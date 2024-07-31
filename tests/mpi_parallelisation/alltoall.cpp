@@ -8,131 +8,134 @@
 
 namespace {
 
-struct RDimW
+struct W
 {
 };
-struct RDimX
+struct X
 {
 };
-struct RDimY
+struct Y
 {
 };
-struct RDimZ
-{
-};
-
-struct IDimW : ddc::UniformPointSampling<RDimW>
-{
-};
-struct IDimX : ddc::UniformPointSampling<RDimX>
-{
-};
-struct IDimY : ddc::UniformPointSampling<RDimY>
-{
-};
-struct IDimZ : ddc::UniformPointSampling<RDimZ>
+struct Z
 {
 };
 
-using IndexW = ddc::DiscreteElement<IDimW>;
-using IndexX = ddc::DiscreteElement<IDimX>;
-using IndexY = ddc::DiscreteElement<IDimY>;
-using IndexZ = ddc::DiscreteElement<IDimZ>;
-using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
-using IndexYX = ddc::DiscreteElement<IDimY, IDimX>;
-using IndexXYZ = ddc::DiscreteElement<IDimX, IDimY, IDimZ>;
-using IndexYZX = ddc::DiscreteElement<IDimY, IDimZ, IDimX>;
-using IndexWXYZ = ddc::DiscreteElement<IDimW, IDimX, IDimY, IDimZ>;
-using IndexYZWX = ddc::DiscreteElement<IDimY, IDimZ, IDimW, IDimX>;
+struct GridW : UniformGridBase<W>
+{
+};
+struct GridX : UniformGridBase<X>
+{
+};
+struct GridY : UniformGridBase<Y>
+{
+};
+struct GridZ : UniformGridBase<Z>
+{
+};
 
-using IVectW = ddc::DiscreteVector<IDimW>;
-using IVectX = ddc::DiscreteVector<IDimX>;
-using IVectY = ddc::DiscreteVector<IDimY>;
-using IVectZ = ddc::DiscreteVector<IDimZ>;
-using IVectXY = ddc::DiscreteVector<IDimX, IDimY>;
-using IVectXYZ = ddc::DiscreteVector<IDimX, IDimY, IDimZ>;
-using IVectWXYZ = ddc::DiscreteVector<IDimW, IDimX, IDimY, IDimZ>;
+using IdxW = Idx<GridW>;
+using IdxX = Idx<GridX>;
+using IdxY = Idx<GridY>;
+using IdxZ = Idx<GridZ>;
+using IdxXY = Idx<GridX, GridY>;
+using IdxYX = Idx<GridY, GridX>;
+using IdxXYZ = Idx<GridX, GridY, GridZ>;
+using IdxYZX = Idx<GridY, GridZ, GridX>;
+using IdxWXYZ = Idx<GridW, GridX, GridY, GridZ>;
+using IdxYZWX = Idx<GridY, GridZ, GridW, GridX>;
 
-using IDomainW = ddc::DiscreteDomain<IDimW>;
-using IDomainX = ddc::DiscreteDomain<IDimX>;
-using IDomainY = ddc::DiscreteDomain<IDimY>;
-using IDomainZ = ddc::DiscreteDomain<IDimZ>;
-using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
-using IDomainYX = ddc::DiscreteDomain<IDimY, IDimX>;
-using IDomainXYZ = ddc::DiscreteDomain<IDimX, IDimY, IDimZ>;
-using IDomainYZX = ddc::DiscreteDomain<IDimY, IDimZ, IDimX>;
-using IDomainWXYZ = ddc::DiscreteDomain<IDimW, IDimX, IDimY, IDimZ>;
-using IDomainYZWX = ddc::DiscreteDomain<IDimY, IDimZ, IDimW, IDimX>;
+using IdxStepW = IdxStep<GridW>;
+using IdxStepX = IdxStep<GridX>;
+using IdxStepY = IdxStep<GridY>;
+using IdxStepZ = IdxStep<GridZ>;
+using IdxStepXY = IdxStep<GridX, GridY>;
+using IdxStepXYZ = IdxStep<GridX, GridY, GridZ>;
+using IdxStepWXYZ = IdxStep<GridW, GridX, GridY, GridZ>;
 
-using CoordW = ddc::Coordinate<RDimW>;
-using CoordX = ddc::Coordinate<RDimX>;
-using CoordY = ddc::Coordinate<RDimY>;
-using CoordZ = ddc::Coordinate<RDimZ>;
+using IdxRangeW = IdxRange<GridW>;
+using IdxRangeX = IdxRange<GridX>;
+using IdxRangeY = IdxRange<GridY>;
+using IdxRangeZ = IdxRange<GridZ>;
+using IdxRangeXY = IdxRange<GridX, GridY>;
+using IdxRangeYX = IdxRange<GridY, GridX>;
+using IdxRangeXYZ = IdxRange<GridX, GridY, GridZ>;
+using IdxRangeYZX = IdxRange<GridY, GridZ, GridX>;
+using IdxRangeWXYZ = IdxRange<GridW, GridX, GridY, GridZ>;
+using IdxRangeYZWX = IdxRange<GridY, GridZ, GridW, GridX>;
 
-using IFieldXY = ddc::Chunk<std::size_t, IDomainXY>;
-using IFieldYX = ddc::Chunk<std::size_t, IDomainYX>;
-using IFieldXYZ = ddc::Chunk<std::size_t, IDomainXYZ>;
-using IFieldYZX = ddc::Chunk<std::size_t, IDomainYZX>;
-using IFieldWXYZ = ddc::Chunk<std::size_t, IDomainWXYZ>;
-using IFieldYZWX = ddc::Chunk<std::size_t, IDomainYZWX>;
+using CoordW = Coord<W>;
+using CoordX = Coord<X>;
+using CoordY = Coord<Y>;
+using CoordZ = Coord<Z>;
 
-using ISpanYX = ddc::ChunkSpan<std::size_t, IDomainYX>;
+using IFieldMemXY = host_t<FieldMem<std::size_t, IdxRangeXY>>;
+using IFieldMemYX = host_t<FieldMem<std::size_t, IdxRangeYX>>;
+using IFieldMemXYZ = host_t<FieldMem<std::size_t, IdxRangeXYZ>>;
+using IFieldMemYZX = host_t<FieldMem<std::size_t, IdxRangeYZX>>;
+using IFieldMemWXYZ = host_t<FieldMem<std::size_t, IdxRangeWXYZ>>;
+using IFieldMemYZWX = host_t<FieldMem<std::size_t, IdxRangeYZWX>>;
 
-using XDistribLayout = MPILayout<IDomainXY, IDimX>;
-using YDistribLayout = MPILayout<IDomainYX, IDimY>;
+using IFieldYX = host_t<Field<std::size_t, IdxRangeYX>>;
 
-using YDistribLayout3D = MPILayout<IDomainXYZ, IDimY>;
-using ZDistribLayout3D = MPILayout<IDomainYZX, IDimZ>;
+using XDistribLayout = MPILayout<IdxRangeXY, GridX>;
+using YDistribLayout = MPILayout<IdxRangeYX, GridY>;
 
-using XYDistribLayout4D = MPILayout<IDomainWXYZ, IDimX, IDimY>;
-using WZDistribLayout4D = MPILayout<IDomainYZWX, IDimW, IDimZ>;
+using YDistribLayout3D = MPILayout<IdxRangeXYZ, GridY>;
+using ZDistribLayout3D = MPILayout<IdxRangeYZX, GridZ>;
+
+using XYDistribLayout4D = MPILayout<IdxRangeWXYZ, GridX, GridY>;
+using WZDistribLayout4D = MPILayout<IdxRangeYZWX, GridW, GridZ>;
 
 template <class HeadDim, class... Dims>
 KOKKOS_FUNCTION std::size_t get_unique_id(
-        ddc::DiscreteElement<HeadDim, Dims...> index,
-        ddc::DiscreteDomain<HeadDim, Dims...> global_size)
+        Idx<HeadDim, Dims...> index,
+        IdxRange<HeadDim, Dims...> global_size)
 {
     if constexpr (sizeof...(Dims) == 0) {
-        return (index - ddc::DiscreteElement<HeadDim>(0)).value();
+        return (index - Idx<HeadDim>(0)).value();
     } else {
-        ddc::DiscreteElement<HeadDim> head_index(index);
-        ddc::DiscreteDomain<Dims...> lower_sizes(global_size);
-        ddc::DiscreteElement<Dims...> lower_indices(index);
-        std::size_t head_index_val = (head_index - ddc::DiscreteElement<HeadDim>(0)).value();
+        Idx<HeadDim> head_index(index);
+        IdxRange<Dims...> lower_sizes(global_size);
+        Idx<Dims...> lower_indices(index);
+        std::size_t head_index_val = (head_index - Idx<HeadDim>(0)).value();
         return head_index_val * lower_sizes.size() + get_unique_id(lower_indices, lower_sizes);
     }
 }
 
 void test_AllToAll2D_GPU()
 {
-    IVectX x_size(10);
-    IVectY y_size(12);
+    IdxStepX x_size(10);
+    IdxStepY y_size(12);
 
-    IndexXY domain_start(0, 0);
-    IVectXY dom_size(x_size, y_size);
-    IDomainXY full_domain(domain_start, dom_size);
+    IdxXY idx_range_start(0, 0);
+    IdxStepXY dom_size(x_size, y_size);
+    IdxRangeXY full_idx_range(idx_range_start, dom_size);
 
-    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_domain, MPI_COMM_WORLD);
+    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
 
-    host_t<IFieldXY> recv_buffer_host(transpose.get_local_domain<XDistribLayout>());
-    device_t<IFieldXY> recv_buffer(transpose.get_local_domain<XDistribLayout>());
-    device_t<IFieldYX> send_buffer_alloc(transpose.get_local_domain<YDistribLayout>());
-    device_t<ISpanYX> send_buffer = send_buffer_alloc.span_view();
+    host_t<IFieldMemXY> recv_buffer_host(transpose.get_local_idx_range<XDistribLayout>());
+    device_t<IFieldMemXY> recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
+    device_t<IFieldMemYX> send_buffer_alloc(transpose.get_local_idx_range<YDistribLayout>());
+    device_t<IFieldYX> send_buffer = get_field(send_buffer_alloc);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            send_buffer.domain(),
-            KOKKOS_LAMBDA(IndexYX ixy) {
-                send_buffer(ixy) = get_unique_id(IndexXY(ixy), full_domain);
+            get_idx_range(send_buffer),
+            KOKKOS_LAMBDA(IdxYX ixy) {
+                send_buffer(ixy) = get_unique_id(IdxXY(ixy), full_idx_range);
             });
 
-    transpose(Kokkos::DefaultExecutionSpace(), recv_buffer.span_view(), send_buffer.span_cview());
+    transpose(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(recv_buffer),
+            get_const_field(send_buffer));
 
-    ddc::parallel_deepcopy(recv_buffer_host.span_view(), recv_buffer.span_cview());
+    ddc::parallel_deepcopy(get_field(recv_buffer_host), get_const_field(recv_buffer));
 
     bool success = true;
-    ddc::for_each(recv_buffer_host.domain(), [&](IndexXY ixy) {
-        success = success and (recv_buffer_host(ixy) == get_unique_id(ixy, full_domain));
+    ddc::for_each(get_idx_range(recv_buffer_host), [&](IdxXY ixy) {
+        success = success and (recv_buffer_host(ixy) == get_unique_id(ixy, full_idx_range));
     });
     EXPECT_TRUE(success);
 }
@@ -141,30 +144,30 @@ void test_AllToAll2D_GPU()
 
 TEST(MPIParallelisation, AllToAll2D_CPU)
 {
-    IVectX x_size(10);
-    IVectY y_size(12);
+    IdxStepX x_size(10);
+    IdxStepY y_size(12);
 
-    IndexXY domain_start(0, 0);
-    IVectXY dom_size(x_size, y_size);
-    IDomainXY full_domain(domain_start, dom_size);
+    IdxXY idx_range_start(0, 0);
+    IdxStepXY dom_size(x_size, y_size);
+    IdxRangeXY full_idx_range(idx_range_start, dom_size);
 
-    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_domain, MPI_COMM_WORLD);
+    MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
 
-    IFieldXY recv_buffer(transpose.get_local_domain<XDistribLayout>());
-    IFieldYX send_buffer(transpose.get_local_domain<YDistribLayout>());
+    IFieldMemXY recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
+    IFieldMemYX send_buffer(transpose.get_local_idx_range<YDistribLayout>());
 
-    ddc::for_each(send_buffer.domain(), [&](IndexYX ixy) {
-        send_buffer(ixy) = get_unique_id(IndexXY(ixy), full_domain);
+    ddc::for_each(get_idx_range(send_buffer), [&](IdxYX ixy) {
+        send_buffer(ixy) = get_unique_id(IdxXY(ixy), full_idx_range);
     });
 
     transpose(
             Kokkos::DefaultHostExecutionSpace(),
-            recv_buffer.span_view(),
-            send_buffer.span_cview());
+            get_field(recv_buffer),
+            get_const_field(send_buffer));
 
     bool success = true;
-    ddc::for_each(recv_buffer.domain(), [&](IndexXY ixy) {
-        success = success and (recv_buffer(ixy) == get_unique_id(ixy, full_domain));
+    ddc::for_each(get_idx_range(recv_buffer), [&](IdxXY ixy) {
+        success = success and (recv_buffer(ixy) == get_unique_id(ixy, full_idx_range));
     });
     EXPECT_TRUE(success);
 }
@@ -176,33 +179,34 @@ TEST(MPIParallelisation, AllToAll2D_GPU)
 
 TEST(MPIParallelisation, AllToAll3D_CPU)
 {
-    IVectX x_size(10);
-    IVectY y_size(12);
-    IVectZ z_size(4);
+    IdxStepX x_size(10);
+    IdxStepY y_size(12);
+    IdxStepZ z_size(4);
 
-    IndexXYZ domain_start(0, 0, 0);
-    IVectXYZ dom_size(x_size, y_size, z_size);
-    IDomainXYZ full_domain(domain_start, dom_size);
+    IdxXYZ idx_range_start(0, 0, 0);
+    IdxStepXYZ dom_size(x_size, y_size, z_size);
+    IdxRangeXYZ full_idx_range(idx_range_start, dom_size);
 
-    MPITransposeAllToAll<YDistribLayout3D, ZDistribLayout3D> transpose(full_domain, MPI_COMM_WORLD);
+    MPITransposeAllToAll<YDistribLayout3D, ZDistribLayout3D>
+            transpose(full_idx_range, MPI_COMM_WORLD);
 
-    IFieldXYZ send_buffer(transpose.get_local_domain<YDistribLayout3D>());
-    IFieldYZX recv_buffer(transpose.get_local_domain<ZDistribLayout3D>());
+    IFieldMemXYZ send_buffer(transpose.get_local_idx_range<YDistribLayout3D>());
+    IFieldMemYZX recv_buffer(transpose.get_local_idx_range<ZDistribLayout3D>());
 
-    ddc::for_each(send_buffer.domain(), [&](IndexXYZ ixyz) {
-        send_buffer(ixyz) = get_unique_id(ixyz, full_domain);
+    ddc::for_each(get_idx_range(send_buffer), [&](IdxXYZ ixyz) {
+        send_buffer(ixyz) = get_unique_id(ixyz, full_idx_range);
     });
 
     MPI_Barrier(MPI_COMM_WORLD);
 
     transpose(
             Kokkos::DefaultHostExecutionSpace(),
-            recv_buffer.span_view(),
-            send_buffer.span_cview());
+            get_field(recv_buffer),
+            get_const_field(send_buffer));
 
     bool success = true;
-    ddc::for_each(recv_buffer.domain(), [&](IndexYZX ixyz) {
-        double expected = get_unique_id(IndexXYZ(ixyz), full_domain);
+    ddc::for_each(get_idx_range(recv_buffer), [&](IdxYZX ixyz) {
+        double expected = get_unique_id(IdxXYZ(ixyz), full_idx_range);
         success = success and (recv_buffer(ixyz) == expected);
     });
     EXPECT_TRUE(success);
@@ -210,35 +214,35 @@ TEST(MPIParallelisation, AllToAll3D_CPU)
 
 TEST(MPIParallelisation, AllToAll4D_CPU)
 {
-    IVectW w_size(10);
-    IVectX x_size(10);
-    IVectY y_size(10);
-    IVectZ z_size(10);
+    IdxStepW w_size(10);
+    IdxStepX x_size(10);
+    IdxStepY y_size(10);
+    IdxStepZ z_size(10);
 
-    IndexWXYZ domain_start(0, 0, 0, 0);
-    IVectWXYZ dom_size(w_size, x_size, y_size, z_size);
-    IDomainWXYZ full_domain(domain_start, dom_size);
+    IdxWXYZ idx_range_start(0, 0, 0, 0);
+    IdxStepWXYZ dom_size(w_size, x_size, y_size, z_size);
+    IdxRangeWXYZ full_idx_range(idx_range_start, dom_size);
 
     MPITransposeAllToAll<XYDistribLayout4D, WZDistribLayout4D>
-            transpose(full_domain, MPI_COMM_WORLD);
+            transpose(full_idx_range, MPI_COMM_WORLD);
 
-    IFieldWXYZ send_buffer(transpose.get_local_domain<XYDistribLayout4D>());
-    IFieldYZWX recv_buffer(transpose.get_local_domain<WZDistribLayout4D>());
+    IFieldMemWXYZ send_buffer(transpose.get_local_idx_range<XYDistribLayout4D>());
+    IFieldMemYZWX recv_buffer(transpose.get_local_idx_range<WZDistribLayout4D>());
 
-    ddc::for_each(send_buffer.domain(), [&](IndexWXYZ iwxyz) {
-        send_buffer(iwxyz) = get_unique_id(iwxyz, full_domain);
+    ddc::for_each(get_idx_range(send_buffer), [&](IdxWXYZ iwxyz) {
+        send_buffer(iwxyz) = get_unique_id(iwxyz, full_idx_range);
     });
 
     MPI_Barrier(MPI_COMM_WORLD);
 
     transpose(
             Kokkos::DefaultHostExecutionSpace(),
-            recv_buffer.span_view(),
-            send_buffer.span_cview());
+            get_field(recv_buffer),
+            get_const_field(send_buffer));
 
     bool success = true;
-    ddc::for_each(recv_buffer.domain(), [&](IndexYZWX iwxyz) {
-        std::size_t expected = get_unique_id(IndexWXYZ(iwxyz), full_domain);
+    ddc::for_each(get_idx_range(recv_buffer), [&](IdxYZWX iwxyz) {
+        std::size_t expected = get_unique_id(IdxWXYZ(iwxyz), full_idx_range);
         success = success and (recv_buffer(iwxyz) == expected);
     });
     EXPECT_TRUE(success);
