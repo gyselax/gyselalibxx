@@ -47,7 +47,7 @@ struct Y
  * @tparam PatchIdx Index of the pach. 
  */
 template <int PatchIdx>
-struct GridX : UniformGridBase<X<PatchIdx>>
+struct GridX : ddc::UniformPointSampling<X<PatchIdx>>
 {
 };
 
@@ -56,7 +56,7 @@ struct GridX : UniformGridBase<X<PatchIdx>>
  * @tparam PatchIdx Index of the pach. 
  */
 template <int PatchIdx>
-struct GridY : UniformGridBase<Y<PatchIdx>>
+struct GridY : ddc::UniformPointSampling<Y<PatchIdx>>
 {
 };
 

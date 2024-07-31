@@ -48,19 +48,19 @@ struct P2
 
 // DISCRETE DIMENSIONS ---------------------------------------------------------------------------
 /// @brief Points sequence on the first logical dimension of patch 1.
-struct GridR1 : UniformGridBase<R1>
+struct GridR1 : ddc::UniformPointSampling<R1>
 {
 };
 /// @brief Points sequence on the second logical dimension of patch 1.
-struct GridP1 : UniformGridBase<P1>
+struct GridP1 : ddc::UniformPointSampling<P1>
 {
 };
 /// @brief Points sequence on the first logical dimension of patch 2.
-struct GridR2 : UniformGridBase<R2>
+struct GridR2 : ddc::UniformPointSampling<R2>
 {
 };
 /// @brief Points sequence on the second logical dimension of patch 2.
-struct GridP2 : UniformGridBase<P2>
+struct GridP2 : ddc::UniformPointSampling<P2>
 {
 };
 

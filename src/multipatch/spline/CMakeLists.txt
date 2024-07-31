@@ -7,7 +7,5 @@ target_include_directories("multipatch_spline"
 )
 target_link_libraries("multipatch_spline" INTERFACE
     DDC::DDC
-  gslx::utils
-
 )
 add_library("gslx::multipatch_spline" ALIAS "multipatch_spline")
