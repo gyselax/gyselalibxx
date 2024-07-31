@@ -1,4 +1,5 @@
 #pragma once
+#include "ddc_aliases.hpp"
 
 /**
  * @brief A namespace to collect classes which are necessary to create Chunks with the
@@ -31,23 +32,23 @@ inline constexpr bool is_spoofed_dim_v = std::is_base_of_v<InternalSpoofGrid, Gr
 
 /**
  * Class to get the type of the radial dimension from a field containing a radial profile.
- * @tparam Field The type of the field containing the radial profile.
+ * @tparam FieldMem The type of the field containing the radial profile.
  */
-template <class Field>
+template <class FieldMem>
 struct ExtractRDim
 {
-    static_assert(!std::is_same_v<Field, Field>, "Unrecognised radial profile type");
+    static_assert(!std::is_same_v<FieldMem, FieldMem>, "Unrecognised radial profile type");
 };
 
 /**
  * Class to get the type of the poloidal dimension from a field containing a profile on the poloidal plane.
- * @tparam Field The type of the field containing the profile on the poloidal plane.
+ * @tparam FieldMem The type of the field containing the profile on the poloidal plane.
  * @tparam GridR The tag for the discrete radial dimension.
  */
-template <class Field, class GridR>
+template <class FieldMem, class GridR>
 struct ExtractThetaDim
 {
-    static_assert(!std::is_same_v<Field, Field>, "Unrecognised poloidal profile type");
+    static_assert(!std::is_same_v<FieldMem, FieldMem>, "Unrecognised poloidal profile type");
 };
 
 /**
@@ -59,12 +60,11 @@ struct ExtractThetaDim
  * @param idx_range The multi-D index range.
  * @returns The index range for the specific grid.
  */
-template <class Grid, class FDistribDomain>
-inline ddc::DiscreteDomain<Grid> get_1d_idx_range(FDistribDomain idx_range)
+template <class Grid, class FDistribIdxRange>
+inline IdxRange<Grid> get_1d_idx_range(FDistribIdxRange idx_range)
 {
     if constexpr (is_spoofed_dim_v<Grid>) {
-        return ddc::DiscreteDomain<
-                Grid>(ddc::DiscreteElement<Grid> {0}, ddc::DiscreteVector<Grid> {1});
+        return IdxRange<Grid>(Idx<Grid> {0}, IdxStep<Grid> {1});
     } else {
         return ddc::select<Grid>(idx_range);
     }
@@ -77,10 +77,10 @@ inline ddc::DiscreteDomain<Grid> get_1d_idx_range(FDistribDomain idx_range)
  * @param idx_range The multi-D index range.
  * @returns The index range for the specific grid.
  */
-template <class... Grid, class FDistribDomain>
-inline ddc::DiscreteDomain<Grid...> get_idx_range(FDistribDomain idx_range)
+template <class... Grid, class FDistribIdxRange>
+inline IdxRange<Grid...> get_idx_range(FDistribIdxRange idx_range)
 {
-    return ddc::DiscreteDomain<Grid...>(get_1d_idx_range<Grid>(idx_range)...);
+    return IdxRange<Grid...>(get_1d_idx_range<Grid>(idx_range)...);
 }
 
 /// If radial profile is stored in a double then the grid tag must be spoofed.
@@ -92,18 +92,15 @@ struct ExtractRDim<double>
 
 /// If radial profile is stored in a 1D chunk then the grid tag is extracted.
 template <class GridR, class Layout>
-struct ExtractRDim<ddc::ChunkView<
-        double,
-        ddc::DiscreteDomain<GridR>,
-        Layout,
-        Kokkos::DefaultExecutionSpace::memory_space>>
+struct ExtractRDim<
+        ConstField<double, IdxRange<GridR>, Layout, Kokkos::DefaultExecutionSpace::memory_space>>
 {
     using type = GridR;
 };
 
 /// If radial profile is stored in a chunk then information about why the chunk has the wrong type is provided
-template <class ElementType, class Domain, class Layout, class MemSpace>
-struct ExtractRDim<ddc::ChunkSpan<ElementType, Domain, Layout, MemSpace>>
+template <class ElementType, class IdxRange, class Layout, class MemSpace>
+struct ExtractRDim<Field<ElementType, IdxRange, Layout, MemSpace>>
 {
     static_assert(
             std::is_same_v<ElementType, const double>,
@@ -113,7 +110,7 @@ struct ExtractRDim<ddc::ChunkSpan<ElementType, Domain, Layout, MemSpace>>
             std::is_same_v<MemSpace, Kokkos::DefaultExecutionSpace::memory_space>,
             "The radial profile should be provided on the GPU");
     static_assert(
-            (ddcHelper::type_seq_length_v<ddc::to_type_seq_t<Domain>>) > 1,
+            (ddcHelper::type_seq_length_v<ddc::to_type_seq_t<IdxRange>>) > 1,
             "The radial profile should not be defined on more than 1 dimensions.");
 };
 
@@ -127,11 +124,7 @@ struct ExtractThetaDim<double, InternalSpoofGridR>
 /// If the profile on the poloidal plane is stored in a chunk on radial values then the grid tag must be spoofed.
 template <class GridR, class Layout>
 struct ExtractThetaDim<
-        ddc::ChunkView<
-                double,
-                ddc::DiscreteDomain<GridR>,
-                Layout,
-                Kokkos::DefaultExecutionSpace::memory_space>,
+        ConstField<double, IdxRange<GridR>, Layout, Kokkos::DefaultExecutionSpace::memory_space>,
         GridR>
 {
     using type = InternalSpoofGridTheta;
@@ -140,9 +133,9 @@ struct ExtractThetaDim<
 /// If the profile on the poloidal plane is stored in a chunk on poloidal values then the grid tag is extracted.
 template <class GridR, class GridTheta, class Layout>
 struct ExtractThetaDim<
-        ddc::ChunkView<
+        ConstField<
                 double,
-                ddc::DiscreteDomain<GridTheta>,
+                IdxRange<GridTheta>,
                 Layout,
                 Kokkos::DefaultExecutionSpace::memory_space>,
         GridR>
@@ -153,9 +146,9 @@ struct ExtractThetaDim<
 /// If the profile on the poloidal plane is stored in a 2D chunk then the grid tag is extracted.
 template <class GridR, class GridTheta, class Layout>
 struct ExtractThetaDim<
-        ddc::ChunkView<
+        ConstField<
                 double,
-                ddc::DiscreteDomain<GridTheta, GridR>,
+                IdxRange<GridTheta, GridR>,
                 Layout,
                 Kokkos::DefaultExecutionSpace::memory_space>,
         GridR>
@@ -164,8 +157,8 @@ struct ExtractThetaDim<
 };
 
 /// If poloidal profile is stored in a chunk then information about why the chunk has the wrong type is provided
-template <class GridR, class ElementType, class Domain, class Layout, class MemSpace>
-struct ExtractThetaDim<ddc::ChunkSpan<ElementType, Domain, Layout, MemSpace>, GridR>
+template <class GridR, class ElementType, class IdxRange, class Layout, class MemSpace>
+struct ExtractThetaDim<Field<ElementType, IdxRange, Layout, MemSpace>, GridR>
 {
     static_assert(
             std::is_same_v<ElementType, const double>,
@@ -175,7 +168,7 @@ struct ExtractThetaDim<ddc::ChunkSpan<ElementType, Domain, Layout, MemSpace>, Gr
             std::is_same_v<MemSpace, Kokkos::DefaultExecutionSpace::memory_space>,
             "The poloidal profile should be provided on the GPU");
     static_assert(
-            (ddcHelper::type_seq_length_v<ddc::to_type_seq_t<Domain>>) > 2,
+            (ddcHelper::type_seq_length_v<ddc::to_type_seq_t<IdxRange>>) > 2,
             "The poloidal profile should not be defined on more than 2 dimensions.");
 };
 

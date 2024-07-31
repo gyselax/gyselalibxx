@@ -20,14 +20,14 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 {
 }
 
-DSpanSpVparMu MaxwellianEquilibrium::operator()(DSpanSpVparMu const allfequilibrium) const
+DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequilibrium) const
 {
-    IdxRangeSp const idxrange_sp = allfequilibrium.domain<Species>();
-    IdxRangeVparMu const idxrange_vparmu = allfequilibrium.domain<GridVpar, GridMu>();
+    IdxRangeSp const idxrange_sp = get_idx_range<Species>(allfequilibrium);
+    IdxRangeVparMu const idxrange_vparmu = get_idx_range<GridVpar, GridMu>(allfequilibrium);
 
     // Initialization of the maxwellian
-    DFieldVparMu maxwellian_alloc(idxrange_vparmu);
-    DSpanVparMu maxwellian = maxwellian_alloc.span_view();
+    DFieldMemVparMu maxwellian_alloc(idxrange_vparmu);
+    DFieldVparMu maxwellian = get_field(maxwellian_alloc);
     double const magnetic_field(1.0);
     ddc::for_each(idxrange_sp, [&](IdxSp const isp) {
         compute_maxwellian(
@@ -71,7 +71,7 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
 }
 
 void MaxwellianEquilibrium::compute_maxwellian(
-        DSpanVparMu const fMaxwellian,
+        DFieldVparMu const fMaxwellian,
         double const mass,
         double const density,
         double const temperature,
@@ -80,7 +80,7 @@ void MaxwellianEquilibrium::compute_maxwellian(
 {
     double const mass_on_2piT = mass / (2. * M_PI * temperature);
     double const coeff_maxw = Kokkos::sqrt(mass_on_2piT) * mass_on_2piT;
-    IdxRangeVparMu const idxrange_vparmu = fMaxwellian.domain<GridVpar, GridMu>();
+    IdxRangeVparMu const idxrange_vparmu = get_idx_range<GridVpar, GridMu>(fMaxwellian);
 
     // Compute fM(vpar,mu) = (2*PI*T)**1.5*n*exp(-energy) with
     //  - n the density, T the temperature and Upar the mean velocity

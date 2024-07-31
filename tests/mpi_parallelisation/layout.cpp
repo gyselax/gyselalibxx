@@ -7,73 +7,72 @@
 
 namespace {
 
-struct X
+struct RDimX
 {
 };
-struct Y
-{
-};
-
-struct GridX : UniformGridBase<X>
-{
-};
-struct GridY : UniformGridBase<Y>
+struct RDimY
 {
 };
 
-using IdxX = Idx<GridX>;
-using IdxY = Idx<GridY>;
-using IdxXY = Idx<GridX, GridY>;
+struct IDimX : ddc::UniformPointSampling<RDimX>
+{
+};
+struct IDimY : ddc::UniformPointSampling<RDimY>
+{
+};
 
-using IdxStepX = IdxStep<GridX>;
-using IdxStepY = IdxStep<GridY>;
-using IdxStepXY = IdxStep<GridX, GridY>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using IndexY = ddc::DiscreteElement<IDimY>;
+using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
 
-using IdxRangeX = IdxRange<GridX>;
-using IdxRangeY = IdxRange<GridY>;
-using IdxRangeXY = IdxRange<GridX, GridY>;
-using IdxRangeYX = IdxRange<GridY, GridX>;
+using IVectX = ddc::DiscreteVector<IDimX>;
+using IVectY = ddc::DiscreteVector<IDimY>;
+using IVectXY = ddc::DiscreteVector<IDimX, IDimY>;
 
-using CoordX = Coord<X>;
-using CoordY = Coord<Y>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
+using IDomainY = ddc::DiscreteDomain<IDimY>;
+using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
+using IDomainYX = ddc::DiscreteDomain<IDimY, IDimX>;
 
-using XYDistribLayout = MPILayout<IdxRangeXY, GridX, GridY>;
-using YDistribLayout = MPILayout<IdxRangeXY, GridY>;
+using CoordX = ddc::Coordinate<RDimX>;
+using CoordY = ddc::Coordinate<RDimY>;
+
+using XYDistribLayout = MPILayout<IDomainXY, IDimX, IDimY>;
+using YDistribLayout = MPILayout<IDomainXY, IDimY>;
 
 TEST(Layout, MinimalDomainDistribution)
 {
-    IdxStepX const x_size(8);
-    IdxStepY const y_size(16);
+    IVectX const x_size(8);
+    IVectY const y_size(16);
 
-    IdxXY const idx_range_start(0, 0);
-    IdxStepXY const dom_size(x_size, y_size);
-    IdxRangeXY const global_idx_range(idx_range_start, dom_size);
+    IndexXY const domain_start(0, 0);
+    IVectXY const dom_size(x_size, y_size);
+    IDomainXY const global_domain(domain_start, dom_size);
 
     int n_procs = 4;
     int expected_local_x_extent = x_size.value() / n_procs;
 
-    IdxX const dom_x_start(idx_range_start);
+    IndexX const dom_x_start(domain_start);
 
     XYDistribLayout layout;
     for (int i(0); i < n_procs; ++i) {
-        IdxRangeXY const local_idx_range
-                = layout.distribute_idx_range(global_idx_range, n_procs, i);
-        EXPECT_EQ(local_idx_range.extent<GridX>().value(), expected_local_x_extent);
+        IDomainXY const local_domain = layout.distribute_domain(global_domain, n_procs, i);
+        EXPECT_EQ(local_domain.extent<IDimX>().value(), expected_local_x_extent);
         EXPECT_EQ(
-                ddc::select<GridX>(local_idx_range.front()),
+                ddc::select<IDimX>(local_domain.front()),
                 dom_x_start + i * expected_local_x_extent);
-        EXPECT_EQ(local_idx_range.extent<GridY>().value(), y_size.value());
+        EXPECT_EQ(local_domain.extent<IDimY>().value(), y_size.value());
     }
 }
 
 TEST(Layout, SpreadDomainDistribution)
 {
-    IdxStepX const x_size(10);
-    IdxStepY const y_size(15);
+    IVectX const x_size(10);
+    IVectY const y_size(15);
 
-    IdxXY const idx_range_start(0, 0);
-    IdxStepXY const dom_size(x_size, y_size);
-    IdxRangeXY const global_idx_range(idx_range_start, dom_size);
+    IndexXY const domain_start(0, 0);
+    IVectXY const dom_size(x_size, y_size);
+    IDomainXY const global_domain(domain_start, dom_size);
 
     int const n_procs = 6;
     int const expected_procs_x = 2;
@@ -81,49 +80,47 @@ TEST(Layout, SpreadDomainDistribution)
     int const expected_local_x_extent = x_size / expected_procs_x;
     int const expected_local_y_extent = y_size / expected_procs_y;
 
-    IdxX const dom_x_start(idx_range_start);
-    IdxY const dom_y_start(idx_range_start);
+    IndexX const dom_x_start(domain_start);
+    IndexY const dom_y_start(domain_start);
 
     XYDistribLayout layout;
     for (int i(0); i < n_procs; ++i) {
-        IdxRangeXY const local_idx_range
-                = layout.distribute_idx_range(global_idx_range, n_procs, i);
-        EXPECT_EQ(local_idx_range.extent<GridX>().value(), expected_local_x_extent);
-        EXPECT_EQ(local_idx_range.extent<GridY>().value(), expected_local_y_extent);
+        IDomainXY const local_domain = layout.distribute_domain(global_domain, n_procs, i);
+        EXPECT_EQ(local_domain.extent<IDimX>().value(), expected_local_x_extent);
+        EXPECT_EQ(local_domain.extent<IDimY>().value(), expected_local_y_extent);
         int const x_rank = i / expected_procs_y;
         int const y_rank = i % expected_procs_y;
         EXPECT_EQ(
-                ddc::select<GridX>(local_idx_range.front()),
+                ddc::select<IDimX>(local_domain.front()),
                 dom_x_start + x_rank * expected_local_x_extent);
         EXPECT_EQ(
-                ddc::select<GridY>(local_idx_range.front()),
+                ddc::select<IDimY>(local_domain.front()),
                 dom_y_start + y_rank * expected_local_y_extent);
     }
 }
 
 TEST(Layout, DomainSelection)
 {
-    IdxStepX const x_size(10);
-    IdxStepY const y_size(15);
+    IVectX const x_size(10);
+    IVectY const y_size(15);
 
-    IdxXY const idx_range_start(0, 0);
-    IdxStepXY const dom_size(x_size, y_size);
-    IdxRangeXY const global_idx_range(idx_range_start, dom_size);
+    IndexXY const domain_start(0, 0);
+    IVectXY const dom_size(x_size, y_size);
+    IDomainXY const global_domain(domain_start, dom_size);
 
     int n_procs = 5;
     int expected_local_y_extent = 3;
 
-    IdxY const dom_y_start(idx_range_start);
+    IndexY const dom_y_start(domain_start);
 
     YDistribLayout layout;
     for (int i(0); i < n_procs; ++i) {
-        IdxRangeXY const local_idx_range
-                = layout.distribute_idx_range(global_idx_range, n_procs, i);
-        EXPECT_EQ(local_idx_range.extent<GridX>(), global_idx_range.extent<GridX>());
+        IDomainXY const local_domain = layout.distribute_domain(global_domain, n_procs, i);
+        EXPECT_EQ(local_domain.extent<IDimX>(), global_domain.extent<IDimX>());
         EXPECT_EQ(
-                ddc::select<GridY>(local_idx_range.front()),
+                ddc::select<IDimY>(local_domain.front()),
                 dom_y_start + i * expected_local_y_extent);
-        EXPECT_EQ(local_idx_range.extent<GridY>().value(), expected_local_y_extent);
+        EXPECT_EQ(local_domain.extent<IDimY>().value(), expected_local_y_extent);
     }
 }
 } // namespace

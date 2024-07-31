@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <paraconf.h>
 
+#include "ddc_aliases.hpp"
 #include "paraconfpp.hpp"
 #include "species_info.hpp"
 
@@ -12,17 +12,17 @@ template <class GridR>
 class CollisionInfoRadial
 {
 private:
-    using DDomR = ddc::DiscreteDomain<GridR>;
+    using IdxRangeR = IdxRange<GridR>;
 
 public:
     /// Type alias for a field on a grid of radial values
-    using DFieldR = device_t<ddc::Chunk<double, DDomR>>;
+    using DFieldMemR = FieldMem<double, IdxRangeR>;
     /// Type alias for a span of a field defined on a grid of radial values
-    using DSpanR = device_t<ddc::ChunkSpan<double, DDomR>>;
+    using DFieldR = Field<double, IdxRangeR>;
     /// Type alias for a span of a field defined on a grid of radial values
-    using DViewR = device_t<ddc::ChunkSpan<double const, DDomR>>;
+    using DConstFieldR = Field<double const, IdxRangeR>;
     /// radial_chunk_type used to treat the 0D case for radial profile
-    using radial_chunk_type = DViewR;
+    using radial_chunk_type = DConstFieldR;
 
 private:
     /// value of nustar0_rpeak read in the YAML input file
@@ -36,11 +36,11 @@ private:
     // but that will be deleted as soon as no more required
     double const m_rpeak;
     double const m_q_rpeak;
-    DViewR m_rg;
-    DViewR m_safety_factor;
+    DConstFieldR m_rg;
+    DConstFieldR m_safety_factor;
 
     /// radial profile of nustar0
-    DFieldR m_nustar0_r;
+    DFieldMemR m_nustar0_r;
 
 public:
     /**
@@ -54,15 +54,15 @@ public:
     {
         double const rpeak = m_rpeak;
         double const q_rpeak = m_q_rpeak;
-        DViewR radial_profile = m_rg.span_cview();
-        DViewR safety_factor = m_safety_factor.span_cview();
+        DConstFieldR radial_profile = get_const_field(m_rg);
+        DConstFieldR safety_factor = get_const_field(m_safety_factor);
         double const nustar0_rpeak = m_nustar0_rpeak;
 
-        DSpanR nustar0_r = m_nustar0_r.span_view();
+        DFieldR nustar0_r = get_field(m_nustar0_r);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                radial_profile.domain(),
-                KOKKOS_LAMBDA(ddc::DiscreteElement<GridR> idx) {
+                get_idx_range(radial_profile),
+                KOKKOS_LAMBDA(Idx<GridR> idx) {
                     double rpeak_on_r = rpeak / radial_profile(idx);
                     double q_on_qrpeak = safety_factor(idx) / q_rpeak;
                     nustar0_r(idx)
@@ -83,8 +83,8 @@ public:
             PC_tree_t const& yaml_input_file,
             double const rpeak,
             double const q_rpeak,
-            DViewR radial_profile,
-            DViewR safety_factor)
+            DConstFieldR radial_profile,
+            DConstFieldR safety_factor)
         : m_nustar0_rpeak {PCpp_double(yaml_input_file, ".CollisionsInfo.nustar0_rpeak")}
         , m_collisions_interspecies {PCpp_bool(
                   yaml_input_file,
@@ -93,7 +93,7 @@ public:
         , m_q_rpeak(q_rpeak)
         , m_rg(radial_profile)
         , m_safety_factor(safety_factor)
-        , m_nustar0_r(radial_profile.domain())
+        , m_nustar0_r(get_idx_range(radial_profile))
     {
         compute_nustar0_r();
     };
@@ -113,15 +113,15 @@ public:
             std::int8_t const collisions_interspecies,
             double const rpeak,
             double const q_rpeak,
-            DViewR radial_profile,
-            DViewR safety_factor)
+            DConstFieldR radial_profile,
+            DConstFieldR safety_factor)
         : m_nustar0_rpeak(nustar0_rpeak)
         , m_collisions_interspecies(collisions_interspecies)
         , m_rpeak(rpeak)
         , m_q_rpeak(q_rpeak)
         , m_rg(radial_profile)
         , m_safety_factor(safety_factor)
-        , m_nustar0_r(radial_profile.domain())
+        , m_nustar0_r(get_idx_range(radial_profile))
     {
         compute_nustar0_r();
     };
@@ -141,7 +141,7 @@ public:
      * @brief A method for accessing the radial profile variable of the class.
      * @return A view containing the radial profile of the grid. 
      */
-    DViewR rg() const
+    DConstFieldR rg() const
     {
         return m_rg;
     }
@@ -150,7 +150,7 @@ public:
      * @brief A method for accessing the safety factor variable of the class.
      * @return A view containing the radial profile of the safety_factor. 
      */
-    DViewR safety_factor() const
+    DConstFieldR safety_factor() const
     {
         return m_safety_factor;
     }
@@ -159,7 +159,7 @@ public:
      * @brief A method for accessing nustar0_r (the radial profile of nustar0) variable of the class.
      * @return A view containing the radial profile of nustar0.
      */
-    DViewR nustar0() const
+    DConstFieldR nustar0() const
     {
         return m_nustar0_r;
     }

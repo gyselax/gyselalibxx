@@ -60,13 +60,13 @@ int main(int argc, char** argv)
     IdxRangeSpVparMu const idxrange_spvparmu(idxrange_kinsp, idxrange_vpar, idxrange_mu);
 
     // ---> Initialisation of the Maxwellian equilibrium distribution
-    DFieldSpVparMu allfequilibrium(idxrange_spvparmu);
+    DFieldMemSpVparMu allfequilibrium(idxrange_spvparmu);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idxrange_kinsp, conf_collision);
     init_fequilibrium(allfequilibrium);
 
     // ---> Initialisation of the distribution function as a pertubed Maxwellian
-    DFieldSpVparMu allfdistribu(idxrange_spvparmu);
+    DFieldMemSpVparMu allfdistribu(idxrange_spvparmu);
     NoPerturbInitialization const init(allfequilibrium);
     init(allfdistribu);
 
@@ -87,23 +87,23 @@ int main(int argc, char** argv)
     double const B_norm = 1.0;
 
     // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
-    host_t<DFieldVpar> const coeff_intdvpar_host
-            = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridVpar>());
-    host_t<DFieldMu> const coeff_intdmu_host
-            = simpson_quadrature_coefficients_1d(allfdistribu.domain<GridMu>());
+    host_t<DFieldMemVpar> const coeff_intdvpar_host
+            = simpson_quadrature_coefficients_1d(get_idx_range<GridVpar>(allfdistribu));
+    host_t<DFieldMemMu> const coeff_intdmu_host
+            = simpson_quadrature_coefficients_1d(get_idx_range<GridMu>(allfdistribu));
     auto coeff_intdvpar = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            coeff_intdvpar_host.span_cview());
+            get_const_field(coeff_intdvpar_host));
     auto coeff_intdmu = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            coeff_intdmu_host.span_cview());
+            get_const_field(coeff_intdmu_host));
 
     CollisionInfo const collision_info(conf_collision);
     CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
             collision_info,
             idxrange_spvparmu,
-            coeff_intdmu.span_cview(),
-            coeff_intdvpar.span_cview(),
+            get_const_field(coeff_intdmu),
+            get_const_field(coeff_intdvpar),
             B_norm);
 
     // --------- TIME ITERATION ---------
@@ -131,7 +131,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu.span_view());
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
 
     int iter = 0;
     for (; iter < nbiter + 1; ++iter) {

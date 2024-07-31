@@ -18,5 +18,5 @@ public:
      *                                 On output: the initialized distribution function.
      * @return The initialized distribution function.
      */
-    virtual DSpanSpVparMu operator()(DSpanSpVparMu allfdistribu) const = 0;
+    virtual DFieldSpVparMu operator()(DFieldSpVparMu allfdistribu) const = 0;
 };
