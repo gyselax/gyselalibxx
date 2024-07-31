@@ -23,12 +23,12 @@
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 
 #if defined(CIRCULAR_MAPPING)
-using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
+using Mapping = CircularToCartesian<X, Y, R, Theta>;
 #elif defined(CZARNY_MAPPING)
-using Mapping = CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>;
+using Mapping = CzarnyToCartesian<X, Y, R, Theta>;
 #endif
 using DiscreteMapping
-        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorNullBound>;
+        = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -67,14 +67,14 @@ int main(int argc, char** argv)
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(PCpp_int(conf_voicexx, ".Mesh.r_size"));
+    IdxStepR const r_size(PCpp_int(conf_voicexx, ".Mesh.r_size"));
 
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(PCpp_int(conf_voicexx, ".Mesh.p_size"));
+    CoordTheta const p_min(0.0);
+    CoordTheta const p_max(2.0 * M_PI);
+    IdxStepTheta const p_size(PCpp_int(conf_voicexx, ".Mesh.p_size"));
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
+    std::vector<CoordTheta> p_knots(p_size + 1);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
@@ -82,22 +82,22 @@ int main(int argc, char** argv)
         r_knots[i] = CoordR(r_min + i * dr);
     }
     for (int i(0); i < p_size + 1; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
+        p_knots[i] = CoordTheta(p_min + i * dp);
     }
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
 
-    ddc::init_discrete_space<BSplinesP>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
+    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
-    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
-    IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
+    IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    SplineRPBuilder const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
 #if defined(CIRCULAR_MAPPING)
     const Mapping mapping;
@@ -106,46 +106,46 @@ int main(int argc, char** argv)
 #endif
     ddc::NullExtrapolationRule bv_r_min;
     ddc::NullExtrapolationRule bv_r_max;
-    ddc::PeriodicExtrapolationRule<RDimP> bv_p_min;
-    ddc::PeriodicExtrapolationRule<RDimP> bv_p_max;
-    SplineRPEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
+    ddc::PeriodicExtrapolationRule<Theta> bv_p_min;
+    ddc::PeriodicExtrapolationRule<Theta> bv_p_max;
+    SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, evaluator);
 
-    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    auto dom_bsplinesRP = builder.spline_domain();
+    auto dom_bsplinesRTheta = get_spline_idx_range(builder);
 
-    DFieldRP coeff_alpha(grid); // values of the coefficent alpha
-    DFieldRP coeff_beta(grid);
-    DFieldRP x(grid);
-    DFieldRP y(grid);
+    DFieldMemRTheta coeff_alpha(grid); // values of the coefficent alpha
+    DFieldMemRTheta coeff_beta(grid);
+    DFieldMemRTheta x(grid);
+    DFieldMemRTheta y(grid);
 
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
         coeff_alpha(irp)
-                = std::exp(-std::tanh((ddc::coordinate(ddc::select<IDimR>(irp)) - 0.7) / 0.05));
+                = std::exp(-std::tanh((ddc::coordinate(ddc::select<GridR>(irp)) - 0.7) / 0.05));
         coeff_beta(irp) = 1.0 / coeff_alpha(irp);
-        ddc::Coordinate<RDimR, RDimP>
-                coord(ddc::coordinate(ddc::select<IDimR>(irp)),
-                      ddc::coordinate(ddc::select<IDimP>(irp)));
+        Coord<R, Theta>
+                coord(ddc::coordinate(ddc::select<GridR>(irp)),
+                      ddc::coordinate(ddc::select<GridTheta>(irp)));
         auto cartesian_coord = mapping(coord);
-        x(irp) = ddc::get<RDimX>(cartesian_coord);
-        y(irp) = ddc::get<RDimY>(cartesian_coord);
+        x(irp) = ddc::get<X>(cartesian_coord);
+        y(irp) = ddc::get<Y>(cartesian_coord);
     });
 
-    Spline2D coeff_alpha_spline(dom_bsplinesRP);
-    Spline2D coeff_beta_spline(dom_bsplinesRP);
+    Spline2D coeff_alpha_spline(dom_bsplinesRTheta);
+    Spline2D coeff_beta_spline(dom_bsplinesRTheta);
 
-    builder(coeff_alpha_spline.span_view(),
-            coeff_alpha.span_cview()); // coeff_alpha_spline are the coefficients
+    builder(get_field(coeff_alpha_spline),
+            get_const_field(coeff_alpha)); // coeff_alpha_spline are the coefficients
     // of the spline representation of the values given by coeff_alpha.
-    builder(coeff_beta_spline.span_view(), coeff_beta.span_cview());
+    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    Spline2D x_spline_representation(dom_bsplinesRP);
-    Spline2D y_spline_representation(dom_bsplinesRP);
+    Spline2D x_spline_representation(dom_bsplinesRTheta);
+    Spline2D y_spline_representation(dom_bsplinesRTheta);
 
-    builder(x_spline_representation.span_view(), x.span_cview());
-    builder(y_spline_representation.span_view(), y.span_cview());
+    builder(get_field(x_spline_representation), get_const_field(x));
+    builder(get_field(y_spline_representation), get_const_field(y));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Setup time : "
@@ -164,38 +164,38 @@ int main(int argc, char** argv)
 
     LHSFunction lhs(mapping);
     RHSFunction rhs(mapping);
-    FieldRP<CoordRP> coords(grid);
-    DFieldRP result(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
-        coords(irp) = CoordRP(
-                ddc::coordinate(ddc::select<IDimR>(irp)),
-                ddc::coordinate(ddc::select<IDimP>(irp)));
+    FieldMemRTheta<CoordRTheta> coords(grid);
+    DFieldMemRTheta result(grid);
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
+        coords(irp) = CoordRTheta(
+                ddc::coordinate(ddc::select<GridR>(irp)),
+                ddc::coordinate(ddc::select<GridTheta>(irp)));
     });
     if (discrete_rhs) {
         // Build the spline approximation of the rhs
 
-        Spline2D rhs_spline(dom_bsplinesRP);
-        DFieldRP rhs_vals(grid);
-        ddc::for_each(grid, [&](IndexRP const irp) { rhs_vals(irp) = rhs(coords(irp)); });
-        builder(rhs_spline.span_view(), rhs_vals.span_cview());
+        Spline2D rhs_spline(dom_bsplinesRTheta);
+        DFieldMemRTheta rhs_vals(grid);
+        ddc::for_each(grid, [&](IdxRTheta const irp) { rhs_vals(irp) = rhs(coords(irp)); });
+        builder(get_field(rhs_spline), get_const_field(rhs_vals));
 
 
 
         start_time = std::chrono::system_clock::now();
         ddc::NullExtrapolationRule r_extrapolation_rule;
-        ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
-        SplineRPEvaluatorNullBound
+        ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+        SplineRThetaEvaluatorNullBound
                 eval(r_extrapolation_rule,
                      r_extrapolation_rule,
                      p_extrapolation_rule,
                      p_extrapolation_rule);
-        solver([&](CoordRP const& coord) { return eval(coord, rhs_spline.span_cview()); },
-               coords.span_cview(),
-               result.span_view());
+        solver([&](CoordRTheta const& coord) { return eval(coord, get_const_field(rhs_spline)); },
+               get_const_field(coords),
+               get_field(result));
         end_time = std::chrono::system_clock::now();
     } else {
         start_time = std::chrono::system_clock::now();
-        solver(rhs, coords.span_cview(), result.span_view());
+        solver(rhs, get_const_field(coords), get_field(result));
         end_time = std::chrono::system_clock::now();
     }
     std::cout << "Solver time : "
@@ -204,7 +204,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
 
     double max_err = 0.0;
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
         const double err = result(irp) - lhs(coords(irp));
         if (err > 0) {
             max_err = max_err > err ? max_err : err;
