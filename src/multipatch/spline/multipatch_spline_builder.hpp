@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+
 #include <cassert>
 #include <tuple>
 #include <utility>
 
 #include <ddc/ddc.hpp>
-
-#include "ddc_aliases.hpp"
 
 
 /**
@@ -29,17 +28,17 @@ template <class... Builders>
 class MultipatchSplineBuilder
 {
     using BuilderTuple = std::tuple<Builders const&...>;
-    using SplineTuple = std::tuple<
-            Field<double,
-                  typename Builders::batched_spline_domain_type,
-                  std::experimental::layout_right,
-                  typename Builders::memory_space>...>;
+    using SplineTuple = std::tuple<ddc::ChunkSpan<
+            double,
+            typename Builders::batched_spline_domain_type,
+            std::experimental::layout_right,
+            typename Builders::memory_space>...>;
     // For PERIODIC or GREVILLE boundary conditions
-    using ValuesTuple = std::tuple<
-            Field<double,
-                  typename Builders::batched_interpolation_domain_type,
-                  std::experimental::layout_right,
-                  typename Builders::memory_space>...>;
+    using ValuesTuple = std::tuple<ddc::ChunkSpan<
+            double,
+            typename Builders::batched_interpolation_domain_type,
+            std::experimental::layout_right,
+            typename Builders::memory_space>...>;
 
 
     BuilderTuple const m_builders;

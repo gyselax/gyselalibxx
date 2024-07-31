@@ -7,9 +7,9 @@ The MultipatchSplineBuilder allows all the given spline builders ot be called in
 ### Example of use 
 We define all the builders for each patch, 
 ```cpp
-SplineBuilderType1 builder_1(idx_range_1); 
-SplineBuilderType2 builder_2(idx_range_2); 
-SplineBuilderType3 builder_3(idx_range_3); 
+SplineBuilderType1 builder_1(domain_1); 
+SplineBuilderType2 builder_2(domain_2); 
+SplineBuilderType3 builder_3(domain_3); 
 ...
 ```
 
@@ -20,18 +20,18 @@ MultipatchSplineBuilder builder (builder_1, builder_2, builder_3);
 
 We allocate memory for the spline representations on each patch,
 ```cpp
-SplineType1 spline_1(spline_idx_range_1); 
-SplineType2 spline_2(spline_idx_range_2); 
-SplineType3 spline_3(spline_idx_range_3); 
+SplineType1 spline_1(spline_domain_1); 
+SplineType2 spline_2(spline_domain_2); 
+SplineType3 spline_3(spline_domain_3); 
 ...
 std::tuple splines_tuple = {spline_1, spline_2, spline_3}; 
 ```
 
 We do the same with the values of the function, 
 ```cpp
-ValuesType1 values_1(idx_range_1); 
-ValuesType2 values_2(idx_range_2); 
-ValuesType3 values_3(idx_range_3); 
+ValuesType1 values_1(domain_1); 
+ValuesType2 values_2(domain_2); 
+ValuesType3 values_3(domain_3); 
 ...
 // initialisation 
 ...
