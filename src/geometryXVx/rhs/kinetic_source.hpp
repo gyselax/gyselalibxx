@@ -35,8 +35,8 @@ private:
     double m_density;
     double m_energy;
     double m_temperature;
-    host_t<DFieldX> m_spatial_extent;
-    host_t<DFieldVx> m_velocity_shape;
+    host_t<DFieldMemX> m_spatial_extent;
+    host_t<DFieldMemVx> m_velocity_shape;
 
 public:
     /**
@@ -51,8 +51,8 @@ public:
      * @param[in] temperature A parameter that sets the temperature of the source. 
      */
     KineticSource(
-            IDomainX const& gridx,
-            IDomainVx const& gridv,
+            IdxRangeX const& gridx,
+            IdxRangeVx const& gridv,
             double extent,
             double stiffness,
             double amplitude,
@@ -73,5 +73,5 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
+    DFieldSpXVx operator()(DFieldSpXVx allfdistribu, double dt) const override;
 };

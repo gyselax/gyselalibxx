@@ -32,5 +32,6 @@ public:
      * @param[in] temperature A span referencing the temperatures.
      * @return A span referencing the reaction rate.
      */
-    DSpanSpX operator()(DSpanSpX rate, DViewSpX density, DViewSpX temperature) const override;
+    DFieldSpX operator()(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature)
+            const override;
 };

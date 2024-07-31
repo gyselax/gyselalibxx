@@ -1,6 +1,7 @@
 #pragma once
-
 #include <geometry.hpp>
+
+#include "ddc_aliases.hpp"
 
 /**
  * @brief An enum class that allows choosing between two types
@@ -11,7 +12,7 @@ enum class MaskType { Normal, Inverted };
 /**
  * @brief Constructs a mask function defined with hyperbolic tangents.
  *
- * Consider the domain [xmin, xmax], and {xleft, xright} 
+ * Consider the index range [xmin, xmax], and {xleft, xright} 
  * the transition coordinates defined using the extent parameter.
  * 
  * If type = 'normal' the mask equals one inside 
@@ -30,8 +31,8 @@ enum class MaskType { Normal, Inverted };
  * @param[in] normalized A boolean that equals true if the integral of the mask must be equal to one.
  * @returns A Dfield containing the mask. 
  */
-host_t<DFieldX> mask_tanh(
-        IDomainX const& gridx,
+host_t<DFieldMemX> mask_tanh(
+        IdxRangeX const& gridx,
         double extent,
         double stiffness,
         MaskType const type,

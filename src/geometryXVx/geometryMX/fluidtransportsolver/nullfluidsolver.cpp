@@ -10,10 +10,10 @@ NullFluidSolver::NullFluidSolver(IdxRangeSp const& dom_fluidsp)
     }
 }
 
-DSpanSpMX NullFluidSolver::operator()(
-        DSpanSpMX const fluid_moments,
-        DViewSpXVx const allfdistribu,
-        DViewX const efield,
+DFieldSpMomX NullFluidSolver::operator()(
+        DFieldSpMomX const fluid_moments,
+        DConstFieldSpXVx const allfdistribu,
+        DConstFieldX const efield,
         double const dt) const
 {
     return fluid_moments;

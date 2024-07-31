@@ -43,7 +43,7 @@ public:
      * @param[in] mean_velocity_bot A parameter that represents the mean velocity of the bump-on-tail Maxwellian. 
      */
     void compute_twomaxwellian(
-            DSpanVx fMaxwellian,
+            DFieldVx fMaxwellian,
             double epsilon_bot,
             double temperature_bot,
             double mean_velocity_bot) const;
@@ -75,7 +75,7 @@ public:
      * @param[out] allfequilibrium The initialized distribution function.
      * @return The initialized distribution function.
      */
-    DSpanSpVx operator()(DSpanSpVx allfequilibrium) const override;
+    DFieldSpVx operator()(DFieldSpVx allfequilibrium) const override;
 
     /**
      * @brief A method for accessing the m_epsilon_bot member variable of the class.

@@ -52,5 +52,6 @@ public:
      * @param[in] dt The timestep. 
      * @return The distribution function after solving the Boltzmann equation.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, double dt) const override;
+    DFieldSpXVx operator()(DFieldSpXVx allfdistribu, DConstFieldX electric_field, double dt)
+            const override;
 };
