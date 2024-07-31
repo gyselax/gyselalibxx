@@ -43,8 +43,8 @@
 namespace {
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 using DiscreteMapping
-        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
-using Mapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
+        = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using Mapping = CircularToCartesian<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
 
@@ -52,7 +52,7 @@ namespace fs = std::filesystem;
 
 
 
-TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
+TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 {
     // SETUP ==========================================================================================
     std::chrono::time_point<std::chrono::system_clock> start_simulation;
@@ -70,14 +70,14 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
     CoordR const r_min(rmin);
     CoordR const r_max(rmax);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    CoordTheta const p_min(0.0);
+    CoordTheta const p_max(2.0 * M_PI);
+    IdxStepTheta const p_size(Nt);
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
+    std::vector<CoordTheta> p_knots(p_size + 1);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
@@ -90,43 +90,43 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
     p_knots[p_size] = p_min;
     for (int i(1); i < p_size; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
+        p_knots[i] = CoordTheta(p_min + i * dp);
     }
     p_knots[p_size] = p_max;
 
 
     // Creating mesh & supports:
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesP>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
+    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IDomainR const interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
-    IDomainP const interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
-    IDomainRP const grid(interpolation_domain_R, interpolation_domain_P);
+    IdxRangeR const interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta const interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    // Split the domain of the advection field along RP
-    const int npoints_p = IDomainP(grid).size();
-    IDomainRP const grid_without_Opoint(grid.remove_first(IVectRP(1, 0)));
-    IDomainRP const Opoint_grid(grid.take_first(IVectRP(1, npoints_p)));
+    // Split the index range of the advection field along RTheta
+    const int npoints_p = IdxRangeTheta(grid).size();
+    IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
+    IdxRangeRTheta const Opoint_grid(grid.take_first(IdxStepRTheta(1, npoints_p)));
 
 
     // OPERATORS ======================================================================================
-    SplineRPBuilder const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<RDimP>(),
-            ddc::PeriodicExtrapolationRule<RDimP>());
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
 
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> polar_spline_evaluator(
             r_extrapolation_rule);
 
     // --- Define the mapping. ------------------------------------------------------------------------
@@ -134,25 +134,26 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, spline_evaluator_extrapol);
 
-    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
-    SplineRPEvaluatorNullBound spline_evaluator(
+    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_domain(mapping);
+    AdvectionPhysicalDomain advection_idx_range(mapping);
 
-    RK3<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>> const time_stepper(grid);
-    SplineFootFinder find_feet(time_stepper, advection_domain, builder, spline_evaluator_extrapol);
+    RK3<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(grid);
+    SplineFootFinder
+            find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
 
-    BslAdvectionRP advection_operator(interpolator, find_feet, mapping);
+    BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(mapping);
@@ -177,16 +178,16 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     // ================================================================================================
     // INITIALISATION                                                                                 |
     // ================================================================================================
-    DFieldRP allfdistribu_rp(grid);
-    DFieldRP allfdistribu_xy(grid);
+    DFieldMemRTheta allfdistribu_rp(grid);
+    DFieldMemRTheta allfdistribu_xy(grid);
 
-    VectorDFieldRP<RDimX, RDimY> advection_field_exact(grid);
-    VectorDFieldRP<RDimR, RDimP> advection_field_rp(grid_without_Opoint);
-    VectorDFieldRP<RDimX, RDimY> advection_field_xy(grid);
-    VectorDFieldRP<RDimX, RDimY> advection_field_xy_from_rp(grid);
+    DVectorFieldMemRTheta<X, Y> advection_field_exact(grid);
+    DVectorFieldMemRTheta<R, Theta> advection_field_rp(grid_without_Opoint);
+    DVectorFieldMemRTheta<X, Y> advection_field_xy(grid);
+    DVectorFieldMemRTheta<X, Y> advection_field_xy_from_rp(grid);
     CoordXY advection_field_xy_center;
 
-    DFieldRP electrostatic_potential(grid);
+    DFieldMemRTheta electrostatic_potential(grid);
 
 
 
@@ -194,8 +195,8 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
     auto function = simulation.get_test_function();
     auto phi_function = simulation.get_electrostatique_potential();
     auto advection_field = simulation.get_advection_field();
-    ddc::for_each(grid, [&](IndexRP const irp) {
-        CoordRP const coord_rp(ddc::coordinate(irp));
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
+        CoordRTheta const coord_rp(ddc::coordinate(irp));
         CoordXY const coord_xy(mapping(coord_rp));
 
         allfdistribu_rp(irp) = function(coord_rp);
@@ -203,8 +204,8 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
         electrostatic_potential(irp) = phi_function(coord_xy, 0);
 
         CoordXY const evaluated_advection_field = advection_field(coord_xy, 0);
-        ddcHelper::get<RDimX>(advection_field_exact)(irp) = CoordX(evaluated_advection_field);
-        ddcHelper::get<RDimY>(advection_field_exact)(irp) = CoordY(evaluated_advection_field);
+        ddcHelper::get<X>(advection_field_exact)(irp) = CoordX(evaluated_advection_field);
+        ddcHelper::get<Y>(advection_field_exact)(irp) = CoordY(evaluated_advection_field);
     });
 
 
@@ -217,66 +218,66 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
 
 
     // Compare advection fields ---
-    VectorDFieldRP<RDimX, RDimY> difference_between_fields_exact_and_xy(grid);
+    DVectorFieldMemRTheta<X, Y> difference_between_fields_exact_and_xy(grid);
     // > Compare the advection field computed on XY to the exact advection field
-    ddc::for_each(grid, [&](IndexRP const irp) {
-        ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)
-                = ddcHelper::get<RDimX>(advection_field_exact)(irp)
-                  - ddcHelper::get<RDimX>(advection_field_xy)(irp);
-        ddcHelper::get<RDimY>(difference_between_fields_exact_and_xy)(irp)
-                = ddcHelper::get<RDimY>(advection_field_exact)(irp)
-                  - ddcHelper::get<RDimY>(advection_field_xy)(irp);
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
+        ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irp)
+                = ddcHelper::get<X>(advection_field_exact)(irp)
+                  - ddcHelper::get<X>(advection_field_xy)(irp);
+        ddcHelper::get<Y>(difference_between_fields_exact_and_xy)(irp)
+                = ddcHelper::get<Y>(advection_field_exact)(irp)
+                  - ddcHelper::get<Y>(advection_field_xy)(irp);
     });
 
 
-    // > Compare the advection field computed on RP to the advection field computed on XY
-    VectorDFieldRP<RDimX, RDimY> difference_between_fields_xy_and_rp(grid);
-    ddc::for_each(grid_without_Opoint, [&](IndexRP const irp) {
-        CoordRP const coord_rp(ddc::coordinate(irp));
+    // > Compare the advection field computed on RTheta to the advection field computed on XY
+    DVectorFieldMemRTheta<X, Y> difference_between_fields_xy_and_rp(grid);
+    ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
+        CoordRTheta const coord_rp(ddc::coordinate(irp));
 
         std::array<std::array<double, 2>, 2> J; // Jacobian matrix
         mapping.jacobian_matrix(coord_rp, J);
         std::array<std::array<double, 2>, 2> G; // Metric tensor
         mapping.metric_tensor(coord_rp, G);
 
-        // computation made in BslAdvectionRP operator:
-        ddcHelper::get<RDimX>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<RDimR>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])
-                  + ddcHelper::get<RDimP>(advection_field_rp)(irp) * -J[1][0] / std::sqrt(G[0][0]);
-        ddcHelper::get<RDimY>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<RDimR>(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])
-                  + ddcHelper::get<RDimP>(advection_field_rp)(irp) * J[0][0] / std::sqrt(G[0][0]);
+        // computation made in BslAdvectionRTheta operator:
+        ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
+                = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0] / std::sqrt(G[0][0]);
+        ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
+                = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0] / std::sqrt(G[0][0]);
 
         // compare
-        ddcHelper::get<RDimX>(difference_between_fields_xy_and_rp)(irp)
-                = ddcHelper::get<RDimX>(advection_field_xy_from_rp)(irp)
-                  - ddcHelper::get<RDimX>(advection_field_xy)(irp);
-        ddcHelper::get<RDimY>(difference_between_fields_xy_and_rp)(irp)
-                = ddcHelper::get<RDimY>(advection_field_xy_from_rp)(irp)
-                  - ddcHelper::get<RDimY>(advection_field_xy)(irp);
+        ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
+                = ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
+                  - ddcHelper::get<X>(advection_field_xy)(irp);
+        ddcHelper::get<Y>(difference_between_fields_xy_and_rp)(irp)
+                = ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
+                  - ddcHelper::get<Y>(advection_field_xy)(irp);
     });
 
-    ddc::for_each(Opoint_grid, [&](IndexRP const irp) {
-        // computation made in BslAdvectionRP operator:
-        ddcHelper::get<RDimX>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_center);
-        ddcHelper::get<RDimY>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_center);
+    ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {
+        // computation made in BslAdvectionRTheta operator:
+        ddcHelper::get<X>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_center);
+        ddcHelper::get<Y>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_center);
 
         // compare
-        ddcHelper::get<RDimX>(difference_between_fields_xy_and_rp)(irp)
-                = ddcHelper::get<RDimX>(advection_field_xy_from_rp)(irp)
-                  - ddcHelper::get<RDimX>(advection_field_xy)(irp);
-        ddcHelper::get<RDimY>(difference_between_fields_xy_and_rp)(irp)
-                = ddcHelper::get<RDimY>(advection_field_xy_from_rp)(irp)
-                  - ddcHelper::get<RDimY>(advection_field_xy)(irp);
+        ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
+                = ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
+                  - ddcHelper::get<X>(advection_field_xy)(irp);
+        ddcHelper::get<Y>(difference_between_fields_xy_and_rp)(irp)
+                = ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
+                  - ddcHelper::get<Y>(advection_field_xy)(irp);
     });
 
     // --- Check the difference on advection fields  --------------------------------------------------
-    ddc::for_each(grid, [&](IndexRP const irp) {
-        EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
-        EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
+        EXPECT_LE(abs(ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
+        EXPECT_LE(abs(ddcHelper::get<Y>(difference_between_fields_exact_and_xy)(irp)), 1e-5);
 
-        EXPECT_LE(abs(ddcHelper::get<RDimX>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
-        EXPECT_LE(abs(ddcHelper::get<RDimY>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
+        EXPECT_LE(abs(ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
+        EXPECT_LE(abs(ddcHelper::get<Y>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
     });
 
 
@@ -288,7 +289,7 @@ TEST(AdvectionFieldRPComputation, TestAdvectionFieldFinder)
         advection_operator(allfdistribu_xy, advection_field_xy, dt);
 
         // Check the advected functions ---
-        ddc::for_each(grid, [&](IndexRP const irp) {
+        ddc::for_each(grid, [&](IdxRTheta const irp) {
             EXPECT_NEAR(allfdistribu_rp(irp), allfdistribu_xy(irp), 1e-13);
         });
     }

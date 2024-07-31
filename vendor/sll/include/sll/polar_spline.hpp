@@ -8,6 +8,7 @@ struct PolarSplineSpan;
 template <class PolarBSplinesType>
 struct PolarSplineView;
 
+
 /**
  * @brief A structure containing the two Chunks necessary to define a spline on a set of
  * polar basis splines.
@@ -19,16 +20,16 @@ struct PolarSpline
 {
 public:
     /// The radial bspline from which the polar bsplines are constructed.
-    using BSplineR = typename PolarBSplinesType::BSplinesR_tag;
+    using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
     /// The poloidal bspline from which the polar bsplines are constructed.
-    using BSplineP = typename PolarBSplinesType::BSplinesP_tag;
+    using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
 
 public:
     /**
      * A Chunk containing the coefficients in front of the b-spline elements which can be
      * expressed as a tensor product of 1D bsplines.
      */
-    ddc::Chunk<double, ddc::DiscreteDomain<BSplineR, BSplineP>> spline_coef;
+    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesR, BSplinesTheta>> spline_coef;
 
     /**
      * A Chunk containing the coefficients in front of the b-spline elements near the
@@ -46,11 +47,11 @@ public:
      *
      * @param domain A 2D domain of bsplines.
      */
-    PolarSpline<PolarBSplinesType>(ddc::DiscreteDomain<BSplineR, BSplineP> domain)
-        : spline_coef(ddc::DiscreteDomain<BSplineR, BSplineP>(
-                ddc::select<BSplineR>(domain).remove_first(
-                        ddc::DiscreteVector<BSplineR>(PolarBSplinesType::continuity + 1)),
-                ddc::select<BSplineP>(domain)))
+    PolarSpline<PolarBSplinesType>(ddc::DiscreteDomain<BSplinesR, BSplinesTheta> domain)
+        : spline_coef(ddc::DiscreteDomain<BSplinesR, BSplinesTheta>(
+                ddc::select<BSplinesR>(domain).remove_first(
+                        ddc::DiscreteVector<BSplinesR>(PolarBSplinesType::continuity + 1)),
+                ddc::select<BSplinesTheta>(domain)))
         , singular_spline_coef(ddc::DiscreteDomain<PolarBSplinesType>(
                   ddc::DiscreteElement<PolarBSplinesType>(0),
                   ddc::DiscreteVector<PolarBSplinesType>(PolarBSplinesType::n_singular_basis())))
@@ -68,7 +69,7 @@ public:
      */
     PolarSpline<PolarBSplinesType>(
             ddc::DiscreteDomain<PolarBSplinesType> singular_domain,
-            ddc::DiscreteDomain<BSplineR, BSplineP> domain)
+            ddc::DiscreteDomain<BSplinesR, BSplinesTheta> domain)
         : spline_coef(domain)
         , singular_spline_coef(singular_domain.take_first(
                   ddc::DiscreteVector<PolarBSplinesType>(PolarBSplinesType::n_singular_basis())))
@@ -90,7 +91,7 @@ public:
      *
      * @return A constant reference to this polar spline.
      */
-    PolarSplineView<PolarBSplinesType> span_cview()
+    PolarSplineView<PolarBSplinesType> span_cview() const
     {
         return PolarSplineView<PolarBSplinesType>(*this);
     }
@@ -107,16 +108,16 @@ struct PolarSplineSpan
 {
 public:
     /// The radial bspline from which the polar bsplines are constructed.
-    using BSplineR = typename PolarBSplinesType::BSplinesR_tag;
+    using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
     /// The poloidal bspline from which the polar bsplines are constructed.
-    using BSplineP = typename PolarBSplinesType::BSplinesP_tag;
+    using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
 
 public:
     /**
      * A ChunkSpan containing the coefficients in front of the b-spline elements which can be
      * expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<double, ddc::DiscreteDomain<BSplineR, BSplineP>> spline_coef;
+    ddc::ChunkSpan<double, ddc::DiscreteDomain<BSplinesR, BSplinesTheta>> spline_coef;
 
     /**
      * A ChunkSpan containing the coefficients in front of the b-spline elements near the
@@ -151,7 +152,7 @@ public:
      *
      * @return A constant reference to a polar spline.
      */
-    PolarSplineView<PolarBSplinesType> span_cview()
+    PolarSplineView<PolarBSplinesType> span_cview() const
     {
         return PolarSplineView<PolarBSplinesType>(*this);
     }
@@ -168,16 +169,16 @@ struct PolarSplineView
 {
 public:
     /// The radial bspline from which the polar bsplines are constructed.
-    using BSplineR = typename PolarBSplinesType::BSplinesR_tag;
+    using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
     /// The poloidal bspline from which the polar bsplines are constructed.
-    using BSplineP = typename PolarBSplinesType::BSplinesP_tag;
+    using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
 
 public:
     /**
      * A ChunkView containing the coefficients in front of the b-spline elements which can be
      * expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplineR, BSplineP>> const spline_coef;
+    ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesTheta>> const spline_coef;
 
     /**
      * A ChunkView containing the coefficients in front of the b-spline elements near the
@@ -213,7 +214,7 @@ public:
      *
      * @return A reference to a polar spline.
      */
-    PolarSplineSpan<PolarBSplinesType> span_view()
+    PolarSplineSpan<PolarBSplinesType> span_view() const
     {
         return *this;
     }
@@ -223,8 +224,20 @@ public:
      *
      * @return A constant reference to a polar spline.
      */
-    PolarSplineView<PolarBSplinesType> span_cview()
+    PolarSplineView<PolarBSplinesType> span_cview() const
     {
         return *this;
     }
 };
+
+template <class T>
+inline constexpr bool is_polar_spline_v = false;
+
+template <class PolarBSplinesType>
+inline constexpr bool is_polar_spline_v<PolarSpline<PolarBSplinesType>> = true;
+
+template <class PolarBSplinesType>
+inline constexpr bool is_polar_spline_v<PolarSplineSpan<PolarBSplinesType>> = true;
+
+template <class PolarBSplinesType>
+inline constexpr bool is_polar_spline_v<PolarSplineView<PolarBSplinesType>> = true;

@@ -14,6 +14,8 @@ target_link_libraries(2d_spline_interpolator_tests
         gslx::geometry_RTheta
         gslx::interpolation_2D_rp
         gslx::paraconfpp
+        gslx::utils
+
 )
 
  

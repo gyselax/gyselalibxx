@@ -16,8 +16,6 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
-#include <stdio.h>
-
 #include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
@@ -40,27 +38,21 @@ namespace fs = std::filesystem;
 
 namespace {
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-using RDimX_adv = typename AdvectionPhysicalDomain<
-        CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimX_adv;
-using RDimY_adv = typename AdvectionPhysicalDomain<
-        CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimY_adv;
+using X_adv = typename AdvectionPhysicalDomain<CircularToCartesian<X, Y, R, Theta>>::X_adv;
+using Y_adv = typename AdvectionPhysicalDomain<CircularToCartesian<X, Y, R, Theta>>::Y_adv;
 #elif defined(CZARNY_MAPPING_PHYSICAL)
-using RDimX_adv =
-        typename AdvectionPhysicalDomain<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimX_adv;
-using RDimY_adv =
-        typename AdvectionPhysicalDomain<CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimY_adv;
+using X_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<X, Y, R, Theta>>::X_adv;
+using Y_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<X, Y, R, Theta>>::Y_adv;
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-using RDimX_adv = typename AdvectionPseudoCartesianDomain<
-        CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimX_adv;
-using RDimY_adv = typename AdvectionPseudoCartesianDomain<
-        CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP>>::RDimY_adv;
+using X_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<X, Y, R, Theta>>::X_adv;
+using Y_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<X, Y, R, Theta>>::Y_adv;
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-using RDimX_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>>::RDimX_adv;
-using RDimY_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>>::RDimY_adv;
+using X_adv = typename AdvectionPseudoCartesianDomain<
+        DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>>::X_adv;
+using Y_adv = typename AdvectionPseudoCartesianDomain<
+        DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>>::Y_adv;
 #endif
 
 } //end namespace
@@ -114,17 +106,17 @@ int main(int argc, char** argv)
     // Grid creation of space. ------------------------------------------------------------------
     CoordR const r_min(rmin);
     CoordR const r_max(rmax);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    CoordTheta const p_min(0.0);
+    CoordTheta const p_max(2.0 * M_PI);
+    IdxStepTheta const p_size(Nt);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
+    std::vector<CoordTheta> p_knots(p_size + 1);
 
     std::ofstream file("r_knots.txt");
     r_knots[0] = r_min;
@@ -139,57 +131,57 @@ int main(int argc, char** argv)
     file.close();
 
     for (int i(0); i < p_size + 1; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
+        p_knots[i] = CoordTheta(p_min + i * dp);
     }
 
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesP>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
+    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IDomainR const interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
-    IDomainP const interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
-    IDomainRP const grid(interpolation_domain_R, interpolation_domain_P);
+    IdxRangeR const interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta const interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
     // --- Builders for the test function and the mapping:
-    SplineRPBuilder const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
-    SplineRPEvaluatorNullBound spline_evaluator(
+    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
 
     // --- Evaluator for the test advection field:
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(r_max);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<RDimP>(),
-            ddc::PeriodicExtrapolationRule<RDimP>());
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
 
 
     std::string key;
 
     // SELECTION OF THE MAPPING AND THE ADVECTION DOMAIN.
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-    CircularToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping;
-    CircularToCartesian<RDimX, RDimY, RDimR, RDimP> mapping;
-    AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    CircularToCartesian<X, Y, R, Theta> analytical_mapping;
+    CircularToCartesian<X, Y, R, Theta> mapping;
+    AdvectionPhysicalDomain advection_idx_range(analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
-    std::string const domain_name = "PHYSICAL";
+    std::string const idx_range_name = "PHYSICAL";
     key += "circular_physical";
 #else
 
@@ -197,29 +189,29 @@ int main(int argc, char** argv)
     double const czarny_epsilon = 1.4;
 
 #if defined(CZARNY_MAPPING_PHYSICAL)
-    CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> mapping(czarny_e, czarny_epsilon);
-    AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<X, Y, R, Theta> mapping(czarny_e, czarny_epsilon);
+    AdvectionPhysicalDomain advection_idx_range(analytical_mapping);
     std::string const mapping_name = "CZARNY";
-    std::string const domain_name = "PHYSICAL";
+    std::string const idx_range_name = "PHYSICAL";
     key += "czarny_physical";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> mapping(czarny_e, czarny_epsilon);
-    AdvectionPseudoCartesianDomain advection_domain(mapping);
+    CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<X, Y, R, Theta> mapping(czarny_e, czarny_epsilon);
+    AdvectionPseudoCartesianDomain advection_idx_range(mapping);
     std::string const mapping_name = "CZARNY";
-    std::string const domain_name = "PSEUDO CARTESIAN";
+    std::string const idx_range_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<RDimX, RDimY, RDimR, RDimP> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesian mapping
-            = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>::
+            = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>::
                     analytical_to_discrete(analytical_mapping, builder, spline_evaluator_extrapol);
-    AdvectionPseudoCartesianDomain advection_domain(mapping);
+    AdvectionPseudoCartesianDomain advection_idx_range(mapping);
     std::string const mapping_name = "DISCRETE";
-    std::string const domain_name = "PSEUDO CARTESIAN";
+    std::string const idx_range_name = "PSEUDO CARTESIAN";
     key += "discrete_pseudo_cartesian";
 #endif
 #endif
@@ -228,24 +220,24 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
-    Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
+    Euler<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X_adv, Y_adv>> time_stepper(grid);
     std::string const method_name = "EULER";
     key += "euler";
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>>
+    CrankNicolson<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X_adv, Y_adv>>
             time_stepper(grid, 20, epsilon_CN);
     std::string const method_name = "CRANK NICOLSON";
     key += "crank_nicolson";
 
 #elif defined(RK3_METHOD)
-    RK3<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
+    RK3<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X_adv, Y_adv>> time_stepper(grid);
     std::string const method_name = "RK3";
     key += "rk3";
 
 #elif defined(RK4_METHOD)
-    RK4<FieldRP<CoordRP>, VectorDFieldRP<RDimX_adv, RDimY_adv>> time_stepper(grid);
+    RK4<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X_adv, Y_adv>> time_stepper(grid);
     std::string const method_name = "RK4";
     key += "rk4";
 #endif
@@ -274,14 +266,14 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    std::cout << mapping_name << " MAPPING - " << domain_name << " DOMAIN - " << method_name
+    std::cout << mapping_name << " MAPPING - " << idx_range_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;
     simulate(
             mapping,
             analytical_mapping,
             grid,
             time_stepper,
-            advection_domain,
+            advection_idx_range,
             simulation,
             interpolator,
             builder,
