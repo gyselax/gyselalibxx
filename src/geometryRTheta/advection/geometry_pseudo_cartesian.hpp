@@ -1,11 +1,12 @@
 #pragma once
-
 #include <ddc/ddc.hpp>
+
+#include "ddc_aliases.hpp"
 
 
 /**
  * @brief Tag the first non periodic dimension
- * in the pseudo_Cartesian domain.
+ * in the pseudo_Cartesian index range.
  */
 struct DimX_pC
 {
@@ -17,7 +18,7 @@ struct DimX_pC
 };
 /**
  * @brief Tag the second non periodic dimension
- * in the pseudo_Cartesian domain.
+ * in the pseudo_Cartesian index range.
  */
 struct DimY_pC
 {
@@ -28,6 +29,6 @@ struct DimY_pC
     static bool constexpr PERIODIC = false;
 };
 
-using CoordX_pC = ddc::Coordinate<DimX_pC>;
-using CoordY_pC = ddc::Coordinate<DimY_pC>;
-using CoordXY_pC = ddc::Coordinate<DimX_pC, DimY_pC>;
+using CoordX_pC = Coord<DimX_pC>;
+using CoordY_pC = Coord<DimY_pC>;
+using CoordXY_pC = Coord<DimX_pC, DimY_pC>;

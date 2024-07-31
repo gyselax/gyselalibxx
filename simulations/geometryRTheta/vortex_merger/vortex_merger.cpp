@@ -46,8 +46,8 @@
 namespace {
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 using DiscreteMapping
-        = DiscreteToCartesian<RDimX, RDimY, SplineRPBuilder, SplineRPEvaluatorConstBound>;
-using CircularMapping = CircularToCartesian<RDimX, RDimY, RDimR, RDimP>;
+        = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
 
 } // end namespace
 
@@ -79,88 +79,89 @@ int main(int argc, char** argv)
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
-    IDomainR const mesh_r = init_pseudo_uniform_spline_dependent_idx_range<
-            IDimR,
+    IdxRangeR const mesh_r = init_pseudo_uniform_spline_dependent_idx_range<
+            GridR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselalibxx, "r");
-    IDomainP const mesh_p = init_pseudo_uniform_spline_dependent_idx_range<
-            IDimP,
-            BSplinesP,
-            SplineInterpPointsP>(conf_gyselalibxx, "p");
-    IDomainRP const grid(mesh_r, mesh_p);
+    IdxRangeTheta const mesh_p = init_pseudo_uniform_spline_dependent_idx_range<
+            GridTheta,
+            BSplinesTheta,
+            SplineInterpPointsTheta>(conf_gyselalibxx, "p");
+    IdxRangeRTheta const grid(mesh_r, mesh_p);
 
-    FieldRP<CoordRP> coords(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
+    FieldMemRTheta<CoordRTheta> coords(grid);
+    ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
 
     // OPERATORS ======================================================================================
-    SplineRPBuilder const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Define the mapping. ------------------------------------------------------------------------
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_left(
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
             ddc::coordinate(mesh_r.front()));
-    ddc::ConstantExtrapolationRule<RDimR, RDimP> boundary_condition_r_right(
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
             ddc::coordinate(mesh_r.back()));
 
-    SplineRPEvaluatorConstBound spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<RDimP>(),
-            ddc::PeriodicExtrapolationRule<RDimP>());
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
 
     const CircularMapping mapping;
     DiscreteMapping const discrete_mapping
             = DiscreteMapping::analytical_to_discrete(mapping, builder, spline_evaluator_extrapol);
 
-    ddc::init_discrete_space<PolarBSplinesRP>(discrete_mapping);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    BSDomainRP const dom_bsplinesRP = builder.spline_domain();
+    BSIdxRangeRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>> const time_stepper(grid);
+    Euler<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(grid);
 
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
-    SplineRPEvaluatorNullBound spline_evaluator(
+    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRP interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_domain(mapping);
+    AdvectionPhysicalDomain advection_idx_range(mapping);
 
-    SplineFootFinder find_feet(time_stepper, advection_domain, builder, spline_evaluator_extrapol);
+    SplineFootFinder
+            find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
 
-    BslAdvectionRP advection_operator(interpolator, find_feet, mapping);
+    BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
 
 
 
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
-    DFieldRP coeff_alpha(grid);
-    DFieldRP coeff_beta(grid);
+    DFieldMemRTheta coeff_alpha(grid);
+    DFieldMemRTheta coeff_beta(grid);
 
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
         coeff_alpha(irp) = -1.0;
         coeff_beta(irp) = 0.0;
     });
 
-    Spline2D coeff_alpha_spline(dom_bsplinesRP);
-    Spline2D coeff_beta_spline(dom_bsplinesRP);
+    Spline2D coeff_alpha_spline(dom_bsplinesRTheta);
+    Spline2D coeff_beta_spline(dom_bsplinesRTheta);
 
-    builder(coeff_alpha_spline.span_view(), coeff_alpha.span_cview());
-    builder(coeff_beta_spline.span_view(), coeff_beta.span_cview());
+    builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
+    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
     PoissonSolver poisson_solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
 
     // --- Predictor corrector operator ---------------------------------------------------------------
-    BslImplicitPredCorrRP predcorr_operator(
-            advection_domain,
+    BslImplicitPredCorrRTheta predcorr_operator(
+            advection_idx_range,
             mapping,
             advection_operator,
             grid,
@@ -188,12 +189,12 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("r_size", Nr);
     ddc::expose_to_pdi("p_size", Nt);
 
-    FieldR<CoordR> coords_r(ddc::select<IDimR>(grid));
-    FieldP<CoordP> coords_p(ddc::select<IDimP>(grid));
-    ddc::for_each(ddc::select<IDimR>(grid), [&](IndexR const ir) {
+    FieldMemR<CoordR> coords_r(ddc::select<GridR>(grid));
+    FieldMemTheta<CoordTheta> coords_p(ddc::select<GridTheta>(grid));
+    ddc::for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
         coords_r(ir) = ddc::coordinate(ir);
     });
-    ddc::for_each(ddc::select<IDimP>(grid), [&](IndexP const ip) {
+    ddc::for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const ip) {
         coords_p(ip) = ddc::coordinate(ip);
     });
 
@@ -209,13 +210,13 @@ int main(int argc, char** argv)
     // INITIALISATION                                                                                 |
     // ================================================================================================
     // Cartesian coordinates and jacobian ****************************
-    FieldRP<CoordX> coords_x(grid);
-    FieldRP<CoordY> coords_y(grid);
-    DFieldRP jacobian(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
+    FieldMemRTheta<CoordX> coords_x(grid);
+    FieldMemRTheta<CoordY> coords_y(grid);
+    DFieldMemRTheta jacobian(grid);
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordXY coords_xy = mapping(ddc::coordinate(irp));
-        coords_x(irp) = ddc::select<RDimX>(coords_xy);
-        coords_y(irp) = ddc::select<RDimY>(coords_xy);
+        coords_x(irp) = ddc::select<X>(coords_xy);
+        coords_y(irp) = ddc::select<Y>(coords_xy);
         jacobian(irp) = mapping.jacobian(ddc::coordinate(irp));
     });
 
@@ -225,21 +226,21 @@ int main(int argc, char** argv)
 
     VortexMergerEquilibria equilibrium(mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
-    DFieldRP rho_eq(grid);
+    DFieldMemRTheta rho_eq(grid);
     equilibrium.set_equilibrium(rho_eq, function, phi_max, tau);
 
 
     VortexMergerDensitySolution solution(mapping);
-    DFieldRP rho(grid);
+    DFieldMemRTheta rho(grid);
     solution.set_initialisation(rho, rho_eq, eps, sigma, x_star_1, y_star_1, x_star_2, y_star_2);
 
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldRP phi_eq(grid);
-    Spline2D rho_coef_eq(dom_bsplinesRP);
-    builder(rho_coef_eq.span_view(), rho_eq.span_cview());
-    PoissonLikeRHSFunction poisson_rhs_eq(rho_coef_eq.span_view(), spline_evaluator);
-    poisson_solver(poisson_rhs_eq, coords.span_cview(), phi_eq.span_view());
+    DFieldMemRTheta phi_eq(grid);
+    Spline2D rho_coef_eq(dom_bsplinesRTheta);
+    builder(get_field(rho_coef_eq), get_const_field(rho_eq));
+    PoissonLikeRHSFunction poisson_rhs_eq(get_field(rho_coef_eq), spline_evaluator);
+    poisson_solver(poisson_rhs_eq, get_const_field(coords), get_field(phi_eq));
 
 
     // --- Save initial data --------------------------------------------------------------------------
@@ -255,7 +256,7 @@ int main(int argc, char** argv)
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
-    predcorr_operator(rho.span_view(), dt, iter_nb);
+    predcorr_operator(get_field(rho), dt, iter_nb);
 
 
     end_simulation = std::chrono::system_clock::now();
