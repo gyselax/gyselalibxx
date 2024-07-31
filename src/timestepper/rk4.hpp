@@ -2,7 +2,6 @@
 #include <ddc_helper.hpp>
 #include <vector_field_common.hpp>
 
-#include "ddc_aliases.hpp"
 #include "itimestepper.hpp"
 
 
@@ -12,7 +11,7 @@
  * A class which provides an implementation of a fourth-order Runge-Kutta method in
  * order to evolve values over time. The values may be either scalars or vectors. In the
  * case of vectors the appropriate dimensions must be passed as template parameters.
- * The values which evolve are defined on an index range.
+ * The values which evolve are defined on a domain.
  *
  * For the following ODE :
  * @f$\partial_t y(t) = f(t, y(t)) @f$,
@@ -27,35 +26,34 @@
  * - @f$ k_3 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_2 ) @f$,
  * - @f$ k_3 = f(t^{n}, y^{n} + dt k_3 ) @f$.
  */
-template <class FieldMemType, class DerivFieldMemType = FieldMemType>
+template <class ValChunk, class DerivChunk = ValChunk>
 class RK4 : public ITimeStepper
 {
 private:
-    static_assert(ddc::is_chunk_v<FieldMemType> or is_field_v<FieldMemType>);
-    static_assert(ddc::is_chunk_v<DerivFieldMemType> or is_field_v<DerivFieldMemType>);
+    static_assert(ddc::is_chunk_v<ValChunk> or is_field_v<ValChunk>);
+    static_assert(ddc::is_chunk_v<DerivChunk> or is_field_v<DerivChunk>);
 
-    static_assert(std::is_same_v<
-                  typename FieldMemType::mdomain_type,
-                  typename DerivFieldMemType::mdomain_type>);
+    static_assert(
+            std::is_same_v<typename ValChunk::mdomain_type, typename DerivChunk::mdomain_type>);
 
-    using IdxRange = typename FieldMemType::mdomain_type;
+    using Domain = typename ValChunk::mdomain_type;
 
-    using Idx = typename IdxRange::discrete_element_type;
+    using Index = typename Domain::discrete_element_type;
 
-    using ValField = typename FieldMemType::span_type;
-    using ValConstField = typename FieldMemType::view_type;
+    using ValSpan = typename ValChunk::span_type;
+    using ValView = typename ValChunk::view_type;
 
-    using DerivField = typename DerivFieldMemType::span_type;
-    using DerivConstField = typename DerivFieldMemType::view_type;
+    using DerivSpan = typename DerivChunk::span_type;
+    using DerivView = typename DerivChunk::view_type;
 
-    IdxRange const m_dom;
+    Domain const m_dom;
 
 public:
     /**
      * @brief Create a RK4 object.
-     * @param[in] dom The index range on which the points which evolve over time are defined.
+     * @param[in] dom The domain on which the points which evolve over time are defined.
      */
-    RK4(IdxRange dom) : m_dom(dom) {}
+    RK4(Domain dom) : m_dom(dom) {}
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
@@ -67,15 +65,15 @@ public:
      *
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
+     *     of the domain.
      * @param[in] dt
      *     The time step over which the values should be evolved.
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy) const
+    void update(ValSpan y, double dt, std::function<void(DerivSpan, ValView)> dy) const
     {
-        using ExecSpace = typename FieldMemType::memory_space::execution_space;
+        using ExecSpace = typename ValChunk::memory_space::execution_space;
         update(ExecSpace(), y, dt, dy);
     }
 
@@ -91,7 +89,7 @@ public:
      *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
+     *     of the domain.
      * @param[in] dt
      *     The time step over which the values should be evolved.
      * @param[in] dy
@@ -100,24 +98,23 @@ public:
     template <class ExecSpace>
     void update(
             ExecSpace const& exec_space,
-            ValField y,
+            ValSpan y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy) const
+            std::function<void(DerivSpan, ValView)> dy) const
     {
-        static_assert(ddc::is_chunk_v<FieldMemType>);
+        static_assert(ddc::is_chunk_v<ValChunk>);
         static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename FieldMemType::memory_space>::
-                        accessible,
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
         static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        update(exec_space, y, dt, dy, [&](ValField y, DerivConstField dy, double dt) {
+        update(exec_space, y, dt, dy, [&](ValSpan y, DerivView dy, double dt) {
             ddc::parallel_for_each(
                     exec_space,
-                    get_idx_range(y),
-                    KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+                    y.domain(),
+                    KOKKOS_LAMBDA(Index const idx) { y(idx) = y(idx) + dy(idx) * dt; });
         });
     }
 
@@ -128,7 +125,7 @@ public:
      *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
+     *     of the domain.
      * @param[in] dt
      *     The time step over which the values should be evolved.
      * @param[in] dy
@@ -139,31 +136,30 @@ public:
     template <class ExecSpace>
     void update(
             ExecSpace const& exec_space,
-            ValField y,
+            ValSpan y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy,
-            std::function<void(ValField, DerivConstField, double)> y_update) const
+            std::function<void(DerivSpan, ValView)> dy,
+            std::function<void(ValSpan, DerivView, double)> y_update) const
     {
         static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename FieldMemType::memory_space>::
-                        accessible,
+                Kokkos::SpaceAccessibility<ExecSpace, typename ValChunk::memory_space>::accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
         static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
+                Kokkos::SpaceAccessibility<ExecSpace, typename DerivChunk::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        FieldMemType m_y_prime_alloc(m_dom);
-        DerivFieldMemType m_k1_alloc(m_dom);
-        DerivFieldMemType m_k2_alloc(m_dom);
-        DerivFieldMemType m_k3_alloc(m_dom);
-        DerivFieldMemType m_k4_alloc(m_dom);
-        DerivFieldMemType m_k_total_alloc(m_dom);
-        ValField m_y_prime = get_field(m_y_prime_alloc);
-        DerivField m_k1 = get_field(m_k1_alloc);
-        DerivField m_k2 = get_field(m_k2_alloc);
-        DerivField m_k3 = get_field(m_k3_alloc);
-        DerivField m_k4 = get_field(m_k4_alloc);
-        DerivField m_k_total = get_field(m_k_total_alloc);
+        ValChunk m_y_prime_alloc(m_dom);
+        DerivChunk m_k1_alloc(m_dom);
+        DerivChunk m_k2_alloc(m_dom);
+        DerivChunk m_k3_alloc(m_dom);
+        DerivChunk m_k4_alloc(m_dom);
+        DerivChunk m_k_total_alloc(m_dom);
+        ValSpan m_y_prime = m_y_prime_alloc.span_view();
+        DerivSpan m_k1 = m_k1_alloc.span_view();
+        DerivSpan m_k2 = m_k2_alloc.span_view();
+        DerivSpan m_k3 = m_k3_alloc.span_view();
+        DerivSpan m_k4 = m_k4_alloc.span_view();
+        DerivSpan m_k_total = m_k_total_alloc.span_view();
 
 
         // Save initial conditions
@@ -202,19 +198,19 @@ public:
 
         // --------- Update y ------------
         // Calculation of step
-        if constexpr (is_field_v<DerivFieldMemType>) {
+        if constexpr (is_field_v<DerivChunk>) {
             ddc::parallel_for_each(
                     exec_space,
-                    get_idx_range(m_k_total),
-                    KOKKOS_CLASS_LAMBDA(Idx const i) {
+                    m_k_total.domain(),
+                    KOKKOS_CLASS_LAMBDA(Index const i) {
                         // k_total = k1 + 4 * k2 + k3
                         fill_k_total(i, m_k_total, m_k1(i) + 2 * m_k2(i) + 2 * m_k3(i) + m_k4(i));
                     });
         } else {
             ddc::parallel_for_each(
                     exec_space,
-                    get_idx_range(m_k_total),
-                    KOKKOS_LAMBDA(Idx const i) {
+                    m_k_total.domain(),
+                    KOKKOS_LAMBDA(Index const i) {
                         // k_total = k1 + 4 * k2 + k3
                         m_k_total(i) = m_k1(i) + 2 * m_k2(i) + 2 * m_k3(i) + m_k4(i);
                     });
@@ -225,9 +221,9 @@ public:
     }
 
 private:
-    void copy(ValField copy_to, ValConstField copy_from) const
+    void copy(ValSpan copy_to, ValView copy_from) const
     {
-        if constexpr (is_field_v<ValField>) {
+        if constexpr (is_field_v<ValSpan>) {
             ddcHelper::deepcopy(copy_to, copy_from);
         } else {
             ddc::parallel_deepcopy(copy_to, copy_from);
@@ -235,7 +231,10 @@ private:
     }
 
     template <class... DDims>
-    KOKKOS_FUNCTION void fill_k_total(Idx i, DerivField m_k_total, Coord<DDims...> new_val) const
+    KOKKOS_FUNCTION void fill_k_total(
+            Index i,
+            DerivSpan m_k_total,
+            ddc::Coordinate<DDims...> new_val) const
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }

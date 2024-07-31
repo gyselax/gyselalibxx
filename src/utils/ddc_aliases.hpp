@@ -2,9 +2,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "derivative_field_common.hpp"
-#include "vector_field_common.hpp"
-
 /**
  * This file contains aliases for DDC. The documentation for DDC can be found at <https://ddc.mdls.fr/>.
  * The names used in the DDC project are not always intuitive for mathematicians/physicists therefore
@@ -91,9 +88,7 @@ using NonUniformGridBase = ddc::NonUniformPointSampling<GridType>;
 template <class... QueryGrids, class FieldType>
 KOKKOS_INLINE_FUNCTION auto get_idx_range(FieldType const& field) noexcept
 {
-    static_assert(
-            ddc::is_chunk_v<FieldType> || is_field_v<FieldType>,
-            "Not a DDC field (ddc::ChunkSpan) type");
+    static_assert(ddc::is_chunk_v<FieldType>, "Not a DDC field (ddc::ChunkSpan) type");
     if constexpr (sizeof...(QueryGrids) == 0) {
         return field.domain();
     } else {
@@ -109,7 +104,7 @@ KOKKOS_INLINE_FUNCTION auto get_idx_range(FieldType const& field) noexcept
  * @returns The index range.
  */
 template <class SplineBuilder>
-inline auto get_spline_idx_range(SplineBuilder const& builder) noexcept
+KOKKOS_INLINE_FUNCTION auto get_spline_idx_range(SplineBuilder const& builder) noexcept
 {
     return builder.spline_domain();
 }
@@ -124,7 +119,7 @@ template <class FieldType>
 inline auto get_field(FieldType& field)
 {
     static_assert(
-            ddc::is_chunk_v<FieldType> || is_field_v<FieldType> || is_deriv_field_v<FieldType>,
+            ddc::is_chunk_v<FieldType>,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_view();
 }
@@ -139,7 +134,7 @@ template <class FieldType>
 inline auto get_const_field(FieldType const& field)
 {
     static_assert(
-            ddc::is_chunk_v<FieldType> || is_field_v<FieldType> || is_deriv_field_v<FieldType>,
+            ddc::is_chunk_v<FieldType>,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_cview();
 }
