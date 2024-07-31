@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -13,7 +14,6 @@
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
-#include "ddc_aliases.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "itimesolver.hpp"
@@ -43,61 +43,61 @@
  * First, it predicts:
  * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
- * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^P@f$ with a BslAdvectionRTheta on @f$ dt @f$;
+ * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^P@f$ with a BslAdvectionRP on @f$ dt @f$;
  *
  * We write @f$X^P@f$ the characteristic feet such that @f$\partial_t X^P = A^n(X^n)@f$.
  *
  * Secondly, it corrects:
  * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
- * - 6. From @f$\rho^n@f$ and @f$\frac{A^{P}(X^n) + A^n(X^P)}{2} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$ dt @f$.
+ * - 6. From @f$\rho^n@f$ and @f$\frac{A^{P}(X^n) + A^n(X^P)}{2} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRP on @f$ dt @f$.
  *
  * (With @f$X^C@f$ the characteristic feet such that @f$\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2} @f$.)
  *
  * @tparam Mapping
  *      A Curvilinear2DToCartesian class or one of its child classes.
- * @tparam AdvectionIdxRange
- *      An AdvectionIdxRange class.
+ * @tparam AdvectionDomain
+ *      An AdvectionDomain class.
  * @tparam FootFinder
  *      A IFootFinder class.
  *
  */
-template <class Mapping, class AdvectionIdxRange>
-class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
+template <class Mapping, class AdvectionDomain>
+class BslExplicitPredCorrRP : public ITimeSolverRP
 {
 private:
-    using EulerMethod = Euler<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>>;
+    using EulerMethod = Euler<FieldRP<CoordRP>, VectorDFieldRP<RDimX, RDimY>>;
 
 
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionIdxRange>, Mapping> const&
+    BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
             m_advection_solver;
 
     EulerMethod const m_euler;
-    SplineFootFinder<EulerMethod, AdvectionIdxRange> const m_find_feet;
+    SplineFootFinder<EulerMethod, AdvectionDomain> const m_find_feet;
 
     PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
-    SplineRThetaBuilder const& m_builder;
-    SplineRThetaEvaluatorConstBound const& m_evaluator;
+    SplineRPBuilder const& m_builder;
+    SplineRPEvaluatorConstBound const& m_evaluator;
 
 
 
 public:
     /**
-     * @brief Instantiate a BslExplicitPredCorrRTheta.
+     * @brief Instantiate a BslExplicitPredCorrRP.
      *
-     * @param[in] advection_idx_range
-     *      An AdvectionIdxRange object which gives the information
-     *      in which index range we advect.
+     * @param[in] advection_domain
+     *      An AdvectionDomain object which gives the information
+     *      in which domain we advect.
      * @param[in] mapping
-     *      The mapping function from the logical index range to the
-     *      physical index range.
+     *      The mapping function from the logical domain to the
+     *      physical domain.
      * @param[in] advection_solver
      *      The advection operator with an Euler method.
      * @param[in] grid
-     *      The index range on which the functions are defined.
+     *      The domain on which the functions are defined.
      * @param[in] builder
      *      A spline builder to get the spline representation of the
      *      advection field and the RHS.
@@ -109,20 +109,20 @@ public:
      * @param[in] advection_evaluator
      *      An evaluator of B-splines for the spline advection field.
      */
-    BslExplicitPredCorrRTheta(
-            AdvectionIdxRange const& advection_idx_range,
+    BslExplicitPredCorrRP(
+            AdvectionDomain const& advection_domain,
             Mapping const& mapping,
-            BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionIdxRange>, Mapping>&
+            BslAdvectionRP<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping>&
                     advection_solver,
-            IdxRangeRTheta const& grid,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& rhs_evaluator,
+            IDomainRP const& grid,
+            SplineRPBuilder const& builder,
+            SplineRPEvaluatorNullBound const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver const& poisson_solver,
-            SplineRThetaEvaluatorConstBound const& advection_evaluator)
+            SplineRPEvaluatorConstBound const& advection_evaluator)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
-        , m_find_feet(m_euler, advection_idx_range, builder, advection_evaluator)
+        , m_find_feet(m_euler, advection_domain, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
@@ -131,42 +131,42 @@ public:
     }
 
 
-    ~BslExplicitPredCorrRTheta() {};
+    ~BslExplicitPredCorrRP() {};
 
 
 
-    DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps) const
+    DSpanRP operator()(DSpanRP allfdistribu, double const dt, int const steps) const
     {
         std::chrono::time_point<std::chrono::system_clock> start_time
                 = std::chrono::system_clock::now();
         std::chrono::time_point<std::chrono::system_clock> end_time;
 
         // Grid. ------------------------------------------------------------------------------------------
-        IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(allfdistribu));
+        IDomainRP const grid(allfdistribu.domain<IDimR, IDimP>());
 
-        FieldMemRTheta<CoordRTheta> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
+        FieldRP<CoordRP> coords(grid);
+        ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
 
-        BSIdxRangeR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
-        BSIdxRangeTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
+        BSDomainR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+                ddc::DiscreteVector<BSplinesR> {PolarBSplinesRP::continuity + 1}));
+        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
-        DFieldMemRTheta electrical_potential(grid);
+        DFieldRP electrical_potential(grid);
 
         SplinePolar electrostatic_potential_coef(
-                PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
-                BSIdxRangeRTheta(radial_bsplines, polar_idx_range));
+                PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
+                BSDomainRP(radial_bsplines, polar_domain));
 
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
-                polar_spline_evaluator(extrapolation_rule);
+        PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(
+                extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        DVectorFieldMemRTheta<X, Y> electric_field(grid);
-        DVectorFieldMemRTheta<X, Y> electric_field_predicted(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_predicted(grid);
+        VectorDFieldRP<RDimX, RDimY> electric_field(grid);
+        VectorDFieldRP<RDimX, RDimY> electric_field_predicted(grid);
+        VectorDFieldRP<RDimX, RDimY> advection_field(grid);
+        VectorDFieldRP<RDimX, RDimY> advection_field_predicted(grid);
 
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
@@ -177,15 +177,15 @@ public:
         for (int iter(0); iter < steps; ++iter) {
             double const time = iter * dt;
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
-            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
+            Spline2D allfdistribu_coef(m_builder.spline_domain());
+            m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
             PoissonLikeRHSFunction const
-                    charge_density_coord_1(get_const_field(allfdistribu_coef), m_evaluator);
+                    charge_density_coord_1(allfdistribu_coef.span_cview(), m_evaluator);
             m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);
 
             polar_spline_evaluator(
-                    get_field(electrical_potential),
-                    get_const_field(coords),
+                    electrical_potential.span_view(),
+                    coords.span_cview(),
                     electrostatic_potential_coef);
 
             ddc::PdiEvent("iteration")
@@ -200,70 +200,70 @@ public:
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
             // --- Copy rho^n because it will be modified:
-            DFieldMemRTheta allfdistribu_predicted(grid);
-            ddc::parallel_deepcopy(get_field(allfdistribu_predicted), allfdistribu);
-            m_advection_solver(get_field(allfdistribu_predicted), get_field(advection_field), dt);
+            DFieldRP allfdistribu_predicted(grid);
+            ddc::parallel_deepcopy(allfdistribu_predicted.span_view(), allfdistribu);
+            m_advection_solver(allfdistribu_predicted.span_view(), advection_field.span_view(), dt);
 
             // --- advect also the feet because it is needed for the next step
-            FieldMemRTheta<CoordRTheta> feet_coords(grid);
-            ddc::for_each(grid, [&](IdxRTheta const irp) {
-                feet_coords(irp) = CoordRTheta(ddc::coordinate(irp));
+            FieldRP<CoordRP> feet_coords(grid);
+            ddc::for_each(grid, [&](IndexRP const irp) {
+                feet_coords(irp) = CoordRP(ddc::coordinate(irp));
             });
-            m_find_feet(get_field(feet_coords), get_field(advection_field), dt);
+            m_find_feet(feet_coords.span_view(), advection_field.span_view(), dt);
 
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
-            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
+            m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
             PoissonLikeRHSFunction const
-                    charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);
+                    charge_density_coord_4(allfdistribu_coef.span_cview(), m_evaluator);
             m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);
 
             // STEP 5: From phi^P, we compute A^P:
             advection_field_computer(electrostatic_potential_coef, advection_field_predicted);
 
 
-            // ---  we evaluate the advection field A^n at the characteristic feet X^Theta
-            DVectorFieldMemRTheta<X, Y> advection_field_evaluated(grid);
-            VectorSplineCoeffsMem2D<X, Y> advection_field_coefs(get_spline_idx_range(m_builder));
+            // ---  we evaluate the advection field A^n at the characteristic feet X^P
+            VectorDFieldRP<RDimX, RDimY> advection_field_evaluated(grid);
+            VectorSpline2D<RDimX, RDimY> advection_field_coefs(m_builder.spline_domain());
 
             m_builder(
-                    ddcHelper::get<X>(advection_field_coefs),
-                    ddcHelper::get<X>(get_const_field(advection_field)));
+                    ddcHelper::get<RDimX>(advection_field_coefs),
+                    ddcHelper::get<RDimX>(advection_field.span_cview()));
             m_builder(
-                    ddcHelper::get<Y>(advection_field_coefs),
-                    ddcHelper::get<Y>(get_const_field(advection_field)));
+                    ddcHelper::get<RDimY>(advection_field_coefs),
+                    ddcHelper::get<RDimY>(advection_field.span_cview()));
 
             m_evaluator(
-                    ddcHelper::get<X>(advection_field_evaluated).span_view(),
-                    get_const_field(feet_coords),
-                    ddcHelper::get<X>(get_const_field(advection_field_coefs)));
+                    ddcHelper::get<RDimX>(advection_field_evaluated).span_view(),
+                    feet_coords.span_cview(),
+                    ddcHelper::get<RDimX>(advection_field_coefs.span_cview()));
             m_evaluator(
-                    ddcHelper::get<Y>(advection_field_evaluated).span_view(),
-                    get_const_field(feet_coords),
-                    ddcHelper::get<Y>(get_const_field(advection_field_coefs)));
+                    ddcHelper::get<RDimY>(advection_field_evaluated).span_view(),
+                    feet_coords.span_cview(),
+                    ddcHelper::get<RDimY>(advection_field_coefs.span_cview()));
 
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
-            ddc::for_each(grid, [&](IdxRTheta const irp) {
-                ddcHelper::get<X>(advection_field)(irp)
-                        = (ddcHelper::get<X>(advection_field_evaluated)(irp)
-                           + ddcHelper::get<X>(advection_field_predicted)(irp))
+            ddc::for_each(grid, [&](IndexRP const irp) {
+                ddcHelper::get<RDimX>(advection_field)(irp)
+                        = (ddcHelper::get<RDimX>(advection_field_evaluated)(irp)
+                           + ddcHelper::get<RDimX>(advection_field_predicted)(irp))
                           / 2.;
-                ddcHelper::get<Y>(advection_field)(irp)
-                        = (ddcHelper::get<Y>(advection_field_evaluated)(irp)
-                           + ddcHelper::get<Y>(advection_field_predicted)(irp))
+                ddcHelper::get<RDimY>(advection_field)(irp)
+                        = (ddcHelper::get<RDimY>(advection_field_evaluated)(irp)
+                           + ddcHelper::get<RDimY>(advection_field_predicted)(irp))
                           / 2.;
             });
 
 
-            m_advection_solver(allfdistribu, get_field(advection_field), dt);
+            m_advection_solver(allfdistribu, advection_field.span_view(), dt);
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
-        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
+        Spline2D allfdistribu_coef(m_builder.spline_domain());
+        m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
         PoissonLikeRHSFunction const
-                charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
+                charge_density_coord(allfdistribu_coef.span_cview(), m_evaluator);
         m_poisson_solver(charge_density_coord, coords, electrical_potential);
 
         ddc::PdiEvent("last_iteration")

@@ -44,5 +44,6 @@ public:
      * @param[in] temperature The plasma temperature at which the reaction rate is computed.
      * @return The ionization reaction rate.
      */
-    DSpanSpX operator()(DSpanSpX rate, DViewSpX density, DViewSpX temperature) const override;
+    DFieldSpX operator()(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature)
+            const override;
 };

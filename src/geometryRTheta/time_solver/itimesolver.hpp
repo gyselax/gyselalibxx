@@ -7,10 +7,10 @@
 /**
  * @brief Base class for the time solvers.
  */
-class ITimeSolverRTheta
+class ITimeSolverRP
 {
 public:
-    virtual ~ITimeSolverRTheta() = default;
+    virtual ~ITimeSolverRP() = default;
 
     /**
      * @brief Solves on @f$ T = dt*N @f$ the equations system.
@@ -25,7 +25,7 @@ public:
      *
      * @return A ChunkSpan toward allfdistribu.
      */
-    virtual DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps = 1)
+    virtual DSpanRP operator()(DSpanRP allfdistribu, double const dt, int const steps = 1)
             const = 0;
 
 

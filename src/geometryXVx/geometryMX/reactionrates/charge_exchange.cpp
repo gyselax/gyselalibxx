@@ -45,7 +45,10 @@ IdxSp find_ion(IdxRangeSp const dom_kinsp)
     return iion;
 }
 
-DSpanSpX ChargeExchangeRate::operator()(DSpanSpX rate, DViewSpX density, DViewSpX temperature) const
+DFieldSpX ChargeExchangeRate::operator()(
+        DFieldSpX rate,
+        DConstFieldSpX density,
+        DConstFieldSpX temperature) const
 {
     return detail::compute_rate_ion_temperature(
             Kokkos::DefaultExecutionSpace(),

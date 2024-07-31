@@ -17,6 +17,8 @@ target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::speciesinfo
         gslx::boltzmann_${GEOMETRY_VARIANT}
+        gslx::utils
+
 )
 
 add_library("gslx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")

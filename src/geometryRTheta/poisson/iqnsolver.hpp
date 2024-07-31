@@ -26,7 +26,7 @@ public:
      *      The rhs of the Quasi-Neutrality equation.
      */
     virtual void operator()(
-            DFieldRTheta electrostatic_potential,
-            DVectorFieldRTheta<X, Y> electric_field,
-            DConstFieldRTheta allfdistribu) const = 0;
+            DSpanRP electrostatic_potential,
+            VectorDSpanRP<RDimX, RDimY> electric_field,
+            DViewRP allfdistribu) const = 0;
 };

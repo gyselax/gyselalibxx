@@ -17,8 +17,6 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             gslx::paraconfpp
             Eigen3::Eigen
             gslx::geometry_RTheta
-            gslx::utils
-
     )
     target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${SOLUTION})
 

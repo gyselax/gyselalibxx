@@ -10,31 +10,29 @@
 
 #include <euler.hpp>
 
-using namespace ddc;
 
-
-struct RDimX
+struct X
 {
     bool PERIODIC = false;
 };
 
-struct IDimX : UniformPointSampling<RDimX>
+struct GridX : UniformGridBase<X>
 {
 };
 
 TEST(EulerFixture, EulerOrder)
 {
-    using CoordX = Coordinate<RDimX>;
-    using IndexX = DiscreteElement<IDimX>;
-    using IVectX = DiscreteVector<IDimX>;
-    using IDomainX = DiscreteDomain<IDimX>;
-    using DChunkX = Chunk<double, IDomainX>;
+    using CoordX = Coord<X>;
+    using IdxX = Idx<GridX>;
+    using IdxStepX = IdxStep<GridX>;
+    using IdxRangeX = IdxRange<GridX>;
+    using DFieldMemX = host_t<DFieldMem<IdxRangeX>>;
 
     CoordX x_min(0.0);
     CoordX x_max(1.0);
-    IVectX x_size(5);
+    IdxStepX x_size(5);
 
-    IndexX start(0);
+    IdxX start(0);
 
     int constexpr Ntests = 5;
 
@@ -44,35 +42,34 @@ TEST(EulerFixture, EulerOrder)
     std::array<double, Ntests> error;
     std::array<double, Ntests - 1> order;
 
-    init_discrete_space<IDimX>(IDimX::init(x_min, x_max, x_size));
-    IDomainX dom(start, x_size);
+    ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
+    IdxRangeX dom(start, x_size);
 
-    Euler<DChunkX> euler(dom);
+    Euler<DFieldMemX> euler(dom);
 
-    DChunkX vals(dom);
-    DChunkX result(dom);
+    DFieldMemX vals(dom);
+    DFieldMemX result(dom);
 
     double exp_val = exp(5.0 * dt * Nt);
-    ddc::for_each(dom, [&](IndexX ix) {
+    ddc::for_each(dom, [&](IdxX ix) {
         double const C = (double(ix.uid()) - 0.6);
         result(ix) = C * exp_val + 0.6;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(dom, [&](IndexX ix) { vals(ix) = double(ix.uid()); });
+        ddc::for_each(dom, [&](IdxX ix) { vals(ix) = double(ix.uid()); });
 
         for (int i(0); i < Nt; ++i) {
             euler
                     .update(vals,
                             dt,
-                            [&](ChunkSpan<double, IDomainX> dy,
-                                ChunkSpan<double const, IDomainX> y) {
-                                ddc::for_each(dom, [&](IndexX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
+                            [&](host_t<DField<IdxRangeX>> dy, host_t<DConstField<IdxRangeX>> y) {
+                                ddc::for_each(dom, [&](IdxX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
                             });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(dom, [&](IndexX ix) {
+        ddc::for_each(dom, [&](IdxX ix) {
             double const err = abs(result(ix) - vals(ix));
             linf_err = err > linf_err ? err : linf_err;
         });
