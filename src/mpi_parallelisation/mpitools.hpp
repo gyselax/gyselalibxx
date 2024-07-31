@@ -2,6 +2,8 @@
 #pragma once
 #include <mpi.h>
 
+#include "ddc_aliases.hpp"
+
 /**
  * @brief An internal tag used to dsecribe an artificial dimension describing the MPI rank
  * where the scattered information will be sent to or where the gathered information will
@@ -140,8 +142,8 @@ namespace detail {
 /**
  * @brief Insert MPI distribution tags into an existing TypeSeq.
  *
- * The MPI tags are each associated with a domain. The MPI tags are inserted into the TypeSeq
- * immediately preceeding the tag with which they are associated. This allows a domain to be
+ * The MPI tags are each associated with an index range. The MPI tags are inserted into the TypeSeq
+ * immediately preceeding the tag with which they are associated. This allows an index range to be
  * split along the axes on which it will be scattered.
  *
  * E.g. if MPI<Phi> is inserted into <R, Theta, Phi, VPar> we would obtain:
@@ -176,8 +178,8 @@ struct InsertMPITags<ddc::detail::TypeSeq<>, TypeSeq>
 /**
  * @brief Insert MPI distribution tags into an existing TypeSeq.
  *
- * The MPI tags are each associated with a domain. The MPI tags are inserted into the TypeSeq
- * immediately preceeding the tag with which they are associated. This allows a domain to be
+ * The MPI tags are each associated with an index range. The MPI tags are inserted into the TypeSeq
+ * immediately preceeding the tag with which they are associated. This allows an index range to be
  * split along the axes on which it will be scattered.
  *
  * E.g. if MPI<Phi> is inserted into <R, Theta, Phi, VPar> we would obtain:
