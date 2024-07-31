@@ -19,8 +19,8 @@ static inline constexpr std::size_t index_max = 2 * (Npolmax - 1);
 static inline constexpr std::int64_t pSpecies_id = 0;
 static inline constexpr std::int64_t mu_id
         = 0; // [TODO] Same than for pSpecies_id: must be deleted from the list of input
-static inline constexpr std::size_t the_local_domain_r_offset = 0;
-static inline constexpr std::size_t the_local_domain_theta_offset = 0;
+static inline constexpr std::size_t the_local_idx_range_r_offset = 0;
+static inline constexpr std::size_t the_local_idx_range_theta_offset = 0;
 static inline constexpr double R0 = 1.0; //[TODO] Attention this should not be fixed.
 static inline constexpr std::int8_t SOL = false;
 static inline constexpr std::int8_t LIM = false;
@@ -65,10 +65,10 @@ namespace koliop_interface {
                 the_theta_extent,
                 the_phi_extent,
                 the_species_extent,
-                the_r_extent, // NOTE: No MPI domain decomposition.
-                the_theta_extent, // NOTE: No MPI domain decomposition.
-                the_local_domain_r_offset,
-                the_local_domain_theta_offset,
+                the_r_extent, // NOTE: No MPI index range decomposition.
+                the_theta_extent, // NOTE: No MPI index range decomposition.
+                the_local_idx_range_r_offset,
+                the_local_idx_range_theta_offset,
                 R0,
                 collision_interspecies,
                 SOL,

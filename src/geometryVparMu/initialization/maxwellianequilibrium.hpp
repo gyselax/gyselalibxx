@@ -61,7 +61,7 @@ public:
      * @param[out] allfequilibrium A Span containing a Maxwellian distribution function.
      * @return A Span containing a Maxwellian distribution function.
      */
-    DSpanSpVparMu operator()(DSpanSpVparMu allfequilibrium) const override;
+    DFieldSpVparMu operator()(DFieldSpVparMu allfequilibrium) const override;
 
 
     /**
@@ -79,7 +79,7 @@ public:
      * @param[in] magnetic_field Magnetic field.
      */
     static void compute_maxwellian(
-            DSpanVparMu const fMaxwellian,
+            DFieldVparMu const fMaxwellian,
             double const mass,
             double const density,
             double const temperature,
