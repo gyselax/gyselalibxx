@@ -11,72 +11,72 @@
 
 namespace FFTPoissonSolverTest {
 
-struct X
+struct RDimX
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = true;
 };
 
-struct Y
+struct RDimY
 {
     /// @brief A boolean indicating if the dimension is periodic.
     static bool constexpr PERIODIC = true;
 };
 
-using CoordX = Coord<X>;
-using CoordY = Coord<Y>;
+using CoordX = ddc::Coordinate<RDimX>;
+using CoordY = ddc::Coordinate<RDimY>;
 
-struct GridX : UniformGridBase<X>
+struct IDimX : ddc::UniformPointSampling<RDimX>
 {
 };
-struct GridY : UniformGridBase<Y>
+struct IDimY : ddc::UniformPointSampling<RDimY>
 {
 };
 
-using IdxX = Idx<GridX>;
-using IdxY = Idx<GridY>;
-using IdxXY = Idx<GridX, GridY>;
+using IndexX = ddc::DiscreteElement<IDimX>;
+using IndexY = ddc::DiscreteElement<IDimY>;
+using IndexXY = ddc::DiscreteElement<IDimX, IDimY>;
 
-using IdxStepX = IdxStep<GridX>;
-using IdxStepY = IdxStep<GridY>;
+using IVectX = ddc::DiscreteVector<IDimX>;
+using IVectY = ddc::DiscreteVector<IDimY>;
 
-using IdxRangeX = IdxRange<GridX>;
-using IdxRangeY = IdxRange<GridY>;
-using IdxRangeXY = IdxRange<GridX, GridY>;
+using IDomainX = ddc::DiscreteDomain<IDimX>;
+using IDomainY = ddc::DiscreteDomain<IDimY>;
+using IDomainXY = ddc::DiscreteDomain<IDimX, IDimY>;
 
-using DFieldMemX = DFieldMem<IdxRangeX>;
-using DFieldMemY = DFieldMem<IdxRangeY>;
-using DFieldMemXY = DFieldMem<IdxRangeXY>;
+using DFieldX = device_t<ddc::Chunk<double, IDomainX>>;
+using DFieldY = device_t<ddc::Chunk<double, IDomainY>>;
+using DFieldXY = device_t<ddc::Chunk<double, IDomainXY>>;
 
-using DFieldX = DField<IdxRangeX>;
-using DFieldY = DField<IdxRangeY>;
-using DFieldXY = DField<IdxRangeXY>;
+using DSpanX = device_t<ddc::ChunkSpan<double, IDomainX>>;
+using DSpanY = device_t<ddc::ChunkSpan<double, IDomainY>>;
+using DSpanXY = device_t<ddc::ChunkSpan<double, IDomainXY>>;
 
 
 TEST(FftPoissonSolver, CosineSource)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
-    IdxStepX const x_size(100);
+    IVectX const x_size(100);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_size + 1));
-    IdxRangeX gridx = IdxRangeX(IdxX(0), x_size);
+    ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_size + 1));
+    IDomainX gridx = IDomainX(IndexX(0), x_size);
 
     // Creating operators
-    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson(gridx);
+    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson(gridx);
 
-    host_t<DFieldMemX> electrostatic_potential_host(gridx);
-    host_t<DFieldMemX> electric_field_host(gridx);
-    host_t<DFieldMemX> rhs_host(gridx);
+    host_t<DFieldX> electrostatic_potential_host(gridx);
+    host_t<DFieldX> electric_field_host(gridx);
+    host_t<DFieldX> rhs_host(gridx);
 
     // Initialization of the distribution function --> fill values
-    for (IdxX const ix : gridx) {
+    for (IndexX const ix : gridx) {
         rhs_host(ix) = cos(ddc::coordinate(ix));
     }
-    DFieldMemX electrostatic_potential(gridx);
-    DFieldMemX electric_field(gridx);
-    DFieldMemX rhs(gridx);
+    DFieldX electrostatic_potential(gridx);
+    DFieldX electric_field(gridx);
+    DFieldX rhs(gridx);
 
     ddc::parallel_deepcopy(rhs, rhs_host);
     poisson(electrostatic_potential, electric_field, rhs);
@@ -86,7 +86,7 @@ TEST(FftPoissonSolver, CosineSource)
     double error_pot = 0.0;
     double error_field = 0.0;
 
-    for (IdxX const ix : gridx) {
+    for (IndexX const ix : gridx) {
         double const exact_pot = cos(ddc::coordinate(ix));
         error_pot = fmax(fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
         double const exact_field = sin(ddc::coordinate(ix));
@@ -100,36 +100,36 @@ TEST(FftPoissonSolver, BatchedCosineSource)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
-    IdxStepX const x_size(10);
+    IVectX const x_size(10);
 
     CoordY const y_min(0.0);
     CoordY const y_max(2.0 * M_PI);
-    IdxStepY const y_size(100);
+    IVectY const y_size(100);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_size + 1));
-    ddc::init_discrete_space<GridY>(GridY::init<GridY>(y_min, y_max, y_size + 1));
-    IdxRangeX gridx = IdxRangeX(IdxX(0), x_size);
-    IdxRangeY gridy = IdxRangeY(IdxY(0), y_size);
-    IdxRangeXY gridxy(gridx, gridy);
+    ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_size + 1));
+    ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_size + 1));
+    IDomainX gridx = IDomainX(IndexX(0), x_size);
+    IDomainY gridy = IDomainY(IndexY(0), y_size);
+    IDomainXY gridxy(gridx, gridy);
 
     // Creating operators
-    FFTPoissonSolver<IdxRangeY, IdxRangeXY, Kokkos::DefaultExecutionSpace> poisson(gridy);
+    FFTPoissonSolver<IDomainY, IDomainXY, Kokkos::DefaultExecutionSpace> poisson(gridy);
 
-    host_t<DFieldMemXY> electrostatic_potential_host(gridxy);
-    host_t<DFieldMemXY> electric_field_host(gridxy);
-    host_t<DFieldMemXY> rhs_host(gridxy);
+    host_t<DFieldXY> electrostatic_potential_host(gridxy);
+    host_t<DFieldXY> electric_field_host(gridxy);
+    host_t<DFieldXY> rhs_host(gridxy);
 
     // Initialization of the distribution function --> fill values
-    for (IdxX const ix : gridx) {
+    for (IndexX const ix : gridx) {
         double const c = ix.uid() + 1;
-        for (IdxY const iy : gridy) {
+        for (IndexY const iy : gridy) {
             rhs_host(ix, iy) = ipow(c, 2) * cos(c * ddc::coordinate(iy));
         }
     }
-    DFieldMemXY electrostatic_potential(gridxy);
-    DFieldMemXY electric_field(gridxy);
-    DFieldMemXY rhs(gridxy);
+    DFieldXY electrostatic_potential(gridxy);
+    DFieldXY electric_field(gridxy);
+    DFieldXY rhs(gridxy);
 
     ddc::parallel_deepcopy(rhs, rhs_host);
     poisson(electrostatic_potential, electric_field, rhs);
@@ -139,9 +139,9 @@ TEST(FftPoissonSolver, BatchedCosineSource)
     double error_pot = 0.0;
     double error_field = 0.0;
 
-    for (IdxX const ix : gridx) {
+    for (IndexX const ix : gridx) {
         double const c = ix.uid() + 1;
-        for (IdxY const iy : gridy) {
+        for (IndexY const iy : gridy) {
             double const exact_pot = cos(c * ddc::coordinate(iy));
             error_pot = fmax(fabs(electrostatic_potential_host(ix, iy) - exact_pot), error_pot);
             double const exact_field = c * sin(c * ddc::coordinate(iy));
@@ -156,39 +156,39 @@ static void TestFftPoissonSolver2DCosineSource()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(2.0 * M_PI);
-    IdxStepX const x_size(10);
+    IVectX const x_size(10);
 
     CoordY const y_min(0.0);
     CoordY const y_max(2.0 * M_PI);
-    IdxStepY const y_size(10);
+    IVectY const y_size(10);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_size + 1));
-    ddc::init_discrete_space<GridY>(GridY::init<GridY>(y_min, y_max, y_size + 1));
+    ddc::init_discrete_space<IDimX>(IDimX::init<IDimX>(x_min, x_max, x_size + 1));
+    ddc::init_discrete_space<IDimY>(IDimY::init<IDimY>(y_min, y_max, y_size + 1));
 
-    IdxRangeX gridx = IdxRangeX(IdxX(0), x_size);
-    IdxRangeY gridy = IdxRangeY(IdxY(0), y_size);
+    IDomainX gridx = IDomainX(IndexX(0), x_size);
+    IDomainY gridy = IDomainY(IndexY(0), y_size);
 
-    IdxRangeXY gridxy(gridx, gridy);
+    IDomainXY gridxy(gridx, gridy);
 
-    FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> poisson(gridxy);
+    FFTPoissonSolver<IDomainXY, IDomainXY, Kokkos::DefaultExecutionSpace> poisson(gridxy);
 
-    DFieldMemXY electrostatic_potential_alloc(gridxy);
-    VectorField<double, IdxRangeXY, NDTag<X, Y>, ddc::DeviceAllocator<double>> electric_field_alloc(
-            gridxy);
-    DFieldMemXY rhs_alloc(gridxy);
+    DFieldXY electrostatic_potential_alloc(gridxy);
+    VectorField<double, IDomainXY, NDTag<RDimX, RDimY>, ddc::DeviceAllocator<double>>
+            electric_field_alloc(gridxy);
+    DFieldXY rhs_alloc(gridxy);
 
-    DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
-    VectorFieldSpan electric_field = get_field(electric_field_alloc);
-    DFieldXY rhs = get_field(rhs_alloc);
+    DSpanXY electrostatic_potential = electrostatic_potential_alloc.span_view();
+    VectorFieldSpan electric_field = electric_field_alloc.span_view();
+    DSpanXY rhs = rhs_alloc.span_view();
 
     // Initialization of the distribution function --> fill values
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
-            KOKKOS_LAMBDA(IdxXY const ixy) {
-                IdxX ix = ddc::select<GridX>(ixy);
-                IdxY iy = ddc::select<GridY>(ixy);
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexX ix = ddc::select<IDimX>(ixy);
+                IndexY iy = ddc::select<IDimY>(ixy);
                 double x = ddc::coordinate(ix);
                 double y = ddc::coordinate(iy);
                 rhs(ixy) = Kokkos::cos(x) + Kokkos::cos(y);
@@ -201,32 +201,32 @@ static void TestFftPoissonSolver2DCosineSource()
             gridxy,
             0.,
             ddc::reducer::max<double>(),
-            KOKKOS_LAMBDA(IdxXY const ixy) {
-                IdxX ix = ddc::select<GridX>(ixy);
-                IdxY iy = ddc::select<GridY>(ixy);
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexX ix = ddc::select<IDimX>(ixy);
+                IndexY iy = ddc::select<IDimY>(ixy);
                 double const exact_pot
                         = Kokkos::cos(ddc::coordinate(ix)) + Kokkos::cos(ddc::coordinate(iy));
                 return Kokkos::abs(electrostatic_potential(ixy) - exact_pot);
             });
-    ddc::ChunkSpan electric_field_x = electric_field.get<X>();
+    ddc::ChunkSpan electric_field_x = electric_field.get<RDimX>();
     double error_field_x = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
             0.,
             ddc::reducer::max<double>(),
-            KOKKOS_LAMBDA(IdxXY const ixy) {
-                IdxX ix = ddc::select<GridX>(ixy);
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexX ix = ddc::select<IDimX>(ixy);
                 double const exact_field_x = Kokkos::sin(ddc::coordinate(ix));
                 return Kokkos::abs(electric_field_x(ixy) - exact_field_x);
             });
-    ddc::ChunkSpan electric_field_y = electric_field.get<Y>();
+    ddc::ChunkSpan electric_field_y = electric_field.get<RDimY>();
     double error_field_y = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
             0.,
             ddc::reducer::max<double>(),
-            KOKKOS_LAMBDA(IdxXY const ixy) {
-                IdxY iy = ddc::select<GridY>(ixy);
+            KOKKOS_LAMBDA(IndexXY const ixy) {
+                IndexY iy = ddc::select<IDimY>(ixy);
                 double const exact_field_y = Kokkos::sin(ddc::coordinate(iy));
                 return Kokkos::abs(electric_field_y(ixy) - exact_field_y);
             });

@@ -40,8 +40,8 @@ void solve_system(
     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, Solver>
             test_instance(values_view, idx_view, nnz_per_row_view);
 
-    test_instance.factorize();
-    test_instance.solve_inplace(res_view);
+    test_instance.setup_solver();
+    test_instance.solve(res_view);
     Kokkos::deep_copy(res_host, res_view);
 
     for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
@@ -112,14 +112,14 @@ TEST(MatrixBatchCsrFixture, Coo_to_Csr)
             = std::make_unique<MatrixBatchCsr<
                     Kokkos::DefaultExecutionSpace>>(batch_size, mat_size, non_zero_per_system);
     convert_coo_to_csr(test_instance, vals_coo_host, row_coo_host, col_coo_host);
-    test_instance->factorize();
+    test_instance->setup_solver();
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             res_host("h_res", batch_size, mat_size);
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
             res_view("res", batch_size, mat_size);
     Kokkos::deep_copy(res_view, 1.);
 
-    test_instance->solve_inplace(res_view);
+    test_instance->solve(res_view);
     Kokkos::deep_copy(res_host, res_view);
 
     for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {

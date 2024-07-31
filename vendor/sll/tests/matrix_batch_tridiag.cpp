@@ -23,8 +23,8 @@ void solve_batched_tridiag_system(
     Kokkos::deep_copy(Rhs_view, Rhs_view_host);
     MatrixBatchTridiag<Kokkos::DefaultExecutionSpace>
             matrix(batch_size, mat_size, A_view, B_view, C_view);
-    matrix.factorize();
-    matrix.solve_inplace(Rhs_view);
+    matrix.setup_solver();
+    matrix.solve(Rhs_view);
     Kokkos::deep_copy(Rhs_view_host, Rhs_view);
 }
 
@@ -112,7 +112,7 @@ TEST(MatrixBatchTridiag, GeneralValidMatrix)
     Kokkos::deep_copy(Rhs_view, Rhs_view_host);
     MatrixBatchTridiag<Kokkos::DefaultExecutionSpace>
             matrix(batch_size, mat_size, A_view, B_view, C_view);
-    matrix.solve_inplace(Rhs_view);
+    matrix.solve(Rhs_view);
     Kokkos::deep_copy(Res_view_host, Rhs_view);
 
     ASSERT_DOUBLE_EQ(Res_view_host(0, 0), 272999. / 16896.);
