@@ -3,11 +3,10 @@
 #include <sll/matrix_batch.hpp>
 #include <sll/matrix_utils.hpp>
 
+#include <ginkgo/extensions/kokkos.hpp>
 #include <ginkgo/ginkgo.hpp>
 
 #include <Kokkos_Core.hpp>
-
-#include "ddc/kernels/splines/ginkgo_executors.hpp"
 
 /**
 * @brief A tag to choose between the batched iterative solvers provided by Ginkgo.
@@ -85,7 +84,7 @@ public:
         , m_preconditionner_max_block_size(preconditionner_max_block_size.value_or(
                   default_preconditionner_max_block_size<ExecSpace>()))
     {
-        std::shared_ptr const gko_exec = ddc::detail::create_gko_exec<ExecSpace>();
+        std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
                         create(gko_exec,
@@ -126,7 +125,7 @@ public:
         , m_preconditionner_max_block_size(preconditionner_max_block_size.value_or(
                   default_preconditionner_max_block_size<ExecSpace>()))
     {
-        std::shared_ptr const gko_exec = ddc::detail::create_gko_exec<ExecSpace>();
+        std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
                         create(gko_exec,

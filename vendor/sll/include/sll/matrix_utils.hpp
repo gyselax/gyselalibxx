@@ -3,9 +3,6 @@
 
 #include <Kokkos_Core.hpp>
 
-#include "ddc/kernels/splines/ginkgo_executors.hpp"
-
-
 /**
  * @brief A function to convert a 2D Kokkos view into a ginkgo multivector structure.
  * @param gko_exec[in] A Ginkgo executor that has access to the Kokkos::View memory space
