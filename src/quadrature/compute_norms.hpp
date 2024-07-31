@@ -4,9 +4,9 @@
  */
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 
+#include "ddc_aliases.hpp"
 #include "quadrature.hpp"
 
 
@@ -22,15 +22,18 @@
  *
  * @return A double containing the L1 norm of the function.
  */
-template <class IDomain>
+template <class IdxRange>
 double compute_L1_norm(
-        host_t<Quadrature<IDomain>> quadrature,
-        ddc::ChunkSpan<double, IDomain> function)
+        host_t<Quadrature<IdxRange>> quadrature,
+        Field<double,
+              IdxRange,
+              std::experimental::layout_right,
+              Kokkos::DefaultHostExecutionSpace::memory_space> function)
 {
-    using Index = typename IDomain::discrete_element_type;
+    using Idx = typename IdxRange::discrete_element_type;
     return quadrature(
             Kokkos::DefaultHostExecutionSpace(),
-            KOKKOS_LAMBDA(Index const idx) { return Kokkos::fabs(function(idx)); });
+            KOKKOS_LAMBDA(Idx const idx) { return Kokkos::fabs(function(idx)); });
 }
 
 
@@ -47,15 +50,18 @@ double compute_L1_norm(
  *
  * @return A double containing the L2 norm of the function.
  */
-template <class IDomain>
+template <class IdxRange>
 double compute_L2_norm(
-        host_t<Quadrature<IDomain>> quadrature,
-        ddc::ChunkSpan<double, IDomain> function)
+        host_t<Quadrature<IdxRange>> quadrature,
+        Field<double,
+              IdxRange,
+              std::experimental::layout_right,
+              Kokkos::DefaultHostExecutionSpace::memory_space> function)
 {
-    using Index = typename IDomain::discrete_element_type;
+    using Idx = typename IdxRange::discrete_element_type;
     return std::sqrt(quadrature(
             Kokkos::DefaultHostExecutionSpace(),
-            KOKKOS_LAMBDA(Index const idx) { return function(idx) * function(idx); }));
+            KOKKOS_LAMBDA(Idx const idx) { return function(idx) * function(idx); }));
 }
 
 
@@ -77,22 +83,26 @@ double compute_L2_norm(
  * object can only be instantiate with rvalues.
  *
  * @param[in] mapping
- *      The mapping function from the logical domain @f$ (r,\theta) @f$
- *      to the physical domain @f$ (x, y) @f$.
+ *      The mapping function from the logical index range @f$ (r,\theta) @f$
+ *      to the physical index range @f$ (x, y) @f$.
  * @param[in, out] coefficients
  *      The quadrature coefficients @f$\{q_{ij}\}_{ij} @f$.
  *
  * @return A rvalue Chunk to the modified coefficients  @f$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} @f$.
  */
 template <class Mapping, class... IDim>
-ddc::Chunk<double, ddc::DiscreteDomain<IDim...>> compute_coeffs_on_mapping(
+host_t<FieldMem<double, IdxRange<IDim...>>> compute_coeffs_on_mapping(
         Mapping& mapping,
-        ddc::Chunk<double, ddc::DiscreteDomain<IDim...>>&& coefficients)
+        FieldMem<
+                double,
+                IdxRange<IDim...>,
+                ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>&&
+                coefficients)
 {
-    ddc::DiscreteDomain<IDim...> grid = ddc::get_domain<IDim...>(coefficients);
-    ddc::for_each(grid, [&](ddc::DiscreteElement<IDim...> const idx) {
-        ddc::Coordinate<typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_p>
-                coord(ddc::coordinate(idx));
+    IdxRange<IDim...> grid = get_idx_range<IDim...>(coefficients);
+    ddc::for_each(grid, [&](Idx<IDim...> const idx) {
+        Coord<typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_p> coord(
+                ddc::coordinate(idx));
         coefficients(idx) *= fabs(mapping.jacobian(coord));
     });
     return std::move(coefficients);
