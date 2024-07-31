@@ -52,7 +52,7 @@ inline void check_conv(
             },
             Kokkos::LAnd<bool>(has_converged));
     if (!has_converged) {
-        throw ::std::runtime_error("Residual tolerance is not reached");
+        throw ::std::runtime_error("Ginkgo did not converge");
     }
 }
 
@@ -69,20 +69,20 @@ inline void check_conv(
  */
 inline void write_log(
         std::fstream& log_file,
-        int const index,
+        int const batch_index,
         int const num_iterations,
         double const implicit_res_norm,
         double const true_res_norm,
         double const b_norm,
         double const tol)
 {
-    log_file << " System no. " << index << ":" << std::endl;
+    log_file << " System no. " << batch_index << ":" << std::endl;
     log_file << " Number of iterations = " << num_iterations << std::endl;
     log_file << " Implicit residual norm = " << implicit_res_norm << std::endl;
     log_file << " True (Ax-b) residual norm = " << true_res_norm << std::endl;
     log_file << " Right-hand side (b) norm = " << b_norm << std::endl;
     if (!(true_res_norm <= tol)) {
-        log_file << " --- System " << index << " did not converge! ---" << std::endl;
+        log_file << " --- System " << batch_index << " did not converge! ---" << std::endl;
     }
     log_file << "------------------------------------------------" << std::endl;
 }
@@ -96,21 +96,97 @@ inline void write_log(
  * @param[in] tol tolerance 
  * @param[in] filename prefix used to generate the logger file.
  */
+template <class sparse_type>
+void save_logger(
+        std::fstream& log_file,
+        int const batch_index,
+        std::unique_ptr<sparse_type> matrix,
+        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const x_view,
+        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const b_view,
+        std::shared_ptr<const gko::log::Convergence<double>> logger,
+        double const tol)
+{
+    std::shared_ptr const gko_exec = matrix->get_executor();
+
+    auto x = gko::matrix::Dense<double>::
+            create(gko_exec,
+                   gko::dim<2>(x_view.extent(0), 1),
+                   gko::array<double>::view(gko_exec, x_view.span(), x_view.data()),
+                   x_view.stride_0());
+    auto b = gko::matrix::Dense<double>::
+            create(gko_exec,
+                   gko::dim<2>(b_view.extent(0), 1),
+                   gko::array<double>::view(gko_exec, b_view.span(), b_view.data()),
+                   b_view.stride_0());
+
+    // allocate the residual
+    auto res = gko::matrix::Dense<double>::create(gko_exec, gko::dim<2>(b_view.extent(0), 1));
+    res->copy_from(b);
+
+    auto norm_dim = gko::dim<2>(1, 1);
+    // allocate rhs norm on host.
+    auto b_norm_host = gko::matrix::Dense<double>::create(gko_exec->get_master(), norm_dim);
+    b_norm_host->fill(0.0);
+    // allocate the residual norm on host.
+    auto res_norm_host = gko::matrix::Dense<double>::create(gko_exec->get_master(), norm_dim);
+    res_norm_host->fill(0.0);
+    // compute rhs norm.
+    b->compute_norm2(b_norm_host);
+    // we need constants on the device
+    auto one = gko::matrix::Dense<double>::create(gko_exec, norm_dim);
+    one->fill(1.0);
+    auto neg_one = gko::matrix::Dense<double>::create(gko_exec, norm_dim);
+    neg_one->fill(-1.0);
+    //to estimate the "true" residual, the apply function below computes Ax-res, and stores the result in res.
+    matrix->apply(one, x, neg_one, res);
+    //compute residual norm.
+    res->compute_norm2(res_norm_host);
+
+    int const log_iters_host = logger->get_num_iterations();
+    double const log_resid_host
+            = gko::make_temporary_clone(
+                      gko_exec->get_master(),
+                      gko::as<gko::matrix::Dense<double>>(logger->get_residual_norm()))
+                      ->at(0, 0);
+
+    write_log(
+            log_file,
+            batch_index,
+            log_iters_host,
+            log_resid_host,
+            res_norm_host->at(0, 0),
+            b_norm_host->at(0, 0),
+            tol);
+}
+
+/**
+ * @brief A function to save convergence data using the logger.
+ * @param[in] batch_matrix Batch of matrices.
+ * @param[in] x_view 2d Kokkos view containing the batch of computed solutions.
+ * @param[in] b_view 2d Kokkos view containing the batch of rhs. 
+ * @param[in] logger Ginkgo logger which stores residual and numbers of iterations for the whole batch.
+ * @param[in] tol tolerance 
+ * @param[in] filename prefix used to generate the logger file.
+ */
 template <class batch_sparse_type>
 void save_logger(
+        std::fstream& log_file,
         std::shared_ptr<batch_sparse_type> batch_matrix,
         Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const x_view,
         Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const b_view,
         std::shared_ptr<const gko::batch::log::BatchConvergence<double>> logger,
-        double const tol,
-        std::string const& filename)
+        double const tol)
 {
-    int const batch_size = x_view.extent(0);
     std::shared_ptr const gko_exec = batch_matrix->get_executor();
+    int const batch_size = x_view.extent(0);
+
+    auto x = to_gko_multivector(gko_exec, x_view);
+    auto b = to_gko_multivector(gko_exec, b_view);
+
     // allocate the residual
     auto res = gko::batch::MultiVector<double>::
-            create(gko_exec, gko::batch_dim<2>(batch_size, gko::dim<2>(x_view.extent(1), 1)));
-    res->copy_from(to_gko_multivector(gko_exec, b_view));
+            create(gko_exec, gko::batch_dim<2>(batch_size, gko::dim<2>(b_view.extent(1), 1)));
+    res->copy_from(b);
 
     auto norm_dim = gko::batch_dim<2>(batch_size, gko::dim<2>(1, 1));
     // allocate rhs norm on host.
@@ -120,23 +196,22 @@ void save_logger(
     auto res_norm_host = gko::batch::MultiVector<double>::create(gko_exec->get_master(), norm_dim);
     res_norm_host->fill(0.0);
     // compute rhs norm.
-    to_gko_multivector(gko_exec, b_view)->compute_norm2(b_norm_host);
+    b->compute_norm2(b_norm_host);
     // we need constants on the device
     auto one = gko::batch::MultiVector<double>::create(gko_exec, norm_dim);
     one->fill(1.0);
     auto neg_one = gko::batch::MultiVector<double>::create(gko_exec, norm_dim);
     neg_one->fill(-1.0);
     //to estimate the "true" residual, the apply function below computes Ax-res, and stores the result in res.
-    batch_matrix->apply(one, to_gko_multivector(gko_exec, x_view), neg_one, res);
+    batch_matrix->apply(one, x, neg_one, res);
     //compute residual norm.
     res->compute_norm2(res_norm_host);
 
-    auto log_resid_host
-            = gko::make_temporary_clone(gko_exec->get_master(), &logger->get_residual_norm());
     auto log_iters_host
             = gko::make_temporary_clone(gko_exec->get_master(), &logger->get_num_iterations());
+    auto log_resid_host
+            = gko::make_temporary_clone(gko_exec->get_master(), &logger->get_residual_norm());
 
-    std::fstream log_file(filename + "_logger.txt", std::ios::out | std::ios::app);
     // "unbatch" converts a batch object into a vector
     // of objects of the corresponding single type.
     for (int i = 0; i < batch_size; ++i) {
@@ -149,7 +224,6 @@ void save_logger(
                 b_norm_host->create_const_view_for_item(i)->at(0, 0),
                 tol);
     }
-    log_file.close();
 }
 
 template <class ExecSpace>

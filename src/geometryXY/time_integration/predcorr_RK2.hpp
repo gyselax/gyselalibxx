@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -9,7 +10,6 @@
 #include <ddc/ddc.hpp>
 
 #include "bsl_advection_1d.hpp"
-#include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
@@ -79,29 +79,29 @@ public:
      * @param dt Time step. 
      * @param nbiter Number of time steps. 
      */
-    void operator()(DFieldXY allfdistribu, double const dt, int const nbiter)
+    void operator()(DSpanXY allfdistribu, double const dt, int const nbiter)
     {
         // Domain
-        IdxRangeXY const meshXY = get_idx_range(allfdistribu);
+        IDomainXY const meshXY = allfdistribu.domain();
 
         // Output of the Poisson solver
-        DFieldMemXY electrostatic_potential_alloc(meshXY);
-        DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
+        DFieldXY electrostatic_potential_alloc(meshXY);
+        DSpanXY electrostatic_potential = electrostatic_potential_alloc.span_view();
 
         VectorFieldXY_XY electric_field_alloc(meshXY);
-        VectorSpanXY_XY electric_field = get_field(electric_field_alloc);
+        VectorSpanXY_XY electric_field = electric_field_alloc.span_view();
 
         // Definition of the RK2
-        RK2<DFieldMemXY, VectorFieldXY_XY> predictor_corrector(meshXY);
+        RK2<DFieldXY, VectorFieldXY_XY> predictor_corrector(meshXY);
 
         // Computation of the advection field: Poisson equation ---
-        std::function<void(VectorSpanXY_XY, DConstFieldXY)> define_electric_field
-                = [&](VectorSpanXY_XY electric_field, DConstFieldXY allfdistribu_view) {
-                      IdxRangeXY xy_dom(get_idx_range<GridX, GridY>(allfdistribu_view));
+        std::function<void(VectorSpanXY_XY, DViewXY)> define_electric_field
+                = [&](VectorSpanXY_XY electric_field, DViewXY allfdistribu_view) {
+                      IDomainXY xy_dom(allfdistribu_view.domain<IDimX, IDimY>());
 
                       // --- compute electrostatic potential and electric field:
-                      DFieldMemXY electrostatic_potential_alloc(xy_dom);
-                      DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
+                      DFieldXY electrostatic_potential_alloc(xy_dom);
+                      DSpanXY electrostatic_potential = electrostatic_potential_alloc.span_view();
 
                       /*
                         The applied Poisson solver needs a span type for allfdistribu. 
@@ -109,8 +109,8 @@ public:
                         allfdistribu_alloc chunk containing the values of the view 
                         allfdistribu to solve the type conflict in the Poisson solver. 
                     */
-                      DFieldMemXY allfdistribu_alloc(xy_dom);
-                      DFieldXY allfdistribu_span = get_field(allfdistribu_alloc);
+                      DFieldXY allfdistribu_alloc(xy_dom);
+                      DSpanXY allfdistribu_span = allfdistribu_alloc.span_view();
                       ddc::parallel_deepcopy(
                               Kokkos::DefaultExecutionSpace(),
                               allfdistribu_span,
@@ -121,21 +121,21 @@ public:
                   };
 
         // Advection operator ---
-        std::function<void(DFieldXY, VectorViewXY_XY, double)> advect_allfdistribu
-                = [&](DFieldXY allfdistribu, VectorViewXY_XY electric_field, double dt) {
-                      DConstFieldXY electric_field_x(ddcHelper::get<X>(electric_field));
-                      DConstFieldXY electric_field_y(ddcHelper::get<Y>(electric_field));
+        std::function<void(DSpanXY, VectorViewXY_XY, double)> advect_allfdistribu
+                = [&](DSpanXY allfdistribu, VectorViewXY_XY electric_field, double dt) {
+                      DViewXY electric_field_x(ddcHelper::get<RDimX>(electric_field));
+                      DViewXY electric_field_y(ddcHelper::get<RDimY>(electric_field));
 
                       // --- compute advection field:
-                      IdxRangeXY dom = get_idx_range(electric_field);
-                      DFieldMemXY advection_field_x_alloc(dom);
-                      DFieldMemXY advection_field_y_alloc(dom);
-                      DFieldXY advection_field_x = get_field(advection_field_x_alloc);
-                      DFieldXY advection_field_y = get_field(advection_field_y_alloc);
+                      IDomainXY dom = electric_field.domain();
+                      DFieldXY advection_field_x_alloc(dom);
+                      DFieldXY advection_field_y_alloc(dom);
+                      DSpanXY advection_field_x = advection_field_x_alloc.span_view();
+                      DSpanXY advection_field_y = advection_field_y_alloc.span_view();
                       ddc::parallel_for_each(
                               Kokkos::DefaultExecutionSpace(),
                               meshXY,
-                              KOKKOS_LAMBDA(IdxXY const i_xy) {
+                              KOKKOS_LAMBDA(IndexXY const i_xy) {
                                   advection_field_x(i_xy) = -electric_field_y(i_xy);
                                   advection_field_y(i_xy) = electric_field_x(i_xy);
                               });
@@ -164,9 +164,9 @@ public:
             auto electrostatic_potential_host
                     = ddc::create_mirror_and_copy(electrostatic_potential);
             auto electric_field_x_host
-                    = ddc::create_mirror_and_copy(ddcHelper::get<X>(electric_field));
+                    = ddc::create_mirror_and_copy(ddcHelper::get<RDimX>(electric_field));
             auto electric_field_y_host
-                    = ddc::create_mirror_and_copy(ddcHelper::get<Y>(electric_field));
+                    = ddc::create_mirror_and_copy(ddcHelper::get<RDimY>(electric_field));
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
                     .and_with("time_saved", iter * dt)

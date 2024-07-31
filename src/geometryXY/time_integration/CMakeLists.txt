@@ -13,8 +13,6 @@ target_link_libraries("predcorr_rk2_xy" INTERFACE
     gslx::geometry_XY
     gslx::pde_solvers
     gslx::timestepper
-    gslx::utils
-
 
 
 )
