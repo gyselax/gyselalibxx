@@ -2,6 +2,8 @@
 #pragma once
 #include <mpi.h>
 
+#include "ddc_aliases.hpp"
+
 /**
  * @brief A superclass describing an operator for converting from/to different MPI layouts.
  *
@@ -16,10 +18,10 @@ class IMPITranspose
                   ddc::to_type_seq_t<typename Layout2::discrete_domain_type>>);
 
 public:
-    /// The type of the domain of the first MPI layout.
-    using domain_type1 = typename Layout1::discrete_domain_type;
-    /// The type of the domain of the second MPI layout.
-    using domain_type2 = typename Layout2::discrete_domain_type;
+    /// The type of the index range of the first MPI layout.
+    using idx_range_type1 = typename Layout1::discrete_domain_type;
+    /// The type of the index range of the second MPI layout.
+    using idx_range_type2 = typename Layout2::discrete_domain_type;
 
 protected:
     /// The MPI communicator

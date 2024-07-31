@@ -12,9 +12,8 @@
  *
  * Calculate the quadrature coefficients for the Simpson method defined on the provided index range.
  *
- * @tparam ExecSpace Execution space, depends on Kokkos.
- *
- * @param[in] index_range The index range on which the quadrature will be carried out.
+ * @param[in] idx_range
+ * 	The index range on which the quadrature will be carried out.
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided index range.
  */
