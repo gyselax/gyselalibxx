@@ -209,7 +209,9 @@ public:
         check_conv(get_batch_size(), m_tol, gko_exec, logger);
         // save logger data
         if (m_with_logger) {
-            save_logger(m_batch_matrix_ell, x_view, rhs_view, logger, m_tol, "ell");
+            std::fstream log_file("ell_log.txt", std::ios::out | std::ios::app);
+            save_logger(log_file, m_batch_matrix_ell, x_view, rhs_view, logger, m_tol);
+            log_file.close();
         }
 
         Kokkos::deep_copy(rhs_view, x_view);
