@@ -54,17 +54,17 @@ int main(int argc, char** argv)
     ddc::ScopeGuard ddc_scope(argc, argv);
 
     // CREATING MESH AND SUPPORTS ----------------------------------------------------------------
-    IDomainX const interpolation_domain_x = init_spline_dependent_idx_range<
-            IDimX,
+    IdxRangeX const interpolation_idx_range_x = init_spline_dependent_idx_range<
+            GridX,
             BSplinesX,
             SplineInterpPointsX>(conf_gyselalibxx, "x");
 
-    IDomainY const interpolation_domain_y = init_spline_dependent_idx_range<
-            IDimY,
+    IdxRangeY const interpolation_idx_range_y = init_spline_dependent_idx_range<
+            GridY,
             BSplinesY,
             SplineInterpPointsY>(conf_gyselalibxx, "y");
 
-    IDomainXY meshXY(interpolation_domain_x, interpolation_domain_y);
+    IdxRangeXY meshXY(interpolation_idx_range_x, interpolation_idx_range_y);
 
 
     // READING CONFIGURATION ---------------------------------------------------------------------
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 
     // --> Initial function infos
     double const epsilon = PCpp_double(conf_gyselalibxx, ".PerturbationInfo.perturb_amplitude");
-    double const mode_k = 2 * M_PI / ddcHelper::total_interval_length(interpolation_domain_x);
+    double const mode_k = 2 * M_PI / ddcHelper::total_interval_length(interpolation_idx_range_x);
 
 
     // DEFINING OPERATORS ------------------------------------------------------------------------
@@ -87,12 +87,12 @@ int main(int argc, char** argv)
     SplineYBuilder_XY const builder_y(meshXY);
 
     // Create spline evaluators ---
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator_XY const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    ddc::PeriodicExtrapolationRule<RDimY> bv_y_min;
-    ddc::PeriodicExtrapolationRule<RDimY> bv_y_max;
+    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
+    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
     SplineYEvaluator_XY const spline_y_evaluator(bv_y_min, bv_y_max);
 
     // Create spline interpolators ---
@@ -100,28 +100,28 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
 
     // Create Poisson solver ---
-    FFTPoissonSolver<IDomainXY, IDomainXY, Kokkos::DefaultExecutionSpace> const poisson_solver(
+    FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> const poisson_solver(
             meshXY);
 
     // Create advection operators ---
-    Euler<FieldXY<CoordX>, DFieldXY> euler_x(meshXY);
+    Euler<FieldMemXY<CoordX>, DFieldMemXY> euler_x(meshXY);
     BslAdvection1D<
-            IDimX,
-            IDomainXY,
-            IDomainXY,
+            GridX,
+            IdxRangeXY,
+            IdxRangeXY,
             SplineXBuilder_XY,
             SplineXEvaluator_XY,
-            Euler<FieldXY<CoordX>, DFieldXY>>
+            Euler<FieldMemXY<CoordX>, DFieldMemXY>>
             advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler_x);
 
-    Euler<FieldXY<CoordY>, DFieldXY> euler_y(meshXY);
+    Euler<FieldMemXY<CoordY>, DFieldMemXY> euler_y(meshXY);
     BslAdvection1D<
-            IDimY,
-            IDomainXY,
-            IDomainXY,
+            GridY,
+            IdxRangeXY,
+            IdxRangeXY,
             SplineYBuilder_XY,
             SplineYEvaluator_XY,
-            Euler<FieldXY<CoordY>, DFieldXY>>
+            Euler<FieldMemXY<CoordY>, DFieldMemXY>>
             advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler_y);
 
 
@@ -135,21 +135,21 @@ int main(int argc, char** argv)
 
     // INITIALISATION ----------------------------------------------------------------------------
     // Initialisation of the distributed function
-    DFieldXY allfdistribu_equilibrium_alloc(meshXY);
-    DSpanXY allfdistribu_equilibrium = allfdistribu_equilibrium_alloc.span_view();
+    DFieldMemXY allfdistribu_equilibrium_alloc(meshXY);
+    DFieldXY allfdistribu_equilibrium = get_field(allfdistribu_equilibrium_alloc);
 
-    DFieldXY allfdistribu_alloc(meshXY);
-    DSpanXY allfdistribu = allfdistribu_alloc.span_view();
+    DFieldMemXY allfdistribu_alloc(meshXY);
+    DFieldXY allfdistribu = get_field(allfdistribu_alloc);
 
     initialize(allfdistribu, allfdistribu_equilibrium);
 
 
     // Initialisation of the electrostatic potential and electric field (for saving data)
-    DFieldXY electrostatic_potential_alloc(meshXY);
-    DSpanXY electrostatic_potential = electrostatic_potential_alloc.span_view();
+    DFieldMemXY electrostatic_potential_alloc(meshXY);
+    DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
     VectorFieldXY_XY electric_field_alloc(meshXY);
-    VectorSpanXY_XY electric_field = electric_field_alloc.span_view();
+    VectorSpanXY_XY electric_field = get_field(electric_field_alloc);
 
     poisson_solver(electrostatic_potential, electric_field, allfdistribu);
 
@@ -166,8 +166,8 @@ int main(int argc, char** argv)
     */
     ddc::expose_to_pdi("Nx_spline_cells", PCpp_int(conf_gyselalibxx, ".SplineMesh.x_ncells"));
     ddc::expose_to_pdi("Ny_spline_cells", PCpp_int(conf_gyselalibxx, ".SplineMesh.y_ncells"));
-    expose_mesh_to_pdi("MeshX", interpolation_domain_x);
-    expose_mesh_to_pdi("MeshY", interpolation_domain_y);
+    expose_mesh_to_pdi("MeshX", interpolation_idx_range_x);
+    expose_mesh_to_pdi("MeshY", interpolation_idx_range_y);
 
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("time_step", delta_t);
@@ -179,8 +179,8 @@ int main(int argc, char** argv)
     int const iter = 0;
     auto allfdistribu_host = ddc::create_mirror_and_copy(allfdistribu);
     auto electrostatic_potential_host = ddc::create_mirror_and_copy(electrostatic_potential);
-    auto electric_field_x_host = ddc::create_mirror_and_copy(ddcHelper::get<RDimX>(electric_field));
-    auto electric_field_y_host = ddc::create_mirror_and_copy(ddcHelper::get<RDimY>(electric_field));
+    auto electric_field_x_host = ddc::create_mirror_and_copy(ddcHelper::get<X>(electric_field));
+    auto electric_field_y_host = ddc::create_mirror_and_copy(ddcHelper::get<Y>(electric_field));
     ddc::PdiEvent("iteration")
             .with("iter", iter)
             .and_with("time_saved", iter * delta_t)
