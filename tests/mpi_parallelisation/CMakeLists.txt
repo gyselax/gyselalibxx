@@ -13,6 +13,8 @@ target_link_libraries(unit_tests_parallelisation_layout
         GTest::gtest
         GTest::gmock
         gslx::mpi_parallelisation
+        gslx::utils
+
 )
 
 gtest_discover_tests(unit_tests_parallelisation_layout)
@@ -28,6 +30,8 @@ target_link_libraries(unit_tests_parallelisation
         GTest::gtest
         GTest::gmock
         gslx::mpi_parallelisation
+        gslx::utils
+
 )
 
 set_property(TARGET unit_tests_parallelisation PROPERTY CROSSCOMPILING_EMULATOR '${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2')
