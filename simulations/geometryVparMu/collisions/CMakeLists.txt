@@ -12,6 +12,8 @@ target_link_libraries(test_collSpVparMu
   gslx::io
   gslx::quadrature
   gslx::speciesinfo
+  gslx::utils
+
   paraconf::paraconf
   )
 
