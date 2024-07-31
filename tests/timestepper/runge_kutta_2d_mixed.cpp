@@ -28,41 +28,41 @@ class RungeKutta2DFixtureMixedTypes<std::tuple<std::integral_constant<std::size_
 public:
     static int constexpr order = ORDER;
 
-    struct RDimX
+    struct X
     {
         static bool constexpr PERIODIC = false;
     };
 
-    struct RDimY
+    struct Y
     {
         static bool constexpr PERIODIC = false;
     };
-    using CoordX = Coordinate<RDimX>;
-    using CoordY = Coordinate<RDimY>;
-    using CoordXY = Coordinate<RDimX, RDimY>;
-    struct IDimX : UniformPointSampling<RDimX>
+    using CoordX = Coord<X>;
+    using CoordY = Coord<Y>;
+    using CoordXY = Coord<X, Y>;
+    struct GridX : UniformGridBase<X>
     {
     };
-    struct IDimY : UniformPointSampling<RDimY>
+    struct GridY : UniformGridBase<Y>
     {
     };
-    using IndexX = DiscreteElement<IDimX>;
-    using IndexY = DiscreteElement<IDimY>;
-    using IVectX = DiscreteVector<IDimX>;
-    using IVectY = DiscreteVector<IDimY>;
-    using IDomainX = DiscreteDomain<IDimX>;
-    using IDomainY = DiscreteDomain<IDimY>;
-    using IndexXY = DiscreteElement<IDimX, IDimY>;
-    using IDomainXY = DiscreteDomain<IDimX, IDimY>;
-    using AdvectionField = VectorField<double, IDomainXY, NDTag<RDimX, RDimY>>;
-    using CChunkXY = Chunk<CoordXY, IDomainXY>;
+    using IdxX = Idx<GridX>;
+    using IdxY = Idx<GridY>;
+    using IdxStepX = IdxStep<GridX>;
+    using IdxStepY = IdxStep<GridY>;
+    using IdxRangeX = IdxRange<GridX>;
+    using IdxRangeY = IdxRange<GridY>;
+    using IdxXY = Idx<GridX, GridY>;
+    using IdxRangeXY = IdxRange<GridX, GridY>;
+    using AdvectionFieldMem = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
+    using CFieldXY = host_t<FieldMem<CoordXY, IdxRangeXY>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
-            RK2<CChunkXY, AdvectionField>,
+            RK2<CFieldXY, AdvectionFieldMem>,
             std::conditional_t<
                     ORDER == 3,
-                    RK3<CChunkXY, AdvectionField>,
-                    RK4<CChunkXY, AdvectionField>>>;
+                    RK3<CFieldXY, AdvectionFieldMem>,
+                    RK4<CFieldXY, AdvectionFieldMem>>>;
 };
 
 using runge_kutta_2d_types = testing::Types<
@@ -74,38 +74,38 @@ TYPED_TEST_SUITE(RungeKutta2DFixtureMixedTypes, runge_kutta_2d_types);
 
 TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
 {
-    using RDimX = typename TestFixture::RDimX;
+    using X = typename TestFixture::X;
     using CoordX = typename TestFixture::CoordX;
-    using IDimX = typename TestFixture::IDimX;
-    using IndexX = typename TestFixture::IndexX;
-    using IVectX = typename TestFixture::IVectX;
-    using IDomainX = typename TestFixture::IDomainX;
+    using GridX = typename TestFixture::GridX;
+    using IdxX = typename TestFixture::IdxX;
+    using IdxStepX = typename TestFixture::IdxStepX;
+    using IdxRangeX = typename TestFixture::IdxRangeX;
 
-    using RDimY = typename TestFixture::RDimY;
+    using Y = typename TestFixture::Y;
     using CoordY = typename TestFixture::CoordY;
-    using IDimY = typename TestFixture::IDimY;
-    using IndexY = typename TestFixture::IndexY;
-    using IVectY = typename TestFixture::IVectY;
-    using IDomainY = typename TestFixture::IDomainY;
+    using GridY = typename TestFixture::GridY;
+    using IdxY = typename TestFixture::IdxY;
+    using IdxStepY = typename TestFixture::IdxStepY;
+    using IdxRangeY = typename TestFixture::IdxRangeY;
 
     using CoordXY = typename TestFixture::CoordXY;
-    using IndexXY = typename TestFixture::IndexXY;
-    using IDomainXY = typename TestFixture::IDomainXY;
-    using CChunkXY = typename TestFixture::CChunkXY;
+    using IdxXY = typename TestFixture::IdxXY;
+    using IdxRangeXY = typename TestFixture::IdxRangeXY;
+    using CFieldXY = typename TestFixture::CFieldXY;
     using RungeKutta = typename TestFixture::RungeKutta;
-    using AdvectionFieldSpan = VectorFieldSpan<double, IDomainXY, NDTag<RDimX, RDimY>>;
-    using AdvectionFieldView = VectorFieldView<double, IDomainXY, NDTag<RDimX, RDimY>>;
+    using AdvectionField = VectorFieldSpan<double, IdxRangeXY, NDTag<X, Y>>;
+    using ConstAdvectionField = VectorFieldView<double, IdxRangeXY, NDTag<X, Y>>;
 
     CoordX x_min(-1.0);
     CoordX x_max(1.0);
-    IVectX x_size(5);
+    IdxStepX x_size(5);
 
     CoordY y_min(-1.0);
     CoordY y_max(1.0);
-    IVectY y_size(5);
+    IdxStepY y_size(5);
 
-    IndexX start_x(0);
-    IndexY start_y(0);
+    IdxX start_x(0);
+    IdxY start_y(0);
 
     int constexpr Ntests = 2;
 
@@ -119,51 +119,56 @@ TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
     std::array<double, Ntests> error;
     std::array<double, Ntests - 1> order;
 
-    init_discrete_space<IDimX>(IDimX::init(x_min, x_max, x_size));
-    IDomainX dom_x(start_x, x_size);
-    init_discrete_space<IDimY>(IDimY::init(y_min, y_max, y_size));
-    IDomainY dom_y(start_y, y_size);
+    ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
+    IdxRangeX dom_x(start_x, x_size);
+    ddc::init_discrete_space<GridY>(GridY::init(y_min, y_max, y_size));
+    IdxRangeY dom_y(start_y, y_size);
 
-    IDomainXY dom(dom_x, dom_y);
+    IdxRangeXY dom(dom_x, dom_y);
 
     RungeKutta runge_kutta(dom);
 
-    CChunkXY vals(dom);
-    CChunkXY result(dom);
+    CFieldXY vals(dom);
+    CFieldXY result(dom);
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(dom, [&](IndexXY ixy) {
-        double const dist_x = (coordinate(select<IDimX>(ixy)) - xc);
-        double const dist_y = (coordinate(select<IDimY>(ixy)) - yc);
+    ddc::for_each(dom, [&](IdxXY ixy) {
+        double const dist_x = (coordinate(select<GridX>(ixy)) - xc);
+        double const dist_y = (coordinate(select<GridY>(ixy)) - yc);
 
-        ddc::get<RDimX>(result(ixy)) = xc + dist_x * cos_val - dist_y * sin_val;
-        ddc::get<RDimY>(result(ixy)) = yc + dist_x * sin_val + dist_y * cos_val;
+        ddc::get<X>(result(ixy)) = xc + dist_x * cos_val - dist_y * sin_val;
+        ddc::get<Y>(result(ixy)) = yc + dist_x * sin_val + dist_y * cos_val;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(dom, [&](IndexXY ixy) { vals(ixy) = coordinate(ixy); });
+        ddc::for_each(dom, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
 
         for (int i(0); i < Nt; ++i) {
             runge_kutta.update(
                     Kokkos::DefaultHostExecutionSpace(),
                     vals,
                     dt,
-                    [yc, xc, &dom, omega](AdvectionFieldSpan dy, ChunkView<CoordXY, IDomainXY> y) {
-                        ddc::for_each(dom, [&](IndexXY ixy) {
-                            ddcHelper::get<RDimX>(dy)(ixy) = omega * (yc - ddc::get<RDimY>(y(ixy)));
-                            ddcHelper::get<RDimY>(dy)(ixy) = omega * (ddc::get<RDimX>(y(ixy)) - xc);
+                    [yc,
+                     xc,
+                     &dom,
+                     omega](AdvectionField dy, host_t<ConstField<CoordXY, IdxRangeXY>> y) {
+                        ddc::for_each(dom, [&](IdxXY ixy) {
+                            ddcHelper::get<X>(dy)(ixy) = omega * (yc - ddc::get<Y>(y(ixy)));
+                            ddcHelper::get<Y>(dy)(ixy) = omega * (ddc::get<X>(y(ixy)) - xc);
                         });
                     },
-                    [&dom](ChunkSpan<CoordXY, IDomainXY> y, AdvectionFieldView dy, double dt) {
-                        ddc::for_each(dom, [&](IndexXY ixy) { y(ixy) += dt * dy(ixy); });
+                    [&dom](host_t<Field<CoordXY, IdxRangeXY>> y,
+                           ConstAdvectionField dy,
+                           double dt) {
+                        ddc::for_each(dom, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
                     });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(dom, [&](IndexXY ixy) {
-            double const err_x = ddc::get<RDimX>(result(ixy) - vals(ixy));
-            double const err_y = ddc::get<RDimY>(result(ixy) - vals(ixy));
+        ddc::for_each(dom, [&](IdxXY ixy) {
+            double const err_x = ddc::get<X>(result(ixy) - vals(ixy));
+            double const err_y = ddc::get<Y>(result(ixy) - vals(ixy));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);
             linf_err = err > linf_err ? err : linf_err;
         });
