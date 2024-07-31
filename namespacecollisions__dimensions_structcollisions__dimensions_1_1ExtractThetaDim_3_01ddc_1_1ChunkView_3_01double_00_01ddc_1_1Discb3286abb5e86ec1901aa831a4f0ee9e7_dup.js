@@ -1,4 +1,0 @@
-var namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ddc_1_1ChunkView_3_01double_00_01ddc_1_1Discb3286abb5e86ec1901aa831a4f0ee9e7_dup =
-[
-    [ "type", "namespacecollisions__dimensions.html#a669ad0a9b39ce1f7cf706288c940a7fc", null ]
-];

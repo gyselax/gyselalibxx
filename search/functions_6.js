@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['get_5f1d_5fidx_5frange_1207',['get_1d_idx_range',['../namespacecollisions__dimensions.html#ac45038274703270e5bb5faeac0f32349',1,'collisions_dimensions']]],
+  ['get_5f1d_5fidx_5frange_1207',['get_1d_idx_range',['../namespacecollisions__dimensions.html#acdf7b3b63a886e508215164bbbca538f',1,'collisions_dimensions']]],
   ['get_5f2d_5findex_1208',['get_2d_index',['../classPolarBSplines.html#acdd45cba30c54de858759d765b5dd897',1,'PolarBSplines']]],
   ['get_5fadvection_5ffield_1209',['get_advection_field',['../classAdvectionSimulation.html#a754d22f275182e9571c7d12414fd7f6f',1,'AdvectionSimulation::get_advection_field()'],['../classAdvectionFieldSimulation.html#a0bc3c0d1829fc8f286c5880848cf4883',1,'AdvectionFieldSimulation::get_advection_field()']]],
   ['get_5famplitudes_1210',['get_amplitudes',['../classKrookSourceAdaptive.html#a8a429dd473078201e0879422899414c0',1,'KrookSourceAdaptive']]],
@@ -16,7 +16,7 @@ var searchData=
   ['get_5ffrequency_1220',['get_frequency',['../classDiocotronDensitySolution.html#a9a485619ee6cbd2ff396ae8fe2a0a1bd',1,'DiocotronDensitySolution']]],
   ['get_5fgridvx_5fghosted_1221',['get_gridvx_ghosted',['../classCollisionsIntra.html#ad611212032beab6cb9512adca7de596b',1,'CollisionsIntra']]],
   ['get_5fgridvx_5fghosted_5fstaggered_1222',['get_gridvx_ghosted_staggered',['../classCollisionsIntra.html#a55d9192a2790d6be4885aa563204c4f7',1,'CollisionsIntra']]],
-  ['get_5fidx_5frange_1223',['get_idx_range',['../namespacecollisions__dimensions.html#a62b94bd51bbdfaab699989e46cf7cc0f',1,'collisions_dimensions']]],
+  ['get_5fidx_5frange_1223',['get_idx_range',['../namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155',1,'collisions_dimensions']]],
   ['get_5findex_1224',['get_index',['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a372fe5a0631e21a250d45cef6ac95049',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_index()'],['../classDiscreteSubDomain.html#aeaf106fce8fc9db50a7c5ba4669c502f',1,'DiscreteSubDomain::get_index()']]],
   ['get_5finternal_5fchunk_1225',['get_internal_chunk',['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a3576feb3379b6a2c26a18035b1a4ab64',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_internal_chunk(ddc::DiscreteElement&lt; ODims... &gt; elem) const'],['../classDerivFieldCommon_3_01ChunkType_00_01ddc_1_1DiscreteDomain_3_01DDims_8_8_8_01_4_01_4.html#a301b2c387f1cd8a0f6c49a088a4c5902',1,'DerivFieldCommon&lt; ChunkType, ddc::DiscreteDomain&lt; DDims... &gt; &gt;::get_internal_chunk(ddc::DiscreteDomain&lt; ODims... &gt; dom) const']]],
   ['get_5flocal_5fidx_5frange_1226',['get_local_idx_range',['../classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8',1,'MPITransposeAllToAll']]],

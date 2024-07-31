@@ -6,7 +6,7 @@ var classMaxwellianEquilibrium =
     [ "~MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0", null ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a034e0f873e3403b14b56ec4200b44bb9", null ],
     [ "~MaxwellianEquilibrium", "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0", null ],
-    [ "operator()", "classMaxwellianEquilibrium.html#a25be9ba7cc2b1fdbf195eae6201b578c", null ],
+    [ "operator()", "classMaxwellianEquilibrium.html#a0cc2b9bdb6300dd5661cedbfc27957b3", null ],
     [ "mass", "classMaxwellianEquilibrium.html#a714053f07bf2fe8f2b7b56cc0deb00c2", null ],
     [ "density_eq", "classMaxwellianEquilibrium.html#a168179a3980e6851b5f8195b10f0d9ac", null ],
     [ "temperature_eq", "classMaxwellianEquilibrium.html#a1bd2bd317c1073d9675dd5ce344d7cad", null ],

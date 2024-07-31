@@ -164,7 +164,7 @@ $(document).ready(function(){initNavTree('ddc__aliases_8hpp_source.html',''); in
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">using</span> NonUniformGridBase = ddc::NonUniformPointSampling&lt;GridType&gt;;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryGrids, <span class="keyword">class </span>FieldType&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keyword">auto</span> <a class="code" href="namespacecollisions__dimensions.html#a62b94bd51bbdfaab699989e46cf7cc0f">get_idx_range</a>(FieldType <span class="keyword">const</span>&amp; field) noexcept</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keyword">auto</span> <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(FieldType <span class="keyword">const</span>&amp; field) noexcept</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    static_assert(ddc::is_chunk_v&lt;FieldType&gt;, <span class="stringliteral">&quot;Not a DDC field (ddc::ChunkSpan) type&quot;</span>);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(QueryGrids) == 0) {</div>
@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('ddc__aliases_8hpp_source.html',''); in
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="stringliteral">&quot;Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type&quot;</span>);</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">return</span> field.span_cview();</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
-<div class="ttc" id="anamespacecollisions__dimensions_html_a62b94bd51bbdfaab699989e46cf7cc0f"><div class="ttname"><a href="namespacecollisions__dimensions.html#a62b94bd51bbdfaab699989e46cf7cc0f">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">ddc::DiscreteDomain&lt; Grid... &gt; get_idx_range(FDistribDomain idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:81</div></div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:81</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

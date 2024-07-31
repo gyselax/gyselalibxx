@@ -6,9 +6,9 @@ var searchData=
   ['neumann_5fspline_5fquadrature_5fcoefficients_1283',['neumann_spline_quadrature_coefficients',['../neumann__spline__quadrature_8hpp.html#ae2329a7e23fe06ca7089ac9748e3b4d0',1,'neumann_spline_quadrature.hpp']]],
   ['neumann_5fspline_5fquadrature_5fcoefficients_5f1d_1284',['neumann_spline_quadrature_coefficients_1d',['../neumann__spline__quadrature_8hpp.html#a76519191c7b9a4df9bbf3da7e0cb025f',1,'neumann_spline_quadrature.hpp']]],
   ['non_5fsingular_5fsolution_1285',['non_singular_solution',['../classManufacturedPoissonTest.html#af7bed860a32f8678d1128795b614d6de',1,'ManufacturedPoissonTest']]],
-  ['noperturbinitialization_1286',['NoPerturbInitialization',['../classNoPerturbInitialization.html#af83e17937b0d453308a2480f76b9c3b7',1,'NoPerturbInitialization']]],
+  ['noperturbinitialization_1286',['NoPerturbInitialization',['../classNoPerturbInitialization.html#a6532d67f7b2827585b9e0e6f985267e2',1,'NoPerturbInitialization']]],
   ['norm_1287',['norm',['../classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d',1,'MatrixBatchCsr::norm()'],['../classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41',1,'MatrixBatchEll::norm()']]],
   ['norm_5finf_1288',['norm_inf',['../utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009',1,'norm_inf(ddc::Coordinate&lt; Tags... &gt; coord):&#160;utils_tools.hpp'],['../utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d',1,'norm_inf(double const coord):&#160;utils_tools.hpp']]],
   ['nullfluidsolver_1289',['NullFluidSolver',['../classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040',1,'NullFluidSolver']]],
-  ['nustar0_1290',['nustar0',['../classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf',1,'CollisionInfo::nustar0()'],['../classCollisionInfoRadial.html#a7945fe1942fa1aebd21cd4a749bdc8b4',1,'CollisionInfoRadial::nustar0()']]]
+  ['nustar0_1290',['nustar0',['../classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf',1,'CollisionInfo::nustar0()'],['../classCollisionInfoRadial.html#a5b7373ae9255469a57241d0a8a7963c5',1,'CollisionInfoRadial::nustar0()']]]
 ];

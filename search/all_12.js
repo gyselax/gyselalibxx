@@ -3,7 +3,7 @@ var searchData=
   ['s_5fdensity_646',['s_density',['../classFluidMoments.html#a51b8fc4fc4530a3cad0836bb997c4c3d',1,'FluidMoments']]],
   ['s_5ftemperature_647',['s_temperature',['../classFluidMoments.html#a4648e3f7abc452675a0ed4bdecd59a80',1,'FluidMoments']]],
   ['s_5fvelocity_648',['s_velocity',['../classFluidMoments.html#a0e36a0f2a4851525413ad0f033ffe37f',1,'FluidMoments']]],
-  ['safety_5ffactor_649',['safety_factor',['../classCollisionInfoRadial.html#adf5c527afab63478458897a2a5e71b40',1,'CollisionInfoRadial::safety_factor()'],['../classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9',1,'CollisionInfo::safety_factor()']]],
+  ['safety_5ffactor_649',['safety_factor',['../classCollisionInfoRadial.html#aa05294a9ef7c3c7b22bfbd2cf0f329a0',1,'CollisionInfoRadial::safety_factor()'],['../classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9',1,'CollisionInfo::safety_factor()']]],
   ['selalib_2b_2b_650',['Selalib++',['../vendor_sll.html',1,'']]],
   ['set_5fell_5felement_651',['set_ell_element',['../classMatrixBatchEll.html#aa3d7d4b0603c631839070708ff574ba6',1,'MatrixBatchEll']]],
   ['set_5fequilibrium_652',['set_equilibrium',['../classVortexMergerEquilibria.html#a53ee133eae7bbe78998ff78e0988ab0a',1,'VortexMergerEquilibria']]],

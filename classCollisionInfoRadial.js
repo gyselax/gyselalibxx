@@ -1,15 +1,15 @@
 var classCollisionInfoRadial =
 [
-    [ "DFieldR", "classCollisionInfoRadial.html#a1374c2e782637f1783c39ac49ca26fe4", null ],
-    [ "DSpanR", "classCollisionInfoRadial.html#a3a3e1798b5a621ba2a343bf46ab65127", null ],
-    [ "DViewR", "classCollisionInfoRadial.html#aac53c3340d52f8905e3c1c49b106802c", null ],
-    [ "radial_chunk_type", "classCollisionInfoRadial.html#a6a132c71c5bb0ecb6badc2b6c6b448ec", null ],
-    [ "CollisionInfoRadial", "classCollisionInfoRadial.html#a2012ef48c5ff858018d53149384071e3", null ],
-    [ "CollisionInfoRadial", "classCollisionInfoRadial.html#a30709c16643d80d9880fa0cd15cff484", null ],
+    [ "DFieldMemR", "classCollisionInfoRadial.html#aae6219b77f97c0afbafcd18f690d3680", null ],
+    [ "DFieldR", "classCollisionInfoRadial.html#ac28b12bc360cd4d1f138132c257d8600", null ],
+    [ "DConstFieldR", "classCollisionInfoRadial.html#a2fa78e0d20eddd65e29a13af7d8648d1", null ],
+    [ "radial_chunk_type", "classCollisionInfoRadial.html#aa18c43d0ec1aaf78c36c87ad08d85ded", null ],
+    [ "CollisionInfoRadial", "classCollisionInfoRadial.html#a6e8311cb922253d367e9a8a9ea8cbb1e", null ],
+    [ "CollisionInfoRadial", "classCollisionInfoRadial.html#a45a16a5c4797db13a2606594fca42902", null ],
     [ "~CollisionInfoRadial", "classCollisionInfoRadial.html#adf788114c002bb90e68f8530f47a7afb", null ],
     [ "compute_nustar0_r", "classCollisionInfoRadial.html#ab009ec0c390a21844d39203aa42ea158", null ],
     [ "collisions_interspecies", "classCollisionInfoRadial.html#ac1ba453a905e26075bc28a11e9d87286", null ],
-    [ "rg", "classCollisionInfoRadial.html#a94150e2fa91431c898d34f53537f0cb2", null ],
-    [ "safety_factor", "classCollisionInfoRadial.html#adf5c527afab63478458897a2a5e71b40", null ],
-    [ "nustar0", "classCollisionInfoRadial.html#a7945fe1942fa1aebd21cd4a749bdc8b4", null ]
+    [ "rg", "classCollisionInfoRadial.html#a28d1c9450c89516bc061ebe3d85a8818", null ],
+    [ "safety_factor", "classCollisionInfoRadial.html#aa05294a9ef7c3c7b22bfbd2cf0f329a0", null ],
+    [ "nustar0", "classCollisionInfoRadial.html#a5b7373ae9255469a57241d0a8a7963c5", null ]
 ];

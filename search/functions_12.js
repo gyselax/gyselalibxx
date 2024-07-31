@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['safety_5ffactor_1328',['safety_factor',['../classCollisionInfoRadial.html#adf5c527afab63478458897a2a5e71b40',1,'CollisionInfoRadial::safety_factor()'],['../classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9',1,'CollisionInfo::safety_factor()']]],
+  ['safety_5ffactor_1328',['safety_factor',['../classCollisionInfoRadial.html#aa05294a9ef7c3c7b22bfbd2cf0f329a0',1,'CollisionInfoRadial::safety_factor()'],['../classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9',1,'CollisionInfo::safety_factor()']]],
   ['set_5fell_5felement_1329',['set_ell_element',['../classMatrixBatchEll.html#aa3d7d4b0603c631839070708ff574ba6',1,'MatrixBatchEll']]],
   ['set_5fequilibrium_1330',['set_equilibrium',['../classVortexMergerEquilibria.html#a53ee133eae7bbe78998ff78e0988ab0a',1,'VortexMergerEquilibria']]],
   ['set_5finitialisation_1331',['set_initialisation',['../classVortexMergerDensitySolution.html#a3a24dd7ac0324005ca912ac05b54d0d6',1,'VortexMergerDensitySolution']]],
