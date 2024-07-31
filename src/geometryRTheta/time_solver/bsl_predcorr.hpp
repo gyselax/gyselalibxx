@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -15,6 +14,7 @@
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
+#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "ifoot_finder.hpp"
 #include "itimesolver.hpp"
@@ -41,12 +41,12 @@
  * First, it advects on a half time step:
  * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
- * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^{n+1/2}@f$ with a BslAdvectionRP on @f$\frac{dt}{2}@f$;
+ * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^{n+1/2}@f$ with a BslAdvectionRTheta on @f$\frac{dt}{2}@f$;
  *
  * Secondly, it advects on a full time step:
  * - 4. From @f$\rho^{n+1/2}@f$, it computes @f$\phi^{n+1/2}@f$ with a PolarSplineFEMPoissonLikeSolver;
  * - 5. From @f$\phi^{n+1/2}@f$, it computes @f$A^{n+1/2}@f$ with a AdvectionFieldFinder;
- * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRP on @f$dt@f$.
+ * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$dt@f$.
  *
  * @tparam Mapping
  *      A Curvilinear2DToCartesian class or one of its child classes.
@@ -55,26 +55,26 @@
  *
  */
 template <class Mapping, class FootFinder>
-class BslPredCorrRP : public ITimeSolverRP
+class BslPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
     Mapping const& m_mapping;
 
-    BslAdvectionRP<FootFinder, Mapping> const& m_advection_solver;
+    BslAdvectionRTheta<FootFinder, Mapping> const& m_advection_solver;
 
     PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
-    SplineRPBuilder const& m_builder;
-    SplineRPEvaluatorNullBound const& m_spline_evaluator;
+    SplineRThetaBuilder const& m_builder;
+    SplineRThetaEvaluatorNullBound const& m_spline_evaluator;
 
 
 public:
     /**
-     * @brief Instantiate a BslPredCorrRP.
+     * @brief Instantiate a BslPredCorrRTheta.
      *
      * @param[in] mapping
-     *      The mapping function from the logical domain to the
-     *      physical domain.
+     *      The mapping function from the logical index range to the
+     *      physical index range.
      * @param[in] advection_solver
      *      The advection operator.
      * @param[in] builder
@@ -86,11 +86,11 @@ public:
      *      The PDE solver which computes the electrical
      *      potential.
      */
-    BslPredCorrRP(
+    BslPredCorrRTheta(
             Mapping const& mapping,
-            BslAdvectionRP<FootFinder, Mapping> const& advection_solver,
-            SplineRPBuilder const& builder,
-            SplineRPEvaluatorNullBound const& rhs_evaluator,
+            BslAdvectionRTheta<FootFinder, Mapping> const& advection_solver,
+            SplineRThetaBuilder const& builder,
+            SplineRThetaEvaluatorNullBound const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
@@ -101,10 +101,10 @@ public:
     }
 
 
-    ~BslPredCorrRP() {};
+    ~BslPredCorrRTheta() {};
 
 
-    DSpanRP operator()(DSpanRP allfdistribu, double const dt, int const steps) const
+    DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps) const
     {
         std::chrono::time_point<std::chrono::system_clock> start_time
                 = std::chrono::system_clock::now();
@@ -112,29 +112,29 @@ public:
 
 
         // Grid. ------------------------------------------------------------------------------------------
-        IDomainRP grid(allfdistribu.domain<IDimR, IDimP>());
-        FieldRP<CoordRP> coords(grid);
-        ddc::for_each(grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
+        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
+        FieldMemRTheta<CoordRTheta> coords(grid);
+        ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
-        BSDomainR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                ddc::DiscreteVector<BSplinesR> {PolarBSplinesRP::continuity + 1}));
-        BSDomainP polar_domain(ddc::discrete_space<BSplinesP>().full_domain());
+        BSIdxRangeR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+                IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
+        BSIdxRangeTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
 
         SplinePolar electrostatic_potential_coef(
-                PolarBSplinesRP::singular_idx_range<PolarBSplinesRP>(),
-                BSDomainRP(radial_bsplines, polar_domain));
+                PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
+                BSIdxRangeRTheta(radial_bsplines, polar_idx_range));
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRP, ddc::NullExtrapolationRule> polar_spline_evaluator(
-                extrapolation_rule);
+        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
+                polar_spline_evaluator(extrapolation_rule);
 
 
-        DFieldRP electrical_potential0(grid);
+        DFieldMemRTheta electrical_potential0(grid);
 
-        Spline2D allfdistribu_coef(m_builder.spline_domain());
-        m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
+        Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
-                charge_density_coord(allfdistribu_coef.span_cview(), m_spline_evaluator);
+                charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
         m_poisson_solver(charge_density_coord, coords, electrical_potential0);
 
         ddc::PdiEvent("iteration")
@@ -144,13 +144,13 @@ public:
                 .and_with("electrical_potential", electrical_potential0);
 
 
-        std::function<void(VectorDSpanRP<RDimX, RDimY>, DViewRP)> define_advection_field
-                = [&](VectorDSpanRP<RDimX, RDimY> advection_field, DViewRP allfdistribu) {
+        std::function<void(DVectorFieldRTheta<X, Y>, DConstFieldRTheta)> define_advection_field
+                = [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta allfdistribu) {
                       // --- compute electrostatic potential:
-                      Spline2D allfdistribu_coef(m_builder.spline_domain());
-                      m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
+                      Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+                      m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
                       PoissonLikeRHSFunction const charge_density_coord(
-                              allfdistribu_coef.span_cview(),
+                              get_const_field(allfdistribu_coef),
                               m_spline_evaluator);
                       m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
 
@@ -158,12 +158,12 @@ public:
                       advection_field_computer(electrostatic_potential_coef, advection_field);
                   };
 
-        std::function<void(DSpanRP, VectorDViewRP<RDimX, RDimY>, double)> advect_allfdistribu =
-                [&](DSpanRP allfdistribu, VectorDViewRP<RDimX, RDimY> advection_field, double dt) {
-                    m_advection_solver(allfdistribu, advection_field, dt);
-                };
+        std::function<void(DFieldRTheta, DConstVectorFieldRTheta<X, Y>, double)> advect_allfdistribu
+                = [&](DFieldRTheta allfdistribu,
+                      DConstVectorFieldRTheta<X, Y> advection_field,
+                      double dt) { m_advection_solver(allfdistribu, advection_field, dt); };
 
-        RK2<DFieldRP, VectorDFieldRP<RDimX, RDimY>> time_stepper(grid);
+        RK2<DFieldMemRTheta, DVectorFieldMemRTheta<X, Y>> time_stepper(grid);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
@@ -174,11 +174,11 @@ public:
                             define_advection_field,
                             advect_allfdistribu);
 
-            DFieldRP electrical_potential(grid);
-            Spline2D allfdistribu_coef(m_builder.spline_domain());
-            m_builder(allfdistribu_coef.span_view(), allfdistribu.span_cview());
+            DFieldMemRTheta electrical_potential(grid);
+            Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
             PoissonLikeRHSFunction const
-                    charge_density_coord(allfdistribu_coef.span_cview(), m_spline_evaluator);
+                    charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
             m_poisson_solver(charge_density_coord, coords, electrical_potential);
 
             ddc::PdiEvent("iteration")

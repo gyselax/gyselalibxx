@@ -214,7 +214,7 @@ def treatment(namefile):
         coordinates in theta; coordinates in x; coordinates in y.
     """
     File = np.loadtxt(namefile, float)
-    #Ir, Ip, IVr, IVp = [], [], [], []
+    #Ir, Ip, IVr, IVtheta = [], [], [], []
     CoordR = File[:, 2]
     CoordP = File[:, 3]
     CoordX = File[:, 4]

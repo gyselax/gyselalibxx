@@ -38,59 +38,60 @@ namespace {
  * @param[in] TOL A tolerance threshold above which the error is considered
  * 				to be sufficiently small.
  *
- * @see SplineInterpolatorRP
+ * @see SplineInterpolatorRTheta
  */
 template <class Function>
 void Interpolation_on_random_coord(
-        IDomainRP& grid,
+        IdxRangeRTheta& grid,
         bool& On_the_nodes,
         Function& exact_function,
         double const TOL)
 {
     int const Nr = ddc::discrete_space<BSplinesR>().ncells();
-    int const Nt = ddc::discrete_space<BSplinesP>().ncells();
+    int const Nt = ddc::discrete_space<BSplinesTheta>().ncells();
 
 
     // Evaluation of the function on the grid. -----------------------------------------------
-    DFieldRP function_evaluated(grid);
-    ddc::for_each(grid, [&](IndexRP const irp) {
-        CoordRP coord(coordinate(ddc::select<IDimR>(irp)), coordinate(ddc::select<IDimP>(irp)));
+    DFieldMemRTheta function_evaluated(grid);
+    ddc::for_each(grid, [&](IdxRTheta const irp) {
+        CoordRTheta
+                coord(coordinate(ddc::select<GridR>(irp)), coordinate(ddc::select<GridTheta>(irp)));
         function_evaluated(irp) = exact_function(coord);
     });
 
 
     // Build the decomposition of the function on Bsplines. ----------------------------------
-    SplineRPBuilder const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
-    IDomainRP random_grid(grid);
-    FieldRP<CoordRP> random_coords(random_grid);
+    IdxRangeRTheta random_grid(grid);
+    FieldMemRTheta<CoordRTheta> random_coords(random_grid);
 
     int number_r(0);
     int number_p(0);
     double random_factor_r;
     double random_factor_p;
-    ddc::for_each(random_grid, [&](IndexRP const irp) {
-        CoordR coord_r(coordinate(ddc::select<IDimR>(irp)));
-        CoordP coord_p(coordinate(ddc::select<IDimP>(irp)));
+    ddc::for_each(random_grid, [&](IdxRTheta const irp) {
+        CoordR coord_r(coordinate(ddc::select<GridR>(irp)));
+        CoordTheta coord_p(coordinate(ddc::select<GridTheta>(irp)));
 
         if (On_the_nodes) {
-            random_coords(irp) = CoordRP(coord_r, coord_p);
+            random_coords(irp) = CoordRTheta(coord_r, coord_p);
         } else {
-            unsigned index_r = ddc::select<IDimR>(irp).uid();
-            unsigned index_p = ddc::select<IDimP>(irp).uid();
+            unsigned index_r = ddc::select<GridR>(irp).uid();
+            unsigned index_p = ddc::select<GridTheta>(irp).uid();
             number_r = (301 * index_r + 3) % (Nr * Nt);
             number_p = (103 * index_p + 2) % (Nr * Nt);
             // Pseudo-random number between 0 and 1 generated :
             random_factor_r = double(number_r) / Nr / Nt * (1 - double(number_p) / Nr / Nt);
             random_factor_p = double(number_p) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
 
-            IndexR ir(ddc::select<IDimR>(irp));
-            IndexP ip(ddc::select<IDimP>(irp));
+            IdxR ir(ddc::select<GridR>(irp));
+            IdxTheta ip(ddc::select<GridTheta>(irp));
 
-            auto r_domain = ddc::get_domain<IDimR>(random_coords);
-            IndexR ir_max(r_domain.back());
+            auto r_idx_range = get_idx_range<GridR>(random_coords);
+            IdxR ir_max(r_idx_range.back());
             CoordR delta_coord_r;
             if (ir + 1 <= ir_max) {
                 delta_coord_r = CoordR(ddc::coordinate(ir + 1) - ddc::coordinate(ir));
@@ -98,39 +99,39 @@ void Interpolation_on_random_coord(
                 delta_coord_r = CoordR(0.);
             }
 
-            auto theta_domain = ddc::get_domain<IDimP>(random_coords);
-            IndexP ip_min(theta_domain.front());
-            IndexP ip_max(theta_domain.back());
-            CoordP delta_coord_p;
+            auto theta_idx_range = get_idx_range<GridTheta>(random_coords);
+            IdxTheta ip_min(theta_idx_range.front());
+            IdxTheta ip_max(theta_idx_range.back());
+            CoordTheta delta_coord_p;
             if (ip + 1 <= ip_max) {
-                delta_coord_p = CoordP(ddc::coordinate(ip + 1) - ddc::coordinate(ip));
+                delta_coord_p = CoordTheta(ddc::coordinate(ip + 1) - ddc::coordinate(ip));
             } else {
-                delta_coord_p = CoordP(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
+                delta_coord_p = CoordTheta(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
             }
 
-            random_coords(irp) = CoordRP(
+            random_coords(irp) = CoordRTheta(
                     coord_r + delta_coord_r * random_factor_r,
-                    CoordP(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
+                    CoordTheta(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
         }
     });
 
 
     // Interpolate the function on Bsplines on the "random" grid. ----------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<RDimP> p_extrapolation_rule;
-    SplineRPEvaluatorNullBound spline_evaluator(
+    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    DSpanRP function_interpolated;
-    SplineInterpolatorRP interpolator(builder, spline_evaluator);
+    DFieldRTheta function_interpolated;
+    SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     function_interpolated = interpolator(function_evaluated, random_coords);
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err(0.0);
-    ddc::for_each(random_coords.domain(), [&](IndexRP const irp) {
+    ddc::for_each(get_idx_range(random_coords), [&](IdxRTheta const irp) {
         double err = fabs(function_interpolated(irp) - exact_function(random_coords(irp)));
         max_err = max_err > err ? max_err : err;
     });
@@ -155,7 +156,7 @@ public:
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    virtual double operator()(CoordRP const& coord) const = 0;
+    virtual double operator()(CoordRTheta const& coord) const = 0;
 };
 
 
@@ -176,9 +177,9 @@ public:
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    double operator()(CoordRP const& coord) const override
+    double operator()(CoordRTheta const& coord) const override
     {
-        const double r = ddc::get<RDimR>(coord);
+        const double r = ddc::get<R>(coord);
         double val = 1.0;
         for (int i(0); i < m_d; i++)
             val *= r;
@@ -201,10 +202,10 @@ public:
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    double operator()(CoordRP const& coord) const override
+    double operator()(CoordRTheta const& coord) const override
     {
-        const double r = ddc::get<RDimR>(coord);
-        const double t = ddc::get<RDimP>(coord);
+        const double r = ddc::get<R>(coord);
+        const double t = ddc::get<Theta>(coord);
         return r * std::cos(t);
     }
 };
@@ -223,10 +224,10 @@ public:
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    double operator()(CoordRP const& coord) const override
+    double operator()(CoordRTheta const& coord) const override
     {
-        const double r = ddc::get<RDimR>(coord);
-        const double t = ddc::get<RDimP>(coord);
+        const double r = ddc::get<R>(coord);
+        const double t = ddc::get<Theta>(coord);
 
         double x0 = 0.;
         double y0 = 0.;
@@ -258,7 +259,7 @@ namespace fs = std::filesystem;
  *
  * @param[in] The path to the grid_size.yaml file.
  *
- * @see SplineInterpolatorRP
+ * @see SplineInterpolatorRTheta
  * @tag Spline_interpolator_polar_test
  */
 int main(int argc, char** argv)
@@ -292,41 +293,41 @@ int main(int argc, char** argv)
     // Grid creation (uniform grid). ----------------------------------------------------------
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IVectR const r_size(Nr);
+    IdxStepR const r_size(Nr);
 
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IVectP const p_size(Nt);
+    CoordTheta const p_min(0.0);
+    CoordTheta const p_max(2.0 * M_PI);
+    IdxStepTheta const p_size(Nt);
 
     double const dr((r_max - r_min) / r_size);
     double const dp((p_max - p_min) / p_size);
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
+    std::vector<CoordTheta> p_knots(p_size + 1);
 
     for (int i(0); i < r_size + 1; ++i) {
         r_knots[i] = CoordR(r_min + i * dr);
     }
     for (int i(0); i < p_size + 1; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
+        p_knots[i] = CoordTheta(p_min + i * dp);
     }
 
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesP>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(p_knots);
 
-    ddc::init_discrete_space<IDimR>(SplineInterpPointsR::get_sampling<IDimR>());
-    ddc::init_discrete_space<IDimP>(SplineInterpPointsP::get_sampling<IDimP>());
+    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IDomainR interpolation_domain_R(SplineInterpPointsR::get_domain<IDimR>());
-    IDomainP interpolation_domain_P(SplineInterpPointsP::get_domain<IDimP>());
-    IDomainRP grid(interpolation_domain_R, interpolation_domain_P);
+    IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
 
     // TESTS ON THE DISCRETE SPACE ===========================================================
     std::cout << "Test interpolator 2D with Bsplines of degree " << spline_degree
-              << " on r and degree " << BSplinesP::degree() << " on theta"
+              << " on r and degree " << BSplinesTheta::degree() << " on theta"
               << " on a grid of " << Nr << " x " << Nt << ":" << std::endl;
 
     // For interpolation points on the node, the interpolation is supposed to be exact:
