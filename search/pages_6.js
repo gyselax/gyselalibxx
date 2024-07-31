@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['initialization_1587',['Initialization',['../src_geometryRTheta_initialization.html',1,'src_geometryRTheta']]],
-  ['initialization_20methods_1588',['Initialization methods',['../src_geometryVparMu_initialization.html',1,'src_geometryVparMu'],['../src_geometryXVx_initialization.html',1,'src_geometryXVx']]],
-  ['initialization_20on_20_28x_2cy_29_20geometry_1589',['Initialization on (x,y) geometry',['../src_geometryXY_initialization.html',1,'src_geometryXY']]],
-  ['interpolation_20methods_1590',['Interpolation Methods',['../src_interpolation.html',1,'src']]]
+  ['initialization_1589',['Initialization',['../src_geometryRTheta_initialization.html',1,'src_geometryRTheta']]],
+  ['initialization_20methods_1590',['Initialization methods',['../src_geometryVparMu_initialization.html',1,'src_geometryVparMu'],['../src_geometryXVx_initialization.html',1,'src_geometryXVx']]],
+  ['initialization_20on_20_28x_2cy_29_20geometry_1591',['Initialization on (x,y) geometry',['../src_geometryXY_initialization.html',1,'src_geometryXY']]],
+  ['interpolation_20methods_1592',['Interpolation Methods',['../src_interpolation.html',1,'src']]]
 ];

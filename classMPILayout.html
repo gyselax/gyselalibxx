@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: MPILayout&lt; Domain, DistributedDim &gt; Class Template Reference</title>
+<title>Gyselalib++: MPILayout&lt; DataIdxRange, DistributedDim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,110 +105,110 @@ $(document).ready(function(){initNavTree('classMPILayout.html',''); initResizabl
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classMPILayout-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MPILayout&lt; Domain, DistributedDim &gt; Class Template Reference</div>  </div>
+<div class="title">MPILayout&lt; DataIdxRange, DistributedDim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class describing a way in which data may be laid out across MPI processes.  
  <a href="classMPILayout.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for MPILayout&lt; Domain, DistributedDim &gt;:</div>
+Inheritance diagram for MPILayout&lt; DataIdxRange, DistributedDim &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classMPILayout.png" usemap="#MPILayout_3C_20Domain_2C_20DistributedDim_20_3E_map" alt=""/>
-  <map id="MPILayout_3C_20Domain_2C_20DistributedDim_20_3E_map" name="MPILayout_3C_20Domain_2C_20DistributedDim_20_3E_map">
-<area href="classIMPILayout.html" alt="IMPILayout&lt; Domain, DistributedDim... &gt;" shape="rect" coords="0,0,243,24"/>
+  <img src="classMPILayout.png" usemap="#MPILayout_3C_20DataIdxRange_2C_20DistributedDim_20_3E_map" alt=""/>
+  <map id="MPILayout_3C_20DataIdxRange_2C_20DistributedDim_20_3E_map" name="MPILayout_3C_20DataIdxRange_2C_20DistributedDim_20_3E_map">
+<area href="classIMPILayout.html" alt="IMPILayout&lt; DataIdxRange, DistributedDim... &gt;" shape="rect" coords="0,0,279,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ab139ceb925baafae1930225cf207b117"><td class="memItemLeft" align="right" valign="top"><a id="ab139ceb925baafae1930225cf207b117"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#ab139ceb925baafae1930225cf207b117">discrete_domain_type</a> = Domain</td></tr>
-<tr class="memdesc:ab139ceb925baafae1930225cf207b117"><td class="mdescLeft">&#160;</td><td class="mdescRight">The domain of the data. <br /></td></tr>
-<tr class="separator:ab139ceb925baafae1930225cf207b117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a006e44e1633555cf765ff894e171ec11"><td class="memItemLeft" align="right" valign="top"><a id="a006e44e1633555cf765ff894e171ec11"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a006e44e1633555cf765ff894e171ec11">distributed_subdomain</a> = typename <a class="el" href="classIMPILayout.html#a3d350026b5917a79d2f591d7e9f75cc7">base_type::distributed_subdomain</a></td></tr>
-<tr class="memdesc:a006e44e1633555cf765ff894e171ec11"><td class="mdescLeft">&#160;</td><td class="mdescRight">The domain of the distributed section of the data. <br /></td></tr>
-<tr class="separator:a006e44e1633555cf765ff894e171ec11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bc625299be668523617d7e7e297b194"><td class="memItemLeft" align="right" valign="top"><a id="a3bc625299be668523617d7e7e297b194"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a3bc625299be668523617d7e7e297b194">distributed_type_seq</a> = typename <a class="el" href="classIMPILayout.html#a6f1fed9419bd39c864f56e72e19b9836">base_type::distributed_type_seq</a></td></tr>
-<tr class="memdesc:a3bc625299be668523617d7e7e297b194"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
-<tr class="separator:a3bc625299be668523617d7e7e297b194"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classIMPILayout"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classIMPILayout')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classIMPILayout.html">IMPILayout&lt; Domain, DistributedDim... &gt;</a></td></tr>
-<tr class="memitem:acceaf34be6c816dcaf46dca49a8faa7c inherit pub_types_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="acceaf34be6c816dcaf46dca49a8faa7c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#acceaf34be6c816dcaf46dca49a8faa7c">discrete_domain_type</a> = Domain</td></tr>
-<tr class="memdesc:acceaf34be6c816dcaf46dca49a8faa7c inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">The domain of the data. <br /></td></tr>
-<tr class="separator:acceaf34be6c816dcaf46dca49a8faa7c inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d350026b5917a79d2f591d7e9f75cc7 inherit pub_types_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a3d350026b5917a79d2f591d7e9f75cc7"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a3d350026b5917a79d2f591d7e9f75cc7">distributed_subdomain</a> = ddc::DiscreteDomain&lt; DistributedDim... &gt;</td></tr>
-<tr class="memdesc:a3d350026b5917a79d2f591d7e9f75cc7 inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">The domain of the distributed section of the data. <br /></td></tr>
-<tr class="separator:a3d350026b5917a79d2f591d7e9f75cc7 inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f1fed9419bd39c864f56e72e19b9836 inherit pub_types_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a6f1fed9419bd39c864f56e72e19b9836"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a6f1fed9419bd39c864f56e72e19b9836">distributed_type_seq</a> = ddc::detail::TypeSeq&lt; DistributedDim... &gt;</td></tr>
-<tr class="memdesc:a6f1fed9419bd39c864f56e72e19b9836 inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
-<tr class="separator:a6f1fed9419bd39c864f56e72e19b9836 inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b457ff7c43f225f88c04bb57d8b48c5"><td class="memItemLeft" align="right" valign="top"><a id="a4b457ff7c43f225f88c04bb57d8b48c5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a4b457ff7c43f225f88c04bb57d8b48c5">idx_range_type</a> = DataIdxRange</td></tr>
+<tr class="memdesc:a4b457ff7c43f225f88c04bb57d8b48c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the data. <br /></td></tr>
+<tr class="separator:a4b457ff7c43f225f88c04bb57d8b48c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5883d6c267edba25da7370986eb15720"><td class="memItemLeft" align="right" valign="top"><a id="a5883d6c267edba25da7370986eb15720"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a5883d6c267edba25da7370986eb15720">distributed_sub_idx_range</a> = typename <a class="el" href="classIMPILayout.html#a880c5120b4d4e28a75c64556dea84473">base_type::distributed_sub_idx_range</a></td></tr>
+<tr class="memdesc:a5883d6c267edba25da7370986eb15720"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the distributed section of the data. <br /></td></tr>
+<tr class="separator:a5883d6c267edba25da7370986eb15720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4f189220fff2a19af86cfcf8132419e"><td class="memItemLeft" align="right" valign="top"><a id="ab4f189220fff2a19af86cfcf8132419e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#ab4f189220fff2a19af86cfcf8132419e">distributed_type_seq</a> = typename <a class="el" href="classIMPILayout.html#a101c87361eab7bcefda79b996d8a6f24">base_type::distributed_type_seq</a></td></tr>
+<tr class="memdesc:ab4f189220fff2a19af86cfcf8132419e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
+<tr class="separator:ab4f189220fff2a19af86cfcf8132419e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classIMPILayout"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classIMPILayout')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classIMPILayout.html">IMPILayout&lt; DataIdxRange, DistributedDim... &gt;</a></td></tr>
+<tr class="memitem:a266f0c2842eb56ebedf2dade7980cab9 inherit pub_types_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a266f0c2842eb56ebedf2dade7980cab9"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a266f0c2842eb56ebedf2dade7980cab9">discrete_domain_type</a> = DataIdxRange</td></tr>
+<tr class="memdesc:a266f0c2842eb56ebedf2dade7980cab9 inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the data. <br /></td></tr>
+<tr class="separator:a266f0c2842eb56ebedf2dade7980cab9 inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a880c5120b4d4e28a75c64556dea84473 inherit pub_types_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a880c5120b4d4e28a75c64556dea84473"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a880c5120b4d4e28a75c64556dea84473">distributed_sub_idx_range</a> = IdxRange&lt; DistributedDim... &gt;</td></tr>
+<tr class="memdesc:a880c5120b4d4e28a75c64556dea84473 inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the distributed section of the data. <br /></td></tr>
+<tr class="separator:a880c5120b4d4e28a75c64556dea84473 inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101c87361eab7bcefda79b996d8a6f24 inherit pub_types_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a101c87361eab7bcefda79b996d8a6f24"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a101c87361eab7bcefda79b996d8a6f24">distributed_type_seq</a> = ddc::detail::TypeSeq&lt; DistributedDim... &gt;</td></tr>
+<tr class="memdesc:a101c87361eab7bcefda79b996d8a6f24 inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
+<tr class="separator:a101c87361eab7bcefda79b996d8a6f24 inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afd766e106aeaac4a5af75593ee8a63ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMPILayout.html#ab139ceb925baafae1930225cf207b117">discrete_domain_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#afd766e106aeaac4a5af75593ee8a63ff">distribute_domain</a> (<a class="el" href="classMPILayout.html#ab139ceb925baafae1930225cf207b117">discrete_domain_type</a> global_domain, int comm_size, int rank)</td></tr>
-<tr class="memdesc:afd766e106aeaac4a5af75593ee8a63ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the distributed domain which follows the chosen layout.  <a href="classMPILayout.html#afd766e106aeaac4a5af75593ee8a63ff">More...</a><br /></td></tr>
-<tr class="separator:afd766e106aeaac4a5af75593ee8a63ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ea3f401285e400bfae8a1b963abb56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMPILayout.html#a4b457ff7c43f225f88c04bb57d8b48c5">idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#ac4ea3f401285e400bfae8a1b963abb56">distribute_idx_range</a> (<a class="el" href="classMPILayout.html#a4b457ff7c43f225f88c04bb57d8b48c5">idx_range_type</a> global_idx_range, int comm_size, int rank)</td></tr>
+<tr class="memdesc:ac4ea3f401285e400bfae8a1b963abb56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the distributed index range which follows the chosen layout.  <a href="classMPILayout.html#ac4ea3f401285e400bfae8a1b963abb56">More...</a><br /></td></tr>
+<tr class="separator:ac4ea3f401285e400bfae8a1b963abb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac2d6f37438614b72970f412b01cf1511"><td class="memTemplParams" colspan="2">template&lt;class HeadTag &gt; </td></tr>
-<tr class="memitem:ac2d6f37438614b72970f412b01cf1511"><td class="memTemplItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; HeadTag &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#ac2d6f37438614b72970f412b01cf1511">internal_distribute_domain</a> (ddc::DiscreteDomain&lt; HeadTag &gt; global_domain, int comm_size, int rank)</td></tr>
-<tr class="memdesc:ac2d6f37438614b72970f412b01cf1511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute a 1D domain over the MPI processes.  <a href="classMPILayout.html#ac2d6f37438614b72970f412b01cf1511">More...</a><br /></td></tr>
-<tr class="separator:ac2d6f37438614b72970f412b01cf1511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1203bd95d42e52a26612b36265c0e0f"><td class="memTemplParams" colspan="2">template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) &gt; 0), bool &gt;  = true&gt; </td></tr>
-<tr class="memitem:af1203bd95d42e52a26612b36265c0e0f"><td class="memTemplItemLeft" align="right" valign="top">ddc::DiscreteDomain&lt; HeadTag, Tags... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#af1203bd95d42e52a26612b36265c0e0f">internal_distribute_domain</a> (ddc::DiscreteDomain&lt; HeadTag, Tags... &gt; domain, int comm_size, int rank)</td></tr>
-<tr class="memdesc:af1203bd95d42e52a26612b36265c0e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute the domain over the MPI processes.  <a href="classMPILayout.html#af1203bd95d42e52a26612b36265c0e0f">More...</a><br /></td></tr>
-<tr class="separator:af1203bd95d42e52a26612b36265c0e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a805e67a98b1dc70a79c9a321a0dd7adc"><td class="memTemplParams" colspan="2">template&lt;class HeadTag &gt; </td></tr>
+<tr class="memitem:a805e67a98b1dc70a79c9a321a0dd7adc"><td class="memTemplItemLeft" align="right" valign="top">IdxRange&lt; HeadTag &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a805e67a98b1dc70a79c9a321a0dd7adc">internal_distribute_idx_range</a> (IdxRange&lt; HeadTag &gt; global_idx_range, int comm_size, int rank)</td></tr>
+<tr class="memdesc:a805e67a98b1dc70a79c9a321a0dd7adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute a 1D index range over the MPI processes.  <a href="classMPILayout.html#a805e67a98b1dc70a79c9a321a0dd7adc">More...</a><br /></td></tr>
+<tr class="separator:a805e67a98b1dc70a79c9a321a0dd7adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95fcbbdda15d02011249c7d6e2848a5f"><td class="memTemplParams" colspan="2">template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) &gt; 0), bool &gt;  = true&gt; </td></tr>
+<tr class="memitem:a95fcbbdda15d02011249c7d6e2848a5f"><td class="memTemplItemLeft" align="right" valign="top">IdxRange&lt; HeadTag, Tags... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a95fcbbdda15d02011249c7d6e2848a5f">internal_distribute_idx_range</a> (IdxRange&lt; HeadTag, Tags... &gt; idx_range, int comm_size, int rank)</td></tr>
+<tr class="memdesc:a95fcbbdda15d02011249c7d6e2848a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute the index range over the MPI processes.  <a href="classMPILayout.html#a95fcbbdda15d02011249c7d6e2848a5f">More...</a><br /></td></tr>
+<tr class="separator:a95fcbbdda15d02011249c7d6e2848a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_attribs_classIMPILayout"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classIMPILayout')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classIMPILayout.html">IMPILayout&lt; Domain, DistributedDim... &gt;</a></td></tr>
-<tr class="memitem:aee2e71c7c15239dfaee73745392af1af inherit pub_static_attribs_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="aee2e71c7c15239dfaee73745392af1af"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#aee2e71c7c15239dfaee73745392af1af">n_distributed_dimensions</a></td></tr>
-<tr class="memdesc:aee2e71c7c15239dfaee73745392af1af inherit pub_static_attribs_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of dimensions that are distributed across MPI processes. <br /></td></tr>
-<tr class="separator:aee2e71c7c15239dfaee73745392af1af inherit pub_static_attribs_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c3d649fe08147c52169f50ac9d8fab5 inherit pub_static_attribs_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a9c3d649fe08147c52169f50ac9d8fab5"></a>
-static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a9c3d649fe08147c52169f50ac9d8fab5">distributed_domains_are_first</a></td></tr>
-<tr class="memdesc:a9c3d649fe08147c52169f50ac9d8fab5 inherit pub_static_attribs_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory. <br /></td></tr>
-<tr class="separator:a9c3d649fe08147c52169f50ac9d8fab5 inherit pub_static_attribs_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_classIMPILayout"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classIMPILayout')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classIMPILayout.html">IMPILayout&lt; DataIdxRange, DistributedDim... &gt;</a></td></tr>
+<tr class="memitem:ace6ec22fc1fdc9798b7532fce56dadbf inherit pub_static_attribs_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="ace6ec22fc1fdc9798b7532fce56dadbf"></a>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#ace6ec22fc1fdc9798b7532fce56dadbf">n_distributed_dimensions</a></td></tr>
+<tr class="memdesc:ace6ec22fc1fdc9798b7532fce56dadbf inherit pub_static_attribs_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of dimensions that are distributed across MPI processes. <br /></td></tr>
+<tr class="separator:ace6ec22fc1fdc9798b7532fce56dadbf inherit pub_static_attribs_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d4e662b2ddf07d632247d503769e3b4 inherit pub_static_attribs_classIMPILayout"><td class="memItemLeft" align="right" valign="top"><a id="a8d4e662b2ddf07d632247d503769e3b4"></a>
+static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a8d4e662b2ddf07d632247d503769e3b4">distributed_idx_ranges_are_first</a></td></tr>
+<tr class="memdesc:a8d4e662b2ddf07d632247d503769e3b4 inherit pub_static_attribs_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory. <br /></td></tr>
+<tr class="separator:a8d4e662b2ddf07d632247d503769e3b4 inherit pub_static_attribs_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Domain, class... DistributedDim&gt;<br />
-class MPILayout&lt; Domain, DistributedDim &gt;</h3>
+<div class="textblock"><h3>template&lt;class DataIdxRange, class... DistributedDim&gt;<br />
+class MPILayout&lt; DataIdxRange, DistributedDim &gt;</h3>
 
 <p>A class describing a way in which data may be laid out across MPI processes. </p>
 <p>This class describes the simplest way of laying out data. In this layout the data is distributed along dimensions in order until the data is distributed. It is possible that the data may not be distributed along some of the requested dimensions if such distribution is not necessary. For example if we distribute dimensions R and Theta of a (R, Theta, Phi, <a class="el" href="structVpar.html" title="Define non periodic parallel velocity .">Vpar</a>, <a class="el" href="structMu.html" title="Define non periodic magnetic momentum .">Mu</a>) grid of size 256 x 1024 x 256 x 64 x 8 over 64 processes, the theta dimension will not be distributed.</p>
-<p>The data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local domain along that dimension is the same for all processes. For example if we distribute dimensions <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a> and <a class="el" href="structY.html" title="A class which describes the real space in the second spatial direction Y.">Y</a> of a (<a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a>, <a class="el" href="structY.html" title="A class which describes the real space in the second spatial direction Y.">Y</a>, Z) grid of size (10, 15, 4) over 6 processes, the <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a> dimension will be distributed over 2 processes and the <a class="el" href="structY.html" title="A class which describes the real space in the second spatial direction Y.">Y</a> dimension will be distributed over 3 processes.</p>
+<p>The data is distributed such that it is maximally distributed over each dimension (in order) such that the size of each local index range along that dimension is the same for all processes. For example if we distribute dimensions <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a> and <a class="el" href="structY.html" title="A class which describes the real space in the second spatial direction Y.">Y</a> of a (<a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a>, <a class="el" href="structY.html" title="A class which describes the real space in the second spatial direction Y.">Y</a>, Z) grid of size (10, 15, 4) over 6 processes, the <a class="el" href="structX.html" title="A class which describes the real space in the first spatial direction X.">X</a> dimension will be distributed over 2 processes and the <a class="el" href="structY.html" title="A class which describes the real space in the second spatial direction Y.">Y</a> dimension will be distributed over 3 processes.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Domain</td><td>The DiscreteDomain on which the data is defined. </td></tr>
+    <tr><td class="paramname">DataIdxRange</td><td>The IdxRange on which the data is defined. </td></tr>
     <tr><td class="paramname">DistributedDim</td><td>The tags of the discrete dimensions which are distributed across MPI processes. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="afd766e106aeaac4a5af75593ee8a63ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd766e106aeaac4a5af75593ee8a63ff">&#9670;&nbsp;</a></span>distribute_domain()</h2>
+<a id="ac4ea3f401285e400bfae8a1b963abb56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4ea3f401285e400bfae8a1b963abb56">&#9670;&nbsp;</a></span>distribute_idx_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Domain , class... DistributedDim&gt; </div>
+template&lt;class DataIdxRange , class... DistributedDim&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMPILayout.html#ab139ceb925baafae1930225cf207b117">discrete_domain_type</a> <a class="el" href="classMPILayout.html">MPILayout</a>&lt; Domain, DistributedDim &gt;::distribute_domain </td>
+          <td class="memname"><a class="el" href="classMPILayout.html#a4b457ff7c43f225f88c04bb57d8b48c5">idx_range_type</a> <a class="el" href="classMPILayout.html">MPILayout</a>&lt; DataIdxRange, DistributedDim &gt;::distribute_idx_range </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMPILayout.html#ab139ceb925baafae1930225cf207b117">discrete_domain_type</a>&#160;</td>
-          <td class="paramname"><em>global_domain</em>, </td>
+          <td class="paramtype"><a class="el" href="classMPILayout.html#a4b457ff7c43f225f88c04bb57d8b48c5">idx_range_type</a>&#160;</td>
+          <td class="paramname"><em>global_idx_range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -235,26 +235,26 @@ template&lt;class Domain , class... DistributedDim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the distributed domain which follows the chosen layout. </p>
+<p>Get the distributed index range which follows the chosen layout. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">global_domain</td><td>The global (non-distributed) domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">global_idx_range</td><td>The global (non-distributed) index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">comm_size</td><td>The number of MPI processes over which the data is distributed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rank</td><td>The rank of the current MPI process.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The distributed domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The distributed index range. </dd></dl>
 
 </div>
 </div>
-<a id="ac2d6f37438614b72970f412b01cf1511"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2d6f37438614b72970f412b01cf1511">&#9670;&nbsp;</a></span>internal_distribute_domain() <span class="overload">[1/2]</span></h2>
+<a id="a805e67a98b1dc70a79c9a321a0dd7adc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a805e67a98b1dc70a79c9a321a0dd7adc">&#9670;&nbsp;</a></span>internal_distribute_idx_range() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Domain , class... DistributedDim&gt; </div>
+template&lt;class DataIdxRange , class... DistributedDim&gt; </div>
 <div class="memtemplate">
 template&lt;class HeadTag &gt; </div>
 <table class="mlabels">
@@ -262,10 +262,10 @@ template&lt;class HeadTag &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteDomain&lt;HeadTag&gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; Domain, DistributedDim &gt;::internal_distribute_domain </td>
+          <td class="memname">IdxRange&lt;HeadTag&gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; DataIdxRange, DistributedDim &gt;::internal_distribute_idx_range </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; HeadTag &gt;&#160;</td>
-          <td class="paramname"><em>global_domain</em>, </td>
+          <td class="paramtype">IdxRange&lt; HeadTag &gt;&#160;</td>
+          <td class="paramname"><em>global_idx_range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -292,26 +292,26 @@ template&lt;class HeadTag &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Distribute a 1D domain over the MPI processes. </p>
+<p>Distribute a 1D index range over the MPI processes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">global_domain</td><td>The domain to be distributed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">global_idx_range</td><td>The index range to be distributed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">comm_size</td><td>The number of processes over which the data should be disctributed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rank</td><td>The rank of the process within the current group of processes</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The distributed domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The distributed index range. </dd></dl>
 
 </div>
 </div>
-<a id="af1203bd95d42e52a26612b36265c0e0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1203bd95d42e52a26612b36265c0e0f">&#9670;&nbsp;</a></span>internal_distribute_domain() <span class="overload">[2/2]</span></h2>
+<a id="a95fcbbdda15d02011249c7d6e2848a5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95fcbbdda15d02011249c7d6e2848a5f">&#9670;&nbsp;</a></span>internal_distribute_idx_range() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Domain , class... DistributedDim&gt; </div>
+template&lt;class DataIdxRange , class... DistributedDim&gt; </div>
 <div class="memtemplate">
 template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) &gt; 0), bool &gt;  = true&gt; </div>
 <table class="mlabels">
@@ -319,10 +319,10 @@ template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::DiscreteDomain&lt;HeadTag, Tags...&gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; Domain, DistributedDim &gt;::internal_distribute_domain </td>
+          <td class="memname">IdxRange&lt;HeadTag, Tags...&gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; DataIdxRange, DistributedDim &gt;::internal_distribute_idx_range </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteDomain&lt; HeadTag, Tags... &gt;&#160;</td>
-          <td class="paramname"><em>domain</em>, </td>
+          <td class="paramtype">IdxRange&lt; HeadTag, Tags... &gt;&#160;</td>
+          <td class="paramname"><em>idx_range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -349,17 +349,17 @@ template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) 
 </table>
 </div><div class="memdoc">
 
-<p>Distribute the domain over the MPI processes. </p>
-<p>This function is called recursively. At each pass it distributes the domain over the first dimension in the discrete domain. The remaining dimensions and processes are then handled in the recursive call.</p>
+<p>Distribute the index range over the MPI processes. </p>
+<p>This function is called recursively. At each pass it distributes the index range over the first dimension in the discrete index range. The remaining dimensions and processes are then handled in the recursive call.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">domain</td><td>The domain to be distributed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range to be distributed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">comm_size</td><td>The number of processes over which the data should be disctributed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rank</td><td>The rank of the process within the current group of processes</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The distributed domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The distributed index range. </dd></dl>
 
 </div>
 </div>

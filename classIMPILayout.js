@@ -1,6 +1,6 @@
 var classIMPILayout =
 [
-    [ "discrete_domain_type", "classIMPILayout.html#acceaf34be6c816dcaf46dca49a8faa7c", null ],
-    [ "distributed_subdomain", "classIMPILayout.html#a3d350026b5917a79d2f591d7e9f75cc7", null ],
-    [ "distributed_type_seq", "classIMPILayout.html#a6f1fed9419bd39c864f56e72e19b9836", null ]
+    [ "discrete_domain_type", "classIMPILayout.html#a266f0c2842eb56ebedf2dade7980cab9", null ],
+    [ "distributed_sub_idx_range", "classIMPILayout.html#a880c5120b4d4e28a75c64556dea84473", null ],
+    [ "distributed_type_seq", "classIMPILayout.html#a101c87361eab7bcefda79b996d8a6f24", null ]
 ];

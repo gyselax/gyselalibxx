@@ -1,6 +1,6 @@
 var compute__norms_8hpp =
 [
-    [ "compute_L1_norm", "compute__norms_8hpp.html#ad1e96dccfff5164b483ed7292d3b281c", null ],
-    [ "compute_L2_norm", "compute__norms_8hpp.html#a7d903203798dcda36c5aa2061acd3ede", null ],
-    [ "compute_coeffs_on_mapping", "compute__norms_8hpp.html#a5a537a7bbe2916d26a2b34247a33a5ba", null ]
+    [ "compute_L1_norm", "compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671", null ],
+    [ "compute_L2_norm", "compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2", null ],
+    [ "compute_coeffs_on_mapping", "compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885", null ]
 ];

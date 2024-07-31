@@ -109,302 +109,315 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_helper.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;impitranspose.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;mpilayout.hpp&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;mpitools.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;transpose.hpp&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Layout1, <span class="keyword">class</span> Layout2&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMPITransposeAllToAll.html">MPITransposeAllToAll</a> : <span class="keyword">public</span> <a class="code" href="classIMPITranspose.html">IMPITranspose</a>&lt;Layout1, Layout2&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a79e53590f441ca58d5d54c4375c5e13d">   26</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classIMPITranspose.html#a912c97bf7c9d1a2e76c9506aca54dbf2">domain_type1</a> = <span class="keyword">typename</span> Layout1::discrete_domain_type;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a344e0857c0bbe773547de60a7c49f616">   28</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classIMPITranspose.html#a8a680fbc332d0bab2c21ebe69c834549">domain_type2</a> = <span class="keyword">typename</span> Layout2::discrete_domain_type;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#aa4c12002abf8daf3b9b4353d64d8475f">   30</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMPITransposeAllToAll.html#aa4c12002abf8daf3b9b4353d64d8475f">distributed_domain_type1</a> = <span class="keyword">typename</span> Layout1::distributed_subdomain;</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#adb5767e29ddcf1142f58f4c15a46d6e5">   32</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMPITransposeAllToAll.html#adb5767e29ddcf1142f58f4c15a46d6e5">distributed_domain_type2</a> = <span class="keyword">typename</span> Layout2::distributed_subdomain;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">   34</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">chunk_layout_type</a> = std::experimental::layout_right;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> layout_1_mpi_dims = ddcHelper::</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            apply_template_to_type_seq_t&lt;MPIDim, typename Layout1::distributed_type_seq&gt;;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">using</span> layout_2_mpi_dims = ddcHelper::</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            apply_template_to_type_seq_t&lt;MPIDim, typename Layout2::distributed_type_seq&gt;;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> layout_1_mpi_domain_type</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain&lt;layout_1_mpi_dims&gt;;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> layout_2_mpi_domain_type</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain&lt;layout_2_mpi_dims&gt;;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> m_comm_size;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    Layout1 m_layout_1;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    Layout2 m_layout_2;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classIMPITranspose.html#a912c97bf7c9d1a2e76c9506aca54dbf2">domain_type1</a> m_local_domain_1;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classIMPITranspose.html#a8a680fbc332d0bab2c21ebe69c834549">domain_type2</a> m_local_domain_2;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    layout_1_mpi_domain_type m_layout_1_mpi_domain;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    layout_2_mpi_domain_type m_layout_2_mpi_domain;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Domain&gt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#aa48df6ee8afabb990fa588b4c9dbcb12">   63</a></span>&#160;    <a class="code" href="classMPITransposeAllToAll.html#aa48df6ee8afabb990fa588b4c9dbcb12">MPITransposeAllToAll</a>(Domain global_domain, MPI_Comm comm)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        : <a class="code" href="classIMPITranspose.html">IMPITranspose</a>&lt;Layout1, Layout2&gt;(comm)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                std::is_same_v&lt;Domain, domain_type1&gt; || std::is_same_v&lt;Domain, domain_type2&gt;,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="stringliteral">&quot;The initialisation global domain should be described by one of the layouts&quot;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="classIMPITranspose.html#a912c97bf7c9d1a2e76c9506aca54dbf2">domain_type1</a> global_domain_layout_1(global_domain);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="classIMPITranspose.html#a8a680fbc332d0bab2c21ebe69c834549">domain_type2</a> global_domain_layout_2(global_domain);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">int</span> rank;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        MPI_Comm_size(comm, &amp;m_comm_size);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        MPI_Comm_rank(comm, &amp;rank);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="classMPITransposeAllToAll.html#aa4c12002abf8daf3b9b4353d64d8475f">distributed_domain_type1</a> distrib_domain(global_domain_layout_1);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">int</span> n_cores_max = distrib_domain.size();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        assert(m_comm_size &lt;= n_cores_max);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">int</span> n_elems = n_cores_max / m_comm_size;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">// Ensure that the load balancing is good</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        assert(n_cores_max - m_comm_size * n_elems == 0);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        m_local_domain_1 = m_layout_1.distribute_domain(global_domain_layout_1, m_comm_size, rank);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        m_local_domain_2 = m_layout_2.distribute_domain(global_domain_layout_2, m_comm_size, rank);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        m_layout_1_mpi_domain = get_distribution(</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#aa4c12002abf8daf3b9b4353d64d8475f">distributed_domain_type1</a>(m_local_domain_1),</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#aa4c12002abf8daf3b9b4353d64d8475f">distributed_domain_type1</a>(global_domain_layout_1));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        m_layout_2_mpi_domain = get_distribution(</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#adb5767e29ddcf1142f58f4c15a46d6e5">distributed_domain_type2</a>(m_local_domain_2),</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#adb5767e29ddcf1142f58f4c15a46d6e5">distributed_domain_type2</a>(global_domain_layout_2));</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Layout&gt;</div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a4c7a0e72939bec4657802a4f3e785e98">   98</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="classMPITransposeAllToAll.html#a4c7a0e72939bec4657802a4f3e785e98">get_local_domain</a>()</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                std::is_same_v&lt;Layout, Layout1&gt; || std::is_same_v&lt;Layout, Layout2&gt;,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="stringliteral">&quot;Transpose class does not handle requested layout&quot;</span>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;Layout, Layout1&gt;) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">return</span> m_local_domain_1;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;Layout, Layout2&gt;) {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordflow">return</span> m_local_domain_2;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> InDomain, <span class="keyword">class</span> OutDomain, <span class="keyword">class</span> MemSpace, <span class="keyword">class</span> ExecSpace&gt;</div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a41dd5bb23e38e545128f15134ff8259f">  124</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#a41dd5bb23e38e545128f15134ff8259f">operator()</a>(</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            ddc::ChunkSpan&lt;ElementType, OutDomain, chunk_layout_type, MemSpace&gt; recv_span,</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            ddc::ChunkView&lt;ElementType, InDomain, chunk_layout_type, MemSpace&gt; send_span)</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        static_assert(!std::is_same_v&lt;InDomain, OutDomain&gt;);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                (std::is_same_v&lt;InDomain, typename Layout1::discrete_domain_type&gt;)</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                || (std::is_same_v&lt;InDomain, typename Layout2::discrete_domain_type&gt;));</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                (std::is_same_v&lt;OutDomain, typename Layout1::discrete_domain_type&gt;)</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                || (std::is_same_v&lt;OutDomain, typename Layout2::discrete_domain_type&gt;));</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keyword">using</span> InLayout = std::conditional_t&lt;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                std::is_same_v&lt;InDomain, typename Layout1::discrete_domain_type&gt;,</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                Layout1,</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                Layout2&gt;;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keyword">using</span> OutLayout = std::conditional_t&lt;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                std::is_same_v&lt;OutDomain, typename Layout1::discrete_domain_type&gt;,</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                Layout1,</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                Layout2&gt;;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        this-&gt;transpose_to&lt;OutLayout&gt;(execution_space, recv_span, send_span);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OutLayout, <span class="keyword">class</span> ElementType, <span class="keyword">class</span> MemSpace, <span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> InDomain&gt;</div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#af50b3849e61a7fec150afecbe776d174">  163</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#af50b3849e61a7fec150afecbe776d174">transpose_to</a>(</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    ElementType,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                    <span class="keyword">typename</span> OutLayout::discrete_domain_type,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    <a class="code" href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">chunk_layout_type</a>,</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    MemSpace&gt; recv_span,</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            ddc::ChunkView&lt;ElementType, InDomain, chunk_layout_type, MemSpace&gt; send_span)</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keyword">using</span> InLayout = std::conditional_t&lt;std::is_same_v&lt;OutLayout, Layout1&gt;, Layout2, Layout1&gt;;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">        /*****************************************************************</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">         * Validate input</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">         *****************************************************************/</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        static_assert((std::is_same_v&lt;InLayout, Layout1&gt;) || (std::is_same_v&lt;InLayout, Layout2&gt;));</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        static_assert((std::is_same_v&lt;OutLayout, Layout1&gt;) || (std::is_same_v&lt;OutLayout, Layout2&gt;));</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        static_assert(Kokkos::SpaceAccessibility&lt;ExecSpace, MemSpace&gt;::accessible);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        static_assert(std::is_same_v&lt;InDomain, typename InLayout::discrete_domain_type&gt;);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keyword">using</span> OutDomain = <span class="keyword">typename</span> OutLayout::discrete_domain_type;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">        /*****************************************************************</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">         * Define groups of tags to build necessary transform</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">         *****************************************************************/</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="comment">// Currently distributed dims will be gathered</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keyword">using</span> dims_to_gather = <span class="keyword">typename</span> InLayout::distributed_type_seq;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="comment">// Future distributed dims must be scattered</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keyword">using</span> dims_to_scatter = <span class="keyword">typename</span> OutLayout::distributed_type_seq;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="comment">// Get MPI tags (e.g. MPI&lt;DimX&gt; indicates where DimX will be gathered from)</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keyword">using</span> gather_mpi_dims = ddcHelper::</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                apply_template_to_type_seq_t&lt;MPIDim, typename InLayout::distributed_type_seq&gt;;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keyword">using</span> scatter_mpi_dims = ddcHelper::</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                apply_template_to_type_seq_t&lt;MPIDim, typename OutLayout::distributed_type_seq&gt;;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="comment">// Get complete set of tags from domains</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keyword">using</span> input_ordered_dims = ddc::to_type_seq_t&lt;InDomain&gt;;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keyword">using</span> output_ordered_dims = ddc::to_type_seq_t&lt;OutDomain&gt;;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="comment">// Find tags that are neither scattered nor gathered</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keyword">using</span> batch_dims = ddc::type_seq_remove_t&lt;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                ddc::type_seq_remove_t&lt;input_ordered_dims, dims_to_scatter&gt;,</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                dims_to_gather&gt;;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="comment">// Insert the MPI tags into the received data to introduce the dimension split</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keyword">using</span> input_mpi_domain_tags</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                = insert_mpi_tags_into_seq_t&lt;scatter_mpi_dims, input_ordered_dims&gt;;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keyword">using</span> output_mpi_domain_tags</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                = insert_mpi_tags_into_seq_t&lt;gather_mpi_dims, output_ordered_dims&gt;;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="comment">// During the alltoall call the MPI tags must be first to correctly send/receive data</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="comment">// but data does not reorder itself</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keyword">using</span> input_alltoall_dim_order</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                = ddc::type_seq_merge_t&lt;scatter_mpi_dims, input_ordered_dims&gt;;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keyword">using</span> output_alltoall_dim_order</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                = ddc::type_seq_merge_t&lt;gather_mpi_dims, input_ordered_dims&gt;;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">        /*****************************************************************</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">         * Define useful domain types</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">         *****************************************************************/</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="comment">// Get the domains of objects which are distributed across processes</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keyword">using</span> gather_domain_type = <span class="keyword">typename</span> InLayout::distributed_subdomain;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="comment">// Get the domains of objects which will be distributed across processes</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keyword">using</span> scatter_domain_type = <span class="keyword">typename</span> OutLayout::distributed_subdomain;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="comment">// Get the domain of objects that are not distributed across processes</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keyword">using</span> batch_domain_type = ddc::detail::convert_type_seq_to_discrete_domain&lt;batch_dims&gt;;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keyword">using</span> gather_mpi_domain_type</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;gather_mpi_dims&gt;;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keyword">using</span> scatter_mpi_domain_type</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;scatter_mpi_dims&gt;;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="comment">// Get the domain containing MPI tags which can be used to describe the function input</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="keyword">using</span> input_mpi_domain_type</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;input_mpi_domain_tags&gt;;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="comment">// Get the domain containing MPI tags which can be used to describe the function output</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">using</span> output_mpi_domain_type</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;output_mpi_domain_tags&gt;;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="comment">// Get the domain that should be used when scattering data</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keyword">using</span> input_alltoall_domain_type</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;input_alltoall_dim_order&gt;;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="comment">// Get the domain that should be used when gathering data</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keyword">using</span> output_alltoall_domain_type</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;output_alltoall_dim_order&gt;;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">        /*****************************************************************</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">         * Build domains</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">         *****************************************************************/</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="comment">// Collect the artificial dimension describing the MPI rank where the scattered information</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">// will be sent to or where the gathered information will be collected from</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        gather_mpi_domain_type gather_mpi_domain;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        scatter_mpi_domain_type scatter_mpi_domain;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;InLayout, Layout1&gt;) {</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            gather_mpi_domain = m_layout_1_mpi_domain;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            scatter_mpi_domain = m_layout_2_mpi_domain;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            gather_mpi_domain = m_layout_2_mpi_domain;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            scatter_mpi_domain = m_layout_1_mpi_domain;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="comment">// Collect the useful subdomains described in the fields</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        batch_domain_type batch_domain(send_span.domain());</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        scatter_domain_type scatter_domain(recv_span.domain());</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        gather_domain_type gather_domain(send_span.domain());</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="comment">// Build the domains describing the function inputs but including the MPI rank information</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        input_mpi_domain_type</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                input_mpi_domain(scatter_mpi_domain, scatter_domain, gather_domain, batch_domain);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        output_mpi_domain_type</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                output_mpi_domain(gather_mpi_domain, scatter_domain, gather_domain, batch_domain);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        assert(input_mpi_domain.size() == send_span.size());</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        assert(output_mpi_domain.size() == recv_span.size());</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="comment">// Create the domains used during the alltoall call (the MPI rank domain is first in this layout)</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        input_alltoall_domain_type input_alltoall_domain(input_mpi_domain);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        output_alltoall_domain_type output_alltoall_domain(output_mpi_domain);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">        /*****************************************************************</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">         * Create views on the function inputs with the domains including the MPI rank information</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">         *****************************************************************/</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        ddc::ChunkView&lt;ElementType, input_mpi_domain_type, chunk_layout_type, MemSpace&gt;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                send_mpi_span(send_span.data_handle(), input_mpi_domain);</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        ddc::ChunkSpan&lt;ElementType, output_mpi_domain_type, chunk_layout_type, MemSpace&gt;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                recv_mpi_span(recv_span.data_handle(), output_mpi_domain);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">        /*****************************************************************</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">         * Transpose data (both on the rank and between ranks)</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">         *****************************************************************/</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="comment">// Create views or copies of the function inputs such that they are laid out on the</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="comment">// domain used during the alltoall call</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keyword">auto</span> alltoall_send_buffer = ddcHelper::create_transpose_mirror_view_and_copy&lt;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                input_alltoall_domain_type&gt;(execution_space, send_mpi_span);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keyword">auto</span> alltoall_recv_buffer = ddcHelper::create_transpose_mirror&lt;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                output_alltoall_domain_type&gt;(execution_space, recv_mpi_span);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="comment">// Call the MPI AlltoAll routine</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        call_all_to_all(</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                execution_space,</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                alltoall_recv_buffer.span_view(),</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                alltoall_send_buffer.span_cview());</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="comment">// If alltoall_recv_buffer owns its data (not a view) then copy the results back to</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="comment">// recv_mpi_span which is a view on recv_span, the function output</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(alltoall_recv_buffer)&gt;) {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            transpose_layout(execution_space, recv_mpi_span, alltoall_recv_buffer.span_cview());</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        }</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keyword">template</span> &lt;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            <span class="keyword">class </span>ElementType,</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keyword">class </span>MPIRecvDomain,</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            <span class="keyword">class </span>MPISendDomain,</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="keyword">class </span>MemSpace,</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keyword">class </span>ExecSpace&gt;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordtype">void</span> call_all_to_all(</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            ddc::ChunkSpan&lt;ElementType, MPIRecvDomain, chunk_layout_type, MemSpace&gt; recv_span,</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            ddc::ChunkView&lt;ElementType, MPISendDomain, chunk_layout_type, MemSpace&gt; send_span)</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    {</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="comment">// No Cuda-aware MPI yet</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keyword">auto</span> send_buffer = ddc::create_mirror_view_and_copy(send_span);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keyword">auto</span> recv_buffer = ddc::create_mirror_view(recv_span);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        MPI_Alltoall(</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                send_buffer.data_handle(),</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                send_buffer.size() / m_comm_size,</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                recv_buffer.data_handle(),</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                recv_buffer.size() / m_comm_size,</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <a class="code" href="classIMPITranspose.html">IMPITranspose&lt;Layout1, Layout2&gt;::m_comm</a>);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(recv_buffer)&gt;) {</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            ddc::parallel_deepcopy(execution_space, recv_span, recv_buffer);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        }</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... DistributedDims&gt;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    ddc::DiscreteDomain&lt;MPIDim&lt;DistributedDims&gt;...&gt; get_distribution(</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            ddc::DiscreteDomain&lt;DistributedDims...&gt; local_domain,</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            ddc::DiscreteDomain&lt;DistributedDims...&gt; global_domain)</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    {</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        ddc::DiscreteElement&lt;MPIDim&lt;DistributedDims&gt;...&gt; start(</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                ddc::DiscreteElement&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {0}...);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        ddc::DiscreteVector&lt;MPIDim&lt;DistributedDims&gt;...&gt; size(</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                ddc::DiscreteVector&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                        ddc::select&lt;DistributedDims&gt;(global_domain).size()</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                        / ddc::select&lt;DistributedDims&gt;(local_domain).size()}...);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">return</span> ddc::DiscreteDomain&lt;MPIDim&lt;DistributedDims&gt;...&gt;(start, size);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    }</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;};</div>
-<div class="ttc" id="aclassIMPITranspose_html"><div class="ttname"><a href="classIMPITranspose.html">IMPITranspose</a></div><div class="ttdoc">A superclass describing an operator for converting from/to different MPI layouts.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:13</div></div>
-<div class="ttc" id="aclassIMPITranspose_html_a8a680fbc332d0bab2c21ebe69c834549"><div class="ttname"><a href="classIMPITranspose.html#a8a680fbc332d0bab2c21ebe69c834549">IMPITranspose::domain_type2</a></div><div class="ttdeci">typename Layout2::discrete_domain_type domain_type2</div><div class="ttdoc">The type of the domain of the second MPI layout.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:22</div></div>
-<div class="ttc" id="aclassIMPITranspose_html_a912c97bf7c9d1a2e76c9506aca54dbf2"><div class="ttname"><a href="classIMPITranspose.html#a912c97bf7c9d1a2e76c9506aca54dbf2">IMPITranspose::domain_type1</a></div><div class="ttdeci">typename Layout1::discrete_domain_type domain_type1</div><div class="ttdoc">The type of the domain of the first MPI layout.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:20</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html"><div class="ttname"><a href="classMPITransposeAllToAll.html">MPITransposeAllToAll</a></div><div class="ttdoc">A class describing an operator for converting from/to different MPI layouts using AlltoAll.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:23</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_a41dd5bb23e38e545128f15134ff8259f"><div class="ttname"><a href="classMPITransposeAllToAll.html#a41dd5bb23e38e545128f15134ff8259f">MPITransposeAllToAll::operator()</a></div><div class="ttdeci">void operator()(ExecSpace const &amp;execution_space, ddc::ChunkSpan&lt; ElementType, OutDomain, chunk_layout_type, MemSpace &gt; recv_span, ddc::ChunkView&lt; ElementType, InDomain, chunk_layout_type, MemSpace &gt; send_span)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:124</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_a4c7a0e72939bec4657802a4f3e785e98"><div class="ttname"><a href="classMPITransposeAllToAll.html#a4c7a0e72939bec4657802a4f3e785e98">MPITransposeAllToAll::get_local_domain</a></div><div class="ttdeci">auto get_local_domain()</div><div class="ttdoc">Getter for the local domain.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:98</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_aa48df6ee8afabb990fa588b4c9dbcb12"><div class="ttname"><a href="classMPITransposeAllToAll.html#aa48df6ee8afabb990fa588b4c9dbcb12">MPITransposeAllToAll::MPITransposeAllToAll</a></div><div class="ttdeci">MPITransposeAllToAll(Domain global_domain, MPI_Comm comm)</div><div class="ttdoc">A constructor for the transpose operator.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:63</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_aa4c12002abf8daf3b9b4353d64d8475f"><div class="ttname"><a href="classMPITransposeAllToAll.html#aa4c12002abf8daf3b9b4353d64d8475f">MPITransposeAllToAll::distributed_domain_type1</a></div><div class="ttdeci">typename Layout1::distributed_subdomain distributed_domain_type1</div><div class="ttdoc">The type of the domain of the first MPI layout.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:30</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_ab84341546f8a48c7337fadae5a080b1a"><div class="ttname"><a href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">MPITransposeAllToAll::chunk_layout_type</a></div><div class="ttdeci">std::experimental::layout_right chunk_layout_type</div><div class="ttdoc">The way in which data should be laid out in memory on Chunks being transposed.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:34</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_adb5767e29ddcf1142f58f4c15a46d6e5"><div class="ttname"><a href="classMPITransposeAllToAll.html#adb5767e29ddcf1142f58f4c15a46d6e5">MPITransposeAllToAll::distributed_domain_type2</a></div><div class="ttdeci">typename Layout2::distributed_subdomain distributed_domain_type2</div><div class="ttdoc">The type of the domain of the second MPI layout.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:32</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_af50b3849e61a7fec150afecbe776d174"><div class="ttname"><a href="classMPITransposeAllToAll.html#af50b3849e61a7fec150afecbe776d174">MPITransposeAllToAll::transpose_to</a></div><div class="ttdeci">void transpose_to(ExecSpace const &amp;execution_space, ddc::ChunkSpan&lt; ElementType, typename OutLayout::discrete_domain_type, chunk_layout_type, MemSpace &gt; recv_span, ddc::ChunkView&lt; ElementType, InDomain, chunk_layout_type, MemSpace &gt; send_span)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:163</div></div>
-<div class="ttc" id="astructMPIDim_html"><div class="ttname"><a href="structMPIDim.html">MPIDim</a></div><div class="ttdoc">An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...</div><div class="ttdef"><b>Definition:</b> mpitools.hpp:12</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_helper.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;impitranspose.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;mpilayout.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;mpitools.hpp&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;transpose.hpp&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Layout1, <span class="keyword">class</span> Layout2&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMPITransposeAllToAll.html">MPITransposeAllToAll</a> : <span class="keyword">public</span> <a class="code" href="classIMPITranspose.html">IMPITranspose</a>&lt;Layout1, Layout2&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#aaaab817292b16b7950c336c245618f35">   27</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9">idx_range_type1</a> = <span class="keyword">typename</span> Layout1::discrete_domain_type;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#af9426bfbb72332bf45cfff384863ce21">   29</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classIMPITranspose.html#af0c568eecf467ecb7e913c5b3fc04f99">idx_range_type2</a> = <span class="keyword">typename</span> Layout2::discrete_domain_type;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">   31</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">distributed_idx_range_type1</a> = <span class="keyword">typename</span> Layout1::distributed_sub_idx_range;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a">   33</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a">distributed_idx_range_type2</a> = <span class="keyword">typename</span> Layout2::distributed_sub_idx_range;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">   35</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">chunk_layout_type</a> = std::experimental::layout_right;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> layout_1_mpi_dims = ddcHelper::</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            apply_template_to_type_seq_t&lt;MPIDim, typename Layout1::distributed_type_seq&gt;;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> layout_2_mpi_dims = ddcHelper::</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            apply_template_to_type_seq_t&lt;MPIDim, typename Layout2::distributed_type_seq&gt;;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">using</span> layout_1_mpi_idx_range_type</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain&lt;layout_1_mpi_dims&gt;;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> layout_2_mpi_idx_range_type</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain&lt;layout_2_mpi_dims&gt;;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> m_comm_size;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    Layout1 m_layout_1;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    Layout2 m_layout_2;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9">idx_range_type1</a> m_local_idx_range_1;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classIMPITranspose.html#af0c568eecf467ecb7e913c5b3fc04f99">idx_range_type2</a> m_local_idx_range_2;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    layout_1_mpi_idx_range_type m_layout_1_mpi_idx_range;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    layout_2_mpi_idx_range_type m_layout_2_mpi_idx_range;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a1c663a83e6a7b770ef8d764d877d4deb">   64</a></span>&#160;    <a class="code" href="classMPITransposeAllToAll.html#a1c663a83e6a7b770ef8d764d877d4deb">MPITransposeAllToAll</a>(IdxRange global_idx_range, MPI_Comm comm)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        : <a class="code" href="classIMPITranspose.html">IMPITranspose</a>&lt;Layout1, Layout2&gt;(comm)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                std::is_same_v&lt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        IdxRange,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        <a class="code" href="classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9">idx_range_type1</a>&gt; || std::is_same_v&lt;IdxRange, idx_range_type2&gt;,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="stringliteral">&quot;The initialisation global idx_range should be described by one of the layouts&quot;</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9">idx_range_type1</a> global_idx_range_layout_1(global_idx_range);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="classIMPITranspose.html#af0c568eecf467ecb7e913c5b3fc04f99">idx_range_type2</a> global_idx_range_layout_2(global_idx_range);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">int</span> rank;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        MPI_Comm_size(comm, &amp;m_comm_size);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        MPI_Comm_rank(comm, &amp;rank);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">distributed_idx_range_type1</a> distrib_idx_range(global_idx_range_layout_1);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">int</span> n_cores_max = distrib_idx_range.size();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        assert(m_comm_size &lt;= n_cores_max);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">int</span> n_elems = n_cores_max / m_comm_size;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="comment">// Ensure that the load balancing is good</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        assert(n_cores_max - m_comm_size * n_elems == 0);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        m_local_idx_range_1</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        m_local_idx_range_2</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                = m_layout_2.distribute_idx_range(global_idx_range_layout_2, m_comm_size, rank);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        m_layout_1_mpi_idx_range = get_distribution(</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">distributed_idx_range_type1</a>(m_local_idx_range_1),</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">distributed_idx_range_type1</a>(global_idx_range_layout_1));</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        m_layout_2_mpi_idx_range = get_distribution(</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a">distributed_idx_range_type2</a>(m_local_idx_range_2),</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <a class="code" href="classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a">distributed_idx_range_type2</a>(global_idx_range_layout_2));</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Layout&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8">  103</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8">get_local_idx_range</a>()</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                std::is_same_v&lt;Layout, Layout1&gt; || std::is_same_v&lt;Layout, Layout2&gt;,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="stringliteral">&quot;Transpose class does not handle requested layout&quot;</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;Layout, Layout1&gt;) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">return</span> m_local_idx_range_1;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;Layout, Layout2&gt;) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">return</span> m_local_idx_range_2;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">template</span> &lt;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keyword">class </span>ElementType,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keyword">class </span>InIdxRange,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keyword">class </span>OutIdxRange,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keyword">class </span>MemSpace,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keyword">class </span>ExecSpace&gt;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#aa17e06ef2bf66529ad287e800ddb033e">  134</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#aa17e06ef2bf66529ad287e800ddb033e">operator()</a>(</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            Field&lt;ElementType, OutIdxRange, chunk_layout_type, MemSpace&gt; recv_span,</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            ConstField&lt;ElementType, InIdxRange, chunk_layout_type, MemSpace&gt; send_span)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        static_assert(!std::is_same_v&lt;InIdxRange, OutIdxRange&gt;);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                (std::is_same_v&lt;InIdxRange, typename Layout1::discrete_domain_type&gt;)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                || (std::is_same_v&lt;InIdxRange, typename Layout2::discrete_domain_type&gt;));</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                (std::is_same_v&lt;OutIdxRange, typename Layout1::discrete_domain_type&gt;)</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                || (std::is_same_v&lt;OutIdxRange, typename Layout2::discrete_domain_type&gt;));</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keyword">using</span> InLayout = std::conditional_t&lt;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                std::is_same_v&lt;InIdxRange, typename Layout1::discrete_domain_type&gt;,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                Layout1,</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                Layout2&gt;;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">using</span> OutLayout = std::conditional_t&lt;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                std::is_same_v&lt;OutIdxRange, typename Layout1::discrete_domain_type&gt;,</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                Layout1,</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                Layout2&gt;;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        this-&gt;transpose_to&lt;OutLayout&gt;(execution_space, recv_span, send_span);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OutLayout, <span class="keyword">class</span> ElementType, <span class="keyword">class</span> MemSpace, <span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> InIdxRange&gt;</div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a2b7973788d3104bf783ebd0964e1248c">  173</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#a2b7973788d3104bf783ebd0964e1248c">transpose_to</a>(</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            Field&lt;ElementType,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                  <span class="keyword">typename</span> OutLayout::discrete_domain_type,</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                  <a class="code" href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">chunk_layout_type</a>,</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                  MemSpace&gt; recv_span,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            ConstField&lt;ElementType, InIdxRange, chunk_layout_type, MemSpace&gt; send_span)</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keyword">using</span> InLayout = std::conditional_t&lt;std::is_same_v&lt;OutLayout, Layout1&gt;, Layout2, Layout1&gt;;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">        /*****************************************************************</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">         * Validate input</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">         *****************************************************************/</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        static_assert((std::is_same_v&lt;InLayout, Layout1&gt;) || (std::is_same_v&lt;InLayout, Layout2&gt;));</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        static_assert((std::is_same_v&lt;OutLayout, Layout1&gt;) || (std::is_same_v&lt;OutLayout, Layout2&gt;));</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        static_assert(Kokkos::SpaceAccessibility&lt;ExecSpace, MemSpace&gt;::accessible);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        static_assert(std::is_same_v&lt;InIdxRange, typename InLayout::discrete_domain_type&gt;);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keyword">using</span> OutIdxRange = <span class="keyword">typename</span> OutLayout::discrete_domain_type;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">        /*****************************************************************</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">         * Define groups of tags to build necessary transform</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">         *****************************************************************/</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="comment">// Currently distributed dims will be gathered</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keyword">using</span> dims_to_gather = <span class="keyword">typename</span> InLayout::distributed_type_seq;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="comment">// Future distributed dims must be scattered</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keyword">using</span> dims_to_scatter = <span class="keyword">typename</span> OutLayout::distributed_type_seq;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="comment">// Get MPI tags (e.g. MPI&lt;DimX&gt; indicates where DimX will be gathered from)</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keyword">using</span> gather_mpi_dims = ddcHelper::</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                apply_template_to_type_seq_t&lt;MPIDim, typename InLayout::distributed_type_seq&gt;;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keyword">using</span> scatter_mpi_dims = ddcHelper::</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                apply_template_to_type_seq_t&lt;MPIDim, typename OutLayout::distributed_type_seq&gt;;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="comment">// Get complete set of tags from index ranges</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keyword">using</span> input_ordered_dims = ddc::to_type_seq_t&lt;InIdxRange&gt;;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keyword">using</span> output_ordered_dims = ddc::to_type_seq_t&lt;OutIdxRange&gt;;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="comment">// Find tags that are neither scattered nor gathered</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keyword">using</span> batch_dims = ddc::type_seq_remove_t&lt;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                ddc::type_seq_remove_t&lt;input_ordered_dims, dims_to_scatter&gt;,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                dims_to_gather&gt;;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="comment">// Insert the MPI tags into the received data to introduce the dimension split</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keyword">using</span> input_mpi_idx_range_tags</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                = insert_mpi_tags_into_seq_t&lt;scatter_mpi_dims, input_ordered_dims&gt;;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keyword">using</span> output_mpi_idx_range_tags</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                = insert_mpi_tags_into_seq_t&lt;gather_mpi_dims, output_ordered_dims&gt;;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="comment">// During the alltoall call the MPI tags must be first to correctly send/receive data</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="comment">// but data does not reorder itself</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keyword">using</span> input_alltoall_dim_order</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                = ddc::type_seq_merge_t&lt;scatter_mpi_dims, input_ordered_dims&gt;;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keyword">using</span> output_alltoall_dim_order</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                = ddc::type_seq_merge_t&lt;gather_mpi_dims, input_ordered_dims&gt;;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">        /*****************************************************************</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">         * Define useful index range types</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">         *****************************************************************/</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="comment">// Get the index ranges of objects which are distributed across processes</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keyword">using</span> gather_idx_range_type = <span class="keyword">typename</span> InLayout::distributed_sub_idx_range;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">// Get the index ranges of objects which will be distributed across processes</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keyword">using</span> scatter_idx_range_type = <span class="keyword">typename</span> OutLayout::distributed_sub_idx_range;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="comment">// Get the index range of objects that are not distributed across processes</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">using</span> batch_idx_range_type = ddc::detail::convert_type_seq_to_discrete_domain&lt;batch_dims&gt;;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keyword">using</span> gather_mpi_idx_range_type</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;gather_mpi_dims&gt;;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keyword">using</span> scatter_mpi_idx_range_type</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;scatter_mpi_dims&gt;;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="comment">// Get the index range containing MPI tags which can be used to describe the function input</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keyword">using</span> input_mpi_idx_range_type</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;input_mpi_idx_range_tags&gt;;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="comment">// Get the index range containing MPI tags which can be used to describe the function output</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keyword">using</span> output_mpi_idx_range_type</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;output_mpi_idx_range_tags&gt;;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <span class="comment">// Get the index range that should be used when scattering data</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="keyword">using</span> input_alltoall_idx_range_type</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;input_alltoall_dim_order&gt;;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">// Get the index range that should be used when gathering data</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keyword">using</span> output_alltoall_idx_range_type</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;output_alltoall_dim_order&gt;;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">        /*****************************************************************</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">         * Build index ranges</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">         *****************************************************************/</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="comment">// Collect the artificial dimension describing the MPI rank where the scattered information</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="comment">// will be sent to or where the gathered information will be collected from</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        gather_mpi_idx_range_type gather_mpi_idx_range;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        scatter_mpi_idx_range_type scatter_mpi_idx_range;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;InLayout, Layout1&gt;) {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            gather_mpi_idx_range = m_layout_1_mpi_idx_range;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            scatter_mpi_idx_range = m_layout_2_mpi_idx_range;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            gather_mpi_idx_range = m_layout_2_mpi_idx_range;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            scatter_mpi_idx_range = m_layout_1_mpi_idx_range;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="comment">// Collect the useful subindex ranges described in the fields</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        batch_idx_range_type batch_idx_range(get_idx_range(send_span));</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        scatter_idx_range_type scatter_idx_range(get_idx_range(recv_span));</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        gather_idx_range_type gather_idx_range(get_idx_range(send_span));</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="comment">// Build the index ranges describing the function inputs but including the MPI rank information</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        input_mpi_idx_range_type input_mpi_idx_range(</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                scatter_mpi_idx_range,</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                scatter_idx_range,</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                gather_idx_range,</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                batch_idx_range);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        output_mpi_idx_range_type output_mpi_idx_range(</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                gather_mpi_idx_range,</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                scatter_idx_range,</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                gather_idx_range,</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                batch_idx_range);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        assert(input_mpi_idx_range.size() == send_span.size());</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        assert(output_mpi_idx_range.size() == recv_span.size());</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="comment">// Create the index ranges used during the alltoall call (the MPI rank index range is first in this layout)</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        input_alltoall_idx_range_type input_alltoall_idx_range(input_mpi_idx_range);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        output_alltoall_idx_range_type output_alltoall_idx_range(output_mpi_idx_range);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">        /*****************************************************************</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">         * Create views on the function inputs with the index ranges including the MPI rank information</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">         *****************************************************************/</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        ConstField&lt;ElementType, input_mpi_idx_range_type, chunk_layout_type, MemSpace&gt;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                send_mpi_span(send_span.data_handle(), input_mpi_idx_range);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        Field&lt;ElementType, output_mpi_idx_range_type, chunk_layout_type, MemSpace&gt;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                recv_mpi_span(recv_span.data_handle(), output_mpi_idx_range);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">        /*****************************************************************</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">         * Transpose data (both on the rank and between ranks)</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">         *****************************************************************/</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="comment">// Create views or copies of the function inputs such that they are laid out on the</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="comment">// index range used during the alltoall call</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keyword">auto</span> alltoall_send_buffer = ddcHelper::create_transpose_mirror_view_and_copy&lt;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                input_alltoall_idx_range_type&gt;(execution_space, send_mpi_span);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keyword">auto</span> alltoall_recv_buffer = ddcHelper::create_transpose_mirror&lt;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                output_alltoall_idx_range_type&gt;(execution_space, recv_mpi_span);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="comment">// Call the MPI AlltoAll routine</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        call_all_to_all(</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                execution_space,</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                get_field(alltoall_recv_buffer),</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                get_const_field(alltoall_send_buffer));</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="comment">// If alltoall_recv_buffer owns its data (not a view) then copy the results back to</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="comment">// recv_mpi_span which is a view on recv_span, the function output</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(alltoall_recv_buffer)&gt;) {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            transpose_layout(execution_space, recv_mpi_span, get_const_field(alltoall_recv_buffer));</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keyword">template</span> &lt;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            <span class="keyword">class </span>ElementType,</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="keyword">class </span>MPIRecvIdxRange,</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            <span class="keyword">class </span>MPISendIdxRange,</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            <span class="keyword">class </span>MemSpace,</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keyword">class </span>ExecSpace&gt;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordtype">void</span> call_all_to_all(</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            Field&lt;ElementType, MPIRecvIdxRange, chunk_layout_type, MemSpace&gt; recv_span,</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            ConstField&lt;ElementType, MPISendIdxRange, chunk_layout_type, MemSpace&gt; send_span)</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="comment">// No Cuda-aware MPI yet</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keyword">auto</span> send_buffer = ddc::create_mirror_view_and_copy(send_span);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keyword">auto</span> recv_buffer = ddc::create_mirror_view(recv_span);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        MPI_Alltoall(</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                send_buffer.data_handle(),</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                send_buffer.size() / m_comm_size,</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                recv_buffer.data_handle(),</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                recv_buffer.size() / m_comm_size,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                <a class="code" href="classIMPITranspose.html">IMPITranspose&lt;Layout1, Layout2&gt;::m_comm</a>);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(recv_buffer)&gt;) {</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            ddc::parallel_deepcopy(execution_space, recv_span, recv_buffer);</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    }</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... DistributedDims&gt;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    IdxRange&lt;MPIDim&lt;DistributedDims&gt;...&gt; get_distribution(</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            IdxRange&lt;DistributedDims...&gt; local_idx_range,</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            IdxRange&lt;DistributedDims...&gt; global_idx_range)</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        Idx&lt;MPIDim&lt;DistributedDims&gt;...&gt; start(Idx&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {0}...);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        IdxStep&lt;MPIDim&lt;DistributedDims&gt;...&gt; size(IdxStep&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                ddc::select&lt;DistributedDims&gt;(global_idx_range).size()</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                / ddc::select&lt;DistributedDims&gt;(local_idx_range).size()}...);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keywordflow">return</span> IdxRange&lt;MPIDim&lt;DistributedDims&gt;...&gt;(start, size);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    }</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;};</div>
+<div class="ttc" id="aclassIMPITranspose_html"><div class="ttname"><a href="classIMPITranspose.html">IMPITranspose</a></div><div class="ttdoc">A superclass describing an operator for converting from/to different MPI layouts.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:15</div></div>
+<div class="ttc" id="aclassIMPITranspose_html_a280d7345bbf2d4f849a36a49bc4643f9"><div class="ttname"><a href="classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9">IMPITranspose::idx_range_type1</a></div><div class="ttdeci">typename Layout1::discrete_domain_type idx_range_type1</div><div class="ttdoc">The type of the index range of the first MPI layout.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:22</div></div>
+<div class="ttc" id="aclassIMPITranspose_html_af0c568eecf467ecb7e913c5b3fc04f99"><div class="ttname"><a href="classIMPITranspose.html#af0c568eecf467ecb7e913c5b3fc04f99">IMPITranspose::idx_range_type2</a></div><div class="ttdeci">typename Layout2::discrete_domain_type idx_range_type2</div><div class="ttdoc">The type of the index range of the second MPI layout.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:24</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html"><div class="ttname"><a href="classMPITransposeAllToAll.html">MPITransposeAllToAll</a></div><div class="ttdoc">A class describing an operator for converting from/to different MPI layouts using AlltoAll.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:24</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_a1119f153697f8f23c1c382f70f208d4a"><div class="ttname"><a href="classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a">MPITransposeAllToAll::distributed_idx_range_type2</a></div><div class="ttdeci">typename Layout2::distributed_sub_idx_range distributed_idx_range_type2</div><div class="ttdoc">The type of the index range of the second MPI layout.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:33</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_a1c663a83e6a7b770ef8d764d877d4deb"><div class="ttname"><a href="classMPITransposeAllToAll.html#a1c663a83e6a7b770ef8d764d877d4deb">MPITransposeAllToAll::MPITransposeAllToAll</a></div><div class="ttdeci">MPITransposeAllToAll(IdxRange global_idx_range, MPI_Comm comm)</div><div class="ttdoc">A constructor for the transpose operator.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:64</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_a2b7973788d3104bf783ebd0964e1248c"><div class="ttname"><a href="classMPITransposeAllToAll.html#a2b7973788d3104bf783ebd0964e1248c">MPITransposeAllToAll::transpose_to</a></div><div class="ttdeci">void transpose_to(ExecSpace const &amp;execution_space, Field&lt; ElementType, typename OutLayout::discrete_domain_type, chunk_layout_type, MemSpace &gt; recv_span, ConstField&lt; ElementType, InIdxRange, chunk_layout_type, MemSpace &gt; send_span)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:173</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_a313e5b285bf71c5fdb45855e4ecd4573"><div class="ttname"><a href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">MPITransposeAllToAll::distributed_idx_range_type1</a></div><div class="ttdeci">typename Layout1::distributed_sub_idx_range distributed_idx_range_type1</div><div class="ttdoc">The type of the index range of the first MPI layout.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:31</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_a992524cf2f61b2ba1e199d108140aad8"><div class="ttname"><a href="classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8">MPITransposeAllToAll::get_local_idx_range</a></div><div class="ttdeci">auto get_local_idx_range()</div><div class="ttdoc">Getter for the local index range.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:103</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_aa17e06ef2bf66529ad287e800ddb033e"><div class="ttname"><a href="classMPITransposeAllToAll.html#aa17e06ef2bf66529ad287e800ddb033e">MPITransposeAllToAll::operator()</a></div><div class="ttdeci">void operator()(ExecSpace const &amp;execution_space, Field&lt; ElementType, OutIdxRange, chunk_layout_type, MemSpace &gt; recv_span, ConstField&lt; ElementType, InIdxRange, chunk_layout_type, MemSpace &gt; send_span)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:134</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_ab84341546f8a48c7337fadae5a080b1a"><div class="ttname"><a href="classMPITransposeAllToAll.html#ab84341546f8a48c7337fadae5a080b1a">MPITransposeAllToAll::chunk_layout_type</a></div><div class="ttdeci">std::experimental::layout_right chunk_layout_type</div><div class="ttdoc">The way in which data should be laid out in memory on Chunks being transposed.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:35</div></div>
+<div class="ttc" id="astructMPIDim_html"><div class="ttname"><a href="structMPIDim.html">MPIDim</a></div><div class="ttdoc">An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...</div><div class="ttdef"><b>Definition:</b> mpitools.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

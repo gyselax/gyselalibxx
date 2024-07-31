@@ -109,46 +109,47 @@ $(document).ready(function(){initNavTree('compute__norms_8hpp.html',''); initRes
 <p>File providing the L1 and the L2 norms.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;ddc/ddc.hpp&gt;</code><br />
+<code>#include &quot;ddc_aliases.hpp&quot;</code><br />
 <code>#include &quot;quadrature.hpp&quot;</code><br />
 </div>
 <p><a href="compute__norms_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad1e96dccfff5164b483ed7292d3b281c"><td class="memTemplParams" colspan="2">template&lt;class IDomain &gt; </td></tr>
-<tr class="memitem:ad1e96dccfff5164b483ed7292d3b281c"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#ad1e96dccfff5164b483ed7292d3b281c">compute_L1_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDomain &gt;&gt; quadrature, ddc::ChunkSpan&lt; double, IDomain &gt; function)</td></tr>
-<tr class="memdesc:ad1e96dccfff5164b483ed7292d3b281c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L1 norm of a function with a given quadrature.  <a href="compute__norms_8hpp.html#ad1e96dccfff5164b483ed7292d3b281c">More...</a><br /></td></tr>
-<tr class="separator:ad1e96dccfff5164b483ed7292d3b281c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d903203798dcda36c5aa2061acd3ede"><td class="memTemplParams" colspan="2">template&lt;class IDomain &gt; </td></tr>
-<tr class="memitem:a7d903203798dcda36c5aa2061acd3ede"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a7d903203798dcda36c5aa2061acd3ede">compute_L2_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDomain &gt;&gt; quadrature, ddc::ChunkSpan&lt; double, IDomain &gt; function)</td></tr>
-<tr class="memdesc:a7d903203798dcda36c5aa2061acd3ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L2 norm of a function with a given quadrature.  <a href="compute__norms_8hpp.html#a7d903203798dcda36c5aa2061acd3ede">More...</a><br /></td></tr>
-<tr class="separator:a7d903203798dcda36c5aa2061acd3ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a537a7bbe2916d26a2b34247a33a5ba"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class... IDim&gt; </td></tr>
-<tr class="memitem:a5a537a7bbe2916d26a2b34247a33a5ba"><td class="memTemplItemLeft" align="right" valign="top">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a5a537a7bbe2916d26a2b34247a33a5ba">compute_coeffs_on_mapping</a> (Mapping &amp;mapping, ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;coefficients)</td></tr>
-<tr class="memdesc:a5a537a7bbe2916d26a2b34247a33a5ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the Jacobian determinant to the coefficients.  <a href="compute__norms_8hpp.html#a5a537a7bbe2916d26a2b34247a33a5ba">More...</a><br /></td></tr>
-<tr class="separator:a5a537a7bbe2916d26a2b34247a33a5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8bd99a8afa015df12150b998bf5671"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:aac8bd99a8afa015df12150b998bf5671"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671">compute_L1_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt; function)</td></tr>
+<tr class="memdesc:aac8bd99a8afa015df12150b998bf5671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L1 norm of a function with a given quadrature.  <a href="compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671">More...</a><br /></td></tr>
+<tr class="separator:aac8bd99a8afa015df12150b998bf5671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab73e82e22113366c35b71e7ba8846bc2"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:ab73e82e22113366c35b71e7ba8846bc2"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2">compute_L2_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt; function)</td></tr>
+<tr class="memdesc:ab73e82e22113366c35b71e7ba8846bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L2 norm of a function with a given quadrature.  <a href="compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2">More...</a><br /></td></tr>
+<tr class="separator:ab73e82e22113366c35b71e7ba8846bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48ec4ccb869cbf8afd4c2c27e88b5885"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class... IDim&gt; </td></tr>
+<tr class="memitem:a48ec4ccb869cbf8afd4c2c27e88b5885"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; IDim... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">compute_coeffs_on_mapping</a> (Mapping &amp;mapping, FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::DefaultHostExecutionSpace::memory_space &gt;&gt; &amp;&amp;coefficients)</td></tr>
+<tr class="memdesc:a48ec4ccb869cbf8afd4c2c27e88b5885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the Jacobian determinant to the coefficients.  <a href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">More...</a><br /></td></tr>
+<tr class="separator:a48ec4ccb869cbf8afd4c2c27e88b5885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing the L1 and the L2 norms. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad1e96dccfff5164b483ed7292d3b281c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1e96dccfff5164b483ed7292d3b281c">&#9670;&nbsp;</a></span>compute_L1_norm()</h2>
+<a id="aac8bd99a8afa015df12150b998bf5671"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8bd99a8afa015df12150b998bf5671">&#9670;&nbsp;</a></span>compute_L1_norm()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDomain &gt; </div>
+template&lt;class IdxRange &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">double compute_L1_norm </td>
           <td>(</td>
-          <td class="paramtype">host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDomain &gt;&gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt;&gt;&#160;</td>
           <td class="paramname"><em>quadrature</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, IDomain &gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt;&#160;</td>
           <td class="paramname"><em>function</em>&#160;</td>
         </tr>
         <tr>
@@ -172,24 +173,24 @@ template&lt;class IDomain &gt; </div>
 
 </div>
 </div>
-<a id="a7d903203798dcda36c5aa2061acd3ede"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d903203798dcda36c5aa2061acd3ede">&#9670;&nbsp;</a></span>compute_L2_norm()</h2>
+<a id="ab73e82e22113366c35b71e7ba8846bc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab73e82e22113366c35b71e7ba8846bc2">&#9670;&nbsp;</a></span>compute_L2_norm()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class IDomain &gt; </div>
+template&lt;class IdxRange &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">double compute_L2_norm </td>
           <td>(</td>
-          <td class="paramtype">host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IDomain &gt;&gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt;&gt;&#160;</td>
           <td class="paramname"><em>quadrature</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, IDomain &gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt;&#160;</td>
           <td class="paramname"><em>function</em>&#160;</td>
         </tr>
         <tr>
@@ -213,8 +214,8 @@ template&lt;class IDomain &gt; </div>
 
 </div>
 </div>
-<a id="a5a537a7bbe2916d26a2b34247a33a5ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a537a7bbe2916d26a2b34247a33a5ba">&#9670;&nbsp;</a></span>compute_coeffs_on_mapping()</h2>
+<a id="a48ec4ccb869cbf8afd4c2c27e88b5885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ec4ccb869cbf8afd4c2c27e88b5885">&#9670;&nbsp;</a></span>compute_coeffs_on_mapping()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,7 +223,7 @@ template&lt;class IDomain &gt; </div>
 template&lt;class Mapping , class... IDim&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDim...&gt; &gt; compute_coeffs_on_mapping </td>
+          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;IDim...&gt; &gt; &gt; compute_coeffs_on_mapping </td>
           <td>(</td>
           <td class="paramtype">Mapping &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
@@ -230,7 +231,7 @@ template&lt;class Mapping , class... IDim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::Chunk&lt; double, ddc::DiscreteDomain&lt; IDim... &gt;&gt; &amp;&amp;&#160;</td>
+          <td class="paramtype">FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::DefaultHostExecutionSpace::memory_space &gt;&gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>coefficients</em>&#160;</td>
         </tr>
         <tr>
@@ -251,7 +252,7 @@ template&lt;class Mapping , class... IDim&gt; </div>
 <p>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object can only be instantiate with rvalues.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical domain \( (r,\theta) \) to the physical domain \( (x, y) \). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical index range \( (r,\theta) \) to the physical index range \( (x, y) \). </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">coefficients</td><td>The quadrature coefficients \(\{q_{ij}\}_{ij} \).</td></tr>
   </table>
   </dd>

@@ -1,9 +1,9 @@
 var classMPILayout =
 [
-    [ "discrete_domain_type", "classMPILayout.html#ab139ceb925baafae1930225cf207b117", null ],
-    [ "distributed_subdomain", "classMPILayout.html#a006e44e1633555cf765ff894e171ec11", null ],
-    [ "distributed_type_seq", "classMPILayout.html#a3bc625299be668523617d7e7e297b194", null ],
-    [ "distribute_domain", "classMPILayout.html#afd766e106aeaac4a5af75593ee8a63ff", null ],
-    [ "internal_distribute_domain", "classMPILayout.html#ac2d6f37438614b72970f412b01cf1511", null ],
-    [ "internal_distribute_domain", "classMPILayout.html#af1203bd95d42e52a26612b36265c0e0f", null ]
+    [ "idx_range_type", "classMPILayout.html#a4b457ff7c43f225f88c04bb57d8b48c5", null ],
+    [ "distributed_sub_idx_range", "classMPILayout.html#a5883d6c267edba25da7370986eb15720", null ],
+    [ "distributed_type_seq", "classMPILayout.html#ab4f189220fff2a19af86cfcf8132419e", null ],
+    [ "distribute_idx_range", "classMPILayout.html#ac4ea3f401285e400bfae8a1b963abb56", null ],
+    [ "internal_distribute_idx_range", "classMPILayout.html#a805e67a98b1dc70a79c9a321a0dd7adc", null ],
+    [ "internal_distribute_idx_range", "classMPILayout.html#a95fcbbdda15d02011249c7d6e2848a5f", null ]
 ];
