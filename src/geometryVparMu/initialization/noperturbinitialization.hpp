@@ -12,14 +12,14 @@
 /// Initialization operator with no perturbation, i.e the distribution function equal to the Maxwellian
 class NoPerturbInitialization : public IInitialization
 {
-    DViewSpVparMu m_fequilibrium;
+    DConstFieldSpVparMu m_fequilibrium;
 
 public:
     /**
      * @brief Creates an instance of the NoPerturbInitialization class.
      * @param[in] fequilibrium A Maxwellian. 
      */
-    NoPerturbInitialization(DViewSpVparMu fequilibrium);
+    NoPerturbInitialization(DConstFieldSpVparMu fequilibrium);
 
     ~NoPerturbInitialization() override = default;
 
@@ -28,5 +28,5 @@ public:
      * @param[in, out] allfdistribu The initialized distribution function.
      * @return The initialized distribution function.
      */
-    DSpanSpVparMu operator()(DSpanSpVparMu allfdistribu) const override;
+    DFieldSpVparMu operator()(DFieldSpVparMu allfdistribu) const override;
 };
