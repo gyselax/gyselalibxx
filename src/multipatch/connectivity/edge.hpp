@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
+
+#include "ddc_aliases.hpp"
 
 
 enum Extremity { FRONT, BACK };
@@ -12,7 +13,7 @@ enum Extremity { FRONT, BACK };
  * @brief Define an edge of a given patch.
  * 
  * An edge is defined by a patch, a dimension and an extremity.
- * For example, in the patch defined on logical domain 
+ * For example, in the patch defined on logical index range 
  * @f$ [a_x, b_x]\times[a_y, b_y] @f$, 
  * 
  * * the edge IDimX, BACK refers to the set @f$ [a_x, b_x]\times\{b_y\} @f$, 
@@ -35,10 +36,10 @@ struct Edge
 
 
 /**
- * @brief Define an edge for the outside domain.
- * OutsideEdge is a pseudo-edge outside the domain
+ * @brief Define an edge for the outside index range.
+ * OutsideEdge is a pseudo-edge outside the index range
  * used to define interfaces between patches and the 
- * outside domaine. 
+ * outside index range.
 */
 struct OutsideEdge
 {

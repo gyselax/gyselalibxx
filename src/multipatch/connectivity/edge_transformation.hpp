@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 
 #include <ddc_helper.hpp>
 
+#include "ddc_aliases.hpp"
 #include "interface.hpp"
 
 /**
@@ -35,8 +35,8 @@ class EdgeTransformation
     using Patch1 = typename Interface::Patch1;
     using Patch2 = typename Interface::Patch2;
 
-    using IdxRangeEdge1 = ddc::DiscreteDomain<EdgeGrid1>;
-    using IdxRangeEdge2 = ddc::DiscreteDomain<EdgeGrid2>;
+    using IdxRangeEdge1 = IdxRange<EdgeGrid1>;
+    using IdxRangeEdge2 = IdxRange<EdgeGrid2>;
 
     IdxRangeEdge1 const& m_idx_range_patch_1;
     IdxRangeEdge2 const& m_idx_range_patch_2;
@@ -70,9 +70,8 @@ public:
      * @return The analogous coordinate on the target patch. 
     */
     template <class CurrentDim>
-    ddc::Coordinate<
-            std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>> const
-    operator()(ddc::Coordinate<CurrentDim> const& current_coord) const
+    Coord<std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>> const
+    operator()(Coord<CurrentDim> const& current_coord) const
     {
         // The other continuous dimension
         using ODim = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>;
@@ -84,19 +83,16 @@ public:
         using OIdxRange = std::
                 conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, IdxRangeEdge2, IdxRangeEdge1>;
 
-        // Get min and length on each 1D domains:
+        // Get min and length on each 1D index ranges:
         CurrentIdxRange const current_idx_range(
-                ddc::DiscreteDomain<
-                        EdgeGrid1,
-                        EdgeGrid2>(m_idx_range_patch_1, m_idx_range_patch_2));
-        OIdxRange const target_idx_range(ddc::DiscreteDomain<
-                                         EdgeGrid1,
-                                         EdgeGrid2>(m_idx_range_patch_1, m_idx_range_patch_2));
+                IdxRange<EdgeGrid1, EdgeGrid2>(m_idx_range_patch_1, m_idx_range_patch_2));
+        OIdxRange const target_idx_range(
+                IdxRange<EdgeGrid1, EdgeGrid2>(m_idx_range_patch_1, m_idx_range_patch_2));
 
-        ddc::Coordinate<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
+        Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
         double const current_length = ddcHelper::total_interval_length(current_idx_range);
 
-        ddc::Coordinate<ODim> const target_min = ddc::coordinate(target_idx_range.front());
+        Coord<ODim> const target_min = ddc::coordinate(target_idx_range.front());
         double const target_length = ddcHelper::total_interval_length(target_idx_range);
 
         double rescale_x = (current_coord - current_min) / current_length * target_length;
@@ -105,6 +101,6 @@ public:
         if constexpr (!orientations_agree) {
             rescale_x = target_length - rescale_x;
         }
-        return target_min + rescale_x; // This has type ddc::Coordinate<ODim>.
+        return target_min + rescale_x; // This has type Coord<ODim>.
     };
 };
