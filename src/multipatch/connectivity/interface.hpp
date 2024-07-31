@@ -28,6 +28,11 @@ struct Interface
     /// @brief Edge type of the second patch.
     using Edge2 = Edge2Type;
 
+    template <
+            class Edge,
+            class = std::enable_if_t<std::is_same_v<Edge, Edge1> || std::is_same_v<Edge, Edge2>>>
+    using OtherEdge = std::conditional_t<std::is_same_v<Edge, Edge1>, Edge2, Edge1>;
+
     /**
      * If True, the parametrisations of the physical edge have the same orientation.
      * If False, the parametrisations of the physical edge have the opposite orientation.
