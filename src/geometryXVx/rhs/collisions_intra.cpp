@@ -352,8 +352,8 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
 
     MatrixBatchTridiag<Kokkos::DefaultExecutionSpace>
             matrix(batch_size, mat_size, AA_view, BB_view, CC_view);
-    matrix.factorize();
-    matrix.solve_inplace(RR_view);
+    matrix.setup_solver();
+    matrix.solve(RR_view);
 
     ddc::parallel_deepcopy(allfdistribu, RR);
     Kokkos::Profiling::popRegion();
