@@ -87,7 +87,7 @@ template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC,
         typename IDim::continuous_element_type>
-restrict_to_idx_range(
+restrict_to_domain(
         typename IDim::continuous_element_type coord,
         ddc::DiscreteDomain<IDim> const& dom)
 {

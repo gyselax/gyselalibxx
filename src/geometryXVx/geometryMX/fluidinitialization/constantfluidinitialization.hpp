@@ -10,14 +10,14 @@
  */
 class ConstantFluidInitialization : public IFluidInitialization
 {
-    DFieldSpM m_moments_alloc;
+    DFieldMemSpMom m_moments_alloc;
 
 public:
     /**
      * @brief Creates an instance of the ConstantFluidInitialization class.
      * @param[in] moments The fluid moments the fluid species should be initialized with. 
      */
-    ConstantFluidInitialization(host_t<DViewSpM> moments);
+    ConstantFluidInitialization(host_t<DConstFieldSpMom> moments);
 
     ~ConstantFluidInitialization() override = default;
 
@@ -27,5 +27,5 @@ public:
      *                             On output: a span referencing a the fluid species initialized with constant moments.
      * @return A span referencing the initialized fluid species.
      */
-    DSpanSpMX operator()(DSpanSpMX const fluid_moments) const override;
+    DFieldSpMomX operator()(DFieldSpMomX const fluid_moments) const override;
 };

@@ -23,6 +23,8 @@ target_link_libraries("fluidsolver_${GEOMETRY_VARIANT}"
         gslx::reactionrates_${GEOMETRY_VARIANT}
         gslx::speciesinfo
         gslx::timestepper
+        gslx::utils
+
 )
 
 add_library("gslx::fluidsolver_${GEOMETRY_VARIANT}" ALIAS "fluidsolver_${GEOMETRY_VARIANT}")

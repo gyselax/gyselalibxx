@@ -32,11 +32,11 @@ static void TestDiffusiveNeutralsRateCoefficients()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(10);
-    IVectX const x_size(512);
+    IdxStepX const x_size(512);
 
     CoordVx const vx_min(-8);
     CoordVx const vx_max(8);
-    IVectVx const vx_size(50);
+    IdxStepVx const vx_size(50);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -46,14 +46,14 @@ static void TestDiffusiveNeutralsRateCoefficients()
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+    ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx meshVx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainXVx meshXVx(meshX, meshVx);
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
+    IdxRangeVx meshVx(SplineInterpPointsVx::get_domain<GridVx>());
+    IdxRangeXVx meshXVx(meshX, meshVx);
 
-    // Kinetic and neutral species domain initialization
+    // Kinetic and neutral species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -89,35 +89,35 @@ static void TestDiffusiveNeutralsRateCoefficients()
 
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
-    // Moments domain initialization
-    IVectM const nb_fluid_moments(1);
-    IDomainM const meshM(IndexM(0), nb_fluid_moments);
-    ddc::init_discrete_space<IDimM>();
+    // Moments index range initialization
+    IdxStepMom const nb_fluid_moments(1);
+    IdxRangeMom const meshM(IdxMom(0), nb_fluid_moments);
+    ddc::init_discrete_space<GridMom>();
 
-    IDomainSpX dom_fluidspx = IDomainSpX(dom_fluidsp, meshX);
+    IdxRangeSpX dom_fluidspx = IdxRangeSpX(dom_fluidsp, meshX);
 
     ChargeExchangeRate charge_exchange(1.);
     IonizationRate ionization(1.);
     RecombinationRate recombination(1.);
 
-    DFieldSpMX neutrals_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    DSpanSpMX neutrals = neutrals_alloc.span_view();
+    DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    DFieldSpMomX neutrals = get_field(neutrals_alloc);
 
-    host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
     ddc::parallel_fill(moments_init, 1.);
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(neutrals);
 
-    DFieldSpMX derivative_alloc(neutrals.domain());
-    DSpanSpMX derivative = derivative_alloc.span_view();
+    DFieldMemSpMomX derivative_alloc(get_idx_range(neutrals));
+    DFieldSpMomX derivative = get_field(derivative_alloc);
 
-    DFieldSpX kinsp_density_alloc(IDomainSpX(dom_kinsp, meshX));
-    DFieldSpX kinsp_velocity_alloc(IDomainSpX(dom_kinsp, meshX));
-    DFieldSpX kinsp_temperature_alloc(IDomainSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_density_alloc(IdxRangeSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_velocity_alloc(IdxRangeSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_temperature_alloc(IdxRangeSpX(dom_kinsp, meshX));
 
-    DSpanSpX kinsp_density = kinsp_density_alloc.span_view();
-    DSpanSpX kinsp_velocity = kinsp_velocity_alloc.span_view();
-    DSpanSpX kinsp_temperature = kinsp_temperature_alloc.span_view();
+    DFieldSpX kinsp_density = get_field(kinsp_density_alloc);
+    DFieldSpX kinsp_velocity = get_field(kinsp_velocity_alloc);
+    DFieldSpX kinsp_temperature = get_field(kinsp_temperature_alloc);
 
     double const kinsp_density_eq(1.);
     double const kinsp_velocity_eq(0.0);
@@ -127,13 +127,13 @@ static void TestDiffusiveNeutralsRateCoefficients()
     ddc::parallel_fill(kinsp_temperature, kinsp_temperature_eq);
 
     // building reaction rates
-    DFieldSpX charge_exchange_rate_alloc(dom_fluidspx);
-    DFieldSpX ionization_rate_alloc(dom_fluidspx);
-    DFieldSpX recombination_rate_alloc(dom_fluidspx);
+    DFieldMemSpX charge_exchange_rate_alloc(dom_fluidspx);
+    DFieldMemSpX ionization_rate_alloc(dom_fluidspx);
+    DFieldMemSpX recombination_rate_alloc(dom_fluidspx);
 
-    DSpanSpX charge_exchange_rate = charge_exchange_rate_alloc.span_view();
-    DSpanSpX ionization_rate = ionization_rate_alloc.span_view();
-    DSpanSpX recombination_rate = recombination_rate_alloc.span_view();
+    DFieldSpX charge_exchange_rate = get_field(charge_exchange_rate_alloc);
+    DFieldSpX ionization_rate = get_field(ionization_rate_alloc);
+    DFieldSpX recombination_rate = get_field(recombination_rate_alloc);
 
     charge_exchange(charge_exchange_rate, kinsp_density, kinsp_temperature);
     ionization(ionization_rate, kinsp_density, kinsp_temperature);

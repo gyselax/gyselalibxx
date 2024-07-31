@@ -72,10 +72,10 @@ double DiocotronDensitySolution::get_slope() const
 }
 
 
-double DiocotronDensitySolution::initialisation(CoordRTheta const& coord) const
+double DiocotronDensitySolution::initialisation(CoordRP const& coord) const
 {
-    const double r = ddc::get<R>(coord);
-    const double theta = ddc::get<Theta>(coord);
+    const double r = ddc::get<RDimR>(coord);
+    const double theta = ddc::get<RDimP>(coord);
 
     if ((m_R1 <= r) and (r <= m_R2)) {
         return (1. + m_eps * std::cos(m_l * theta))
@@ -85,9 +85,9 @@ double DiocotronDensitySolution::initialisation(CoordRTheta const& coord) const
     }
 }
 
-double DiocotronDensitySolution::equilibrium(CoordRTheta const& coord) const
+double DiocotronDensitySolution::equilibrium(CoordRP const& coord) const
 {
-    const double r = ddc::get<R>(coord);
+    const double r = ddc::get<RDimR>(coord);
 
     if ((m_R1 <= r) and (r <= m_R2)) {
         return 1. * std::exp(-(std::pow((r - m_r_bar) / m_d, m_p)));

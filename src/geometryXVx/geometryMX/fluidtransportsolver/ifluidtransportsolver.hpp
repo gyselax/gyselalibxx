@@ -22,9 +22,9 @@ public:
      * @param[in] dt The timestep.
      * @return a span referencing the fluid species after solving the fluid model on one timestep.
      */
-    virtual DSpanSpMX operator()(
-            DSpanSpMX fluid_moments,
-            DViewSpXVx allfdistribu,
-            DViewX efield,
+    virtual DFieldSpMomX operator()(
+            DFieldSpMomX fluid_moments,
+            DConstFieldSpXVx allfdistribu,
+            DConstFieldX efield,
             double dt) const = 0;
 };

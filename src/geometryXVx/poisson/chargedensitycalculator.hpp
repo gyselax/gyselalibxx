@@ -20,7 +20,7 @@
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
-    Quadrature<IDomainVx, IDomainXVx> m_quadrature;
+    Quadrature<IdxRangeVx, IdxRangeXVx> m_quadrature;
 
 public:
     /**
@@ -28,7 +28,7 @@ public:
      * @param[in] coeffs
      *            The coefficients of the quadrature.
      */
-    explicit ChargeDensityCalculator(DViewVx coeffs);
+    explicit ChargeDensityCalculator(DConstFieldVx coeffs);
 
     /**
      * @brief Computes the charge density rho from the distribution function.
@@ -37,5 +37,5 @@ public:
      *
      * @return rho The charge density.
      */
-    DSpanX operator()(DSpanX rho, DViewSpXVx allfdistribu) const final;
+    DFieldX operator()(DFieldX rho, DConstFieldSpXVx allfdistribu) const final;
 };

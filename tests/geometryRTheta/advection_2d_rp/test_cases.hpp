@@ -1,4 +1,5 @@
 #pragma once
+
 #include <ddc/ddc.hpp>
 
 #include <sll/gauss_legendre_integration.hpp>
@@ -7,7 +8,6 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
-#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -26,7 +26,7 @@
 /**
  * @brief Base class for the test functions for the 2D polar advection operator.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionRP
  * @see AdvectionSimulation
  */
 class FunctionToBeAdvected
@@ -42,7 +42,7 @@ public:
      *
      * @return The value of the function at the coordinate.
      */
-    virtual double operator()(CoordRTheta coord) = 0;
+    virtual double operator()(CoordRP coord) = 0;
 };
 
 
@@ -71,16 +71,16 @@ public:
      * @brief Instantiate a FunctionToBeAdvected_cos_4_elipse function.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      */
     FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {};
     ~FunctionToBeAdvected_cos_4_elipse() {};
 
-    double operator()(CoordRTheta coord_rp) final
+    double operator()(CoordRP coord_rp) final
     {
         CoordXY const coord_xy(m_mapping(coord_rp));
-        double const x = ddc::get<X>(coord_xy);
-        double const y = ddc::get<Y>(coord_xy);
+        double const x = ddc::get<RDimX>(coord_xy);
+        double const y = ddc::get<RDimY>(coord_xy);
 
         double const a = 0.3;
         double const x_bar = 0.;
@@ -123,7 +123,7 @@ public:
      * @brief Instantiate a FunctionToBeAdvected_gaussian function.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      * @param[in] constant
      *      The constant @f$ C@f$ in front of the exponential.
      * @param[in] x0
@@ -158,13 +158,13 @@ public:
         , m_rmax(rmax) {};
     ~FunctionToBeAdvected_gaussian() {};
 
-    double operator()(CoordRTheta coord_rp) final
+    double operator()(CoordRP coord_rp) final
     {
         // Gaussian centered in (x0, y0):
         CoordXY const coord_xy(m_mapping(coord_rp));
-        double const x = ddc::get<X>(coord_xy);
-        double const y = ddc::get<Y>(coord_xy);
-        double const r = ddc::get<R>(coord_rp);
+        double const x = ddc::get<RDimX>(coord_xy);
+        double const y = ddc::get<RDimY>(coord_xy);
+        double const r = ddc::get<RDimR>(coord_rp);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * std::exp(
@@ -183,7 +183,7 @@ public:
  * @brief Base class for the advection field for the tests of the 2D polar advection
  * operator.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionRP
  * @see AdvectionSimulation
  */
 class AdvectionField
@@ -192,26 +192,26 @@ public:
     virtual ~AdvectionField() = default;
 
     /**
-     * @brief Get the advection field in the physical index range.
+     * @brief Get the advection field in the physical domain.
      *
      * @param[in] coord
-     *      The coordinate in the physical index range.
+     *      The coordinate in the physical domain.
      * @param[in] t
      *      Time component.
      *
-     * @return The advection field in the physical index range.
+     * @return The advection field in the physical domain.
      */
     virtual CoordXY operator()(CoordXY const coord, double const t = 0.) const = 0;
 
     /**
-     * @brief Get the characteristic feet in the physical index range.
+     * @brief Get the characteristic feet in the physical domain.
      *
      * @param[in] coord
-     *      The original coordinate in the physical index range.
+     *      The original coordinate in the physical domain.
      * @param[in] t
      *      Time component.
      *
-     * @return The characteristic feet in the physical index range.
+     * @return The characteristic feet in the physical domain.
      */
     virtual CoordXY exact_feet(CoordXY coord, double t) const = 0;
 };
@@ -255,15 +255,15 @@ public:
 
     CoordXY operator()(CoordXY const coord, double const t) const final
     {
-        double const x = m_omega * (m_yc - ddc::get<Y>(coord));
-        double const y = m_omega * (ddc::get<X>(coord) - m_xc);
+        double const x = m_omega * (m_yc - ddc::get<RDimY>(coord));
+        double const y = m_omega * (ddc::get<RDimX>(coord) - m_xc);
         return CoordXY(x, y);
     };
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
     {
-        double const x = ddc::get<X>(coord);
-        double const y = ddc::get<Y>(coord);
+        double const x = ddc::get<RDimX>(coord);
+        double const y = ddc::get<RDimY>(coord);
         double const foot_x
                 = m_xc + (x - m_xc) * std::cos(m_omega * -t) - (y - m_yc) * std::sin(m_omega * -t);
         double const foot_y
@@ -278,7 +278,7 @@ public:
  * @brief Advection field for the tests of the 2D polar advection operator.
  *
  *
- * The test advection field for a translation in the physical index range is given by :
+ * The test advection field for a translation in the physical domain is given by :
  *
  * @f$ A(x,y) = [v_x, v_y]@f$.
  *
@@ -299,12 +299,12 @@ public:
      * @brief Instantiate an AdvectionField_translation advection field.
      *
      * @param[in] vx
-     *      The constant first component of the advection field in the physical index range.
+     *      The constant first component of the advection field in the physical domain.
      * @param[in] vy
-     *      The constant second component of the advection field in the physical index range.
+     *      The constant second component of the advection field in the physical domain.
      */
     AdvectionField_translation(CoordVx vx, CoordVy vy)
-        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy)) {};
+        : m_velocity(ddc::get<RDimVx>(vx), ddc::get<RDimVy>(vy)) {};
     ~AdvectionField_translation() {};
 
     CoordXY operator()(CoordXY const coord, double const t) const final
@@ -324,7 +324,7 @@ public:
  * @brief Advection field for the tests of the 2D polar advection operator.
  *
  *
- * The test advection field for a rotation in the physical index range is given by :
+ * The test advection field for a rotation in the physical domain is given by :
  *
  * @f$ A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]@f$.
  *
@@ -343,38 +343,35 @@ class AdvectionField_rotation : public AdvectionField
 {
 private:
     double const m_vr;
-    double const m_vtheta;
-    CircularToCartesian<X, Y, R, Theta> const m_mapping;
+    double const m_vp;
+    CircularToCartesian<RDimX, RDimY, RDimR, RDimP> const m_mapping;
 
 public:
     /**
      * @brief Instantiate an AdvectionField_rotation advection field.
      *
      * @param[in] vr
-     *      The constant first polar component of the advection field in the physical index range.
-     * @param[in] vtheta
-     *      The constant second polar component of the advection field in the physical index range.
+     *      The constant first polar component of the advection field in the physical domain.
+     * @param[in] vp
+     *      The constant second polar component of the advection field in the physical domain.
      */
-    AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
-        : m_vr(vr)
-        , m_vtheta(vtheta)
-        , m_mapping() {};
+    AdvectionField_rotation(CoordVr vr, CoordVp vp) : m_vr(vr), m_vp(vp), m_mapping() {};
     ~AdvectionField_rotation() {};
 
     CoordXY operator()(CoordXY const coord, double const t) const final
     {
-        CoordRTheta const coord_rp(m_mapping(coord));
+        CoordRP const coord_rp(m_mapping(coord));
         std::array<std::array<double, 2>, 2> jacobian;
         m_mapping.jacobian_matrix(coord_rp, jacobian);
-        double const vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];
-        double const vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];
+        double const vx = m_vr * jacobian[0][0] + m_vp * jacobian[0][1];
+        double const vy = m_vr * jacobian[1][0] + m_vp * jacobian[1][1];
         return CoordXY(vx, vy);
     };
 
     CoordXY exact_feet(CoordXY coord_xy, double const t) const final
     {
-        CoordRTheta const coord_rp(m_mapping(coord_xy));
-        CoordRTheta const velocity(m_vr, m_vtheta);
+        CoordRP const coord_rp(m_mapping(coord_xy));
+        CoordRP const velocity(m_vr, m_vp);
         return m_mapping(coord_rp - t * velocity);
     };
 };
@@ -390,7 +387,7 @@ public:
  * - RotationSimulation,
  * - DecentredRotationSimulation.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionRP
  * @see FunctionToBeAdvected
  * @see AdvectionField
  */
@@ -475,11 +472,11 @@ public:
      * @brief Instantiate a TranslationSimulation simulation.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      * @param[in] rmin
-     *      The minimum value of @f$ r@f$ on the logical index range.
+     *      The minimum value of @f$ r@f$ on the logical domain.
      * @param[in] rmax
-     *      The maximum value of @f$ r@f$ on the logical index range.
+     *      The maximum value of @f$ r@f$ on the logical domain.
      */
     TranslationSimulation(Mapping const& mapping, double const rmin, double const rmax)
         : AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>(
@@ -524,15 +521,15 @@ public:
      * @brief Instantiate a RotationSimulation simulation.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      * @param[in] rmin
-     *      The minimum value of @f$ r@f$ on the logical index range.
+     *      The minimum value of @f$ r@f$ on the logical domain.
      * @param[in] rmax
-     *      The maximum value of @f$ r@f$ on the logical index range.
+     *      The maximum value of @f$ r@f$ on the logical domain.
      */
     RotationSimulation(Mapping const& mapping, double const rmin, double const rmax)
         : AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>(
-                AdvectionField_rotation(CoordVr(0.), CoordVtheta(2 * M_PI)),
+                AdvectionField_rotation(CoordVr(0.), CoordVp(2 * M_PI)),
                 FunctionToBeAdvected_gaussian<
                         Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)) {};
 };
@@ -574,7 +571,7 @@ public:
      * @brief Instantiate a DecentredRotationSimulation simulation.
      *
      * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
+     *      The mapping from the logical domain to the physical domain.
      */
     DecentredRotationSimulation(Mapping const& mapping)
         : AdvectionSimulation<

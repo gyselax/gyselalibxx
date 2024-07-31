@@ -24,16 +24,16 @@ TEST(GeometryXM, KineticFluidSpecies)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_size(50);
+    IdxStepX const x_size(50);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
     SplineXBuilder_1d const builder_x(meshX);
 
-    // Kinetic species domain initialization
+    // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -49,7 +49,7 @@ TEST(GeometryXM, KineticFluidSpecies)
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
-    // Fluid species domain initialization
+    // Fluid species index range initialization
     IdxStepSp const nb_fluidspecies(2);
     IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
@@ -61,7 +61,7 @@ TEST(GeometryXM, KineticFluidSpecies)
     fluid_masses(dom_fluidsp.front()) = 5.;
     fluid_masses(dom_fluidsp.back()) = 8.;
 
-    // Create the domain of kinetic species + fluid species
+    // Create the index range of kinetic species + fluid species
     IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
@@ -112,16 +112,16 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_size(50);
+    IdxStepX const x_size(50);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
     SplineXBuilder_1d const builder_x(meshX);
 
-    // Kinetic species domain initialization
+    // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -140,7 +140,7 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
     // adiabatic species initialization
     int nb_ion_adiabspecies = 1;
 
-    // Fluid species domain initialization
+    // Fluid species index range initialization
     IdxStepSp const nb_fluidspecies(2);
     IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
@@ -152,8 +152,8 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
     fluid_masses(dom_fluidsp.front()) = 5.;
     fluid_masses(dom_fluidsp.back()) = 8.;
 
-    // Create the domain of all species including kinetic species + fluid species + adiabatic species (if existing)
-    // adiabatic species are placed at the back of the domain
+    // Create the index range of all species including kinetic species + fluid species + adiabatic species (if existing)
+    // adiabatic species are placed at the back of the index range
     IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies + nb_ion_adiabspecies);
 
     // Create a Field that contains charges of all species
@@ -173,7 +173,7 @@ TEST(GeometryXM, KineticFluidAdiabaticSpecies)
     double const charge_adiabspecies(3.);
     charges(dom_allsp.back()) = nb_ion_adiabspecies * charge_adiabspecies;
 
-    // Create the domain of kinetic and fluid species
+    // Create the index range of kinetic and fluid species
     IdxRangeSp const dom_kinfluidsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains masses of kinetic and fluid species (adiabatic species do not have a mass)

@@ -15,6 +15,8 @@ target_link_libraries("utils_${GEOMETRY_VARIANT}"
         DDC::DDC
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::quadrature
+        gslx::utils
+
 )
 
 add_library("gslx::utils_${GEOMETRY_VARIANT}" ALIAS "utils_${GEOMETRY_VARIANT}")

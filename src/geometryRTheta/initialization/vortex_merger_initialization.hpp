@@ -1,9 +1,9 @@
 #pragma once
+
 #include <cmath>
 
 #include <ddc/ddc.hpp>
 
-#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "vortex_merger_equilibrium.hpp"
 
@@ -27,8 +27,8 @@ public:
      * @brief Instantiate a VortexMergerDensitySolution.
      *
      * @param[in] mapping
-     *      A mapping function from the logical index range
-     *      to the physical index range.
+     *      A mapping function from the logical domain
+     *      to the physical domain.
      */
     VortexMergerDensitySolution(Mapping const& mapping) : m_mapping(mapping) {}
 
@@ -70,8 +70,8 @@ public:
      *
      */
     void set_initialisation(
-            DFieldRTheta rho_init,
-            DConstFieldRTheta rho_eq,
+            DSpanRP rho_init,
+            DViewRP rho_eq,
             const double eps,
             const double sigma,
             const double x_star_1,
@@ -79,14 +79,14 @@ public:
             const double x_star_2,
             const double y_star_2)
     {
-        IdxRangeRTheta grid = get_idx_range<GridR, GridTheta>(rho_init);
+        IDomainRP grid = ddc::get_domain<IDimR, IDimP>(rho_init);
 
         // Initialisation:
-        ddc::for_each(grid, [&](IdxRTheta const irp) {
-            const CoordRTheta coord_rp(ddc::coordinate(irp));
+        ddc::for_each(grid, [&](IndexRP const irp) {
+            const CoordRP coord_rp(ddc::coordinate(irp));
             const CoordXY coord_xy(m_mapping(coord_rp));
-            const double x = ddc::get<X>(coord_xy);
-            const double y = ddc::get<Y>(coord_xy);
+            const double x = ddc::get<RDimX>(coord_xy);
+            const double y = ddc::get<RDimY>(coord_xy);
 
             rho_init(irp) = rho_eq(irp)
                             + eps

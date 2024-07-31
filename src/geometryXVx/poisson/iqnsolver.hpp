@@ -25,7 +25,7 @@ public:
      * @param[in] allfdistribu The distribution function.
      */
     virtual void operator()(
-            DSpanX electrostatic_potential,
-            DSpanX electric_field,
-            DViewSpXVx allfdistribu) const = 0;
+            DFieldX electrostatic_potential,
+            DFieldX electric_field,
+            DConstFieldSpXVx allfdistribu) const = 0;
 };

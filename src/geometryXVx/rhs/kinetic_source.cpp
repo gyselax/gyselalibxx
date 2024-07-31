@@ -6,8 +6,8 @@
 #include "mask_tanh.hpp"
 
 KineticSource::KineticSource(
-        IDomainX const& gridx,
-        IDomainVx const& gridvx,
+        IdxRangeX const& gridx,
+        IdxRangeVx const& gridvx,
         double const extent,
         double const stiffness,
         double const amplitude,
@@ -23,7 +23,7 @@ KineticSource::KineticSource(
 {
     // compute the source velocity profile (maxwellian profile if density = energy = 1.)
     double const coeff(1.0 / std::sqrt(2 * M_PI * m_temperature));
-    ddc::for_each(gridvx, [=](IndexVx const ivx) {
+    ddc::for_each(gridvx, [=](IdxVx const ivx) {
         CoordVx const coordvx = ddc::coordinate(ivx);
         double const coordvx_sq = coordvx * coordvx;
         double const density_source = coeff * (1.5 - coordvx_sq / (2 * m_temperature))
@@ -42,28 +42,28 @@ KineticSource::KineticSource(
     ddc::expose_to_pdi("kinetic_source_spatial_extent", m_spatial_extent);
 }
 
-DSpanSpXVx KineticSource::operator()(DSpanSpXVx const allfdistribu, double const dt) const
+DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
     Kokkos::Profiling::pushRegion("KineticSource");
     auto velocity_shape_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            m_velocity_shape.span_view());
-    auto velocity_shape = velocity_shape_alloc.span_view();
+            get_field(m_velocity_shape));
+    auto velocity_shape = get_field(velocity_shape_alloc);
 
     auto spatial_extent_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            m_spatial_extent.span_view());
-    auto spatial_extent = spatial_extent_alloc.span_view();
+            get_field(m_spatial_extent));
+    auto spatial_extent = get_field(spatial_extent_alloc);
 
     auto const& amplitude = m_amplitude;
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+            get_idx_range(allfdistribu),
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
                 double const df(
-                        amplitude * spatial_extent(ddc::select<IDimX>(ispxvx))
-                        * velocity_shape(ddc::select<IDimVx>(ispxvx)) * dt);
+                        amplitude * spatial_extent(ddc::select<GridX>(ispxvx))
+                        * velocity_shape(ddc::select<GridVx>(ispxvx)) * dt);
                 allfdistribu(ispxvx) += df;
             });
 

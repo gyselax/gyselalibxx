@@ -13,7 +13,7 @@ KineticFluidCouplingSource::KineticFluidCouplingSource(
         IReactionRate const& ionization,
         IReactionRate const& recombination,
         double const normalization_coeff,
-        DViewVx const& quadrature_coeffs) // for kinetic species
+        DConstFieldVx const& quadrature_coeffs) // for kinetic species
     : m_density_coupling_coeff(density_coupling_coeff)
     , m_momentum_coupling_coeff(momentum_coupling_coeff)
     , m_energy_coupling_coeff(energy_coupling_coeff)
@@ -52,23 +52,23 @@ IdxSp KineticFluidCouplingSource::find_ion(IdxRangeSp const dom_kinsp) const
 }
 
 void KineticFluidCouplingSource::get_source_term(
-        DSpanX density_source_neutral,
-        DViewSpX kinsp_density,
-        DViewSpMX neutrals,
-        DViewSpX ionization,
-        DViewSpX recombination) const
+        DFieldX density_source_neutral,
+        DConstFieldSpX kinsp_density,
+        DConstFieldSpMomX neutrals,
+        DConstFieldSpX ionization,
+        DConstFieldSpX recombination) const
 {
-    IdxSp const iion(find_ion(ddc::get_domain<Species>(kinsp_density)));
+    IdxSp const iion(find_ion(get_idx_range<Species>(kinsp_density)));
     // Neutrals density source computation
-    IDomainSpM const dom_msp(ddc::get_domain<Species, IDimM>(neutrals));
-    IndexSpM ineutral(dom_msp.front());
-    IdxRangeSp const dom_sp(ddc::get_domain<Species>(neutrals));
+    IdxRangeSpMom const dom_msp(get_idx_range<Species, GridMom>(neutrals));
+    IdxSpMom ineutral(dom_msp.front());
+    IdxRangeSp const dom_sp(get_idx_range<Species>(neutrals));
     IdxSp ispneutral(dom_sp.front());
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            density_source_neutral.domain(),
-            KOKKOS_LAMBDA(IndexX const ix) {
+            get_idx_range(density_source_neutral),
+            KOKKOS_LAMBDA(IdxX const ix) {
                 density_source_neutral(ix) = neutrals(ineutral, ix) * kinsp_density(ielec(), ix)
                                                      * ionization(ispneutral, ix)
                                              - kinsp_density(iion, ix) * kinsp_density(ielec(), ix)
@@ -77,74 +77,74 @@ void KineticFluidCouplingSource::get_source_term(
 }
 
 void KineticFluidCouplingSource::get_derivative_neutrals(
-        DSpanSpMX dn,
-        DViewSpMX neutrals,
-        DViewX density_source_neutral) const
+        DFieldSpMomX dn,
+        DConstFieldSpMomX neutrals,
+        DConstFieldX density_source_neutral) const
 {
     // neutrals dn computation
-    IDomainSpX dom_fluidspx(ddc::get_domain<Species, IDimX>(neutrals));
+    IdxRangeSpX dom_fluidspx(get_idx_range<Species, GridX>(neutrals));
 
     // compute diffusive model equation terms
-    IndexM const ineutral_density(0);
+    IdxMom const ineutral_density(0);
     double const normalization_coeff_alpha0(m_normalization_coeff);
 
     // build rhs of diffusive model equation
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dom_fluidspx,
-            KOKKOS_LAMBDA(IndexSpX const ifspx) {
-                IndexX const ix(ifspx);
+            KOKKOS_LAMBDA(IdxSpX const ifspx) {
+                IdxX const ix(ifspx);
                 dn(ifspx, ineutral_density)
                         = -density_source_neutral(ix) / normalization_coeff_alpha0;
             });
 }
 
 void KineticFluidCouplingSource::get_derivative_allfdistribu(
-        DSpanSpXVx df,
-        DViewSpXVx allfdistribu,
-        DViewSpXVx velocity_shape_source) const
+        DFieldSpXVx df,
+        DConstFieldSpXVx allfdistribu,
+        DConstFieldSpXVx velocity_shape_source) const
 {
     // df computation
-    IDomainSpXVx dom_kspx(allfdistribu.domain());
+    IdxRangeSpXVx dom_kspx(get_idx_range(allfdistribu));
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dom_kspx,
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) { df(ispxvx) = velocity_shape_source(ispxvx); });
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) { df(ispxvx) = velocity_shape_source(ispxvx); });
 }
 
 void KineticFluidCouplingSource::operator()(
-        DSpanSpXVx const allfdistribu,
-        DSpanSpMX neutrals,
+        DFieldSpXVx const allfdistribu,
+        DFieldSpMomX neutrals,
         double const dt) const
 {
     Kokkos::Profiling::pushRegion("KineticFluidCouplingSource");
-    RK2<DFieldSpMX> timestepper_neutrals(neutrals.domain());
-    RK2<DFieldSpXVx> timestepper_kinetic(allfdistribu.domain());
+    RK2<DFieldMemSpMomX> timestepper_neutrals(get_idx_range(neutrals));
+    RK2<DFieldMemSpXVx> timestepper_kinetic(get_idx_range(allfdistribu));
 
-    // useful params and domains
-    IdxSp const iion(find_ion(ddc::get_domain<Species>(allfdistribu)));
+    // useful params and index ranges
+    IdxSp const iion(find_ion(get_idx_range<Species>(allfdistribu)));
 
     // kinetic species fluid moments computation
-    IDomainSpX dom_kspx(allfdistribu.domain());
-    DFieldSpX kinsp_density_alloc(dom_kspx);
-    DFieldSpX kinsp_velocity_alloc(dom_kspx);
-    DFieldSpX kinsp_temperature_alloc(dom_kspx);
+    IdxRangeSpX dom_kspx(get_idx_range(allfdistribu));
+    DFieldMemSpX kinsp_density_alloc(dom_kspx);
+    DFieldMemSpX kinsp_velocity_alloc(dom_kspx);
+    DFieldMemSpX kinsp_temperature_alloc(dom_kspx);
 
-    DSpanSpX kinsp_density = kinsp_density_alloc.span_view();
-    DSpanSpX kinsp_velocity = kinsp_velocity_alloc.span_view();
-    DSpanSpX kinsp_temperature = kinsp_temperature_alloc.span_view();
+    DFieldSpX kinsp_density = get_field(kinsp_density_alloc);
+    DFieldSpX kinsp_velocity = get_field(kinsp_velocity_alloc);
+    DFieldSpX kinsp_temperature = get_field(kinsp_temperature_alloc);
 
-    DViewVx quadrature_coeffs = m_quadrature_coeffs.span_view();
+    DConstFieldVx quadrature_coeffs = get_field(m_quadrature_coeffs);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), kinsp_density, 0.);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dom_kspx,
-            KOKKOS_LAMBDA(IndexSpX const ispx) {
+            KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IndexVx const ivx : allfdistribu.domain<IDimVx>()) {
+                for (IdxVx const ivx : get_idx_range<GridVx>(allfdistribu)) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(ispx, ivx));
                     kinsp_density(ispx) += val;
@@ -157,22 +157,22 @@ void KineticFluidCouplingSource::operator()(
             });
 
     // building reaction rates
-    IDomainSpX dom_fluidspx(ddc::get_domain<Species, IDimX>(neutrals));
+    IdxRangeSpX dom_fluidspx(get_idx_range<Species, GridX>(neutrals));
 
-    DFieldSpX ionization_rate_alloc(dom_fluidspx);
-    DFieldSpX recombination_rate_alloc(dom_fluidspx);
+    DFieldMemSpX ionization_rate_alloc(dom_fluidspx);
+    DFieldMemSpX recombination_rate_alloc(dom_fluidspx);
 
-    DSpanSpX ionization_rate = ionization_rate_alloc.span_view();
-    DSpanSpX recombination_rate = recombination_rate_alloc.span_view();
+    DFieldSpX ionization_rate = get_field(ionization_rate_alloc);
+    DFieldSpX recombination_rate = get_field(recombination_rate_alloc);
 
     m_ionization(ionization_rate, kinsp_density, kinsp_temperature);
     m_recombination(recombination_rate, kinsp_density, kinsp_temperature);
 
     // source term computation
-    IDomainX grid_x(allfdistribu.domain<IDimX>());
+    IdxRangeX grid_x(get_idx_range<GridX>(allfdistribu));
 
-    DFieldX density_source_neutral_alloc(grid_x);
-    auto density_source_neutral = density_source_neutral_alloc.span_view();
+    DFieldMemX density_source_neutral_alloc(grid_x);
+    auto density_source_neutral = get_field(density_source_neutral_alloc);
     get_source_term(
             density_source_neutral,
             kinsp_density,
@@ -181,8 +181,8 @@ void KineticFluidCouplingSource::operator()(
             recombination_rate);
 
     // S(v) velocity shape calculation for kinetic species
-    DFieldSpXVx velocity_shape_source_alloc(allfdistribu.domain());
-    DSpanSpXVx velocity_shape_source = velocity_shape_source_alloc.span_view();
+    DFieldMemSpXVx velocity_shape_source_alloc(get_idx_range(allfdistribu));
+    DFieldSpXVx velocity_shape_source = get_field(velocity_shape_source_alloc);
 
     double density_coupling_coeff_proxy = m_density_coupling_coeff;
     double momentum_coupling_coeff_proxy = m_momentum_coupling_coeff;
@@ -191,10 +191,10 @@ void KineticFluidCouplingSource::operator()(
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
-                IndexX const ix(ispxvx);
-                IndexVx const ivx(ispxvx);
+            get_idx_range(allfdistribu),
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
+                IdxX const ix(ispxvx);
+                IdxVx const ivx(ispxvx);
                 CoordVx const coordvx = ddc::coordinate(ivx);
                 double const neutral_temperature
                         = (kinsp_temperature(iion, ix) + kinsp_temperature(ielec(), ix)) / 2.;
@@ -217,10 +217,10 @@ void KineticFluidCouplingSource::operator()(
                                                 + momentum_source + energy_source;
             });
 
-    timestepper_kinetic.update(allfdistribu, dt, [&](DSpanSpXVx df, DViewSpXVx f) {
+    timestepper_kinetic.update(allfdistribu, dt, [&](DFieldSpXVx df, DConstFieldSpXVx f) {
         get_derivative_allfdistribu(df, f, velocity_shape_source);
     });
-    timestepper_neutrals.update(neutrals, dt, [&](DSpanSpMX dn, DViewSpMX n) {
+    timestepper_neutrals.update(neutrals, dt, [&](DFieldSpMomX dn, DConstFieldSpMomX n) {
         get_derivative_neutrals(dn, n, density_source_neutral);
     });
 

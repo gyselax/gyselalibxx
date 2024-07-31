@@ -14,7 +14,7 @@ DiffusiveNeutralSolver::DiffusiveNeutralSolver(
         double const normalization_coeff,
         SplineXBuilder_1d const& spline_x_builder,
         SplineXEvaluator_1d const& spline_x_evaluator,
-        DViewVx const& quadrature_coeffs)
+        DConstFieldVx const& quadrature_coeffs)
     : m_charge_exchange(charge_exchange)
     , m_ionization(ionization)
     , m_recombination(recombination)
@@ -44,44 +44,44 @@ IdxSp DiffusiveNeutralSolver::find_ion(IdxRangeSp const dom_kinsp) const
 }
 
 void DiffusiveNeutralSolver::get_derivative(
-        DSpanSpMX dn,
-        DViewSpMX neutrals,
-        DViewSpX density,
-        DViewSpX velocity,
-        DViewSpX temperature) const
+        DFieldSpMomX dn,
+        DConstFieldSpMomX neutrals,
+        DConstFieldSpX density,
+        DConstFieldSpX velocity,
+        DConstFieldSpX temperature) const
 {
-    IDomainSpX dom_fluidspx(ddc::get_domain<Species, IDimX>(neutrals));
+    IdxRangeSpX dom_fluidspx(get_idx_range<Species, GridX>(neutrals));
 
     // building reaction rates
-    DFieldSpX charge_exchange_rate_alloc(dom_fluidspx);
-    DFieldSpX ionization_rate_alloc(dom_fluidspx);
-    DFieldSpX recombination_rate_alloc(dom_fluidspx);
+    DFieldMemSpX charge_exchange_rate_alloc(dom_fluidspx);
+    DFieldMemSpX ionization_rate_alloc(dom_fluidspx);
+    DFieldMemSpX recombination_rate_alloc(dom_fluidspx);
 
-    DSpanSpX charge_exchange_rate = charge_exchange_rate_alloc.span_view();
-    DSpanSpX ionization_rate = ionization_rate_alloc.span_view();
-    DSpanSpX recombination_rate = recombination_rate_alloc.span_view();
+    DFieldSpX charge_exchange_rate = get_field(charge_exchange_rate_alloc);
+    DFieldSpX ionization_rate = get_field(ionization_rate_alloc);
+    DFieldSpX recombination_rate = get_field(recombination_rate_alloc);
 
     m_charge_exchange(charge_exchange_rate, density, temperature);
     m_ionization(ionization_rate, density, temperature);
     m_recombination(recombination_rate, density, temperature);
 
     // compute diffusive model equation terms
-    DFieldSpX density_equilibrium_velocity_alloc(dom_fluidspx);
-    DFieldSpX diffusion_temperature_alloc(dom_fluidspx);
-    ddc::ChunkSpan density_equilibrium_velocity = density_equilibrium_velocity_alloc.span_view();
-    ddc::ChunkSpan diffusion_temperature = diffusion_temperature_alloc.span_view();
+    DFieldMemSpX density_equilibrium_velocity_alloc(dom_fluidspx);
+    DFieldMemSpX diffusion_temperature_alloc(dom_fluidspx);
+    ddc::ChunkSpan density_equilibrium_velocity = get_field(density_equilibrium_velocity_alloc);
+    ddc::ChunkSpan diffusion_temperature = get_field(diffusion_temperature_alloc);
 
-    IdxSp const iion(find_ion(ddc::get_domain<Species>(density)));
-    IndexM const ineutral_density(0);
+    IdxSp const iion(find_ion(get_idx_range<Species>(density)));
+    IdxMom const ineutral_density(0);
 
     double const normalization_coeff_alpha0(m_normalization_coeff);
     double const mass_ratio(mass(ielec()) / mass(iion));
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dom_fluidspx,
-            KOKKOS_LAMBDA(IndexSpX const ifspx) {
+            KOKKOS_LAMBDA(IdxSpX const ifspx) {
                 IdxSp const isp(ddc::select<Species>(ifspx));
-                IndexX const ix(ddc::select<IDimX>(ifspx));
+                IdxX const ix(ddc::select<GridX>(ifspx));
 
                 double const denom = density(iion, ix) * charge_exchange_rate(ifspx)
                                      + density(ielec(), ix) * ionization_rate(ifspx);
@@ -99,79 +99,81 @@ void DiffusiveNeutralSolver::get_derivative(
             });
 
     // compute coordinates at which spatial derivatives are evaluated
-    FieldX<CoordX> coords_eval_alloc(neutrals.domain<IDimX>());
-    auto coords_eval = coords_eval_alloc.span_view();
+    FieldMemX<CoordX> coords_eval_alloc(get_idx_range<GridX>(neutrals));
+    auto coords_eval = get_field(coords_eval_alloc);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            neutrals.domain<IDimX>(),
-            KOKKOS_LAMBDA(IndexX const ix) { coords_eval(ix) = ddc::coordinate(ix); });
+            get_idx_range<GridX>(neutrals),
+            KOKKOS_LAMBDA(IdxX const ix) { coords_eval(ix) = ddc::coordinate(ix); });
 
     // create chunks to store spatial derivatives
-    DFieldSpX gradx_density_equilibrium_velocity_alloc(dom_fluidspx);
-    DFieldSpX gradx_diffusion_temperature_alloc(dom_fluidspx);
-    DFieldSpX gradx_neutrals_density_alloc(dom_fluidspx);
-    DFieldSpX laplx_neutrals_density_alloc(dom_fluidspx);
+    DFieldMemSpX gradx_density_equilibrium_velocity_alloc(dom_fluidspx);
+    DFieldMemSpX gradx_diffusion_temperature_alloc(dom_fluidspx);
+    DFieldMemSpX gradx_neutrals_density_alloc(dom_fluidspx);
+    DFieldMemSpX laplx_neutrals_density_alloc(dom_fluidspx);
 
     ddc::ChunkSpan gradx_density_equilibrium_velocity
-            = gradx_density_equilibrium_velocity_alloc.span_view();
-    ddc::ChunkSpan gradx_diffusion_temperature = gradx_diffusion_temperature_alloc.span_view();
-    ddc::ChunkSpan gradx_neutrals_density = gradx_neutrals_density_alloc.span_view();
-    ddc::ChunkSpan laplx_neutrals_density = laplx_neutrals_density_alloc.span_view();
+            = get_field(gradx_density_equilibrium_velocity_alloc);
+    ddc::ChunkSpan gradx_diffusion_temperature = get_field(gradx_diffusion_temperature_alloc);
+    ddc::ChunkSpan gradx_neutrals_density = get_field(gradx_neutrals_density_alloc);
+    ddc::ChunkSpan laplx_neutrals_density = get_field(laplx_neutrals_density_alloc);
 
-    ddc::for_each(neutrals.domain<Species>(), [&](IdxSp const isp) {
+    ddc::for_each(get_idx_range<Species>(neutrals), [&](IdxSp const isp) {
         // compute spline coefficients
-        DBSFieldX density_equilibrium_velocity_spline_x_coeff(m_spline_x_builder.spline_domain());
+        DBSFieldMemX density_equilibrium_velocity_spline_x_coeff(
+                get_spline_idx_range(m_spline_x_builder));
 
-        DBSFieldX diffusion_temperature_spline_x_coeff(m_spline_x_builder.spline_domain());
+        DBSFieldMemX diffusion_temperature_spline_x_coeff(get_spline_idx_range(m_spline_x_builder));
 
-        DBSFieldX neutrals_density_spline_x_coeff(m_spline_x_builder.spline_domain());
+        DBSFieldMemX neutrals_density_spline_x_coeff(get_spline_idx_range(m_spline_x_builder));
 
         m_spline_x_builder(
-                density_equilibrium_velocity_spline_x_coeff.span_view(),
+                get_field(density_equilibrium_velocity_spline_x_coeff),
                 density_equilibrium_velocity[isp].span_cview());
 
         m_spline_x_builder(
-                diffusion_temperature_spline_x_coeff.span_view(),
+                get_field(diffusion_temperature_spline_x_coeff),
                 diffusion_temperature[isp].span_cview());
 
         m_spline_x_builder(
-                neutrals_density_spline_x_coeff.span_view(),
-                neutrals[IndexSpM(isp, ineutral_density)].span_cview());
+                get_field(neutrals_density_spline_x_coeff),
+                neutrals[IdxSpMom(isp, ineutral_density)].span_cview());
 
         // compute gradients
         m_spline_x_evaluator
                 .deriv(gradx_density_equilibrium_velocity[isp].span_view(),
-                       coords_eval.span_cview(),
-                       density_equilibrium_velocity_spline_x_coeff.span_cview());
+                       get_const_field(coords_eval),
+                       get_const_field(density_equilibrium_velocity_spline_x_coeff));
 
         m_spline_x_evaluator
                 .deriv(gradx_diffusion_temperature[isp],
-                       coords_eval.span_cview(),
-                       diffusion_temperature_spline_x_coeff.span_cview());
+                       get_const_field(coords_eval),
+                       get_const_field(diffusion_temperature_spline_x_coeff));
 
         m_spline_x_evaluator
                 .deriv(gradx_neutrals_density[isp],
-                       coords_eval.span_cview(),
-                       neutrals_density_spline_x_coeff.span_cview());
+                       get_const_field(coords_eval),
+                       get_const_field(neutrals_density_spline_x_coeff));
 
         // compute laplacian
-        DBSFieldX gradx_neutrals_density_spline_x_coeff(m_spline_x_builder.spline_domain());
+        DBSFieldMemX gradx_neutrals_density_spline_x_coeff(
+                get_spline_idx_range(m_spline_x_builder));
 
         m_spline_x_builder(
-                gradx_neutrals_density_spline_x_coeff.span_view(),
+                get_field(gradx_neutrals_density_spline_x_coeff),
                 gradx_neutrals_density[isp].span_cview());
 
         m_spline_x_evaluator
                 .deriv(laplx_neutrals_density[isp],
-                       coords_eval.span_cview(),
-                       gradx_neutrals_density_spline_x_coeff.span_cview());
+                       get_const_field(coords_eval),
+                       get_const_field(gradx_neutrals_density_spline_x_coeff));
     });
 
     // build rhs of diffusive model equation
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dom_fluidspx,
-            KOKKOS_LAMBDA(IndexSpX const ifspx) {
+            KOKKOS_LAMBDA(IdxSpX const ifspx) {
                 dn(ifspx, ineutral_density)
                         = -gradx_density_equilibrium_velocity(ifspx)
                           + gradx_diffusion_temperature(ifspx) * gradx_neutrals_density(ifspx)
@@ -179,36 +181,36 @@ void DiffusiveNeutralSolver::get_derivative(
             }); // density source is not solved here, we only solve transport.
 }
 
-DSpanSpMX DiffusiveNeutralSolver::operator()(
-        DSpanSpMX const neutrals,
-        DViewSpXVx const allfdistribu,
-        DViewX const efield,
+DFieldSpMomX DiffusiveNeutralSolver::operator()(
+        DFieldSpMomX const neutrals,
+        DConstFieldSpXVx const allfdistribu,
+        DConstFieldX const efield,
         double const dt) const
 {
     Kokkos::Profiling::pushRegion("DiffusiveNeutralSolver");
-    RK2<DFieldSpMX> timestepper(neutrals.domain());
+    RK2<DFieldMemSpMomX> timestepper(get_idx_range(neutrals));
 
     // moments computation
-    IDomainSpX dom_kspx(allfdistribu.domain());
-    DFieldSpX density_alloc(dom_kspx);
-    DFieldSpX velocity_alloc(dom_kspx);
-    DFieldSpX temperature_alloc(dom_kspx);
+    IdxRangeSpX dom_kspx(get_idx_range(allfdistribu));
+    DFieldMemSpX density_alloc(dom_kspx);
+    DFieldMemSpX velocity_alloc(dom_kspx);
+    DFieldMemSpX temperature_alloc(dom_kspx);
 
-    DSpanSpX density = density_alloc.span_view();
-    DSpanSpX velocity = velocity_alloc.span_view();
-    DSpanSpX temperature = temperature_alloc.span_view();
+    DFieldSpX density = get_field(density_alloc);
+    DFieldSpX velocity = get_field(velocity_alloc);
+    DFieldSpX temperature = get_field(temperature_alloc);
 
-    DViewVx quadrature_coeffs = m_quadrature_coeffs;
+    DConstFieldVx quadrature_coeffs = m_quadrature_coeffs;
 
     // fluid moments computation
     ddc::parallel_fill(density, 0.);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             dom_kspx,
-            KOKKOS_LAMBDA(IndexSpX const ispx) {
+            KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IndexVx const ivx : allfdistribu.domain<IDimVx>()) {
+                for (IdxVx const ivx : get_idx_range<GridVx>(allfdistribu)) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(ispx, ivx));
                     density(ispx) += val;
@@ -220,7 +222,7 @@ DSpanSpMX DiffusiveNeutralSolver::operator()(
                         = (momentum_flux - particle_flux * velocity(ispx)) / density(ispx);
             });
 
-    timestepper.update(neutrals, dt, [&](DSpanSpMX dn, DViewSpMX n) {
+    timestepper.update(neutrals, dt, [&](DFieldSpMomX dn, DConstFieldSpMomX n) {
         get_derivative(dn, n, density, velocity, temperature);
     });
     Kokkos::Profiling::popRegion();

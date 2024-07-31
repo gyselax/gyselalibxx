@@ -306,6 +306,18 @@ def get_geometry_name_shortcuts(geometry_file):
             name_map[struct_name] = 'DField' + struct_name[5:]
         elif struct_name.startswith('DView'):
             name_map[struct_name] = 'DConstField' + struct_name[5:]
+        elif struct_name.startswith('BSField'):
+            name_map[struct_name] = 'BSFieldMem' + struct_name[7:]
+        elif struct_name.startswith('BSSpan'):
+            name_map[struct_name] = 'BSField' + struct_name[6:]
+        elif struct_name.startswith('BSView'):
+            name_map[struct_name] = 'BSConstField' + struct_name[6:]
+        elif struct_name.startswith('DBSField'):
+            name_map[struct_name] = 'DBSFieldMem' + struct_name[8:]
+        elif struct_name.startswith('DBSSpan'):
+            name_map[struct_name] = 'DBSField' + struct_name[7:]
+        elif struct_name.startswith('DBSView'):
+            name_map[struct_name] = 'DBSConstField' + struct_name[7:]
         elif 'DomainType' in struct_name:
             name_map[struct_name] = struct_name.replace('DomainType', 'IdxRange')
         elif 'Domain' in struct_name:

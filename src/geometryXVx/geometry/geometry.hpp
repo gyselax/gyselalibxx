@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
 #include <ddc/kernels/splines.hpp>
@@ -10,10 +9,12 @@
 #include <moments.hpp>
 #include <species_info.hpp>
 
+#include "ddc_aliases.hpp"
+
 /**
  * @brief A class which describes the real space in the spatial X direction
  */
-struct RDimX
+struct X
 {
     /**
      * @brief A boolean indicating if the dimension is periodic.
@@ -28,7 +29,7 @@ struct RDimX
 /**
  * @brief A class which describes the real space in the X-velocity direction
  */
-struct RDimVx
+struct Vx
 {
     /**
      * @brief A boolean indicating if the dimension is periodic.
@@ -39,7 +40,7 @@ struct RDimVx
 /**
  * @brief A class which describes the real space in the temporal direction
  */
-struct RDimT
+struct T
 {
     /**
      * @brief A boolean indicating if the dimension is periodic.
@@ -48,12 +49,12 @@ struct RDimT
 };
 
 
-using CoordT = ddc::Coordinate<RDimT>;
-using CoordX = ddc::Coordinate<RDimX>;
+using CoordT = Coord<T>;
+using CoordX = Coord<X>;
 
-using CoordVx = ddc::Coordinate<RDimVx>;
+using CoordVx = Coord<Vx>;
 
-using CoordXVx = ddc::Coordinate<RDimX, RDimVx>;
+using CoordXVx = Coord<X, Vx>;
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
@@ -64,20 +65,19 @@ bool constexpr BsplineOnUniformCellsVx = true;
 struct BSplinesX
     : std::conditional_t<
               BsplineOnUniformCellsX,
-              ddc::UniformBSplines<RDimX, BSDegreeX>,
-              ddc::NonUniformBSplines<RDimX, BSDegreeX>>
+              ddc::UniformBSplines<X, BSDegreeX>,
+              ddc::NonUniformBSplines<X, BSDegreeX>>
 {
 };
 struct BSplinesVx
     : std::conditional_t<
               BsplineOnUniformCellsVx,
-              ddc::UniformBSplines<RDimVx, BSDegreeVx>,
-              ddc::NonUniformBSplines<RDimVx, BSDegreeVx>>
+              ddc::UniformBSplines<Vx, BSDegreeVx>,
+              ddc::NonUniformBSplines<Vx, BSDegreeVx>>
 {
 };
 
-auto constexpr SplineXBoundary
-        = RDimX::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
 auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
 
 using SplineInterpPointsX
@@ -85,10 +85,10 @@ using SplineInterpPointsX
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 
-struct IDimX : SplineInterpPointsX::interpolation_discrete_dimension_type
+struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
 };
-struct IDimVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
+struct GridVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
 {
 };
 
@@ -96,193 +96,231 @@ using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimVx>;
+        GridX,
+        GridVx>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
 #ifdef PERIODIC_RDIMX
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>,
 #else
-        ddc::ConstantExtrapolationRule<RDimX>,
-        ddc::ConstantExtrapolationRule<RDimX>,
+        ddc::ConstantExtrapolationRule<X>,
+        ddc::ConstantExtrapolationRule<X>,
 #endif
-        IDimX,
-        IDimVx>;
+        GridX,
+        GridVx>;
 using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
-        IDimVx,
+        GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX,
-        IDimVx>;
+        GridX,
+        GridVx>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
-        IDimVx,
-        ddc::ConstantExtrapolationRule<RDimVx>,
-        ddc::ConstantExtrapolationRule<RDimVx>,
-        IDimX,
-        IDimVx>;
+        GridVx,
+        ddc::ConstantExtrapolationRule<Vx>,
+        ddc::ConstantExtrapolationRule<Vx>,
+        GridX,
+        GridVx>;
 using SplineXBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimX>;
+        GridX>;
 using SplineXEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
-        IDimX,
+        GridX,
 #ifdef PERIODIC_RDIMX
-        ddc::PeriodicExtrapolationRule<RDimX>,
-        ddc::PeriodicExtrapolationRule<RDimX>,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>,
 #else
-        ddc::ConstantExtrapolationRule<RDimX>,
-        ddc::ConstantExtrapolationRule<RDimX>,
+        ddc::ConstantExtrapolationRule<X>,
+        ddc::ConstantExtrapolationRule<X>,
 #endif
-        IDimX>;
+        GridX>;
 using SplineVxBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesVx,
-        IDimVx,
+        GridVx,
         SplineVxBoundary,
         SplineVxBoundary,
         ddc::SplineSolver::LAPACK,
-        IDimVx>;
+        GridVx>;
 using SplineVxEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesVx,
-        IDimVx,
-        ddc::ConstantExtrapolationRule<RDimVx>,
-        ddc::ConstantExtrapolationRule<RDimVx>,
-        IDimVx>;
+        GridVx,
+        ddc::ConstantExtrapolationRule<Vx>,
+        ddc::ConstantExtrapolationRule<Vx>,
+        GridVx>;
 
-struct IDimM : Moments
+struct GridMom : Moments
 {
 };
 
-using IndexM = ddc::DiscreteElement<IDimM>;
+using IdxMom = Idx<GridMom>;
 
-using IndexVx = ddc::DiscreteElement<IDimVx>;
+using IdxVx = Idx<GridVx>;
 
-using IndexX = ddc::DiscreteElement<IDimX>;
-
-
-using IndexSpM = ddc::DiscreteElement<Species, IDimM>;
-
-using IndexSpMX = ddc::DiscreteElement<Species, IDimM, IDimX>;
-
-using IndexSpX = ddc::DiscreteElement<Species, IDimX>;
-
-using IndexSpVx = ddc::DiscreteElement<Species, IDimVx>;
-
-using IndexSpXVx = ddc::DiscreteElement<Species, IDimX, IDimVx>;
-
-using IndexXVx = ddc::DiscreteElement<IDimX, IDimVx>;
+using IdxX = Idx<GridX>;
 
 
+using IdxSpMom = Idx<Species, GridMom>;
 
-using IVectM = ddc::DiscreteVector<IDimM>;
+using IdxSpMomX = Idx<Species, GridMom, GridX>;
 
-using IVectVx = ddc::DiscreteVector<IDimVx>;
+using IdxSpX = Idx<Species, GridX>;
 
-using IVectX = ddc::DiscreteVector<IDimX>;
+using IdxSpVx = Idx<Species, GridVx>;
 
+using IdxSpXVx = Idx<Species, GridX, GridVx>;
 
-using IVectSpM = ddc::DiscreteVector<Species, IDimM>;
-
-using IVectSpMX = ddc::DiscreteVector<Species, IDimM, IDimX>;
-
-using IVectSpVx = ddc::DiscreteVector<Species, IDimVx>;
-
-using IVectSpX = ddc::DiscreteVector<Species, IDimX>;
-
-using IVectSpXVx = ddc::DiscreteVector<Species, IDimX, IDimVx>;
-
-using IVectXVx = ddc::DiscreteVector<IDimX, IDimVx>;
+using IdxXVx = Idx<GridX, GridVx>;
 
 
 
-using BSDomainX = ddc::DiscreteDomain<BSplinesX>;
+using IdxStepMom = IdxStep<GridMom>;
 
-using BSDomainVx = ddc::DiscreteDomain<BSplinesVx>;
+using IdxStepVx = IdxStep<GridVx>;
 
-
-
-using IDomainM = ddc::DiscreteDomain<IDimM>;
-
-using IDomainVx = ddc::DiscreteDomain<IDimVx>;
-
-using IDomainX = ddc::DiscreteDomain<IDimX>;
-
-using IDomainSpM = ddc::DiscreteDomain<Species, IDimM>;
-
-using IDomainSpMX = ddc::DiscreteDomain<Species, IDimM, IDimX>;
-
-using IDomainSpVx = ddc::DiscreteDomain<Species, IDimVx>;
-
-using IDomainSpX = ddc::DiscreteDomain<Species, IDimX>;
-
-using IDomainSpXVx = ddc::DiscreteDomain<Species, IDimX, IDimVx>;
-
-using IDomainXVx = ddc::DiscreteDomain<IDimX, IDimVx>;
+using IdxStepX = IdxStep<GridX>;
 
 
-template <class ElementType>
-using FieldVx = device_t<ddc::Chunk<ElementType, IDomainVx>>;
+using IdxStepSpMom = IdxStep<Species, GridMom>;
 
-template <class ElementType>
-using FieldX = device_t<ddc::Chunk<ElementType, IDomainX>>;
+using IdxStepSpMomX = IdxStep<Species, GridMom, GridX>;
 
-template <class ElementType>
-using BSFieldX = device_t<ddc::Chunk<ElementType, BSDomainX>>;
+using IdxStepSpVx = IdxStep<Species, GridVx>;
+
+using IdxStepSpX = IdxStep<Species, GridX>;
+
+using IdxStepSpXVx = IdxStep<Species, GridX, GridVx>;
+
+using IdxStepXVx = IdxStep<GridX, GridVx>;
+
+
+
+using BSIdxRangeX = IdxRange<BSplinesX>;
+
+using BSIdxRangeVx = IdxRange<BSplinesVx>;
+
+
+
+using IdxRangeMom = IdxRange<GridMom>;
+
+using IdxRangeVx = IdxRange<GridVx>;
+
+using IdxRangeX = IdxRange<GridX>;
+
+using IdxRangeSpMom = IdxRange<Species, GridMom>;
+
+using IdxRangeSpMomX = IdxRange<Species, GridMom, GridX>;
+
+using IdxRangeSpVx = IdxRange<Species, GridVx>;
+
+using IdxRangeSpX = IdxRange<Species, GridX>;
+
+using IdxRangeSpXVx = IdxRange<Species, GridX, GridVx>;
+
+using IdxRangeXVx = IdxRange<GridX, GridVx>;
 
 
 template <class ElementType>
-using FieldSpM = device_t<ddc::Chunk<ElementType, IDomainSpM>>;
+using FieldMemVx = FieldMem<ElementType, IdxRangeVx>;
 
 template <class ElementType>
-using FieldSpMX = device_t<ddc::Chunk<ElementType, IDomainSpMX>>;
+using FieldMemX = FieldMem<ElementType, IdxRangeX>;
 
 template <class ElementType>
-using FieldSpVx = device_t<ddc::Chunk<ElementType, IDomainSpVx>>;
+using BSFieldMemX = FieldMem<ElementType, BSIdxRangeX>;
+
 
 template <class ElementType>
-using FieldSpX = device_t<ddc::Chunk<ElementType, IDomainSpX>>;
+using FieldMemSpMom = FieldMem<ElementType, IdxRangeSpMom>;
 
 template <class ElementType>
-using FieldSpXVx = device_t<ddc::Chunk<ElementType, IDomainSpXVx>>;
+using FieldMemSpMomX = FieldMem<ElementType, IdxRangeSpMomX>;
+
+template <class ElementType>
+using FieldMemSpVx = FieldMem<ElementType, IdxRangeSpVx>;
+
+template <class ElementType>
+using FieldMemSpX = FieldMem<ElementType, IdxRangeSpX>;
+
+template <class ElementType>
+using FieldMemSpXVx = FieldMem<ElementType, IdxRangeSpXVx>;
 
 
+
+using DFieldMemVx = FieldMemVx<double>;
+
+using DFieldMemX = FieldMemX<double>;
+
+using DBSFieldMemX = BSFieldMemX<double>;
+
+
+using DFieldMemSpMom = FieldMemSpMom<double>;
+
+using DFieldMemSpMomX = FieldMemSpMomX<double>;
+
+using DFieldMemSpVx = FieldMemSpVx<double>;
+
+using DFieldMemSpX = FieldMemSpX<double>;
+
+using DFieldMemSpXVx = FieldMemSpXVx<double>;
+
+
+
+template <class ElementType>
+using BSFieldX = Field<ElementType, BSIdxRangeX>;
+
+template <class ElementType>
+using FieldX = Field<ElementType, IdxRangeX>;
+
+template <class ElementType>
+using FieldVx = Field<ElementType, IdxRangeVx>;
+
+template <class ElementType>
+using FieldSpMomX = Field<ElementType, IdxRangeSpMomX>;
+
+template <class ElementType>
+using FieldSpVx = Field<ElementType, IdxRangeSpVx>;
+
+template <class ElementType>
+using FieldSpX = Field<ElementType, IdxRangeSpX>;
+
+template <class ElementType>
+using FieldSpXVx = Field<ElementType, IdxRangeSpXVx>;
+
+
+using DBSFieldX = BSFieldX<double>;
 
 using DFieldVx = FieldVx<double>;
 
 using DFieldX = FieldX<double>;
 
-using DBSFieldX = BSFieldX<double>;
-
-
-using DFieldSpM = FieldSpM<double>;
-
-using DFieldSpMX = FieldSpMX<double>;
+using DFieldSpMomX = FieldSpMomX<double>;
 
 using DFieldSpVx = FieldSpVx<double>;
 
@@ -291,121 +329,83 @@ using DFieldSpX = FieldSpX<double>;
 using DFieldSpXVx = FieldSpXVx<double>;
 
 
+template <class ElementType>
+using ConstFieldVx = Field<ElementType const, IdxRangeVx>;
 
 template <class ElementType>
-using BSSpanX = device_t<ddc::ChunkSpan<ElementType, BSDomainX>>;
-
-template <class ElementType>
-using SpanX = device_t<ddc::ChunkSpan<ElementType, IDomainX>>;
-
-template <class ElementType>
-using SpanVx = device_t<ddc::ChunkSpan<ElementType, IDomainVx>>;
-
-template <class ElementType>
-using SpanSpMX = device_t<ddc::ChunkSpan<ElementType, IDomainSpMX>>;
-
-template <class ElementType>
-using SpanSpVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpVx>>;
-
-template <class ElementType>
-using SpanSpX = device_t<ddc::ChunkSpan<ElementType, IDomainSpX>>;
-
-template <class ElementType>
-using SpanSpXVx = device_t<ddc::ChunkSpan<ElementType, IDomainSpXVx>>;
-
-
-using DBSSpanX = BSSpanX<double>;
-
-using DSpanVx = SpanVx<double>;
-
-using DSpanX = SpanX<double>;
-
-using DSpanSpMX = SpanSpMX<double>;
-
-using DSpanSpVx = SpanSpVx<double>;
-
-using DSpanSpX = SpanSpX<double>;
-
-using DSpanSpXVx = SpanSpXVx<double>;
+using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
 
 template <class ElementType>
-using ViewVx = device_t<ddc::ChunkSpan<ElementType const, IDomainVx>>;
+using BSConstFieldX = Field<ElementType const, BSIdxRangeX>;
 
 template <class ElementType>
-using ViewX = device_t<ddc::ChunkSpan<ElementType const, IDomainX>>;
-
-
-template <class ElementType>
-using BSViewX = device_t<ddc::ChunkSpan<ElementType const, BSDomainX>>;
+using ConstFieldSpMom = Field<ElementType const, IdxRangeSpMom>;
 
 template <class ElementType>
-using ViewSpM = device_t<ddc::ChunkSpan<ElementType const, IDomainSpM>>;
+using ConstFieldSpMomX = Field<ElementType const, IdxRangeSpMomX>;
 
 template <class ElementType>
-using ViewSpMX = device_t<ddc::ChunkSpan<ElementType const, IDomainSpMX>>;
+using ConstFieldSpVx = Field<ElementType const, IdxRangeSpVx>;
 
 template <class ElementType>
-using ViewSpVx = device_t<ddc::ChunkSpan<ElementType const, IDomainSpVx>>;
+using ConstFieldSpX = Field<ElementType const, IdxRangeSpX>;
 
 template <class ElementType>
-using ViewSpX = device_t<ddc::ChunkSpan<ElementType const, IDomainSpX>>;
-
-template <class ElementType>
-using ViewSpXVx = device_t<ddc::ChunkSpan<ElementType const, IDomainSpXVx>>;
+using ConstFieldSpXVx = Field<ElementType const, IdxRangeSpXVx>;
 
 
 
-using DViewVx = ViewVx<double>;
+using DConstFieldVx = ConstFieldVx<double>;
 
-using DViewX = ViewX<double>;
+using DConstFieldX = ConstFieldX<double>;
 
 
-using DBSViewX = BSViewX<double>;
+using DBSConstFieldX = BSConstFieldX<double>;
 
-using DViewSpM = ViewSpM<double>;
+using DConstFieldSpMom = ConstFieldSpMom<double>;
 
-using DViewSpMX = ViewSpMX<double>;
+using DConstFieldSpMomX = ConstFieldSpMomX<double>;
 
-using DViewSpX = ViewSpX<double>;
+using DConstFieldSpX = ConstFieldSpX<double>;
 
-using DViewSpVx = ViewSpVx<double>;
+using DConstFieldSpVx = ConstFieldSpVx<double>;
 
-using DViewSpXVx = ViewSpXVx<double>;
+using DConstFieldSpXVx = ConstFieldSpXVx<double>;
 
 
 /**
- * @brief A class providing aliases for useful subdomains of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections.
+ * @brief A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections.
  */
 class GeometryXVx
 {
 public:
     /**
-     * @brief A templated type giving the velocity discrete dimension type associated to a spatial discrete dimension type.
+     * @brief A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type.
      */
     template <class T>
-    using velocity_dim_for = std::conditional_t<std::is_same_v<T, IDimX>, IDimVx, void>;
+    using velocity_dim_for = std::conditional_t<std::is_same_v<T, GridX>, GridVx, void>;
 
     /**
-     * @brief A templated type giving the spatial discrete dimension type associated to a velocity discrete dimension type.
+     * @brief A templated type giving the spatial discretised dimension type associated to a velocity discretised dimension type.
      */
     template <class T>
-    using spatial_dim_for = std::conditional_t<std::is_same_v<T, IDimVx>, IDimX, void>;
+    using spatial_dim_for = std::conditional_t<std::is_same_v<T, GridVx>, GridX, void>;
 
     /**
-     * @brief An alias for the spatial discrete domain type.
+     * @brief An alias for the spatial discrete index range type.
      */
-    using SpatialIdxRange = IDomainX;
+    using SpatialIdxRange = IdxRangeX;
 
     /**
-     * @brief An alias for the velocity discrete domain type.
+     * @brief An alias for the velocity discrete index range type.
      */
-    using VelocityIdxRange = IDomainVx;
+    using VelocityIdxRange = IdxRangeVx;
 
 
-    // using FdistribuDDom = DiscreteDomain<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(ddc::DiscreteDomain());
+    // using FdistribuIdxRange = DiscreteDomain<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(IdxRange());
     /**
-     * @brief An alias for the whole distribution function discrete domain type.
+     * @brief An alias for the whole distribution function discrete index range type.
      */
-    using FdistribuIdxRange = IDomainSpXVx;
+    using FdistribuIdxRange = IdxRangeSpXVx;
 };

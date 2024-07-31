@@ -18,19 +18,19 @@
  * singular point and ensure the desired continuity condition.
  *
  * @tparam BSplinesR  The basis of radial bsplines from which the polar bsplines are constructed.
- * @tparam BSplinesTheta  The poloidal bspline from which the polar bsplines are constructed.
+ * @tparam BSplinesP  The poloidal bspline from which the polar bsplines are constructed.
  * @tparam C          The continuity condition. The resulting splines will be continuously
  *                    differentiable C times. If C == -1 then the resulting spline representation
  *                    will be discontinuous at the singular point.
  */
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 class PolarBSplines
 {
     static_assert(C >= -1, "Parameter `C` cannot be less than -1");
     static_assert(C < 2, "Values larger than 1 are not implemented for parameter `C`");
     static_assert(!BSplinesR::is_periodic(), "Radial bsplines must not be periodic.");
     static_assert(!BSplinesR::is_uniform(), "Radial bsplines must have knots at the boundary.");
-    static_assert(BSplinesTheta::is_periodic(), "Poloidal bsplines should be periodic.");
+    static_assert(BSplinesP::is_periodic(), "Poloidal bsplines should be periodic.");
 
 private:
     // Tags to determine what to evaluate
@@ -47,14 +47,14 @@ public:
     using BSplinesR_tag = BSplinesR;
 
     /// The poloidal bspline from which the polar bsplines are constructed.
-    using BSplinesTheta_tag = BSplinesTheta;
+    using BSplinesP_tag = BSplinesP;
 
 
     /// The tag for the radial direction of the bsplines.
     using DimR = typename BSplinesR::continuous_dimension_type;
 
     /// The tag for the poloidal direction of the bsplines.
-    using DimTheta = typename BSplinesTheta::continuous_dimension_type;
+    using DimP = typename BSplinesP::continuous_dimension_type;
 
 public:
     /// The continuity enforced by the bsplines at the singular point.
@@ -74,25 +74,25 @@ public:
      * The type of a 2D index for the subset of the polar bsplines which can be expressed as a tensor
      * product of 1D bsplines.
      */
-    using tensor_product_index_type = ddc::DiscreteElement<BSplinesR, BSplinesTheta>;
+    using tensor_product_index_type = ddc::DiscreteElement<BSplinesR, BSplinesP>;
 
     /**
      * The type of the 2D idx_range for the subset of the polar bsplines which can be expressed as a tensor
      * product of 1D bsplines.
      */
-    using tensor_product_idx_range_type = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
+    using tensor_product_idx_range_type = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
     /**
      * The type of a 2D vector for the subset of the polar bsplines which can be expressed as a tensor
      * product of 1D bsplines.
      */
-    using tensor_product_idx_step_type = ddc::DiscreteVector<BSplinesR, BSplinesTheta>;
+    using tensor_product_idx_step_type = ddc::DiscreteVector<BSplinesR, BSplinesP>;
 
 private:
     using IdxR = ddc::DiscreteElement<BSplinesR>;
-    using IdxTheta = ddc::DiscreteElement<BSplinesTheta>;
+    using IdxP = ddc::DiscreteElement<BSplinesP>;
     using IdxStepR = ddc::DiscreteVector<BSplinesR>;
-    using IdxStepTheta = ddc::DiscreteVector<BSplinesTheta>;
+    using IdxStepP = ddc::DiscreteVector<BSplinesP>;
 
 public:
     /**
@@ -133,9 +133,9 @@ public:
     static ddc::DiscreteElement<DDim> get_polar_index(tensor_product_index_type const& idx)
     {
         int const r_idx = ddc::select<BSplinesR>(idx).uid();
-        int const theta_idx = ddc::select<BSplinesTheta>(idx).uid();
+        int const p_idx = ddc::select<BSplinesP>(idx).uid();
         assert(r_idx >= C + 1);
-        int local_idx((r_idx - C - 1) * ddc::discrete_space<BSplinesTheta>().nbasis() + theta_idx);
+        int local_idx((r_idx - C - 1) * ddc::discrete_space<BSplinesP>().nbasis() + p_idx);
         return ddc::DiscreteElement<DDim>(n_singular_basis() + local_idx);
     }
 
@@ -152,11 +152,11 @@ public:
     {
         assert(idx.uid() >= n_singular_basis());
         int const idx_2d = idx.uid() - n_singular_basis();
-        int const r_idx = idx_2d / ddc::discrete_space<BSplinesTheta>().nbasis();
-        int const theta_idx = idx_2d - r_idx * ddc::discrete_space<BSplinesTheta>().nbasis();
+        int const r_idx = idx_2d / ddc::discrete_space<BSplinesP>().nbasis();
+        int const p_idx = idx_2d - r_idx * ddc::discrete_space<BSplinesP>().nbasis();
         ddc::DiscreteElement<BSplinesR> r_idx_elem(r_idx + C + 1);
-        ddc::DiscreteElement<BSplinesTheta> theta_idx_elem(theta_idx);
-        return ddc::DiscreteElement<BSplinesR, BSplinesTheta>(r_idx_elem, theta_idx_elem);
+        ddc::DiscreteElement<BSplinesP> p_idx_elem(p_idx);
+        return ddc::DiscreteElement<BSplinesR, BSplinesP>(r_idx_elem, p_idx_elem);
     }
 
 private:
@@ -185,7 +185,7 @@ public:
          * an index for the polar bspline being constructed, and 2 indices for the 2D bspline.
          */
         using singular_basis_linear_combination_idx_range_type
-                = ddc::DiscreteDomain<DDim, BSplinesR, BSplinesTheta>;
+                = ddc::DiscreteDomain<DDim, BSplinesR, BSplinesP>;
 
         ddc::Chunk<
                 double,
@@ -248,11 +248,11 @@ public:
                     typename DiscreteMapping::BSplineP>;
             if constexpr (C > -1) {
                 const ddc::Coordinate<DimX, DimY> pole
-                        = curvilinear_to_cartesian(ddc::Coordinate<DimR, DimTheta>(0.0, 0.0));
+                        = curvilinear_to_cartesian(ddc::Coordinate<DimR, DimP>(0.0, 0.0));
                 const double x0 = ddc::get<DimX>(pole);
                 const double y0 = ddc::get<DimY>(pole);
                 double tau = 0.0;
-                for (std::size_t i(0); i < ddc::discrete_space<BSplinesTheta>().size(); ++i) {
+                for (std::size_t i(0); i < ddc::discrete_space<BSplinesP>().size(); ++i) {
                     const ddc::Coordinate<DimX, DimY> point
                             = curvilinear_to_cartesian.control_point(
                                     mapping_tensor_product_index_type(1, i));
@@ -291,11 +291,11 @@ public:
                 assert(nr_in_singular.value() < int(ddc::discrete_space<BSplinesR>().size()));
 
                 // The number of poloidal bases used to construct the bsplines traversing the singular point.
-                const IdxStepTheta np_in_singular(ddc::discrete_space<BSplinesTheta>().nbasis());
+                const IdxStepP np_in_singular(ddc::discrete_space<BSplinesP>().nbasis());
 
                 // The number of elements of the poloidal basis which will have an associated coefficient
                 // (This will be larger than np_in_singular as it includes the periodicity)
-                const IdxStepTheta np_tot(ddc::discrete_space<BSplinesTheta>().size());
+                const IdxStepP np_tot(ddc::discrete_space<BSplinesP>().size());
 
                 // The index range of the 2D bsplines in the innermost circles from which the polar bsplines
                 // traversing the singular point will be constructed.
@@ -314,11 +314,11 @@ public:
                         ddc::DiscreteElement<BernsteinBasis> {0},
                         ddc::DiscreteVector<BernsteinBasis> {n_singular_basis()});
 
-                ddc::DiscreteDomain<BSplinesTheta> poloidal_spline_idx_range
-                        = ddc::discrete_space<BSplinesTheta>().full_domain();
+                ddc::DiscreteDomain<BSplinesP> poloidal_spline_idx_range
+                        = ddc::discrete_space<BSplinesP>().full_domain();
 
                 for (IdxR const ir : ddc::DiscreteDomain<BSplinesR>(IdxR(0), IdxStepR(C + 1))) {
-                    for (IdxTheta const ip : poloidal_spline_idx_range.take_first(np_in_singular)) {
+                    for (IdxP const ip : poloidal_spline_idx_range.take_first(np_in_singular)) {
                         const ddc::Coordinate<DimX, DimY> point
                                 = curvilinear_to_cartesian.control_point(
                                         mapping_tensor_product_index_type(ir, ip));
@@ -332,8 +332,8 @@ public:
                         }
                     }
                     for (discrete_element_type k : singular_idx_range<DDim>()) {
-                        for (IdxTheta const ip : poloidal_spline_idx_range.take_first(
-                                     IdxStepTheta {BSplinesTheta::degree()})) {
+                        for (IdxP const ip :
+                             poloidal_spline_idx_range.take_first(IdxStepP {BSplinesP::degree()})) {
                             m_singular_basis_elements(k, ir, ip + np_in_singular)
                                     = m_singular_basis_elements(k, ir, ip);
                         }
@@ -422,7 +422,7 @@ public:
         tensor_product_index_type eval_basis(
                 DSpan1D singular_values,
                 DSpan2D values,
-                ddc::Coordinate<DimR, DimTheta> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
 
         /**
          * @brief Evaluate the radial derivative of the polar basis splines at the coordinate p.
@@ -443,7 +443,7 @@ public:
         tensor_product_index_type eval_deriv_r(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                ddc::Coordinate<DimR, DimTheta> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
 
         /**
          * @brief Evaluate the poloidal derivative of the polar basis splines at the coordinate p.
@@ -461,10 +461,10 @@ public:
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
-        tensor_product_index_type eval_deriv_theta(
+        tensor_product_index_type eval_deriv_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                ddc::Coordinate<DimR, DimTheta> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
 
         /**
          * @brief Evaluate the second order derivative of the polar basis splines in the radial and poloidal
@@ -483,10 +483,10 @@ public:
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
-        tensor_product_index_type eval_deriv_r_and_theta(
+        tensor_product_index_type eval_deriv_r_and_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                ddc::Coordinate<DimR, DimTheta> p) const;
+                ddc::Coordinate<DimR, DimP> p) const;
 
         /**
          * Calculate the integrals of each of the basis splines.
@@ -503,8 +503,8 @@ public:
         std::size_t nbasis() const noexcept
         {
             std::size_t nr = ddc::discrete_space<BSplinesR>().nbasis() - C - 1;
-            std::size_t ntheta = ddc::discrete_space<BSplinesTheta>().nbasis();
-            return n_singular_basis() + nr * ntheta;
+            std::size_t np = ddc::discrete_space<BSplinesP>().nbasis();
+            return n_singular_basis() + nr * np;
         }
 
         /**
@@ -531,88 +531,88 @@ public:
 
     private:
         template <class EvalTypeR, class EvalTypeP>
-        ddc::DiscreteElement<BSplinesR, BSplinesTheta> eval(
+        ddc::DiscreteElement<BSplinesR, BSplinesP> eval(
                 DSpan1D singular_values,
                 DSpan2D values,
-                ddc::Coordinate<DimR, DimTheta> coord_eval,
+                ddc::Coordinate<DimR, DimP> coord_eval,
                 EvalTypeR const,
                 EvalTypeP const) const;
     };
 };
 
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 template <class DDim, class MemorySpace>
-ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
+ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
         Impl<DDim, MemorySpace>::eval_basis(
                 DSpan1D singular_values,
                 DSpan2D values,
-                ddc::Coordinate<DimR, DimTheta> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_values, values, p, eval_type(), eval_type());
 }
 
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 template <class DDim, class MemorySpace>
-ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
+ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
         Impl<DDim, MemorySpace>::eval_deriv_r(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                ddc::Coordinate<DimR, DimTheta> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());
 }
 
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 template <class DDim, class MemorySpace>
-ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
-        Impl<DDim, MemorySpace>::eval_deriv_theta(
+ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
+        Impl<DDim, MemorySpace>::eval_deriv_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                ddc::Coordinate<DimR, DimTheta> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());
 }
 
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 template <class DDim, class MemorySpace>
-ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
-        Impl<DDim, MemorySpace>::eval_deriv_r_and_theta(
+ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
+        Impl<DDim, MemorySpace>::eval_deriv_r_and_p(
                 DSpan1D singular_derivs,
                 DSpan2D derivs,
-                ddc::Coordinate<DimR, DimTheta> p) const
+                ddc::Coordinate<DimR, DimP> p) const
 {
     return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());
 }
 
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 template <class DDim, class MemorySpace>
 template <class EvalTypeR, class EvalTypeP>
-ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
+ddc::DiscreteElement<BSplinesR, BSplinesP> PolarBSplines<BSplinesR, BSplinesP, C>::
         Impl<DDim, MemorySpace>::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
-                ddc::Coordinate<DimR, DimTheta> coord_eval,
+                ddc::Coordinate<DimR, DimP> coord_eval,
                 EvalTypeR const,
                 EvalTypeP const) const
 {
     assert(singular_values.extent(0) == n_singular_basis());
     assert(values.extent(0) == BSplinesR::degree() + 1);
-    assert(values.extent(1) == BSplinesTheta::degree() + 1);
+    assert(values.extent(1) == BSplinesP::degree() + 1);
     static_assert(
             std::is_same_v<EvalTypeR, eval_type> || std::is_same_v<EvalTypeR, eval_deriv_type>);
     static_assert(
             std::is_same_v<EvalTypeP, eval_type> || std::is_same_v<EvalTypeP, eval_deriv_type>);
 
     ddc::DiscreteElement<BSplinesR> jmin_r;
-    ddc::DiscreteElement<BSplinesTheta> jmin_theta;
+    ddc::DiscreteElement<BSplinesP> jmin_p;
 
     std::size_t constexpr nr = BSplinesR::degree() + 1;
-    std::size_t constexpr ntheta = BSplinesTheta::degree() + 1;
+    std::size_t constexpr np = BSplinesP::degree() + 1;
 
     std::array<double, nr> vals_r_ptr;
-    std::array<double, ntheta> vals_theta_ptr;
+    std::array<double, np> vals_p_ptr;
     DSpan1D const vals_r(vals_r_ptr.data(), nr);
-    DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
+    DSpan1D const vals_p(vals_p_ptr.data(), np);
 
     if constexpr (std::is_same_v<EvalTypeR, eval_type>) {
         jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<DimR>(coord_eval));
@@ -620,11 +620,9 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
         jmin_r = ddc::discrete_space<BSplinesR>().eval_deriv(vals_r, ddc::select<DimR>(coord_eval));
     }
     if constexpr (std::is_same_v<EvalTypeP, eval_type>) {
-        jmin_theta = ddc::discrete_space<BSplinesTheta>()
-                             .eval_basis(vals_theta, ddc::select<DimTheta>(coord_eval));
+        jmin_p = ddc::discrete_space<BSplinesP>().eval_basis(vals_p, ddc::select<DimP>(coord_eval));
     } else if constexpr (std::is_same_v<EvalTypeP, eval_deriv_type>) {
-        jmin_theta = ddc::discrete_space<BSplinesTheta>()
-                             .eval_deriv(vals_theta, ddc::select<DimTheta>(coord_eval));
+        jmin_p = ddc::discrete_space<BSplinesP>().eval_deriv(vals_p, ddc::select<DimP>(coord_eval));
     }
 
     std::size_t nr_done = 0;
@@ -634,10 +632,9 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
         for (discrete_element_type k : singular_idx_range<DDim>()) {
             singular_values(k.uid()) = 0.0;
             for (std::size_t i(0); i < nr_done; ++i) {
-                for (std::size_t j(0); j < ntheta; ++j) {
-                    singular_values(k.uid())
-                            += m_singular_basis_elements(k, jmin_r + i, jmin_theta + j) * vals_r[i]
-                               * vals_theta[j];
+                for (std::size_t j(0); j < np; ++j) {
+                    singular_values(k.uid()) += m_singular_basis_elements(k, jmin_r + i, jmin_p + j)
+                                                * vals_r[i] * vals_p[j];
                 }
             }
         }
@@ -648,56 +645,54 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
     }
 
     for (std::size_t i(0); i < nr - nr_done; ++i) {
-        for (std::size_t j(0); j < ntheta; ++j) {
-            values(i, j) = vals_r[i + nr_done] * vals_theta[j];
+        for (std::size_t j(0); j < np; ++j) {
+            values(i, j) = vals_r[i + nr_done] * vals_p[j];
         }
     }
     for (std::size_t i(nr - nr_done); i < nr; ++i) {
-        for (std::size_t j(0); j < ntheta; ++j) {
+        for (std::size_t j(0); j < np; ++j) {
             values(i, j) = 0.0;
         }
     }
-    return ddc::DiscreteElement<BSplinesR, BSplinesTheta>(jmin_r, jmin_theta);
+    return ddc::DiscreteElement<BSplinesR, BSplinesP>(jmin_r, jmin_p);
 }
 
-template <class BSplinesR, class BSplinesTheta, int C>
+template <class BSplinesR, class BSplinesP, int C>
 template <class DDim, class MemorySpace>
-void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integrals(
+void PolarBSplines<BSplinesR, BSplinesP, C>::Impl<DDim, MemorySpace>::integrals(
         PolarSplineSpan<DDim> int_vals) const
 {
     auto r_bspl_space = ddc::discrete_space<BSplinesR>();
-    auto theta_bspl_space = ddc::discrete_space<BSplinesTheta>();
+    auto p_bspl_space = ddc::discrete_space<BSplinesP>();
 
     assert(int_vals.singular_spline_coef.domain().extents() == n_singular_basis());
     assert(int_vals.spline_coef.domain().front().template uid<BSplinesR>() == C + 1);
     assert(int_vals.spline_coef.domain().back().template uid<BSplinesR>()
            == r_bspl_space.nbasis() - 1);
-    assert(int_vals.spline_coef.domain().template extent<BSplinesTheta>()
-                   == theta_bspl_space.nbasis()
-           || int_vals.spline_coef.domain().template extent<BSplinesTheta>()
-                      == theta_bspl_space.size());
+    assert(int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.nbasis()
+           || int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.size());
 
     ddc::Chunk<double, ddc::DiscreteDomain<BSplinesR>> r_integrals_alloc(
             r_bspl_space.full_domain().take_first(
                     ddc::DiscreteVector<BSplinesR> {r_bspl_space.nbasis()}));
-    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesTheta>> theta_integrals_alloc(
-            theta_bspl_space.full_domain().take_first(
-                    ddc::DiscreteVector<BSplinesTheta> {theta_bspl_space.size()}));
+    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesP>> p_integrals_alloc(
+            p_bspl_space.full_domain().take_first(
+                    ddc::DiscreteVector<BSplinesP> {p_bspl_space.size()}));
     ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();
-    ddc::ChunkSpan theta_integrals = theta_integrals_alloc.span_view();
+    ddc::ChunkSpan p_integrals = p_integrals_alloc.span_view();
 
     r_bspl_space.integrals(r_integrals);
-    theta_bspl_space.integrals(theta_integrals);
+    p_bspl_space.integrals(p_integrals);
 
     ddc::for_each(singular_idx_range<DDim>(), [&](auto k) {
         int_vals.singular_spline_coef(k) = ddc::transform_reduce(
-                ddc::select<BSplinesR, BSplinesTheta>(m_singular_basis_elements.domain()),
+                ddc::select<BSplinesR, BSplinesP>(m_singular_basis_elements.domain()),
                 0.0,
                 ddc::reducer::sum<double>(),
                 [&](tensor_product_index_type const idx) {
                     IdxR i = ddc::select<BSplinesR>(idx);
-                    IdxTheta j = ddc::select<BSplinesTheta>(idx);
-                    return m_singular_basis_elements(k, i, j) * r_integrals(i) * theta_integrals(j);
+                    IdxP j = ddc::select<BSplinesP>(idx);
+                    return m_singular_basis_elements(k, i, j) * r_integrals(i) * p_integrals(j);
                 });
     });
 
@@ -705,16 +700,16 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
             ddc::select<BSplinesR>(int_vals.spline_coef.domain()));
 
     tensor_product_idx_range_type
-            tensor_bspline_idx_range(r_tensor_product_dom, theta_integrals.domain());
+            tensor_bspline_idx_range(r_tensor_product_dom, p_integrals.domain());
 
     ddc::for_each(tensor_bspline_idx_range, [&](auto idx) {
         int_vals.spline_coef(idx) = r_integrals(ddc::select<BSplinesR>(idx))
-                                    * theta_integrals(ddc::select<BSplinesTheta>(idx));
+                                    * p_integrals(ddc::select<BSplinesP>(idx));
     });
 
-    if (int_vals.spline_coef.domain().template extent<BSplinesTheta>() == theta_bspl_space.size()) {
-        ddc::DiscreteDomain<BSplinesTheta> periodic_points(theta_integrals.domain().take_last(
-                ddc::DiscreteVector<BSplinesTheta> {BSplinesTheta::degree()}));
+    if (int_vals.spline_coef.domain().template extent<BSplinesP>() == p_bspl_space.size()) {
+        ddc::DiscreteDomain<BSplinesP> periodic_points(p_integrals.domain().take_last(
+                ddc::DiscreteVector<BSplinesP> {BSplinesP::degree()}));
         tensor_product_idx_range_type repeat_idx_range(r_tensor_product_dom, periodic_points);
         ddc::for_each(repeat_idx_range, [&](auto idx) { int_vals.spline_coef(idx) = 0.0; });
     }

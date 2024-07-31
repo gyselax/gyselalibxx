@@ -52,6 +52,8 @@ target_link_libraries(unit_tests_lagrange
         GTest::gtest
         GTest::gmock
         gslx::interpolation
+        gslx::utils
+
 
 )
 gtest_discover_tests(unit_tests_lagrange
@@ -71,6 +73,8 @@ target_link_libraries(unit_tests_advection
         gslx::interpolation
 	gslx::advection
 	gslx::geometry_xperiod_vx
+	gslx::utils
+
 
 )
 gtest_discover_tests(unit_tests_advection 

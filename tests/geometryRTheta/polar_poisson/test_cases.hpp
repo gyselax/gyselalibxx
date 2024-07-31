@@ -1,4 +1,5 @@
 #pragma once
+
 #include <cmath>
 
 #include <ddc/ddc.hpp>
@@ -7,7 +8,6 @@
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 
-#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 
 /**
@@ -27,10 +27,10 @@ public:
     using coordinate_converter_type = CurvilinearToCartesian;
 
 private:
-    using X = typename CurvilinearToCartesian::cartesian_tag_x;
-    using Y = typename CurvilinearToCartesian::cartesian_tag_y;
-    using R = typename CurvilinearToCartesian::curvilinear_tag_r;
-    using Theta = typename CurvilinearToCartesian::curvilinear_tag_p;
+    using RDimX = typename CurvilinearToCartesian::cartesian_tag_x;
+    using RDimY = typename CurvilinearToCartesian::cartesian_tag_y;
+    using RDimR = typename CurvilinearToCartesian::curvilinear_tag_r;
+    using RDimP = typename CurvilinearToCartesian::curvilinear_tag_p;
 
 protected:
     /**
@@ -61,7 +61,7 @@ public:
      *
      * @return The value of the function at a given coordinate.
      */
-    virtual double operator()(Coord<R, Theta> const& coord) const = 0;
+    virtual double operator()(ddc::Coordinate<RDimR, RDimP> const& coord) const = 0;
 };
 
 /**
@@ -88,10 +88,10 @@ public:
     {
     }
 
-    double operator()(Coord<R, Theta> const& coord) const final
+    double operator()(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
-        const double s = ddc::get<R>(coord);
-        const double t = ddc::get<Theta>(coord);
+        const double s = ddc::get<RDimR>(coord);
+        const double t = ddc::get<RDimP>(coord);
         return 1e-4 * ipow(s, 6) * ipow(s - 1, 6) / ipow(0.5, 12) * std::cos(11 * t);
     }
 };
@@ -128,13 +128,13 @@ public:
     {
     }
 
-    double operator()(Coord<R, Theta> const& coord) const final
+    double operator()(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
-        const double s = ddc::get<R>(coord);
-        const Coord<X, Y> cart_coord
+        const double s = ddc::get<RDimR>(coord);
+        const ddc::Coordinate<RDimX, RDimY> cart_coord
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter(coord);
-        const double x = ddc::get<X>(cart_coord);
-        const double y = ddc::get<Y>(cart_coord);
+        const double x = ddc::get<RDimX>(cart_coord);
+        const double y = ddc::get<RDimY>(cart_coord);
         return 1e-4 * ipow(1 + s, 6) * ipow(1 - s, 6) * std::cos(2 * M_PI * x)
                * std::sin(2 * M_PI * y) / ipow(0.5, 12);
     }
@@ -147,14 +147,14 @@ public:
      *
      * @return The value of the x-derivative of the function at a given coordinate.
      */
-    double derivative_x(Coord<R, Theta> const& coord) const
+    double derivative_x(ddc::Coordinate<RDimR, RDimP> const& coord) const
     {
-        const Coord<X, Y> cart_coord
+        const ddc::Coordinate<RDimX, RDimY> cart_coord
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter(coord);
-        const double x = ddc::get<X>(cart_coord);
-        const double y = ddc::get<Y>(cart_coord);
+        const double x = ddc::get<RDimX>(cart_coord);
+        const double y = ddc::get<RDimY>(cart_coord);
 
-        const double r = ddc::get<R>(coord);
+        const double r = ddc::get<RDimR>(coord);
         const double dx_r
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter.inv_jacobian_11(
                         coord);
@@ -173,14 +173,14 @@ public:
      *
      * @return The value of the y-derivative of the function at a given coordinate.
      */
-    double derivative_y(Coord<R, Theta> const& coord) const
+    double derivative_y(ddc::Coordinate<RDimR, RDimP> const& coord) const
     {
-        const Coord<X, Y> cart_coord
+        const ddc::Coordinate<RDimX, RDimY> cart_coord
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter(coord);
-        const double x = ddc::get<X>(cart_coord);
-        const double y = ddc::get<Y>(cart_coord);
+        const double x = ddc::get<RDimX>(cart_coord);
+        const double y = ddc::get<RDimY>(cart_coord);
 
-        const double r = ddc::get<R>(coord);
+        const double r = ddc::get<RDimR>(coord);
         const double dy_r
                 = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter.inv_jacobian_12(
                         coord);
@@ -228,27 +228,27 @@ public:
      *
      * @return The value of the RHS at the O-point.
      */
-    double solution_at_pole(Coord<R, Theta> const& coord) const;
+    double solution_at_pole(ddc::Coordinate<RDimR, RDimP> const& coord) const;
     /**
-     * @brief Get the value of the RHS on the index range except the O-point.
+     * @brief Get the value of the RHS on the domain except the O-point.
      *
      * @param[in] coord
      *      The given polar coordinate.
      *
-     * @return The value of the RHS on the index range except the O-point.
+     * @return The value of the RHS on the domain except the O-point.
      */
-    double non_singular_solution(Coord<R, Theta> const& coord) const;
+    double non_singular_solution(ddc::Coordinate<RDimR, RDimP> const& coord) const;
     /**
-     * @brief Get the value of the RHS at any point of the index range.
+     * @brief Get the value of the RHS at any point of the domain.
      *
      * @param[in] coord
      *      The given polar coordinate.
      *
-     * @return The value of the RHS at any point of the index range.
+     * @return The value of the RHS at any point of the domain.
      */
-    double operator()(Coord<R, Theta> const& coord) const
+    double operator()(ddc::Coordinate<RDimR, RDimP> const& coord) const
     {
-        if (ddc::get<R>(coord) == 0.0) {
+        if (ddc::get<RDimR>(coord) == 0.0) {
             return solution_at_pole(coord);
         } else {
             return non_singular_solution(coord);

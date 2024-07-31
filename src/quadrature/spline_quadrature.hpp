@@ -70,13 +70,46 @@ host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
 
-    FieldMem<
-            double,
-            IdxRange<Grid>,
-            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
-            quadrature_coefficients(builder.interpolation_domain());
-    std::tie(std::ignore, quadrature_coefficients, std::ignore) = builder.quadrature_coefficients();
-    return ddc::create_mirror_and_copy(quadrature_coefficients[idx_range]);
+    using bsplines_type = typename SplineBuilder::bsplines_type;
+
+    // Vector of integrals of B-splines
+    host_t<FieldMem<double, IdxRange<bsplines_type>>> integral_bsplines(
+            get_spline_idx_range(builder));
+    ddc::discrete_space<bsplines_type>().integrals(get_field(integral_bsplines));
+
+    // Solve matrix equation
+    ddc::ChunkSpan integral_bsplines_without_periodic_point
+            = integral_bsplines[IdxRange<bsplines_type>(
+                    Idx<bsplines_type>(0),
+                    IdxStep<bsplines_type>(builder.get_interpolation_matrix().size()))];
+    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            integral_bsplines_mirror_with_additional_allocation(
+                    "integral_bsplines_mirror_with_additional_allocation",
+                    builder.get_interpolation_matrix().required_number_of_rhs_rows(),
+                    1);
+    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+            integral_bsplines_mirror = Kokkos::
+                    subview(integral_bsplines_mirror_with_additional_allocation,
+                            std::pair<std::size_t, std::size_t> {
+                                    0,
+                                    integral_bsplines_without_periodic_point.size()},
+                            0);
+    Kokkos::deep_copy(
+            integral_bsplines_mirror,
+            integral_bsplines_without_periodic_point.allocation_kokkos_view());
+    builder.get_interpolation_matrix()
+            .solve(integral_bsplines_mirror_with_additional_allocation, true);
+    Kokkos::deep_copy(
+            integral_bsplines_without_periodic_point.allocation_kokkos_view(),
+            integral_bsplines_mirror);
+
+    host_t<FieldMem<double, IdxRange<Grid>>> coefficients(idx_range);
+
+    Kokkos::deep_copy(
+            coefficients.allocation_kokkos_view(),
+            integral_bsplines_without_periodic_point.allocation_kokkos_view());
+
+    return coefficients;
 }
 
 

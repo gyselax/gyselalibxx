@@ -14,7 +14,7 @@
 class FluidMoments
 {
 private:
-    Quadrature<IDomainVx, IDomainSpXVx> m_integrate_v;
+    Quadrature<IdxRangeVx, IdxRangeSpXVx> m_integrate_v;
 
 public:
     /**
@@ -59,7 +59,7 @@ public:
      *
      * @param[in] integrate_v A quadrature method which integrates over the velocity space.
      */
-    FluidMoments(Quadrature<IDomainVx, IDomainSpXVx> integrate_v);
+    FluidMoments(Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate_v);
 
     ~FluidMoments() = default;
 
@@ -71,7 +71,7 @@ public:
      *                          at the given point.
      * @param[in] moment_density A tag to ensure that the correct operator is called.
      */
-    void operator()(double& density, DViewVx fdistribu, MomentDensity moment_density);
+    void operator()(double& density, DConstFieldVx fdistribu, MomentDensity moment_density);
 
     /**
      * Calculate the density of the distribution function.
@@ -80,7 +80,7 @@ public:
      * @param[in] allfdistribu The distribution function.
      * @param[in] moment_density A tag to ensure that the correct operator is called.
      */
-    void operator()(DSpanSpX density, DViewSpXVx allfdistribu, MomentDensity moment_density);
+    void operator()(DFieldSpX density, DConstFieldSpXVx allfdistribu, MomentDensity moment_density);
 
     /**
      * Calculate the mean velocity at a specific point of the distribution function.
@@ -93,7 +93,7 @@ public:
      */
     void operator()(
             double& mean_velocity,
-            DViewVx fdistribu,
+            DConstFieldVx fdistribu,
             double density,
             MomentVelocity moment_velocity);
 
@@ -106,9 +106,9 @@ public:
      * @param[in] moment_velocity A tag to ensure that the correct operator is called.
      */
     void operator()(
-            DSpanSpX mean_velocity,
-            DViewSpXVx allfdistribu,
-            DViewSpX density,
+            DFieldSpX mean_velocity,
+            DConstFieldSpXVx allfdistribu,
+            DConstFieldSpX density,
             MomentVelocity moment_velocity);
 
     /**
@@ -123,7 +123,7 @@ public:
      */
     void operator()(
             double& temperature,
-            DViewVx fdistribu,
+            DConstFieldVx fdistribu,
             double density,
             double mean_velocity,
             MomentTemperature moment_temperature);
@@ -138,9 +138,9 @@ public:
      * @param[in] moment_temperature A tag to ensure that the correct operator is called.
      */
     void operator()(
-            DSpanSpX temperature,
-            DViewSpXVx allfdistribu,
-            DViewSpX density,
-            DViewSpX mean_velocity,
+            DFieldSpX temperature,
+            DConstFieldSpXVx allfdistribu,
+            DConstFieldSpX density,
+            DConstFieldSpX mean_velocity,
             MomentTemperature moment_temperature);
 };

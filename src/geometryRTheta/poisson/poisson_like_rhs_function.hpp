@@ -20,18 +20,18 @@ public:
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
+            BSplinesP,
+            IDimR,
+            IDimP,
             RadialExtrapolationRule,
             RadialExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            GridR,
-            GridTheta>;
+            ddc::PeriodicExtrapolationRule<RDimP>,
+            ddc::PeriodicExtrapolationRule<RDimP>,
+            IDimR,
+            IDimP>;
 
 private:
-    Spline2DConstField const m_coefs;
+    Spline2DView const m_coefs;
     evaluator_type const& m_evaluator;
 
 public:
@@ -43,7 +43,7 @@ public:
 	 * @param[in] evaluator
 	 *      Evaluator on bsplines.
 	 */
-    PoissonLikeRHSFunction(Spline2DConstField coefs, evaluator_type const& evaluator)
+    PoissonLikeRHSFunction(Spline2DView coefs, evaluator_type const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {
@@ -59,7 +59,7 @@ public:
 	 *
 	 * @return A double with the value of the rhs at the given coordinate.
 	 */
-    double operator()(CoordRTheta const& coord_rp) const
+    double operator()(CoordRP const& coord_rp) const
     {
         return m_evaluator(coord_rp, m_coefs);
     }

@@ -18,6 +18,8 @@ target_link_libraries(bumpontail_fem_uniform_${GEOMETRY_VARIANT}
         gslx::boltzmann_${GEOMETRY_VARIANT}
         gslx::advection
         gslx::io
+        gslx::utils
+
 )
 
 install(TARGETS bumpontail_fem_uniform_${GEOMETRY_VARIANT})
@@ -40,6 +42,8 @@ target_link_libraries(bumpontail_fft
         gslx::boltzmann_xperiod_vx
         gslx::advection
         gslx::io
+        gslx::utils
+
 )
 
 install(TARGETS bumpontail_fft)

@@ -25,9 +25,9 @@ public:
      * @param[in] steps The number of iterations to be performed by the solver.
      * @return The distribution function after solving the system.
      */
-    virtual DSpanSpXVx operator()(
-            DSpanSpXVx allfdistribu,
-            DSpanSpMX fluid_moments,
+    virtual DFieldSpXVx operator()(
+            DFieldSpXVx allfdistribu,
+            DFieldSpMomX fluid_moments,
             double time_start,
             double dt,
             int steps = 1) const = 0;

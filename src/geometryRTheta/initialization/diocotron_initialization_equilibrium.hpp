@@ -1,10 +1,10 @@
 #pragma once
+
 #include <cassert>
 #include <cmath>
 
 #include <ddc/ddc.hpp>
 
-#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 
 /**
@@ -85,15 +85,15 @@ public:
      *
      *
      * @param[in] W1
-     *      The value of the r-coordinate where the index range starts.
+     *      The value of the r-coordinate where the domain starts.
      * @param[in] R1
-     *      The value of the r-coordinate where the index range of non null
+     *      The value of the r-coordinate where the domain of non null
      *      initial condition starts.
      * @param[in] R2
-     *      The value of the r-coordinate where the index range of non null
+     *      The value of the r-coordinate where the domain of non null
      *      initial condition ends.
      * @param[in] W2
-     *      The value of the r-coordinate where the index range ends.
+     *      The value of the r-coordinate where the domain ends.
      * @param[in] Q
      *      The charge carried by the inner conductor at @f$ r = W_1 @f$.
      * @param[in] l
@@ -172,7 +172,7 @@ public:
      *
      * @return The value of the initial condition at the given coordinate.
      */
-    double initialisation(Coord<R, Theta> const& coord) const;
+    double initialisation(ddc::Coordinate<RDimR, RDimP> const& coord) const;
 
     /**
      * @brief Get the equilibrium of the density.
@@ -189,7 +189,7 @@ public:
      *
      * @return The value of the equilibrium at the given coordinate.
      */
-    double equilibrium(Coord<R, Theta> const& coord) const;
+    double equilibrium(ddc::Coordinate<RDimR, RDimP> const& coord) const;
 
 private:
     /**

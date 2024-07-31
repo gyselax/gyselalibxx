@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cassert>
 #include <cmath>
 
@@ -11,6 +10,8 @@
 #include <irighthandside.hpp>
 #include <quadrature.hpp>
 #include <trapezoid_quadrature.hpp>
+
+#include "ddc_aliases.hpp"
 
 /**
  * @brief Class describing the intra-species collision operator
@@ -38,17 +39,14 @@
 class CollisionsIntra : public IRightHandSide
 {
 private:
-    static constexpr bool uniform_edge_v = ddc::is_uniform_point_sampling_v<IDimVx>;
+    static constexpr bool uniform_edge_v = ddc::is_uniform_point_sampling_v<GridVx>;
 
 public:
     /**
      * A conditional type representing either a uniform or a non-uniform ghosted vx mesh. 
      */
     struct GhostedVx
-        : std::conditional_t<
-                  uniform_edge_v,
-                  ddc::UniformPointSampling<RDimVx>,
-                  ddc::NonUniformPointSampling<RDimVx>>
+        : std::conditional_t<uniform_edge_v, UniformGridBase<Vx>, NonUniformGridBase<Vx>>
     {
     };
 
@@ -56,64 +54,60 @@ public:
      * A conditional type representing either a uniform or a non-uniform ghosted staggered vx mesh. 
      */
     struct GhostedVxStaggered
-        : std::conditional_t<
-                  uniform_edge_v,
-                  ddc::UniformPointSampling<RDimVx>,
-                  ddc::NonUniformPointSampling<RDimVx>>
+        : std::conditional_t<uniform_edge_v, UniformGridBase<Vx>, NonUniformGridBase<Vx>>
     {
     };
 
     /**
      * A type representing a mesh for species, space and ghosted vx mesh. 
      */
-    using IDomainSpXVx_ghosted = ddc::DiscreteDomain<Species, IDimX, GhostedVx>;
+    using IDomainSpXVx_ghosted = IdxRange<Species, GridX, GhostedVx>;
 
     /**
      * A type representing a mesh for species, space and ghosted staggered vx mesh. 
      */
-    using IDomainSpXVx_ghosted_staggered = ddc::DiscreteDomain<Species, IDimX, GhostedVxStaggered>;
+    using IDomainSpXVx_ghosted_staggered = IdxRange<Species, GridX, GhostedVxStaggered>;
 
     /**
      * A type representing a ghosted vx index. 
      */
-    using IndexVx_ghosted = ddc::DiscreteElement<GhostedVx>;
+    using IndexVx_ghosted = Idx<GhostedVx>;
 
     /**
      * A type representing a ghosted staggered vx index. 
      */
-    using IndexVx_ghosted_staggered = ddc::DiscreteElement<GhostedVxStaggered>;
+    using IndexVx_ghosted_staggered = Idx<GhostedVxStaggered>;
 
     /**
      * A type representing a species, space and ghosted vx index. 
      */
-    using IndexSpXVx_ghosted = ddc::DiscreteElement<Species, IDimX, GhostedVx>;
+    using IndexSpXVx_ghosted = Idx<Species, GridX, GhostedVx>;
 
     /**
      * A type representing a species, space and ghosted staggered vx index. 
      */
-    using IndexSpXVx_ghosted_staggered = ddc::DiscreteElement<Species, IDimX, GhostedVxStaggered>;
+    using IndexSpXVx_ghosted_staggered = Idx<Species, GridX, GhostedVxStaggered>;
 
 
 private:
     template <class TargetDim>
-    KOKKOS_FUNCTION static ddc::DiscreteElement<TargetDim> to_index(
-            ddc::DiscreteElement<IDimVx> const& index);
+    KOKKOS_FUNCTION static Idx<TargetDim> to_index(Idx<GridVx> const& index);
 
     template <class VDim>
     std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>>
-    build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom);
+    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& dom);
 
     template <class VDim>
     std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>>
-    build_ghosted_staggered_vx_point_sampling(ddc::DiscreteDomain<VDim> const& dom);
+    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& dom);
 
     double m_nustar0;
     double m_fthresh;
-    DFieldSpX m_nustar_profile_alloc;
-    DSpanSpX m_nustar_profile;
+    DFieldMemSpX m_nustar_profile_alloc;
+    DFieldSpX m_nustar_profile;
 
-    ddc::DiscreteDomain<GhostedVx> m_gridvx_ghosted;
-    ddc::DiscreteDomain<GhostedVxStaggered> m_gridvx_ghosted_staggered;
+    IdxRange<GhostedVx> m_gridvx_ghosted;
+    IdxRange<GhostedVxStaggered> m_gridvx_ghosted_staggered;
 
     IDomainSpXVx_ghosted m_mesh_ghosted;
     IDomainSpXVx_ghosted_staggered m_mesh_ghosted_staggered;
@@ -122,10 +116,10 @@ public:
     /**
      * @brief The constructor for the operator.
      *
-     * @param[in] mesh The domain on which the operator will act.
+     * @param[in] mesh The index range on which the operator will act.
      * @param[in] nustar0 The normalized collisionality.
      */
-    CollisionsIntra(IDomainSpXVx const& mesh, double nustar0);
+    CollisionsIntra(IdxRangeSpXVx const& mesh, double nustar0);
 
     ~CollisionsIntra() = default;
 
@@ -142,7 +136,7 @@ public:
      *
      * @return A span referencing the distribution function passed as argument.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, double dt) const override;
+    DFieldSpXVx operator()(DFieldSpXVx allfdistribu, double dt) const override;
 
     /**
      * @brief Get the collision coefficient.
@@ -156,21 +150,21 @@ public:
      *
      * @return The ghosted vx mesh.
      */
-    ddc::DiscreteDomain<GhostedVx> const& get_gridvx_ghosted() const;
+    IdxRange<GhostedVx> const& get_gridvx_ghosted() const;
 
     /**
      * @brief Get the ghosted and staggered vx mesh used for computing finite differences centered derivatives.
      *
      * @return The ghosted and staggered vx mesh.
      */
-    ddc::DiscreteDomain<GhostedVxStaggered> const& get_gridvx_ghosted_staggered() const;
+    IdxRange<GhostedVxStaggered> const& get_gridvx_ghosted_staggered() const;
 
     /**
      * @brief Get a mesh containing the species, spatial and the ghosted vx mesh.
      *
      * @return The species, spatial, and ghosted vx mesh.
      */
-    ddc::DiscreteDomain<Species, IDimX, GhostedVx> const& get_mesh_ghosted() const;
+    IdxRange<Species, GridX, GhostedVx> const& get_mesh_ghosted() const;
 
     /**
      * @brief Compute the right-hand-side of the collision operator linear system.
@@ -182,11 +176,11 @@ public:
      * @param[in] fthresh A constant value used for imposing Dirichlet boundary condition to solve the linear system.  
      */
     void compute_rhs_vector(
-            DSpanSpXVx RR,
-            DViewSpXVx AA,
-            DViewSpXVx BB,
-            DViewSpXVx CC,
-            DViewSpXVx allfdistribu,
+            DFieldSpXVx RR,
+            DConstFieldSpXVx AA,
+            DConstFieldSpXVx BB,
+            DConstFieldSpXVx CC,
+            DConstFieldSpXVx allfdistribu,
             double fthresh) const;
     /**
      * @brief Compute the coefficients of the tridiagonal matrix of the collision operator linear system.
@@ -199,12 +193,12 @@ public:
      * @param[in] deltat The time step.
      */
     void compute_matrix_coeff(
-            DSpanSpXVx AA,
-            DSpanSpXVx BB,
-            DSpanSpXVx CC,
-            device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Dcoll,
-            device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted_staggered>> Dcoll_staggered,
-            device_t<ddc::ChunkSpan<double, IDomainSpXVx_ghosted>> Nucoll,
+            DFieldSpXVx AA,
+            DFieldSpXVx BB,
+            DFieldSpXVx CC,
+            Field<double, IDomainSpXVx_ghosted> Dcoll,
+            Field<double, IDomainSpXVx_ghosted_staggered> Dcoll_staggered,
+            Field<double, IDomainSpXVx_ghosted> Nucoll,
             double deltat) const;
 
     /**
@@ -216,7 +210,7 @@ public:
      */
     void fill_matrix_with_coeff(
             Matrix_Banded& matrix,
-            host_t<DViewVx> AA,
-            host_t<DViewVx> BB,
-            host_t<DViewVx> CC) const;
+            host_t<DConstFieldVx> AA,
+            host_t<DConstFieldVx> BB,
+            host_t<DConstFieldVx> CC) const;
 };

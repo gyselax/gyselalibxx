@@ -23,5 +23,6 @@ public:
      * @param[in] temperature The temperature at which the reaction rate should be computed.
      * @return A span referencing the reaction rate.
      */
-    virtual DSpanSpX operator()(DSpanSpX rate, DViewSpX density, DViewSpX temperature) const = 0;
+    virtual DFieldSpX operator()(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature)
+            const = 0;
 };

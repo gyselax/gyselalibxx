@@ -16,8 +16,6 @@ target_link_libraries(diocotron_init_eq
         
         sll::SLL
         gslx::geometry_RTheta
-        gslx::utils
-
 )
 
 add_library("gslx::diocotron_init_eq" ALIAS "diocotron_init_eq")

@@ -18,5 +18,5 @@ public:
      *                                 On output: the initialized fluid species.
      * @return A span referencing the initialized fluid species.
      */
-    virtual DSpanSpMX operator()(DSpanSpMX fluid_moments) const = 0;
+    virtual DFieldSpMomX operator()(DFieldSpMomX fluid_moments) const = 0;
 };

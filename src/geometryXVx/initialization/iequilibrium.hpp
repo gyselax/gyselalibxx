@@ -18,5 +18,5 @@ public:
      *                                 On output: the initialized distribution function.
      * @return The initialized distribution function.
      */
-    virtual DSpanSpVx operator()(DSpanSpVx allfequilibrium) const = 0;
+    virtual DFieldSpVx operator()(DFieldSpVx allfequilibrium) const = 0;
 };

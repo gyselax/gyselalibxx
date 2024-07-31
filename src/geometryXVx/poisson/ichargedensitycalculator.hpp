@@ -23,5 +23,5 @@ public:
      *
      * @return rho The charge density.
      */
-    virtual DSpanX operator()(DSpanX rho, DViewSpXVx allfdistribu) const = 0;
+    virtual DFieldX operator()(DFieldX rho, DConstFieldSpXVx allfdistribu) const = 0;
 };

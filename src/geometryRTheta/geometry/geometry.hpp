@@ -1,4 +1,5 @@
 #pragma once
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
@@ -7,8 +8,6 @@
 #include <directional_tag.hpp>
 #include <vector_field.hpp>
 #include <vector_field_span.hpp>
-
-#include "ddc_aliases.hpp"
 
 
 /*
@@ -25,7 +24,7 @@
 /**
  * @brief Define non periodic real R dimension.
  */
-struct R
+struct RDimR
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -36,7 +35,7 @@ struct R
 /**
  * @brief Define periodic real Theta dimension.
  */
-struct Theta
+struct RDimP
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -48,7 +47,7 @@ struct Theta
 /**
  * @brief Define non periodic real R velocity dimension.
  */
-struct Vr
+struct RDimVr
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -59,7 +58,7 @@ struct Vr
 /**
  * @brief Define periodic real Theta velocity dimension.
  */
-struct Vtheta
+struct RDimVp
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -69,12 +68,12 @@ struct Vtheta
 };
 
 
-using CoordR = Coord<R>;
-using CoordTheta = Coord<Theta>;
-using CoordRTheta = Coord<R, Theta>;
+using CoordR = ddc::Coordinate<RDimR>;
+using CoordP = ddc::Coordinate<RDimP>;
+using CoordRP = ddc::Coordinate<RDimR, RDimP>;
 
-using CoordVr = Coord<Vr>;
-using CoordVtheta = Coord<Vtheta>;
+using CoordVr = ddc::Coordinate<RDimVr>;
+using CoordVp = ddc::Coordinate<RDimVp>;
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
@@ -86,18 +85,18 @@ bool constexpr BsplineOnUniformCellsP = false;
 struct BSplinesR
     : std::conditional_t<
               BsplineOnUniformCellsR,
-              ddc::UniformBSplines<R, BSDegreeR>,
-              ddc::NonUniformBSplines<R, BSDegreeR>>
+              ddc::UniformBSplines<RDimR, BSDegreeR>,
+              ddc::NonUniformBSplines<RDimR, BSDegreeR>>
 {
 };
-struct BSplinesTheta
+struct BSplinesP
     : std::conditional_t<
               BsplineOnUniformCellsP,
-              ddc::UniformBSplines<Theta, BSDegreeP>,
-              ddc::NonUniformBSplines<Theta, BSDegreeP>>
+              ddc::UniformBSplines<RDimP, BSDegreeP>,
+              ddc::NonUniformBSplines<RDimP, BSDegreeP>>
 {
 };
-struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
+struct PolarBSplinesRP : PolarBSplines<BSplinesR, BSplinesP, 1>
 {
 };
 
@@ -106,168 +105,163 @@ auto constexpr SplinePBoundary = ddc::BoundCond::PERIODIC;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
-using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplinePBoundary, SplinePBoundary>;
+using SplineInterpPointsP
+        = ddc::GrevilleInterpolationPoints<BSplinesP, SplinePBoundary, SplinePBoundary>;
 
 // --- Discrete dimensions
-struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
+struct IDimR : SplineInterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
+struct IDimP : SplineInterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
 // --- Operators
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineRPBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
+        BSplinesP,
+        IDimR,
+        IDimP,
         SplineRBoundary, // boundary at r=0
         SplineRBoundary, // boundary at rmax
         SplinePBoundary,
         SplinePBoundary,
         ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
+        IDimR,
+        IDimP>;
 
-using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
+using SplineRPEvaluatorConstBound = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
+        BSplinesP,
+        IDimR,
+        IDimP,
+        ddc::ConstantExtrapolationRule<RDimR, RDimP>, // boundary at r=0
+        ddc::ConstantExtrapolationRule<RDimR, RDimP>, // boundary at rmax
+        ddc::PeriodicExtrapolationRule<RDimP>,
+        ddc::PeriodicExtrapolationRule<RDimP>,
+        IDimR,
+        IDimP>;
 
-using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
+using SplineRPEvaluatorNullBound = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
+        BSplinesP,
+        IDimR,
+        IDimP,
         ddc::NullExtrapolationRule, // boundary at r=0
         ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
+        ddc::PeriodicExtrapolationRule<RDimP>,
+        ddc::PeriodicExtrapolationRule<RDimP>,
+        IDimR,
+        IDimP>;
 
 
 // --- Index definitions
-using IdxR = Idx<GridR>;
-using IdxTheta = Idx<GridTheta>;
-using IdxRTheta = Idx<GridR, GridTheta>;
+using IndexR = ddc::DiscreteElement<IDimR>;
+using IndexP = ddc::DiscreteElement<IDimP>;
+using IndexRP = ddc::DiscreteElement<IDimR, IDimP>;
 
 // --- IVect definitions
-using IdxStepR = IdxStep<GridR>;
-using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepRTheta = IdxStep<GridR, GridTheta>;
+using IVectR = ddc::DiscreteVector<IDimR>;
+using IVectP = ddc::DiscreteVector<IDimP>;
+using IVectRP = ddc::DiscreteVector<IDimR, IDimP>;
 
 // --- Domain definitions
-using IdxRangeR = IdxRange<GridR>;
-using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
+using IDomainR = ddc::DiscreteDomain<IDimR>;
+using IDomainP = ddc::DiscreteDomain<IDimP>;
+using IDomainRP = ddc::DiscreteDomain<IDimR, IDimP>;
 
-using BSIdxRangeR = IdxRange<BSplinesR>;
-using BSIdxRangeTheta = IdxRange<BSplinesTheta>;
-using BSIdxRangeRTheta = IdxRange<BSplinesR, BSplinesTheta>;
-using BSIdxRangePolar = IdxRange<PolarBSplinesRTheta>;
+using BSDomainR = ddc::DiscreteDomain<BSplinesR>;
+using BSDomainP = ddc::DiscreteDomain<BSplinesP>;
+using BSDomainRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+using BSDomainPolar = ddc::DiscreteDomain<PolarBSplinesRP>;
 
 
 // --- Chunk definitions
 template <class ElementType>
-using FieldMemR = host_t<FieldMem<ElementType, IdxRangeR>>;
+using FieldR = ddc::Chunk<ElementType, IDomainR>;
 
 template <class ElementType>
-using FieldMemTheta = host_t<FieldMem<ElementType, IdxRangeTheta>>;
+using FieldP = ddc::Chunk<ElementType, IDomainP>;
 
 template <class ElementType>
-using FieldMemRTheta = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
+using FieldRP = ddc::Chunk<ElementType, IDomainRP>;
 
-using DFieldMemR = FieldMemR<double>;
-using DFieldMemTheta = FieldMemTheta<double>;
-using DFieldMemRTheta = FieldMemRTheta<double>;
+using DFieldR = FieldR<double>;
+using DFieldP = FieldP<double>;
+using DFieldRP = FieldRP<double>;
 
 // --- Span definitions
 template <class ElementType>
-using FieldR = host_t<Field<ElementType, IdxRangeR>>;
+using SpanR = ddc::ChunkSpan<ElementType, IDomainR>;
 
 template <class ElementType>
-using FieldTheta = host_t<Field<ElementType, IdxRangeTheta>>;
+using SpanP = ddc::ChunkSpan<ElementType, IDomainP>;
 
-// Equivalent to host_t<Field<ElementType, IdxRangeRTheta>> but used for type deductions
 template <class ElementType>
-using FieldRTheta
-        = Field<ElementType,
-                IdxRangeRTheta,
-                std::experimental::layout_right,
-                Kokkos::DefaultHostExecutionSpace::memory_space>;
+using SpanRP = ddc::ChunkSpan<ElementType, IDomainRP>;
 
-using DFieldR = FieldR<double>;
-using DFieldTheta = FieldTheta<double>;
-using DFieldRTheta = FieldRTheta<double>;
+using DSpanR = SpanR<double>;
+using DSpanP = SpanP<double>;
+using DSpanRP = SpanRP<double>;
 
 // --- View definitions
 template <class ElementType>
-using ConstFieldR = host_t<ConstField<ElementType const, IdxRangeR>>;
+using ViewR = ddc::ChunkView<ElementType const, IDomainR>;
 
 template <class ElementType>
-using ConstFieldTheta = host_t<ConstField<ElementType const, IdxRangeTheta>>;
+using ViewP = ddc::ChunkView<ElementType const, IDomainP>;
 
 template <class ElementType>
-using ConstFieldRTheta = host_t<ConstField<ElementType const, IdxRangeRTheta>>;
+using ViewRP = ddc::ChunkView<ElementType const, IDomainRP>;
 
-using DConstFieldR = ConstFieldR<double>;
-using DConstFieldTheta = ConstFieldTheta<double>;
-using DConstFieldRTheta = ConstFieldRTheta<double>;
+using DViewR = ViewR<double>;
+using DViewP = ViewP<double>;
+using DViewRP = ViewRP<double>;
 
 // --- Spline representation definitions
-using Spline2D = host_t<FieldMem<double, BSIdxRangeRTheta>>;
-using Spline2DField = host_t<Field<double, BSIdxRangeRTheta>>;
-using Spline2DConstField = host_t<Field<double const, BSIdxRangeRTheta>>;
+using Spline2D = ddc::Chunk<double, BSDomainRP>;
+using Spline2DSpan = ddc::ChunkSpan<double, BSDomainRP>;
+using Spline2DView = ddc::ChunkSpan<double const, BSDomainRP>;
 
 /**
  * @brief Tag the polar B-splines decomposition of a function.
  *
  * Store the polar B-splines coefficients of the function.
  */
-using SplinePolar = PolarSpline<PolarBSplinesRTheta>;
+using SplinePolar = PolarSpline<PolarBSplinesRP>;
 
 /**
  * @brief Type of the index of an element of polar B-splines.
  */
-using IdxPolarBspl = Idx<PolarBSplinesRTheta>;
+using IndexPolarBspl = ddc::DiscreteElement<PolarBSplinesRP>;
 
 
 // --- VectorField definitions
 template <class Dim1, class Dim2>
-using DVectorFieldMemRTheta = VectorField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorDFieldRP = VectorField<double, IDomainRP, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DVectorFieldRTheta = VectorFieldSpan<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorDSpanRP = VectorFieldSpan<double, IDomainRP, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DConstVectorFieldRTheta = VectorFieldView<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorDViewRP = VectorFieldView<double, IDomainRP, NDTag<Dim1, Dim2>>;
 
 
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffsMem2D = VectorField<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorSpline2D = VectorField<double, BSDomainRP, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffs2D = VectorFieldSpan<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorSpline2DSpan = VectorFieldSpan<double, BSDomainRP, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using ConstVectorSplineCoeffs2D = VectorFieldView<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorSpline2DView = VectorFieldView<double, BSDomainRP, NDTag<Dim1, Dim2>>;
 
 
 
@@ -276,7 +270,7 @@ using ConstVectorSplineCoeffs2D = VectorFieldView<double, BSIdxRangeRTheta, NDTa
 /**
  * @brief Define non periodic real X dimension.
  */
-struct X
+struct RDimX
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -287,7 +281,7 @@ struct X
 /**
  * @brief Define non periodic real Y dimension.
  */
-struct Y
+struct RDimY
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -299,7 +293,7 @@ struct Y
 /**
  * @brief Define non periodic real X velocity dimension.
  */
-struct Vx
+struct RDimVx
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -310,7 +304,7 @@ struct Vx
 /**
  * @brief Define non periodic real Y velocity dimension.
  */
-struct Vy
+struct RDimVy
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -320,9 +314,9 @@ struct Vy
 };
 
 
-using CoordX = Coord<X>;
-using CoordY = Coord<Y>;
-using CoordXY = Coord<X, Y>;
+using CoordX = ddc::Coordinate<RDimX>;
+using CoordY = ddc::Coordinate<RDimY>;
+using CoordXY = ddc::Coordinate<RDimX, RDimY>;
 
-using CoordVx = Coord<Vx>;
-using CoordVy = Coord<Vy>;
+using CoordVx = ddc::Coordinate<RDimVx>;
+using CoordVy = ddc::Coordinate<RDimVy>;

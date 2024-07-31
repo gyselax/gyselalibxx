@@ -1,7 +1,7 @@
 #pragma once
+
 #include <functional>
 
-#include "ddc_aliases.hpp"
 #include "ifoot_finder.hpp"
 
 /**
@@ -9,31 +9,31 @@
  *
  * @tparam TimeStepper
  *      A child class of ITimeStepper providing a time integration method.
- * @tparam AdvectionIdxRange
- *      A child class of AdvectionIdxRange providing the informations about the advection index range.
+ * @tparam AdvectionDomain
+ *      A child class of AdvectionDomain providing the informations about the advection domain.
  *
- * @see BslAdvectionRTheta
+ * @see BslAdvectionRP
  */
-template <class TimeStepper, class AdvectionIdxRange>
+template <class TimeStepper, class AdvectionDomain>
 class SplineFootFinder : public IFootFinder
 {
 private:
     /**
-     * @brief Tag the first dimension in the advection index range.
+     * @brief Tag the first dimension in the advection domain.
      */
-    using X_adv = typename AdvectionIdxRange::X_adv;
+    using RDimX_adv = typename AdvectionDomain::RDimX_adv;
     /**
-     * @brief Tag the second dimension in the advection index range.
+     * @brief Tag the second dimension in the advection domain.
      */
-    using Y_adv = typename AdvectionIdxRange::Y_adv;
+    using RDimY_adv = typename AdvectionDomain::RDimY_adv;
 
 
     TimeStepper const& m_time_stepper;
 
-    AdvectionIdxRange const& m_advection_idx_range;
+    AdvectionDomain const& m_advection_domain;
 
-    SplineRThetaBuilder const& m_builder_advection_field;
-    SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
+    SplineRPBuilder const& m_builder_advection_field;
+    SplineRPEvaluatorConstBound const& m_evaluator_advection_field;
 
 
 public:
@@ -44,8 +44,8 @@ public:
      * @param[in] time_stepper
      *      The time integration method used to solve the characteristic
      *      equation (ITimeStepper).
-     * @param[in] advection_idx_range
-     *      An AdvectionIdxRange object which defines in which index range we
+     * @param[in] advection_domain
+     *      An AdvectionDomain object which defines in which domain we
      *      advect the characteristics.
      * @param[in] builder_advection_field
      *      The spline builder which computes the spline representation
@@ -55,18 +55,18 @@ public:
      *
      * @tparam TimeStepper
      *      A child class of ITimeStepper providing a time integration method.
-     * @tparam AdvectionIdxRange
-     *      A child class of AdvectionIdxRange providing the informations about the advection index range.
+     * @tparam AdvectionDomain
+     *      A child class of AdvectionDomain providing the informations about the advection domain.
      *
      * @see ITimeStepper
      */
     SplineFootFinder(
             TimeStepper const& time_stepper,
-            AdvectionIdxRange const& advection_idx_range,
-            SplineRThetaBuilder const& builder_advection_field,
-            SplineRThetaEvaluatorConstBound const& evaluator_advection_field)
+            AdvectionDomain const& advection_domain,
+            SplineRPBuilder const& builder_advection_field,
+            SplineRPEvaluatorConstBound const& evaluator_advection_field)
         : m_time_stepper(time_stepper)
-        , m_advection_idx_range(advection_idx_range)
+        , m_advection_domain(advection_domain)
         , m_builder_advection_field(builder_advection_field)
         , m_evaluator_advection_field(evaluator_advection_field)
     {
@@ -78,8 +78,8 @@ public:
     /**
      * @brief Advect the feet over @f$ dt @f$.
      *
-     * From the advection field in the physical index range, compute the advection field
-     * in the right index range an compute its B-splines coefficients.
+     * From the advection field in the physical domain, compute the advection field
+     * in the right domain an compute its B-splines coefficients.
      * Then, use the given time integration method (time_stepper) to solve the
      * characteristic equation over @f$ dt @f$.
      *
@@ -87,56 +87,53 @@ public:
      *      On input: the mesh points.
      *      On output: the characteristic feet.
      * @param[in] advection_field
-     *      The advection field in the physical index range.
+     *      The advection field in the physical domain.
      * @param[in] dt
      *      The time step.
      */
-    void operator()(
-            FieldRTheta<CoordRTheta> feet,
-            DConstVectorFieldRTheta<X, Y> advection_field,
-            double dt) const final
+    void operator()(SpanRP<CoordRP> feet, VectorDViewRP<RDimX, RDimY> advection_field, double dt)
+            const final
     {
-        DVectorFieldMemRTheta<X_adv, Y_adv> advection_field_in_adv_dom(
-                get_idx_range(advection_field));
-        VectorSplineCoeffsMem2D<X_adv, Y_adv> advection_field_in_adv_idx_range_coefs(
-                get_spline_idx_range(m_builder_advection_field));
+        VectorDFieldRP<RDimX_adv, RDimY_adv> advection_field_in_adv_dom(advection_field.domain());
+        VectorSpline2D<RDimX_adv, RDimY_adv> advection_field_in_adv_dom_coefs(
+                m_builder_advection_field.spline_domain());
 
-        // Compute the advection field in the advection index range.
-        m_advection_idx_range
-                .compute_advection_field(advection_field, get_field(advection_field_in_adv_dom));
+        // Compute the advection field in the advection domain.
+        m_advection_domain
+                .compute_advection_field(advection_field, advection_field_in_adv_dom.span_view());
 
-        // Get the coefficients of the advection field in the advection index range.
+        // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
-                ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs),
-                ddcHelper::get<X_adv>(get_const_field(advection_field_in_adv_dom)));
+                ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom_coefs),
+                ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom.span_cview()));
         m_builder_advection_field(
-                ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs),
-                ddcHelper::get<Y_adv>(get_const_field(advection_field_in_adv_dom)));
+                ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom_coefs),
+                ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom.span_cview()));
 
 
         // The function describing how the derivative of the evolve function is calculated.
-        std::function<void(DVectorFieldRTheta<X_adv, Y_adv>, ConstFieldRTheta<CoordRTheta>)> dy
-                = [&](DVectorFieldRTheta<X_adv, Y_adv> updated_advection_field,
-                      ConstFieldRTheta<CoordRTheta> feet) {
+        std::function<void(VectorDSpanRP<RDimX_adv, RDimY_adv>, ViewRP<CoordRP>)> dy
+                = [&](VectorDSpanRP<RDimX_adv, RDimY_adv> updated_advection_field,
+                      ViewRP<CoordRP> feet) {
                       m_evaluator_advection_field(
-                              ddcHelper::get<X_adv>(updated_advection_field).span_view(),
-                              get_const_field(feet),
-                              ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs)
+                              ddcHelper::get<RDimX_adv>(updated_advection_field).span_view(),
+                              feet.span_cview(),
+                              ddcHelper::get<RDimX_adv>(advection_field_in_adv_dom_coefs)
                                       .span_cview());
                       m_evaluator_advection_field(
-                              ddcHelper::get<Y_adv>(updated_advection_field).span_view(),
-                              get_const_field(feet),
-                              ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs)
+                              ddcHelper::get<RDimY_adv>(updated_advection_field).span_view(),
+                              feet.span_cview(),
+                              ddcHelper::get<RDimY_adv>(advection_field_in_adv_dom_coefs)
                                       .span_cview());
                   };
 
         // The function describing how the value(s) are updated using the derivative.
-        std::function<void(FieldRTheta<CoordRTheta>, DConstVectorFieldRTheta<X_adv, Y_adv>, double)>
-                update_function = [&](FieldRTheta<CoordRTheta> feet,
-                                      DConstVectorFieldRTheta<X_adv, Y_adv> advection_field,
+        std::function<void(SpanRP<CoordRP>, VectorDViewRP<RDimX_adv, RDimY_adv>, double)>
+                update_function = [&](SpanRP<CoordRP> feet,
+                                      VectorDViewRP<RDimX_adv, RDimY_adv> advection_field,
                                       double dt) {
                     // Compute the characteristic feet at t^n:
-                    m_advection_idx_range.advect_feet(feet, advection_field, dt);
+                    m_advection_domain.advect_feet(feet, advection_field, dt);
 
                     // Treatment to conserve the C0 property of the advected function:
                     unify_value_at_center_pt(feet);
@@ -167,20 +164,20 @@ private:
      *
      */
     template <class T>
-    void is_unified(FieldRTheta<T> const& values) const
+    void is_unified(SpanRP<T> const& values) const
     {
-        auto const r_idx_range = get_idx_range<GridR>(values);
-        auto const theta_idx_range = get_idx_range<GridTheta>(values);
-        if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
+        auto const r_domain = ddc::get_domain<IDimR>(values);
+        auto const theta_domain = ddc::get_domain<IDimP>(values);
+        if (std::fabs(ddc::coordinate(r_domain.front())) < 1e-15) {
+            ddc::for_each(theta_domain, [&](const IndexP ip) {
                 if (norm_inf(
-                            values(r_idx_range.front(), ip)
-                            - values(r_idx_range.front(), theta_idx_range.front()))
+                            values(r_domain.front(), ip)
+                            - values(r_domain.front(), theta_domain.front()))
                     > 1e-15) {
                     std::cout << "WARNING ! -> Discontinous at the center point." << std::endl;
                 }
-                assert(values(r_idx_range.front(), ip)
-                       == values(r_idx_range.front(), theta_idx_range.front()));
+                assert(values(r_domain.front(), ip)
+                       == values(r_domain.front(), theta_domain.front()));
             });
         }
     }
@@ -200,14 +197,13 @@ private:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_center_pt(FieldRTheta<T> values) const
+    void unify_value_at_center_pt(SpanRP<T> values) const
     {
-        auto const r_idx_range = get_idx_range<GridR>(values);
-        auto const theta_idx_range = get_idx_range<GridTheta>(values);
-        if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
-                values(r_idx_range.front(), ip)
-                        = values(r_idx_range.front(), theta_idx_range.front());
+        auto const r_domain = ddc::get_domain<IDimR>(values);
+        auto const theta_domain = ddc::get_domain<IDimP>(values);
+        if (std::fabs(ddc::coordinate(r_domain.front())) < 1e-15) {
+            ddc::for_each(theta_domain, [&](const IndexP ip) {
+                values(r_domain.front(), ip) = values(r_domain.front(), theta_domain.front());
             });
         }
     }

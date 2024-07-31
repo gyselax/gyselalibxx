@@ -36,14 +36,14 @@ IdxSp find_ion(IdxRangeSp const dom_sp)
  * but could be space dependent (for instance to have no collisions in some specific
  * parts of the simulation box).
  */
-void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
+void compute_nustar_profile(DFieldSpX nustar_profile, double nustar0)
 {
-    double const Lx = ddcHelper::total_interval_length(ddc::get_domain<IDimX>(nustar_profile));
+    double const Lx = ddcHelper::total_interval_length(get_idx_range<GridX>(nustar_profile));
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            nustar_profile.domain(),
-            KOKKOS_LAMBDA(IndexSpX const ispx) {
+            get_idx_range(nustar_profile),
+            KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double const coeff = Kokkos::sqrt(mass(ielec()) / mass(ddc::select<Species>(ispx)))
                                      * Kokkos::pow(charge(ddc::select<Species>(ispx)), 4) / Lx;
                 nustar_profile(ispx) = coeff * nustar0;
@@ -54,15 +54,15 @@ void compute_nustar_profile(DSpanSpX nustar_profile, double nustar0)
  * Computes the space and species dependent collision frequency collfreq.
  */
 void compute_collfreq(
-        DSpanSpX collfreq,
-        DViewSpX nustar_profile,
-        DViewSpX density,
-        DViewSpX temperature)
+        DFieldSpX collfreq,
+        DConstFieldSpX nustar_profile,
+        DConstFieldSpX density,
+        DConstFieldSpX temperature)
 {
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            collfreq.domain(),
-            KOKKOS_LAMBDA(IndexSpX const ispx) {
+            get_idx_range(collfreq),
+            KOKKOS_LAMBDA(IdxSpX const ispx) {
                 collfreq(ispx) = nustar_profile(ispx) * density(ispx)
                                  / Kokkos::pow(temperature(ispx), 1.5);
             });
@@ -72,19 +72,19 @@ void compute_collfreq(
  * Computes the two species collision frequency collfreq_ei
  */
 void compute_collfreq_ab(
-        DSpanSpX collfreq_ab,
-        DViewSpX nustar_profile,
-        DViewSpX density,
-        DViewSpX temperature)
+        DFieldSpX collfreq_ab,
+        DConstFieldSpX nustar_profile,
+        DConstFieldSpX density,
+        DConstFieldSpX temperature)
 {
-    IdxSp const iion = find_ion(density.domain<Species>());
+    IdxSp const iion = find_ion(get_idx_range<Species>(density));
     double const charge_ratio(charge(iion) / charge(ielec()));
     double const me_on_mi(mass(ielec()) / mass(iion));
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            collfreq_ab.domain<IDimX>(),
-            KOKKOS_LAMBDA(IndexX const ix) {
+            get_idx_range<GridX>(collfreq_ab),
+            KOKKOS_LAMBDA(IdxX const ix) {
                 double const collfreq_elec(
                         nustar_profile(ielec(), ix) * density(ielec(), ix)
                         / Kokkos::pow(temperature(ielec(), ix), 1.5));
@@ -116,20 +116,20 @@ void compute_collfreq_ab(
  * Computes the momentum and energy exchange terms between ions and electrons
  */
 void compute_momentum_energy_exchange(
-        DSpanSpX momentum_exchange_ab,
-        DSpanSpX energy_exchange_ab,
-        DViewSpX collfreq_ab,
-        DViewSpX density,
-        DViewSpX mean_velocity,
-        DViewSpX temperature)
+        DFieldSpX momentum_exchange_ab,
+        DFieldSpX energy_exchange_ab,
+        DConstFieldSpX collfreq_ab,
+        DConstFieldSpX density,
+        DConstFieldSpX mean_velocity,
+        DConstFieldSpX temperature)
 {
-    IdxSp const iion = find_ion(density.domain<Species>());
+    IdxSp const iion = find_ion(get_idx_range<Species>(density));
     double const mass_ratio(mass(ielec()) / mass(iion));
     double const me_on_memi(mass(ielec()) / (mass(ielec()) + mass(iion)));
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            collfreq_ab.domain<IDimX>(),
-            KOKKOS_LAMBDA(IndexX const ix) {
+            get_idx_range<GridX>(collfreq_ab),
+            KOKKOS_LAMBDA(IdxX const ix) {
                 // momentum exchange terms
                 momentum_exchange_ab(ielec(), ix)
                         = -collfreq_ab(ielec(), ix) * density(ielec(), ix)

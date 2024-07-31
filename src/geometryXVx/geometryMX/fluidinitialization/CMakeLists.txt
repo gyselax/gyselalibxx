@@ -14,6 +14,8 @@ target_link_libraries("fluidinitialization_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::DDC
         gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::utils
+
 )
 
 add_library("gslx::fluidinitialization_${GEOMETRY_VARIANT}" ALIAS "fluidinitialization_${GEOMETRY_VARIANT}")

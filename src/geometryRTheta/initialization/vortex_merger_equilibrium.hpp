@@ -1,11 +1,11 @@
 #pragma once
+
 #include <functional>
 
 #include <ddc/ddc.hpp>
 
 #include <geometry.hpp>
 
-#include "ddc_aliases.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "utils_tools.hpp"
@@ -23,9 +23,9 @@ class VortexMergerEquilibria
 {
 private:
     Mapping const& m_mapping;
-    IdxRangeRTheta const& m_grid;
-    SplineRThetaBuilder const& m_builder;
-    SplineRThetaEvaluatorNullBound const& m_evaluator;
+    IDomainRP const& m_grid;
+    SplineRPBuilder const& m_builder;
+    SplineRPEvaluatorNullBound const& m_evaluator;
     PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
 public:
@@ -33,10 +33,10 @@ public:
      * @brief Instantiate a VortexMergerEquilibria.
      *
      * @param[in] mapping
-     *      The mapping function from the logical index range
-     *      to the physical index range.
+     *      The mapping function from the logical domain
+     *      to the physical domain.
      * @param[in] grid
-     *      The index range where the equilibrium is defined.
+     *      The domain where the equilibrium is defined.
      * @param[in] builder
      *      A spline builder to get the spline representation
      *      of the RHS of the PDE.
@@ -48,9 +48,9 @@ public:
      */
     VortexMergerEquilibria(
             Mapping const& mapping,
-            IdxRangeRTheta const& grid,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& evaluator,
+            IDomainRP const& grid,
+            SplineRPBuilder const& builder,
+            SplineRPEvaluatorNullBound const& evaluator,
             PolarSplineFEMPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
@@ -96,22 +96,22 @@ public:
      *       implicit loop.
      */
     void find_equilibrium(
-            DFieldRTheta sigma,
-            DFieldRTheta phi_eq,
-            DFieldRTheta rho_eq,
+            DSpanRP sigma,
+            DSpanRP phi_eq,
+            DSpanRP rho_eq,
             std::function<double(double const)> const& function,
             double const phi_max, // ToDo: ADD CASE WHERE RHO_MAX IS GIVEN.
             double const tau,
             int count_max = 25) const
     {
-        DFieldMemRTheta phi_star(m_grid);
-        DFieldMemRTheta ci(m_grid);
+        DFieldRP phi_star(m_grid);
+        DFieldRP ci(m_grid);
 
-        auto dom_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2D rho_coef(dom_bsplinesRTheta);
+        auto dom_bsplinesRP = m_builder.spline_domain();
+        Spline2D rho_coef(dom_bsplinesRP);
 
-        FieldMemRTheta<CoordRTheta> coords(m_grid);
-        ddc::for_each(m_grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
+        FieldRP<CoordRP> coords(m_grid);
+        ddc::for_each(m_grid, [&](IndexRP const irp) { coords(irp) = ddc::coordinate(irp); });
 
         double difference_sigma(0.);
         int count = 0;
@@ -119,33 +119,33 @@ public:
         do {
             count += 1;
             // STEP 1: compute rho^i
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
+            ddc::for_each(m_grid, [&](IndexRP const irp) {
                 rho_eq(irp) = sigma(irp) * function(phi_eq(irp));
             });
 
 
             // STEP 2: compute phi_star^i with PDE solver
-            m_builder(get_field(rho_coef), get_const_field(rho_eq));
+            m_builder(rho_coef.span_view(), rho_eq.span_cview());
             PoissonLikeRHSFunction poisson_rhs(rho_coef, m_evaluator);
-            m_poisson_solver(poisson_rhs, get_const_field(coords), get_field(phi_star));
+            m_poisson_solver(poisson_rhs, coords.span_cview(), phi_star.span_view());
 
             // STEP 3: compute c^i
             // If phi_max is given:
             double norm_Linf_phi_star(0.);
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
+            ddc::for_each(m_grid, [&](IndexRP const irp) {
                 double const abs_phi_star = fabs(phi_star(irp));
                 norm_Linf_phi_star
                         = norm_Linf_phi_star > abs_phi_star ? norm_Linf_phi_star : abs_phi_star;
             });
 
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
+            ddc::for_each(m_grid, [&](IndexRP const irp) {
                 ci(irp) = phi_max / norm_Linf_phi_star;
             });
 
 
             // STEP 4: update sigma and phi
             difference_sigma = 0.;
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
+            ddc::for_each(m_grid, [&](IndexRP const irp) {
                 double const abs_diff_sigma = fabs(sigma(irp) - ci(irp) * sigma(irp));
                 difference_sigma
                         = difference_sigma > abs_diff_sigma ? difference_sigma : abs_diff_sigma;
@@ -158,17 +158,16 @@ public:
 
 
         // STEP 1: compute rho^i
-        ddc::for_each(m_grid, [&](IdxRTheta const irp) {
+        ddc::for_each(m_grid, [&](IndexRP const irp) {
             rho_eq(irp) = sigma(irp) * function(phi_eq(irp));
         });
 
         // Unify at the center point:
-        auto r_idx_range = get_idx_range<GridR>(rho_eq);
-        auto theta_idx_range = get_idx_range<GridTheta>(rho_eq);
-        if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
-                rho_eq(r_idx_range.front(), ip)
-                        = rho_eq(r_idx_range.front(), theta_idx_range.front());
+        auto r_domain = ddc::get_domain<IDimR>(rho_eq);
+        auto theta_domain = ddc::get_domain<IDimP>(rho_eq);
+        if (std::fabs(ddc::coordinate(r_domain.front())) < 1e-15) {
+            ddc::for_each(theta_domain, [&](const IndexP ip) {
+                rho_eq(r_domain.front(), ip) = rho_eq(r_domain.front(), theta_domain.front());
             });
         }
     };
@@ -189,29 +188,29 @@ public:
      *
      */
     void set_equilibrium(
-            DFieldRTheta rho_eq,
+            DSpanRP rho_eq,
             std::function<double(double const)> function,
             double const phi_max,
             double const tau)
     {
-        IdxRangeRTheta grid = get_idx_range<GridR, GridTheta>(rho_eq);
+        IDomainRP grid = ddc::get_domain<IDimR, IDimP>(rho_eq);
 
         // Equilibrium:
-        DFieldMemRTheta sigma_0(grid);
-        DFieldMemRTheta phi_eq(grid);
+        DFieldRP sigma_0(grid);
+        DFieldRP phi_eq(grid);
         const double sig = 0.3;
-        ddc::for_each(grid, [&](IdxRTheta const irp) {
-            const CoordRTheta coord_rp(ddc::coordinate(irp));
+        ddc::for_each(grid, [&](IndexRP const irp) {
+            const CoordRP coord_rp(ddc::coordinate(irp));
             const CoordXY coord_xy(m_mapping(coord_rp));
-            const double x = ddc::get<X>(coord_xy);
-            const double y = ddc::get<Y>(coord_xy);
+            const double x = ddc::get<RDimX>(coord_xy);
+            const double y = ddc::get<RDimY>(coord_xy);
             sigma_0(irp) = sig;
             phi_eq(irp) = std::exp(-(x * x + y * y) / (2 * sig * sig));
         });
         find_equilibrium(
-                get_field(sigma_0),
-                get_field(phi_eq),
-                get_field(rho_eq),
+                sigma_0.span_view(),
+                phi_eq.span_view(),
+                rho_eq.span_view(),
                 function,
                 phi_max,
                 tau);

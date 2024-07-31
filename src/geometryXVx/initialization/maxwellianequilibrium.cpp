@@ -14,14 +14,14 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 {
 }
 
-DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) const
+DFieldSpVx MaxwellianEquilibrium::operator()(DFieldSpVx const allfequilibrium) const
 {
-    IDomainVx const gridvx = allfequilibrium.domain<IDimVx>();
-    IdxRangeSp const gridsp = allfequilibrium.domain<Species>();
+    IdxRangeVx const gridvx = get_idx_range<GridVx>(allfequilibrium);
+    IdxRangeSp const gridsp = get_idx_range<Species>(allfequilibrium);
 
     // Initialization of the maxwellian
-    DFieldVx maxwellian_alloc(gridvx);
-    ddc::ChunkSpan maxwellian = maxwellian_alloc.span_view();
+    DFieldMemVx maxwellian_alloc(gridvx);
+    ddc::ChunkSpan maxwellian = get_field(maxwellian_alloc);
     ddc::for_each(gridsp, [&](IdxSp const isp) {
         compute_maxwellian(
                 maxwellian,
@@ -32,7 +32,7 @@ DSpanSpVx MaxwellianEquilibrium::operator()(DSpanSpVx const allfequilibrium) con
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 gridvx,
-                KOKKOS_LAMBDA(IndexVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
+                KOKKOS_LAMBDA(IdxVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
     });
     return allfequilibrium;
 }
@@ -62,17 +62,17 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
 
 
 void MaxwellianEquilibrium::compute_maxwellian(
-        DSpanVx const fMaxwellian,
+        DFieldVx const fMaxwellian,
         double const density,
         double const temperature,
         double const mean_velocity)
 {
     double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
-    IDomainVx const gridvx = fMaxwellian.domain();
+    IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridvx,
-            KOKKOS_LAMBDA(IndexVx const ivx) {
+            KOKKOS_LAMBDA(IdxVx const ivx) {
                 CoordVx const vx = ddc::coordinate(ivx);
                 fMaxwellian(ivx) = density * inv_sqrt_2piT
                                    * Kokkos::exp(

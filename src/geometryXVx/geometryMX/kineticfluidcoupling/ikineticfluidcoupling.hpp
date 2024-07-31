@@ -32,6 +32,6 @@ public:
      * @param[in] dt The timestep.
      * 
      */
-    virtual void operator()(DSpanSpXVx const allfdistribu, DSpanSpMX neutrals, double const dt)
+    virtual void operator()(DFieldSpXVx const allfdistribu, DFieldSpMomX neutrals, double const dt)
             const = 0;
 };

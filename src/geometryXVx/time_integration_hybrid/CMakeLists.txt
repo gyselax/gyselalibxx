@@ -20,6 +20,8 @@ target_link_libraries("time_integration_hybrid_${GEOMETRY_VARIANT}"
         gslx::fluidrhs_${GEOMETRY_VARIANT}
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::speciesinfo
+        gslx::utils
+
 )
 
 add_library("gslx::time_integration_hybrid_${GEOMETRY_VARIANT}" ALIAS "time_integration_hybrid_${GEOMETRY_VARIANT}")

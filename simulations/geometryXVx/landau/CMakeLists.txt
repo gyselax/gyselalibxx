@@ -19,6 +19,8 @@ target_link_libraries(landau_fem_uniform_${GEOMETRY_VARIANT}
         gslx::advection
         gslx::io
         gslx::pde_solvers
+        gslx::utils
+
 )
 
 install(TARGETS landau_fem_uniform_${GEOMETRY_VARIANT})
@@ -42,6 +44,8 @@ target_link_libraries(landau_fft
         gslx::advection
         gslx::io
         gslx::pde_solvers
+        gslx::utils
+
 )
 
 install(TARGETS landau_fft)

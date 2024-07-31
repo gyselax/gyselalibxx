@@ -2,8 +2,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/polar_spline.hpp>
-
 #include "derivative_field_common.hpp"
 #include "vector_field_common.hpp"
 
@@ -126,8 +124,7 @@ template <class FieldType>
 inline auto get_field(FieldType& field)
 {
     static_assert(
-            (ddc::is_chunk_v<FieldType>) || (is_field_v<FieldType>) || (is_deriv_field_v<FieldType>)
-                    || (is_polar_spline_v<FieldType>),
+            ddc::is_chunk_v<FieldType> || is_field_v<FieldType> || is_deriv_field_v<FieldType>,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_view();
 }
@@ -142,8 +139,7 @@ template <class FieldType>
 inline auto get_const_field(FieldType const& field)
 {
     static_assert(
-            (ddc::is_chunk_v<FieldType>) || (is_field_v<FieldType>) || (is_deriv_field_v<FieldType>)
-                    || (is_polar_spline_v<FieldType>),
+            ddc::is_chunk_v<FieldType> || is_field_v<FieldType> || is_deriv_field_v<FieldType>,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_cview();
 }

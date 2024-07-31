@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
+#include "ddc_aliases.hpp"
 #include "ireactionrate.hpp"
 
 namespace detail {
 
 template <typename CoeffView>
-DSpanSpX compute_rate_electron_density_temperature(
+DFieldSpX compute_rate_electron_density_temperature(
         Kokkos::DefaultExecutionSpace exec_space,
-        DSpanSpX rate,
-        DViewSpX density,
-        DViewSpX temperature,
+        DFieldSpX rate,
+        DConstFieldSpX density,
+        DConstFieldSpX temperature,
         CoeffView slope_coefficients,
         CoeffView intercept_coefficients,
         double norm_coeff_rate)
 {
     ddc::parallel_for_each(
             exec_space,
-            rate.domain(),
-            KOKKOS_LAMBDA(IndexSpX const ifspx) {
+            get_idx_range(rate),
+            KOKKOS_LAMBDA(IdxSpX const ifspx) {
                 double temperature_log10
-                        = Kokkos::log10(temperature(ielec(), ddc::select<IDimX>(ifspx)));
-                double density_log10 = Kokkos::log10(density(ielec(), ddc::select<IDimX>(ifspx)));
+                        = Kokkos::log10(temperature(ielec(), ddc::select<GridX>(ifspx)));
+                double density_log10 = Kokkos::log10(density(ielec(), ddc::select<GridX>(ifspx)));
 
                 double rate_log10 = 0.0;
                 for (int i = 0; i < slope_coefficients.extent(0); ++i) {
@@ -36,19 +36,19 @@ DSpanSpX compute_rate_electron_density_temperature(
 }
 
 template <typename CoeffView>
-DSpanSpX compute_rate_ion_temperature(
+DFieldSpX compute_rate_ion_temperature(
         Kokkos::DefaultExecutionSpace exec_space,
-        DSpanSpX rate,
-        DViewSpX temperature,
+        DFieldSpX rate,
+        DConstFieldSpX temperature,
         CoeffView polynomial_coefficients,
         double norm_coeff_rate)
 {
     ddc::parallel_for_each(
             exec_space,
-            rate.domain(),
-            KOKKOS_LAMBDA(IndexSpX const ifspx) {
+            get_idx_range(rate),
+            KOKKOS_LAMBDA(IdxSpX const ifspx) {
                 double temperature_log10
-                        = Kokkos::log10(temperature(ielec(), ddc::select<IDimX>(ifspx)));
+                        = Kokkos::log10(temperature(ielec(), ddc::select<GridX>(ifspx)));
 
                 double rate_log10 = 0.0;
                 for (int i = 0; i < polynomial_coefficients.extent(0); ++i) {

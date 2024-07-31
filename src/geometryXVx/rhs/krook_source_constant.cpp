@@ -9,8 +9,8 @@
 #include "mask_tanh.hpp"
 
 KrookSourceConstant::KrookSourceConstant(
-        IDomainX const& gridx,
-        IDomainVx const& gridvx,
+        IdxRangeX const& gridx,
+        IdxRangeVx const& gridvx,
         RhsType const type,
         double const extent,
         double const stiffness,
@@ -27,7 +27,7 @@ KrookSourceConstant::KrookSourceConstant(
     , m_ftarget(gridvx)
 {
     // mask that defines the region where the operator is active
-    host_t<DFieldX> mask_host(gridx);
+    host_t<DFieldMemX> mask_host(gridx);
     switch (m_type) {
     case RhsType::Source:
         // the mask equals one in the interval [x_left, x_right]
@@ -38,11 +38,11 @@ KrookSourceConstant::KrookSourceConstant(
         mask_host = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Inverted, false);
         break;
     }
-    ddc::parallel_deepcopy(m_mask.span_view(), mask_host);
+    ddc::parallel_deepcopy(get_field(m_mask), mask_host);
 
     // target distribution function
-    MaxwellianEquilibrium::compute_maxwellian(m_ftarget.span_view(), m_density, m_temperature, 0.);
-    auto ftarget_host = ddc::create_mirror_view_and_copy(m_ftarget.span_view());
+    MaxwellianEquilibrium::compute_maxwellian(get_field(m_ftarget), m_density, m_temperature, 0.);
+    auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(m_ftarget));
 
     switch (m_type) {
     case RhsType::Source:
@@ -66,23 +66,23 @@ KrookSourceConstant::KrookSourceConstant(
     }
 }
 
-DSpanSpXVx KrookSourceConstant::operator()(DSpanSpXVx const allfdistribu, double const dt) const
+DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
     Kokkos::Profiling::pushRegion("KrookSource");
 
-    auto ftarget = m_ftarget.span_view();
-    auto mask = m_mask.span_view();
+    auto ftarget = get_field(m_ftarget);
+    auto mask = get_field(m_mask);
     auto const& amplitude = m_amplitude;
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+            get_idx_range(allfdistribu),
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
                 allfdistribu(ispxvx)
-                        = ftarget(ddc::select<IDimVx>(ispxvx))
-                          + (allfdistribu(ispxvx) - ftarget(ddc::select<IDimVx>(ispxvx)))
+                        = ftarget(ddc::select<GridVx>(ispxvx))
+                          + (allfdistribu(ispxvx) - ftarget(ddc::select<GridVx>(ispxvx)))
                                     * Kokkos::exp(
-                                            -amplitude * mask(ddc::select<IDimX>(ispxvx)) * dt);
+                                            -amplitude * mask(ddc::select<GridX>(ispxvx)) * dt);
             });
 
     Kokkos::Profiling::popRegion();

@@ -8,9 +8,9 @@
 #include "collisions_inter.hpp"
 #include "collisions_utils.hpp"
 
-CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
+CollisionsInter::CollisionsInter(IdxRangeSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
-    , m_nustar_profile_alloc(ddc::select<Species, IDimX>(mesh))
+    , m_nustar_profile_alloc(ddc::select<Species, GridX>(mesh))
 {
     // validity checks
     if (ddc::select<Species>(mesh).size() != 2) {
@@ -20,39 +20,40 @@ CollisionsInter::CollisionsInter(IDomainSpXVx const& mesh, double nustar0)
         throw std::invalid_argument("Collision operator should not be used with nustar0=0.");
     }
 
-    m_nustar_profile = m_nustar_profile_alloc.span_view();
+    m_nustar_profile = get_field(m_nustar_profile_alloc);
     compute_nustar_profile(m_nustar_profile, m_nustar0);
     ddc::expose_to_pdi("collinter_nustar0", m_nustar0);
 }
 
-void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfdistribu) const
+void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx const allfdistribu)
+        const
 {
-    IDomainSpX grid_sp_x = allfdistribu.domain<Species, IDimX>();
-    DFieldSpX density_f(grid_sp_x);
-    DFieldSpX fluid_velocity_f(grid_sp_x);
-    DFieldSpX temperature_f(grid_sp_x);
-    auto density = density_f.span_view();
-    auto fluid_velocity = fluid_velocity_f.span_view();
-    auto temperature = temperature_f.span_view();
+    IdxRangeSpX grid_sp_x = get_idx_range<Species, GridX>(allfdistribu);
+    DFieldMemSpX density_f(grid_sp_x);
+    DFieldMemSpX fluid_velocity_f(grid_sp_x);
+    DFieldMemSpX temperature_f(grid_sp_x);
+    auto density = get_field(density_f);
+    auto fluid_velocity = get_field(fluid_velocity_f);
+    auto temperature = get_field(temperature_f);
 
-    host_t<DFieldVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients(ddc::get_domain<IDimVx>(allfdistribu)));
+    host_t<DFieldMemVx> const quadrature_coeffs_host(
+            trapezoid_quadrature_coefficients(get_idx_range<GridVx>(allfdistribu)));
     auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
-            quadrature_coeffs_host.span_view());
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+            get_field(quadrature_coeffs_host));
+    auto quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     //Moments computation
     ddc::parallel_fill(density, 0.);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
-            KOKKOS_LAMBDA(IndexSpX const ispx) {
+            KOKKOS_LAMBDA(IdxSpX const ispx) {
                 IdxSp isp(ddc::select<Species>(ispx));
-                IndexX ix(ddc::select<IDimX>(ispx));
+                IdxX ix(ddc::select<GridX>(ispx));
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IndexVx ivx : allfdistribu.domain<IDimVx>()) {
+                for (IdxVx ivx : get_idx_range<GridVx>(allfdistribu)) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(isp, ix, ivx));
                     density(isp, ix) += val;
@@ -66,31 +67,31 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
 
 
     //Collision frequencies, momentum and energy exchange terms
-    DFieldSpX nustar_profile(grid_sp_x);
+    DFieldMemSpX nustar_profile(grid_sp_x);
     ddc::parallel_deepcopy(nustar_profile, m_nustar_profile);
-    DFieldSpX collfreq_ab(grid_sp_x);
-    DFieldSpX momentum_exchange_ab_f(grid_sp_x);
-    DFieldSpX energy_exchange_ab_f(grid_sp_x);
-    auto momentum_exchange_ab = momentum_exchange_ab_f.span_view();
-    auto energy_exchange_ab = energy_exchange_ab_f.span_view();
-    compute_collfreq_ab(collfreq_ab.span_view(), nustar_profile, density, temperature);
+    DFieldMemSpX collfreq_ab(grid_sp_x);
+    DFieldMemSpX momentum_exchange_ab_f(grid_sp_x);
+    DFieldMemSpX energy_exchange_ab_f(grid_sp_x);
+    auto momentum_exchange_ab = get_field(momentum_exchange_ab_f);
+    auto energy_exchange_ab = get_field(energy_exchange_ab_f);
+    compute_collfreq_ab(get_field(collfreq_ab), nustar_profile, density, temperature);
     compute_momentum_energy_exchange(
-            momentum_exchange_ab.span_view(),
-            energy_exchange_ab.span_view(),
+            get_field(momentum_exchange_ab),
+            get_field(energy_exchange_ab),
             collfreq_ab,
             density,
             fluid_velocity,
             temperature);
 
-    DFieldSpXVx fmaxwellian_f(allfdistribu.domain());
-    auto fmaxwellian = fmaxwellian_f.span_view();
+    DFieldMemSpXVx fmaxwellian_f(get_idx_range(allfdistribu));
+    auto fmaxwellian = get_field(fmaxwellian_f);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+            get_idx_range(allfdistribu),
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
                 IdxSp isp(ddc::select<Species>(ispxvx));
-                IndexX ix(ddc::select<IDimX>(ispxvx));
-                IndexVx ivx(ddc::select<IDimVx>(ispxvx));
+                IdxX ix(ddc::select<GridX>(ispxvx));
+                IdxVx ivx(ddc::select<GridVx>(ispxvx));
                 double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature(isp, ix));
                 CoordVx const vx = ddc::coordinate(ivx);
                 fmaxwellian(ispxvx)
@@ -103,11 +104,11 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+            get_idx_range(allfdistribu),
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
                 IdxSp isp(ddc::select<Species>(ispxvx));
-                IndexX ix(ddc::select<IDimX>(ispxvx));
-                IndexVx ivx(ddc::select<IDimVx>(ispxvx));
+                IdxX ix(ddc::select<GridX>(ispxvx));
+                IdxVx ivx(ddc::select<GridVx>(ispxvx));
                 double const coordv = ddc::coordinate(ivx);
                 double const term_v(coordv - fluid_velocity(isp, ix));
                 df(isp, ix, ivx) = (2. * energy_exchange_ab(isp, ix)
@@ -119,12 +120,12 @@ void CollisionsInter::get_derivative(DSpanSpXVx const df, DViewSpXVx const allfd
 }
 
 
-DSpanSpXVx CollisionsInter::operator()(DSpanSpXVx allfdistribu, double dt) const
+DFieldSpXVx CollisionsInter::operator()(DFieldSpXVx allfdistribu, double dt) const
 {
     Kokkos::Profiling::pushRegion("CollisionsInter");
-    RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
+    RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
-    timestepper.update(allfdistribu, dt, [&](DSpanSpXVx dy, DViewSpXVx y) {
+    timestepper.update(allfdistribu, dt, [&](DFieldSpXVx dy, DConstFieldSpXVx y) {
         get_derivative(dy, y);
     });
 
