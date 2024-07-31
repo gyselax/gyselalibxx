@@ -129,7 +129,8 @@ TEST(MatrixBatchCsrFixture, Coo_to_Csr)
     }
 }
 
-TEST(MatrixBatchCsrFixture, SolveDiagonalBicgstab)
+template <MatrixBatchCsrSolver Solver>
+void solve_diagonal_system()
 {
     int const batch_size = 2;
     int const mat_size = 4;
@@ -152,14 +153,12 @@ TEST(MatrixBatchCsrFixture, SolveDiagonalBicgstab)
     Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             solution_view_host(solution, batch_size * mat_size);
 
-    solve_system<MatrixBatchCsrSolver::BICGSTAB>(
-            values_view_host,
-            idx_view_host,
-            nnz_per_row_view_host,
-            solution_view_host);
+    solve_system<
+            Solver>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
 }
 
-TEST(MatrixBatchCsrFixture, SolveSparseBicgstab)
+template <MatrixBatchCsrSolver Solver>
+void solve_sparse_system()
 {
     int const batch_size = 2;
     int const mat_size = 5;
@@ -212,68 +211,109 @@ TEST(MatrixBatchCsrFixture, SolveSparseBicgstab)
             }
         }
     }
-    solve_system<MatrixBatchCsrSolver::BICGSTAB>(
-            values_view_host,
-            idx_view_host,
-            nnz_per_row_view_host,
-            solution_view_host);
+    solve_system<
+            Solver>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
+}
+
+template <MatrixBatchCsrSolver Solver>
+void solve_pds_system()
+{
+    {
+        int const batch_size = 2;
+        int const mat_size = 5;
+        int const non_zero_per_system = 25;
+        int nnz_per_row[] = {0, 5, 10, 15, 20, 25};
+        //first matrix eigenvalues [7.13490895 1.12269422 0.2177588  0.07179924 0.02072621]
+        //second matrix eigenvalues  [9.38119529e+00 9.57862018e-01 5.16641290e-01 5.50717953e-02 4.69290376e-03]
+        double solution[]
+                = {-2.37358759,
+                   2.41177772,
+                   1.09774264,
+                   1.10503935,
+                   -0.16610463,
+                   -19.035696,
+                   27.611921,
+                   -34.03087866,
+                   30.813921,
+                   11.64331918};
+        double matvalues[2][5][5]
+                = {{{2.85679107, 1.86116608, 1.55237696, 1.67953204, 1.6130445},
+                    {1.86116608, 1.39832276, 1.07542783, 0.98889335, 1.37330181},
+                    {1.55237696, 1.07542783, 1.06195425, 1.00023903, 1.08393101},
+                    {1.67953204, 0.98889335, 1.00023903, 1.44583069, 0.56698767},
+                    {1.6130445, 1.3733018, 1.08393101, 0.56698767, 1.80498864}},
+                   {{1.67297988, 1.33253271, 2.15265423, 1.76538283, 1.28063759},
+                    {1.33253271, 1.26654954, 1.75269646, 1.18861185, 1.23794696},
+                    {2.15265423, 1.75269646, 3.36746571, 2.65006331, 2.27777785},
+                    {1.76538283, 1.18861185, 2.65006331, 2.4502457, 1.41434842},
+                    {1.28063759, 1.23794696, 2.27777785, 1.41434842, 2.15822247}}};
+
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                values_view_host("values_host", batch_size, non_zero_per_system);
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                idx_view_host("col_idxs_host", non_zero_per_system);
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                nnz_per_row_view_host(nnz_per_row, mat_size + 1);
+        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                solution_view_host(solution, batch_size * mat_size);
+        int cpt;
+        for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
+            cpt = 0;
+            for (int i = 0; i < mat_size; i++) {
+                for (int j = 0; j < mat_size; j++) {
+                    if (abs(matvalues[batch_idx][i][j]) > 1e-16) {
+                        if (batch_idx == 0) {
+                            idx_view_host(cpt) = j;
+                        }
+                        values_view_host(batch_idx, cpt) = matvalues[batch_idx][i][j];
+                        cpt++;
+                    }
+                }
+            }
+        }
+        solve_system<
+                Solver>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
+    }
+}
+
+TEST(MatrixBatchCsrFixture, SolveDiagonalCg)
+{
+    solve_diagonal_system<MatrixBatchCsrSolver::CG>();
+}
+
+TEST(MatrixBatchCsrFixture, SolveDiagonalBatchCg)
+{
+    solve_diagonal_system<MatrixBatchCsrSolver::BATCH_CG>();
+}
+
+/* Disabled because of Ginkgo issue #1563 (OpenMP-specific)
+TEST(MatrixBatchCsrFixture, SolveDiagonalBicgstab)
+{
+    solve_diagonal_system<MatrixBatchCsrSolver::BICGSTAB>();
+}
+*/
+
+TEST(MatrixBatchCsrFixture, SolveDiagonalBatchBicgstab)
+{
+    solve_diagonal_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>();
 }
 
 TEST(MatrixBatchCsrFixture, SolvePDSCg)
 {
-    int const batch_size = 2;
-    int const mat_size = 5;
-    int const non_zero_per_system = 25;
-    int nnz_per_row[] = {0, 5, 10, 15, 20, 25};
-    //first matrix eigenvalues [7.13490895 1.12269422 0.2177588  0.07179924 0.02072621]
-    //second matrix eigenvalues  [9.38119529e+00 9.57862018e-01 5.16641290e-01 5.50717953e-02 4.69290376e-03]
-    double solution[]
-            = {-2.37358759,
-               2.41177772,
-               1.09774264,
-               1.10503935,
-               -0.16610463,
-               -19.035696,
-               27.611921,
-               -34.03087866,
-               30.813921,
-               11.64331918};
-    double matvalues[2][5][5]
-            = {{{2.85679107, 1.86116608, 1.55237696, 1.67953204, 1.6130445},
-                {1.86116608, 1.39832276, 1.07542783, 0.98889335, 1.37330181},
-                {1.55237696, 1.07542783, 1.06195425, 1.00023903, 1.08393101},
-                {1.67953204, 0.98889335, 1.00023903, 1.44583069, 0.56698767},
-                {1.6130445, 1.3733018, 1.08393101, 0.56698767, 1.80498864}},
-               {{1.67297988, 1.33253271, 2.15265423, 1.76538283, 1.28063759},
-                {1.33253271, 1.26654954, 1.75269646, 1.18861185, 1.23794696},
-                {2.15265423, 1.75269646, 3.36746571, 2.65006331, 2.27777785},
-                {1.76538283, 1.18861185, 2.65006331, 2.4502457, 1.41434842},
-                {1.28063759, 1.23794696, 2.27777785, 1.41434842, 2.15822247}}};
+    solve_pds_system<MatrixBatchCsrSolver::CG>();
+}
 
-    Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-            values_view_host("values_host", batch_size, non_zero_per_system);
-    Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-            idx_view_host("col_idxs_host", non_zero_per_system);
-    Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-            nnz_per_row_view_host(nnz_per_row, mat_size + 1);
-    Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-            solution_view_host(solution, batch_size * mat_size);
-    int cpt;
-    for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
-        cpt = 0;
-        for (int i = 0; i < mat_size; i++) {
-            for (int j = 0; j < mat_size; j++) {
-                if (abs(matvalues[batch_idx][i][j]) > 1e-16) {
-                    if (batch_idx == 0) {
-                        idx_view_host(cpt) = j;
-                    }
-                    values_view_host(batch_idx, cpt) = matvalues[batch_idx][i][j];
-                    cpt++;
-                }
-            }
-        }
-    }
-    solve_system<
-            MatrixBatchCsrSolver::
-                    CG>(values_view_host, idx_view_host, nnz_per_row_view_host, solution_view_host);
+TEST(MatrixBatchCsrFixture, SolvePDSBatchCg)
+{
+    solve_pds_system<MatrixBatchCsrSolver::BATCH_CG>();
+}
+
+TEST(MatrixBatchCsrFixture, SolveSparseBicgstab)
+{
+    solve_sparse_system<MatrixBatchCsrSolver::BICGSTAB>();
+}
+
+TEST(MatrixBatchCsrFixture, SolveSparseBatchBicgstab)
+{
+    solve_sparse_system<MatrixBatchCsrSolver::BATCH_BICGSTAB>();
 }
