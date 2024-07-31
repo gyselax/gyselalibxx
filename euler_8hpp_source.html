@@ -109,86 +109,90 @@ $(document).ready(function(){initNavTree('euler_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector_field_common.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;itimestepper.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ValChunk, <span class="keyword">class</span> DerivChunk = ValChunk&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classEuler.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEuler.html">Euler</a> : <span class="keyword">public</span> <a class="code" href="classITimeStepper.html">ITimeStepper</a></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    static_assert(ddc::is_chunk_v&lt;ValChunk&gt; or is_field_v&lt;ValChunk&gt;);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    static_assert(ddc::is_chunk_v&lt;DerivChunk&gt; or is_field_v&lt;DerivChunk&gt;);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            std::is_same_v&lt;typename ValChunk::mdomain_type, typename DerivChunk::mdomain_type&gt;);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> Domain = <span class="keyword">typename</span> ValChunk::mdomain_type;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;itimestepper.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FieldMemType, <span class="keyword">class</span> DerivFieldMemType = FieldMemType&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classEuler.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEuler.html">Euler</a> : <span class="keyword">public</span> <a class="code" href="classITimeStepper.html">ITimeStepper</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    static_assert(ddc::is_chunk_v&lt;FieldMemType&gt; or is_field_v&lt;FieldMemType&gt;);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    static_assert(ddc::is_chunk_v&lt;DerivFieldMemType&gt; or is_field_v&lt;DerivFieldMemType&gt;);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    static_assert(std::is_same_v&lt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                  <span class="keyword">typename</span> FieldMemType::mdomain_type,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                  <span class="keyword">typename</span> DerivFieldMemType::mdomain_type&gt;);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> Index = <span class="keyword">typename</span> Domain::discrete_element_type;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> IdxRange = <span class="keyword">typename</span> FieldMemType::mdomain_type;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> ValSpan = <span class="keyword">typename</span> ValChunk::span_type;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> ValView = <span class="keyword">typename</span> ValChunk::view_type;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> DerivSpan = <span class="keyword">typename</span> DerivChunk::span_type;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> DerivView = <span class="keyword">typename</span> DerivChunk::view_type;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    Domain <span class="keyword">const</span> m_dom;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> Idx = <span class="keyword">typename</span> IdxRange::discrete_element_type;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">using</span> ValField = <span class="keyword">typename</span> FieldMemType::span_type;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> ValConstField = <span class="keyword">typename</span> FieldMemType::view_type;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">using</span> <a class="code" href="classDerivField.html">DerivField</a> = <span class="keyword">typename</span> DerivFieldMemType::span_type;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">using</span> DerivConstField = <span class="keyword">typename</span> DerivFieldMemType::view_type;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">   53</a></span>&#160;    <a class="code" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler</a>(Domain dom) : m_dom(dom) {}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">   71</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a>(ValSpan y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">using</span> ExecSpace = <span class="keyword">typename</span> ValChunk::memory_space::execution_space;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a>(ExecSpace(), y, dt, dy);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classEuler.html#a20ceb8499822225f00079922405d9dad">   96</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#a20ceb8499822225f00079922405d9dad">update</a>(</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; exec_space,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            ValSpan y,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        static_assert(ddc::is_chunk_v&lt;ValChunk&gt;);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                Kokkos::SpaceAccessibility&lt;ExecSpace, typename ValChunk::memory_space&gt;::accessible,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        static_assert(</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                Kokkos::SpaceAccessibility&lt;ExecSpace, typename DerivChunk::memory_space&gt;::</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                        accessible,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a>(exec_space, y, dt, dy, [&amp;](ValSpan y, DerivView dy, <span class="keywordtype">double</span> dt) {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            ddc::parallel_for_each(</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    exec_space,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    y.domain(),</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    KOKKOS_LAMBDA(Index <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        });</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace&gt;</div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14">  134</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14">update</a>(</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; exec_space,</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            ValSpan y,</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(DerivSpan, ValView)&gt; dy,</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValSpan, DerivView, <span class="keywordtype">double</span>)&gt; y_update)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        DerivChunk m_k1(m_dom);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="comment">// Calculate k1 = f(y_n)</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        dy(m_k1, y);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="comment">// Calculate y_new := y_n + h*k_1</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        y_update(y, m_k1, dt);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    }</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;};</div>
-<div class="ttc" id="aclassEuler_html"><div class="ttname"><a href="classEuler.html">Euler</a></div><div class="ttdoc">A class which provides an implementation of an explicit Euler method.</div><div class="ttdef"><b>Definition:</b> euler.hpp:28</div></div>
-<div class="ttc" id="aclassEuler_html_a20ceb8499822225f00079922405d9dad"><div class="ttname"><a href="classEuler.html#a20ceb8499822225f00079922405d9dad">Euler::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:96</div></div>
-<div class="ttc" id="aclassEuler_html_a5af55f31f2b26e3122ef42c6fce49b14"><div class="ttname"><a href="classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14">Euler::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:134</div></div>
-<div class="ttc" id="aclassEuler_html_a8019703dccd8358b9b221818fa51bdcb"><div class="ttname"><a href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler::Euler</a></div><div class="ttdeci">Euler(Domain dom)</div><div class="ttdoc">Create a Euler object.</div><div class="ttdef"><b>Definition:</b> euler.hpp:53</div></div>
-<div class="ttc" id="aclassEuler_html_ab0df03fe21a6b3894fb88d3119ed88f8"><div class="ttname"><a href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">Euler::update</a></div><div class="ttdeci">void update(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:71</div></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    IdxRange <span class="keyword">const</span> m_dom;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">   55</a></span>&#160;    <a class="code" href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">Euler</a>(IdxRange dom) : m_dom(dom) {}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">   73</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">update</a>(ValField y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">using</span> ExecSpace = <span class="keyword">typename</span> FieldMemType::memory_space::execution_space;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">update</a>(ExecSpace(), y, dt, dy);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace&gt;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classEuler.html#a591a0f7e5c2ee10a3e12c4fc7629fdf8">   98</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#a591a0f7e5c2ee10a3e12c4fc7629fdf8">update</a>(</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; exec_space,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            ValField y,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordtype">double</span> dt,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        static_assert(ddc::is_chunk_v&lt;FieldMemType&gt;);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                Kokkos::SpaceAccessibility&lt;ExecSpace, typename FieldMemType::memory_space&gt;::</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        accessible,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        static_assert(</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                Kokkos::SpaceAccessibility&lt;ExecSpace, typename DerivFieldMemType::memory_space&gt;::</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                        accessible,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">update</a>(exec_space, y, dt, dy, [&amp;](ValField y, DerivConstField dy, <span class="keywordtype">double</span> dt) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    exec_space,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    get_idx_range(y),</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    KOKKOS_LAMBDA(Idx <span class="keyword">const</span> idx) { y(idx) = y(idx) + dy(idx) * dt; });</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        });</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace&gt;</div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classEuler.html#a52540fe6d8e0a9b5f929126320b344d7">  137</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEuler.html#a52540fe6d8e0a9b5f929126320b344d7">update</a>(</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; exec_space,</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            ValField y,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordtype">double</span> dt,</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy,</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValField, DerivConstField, <span class="keywordtype">double</span>)&gt; y_update)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        DerivFieldMemType m_k1(m_dom);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="comment">// Calculate k1 = f(y_n)</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        dy(m_k1, y);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="comment">// Calculate y_new := y_n + h*k_1</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        y_update(y, m_k1, dt);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;};</div>
+<div class="ttc" id="aclassDerivField_html"><div class="ttname"><a href="classDerivField.html">DerivField</a></div><div class="ttdoc">See DerivFieldImplementation.</div><div class="ttdef"><b>Definition:</b> derivative_field.hpp:18</div></div>
+<div class="ttc" id="aclassEuler_html"><div class="ttname"><a href="classEuler.html">Euler</a></div><div class="ttdoc">A class which provides an implementation of an explicit Euler method.</div><div class="ttdef"><b>Definition:</b> euler.hpp:29</div></div>
+<div class="ttc" id="aclassEuler_html_a52540fe6d8e0a9b5f929126320b344d7"><div class="ttname"><a href="classEuler.html#a52540fe6d8e0a9b5f929126320b344d7">Euler::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:137</div></div>
+<div class="ttc" id="aclassEuler_html_a591a0f7e5c2ee10a3e12c4fc7629fdf8"><div class="ttname"><a href="classEuler.html#a591a0f7e5c2ee10a3e12c4fc7629fdf8">Euler::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:98</div></div>
+<div class="ttc" id="aclassEuler_html_aa3b557e00af95d751f7ab1643861fb04"><div class="ttname"><a href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">Euler::update</a></div><div class="ttdeci">void update(ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the explicit Euler scheme.</div><div class="ttdef"><b>Definition:</b> euler.hpp:73</div></div>
+<div class="ttc" id="aclassEuler_html_aee564617f47b75872e782d02b6c2bde1"><div class="ttname"><a href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">Euler::Euler</a></div><div class="ttdeci">Euler(IdxRange dom)</div><div class="ttdoc">Create a Euler object.</div><div class="ttdef"><b>Definition:</b> euler.hpp:55</div></div>
 <div class="ttc" id="aclassITimeStepper_html"><div class="ttname"><a href="classITimeStepper.html">ITimeStepper</a></div><div class="ttdef"><b>Definition:</b> itimestepper.hpp:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

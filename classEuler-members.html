@@ -100,16 +100,16 @@ $(document).ready(function(){initNavTree('classEuler.html',''); initResizable();
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Euler&lt; ValChunk, DerivChunk &gt; Member List</div>  </div>
+<div class="title">Euler&lt; FieldMemType, DerivFieldMemType &gt; Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classEuler.html">Euler&lt; ValChunk, DerivChunk &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classEuler.html">Euler&lt; FieldMemType, DerivFieldMemType &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler</a>(Domain dom)</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; ValChunk, DerivChunk &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a>(ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; ValChunk, DerivChunk &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEuler.html#a20ceb8499822225f00079922405d9dad">update</a>(ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; ValChunk, DerivChunk &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14">update</a>(ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; ValChunk, DerivChunk &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">Euler</a>(IdxRange dom)</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; FieldMemType, DerivFieldMemType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">update</a>(ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy) const</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; FieldMemType, DerivFieldMemType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classEuler.html#a591a0f7e5c2ee10a3e12c4fc7629fdf8">update</a>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy) const</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; FieldMemType, DerivFieldMemType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classEuler.html#a52540fe6d8e0a9b5f929126320b344d7">update</a>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</td><td class="entry"><a class="el" href="classEuler.html">Euler&lt; FieldMemType, DerivFieldMemType &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

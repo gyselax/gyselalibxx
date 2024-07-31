@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Euler&lt; ValChunk, DerivChunk &gt; Class Template Reference</title>
+<title>Gyselalib++: Euler&lt; FieldMemType, DerivFieldMemType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,64 +103,64 @@ $(document).ready(function(){initNavTree('classEuler.html',''); initResizable();
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classEuler-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Euler&lt; ValChunk, DerivChunk &gt; Class Template Reference</div>  </div>
+<div class="title">Euler&lt; FieldMemType, DerivFieldMemType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class which provides an implementation of an explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method.  
  <a href="classEuler.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for Euler&lt; ValChunk, DerivChunk &gt;:</div>
+Inheritance diagram for Euler&lt; FieldMemType, DerivFieldMemType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classEuler.png" usemap="#Euler_3C_20ValChunk_2C_20DerivChunk_20_3E_map" alt=""/>
-  <map id="Euler_3C_20ValChunk_2C_20DerivChunk_20_3E_map" name="Euler_3C_20ValChunk_2C_20DerivChunk_20_3E_map">
-<area href="classITimeStepper.html" alt="ITimeStepper" shape="rect" coords="0,0,197,24"/>
+  <img src="classEuler.png" usemap="#Euler_3C_20FieldMemType_2C_20DerivFieldMemType_20_3E_map" alt=""/>
+  <map id="Euler_3C_20FieldMemType_2C_20DerivFieldMemType_20_3E_map" name="Euler_3C_20FieldMemType_2C_20DerivFieldMemType_20_3E_map">
+<area href="classITimeStepper.html" alt="ITimeStepper" shape="rect" coords="0,0,272,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8019703dccd8358b9b221818fa51bdcb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">Euler</a> (Domain dom)</td></tr>
-<tr class="memdesc:a8019703dccd8358b9b221818fa51bdcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object.  <a href="classEuler.html#a8019703dccd8358b9b221818fa51bdcb">More...</a><br /></td></tr>
-<tr class="separator:a8019703dccd8358b9b221818fa51bdcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0df03fe21a6b3894fb88d3119ed88f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">update</a> (ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
-<tr class="memdesc:ab0df03fe21a6b3894fb88d3119ed88f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#ab0df03fe21a6b3894fb88d3119ed88f8">More...</a><br /></td></tr>
-<tr class="separator:ab0df03fe21a6b3894fb88d3119ed88f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20ceb8499822225f00079922405d9dad"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
-<tr class="memitem:a20ceb8499822225f00079922405d9dad"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEuler.html#a20ceb8499822225f00079922405d9dad">update</a> (ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy) const</td></tr>
-<tr class="memdesc:a20ceb8499822225f00079922405d9dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#a20ceb8499822225f00079922405d9dad">More...</a><br /></td></tr>
-<tr class="separator:a20ceb8499822225f00079922405d9dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5af55f31f2b26e3122ef42c6fce49b14"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
-<tr class="memitem:a5af55f31f2b26e3122ef42c6fce49b14"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14">update</a> (ExecSpace const &amp;exec_space, ValSpan y, double dt, std::function&lt; void(DerivSpan, ValView)&gt; dy, std::function&lt; void(ValSpan, DerivView, double)&gt; y_update) const</td></tr>
-<tr class="memdesc:a5af55f31f2b26e3122ef42c6fce49b14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#a5af55f31f2b26e3122ef42c6fce49b14">More...</a><br /></td></tr>
-<tr class="separator:a5af55f31f2b26e3122ef42c6fce49b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee564617f47b75872e782d02b6c2bde1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">Euler</a> (IdxRange dom)</td></tr>
+<tr class="memdesc:aee564617f47b75872e782d02b6c2bde1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object.  <a href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">More...</a><br /></td></tr>
+<tr class="separator:aee564617f47b75872e782d02b6c2bde1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3b557e00af95d751f7ab1643861fb04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">update</a> (ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy) const</td></tr>
+<tr class="memdesc:aa3b557e00af95d751f7ab1643861fb04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#aa3b557e00af95d751f7ab1643861fb04">More...</a><br /></td></tr>
+<tr class="separator:aa3b557e00af95d751f7ab1643861fb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a591a0f7e5c2ee10a3e12c4fc7629fdf8"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:a591a0f7e5c2ee10a3e12c4fc7629fdf8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEuler.html#a591a0f7e5c2ee10a3e12c4fc7629fdf8">update</a> (ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy) const</td></tr>
+<tr class="memdesc:a591a0f7e5c2ee10a3e12c4fc7629fdf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#a591a0f7e5c2ee10a3e12c4fc7629fdf8">More...</a><br /></td></tr>
+<tr class="separator:a591a0f7e5c2ee10a3e12c4fc7629fdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52540fe6d8e0a9b5f929126320b344d7"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:a52540fe6d8e0a9b5f929126320b344d7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEuler.html#a52540fe6d8e0a9b5f929126320b344d7">update</a> (ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</td></tr>
+<tr class="memdesc:a52540fe6d8e0a9b5f929126320b344d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#a52540fe6d8e0a9b5f929126320b344d7">More...</a><br /></td></tr>
+<tr class="separator:a52540fe6d8e0a9b5f929126320b344d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class ValChunk, class DerivChunk = ValChunk&gt;<br />
-class Euler&lt; ValChunk, DerivChunk &gt;</h3>
+<div class="textblock"><h3>template&lt;class FieldMemType, class DerivFieldMemType = FieldMemType&gt;<br />
+class Euler&lt; FieldMemType, DerivFieldMemType &gt;</h3>
 
 <p>A class which provides an implementation of an explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method. </p>
-<p>A class which provides an implementation of an explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on a domain.</p>
+<p>A class which provides an implementation of an explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</p>
 <p>For the following ODE : \(\partial_t y(t) = f(t, y(t)) \),</p>
 <p>the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method is given by : \( y^{n+1} = y^{n} + dt f(t^{n}, y^{n})\).</p>
 <p>The method is order 1. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8019703dccd8358b9b221818fa51bdcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8019703dccd8358b9b221818fa51bdcb">&#9670;&nbsp;</a></span>Euler()</h2>
+<a id="aee564617f47b75872e782d02b6c2bde1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee564617f47b75872e782d02b6c2bde1">&#9670;&nbsp;</a></span>Euler()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
+template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEuler.html">Euler</a>&lt; ValChunk, DerivChunk &gt;::<a class="el" href="classEuler.html">Euler</a> </td>
+          <td class="memname"><a class="el" href="classEuler.html">Euler</a>&lt; FieldMemType, DerivFieldMemType &gt;::<a class="el" href="classEuler.html">Euler</a> </td>
           <td>(</td>
-          <td class="paramtype">Domain&#160;</td>
+          <td class="paramtype">IdxRange&#160;</td>
           <td class="paramname"><em>dom</em></td><td>)</td>
           <td></td>
         </tr>
@@ -175,7 +175,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 <p>Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The domain on which the points which evolve over time are defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range on which the points which evolve over time are defined. </td></tr>
   </table>
   </dd>
 </dl>
@@ -183,21 +183,21 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab0df03fe21a6b3894fb88d3119ed88f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0df03fe21a6b3894fb88d3119ed88f8">&#9670;&nbsp;</a></span>update() <span class="overload">[1/3]</span></h2>
+<a id="aa3b557e00af95d751f7ab1643861fb04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3b557e00af95d751f7ab1643861fb04">&#9670;&nbsp;</a></span>update() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
+template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classEuler.html">Euler</a>&lt; ValChunk, DerivChunk &gt;::update </td>
+          <td class="memname">void <a class="el" href="classEuler.html">Euler</a>&lt; FieldMemType, DerivFieldMemType &gt;::update </td>
           <td>(</td>
-          <td class="paramtype">ValSpan&#160;</td>
+          <td class="paramtype">ValField&#160;</td>
           <td class="paramname"><em>y</em>, </td>
         </tr>
         <tr>
@@ -209,7 +209,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(DerivSpan, ValView)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt;&#160;</td>
           <td class="paramname"><em>dy</em>&#160;</td>
         </tr>
         <tr>
@@ -229,7 +229,7 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 <p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method $f += df * dt$. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the domain. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step over which the values should be evolved. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dy</td><td>The function describing how the derivative of the evolve function is calculated. </td></tr>
   </table>
@@ -238,13 +238,13 @@ template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
 
 </div>
 </div>
-<a id="a20ceb8499822225f00079922405d9dad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20ceb8499822225f00079922405d9dad">&#9670;&nbsp;</a></span>update() <span class="overload">[2/3]</span></h2>
+<a id="a591a0f7e5c2ee10a3e12c4fc7629fdf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a591a0f7e5c2ee10a3e12c4fc7629fdf8">&#9670;&nbsp;</a></span>update() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
+template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </div>
 <div class="memtemplate">
 template&lt;class ExecSpace &gt; </div>
 <table class="mlabels">
@@ -252,7 +252,7 @@ template&lt;class ExecSpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classEuler.html">Euler</a>&lt; ValChunk, DerivChunk &gt;::update </td>
+          <td class="memname">void <a class="el" href="classEuler.html">Euler</a>&lt; FieldMemType, DerivFieldMemType &gt;::update </td>
           <td>(</td>
           <td class="paramtype">ExecSpace const &amp;&#160;</td>
           <td class="paramname"><em>exec_space</em>, </td>
@@ -260,7 +260,7 @@ template&lt;class ExecSpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ValSpan&#160;</td>
+          <td class="paramtype">ValField&#160;</td>
           <td class="paramname"><em>y</em>, </td>
         </tr>
         <tr>
@@ -272,7 +272,7 @@ template&lt;class ExecSpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(DerivSpan, ValView)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt;&#160;</td>
           <td class="paramname"><em>dy</em>&#160;</td>
         </tr>
         <tr>
@@ -293,7 +293,7 @@ template&lt;class ExecSpace &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the domain. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step over which the values should be evolved. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dy</td><td>The function describing how the derivative of the evolve function is calculated. </td></tr>
   </table>
@@ -302,13 +302,13 @@ template&lt;class ExecSpace &gt; </div>
 
 </div>
 </div>
-<a id="a5af55f31f2b26e3122ef42c6fce49b14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5af55f31f2b26e3122ef42c6fce49b14">&#9670;&nbsp;</a></span>update() <span class="overload">[3/3]</span></h2>
+<a id="a52540fe6d8e0a9b5f929126320b344d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52540fe6d8e0a9b5f929126320b344d7">&#9670;&nbsp;</a></span>update() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValChunk , class DerivChunk  = ValChunk&gt; </div>
+template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </div>
 <div class="memtemplate">
 template&lt;class ExecSpace &gt; </div>
 <table class="mlabels">
@@ -316,7 +316,7 @@ template&lt;class ExecSpace &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classEuler.html">Euler</a>&lt; ValChunk, DerivChunk &gt;::update </td>
+          <td class="memname">void <a class="el" href="classEuler.html">Euler</a>&lt; FieldMemType, DerivFieldMemType &gt;::update </td>
           <td>(</td>
           <td class="paramtype">ExecSpace const &amp;&#160;</td>
           <td class="paramname"><em>exec_space</em>, </td>
@@ -324,7 +324,7 @@ template&lt;class ExecSpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ValSpan&#160;</td>
+          <td class="paramtype">ValField&#160;</td>
           <td class="paramname"><em>y</em>, </td>
         </tr>
         <tr>
@@ -336,13 +336,13 @@ template&lt;class ExecSpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(DerivSpan, ValView)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt;&#160;</td>
           <td class="paramname"><em>dy</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(ValSpan, DerivView, double)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(ValField, DerivConstField, double)&gt;&#160;</td>
           <td class="paramname"><em>y_update</em>&#160;</td>
         </tr>
         <tr>
@@ -362,7 +362,7 @@ template&lt;class ExecSpace &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the domain. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">y</td><td>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step over which the values should be evolved. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dy</td><td>The function describing how the derivative of the evolve function is calculated. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">y_update</td><td>The function describing how the value(s) are updated using the derivative. </td></tr>

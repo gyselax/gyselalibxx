@@ -14,7 +14,7 @@ var searchData=
   ['epsilon_221',['epsilon',['../classCzarnyToCartesian.html#a9e4ad729fd290d47759637b69b9aa30a',1,'CzarnyToCartesian']]],
   ['epsilon_5fbot_222',['epsilon_bot',['../classBumpontailEquilibrium.html#a6fc7a8353d8975267668167983fb1bec',1,'BumpontailEquilibrium']]],
   ['equilibrium_223',['equilibrium',['../classDiocotronDensitySolution.html#addb4e4b9e22583a0922b16b770841c47',1,'DiocotronDensitySolution']]],
-  ['euler_224',['Euler',['../classEuler.html',1,'Euler&lt; ValChunk, DerivChunk &gt;'],['../classEuler.html#a8019703dccd8358b9b221818fa51bdcb',1,'Euler::Euler()']]],
+  ['euler_224',['Euler',['../classEuler.html',1,'Euler&lt; FieldMemType, DerivFieldMemType &gt;'],['../classEuler.html#aee564617f47b75872e782d02b6c2bde1',1,'Euler::Euler()']]],
   ['eval_5fbasis_225',['eval_basis',['../classPolarBSplines_1_1Impl.html#a19829dfac3af3875a55bb24f381dc7f3',1,'PolarBSplines::Impl']]],
   ['eval_5fderiv_5fp_226',['eval_deriv_p',['../classPolarBSplines_1_1Impl.html#a18d586476090a43876e9a60c570517df',1,'PolarBSplines::Impl']]],
   ['eval_5fderiv_5fr_227',['eval_deriv_r',['../classPolarBSplines_1_1Impl.html#a1c7b43c3dff18ca7a0b3280748873540',1,'PolarBSplines::Impl']]],
