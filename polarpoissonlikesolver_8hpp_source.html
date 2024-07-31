@@ -637,7 +637,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;                MatrixBatchCsrSolver::CG&gt;&gt;(1, matrix_size, n_matrix_elements);</div>
 <div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        convert_coo_to_csr&lt;</div>
 <div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;                MatrixBatchCsrSolver::CG&gt;(m_gko_matrix, vals_coo_host, row_coo_host, col_coo_host);</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        m_gko_matrix-&gt;setup_solver();</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        m_gko_matrix-&gt;factorize();</div>
 <div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    }</div>
 <div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160; </div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> RHSFunction&gt;</div>
@@ -726,7 +726,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;                b(<span class="stringliteral">&quot;b&quot;</span>, batch_size, b_size);</div>
 <div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;        Kokkos::deep_copy(b, b_host);</div>
 <div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        m_gko_matrix-&gt;solve(b);</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        m_gko_matrix-&gt;solve_inplace(b);</div>
 <div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160; </div>
 <div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;        Kokkos::deep_copy(b_host, b);</div>
 <div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;        <span class="comment">//-----------------</span></div>

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['factorize_246',['factorize',['../classMatrixBatchTridiag.html#a7a53446a0a79c099986468f6a6cf4e7b',1,'MatrixBatchTridiag::factorize()'],['../classMatrixBatchEll.html#ade9b19aa5be23b68a1f9d8df6a4244bb',1,'MatrixBatchEll::factorize()'],['../classMatrixBatch.html#a7f9441c3e43c3af6e7d4c0485770a11c',1,'MatrixBatch::factorize()'],['../classMatrixBatchCsr.html#a0d6ad746ade755c3bf5d677aed54005e',1,'MatrixBatchCsr::factorize()']]],
   ['fdistribfield_247',['FDistribField',['../classCollisionSpVparMu.html#a211f181ea2c749a5b4068ba5087e1b2a',1,'CollisionSpVparMu']]],
   ['fdistribuidxrange_248',['FdistribuIdxRange',['../classGeometryXYVxVy.html#a3fae88a8a11da17209ec4c1cda0c76f9',1,'GeometryXYVxVy::FdistribuIdxRange()'],['../classGeometryXVx.html#a48b137216e7970d67521f5ce05638bd6',1,'GeometryXVx::FdistribuIdxRange()']]],
   ['fem1dpoissonsolver_249',['FEM1DPoissonSolver',['../classFEM1DPoissonSolver.html',1,'FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator &gt;'],['../classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216',1,'FEM1DPoissonSolver::FEM1DPoissonSolver()']]],
