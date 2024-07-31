@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('vector__field__common_8hpp_source.html
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">inline</span> constexpr <span class="keywordtype">bool</span> is_borrowed_field_v</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        = is_field_v&lt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                  T&gt; &amp;&amp; (std::is_lvalue_reference_v&lt;T&gt; || enable_borrowed_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                  <a class="code" href="structT.html">T</a>&gt; &amp;&amp; (std::is_lvalue_reference_v&lt;T&gt; || enable_borrowed_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>ddcHelper {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
@@ -256,6 +256,7 @@ $(document).ready(function(){initNavTree('vector__field__common_8hpp_source.html
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;};</div>
 <div class="ttc" id="aclassVectorFieldCommon_html"><div class="ttname"><a href="classVectorFieldCommon.html">VectorFieldCommon</a></div><div class="ttdef"><b>Definition:</b> vector_field_common.hpp:8</div></div>
+<div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

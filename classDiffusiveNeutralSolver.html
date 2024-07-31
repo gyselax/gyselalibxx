@@ -121,15 +121,15 @@ Inheritance diagram for DiffusiveNeutralSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9a8637ff544916db9e3fcda0682233aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#a9a8637ff544916db9e3fcda0682233aa">DiffusiveNeutralSolver</a> (<a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;charge_exchange, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;ionization, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;recombination, double const normalization_coeff, SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, DViewVx const &amp;quadrature_coeffs)</td></tr>
-<tr class="memdesc:a9a8637ff544916db9e3fcda0682233aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model.">DiffusiveNeutralSolver</a> class.  <a href="classDiffusiveNeutralSolver.html#a9a8637ff544916db9e3fcda0682233aa">More...</a><br /></td></tr>
-<tr class="separator:a9a8637ff544916db9e3fcda0682233aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfa7ed6b9809fc0338cd689b7d8dd37e"><td class="memItemLeft" align="right" valign="top">DSpanSpMX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e">operator()</a> (DSpanSpMX neutrals, DViewSpXVx allfdistribu, DViewX efield, double dt) const override</td></tr>
-<tr class="memdesc:abfa7ed6b9809fc0338cd689b7d8dd37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the neutral fluid moments according to the pressure-diffusive neutral model.  <a href="classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e">More...</a><br /></td></tr>
-<tr class="separator:abfa7ed6b9809fc0338cd689b7d8dd37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5ebfe3292a4555f0c0df1cdd2a0fa6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#ae5ebfe3292a4555f0c0df1cdd2a0fa6a">get_derivative</a> (DSpanSpMX dn, DViewSpMX n, DViewSpX density, DViewSpX velocity, DViewSpX temperature) const</td></tr>
-<tr class="memdesc:ae5ebfe3292a4555f0c0df1cdd2a0fa6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the expression of the time derivative of the neutral fluid moments.  <a href="classDiffusiveNeutralSolver.html#ae5ebfe3292a4555f0c0df1cdd2a0fa6a">More...</a><br /></td></tr>
-<tr class="separator:ae5ebfe3292a4555f0c0df1cdd2a0fa6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e94566b0532a082b9b99234aff81407"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#a3e94566b0532a082b9b99234aff81407">DiffusiveNeutralSolver</a> (<a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;charge_exchange, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;ionization, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;recombination, double const normalization_coeff, SplineXBuilder_1d const &amp;spline_x_builder, SplineXEvaluator_1d const &amp;spline_x_evaluator, DConstFieldVx const &amp;quadrature_coeffs)</td></tr>
+<tr class="memdesc:a3e94566b0532a082b9b99234aff81407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classDiffusiveNeutralSolver.html" title="A class that solves a so-called &quot;pressure-diffusive&quot; fluid neutral model.">DiffusiveNeutralSolver</a> class.  <a href="classDiffusiveNeutralSolver.html#a3e94566b0532a082b9b99234aff81407">More...</a><br /></td></tr>
+<tr class="separator:a3e94566b0532a082b9b99234aff81407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af44bb1d70fd2a551ed4fc7008b564d5b"><td class="memItemLeft" align="right" valign="top">DFieldSpMomX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#af44bb1d70fd2a551ed4fc7008b564d5b">operator()</a> (DFieldSpMomX neutrals, DConstFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const override</td></tr>
+<tr class="memdesc:af44bb1d70fd2a551ed4fc7008b564d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the neutral fluid moments according to the pressure-diffusive neutral model.  <a href="classDiffusiveNeutralSolver.html#af44bb1d70fd2a551ed4fc7008b564d5b">More...</a><br /></td></tr>
+<tr class="separator:af44bb1d70fd2a551ed4fc7008b564d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab97a1fa8c8d970139201097b4f2f27fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiffusiveNeutralSolver.html#ab97a1fa8c8d970139201097b4f2f27fa">get_derivative</a> (DFieldSpMomX dn, DConstFieldSpMomX n, DConstFieldSpX density, DConstFieldSpX velocity, DConstFieldSpX temperature) const</td></tr>
+<tr class="memdesc:ab97a1fa8c8d970139201097b4f2f27fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the expression of the time derivative of the neutral fluid moments.  <a href="classDiffusiveNeutralSolver.html#ab97a1fa8c8d970139201097b4f2f27fa">More...</a><br /></td></tr>
+<tr class="separator:ab97a1fa8c8d970139201097b4f2f27fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that solves a so-called "pressure-diffusive" fluid neutral model. </p>
@@ -157,8 +157,8 @@ Public Member Functions</h2></td></tr>
 <p>Where \(\alpha_0\) is a normalization coefficient equal to \(\alpha_0 = \omega_{pe0}/(n_0 K_0)\). All the terms that appear in this normalized equation keep the same expression as when writing the dimensional form of the model, except that quantities involved are normalized.</p>
 <p>The pressure-diffusive model is solved using a <a class="el" href="classRK2.html" title="A class which provides an implementation of a second-order Runge-Kutta method.">RK2</a> time integrator. Spatial derivatives are computed using splines polynomials. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9a8637ff544916db9e3fcda0682233aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a8637ff544916db9e3fcda0682233aa">&#9670;&nbsp;</a></span>DiffusiveNeutralSolver()</h2>
+<a id="a3e94566b0532a082b9b99234aff81407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e94566b0532a082b9b99234aff81407">&#9670;&nbsp;</a></span>DiffusiveNeutralSolver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +202,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewVx const &amp;&#160;</td>
+          <td class="paramtype">DConstFieldVx const &amp;&#160;</td>
           <td class="paramname"><em>quadrature_coeffs</em>&#160;</td>
         </tr>
         <tr>
@@ -230,8 +230,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abfa7ed6b9809fc0338cd689b7d8dd37e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfa7ed6b9809fc0338cd689b7d8dd37e">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="af44bb1d70fd2a551ed4fc7008b564d5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af44bb1d70fd2a551ed4fc7008b564d5b">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,21 +240,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpMX DiffusiveNeutralSolver::operator() </td>
+          <td class="memname">DFieldSpMomX DiffusiveNeutralSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>neutrals</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DConstFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramtype">DConstFieldX&#160;</td>
           <td class="paramname"><em>efield</em>, </td>
         </tr>
         <tr>
@@ -289,12 +289,12 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A span referencing the neutral fluid moments passed as argument. </dd></dl>
 
-<p>Implements <a class="el" href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">IFluidTransportSolver</a>.</p>
+<p>Implements <a class="el" href="classIFluidTransportSolver.html#a7b533a63875dcba416c647dfab0dd7eb">IFluidTransportSolver</a>.</p>
 
 </div>
 </div>
-<a id="ae5ebfe3292a4555f0c0df1cdd2a0fa6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5ebfe3292a4555f0c0df1cdd2a0fa6a">&#9670;&nbsp;</a></span>get_derivative()</h2>
+<a id="ab97a1fa8c8d970139201097b4f2f27fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab97a1fa8c8d970139201097b4f2f27fa">&#9670;&nbsp;</a></span>get_derivative()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,31 +302,31 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void DiffusiveNeutralSolver::get_derivative </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>dn</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpMX&#160;</td>
+          <td class="paramtype">DConstFieldSpMomX&#160;</td>
           <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>density</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>velocity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>temperature</em>&#160;</td>
         </tr>
         <tr>

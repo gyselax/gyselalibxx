@@ -106,9 +106,9 @@ $(document).ready(function(){initNavTree('nullfluidsolver_8hpp_source.html','');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ifluidtransportsolver.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullFluidSolver.html">NullFluidSolver</a> : <span class="keyword">public</span> <a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div>
@@ -118,13 +118,16 @@ $(document).ready(function(){initNavTree('nullfluidsolver_8hpp_source.html','');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ~<a class="code" href="classNullFluidSolver.html">NullFluidSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">   35</a></span>&#160;    DSpanSpMX <a class="code" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">operator()</a>(DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, <span class="keywordtype">double</span> dt)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">   35</a></span>&#160;    DFieldSpMomX <a class="code" href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">operator()</a>(</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            DFieldSpMomX fluid_moments,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            DConstFieldSpXVx allfdistribu,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            DConstFieldX efield,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
 <div class="ttc" id="aclassIFluidTransportSolver_html"><div class="ttname"><a href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div><div class="ttdoc">An abstract class for solving the transport of a fluid model.</div><div class="ttdef"><b>Definition:</b> ifluidtransportsolver.hpp:11</div></div>
 <div class="ttc" id="aclassNullFluidSolver_html"><div class="ttname"><a href="classNullFluidSolver.html">NullFluidSolver</a></div><div class="ttdoc">A dommy class that solves a fluid model.</div><div class="ttdef"><b>Definition:</b> nullfluidsolver.hpp:14</div></div>
-<div class="ttc" id="aclassNullFluidSolver_html_a02b59c028368fca8f86367cad9609bbc"><div class="ttname"><a href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">NullFluidSolver::operator()</a></div><div class="ttdeci">DSpanSpMX operator()(DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt) const override</div><div class="ttdoc">Solves a dummy fluid model on a timestep dt.</div></div>
 <div class="ttc" id="aclassNullFluidSolver_html_a127fbdae4830d4c08a5c2a7f40b93040"><div class="ttname"><a href="classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040">NullFluidSolver::NullFluidSolver</a></div><div class="ttdeci">NullFluidSolver(IdxRangeSp const &amp;dom_fluidsp)</div><div class="ttdoc">The constructor for the class.</div></div>
+<div class="ttc" id="aclassNullFluidSolver_html_a57df0286d899f8278d9147aeea564292"><div class="ttname"><a href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">NullFluidSolver::operator()</a></div><div class="ttdeci">DFieldSpMomX operator()(DFieldSpMomX fluid_moments, DConstFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const override</div><div class="ttdoc">Solves a dummy fluid model on a timestep dt.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -137,9 +137,9 @@ $(document).ready(function(){initNavTree('predcorr__hybrid_8hpp_source.html','')
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ~<a class="code" href="classPredCorrHybrid.html">PredCorrHybrid</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">   68</a></span>&#160;    DSpanSpXVx <a class="code" href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">operator()</a>(</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            DSpanSpXVx allfdistribu,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            DSpanSpMX fluid_moments,</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">   68</a></span>&#160;    DFieldSpXVx <a class="code" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">operator()</a>(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            DFieldSpXVx allfdistribu,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            DFieldSpMomX fluid_moments,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">double</span> time_start,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">double</span> dt,</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">int</span> steps = 1) <span class="keyword">const override</span>;</div>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('predcorr__hybrid_8hpp_source.html','')
 <div class="ttc" id="aclassITimeSolverHybrid_html"><div class="ttname"><a href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations coupled to a fluid model.</div><div class="ttdef"><b>Definition:</b> itimesolver_hybrid.hpp:11</div></div>
 <div class="ttc" id="aclassPredCorrHybrid_html"><div class="ttname"><a href="classPredCorrHybrid.html">PredCorrHybrid</a></div><div class="ttdoc">A class that solves a Boltzmann-Poisson system of equations coupled to a fluid particles model using ...</div><div class="ttdef"><b>Definition:</b> predcorr_hybrid.hpp:29</div></div>
 <div class="ttc" id="aclassPredCorrHybrid_html_a01e466a8ca5ea62d40c888c566e99779"><div class="ttname"><a href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">PredCorrHybrid::PredCorrHybrid</a></div><div class="ttdeci">PredCorrHybrid(IBoltzmannSolver const &amp;boltzmann_solver, IFluidTransportSolver const &amp;fluid_solver, IQNSolver const &amp;poisson_solver, IKineticFluidCoupling const &amp;kinetic_fluid_coupling)</div><div class="ttdoc">Creates an instance of the predictor-corrector class.</div></div>
-<div class="ttc" id="aclassPredCorrHybrid_html_a4247e382ebf03258bc1ad34171d297a9"><div class="ttname"><a href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">PredCorrHybrid::operator()</a></div><div class="ttdeci">DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DSpanSpMX fluid_moments, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson-fluid system.</div></div>
+<div class="ttc" id="aclassPredCorrHybrid_html_a6bfe0fdcbcc66b657bb0598cd4a1135c"><div class="ttname"><a href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">PredCorrHybrid::operator()</a></div><div class="ttdeci">DFieldSpXVx operator()(DFieldSpXVx allfdistribu, DFieldSpMomX fluid_moments, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson-fluid system.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

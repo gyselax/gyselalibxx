@@ -137,7 +137,7 @@ Example of use</h3>
  Here \(\Omega&#39; = \Omega \in \mathbb{R}\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldX f(x_dom); </div>
 <div class="line">DFieldX A(x_dom); </div>
 <div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
-<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:89</div></div>
+<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:74</div></div>
 </div><!-- fragment --></li>
 <li>Equation on a 2D domain (and time dimension): <p class="formulaDsp">
 \[ \partial_t f(t,x,y) + A_x(x,y)\partial_{x}f(t,x,y) = 0, \]
@@ -159,8 +159,7 @@ Example of use</h3>
  Here \(\Omega&#39; = \Omega \in \mathbb{R}^2\). In the code, it would correspond to <div class="fragment"><div class="line">DFieldXVx f(xvx_dom); </div>
 <div class="line">DFieldXVx A(xvx_dom); </div>
 <div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimX.html">IDimX</a>; </div>
-</div><!-- fragment --> or <div class="fragment"><div class="line"><span class="keyword">using</span> IDimInterest = <a class="code" href="structIDimVx.html">IDimVx</a>; </div>
-<div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:92</div></div>
+</div><!-- fragment --> or <div class="fragment"><div class="line"><span class="keyword">using</span> IDimInterest = IDimVx; </div>
 </div><!-- fragment --></li>
 <li>Equation on a 1Dx1V domain with species dimension (and time dimension): <p class="formulaDsp">
 \[\begin{aligned} &amp; \partial_t f_s(t,x,v_x) + A_{s,x}(x)\partial_{x}f_s(t,x,v_x) = 0, \end{aligned} \]

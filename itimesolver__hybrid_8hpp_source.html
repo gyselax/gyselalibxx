@@ -114,15 +114,15 @@ $(document).ready(function(){initNavTree('itimesolver__hybrid_8hpp_source.html',
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classITimeSolverHybrid.html">ITimeSolverHybrid</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classITimeSolverHybrid.html#aac4df043061d69ff7995f5a22b34a867">   28</a></span>&#160;    <span class="keyword">virtual</span> DSpanSpXVx <a class="code" href="classITimeSolverHybrid.html#aac4df043061d69ff7995f5a22b34a867">operator()</a>(</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DSpanSpXVx allfdistribu,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DSpanSpMX fluid_moments,</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classITimeSolverHybrid.html#aa65ff6d73a2a7a97aeed15dab0ab3d94">   28</a></span>&#160;    <span class="keyword">virtual</span> DFieldSpXVx <a class="code" href="classITimeSolverHybrid.html#aa65ff6d73a2a7a97aeed15dab0ab3d94">operator()</a>(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DFieldSpXVx allfdistribu,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DFieldSpMomX fluid_moments,</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">double</span> time_start,</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordtype">double</span> dt,</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordtype">int</span> steps = 1) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 <div class="ttc" id="aclassITimeSolverHybrid_html"><div class="ttname"><a href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations coupled to a fluid model.</div><div class="ttdef"><b>Definition:</b> itimesolver_hybrid.hpp:11</div></div>
-<div class="ttc" id="aclassITimeSolverHybrid_html_aac4df043061d69ff7995f5a22b34a867"><div class="ttname"><a href="classITimeSolverHybrid.html#aac4df043061d69ff7995f5a22b34a867">ITimeSolverHybrid::operator()</a></div><div class="ttdeci">virtual DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DSpanSpMX fluid_moments, double time_start, double dt, int steps=1) const =0</div><div class="ttdoc">Operator for solving the Boltzmann-Poisson-fluid system.</div></div>
+<div class="ttc" id="aclassITimeSolverHybrid_html_aa65ff6d73a2a7a97aeed15dab0ab3d94"><div class="ttname"><a href="classITimeSolverHybrid.html#aa65ff6d73a2a7a97aeed15dab0ab3d94">ITimeSolverHybrid::operator()</a></div><div class="ttdeci">virtual DFieldSpXVx operator()(DFieldSpXVx allfdistribu, DFieldSpMomX fluid_moments, double time_start, double dt, int steps=1) const =0</div><div class="ttdoc">Operator for solving the Boltzmann-Poisson-fluid system.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

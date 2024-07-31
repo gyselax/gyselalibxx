@@ -122,15 +122,15 @@ Inheritance diagram for IBoltzmannSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a98dec4fbaa427c58422ed1c179e738bb"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBoltzmannSolver.html#a98dec4fbaa427c58422ed1c179e738bb">operator()</a> (DSpanSpXVx allfdistribu, DViewX efield, double dt) const =0</td></tr>
-<tr class="memdesc:a98dec4fbaa427c58422ed1c179e738bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann equation on one timestep.  <a href="classIBoltzmannSolver.html#a98dec4fbaa427c58422ed1c179e738bb">More...</a><br /></td></tr>
-<tr class="separator:a98dec4fbaa427c58422ed1c179e738bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedf19fb0ae7e0bf80729c9f761ee20ed"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBoltzmannSolver.html#aedf19fb0ae7e0bf80729c9f761ee20ed">operator()</a> (DFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const =0</td></tr>
+<tr class="memdesc:aedf19fb0ae7e0bf80729c9f761ee20ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann equation on one timestep.  <a href="classIBoltzmannSolver.html#aedf19fb0ae7e0bf80729c9f761ee20ed">More...</a><br /></td></tr>
+<tr class="separator:aedf19fb0ae7e0bf80729c9f761ee20ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for solving a Boltzmann equation. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a98dec4fbaa427c58422ed1c179e738bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98dec4fbaa427c58422ed1c179e738bb">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="aedf19fb0ae7e0bf80729c9f761ee20ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf19fb0ae7e0bf80729c9f761ee20ed">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,15 +139,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DSpanSpXVx IBoltzmannSolver::operator() </td>
+          <td class="memname">virtual DFieldSpXVx IBoltzmannSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">DFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramtype">DConstFieldX&#160;</td>
           <td class="paramname"><em>efield</em>, </td>
         </tr>
         <tr>
@@ -180,7 +180,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the Boltzmann equation. </dd></dl>
 
-<p>Implemented in <a class="el" href="classSplitVlasovSolver.html#ad4843f29aef761e78933df55034e7aa3">SplitVlasovSolver</a>, and <a class="el" href="classSplitRightHandSideSolver.html#a83cc73ba72845154b30ac9fd8cc376e6">SplitRightHandSideSolver</a>.</p>
+<p>Implemented in <a class="el" href="classSplitVlasovSolver.html#a958b142757ef330191c9c25188294f15">SplitVlasovSolver</a>, and <a class="el" href="classSplitRightHandSideSolver.html#a350971eed31753861f6e2917b9b6b968">SplitRightHandSideSolver</a>.</p>
 
 </div>
 </div>

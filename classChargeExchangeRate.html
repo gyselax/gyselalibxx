@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a03a0f421dd456bff34cf2161d478d983"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">ChargeExchangeRate</a> (double norm_coeff_rate)</td></tr>
 <tr class="memdesc:a03a0f421dd456bff34cf2161d478d983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the ConstantChargeExchangeRate class.  <a href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">More...</a><br /></td></tr>
 <tr class="separator:a03a0f421dd456bff34cf2161d478d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32b4acc4bacbd5c0a50d74043660a55f"><td class="memItemLeft" align="right" valign="top">DSpanSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeExchangeRate.html#a32b4acc4bacbd5c0a50d74043660a55f">operator()</a> (DSpanSpX rate, DViewSpX density, DViewSpX temperature) const override</td></tr>
-<tr class="memdesc:a32b4acc4bacbd5c0a50d74043660a55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the charge-exchange reaction rate depending on density and temperature.  <a href="classChargeExchangeRate.html#a32b4acc4bacbd5c0a50d74043660a55f">More...</a><br /></td></tr>
-<tr class="separator:a32b4acc4bacbd5c0a50d74043660a55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b415cda84b9f40a85da1d4f5d377b4"><td class="memItemLeft" align="right" valign="top">DFieldSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">operator()</a> (DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature) const override</td></tr>
+<tr class="memdesc:a73b415cda84b9f40a85da1d4f5d377b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the charge-exchange reaction rate depending on density and temperature.  <a href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">More...</a><br /></td></tr>
+<tr class="separator:a73b415cda84b9f40a85da1d4f5d377b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that describes a charge-exchange reaction rate. </p>
@@ -159,7 +159,7 @@ Public Member Functions</h2></td></tr>
 <p>A polynomial of reaction rate vs. ion temperature is fitted in log-log space. The polynomial fits data from the OPEN-ADAS database for Hydrogen.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">norm_coeff_rate</td><td>All rate coefficients coefficients are normalized so that CX is of order unity at normalized density (n) = 1 and normalized temperature (T) = 1 with n_0 = 1e20 and T_0 = 10 eV. These are typical values for a SOL plasma. The norm_coeff_rate parameter shifts all the reaction rates to modify the source dynamics. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">norm_coeff_rate</td><td>All rate coefficients coefficients are normalized so that CX is of order unity at normalized density (n) = 1 and normalized temperature (<a class="el" href="structT.html" title="A class which describes the real space in the temporal direction.">T</a>) = 1 with n_0 = 1e20 and T_0 = 10 eV. These are typical values for a SOL plasma. The norm_coeff_rate parameter shifts all the reaction rates to modify the source dynamics. </td></tr>
   </table>
   </dd>
 </dl>
@@ -167,8 +167,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a32b4acc4bacbd5c0a50d74043660a55f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32b4acc4bacbd5c0a50d74043660a55f">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a73b415cda84b9f40a85da1d4f5d377b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73b415cda84b9f40a85da1d4f5d377b4">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,21 +177,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpX ChargeExchangeRate::operator() </td>
+          <td class="memname">DFieldSpX ChargeExchangeRate::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpX&#160;</td>
+          <td class="paramtype">DFieldSpX&#160;</td>
           <td class="paramname"><em>rate</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>density</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>temperature</em>&#160;</td>
         </tr>
         <tr>
@@ -218,7 +218,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The charge-exchange reaction rate. </dd></dl>
 
-<p>Implements <a class="el" href="classIReactionRate.html#a5ec42dbaf0ba81a1cbe068cea148146e">IReactionRate</a>.</p>
+<p>Implements <a class="el" href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">IReactionRate</a>.</p>
 
 </div>
 </div>

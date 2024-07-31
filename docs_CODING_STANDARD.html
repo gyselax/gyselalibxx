@@ -124,12 +124,12 @@ Parameter passing</h1>
 <li>If there is a single out/inout-parameter, we return it</li>
 <li>For in-parameters (those we use but don't modify)<ul>
 <li>if it's a scalar native type (int, double, ...) we take it by copy</li>
-<li>if it's a const view type (<code>std::span&lt;const T&gt;</code>, <code>BlockView&lt;T&gt;</code>, ...) we take it by copy</li>
+<li>if it's a const view type (<code>std::span&lt;const <a class="el" href="structT.html" title="A class which describes the real space in the temporal direction.">T</a>&gt;</code>, <code>BlockView&lt;<a class="el" href="structT.html" title="A class which describes the real space in the temporal direction.">T</a>&gt;</code>, ...) we take it by copy</li>
 <li>otherwise, we take a const-ref: <code>Type const&amp;</code></li>
 </ul>
 </li>
 <li>For out/inout-parameters<ul>
-<li>if it's a modifiable view type (<code>std::span&lt;T&gt;</code>, <code>BlockSpan&lt;T&gt;</code>, ...) we take it by copy</li>
+<li>if it's a modifiable view type (<code>std::span&lt;<a class="el" href="structT.html" title="A class which describes the real space in the temporal direction.">T</a>&gt;</code>, <code>BlockSpan&lt;<a class="el" href="structT.html" title="A class which describes the real space in the temporal direction.">T</a>&gt;</code>, ...) we take it by copy</li>
 <li>otherwise, we take a ref: <code>Type&amp;</code></li>
 </ul>
 </li>

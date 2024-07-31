@@ -124,15 +124,15 @@ Inheritance diagram for IReactionRate:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5ec42dbaf0ba81a1cbe068cea148146e"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIReactionRate.html#a5ec42dbaf0ba81a1cbe068cea148146e">operator()</a> (DSpanSpX rate, DViewSpX density, DViewSpX temperature) const =0</td></tr>
-<tr class="memdesc:a5ec42dbaf0ba81a1cbe068cea148146e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for computing the reaction rate from two Spans referencing density and temperature.  <a href="classIReactionRate.html#a5ec42dbaf0ba81a1cbe068cea148146e">More...</a><br /></td></tr>
-<tr class="separator:a5ec42dbaf0ba81a1cbe068cea148146e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa53dd629fec8987317cc634bb52d7fe3"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">operator()</a> (DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature) const =0</td></tr>
+<tr class="memdesc:aa53dd629fec8987317cc634bb52d7fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for computing the reaction rate from two Spans referencing density and temperature.  <a href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">More...</a><br /></td></tr>
+<tr class="separator:aa53dd629fec8987317cc634bb52d7fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract interface representing a reaction rate that depends on temperature and density. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5ec42dbaf0ba81a1cbe068cea148146e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ec42dbaf0ba81a1cbe068cea148146e">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="aa53dd629fec8987317cc634bb52d7fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa53dd629fec8987317cc634bb52d7fe3">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,21 +141,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DSpanSpX IReactionRate::operator() </td>
+          <td class="memname">virtual DFieldSpX IReactionRate::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpX&#160;</td>
+          <td class="paramtype">DFieldSpX&#160;</td>
           <td class="paramname"><em>rate</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>density</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>temperature</em>&#160;</td>
         </tr>
         <tr>
@@ -182,7 +182,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A span referencing the reaction rate. </dd></dl>
 
-<p>Implemented in <a class="el" href="classRecombinationRate.html#ac717289f79c9f22c8944850d3d0ccff9">RecombinationRate</a>, <a class="el" href="classIonizationRate.html#abf72555f9d66c261b0cdce85c74be580">IonizationRate</a>, <a class="el" href="classConstantRate.html#a86f11deab578b89868ae726dff8141e3">ConstantRate</a>, and <a class="el" href="classChargeExchangeRate.html#a32b4acc4bacbd5c0a50d74043660a55f">ChargeExchangeRate</a>.</p>
+<p>Implemented in <a class="el" href="classRecombinationRate.html#afc0642ee5f185d34df820b67d3b360e9">RecombinationRate</a>, <a class="el" href="classIonizationRate.html#a04169db7340af25ff0c760184148c81a">IonizationRate</a>, <a class="el" href="classConstantRate.html#ada12e13f0c3e2b98cb5b2c35a21be9b9">ConstantRate</a>, and <a class="el" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">ChargeExchangeRate</a>.</p>
 
 </div>
 </div>

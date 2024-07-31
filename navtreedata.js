@@ -86,7 +86,7 @@ var NAVTREEINDEX =
 "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim",
 "dir_1768338d22a236895abd99fb8317b81f.html",
 "simulations_geometryRTheta_diocotron.html#autotoc_md21",
-"structInterface.html"
+"structInterface.html#a0eba2d684c513fce67db0f0f977d1315"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

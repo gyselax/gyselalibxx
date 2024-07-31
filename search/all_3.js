@@ -35,7 +35,7 @@ var searchData=
   ['dfieldr_174',['DFieldR',['../classCollisionInfoRadial.html#ac28b12bc360cd4d1f138132c257d8600',1,'CollisionInfoRadial::DFieldR()'],['../classCollisionSpVparMu.html#a2305a46a09918df16660df557bd4927b',1,'CollisionSpVparMu::DFieldR()']]],
   ['dfieldthetar_175',['DFieldThetaR',['../classCollisionSpVparMu.html#a1589eb683874cc5c2a1524b802c3808e',1,'CollisionSpVparMu']]],
   ['difference_5ftype_176',['difference_type',['../structDiscreteSubDomainIterator.html#ac08204c8fba4bb6c7b1961d1fba54f82',1,'DiscreteSubDomainIterator']]],
-  ['diffusiveneutralsolver_177',['DiffusiveNeutralSolver',['../classDiffusiveNeutralSolver.html',1,'DiffusiveNeutralSolver'],['../classDiffusiveNeutralSolver.html#a9a8637ff544916db9e3fcda0682233aa',1,'DiffusiveNeutralSolver::DiffusiveNeutralSolver()']]],
+  ['diffusiveneutralsolver_177',['DiffusiveNeutralSolver',['../classDiffusiveNeutralSolver.html',1,'DiffusiveNeutralSolver'],['../classDiffusiveNeutralSolver.html#a3e94566b0532a082b9b99234aff81407',1,'DiffusiveNeutralSolver::DiffusiveNeutralSolver()']]],
   ['dim_178',['Dim',['../classCosineEvaluator_1_1Evaluator.html#a99d3dc08749dcc0f67a8413ce90f9b54',1,'CosineEvaluator::Evaluator::Dim()'],['../classPolynomialEvaluator_1_1Evaluator.html#a4737bbc80764b64d948776e30447581e',1,'PolynomialEvaluator::Evaluator::Dim()']]],
   ['dim1_179',['Dim1',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ab143750fd3c7386b9dbfb894e7edb59c',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['dim2_180',['Dim2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aae5e0f9130d5fb84aec2a873716be531',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],

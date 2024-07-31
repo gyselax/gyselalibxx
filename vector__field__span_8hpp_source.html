@@ -221,7 +221,7 @@ $(document).ready(function(){initNavTree('vector__field__span_8hpp_source.html',
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="keyword">typename</span> ChunkType::memory_space&gt;(std::move(std::get&lt;Is&gt;(chunk_slices))...);</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... ODDims, <span class="keyword">typename</span> T, T... ints&gt;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... ODDims, <span class="keyword">typename</span> <a class="code" href="structT.html">T</a>, <a class="code" href="structT.html">T</a>... ints&gt;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    KOKKOS_FUNCTION <a class="code" href="classVectorFieldSpan.html#a2068672157fb033bbdb9a634f8e678a0">element_type</a> operator()(</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            ddc::DiscreteElement&lt;ODDims...&gt; <span class="keyword">const</span>&amp; delems,</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            std::integer_sequence&lt;T, ints...&gt;) <span class="keyword">const</span> noexcept</div>
@@ -363,6 +363,7 @@ $(document).ready(function(){initNavTree('vector__field__span_8hpp_source.html',
 <div class="ttc" id="aclassVectorFieldSpan_html_ae3ef9487bd121b575f80db5989536a2f"><div class="ttname"><a href="classVectorFieldSpan.html#ae3ef9487bd121b575f80db5989536a2f">VectorFieldSpan::view_type</a></div><div class="ttdeci">VectorFieldSpan&lt; const ElementType, Domain, NDTag, LayoutStridedPolicy, MemorySpace &gt; view_type</div><div class="ttdoc">A type which can hold a constant reference to a VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:71</div></div>
 <div class="ttc" id="aclassVectorFieldSpan_html_afb64624cf289a427bf7e964b58d7d6cb"><div class="ttname"><a href="classVectorFieldSpan.html#afb64624cf289a427bf7e964b58d7d6cb">VectorFieldSpan::layout_type</a></div><div class="ttdeci">LayoutStridedPolicy layout_type</div><div class="ttdoc">Type describing the way in which the data is laid out in the Chunk span memory.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:79</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
+<div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -104,243 +104,217 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;quadrature.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> compute_nustar_profile(DSpanSpX nustar_profile, <span class="keywordtype">double</span> nustar0);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> compute_collfreq(</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        DSpanSpX collfreq,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        DViewSpX nustar_profile,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        DViewSpX density,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        DViewSpX temperature);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDimension&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> compute_Dcoll(</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                ddc::DiscreteDomain&lt;Species, IDimX, IDimension&gt;,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                std::experimental::layout_right,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; Dcoll,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        DViewSpX collfreq,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        DViewSpX density,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        DViewSpX temperature)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            Dcoll.domain(),</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            KOKKOS_LAMBDA(ddc::DiscreteElement&lt;Species, IDimX, IDimension&gt; <span class="keyword">const</span> ispxdimvx) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> vT(</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        Kokkos::sqrt(2. * temperature(ddc::select&lt;Species, IDimX&gt;(ispxdimvx))));</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> v_norm(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        Kokkos::fabs(ddc::coordinate(ddc::select&lt;IDimension&gt;(ispxdimvx))) / vT);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> tol = 1.e-15;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordflow">if</span> (v_norm &gt; tol) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> coeff(2. / Kokkos::sqrt(M_PI));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> AD(</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                            3. * Kokkos::sqrt(2. * M_PI) / 4.</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                            * temperature(ddc::select&lt;Species, IDimX&gt;(ispxdimvx))</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                            * collfreq(ddc::select&lt;Species, IDimX&gt;(ispxdimvx)));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> inv_v_norm(1. / v_norm);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi(Kokkos::erf(v_norm));</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi_prime(coeff * Kokkos::exp(-v_norm * v_norm));</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> psi((phi - v_norm * phi_prime) * 0.5 * inv_v_norm * inv_v_norm);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    Dcoll(ispxdimvx) = AD * (phi - psi) * inv_v_norm;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    Dcoll(ispxdimvx) = Kokkos::sqrt(2)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                       * temperature(ddc::select&lt;Species, IDimX&gt;(ispxdimvx))</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                       * collfreq(ddc::select&lt;Species, IDimX&gt;(ispxdimvx));</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            });</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDimension&gt;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> compute_dvDcoll(</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                ddc::DiscreteDomain&lt;Species, IDimX, IDimension&gt;,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                std::experimental::layout_right,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; dvDcoll,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        DViewSpX collfreq,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        DViewSpX density,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        DViewSpX temperature)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            dvDcoll.domain(),</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            KOKKOS_LAMBDA(ddc::DiscreteElement&lt;Species, IDimX, IDimension&gt; <span class="keyword">const</span> ispxdimvx) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> vT(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        Kokkos::sqrt(2. * temperature(ddc::select&lt;Species, IDimX&gt;(ispxdimvx))));</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> v_norm(</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        Kokkos::fabs(ddc::coordinate(ddc::select&lt;IDimension&gt;(ispxdimvx))) / vT);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> tol = 1.e-15;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="keywordflow">if</span> (v_norm &gt; tol) {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> coeff(2. / Kokkos::sqrt(M_PI));</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> AD(</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                            3. * Kokkos::sqrt(2. * M_PI) / 4.</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                            * temperature(ddc::select&lt;Species, IDimX&gt;(ispxdimvx))</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                            * collfreq(ddc::select&lt;Species, IDimX&gt;(ispxdimvx)));</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> inv_v_norm(1. / v_norm);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi(Kokkos::erf(v_norm));</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi_prime(coeff * Kokkos::exp(-v_norm * v_norm));</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> psi((phi - v_norm * phi_prime) * 0.5 * inv_v_norm * inv_v_norm);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> sign(</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                            ddc::coordinate(ddc::select&lt;IDimension&gt;(ispxdimvx))</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            / Kokkos::fabs(ddc::coordinate(ddc::select&lt;IDimension&gt;(ispxdimvx))));</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    dvDcoll(ispxdimvx)</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                            = sign * AD</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                              / Kokkos::sqrt(</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                      2 * temperature(ddc::select&lt;Species, IDimX&gt;(ispxdimvx)))</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                              * inv_v_norm * inv_v_norm * (3 * psi - phi);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                    dvDcoll(ispxdimvx) = 0.;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            });</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDimension&gt;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keywordtype">void</span> compute_Vcoll_Tcoll(</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        DSpanSpX Vcoll,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        DSpanSpX Tcoll,</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        DViewSpXVx allfdistribu,</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                ddc::DiscreteDomain&lt;Species, IDimX, IDimension&gt;,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                std::experimental::layout_right,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; Dcoll,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                ddc::DiscreteDomain&lt;Species, IDimX, IDimension&gt;,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                std::experimental::layout_right,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; dvDcoll)</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    host_t&lt;DFieldVx&gt; <span class="keyword">const</span> quadrature_coeffs_host(</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <a class="code" href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">trapezoid_quadrature_coefficients</a>(ddc::get_domain&lt;IDimVx&gt;(allfdistribu)));</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            quadrature_coeffs_host.span_view());</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs = quadrature_coeffs_alloc.span_view();</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment">// computation of the integrands</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    DFieldSpXVx I0mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    DFieldSpXVx I1mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    DFieldSpXVx I2mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    DFieldSpXVx I3mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    DFieldSpXVx I4mean_integrand_alloc(allfdistribu.domain());</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">auto</span> I0mean_integrand = I0mean_integrand_alloc.span_view();</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">auto</span> I1mean_integrand = I1mean_integrand_alloc.span_view();</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">auto</span> I2mean_integrand = I2mean_integrand_alloc.span_view();</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">auto</span> I3mean_integrand = I3mean_integrand_alloc.span_view();</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">auto</span> I4mean_integrand = I4mean_integrand_alloc.span_view();</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            allfdistribu.domain(),</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            KOKKOS_LAMBDA(IndexSpXVx <span class="keyword">const</span> ispxvx) {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                ddc::DiscreteElement&lt;IDimension&gt; <span class="keyword">const</span> idimvx(</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                        ddc::select&lt;IDimVx&gt;(ispxvx).uid() + 1);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                ddc::DiscreteElement&lt;Species, IDimX, IDimension&gt;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                        ispxdimvx(ddc::select&lt;Species&gt;(ispxvx), ddc::select&lt;IDimX&gt;(ispxvx), idimvx);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                CoordVx <span class="keyword">const</span> coordv = ddc::coordinate(ddc::select&lt;IDimVx&gt;(ispxvx));</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                I0mean_integrand(ispxvx) = Dcoll(ispxdimvx) * allfdistribu(ispxvx);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                I1mean_integrand(ispxvx) = I0mean_integrand(ispxvx) * coordv;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                I2mean_integrand(ispxvx) = I1mean_integrand(ispxvx) * coordv;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                I3mean_integrand(ispxvx) = dvDcoll(ispxdimvx) * allfdistribu(ispxvx);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                I4mean_integrand(ispxvx)</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                        = I0mean_integrand(ispxvx) + I3mean_integrand(ispxvx) * coordv;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            });</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="comment">// computation of the integrals over the Vx direction</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    IDomainSpX grid_sp_x(allfdistribu.domain&lt;<a class="code" href="structSpecies.html">Species</a>, <a class="code" href="structIDimX.html">IDimX</a>&gt;());</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    DFieldSpX I0mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    DFieldSpX I1mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    DFieldSpX I2mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    DFieldSpX I3mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    DFieldSpX I4mean_alloc(grid_sp_x);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keyword">auto</span> I0mean = I0mean_alloc.span_view();</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">auto</span> I1mean = I1mean_alloc.span_view();</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keyword">auto</span> I2mean = I2mean_alloc.span_view();</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">auto</span> I3mean = I3mean_alloc.span_view();</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">auto</span> I4mean = I4mean_alloc.span_view();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    ddc::parallel_fill(I0mean, 0.);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    ddc::parallel_fill(I1mean, 0.);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    ddc::parallel_fill(I2mean, 0.);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    ddc::parallel_fill(I3mean, 0.);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    ddc::parallel_fill(I4mean, 0.);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            grid_sp_x,</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            KOKKOS_LAMBDA(IndexSpX <span class="keyword">const</span> ispx) {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                <span class="keywordflow">for</span> (IndexVx <span class="keyword">const</span> ivx : allfdistribu.domain&lt;<a class="code" href="structIDimVx.html">IDimVx</a>&gt;()) {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    I0mean(ispx) += quadrature_coeffs(ivx) * I0mean_integrand(ispx, ivx);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                    I1mean(ispx) += quadrature_coeffs(ivx) * I1mean_integrand(ispx, ivx);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    I2mean(ispx) += quadrature_coeffs(ivx) * I2mean_integrand(ispx, ivx);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    I3mean(ispx) += quadrature_coeffs(ivx) * I3mean_integrand(ispx, ivx);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    I4mean(ispx) += quadrature_coeffs(ivx) * I4mean_integrand(ispx, ivx);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                }</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> inv_Pcoll(</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                        1. / (I0mean(ispx) * I4mean(ispx) - I1mean(ispx) * I3mean(ispx)));</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                Vcoll(ispx)</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        = inv_Pcoll * (I1mean(ispx) * I4mean(ispx) - I2mean(ispx) * I3mean(ispx));</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                Tcoll(ispx)</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                        = inv_Pcoll * (I0mean(ispx) * I2mean(ispx) - I1mean(ispx) * I1mean(ispx));</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            });</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IDimension&gt;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keywordtype">void</span> compute_Nucoll(</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                ddc::DiscreteDomain&lt;Species, IDimX, IDimension&gt;,</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                std::experimental::layout_right,</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; Nucoll,</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        ddc::ChunkSpan&lt;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                ddc::DiscreteDomain&lt;Species, IDimX, IDimension&gt;,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                std::experimental::layout_right,</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                Kokkos::DefaultExecutionSpace::memory_space&gt; Dcoll,</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        DViewSpX Vcoll,</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        DViewSpX Tcoll)</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;{</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            Dcoll.domain(),</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            KOKKOS_LAMBDA(ddc::DiscreteElement&lt;Species, IDimX, IDimension&gt; <span class="keyword">const</span> ispxdimvx) {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> coordv(ddc::coordinate(ddc::select&lt;IDimension&gt;(ispxdimvx)));</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                Nucoll(ispxdimvx) = -Dcoll(ispxdimvx)</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                                    * (coordv - Vcoll(ddc::select&lt;Species, IDimX&gt;(ispxdimvx)))</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                                    / Tcoll(ddc::select&lt;Species, IDimX&gt;(ispxdimvx));</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            });</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keywordtype">void</span> compute_collfreq_ab(</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        DSpanSpX collfreq_ab,</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        DViewSpX nustar_profile,</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        DViewSpX density,</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        DViewSpX temperature);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="keywordtype">void</span> compute_momentum_energy_exchange(</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        DSpanSpX momentum_exchange_ab,</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        DSpanSpX energy_exchange_ab,</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        DViewSpX collfreq_ab,</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        DViewSpX density,</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        DViewSpX mean_velocity,</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        DViewSpX temperature);</div>
-<div class="ttc" id="astructIDimVx_html"><div class="ttname"><a href="structIDimVx.html">IDimVx</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:92</div></div>
-<div class="ttc" id="astructIDimX_html"><div class="ttname"><a href="structIDimX.html">IDimX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:89</div></div>
-<div class="ttc" id="astructSpecies_html"><div class="ttname"><a href="structSpecies.html">Species</a></div><div class="ttdef"><b>Definition:</b> species_info.hpp:142</div></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;quadrature.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> compute_nustar_profile(DFieldSpX nustar_profile, <span class="keywordtype">double</span> nustar0);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> compute_collfreq(</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        DFieldSpX collfreq,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        DConstFieldSpX nustar_profile,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        DConstFieldSpX density,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        DConstFieldSpX temperature);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> LocalGr<span class="keywordtype">id</span>Vx&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> compute_Dcoll(</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        DField&lt;IdxRange&lt;Species, GridX, LocalGridVx&gt;&gt; Dcoll,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        DConstFieldSpX collfreq,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        DConstFieldSpX density,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        DConstFieldSpX temperature)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(Dcoll),</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            KOKKOS_LAMBDA(Idx&lt;Species, GridX, LocalGridVx&gt; <span class="keyword">const</span> ispxdimvx) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> vT(</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                        Kokkos::sqrt(2. * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> v_norm(</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        Kokkos::fabs(ddc::coordinate(ddc::select&lt;LocalGridVx&gt;(ispxdimvx))) / vT);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> tol = 1.e-15;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordflow">if</span> (v_norm &gt; tol) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> coeff(2. / Kokkos::sqrt(M_PI));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> AD(</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                            3. * Kokkos::sqrt(2. * M_PI) / 4.</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                            * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                            * collfreq(ddc::select&lt;Species, GridX&gt;(ispxdimvx)));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> inv_v_norm(1. / v_norm);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi(Kokkos::erf(v_norm));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi_prime(coeff * Kokkos::exp(-v_norm * v_norm));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> psi((phi - v_norm * phi_prime) * 0.5 * inv_v_norm * inv_v_norm);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    Dcoll(ispxdimvx) = AD * (phi - psi) * inv_v_norm;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    Dcoll(ispxdimvx) = Kokkos::sqrt(2)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                       * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                       * collfreq(ddc::select&lt;Species, GridX&gt;(ispxdimvx));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            });</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> LocalGr<span class="keywordtype">id</span>Vx&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">void</span> compute_dvDcoll(</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        DField&lt;IdxRange&lt;Species, GridX, LocalGridVx&gt;&gt; dvDcoll,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        DConstFieldSpX collfreq,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        DConstFieldSpX density,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        DConstFieldSpX temperature)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(dvDcoll),</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            KOKKOS_LAMBDA(Idx&lt;Species, GridX, LocalGridVx&gt; <span class="keyword">const</span> ispxdimvx) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> vT(</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        Kokkos::sqrt(2. * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))));</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> v_norm(</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        Kokkos::fabs(ddc::coordinate(ddc::select&lt;LocalGridVx&gt;(ispxdimvx))) / vT);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> tol = 1.e-15;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">if</span> (v_norm &gt; tol) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> coeff(2. / Kokkos::sqrt(M_PI));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> AD(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                            3. * Kokkos::sqrt(2. * M_PI) / 4.</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                            * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                            * collfreq(ddc::select&lt;Species, GridX&gt;(ispxdimvx)));</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> inv_v_norm(1. / v_norm);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi(Kokkos::erf(v_norm));</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> phi_prime(coeff * Kokkos::exp(-v_norm * v_norm));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> psi((phi - v_norm * phi_prime) * 0.5 * inv_v_norm * inv_v_norm);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> sign(</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                            ddc::coordinate(ddc::select&lt;LocalGridVx&gt;(ispxdimvx))</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                            / Kokkos::fabs(ddc::coordinate(ddc::select&lt;LocalGridVx&gt;(ispxdimvx))));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    dvDcoll(ispxdimvx)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                            = sign * AD</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                              / Kokkos::sqrt(</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                      2 * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx)))</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                              * inv_v_norm * inv_v_norm * (3 * psi - phi);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    dvDcoll(ispxdimvx) = 0.;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            });</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> LocalGr<span class="keywordtype">id</span>Vx&gt;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keywordtype">void</span> compute_Vcoll_Tcoll(</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        DFieldSpX Vcoll,</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        DFieldSpX Tcoll,</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        DConstFieldSpXVx allfdistribu,</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        DField&lt;IdxRange&lt;Species, GridX, LocalGridVx&gt;&gt; Dcoll,</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        DField&lt;IdxRange&lt;Species, GridX, LocalGridVx&gt;&gt; dvDcoll)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;{</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    host_t&lt;DFieldMemVx&gt; <span class="keyword">const</span> quadrature_coeffs_host(</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <a class="code" href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">trapezoid_quadrature_coefficients</a>(get_idx_range&lt;GridVx&gt;(allfdistribu)));</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            get_field(quadrature_coeffs_host));</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">auto</span> quadrature_coeffs = get_field(quadrature_coeffs_alloc);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="comment">// computation of the integrands</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    DFieldMemSpXVx I0mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    DFieldMemSpXVx I1mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    DFieldMemSpXVx I2mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    DFieldMemSpXVx I3mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    DFieldMemSpXVx I4mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">auto</span> I0mean_integrand = get_field(I0mean_integrand_alloc);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">auto</span> I1mean_integrand = get_field(I1mean_integrand_alloc);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">auto</span> I2mean_integrand = get_field(I2mean_integrand_alloc);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">auto</span> I3mean_integrand = get_field(I3mean_integrand_alloc);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">auto</span> I4mean_integrand = get_field(I4mean_integrand_alloc);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu),</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            KOKKOS_LAMBDA(IdxSpXVx <span class="keyword">const</span> ispxvx) {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                Idx&lt;LocalGridVx&gt; <span class="keyword">const</span> idimvx(ddc::select&lt;GridVx&gt;(ispxvx).uid() + 1);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                Idx&lt;Species, GridX, LocalGridVx&gt;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                        ispxdimvx(ddc::select&lt;Species&gt;(ispxvx), ddc::select&lt;GridX&gt;(ispxvx), idimvx);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                CoordVx <span class="keyword">const</span> coordv = ddc::coordinate(ddc::select&lt;GridVx&gt;(ispxvx));</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                I0mean_integrand(ispxvx) = Dcoll(ispxdimvx) * allfdistribu(ispxvx);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                I1mean_integrand(ispxvx) = I0mean_integrand(ispxvx) * coordv;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                I2mean_integrand(ispxvx) = I1mean_integrand(ispxvx) * coordv;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                I3mean_integrand(ispxvx) = dvDcoll(ispxdimvx) * allfdistribu(ispxvx);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                I4mean_integrand(ispxvx)</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                        = I0mean_integrand(ispxvx) + I3mean_integrand(ispxvx) * coordv;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            });</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="comment">// computation of the integrals over the Vx direction</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    IdxRangeSpX grid_sp_x(get_idx_range&lt;Species, GridX&gt;(allfdistribu));</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    DFieldMemSpX I0mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    DFieldMemSpX I1mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    DFieldMemSpX I2mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    DFieldMemSpX I3mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    DFieldMemSpX I4mean_alloc(grid_sp_x);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keyword">auto</span> I0mean = get_field(I0mean_alloc);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">auto</span> I1mean = get_field(I1mean_alloc);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keyword">auto</span> I2mean = get_field(I2mean_alloc);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keyword">auto</span> I3mean = get_field(I3mean_alloc);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keyword">auto</span> I4mean = get_field(I4mean_alloc);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    ddc::parallel_fill(I0mean, 0.);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    ddc::parallel_fill(I1mean, 0.);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    ddc::parallel_fill(I2mean, 0.);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    ddc::parallel_fill(I3mean, 0.);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    ddc::parallel_fill(I4mean, 0.);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            grid_sp_x,</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ispx) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                <span class="keywordflow">for</span> (IdxVx <span class="keyword">const</span> ivx : get_idx_range&lt;GridVx&gt;(allfdistribu)) {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                    I0mean(ispx) += quadrature_coeffs(ivx) * I0mean_integrand(ispx, ivx);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                    I1mean(ispx) += quadrature_coeffs(ivx) * I1mean_integrand(ispx, ivx);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                    I2mean(ispx) += quadrature_coeffs(ivx) * I2mean_integrand(ispx, ivx);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                    I3mean(ispx) += quadrature_coeffs(ivx) * I3mean_integrand(ispx, ivx);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                    I4mean(ispx) += quadrature_coeffs(ivx) * I4mean_integrand(ispx, ivx);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> inv_Pcoll(</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                        1. / (I0mean(ispx) * I4mean(ispx) - I1mean(ispx) * I3mean(ispx)));</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                Vcoll(ispx)</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                        = inv_Pcoll * (I1mean(ispx) * I4mean(ispx) - I2mean(ispx) * I3mean(ispx));</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                Tcoll(ispx)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                        = inv_Pcoll * (I0mean(ispx) * I2mean(ispx) - I1mean(ispx) * I1mean(ispx));</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            });</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;}</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> LocalGr<span class="keywordtype">id</span>Vx&gt;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keywordtype">void</span> compute_Nucoll(</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        DField&lt;IdxRange&lt;Species, GridX, LocalGridVx&gt;&gt; Nucoll,</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        DField&lt;IdxRange&lt;Species, GridX, LocalGridVx&gt;&gt; Dcoll,</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        DConstFieldSpX Vcoll,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        DConstFieldSpX Tcoll)</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;{</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(Dcoll),</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            KOKKOS_LAMBDA(Idx&lt;Species, GridX, LocalGridVx&gt; <span class="keyword">const</span> ispxdimvx) {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> coordv(ddc::coordinate(ddc::select&lt;LocalGridVx&gt;(ispxdimvx)));</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                Nucoll(ispxdimvx) = -Dcoll(ispxdimvx)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                                    * (coordv - Vcoll(ddc::select&lt;Species, GridX&gt;(ispxdimvx)))</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                                    / Tcoll(ddc::select&lt;Species, GridX&gt;(ispxdimvx));</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            });</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keywordtype">void</span> compute_collfreq_ab(</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        DFieldSpX collfreq_ab,</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        DConstFieldSpX nustar_profile,</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        DConstFieldSpX density,</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        DConstFieldSpX temperature);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keywordtype">void</span> compute_momentum_energy_exchange(</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        DFieldSpX momentum_exchange_ab,</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        DFieldSpX energy_exchange_ab,</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        DConstFieldSpX collfreq_ab,</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        DConstFieldSpX density,</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        DConstFieldSpX mean_velocity,</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        DConstFieldSpX temperature);</div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:81</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></div><div class="ttdoc">File providing quadrature coefficients via the trapezoidal method.</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html_a63e347081ac7ebf1c3542b42b25e44ad"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">host_t&lt; FieldMem&lt; double, IdxRange&lt; ODims... &gt; &gt; &gt; trapezoid_quadrature_coefficients(IdxRange&lt; ODims... &gt; const &amp;idx_range)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition:</b> trapezoid_quadrature.hpp:53</div></div>
 </div><!-- fragment --></div><!-- contents -->

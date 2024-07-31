@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('classGeometryXYVxVy.html',''); initRes
 Public Types</h2></td></tr>
 <tr class="memitem:a4c9cc4488baf3e8e9f1504f1a97391f5"><td class="memTemplParams" colspan="2"><a id="a4c9cc4488baf3e8e9f1504f1a97391f5"></a>
 template&lt;class T &gt; </td></tr>
-<tr class="memitem:a4c9cc4488baf3e8e9f1504f1a97391f5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a4c9cc4488baf3e8e9f1504f1a97391f5">velocity_dim_for</a> = std::conditional_t&lt; std::is_same_v&lt; T, <a class="el" href="structGridX.html">GridX</a> &gt;, <a class="el" href="structGridVx.html">GridVx</a>, std::conditional_t&lt; std::is_same_v&lt; T, <a class="el" href="structGridY.html">GridY</a> &gt;, <a class="el" href="structGridVy.html">GridVy</a>, void &gt; &gt;</td></tr>
+<tr class="memitem:a4c9cc4488baf3e8e9f1504f1a97391f5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a4c9cc4488baf3e8e9f1504f1a97391f5">velocity_dim_for</a> = std::conditional_t&lt; std::is_same_v&lt; <a class="el" href="structT.html">T</a>, <a class="el" href="structGridX.html">GridX</a> &gt;, <a class="el" href="structGridVx.html">GridVx</a>, std::conditional_t&lt; std::is_same_v&lt; <a class="el" href="structT.html">T</a>, <a class="el" href="structGridY.html">GridY</a> &gt;, <a class="el" href="structGridVy.html">GridVy</a>, void &gt; &gt;</td></tr>
 <tr class="memdesc:a4c9cc4488baf3e8e9f1504f1a97391f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type. <br /></td></tr>
 <tr class="separator:a4c9cc4488baf3e8e9f1504f1a97391f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e5562390318728d2761cf29d9c0e877"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeometryXYVxVy.html#a9e5562390318728d2761cf29d9c0e877">SpatialIdxRange</a> = IdxRangeXY</td></tr>
@@ -142,7 +142,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classGeometryXYVxVy.html#a4c9cc4488baf3e8e9f1504f1a97391f5">GeometryXYVxVy::velocity_dim_for</a> =  std::conditional_t&lt; std::is_same_v&lt;T, <a class="el" href="structGridX.html">GridX</a>&gt;, <a class="el" href="structGridVx.html">GridVx</a>, std::conditional_t&lt;std::is_same_v&lt;T, <a class="el" href="structGridY.html">GridY</a>&gt;, <a class="el" href="structGridVy.html">GridVy</a>, void&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="classGeometryXYVxVy.html#a4c9cc4488baf3e8e9f1504f1a97391f5">GeometryXYVxVy::velocity_dim_for</a> =  std::conditional_t&lt; std::is_same_v&lt;<a class="el" href="structT.html">T</a>, <a class="el" href="structGridX.html">GridX</a>&gt;, <a class="el" href="structGridVx.html">GridVx</a>, std::conditional_t&lt;std::is_same_v&lt;<a class="el" href="structT.html">T</a>, <a class="el" href="structGridY.html">GridY</a>&gt;, <a class="el" href="structGridVy.html">GridVy</a>, void&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">

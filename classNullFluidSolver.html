@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a127fbdae4830d4c08a5c2a7f40b93040"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040">NullFluidSolver</a> (IdxRangeSp const &amp;dom_fluidsp)</td></tr>
 <tr class="memdesc:a127fbdae4830d4c08a5c2a7f40b93040"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the class.  <a href="classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040">More...</a><br /></td></tr>
 <tr class="separator:a127fbdae4830d4c08a5c2a7f40b93040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b59c028368fca8f86367cad9609bbc"><td class="memItemLeft" align="right" valign="top">DSpanSpMX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">operator()</a> (DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt) const override</td></tr>
-<tr class="memdesc:a02b59c028368fca8f86367cad9609bbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a dummy fluid model on a timestep dt.  <a href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">More...</a><br /></td></tr>
-<tr class="separator:a02b59c028368fca8f86367cad9609bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57df0286d899f8278d9147aeea564292"><td class="memItemLeft" align="right" valign="top">DFieldSpMomX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">operator()</a> (DFieldSpMomX fluid_moments, DConstFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const override</td></tr>
+<tr class="memdesc:a57df0286d899f8278d9147aeea564292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a dummy fluid model on a timestep dt.  <a href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">More...</a><br /></td></tr>
+<tr class="separator:a57df0286d899f8278d9147aeea564292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A dommy class that solves a fluid model. </p>
@@ -151,7 +151,7 @@ Public Member Functions</h2></td></tr>
 <p>The constructor for the class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom_fluidsp</td><td>The moments domain on which the fluid species is defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom_fluidsp</td><td>The moments index range on which the fluid species is defined. </td></tr>
   </table>
   </dd>
 </dl>
@@ -159,8 +159,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a02b59c028368fca8f86367cad9609bbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02b59c028368fca8f86367cad9609bbc">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a57df0286d899f8278d9147aeea564292"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57df0286d899f8278d9147aeea564292">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,21 +169,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpMX NullFluidSolver::operator() </td>
+          <td class="memname">DFieldSpMomX NullFluidSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>fluid_moments</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DConstFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramtype">DConstFieldX&#160;</td>
           <td class="paramname"><em>efield</em>, </td>
         </tr>
         <tr>
@@ -217,7 +217,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a span referencing the fluid species after solving the dummy fluid model on one timestep. </dd></dl>
 
-<p>Implements <a class="el" href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">IFluidTransportSolver</a>.</p>
+<p>Implements <a class="el" href="classIFluidTransportSolver.html#a7b533a63875dcba416c647dfab0dd7eb">IFluidTransportSolver</a>.</p>
 
 </div>
 </div>

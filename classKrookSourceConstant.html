@@ -121,16 +121,16 @@ Inheritance diagram for KrookSourceConstant:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad395273e96edc581ba4ba375c6fbb98c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceConstant.html#ad395273e96edc581ba4ba375c6fbb98c">KrookSourceConstant</a> (IDomainX const &amp;gridx, IDomainVx const &amp;gridv, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</td></tr>
-<tr class="memdesc:ad395273e96edc581ba4ba375c6fbb98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKrookSourceConstant.html" title="A class that describes a source of particles.">KrookSourceConstant</a> class.  <a href="classKrookSourceConstant.html#ad395273e96edc581ba4ba375c6fbb98c">More...</a><br /></td></tr>
-<tr class="separator:ad395273e96edc581ba4ba375c6fbb98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23f3846feea732e1d57eae70823c546e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceConstant.html#a23f3846feea732e1d57eae70823c546e">KrookSourceConstant</a> (IdxRangeX const &amp;gridx, IdxRangeVx const &amp;gridv, RhsType const type, double extent, double stiffness, double amplitude, double density, double temperature)</td></tr>
+<tr class="memdesc:a23f3846feea732e1d57eae70823c546e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKrookSourceConstant.html" title="A class that describes a source of particles.">KrookSourceConstant</a> class.  <a href="classKrookSourceConstant.html#a23f3846feea732e1d57eae70823c546e">More...</a><br /></td></tr>
+<tr class="separator:a23f3846feea732e1d57eae70823c546e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94d8fa0b721fbe980a11a9edc298b9c8"><td class="memItemLeft" align="right" valign="top"><a id="a94d8fa0b721fbe980a11a9edc298b9c8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8">KrookSourceConstant</a> (<a class="el" href="classKrookSourceConstant.html">KrookSourceConstant</a> &amp;&amp;)=default</td></tr>
 <tr class="memdesc:a94d8fa0b721fbe980a11a9edc298b9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKrookSourceConstant.html" title="A class that describes a source of particles.">KrookSourceConstant</a> class. <br /></td></tr>
 <tr class="separator:a94d8fa0b721fbe980a11a9edc298b9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bb1a360f9fc26be63ed224103237151"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceConstant.html#a4bb1a360f9fc26be63ed224103237151">operator()</a> (DSpanSpXVx allfdistribu, double dt) const override</td></tr>
-<tr class="memdesc:a4bb1a360f9fc26be63ed224103237151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function following the <a class="el" href="classKrookSourceConstant.html" title="A class that describes a source of particles.">KrookSourceConstant</a> operator.  <a href="classKrookSourceConstant.html#a4bb1a360f9fc26be63ed224103237151">More...</a><br /></td></tr>
-<tr class="separator:a4bb1a360f9fc26be63ed224103237151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a266237a1a58a6f8f000ee4e910353dcc"><td class="memItemLeft" align="right" valign="top">DFieldSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKrookSourceConstant.html#a266237a1a58a6f8f000ee4e910353dcc">operator()</a> (DFieldSpXVx allfdistribu, double dt) const override</td></tr>
+<tr class="memdesc:a266237a1a58a6f8f000ee4e910353dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function following the <a class="el" href="classKrookSourceConstant.html" title="A class that describes a source of particles.">KrookSourceConstant</a> operator.  <a href="classKrookSourceConstant.html#a266237a1a58a6f8f000ee4e910353dcc">More...</a><br /></td></tr>
+<tr class="separator:a266237a1a58a6f8f000ee4e910353dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that describes a source of particles. </p>
@@ -140,8 +140,8 @@ Public Member Functions</h2></td></tr>
 <p>amplitude is a constant for both species.</p>
 <p>The solution of the evolution equation is therefore : f(t+dt) = ftarget + (f(t)-ftarget)*exp(-amplitude*mask*dt) </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad395273e96edc581ba4ba375c6fbb98c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad395273e96edc581ba4ba375c6fbb98c">&#9670;&nbsp;</a></span>KrookSourceConstant()</h2>
+<a id="a23f3846feea732e1d57eae70823c546e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23f3846feea732e1d57eae70823c546e">&#9670;&nbsp;</a></span>KrookSourceConstant()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,13 +149,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">KrookSourceConstant::KrookSourceConstant </td>
           <td>(</td>
-          <td class="paramtype">IDomainX const &amp;&#160;</td>
+          <td class="paramtype">IdxRangeX const &amp;&#160;</td>
           <td class="paramname"><em>gridx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IDomainVx const &amp;&#160;</td>
+          <td class="paramtype">IdxRangeVx const &amp;&#160;</td>
           <td class="paramname"><em>gridv</em>, </td>
         </tr>
         <tr>
@@ -220,8 +220,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4bb1a360f9fc26be63ed224103237151"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bb1a360f9fc26be63ed224103237151">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a266237a1a58a6f8f000ee4e910353dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a266237a1a58a6f8f000ee4e910353dcc">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,9 +230,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpXVx KrookSourceConstant::operator() </td>
+          <td class="memname">DFieldSpXVx KrookSourceConstant::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">DFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -265,7 +265,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A span referencing the distribution function passed as argument. </dd></dl>
 
-<p>Implements <a class="el" href="classIRightHandSide.html#ae583170af9abcdbb740c12c963860367">IRightHandSide</a>.</p>
+<p>Implements <a class="el" href="classIRightHandSide.html#a00f66ff88f6b0fd17a931a09b1ddb2d3">IRightHandSide</a>.</p>
 
 </div>
 </div>

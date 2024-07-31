@@ -121,15 +121,15 @@ Inheritance diagram for ITimeSolverHybrid:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aac4df043061d69ff7995f5a22b34a867"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolverHybrid.html#aac4df043061d69ff7995f5a22b34a867">operator()</a> (DSpanSpXVx allfdistribu, DSpanSpMX fluid_moments, double time_start, double dt, int steps=1) const =0</td></tr>
-<tr class="memdesc:aac4df043061d69ff7995f5a22b34a867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann-Poisson-fluid system.  <a href="classITimeSolverHybrid.html#aac4df043061d69ff7995f5a22b34a867">More...</a><br /></td></tr>
-<tr class="separator:aac4df043061d69ff7995f5a22b34a867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa65ff6d73a2a7a97aeed15dab0ab3d94"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolverHybrid.html#aa65ff6d73a2a7a97aeed15dab0ab3d94">operator()</a> (DFieldSpXVx allfdistribu, DFieldSpMomX fluid_moments, double time_start, double dt, int steps=1) const =0</td></tr>
+<tr class="memdesc:aa65ff6d73a2a7a97aeed15dab0ab3d94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann-Poisson-fluid system.  <a href="classITimeSolverHybrid.html#aa65ff6d73a2a7a97aeed15dab0ab3d94">More...</a><br /></td></tr>
+<tr class="separator:aa65ff6d73a2a7a97aeed15dab0ab3d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for solving a Boltzmann-Poisson system of equations coupled to a fluid model. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aac4df043061d69ff7995f5a22b34a867"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac4df043061d69ff7995f5a22b34a867">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="aa65ff6d73a2a7a97aeed15dab0ab3d94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa65ff6d73a2a7a97aeed15dab0ab3d94">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -138,15 +138,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DSpanSpXVx ITimeSolverHybrid::operator() </td>
+          <td class="memname">virtual DFieldSpXVx ITimeSolverHybrid::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">DFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>fluid_moments</em>, </td>
         </tr>
         <tr>
@@ -193,7 +193,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
 
-<p>Implemented in <a class="el" href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">PredCorrHybrid</a>.</p>
+<p>Implemented in <a class="el" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">PredCorrHybrid</a>.</p>
 
 </div>
 </div>

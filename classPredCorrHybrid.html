@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a01e466a8ca5ea62d40c888c566e99779"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">PredCorrHybrid</a> (<a class="el" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> const &amp;boltzmann_solver, <a class="el" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> const &amp;fluid_solver, <a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;poisson_solver, <a class="el" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> const &amp;kinetic_fluid_coupling)</td></tr>
 <tr class="memdesc:a01e466a8ca5ea62d40c888c566e99779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <a href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">More...</a><br /></td></tr>
 <tr class="separator:a01e466a8ca5ea62d40c888c566e99779"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4247e382ebf03258bc1ad34171d297a9"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">operator()</a> (DSpanSpXVx allfdistribu, DSpanSpMX fluid_moments, double time_start, double dt, int steps=1) const override</td></tr>
-<tr class="memdesc:a4247e382ebf03258bc1ad34171d297a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson-fluid system.  <a href="classPredCorrHybrid.html#a4247e382ebf03258bc1ad34171d297a9">More...</a><br /></td></tr>
-<tr class="separator:a4247e382ebf03258bc1ad34171d297a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bfe0fdcbcc66b657bb0598cd4a1135c"><td class="memItemLeft" align="right" valign="top">DFieldSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">operator()</a> (DFieldSpXVx allfdistribu, DFieldSpMomX fluid_moments, double time_start, double dt, int steps=1) const override</td></tr>
+<tr class="memdesc:a6bfe0fdcbcc66b657bb0598cd4a1135c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Boltzmann-Poisson-fluid system.  <a href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">More...</a><br /></td></tr>
+<tr class="separator:a6bfe0fdcbcc66b657bb0598cd4a1135c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that solves a Boltzmann-Poisson system of equations coupled to a fluid particles model using a predictor-corrector scheme. </p>
@@ -184,8 +184,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4247e382ebf03258bc1ad34171d297a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4247e382ebf03258bc1ad34171d297a9">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a6bfe0fdcbcc66b657bb0598cd4a1135c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bfe0fdcbcc66b657bb0598cd4a1135c">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,15 +194,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpXVx PredCorrHybrid::operator() </td>
+          <td class="memname">DFieldSpXVx PredCorrHybrid::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">DFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>fluid_moments</em>, </td>
         </tr>
         <tr>
@@ -249,7 +249,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
 
-<p>Implements <a class="el" href="classITimeSolverHybrid.html#aac4df043061d69ff7995f5a22b34a867">ITimeSolverHybrid</a>.</p>
+<p>Implements <a class="el" href="classITimeSolverHybrid.html#aa65ff6d73a2a7a97aeed15dab0ab3d94">ITimeSolverHybrid</a>.</p>
 
 </div>
 </div>

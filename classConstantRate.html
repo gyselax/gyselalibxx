@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84b2179632b174b18c48b46e24340a93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstantRate.html#a84b2179632b174b18c48b46e24340a93">ConstantRate</a> (double const value)</td></tr>
 <tr class="memdesc:a84b2179632b174b18c48b46e24340a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classConstantRate.html" title="A class that describes a reaction rate that is constant.">ConstantRate</a> class.  <a href="classConstantRate.html#a84b2179632b174b18c48b46e24340a93">More...</a><br /></td></tr>
 <tr class="separator:a84b2179632b174b18c48b46e24340a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86f11deab578b89868ae726dff8141e3"><td class="memItemLeft" align="right" valign="top">DSpanSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstantRate.html#a86f11deab578b89868ae726dff8141e3">operator()</a> (DSpanSpX rate, DViewSpX density, DViewSpX temperature) const override</td></tr>
-<tr class="memdesc:a86f11deab578b89868ae726dff8141e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for computing the reaction rate.  <a href="classConstantRate.html#a86f11deab578b89868ae726dff8141e3">More...</a><br /></td></tr>
-<tr class="separator:a86f11deab578b89868ae726dff8141e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada12e13f0c3e2b98cb5b2c35a21be9b9"><td class="memItemLeft" align="right" valign="top">DFieldSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstantRate.html#ada12e13f0c3e2b98cb5b2c35a21be9b9">operator()</a> (DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature) const override</td></tr>
+<tr class="memdesc:ada12e13f0c3e2b98cb5b2c35a21be9b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for computing the reaction rate.  <a href="classConstantRate.html#ada12e13f0c3e2b98cb5b2c35a21be9b9">More...</a><br /></td></tr>
+<tr class="separator:ada12e13f0c3e2b98cb5b2c35a21be9b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that describes a reaction rate that is constant. </p>
@@ -158,8 +158,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a86f11deab578b89868ae726dff8141e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86f11deab578b89868ae726dff8141e3">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="ada12e13f0c3e2b98cb5b2c35a21be9b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada12e13f0c3e2b98cb5b2c35a21be9b9">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,21 +168,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpX ConstantRate::operator() </td>
+          <td class="memname">DFieldSpX ConstantRate::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpX&#160;</td>
+          <td class="paramtype">DFieldSpX&#160;</td>
           <td class="paramname"><em>rate</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>density</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>temperature</em>&#160;</td>
         </tr>
         <tr>
@@ -209,7 +209,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A span referencing the reaction rate. </dd></dl>
 
-<p>Implements <a class="el" href="classIReactionRate.html#a5ec42dbaf0ba81a1cbe068cea148146e">IReactionRate</a>.</p>
+<p>Implements <a class="el" href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">IReactionRate</a>.</p>
 
 </div>
 </div>

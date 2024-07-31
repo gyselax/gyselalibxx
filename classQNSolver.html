@@ -125,9 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8e24e91f5ed1c4bb590e93eb4f1f81ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba">QNSolver</a> (<a class="el" href="classIPoissonSolver.html">PoissonSolver</a> const &amp;solve_poisson, <a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;compute_rho)</td></tr>
 <tr class="memdesc:a8e24e91f5ed1c4bb590e93eb4f1f81ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the FftQNSolver operator.  <a href="classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba">More...</a><br /></td></tr>
 <tr class="separator:a8e24e91f5ed1c4bb590e93eb4f1f81ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed8063537a8c1803a2fa92bac6e9c3fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQNSolver.html#aed8063537a8c1803a2fa92bac6e9c3fe">operator()</a> (DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const override</td></tr>
-<tr class="memdesc:aed8063537a8c1803a2fa92bac6e9c3fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classQNSolver.html#aed8063537a8c1803a2fa92bac6e9c3fe">More...</a><br /></td></tr>
-<tr class="separator:aed8063537a8c1803a2fa92bac6e9c3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a866ea0a8cd34e7789d8847aaf963fdf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQNSolver.html#a866ea0a8cd34e7789d8847aaf963fdf2">operator()</a> (DFieldX electrostatic_potential, DFieldX electric_field, DConstFieldSpXVx allfdistribu) const override</td></tr>
+<tr class="memdesc:a866ea0a8cd34e7789d8847aaf963fdf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator which solves the equation using the method described by the class.  <a href="classQNSolver.html#a866ea0a8cd34e7789d8847aaf963fdf2">More...</a><br /></td></tr>
+<tr class="separator:a866ea0a8cd34e7789d8847aaf963fdf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e24e91f5ed1c4bb590e93eb4f1f81ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba">QNSolver</a> (<a class="el" href="classIPoissonSolver.html">PoissonSolver</a> const &amp;solve_poisson, <a class="el" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a> const &amp;compute_rho)</td></tr>
 <tr class="memdesc:a8e24e91f5ed1c4bb590e93eb4f1f81ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the <a class="el" href="classQNSolver.html" title="An operator which solves the Quasi-Neutrality equation using a fast Fourier transform.">QNSolver</a> operator.  <a href="classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba">More...</a><br /></td></tr>
 <tr class="separator:a8e24e91f5ed1c4bb590e93eb4f1f81ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,8 +141,6 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An operator which solves the Quasi-Neutrality equation using a fast Fourier transform. </p>
-<p>An operator which solves the Quasi-Neutrality equation: \( - \frac{d^2 \phi}{dx^2} = \rho \) using a fast Fourier transform on a periodic domain. This operator only works for equidistant points.</p>
-<p>The electric field, \( \frac{d \phi}{dx} \) is calculated using a spline interpolation implemented in ElectricField.</p>
 <p>An operator which solves the Quasi-Neutrality equation: \( - \frac{d^2 \phi}{dx^2} = \rho \) using a fast Fourier transform on a periodic index range. This operator only works for equidistant points.</p>
 <p>The electric field, \( \frac{d \phi}{dx} \) is calculated using a spline interpolation implemented in ElectricField. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -221,8 +219,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aed8063537a8c1803a2fa92bac6e9c3fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed8063537a8c1803a2fa92bac6e9c3fe">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a866ea0a8cd34e7789d8847aaf963fdf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a866ea0a8cd34e7789d8847aaf963fdf2">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,19 +231,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void QNSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramtype">DFieldX&#160;</td>
           <td class="paramname"><em>electrostatic_potential</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramtype">DFieldX&#160;</td>
           <td class="paramname"><em>electric_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DConstFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>&#160;</td>
         </tr>
         <tr>
@@ -271,7 +269,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classIQNSolver.html#a20410c1561e641ac9ba617081c3da1b9">IQNSolver</a>.</p>
+<p>Implements <a class="el" href="classIQNSolver.html#a0a2d3c31695c821a43582f1c2cd4e928">IQNSolver</a>.</p>
 
 </div>
 </div>

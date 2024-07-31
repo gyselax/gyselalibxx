@@ -121,12 +121,12 @@ Inheritance diagram for KineticSource:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a361b8d5b34373ff17f657c9df6067f88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">KineticSource</a> (IDomainX const &amp;gridx, IDomainVx const &amp;gridv, double extent, double stiffness, double amplitude, double density, double energy, double temperature)</td></tr>
-<tr class="memdesc:a361b8d5b34373ff17f657c9df6067f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKineticSource.html" title="A class that describes a source of particles.">KineticSource</a> class.  <a href="classKineticSource.html#a361b8d5b34373ff17f657c9df6067f88">More...</a><br /></td></tr>
-<tr class="separator:a361b8d5b34373ff17f657c9df6067f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3425fe8d56c34d35fe15a4378e97a6a"><td class="memItemLeft" align="right" valign="top">DSpanSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticSource.html#ab3425fe8d56c34d35fe15a4378e97a6a">operator()</a> (DSpanSpXVx allfdistribu, double dt) const override</td></tr>
-<tr class="memdesc:ab3425fe8d56c34d35fe15a4378e97a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function following the <a class="el" href="classKineticSource.html" title="A class that describes a source of particles.">KineticSource</a> operator.  <a href="classKineticSource.html#ab3425fe8d56c34d35fe15a4378e97a6a">More...</a><br /></td></tr>
-<tr class="separator:ab3425fe8d56c34d35fe15a4378e97a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1eb6d9a4a099ed40aa4bd3b22165358"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticSource.html#ac1eb6d9a4a099ed40aa4bd3b22165358">KineticSource</a> (IdxRangeX const &amp;gridx, IdxRangeVx const &amp;gridv, double extent, double stiffness, double amplitude, double density, double energy, double temperature)</td></tr>
+<tr class="memdesc:ac1eb6d9a4a099ed40aa4bd3b22165358"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKineticSource.html" title="A class that describes a source of particles.">KineticSource</a> class.  <a href="classKineticSource.html#ac1eb6d9a4a099ed40aa4bd3b22165358">More...</a><br /></td></tr>
+<tr class="separator:ac1eb6d9a4a099ed40aa4bd3b22165358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384f4c655ebe246d99964de77ee780d2"><td class="memItemLeft" align="right" valign="top">DFieldSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticSource.html#a384f4c655ebe246d99964de77ee780d2">operator()</a> (DFieldSpXVx allfdistribu, double dt) const override</td></tr>
+<tr class="memdesc:a384f4c655ebe246d99964de77ee780d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function following the <a class="el" href="classKineticSource.html" title="A class that describes a source of particles.">KineticSource</a> operator.  <a href="classKineticSource.html#a384f4c655ebe246d99964de77ee780d2">More...</a><br /></td></tr>
+<tr class="separator:a384f4c655ebe246d99964de77ee780d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that describes a source of particles. </p>
@@ -135,8 +135,8 @@ Public Member Functions</h2></td></tr>
 <p>velocity_shape defines the velocity profile of the source in the parallel velocity direction. It is the sum of a source that injects only density, and a source that injects only energy. If the density and energy parameters are equal to one (usual case), the resulting velocity_shape is maxwellian.</p>
 <p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/kinetic_source.pdf">rhs docs</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a361b8d5b34373ff17f657c9df6067f88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a361b8d5b34373ff17f657c9df6067f88">&#9670;&nbsp;</a></span>KineticSource()</h2>
+<a id="ac1eb6d9a4a099ed40aa4bd3b22165358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1eb6d9a4a099ed40aa4bd3b22165358">&#9670;&nbsp;</a></span>KineticSource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,13 +144,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">KineticSource::KineticSource </td>
           <td>(</td>
-          <td class="paramtype">IDomainX const &amp;&#160;</td>
+          <td class="paramtype">IdxRangeX const &amp;&#160;</td>
           <td class="paramname"><em>gridx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IDomainVx const &amp;&#160;</td>
+          <td class="paramtype">IdxRangeVx const &amp;&#160;</td>
           <td class="paramname"><em>gridv</em>, </td>
         </tr>
         <tr>
@@ -215,8 +215,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab3425fe8d56c34d35fe15a4378e97a6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3425fe8d56c34d35fe15a4378e97a6a">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a384f4c655ebe246d99964de77ee780d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384f4c655ebe246d99964de77ee780d2">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,9 +225,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DSpanSpXVx KineticSource::operator() </td>
+          <td class="memname">DFieldSpXVx KineticSource::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">DFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -260,7 +260,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A span referencing the distribution function passed as argument. </dd></dl>
 
-<p>Implements <a class="el" href="classIRightHandSide.html#ae583170af9abcdbb740c12c963860367">IRightHandSide</a>.</p>
+<p>Implements <a class="el" href="classIRightHandSide.html#a00f66ff88f6b0fd17a931a09b1ddb2d3">IRightHandSide</a>.</p>
 
 </div>
 </div>

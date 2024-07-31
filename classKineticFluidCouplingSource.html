@@ -121,24 +121,24 @@ Inheritance diagram for KineticFluidCouplingSource:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adf5be505b43635eefede1811ee25c4a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#adf5be505b43635eefede1811ee25c4a8">KineticFluidCouplingSource</a> (double density_coupling_coeff, double momentum_coupling_coeff, double energy_coupling_coeff, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;ionization, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;recombination, double normalization_coeff, DViewVx const &amp;quadrature_coeffs)</td></tr>
-<tr class="memdesc:adf5be505b43635eefede1811ee25c4a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> class.  <a href="classKineticFluidCouplingSource.html#adf5be505b43635eefede1811ee25c4a8">More...</a><br /></td></tr>
-<tr class="separator:adf5be505b43635eefede1811ee25c4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d5052f324937fb7ae747d232be67999"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a9d5052f324937fb7ae747d232be67999">operator()</a> (DSpanSpXVx const allfdistribu, DSpanSpMX neutrals, double const dt) const override</td></tr>
-<tr class="memdesc:a9d5052f324937fb7ae747d232be67999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function and neutral density following the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> operator.  <a href="classKineticFluidCouplingSource.html#a9d5052f324937fb7ae747d232be67999">More...</a><br /></td></tr>
-<tr class="separator:a9d5052f324937fb7ae747d232be67999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad58fde1975e1ff8736d196030b5d105"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#aad58fde1975e1ff8736d196030b5d105">KineticFluidCouplingSource</a> (double density_coupling_coeff, double momentum_coupling_coeff, double energy_coupling_coeff, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;ionization, <a class="el" href="classIReactionRate.html">IReactionRate</a> const &amp;recombination, double normalization_coeff, DConstFieldVx const &amp;quadrature_coeffs)</td></tr>
+<tr class="memdesc:aad58fde1975e1ff8736d196030b5d105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> class.  <a href="classKineticFluidCouplingSource.html#aad58fde1975e1ff8736d196030b5d105">More...</a><br /></td></tr>
+<tr class="separator:aad58fde1975e1ff8736d196030b5d105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d185066590f530d132ecfd4d4b315be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a8d185066590f530d132ecfd4d4b315be">operator()</a> (DFieldSpXVx const allfdistribu, DFieldSpMomX neutrals, double const dt) const override</td></tr>
+<tr class="memdesc:a8d185066590f530d132ecfd4d4b315be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function and neutral density following the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> operator.  <a href="classKineticFluidCouplingSource.html#a8d185066590f530d132ecfd4d4b315be">More...</a><br /></td></tr>
+<tr class="separator:a8d185066590f530d132ecfd4d4b315be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b0a180bb8863021aff31bd74fe158a7"><td class="memItemLeft" align="right" valign="top">IdxSp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a3b0a180bb8863021aff31bd74fe158a7">find_ion</a> (IdxRangeSp const dom_kinsp) const</td></tr>
-<tr class="memdesc:a3b0a180bb8863021aff31bd74fe158a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index of the ion species in the domain.  <a href="classKineticFluidCouplingSource.html#a3b0a180bb8863021aff31bd74fe158a7">More...</a><br /></td></tr>
+<tr class="memdesc:a3b0a180bb8863021aff31bd74fe158a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index of the ion species in the index range.  <a href="classKineticFluidCouplingSource.html#a3b0a180bb8863021aff31bd74fe158a7">More...</a><br /></td></tr>
 <tr class="separator:a3b0a180bb8863021aff31bd74fe158a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a338658107a16732ecdbcdcc3ad7182e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a338658107a16732ecdbcdcc3ad7182e8">get_source_term</a> (DSpanX density_source_neutral, DViewSpX kinsp_density, DViewSpMX neutrals, DViewSpX ionization, DViewSpX recombination) const</td></tr>
-<tr class="memdesc:a338658107a16732ecdbcdcc3ad7182e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the source term density_source_neutral(x) of the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> operator.  <a href="classKineticFluidCouplingSource.html#a338658107a16732ecdbcdcc3ad7182e8">More...</a><br /></td></tr>
-<tr class="separator:a338658107a16732ecdbcdcc3ad7182e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ac5bff808c0dd03444c821a14c0fac9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a4ac5bff808c0dd03444c821a14c0fac9">get_derivative_neutrals</a> (DSpanSpMX dn, DViewSpMX neutrals, DViewX density_source_neutral) const</td></tr>
-<tr class="memdesc:a4ac5bff808c0dd03444c821a14c0fac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes dn (of neutral density) for the equation dn/dt = - density_source_neutral.  <a href="classKineticFluidCouplingSource.html#a4ac5bff808c0dd03444c821a14c0fac9">More...</a><br /></td></tr>
-<tr class="separator:a4ac5bff808c0dd03444c821a14c0fac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16777fb8b2e74ebf6e986ade29fb0e65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a16777fb8b2e74ebf6e986ade29fb0e65">get_derivative_allfdistribu</a> (DSpanSpXVx df, DViewSpXVx allfdistribu, DViewSpXVx velocity_shape_source) const</td></tr>
-<tr class="memdesc:a16777fb8b2e74ebf6e986ade29fb0e65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes df for the equation df/dt = density_source_neutral(x) * velocity_shape_source(x,v).  <a href="classKineticFluidCouplingSource.html#a16777fb8b2e74ebf6e986ade29fb0e65">More...</a><br /></td></tr>
-<tr class="separator:a16777fb8b2e74ebf6e986ade29fb0e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae71a75cc436ceff96e2d3816a27a3701"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#ae71a75cc436ceff96e2d3816a27a3701">get_source_term</a> (DFieldX density_source_neutral, DConstFieldSpX kinsp_density, DConstFieldSpMomX neutrals, DConstFieldSpX ionization, DConstFieldSpX recombination) const</td></tr>
+<tr class="memdesc:ae71a75cc436ceff96e2d3816a27a3701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the source term density_source_neutral(x) of the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> operator.  <a href="classKineticFluidCouplingSource.html#ae71a75cc436ceff96e2d3816a27a3701">More...</a><br /></td></tr>
+<tr class="separator:ae71a75cc436ceff96e2d3816a27a3701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaaafac1e1b982e647492d4fdc066ede"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#adaaafac1e1b982e647492d4fdc066ede">get_derivative_neutrals</a> (DFieldSpMomX dn, DConstFieldSpMomX neutrals, DConstFieldX density_source_neutral) const</td></tr>
+<tr class="memdesc:adaaafac1e1b982e647492d4fdc066ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes dn (of neutral density) for the equation dn/dt = - density_source_neutral.  <a href="classKineticFluidCouplingSource.html#adaaafac1e1b982e647492d4fdc066ede">More...</a><br /></td></tr>
+<tr class="separator:adaaafac1e1b982e647492d4fdc066ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88112d3fa4d622eae00bfc8801ff924"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#ad88112d3fa4d622eae00bfc8801ff924">get_derivative_allfdistribu</a> (DFieldSpXVx df, DConstFieldSpXVx allfdistribu, DConstFieldSpXVx velocity_shape_source) const</td></tr>
+<tr class="memdesc:ad88112d3fa4d622eae00bfc8801ff924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes df for the equation df/dt = density_source_neutral(x) * velocity_shape_source(x,v).  <a href="classKineticFluidCouplingSource.html#ad88112d3fa4d622eae00bfc8801ff924">More...</a><br /></td></tr>
+<tr class="separator:ad88112d3fa4d622eae00bfc8801ff924"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that describes a source of particles due to neutrals. </p>
@@ -146,8 +146,8 @@ Public Member Functions</h2></td></tr>
 <p>The velocity_shape_source \(S_v(x,v)\) defines the velocity profile of the source in the parallel velocity direction. It is the sum of a source that injects only density, a source that injects only momentum and a source that injects only energy. If the density and energy parameters are equal to one (usual case), the resulting velocity_shape is maxwellian.</p>
 <p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/kinetic_source.pdf">rhs docs</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adf5be505b43635eefede1811ee25c4a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf5be505b43635eefede1811ee25c4a8">&#9670;&nbsp;</a></span>KineticFluidCouplingSource()</h2>
+<a id="aad58fde1975e1ff8736d196030b5d105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad58fde1975e1ff8736d196030b5d105">&#9670;&nbsp;</a></span>KineticFluidCouplingSource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +191,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewVx const &amp;&#160;</td>
+          <td class="paramtype">DConstFieldVx const &amp;&#160;</td>
           <td class="paramname"><em>quadrature_coeffs</em>&#160;</td>
         </tr>
         <tr>
@@ -219,8 +219,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9d5052f324937fb7ae747d232be67999"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d5052f324937fb7ae747d232be67999">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a8d185066590f530d132ecfd4d4b315be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d185066590f530d132ecfd4d4b315be">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,13 +231,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void KineticFluidCouplingSource::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx const&#160;</td>
+          <td class="paramtype">DFieldSpXVx const&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>neutrals</em>, </td>
         </tr>
         <tr>
@@ -269,7 +269,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classIKineticFluidCoupling.html#aa4c10051c1215e1e271edfb3587e4729">IKineticFluidCoupling</a>.</p>
+<p>Implements <a class="el" href="classIKineticFluidCoupling.html#a915230ecc7ba3faffc9279f0283bb0b3">IKineticFluidCoupling</a>.</p>
 
 </div>
 </div>
@@ -289,19 +289,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the index of the ion species in the domain. </p>
+<p>Returns the index of the ion species in the index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>The domain of the kinetic species.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>The index range of the kinetic species.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The index of the ion species in the domain. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The index of the ion species in the index range. </dd></dl>
 
 </div>
 </div>
-<a id="a338658107a16732ecdbcdcc3ad7182e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a338658107a16732ecdbcdcc3ad7182e8">&#9670;&nbsp;</a></span>get_source_term()</h2>
+<a id="ae71a75cc436ceff96e2d3816a27a3701"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae71a75cc436ceff96e2d3816a27a3701">&#9670;&nbsp;</a></span>get_source_term()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,31 +309,31 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void KineticFluidCouplingSource::get_source_term </td>
           <td>(</td>
-          <td class="paramtype">DSpanX&#160;</td>
+          <td class="paramtype">DFieldX&#160;</td>
           <td class="paramname"><em>density_source_neutral</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>kinsp_density</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpMX&#160;</td>
+          <td class="paramtype">DConstFieldSpMomX&#160;</td>
           <td class="paramname"><em>neutrals</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>ionization</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpX&#160;</td>
+          <td class="paramtype">DConstFieldSpX&#160;</td>
           <td class="paramname"><em>recombination</em>&#160;</td>
         </tr>
         <tr>
@@ -358,8 +358,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4ac5bff808c0dd03444c821a14c0fac9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ac5bff808c0dd03444c821a14c0fac9">&#9670;&nbsp;</a></span>get_derivative_neutrals()</h2>
+<a id="adaaafac1e1b982e647492d4fdc066ede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaaafac1e1b982e647492d4fdc066ede">&#9670;&nbsp;</a></span>get_derivative_neutrals()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,19 +367,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void KineticFluidCouplingSource::get_derivative_neutrals </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>dn</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpMX&#160;</td>
+          <td class="paramtype">DConstFieldSpMomX&#160;</td>
           <td class="paramname"><em>neutrals</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramtype">DConstFieldX&#160;</td>
           <td class="paramname"><em>density_source_neutral</em>&#160;</td>
         </tr>
         <tr>
@@ -402,8 +402,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a16777fb8b2e74ebf6e986ade29fb0e65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16777fb8b2e74ebf6e986ade29fb0e65">&#9670;&nbsp;</a></span>get_derivative_allfdistribu()</h2>
+<a id="ad88112d3fa4d622eae00bfc8801ff924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad88112d3fa4d622eae00bfc8801ff924">&#9670;&nbsp;</a></span>get_derivative_allfdistribu()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,19 +411,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void KineticFluidCouplingSource::get_derivative_allfdistribu </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpXVx&#160;</td>
+          <td class="paramtype">DFieldSpXVx&#160;</td>
           <td class="paramname"><em>df</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DConstFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DConstFieldSpXVx&#160;</td>
           <td class="paramname"><em>velocity_shape_source</em>&#160;</td>
         </tr>
         <tr>

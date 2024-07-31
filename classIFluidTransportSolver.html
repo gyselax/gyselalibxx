@@ -122,15 +122,15 @@ Inheritance diagram for IFluidTransportSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af645e949db74cd0e77c9b00abf3817de"><td class="memItemLeft" align="right" valign="top">virtual DSpanSpMX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">operator()</a> (DSpanSpMX fluid_moments, DViewSpXVx allfdistribu, DViewX efield, double dt) const =0</td></tr>
-<tr class="memdesc:af645e949db74cd0e77c9b00abf3817de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the fluid model on one timestep.  <a href="classIFluidTransportSolver.html#af645e949db74cd0e77c9b00abf3817de">More...</a><br /></td></tr>
-<tr class="separator:af645e949db74cd0e77c9b00abf3817de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b533a63875dcba416c647dfab0dd7eb"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpMomX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIFluidTransportSolver.html#a7b533a63875dcba416c647dfab0dd7eb">operator()</a> (DFieldSpMomX fluid_moments, DConstFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const =0</td></tr>
+<tr class="memdesc:a7b533a63875dcba416c647dfab0dd7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the fluid model on one timestep.  <a href="classIFluidTransportSolver.html#a7b533a63875dcba416c647dfab0dd7eb">More...</a><br /></td></tr>
+<tr class="separator:a7b533a63875dcba416c647dfab0dd7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for solving the transport of a fluid model. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af645e949db74cd0e77c9b00abf3817de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af645e949db74cd0e77c9b00abf3817de">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a7b533a63875dcba416c647dfab0dd7eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b533a63875dcba416c647dfab0dd7eb">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,21 +139,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DSpanSpMX IFluidTransportSolver::operator() </td>
+          <td class="memname">virtual DFieldSpMomX IFluidTransportSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DSpanSpMX&#160;</td>
+          <td class="paramtype">DFieldSpMomX&#160;</td>
           <td class="paramname"><em>fluid_moments</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewSpXVx&#160;</td>
+          <td class="paramtype">DConstFieldSpXVx&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DViewX&#160;</td>
+          <td class="paramtype">DConstFieldX&#160;</td>
           <td class="paramname"><em>efield</em>, </td>
         </tr>
         <tr>
@@ -187,7 +187,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a span referencing the fluid species after solving the fluid model on one timestep. </dd></dl>
 
-<p>Implemented in <a class="el" href="classDiffusiveNeutralSolver.html#abfa7ed6b9809fc0338cd689b7d8dd37e">DiffusiveNeutralSolver</a>, and <a class="el" href="classNullFluidSolver.html#a02b59c028368fca8f86367cad9609bbc">NullFluidSolver</a>.</p>
+<p>Implemented in <a class="el" href="classDiffusiveNeutralSolver.html#af44bb1d70fd2a551ed4fc7008b564d5b">DiffusiveNeutralSolver</a>, and <a class="el" href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">NullFluidSolver</a>.</p>
 
 </div>
 </div>

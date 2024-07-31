@@ -116,13 +116,13 @@ $(document).ready(function(){initNavTree('geometryXVx_2poisson_2iqnsolver_8hpp_s
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIQNSolver.html">IQNSolver</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classIQNSolver.html#a20410c1561e641ac9ba617081c3da1b9">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classIQNSolver.html#a20410c1561e641ac9ba617081c3da1b9">operator()</a>(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DSpanX electrostatic_potential,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DSpanX electric_field,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DViewSpXVx allfdistribu) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classIQNSolver.html#a0a2d3c31695c821a43582f1c2cd4e928">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classIQNSolver.html#a0a2d3c31695c821a43582f1c2cd4e928">operator()</a>(</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DFieldX electrostatic_potential,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DFieldX electric_field,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DConstFieldSpXVx allfdistribu) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
-<div class="ttc" id="aclassIQNSolver_html_a20410c1561e641ac9ba617081c3da1b9"><div class="ttname"><a href="classIQNSolver.html#a20410c1561e641ac9ba617081c3da1b9">IQNSolver::operator()</a></div><div class="ttdeci">virtual void operator()(DSpanX electrostatic_potential, DSpanX electric_field, DViewSpXVx allfdistribu) const =0</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
+<div class="ttc" id="aclassIQNSolver_html_a0a2d3c31695c821a43582f1c2cd4e928"><div class="ttname"><a href="classIQNSolver.html#a0a2d3c31695c821a43582f1c2cd4e928">IQNSolver::operator()</a></div><div class="ttdeci">virtual void operator()(DFieldX electrostatic_potential, DFieldX electric_field, DConstFieldSpXVx allfdistribu) const =0</div><div class="ttdoc">The operator which solves the equation using the method described by the class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
