@@ -3,11 +3,10 @@
 #include <sll/matrix_batch.hpp>
 #include <sll/matrix_utils.hpp>
 
+#include <ginkgo/extensions/kokkos.hpp>
 #include <ginkgo/ginkgo.hpp>
 
 #include <Kokkos_Core.hpp>
-
-#include "ddc/kernels/splines/ginkgo_executors.hpp"
 
 /**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.
@@ -62,7 +61,7 @@ public:
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
     {
-        std::shared_ptr const gko_exec = ddc::detail::create_gko_exec<ExecSpace>();
+        std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_ell = gko::share(
                 batch_sparse_type::
                         create(gko_exec,
@@ -94,7 +93,7 @@ public:
 
 
     {
-        std::shared_ptr const gko_exec = ddc::detail::create_gko_exec<ExecSpace>();
+        std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_ell = gko::share(gko::batch::matrix::Ell<double>::create(
                 gko_exec,
                 gko::batch_dim<2>(this->get_batch_size(), gko::dim<2>(get_size(), get_size())),
