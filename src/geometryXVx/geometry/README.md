@@ -6,7 +6,7 @@ The shortcuts defined in the geometry file represent:
 1.  The spatial, velocity and time dimensions in real space (RDimX, RDimVx, and RDimT).
 2.  The type of coordinates of objects represented on the dimensions (CoordT, CoordX, CoordVx, CoordXVx).
 3.  The type of the B-Spline bases used on the spatial and velocity dimensions (BSplinesX, BSplinesVx).
-4.  The type which will describe the grid points (representing space, velocity and species) on which the simulation will evolve (IDimX, IDimVx, IDimSp).
+4.  The type which will describe the grid points (representing space, velocity and species) on which the simulation will evolve (GridX, GridVx, Species).
 5.  The type of the helper class which initialises grid points in space and velocity which are compatible with the defined splines (SplineInterpPointsX, SplineInterpPointsVx).
 6.  The type of the objects used to build splines (SplineXBuilder, SplineVxBuilder).
 7.  The type which describes the index of a grid point (representing space, velocity and/or species) (e.g. IndexX).

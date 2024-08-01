@@ -29,28 +29,28 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(10);
-    IVectX const x_size(512);
+    IdxStepX const x_size(512);
 
     CoordVx const vx_min(-8);
     CoordVx const vx_max(8);
-    IVectVx const vx_size(50);
+    IdxStepVx const vx_size(50);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+    ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx meshVx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainXVx meshXVx(meshX, meshVx);
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
+    IdxRangeVx meshVx(SplineInterpPointsVx::get_domain<GridVx>());
+    IdxRangeXVx meshXVx(meshX, meshVx);
 
     SplineXBuilder const builder_x(meshXVx);
     SplineVxBuilder const builder_vx(meshXVx);
 
-    // Kinetic species domain initialization
+    // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -66,7 +66,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
-    // Neutral species domain initialization
+    // Neutral species index range initialization
     IdxStepSp const nb_fluidspecies(1);
     IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
     IdxSp const my_ifluid = dom_fluidsp.front();
@@ -79,7 +79,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     double const neutral_mass(1.);
     fluid_masses(my_ifluid) = neutral_mass;
 
-    // Create the domain of kinetic species + fluid species
+    // Create the index range of kinetic species + fluid species
     IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
@@ -110,10 +110,10 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
 
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
-    // Moments domain initialization
-    IVectM const nb_fluid_moments(1);
-    IDomainM const meshM(IndexM(0), nb_fluid_moments);
-    ddc::init_discrete_space<IDimM>();
+    // Moments index range initialization
+    IdxStepMom const nb_fluid_moments(1);
+    IdxRangeMom const meshM(IdxMom(0), nb_fluid_moments);
+    ddc::init_discrete_space<GridMom>();
 
     // Neutral species initialization
     double const charge_exchange_val(0.5);
@@ -122,11 +122,11 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     double const normalization_coeff(1.);
 
 #ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
 #else
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_min(x_min);
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_max(x_max);
+    ddc::ConstantExtrapolationRule<X> bv_x_min(x_min);
+    ddc::ConstantExtrapolationRule<X> bv_x_max(x_max);
 #endif
 
     ConstantRate charge_exchange(charge_exchange_val);
@@ -136,9 +136,9 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     SplineXBuilder_1d const spline_x_builder_neutrals(meshX);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    DFieldVx quadrature_coeffs_alloc(
+    DFieldMemVx quadrature_coeffs_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx));
-    ddc::ChunkSpan const quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    ddc::ChunkSpan const quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     DiffusiveNeutralSolver const neutralsolver(
             charge_exchange,
@@ -149,27 +149,27 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
             spline_x_evaluator_neutrals,
             quadrature_coeffs);
 
-    host_t<DFieldSpMX> neutrals_init_host(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    ddc::for_each(neutrals_init_host.domain(), [&](IndexSpMX const ispmx) {
-        CoordX coordx(ddc::coordinate(ddc::select<IDimX>(ispmx)));
+    host_t<DFieldMemSpMomX> neutrals_init_host(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    ddc::for_each(get_idx_range(neutrals_init_host), [&](IdxSpMomX const ispmx) {
+        CoordX coordx(ddc::coordinate(ddc::select<GridX>(ispmx)));
         double const lx_2((x_max + x_min) / 2.);
         neutrals_init_host(ispmx) = std::exp(-0.5 * (coordx - lx_2) * (coordx - lx_2));
     });
 
-    DFieldSpMX neutrals_alloc(neutrals_init_host.domain());
-    DSpanSpMX neutrals = neutrals_alloc.span_view();
+    DFieldMemSpMomX neutrals_alloc(get_idx_range(neutrals_init_host));
+    DFieldSpMomX neutrals = get_field(neutrals_alloc);
     ddc::parallel_deepcopy(neutrals, neutrals_init_host);
 
-    DFieldSpMX derivative_alloc(neutrals.domain());
-    DSpanSpMX derivative = derivative_alloc.span_view();
+    DFieldMemSpMomX derivative_alloc(get_idx_range(neutrals));
+    DFieldSpMomX derivative = get_field(derivative_alloc);
 
-    DFieldSpX kinsp_density_alloc(IDomainSpX(dom_kinsp, meshX));
-    DFieldSpX kinsp_velocity_alloc(IDomainSpX(dom_kinsp, meshX));
-    DFieldSpX kinsp_temperature_alloc(IDomainSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_density_alloc(IdxRangeSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_velocity_alloc(IdxRangeSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_temperature_alloc(IdxRangeSpX(dom_kinsp, meshX));
 
-    DSpanSpX kinsp_density = kinsp_density_alloc.span_view();
-    DSpanSpX kinsp_velocity = kinsp_velocity_alloc.span_view();
-    DSpanSpX kinsp_temperature = kinsp_temperature_alloc.span_view();
+    DFieldSpX kinsp_density = get_field(kinsp_density_alloc);
+    DFieldSpX kinsp_velocity = get_field(kinsp_velocity_alloc);
+    DFieldSpX kinsp_temperature = get_field(kinsp_temperature_alloc);
 
     double const kinsp_density_eq(1.);
     double const kinsp_velocity_eq(0.5);
@@ -181,19 +181,19 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     neutralsolver.get_derivative(
             derivative,
             neutrals,
-            kinsp_density.span_cview(),
-            kinsp_velocity.span_cview(),
-            kinsp_temperature.span_cview());
+            get_const_field(kinsp_density),
+            get_const_field(kinsp_velocity),
+            get_const_field(kinsp_temperature));
 
     auto derivative_host = ddc::create_mirror_view_and_copy(derivative);
 
     double error_l1(0);
     double max_derivative(0);
-    ddc::for_each(neutrals.domain(), [&](IndexSpMX const ispmx) {
+    ddc::for_each(get_idx_range(neutrals), [&](IdxSpMomX const ispmx) {
         double const neutral_val(neutrals_init_host(ispmx));
 
         double const lx_2((x_max + x_min) / 2.);
-        CoordX coordx(ddc::coordinate(ddc::select<IDimX>(ispmx)));
+        CoordX coordx(ddc::coordinate(ddc::select<GridX>(ispmx)));
         double const neutral_val_deriv((lx_2 - coordx) * neutral_val);
         double const neutral_val_deriv2(neutral_val * ((lx_2 - coordx) * (lx_2 - coordx) - 1.));
 

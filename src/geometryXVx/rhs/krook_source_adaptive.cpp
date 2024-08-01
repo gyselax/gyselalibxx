@@ -15,8 +15,8 @@
 
 
 KrookSourceAdaptive::KrookSourceAdaptive(
-        IDomainX const& gridx,
-        IDomainVx const& gridvx,
+        IdxRangeX const& gridx,
+        IdxRangeVx const& gridvx,
         RhsType const type,
         double const extent,
         double const stiffness,
@@ -33,7 +33,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     , m_ftarget(gridvx)
 {
     // mask that defines the region where the operator is active
-    host_t<DFieldX> mask_host(gridx);
+    host_t<DFieldMemX> mask_host(gridx);
     switch (m_type) {
     case RhsType::Source:
         // the mask equals one in the interval [x_left, x_right]
@@ -44,11 +44,11 @@ KrookSourceAdaptive::KrookSourceAdaptive(
         mask_host = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Inverted, false);
         break;
     }
-    ddc::parallel_deepcopy(m_mask.span_view(), mask_host);
+    ddc::parallel_deepcopy(get_field(m_mask), mask_host);
 
     // target distribution function
-    MaxwellianEquilibrium::compute_maxwellian(m_ftarget.span_view(), m_density, m_temperature, 0.);
-    auto ftarget_host = ddc::create_mirror_view_and_copy(m_ftarget.span_view());
+    MaxwellianEquilibrium::compute_maxwellian(get_field(m_ftarget), m_density, m_temperature, 0.);
+    auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(m_ftarget));
 
     switch (m_type) {
     case RhsType::Source:
@@ -72,9 +72,10 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     }
 }
 
-void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const allfdistribu) const
+void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx const allfdistribu)
+        const
 {
-    IdxRangeSp const dom_sp(ddc::get_domain<Species>(allfdistribu));
+    IdxRangeSp const dom_sp(get_idx_range<Species>(allfdistribu));
     assert(dom_sp.size() == 2);
     assert(charge(dom_sp.front()) * charge(dom_sp.back()) < 0.);
     std::optional<IdxSp> iion_opt;
@@ -84,62 +85,62 @@ void KrookSourceAdaptive::get_amplitudes(DSpanSpX amplitudes, DViewSpXVx const a
         }
     }
     IdxSp iion(iion_opt.value());
-    IDomainVx const gridvx = allfdistribu.domain<IDimVx>();
-    DFieldVx const quadrature_coeffs_alloc(
+    IdxRangeVx const gridvx = allfdistribu.domain<GridVx>();
+    DFieldMemVx const quadrature_coeffs_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
-    auto quadrature_coeffs = quadrature_coeffs_alloc.span_view();
+    auto quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
     auto const& amplitude = m_amplitude;
     auto const& density = m_density;
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            ddc::get_domain<IDimX>(allfdistribu),
-            KOKKOS_LAMBDA(IndexX const ix) {
-                amplitudes(IndexSpX(iion, ix)) = amplitude;
+            get_idx_range<GridX>(allfdistribu),
+            KOKKOS_LAMBDA(IdxX const ix) {
+                amplitudes(IdxSpX(iion, ix)) = amplitude;
                 double density_ion = 0.;
                 double density_electron = 0.;
 
-                for (IndexVx ivx : allfdistribu.domain<IDimVx>()) {
+                for (IdxVx ivx : get_idx_range<GridVx>(allfdistribu)) {
                     density_ion += quadrature_coeffs(ivx) * allfdistribu(iion, ix, ivx);
                     density_electron += quadrature_coeffs(ivx) * allfdistribu(ielec(), ix, ivx);
                 }
-                amplitudes(IndexSpX(ielec(), ix))
+                amplitudes(IdxSpX(ielec(), ix))
                         = amplitude * (density_ion - density) / (density_electron - density);
             });
 }
 
 void KrookSourceAdaptive::get_derivative(
-        DSpanSpXVx df,
-        DViewSpXVx allfdistribu,
-        DViewSpXVx allfdistribu_start) const
+        DFieldSpXVx df,
+        DConstFieldSpXVx allfdistribu,
+        DConstFieldSpXVx allfdistribu_start) const
 {
-    IDomainSpX grid_sp_x(allfdistribu.domain<Species, IDimX>());
+    IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
 
-    DFieldSpX amplitudes_alloc(grid_sp_x);
-    auto amplitudes = amplitudes_alloc.span_view();
+    DFieldMemSpX amplitudes_alloc(grid_sp_x);
+    auto amplitudes = get_field(amplitudes_alloc);
     get_amplitudes(amplitudes, allfdistribu);
 
-    auto ftarget(m_ftarget.span_view());
-    auto mask(m_mask.span_view());
+    auto ftarget(get_field(m_ftarget));
+    auto mask(get_field(m_mask));
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            allfdistribu.domain(),
-            KOKKOS_LAMBDA(IndexSpXVx const ispxvx) {
+            get_idx_range(allfdistribu),
+            KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
                 IdxSp isp(ddc::select<Species>(ispxvx));
-                IndexX ix(ddc::select<IDimX>(ispxvx));
-                IndexVx ivx(ddc::select<IDimVx>(ispxvx));
+                IdxX ix(ddc::select<GridX>(ispxvx));
+                IdxVx ivx(ddc::select<GridVx>(ispxvx));
                 df(ispxvx) = -mask(ix) * amplitudes(isp, ix)
                              * (allfdistribu_start(ispxvx) - ftarget(ivx));
             });
 }
 
-DSpanSpXVx KrookSourceAdaptive::operator()(DSpanSpXVx const allfdistribu, double const dt) const
+DFieldSpXVx KrookSourceAdaptive::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
     Kokkos::Profiling::pushRegion("KrookSource");
-    RK2<DFieldSpXVx> timestepper(allfdistribu.domain());
+    RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
-    timestepper.update(allfdistribu, dt, [&](DSpanSpXVx df, DViewSpXVx f) {
+    timestepper.update(allfdistribu, dt, [&](DFieldSpXVx df, DConstFieldSpXVx f) {
         get_derivative(df, f, allfdistribu);
     });
     Kokkos::Profiling::popRegion();

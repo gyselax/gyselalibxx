@@ -24,16 +24,16 @@ TEST(GeometryXM, MomentsInitialization)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_size(50);
+    IdxStepX const x_size(50);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
     SplineXBuilder_1d const builder_x(meshX);
 
-    // Kinetic species domain initialization
+    // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -49,7 +49,7 @@ TEST(GeometryXM, MomentsInitialization)
     kinetic_masses(ielec) = mass_elec;
     kinetic_masses(iion) = mass_ion;
 
-    // Neutral species domain initialization
+    // Neutral species index range initialization
     IdxStepSp const nb_fluidspecies(1);
     IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
     IdxSp const ifluid = dom_fluidsp.front();
@@ -61,7 +61,7 @@ TEST(GeometryXM, MomentsInitialization)
     host_t<DFieldMemSp> fluid_masses(dom_fluidsp);
     fluid_masses(ifluid) = kinetic_masses(iion);
 
-    // Create the domain of kinetic species + fluid species
+    // Create the index range of kinetic species + fluid species
     IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
@@ -92,24 +92,24 @@ TEST(GeometryXM, MomentsInitialization)
 
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
-    // Moments domain initialization
-    IVectM const nb_fluid_moments(3);
-    IDomainM const meshM(IndexM(0), nb_fluid_moments);
-    ddc::init_discrete_space<IDimM>();
+    // Moments index range initialization
+    IdxStepMom const nb_fluid_moments(3);
+    IdxRangeMom const meshM(IdxMom(0), nb_fluid_moments);
+    ddc::init_discrete_space<GridMom>();
 
-    IndexM idensity(0);
-    IndexM iparticle_flux(1);
-    IndexM istress(2);
+    IdxMom idensity(0);
+    IdxMom iparticle_flux(1);
+    IdxMom istress(2);
 
     // Neutral species initialization
-    DFieldSpMX neutrals_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    auto neutrals = neutrals_alloc.span_view();
+    DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    auto neutrals = get_field(neutrals_alloc);
 
     double const fluid_density_init(1.);
     double const fluid_particle_flux_init(0.5);
     double const fluid_stress_init(0.9);
 
-    host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
     moments_init(ifluid, idensity) = fluid_density_init;
     moments_init(ifluid, iparticle_flux) = fluid_particle_flux_init;
     moments_init(ifluid, istress) = fluid_stress_init;
@@ -120,22 +120,22 @@ TEST(GeometryXM, MomentsInitialization)
     auto neutrals_host = ddc::create_mirror_view_and_copy(neutrals);
 
     double const tolerance(1.e-12);
-    ddc::for_each(ddc::get_domain<Species, IDimX>(neutrals), [&](IndexSpX const ispx) {
+    ddc::for_each(get_idx_range<Species, GridX>(neutrals), [&](IdxSpX const ispx) {
         IdxSp const isp(ddc::select<Species>(ispx));
-        IndexX const ix(ddc::select<IDimX>(ispx));
+        IdxX const ix(ddc::select<GridX>(ispx));
 
         // test for equality of density
-        IndexSpMX const idensity_loc(isp, idensity, ix);
+        IdxSpMomX const idensity_loc(isp, idensity, ix);
         EXPECT_LE(std::fabs(neutrals_host(idensity_loc) - fluid_density_init), tolerance);
 
         // test for equality of particle_flux
-        IndexSpMX const iparticle_flux_loc(isp, iparticle_flux, ix);
+        IdxSpMomX const iparticle_flux_loc(isp, iparticle_flux, ix);
         EXPECT_LE(
                 std::fabs(neutrals_host(iparticle_flux_loc) - fluid_particle_flux_init),
                 tolerance);
 
         // test for equality of stresses
-        IndexSpMX const istress_loc(isp, istress, ix);
+        IdxSpMomX const istress_loc(isp, istress, ix);
         EXPECT_LE(std::fabs(neutrals_host(istress_loc) - fluid_stress_init), tolerance);
     });
 }

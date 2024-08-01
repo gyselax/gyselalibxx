@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cassert>
 #include <typeinfo>
 
@@ -16,10 +15,11 @@
 #include <vector_field_span.hpp>
 
 #include "advection_domain.hpp"
+#include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 
 /**
- * @brief Define a domain for the advection.
+ * @brief Define an domain for the advection.
  *
  * The natural advection domain is the physical domain (AdvectionPhysicalDomain),
  * where the studied equation is given.
@@ -33,7 +33,7 @@
  * More details can be found in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
- * @see BslAdvectionRP
+ * @see BslAdvectionRTheta
  * @see IFootFinder
  */
 template <class Mapping>
@@ -70,15 +70,15 @@ public:
     /**
      * @brief The first dimension in the advection domain.
      */
-    using RDimX_adv = RDimX;
+    using X_adv = X;
     /**
      * @brief The second dimension in the advection domain.
      */
-    using RDimY_adv = RDimY;
+    using Y_adv = Y;
     /**
      * @brief The coordinate type associated to the dimensions in the advection domain.
      */
-    using CoordXY_adv = ddc::Coordinate<RDimX_adv, RDimY_adv>;
+    using CoordXY_adv = Coord<X_adv, Y_adv>;
 
 private:
     Mapping const& m_mapping;
@@ -104,7 +104,7 @@ public:
      * The function implemented here deals with the computation of the characteristic feet.
      * The IFootFinder class uses a time integration method to solve the characteristic
      * equation.
-     * The BslAdvectionRP class calls advect_feet to compute the characteristic feet
+     * The BslAdvectionRTheta class calls advect_feet to compute the characteristic feet
      * and interpolate the function we want to advect.
      *
      * The advect_feet implemented here computes only
@@ -130,28 +130,28 @@ public:
      *      The time step.
      */
     void advect_feet(
-            SpanRP<CoordRP> feet_coords_rp,
-            VectorDViewRP<RDimX_adv, RDimY_adv> advection_field,
+            FieldRTheta<CoordRTheta> feet_coords_rp,
+            DConstVectorFieldRTheta<X_adv, Y_adv> advection_field,
             double dt) const
     {
         using namespace ddc;
 
-        auto const rp_dom = ddc::get_domain<IDimR, IDimP>(feet_coords_rp);
-        CoordXY coord_center(m_mapping(CoordRP(0, 0)));
+        auto const rp_dom = get_idx_range<GridR, GridTheta>(feet_coords_rp);
+        CoordXY coord_center(m_mapping(CoordRTheta(0, 0)));
 
-        ddc::for_each(rp_dom, [&](IndexRP const irp) {
-            CoordRP const coord_rp(feet_coords_rp(irp));
+        ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+            CoordRTheta const coord_rp(feet_coords_rp(irp));
             CoordXY const coord_xy = m_mapping(coord_rp);
 
             CoordXY const feet_xy = coord_xy - dt * advection_field(irp);
 
             if (norm_inf(feet_xy - coord_center) < 1e-15) {
-                feet_coords_rp(irp) = CoordRP(0, 0);
+                feet_coords_rp(irp) = CoordRTheta(0, 0);
             } else {
                 feet_coords_rp(irp) = m_mapping(feet_xy);
-                ddc::select<RDimP>(feet_coords_rp(irp)) = ddcHelper::restrict_to_domain(
-                        ddc::select<RDimP>(feet_coords_rp(irp)),
-                        IDomainP(rp_dom));
+                ddc::select<Theta>(feet_coords_rp(irp)) = ddcHelper::restrict_to_idx_range(
+                        ddc::select<Theta>(feet_coords_rp(irp)),
+                        IdxRangeTheta(rp_dom));
             }
         });
     }
@@ -172,15 +172,15 @@ public:
      *      The advection field in the advection domain which is here the physical domain.
      */
     void compute_advection_field(
-            VectorDViewRP<RDimX, RDimY> advection_field,
-            VectorDSpanRP<RDimX_adv, RDimY_adv> advection_field_physical) const
+            DConstVectorFieldRTheta<X, Y> advection_field,
+            DVectorFieldRTheta<X_adv, Y_adv> advection_field_physical) const
     {
         ddc::parallel_deepcopy(
-                ddcHelper::get<RDimX_adv>(advection_field_physical),
-                ddcHelper::get<RDimX>(advection_field));
+                ddcHelper::get<X_adv>(advection_field_physical),
+                ddcHelper::get<X>(advection_field));
         ddc::parallel_deepcopy(
-                ddcHelper::get<RDimY_adv>(advection_field_physical),
-                ddcHelper::get<RDimY>(advection_field));
+                ddcHelper::get<Y_adv>(advection_field_physical),
+                ddcHelper::get<Y>(advection_field));
         ;
     }
 };
@@ -244,15 +244,15 @@ public:
     /**
      * @brief The first dimension in the advection domain.
      */
-    using RDimX_adv = DimX_pC;
+    using X_adv = DimX_pC;
     /**
      * @brief The second dimension in the advection domain.
      */
-    using RDimY_adv = DimY_pC;
+    using Y_adv = DimY_pC;
     /**
      * @brief The coordinate type associated to the dimensions in the advection domain.
      */
-    using CoordXY_adv = ddc::Coordinate<RDimX_adv, RDimY_adv>;
+    using CoordXY_adv = Coord<X_adv, Y_adv>;
 
 
 private:
@@ -285,7 +285,7 @@ public:
      * The function implemented here deals with the computation of the characteristic feet.
      * The IFootFinder class uses a time integration method to solve the characteristic
      * equation.
-     * The BslAdvectionRP class calls advect_feet to compute the characteristic feet
+     * The BslAdvectionRTheta class calls advect_feet to compute the characteristic feet
      * and interpolate the function we want to advect.
      *
      * The advect_feet implemented here computes only
@@ -311,30 +311,30 @@ public:
      *      The time step.
      */
     void advect_feet(
-            SpanRP<CoordRP> feet_coords_rp,
-            VectorDViewRP<RDimX_adv, RDimY_adv> const& advection_field,
+            FieldRTheta<CoordRTheta> feet_coords_rp,
+            DConstVectorFieldRTheta<X_adv, Y_adv> const& advection_field,
             double const dt) const
     {
-        static_assert(!std::is_same_v<Mapping, CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>);
-        auto const rp_dom = advection_field.domain();
+        static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
+        auto const rp_dom = get_idx_range(advection_field);
 
-        CircularToCartesian<RDimX_adv, RDimY_adv, RDimR, RDimP> const pseudo_Cartesian_mapping;
+        CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
         CoordXY_adv const center_xy_pseudo_cart
-                = CoordXY_adv(pseudo_Cartesian_mapping(CoordRP(0., 0.)));
+                = CoordXY_adv(pseudo_Cartesian_mapping(CoordRTheta(0., 0.)));
 
-        ddc::for_each(rp_dom, [&](IndexRP const irp) {
-            CoordRP const coord_rp(feet_coords_rp(irp));
+        ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+            CoordRTheta const coord_rp(feet_coords_rp(irp));
             CoordXY_adv const coord_xy_pseudo_cart = pseudo_Cartesian_mapping(coord_rp);
             CoordXY_adv const feet_xy_pseudo_cart
                     = coord_xy_pseudo_cart - dt * advection_field(irp);
 
             if (norm_inf(feet_xy_pseudo_cart - center_xy_pseudo_cart) < 1e-15) {
-                feet_coords_rp(irp) = CoordRP(0, 0);
+                feet_coords_rp(irp) = CoordRTheta(0, 0);
             } else {
                 feet_coords_rp(irp) = pseudo_Cartesian_mapping(feet_xy_pseudo_cart);
-                ddc::select<RDimP>(feet_coords_rp(irp)) = ddcHelper::restrict_to_domain(
-                        ddc::select<RDimP>(feet_coords_rp(irp)),
-                        IDomainP(rp_dom));
+                ddc::select<Theta>(feet_coords_rp(irp)) = ddcHelper::restrict_to_idx_range(
+                        ddc::select<Theta>(feet_coords_rp(irp)),
+                        IdxRangeTheta(rp_dom));
             }
         });
     }
@@ -354,18 +354,18 @@ public:
      *      The advection field in the advection domain which is here the pseudo-Cartesian domain.
      */
     void compute_advection_field(
-            VectorDViewRP<RDimX, RDimY> advection_field,
-            VectorDSpanRP<RDimX_adv, RDimY_adv> advection_field_pseudo_Cart) const
+            DConstVectorFieldRTheta<X, Y> advection_field,
+            DVectorFieldRTheta<X_adv, Y_adv> advection_field_pseudo_Cart) const
     {
-        static_assert(!std::is_same_v<Mapping, CircularToCartesian<RDimX, RDimY, RDimR, RDimP>>);
+        static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
 
-        IDomainRP const rp_dom = advection_field.domain();
-        CircularToCartesian<RDimX_adv, RDimY_adv, RDimR, RDimP> const pseudo_Cartesian_mapping;
+        IdxRangeRTheta const rp_dom = get_idx_range(advection_field);
+        CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
 
-        ddc::for_each(rp_dom, [&](IndexRP const irp) {
-            CoordRP const coord_rp(ddc::coordinate(irp));
-            double const r(ddc::get<RDimR>(coord_rp));
-            double const th(ddc::get<RDimP>(coord_rp));
+        ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+            CoordRTheta const coord_rp(ddc::coordinate(irp));
+            double const r(ddc::get<R>(coord_rp));
+            double const th(ddc::get<Theta>(coord_rp));
 
             Matrix2x2 J;
 
@@ -384,7 +384,7 @@ public:
                 Matrix2x2 J_0;
                 m_mapping.to_pseudo_cartesian_jacobian_center_matrix(rp_dom, J_0);
 
-                CoordRP const coord_rp_epsilon(m_epsilon, th);
+                CoordRTheta const coord_rp_epsilon(m_epsilon, th);
 
                 Matrix2x2 pseudo_Cart_J_epsilon;
                 Matrix2x2 map_J_epsilon;
@@ -410,12 +410,12 @@ public:
                 J[1][1] = (1 - r / m_epsilon) * J_0[1][1] + r / m_epsilon * J_eps[1][1];
             }
 
-            ddcHelper::get<RDimX_adv>(advection_field_pseudo_Cart)(irp)
-                    = ddcHelper::get<RDimX>(advection_field)(irp) * J[0][0]
-                      + ddcHelper::get<RDimY>(advection_field)(irp) * J[0][1];
-            ddcHelper::get<RDimY_adv>(advection_field_pseudo_Cart)(irp)
-                    = ddcHelper::get<RDimX>(advection_field)(irp) * J[1][0]
-                      + ddcHelper::get<RDimY>(advection_field)(irp) * J[1][1];
+            ddcHelper::get<X_adv>(advection_field_pseudo_Cart)(irp)
+                    = ddcHelper::get<X>(advection_field)(irp) * J[0][0]
+                      + ddcHelper::get<Y>(advection_field)(irp) * J[0][1];
+            ddcHelper::get<Y_adv>(advection_field_pseudo_Cart)(irp)
+                    = ddcHelper::get<X>(advection_field)(irp) * J[1][0]
+                      + ddcHelper::get<Y>(advection_field)(irp) * J[1][1];
         });
     }
 };

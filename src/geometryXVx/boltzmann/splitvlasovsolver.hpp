@@ -7,10 +7,10 @@
 #include "iboltzmannsolver.hpp"
 
 /**A generic class for a spatial advection*/
-template <class Geometry, class DDimX>
+template <class Geometry, class GridX>
 class IAdvectionSpatial;
 /**A generic class for a velocity advection*/
-template <class Geometry, class DDimV>
+template <class Geometry, class GridV>
 class IAdvectionVelocity;
 
 /**
@@ -25,10 +25,10 @@ class IAdvectionVelocity;
 class SplitVlasovSolver : public IBoltzmannSolver
 {
     /** Member advection operator in the x direction*/
-    IAdvectionSpatial<GeometryXVx, IDimX> const& m_advec_x;
+    IAdvectionSpatial<GeometryXVx, GridX> const& m_advec_x;
 
     /** Member advection operator in the vx direction*/
-    IAdvectionVelocity<GeometryXVx, IDimVx> const& m_advec_vx;
+    IAdvectionVelocity<GeometryXVx, GridVx> const& m_advec_vx;
 
 public:
     /**
@@ -37,8 +37,8 @@ public:
      * @param[in] advec_vx An advection operator along the vx direction.
      */
     SplitVlasovSolver(
-            IAdvectionSpatial<GeometryXVx, IDimX> const& advec_x,
-            IAdvectionVelocity<GeometryXVx, IDimVx> const& advec_vx);
+            IAdvectionSpatial<GeometryXVx, GridX> const& advec_x,
+            IAdvectionVelocity<GeometryXVx, GridVx> const& advec_vx);
 
     ~SplitVlasovSolver() override = default;
 
@@ -51,5 +51,6 @@ public:
      * @param[in] dt The timestep. 
      * @return The distribution function after solving the Vlasov equation.
      */
-    DSpanSpXVx operator()(DSpanSpXVx allfdistribu, DViewX electric_field, double dt) const override;
+    DFieldSpXVx operator()(DFieldSpXVx allfdistribu, DConstFieldX electric_field, double dt)
+            const override;
 };

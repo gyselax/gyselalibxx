@@ -31,7 +31,10 @@ RecombinationRate::RecombinationRate(double const norm_coeff_rate)
             NULL);
 }
 
-DSpanSpX RecombinationRate::operator()(DSpanSpX rate, DViewSpX density, DViewSpX temperature) const
+DFieldSpX RecombinationRate::operator()(
+        DFieldSpX rate,
+        DConstFieldSpX density,
+        DConstFieldSpX temperature) const
 {
     return detail::compute_rate_electron_density_temperature(
             Kokkos::DefaultExecutionSpace(),

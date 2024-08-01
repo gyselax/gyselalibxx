@@ -68,7 +68,7 @@ private:
     SplineXBuilder_1d const& m_spline_x_builder;
     SplineXEvaluator_1d const& m_spline_x_evaluator;
 
-    DViewVx const m_quadrature_coeffs;
+    DConstFieldVx const m_quadrature_coeffs;
 
     IdxSp find_ion(IdxRangeSp const dom_kinsp) const;
 
@@ -90,7 +90,7 @@ public:
             double const normalization_coeff,
             SplineXBuilder_1d const& spline_x_builder,
             SplineXEvaluator_1d const& spline_x_evaluator,
-            DViewVx const& quadrature_coeffs);
+            DConstFieldVx const& quadrature_coeffs);
 
     ~DiffusiveNeutralSolver() override = default;
 
@@ -107,8 +107,11 @@ public:
      *
      * @return A span referencing the neutral fluid moments passed as argument.
      */
-    DSpanSpMX operator()(DSpanSpMX neutrals, DViewSpXVx allfdistribu, DViewX efield, double dt)
-            const override;
+    DFieldSpMomX operator()(
+            DFieldSpMomX neutrals,
+            DConstFieldSpXVx allfdistribu,
+            DConstFieldX efield,
+            double dt) const override;
 
     /**
      * @brief Computes the expression of the time derivative of the neutral fluid moments. 
@@ -127,9 +130,9 @@ public:
      * @param[in] temperature The plasma temperature (for ion and electrons).
      */
     void get_derivative(
-            DSpanSpMX dn,
-            DViewSpMX n,
-            DViewSpX density,
-            DViewSpX velocity,
-            DViewSpX temperature) const;
+            DFieldSpMomX dn,
+            DConstFieldSpMomX n,
+            DConstFieldSpX density,
+            DConstFieldSpX velocity,
+            DConstFieldSpX temperature) const;
 };

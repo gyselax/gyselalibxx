@@ -17,9 +17,9 @@ SplitRightHandSideSolver::SplitRightHandSideSolver(
 {
 }
 
-DSpanSpXVx SplitRightHandSideSolver::operator()(
-        DSpanSpXVx const allfdistribu,
-        DViewX const electric_field,
+DFieldSpXVx SplitRightHandSideSolver::operator()(
+        DFieldSpXVx const allfdistribu,
+        DConstFieldX const electric_field,
         double const dt) const
 {
     for (auto rhsit = m_rhs.begin(); rhsit != m_rhs.end(); ++rhsit) {

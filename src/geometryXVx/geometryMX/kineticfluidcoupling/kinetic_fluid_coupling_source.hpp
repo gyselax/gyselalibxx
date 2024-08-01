@@ -1,9 +1,9 @@
 #pragma once
-
 #include <cmath>
 
 #include <geometry.hpp>
 
+#include "ddc_aliases.hpp"
 #include "ikineticfluidcoupling.hpp"
 #include "ireactionrate.hpp"
 
@@ -33,7 +33,7 @@ private:
     IReactionRate const& m_ionization;
     IReactionRate const& m_recombination;
     double m_normalization_coeff;
-    DViewVx const m_quadrature_coeffs;
+    DConstFieldVx const m_quadrature_coeffs;
 
 public:
     /**
@@ -54,7 +54,7 @@ public:
             IReactionRate const& ionization,
             IReactionRate const& recombination,
             double normalization_coeff,
-            DViewVx const& quadrature_coeffs);
+            DConstFieldVx const& quadrature_coeffs);
 
     ~KineticFluidCouplingSource() override = default;
 
@@ -66,16 +66,16 @@ public:
      * @param[in] dt The time step over which the collisions occur.
      *
      */
-    void operator()(DSpanSpXVx const allfdistribu, DSpanSpMX neutrals, double const dt)
+    void operator()(DFieldSpXVx const allfdistribu, DFieldSpMomX neutrals, double const dt)
             const override;
 
 public:
     /**
-    * @brief Returns the index of the ion species in the domain.
+    * @brief Returns the index of the ion species in the index range.
     *
-    * @param[in] dom_kinsp The domain of the kinetic species.
+    * @param[in] dom_kinsp The index range of the kinetic species.
     * 
-    * @return The index of the ion species in the domain.
+    * @return The index of the ion species in the index range.
     */
     IdxSp find_ion(IdxRangeSp const dom_kinsp) const;
 
@@ -90,11 +90,11 @@ public:
      * 
     */
     void get_source_term(
-            DSpanX density_source_neutral,
-            DViewSpX kinsp_density,
-            DViewSpMX neutrals,
-            DViewSpX ionization,
-            DViewSpX recombination) const;
+            DFieldX density_source_neutral,
+            DConstFieldSpX kinsp_density,
+            DConstFieldSpMomX neutrals,
+            DConstFieldSpX ionization,
+            DConstFieldSpX recombination) const;
 
     /**
      * @brief Computes dn (of neutral density) for the equation dn/dt = - density_source_neutral.
@@ -104,8 +104,10 @@ public:
      * @param[in] density_source_neutral The density source term.
      * 
     */
-    void get_derivative_neutrals(DSpanSpMX dn, DViewSpMX neutrals, DViewX density_source_neutral)
-            const;
+    void get_derivative_neutrals(
+            DFieldSpMomX dn,
+            DConstFieldSpMomX neutrals,
+            DConstFieldX density_source_neutral) const;
 
     /**
      * @brief Computes df for the equation df/dt = density_source_neutral(x) * velocity_shape_source(x,v).
@@ -116,7 +118,7 @@ public:
      *
     */
     void get_derivative_allfdistribu(
-            DSpanSpXVx df,
-            DViewSpXVx allfdistribu,
-            DViewSpXVx velocity_shape_source) const;
+            DFieldSpXVx df,
+            DConstFieldSpXVx allfdistribu,
+            DConstFieldSpXVx velocity_shape_source) const;
 };

@@ -46,11 +46,11 @@ static void TestKineticFluidCoupling()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_ncells(10);
+    IdxStepX const x_ncells(10);
 
     CoordVx const vx_min(-8);
     CoordVx const vx_max(8);
-    IVectVx const vx_ncells(20);
+    IdxStepVx const vx_ncells(20);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -60,12 +60,12 @@ static void TestKineticFluidCoupling()
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+    ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx meshVx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainXVx meshXVx(meshX, meshVx);
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
+    IdxRangeVx meshVx(SplineInterpPointsVx::get_domain<GridVx>());
+    IdxRangeXVx meshXVx(meshX, meshVx);
 
     SplineXBuilder const builder_x(meshXVx);
 #ifndef PERIODIC_RDIMX
@@ -74,7 +74,7 @@ static void TestKineticFluidCoupling()
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(meshVx);
 
-    // Kinetic species domain initialization
+    // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -90,7 +90,7 @@ static void TestKineticFluidCoupling()
     kinetic_masses(ielec) = mass_elec;
     kinetic_masses(iion) = mass_ion;
 
-    // Fluid species domain initialization
+    // Fluid species index range initialization
     IdxStepSp const nb_fluidspecies(1);
     IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
@@ -101,7 +101,7 @@ static void TestKineticFluidCoupling()
     host_t<DFieldMemSp> fluid_masses(dom_fluidsp);
     ddc::parallel_fill(fluid_masses, mass_ion);
 
-    // Create the domain of kinetic species + fluid species
+    // Create the index range of kinetic species + fluid species
     IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
@@ -133,8 +133,8 @@ static void TestKineticFluidCoupling()
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     // Initialization of kinetic species distribution function
-    DFieldSpXVx allfdistribu_alloc(IDomainSpXVx(dom_kinsp, meshX, meshVx));
-    auto allfdistribu = allfdistribu_alloc.span_view();
+    DFieldMemSpXVx allfdistribu_alloc(IdxRangeSpXVx(dom_kinsp, meshX, meshVx));
+    auto allfdistribu = get_field(allfdistribu_alloc);
 
     host_t<DFieldMemSp> kinsp_density_eq(dom_kinsp);
     host_t<DFieldMemSp> kinsp_velocity_eq(dom_kinsp);
@@ -144,8 +144,8 @@ static void TestKineticFluidCoupling()
     ddc::parallel_fill(kinsp_velocity_eq, 0.);
     ddc::parallel_fill(kinsp_temperature_eq, 1.);
 
-    DFieldSpVx allfequilibrium_alloc(IDomainSpVx(dom_kinsp, meshVx));
-    auto allfequilibrium = allfequilibrium_alloc.span_view();
+    DFieldMemSpVx allfequilibrium_alloc(IdxRangeSpVx(dom_kinsp, meshVx));
+    auto allfequilibrium = get_field(allfequilibrium_alloc);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(kinsp_density_eq),
             std::move(kinsp_temperature_eq),
@@ -161,26 +161,26 @@ static void TestKineticFluidCoupling()
             init(allfequilibrium, std::move(init_perturb_mode), std::move(init_perturb_amplitude));
     init(allfdistribu);
 
-    // Moments domain initialization
-    IVectM const nb_fluid_moments(1);
-    IDomainM const meshM(IndexM(0), nb_fluid_moments);
-    ddc::init_discrete_space<IDimM>();
+    // Moments index range initialization
+    IdxStepMom const nb_fluid_moments(1);
+    IdxRangeMom const meshM(IdxMom(0), nb_fluid_moments);
+    ddc::init_discrete_space<GridMom>();
 
     // Initialization of fluid species moments
-    DFieldSpMX fluid_moments_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    auto fluid_moments = fluid_moments_alloc.span_view();
+    DFieldMemSpMomX fluid_moments_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    auto fluid_moments = get_field(fluid_moments_alloc);
 
-    host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
     ddc::parallel_fill(moments_init, 0.);
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(fluid_moments);
 
 #ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
 #else
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_min(x_min);
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_max(x_max);
+    ddc::ConstantExtrapolationRule<X> bv_x_min(x_min);
+    ddc::ConstantExtrapolationRule<X> bv_x_max(x_max);
 #endif
 
     // Creating operators
@@ -190,27 +190,27 @@ static void TestKineticFluidCoupling()
 #endif
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    IVectVx static constexpr gwvx {0};
-    LagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET, IDimX, IDimVx> const
+    IdxStepVx static constexpr gwvx {0};
+    LagrangeInterpolator<GridVx, BCond::DIRICHLET, BCond::DIRICHLET, GridX, GridVx> const
             lagrange_vx_non_preallocatable_interpolator(3, gwvx);
     PreallocatableLagrangeInterpolator<
-            IDimVx,
+            GridVx,
             BCond::DIRICHLET,
             BCond::DIRICHLET,
-            IDimX,
-            IDimVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
+            GridX,
+            GridVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
 
-    BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
+    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(lagrange_vx_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
-                                     Kokkos::DefaultExecutionSpace>(meshVx, builder_vx_poisson));
+    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                        Kokkos::DefaultExecutionSpace>(meshVx, builder_vx_poisson));
 
-    ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
 #ifdef PERIODIC_RDIMX
-    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
+    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
 #else
     FEM1DPoissonSolver const poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
@@ -226,7 +226,7 @@ static void TestKineticFluidCoupling()
     SplineXBuilder_1d const spline_x_builder_neutrals(meshX);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    DFieldVx const quadrature_coeffs_neutrals(
+    DFieldMemVx const quadrature_coeffs_neutrals(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx));
 
     DiffusiveNeutralSolver const fluidsolver(
@@ -236,7 +236,7 @@ static void TestKineticFluidCoupling()
             normalization_coeff,
             spline_x_builder_neutrals,
             spline_x_evaluator_neutrals,
-            quadrature_coeffs_neutrals.span_cview());
+            get_const_field(quadrature_coeffs_neutrals));
 
     // kinetic fluid coupling term
     KineticFluidCouplingSource const kineticfluidcoupling(
@@ -273,16 +273,16 @@ static void TestKineticFluidCoupling()
     double const X_1
             = N * (recombination_rate - ionization_rate) / (recombination_rate + ionization_rate);
 
-    DFieldSpMX X_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    auto X = X_alloc.span_view();
-    DFieldSpMX analytical_nN_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    auto analytical_nN = analytical_nN_alloc.span_view();
+    DFieldMemSpMomX X_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    auto X = get_field(X_alloc);
+    DFieldMemSpMomX analytical_nN_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    auto analytical_nN = get_field(analytical_nN_alloc);
     double const t_diag = nb_iter * deltat;
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            X.domain(),
-            KOKKOS_LAMBDA(IndexSpMX const ispmx) {
+            get_idx_range(X),
+            KOKKOS_LAMBDA(IdxSpMomX const ispmx) {
                 X(ispmx) = Kokkos::exp(alpha * t_diag)
                                    * Kokkos::
                                            pow((beta / alpha) * (Kokkos::exp(alpha * t_diag) - 1)
@@ -294,7 +294,7 @@ static void TestKineticFluidCoupling()
 
     auto analytical_nN_host = ddc::create_mirror_view_and_copy(analytical_nN);
 
-    ddc::for_each(fluid_moments_host.domain(), [&](IndexSpMX const ispmx) {
+    ddc::for_each(get_idx_range(fluid_moments_host), [&](IdxSpMomX const ispmx) {
         EXPECT_NEAR(analytical_nN_host(ispmx), fluid_moments_host(ispmx), 1.5e-8);
     });
 

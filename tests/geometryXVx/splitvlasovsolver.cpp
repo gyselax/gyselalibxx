@@ -13,48 +13,42 @@
 #include "species_info.hpp"
 #include "splitvlasovsolver.hpp"
 
-class MockAdvectionX : public IAdvectionSpatial<GeometryXVx, IDimX>
+class MockAdvectionX : public IAdvectionSpatial<GeometryXVx, GridX>
 {
-    using DDom = typename GeometryXVx::FdistribuIdxRange;
+    using IdxRange = typename GeometryXVx::FdistribuIdxRange;
 
 public:
     MockAdvectionX() = default;
 
-    MOCK_METHOD(
-            (device_t<ddc::ChunkSpan<double, DDom>>),
-            CallOp,
-            ((device_t<ddc::ChunkSpan<double, DDom>>)allfdistribu, double dt),
-            (const));
+    MOCK_METHOD((DField<IdxRange>), CallOp, ((DField<IdxRange>)allfdistribu, double dt), (const));
 
-    device_t<ddc::ChunkSpan<double, DDom>> operator()(
-            device_t<ddc::ChunkSpan<double, DDom>> const allfdistribu,
-            double const dt) const override
+    DField<IdxRange> operator()(DField<IdxRange> const allfdistribu, double const dt) const override
     {
         return this->CallOp(allfdistribu, dt);
     }
 };
 
-class MockAdvectionVx : public IAdvectionVelocity<GeometryXVx, IDimVx>
+class MockAdvectionVx : public IAdvectionVelocity<GeometryXVx, GridVx>
 {
-    using DDom = typename GeometryXVx::FdistribuIdxRange;
-    using IDimX = typename GeometryXVx::SpatialIdxRange;
+    using IdxRange = typename GeometryXVx::FdistribuIdxRange;
+    using GridX = typename GeometryXVx::SpatialIdxRange;
 
 public:
     MockAdvectionVx() = default;
 
     MOCK_METHOD(
-            (device_t<ddc::ChunkSpan<double, DDom>>),
+            (DField<IdxRange>),
             CallOp,
             // clang-format off
-            ((device_t<ddc::ChunkSpan<double, DDom>>) allfdistribu,
-             (device_t<ddc::ChunkSpan<const double, IDimX>>) efield,
+            ((DField<IdxRange>) allfdistribu,
+             (DConstField<GridX>) efield,
              (double) dt),
             // clang-format on
             (const));
 
-    device_t<ddc::ChunkSpan<double, DDom>> operator()(
-            device_t<ddc::ChunkSpan<double, DDom>> const allfdistribu,
-            device_t<ddc::ChunkSpan<const double, IDimX>> const efield,
+    DField<IdxRange> operator()(
+            DField<IdxRange> const allfdistribu,
+            DConstField<GridX> const efield,
             double const dt) const override
     {
         return this->CallOp(allfdistribu, efield, dt);
@@ -65,10 +59,10 @@ using namespace ::testing;
 
 TEST(SplitVlasovSolver, Ordering)
 {
-    IDomainSpXVx const dom(IndexSpXVx(0, 0, 0), IVectSpXVx(0, 0, 0));
-    DFieldSpXVx fdistribu(dom);
-    DSpanSpXVx const fdistribu_s(fdistribu);
-    DFieldX const efield(ddc::select<IDimX>(dom));
+    IdxRangeSpXVx const dom(IdxSpXVx(0, 0, 0), IdxStepSpXVx(0, 0, 0));
+    DFieldMemSpXVx fdistribu(dom);
+    DFieldSpXVx const fdistribu_s(fdistribu);
+    DFieldMemX const efield(ddc::select<GridX>(dom));
     double const dt = 0.;
 
     MockAdvectionX const advec_x;

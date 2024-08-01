@@ -21,6 +21,8 @@ target_link_libraries(neutrals_${GEOMETRY_VARIANT}
         gslx::speciesinfo
         gslx::time_integration_hybrid_${GEOMETRY_VARIANT}
         gslx::io
+        gslx::utils
+
         paraconf::paraconf
         PDI::pdi
 )

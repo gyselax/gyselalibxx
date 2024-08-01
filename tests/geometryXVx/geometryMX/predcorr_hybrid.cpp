@@ -44,11 +44,11 @@ TEST(GeometryXM, PredCorrHybrid)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(1.0);
-    IVectX const x_ncells(50);
+    IdxStepX const x_ncells(50);
 
     CoordVx const vx_min(-8);
     CoordVx const vx_max(8);
-    IVectVx const vx_ncells(50);
+    IdxStepVx const vx_ncells(50);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -58,12 +58,12 @@ TEST(GeometryXM, PredCorrHybrid)
 
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_ncells);
 
-    ddc::init_discrete_space<IDimX>(SplineInterpPointsX::get_sampling<IDimX>());
-    ddc::init_discrete_space<IDimVx>(SplineInterpPointsVx::get_sampling<IDimVx>());
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+    ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
 
-    IDomainX meshX(SplineInterpPointsX::get_domain<IDimX>());
-    IDomainVx meshVx(SplineInterpPointsVx::get_domain<IDimVx>());
-    IDomainXVx meshXVx(meshX, meshVx);
+    IdxRangeX meshX(SplineInterpPointsX::get_domain<GridX>());
+    IdxRangeVx meshVx(SplineInterpPointsVx::get_domain<GridVx>());
+    IdxRangeXVx meshXVx(meshX, meshVx);
 
     SplineXBuilder const builder_x(meshXVx);
 #ifndef PERIODIC_RDIMX
@@ -72,7 +72,7 @@ TEST(GeometryXM, PredCorrHybrid)
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(meshVx);
 
-    // Kinetic species domain initialization
+    // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
     IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
 
@@ -88,7 +88,7 @@ TEST(GeometryXM, PredCorrHybrid)
     kinetic_masses(ielec) = mass_elec;
     kinetic_masses(iion) = mass_ion;
 
-    // Fluid species domain initialization
+    // Fluid species index range initialization
     IdxStepSp const nb_fluidspecies(1);
     IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
 
@@ -99,7 +99,7 @@ TEST(GeometryXM, PredCorrHybrid)
     host_t<DFieldMemSp> fluid_masses(dom_fluidsp);
     ddc::parallel_fill(fluid_masses, mass_ion);
 
-    // Create the domain of kinetic species + fluid species
+    // Create the index range of kinetic species + fluid species
     IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
@@ -131,8 +131,8 @@ TEST(GeometryXM, PredCorrHybrid)
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     // Initialization of kinetic species distribution function
-    DFieldSpXVx allfdistribu_alloc(IDomainSpXVx(dom_kinsp, meshX, meshVx));
-    auto allfdistribu = allfdistribu_alloc.span_view();
+    DFieldMemSpXVx allfdistribu_alloc(IdxRangeSpXVx(dom_kinsp, meshX, meshVx));
+    auto allfdistribu = get_field(allfdistribu_alloc);
 
     host_t<DFieldMemSp> kinsp_density_eq(dom_kinsp);
     host_t<DFieldMemSp> kinsp_velocity_eq(dom_kinsp);
@@ -142,8 +142,8 @@ TEST(GeometryXM, PredCorrHybrid)
     ddc::parallel_fill(kinsp_velocity_eq, 0.);
     ddc::parallel_fill(kinsp_temperature_eq, 1.);
 
-    DFieldSpVx allfequilibrium_alloc(IDomainSpVx(dom_kinsp, meshVx));
-    auto allfequilibrium = allfequilibrium_alloc.span_view();
+    DFieldMemSpVx allfequilibrium_alloc(IdxRangeSpVx(dom_kinsp, meshVx));
+    auto allfequilibrium = get_field(allfequilibrium_alloc);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(kinsp_density_eq),
             std::move(kinsp_temperature_eq),
@@ -159,20 +159,20 @@ TEST(GeometryXM, PredCorrHybrid)
             init(allfequilibrium, std::move(init_perturb_mode), std::move(init_perturb_amplitude));
     init(allfdistribu);
 
-    // Moments domain initialization
-    IVectM const nb_fluid_moments(3);
-    IDomainM const meshM(IndexM(0), nb_fluid_moments);
-    ddc::init_discrete_space<IDimM>();
+    // Moments index range initialization
+    IdxStepMom const nb_fluid_moments(3);
+    IdxRangeMom const meshM(IdxMom(0), nb_fluid_moments);
+    ddc::init_discrete_space<GridMom>();
 
-    IndexM idensity(0);
-    IndexM iflux(1);
-    IndexM istress(2);
+    IdxMom idensity(0);
+    IdxMom iflux(1);
+    IdxMom istress(2);
 
     // Initialization of fluid species moments
-    DFieldSpMX fluid_moments_alloc(IDomainSpMX(dom_fluidsp, meshM, meshX));
-    auto fluid_moments = fluid_moments_alloc.span_view();
+    DFieldMemSpMomX fluid_moments_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    auto fluid_moments = get_field(fluid_moments_alloc);
 
-    host_t<DFieldSpM> moments_init(IDomainSpM(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
     ddc::parallel_fill(moments_init[idensity], 1.);
     ddc::parallel_fill(moments_init[iflux], 0.);
     ddc::parallel_fill(moments_init[istress], 1.);
@@ -181,11 +181,11 @@ TEST(GeometryXM, PredCorrHybrid)
     fluid_init(fluid_moments);
 
 #ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_min;
-    ddc::PeriodicExtrapolationRule<RDimX> bv_x_max;
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
 #else
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_min(x_min);
-    ddc::ConstantExtrapolationRule<RDimX> bv_x_max(x_max);
+    ddc::ConstantExtrapolationRule<X> bv_x_min(x_min);
+    ddc::ConstantExtrapolationRule<X> bv_x_max(x_max);
 #endif
 
     // Creating operators
@@ -195,26 +195,26 @@ TEST(GeometryXM, PredCorrHybrid)
 #endif
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
 
-    IVectVx static constexpr gwvx {0};
-    LagrangeInterpolator<IDimVx, BCond::DIRICHLET, BCond::DIRICHLET, IDimX, IDimVx> const
+    IdxStepVx static constexpr gwvx {0};
+    LagrangeInterpolator<GridVx, BCond::DIRICHLET, BCond::DIRICHLET, GridX, GridVx> const
             lagrange_vx_non_preallocatable_interpolator(3, gwvx);
     PreallocatableLagrangeInterpolator<
-            IDimVx,
+            GridVx,
             BCond::DIRICHLET,
             BCond::DIRICHLET,
-            IDimX,
-            IDimVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
+            GridX,
+            GridVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
 
-    BslAdvectionSpatial<GeometryXVx, IDimX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocity<GeometryXVx, IDimVx> const advection_vx(lagrange_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
+    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(lagrange_vx_interpolator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    DFieldVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
-                                     Kokkos::DefaultExecutionSpace>(meshVx, builder_vx_poisson));
-    ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
+    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                        Kokkos::DefaultExecutionSpace>(meshVx, builder_vx_poisson));
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
 #ifdef PERIODIC_RDIMX
-    FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
+    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
 #else
     FEM1DPoissonSolver const poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
@@ -239,8 +239,8 @@ TEST(GeometryXM, PredCorrHybrid)
     PredCorr const predcorr(vlasov, poisson);
 
     // distribution function to be evolved by predcorr without fluid species
-    DFieldSpXVx allfdistribu_predcorr_alloc(allfdistribu.domain());
-    auto allfdistribu_predcorr = allfdistribu_predcorr_alloc.span_view();
+    DFieldMemSpXVx allfdistribu_predcorr_alloc(get_idx_range(allfdistribu));
+    auto allfdistribu_predcorr = get_field(allfdistribu_predcorr_alloc);
     ddc::parallel_deepcopy(allfdistribu_predcorr, allfdistribu);
 
     double const time_start(0.);
@@ -263,7 +263,7 @@ TEST(GeometryXM, PredCorrHybrid)
      * should be equal
      */
     double const tolerance(1.e-12);
-    ddc::for_each(allfdistribu.domain(), [&](IndexSpXVx const ispxvx) {
+    ddc::for_each(get_idx_range(allfdistribu), [&](IdxSpXVx const ispxvx) {
         EXPECT_LE(
                 std::fabs(allfdistribu_host(ispxvx) - allfdistribu_predcorr_host(ispxvx)),
                 tolerance);

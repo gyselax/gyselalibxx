@@ -19,6 +19,8 @@ target_link_libraries("poisson_${GEOMETRY_VARIANT}"
         gslx::pde_solvers
         gslx::quadrature
         gslx::speciesinfo
+        gslx::utils
+
 )
 
 add_library("gslx::poisson_${GEOMETRY_VARIANT}" ALIAS "poisson_${GEOMETRY_VARIANT}")
