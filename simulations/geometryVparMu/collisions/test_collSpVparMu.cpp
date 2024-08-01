@@ -93,7 +93,9 @@ int main(int argc, char** argv)
     DFieldMemMu const coeff_intdmu(
             simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
                     allfdistribu.domain<GridMu>()));
-    CollisionSpVparMu collision_operator(
+    CollisionInfo collision_info(conf_collision);
+    CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
+            collision_info,
             idxrange_spvparmu,
             get_const_field(coeff_intdmu),
             get_const_field(coeff_intdvpar),

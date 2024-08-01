@@ -106,8 +106,8 @@ void launch_tests(
         std::array<std::array<double, 2>, 5> const& TOLs)
 {
     using SplineRBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
             GridR,
             ddc::BoundCond::GREVILLE, // boundary at r=0
@@ -130,7 +130,8 @@ void launch_tests(
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
     DFieldMemRTheta const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
-            spline_quadrature_coefficients(grid, r_builder, p_builder));
+            spline_quadrature_coefficients<
+                    Kokkos::DefaultHostExecutionSpace>(grid, r_builder, p_builder));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
 
     DFieldMemRTheta test(grid);
