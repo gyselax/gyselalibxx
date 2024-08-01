@@ -15,7 +15,7 @@
 * CG Conjugate Gradient method (For symmetric positive definite matrices).
 * If the matrices structures verify CG requirements, we encourage the use of this method for its lower computation cost.
 */
-enum class MatrixBatchCsrSolver { CG, BICGSTAB };
+enum class MatrixBatchCsrSolver { CG, BICGSTAB, BATCH_CG, BATCH_BICGSTAB };
 
 /**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.
@@ -34,28 +34,36 @@ enum class MatrixBatchCsrSolver { CG, BICGSTAB };
 template <class ExecSpace, MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB>
 class MatrixBatchCsr : public MatrixBatch<ExecSpace>
 {
-    using batch_sparse_type = gko::batch::matrix::Csr<double, int>;
-
-    using solver_type = std::conditional_t<
-            Solver == MatrixBatchCsrSolver::CG,
-            gko::batch::solver::Cg<double>,
-            gko::batch::solver::Bicgstab<double>>;
-
-    using DKokkosView2D
-            = Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space>;
+public:
+    using typename MatrixBatch<ExecSpace>::BatchedRHS;
+    using MatrixBatch<ExecSpace>::size;
+    using MatrixBatch<ExecSpace>::batch_size;
 
 private:
+    using batch_sparse_type = gko::batch::matrix::Csr<double, int>;
+    using solver_type = std::conditional_t<
+            Solver == MatrixBatchCsrSolver::CG,
+            gko::solver::Cg<double>,
+            std::conditional_t<
+                    Solver == MatrixBatchCsrSolver::BICGSTAB,
+                    gko::solver::Bicgstab<double>,
+                    std::conditional_t<
+                            Solver == MatrixBatchCsrSolver::BATCH_CG,
+                            gko::batch::solver::Cg<double>,
+                            gko::batch::solver::Bicgstab<double>>>>;
+
     std::shared_ptr<batch_sparse_type> m_batch_matrix_csr;
-    std::shared_ptr<solver_type> m_solver;
-    int const m_nnz_per_system;
-    int const m_max_iter;
-    double const m_tol;
+    std::conditional_t<
+            Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB,
+            std::vector<std::shared_ptr<solver_type>>,
+            std::shared_ptr<solver_type>>
+            m_solver;
+    int m_max_iter;
+    double m_tol;
     bool m_with_logger;
     unsigned int m_preconditionner_max_block_size; // Maximum size of Jacobi-block preconditionner
 
 public:
-    using MatrixBatch<ExecSpace>::get_size;
-    using MatrixBatch<ExecSpace>::get_batch_size;
     /**
      * @brief The constructor for MatrixBatchCsr class.
      *
@@ -68,7 +76,7 @@ public:
      * @param[in] logger boolean parameter for saving log informations such residual and interations count.
      * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
      */
-    MatrixBatchCsr(
+    explicit MatrixBatchCsr(
             const int batch_size,
             const int mat_size,
             const int nnz_per_system,
@@ -77,7 +85,6 @@ public:
             std::optional<bool> logger = std::nullopt,
             std::optional<int> preconditionner_max_block_size = 1u)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
-        , m_nnz_per_system(nnz_per_system)
         , m_max_iter(max_iter.value_or(1000))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
@@ -89,7 +96,7 @@ public:
                 batch_sparse_type::
                         create(gko_exec,
                                gko::batch_dim<2>(batch_size, gko::dim<2>(mat_size, mat_size)),
-                               m_nnz_per_system));
+                               nnz_per_system));
     }
 
     /**
@@ -109,7 +116,7 @@ public:
      * @param[in] logger bolean parameter to save logger information. Default value false.
      * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
      */
-    MatrixBatchCsr(
+    explicit MatrixBatchCsr(
             Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace> batch_values,
             Kokkos::View<int*, Kokkos::LayoutRight, ExecSpace> cols_idx,
             Kokkos::View<int*, Kokkos::LayoutRight, ExecSpace> nnz_per_row,
@@ -118,7 +125,6 @@ public:
             std::optional<bool> logger = std::nullopt,
             std::optional<int> preconditionner_max_block_size = 1u)
         : MatrixBatch<ExecSpace>(batch_values.extent(0), nnz_per_row.size() - 1)
-        , m_nnz_per_system(cols_idx.extent(0))
         , m_max_iter(max_iter.value_or(1000))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
@@ -129,8 +135,7 @@ public:
         m_batch_matrix_csr = gko::share(
                 batch_sparse_type::
                         create(gko_exec,
-                               gko::batch_dim<
-                                       2>(get_batch_size(), gko::dim<2>(get_size(), get_size())),
+                               gko::batch_dim<2>(batch_size(), gko::dim<2>(size(), size())),
                                std::move(gko::array<double>::
                                                  view(gko_exec,
                                                       batch_values.span(),
@@ -162,66 +167,141 @@ public:
         double* vals_buffer = m_batch_matrix_csr->get_values();
 
         Kokkos::View<int*, Kokkos::LayoutRight, ExecSpace>
-                col_idx_view_buffer(idx_buffer, m_nnz_per_system);
+                col_idx_view_buffer(idx_buffer, m_batch_matrix_csr->get_num_elements_per_item());
         Kokkos::View<int*, Kokkos::LayoutRight, ExecSpace>
-                nnz_per_row_view_buffer(nnz_per_row_buffer, get_size() + 1);
-        Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace>
-                vals_view_buffer(vals_buffer, get_batch_size(), m_nnz_per_system);
+                nnz_per_row_view_buffer(nnz_per_row_buffer, size() + 1);
+        Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace> vals_view_buffer(
+                vals_buffer,
+                batch_size(),
+                m_batch_matrix_csr->get_num_elements_per_item());
 
         return {vals_view_buffer, col_idx_view_buffer, nnz_per_row_view_buffer};
     }
 
     /**
-     * @brief function used to set-up the Ginkgo solver. It uses the batch of matrices to
-     *        generate a batched Jacobi preconditioner. Other parameters like number of iterations and tolerance
-     *        are also used to generate the linear solver structure.
+     * @brief Perform a pre-process operation on the solver. Must be called after filling the matrix.
+     *
+     * It uses the batch of matrices to generate a batched Jacobi preconditioner. Other parameters like maximum number
+     * of iterations and tolerance are also used to instantiate a Ginkgo solver.
+     *
+     * The stopping criterion is a reduction factor ||Ax-b||/||b||<tol with max_iter maximum iterations.
      */
-    void factorize() final
+    void setup_solver() final
     {
         std::shared_ptr const gko_exec = m_batch_matrix_csr->get_executor();
-        std::shared_ptr precond = gko::batch::preconditioner::Jacobi<double, int>::build()
-                                          .with_max_block_size(m_preconditionner_max_block_size)
-                                          .on(gko_exec);
 
-        std::shared_ptr solver_factory = solver_type::build()
-                                                 .with_max_iterations(m_max_iter)
-                                                 .with_tolerance(m_tol)
-                                                 .with_preconditioner(precond)
-                                                 .on(gko_exec);
-        m_solver = solver_factory->generate(m_batch_matrix_csr);
+        if constexpr (
+                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
+            // Create the solver factory
+            std::shared_ptr const residual_criterion
+                    = gko::stop::ResidualNorm<double>::build().with_reduction_factor(m_tol).on(
+                            gko_exec);
+
+            std::shared_ptr const iterations_criterion
+                    = gko::stop::Iteration::build().with_max_iters(m_max_iter).on(gko_exec);
+
+            std::shared_ptr const preconditioner
+                    = gko::preconditioner::Jacobi<double>::build()
+                              .with_max_block_size(m_preconditionner_max_block_size)
+                              .on(gko_exec);
+
+            std::unique_ptr const solver_factory
+                    = solver_type::build()
+                              .with_preconditioner(preconditioner)
+                              .with_criteria(residual_criterion, iterations_criterion)
+                              .on(gko_exec);
+
+            // Create the solvers
+            for (int i = 0; i < batch_size(); i++) {
+                m_solver.emplace_back(solver_factory->generate(
+                        m_batch_matrix_csr->create_const_view_for_item(i)));
+            }
+        } else {
+            // Create the solver factory
+            std::shared_ptr const preconditioner
+                    = gko::batch::preconditioner::Jacobi<double, int>::build()
+                              .with_max_block_size(m_preconditionner_max_block_size)
+                              .on(gko_exec);
+
+            std::shared_ptr solver_factory = solver_type::build()
+                                                     .with_max_iterations(m_max_iter)
+                                                     .with_tolerance(m_tol)
+                                                     .with_preconditioner(preconditioner)
+                                                     .on(gko_exec);
+
+            // Create the solver
+            m_solver = solver_factory->generate(m_batch_matrix_csr);
+        }
         gko_exec->synchronize();
     }
 
     /**
-     * @brief A function which solves the collection of linear problems.
-     * @param[inout] rhs_view 2d Kokkos view which stores the right hand side, 
-     * @return  The computation result, stored in rhs_view.
+     * @brief Solve the batched linear problem Ax=b.
+     *
+     * @param[in, out] b A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solutions.
      */
-    DKokkosView2D solve_inplace(DKokkosView2D rhs_view) const final
+    void solve(BatchedRHS const b) const final
     {
-        std::shared_ptr const gko_exec = m_solver->get_executor();
-        DKokkosView2D x_view("x_view", get_batch_size(), get_size());
+        BatchedRHS x_view("x_view", batch_size(), size());
+        Kokkos::deep_copy(x_view, b);
 
-        // Create a logger to obtain the iteration counts and "implicit" residual norms for every system after the solve.
-        std::shared_ptr<const gko::batch::log::BatchConvergence<double>> logger
-                = gko::batch::log::BatchConvergence<double>::create();
-        m_solver->add_logger(logger);
-        gko_exec->synchronize();
+        if constexpr (
+                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
+            for (int i = 0; i < batch_size(); i++) {
+                std::shared_ptr const gko_exec = m_solver[i]->get_executor();
 
-        Kokkos::deep_copy(x_view, rhs_view);
-        m_solver
-                ->apply(to_gko_multivector(gko_exec, rhs_view),
-                        to_gko_multivector(gko_exec, x_view));
-        m_solver->remove_logger(logger);
-        // save logger data
-        if (m_with_logger) {
-            save_logger(m_batch_matrix_csr, x_view, rhs_view, logger, m_tol, "csr");
+                // Create a logger to obtain the iteration counts and "implicit" residual norms for every system after the solve.
+                std::shared_ptr const logger = gko::log::Convergence<double>::create();
+
+                // Solve & log
+                m_solver[i]->add_logger(logger);
+                m_solver[i]
+                        ->apply(to_gko_multivector(gko_exec, b)->create_const_view_for_item(i),
+                                to_gko_multivector(gko_exec, x_view)->create_view_for_item(i));
+                m_solver[i]->remove_logger(logger);
+
+                // Check convergency
+                if (!logger->has_converged()) {
+                    throw std::runtime_error("Ginkgo did not converge in MatrixBatchCsr");
+                }
+
+                // save logger data
+                if (m_with_logger) {
+                    std::fstream log_file("csr_log.txt", std::ios::out | std::ios::app);
+                    save_logger(
+                            log_file,
+                            i,
+                            m_batch_matrix_csr->create_const_view_for_item(i),
+                            Kokkos::subview(x_view, i, Kokkos::ALL),
+                            Kokkos::subview(b, i, Kokkos::ALL),
+                            logger,
+                            m_tol);
+                    log_file.close();
+                }
+            }
+        } else {
+            std::shared_ptr const gko_exec = m_solver->get_executor();
+
+            // Create a logger to obtain the iteration counts and "implicit" residual norms for every system after the solve.
+            std::shared_ptr const logger = gko::batch::log::BatchConvergence<double>::create();
+
+            // Solve & log
+            m_solver->add_logger(logger);
+            m_solver->apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x_view));
+            m_solver->remove_logger(logger);
+
+            // Check convergency
+            check_conv(batch_size(), m_tol, gko_exec, logger);
+
+            // Save logger data
+            if (m_with_logger) {
+                std::fstream log_file("csr_log.txt", std::ios::out | std::ios::app);
+                save_logger(log_file, m_batch_matrix_csr, x_view, b, logger, m_tol);
+                log_file.close();
+            }
         }
-        //check convergence
-        check_conv(get_batch_size(), m_tol, gko_exec, logger);
 
-        Kokkos::deep_copy(rhs_view, x_view);
-        return rhs_view;
+        Kokkos::deep_copy(b, x_view);
     }
 
     /**
@@ -231,13 +311,15 @@ public:
      */
     double norm(int batch_idx) const
     {
-        int const tmp_mat_size = get_size();
-        int const tmp_batch_size = get_batch_size();
+        int const tmp_mat_size = size();
+        int const tmp_batch_size = batch_size();
         double result = 0.;
         double* vals_proxy = m_batch_matrix_csr->get_values();
         int* row_ptr_proxy = m_batch_matrix_csr->get_row_ptrs();
-        Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space>
-                vals_view(vals_proxy, tmp_batch_size, m_nnz_per_system);
+        Kokkos::View<double**, Kokkos::LayoutRight, typename ExecSpace::memory_space> vals_view(
+                vals_proxy,
+                tmp_batch_size,
+                m_batch_matrix_csr->get_num_elements_per_item());
         Kokkos::View<int*, Kokkos::LayoutRight, typename ExecSpace::memory_space>
                 row_ptr_view(row_ptr_proxy, tmp_mat_size + 1);
 
@@ -275,8 +357,8 @@ void convert_coo_to_csr(
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> row_coo_host,
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> col_coo_host)
 {
-    int const mat_size = matrix->get_size();
-    int const batch_size = matrix->get_batch_size();
+    int const mat_size = matrix->size();
+    int const batch_size = matrix->batch_size();
     int const non_zero_per_system = vals_coo_host.extent(0) / batch_size;
 
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>

@@ -46,8 +46,8 @@ TEST(MatrixBatchEllFixture, Init)
     Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace>
             idx_view(col_idxs, mat_size, non_zero_per_col);
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 0.001);
-    ASSERT_EQ(test_instance.get_batch_size(), batch_size);
-    ASSERT_EQ(test_instance.get_size(), mat_size);
+    ASSERT_EQ(test_instance.batch_size(), batch_size);
+    ASSERT_EQ(test_instance.size(), mat_size);
 }
 
 
@@ -70,7 +70,7 @@ TEST(MatrixBatchEllFixture, SetGetElement)
     Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace>
             idx_view(col_idx, mat_size, non_zero_per_col);
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-8);
-    auto [idx, vals] = test_instance.get_batch_idx_and_vals();
+    auto [idx, vals] = test_instance.get_batch_ell();
 
     test_instance.set_ell_element(0, 3, 0, 42);
     ASSERT_EQ(test_instance.get_ell_element(0, 3, 0), 42);
@@ -102,7 +102,7 @@ TEST(MatrixBatchEllFixture, GetIdxAndVals)
     Kokkos::deep_copy(idx_view, idx_host);
     Kokkos::deep_copy(values_view, values_host);
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-8);
-    auto [idx, vals] = test_instance.get_batch_idx_and_vals();
+    auto [idx, vals] = test_instance.get_batch_ell();
 
     Kokkos::deep_copy(idx_host, idx);
     Kokkos::deep_copy(values_host, vals);
@@ -158,8 +158,8 @@ TEST(MatrixBatchEllFixture, SolveDiagonal)
     Kokkos::deep_copy(res_view, res_host);
 
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-6);
-    test_instance.factorize();
-    test_instance.solve_inplace(res_view);
+    test_instance.setup_solver();
+    test_instance.solve(res_view);
 
     Kokkos::deep_copy(res_host, res_view);
     ASSERT_EQ(res_host(0, 0), 0.);
@@ -239,8 +239,8 @@ TEST(MatrixBatchEllFixture, SolveSparse)
     Kokkos::deep_copy(values_view, values_host);
     Kokkos::deep_copy(res_view, 1.);
     MatrixBatchEll<Kokkos::DefaultExecutionSpace> test_instance(idx_view, values_view, 1000, 1e-12);
-    test_instance.factorize();
-    test_instance.solve_inplace(res_view);
+    test_instance.setup_solver();
+    test_instance.solve(res_view);
     ASSERT_EQ(test_instance.norm(0), 7);
     Kokkos::deep_copy(res_host, res_view);
     ASSERT_FLOAT_EQ(res_host(0, 0), solution[0]);
