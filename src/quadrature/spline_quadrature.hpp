@@ -93,8 +93,9 @@ host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */
-template <class... DDims, class... SplineBuilders>
-device_t<FieldMem<double, IdxRange<DDims...>>> spline_quadrature_coefficients(
+template <class ExecSpace, class... DDims, class... SplineBuilders>
+FieldMem<double, IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+spline_quadrature_coefficients(
         IdxRange<DDims...> const& idx_range,
         SplineBuilders const&... builders)
 {
@@ -108,8 +109,12 @@ device_t<FieldMem<double, IdxRange<DDims...>>> spline_quadrature_coefficients(
 
     // Allocate ND coefficients
     host_t<FieldMem<double, IdxRange<DDims...>>> coefficients_host(idx_range);
-    device_t<FieldMem<double, IdxRange<DDims...>>> coefficients(idx_range);
 
+    FieldMem<
+            double,
+            IdxRange<DDims...>,
+            ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients(idx_range);
     ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)

@@ -64,7 +64,8 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     SplineXBuilder const builder_x(gridx);
 
-    DFieldMemX const quadrature_coeffs(spline_quadrature_coefficients(gridx, builder_x));
+    DFieldMemX const quadrature_coeffs(
+            spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx, builder_x));
     Quadrature const integrate(get_const_field(quadrature_coeffs));
 
     DFieldMemX values(gridx);
@@ -125,7 +126,8 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldMemY quadrature_coeffs = spline_quadrature_coefficients(gridy, builder_y);
+    DFieldMemY quadrature_coeffs
+            = spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy, builder_y);
     Quadrature<IdxRangeY> const integrate(get_const_field(quadrature_coeffs));
 
     DFieldMemY values_alloc(gridy);
