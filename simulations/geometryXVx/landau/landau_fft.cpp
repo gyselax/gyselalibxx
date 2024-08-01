@@ -127,8 +127,9 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
-                                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
+    DFieldMemVx const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
     ChargeDensityCalculator rhs(quadrature_coeffs.span_view());
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(mesh_x);

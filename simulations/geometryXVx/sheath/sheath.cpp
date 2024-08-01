@@ -216,8 +216,9 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
-                                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
+    DFieldMemVx const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
     ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
 #ifdef PERIODIC_RDIMX
@@ -226,7 +227,6 @@ int main(int argc, char** argv)
     FEM1DPoissonSolver poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
     QNSolver const poisson(poisson_solver, rhs);
-
 
     PredCorr const predcorr(boltzmann, poisson);
 
