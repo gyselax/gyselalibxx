@@ -40,9 +40,9 @@ private:
     using layout_2_mpi_dims = ddcHelper::
             apply_template_to_type_seq_t<MPIDim, typename Layout2::distributed_type_seq>;
     using layout_1_mpi_idx_range_type
-            = ddc::detail::convert_type_seq_to_discrete_domain<layout_1_mpi_dims>;
+            = ddc::detail::convert_type_seq_to_discrete_domain_t<layout_1_mpi_dims>;
     using layout_2_mpi_idx_range_type
-            = ddc::detail::convert_type_seq_to_discrete_domain<layout_2_mpi_dims>;
+            = ddc::detail::convert_type_seq_to_discrete_domain_t<layout_2_mpi_dims>;
 
 private:
     int m_comm_size;
@@ -228,23 +228,23 @@ public:
         // Get the index ranges of objects which will be distributed across processes
         using scatter_idx_range_type = typename OutLayout::distributed_sub_idx_range;
         // Get the index range of objects that are not distributed across processes
-        using batch_idx_range_type = ddc::detail::convert_type_seq_to_discrete_domain<batch_dims>;
+        using batch_idx_range_type = ddc::detail::convert_type_seq_to_discrete_domain_t<batch_dims>;
         using gather_mpi_idx_range_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<gather_mpi_dims>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<gather_mpi_dims>;
         using scatter_mpi_idx_range_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<scatter_mpi_dims>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<scatter_mpi_dims>;
         // Get the index range containing MPI tags which can be used to describe the function input
         using input_mpi_idx_range_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<input_mpi_idx_range_tags>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<input_mpi_idx_range_tags>;
         // Get the index range containing MPI tags which can be used to describe the function output
         using output_mpi_idx_range_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<output_mpi_idx_range_tags>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<output_mpi_idx_range_tags>;
         // Get the index range that should be used when scattering data
         using input_alltoall_idx_range_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<input_alltoall_dim_order>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<input_alltoall_dim_order>;
         // Get the index range that should be used when gathering data
         using output_alltoall_idx_range_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<output_alltoall_dim_order>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<output_alltoall_dim_order>;
 
         /*****************************************************************
          * Build index ranges

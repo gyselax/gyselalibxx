@@ -110,7 +110,7 @@ struct ExtractRDim<Field<ElementType, IdxRange, Layout, MemSpace>>
             std::is_same_v<MemSpace, Kokkos::DefaultExecutionSpace::memory_space>,
             "The radial profile should be provided on the GPU");
     static_assert(
-            (ddcHelper::type_seq_length_v<ddc::to_type_seq_t<IdxRange>>) > 1,
+            (ddc::type_seq_size_v<ddc::to_type_seq_t<IdxRange>>) > 1,
             "The radial profile should not be defined on more than 1 dimensions.");
 };
 
@@ -168,7 +168,7 @@ struct ExtractThetaDim<Field<ElementType, IdxRange, Layout, MemSpace>, GridR>
             std::is_same_v<MemSpace, Kokkos::DefaultExecutionSpace::memory_space>,
             "The poloidal profile should be provided on the GPU");
     static_assert(
-            (ddcHelper::type_seq_length_v<ddc::to_type_seq_t<IdxRange>>) > 2,
+            (ddc::type_seq_size_v<ddc::to_type_seq_t<IdxRange>>) > 2,
             "The poloidal profile should not be defined on more than 2 dimensions.");
 };
 
@@ -209,7 +209,7 @@ template <class OrderedGrids, class... ExpectedGrids>
 constexpr bool order_of_last_grids()
 {
     int n_real_dims = ((is_spoofed_dim_v<ExpectedGrids> ? 0 : 1) + ...);
-    int idx(ddcHelper::type_seq_length_v<OrderedGrids> - n_real_dims);
+    int idx(ddc::type_seq_size_v<OrderedGrids> - n_real_dims);
     return ((check_dimension_location<ExpectedGrids, OrderedGrids>(idx)) && ...);
 }
 

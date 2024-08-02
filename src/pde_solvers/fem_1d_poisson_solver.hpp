@@ -176,7 +176,7 @@ private:
     using RHSQuadTags = ddc::
             type_seq_merge_t<typename base_type::batch_tags, ddc::detail::TypeSeq<GridPDEDimQ>>;
 
-    using RHSQuadratureIdxRange = ddc::detail::convert_type_seq_to_discrete_domain<RHSQuadTags>;
+    using RHSQuadratureIdxRange = ddc::detail::convert_type_seq_to_discrete_domain_t<RHSQuadTags>;
 
     using RHSQuadratureIdx = typename RHSQuadratureIdxRange::discrete_element_type;
 
