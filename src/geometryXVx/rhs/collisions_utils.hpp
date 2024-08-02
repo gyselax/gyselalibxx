@@ -154,7 +154,7 @@ void compute_Vcoll_Tcoll(
 {
     DFieldMemVx const quadrature_coeffs_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
-                    ddc::get_domain<GridVx>(allfdistribu)));
+                    get_idx_range<GridVx>(allfdistribu)));
     DConstFieldVx const quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
     // computation of the integrands

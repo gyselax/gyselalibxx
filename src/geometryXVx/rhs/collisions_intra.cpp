@@ -263,7 +263,7 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
 
     DFieldMemVx const quadrature_coeffs_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
-                    ddc::get_domain<GridVx>(allfdistribu)));
+                    get_idx_range<GridVx>(allfdistribu)));
     auto quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     //Moments computation

@@ -38,7 +38,7 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
     DFieldMemVx quadrature_coeffs_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
-                    ddc::get_domain<GridVx>(allfdistribu)));
+                    get_idx_range<GridVx>(allfdistribu)));
     DFieldVx quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     //Moments computation

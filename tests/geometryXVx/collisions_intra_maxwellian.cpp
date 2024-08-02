@@ -189,9 +189,9 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // collision operator should not change densiy, mean_velocity and temperature
-    DFieldMemSpX density_res(ddc::get_domain<Species, GridX>(allfdistribu_host));
-    DFieldMemSpX mean_velocity_res(ddc::get_domain<Species, GridX>(allfdistribu_host));
-    DFieldMemSpX temperature_res(ddc::get_domain<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX density_res(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX mean_velocity_res(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX temperature_res(get_idx_range<Species, GridX>(allfdistribu_host));
 
     DFieldMemVx const quadrature_coeffs
             = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);

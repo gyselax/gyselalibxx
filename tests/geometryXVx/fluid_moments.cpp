@@ -96,9 +96,9 @@ TEST(Physics, FluidMoments)
     });
 
     // density and temperature
-    DFieldMemSpX density_computed(ddc::get_domain<Species, GridX>(allfdistribu_host));
-    DFieldMemSpX mean_velocity_computed(ddc::get_domain<Species, GridX>(allfdistribu_host));
-    DFieldMemSpX temperature_computed(ddc::get_domain<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX density_computed(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX mean_velocity_computed(get_idx_range<Species, GridX>(allfdistribu_host));
+    DFieldMemSpX temperature_computed(get_idx_range<Species, GridX>(allfdistribu_host));
 
     DFieldMemVx const quadrature_coeffs
             = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);

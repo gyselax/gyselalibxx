@@ -140,7 +140,8 @@ void DiffusiveNeutralSolver::get_derivative(
                 get_const_field(neutrals[IdxSpMom(isp, ineutral_density)]));
 
         // compute gradients
-        m_spline_x_evaluator.deriv(gradx_density_equilibrium_velocity[isp].span_view(),
+        m_spline_x_evaluator
+                .deriv(gradx_density_equilibrium_velocity[isp],
                        get_const_field(coords_eval),
                        get_const_field(density_equilibrium_velocity_spline_x_coeff));
 

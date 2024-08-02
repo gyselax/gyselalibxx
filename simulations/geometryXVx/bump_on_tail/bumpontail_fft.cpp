@@ -72,8 +72,8 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
-    IdxRangeX mesh_x(SplineInterpPointsX::get_domain<GridX>());
-    IdxRangeVx mesh_vx(SplineInterpPointsVx::get_domain<GridVx>());
+    IdxRangeX mesh_x(SplineInterpPointsX::get_idx_range<GridX>());
+    IdxRangeVx mesh_vx(SplineInterpPointsVx::get_idx_range<GridVx>());
     IdxRangeXVx meshXVx(mesh_x, mesh_vx);
 
     IdxRangeSp const dom_kinsp = init_species(conf_voicexx);
