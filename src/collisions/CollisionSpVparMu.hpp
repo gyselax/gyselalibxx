@@ -69,8 +69,6 @@ public:
     using IdxRangeMu = IdxRange<GridMu>;
     /// Type alias for the index range of the velocity parallel to the magnetic field.
     using IdxRangeVpar = IdxRange<GridVpar>;
-    /// Type alias for a field on a grid of species
-    using DFieldMemSp = FieldMem<double, IdxRangeSp>;
     /// Type alias for a field on a grid of radial values
     using DFieldMemR = FieldMem<double, IdxRangeR>;
     /// Type alias for a field on a grid of magnetic moments

@@ -10,6 +10,7 @@
 #include "interface.hpp"
 #include "patch.hpp"
 
+using namespace non_periodic_uniform_2d_2patches;
 
 namespace {
 class CoordinateTransformationTest : public ::testing::Test
