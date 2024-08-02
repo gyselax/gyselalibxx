@@ -102,14 +102,16 @@ double compute_error(int n_elems, Method quad_method)
     IdxStep<GridY> npoints(n_elems);
     IdxRange<GridY> gridy(lbound, npoints);
 
-    DFieldMemY quadrature_coeffs_alloc(gridy);
-    if (quad_method == Method::TRAPEZ) {
+    DFieldMemX quadrature_coeffs_alloc;
+    switch (quad_method) {
+    case Method::TRAPEZ:
         quadrature_coeffs_alloc
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, GridY>(gridy);
-    }
-    if (quad_method == Method::SIMPSON) {
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy);
+        break;
+    case Method::SIMPSON:
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, GridY>(gridy);
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridy);
+        break;
     }
 
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
