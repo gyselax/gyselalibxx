@@ -152,7 +152,7 @@ static void TestKineticFluidCoupling()
             std::move(kinsp_velocity_eq));
     init_fequilibrium(allfequilibrium);
 
-    host_t<IFieldSp> init_perturb_mode(dom_kinsp);
+    host_t<IFieldMemSp> init_perturb_mode(dom_kinsp);
     host_t<DFieldMemSp> init_perturb_amplitude(dom_kinsp);
     ddc::parallel_fill(init_perturb_mode, 1);
     ddc::parallel_fill(init_perturb_amplitude, 0.0);

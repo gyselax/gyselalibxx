@@ -82,10 +82,6 @@ using IdxSpXVx = Idx<Species, GridX, GridVx>;
 
 // Chunks, Spans and Views
 template <class ElementType>
-using FieldMemSp = FieldMem<ElementType, IdxRangeSp>;
-using DFieldMemSp = DFieldMemSp;
-
-template <class ElementType>
 using FieldMemSpXVx = FieldMem<ElementType, IdxRangeSpXVx>;
 using DFieldMemSpXVx = FieldMemSpXVx<double>;
 
