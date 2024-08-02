@@ -38,7 +38,7 @@ struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 
 using IdxStepX = IdxStep<X>;
 using IdxRangeX = IdxRange<GridX>;
-using DFieldMemX = device_t<FieldMem<double, IdxRangeX>>;
+using DFieldMemX = FieldMem<double, IdxRangeX>;
 
 
 TEST(SplineUniformQuadrature, ExactForConstantFunc)
@@ -48,8 +48,8 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
     IdxStepX const x_size(10);
 
     using SplineXBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesX,
             GridX,
             SplineXBoundary,
@@ -70,7 +70,7 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     DFieldMemX values(gridx);
 
-    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
+    ddc::parallel_fill(values, 1.0);
     double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
@@ -104,8 +104,8 @@ double compute_error(int n_elems)
     using GridY = typename ComputeErrorTraits<N>::GridY;
     auto constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
     using SplineYBuilder = ddc::SplineBuilder<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesY,
             GridY,
             SplineYBoundary,
@@ -126,12 +126,12 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    device_t<DFieldMemY> quadrature_coeffs
+    DFieldMemY quadrature_coeffs
             = spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy, builder_y);
     Quadrature<IdxRangeY> const integrate(get_const_field(quadrature_coeffs));
 
-    device_t<DFieldMemY> values_alloc(gridy);
-    device_t<DFieldY> values = get_field(values_alloc);
+    DFieldMemY values_alloc(gridy);
+    DFieldY values = get_field(values_alloc);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridy,

@@ -57,7 +57,7 @@ double constant_func_check_1d(Method quad_method)
 
     DFieldMemX values_alloc(gridx);
     device_t<Field<double, IDomXPeriod>> values = get_field(values_alloc);
-    Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
+    ddc::parallel_fill(values, 1.0);
     double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     double expected_val = x_max - x_min;
 
