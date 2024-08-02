@@ -135,23 +135,23 @@ $(document).ready(function(){initNavTree('diocotron__initialization__equilibrium
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classDiocotronDensitySolution.html#a241c1b873cf5fd34a13d79a149fa5734">  104</a></span>&#160;    <a class="code" href="classDiocotronDensitySolution.html#a241c1b873cf5fd34a13d79a149fa5734">DiocotronDensitySolution</a>(</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> W1,</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> <a class="code" href="structR1.html">R1</a>,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> <a class="code" href="structR2.html">R2</a>,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> R1,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> R2,</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> W2,</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> Q,</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordtype">int</span> <span class="keyword">const</span> l,</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> eps)</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        : m_W1(W1)</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        , m_R1(<a class="code" href="structR1.html">R1</a>)</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        , m_R2(<a class="code" href="structR2.html">R2</a>)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        , m_R1(R1)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        , m_R2(R2)</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        , m_W2(W2)</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        , m_Q(Q)</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        , m_l(l)</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        , m_eps(eps)</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        , m_omega_Re(0.)</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        , m_omega_Im(0.)</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        , m_r_bar((<a class="code" href="structR1.html">R1</a> + <a class="code" href="structR2.html">R2</a>) / 2.)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        , m_d((<a class="code" href="structR2.html">R2</a> - <a class="code" href="structR1.html">R1</a>) / 2.)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        , m_r_bar((R1 + R2) / 2.)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        , m_d((R2 - R1) / 2.)</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        , m_p(50.)</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    {</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        assert(0 &lt;= m_W1);</div>
@@ -184,8 +184,6 @@ $(document).ready(function(){initNavTree('diocotron__initialization__equilibrium
 <div class="ttc" id="aclassDiocotronDensitySolution_html_a87def8e146e4c4104e3a3d3d7d54445d"><div class="ttname"><a href="classDiocotronDensitySolution.html#a87def8e146e4c4104e3a3d3d7d54445d">DiocotronDensitySolution::initialisation</a></div><div class="ttdeci">double initialisation(Coord&lt; R, Theta &gt; const &amp;coord) const</div><div class="ttdoc">Get the initial condition of the density.</div></div>
 <div class="ttc" id="aclassDiocotronDensitySolution_html_a9615447cc5be0e3addf4f885660af89a"><div class="ttname"><a href="classDiocotronDensitySolution.html#a9615447cc5be0e3addf4f885660af89a">DiocotronDensitySolution::equilibrium</a></div><div class="ttdeci">double equilibrium(Coord&lt; R, Theta &gt; const &amp;coord) const</div><div class="ttdoc">Get the equilibrium of the density.</div></div>
 <div class="ttc" id="aclassDiocotronDensitySolution_html_a9a485619ee6cbd2ff396ae8fe2a0a1bd"><div class="ttname"><a href="classDiocotronDensitySolution.html#a9a485619ee6cbd2ff396ae8fe2a0a1bd">DiocotronDensitySolution::get_frequency</a></div><div class="ttdeci">double get_frequency() const</div><div class="ttdoc">Get the frequency of the perturbation.</div></div>
-<div class="ttc" id="astructR1_html"><div class="ttname"><a href="structR1.html">R1</a></div><div class="ttdoc">First continuous dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:22</div></div>
-<div class="ttc" id="astructR2_html"><div class="ttname"><a href="structR2.html">R2</a></div><div class="ttdoc">First continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_onion_shape_uniform.hpp:36</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

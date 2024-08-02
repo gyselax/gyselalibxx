@@ -115,21 +115,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11c84fec5577a58b0addfd13bd744117"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117">EdgeTransformation</a> (IdxRangeEdge1 const &amp;idx_range_patch_1, IdxRangeEdge2 const &amp;idx_range_patch_2)</td></tr>
 <tr class="memdesc:a11c84fec5577a58b0addfd13bd744117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>.  <a href="classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117">More...</a><br /></td></tr>
 <tr class="separator:a11c84fec5577a58b0addfd13bd744117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a338296619477cc3cdf79fb629f5f4211"><td class="memTemplParams" colspan="2">template&lt;class CurrentDim &gt; </td></tr>
-<tr class="memitem:a338296619477cc3cdf79fb629f5f4211"><td class="memTemplItemLeft" align="right" valign="top">Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentDim, EdgeDim1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt; const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a338296619477cc3cdf79fb629f5f4211">operator()</a> (Coord&lt; CurrentDim &gt; const &amp;current_coord) const</td></tr>
-<tr class="memdesc:a338296619477cc3cdf79fb629f5f4211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.  <a href="classEdgeTransformation.html#a338296619477cc3cdf79fb629f5f4211">More...</a><br /></td></tr>
-<tr class="separator:a338296619477cc3cdf79fb629f5f4211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4e3d76c60e46f6d36a8f6fc9fd8f49"><td class="memTemplParams" colspan="2">template&lt;class CurrentDim &gt; </td></tr>
+<tr class="memitem:ade4e3d76c60e46f6d36a8f6fc9fd8f49"><td class="memTemplItemLeft" align="right" valign="top">Coord&lt; std::conditional_t&lt; std::is_same_v&lt; CurrentDim, EdgeDim1 &gt;, EdgeDim2, EdgeDim1 &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#ade4e3d76c60e46f6d36a8f6fc9fd8f49">operator()</a> (Coord&lt; CurrentDim &gt; const &amp;current_coord) const</td></tr>
+<tr class="memdesc:ade4e3d76c60e46f6d36a8f6fc9fd8f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a coordinate on the edge in the dimension of the current patch to the analogous coordinate on the target patch.  <a href="classEdgeTransformation.html#ade4e3d76c60e46f6d36a8f6fc9fd8f49">More...</a><br /></td></tr>
+<tr class="separator:ade4e3d76c60e46f6d36a8f6fc9fd8f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a953cea3a043308fbce6a55438daf7376"><td class="memTemplParams" colspan="2">template&lt;class CurrentIdx &gt; </td></tr>
+<tr class="memitem:a953cea3a043308fbce6a55438daf7376"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a953cea3a043308fbce6a55438daf7376">operator()</a> (CurrentIdx const &amp;current_idx) const</td></tr>
+<tr class="memdesc:a953cea3a043308fbce6a55438daf7376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.  <a href="classEdgeTransformation.html#a953cea3a043308fbce6a55438daf7376">More...</a><br /></td></tr>
+<tr class="separator:a953cea3a043308fbce6a55438daf7376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3df119bf2d4697601126025f86fe4e85"><td class="memTemplParams" colspan="2">template&lt;class CurrentIdx &gt; </td></tr>
+<tr class="memitem:a3df119bf2d4697601126025f86fe4e85"><td class="memTemplItemLeft" align="right" valign="top">bool const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a3df119bf2d4697601126025f86fe4e85">is_match_available</a> (CurrentIdx const &amp;current_idx) const</td></tr>
+<tr class="memdesc:a3df119bf2d4697601126025f86fe4e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given index has an equivalent index on the other patch of an interface.  <a href="classEdgeTransformation.html#a3df119bf2d4697601126025f86fe4e85">More...</a><br /></td></tr>
+<tr class="separator:a3df119bf2d4697601126025f86fe4e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05254973d20aa858b71866be692df574"><td class="memTemplParams" colspan="2">template&lt;class CurrentGrid , class TargetGrid &gt; </td></tr>
+<tr class="memitem:a05254973d20aa858b71866be692df574"><td class="memTemplItemLeft" align="right" valign="top">bool const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEdgeTransformation.html#a05254973d20aa858b71866be692df574">search_for_match</a> (Idx&lt; TargetGrid &gt; &amp;target_idx, Idx&lt; CurrentGrid &gt; const &amp;current_idx) const</td></tr>
+<tr class="memdesc:a05254973d20aa858b71866be692df574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch.  <a href="classEdgeTransformation.html#a05254973d20aa858b71866be692df574">More...</a><br /></td></tr>
+<tr class="separator:a05254973d20aa858b71866be692df574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Interface&gt;<br />
 class EdgeTransformation&lt; Interface &gt;</h3>
 
 <p>Transform a coordinate or an index from one edge to the one on the other edge. </p>
-<p>According to the orientation of the interface, we compute</p><ul>
+<p>According to the orientation of the interface, we compute the equivalent coordinate</p><ul>
 <li>if True, \( \\ t \mapsto min_2 + \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) \)</li>
 <li>if False, \( \\ t \mapsto max_2 - \frac{t - min_1}{max_1 - min_1}(max_2 - min_2) \)</li>
 </ul>
 <p>where \( min_i \) and \( max_i \) are the minimum and maximum coordinates of the edge \( i \).</p>
+<p>For the indices, we look for an equivalent index corresponding to a coordinate equivalent to the coordinate of the initial index.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname"><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></td><td>The <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a> type where we want to compute the transformation. </td></tr>
@@ -185,8 +198,8 @@ template&lt;class Interface &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a338296619477cc3cdf79fb629f5f4211"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a338296619477cc3cdf79fb629f5f4211">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="ade4e3d76c60e46f6d36a8f6fc9fd8f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4e3d76c60e46f6d36a8f6fc9fd8f49">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +212,7 @@ template&lt;class CurrentDim &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Coord&lt;std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt; &gt; const <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::operator() </td>
+          <td class="memname">Coord&lt;std::conditional_t&lt;std::is_same_v&lt;CurrentDim, EdgeDim1&gt;, EdgeDim2, EdgeDim1&gt; &gt; <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">Coord&lt; CurrentDim &gt; const &amp;&#160;</td>
           <td class="paramname"><em>current_coord</em></td><td>)</td>
@@ -227,6 +240,166 @@ template&lt;class CurrentDim &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The analogous coordinate on the target patch. </dd></dl>
+
+</div>
+</div>
+<a id="a953cea3a043308fbce6a55438daf7376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a953cea3a043308fbce6a55438daf7376">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Interface &gt; </div>
+<div class="memtemplate">
+template&lt;class CurrentIdx &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">CurrentIdx const &amp;&#160;</td>
+          <td class="paramname"><em>current_idx</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transform an index on the edge in the dimension of the current patch to the analogous index on the target patch. </p>
+<p>If the grids are uniform, we can simplify the algorithm by using modulo. Otherwise, we need to check all the indices of the target grid. We suppose the coordinate transformation bijective, so we can use a dichotomy method.</p>
+<p>This method mainly calls search_for_match.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">current_idx</td><td>A index on the edge of the current patch. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CurrentIdx</td><td>The current index type of the given coordinate index.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The analogous index on the target patch. </dd></dl>
+
+</div>
+</div>
+<a id="a3df119bf2d4697601126025f86fe4e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3df119bf2d4697601126025f86fe4e85">&#9670;&nbsp;</a></span>is_match_available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Interface &gt; </div>
+<div class="memtemplate">
+template&lt;class CurrentIdx &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::is_match_available </td>
+          <td>(</td>
+          <td class="paramtype">CurrentIdx const &amp;&#160;</td>
+          <td class="paramname"><em>current_idx</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if a given index has an equivalent index on the other patch of an interface. </p>
+<p>If the grids are uniform, we can simplify the algorithm by using modulo. Otherwise, we need to check all the indices of the target grid. We suppose the coordinate transformation bijective, so we can use a dichotomy method. <br  />
+</p>
+<p>This method mainly calls search_for_match.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">current_idx</td><td>A index on the edge of the current patch. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CurrentIdx</td><td>The current index type of the given coordinate index.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean stating if there is an equivalent index. </dd></dl>
+
+</div>
+</div>
+<a id="a05254973d20aa858b71866be692df574"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05254973d20aa858b71866be692df574">&#9670;&nbsp;</a></span>search_for_match()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Interface &gt; </div>
+<div class="memtemplate">
+template&lt;class CurrentGrid , class TargetGrid &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool const <a class="el" href="classEdgeTransformation.html">EdgeTransformation</a>&lt; <a class="el" href="structInterface.html">Interface</a> &gt;::search_for_match </td>
+          <td>(</td>
+          <td class="paramtype">Idx&lt; TargetGrid &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Idx&lt; CurrentGrid &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>current_idx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if a given index has an equivalent index and transform an index on the edge in the dimension of the current patch to the analogous index on the target patch. </p>
+<p>If the grids are uniform, we can simplify the algorithm by using modulo. Otherwise, we need to check all the indices of the target grid. We suppose the coordinate transformation bijective, so we can use a dichotomy method.</p>
+<dl class="section warning"><dt>Warning</dt><dd>target_idx is always replaced by the suspected index. If there is not equivalent index, the returned index is wrong but the closest that the algorithm found.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CurrentGrid</td><td>The grid where the input index is defined. </td></tr>
+    <tr><td class="paramname">TargetGrid</td><td>The grid where the output index is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">target_idx</td><td>A index on the edge of the target patch. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">current_idx</td><td>A index on the edge of the current patch. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CurrentIdx</td><td>The current index type of the given coordinate index.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean stating if there is an equivalent index. </dd></dl>
 
 </div>
 </div>

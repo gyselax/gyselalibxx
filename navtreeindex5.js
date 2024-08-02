@@ -1,5 +1,11 @@
 var NAVTREEINDEX5 =
 {
+"dir_0b94a1bc260289a82ecb53162f2bb9d0.html":[14,0,4,1],
+"dir_115e60596e2d00727777ec90d6d12217.html":[14,0,14],
+"dir_11b58978920713630aec331a5d926557.html":[14,0,6,2,1],
+"dir_1565b715753ffeaa27b85f9d3e8ee903.html":[14,0,8,2],
+"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[14,0,7,0],
+"dir_1768338d22a236895abd99fb8317b81f.html":[14,0,12,1],
 "dir_198f4eba1c2ed3c02ad3281d01a546ac.html":[14,0,16],
 "dir_1d94e9375779727dd62c0acfd18de170.html":[14,0,6,2,3],
 "dir_21841c3627e393781c2c07b5dcb1ed74.html":[14,2],
@@ -243,11 +249,5 @@ var NAVTREEINDEX5 =
 "refined__discrete__mapping__to__cartesian_8hpp_source.html":[14,2,0,0,0,0,6],
 "restartinitialization_8hpp_source.html":[14,0,6,3,4],
 "rk2_8hpp_source.html":[14,0,17,3],
-"rk3_8hpp_source.html":[14,0,17,4],
-"rk4_8hpp_source.html":[14,0,17,5],
-"simpson__quadrature_8hpp_source.html":[14,0,15,4],
-"simulations.html":[8],
-"simulations_geometryRTheta.html":[8,0],
-"simulations_geometryRTheta_diocotron.html":[8,0,0],
-"simulations_geometryRTheta_diocotron.html#autotoc_md21":[0]
+"rk3_8hpp_source.html":[14,0,17,4]
 };

@@ -119,83 +119,87 @@ $(document).ready(function(){initNavTree('2patches__2d__non__periodic__uniform_8
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;patch.hpp&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">int</span> constexpr BSplineDegree = 3;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>non_periodic_uniform_2d_2patches {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// CONTINUOUS DIMENSIONS -------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structX1.html">   21</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structX1.html">X1</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structX1.html#a86869ec2f1a48c93d952bfd16393982d">   24</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structX1.html#a86869ec2f1a48c93d952bfd16393982d">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structY1.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structY1.html">Y1</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structY1.html#a3be037bcc8b684ce9d9c3dae3da7700c">   31</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structY1.html#a3be037bcc8b684ce9d9c3dae3da7700c">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structX2.html">   35</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structX2.html">X2</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structX2.html#aaac9cf623474f44d17db3bcaa0071cd4">   38</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structX2.html#aaac9cf623474f44d17db3bcaa0071cd4">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structY2.html">   42</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structY2.html">Y2</a></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structY2.html#aca8e9949ee9947edd995e0bc6de07ce2">   45</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structY2.html#aca8e9949ee9947edd995e0bc6de07ce2">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// GRID: points sequences ------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structGridX1.html">   51</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structGridX1.html">GridX1</a> : UniformGridBase&lt;X1&gt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structGridY1.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridY1.html">GridY1</a> : UniformGridBase&lt;Y1&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structGridX2.html">   59</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridX2.html">GridX2</a> : UniformGridBase&lt;X2&gt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structGridY2.html">   63</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridY2.html">GridY2</a> : UniformGridBase&lt;Y2&gt;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">// SPLINE DIMENSIONS -----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structBSplinesX1.html">   70</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structBSplinesX1.html">BSplinesX1</a> : ddc::UniformBSplines&lt;X1, BSplineDegree&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structBSplinesY1.html">   74</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesY1.html">BSplinesY1</a> : ddc::UniformBSplines&lt;Y1, BSplineDegree&gt;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structBSplinesX2.html">   79</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesX2.html">BSplinesX2</a> : ddc::UniformBSplines&lt;X2, BSplineDegree&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structBSplinesY2.html">   83</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesY2.html">BSplinesY2</a> : ddc::UniformBSplines&lt;Y2, BSplineDegree&gt;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">// PATCHES ---------------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span><span class="keyword">using</span> <a class="code" href="structPatch.html">Patch1</a> = <a class="code" href="structPatch.html">Patch&lt;GridX1, GridY1, BSplinesX1, BSplinesY1&gt;</a>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">using</span> <a class="code" href="structPatch.html">Patch2</a> = <a class="code" href="structPatch.html">Patch&lt;GridX2, GridY2, BSplinesX2, BSplinesY2&gt;</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">using</span> PatchOrdering = ddc::detail::TypeSeq&lt;Patch1, Patch2&gt;;</div>
-<div class="ttc" id="astructBSplinesX1_html"><div class="ttname"><a href="structBSplinesX1.html">BSplinesX1</a></div><div class="ttdoc">First spline dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:71</div></div>
-<div class="ttc" id="astructBSplinesX2_html"><div class="ttname"><a href="structBSplinesX2.html">BSplinesX2</a></div><div class="ttdoc">First spline dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:80</div></div>
-<div class="ttc" id="astructBSplinesY1_html"><div class="ttname"><a href="structBSplinesY1.html">BSplinesY1</a></div><div class="ttdoc">Second spline dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:75</div></div>
-<div class="ttc" id="astructBSplinesY2_html"><div class="ttname"><a href="structBSplinesY2.html">BSplinesY2</a></div><div class="ttdoc">Second spline dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:84</div></div>
-<div class="ttc" id="astructGridX1_html"><div class="ttname"><a href="structGridX1.html">GridX1</a></div><div class="ttdoc">Points sequence on the first logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:52</div></div>
-<div class="ttc" id="astructGridX2_html"><div class="ttname"><a href="structGridX2.html">GridX2</a></div><div class="ttdoc">Points sequence on the first logical dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:60</div></div>
-<div class="ttc" id="astructGridY1_html"><div class="ttname"><a href="structGridY1.html">GridY1</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:56</div></div>
-<div class="ttc" id="astructGridY2_html"><div class="ttname"><a href="structGridY2.html">GridY2</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:64</div></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">int</span> constexpr BSplineDegree = 3;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// CONTINUOUS DIMENSIONS -------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1X1.html">   23</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1X1.html">X1</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1X1.html#a39262442f4fa1fe061dede0d0d367a8c">   26</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structnon__periodic__uniform__2d__2patches_1_1X1.html#a39262442f4fa1fe061dede0d0d367a8c">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1Y1.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1Y1.html">Y1</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1Y1.html#a42025a2cb0e222e01447e8638ba2d80b">   33</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structnon__periodic__uniform__2d__2patches_1_1Y1.html#a42025a2cb0e222e01447e8638ba2d80b">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1X2.html">   37</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1X2.html">X2</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1X2.html#a950818029e5a197707fbd1f7cf9a91f2">   40</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structnon__periodic__uniform__2d__2patches_1_1X2.html#a950818029e5a197707fbd1f7cf9a91f2">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1Y2.html">   44</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1Y2.html">Y2</a></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1Y2.html#adfc01b4b83bd4e19d1a9c896f8a08e4e">   47</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structnon__periodic__uniform__2d__2patches_1_1Y2.html#adfc01b4b83bd4e19d1a9c896f8a08e4e">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">// GRID: points sequences ------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1GridX1.html">   53</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1GridX1.html">GridX1</a> : UniformGridBase&lt;X1&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1GridY1.html">   57</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1GridY1.html">GridY1</a> : UniformGridBase&lt;Y1&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1GridX2.html">   61</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1GridX2.html">GridX2</a> : UniformGridBase&lt;X2&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1GridY2.html">   65</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1GridY2.html">GridY2</a> : UniformGridBase&lt;Y2&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// SPLINE DIMENSIONS -----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesX1.html">   72</a></span>&#160;<span class="comment"></span><span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesX1.html">BSplinesX1</a> : ddc::UniformBSplines&lt;X1, BSplineDegree&gt;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesY1.html">   76</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesY1.html">BSplinesY1</a> : ddc::UniformBSplines&lt;Y1, BSplineDegree&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesX2.html">   81</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesX2.html">BSplinesX2</a> : ddc::UniformBSplines&lt;X2, BSplineDegree&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesY2.html">   85</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnon__periodic__uniform__2d__2patches_1_1BSplinesY2.html">BSplinesY2</a> : ddc::UniformBSplines&lt;Y2, BSplineDegree&gt;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">// PATCHES ---------------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span><span class="keyword">using</span> <a class="code" href="structPatch.html">Patch1</a> = <a class="code" href="structPatch.html">Patch&lt;GridX1, GridY1, BSplinesX1, BSplinesY1&gt;</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">using</span> <a class="code" href="structPatch.html">Patch2</a> = <a class="code" href="structPatch.html">Patch&lt;GridX2, GridY2, BSplinesX2, BSplinesY2&gt;</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">using</span> PatchOrdering = ddc::detail::TypeSeq&lt;Patch1, Patch2&gt;;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;} <span class="comment">// namespace non_periodic_uniform_2d_2patches</span></div>
 <div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:14</div></div>
-<div class="ttc" id="astructX1_html"><div class="ttname"><a href="structX1.html">X1</a></div><div class="ttdoc">First continuous dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:22</div></div>
-<div class="ttc" id="astructX1_html_a86869ec2f1a48c93d952bfd16393982d"><div class="ttname"><a href="structX1.html#a86869ec2f1a48c93d952bfd16393982d">X1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:24</div></div>
-<div class="ttc" id="astructX2_html"><div class="ttname"><a href="structX2.html">X2</a></div><div class="ttdoc">First continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:36</div></div>
-<div class="ttc" id="astructX2_html_aaac9cf623474f44d17db3bcaa0071cd4"><div class="ttname"><a href="structX2.html#aaac9cf623474f44d17db3bcaa0071cd4">X2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:38</div></div>
-<div class="ttc" id="astructY1_html"><div class="ttname"><a href="structY1.html">Y1</a></div><div class="ttdoc">Second continuous dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:29</div></div>
-<div class="ttc" id="astructY1_html_a3be037bcc8b684ce9d9c3dae3da7700c"><div class="ttname"><a href="structY1.html#a3be037bcc8b684ce9d9c3dae3da7700c">Y1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:31</div></div>
-<div class="ttc" id="astructY2_html"><div class="ttname"><a href="structY2.html">Y2</a></div><div class="ttdoc">Second continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:43</div></div>
-<div class="ttc" id="astructY2_html_aca8e9949ee9947edd995e0bc6de07ce2"><div class="ttname"><a href="structY2.html#aca8e9949ee9947edd995e0bc6de07ce2">Y2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:45</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1BSplinesX1_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1BSplinesX1.html">non_periodic_uniform_2d_2patches::BSplinesX1</a></div><div class="ttdoc">First spline dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:73</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1BSplinesX2_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1BSplinesX2.html">non_periodic_uniform_2d_2patches::BSplinesX2</a></div><div class="ttdoc">First spline dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:82</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1BSplinesY1_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1BSplinesY1.html">non_periodic_uniform_2d_2patches::BSplinesY1</a></div><div class="ttdoc">Second spline dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:77</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1BSplinesY2_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1BSplinesY2.html">non_periodic_uniform_2d_2patches::BSplinesY2</a></div><div class="ttdoc">Second spline dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:86</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1GridX1_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1GridX1.html">non_periodic_uniform_2d_2patches::GridX1</a></div><div class="ttdoc">Points sequence on the first logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:54</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1GridX2_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1GridX2.html">non_periodic_uniform_2d_2patches::GridX2</a></div><div class="ttdoc">Points sequence on the first logical dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:62</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1GridY1_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1GridY1.html">non_periodic_uniform_2d_2patches::GridY1</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:58</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1GridY2_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1GridY2.html">non_periodic_uniform_2d_2patches::GridY2</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:66</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1X1_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1X1.html">non_periodic_uniform_2d_2patches::X1</a></div><div class="ttdoc">First continuous dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:24</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1X1_html_a39262442f4fa1fe061dede0d0d367a8c"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1X1.html#a39262442f4fa1fe061dede0d0d367a8c">non_periodic_uniform_2d_2patches::X1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:26</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1X2_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1X2.html">non_periodic_uniform_2d_2patches::X2</a></div><div class="ttdoc">First continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:38</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1X2_html_a950818029e5a197707fbd1f7cf9a91f2"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1X2.html#a950818029e5a197707fbd1f7cf9a91f2">non_periodic_uniform_2d_2patches::X2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:40</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1Y1_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1Y1.html">non_periodic_uniform_2d_2patches::Y1</a></div><div class="ttdoc">Second continuous dimension of patch 1.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:31</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1Y1_html_a42025a2cb0e222e01447e8638ba2d80b"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1Y1.html#a42025a2cb0e222e01447e8638ba2d80b">non_periodic_uniform_2d_2patches::Y1::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:33</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1Y2_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1Y2.html">non_periodic_uniform_2d_2patches::Y2</a></div><div class="ttdoc">Second continuous dimension of patch 2.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:45</div></div>
+<div class="ttc" id="astructnon__periodic__uniform__2d__2patches_1_1Y2_html_adfc01b4b83bd4e19d1a9c896f8a08e4e"><div class="ttname"><a href="structnon__periodic__uniform__2d__2patches_1_1Y2.html#adfc01b4b83bd4e19d1a9c896f8a08e4e">non_periodic_uniform_2d_2patches::Y2::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition:</b> 2patches_2d_non_periodic_uniform.hpp:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -104,8 +104,8 @@ $(document).ready(function(){initNavTree('src_multipatch_connectivity.html','');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This directory defines structures and methods to describe patches and how they are connected to one another.</p>
-<h1><a class="anchor" id="src_multipatch_connectivity__Patch_tag"></a>
-Patch tag</h1>
+<h1><a class="anchor" id="src_multipatch_connectivity__Patch"></a>
+Patch</h1>
 <p>The tag <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> refers to a single 2D patch geometry. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as:</p>
 <ul>
 <li>Grids (or points sequence along one dimension) on both dimensions (<code>Grid1</code> and <code>Grid2</code>); <br  />
@@ -155,6 +155,21 @@ Sticking and Coordinate Transformation</h4>
 \[t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}). \]
 </p>
 <p>In the code, the sticking of two edges is represented by an <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure which contains tags to the first patch and the second patch as well as the boolean member <code>orientations_agree</code>. The transformation from one edge to the other is done using the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator.</p>
+<p>This operator contains an <code>operator()</code> to transform a given coordinate on a coordinate on the other patch. It has also been extended for indices.</p>
+<h4><a class="anchor" id="autotoc_md68"></a>
+Index transformation</h4>
+<p>All the patches are discretized into a finite number of points indexed by indices. So each index refers to a coordinate on a patch. For a given index on an edge of a patch at the interface, we can find an equivalent index on the other patch. This is always true for conforming meshes but not always the case for non-conforming meshes.</p>
+<p>For non-conforming meshes, the method <code>is_match_available()</code> is needed to identify if the given index has an equivalent or not. If <code>is_match_available()</code> returns true, we can then call the <code>operator()</code> to get the equivalent index on the other patch. Instead of calling both method, it is also possible to call <code>search_for_match()</code> which returns true if there is an equivalent index and updates it the given target index.</p>
+<p><b>For uniform grids</b> \(\{x_i\}_{i=0, ..., N}\) (current grid) and \(\{x_j\}_{j=0, ..., M}\) (target grid), finding an equivalent index can be done with the following steps:</p>
+<ul>
+<li>We compute the greatest common divisor of the number of cells \(N\) and \(M\) (e.g. \(\exists \ gcd \in\mathbb{N}, gcd&gt;1; \ M \wedge N = gcd\)).</li>
+<li>The current index \(k\) can have an equivalent index on the target patch.</li>
+</ul>
+<p>Depending on if \(k / p \in \mathbb{N}^*\) with \(p = \frac{N}{gcd} \in \mathbb{N}^*\), this equivalent is given by multiplying by \(\frac{M}{N}\) and adapt if the coordinate transformation is not order-preserving.</p>
+<ul>
+<li>If the greatest common divisor is \(1\), there is no equivalent index except for the first and last indices.</li>
+</ul>
+<p><b>For non-uniform grids</b>, we cannot use this algorithm. We check all the indices of the target patch if one of them fit with the current one. We can use dichotomy method for the search.</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__References"></a>
 References</h1>
 <p>[1] Buchegger, F., Jüttler, B., Mantzaflaris, A., <em>Adaptively refined multi-patch B-splines with enhanced smoothness</em>. Applied Mathematics and Computation, Volume 272, Part 1 (2016). <a href="https://www.sciencedirect.com/science/article/pii/S009630031500836X">https://www.sciencedirect.com/science/article/pii/S009630031500836X</a>.</p>
