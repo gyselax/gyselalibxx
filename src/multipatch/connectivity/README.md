@@ -2,7 +2,7 @@
 
 This directory defines structures and methods to describe patches and how they are connected to one another.
 
-## Patch tag
+## Patch
 The tag Patch refers to a single 2D patch geometry. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as: 
 
 * Grids (or points sequence along one dimension) on both dimensions (`Grid1` and `Grid2`);  
@@ -101,7 +101,45 @@ t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} 
 
 In the code, the sticking of two edges is represented by an `Interface` structure which contains tags 
 to the first patch and the second patch as well as the boolean member `orientations_agree`. 
-The transformation from one edge to the other is done using the `EdgeTransformation` operator.
+The transformation from one edge to the other is done using the `EdgeTransformation` operator. 
+
+This operator contains an `operator()` to transform a given coordinate on a coordinate on the other patch. 
+It has also been extended for indices. 
+
+#### Index transformation
+
+All the patches are discretized into a finite number of points indexed by indices. 
+So each index refers to a coordinate on a patch. 
+For a given index on an edge of a patch at the interface, we can find an equivalent 
+index on the other patch. This is always true for conforming meshes but not always the 
+case for non-conforming meshes. 
+
+For non-conforming meshes, the method `is_match_available()` is needed to identify if the given 
+index has an equivalent or not. If `is_match_available()` returns true, we can then 
+call the `operator()` to get the equivalent index on the other patch. 
+Instead of calling both method, it is also possible to call `search_for_match()` which 
+returns true if there is an equivalent index and updates it the given target index. 
+
+**For uniform grids** $`\{x_i\}_{i=0, ..., N}`$ (current grid)  and $`\{x_j\}_{j=0, ..., M}`$ (target grid), 
+finding an equivalent index can be done with the following steps:
+
+* We compute the greatest common divisor of the number of cells $`N`$ and $`M`$ 
+(e.g. $`\exists \ gcd \in\mathbb{N}, gcd>1; \ M \wedge N = gcd`$).
+
+* The current index $`k`$ can have an equivalent index on the target patch. 
+
+Depending on if $`k / p \in \mathbb{N}^*`$ with $`p = \frac{N}{gcd} \in \mathbb{N}^*`$,
+this equivalent is given by multiplying by $`\frac{M}{N}`$ and adapt if the coordinate transformation is not order-preserving. 
+
+* If the greatest common divisor is $`1`$, there is no equivalent index except for the first and last indices. 
+
+
+
+**For non-uniform grids**, we cannot use this algorithm. We check all the indices of the target patch if 
+one of them fit with the current one. 
+We can use dichotomy method for the search. 
+
+
 
 ## References
 [1] Buchegger, F., Jüttler, B., Mantzaflaris, A., 

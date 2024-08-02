@@ -7,7 +7,7 @@
 
 SingleModePerturbInitialization::SingleModePerturbInitialization(
         DConstFieldSpVx fequilibrium,
-        host_t<IFieldSp> init_perturb_mode,
+        host_t<IFieldMemSp> init_perturb_mode,
         host_t<DFieldMemSp> init_perturb_amplitude)
     : m_fequilibrium(fequilibrium)
     , m_init_perturb_mode(std::move(init_perturb_mode))
@@ -55,7 +55,7 @@ SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input
         IdxRangeSp dom_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<IFieldSp> init_perturb_mode(dom_kinsp);
+    host_t<IFieldMemSp> init_perturb_mode(dom_kinsp);
     host_t<DFieldMemSp> init_perturb_amplitude(dom_kinsp);
 
     for (IdxSp const isp : dom_kinsp) {
