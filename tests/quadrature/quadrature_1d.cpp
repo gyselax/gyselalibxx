@@ -43,16 +43,19 @@ double constant_func_check_1d(Method quad_method)
     IdxStep<GridXPeriod> npoints(x_size);
     IdxRange<GridXPeriod> gridx(lbound, npoints);
 
-    DFieldMemX quadrature_coeffs_alloc(gridx);
-    if (quad_method == Method::TRAPEZ) {
+    DFieldMemX quadrature_coeffs_alloc;
+    switch (quad_method) {
+    case Method::TRAPEZ:
         quadrature_coeffs_alloc
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
-    }
-    if (quad_method == Method::SIMPSON) {
+        break;
+
+    case Method::SIMPSON:
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
+        break;
     }
-
+    
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
 
     DFieldMemX values_alloc(gridx);
