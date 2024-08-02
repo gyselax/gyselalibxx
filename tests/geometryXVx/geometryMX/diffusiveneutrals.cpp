@@ -138,7 +138,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
 
     DFieldMemVx quadrature_coeffs_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx));
-    ddc::ChunkSpan const quadrature_coeffs = get_field(quadrature_coeffs_alloc);
+    DFieldVx const quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     DiffusiveNeutralSolver const neutralsolver(
             charge_exchange,
