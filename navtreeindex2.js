@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classEdgeTransformation.html#a338296619477cc3cdf79fb629f5f4211":[13,73,2],
 "classEdgeTransformation.html#a91afccef9c7c3d5767a08ed75e05adef":[13,73,1],
 "classElectrostaticalPotentialSimulation.html":[13,74],
 "classElectrostaticalPotentialSimulation.html#a150cdef92eaaa9333e84de31bcd69b86":[13,74,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX2 =
 "classMPILayout.html#a95fcbbdda15d02011249c7d6e2848a5f":[13,168,5],
 "classMPILayout.html#ab4f189220fff2a19af86cfcf8132419e":[13,168,2],
 "classMPILayout.html#ac4ea3f401285e400bfae8a1b963abb56":[13,168,3],
-"classMPITransposeAllToAll.html":[13,169]
+"classMPITransposeAllToAll.html":[13,169],
+"classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a":[13,169,3]
 };

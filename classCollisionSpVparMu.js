@@ -5,7 +5,6 @@ var classCollisionSpVparMu =
     [ "IdxRangeSpThetaRVpar", "classCollisionSpVparMu.html#a7b46d43ec25e05bbc279831800fdb0a3", null ],
     [ "IdxRangeMu", "classCollisionSpVparMu.html#a9ffb70ca497a6fada1c31f4fe524355b", null ],
     [ "IdxRangeVpar", "classCollisionSpVparMu.html#a4a306b9be83e564c6a078d3103cb701d", null ],
-    [ "DFieldMemSp", "classCollisionSpVparMu.html#af4de61a1f2d04330eee1d399ecea6cfa", null ],
     [ "DFieldMemR", "classCollisionSpVparMu.html#ae9f23e54d53f2141b06a60e634f01de4", null ],
     [ "DFieldMemMu", "classCollisionSpVparMu.html#a084148066e0a76acc57795ed6dd86dac", null ],
     [ "DFieldMemVpar", "classCollisionSpVparMu.html#a486cc20292411446f4ec1218bf307d89", null ],

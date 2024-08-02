@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['compute_5fnorms_2ehpp_1080',['compute_norms.hpp',['../compute__norms_8hpp.html',1,'']]]
+  ['compute_5fnorms_2ehpp_1079',['compute_norms.hpp',['../compute__norms_8hpp.html',1,'']]]
 ];

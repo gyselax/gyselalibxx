@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim":[13,187,5],
 "classPreallocatableLagrangeInterpolator.html":[13,191],
 "classPreallocatableLagrangeInterpolator.html#a388bacd998c3914067d0b0869d49f38c":[13,191,2],
 "classPreallocatableLagrangeInterpolator.html#a89d9c3223de02ee3ca1034da54134e09":[13,191,1],
@@ -34,8 +33,8 @@ var NAVTREEINDEX4 =
 "classQNSolver.html#a866ea0a8cd34e7789d8847aaf963fdf2":[13,197,4],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[13,197,0],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[13,197,2],
-"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,197,3],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,197,1],
+"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[13,197,3],
 "classQuadrature.html":[13,198],
 "classQuadrature.html#a2b67590831fc07948151ca0094a252c7":[13,198,2],
 "classQuadrature.html#a8a648c66e4caed6c0866269d59cbc5ef":[13,198,1],
@@ -110,11 +109,11 @@ var NAVTREEINDEX4 =
 "classRotationSimulation.html":[13,209],
 "classRotationSimulation.html#a24cab55207f4b65feffd1255545b92dd":[13,209,0],
 "classSingleModePerturbInitialization.html":[13,210],
-"classSingleModePerturbInitialization.html#a0862e1654d1bf0168b0979b2abce414e":[13,210,0],
 "classSingleModePerturbInitialization.html#a15387a7189e36d23965cbb2595a8ce8c":[13,210,6],
-"classSingleModePerturbInitialization.html#a1c4a5ae3efa7daff0297fb67e2784f6e":[13,210,2],
-"classSingleModePerturbInitialization.html#a543dcd83b62baaceb48d54a2cab09e83":[13,210,3],
+"classSingleModePerturbInitialization.html#a49e29d0f5b2005da7b1b71bafcd63e69":[13,210,2],
+"classSingleModePerturbInitialization.html#a53ca3f65b528117d31bb9880f07a8fde":[13,210,0],
 "classSingleModePerturbInitialization.html#a543dcd83b62baaceb48d54a2cab09e83":[13,210,1],
+"classSingleModePerturbInitialization.html#a543dcd83b62baaceb48d54a2cab09e83":[13,210,3],
 "classSingleModePerturbInitialization.html#a61e6fb88a3b58a97d55b07577e5ef1e4":[13,210,4],
 "classSingleModePerturbInitialization.html#a6fe8be7de3eefd844b3f15e7d50b1707":[13,210,5],
 "classSingleModePerturbInitialization.html#abcef02302c35de979ca2d34d5f4b5b8f":[13,210,7],
@@ -122,10 +121,10 @@ var NAVTREEINDEX4 =
 "classSpeciesInformation.html#af77dd55f79155df4dab9bf490d900a07":[13,212,1],
 "classSpeciesInformation_1_1Impl.html":[13,212,0],
 "classSpeciesInformation_1_1Impl.html#a1b646bde625f303eb58abfd02bfa9b4d":[13,212,0,6],
-"classSpeciesInformation_1_1Impl.html#a7369ff9276253d2376fde3f241eba6a0":[13,212,0,2],
 "classSpeciesInformation_1_1Impl.html#a9db19ad040ca32c4bcd51b6aedd776c3":[13,212,0,1],
 "classSpeciesInformation_1_1Impl.html#aa89c8b5db4b1bb25e001ead86f921e82":[13,212,0,0],
 "classSpeciesInformation_1_1Impl.html#ac70d3fcf55a5c234a7b405fb1061f644":[13,212,0,7],
+"classSpeciesInformation_1_1Impl.html#ac94bc0ed950b46ac929fd0e68fad9597":[13,212,0,2],
 "classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5":[13,212,0,4],
 "classSpeciesInformation_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56":[13,212,0,8],
 "classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70":[13,212,0,5],
@@ -249,5 +248,6 @@ var NAVTREEINDEX4 =
 "dir_115e60596e2d00727777ec90d6d12217.html":[14,0,14],
 "dir_11b58978920713630aec331a5d926557.html":[14,0,6,2,1],
 "dir_1565b715753ffeaa27b85f9d3e8ee903.html":[14,0,8,2],
-"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[14,0,7,0]
+"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[14,0,7,0],
+"dir_1768338d22a236895abd99fb8317b81f.html":[14,0,12,1]
 };
