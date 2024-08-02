@@ -49,7 +49,8 @@ quadrature_coeffs_nd(
             IdxRange<DDims...>,
             ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             coefficients_alloc(idx_range);
-    DField<IdxRange<DDims...>> coefficients(get_field(coefficients_alloc));
+    DField<IdxRange<DDims...>, std::experimental::layout_right, typename ExecSpace::memory_space>
+            coefficients(get_field(coefficients_alloc));
     // Get coefficients for each dimension
     std::tuple<CoefficientFieldMem1D<ExecSpace, DDims>...> current_dim_coeffs_alloc(
             funcs(ddc::select<DDims>(idx_range))...);

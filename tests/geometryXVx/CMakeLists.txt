@@ -29,8 +29,8 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         gslx::moments
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::quadrature
-     
-       
+        gslx::time_integration_${GEOMETRY_VARIANT}
+        gslx::utils_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
