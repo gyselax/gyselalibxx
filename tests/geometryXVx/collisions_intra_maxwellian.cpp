@@ -195,7 +195,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     DFieldMemVx const quadrature_coeffs
             = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
-    Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate(quadrature_coeffs.span_cview());
+    Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate(get_const_field(quadrature_coeffs));
 
     FluidMoments moments(integrate);
 

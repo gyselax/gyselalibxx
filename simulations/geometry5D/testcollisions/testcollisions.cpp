@@ -220,10 +220,10 @@ int main(int argc, char** argv)
 
     DFieldMemVpar const coeff_intdvpar
             = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-                    allfdistribu.domain<GridVpar>());
+                    get_idx_range<GridVpar>(allfdistribu));
     DFieldMemMu const coeff_intdmu
             = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-                    allfdistribu.domain<GridMu>());
+                    get_idx_range<GridMu>(allfdistribu));
 
     CollisionInfoRadial<GridTor1> collision_info(
             nustar0_rpeak,

@@ -132,7 +132,7 @@ int main(int argc, char** argv)
     DFieldMemVx const quadrature_coeffs(
             neumann_spline_quadrature_coefficients<
                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
-    ChargeDensityCalculator rhs(quadrature_coeffs.span_cview());
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
     FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
     QNSolver const poisson(fem_solver, rhs);
 

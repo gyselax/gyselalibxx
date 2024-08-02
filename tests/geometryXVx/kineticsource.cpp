@@ -51,8 +51,8 @@ TEST(KineticSource, Moments)
             = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
     host_t<DFieldMemVx> quadrature_coeffs_vx
             = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridvx);
-    host_t<Quadrature<IdxRangeX>> const integrate_x(quadrature_coeffs_x.span_cview());
-    host_t<Quadrature<IdxRangeVx>> const integrate_v(quadrature_coeffs_vx.span_cview());
+    host_t<Quadrature<IdxRangeX>> const integrate_x(get_const_field(quadrature_coeffs_x));
+    host_t<Quadrature<IdxRangeVx>> const integrate_v(get_const_field(quadrature_coeffs_vx));
 
     host_t<DFieldMemSp> charges(dom_sp);
     charges(my_ielec) = -1.;

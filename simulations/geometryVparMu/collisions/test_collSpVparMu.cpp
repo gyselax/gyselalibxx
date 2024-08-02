@@ -89,11 +89,11 @@ int main(int argc, char** argv)
     // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
     DFieldMemVpar const coeff_intdvpar(
             simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-                    allfdistribu.domain<GridVpar>()));
+                    get_idx_range<GridVpar>(allfdistribu)));
     DFieldMemMu const coeff_intdmu(
             simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-                    allfdistribu.domain<GridMu>()));
-    CollisionInfo collision_info(conf_collision);
+                    get_idx_range<GridMu>(allfdistribu)));
+    CollisionInfo const collision_info(conf_collision);
     CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
             collision_info,
             idxrange_spvparmu,

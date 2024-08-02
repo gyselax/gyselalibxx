@@ -140,7 +140,7 @@ int main(int argc, char** argv)
             neumann_spline_quadrature_coefficients<
                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
     FFTPoissonSolver<IDomainX, IDomainX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(mesh_x);
-    ChargeDensityCalculator rhs(quadrature_coeffs.span_view());
+    ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);

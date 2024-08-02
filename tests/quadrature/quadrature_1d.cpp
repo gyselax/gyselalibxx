@@ -56,7 +56,7 @@ double constant_func_check_1d(Method quad_method)
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
 
     DFieldMemX values_alloc(gridx);
-    device_t<Field<double, IDomXPeriod>> values = values_alloc.span_view();
+    device_t<Field<double, IDomXPeriod>> values = get_field(values_alloc);
     Kokkos::deep_copy(values.allocation_kokkos_view(), 1.0);
     double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
     double expected_val = x_max - x_min;

@@ -131,7 +131,7 @@ double compute_error(int n_elems)
     Quadrature<IdxRangeY> const integrate(get_const_field(quadrature_coeffs));
 
     DFieldMemY values_alloc(gridy);
-    DFieldY values = values_alloc.span_view();
+    DFieldY values = get_field(values_alloc);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridy,
