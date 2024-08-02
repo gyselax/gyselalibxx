@@ -113,8 +113,8 @@ double compute_error(int n_elems)
             ddc::SplineSolver::LAPACK,
             GridY>;
     using IdxRangeY = IdxRange<GridY>;
-    using DFieldMemY = device_t<FieldMem<double, IdxRangeY>>;
-    using DFieldY = device_t<Field<double, IdxRangeY>>;
+    using DFieldMemY = FieldMem<double, IdxRangeY>;
+    using DFieldY = Field<double, IdxRangeY>;
 
     Coord<Y> const y_min(0.0);
     Coord<Y> const y_max(M_PI);
@@ -126,12 +126,12 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    DFieldMemY quadrature_coeffs
+    device_t<DFieldMemY> quadrature_coeffs
             = spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy, builder_y);
     Quadrature<IdxRangeY> const integrate(get_const_field(quadrature_coeffs));
 
-    DFieldMemY values_alloc(gridy);
-    DFieldY values = get_field(values_alloc);
+    device_t<DFieldMemY> values_alloc(gridy);
+    device_t<DFieldY> values = get_field(values_alloc);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridy,
