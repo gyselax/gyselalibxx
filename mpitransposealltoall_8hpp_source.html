@@ -132,9 +132,9 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> layout_2_mpi_dims = ddcHelper::</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            apply_template_to_type_seq_t&lt;MPIDim, typename Layout2::distributed_type_seq&gt;;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">using</span> layout_1_mpi_idx_range_type</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain&lt;layout_1_mpi_dims&gt;;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;layout_1_mpi_dims&gt;;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> layout_2_mpi_idx_range_type</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain&lt;layout_2_mpi_dims&gt;;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;layout_2_mpi_dims&gt;;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> m_comm_size;</div>
@@ -279,23 +279,23 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">// Get the index ranges of objects which will be distributed across processes</span></div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keyword">using</span> scatter_idx_range_type = <span class="keyword">typename</span> OutLayout::distributed_sub_idx_range;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="comment">// Get the index range of objects that are not distributed across processes</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">using</span> batch_idx_range_type = ddc::detail::convert_type_seq_to_discrete_domain&lt;batch_dims&gt;;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">using</span> batch_idx_range_type = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_dims&gt;;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keyword">using</span> gather_mpi_idx_range_type</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;gather_mpi_dims&gt;;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;gather_mpi_dims&gt;;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keyword">using</span> scatter_mpi_idx_range_type</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;scatter_mpi_dims&gt;;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;scatter_mpi_dims&gt;;</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="comment">// Get the index range containing MPI tags which can be used to describe the function input</span></div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keyword">using</span> input_mpi_idx_range_type</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;input_mpi_idx_range_tags&gt;;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;input_mpi_idx_range_tags&gt;;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="comment">// Get the index range containing MPI tags which can be used to describe the function output</span></div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keyword">using</span> output_mpi_idx_range_type</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;output_mpi_idx_range_tags&gt;;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;output_mpi_idx_range_tags&gt;;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <span class="comment">// Get the index range that should be used when scattering data</span></div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="keyword">using</span> input_alltoall_idx_range_type</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;input_alltoall_dim_order&gt;;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;input_alltoall_dim_order&gt;;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">// Get the index range that should be used when gathering data</span></div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keyword">using</span> output_alltoall_idx_range_type</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain&lt;output_alltoall_dim_order&gt;;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;output_alltoall_dim_order&gt;;</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">        /*****************************************************************</span></div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">         * Build index ranges</span></div>

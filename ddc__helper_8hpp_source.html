@@ -349,15 +349,9 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="keyword">namespace </span>ddcHelper {</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TypeSeq&gt;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;constexpr std::size_t type_seq_length_v = std::numeric_limits&lt;std::size_t&gt;::max();</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... Tags&gt;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;constexpr std::size_t type_seq_length_v&lt;ddc::detail::TypeSeq&lt;Tags...&gt;&gt; = <span class="keyword">sizeof</span>...(Tags);</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Tag&gt; <span class="keyword">class </span>Templ, <span class="keyword">class </span>TypeSeq&gt;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="keyword">using</span> apply_template_to_type_seq_t = <span class="keyword">typename</span> detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;} <span class="comment">// namespace ddcHelper</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Tag&gt; <span class="keyword">class </span>Templ, <span class="keyword">class </span>TypeSeq&gt;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword">using</span> apply_template_to_type_seq_t = <span class="keyword">typename</span> detail::ApplyTemplateToTypeSeq&lt;Templ, TypeSeq&gt;::type;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;} <span class="comment">// namespace ddcHelper</span></div>
 <div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
