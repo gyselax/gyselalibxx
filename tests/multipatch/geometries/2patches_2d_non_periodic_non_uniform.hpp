@@ -4,8 +4,8 @@
     Geometry defined here: 2 * 2D patches.
         - patch 1 and patch 2: 
             - non-periodic on X and Y;
-            - uniform cubic splines;
-            - uniform Grid1 and Grid2; 
+            - non uniform cubic splines;
+            - non uniform Grid1 and Grid2; 
 */
 
 #include <ddc/ddc.hpp>
@@ -13,8 +13,7 @@
 
 #include "patch.hpp"
 
-
-namespace non_periodic_uniform_2d_2patches {
+namespace non_periodic_non_uniform_2d_2patches {
 
 int constexpr BSplineDegree = 3;
 
@@ -50,39 +49,39 @@ struct Y2
 
 // GRID: points sequences ------------------------------------------------------------------------
 /// @brief Points sequence on the first logical dimension of patch 1.
-struct GridX1 : UniformGridBase<X1>
+struct GridX1 : NonUniformGridBase<X1>
 {
 };
 /// @brief Points sequence on the second logical dimension of patch 1.
-struct GridY1 : UniformGridBase<Y1>
+struct GridY1 : NonUniformGridBase<Y1>
 {
 };
 /// @brief Points sequence on the first logical dimension of patch 2.
-struct GridX2 : UniformGridBase<X2>
+struct GridX2 : NonUniformGridBase<X2>
 {
 };
 /// @brief Points sequence on the second logical dimension of patch 2.
-struct GridY2 : UniformGridBase<Y2>
+struct GridY2 : NonUniformGridBase<Y2>
 {
 };
 
 
 // SPLINE DIMENSIONS -----------------------------------------------------------------------------
 /// @brief First spline dimension of patch 1.
-struct BSplinesX1 : ddc::UniformBSplines<X1, BSplineDegree>
+struct BSplinesX1 : ddc::NonUniformBSplines<X1, BSplineDegree>
 {
 };
 /// @brief Second spline dimension of patch 1.
-struct BSplinesY1 : ddc::UniformBSplines<Y1, BSplineDegree>
+struct BSplinesY1 : ddc::NonUniformBSplines<Y1, BSplineDegree>
 {
 };
 
 /// @brief First spline dimension of patch 2.
-struct BSplinesX2 : ddc::UniformBSplines<X2, BSplineDegree>
+struct BSplinesX2 : ddc::NonUniformBSplines<X2, BSplineDegree>
 {
 };
 /// @brief Second spline dimension of patch 2.
-struct BSplinesY2 : ddc::UniformBSplines<Y2, BSplineDegree>
+struct BSplinesY2 : ddc::NonUniformBSplines<Y2, BSplineDegree>
 {
 };
 
@@ -96,4 +95,5 @@ using Patch2 = Patch<GridX2, GridY2, BSplinesX2, BSplinesY2>;
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
 
-} // namespace non_periodic_uniform_2d_2patches
+
+} // namespace non_periodic_non_uniform_2d_2patches
