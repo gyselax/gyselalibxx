@@ -112,7 +112,7 @@ double compute_error(int n_elems, Method quad_method)
 
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
     DFieldMemY values_alloc(gridy);
-    auto values = get_field(values_alloc);
+    DFieldY values = get_field(values_alloc);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),

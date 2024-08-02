@@ -33,8 +33,7 @@ TEST(Maxwellian, Moments)
 
     host_t<DFieldMemVx> quadrature_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridvx));
-    Quadrature<IdxRangeVx, Kokkos::DefaultHostExecutionSpace> const integrate_v(
-            get_const_field(quadrature_coeffs));
+    host_t<Quadrature<IdxRangeVx>> const integrate_v(get_const_field(quadrature_coeffs));
 
     double const density = 1.e-5;
     double const mean_velocity = 0.5;
