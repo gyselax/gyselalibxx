@@ -45,14 +45,16 @@ double constant_func_check_1d(Method quad_method)
 
     DFieldMemX quadrature_coeffs_alloc;
     switch (quad_method) {
-    case Method::TRAPEZ:
+    case Method::TRAPEZ: {
         quadrature_coeffs_alloc
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
         break;
-    case Method::SIMPSON:
+    }
+    case Method::SIMPSON: {
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
         break;
+    }
     }
 
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
@@ -102,16 +104,18 @@ double compute_error(int n_elems, Method quad_method)
     IdxStep<GridY> npoints(n_elems);
     IdxRange<GridY> gridy(lbound, npoints);
 
-    DFieldMemX quadrature_coeffs_alloc;
+    DFieldMemY quadrature_coeffs_alloc;
     switch (quad_method) {
-    case Method::TRAPEZ:
+    case Method::TRAPEZ: {
         quadrature_coeffs_alloc
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy);
         break;
-    case Method::SIMPSON:
+    }
+    case Method::SIMPSON: {
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridy);
         break;
+    }
     }
 
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
