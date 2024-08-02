@@ -14,8 +14,6 @@
 #include "patch.hpp"
 
 
-namespace non_periodic_uniform_2d_2patches {
-
 int constexpr BSplineDegree = 3;
 
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
@@ -95,5 +93,3 @@ using Patch2 = Patch<GridX2, GridY2, BSplinesX2, BSplinesY2>;
 
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
-
-} // namespace non_periodic_uniform_2d_2patches

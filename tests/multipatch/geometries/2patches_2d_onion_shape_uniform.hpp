@@ -13,8 +13,6 @@
 
 #include "patch.hpp"
 
-namespace onion_shape_uniform_2d_2patches {
-
 
 int constexpr BSplineDegree = 3;
 
@@ -96,5 +94,3 @@ using Patch2 = Patch<GridR2, GridP2, BSplinesR2, BSplinesP2>;
 
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
-
-} // namespace onion_shape_uniform_2d_2patches

@@ -87,14 +87,14 @@ protected:
 
     /// @brief The domain for the chunk excluding derivatives
     using physical_domain_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain<physical_dims>;
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_dims>;
 
     /// @brief The DiscreteElement which describes the physical position where values are defined.
     using physical_element_type = typename physical_domain_type::discrete_element_type;
 
     /// @brief The DiscreteDomain which describes the derivatives present on each chunk.
     using discrete_deriv_domain_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain<deriv_tags>;
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<deriv_tags>;
 
     /** @brief The DiscreteElement which describes the order of the derivatives in each dimension.
      * (e.g. second-order derivative).
@@ -107,7 +107,7 @@ protected:
     using discrete_deriv_vector_type = typename discrete_deriv_domain_type::mlength_type;
 
     /// @brief The number of chunks which must be created to describe this object.
-    static constexpr int n_chunks = 1 << ddcHelper::type_seq_length_v<deriv_tags>;
+    static constexpr int n_chunks = 1 << ddc::type_seq_size_v<deriv_tags>;
 
     template <class, class, int, class>
     friend class DerivField;
@@ -313,7 +313,7 @@ protected:
         // Get the types related to the implicit information
         using remaining_deriv_tags = ddc::type_seq_remove_t<deriv_tags, provided_deriv_tags>;
         using remaining_deriv_domain_type =
-                typename ddc::detail::convert_type_seq_to_discrete_domain<remaining_deriv_tags>;
+                typename ddc::detail::convert_type_seq_to_discrete_domain_t<remaining_deriv_tags>;
 
         // Find the domain of the derivatives (either provided or a domain containing only the 0-th derivative)
         remaining_deriv_domain_type no_deriv_domain = detail::get_domain_from_element(
@@ -343,7 +343,7 @@ protected:
                 local_chunk(subview, full_domain);
 
         // If necessary, slice off the derivative dimensions deduced implicitly
-        if constexpr (ddcHelper::type_seq_length_v<remaining_deriv_tags> == 0) {
+        if constexpr (ddc::type_seq_size_v<remaining_deriv_tags> == 0) {
             return local_chunk;
         } else {
             return local_chunk[no_deriv_domain.front()];
@@ -369,25 +369,25 @@ protected:
         using provided_deriv_tags = detail::deriv_sub_set_t<provided_tags>;
         using provided_physical_tags = ddc::type_seq_remove_t<provided_tags, provided_deriv_tags>;
         using provided_deriv_domain_type
-                = ddc::detail::convert_type_seq_to_discrete_domain<provided_deriv_tags>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<provided_deriv_tags>;
         using provided_deriv_element_type =
                 typename provided_deriv_domain_type::discrete_element_type;
 
         // Get the types related to the implicit information
         using remaining_deriv_tags = ddc::type_seq_remove_t<deriv_tags, provided_deriv_tags>;
         using remaining_deriv_domain_type =
-                typename ddc::detail::convert_type_seq_to_discrete_domain<remaining_deriv_tags>;
+                typename ddc::detail::convert_type_seq_to_discrete_domain_t<remaining_deriv_tags>;
         using remaining_deriv_element_type =
                 typename remaining_deriv_domain_type::discrete_element_type;
 
         // Get the types related to the final chunk type
         using sliced_tags = ddc::type_seq_merge_t<provided_physical_tags, deriv_tags>;
         using sliced_domain_type =
-                typename ddc::detail::convert_type_seq_to_discrete_domain<sliced_tags>;
+                typename ddc::detail::convert_type_seq_to_discrete_domain_t<sliced_tags>;
         using sliced_element_type = typename sliced_domain_type::discrete_element_type;
         using final_tags = ddc::type_seq_remove_t<ddc::detail::TypeSeq<DDims...>, sliced_tags>;
         using final_domain_type =
-                typename ddc::detail::convert_type_seq_to_discrete_domain<final_tags>;
+                typename ddc::detail::convert_type_seq_to_discrete_domain_t<final_tags>;
 
         // Get the index of the relevant derivatives
         provided_deriv_element_type requested_derivs(elem);
@@ -524,7 +524,7 @@ public:
         using provided_deriv_tags = ddc::detail::TypeSeq<ODims...>;
         using remaining_deriv_tags = ddc::type_seq_remove_t<deriv_tags, provided_deriv_tags>;
         using remaining_deriv_domain_type =
-                typename ddc::detail::convert_type_seq_to_discrete_domain<remaining_deriv_tags>;
+                typename ddc::detail::convert_type_seq_to_discrete_domain_t<remaining_deriv_tags>;
         using remaining_deriv_element_type =
                 typename remaining_deriv_domain_type::discrete_element_type;
 

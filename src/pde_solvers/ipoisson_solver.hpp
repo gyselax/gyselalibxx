@@ -35,7 +35,7 @@ protected:
 
 protected:
     /// @brief Indicates whether the gradient is represented by a VectorFieldSpan or a ChunkSpan.
-    static constexpr bool using_vector_span = ddcHelper::type_seq_length_v<laplacian_tags> == 1;
+    static constexpr bool using_vector_span = ddc::type_seq_size_v<laplacian_tags> == 1;
 
 public:
     /// @brief The ChunkSpan type of the arguments to operator().
@@ -45,13 +45,13 @@ public:
 
     /// @brief The type of the derivative of @f$ \phi @f$.
     using vector_field_type = std::conditional_t<
-            ddcHelper::type_seq_length_v<laplacian_tags> == 1,
+            ddc::type_seq_size_v<laplacian_tags> == 1,
             field_type,
             VectorFieldSpan<double, FullIdxRange, real_laplacian_tags, LayoutSpace, MemorySpace>>;
 
     /// @brief The DiscreteDomain describing the batch dimensions.
     using batch_idx_range_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain<batch_tags>;
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<batch_tags>;
     /// @brief The DiscreteElement for indexing a batch dimension.
     using batch_index_type = typename batch_idx_range_type::discrete_element_type;
 

@@ -14,7 +14,7 @@ class SingleModePerturbInitialization : public IInitialization
 {
     DConstFieldSpVxVy m_fequilibrium;
 
-    host_t<IFieldMemSp> m_init_perturb_mode;
+    host_t<IFieldSp> m_init_perturb_mode;
 
     host_t<DFieldMemSp> m_init_perturb_amplitude;
 
@@ -40,7 +40,7 @@ public:
      */
     SingleModePerturbInitialization(
             DConstFieldSpVxVy fequilibrium,
-            host_t<IFieldMemSp> init_perturb_mode,
+            host_t<IFieldSp> init_perturb_mode,
             host_t<DFieldMemSp> init_perturb_amplitude);
 
     ~SingleModePerturbInitialization() override = default;
