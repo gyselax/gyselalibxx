@@ -4,8 +4,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
+#include <ddc_helper.hpp>
 
 /// @brief Species discrete dimension to access constant attributes related to species.
 class SpeciesInformation
@@ -23,27 +22,28 @@ public:
         friend class Impl;
 
         /// alias of the discrete element of this discrete dimension
-        using discrete_element_type = Idx<Grid1D>;
+        using discrete_element_type = ddc::DiscreteElement<Grid1D>;
 
         /// alias of the discrete domain of this discrete dimension
-        using discrete_domain_type = IdxRange<Grid1D>;
+        using discrete_domain_type = ddc::DiscreteDomain<Grid1D>;
 
         /// alias of the discrete vector of this discrete dimension
-        using discrete_vector_type = IdxStep<Grid1D>;
+        using discrete_vector_type = ddc::DiscreteVector<Grid1D>;
 
     private:
         // charge of the particles (kinetic + adiabatic)
-        FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_charge;
+        ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+                m_charge;
 
         // mass of the particles of all kinetic species
-        FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
+        ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
 
         // workaround to access charges on the device
-        ConstField<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
+        ddc::ChunkView<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
                 m_charge_view;
 
         // workaround to access masses on the device
-        ConstField<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
+        ddc::ChunkView<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
                 m_mass_view;
 
         discrete_element_type m_ielec;
@@ -73,9 +73,10 @@ public:
          * @param[in] charge array storing both kinetic and adiabatic charges
          * @param[in] mass array storing both kinetic and adiabatic masses
          */
-        Impl(FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+        Impl(ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
                      charge,
-             FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> mass)
+             ddc::Chunk<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
+                     mass)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
         {
@@ -142,7 +143,7 @@ struct Species : SpeciesInformation
 };
 
 /// @return the discrete element representing the electron species
-KOKKOS_INLINE_FUNCTION Idx<Species> ielec()
+KOKKOS_INLINE_FUNCTION ddc::DiscreteElement<Species> ielec()
 {
     return ddc::discrete_space<Species>().ielec();
 }
@@ -151,7 +152,7 @@ KOKKOS_INLINE_FUNCTION Idx<Species> ielec()
  * @param[in] isp a discrete element of either a kinetic or adiabatic species
  * @return the charge associated to the discrete element
  */
-KOKKOS_INLINE_FUNCTION double charge(Idx<Species> const isp)
+KOKKOS_INLINE_FUNCTION double charge(ddc::DiscreteElement<Species> const isp)
 {
     return ddc::discrete_space<Species>().charge(isp);
 }
@@ -160,24 +161,24 @@ KOKKOS_INLINE_FUNCTION double charge(Idx<Species> const isp)
  * @param[in] isp a discrete element of either a kinetic or adiabatic species
  * @return the mass associated to the discrete element
  */
-KOKKOS_INLINE_FUNCTION double mass(Idx<Species> const isp)
+KOKKOS_INLINE_FUNCTION double mass(ddc::DiscreteElement<Species> const isp)
 {
     return ddc::discrete_space<Species>().mass(isp);
 }
 
-using IdxSp = Idx<Species>;
-using IdxRangeSp = IdxRange<Species>;
-using IdxStepSp = IdxStep<Species>;
+using IdxSp = ddc::DiscreteElement<Species>;
+using IdxRangeSp = ddc::DiscreteDomain<Species>; // --> Should be DomSp
+using IdxStepSp = ddc::DiscreteVector<Species>; // --> Should be VectSp or VecSp
 
 template <class ElementType>
-using FieldMemSp = FieldMem<ElementType, IdxRangeSp>;
+using FieldMemSp = ddc::Chunk<ElementType, IdxRangeSp>;
 using DFieldMemSp = FieldMemSp<double>;
-using IFieldMemSp = FieldMemSp<int>;
+using IFieldSp = device_t<ddc::Chunk<int, IdxRangeSp>>;
 
 template <class ElementType>
-using ConstFieldSp = ConstField<ElementType, IdxRangeSp>;
+using ConstFieldSp = ddc::ChunkView<ElementType const, IdxRangeSp>;
 using DConstFieldSp = ConstFieldSp<double>;
 
 template <class ElementType>
-using FieldSp = Field<ElementType, IdxRangeSp>;
+using FieldSp = device_t<ddc::ChunkSpan<ElementType, IdxRangeSp>>;
 using DFieldSp = FieldSp<double>;

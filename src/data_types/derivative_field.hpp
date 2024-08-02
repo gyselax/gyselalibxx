@@ -101,7 +101,7 @@ private:
      * direction is defined. This object is used internally to initialise the chunks.
      */
     using physical_deriv_domain_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain<physical_deriv_dims>;
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_deriv_dims>;
 
     /// @brief The DiscreteDomain which describes the derivatives present on each chunk.
     using discrete_deriv_domain_type = typename base_type::discrete_deriv_domain_type;

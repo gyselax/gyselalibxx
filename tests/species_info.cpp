@@ -13,8 +13,8 @@ TEST(SpeciesInfo, Ielec)
     IdxSp my_iion = dom_sp.front();
     IdxSp my_ielec = dom_sp.back();
 
-    host_t<DFieldMemSp> charges(dom_sp);
-    host_t<DFieldMemSp> masses(dom_sp);
+    DFieldMemSp charges(dom_sp);
+    DFieldMemSp masses(dom_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
     ddc::parallel_fill(masses, 1.);

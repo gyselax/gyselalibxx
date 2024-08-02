@@ -373,13 +373,6 @@ using device_t = on_memory_space_t<Kokkos::DefaultExecutionSpace::memory_space, 
 
 
 namespace ddcHelper {
-/// A helper to determine the number of tags in a type sequence.
-template <class TypeSeq>
-constexpr std::size_t type_seq_length_v = std::numeric_limits<std::size_t>::max();
-
-template <class... Tags>
-constexpr std::size_t type_seq_length_v<ddc::detail::TypeSeq<Tags...>> = sizeof...(Tags);
-
 /// A helper to get a type sequence by applying a template to a sequence of type tags.
 template <template <class Tag> class Templ, class TypeSeq>
 using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq<Templ, TypeSeq>::type;

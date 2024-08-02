@@ -164,13 +164,13 @@ int main(int argc, char** argv)
     ddc::parallel_deepcopy(field_grid_mu, DConstFieldMu(grid_mu.data(), dom_mu));
     auto field_grid_mu_host = ddc::create_mirror_view_and_copy(get_field(field_grid_mu));
     FieldMemSp<int> field_species(dom_kinsp);
-    ddc::parallel_deepcopy(field_species, host_t<ConstFieldSp<int>>(species.data(), dom_kinsp));
+    ddc::parallel_deepcopy(field_species, ConstFieldSp<int>(species.data(), dom_kinsp));
     auto field_species_host = ddc::create_mirror_view_and_copy(get_field(field_species));
     DFieldMemSp field_charges(dom_kinsp);
-    ddc::parallel_deepcopy(field_charges, host_t<DConstFieldSp>(charges.data(), dom_kinsp));
+    ddc::parallel_deepcopy(field_charges, DConstFieldSp(charges.data(), dom_kinsp));
     auto field_charges_host = ddc::create_mirror_view_and_copy(get_field(field_charges));
     DFieldMemSp field_masses(dom_kinsp);
-    ddc::parallel_deepcopy(field_masses, host_t<DConstFieldSp>(masses.data(), dom_kinsp));
+    ddc::parallel_deepcopy(field_masses, DConstFieldSp(masses.data(), dom_kinsp));
     auto field_masses_host = ddc::create_mirror_view_and_copy(get_field(field_masses));
 
     // Algorithm Info

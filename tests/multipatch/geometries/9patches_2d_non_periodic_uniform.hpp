@@ -13,7 +13,6 @@
 
 #include "patch.hpp"
 
-namespace non_periodic_uniform_2d_9patches {
 
 int constexpr BSplineDegree = 3;
 
@@ -115,5 +114,3 @@ using Patch9 = Patch<GridX<9>, GridY<9>, BSplinesX<9>, BSplinesY<9>>;
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::
         TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9>;
-
-} // namespace non_periodic_uniform_2d_9patches
