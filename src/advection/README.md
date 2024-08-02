@@ -91,7 +91,7 @@ using IDimInterest = IDimX;
 ```
 or 
 ```cpp
-using IDimInterest = GridVx; 
+using IDimInterest = IDimVx; 
 ```
 
 *  Equation on a 1Dx1V domain with species dimension (and time dimension): 
