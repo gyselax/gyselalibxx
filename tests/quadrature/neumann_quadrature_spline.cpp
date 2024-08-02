@@ -42,7 +42,7 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
-using DFieldMemX = device_t<FieldMem<double, IdxRangeX>>;
+using DFieldMemX = FieldMem<double, IdxRangeX>;
 
 TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
 {

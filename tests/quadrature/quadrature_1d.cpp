@@ -22,7 +22,7 @@ struct GridXPeriod : NonUniformGridBase<DimXPeriod>
 };
 using IDomXPeriod = IdxRange<GridXPeriod>;
 using CoordXPeriod = Coord<DimXPeriod>;
-using DFieldMemX = device_t<FieldMem<double, IDomXPeriod>>;
+using DFieldMemX = FieldMem<double, IDomXPeriod>;
 
 double constant_func_check_1d(Method quad_method)
 {
@@ -49,13 +49,12 @@ double constant_func_check_1d(Method quad_method)
         quadrature_coeffs_alloc
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
         break;
-
     case Method::SIMPSON:
         quadrature_coeffs_alloc
                 = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
         break;
     }
-    
+
     Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
 
     DFieldMemX values_alloc(gridx);
