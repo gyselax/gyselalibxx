@@ -3,7 +3,8 @@
 /*
     Geometry defined here: 9 * 2D patches.
         - for all patches: 
-            - non-periodic on X and Y;
+            - periodic on X;
+            - non-periodic on Y;
             - uniform cubic splines;
             - uniform Grid1 and Grid2; 
 
@@ -18,10 +19,10 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include "patch.hpp"
+#include "connectivity.hpp"
 #include "edge.hpp"
 #include "interface.hpp"
-#include "connectivity.hpp"
+#include "patch.hpp"
 
 namespace non_periodic_uniform_2d_9patches {
 
@@ -184,14 +185,10 @@ using Interface_4_7 = Interface<SouthEdge4, NorthEdge7, true>;
 using Interface_5_8 = Interface<SouthEdge5, NorthEdge8, true>;
 using Interface_6_9 = Interface<SouthEdge6, NorthEdge9, true>;
 
-using SouthInterface7 = Interface<SouthEdge7, OutsideEdge, true>;
-using SouthInterface8 = Interface<SouthEdge8, OutsideEdge, true>;
-using SouthInterface9 = Interface<SouthEdge9, OutsideEdge, true>;
+using SouthInterface7 = Interface<OutsideEdge, SouthEdge7, true>;
+using SouthInterface8 = Interface<OutsideEdge, SouthEdge8, true>;
+using SouthInterface9 = Interface<OutsideEdge, SouthEdge9, true>;
 
-
-using EastInterface3 = Interface<OutsideEdge, EastEdge3, true>;
-using EastInterface6 = Interface<OutsideEdge, EastEdge6, true>;
-using EastInterface9 = Interface<OutsideEdge, EastEdge9, true>;
 
 using Interface_1_2 = Interface<EastEdge1, WestEdge2, true>;
 using Interface_4_5 = Interface<EastEdge4, WestEdge5, true>;
@@ -201,9 +198,9 @@ using Interface_2_3 = Interface<EastEdge2, WestEdge3, true>;
 using Interface_5_6 = Interface<EastEdge5, WestEdge6, true>;
 using Interface_8_9 = Interface<EastEdge8, WestEdge9, true>;
 
-using WestInterface1 = Interface<WestEdge1, OutsideEdge, true>;
-using WestInterface4 = Interface<WestEdge4, OutsideEdge, true>;
-using WestInterface7 = Interface<WestEdge7, OutsideEdge, true>;
+using Interface_3_1 = Interface<WestEdge1, EastEdge3, true>;
+using Interface_6_4 = Interface<WestEdge4, EastEdge6, true>;
+using Interface_9_7 = Interface<WestEdge7, EastEdge9, true>;
 
 using Connectivity = MultipatchConnectivity<
         NorthInterface1,
@@ -218,16 +215,14 @@ using Connectivity = MultipatchConnectivity<
         SouthInterface7,
         SouthInterface8,
         SouthInterface9,
-        EastInterface3,
-        EastInterface6,
-        EastInterface9,
         Interface_1_2,
         Interface_4_5,
         Interface_7_8,
         Interface_2_3,
         Interface_5_6,
         Interface_8_9,
-        WestInterface1,
-        WestInterface4,
-        WestInterface7>;
-} // namespace non_periodic_uniform_2d_9patches
+        Interface_3_1,
+        Interface_6_4,
+        Interface_9_7>;
+
+}; // namespace non_periodic_uniform_2d_9patches
