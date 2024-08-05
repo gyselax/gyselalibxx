@@ -17,24 +17,30 @@ namespace connectivity_details {
 template <class Patch, class InterfaceTypeSeq>
 struct PatchConnection;
 
+/// Specialisation of PatchConnection for an empty interface list.
 template <class Patch>
 struct PatchConnection<Patch, ddc::detail::TypeSeq<>>
 {
+    /// The type found by the class.
     using type = ddc::detail::TypeSeq<>;
 };
 
+/// Specialisation of PatchConnection for an interface list with one element.
 template <class Patch, class InterfaceType>
 struct PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType>>
 {
+    /// The type found by the class.
     using type = std::conditional_t<
             InterfaceType::template connected_to_patch<Patch>(),
             ddc::detail::TypeSeq<InterfaceType>,
             ddc::detail::TypeSeq<>>;
 };
 
+/// Specialisation of PatchConnection to iterate recursively over the interface type sequence.
 template <class Patch, class InterfaceType1, class... RemainingInterfaceTypes>
 struct PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType1, RemainingInterfaceTypes...>>
 {
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<
             typename PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType1>>::type,
             typename PatchConnection<Patch, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::
@@ -49,23 +55,22 @@ struct PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType1, RemainingInte
 template <class TypeSeq>
 struct FilterEdges;
 
-template <>
-struct FilterEdges<ddc::detail::TypeSeq<>>
-{
-};
-
+/// Specialisation of FilterEdges for the case with one edge in the list.
 template <class EdgeType>
 struct FilterEdges<ddc::detail::TypeSeq<EdgeType>>
 {
+    /// The type found by the class.
     using type = std::conditional_t<
             std::is_same_v<EdgeType, OutsideEdge>,
             ddc::detail::TypeSeq<>,
             ddc::detail::TypeSeq<EdgeType>>;
 };
 
+/// Specialisation of FilterEdges to iterate recursively over the edge type sequence.
 template <class EdgeType1, class... RemainingEdgeTypes>
 struct FilterEdges<ddc::detail::TypeSeq<EdgeType1, RemainingEdgeTypes...>>
 {
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<
             typename FilterEdges<ddc::detail::TypeSeq<EdgeType1>>::type,
             typename FilterEdges<ddc::detail::TypeSeq<RemainingEdgeTypes...>>::type>;
@@ -78,9 +83,11 @@ struct FilterEdges<ddc::detail::TypeSeq<EdgeType1, RemainingEdgeTypes...>>
 template <class TypeSeq>
 struct ToTuple;
 
+/// Specialisation of ToTuple for type sequences.
 template <class... I>
 struct ToTuple<ddc::detail::TypeSeq<I...>>
 {
+    /// The type found by the class.
     using type = std::tuple<I...>;
 };
 
@@ -91,15 +98,19 @@ struct ToTuple<ddc::detail::TypeSeq<I...>>
 template <class TypeSeq>
 struct ExtractPatches;
 
+/// Specialisation of ExtractPatches for an empty patch list.
 template <>
 struct ExtractPatches<ddc::detail::TypeSeq<>>
 {
+    /// The type found by the class.
     using type = ddc::detail::TypeSeq<>;
 };
 
+/// Specialisation of ExtractPatches to iterate recursively over the edge type sequence.
 template <class EdgeType1, class... EdgeTypes>
 struct ExtractPatches<ddc::detail::TypeSeq<EdgeType1, EdgeTypes...>>
 {
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<
             ddc::detail::TypeSeq<typename EdgeType1::associated_patch>,
             typename ExtractPatches<ddc::detail::TypeSeq<EdgeTypes...>>::type>;
@@ -113,36 +124,47 @@ struct ExtractPatches<ddc::detail::TypeSeq<EdgeType1, EdgeTypes...>>
 template <class Grid1D, class PatchTypeSeq>
 struct FindPatch;
 
+/// Specialisation of FindPatch for an empty patch list.
 template <class Grid1D>
 struct FindPatch<Grid1D, ddc::detail::TypeSeq<>>
 {
     static_assert(!std::is_same_v<Grid1D, Grid1D>, "No patches found using dimension.");
 };
 
+/**
+ * Specialisation of FindPatch for the case where Grid1 from first patch in type sequence
+ * matches QueryGrid1D
+ */
 template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
         ddc::detail::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
-    // Case where Grid1 from first patch in type sequence matches QueryGrid1D
+    /// The type found by the class.
     using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
 };
 
+/**
+ * Specialisation of FindPatch for the case where Grid2 from first patch in type sequence
+ * matches QueryGrid1D
+ */
 template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
         ddc::detail::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
-    // Case where Grid2 from first patch in type sequence matches QueryGrid1D
+    /// The type found by the class.
     using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
+/// Specialisation of FindPatch to iterate recursively over the patch type sequence.
 template <class Grid1D, class Patch1, class... RemainingPatchTypes>
 struct FindPatch<Grid1D, ddc::detail::TypeSeq<Patch1, RemainingPatchTypes...>>
 {
     // Should instantiate specialisations above instead of this specialisation
     static_assert(!std::is_same_v<typename Patch1::Grid1, Grid1D>);
     static_assert(!std::is_same_v<typename Patch1::Grid2, Grid1D>);
+    /// The type found by the class.
     using type = typename FindPatch<Grid1D, ddc::detail::TypeSeq<RemainingPatchTypes...>>::type;
 };
 
@@ -154,35 +176,42 @@ struct FindPatch<Grid1D, ddc::detail::TypeSeq<Patch1, RemainingPatchTypes...>>
 template <class Edge, class InterfaceTypeSeq>
 struct FindInterface;
 
+/// Specialisation of FindInterface for an empty interface list.
 template <class Edge>
 struct FindInterface<Edge, ddc::detail::TypeSeq<>>
 {
     static_assert(!std::is_same_v<Edge, Edge>, "Edge not found in collection of interfaces");
 };
 
+/// Specialisation of FindInterface to iterate recursively over the interface type sequence.
 template <class Edge, class Interface1, class... RemainingInterfaceTypes>
 struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 {
     // Should instantiate specialisations above instead of this specialisation
     static_assert(!std::is_same_v<Edge, typename Interface1::Edge1>);
     static_assert(!std::is_same_v<Edge, typename Interface1::Edge2>);
+    /// The type found by the class.
     using type =
             typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
 };
 
+/// Specialisation of FindInterface for the case where Edge1 from the first interface matches Edge.
 template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
         ddc::detail::TypeSeq<Interface<Edge, OEdge, Orientations>, RemainingInterfaceTypes...>>
 {
+    /// The type found by the class.
     using type = Interface<Edge, OEdge, Orientations>;
 };
 
+/// Specialisation of FindInterface for the case where Edge1 from the second interface matches Edge.
 template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
         ddc::detail::TypeSeq<Interface<OEdge, Edge, Orientations>, RemainingInterfaceTypes...>>
 {
+    /// The type found by the class.
     using type = Interface<OEdge, Edge, Orientations>;
 };
 
@@ -193,15 +222,19 @@ struct FindInterface<
 template <class EdgeType>
 struct SwapEnd;
 
+/// Specialisation of SwapEnd for an edge at the front end of a grid line.
 template <class Patch, class Grid1D>
 struct SwapEnd<Edge<Patch, Grid1D, FRONT>>
 {
+    /// The type found by the class.
     using type = Edge<Patch, Grid1D, BACK>;
 };
 
+/// Specialisation of SwapEnd for an edge at the back end of a grid line.
 template <class Patch, class Grid1D>
 struct SwapEnd<Edge<Patch, Grid1D, BACK>>
 {
+    /// The type found by the class.
     using type = Edge<Patch, Grid1D, FRONT>;
 };
 
@@ -229,15 +262,19 @@ enum InsertPosition { FrontInsert, BackInsert };
 template <class ToInsert, class TypeSeq, InsertPosition insert_pos>
 struct AddToTypeSeq;
 
+/// Specialisation of AddToTypeSeq to add an element at the front of the type sequence.
 template <class ToInsert, class TypeSeq>
 struct AddToTypeSeq<ToInsert, TypeSeq, FrontInsert>
 {
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<TypeSeq, ddc::detail::TypeSeq<ToInsert>>;
 };
 
+/// Specialisation of AddToTypeSeq to add an element at the back of the type sequence.
 template <class ToInsert, class TypeSeq>
 struct AddToTypeSeq<ToInsert, TypeSeq, BackInsert>
 {
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<ddc::detail::TypeSeq<ToInsert>, TypeSeq>;
 };
 
@@ -261,6 +298,7 @@ template <
         = ddc::in_tags_v<typename StartEdge::grid, FoundGrids>>
 struct CollectGridsAlongDim;
 
+/// Specialisation of CollectGridsAlongDim to iterate recursively over the grids on the dimension.
 template <
         class StartEdge,
         class InterfaceTypeSeq,
@@ -275,8 +313,10 @@ struct CollectGridsAlongDim<
         MatchingEdge,
         false>
 {
+    /// The new list of grids that have been found including the grid from the current patch.
     using NewGridList =
             typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, insert_pos>::type;
+    /// The type found by the class.
     using type = typename CollectGridsAlongDim<
             typename SwapEnd<MatchingEdge>::type,
             InterfaceTypeSeq,
@@ -284,6 +324,7 @@ struct CollectGridsAlongDim<
             NewGridList>::type;
 };
 
+/// Specialisation of CollectGridsAlongDim to stop when the grid has already been identified (due to periodicity).
 template <
         class StartEdge,
         class InterfaceTypeSeq,
@@ -292,12 +333,15 @@ template <
         class MatchingEdge>
 struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, MatchingEdge, true>
 {
+    /// The type found by the class.
     using type = FoundGrids;
 };
 
+/// Specialisation of CollectGridsAlongDim to stop when there are no more grids.
 template <class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, class FoundGrids>
 struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false>
 {
+    /// The type found by the class.
     using type = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, insert_pos>::type;
 };
 
@@ -312,11 +356,18 @@ struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids,
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 struct CollectAllGridsOnDim
 {
-    // Work backward from front (start) of grid inserting each new grid at the start of the sequence
+    /**
+     * @brief The type sequence describing all grids found by iterating along this
+     * dimension in the backwards direction.
+     *
+     * This is found by working backward from front (start) of grid inserting each
+     * new grid at the start of the sequence
+     */
     using BackwardTypeSeq = typename CollectGridsAlongDim<
             Edge<StartPatch, Grid1D, FRONT>,
             InterfaceTypeSeq,
             BackInsert>::type;
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<
             BackwardTypeSeq,
             // Work forward from back (end) of grid inserting each new grid at the end of the sequence
@@ -335,9 +386,11 @@ struct CollectAllGridsOnDim
 template <class QueryGrid1D, class IdxRangeType>
 struct SelectRelevantIdxRangeType;
 
+/// Specialisation of SelectRelevantIdxRangeType to get access to the grids in the index range.
 template <class QueryGrid1D, class... IdxRangeGrids>
 struct SelectRelevantIdxRangeType<QueryGrid1D, IdxRange<IdxRangeGrids...>>
 {
+    /// The type found by the class.
     using type = std::conditional_t<
             ddc::in_tags_v<QueryGrid1D, ddc::detail::TypeSeq<IdxRangeGrids...>>,
             ddc::detail::TypeSeq<IdxRange<IdxRangeGrids...>>,
@@ -356,15 +409,19 @@ struct SelectRelevantIdxRangeType<QueryGrid1D, IdxRange<IdxRangeGrids...>>
 template <class QueryGrid1D, class IdxRangeTuple>
 struct FindRelevantIdxRangeType;
 
+/// Specialisation of FindRelevantIdxRangeType for an empty list of index range types.
 template <class QueryGrid1D>
 struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<>>
 {
+    /// The type found by the class.
     using type = ddc::detail::TypeSeq<>;
 };
 
+/// Specialisation of FindRelevantIdxRangeType to iterate recursively over the possible index range types.
 template <class QueryGrid1D, class HeadIdxRangeType, class... IdxRangeTypes>
 struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<HeadIdxRangeType, IdxRangeTypes...>>
 {
+    /// The type found by the class.
     using type = ddc::type_seq_merge_t<
             typename SelectRelevantIdxRangeType<QueryGrid1D, HeadIdxRangeType>::type,
             typename FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeTypes...>>::type>;
