@@ -53,6 +53,8 @@ public:
      *
      * @tparam Grid1D The grid indicating the direction of interest.
      * @param all_idx_ranges A tuple containing all available index ranges.
+     *
+     * @return A tuple of index ranges along the line of interest.
      */
     template <class Grid1D, class... IdxRanges>
     static auto get_all_idx_ranges_along_direction(std::tuple<IdxRanges...> all_idx_ranges)
