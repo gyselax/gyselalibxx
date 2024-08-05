@@ -134,11 +134,8 @@ struct FindInterface<Edge, ddc::detail::TypeSeq<>>
 template <class Edge, class Interface1, class... RemainingInterfaceTypes>
 struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 {
-    static_assert(
-            !(std::is_same_v<
-                      Edge,
-                      typename Interface1::
-                              Edge1> || std::is_same_v<Edge, typename Interface1::Edge2>));
+    static_assert(!std::is_same_v<Edge, typename Interface1::Edge1>);
+    static_assert(!std::is_same_v<Edge, typename Interface1::Edge2>);
     using type =
             typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
 };
