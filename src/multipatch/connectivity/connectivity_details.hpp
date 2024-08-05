@@ -3,6 +3,9 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "edge.hpp"
+#include "interface.hpp"
+#include "patch.hpp"
 
 namespace connectivity_details {
 /**
@@ -108,7 +111,7 @@ struct FindPatch<
         QueryGrid1D,
         ddc::detail::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
-    using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
+    using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
 template <class Grid1D, class Patch1, class... RemainingPatchTypes>
@@ -128,6 +131,18 @@ struct FindInterface<Edge, ddc::detail::TypeSeq<>>
     static_assert(!std::is_same_v<Edge, Edge>, "Edge not found in collection of interfaces");
 };
 
+template <class Edge, class Interface1, class... RemainingInterfaceTypes>
+struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
+{
+    static_assert(
+            !(std::is_same_v<
+                      Edge,
+                      typename Interface1::
+                              Edge1> || std::is_same_v<Edge, typename Interface1::Edge2>));
+    using type =
+            typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
+};
+
 template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
@@ -141,19 +156,7 @@ struct FindInterface<
         Edge,
         ddc::detail::TypeSeq<Interface<OEdge, Edge, Orientations>, RemainingInterfaceTypes...>>
 {
-    using type = Interface<Edge, OEdge, Orientations>;
-};
-
-template <class Edge, class Interface1, class... RemainingInterfaceTypes>
-struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
-{
-    static_assert(
-            !(std::is_same_v<
-                      Edge,
-                      typename Interface1::
-                              Edge1> || std::is_same_v<Edge, typename Interface1::Edge2>));
-    using type =
-            typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
+    using type = Interface<OEdge, Edge, Orientations>;
 };
 
 template <class EdgeType>
@@ -277,6 +280,10 @@ using direct_patch_connections_t =
 
 template <class Grid1D, class PatchTypeSeq>
 using find_patch_t = typename connectivity_details::FindPatch<Grid1D, PatchTypeSeq>::type;
+
+template <class EdgeType, class InterfaceTypeSeq>
+using find_associated_interface_t =
+        typename connectivity_details::FindInterface<EdgeType, InterfaceTypeSeq>::type;
 
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 using collect_grids_on_dim_t = typename connectivity_details::
