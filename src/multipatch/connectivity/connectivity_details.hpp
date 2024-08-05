@@ -9,9 +9,12 @@
 
 namespace connectivity_details {
 /**
- * @brief A class which extracts the derivative dimensions from a type sequence.
+ * @brief A class which finds all interfaces connected to a given patch.
+ *
+ * @tparam Patch The patch whose connections are being searched for.
+ * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
  */
-template <class Patch, class InterfaceTypes>
+template <class Patch, class InterfaceTypeSeq>
 struct PatchConnection;
 
 template <class Patch>
@@ -38,6 +41,11 @@ struct PatchConnection<Patch, ddc::detail::TypeSeq<InterfaceType1, RemainingInte
                     type>;
 };
 
+/**
+ * @brief A class which finds all edges which are not OutsideEdge types.
+ *
+ * @tparam A DDC type sequence containing all the possible Edges.
+ */
 template <class TypeSeq>
 struct FilterEdges;
 
@@ -63,6 +71,10 @@ struct FilterEdges<ddc::detail::TypeSeq<EdgeType1, RemainingEdgeTypes...>>
             typename FilterEdges<ddc::detail::TypeSeq<RemainingEdgeTypes...>>::type>;
 };
 
+/**
+ * @brief A class to convert a type sequence to a tuple.
+ * @tparam The type sequence.
+ */
 template <class TypeSeq>
 struct ToTuple;
 
@@ -72,6 +84,10 @@ struct ToTuple<ddc::detail::TypeSeq<I...>>
     using type = std::tuple<I...>;
 };
 
+/**
+ * @brief A class to find all the patches used by the various edges.
+ * @tparam A DDC type sequence containing all the Edges.
+ */
 template <class TypeSeq>
 struct ExtractPatches;
 
@@ -89,6 +105,11 @@ struct ExtractPatches<ddc::detail::TypeSeq<EdgeType1, EdgeTypes...>>
             typename ExtractPatches<ddc::detail::TypeSeq<EdgeTypes...>>::type>;
 };
 
+/**
+ * @brief A class to locate a patch which contains the specified grid.
+ * @tparam The identifying grid.
+ * @tparam A DDC type sequence containing all possible patches.
+ */
 template <class Grid1D, class PatchTypeSeq>
 struct FindPatch;
 
@@ -103,6 +124,7 @@ struct FindPatch<
         QueryGrid1D,
         ddc::detail::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
+    // Case where Grid1 from first patch in type sequence matches QueryGrid1D
     using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
 };
 
@@ -111,17 +133,24 @@ struct FindPatch<
         QueryGrid1D,
         ddc::detail::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
+    // Case where Grid2 from first patch in type sequence matches QueryGrid1D
     using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
 template <class Grid1D, class Patch1, class... RemainingPatchTypes>
 struct FindPatch<Grid1D, ddc::detail::TypeSeq<Patch1, RemainingPatchTypes...>>
 {
+    // Should instantiate specialisations above instead of this specialisation
     static_assert(!std::is_same_v<typename Patch1::Grid1, Grid1D>);
     static_assert(!std::is_same_v<typename Patch1::Grid2, Grid1D>);
     using type = typename FindPatch<Grid1D, ddc::detail::TypeSeq<RemainingPatchTypes...>>::type;
 };
 
+/**
+ * @brief A class to locate an interface which contains the specified edge.
+ * @tparam The edge being located.
+ * @tparam A DDC type sequence of possible interfaces.
+ */
 template <class Edge, class InterfaceTypeSeq>
 struct FindInterface;
 
@@ -134,10 +163,9 @@ struct FindInterface<Edge, ddc::detail::TypeSeq<>>
 template <class Edge, class Interface1, class... RemainingInterfaceTypes>
 struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 {
-    static_assert(
-            !std::is_same_v<Edge, typename Interface1::Edge1>); // Should instantiate specialisation
-    static_assert(
-            !std::is_same_v<Edge, typename Interface1::Edge2>); // Should instantiate specialisation
+    // Should instantiate specialisations above instead of this specialisation
+    static_assert(!std::is_same_v<Edge, typename Interface1::Edge1>);
+    static_assert(!std::is_same_v<Edge, typename Interface1::Edge2>);
     using type =
             typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
 };
@@ -158,6 +186,10 @@ struct FindInterface<
     using type = Interface<OEdge, Edge, Orientations>;
 };
 
+/**
+ * @brief A class to get the opposite edge of a grid line from one of the edges.
+ * @tparam EdgeType The start edge connected to a grid line.
+ */
 template <class EdgeType>
 struct SwapEnd;
 
@@ -173,13 +205,28 @@ struct SwapEnd<Edge<Patch, Grid1D, BACK>>
     using type = Edge<Patch, Grid1D, FRONT>;
 };
 
+/**
+ * @brief A utility to get the other edge in an interface.
+ * @tparam StartEdge The edge whose equivalent we are looking for.
+ * @tparam InterfaceTypeSeq The DDC type sequence describing all possible interfaces which might
+ *                  contain the start edge.
+ */
 template <class StartEdge, class InterfaceTypeSeq>
 using equivalent_edge_t =
         typename FindInterface<StartEdge, InterfaceTypeSeq>::type::template OtherEdge<StartEdge>;
 
+/**
+ * @brief An enumerate to help when inserting elements into a type sequence.
+ */
 enum InsertPosition { FrontInsert, BackInsert };
 
-template <class ToInsert, class TypeSeq, InsertPosition dir>
+/**
+ * @brief A class which helps insert an element into a type sequence.
+ * @tparam ToInsert The element to be inserted into the type sequence.
+ * @tparam TypeSeq A type sequence into which elements will be inserted.
+ * @tparam insert_pos The position where the element should be inserted (back/front).
+ */
+template <class ToInsert, class TypeSeq, InsertPosition insert_pos>
 struct AddToTypeSeq;
 
 template <class ToInsert, class TypeSeq>
@@ -194,10 +241,20 @@ struct AddToTypeSeq<ToInsert, TypeSeq, BackInsert>
     using type = ddc::type_seq_merge_t<ddc::detail::TypeSeq<ToInsert>, TypeSeq>;
 };
 
+/**
+ * @brief A class which collects grids along a given dimension n a specified direction
+ *          from a starting edge.
+ *
+ * @tparam StartEdge The edge from which the collection should begin.
+ * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
+ * @tparam insert_pos The position where the element should be inserted (back/front).
+ * @tparam FoundGrids The grids that have been discovered so far along the given
+ *                      dimension and direction.
+ */
 template <
         class StartEdge,
         class InterfaceTypeSeq,
-        InsertPosition dir,
+        InsertPosition insert_pos,
         class FoundGrids = ddc::detail::TypeSeq<>,
         class MatchingEdge = equivalent_edge_t<StartEdge, InterfaceTypeSeq>,
         bool grid_already_found // Periodic case
@@ -207,38 +264,53 @@ struct CollectGridsAlongDim;
 template <
         class StartEdge,
         class InterfaceTypeSeq,
-        InsertPosition dir,
+        InsertPosition insert_pos,
         class FoundGrids,
         class MatchingEdge>
-struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, dir, FoundGrids, MatchingEdge, false>
+struct CollectGridsAlongDim<
+        StartEdge,
+        InterfaceTypeSeq,
+        insert_pos,
+        FoundGrids,
+        MatchingEdge,
+        false>
 {
-    using NewGridList = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, dir>::type;
+    using NewGridList =
+            typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, insert_pos>::type;
     using type = typename CollectGridsAlongDim<
             typename SwapEnd<MatchingEdge>::type,
             InterfaceTypeSeq,
-            dir,
+            insert_pos,
             NewGridList>::type;
 };
 
 template <
         class StartEdge,
         class InterfaceTypeSeq,
-        InsertPosition dir,
+        InsertPosition insert_pos,
         class FoundGrids,
         class MatchingEdge>
-struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, dir, FoundGrids, MatchingEdge, true>
+struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, MatchingEdge, true>
 {
     using type = FoundGrids;
 };
 
-template <class StartEdge, class InterfaceTypeSeq, InsertPosition dir, class FoundGrids>
-struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, dir, FoundGrids, OutsideEdge, false>
+template <class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, class FoundGrids>
+struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false>
 {
-    using type = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, dir>::type;
+    using type = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, insert_pos>::type;
 };
 
+/**
+ * @brief A class which collects all grids along a given dimension in both direction.
+ *
+ * @tparam StartPatch The patch from which the collection should begin.
+ * @tparam Grid1D The first grid to be included (this describes the dimension along which
+ *                  grids are collected).
+ * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
+ */
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
-struct CollectGridsOnDim
+struct CollectAllGridsOnDim
 {
     // Work backward from front (start) of grid inserting each new grid at the start of the sequence
     using BackwardTypeSeq = typename CollectGridsAlongDim<
@@ -255,6 +327,11 @@ struct CollectGridsOnDim
                     BackwardTypeSeq>::type>;
 };
 
+/**
+ * @brief A class to create a type sequence which contains the index range if it contains the grid.
+ * @tparam QueryGrid1D The grid which may or may not be present in the index range.
+ * @tparam IdxRangeType The index range type being checked.
+ */
 template <class QueryGrid1D, class IdxRangeType>
 struct SelectRelevantIdxRangeType;
 
@@ -267,6 +344,15 @@ struct SelectRelevantIdxRangeType<QueryGrid1D, IdxRange<IdxRangeGrids...>>
             ddc::detail::TypeSeq<>>;
 };
 
+/**
+ * @brief A class to find any index range types which contain a index range defined on the
+ *      provided grid.
+ *      E.g. Grid1, std::tuple<IdxRange<Grid1, Grid2>, IdxRange<Grid3,Grid4>> will
+ *      find: ddc::detail::TypeSeq<IdxRange<Grid1, Grid2>>
+ *
+ * @tparam QueryGrid1D The grid being searched for.
+ * @tparam A tuple of index ranges which may contain the relevant grid.
+ */
 template <class QueryGrid1D, class IdxRangeTuple>
 struct FindRelevantIdxRangeType;
 
@@ -286,31 +372,39 @@ struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<HeadIdxRangeType, IdxRan
 
 } // end namespace connectivity_details
 
-
+/// A tool for converting a DDC type sequence to a tuple.
 template <class TypeSeq>
 using to_tuple_t = typename connectivity_details::ToTuple<TypeSeq>::type;
 
-template <class... T>
-using filter_edges_t = typename connectivity_details::FilterEdges<ddc::detail::TypeSeq<T...>>::type;
+/// A tool to find all edges which are not OutsideEdge types.
+template <class... EdgeType>
+using filter_edges_t =
+        typename connectivity_details::FilterEdges<ddc::detail::TypeSeq<EdgeType...>>::type;
 
-template <class TypeSeq>
-using extract_patches_t = typename connectivity_details::ExtractPatches<TypeSeq>::type;
+/// A tool to find all the patches used by the various edges.
+template <class EdgeTypeSeq>
+using extract_patches_t = typename connectivity_details::ExtractPatches<EdgeTypeSeq>::type;
 
-template <class Patch, class InterfaceTypeSeq>
+/// A tool to find all patches directly connected to the start patch via an interface.
+template <class StartPatch, class InterfaceTypeSeq>
 using direct_patch_connections_t =
-        typename connectivity_details::PatchConnection<Patch, InterfaceTypeSeq>::type;
+        typename connectivity_details::PatchConnection<StartPatch, InterfaceTypeSeq>::type;
 
+/// A tool to find a patch which contains the specified grid.
 template <class Grid1D, class PatchTypeSeq>
 using find_patch_t = typename connectivity_details::FindPatch<Grid1D, PatchTypeSeq>::type;
 
+/// A tool to find the interface which contains a specified edge.
 template <class EdgeType, class InterfaceTypeSeq>
 using find_associated_interface_t =
         typename connectivity_details::FindInterface<EdgeType, InterfaceTypeSeq>::type;
 
+/// A tool to collect all grids along a given line including the specified grid.
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 using collect_grids_on_dim_t = typename connectivity_details::
-        CollectGridsOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
+        CollectAllGridsOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
 
+/// A tool to find the first multi-D index range which contains a specific grid.
 template <class QueryGrid1D, class IdxRangeTuple>
 using find_relevant_idx_range_t = ddc::type_seq_element_t<
         0,
