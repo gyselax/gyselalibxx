@@ -11,8 +11,12 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "connectivity.hpp"
+#include "edge.hpp"
+#include "interface.hpp"
 #include "patch.hpp"
 
+namespace non_periodic_uniform_2d_2patches {
 
 namespace non_periodic_uniform_2d_2patches {
 
@@ -95,5 +99,34 @@ using Patch2 = Patch<GridX2, GridY2, BSplinesX2, BSplinesY2>;
 
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
+
+using NorthEdge1 = Edge<Patch1, GridY1, BACK>;
+using SouthEdge1 = Edge<Patch1, GridY1, FRONT>;
+using EastEdge1 = Edge<Patch1, GridX1, BACK>;
+using WestEdge1 = Edge<Patch1, GridX1, FRONT>;
+
+using NorthEdge2 = Edge<Patch2, GridY2, BACK>;
+using SouthEdge2 = Edge<Patch2, GridY2, FRONT>;
+using EastEdge2 = Edge<Patch2, GridX2, BACK>;
+using WestEdge2 = Edge<Patch2, GridX2, FRONT>;
+
+using NorthInterface1 = Interface<NorthEdge1, OutsideEdge, true>;
+using SouthInterface1 = Interface<SouthEdge1, OutsideEdge, true>;
+using WestInterface1 = Interface<WestEdge1, OutsideEdge, true>;
+
+using NorthInterface2 = Interface<NorthEdge2, OutsideEdge, true>;
+using SouthInterface2 = Interface<SouthEdge2, OutsideEdge, true>;
+using EastInterface2 = Interface<EastEdge2, OutsideEdge, true>;
+
+using Interface_1_2 = Interface<EastEdge1, WestEdge2, true>;
+
+using Connectivity = MultipatchConnectivity<
+        NorthInterface1,
+        SouthInterface1,
+        WestInterface1,
+        NorthInterface2,
+        SouthInterface2,
+        EastInterface2,
+        Interface_1_2>;
 
 } // namespace non_periodic_uniform_2d_2patches
