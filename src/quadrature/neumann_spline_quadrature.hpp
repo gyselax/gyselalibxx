@@ -19,10 +19,17 @@
 
 
 namespace {
-template <class Grid>
-using CoefficientFieldMem1D_h = host_t<FieldMem<double, IdxRange<Grid>>>;
-template <class Grid>
-using CoefficientField1D_h = host_t<Field<double, IdxRange<Grid>>>;
+template <class ExecSpace, class Grid>
+using CoefficientFieldMem1D_h = FieldMem<
+        double,
+        IdxRange<Grid>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>;
+template <class ExecSpace, class Grid>
+using CoefficientField1D_h
+        = Field<double,
+                IdxRange<Grid>,
+                std::experimental::layout_right,
+                typename ExecSpace::memory_space>;
 
 } // namespace
 
@@ -46,11 +53,15 @@ using CoefficientField1D_h = host_t<Field<double, IdxRange<Grid>>>;
  *
  * @return The quadrature coefficients for the method defined on the provided index range.
  */
-template <class Grid, class SplineBuilder>
-host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_1d(
+template <class ExecSpace, class Grid, class SplineBuilder>
+FieldMem<double, IdxRange<Grid>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+neumann_spline_quadrature_coefficients_1d(
         IdxRange<Grid> const& idx_range,
         SplineBuilder const& builder)
 {
+    static_assert(
+            std::is_same_v<typename ExecSpace::memory_space, typename SplineBuilder::memory_space>,
+            "ExecSpace and SplineBuiler memory space do not match.");
     constexpr int nbc_xmin = SplineBuilder::s_nbc_xmin;
     constexpr int nbc_xmax = SplineBuilder::s_nbc_xmax;
     static_assert(
@@ -74,16 +85,14 @@ host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_
 
     assert(idx_range.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbc_xmin - nbc_xmax);
 
-    FieldMem<
-            double,
-            IdxRange<Grid>,
-            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
+    FieldMem<double, IdxRange<Grid>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             quadrature_coefficients(builder.interpolation_domain());
+
     // Even if derivatives coefficients on boundaries are eventually non-zero,
     // they are ignored for 0-flux Neumann boundary condition because
     // they would always be multiplied by f'(x)=0
     std::tie(std::ignore, quadrature_coefficients, std::ignore) = builder.quadrature_coefficients();
-    return ddc::create_mirror_and_copy(quadrature_coefficients[idx_range]);
+    return ddc::create_mirror_and_copy(ExecSpace(), quadrature_coefficients[idx_range]);
 }
 
 
@@ -108,31 +117,48 @@ neumann_spline_quadrature_coefficients(
         IdxRange<DDims...> const& idx_range,
         SplineBuilders const&... builders)
 {
+    static_assert(
+            (std::is_same_v<
+                     typename ExecSpace::memory_space,
+                     typename SplineBuilders::memory_space> and ...),
+            "ExecSpace and SplineBuiler memory space do not match.");
     assert((std::is_same_v<
                     typename DDims::continuous_dimension_type,
                     typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientFieldMem1D_h<DDims>...> current_dim_coeffs_alloc(
-            neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(idx_range), builders)...);
-    std::tuple<CoefficientField1D_h<DDims>...> current_dim_coeffs(
-            get_field(std::get<CoefficientFieldMem1D_h<DDims>>(current_dim_coeffs_alloc))...);
+    std::tuple<CoefficientFieldMem1D_h<ExecSpace, DDims>...> current_dim_coeffs_alloc(
+            neumann_spline_quadrature_coefficients_1d<
+                    ExecSpace>(ddc::select<DDims>(idx_range), builders)...);
+    std::tuple<CoefficientField1D_h<ExecSpace, DDims>...> current_dim_coeffs(get_field(
+            std::get<CoefficientFieldMem1D_h<ExecSpace, DDims>>(current_dim_coeffs_alloc))...);
     // Allocate ND coefficients
     FieldMem<
             double,
             IdxRange<DDims...>,
             ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
             coefficients_alloc(idx_range);
-    auto coefficients_alloc_host = ddc::create_mirror_view(get_field(coefficients_alloc));
-    auto coefficients = get_field(coefficients_alloc_host);
-
-    ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
-        // multiply the 1D coefficients by one another
-        coefficients(idim)
-                = (std::get<CoefficientField1D_h<DDims>>(current_dim_coeffs)(
-                           ddc::select<DDims>(idim))
-                   * ... * 1);
-    });
-    ddc::parallel_deepcopy(coefficients_alloc, coefficients_alloc_host);
+    DField<IdxRange<DDims...>, std::experimental::layout_right, typename ExecSpace::memory_space>
+            coefficients(get_field(coefficients_alloc));
+    if constexpr (std::is_same_v<ExecSpace, typename Kokkos::DefaultHostExecutionSpace>) {
+        ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
+            // multiply the 1D coefficients by one another
+            coefficients(idim)
+                    = (std::get<CoefficientField1D_h<ExecSpace, DDims>>(current_dim_coeffs)(
+                               ddc::select<DDims>(idim))
+                       * ... * 1);
+        });
+    } else {
+        ddc::parallel_for_each(
+                ExecSpace(),
+                idx_range,
+                KOKKOS_LAMBDA(Idx<DDims...> const idim) {
+                    // multiply the 1D coefficients by one another
+                    coefficients(idim)
+                            = (std::get<CoefficientField1D_h<ExecSpace, DDims>>(current_dim_coeffs)(
+                                       ddc::select<DDims>(idim))
+                               * ... * 1);
+                });
+    }
     return coefficients_alloc;
 }
