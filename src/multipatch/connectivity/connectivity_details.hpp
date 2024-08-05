@@ -134,8 +134,10 @@ struct FindInterface<Edge, ddc::detail::TypeSeq<>>
 template <class Edge, class Interface1, class... RemainingInterfaceTypes>
 struct FindInterface<Edge, ddc::detail::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 {
-    static_assert(!std::is_same_v<Edge, typename Interface1::Edge1>);
-    static_assert(!std::is_same_v<Edge, typename Interface1::Edge2>);
+    static_assert(
+            !std::is_same_v<Edge, typename Interface1::Edge1>); // Should instantiate specialisation
+    static_assert(
+            !std::is_same_v<Edge, typename Interface1::Edge2>); // Should instantiate specialisation
     using type =
             typename FindInterface<Edge, ddc::detail::TypeSeq<RemainingInterfaceTypes...>>::type;
 };
@@ -171,63 +173,86 @@ struct SwapEnd<Edge<Patch, Grid1D, BACK>>
     using type = Edge<Patch, Grid1D, FRONT>;
 };
 
-template <class Edge, class InterfaceTypeSeq>
-struct GetNextEdge
+template <class StartEdge, class InterfaceTypeSeq>
+using equivalent_edge_t =
+        typename FindInterface<StartEdge, InterfaceTypeSeq>::type::template OtherEdge<StartEdge>;
+
+enum InsertPosition { FrontInsert, BackInsert };
+
+template <class ToInsert, class TypeSeq, InsertPosition dir>
+struct AddToTypeSeq;
+
+template <class ToInsert, class TypeSeq>
+struct AddToTypeSeq<ToInsert, TypeSeq, FrontInsert>
 {
-    using current_interface = typename FindInterface<Edge, InterfaceTypeSeq>::type;
-    using type = typename SwapEnd<typename current_interface::template OtherEdge<Edge>>::type;
+    using type = ddc::type_seq_merge_t<TypeSeq, ddc::detail::TypeSeq<ToInsert>>;
 };
 
-template <class StartEdge, class InterfaceTypeSeq, class FoundGrids = ddc::detail::TypeSeq<>>
-struct CollectGridsOnDimFrontToBack
+template <class ToInsert, class TypeSeq>
+struct AddToTypeSeq<ToInsert, TypeSeq, BackInsert>
 {
-    using current_front_to_back_interface =
-            typename FindInterface<StartEdge, InterfaceTypeSeq>::type;
-    using MatchingBackEdge =
-            typename current_front_to_back_interface::template OtherEdge<StartEdge>;
-    using type = std::conditional_t<
-            std::is_same_v<
-                    MatchingBackEdge,
-                    OutsideEdge> || ddc::in_tags_v<StartEdge::associated_patch, FoundGrids>,
-            FoundGrids,
-            CollectGridsOnDimFrontToBack<
-                    typename SwapEnd<MatchingBackEdge>::type,
-                    InterfaceTypeSeq,
-                    ddc::type_seq_merge_t<
-                            FoundGrids,
-                            ddc::detail::TypeSeq<typename StartEdge::grid>>>>;
+    using type = ddc::type_seq_merge_t<ddc::detail::TypeSeq<ToInsert>, TypeSeq>;
 };
 
-template <class StartEdge, class InterfaceTypeSeq, class FoundGrids = ddc::detail::TypeSeq<>>
-struct CollectGridsOnDimBackToFront
+template <
+        class StartEdge,
+        class InterfaceTypeSeq,
+        InsertPosition dir,
+        class FoundGrids = ddc::detail::TypeSeq<>,
+        class MatchingEdge = equivalent_edge_t<StartEdge, InterfaceTypeSeq>,
+        bool grid_already_found // Periodic case
+        = ddc::in_tags_v<typename StartEdge::grid, FoundGrids>>
+struct CollectGridsAlongDim;
+
+template <
+        class StartEdge,
+        class InterfaceTypeSeq,
+        InsertPosition dir,
+        class FoundGrids,
+        class MatchingEdge>
+struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, dir, FoundGrids, MatchingEdge, false>
 {
-    using current_back_to_front_interface =
-            typename FindInterface<StartEdge, InterfaceTypeSeq>::type;
-    using MatchingFrontEdge =
-            typename current_back_to_front_interface::template OtherEdge<StartEdge>;
-    using type = std::conditional_t<
-            std::is_same_v<
-                    MatchingFrontEdge,
-                    OutsideEdge> || ddc::in_tags_v<typename StartEdge::associated_patch, FoundGrids>,
-            FoundGrids,
-            CollectGridsOnDimBackToFront<
-                    typename SwapEnd<MatchingFrontEdge>::type,
-                    InterfaceTypeSeq,
-                    ddc::type_seq_merge_t<
-                            ddc::detail::TypeSeq<typename StartEdge::grid>,
-                            FoundGrids>>>;
+    using NewGridList = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, dir>::type;
+    using type = typename CollectGridsAlongDim<
+            typename SwapEnd<MatchingEdge>::type,
+            InterfaceTypeSeq,
+            dir,
+            NewGridList>::type;
+};
+
+template <
+        class StartEdge,
+        class InterfaceTypeSeq,
+        InsertPosition dir,
+        class FoundGrids,
+        class MatchingEdge>
+struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, dir, FoundGrids, MatchingEdge, true>
+{
+    using type = FoundGrids;
+};
+
+template <class StartEdge, class InterfaceTypeSeq, InsertPosition dir, class FoundGrids>
+struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, dir, FoundGrids, OutsideEdge, false>
+{
+    using type = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, dir>::type;
 };
 
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 struct CollectGridsOnDim
 {
+    // Work backward from front (start) of grid inserting each new grid at the start of the sequence
+    using BackwardTypeSeq = typename CollectGridsAlongDim<
+            Edge<StartPatch, Grid1D, FRONT>,
+            InterfaceTypeSeq,
+            BackInsert>::type;
     using type = ddc::type_seq_merge_t<
-            typename CollectGridsOnDimBackToFront<
+            BackwardTypeSeq,
+            // Work forward from back (end) of grid inserting each new grid at the end of the sequence
+            typename CollectGridsAlongDim<
                     Edge<StartPatch, Grid1D, BACK>,
-                    InterfaceTypeSeq>::type,
-            typename CollectGridsOnDimFrontToBack<
-                    Edge<StartPatch, Grid1D, FRONT>,
-                    InterfaceTypeSeq>::type>;
+                    InterfaceTypeSeq,
+                    FrontInsert,
+                    BackwardTypeSeq>::type>;
 };
 
 template <class QueryGrid1D, class IdxRangeType>
