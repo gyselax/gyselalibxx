@@ -50,7 +50,6 @@ jobs:
     needs: docker
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-      options: --user root
     strategy:
       matrix:
         toolchain: [tests_toolchain.cmake, tests_release_toolchain.cmake]
