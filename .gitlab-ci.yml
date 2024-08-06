@@ -1,9 +1,4 @@
 
-stages:
-  - .pre
-  - static_analysis
-  - test
-
 include:
   - local: 'ci_tools/reusable_ci_jobs.yml'
 
@@ -48,19 +43,18 @@ indentation:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  stage: static_analysis
+  stage: test
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     ./bin/indent -td
-
 python_best_practices:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  stage: static_analysis
+  stage: test
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
@@ -95,7 +89,7 @@ public_mirror:
 documentation:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  stage: static_analysis
+  stage: test
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   before_script: |
@@ -118,7 +112,7 @@ markdown_best_practices:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  stage: static_analysis
+  stage: test
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
@@ -131,18 +125,3 @@ markdown_best_practices:
     python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
   allow_failure:
     exit_codes: 2
-
-cppcheck_static_analysis:
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  stage: static_analysis
-  needs: [ setup_env_mr ]
-  image: ghcr.io/gyselax/gyselalibxx_env
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
-  script: |
-    set +e
-    python3 ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
-  allow_failure:
-    exit_codes: [1, 2] # Allow failure due to style or error but not fatal

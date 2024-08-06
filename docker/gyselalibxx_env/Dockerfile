@@ -47,13 +47,6 @@ RUN chmod +x /bin/bash_run \
  && cmake --install build \
  && cd .. \
  && rm -rf ginkgo \
- && git clone -b 2.14.2 https://github.com/danmar/cppcheck.git \
- && cd cppcheck \
- && cmake -S . -B build \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
- && rm -rf cppcheck \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
