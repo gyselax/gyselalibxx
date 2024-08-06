@@ -15,12 +15,12 @@ module load spack-MI250-3.1.0
 
 # Inject PDI recipes into our local repo.
 git clone https://github.com/pdidev/spack pdi.spack || true
-cd pdi.spack && git checkout ef35ace && cd ..
+cd pdi.spack && git pull && cd ..
 cp -rf -- pdi.spack/packages "${SPACK_USER_PREFIX}/config_user_spack/local-repo"
 
 # NOTE: A sparse checkout would be great.
 git clone https://github.com/spack/spack spack.spack || true
-cd spack.spack && git checkout d66dce2 && cd ..
+cd spack.spack && git pull && cd ..
 # NOTE: We may be overriding some CINES modified recipes.
 cp -rf -- spack.spack/var/spack/repos/builtin/packages/ginkgo "${SPACK_USER_PREFIX}/config_user_spack/local-repo/packages"
 
@@ -33,7 +33,6 @@ echo "Preparing the Spack environment..."
 # # ongoing issue a CINES to fix the issue.
 # echo "# Disabled" >"${SPACK_USER_PREFIX}/config_user_spack/mirrors.yaml"
 
-# We use GCC as a base compiler (c/c++/fortran) and implicitly, ROCm's hipcc when the +rocm variant is specified.
 PRODUCT_SPEC_LIST="
 libyaml@0.2.5%gcc@12.1 build_system=autotools arch=linux-rhel8-zen3
 paraconf@1.0.0%gcc@12.1~fortran~ipo~shared~tests build_system=cmake build_type=Release generator==ninja arch=linux-rhel8-zen3
@@ -50,11 +49,12 @@ ninja@1.11.1%gcc@12.1+re2c build_system=generic arch=linux-rhel8-zen3
 # uninstalling previous products.
 # NOTE: This may fail if the product are not already installed. IMO this is a
 # bug, a rm of something that does not exists is a success not a failure.
-echo "Removing old packages (errors are expected)."
-spack uninstall --dependents --all --yes-to-all ${PRODUCT_SPEC_LIST} || true
-echo "Installing new packages (errors are NOT expected)."
-spack spec --reuse-deps ${PRODUCT_SPEC_LIST}
-spack install --no-check-signature --reuse-deps ${PRODUCT_SPEC_LIST}
+spack uninstall --dependents --all --yes-to-all \
+    ${PRODUCT_SPEC_LIST} || true
+
+# GCC based with hipcc for the ROCm variant:
+spack install --no-check-signature --reuse-deps \
+    ${PRODUCT_SPEC_LIST}
 
 # Ensure we expose modules for every installed software.
 spack module tcl refresh --delete-tree --yes-to-all
