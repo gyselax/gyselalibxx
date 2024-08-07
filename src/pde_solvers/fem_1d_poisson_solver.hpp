@@ -87,7 +87,9 @@ private:
      *
      * @tparam ElementType The type of the elements in the chunk.
      */
-    using DQField = DFieldMem<IdxRangeQ, ddc::KokkosAllocator<double, memory_space>>;
+    using DQFieldMem = DFieldMem<IdxRangeQ, ddc::KokkosAllocator<double, memory_space>>;
+    /// The accessor type for the DQFieldMem type
+    using DQConstField = DConstField<IdxRangeQ, std::experimental::layout_right, memory_space>;
 
     /**
      * @brief An array of coordinates defined at the quadrature points.
@@ -161,10 +163,16 @@ private:
     using full_index =
             typename SplineEvaluator::batched_evaluation_domain_type::discrete_element_type;
 
-    using CoordField = FieldMem<
+    using CoordFieldMem = FieldMem<
             CoordPDEDim,
             typename FEMSplineEvaluator::batched_evaluation_domain_type,
             ddc::KokkosAllocator<CoordPDEDim, memory_space>>;
+
+    using CoordField
+            = Field<CoordPDEDim,
+                    typename FEMSplineEvaluator::batched_evaluation_domain_type,
+                    std::experimental::layout_right,
+                    memory_space>;
 
 private:
     using RHSBSplines = InputBSplines;
@@ -196,7 +204,7 @@ private:
 
     int m_matrix_size;
 
-    DQField m_quad_coef;
+    DQFieldMem m_quad_coef;
 
     std::unique_ptr<Matrix> m_fem_matrix;
 
@@ -263,8 +271,8 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordField eval_pts_alloc(get_idx_range(phi));
-        ddc::ChunkSpan eval_pts = get_field(eval_pts_alloc);
+        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
+        CoordField eval_pts = get_field(eval_pts_alloc);
 
         ddc::parallel_for_each(
                 exec_space(),
@@ -301,8 +309,8 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordField eval_pts_alloc(get_idx_range(phi));
-        ddc::ChunkSpan eval_pts = get_field(eval_pts_alloc);
+        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
+        CoordField eval_pts = get_field(eval_pts_alloc);
 
         ddc::parallel_for_each(
                 exec_space(),
@@ -449,14 +457,14 @@ public:
         IdxRange<FEMBSplines> fem_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
         int const nbasis_proxy = ddc::discrete_space<FEMBSplines>().nbasis();
         SplineEvaluator spline_evaluator_proxy = m_spline_evaluator;
-        ddc::ChunkSpan quad_coef_proxy = get_field(m_quad_coef);
+        DQConstField quad_coef_proxy = get_const_field(m_quad_coef);
 
         FEMBSplinesIdx last_basis_element(nbasis_proxy - 1);
 
         ddc::parallel_fill(phi_spline_coef, 0.0);
 
         // Create the rhs as an alias for phi_spline_coef as the matrix equation is solved in place.
-        ddc::ChunkSpan rhs(phi_spline_coef);
+        BatchedFEMBSplinesCoeff rhs(phi_spline_coef);
 
         batch_idx_range_type batch_idx_range(get_idx_range(rho));
         RHSQuadratureIdxRange rhs_build_idx_range(batch_idx_range, get_idx_range(m_quad_coef));
@@ -489,7 +497,8 @@ public:
                 });
 
         auto phi_spline_coef_host_alloc = ddc::create_mirror_and_copy(phi_spline_coef);
-        ddc::ChunkSpan phi_spline_coef_host = get_field(phi_spline_coef_host_alloc);
+        host_t<BatchedFEMBSplinesCoeff> phi_spline_coef_host
+                = get_field(phi_spline_coef_host_alloc);
 
         int constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());
 

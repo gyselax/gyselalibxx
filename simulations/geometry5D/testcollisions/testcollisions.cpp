@@ -148,30 +148,30 @@ int main(int argc, char** argv)
     IdxStepSp const kinspecies(charges.size());
     IdxRangeSp const dom_kinsp(IdxSp(0), kinspecies);
 
-    DFieldMemTor1 field_grid_tor1(dom_tor1);
-    ddc::parallel_deepcopy(field_grid_tor1, DConstFieldTor1(grid_tor1.data(), dom_tor1));
-    auto field_grid_tor1_host = ddc::create_mirror_view_and_copy(get_field(field_grid_tor1));
-    DFieldMemTor2 field_grid_tor2(dom_tor2);
-    ddc::parallel_deepcopy(field_grid_tor2, DConstFieldTor2(grid_tor2.data(), dom_tor2));
-    auto field_grid_tor2_host = ddc::create_mirror_view_and_copy(get_field(field_grid_tor2));
-    DFieldMemTor3 field_grid_tor3(dom_tor3);
-    ddc::parallel_deepcopy(field_grid_tor3, DConstFieldTor3(grid_tor3.data(), dom_tor3));
-    auto field_grid_tor3_host = ddc::create_mirror_view_and_copy(get_field(field_grid_tor3));
-    DFieldMemVpar field_grid_vpar(dom_vpar);
-    ddc::parallel_deepcopy(field_grid_vpar, DConstFieldVpar(grid_vpar.data(), dom_vpar));
-    auto field_grid_vpar_host = ddc::create_mirror_view_and_copy(get_field(field_grid_vpar));
-    DFieldMemMu field_grid_mu(dom_mu);
-    ddc::parallel_deepcopy(field_grid_mu, DConstFieldMu(grid_mu.data(), dom_mu));
-    auto field_grid_mu_host = ddc::create_mirror_view_and_copy(get_field(field_grid_mu));
-    FieldMemSp<int> field_species(dom_kinsp);
-    ddc::parallel_deepcopy(field_species, host_t<ConstFieldSp<int>>(species.data(), dom_kinsp));
-    auto field_species_host = ddc::create_mirror_view_and_copy(get_field(field_species));
-    DFieldMemSp field_charges(dom_kinsp);
-    ddc::parallel_deepcopy(field_charges, host_t<DConstFieldSp>(charges.data(), dom_kinsp));
-    auto field_charges_host = ddc::create_mirror_view_and_copy(get_field(field_charges));
-    DFieldMemSp field_masses(dom_kinsp);
-    ddc::parallel_deepcopy(field_masses, host_t<DConstFieldSp>(masses.data(), dom_kinsp));
-    auto field_masses_host = ddc::create_mirror_view_and_copy(get_field(field_masses));
+    DConstFieldTor1 field_grid_tor1_host(grid_tor1.data(), dom_tor1);
+    auto field_grid_tor1 = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_tor1_host);
+    DConstFieldTor2 field_grid_tor2_host(grid_tor2.data(), dom_tor2);
+    auto field_grid_tor2 = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_tor2_host);
+    DConstFieldTor3 field_grid_tor3_host(grid_tor3.data(), dom_tor3);
+    auto field_grid_tor3 = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_tor3_host);
+    DConstFieldVpar field_grid_vpar_host(grid_vpar.data(), dom_vpar);
+    auto field_grid_vpar = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_vpar_host);
+    DConstFieldMu field_grid_mu_host(grid_mu.data(), dom_mu);
+    auto field_grid_mu
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_mu_host);
+    host_t<ConstFieldSp<int>> field_species_host(species.data(), dom_kinsp);
+    auto field_species
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_species_host);
+    host_t<DConstFieldSp> field_charges_host(charges.data(), dom_kinsp);
+    auto field_charges
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_charges_host);
+    host_t<DConstFieldSp> field_masses_host(masses.data(), dom_kinsp);
+    auto field_masses
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_masses_host);
 
     // Algorithm Info
     double const deltat = PCpp_double(conf_gyselax, ".Algorithm.deltat");

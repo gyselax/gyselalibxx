@@ -80,7 +80,7 @@ using IdxStepSpX = IdxStep<Species, GridX>;
 using IdxRangeSpXVx = IdxRange<Species, GridX, GridVx>;
 using IdxSpXVx = Idx<Species, GridX, GridVx>;
 
-// Chunks, Spans and Views
+// Field types
 template <class ElementType>
 using FieldMemSpXVx = FieldMem<ElementType, IdxRangeSpXVx>;
 using DFieldMemSpXVx = FieldMemSpXVx<double>;
@@ -185,7 +185,7 @@ public:
         charges_host(i_ion) = 1.;
         auto charges_alloc = ddc::
                 create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), get_field(charges_host));
-        ddc::ChunkSpan charges = get_field(charges_alloc);
+        DFieldSp charges = get_field(charges_alloc);
 
         // Initialization of the masses
         host_t<DFieldMemSp> masses_host(dom_allsp);
@@ -193,7 +193,7 @@ public:
         masses_host(i_ion) = 1.;
         auto masses_alloc = ddc::
                 create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), get_field(masses_host));
-        ddc::ChunkSpan masses = get_field(masses_alloc);
+        DFieldSp masses = get_field(masses_alloc);
 
 
         // Initialization of the distribution function and advection field

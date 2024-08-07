@@ -83,14 +83,14 @@ public:
     using DFieldR = Field<double, IdxRangeR>;
     /// Type alias for a span of a field defined on a grid on a poloidal plane
     using DFieldThetaR = Field<double, IdxRangeThetaR>;
-    /// Type alias for a constant reference to a Chunk on GPU defined on a grid of magnetic moments.
+    /// Type alias for a constant reference to a Field on GPU defined on a grid of magnetic moments.
     using DConstFieldMu
             = Field<double const,
                     IdxRangeMu,
                     std::experimental::layout_right,
                     Kokkos::DefaultExecutionSpace::
                             memory_space>; // Equivalent to Field<double const, IdxRangeMu>
-    /// Type alias for a constant reference to a Chunk on GPU defined on a grid of parallel velocities.
+    /// Type alias for a constant reference to a Field on GPU defined on a grid of parallel velocities.
     using DConstFieldVpar
             = Field<double const,
                     IdxRangeVpar,
@@ -187,10 +187,12 @@ public:
 
         IdxRangeSp idxrange_sp = ddc::select<Species>(fdistrib_idx_range);
         // --> Initialize the mass species
-        ddc::ChunkSpan hat_As_host = ddc::discrete_space<Species>().masses()[idxrange_sp];
+        host_t<DConstFieldSp> hat_As_host
+                = ddc::host_discrete_space<Species>().masses()[idxrange_sp];
         ddc::parallel_deepcopy(get_field(m_hat_As), hat_As_host);
         // --> Initialize the charge species
-        ddc::ChunkSpan hat_Zs_host = ddc::discrete_space<Species>().charges()[idxrange_sp];
+        host_t<DConstFieldSp> hat_Zs_host
+                = ddc::host_discrete_space<Species>().charges()[idxrange_sp];
         ddc::parallel_deepcopy(get_field(m_hat_Zs), hat_Zs_host);
 
         // --> Initialize the other quantities needed in koliop

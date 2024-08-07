@@ -155,7 +155,7 @@ void saving_computed(Mapping const& mapping, DFieldRTheta function, std::string 
  *      The time when we want to get the exact feet.
  *
  *
- * @return A Chunk with the exact characteristic feet at the given time.
+ * @return A FieldMem with the exact characteristic feet at the given time.
  */
 template <class AdvectionField, class Mapping>
 FieldMemRTheta<CoordRTheta> compute_exact_feet_rp(
