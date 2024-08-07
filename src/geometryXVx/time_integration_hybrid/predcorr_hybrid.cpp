@@ -31,7 +31,7 @@ DFieldSpXVx PredCorrHybrid::operator()(
         int const steps) const
 {
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    host_t<DFieldSpXVx> allfdistribu_host = get_field(allfdistribu_alloc);
+    ddc::ChunkSpan allfdistribu_host = get_field(allfdistribu_alloc);
 
     IdxRangeX const dom_x = get_idx_range<GridX>(allfdistribu);
 

@@ -30,7 +30,7 @@ class FFTPoissonSolver;
  * @tparam FullIdxRange The index range on which the operator() acts. This is equal to the
  *                      LaplacianIdxRange plus any batched dimensions.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations will take place.
- * @tparam LayoutSpace The layout space of the Fields passed to operator().
+ * @tparam LayoutSpace The layout space of the ChunkSpans passed to operator().
  */
 template <class... GridPDEDim1D, class FullIdxRange, class ExecSpace, class LayoutSpace>
 class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, FullIdxRange, ExecSpace, LayoutSpace>
@@ -54,25 +54,25 @@ public:
     };
 
 public:
-    /// @brief The Field type of the arguments to operator().
+    /// @brief The ChunkSpan type of the arguments to operator().
     using field_type = typename base_type::field_type;
-    /// @brief The const Field type of the arguments to operator().
+    /// @brief The const ChunkSpan type of the arguments to operator().
     using const_field_type = typename base_type::const_field_type;
 
     /// @brief The type of the derivative of @f$ \phi @f$.
     using vector_field_type = typename base_type::vector_field_type;
 
-    /// @brief The index range type describing the batch dimensions.
+    /// @brief The DiscreteDomain describing the batch dimensions.
     using batch_idx_range_type = typename base_type::batch_idx_range_type;
-    /// @brief The index type for indexing a batch dimension.
+    /// @brief The DiscreteElement for indexing a batch dimension.
     using batch_index_type = typename base_type::batch_index_type;
 
     /// @brief The type of the index range on which the equation is defined.
     using laplacian_idx_range_type = typename base_type::laplacian_idx_range_type;
 
-    /// @brief The layout space of the Fields passed to operator().
+    /// @brief The layout space of the ChunkSpans passed to operator().
     using layout_space = typename base_type::layout_space;
-    /// @brief The space (CPU/GPU) where the Fields passed to operator() are saved.
+    /// @brief The space (CPU/GPU) where the ChunkSpans passed to operator() are saved.
     using memory_space = typename base_type::memory_space;
 
     /// @brief The type of the Fourier space index range.
@@ -81,12 +81,12 @@ public:
     /// @brief The type of an index of the Fourier space index range.
     using fourier_index_type = typename fourier_idx_range_type::discrete_element_type;
 
-    /// @brief The type of a Field storing the Fourier transform of a function.
+    /// @brief The type of a Chunk storing the Fourier transform of a function.
     using fourier_field_mem_type = FieldMem<
             Kokkos::complex<double>,
             fourier_idx_range_type,
             ddc::KokkosAllocator<Kokkos::complex<double>, memory_space>>;
-    /// @brief The type of a Field storing the Fourier transform of a function.
+    /// @brief The type of a ChunkSpan storing the Fourier transform of a function.
     using fourier_field_type = typename fourier_field_mem_type::span_type;
 
 private:
@@ -112,9 +112,9 @@ private:
      * @brief Differentiate an expression from its representation in Fourier space by multiplying
      * by -i * k and then converting back to real space.
      *
-     * @param[out] derivative The Field where the derivative will be saved.
+     * @param[out] derivative The ChunkSpan where the derivative will be saved.
      * @param[out] fourier_derivative The derivative of the function in Fourier space will be saved.
-     * @param[in] values The Field containing the values of the function in Fourier space.
+     * @param[in] values The ChunkSpan containing the values of the function in Fourier space.
      *
      * @tparam Dim The dimension along which the expression is differentiated.
      */
@@ -136,9 +136,9 @@ private:
     /**
      * @brief Get the gradient of a 1D expression from its representation in Fourier space.
      *
-     * @param[out] gradient The Field where the derivative will be saved.
+     * @param[out] gradient The ChunkSpan where the derivative will be saved.
      * @param[out] fourier_derivative The derivative of the function in Fourier space will be saved.
-     * @param[in] values The Field containing the values of the function in Fourier space.
+     * @param[in] values The ChunkSpan containing the values of the function in Fourier space.
      */
     void get_gradient(
             DField<laplacian_idx_range_type, LayoutSpace, memory_space> gradient,
@@ -157,7 +157,7 @@ private:
      *
      * @param[out] gradient The VectorFieldSpan where the gradient will be saved.
      * @param[out] fourier_derivative The derivative of the function in Fourier space will be saved.
-     * @param[in] values The Field containing the values of the function in Fourier space.
+     * @param[in] values The ChunkSpan containing the values of the function in Fourier space.
      */
     template <class... Dims>
     void get_gradient(
@@ -218,8 +218,8 @@ public:
      * @brief Differentiate and multiply by -1 an expression in Fourier space by multiplying by -i * k
      * This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA
      *
-     * @param derivative The Field where the derivative will be saved.
-     * @param values The Field containing the values of the function in Fourier space.
+     * @param derivative The ChunkSpan where the derivative will be saved.
+     * @param values The ChunkSpan containing the values of the function in Fourier space.
      *
      * @tparam Dim The dimension along which the expression is differentiated.
      */

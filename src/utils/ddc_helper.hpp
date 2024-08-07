@@ -8,7 +8,6 @@
 #include <ddc/ddc.hpp>
 
 #include "directional_tag.hpp"
-#include "transpose.hpp"
 #include "vector_field.hpp"
 #include "vector_field_span.hpp"
 

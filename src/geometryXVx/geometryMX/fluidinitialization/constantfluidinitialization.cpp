@@ -12,7 +12,7 @@ ConstantFluidInitialization::ConstantFluidInitialization(host_t<DConstFieldSpMom
 
 DFieldSpMomX ConstantFluidInitialization::operator()(DFieldSpMomX const fluid_moments) const
 {
-    DConstFieldSpMom moments(get_field(m_moments_alloc));
+    ddc::ChunkSpan moments(get_field(m_moments_alloc));
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(fluid_moments),

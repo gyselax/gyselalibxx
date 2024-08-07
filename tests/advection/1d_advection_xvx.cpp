@@ -74,7 +74,7 @@ using IdxRangeXVx = IdxRange<GridX, GridVx>;
 using IdxXVx = Idx<GridX, GridVx>;
 
 
-// Field types
+// Chunks, Spans and Views
 template <class ElementType>
 using FieldMemX = FieldMem<ElementType, IdxRangeX>;
 using DFieldMemX = FieldMemX<double>;

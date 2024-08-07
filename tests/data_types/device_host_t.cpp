@@ -5,7 +5,6 @@
 
 #include <gtest/gtest.h>
 
-#include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
@@ -23,29 +22,29 @@ class Tag2
 using Direction = NDTag<Tag1, Tag2>;
 
 
-struct GridX
+struct DDimX
 {
 };
-using IdxX = Idx<GridX>;
-using IdxSteptX = IdxStep<GridX>;
-using IdxRangeX = IdxRange<GridX>;
+using DElemX = ddc::DiscreteElement<DDimX>;
+using DVectX = ddc::DiscreteVector<DDimX>;
+using DDomX = ddc::DiscreteDomain<DDimX>;
 
 
 template <class Datatype>
-using FieldMemX = FieldMem<Datatype, IdxRangeX>;
+using ChunkX = ddc::Chunk<Datatype, DDomX>;
 template <class Datatype>
-using FieldX = Field<Datatype, IdxRangeX>;
+using ChunkSpanX = ddc::ChunkSpan<Datatype, DDomX>;
 
 
 template <class Datatype>
-using VectorFieldX = VectorField<Datatype, IdxRangeX, Direction>;
+using VectorFieldX = VectorField<Datatype, DDomX, Direction>;
 template <class Datatype>
-using VectorFieldFieldX = VectorFieldSpan<Datatype, IdxRangeX, Direction>;
+using VectorFieldSpanX = VectorFieldSpan<Datatype, DDomX, Direction>;
 
 
-static IdxX constexpr lbound_x(50);
-static IdxSteptX constexpr nelems_x(3);
-static IdxRangeX constexpr dom_x(lbound_x, nelems_x);
+static DElemX constexpr lbound_x(50);
+static DVectX constexpr nelems_x(3);
+static DDomX constexpr dom_x(lbound_x, nelems_x);
 
 } // end namespace
 
@@ -53,10 +52,10 @@ static IdxRangeX constexpr dom_x(lbound_x, nelems_x);
 // Tests on DefaultExecutionSpace ----------------------------------------------------------------
 TEST(MemorySpace, ChunkOnDeviceT)
 {
-    FieldMemX<double> chunk_test_alloc(dom_x);
-    FieldMem<
+    device_t<ChunkX<double>> chunk_test_alloc(dom_x);
+    ddc::Chunk<
             double,
-            IdxRangeX,
+            DDomX,
             ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
             chunk_alloc(dom_x);
     EXPECT_TRUE(typeid(chunk_test_alloc) == typeid(chunk_alloc));
@@ -65,14 +64,14 @@ TEST(MemorySpace, ChunkOnDeviceT)
 
 TEST(MemorySpace, ChunkSpanOnDeviceT)
 {
-    FieldMemX<double> chunk_test_alloc(dom_x);
-    FieldX<double> chunk_span_test = get_field(chunk_test_alloc);
-    FieldMem<
+    device_t<ChunkX<double>> chunk_test_alloc(dom_x);
+    device_t<ChunkSpanX<double>> chunk_span_test = chunk_test_alloc.span_view();
+    ddc::Chunk<
             double,
-            IdxRangeX,
+            DDomX,
             ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
             chunk_alloc(dom_x);
-    ddc::ChunkSpan chunk_span = get_field(chunk_alloc);
+    ddc::ChunkSpan chunk_span = chunk_alloc.span_view();
     EXPECT_TRUE(typeid(chunk_span_test) == typeid(chunk_span));
 }
 
@@ -82,7 +81,7 @@ TEST(MemorySpace, VectorFieldOnDeviceT)
     device_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
     VectorField<
             double,
-            IdxRangeX,
+            DDomX,
             Direction,
             ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
             vector_field_alloc(dom_x);
@@ -93,14 +92,14 @@ TEST(MemorySpace, VectorFieldOnDeviceT)
 TEST(MemorySpace, VectorFieldSpanOnDeviceT)
 {
     device_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    device_t<VectorFieldFieldX<double>> vector_field_span_test = get_field(vector_field_test_alloc);
+    device_t<VectorFieldSpanX<double>> vector_field_span_test = vector_field_test_alloc.span_view();
     VectorField<
             double,
-            IdxRangeX,
+            DDomX,
             Direction,
             ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
             vector_field_alloc(dom_x);
-    VectorFieldSpan vector_field_span = get_field(vector_field_alloc);
+    VectorFieldSpan vector_field_span = vector_field_alloc.span_view();
     EXPECT_TRUE(typeid(vector_field_span_test) == typeid(vector_field_span));
 }
 
@@ -108,10 +107,10 @@ TEST(MemorySpace, VectorFieldSpanOnDeviceT)
 // Tests on DefaultHostExecutionSpace ------------------------------------------------------------
 TEST(MemorySpace, ChunkOnHostT)
 {
-    host_t<FieldMemX<double>> chunk_test_alloc(dom_x);
-    FieldMem<
+    host_t<ChunkX<double>> chunk_test_alloc(dom_x);
+    ddc::Chunk<
             double,
-            IdxRangeX,
+            DDomX,
             ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
             chunk_alloc(dom_x);
     EXPECT_TRUE(typeid(chunk_test_alloc) == typeid(chunk_alloc));
@@ -120,14 +119,14 @@ TEST(MemorySpace, ChunkOnHostT)
 
 TEST(MemorySpace, ChunkSpanOnHostT)
 {
-    host_t<FieldMemX<double>> chunk_test_alloc(dom_x);
-    host_t<FieldX<double>> chunk_span_test = get_field(chunk_test_alloc);
-    FieldMem<
+    host_t<ChunkX<double>> chunk_test_alloc(dom_x);
+    host_t<ChunkSpanX<double>> chunk_span_test = chunk_test_alloc.span_view();
+    ddc::Chunk<
             double,
-            IdxRangeX,
+            DDomX,
             ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
             chunk_alloc(dom_x);
-    ddc::ChunkSpan chunk_span = get_field(chunk_alloc);
+    ddc::ChunkSpan chunk_span = chunk_alloc.span_view();
     EXPECT_TRUE(typeid(chunk_span_test) == typeid(chunk_span));
 }
 
@@ -137,7 +136,7 @@ TEST(MemorySpace, VectorFieldOnHostT)
     host_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
     VectorField<
             double,
-            IdxRangeX,
+            DDomX,
             Direction,
             ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
             vector_field_alloc(dom_x);
@@ -148,13 +147,13 @@ TEST(MemorySpace, VectorFieldOnHostT)
 TEST(MemorySpace, VectorFieldSpanOnHostT)
 {
     host_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    host_t<VectorFieldFieldX<double>> vector_field_span_test = get_field(vector_field_test_alloc);
+    host_t<VectorFieldSpanX<double>> vector_field_span_test = vector_field_test_alloc.span_view();
     VectorField<
             double,
-            IdxRangeX,
+            DDomX,
             Direction,
             ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
             vector_field_alloc(dom_x);
-    VectorFieldSpan vector_field_span = get_field(vector_field_alloc);
+    VectorFieldSpan vector_field_span = vector_field_alloc.span_view();
     EXPECT_TRUE(typeid(vector_field_span_test) == typeid(vector_field_span));
 }

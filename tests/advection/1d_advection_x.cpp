@@ -46,7 +46,7 @@ using IdxX = Idx<GridX>;
 using IdxStepX = IdxStep<GridX>;
 
 
-// Field types
+// Chunks, Spans and Views
 template <class ElementType>
 using FieldMemX = FieldMem<ElementType, IdxRangeX>;
 using DFieldMemX = FieldMemX<double>;

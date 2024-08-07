@@ -32,7 +32,7 @@ private:
     IdxRangeInterp m_idx_range;
     IdxRangeInterp m_inner_idx_range;
     Field<double, IdxRangeInterp, std::experimental::layout_right, typename Execspace::memory_space>
-            m_lagrange_coeffs;
+            m_ChunkSpan;
     CoordDimI m_left_bound;
     CoordDimI m_right_bound;
     IdxStepInterp m_poly_support;
@@ -56,7 +56,7 @@ public:
             IdxStepInterp ghost)
         : m_idx_range(idx_range)
         , m_inner_idx_range(idx_range.remove(ghost, ghost))
-        , m_lagrange_coeffs(x_nodes_fnodes)
+        , m_ChunkSpan(x_nodes_fnodes)
         , m_left_bound(ddc::coordinate(m_inner_idx_range.front()))
         , m_right_bound(ddc::coordinate(m_inner_idx_range.back()))
         , m_poly_support(degree + 1)
@@ -204,7 +204,7 @@ KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, GridInterp, BcMin, BcMax>::eva
     IdxRangeInterp subidx_range(begin, npoints_subidx_range);
     double p = 0;
     for (IdxInterp const ix : subidx_range) {
-        p += compute_basis(x_intern, ix, subidx_range) * m_lagrange_coeffs(ix);
+        p += compute_basis(x_intern, ix, subidx_range) * m_ChunkSpan(ix);
     }
     return p;
 }

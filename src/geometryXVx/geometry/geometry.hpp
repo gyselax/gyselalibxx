@@ -305,9 +305,6 @@ template <class ElementType>
 using FieldSpMomX = Field<ElementType, IdxRangeSpMomX>;
 
 template <class ElementType>
-using FieldSpMom = Field<ElementType, IdxRangeSpMom>;
-
-template <class ElementType>
 using FieldSpVx = Field<ElementType, IdxRangeSpVx>;
 
 template <class ElementType>
@@ -325,8 +322,6 @@ using DFieldX = FieldX<double>;
 
 using DFieldSpMomX = FieldSpMomX<double>;
 
-using DFieldSpMom = FieldSpMom<double>;
-
 using DFieldSpVx = FieldSpVx<double>;
 
 using DFieldSpX = FieldSpX<double>;
@@ -342,25 +337,22 @@ using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
 
 template <class ElementType>
-using BSConstFieldX = ConstField<ElementType, BSIdxRangeX>;
+using BSConstFieldX = Field<ElementType const, BSIdxRangeX>;
 
 template <class ElementType>
-using ConstFieldSpMom = ConstField<ElementType, IdxRangeSpMom>;
+using ConstFieldSpMom = Field<ElementType const, IdxRangeSpMom>;
 
 template <class ElementType>
-using ConstFieldSpMomX = ConstField<ElementType, IdxRangeSpMomX>;
+using ConstFieldSpMomX = Field<ElementType const, IdxRangeSpMomX>;
 
 template <class ElementType>
-using ConstFieldSpMom = ConstField<ElementType, IdxRangeSpMom>;
+using ConstFieldSpVx = Field<ElementType const, IdxRangeSpVx>;
 
 template <class ElementType>
-using ConstFieldSpVx = ConstField<ElementType, IdxRangeSpVx>;
+using ConstFieldSpX = Field<ElementType const, IdxRangeSpX>;
 
 template <class ElementType>
-using ConstFieldSpX = ConstField<ElementType, IdxRangeSpX>;
-
-template <class ElementType>
-using ConstFieldSpXVx = ConstField<ElementType, IdxRangeSpXVx>;
+using ConstFieldSpXVx = Field<ElementType const, IdxRangeSpXVx>;
 
 
 
@@ -374,8 +366,6 @@ using DBSConstFieldX = BSConstFieldX<double>;
 using DConstFieldSpMom = ConstFieldSpMom<double>;
 
 using DConstFieldSpMomX = ConstFieldSpMomX<double>;
-
-using DConstFieldSpMom = ConstFieldSpMom<double>;
 
 using DConstFieldSpX = ConstFieldSpX<double>;
 
@@ -413,7 +403,7 @@ public:
     using VelocityIdxRange = IdxRangeVx;
 
 
-    // using FdistribuIdxRange = IdxRange<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(IdxRange());
+    // using FdistribuIdxRange = DiscreteDomain<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(IdxRange());
     /**
      * @brief An alias for the whole distribution function discrete index range type.
      */

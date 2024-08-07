@@ -320,12 +320,12 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
     // Function tests
     // --- patch 1
-    DFieldMem<IdxRangeX1> function_1_alloc(idx_range_x1);
-    DField<IdxRangeX1> function_1 = get_field(function_1_alloc);
+    FieldMem<double, IdxRangeX1> function_1_alloc(idx_range_x1);
+    ddc::ChunkSpan function_1 = get_field(function_1_alloc);
 
     // --- patch 2
-    DFieldMem<IdxRangeX2> function_2_alloc(idx_range_x2);
-    DField<IdxRangeX2> function_2 = get_field(function_2_alloc);
+    FieldMem<double, IdxRangeX2> function_2_alloc(idx_range_x2);
+    ddc::ChunkSpan function_2 = get_field(function_2_alloc);
 
     initialize_1D_functions(function_1, function_2);
 
@@ -336,22 +336,20 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
     // Spline representations
     // --- patch 1
-    DFieldMem<IdxRange<BSplinesX1>> function_1_coef_alloc(get_spline_idx_range(builder_x1));
-    DField<IdxRange<BSplinesX1>> function_1_coef = get_field(function_1_coef_alloc);
+    FieldMem<double, IdxRange<BSplinesX1>> function_1_coef_alloc(get_spline_idx_range(builder_x1));
+    ddc::ChunkSpan function_1_coef = get_field(function_1_coef_alloc);
 
-    DFieldMem<IdxRange<BSplinesX1>> function_1_coef_expected_alloc(
+    FieldMem<double, IdxRange<BSplinesX1>> function_1_coef_expected_alloc(
             get_spline_idx_range(builder_x1));
-    DField<IdxRange<BSplinesX1>> function_1_coef_expected
-            = get_field(function_1_coef_expected_alloc);
+    ddc::ChunkSpan function_1_coef_expected = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
-    DFieldMem<IdxRange<BSplinesX2>> function_2_coef_alloc(get_spline_idx_range(builder_x2));
-    DField<IdxRange<BSplinesX2>> function_2_coef = get_field(function_2_coef_alloc);
+    FieldMem<double, IdxRange<BSplinesX2>> function_2_coef_alloc(get_spline_idx_range(builder_x2));
+    ddc::ChunkSpan function_2_coef = get_field(function_2_coef_alloc);
 
-    DFieldMem<IdxRange<BSplinesX2>> function_2_coef_expected_alloc(
+    FieldMem<double, IdxRange<BSplinesX2>> function_2_coef_expected_alloc(
             get_spline_idx_range(builder_x2));
-    DField<IdxRange<BSplinesX2>> function_2_coef_expected
-            = get_field(function_2_coef_expected_alloc);
+    ddc::ChunkSpan function_2_coef_expected = get_field(function_2_coef_expected_alloc);
 
     // --- collection
     std::tuple function_coef = {function_1_coef, function_2_coef};
@@ -390,12 +388,12 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
     // Function tests
     // --- patch 1
-    DFieldMem<IdxRangeXY1> function_1_alloc(idx_range_xy1);
-    DField<IdxRangeXY1> function_1 = get_field(function_1_alloc);
+    FieldMem<double, IdxRangeXY1> function_1_alloc(idx_range_xy1);
+    ddc::ChunkSpan function_1 = get_field(function_1_alloc);
 
     // --- patch 2
-    DFieldMem<IdxRangeXY2> function_2_alloc(idx_range_xy2);
-    DField<IdxRangeXY2> function_2 = get_field(function_2_alloc);
+    FieldMem<double, IdxRangeXY2> function_2_alloc(idx_range_xy2);
+    ddc::ChunkSpan function_2 = get_field(function_2_alloc);
 
     initialize_2D_functions(function_1, function_2);
 
@@ -406,24 +404,22 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 
     // Spline representations
     // --- patch 1
-    DFieldMem<IdxRange<BSplinesX1, GridY1>> function_1_coef_alloc(
+    FieldMem<double, IdxRange<BSplinesX1, GridY1>> function_1_coef_alloc(
             builder_x1.batched_spline_domain());
-    DField<IdxRange<BSplinesX1, GridY1>> function_1_coef = get_field(function_1_coef_alloc);
+    ddc::ChunkSpan function_1_coef = get_field(function_1_coef_alloc);
 
-    DFieldMem<IdxRange<BSplinesX1, GridY1>> function_1_coef_expected_alloc(
+    FieldMem<double, IdxRange<BSplinesX1, GridY1>> function_1_coef_expected_alloc(
             builder_x1.batched_spline_domain());
-    DField<IdxRange<BSplinesX1, GridY1>> function_1_coef_expected
-            = get_field(function_1_coef_expected_alloc);
+    ddc::ChunkSpan function_1_coef_expected = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
-    DFieldMem<IdxRange<BSplinesX2, GridY2>> function_2_coef_alloc(
+    FieldMem<double, IdxRange<BSplinesX2, GridY2>> function_2_coef_alloc(
             builder_x2.batched_spline_domain());
-    DField<IdxRange<BSplinesX2, GridY2>> function_2_coef = get_field(function_2_coef_alloc);
+    ddc::ChunkSpan function_2_coef = get_field(function_2_coef_alloc);
 
-    DFieldMem<IdxRange<BSplinesX2, GridY2>> function_2_coef_expected_alloc(
+    FieldMem<double, IdxRange<BSplinesX2, GridY2>> function_2_coef_expected_alloc(
             builder_x2.batched_spline_domain());
-    DField<IdxRange<BSplinesX2, GridY2>> function_2_coef_expected
-            = get_field(function_2_coef_expected_alloc);
+    ddc::ChunkSpan function_2_coef_expected = get_field(function_2_coef_expected_alloc);
 
     // --- collection
     std::tuple function_coef = {function_1_coef, function_2_coef};

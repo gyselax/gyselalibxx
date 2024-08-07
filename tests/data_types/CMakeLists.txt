@@ -13,9 +13,7 @@ target_link_libraries(unit_tests_data_types
     PUBLIC
         GTest::gtest
         GTest::gmock
-
         gslx::data_types
-        gslx::utils
 )
 
 gtest_discover_tests(unit_tests_data_types DISCOVERY_MODE PRE_TEST)

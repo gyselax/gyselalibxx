@@ -169,12 +169,12 @@ public:
 
         // INITIALISATION ------------------------------------------------------------------------
         // Initialization of the masses
-        host_t<DFieldMemSp> masses_host(dom_allsp);
+        host_t<FieldMemSp<int>> masses_host(dom_allsp);
         masses_host(i_elec) = 1;
         masses_host(i_ion) = 1;
         auto masses_alloc = ddc::
                 create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), get_field(masses_host));
-        DFieldSp masses = get_field(masses_alloc);
+        ddc::ChunkSpan masses = get_field(masses_alloc);
 
 
         // Initialization of the distribution function and advection field
