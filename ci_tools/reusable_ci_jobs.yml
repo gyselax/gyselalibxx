@@ -56,7 +56,7 @@ setup_env_mr:
     cd build
     cmake -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN} ..
     cmake --build . -j 4
-    ctest -j 2 --timeout 5 --output-junit tests.xml
+    ctest -j 2 --timeout 5 --output-junit tests.xml --output-on-failure
     ls ./tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png
     ls ./tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png
   artifacts:

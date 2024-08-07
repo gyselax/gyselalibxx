@@ -183,7 +183,7 @@ using BSIdxRangeRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 using BSIdxRangePolar = IdxRange<PolarBSplinesRTheta>;
 
 
-// --- Chunk definitions
+// --- Field definitions
 template <class ElementType>
 using FieldMemR = host_t<FieldMem<ElementType, IdxRangeR>>;
 
