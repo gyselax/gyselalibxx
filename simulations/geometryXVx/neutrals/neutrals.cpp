@@ -18,7 +18,6 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "charge_exchange.hpp"
@@ -157,25 +156,20 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<X> bv_x_max(ddc::coordinate(mesh_x.back()));
 #endif
 
+    ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(mesh_vx.front()));
+    ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(mesh_vx.back()));
+
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
+    SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 #ifndef PERIODIC_RDIMX
     SplineXEvaluator_1d const spline_x_evaluator_poisson(bv_x_min, bv_x_max);
 #endif
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
-
-    IdxStepVx static constexpr gwvx {0};
-    LagrangeInterpolator<GridVx, BCond::DIRICHLET, BCond::DIRICHLET, GridX, GridVx> const
-            lagrange_vx_non_preallocatable_interpolator(3, gwvx);
-    PreallocatableLagrangeInterpolator<
-            GridVx,
-            BCond::DIRICHLET,
-            BCond::DIRICHLET,
-            GridX,
-            GridVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
+    PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
     BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(lagrange_vx_interpolator);
+    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);
 
     // list of rhs operators
     std::vector<std::reference_wrapper<IRightHandSide const>> rhs_operators;
