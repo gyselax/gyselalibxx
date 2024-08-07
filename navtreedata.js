@@ -71,6 +71,7 @@ var NAVTREE =
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Geometry (vpar, mu)", "src_geometryVparMu.html", "src_geometryVparMu" ],
     [ "Gyselalib++ tests", "tests.html", "tests" ],
+    [ "Collisions test", "tests_geometry5D_collisions.html", null ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
@@ -80,13 +81,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html#a9cc7c6f7a84bbfee2fa7105e63740d93",
-"classEdgeTransformation.html",
-"classMPILayout.html#a805e67a98b1dc70a79c9a321a0dd7adc",
-"classPolarSplineFEMPoissonLikeSolver.html#a22eac39c2fceb87b79f36f12d46c10f8",
-"dir_0b94a1bc260289a82ecb53162f2bb9d0.html",
-"rk4_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a7d0f81f6499b4284768beb4cffff271a"
+"classCollisionSpVparMu.html#a913b828900b7df56e1f65981a97a47f3",
+"classDiscreteToCartesian.html#ae1bf31c827fc3abbf866d77068a93367",
+"classMPILayout.html#a5883d6c267edba25da7370986eb15720",
+"classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791",
+"ddc__helper_8hpp_source.html",
+"quadrature__coeffs__nd_8hpp.html",
+"structMu.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

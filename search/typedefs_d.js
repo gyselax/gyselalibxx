@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['tensor_5fproduct_5fidx_5frange_5ftype_1541',['tensor_product_idx_range_type',['../classPolarBSplines.html#aa4d0e6fff9aa8d6641fca3cfad60bc0b',1,'PolarBSplines']]],
-  ['tensor_5fproduct_5fidx_5fstep_5ftype_1542',['tensor_product_idx_step_type',['../classPolarBSplines.html#a88a1c2cb066c6e86912f15115ee2aa57',1,'PolarBSplines']]],
-  ['tensor_5fproduct_5findex_5ftype_1543',['tensor_product_index_type',['../classPolarBSplines.html#aafa27d2710cd09d6713d6dafcb2ae564',1,'PolarBSplines']]],
-  ['type_1544',['type',['../structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.html#a3d7bd6ff70bbce6361c363dd77cc76bd',1,'interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;']]]
+  ['radial_5fchunk_5ftype_1630',['radial_chunk_type',['../classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d',1,'CollisionInfo::radial_chunk_type()'],['../classCollisionInfoRadial.html#aa18c43d0ec1aaf78c36c87ad08d85ded',1,'CollisionInfoRadial::radial_chunk_type()']]],
+  ['real_5flaplacian_5ftags_1631',['real_laplacian_tags',['../classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a0a0326fd8998acb7b363b777ba327395',1,'IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, FullIdxRange, LayoutSpace, MemorySpace &gt;']]]
 ];

@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('structInterface.html',''); initResizab
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structInterface-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -121,14 +122,17 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">Edge2</a> = Edge2Type</td></tr>
 <tr class="memdesc:a8f23b4f792c4cc36db73b8f7f49b4d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> type of the second patch. <br /></td></tr>
 <tr class="separator:a8f23b4f792c4cc36db73b8f7f49b4d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eabd9b5a702cf327f1db9aa89f75569"><td class="memItemLeft" align="right" valign="top"><a id="a2eabd9b5a702cf327f1db9aa89f75569"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#a2eabd9b5a702cf327f1db9aa89f75569">Patch1</a> = typename Edge1::associated_patch</td></tr>
-<tr class="memdesc:a2eabd9b5a702cf327f1db9aa89f75569"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of first patch. <br /></td></tr>
-<tr class="separator:a2eabd9b5a702cf327f1db9aa89f75569"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8c8f525826573dc1741ed5809228108"><td class="memItemLeft" align="right" valign="top"><a id="ad8c8f525826573dc1741ed5809228108"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInterface.html#ad8c8f525826573dc1741ed5809228108">Patch2</a> = typename Edge2::associated_patch</td></tr>
-<tr class="memdesc:ad8c8f525826573dc1741ed5809228108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of second patch. <br /></td></tr>
-<tr class="separator:ad8c8f525826573dc1741ed5809228108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add430c600a6a1181e4793a5a3b8beafd"><td class="memTemplParams" colspan="2">template&lt;class Edge , class  = std::enable_if_t&lt;std::is_same_v&lt;Edge, Edge1&gt; || std::is_same_v&lt;Edge, Edge2&gt;&gt;&gt; </td></tr>
+<tr class="memitem:add430c600a6a1181e4793a5a3b8beafd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structInterface.html#add430c600a6a1181e4793a5a3b8beafd">OtherEdge</a> = std::conditional_t&lt; std::is_same_v&lt; <a class="el" href="structEdge.html">Edge</a>, <a class="el" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Edge1</a> &gt;, <a class="el" href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">Edge2</a>, <a class="el" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Edge1</a> &gt;</td></tr>
+<tr class="memdesc:add430c600a6a1181e4793a5a3b8beafd"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to get the other edge of an interface.  <a href="structInterface.html#add430c600a6a1181e4793a5a3b8beafd">More...</a><br /></td></tr>
+<tr class="separator:add430c600a6a1181e4793a5a3b8beafd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ae0bdd297037fb4c4415bc7f9a3ca9fff"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
+<tr class="memitem:ae0bdd297037fb4c4415bc7f9a3ca9fff"><td class="memTemplItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structInterface.html#ae0bdd297037fb4c4415bc7f9a3ca9fff">connected_to_patch</a> ()</td></tr>
+<tr class="memdesc:ae0bdd297037fb4c4415bc7f9a3ca9fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">A compile-time function to check if an interface is on the edge of a given patch.  <a href="structInterface.html#ae0bdd297037fb4c4415bc7f9a3ca9fff">More...</a><br /></td></tr>
+<tr class="separator:ae0bdd297037fb4c4415bc7f9a3ca9fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -150,7 +154,68 @@ struct Interface&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;</h3>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a> </dd></dl>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="add430c600a6a1181e4793a5a3b8beafd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add430c600a6a1181e4793a5a3b8beafd">&#9670;&nbsp;</a></span>OtherEdge</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Edge1Type , class Edge2Type , bool orientations_agree_bool&gt; </div>
+<div class="memtemplate">
+template&lt;class Edge , class  = std::enable_if_t&lt;std::is_same_v&lt;Edge, Edge1&gt; || std::is_same_v&lt;Edge, Edge2&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structInterface.html">Interface</a>&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::<a class="el" href="structInterface.html#add430c600a6a1181e4793a5a3b8beafd">OtherEdge</a> =  std::conditional_t&lt;std::is_same_v&lt;<a class="el" href="structEdge.html">Edge</a>, <a class="el" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Edge1</a>&gt;, <a class="el" href="structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a">Edge2</a>, <a class="el" href="structInterface.html#a0eba2d684c513fce67db0f0f977d1315">Edge1</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A tool to get the other edge of an interface. </p>
+<p>I.e. to get Edge1 given Edge2 or Edge2 given Edge1 </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae0bdd297037fb4c4415bc7f9a3ca9fff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0bdd297037fb4c4415bc7f9a3ca9fff">&#9670;&nbsp;</a></span>connected_to_patch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Edge1Type , class Edge2Type , bool orientations_agree_bool&gt; </div>
+<div class="memtemplate">
+template&lt;class Patch &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr bool <a class="el" href="structInterface.html">Interface</a>&lt; Edge1Type, Edge2Type, orientations_agree_bool &gt;::connected_to_patch </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A compile-time function to check if an interface is on the edge of a given patch. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">The</td><td>patch which may be connected </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the patch is connected, False otherwise. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="af2dbae0b5ea4505116a20eeb5179e72d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af2dbae0b5ea4505116a20eeb5179e72d">&#9670;&nbsp;</a></span>orientations_agree</h2>
 
