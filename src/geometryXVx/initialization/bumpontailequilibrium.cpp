@@ -21,7 +21,7 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
 
     // Initialization of the maxwellian
     DFieldMemVx maxwellian_alloc(gridvx);
-    ddc::ChunkSpan maxwellian = get_field(maxwellian_alloc);
+    DFieldVx maxwellian = get_field(maxwellian_alloc);
     ddc::for_each(gridsp, [&](IdxSp const isp) {
         compute_twomaxwellian(
                 maxwellian,

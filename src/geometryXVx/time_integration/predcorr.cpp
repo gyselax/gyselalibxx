@@ -23,7 +23,7 @@ DFieldSpXVx PredCorr::operator()(
         int const steps) const
 {
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    ddc::ChunkSpan allfdistribu_host = get_field(allfdistribu_alloc);
+    host_t<DFieldSpXVx> allfdistribu_host = get_field(allfdistribu_alloc);
 
     // electrostatic potential and electric field (depending only on x)
     host_t<DFieldMemX> electrostatic_potential_host(get_idx_range<GridX>(allfdistribu));

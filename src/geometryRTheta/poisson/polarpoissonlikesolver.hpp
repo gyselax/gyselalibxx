@@ -772,7 +772,7 @@ public:
      *      The type is templated but we can use the PoissonLikeRHSFunction
      *      class.
      * @param[in] coords_eval
-     *      A Chunk of coordinates where we want to compute the solution.
+     *      A Field of coordinates where we want to compute the solution.
      * @param[out] result
      *      The values of the solution @f$\phi@f$ on the given coords_eval.
      */

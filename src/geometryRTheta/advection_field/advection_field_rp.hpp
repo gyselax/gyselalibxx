@@ -132,7 +132,7 @@ public:
 
 
     /**
-     * @brief Compute the advection field from a Chunk of @f$\phi@f$ values.
+     * @brief Compute the advection field from a Field of @f$\phi@f$ values.
      *
      * @param[in] electrostatic_potential
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
@@ -345,7 +345,7 @@ public:
 
 
     /**
-     * @brief Compute the advection field from a Chunk of @f$\phi@f$ values.
+     * @brief Compute the advection field from a Field of @f$\phi@f$ values.
      *
      * @param[in] electrostatic_potential
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).

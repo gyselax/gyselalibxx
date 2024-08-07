@@ -250,7 +250,7 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
 {
     Kokkos::Profiling::pushRegion("CollisionsIntra");
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    ddc::ChunkSpan allfdistribu_host = get_field(allfdistribu_alloc);
+    host_t<DFieldSpXVx> allfdistribu_host = get_field(allfdistribu_alloc);
 
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
     // density and temperature

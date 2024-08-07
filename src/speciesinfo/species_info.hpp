@@ -73,9 +73,8 @@ public:
          * @param[in] charge array storing both kinetic and adiabatic charges
          * @param[in] mass array storing both kinetic and adiabatic masses
          */
-        Impl(FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>>
-                     charge,
-             FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> mass)
+        Impl(DFieldMem<discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> charge,
+             DFieldMem<discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> mass)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
         {
