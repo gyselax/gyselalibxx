@@ -208,7 +208,7 @@ static void TestFftPoissonSolver2DCosineSource()
                         = Kokkos::cos(ddc::coordinate(ix)) + Kokkos::cos(ddc::coordinate(iy));
                 return Kokkos::abs(electrostatic_potential(ixy) - exact_pot);
             });
-    ddc::ChunkSpan electric_field_x = electric_field.get<X>();
+    DFieldXY electric_field_x = electric_field.get<X>();
     double error_field_x = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
@@ -219,7 +219,7 @@ static void TestFftPoissonSolver2DCosineSource()
                 double const exact_field_x = Kokkos::sin(ddc::coordinate(ix));
                 return Kokkos::abs(electric_field_x(ixy) - exact_field_x);
             });
-    ddc::ChunkSpan electric_field_y = electric_field.get<Y>();
+    DFieldXY electric_field_y = electric_field.get<Y>();
     double error_field_y = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             gridxy,
