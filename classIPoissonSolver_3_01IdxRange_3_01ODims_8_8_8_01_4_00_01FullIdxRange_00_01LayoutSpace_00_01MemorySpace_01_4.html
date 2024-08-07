@@ -117,11 +117,11 @@ $(document).ready(function(){initNavTree('classIPoissonSolver_3_01IdxRange_3_01O
 Public Types</h2></td></tr>
 <tr class="memitem:a6e5f7ddccacccd02432de9165f8c46d0"><td class="memItemLeft" align="right" valign="top"><a id="a6e5f7ddccacccd02432de9165f8c46d0"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a6e5f7ddccacccd02432de9165f8c46d0">field_type</a> = Field&lt; double, FullIdxRange, LayoutSpace, MemorySpace &gt;</td></tr>
-<tr class="memdesc:a6e5f7ddccacccd02432de9165f8c46d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ChunkSpan type of the arguments to operator(). <br /></td></tr>
+<tr class="memdesc:a6e5f7ddccacccd02432de9165f8c46d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Field type of the arguments to operator(). <br /></td></tr>
 <tr class="separator:a6e5f7ddccacccd02432de9165f8c46d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0f36ddd11a5a66ebb304e33bb31753e"><td class="memItemLeft" align="right" valign="top"><a id="ad0f36ddd11a5a66ebb304e33bb31753e"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#ad0f36ddd11a5a66ebb304e33bb31753e">const_field_type</a> = ConstField&lt; double, FullIdxRange, LayoutSpace, MemorySpace &gt;</td></tr>
-<tr class="memdesc:ad0f36ddd11a5a66ebb304e33bb31753e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The const ChunkSpan type of the arguments to operator(). <br /></td></tr>
+<tr class="memdesc:ad0f36ddd11a5a66ebb304e33bb31753e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The const Field type of the arguments to operator(). <br /></td></tr>
 <tr class="separator:ad0f36ddd11a5a66ebb304e33bb31753e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01d5f90feb272069b671b1c9bd8e2eda"><td class="memItemLeft" align="right" valign="top"><a id="a01d5f90feb272069b671b1c9bd8e2eda"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a01d5f90feb272069b671b1c9bd8e2eda">vector_field_type</a> = std::conditional_t&lt; ddc::type_seq_size_v&lt; <a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a23e7b2fa14f8262f1843ef1c96f0dc6c">laplacian_tags</a> &gt;==1, <a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a6e5f7ddccacccd02432de9165f8c46d0">field_type</a>, <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; double, FullIdxRange, <a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a0a0326fd8998acb7b363b777ba327395">real_laplacian_tags</a>, LayoutSpace, MemorySpace &gt; &gt;</td></tr>
@@ -129,7 +129,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="separator:a01d5f90feb272069b671b1c9bd8e2eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd197ebe4eba1ca06210cc252129d31a"><td class="memItemLeft" align="right" valign="top"><a id="abd197ebe4eba1ca06210cc252129d31a"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#abd197ebe4eba1ca06210cc252129d31a">batch_idx_range_type</a> = typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt; <a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a3c8d9834fd3777105a2ab877521010d4">batch_tags</a> &gt;</td></tr>
-<tr class="memdesc:abd197ebe4eba1ca06210cc252129d31a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The DiscreteDomain describing the batch dimensions. <br /></td></tr>
+<tr class="memdesc:abd197ebe4eba1ca06210cc252129d31a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range type describing the batch dimensions. <br /></td></tr>
 <tr class="separator:abd197ebe4eba1ca06210cc252129d31a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab46e71b08ac34c06658fabc34133cbe3"><td class="memItemLeft" align="right" valign="top"><a id="ab46e71b08ac34c06658fabc34133cbe3"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#ab46e71b08ac34c06658fabc34133cbe3">batch_index_type</a> = typename batch_idx_range_type::discrete_element_type</td></tr>
@@ -141,11 +141,11 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="separator:a637677a7caa759d3609457cf4be7d534"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28af89dadb55009d4fef1c16d2457f60"><td class="memItemLeft" align="right" valign="top"><a id="a28af89dadb55009d4fef1c16d2457f60"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a28af89dadb55009d4fef1c16d2457f60">layout_space</a> = LayoutSpace</td></tr>
-<tr class="memdesc:a28af89dadb55009d4fef1c16d2457f60"><td class="mdescLeft">&#160;</td><td class="mdescRight">The layout space of the ChunkSpans passed to operator(). <br /></td></tr>
+<tr class="memdesc:a28af89dadb55009d4fef1c16d2457f60"><td class="mdescLeft">&#160;</td><td class="mdescRight">The layout space of the Fields passed to operator(). <br /></td></tr>
 <tr class="separator:a28af89dadb55009d4fef1c16d2457f60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8577edb3a405d5f1ca459ed98c4c8f13"><td class="memItemLeft" align="right" valign="top"><a id="a8577edb3a405d5f1ca459ed98c4c8f13"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html#a8577edb3a405d5f1ca459ed98c4c8f13">memory_space</a> = MemorySpace</td></tr>
-<tr class="memdesc:a8577edb3a405d5f1ca459ed98c4c8f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">The space (CPU/GPU) where the ChunkSpans passed to operator() are saved. <br /></td></tr>
+<tr class="memdesc:a8577edb3a405d5f1ca459ed98c4c8f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">The space (CPU/GPU) where the Fields passed to operator() are saved. <br /></td></tr>
 <tr class="separator:a8577edb3a405d5f1ca459ed98c4c8f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -193,8 +193,8 @@ class IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, FullIdxRange, LayoutSpace, 
   <table class="tparams">
     <tr><td class="paramname">LaplacianIdxRange</td><td>The index range on which the equation is defined. </td></tr>
     <tr><td class="paramname">FullIdxRange</td><td>The index range on which the operator() acts. This is equal to the LaplacianIdxRange plus any batched dimensions. </td></tr>
-    <tr><td class="paramname">LayoutSpace</td><td>The layout space of the ChunkSpans passed to operator(). </td></tr>
-    <tr><td class="paramname">MemorySpace</td><td>The space (CPU/GPU) where the ChunkSpans passed to operator() are saved. </td></tr>
+    <tr><td class="paramname">LayoutSpace</td><td>The layout space of the Fields passed to operator(). </td></tr>
+    <tr><td class="paramname">MemorySpace</td><td>The space (CPU/GPU) where the Fields passed to operator() are saved. </td></tr>
   </table>
   </dd>
 </dl>

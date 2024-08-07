@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9db19ad040ca32c4bcd51b6aedd776c3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpeciesInformation_1_1Impl.html#a9db19ad040ca32c4bcd51b6aedd776c3">Impl</a> (<a class="el" href="classSpeciesInformation_1_1Impl.html">Impl</a>&lt; Grid1D, OMemorySpace &gt; const &amp;impl)</td></tr>
 <tr class="memdesc:a9db19ad040ca32c4bcd51b6aedd776c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion constructor between different memory spaces.  <a href="classSpeciesInformation_1_1Impl.html#a9db19ad040ca32c4bcd51b6aedd776c3">More...</a><br /></td></tr>
 <tr class="separator:a9db19ad040ca32c4bcd51b6aedd776c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac94bc0ed950b46ac929fd0e68fad9597"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesInformation_1_1Impl.html#ac94bc0ed950b46ac929fd0e68fad9597">Impl</a> (FieldMem&lt; double, discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; <a class="el" href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">charge</a>, FieldMem&lt; double, discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; <a class="el" href="classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70">mass</a>)</td></tr>
-<tr class="memdesc:ac94bc0ed950b46ac929fd0e68fad9597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main constructor taking all attributes.  <a href="classSpeciesInformation_1_1Impl.html#ac94bc0ed950b46ac929fd0e68fad9597">More...</a><br /></td></tr>
-<tr class="separator:ac94bc0ed950b46ac929fd0e68fad9597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436c3ffea1730d1cec678c3acaa86968"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesInformation_1_1Impl.html#a436c3ffea1730d1cec678c3acaa86968">Impl</a> (DFieldMem&lt; discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; <a class="el" href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">charge</a>, DFieldMem&lt; discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; <a class="el" href="classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70">mass</a>)</td></tr>
+<tr class="memdesc:a436c3ffea1730d1cec678c3acaa86968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main constructor taking all attributes.  <a href="classSpeciesInformation_1_1Impl.html#a436c3ffea1730d1cec678c3acaa86968">More...</a><br /></td></tr>
+<tr class="separator:a436c3ffea1730d1cec678c3acaa86968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4f71674dfd6e0c19e53a92bfaec3711"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION discrete_element_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesInformation_1_1Impl.html#af4f71674dfd6e0c19e53a92bfaec3711">ielec</a> () const</td></tr>
 <tr class="separator:af4f71674dfd6e0c19e53a92bfaec3711"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc4091cbb9adc9c34bc0b874b0ac5ce5"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">charge</a> (discrete_element_type const isp) const</td></tr>
@@ -182,8 +182,8 @@ template&lt;class OMemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="ac94bc0ed950b46ac929fd0e68fad9597"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac94bc0ed950b46ac929fd0e68fad9597">&#9670;&nbsp;</a></span>Impl() <span class="overload">[2/2]</span></h2>
+<a id="a436c3ffea1730d1cec678c3acaa86968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436c3ffea1730d1cec678c3acaa86968">&#9670;&nbsp;</a></span>Impl() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,13 +196,13 @@ template&lt;class Grid1D , class MemorySpace &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classSpeciesInformation_1_1Impl.html">SpeciesInformation::Impl</a>&lt; Grid1D, MemorySpace &gt;::<a class="el" href="classSpeciesInformation_1_1Impl.html">Impl</a> </td>
           <td>(</td>
-          <td class="paramtype">FieldMem&lt; double, discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt;&#160;</td>
+          <td class="paramtype">DFieldMem&lt; discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt;&#160;</td>
           <td class="paramname"><em>charge</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FieldMem&lt; double, discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt;&#160;</td>
+          <td class="paramtype">DFieldMem&lt; discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt;&#160;</td>
           <td class="paramname"><em>mass</em>&#160;</td>
         </tr>
         <tr>

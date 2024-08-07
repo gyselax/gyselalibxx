@@ -281,11 +281,11 @@ $(document).ready(function(){initNavTree('bsl__advection__1d_8hpp_source.html','
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">// Interpolate the function ..............................................................</span></div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">            To interpolate the function we want to advect, we build for the feet a Chunk defined </span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">            To interpolate the function we want to advect, we build for the feet a Field defined </span></div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">            on the index range where the function is defined. </span></div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">        */</span></div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        FieldMem&lt;CoordInterest, FunctionIdxRange&gt; feet_alloc(function_dom);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        ddc::ChunkSpan feet = get_field(feet_alloc);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        Field&lt;CoordInterest, FunctionIdxRange&gt; feet = get_field(feet_alloc);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        ddc::parallel_for_each(</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                Kokkos::DefaultExecutionSpace(),</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                function_dom,</div>

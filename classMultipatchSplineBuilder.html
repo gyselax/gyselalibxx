@@ -124,7 +124,7 @@ Public Member Functions</h2></td></tr>
 class MultipatchSplineBuilder&lt; Builders &gt;</h3>
 
 <p>A class to call all the builders of all the patches once. </p>
-<p>We need to instantiate all the builders for all the pacthes in the main code. We process the same way for the ddc::Chunk containing the spline coefficients and the values of the function on each patch, and we store them in std::tuple. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
+<p>We need to instantiate all the builders for all the pacthes in the main code. We process the same way for the Field containing the spline coefficients and the values of the function on each patch, and we store them in std::tuple. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
 <p>This function is useful to avoid calling individually all the builders, especially in multipatch geometry with several patches.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -211,8 +211,8 @@ template&lt;class... Builders&gt; </div>
 <dl class="section warning"><dt>Warning</dt><dd>The splines and the values std::tuples have to be sorted in the same order as the patches in the tuple.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">splines</td><td>Tuple of all the ddc::ChunkSpan pointing to the spline representations. </td></tr>
-    <tr><td class="paramname">values</td><td>Tuple of all the ddc::ChunkSpan pointing to the function values. </td></tr>
+    <tr><td class="paramname">splines</td><td>Tuple of all the Fields pointing to the spline representations. </td></tr>
+    <tr><td class="paramname">values</td><td>Tuple of all the Fields pointing to the function values. </td></tr>
   </table>
   </dd>
 </dl>

@@ -125,10 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af559bba295fb3d5fcac425cae71bb972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an advection operator.  <a href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">More...</a><br /></td></tr>
 <tr class="separator:af559bba295fb3d5fcac425cae71bb972"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ec3143116ac05ac379f74130bdff00f"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorFieldSpan.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field_xy, double dt) const</td></tr>
-<tr class="memdesc:a8ec3143116ac05ac379f74130bdff00f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a ChunkSpan to the advected function.  <a href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">More...</a><br /></td></tr>
+<tr class="memdesc:a8ec3143116ac05ac379f74130bdff00f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field of the advected function.  <a href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">More...</a><br /></td></tr>
 <tr class="separator:a8ec3143116ac05ac379f74130bdff00f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad039fe94bfb0a44e719464206b0825aa"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorFieldSpan.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; advection_field_rp, CoordXY const &amp;advection_field_xy_center, double dt) const</td></tr>
-<tr class="memdesc:ad039fe94bfb0a44e719464206b0825aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a ChunkSpan to the advected function.  <a href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">More...</a><br /></td></tr>
+<tr class="memdesc:ad039fe94bfb0a44e719464206b0825aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field to the advected function.  <a href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">More...</a><br /></td></tr>
 <tr class="separator:ad039fe94bfb0a44e719464206b0825aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -252,16 +252,16 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Allocate a ChunkSpan to the advected function. </p>
+<p>Allocate a Field of the advected function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>A ChunkSpan containing the values of the function we want to advect. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>A Field containing the values of the function we want to advect. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_xy</td><td>A DConstVectorFieldRTheta containing the values of the advection field on the physical index range axes. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>A time step used.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A ChunkSpan to allfdistribu advected on the time step given. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A Field to allfdistribu advected on the time step given. </dd></dl>
 
 <p>Implements <a class="el" href="classIAdvectionRTheta.html#a96cd4aff911a5d2155fb29480f92a5db">IAdvectionRTheta</a>.</p>
 
@@ -315,17 +315,17 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Allocate a ChunkSpan to the advected function. </p>
+<p>Allocate a Field to the advected function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>A ChunkSpan containing the values of the function we want to advect. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>A Field containing the values of the function we want to advect. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_rp</td><td>A DConstVectorFieldRTheta containing the values of the advection field on the logical index range axis. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_xy_center</td><td>A CoordXY containing the value of the advection field on the physical index range axis at the O-point. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>A time step used.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A ChunkSpan to allfdistribu advected on the time step given. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A Field to allfdistribu advected on the time step given. </dd></dl>
 
 <p>Implements <a class="el" href="classIAdvectionRTheta.html#a4328d88d197173a9c6d3c3f32ee10db5">IAdvectionRTheta</a>.</p>
 

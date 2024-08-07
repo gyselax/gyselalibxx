@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    IdxRangeInterp m_idx_range;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    IdxRangeInterp m_inner_idx_range;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    Field&lt;double, IdxRangeInterp, std::experimental::layout_right, typename Execspace::memory_space&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            m_ChunkSpan;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            m_lagrange_coeffs;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    CoordDimI m_left_bound;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    CoordDimI m_right_bound;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    IdxStepInterp m_poly_support;</div>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            IdxStepInterp ghost)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        : m_idx_range(idx_range)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        , m_inner_idx_range(idx_range.remove(ghost, ghost))</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        , m_ChunkSpan(x_nodes_fnodes)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        , m_lagrange_coeffs(x_nodes_fnodes)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        , m_left_bound(ddc::coordinate(m_inner_idx_range.front()))</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        , m_right_bound(ddc::coordinate(m_inner_idx_range.back()))</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        , m_poly_support(degree + 1)</div>
@@ -278,7 +278,7 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    IdxRangeInterp subidx_range(begin, npoints_subidx_range);</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordtype">double</span> p = 0;</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">for</span> (IdxInterp <span class="keyword">const</span> ix : subidx_range) {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        p += compute_basis(x_intern, ix, subidx_range) * m_ChunkSpan(ix);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        p += compute_basis(x_intern, ix, subidx_range) * m_lagrange_coeffs(ix);</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> p;</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
