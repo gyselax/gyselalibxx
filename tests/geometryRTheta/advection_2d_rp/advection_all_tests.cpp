@@ -117,14 +117,14 @@ public:
     using X_adv = typename AdvectionIdxRange::X_adv;
     using Y_adv = typename AdvectionIdxRange::Y_adv;
 
-    using ValChunk = FieldMemRTheta<CoordRTheta>;
-    using DerivChunk = DVectorFieldMemRTheta<X_adv, Y_adv>;
+    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
+    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
 
     using NumericalTuple = std::tuple<
-            NumericalMethodParameters<Euler<ValChunk, DerivChunk>>,
-            NumericalMethodParameters<CrankNicolson<ValChunk, DerivChunk>>,
-            NumericalMethodParameters<RK3<ValChunk, DerivChunk>>,
-            NumericalMethodParameters<RK4<ValChunk, DerivChunk>>>;
+            NumericalMethodParameters<Euler<ValFieldMem, DerivFieldMem>>,
+            NumericalMethodParameters<CrankNicolson<ValFieldMem, DerivFieldMem>>,
+            NumericalMethodParameters<RK3<ValFieldMem, DerivFieldMem>>,
+            NumericalMethodParameters<RK4<ValFieldMem, DerivFieldMem>>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -135,19 +135,19 @@ public:
         , params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
-                          Euler<ValChunk, DerivChunk>(params.grid),
+                          Euler<ValFieldMem, DerivFieldMem>(params.grid),
                           params.dt * 0.1,
                           "EULER"),
                   NumericalMethodParameters(
-                          CrankNicolson<ValChunk, DerivChunk>(params.grid, 20, 1e-12),
+                          CrankNicolson<ValFieldMem, DerivFieldMem>(params.grid, 20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
                   NumericalMethodParameters(
-                          RK3<ValChunk, DerivChunk>(params.grid),
+                          RK3<ValFieldMem, DerivFieldMem>(params.grid),
                           params.dt,
                           "RK3"),
                   NumericalMethodParameters(
-                          RK4<ValChunk, DerivChunk>(params.grid),
+                          RK4<ValFieldMem, DerivFieldMem>(params.grid),
                           params.dt,
                           "RK4")))
     {

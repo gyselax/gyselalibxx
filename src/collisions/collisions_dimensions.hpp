@@ -2,7 +2,7 @@
 #include "ddc_aliases.hpp"
 
 /**
- * @brief A namespace to collect classes which are necessary to create Chunks with the
+ * @brief A namespace to collect classes which are necessary to create Fields with the
  * correct number of dimensions to be compatible with Koliop.
  */
 namespace collisions_dimensions {

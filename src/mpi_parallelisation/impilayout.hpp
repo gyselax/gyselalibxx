@@ -7,7 +7,7 @@
 /**
  * @brief A super class describing a way in which data may be laid out across MPI processes.
  *
- * @tparam DataIdxRange The DiscreteDomain on which the data is defined.
+ * @tparam DataIdxRange The index range on which the data is defined.
  * @tparam DistributedDim The tags of the discrete dimensions which are distributed
  *              across MPI processes.
  */
