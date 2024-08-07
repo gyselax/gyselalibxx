@@ -26,7 +26,7 @@ public:
      * @param[in] dt
      *      The time step.
      *
-     * @return A Field of the advected function (allfdistribu).
+     * @return A ChunkSpan to the advected function (allfdistribu).
      */
     virtual DFieldRTheta operator()(
             DFieldRTheta allfdistribu,
@@ -47,7 +47,7 @@ public:
      * @param[in] dt
      *      The time step.
      *
-     * @return A Field of the advected function (allfdistribu).
+     * @return A ChunkSpan to the advected function (allfdistribu).
      */
     virtual DFieldRTheta operator()(
             DFieldRTheta allfdistribu,

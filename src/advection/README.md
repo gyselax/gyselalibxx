@@ -116,7 +116,7 @@ The operator takes as templated parameters:
 * FunctionDomain: the full domain where the function we want to advect is defined; 
 * AdvectionFieldBuilder: a spline builder type for the advection field. 
 * AdvectionFieldEvaluator: a spline evaluator type for the advection field. 
-* TimeStepper: a time integration method (see [timestepper](./../timestepper/README.md)) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Field of coordinates of the dimension of interest defined on the advection field domain.
+* TimeStepper: a time integration method (see [timestepper](./../timestepper/README.md)) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Chunk of coordinates of the dimension of interest defined on the advection field domain.
 
 **Remark/Warning:** the BslAdvection1D operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the `tests/advection/` folder). 
 

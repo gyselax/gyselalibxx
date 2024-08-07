@@ -134,6 +134,7 @@ markdown_best_practices:
 
 cppcheck_static_analysis:
   rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   stage: static_analysis
   needs: [ setup_env_mr ]

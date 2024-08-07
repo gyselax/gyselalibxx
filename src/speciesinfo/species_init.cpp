@@ -11,8 +11,8 @@
  * @param[in] nb_fluidspecies number of fluid species
  */
 void init_all_species(
-        IdxRangeSp& dom_kinsp,
-        IdxRangeSp& dom_fluidsp,
+        ddc::DiscreteDomain<Species>& dom_kinsp,
+        ddc::DiscreteDomain<Species>& dom_fluidsp,
         PC_tree_t conf_voicexx,
         int nb_kinspecies,
         int nb_fluidspecies)
@@ -93,12 +93,14 @@ void init_all_species(
  * @param[in] conf_voicexx is the YAML input file
  * @return the kinetic species domain 
  */
-IdxRangeSp init_species(PC_tree_t conf_voicexx)
+ddc::DiscreteDomain<Species> init_species(PC_tree_t conf_voicexx)
 {
+    using IdxStepSp = ddc::DiscreteVector<Species>;
+
     IdxStepSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IdxStepSp const nb_fluidspecies(0);
-    IdxRangeSp dom_kinsp;
-    IdxRangeSp dom_fluidsp;
+    ddc::DiscreteDomain<Species> dom_kinsp;
+    ddc::DiscreteDomain<Species> dom_fluidsp;
     init_all_species(dom_kinsp, dom_fluidsp, conf_voicexx, nb_kinspecies, nb_fluidspecies);
     return dom_kinsp;
 }
@@ -111,8 +113,13 @@ IdxRangeSp init_species(PC_tree_t conf_voicexx)
  * @param[out] fluid species domain 
  * @param[in] conf_voicexx is the YAML input file
  */
-void init_species_withfluid(IdxRangeSp& dom_kinsp, IdxRangeSp& dom_fluidsp, PC_tree_t conf_voicexx)
+void init_species_withfluid(
+        ddc::DiscreteDomain<Species>& dom_kinsp,
+        ddc::DiscreteDomain<Species>& dom_fluidsp,
+        PC_tree_t conf_voicexx)
 {
+    using IdxStepSp = ddc::DiscreteVector<Species>;
+
     IdxStepSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
     IdxStepSp const nb_fluidspecies(PCpp_len(conf_voicexx, ".NeutralSpeciesInfo"));
     init_all_species(dom_kinsp, dom_fluidsp, conf_voicexx, nb_kinspecies, nb_fluidspecies);

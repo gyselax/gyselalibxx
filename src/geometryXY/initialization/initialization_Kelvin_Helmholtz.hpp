@@ -40,8 +40,8 @@ public:
     /**
      * @brief Initialise @f$ f_{eq}@f$ and @f$ f @f$.
      * 
-     * @param allfdistribu Field refering to the @f$ f @f$ function.
-     * @param allfdistribu_equilibrium Field refering to the @f$ f_{eq} @f$ function.
+     * @param allfdistribu ChunkSpan refering to the @f$ f @f$ function.
+     * @param allfdistribu_equilibrium ChunkSpan refering to the @f$ f_{eq} @f$ function.
      */
     void operator()(DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)
     {

@@ -155,7 +155,7 @@ public:
 
 private:
     /**
-     * A function which converts an integer into an index found in an index range
+     * A function which converts an integer into a DiscreteElement found in an index range
      * starting from the front. This is useful for iterating over an index range using Kokkos
      * loops.
      *

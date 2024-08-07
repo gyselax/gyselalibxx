@@ -23,7 +23,7 @@ public:
      * @param[in] steps
      *      The number @f$ N@f$ of time interations.
      *
-     * @return A Field toward allfdistribu.
+     * @return A ChunkSpan toward allfdistribu.
      */
     virtual DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps = 1)
             const = 0;

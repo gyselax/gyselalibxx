@@ -16,8 +16,8 @@ class IPoissonSolver;
  * @tparam LaplacianIdxRange The index range on which the equation is defined.
  * @tparam FullIdxRange The index range on which the operator() acts. This is equal to the
  *                      LaplacianIdxRange plus any batched dimensions.
- * @tparam LayoutSpace The layout space of the Fields passed to operator().
- * @tparam MemorySpace The space (CPU/GPU) where the Fields passed to operator()
+ * @tparam LayoutSpace The layout space of the ChunkSpans passed to operator().
+ * @tparam MemorySpace The space (CPU/GPU) where the ChunkSpans passed to operator()
  *                      are saved.
  */
 template <class... ODims, class FullIdxRange, class LayoutSpace, class MemorySpace>
@@ -38,9 +38,9 @@ protected:
     static constexpr bool using_vector_span = ddc::type_seq_size_v<laplacian_tags> == 1;
 
 public:
-    /// @brief The Field type of the arguments to operator().
+    /// @brief The ChunkSpan type of the arguments to operator().
     using field_type = Field<double, FullIdxRange, LayoutSpace, MemorySpace>;
-    /// @brief The const Field type of the arguments to operator().
+    /// @brief The const ChunkSpan type of the arguments to operator().
     using const_field_type = ConstField<double, FullIdxRange, LayoutSpace, MemorySpace>;
 
     /// @brief The type of the derivative of @f$ \phi @f$.
@@ -49,7 +49,7 @@ public:
             field_type,
             VectorFieldSpan<double, FullIdxRange, real_laplacian_tags, LayoutSpace, MemorySpace>>;
 
-    /// @brief The index range type describing the batch dimensions.
+    /// @brief The DiscreteDomain describing the batch dimensions.
     using batch_idx_range_type =
             typename ddc::detail::convert_type_seq_to_discrete_domain_t<batch_tags>;
     /// @brief The DiscreteElement for indexing a batch dimension.
@@ -58,9 +58,9 @@ public:
     /// @brief The type of the index range on which the equation is defined.
     using laplacian_idx_range_type = IdxRange<ODims...>;
 
-    /// @brief The layout space of the Fields passed to operator().
+    /// @brief The layout space of the ChunkSpans passed to operator().
     using layout_space = LayoutSpace;
-    /// @brief The space (CPU/GPU) where the Fields passed to operator() are saved.
+    /// @brief The space (CPU/GPU) where the ChunkSpans passed to operator() are saved.
     using memory_space = MemorySpace;
 
 public:

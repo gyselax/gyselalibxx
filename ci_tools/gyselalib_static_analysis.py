@@ -11,6 +11,7 @@ The rules that are currently implemented are:
     - Check that "" is used to include files from the Gysela library and <> is used to include files from other libraries
 """
 import argparse
+from itertools import chain
 from pathlib import Path
 import re
 import subprocess
@@ -34,7 +35,9 @@ ddc_keyword_map = {'DiscreteElement': 'Idx',
                    'span_view'      : 'get_field',
                    'span_cview'     : 'get_const_field',
                    'domain'         : 'get_idx_range',
-                   'spline_domain'  : 'get_spline_idx_range'}
+                   'spline_domain'  : 'get_spline_idx_range',
+                   'UniformPointSampling' : 'UniformGridBase',
+                   'NonUniformPointSampling' : 'NonUniformGridBase'}
 
 mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_view', 'create_mirror_view_and_copy'}
 
@@ -122,7 +125,7 @@ class FileObject:
             if func_idx is not None:
                 func_name = line[func_idx]['str']
                 return_type = ''.join(v['str'] for v in line[:func_idx])
-                if return_type == 'auto':
+                if line[func_idx-1]['str'] == 'auto':
                     auto_functions.add(func_name)
                 elif re.search(r'\b(ddc::Chunk)|(FieldMem)\b', return_type):
                     field_mem_functions.add(func_name)
@@ -221,7 +224,7 @@ def search_for_unnecessary_auto(file):
 
         # If rhs of assignment is not a mirror function (where auto is compulsory) or a function returning auto
         # then raise an error
-        if not any(v['str'] in (*mirror_functions, auto_functions) for v in file.data[start:end]):
+        if not any(v['str'] in chain(mirror_functions, auto_functions) for v in file.data[start:end]):
             report_error(ERROR, file, file.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
 def search_for_bad_create_mirror(file):
@@ -295,6 +298,8 @@ def search_for_bad_aliases(file):
 
     template_declarations = file.root.findall(".//TokenAndName")
     for temp in template_declarations:
+        if Path(temp.attrib['file']) != file.file:
+            continue
         possible_nodes = list(temp)
         template_class_loc = [possible_nodes.index(tok) \
                               for tok in temp.findall("./template-token[@str='class']")]
@@ -363,7 +368,7 @@ def check_directives(file):
             report_error(FATAL, file.file, 2, "#pragma once missing from the top of a hpp file")
 
     if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
-        report_error(FATAL, file.file, 2, "#pragma once missing from the top of a hpp file")
+        report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
     include_directives = {d.attrib['linenr']: d[2].attrib for d in file.root.findall("./dump/directivelist/directive") if len(d) > 2 and d[1].attrib['str'] == 'include'}
     for linenr, d in include_directives.items():
@@ -395,7 +400,8 @@ if __name__ == '__main__':
 
     multipatch_geom = list(relevant_files.pop('multipatch'))
 
-    cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style', '--std=c++17', '--max-ctu-depth=5']
+    cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
+                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember']
     for f in multipatch_geom:
         if no_file_filter or f in filter_files:
             print("------------- Checking ", f, " -------------")

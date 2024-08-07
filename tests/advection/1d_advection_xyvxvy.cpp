@@ -101,7 +101,7 @@ using IdxRangeXYVxVy = IdxRange<GridX, GridY, GridVx, GridVy>;
 
 
 
-// Field types
+// Chunks, Spans and Views
 template <class ElementType>
 using FieldMemXY = FieldMem<ElementType, IdxRangeXY>;
 using DFieldMemXY = FieldMemXY<double>;
@@ -297,7 +297,7 @@ public:
                 });
 
         /*
-            The advection field is a Field of doubles instead of a Field 
+            The advection field is a Chunk of double instead of a Chunk 
             of coordinates, because inside the advection operator
             we use an interpolator which needs the DFieldMemXY format.
         */

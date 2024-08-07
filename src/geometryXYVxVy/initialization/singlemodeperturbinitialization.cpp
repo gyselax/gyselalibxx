@@ -24,8 +24,8 @@ DFieldSpXYVxVy SingleModePerturbInitialization::operator()(DFieldSpXYVxVy const 
 
     // Initialization of the perturbation
     DFieldMemXY perturbation_alloc(gridxy);
-    DConstFieldSpVxVy fequilibrium_proxy = get_field(m_fequilibrium);
-    DFieldXY perturbation_proxy = get_field(perturbation_alloc);
+    ddc::ChunkSpan fequilibrium_proxy = get_field(m_fequilibrium);
+    ddc::ChunkSpan perturbation_proxy = get_field(perturbation_alloc);
     ddc::for_each(gridsp, [&](IdxSp const isp) {
         perturbation_initialization(
                 perturbation_proxy,

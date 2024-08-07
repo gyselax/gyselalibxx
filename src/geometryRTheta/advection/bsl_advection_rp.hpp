@@ -98,17 +98,17 @@ public:
 
 
     /**
-     * @brief Allocate a Field of the advected function.
+     * @brief Allocate a ChunkSpan to the advected function.
      *
      * @param [in, out] allfdistribu
-     *      A Field containing the values of the function we want to advect.
+     *      A ChunkSpan containing the values of the function we want to advect.
      * @param [in] advection_field_xy
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the physical index range axes.
      * @param [in] dt
      *      A time step used.
      *
-     * @return A Field to allfdistribu advected on the time step given.
+     * @return A ChunkSpan to allfdistribu advected on the time step given.
      */
     DFieldRTheta operator()(
             DFieldRTheta allfdistribu,
@@ -135,10 +135,10 @@ public:
 
 
     /**
-     * @brief Allocate a Field to the advected function.
+     * @brief Allocate a ChunkSpan to the advected function.
      *
      * @param [in, out] allfdistribu
-     *      A Field containing the values of the function we want to advect.
+     *      A ChunkSpan containing the values of the function we want to advect.
      * @param [in] advection_field_rp
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the logical index range axis.
@@ -148,7 +148,7 @@ public:
      * @param [in] dt
      *      A time step used.
      *
-     * @return A Field to allfdistribu advected on the time step given.
+     * @return A ChunkSpan to allfdistribu advected on the time step given.
      */
     DFieldRTheta operator()(
             DFieldRTheta allfdistribu,

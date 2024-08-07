@@ -14,7 +14,7 @@
  * @brief A class to call all the builders of all the patches once. 
  * 
  * We need to instantiate all the builders for all the pacthes in the main code.
- * We process the same way for the Field containing the spline coefficients and the 
+ * We process the same way for the ddc::Chunk containing the spline coefficients and the 
  * values of the function on each patch, and we store them in std::tuple. 
  * This class is instantiated with all the builders. 
  * The operator() allows to call all the builders stored in the member of this class in 
@@ -65,8 +65,8 @@ public:
      * @warning The splines and the values std::tuples have to be sorted 
      * in the same order as the patches in the tuple. 
      * 
-     * @param splines Tuple of all the Fields pointing to the spline representations. 
-     * @param values Tuple of all the Fields pointing to the function values. 
+     * @param splines Tuple of all the ddc::ChunkSpan pointing to the spline representations. 
+     * @param values Tuple of all the ddc::ChunkSpan pointing to the function values. 
      */
     void operator()(SplineTuple const& splines, ValuesTuple const& values)
     {

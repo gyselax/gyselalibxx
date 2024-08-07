@@ -68,8 +68,8 @@ void DiffusiveNeutralSolver::get_derivative(
     // compute diffusive model equation terms
     DFieldMemSpX density_equilibrium_velocity_alloc(dom_fluidspx);
     DFieldMemSpX diffusion_temperature_alloc(dom_fluidspx);
-    DFieldSpX density_equilibrium_velocity = get_field(density_equilibrium_velocity_alloc);
-    DFieldSpX diffusion_temperature = get_field(diffusion_temperature_alloc);
+    ddc::ChunkSpan density_equilibrium_velocity = get_field(density_equilibrium_velocity_alloc);
+    ddc::ChunkSpan diffusion_temperature = get_field(diffusion_temperature_alloc);
 
     IdxSp const iion(find_ion(get_idx_range<Species>(density)));
     IdxMom const ineutral_density(0);
@@ -112,11 +112,11 @@ void DiffusiveNeutralSolver::get_derivative(
     DFieldMemSpX gradx_neutrals_density_alloc(dom_fluidspx);
     DFieldMemSpX laplx_neutrals_density_alloc(dom_fluidspx);
 
-    DFieldSpX gradx_density_equilibrium_velocity
+    ddc::ChunkSpan gradx_density_equilibrium_velocity
             = get_field(gradx_density_equilibrium_velocity_alloc);
-    DFieldSpX gradx_diffusion_temperature = get_field(gradx_diffusion_temperature_alloc);
-    DFieldSpX gradx_neutrals_density = get_field(gradx_neutrals_density_alloc);
-    DFieldSpX laplx_neutrals_density = get_field(laplx_neutrals_density_alloc);
+    ddc::ChunkSpan gradx_diffusion_temperature = get_field(gradx_diffusion_temperature_alloc);
+    ddc::ChunkSpan gradx_neutrals_density = get_field(gradx_neutrals_density_alloc);
+    ddc::ChunkSpan laplx_neutrals_density = get_field(laplx_neutrals_density_alloc);
 
     ddc::for_each(get_idx_range<Species>(neutrals), [&](IdxSp const isp) {
         // compute spline coefficients

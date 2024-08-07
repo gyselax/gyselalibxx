@@ -243,11 +243,11 @@ public:
 
         // Interpolate the function ..............................................................
         /*
-            To interpolate the function we want to advect, we build for the feet a Field defined 
+            To interpolate the function we want to advect, we build for the feet a Chunk defined 
             on the index range where the function is defined. 
         */
         FieldMem<CoordInterest, FunctionIdxRange> feet_alloc(function_dom);
-        Field<CoordInterest, FunctionIdxRange> feet = get_field(feet_alloc);
+        ddc::ChunkSpan feet = get_field(feet_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 function_dom,

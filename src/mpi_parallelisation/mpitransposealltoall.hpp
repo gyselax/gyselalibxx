@@ -31,8 +31,8 @@ public:
     using distributed_idx_range_type1 = typename Layout1::distributed_sub_idx_range;
     /// The type of the index range of the second MPI layout.
     using distributed_idx_range_type2 = typename Layout2::distributed_sub_idx_range;
-    /// The way in which data should be laid out in memory on Fields being transposed.
-    using field_layout_type = std::experimental::layout_right;
+    /// The way in which data should be laid out in memory on Chunks being transposed.
+    using chunk_layout_type = std::experimental::layout_right;
 
 private:
     using layout_1_mpi_dims = ddcHelper::
@@ -133,8 +133,8 @@ public:
             class ExecSpace>
     void operator()(
             ExecSpace const& execution_space,
-            Field<ElementType, OutIdxRange, field_layout_type, MemSpace> recv_span,
-            ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_span)
+            Field<ElementType, OutIdxRange, chunk_layout_type, MemSpace> recv_span,
+            ConstField<ElementType, InIdxRange, chunk_layout_type, MemSpace> send_span)
     {
         static_assert(!std::is_same_v<InIdxRange, OutIdxRange>);
         static_assert(
@@ -174,9 +174,9 @@ public:
             ExecSpace const& execution_space,
             Field<ElementType,
                   typename OutLayout::discrete_domain_type,
-                  field_layout_type,
+                  chunk_layout_type,
                   MemSpace> recv_span,
-            ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_span)
+            ConstField<ElementType, InIdxRange, chunk_layout_type, MemSpace> send_span)
     {
         using InLayout = std::conditional_t<std::is_same_v<OutLayout, Layout1>, Layout2, Layout1>;
         /*****************************************************************
@@ -287,9 +287,9 @@ public:
         /*****************************************************************
          * Create views on the function inputs with the index ranges including the MPI rank information
          *****************************************************************/
-        ConstField<ElementType, input_mpi_idx_range_type, field_layout_type, MemSpace>
+        ConstField<ElementType, input_mpi_idx_range_type, chunk_layout_type, MemSpace>
                 send_mpi_span(send_span.data_handle(), input_mpi_idx_range);
-        Field<ElementType, output_mpi_idx_range_type, field_layout_type, MemSpace>
+        Field<ElementType, output_mpi_idx_range_type, chunk_layout_type, MemSpace>
                 recv_mpi_span(recv_span.data_handle(), output_mpi_idx_range);
 
         /*****************************************************************
@@ -325,8 +325,8 @@ private:
             class ExecSpace>
     void call_all_to_all(
             ExecSpace const& execution_space,
-            Field<ElementType, MPIRecvIdxRange, field_layout_type, MemSpace> recv_span,
-            ConstField<ElementType, MPISendIdxRange, field_layout_type, MemSpace> send_span)
+            Field<ElementType, MPIRecvIdxRange, chunk_layout_type, MemSpace> recv_span,
+            ConstField<ElementType, MPISendIdxRange, chunk_layout_type, MemSpace> send_span)
     {
         // No Cuda-aware MPI yet
         auto send_buffer = ddc::create_mirror_view_and_copy(send_span);
