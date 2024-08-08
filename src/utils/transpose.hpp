@@ -47,7 +47,6 @@ ddc::ChunkSpan<ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace> tran
     assert(start_view.domain() == end_span.domain());
 
     using StartIndex = typename StartDomain::discrete_element_type;
-    using EndIndex = typename EndDomain::discrete_element_type;
 
     ddc::parallel_for_each(
             execution_space,
