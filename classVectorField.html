@@ -138,10 +138,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a3ec69912b7bbe42bf8302013b4ee3bcd">view_type</a> = <a class="el" href="classVectorFieldSpan.html">VectorFieldSpan</a>&lt; const ElementType, Domain, NDTag, std::experimental::layout_right, typename Allocator::memory_space &gt;</td></tr>
 <tr class="memdesc:a3ec69912b7bbe42bf8302013b4ee3bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a constant reference to this <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>. <br /></td></tr>
 <tr class="separator:a3ec69912b7bbe42bf8302013b4ee3bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab896e267b63db730e4344e1e15f2956f"><td class="memItemLeft" align="right" valign="top"><a id="ab896e267b63db730e4344e1e15f2956f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> = typename base_type::mdomain_type</td></tr>
-<tr class="memdesc:ab896e267b63db730e4344e1e15f2956f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain on which the field is defined. <br /></td></tr>
-<tr class="separator:ab896e267b63db730e4344e1e15f2956f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedcaaaf1e6086b8313e5c05c5eab43af"><td class="memItemLeft" align="right" valign="top"><a id="aedcaaaf1e6086b8313e5c05c5eab43af"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#aedcaaaf1e6086b8313e5c05c5eab43af">discrete_domain_type</a> = typename base_type::discrete_domain_type</td></tr>
+<tr class="memdesc:aedcaaaf1e6086b8313e5c05c5eab43af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain on which the field is defined. <br /></td></tr>
+<tr class="separator:aedcaaaf1e6086b8313e5c05c5eab43af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7df5bf4cd762372ba4ae06c99b6ed478"><td class="memItemLeft" align="right" valign="top"><a id="a7df5bf4cd762372ba4ae06c99b6ed478"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a7df5bf4cd762372ba4ae06c99b6ed478">memory_space</a> = typename chunk_type::memory_space</td></tr>
 <tr class="memdesc:a7df5bf4cd762372ba4ae06c99b6ed478"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the memory space where the field is saved (CPU vs GPU). <br /></td></tr>
@@ -153,9 +153,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#affcf9abd0e02dde4aa553233de0b57c8">VectorField</a> ()=default</td></tr>
 <tr class="memdesc:affcf9abd0e02dde4aa553233de0b57c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a>. <br /></td></tr>
 <tr class="separator:affcf9abd0e02dde4aa553233de0b57c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9355ed87913f63a941e03f6b61a4c9e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0">VectorField</a> (<a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> const &amp;domain, Allocator allocator=Allocator())</td></tr>
-<tr class="memdesc:a9355ed87913f63a941e03f6b61a4c9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> on a domain with uninitialized values.  <a href="classVectorField.html#a9355ed87913f63a941e03f6b61a4c9e0">More...</a><br /></td></tr>
-<tr class="separator:a9355ed87913f63a941e03f6b61a4c9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14e408e6d64fce821de4ac97427e9567"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a14e408e6d64fce821de4ac97427e9567">VectorField</a> (<a class="el" href="classVectorField.html#aedcaaaf1e6086b8313e5c05c5eab43af">discrete_domain_type</a> const &amp;domain, Allocator allocator=Allocator())</td></tr>
+<tr class="memdesc:a14e408e6d64fce821de4ac97427e9567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classVectorField.html" title="Pre-declaration of VectorField.">VectorField</a> on a domain with uninitialized values.  <a href="classVectorField.html#a14e408e6d64fce821de4ac97427e9567">More...</a><br /></td></tr>
+<tr class="separator:a14e408e6d64fce821de4ac97427e9567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4838971fca188dc404dc50d8af9ef3d9"><td class="memItemLeft" align="right" valign="top"><a id="a4838971fca188dc404dc50d8af9ef3d9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a4838971fca188dc404dc50d8af9ef3d9">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=delete</td></tr>
 <tr class="memdesc:a4838971fca188dc404dc50d8af9ef3d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted: use deepcopy instead. <br /></td></tr>
@@ -212,8 +212,8 @@ class VectorField&lt; ElementType, Domain, NDTag, Allocator &gt;</h3>
 <p>A class which describes a vector field.</p>
 <p>A class which describes a vector field. In other words a class which maps a position on a domain to a vector (x,y,z,...). This is done by storing the values at the positions in individual Chunks. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9355ed87913f63a941e03f6b61a4c9e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9355ed87913f63a941e03f6b61a4c9e0">&#9670;&nbsp;</a></span>VectorField() <span class="overload">[1/2]</span></h2>
+<a id="a14e408e6d64fce821de4ac97427e9567"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14e408e6d64fce821de4ac97427e9567">&#9670;&nbsp;</a></span>VectorField() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,7 +226,7 @@ template&lt;class ElementType , class Domain , class NDTag , class Allocator &gt
         <tr>
           <td class="memname"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, Domain, NDTag, Allocator &gt;::<a class="el" href="classVectorField.html">VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html#ab896e267b63db730e4344e1e15f2956f">mdomain_type</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html#aedcaaaf1e6086b8313e5c05c5eab43af">discrete_domain_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>domain</em>, </td>
         </tr>
         <tr>

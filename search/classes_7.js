@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hiddenfembsplines_985',['HiddenFEMBSplines',['../structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html',1,'FEM1DPoissonSolver']]]
+  ['hiddenfembsplines_984',['HiddenFEMBSplines',['../structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html',1,'FEM1DPoissonSolver']]]
 ];

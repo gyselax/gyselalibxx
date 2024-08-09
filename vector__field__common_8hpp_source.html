@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('vector__field__common_8hpp_source.html
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> data_type = <span class="keyword">typename</span> ChunkType::element_type;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">using</span> mdomain_type = <span class="keyword">typename</span> ChunkType::mdomain_type;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">using</span> discrete_domain_type = <span class="keyword">typename</span> ChunkType::discrete_domain_type;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">using</span> element_type = <span class="keyword">typename</span> ddc::detail::TaggedVector&lt;data_type, DDims...&gt;;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">using</span> element_ref_type = <span class="keyword">typename</span> ddc::detail::TaggedVector&lt;data_type&amp;, DDims...&gt;;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">using</span> NDTypeTag = ddc::detail::TypeSeq&lt;DDims...&gt;;</div>
@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('vector__field__common_8hpp_source.html
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    constexpr mdomain_type domain() const noexcept</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    constexpr discrete_domain_type domain() const noexcept</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    {</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> m_values[0].domain();</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
