@@ -4,4 +4,6 @@ The `multipatch` folder contains all the code describing methods and classes whi
 
 - [connectivity](./connectivity/README.md) - Defines structures and methods to describe patches and how they are connected to one another.
 
+- [data\_types](./data_types/README.md) - Defines classes to handle objects on a multipatch domain more conveniently.
+
 - [spline](./spline/README.md) - Defines structures and methods to deal with different splines on every patches.
