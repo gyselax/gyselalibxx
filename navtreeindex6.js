@@ -1,5 +1,10 @@
 var NAVTREEINDEX6 =
 {
+"polynomial__evaluator_8hpp_source.html":[15,2,0,1,2],
+"predcorr__RK2_8hpp_source.html":[15,0,7,2,0],
+"predcorr__hybrid_8hpp_source.html":[15,0,6,7,1],
+"preprocessor_8hpp_source.html":[15,0,18,4],
+"quadrature_8hpp_source.html":[15,0,15,2],
 "quadrature__coeffs__nd_8hpp.html":[15,0,15,3],
 "quadrature__coeffs__nd_8hpp.html#abe2b323c35771531c1be8ad980031009":[15,0,15,3,0],
 "quadrature__coeffs__nd_8hpp_source.html":[15,0,15,3],
@@ -180,9 +185,11 @@ var NAVTREEINDEX6 =
 "src_multipatch_connectivity.html#src_multipatch_connectivity__Interfaces":[9,10,0,1],
 "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch":[9,10,0,0],
 "src_multipatch_connectivity.html#src_multipatch_connectivity__References":[9,10,0,2],
-"src_multipatch_spline.html":[9,10,1],
+"src_multipatch_data_types.html":[9,10,1],
+"src_multipatch_data_types.html#src_multipatch_data_types__MultipatchType":[9,10,1,0],
+"src_multipatch_spline.html":[9,10,2],
 "src_multipatch_spline.html#autotoc_md69":[9],
-"src_multipatch_spline.html#src_multipatch_spline__Spline_builder":[9,10,1,0],
+"src_multipatch_spline.html#src_multipatch_spline__Spline_builder":[9,10,2,0],
 "src_pde_solvers.html":[9,12],
 "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[9,12,0],
 "src_quadrature.html":[9,13],
@@ -242,12 +249,5 @@ var NAVTREEINDEX6 =
 "structGridTor2.html":[14,98],
 "structGridTor3.html":[14,99],
 "structGridVpar.html":[14,100],
-"structGridVx.html":[14,101],
-"structGridVy.html":[14,102],
-"structGridX.html":[14,103],
-"structGridY.html":[14,104],
-"structInterface.html":[14,120],
-"structInterface.html#a0eba2d684c513fce67db0f0f977d1315":[14,120,0],
-"structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a":[14,120,1],
-"structInterface.html#add430c600a6a1181e4793a5a3b8beafd":[14,120,2]
+"structGridVx.html":[14,101]
 };

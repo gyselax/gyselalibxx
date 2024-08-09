@@ -313,6 +313,7 @@ var annotated =
     [ "Mu", "structMu.html", null ],
     [ "MultipatchConnectivity", "classMultipatchConnectivity.html", "classMultipatchConnectivity" ],
     [ "MultipatchSplineBuilder", "classMultipatchSplineBuilder.html", "classMultipatchSplineBuilder" ],
+    [ "MultipatchType", "classMultipatchType.html", "classMultipatchType" ],
     [ "NoPerturbInitialization", "classNoPerturbInitialization.html", "classNoPerturbInitialization" ],
     [ "NullAdvectionVelocity", "classNullAdvectionVelocity.html", "classNullAdvectionVelocity" ],
     [ "NullFluidSolver", "classNullFluidSolver.html", "classNullFluidSolver" ],
