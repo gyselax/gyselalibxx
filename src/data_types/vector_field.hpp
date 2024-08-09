@@ -69,7 +69,7 @@ public:
     /**
      * @brief The type of the domain on which the field is defined.
      */
-    using mdomain_type = typename base_type::mdomain_type;
+    using discrete_domain_type = typename base_type::discrete_domain_type;
 
     /**
      * @brief The type of the memory space where the field is saved (CPU vs GPU).
@@ -80,7 +80,7 @@ private:
     /// Construct a VectorField on a domain with uninitialized values
     template <std::size_t... Is>
     explicit VectorField(
-            mdomain_type const& domain,
+            discrete_domain_type const& domain,
             Allocator allocator,
             std::index_sequence<Is...> const&)
         : base_type(((void)Is, chunk_type(domain, allocator))...)
@@ -109,7 +109,7 @@ public:
      * @param[in] domain The domain on which the chunk will be defined.
      * @param[in] allocator An optional allocator used to create the chunks.
      */
-    explicit VectorField(mdomain_type const& domain, Allocator allocator = Allocator())
+    explicit VectorField(discrete_domain_type const& domain, Allocator allocator = Allocator())
         : VectorField(domain, allocator, std::make_index_sequence<base_type::NDims> {})
     {
     }

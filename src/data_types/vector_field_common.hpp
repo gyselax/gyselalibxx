@@ -72,7 +72,7 @@ class VectorFieldCommon<ChunkType, ddc::detail::TypeSeq<DDims...>>
     using data_type = typename ChunkType::element_type;
 
 public:
-    using mdomain_type = typename ChunkType::mdomain_type;
+    using discrete_domain_type = typename ChunkType::discrete_domain_type;
     using element_type = typename ddc::detail::TaggedVector<data_type, DDims...>;
     using element_ref_type = typename ddc::detail::TaggedVector<data_type&, DDims...>;
     using NDTypeTag = ddc::detail::TypeSeq<DDims...>;
@@ -113,7 +113,7 @@ protected:
     }
 
 public:
-    constexpr mdomain_type domain() const noexcept
+    constexpr discrete_domain_type domain() const noexcept
     {
         return m_values[0].domain();
     }

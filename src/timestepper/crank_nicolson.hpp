@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc_helper.hpp>
 #include <vector_field_common.hpp>
@@ -35,10 +36,10 @@ private:
     static_assert(ddc::is_chunk_v<DerivFieldMemType> or is_field_v<DerivFieldMemType>);
 
     static_assert(std::is_same_v<
-                  typename FieldMemType::mdomain_type,
-                  typename DerivFieldMemType::mdomain_type>);
+                  typename FieldMemType::discrete_domain_type,
+                  typename DerivFieldMemType::discrete_domain_type>);
 
-    using IdxRange = typename FieldMemType::mdomain_type;
+    using IdxRange = typename FieldMemType::discrete_domain_type;
 
     using Idx = typename IdxRange::discrete_element_type;
 
@@ -63,7 +64,7 @@ public:
      *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
      *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
      */
-    CrankNicolson(IdxRange dom, int const counter = int(20), double const epsilon = 1e-12)
+    explicit CrankNicolson(IdxRange dom, int const counter = int(20), double const epsilon = 1e-12)
         : m_dom(dom)
         , m_max_counter(counter)
         , m_epsilon(epsilon)
@@ -248,7 +249,7 @@ public:
     template <class ExecSpace>
     bool have_converged(ExecSpace const& exec_space, ValConstField y_old, ValConstField y_new) const
     {
-        auto const dom = get_idx_range(y_old);
+        IdxRange const dom = get_idx_range(y_old);
 
         double norm_old = ddc::parallel_transform_reduce(
                 exec_space,

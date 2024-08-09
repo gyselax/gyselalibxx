@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
 #include <type_traits>
@@ -36,10 +37,10 @@ private:
     static_assert(ddc::is_chunk_v<DerivFieldMemType> or is_field_v<DerivFieldMemType>);
 
     static_assert(std::is_same_v<
-                  typename FieldMemType::mdomain_type,
-                  typename DerivFieldMemType::mdomain_type>);
+                  typename FieldMemType::discrete_domain_type,
+                  typename DerivFieldMemType::discrete_domain_type>);
 
-    using IdxRange = typename FieldMemType::mdomain_type;
+    using IdxRange = typename FieldMemType::discrete_domain_type;
 
     using Idx = typename IdxRange::discrete_element_type;
 
@@ -57,7 +58,7 @@ public:
      * @brief Create a RK2 object.
      * @param[in] dom The index range on which the points which evolve over time are defined.
      */
-    RK2(IdxRange dom) : m_dom(dom) {}
+    explicit RK2(IdxRange dom) : m_dom(dom) {}
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
