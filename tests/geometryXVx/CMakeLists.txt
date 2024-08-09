@@ -13,6 +13,7 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     krooksource.cpp
     masks.cpp
     splitvlasovsolver.cpp
+    maxwellian.cpp
     ../main.cpp
 )
 
