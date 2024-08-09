@@ -81,7 +81,7 @@ public:
     /**
      * @brief The type of the domain on which the field is defined.
      */
-    using mdomain_type = typename base_type::mdomain_type;
+    using discrete_domain_type = typename base_type::discrete_domain_type;
 
     /**
      * @brief The type of the memory space where the field is saved (CPU vs GPU).
@@ -124,7 +124,7 @@ private:
     KOKKOS_FUNCTION constexpr VectorFieldSpan(
             VectorFieldSpan<
                     OElementType,
-                    mdomain_type,
+                    discrete_domain_type,
                     NDTag,
                     LayoutStridedPolicy,
                     MemorySpace> const& other,
@@ -141,7 +141,7 @@ private:
         using ChunkType = std::tuple_element_t<0, decltype(chunk_slices)>;
         return VectorFieldSpan<
                 ElementType,
-                typename ChunkType::mdomain_type,
+                typename ChunkType::discrete_domain_type,
                 NDTag,
                 typename ChunkType::layout_type,
                 typename ChunkType::memory_space>(std::move(std::get<Is>(chunk_slices))...);
@@ -207,7 +207,7 @@ public:
     template <class OElementType>
     KOKKOS_FUNCTION constexpr VectorFieldSpan(VectorFieldSpan<
                                               OElementType,
-                                              mdomain_type,
+                                              discrete_domain_type,
                                               NDTag,
                                               LayoutStridedPolicy,
                                               MemorySpace> const& other) noexcept
@@ -224,7 +224,7 @@ public:
             class = std::enable_if_t<
                     std::conjunction_v<std::is_same<OElementType, ElementType>...>>,
             class = std::enable_if_t<sizeof...(OElementType) == base_type::NDims>>
-    KOKKOS_FUNCTION VectorFieldSpan(mdomain_type const& domain, OElementType*... ptr)
+    KOKKOS_FUNCTION VectorFieldSpan(discrete_domain_type const& domain, OElementType*... ptr)
         : base_type((chunk_type(ptr, domain))...)
     {
     }
