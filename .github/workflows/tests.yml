@@ -62,7 +62,7 @@ jobs:
     - 
       run: |
         whoami
-        useradd non_sudo_user
+        useradd -m non_sudo_user
         su - non_sudo_user
     - 
       name: Run tests
