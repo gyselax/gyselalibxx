@@ -72,8 +72,8 @@ public:
         }
         break_points_y1[y1_size - 1] = y1_max;
 
-        ddc::init_discrete_space<GridX1>(break_points_x1);
-        ddc::init_discrete_space<GridY1>(break_points_y1);
+        ddc::init_discrete_space<GridX<1>>(break_points_x1);
+        ddc::init_discrete_space<GridY<1>>(break_points_y1);
 
         // Patch 2
         Patch2::Coord1 const x2_min(1.0);
@@ -98,8 +98,8 @@ public:
         }
         break_points_y2[y2_size - 1] = y2_max;
 
-        ddc::init_discrete_space<GridX2>(break_points_x2);
-        ddc::init_discrete_space<GridY2>(break_points_y2);
+        ddc::init_discrete_space<GridX<2>>(break_points_x2);
+        ddc::init_discrete_space<GridY<2>>(break_points_y2);
 
         // Patch 3
         Patch3::Coord1 const x3_min(1.0);
@@ -124,8 +124,8 @@ public:
         }
         break_points_y3[y3_size - 1] = y3_max;
 
-        ddc::init_discrete_space<GridX3>(break_points_x3);
-        ddc::init_discrete_space<GridY3>(break_points_y3);
+        ddc::init_discrete_space<GridX<3>>(break_points_x3);
+        ddc::init_discrete_space<GridY<3>>(break_points_y3);
     }
 };
 
@@ -134,16 +134,16 @@ public:
 
 TEST_F(IndexTransformationNonUniformTest, IndexAvaibility)
 {
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY2F = Edge<Patch2, GridY2, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY2F = Edge<Patch2, GridY<2>, FRONT>;
     using Interface12 = Interface<EdgeY1B, EdgeY2F, false>;
 
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY<3>, FRONT>;
     using Interface13 = Interface<EdgeY1B, EdgeY3F, false>;
 
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY<3>, FRONT>;
     using Interface31 = Interface<EdgeY3F, EdgeY1B, false>;
 
     // Coordinate transformation .................................................................
@@ -180,12 +180,12 @@ TEST_F(IndexTransformationNonUniformTest, IndexAvaibility)
 
 TEST_F(IndexTransformationNonUniformTest, InvertedOrientation)
 {
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY2F = Edge<Patch2, GridY2, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY2F = Edge<Patch2, GridY<2>, FRONT>;
     using Interface12 = Interface<EdgeY1B, EdgeY2F, false>;
 
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY<3>, FRONT>;
     using Interface13 = Interface<EdgeY1B, EdgeY3F, false>;
 
     // Coordinate transformation .................................................................
@@ -210,12 +210,12 @@ TEST_F(IndexTransformationNonUniformTest, InvertedOrientation)
 
 TEST_F(IndexTransformationNonUniformTest, StickingDifferentDimensions)
 {
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeX2F = Edge<Patch2, GridX2, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeX2F = Edge<Patch2, GridX<2>, FRONT>;
     using Interface12 = Interface<EdgeY1B, EdgeX2F, true>;
 
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeX3F = Edge<Patch3, GridX3, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeX3F = Edge<Patch3, GridX<3>, FRONT>;
     using Interface13 = Interface<EdgeY1B, EdgeX3F, true>;
 
     // Coordinate transformation .................................................................
@@ -240,12 +240,12 @@ TEST_F(IndexTransformationNonUniformTest, StickingDifferentDimensions)
 
 TEST_F(IndexTransformationNonUniformTest, ReverseTransformation)
 {
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY2F = Edge<Patch2, GridY2, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY2F = Edge<Patch2, GridY<2>, FRONT>;
     using Interface12 = Interface<EdgeY1B, EdgeY2F, false>;
 
-    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
-    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY<3>, FRONT>;
     using Interface13 = Interface<EdgeY1B, EdgeY3F, false>;
 
     // Coordinate transformation .................................................................

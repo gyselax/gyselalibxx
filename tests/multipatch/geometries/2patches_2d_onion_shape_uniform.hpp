@@ -7,10 +7,12 @@
             - uniform cubic splines;
             - uniform Grid1 and Grid2; 
 */
+#pragma once
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "edge.hpp"
 #include "patch.hpp"
 
 namespace onion_shape_uniform_2d_2patches {
@@ -19,82 +21,109 @@ namespace onion_shape_uniform_2d_2patches {
 int constexpr BSplineDegree = 3;
 
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
-/// @brief First continuous dimension of patch 1.
-struct R1
+/**
+ * @brief First continuous dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct R
 {
     /// @brief Non periodic dimension.
     static bool constexpr PERIODIC = false;
 };
 
-/// @brief Second continuous dimension of patch 1.
-struct P1
+/**
+ * @brief Second continuous dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct Theta
 {
     /// @brief Periodic dimension.
     static bool constexpr PERIODIC = true;
 };
 
-/// @brief First continuous dimension of patch 2.
-struct R2
-{
-    /// @brief Non periodic dimension.
-    static bool constexpr PERIODIC = false;
-};
-
-/// @brief Second continuous dimension of patch 2.
-struct P2
-{
-    /// @brief Periodic dimension.
-    static bool constexpr PERIODIC = true;
-};
 
 
 // DISCRETE DIMENSIONS ---------------------------------------------------------------------------
-/// @brief Points sequence on the first logical dimension of patch 1.
-struct GridR1 : UniformGridBase<R1>
+/**
+ * @brief Points sequence on the second logical dimension of patch 1.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct GridR : UniformGridBase<R<PatchIdx>>
 {
 };
-/// @brief Points sequence on the second logical dimension of patch 1.
-struct GridP1 : UniformGridBase<P1>
+
+/**
+ * @brief Points sequence on the second logical dimension of patch 1.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct GridTheta : UniformGridBase<Theta<PatchIdx>>
 {
 };
-/// @brief Points sequence on the first logical dimension of patch 2.
-struct GridR2 : UniformGridBase<R2>
-{
-};
-/// @brief Points sequence on the second logical dimension of patch 2.
-struct GridP2 : UniformGridBase<P2>
-{
-};
+
 
 
 // SPLINE DIMENSIONS -----------------------------------------------------------------------------
-/// @brief First spline dimension of patch 1.
-struct BSplinesR1 : ddc::UniformBSplines<R1, BSplineDegree>
-{
-};
-/// @brief Second spline dimension of patch 1.
-struct BSplinesP1 : ddc::UniformBSplines<P1, BSplineDegree>
+/**
+ * @brief First spline dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct BSplinesR : ddc::UniformBSplines<R<PatchIdx>, BSplineDegree>
 {
 };
 
-/// @brief First spline dimension of patch 2.
-struct BSplinesR2 : ddc::UniformBSplines<R2, BSplineDegree>
-{
-};
-/// @brief Second spline dimension of patch 2.
-struct BSplinesP2 : ddc::UniformBSplines<P2, BSplineDegree>
+/**
+ * @brief Second spline dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct BSplinesTheta : ddc::UniformBSplines<Theta<PatchIdx>, BSplineDegree>
 {
 };
 
 
 // PATCHES ---------------------------------------------------------------------------------------
 /// @brief First patch.
-using Patch1 = Patch<GridR1, GridP1, BSplinesR1, BSplinesP1>;
-/// @brief Second patch.
-using Patch2 = Patch<GridR2, GridP2, BSplinesR2, BSplinesP2>;
+using Patch1 = Patch<GridR<1>, GridTheta<1>, BSplinesR<1>, BSplinesTheta<1>>;
 
+/// @brief Second patch.
+using Patch2 = Patch<GridR<2>, GridTheta<2>, BSplinesR<2>, BSplinesTheta<2>>;
 
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2>;
+
+
+// EDGES -----------------------------------------------------------------------------------------
+template <int PatchIdx>
+using NorthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridTheta<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using SouthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridTheta<PatchIdx>,
+               FRONT>;
+template <int PatchIdx>
+using EastEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridR<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using WestEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridR<PatchIdx>,
+               FRONT>;
+
+
+// INTERFACES ------------------------------------------------------------------------------------
+
+
+// CONNECTIVITY ----------------------------------------------------------------------------------
+
 
 } // namespace onion_shape_uniform_2d_2patches

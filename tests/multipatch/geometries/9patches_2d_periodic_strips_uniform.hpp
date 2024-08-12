@@ -34,7 +34,7 @@ int constexpr BSplineDegree = 3;
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
 /**
  * @brief First continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct X
@@ -45,7 +45,7 @@ struct X
 
 /**
  * @brief Second continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct Y
@@ -59,7 +59,7 @@ struct Y
 // DISCRETE DIMENSIONS ---------------------------------------------------------------------------
 /**
  * @brief Points sequence on the second logical dimension of patch 1.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct GridX : UniformGridBase<X<PatchIdx>>
@@ -68,7 +68,7 @@ struct GridX : UniformGridBase<X<PatchIdx>>
 
 /**
  * @brief Points sequence on the second logical dimension of patch 1.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct GridY : UniformGridBase<Y<PatchIdx>>
@@ -80,7 +80,7 @@ struct GridY : UniformGridBase<Y<PatchIdx>>
 // SPLINE DIMENSIONS -----------------------------------------------------------------------------
 /**
  * @brief First spline dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
@@ -89,7 +89,7 @@ struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
 
 /**
  * @brief Second spline dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct BSplinesY : ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree>
@@ -130,81 +130,62 @@ using Patch9 = Patch<GridX<9>, GridY<9>, BSplinesX<9>, BSplinesY<9>>;
 using PatchOrdering = ddc::detail::
         TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9>;
 
-using NorthEdge1 = Edge<Patch1, GridY<1>, BACK>;
-using SouthEdge1 = Edge<Patch1, GridY<1>, FRONT>;
-using EastEdge1 = Edge<Patch1, GridX<1>, BACK>;
-using WestEdge1 = Edge<Patch1, GridX<1>, FRONT>;
 
-using NorthEdge2 = Edge<Patch2, GridY<2>, BACK>;
-using SouthEdge2 = Edge<Patch2, GridY<2>, FRONT>;
-using EastEdge2 = Edge<Patch2, GridX<2>, BACK>;
-using WestEdge2 = Edge<Patch2, GridX<2>, FRONT>;
-
-using NorthEdge3 = Edge<Patch3, GridY<3>, BACK>;
-using SouthEdge3 = Edge<Patch3, GridY<3>, FRONT>;
-using EastEdge3 = Edge<Patch3, GridX<3>, BACK>;
-using WestEdge3 = Edge<Patch3, GridX<3>, FRONT>;
-
-using NorthEdge4 = Edge<Patch4, GridY<4>, BACK>;
-using SouthEdge4 = Edge<Patch4, GridY<4>, FRONT>;
-using EastEdge4 = Edge<Patch4, GridX<4>, BACK>;
-using WestEdge4 = Edge<Patch4, GridX<4>, FRONT>;
-
-using NorthEdge5 = Edge<Patch5, GridY<5>, BACK>;
-using SouthEdge5 = Edge<Patch5, GridY<5>, FRONT>;
-using EastEdge5 = Edge<Patch5, GridX<5>, BACK>;
-using WestEdge5 = Edge<Patch5, GridX<5>, FRONT>;
-
-using NorthEdge6 = Edge<Patch6, GridY<6>, BACK>;
-using SouthEdge6 = Edge<Patch6, GridY<6>, FRONT>;
-using EastEdge6 = Edge<Patch6, GridX<6>, BACK>;
-using WestEdge6 = Edge<Patch6, GridX<6>, FRONT>;
-
-using NorthEdge7 = Edge<Patch7, GridY<7>, BACK>;
-using SouthEdge7 = Edge<Patch7, GridY<7>, FRONT>;
-using EastEdge7 = Edge<Patch7, GridX<7>, BACK>;
-using WestEdge7 = Edge<Patch7, GridX<7>, FRONT>;
-
-using NorthEdge8 = Edge<Patch8, GridY<8>, BACK>;
-using SouthEdge8 = Edge<Patch8, GridY<8>, FRONT>;
-using EastEdge8 = Edge<Patch8, GridX<8>, BACK>;
-using WestEdge8 = Edge<Patch8, GridX<8>, FRONT>;
-
-using NorthEdge9 = Edge<Patch9, GridY<9>, BACK>;
-using SouthEdge9 = Edge<Patch9, GridY<9>, FRONT>;
-using EastEdge9 = Edge<Patch9, GridX<9>, BACK>;
-using WestEdge9 = Edge<Patch9, GridX<9>, FRONT>;
+// EDGES -----------------------------------------------------------------------------------------
+template <int PatchIdx>
+using NorthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridY<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using SouthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridY<PatchIdx>,
+               FRONT>;
+template <int PatchIdx>
+using EastEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridX<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using WestEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridX<PatchIdx>,
+               FRONT>;
 
 
-using NorthInterface1 = Interface<NorthEdge1, OutsideEdge, true>;
-using NorthInterface2 = Interface<NorthEdge2, OutsideEdge, true>;
-using NorthInterface3 = Interface<NorthEdge3, OutsideEdge, true>;
+// INTERFACES ------------------------------------------------------------------------------------
+using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
+using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
+using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
 
-using Interface_1_4 = Interface<SouthEdge1, NorthEdge4, true>;
-using Interface_2_5 = Interface<SouthEdge2, NorthEdge5, true>;
-using Interface_3_6 = Interface<SouthEdge3, NorthEdge6, true>;
+using Interface_1_4 = Interface<SouthEdge<1>, NorthEdge<4>, true>;
+using Interface_2_5 = Interface<SouthEdge<2>, NorthEdge<5>, true>;
+using Interface_3_6 = Interface<SouthEdge<3>, NorthEdge<6>, true>;
 
-using Interface_4_7 = Interface<SouthEdge4, NorthEdge7, true>;
-using Interface_5_8 = Interface<SouthEdge5, NorthEdge8, true>;
-using Interface_6_9 = Interface<SouthEdge6, NorthEdge9, true>;
+using Interface_4_7 = Interface<SouthEdge<4>, NorthEdge<7>, true>;
+using Interface_5_8 = Interface<SouthEdge<5>, NorthEdge<8>, true>;
+using Interface_6_9 = Interface<SouthEdge<6>, NorthEdge<9>, true>;
 
-using SouthInterface7 = Interface<OutsideEdge, SouthEdge7, true>;
-using SouthInterface8 = Interface<OutsideEdge, SouthEdge8, true>;
-using SouthInterface9 = Interface<OutsideEdge, SouthEdge9, true>;
+using SouthInterface7 = Interface<OutsideEdge, SouthEdge<7>, true>;
+using SouthInterface8 = Interface<OutsideEdge, SouthEdge<8>, true>;
+using SouthInterface9 = Interface<OutsideEdge, SouthEdge<9>, true>;
 
 
-using Interface_1_2 = Interface<EastEdge1, WestEdge2, true>;
-using Interface_4_5 = Interface<EastEdge4, WestEdge5, true>;
-using Interface_7_8 = Interface<EastEdge7, WestEdge8, true>;
+using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
+using Interface_4_5 = Interface<EastEdge<4>, WestEdge<5>, true>;
+using Interface_7_8 = Interface<EastEdge<7>, WestEdge<8>, true>;
 
-using Interface_2_3 = Interface<EastEdge2, WestEdge3, true>;
-using Interface_5_6 = Interface<EastEdge5, WestEdge6, true>;
-using Interface_8_9 = Interface<EastEdge8, WestEdge9, true>;
+using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
+using Interface_5_6 = Interface<EastEdge<5>, WestEdge<6>, true>;
+using Interface_8_9 = Interface<EastEdge<8>, WestEdge<9>, true>;
 
-using Interface_3_1 = Interface<WestEdge1, EastEdge3, true>;
-using Interface_6_4 = Interface<WestEdge4, EastEdge6, true>;
-using Interface_9_7 = Interface<WestEdge7, EastEdge9, true>;
+using Interface_3_1 = Interface<WestEdge<1>, EastEdge<3>, true>;
+using Interface_6_4 = Interface<WestEdge<4>, EastEdge<6>, true>;
+using Interface_9_7 = Interface<WestEdge<7>, EastEdge<9>, true>;
 
+
+// CONNECTIVITY ----------------------------------------------------------------------------------
 using Connectivity = MultipatchConnectivity<
         NorthInterface1,
         NorthInterface2,

@@ -83,8 +83,8 @@ public:
                 get_idx_range(field1),
                 KOKKOS_LAMBDA(Patch1::Idx12 const idx) {
                     Patch1::Coord12 const xy1 = ddc::coordinate(idx);
-                    double const x1 = ddc::get<X1>(xy1);
-                    double const y1 = ddc::get<Y1>(xy1);
+                    double const x1 = ddc::get<X<1>>(xy1);
+                    double const y1 = ddc::get<Y<1>>(xy1);
                     field1(idx) = x1 * x1 + y1 * y1;
                 });
         ddc::parallel_for_each(
@@ -92,8 +92,8 @@ public:
                 get_idx_range(field2),
                 KOKKOS_LAMBDA(Patch2::Idx12 const idx) {
                     Patch2::Coord12 const xy2 = ddc::coordinate(idx);
-                    double const x2 = ddc::get<X2>(xy2);
-                    double const y2 = ddc::get<Y2>(xy2);
+                    double const x2 = ddc::get<X<2>>(xy2);
+                    double const y2 = ddc::get<Y<2>>(xy2);
                     field2(idx) = x2 * x2 - y2 * y2;
                 });
     }

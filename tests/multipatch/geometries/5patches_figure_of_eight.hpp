@@ -29,7 +29,11 @@
 
 #include <ddc/ddc.hpp>
 
+#include "connectivity.hpp"
 #include "ddc_aliases.hpp"
+#include "edge.hpp"
+#include "interface.hpp"
+#include "patch.hpp"
 
 namespace figure_of_eight_5patches {
 
@@ -38,7 +42,7 @@ int constexpr BSplineDegree = 3;
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
 /**
  * @brief First continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct X
@@ -49,7 +53,7 @@ struct X
 
 /**
  * @brief Second continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct Y
@@ -63,7 +67,7 @@ struct Y
 // DISCRETE DIMENSIONS ---------------------------------------------------------------------------
 /**
  * @brief Points sequence on the second logical dimension of patch 1.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct GridX : UniformGridBase<X<PatchIdx>>
@@ -72,7 +76,7 @@ struct GridX : UniformGridBase<X<PatchIdx>>
 
 /**
  * @brief Points sequence on the second logical dimension of patch 1.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct GridY : UniformGridBase<Y<PatchIdx>>
@@ -84,7 +88,7 @@ struct GridY : UniformGridBase<Y<PatchIdx>>
 // SPLINE DIMENSIONS -----------------------------------------------------------------------------
 /**
  * @brief First spline dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
@@ -93,7 +97,7 @@ struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
 
 /**
  * @brief Second spline dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the pach. 
+ * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
 struct BSplinesY : ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree>
@@ -121,45 +125,46 @@ using Patch5 = Patch<GridX<5>, GridY<5>, BSplinesX<5>, BSplinesY<5>>;
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5>;
 
-using NorthEdge1 = Edge<Patch1, GridY<1>, BACK>;
-using SouthEdge1 = Edge<Patch1, GridY<1>, FRONT>;
-using EastEdge1 = Edge<Patch1, GridX<1>, BACK>;
-using WestEdge1 = Edge<Patch1, GridX<1>, FRONT>;
 
-using NorthEdge2 = Edge<Patch2, GridY<2>, BACK>;
-using SouthEdge2 = Edge<Patch2, GridY<2>, FRONT>;
-using EastEdge2 = Edge<Patch2, GridX<2>, BACK>;
-using WestEdge2 = Edge<Patch2, GridX<2>, FRONT>;
-
-using NorthEdge3 = Edge<Patch3, GridY<3>, BACK>;
-using SouthEdge3 = Edge<Patch3, GridY<3>, FRONT>;
-using EastEdge3 = Edge<Patch3, GridX<3>, BACK>;
-using WestEdge3 = Edge<Patch3, GridX<3>, FRONT>;
-
-using NorthEdge4 = Edge<Patch4, GridY<4>, BACK>;
-using SouthEdge4 = Edge<Patch4, GridY<4>, FRONT>;
-using EastEdge4 = Edge<Patch4, GridX<4>, BACK>;
-using WestEdge4 = Edge<Patch4, GridX<4>, FRONT>;
-
-using NorthEdge5 = Edge<Patch5, GridY<5>, BACK>;
-using SouthEdge5 = Edge<Patch5, GridY<5>, FRONT>;
-using EastEdge5 = Edge<Patch5, GridX<5>, BACK>;
-using WestEdge5 = Edge<Patch5, GridX<5>, FRONT>;
+// EDGES -----------------------------------------------------------------------------------------
+template <int PatchIdx>
+using NorthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridY<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using SouthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridY<PatchIdx>,
+               FRONT>;
+template <int PatchIdx>
+using EastEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridX<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using WestEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridX<PatchIdx>,
+               FRONT>;
 
 
-using Patch3InterfaceNorth = Interface<NorthEdge3, SouthEdge1, true>;
-using Patch3InterfaceSouth = Interface<SouthEdge3, NorthEdge5, false>;
-using Patch3InterfaceEast = Interface<EastEdge3, WestEdge4, false>;
-using Patch3InterfaceWest = Interface<WestEdge3, EastEdge2, true>;
+// INTERFACES ------------------------------------------------------------------------------------
+using Patch3InterfaceNorth = Interface<NorthEdge<3>, SouthEdge<1>, true>;
+using Patch3InterfaceSouth = Interface<SouthEdge<3>, NorthEdge<5>, false>;
+using Patch3InterfaceEast = Interface<EastEdge<3>, WestEdge<4>, false>;
+using Patch3InterfaceWest = Interface<WestEdge<3>, EastEdge<2>, true>;
 
-using LoopInterface_2_1 = Interface<NorthEdge2, WestEdge1, false>;
-using LoopInterface_1_4 = Interface<EastEdge1, NorthEdge4, true>;
-using LoopInterface_4_5 = Interface<SouthEdge4, EastEdge5, false>;
-using LoopInterface_5_2 = Interface<WestEdge5, SouthEdge2, true>;
+using LoopInterface_2_1 = Interface<NorthEdge<2>, WestEdge<1>, false>;
+using LoopInterface_1_4 = Interface<EastEdge<1>, NorthEdge<4>, true>;
+using LoopInterface_4_5 = Interface<SouthEdge<4>, EastEdge<5>, false>;
+using LoopInterface_5_2 = Interface<WestEdge<5>, SouthEdge<2>, true>;
 
-using EightInterface_2_1 = Interface<WestEdge2, NorthEdge1, false>;
-using EightInterface_5_4 = Interface<SouthEdge5, EastEdge4, false>;
+using EightInterface_2_1 = Interface<WestEdge<2>, NorthEdge<1>, false>;
+using EightInterface_5_4 = Interface<SouthEdge<5>, EastEdge<4>, false>;
 
+
+// CONNECTIVITY ----------------------------------------------------------------------------------
 using Connectivity = MultipatchConnectivity<
         Patch3InterfaceNorth,
         Patch3InterfaceSouth,
