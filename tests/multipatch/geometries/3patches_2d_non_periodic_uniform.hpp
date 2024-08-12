@@ -7,10 +7,12 @@
             - uniform cubic splines;
             - uniform Grid1 and Grid2; 
 */
+#pragma once
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "edge.hpp"
 #include "patch.hpp"
 
 
@@ -19,43 +21,23 @@ namespace non_periodic_uniform_2d_3patches {
 int constexpr BSplineDegree = 3;
 
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
-/// @brief First continuous dimension of patch 1.
-struct X1
+/**
+ * @brief First continuous dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct X
 {
     /// @brief Non periodic dimension.
     static bool constexpr PERIODIC = false;
 };
 
-/// @brief Second continuous dimension of patch 1.
-struct Y1
-{
-    /// @brief Non periodic dimension.
-    static bool constexpr PERIODIC = false;
-};
-
-/// @brief First continuous dimension of patch 2.
-struct X2
-{
-    /// @brief Non periodic dimension.
-    static bool constexpr PERIODIC = false;
-};
-
-/// @brief Second continuous dimension of patch 2.
-struct Y2
-{
-    /// @brief Non periodic dimension.
-    static bool constexpr PERIODIC = false;
-};
-
-/// @brief First continuous dimension of patch 3.
-struct X3
-{
-    /// @brief Non periodic dimension.
-    static bool constexpr PERIODIC = false;
-};
-
-/// @brief Second continuous dimension of patch 3.
-struct Y3
+/**
+ * @brief Second continuous dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct Y
 {
     /// @brief Non periodic dimension.
     static bool constexpr PERIODIC = false;
@@ -63,72 +45,86 @@ struct Y3
 
 
 
-// GRID: points sequences ------------------------------------------------------------------------
-/// @brief Points sequence on the first logical dimension of patch 1.
-struct GridX1 : UniformGridBase<X1>
+// DISCRETE DIMENSIONS ---------------------------------------------------------------------------
+/**
+ * @brief Points sequence on the second logical dimension of patch 1.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct GridX : UniformGridBase<X<PatchIdx>>
 {
 };
-/// @brief Points sequence on the second logical dimension of patch 1.
-struct GridY1 : UniformGridBase<Y1>
+
+/**
+ * @brief Points sequence on the second logical dimension of patch 1.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct GridY : UniformGridBase<Y<PatchIdx>>
 {
 };
-/// @brief Points sequence on the first logical dimension of patch 2.
-struct GridX2 : UniformGridBase<X2>
-{
-};
-/// @brief Points sequence on the second logical dimension of patch 2.
-struct GridY2 : UniformGridBase<Y2>
-{
-};
-/// @brief Points sequence on the first logical dimension of patch 3.
-struct GridX3 : UniformGridBase<X3>
-{
-};
-/// @brief Points sequence on the second logical dimension of patch 3.
-struct GridY3 : UniformGridBase<Y3>
-{
-};
+
 
 
 // SPLINE DIMENSIONS -----------------------------------------------------------------------------
-/// @brief First spline dimension of patch 1.
-struct BSplinesX1 : ddc::UniformBSplines<X1, BSplineDegree>
-{
-};
-/// @brief Second spline dimension of patch 1.
-struct BSplinesY1 : ddc::UniformBSplines<Y1, BSplineDegree>
-{
-};
-
-/// @brief First spline dimension of patch 2.
-struct BSplinesX2 : ddc::UniformBSplines<X2, BSplineDegree>
-{
-};
-/// @brief Second spline dimension of patch 2.
-struct BSplinesY2 : ddc::UniformBSplines<Y2, BSplineDegree>
+/**
+ * @brief First spline dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct BSplinesX : ddc::UniformBSplines<X<PatchIdx>, BSplineDegree>
 {
 };
 
-/// @brief First spline dimension of patch 2.
-struct BSplinesX3 : ddc::UniformBSplines<X3, BSplineDegree>
-{
-};
-/// @brief Second spline dimension of patch 2.
-struct BSplinesY3 : ddc::UniformBSplines<Y3, BSplineDegree>
+/**
+ * @brief Second spline dimension of patch PatchIdx.
+ * @tparam PatchIdx Index of the patch. 
+ */
+template <int PatchIdx>
+struct BSplinesY : ddc::UniformBSplines<Y<PatchIdx>, BSplineDegree>
 {
 };
 
 
 // PATCHES ---------------------------------------------------------------------------------------
 /// @brief First patch.
-using Patch1 = Patch<GridX1, GridY1, BSplinesX1, BSplinesY1>;
+using Patch1 = Patch<GridX<1>, GridY<1>, BSplinesX<1>, BSplinesY<1>>;
 /// @brief Second patch.
-using Patch2 = Patch<GridX2, GridY2, BSplinesX2, BSplinesY2>;
+using Patch2 = Patch<GridX<2>, GridY<2>, BSplinesX<2>, BSplinesY<2>>;
 /// @brief Third patch.
-using Patch3 = Patch<GridX3, GridY3, BSplinesX3, BSplinesY3>;
+using Patch3 = Patch<GridX<3>, GridY<3>, BSplinesX<3>, BSplinesY<3>>;
 
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
+
+
+// EDGES -----------------------------------------------------------------------------------------
+template <int PatchIdx>
+using NorthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridY<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using SouthEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridY<PatchIdx>,
+               FRONT>;
+template <int PatchIdx>
+using EastEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridX<PatchIdx>,
+               BACK>;
+template <int PatchIdx>
+using WestEdge
+        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
+               GridX<PatchIdx>,
+               FRONT>;
+
+
+// INTERFACES ------------------------------------------------------------------------------------
+
+
+// CONNECTIVITY ----------------------------------------------------------------------------------
 
 
 } // namespace non_periodic_uniform_2d_3patches

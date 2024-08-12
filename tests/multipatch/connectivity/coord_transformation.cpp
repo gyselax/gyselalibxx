@@ -46,8 +46,8 @@ public:
         Patch1::Coord2 const y1_min(2.5);
         Patch1::Coord2 const y1_max(7.0);
 
-        ddc::init_discrete_space<GridX1>(GridX1::init(x1_min, x1_max, x1_size));
-        ddc::init_discrete_space<GridY1>(GridY1::init(y1_min, y1_max, y1_size));
+        ddc::init_discrete_space<GridX<1>>(GridX<1>::init(x1_min, x1_max, x1_size));
+        ddc::init_discrete_space<GridY<1>>(GridY<1>::init(y1_min, y1_max, y1_size));
 
         // Patch 2
         Patch2::Coord1 const x2_min(1.0);
@@ -56,8 +56,8 @@ public:
         Patch2::Coord2 const y2_min(-4.0);
         Patch2::Coord2 const y2_max(-3.5);
 
-        ddc::init_discrete_space<GridX2>(GridX2::init(x2_min, x2_max, x2_size));
-        ddc::init_discrete_space<GridY2>(GridY2::init(y2_min, y2_max, y2_size));
+        ddc::init_discrete_space<GridX<2>>(GridX<2>::init(x2_min, x2_max, x2_size));
+        ddc::init_discrete_space<GridY<2>>(GridY<2>::init(y2_min, y2_max, y2_size));
     }
 };
 
@@ -67,8 +67,8 @@ public:
 
 TEST_F(CoordinateTransformationTest, InvertedOrientation)
 {
-    using EgdeY1B = Edge<Patch1, GridY1, BACK>;
-    using EgdeY2F = Edge<Patch2, GridY2, FRONT>;
+    using EgdeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EgdeY2F = Edge<Patch2, GridY<2>, FRONT>;
     using Interface12 = Interface<EgdeY1B, EgdeY2F, false>;
 
     // Coordinate transformation .................................................................
@@ -84,8 +84,8 @@ TEST_F(CoordinateTransformationTest, InvertedOrientation)
 
 TEST_F(CoordinateTransformationTest, StickingDifferentDimensions)
 {
-    using EgdeY1B = Edge<Patch1, GridY1, BACK>;
-    using EgdeX2F = Edge<Patch2, GridX2, FRONT>;
+    using EgdeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EgdeX2F = Edge<Patch2, GridX<2>, FRONT>;
     using Interface12 = Interface<EgdeY1B, EgdeX2F, true>;
 
     // Coordinate transformation .................................................................
@@ -101,8 +101,8 @@ TEST_F(CoordinateTransformationTest, StickingDifferentDimensions)
 
 TEST_F(CoordinateTransformationTest, ReverseTransformation)
 {
-    using EgdeY1B = Edge<Patch1, GridY1, BACK>;
-    using EgdeY2F = Edge<Patch2, GridY2, FRONT>;
+    using EgdeY1B = Edge<Patch1, GridY<1>, BACK>;
+    using EgdeY2F = Edge<Patch2, GridY<2>, FRONT>;
     using Interface12 = Interface<EgdeY1B, EgdeY2F, false>;
 
     // Coordinate transformation .................................................................

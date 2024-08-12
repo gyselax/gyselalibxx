@@ -158,7 +158,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDimSimple)
     auto idx_ranges_y
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridY>(all_domains);
     static_assert(std::tuple_size_v<decltype(idx_ranges_y)> == 1);
-    EXPECT_EQ(std::get<0>(idx_ranges_y), ddc::select<GridY2>(idx_range_2));
+    EXPECT_EQ(std::get<0>(idx_ranges_y), ddc::select<GridY<2>>(idx_range_2));
 
     using StartGridX = typename Patch2::Grid1;
 
@@ -171,8 +171,8 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDimSimple)
     static_assert(std::is_same_v<
                   typename Patch2::IdxRange1,
                   std::tuple_element_t<1, decltype(idx_ranges_x)>>);
-    EXPECT_EQ(std::get<0>(idx_ranges_x), ddc::select<GridX1>(idx_range_1));
-    EXPECT_EQ(std::get<1>(idx_ranges_x), ddc::select<GridX2>(idx_range_2));
+    EXPECT_EQ(std::get<0>(idx_ranges_x), ddc::select<GridX<1>>(idx_range_1));
+    EXPECT_EQ(std::get<1>(idx_ranges_x), ddc::select<GridX<2>>(idx_range_2));
 }
 
 TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDim)
@@ -202,14 +202,14 @@ TEST(MultipatchConnectivityDetailsTest, FilterEdges)
 {
     using namespace non_periodic_uniform_2d_2patches;
     using FilteredEdges = Connectivity::inner_edges;
-    static_assert(ddc::in_tags_v<NorthEdge1, FilteredEdges>);
-    static_assert(ddc::in_tags_v<SouthEdge1, FilteredEdges>);
-    static_assert(ddc::in_tags_v<EastEdge1, FilteredEdges>);
-    static_assert(ddc::in_tags_v<WestEdge1, FilteredEdges>);
-    static_assert(ddc::in_tags_v<NorthEdge2, FilteredEdges>);
-    static_assert(ddc::in_tags_v<SouthEdge2, FilteredEdges>);
-    static_assert(ddc::in_tags_v<EastEdge2, FilteredEdges>);
-    static_assert(ddc::in_tags_v<WestEdge2, FilteredEdges>);
+    static_assert(ddc::in_tags_v<NorthEdge<1>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<SouthEdge<1>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<EastEdge<1>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<WestEdge<1>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<NorthEdge<2>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<SouthEdge<2>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<EastEdge<2>, FilteredEdges>);
+    static_assert(ddc::in_tags_v<WestEdge<2>, FilteredEdges>);
     static_assert(ddc::type_seq_size_v<FilteredEdges> == 8);
 }
 
@@ -235,12 +235,12 @@ TEST(MultipatchConnectivityDetailsTest, FindAssociatedInterface)
 {
     using namespace non_periodic_uniform_2d_2patches;
     using NorthEdge1Interface
-            = find_associated_interface_t<NorthEdge1, Connectivity::interface_collection>;
+            = find_associated_interface_t<NorthEdge<1>, Connectivity::interface_collection>;
     static_assert(std::is_same_v<NorthEdge1Interface, NorthInterface1>);
     using SouthEdge1Interface
-            = find_associated_interface_t<SouthEdge1, Connectivity::interface_collection>;
+            = find_associated_interface_t<SouthEdge<1>, Connectivity::interface_collection>;
     static_assert(std::is_same_v<SouthEdge1Interface, SouthInterface1>);
     using WestEdge2Interface
-            = find_associated_interface_t<WestEdge2, Connectivity::interface_collection>;
+            = find_associated_interface_t<WestEdge<2>, Connectivity::interface_collection>;
     static_assert(std::is_same_v<WestEdge2Interface, Interface_1_2>);
 }
