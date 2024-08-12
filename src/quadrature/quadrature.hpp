@@ -67,18 +67,30 @@ public:
                 "The object passed to Quadrature::operator() is not defined on the quadrature "
                 "idx_range.");
 
-        ddc::ChunkSpan const coeff_proxy = m_coefficients;
+        QuadConstField const coeff_proxy = m_coefficients;
 
         // This fence helps avoid a CPU seg fault. See #290 for more details
         exec_space.fence();
-        return ddc::parallel_transform_reduce(
-                exec_space,
-                get_idx_range(coeff_proxy),
-                0.0,
-                ddc::reducer::sum<double>(),
-                KOKKOS_LAMBDA(QuadratureIdx const ix) {
-                    return coeff_proxy(ix) * integrated_function(ix);
-                });
+        // This condition is necessary to execute in serial, even in a device activated build.
+        // Without it a seg fault appears
+        if constexpr (std::is_same_v<ExecutionSpace, Kokkos::DefaultHostExecutionSpace>) {
+            return ddc::transform_reduce(
+                    get_idx_range(coeff_proxy),
+                    0.0,
+                    ddc::reducer::sum<double>(),
+                    KOKKOS_LAMBDA(QuadratureIdx const ix) {
+                        return coeff_proxy(ix) * integrated_function(ix);
+                    });
+        } else {
+            return ddc::parallel_transform_reduce(
+                    exec_space,
+                    get_idx_range(coeff_proxy),
+                    0.0,
+                    ddc::reducer::sum<double>(),
+                    KOKKOS_LAMBDA(QuadratureIdx const ix) {
+                        return coeff_proxy(ix) * integrated_function(ix);
+                    });
+        }
     }
 
     /**
@@ -130,7 +142,7 @@ public:
         QuadratureIdxRange quad_idx_range(get_idx_range(m_coefficients));
         BatchIdxRange batch_idx_range(get_idx_range(result));
 
-        ddc::ChunkSpan const coeff_proxy = m_coefficients;
+        QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
         Kokkos::parallel_for(
                 Kokkos::TeamPolicy<>(exec_space, batch_idx_range.size(), Kokkos::AUTO),

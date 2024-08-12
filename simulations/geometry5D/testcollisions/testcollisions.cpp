@@ -217,16 +217,13 @@ int main(int argc, char** argv)
     IdxRangeTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
     DFieldMemTorCS B_norm(dom_tor1_tor2);
     ddc::parallel_fill(B_norm, 1.0);
-    host_t<DFieldMemVpar> const coeff_intdvpar_host
-            = simpson_quadrature_coefficients_1d(get_idx_range<GridVpar>(allfdistribu));
-    host_t<DFieldMemMu> const coeff_intdmu_host
-            = simpson_quadrature_coefficients_1d(get_idx_range<GridMu>(allfdistribu));
-    auto coeff_intdvpar = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_const_field(coeff_intdvpar_host));
-    auto coeff_intdmu = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_const_field(coeff_intdmu_host));
+
+    DFieldMemVpar const coeff_intdvpar
+            = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridVpar>(allfdistribu));
+    DFieldMemMu const coeff_intdmu
+            = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridMu>(allfdistribu));
 
     CollisionInfoRadial<GridTor1> collision_info(
             nustar0_rpeak,

@@ -38,7 +38,7 @@ struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 
 using IdxStepX = IdxStep<X>;
 using IdxRangeX = IdxRange<GridX>;
-using DFieldMemX = FieldMem<double, IdxRangeX>;
+using DFieldMemX = DFieldMem<IdxRangeX>;
 
 
 TEST(SplineUniformQuadrature, ExactForConstantFunc)
@@ -64,21 +64,17 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     SplineXBuilder const builder_x(gridx);
 
-    host_t<DFieldMemX> const quadrature_coeffs_host
-            = spline_quadrature_coefficients(gridx, builder_x);
-    auto quadrature_coeffs = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    Quadrature const integrate(quadrature_coeffs.span_cview());
+    DFieldMemX const quadrature_coeffs(
+            spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx, builder_x));
+    Quadrature const integrate(get_const_field(quadrature_coeffs));
 
     DFieldMemX values(gridx);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
-    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }
-
 
 template <std::size_t N>
 struct ComputeErrorTraits
@@ -117,8 +113,8 @@ double compute_error(int n_elems)
             ddc::SplineSolver::LAPACK,
             GridY>;
     using IdxRangeY = IdxRange<GridY>;
-    using DFieldMemY = FieldMem<double, IdxRangeY>;
-    using DFieldY = Field<double, IdxRangeY>;
+    using DFieldMemY = DFieldMem<IdxRangeY>;
+    using DFieldY = DField<IdxRangeY>;
 
     Coord<Y> const y_min(0.0);
     Coord<Y> const y_max(M_PI);
@@ -130,12 +126,9 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    host_t<DFieldMemY> const quadrature_coeffs_host
-            = spline_quadrature_coefficients(gridy, builder_y);
-    auto quadrature_coeffs = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    Quadrature const integrate(quadrature_coeffs.span_cview());
+    DFieldMemY quadrature_coeffs(
+            spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy, builder_y));
+    Quadrature<IdxRangeY> const integrate(get_const_field(quadrature_coeffs));
 
     DFieldMemY values_alloc(gridy);
     DFieldY values = get_field(values_alloc);

@@ -6,16 +6,17 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <collisions_inter.hpp>
-#include <collisions_utils.hpp>
-#include <fluid_moments.hpp>
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-#include <maxwellianequilibrium.hpp>
 #include <pdi.h>
-#include <quadrature.hpp>
-#include <species_info.hpp>
-#include <trapezoid_quadrature.hpp>
+
+#include "collisions_inter.hpp"
+#include "collisions_utils.hpp"
+#include "fluid_moments.hpp"
+#include "geometry.hpp"
+#include "irighthandside.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
+#include "species_info.hpp"
+#include "trapezoid_quadrature.hpp"
 
 TEST(CollisionsInter, CollisionsInter)
 {
@@ -89,11 +90,9 @@ TEST(CollisionsInter, CollisionsInter)
         double const nustar0(0.1);
         CollisionsInter collisions(mesh, nustar0);
 
-        host_t<DFieldMemVx> const quadrature_coeffs_host
-                = trapezoid_quadrature_coefficients(gridvx);
-        auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(quadrature_coeffs_host));
+        DFieldMemVx quadrature_coeffs
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
+
         Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate(get_const_field(quadrature_coeffs));
         FluidMoments moments(integrate);
 

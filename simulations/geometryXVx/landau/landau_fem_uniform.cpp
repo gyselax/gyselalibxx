@@ -130,8 +130,8 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
     FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
-    host_t<DFieldMemVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
+    host_t<DFieldMemVx> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients<
+            Kokkos::DefaultHostExecutionSpace>(mesh_vx, builder_vx_poisson);
     auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             get_field(quadrature_coeffs_host));

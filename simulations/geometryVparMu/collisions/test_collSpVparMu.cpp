@@ -87,17 +87,12 @@ int main(int argc, char** argv)
     double const B_norm = 1.0;
 
     // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
-    host_t<DFieldMemVpar> const coeff_intdvpar_host
-            = simpson_quadrature_coefficients_1d(get_idx_range<GridVpar>(allfdistribu));
-    host_t<DFieldMemMu> const coeff_intdmu_host
-            = simpson_quadrature_coefficients_1d(get_idx_range<GridMu>(allfdistribu));
-    auto coeff_intdvpar = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_const_field(coeff_intdvpar_host));
-    auto coeff_intdmu = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_const_field(coeff_intdmu_host));
-
+    DFieldMemVpar const coeff_intdvpar(
+            simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridVpar>(allfdistribu)));
+    DFieldMemMu const coeff_intdmu(
+            simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridMu>(allfdistribu)));
     CollisionInfo const collision_info(conf_collision);
     CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
             collision_info,

@@ -8,16 +8,17 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <collisions_intra.hpp>
-#include <collisions_utils.hpp>
-#include <fluid_moments.hpp>
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-#include <maxwellianequilibrium.hpp>
 #include <pdi.h>
-#include <quadrature.hpp>
-#include <species_info.hpp>
-#include <trapezoid_quadrature.hpp>
+
+#include "collisions_intra.hpp"
+#include "collisions_utils.hpp"
+#include "fluid_moments.hpp"
+#include "geometry.hpp"
+#include "irighthandside.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
+#include "species_info.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
  * Intra species collisions applied on a maxwellian should not change the distribution function
@@ -192,11 +193,11 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     DFieldMemSpX density_res(get_idx_range<Species, GridX>(allfdistribu_host));
     DFieldMemSpX mean_velocity_res(get_idx_range<Species, GridX>(allfdistribu_host));
     DFieldMemSpX temperature_res(get_idx_range<Species, GridX>(allfdistribu_host));
-    host_t<DFieldMemVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
-    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+
+    DFieldMemVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
     Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate(get_const_field(quadrature_coeffs));
+
     FluidMoments moments(integrate);
 
     moments(get_field(density_res), get_const_field(allfdistribu), FluidMoments::s_density);

@@ -211,8 +211,8 @@ def search_for_unnecessary_auto(file):
                       for v,t in zip(variables, variable_types) if t is not None and t.attrib['str'] == 'auto']
 
     # Find the name and location of the first use of the auto variables
-    var_data_idx = [file.data.index(v.attrib) for v in auto_variables]
-    var_names = [v.attrib['str'] for v in auto_variables]
+    var_data_idx = [file.data.index(v.attrib) for v in auto_variables if v]
+    var_names = [v.attrib['str'] for v in auto_variables if v]
     for idx, var_name in enumerate(var_names):
         start = var_data_idx[idx]
         end = next(i for i,v in enumerate(file.data[start:], start) if v['str'] == ';')
@@ -271,11 +271,17 @@ def search_for_bad_memory(file):
             continue
         first_var = line[first_var_idx]
         linenr = first_var['linenr']
-        var_description = next(v for v in file.variables if v['id'] == first_var['variable'])
-        data_idx = file.data.index(first_var)
-        start_idx = next(i for i,l in reversed(list(enumerate(file.data[:data_idx]))) if l['id'] == var_description['typeStartToken'])
-        end_idx = next(i for i,l in enumerate(file.data[start_idx:], start_idx) if 'variable' in l)
-        type_name = ''.join(v['str'] for v in file.data[start_idx:end_idx])
+        scope = first_var['scope']
+        var_id = first_var['variable']
+        var_tag = file.root.find(f".//var[@scope='{scope}'][@id='{var_id}']")
+        while var_tag is None:
+            scope = file.root.find(f".//scopes/scope[@id='{scope}']").attrib['nestedIn']
+            var_tag = file.root.find(f".//var[@scope='{scope}'][@id='{var_id}']")
+
+        var_description = var_tag.attrib
+        start_idx = file.data.index(file.root.find(f".//token[@id='{var_description['typeStartToken']}'][@scope='{scope}']").attrib)
+        end_idx = file.data.index(file.root.find(f".//token[@id='{var_description['typeEndToken']}'][@scope='{scope}']").attrib)
+        type_name = ''.join(v['str'] for v in file.data[start_idx:end_idx+1])
         if 'Mem' not in type_name:
             line_str = ' '.join(l['str'] for l in line)
             msg = ( 'Possible memory error. Mem not found in type where a FieldMem object is saved to.',
@@ -365,19 +371,20 @@ def check_directives(file):
         except ValueError:
             pragma_idx = None
         if pragma_idx is None or file.raw[pragma_idx-1] != '#' or file.raw[pragma_idx+1] != 'once':
-            report_error(FATAL, file.file, 2, "#pragma once missing from the top of a hpp file")
+            report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
     if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
         report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
-    include_directives = {d.attrib['linenr']: d[2].attrib for d in file.root.findall("./dump/directivelist/directive") if len(d) > 2 and d[1].attrib['str'] == 'include'}
-    for linenr, d in include_directives.items():
-        include_file = d['str'][1:-1]
+    directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")}
+    include_directives = {linenr: words[1] for linenr, words in directives.items() if len(words)>1 and words[0] == '#include'}
+    for linenr, include_str in include_directives.items():
+        include_file = include_str[1:-1]
         possible_matches = [match for f in global_folders for match in f.glob(f'**/{include_file}')]
-        if possible_matches and d['str'] != '"':
-            report_error(STYLE, file, linenr, f'Quotes should be used to include files from the gyselalibxx project ({d["str"]}->"{include_file}")')
-        elif not possible_matches and d['str'] == '"':
-            report_error(STYLE, file, linenr, f'Angle brackets should be used to include files from external libraries ({d["str"]}-><{include_file}>)')
+        if possible_matches and include_str[0] != '"':
+            report_error(STYLE, file, linenr, f'Quotes should be used to include files from the gyselalibxx project ({include_str}->"{include_file}")')
+        elif not possible_matches and include_str == '"':
+            report_error(STYLE, file, linenr, f'Angle brackets should be used to include files from external libraries ({include_str}-><{include_file}>)')
 
 def check_licence_presence(file):
     """

@@ -8,15 +8,14 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
-
 #include "constantfluidinitialization.hpp"
 #include "constantrate.hpp"
 #include "diffusiveneutralsolver.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
 #include "species_info.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
  * This test initializes a neutral density with an exponential spatial variation 
@@ -136,10 +135,9 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     SplineXBuilder_1d const spline_x_builder_neutrals(meshX);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host(trapezoid_quadrature_coefficients(meshVx));
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+    DFieldMemVx quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx));
+    DFieldVx const quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     DiffusiveNeutralSolver const neutralsolver(
             charge_exchange,

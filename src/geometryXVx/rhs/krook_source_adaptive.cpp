@@ -4,14 +4,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <maxwellianequilibrium.hpp>
-#include <quadrature.hpp>
-#include <rk2.hpp>
-#include <species_info.hpp>
-#include <trapezoid_quadrature.hpp>
-
 #include "krook_source_adaptive.hpp"
 #include "mask_tanh.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
+#include "rk2.hpp"
+#include "species_info.hpp"
+#include "trapezoid_quadrature.hpp"
 
 
 KrookSourceAdaptive::KrookSourceAdaptive(
@@ -86,11 +85,9 @@ void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx 
     }
     IdxSp iion(iion_opt.value());
     IdxRangeVx const gridvx = get_idx_range<GridVx>(allfdistribu);
-    host_t<DFieldMemVx> const quadrature_coeffs_host(trapezoid_quadrature_coefficients(gridvx));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    auto quadrature_coeffs = get_field(quadrature_coeffs_alloc);
+    DFieldMemVx const quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
+    DConstFieldVx quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
     auto const& amplitude = m_amplitude;
     auto const& density = m_density;

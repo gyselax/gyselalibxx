@@ -14,7 +14,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <collisions_inter.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
@@ -22,6 +21,7 @@
 #include "bsl_advection_x.hpp"
 #include "charge_exchange.hpp"
 #include "chargedensitycalculator.hpp"
+#include "collisions_inter.hpp"
 #include "collisions_intra.hpp"
 #include "constantfluidinitialization.hpp"
 #include "constantrate.hpp"
@@ -127,17 +127,17 @@ int main(int argc, char** argv)
     // Neutral species initialization
     DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, mesh_x));
     auto neutrals = get_field(neutrals_alloc);
-    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init_host(IdxRangeSpMom(dom_fluidsp, meshM));
 
     for (IdxSp const isp : dom_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_voicexx,
                 ".NeutralSpeciesInfo[%d]",
                 (isp - dom_fluidsp.front()).value());
-        ddc::parallel_fill(moments_init[isp], PCpp_double(conf_nisp, ".density_eq"));
+        ddc::parallel_fill(moments_init_host[isp], PCpp_double(conf_nisp, ".density_eq"));
     }
-
-    ConstantFluidInitialization fluid_init(moments_init);
+    auto moments_init = ddc::create_mirror_and_copy(get_field(moments_init_host));
+    ConstantFluidInitialization fluid_init(get_const_field(moments_init));
     fluid_init(neutrals);
 
     // --> Algorithm info
@@ -239,13 +239,10 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
-
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    DFieldMemVx const quadrature_coeffs_alloc(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs_alloc));
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(mesh_x);
 #else
@@ -266,11 +263,8 @@ int main(int argc, char** argv)
     SplineXBuilder_1d const spline_x_builder_neutrals(mesh_x);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_neutrals_host(
-            trapezoid_quadrature_coefficients(mesh_vx));
-    auto const quadrature_coeffs_neutrals = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_neutrals_host));
+    DFieldMemVx const quadrature_coeffs_neutrals(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(mesh_vx));
 
     DiffusiveNeutralSolver const neutralsolver(
             charge_exchange,
@@ -288,7 +282,7 @@ int main(int argc, char** argv)
             ionization,
             recombination,
             normalization_coeff,
-            quadrature_coeffs);
+            get_const_field(quadrature_coeffs_alloc));
 
     PredCorrHybrid const predcorr(boltzmann, neutralsolver, poisson, kineticfluidcoupling);
 

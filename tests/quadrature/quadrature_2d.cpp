@@ -9,7 +9,10 @@
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
+
 namespace {
+
+enum Method { TRAPEZ, SIMPSON };
 
 struct X
 {
@@ -41,9 +44,9 @@ using IdxRangeX = IdxRange<GridX>;
 using IdxRangeY = IdxRange<GridY>;
 using IdxRangeXY = IdxRange<GridX, GridY>;
 
-using DFieldMemXY = FieldMem<double, IdxRangeXY>;
+using DFieldMemXY = DFieldMem<IdxRangeXY>;
 
-TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
+double constant_func_check_2d()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(M_PI);
@@ -59,18 +62,17 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
 
     IdxRangeXY const gridxy(gridx, gridy);
 
-    host_t<DFieldMemXY> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridxy);
-    auto quadrature_coeffs = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    Quadrature<IdxRangeXY> const integrate(quadrature_coeffs);
+    DFieldMemXY quadrature_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
 
+    Quadrature<IdxRangeXY> const integrate(get_const_field(quadrature_coeffs));
     DFieldMemXY values(gridxy);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
-    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = (x_max - x_min) * (y_max - y_min);
-    EXPECT_LE(abs(integral - expected_val), 1e-9);
+
+    return abs(integral - expected_val);
 }
 
 void integrated_function_operator()
@@ -87,11 +89,9 @@ void integrated_function_operator()
     IdxRangeY gridy = ddc::init_discrete_space<GridY>(GridY::init<GridY>(y_min, y_max, y_ncells));
     IdxRangeXY gridxy(gridx, gridy);
 
-    host_t<DFieldMemXY> quad_coeffs_host_second = trapezoid_quadrature_coefficients(gridxy);
-    auto quad_coeffs_second = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quad_coeffs_host_second));
-    Quadrature func_operator(quad_coeffs_second.span_cview());
+    DFieldMemXY quad_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
+    Quadrature func_operator(get_const_field(quad_coeffs));
 
     double const integral = func_operator(
             Kokkos::DefaultExecutionSpace(),
@@ -139,8 +139,8 @@ double compute_error(int n_elems)
     using IdxRangeX = IdxRange<GridX>;
     using IdxRangeY = IdxRange<GridY>;
     using IdxRangeXY = IdxRange<GridX, GridY>;
-    using DFieldMemXY = FieldMem<double, IdxRangeXY>;
-    using DFieldXY = Field<double, IdxRangeXY>;
+    using DFieldMemXY = DFieldMem<IdxRangeXY>;
+    using DFieldXY = DField<IdxRangeXY>;
 
     Coord<DimX> const x_min(0.0);
     Coord<DimX> const x_max(M_PI);
@@ -156,10 +156,8 @@ double compute_error(int n_elems)
             = ddc::init_discrete_space<GridY>(GridY::template init<GridY>(y_min, y_max, y_size));
     IdxRangeXY const gridxy(gridx, gridy);
 
-    host_t<DFieldMemXY> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridxy);
-    auto quadrature_coeffs = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+    DFieldMemXY quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
     Quadrature<IdxRangeXY> const integrate(quadrature_coeffs);
 
     DFieldMemXY values_alloc(gridxy);
@@ -177,16 +175,22 @@ double compute_error(int n_elems)
 }
 
 template <std::size_t... Is>
-std::array<double, sizeof...(Is)> compute_errors(std::index_sequence<Is...>, int n_elems)
+std::array<double, sizeof...(Is)> compute_trapez_errors(std::index_sequence<Is...>, int n_elems)
 {
     return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2)...};
+}
+
+TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
+{
+    EXPECT_LE(constant_func_check_2d(), 1e-9);
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature2D, Convergence)
 {
     constexpr int NTESTS(4);
 
-    std::array<double, NTESTS> error = compute_errors(std::make_index_sequence<NTESTS>(), 50);
+    std::array<double, NTESTS> error
+            = compute_trapez_errors(std::make_index_sequence<NTESTS>(), 50);
 
     for (int i(1); i < NTESTS; ++i) {
         EXPECT_LE(error[i], error[i - 1]);

@@ -8,11 +8,11 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <fluid_moments.hpp>
-#include <geometry.hpp>
-#include <maxwellianequilibrium.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
+#include "fluid_moments.hpp"
+#include "geometry.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
      * Initializes the distribution function as a Maxwellian with fluid moments depending on space.
@@ -99,11 +99,11 @@ TEST(Physics, FluidMoments)
     DFieldMemSpX density_computed(get_idx_range<Species, GridX>(allfdistribu_host));
     DFieldMemSpX mean_velocity_computed(get_idx_range<Species, GridX>(allfdistribu_host));
     DFieldMemSpX temperature_computed(get_idx_range<Species, GridX>(allfdistribu_host));
-    host_t<DFieldMemVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
-    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+
+    DFieldMemVx const quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx);
     Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate(get_const_field(quadrature_coeffs));
+
     FluidMoments moments(integrate);
     ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     moments(get_field(density_computed), get_const_field(allfdistribu), FluidMoments::s_density);

@@ -13,30 +13,46 @@
  *
  * Calculate the quadrature coefficients for the trapezoid method defined on the provided index range.
  *
+ * @tparam ExecSpace Execution space, depends on Kokkos.
+ *
  * @param[in] idx_range
- * 	The index range on which the quadrature will be carried out.
+ * 	The idx_range on which the quadrature will be carried out.
  *
  * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
-template <class Grid>
-host_t<FieldMem<double, IdxRange<Grid>>> trapezoid_quadrature_coefficients_1d(
-        IdxRange<Grid> const& idx_range)
+template <class ExecSpace, class Grid1D>
+FieldMem<double, IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
-    host_t<FieldMem<double, IdxRange<Grid>>> coefficients(idx_range);
-    IdxRange<Grid> middle_idx_range = idx_range.remove(IdxStep<Grid>(1), IdxStep<Grid>(1));
+    DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients_alloc(idx_range);
+    DField<IdxRange<Grid1D>,
+           std::experimental::layout_right,
+           typename ExecSpace::memory_space> const coefficients
+            = get_field(coefficients_alloc);
+    IdxRange<Grid1D> middle_domain = idx_range.remove(IdxStep<Grid1D>(1), IdxStep<Grid1D>(1));
 
-    coefficients(idx_range.front()) = 0.5 * distance_at_right(idx_range.front());
-    ddc::for_each(middle_idx_range, [&](Idx<Grid> const idx) {
-        coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));
-    });
-    coefficients(idx_range.back()) = 0.5 * distance_at_left(idx_range.back());
+    ddc::parallel_for_each(
+            ExecSpace(),
+            middle_domain,
+            KOKKOS_LAMBDA(Idx<Grid1D> const idx) {
+                coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));
+            });
+    double const dx_l = distance_at_left(idx_range.back());
+    double const dx_r = distance_at_right(idx_range.front());
+    Kokkos::parallel_for(
+            "bounds",
+            Kokkos::RangePolicy<ExecSpace>(0, 1),
+            KOKKOS_LAMBDA(const int i) {
+                coefficients(idx_range.front()) = 0.5 * dx_r;
+                coefficients(idx_range.back()) = 0.5 * dx_l;
+                if constexpr (Grid1D::continuous_dimension_type::PERIODIC) {
+                    coefficients(idx_range.front()) += 0.5 * dx_l;
+                    coefficients(idx_range.back()) += 0.5 * dx_r;
+                }
+            });
 
-    if constexpr (Grid::continuous_dimension_type::PERIODIC) {
-        coefficients(idx_range.front()) += 0.5 * distance_at_left(idx_range.back());
-        coefficients(idx_range.back()) += 0.5 * distance_at_right(idx_range.front());
-    }
-
-    return coefficients;
+    return coefficients_alloc;
 }
 
 /**
@@ -44,17 +60,23 @@ host_t<FieldMem<double, IdxRange<Grid>>> trapezoid_quadrature_coefficients_1d(
  *
  * Calculate the quadrature coefficients for the trapezoid method defined on the provided index range.
  *
- * @param[in] idx_range
- * 	The index range on which the quadrature will be carried out.
+ * @tparam ExecSpace Execution space, depends on Kokkos.
  *
- * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
+ * @param[in] idx_range
+ * 	The idx_range on which the quadrature will be carried out.
+ *
+ * @return The quadrature coefficients for the trapezoid method defined on the provided idx_range.
+ *         The allocation place (host or device ) will depend on the ExecSpace.
  */
-template <class... ODims>
-host_t<FieldMem<double, IdxRange<ODims...>>> trapezoid_quadrature_coefficients(
-        IdxRange<ODims...> const& idx_range)
+template <class ExecSpace, class... ODims>
+FieldMem<double, IdxRange<ODims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+trapezoid_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
 {
-    return quadrature_coeffs_nd(
+    return quadrature_coeffs_nd<ExecSpace, ODims...>(
             idx_range,
-            (std::function<host_t<FieldMem<double, IdxRange<ODims>>>(IdxRange<ODims>)>(
-                    trapezoid_quadrature_coefficients_1d<ODims>))...);
+            (std::function<FieldMem<
+                     double,
+                     IdxRange<ODims>,
+                     ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>(
+                     IdxRange<ODims>)>(trapezoid_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }

@@ -19,9 +19,18 @@
 
 
 namespace {
-template <class Grid>
-using CoefficientChunk1D = host_t<FieldMem<double, IdxRange<Grid>>>;
-}
+template <class ExecSpace, class Grid1D>
+using CoefficientFieldMem1D = DFieldMem<
+        IdxRange<Grid1D>,
+        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>;
+template <class ExecSpace, class Grid1D>
+using CoefficientField1D = DField<
+        IdxRange<Grid1D>,
+        std::experimental::layout_right,
+        typename ExecSpace::memory_space>;
+
+} // namespace
+
 
 
 /**
@@ -42,9 +51,10 @@ using CoefficientChunk1D = host_t<FieldMem<double, IdxRange<Grid>>>;
  *
  * @return The quadrature coefficients for the method defined on the provided index range.
  */
-template <class Grid, class SplineBuilder>
-host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_1d(
-        IdxRange<Grid> const& idx_range,
+template <class ExecSpace, class Grid1D, class SplineBuilder>
+DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+neumann_spline_quadrature_coefficients_1d(
+        IdxRange<Grid1D> const& idx_range,
         SplineBuilder const& builder)
 {
     constexpr int nbc_xmin = SplineBuilder::s_nbc_xmin;
@@ -65,21 +75,28 @@ host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_
             nbc_xmax == 1,
             "The neumann spline quadrature requires a builder which uses the value of the "
             "derivative.");
+    // Since spline builder quadrature coeffs are not available on device, need host allocated builder.
+    // See https://github.com/CExA-project/ddc/issues/598
+    static_assert(
+            (std::is_same_v<
+                    typename SplineBuilder::memory_space,
+                    typename Kokkos::DefaultHostExecutionSpace::memory_space>),
+            "SplineBuilder must be host allocated.");
 
     using bsplines_type = typename SplineBuilder::bsplines_type;
 
     assert(idx_range.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbc_xmin - nbc_xmax);
 
-    FieldMem<
-            double,
-            IdxRange<Grid>,
-            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
+    DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
             quadrature_coefficients(builder.interpolation_domain());
     // Even if derivatives coefficients on boundaries are eventually non-zero,
     // they are ignored for 0-flux Neumann boundary condition because
     // they would always be multiplied by f'(x)=0
     std::tie(std::ignore, quadrature_coefficients, std::ignore) = builder.quadrature_coefficients();
-    return ddc::create_mirror_and_copy(quadrature_coefficients[idx_range]);
+    DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            output_quad_coefficients(idx_range);
+    ddc::parallel_deepcopy(output_quad_coefficients, quadrature_coefficients[idx_range]);
+    return output_quad_coefficients;
 }
 
 
@@ -98,8 +115,9 @@ host_t<FieldMem<double, IdxRange<Grid>>> neumann_spline_quadrature_coefficients_
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */
-template <class... DDims, class... SplineBuilders>
-host_t<FieldMem<double, IdxRange<DDims...>>> neumann_spline_quadrature_coefficients(
+template <class ExecSpace, class... DDims, class... SplineBuilders>
+DFieldMem<IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+neumann_spline_quadrature_coefficients(
         IdxRange<DDims...> const& idx_range,
         SplineBuilders const&... builders)
 {
@@ -108,18 +126,27 @@ host_t<FieldMem<double, IdxRange<DDims...>>> neumann_spline_quadrature_coefficie
                     typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
-            neumann_spline_quadrature_coefficients_1d(ddc::select<DDims>(idx_range), builders)...);
-
+    std::tuple<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims>...>
+    current_dim_coeffs_alloc(
+            neumann_spline_quadrature_coefficients_1d<
+                    Kokkos::DefaultHostExecutionSpace>(ddc::select<DDims>(idx_range), builders)...);
+    std::tuple<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims>...> current_dim_coeffs(
+            get_field(std::get<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims>>(
+                    current_dim_coeffs_alloc))...);
     // Allocate ND coefficients
-    host_t<FieldMem<double, IdxRange<DDims...>>> coefficients(idx_range);
-
+    DFieldMem<IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients_alloc(idx_range);
+    auto coefficients_alloc_host = ddc::create_mirror(get_field(coefficients_alloc));
+    host_t<DField<IdxRange<DDims...>>> coefficients(get_field(coefficients_alloc_host));
+    // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
+    // (see https://github.com/kokkos/kokkos/pull/7059)
     ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
-                = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
+                = (std::get<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims>>(
+                           current_dim_coeffs)(ddc::select<DDims>(idim))
                    * ... * 1);
     });
-
-    return coefficients;
+    ddc::parallel_deepcopy(coefficients_alloc, coefficients_alloc_host);
+    return coefficients_alloc;
 }

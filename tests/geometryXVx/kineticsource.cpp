@@ -5,13 +5,14 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-#include <kinetic_source.hpp>
 #include <pdi.h>
-#include <quadrature.hpp>
-#include <species_info.hpp>
-#include <trapezoid_quadrature.hpp>
+
+#include "geometry.hpp"
+#include "irighthandside.hpp"
+#include "kinetic_source.hpp"
+#include "quadrature.hpp"
+#include "species_info.hpp"
+#include "trapezoid_quadrature.hpp"
 
 TEST(KineticSource, Moments)
 {
@@ -47,8 +48,10 @@ TEST(KineticSource, Moments)
 
     IdxRangeSpXVx const mesh(IdxRangeSp(my_iion, IdxStepSp(1)), gridx, gridvx);
 
-    host_t<DFieldMemX> quadrature_coeffs_x = trapezoid_quadrature_coefficients(gridx);
-    host_t<DFieldMemVx> quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
+    host_t<DFieldMemX> quadrature_coeffs_x
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
+    host_t<DFieldMemVx> quadrature_coeffs_vx
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridvx);
     host_t<Quadrature<IdxRangeX>> const integrate_x(get_const_field(quadrature_coeffs_x));
     host_t<Quadrature<IdxRangeVx>> const integrate_v(get_const_field(quadrature_coeffs_vx));
 

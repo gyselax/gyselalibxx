@@ -205,13 +205,10 @@ static void TestKineticFluidCoupling()
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(meshVx, builder_vx_poisson);
+    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                        Kokkos::DefaultExecutionSpace>(meshVx, builder_vx_poisson));
 
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
 #else
@@ -229,11 +226,9 @@ static void TestKineticFluidCoupling()
     SplineXBuilder_1d const spline_x_builder_neutrals(meshX);
     SplineXEvaluator_1d const spline_x_evaluator_neutrals(bv_x_min, bv_x_max);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_neutrals_host(
-            trapezoid_quadrature_coefficients(meshVx));
-    auto const quadrature_coeffs_neutrals = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_neutrals_host));
+    DFieldMemVx const quadrature_coeffs_neutrals(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(meshVx));
+
 
     DiffusiveNeutralSolver const fluidsolver(
             charge_exchange,
@@ -261,10 +256,8 @@ static void TestKineticFluidCoupling()
     PredCorrHybrid const predcorr_hybrid(vlasov, fluidsolver, poisson, kineticfluidcoupling);
     predcorr_hybrid(allfdistribu, fluid_moments, time_start, deltat, nb_iter);
 
-    auto allfdistribu_host
-            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), allfdistribu);
-    auto fluid_moments_host
-            = ddc::create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), fluid_moments);
+    auto allfdistribu_host = ddc::create_mirror_view_and_copy(allfdistribu);
+    auto fluid_moments_host = ddc::create_mirror_view_and_copy(fluid_moments);
 
     // analytical solution
     // we know the rate values for the initial conditions, we assume T=cte. so rates independent of time.

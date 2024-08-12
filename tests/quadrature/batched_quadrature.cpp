@@ -77,11 +77,11 @@ using IdxRangeXB1YB2 = IdxRange<GridX, GridBatch1, GridY, GridBatch2>;
 using IdxRangeXY = IdxRange<GridX, GridY>;
 using IdxRangeB1B2 = IdxRange<GridBatch1, GridBatch2>;
 
-using DFieldMemBatch1 = FieldMem<double, IdxRangeBatch1>;
-using DFieldMemX = FieldMem<double, IdxRangeX>;
-using DFieldMemY = FieldMem<double, IdxRangeY>;
-using DFieldMemXY = FieldMem<double, IdxRangeXY>;
-using DFieldMemB1B2 = FieldMem<double, IdxRangeB1B2>;
+using DFieldMemBatch1 = DFieldMem<IdxRangeBatch1>;
+using DFieldMemX = DFieldMem<IdxRangeX>;
+using DFieldMemY = DFieldMem<IdxRangeY>;
+using DFieldMemXY = DFieldMem<IdxRangeXY>;
+using DFieldMemB1B2 = DFieldMem<IdxRangeB1B2>;
 
 void batched_operator_1d()
 {
@@ -96,10 +96,8 @@ void batched_operator_1d()
             GridBatch1::init<GridBatch1>(b_min, b_max, b_ncells));
     IdxRangeX gridx = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells));
 
-    host_t<DFieldMemX> quad_coeffs_host = trapezoid_quadrature_coefficients(gridx);
-    auto quad_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quad_coeffs_host));
+    DFieldMemX quad_coeffs(trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
+
     Quadrature<IdxRangeX, IdxRangeB1X> quad_batched_operator(get_field(quad_coeffs));
 
     DFieldMemBatch1 results(gridb);
@@ -112,8 +110,7 @@ void batched_operator_1d()
                 return b * x + 2;
             });
 
-    auto results_host = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), get_field(results));
+    auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
     ddc::for_each(gridb, [&](IdxBatch1 ib) {
         double b = ddc::coordinate(ddc::select<GridBatch1>(ib));
@@ -149,10 +146,8 @@ void batched_operator_2d()
 
     IdxRangeXY gridxy(gridx, gridy);
 
-    host_t<DFieldMemXY> quad_coeffs_host = trapezoid_quadrature_coefficients(gridxy);
-    auto quad_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quad_coeffs_host));
+    DFieldMemXY quad_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
     Quadrature<IdxRangeXY, IdxRangeB1B2XY> quad_batched_operator(get_field(quad_coeffs));
 
     IdxRangeB1B2 gridb(gridb1, gridb2);
@@ -169,8 +164,7 @@ void batched_operator_2d()
                 return b1 * (x * y + 2 * x + b2 * y);
             });
 
-    auto results_host = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), get_field(results));
+    auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
     ddc::for_each(gridb, [&](IdxB1B2 ib) {
         double const b1 = ddc::coordinate(ddc::select<GridBatch1>(ib));
@@ -207,10 +201,9 @@ void batched_operator_1d_2d()
 
     IdxRangeXY gridxy(gridx, gridy);
 
-    host_t<DFieldMemXY> quad_coeffs_host = trapezoid_quadrature_coefficients(gridxy);
-    auto quad_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quad_coeffs_host));
+    DFieldMemXY quad_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
+
     Quadrature<IdxRangeXY, IdxRangeB1XY> quad_batched_operator(get_field(quad_coeffs));
 
     DFieldMemBatch1 results(gridb1);
@@ -224,8 +217,7 @@ void batched_operator_1d_2d()
                 return b1 * (x * y + 2 * x + 3 * y);
             });
 
-    auto results_host = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), get_field(results));
+    auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
     ddc::for_each(gridb1, [&](IdxBatch1 ib) {
         double const b1 = ddc::coordinate(ib);
@@ -258,10 +250,7 @@ void batched_operator_2d_1d()
             GridBatch2::init<GridBatch2>(b2_min, b2_max, b2_ncells));
     IdxRangeX gridx = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells));
 
-    host_t<DFieldMemX> quad_coeffs_host = trapezoid_quadrature_coefficients(gridx);
-    auto quad_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quad_coeffs_host));
+    DFieldMemX quad_coeffs(trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
     Quadrature<IdxRangeX, IdxRangeB1B2X> quad_batched_operator(get_field(quad_coeffs));
 
     IdxRangeB1B2 gridb(gridb1, gridb2);
@@ -277,8 +266,7 @@ void batched_operator_2d_1d()
                 return b1 * x + b2;
             });
 
-    auto results_host = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), get_field(results));
+    auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
     ddc::for_each(gridb, [&](IdxB1B2 ib) {
         double const b1 = ddc::coordinate(ddc::select<GridBatch1>(ib));
@@ -315,10 +303,8 @@ void batched_operator_2d_reordered()
 
     IdxRangeXY gridxy(gridx, gridy);
 
-    host_t<DFieldMemXY> quad_coeffs_host = trapezoid_quadrature_coefficients(gridxy);
-    auto quad_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quad_coeffs_host));
+    DFieldMemXY quad_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
     Quadrature<IdxRangeXY, IdxRangeXB1YB2> quad_batched_operator(get_field(quad_coeffs));
 
     IdxRangeB1B2 gridb(gridb1, gridb2);
@@ -335,8 +321,7 @@ void batched_operator_2d_reordered()
                 return b1 * (x * y + 2 * x + b2 * y);
             });
 
-    auto results_host = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), get_field(results));
+    auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
     ddc::for_each(gridb, [&](IdxB1B2 ib) {
         double const b1 = ddc::coordinate(ddc::select<GridBatch1>(ib));

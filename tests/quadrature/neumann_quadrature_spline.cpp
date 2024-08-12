@@ -42,9 +42,9 @@ using SplineXBuilder_1d = ddc::SplineBuilder<
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
-using DFieldMemX = host_t<FieldMem<double, IdxRangeX>>;
+using DFieldMemX = DFieldMem<IdxRangeX>;
 
-TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
+TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFuncHost)
 {
     CoordX const x_min(0.0);
     CoordX const x_max(M_PI);
@@ -58,16 +58,40 @@ TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFunc)
 
     SplineXBuilder_1d const builder_x(gridx);
 
-    DFieldMemX const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(gridx, builder_x);
-    auto quadrature_coeffs = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    Quadrature const integrate(quadrature_coeffs.span_cview());
+    host_t<DFieldMemX> const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultHostExecutionSpace>(gridx, builder_x));
+    Quadrature const integrate(get_const_field(quadrature_coeffs));
 
-    device_t<DFieldMemX> values(gridx);
-    ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
-    double integral = integrate(Kokkos::DefaultExecutionSpace(), values.span_cview());
+    host_t<DFieldMemX> values(gridx);
+    ddc::parallel_fill(values, 1.0);
+    double integral = integrate(Kokkos::DefaultHostExecutionSpace(), get_const_field(values));
+    double expected_val = x_max - x_min;
+    EXPECT_LE(abs(integral - expected_val), 1e-15);
+}
+
+
+TEST(NeumannSplineUniformQuadrature1D, ExactForConstantFuncDefaultExecSpace)
+{
+    CoordX const x_min(0.0);
+    CoordX const x_max(M_PI);
+    IdxStepX const x_size(10);
+
+    // Creating mesh & supports
+    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
+
+    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+    IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
+
+    SplineXBuilder_1d const builder_x(gridx);
+
+    DFieldMemX const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                       Kokkos::DefaultExecutionSpace>(gridx, builder_x));
+    Quadrature const integrate(get_const_field(quadrature_coeffs));
+
+    DFieldMemX values(gridx);
+    ddc::parallel_fill(values, 1.0);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = x_max - x_min;
     EXPECT_LE(abs(integral - expected_val), 1e-15);
 }
@@ -107,8 +131,8 @@ double compute_error(int n_elems)
             ddc::SplineSolver::LAPACK,
             GridY>;
     using IdxRangeY = IdxRange<GridY>;
-    using DFieldMemY = FieldMem<double, IdxRangeY>;
-    using DFieldY = Field<double, IdxRangeY>;
+    using DFieldMemY = DFieldMem<IdxRangeY>;
+    using DFieldY = DField<IdxRangeY>;
 
     Coord<DimY> const y_min(-1.0);
     Coord<DimY> const y_max(1.0);
@@ -120,13 +144,9 @@ double compute_error(int n_elems)
 
     SplineYBuilder const builder_y(gridy);
 
-    host_t<DFieldMemY> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(gridy, builder_y);
-    auto quadrature_coeffs = ddc::create_mirror_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-
-    Quadrature const integrate(quadrature_coeffs.span_cview());
+    DFieldMemY const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                       Kokkos::DefaultExecutionSpace>(gridy, builder_y));
+    Quadrature const integrate(get_field(quadrature_coeffs));
 
     DFieldMemY values_alloc(gridy);
     DFieldY values = get_field(values_alloc);

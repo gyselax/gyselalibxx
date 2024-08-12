@@ -2,12 +2,11 @@
 
 #include <ddc/ddc.hpp>
 
-#include <ddc_helper.hpp>
-#include <geometry.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
-
+#include "ddc_helper.hpp"
+#include "geometry.hpp"
 #include "mask_tanh.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 host_t<DFieldMemX> mask_tanh(
         IdxRangeX const& gridx,
@@ -46,7 +45,8 @@ host_t<DFieldMemX> mask_tanh(
     }
 
     if (normalized) {
-        host_t<DFieldMemX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
+        host_t<DFieldMemX> const quadrature_coeffs
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
         host_t<Quadrature<IdxRangeX>> const integrate_x(quadrature_coeffs);
         double const coeff_norm
                 = integrate_x(Kokkos::DefaultHostExecutionSpace(), get_const_field(mask));

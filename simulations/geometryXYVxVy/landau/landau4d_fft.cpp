@@ -137,14 +137,13 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
 
-    host_t<DFieldMemVxVy> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vxvy, builder_vx_1d, builder_vy_1d);
-    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+    DFieldMemVxVy const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vxvy, builder_vx_1d, builder_vy_1d));
+
     FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
             mesh_xy);
-    ChargeDensityCalculator const rhs(quadrature_coeffs);
+    ChargeDensityCalculator const rhs(get_const_field(quadrature_coeffs));
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     // Create predcorr operator
