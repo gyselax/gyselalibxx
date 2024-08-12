@@ -50,6 +50,7 @@ jobs:
     needs: docker
     container:
       image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
+      options: --user root
     strategy:
       matrix:
         toolchain: [tests_toolchain.cmake, tests_release_toolchain.cmake]
@@ -58,6 +59,11 @@ jobs:
       name: Checkout gyselalibxx
       uses: actions/checkout@v4
       with: { submodules: recursive }
+    - 
+      run: |
+        whoami
+        useradd non_sudo_user
+        su - non_sudo_user
     - 
       name: Run tests
       run: |
