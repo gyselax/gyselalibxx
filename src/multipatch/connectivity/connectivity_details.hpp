@@ -300,7 +300,7 @@ template <
         class FoundGrids = ddc::detail::TypeSeq<>,
         class MatchingEdge = equivalent_edge_t<StartEdge, InterfaceTypeSeq>,
         bool grid_already_found // Periodic case
-        = ddc::in_tags_v<typename StartEdge::grid, FoundGrids>>
+        = ddc::in_tags_v<typename StartEdge::perpendicular_grid, FoundGrids>>
 struct CollectGridsAlongDim;
 
 /// Specialisation of CollectGridsAlongDim to iterate recursively over the grids on the dimension.
@@ -320,7 +320,8 @@ struct CollectGridsAlongDim<
 {
     /// The new list of grids that have been found including the grid from the current patch.
     using NewGridList =
-            typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, insert_pos>::type;
+            typename AddToTypeSeq<typename StartEdge::perpendicular_grid, FoundGrids, insert_pos>::
+                    type;
     /// The type found by the class.
     using type = typename CollectGridsAlongDim<
             typename SwapExtremity<MatchingEdge>::type,
@@ -347,7 +348,9 @@ template <class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, cl
 struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false>
 {
     /// The type found by the class.
-    using type = typename AddToTypeSeq<typename StartEdge::grid, FoundGrids, insert_pos>::type;
+    using type =
+            typename AddToTypeSeq<typename StartEdge::perpendicular_grid, FoundGrids, insert_pos>::
+                    type;
 };
 
 /**

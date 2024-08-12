@@ -16,20 +16,25 @@ enum Extremity { FRONT, BACK };
  * For example, in the patch defined on logical index range 
  * @f$ [a_x, b_x]\times[a_y, b_y] @f$, 
  * 
- * * the edge IDimX, BACK refers to the set @f$ [a_x, b_x]\times\{b_y\} @f$, 
- * * and the edge IDimX, FRONT refers to the set @f$ [a_x, b_x]\times\{a_y\} @f$. 
+ * * the edge GridY, BACK refers to the set @f$ [a_x, b_x]\times\{b_y\} @f$, 
+ * * and the edge GridY, FRONT refers to the set @f$ [a_x, b_x]\times\{a_y\} @f$. 
  * 
  * @tparam Patch Patch where the edge is defined. 
- * @tparam Grid Discrete dimension where the edge is defined.     
+ * @tparam Grid1D Grid on the complementary dimension of the edge.     
  * @tparam extremity_val The BACK or FRONT value.
 */
-template <class Patch, class Grid, Extremity extremity_val>
+template <class Patch, class Grid1D, Extremity extremity_val>
 struct Edge
 {
     /// @brief Patch where the edge is defined.
     using associated_patch = Patch;
-    /// @brief Discrete dimension where the edge is defined.
-    using grid = Grid;
+    /// @brief Grid on the perpendicular dimension of the edge.
+    using perpendicular_grid = Grid1D;
+    /// @brief Grid parallel to the edge.
+    using parallel_grid = std::conditional_t<
+            std::is_same_v<Grid1D, typename Patch::Grid1>,
+            typename Patch::Grid2,
+            typename Patch::Grid1>;
     /// @brief Design if the edge is on the BACK or the FRONT of the other dimension.
     static constexpr Extremity extremity = extremity_val;
 };

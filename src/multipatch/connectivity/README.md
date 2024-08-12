@@ -65,9 +65,9 @@ So we obtain four logical edges
 In the code, we define edges as follows. 
 Every edge of a logical patch is identified via the patch it belongs to, the dimension 
 and whether it is at the front or the back of the domain. 
-So e.g.the edge $`[a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}`$ would be identified with patch $i$, dimensions `RDimXi` and `FRONT`.
-$`[a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}`$ would be identified with patch $i$, dimensions `RDimXi` and `BACK` and 
-$`\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$ would be identified with patch $i$, dimensions `RDimYi` and `BACK`.
+So e.g.the edge $`[a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}`$ would be identified with patch $i$, dimensions `Yi` and `FRONT`.
+$`[a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}`$ would be identified with patch $i$, dimensions `Yi` and `BACK` and 
+$`\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$ would be identified with patch $i$, dimensions `Xi` and `BACK`.
 
 #### Sticking and Coordinate Transformation
 
