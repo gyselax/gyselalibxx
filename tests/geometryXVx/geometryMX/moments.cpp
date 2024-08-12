@@ -103,13 +103,15 @@ TEST(GeometryXM, MomentsInitialization)
 
     // Neutral species initialization
     DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
-    auto neutrals = get_field(neutrals_alloc);
+    DFieldSpMomX neutrals = get_field(neutrals_alloc);
 
     double const fluid_density_init(1.);
     double const fluid_particle_flux_init(0.5);
     double const fluid_stress_init(0.9);
 
-    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init_alloc(IdxRangeSpMom(dom_fluidsp, meshM));
+    host_t<DFieldSpMom> moments_init = get_field(moments_init_alloc);
+
     moments_init(ifluid, idensity) = fluid_density_init;
     moments_init(ifluid, iparticle_flux) = fluid_particle_flux_init;
     moments_init(ifluid, istress) = fluid_stress_init;
@@ -120,7 +122,7 @@ TEST(GeometryXM, MomentsInitialization)
     auto neutrals_host = ddc::create_mirror_view_and_copy(neutrals);
 
     double const tolerance(1.e-12);
-    ddc::for_each(get_idx_range<Species, GridX>(neutrals), [&](IdxSpX const ispx) {
+    ddc::for_each(get_idx_range<Species, GridX>(neutrals_host), [&](IdxSpX const ispx) {
         IdxSp const isp(ddc::select<Species>(ispx));
         IdxX const ix(ddc::select<GridX>(ispx));
 

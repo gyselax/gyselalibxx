@@ -222,8 +222,9 @@ double compute_difference_L2_norm(
         difference_function(irp) = exact_function(irp) - allfdistribu_advected(irp);
     });
 
-    DFieldMemRTheta const quadrature_coeffs
-            = compute_coeffs_on_mapping(mapping, trapezoid_quadrature_coefficients(grid));
+    DFieldMemRTheta const quadrature_coeffs = compute_coeffs_on_mapping(
+            mapping,
+            trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(grid));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
 
     double const normL2_exact_function = compute_L2_norm(quadrature, get_field(exact_function));

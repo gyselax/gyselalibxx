@@ -8,10 +8,10 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <geometry.hpp>
-#include <maxwellianequilibrium.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
+#include "geometry.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 static void TestMaxwellian()
 {
@@ -31,11 +31,9 @@ static void TestMaxwellian()
 
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host = trapezoid_quadrature_coefficients(gridvx);
-    auto quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    Quadrature<IdxRangeVx> integrate_v(get_const_field(quadrature_coeffs));
+    DFieldMemVx quadrature_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
+    Quadrature<IdxRangeVx> const integrate_v(get_const_field(quadrature_coeffs));
 
     double const density = 1.e-5;
     double const mean_velocity = 0.5;

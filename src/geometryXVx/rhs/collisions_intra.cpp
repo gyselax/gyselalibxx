@@ -1,12 +1,12 @@
 #include <iomanip>
 
-#include <fluid_moments.hpp>
 #include <pdi.h>
 
 #include "sll/matrix_batch_tridiag.hpp"
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
+#include "fluid_moments.hpp"
 
 template <class TargetDim>
 KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(Idx<GridVx> const& index)
@@ -261,12 +261,10 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     auto fluid_velocity = get_field(fluid_velocity_alloc);
     auto temperature = get_field(temperature_alloc);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients(get_idx_range<GridVx>(allfdistribu)));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    auto quadrature_coeffs = get_field(quadrature_coeffs_alloc);
+    DFieldMemVx const quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridVx>(allfdistribu)));
+    DConstFieldVx quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
     //Moments computation
     ddc::parallel_fill(density, 0.);

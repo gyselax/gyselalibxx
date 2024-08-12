@@ -60,18 +60,25 @@ TEST(Masks, Ordering)
     EXPECT_LE(std::fabs(mask_inverted(tenth) - 1.0), tolerance);
 
     // tests if integral of normalized mask equals 1
-    host_t<DFieldMemX> const quadrature_coeffs = trapezoid_quadrature_coefficients(gridx);
-    host_t<Quadrature<IdxRangeX>> const integrate_x(quadrature_coeffs);
+    DFieldMemX const quadrature_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
+    Quadrature<IdxRangeX> const integrate_x(quadrature_coeffs);
 
-    host_t<DFieldMemX> mask_normalized
+    host_t<DFieldMemX> mask_normalized_host
             = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
+    auto mask_normalized = ddc::create_mirror_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(mask_normalized_host));
     double const mask_integrated
-            = integrate_x(Kokkos::DefaultHostExecutionSpace(), get_const_field(mask_normalized));
+            = integrate_x(Kokkos::DefaultExecutionSpace(), get_const_field(mask_normalized));
     EXPECT_LE(std::fabs(mask_integrated - 1.0), tolerance);
-    host_t<DFieldMemX> mask_normalized_inverted
+    host_t<DFieldMemX> mask_normalized_inverted_host
             = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, true);
+    auto mask_normalized_inverted = ddc::create_mirror_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(mask_normalized_inverted_host));
     double const mask_inverted_integrated = integrate_x(
-            Kokkos::DefaultHostExecutionSpace(),
+            Kokkos::DefaultExecutionSpace(),
             get_const_field(mask_normalized_inverted));
     EXPECT_LE(std::fabs(mask_inverted_integrated - 1.0), tolerance);
 }

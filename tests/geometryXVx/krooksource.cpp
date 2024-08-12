@@ -9,18 +9,19 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-#include <krook_source_adaptive.hpp>
-#include <krook_source_constant.hpp>
-#include <mask_tanh.hpp>
-#include <maxwellianequilibrium.hpp>
 #include <paraconf.h>
 #include <pdi.h>
-#include <quadrature.hpp>
-#include <species_info.hpp>
-#include <splitrighthandsidesolver.hpp>
-#include <trapezoid_quadrature.hpp>
+
+#include "geometry.hpp"
+#include "irighthandside.hpp"
+#include "krook_source_adaptive.hpp"
+#include "krook_source_constant.hpp"
+#include "mask_tanh.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "quadrature.hpp"
+#include "species_info.hpp"
+#include "splitrighthandsidesolver.hpp"
+#include "trapezoid_quadrature.hpp"
 
 TEST(KrookSource, Adaptive)
 {
@@ -55,8 +56,9 @@ TEST(KrookSource, Adaptive)
     IdxRangeSp const gridsp = dom_sp;
     IdxRangeSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_vx = trapezoid_quadrature_coefficients(gridvx);
-    host_t<Quadrature<IdxRangeVx>> const integrate_v(quadrature_coeffs_vx);
+    DFieldMemVx const quadrature_coeffs_vx(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
+    Quadrature<IdxRangeVx> const integrate_v(get_const_field(quadrature_coeffs_vx));
 
     host_t<DFieldMemSp> charges(dom_sp);
     host_t<DFieldMemSp> masses(dom_sp);
@@ -110,7 +112,7 @@ TEST(KrookSource, Adaptive)
 
     host_t<DFieldMemSpX> densities(get_idx_range<Species, GridX>(allfdistribu));
     ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
-        densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
+        densities(ispx) = integrate_v(Kokkos::DefaultExecutionSpace(), allfdistribu[ispx]);
     });
 
     // the charge should be conserved by the operator
@@ -139,7 +141,7 @@ TEST(KrookSource, Adaptive)
     rhs_krook(allfdistribu, 0.01);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
-        densities(ispx) = integrate_v(Kokkos::DefaultHostExecutionSpace(), allfdistribu_host[ispx]);
+        densities(ispx) = integrate_v(Kokkos::DefaultExecutionSpace(), allfdistribu[ispx]);
     });
 
     // the rk2 scheme used in the krook operator should be of order 2

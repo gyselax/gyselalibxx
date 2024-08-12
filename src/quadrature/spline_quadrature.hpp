@@ -18,8 +18,8 @@
 
 
 namespace {
-template <class Grid>
-using CoefficientChunk1D = host_t<FieldMem<double, IdxRange<Grid>>>;
+template <class Grid1D>
+using CoefficientFieldMem1D_host = host_t<DFieldMem<IdxRange<Grid1D>>>;
 }
 
 
@@ -56,9 +56,9 @@ using CoefficientChunk1D = host_t<FieldMem<double, IdxRange<Grid>>>;
  *
  * @return A chunk with the quadrature coefficients @f$ q @f$.
  */
-template <class Grid, class SplineBuilder>
-host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
-        IdxRange<Grid> const& idx_range,
+template <class Grid1D, class SplineBuilder>
+host_t<DFieldMem<IdxRange<Grid1D>>> spline_quadrature_coefficients_1d(
+        IdxRange<Grid1D> const& idx_range,
         SplineBuilder const& builder)
 {
     static_assert(
@@ -69,11 +69,15 @@ host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
             SplineBuilder::s_nbc_xmax == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
+    // Since spline builder quadrature coeffs are not available on device, need host allocated builder.
+    // See https://github.com/CExA-project/ddc/issues/598
+    static_assert(
+            (std::is_same_v<
+                    typename SplineBuilder::memory_space,
+                    typename Kokkos::DefaultHostExecutionSpace::memory_space>),
+            "SplineBuilder must be host allocated.");
 
-    FieldMem<
-            double,
-            IdxRange<Grid>,
-            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
+    DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
             quadrature_coefficients(builder.interpolation_domain());
     std::tie(std::ignore, quadrature_coefficients, std::ignore) = builder.quadrature_coefficients();
     return ddc::create_mirror_and_copy(quadrature_coefficients[idx_range]);
@@ -93,8 +97,9 @@ host_t<FieldMem<double, IdxRange<Grid>>> spline_quadrature_coefficients_1d(
  *
  * @return The coefficients which define the spline quadrature method in ND.
  */
-template <class... DDims, class... SplineBuilders>
-host_t<FieldMem<double, IdxRange<DDims...>>> spline_quadrature_coefficients(
+template <class ExecSpace, class... DDims, class... SplineBuilders>
+DFieldMem<IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+spline_quadrature_coefficients(
         IdxRange<DDims...> const& idx_range,
         SplineBuilders const&... builders)
 {
@@ -103,18 +108,22 @@ host_t<FieldMem<double, IdxRange<DDims...>>> spline_quadrature_coefficients(
                     typename SplineBuilders::continuous_dimension_type> and ...));
 
     // Get coefficients for each dimension
-    std::tuple<CoefficientChunk1D<DDims>...> current_dim_coeffs(
+    std::tuple<CoefficientFieldMem1D_host<DDims>...> current_dim_coeffs(
             spline_quadrature_coefficients_1d(ddc::select<DDims>(idx_range), builders)...);
 
     // Allocate ND coefficients
-    host_t<FieldMem<double, IdxRange<DDims...>>> coefficients(idx_range);
-
+    DFieldMem<IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
+            coefficients(idx_range);
+    auto coefficients_host = ddc::create_mirror(get_field(coefficients));
+    // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
+    // (see https://github.com/kokkos/kokkos/pull/7059)
     ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
-        coefficients(idim)
-                = (std::get<CoefficientChunk1D<DDims>>(current_dim_coeffs)(ddc::select<DDims>(idim))
+        coefficients_host(idim)
+                = (std::get<CoefficientFieldMem1D_host<DDims>>(current_dim_coeffs)(
+                           ddc::select<DDims>(idim))
                    * ... * 1);
     });
-
+    ddc::parallel_deepcopy(coefficients, coefficients_host);
     return coefficients;
 }

@@ -14,13 +14,13 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <collisions_inter.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
+#include "collisions_inter.hpp"
 #include "collisions_intra.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
@@ -210,20 +210,17 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
     SplitRightHandSideSolver const boltzmann(vlasov, rhs_operators);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
+    DFieldMemVx const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
 #ifdef PERIODIC_RDIMX
     FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(mesh_x);
 #else
     FEM1DPoissonSolver poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
     QNSolver const poisson(poisson_solver, rhs);
-
 
     PredCorr const predcorr(boltzmann, poisson);
 

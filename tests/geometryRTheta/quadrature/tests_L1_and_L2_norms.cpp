@@ -130,9 +130,9 @@ void launch_tests(
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
     DFieldMemRTheta const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
-            spline_quadrature_coefficients(grid, r_builder, p_builder));
+            spline_quadrature_coefficients<
+                    Kokkos::DefaultHostExecutionSpace>(grid, r_builder, p_builder));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
-
 
     DFieldMemRTheta test(grid);
 

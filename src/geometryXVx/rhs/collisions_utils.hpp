@@ -1,11 +1,10 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
 * @brief Compute the collisionality spatial profile.
@@ -152,12 +151,10 @@ void compute_Vcoll_Tcoll(
         DField<IdxRange<Species, GridX, LocalGridVx>> Dcoll,
         DField<IdxRange<Species, GridX, LocalGridVx>> dvDcoll)
 {
-    host_t<DFieldMemVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients(get_idx_range<GridVx>(allfdistribu)));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    auto quadrature_coeffs = get_field(quadrature_coeffs_alloc);
+    DFieldMemVx const quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridVx>(allfdistribu)));
+    DConstFieldVx const quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
     // computation of the integrands
     DFieldMemSpXVx I0mean_integrand_alloc(get_idx_range(allfdistribu));

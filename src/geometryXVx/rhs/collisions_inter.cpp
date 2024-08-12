@@ -1,12 +1,12 @@
 #include <iomanip>
 
-#include <fluid_moments.hpp>
-#include <maxwellianequilibrium.hpp>
 #include <pdi.h>
-#include <rk2.hpp>
 
 #include "collisions_inter.hpp"
 #include "collisions_utils.hpp"
+#include "fluid_moments.hpp"
+#include "maxwellianequilibrium.hpp"
+#include "rk2.hpp"
 
 CollisionsInter::CollisionsInter(IdxRangeSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
@@ -36,12 +36,10 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
     auto fluid_velocity = get_field(fluid_velocity_f);
     auto temperature = get_field(temperature_f);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host(
-            trapezoid_quadrature_coefficients(get_idx_range<GridVx>(allfdistribu)));
-    auto quadrature_coeffs_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    auto quadrature_coeffs = get_field(quadrature_coeffs_alloc);
+    DFieldMemVx quadrature_coeffs_alloc(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridVx>(allfdistribu)));
+    DFieldVx quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     //Moments computation
     ddc::parallel_fill(density, 0.);

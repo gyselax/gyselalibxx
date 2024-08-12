@@ -129,12 +129,10 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    host_t<DFieldMemVx> const quadrature_coeffs_host
-            = neumann_spline_quadrature_coefficients(mesh_vx, builder_vx_poisson);
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
-    ChargeDensityCalculator rhs(quadrature_coeffs);
+    DFieldMemVx const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
+    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
     FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
     QNSolver const poisson(fem_solver, rhs);
 
