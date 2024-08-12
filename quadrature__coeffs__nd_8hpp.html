@@ -115,24 +115,24 @@ $(document).ready(function(){initNavTree('quadrature__coeffs__nd_8hpp.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abe2b323c35771531c1be8ad980031009"><td class="memTemplParams" colspan="2">template&lt;class... DDims&gt; </td></tr>
-<tr class="memitem:abe2b323c35771531c1be8ad980031009"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="quadrature__coeffs__nd_8hpp.html#abe2b323c35771531c1be8ad980031009">quadrature_coeffs_nd</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims &gt;&gt;&gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</td></tr>
-<tr class="memdesc:abe2b323c35771531c1be8ad980031009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.  <a href="quadrature__coeffs__nd_8hpp.html#abe2b323c35771531c1be8ad980031009">More...</a><br /></td></tr>
-<tr class="separator:abe2b323c35771531c1be8ad980031009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaccf3b1bbbd93304c7caca630cdf21e"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class... DDims&gt; </td></tr>
+<tr class="memitem:adaccf3b1bbbd93304c7caca630cdf21e"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="quadrature__coeffs__nd_8hpp.html#adaccf3b1bbbd93304c7caca630cdf21e">quadrature_coeffs_nd</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt;&gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</td></tr>
+<tr class="memdesc:adaccf3b1bbbd93304c7caca630cdf21e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.  <a href="quadrature__coeffs__nd_8hpp.html#adaccf3b1bbbd93304c7caca630cdf21e">More...</a><br /></td></tr>
+<tr class="separator:adaccf3b1bbbd93304c7caca630cdf21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing helper functions for defining multi-dimensional quadrature methods. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abe2b323c35771531c1be8ad980031009"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe2b323c35771531c1be8ad980031009">&#9670;&nbsp;</a></span>quadrature_coeffs_nd()</h2>
+<a id="adaccf3b1bbbd93304c7caca630cdf21e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaccf3b1bbbd93304c7caca630cdf21e">&#9670;&nbsp;</a></span>quadrature_coeffs_nd()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class... DDims&gt; </div>
+template&lt;class ExecSpace , class... DDims&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;DDims...&gt; &gt; &gt; quadrature_coeffs_nd </td>
+          <td class="memname">DFieldMem&lt;IdxRange&lt;DDims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt; &gt; quadrature_coeffs_nd </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; DDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em>, </td>
@@ -140,7 +140,7 @@ template&lt;class... DDims&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims &gt;&gt;&gt;(IdxRange&lt; DDims &gt;)&gt;...&#160;</td>
+          <td class="paramtype">std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt;&gt;(IdxRange&lt; DDims &gt;)&gt;...&#160;</td>
           <td class="paramname"><em>funcs</em>&#160;</td>
         </tr>
         <tr>

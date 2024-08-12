@@ -118,30 +118,30 @@ $(document).ready(function(){initNavTree('neumann__spline__quadrature_8hpp.html'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="memTemplParams" colspan="2">template&lt;class Grid , class SplineBuilder &gt; </td></tr>
-<tr class="memitem:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; Grid &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#a76519191c7b9a4df9bbf3da7e0cb025f">neumann_spline_quadrature_coefficients_1d</a> (IdxRange&lt; Grid &gt; const &amp;idx_range, SplineBuilder const &amp;builder)</td></tr>
-<tr class="memdesc:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in 1D.  <a href="neumann__spline__quadrature_8hpp.html#a76519191c7b9a4df9bbf3da7e0cb025f">More...</a><br /></td></tr>
-<tr class="separator:a76519191c7b9a4df9bbf3da7e0cb025f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="memTemplParams" colspan="2">template&lt;class... DDims, class... SplineBuilders&gt; </td></tr>
-<tr class="memitem:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; DDims... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#ae2329a7e23fe06ca7089ac9748e3b4d0">neumann_spline_quadrature_coefficients</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</td></tr>
-<tr class="memdesc:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.  <a href="neumann__spline__quadrature_8hpp.html#ae2329a7e23fe06ca7089ac9748e3b4d0">More...</a><br /></td></tr>
-<tr class="separator:ae2329a7e23fe06ca7089ac9748e3b4d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c16c5257236f20ed676298bea99c837"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class Grid1D , class SplineBuilder &gt; </td></tr>
+<tr class="memitem:a6c16c5257236f20ed676298bea99c837"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRange&lt; Grid1D &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#a6c16c5257236f20ed676298bea99c837">neumann_spline_quadrature_coefficients_1d</a> (IdxRange&lt; Grid1D &gt; const &amp;idx_range, SplineBuilder const &amp;builder)</td></tr>
+<tr class="memdesc:a6c16c5257236f20ed676298bea99c837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in 1D.  <a href="neumann__spline__quadrature_8hpp.html#a6c16c5257236f20ed676298bea99c837">More...</a><br /></td></tr>
+<tr class="separator:a6c16c5257236f20ed676298bea99c837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aaa514e4dd786570bd2fdb9b0eb0797"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class... DDims, class... SplineBuilders&gt; </td></tr>
+<tr class="memitem:a1aaa514e4dd786570bd2fdb9b0eb0797"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797">neumann_spline_quadrature_coefficients</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</td></tr>
+<tr class="memdesc:a1aaa514e4dd786570bd2fdb9b0eb0797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.  <a href="neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797">More...</a><br /></td></tr>
+<tr class="separator:a1aaa514e4dd786570bd2fdb9b0eb0797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing quadrature coefficients via a spline quadrature. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a76519191c7b9a4df9bbf3da7e0cb025f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76519191c7b9a4df9bbf3da7e0cb025f">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients_1d()</h2>
+<a id="a6c16c5257236f20ed676298bea99c837"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c16c5257236f20ed676298bea99c837">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients_1d()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Grid , class SplineBuilder &gt; </div>
+template&lt;class ExecSpace , class Grid1D , class SplineBuilder &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;Grid&gt; &gt; &gt; neumann_spline_quadrature_coefficients_1d </td>
+          <td class="memname">DFieldMem&lt;IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt; &gt; neumann_spline_quadrature_coefficients_1d </td>
           <td>(</td>
-          <td class="paramtype">IdxRange&lt; Grid &gt; const &amp;&#160;</td>
+          <td class="paramtype">IdxRange&lt; Grid1D &gt; const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em>, </td>
         </tr>
         <tr>
@@ -172,16 +172,16 @@ template&lt;class Grid , class SplineBuilder &gt; </div>
 
 </div>
 </div>
-<a id="ae2329a7e23fe06ca7089ac9748e3b4d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2329a7e23fe06ca7089ac9748e3b4d0">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients()</h2>
+<a id="a1aaa514e4dd786570bd2fdb9b0eb0797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aaa514e4dd786570bd2fdb9b0eb0797">&#9670;&nbsp;</a></span>neumann_spline_quadrature_coefficients()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class... DDims, class... SplineBuilders&gt; </div>
+template&lt;class ExecSpace , class... DDims, class... SplineBuilders&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;DDims...&gt; &gt; &gt; neumann_spline_quadrature_coefficients </td>
+          <td class="memname">DFieldMem&lt;IdxRange&lt;DDims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt; &gt; neumann_spline_quadrature_coefficients </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; DDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em>, </td>

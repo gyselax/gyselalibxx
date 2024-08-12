@@ -116,30 +116,30 @@ $(document).ready(function(){initNavTree('trapezoid__quadrature_8hpp.html',''); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5be98c8bc2a5baddef8ffdc5c10dede3"><td class="memTemplParams" colspan="2">template&lt;class Grid &gt; </td></tr>
-<tr class="memitem:a5be98c8bc2a5baddef8ffdc5c10dede3"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; Grid &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="trapezoid__quadrature_8hpp.html#a5be98c8bc2a5baddef8ffdc5c10dede3">trapezoid_quadrature_coefficients_1d</a> (IdxRange&lt; Grid &gt; const &amp;idx_range)</td></tr>
-<tr class="memdesc:a5be98c8bc2a5baddef8ffdc5c10dede3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the trapezoid coefficients in 1D.  <a href="trapezoid__quadrature_8hpp.html#a5be98c8bc2a5baddef8ffdc5c10dede3">More...</a><br /></td></tr>
-<tr class="separator:a5be98c8bc2a5baddef8ffdc5c10dede3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63e347081ac7ebf1c3542b42b25e44ad"><td class="memTemplParams" colspan="2">template&lt;class... ODims&gt; </td></tr>
-<tr class="memitem:a63e347081ac7ebf1c3542b42b25e44ad"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; ODims... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">trapezoid_quadrature_coefficients</a> (IdxRange&lt; ODims... &gt; const &amp;idx_range)</td></tr>
-<tr class="memdesc:a63e347081ac7ebf1c3542b42b25e44ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the trapezoid coefficients in ND.  <a href="trapezoid__quadrature_8hpp.html#a63e347081ac7ebf1c3542b42b25e44ad">More...</a><br /></td></tr>
-<tr class="separator:a63e347081ac7ebf1c3542b42b25e44ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae214995b01b6285501ef65f8618725f3"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class Grid1D &gt; </td></tr>
+<tr class="memitem:ae214995b01b6285501ef65f8618725f3"><td class="memTemplItemLeft" align="right" valign="top">FieldMem&lt; double, IdxRange&lt; Grid1D &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="trapezoid__quadrature_8hpp.html#ae214995b01b6285501ef65f8618725f3">trapezoid_quadrature_coefficients_1d</a> (IdxRange&lt; Grid1D &gt; const &amp;idx_range)</td></tr>
+<tr class="memdesc:ae214995b01b6285501ef65f8618725f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the trapezoid coefficients in 1D.  <a href="trapezoid__quadrature_8hpp.html#ae214995b01b6285501ef65f8618725f3">More...</a><br /></td></tr>
+<tr class="separator:ae214995b01b6285501ef65f8618725f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03b9057aa4427dd320a7bb0273a439a2"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class... ODims&gt; </td></tr>
+<tr class="memitem:a03b9057aa4427dd320a7bb0273a439a2"><td class="memTemplItemLeft" align="right" valign="top">FieldMem&lt; double, IdxRange&lt; ODims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="trapezoid__quadrature_8hpp.html#a03b9057aa4427dd320a7bb0273a439a2">trapezoid_quadrature_coefficients</a> (IdxRange&lt; ODims... &gt; const &amp;idx_range)</td></tr>
+<tr class="memdesc:a03b9057aa4427dd320a7bb0273a439a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the trapezoid coefficients in ND.  <a href="trapezoid__quadrature_8hpp.html#a03b9057aa4427dd320a7bb0273a439a2">More...</a><br /></td></tr>
+<tr class="separator:a03b9057aa4427dd320a7bb0273a439a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing quadrature coefficients via the trapezoidal method. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a5be98c8bc2a5baddef8ffdc5c10dede3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5be98c8bc2a5baddef8ffdc5c10dede3">&#9670;&nbsp;</a></span>trapezoid_quadrature_coefficients_1d()</h2>
+<a id="ae214995b01b6285501ef65f8618725f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae214995b01b6285501ef65f8618725f3">&#9670;&nbsp;</a></span>trapezoid_quadrature_coefficients_1d()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Grid &gt; </div>
+template&lt;class ExecSpace , class Grid1D &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;Grid&gt; &gt; &gt; trapezoid_quadrature_coefficients_1d </td>
+          <td class="memname">FieldMem&lt;double, IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt; &gt; trapezoid_quadrature_coefficients_1d </td>
           <td>(</td>
-          <td class="paramtype">IdxRange&lt; Grid &gt; const &amp;&#160;</td>
+          <td class="paramtype">IdxRange&lt; Grid1D &gt; const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td></td>
         </tr>
@@ -148,9 +148,15 @@ template&lt;class Grid &gt; </div>
 
 <p>Get the trapezoid coefficients in 1D. </p>
 <p>Calculate the quadrature coefficients for the trapezoid method defined on the provided index range.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ExecSpace</td><td>Execution space, depends on Kokkos.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the quadrature will be carried out.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The idx_range on which the quadrature will be carried out.</td></tr>
   </table>
   </dd>
 </dl>
@@ -158,16 +164,16 @@ template&lt;class Grid &gt; </div>
 
 </div>
 </div>
-<a id="a63e347081ac7ebf1c3542b42b25e44ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63e347081ac7ebf1c3542b42b25e44ad">&#9670;&nbsp;</a></span>trapezoid_quadrature_coefficients()</h2>
+<a id="a03b9057aa4427dd320a7bb0273a439a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03b9057aa4427dd320a7bb0273a439a2">&#9670;&nbsp;</a></span>trapezoid_quadrature_coefficients()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class... ODims&gt; </div>
+template&lt;class ExecSpace , class... ODims&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;FieldMem&lt;double, IdxRange&lt;ODims...&gt; &gt; &gt; trapezoid_quadrature_coefficients </td>
+          <td class="memname">FieldMem&lt;double, IdxRange&lt;ODims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt; &gt; trapezoid_quadrature_coefficients </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; ODims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em></td><td>)</td>
@@ -178,13 +184,19 @@ template&lt;class... ODims&gt; </div>
 
 <p>Get the trapezoid coefficients in ND. </p>
 <p>Calculate the quadrature coefficients for the trapezoid method defined on the provided index range.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the quadrature will be carried out.</td></tr>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ExecSpace</td><td>Execution space, depends on Kokkos.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The quadrature coefficients for the trapezoid method defined on the provided index range. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The idx_range on which the quadrature will be carried out.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The quadrature coefficients for the trapezoid method defined on the provided idx_range. The allocation place (host or device ) will depend on the ExecSpace. </dd></dl>
 
 </div>
 </div>
