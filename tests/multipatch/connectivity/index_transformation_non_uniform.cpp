@@ -134,18 +134,17 @@ public:
 
 TEST_F(IndexTransformationNonUniformTest, IndexAvaibility)
 {
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX2F = Edge<Patch2, GridX2, FRONT>;
-    using Interface12 = Interface<EgdeX1B, EgdeX2F, false>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY2F = Edge<Patch2, GridY2, FRONT>;
+    using Interface12 = Interface<EdgeY1B, EdgeY2F, false>;
 
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX3F = Edge<Patch3, GridX3, FRONT>;
-    using Interface13 = Interface<EgdeX1B, EgdeX3F, false>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using Interface13 = Interface<EdgeY1B, EdgeY3F, false>;
 
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX3F = Edge<Patch3, GridX3, FRONT>;
-    using Interface31 = Interface<EgdeX3F, EgdeX1B, false>;
-
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using Interface31 = Interface<EdgeY3F, EdgeY1B, false>;
 
     // Coordinate transformation .................................................................
     // Index starting at 0
@@ -181,13 +180,13 @@ TEST_F(IndexTransformationNonUniformTest, IndexAvaibility)
 
 TEST_F(IndexTransformationNonUniformTest, InvertedOrientation)
 {
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX2F = Edge<Patch2, GridX2, FRONT>;
-    using Interface12 = Interface<EgdeX1B, EgdeX2F, false>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY2F = Edge<Patch2, GridY2, FRONT>;
+    using Interface12 = Interface<EdgeY1B, EdgeY2F, false>;
 
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX3F = Edge<Patch3, GridX3, FRONT>;
-    using Interface13 = Interface<EgdeX1B, EgdeX3F, false>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using Interface13 = Interface<EdgeY1B, EdgeY3F, false>;
 
     // Coordinate transformation .................................................................
     // Index starting at 0
@@ -211,13 +210,13 @@ TEST_F(IndexTransformationNonUniformTest, InvertedOrientation)
 
 TEST_F(IndexTransformationNonUniformTest, StickingDifferentDimensions)
 {
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeY2F = Edge<Patch2, GridY2, FRONT>;
-    using Interface12 = Interface<EgdeX1B, EgdeY2F, true>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeX2F = Edge<Patch2, GridX2, FRONT>;
+    using Interface12 = Interface<EdgeY1B, EdgeX2F, true>;
 
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeY3F = Edge<Patch3, GridY3, FRONT>;
-    using Interface13 = Interface<EgdeX1B, EgdeY3F, true>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeX3F = Edge<Patch3, GridX3, FRONT>;
+    using Interface13 = Interface<EdgeY1B, EdgeX3F, true>;
 
     // Coordinate transformation .................................................................
     // Index starting at 0
@@ -241,13 +240,13 @@ TEST_F(IndexTransformationNonUniformTest, StickingDifferentDimensions)
 
 TEST_F(IndexTransformationNonUniformTest, ReverseTransformation)
 {
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX2F = Edge<Patch2, GridX2, FRONT>;
-    using Interface12 = Interface<EgdeX1B, EgdeX2F, false>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY2F = Edge<Patch2, GridY2, FRONT>;
+    using Interface12 = Interface<EdgeY1B, EdgeY2F, false>;
 
-    using EgdeX1B = Edge<Patch1, GridX1, BACK>;
-    using EgdeX3F = Edge<Patch3, GridX3, FRONT>;
-    using Interface13 = Interface<EgdeX1B, EgdeX3F, false>;
+    using EdgeY1B = Edge<Patch1, GridY1, BACK>;
+    using EdgeY3F = Edge<Patch3, GridY3, FRONT>;
+    using Interface13 = Interface<EdgeY1B, EdgeY3F, false>;
 
     // Coordinate transformation .................................................................
     EdgeTransformation<Interface12> index_transformation_12(idx_range_x1, idx_range_x2);

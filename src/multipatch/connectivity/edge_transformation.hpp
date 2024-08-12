@@ -6,9 +6,8 @@
 
 #include <ddc/ddc.hpp>
 
-#include <ddc_helper.hpp>
-
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "edge.hpp"
 #include "interface.hpp"
 
@@ -41,8 +40,8 @@ class EdgeTransformation
             "The interface cannot be an interface with the outside domain.");
 
 
-    using EdgeGrid1 = typename Interface::Edge1::grid;
-    using EdgeGrid2 = typename Interface::Edge2::grid;
+    using EdgeGrid1 = typename Interface::Edge1::parallel_grid;
+    using EdgeGrid2 = typename Interface::Edge2::parallel_grid;
 
     using EdgeDim1 = typename EdgeGrid1::continuous_dimension_type;
     using EdgeDim2 = typename EdgeGrid2::continuous_dimension_type;
