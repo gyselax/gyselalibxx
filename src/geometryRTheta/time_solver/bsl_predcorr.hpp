@@ -14,6 +14,7 @@
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "ifoot_finder.hpp"

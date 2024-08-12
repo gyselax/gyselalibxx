@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -22,6 +21,7 @@
 #include "chargedensitycalculator.hpp"
 #include "collisions_inter.hpp"
 #include "collisions_intra.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"

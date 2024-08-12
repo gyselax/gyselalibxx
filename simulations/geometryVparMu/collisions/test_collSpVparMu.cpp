@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <cstdlib>
 #include <filesystem>
@@ -13,6 +12,7 @@
 
 #include "CollisionSpVparMu.hpp"
 #include "collisioninfo.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"

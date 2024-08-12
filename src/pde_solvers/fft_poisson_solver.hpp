@@ -5,6 +5,7 @@
 #include <ddc_helper.hpp>
 #include <directional_tag.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ipoisson_solver.hpp"
 
@@ -155,13 +156,13 @@ private:
     /**
      * @brief Get the gradient of a multi-dimensional expression from its representation in Fourier space.
      *
-     * @param[out] gradient The VectorFieldSpan where the gradient will be saved.
+     * @param[out] gradient The VectorField where the gradient will be saved.
      * @param[out] fourier_derivative The derivative of the function in Fourier space will be saved.
      * @param[in] values The Field containing the values of the function in Fourier space.
      */
     template <class... Dims>
     void get_gradient(
-            VectorFieldSpan<
+            VectorField<
                     double,
                     laplacian_idx_range_type,
                     NDTag<Dims...>,

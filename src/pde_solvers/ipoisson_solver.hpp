@@ -3,7 +3,7 @@
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field.hpp"
 
 template <class LaplacianIdxRange, class FullIdxRange, class LayoutSpace, class MemorySpace>
 class IPoissonSolver;
@@ -34,7 +34,7 @@ protected:
     using batch_tags = ddc::type_seq_remove_t<space_tags, laplacian_tags>;
 
 protected:
-    /// @brief Indicates whether the gradient is represented by a VectorFieldSpan or a ChunkSpan.
+    /// @brief Indicates whether the gradient is represented by a VectorField or a ChunkSpan.
     static constexpr bool using_vector_span = ddc::type_seq_size_v<laplacian_tags> == 1;
 
 public:
@@ -47,7 +47,7 @@ public:
     using vector_field_type = std::conditional_t<
             ddc::type_seq_size_v<laplacian_tags> == 1,
             field_type,
-            VectorFieldSpan<double, FullIdxRange, real_laplacian_tags, LayoutSpace, MemorySpace>>;
+            VectorField<double, FullIdxRange, real_laplacian_tags, LayoutSpace, MemorySpace>>;
 
     /// @brief The index range type describing the batch dimensions.
     using batch_idx_range_type =

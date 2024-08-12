@@ -20,8 +20,6 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
-#include <stdio.h>
-
 #include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
@@ -39,7 +37,7 @@
 #include "spline_interpolator_2d_rp.hpp"
 #include "test_cases.hpp"
 #include "vector_field.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field_mem.hpp"
 
 
 namespace {

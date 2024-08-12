@@ -9,6 +9,7 @@
 #include <moments.hpp>
 #include <species_info.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 
 /**

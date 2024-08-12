@@ -7,9 +7,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <directional_tag.hpp>
-#include <geometry.hpp>
-
+#include "ddc_alias_inline_functions.hpp"
+#include "directional_tag.hpp"
+#include "geometry.hpp"
 #include "qnsolver.hpp"
 
 QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator const& compute_rho)
@@ -33,7 +33,7 @@ void QNSolver::operator()(
     DFieldMemVxVy contiguous_slice_vxvy(get_idx_range<GridVx, GridVy>(allfdistribu));
     m_compute_rho(rho, allfdistribu);
 
-    VectorFieldSpan<
+    VectorField<
             double,
             IdxRangeXY,
             NDTag<X, Y>,

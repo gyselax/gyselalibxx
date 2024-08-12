@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <iostream>
 #include <string>
 
@@ -8,6 +7,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"

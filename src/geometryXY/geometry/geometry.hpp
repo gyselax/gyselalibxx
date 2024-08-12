@@ -4,11 +4,12 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field_mem.hpp"
 
 
 
@@ -184,8 +185,8 @@ using ConstFieldXY = Field<ElementType const, IdxRangeXY>;
 using DConstFieldXY = ConstFieldXY<double>;
 
 
-// VectorField aliases
-using VectorFieldXY_XY = VectorField<
+// VectorFieldMem aliases
+using VectorFieldXY_XY = VectorFieldMem<
         double,
         IdxRangeXY,
         NDTag<X, Y>,

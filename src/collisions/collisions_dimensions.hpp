@@ -1,4 +1,5 @@
 #pragma once
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 
 /**

@@ -5,11 +5,12 @@
 
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field_mem.hpp"
 
 
 namespace {
@@ -38,9 +39,9 @@ using FieldX = Field<Datatype, IdxRangeX>;
 
 
 template <class Datatype>
-using VectorFieldX = VectorField<Datatype, IdxRangeX, Direction>;
+using VectorFieldX = VectorFieldMem<Datatype, IdxRangeX, Direction>;
 template <class Datatype>
-using VectorFieldFieldX = VectorFieldSpan<Datatype, IdxRangeX, Direction>;
+using VectorFieldFieldX = VectorField<Datatype, IdxRangeX, Direction>;
 
 
 static IdxX constexpr lbound_x(50);
@@ -51,36 +52,30 @@ static IdxRangeX constexpr dom_x(lbound_x, nelems_x);
 
 
 // Tests on DefaultExecutionSpace ----------------------------------------------------------------
-TEST(MemorySpace, ChunkOnDeviceT)
+TEST(MemorySpace, FieldMemOnDeviceT)
 {
-    FieldMemX<double> chunk_test_alloc(dom_x);
-    FieldMem<
-            double,
-            IdxRangeX,
-            ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
-            chunk_alloc(dom_x);
-    EXPECT_TRUE(typeid(chunk_test_alloc) == typeid(chunk_alloc));
+    FieldMemX<double> field_test_alloc(dom_x);
+    DFieldMem<IdxRangeX, ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
+            field_alloc(dom_x);
+    EXPECT_TRUE(typeid(field_test_alloc) == typeid(field_alloc));
 }
 
 
-TEST(MemorySpace, ChunkSpanOnDeviceT)
+TEST(MemorySpace, FieldOnDeviceT)
 {
-    FieldMemX<double> chunk_test_alloc(dom_x);
-    FieldX<double> chunk_span_test = get_field(chunk_test_alloc);
-    FieldMem<
-            double,
-            IdxRangeX,
-            ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
-            chunk_alloc(dom_x);
-    ddc::ChunkSpan chunk_span = get_field(chunk_alloc);
-    EXPECT_TRUE(typeid(chunk_span_test) == typeid(chunk_span));
+    FieldMemX<double> field_test_alloc(dom_x);
+    FieldX<double> field_test = get_field(field_test_alloc);
+    DFieldMem<IdxRangeX, ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
+            field_alloc(dom_x);
+    DField<IdxRangeX> field = get_field(field_alloc);
+    EXPECT_TRUE(typeid(field_test) == typeid(field));
 }
 
 
 TEST(MemorySpace, VectorFieldOnDeviceT)
 {
     device_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    VectorField<
+    VectorFieldMem<
             double,
             IdxRangeX,
             Direction,
@@ -93,49 +88,47 @@ TEST(MemorySpace, VectorFieldOnDeviceT)
 TEST(MemorySpace, VectorFieldSpanOnDeviceT)
 {
     device_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    device_t<VectorFieldFieldX<double>> vector_field_span_test = get_field(vector_field_test_alloc);
-    VectorField<
+    device_t<VectorFieldFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
+    VectorFieldMem<
             double,
             IdxRangeX,
             Direction,
             ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
             vector_field_alloc(dom_x);
-    VectorFieldSpan vector_field_span = get_field(vector_field_alloc);
-    EXPECT_TRUE(typeid(vector_field_span_test) == typeid(vector_field_span));
+    VectorField vector_field = get_field(vector_field_alloc);
+    EXPECT_TRUE(typeid(vector_field_test) == typeid(vector_field));
 }
 
 
 // Tests on DefaultHostExecutionSpace ------------------------------------------------------------
-TEST(MemorySpace, ChunkOnHostT)
+TEST(MemorySpace, FieldMemOnHostT)
 {
-    host_t<FieldMemX<double>> chunk_test_alloc(dom_x);
-    FieldMem<
-            double,
+    host_t<FieldMemX<double>> field_test_alloc(dom_x);
+    DFieldMem<
             IdxRangeX,
             ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
-            chunk_alloc(dom_x);
-    EXPECT_TRUE(typeid(chunk_test_alloc) == typeid(chunk_alloc));
+            field_alloc(dom_x);
+    EXPECT_TRUE(typeid(field_test_alloc) == typeid(field_alloc));
 }
 
 
-TEST(MemorySpace, ChunkSpanOnHostT)
+TEST(MemorySpace, FieldOnHostT)
 {
-    host_t<FieldMemX<double>> chunk_test_alloc(dom_x);
-    host_t<FieldX<double>> chunk_span_test = get_field(chunk_test_alloc);
-    FieldMem<
-            double,
+    host_t<FieldMemX<double>> field_test_alloc(dom_x);
+    host_t<FieldX<double>> field_test = get_field(field_test_alloc);
+    host_t<DFieldMem<
             IdxRangeX,
-            ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
-            chunk_alloc(dom_x);
-    ddc::ChunkSpan chunk_span = get_field(chunk_alloc);
-    EXPECT_TRUE(typeid(chunk_span_test) == typeid(chunk_span));
+            ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>>
+            field_alloc(dom_x);
+    host_t<DField<IdxRangeX>> field = get_field(field_alloc);
+    EXPECT_TRUE(typeid(field_test) == typeid(field));
 }
 
 
 TEST(MemorySpace, VectorFieldOnHostT)
 {
     host_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    VectorField<
+    VectorFieldMem<
             double,
             IdxRangeX,
             Direction,
@@ -148,13 +141,13 @@ TEST(MemorySpace, VectorFieldOnHostT)
 TEST(MemorySpace, VectorFieldSpanOnHostT)
 {
     host_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    host_t<VectorFieldFieldX<double>> vector_field_span_test = get_field(vector_field_test_alloc);
-    VectorField<
+    host_t<VectorFieldFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
+    VectorFieldMem<
             double,
             IdxRangeX,
             Direction,
             ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
             vector_field_alloc(dom_x);
-    VectorFieldSpan vector_field_span = get_field(vector_field_alloc);
-    EXPECT_TRUE(typeid(vector_field_span_test) == typeid(vector_field_span));
+    VectorField vector_field = get_field(vector_field_alloc);
+    EXPECT_TRUE(typeid(vector_field_test) == typeid(vector_field));
 }

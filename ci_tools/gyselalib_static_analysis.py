@@ -187,6 +187,7 @@ def check_for_ddc_keywords(file):
     """
     file_exceptions = [HOME_DIR / 'src' / 'utils' / 'ddc_helper.hpp',
                        HOME_DIR / 'src' / 'utils' / 'ddc_aliases.hpp',
+                       HOME_DIR / 'src' / 'utils' / 'ddc_alias_inline_functions.hpp',
                        HOME_DIR / 'src' / 'utils' / 'transpose.hpp']
     if (HOME_DIR / 'src' / 'data_types') in file.file.parents or file.file in file_exceptions:
         return

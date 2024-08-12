@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -9,6 +8,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "mask_tanh.hpp"
 #include "quadrature.hpp"

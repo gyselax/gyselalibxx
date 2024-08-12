@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -25,6 +24,7 @@
 #include "collisions_intra.hpp"
 #include "constantfluidinitialization.hpp"
 #include "constantrate.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "diffusiveneutralsolver.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"

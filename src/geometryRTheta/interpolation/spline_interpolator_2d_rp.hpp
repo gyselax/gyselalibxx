@@ -1,4 +1,5 @@
 #pragma once
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "i_interpolator_2d_rp.hpp"

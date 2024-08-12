@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -23,6 +22,7 @@
 #include "bsl_predcorr_second_order_implicit.hpp"
 #include "compute_norms.hpp"
 #include "crank_nicolson.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"

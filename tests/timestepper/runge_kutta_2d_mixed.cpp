@@ -8,12 +8,12 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <directional_tag.hpp>
-#include <rk2.hpp>
-#include <rk3.hpp>
-#include <rk4.hpp>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
+#include "directional_tag.hpp"
+#include "rk2.hpp"
+#include "rk3.hpp"
+#include "rk4.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 using namespace ddc;
 
@@ -54,7 +54,7 @@ public:
     using IdxRangeY = IdxRange<GridY>;
     using IdxXY = Idx<GridX, GridY>;
     using IdxRangeXY = IdxRange<GridX, GridY>;
-    using AdvectionFieldMem = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
+    using AdvectionFieldMem = VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>;
     using CFieldXY = host_t<FieldMem<CoordXY, IdxRangeXY>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
@@ -93,8 +93,8 @@ TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
     using IdxRangeXY = typename TestFixture::IdxRangeXY;
     using CFieldXY = typename TestFixture::CFieldXY;
     using RungeKutta = typename TestFixture::RungeKutta;
-    using AdvectionField = VectorFieldSpan<double, IdxRangeXY, NDTag<X, Y>>;
-    using ConstAdvectionField = VectorFieldView<double, IdxRangeXY, NDTag<X, Y>>;
+    using AdvectionField = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
+    using ConstAdvectionField = VectorConstField<double, IdxRangeXY, NDTag<X, Y>>;
 
     CoordX x_min(-1.0);
     CoordX x_max(1.0);

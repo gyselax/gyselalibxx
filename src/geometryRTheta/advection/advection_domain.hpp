@@ -7,16 +7,16 @@
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
 
-#include <ddc_helper.hpp>
-#include <directional_tag.hpp>
-#include <geometry.hpp>
-#include <utils_tools.hpp>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
-
 #include "advection_domain.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "directional_tag.hpp"
+#include "geometry.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "utils_tools.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 /**
  * @brief Define an domain for the advection.

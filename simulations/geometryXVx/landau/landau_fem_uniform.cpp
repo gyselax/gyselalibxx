@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -16,6 +15,7 @@
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "input.hpp"

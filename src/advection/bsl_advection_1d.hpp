@@ -4,6 +4,7 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"

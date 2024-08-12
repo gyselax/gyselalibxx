@@ -3,10 +3,11 @@
 
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field_mem.hpp"
 
 namespace {
 
@@ -22,212 +23,208 @@ using Direction = NDTag<Tag1, Tag2>;
 using Coord2D = Coord<Tag1, Tag2>;
 
 using Idx0D = Idx<>;
-using IdxStept0D = IdxStep<>;
+using IdxStep0D = IdxStep<>;
 using IdxRange0D = IdxRange<>;
 
-template <class Datatype>
-using VectorField0D = VectorField<Datatype, IdxRange0D, Direction>;
-template <class Datatype>
-using VectorFieldField0D = VectorFieldSpan<Datatype, IdxRange0D, Direction>;
+using DVectorFieldMem0D = VectorFieldMem<double, IdxRange0D, Direction>;
 
 struct GridX
 {
 };
 using IdxX = Idx<GridX>;
-using IdxSteptX = IdxStep<GridX>;
+using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
-template <class Datatype>
-using VectorFieldX = VectorField<Datatype, IdxRangeX, Direction>;
-template <class Datatype>
-using VectorFieldFieldX = VectorFieldSpan<Datatype, IdxRangeX, Direction>;
+using DVectorFieldMemX = VectorFieldMem<double, IdxRangeX, Direction>;
+using DVectorFieldX = VectorField<double, IdxRangeX, Direction>;
+using DVectorConstFieldX = VectorField<double const, IdxRangeX, Direction>;
+using DVectorConstFieldSliceX
+        = VectorField<double const, IdxRangeX, Direction, std::experimental::layout_stride>;
 
 
 struct GridY
 {
 };
 using IdxY = Idx<GridY>;
-using IdxSteptY = IdxStep<GridY>;
+using IdxStepY = IdxStep<GridY>;
 using IdxRangeY = IdxRange<GridY>;
 
-template <class Datatype>
-using VectorFieldY = VectorField<Datatype, IdxRangeY, Direction>;
-template <class Datatype>
-using VectorFieldFieldY = VectorFieldSpan<Datatype, IdxRangeY, Direction>;
+using DVectorFieldMemY = VectorFieldMem<double, IdxRangeY, Direction>;
+using DVectorFieldY = VectorField<double, IdxRangeY, Direction>;
+using DVectorConstFieldY = VectorField<double const, IdxRangeY, Direction>;
 
 
 struct GridZ
 {
 };
 using IdxZ = Idx<GridZ>;
-using IdxSteptZ = IdxStep<GridZ>;
+using IdxStepZ = IdxStep<GridZ>;
 using IdxRangeZ = IdxRange<GridZ>;
 
 
 using IdxXY = Idx<GridX, GridY>;
-using IdxSteptXY = IdxStep<GridX, GridY>;
+using IdxStepXY = IdxStep<GridX, GridY>;
 using IdxRangeXY = IdxRange<GridX, GridY>;
 
-template <class Datatype>
-using VectorFieldXY = VectorField<Datatype, IdxRangeXY, Direction>;
-
+using DVectorFieldMemXY = VectorFieldMem<double, IdxRangeXY, Direction>;
+using DVectorConstFieldXY = VectorField<double const, IdxRangeXY, Direction>;
+using DVectorConstFieldSliceXY
+        = VectorField<double const, IdxRangeXY, Direction, std::experimental::layout_stride>;
 
 using IdxYX = Idx<GridY, GridX>;
-using IdxSteptYX = IdxStep<GridY, GridX>;
+using IdxStepYX = IdxStep<GridY, GridX>;
 using IdxRangeYX = IdxRange<GridY, GridX>;
 
-template <class Datatype>
-using VectorFieldYX = VectorField<Datatype, IdxRangeYX, Direction>;
-template <class Datatype>
-using VectorFieldFieldYX = VectorFieldSpan<Datatype, IdxRangeYX, Direction>;
+using DVectorFieldMemYX = VectorFieldMem<double, IdxRangeYX, Direction>;
+using DVectorConstFieldYX = VectorField<double const, IdxRangeYX, Direction>;
 
 
 static Idx0D constexpr lbound_0d {};
-static IdxStept0D constexpr nelems_0d {};
-static IdxRange0D constexpr dom_0d(lbound_0d, nelems_0d);
+static IdxStep0D constexpr nelems_0d {};
+static IdxRange0D constexpr idx_range_0d(lbound_0d, nelems_0d);
 
 static IdxX constexpr lbound_x(50);
-static IdxSteptX constexpr nelems_x(3);
-static IdxRangeX constexpr dom_x(lbound_x, nelems_x);
+static IdxStepX constexpr nelems_x(3);
+static IdxRangeX constexpr idx_range_x(lbound_x, nelems_x);
 
 static IdxY constexpr lbound_y(4);
-static IdxSteptY constexpr nelems_y(12);
+static IdxStepY constexpr nelems_y(12);
 
 static IdxXY constexpr lbound_x_y {lbound_x, lbound_y};
-static IdxSteptXY constexpr nelems_x_y(nelems_x, nelems_y);
-static IdxRangeXY constexpr dom_x_y(lbound_x_y, nelems_x_y);
+static IdxStepXY constexpr nelems_x_y(nelems_x, nelems_y);
+static IdxRangeXY constexpr idx_range_x_y(lbound_x_y, nelems_x_y);
 
 } // namespace
 
-// Member types of VectorField 1D \{
+// Member types of VectorFieldMem 1D \{
 
-TEST(VectorField0DTest, LayoutType)
+TEST(VectorFieldMem0DTest, LayoutType)
 {
     EXPECT_TRUE((std::is_same_v<
-                 VectorField0D<double>::chunk_type::layout_type,
+                 DVectorFieldMem0D::chunk_type::layout_type,
                  std::experimental::layout_right>));
 }
 
 TEST(VectorField1DTest, LayoutType)
 {
-    VectorFieldX<double> chunk(dom_x);
+    DVectorFieldMemX field(idx_range_x);
 
     EXPECT_TRUE((std::is_same_v<
-                 std::decay_t<decltype(chunk)::chunk_type>::layout_type,
+                 std::decay_t<decltype(field)::chunk_type>::layout_type,
                  std::experimental::layout_right>));
 }
 
 // TODO: many missing types
 
 // \}
-// Functions implemented in VectorField 1D (and free functions specific to it) \{
+// Functions implemented in VectorFieldMem 1D (and free functions specific to it) \{
 
-TEST(VectorField0DTest, MoveConstructor)
+TEST(VectorFieldMem0DTest, MoveConstructor)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorField0D<double> chunk(dom_0d);
-    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    DVectorFieldMem0D field(idx_range_0d);
+    ddcHelper::get<Tag1>(field)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(field)() = ddc::get<Tag2>(factor);
 
-    VectorField0D<double> chunk2(std::move(chunk));
-    EXPECT_EQ(get_idx_range(chunk2), dom_0d);
-    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddc::get<Tag1>(chunk2()));
-    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddc::get<Tag2>(chunk2()));
+    DVectorFieldMem0D field2(std::move(field));
+    EXPECT_EQ(get_idx_range(field2), idx_range_0d);
+    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddc::get<Tag1>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddc::get<Tag2>(field2()));
 }
 
 TEST(VectorField1DTest, MoveConstructor)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : idx_range_x) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
     }
 
-    VectorFieldX<double> chunk2(std::move(chunk));
-    EXPECT_EQ(get_idx_range(chunk2), dom_x);
-    for (auto&& ix : get_idx_range(chunk2)) {
+    DVectorFieldMemX field2(std::move(field));
+    EXPECT_EQ(get_idx_range(field2), idx_range_x);
+    for (IdxX ix : get_idx_range(field2)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        Coord2D val = double(ix.uid()) * factor;
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk2(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk2(ix)));
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(field2(ix)));
     }
 }
 
-TEST(VectorField0DTest, MoveAssignment)
+TEST(VectorFieldMem0DTest, MoveAssignment)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorField0D<double> chunk(dom_0d);
-    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    DVectorFieldMem0D field(idx_range_0d);
+    ddcHelper::get<Tag1>(field)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(field)() = ddc::get<Tag2>(factor);
 
-    VectorField0D<double> chunk2(IdxRange0D(lbound_0d, IdxStept0D()));
-    chunk2 = std::move(chunk);
-    EXPECT_EQ(get_idx_range(chunk2), dom_0d);
-    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddc::get<Tag1>(chunk2()));
-    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddc::get<Tag2>(chunk2()));
+    DVectorFieldMem0D field2(IdxRange0D(lbound_0d, IdxStep0D()));
+    field2 = std::move(field);
+    EXPECT_EQ(get_idx_range(field2), idx_range_0d);
+    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddc::get<Tag1>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddc::get<Tag2>(field2()));
 }
 
 TEST(VectorField1DTest, MoveAssignment)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
     }
 
-    VectorFieldX<double> chunk2(IdxRangeX(lbound_x, IdxSteptX(0)));
-    chunk2 = std::move(chunk);
-    EXPECT_EQ(get_idx_range(chunk2), dom_x);
-    for (auto&& ix : get_idx_range(chunk2)) {
+    DVectorFieldMemX field2(IdxRangeX(lbound_x, IdxStepX(0)));
+    field2 = std::move(field);
+    EXPECT_EQ(get_idx_range(field2), idx_range_x);
+    for (IdxX ix : get_idx_range(field2)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        Coord2D val = double(ix.uid()) * factor;
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk2(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk2(ix)));
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(field2(ix)));
     }
 }
 
-TEST(VectorField0DTest, Swap)
+TEST(VectorFieldMem0DTest, Swap)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorField0D<double> chunk(dom_0d);
-    ddcHelper::get<Tag1>(chunk)() = ddc::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(chunk)() = ddc::get<Tag2>(factor);
+    DVectorFieldMem0D field(idx_range_0d);
+    ddcHelper::get<Tag1>(field)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(field)() = ddc::get<Tag2>(factor);
 
-    IdxRange0D empty_idx_range(lbound_0d, IdxStept0D());
-    VectorField0D<double> chunk2(empty_idx_range);
+    IdxRange0D empty_idx_range(lbound_0d, IdxStep0D());
+    DVectorFieldMem0D field2(empty_idx_range);
 
-    std::swap(chunk2, chunk);
-    EXPECT_EQ(get_idx_range(chunk), empty_idx_range);
-    EXPECT_EQ(get_idx_range(chunk2), dom_0d);
-    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddc::get<Tag1>(chunk2()));
-    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddc::get<Tag2>(chunk2()));
+    std::swap(field2, field);
+    EXPECT_EQ(get_idx_range(field), empty_idx_range);
+    EXPECT_EQ(get_idx_range(field2), idx_range_0d);
+    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddc::get<Tag1>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddc::get<Tag2>(field2()));
 }
 
 TEST(VectorField1DTest, Swap)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
     }
 
-    IdxRangeX empty_idx_range(lbound_x, IdxSteptX(0));
-    VectorFieldX<double> chunk2(empty_idx_range);
+    IdxRangeX empty_idx_range(lbound_x, IdxStepX(0));
+    DVectorFieldMemX field2(empty_idx_range);
 
-    std::swap(chunk2, chunk);
-    EXPECT_EQ(get_idx_range(chunk), empty_idx_range);
-    EXPECT_EQ(get_idx_range(chunk2), dom_x);
-    for (auto&& ix : get_idx_range(chunk2)) {
+    std::swap(field2, field);
+    EXPECT_EQ(get_idx_range(field), empty_idx_range);
+    EXPECT_EQ(get_idx_range(field2), idx_range_x);
+    for (IdxX ix : get_idx_range(field2)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        Coord2D val = double(ix.uid()) * factor;
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk2(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk2(ix)));
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(field2(ix)));
     }
 }
 
@@ -236,73 +233,73 @@ TEST(VectorField1DTest, Swap)
 TEST(VectorField1DTest, AccessConst)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    VectorFieldX<double> const& chunk_cref = chunk;
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    DVectorFieldMemX const& field_cref = field;
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk_cref(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk_cref(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(field_cref(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(field_cref(ix)));
     }
 }
 
 TEST(VectorField1DTest, Access)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(field(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(field(ix)));
     }
 }
 
-TEST(VectorField1DTest, SpanCview)
+TEST(VectorField1DTest, GetConstField)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(get_const_field(chunk)(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(get_const_field(chunk)(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(get_const_field(field)(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(get_const_field(field)(ix)));
     }
 }
 
-TEST(VectorField1DTest, ViewConst)
+TEST(VectorField1DTest, GetFieldFromConst)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    VectorFieldX<double> const& chunk_cref = chunk;
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field(idx_range_x);
+    DVectorFieldMemX const& field_cref = field;
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(get_field(chunk_cref)(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(get_field(chunk_cref)(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(get_field(field_cref)(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(get_field(field_cref)(ix)));
     }
 }
 
-TEST(VectorField1DTest, View)
+TEST(VectorField1DTest, GetField)
 {
     Coord2D constexpr factor(1.391, 2.444);
-    VectorFieldX<double> chunk(dom_x);
-    VectorFieldFieldX<double> chunk_span = get_field(chunk);
-    for (auto&& ix : get_idx_range(chunk)) {
-        Coord2D val = double(ix.uid()) * factor;
-        ddcHelper::get<Tag1>(chunk_span)(ix) = ddc::get<Tag1>(val);
-        ddcHelper::get<Tag2>(chunk_span)(ix) = ddc::get<Tag2>(val);
+    DVectorFieldMemX field_alloc(idx_range_x);
+    DVectorFieldX field = get_field(field_alloc);
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(chunk(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(chunk(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddc::get<Tag1>(field_alloc(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddc::get<Tag2>(field_alloc(ix)));
     }
 }
 
@@ -321,24 +318,24 @@ TEST(VectorField1DTest, View)
 
 TEST(VectorField1DTest, Rank)
 {
-    VectorFieldX<double> chunk(dom_x);
-    EXPECT_EQ(VectorFieldX<double>::rank(), 1);
+    DVectorFieldMemX field(idx_range_x);
+    EXPECT_EQ(DVectorFieldMemX::rank(), 1);
 }
 
 // TODO: stride
 
 // swap is hidden
 
-TEST(VectorField1DTest, Domain)
+TEST(VectorField1DTest, IdxRange)
 {
-    VectorFieldX<double> chunk(dom_x);
-    EXPECT_EQ(dom_x, get_idx_range(chunk));
+    DVectorFieldMemX field(idx_range_x);
+    EXPECT_EQ(idx_range_x, get_idx_range(field));
 }
 
-TEST(VectorField1DTest, DomainX)
+TEST(VectorField1DTest, IdxRangeX)
 {
-    VectorFieldX<double> chunk(dom_x);
-    EXPECT_EQ(dom_x, get_idx_range<GridX>(chunk));
+    DVectorFieldMemX field(idx_range_x);
+    EXPECT_EQ(idx_range_x, get_idx_range<GridX>(field));
 }
 
 // TODO: data_handle()
@@ -347,77 +344,74 @@ TEST(VectorField1DTest, DomainX)
 
 // TODO: allocation_mdspan
 
-TEST(VectorField1DTest, GetDomainX)
-{
-    VectorFieldX<double> chunk(dom_x);
-    EXPECT_EQ(dom_x, ddcHelper::get_domain<GridX>(chunk));
-}
-
 
 TEST(VectorField1DTest, Deepcopy)
 {
-    VectorFieldX<double> chunk(dom_x);
-    for (auto&& ix : get_idx_range(chunk)) {
-        ddcHelper::get<Tag1>(chunk)(ix) = 1.001 * ix.uid();
-        ddcHelper::get<Tag2>(chunk)(ix) = 0.0;
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : get_idx_range(field)) {
+        ddcHelper::get<Tag1>(field)(ix) = 1.001 * (ix - idx_range_x.front()).value();
+        ddcHelper::get<Tag2>(field)(ix) = 0.0;
     }
-    VectorFieldX<double> chunk2(get_idx_range(chunk));
-    ddcHelper::deepcopy(chunk2, chunk);
-    for (auto&& ix : get_idx_range(chunk)) {
+    DVectorFieldMemX field2(get_idx_range(field));
+    ddcHelper::deepcopy(field2, field);
+    for (IdxX ix : get_idx_range(field)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: these are copy
-        EXPECT_EQ(ddc::get<Tag1>(chunk2(ix)), ddc::get<Tag1>(chunk(ix)));
-        EXPECT_EQ(ddc::get<Tag2>(chunk2(ix)), ddc::get<Tag2>(chunk(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(field2(ix)), ddc::get<Tag1>(field(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(field2(ix)), ddc::get<Tag2>(field(ix)));
     }
 }
 
 // \}
-// Functions implemented in VectorField 2D (and free functions specific to it) \{
+// Functions implemented in VectorFieldMem 2D (and free functions specific to it) \{
 
 // TODO: lots to do still!
 
 TEST(VectorField2DTest, Access)
 {
-    VectorFieldXY<double> chunk(dom_x_y);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.357 * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.159 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1.357 * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = 1.159 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
             // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-            EXPECT_EQ(ddc::get<Tag1>(chunk(ix, iy)), ddc::get<Tag1>(chunk(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(chunk(ix, iy)), ddc::get<Tag2>(chunk(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(field(ix, iy)), ddc::get<Tag1>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(field(ix, iy)), ddc::get<Tag2>(field(ix, iy)));
         }
     }
 }
 
 TEST(VectorField2DTest, AccessReordered)
 {
-    VectorFieldXY<double> chunk(dom_x_y);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.455 * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.522 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1.455 * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = 1.522 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
             // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-            EXPECT_EQ(ddc::get<Tag1>(chunk(iy, ix)), ddc::get<Tag1>(chunk(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(chunk(iy, ix)), ddc::get<Tag2>(chunk(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(field(iy, ix)), ddc::get<Tag1>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(field(iy, ix)), ddc::get<Tag2>(field(ix, iy)));
         }
     }
 }
 
 TEST(VectorField2DTest, Cview)
 {
-    VectorFieldXY<double> chunk(dom_x_y);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1. * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = .001 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
-    auto cview = get_const_field(chunk);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
+    DVectorConstFieldXY cview = get_const_field(field);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-            EXPECT_EQ(ddc::get<Tag1>(cview(ix, iy)), ddc::get<Tag1>(chunk(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(cview(ix, iy)), ddc::get<Tag2>(chunk(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(cview(ix, iy)), ddc::get<Tag1>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(cview(ix, iy)), ddc::get<Tag2>(field(ix, iy)));
         }
     }
 }
@@ -426,29 +420,30 @@ TEST(VectorField2DTest, SliceCoordX)
 {
     IdxX constexpr slice_x_val = IdxX(lbound_x + 1);
 
-    VectorFieldXY<double> chunk(dom_x_y);
-    VectorFieldXY<double> const& chunk_cref = chunk;
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    DVectorFieldMemXY const& field_cref = field;
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1. * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = .001 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
 
-    auto&& chunk_y = chunk_cref[slice_x_val];
+    DVectorConstFieldY field_y = field_cref[slice_x_val];
     EXPECT_TRUE((std::is_same_v<
-                 std::decay_t<decltype(chunk_y)>::layout_type,
+                 std::decay_t<decltype(field_y)>::layout_type,
                  std::experimental::layout_right>));
     EXPECT_EQ(
-            ddcHelper::get<Tag1>(chunk_y).extent<GridY>(),
-            ddcHelper::get<Tag1>(chunk).extent<GridY>());
+            ddcHelper::get<Tag1>(field_y).extent<GridY>(),
+            ddcHelper::get<Tag1>(field).extent<GridY>());
     EXPECT_EQ(
-            ddcHelper::get<Tag2>(chunk_y).extent<GridY>(),
-            ddcHelper::get<Tag2>(chunk).extent<GridY>());
-    for (auto&& ix : get_idx_range<GridY>(chunk_cref)) {
+            ddcHelper::get<Tag2>(field_y).extent<GridY>(),
+            ddcHelper::get<Tag2>(field).extent<GridY>());
+    for (IdxY ix : get_idx_range<GridY>(field_cref)) {
         // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-        EXPECT_EQ(ddc::get<Tag1>(chunk_y(ix)), ddc::get<Tag1>(chunk_cref(slice_x_val, ix)));
-        EXPECT_EQ(ddc::get<Tag2>(chunk_y(ix)), ddc::get<Tag2>(chunk_cref(slice_x_val, ix)));
+        EXPECT_EQ(ddc::get<Tag1>(field_y(ix)), ddc::get<Tag1>(field_cref(slice_x_val, ix)));
+        EXPECT_EQ(ddc::get<Tag2>(field_y(ix)), ddc::get<Tag2>(field_cref(slice_x_val, ix)));
     }
 }
 
@@ -456,59 +451,61 @@ TEST(VectorField2DTest, SliceCoordY)
 {
     IdxY constexpr slice_y_val = IdxY(lbound_y + 1);
 
-    VectorFieldXY<double> chunk(dom_x_y);
-    VectorFieldXY<double> const& chunk_cref = chunk;
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    DVectorFieldMemXY const& field_cref = field;
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1. * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = .001 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
 
-    auto&& chunk_x = chunk_cref[slice_y_val];
+    DVectorConstFieldSliceX field_x = field_cref[slice_y_val];
     EXPECT_TRUE((std::is_same_v<
-                 std::decay_t<decltype(chunk_x)>::layout_type,
+                 std::decay_t<decltype(field_x)>::layout_type,
                  std::experimental::layout_stride>));
     EXPECT_EQ(
-            ddcHelper::get<Tag1>(chunk_x).extent<GridX>(),
-            ddcHelper::get<Tag1>(chunk).extent<GridX>());
+            ddcHelper::get<Tag1>(field_x).extent<GridX>(),
+            ddcHelper::get<Tag1>(field).extent<GridX>());
     EXPECT_EQ(
-            ddcHelper::get<Tag2>(chunk_x).extent<GridX>(),
-            ddcHelper::get<Tag2>(chunk).extent<GridX>());
-    for (auto&& ix : get_idx_range<GridX>(chunk_cref)) {
+            ddcHelper::get<Tag2>(field_x).extent<GridX>(),
+            ddcHelper::get<Tag2>(field).extent<GridX>());
+    for (IdxX ix : get_idx_range<GridX>(field_cref)) {
         // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-        EXPECT_EQ(ddc::get<Tag1>(chunk_x(ix)), ddc::get<Tag1>(chunk_cref(ix, slice_y_val)));
-        EXPECT_EQ(ddc::get<Tag2>(chunk_x(ix)), ddc::get<Tag2>(chunk_cref(ix, slice_y_val)));
+        EXPECT_EQ(ddc::get<Tag1>(field_x(ix)), ddc::get<Tag1>(field_cref(ix, slice_y_val)));
+        EXPECT_EQ(ddc::get<Tag2>(field_x(ix)), ddc::get<Tag2>(field_cref(ix, slice_y_val)));
     }
 }
 
 TEST(VectorField2DTest, SliceDomainX)
 {
-    IdxRangeX constexpr subidx_range_x = IdxRangeX(IdxX(lbound_x + 1), IdxSteptX(nelems_x - 2));
+    IdxRangeX constexpr subidx_range_x = IdxRangeX(IdxX(lbound_x + 1), IdxStepX(nelems_x - 2));
 
-    VectorFieldXY<double> chunk(dom_x_y);
-    VectorFieldXY<double> const& chunk_cref = chunk;
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    DVectorFieldMemXY const& field_cref = field;
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1. * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = .001 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
 
-    auto&& subchunk_x = chunk_cref[subidx_range_x];
+    DVectorConstFieldXY subfield_x = field_cref[subidx_range_x];
     EXPECT_TRUE((std::is_same_v<
-                 std::decay_t<decltype(subchunk_x)>::layout_type,
+                 std::decay_t<decltype(subfield_x)>::layout_type,
                  std::experimental::layout_right>));
 
-    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_x).extent<GridX>(), subidx_range_x.size());
-    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_x).extent<GridY>(), get_idx_range<GridY>(chunk).size());
-    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_x).extent<GridX>(), subidx_range_x.size());
-    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_x).extent<GridY>(), get_idx_range<GridY>(chunk).size());
-    for (auto&& ix : get_idx_range<GridX>(subchunk_x)) {
-        for (auto&& iy : get_idx_range<GridY>(subchunk_x)) {
+    EXPECT_EQ(ddcHelper::get<Tag1>(subfield_x).extent<GridX>(), subidx_range_x.size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subfield_x).extent<GridY>(), get_idx_range<GridY>(field).size());
+    EXPECT_EQ(ddcHelper::get<Tag1>(subfield_x).extent<GridX>(), subidx_range_x.size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subfield_x).extent<GridY>(), get_idx_range<GridY>(field).size());
+    for (IdxX ix : get_idx_range<GridX>(subfield_x)) {
+        for (IdxY iy : get_idx_range<GridY>(subfield_x)) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-            EXPECT_EQ(ddc::get<Tag1>(subchunk_x(ix, iy)), ddc::get<Tag1>(chunk_cref(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(subchunk_x(ix, iy)), ddc::get<Tag2>(chunk_cref(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(subfield_x(ix, iy)), ddc::get<Tag1>(field_cref(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(subfield_x(ix, iy)), ddc::get<Tag2>(field_cref(ix, iy)));
         }
     }
 }
@@ -517,11 +514,11 @@ TEST(VectorField2DTest, SliceDomainXTooearly)
 {
     [[maybe_unused]] IdxRangeX constexpr subidx_range_x = IdxRangeX(IdxX(lbound_x - 1), nelems_x);
 
-    VectorFieldXY<double> chunk(dom_x_y);
+    DVectorFieldMemXY field(idx_range_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
     // the error message is checked with clang & gcc only
     EXPECT_DEATH(
-            chunk[subidx_range_x],
+            field[subidx_range_x],
             R"rgx([Aa]ssert.*uid<ODDims>\(m_element_begin\).*uid<ODDims>\(odomain\.m_element_begin\))rgx");
 #endif
 }
@@ -529,89 +526,92 @@ TEST(VectorField2DTest, SliceDomainXTooearly)
 TEST(VectorField2DTest, SliceDomainXToolate)
 {
     [[maybe_unused]] IdxRangeX constexpr subidx_range_x
-            = IdxRangeX(lbound_x, IdxSteptX(nelems_x + 1));
+            = IdxRangeX(lbound_x, IdxStepX(nelems_x + 1));
 
-    VectorFieldXY<double> chunk(dom_x_y);
+    DVectorFieldMemXY field(idx_range_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
     // the error message is checked with clang & gcc only
     EXPECT_DEATH(
-            chunk[subidx_range_x],
+            field[subidx_range_x],
             R"rgx([Aa]ssert.*uid<ODDims>\(m_element_end\).*uid<ODDims>\(odomain\.m_element_end\).*)rgx");
 #endif
 }
 
 TEST(VectorField2DTest, SliceDomainY)
 {
-    IdxRangeY constexpr subidx_range_y = IdxRangeY(IdxY(lbound_y + 1), IdxSteptY(nelems_y - 2));
+    IdxRangeY constexpr subidx_range_y = IdxRangeY(IdxY(lbound_y + 1), IdxStepY(nelems_y - 2));
 
-    VectorFieldXY<double> chunk(dom_x_y);
-    VectorFieldXY<double> const& chunk_cref = chunk;
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1. * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = .001 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    DVectorFieldMemXY const& field_cref = field;
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1. * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = .001 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
-    auto&& subchunk_y = chunk_cref[subidx_range_y];
+    DVectorConstFieldSliceXY subfield_y = field_cref[subidx_range_y];
     EXPECT_TRUE((std::is_same_v<
-                 std::decay_t<decltype(subchunk_y)>::layout_type,
+                 std::decay_t<decltype(subfield_y)>::layout_type,
                  std::experimental::layout_stride>));
 
-    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_y).extent<GridX>(), get_idx_range<GridX>(chunk).size());
-    EXPECT_EQ(ddcHelper::get<Tag1>(subchunk_y).extent<GridY>(), subidx_range_y.size());
-    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_y).extent<GridX>(), get_idx_range<GridX>(chunk).size());
-    EXPECT_EQ(ddcHelper::get<Tag2>(subchunk_y).extent<GridY>(), subidx_range_y.size());
-    for (auto&& ix : get_idx_range<GridX>(subchunk_y)) {
-        for (auto&& iy : get_idx_range<GridY>(subchunk_y)) {
+    EXPECT_EQ(ddcHelper::get<Tag1>(subfield_y).extent<GridX>(), get_idx_range<GridX>(field).size());
+    EXPECT_EQ(ddcHelper::get<Tag1>(subfield_y).extent<GridY>(), subidx_range_y.size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subfield_y).extent<GridX>(), get_idx_range<GridX>(field).size());
+    EXPECT_EQ(ddcHelper::get<Tag2>(subfield_y).extent<GridY>(), subidx_range_y.size());
+    for (IdxX ix : get_idx_range<GridX>(subfield_y)) {
+        for (IdxY iy : get_idx_range<GridY>(subfield_y)) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-            EXPECT_EQ(ddc::get<Tag1>(subchunk_y(ix, iy)), ddc::get<Tag1>(chunk_cref(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(subchunk_y(ix, iy)), ddc::get<Tag2>(chunk_cref(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(subfield_y(ix, iy)), ddc::get<Tag1>(field_cref(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(subfield_y(ix, iy)), ddc::get<Tag2>(field_cref(ix, iy)));
         }
     }
 }
 
 TEST(VectorField2DTest, Deepcopy)
 {
-    VectorFieldXY<double> chunk(dom_x_y);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.739 * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.412 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1.739 * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = 1.412 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
-    VectorFieldXY<double> chunk2(get_idx_range(chunk));
-    ddcHelper::deepcopy(chunk2, chunk);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
+    DVectorFieldMemXY field2(get_idx_range(field));
+    ddcHelper::deepcopy(field2, field);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-            EXPECT_EQ(ddc::get<Tag1>(chunk2(ix, iy)), ddc::get<Tag1>(chunk(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(chunk2(ix, iy)), ddc::get<Tag2>(chunk(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(field2(ix, iy)), ddc::get<Tag1>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(field2(ix, iy)), ddc::get<Tag2>(field(ix, iy)));
         }
     }
 }
 
 TEST(VectorField2DTest, DeepcopyReordered)
 {
-    VectorFieldXY<double> chunk(dom_x_y);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
-            ddcHelper::get<Tag1>(chunk)(ix, iy) = 1.739 * ix.uid();
-            ddcHelper::get<Tag2>(chunk)(ix, iy) = 1.412 * iy.uid();
+    DVectorFieldMemXY field(idx_range_x_y);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
+            ddcHelper::get<Tag1>(field)(ix, iy) = 1.739 * (ix - idx_range_x.front()).value();
+            ddcHelper::get<Tag2>(field)(ix, iy)
+                    = 1.412 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
-    VectorFieldYX<double> chunk2(ddc::select<GridY, GridX>(get_idx_range(chunk)));
-    VectorFieldSpan<double, IdxRangeXY, Direction, std::experimental::layout_left> chunk2_view(
-            get_idx_range(chunk),
-            chunk2.get<Tag1>().data_handle(),
-            chunk2.get<Tag2>().data_handle());
-    ddcHelper::deepcopy(chunk2_view, chunk);
-    for (auto&& ix : get_idx_range<GridX>(chunk)) {
-        for (auto&& iy : get_idx_range<GridY>(chunk)) {
+    DVectorFieldMemYX field2(ddc::select<GridY, GridX>(get_idx_range(field)));
+    VectorField<double, IdxRangeXY, Direction, std::experimental::layout_left> field2_view(
+            get_idx_range(field),
+            field2.get<Tag1>().data_handle(),
+            field2.get<Tag2>().data_handle());
+    ddcHelper::deepcopy(field2_view, field);
+    for (IdxX ix : get_idx_range<GridX>(field)) {
+        for (IdxY iy : get_idx_range<GridY>(field)) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-            EXPECT_EQ(ddc::get<Tag1>(chunk2(ix, iy)), ddc::get<Tag1>(chunk(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(chunk2(ix, iy)), ddc::get<Tag2>(chunk(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag1>(chunk2(ix, iy)), ddc::get<Tag1>(chunk(iy, ix)));
-            EXPECT_EQ(ddc::get<Tag2>(chunk2(ix, iy)), ddc::get<Tag2>(chunk(iy, ix)));
+            EXPECT_EQ(ddc::get<Tag1>(field2(ix, iy)), ddc::get<Tag1>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(field2(ix, iy)), ddc::get<Tag2>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(field2(ix, iy)), ddc::get<Tag1>(field(iy, ix)));
+            EXPECT_EQ(ddc::get<Tag2>(field2(ix, iy)), ddc::get<Tag2>(field(iy, ix)));
         }
     }
 }

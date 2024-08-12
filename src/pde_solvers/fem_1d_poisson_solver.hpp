@@ -6,6 +6,7 @@
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/matrix.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ipoisson_solver.hpp"
 

@@ -9,6 +9,7 @@
 #include <ddc/ddc.hpp>
 
 #include "bsl_advection_1d.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
@@ -16,7 +17,7 @@
 #include "rk2.hpp"
 #include "utils_tools.hpp"
 #include "vector_field.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field_mem.hpp"
 
 /**
  * @brief Predictor-corrector based on RK2 for the guiding-center model. 

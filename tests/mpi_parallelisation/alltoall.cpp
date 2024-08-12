@@ -6,6 +6,8 @@
 #include <mpilayout.hpp>
 #include <mpitransposealltoall.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
+
 namespace {
 
 struct W

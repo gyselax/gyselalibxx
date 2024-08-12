@@ -1,188 +1,315 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+#include "ddc_aliases.hpp"
+#include "vector_field_mem.hpp"
 
-#include <ddc/ddc.hpp>
 
-#include "vector_field_common.hpp"
-
-/**
- * @brief Pre-declaration of VectorField.
- */
-template <class ElementType, class Domain, class, class Allocator = ddc::HostAllocator<ElementType>>
+template <
+        class ElementType,
+        class IdxRangeType,
+        class NDTag,
+        class LayoutStridedPolicy = std::experimental::layout_right,
+        class MemorySpace = Kokkos::DefaultHostExecutionSpace::memory_space>
 class VectorField;
 
+template <
+        class ElementType,
+        class IdxRangeType,
+        class NDTag,
+        class LayoutStridedPolicy,
+        class MemorySpace>
+inline constexpr bool enable_field<
+        VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
 
-template <class ElementType, class Domain, class DimSeq, class Allocator>
-inline constexpr bool enable_field<VectorField<ElementType, Domain, DimSeq, Allocator>> = true;
+template <
+        class ElementType,
+        class IdxRangeType,
+        class NDTag,
+        class LayoutStridedPolicy,
+        class MemorySpace>
+inline constexpr bool enable_borrowed_field<
+        VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
+
 
 /**
- * @brief Pre-declaration of VectorFieldSpan.
- */
-template <class, class, class, class, class>
-class VectorFieldSpan;
-
-/**
- * @brief A class which describes a vector field.
+ * @brief A class which holds multiple (scalar) fields in order to represent a vector field.
  *
- * A class which describes a vector field. In other words a class which maps a position on a domain
- * to a vector (x,y,z,...). This is done by storing the values at the positions in individual
- * Chunks.
+ * @tparam ElementType The data type of a scalar element of the vector field.
+ * @tparam IdxRangeType
+ * @tparam NDTag A NDTag describing the dimensions described by the scalar elements of a vector field element.
+ * @tparam LayoutStridedPolicy The memory layout. See DDC.
+ * @tparam MemorySpace The memory space (CPU/GPU).
  */
-template <class ElementType, class Domain, class NDTag, class Allocator>
-class VectorField : public VectorFieldCommon<ddc::Chunk<ElementType, Domain, Allocator>, NDTag>
+template <
+        class ElementType,
+        class IdxRangeType,
+        class NDTag,
+        class LayoutStridedPolicy,
+        class MemorySpace>
+class VectorField
+    : public VectorFieldCommon<
+              Field<ElementType, IdxRangeType, LayoutStridedPolicy, MemorySpace>,
+              NDTag>
 {
 public:
     /**
      * @brief Type describing the object which can be extracted from this VectorField using the get<> function.
      */
-    using chunk_type = ddc::Chunk<ElementType, Domain, Allocator>;
+    using field_type = Field<ElementType, IdxRangeType, LayoutStridedPolicy, MemorySpace>;
 
 private:
-    using base_type = VectorFieldCommon<chunk_type, NDTag>;
+    using base_type = VectorFieldCommon<field_type, NDTag>;
 
 public:
-    /// The type of an element in one of the Chunks comprising the VectorField
+    /// The type of an element in one of the Fields comprising the VectorField
     using element_type = typename base_type::element_type;
 
 public:
     /**
-     * @brief A type which can hold a reference to this VectorField.
+     * @brief A type which can hold a modifiable reference to a VectorFieldMem.
+     *
+     * A type which can hold a reference to a VectorFieldMem. If this object is modifiable then
+     * so is the span type.
+     * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using span_type = VectorFieldSpan<
-            ElementType,
-            Domain,
-            NDTag,
-            std::experimental::layout_right,
-            typename Allocator::memory_space>;
+    using span_type
+            = VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;
+    /**
+     * @brief A type which can hold a constant reference to a VectorFieldMem.
+     * This is a DDC keyword used to make this class interchangeable with Field.
+     */
+    using view_type
+            = VectorField<const ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;
 
     /**
-     * @brief A type which can hold a constant reference to this VectorField.
+     * @brief Type describing the way in which the data is laid out in the Field memory.
+     *
+     * Type describing the way in which the data is laid out in the Field memory.
+     * I.e. it describes whether it is contiguous or not.
      */
-    using view_type = VectorFieldSpan<
-            const ElementType,
-            Domain,
-            NDTag,
-            std::experimental::layout_right,
-            typename Allocator::memory_space>;
+    using layout_type = LayoutStridedPolicy;
 
     /**
-     * @brief The type of the domain on which the field is defined.
+     * @brief The type of the index range on which the field is defined.
+     * This is a DDC keyword used to make this class interchangeable with Field.
+     * In DDC IdxRange types are referred to as DiscreteDomain types.
      */
     using discrete_domain_type = typename base_type::discrete_domain_type;
+    /// @brief The IdxRange on which the fields in this object are defined.
+    using index_range_type = discrete_domain_type;
 
     /**
      * @brief The type of the memory space where the field is saved (CPU vs GPU).
      */
-    using memory_space = typename chunk_type::memory_space;
+    using memory_space = typename field_type::memory_space;
 
 private:
-    /// Construct a VectorField on a domain with uninitialized values
-    template <std::size_t... Is>
-    explicit VectorField(
-            discrete_domain_type const& domain,
-            Allocator allocator,
-            std::index_sequence<Is...> const&)
-        : base_type(((void)Is, chunk_type(domain, allocator))...)
+    template <class, class, class, class, class>
+    friend class VectorField;
+
+    template <class OElementType, class Allocator, std::size_t... Is>
+    KOKKOS_FUNCTION constexpr VectorField(
+            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>& other,
+            std::index_sequence<Is...> const&) noexcept
+        : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
     {
     }
 
-    /** Element access using a multi-dimensional DiscreteElement
+    /** Constructs a new VectorField from a VectorFieldMem, yields a new view to the same data
+     * @param other the VectorFieldMem to view
+     */
+    // Disabled by SFINAE in the case of `ElementType` is not `const` to avoid write access
+    template <
+            class OElementType,
+            std::size_t... Is,
+            class SFINAEElementType = ElementType,
+            class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
+            class Allocator>
+    KOKKOS_FUNCTION constexpr VectorField(
+            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator> const& other,
+            std::index_sequence<Is...> const&) noexcept
+        : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+    {
+    }
+
+    /** Constructs a new VectorField by copy of a chunk, yields a new view to the same data
+     * @param other the VectorField to move
+     */
+    template <class OElementType, std::size_t... Is>
+    KOKKOS_FUNCTION constexpr VectorField(
+            VectorField<
+                    OElementType,
+                    index_range_type,
+                    NDTag,
+                    LayoutStridedPolicy,
+                    MemorySpace> const& other,
+            std::index_sequence<Is...> const&) noexcept
+        : base_type((ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other))...)
+    {
+    }
+
+    template <class SliceType, std::size_t... Is>
+    constexpr auto get_slice(SliceType const& slice_spec, std::index_sequence<Is...> const&)
+    {
+        auto chunk_slices = std::make_tuple(
+                this->template get<ddc::type_seq_element_t<Is, NDTag>>()[slice_spec]...);
+        using FieldType = std::tuple_element_t<0, decltype(chunk_slices)>;
+        return VectorField<
+                ElementType,
+                typename FieldType::discrete_domain_type,
+                NDTag,
+                typename FieldType::layout_type,
+                typename FieldType::memory_space>(std::move(std::get<Is>(chunk_slices))...);
+    }
+
+    /** Element access using a multi-dimensional Idx
      * @param delems discrete coordinates
      * @return copy of this element
      */
     template <class... ODDims, typename T, T... ints>
-    element_type operator()(
-            ddc::DiscreteElement<ODDims...> const& delems,
-            std::integer_sequence<T, ints...>) const noexcept
+    KOKKOS_FUNCTION element_type
+    operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>) const noexcept
     {
         return element_type((base_type::m_values[ints](delems))...);
     }
 
 public:
     /// Empty VectorField
-    VectorField() = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorField() = default;
 
-    /**
-     * Construct a VectorField on a domain with uninitialized values
-     *
-     * @param[in] domain The domain on which the chunk will be defined.
-     * @param[in] allocator An optional allocator used to create the chunks.
+    /// VectorField destructor
+    KOKKOS_DEFAULTED_FUNCTION ~VectorField() = default;
+
+    /** Constructs a new VectorField by copy, yields a new view to the same data
+     * @param other the VectorField to copy
      */
-    explicit VectorField(discrete_domain_type const& domain, Allocator allocator = Allocator())
-        : VectorField(domain, allocator, std::make_index_sequence<base_type::NDims> {})
-    {
-    }
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorField(VectorField const& other) = default;
 
-    /// Deleted: use deepcopy instead
-    VectorField(VectorField const& other) = delete;
-
-    /**
-     * Constructs a new VectorField by move
+    /** Constructs a new VectorField by move
      * @param other the VectorField to move
      */
-    VectorField(VectorField&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorField(VectorField&& other) = default;
 
-    /// Deleted: use deepcopy instead
-    VectorField& operator=(VectorField const& other) = delete;
+    /** Constructs a new VectorField from a VectorFieldMem, yields a new view to the same data
+     * @param other the VectorFieldMem to view
+     */
+    template <class OElementType, class Allocator>
+    KOKKOS_FUNCTION constexpr VectorField(
+            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>& other) noexcept
+        : VectorField(other, std::make_index_sequence<base_type::NDims> {})
+    {
+    }
 
-    /**
-     * Move-assigns a new value to this VectorFieldSpan
-     * @param other the VectorFieldSpan to move
+    /** Constructs a new VectorField from a VectorFieldMem, yields a new view to the same data
+     * @param other the VectorFieldMem to view
+     */
+    // Disabled by SFINAE in the case of `ElementType` is not `const` to avoid write access
+    template <
+            class OElementType,
+            class SFINAEElementType = ElementType,
+            class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
+            class Allocator>
+    KOKKOS_FUNCTION constexpr VectorField(
+            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator> const& other) noexcept
+        : VectorField(other, std::make_index_sequence<base_type::NDims> {})
+    {
+    }
+
+    /** Constructs a new VectorField by copy of a chunk, yields a new view to the same data
+     * @param other the VectorField to move
+     */
+    template <class OElementType>
+    KOKKOS_FUNCTION constexpr VectorField(VectorField<
+                                          OElementType,
+                                          index_range_type,
+                                          NDTag,
+                                          LayoutStridedPolicy,
+                                          MemorySpace> const& other) noexcept
+        : VectorField(other, std::make_index_sequence<base_type::NDims> {})
+    {
+    }
+
+    /** Constructs a new VectorField from scratch
+     * @param ptr the allocation pointer to the data
+     * @param idx_range the index range that sustains the view
+     */
+    template <
+            class... OElementType,
+            class = std::enable_if_t<
+                    std::conjunction_v<std::is_same<OElementType, ElementType>...>>,
+            class = std::enable_if_t<sizeof...(OElementType) == base_type::NDims>>
+    KOKKOS_FUNCTION VectorField(index_range_type const& idx_range, OElementType*... ptr)
+        : base_type((field_type(ptr, idx_range))...)
+    {
+    }
+
+    /** Constructs a new VectorField containing references to Field.
+     * @param fields The Fields.
+     */
+    template <
+            class... FieldType,
+            class = std::enable_if_t<std::conjunction_v<std::is_same<FieldType, field_type>...>>>
+    KOKKOS_FUNCTION constexpr VectorField(FieldType... fields) : base_type(std::move(fields)...)
+    {
+    }
+
+    /** Copy-assigns a new value to this VectorField, yields a new view to the same data
+     * @param other the VectorField to copy
      * @return *this
      */
-    VectorField& operator=(VectorField&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorField& operator=(VectorField const& other) = default;
 
-    ~VectorField() = default;
+    /** Move-assigns a new value to this VectorField
+     * @param other the VectorField to move
+     * @return *this
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr VectorField& operator=(VectorField&& other) = default;
 
     /**
-     * Get a constant reference to this vector field.
+     * Get a constant reference to the vector field referred to by this vector field span.
      *
-     * @return A constant reference to this vector field.
+     * This function is designed to match the equivalent function in DDC. In Gysela it should
+     * not be called directly. Instead the global function get_const_field should be used.
+     *
+     * @return A constant reference to the vector field.
      */
-    view_type span_cview() const
+    constexpr view_type span_cview() const
     {
         return view_type(*this);
     }
 
     /**
-     * Get a constant reference to this vector field.
+     * Get a modifiable reference to the vector field referred to by this vector field span.
      *
-     * @return A constant reference to this vector field.
+     * This function is designed to match the equivalent function in DDC. In Gysela it should
+     * not be called directly. Instead the global function get_field should be used.
+     *
+     * @return A constant reference to the vector field.
      */
-    view_type span_view() const
+    constexpr span_type span_view() const
     {
-        return view_type(*this);
+        return *this;
     }
 
-    /**
-     * Get a modifiable reference to this vector field.
-     *
-     * @return A modifiable reference to this vector field.
-     */
-    span_type span_view()
-    {
-        return span_type(*this);
-    }
-
-    /** Element access using a list of DiscreteElement
+    /** Element access using a list of Idxs
      * @param delems 1D discrete coordinates
      * @return copy of this element
      */
     template <class... ODDims>
-    element_type operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION element_type operator()(Idx<ODDims> const&... delems) const noexcept
     {
-        ddc::DiscreteElement<ODDims...> delem_idx(delems...);
+        Idx<ODDims...> delem_idx(delems...);
         return this->
         operator()(delem_idx, std::make_integer_sequence<int, element_type::size()> {});
     }
 
-    /** Element access using a multi-dimensional DiscreteElement
+    /** Element access using a multi-dimensional Idx
      * @param delems discrete coordinates
      * @return copy of this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    element_type operator()(ddc::DiscreteElement<ODDims...> const& delems) const noexcept
+    KOKKOS_FUNCTION element_type operator()(Idx<ODDims...> const& delems) const noexcept
     {
         return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
     }
@@ -191,62 +318,40 @@ public:
     /**
      * @brief Slice out some dimensions.
      *
-     * Get the VectorField on the reduced domain which is obtained by indexing
+     * Get the VectorFieldMem on the reduced index range which is obtained by indexing
      * the dimensions QueryDDims at the position slice_spec.
      *
-     * @param[in] slice_spec The slice describing the domain of interest.
+     * @param[in] slice_spec The slice describing the index range of interest.
      *
-     * @return A constant reference to the vector field on the sliced domain.
+     * @return A reference to the vector field on the sliced index range.
      */
     template <class... QueryDDims>
-    auto operator[](ddc::DiscreteElement<QueryDDims...> const& slice_spec) const
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
     {
-        return span_cview()[slice_spec];
+        return get_slice(slice_spec, std::make_index_sequence<base_type::NDims> {});
     }
 
     /**
      * @brief Slice out some dimensions.
      *
-     * Get the VectorField on the reduced domain which is obtained by indexing
-     * the dimensions QueryDDims at the position slice_spec.
+     * Get the VectorFieldMem on the reduced index range passed as an argument.
      *
-     * @param[in] slice_spec The slice describing the domain of interest.
+     * @param[in] oidx_range The index range of interest.
      *
-     * @return A modifiable reference to the vector field on the sliced domain.
+     * @return A reference to the vector field on the sliced index range.
      */
     template <class... QueryDDims>
-    auto operator[](ddc::DiscreteElement<QueryDDims...> const& slice_spec)
+    constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
-        return span_view()[slice_spec];
-    }
-
-    /**
-     * @brief Slice out some dimensions.
-     *
-     * Get the VectorField on the reduced domain passed as an argument.
-     *
-     * @param[in] odomain The domain of interest.
-     *
-     * @return A modifiable reference to the vector field on the sliced domain.
-     */
-    template <class... QueryDDims>
-    auto operator[](ddc::DiscreteDomain<QueryDDims...> const& odomain) const
-    {
-        return span_cview()[odomain];
-    }
-
-    /**
-     * @brief Slice out some dimensions.
-     *
-     * Get the VectorField on the reduced domain passed as an argument.
-     *
-     * @param[in] odomain The domain of interest.
-     *
-     * @return A modifiable reference to the vector field on the sliced domain.
-     */
-    template <class... QueryDDims>
-    auto operator[](ddc::DiscreteDomain<QueryDDims...> const& odomain)
-    {
-        return span_view()[odomain];
+        return get_slice(oidx_range, std::make_index_sequence<base_type::NDims> {});
     }
 };
+
+template <
+        class ElementType,
+        class IdxRangeType,
+        class NDTag,
+        class LayoutStridedPolicy = std::experimental::layout_right,
+        class MemorySpace = Kokkos::DefaultHostExecutionSpace::memory_space>
+using VectorConstField
+        = VectorField<const ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;

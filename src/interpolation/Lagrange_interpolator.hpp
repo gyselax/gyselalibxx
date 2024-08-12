@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-
 #include <ddc/ddc.hpp>
 
 #include "Lagrange.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "iinterpolator.hpp"
 

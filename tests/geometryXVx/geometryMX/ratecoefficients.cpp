@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <cmath>
 
 #include <ddc/ddc.hpp>
@@ -12,6 +11,7 @@
 
 #include "charge_exchange.hpp"
 #include "constantfluidinitialization.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "diffusiveneutralsolver.hpp"
 #include "geometry.hpp"
 #include "ionization.hpp"

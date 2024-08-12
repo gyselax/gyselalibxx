@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+#include "ddc_alias_inline_functions.hpp"
 #define _USE_MATH_DEFINES
 
 #include <cmath>

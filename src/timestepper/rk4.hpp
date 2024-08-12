@@ -3,6 +3,7 @@
 #include <ddc_helper.hpp>
 #include <vector_field_common.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "itimestepper.hpp"
 
@@ -46,7 +47,7 @@ private:
     using ValField = typename FieldMemType::span_type;
     using ValConstField = typename FieldMemType::view_type;
 
-    using DerivField = typename DerivFieldMemType::span_type;
+    using DerivFieldMem = typename DerivFieldMemType::span_type;
     using DerivConstField = typename DerivFieldMemType::view_type;
 
     IdxRange const m_dom;
@@ -74,7 +75,7 @@ public:
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy) const
+    void update(ValField y, double dt, std::function<void(DerivFieldMem, ValConstField)> dy) const
     {
         using ExecSpace = typename FieldMemType::memory_space::execution_space;
         update(ExecSpace(), y, dt, dy);
@@ -103,7 +104,7 @@ public:
             ExecSpace const& exec_space,
             ValField y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy) const
+            std::function<void(DerivFieldMem, ValConstField)> dy) const
     {
         static_assert(ddc::is_chunk_v<FieldMemType>);
         static_assert(
@@ -142,7 +143,7 @@ public:
             ExecSpace const& exec_space,
             ValField y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy,
+            std::function<void(DerivFieldMem, ValConstField)> dy,
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
         static_assert(
@@ -160,11 +161,11 @@ public:
         DerivFieldMemType m_k4_alloc(m_dom);
         DerivFieldMemType m_k_total_alloc(m_dom);
         ValField m_y_prime = get_field(m_y_prime_alloc);
-        DerivField m_k1 = get_field(m_k1_alloc);
-        DerivField m_k2 = get_field(m_k2_alloc);
-        DerivField m_k3 = get_field(m_k3_alloc);
-        DerivField m_k4 = get_field(m_k4_alloc);
-        DerivField m_k_total = get_field(m_k_total_alloc);
+        DerivFieldMem m_k1 = get_field(m_k1_alloc);
+        DerivFieldMem m_k2 = get_field(m_k2_alloc);
+        DerivFieldMem m_k3 = get_field(m_k3_alloc);
+        DerivFieldMem m_k4 = get_field(m_k4_alloc);
+        DerivFieldMem m_k_total = get_field(m_k_total_alloc);
 
 
         // Save initial conditions
@@ -236,7 +237,7 @@ private:
     }
 
     template <class... DDims>
-    KOKKOS_FUNCTION void fill_k_total(Idx i, DerivField m_k_total, Coord<DDims...> new_val) const
+    KOKKOS_FUNCTION void fill_k_total(Idx i, DerivFieldMem m_k_total, Coord<DDims...> new_val) const
     {
         ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }

@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <ddc/ddc.hpp>
 
 #include <sll/math_tools.hpp>
@@ -7,6 +6,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
 
 namespace FFTPoissonSolverTest {
@@ -174,12 +174,12 @@ static void TestFftPoissonSolver2DCosineSource()
     FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> poisson(gridxy);
 
     DFieldMemXY electrostatic_potential_alloc(gridxy);
-    VectorField<double, IdxRangeXY, NDTag<X, Y>, ddc::DeviceAllocator<double>> electric_field_alloc(
-            gridxy);
+    VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>, ddc::DeviceAllocator<double>>
+            electric_field_alloc(gridxy);
     DFieldMemXY rhs_alloc(gridxy);
 
     DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
-    VectorFieldSpan electric_field = get_field(electric_field_alloc);
+    VectorField electric_field = get_field(electric_field_alloc);
     DFieldXY rhs = get_field(rhs_alloc);
 
     // Initialization of the distribution function --> fill values
