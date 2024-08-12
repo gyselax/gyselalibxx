@@ -68,7 +68,7 @@ jobs:
         cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }} ..
         cmake --build . -j 4
         ctest -j 2 --timeout 5 --output-junit tests.xml
-      with:
+      env:
         OMPI_ALLOW_RUN_AS_ROOT: 1
         OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
     - name: Publish Test Report
