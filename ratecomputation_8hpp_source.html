@@ -106,65 +106,66 @@ $(document).ready(function(){initNavTree('ratecomputation_8hpp_source.html','');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ireactionrate.hpp&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CoeffView&gt;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;DFieldSpX compute_rate_electron_density_temperature(</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        Kokkos::DefaultExecutionSpace exec_space,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        DFieldSpX rate,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        DConstFieldSpX density,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        DConstFieldSpX temperature,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        CoeffView slope_coefficients,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        CoeffView intercept_coefficients,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">double</span> norm_coeff_rate)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            exec_space,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(rate),</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ifspx) {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <span class="keywordtype">double</span> temperature_log10</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                        = Kokkos::log10(temperature(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="keywordtype">double</span> density_log10 = Kokkos::log10(density(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="keywordtype">double</span> rate_log10 = 0.0;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; slope_coefficients.extent(0); ++i) {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                    <span class="keywordtype">double</span> polynomial_cs</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                            = slope_coefficients(i) * density_log10 + intercept_coefficients(i);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                    rate_log10 += polynomial_cs * Kokkos::pow(temperature_log10, i);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                rate(ifspx) = Kokkos::pow(10, rate_log10) * norm_coeff_rate;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            });</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">return</span> rate;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CoeffView&gt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;DFieldSpX compute_rate_ion_temperature(</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        Kokkos::DefaultExecutionSpace exec_space,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        DFieldSpX rate,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        DConstFieldSpX temperature,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        CoeffView polynomial_coefficients,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> norm_coeff_rate)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ddc::parallel_for_each(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            exec_space,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(rate),</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ifspx) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordtype">double</span> temperature_log10</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        = Kokkos::log10(temperature(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordtype">double</span> rate_log10 = 0.0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; polynomial_coefficients.extent(0); ++i) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    rate_log10 += polynomial_coefficients[i] * Kokkos::pow(temperature_log10, i);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                rate(ifspx) = Kokkos::pow(10, rate_log10) * norm_coeff_rate;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            });</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> rate;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// namespace detail</span></div>
-<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:81</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ireactionrate.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CoeffView&gt;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;DFieldSpX compute_rate_electron_density_temperature(</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        Kokkos::DefaultExecutionSpace exec_space,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        DFieldSpX rate,</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        DConstFieldSpX density,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        DConstFieldSpX temperature,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        CoeffView slope_coefficients,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        CoeffView intercept_coefficients,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">double</span> norm_coeff_rate)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            exec_space,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(rate),</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ifspx) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="keywordtype">double</span> temperature_log10</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                        = Kokkos::log10(temperature(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <span class="keywordtype">double</span> density_log10 = Kokkos::log10(density(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordtype">double</span> rate_log10 = 0.0;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; slope_coefficients.extent(0); ++i) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                    <span class="keywordtype">double</span> polynomial_cs</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                            = slope_coefficients(i) * density_log10 + intercept_coefficients(i);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    rate_log10 += polynomial_cs * Kokkos::pow(temperature_log10, i);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                rate(ifspx) = Kokkos::pow(10, rate_log10) * norm_coeff_rate;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            });</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> rate;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CoeffView&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;DFieldSpX compute_rate_ion_temperature(</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        Kokkos::DefaultExecutionSpace exec_space,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        DFieldSpX rate,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        DConstFieldSpX temperature,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        CoeffView polynomial_coefficients,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">double</span> norm_coeff_rate)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ddc::parallel_for_each(</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            exec_space,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(rate),</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ifspx) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordtype">double</span> temperature_log10</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        = Kokkos::log10(temperature(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="keywordtype">double</span> rate_log10 = 0.0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; polynomial_coefficients.extent(0); ++i) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    rate_log10 += polynomial_coefficients[i] * Kokkos::pow(temperature_log10, i);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                rate(ifspx) = Kokkos::pow(10, rate_log10) * norm_coeff_rate;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            });</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> rate;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace detail</span></div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:82</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

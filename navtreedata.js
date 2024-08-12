@@ -69,7 +69,6 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Geometry (vpar, mu)", "src_geometryVparMu.html", "src_geometryVparMu" ],
     [ "Gyselalib++ tests", "tests.html", "tests" ],
     [ "Collisions test", "tests_geometry5D_collisions.html", null ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
@@ -82,12 +81,12 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionSpVparMu.html#a913b828900b7df56e1f65981a97a47f3",
-"classDiscreteToCartesian.html#ae1bf31c827fc3abbf866d77068a93367",
-"classMPILayout.html#a5883d6c267edba25da7370986eb15720",
-"classPolarSplineEvaluator.html#aa9f2c3bbb2863cd856857fd978cc9af1",
-"curvilinear2d__to__cartesian_8hpp_source.html",
-"polynomial__evaluator_8hpp_source.html",
-"structGridVy.html"
+"classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445",
+"classLagrangeInterpolator.html#a60914d8391f7ea2e47c624a088ec5d92",
+"classPolarSplineEvaluator.html#a648c0a6d88caf58e87f2f0c3101a7102",
+"compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2",
+"output_8hpp_source.html",
+"structIdxRangeSliceIterator.html#a514bf6156b13f8c11c115c7ba569391b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -124,17 +124,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a31e81109c3158ec9c217880fc5564fdb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a31e81109c3158ec9c217880fc5564fdb">CrankNicolson</a> (IdxRange dom, int const counter=int(20), double const epsilon=1e-12)</td></tr>
 <tr class="memdesc:a31e81109c3158ec9c217880fc5564fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a> object.  <a href="classCrankNicolson.html#a31e81109c3158ec9c217880fc5564fdb">More...</a><br /></td></tr>
 <tr class="separator:a31e81109c3158ec9c217880fc5564fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af12cfbf53dd70bc8e32589a94954b286"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#af12cfbf53dd70bc8e32589a94954b286">update</a> (ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy) const</td></tr>
-<tr class="memdesc:af12cfbf53dd70bc8e32589a94954b286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#af12cfbf53dd70bc8e32589a94954b286">More...</a><br /></td></tr>
-<tr class="separator:af12cfbf53dd70bc8e32589a94954b286"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bce43f717b5a582a45345a334b4062c"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
-<tr class="memitem:a1bce43f717b5a582a45345a334b4062c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a1bce43f717b5a582a45345a334b4062c">update</a> (ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy) const</td></tr>
-<tr class="memdesc:a1bce43f717b5a582a45345a334b4062c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#a1bce43f717b5a582a45345a334b4062c">More...</a><br /></td></tr>
-<tr class="separator:a1bce43f717b5a582a45345a334b4062c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a422e7c35f9080b6b6a1df33f4d3fac1b"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
-<tr class="memitem:a422e7c35f9080b6b6a1df33f4d3fac1b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a422e7c35f9080b6b6a1df33f4d3fac1b">update</a> (ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</td></tr>
-<tr class="memdesc:a422e7c35f9080b6b6a1df33f4d3fac1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#a422e7c35f9080b6b6a1df33f4d3fac1b">More...</a><br /></td></tr>
-<tr class="separator:a422e7c35f9080b6b6a1df33f4d3fac1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffa66677ee474545531df76a8c07a6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#aeffa66677ee474545531df76a8c07a6d">update</a> (ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy) const</td></tr>
+<tr class="memdesc:aeffa66677ee474545531df76a8c07a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#aeffa66677ee474545531df76a8c07a6d">More...</a><br /></td></tr>
+<tr class="separator:aeffa66677ee474545531df76a8c07a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55861c1516576c81d426ec330fbb2f80"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:a55861c1516576c81d426ec330fbb2f80"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a55861c1516576c81d426ec330fbb2f80">update</a> (ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy) const</td></tr>
+<tr class="memdesc:a55861c1516576c81d426ec330fbb2f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#a55861c1516576c81d426ec330fbb2f80">More...</a><br /></td></tr>
+<tr class="separator:a55861c1516576c81d426ec330fbb2f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4f2952ddd9d9bac670fafd20e15448f"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:ab4f2952ddd9d9bac670fafd20e15448f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#ab4f2952ddd9d9bac670fafd20e15448f">update</a> (ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</td></tr>
+<tr class="memdesc:ab4f2952ddd9d9bac670fafd20e15448f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#ab4f2952ddd9d9bac670fafd20e15448f">More...</a><br /></td></tr>
+<tr class="separator:ab4f2952ddd9d9bac670fafd20e15448f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a055f6ca4aa70a2a7e04d3780accad4bd"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
 <tr class="memitem:a055f6ca4aa70a2a7e04d3780accad4bd"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a055f6ca4aa70a2a7e04d3780accad4bd">have_converged</a> (ExecSpace const &amp;exec_space, ValConstField y_old, ValConstField y_new) const</td></tr>
 <tr class="memdesc:a055f6ca4aa70a2a7e04d3780accad4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the relative difference of the function between two time steps is below epsilon.  <a href="classCrankNicolson.html#a055f6ca4aa70a2a7e04d3780accad4bd">More...</a><br /></td></tr>
@@ -206,8 +206,8 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af12cfbf53dd70bc8e32589a94954b286"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af12cfbf53dd70bc8e32589a94954b286">&#9670;&nbsp;</a></span>update() <span class="overload">[1/3]</span></h2>
+<a id="aeffa66677ee474545531df76a8c07a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeffa66677ee474545531df76a8c07a6d">&#9670;&nbsp;</a></span>update() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,7 +232,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt;&#160;</td>
           <td class="paramname"><em>dy</em>&#160;</td>
         </tr>
         <tr>
@@ -261,8 +261,8 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
 
 </div>
 </div>
-<a id="a1bce43f717b5a582a45345a334b4062c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1bce43f717b5a582a45345a334b4062c">&#9670;&nbsp;</a></span>update() <span class="overload">[2/3]</span></h2>
+<a id="a55861c1516576c81d426ec330fbb2f80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55861c1516576c81d426ec330fbb2f80">&#9670;&nbsp;</a></span>update() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -295,7 +295,7 @@ template&lt;class ExecSpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt;&#160;</td>
           <td class="paramname"><em>dy</em>&#160;</td>
         </tr>
         <tr>
@@ -325,8 +325,8 @@ template&lt;class ExecSpace &gt; </div>
 
 </div>
 </div>
-<a id="a422e7c35f9080b6b6a1df33f4d3fac1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a422e7c35f9080b6b6a1df33f4d3fac1b">&#9670;&nbsp;</a></span>update() <span class="overload">[3/3]</span></h2>
+<a id="ab4f2952ddd9d9bac670fafd20e15448f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4f2952ddd9d9bac670fafd20e15448f">&#9670;&nbsp;</a></span>update() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +359,7 @@ template&lt;class ExecSpace &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivField.html">DerivField</a>, ValConstField)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt;&#160;</td>
           <td class="paramname"><em>dy</em>, </td>
         </tr>
         <tr>

@@ -124,10 +124,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af559bba295fb3d5fcac425cae71bb972"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">BslAdvectionRTheta</a> (<a class="el" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a>&lt; ddc::NullExtrapolationRule &gt; const &amp;function_interpolator, FootFinder const &amp;foot_finder, Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:af559bba295fb3d5fcac425cae71bb972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an advection operator.  <a href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">More...</a><br /></td></tr>
 <tr class="separator:af559bba295fb3d5fcac425cae71bb972"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ec3143116ac05ac379f74130bdff00f"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorFieldSpan.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field_xy, double dt) const</td></tr>
+<tr class="memitem:a8ec3143116ac05ac379f74130bdff00f"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field_xy, double dt) const</td></tr>
 <tr class="memdesc:a8ec3143116ac05ac379f74130bdff00f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field of the advected function.  <a href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">More...</a><br /></td></tr>
 <tr class="separator:a8ec3143116ac05ac379f74130bdff00f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad039fe94bfb0a44e719464206b0825aa"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorFieldSpan.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; advection_field_rp, CoordXY const &amp;advection_field_xy_center, double dt) const</td></tr>
+<tr class="memitem:ad039fe94bfb0a44e719464206b0825aa"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; advection_field_rp, CoordXY const &amp;advection_field_xy_center, double dt) const</td></tr>
 <tr class="memdesc:ad039fe94bfb0a44e719464206b0825aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field to the advected function.  <a href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">More...</a><br /></td></tr>
 <tr class="separator:ad039fe94bfb0a44e719464206b0825aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -230,7 +230,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td>
           <td class="paramname"><em>advection_field_xy</em>, </td>
         </tr>
         <tr>
@@ -287,7 +287,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorFieldSpan.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;&#160;</td>
           <td class="paramname"><em>advection_field_rp</em>, </td>
         </tr>
         <tr>

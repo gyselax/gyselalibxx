@@ -110,17 +110,17 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/curvilinear2d_to_cartesian.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/discrete_mapping_to_cartesian.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;directional_tag.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;vector_field.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;vector_field_span.hpp&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;advection_domain.hpp&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;i_interpolator_2d_rp.hpp&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;iadvectionrp.hpp&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;spline_foot_finder.hpp&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;advection_domain.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;directional_tag.hpp&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;i_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;iadvectionrp.hpp&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;spline_foot_finder.hpp&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;vector_field.hpp&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;vector_field_mem.hpp&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">  113</a></span>&#160;    DFieldRTheta <a class="code" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">operator()</a>(</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            DFieldRTheta allfdistribu,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="classVectorFieldSpan.html">DConstVectorFieldRTheta&lt;X, Y&gt;</a> advection_field_xy,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="classVectorField.html">DConstVectorFieldRTheta&lt;X, Y&gt;</a> advection_field_xy,</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">// Pre-allocate some memory to prevent allocation later in loop</span></div>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">  153</a></span>&#160;    DFieldRTheta <a class="code" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">operator()</a>(</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            DFieldRTheta allfdistribu,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="classVectorFieldSpan.html">DConstVectorFieldRTheta&lt;R, Theta&gt;</a> advection_field_rp,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="classVectorField.html">DConstVectorFieldRTheta&lt;R, Theta&gt;</a> advection_field_rp,</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            CoordXY <span class="keyword">const</span>&amp; advection_field_xy_center,</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">    </span>{</div>
@@ -188,7 +188,7 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="comment">// Convert advection field on RTheta to advection field on XY</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="classVectorField.html">DVectorFieldMemRTheta&lt;X, Y&gt;</a> advection_field_xy(grid);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="classVectorFieldMem.html">DVectorFieldMemRTheta&lt;X, Y&gt;</a> advection_field_xy(grid);</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        ddc::for_each(grid_without_Opoint, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            CoordRTheta <span class="keyword">const</span> coord_rp(ddc::coordinate(irp));</div>
@@ -235,9 +235,9 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="ttc" id="aclassBslAdvectionRTheta_html_af559bba295fb3d5fcac425cae71bb972"><div class="ttname"><a href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">BslAdvectionRTheta::BslAdvectionRTheta</a></div><div class="ttdeci">BslAdvectionRTheta(PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt; const &amp;function_interpolator, FootFinder const &amp;foot_finder, Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate an advection operator.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:86</div></div>
 <div class="ttc" id="aclassIAdvectionRTheta_html"><div class="ttname"><a href="classIAdvectionRTheta.html">IAdvectionRTheta</a></div><div class="ttdoc">Define the base class of 2D advection operators in polar index range.</div><div class="ttdef"><b>Definition:</b> iadvectionrp.hpp:14</div></div>
 <div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;</a></div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_acef8faad99837d409dafb5dd4df5bfbf"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">PreallocatableSplineInterpolatorRTheta::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorRTheta &gt; preallocate() const override</div><div class="ttdoc">Create a pointer to an instance of the SplineInterpolatorRTheta class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:150</div></div>
-<div class="ttc" id="aclassVectorFieldSpan_html"><div class="ttname"><a href="classVectorFieldSpan.html">VectorFieldSpan</a></div><div class="ttdoc">Pre-declaration of VectorFieldSpan.</div><div class="ttdef"><b>Definition:</b> vector_field_span.hpp:45</div></div>
-<div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">Pre-declaration of VectorField.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:34</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_acef8faad99837d409dafb5dd4df5bfbf"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">PreallocatableSplineInterpolatorRTheta::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorRTheta &gt; preallocate() const override</div><div class="ttdoc">Create a pointer to an instance of the SplineInterpolatorRTheta class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:151</div></div>
+<div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition:</b> vector_field_mem.hpp:45</div></div>
+<div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition:</b> vector_field.hpp:54</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

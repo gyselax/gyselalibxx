@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['operator_21_3d_1652',['operator!=',['../structDiscreteSubDomainIterator.html#a6121d8945c6deea17db11f2e76723743',1,'DiscreteSubDomainIterator']]],
-  ['operator_2b_1653',['operator+',['../structDiscreteSubDomainIterator.html#a430bf90ca1c2f9c68f59e5763614f5a3',1,'DiscreteSubDomainIterator::operator+()'],['../structDiscreteSubDomainIterator.html#a8d41ba130c04f24815d40de86d212877',1,'DiscreteSubDomainIterator::operator+()']]],
-  ['operator_2d_1654',['operator-',['../structDiscreteSubDomainIterator.html#abdc63a536f41696fe1ff1f1c86714a91',1,'DiscreteSubDomainIterator::operator-()'],['../structDiscreteSubDomainIterator.html#a8c1486248ee26c89442fb443d916d2ff',1,'DiscreteSubDomainIterator::operator-()']]],
-  ['operator_3c_1655',['operator&lt;',['../structDiscreteSubDomainIterator.html#a35e9ae5ac23351f6909ebbcd353fa072',1,'DiscreteSubDomainIterator']]],
-  ['operator_3c_3d_1656',['operator&lt;=',['../structDiscreteSubDomainIterator.html#a4fa232576db281d74f5b6b5c9491901d',1,'DiscreteSubDomainIterator']]],
-  ['operator_3d_3d_1657',['operator==',['../structDiscreteSubDomainIterator.html#af78311c732bda4c1030a781d88b26a93',1,'DiscreteSubDomainIterator']]],
-  ['operator_3e_1658',['operator&gt;',['../structDiscreteSubDomainIterator.html#a33eab5133247e0453f87e63a0548b67d',1,'DiscreteSubDomainIterator']]],
-  ['operator_3e_3d_1659',['operator&gt;=',['../structDiscreteSubDomainIterator.html#a2c0f1f5d668bca96d124cb7033420cdc',1,'DiscreteSubDomainIterator']]]
+  ['operator_21_3d_1659',['operator!=',['../structIdxRangeSliceIterator.html#af5bc866513c146093b042f3780c0be4e',1,'IdxRangeSliceIterator']]],
+  ['operator_2b_1660',['operator+',['../structIdxRangeSliceIterator.html#a9539566c24effedeeaa603fcf15c4811',1,'IdxRangeSliceIterator::operator+()'],['../structIdxRangeSliceIterator.html#ae0ee5c8ecbc1cb7b6147f30ac2f3aab7',1,'IdxRangeSliceIterator::operator+()']]],
+  ['operator_2d_1661',['operator-',['../structIdxRangeSliceIterator.html#a3cfcae6e2ba479c5077abc819313c12e',1,'IdxRangeSliceIterator::operator-()'],['../structIdxRangeSliceIterator.html#ad7923f6934b84d704dc59678b045367b',1,'IdxRangeSliceIterator::operator-()']]],
+  ['operator_3c_1662',['operator&lt;',['../structIdxRangeSliceIterator.html#ae6a416f58a4540fa3d3dc9cda6e8b9b5',1,'IdxRangeSliceIterator']]],
+  ['operator_3c_3d_1663',['operator&lt;=',['../structIdxRangeSliceIterator.html#a0bf9255c2ed25e24bda95077a79513f1',1,'IdxRangeSliceIterator']]],
+  ['operator_3d_3d_1664',['operator==',['../structIdxRangeSliceIterator.html#a153e037eed89b24fe5ada80196e05405',1,'IdxRangeSliceIterator']]],
+  ['operator_3e_1665',['operator&gt;',['../structIdxRangeSliceIterator.html#a204f90d83624f50a726cb50539ea1e4d',1,'IdxRangeSliceIterator']]],
+  ['operator_3e_3d_1666',['operator&gt;=',['../structIdxRangeSliceIterator.html#a959c6f01604840ae112002c63bb1a340',1,'IdxRangeSliceIterator']]]
 ];

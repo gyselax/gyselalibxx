@@ -12,6 +12,7 @@ var src =
     ] ],
     [ "Geometry (mu, vpar, r, theta, phi)", "src_geometry5D.html", "src_geometry5D" ],
     [ "Geometry (r, theta)", "src_geometryRTheta.html", "src_geometryRTheta" ],
+    [ "Geometry (vpar, mu)", "src_geometryVparMu.html", "src_geometryVparMu" ],
     [ "Geometry (x, v_x)", "src_geometryXVx.html", "src_geometryXVx" ],
     [ "Geometry (x, y)", "src_geometryXY.html", "src_geometryXY" ],
     [ "Geometry (x, y, v_x, v_y)", "src_geometryXYVxVy.html", "src_geometryXYVxVy" ],
