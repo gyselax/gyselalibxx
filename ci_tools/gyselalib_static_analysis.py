@@ -377,7 +377,8 @@ def check_directives(file):
     if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
         report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
-    directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")}
+    directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
+                        if Path(d.attrib['file']) == file.file}
     include_directives = {linenr: words[1] for linenr, words in directives.items() if len(words)>1 and words[0] == '#include'}
     for linenr, include_str in include_directives.items():
         include_file = include_str[1:-1]
@@ -413,12 +414,16 @@ if __name__ == '__main__':
     for f in multipatch_geom:
         if no_file_filter or f in filter_files:
             print("------------- Checking ", f, " -------------")
-            subprocess.run([*cppcheck_command, f], check=False)
+            p = subprocess.run([*cppcheck_command, f], check=False)
+            if p.returncode:
+                error_level = max(error_level, possible_error_levels[STYLE])
 
     for geom, files in relevant_files.items():
         if no_file_filter or any(f in filter_files for f in files):
             print("------------- Checking ", geom, " -------------")
-            subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in filter_files], check=False)
+            p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in filter_files], check=False)
+            if p.returncode:
+                error_level = max(error_level, possible_error_levels[STYLE])
 
     files = [FileObject(f) for f in HOME_DIR.glob('**/*.dump')]
     for myfile in files:
