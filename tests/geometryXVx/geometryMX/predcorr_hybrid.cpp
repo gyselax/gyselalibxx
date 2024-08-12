@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <cmath>
 
 #include <ddc/ddc.hpp>
@@ -16,6 +15,7 @@
 #include "chargedensitycalculator.hpp"
 #include "constantfluidinitialization.hpp"
 #include "constantrate.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"

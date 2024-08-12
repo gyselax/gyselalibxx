@@ -5,6 +5,7 @@
 #include <ddc_helper.hpp>
 #include <vector_field_common.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "itimestepper.hpp"
 
@@ -43,7 +44,7 @@ private:
     using ValField = typename FieldMemType::span_type;
     using ValConstField = typename FieldMemType::view_type;
 
-    using DerivField = typename DerivFieldMemType::span_type;
+    using DerivFieldMem = typename DerivFieldMemType::span_type;
     using DerivConstField = typename DerivFieldMemType::view_type;
 
     IdxRange const m_dom;
@@ -71,7 +72,7 @@ public:
      * @param[in] dy
      *     The function describing how the derivative of the evolve function is calculated.
      */
-    void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy) const
+    void update(ValField y, double dt, std::function<void(DerivFieldMem, ValConstField)> dy) const
     {
         using ExecSpace = typename FieldMemType::memory_space::execution_space;
         update(ExecSpace(), y, dt, dy);
@@ -100,7 +101,7 @@ public:
             ExecSpace const& exec_space,
             ValField y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy) const
+            std::function<void(DerivFieldMem, ValConstField)> dy) const
     {
         static_assert(ddc::is_chunk_v<FieldMemType>);
         static_assert(
@@ -139,7 +140,7 @@ public:
             ExecSpace const& exec_space,
             ValField y,
             double dt,
-            std::function<void(DerivField, ValConstField)> dy,
+            std::function<void(DerivFieldMem, ValConstField)> dy,
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
         DerivFieldMemType m_k1(m_dom);

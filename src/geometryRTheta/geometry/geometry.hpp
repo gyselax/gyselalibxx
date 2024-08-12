@@ -4,11 +4,12 @@
 
 #include <sll/polar_bsplines.hpp>
 
-#include <directional_tag.hpp>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
-
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "directional_tag.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 
 /*
@@ -248,26 +249,26 @@ using SplinePolar = PolarSpline<PolarBSplinesRTheta>;
 using IdxPolarBspl = Idx<PolarBSplinesRTheta>;
 
 
-// --- VectorField definitions
+// --- VectorFieldMem definitions
 template <class Dim1, class Dim2>
-using DVectorFieldMemRTheta = VectorField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
-
-template <class Dim1, class Dim2>
-using DVectorFieldRTheta = VectorFieldSpan<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using DVectorFieldMemRTheta = VectorFieldMem<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DConstVectorFieldRTheta = VectorFieldView<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using DConstVectorFieldRTheta = VectorConstField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffsMem2D = VectorField<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorSplineCoeffsMem2D = VectorFieldMem<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffs2D = VectorFieldSpan<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using VectorSplineCoeffs2D = VectorField<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using ConstVectorSplineCoeffs2D = VectorFieldView<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using ConstVectorSplineCoeffs2D = VectorConstField<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 
 

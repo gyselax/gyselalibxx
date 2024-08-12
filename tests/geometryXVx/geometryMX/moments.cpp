@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <cmath>
 
 #include <ddc/ddc.hpp>
@@ -10,6 +9,7 @@
 #include <pdi.h>
 
 #include "constantfluidinitialization.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "species_info.hpp"
 

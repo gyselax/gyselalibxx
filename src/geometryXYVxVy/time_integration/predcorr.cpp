@@ -5,9 +5,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <iqnsolver.hpp>
-#include <ivlasovsolver.hpp>
-
+#include "ddc_alias_inline_functions.hpp"
+#include "iqnsolver.hpp"
+#include "ivlasovsolver.hpp"
 #include "predcorr.hpp"
 
 PredCorr::PredCorr(IVlasovSolver const& vlasov_solver, IQNSolver const& poisson_solver)

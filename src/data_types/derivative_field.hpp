@@ -1,297 +1,357 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 
+#include "ddc_aliases.hpp"
 #include "derivative_field_common.hpp"
-#include "derivative_field_span.hpp"
+
+template <class, class, int, class>
+class DerivFieldMem;
 
 /**
  * See @ref DerivFieldImplementation
  */
 template <
         class ElementType,
-        class Domain,
-        int NDerivs,
-        class Allocator = ddc::HostAllocator<ElementType>>
+        class SupportType,
+        class LayoutStridedPolicy = std::experimental::layout_right,
+        class MemorySpace = Kokkos::DefaultHostExecutionSpace::memory_space>
 class DerivField;
 
-template <class ElementType, class SupportType, int NDerivs, class Allocator>
-inline constexpr bool
-        enable_deriv_field<DerivField<ElementType, SupportType, NDerivs, Allocator>> = true;
+template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>
+inline constexpr bool enable_deriv_field<
+        DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
 
+template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>
+inline constexpr bool enable_borrowed_deriv_field<
+        DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
+
+namespace ddcHelper {
 
 /**
- * @brief A class which holds a chunk of memory describing a field and its derivatives.
+ * @brief Copy the contents of one DerivField into another.
  *
- * The values of the field and the derivatives may be defined on different domains, but
+ * @param dst The DerivField where the data will be saved.
+ * @param src The DerivField whose data will be copied.
+ */
+template <
+        class FieldDst,
+        class FieldSrc,
+        std::enable_if_t<
+                is_borrowed_deriv_field_v<FieldDst> && is_borrowed_deriv_field_v<FieldSrc>,
+                bool> = true>
+auto deepcopy(FieldDst&& dst, FieldSrc&& src)
+{
+    assert(dst.get_values_field().domain().extents() == src.get_values_field().domain().extents());
+
+    DerivField dst_field = dst.span_view();
+    DerivField src_field = src.span_view();
+
+    dst_field.deepcopy(src_field);
+
+    return dst_field;
+}
+
+/**
+ * @brief Copy the contents of one DerivField into another.
+ *
+ * @param execution_space The Kokkos execution space where the copy will be carried out.
+ * @param dst The DerivField where the data will be saved.
+ * @param src The DerivField whose data will be copied.
+ */
+template <class ExecSpace, class FieldDst, class FieldSrc>
+auto deepcopy(ExecSpace const& execution_space, FieldDst&& dst, FieldSrc&& src)
+{
+    static_assert(is_borrowed_deriv_field_v<FieldDst>);
+    static_assert(is_borrowed_deriv_field_v<FieldSrc>);
+
+    assert(dst.get_values_field().idx_range().extents()
+           == src.get_values_field().idx_range().extents());
+
+    DerivField dst_field = get_field(dst);
+    DerivField src_field = get_field(src);
+
+    dst_field.deepcopy(execution_space, src_field);
+
+    return dst_field;
+}
+
+} // namespace ddcHelper
+
+/**
+ * @brief A class which holds references to chunks of memory describing a field and its derivatives.
+ *
+ * The values of the field and the derivatives may be defined on different index ranges, but
  * the underlying mesh must be the same for both.
  *
  * @anchor DerivFieldImplementation
  *
  * @tparam ElementType The type of the elements inside the chunks.
- * @tparam ddc::DiscreteDomain<DDims...> The domain on which the internal chunks are defined.
- *          This domain is the physical domain on which the values are defined combined with
- *          the domain of the derivatives of interest (e.g. ddc::DiscreteDomain<Deriv<IDimX>, IDimX, IDimY>).
- * @tparam NDerivs The number of derivatives which are defined in the dimensions where derivatives
- *          appear.
- * @tparam Allocator The Allocator which is used to build the Chunk. This provides information
- *          about the memory space where the data will be saved.
+ * @tparam IdxRange<DDims...> The index range on which the internal fields are defined.
+ *          This index range is the physical index range on which the values are defined combined with
+ *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<IDimX>, IDimX, IDimY>).
+ * @tparam LayoutStridedPolicy The way in which the memory is laid out in memory (contiguous in
+ *          the leading/trailing dimension, strided, etc).
+ * @tparam MemorySpace The memory space where the data is saved (CPU/GPU).
  */
-template <class ElementType, class... DDims, int NDerivs, class Allocator>
-class DerivField<ElementType, ddc::DiscreteDomain<DDims...>, NDerivs, Allocator>
+template <class ElementType, class... DDims, class LayoutStridedPolicy, class MemorySpace>
+class DerivField<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>
     : public DerivFieldCommon<
-              ddc::Chunk<ElementType, ddc::DiscreteDomain<DDims...>, Allocator>,
-              ddc::DiscreteDomain<DDims...>>
+              Field<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>,
+              IdxRange<DDims...>>
 {
 private:
     /// @brief The class from which this object inherits.
     using base_type = DerivFieldCommon<
-            ddc::Chunk<ElementType, ddc::DiscreteDomain<DDims...>, Allocator>,
-            ddc::DiscreteDomain<DDims...>>;
+            Field<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>,
+            IdxRange<DDims...>>;
 
 public:
     /// @brief The type of the elements in the chunks.
     using element_type = typename base_type::element_type;
 
-    /// @brief The DiscreteDomain on which the chunks in this object are defined.
+    /**
+     * @brief The IdxRange on which the chunks in this object are defined.
+     *
+     * This is a DDC keyword used to make this class interchangeable with Field.
+     * In DDC IdxRange types are referred to as DiscreteDomain types.
+     */
     using discrete_domain_type = typename base_type::discrete_domain_type;
+    /// @brief The IdxRange on which the fields in this object are defined.
+    using index_range_type = typename base_type::index_range_type;
 
-    /// @brief The DiscreteElement which can be used to index this object.
+    /**
+     * @brief The Idx which can be used to index this object.
+     *
+     * This is a DDC keyword used to make this class interchangeable with Field.
+     * In DDC Idx types are referred to as DiscreteElement types.
+     */
     using discrete_element_type = typename base_type::discrete_element_type;
 
     /// @brief A type sequence containing all derivatives present in this object.
     using deriv_tags = typename base_type::deriv_tags;
 
-    /// @brief A type sequence containing all dimensions for which derivatives are present in this object.
-    using physical_deriv_dims = typename base_type::physical_deriv_dims;
+    /// @brief A type sequence containing all grid types for which derivatives are present in this object.
+    using physical_deriv_grids = typename detail::strip_deriv_t<deriv_tags>;
 
-    /// @brief A type sequence containing all the physical dimensions on which the chunks are defined.
-    using physical_dims = typename base_type::physical_dims;
+    /// @brief A type sequence containing all the grids on which the fields are defined.
+    using physical_grids = typename base_type::physical_grids;
 
-    /// @brief The physical domain on which the field is defined.
-    using physical_domain_type = typename base_type::physical_domain_type;
+    /// @brief The physical index range on which the field is defined.
+    using physical_idx_range_type = typename base_type::physical_idx_range_type;
 
-    /// @brief The type of the chunk stored in the array
+    /**
+     * @brief The type of the field stored in the array
+     *
+     * This is a DDC keyword used to make this class interchangeable with Field.
+     * In DDC FieldMem types are referred to as Chunk types and Field types are
+     * referred to as ChunkSpan/ChunkView.
+     */
     using chunk_type = typename base_type::chunk_type;
 
-    template <class, class, class, class>
-    friend class DerivSpan;
+    /// @brief The type of a modifiable span of this field. This is a DDC keyword used to make this class interchangeable with Field.
+    using span_type = DerivField<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>;
 
-    /// type of a modifiable span of this span
-    using span_type = DerivFieldSpan<
-            ElementType,
-            ddc::DiscreteDomain<DDims...>,
-            typename chunk_type::layout_type,
-            typename chunk_type::memory_space>;
-
-    /// type of a constant view of this span
-    using view_type = DerivFieldSpan<
-            ElementType const,
-            ddc::DiscreteDomain<DDims...>,
-            typename chunk_type::layout_type,
-            typename chunk_type::memory_space>;
+    /// @brief The type of a constant view of this field. This is a DDC keyword used to make this class interchangeable with Field.
+    using view_type
+            = DerivField<ElementType const, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>;
 
 private:
-    /** @brief A domain describing all the domains where derivatives are defined.
-     *
-     * A domain describing all the domains where derivatives are defined. If this domain is
-     * sliced into a 1D object then it describes the domain on which the derivative in that
-     * direction is defined. This object is used internally to initialise the chunks.
-     */
-    using physical_deriv_domain_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_deriv_dims>;
+    /// @brief The IdxRange which describes the derivatives present on each chunk.
+    using discrete_deriv_idx_range_type = typename base_type::discrete_deriv_idx_range_type;
 
-    /// @brief The DiscreteDomain which describes the derivatives present on each chunk.
-    using discrete_deriv_domain_type = typename base_type::discrete_deriv_domain_type;
-
-    /** @brief The DiscreteElement which describes the order of the derivatives in each dimension.
+    /** @brief The Idx which describes the order of the derivatives in each dimension.
      * (e.g. second-order derivative).
      */
-    using discrete_deriv_element_type = typename base_type::discrete_deriv_element_type;
+    using discrete_deriv_index_type = typename base_type::discrete_deriv_index_type;
 
-    using mapping_type = typename chunk_type::mapping_type;
-
-    using extents_type = typename chunk_type::extents_type;
-
-    using allocator_type = ddc::KokkosAllocator<element_type, typename chunk_type::memory_space>;
-
-    using internal_mdspan_type = typename base_type::internal_mdspan_type;
+    /// @brief The type of a reference to an element of the mdspan
+    using reference = typename chunk_type::reference;
 
     /// @brief The number of chunks which must be created to describe this object.
-    static constexpr int n_chunks = base_type::n_chunks;
+    static constexpr int n_fields = base_type::n_fields;
 
 private:
-    /// @brief A function to get the domain along direction Tag for the ArrayIndex-th element of internal_chunks.
+    /** @brief Get the subindex range to be extracted from a DerivFieldMem to build the internal_chunk at position ArrayIndex
+     * along dimension Tag.
+     */
     template <std::size_t ArrayIndex, class Tag>
-    ddc::DiscreteDomain<Tag> get_domain(
-            physical_domain_type val_domain,
-            physical_deriv_domain_type deriv_domains)
+    KOKKOS_FUNCTION constexpr Idx<Tag> get_chunk_subidx_range_1d_idx()
     {
-        // If the Tag describes a dimension for which a derivative is defined
-        if constexpr (ddc::in_tags_v<Tag, physical_deriv_dims>) {
-            // If the Chunk at this index contains the derivatives of this dimension
-            if constexpr (ArrayIndex & (1 << ddc::type_seq_rank_v<Tag, physical_deriv_dims>)) {
-                return ddc::select<Tag>(deriv_domains);
-            }
-            // If the Chunk at this index doesn't contain derivatives of this dimension
-            else {
-                return ddc::select<Tag>(val_domain);
-            }
-        }
-        // If the Tag describes a derivative
-        else if constexpr (ddc::in_tags_v<Tag, deriv_tags>) {
-            // If the Chunk at this index contains the derivatives of this dimension
+        // The Tag describes a dimension for which a derivative is defined
+        if constexpr (ddc::in_tags_v<Tag, deriv_tags>) {
+            // If the Field at this index contains the derivatives of this dimension
             if constexpr (ArrayIndex & (1 << ddc::type_seq_rank_v<Tag, deriv_tags>)) {
-                return ddc::DiscreteDomain<
-                        Tag>(ddc::DiscreteElement<Tag>(1), ddc::DiscreteVector<Tag>(NDerivs));
+                return Idx<Tag>(1);
             }
-            // If the Chunk at this index doesn't contain derivatives of this dimension
+            // If the Field at this index doesn't contain derivatives of this dimension
             else {
-                return ddc::DiscreteDomain<
-                        Tag>(ddc::DiscreteElement<Tag>(0), ddc::DiscreteVector<Tag>(1));
-            }
-        }
-        // If the Tag describes a dimension for which derivatives are not defined.
-        else {
-            return ddc::select<Tag>(val_domain);
-        }
-    }
-
-    /// @brief Get the domain of the Chunk at the index ArrayIndex in internal_chunks.
-    template <std::size_t ArrayIndex>
-    ddc::DiscreteDomain<DDims...> get_chunk_domain(
-            physical_domain_type val_domain,
-            physical_deriv_domain_type deriv_domains)
-    {
-        return ddc::DiscreteDomain<DDims...>(
-                get_domain<ArrayIndex, DDims>(val_domain, deriv_domains)...);
-    }
-
-    /// @brief Get the size of the mdspan in dimension QueryDDim, at the index ArrayIndex.
-    template <class QueryDDim, std::size_t ArrayIndex>
-    std::size_t get_span_size()
-    {
-        if constexpr (ddc::in_tags_v<QueryDDim, deriv_tags>) {
-            if (ArrayIndex & (1 << ddc::type_seq_rank_v<QueryDDim, deriv_tags>)) {
-                return NDerivs;
-            } else {
-                return 1;
-            }
-        } else if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_dims>) {
-            if constexpr (
-                    ArrayIndex & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
-                DiscreteSubDomain<QueryDDim> local_dom(base_type::m_cross_derivative_domain);
-                return local_dom.extents().value();
-            } else {
-                ddc::DiscreteDomain<QueryDDim> local_dom(base_type::m_physical_domain);
-                return local_dom.extents().value();
+                return Idx<Tag>(0);
             }
         } else {
-            ddc::DiscreteDomain<QueryDDim> local_dom(base_type::m_physical_domain);
-            return local_dom.extents().value();
+            // Empty IdxRange to be discarded
+            return Idx<Tag>();
         }
     }
 
-    /// @brief Make the internal mdspan that will be saved in internal_chunks at the index ArrayIndex.
+    /// @brief Get the subindex range to be extracted from a DerivFieldMem to build the internal_chunk at position ArrayIndex
     template <std::size_t ArrayIndex>
-    std::enable_if_t<std::is_constructible_v<mapping_type, extents_type>, internal_mdspan_type>
-    make_internal_mdspan(
-            ddc::KokkosAllocator<element_type, typename chunk_type::memory_space> allocator)
+    KOKKOS_FUNCTION constexpr discrete_deriv_index_type get_chunk_subidx_range_idx()
     {
-        std::size_t alloc_size(((get_span_size<DDims, ArrayIndex>()) * ...));
-        element_type* ptr = allocator.allocate("", alloc_size);
-
-        extents_type extents_r(get_span_size<DDims, ArrayIndex>()...);
-        mapping_type mapping_r(extents_r);
-
-        std::array<std::size_t, sizeof...(DDims)> strides_s {
-                mapping_r.stride(ddc::type_seq_rank_v<DDims, ddc::detail::TypeSeq<DDims...>>)...};
-        std::experimental::layout_stride::mapping<extents_type> mapping_s(extents_r, strides_s);
-        return internal_mdspan_type(ptr, mapping_s);
+        return discrete_deriv_index_type(get_chunk_subidx_range_1d_idx<ArrayIndex, DDims>()...);
     }
 
-    /// @brief Initialise the chunks inside internal_chunks.
-    template <std::size_t... ArrayIndex>
-    void initialise_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
+    /// @brief Initialise fields inside internal_fields.
+    template <class Field, std::size_t... ArrayIndex>
+    KOKKOS_FUNCTION constexpr void initialise_fields(
+            Field const& chunks,
+            std::index_sequence<ArrayIndex...>)
     {
-        ((base_type::internal_chunks[ArrayIndex] = make_internal_mdspan<ArrayIndex>(allocator)),
+        ((base_type::internal_fields[ArrayIndex] = chunks.internal_fields[chunks.get_array_index(
+                  get_chunk_subidx_range_idx<ArrayIndex>())]),
          ...);
+    }
+
+    auto get_kokkos_view_from_internal_chunk(int index)
+    {
+        typename base_type::internal_mdspan_type field = base_type::internal_fields[index];
+        auto kokkos_layout = ddc::detail::build_kokkos_layout(
+                field.extents(),
+                field.mapping(),
+                std::make_index_sequence<sizeof...(DDims)> {});
+        return Kokkos::View<
+                ddc::detail::mdspan_to_kokkos_element_t<ElementType, sizeof...(DDims)>,
+                decltype(kokkos_layout),
+                MemorySpace>(field.data_handle(), kokkos_layout);
     }
 
 public:
     /**
-     * @brief The constructor for DerivField. The constructor initialises the chunks using
-     * the provided domains.
+     * @brief Copy-construct a DerivField
      *
-     * @param val_domain The domain on which the values of the field are defined.
-     * @param m_deriv_domain The 1D sub-domains on which the derivatives of the field are defined.
+     * @param other The DerivField being copied.
      */
-    template <class... DerivDoms>
-    DerivField(physical_domain_type val_domain, DiscreteSubDomain<DerivDoms>... m_deriv_domain)
-        : DerivField(allocator_type(), val_domain, m_deriv_domain...)
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivField(DerivField const& other) = default;
+
+    /**
+     * @brief Move-construct a DerivField
+     *
+     * @param other The DerivField being moved.
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivField(DerivField&& other) = default;
+
+    /** 
+     * @brief Constructs a new DerivField containing a modifiable view on the data in a DerivFieldMem.
+     *
+     * @param field The DerivFieldMem to view.
+     */
+    template <
+            class OElementType,
+            int NDerivs,
+            class Allocator,
+            class = std::enable_if_t<std::is_same_v<typename Allocator::memory_space, MemorySpace>>>
+    constexpr DerivField(DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator>& field)
+        : base_type(
+                field.m_physical_idx_range,
+                field.m_deriv_idx_range,
+                field.m_cross_derivative_idx_range)
     {
+        initialise_fields(field, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
+
+    /** 
+     * @brief Constructs a new DerivField containing a constant view on the data in a DerivFieldMem.
+     *
+     * @param field The DerivFieldMem to view.
+     */
+    // Disabled by SFINAE if `ElementType` is not `const` to avoid write access
+    template <
+            class OElementType,
+            class SFINAEElementType = ElementType,
+            class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
+            int NDerivs,
+            class Allocator,
+            class = std::enable_if_t<std::is_same_v<typename Allocator::memory_space, MemorySpace>>>
+    constexpr DerivField(
+            DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator> const& field)
+        : base_type(
+                field.m_physical_idx_range,
+                field.m_deriv_idx_range,
+                field.m_cross_derivative_idx_range)
+    {
+        initialise_fields(field, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
     /**
-     * @brief The constructor for DerivField. The constructor initialises the chunks using
-     * the provided domains.
+     * @brief Copy construct a DerivField. The element type may be changed to a complatible type.
+     * (e.g. double -> const double).
      *
-     * @param allocator The object which allocates the memory on the CPU or GPU.
-     * @param val_domain The domain on which the values of the field are defined.
-     * @param m_deriv_domain The 1D sub-domains on which the derivatives of the field are defined.
+     * @param field The DerivField to be copied.
      */
-    template <class... DerivDoms>
-    DerivField(
-            allocator_type allocator,
-            physical_domain_type val_domain,
-            DiscreteSubDomain<DerivDoms>... m_deriv_domain)
+    template <class OElementType>
+    KOKKOS_FUNCTION constexpr DerivField(
+            DerivField<OElementType, index_range_type, LayoutStridedPolicy, MemorySpace> const&
+                    field)
         : base_type(
-                val_domain,
-                discrete_deriv_domain_type(ddc::DiscreteDomain<ddc::Deriv<DerivDoms>>(
-                        ddc::DiscreteElement<ddc::Deriv<DerivDoms>>(1),
-                        ddc::DiscreteVector<ddc::Deriv<DerivDoms>>(NDerivs))...),
-                to_subdomain_collection<physical_deriv_dims>(m_deriv_domain...))
+                field.m_physical_idx_range,
+                field.m_deriv_idx_range,
+                field.m_cross_derivative_idx_range)
     {
-        static_assert(
-                ddc::type_seq_same_v<ddc::detail::TypeSeq<DerivDoms...>, physical_deriv_dims>);
-        initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_chunks> {});
+        initialise_fields(field, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
-    /// Defaulted destructor
-    ~DerivField() = default;
+    KOKKOS_DEFAULTED_FUNCTION ~DerivField() = default;
 
-    /// Deleted copy operator
-    DerivField& operator=(DerivField const& other) = delete;
-
-    /** Move-assigns a new value to this field
-     * @param other the Chunk to move
+    /** Copy-assigns a new value to this DerivField, yields a new view to the same data
+     * @param other the DerivField to copy
      * @return *this
      */
-    DerivField& operator=(DerivField&& other) = default;
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivField& operator=(DerivField const& other) = default;
+
+    /** Move-assigns a new value to this DerivField
+     * @param other the DerivField to move
+     * @return *this
+     */
+    KOKKOS_DEFAULTED_FUNCTION constexpr DerivField& operator=(DerivField&& other) = default;
 
     /**
-     * @brief Get a modifiable reference to an element from a constant field.
-     * A DiscreteElement describes the element of interest. If information about the derivatives is
-     * missing then it is assumed that the 0-th order derivative is requested.
+     * @brief Copy the source DerivField into this DerivField using Kokkos::deep_copy. 
      *
-     * @param elems The element of interest.
-     *
-     * @returns The requested element.
+     * @param src The DerivField containing the data to be copied.
      */
-    template <class... DElem>
-    element_type& operator()(DElem... elems) noexcept
+    template <class OElementType, class OLayoutStridedPolicy, class OMemorySpace>
+    void deepcopy(
+            DerivField<OElementType, index_range_type, OLayoutStridedPolicy, OMemorySpace> src)
     {
-        static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_element_type = ddcHelper::combine_t<DElem...>;
-        full_element_type elem(elems...);
-        return base_type::get_internal_chunk(elem)();
+        for (int i(0); i < n_fields; ++i) {
+            auto kokkos_span = get_kokkos_view_from_internal_chunk(i);
+            auto src_kokkos_span = src.get_kokkos_view_from_internal_chunk(i);
+            Kokkos::deep_copy(kokkos_span, src_kokkos_span);
+        }
+    }
+
+    /**
+     * @brief Copy the source DerivField into this DerivField using Kokkos::deep_copy.
+     *
+     * @param execution_space The execution space on which the copy will be carried out.
+     * @param src The DerivField containing the data to be copied.
+     */
+    template <class ExecSpace, class OElementType, class OLayoutStridedPolicy, class OMemorySpace>
+    void deepcopy(
+            ExecSpace const& execution_space,
+            DerivField<OElementType, index_range_type, OLayoutStridedPolicy, OMemorySpace> src)
+    {
+        for (int i(0); i < n_fields; ++i) {
+            auto kokkos_span = get_kokkos_view_from_internal_chunk(i);
+            auto src_kokkos_span = src.get_kokkos_view_from_internal_chunk(i);
+            Kokkos::deep_copy(execution_space, kokkos_span, src_kokkos_span);
+        }
     }
 
     /**
      * @brief Get an element from a constant field.
-     * A DiscreteElement describes the element of interest. If information about the derivatives is
+     * An Idx describes the element of interest. If information about the derivatives is
      * missing then it is assumed that the 0-th order derivative is requested.
      *
      * @param elems The element of interest.
@@ -299,53 +359,58 @@ public:
      * @returns The requested element.
      */
     template <class... DElem>
-    element_type const& operator()(DElem... elems) const noexcept
+    KOKKOS_FUNCTION constexpr reference operator()(DElem... elems) const noexcept
     {
         static_assert((ddc::is_discrete_element_v<DElem> && ...));
-        using full_element_type = ddcHelper::combine_t<DElem...>;
-        full_element_type elem(elems...);
-        return base_type::get_internal_chunk(elem)();
+        using full_index_type = detail::combine_t<DElem...>;
+        full_index_type elem(elems...);
+        return base_type::get_internal_field(elem)();
     }
 
     /**
-     * @brief Get a constant DerivFieldSpan of this field.
+     * @brief Get a constant DerivField of this field.
+     *
+     * This function is designed to match the equivalent function in DDC. In Gysela it should
+     * not be called directly. Instead the global function get_const_field should be used.
      *
      * @returns A constant span of this field.
      */
-    view_type span_cview() const
+    KOKKOS_FUNCTION constexpr view_type span_cview() const
     {
         return view_type(*this);
     }
 
     /**
-     * @brief Get a constant DerivFieldSpan of this field.
+     * @brief Get a modifiable DerivField of this field.
      *
-     * @returns A constant span of this field.
-     */
-    view_type span_view() const
-    {
-        return view_type(*this);
-    }
-
-    /**
-     * @brief Get a modifiable DerivFieldSpan of this field.
+     * This function is designed to match the equivalent function in DDC. In Gysela it should
+     * not be called directly. Instead the global function get_field should be used.
      *
      * @returns A span of this field.
      */
-    span_type span_view()
+    KOKKOS_FUNCTION constexpr span_type span_view() const
     {
         return *this;
     }
 };
 
+template <
+        class ElementType,
+        class SupportType,
+        class LayoutStridedPolicy = std::experimental::layout_right,
+        class MemorySpace = Kokkos::HostSpace>
+using DerivConstField
+        = DerivField<ElementType const, SupportType, LayoutStridedPolicy, MemorySpace>;
+
 namespace detail {
-template <class NewMemorySpace, class ElementType, class SupportType, int NDerivs, class Allocator>
-struct OnMemorySpace<NewMemorySpace, DerivField<ElementType, SupportType, NDerivs, Allocator>>
+template <
+        class NewMemorySpace,
+        class ElementType,
+        class SupportType,
+        class Layout,
+        class MemorySpace>
+struct OnMemorySpace<NewMemorySpace, DerivField<ElementType, SupportType, Layout, MemorySpace>>
 {
-    using type = DerivField<
-            ElementType,
-            SupportType,
-            NDerivs,
-            ddc::KokkosAllocator<ElementType, NewMemorySpace>>;
+    using type = DerivField<ElementType, SupportType, Layout, NewMemorySpace>;
 };
-} // namespace detail
+}; // namespace detail

@@ -4,15 +4,15 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
-#include <directional_tag.hpp>
-#include <geometry.hpp>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
-
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "directional_tag.hpp"
+#include "geometry.hpp"
 #include "iqnsolver.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 
 

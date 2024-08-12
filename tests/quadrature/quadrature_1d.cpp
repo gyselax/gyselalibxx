@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
-
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "quadrature.hpp"
 #include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"

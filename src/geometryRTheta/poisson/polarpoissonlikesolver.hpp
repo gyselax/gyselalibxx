@@ -9,6 +9,7 @@
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 

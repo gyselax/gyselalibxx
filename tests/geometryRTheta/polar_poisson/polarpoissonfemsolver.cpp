@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -14,6 +13,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"

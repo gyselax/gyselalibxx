@@ -6,6 +6,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "quadrature.hpp"
 

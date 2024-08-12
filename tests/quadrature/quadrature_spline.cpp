@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include "ddc/ddc.hpp"
 #include "ddc/kernels/splines.hpp"
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"

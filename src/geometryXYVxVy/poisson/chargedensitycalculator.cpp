@@ -2,10 +2,10 @@
 
 #include <ddc/ddc.hpp>
 
-#include <ddc_helper.hpp>
-#include <species_info.hpp>
-
 #include "chargedensitycalculator.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
+#include "species_info.hpp"
 
 ChargeDensityCalculator::ChargeDensityCalculator(DConstFieldVxVy coeffs) : m_quadrature(coeffs) {}
 

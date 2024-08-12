@@ -3,6 +3,7 @@
 #pragma once
 #include <paraconf.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "paraconfpp.hpp"
 #include "species_info.hpp"

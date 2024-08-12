@@ -5,17 +5,17 @@
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_to_cartesian.hpp>
 
-#include <directional_tag.hpp>
-#include <geometry.hpp>
-#include <vector_field.hpp>
-#include <vector_field_span.hpp>
-
 #include "advection_domain.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "directional_tag.hpp"
+#include "geometry.hpp"
 #include "i_interpolator_2d_rp.hpp"
 #include "iadvectionrp.hpp"
 #include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 
 

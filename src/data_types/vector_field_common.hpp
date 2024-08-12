@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
 
-template <class, class>
+#include "ddc_aliases.hpp"
+
+template <class FieldType, class NDTypeSeq>
 class VectorFieldCommon;
 
 template <class T>
@@ -23,13 +24,6 @@ inline constexpr bool is_borrowed_field_v
 
 namespace ddcHelper {
 
-template <class... QueryDDims, class FieldType>
-auto get_domain(FieldType const& field) noexcept
-{
-    static_assert(is_field_v<FieldType>, "Not a field span type");
-    return field.template domain<QueryDDims...>();
-}
-
 template <
         class FieldDst,
         class FieldSrc,
@@ -42,22 +36,22 @@ auto deepcopy(FieldDst&& dst, FieldSrc&& src)
                   typename std::remove_reference_t<FieldDst>::NDTypeTag,
                   typename std::remove_reference_t<FieldSrc>::NDTypeTag>);
 
-    assert(dst.domain().extents() == src.domain().extents());
+    assert(dst.idx_range().extents() == src.idx_range().extents());
 
     dst.deepcopy(src);
-    return dst.span_view();
+    return get_field(dst);
 }
 
-template <class QueryTag, class ChunkType, class NDTypeTag>
-inline constexpr typename ChunkType::span_type get(
-        VectorFieldCommon<ChunkType, NDTypeTag>& field) noexcept
+template <class QueryTag, class FieldType, class NDTypeTag>
+inline constexpr typename FieldType::span_type get(
+        VectorFieldCommon<FieldType, NDTypeTag>& field) noexcept
 {
     return field.template get<QueryTag>();
 }
 
-template <class QueryTag, class ChunkType, class NDTypeTag>
-inline constexpr typename ChunkType::view_type get(
-        VectorFieldCommon<ChunkType, NDTypeTag> const& field) noexcept
+template <class QueryTag, class FieldType, class NDTypeTag>
+inline constexpr typename FieldType::view_type get(
+        VectorFieldCommon<FieldType, NDTypeTag> const& field) noexcept
 {
     return field.template get<QueryTag>();
 }
@@ -65,71 +59,88 @@ inline constexpr typename ChunkType::view_type get(
 
 } // namespace ddcHelper
 
-template <class ChunkType, class... DDims>
-class VectorFieldCommon<ChunkType, ddc::detail::TypeSeq<DDims...>>
+template <class FieldType, class... DDims>
+class VectorFieldCommon<FieldType, ddc::detail::TypeSeq<DDims...>>
 {
-    static_assert(ddc::is_chunk_v<ChunkType>);
-    using data_type = typename ChunkType::element_type;
+    static_assert(ddc::is_chunk_v<FieldType>);
+    using data_type = typename FieldType::element_type;
 
 public:
-    using discrete_domain_type = typename ChunkType::discrete_domain_type;
+    /// @brief The type of the elements in the fields.
     using element_type = typename ddc::detail::TaggedVector<data_type, DDims...>;
+
+    /**
+     * @brief The IdxRange on which the fields in this object are defined.
+     *
+     * This is a DDC keyword used to make this class interchangeable with Field.
+     * In DDC IdxRange types are referred to as DiscreteDomain types.
+     */
+    using discrete_domain_type = typename FieldType::discrete_domain_type;
+    /// @brief The IdxRange on which the fields in this object are defined.
+    using index_range_type = discrete_domain_type;
+
+    /// @brief The type of the element returned when indexing this field (e.g. a tuple of doubles).
     using element_ref_type = typename ddc::detail::TaggedVector<data_type&, DDims...>;
+
+    /// @brief The tags describing the dimensions which make up the elements of the vector.
     using NDTypeTag = ddc::detail::TypeSeq<DDims...>;
 
-    using chunk_span_type = typename ChunkType::span_type;
-    using chunk_view_type = typename ChunkType::view_type;
+    /// @brief The type of a modifiable span of one of these field. This is a DDC keyword used to make this class interchangeable with Field.
+    using chunk_span_type = typename FieldType::span_type;
+    /// @brief The type of a constant view of one of these field. This is a DDC keyword used to make this class interchangeable with Field.
+    using chunk_view_type = typename FieldType::view_type;
 
 protected:
     static constexpr std::size_t NDims = sizeof...(DDims);
 
-    std::array<ChunkType, NDims> m_values;
+    std::array<FieldType, NDims> m_values;
 
 protected:
-    /// Empty Chunk
+    /// Empty Field
     KOKKOS_DEFAULTED_FUNCTION VectorFieldCommon() = default;
 
-    /// Construct a Chunk on a domain with uninitialized values
+    /// Construct a Field on an index range with uninitialized values
     template <
-            class... Chunks,
-            class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, ChunkType>...>>,
+            class... FieldTypes,
+            class = std::enable_if_t<std::conjunction_v<std::is_same<FieldTypes, FieldType>...>>,
             std::enable_if_t<
-                    !std::conjunction_v<std::bool_constant<ddc::is_borrowed_chunk_v<Chunks>>...>,
+                    !std::conjunction_v<
+                            std::bool_constant<ddc::is_borrowed_chunk_v<FieldTypes>>...>,
                     int> = 0>
-    explicit VectorFieldCommon(Chunks&&... chunks) : m_values {std::move(chunks)...}
+    explicit VectorFieldCommon(FieldTypes&&... fields) : m_values {std::move(fields)...}
     {
     }
 
-    /// Construct a Chunk on a domain with uninitialized values
+    /// Construct a Field on an index range with uninitialized values
     template <
-            class... Chunks,
-            class = std::enable_if_t<std::conjunction_v<std::is_same<Chunks, ChunkType>...>>,
+            class... FieldTypes,
+            class = std::enable_if_t<std::conjunction_v<std::is_same<FieldTypes, FieldType>...>>,
             std::enable_if_t<
-                    std::conjunction_v<std::bool_constant<ddc::is_borrowed_chunk_v<Chunks>>...>,
+                    std::conjunction_v<std::bool_constant<ddc::is_borrowed_chunk_v<FieldTypes>>...>,
                     int> = 0>
-    KOKKOS_FUNCTION explicit VectorFieldCommon(Chunks&&... chunks)
-        : m_values {std::forward<Chunks>(chunks)...}
+    KOKKOS_FUNCTION explicit VectorFieldCommon(FieldTypes&&... fields)
+        : m_values {std::forward<FieldTypes>(fields)...}
     {
     }
 
 public:
-    constexpr discrete_domain_type domain() const noexcept
+    constexpr discrete_domain_type idx_range() const noexcept
     {
         return m_values[0].domain();
     }
 
-    /** Provide access to the domain on which this chunk is defined
-     * @return the domain on which this chunk is defined
+    /** Provide access to the index range on which this field is defined
+     * @return the index range on which this field is defined
      */
     template <class... QueryDDims>
-    constexpr ddc::DiscreteDomain<QueryDDims...> domain() const noexcept
+    constexpr IdxRange<QueryDDims...> idx_range() const noexcept
     {
-        return ddc::select<QueryDDims...>(domain());
+        return ddc::select<QueryDDims...>(idx_range());
     }
 
     static constexpr int rank() noexcept
     {
-        return ChunkType::rank();
+        return FieldType::rank();
     }
 
     template <class FieldSrc>

@@ -10,6 +10,7 @@
 
 #include "collisions_inter.hpp"
 #include "collisions_utils.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "fluid_moments.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"

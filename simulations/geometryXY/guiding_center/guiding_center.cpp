@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <chrono>
 #include <cmath>
 #include <filesystem>
@@ -12,6 +11,7 @@
 #include <pdi.h>
 
 #include "bsl_advection_1d.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "directional_tag.hpp"
 #include "euler.hpp"
 #include "fft_poisson_solver.hpp"
@@ -27,7 +27,7 @@
 #include "spline_interpolator.hpp"
 #include "utils_tools.hpp"
 #include "vector_field.hpp"
-#include "vector_field_span.hpp"
+#include "vector_field_mem.hpp"
 
 
 using std::cerr;

@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -12,6 +11,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "krook_source_adaptive.hpp"

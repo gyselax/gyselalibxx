@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/kernels/splines.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "iinterpolator.hpp"
 

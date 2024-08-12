@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-
 #include <ddc/ddc.hpp>
+
+#include "ddc_aliases.hpp"
 
 namespace detail {
 
@@ -95,12 +96,12 @@ using strip_deriv_t = typename StripDeriv<Seq>::type;
  * For example this function can be used to build DDC objects.
  *
  * Example:
- * ddc::DiscreteElement<ddc::Deriv<X>> known_derivatives(2);
- * ddc::DiscreteElement<ddc::Deriv<X>, ddc::Deriv<Y>, ddc::Deriv<Z>> default_derivatives(0, 0, 0);
- * ddc::DiscreteElement<ddc::Deriv<X>, ddc::Deriv<Y>, ddc::Deriv<Z>> complete_derivative
+ * Idx<ddc::Deriv<X>> known_derivatives(2);
+ * Idx<ddc::Deriv<X>, ddc::Deriv<Y>, ddc::Deriv<Z>> default_derivatives(0, 0, 0);
+ * Idx<ddc::Deriv<X>, ddc::Deriv<Y>, ddc::Deriv<Z>> complete_derivative
  *         = select_default(known_derivatives, default_derivatives);
  * // Equivalent to:
- * // ddc::DiscreteElement<ddc::Deriv<X>, ddc::Deriv<Y>, ddc::Deriv<Z>> complete_derivative(2, 0, 0);
+ * // Idx<ddc::Deriv<X>, ddc::Deriv<Y>, ddc::Deriv<Z>> complete_derivative(2, 0, 0);
  *
  * @param known_values The values that are known and should appear in the result.
  * @param default_values The values that should be used if no value is provided for the related tag.
@@ -144,9 +145,9 @@ template <class... Tags>
 struct DefaultDerivElem<ddc::detail::TypeSeq<Tags...>>
 {
     static_assert((is_deriv_dim_v<Tags> && ...));
-    KOKKOS_FUNCTION constexpr static ddc::DiscreteElement<Tags...> get_element()
+    KOKKOS_FUNCTION constexpr static Idx<Tags...> get_element()
     {
-        return ddc::DiscreteElement<Tags...>(ddc::DiscreteElement<Tags>(0)...);
+        return Idx<Tags...>(Idx<Tags> {0}...);
     }
 };
 
@@ -157,7 +158,7 @@ struct DefaultDerivElem<ddc::detail::TypeSeq<Tags...>>
  *
  * @tparam A type sequence of derivative dimensions.
  *
- * @return A DiscreteElement of 0s.
+ * @return An Idx of 0s.
  */
 template <class DerivSeq>
 KOKKOS_FUNCTION auto no_derivative_element()
@@ -168,18 +169,55 @@ KOKKOS_FUNCTION auto no_derivative_element()
 //-----------------------------------------------------------------------------
 
 /**
- * @brief A helper function to get the domain which only contains the one specified element.
+ * @brief A helper function to get the index range which only contains the one specified element.
  *
- * @param idx The element that the domain should describe.
+ * @param idx The element that the index range should describe.
  *
- * @return The domain containing the point.
+ * @return The index range containing the point.
  */
 template <class... Tag>
-KOKKOS_FUNCTION ddc::DiscreteDomain<Tag...> get_domain_from_element(
-        ddc::DiscreteElement<Tag...> idx)
+KOKKOS_FUNCTION IdxRange<Tag...> get_idx_range_from_element(Idx<Tag...> idx)
 {
-    return ddc::DiscreteDomain<Tag...>(
-            ddc::DiscreteDomain<Tag> {ddc::select<Tag>(idx), ddc::DiscreteVector<Tag>(1)}...);
+    return IdxRange<Tag...>(IdxRange<Tag> {ddc::select<Tag>(idx), IdxStep<Tag> {1}}...);
 }
+
+//-----------------------------------------------------------------------------
+
+/**
+ * @brief A helper structure to determine the type when combining tags across containers.
+ *
+ * E.g. Combine<Idx<Tag1>, Idx<Tag2>>::type == Idx<Tag1, Tag2>
+ *
+ * @tparam Containers The containers that should be combined. They should differ only in the tags.
+ */
+template <class... Containers>
+struct Combine;
+
+template <class Container>
+struct Combine<Container>
+{
+    using type = Container;
+};
+
+template <
+        template <typename...>
+        class Container,
+        class... Tags,
+        class... OTags,
+        class... TailContainers>
+struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
+{
+    using type = Combine<Container<Tags..., OTags...>, TailContainers...>;
+};
+
+/**
+ * @brief A helper structure to determine the type when combining tags across containers.
+ *
+ * E.g. combine_t<Idx<Tag1>, Idx<Tag2>> == Idx<Tag1, Tag2>
+ *
+ * @tparam Containers The containers that should be combined. They should differ only in the tags.
+ */
+template <class... Containers>
+using combine_t = typename detail::Combine<Containers...>::type;
 
 } // namespace detail

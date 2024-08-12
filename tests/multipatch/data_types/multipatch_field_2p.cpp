@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 #include "2patches_2d_non_periodic_uniform.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
 #include "patch.hpp"
