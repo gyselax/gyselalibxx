@@ -221,8 +221,9 @@ var NAVTREEINDEX6 =
 "structDimX__pC.html":[13,66],
 "structDimY__pC.html":[13,67],
 "structEdge.html":[13,70],
-"structEdge.html#a678ca5c6e26101fb30cd8725dc35c693":[13,70,0],
-"structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6":[13,70,1],
+"structEdge.html#a01bafe4f74a4d717a45f57c4f7e023a9":[13,70,0],
+"structEdge.html#a17c65ef78459378e78d6327af23bc017":[13,70,1],
+"structEdge.html#a45e9ce9846a4f8d061b19460c3cc4c6d":[13,70,2],
 "structFEM1DPoissonSolver_1_1GridPDEDimQ.html":[13,78,0],
 "structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html":[13,78,1],
 "structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01FullIdxRange_00_01ExecSpace0e5661b22cfccf10bc7f0f673649be85.html":[13,80,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structIdxRangeSliceIterator.html#a2bc2f844f5c62135ee360447ddcf8809":[13,110,5],
 "structIdxRangeSliceIterator.html#a2f22d954e2203515d1e2f7af4e55eebb":[13,110,4],
 "structIdxRangeSliceIterator.html#a3a3f2ef530db13392de4db51e109a29e":[13,110,13],
-"structIdxRangeSliceIterator.html#a3cfcae6e2ba479c5077abc819313c12e":[13,110,22],
-"structIdxRangeSliceIterator.html#a40511e40d48a2f61ad950704eca6bf75":[13,110,9]
+"structIdxRangeSliceIterator.html#a3cfcae6e2ba479c5077abc819313c12e":[13,110,22]
 };

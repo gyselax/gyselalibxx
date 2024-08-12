@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Edge&lt; Patch, Grid, extremity_val &gt; Struct Template Reference</title>
+<title>Gyselalib++: Edge&lt; Patch, Grid1D, extremity_val &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('structEdge.html',''); initResizable();
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structEdge-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Edge&lt; Patch, Grid, extremity_val &gt; Struct Template Reference</div>  </div>
+<div class="title">Edge&lt; Patch, Grid1D, extremity_val &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -113,36 +113,40 @@ $(document).ready(function(){initNavTree('structEdge.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a678ca5c6e26101fb30cd8725dc35c693"><td class="memItemLeft" align="right" valign="top"><a id="a678ca5c6e26101fb30cd8725dc35c693"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#a678ca5c6e26101fb30cd8725dc35c693">associated_patch</a> = <a class="el" href="structPatch.html">Patch</a></td></tr>
-<tr class="memdesc:a678ca5c6e26101fb30cd8725dc35c693"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> where the edge is defined. <br /></td></tr>
-<tr class="separator:a678ca5c6e26101fb30cd8725dc35c693"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b6b386b8c648dfb8768c6a105d45ec6"><td class="memItemLeft" align="right" valign="top"><a id="a9b6b386b8c648dfb8768c6a105d45ec6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#a9b6b386b8c648dfb8768c6a105d45ec6">grid</a> = Grid</td></tr>
-<tr class="memdesc:a9b6b386b8c648dfb8768c6a105d45ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discrete dimension where the edge is defined. <br /></td></tr>
-<tr class="separator:a9b6b386b8c648dfb8768c6a105d45ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01bafe4f74a4d717a45f57c4f7e023a9"><td class="memItemLeft" align="right" valign="top"><a id="a01bafe4f74a4d717a45f57c4f7e023a9"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#a01bafe4f74a4d717a45f57c4f7e023a9">associated_patch</a> = <a class="el" href="structPatch.html">Patch</a></td></tr>
+<tr class="memdesc:a01bafe4f74a4d717a45f57c4f7e023a9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> where the edge is defined. <br /></td></tr>
+<tr class="separator:a01bafe4f74a4d717a45f57c4f7e023a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c65ef78459378e78d6327af23bc017"><td class="memItemLeft" align="right" valign="top"><a id="a17c65ef78459378e78d6327af23bc017"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#a17c65ef78459378e78d6327af23bc017">perpendicular_grid</a> = Grid1D</td></tr>
+<tr class="memdesc:a17c65ef78459378e78d6327af23bc017"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid on the perpendicular dimension of the edge. <br /></td></tr>
+<tr class="separator:a17c65ef78459378e78d6327af23bc017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e9ce9846a4f8d061b19460c3cc4c6d"><td class="memItemLeft" align="right" valign="top"><a id="a45e9ce9846a4f8d061b19460c3cc4c6d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#a45e9ce9846a4f8d061b19460c3cc4c6d">parallel_grid</a> = std::conditional_t&lt; std::is_same_v&lt; Grid1D, typename Patch::Grid1 &gt;, typename Patch::Grid2, typename Patch::Grid1 &gt;</td></tr>
+<tr class="memdesc:a45e9ce9846a4f8d061b19460c3cc4c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid parallel to the edge. <br /></td></tr>
+<tr class="separator:a45e9ce9846a4f8d061b19460c3cc4c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a65f21b037c4e94e4ff923e2f580a407c"><td class="memItemLeft" align="right" valign="top"><a id="a65f21b037c4e94e4ff923e2f580a407c"></a>
-static constexpr Extremity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#a65f21b037c4e94e4ff923e2f580a407c">extremity</a> = extremity_val</td></tr>
-<tr class="memdesc:a65f21b037c4e94e4ff923e2f580a407c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Design if the edge is on the BACK or the FRONT of the other dimension. <br /></td></tr>
-<tr class="separator:a65f21b037c4e94e4ff923e2f580a407c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30ccf4f66cb1a094ab1d771965a9154"><td class="memItemLeft" align="right" valign="top"><a id="ab30ccf4f66cb1a094ab1d771965a9154"></a>
+static constexpr Extremity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEdge.html#ab30ccf4f66cb1a094ab1d771965a9154">extremity</a> = extremity_val</td></tr>
+<tr class="memdesc:ab30ccf4f66cb1a094ab1d771965a9154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Design if the edge is on the BACK or the FRONT of the other dimension. <br /></td></tr>
+<tr class="separator:ab30ccf4f66cb1a094ab1d771965a9154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Patch, class Grid, Extremity extremity_val&gt;<br />
-struct Edge&lt; Patch, Grid, extremity_val &gt;</h3>
+<div class="textblock"><h3>template&lt;class Patch, class Grid1D, Extremity extremity_val&gt;<br />
+struct Edge&lt; Patch, Grid1D, extremity_val &gt;</h3>
 
 <p>Define an edge of a given patch. </p>
 <p>An edge is defined by a patch, a dimension and an extremity. For example, in the patch defined on logical index range \( [a_x, b_x]\times[a_y, b_y] \),</p>
 <ul>
-<li>the edge IDimX, BACK refers to the set \( [a_x, b_x]\times\{b_y\} \),</li>
-<li>and the edge IDimX, FRONT refers to the set \( [a_x, b_x]\times\{a_y\} \).</li>
+<li>the edge <a class="el" href="structGridY.html">GridY</a>, BACK refers to the set \( [a_x, b_x]\times\{b_y\} \),</li>
+<li>and the edge <a class="el" href="structGridY.html">GridY</a>, FRONT refers to the set \( [a_x, b_x]\times\{a_y\} \).</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname"><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a></td><td><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> where the edge is defined. </td></tr>
-    <tr><td class="paramname">Grid</td><td>Discrete dimension where the edge is defined. <br  />
+    <tr><td class="paramname">Grid1D</td><td>Grid on the complementary dimension of the edge. <br  />
  </td></tr>
     <tr><td class="paramname">extremity_val</td><td>The BACK or FRONT value. </td></tr>
   </table>
