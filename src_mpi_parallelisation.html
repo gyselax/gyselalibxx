@@ -128,16 +128,16 @@ Example</h3>
 <li><b>PoloidalLayout</b> - \((n_{sp} = 2, n_{vpar} = 1, n_\mu = 2, n_r = 4, n_\theta = 16)\)</li>
 <li><b>CollisionalLayout</b> - \((n_{sp} = 2, n_r = 1, n_\theta = 4, n_{vpar} = 8, n_\mu = 4)\)</li>
 </ol>
-<p>Suppose that the alltoall transpose operator is called with an input type of <code>Span&lt;double, Domain&lt;IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta&gt;&gt;</code> on the poloidal layout and an output type of <code>Span&lt;double, Domain&lt;IDimSp, IDimR, IDimTheta, IDimVpar, IDimMu&gt;&gt;</code> on the collisional layout. The steps carried out by the alltoall transpose operator are:</p>
+<p>Suppose that the alltoall transpose operator is called with an input type of <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code> on the poloidal layout and an output type of <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>&gt;&gt;</code> on the collisional layout. The steps carried out by the alltoall transpose operator are:</p>
 <ol type="1">
-<li>Break the span to introduce the splits along which the span will be split. This operation does not require any copying.<ul>
+<li>Break the field to introduce the splits along which the field will be split. This operation does not require any copying.<ul>
 <li>Before:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (2, 1, 2, 4, 16)</li>
 </ul>
 </li>
 <li>After:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;IDimSp, IDimVpar, IDimMu, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimR&gt;, IDimR, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimTheta&gt;, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridR.html">GridR</a>&gt;, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridTheta.html">GridTheta</a>&gt;, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (2, 1, 2, 4, 1, 4, 4)</li>
 </ul>
 </li>
@@ -145,12 +145,12 @@ Example</h3>
 </li>
 <li>Reorder the dimensions so the MPI dimensions are grouped in the first dimensions of the domain:<ul>
 <li>Before:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;IDimSp, IDimVpar, IDimMu, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimR&gt;, IDimR, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimTheta&gt;, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridR.html">GridR</a>&gt;, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridTheta.html">GridTheta</a>&gt;, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (2, 1, 2, 4, 1, 4, 4)</li>
 </ul>
 </li>
 <li>After:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimR&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimTheta&gt;, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridR.html">GridR</a>&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridTheta.html">GridTheta</a>&gt;, <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (4, 4, 2, 1, 2, 1, 4)</li>
 </ul>
 </li>
@@ -158,12 +158,12 @@ Example</h3>
 </li>
 <li>Call AlltoAll to send the subblocks <code>field[mpi_idx_r, mpi_idx_theta]</code> to each MPI rank. The data received from each rank will allow the <a class="el" href="structVpar.html" title="Define non periodic parallel velocity .">Vpar</a> and <a class="el" href="structMu.html" title="Define non periodic magnetic momentum .">Mu</a> dimensions to be reassembled.<ul>
 <li>Before:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimR&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimTheta&gt;, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridR.html">GridR</a>&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridTheta.html">GridTheta</a>&gt;, <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (4, 4, 2, 1, 2, 1, 4)</li>
 </ul>
 </li>
 <li>After:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimVpar&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimMu&gt;, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridVpar.html">GridVpar</a>&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridMu.html">GridMu</a>&gt;, <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (4, 4, 2, 1, 2, 1, 4)</li>
 </ul>
 </li>
@@ -171,12 +171,12 @@ Example</h3>
 </li>
 <li>Reorder the dimensions so data relative to the <a class="el" href="structVpar.html" title="Define non periodic parallel velocity .">Vpar</a> and <a class="el" href="structMu.html" title="Define non periodic magnetic momentum .">Mu</a> dimensions are placed contiguously and dimensions are ordered as expected in the output layout:<ul>
 <li>Before:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimVpar&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimMu&gt;, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridVpar.html">GridVpar</a>&gt;, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridMu.html">GridMu</a>&gt;, <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>&gt;&gt;</code></li>
 <li><b>size</b>: (4, 4, 2, 1, 2, 1, 4)</li>
 </ul>
 </li>
 <li>After:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;IDimSp, IDimR, IDimTheta, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimVpar&gt;, IDimVpar, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimMu&gt;, IDimMu&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridVpar.html">GridVpar</a>&gt;, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridMu.html">GridMu</a>&gt;, <a class="el" href="structGridMu.html">GridMu</a>&gt;&gt;</code></li>
 <li><b>size</b>: (2, 1, 4, 4, 2, 4, 1)</li>
 </ul>
 </li>
@@ -184,12 +184,12 @@ Example</h3>
 </li>
 <li>Remove the metadata describing the MPI splits. This operation does not require any copying.<ul>
 <li>Before:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;IDimSp, IDimR, IDimTheta, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimVpar&gt;, IDimVpar, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;IDimMu&gt;, IDimMu&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridVpar.html">GridVpar</a>&gt;, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structMPIDim.html" title="An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...">MPIDim</a>&lt;<a class="el" href="structGridMu.html">GridMu</a>&gt;, <a class="el" href="structGridMu.html">GridMu</a>&gt;&gt;</code></li>
 <li><b>size</b>: (2, 1, 4, 4, 2, 4, 1)</li>
 </ul>
 </li>
 <li>After:<ul>
-<li><b>type</b>: <code>Span&lt;double, Domain&lt;IDimSp, IDimR, IDimTheta, IDimVpar, IDimMu&gt;&gt;</code></li>
+<li><b>type</b>: <code>DField&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structGridVpar.html">GridVpar</a>, <a class="el" href="structGridMu.html">GridMu</a>&gt;&gt;</code></li>
 <li><b>size</b>: (2, 1, 4, 8, 4) </li>
 </ul>
 </li>

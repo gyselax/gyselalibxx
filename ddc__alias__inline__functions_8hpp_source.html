@@ -103,60 +103,65 @@ $(document).ready(function(){initNavTree('ddc__alias__inline__functions_8hpp_sou
 <div class="title">ddc_alias_inline_functions.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;sll/polar_spline.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;derivative_field_common.hpp&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;vector_field_common.hpp&quot;</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sll/polar_spline.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryGrids, <span class="keyword">class </span>FieldType&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keyword">auto</span> <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(FieldType <span class="keyword">const</span>&amp; field) noexcept</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            ddc::is_chunk_v&lt;FieldType&gt; || is_field_v&lt;FieldType&gt;,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="stringliteral">&quot;Not a DDC field (ddc::ChunkSpan) type&quot;</span>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">if</span> constexpr (ddc::is_chunk_v&lt;FieldType&gt;) {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(QueryGrids) == 0) {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordflow">return</span> field.domain();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">return</span> field.template domain&lt;QueryGrids...&gt;();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(QueryGrids) == 0) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">return</span> field.idx_range();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordflow">return</span> field.template idx_range&lt;QueryGrids...&gt;();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> SplineBuilder&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> get_spline_idx_range(SplineBuilder <span class="keyword">const</span>&amp; builder) noexcept</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> builder.spline_domain();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FieldType&gt;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> get_field(FieldType&amp; field)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            (ddc::is_chunk_v&lt;FieldType&gt;) || (is_field_v&lt;FieldType&gt;) || (is_deriv_field_v&lt;FieldType&gt;)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    || (is_polar_spline_v&lt;FieldType&gt;),</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="stringliteral">&quot;Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type&quot;</span>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> field.span_view();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FieldType&gt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> get_const_field(FieldType <span class="keyword">const</span>&amp; field)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            (ddc::is_chunk_v&lt;FieldType&gt;) || (is_field_v&lt;FieldType&gt;) || (is_deriv_field_v&lt;FieldType&gt;)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    || (is_polar_spline_v&lt;FieldType&gt;),</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="stringliteral">&quot;Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type&quot;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> field.span_cview();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;derivative_field_common.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;vector_field_common.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryGrids, <span class="keyword">class </span>FieldType&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keyword">auto</span> <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(FieldType <span class="keyword">const</span>&amp; field) noexcept</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            ddc::is_chunk_v&lt;FieldType&gt; || is_field_v&lt;FieldType&gt;,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="stringliteral">&quot;Not a DDC field (ddc::ChunkSpan) type&quot;</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">if</span> constexpr (ddc::is_chunk_v&lt;FieldType&gt;) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(QueryGrids) == 0) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">return</span> field.domain();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">return</span> field.template domain&lt;QueryGrids...&gt;();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>...(QueryGrids) == 0) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">return</span> field.idx_range();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordflow">return</span> field.template idx_range&lt;QueryGrids...&gt;();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> SplineBuilder&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> get_spline_idx_range(SplineBuilder <span class="keyword">const</span>&amp; builder) noexcept</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> builder.spline_domain();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FieldType&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> get_field(FieldType&amp;&amp; field)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">using</span> Type = std::remove_cv_t&lt;std::remove_reference_t&lt;FieldType&gt;&gt;;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            (ddc::is_chunk_v&lt;Type&gt;) || (is_field_v&lt;Type&gt;) || (is_deriv_field_v&lt;Type&gt;)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    || (is_polar_spline_v&lt;Type&gt;),</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="stringliteral">&quot;Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type&quot;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> field.span_view();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FieldType&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> get_const_field(FieldType&amp;&amp; field)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">using</span> Type = std::remove_cv_t&lt;std::remove_reference_t&lt;FieldType&gt;&gt;;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            (ddc::is_chunk_v&lt;Type&gt;) || (is_field_v&lt;Type&gt;) || (is_deriv_field_v&lt;Type&gt;)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    || (is_polar_spline_v&lt;Type&gt;),</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="stringliteral">&quot;Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type&quot;</span>);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> field.span_cview();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
 <div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:82</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

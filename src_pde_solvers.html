@@ -113,8 +113,8 @@ Poisson's equation</h1>
 <li><a class="el" href="classFFTPoissonSolver.html" title="See FFTPoissonSolverImplementation.">FFTPoissonSolver</a></li>
 </ul>
 <p>These solvers implement 2 interfaces:</p><ul>
-<li><code>chunk_span_type operator()(chunk_span_type phi, chunk_span_type rho) const</code></li>
-<li><code>chunk_span_type operator()(chunk_span_type phi, vector_span_type E, chunk_span_type rho) const</code></li>
+<li><code>field_type operator()(field_type phi, field_type rho) const</code></li>
+<li><code>field_type operator()(field_type phi, vector_field_type E, chunk_field_type rho) const</code></li>
 </ul>
 <p>The second interface calculates \(\phi\) the solution to the equation but also \(E = - \nabla \phi\). </p>
 </div></div><!-- contents -->

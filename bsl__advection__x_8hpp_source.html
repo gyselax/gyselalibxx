@@ -104,100 +104,94 @@ $(document).ready(function(){initNavTree('bsl__advection__x_8hpp_source.html',''
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;iinterpolator.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;species_info.hpp&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;iadvectionx.hpp&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>X&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classBslAdvectionSpatial.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a> : <span class="keyword">public</span> <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt;Geometry, GridX&gt;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">using</span> GridV = <span class="keyword">typename</span> Geometry::template velocity_dim_for&lt;GridX&gt;;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> FdistribIdxRange = <span class="keyword">typename</span> Geometry::FdistribuIdxRange;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> IdxX = Idx&lt;GridX&gt;;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> IdxV = Idx&lt;GridV&gt;;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> DimX = <span class="keyword">typename</span> GridX::continuous_dimension_type;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">using</span> DimV = <span class="keyword">typename</span> GridV::continuous_dimension_type;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">using</span> PreallocatableInterpolatorType = interpolator_on_idx_range_t&lt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a>,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="structGridX.html">GridX</a>,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            ddc::cartesian_prod_t&lt;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                    <span class="keyword">typename</span> Geometry::SpatialIdxRange,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="keyword">typename</span> Geometry::VelocityIdxRange&gt;&gt;;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">using</span> InterpolatorType = interpolator_on_idx_range_t&lt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <a class="code" href="classIInterpolator.html">IInterpolator</a>,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <a class="code" href="structGridX.html">GridX</a>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            ddc::cartesian_prod_t&lt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    <span class="keyword">typename</span> Geometry::SpatialIdxRange,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    <span class="keyword">typename</span> Geometry::VelocityIdxRange&gt;&gt;;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    PreallocatableInterpolatorType <span class="keyword">const</span>&amp; m_interpolator_x;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">   46</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">BslAdvectionSpatial</a>(PreallocatableInterpolatorType <span class="keyword">const</span>&amp; interpolator_x)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        : m_interpolator_x(interpolator_x)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ~<a class="code" href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classBslAdvectionSpatial.html#a9522e25bbef20920f921d8e45728f4d6">   59</a></span>&#160;    Field&lt;double, FdistribIdxRange&gt; <a class="code" href="classBslAdvectionSpatial.html#a9522e25bbef20920f921d8e45728f4d6">operator()</a>(</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            Field&lt;double, FdistribIdxRange&gt; <span class="keyword">const</span> allfdistribu,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dt)<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvectionSpatial&quot;</span>);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        FdistribIdxRange <span class="keyword">const</span> dom = get_idx_range(allfdistribu);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        IdxRange&lt;GridX&gt; <span class="keyword">const</span> x_idx_range = ddc::select&lt;GridX&gt;(dom);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        IdxRange&lt;GridV&gt; <span class="keyword">const</span> v_idx_range = ddc::select&lt;GridV&gt;(dom);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        IdxRange&lt;Species&gt; <span class="keyword">const</span> sp_idx_range = ddc::select&lt;Species&gt;(dom);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        ddc::Chunk feet_coords_alloc(</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                ddc::remove_dims_of(dom, sp_idx_range),</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                ddc::DeviceAllocator&lt;Coord&lt;DimX&gt;&gt;());</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        ddc::ChunkSpan feet_coords = get_field(feet_coords_alloc);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::unique_ptr&lt;InterpolatorType&gt; <span class="keyword">const</span> interpolator_x_ptr = m_interpolator_x.preallocate();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        InterpolatorType <span class="keyword">const</span>&amp; interpolator_x = *interpolator_x_ptr;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">auto</span> batch_idx_range</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                = ddc::remove_dims_of(dom, IdxRange&lt;Species, GridX&gt;(sp_idx_range, x_idx_range));</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">using</span> IdxB = <span class="keyword">typename</span> decltype(batch_idx_range)::discrete_element_type;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">for</span> (IdxSp <span class="keyword">const</span> isp : sp_idx_range) {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            ddc::parallel_for_each(</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    batch_idx_range,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    KOKKOS_LAMBDA(IdxB <span class="keyword">const</span> ib) {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        <span class="comment">// compute the displacement</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        IdxV <span class="keyword">const</span> iv(ib);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        Coord&lt;DimV&gt; <span class="keyword">const</span> coord_iv = ddc::coordinate(iv);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        <span class="keywordtype">double</span> <span class="keyword">const</span> dx = sqrt_me_on_mspecies * dt * coord_iv;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                        <span class="comment">// compute the coordinates of the feet</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        <span class="keywordflow">for</span> (IdxX <span class="keyword">const</span> ix : x_idx_range) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                            feet_coords(ix, ib) = Coord&lt;DimX&gt;(ddc::coordinate(ix) - dx);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    });</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            interpolator_x(allfdistribu[isp], get_const_field(feet_coords));</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        Kokkos::Profiling::popRegion();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
-<div class="ttc" id="aclassBslAdvectionSpatial_html"><div class="ttname"><a href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a></div><div class="ttdoc">A class which computes the spatial advection along the dimension of interest GridX.</div><div class="ttdef"><b>Definition:</b> bsl_advection_x.hpp:18</div></div>
-<div class="ttc" id="aclassBslAdvectionSpatial_html_a6ee34fd8becaaf459692d47d6f59568d"><div class="ttname"><a href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">BslAdvectionSpatial::BslAdvectionSpatial</a></div><div class="ttdeci">BslAdvectionSpatial(PreallocatableInterpolatorType const &amp;interpolator_x)</div><div class="ttdoc">Constructor</div><div class="ttdef"><b>Definition:</b> bsl_advection_x.hpp:46</div></div>
-<div class="ttc" id="aclassBslAdvectionSpatial_html_a9522e25bbef20920f921d8e45728f4d6"><div class="ttname"><a href="classBslAdvectionSpatial.html#a9522e25bbef20920f921d8e45728f4d6">BslAdvectionSpatial::operator()</a></div><div class="ttdeci">Field&lt; double, FdistribIdxRange &gt; operator()(Field&lt; double, FdistribIdxRange &gt; const allfdistribu, double const dt) const override</div><div class="ttdoc">Advects fdistribu along GridX for a duration dt.</div><div class="ttdef"><b>Definition:</b> bsl_advection_x.hpp:59</div></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;iadvectionx.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;iinterpolator.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;species_info.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>X&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classBslAdvectionSpatial.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a> : <span class="keyword">public</span> <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>&lt;Geometry, GridX&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> GridV = <span class="keyword">typename</span> Geometry::template velocity_dim_for&lt;GridX&gt;;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">using</span> FdistribIdxRange = <span class="keyword">typename</span> Geometry::FdistribuIdxRange;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">using</span> IdxX = Idx&lt;GridX&gt;;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">using</span> IdxV = Idx&lt;GridV&gt;;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> DimX = <span class="keyword">typename</span> GridX::continuous_dimension_type;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">using</span> DimV = <span class="keyword">typename</span> GridV::continuous_dimension_type;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">using</span> SpaceVelocityIdxRange = ddc::cartesian_prod_t&lt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">typename</span> Geometry::SpatialIdxRange,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keyword">typename</span> Geometry::VelocityIdxRange&gt;;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> PreallocatableInterpolatorType = interpolator_on_idx_range_t&lt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <a class="code" href="structGridX.html">GridX</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            SpaceVelocityIdxRange&gt;;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> InterpolatorType</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            = interpolator_on_idx_range_t&lt;IInterpolator, GridX, SpaceVelocityIdxRange&gt;;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    PreallocatableInterpolatorType <span class="keyword">const</span>&amp; m_interpolator_x;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">   41</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">BslAdvectionSpatial</a>(PreallocatableInterpolatorType <span class="keyword">const</span>&amp; interpolator_x)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        : m_interpolator_x(interpolator_x)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ~<a class="code" href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classBslAdvectionSpatial.html#a9522e25bbef20920f921d8e45728f4d6">   54</a></span>&#160;    Field&lt;double, FdistribIdxRange&gt; <a class="code" href="classBslAdvectionSpatial.html#a9522e25bbef20920f921d8e45728f4d6">operator()</a>(</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            Field&lt;double, FdistribIdxRange&gt; <span class="keyword">const</span> allfdistribu,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dt)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">using</span> BatchedIdxRange = ddc::remove_dims_of_t&lt;FdistribIdxRange, Species, GridX&gt;;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">using</span> BatchedIdx = <span class="keyword">typename</span> BatchedIdxRange::discrete_element_type;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvectionSpatial&quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        FdistribIdxRange <span class="keyword">const</span> dom = get_idx_range(allfdistribu);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        IdxRange&lt;GridX&gt; <span class="keyword">const</span> x_idx_range = ddc::select&lt;GridX&gt;(dom);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        IdxRange&lt;GridV&gt; <span class="keyword">const</span> v_idx_range = ddc::select&lt;GridV&gt;(dom);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        IdxRange&lt;Species&gt; <span class="keyword">const</span> sp_idx_range = ddc::select&lt;Species&gt;(dom);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        SpaceVelocityIdxRange batched_feet_idx_range(dom);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        FieldMem&lt;Coord&lt;DimX&gt;, SpaceVelocityIdxRange&gt; feet_coords_alloc(batched_feet_idx_range);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        Field&lt;Coord&lt;DimX&gt;, SpaceVelocityIdxRange&gt; feet_coords(get_field(feet_coords_alloc));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        std::unique_ptr&lt;InterpolatorType&gt; <span class="keyword">const</span> interpolator_x_ptr = m_interpolator_x.preallocate();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        InterpolatorType <span class="keyword">const</span>&amp; interpolator_x = *interpolator_x_ptr;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        BatchedIdxRange batch_idx_range(dom);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">for</span> (IdxSp <span class="keyword">const</span> isp : sp_idx_range) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            ddc::parallel_for_each(</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    batch_idx_range,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    KOKKOS_LAMBDA(BatchedIdx <span class="keyword">const</span> ib) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        <span class="comment">// compute the displacement</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        IdxV <span class="keyword">const</span> iv(ib);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        Coord&lt;DimV&gt; <span class="keyword">const</span> coord_iv = ddc::coordinate(iv);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        <span class="keywordtype">double</span> <span class="keyword">const</span> dx = sqrt_me_on_mspecies * dt * coord_iv;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        <span class="comment">// compute the coordinates of the feet</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        <span class="keywordflow">for</span> (IdxX <span class="keyword">const</span> ix : x_idx_range) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                            feet_coords(ix, ib) = Coord&lt;DimX&gt;(ddc::coordinate(ix) - dx);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    });</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            interpolator_x(allfdistribu[isp], get_const_field(feet_coords));</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        Kokkos::Profiling::popRegion();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
+<div class="ttc" id="aclassBslAdvectionSpatial_html"><div class="ttname"><a href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a></div><div class="ttdoc">A class which computes the spatial advection along the dimension of interest GridX.</div><div class="ttdef"><b>Definition:</b> bsl_advection_x.hpp:16</div></div>
+<div class="ttc" id="aclassBslAdvectionSpatial_html_a6ee34fd8becaaf459692d47d6f59568d"><div class="ttname"><a href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">BslAdvectionSpatial::BslAdvectionSpatial</a></div><div class="ttdeci">BslAdvectionSpatial(PreallocatableInterpolatorType const &amp;interpolator_x)</div><div class="ttdoc">Constructor</div><div class="ttdef"><b>Definition:</b> bsl_advection_x.hpp:41</div></div>
+<div class="ttc" id="aclassBslAdvectionSpatial_html_a9522e25bbef20920f921d8e45728f4d6"><div class="ttname"><a href="classBslAdvectionSpatial.html#a9522e25bbef20920f921d8e45728f4d6">BslAdvectionSpatial::operator()</a></div><div class="ttdeci">Field&lt; double, FdistribIdxRange &gt; operator()(Field&lt; double, FdistribIdxRange &gt; const allfdistribu, double const dt) const override</div><div class="ttdoc">Advects fdistribu along GridX for a duration dt.</div><div class="ttdef"><b>Definition:</b> bsl_advection_x.hpp:54</div></div>
 <div class="ttc" id="aclassIAdvectionSpatial_html"><div class="ttname"><a href="classIAdvectionSpatial.html">IAdvectionSpatial</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionx.hpp:16</div></div>
-<div class="ttc" id="aclassIInterpolator_html"><div class="ttname"><a href="classIInterpolator.html">IInterpolator</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:54</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolator_html"><div class="ttname"><a href="classIPreallocatableInterpolator.html">IPreallocatableInterpolator</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> iinterpolator.hpp:135</div></div>
 <div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:90</div></div>
 </div><!-- fragment --></div><!-- contents -->

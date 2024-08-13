@@ -132,14 +132,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa9d7676ad1af7f4bfc6cb5bb6763407f"><td class="memItemLeft" align="right" valign="top"><a id="aa9d7676ad1af7f4bfc6cb5bb6763407f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aa9d7676ad1af7f4bfc6cb5bb6763407f">IDomainSpXVx_ghosted</a> = IdxRange&lt; <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structCollisionsIntra_1_1GhostedVx.html">GhostedVx</a> &gt;</td></tr>
-<tr class="memdesc:aa9d7676ad1af7f4bfc6cb5bb6763407f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a mesh for species, space and ghosted vx mesh. <br /></td></tr>
-<tr class="separator:aa9d7676ad1af7f4bfc6cb5bb6763407f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae939fc27fcebbe5c2e6c9f6677ab4a11"><td class="memItemLeft" align="right" valign="top"><a id="ae939fc27fcebbe5c2e6c9f6677ab4a11"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#ae939fc27fcebbe5c2e6c9f6677ab4a11">IDomainSpXVx_ghosted_staggered</a> = IdxRange&lt; <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structCollisionsIntra_1_1GhostedVxStaggered.html">GhostedVxStaggered</a> &gt;</td></tr>
-<tr class="memdesc:ae939fc27fcebbe5c2e6c9f6677ab4a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a mesh for species, space and ghosted staggered vx mesh. <br /></td></tr>
-<tr class="separator:ae939fc27fcebbe5c2e6c9f6677ab4a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78125fea3147218240c8bb1cfd8b3b4e"><td class="memItemLeft" align="right" valign="top"><a id="a78125fea3147218240c8bb1cfd8b3b4e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a78125fea3147218240c8bb1cfd8b3b4e">IdxRangeSpXVx_ghosted</a> = IdxRange&lt; <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structCollisionsIntra_1_1GhostedVx.html">GhostedVx</a> &gt;</td></tr>
+<tr class="memdesc:a78125fea3147218240c8bb1cfd8b3b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a mesh for species, space and ghosted vx mesh. <br /></td></tr>
+<tr class="separator:a78125fea3147218240c8bb1cfd8b3b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8de0dc7f09923428fa8ef0e30aeef1e"><td class="memItemLeft" align="right" valign="top"><a id="aa8de0dc7f09923428fa8ef0e30aeef1e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aa8de0dc7f09923428fa8ef0e30aeef1e">IdxRangeSpXVx_ghosted_staggered</a> = IdxRange&lt; <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structCollisionsIntra_1_1GhostedVxStaggered.html">GhostedVxStaggered</a> &gt;</td></tr>
+<tr class="memdesc:aa8de0dc7f09923428fa8ef0e30aeef1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a mesh for species, space and ghosted staggered vx mesh. <br /></td></tr>
+<tr class="separator:aa8de0dc7f09923428fa8ef0e30aeef1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ab6bdc39ec17f24fde97078d88dbc3c"><td class="memItemLeft" align="right" valign="top"><a id="a7ab6bdc39ec17f24fde97078d88dbc3c"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a7ab6bdc39ec17f24fde97078d88dbc3c">IndexVx_ghosted</a> = Idx&lt; <a class="el" href="structCollisionsIntra_1_1GhostedVx.html">GhostedVx</a> &gt;</td></tr>
 <tr class="memdesc:a7ab6bdc39ec17f24fde97078d88dbc3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a ghosted vx index. <br /></td></tr>
@@ -180,9 +180,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a21406b811ef83d4f90a80c0139ddb5de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">compute_rhs_vector</a> (DFieldSpXVx RR, DConstFieldSpXVx AA, DConstFieldSpXVx BB, DConstFieldSpXVx CC, DConstFieldSpXVx allfdistribu, double fthresh) const</td></tr>
 <tr class="memdesc:a21406b811ef83d4f90a80c0139ddb5de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the right-hand-side of the collision operator linear system.  <a href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">More...</a><br /></td></tr>
 <tr class="separator:a21406b811ef83d4f90a80c0139ddb5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afea176b3b4ed99957555ea927d4f9948"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#afea176b3b4ed99957555ea927d4f9948">compute_matrix_coeff</a> (DFieldSpXVx AA, DFieldSpXVx BB, DFieldSpXVx CC, Field&lt; double, <a class="el" href="classCollisionsIntra.html#aa9d7676ad1af7f4bfc6cb5bb6763407f">IDomainSpXVx_ghosted</a> &gt; Dcoll, Field&lt; double, <a class="el" href="classCollisionsIntra.html#ae939fc27fcebbe5c2e6c9f6677ab4a11">IDomainSpXVx_ghosted_staggered</a> &gt; Dcoll_staggered, Field&lt; double, <a class="el" href="classCollisionsIntra.html#aa9d7676ad1af7f4bfc6cb5bb6763407f">IDomainSpXVx_ghosted</a> &gt; Nucoll, double deltat) const</td></tr>
-<tr class="memdesc:afea176b3b4ed99957555ea927d4f9948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the coefficients of the tridiagonal matrix of the collision operator linear system.  <a href="classCollisionsIntra.html#afea176b3b4ed99957555ea927d4f9948">More...</a><br /></td></tr>
-<tr class="separator:afea176b3b4ed99957555ea927d4f9948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c59137d3bc0e30d7ca9b413039b050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050">compute_matrix_coeff</a> (DFieldSpXVx AA, DFieldSpXVx BB, DFieldSpXVx CC, Field&lt; double, <a class="el" href="classCollisionsIntra.html#a78125fea3147218240c8bb1cfd8b3b4e">IdxRangeSpXVx_ghosted</a> &gt; Dcoll, Field&lt; double, <a class="el" href="classCollisionsIntra.html#aa8de0dc7f09923428fa8ef0e30aeef1e">IdxRangeSpXVx_ghosted_staggered</a> &gt; Dcoll_staggered, Field&lt; double, <a class="el" href="classCollisionsIntra.html#a78125fea3147218240c8bb1cfd8b3b4e">IdxRangeSpXVx_ghosted</a> &gt; Nucoll, double deltat) const</td></tr>
+<tr class="memdesc:aa3c59137d3bc0e30d7ca9b413039b050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the coefficients of the tridiagonal matrix of the collision operator linear system.  <a href="classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050">More...</a><br /></td></tr>
+<tr class="separator:aa3c59137d3bc0e30d7ca9b413039b050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f9e7a4e2131b1641f821f4bb4a78b03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03">fill_matrix_with_coeff</a> (<a class="el" href="classMatrix__Banded.html">Matrix_Banded</a> &amp;matrix, host_t&lt; DConstFieldVx &gt; AA, host_t&lt; DConstFieldVx &gt; BB, host_t&lt; DConstFieldVx &gt; CC) const</td></tr>
 <tr class="memdesc:a8f9e7a4e2131b1641f821f4bb4a78b03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the tridiagonal matrix of the collision operator linear system with the required coefficients.  <a href="classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03">More...</a><br /></td></tr>
 <tr class="separator:a8f9e7a4e2131b1641f821f4bb4a78b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -274,7 +274,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A span referencing the distribution function passed as argument. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A field referencing the distribution function passed as argument. </dd></dl>
 
 <p>Implements <a class="el" href="classIRightHandSide.html#a00f66ff88f6b0fd17a931a09b1ddb2d3">IRightHandSide</a>.</p>
 
@@ -426,8 +426,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afea176b3b4ed99957555ea927d4f9948"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afea176b3b4ed99957555ea927d4f9948">&#9670;&nbsp;</a></span>compute_matrix_coeff()</h2>
+<a id="aa3c59137d3bc0e30d7ca9b413039b050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c59137d3bc0e30d7ca9b413039b050">&#9670;&nbsp;</a></span>compute_matrix_coeff()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -453,19 +453,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Field&lt; double, <a class="el" href="classCollisionsIntra.html#aa9d7676ad1af7f4bfc6cb5bb6763407f">IDomainSpXVx_ghosted</a> &gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, <a class="el" href="classCollisionsIntra.html#a78125fea3147218240c8bb1cfd8b3b4e">IdxRangeSpXVx_ghosted</a> &gt;&#160;</td>
           <td class="paramname"><em>Dcoll</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Field&lt; double, <a class="el" href="classCollisionsIntra.html#ae939fc27fcebbe5c2e6c9f6677ab4a11">IDomainSpXVx_ghosted_staggered</a> &gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, <a class="el" href="classCollisionsIntra.html#aa8de0dc7f09923428fa8ef0e30aeef1e">IdxRangeSpXVx_ghosted_staggered</a> &gt;&#160;</td>
           <td class="paramname"><em>Dcoll_staggered</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Field&lt; double, <a class="el" href="classCollisionsIntra.html#aa9d7676ad1af7f4bfc6cb5bb6763407f">IDomainSpXVx_ghosted</a> &gt;&#160;</td>
+          <td class="paramtype">Field&lt; double, <a class="el" href="classCollisionsIntra.html#a78125fea3147218240c8bb1cfd8b3b4e">IdxRangeSpXVx_ghosted</a> &gt;&#160;</td>
           <td class="paramname"><em>Nucoll</em>, </td>
         </tr>
         <tr>

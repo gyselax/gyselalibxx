@@ -2,8 +2,8 @@ var classCollisionsIntra =
 [
     [ "GhostedVx", "structCollisionsIntra_1_1GhostedVx.html", null ],
     [ "GhostedVxStaggered", "structCollisionsIntra_1_1GhostedVxStaggered.html", null ],
-    [ "IDomainSpXVx_ghosted", "classCollisionsIntra.html#aa9d7676ad1af7f4bfc6cb5bb6763407f", null ],
-    [ "IDomainSpXVx_ghosted_staggered", "classCollisionsIntra.html#ae939fc27fcebbe5c2e6c9f6677ab4a11", null ],
+    [ "IdxRangeSpXVx_ghosted", "classCollisionsIntra.html#a78125fea3147218240c8bb1cfd8b3b4e", null ],
+    [ "IdxRangeSpXVx_ghosted_staggered", "classCollisionsIntra.html#aa8de0dc7f09923428fa8ef0e30aeef1e", null ],
     [ "IndexVx_ghosted", "classCollisionsIntra.html#a7ab6bdc39ec17f24fde97078d88dbc3c", null ],
     [ "IndexVx_ghosted_staggered", "classCollisionsIntra.html#a749352d5f54d55d7a693c106b8230be3", null ],
     [ "IndexSpXVx_ghosted", "classCollisionsIntra.html#ae0b079fb7cd39ccf47046f94fd85821d", null ],
@@ -16,6 +16,6 @@ var classCollisionsIntra =
     [ "get_gridvx_ghosted_staggered", "classCollisionsIntra.html#a398712f845cd31322e0103a771d2db20", null ],
     [ "get_mesh_ghosted", "classCollisionsIntra.html#a84cbeb483e27f40cbae29c42aaabc287", null ],
     [ "compute_rhs_vector", "classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de", null ],
-    [ "compute_matrix_coeff", "classCollisionsIntra.html#afea176b3b4ed99957555ea927d4f9948", null ],
+    [ "compute_matrix_coeff", "classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050", null ],
     [ "fill_matrix_with_coeff", "classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03", null ]
 ];

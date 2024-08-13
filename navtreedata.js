@@ -80,7 +80,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html#a913b828900b7df56e1f65981a97a47f3",
+"classCollisionSpVparMu.html#ab0c339b07aedd6ed65f9698b4ec34f0f",
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445",
 "classLagrangeInterpolator.html#a60914d8391f7ea2e47c624a088ec5d92",
 "classPolarSplineEvaluator.html#a648c0a6d88caf58e87f2f0c3101a7102",

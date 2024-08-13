@@ -125,7 +125,7 @@ Inheritance diagram for IReactionRate:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa53dd629fec8987317cc634bb52d7fe3"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">operator()</a> (DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature) const =0</td></tr>
-<tr class="memdesc:aa53dd629fec8987317cc634bb52d7fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for computing the reaction rate from two Spans referencing density and temperature.  <a href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">More...</a><br /></td></tr>
+<tr class="memdesc:aa53dd629fec8987317cc634bb52d7fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for computing the reaction rate from two Fields referencing density and temperature.  <a href="classIReactionRate.html#aa53dd629fec8987317cc634bb52d7fe3">More...</a><br /></td></tr>
 <tr class="separator:aa53dd629fec8987317cc634bb52d7fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -171,16 +171,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Operator for computing the reaction rate from two Spans referencing density and temperature. </p>
+<p>Operator for computing the reaction rate from two Fields referencing density and temperature. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">rate</td><td>On input: the uninitialized value of a Span referencing a reaction rate. On output: the value of reaction rate. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">rate</td><td>On input: the uninitialized value of a Field referencing a reaction rate. On output: the value of reaction rate. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">density</td><td>The density at which the reaction rate should be computed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">temperature</td><td>The temperature at which the reaction rate should be computed. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A span referencing the reaction rate. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A field referencing the reaction rate. </dd></dl>
 
 <p>Implemented in <a class="el" href="classRecombinationRate.html#afc0642ee5f185d34df820b67d3b360e9">RecombinationRate</a>, <a class="el" href="classIonizationRate.html#a04169db7340af25ff0c760184148c81a">IonizationRate</a>, <a class="el" href="classConstantRate.html#ada12e13f0c3e2b98cb5b2c35a21be9b9">ConstantRate</a>, and <a class="el" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">ChargeExchangeRate</a>.</p>
 

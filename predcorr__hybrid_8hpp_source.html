@@ -107,49 +107,48 @@ $(document).ready(function(){initNavTree('predcorr__hybrid_8hpp_source.html','')
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ikineticfluidcoupling.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;itimesolver_hybrid.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classIQNSolver.html">IQNSolver</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span><a class="code" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPredCorrHybrid.html">PredCorrHybrid</a> : <span class="keyword">public</span> <a class="code" href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; m_boltzmann_solver;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> <span class="keyword">const</span>&amp; m_fluid_solver;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classIQNSolver.html">IQNSolver</a> <span class="keyword">const</span>&amp; m_poisson_solver;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> <span class="keyword">const</span>&amp; m_kinetic_fluid_coupling;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">   47</a></span>&#160;    <a class="code" href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">PredCorrHybrid</a>(</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; boltzmann_solver,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> <span class="keyword">const</span>&amp; fluid_solver,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classIQNSolver.html">IQNSolver</a> <span class="keyword">const</span>&amp; poisson_solver,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> <span class="keyword">const</span>&amp; kinetic_fluid_coupling);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ~<a class="code" href="classPredCorrHybrid.html">PredCorrHybrid</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">   68</a></span>&#160;    DFieldSpXVx <a class="code" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">operator()</a>(</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            DFieldSpXVx allfdistribu,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            DFieldSpMomX fluid_moments,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">double</span> time_start,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">int</span> steps = 1) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ikineticfluidcoupling.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;itimesolver_hybrid.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classIQNSolver.html">IQNSolver</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPredCorrHybrid.html">PredCorrHybrid</a> : <span class="keyword">public</span> <a class="code" href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; m_boltzmann_solver;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> <span class="keyword">const</span>&amp; m_fluid_solver;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classIQNSolver.html">IQNSolver</a> <span class="keyword">const</span>&amp; m_poisson_solver;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> <span class="keyword">const</span>&amp; m_kinetic_fluid_coupling;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">   46</a></span>&#160;    <a class="code" href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">PredCorrHybrid</a>(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="classIBoltzmannSolver.html">IBoltzmannSolver</a> <span class="keyword">const</span>&amp; boltzmann_solver,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="classIFluidTransportSolver.html">IFluidTransportSolver</a> <span class="keyword">const</span>&amp; fluid_solver,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="classIQNSolver.html">IQNSolver</a> <span class="keyword">const</span>&amp; poisson_solver,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a> <span class="keyword">const</span>&amp; kinetic_fluid_coupling);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ~<a class="code" href="classPredCorrHybrid.html">PredCorrHybrid</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">   67</a></span>&#160;    DFieldSpXVx <a class="code" href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">operator()</a>(</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            DFieldSpXVx allfdistribu,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            DFieldSpMomX fluid_moments,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordtype">double</span> time_start,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">double</span> dt,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">int</span> steps = 1) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
 <div class="ttc" id="aclassIBoltzmannSolver_html"><div class="ttname"><a href="classIBoltzmannSolver.html">IBoltzmannSolver</a></div><div class="ttdoc">An abstract class for solving a Boltzmann equation.</div><div class="ttdef"><b>Definition:</b> iboltzmannsolver.hpp:11</div></div>
 <div class="ttc" id="aclassIFluidTransportSolver_html"><div class="ttname"><a href="classIFluidTransportSolver.html">IFluidTransportSolver</a></div><div class="ttdoc">An abstract class for solving the transport of a fluid model.</div><div class="ttdef"><b>Definition:</b> ifluidtransportsolver.hpp:11</div></div>
 <div class="ttc" id="aclassIKineticFluidCoupling_html"><div class="ttname"><a href="classIKineticFluidCoupling.html">IKineticFluidCoupling</a></div><div class="ttdoc">An abstract class representing a source for both the Boltzmann and neutral fluid equations.</div><div class="ttdef"><b>Definition:</b> ikineticfluidcoupling.hpp:11</div></div>
 <div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
-<div class="ttc" id="aclassITimeSolverHybrid_html"><div class="ttname"><a href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations coupled to a fluid model.</div><div class="ttdef"><b>Definition:</b> itimesolver_hybrid.hpp:11</div></div>
-<div class="ttc" id="aclassPredCorrHybrid_html"><div class="ttname"><a href="classPredCorrHybrid.html">PredCorrHybrid</a></div><div class="ttdoc">A class that solves a Boltzmann-Poisson system of equations coupled to a fluid particles model using ...</div><div class="ttdef"><b>Definition:</b> predcorr_hybrid.hpp:29</div></div>
+<div class="ttc" id="aclassITimeSolverHybrid_html"><div class="ttname"><a href="classITimeSolverHybrid.html">ITimeSolverHybrid</a></div><div class="ttdoc">An abstract class for solving a Boltzmann-Poisson system of equations coupled to a fluid model.</div><div class="ttdef"><b>Definition:</b> itimesolver_hybrid.hpp:10</div></div>
+<div class="ttc" id="aclassPredCorrHybrid_html"><div class="ttname"><a href="classPredCorrHybrid.html">PredCorrHybrid</a></div><div class="ttdoc">A class that solves a Boltzmann-Poisson system of equations coupled to a fluid particles model using ...</div><div class="ttdef"><b>Definition:</b> predcorr_hybrid.hpp:28</div></div>
 <div class="ttc" id="aclassPredCorrHybrid_html_a01e466a8ca5ea62d40c888c566e99779"><div class="ttname"><a href="classPredCorrHybrid.html#a01e466a8ca5ea62d40c888c566e99779">PredCorrHybrid::PredCorrHybrid</a></div><div class="ttdeci">PredCorrHybrid(IBoltzmannSolver const &amp;boltzmann_solver, IFluidTransportSolver const &amp;fluid_solver, IQNSolver const &amp;poisson_solver, IKineticFluidCoupling const &amp;kinetic_fluid_coupling)</div><div class="ttdoc">Creates an instance of the predictor-corrector class.</div></div>
 <div class="ttc" id="aclassPredCorrHybrid_html_a6bfe0fdcbcc66b657bb0598cd4a1135c"><div class="ttname"><a href="classPredCorrHybrid.html#a6bfe0fdcbcc66b657bb0598cd4a1135c">PredCorrHybrid::operator()</a></div><div class="ttdeci">DFieldSpXVx operator()(DFieldSpXVx allfdistribu, DFieldSpMomX fluid_moments, double time_start, double dt, int steps=1) const override</div><div class="ttdoc">Solves the Boltzmann-Poisson-fluid system.</div></div>
 </div><!-- fragment --></div><!-- contents -->

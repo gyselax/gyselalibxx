@@ -217,7 +217,7 @@ template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a ChunkSpan fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the index range over which the quadrature is calculated and returning the value of the function to be integrated at that point. It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated. If the exec_space is a GPU the function that is passed must be accessible from GPU.</td></tr>
   </table>
   </dd>
 </dl>
@@ -274,7 +274,7 @@ template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunctio
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>The result of the quadrature calculation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. Please note that a ChunkSpan fulfills the described criteria. If the exec_space is a GPU the function that is passed must be accessible from GPU. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">integrated_function</td><td>A function taking an index of a position in the index range over which the quadrature is calculated (including the batch index range) and returning the value of the function to be integrated at that point. Please note that a Field fulfills the described criteria. If the exec_space is a GPU the function that is passed must be accessible from GPU. </td></tr>
   </table>
   </dd>
 </dl>

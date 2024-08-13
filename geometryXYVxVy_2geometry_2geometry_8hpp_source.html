@@ -398,7 +398,7 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2geometry_2geometry_8hp
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">using</span> FieldMemSpXYVxVy = FieldMem&lt;ElementType, IdxRangeSpXYVxVy&gt;;</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">using</span> DFieldMemSpXYVxVy = FieldMemSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">//  Span definition</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">//  Field definitions</span></div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">using</span> FieldX = Field&lt;ElementType, IdxRangeX&gt;;</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">using</span> DFieldX = FieldX&lt;double&gt;;</div>
@@ -431,7 +431,7 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2geometry_2geometry_8hp
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">using</span> FieldSpXYVxVy = Field&lt;ElementType, IdxRangeSpXYVxVy&gt;;</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="keyword">using</span> DFieldSpXYVxVy = FieldSpXYVxVy&lt;double&gt;;</div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">// View definition</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">// ConstField definitions</span></div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="keyword">using</span> ConstFieldX = Field&lt;ElementType const, IdxRangeX&gt;;</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
@@ -491,14 +491,14 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2geometry_2geometry_8hp
 <div class="ttc" id="astructGridVy_html"><div class="ttname"><a href="structGridVy.html">GridVy</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:132</div></div>
 <div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:90</div></div>
 <div class="ttc" id="astructGridY_html"><div class="ttname"><a href="structGridY.html">GridY</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:78</div></div>
-<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:304</div></div>
-<div class="ttc" id="astructVx_html_a74ba57fd378fdaadf337f2e532c53c94"><div class="ttname"><a href="structVx.html#a74ba57fd378fdaadf337f2e532c53c94">Vx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:309</div></div>
-<div class="ttc" id="astructVy_html"><div class="ttname"><a href="structVy.html">Vy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:315</div></div>
-<div class="ttc" id="astructVy_html_a941096674fb4211e80aa95dfe391a287"><div class="ttname"><a href="structVy.html#a941096674fb4211e80aa95dfe391a287">Vy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:320</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:281</div></div>
-<div class="ttc" id="astructX_html_a3f2fbdd06dd7a7479b1d5d72be648bd5"><div class="ttname"><a href="structX.html#a3f2fbdd06dd7a7479b1d5d72be648bd5">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:286</div></div>
-<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:292</div></div>
-<div class="ttc" id="astructY_html_afe04f46adf2cb2df852b5d5d3ed884a6"><div class="ttname"><a href="structY.html#afe04f46adf2cb2df852b5d5d3ed884a6">Y::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:297</div></div>
+<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:305</div></div>
+<div class="ttc" id="astructVx_html_a74ba57fd378fdaadf337f2e532c53c94"><div class="ttname"><a href="structVx.html#a74ba57fd378fdaadf337f2e532c53c94">Vx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:310</div></div>
+<div class="ttc" id="astructVy_html"><div class="ttname"><a href="structVy.html">Vy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:316</div></div>
+<div class="ttc" id="astructVy_html_a941096674fb4211e80aa95dfe391a287"><div class="ttname"><a href="structVy.html#a941096674fb4211e80aa95dfe391a287">Vy::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:321</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:282</div></div>
+<div class="ttc" id="astructX_html_a3f2fbdd06dd7a7479b1d5d72be648bd5"><div class="ttname"><a href="structX.html#a3f2fbdd06dd7a7479b1d5d72be648bd5">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:287</div></div>
+<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:293</div></div>
+<div class="ttc" id="astructY_html_afe04f46adf2cb2df852b5d5d3ed884a6"><div class="ttname"><a href="structY.html#afe04f46adf2cb2df852b5d5d3ed884a6">Y::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:298</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

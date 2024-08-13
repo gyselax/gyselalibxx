@@ -198,10 +198,10 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keyword">class </span>OutIdxRange,</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keyword">class </span>MemSpace,</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keyword">class </span>ExecSpace&gt;</div>
-<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a6589c9c04475b4e0fc06284e2ecb833d">  135</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#a6589c9c04475b4e0fc06284e2ecb833d">operator()</a>(</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a39ce203fa89367e0832e8883e7b58d72">  135</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#a39ce203fa89367e0832e8883e7b58d72">operator()</a>(</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            Field&lt;ElementType, OutIdxRange, field_layout_type, MemSpace&gt; recv_span,</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            ConstField&lt;ElementType, InIdxRange, field_layout_type, MemSpace&gt; send_span)</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            Field&lt;ElementType, OutIdxRange, field_layout_type, MemSpace&gt; recv_field,</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            ConstField&lt;ElementType, InIdxRange, field_layout_type, MemSpace&gt; send_field)</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    {</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        static_assert(!std::is_same_v&lt;InIdxRange, OutIdxRange&gt;);</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        static_assert(</div>
@@ -218,17 +218,17 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                std::is_same_v&lt;OutIdxRange, typename Layout1::discrete_domain_type&gt;,</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                Layout1,</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                Layout2&gt;;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        this-&gt;transpose_to&lt;OutLayout&gt;(execution_space, recv_span, send_span);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        this-&gt;transpose_to&lt;OutLayout&gt;(execution_space, recv_field, send_field);</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OutLayout, <span class="keyword">class</span> ElementType, <span class="keyword">class</span> MemSpace, <span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> InIdxRange&gt;</div>
-<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#a56db8030d67c73ff5352872140945457">  174</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#a56db8030d67c73ff5352872140945457">transpose_to</a>(</div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classMPITransposeAllToAll.html#ab4eb14a8f1df3c01b899b5b25e5f574a">  174</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMPITransposeAllToAll.html#ab4eb14a8f1df3c01b899b5b25e5f574a">transpose_to</a>(</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            Field&lt;ElementType,</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                  <span class="keyword">typename</span> OutLayout::discrete_domain_type,</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                  <a class="code" href="classMPITransposeAllToAll.html#a79ffa0d257284fa0c6da3dd5e1b131b9">field_layout_type</a>,</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                  MemSpace&gt; recv_span,</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            ConstField&lt;ElementType, InIdxRange, field_layout_type, MemSpace&gt; send_span)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                  MemSpace&gt; recv_field,</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            ConstField&lt;ElementType, InIdxRange, field_layout_type, MemSpace&gt; send_field)</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    {</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keyword">using</span> InLayout = std::conditional_t&lt;std::is_same_v&lt;OutLayout, Layout1&gt;, Layout2, Layout1&gt;;</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">        /*****************************************************************</span></div>
@@ -314,9 +314,9 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        }</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="comment">// Collect the useful subindex ranges described in the fields</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        batch_idx_range_type batch_idx_range(get_idx_range(send_span));</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        scatter_idx_range_type scatter_idx_range(get_idx_range(recv_span));</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        gather_idx_range_type gather_idx_range(get_idx_range(send_span));</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        batch_idx_range_type batch_idx_range(get_idx_range(send_field));</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        scatter_idx_range_type scatter_idx_range(get_idx_range(recv_field));</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        gather_idx_range_type gather_idx_range(get_idx_range(send_field));</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="comment">// Build the index ranges describing the function inputs but including the MPI rank information</span></div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        input_mpi_idx_range_type input_mpi_idx_range(</div>
@@ -329,8 +329,8 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                scatter_idx_range,</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                gather_idx_range,</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                batch_idx_range);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        assert(input_mpi_idx_range.size() == send_span.size());</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        assert(output_mpi_idx_range.size() == recv_span.size());</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        assert(input_mpi_idx_range.size() == send_field.size());</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        assert(output_mpi_idx_range.size() == recv_field.size());</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="comment">// Create the index ranges used during the alltoall call (the MPI rank index range is first in this layout)</span></div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        input_alltoall_idx_range_type input_alltoall_idx_range(input_mpi_idx_range);</div>
@@ -340,9 +340,9 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">         * Create views on the function inputs with the index ranges including the MPI rank information</span></div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">         *****************************************************************/</span></div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        ConstField&lt;ElementType, input_mpi_idx_range_type, field_layout_type, MemSpace&gt;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                send_mpi_span(send_span.data_handle(), input_mpi_idx_range);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                send_mpi_field(send_field.data_handle(), input_mpi_idx_range);</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        Field&lt;ElementType, output_mpi_idx_range_type, field_layout_type, MemSpace&gt;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                recv_mpi_span(recv_span.data_handle(), output_mpi_idx_range);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                recv_mpi_field(recv_field.data_handle(), output_mpi_idx_range);</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">        /*****************************************************************</span></div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">         * Transpose data (both on the rank and between ranks)</span></div>
@@ -350,9 +350,9 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="comment">// Create views or copies of the function inputs such that they are laid out on the</span></div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="comment">// index range used during the alltoall call</span></div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keyword">auto</span> alltoall_send_buffer = ddcHelper::create_transpose_mirror_view_and_copy&lt;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                input_alltoall_idx_range_type&gt;(execution_space, send_mpi_span);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                input_alltoall_idx_range_type&gt;(execution_space, send_mpi_field);</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keyword">auto</span> alltoall_recv_buffer = ddcHelper::create_transpose_mirror&lt;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                output_alltoall_idx_range_type&gt;(execution_space, recv_mpi_span);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                output_alltoall_idx_range_type&gt;(execution_space, recv_mpi_field);</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="comment">// Call the MPI AlltoAll routine</span></div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        call_all_to_all(</div>
@@ -361,52 +361,55 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                get_const_field(alltoall_send_buffer));</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="comment">// If alltoall_recv_buffer owns its data (not a view) then copy the results back to</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="comment">// recv_mpi_span which is a view on recv_span, the function output</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="comment">// recv_mpi_field which is a view on recv_field, the function output</span></div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(alltoall_recv_buffer)&gt;) {</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            transpose_layout(execution_space, recv_mpi_span, get_const_field(alltoall_recv_buffer));</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    }</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">template</span> &lt;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="keyword">class </span>ElementType,</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            <span class="keyword">class </span>MPIRecvIdxRange,</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            <span class="keyword">class </span>MPISendIdxRange,</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keyword">class </span>MemSpace,</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            <span class="keyword">class </span>ExecSpace&gt;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordtype">void</span> call_all_to_all(</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            Field&lt;ElementType, MPIRecvIdxRange, field_layout_type, MemSpace&gt; recv_span,</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            ConstField&lt;ElementType, MPISendIdxRange, field_layout_type, MemSpace&gt; send_span)</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    {</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="comment">// No Cuda-aware MPI yet</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keyword">auto</span> send_buffer = ddc::create_mirror_view_and_copy(send_span);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keyword">auto</span> recv_buffer = ddc::create_mirror_view(recv_span);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        MPI_Alltoall(</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                send_buffer.data_handle(),</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                send_buffer.size() / m_comm_size,</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                recv_buffer.data_handle(),</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                recv_buffer.size() / m_comm_size,</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            transpose_layout(</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                    execution_space,</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                    recv_mpi_field,</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                    get_const_field(alltoall_recv_buffer));</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    }</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">template</span> &lt;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keyword">class </span>ElementType,</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            <span class="keyword">class </span>MPIRecvIdxRange,</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keyword">class </span>MPISendIdxRange,</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keyword">class </span>MemSpace,</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            <span class="keyword">class </span>ExecSpace&gt;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">void</span> call_all_to_all(</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            Field&lt;ElementType, MPIRecvIdxRange, field_layout_type, MemSpace&gt; recv_field,</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            ConstField&lt;ElementType, MPISendIdxRange, field_layout_type, MemSpace&gt; send_field)</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="comment">// No Cuda-aware MPI yet</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keyword">auto</span> send_buffer = ddc::create_mirror_view_and_copy(send_field);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keyword">auto</span> recv_buffer = ddc::create_mirror_view(recv_field);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        MPI_Alltoall(</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                send_buffer.data_handle(),</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                send_buffer.size() / m_comm_size,</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                <a class="code" href="classIMPITranspose.html">IMPITranspose&lt;Layout1, Layout2&gt;::m_comm</a>);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(recv_buffer)&gt;) {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            ddc::parallel_deepcopy(execution_space, recv_span, recv_buffer);</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        }</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    }</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... DistributedDims&gt;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    IdxRange&lt;MPIDim&lt;DistributedDims&gt;...&gt; get_distribution(</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            IdxRange&lt;DistributedDims...&gt; local_idx_range,</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            IdxRange&lt;DistributedDims...&gt; global_idx_range)</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    {</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        Idx&lt;MPIDim&lt;DistributedDims&gt;...&gt; start(Idx&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {0}...);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        IdxStep&lt;MPIDim&lt;DistributedDims&gt;...&gt; size(IdxStep&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                ddc::select&lt;DistributedDims&gt;(global_idx_range).size()</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                / ddc::select&lt;DistributedDims&gt;(local_idx_range).size()}...);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">return</span> IdxRange&lt;MPIDim&lt;DistributedDims&gt;...&gt;(start, size);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    }</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;};</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                recv_buffer.data_handle(),</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                recv_buffer.size() / m_comm_size,</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                MPI_type_descriptor_t&lt;ElementType&gt;,</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                <a class="code" href="classIMPITranspose.html">IMPITranspose&lt;Layout1, Layout2&gt;::m_comm</a>);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">if</span> constexpr (!ddc::is_borrowed_chunk_v&lt;decltype(recv_buffer)&gt;) {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            ddc::parallel_deepcopy(execution_space, recv_field, recv_buffer);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... DistributedDims&gt;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    IdxRange&lt;MPIDim&lt;DistributedDims&gt;...&gt; get_distribution(</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            IdxRange&lt;DistributedDims...&gt; local_idx_range,</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            IdxRange&lt;DistributedDims...&gt; global_idx_range)</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        Idx&lt;MPIDim&lt;DistributedDims&gt;...&gt; start(Idx&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {0}...);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        IdxStep&lt;MPIDim&lt;DistributedDims&gt;...&gt; size(IdxStep&lt;<a class="code" href="structMPIDim.html">MPIDim&lt;DistributedDims&gt;</a>&gt; {</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                ddc::select&lt;DistributedDims&gt;(global_idx_range).size()</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                / ddc::select&lt;DistributedDims&gt;(local_idx_range).size()}...);</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keywordflow">return</span> IdxRange&lt;MPIDim&lt;DistributedDims&gt;...&gt;(start, size);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;};</div>
 <div class="ttc" id="aclassIMPITranspose_html"><div class="ttname"><a href="classIMPITranspose.html">IMPITranspose</a></div><div class="ttdoc">A superclass describing an operator for converting from/to different MPI layouts.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:15</div></div>
 <div class="ttc" id="aclassIMPITranspose_html_a280d7345bbf2d4f849a36a49bc4643f9"><div class="ttname"><a href="classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9">IMPITranspose::idx_range_type1</a></div><div class="ttdeci">typename Layout1::discrete_domain_type idx_range_type1</div><div class="ttdoc">The type of the index range of the first MPI layout.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:22</div></div>
 <div class="ttc" id="aclassIMPITranspose_html_af0c568eecf467ecb7e913c5b3fc04f99"><div class="ttname"><a href="classIMPITranspose.html#af0c568eecf467ecb7e913c5b3fc04f99">IMPITranspose::idx_range_type2</a></div><div class="ttdeci">typename Layout2::discrete_domain_type idx_range_type2</div><div class="ttdoc">The type of the index range of the second MPI layout.</div><div class="ttdef"><b>Definition:</b> impitranspose.hpp:24</div></div>
@@ -414,10 +417,10 @@ $(document).ready(function(){initNavTree('mpitransposealltoall_8hpp_source.html'
 <div class="ttc" id="aclassMPITransposeAllToAll_html_a1119f153697f8f23c1c382f70f208d4a"><div class="ttname"><a href="classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a">MPITransposeAllToAll::distributed_idx_range_type2</a></div><div class="ttdeci">typename Layout2::distributed_sub_idx_range distributed_idx_range_type2</div><div class="ttdoc">The type of the index range of the second MPI layout.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:34</div></div>
 <div class="ttc" id="aclassMPITransposeAllToAll_html_a1c663a83e6a7b770ef8d764d877d4deb"><div class="ttname"><a href="classMPITransposeAllToAll.html#a1c663a83e6a7b770ef8d764d877d4deb">MPITransposeAllToAll::MPITransposeAllToAll</a></div><div class="ttdeci">MPITransposeAllToAll(IdxRange global_idx_range, MPI_Comm comm)</div><div class="ttdoc">A constructor for the transpose operator.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:65</div></div>
 <div class="ttc" id="aclassMPITransposeAllToAll_html_a313e5b285bf71c5fdb45855e4ecd4573"><div class="ttname"><a href="classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573">MPITransposeAllToAll::distributed_idx_range_type1</a></div><div class="ttdeci">typename Layout1::distributed_sub_idx_range distributed_idx_range_type1</div><div class="ttdoc">The type of the index range of the first MPI layout.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:32</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_a56db8030d67c73ff5352872140945457"><div class="ttname"><a href="classMPITransposeAllToAll.html#a56db8030d67c73ff5352872140945457">MPITransposeAllToAll::transpose_to</a></div><div class="ttdeci">void transpose_to(ExecSpace const &amp;execution_space, Field&lt; ElementType, typename OutLayout::discrete_domain_type, field_layout_type, MemSpace &gt; recv_span, ConstField&lt; ElementType, InIdxRange, field_layout_type, MemSpace &gt; send_span)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:174</div></div>
-<div class="ttc" id="aclassMPITransposeAllToAll_html_a6589c9c04475b4e0fc06284e2ecb833d"><div class="ttname"><a href="classMPITransposeAllToAll.html#a6589c9c04475b4e0fc06284e2ecb833d">MPITransposeAllToAll::operator()</a></div><div class="ttdeci">void operator()(ExecSpace const &amp;execution_space, Field&lt; ElementType, OutIdxRange, field_layout_type, MemSpace &gt; recv_span, ConstField&lt; ElementType, InIdxRange, field_layout_type, MemSpace &gt; send_span)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:135</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_a39ce203fa89367e0832e8883e7b58d72"><div class="ttname"><a href="classMPITransposeAllToAll.html#a39ce203fa89367e0832e8883e7b58d72">MPITransposeAllToAll::operator()</a></div><div class="ttdeci">void operator()(ExecSpace const &amp;execution_space, Field&lt; ElementType, OutIdxRange, field_layout_type, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, field_layout_type, MemSpace &gt; send_field)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:135</div></div>
 <div class="ttc" id="aclassMPITransposeAllToAll_html_a79ffa0d257284fa0c6da3dd5e1b131b9"><div class="ttname"><a href="classMPITransposeAllToAll.html#a79ffa0d257284fa0c6da3dd5e1b131b9">MPITransposeAllToAll::field_layout_type</a></div><div class="ttdeci">std::experimental::layout_right field_layout_type</div><div class="ttdoc">The way in which data should be laid out in memory on Fields being transposed.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:36</div></div>
 <div class="ttc" id="aclassMPITransposeAllToAll_html_a992524cf2f61b2ba1e199d108140aad8"><div class="ttname"><a href="classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8">MPITransposeAllToAll::get_local_idx_range</a></div><div class="ttdeci">auto get_local_idx_range()</div><div class="ttdoc">Getter for the local index range.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:104</div></div>
+<div class="ttc" id="aclassMPITransposeAllToAll_html_ab4eb14a8f1df3c01b899b5b25e5f574a"><div class="ttname"><a href="classMPITransposeAllToAll.html#ab4eb14a8f1df3c01b899b5b25e5f574a">MPITransposeAllToAll::transpose_to</a></div><div class="ttdeci">void transpose_to(ExecSpace const &amp;execution_space, Field&lt; ElementType, typename OutLayout::discrete_domain_type, field_layout_type, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, field_layout_type, MemSpace &gt; send_field)</div><div class="ttdoc">An operator which transposes from one layout to another.</div><div class="ttdef"><b>Definition:</b> mpitransposealltoall.hpp:174</div></div>
 <div class="ttc" id="astructMPIDim_html"><div class="ttname"><a href="structMPIDim.html">MPIDim</a></div><div class="ttdoc">An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered ...</div><div class="ttdef"><b>Definition:</b> mpitools.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

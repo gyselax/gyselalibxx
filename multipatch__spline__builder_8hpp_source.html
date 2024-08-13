@@ -120,44 +120,42 @@ $(document).ready(function(){initNavTree('multipatch__spline__builder_8hpp_sourc
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> BuilderTuple = std::tuple&lt;Builders <span class="keyword">const</span>&amp;...&gt;;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> SplineTuple = std::tuple&lt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            Field&lt;double,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                  <span class="keyword">typename</span> Builders::batched_spline_domain_type,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                  std::experimental::layout_right,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                  <span class="keyword">typename</span> Builders::memory_space&gt;...&gt;;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// For PERIODIC or GREVILLE boundary conditions</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> ValuesTuple = std::tuple&lt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            Field&lt;double,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                  <span class="keyword">typename</span> Builders::batched_interpolation_domain_type,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                  std::experimental::layout_right,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                  <span class="keyword">typename</span> Builders::memory_space&gt;...&gt;;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            DField&lt;<span class="keyword">typename</span> Builders::batched_spline_domain_type,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                   std::experimental::layout_right,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                   <span class="keyword">typename</span> Builders::memory_space&gt;...&gt;;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// For PERIODIC or GREVILLE boundary conditions</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> ValuesTuple = std::tuple&lt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            DField&lt;<span class="keyword">typename</span> Builders::batched_interpolation_domain_type,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                   std::experimental::layout_right,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                   <span class="keyword">typename</span> Builders::memory_space&gt;...&gt;;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    BuilderTuple <span class="keyword">const</span> m_builders;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    BuilderTuple <span class="keyword">const</span> m_builders;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32">   57</a></span>&#160;    <a class="code" href="classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32">MultipatchSplineBuilder</a>(Builders <span class="keyword">const</span>&amp;... builders) : m_builders(std::tie(builders...)) {};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32">   55</a></span>&#160;    <a class="code" href="classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32">MultipatchSplineBuilder</a>(Builders <span class="keyword">const</span>&amp;... builders) : m_builders(std::tie(builders...)) {};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    ~<a class="code" href="classMultipatchSplineBuilder.html">MultipatchSplineBuilder</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    ~<a class="code" href="classMultipatchSplineBuilder.html">MultipatchSplineBuilder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classMultipatchSplineBuilder.html#a9485611f29551dacbabfdccdcfa4dafa">   71</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMultipatchSplineBuilder.html#a9485611f29551dacbabfdccdcfa4dafa">operator()</a>(SplineTuple <span class="keyword">const</span>&amp; splines, ValuesTuple <span class="keyword">const</span>&amp; values)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        apply_builders(splines, values, std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Builders)&gt; {});</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">template</span> &lt;std::size_t... I&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> apply_builders(</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            SplineTuple <span class="keyword">const</span>&amp; splines,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            ValuesTuple <span class="keyword">const</span>&amp; values,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            std::index_sequence&lt;I...&gt;)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        (std::get&lt;I&gt;(m_builders)(std::get&lt;I&gt;(splines), std::get&lt;I&gt;(values).span_cview()), ...);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    };</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classMultipatchSplineBuilder.html#a9485611f29551dacbabfdccdcfa4dafa">   69</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMultipatchSplineBuilder.html#a9485611f29551dacbabfdccdcfa4dafa">operator()</a>(SplineTuple <span class="keyword">const</span>&amp; splines, ValuesTuple <span class="keyword">const</span>&amp; values)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        apply_builders(splines, values, std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Builders)&gt; {});</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">template</span> &lt;std::size_t... I&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> apply_builders(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            SplineTuple <span class="keyword">const</span>&amp; splines,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            ValuesTuple <span class="keyword">const</span>&amp; values,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            std::index_sequence&lt;I...&gt;)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        (std::get&lt;I&gt;(m_builders)(std::get&lt;I&gt;(splines), get_const_field(std::get&lt;I&gt;(values))), ...);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    };</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
 <div class="ttc" id="aclassMultipatchSplineBuilder_html"><div class="ttname"><a href="classMultipatchSplineBuilder.html">MultipatchSplineBuilder</a></div><div class="ttdoc">A class to call all the builders of all the patches once.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:30</div></div>
-<div class="ttc" id="aclassMultipatchSplineBuilder_html_a9035d281f5fa48edfe9185942b43be32"><div class="ttname"><a href="classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32">MultipatchSplineBuilder::MultipatchSplineBuilder</a></div><div class="ttdeci">MultipatchSplineBuilder(Builders const &amp;... builders)</div><div class="ttdoc">Instantiate the MultipatchSplineBuilder from a std::tuple of all the builder on each patch.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:57</div></div>
-<div class="ttc" id="aclassMultipatchSplineBuilder_html_a9485611f29551dacbabfdccdcfa4dafa"><div class="ttname"><a href="classMultipatchSplineBuilder.html#a9485611f29551dacbabfdccdcfa4dafa">MultipatchSplineBuilder::operator()</a></div><div class="ttdeci">void operator()(SplineTuple const &amp;splines, ValuesTuple const &amp;values)</div><div class="ttdoc">Build the spline representation of each given function.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:71</div></div>
+<div class="ttc" id="aclassMultipatchSplineBuilder_html_a9035d281f5fa48edfe9185942b43be32"><div class="ttname"><a href="classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32">MultipatchSplineBuilder::MultipatchSplineBuilder</a></div><div class="ttdeci">MultipatchSplineBuilder(Builders const &amp;... builders)</div><div class="ttdoc">Instantiate the MultipatchSplineBuilder from a std::tuple of all the builder on each patch.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:55</div></div>
+<div class="ttc" id="aclassMultipatchSplineBuilder_html_a9485611f29551dacbabfdccdcfa4dafa"><div class="ttname"><a href="classMultipatchSplineBuilder.html#a9485611f29551dacbabfdccdcfa4dafa">MultipatchSplineBuilder::operator()</a></div><div class="ttdeci">void operator()(SplineTuple const &amp;splines, ValuesTuple const &amp;values)</div><div class="ttdoc">Build the spline representation of each given function.</div><div class="ttdef"><b>Definition:</b> multipatch_spline_builder.hpp:69</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -166,7 +166,7 @@ template&lt;class IdxRange &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature</td><td>The quadrature used to compute the integral. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">function</td><td>A ChunkSpan to the value of the function on the quadrature grid.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">function</td><td>A Field to the value of the function on the quadrature grid.</td></tr>
   </table>
   </dd>
 </dl>
@@ -207,7 +207,7 @@ template&lt;class IdxRange &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature</td><td>The quadrature used to compute the integral. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">function</td><td>A ChunkSpan to the value of the function on the quadrature grid.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">function</td><td>A Field to the value of the function on the quadrature grid.</td></tr>
   </table>
   </dd>
 </dl>
@@ -254,11 +254,11 @@ template&lt;class Mapping , class... IDim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical index range \( (r,\theta) \) to the physical index range \( (x, y) \). </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">coefficients</td><td>The quadrature coefficients \(\{q_{ij}\}_{ij} \).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coefficients</td><td>The quadrature coefficients \(\{q_{ij}\}_{ij} \).</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A rvalue Chunk to the modified coefficients \(\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} \). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A rvalue FieldMem to the modified coefficients \(\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} \). </dd></dl>
 
 </div>
 </div>
