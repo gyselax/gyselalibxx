@@ -1,14 +1,14 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <assert.hpp>
-#include <ddc_helper.hpp>
-#include <species_info.hpp>
-
+#include "assert.hpp"
 #include "collisions_dimensions.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "koliop_interface.hpp"
+#include "species_info.hpp"
 
 /**
  * @brief A class which computes the collision operator in (vpar,mu)
@@ -70,37 +70,35 @@ public:
     using IdxRangeMu = IdxRange<GridMu>;
     /// Type alias for the index range of the velocity parallel to the magnetic field.
     using IdxRangeVpar = IdxRange<GridVpar>;
-    /// Type alias for a field on a grid of radial values
-    using DFieldMemR = FieldMem<double, IdxRangeR>;
-    /// Type alias for a field on a grid of magnetic moments
-    using DFieldMemMu = FieldMem<double, IdxRangeMu>;
-    /// Type alias for a field on a grid of parallel velocities
-    using DFieldMemVpar = FieldMem<double, IdxRangeVpar>;
-    /// Type alias for a field on a grid on a poloidal plane
-    using DFieldMemThetaR = FieldMem<double, IdxRangeThetaR>;
-    /// Type alias for a field on a grid of species, poloidal plane and parallel velocities
-    using DFieldMemSpThetaRVpar = FieldMem<double, IdxRangeSpThetaRVpar>;
-    /// Type alias for a span of a field defined on a grid of radial values
-    using DFieldR = Field<double, IdxRangeR>;
-    /// Type alias for a span of a field defined on a grid on a poloidal plane
-    using DFieldThetaR = Field<double, IdxRangeThetaR>;
-    /// Type alias for a constant reference to a Field on GPU defined on a grid of magnetic moments.
-    using DConstFieldMu
-            = Field<double const,
-                    IdxRangeMu,
-                    std::experimental::layout_right,
-                    Kokkos::DefaultExecutionSpace::
-                            memory_space>; // Equivalent to Field<double const, IdxRangeMu>
-    /// Type alias for a constant reference to a Field on GPU defined on a grid of parallel velocities.
-    using DConstFieldVpar
-            = Field<double const,
-                    IdxRangeVpar,
-                    std::experimental::layout_right,
-                    Kokkos::DefaultExecutionSpace::
-                            memory_space>; // Equivalent to Field<double const, IdxRangeMu>
+    /// Type alias for a field memory block on a grid of radial values
+    using DFieldMemR = DFieldMem<IdxRangeR>;
+    /// Type alias for a field memory block on a grid of magnetic moments
+    using DFieldMemMu = DFieldMem<IdxRangeMu>;
+    /// Type alias for a field memory block on a grid of parallel velocities
+    using DFieldMemVpar = DFieldMem<IdxRangeVpar>;
+    /// Type alias for a field memory block on a grid on a poloidal plane
+    using DFieldMemThetaR = DFieldMem<IdxRangeThetaR>;
+    /// Type alias for a field memory block on a grid of species, poloidal plane and parallel velocities
+    using DFieldMemSpThetaRVpar = DFieldMem<IdxRangeSpThetaRVpar>;
+    /// Type alias for a field defined on a grid of radial values
+    using DFieldR = DField<IdxRangeR>;
+    /// Type alias for a field defined on a grid on a poloidal plane
+    using DFieldThetaR = DField<IdxRangeThetaR>;
+    /// Type alias for a constant field on GPU defined on a grid of magnetic moments.
+    using DConstFieldMu = DConstField<
+            IdxRangeMu,
+            std::experimental::layout_right,
+            Kokkos::DefaultExecutionSpace::
+                    memory_space>; // Equivalent to Field<double const, IdxRangeMu>
+    /// Type alias for a constant field on GPU defined on a grid of parallel velocities.
+    using DConstFieldVpar = DConstField<
+            IdxRangeVpar,
+            std::experimental::layout_right,
+            Kokkos::DefaultExecutionSpace::
+                    memory_space>; // Equivalent to Field<double const, IdxRangeMu>
 
-    /// Type alias for a reference to the distribution function stored on GPU.
-    using FDistribField = Field<double, FDistribIdxRange>;
+    /// Type alias for the distribution function stored on GPU.
+    using FDistribField = DField<FDistribIdxRange>;
 
 private:
     /**

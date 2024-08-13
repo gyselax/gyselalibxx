@@ -1,4 +1,6 @@
+// SPDX-License-Identifier: MIT
 #pragma once
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
@@ -16,7 +18,7 @@ void compute_nustar_profile(DFieldSpX nustar_profile, double nustar0);
 
 /**
 * @brief Compute the collision frequency for each species.
-* @param[inout] collfreq A Span representing the collision frequency for each species.
+* @param[inout] collfreq A Field representing the collision frequency for each species.
 * @param[in] nustar_profile The collisionality profile.
 * @param[in] density The density of each species.
 * @param[in] temperature The temperature of each species.
@@ -29,7 +31,7 @@ void compute_collfreq(
 
 /**
 * @brief Compute the intra species collision operator diffusion coefficient.
-* @param[inout] Dcoll A Span representing the diffusion coefficient.
+* @param[inout] Dcoll A Field representing the diffusion coefficient.
 * @param[in] collfreq The collision frequency for each species.
 * @param[in] density The density of each species.
 * @param[in] temperature The temperature of each species.
@@ -73,7 +75,7 @@ void compute_Dcoll(
 
 /**
 * @brief Compute the velocity derivative of the collision operator diffusion coefficient.
-* @param[inout] dvDcoll A Span representing the derivative of the diffusion coefficient.
+* @param[inout] dvDcoll A Field representing the derivative of the diffusion coefficient.
 * @param[in] collfreq The collision frequency for each species.
 * @param[in] density The density of each species.
 * @param[in] temperature The temperature of each species.
@@ -227,8 +229,8 @@ void compute_Vcoll_Tcoll(
 
 /**
 * @brief Compute the intra species collision operator advection coefficient.
-* @param[inout] Nucoll A Span representing the advection coefficient.
-* @param[in] Dcoll A Span representing the diffusion coefficient.
+* @param[inout] Nucoll A Field representing the advection coefficient.
+* @param[in] Dcoll A Field representing the diffusion coefficient.
 * @param[in] Vcoll The Vcoll coefficient.
 * @param[in] Tcoll The Tcoll coefficient.
 */

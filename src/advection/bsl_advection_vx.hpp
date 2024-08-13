@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <ddc_helper.hpp>
-#include <iinterpolator.hpp>
-#include <species_info.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "iadvectionvx.hpp"
+#include "iinterpolator.hpp"
+#include "species_info.hpp"
 
 /**
  * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every cartesian geometry.
@@ -19,22 +17,20 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
 {
     using FdistribuIdxRange = typename Geometry::FdistribuIdxRange;
     using SpatialIdxRange = typename Geometry::SpatialIdxRange;
+    using SpatialIdx = typename SpatialIdxRange::discrete_element_type;
     using IdxV = Idx<GridV>;
     using DimV = typename GridV::continuous_dimension_type;
+    using SpaceVelocityIdxRange = ddc::cartesian_prod_t<
+            typename Geometry::SpatialIdxRange,
+            typename Geometry::VelocityIdxRange>;
 
 private:
     using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             GridV,
-            ddc::cartesian_prod_t<
-                    typename Geometry::SpatialIdxRange,
-                    typename Geometry::VelocityIdxRange>>;
-    using InterpolatorType = interpolator_on_idx_range_t<
-            IInterpolator,
-            GridV,
-            ddc::cartesian_prod_t<
-                    typename Geometry::SpatialIdxRange,
-                    typename Geometry::VelocityIdxRange>>;
+            SpaceVelocityIdxRange>;
+    using InterpolatorType
+            = interpolator_on_idx_range_t<IInterpolator, GridV, SpaceVelocityIdxRange>;
     PreallocatableInterpolatorType const& m_interpolator_v;
 
 public:
@@ -61,6 +57,10 @@ public:
             Field<const double, SpatialIdxRange> const electric_field,
             double const dt) const override
     {
+        using BatchedIdxRange = ddc::remove_dims_of_t<FdistribuIdxRange, Species, GridV>;
+        using BatchedIdx = typename BatchedIdxRange::discrete_element_type;
+
+
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
         FdistribuIdxRange const dom = get_idx_range(allfdistribu);
         IdxRange<GridV> const v_dom = ddc::select<GridV>(dom);
@@ -74,18 +74,15 @@ public:
         ddc::parallel_fill(derivs_max, 0.);
 
         // pre-allocate some memory to prevent allocation later in loop
-        ddc::Chunk feet_coords_alloc(
-                ddc::remove_dims_of(dom, sp_dom),
-                ddc::DeviceAllocator<Coord<DimV>>());
-        ddc::ChunkSpan feet_coords = get_field(feet_coords_alloc);
+        SpaceVelocityIdxRange batched_feet_idx_range(dom);
+        FieldMem<Coord<DimV>, SpaceVelocityIdxRange> feet_coords_alloc(batched_feet_idx_range);
+        Field<Coord<DimV>, SpaceVelocityIdxRange> feet_coords(get_field(feet_coords_alloc));
         std::unique_ptr<InterpolatorType> const interpolator_v_ptr = m_interpolator_v.preallocate();
         InterpolatorType const& interpolator_v = *interpolator_v_ptr;
 
         SpatialIdxRange const spatial_dom(get_idx_range(allfdistribu));
 
-        auto batch_idx_range = ddc::remove_dims_of(ddc::remove_dims_of(dom, sp_dom), v_dom);
-        using IdxB = typename decltype(batch_idx_range)::discrete_element_type;
-        using IdxSpatial = typename SpatialIdxRange::discrete_element_type;
+        BatchedIdxRange batch_idx_range(dom);
 
         ddc::for_each(sp_dom, [&](IdxSp const isp) {
             double const charge_proxy
@@ -94,8 +91,8 @@ public:
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
-                    KOKKOS_LAMBDA(IdxB const ib) {
-                        IdxSpatial const ix(ib);
+                    KOKKOS_LAMBDA(BatchedIdx const ib) {
+                        SpatialIdx const ix(ib);
                         // compute the displacement
                         double const dvx
                                 = charge_proxy * sqrt_me_on_mspecies * dt * electric_field(ix);

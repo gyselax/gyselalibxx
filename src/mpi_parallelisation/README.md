@@ -30,45 +30,45 @@ If we have 16 MPI ranks then each rank has a domain with the following number of
 1.  **PoloidalLayout** - $`(n_{sp} = 2, n_{vpar} = 1, n_\mu = 2, n_r = 4, n_\theta = 16)`$
 2.  **CollisionalLayout** - $`(n_{sp} = 2, n_r = 1, n_\theta = 4, n_{vpar} = 8, n_\mu = 4)`$
 
-Suppose that the alltoall transpose operator is called with an input type of `Span<double, Domain<IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta>>` on the poloidal layout and an output type of `Span<double, Domain<IDimSp, IDimR, IDimTheta, IDimVpar, IDimMu>>` on the collisional layout.
+Suppose that the alltoall transpose operator is called with an input type of `DField<IdxRange<Species, GridVpar, GridMu, GridR, GridTheta>>` on the poloidal layout and an output type of `DField<IdxRange<Species, GridR, GridTheta, GridVpar, GridMu>>` on the collisional layout.
 The steps carried out by the alltoall transpose operator are:
 
-1.  Break the span to introduce the splits along which the span will be split. This operation does not require any copying.
+1.  Break the field to introduce the splits along which the field will be split. This operation does not require any copying.
     - Before:
-        - **type**: `Span<double, Domain<IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta>>`
+        - **type**: `DField<IdxRange<Species, GridVpar, GridMu, GridR, GridTheta>>`
         - **size**: (2, 1, 2, 4, 16)
     - After:
-        - **type**: `Span<double, Domain<IDimSp, IDimVpar, IDimMu, MPIDim<IDimR>, IDimR, MPIDim<IDimTheta>, IDimTheta>>`
+        - **type**: `DField<IdxRange<Species, GridVpar, GridMu, MPIDim<GridR>, GridR, MPIDim<GridTheta>, GridTheta>>`
         - **size**: (2, 1, 2, 4, 1, 4, 4)
 
 2.  Reorder the dimensions so the MPI dimensions are grouped in the first dimensions of the domain:
     - Before:
-        - **type**: `Span<double, Domain<IDimSp, IDimVpar, IDimMu, MPIDim<IDimR>, IDimR, MPIDim<IDimTheta>, IDimTheta>>`
+        - **type**: `DField<IdxRange<Species, GridVpar, GridMu, MPIDim<GridR>, GridR, MPIDim<GridTheta>, GridTheta>>`
         - **size**: (2, 1, 2, 4, 1, 4, 4)
     - After:
-        - **type**: `Span<double, Domain<MPIDim<IDimR>, MPIDim<IDimTheta>, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta>>`
+        - **type**: `DField<IdxRange<MPIDim<GridR>, MPIDim<GridTheta>, Species, GridVpar, GridMu, GridR, GridTheta>>`
         - **size**: (4, 4, 2, 1, 2, 1, 4)
 
 3.  Call AlltoAll to send the subblocks `field[mpi_idx_r, mpi_idx_theta]` to each MPI rank. The data received from each rank will allow the Vpar and Mu dimensions to be reassembled.
     - Before:
-        - **type**: `Span<double, Domain<MPIDim<IDimR>, MPIDim<IDimTheta>, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta>>`
+        - **type**: `DField<IdxRange<MPIDim<GridR>, MPIDim<GridTheta>, Species, GridVpar, GridMu, GridR, GridTheta>>`
         - **size**: (4, 4, 2, 1, 2, 1, 4)
     - After:
-        - **type**: `Span<double, Domain<MPIDim<IDimVpar>, MPIDim<IDimMu>, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta>>`
+        - **type**: `DField<IdxRange<MPIDim<GridVpar>, MPIDim<GridMu>, Species, GridVpar, GridMu, GridR, GridTheta>>`
         - **size**: (4, 4, 2, 1, 2, 1, 4)
 
 4.  Reorder the dimensions so data relative to the Vpar and Mu dimensions are placed contiguously and dimensions are ordered as expected in the output layout:
     - Before:
-        - **type**: `Span<double, Domain<MPIDim<IDimVpar>, MPIDim<IDimMu>, IDimSp, IDimVpar, IDimMu, IDimR, IDimTheta>>`
+        - **type**: `DField<IdxRange<MPIDim<GridVpar>, MPIDim<GridMu>, Species, GridVpar, GridMu, GridR, GridTheta>>`
         - **size**: (4, 4, 2, 1, 2, 1, 4)
     - After:
-        - **type**: `Span<double, Domain<IDimSp, IDimR, IDimTheta, MPIDim<IDimVpar>, IDimVpar, MPIDim<IDimMu>, IDimMu>>`
+        - **type**: `DField<IdxRange<Species, GridR, GridTheta, MPIDim<GridVpar>, GridVpar, MPIDim<GridMu>, GridMu>>`
         - **size**: (2, 1, 4, 4, 2, 4, 1)
 
 5.  Remove the metadata describing the MPI splits. This operation does not require any copying.
     - Before:
-        - **type**: `Span<double, Domain<IDimSp, IDimR, IDimTheta, MPIDim<IDimVpar>, IDimVpar, MPIDim<IDimMu>, IDimMu>>`
+        - **type**: `DField<IdxRange<Species, GridR, GridTheta, MPIDim<GridVpar>, GridVpar, MPIDim<GridMu>, GridMu>>`
         - **size**: (2, 1, 4, 4, 2, 4, 1)
     - After:
-        - **type**: `Span<double, Domain<IDimSp, IDimR, IDimTheta, IDimVpar, IDimMu>>`
+        - **type**: `DField<IdxRange<Species, GridR, GridTheta, GridVpar, GridMu>>`
         - **size**: (2, 1, 4, 8, 4)

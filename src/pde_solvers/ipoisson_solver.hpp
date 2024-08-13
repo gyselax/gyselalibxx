@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 
@@ -34,14 +35,14 @@ protected:
     using batch_tags = ddc::type_seq_remove_t<space_tags, laplacian_tags>;
 
 protected:
-    /// @brief Indicates whether the gradient is represented by a VectorField or a ChunkSpan.
-    static constexpr bool using_vector_span = ddc::type_seq_size_v<laplacian_tags> == 1;
+    /// @brief Indicates whether the gradient is represented by a VectorField or a Field.
+    static constexpr bool using_vector_field = ddc::type_seq_size_v<laplacian_tags> == 1;
 
 public:
     /// @brief The Field type of the arguments to operator().
-    using field_type = Field<double, FullIdxRange, LayoutSpace, MemorySpace>;
+    using field_type = DField<FullIdxRange, LayoutSpace, MemorySpace>;
     /// @brief The const Field type of the arguments to operator().
-    using const_field_type = ConstField<double, FullIdxRange, LayoutSpace, MemorySpace>;
+    using const_field_type = DConstField<FullIdxRange, LayoutSpace, MemorySpace>;
 
     /// @brief The type of the derivative of @f$ \phi @f$.
     using vector_field_type = std::conditional_t<
@@ -52,7 +53,7 @@ public:
     /// @brief The index range type describing the batch dimensions.
     using batch_idx_range_type =
             typename ddc::detail::convert_type_seq_to_discrete_domain_t<batch_tags>;
-    /// @brief The DiscreteElement for indexing a batch dimension.
+    /// @brief The index for indexing a batch dimension.
     using batch_index_type = typename batch_idx_range_type::discrete_element_type;
 
     /// @brief The type of the index range on which the equation is defined.

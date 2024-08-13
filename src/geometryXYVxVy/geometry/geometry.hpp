@@ -317,7 +317,7 @@ template <class ElementType>
 using FieldMemSpXYVxVy = FieldMem<ElementType, IdxRangeSpXYVxVy>;
 using DFieldMemSpXYVxVy = FieldMemSpXYVxVy<double>;
 
-//  Span definition
+//  Field definitions
 template <class ElementType>
 using FieldX = Field<ElementType, IdxRangeX>;
 using DFieldX = FieldX<double>;
@@ -350,7 +350,7 @@ template <class ElementType>
 using FieldSpXYVxVy = Field<ElementType, IdxRangeSpXYVxVy>;
 using DFieldSpXYVxVy = FieldSpXYVxVy<double>;
 
-// View definition
+// ConstField definitions
 template <class ElementType>
 using ConstFieldX = Field<ElementType const, IdxRangeX>;
 

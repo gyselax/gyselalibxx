@@ -8,8 +8,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
@@ -221,11 +219,11 @@ public:
 
             // Evaluate A^n at X^P:
             m_evaluator(
-                    ddcHelper::get<X>(advection_field_k).span_view(),
+                    get_field(ddcHelper::get<X>(advection_field_k)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(get_const_field(advection_field_coefs_k)));
             m_evaluator(
-                    ddcHelper::get<Y>(advection_field_k).span_view(),
+                    get_field(ddcHelper::get<Y>(advection_field_k)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs_k)));
 
@@ -286,11 +284,11 @@ public:
 
             // Evaluate A^P at X^P:
             m_evaluator(
-                    ddcHelper::get<X>(advection_field_k).span_view(),
+                    get_field(ddcHelper::get<X>(advection_field_k)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(get_const_field(advection_field_coefs_k)));
             m_evaluator(
-                    ddcHelper::get<Y>(advection_field_k).span_view(),
+                    get_field(ddcHelper::get<Y>(advection_field_k)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs_k)));
 
@@ -367,11 +365,11 @@ private:
 
             // Evaluate A at X^{k-1}:
             m_evaluator(
-                    ddcHelper::get<X>(advection_field_k).span_view(),
+                    get_field(ddcHelper::get<X>(advection_field_k)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(advection_field_coefs_k));
             m_evaluator(
-                    ddcHelper::get<Y>(advection_field_k).span_view(),
+                    get_field(ddcHelper::get<Y>(advection_field_k)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(advection_field_coefs_k));
 

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * @file compute_norms.hpp
  * File providing the L1 and the L2 norms.
@@ -19,7 +20,7 @@
  * @param[in] quadrature
  *      The quadrature used to compute the integral.
  * @param[in] function
- *      A ChunkSpan to the value of the function on the quadrature grid.
+ *      A Field to the value of the function on the quadrature grid.
  *
  * @return A double containing the L1 norm of the function.
  */
@@ -47,7 +48,7 @@ double compute_L1_norm(
  * @param[in] quadrature
  *      The quadrature used to compute the integral.
  * @param[in] function
- *      A ChunkSpan to the value of the function on the quadrature grid.
+ *      A Field to the value of the function on the quadrature grid.
  *
  * @return A double containing the L2 norm of the function.
  */
@@ -86,10 +87,10 @@ double compute_L2_norm(
  * @param[in] mapping
  *      The mapping function from the logical index range @f$ (r,\theta) @f$
  *      to the physical index range @f$ (x, y) @f$.
- * @param[in, out] coefficients
+ * @param[in] coefficients
  *      The quadrature coefficients @f$\{q_{ij}\}_{ij} @f$.
  *
- * @return A rvalue Chunk to the modified coefficients  @f$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} @f$.
+ * @return A rvalue FieldMem to the modified coefficients  @f$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} @f$.
  */
 template <class Mapping, class... IDim>
 host_t<FieldMem<double, IdxRange<IDim...>>> compute_coeffs_on_mapping(

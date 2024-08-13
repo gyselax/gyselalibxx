@@ -1,15 +1,15 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <cassert>
 #include <cmath>
 
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
+#include "irighthandside.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
  * @brief Class describing the inter-species collision operator
@@ -50,7 +50,7 @@ public:
      * @param[inout] allfdistribu The distribution function.
      * @param[in] dt The time step over which the collisions occur.
      *
-     * @return A span referencing the distribution function passed as argument.
+     * @return A field referencing the distribution function passed as argument.
      */
     DFieldSpXVx operator()(DFieldSpXVx allfdistribu, double dt) const override;
 

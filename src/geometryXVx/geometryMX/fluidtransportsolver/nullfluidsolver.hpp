@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
-#include <geometry.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
 #include "ifluidtransportsolver.hpp"
 
 /**
@@ -24,13 +22,13 @@ public:
 
     /**
      * @brief Solves a dummy fluid model on a timestep dt.
-     * @param[in, out] fluid_moments On input : a span referencing the moments of the fluid species.
-     *                               On output : a span referencing the moments of the fluid species 
+     * @param[in, out] fluid_moments On input : a field referencing the moments of the fluid species.
+     *                               On output : a field referencing the moments of the fluid species 
      *                               updated after solving the dummy fluid model.
      * @param[in] allfdistribu A constant view referencing the distribution function.
      * @param[in] efield A constant view referencing the electric field.
      * @param[in] dt The timestep. 
-     * @return a span referencing the fluid species after solving the dummy fluid model on one timestep.
+     * @return a field referencing the fluid species after solving the dummy fluid model on one timestep.
      */
     DFieldSpMomX operator()(
             DFieldSpMomX fluid_moments,

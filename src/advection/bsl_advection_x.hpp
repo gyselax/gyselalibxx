@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
 #include <ddc/ddc.hpp>
-
-#include <iinterpolator.hpp>
-#include <species_info.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "iadvectionx.hpp"
+#include "iinterpolator.hpp"
+#include "species_info.hpp"
 
 /**
  * @brief A class which computes the spatial advection along the dimension of interest GridX. Working for every cartesian geometry. 
@@ -22,20 +20,17 @@ class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
     using IdxV = Idx<GridV>;
     using DimX = typename GridX::continuous_dimension_type;
     using DimV = typename GridV::continuous_dimension_type;
+    using SpaceVelocityIdxRange = ddc::cartesian_prod_t<
+            typename Geometry::SpatialIdxRange,
+            typename Geometry::VelocityIdxRange>;
 
 private:
     using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             GridX,
-            ddc::cartesian_prod_t<
-                    typename Geometry::SpatialIdxRange,
-                    typename Geometry::VelocityIdxRange>>;
-    using InterpolatorType = interpolator_on_idx_range_t<
-            IInterpolator,
-            GridX,
-            ddc::cartesian_prod_t<
-                    typename Geometry::SpatialIdxRange,
-                    typename Geometry::VelocityIdxRange>>;
+            SpaceVelocityIdxRange>;
+    using InterpolatorType
+            = interpolator_on_idx_range_t<IInterpolator, GridX, SpaceVelocityIdxRange>;
     PreallocatableInterpolatorType const& m_interpolator_x;
 
 public:
@@ -60,6 +55,9 @@ public:
             Field<double, FdistribIdxRange> const allfdistribu,
             double const dt) const override
     {
+        using BatchedIdxRange = ddc::remove_dims_of_t<FdistribIdxRange, Species, GridX>;
+        using BatchedIdx = typename BatchedIdxRange::discrete_element_type;
+
         Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
         FdistribIdxRange const dom = get_idx_range(allfdistribu);
         IdxRange<GridX> const x_idx_range = ddc::select<GridX>(dom);
@@ -67,23 +65,20 @@ public:
         IdxRange<Species> const sp_idx_range = ddc::select<Species>(dom);
 
         // pre-allocate some memory to prevent allocation later in loop
-        ddc::Chunk feet_coords_alloc(
-                ddc::remove_dims_of(dom, sp_idx_range),
-                ddc::DeviceAllocator<Coord<DimX>>());
-        ddc::ChunkSpan feet_coords = get_field(feet_coords_alloc);
+        SpaceVelocityIdxRange batched_feet_idx_range(dom);
+        FieldMem<Coord<DimX>, SpaceVelocityIdxRange> feet_coords_alloc(batched_feet_idx_range);
+        Field<Coord<DimX>, SpaceVelocityIdxRange> feet_coords(get_field(feet_coords_alloc));
         std::unique_ptr<InterpolatorType> const interpolator_x_ptr = m_interpolator_x.preallocate();
         InterpolatorType const& interpolator_x = *interpolator_x_ptr;
 
-        auto batch_idx_range
-                = ddc::remove_dims_of(dom, IdxRange<Species, GridX>(sp_idx_range, x_idx_range));
-        using IdxB = typename decltype(batch_idx_range)::discrete_element_type;
+        BatchedIdxRange batch_idx_range(dom);
 
         for (IdxSp const isp : sp_idx_range) {
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
-                    KOKKOS_LAMBDA(IdxB const ib) {
+                    KOKKOS_LAMBDA(BatchedIdx const ib) {
                         // compute the displacement
                         IdxV const iv(ib);
                         Coord<DimV> const coord_iv = ddc::coordinate(iv);

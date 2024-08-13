@@ -8,8 +8,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
@@ -235,11 +233,11 @@ public:
                     ddcHelper::get<Y>(get_const_field(advection_field)));
 
             m_evaluator(
-                    ddcHelper::get<X>(advection_field_evaluated).span_view(),
+                    get_field(ddcHelper::get<X>(advection_field_evaluated)),
                     get_const_field(feet_coords),
                     ddcHelper::get<X>(get_const_field(advection_field_coefs)));
             m_evaluator(
-                    ddcHelper::get<Y>(advection_field_evaluated).span_view(),
+                    get_field(ddcHelper::get<Y>(advection_field_evaluated)),
                     get_const_field(feet_coords),
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs)));
 

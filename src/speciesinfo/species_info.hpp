@@ -4,6 +4,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 
@@ -58,12 +59,12 @@ public:
          */
         template <class OMemorySpace>
         explicit Impl(Impl<Grid1D, OMemorySpace> const& impl)
-            : m_charge(impl.m_charge.domain())
-            , m_mass(impl.m_mass.domain())
+            : m_charge(get_idx_range(impl.m_charge))
+            , m_mass(get_idx_range(impl.m_mass))
             , m_ielec(impl.m_ielec)
         {
-            m_charge_view = m_charge.span_cview();
-            m_mass_view = m_mass.span_cview();
+            m_charge_view = get_const_field(m_charge);
+            m_mass_view = get_const_field(m_mass);
             ddc::parallel_deepcopy(m_charge, impl.m_charge);
             ddc::parallel_deepcopy(m_mass, impl.m_mass);
         }
@@ -78,11 +79,11 @@ public:
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
         {
-            m_charge_view = m_charge.span_cview();
-            m_mass_view = m_mass.span_cview();
+            m_charge_view = get_const_field(m_charge);
+            m_mass_view = get_const_field(m_mass);
             assert(charge.size() >= 2);
             bool electron_found = false;
-            for (discrete_element_type const isp : m_charge.domain()) {
+            for (discrete_element_type const isp : get_idx_range(m_charge)) {
                 if (m_charge(isp) == -1.) {
                     electron_found = true;
                     m_ielec = isp;
@@ -120,13 +121,13 @@ public:
         /// @return kinetic and adiabatic charges array
         auto charges() const
         {
-            return m_charge.span_view();
+            return get_const_field(m_charge);
         }
 
         /// @return kinetic and adiabatic masses array
         auto masses() const
         {
-            return m_mass.span_view();
+            return get_const_field(m_mass);
         }
     };
 };

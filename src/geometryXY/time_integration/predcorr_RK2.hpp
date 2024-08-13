@@ -89,41 +89,41 @@ public:
         DFieldMemXY electrostatic_potential_alloc(meshXY);
         DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
-        VectorFieldXY_XY electric_field_alloc(meshXY);
-        VectorSpanXY_XY electric_field = get_field(electric_field_alloc);
+        VectorFieldMemXY_XY electric_field_alloc(meshXY);
+        VectorFieldXY_XY electric_field = get_field(electric_field_alloc);
 
         // Definition of the RK2
-        RK2<DFieldMemXY, VectorFieldXY_XY> predictor_corrector(meshXY);
+        RK2<DFieldMemXY, VectorFieldMemXY_XY> predictor_corrector(meshXY);
 
         // Computation of the advection field: Poisson equation ---
-        std::function<void(VectorSpanXY_XY, DConstFieldXY)> define_electric_field
-                = [&](VectorSpanXY_XY electric_field, DConstFieldXY allfdistribu_view) {
-                      IdxRangeXY xy_dom(get_idx_range<GridX, GridY>(allfdistribu_view));
+        std::function<void(VectorFieldXY_XY, DConstFieldXY)> define_electric_field
+                = [&](VectorFieldXY_XY electric_field, DConstFieldXY allfdistribu_const) {
+                      IdxRangeXY xy_dom(get_idx_range<GridX, GridY>(allfdistribu_const));
 
                       // --- compute electrostatic potential and electric field:
                       DFieldMemXY electrostatic_potential_alloc(xy_dom);
                       DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
                       /*
-                        The applied Poisson solver needs a span type for allfdistribu. 
-                        The time stepper uses a view type. So we create a temporary  
-                        allfdistribu_alloc chunk containing the values of the view 
+                        The applied Poisson solver needs a modifiable field for allfdistribu.
+                        The time stepper uses a constant field type. So we create a temporary  
+                        allfdistribu_alloc chunk containing the values of the constant 
                         allfdistribu to solve the type conflict in the Poisson solver. 
-                    */
+                      */
                       DFieldMemXY allfdistribu_alloc(xy_dom);
-                      DFieldXY allfdistribu_span = get_field(allfdistribu_alloc);
+                      DFieldXY allfdistribu = get_field(allfdistribu_alloc);
                       ddc::parallel_deepcopy(
                               Kokkos::DefaultExecutionSpace(),
-                              allfdistribu_span,
-                              allfdistribu_view);
+                              allfdistribu,
+                              allfdistribu_const);
 
 
-                      m_poisson_solver(electrostatic_potential, electric_field, allfdistribu_span);
+                      m_poisson_solver(electrostatic_potential, electric_field, allfdistribu);
                   };
 
         // Advection operator ---
-        std::function<void(DFieldXY, VectorViewXY_XY, double)> advect_allfdistribu
-                = [&](DFieldXY allfdistribu, VectorViewXY_XY electric_field, double dt) {
+        std::function<void(DFieldXY, VectorConstFieldXY_XY, double)> advect_allfdistribu
+                = [&](DFieldXY allfdistribu, VectorConstFieldXY_XY electric_field, double dt) {
                       DConstFieldXY electric_field_x(ddcHelper::get<X>(electric_field));
                       DConstFieldXY electric_field_y(ddcHelper::get<Y>(electric_field));
 

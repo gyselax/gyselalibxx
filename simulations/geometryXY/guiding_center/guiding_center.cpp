@@ -148,8 +148,8 @@ int main(int argc, char** argv)
     DFieldMemXY electrostatic_potential_alloc(meshXY);
     DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
-    VectorFieldXY_XY electric_field_alloc(meshXY);
-    VectorSpanXY_XY electric_field = get_field(electric_field_alloc);
+    VectorFieldMemXY_XY electric_field_alloc(meshXY);
+    VectorFieldXY_XY electric_field = get_field(electric_field_alloc);
 
     poisson_solver(electrostatic_potential, electric_field, allfdistribu);
 

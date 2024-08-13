@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include <geometry.hpp>
-
+#include "geometry.hpp"
 #include "ikineticfluidcoupling.hpp"
 #include "itimesolver_hybrid.hpp"
 
@@ -57,7 +56,7 @@ public:
      * @param[in, out] allfdistribu On input: the initial value of the distribution function.
      *                              On output: the value of the distribution function after solving 
      *                              the Boltzmann-Poisson-fluid system a given number of iterations.
-     ** @param[in, out] fluid_moments On input: a span referencing the fluid species.
+     ** @param[in, out] fluid_moments On input: a field referencing the fluid species.
      *                                On output: the state of the fluid species after solving 
      *                                the Boltzmann-Poisson-fluid system a given number of iterations.
      * @param[in] time_start The physical time at the start of the simulation.

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <cassert>
 #include <cmath>
@@ -6,12 +7,11 @@
 
 #include <sll/matrix_banded.hpp>
 
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
+#include "irighthandside.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
  * @brief Class describing the intra-species collision operator
@@ -61,12 +61,12 @@ public:
     /**
      * A type representing a mesh for species, space and ghosted vx mesh. 
      */
-    using IDomainSpXVx_ghosted = IdxRange<Species, GridX, GhostedVx>;
+    using IdxRangeSpXVx_ghosted = IdxRange<Species, GridX, GhostedVx>;
 
     /**
      * A type representing a mesh for species, space and ghosted staggered vx mesh. 
      */
-    using IDomainSpXVx_ghosted_staggered = IdxRange<Species, GridX, GhostedVxStaggered>;
+    using IdxRangeSpXVx_ghosted_staggered = IdxRange<Species, GridX, GhostedVxStaggered>;
 
     /**
      * A type representing a ghosted vx index. 
@@ -109,8 +109,8 @@ private:
     IdxRange<GhostedVx> m_gridvx_ghosted;
     IdxRange<GhostedVxStaggered> m_gridvx_ghosted_staggered;
 
-    IDomainSpXVx_ghosted m_mesh_ghosted;
-    IDomainSpXVx_ghosted_staggered m_mesh_ghosted_staggered;
+    IdxRangeSpXVx_ghosted m_mesh_ghosted;
+    IdxRangeSpXVx_ghosted_staggered m_mesh_ghosted_staggered;
 
 public:
     /**
@@ -134,7 +134,7 @@ public:
      * @param[inout] allfdistribu The distribution function.
      * @param[in] dt The time step over which the collisions occur.
      *
-     * @return A span referencing the distribution function passed as argument.
+     * @return A field referencing the distribution function passed as argument.
      */
     DFieldSpXVx operator()(DFieldSpXVx allfdistribu, double dt) const override;
 
@@ -196,9 +196,9 @@ public:
             DFieldSpXVx AA,
             DFieldSpXVx BB,
             DFieldSpXVx CC,
-            Field<double, IDomainSpXVx_ghosted> Dcoll,
-            Field<double, IDomainSpXVx_ghosted_staggered> Dcoll_staggered,
-            Field<double, IDomainSpXVx_ghosted> Nucoll,
+            Field<double, IdxRangeSpXVx_ghosted> Dcoll,
+            Field<double, IdxRangeSpXVx_ghosted_staggered> Dcoll_staggered,
+            Field<double, IdxRangeSpXVx_ghosted> Nucoll,
             double deltat) const;
 
     /**

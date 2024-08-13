@@ -121,9 +121,9 @@ public:
      * transpose_to function must be used to disambiguate.
      *
      * @param[in] execution_space The execution space (Host/Device) where the code will run.
-     * @param[out] recv_span The chunk which will describe the data in the new layout. This
+     * @param[out] recv_field The chunk which will describe the data in the new layout. This
      *                      data is gathered from the MPI processes.
-     * @param[in] send_span The chunk describing the data in the current layout. This data
+     * @param[in] send_field The chunk describing the data in the current layout. This data
      *                      will be scattered to other MPI processes.
      */
     template <
@@ -134,8 +134,8 @@ public:
             class ExecSpace>
     void operator()(
             ExecSpace const& execution_space,
-            Field<ElementType, OutIdxRange, field_layout_type, MemSpace> recv_span,
-            ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_span)
+            Field<ElementType, OutIdxRange, field_layout_type, MemSpace> recv_field,
+            ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_field)
     {
         static_assert(!std::is_same_v<InIdxRange, OutIdxRange>);
         static_assert(
@@ -152,7 +152,7 @@ public:
                 std::is_same_v<OutIdxRange, typename Layout1::discrete_domain_type>,
                 Layout1,
                 Layout2>;
-        this->transpose_to<OutLayout>(execution_space, recv_span, send_span);
+        this->transpose_to<OutLayout>(execution_space, recv_field, send_field);
     }
 
     /**
@@ -165,9 +165,9 @@ public:
      * @tparam OutLayout The layout that the data should be transposed to.
      *
      * @param[in] execution_space The execution space (Host/Device) where the code will run.
-     * @param[out] recv_span The chunk which will describe the data in the new layout. This
+     * @param[out] recv_field The chunk which will describe the data in the new layout. This
      *                      data is gathered from the MPI processes.
-     * @param[in] send_span The chunk describing the data in the current layout. This data
+     * @param[in] send_field The chunk describing the data in the current layout. This data
      *                      will be scattered to other MPI processes.
      */
     template <class OutLayout, class ElementType, class MemSpace, class ExecSpace, class InIdxRange>
@@ -176,8 +176,8 @@ public:
             Field<ElementType,
                   typename OutLayout::discrete_domain_type,
                   field_layout_type,
-                  MemSpace> recv_span,
-            ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_span)
+                  MemSpace> recv_field,
+            ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_field)
     {
         using InLayout = std::conditional_t<std::is_same_v<OutLayout, Layout1>, Layout2, Layout1>;
         /*****************************************************************
@@ -263,9 +263,9 @@ public:
         }
 
         // Collect the useful subindex ranges described in the fields
-        batch_idx_range_type batch_idx_range(get_idx_range(send_span));
-        scatter_idx_range_type scatter_idx_range(get_idx_range(recv_span));
-        gather_idx_range_type gather_idx_range(get_idx_range(send_span));
+        batch_idx_range_type batch_idx_range(get_idx_range(send_field));
+        scatter_idx_range_type scatter_idx_range(get_idx_range(recv_field));
+        gather_idx_range_type gather_idx_range(get_idx_range(send_field));
 
         // Build the index ranges describing the function inputs but including the MPI rank information
         input_mpi_idx_range_type input_mpi_idx_range(
@@ -278,8 +278,8 @@ public:
                 scatter_idx_range,
                 gather_idx_range,
                 batch_idx_range);
-        assert(input_mpi_idx_range.size() == send_span.size());
-        assert(output_mpi_idx_range.size() == recv_span.size());
+        assert(input_mpi_idx_range.size() == send_field.size());
+        assert(output_mpi_idx_range.size() == recv_field.size());
 
         // Create the index ranges used during the alltoall call (the MPI rank index range is first in this layout)
         input_alltoall_idx_range_type input_alltoall_idx_range(input_mpi_idx_range);
@@ -289,9 +289,9 @@ public:
          * Create views on the function inputs with the index ranges including the MPI rank information
          *****************************************************************/
         ConstField<ElementType, input_mpi_idx_range_type, field_layout_type, MemSpace>
-                send_mpi_span(send_span.data_handle(), input_mpi_idx_range);
+                send_mpi_field(send_field.data_handle(), input_mpi_idx_range);
         Field<ElementType, output_mpi_idx_range_type, field_layout_type, MemSpace>
-                recv_mpi_span(recv_span.data_handle(), output_mpi_idx_range);
+                recv_mpi_field(recv_field.data_handle(), output_mpi_idx_range);
 
         /*****************************************************************
          * Transpose data (both on the rank and between ranks)
@@ -299,9 +299,9 @@ public:
         // Create views or copies of the function inputs such that they are laid out on the
         // index range used during the alltoall call
         auto alltoall_send_buffer = ddcHelper::create_transpose_mirror_view_and_copy<
-                input_alltoall_idx_range_type>(execution_space, send_mpi_span);
+                input_alltoall_idx_range_type>(execution_space, send_mpi_field);
         auto alltoall_recv_buffer = ddcHelper::create_transpose_mirror<
-                output_alltoall_idx_range_type>(execution_space, recv_mpi_span);
+                output_alltoall_idx_range_type>(execution_space, recv_mpi_field);
 
         // Call the MPI AlltoAll routine
         call_all_to_all(
@@ -310,9 +310,12 @@ public:
                 get_const_field(alltoall_send_buffer));
 
         // If alltoall_recv_buffer owns its data (not a view) then copy the results back to
-        // recv_mpi_span which is a view on recv_span, the function output
+        // recv_mpi_field which is a view on recv_field, the function output
         if constexpr (!ddc::is_borrowed_chunk_v<decltype(alltoall_recv_buffer)>) {
-            transpose_layout(execution_space, recv_mpi_span, get_const_field(alltoall_recv_buffer));
+            transpose_layout(
+                    execution_space,
+                    recv_mpi_field,
+                    get_const_field(alltoall_recv_buffer));
         }
     }
 
@@ -326,12 +329,12 @@ private:
             class ExecSpace>
     void call_all_to_all(
             ExecSpace const& execution_space,
-            Field<ElementType, MPIRecvIdxRange, field_layout_type, MemSpace> recv_span,
-            ConstField<ElementType, MPISendIdxRange, field_layout_type, MemSpace> send_span)
+            Field<ElementType, MPIRecvIdxRange, field_layout_type, MemSpace> recv_field,
+            ConstField<ElementType, MPISendIdxRange, field_layout_type, MemSpace> send_field)
     {
         // No Cuda-aware MPI yet
-        auto send_buffer = ddc::create_mirror_view_and_copy(send_span);
-        auto recv_buffer = ddc::create_mirror_view(recv_span);
+        auto send_buffer = ddc::create_mirror_view_and_copy(send_field);
+        auto recv_buffer = ddc::create_mirror_view(recv_field);
         MPI_Alltoall(
                 send_buffer.data_handle(),
                 send_buffer.size() / m_comm_size,
@@ -341,7 +344,7 @@ private:
                 MPI_type_descriptor_t<ElementType>,
                 IMPITranspose<Layout1, Layout2>::m_comm);
         if constexpr (!ddc::is_borrowed_chunk_v<decltype(recv_buffer)>) {
-            ddc::parallel_deepcopy(execution_space, recv_span, recv_buffer);
+            ddc::parallel_deepcopy(execution_space, recv_field, recv_buffer);
         }
     }
 

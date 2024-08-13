@@ -30,16 +30,14 @@ class MultipatchSplineBuilder
 {
     using BuilderTuple = std::tuple<Builders const&...>;
     using SplineTuple = std::tuple<
-            Field<double,
-                  typename Builders::batched_spline_domain_type,
-                  std::experimental::layout_right,
-                  typename Builders::memory_space>...>;
+            DField<typename Builders::batched_spline_domain_type,
+                   std::experimental::layout_right,
+                   typename Builders::memory_space>...>;
     // For PERIODIC or GREVILLE boundary conditions
     using ValuesTuple = std::tuple<
-            Field<double,
-                  typename Builders::batched_interpolation_domain_type,
-                  std::experimental::layout_right,
-                  typename Builders::memory_space>...>;
+            DField<typename Builders::batched_interpolation_domain_type,
+                   std::experimental::layout_right,
+                   typename Builders::memory_space>...>;
 
 
     BuilderTuple const m_builders;
@@ -81,6 +79,6 @@ private:
             ValuesTuple const& values,
             std::index_sequence<I...>)
     {
-        (std::get<I>(m_builders)(std::get<I>(splines), std::get<I>(values).span_cview()), ...);
+        (std::get<I>(m_builders)(std::get<I>(splines), get_const_field(std::get<I>(values))), ...);
     };
 };

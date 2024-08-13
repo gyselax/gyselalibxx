@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <functional>
 
@@ -116,20 +117,20 @@ public:
 
 
         // The function describing how the derivative of the evolve function is calculated.
-        std::function<void(DVectorFieldRTheta<X_adv, Y_adv>, ConstFieldRTheta<CoordRTheta>)> dy
-                = [&](DVectorFieldRTheta<X_adv, Y_adv> updated_advection_field,
-                      ConstFieldRTheta<CoordRTheta> feet) {
-                      m_evaluator_advection_field(
-                              ddcHelper::get<X_adv>(updated_advection_field).span_view(),
-                              get_const_field(feet),
-                              ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs)
-                                      .span_cview());
-                      m_evaluator_advection_field(
-                              ddcHelper::get<Y_adv>(updated_advection_field).span_view(),
-                              get_const_field(feet),
-                              ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs)
-                                      .span_cview());
-                  };
+        std::function<void(DVectorFieldRTheta<X_adv, Y_adv>, ConstFieldRTheta<CoordRTheta>)> dy =
+                [&](DVectorFieldRTheta<X_adv, Y_adv> updated_advection_field,
+                    ConstFieldRTheta<CoordRTheta> feet) {
+                    m_evaluator_advection_field(
+                            get_field(ddcHelper::get<X_adv>(updated_advection_field)),
+                            get_const_field(feet),
+                            get_const_field(
+                                    ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs)));
+                    m_evaluator_advection_field(
+                            get_field(ddcHelper::get<Y_adv>(updated_advection_field)),
+                            get_const_field(feet),
+                            get_const_field(
+                                    ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs)));
+                };
 
         // The function describing how the value(s) are updated using the derivative.
         std::function<void(FieldRTheta<CoordRTheta>, DConstVectorFieldRTheta<X_adv, Y_adv>, double)>

@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
 
-#include <geometry.hpp>
-
+#include "geometry.hpp"
 #include "ireactionrate.hpp"
 
 /**
@@ -26,11 +24,11 @@ public:
     /**
      * @brief Operator for computing the reaction rate.
      * 
-     * @param[out] rate On input: the uninitialized value of a Span referencing a reaction rate.
-     *                      On output: the span referencing a constant reaction rate.
-     * @param[in] density A span referencing the density.
-     * @param[in] temperature A span referencing the temperatures.
-     * @return A span referencing the reaction rate.
+     * @param[out] rate On input: the uninitialized value of a Field referencing a reaction rate.
+     *                      On output: the field referencing a constant reaction rate.
+     * @param[in] density A field referencing the density.
+     * @param[in] temperature A field referencing the temperatures.
+     * @return A field referencing the reaction rate.
      */
     DFieldSpX operator()(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature)
             const override;
