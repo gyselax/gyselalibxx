@@ -5,6 +5,7 @@ var dir_2cb1bf5254cdb852c9c33e2ec5cf247b =
     [ "data_types", "dir_b275d1bfd448437cc7a148047f8d5592.html", "dir_b275d1bfd448437cc7a148047f8d5592" ],
     [ "geometry5D", "dir_d19a9aef731ec5e9b746a373b6509003.html", "dir_d19a9aef731ec5e9b746a373b6509003" ],
     [ "geometryRTheta", "dir_2daa31455a745d8a4b29bdb1d755058a.html", "dir_2daa31455a745d8a4b29bdb1d755058a" ],
+    [ "geometryTokamAxi", "dir_a338a3814d862c238fac4cbb3384dd27.html", "dir_a338a3814d862c238fac4cbb3384dd27" ],
     [ "geometryVparMu", "dir_bed635a6e96132b7fe749c72b0b07a99.html", "dir_bed635a6e96132b7fe749c72b0b07a99" ],
     [ "geometryXVx", "dir_a2bb6054debc127821c0784e49f1530c.html", "dir_a2bb6054debc127821c0784e49f1530c" ],
     [ "geometryXY", "dir_708e2f07fae7cfcd9492f31176bb16a6.html", "dir_708e2f07fae7cfcd9492f31176bb16a6" ],
