@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include <geometry.hpp>
-
+#include "geometry.hpp"
 #include "ifluidtransportsolver.hpp"
 #include "ireactionrate.hpp"
 
@@ -101,11 +100,11 @@ public:
      * only fluid moments we consider.
      *
      * @param[inout] neutrals The fluid moments describing the neutrals.
-     * @param[in] allfdistribu A Span referencing a constant view of the distribution function.
-     * @param[in] efield A Span referencing a constant view of the electric field.
+     * @param[in] allfdistribu A Field referencing a constant view of the distribution function.
+     * @param[in] efield A Field referencing a constant view of the electric field.
      * @param[in] dt The time step.
      *
-     * @return A span referencing the neutral fluid moments passed as argument.
+     * @return A field referencing the neutral fluid moments passed as argument.
      */
     DFieldSpMomX operator()(
             DFieldSpMomX neutrals,

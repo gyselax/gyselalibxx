@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
@@ -198,7 +199,7 @@ using DFieldMemR = FieldMemR<double>;
 using DFieldMemTheta = FieldMemTheta<double>;
 using DFieldMemRTheta = FieldMemRTheta<double>;
 
-// --- Span definitions
+// --- Field definitions
 template <class ElementType>
 using FieldR = host_t<Field<ElementType, IdxRangeR>>;
 
@@ -219,22 +220,22 @@ using DFieldRTheta = FieldRTheta<double>;
 
 // --- View definitions
 template <class ElementType>
-using ConstFieldR = host_t<ConstField<ElementType const, IdxRangeR>>;
+using ConstFieldR = host_t<ConstField<ElementType, IdxRangeR>>;
 
 template <class ElementType>
-using ConstFieldTheta = host_t<ConstField<ElementType const, IdxRangeTheta>>;
+using ConstFieldTheta = host_t<ConstField<ElementType, IdxRangeTheta>>;
 
 template <class ElementType>
-using ConstFieldRTheta = host_t<ConstField<ElementType const, IdxRangeRTheta>>;
+using ConstFieldRTheta = host_t<ConstField<ElementType, IdxRangeRTheta>>;
 
 using DConstFieldR = ConstFieldR<double>;
 using DConstFieldTheta = ConstFieldTheta<double>;
 using DConstFieldRTheta = ConstFieldRTheta<double>;
 
 // --- Spline representation definitions
-using Spline2D = host_t<FieldMem<double, BSIdxRangeRTheta>>;
-using Spline2DField = host_t<Field<double, BSIdxRangeRTheta>>;
-using Spline2DConstField = host_t<Field<double const, BSIdxRangeRTheta>>;
+using Spline2D = host_t<DFieldMem<BSIdxRangeRTheta>>;
+using Spline2DField = host_t<DField<BSIdxRangeRTheta>>;
+using Spline2DConstField = host_t<DConstField<BSIdxRangeRTheta>>;
 
 /**
  * @brief Tag the polar B-splines decomposition of a function.

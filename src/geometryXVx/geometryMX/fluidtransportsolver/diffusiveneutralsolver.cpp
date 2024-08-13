@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
 
-#include <quadrature.hpp>
-#include <rk2.hpp>
-#include <trapezoid_quadrature.hpp>
-
 #include "diffusiveneutralsolver.hpp"
+#include "quadrature.hpp"
+#include "rk2.hpp"
+#include "trapezoid_quadrature.hpp"
 
 
 DiffusiveNeutralSolver::DiffusiveNeutralSolver(
@@ -129,19 +128,19 @@ void DiffusiveNeutralSolver::get_derivative(
 
         m_spline_x_builder(
                 get_field(density_equilibrium_velocity_spline_x_coeff),
-                density_equilibrium_velocity[isp].span_cview());
+                get_const_field(density_equilibrium_velocity[isp]));
 
         m_spline_x_builder(
                 get_field(diffusion_temperature_spline_x_coeff),
-                diffusion_temperature[isp].span_cview());
+                get_const_field(diffusion_temperature[isp]));
 
         m_spline_x_builder(
                 get_field(neutrals_density_spline_x_coeff),
-                neutrals[IdxSpMom(isp, ineutral_density)].span_cview());
+                get_const_field(neutrals[IdxSpMom(isp, ineutral_density)]));
 
         // compute gradients
         m_spline_x_evaluator
-                .deriv(gradx_density_equilibrium_velocity[isp].span_view(),
+                .deriv(get_field(gradx_density_equilibrium_velocity[isp]),
                        get_const_field(coords_eval),
                        get_const_field(density_equilibrium_velocity_spline_x_coeff));
 
@@ -161,7 +160,7 @@ void DiffusiveNeutralSolver::get_derivative(
 
         m_spline_x_builder(
                 get_field(gradx_neutrals_density_spline_x_coeff),
-                gradx_neutrals_density[isp].span_cview());
+                get_const_field(gradx_neutrals_density[isp]));
 
         m_spline_x_evaluator
                 .deriv(laplx_neutrals_density[isp],

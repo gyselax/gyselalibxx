@@ -39,9 +39,9 @@ using FieldX = Field<Datatype, IdxRangeX>;
 
 
 template <class Datatype>
-using VectorFieldX = VectorFieldMem<Datatype, IdxRangeX, Direction>;
+using VectorFieldMemX = VectorFieldMem<Datatype, IdxRangeX, Direction>;
 template <class Datatype>
-using VectorFieldFieldX = VectorField<Datatype, IdxRangeX, Direction>;
+using VectorFieldX = VectorField<Datatype, IdxRangeX, Direction>;
 
 
 static IdxX constexpr lbound_x(50);
@@ -72,9 +72,9 @@ TEST(MemorySpace, FieldOnDeviceT)
 }
 
 
-TEST(MemorySpace, VectorFieldOnDeviceT)
+TEST(MemorySpace, VectorFieldMemOnDeviceT)
 {
-    device_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
+    device_t<VectorFieldMemX<double>> vector_field_test_alloc(dom_x);
     VectorFieldMem<
             double,
             IdxRangeX,
@@ -85,10 +85,10 @@ TEST(MemorySpace, VectorFieldOnDeviceT)
 }
 
 
-TEST(MemorySpace, VectorFieldSpanOnDeviceT)
+TEST(MemorySpace, VectorFieldOnDeviceT)
 {
-    device_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    device_t<VectorFieldFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
+    device_t<VectorFieldMemX<double>> vector_field_test_alloc(dom_x);
+    device_t<VectorFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
     VectorFieldMem<
             double,
             IdxRangeX,
@@ -125,9 +125,9 @@ TEST(MemorySpace, FieldOnHostT)
 }
 
 
-TEST(MemorySpace, VectorFieldOnHostT)
+TEST(MemorySpace, VectorFieldMemOnHostT)
 {
-    host_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
+    host_t<VectorFieldMemX<double>> vector_field_test_alloc(dom_x);
     VectorFieldMem<
             double,
             IdxRangeX,
@@ -138,10 +138,10 @@ TEST(MemorySpace, VectorFieldOnHostT)
 }
 
 
-TEST(MemorySpace, VectorFieldSpanOnHostT)
+TEST(MemorySpace, VectorFieldOnHostT)
 {
-    host_t<VectorFieldX<double>> vector_field_test_alloc(dom_x);
-    host_t<VectorFieldFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
+    host_t<VectorFieldMemX<double>> vector_field_test_alloc(dom_x);
+    host_t<VectorFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
     VectorFieldMem<
             double,
             IdxRangeX,

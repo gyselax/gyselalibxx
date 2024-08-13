@@ -351,17 +351,21 @@ private:
 
         auto quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));
 
+        FEMBSplinesIdxRange spline_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
+        FEMBSplinesIdx first_bspline_idx = spline_idx_range.front();
+
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
         ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
-            FEMBSplinesIdx const jmin
+            FEMBSplinesIdx const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
+            std::size_t j_min = (jmin_idx - first_bspline_idx).value();
             for (int j = 0; j < s_degree + 1; ++j) {
                 for (int k = 0; k < s_degree + 1; ++k) {
-                    int const j_idx = (j + jmin.uid()) % nbasis;
-                    int const k_idx = (k + jmin.uid()) % nbasis;
+                    int const j_idx = (j + j_min) % nbasis;
+                    int const k_idx = (k + j_min) % nbasis;
                     double a_jk = m_fem_matrix->get_element(j_idx, k_idx);
                     // Update element
                     a_jk += derivs[j] * derivs[k] * quad_coef_host(ix);
@@ -381,7 +385,7 @@ private:
         ddc::discrete_space<InputBSplines>().integrals(get_field(int_vals));
 
         for (FEMBSplinesIdx const ix : bspline_dom) {
-            int const i = ix.uid();
+            int const i = (ix - first_bspline_idx).value();
             m_fem_matrix->set_element(nbasis, i, int_vals(ix));
             m_fem_matrix->set_element(i, nbasis, int_vals(ix));
         }
@@ -409,17 +413,21 @@ private:
 
         auto quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));
 
+        FEMBSplinesIdxRange spline_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
+        FEMBSplinesIdx first_bspline_idx = spline_idx_range.front();
+
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
         ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
-            FEMBSplinesIdx const jmin
+            FEMBSplinesIdx const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
+            std::size_t j_min = (jmin_idx - first_bspline_idx).value();
             for (int j = 0; j < s_degree + 1; ++j) {
                 for (int k = 0; k < s_degree + 1; ++k) {
-                    int const j_idx = (j + jmin.uid()) % nbasis - 1;
-                    int const k_idx = (k + jmin.uid()) % nbasis - 1;
+                    int const j_idx = (j + j_min) % nbasis - 1;
+                    int const k_idx = (k + j_min) % nbasis - 1;
 
                     if (j_idx != -1 && j_idx != m_matrix_size && k_idx != -1
                         && k_idx != m_matrix_size) {
@@ -484,8 +492,9 @@ public:
                     DSpan1D values = as_span(values_alloc);
                     FEMBSplinesIdx const jmin
                             = ddc::discrete_space<FEMBSplines>().eval_basis(values, coord);
-                    double const rho_val
-                            = spline_evaluator_proxy(coord, rho_spline_coef[ib].span_cview());
+                    double const rho_val = spline_evaluator_proxy(
+                            coord,
+                            DConstField<BSplinesIdxRange>(rho_spline_coef[ib]));
                     for (int j = 0; j < s_degree + 1; ++j) {
                         FEMBSplinesIdx j_idx = jmin + j;
                         while (j_idx > last_basis_element) {

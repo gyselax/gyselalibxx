@@ -14,10 +14,10 @@ The shortcuts defined in the geometry file represent:
 7.  The type which describes the index of a grid point (e.g. `IndexX`).
 8.  The type which describes a distance between grid points (e.g. `IVectX`).
 9.  The type which describes the domain on which the grid points are defined (e.g. `IDomainX`).
-10. The templated type of a field defined on each of the domains (e.g. `FieldX<ElementType>`). A field defines values at each grid point in the provided domain.
-11. The type of a field of doubles defined on each of the domains (e.g. `DFieldX`).
-12. The templated type of a field span defined on each of the domains (e.g. `SpanX<ElementType>`). A span is similar to a reference. It provides access to a field or a sub-set of a field, but does not own the data itself.
-13. The type of a span of doubles defined on each of the domains (e.g. `DSpanX`).
-12. The templated type of a field view defined on each of the domains (e.g. `ViewX<ElementType>`). A view is very similar to a span. The only difference is that a view is constant. In other words, the data in the underlying field cannot be modified using a view.
-13. The type of a view of doubles defined on each of the domains (e.g. `DViewX`).
-14. The type of VectorField defined on the domain `IDomainXY` on the directions `NDTag<RDimX, RDimY>` (`VectorFieldXY_XY`). 
+10. The templated type of a field memory block defined on each of the domains (e.g. `FieldMemX<ElementType>`). A field memory block allocates values at each grid point in the provided domain.
+11. The type of a field memory block of doubles defined on each of the domains (e.g. `DFieldMemX`).
+12. The templated type of a field defined on each of the domains (e.g. `FieldX<ElementType>`). A field is similar to a reference. It provides access to a field memory block or a sub-set of a field memory block, but does not own the data itself.
+13. The type of a field of doubles defined on each of the domains (e.g. `DFieldX`).
+14. The templated type of a constant field defined on each of the domains (e.g. `ConstFieldX<ElementType>`).
+15. The type of a constant field of doubles defined on each of the domains (e.g. `DConstFieldX`).
+16. The type of VectorField defined on the domain `IDomainXY` on the directions `NDTag<RDimX, RDimY>` (`VectorFieldXY_XY`). 

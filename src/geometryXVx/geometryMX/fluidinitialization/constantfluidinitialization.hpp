@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include <geometry.hpp>
-
+#include "geometry.hpp"
 #include "ifluidinitialization.hpp"
 /**
  * @brief A class that initializes a fluid species with constant moments.
@@ -23,9 +22,9 @@ public:
 
     /**
      * @brief Initializes the fluid species with a constant moments.
-     * @param[inout] fluid_moments On input: a span referencing an uninitialized fluid species described through its moments.
-     *                             On output: a span referencing a the fluid species initialized with constant moments.
-     * @return A span referencing the initialized fluid species.
+     * @param[inout] fluid_moments On input: a field referencing an uninitialized fluid species described through its moments.
+     *                             On output: a field referencing a the fluid species initialized with constant moments.
+     * @return A field referencing the initialized fluid species.
      */
     DFieldSpMomX operator()(DFieldSpMomX const fluid_moments) const override;
 };

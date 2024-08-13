@@ -16,12 +16,12 @@ private:
     using IdxRangeR = IdxRange<GridR>;
 
 public:
-    /// Type alias for a field on a grid of radial values
-    using DFieldMemR = FieldMem<double, IdxRangeR>;
-    /// Type alias for a span of a field defined on a grid of radial values
-    using DFieldR = Field<double, IdxRangeR>;
-    /// Type alias for a span of a field defined on a grid of radial values
-    using DConstFieldR = Field<double const, IdxRangeR>;
+    /// Type alias for a field memory block on a grid of radial values
+    using DFieldMemR = DFieldMem<IdxRangeR>;
+    /// Type alias for a field defined on a grid of radial values
+    using DFieldR = DField<IdxRangeR>;
+    /// Type alias for a field defined on a grid of radial values
+    using DConstFieldR = DConstField<IdxRangeR>;
     /// radial_chunk_type used to treat the 0D case for radial profile
     using radial_chunk_type = DConstFieldR;
 

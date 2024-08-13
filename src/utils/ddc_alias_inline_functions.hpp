@@ -1,4 +1,7 @@
+// SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 
 #include <sll/polar_spline.hpp>
@@ -54,11 +57,12 @@ inline auto get_spline_idx_range(SplineBuilder const& builder) noexcept
  * @returns The modifiable field.
  */
 template <class FieldType>
-inline auto get_field(FieldType& field)
+inline auto get_field(FieldType&& field)
 {
+    using Type = std::remove_cv_t<std::remove_reference_t<FieldType>>;
     static_assert(
-            (ddc::is_chunk_v<FieldType>) || (is_field_v<FieldType>) || (is_deriv_field_v<FieldType>)
-                    || (is_polar_spline_v<FieldType>),
+            (ddc::is_chunk_v<Type>) || (is_field_v<Type>) || (is_deriv_field_v<Type>)
+                    || (is_polar_spline_v<Type>),
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_view();
 }
@@ -70,11 +74,12 @@ inline auto get_field(FieldType& field)
  * @returns The constant field.
  */
 template <class FieldType>
-inline auto get_const_field(FieldType const& field)
+inline auto get_const_field(FieldType&& field)
 {
+    using Type = std::remove_cv_t<std::remove_reference_t<FieldType>>;
     static_assert(
-            (ddc::is_chunk_v<FieldType>) || (is_field_v<FieldType>) || (is_deriv_field_v<FieldType>)
-                    || (is_polar_spline_v<FieldType>),
+            (ddc::is_chunk_v<Type>) || (is_field_v<Type>) || (is_deriv_field_v<Type>)
+                    || (is_polar_spline_v<Type>),
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_cview();
 }

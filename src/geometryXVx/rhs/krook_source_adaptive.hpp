@@ -1,7 +1,7 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
-#include <geometry.hpp>
-
+#include "geometry.hpp"
 #include "irighthandside.hpp"
 
 /**
@@ -73,7 +73,7 @@ public:
      * @param[inout] allfdistribu The distribution function.
      * @param[in] dt The time step.
      *
-     * @return A span referencing the distribution function passed as argument.
+     * @return A field referencing the distribution function passed as argument.
      */
     DFieldSpXVx operator()(DFieldSpXVx allfdistribu, double dt) const override;
 
@@ -84,7 +84,7 @@ public:
      * This coefficient depends on the considered species and ensures that 
      * the operator conserves the charge locally. 
      *
-     * @param[inout] amplitudes A Span that contains on output the amplitude 
+     * @param[inout] amplitudes A field that contains on output the amplitude 
      *                         coefficients for each species. 
      * @param[in] allfdistribu The distribution function.
      */

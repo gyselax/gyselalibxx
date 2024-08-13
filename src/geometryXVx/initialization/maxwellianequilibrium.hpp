@@ -3,11 +3,11 @@
 #pragma once
 
 #include <paraconf.h>
-#include <species_info.hpp>
 
 #include "geometry.hpp"
 #include "iequilibrium.hpp"
 #include "paraconfpp.hpp"
+#include "species_info.hpp"
 
 /**
  * @brief A class that initializes the distribution function as a Maxwellian.
@@ -49,8 +49,8 @@ public:
 
     /**
      * @brief Initializes allfequilibrium as a Maxwellian.
-     * @param[out] allfequilibrium A Span containing a Maxwellian distribution function.
-     * @return A Span containing a Maxwellian distribution function.
+     * @param[out] allfequilibrium A Field containing a Maxwellian distribution function.
+     * @return A Field containing a Maxwellian distribution function.
      */
     DFieldSpVx operator()(DFieldSpVx allfequilibrium) const override;
 

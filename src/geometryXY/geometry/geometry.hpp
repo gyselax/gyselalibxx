@@ -159,7 +159,7 @@ using FieldMemXY = FieldMem<ElementType, IdxRangeXY>;
 using DFieldMemXY = FieldMemXY<double>;
 
 
-//  Span definitions
+//  Field definitions
 template <class ElementType>
 using FieldX = Field<ElementType, IdxRangeX>;
 using DFieldX = FieldX<double>;
@@ -173,7 +173,7 @@ using FieldXY = Field<ElementType, IdxRangeXY>;
 using DFieldXY = FieldXY<double>;
 
 
-// View definitions
+// ConstField definitions
 template <class ElementType>
 using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
@@ -186,10 +186,11 @@ using DConstFieldXY = ConstFieldXY<double>;
 
 
 // VectorFieldMem aliases
-using VectorFieldXY_XY = VectorFieldMem<
+// Represent a vector field (v_x, v_y) on indices (x_i, y_j) : (v_x(x_i, y_j), v_y(x_i,y_j))
+using VectorFieldMemXY_XY = VectorFieldMem<
         double,
         IdxRangeXY,
         NDTag<X, Y>,
         ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>;
-using VectorSpanXY_XY = typename VectorFieldXY_XY::span_type;
-using VectorViewXY_XY = typename VectorFieldXY_XY::view_type;
+using VectorFieldXY_XY = typename VectorFieldMemXY_XY::span_type;
+using VectorConstFieldXY_XY = typename VectorFieldMemXY_XY::view_type;

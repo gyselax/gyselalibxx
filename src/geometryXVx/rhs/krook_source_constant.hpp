@@ -1,7 +1,7 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
-#include <geometry.hpp>
-
+#include "geometry.hpp"
 #include "irighthandside.hpp"
 
 /**
@@ -71,7 +71,7 @@ public:
      * @param[inout] allfdistribu The distribution function.
      * @param[in] dt The time step.
      *
-     * @return A span referencing the distribution function passed as argument.
+     * @return A field referencing the distribution function passed as argument.
      */
     DFieldSpXVx operator()(DFieldSpXVx allfdistribu, double dt) const override;
 };

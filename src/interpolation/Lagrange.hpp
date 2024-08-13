@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <iostream>
-#include <vector>
-
 #include <ddc/ddc.hpp>
 
-#include <ddc_helper.hpp>
-
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 enum class BCond { PERIODIC, DIRICHLET };
 
@@ -42,7 +38,7 @@ public:
      * @brief Usual Constructor
      *
      * @param[in] degree integer which correspond to the degree of interpolation.
-     * @param[in] x_nodes_fnodes Chunkspan of nodes and associated values of the function.
+     * @param[in] x_nodes_fnodes Field of nodes and associated values of the function.
      * @param[in] idx_range along interest direction, usedful in periodic case
      * @param[in] ghost DiscretVector which gives the number of ghosted points
      */
