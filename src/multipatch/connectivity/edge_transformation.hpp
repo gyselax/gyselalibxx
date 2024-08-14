@@ -66,7 +66,9 @@ public:
             IdxRangeEdge1 const& idx_range_patch_1,
             IdxRangeEdge2 const& idx_range_patch_2)
         : m_idx_range_patch_1(idx_range_patch_1)
-        , m_idx_range_patch_2(idx_range_patch_2) {};
+        , m_idx_range_patch_2(idx_range_patch_2)
+    {
+    }
 
     ~EdgeTransformation() = default;
 
@@ -117,7 +119,7 @@ public:
             rescale_x = target_length - rescale_x;
         }
         return target_min + rescale_x;
-    };
+    }
 
 
 
@@ -148,7 +150,7 @@ public:
         bool is_equivalent_idx_found = search_for_match(target_idx, current_idx);
         assert(is_equivalent_idx_found);
         return target_idx;
-    };
+    }
 
 
 
@@ -177,7 +179,7 @@ public:
                 = std::conditional_t<std::is_same_v<CurrentIdx, EdgeIdx1>, EdgeIdx2, EdgeIdx1>;
         TargetIdx potential_target_idx;
         return search_for_match(potential_target_idx, current_idx);
-    };
+    }
 
 
 
@@ -263,7 +265,6 @@ public:
             // If there is an equivalent index, update target_idx.
             if (is_equivalent_idx) {
                 double const rescaling_factor = double(n_cells_current) / double(n_cells_target);
-                int const current_idx_value = (current_idx - current_idx_range.front()).value();
                 TargetIdxStep target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
                 target_idx = TargetIdx(target_idx_range.front());
                 target_idx += target_idx_step_rescaled;

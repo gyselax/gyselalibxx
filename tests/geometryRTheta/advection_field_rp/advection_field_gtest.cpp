@@ -28,6 +28,7 @@
 #include "crank_nicolson.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
+#include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
@@ -70,30 +71,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     CoordR const r_min(rmin);
     CoordR const r_max(rmax);
-    IdxStepR const r_size(Nr);
+    IdxStepR const r_ncells(Nr);
 
     CoordTheta const p_min(0.0);
     CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_size(Nt);
+    IdxStepTheta const p_ncells(Nt);
 
-    std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordTheta> p_knots(p_size + 1);
-
-    double const dr((r_max - r_min) / r_size);
-    double const dp((p_max - p_min) / p_size);
-
-    r_knots[0] = r_min;
-    for (int i(1); i < r_size; ++i) {
-        r_knots[i] = r_min + i * dr;
-    }
-    r_knots[r_size] = r_max;
-
-    p_knots[p_size] = p_min;
-    for (int i(1); i < p_size; ++i) {
-        p_knots[i] = CoordTheta(p_min + i * dp);
-    }
-    p_knots[p_size] = p_max;
-
+    std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
+    std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);
 
     // Creating mesh & supports:
     ddc::init_discrete_space<BSplinesR>(r_knots);
