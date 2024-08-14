@@ -1,5 +1,11 @@
 var NAVTREEINDEX5 =
 {
+"collisions__inter_8hpp_source.html":[14,0,7,5,0],
+"collisions__intra_8hpp_source.html":[14,0,7,5,1],
+"collisions__utils_8hpp_source.html":[14,0,7,5,2],
+"compute__norms_8hpp.html":[14,0,16,0],
+"compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885":[14,0,16,0,2],
+"compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671":[14,0,16,0,0],
 "compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2":[14,0,16,0,1],
 "compute__norms_8hpp_source.html":[14,0,16,0],
 "connectivity_8hpp_source.html":[14,0,13,0,0],
@@ -227,6 +233,7 @@ var NAVTREEINDEX5 =
 "krook__source__adaptive_8hpp_source.html":[14,0,7,5,5],
 "krook__source__constant_8hpp_source.html":[14,0,7,5,6],
 "mask__tanh_8hpp_source.html":[14,0,7,5,7],
+"matching__idx__slice_8hpp_source.html":[14,0,13,0,5],
 "math__tools_8hpp_source.html":[14,2,0,0,0,3],
 "matrix_8hpp_source.html":[14,2,0,0,0,4],
 "matrix__banded_8hpp_source.html":[14,2,0,0,0,5],
@@ -242,12 +249,5 @@ var NAVTREEINDEX5 =
 "matrix__utils_8hpp_source.html":[14,2,0,0,0,15],
 "moments_8hpp_source.html":[14,0,17,0],
 "mpilayout_8hpp_source.html":[14,0,12,2],
-"mpitools_8hpp_source.html":[14,0,12,3],
-"mpitransposealltoall_8hpp_source.html":[14,0,12,4],
-"multipatch__spline__builder_8hpp_source.html":[14,0,13,2,0],
-"multipatch__type_8hpp_source.html":[14,0,13,1,0],
-"neumann__spline__quadrature_8hpp.html":[14,0,16,1],
-"neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797":[14,0,16,1,1],
-"neumann__spline__quadrature_8hpp.html#a6c16c5257236f20ed676298bea99c837":[14,0,16,1,0],
-"neumann__spline__quadrature_8hpp_source.html":[14,0,16,1]
+"mpitools_8hpp_source.html":[14,0,12,3]
 };

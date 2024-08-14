@@ -83,10 +83,10 @@ var NAVTREEINDEX =
 "classCollisionSpVparMu.html#ab0c339b07aedd6ed65f9698b4ec34f0f",
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445",
 "classLagrangeInterpolator.html#a60914d8391f7ea2e47c624a088ec5d92",
-"classPolarSplineEvaluator.html#a648c0a6d88caf58e87f2f0c3101a7102",
-"compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2",
-"noperturbinitialization_8hpp_source.html",
-"structIdxRangeSliceIterator.html#a2978026bd938a7badfc0429d98f69189"
+"classPolarSplineEvaluator.html#a0dace1c41499a5500a1f1c10e01794d1",
+"collisions__inter_8hpp_source.html",
+"mpitransposealltoall_8hpp_source.html",
+"structGridVy.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

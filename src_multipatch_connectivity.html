@@ -104,6 +104,23 @@ $(document).ready(function(){initNavTree('src_multipatch_connectivity.html','');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This directory defines structures and methods to describe patches and how they are connected to one another.</p>
+<p>The following sections decribe the structures and methods implemented:</p>
+<ul>
+<li><a href="#src_multipatch_connectivity__Patch">Patch</a> - Definition of <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> tag.</li>
+<li><a href="#src_multipatch_connectivity__Interfaces">Interfaces</a><ul>
+<li><a href="#src_multipatch_connectivity__Interfaces__Sticking_of_Two_Edges">Sticking of Two Edges</a><ul>
+<li><a href="#src_multipatch_connectivity__Interfaces__Multi-patch_domain">Multi-patch domain</a> - Mathematical definition of multi-patch domain.</li>
+<li><a href="#src_multipatch_connectivity__Interfaces__Edges">Edges</a> - Mathematical defintion of edges.</li>
+<li><a href="#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation">Sticking and Coordinate Transformation</a> - Mathematical defintion of coordinate transformation and links to the implemented class (<a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a>, <a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> and <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>).</li>
+<li><a href="#src_multipatch_connectivity__Interfaces__Index_transformation">Index transformation</a> - Algorithm of the index transformation in <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>.</li>
+<li><a href="#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes">Conformity of the meshes</a> - Definition of <code>UniformGridIdxMatching</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#src_multipatch_connectivity__References">References</a> - References.</li>
+<li><a href="#src_multipatch_connectivity__Contents">Contents</a> - List of files in the folder.</li>
+</ul>
 <h1><a class="anchor" id="src_multipatch_connectivity__Patch"></a>
 Patch</h1>
 <p>The tag <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> refers to a single 2D patch geometry. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as:</p>
@@ -170,6 +187,24 @@ Index transformation</h4>
 <li>If the greatest common divisor is \(1\), there is no equivalent index except for the first and last indices.</li>
 </ul>
 <p><b>For non-uniform grids</b>, we cannot use this algorithm. We check all the indices of the target patch if one of them fit with the current one. We can use dichotomy method for the search.</p>
+<h4><a class="anchor" id="autotoc_md69"></a>
+Conformity of the meshes</h4>
+<p>When there are non-conforming meshes, some operators need to loop on the "conforming indexes" at each <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a>, i.e. the indexes with an equivalent index on the other patch of the interface.</p>
+<p>The <code>UniformIdxStepIndexMatching</code> storage class stores for a given <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a> the "conforming indexes" in an <a class="el" href="classIdxRangeSlice.html" title="A class which describes a collection of equally spaced Idxs which form a index range.">IdxRangeSlice</a> for each patch. Currently, the <a class="el" href="classIdxRangeSlice.html" title="A class which describes a collection of equally spaced Idxs which form a index range.">IdxRangeSlice</a> stores indexes from an IdxRange with regular index steps. So the <code>UniformIdxStepIndexMatching</code> class does the same, and triggers assert when the conformity between two edges is not uniform.</p>
+<p>For example, <code>UniformIdxStepIndexMatching</code> is adapted to this type of interface </p><div class="fragment"><div class="line">0   1   2   3   4   5   6   7   8       &lt;- Edge1</div>
+<div class="line">|   |   |   |   |   |   |   |   |</div>
+<div class="line">   -2-     -2-     -2-     -2-          &lt;- The index steps are regular. </div>
+<div class="line">   -1-     -1-     -1-     -1-          &lt;- The index steps are regular. </div>
+<div class="line">|       |       |       |       |</div>
+<div class="line">0       1       2       3       4       &lt;- Edge2</div>
+</div><!-- fragment --><p>but fails for this type of interface </p><div class="fragment"><div class="line">0   1   2   3   4   5   6   7   8       &lt;- Edge1</div>
+<div class="line">|   |   |   |   |   |   |   |   |</div>
+<div class="line"> -1-     -3-       -2-     -2-          &lt;- The index steps are NOT regular. </div>
+<div class="line"> -1-     -1-       -1-     -1-          &lt;- The index steps are regular. </div>
+<div class="line">|   |           |       |       |</div>
+<div class="line">0   1           2       3       4       &lt;- Edge2</div>
+</div><!-- fragment --><p>The grids can be uniform or not uniform, as long as the index steps between the conforming indices are regular.</p>
+<p>If the grids are uniform, we know that the index steps between the conforming indices are regular. Moreover the index steps are given by the number of cells divided by the greatest common divisor of the two numbers of cells. (E.g. if the first example was on uniform grids: \(\gcd(8,4) = 4\). On the first edge, the index step is \(\frac{8}{4} = 2\) and on the second edge, \(\frac{4}{4} = 1\).)</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__References"></a>
 References</h1>
 <p>[1] Buchegger, F., Jüttler, B., Mantzaflaris, A., <em>Adaptively refined multi-patch B-splines with enhanced smoothness</em>. Applied Mathematics and Computation, Volume 272, Part 1 (2016). <a href="https://www.sciencedirect.com/science/article/pii/S009630031500836X">https://www.sciencedirect.com/science/article/pii/S009630031500836X</a>.</p>

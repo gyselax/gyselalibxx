@@ -253,6 +253,7 @@ var annotated =
     [ "Lagrange", "classLagrange.html", "classLagrange" ],
     [ "LagrangeInterpolator", "classLagrangeInterpolator.html", "classLagrangeInterpolator" ],
     [ "ManufacturedPoissonTest", "classManufacturedPoissonTest.html", "classManufacturedPoissonTest" ],
+    [ "MatchingIdxSlice", "classMatchingIdxSlice.html", "classMatchingIdxSlice" ],
     [ "Matrix", "classMatrix.html", "classMatrix" ],
     [ "Matrix_Banded", "classMatrix__Banded.html", "classMatrix__Banded" ],
     [ "Matrix_Center_Block", "classMatrix__Center__Block.html", "classMatrix__Center__Block" ],
