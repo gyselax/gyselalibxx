@@ -36,13 +36,14 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
 
                 sll::SLL
 
-                gslx::paraconfpp
-                gslx::interpolation_2D_rp
-                gslx::geometry_RTheta
                 gslx::advection_rp
+                gslx::geometry_RTheta
+                gslx::interpolation_2D_rp
+                gslx::io
+                gslx::paraconfpp
                 gslx::quadrature
-                gslx::utils
                 gslx::timestepper
+                gslx::utils
         )
         target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${TIME_METHOD} -D${SIMULATION} -D${MESH})
         # CONVERGENCE ORDER TEST: ----------------------------------------
@@ -72,16 +73,17 @@ target_link_libraries(advection_ALL
 		paraconf::paraconf
 		PDI::pdi
 		Eigen3::Eigen
-		
+
 		sll::SLL
-		
-		gslx::paraconfpp
-		gslx::interpolation_2D_rp
-		gslx::geometry_RTheta
+
 		gslx::advection_rp
+		gslx::geometry_RTheta
+		gslx::interpolation_2D_rp
+		gslx::io
+		gslx::paraconfpp
 		gslx::quadrature
-		gslx::utils
 		gslx::timestepper
+		gslx::utils
 )
 
 

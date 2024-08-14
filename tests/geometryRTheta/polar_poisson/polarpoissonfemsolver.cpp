@@ -15,6 +15,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
+#include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "polarpoissonlikesolver.hpp"
@@ -67,23 +68,14 @@ int main(int argc, char** argv)
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IdxStepR const r_size(PCpp_int(conf_voicexx, ".Mesh.r_size"));
+    IdxStepR const r_ncells(PCpp_int(conf_voicexx, ".Mesh.r_ncells"));
 
     CoordTheta const p_min(0.0);
     CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_size(PCpp_int(conf_voicexx, ".Mesh.p_size"));
+    IdxStepTheta const p_ncells(PCpp_int(conf_voicexx, ".Mesh.p_ncells"));
 
-    std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordTheta> p_knots(p_size + 1);
-
-    double const dr((r_max - r_min) / r_size);
-    double const dp((p_max - p_min) / p_size);
-    for (int i(0); i < r_size + 1; ++i) {
-        r_knots[i] = CoordR(r_min + i * dr);
-    }
-    for (int i(0); i < p_size + 1; ++i) {
-        p_knots[i] = CoordTheta(p_min + i * dp);
-    }
+    std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
+    std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
