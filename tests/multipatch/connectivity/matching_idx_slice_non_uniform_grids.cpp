@@ -9,6 +9,7 @@
 #include "idx_range_slice.hpp"
 #include "interface.hpp"
 #include "matching_idx_slice.hpp"
+#include "mesh_builder.hpp"
 #include "patch.hpp"
 
 
@@ -55,21 +56,10 @@ public:
         Patch1::Coord2 const y1_min(2.5);
         Patch1::Coord2 const y1_max(7.0);
 
-        std::vector<Patch1::Coord1> break_points_x1(x1_size);
-        double const dx1(double(x1_max - x1_min) / (x1_size - 1));
-        break_points_x1[0] = x1_min;
-        for (int i(1); i < x1_size - 1; ++i) {
-            break_points_x1[i] = x1_min + i * dx1;
-        }
-        break_points_x1[x1_size - 1] = x1_max;
-
-        std::vector<Patch1::Coord2> break_points_y1(y1_size);
-        double const dy1(double(y1_max - y1_min) / (y1_size - 1));
-        break_points_y1[0] = y1_min;
-        for (int i(1); i < y1_size - 1; ++i) {
-            break_points_y1[i] = y1_min + i * dy1;
-        }
-        break_points_y1[y1_size - 1] = y1_max;
+        std::vector<Patch1::Coord1> break_points_x1
+                = build_uniform_break_points(x1_min, x1_max, x1_size - 1);
+        std::vector<Patch1::Coord2> break_points_y1
+                = build_uniform_break_points(y1_min, y1_max, y1_size - 1);
 
         ddc::init_discrete_space<GridX<1>>(break_points_x1);
         ddc::init_discrete_space<GridY<1>>(break_points_y1);
@@ -82,21 +72,10 @@ public:
         Patch2::Coord2 const y2_min(-4.0);
         Patch2::Coord2 const y2_max(-3.5);
 
-        std::vector<Patch2::Coord1> break_points_x2(x2_size);
-        double const dx2(double(x2_max - x2_min) / (x2_size - 1));
-        break_points_x2[0] = x2_min;
-        for (int i(1); i < x2_size - 1; ++i) {
-            break_points_x2[i] = x2_min + i * dx2;
-        }
-        break_points_x2[x2_size - 1] = x2_max;
-
-        std::vector<Patch2::Coord2> break_points_y2(y2_size);
-        double const dy2(double(y2_max - y2_min) / (y2_size - 1));
-        break_points_y2[0] = y2_min;
-        for (int i(1); i < y2_size - 1; ++i) {
-            break_points_y2[i] = y2_min + i * dy2;
-        }
-        break_points_y2[y2_size - 1] = y2_max;
+        std::vector<Patch2::Coord1> break_points_x2
+                = build_uniform_break_points(x2_min, x2_max, x2_size - 1);
+        std::vector<Patch2::Coord2> break_points_y2
+                = build_uniform_break_points(y2_min, y2_max, y2_size - 1);
 
         ddc::init_discrete_space<GridX<2>>(break_points_x2);
         ddc::init_discrete_space<GridY<2>>(break_points_y2);
@@ -109,14 +88,8 @@ public:
         Patch3::Coord2 const y3_min(0.0);
         Patch3::Coord2 const y3_max(1.0);
 
-        std::vector<Patch3::Coord1> break_points_x3(x3_size);
-        double const dx3(double(x3_max - x3_min) / (x3_size - 1));
-        break_points_x3[0] = x3_min;
-        for (int i(1); i < x3_size - 1; ++i) {
-            break_points_x3[i] = x3_min + i * dx3;
-        }
-        break_points_x3[x3_size - 1] = x3_max;
-
+        std::vector<Patch3::Coord1> break_points_x3
+                = build_uniform_break_points(x3_min, x3_max, x3_size - 1);
         std::vector<Patch3::Coord2> break_points_y3(y3_size);
         double const dy3(double(y3_max - y3_min) / (y3_size - 1));
         break_points_y3[0] = y3_min;

@@ -345,7 +345,7 @@ def search_for_uid(file):
     """
     if not file.data_xml:
         return
-    uid_usage = [d.attrib for d in file.data_xml.findall(".token[@str='uid']")]
+    uid_usage = [d.attrib for d in file.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
     uid_indices = [file.data.index(d) for d in uid_usage]
     uid_usage = [d for idx, d in zip(uid_indices, uid_usage) if file.data[idx-1]['str'] == '.'
                                         and file.data[idx+1]['str'] == '(']
@@ -410,7 +410,7 @@ if __name__ == '__main__':
     multipatch_geom = list(relevant_files.pop('multipatch'))
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
-                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember']
+                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--error-exitcode=1']
     for f in multipatch_geom:
         if no_file_filter or f in filter_files:
             print("------------- Checking ", f, " -------------")
