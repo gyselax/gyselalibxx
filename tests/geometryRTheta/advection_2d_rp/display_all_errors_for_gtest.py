@@ -52,7 +52,7 @@ Returns
 -------
     The convergence orders for each test functions.
 """
-from copy import deepcopy
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -69,15 +69,15 @@ if plot_results:
 else :
     list_pow = [0, 2]
 
-yaml_configs = [deepcopy(yaml_parameters) for _ in list_pow]
+yaml_configs = [yaml_parameters.copy() for _ in list_pow]
 
-Nr0 = yaml_parameters['SplineMesh']['r_ncells']
-Nt0 = yaml_parameters['SplineMesh']['p_ncells']
-dt0 = yaml_parameters['Time']['time_step']
+Nr0 = yaml_parameters['r_size']
+Nt0 = yaml_parameters['p_size']
+dt0 = yaml_parameters['time_step']
 for i, p in enumerate(list_pow):
-    yaml_configs[i]['Time']['time_step'] = dt0 / 2**p
-    yaml_configs[i]['SplineMesh'].update({'r_ncells': Nr0 * 2**p,
-                                          'p_ncells': Nt0 * 2**p})
+    yaml_configs[i].update({'r_size': Nr0 * 2**p,
+                            'p_size': Nt0 * 2**p,
+                            'time_step': dt0 / 2**p})
 Order = [2**-i for i in list_pow]
 
 
