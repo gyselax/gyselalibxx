@@ -38,8 +38,17 @@ public:
      * @return The object on the given patch.
      */
     template <class Patch>
-    T<Patch> get()
+    T<Patch> get() const
     {
         return std::get<T<Patch>>(m_tuple);
+    }
+
+    /**
+     * @brief Get the number of objects stored inside the class. This is equal to the number of patches.
+     * @return Number of elements stored in the tuple of the class.
+     */
+    std::size_t size() const
+    {
+        return sizeof...(Patches);
     }
 };

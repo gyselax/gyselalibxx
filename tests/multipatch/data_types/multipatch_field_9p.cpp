@@ -14,6 +14,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
+#include "types.hpp"
 
 // Namespace of the multipatch geometry where the patches are defined
 using namespace periodic_strips_uniform_2d_9patches;
@@ -23,9 +24,6 @@ namespace {
 using DFieldMem3 = DFieldMem<Patch3::IdxRange12>;
 using DFieldMem5 = DFieldMem<Patch5::IdxRange12>;
 using DFieldMem7 = DFieldMem<Patch7::IdxRange12>;
-
-template <class Patch>
-using DFieldOnPatch = DField<typename Patch::IdxRange12>;
 
 using Field3 = DFieldOnPatch<Patch3>;
 using Field5 = DFieldOnPatch<Patch5>;

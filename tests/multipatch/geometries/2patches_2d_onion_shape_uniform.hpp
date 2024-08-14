@@ -3,9 +3,9 @@
 /*
     Geometry defined here: 2 * 2D patches.
         - patch 1 and patch 2: 
-            - non-periodic on R and periodic P;
+            - non-periodic on R and periodic Theta;
             - uniform cubic splines;
-            - uniform Grid1 and Grid2; 
+            - uniform GridR and GridTheta; 
 */
 #pragma once
 
@@ -22,10 +22,8 @@ int constexpr BSplineDegree = 3;
 
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
 /**
- * @brief First continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the patch. 
+ * @brief First continuous dimension of all the patches.
  */
-template <int PatchIdx>
 struct R
 {
     /// @brief Non periodic dimension.
@@ -33,10 +31,8 @@ struct R
 };
 
 /**
- * @brief Second continuous dimension of patch PatchIdx.
- * @tparam PatchIdx Index of the patch. 
+ * @brief Second continuous dimension of all the patches.
  */
-template <int PatchIdx>
 struct Theta
 {
     /// @brief Periodic dimension.
@@ -51,7 +47,7 @@ struct Theta
  * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
-struct GridR : UniformGridBase<R<PatchIdx>>
+struct GridR : UniformGridBase<R>
 {
 };
 
@@ -60,7 +56,7 @@ struct GridR : UniformGridBase<R<PatchIdx>>
  * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
-struct GridTheta : UniformGridBase<Theta<PatchIdx>>
+struct GridTheta : UniformGridBase<Theta>
 {
 };
 
@@ -72,7 +68,7 @@ struct GridTheta : UniformGridBase<Theta<PatchIdx>>
  * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
-struct BSplinesR : ddc::UniformBSplines<R<PatchIdx>, BSplineDegree>
+struct BSplinesR : ddc::UniformBSplines<R, BSplineDegree>
 {
 };
 
@@ -81,7 +77,7 @@ struct BSplinesR : ddc::UniformBSplines<R<PatchIdx>, BSplineDegree>
  * @tparam PatchIdx Index of the patch. 
  */
 template <int PatchIdx>
-struct BSplinesTheta : ddc::UniformBSplines<Theta<PatchIdx>, BSplineDegree>
+struct BSplinesTheta : ddc::UniformBSplines<Theta, BSplineDegree>
 {
 };
 
