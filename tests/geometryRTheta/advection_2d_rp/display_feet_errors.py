@@ -184,7 +184,7 @@ if executable_name == "advection_ALL" :
     print("Choose an executable of one simulation, not advection_ALL which launches severals simulations.")
 assert(executable_name != "advection_ALL")
 
-dt0 = yaml_parameters['time_step']
+dt0 = yaml_parameters['Time']['time_step']
 max_pow = 9
 DT = [dt0 * 2**(-i) for i in range(0,max_pow)]
 
@@ -194,7 +194,7 @@ ERR_d = []
 ERR_d_init_end = []
 L_exact_Fr, L_exact_Fp, L_computed_Fr, L_computed_Fp  = [], [], [], []
 for dt in DT:
-    yaml_parameters['time_step'] = dt
+    yaml_parameters['Time']['time_step'] = dt
     # Execute the test file given as input in the command -------
     out = execute(executable, yaml_parameters, verbose)
 
@@ -207,8 +207,8 @@ for dt in DT:
     _, _, Cr, Cp, _, _, computed_Fr, computed_Fp, computed_Fx, computed_Fy  = treatment_feet(namefile1)
     _, _, _, _, _, _,  exact_Fr, exact_Fp, exact_Fx, exact_Fy = treatment_feet(namefile2)
 
-    Nr = yaml_parameters['r_size']
-    Nt = yaml_parameters['p_size']
+    Nr = yaml_parameters['SplineMesh']['r_ncells']
+    Nt = yaml_parameters['SplineMesh']['p_ncells']
 
     # --- Plot type 1 : the convergence order
     ERR_d += [compute_max_distance_error(Nr+3, Nt, computed_Fx, computed_Fy, exact_Fx, exact_Fy)]
