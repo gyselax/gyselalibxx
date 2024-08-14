@@ -226,12 +226,12 @@ else :
     fct_names = [name]
     selected_test = [-1]
 
-rmin = yaml_parameters['SplineMesh']['r_min']
-rmax = yaml_parameters['SplineMesh']['r_max']
-Nr = yaml_parameters['SplineMesh']['r_ncells']
-Nt = yaml_parameters['SplineMesh']['p_ncells']
-dt0 = yaml_parameters['Time']['time_step']
-T = yaml_parameters['Time']['final_time']
+rmin = yaml_parameters['r_min']
+rmax = yaml_parameters['r_max']
+Nr = yaml_parameters['r_size']
+Nt = yaml_parameters['p_size']
+dt0 = yaml_parameters['time_step']
+T = yaml_parameters['final_time']
 details1 = f"_{Nr}x{Nt}_[{rmin}_{rmax}]"
 for i, (name, folder) in enumerate(zip(fct_names, output_folder_names)):
     dt = dt0

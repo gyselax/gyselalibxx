@@ -23,9 +23,7 @@
 #include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
-#include "input.hpp"
 #include "itimestepper.hpp"
-#include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "rk2.hpp"
@@ -83,10 +81,15 @@ int main(int argc, char** argv)
 
 
     // Parameters of the grid. ---------------------------------------------------------------
-    double const dt = PCpp_double(conf_voicexx, ".Time.time_step");
-    double const final_time = PCpp_double(conf_voicexx, ".Time.final_time");
-    bool const save_curves = PCpp_bool(conf_voicexx, ".Output.save_curves");
-    bool const save_feet = PCpp_bool(conf_voicexx, ".Output.save_feet");
+    double const rmin = PCpp_double(conf_voicexx, ".Mesh.r_min");
+    double const rmax = PCpp_double(conf_voicexx, ".Mesh.r_max");
+    int const Nr = PCpp_int(conf_voicexx, ".Mesh.r_size");
+    int const Nt = PCpp_int(conf_voicexx, ".Mesh.p_size");
+    double const dt = PCpp_double(conf_voicexx, ".Mesh.time_step");
+    double const final_time = PCpp_double(conf_voicexx, ".Mesh.final_time");
+    bool const save_curves = PCpp_bool(conf_voicexx, ".Mesh.save_curves");
+    bool const save_feet = PCpp_bool(conf_voicexx, ".Mesh.save_feet");
+    PC_tree_destroy(&conf_voicexx);
 
     if (save_curves or save_feet) {
         fs::create_directory("output");
@@ -95,39 +98,51 @@ int main(int argc, char** argv)
         fs::create_directory("output/curves");
     }
 
+    std::cout << "TESTS ON THE ADVECTION OPERATOR "
+              << "FOR [rmin, rmax] = [" << rmin << ", " << rmax << "], "
+              << "WITH NrxNt = " << Nr << "x" << Nt << " AND dt = " << dt << ": " << std::endl;
+
     // BUILD GRIDS ------------------------------------------------------------------------------
     // Grid creation of space. ------------------------------------------------------------------
+    CoordR const r_min(rmin);
+    CoordR const r_max(rmax);
+    IdxStepR const r_size(Nr);
+
     CoordTheta const p_min(0.0);
     CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_ncells(PCpp_int(conf_voicexx, ".SplineMesh.p_ncells"));
+    IdxStepTheta const p_size(Nt);
 
-    IdxRangeR const interpolation_idx_range_R = init_pseudo_uniform_spline_dependent_idx_range<
-            GridR,
-            BSplinesR,
-            SplineInterpPointsR>(conf_voicexx, "r");
-    PC_tree_destroy(&conf_voicexx);
+    double const dr((r_max - r_min) / r_size);
+    double const dp((p_max - p_min) / p_size);
 
-    std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);
-    ddc::init_discrete_space<BSplinesTheta>(p_knots);
-    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
-    IdxRangeTheta const interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
-
-    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_P);
-
-    CoordR const rmin = ddc::coordinate(interpolation_idx_range_R.front());
-    CoordR const rmax = ddc::coordinate(interpolation_idx_range_R.back());
-
-    std::cout << "TESTS ON THE ADVECTION OPERATOR "
-              << "FOR [rmin, rmax] = [" << double(rmin) << ", " << double(rmax) << "], "
-              << "WITH NrxNt = " << interpolation_idx_range_R.size() << "x"
-              << interpolation_idx_range_P.size() << " AND dt = " << dt << ": " << std::endl;
+    std::vector<CoordR> r_knots(r_size + 1);
+    std::vector<CoordTheta> p_knots(p_size + 1);
 
     std::ofstream file("r_knots.txt");
-    for_each(interpolation_idx_range_R, [&](IdxR ir) {
-        file << (ir - interpolation_idx_range_R.front()).value() << " "
-             << double(ddc::coordinate(ir)) << std::endl;
-    });
+    r_knots[0] = r_min;
+    file << 0 << "  " << double(r_knots[0]) << std::endl;
+    for (int i(1); i < r_size; ++i) {
+        r_knots[i] = CoordR(rmin + i * dr);
+
+        file << i << "  " << double(r_knots[i]) << std::endl;
+    }
+    r_knots[r_size] = r_max;
+    file << int(r_size) << "  " << double(r_knots[r_size]) << std::endl;
     file.close();
+
+    for (int i(0); i < p_size + 1; ++i) {
+        p_knots[i] = CoordTheta(p_min + i * dp);
+    }
+
+    ddc::init_discrete_space<BSplinesR>(r_knots);
+    ddc::init_discrete_space<BSplinesTheta>(p_knots);
+
+    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
+
+    IdxRangeR const interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta const interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
 
 
@@ -148,8 +163,8 @@ int main(int argc, char** argv)
 
 
     // --- Evaluator for the test advection field:
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
     SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
