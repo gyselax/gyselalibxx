@@ -5,6 +5,7 @@
 #include <paraconf.h>
 
 #include "ddc_aliases.hpp"
+#include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 
 /**
@@ -54,7 +55,7 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
 template <class Grid1D, class BSplines, class InterpPointInitMethod>
 inline IdxRange<Grid1D> init_spline_dependent_idx_range(
         PC_tree_t const& conf_voicexx,
-        std::string mesh_identifier)
+        std::string const& mesh_identifier)
 {
     if constexpr (BSplines::is_uniform()) {
         using Dim = typename Grid1D::continuous_dimension_type;
@@ -92,7 +93,7 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
 template <class Grid1D, class BSplines, class InterpPointInitMethod>
 inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
         PC_tree_t const& conf_voicexx,
-        std::string mesh_identifier)
+        std::string const& mesh_identifier)
 {
     static_assert(!BSplines::is_uniform());
     using Dim = typename Grid1D::continuous_dimension_type;
@@ -102,15 +103,7 @@ inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
     Coord1D max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
     IdxStep<Grid1D> ncells(PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
 
-    std::vector<Coord1D> break_points(ncells + 1);
-
-    double const delta(double(max - min) / ncells);
-
-    break_points[0] = min;
-    for (int i(1); i < ncells; ++i) {
-        break_points[i] = min + i * delta;
-    }
-    break_points[ncells] = max;
+    std::vector<Coord1D> break_points = build_uniform_break_points(min, max, ncells);
 
     ddc::init_discrete_space<BSplines>(break_points);
     ddc::init_discrete_space<Grid1D>(InterpPointInitMethod::template get_sampling<Grid1D>());

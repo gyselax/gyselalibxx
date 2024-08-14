@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"
+#include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -27,20 +28,13 @@ double constant_func_check_1d(Method quad_method)
 {
     CoordXPeriod const x_min(0.0);
     CoordXPeriod const x_max(M_PI);
-    IdxStep<GridXPeriod> const x_size(100);
+    IdxStep<GridXPeriod> const x_ncells(100);
 
     // Creating mesh & support
-    std::vector<CoordXPeriod> point_sampling;
-    double dx = (x_max - x_min) / x_size;
-    // Create & intialize mesh
-    for (int k = 0; k < x_size; k++) {
-        point_sampling.push_back(x_min + k * dx);
-    }
-
+    std::vector<CoordXPeriod> point_sampling = build_uniform_break_points(x_min, x_max, x_ncells);
     ddc::init_discrete_space<GridXPeriod>(point_sampling);
     Idx<GridXPeriod> lbound(0);
-    IdxStep<GridXPeriod> npoints(x_size);
-    IdxRange<GridXPeriod> gridx(lbound, npoints);
+    IdxRange<GridXPeriod> gridx(lbound, x_ncells);
 
     DFieldMemX quadrature_coeffs_alloc;
     switch (quad_method) {
@@ -80,7 +74,7 @@ struct ComputeErrorTraits
 };
 
 template <std::size_t N>
-double compute_error(int n_elems, Method quad_method)
+double compute_error(int n_cells, Method quad_method)
 {
     using DimY = typename ComputeErrorTraits<N>::Y;
     using GridY = typename ComputeErrorTraits<N>::GridY;
@@ -90,17 +84,13 @@ double compute_error(int n_elems, Method quad_method)
 
     Coord<DimY> const y_min(0.0);
     Coord<DimY> const y_max(M_PI);
-    std::vector<Coord<DimY>> point_sampling;
-    double dy = (y_max - y_min) / n_elems;
+    IdxStep<GridY> npoints(n_cells + 1);
+    IdxStep<GridY> ncells(n_cells);
 
-    // Create & intialize Uniform mesh
-    for (int k = 0; k < n_elems; k++) {
-        point_sampling.push_back(y_min + k * dy);
-    }
-
+    std::vector<Coord<DimY>> point_sampling = build_uniform_break_points(y_min, y_max, ncells);
     ddc::init_discrete_space<GridY>(point_sampling);
+
     Idx<GridY> lbound(0);
-    IdxStep<GridY> npoints(n_elems);
     IdxRange<GridY> gridy(lbound, npoints);
 
     DFieldMemY quadrature_coeffs_alloc;
@@ -131,15 +121,15 @@ double compute_error(int n_elems, Method quad_method)
 }
 
 template <std::size_t... Is>
-std::array<double, sizeof...(Is)> compute_errors_trpz(std::index_sequence<Is...>, int n_elems)
+std::array<double, sizeof...(Is)> compute_errors_trpz(std::index_sequence<Is...>, int ncells)
 {
-    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::TRAPEZ)...};
+    return std::array<double, sizeof...(Is)> {compute_error<Is>(ncells *= 2, Method::TRAPEZ)...};
 }
 
 template <std::size_t... Is>
-std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is...>, int n_elems)
+std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is...>, int ncells)
 {
-    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::SIMPSON)...};
+    return std::array<double, sizeof...(Is)> {compute_error<Is>(ncells *= 2, Method::SIMPSON)...};
 }
 
 TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
