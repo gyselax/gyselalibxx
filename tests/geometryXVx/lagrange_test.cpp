@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "Lagrange_interpolator.hpp"
+#include "mesh_builder.hpp"
 // Here Z stands to specify that we use ad hoc geometry
 struct Z
 {
@@ -29,7 +30,7 @@ public:
 private:
     using IdxStepZ = IdxStep<GridZ>;
     using IdxZ = Idx<GridZ>;
-    const IdxStepZ x_size;
+    const IdxStepZ x_ncells;
     const CoordZ x_min;
     const CoordZ x_max;
     const bool perturb;
@@ -39,25 +40,18 @@ private:
 
 
 public:
-    LagrangeTest() : x_size(10), x_min(-1), x_max(1), perturb(false) {};
+    LagrangeTest() : x_ncells(10), x_min(-1), x_max(1), perturb(false) {};
     LagrangeTest(int nx, int deg, bool perturbation, std::function<double(double, int)> f)
-        : x_size(nx)
+        : x_ncells(nx)
         , x_min(-1)
         , x_max(1)
         , perturb(perturbation)
         , f_poly(f)
     {
-        std::vector<double> point_sampling;
-
-        double dx = (x_max - x_min) / x_size;
-        // Create & intialize Uniform mesh
-        for (int k = 0; k < x_size; k++) {
-            point_sampling.push_back(x_min + k * dx);
-        }
+        std::vector<CoordZ> point_sampling = build_uniform_break_points(x_min, x_max, x_ncells);
         ddc::init_discrete_space<GridZ>(point_sampling);
         Idx<GridZ> lbound(0);
-        IdxStep<GridZ> npoints(x_size);
-        IdxRange<GridZ> interpolation_idx_range_x(lbound, npoints);
+        IdxRange<GridZ> interpolation_idx_range_x(lbound, x_ncells + 1);
 
         host_t<DFieldMem<IdxRange<GridZ>>> exact_host_alloc(interpolation_idx_range_x);
         host_t<DField<IdxRange<GridZ>>> exact_host = get_field(exact_host_alloc);
@@ -70,11 +64,11 @@ public:
         host_t<FieldMem<Coord<Z>, IdxRange<GridZ>>> Sample_host(interpolation_idx_range_x);
 
         ddc::for_each(get_idx_range(Sample_host), [&](IdxZ const ix) {
-            if (cpt % int(0.1 * x_size) == 0) {
+            if (cpt % int(0.1 * x_ncells) == 0) {
                 Sample_host(ix) = Coord<Z>(
                         ddc::coordinate(ix).value()
-                        + (cpt > 0.1 * x_size) * (cpt < 0.9 * x_size) * perturb
-                                  * unif_distr(generator) / x_size);
+                        + (cpt > 0.1 * x_ncells) * (cpt < 0.9 * x_ncells) * perturb
+                                  * unif_distr(generator) / x_ncells);
             } else {
                 Sample_host(ix) = Coord<Z>(ddc::coordinate(ix).value());
             }
