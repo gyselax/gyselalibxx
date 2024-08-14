@@ -85,8 +85,8 @@ var NAVTREEINDEX =
 "classLagrangeInterpolator.html#a60914d8391f7ea2e47c624a088ec5d92",
 "classPolarSplineEvaluator.html#a0dace1c41499a5500a1f1c10e01794d1",
 "collisions__inter_8hpp_source.html",
-"mpitransposealltoall_8hpp_source.html",
-"structGridVy.html"
+"mpitools_8hpp_source.html",
+"structGridVx.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
