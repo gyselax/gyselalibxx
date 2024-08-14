@@ -2,6 +2,20 @@
 
 This directory defines structures and methods to describe patches and how they are connected to one another.
 
+The following sections decribe the structures and methods implemented: 
+
+-  [Patch](#src_multipatch_connectivity__Patch) - Definition of Patch tag.
+-  [Interfaces](#src_multipatch_connectivity__Interfaces)
+    - [Sticking of Two Edges](#src_multipatch_connectivity__Interfaces__Sticking_of_Two_Edges)
+        - [Multi-patch domain](#src_multipatch_connectivity__Interfaces__Multi-patch_domain) - Mathematical definition of multi-patch domain.
+        - [Edges](#src_multipatch_connectivity__Interfaces__Edges) - Mathematical defintion of edges. 
+        - [Sticking and Coordinate Transformation](#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation) - Mathematical defintion of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation). 
+        - [Index transformation](#src_multipatch_connectivity__Interfaces__Index_transformation) - Algorithm of the index transformation in EdgeTransformation. 
+        - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`. 
+- [References](#src_multipatch_connectivity__References) - References. 
+- [Contents](#src_multipatch_connectivity__Contents) - List of files in the folder. 
+
+
 ## Patch
 The tag Patch refers to a single 2D patch geometry. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as: 
 
@@ -138,6 +152,45 @@ this equivalent is given by multiplying by $`\frac{M}{N}`$ and adapt if the coor
 **For non-uniform grids**, we cannot use this algorithm. We check all the indices of the target patch if 
 one of them fit with the current one. 
 We can use dichotomy method for the search. 
+
+
+
+#### Conformity of the meshes
+When there are non-conforming meshes, some operators need to loop on the "conforming indexes" at each Interface, 
+i.e. the indexes with an equivalent index on the other patch of the interface. 
+
+The `UniformIdxStepIndexMatching` storage class stores for a given Interface the "conforming indexes" in an IdxRangeSlice for each patch. 
+Currently, the IdxRangeSlice stores indexes from an IdxRange with regular index steps. 
+So the `UniformIdxStepIndexMatching` class does the same, and triggers assert when the conformity between two edges is not 
+uniform. 
+
+For example, `UniformIdxStepIndexMatching` is adapted to this type of interface
+```
+    0   1   2   3   4   5   6   7   8       <- Edge1
+    |   |   |   |   |   |   |   |   |
+       -2-     -2-     -2-     -2-          <- The index steps are regular. 
+       -1-     -1-     -1-     -1-          <- The index steps are regular. 
+    |       |       |       |       |
+    0       1       2       3       4       <- Edge2
+``` 
+
+but fails for this type of interface
+```
+    0   1   2   3   4   5   6   7   8       <- Edge1
+    |   |   |   |   |   |   |   |   |
+     -1-     -3-       -2-     -2-          <- The index steps are NOT regular. 
+     -1-     -1-       -1-     -1-          <- The index steps are regular. 
+    |   |           |       |       |
+    0   1           2       3       4       <- Edge2
+``` 
+
+The grids can be uniform or not uniform, as long as the index steps between the conforming indices are regular. 
+
+If the grids are uniform, we know that the index steps between the conforming indices are regular. 
+Moreover the index steps are given by the number of cells divided by the greatest common divisor of the 
+two numbers of cells. 
+(E.g. if the first example was on uniform grids: $`\gcd(8,4) = 4`$. On the first edge, the index step is $`\frac{8}{4} = 2`$ and 
+on the second edge, $`\frac{4}{4} = 1`$.) 
 
 
 
