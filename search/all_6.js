@@ -19,7 +19,7 @@ var searchData=
   ['geometryvparmu_20_3a_304',['GeometryVparMu :',['../src_geometryVparMu_geometry.html',1,'src_geometryVparMu']]],
   ['geometryxvx_305',['GeometryXVx',['../classGeometryXVx.html',1,'']]],
   ['geometryxyvxvy_306',['GeometryXYVxVy',['../classGeometryXYVxVy.html',1,'']]],
-  ['get_307',['get',['../classMatchingIdxSlice.html#a68ff4d4c93df3a00de3edb53f07d969a',1,'MatchingIdxSlice::get()'],['../classMultipatchType.html#ac49e90352a8554665ea33991dc6a1fe8',1,'MultipatchType::get()']]],
+  ['get_307',['get',['../classMatchingIdxSlice.html#a68ff4d4c93df3a00de3edb53f07d969a',1,'MatchingIdxSlice::get()'],['../classMultipatchType.html#a142583379ff2164a1f5494df64e41edf',1,'MultipatchType::get()']]],
   ['get_5f1d_5fidx_5frange_308',['get_1d_idx_range',['../namespacecollisions__dimensions.html#acdf7b3b63a886e508215164bbbca538f',1,'collisions_dimensions']]],
   ['get_5f2d_5findex_309',['get_2d_index',['../classPolarBSplines.html#ab56f0b5cebcd71f64d277cd1cf50ecdf',1,'PolarBSplines']]],
   ['get_5fadvection_5ffield_310',['get_advection_field',['../classAdvectionFieldSimulation.html#a0bc3c0d1829fc8f286c5880848cf4883',1,'AdvectionFieldSimulation::get_advection_field()'],['../classAdvectionSimulation.html#a754d22f275182e9571c7d12414fd7f6f',1,'AdvectionSimulation::get_advection_field()']]],

@@ -3,10 +3,10 @@ var tests_geometryRTheta =
     [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_2d_rp.html", [
       [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator", [
         [ "Example", "src_mpi_parallelisation.html#autotoc_md63", null ],
-        [ "Advection along x on (t, x)", "tests_advection.html#autotoc_md71", null ],
-        [ "Advection along x on (t, x, vx)", "tests_advection.html#autotoc_md72", null ],
-        [ "Advection along x and y on (t, x, y, vx, vy)", "tests_advection.html#autotoc_md73", null ],
-        [ "Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity", "tests_advection.html#autotoc_md74", [
+        [ "Advection along x on (t, x)", "tests_advection.html#autotoc_md75", null ],
+        [ "Advection along x on (t, x, vx)", "tests_advection.html#autotoc_md76", null ],
+        [ "Advection along x and y on (t, x, y, vx, vy)", "tests_advection.html#autotoc_md77", null ],
+        [ "Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity", "tests_advection.html#autotoc_md78", [
           [ "Advection field along the physical domain axis", "src_geometryRTheta_advection_field.html#autotoc_md48", null ],
           [ "Advection field along the logical domain axis", "src_geometryRTheta_advection_field.html#autotoc_md49", [
             [ "General coordinates system", "src_geometryRTheta_advection_field.html#autotoc_md50", null ],
@@ -29,10 +29,15 @@ var tests_geometryRTheta =
             [ "Index transformation", "src_multipatch_connectivity.html#autotoc_md68", null ],
             [ "Conformity of the meshes", "src_multipatch_connectivity.html#autotoc_md69", null ]
           ] ],
-          [ "Example of use", "src_multipatch_spline.html#autotoc_md70", null ],
-          [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md77", null ],
-          [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md78", null ],
-          [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md79", null ]
+          [ "Mappings", "src_multipatch_connectivity.html#autotoc_md70", null ],
+          [ "Global analytical invertible mapping", "src_multipatch_connectivity.html#autotoc_md71", [
+            [ "Onion shape geometry", "src_multipatch_connectivity.html#autotoc_md72", null ]
+          ] ],
+          [ "Types", "src_multipatch_data_types.html#autotoc_md73", null ],
+          [ "Example of use", "src_multipatch_spline.html#autotoc_md74", null ],
+          [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md81", null ],
+          [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md82", null ],
+          [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md83", null ]
         ] ]
       ] ],
       [ "Python tests", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests", null ],

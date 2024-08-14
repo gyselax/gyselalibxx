@@ -115,10 +115,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4cda459ccaf034298db704f3e6b131c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a4cda459ccaf034298db704f3e6b131c4">MultipatchType</a> (<a class="el" href="structT.html">T</a>&lt; Patches &gt;... args)</td></tr>
 <tr class="memdesc:a4cda459ccaf034298db704f3e6b131c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> class from an arbitrary number of objects.  <a href="classMultipatchType.html#a4cda459ccaf034298db704f3e6b131c4">More...</a><br /></td></tr>
 <tr class="separator:a4cda459ccaf034298db704f3e6b131c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac49e90352a8554665ea33991dc6a1fe8"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
-<tr class="memitem:ac49e90352a8554665ea33991dc6a1fe8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structT.html">T</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#ac49e90352a8554665ea33991dc6a1fe8">get</a> ()</td></tr>
-<tr class="memdesc:ac49e90352a8554665ea33991dc6a1fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve an object from the patch that it is defined on.  <a href="classMultipatchType.html#ac49e90352a8554665ea33991dc6a1fe8">More...</a><br /></td></tr>
-<tr class="separator:ac49e90352a8554665ea33991dc6a1fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a142583379ff2164a1f5494df64e41edf"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
+<tr class="memitem:a142583379ff2164a1f5494df64e41edf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structT.html">T</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a142583379ff2164a1f5494df64e41edf">get</a> () const</td></tr>
+<tr class="memdesc:a142583379ff2164a1f5494df64e41edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve an object from the patch that it is defined on.  <a href="classMultipatchType.html#a142583379ff2164a1f5494df64e41edf">More...</a><br /></td></tr>
+<tr class="separator:a142583379ff2164a1f5494df64e41edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a14854eb7707b84e0dc4d8837519ada"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada">size</a> () const</td></tr>
+<tr class="memdesc:a1a14854eb7707b84e0dc4d8837519ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of objects stored inside the class.  <a href="classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada">More...</a><br /></td></tr>
+<tr class="separator:a1a14854eb7707b84e0dc4d8837519ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;template&lt; typename P &gt; typename T, class... Patches&gt;<br />
@@ -172,8 +175,8 @@ template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac49e90352a8554665ea33991dc6a1fe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac49e90352a8554665ea33991dc6a1fe8">&#9670;&nbsp;</a></span>get()</h2>
+<a id="a142583379ff2164a1f5494df64e41edf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a142583379ff2164a1f5494df64e41edf">&#9670;&nbsp;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -189,7 +192,7 @@ template&lt;class Patch &gt; </div>
           <td class="memname"><a class="el" href="structT.html">T</a>&lt;<a class="el" href="structPatch.html">Patch</a>&gt; <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -207,6 +210,36 @@ template&lt;class Patch &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The object on the given patch. </dd></dl>
+
+</div>
+</div>
+<a id="a1a14854eb7707b84e0dc4d8837519ada"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a14854eb7707b84e0dc4d8837519ada">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the number of objects stored inside the class. </p>
+<p>This is equal to the number of patches. </p><dl class="section return"><dt>Returns</dt><dd>Number of elements stored in the tuple of the class. </dd></dl>
 
 </div>
 </div>

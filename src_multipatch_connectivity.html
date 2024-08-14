@@ -118,6 +118,11 @@ $(document).ready(function(){initNavTree('src_multipatch_connectivity.html','');
 </li>
 </ul>
 </li>
+<li><a href="#src_multipatch_connectivity__Patch_locator">Patch locator</a> - Definition of child classes <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> operator to identify the patch where a given physical coordinate is.<ul>
+<li><a href="#src_multipatch_connectivity__Onion_shape_geometry">Onion shape geometry</a> - Definition of <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code>, a specialisation of <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> for "onion" shape geometries. <br  />
+</li>
+</ul>
+</li>
 <li><a href="#src_multipatch_connectivity__References">References</a> - References.</li>
 <li><a href="#src_multipatch_connectivity__Contents">Contents</a> - List of files in the folder.</li>
 </ul>
@@ -171,7 +176,7 @@ Sticking and Coordinate Transformation</h4>
 <p> If the transformation is order-reversing (i.e. the orientations of the parametrizations of the physical edge are opposite), then it is </p><p class="formulaDsp">
 \[t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}). \]
 </p>
-<p>In the code, the sticking of two edges is represented by an <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure which contains tags to the first patch and the second patch as well as the boolean member <code>orientations_agree</code>. The transformation from one edge to the other is done using the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator.</p>
+<p>In the code, an edge is represented by the <code><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a></code> structure. The sticking of two edges is represented by an <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure which contains tags to the first patch and the second patch as well as the boolean member <code>orientations_agree</code>. The transformation from one edge to the other is done using the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator.</p>
 <p>This operator contains an <code>operator()</code> to transform a given coordinate on a coordinate on the other patch. It has also been extended for indices.</p>
 <h4><a class="anchor" id="autotoc_md68"></a>
 Index transformation</h4>
@@ -205,16 +210,43 @@ Conformity of the meshes</h4>
 <div class="line">0   1           2       3       4       &lt;- Edge2</div>
 </div><!-- fragment --><p>The grids can be uniform or not uniform, as long as the index steps between the conforming indices are regular.</p>
 <p>If the grids are uniform, we know that the index steps between the conforming indices are regular. Moreover the index steps are given by the number of cells divided by the greatest common divisor of the two numbers of cells. (E.g. if the first example was on uniform grids: \(\gcd(8,4) = 4\). On the first edge, the index step is \(\frac{8}{4} = 2\) and on the second edge, \(\frac{4}{4} = 1\).)</p>
+<h1><a class="anchor" id="src_multipatch_connectivity__Patch_locator"></a>
+Patch locator</h1>
+<p>The <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> is a base class of operators to identify the patch where a given physical coordinate is.</p>
+<h3><a class="anchor" id="autotoc_md70"></a>
+Mappings</h3>
+<p>On each patch, we define a mapping from the logical domain to the physical domain. </p><p class="formulaDsp">
+\[ \mathcal{F}^{(i)}: \hat{\Omega}^{(i)} \rightarrow \Omega^{(i)} \]
+</p>
+<p> (The \(\hat{\Omega}^{(i)}\) refers to the above domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]\).) The domain \(\hat{\Omega}^{(i)}\) is called the <em>logical domain</em> and \(\Omega^{(i)}\) the <em>physical domain</em>.</p>
+<h3><a class="anchor" id="autotoc_md71"></a>
+Global analytical invertible mapping</h3>
+<p>We assume that there is a global mapping analytically invertible such that </p><p class="formulaDsp">
+\[ \mathcal{F}: \hat{\Omega} \rightarrow \Omega \\ (\mathcal{F})^{-1}: \Omega \rightarrow \hat{\Omega} \\ \text{with } \Omega = \bigcup_{i = 0}^{K} \Omega^{(i)} \quad \text{and } \hat{\Omega} = \bigcup_{i = 0}^{K} \hat{\Omega}^{(i)} .\\ \]
+</p>
+<p> We can easily apply \((\mathcal{F})^{-1}\) to identify the equivalent logical coordinate of a given physical coordinate \(x\in\Omega\). We check then for each patch if the logical coordinate is on a rectangular logical patch \(\hat{\Omega}^{(i)}\), i.e. if \((\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}\).</p>
+<p>The global analytically invertible mappings implemented are child class of <code><a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html" title="A class for describing analytical invertible curvilinear 2D mappings from the logical domain to the p...">AnalyticalInvertibleCurvilinear2DToCartesian</a></code>.</p>
+<h4><a class="anchor" id="autotoc_md72"></a>
+Onion shape geometry</h4>
+<p>We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches. The patches are defined on the same dimensions <code><a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a></code> and <code><a class="el" href="structTheta.html" title="Define periodic real Theta dimension.">Theta</a></code>. The logical grid is then split into different logical grids, one for each patch. We can then define one global mapping from the (<code><a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a></code>, <code><a class="el" href="structTheta.html" title="Define periodic real Theta dimension.">Theta</a></code>) domain to the (<code><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></code>, <code><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></code>) domain for all the patches. This mapping also needs to be defined from the physical domain to the logical domain.</p>
+<p>We order the patches from the O-point to the outside boundary.</p>
+<p>The patch grids have to be continuous (i.e. we define patches such as \(b_x^{(i)} = a_x^{(i+1)}\) for edges on \(\{a_x^{(i)}\}\times[a_y^{(i)}, b_y^{(i)}]\) and \(\{b_x^{(i+1)}\}\times[a_y^{(i+1)}, b_y^{(i+1)}]\)).</p>
+<p>In the <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code> operator, we use these properties to apply a dichotomy method and reduce the number of tests to identify where the physical coordinate is.</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__References"></a>
 References</h1>
 <p>[1] Buchegger, F., Jüttler, B., Mantzaflaris, A., <em>Adaptively refined multi-patch B-splines with enhanced smoothness</em>. Applied Mathematics and Computation, Volume 272, Part 1 (2016). <a href="https://www.sciencedirect.com/science/article/pii/S009630031500836X">https://www.sciencedirect.com/science/article/pii/S009630031500836X</a>.</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__Contents"></a>
 Contents</h1>
 <ul>
-<li><code><a class="el" href="edge__transformation_8hpp_source.html">edge_transformation.hpp</a></code>: Defines the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator to transform the coordinate from one edge to the other (see above).</li>
-<li><code><a class="el" href="edge_8hpp_source.html">edge.hpp</a></code>: Defines the <code><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a></code> structure.</li>
-<li><code><a class="el" href="interface_8hpp_source.html">interface.hpp</a></code>: Defines the <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure.</li>
-<li><code><a class="el" href="patch_8hpp_source.html">patch.hpp</a></code>: Defines the <code><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a></code> tag. </li>
+<li><code><a class="el" href="edge__transformation_8hpp_source.html">edge_transformation.hpp</a></code>: Define the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator to transform the coordinate from one edge to the other (see above).</li>
+<li><code><a class="el" href="edge_8hpp_source.html">edge.hpp</a></code>: Define the <code><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a></code> structure.</li>
+<li><code><a class="el" href="interface_8hpp_source.html">interface.hpp</a></code>: Define the <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure.</li>
+<li><code><a class="el" href="ipatch__locator_8hpp_source.html">ipatch_locator.hpp</a></code>: Define the base class <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> for the operators identifying the patch where a physical coordinate is.<ul>
+<li><code><a class="el" href="onion__patch__locator_8hpp_source.html">onion_patch_locator.hpp</a></code>: Define a child class <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code> specialised for "onion" type geometries.</li>
+</ul>
+</li>
+<li><code><a class="el" href="matching__idx__slice_8hpp_source.html">matching_idx_slice.hpp</a></code> : Define <code><a class="el" href="classMatchingIdxSlice.html" title="Store the conforming indexes of each patch of a given interface.">MatchingIdxSlice</a></code> storing the conforming indices of both patch at a given interface.</li>
+<li><code><a class="el" href="patch_8hpp_source.html">patch.hpp</a></code>: Define the <code><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a></code> tag. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

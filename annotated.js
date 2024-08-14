@@ -111,6 +111,10 @@ var annotated =
       [ "BSplinesX", "structperiodic__strips__uniform__2d__9patches_1_1BSplinesX.html", null ],
       [ "BSplinesY", "structperiodic__strips__uniform__2d__9patches_1_1BSplinesY.html", null ]
     ] ],
+    [ "physical_geometry", null, [
+      [ "X", "structphysical__geometry_1_1X.html", null ],
+      [ "Y", "structphysical__geometry_1_1Y.html", null ]
+    ] ],
     [ "AdvectionDomain", "classAdvectionDomain.html", "classAdvectionDomain" ],
     [ "AdvectionField", "classAdvectionField.html", "classAdvectionField" ],
     [ "AdvectionField_decentred_rotation", "classAdvectionField__decentred__rotation.html", "classAdvectionField__decentred__rotation" ],
@@ -231,6 +235,7 @@ var annotated =
     [ "interpolator_on_idx_range", "structinterpolator__on__idx__range.html", null ],
     [ "interpolator_on_idx_range< Interp, GridInterp, IdxRange< Grid1D... > >", "structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.html", "structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4" ],
     [ "IonizationRate", "classIonizationRate.html", "classIonizationRate" ],
+    [ "IPatchLocator", "classIPatchLocator.html", "classIPatchLocator" ],
     [ "IPoissonSolver", "classIPoissonSolver.html", null ],
     [ "IPoissonSolver< IdxRange< ODims... >, FullIdxRange, LayoutSpace, MemorySpace >", "classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4.html", "classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01FullIdxRange_00_01LayoutSpace_00_01MemorySpace_01_4" ],
     [ "IPreallocatableInterpolator", "classIPreallocatableInterpolator.html", "classIPreallocatableInterpolator" ],
@@ -278,6 +283,8 @@ var annotated =
     [ "NullAdvectionVelocity", "classNullAdvectionVelocity.html", "classNullAdvectionVelocity" ],
     [ "NullFluidSolver", "classNullFluidSolver.html", "classNullFluidSolver" ],
     [ "NullQNSolver", "classNullQNSolver.html", "classNullQNSolver" ],
+    [ "OnionPatchLocator", "classOnionPatchLocator.html", null ],
+    [ "OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, Mapping >", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_01_4.html", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_01_4" ],
     [ "OutsideEdge", "structOutsideEdge.html", null ],
     [ "Patch", "structPatch.html", null ],
     [ "Patch< grid1, grid2, bsplines_dim1, bsplines_dim2 >", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4" ],

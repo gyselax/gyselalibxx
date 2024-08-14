@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('tests_advection.html',''); initResizab
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="tests_advection__Contents"></a>
 Contents</h1>
-<h3><a class="anchor" id="autotoc_md71"></a>
+<h3><a class="anchor" id="autotoc_md75"></a>
 Advection along x on (t, x)</h3>
 <ul>
 <li>1d_advection_x.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1D case.</li>
@@ -118,7 +118,7 @@ Advection along x on (t, x)</h3>
 \[\left\{ \begin{aligned} &amp; f_0(x) = \sin(2x), \\ &amp; A(x) = \sin(x). \end{aligned} \right. \]
 </p>
 <p> We test it on a grid \(N_x = 32\) with \(dt = 0.05\). The simulation runs on \(t\in[0,0.4]\) and the relative error is expected to be below \( 5*10^{-3}\).</p>
-<h3><a class="anchor" id="autotoc_md72"></a>
+<h3><a class="anchor" id="autotoc_md76"></a>
 Advection along x on (t, x, vx)</h3>
 <ul>
 <li>1d_advection_xvx.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1Dx1V case.</li>
@@ -131,7 +131,7 @@ Advection along x on (t, x, vx)</h3>
 \[\left\{ \begin{aligned} &amp; f_0(x, v_x) = \cos(x), \\ &amp; A(x, v_x) = v_x. \end{aligned} \right. \]
 </p>
 <p> We test it on a grid \(N_x\times N_{v_x} = 100\times50\) with \(dt = 0.1\). The simulation runs on \(t\in[0,0.4]\) and the relative error is expected to be below \( 5*10^{-7}\).</p>
-<h3><a class="anchor" id="autotoc_md73"></a>
+<h3><a class="anchor" id="autotoc_md77"></a>
 Advection along x and y on (t, x, y, vx, vy)</h3>
 <ul>
 <li>1d_advection_xyvxvy.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 2Dx2V case with a Strang splitting for the resolution.</li>
@@ -148,7 +148,7 @@ Advection along x and y on (t, x, y, vx, vy)</h3>
 \[\left\{ \begin{aligned} &amp; G (r) = \cos(\frac{\pi r}{2a}) * \mathbb{1}_{r&lt;a}(r), \\ &amp; r_1 (x,y) = \sqrt{x^2 + 8 y^2}, \\ &amp; r_2 (x,y) = \sqrt{8 x^2 + y^2}, \\ &amp; \omega = 2 \pi, \\ &amp; (x_c, y_c) = (0.25, 0). \\ \end{aligned} \right. \]
 </p>
 <p> We test it on a grid \(N_x \times N_y \times N_{v_x} \times N_{v_y} = 60 \times 60 \times 2 \times 2\) with \(dt = 0.05\). The simulation runs on \(t\in[0,0.2]\) and the relative error is expected to be below \( 7*10^{-2}\).</p>
-<h3><a class="anchor" id="autotoc_md74"></a>
+<h3><a class="anchor" id="autotoc_md78"></a>
 Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity</h3>
 <ul>
 <li>1d_spatial_advection.cpp: test the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator for a 1Dx1V case. <br  />

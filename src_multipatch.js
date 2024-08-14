@@ -3,6 +3,7 @@ var src_multipatch =
     [ "Multipatch connectivity", "src_multipatch_connectivity.html", [
       [ "Patch", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch", null ],
       [ "Interfaces", "src_multipatch_connectivity.html#src_multipatch_connectivity__Interfaces", null ],
+      [ "Patch locator", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_locator", null ],
       [ "References", "src_multipatch_connectivity.html#src_multipatch_connectivity__References", null ],
       [ "Contents", "src_multipatch_connectivity.html#src_multipatch_connectivity__Contents", null ]
     ] ],
