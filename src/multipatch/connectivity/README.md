@@ -11,7 +11,9 @@ The following sections decribe the structures and methods implemented:
         - [Edges](#src_multipatch_connectivity__Interfaces__Edges) - Mathematical defintion of edges. 
         - [Sticking and Coordinate Transformation](#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation) - Mathematical defintion of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation). 
         - [Index transformation](#src_multipatch_connectivity__Interfaces__Index_transformation) - Algorithm of the index transformation in EdgeTransformation. 
-        - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`. 
+        - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`.
+- [Patch locator](#src_multipatch_connectivity__Patch_locator) - Definition of child classes `IPatchLocator` operator to identify the patch where a given physical coordinate is.
+    - [Onion shape geometry ](#src_multipatch_connectivity__Onion_shape_geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
 - [References](#src_multipatch_connectivity__References) - References. 
 - [Contents](#src_multipatch_connectivity__Contents) - List of files in the folder. 
 
@@ -33,7 +35,6 @@ The domain defined on this patch is called *logical domain*.
 
 ## Interfaces 
 ### Sticking of Two Edges
-
 We follow the idea to represent the topology of a multipatch domain using
 the idea of *domain manifolds* (see [1]). This means that we have several
 independent tensor-product logical domains and define their sticking via coordinate 
@@ -47,8 +48,8 @@ unit squares as logical domains, the coordinate transformations of the faces and
 about which edges are identified determine the 
 isometries used in the paper and vice versa. This is easy to show.
 
-#### Multi-patch domain
 
+#### Multi-patch domain
 For simplicity, we will constrain ourselves to the 2D case, but this approach
 could be generalized to arbitrary dimensions.
 
@@ -67,7 +68,6 @@ the logical coordinates for the patch. We call this logical coordinate domain
 the *logical patch*.
 
 #### Edges
-
 So we obtain four logical edges
 ```math 
 [a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}, \quad
@@ -84,7 +84,6 @@ $`[a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}`$ would be identified with patch
 $`\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$ would be identified with patch $i$, dimensions `Xi` and `BACK`.
 
 #### Sticking and Coordinate Transformation
-
 Any edge can then be associated with an edge on another patch. 
 This corresponds to the 'sticking'. 
 So for a different patch $`\Omega^{(j)}`$, we have the logical coordinate domain
@@ -113,7 +112,8 @@ t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} 
 ```
 
 
-In the code, the sticking of two edges is represented by an `Interface` structure which contains tags 
+In the code, an edge is represented by the `Edge` structure. 
+The sticking of two edges is represented by an `Interface` structure which contains tags 
 to the first patch and the second patch as well as the boolean member `orientations_agree`. 
 The transformation from one edge to the other is done using the `EdgeTransformation` operator. 
 
@@ -121,7 +121,6 @@ This operator contains an `operator()` to transform a given coordinate on a coor
 It has also been extended for indices. 
 
 #### Index transformation
-
 All the patches are discretized into a finite number of points indexed by indices. 
 So each index refers to a coordinate on a patch. 
 For a given index on an edge of a patch at the interface, we can find an equivalent 
@@ -152,7 +151,6 @@ this equivalent is given by multiplying by $`\frac{M}{N}`$ and adapt if the coor
 **For non-uniform grids**, we cannot use this algorithm. We check all the indices of the target patch if 
 one of them fit with the current one. 
 We can use dichotomy method for the search. 
-
 
 
 #### Conformity of the meshes
@@ -194,6 +192,49 @@ on the second edge, $`\frac{4}{4} = 1`$.)
 
 
 
+## Patch locator
+The `IPatchLocator` is a base class of operators to identify the patch where a given physical coordinate is. 
+
+### Mappings
+On each patch, we define a mapping from the logical domain to the physical domain. 
+```math
+    \mathcal{F}^{(i)}: \hat{\Omega}^{(i)} \rightarrow \Omega^{(i)}
+```
+
+(The $`\hat{\Omega}^{(i)}`$ refers to the above domain $`[a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]`$.)
+The domain $`\hat{\Omega}^{(i)}`$  is called the *logical domain* and $`\Omega^{(i)}`$ the *physical domain*. 
+
+### Global analytical invertible mapping
+We assume that there is a global mapping analytically invertible such that
+```math
+    \mathcal{F}: \hat{\Omega} \rightarrow \Omega \\
+    (\mathcal{F})^{-1}: \Omega \rightarrow \hat{\Omega} \\
+        \text{with } \Omega = \bigcup_{i = 0}^{K} \Omega^{(i)} \quad 
+        \text{and } \hat{\Omega} = \bigcup_{i = 0}^{K} \hat{\Omega}^{(i)} .\\
+```
+
+We can easily apply $`(\mathcal{F})^{-1}`$ to identify the equivalent logical coordinate of a given physical coordinate $`x\in\Omega`$. 
+We check then for each patch if the logical coordinate is on a rectangular logical patch $\hat{\Omega}^{(i)}$, 
+i.e. if $`(\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}`$. 
+
+The global analytically invertible mappings implemented are child class of `AnalyticalInvertibleCurvilinear2DToCartesian`.
+
+#### Onion shape geometry 
+We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches.
+The patches are defined on the same dimensions `R` and `Theta`. 
+The logical grid is then split into different logical grids, one for each patch.
+We can then define one global mapping from the (`R`, `Theta`) domain to the (`X`, `Y`) domain for all the patches. 
+This mapping also needs to be defined from the physical domain to the logical domain. 
+
+We order the patches from the O-point to the outside boundary. 
+
+The patch grids have to be continuous (i.e. we define patches such as $`b_x^{(i)} = a_x^{(i+1)}`$ for 
+edges on $`\{a_x^{(i)}\}\times[a_y^{(i)}, b_y^{(i)}]`$ and $`\{b_x^{(i+1)}\}\times[a_y^{(i+1)}, b_y^{(i+1)}]`$).
+
+In the `OnionPatchLocator` operator, we use these properties to apply a dichotomy method 
+and reduce the number of tests to identify where the physical coordinate is. 
+
+
 ## References
 [1] Buchegger, F., Jüttler, B., Mantzaflaris, A., 
 *Adaptively refined multi-patch B-splines with enhanced smoothness*.
@@ -204,7 +245,10 @@ https://www.sciencedirect.com/science/article/pii/S009630031500836X.
 
 
 ## Contents
-- `edge_transformation.hpp`: Defines the `EdgeTransformation` operator to transform the coordinate from one edge to the other (see above).
-- `edge.hpp`: Defines the `Edge` structure.
-- `interface.hpp`: Defines the `Interface` structure.
-- `patch.hpp`: Defines the `Patch` tag.
+- `edge_transformation.hpp`: Define the `EdgeTransformation` operator to transform the coordinate from one edge to the other (see above).
+- `edge.hpp`: Define the `Edge` structure.
+- `interface.hpp`: Define the `Interface` structure.
+- `ipatch_locator.hpp`: Define the base class `IPatchLocator` for the operators identifying the patch where a physical coordinate is. 
+    - `onion_patch_locator.hpp`: Define a child class `OnionPatchLocator` specialised for "onion" type geometries. 
+- `matching_idx_slice.hpp` : Define `MatchingIdxSlice` storing the conforming indices of both patch at a given interface.
+- `patch.hpp`: Define the `Patch` tag.

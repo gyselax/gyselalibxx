@@ -1,11 +1,9 @@
-SplineMesh:
+Mesh:
   r_min: 0
   r_max: 1
-  r_ncells: 40
-  p_ncells: 80
-Time:
+  r_size: 40
+  p_size: 80
   time_step: 0.1
   final_time: 0.8
-Output:
   save_curves: false
   save_feet: false

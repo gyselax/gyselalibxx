@@ -216,12 +216,12 @@ out = execute(executable, yaml_parameters, verbose)
 # Display the curves --------------------------------------------
 mapping, method, domain, simulation, name = get_simulation_config(executable)
 
-rmin = yaml_parameters['SplineMesh']['r_min']
-rmax = yaml_parameters['SplineMesh']['r_max']
-Nr = yaml_parameters['SplineMesh']['r_ncells']
-Nth = yaml_parameters['SplineMesh']['p_ncells']
-dt = yaml_parameters['Time']['time_step']
-T = yaml_parameters['Time']['final_time']
+rmin = yaml_parameters['r_min']
+rmax = yaml_parameters['r_max']
+Nr = yaml_parameters['r_size']
+Nth = yaml_parameters['p_size']
+dt = yaml_parameters['time_step']
+T = yaml_parameters['final_time']
 iter_nb = int(T/dt)
 details = f"\n $NrxNt$ = {Nr}x{Nth}; [$rmin$,$rmax$] = [{rmin},{rmax}]."
 output_folder = f'{mapping.replace(" ","_")}_{domain}-{method.replace(" ","_")}-{simulation}_output'

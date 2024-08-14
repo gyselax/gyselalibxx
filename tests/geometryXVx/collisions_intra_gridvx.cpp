@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: MIT
+
 #include <ddc/ddc.hpp>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "collisions_intra.hpp"
-#include "collisions_utils.hpp"
-#include "geometry.hpp"
-#include "irighthandside.hpp"
-#include "mesh_builder.hpp"
-#include "pdi.h"
-#include "quadrature.hpp"
-#include "species_info.hpp"
-#include "trapezoid_quadrature.hpp"
+#include <collisions_intra.hpp>
+#include <collisions_utils.hpp>
+#include <geometry.hpp>
+#include <irighthandside.hpp>
+#include <pdi.h>
+#include <quadrature.hpp>
+#include <species_info.hpp>
+#include <trapezoid_quadrature.hpp>
 
 /**
  * Tests the construction of the gridvx and gridvx_staggered 
@@ -69,26 +69,29 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     IdxRange<CollisionsIntra::GhostedVxStaggered> gridvx_ghosted_staggered
             = collisions.get_gridvx_ghosted_staggered();
 
+    double const npoints(gridvx.size());
+    std::vector<double> gridvx_ghosted_pred(npoints + 2);
+    std::vector<double> gridvx_ghosted_staggered_pred(npoints + 1);
+
     double const dv((vx_max - vx_min) / vx_size);
-    std::vector<CoordVx> gridvx_ghosted_pred
-            = build_uniform_break_points(vx_min - dv, vx_max + dv, gridvx.extents() + 1);
-    std::vector<CoordVx> gridvx_ghosted_staggered_pred
-            = build_uniform_break_points(vx_min - dv / 2., vx_max + dv / 2., gridvx.extents());
+    gridvx_ghosted_pred[0] = vx_min - dv;
+    gridvx_ghosted_pred[npoints] = vx_max;
+    gridvx_ghosted_pred[npoints + 1] = vx_max + dv;
+
+    gridvx_ghosted_staggered_pred[0] = vx_min - dv / 2.;
+    gridvx_ghosted_staggered_pred[npoints] = vx_max + dv / 2.;
+    for (int i(1); i < npoints; i++) {
+        gridvx_ghosted_pred[i] = vx_min + dv * (i - 1);
+        gridvx_ghosted_staggered_pred[i] = vx_min - dv / 2. + dv * i;
+    }
 
     ddc::for_each(gridvx_ghosted, [&](auto const ivx_gh) {
-        EXPECT_LE(
-                std::fabs(
-                        ddc::coordinate(ivx_gh)
-                        - gridvx_ghosted_pred[(ivx_gh - gridvx_ghosted.front()).value()]),
-                1.e-12);
+        EXPECT_LE(std::fabs(ddc::coordinate(ivx_gh) - gridvx_ghosted_pred[ivx_gh.uid()]), 1.e-12);
     });
 
     ddc::for_each(gridvx_ghosted_staggered, [&](auto const ivx_ghs) {
         EXPECT_LE(
-                std::fabs(
-                        ddc::coordinate(ivx_ghs)
-                        - gridvx_ghosted_staggered_pred[(ivx_ghs - gridvx_ghosted_staggered.front())
-                                                                .value()]),
+                std::fabs(ddc::coordinate(ivx_ghs) - gridvx_ghosted_staggered_pred[ivx_ghs.uid()]),
                 1.e-12);
     });
 

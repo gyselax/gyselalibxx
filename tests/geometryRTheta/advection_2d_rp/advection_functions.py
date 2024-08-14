@@ -78,20 +78,15 @@ def set_input(rmin_def, rmax_def, Nr_def, Nth_def, dt_def, T_def, curves_def=Fal
 
     args = parser.parse_args()
 
-    yaml_parameters = {'SplineMesh': {
-                            'r_min': args.rmin,
-                            'r_max': args.rmax,
-                            'r_ncells': args.Nr,
-                            'p_ncells': args.Nth
-                        },
-                        'Time': {
-                            'time_step': args.dt,
-                            'final_time': args.T
-                        },
-                        'Output': {
-                            'save_curves': args.curves,
-                            'save_feet': args.feet
-                        }
+    yaml_parameters = {
+            'r_min': args.rmin,
+            'r_max': args.rmax,
+            'r_size': args.Nr,
+            'p_size': args.Nth,
+            'time_step': args.dt,
+            'final_time': args.T,
+            'save_curves': args.curves,
+            'save_feet': args.feet
             }
 
     executable = args.executable[0]
@@ -120,7 +115,7 @@ def execute(executable, yaml_parameters, print_out=True):
     """
     params_file = executable+"_params.yaml"
     with open(params_file, "w", encoding="utf-8") as f:
-        print(yaml.dump(yaml_parameters), file=f)
+        print(yaml.dump({'Mesh':yaml_parameters}), file=f)
 
     with subprocess.Popen([executable, params_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as p:
         out, err = p.communicate()

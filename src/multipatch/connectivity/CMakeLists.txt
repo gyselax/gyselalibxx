@@ -7,7 +7,8 @@ target_include_directories("multipatch_connectivity"
 )
 target_link_libraries("multipatch_connectivity" INTERFACE
     DDC::DDC
-    gslx::utils
     gslx::data_types
+    gslx::multipatch_data_types
+    gslx::utils
 )
 add_library("gslx::multipatch_connectivity" ALIAS "multipatch_connectivity")

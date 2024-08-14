@@ -27,3 +27,10 @@ and the field on patch 3 can be retrieved via
 ```
 DField<Patch3::IdxRange12> field3_from_multipatch = multipatch_field.get<Patch3>();
 ```
+
+
+### Types
+In `types.hpp` file different aliases are defined to use the MultipatchType class: 
+
+* DFieldOnPatch: for storing Field defined on the logical 2D grid of patches.
+* IdxRangeOnPatch: for storing 2D IdxRange defined on the logical 2D grid of patches.

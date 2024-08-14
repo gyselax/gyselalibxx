@@ -15,6 +15,7 @@
 #include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
 #include "patch.hpp"
+#include "types.hpp"
 
 // Namespace of the multipatch geometry where the patches are defined
 using namespace non_periodic_uniform_2d_2patches;
@@ -22,9 +23,6 @@ using namespace non_periodic_uniform_2d_2patches;
 namespace {
 using DFieldMem1 = DFieldMem<Patch1::IdxRange12>;
 using DFieldMem2 = DFieldMem<Patch2::IdxRange12>;
-
-template <class Patch>
-using DFieldOnPatch = DField<typename Patch::IdxRange12>;
 
 using Field1 = DFieldOnPatch<Patch1>;
 using Field2 = DFieldOnPatch<Patch2>;
