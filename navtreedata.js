@@ -60,12 +60,12 @@ var NAVTREE =
     ] ],
     [ "Using DDC in Gyselalibxx", "docs_DDC_in_gyselalibxx.html", [
       [ "Contents", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Contents", null ],
-      [ "Coordinate", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinate", null ],
-      [ "Domain and associated concepts", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain_and_associated_concepts", null ],
-      [ "PointSampling", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__PointSampling", null ],
-      [ "DiscreteElement", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteElement", null ],
-      [ "DiscreteVector", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteVector", null ],
-      [ "DiscreteDomain", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteDomain", null ],
+      [ "Coordinates", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinates", null ],
+      [ "Indexing and associated concepts", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts", null ],
+      [ "Grid", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Grid", null ],
+      [ "Index", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index", null ],
+      [ "Index Step", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index_Step", null ],
+      [ "Index Range", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index_Range", null ],
       [ "Data Storage", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Data_Storage", null ],
       [ "Example", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example", null ],
       [ "Pitfalls", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Pitfalls", null ]

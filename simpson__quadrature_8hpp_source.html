@@ -109,51 +109,102 @@ $(document).ready(function(){initNavTree('simpson__quadrature_8hpp_source.html',
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_helper.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="quadrature__coeffs__nd_8hpp.html">quadrature_coeffs_nd.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;FieldMem&lt;double, IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;simpson_quadrature_coefficients_1d(IdxRange&lt;Grid1D&gt; <span class="keyword">const</span>&amp; idx_range)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            coefficients_alloc(idx_range);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    DField&lt;IdxRange&lt;Grid1D&gt;,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;           std::experimental::layout_right,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;           <span class="keyword">typename</span> ExecSpace::memory_space&gt; <span class="keyword">const</span> coefficients</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            = get_field(coefficients_alloc);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> dx_l = distance_at_left(idx_range.back());</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> dx_r = distance_at_right(idx_range.front());</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    Kokkos::parallel_for(</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="stringliteral">&quot;bounds&quot;</span>,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                coefficients(idx_range.front()) = 1. / 3. * dx_r;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                coefficients(idx_range.back()) = 1. / 3. * dx_l;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            });</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    Kokkos::parallel_for(</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="stringliteral">&quot;centre&quot;</span>,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            Kokkos::RangePolicy&lt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    ExecSpace&gt;(0, (*idx_range.end() - *idx_range.begin()).value() / 2 - 1),</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                Idx&lt;Grid1D&gt; idx = *idx_range.begin() + 1 + 2 * i;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                coefficients(idx) = 2. / 3. * (distance_at_left(idx) + distance_at_right(idx));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                idx += IdxStep&lt;Grid1D&gt;(1);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                coefficients(idx) = 1. / 3. * (distance_at_left(idx) + distance_at_right(idx));</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            });</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> constexpr (Grid1D::continuous_dimension_type::PERIODIC) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        Kokkos::parallel_for(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="stringliteral">&quot;bounds&quot;</span>,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    coefficients(idx_range.front()) += 2. / 3. * dx_l;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    coefficients(idx_range.back()) += 2. / 3. * dx_r;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                });</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> coefficients_alloc;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;FieldMem&lt;double, IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;simpson_quadrature_coefficients_1d(IdxRange&lt;Grid1D&gt; <span class="keyword">const</span>&amp; idx_range)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span> constexpr (Grid1D::continuous_dimension_type::PERIODIC) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">if</span> (idx_range.size() % 2 != 0) {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                    <span class="stringliteral">&quot;Simpson quadrature requires 2n quadrature points for a periodic direction.&quot;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span> (idx_range.size() % 2 == 0) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Simpson quadrature requires 2n+1 quadrature points for a &quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                                     <span class="stringliteral">&quot;non-periodic direction.&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            coefficients_alloc(idx_range);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    DField&lt;IdxRange&lt;Grid1D&gt;,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;           std::experimental::layout_right,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;           <span class="keyword">typename</span> ExecSpace::memory_space&gt; <span class="keyword">const</span> coefficients</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            = get_field(coefficients_alloc);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    Kokkos::parallel_for(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="stringliteral">&quot;centre_left&quot;</span>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            Kokkos::RangePolicy&lt;ExecSpace&gt;(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    0,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    idx_range.size() / 2 - <span class="keywordtype">int</span>(Grid1D::continuous_dimension_type::PERIODIC)),</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                Idx&lt;Grid1D&gt; idx_c = idx_range.front() + i * 2 + 1;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_l = distance_at_left(idx_c);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_r = distance_at_right(idx_c);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_sum = dx_l + dx_r;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                coefficients(idx_c - 1) = dx_sum * (2. * dx_l - dx_r) / (6. * dx_l);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                coefficients(idx_c) = dx_sum * dx_sum * dx_sum / (6. * dx_l * dx_r);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            });</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// The incrementation is done in a separate loop to avoid race conditions</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    Kokkos::parallel_for(</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="stringliteral">&quot;overlap_increment&quot;</span>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            Kokkos::RangePolicy&lt;ExecSpace&gt;(</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    0,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    idx_range.size() / 2 - <span class="keywordtype">int</span>(Grid1D::continuous_dimension_type::PERIODIC) - 1),</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                Idx&lt;Grid1D&gt; idx_c = idx_range.front() + i * 2 + 1;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_l = distance_at_left(idx_c);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_r = distance_at_right(idx_c);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_sum = dx_l + dx_r;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                coefficients(idx_c + 1) += dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            });</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    Kokkos::parallel_for(</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="stringliteral">&quot;bounds&quot;</span>,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                Idx&lt;Grid1D&gt; idx_c</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        = idx_range.back() - 1 - <span class="keywordtype">int</span>(Grid1D::continuous_dimension_type::PERIODIC);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_l = distance_at_left(idx_c);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_r = distance_at_right(idx_c);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> dx_sum = dx_l + dx_r;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                coefficients(idx_c + 1) = dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            });</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> constexpr (Grid1D::continuous_dimension_type::PERIODIC) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        Kokkos::parallel_for(</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="stringliteral">&quot;bounds&quot;</span>,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    Idx&lt;Grid1D&gt; idx_c = idx_range.back();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> dx_l = distance_at_left(idx_c);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> dx_r = distance_at_right(idx_c);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <span class="keywordtype">double</span> <span class="keyword">const</span> dx_sum = dx_l + dx_r;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    coefficients(idx_c - 1) += dx_sum * (2. * dx_l - dx_r) / (6. * dx_l);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    coefficients(idx_c) = dx_sum * dx_sum * dx_sum / (6. * dx_l * dx_r);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    coefficients(idx_range.front()) += dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                });</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> coefficients_alloc;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... ODims&gt;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;FieldMem&lt;double, IdxRange&lt;ODims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;simpson_quadrature_coefficients(IdxRange&lt;ODims...&gt; <span class="keyword">const</span>&amp; idx_range)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;{</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="quadrature__coeffs__nd_8hpp.html#adaccf3b1bbbd93304c7caca630cdf21e">quadrature_coeffs_nd</a>&lt;ExecSpace, ODims...&gt;(</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            idx_range,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            (std::function&lt;FieldMem&lt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                     double,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                     IdxRange&lt;ODims&gt;,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                     ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;(</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                     IdxRange&lt;ODims&gt;)&gt;(simpson_quadrature_coefficients_1d&lt;ExecSpace, ODims&gt;))...);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html">quadrature_coeffs_nd.hpp</a></div><div class="ttdoc">File providing helper functions for defining multi-dimensional quadrature methods.</div></div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_adaccf3b1bbbd93304c7caca630cdf21e"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#adaccf3b1bbbd93304c7caca630cdf21e">quadrature_coeffs_nd</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; quadrature_coeffs_nd(IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt;&gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition:</b> quadrature_coeffs_nd.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
