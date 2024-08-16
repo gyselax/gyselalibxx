@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 #pragma once
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -35,11 +34,14 @@ private:
 
     evaluator_type const& m_evaluator;
 
-    mutable host_t<DFieldMem<IdxRangeBSRTheta>> m_coefs;
+    mutable host_t<FieldMem<double, BSIdxRangeRTheta>> m_coefs;
 
-    using r_deriv_type = host_t<DConstField<SplineRThetaBuilder::batched_derivs_domain_type1>>;
-    using p_deriv_type = host_t<DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>>;
-    using mixed_deriv_type = host_t<DConstField<SplineRThetaBuilder::batched_derivs_domain_type>>;
+    using r_deriv_type
+            = host_t<Field<double const, SplineRThetaBuilder::batched_derivs_domain_type1>>;
+    using p_deriv_type
+            = host_t<Field<double const, SplineRThetaBuilder::batched_derivs_domain_type2>>;
+    using mixed_deriv_type
+            = host_t<Field<double const, SplineRThetaBuilder::batched_derivs_domain_type>>;
 
 public:
     /**

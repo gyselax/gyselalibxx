@@ -7,8 +7,9 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
+#include <ddc_helper.hpp>
+
 #include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
 
 // TODO: Generalize (IDimI -> Tags...) and make it usable for all Gysela operators ?
 template <template <class...> class Interp, class GridInterp, class IdxRange>

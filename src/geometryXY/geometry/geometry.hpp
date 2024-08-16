@@ -122,12 +122,12 @@ using SplineYEvaluator_XY = ddc::SplineEvaluator<
         GridY>;
 
 // Spline index range
-using IdxRangeBSX = IdxRange<BSplinesX>;
-using IdxRangeBSY = IdxRange<BSplinesY>;
-using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;
+using BSIdxRangeX = IdxRange<BSplinesX>;
+using BSIdxRangeY = IdxRange<BSplinesY>;
+using BSIdxRangeXY = IdxRange<BSplinesX, BSplinesY>;
 
 template <class ElementType>
-using BSConstFieldXY = Field<ElementType const, IdxRangeBSXY>;
+using BSConstFieldXY = Field<ElementType const, BSIdxRangeXY>;
 using DBSConstFieldXY = BSConstFieldXY<double>;
 
 // Index definitions

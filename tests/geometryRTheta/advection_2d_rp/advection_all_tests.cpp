@@ -55,20 +55,20 @@ using DiscreteMapping
 
 
 } // end namespace
-template <class Mapping, class AnalyticalMapping, class IdxRangeAdvection>
+template <class Mapping, class AnalyticalMapping, class AdvectionIdxRange>
 struct SimulationParameters
 {
 public:
     Mapping const& mapping;
     AnalyticalMapping const& analytical_mapping;
-    IdxRangeAdvection const& advection_idx_range;
+    AdvectionIdxRange const& advection_idx_range;
     std::string mapping_name;
     std::string idx_range_name;
-    using IdxRangeSimulationAdvection = IdxRangeAdvection;
+    using SimultationAdvectionIdxRange = AdvectionIdxRange;
     SimulationParameters(
             Mapping const& map,
             AnalyticalMapping const& a_map,
-            IdxRangeAdvection const& dom,
+            AdvectionIdxRange const& dom,
             std::string m_name,
             std::string dom_name)
         : mapping(map)
@@ -106,16 +106,16 @@ struct NumericalParams
 };
 
 
-template <class IdxRangeAdvection>
+template <class AdvectionIdxRange>
 struct Numerics
 {
 private:
-    IdxRangeAdvection advection_idx_range;
+    AdvectionIdxRange advection_idx_range;
     NumericalParams params;
 
 public:
-    using X_adv = typename IdxRangeAdvection::X_adv;
-    using Y_adv = typename IdxRangeAdvection::Y_adv;
+    using X_adv = typename AdvectionIdxRange::X_adv;
+    using Y_adv = typename AdvectionIdxRange::Y_adv;
 
     using ValFieldMem = FieldMemRTheta<CoordRTheta>;
     using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
@@ -130,7 +130,7 @@ public:
 
     NumericalTuple numerics;
 
-    Numerics(IdxRangeAdvection m_advection_idx_range, NumericalParams m_params)
+    Numerics(AdvectionIdxRange m_advection_idx_range, NumericalParams m_params)
         : advection_idx_range(m_advection_idx_range)
         , params(m_params)
         , numerics(std::make_tuple(

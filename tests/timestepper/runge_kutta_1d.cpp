@@ -8,9 +8,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "rk2.hpp"
-#include "rk3.hpp"
-#include "rk4.hpp"
+#include <rk2.hpp>
+#include <rk3.hpp>
+#include <rk4.hpp>
 
 
 template <class T>

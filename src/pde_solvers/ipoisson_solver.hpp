@@ -6,7 +6,7 @@
 #include "ddc_helper.hpp"
 #include "vector_field.hpp"
 
-template <class IdxRangeLaplacian, class IdxRangeFull, class LayoutSpace, class MemorySpace>
+template <class LaplacianIdxRange, class FullIdxRange, class LayoutSpace, class MemorySpace>
 class IPoissonSolver;
 
 /**
@@ -14,15 +14,15 @@ class IPoissonSolver;
  * Classes inheriting from this must implement a way to solve the following equation:
  * @f$ -\Delta \phi = \rho @f$
  *
- * @tparam IdxRangeLaplacian The index range on which the equation is defined.
- * @tparam IdxRangeFull The index range on which the operator() acts. This is equal to the
- *                      IdxRangeLaplacian plus any batched dimensions.
+ * @tparam LaplacianIdxRange The index range on which the equation is defined.
+ * @tparam FullIdxRange The index range on which the operator() acts. This is equal to the
+ *                      LaplacianIdxRange plus any batched dimensions.
  * @tparam LayoutSpace The layout space of the Fields passed to operator().
  * @tparam MemorySpace The space (CPU/GPU) where the Fields passed to operator()
  *                      are saved.
  */
-template <class... ODims, class IdxRangeFull, class LayoutSpace, class MemorySpace>
-class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, LayoutSpace, MemorySpace>
+template <class... ODims, class FullIdxRange, class LayoutSpace, class MemorySpace>
+class IPoissonSolver<IdxRange<ODims...>, FullIdxRange, LayoutSpace, MemorySpace>
 {
 protected:
     /// @brief The tags describing the real dimensions in the equation.
@@ -30,7 +30,7 @@ protected:
     /// @brief The tags describing the discrete dimensions in the equation.
     using laplacian_tags = ddc::detail::TypeSeq<ODims...>;
     /// @brief The tags describing the dimensions of the index range on which the operator acts.
-    using space_tags = ddc::to_type_seq_t<IdxRangeFull>;
+    using space_tags = ddc::to_type_seq_t<FullIdxRange>;
     /// @brief The tags describing the batched dimensions.
     using batch_tags = ddc::type_seq_remove_t<space_tags, laplacian_tags>;
 
@@ -40,15 +40,15 @@ protected:
 
 public:
     /// @brief The Field type of the arguments to operator().
-    using field_type = DField<IdxRangeFull, LayoutSpace, MemorySpace>;
+    using field_type = DField<FullIdxRange, LayoutSpace, MemorySpace>;
     /// @brief The const Field type of the arguments to operator().
-    using const_field_type = DConstField<IdxRangeFull, LayoutSpace, MemorySpace>;
+    using const_field_type = DConstField<FullIdxRange, LayoutSpace, MemorySpace>;
 
     /// @brief The type of the derivative of @f$ \phi @f$.
     using vector_field_type = std::conditional_t<
             ddc::type_seq_size_v<laplacian_tags> == 1,
             field_type,
-            VectorField<double, IdxRangeFull, real_laplacian_tags, LayoutSpace, MemorySpace>>;
+            VectorField<double, FullIdxRange, real_laplacian_tags, LayoutSpace, MemorySpace>>;
 
     /// @brief The index range type describing the batch dimensions.
     using batch_idx_range_type =

@@ -13,6 +13,7 @@
 
 #include <paraconf.h>
 #include <pdi.h>
+#include <utils_tools.hpp>
 
 #include "advection_domain.hpp"
 #include "bsl_advection_rp.hpp"
@@ -38,7 +39,6 @@
 #include "spline_interpolator_2d_rp.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
-#include "utils_tools.hpp"
 #include "vortex_merger_equilibrium.hpp"
 #include "vortex_merger_initialization.hpp"
 
@@ -114,7 +114,7 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    IdxRangeBSRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
+    BSIdxRangeRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
 
 
     // --- Time integration method --------------------------------------------------------------------

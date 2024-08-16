@@ -129,27 +129,27 @@ public:
     template <
             class ElementType,
             class InIdxRange,
-            class IdxRangeOut,
+            class OutIdxRange,
             class MemSpace,
             class ExecSpace>
     void operator()(
             ExecSpace const& execution_space,
-            Field<ElementType, IdxRangeOut, field_layout_type, MemSpace> recv_field,
+            Field<ElementType, OutIdxRange, field_layout_type, MemSpace> recv_field,
             ConstField<ElementType, InIdxRange, field_layout_type, MemSpace> send_field)
     {
-        static_assert(!std::is_same_v<InIdxRange, IdxRangeOut>);
+        static_assert(!std::is_same_v<InIdxRange, OutIdxRange>);
         static_assert(
                 (std::is_same_v<InIdxRange, typename Layout1::discrete_domain_type>)
                 || (std::is_same_v<InIdxRange, typename Layout2::discrete_domain_type>));
         static_assert(
-                (std::is_same_v<IdxRangeOut, typename Layout1::discrete_domain_type>)
-                || (std::is_same_v<IdxRangeOut, typename Layout2::discrete_domain_type>));
+                (std::is_same_v<OutIdxRange, typename Layout1::discrete_domain_type>)
+                || (std::is_same_v<OutIdxRange, typename Layout2::discrete_domain_type>));
         using InLayout = std::conditional_t<
                 std::is_same_v<InIdxRange, typename Layout1::discrete_domain_type>,
                 Layout1,
                 Layout2>;
         using OutLayout = std::conditional_t<
-                std::is_same_v<IdxRangeOut, typename Layout1::discrete_domain_type>,
+                std::is_same_v<OutIdxRange, typename Layout1::discrete_domain_type>,
                 Layout1,
                 Layout2>;
         this->transpose_to<OutLayout>(execution_space, recv_field, send_field);
@@ -188,7 +188,7 @@ public:
         static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemSpace>::accessible);
 
         static_assert(std::is_same_v<InIdxRange, typename InLayout::discrete_domain_type>);
-        using IdxRangeOut = typename OutLayout::discrete_domain_type;
+        using OutIdxRange = typename OutLayout::discrete_domain_type;
 
         /*****************************************************************
          * Define groups of tags to build necessary transform
@@ -204,7 +204,7 @@ public:
                 apply_template_to_type_seq_t<MPIDim, typename OutLayout::distributed_type_seq>;
         // Get complete set of tags from index ranges
         using input_ordered_dims = ddc::to_type_seq_t<InIdxRange>;
-        using output_ordered_dims = ddc::to_type_seq_t<IdxRangeOut>;
+        using output_ordered_dims = ddc::to_type_seq_t<OutIdxRange>;
         // Find tags that are neither scattered nor gathered
         using batch_dims = ddc::type_seq_remove_t<
                 ddc::type_seq_remove_t<input_ordered_dims, dims_to_scatter>,

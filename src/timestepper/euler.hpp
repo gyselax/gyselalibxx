@@ -2,11 +2,12 @@
 #pragma once
 #include <array>
 
+#include <ddc_helper.hpp>
+#include <vector_field_common.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
 #include "itimestepper.hpp"
-#include "vector_field_common.hpp"
 
 /**
  * @brief A class which provides an implementation of an explicit Euler method.

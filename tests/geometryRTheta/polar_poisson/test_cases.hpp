@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 #pragma once
 #include <cmath>
 
@@ -50,7 +49,7 @@ public:
      *      The mapping function which converts the logical (polar)
      *      coordinates into the physical (Cartesian) coordinates.
      */
-    explicit PoissonSolution(CurvilinearToCartesian const& coordinate_converter)
+    PoissonSolution(CurvilinearToCartesian const& coordinate_converter)
         : m_coordinate_converter(coordinate_converter)
     {
     }
@@ -84,7 +83,7 @@ public:
      *      The mapping function which converts the logical (polar)
      *      coordinates into the physical (Cartesian) coordinates.
      */
-    explicit CurvilinearSolution(CurvilinearToCartesian const& coordinate_converter)
+    CurvilinearSolution(CurvilinearToCartesian const& coordinate_converter)
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
     {
     }
@@ -124,7 +123,7 @@ public:
      *      The mapping function which converts the logical (polar)
      *      coordinates into the physical (Cartesian) coordinates.
      */
-    explicit CartesianSolution(CurvilinearToCartesian const& coordinate_converter)
+    CartesianSolution(CurvilinearToCartesian const& coordinate_converter)
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
     {
     }
@@ -217,7 +216,7 @@ public:
      *      The mapping function which converts the logical (polar)
      *      coordinates into the physical (Cartesian) coordinates.
      */
-    explicit ManufacturedPoissonTest(CurvilinearToCartesian const& coordinate_converter)
+    ManufacturedPoissonTest(CurvilinearToCartesian const& coordinate_converter)
         : m_coordinate_converter(coordinate_converter)
     {
     }

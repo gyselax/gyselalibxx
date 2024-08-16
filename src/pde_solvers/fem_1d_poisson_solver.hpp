@@ -141,25 +141,25 @@ private:
     using FEMSplineEvaluator = typename FEMSplineEvaluatorBuilder<
             typename SplineEvaluator::batched_evaluation_domain_type>::type;
 
-    using IdxFEMBSplines = Idx<FEMBSplines>;
+    using FEMBSplinesIdx = Idx<FEMBSplines>;
 
-    using IdxRangeFEMBSplines = IdxRange<FEMBSplines>;
+    using FEMBSplinesIdxRange = IdxRange<FEMBSplines>;
 
-    using IdxRangeBatchedFEMBSplines = typename FEMSplineEvaluator::batched_spline_domain_type;
+    using BatchedFEMBSplinesIdxRange = typename FEMSplineEvaluator::batched_spline_domain_type;
 
     using FEMBSplinesCoeffMem
-            = DFieldMem<IdxRangeFEMBSplines, ddc::KokkosAllocator<double, memory_space>>;
+            = DFieldMem<FEMBSplinesIdxRange, ddc::KokkosAllocator<double, memory_space>>;
 
     using BatchedFEMBSplinesCoeffMem
-            = DFieldMem<IdxRangeBatchedFEMBSplines, ddc::KokkosAllocator<double, memory_space>>;
+            = DFieldMem<BatchedFEMBSplinesIdxRange, ddc::KokkosAllocator<double, memory_space>>;
 
     using BatchedFEMBSplinesCoeff = typename BatchedFEMBSplinesCoeffMem::span_type;
 
 private:
-    using IdxRangeBSplines = IdxRange<InputBSplines>;
-    using IdxBSplines = Idx<InputBSplines>;
+    using BSplinesIdxRange = IdxRange<InputBSplines>;
+    using BSplinesIdx = Idx<InputBSplines>;
 
-    using IdxRangeBatchedBSplines = typename SplineEvaluator::batched_spline_domain_type;
+    using BatchedBSplinesIdxRange = typename SplineEvaluator::batched_spline_domain_type;
 
     using full_index =
             typename SplineEvaluator::batched_evaluation_domain_type::discrete_element_type;
@@ -179,15 +179,15 @@ private:
     using RHSBSplines = InputBSplines;
 
     using RHSSplineCoeffMem
-            = DFieldMem<IdxRangeBatchedBSplines, ddc::KokkosAllocator<double, memory_space>>;
+            = DFieldMem<BatchedBSplinesIdxRange, ddc::KokkosAllocator<double, memory_space>>;
     using RHSSplineCoeff = typename RHSSplineCoeffMem::span_type;
 
     using RHSQuadTags = ddc::
             type_seq_merge_t<typename base_type::batch_tags, ddc::detail::TypeSeq<GridPDEDimQ>>;
 
-    using IdxRangeRHSQuadrature = ddc::detail::convert_type_seq_to_discrete_domain_t<RHSQuadTags>;
+    using RHSQuadratureIdxRange = ddc::detail::convert_type_seq_to_discrete_domain_t<RHSQuadTags>;
 
-    using IdxRHSQuadrature = typename IdxRangeRHSQuadrature::discrete_element_type;
+    using RHSQuadratureIdx = typename RHSQuadratureIdxRange::discrete_element_type;
 
 private:
     // Spline degree in x direction
@@ -266,7 +266,7 @@ public:
     field_type operator()(field_type phi, field_type rho) const override
     {
         batch_idx_range_type batch_dom(get_idx_range(phi));
-        IdxRangeBatchedFEMBSplines
+        BatchedFEMBSplinesIdxRange
                 phi_coefs_idx_range(batch_dom, ddc::discrete_space<FEMBSplines>().full_domain());
         BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
@@ -304,7 +304,7 @@ public:
     field_type operator()(field_type phi, vector_field_type E, field_type rho) const override
     {
         batch_idx_range_type batch_dom(get_idx_range(phi));
-        IdxRangeBatchedFEMBSplines
+        BatchedFEMBSplinesIdxRange
                 phi_coefs_idx_range(batch_dom, ddc::discrete_space<FEMBSplines>().full_domain());
         BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
@@ -351,15 +351,15 @@ private:
 
         auto quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));
 
-        IdxRangeFEMBSplines spline_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
-        IdxFEMBSplines first_bspline_idx = spline_idx_range.front();
+        FEMBSplinesIdxRange spline_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
+        FEMBSplinesIdx first_bspline_idx = spline_idx_range.front();
 
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
         ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
-            IdxFEMBSplines const jmin_idx
+            FEMBSplinesIdx const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
             std::size_t j_min = (jmin_idx - first_bspline_idx).value();
             for (int j = 0; j < s_degree + 1; ++j) {
@@ -376,15 +376,15 @@ private:
         });
 
         // Impose the boundary conditions
-        IdxRangeFEMBSplines const bspline_full_idx_range
+        FEMBSplinesIdxRange const bspline_full_idx_range
                 = ddc::discrete_space<FEMBSplines>().full_domain();
-        IdxRangeFEMBSplines const bspline_dom
+        FEMBSplinesIdxRange const bspline_dom
                 = bspline_full_idx_range.take_first(IdxStep<FEMBSplines>(nbasis));
 
         host_t<FEMBSplinesCoeffMem> int_vals(bspline_dom);
         ddc::discrete_space<InputBSplines>().integrals(get_field(int_vals));
 
-        for (IdxFEMBSplines const ix : bspline_dom) {
+        for (FEMBSplinesIdx const ix : bspline_dom) {
             int const i = (ix - first_bspline_idx).value();
             m_fem_matrix->set_element(nbasis, i, int_vals(ix));
             m_fem_matrix->set_element(i, nbasis, int_vals(ix));
@@ -413,15 +413,15 @@ private:
 
         auto quad_coef_host = ddc::create_mirror_and_copy(get_const_field(m_quad_coef));
 
-        IdxRangeFEMBSplines spline_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
-        IdxFEMBSplines first_bspline_idx = spline_idx_range.front();
+        FEMBSplinesIdxRange spline_idx_range = ddc::discrete_space<FEMBSplines>().full_domain();
+        FEMBSplinesIdx first_bspline_idx = spline_idx_range.front();
 
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
         ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
-            IdxFEMBSplines const jmin_idx
+            FEMBSplinesIdx const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
             std::size_t j_min = (jmin_idx - first_bspline_idx).value();
             for (int j = 0; j < s_degree + 1; ++j) {
@@ -456,7 +456,7 @@ public:
     void solve_matrix_system(BatchedFEMBSplinesCoeff phi_spline_coef, field_type rho) const
     {
         // Calculate the spline representation of the RHS.
-        IdxRangeBatchedBSplines rho_spline_coef_idx_range(
+        BatchedBSplinesIdxRange rho_spline_coef_idx_range(
                 batch_idx_range_type(get_idx_range(rho)),
                 get_spline_idx_range(m_spline_builder));
         RHSSplineCoeffMem rho_spline_coef_alloc(rho_spline_coef_idx_range);
@@ -468,7 +468,7 @@ public:
         SplineEvaluator spline_evaluator_proxy = m_spline_evaluator;
         DQConstField quad_coef_proxy = get_const_field(m_quad_coef);
 
-        IdxFEMBSplines last_basis_element(nbasis_proxy - 1);
+        FEMBSplinesIdx last_basis_element(nbasis_proxy - 1);
 
         ddc::parallel_fill(phi_spline_coef, 0.0);
 
@@ -476,7 +476,7 @@ public:
         BatchedFEMBSplinesCoeff rhs(phi_spline_coef);
 
         batch_idx_range_type batch_idx_range(get_idx_range(rho));
-        IdxRangeRHSQuadrature rhs_build_idx_range(batch_idx_range, get_idx_range(m_quad_coef));
+        RHSQuadratureIdxRange rhs_build_idx_range(batch_idx_range, get_idx_range(m_quad_coef));
 
         // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
         // Rk: phi_rhs no longer contains spline coefficients, but is the
@@ -484,19 +484,19 @@ public:
         ddc::parallel_for_each(
                 exec_space(),
                 rhs_build_idx_range,
-                KOKKOS_LAMBDA(IdxRHSQuadrature const idx) {
+                KOKKOS_LAMBDA(RHSQuadratureIdx const idx) {
                     batch_index_type ib(idx);
                     IdxQ iq(idx);
                     CoordPDEDim const coord = ddc::coordinate(iq);
                     std::array<double, s_degree + 1> values_alloc;
                     DSpan1D values = as_span(values_alloc);
-                    IdxFEMBSplines const jmin
+                    FEMBSplinesIdx const jmin
                             = ddc::discrete_space<FEMBSplines>().eval_basis(values, coord);
                     double const rho_val = spline_evaluator_proxy(
                             coord,
-                            DConstField<IdxRangeBSplines>(rho_spline_coef[ib]));
+                            DConstField<BSplinesIdxRange>(rho_spline_coef[ib]));
                     for (int j = 0; j < s_degree + 1; ++j) {
-                        IdxFEMBSplines j_idx = jmin + j;
+                        FEMBSplinesIdx j_idx = jmin + j;
                         while (j_idx > last_basis_element) {
                             j_idx -= nbasis_proxy;
                         }
@@ -513,7 +513,7 @@ public:
         int constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());
 
         ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
-            IdxRangeFEMBSplines solve_idx_range(
+            FEMBSplinesIdxRange solve_idx_range(
                     fem_idx_range.front() + n_implicit_min_bcs,
                     IdxStep<FEMBSplines>(m_matrix_size));
             DSpan1D const phi_rhs_host
@@ -530,7 +530,7 @@ public:
             ddc::parallel_fill(phi_spline_coef[fem_idx_range.front()], 0.0);
             ddc::parallel_fill(phi_spline_coef[fem_idx_range.back()], 0.0);
         } else {
-            IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
+            FEMBSplinesIdx first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
             ddc::parallel_for_each(
@@ -539,7 +539,7 @@ public:
                     KOKKOS_LAMBDA(batch_index_type ib) {
                         for (int i = 0; i < s_degree; i++) {
                             phi_spline_coef(ib, first_repeat_bspline + i)
-                                    = phi_spline_coef(ib, IdxFEMBSplines(i));
+                                    = phi_spline_coef(ib, FEMBSplinesIdx(i));
                         }
                     });
         }

@@ -3,9 +3,10 @@
 #include <utility>
 #include <vector>
 
-#include "geometry.hpp"
+#include <geometry.hpp>
+#include <irighthandside.hpp>
+
 #include "iboltzmannsolver.hpp"
-#include "irighthandside.hpp"
 #include "splitrighthandsidesolver.hpp"
 
 SplitRightHandSideSolver::SplitRightHandSideSolver(

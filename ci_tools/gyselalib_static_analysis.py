@@ -104,18 +104,6 @@ class FileObject:
         self.aliases = {self.raw[idx+1]['str']: self.raw[idx+3:expr_end[np.searchsorted(expr_end, idx)]]
                     for idx in using_indices}
 
-        self.type_names = [{'str': line[1]['str'], 'linenr': line[0]['linenr']} for line in self.lines \
-                            if line and line[0]['str'] in ('struct', 'class')]
-        for templated_obj in self.root.findall('./dump/TemplateSimplifier/TokenAndName'):
-            if Path(templated_obj.attrib['file']) != self._file:
-                continue
-            linenr = templated_obj.attrib['line']
-            self.type_names += [{'str': templated_obj[i+2].attrib['str'] if templated_obj[i+1].attrib['str'] == '...' \
-                                        else templated_obj[i+1].attrib['str'],
-                                 'linenr': linenr} for i,t in enumerate(templated_obj) \
-                                if t.attrib['str'] in ('struct', 'class')]
-        self.type_names += [{'str': self.raw[idx+1]['str'], 'linenr': self.raw[idx+1]['linenr']} for idx in using_indices]
-
         self._identify_potential_bugs()
 
     @property
@@ -312,33 +300,27 @@ def search_for_bad_aliases(file):
         if re.search(r'\bField<(const )?double', val_str) or \
                 re.search(r'\bFieldMem<(const )?double', val_str):
             report_error(STYLE, file, val[0]['linenr'], f'double does not need to be a template parameter. Please use DField/DFieldMem ({val_str})')
-        if a_name[0].isupper():
-            if val_str.startswith('Idx<') and not a_name.startswith('Idx'):
-                report_error(STYLE, file, val[0]['linenr'], f"Index type aliases should start with the keyword Idx ({a_name})")
-            elif val_str.startswith('IdxStep<') and not a_name.startswith('IdxStep'):
-                report_error(STYLE, file, val[0]['linenr'], f"Index step type aliases should start with the keyword IdxStep ({a_name})")
-            elif val_str.startswith('IdxRange<') and not a_name.startswith('IdxRange'):
-                report_error(STYLE, file, val[0]['linenr'], f"Index type aliases should start with the keyword IdxRange ({a_name})")
-
-    for alias_key in file.type_names:
-        a_name = alias_key['str']
-        linenr = alias_key['linenr']
         if any(bad_name in a_name for bad_name in forbidden_substrings):
-            report_error(STYLE, file, linenr, f"Name seems to contain DDC keywords. Please use the new naming conventions (using {a_name} = {val_str})")
-        if a_name == 'Grid':
-            msg = ("The name 'Grid' is too general and should be avoided as it implies that the type "
-                   "can be multi-D. Please use Grid1D")
-            report_error(STYLE, file, linenr, msg)
-        if 'Idx' in a_name and not (a_name.startswith('Idx') or a_name.startswith('MultipatchIdx')):
-            prefix = 'Multipatch' if 'Multipatch' in a_name else ''
-            name = a_name.replace('Multipatch','')
-            if 'IdxRange' in a_name:
-                expected_name = prefix + 'IdxRange' + name.replace('IdxRange','')
-            elif 'IdxStep' in a_name:
-                expected_name = prefix + 'IdxStep' + name.replace('IdxStep','')
-            else:
-                expected_name = prefix + 'Idx' + name.replace('Idx','')
-            report_error(STYLE, file, linenr, f"Type aliases should start with the type keyword ({a_name} -> {expected_name})")
+            report_error(STYLE, file, val[0]['linenr'], f"Name seems to contain DDC keywords. Please use the new naming conventions (using {a_name} = {val_str})")
+
+    template_declarations = file.root.findall(".//TokenAndName")
+    for temp in template_declarations:
+        if Path(temp.attrib['file']) != file.file:
+            continue
+        possible_nodes = list(temp)
+        template_class_loc = [possible_nodes.index(tok) \
+                              for tok in temp.findall("./template-token[@str='class']")]
+        template_class_loc = [l+2 if possible_nodes[l+1].attrib['str'] == '...' else l+1 \
+                              for l in template_class_loc]
+        template_class_names = [possible_nodes[l].attrib['str'] for l in template_class_loc]
+
+        for name in template_class_names:
+            if any(bad_name in name for bad_name in forbidden_substrings):
+                msg = f"Name seems to contain DDC keywords. Please use the new naming conventions ({name})"
+                report_error(STYLE, file, temp.attrib['line'], msg)
+            if name == 'Grid':
+                msg = "The name 'Grid' is too general and should be avoided as it implies that the type can be multi-D. Please use Grid1D"
+                report_error(STYLE, file, temp.attrib['line'], msg)
 
 def check_struct_names(file):
     """

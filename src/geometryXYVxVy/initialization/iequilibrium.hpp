@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include <geometry.hpp>
 
 /**
  * @brief An abstract class for initializing the equilibrium state of the distribution function.

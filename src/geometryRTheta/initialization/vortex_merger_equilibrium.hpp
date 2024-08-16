@@ -1,12 +1,12 @@
-// SPDX-License-Identifier: MIT
 #pragma once
 #include <functional>
 
 #include <ddc/ddc.hpp>
 
+#include <geometry.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "utils_tools.hpp"

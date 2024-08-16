@@ -3,9 +3,10 @@
 
 #include <ddc/ddc.hpp>
 
+#include <maxwellianequilibrium.hpp>
+
 #include "krook_source_constant.hpp"
 #include "mask_tanh.hpp"
-#include "maxwellianequilibrium.hpp"
 
 KrookSourceConstant::KrookSourceConstant(
         IdxRangeX const& gridx,
