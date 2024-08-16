@@ -30,11 +30,7 @@ trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
            std::experimental::layout_right,
            typename ExecSpace::memory_space> const coefficients
             = get_field(coefficients_alloc);
-
-    IdxRange<Grid1D> middle_idx_range
-            = idx_range
-                      .remove(IdxStep<Grid1D>(1),
-                              IdxStep<Grid1D>(!Grid1D::continuous_dimension_type::PERIODIC));
+    IdxRange<Grid1D> middle_idx_range = idx_range.remove(IdxStep<Grid1D>(1), IdxStep<Grid1D>(1));
 
     ddc::parallel_for_each(
             ExecSpace(),
@@ -42,25 +38,19 @@ trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
             KOKKOS_LAMBDA(Idx<Grid1D> const idx) {
                 coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));
             });
-
-    if constexpr (Grid1D::continuous_dimension_type::PERIODIC) {
-        Kokkos::parallel_for(
-                "bounds",
-                Kokkos::RangePolicy<ExecSpace>(0, 1),
-                KOKKOS_LAMBDA(const int i) {
-                    Idx<Grid1D> idx = idx_range.front();
-                    coefficients(idx)
-                            = 0.5 * (distance_at_right(idx_range.back()) + distance_at_right(idx));
-                });
-    } else {
-        Kokkos::parallel_for(
-                "bounds",
-                Kokkos::RangePolicy<ExecSpace>(0, 1),
-                KOKKOS_LAMBDA(const int i) {
-                    coefficients(idx_range.front()) = 0.5 * distance_at_right(idx_range.front());
-                    coefficients(idx_range.back()) = 0.5 * distance_at_left(idx_range.back());
-                });
-    }
+    double const dx_l = distance_at_left(idx_range.back());
+    double const dx_r = distance_at_right(idx_range.front());
+    Kokkos::parallel_for(
+            "bounds",
+            Kokkos::RangePolicy<ExecSpace>(0, 1),
+            KOKKOS_LAMBDA(const int i) {
+                coefficients(idx_range.front()) = 0.5 * dx_r;
+                coefficients(idx_range.back()) = 0.5 * dx_l;
+                if constexpr (Grid1D::continuous_dimension_type::PERIODIC) {
+                    coefficients(idx_range.front()) += 0.5 * dx_l;
+                    coefficients(idx_range.back()) += 0.5 * dx_r;
+                }
+            });
 
     return coefficients_alloc;
 }

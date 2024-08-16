@@ -27,6 +27,9 @@ using DFieldMem2 = DFieldMem<Patch2::IdxRange12>;
 using Field1 = DFieldOnPatch<Patch1>;
 using Field2 = DFieldOnPatch<Patch2>;
 
+using ConstField1 = DConstFieldOnPatch<Patch1>;
+using ConstField2 = DConstFieldOnPatch<Patch2>;
+
 } // namespace
 
 class MultiPatchField2Patches : public ::testing::Test
@@ -152,6 +155,65 @@ TEST_F(MultiPatchField2Patches, Polynomials)
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
     Field2 field2_from_multipatch = global_field.get<Patch2>();
+
+    // Assert
+    auto field1_from_multipatch_host = ddc::create_mirror_and_copy(field1_from_multipatch);
+    auto field2_from_multipatch_host = ddc::create_mirror_and_copy(field2_from_multipatch);
+
+    std::size_t const idx_x1 = 3, idx_y1 = 5, idx_x2 = 7, idx_y2 = 2;
+    double x1_length = ddc::get<Patch1::Dim1>(x1_max) - ddc::get<Patch1::Dim1>(x1_min);
+    double y1_length = ddc::get<Patch1::Dim2>(y1_max) - ddc::get<Patch1::Dim2>(y1_min);
+    double x2_length = ddc::get<Patch2::Dim1>(x2_max) - ddc::get<Patch2::Dim1>(x2_min);
+    double y2_length = ddc::get<Patch2::Dim2>(y2_max) - ddc::get<Patch2::Dim2>(y2_min);
+
+    EXPECT_NEAR(
+            field1_from_multipatch_host(Patch1::Idx12(idx_x1, idx_y1)),
+            (idx_x1 * x1_length / (x1_size.value() - 1))
+                            * (idx_x1 * x1_length / (x1_size.value() - 1))
+                    + (idx_y1 * y1_length / (y1_size.value() - 1))
+                              * (idx_y1 * y1_length / (y1_size.value() - 1)),
+            1e-14);
+    EXPECT_NEAR(
+            field2_from_multipatch_host(Patch2::Idx12(idx_x2, idx_y2)),
+            (idx_x2 * x2_length / (x2_size.value() - 1))
+                            * (idx_x2 * x2_length / (x2_size.value() - 1))
+                    - (idx_y2 * y2_length / (y2_size.value() - 1))
+                              * (idx_y2 * y2_length / (y2_size.value() - 1)),
+            1e-14);
+}
+
+TEST_F(MultiPatchField2Patches, GetIdxRange)
+{
+    // Arrange
+    Field1 const field1 = get_field(field_mem1);
+    Field2 const field2 = get_field(field_mem2);
+
+    initialize_non_const_fields(field1, field2);
+
+    MultipatchType<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(get_idx_range(global_field));
+
+    ASSERT_EQ(get_idx_range(field1), all_idx_ranges.get<Patch1>());
+    ASSERT_EQ(get_idx_range(field2), all_idx_ranges.get<Patch2>());
+}
+
+TEST_F(MultiPatchField2Patches, ConstField)
+{
+    // Arrange
+    Field1 const field1 = get_field(field_mem1);
+    Field2 const field2 = get_field(field_mem2);
+
+    initialize_non_const_fields(field1, field2);
+
+    MultipatchType<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+
+    MultipatchType<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
+            global_field.get_const_field());
+
+    // Act
+    ConstField1 field1_from_multipatch = global_const_field.get<Patch1>();
+    ConstField2 field2_from_multipatch = global_const_field.get<Patch2>();
 
     // Assert
     auto field1_from_multipatch_host = ddc::create_mirror_and_copy(field1_from_multipatch);

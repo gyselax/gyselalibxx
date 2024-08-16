@@ -105,3 +105,19 @@ TEST(MultipatchFieldMorePatches, ConstantOnEveryOne)
     EXPECT_NEAR(field5_from_multipatch_host(Patch5::Idx12(7, 2)), 5.0, 1e-14);
     EXPECT_NEAR(field7_from_multipatch_host(Patch7::Idx12(2, 6)), 7.0, 1e-14);
 }
+
+TEST(MultipatchFieldMorePatches, Subpatches)
+{
+    Patch1::Idx1 idx1(0);
+    Patch2::Idx1 idx2(1);
+    Patch3::Idx1 idx3(2);
+    Patch4::Idx1 idx4(3);
+    Patch5::Idx1 idx5(4);
+    Patch6::Idx1 idx6(5);
+    MultipatchType<Idx1OnPatch, Patch1, Patch2, Patch3, Patch4, Patch5, Patch6>
+            idx_list(idx1, idx2, idx3, idx4, idx5, idx6);
+    MultipatchType<Idx1OnPatch, Patch1, Patch2, Patch3> sub_idx_list(idx_list);
+    EXPECT_EQ(sub_idx_list.get<Patch1>(), idx1);
+    EXPECT_EQ(sub_idx_list.get<Patch2>(), idx2);
+    EXPECT_EQ(sub_idx_list.get<Patch3>(), idx3);
+}
