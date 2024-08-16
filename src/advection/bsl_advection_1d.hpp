@@ -172,10 +172,10 @@ public:
         Kokkos::Profiling::pushRegion("BslAdvection1D");
 
         // Get index ranges and operators .............................................................
-        IdxRangeFunction const function_dom = get_idx_range(allfdistribu);
-        IdxRangeAdvection const advection_dom = get_idx_range(advection_field);
-        auto const batch_dom = ddc::remove_dims_of(function_dom, advection_dom);
-        IdxRangeInterest const interest_dom(advection_dom);
+        IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
+        IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
+        auto const idx_range_batch = ddc::remove_dims_of(idx_range_function, idx_range_advection);
+        IdxRangeInterest const idx_range_interest(idx_range_advection);
 
         std::unique_ptr<FunctionInterpolatorType> const function_interpolator_ptr
                 = m_function_interpolator.preallocate();
@@ -195,9 +195,9 @@ public:
 
         // Build derivatives on boundaries and fill with zeros....................................
         FunctionDerivFieldMem function_derivatives_min(
-                m_function_interpolator.batched_derivs_idx_range_xmin(function_dom));
+                m_function_interpolator.batched_derivs_idx_range_xmin(idx_range_function));
         FunctionDerivFieldMem function_derivatives_max(
-                m_function_interpolator.batched_derivs_idx_range_xmax(function_dom));
+                m_function_interpolator.batched_derivs_idx_range_xmax(idx_range_function));
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 
@@ -207,11 +207,11 @@ public:
             need to be defined on the same index range as the advection field. We then work on space
             slices of the characteristic feet.  
         */
-        FeetFieldMem slice_feet_alloc(advection_dom);
+        FeetFieldMem slice_feet_alloc(idx_range_advection);
         FeetField slice_feet = get_field(slice_feet_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                advection_dom,
+                idx_range_advection,
                 KOKKOS_LAMBDA(IdxAdvection const idx) {
                     slice_feet(idx) = ddc::coordinate(IdxInterest(idx));
                 });
@@ -247,11 +247,11 @@ public:
             To interpolate the function we want to advect, we build for the feet a Field defined 
             on the index range where the function is defined. 
         */
-        FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(function_dom);
+        FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(idx_range_function);
         Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                function_dom,
+                idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {
                     IdxAdvection slice_foot_index(idx);
                     feet(idx) = slice_feet(slice_foot_index);

@@ -98,22 +98,23 @@ public:
             DConstVectorFieldRTheta<X, Y> advection_field,
             double dt) const final
     {
-        DVectorFieldMemRTheta<X_adv, Y_adv> advection_field_in_adv_dom(
+        DVectorFieldMemRTheta<X_adv, Y_adv> idx_range_advection_field_in_adv(
                 get_idx_range(advection_field));
         VectorSplineCoeffsMem2D<X_adv, Y_adv> advection_field_in_adv_idx_range_coefs(
                 get_spline_idx_range(m_builder_advection_field));
 
         // Compute the advection field in the advection index range.
-        m_advection_idx_range
-                .compute_advection_field(advection_field, get_field(advection_field_in_adv_dom));
+        m_advection_idx_range.compute_advection_field(
+                advection_field,
+                get_field(idx_range_advection_field_in_adv));
 
         // Get the coefficients of the advection field in the advection index range.
         m_builder_advection_field(
                 ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs),
-                ddcHelper::get<X_adv>(get_const_field(advection_field_in_adv_dom)));
+                ddcHelper::get<X_adv>(get_const_field(idx_range_advection_field_in_adv)));
         m_builder_advection_field(
                 ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs),
-                ddcHelper::get<Y_adv>(get_const_field(advection_field_in_adv_dom)));
+                ddcHelper::get<Y_adv>(get_const_field(idx_range_advection_field_in_adv)));
 
 
         // The function describing how the derivative of the evolve function is calculated.

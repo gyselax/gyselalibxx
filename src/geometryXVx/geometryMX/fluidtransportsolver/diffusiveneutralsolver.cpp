@@ -24,11 +24,11 @@ DiffusiveNeutralSolver::DiffusiveNeutralSolver(
 {
 }
 
-IdxSp DiffusiveNeutralSolver::find_ion(IdxRangeSp const dom_kinsp) const
+IdxSp DiffusiveNeutralSolver::find_ion(IdxRangeSp const idx_range_kinsp) const
 {
     bool ion_found = false;
     IdxSp iion;
-    for (IdxSp const isp : dom_kinsp) {
+    for (IdxSp const isp : idx_range_kinsp) {
         if (charge(isp) > 0.) {
             ion_found = true;
             iion = isp;
@@ -37,7 +37,7 @@ IdxSp DiffusiveNeutralSolver::find_ion(IdxRangeSp const dom_kinsp) const
     if (!ion_found) {
         throw std::runtime_error("ion not found");
     }
-    assert(dom_kinsp.size() == 2);
+    assert(idx_range_kinsp.size() == 2);
 
     return iion;
 }
@@ -49,12 +49,12 @@ void DiffusiveNeutralSolver::get_derivative(
         DConstFieldSpX velocity,
         DConstFieldSpX temperature) const
 {
-    IdxRangeSpX dom_fluidspx(get_idx_range<Species, GridX>(neutrals));
+    IdxRangeSpX idx_range_fluidspx(get_idx_range<Species, GridX>(neutrals));
 
     // building reaction rates
-    DFieldMemSpX charge_exchange_rate_alloc(dom_fluidspx);
-    DFieldMemSpX ionization_rate_alloc(dom_fluidspx);
-    DFieldMemSpX recombination_rate_alloc(dom_fluidspx);
+    DFieldMemSpX charge_exchange_rate_alloc(idx_range_fluidspx);
+    DFieldMemSpX ionization_rate_alloc(idx_range_fluidspx);
+    DFieldMemSpX recombination_rate_alloc(idx_range_fluidspx);
 
     DFieldSpX charge_exchange_rate = get_field(charge_exchange_rate_alloc);
     DFieldSpX ionization_rate = get_field(ionization_rate_alloc);
@@ -65,8 +65,8 @@ void DiffusiveNeutralSolver::get_derivative(
     m_recombination(recombination_rate, density, temperature);
 
     // compute diffusive model equation terms
-    DFieldMemSpX density_equilibrium_velocity_alloc(dom_fluidspx);
-    DFieldMemSpX diffusion_temperature_alloc(dom_fluidspx);
+    DFieldMemSpX density_equilibrium_velocity_alloc(idx_range_fluidspx);
+    DFieldMemSpX diffusion_temperature_alloc(idx_range_fluidspx);
     DFieldSpX density_equilibrium_velocity = get_field(density_equilibrium_velocity_alloc);
     DFieldSpX diffusion_temperature = get_field(diffusion_temperature_alloc);
 
@@ -77,7 +77,7 @@ void DiffusiveNeutralSolver::get_derivative(
     double const mass_ratio(mass(ielec()) / mass(iion));
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            dom_fluidspx,
+            idx_range_fluidspx,
             KOKKOS_LAMBDA(IdxSpX const ifspx) {
                 IdxSp const isp(ddc::select<Species>(ifspx));
                 IdxX const ix(ddc::select<GridX>(ifspx));
@@ -106,10 +106,10 @@ void DiffusiveNeutralSolver::get_derivative(
             KOKKOS_LAMBDA(IdxX const ix) { coords_eval(ix) = ddc::coordinate(ix); });
 
     // create chunks to store spatial derivatives
-    DFieldMemSpX gradx_density_equilibrium_velocity_alloc(dom_fluidspx);
-    DFieldMemSpX gradx_diffusion_temperature_alloc(dom_fluidspx);
-    DFieldMemSpX gradx_neutrals_density_alloc(dom_fluidspx);
-    DFieldMemSpX laplx_neutrals_density_alloc(dom_fluidspx);
+    DFieldMemSpX gradx_density_equilibrium_velocity_alloc(idx_range_fluidspx);
+    DFieldMemSpX gradx_diffusion_temperature_alloc(idx_range_fluidspx);
+    DFieldMemSpX gradx_neutrals_density_alloc(idx_range_fluidspx);
+    DFieldMemSpX laplx_neutrals_density_alloc(idx_range_fluidspx);
 
     DFieldSpX gradx_density_equilibrium_velocity
             = get_field(gradx_density_equilibrium_velocity_alloc);
@@ -171,7 +171,7 @@ void DiffusiveNeutralSolver::get_derivative(
     // build rhs of diffusive model equation
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            dom_fluidspx,
+            idx_range_fluidspx,
             KOKKOS_LAMBDA(IdxSpX const ifspx) {
                 dn(ifspx, ineutral_density)
                         = -gradx_density_equilibrium_velocity(ifspx)
@@ -190,10 +190,10 @@ DFieldSpMomX DiffusiveNeutralSolver::operator()(
     RK2<DFieldMemSpMomX> timestepper(get_idx_range(neutrals));
 
     // moments computation
-    IdxRangeSpX dom_kspx(get_idx_range(allfdistribu));
-    DFieldMemSpX density_alloc(dom_kspx);
-    DFieldMemSpX velocity_alloc(dom_kspx);
-    DFieldMemSpX temperature_alloc(dom_kspx);
+    IdxRangeSpX idx_range_kspx(get_idx_range(allfdistribu));
+    DFieldMemSpX density_alloc(idx_range_kspx);
+    DFieldMemSpX velocity_alloc(idx_range_kspx);
+    DFieldMemSpX temperature_alloc(idx_range_kspx);
 
     DFieldSpX density = get_field(density_alloc);
     DFieldSpX velocity = get_field(velocity_alloc);
@@ -205,7 +205,7 @@ DFieldSpMomX DiffusiveNeutralSolver::operator()(
     ddc::parallel_fill(density, 0.);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            dom_kspx,
+            idx_range_kspx,
             KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double particle_flux(0);
                 double momentum_flux(0);

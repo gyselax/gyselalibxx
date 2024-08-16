@@ -23,9 +23,9 @@ void QNSolver::operator()(
 {
     Kokkos::Profiling::pushRegion("QNSolver");
     assert(get_idx_range(electrostatic_potential) == get_idx_range<GridX>(allfdistribu));
-    IdxRangeX const x_dom = get_idx_range(electrostatic_potential);
+    IdxRangeX const idx_range_x = get_idx_range(electrostatic_potential);
     // Compute the RHS of the Quasi-Neutrality equation.
-    DFieldMemX rho(x_dom);
+    DFieldMemX rho(idx_range_x);
 
     m_compute_rho(rho, allfdistribu);
 

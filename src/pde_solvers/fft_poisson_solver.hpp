@@ -177,10 +177,10 @@ private:
     }
 
     template <class Grid1D>
-    void init_fourier_space(IdxRange<Grid1D> dom)
+    void init_fourier_space(IdxRange<Grid1D> idx_range)
     {
         using GridFFT = GridFourier<typename Grid1D::continuous_dimension_type>;
-        ddc::init_discrete_space<GridFFT>(ddc::init_fourier_space<GridFFT>(dom));
+        ddc::init_discrete_space<GridFFT>(ddc::init_fourier_space<GridFFT>(idx_range));
     }
 
 public:

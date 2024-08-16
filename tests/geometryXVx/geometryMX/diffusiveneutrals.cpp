@@ -51,59 +51,59 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
 
     // Kinetic species index range initialization
     IdxStepSp const nb_kinspecies(2);
-    IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
+    IdxRangeSp const idx_range_kinsp(IdxSp(0), nb_kinspecies);
 
-    IdxSp const my_iion = dom_kinsp.front();
-    IdxSp const my_ielec = dom_kinsp.back();
+    IdxSp const my_iion = idx_range_kinsp.front();
+    IdxSp const my_ielec = idx_range_kinsp.back();
 
-    host_t<DFieldMemSp> kinetic_charges(dom_kinsp);
+    host_t<DFieldMemSp> kinetic_charges(idx_range_kinsp);
     kinetic_charges(my_ielec) = -1.;
     kinetic_charges(my_iion) = 1.;
 
-    host_t<DFieldMemSp> kinetic_masses(dom_kinsp);
+    host_t<DFieldMemSp> kinetic_masses(idx_range_kinsp);
     double const mass_ion(400.), mass_elec(1.);
     kinetic_masses(my_ielec) = mass_elec;
     kinetic_masses(my_iion) = mass_ion;
 
     // Neutral species index range initialization
     IdxStepSp const nb_fluidspecies(1);
-    IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
-    IdxSp const my_ifluid = dom_fluidsp.front();
+    IdxRangeSp const idx_range_fluidsp(IdxSp(idx_range_kinsp.back() + 1), nb_fluidspecies);
+    IdxSp const my_ifluid = idx_range_fluidsp.front();
 
     // neutrals charge is zero
-    host_t<DFieldMemSp> fluid_charges(dom_fluidsp);
+    host_t<DFieldMemSp> fluid_charges(idx_range_fluidsp);
     ddc::parallel_fill(fluid_charges, 0.);
 
-    host_t<DFieldMemSp> fluid_masses(dom_fluidsp);
+    host_t<DFieldMemSp> fluid_masses(idx_range_fluidsp);
     double const neutral_mass(1.);
     fluid_masses(my_ifluid) = neutral_mass;
 
     // Create the index range of kinetic species + fluid species
-    IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
+    IdxRangeSp const idx_range_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
     // Create a Field that contains charges of all species
-    host_t<DFieldMemSp> charges(dom_allsp);
+    host_t<DFieldMemSp> charges(idx_range_allsp);
 
     // fill the Field with charges of kinetic species
-    for (IdxSp isp : dom_kinsp) {
+    for (IdxSp isp : idx_range_kinsp) {
         charges(isp) = kinetic_charges(isp);
     }
 
     // fill the Field with charges of fluid species
-    for (IdxSp isp : dom_fluidsp) {
+    for (IdxSp isp : idx_range_fluidsp) {
         charges(isp) = fluid_charges(isp);
     }
 
     // Create a Field that contains masses of kinetic and fluid species
-    host_t<DFieldMemSp> masses(dom_allsp);
+    host_t<DFieldMemSp> masses(idx_range_allsp);
 
     // fill the Field with masses of kinetic species
-    for (IdxSp isp : dom_kinsp) {
+    for (IdxSp isp : idx_range_kinsp) {
         masses(isp) = kinetic_masses(isp);
     }
 
     // fill the Field with masses of fluid species
-    for (IdxSp isp : dom_fluidsp) {
+    for (IdxSp isp : idx_range_fluidsp) {
         masses(isp) = fluid_masses(isp);
     }
 
@@ -148,7 +148,7 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
             spline_x_evaluator_neutrals,
             quadrature_coeffs);
 
-    host_t<DFieldMemSpMomX> neutrals_init_host(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    host_t<DFieldMemSpMomX> neutrals_init_host(IdxRangeSpMomX(idx_range_fluidsp, meshM, meshX));
     ddc::for_each(get_idx_range(neutrals_init_host), [&](IdxSpMomX const ispmx) {
         CoordX coordx(ddc::coordinate(ddc::select<GridX>(ispmx)));
         double const lx_2((x_max + x_min) / 2.);
@@ -162,9 +162,9 @@ TEST(GeometryMX, DiffusiveNeutralsDerivative)
     DFieldMemSpMomX derivative_alloc(get_idx_range(neutrals));
     DFieldSpMomX derivative = get_field(derivative_alloc);
 
-    DFieldMemSpX kinsp_density_alloc(IdxRangeSpX(dom_kinsp, meshX));
-    DFieldMemSpX kinsp_velocity_alloc(IdxRangeSpX(dom_kinsp, meshX));
-    DFieldMemSpX kinsp_temperature_alloc(IdxRangeSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_density_alloc(IdxRangeSpX(idx_range_kinsp, meshX));
+    DFieldMemSpX kinsp_velocity_alloc(IdxRangeSpX(idx_range_kinsp, meshX));
+    DFieldMemSpX kinsp_temperature_alloc(IdxRangeSpX(idx_range_kinsp, meshX));
 
     DFieldSpX kinsp_density = get_field(kinsp_density_alloc);
     DFieldSpX kinsp_velocity = get_field(kinsp_velocity_alloc);

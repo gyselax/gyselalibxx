@@ -21,30 +21,30 @@ std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_spatial_adv()
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
-    IdxRange<GridX> x_dom = SplineInterpPointsX::get_domain<GridX>();
-    IdxRange<GridVx> vx_dom = SplineInterpPointsVx::get_domain<GridVx>();
+    IdxRange<GridX> idx_range_x = SplineInterpPointsX::get_domain<GridX>();
+    IdxRange<GridVx> idx_range_vx = SplineInterpPointsVx::get_domain<GridVx>();
 
-    return {x_dom, vx_dom};
+    return {idx_range_x, idx_range_vx};
 }
 
 
 template <class Geometry, class GridX>
 double SpatialAdvection(
         IAdvectionSpatial<Geometry, GridX> const& advection_x,
-        IdxRange<GridX> x_dom,
-        IdxRange<GridVx> vx_dom)
+        IdxRange<GridX> idx_range_x,
+        IdxRange<GridVx> idx_range_vx)
 {
     //kinetic species
     IdxStepSp const nb_kinsp(1);
     IdxStepSp const nb_species(2);
-    IdxRangeSp const dom_allsp(IdxSp(0), nb_species);
-    IdxSp const i_elec = dom_allsp.front();
-    IdxSp const i_ion = dom_allsp.back();
+    IdxRangeSp const idx_range_allsp(IdxSp(0), nb_species);
+    IdxSp const i_elec = idx_range_allsp.front();
+    IdxSp const i_ion = idx_range_allsp.back();
     //Mesh Initialization
-    IdxRangeSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
+    IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
     // Charge Initialization
-    host_t<DFieldMemSp> masses_host(dom_allsp);
-    host_t<DFieldMemSp> charges_host(dom_allsp);
+    host_t<DFieldMemSp> masses_host(idx_range_allsp);
+    host_t<DFieldMemSp> charges_host(idx_range_allsp);
 
     masses_host(i_elec) = 1.;
     masses_host(i_ion) = 1.;
@@ -95,14 +95,15 @@ double SpatialAdvection(
 
 TEST(SpatialAdvection, SplineBatched)
 {
-    auto [x_dom, vx_dom] = Init_idx_range_spatial_adv();
-    IdxRangeXVx meshXVx(x_dom, vx_dom);
+    auto [idx_range_x, idx_range_vx] = Init_idx_range_spatial_adv();
+    IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
     SplineXBuilder const builder_x(meshXVx);
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
     BslAdvectionSpatial<GeometryXVx, GridX> const spline_advection_x(spline_x_interpolator);
-    double const err = SpatialAdvection<GeometryXVx, GridX>(spline_advection_x, x_dom, vx_dom);
+    double const err
+            = SpatialAdvection<GeometryXVx, GridX>(spline_advection_x, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1.e-6);
 }

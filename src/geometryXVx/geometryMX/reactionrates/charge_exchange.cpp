@@ -27,11 +27,11 @@ ChargeExchangeRate::ChargeExchangeRate(double const norm_coeff_rate)
             NULL);
 }
 
-IdxSp find_ion(IdxRangeSp const dom_kinsp)
+IdxSp find_ion(IdxRangeSp const idx_range_kinsp)
 {
     bool ion_found = false;
     IdxSp iion;
-    for (IdxSp const isp : dom_kinsp) {
+    for (IdxSp const isp : idx_range_kinsp) {
         if (charge(isp) > 0.) {
             ion_found = true;
             iion = isp;
@@ -40,7 +40,7 @@ IdxSp find_ion(IdxRangeSp const dom_kinsp)
     if (!ion_found) {
         throw std::runtime_error("ion not found");
     }
-    assert(dom_kinsp.size() == 2);
+    assert(idx_range_kinsp.size() == 2);
 
     return iion;
 }

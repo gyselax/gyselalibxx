@@ -59,10 +59,10 @@ using namespace ::testing;
 
 TEST(SplitVlasovSolver, Ordering)
 {
-    IdxRangeSpXVx const dom(IdxSpXVx(0, 0, 0), IdxStepSpXVx(0, 0, 0));
-    DFieldMemSpXVx fdistribu(dom);
+    IdxRangeSpXVx const idx_range(IdxSpXVx(0, 0, 0), IdxStepSpXVx(0, 0, 0));
+    DFieldMemSpXVx fdistribu(idx_range);
     DFieldSpXVx const fdistribu_s(fdistribu);
-    DFieldMemX const efield(ddc::select<GridX>(dom));
+    DFieldMemX const efield(ddc::select<GridX>(idx_range));
     double const dt = 0.;
 
     MockAdvectionX const advec_x;

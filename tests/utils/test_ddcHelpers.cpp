@@ -39,7 +39,7 @@ TEST(DDCHelper, UniformPeriodicRestriction)
 
     ddc::init_discrete_space<GridUniform>(GridUniform::init(x_min, x_max, x_size + 1));
 
-    IdxRange dom(Idx(0), x_size);
+    IdxRange idx_range(Idx(0), x_size);
 
     constexpr int ntest = 10;
     Coord1D test_start_very_low(x_min - 20 * x_len);
@@ -59,7 +59,7 @@ TEST(DDCHelper, UniformPeriodicRestriction)
     for (int j(0); j < 4; ++j) {
         for (int i(0); i < ntest; ++i) {
             Coord1D test = test_cases[j] + i * dx;
-            Coord1D restricted = ddcHelper::restrict_to_idx_range(test, dom);
+            Coord1D restricted = ddcHelper::restrict_to_idx_range(test, idx_range);
             EXPECT_LE(ddc::get<Tag>(restricted), x_max);
             EXPECT_GE(ddc::get<Tag>(restricted), x_min);
             EXPECT_NEAR(ddc::get<Tag>(expected[i]), ddc::get<Tag>(restricted), 1e-8);
@@ -86,7 +86,7 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
 
     ddc::init_discrete_space<GridNonUniform>(nu_points);
 
-    IdxRange dom(Idx(0), x_size);
+    IdxRange idx_range(Idx(0), x_size);
 
     constexpr int ntest = 10;
     Coord1D test_start_very_low(x_min - 20 * x_len);
@@ -106,7 +106,7 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
     for (int j(0); j < 4; ++j) {
         for (int i(0); i < ntest; ++i) {
             Coord1D test = test_cases[j] + i * dx;
-            Coord1D restricted = ddcHelper::restrict_to_idx_range(test, dom);
+            Coord1D restricted = ddcHelper::restrict_to_idx_range(test, idx_range);
             EXPECT_LE(ddc::get<Tag>(restricted), x_max);
             EXPECT_GE(ddc::get<Tag>(restricted), x_min);
             EXPECT_NEAR(ddc::get<Tag>(expected[i]), ddc::get<Tag>(restricted), 1e-8);

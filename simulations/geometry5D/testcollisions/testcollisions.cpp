@@ -136,40 +136,40 @@ int main(int argc, char** argv)
             PDI_INOUT,
             NULL);
     ddc::init_discrete_space<GridTor1>(grid_tor1);
-    IdxRangeTor1 dom_tor1(IdxTor1(0), IdxStepTor1(grid_tor1.size()));
+    IdxRangeTor1 idx_range_tor1(IdxTor1(0), IdxStepTor1(grid_tor1.size()));
     ddc::init_discrete_space<GridTor2>(grid_tor2);
-    IdxRangeTor2 dom_tor2(IdxTor2(0), IdxStepTor2(grid_tor2.size()));
+    IdxRangeTor2 idx_range_tor2(IdxTor2(0), IdxStepTor2(grid_tor2.size()));
     ddc::init_discrete_space<GridTor3>(grid_tor3);
-    IdxRangeTor3 dom_tor3(IdxTor3(0), IdxStepTor3(grid_tor3.size()));
+    IdxRangeTor3 idx_range_tor3(IdxTor3(0), IdxStepTor3(grid_tor3.size()));
     ddc::init_discrete_space<GridVpar>(grid_vpar);
-    IdxRangeVpar dom_vpar(IdxVpar(0), IdxStepVpar(grid_vpar.size()));
+    IdxRangeVpar idx_range_vpar(IdxVpar(0), IdxStepVpar(grid_vpar.size()));
     ddc::init_discrete_space<GridMu>(grid_mu);
-    IdxRangeMu dom_mu(IdxMu(0), IdxStepMu(grid_mu.size()));
+    IdxRangeMu idx_range_mu(IdxMu(0), IdxStepMu(grid_mu.size()));
     IdxStepSp const kinspecies(charges.size());
-    IdxRangeSp const dom_kinsp(IdxSp(0), kinspecies);
+    IdxRangeSp const idx_range_kinsp(IdxSp(0), kinspecies);
 
-    DConstFieldTor1 field_grid_tor1_host(grid_tor1.data(), dom_tor1);
+    DConstFieldTor1 field_grid_tor1_host(grid_tor1.data(), idx_range_tor1);
     auto field_grid_tor1 = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_tor1_host);
-    DConstFieldTor2 field_grid_tor2_host(grid_tor2.data(), dom_tor2);
+    DConstFieldTor2 field_grid_tor2_host(grid_tor2.data(), idx_range_tor2);
     auto field_grid_tor2 = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_tor2_host);
-    DConstFieldTor3 field_grid_tor3_host(grid_tor3.data(), dom_tor3);
+    DConstFieldTor3 field_grid_tor3_host(grid_tor3.data(), idx_range_tor3);
     auto field_grid_tor3 = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_tor3_host);
-    DConstFieldVpar field_grid_vpar_host(grid_vpar.data(), dom_vpar);
+    DConstFieldVpar field_grid_vpar_host(grid_vpar.data(), idx_range_vpar);
     auto field_grid_vpar = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_vpar_host);
-    DConstFieldMu field_grid_mu_host(grid_mu.data(), dom_mu);
+    DConstFieldMu field_grid_mu_host(grid_mu.data(), idx_range_mu);
     auto field_grid_mu
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_grid_mu_host);
-    host_t<ConstFieldSp<int>> field_species_host(species.data(), dom_kinsp);
+    host_t<ConstFieldSp<int>> field_species_host(species.data(), idx_range_kinsp);
     auto field_species
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_species_host);
-    host_t<DConstFieldSp> field_charges_host(charges.data(), dom_kinsp);
+    host_t<DConstFieldSp> field_charges_host(charges.data(), idx_range_kinsp);
     auto field_charges
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_charges_host);
-    host_t<DConstFieldSp> field_masses_host(masses.data(), dom_kinsp);
+    host_t<DConstFieldSp> field_masses_host(masses.data(), idx_range_kinsp);
     auto field_masses
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), field_masses_host);
 
@@ -184,19 +184,24 @@ int main(int argc, char** argv)
     cout << "nbiter = " << nbiter << " nbstep_diag = " << nbstep_diag << endl;
 
     // Poloidal cross-section of the 3 moments: density, temperature and Upar
-    IdxRangeSpTorCS const dom_sp_torCS(dom_kinsp, dom_tor2, dom_tor1);
-    DFieldSpTorCS_host density_torCS_host(dom_sp_torCS);
-    DFieldSpTorCS_host temperature_torCS_host(dom_sp_torCS);
-    DFieldSpTorCS_host Upar_torCS_host(dom_sp_torCS);
+    IdxRangeSpTorCS const idx_range_sp_torCS(idx_range_kinsp, idx_range_tor2, idx_range_tor1);
+    DFieldSpTorCS_host density_torCS_host(idx_range_sp_torCS);
+    DFieldSpTorCS_host temperature_torCS_host(idx_range_sp_torCS);
+    DFieldSpTorCS_host Upar_torCS_host(idx_range_sp_torCS);
     ddc::PdiEvent("read_profiles")
             .with("densityTorCS", density_torCS_host)
             .with("temperatureTorCS", temperature_torCS_host)
             .with("UparTorCS", Upar_torCS_host);
 
     // fdistribu
-    IdxRangeSpTor3DV2D const
-            dom_sp_tor3D_v2D(dom_kinsp, dom_tor3, dom_tor2, dom_tor1, dom_vpar, dom_mu);
-    DFieldSpTor3DV2D_host allfdistribu_host(dom_sp_tor3D_v2D);
+    IdxRangeSpTor3DV2D const idx_range_sp_tor3D_v2D(
+            idx_range_kinsp,
+            idx_range_tor3,
+            idx_range_tor2,
+            idx_range_tor1,
+            idx_range_vpar,
+            idx_range_mu);
+    DFieldSpTor3DV2D_host allfdistribu_host(idx_range_sp_tor3D_v2D);
     double time_saved;
     ddc::PdiEvent("read_fdistribu")
             .with("time_saved", time_saved)
@@ -212,10 +217,10 @@ int main(int argc, char** argv)
     std::int8_t const collisions_interspecies = true;
     double const rpeak = 1.;
     double const q_rpeak = 1.;
-    DFieldMemTor1 safety_factor(dom_tor1);
+    DFieldMemTor1 safety_factor(idx_range_tor1);
     ddc::parallel_fill(safety_factor, 1.0); //ATTENTION: Must be changed
-    IdxRangeTorCS dom_tor1_tor2(dom_tor2, dom_tor1);
-    DFieldMemTorCS B_norm(dom_tor1_tor2);
+    IdxRangeTorCS idx_range_tor1_tor2(idx_range_tor2, idx_range_tor1);
+    DFieldMemTorCS B_norm(idx_range_tor1_tor2);
     ddc::parallel_fill(B_norm, 1.0);
 
     DFieldMemVpar const coeff_intdvpar
@@ -240,7 +245,7 @@ int main(int argc, char** argv)
             DConstFieldTorCS>
             collision_operator(
                     collision_info,
-                    dom_sp_tor3D_v2D,
+                    idx_range_sp_tor3D_v2D,
                     get_const_field(coeff_intdmu),
                     get_const_field(coeff_intdvpar),
                     get_const_field(B_norm));

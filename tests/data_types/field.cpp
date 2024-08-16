@@ -478,7 +478,7 @@ TEST(VectorField2DTest, SliceCoordY)
     }
 }
 
-TEST(VectorField2DTest, SliceDomainX)
+TEST(VectorField2DTest, IdxRangeSliceX)
 {
     IdxRangeX constexpr subidx_range_x = IdxRangeX(IdxX(lbound_x + 1), IdxStepX(nelems_x - 2));
 
@@ -510,7 +510,7 @@ TEST(VectorField2DTest, SliceDomainX)
     }
 }
 
-TEST(VectorField2DTest, SliceDomainXTooearly)
+TEST(VectorField2DTest, IdxRangeSliceXTooearly)
 {
     [[maybe_unused]] IdxRangeX constexpr subidx_range_x = IdxRangeX(IdxX(lbound_x - 1), nelems_x);
 
@@ -523,7 +523,7 @@ TEST(VectorField2DTest, SliceDomainXTooearly)
 #endif
 }
 
-TEST(VectorField2DTest, SliceDomainXToolate)
+TEST(VectorField2DTest, IdxRangeSliceXToolate)
 {
     [[maybe_unused]] IdxRangeX constexpr subidx_range_x
             = IdxRangeX(lbound_x, IdxStepX(nelems_x + 1));
@@ -537,7 +537,7 @@ TEST(VectorField2DTest, SliceDomainXToolate)
 #endif
 }
 
-TEST(VectorField2DTest, SliceDomainY)
+TEST(VectorField2DTest, IdxRangeSliceY)
 {
     IdxRangeY constexpr subidx_range_y = IdxRangeY(IdxY(lbound_y + 1), IdxStepY(nelems_y - 2));
 
@@ -599,19 +599,19 @@ TEST(VectorField2DTest, DeepcopyReordered)
                     = 1.412 * (iy - ddc::select<GridY>(idx_range_x_y).front()).value();
         }
     }
-    DVectorFieldMemYX field2(ddc::select<GridY, GridX>(get_idx_range(field)));
-    VectorField<double, IdxRangeXY, Direction, std::experimental::layout_left> field2_view(
-            get_idx_range(field),
-            field2.get<Tag1>().data_handle(),
-            field2.get<Tag2>().data_handle());
-    ddcHelper::deepcopy(field2_view, field);
+    DVectorFieldMemYX field2_alloc(ddc::select<GridY, GridX>(get_idx_range(field)));
+    VectorField<double, IdxRangeXY, Direction, std::experimental::layout_left>
+            field2(get_idx_range(field),
+                   field2_alloc.get<Tag1>().data_handle(),
+                   field2_alloc.get<Tag2>().data_handle());
+    ddcHelper::deepcopy(field2, field);
     for (IdxX ix : get_idx_range<GridX>(field)) {
         for (IdxY iy : get_idx_range<GridY>(field)) {
             // we expect complete equality, not EXPECT_DOUBLE_EQ: these are copy
-            EXPECT_EQ(ddc::get<Tag1>(field2(ix, iy)), ddc::get<Tag1>(field(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag2>(field2(ix, iy)), ddc::get<Tag2>(field(ix, iy)));
-            EXPECT_EQ(ddc::get<Tag1>(field2(ix, iy)), ddc::get<Tag1>(field(iy, ix)));
-            EXPECT_EQ(ddc::get<Tag2>(field2(ix, iy)), ddc::get<Tag2>(field(iy, ix)));
+            EXPECT_EQ(ddc::get<Tag1>(field2_alloc(ix, iy)), ddc::get<Tag1>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag2>(field2_alloc(ix, iy)), ddc::get<Tag2>(field(ix, iy)));
+            EXPECT_EQ(ddc::get<Tag1>(field2_alloc(ix, iy)), ddc::get<Tag1>(field(iy, ix)));
+            EXPECT_EQ(ddc::get<Tag2>(field2_alloc(ix, iy)), ddc::get<Tag2>(field(iy, ix)));
         }
     }
 }

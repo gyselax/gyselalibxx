@@ -41,8 +41,8 @@ Here are some examples of equation types the BslAdvection1D operator can solve:
 
 Here $`\Omega' = \Omega \in \mathbb{R}`$. In the code, it would correspond to 
 ```cpp
-DFieldX f(x_dom); 
-DFieldX A(x_dom); 
+DFieldX f(idx_range_x); 
+DFieldX A(idx_range_x); 
 using IDimInterest = IDimX; 
 ```
 
@@ -54,8 +54,8 @@ using IDimInterest = IDimX;
 
 Here $`\Omega' = \Omega \in \mathbb{R}^2`$. In the code, it would correspond to 
 ```cpp
-DFieldXY f(xy_dom); 
-DFieldXY A(xy_dom); 
+DFieldXY f(idx_range_xy); 
+DFieldXY A(idx_range_xy); 
 using IDimInterest = IDimX; 
 ```
 
@@ -67,8 +67,8 @@ using IDimInterest = IDimX;
 
 Here $`\Omega' \in \mathbb{R}^2`$ and $`\Omega \in \mathbb{R}^4`$. In the code, it would correspond to 
 ```cpp
-DFieldXYVxVy f(xyvxvy_dom); 
-DFieldXY A(xy_dom); 
+DFieldXYVxVy f(idx_range_xyvxvy); 
+DFieldXY A(idx_range_xy); 
 using IDimInterest = IDimX; 
 ```
 
@@ -85,8 +85,8 @@ using IDimInterest = IDimX;
 
 Here $`\Omega' = \Omega \in \mathbb{R}^2`$. In the code, it would correspond to 
 ```cpp
-DFieldXVx f(xvx_dom); 
-DFieldXVx A(xvx_dom); 
+DFieldXVx f(idx_range_xvx); 
+DFieldXVx A(idx_range_xvx); 
 using IDimInterest = IDimX; 
 ```
 or 
@@ -103,8 +103,8 @@ using IDimInterest = IDimVx;
 
 Here $`\Omega' = \Omega \in \mathbb{R}^2`$. In the code, it would correspond to 
 ```cpp
-DFieldSpXVx f(sp_xvx_dom); 
-DFieldSpX A(sp_x_dom); 
+DFieldSpXVx f(idx_range_sp_xvx); 
+DFieldSpX A(idx_range_sp_x); 
 using IDimInterest = IDimX; 
 ```
 

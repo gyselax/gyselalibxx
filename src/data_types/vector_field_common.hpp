@@ -124,7 +124,7 @@ protected:
     }
 
 public:
-    constexpr discrete_domain_type idx_range() const noexcept
+    constexpr index_range_type idx_range() const noexcept
     {
         return m_values[0].domain();
     }

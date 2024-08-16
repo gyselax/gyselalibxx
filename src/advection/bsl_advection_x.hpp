@@ -59,19 +59,19 @@ public:
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
         Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
-        IdxRangeFdistrib const dom = get_idx_range(allfdistribu);
-        IdxRange<GridX> const x_idx_range = ddc::select<GridX>(dom);
-        IdxRange<GridV> const v_idx_range = ddc::select<GridV>(dom);
-        IdxRange<Species> const sp_idx_range = ddc::select<Species>(dom);
+        IdxRangeFdistrib const idx_range = get_idx_range(allfdistribu);
+        IdxRange<GridX> const x_idx_range = ddc::select<GridX>(idx_range);
+        IdxRange<GridV> const v_idx_range = ddc::select<GridV>(idx_range);
+        IdxRange<Species> const sp_idx_range = ddc::select<Species>(idx_range);
 
         // pre-allocate some memory to prevent allocation later in loop
-        IdxRangeSpaceVelocity batched_feet_idx_range(dom);
+        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
         FieldMem<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
         Field<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
         std::unique_ptr<InterpolatorType> const interpolator_x_ptr = m_interpolator_x.preallocate();
         InterpolatorType const& interpolator_x = *interpolator_x_ptr;
 
-        IdxRangeBatch batch_idx_range(dom);
+        IdxRangeBatch batch_idx_range(idx_range);
 
         for (IdxSp const isp : sp_idx_range) {
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));

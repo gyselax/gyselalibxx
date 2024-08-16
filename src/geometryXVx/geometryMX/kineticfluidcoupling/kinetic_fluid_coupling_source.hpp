@@ -45,7 +45,7 @@ public:
      * @param[in] ionization The rate of the ionization reaction.
      * @param[in] recombination The rate of the recombination reaction.
      * @param[in] normalization_coeff The normalization coefficient of neutrals.
-     * @param[in] quadrature_coeffs A View referencing coefficients for a quadrature.
+     * @param[in] quadrature_coeffs A constant field referencing coefficients for a quadrature.
      */
     KineticFluidCouplingSource(
             double density_coupling_coeff,
@@ -73,11 +73,11 @@ public:
     /**
     * @brief Returns the index of the ion species in the index range.
     *
-    * @param[in] dom_kinsp The index range of the kinetic species.
+    * @param[in] idx_range_kinsp The index range of the kinetic species.
     * 
     * @return The index of the ion species in the index range.
     */
-    IdxSp find_ion(IdxRangeSp const dom_kinsp) const;
+    IdxSp find_ion(IdxRangeSp const idx_range_kinsp) const;
 
     /**
      * @brief Computes the source term density_source_neutral(x) of the KineticFluidCouplingSource operator.

@@ -37,19 +37,19 @@ public:
     ~LagrangeInterpolator() override = default;
 
     batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const override
+            IdxRange<Grid1D...> idx_range) const override
     {
-        return ddc::replace_dim_of<
-                GridInterp,
-                deriv_type>(dom, IdxRange<deriv_type>(Idx<deriv_type>(1), IdxStep<deriv_type>(0)));
+        return ddc::replace_dim_of<GridInterp, deriv_type>(
+                idx_range,
+                IdxRange<deriv_type>(Idx<deriv_type>(1), IdxStep<deriv_type>(0)));
     }
 
     batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const override
+            IdxRange<Grid1D...> idx_range) const override
     {
-        return ddc::replace_dim_of<
-                GridInterp,
-                deriv_type>(dom, IdxRange<deriv_type>(Idx<deriv_type>(1), IdxStep<deriv_type>(0)));
+        return ddc::replace_dim_of<GridInterp, deriv_type>(
+                idx_range,
+                IdxRange<deriv_type>(Idx<deriv_type>(1), IdxStep<deriv_type>(0)));
     }
 
     /**

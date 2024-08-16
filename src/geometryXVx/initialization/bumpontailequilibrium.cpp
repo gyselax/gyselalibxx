@@ -38,14 +38,14 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
 }
 
 BumpontailEquilibrium BumpontailEquilibrium::init_from_input(
-        IdxRangeSp dom_kinsp,
+        IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<DFieldMemSp> epsilon_bot(dom_kinsp);
-    host_t<DFieldMemSp> temperature_bot(dom_kinsp);
-    host_t<DFieldMemSp> mean_velocity_bot(dom_kinsp);
+    host_t<DFieldMemSp> epsilon_bot(idx_range_kinsp);
+    host_t<DFieldMemSp> temperature_bot(idx_range_kinsp);
+    host_t<DFieldMemSp> mean_velocity_bot(idx_range_kinsp);
 
-    for (IdxSp const isp : dom_kinsp) {
+    for (IdxSp const isp : idx_range_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         epsilon_bot(isp) = PCpp_double(conf_isp, ".epsilon_bot");

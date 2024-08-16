@@ -78,20 +78,20 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
     std::array<double, Ntests - 1> order;
 
     ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
-    IdxRangeX dom_x(start_x, x_size);
+    IdxRangeX idx_range_x(start_x, x_size);
     ddc::init_discrete_space<GridY>(GridY::init(y_min, y_max, y_size));
-    IdxRangeY dom_y(start_y, y_size);
+    IdxRangeY idx_range_y(start_y, y_size);
 
-    IdxRangeXY dom(dom_x, dom_y);
+    IdxRangeXY idx_range(idx_range_x, idx_range_y);
 
-    Method crank_nicolson(dom);
+    Method crank_nicolson(idx_range);
 
-    CFieldXY vals(dom);
-    CFieldXY result(dom);
+    CFieldXY vals(idx_range);
+    CFieldXY result(idx_range);
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(dom, [&](IdxXY ixy) {
+    ddc::for_each(idx_range, [&](IdxXY ixy) {
         double const dist_x = (coordinate(select<GridX>(ixy)) - xc);
         double const dist_y = (coordinate(select<GridY>(ixy)) - yc);
 
@@ -100,7 +100,7 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(dom, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
+        ddc::for_each(idx_range, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
 
         for (int i(0); i < Nt; ++i) {
             crank_nicolson.update(
@@ -109,22 +109,23 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
                     dt,
                     [yc,
                      xc,
-                     &dom,
+                     &idx_range,
                      omega](AdvectionField dy, host_t<ConstField<CoordXY, IdxRangeXY>> y) {
-                        ddc::for_each(dom, [&](IdxXY ixy) {
+                        ddc::for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(dy)(ixy) = omega * (yc - ddc::get<Y>(y(ixy)));
                             ddcHelper::get<Y>(dy)(ixy) = omega * (ddc::get<X>(y(ixy)) - xc);
                         });
                     },
-                    [&dom](host_t<Field<CoordXY, IdxRangeXY>> y,
-                           ConstAdvectionField dy,
-                           double dt) {
-                        ddc::for_each(dom, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
+                    [&idx_range](
+                            host_t<Field<CoordXY, IdxRangeXY>> y,
+                            ConstAdvectionField dy,
+                            double dt) {
+                        ddc::for_each(idx_range, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
                     });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(dom, [&](IdxXY ixy) {
+        ddc::for_each(idx_range, [&](IdxXY ixy) {
             double const err_x = ddc::get<X>(result(ixy) - vals(ixy));
             double const err_y = ddc::get<Y>(result(ixy) - vals(ixy));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);

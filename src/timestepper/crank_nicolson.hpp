@@ -50,14 +50,14 @@ private:
     using DerivFieldMem = typename DerivFieldMemType::span_type;
     using DerivConstField = typename DerivFieldMemType::view_type;
 
-    IdxRange const m_dom;
+    IdxRange const m_idx_range;
     int const m_max_counter;
     double const m_epsilon;
 
 public:
     /**
      * @brief Create a CrankNicolson object.
-     * @param[in] dom
+     * @param[in] idx_range
      *      The index range on which the points which evolve over time are defined.
      * @param[in] counter
      *      The maximal number of loops for the implicit method.
@@ -65,8 +65,11 @@ public:
      *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
      *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
      */
-    explicit CrankNicolson(IdxRange dom, int const counter = int(20), double const epsilon = 1e-12)
-        : m_dom(dom)
+    explicit CrankNicolson(
+            IdxRange idx_range,
+            int const counter = int(20),
+            double const epsilon = 1e-12)
+        : m_idx_range(idx_range)
         , m_max_counter(counter)
         , m_epsilon(epsilon)
     {
@@ -167,11 +170,11 @@ public:
                 Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        FieldMemType m_y_init_alloc(m_dom);
-        FieldMemType m_y_old_alloc(m_dom);
-        DerivFieldMemType m_k1_alloc(m_dom);
-        DerivFieldMemType m_k_new_alloc(m_dom);
-        DerivFieldMemType m_k_total_alloc(m_dom);
+        FieldMemType m_y_init_alloc(m_idx_range);
+        FieldMemType m_y_old_alloc(m_idx_range);
+        DerivFieldMemType m_k1_alloc(m_idx_range);
+        DerivFieldMemType m_k_new_alloc(m_idx_range);
+        DerivFieldMemType m_k_total_alloc(m_idx_range);
         ValField m_y_init = get_field(m_y_init_alloc);
         ValField m_y_old = get_field(m_y_old_alloc);
         DerivFieldMem m_k1 = get_field(m_k1_alloc);
@@ -250,18 +253,18 @@ public:
     template <class ExecSpace>
     bool have_converged(ExecSpace const& exec_space, ValConstField y_old, ValConstField y_new) const
     {
-        IdxRange const dom = get_idx_range(y_old);
+        IdxRange const idx_range = get_idx_range(y_old);
 
         double norm_old = ddc::parallel_transform_reduce(
                 exec_space,
-                dom,
+                idx_range,
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(Idx const idx) { return norm_inf(y_old(idx)); });
 
         double max_diff = ddc::parallel_transform_reduce(
                 exec_space,
-                dom,
+                idx_range,
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(Idx const idx) { return norm_inf(y_old(idx) - y_new(idx)); });

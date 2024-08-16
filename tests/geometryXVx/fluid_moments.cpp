@@ -28,9 +28,9 @@ TEST(Physics, FluidMoments)
     IdxStepVx const vx_size(400);
 
     IdxStepSp const nb_species(2);
-    IdxRangeSp const dom_sp(IdxSp(0), nb_species);
-    IdxSp const my_ielec = dom_sp.front();
-    IdxSp const my_iion = dom_sp.back();
+    IdxRangeSp const idx_range_sp(IdxSp(0), nb_species);
+    IdxSp const my_ielec = idx_range_sp.front();
+    IdxSp const my_iion = idx_range_sp.back();
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -47,10 +47,10 @@ TEST(Physics, FluidMoments)
 
     IdxRangeSpXVx const mesh(IdxRangeSp(my_iion, IdxStepSp(1)), gridx, gridvx);
 
-    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldMemSp> charges(idx_range_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldMemSp> masses(dom_sp);
+    host_t<DFieldMemSp> masses(idx_range_sp);
     ddc::parallel_fill(masses, 1);
 
     // Initialization of the distribution function as a maxwellian

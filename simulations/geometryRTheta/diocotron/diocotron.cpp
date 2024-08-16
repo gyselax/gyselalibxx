@@ -113,7 +113,7 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    IdxRangeBSRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
+    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
 
     // --- Time integration method --------------------------------------------------------------------
@@ -164,8 +164,8 @@ int main(int argc, char** argv)
         coeff_beta(irp) = 0.0;
     });
 
-    Spline2D coeff_alpha_spline(dom_bsplinesRTheta);
-    Spline2D coeff_beta_spline(dom_bsplinesRTheta);
+    Spline2D coeff_alpha_spline(idx_range_bsplinesRTheta);
+    Spline2D coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
@@ -266,7 +266,7 @@ int main(int argc, char** argv)
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldMemRTheta phi_eq(mesh_rp);
-    Spline2D rho_coef_eq(dom_bsplinesRTheta);
+    Spline2D rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_const_field(coords), get_field(phi_eq));

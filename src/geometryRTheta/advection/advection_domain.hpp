@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <cassert>
 #include <typeinfo>
@@ -19,7 +20,7 @@
 #include "vector_field_mem.hpp"
 
 /**
- * @brief Define an domain for the advection.
+ * @brief Define a domain for the advection.
  *
  * The natural advection domain is the physical domain (AdvectionPhysicalDomain),
  * where the studied equation is given.
@@ -136,10 +137,10 @@ public:
     {
         using namespace ddc;
 
-        auto const rp_dom = get_idx_range<GridR, GridTheta>(feet_coords_rp);
+        auto const idx_range_rp = get_idx_range<GridR, GridTheta>(feet_coords_rp);
         CoordXY coord_center(m_mapping(CoordRTheta(0, 0)));
 
-        ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+        ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(feet_coords_rp(irp));
             CoordXY const coord_xy = m_mapping(coord_rp);
 
@@ -151,7 +152,7 @@ public:
                 feet_coords_rp(irp) = m_mapping(feet_xy);
                 ddc::select<Theta>(feet_coords_rp(irp)) = ddcHelper::restrict_to_idx_range(
                         ddc::select<Theta>(feet_coords_rp(irp)),
-                        IdxRangeTheta(rp_dom));
+                        IdxRangeTheta(idx_range_rp));
             }
         });
     }
@@ -316,13 +317,13 @@ public:
             double const dt) const
     {
         static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
-        auto const rp_dom = get_idx_range(advection_field);
+        auto const idx_range_rp = get_idx_range(advection_field);
 
         CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
         CoordXY_adv const center_xy_pseudo_cart
                 = CoordXY_adv(pseudo_Cartesian_mapping(CoordRTheta(0., 0.)));
 
-        ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+        ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(feet_coords_rp(irp));
             CoordXY_adv const coord_xy_pseudo_cart = pseudo_Cartesian_mapping(coord_rp);
             CoordXY_adv const feet_xy_pseudo_cart
@@ -334,7 +335,7 @@ public:
                 feet_coords_rp(irp) = pseudo_Cartesian_mapping(feet_xy_pseudo_cart);
                 ddc::select<Theta>(feet_coords_rp(irp)) = ddcHelper::restrict_to_idx_range(
                         ddc::select<Theta>(feet_coords_rp(irp)),
-                        IdxRangeTheta(rp_dom));
+                        IdxRangeTheta(idx_range_rp));
             }
         });
     }
@@ -359,10 +360,10 @@ public:
     {
         static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
 
-        IdxRangeRTheta const rp_dom = get_idx_range(advection_field);
+        IdxRangeRTheta const idx_range_rp = get_idx_range(advection_field);
         CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
 
-        ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+        ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
             double const r(ddc::get<R>(coord_rp));
             double const th(ddc::get<Theta>(coord_rp));
@@ -382,7 +383,7 @@ public:
 
             } else {
                 Matrix2x2 J_0;
-                m_mapping.to_pseudo_cartesian_jacobian_center_matrix(rp_dom, J_0);
+                m_mapping.to_pseudo_cartesian_jacobian_center_matrix(idx_range_rp, J_0);
 
                 CoordRTheta const coord_rp_epsilon(m_epsilon, th);
 

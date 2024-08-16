@@ -66,11 +66,11 @@ public:
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
      * This is the index range on which derivatives on lower boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The lower boundaries of this index range.
+     * @param[in] idx_range The index range of a single-species distribution function.
+     * @return idx_range The lower boundaries of this index range.
      */
     virtual batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const = 0;
+            IdxRange<Grid1D...> idx_range) const = 0;
 
     /**
      * @brief Get the batched derivs index range on upper boundaries.
@@ -78,11 +78,11 @@ public:
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
      * This is the index range on which derivatives on upper boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The upper boundaries of this index range.
+     * @param[in] idx_range The index range of a single-species distribution function.
+     * @return idx_range The upper boundaries of this index range.
      */
     virtual batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const = 0;
+            IdxRange<Grid1D...> idx_range) const = 0;
 
     /**
      * @brief Approximate the value of a function at a set of coordinates using the
@@ -159,13 +159,13 @@ public:
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
      * This is the index range on which derivatives on lower boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The lower boundaries of this index range.
+     * @param[in] idx_range The index range of a single-species distribution function.
+     * @return idx_range The lower boundaries of this index range.
      */
     batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const override
+            IdxRange<Grid1D...> idx_range) const override
     {
-        return (*preallocate()).batched_derivs_idx_range_xmin(dom);
+        return (*preallocate()).batched_derivs_idx_range_xmin(idx_range);
     }
 
     /**
@@ -174,13 +174,13 @@ public:
      * Dimension of interest IDimI is replaced with ddc::Deriv<IDimI::continuous_dimensions_type>.
      * This is the index range on which derivatives on upper boundaries are defined.
      *
-     * @param[in] dom The index range of a single-species distribution function.
-     * @return dom The upper boundaries of this index range.
+     * @param[in] idx_range The index range of a single-species distribution function.
+     * @return idx_range The upper boundaries of this index range.
      */
     batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const override
+            IdxRange<Grid1D...> idx_range) const override
     {
-        return (*preallocate()).batched_derivs_idx_range_xmax(dom);
+        return (*preallocate()).batched_derivs_idx_range_xmax(idx_range);
     }
 
     /**

@@ -10,8 +10,8 @@ The shortcuts defined in the geometry file represent:
 5.  The type of the helper class which initialises grid points in space and velocity which are compatible with the defined splines (SplineInterpPointsX, SplineInterpPointsVx).
 6.  The type of the objects used to build splines (SplineXBuilder, SplineVxBuilder).
 7.  The type which describes the index of a grid point (representing space, velocity and/or species) (e.g. IndexX).
-8.  The type which describes a distance between grid points (e.g. IVectX).
-9.  The type which describes the domain on which the grid points are defined (e.g. IDomainX).
+8.  The type which describes a distance between grid points (e.g. IdxStepX).
+9.  The type which describes the domain on which the grid points are defined (e.g. IdxRangeX).
 10. The templated type of a field memory block defined on each of the domains (e.g. `FieldMemX<ElementType>`). A field memory block allocates values at each grid point in the provided domain.
 11. The type of a field memory block of doubles defined on each of the domains (e.g. `DFieldMemX`).
 12. The templated type of a field defined on each of the domains (e.g. `FieldX<ElementType>`). A field is similar to a reference. It provides access to a field memory block or a sub-set of a field memory block, but does not own the data itself.

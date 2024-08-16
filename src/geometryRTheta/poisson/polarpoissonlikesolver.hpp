@@ -255,14 +255,15 @@ public:
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
     {
         // Get break points
-        IdxRange<KnotsR> r_edges_dom = ddc::discrete_space<BSplinesR_Polar>().break_point_domain();
-        IdxRange<KnotsTheta> theta_edges_dom
+        IdxRange<KnotsR> idx_range_r_edges
+                = ddc::discrete_space<BSplinesR_Polar>().break_point_domain();
+        IdxRange<KnotsTheta> idx_range_theta_edges
                 = ddc::discrete_space<BSplinesTheta_Polar>().break_point_domain();
-        host_t<FieldMem<Coord<R>, IdxRange<KnotsR>>> breaks_r(r_edges_dom);
-        host_t<FieldMem<Coord<Theta>, IdxRange<KnotsTheta>>> breaks_theta(theta_edges_dom);
+        host_t<FieldMem<Coord<R>, IdxRange<KnotsR>>> breaks_r(idx_range_r_edges);
+        host_t<FieldMem<Coord<Theta>, IdxRange<KnotsTheta>>> breaks_theta(idx_range_theta_edges);
 
-        ddc::for_each(r_edges_dom, [&](Idx<KnotsR> i) { breaks_r(i) = ddc::coordinate(i); });
-        ddc::for_each(theta_edges_dom, [&](Idx<KnotsTheta> i) {
+        ddc::for_each(idx_range_r_edges, [&](Idx<KnotsR> i) { breaks_r(i) = ddc::coordinate(i); });
+        ddc::for_each(idx_range_theta_edges, [&](Idx<KnotsTheta> i) {
             breaks_theta(i) = ddc::coordinate(i);
         });
 

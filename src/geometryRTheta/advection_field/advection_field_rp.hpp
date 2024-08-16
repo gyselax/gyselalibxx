@@ -148,8 +148,8 @@ public:
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
-        IdxRangeBSRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
-        Spline2D electrostatic_potential_coef(dom_bsplinesRTheta);
+        IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
+        Spline2D electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef), advection_field_xy);
@@ -364,8 +364,8 @@ public:
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
-        IdxRangeBSRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
-        Spline2D electrostatic_potential_coef(dom_bsplinesRTheta);
+        IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
+        Spline2D electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef),

@@ -37,12 +37,12 @@ public:
 
     /**
      * @brief Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.
-     * @param[in] dom_kinsp Discrete Domain for the kinetic species
+     * @param[in] idx_range_kinsp Index range for the kinetic species
      * @param[in] yaml_input_file YAML input file
      * @return an instance of Maxwellian distribution function.
      */
     static MaxwellianEquilibrium init_from_input(
-            IdxRangeSp dom_kinsp,
+            IdxRangeSp idx_range_kinsp,
             PC_tree_t const& yaml_input_file);
 
     /**
@@ -72,7 +72,7 @@ public:
 
     /**
      * @brief A method for accessing the m_density_eq member variable of the class.
-     * @return A view containing the m_density_eq value. 
+     * @return A field containing the m_density_eq value. 
      */
     host_t<ConstFieldSp<double>> density_eq() const
     {
@@ -81,7 +81,7 @@ public:
 
     /**
      * @brief A method for accessing the m_temperature_eq member variable of the class.
-     * @return A view containing the m_temperature_eq value. 
+     * @return A field containing the m_temperature_eq value. 
      */
     host_t<ConstFieldSp<double>> temperature_eq() const
     {
@@ -90,7 +90,7 @@ public:
 
     /**
      * @brief A method for accessing the m_mean_velocity_eq member variable of the class.
-     * @return A view containing the m_velocity_eq value. 
+     * @return A field containing the m_velocity_eq value. 
      */
     host_t<ConstFieldSp<double>> mean_velocity_eq() const
     {

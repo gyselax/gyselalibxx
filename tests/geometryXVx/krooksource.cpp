@@ -35,7 +35,7 @@ TEST(KrookSource, Adaptive)
 
     IdxStepSp const nb_kinspecies(2);
 
-    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
+    IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -53,20 +53,20 @@ TEST(KrookSource, Adaptive)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IdxRangeSp const gridsp = dom_sp;
+    IdxRangeSp const gridsp = idx_range_sp;
     IdxRangeSpXVx const mesh(gridsp, gridx, gridvx);
 
     DFieldMemVx const quadrature_coeffs_vx(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
     Quadrature<IdxRangeVx> const integrate_v(get_const_field(quadrature_coeffs_vx));
 
-    host_t<DFieldMemSp> charges(dom_sp);
-    host_t<DFieldMemSp> masses(dom_sp);
-    IdxSp my_iion(dom_sp.front());
-    IdxSp my_ielec(dom_sp.back());
+    host_t<DFieldMemSp> charges(idx_range_sp);
+    host_t<DFieldMemSp> masses(idx_range_sp);
+    IdxSp my_iion(idx_range_sp.front());
+    IdxSp my_ielec(idx_range_sp.back());
     charges(my_iion) = 1.;
     charges(my_ielec) = -1.;
-    ddc::for_each(dom_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
+    ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
@@ -172,7 +172,7 @@ TEST(KrookSource, Constant)
 
     IdxStepSp const nb_kinspecies(2);
 
-    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
+    IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -191,15 +191,15 @@ TEST(KrookSource, Constant)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IdxRangeSp const gridsp = dom_sp;
+    IdxRangeSp const gridsp = idx_range_sp;
 
     IdxRangeSpXVx const mesh(gridsp, gridx, gridvx);
 
-    host_t<DFieldMemSp> charges(dom_sp);
-    host_t<DFieldMemSp> masses(dom_sp);
-    charges(dom_sp.front()) = 1.;
-    charges(dom_sp.back()) = -1.;
-    ddc::for_each(dom_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
+    host_t<DFieldMemSp> charges(idx_range_sp);
+    host_t<DFieldMemSp> masses(idx_range_sp);
+    charges(idx_range_sp.front()) = 1.;
+    charges(idx_range_sp.back()) = -1.;
+    ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
     // Initialization of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));

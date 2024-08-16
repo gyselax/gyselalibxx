@@ -51,14 +51,14 @@ private:
     using DerivConstField = typename DerivFieldMemType::view_type;
 
 
-    IdxRange const m_dom;
+    IdxRange const m_idx_range;
 
 public:
     /**
      * @brief Create a RK2 object.
-     * @param[in] dom The index range on which the points which evolve over time are defined.
+     * @param[in] idx_range The index range on which the points which evolve over time are defined.
      */
-    explicit RK2(IdxRange dom) : m_dom(dom) {}
+    explicit RK2(IdxRange idx_range) : m_idx_range(idx_range) {}
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
@@ -147,9 +147,9 @@ public:
             std::function<void(DerivFieldMem, ValConstField)> dy,
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
-        DerivFieldMemType m_k1(m_dom);
-        DerivFieldMemType m_k2(m_dom);
-        FieldMemType m_y_prime(m_dom);
+        DerivFieldMemType m_k1(m_idx_range);
+        DerivFieldMemType m_k2(m_idx_range);
+        FieldMemType m_y_prime(m_idx_range);
 
 
         // Save initial conditions

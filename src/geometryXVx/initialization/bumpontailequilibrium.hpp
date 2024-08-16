@@ -62,12 +62,12 @@ public:
 
     /**
      * @brief Read the density, temperature and mean velocity required to initialize the bump-on-tail Maxwellian in a YAML input file.
-     * @param[in] dom_kinsp Discrete Domain for the kinetic species
+     * @param[in] idx_range_kinsp Index range for the kinetic species
      * @param[in] yaml_input_file YAML input file
      * @return an instance of Maxwellian distribution function.
      */
     static BumpontailEquilibrium init_from_input(
-            IdxRangeSp dom_kinsp,
+            IdxRangeSp idx_range_kinsp,
             PC_tree_t const& yaml_input_file);
 
     /**
@@ -79,7 +79,7 @@ public:
 
     /**
      * @brief A method for accessing the m_epsilon_bot member variable of the class.
-     * @return a View containing the m_epsilon_bot variable.
+     * @return a field containing the m_epsilon_bot variable.
      */
     host_t<DConstFieldSp> epsilon_bot() const
     {
@@ -88,7 +88,7 @@ public:
 
     /**
      * @brief A method for accessing the m_temperature_bot member variable of the class.
-     * @return a View containing the m_temperature_bot variable.
+     * @return a field containing the m_temperature_bot variable.
      */
     host_t<DConstFieldSp> temperature_bot() const
     {
@@ -97,7 +97,7 @@ public:
 
     /**
      * @brief A method for accessing the m_mean_velocity_bot member variable of the class.
-     * @return a View containing the m_velocity_bot variable.
+     * @return a field containing the m_velocity_bot variable.
      */
     host_t<DConstFieldSp> mean_velocity_bot() const
     {

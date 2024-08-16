@@ -43,33 +43,35 @@ TEST(CrankNicolsonFixture, CrankNicolsonOrder)
     std::array<double, Ntests - 1> order;
 
     ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
-    IdxRangeX dom(start, x_size);
+    IdxRangeX idx_range(start, x_size);
 
-    CrankNicolson<DFieldMemX> crank_nicolson(dom);
+    CrankNicolson<DFieldMemX> crank_nicolson(idx_range);
 
-    DFieldMemX vals(dom);
-    DFieldMemX result(dom);
+    DFieldMemX vals(idx_range);
+    DFieldMemX result(idx_range);
 
     double exp_val = exp(5.0 * dt * Nt);
-    ddc::for_each(dom, [&](IdxX ix) {
+    ddc::for_each(idx_range, [&](IdxX ix) {
         double const C = (double(ix.uid()) - 0.6);
         result(ix) = C * exp_val + 0.6;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(dom, [&](IdxX ix) { vals(ix) = double(ix.uid()); });
+        ddc::for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix.uid()); });
 
         for (int i(0); i < Nt; ++i) {
             crank_nicolson
                     .update(vals,
                             dt,
                             [&](host_t<DField<IdxRangeX>> dy, host_t<DConstField<IdxRangeX>> y) {
-                                ddc::for_each(dom, [&](IdxX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
+                                ddc::for_each(idx_range, [&](IdxX ix) {
+                                    dy(ix) = 5.0 * y(ix) - 3.0;
+                                });
                             });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(dom, [&](IdxX ix) {
+        ddc::for_each(idx_range, [&](IdxX ix) {
             double const err = abs(result(ix) - vals(ix));
             linf_err = err > linf_err ? err : linf_err;
         });

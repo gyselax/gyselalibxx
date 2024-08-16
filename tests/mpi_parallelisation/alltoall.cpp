@@ -3,10 +3,9 @@
 
 #include <gtest/gtest.h>
 
-#include <mpilayout.hpp>
-#include <mpitransposealltoall.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
+#include "mpilayout.hpp"
+#include "mpitransposealltoall.hpp"
 
 namespace {
 
@@ -111,8 +110,8 @@ void test_AllToAll2D_GPU()
     IdxStepY y_size(12);
 
     IdxXY idx_range_start(0, 0);
-    IdxStepXY dom_size(x_size, y_size);
-    IdxRangeXY full_idx_range(idx_range_start, dom_size);
+    IdxStepXY idx_range_size(x_size, y_size);
+    IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
 
     MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
 
@@ -150,8 +149,8 @@ TEST(MPIParallelisation, AllToAll2D_CPU)
     IdxStepY y_size(12);
 
     IdxXY idx_range_start(0, 0);
-    IdxStepXY dom_size(x_size, y_size);
-    IdxRangeXY full_idx_range(idx_range_start, dom_size);
+    IdxStepXY idx_range_size(x_size, y_size);
+    IdxRangeXY full_idx_range(idx_range_start, idx_range_size);
 
     MPITransposeAllToAll<XDistribLayout, YDistribLayout> transpose(full_idx_range, MPI_COMM_WORLD);
 
@@ -186,8 +185,8 @@ TEST(MPIParallelisation, AllToAll3D_CPU)
     IdxStepZ z_size(4);
 
     IdxXYZ idx_range_start(0, 0, 0);
-    IdxStepXYZ dom_size(x_size, y_size, z_size);
-    IdxRangeXYZ full_idx_range(idx_range_start, dom_size);
+    IdxStepXYZ idx_range_size(x_size, y_size, z_size);
+    IdxRangeXYZ full_idx_range(idx_range_start, idx_range_size);
 
     MPITransposeAllToAll<YDistribLayout3D, ZDistribLayout3D>
             transpose(full_idx_range, MPI_COMM_WORLD);
@@ -222,8 +221,8 @@ TEST(MPIParallelisation, AllToAll4D_CPU)
     IdxStepZ z_size(10);
 
     IdxWXYZ idx_range_start(0, 0, 0, 0);
-    IdxStepWXYZ dom_size(w_size, x_size, y_size, z_size);
-    IdxRangeWXYZ full_idx_range(idx_range_start, dom_size);
+    IdxStepWXYZ idx_range_size(w_size, x_size, y_size, z_size);
+    IdxRangeWXYZ full_idx_range(idx_range_start, idx_range_size);
 
     MPITransposeAllToAll<XYDistribLayout4D, WZDistribLayout4D>
             transpose(full_idx_range, MPI_COMM_WORLD);

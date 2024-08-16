@@ -77,7 +77,7 @@ private:
                 get_idx_range<PatchIndex, RelevantGrids, IdxRangeTuple>(all_idx_ranges)...);
     }
 
-    /// Get the relevant index range from the input domains using the grid to identify it.
+    /// Get the relevant index range from the input index ranges using the grid to identify it.
     template <std::size_t PatchIndex, class RelevantGrids, class IdxRangeTuple>
     static auto get_idx_range(IdxRangeTuple all_idx_ranges)
     {

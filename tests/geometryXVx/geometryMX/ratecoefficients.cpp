@@ -55,24 +55,24 @@ static void TestDiffusiveNeutralsRateCoefficients()
 
     // Kinetic and neutral species index range initialization
     IdxStepSp const nb_kinspecies(2);
-    IdxRangeSp const dom_kinsp(IdxSp(0), nb_kinspecies);
+    IdxRangeSp const idx_range_kinsp(IdxSp(0), nb_kinspecies);
 
     IdxStepSp const nb_fluidspecies(1);
-    IdxRangeSp const dom_fluidsp(IdxSp(dom_kinsp.back() + 1), nb_fluidspecies);
+    IdxRangeSp const idx_range_fluidsp(IdxSp(idx_range_kinsp.back() + 1), nb_fluidspecies);
 
-    IdxRangeSp const dom_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
+    IdxRangeSp const idx_range_allsp(IdxSp(0), nb_kinspecies + nb_fluidspecies);
 
-    host_t<DFieldMemSp> masses(dom_allsp);
-    host_t<DFieldSp> kinetic_masses = masses[dom_kinsp];
-    host_t<DFieldSp> fluid_masses = masses[dom_fluidsp];
+    host_t<DFieldMemSp> masses(idx_range_allsp);
+    host_t<DFieldSp> kinetic_masses = masses[idx_range_kinsp];
+    host_t<DFieldSp> fluid_masses = masses[idx_range_fluidsp];
 
-    host_t<DFieldMemSp> charges(dom_allsp);
-    host_t<DFieldSp> kinetic_charges = charges[dom_kinsp];
-    host_t<DFieldSp> fluid_charges = charges[dom_fluidsp];
+    host_t<DFieldMemSp> charges(idx_range_allsp);
+    host_t<DFieldSp> kinetic_charges = charges[idx_range_kinsp];
+    host_t<DFieldSp> fluid_charges = charges[idx_range_fluidsp];
 
-    IdxSp const my_iion = dom_kinsp.front();
-    IdxSp const my_ielec = dom_kinsp.back();
-    IdxSp const my_ifluid = dom_fluidsp.front();
+    IdxSp const my_iion = idx_range_kinsp.front();
+    IdxSp const my_ielec = idx_range_kinsp.back();
+    IdxSp const my_ifluid = idx_range_fluidsp.front();
 
     kinetic_charges(my_ielec) = -1.;
     kinetic_charges(my_iion) = 1.;
@@ -94,16 +94,16 @@ static void TestDiffusiveNeutralsRateCoefficients()
     IdxRangeMom const meshM(IdxMom(0), nb_fluid_moments);
     ddc::init_discrete_space<GridMom>();
 
-    IdxRangeSpX dom_fluidspx = IdxRangeSpX(dom_fluidsp, meshX);
+    IdxRangeSpX idx_range_fluidspx = IdxRangeSpX(idx_range_fluidsp, meshX);
 
     ChargeExchangeRate charge_exchange(1.);
     IonizationRate ionization(1.);
     RecombinationRate recombination(1.);
 
-    DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, meshX));
+    DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(idx_range_fluidsp, meshM, meshX));
     DFieldSpMomX neutrals = get_field(neutrals_alloc);
 
-    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(idx_range_fluidsp, meshM));
     ddc::parallel_fill(moments_init, 1.);
     ConstantFluidInitialization fluid_init(moments_init);
     fluid_init(neutrals);
@@ -111,9 +111,9 @@ static void TestDiffusiveNeutralsRateCoefficients()
     DFieldMemSpMomX derivative_alloc(get_idx_range(neutrals));
     DFieldSpMomX derivative = get_field(derivative_alloc);
 
-    DFieldMemSpX kinsp_density_alloc(IdxRangeSpX(dom_kinsp, meshX));
-    DFieldMemSpX kinsp_velocity_alloc(IdxRangeSpX(dom_kinsp, meshX));
-    DFieldMemSpX kinsp_temperature_alloc(IdxRangeSpX(dom_kinsp, meshX));
+    DFieldMemSpX kinsp_density_alloc(IdxRangeSpX(idx_range_kinsp, meshX));
+    DFieldMemSpX kinsp_velocity_alloc(IdxRangeSpX(idx_range_kinsp, meshX));
+    DFieldMemSpX kinsp_temperature_alloc(IdxRangeSpX(idx_range_kinsp, meshX));
 
     DFieldSpX kinsp_density = get_field(kinsp_density_alloc);
     DFieldSpX kinsp_velocity = get_field(kinsp_velocity_alloc);
@@ -127,9 +127,9 @@ static void TestDiffusiveNeutralsRateCoefficients()
     ddc::parallel_fill(kinsp_temperature, kinsp_temperature_eq);
 
     // building reaction rates
-    DFieldMemSpX charge_exchange_rate_alloc(dom_fluidspx);
-    DFieldMemSpX ionization_rate_alloc(dom_fluidspx);
-    DFieldMemSpX recombination_rate_alloc(dom_fluidspx);
+    DFieldMemSpX charge_exchange_rate_alloc(idx_range_fluidspx);
+    DFieldMemSpX ionization_rate_alloc(idx_range_fluidspx);
+    DFieldMemSpX recombination_rate_alloc(idx_range_fluidspx);
 
     DFieldSpX charge_exchange_rate = get_field(charge_exchange_rate_alloc);
     DFieldSpX ionization_rate = get_field(ionization_rate_alloc);
@@ -141,21 +141,21 @@ static void TestDiffusiveNeutralsRateCoefficients()
 
     double mean_cx_rate = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
-            dom_fluidspx,
+            idx_range_fluidspx,
             0.,
             ddc::reducer::sum<double>(),
             charge_exchange_rate);
 
     double mean_i_rate = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
-            dom_fluidspx,
+            idx_range_fluidspx,
             0.,
             ddc::reducer::sum<double>(),
             ionization_rate);
 
     double mean_r_rate = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
-            dom_fluidspx,
+            idx_range_fluidspx,
             0.,
             ddc::reducer::sum<double>(),
             recombination_rate);

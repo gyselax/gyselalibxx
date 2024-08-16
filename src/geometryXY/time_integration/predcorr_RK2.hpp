@@ -82,7 +82,7 @@ public:
      */
     void operator()(DFieldXY allfdistribu, double const dt, int const nbiter)
     {
-        // Domain
+        // Index range
         IdxRangeXY const meshXY = get_idx_range(allfdistribu);
 
         // Output of the Poisson solver
@@ -98,10 +98,10 @@ public:
         // Computation of the advection field: Poisson equation ---
         std::function<void(VectorFieldXY_XY, DConstFieldXY)> define_electric_field
                 = [&](VectorFieldXY_XY electric_field, DConstFieldXY allfdistribu_const) {
-                      IdxRangeXY xy_dom(get_idx_range<GridX, GridY>(allfdistribu_const));
+                      IdxRangeXY idx_range_xy(get_idx_range<GridX, GridY>(allfdistribu_const));
 
                       // --- compute electrostatic potential and electric field:
-                      DFieldMemXY electrostatic_potential_alloc(xy_dom);
+                      DFieldMemXY electrostatic_potential_alloc(idx_range_xy);
                       DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
                       /*
@@ -110,7 +110,7 @@ public:
                         allfdistribu_alloc chunk containing the values of the constant 
                         allfdistribu to solve the type conflict in the Poisson solver. 
                       */
-                      DFieldMemXY allfdistribu_alloc(xy_dom);
+                      DFieldMemXY allfdistribu_alloc(idx_range_xy);
                       DFieldXY allfdistribu = get_field(allfdistribu_alloc);
                       ddc::parallel_deepcopy(
                               Kokkos::DefaultExecutionSpace(),
@@ -128,9 +128,9 @@ public:
                       DConstFieldXY electric_field_y(ddcHelper::get<Y>(electric_field));
 
                       // --- compute advection field:
-                      IdxRangeXY dom = get_idx_range(electric_field);
-                      DFieldMemXY advection_field_x_alloc(dom);
-                      DFieldMemXY advection_field_y_alloc(dom);
+                      IdxRangeXY idx_range = get_idx_range(electric_field);
+                      DFieldMemXY advection_field_x_alloc(idx_range);
+                      DFieldMemXY advection_field_y_alloc(idx_range);
                       DFieldXY advection_field_x = get_field(advection_field_x_alloc);
                       DFieldXY advection_field_y = get_field(advection_field_y_alloc);
                       ddc::parallel_for_each(

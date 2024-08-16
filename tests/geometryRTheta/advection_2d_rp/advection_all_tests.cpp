@@ -68,12 +68,12 @@ public:
     SimulationParameters(
             Mapping const& map,
             AnalyticalMapping const& a_map,
-            IdxRangeAdvection const& dom,
+            IdxRangeAdvection const& idx_range,
             std::string m_name,
             std::string dom_name)
         : mapping(map)
         , analytical_mapping(a_map)
-        , advection_idx_range(dom)
+        , advection_idx_range(idx_range)
         , mapping_name(m_name)
         , idx_range_name(dom_name)
     {

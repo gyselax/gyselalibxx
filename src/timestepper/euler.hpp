@@ -46,14 +46,14 @@ private:
     using DerivFieldMem = typename DerivFieldMemType::span_type;
     using DerivConstField = typename DerivFieldMemType::view_type;
 
-    IdxRange const m_dom;
+    IdxRange const m_idx_range;
 
 public:
     /**
      * @brief Create a Euler object.
-     * @param[in] dom The index range on which the points which evolve over time are defined.
+     * @param[in] idx_range The index range on which the points which evolve over time are defined.
      */
-    explicit Euler(IdxRange dom) : m_dom(dom) {}
+    explicit Euler(IdxRange idx_range) : m_idx_range(idx_range) {}
 
     /**
      * @brief Carry out one step of the explicit Euler scheme.
@@ -142,7 +142,7 @@ public:
             std::function<void(DerivFieldMem, ValConstField)> dy,
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
-        DerivFieldMemType m_k1(m_dom);
+        DerivFieldMemType m_k1(m_idx_range);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
