@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #include "test_cases.hpp"
 
 template <>

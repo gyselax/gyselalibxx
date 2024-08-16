@@ -8,7 +8,7 @@
     - echo "CHANGED_FILES=${changed_files}" >> build.env
     - FOUND_SLL=$(grep "vendor/sll/.*" -x changed_files.txt || true)
     - if [ -z "$FOUND_SLL" ]; then echo "SLL_BUILD_TESTING=OFF" >> build.env; else echo "SLL_BUILD_TESTING=ON" >> build.env; fi
-    - FOUND_POISSON_2D=$(grep "src/geometryRTheta/poisson/.*" -x changed_files.txt || true)
+    - FOUND_POISSON_2D=$(grep "\(src/geometryRTheta/poisson/.*\)\|\(geometryRTheta/polar_poisson/.*\)" -x changed_files.txt || true)
     - if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> build.env; else echo "POISSON_2D_BUILD_TESTING=ON" >> build.env; fi
     - FOUND_DDC=$(grep "vendor/ddc" changed_files.txt || true)
     - if [ -z "$FOUND_DDC" ]; then echo "DDC_BUILD_TESTING=OFF" >> build.env; else echo "DDC_BUILD_TESTING=ON" >> build.env; fi
