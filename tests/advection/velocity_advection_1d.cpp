@@ -134,17 +134,17 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
 class Velocity1DAdvectionTest : public ::testing::Test
 {
 protected:
-    IdxRangeX const x_dom;
-    IdxRangeVx const vx_dom;
-    IdxRangeSp const dom_allsp;
+    IdxRangeX const idx_range_x;
+    IdxRangeVx const idx_range_vx;
+    IdxRangeSp const idx_range_allsp;
 
     static constexpr IdxStepSp nb_species = IdxStepSp(2);
 
 public:
     Velocity1DAdvectionTest()
-        : x_dom(SplineInterpPointsX::get_domain<GridX>())
-        , vx_dom(SplineInterpPointsVx::get_domain<GridVx>())
-        , dom_allsp(IdxSp(0), nb_species) {};
+        : idx_range_x(SplineInterpPointsX::get_domain<GridX>())
+        , idx_range_vx(SplineInterpPointsVx::get_domain<GridVx>())
+        , idx_range_allsp(IdxSp(0), nb_species) {};
 
     ~Velocity1DAdvectionTest() = default;
 
@@ -172,15 +172,15 @@ public:
             SplineVxBuilder const& builder_vx)
     {
         // Mesh ----------------------------------------------------------------------------------
-        IdxRangeSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
-        IdxRangeSpX const meshSpX(dom_allsp, x_dom);
-        IdxSp const i_elec = dom_allsp.front();
-        IdxSp const i_ion = dom_allsp.back();
+        IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
+        IdxRangeSpX const meshSpX(idx_range_allsp, idx_range_x);
+        IdxSp const i_elec = idx_range_allsp.front();
+        IdxSp const i_ion = idx_range_allsp.back();
 
 
         // INITIALISATION ------------------------------------------------------------------------
         // Initialization of the charges
-        host_t<DFieldMemSp> charges_host(dom_allsp);
+        host_t<DFieldMemSp> charges_host(idx_range_allsp);
         charges_host(i_elec) = -1.;
         charges_host(i_ion) = 1.;
         auto charges_alloc = ddc::
@@ -188,7 +188,7 @@ public:
         DFieldSp charges = get_field(charges_alloc);
 
         // Initialization of the masses
-        host_t<DFieldMemSp> masses_host(dom_allsp);
+        host_t<DFieldMemSp> masses_host(idx_range_allsp);
         masses_host(i_elec) = 1.;
         masses_host(i_ion) = 1.;
         auto masses_alloc = ddc::
@@ -270,7 +270,7 @@ public:
 
 TEST_F(Velocity1DAdvectionTest, BatchedLagrange)
 {
-    IdxRangeSpXVx meshSpXVx(dom_allsp, x_dom, vx_dom);
+    IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
     // Interpolator for the function
     IdxStepVx static constexpr n_ghosts_vx {0};
@@ -288,8 +288,8 @@ TEST_F(Velocity1DAdvectionTest, BatchedLagrange)
     // Interpolator of the advection field
     SplineVxBuilder const builder_vx(meshSpXVx);
 
-    CoordVx const vx_min = ddc::coordinate(vx_dom.front());
-    CoordVx const vx_max = vx_min + ddcHelper::total_interval_length(vx_dom);
+    CoordVx const vx_min = ddc::coordinate(idx_range_vx.front());
+    CoordVx const vx_max = vx_min + ddcHelper::total_interval_length(idx_range_vx);
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
@@ -314,12 +314,12 @@ TEST_F(Velocity1DAdvectionTest, BatchedLagrange)
 
 TEST_F(Velocity1DAdvectionTest, SplineBatched)
 {
-    IdxRangeSpXVx meshSpXVx(dom_allsp, x_dom, vx_dom);
+    IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
     SplineVxBuilder const builder_vx(meshSpXVx);
 
-    CoordVx const vx_min = ddc::coordinate(vx_dom.front());
-    CoordVx const vx_max = vx_min + ddcHelper::total_interval_length(vx_dom);
+    CoordVx const vx_min = ddc::coordinate(idx_range_vx.front());
+    CoordVx const vx_max = vx_min + ddcHelper::total_interval_length(idx_range_vx);
 
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);

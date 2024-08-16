@@ -67,10 +67,10 @@ int main(int argc, char** argv)
             SplineInterpPointsVx>(conf_voicexx, "vx");
     IdxRangeXVx const meshXVx(mesh_x, mesh_vx);
 
-    IdxRangeSp const dom_kinsp = init_species(conf_voicexx);
+    IdxRangeSp const idx_range_kinsp = init_species(conf_voicexx);
 
-    IdxRangeSpXVx const meshSpXVx(dom_kinsp, meshXVx);
-    IdxRangeSpVx const meshSpVx(dom_kinsp, mesh_vx);
+    IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
+    IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
 
     SplineXBuilder const builder_x(meshXVx);
     SplineXBuilder_1d const builder_x_poisson(mesh_x);
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
     // Initialization of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(dom_kinsp, conf_voicexx);
+            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
     init_fequilibrium(allfequilibrium);
 
     ddc::expose_to_pdi("iter_start", iter_start);
@@ -89,7 +89,7 @@ int main(int argc, char** argv)
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialization const init = SingleModePerturbInitialization::
-                init_from_input(allfequilibrium, dom_kinsp, conf_voicexx);
+                init_from_input(allfequilibrium, idx_range_kinsp, conf_voicexx);
         init(allfdistribu);
     } else {
         RestartInitialization const restart(iter_start, time_start);
@@ -146,9 +146,13 @@ int main(int argc, char** argv)
     expose_mesh_to_pdi("MeshX", mesh_x);
     expose_mesh_to_pdi("MeshVx", mesh_vx);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
-    ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
+    ddc::expose_to_pdi("Nkinspecies", idx_range_kinsp.size());
+    ddc::expose_to_pdi(
+            "fdistribu_charges",
+            ddc::discrete_space<Species>().charges()[idx_range_kinsp]);
+    ddc::expose_to_pdi(
+            "fdistribu_masses",
+            ddc::discrete_space<Species>().masses()[idx_range_kinsp]);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();

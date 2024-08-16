@@ -108,8 +108,8 @@ public:
         DFieldMemRTheta phi_star(m_grid);
         DFieldMemRTheta ci(m_grid);
 
-        auto dom_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2D rho_coef(dom_bsplinesRTheta);
+        auto idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
+        Spline2D rho_coef(idx_range_bsplinesRTheta);
 
         FieldMemRTheta<CoordRTheta> coords(m_grid);
         ddc::for_each(m_grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });

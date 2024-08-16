@@ -59,7 +59,6 @@ FILE(GLOB_RECURSE MarkdownSources
 	"${gyselalibxx_SOURCE_DIR}/tests/*README.md"
 	"${gyselalibxx_SOURCE_DIR}/simulations/*README.md"
 	"${gyselalibxx_SOURCE_DIR}/vendor/sll/*README.md"
-	"${gyselalibxx_SOURCE_DIR}/toolchains/*README.md"
 	"${CMAKE_CURRENT_SOURCE_DIR}/*.md")
 
 message(STATUS ${MarkdownSources})

@@ -173,17 +173,17 @@ private:
      * loops.
      *
      * @param[in] idx The index of the requested element.
-     * @param[in] dom The index range being iterated over.
+     * @param[in] idx_range The index range being iterated over.
      *
      * @return The vector displacement from the front of the index range
      */
     template <class HeadDim, class... Grid1D>
     KOKKOS_FUNCTION static Idx<HeadDim, Grid1D...> to_discrete_element(
             int idx,
-            IdxRange<HeadDim, Grid1D...> dom)
+            IdxRange<HeadDim, Grid1D...> idx_range)
     {
-        IdxRange<Grid1D...> subidx_range(dom);
-        Idx<HeadDim> head_idx(ddc::select<HeadDim>(dom).front() + idx / subidx_range.size());
+        IdxRange<Grid1D...> subidx_range(idx_range);
+        Idx<HeadDim> head_idx(ddc::select<HeadDim>(idx_range).front() + idx / subidx_range.size());
         if constexpr (sizeof...(Grid1D) == 0) {
             return head_idx;
         } else {

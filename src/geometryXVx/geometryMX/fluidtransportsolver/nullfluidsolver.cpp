@@ -2,10 +2,10 @@
 
 #include "nullfluidsolver.hpp"
 
-NullFluidSolver::NullFluidSolver(IdxRangeSp const& dom_fluidsp)
+NullFluidSolver::NullFluidSolver(IdxRangeSp const& idx_range_fluidsp)
 {
     // charged fluid species is not allowed for now
-    for (IdxSp const isp : dom_fluidsp) {
+    for (IdxSp const isp : idx_range_fluidsp) {
         assert(charge(isp) == 0.);
     }
 }

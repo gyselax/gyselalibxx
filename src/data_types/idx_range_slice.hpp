@@ -106,19 +106,19 @@ public:
     /**
      * @brief Check if all elements of the specified IdxRange are found in this index range slice.
      *
-     * @param dom The index range which may or may not be in this index range slice.
+     * @param idx_range The index range which may or may not be in this index range slice.
      *
      * @returns bool True if the all elements of the specified IdxRange are found in this index range slice.
      *               False otherwise.
      */
     template <class... DDims>
-    KOKKOS_FUNCTION bool contains(IdxRange<DDims...> dom) const
+    KOKKOS_FUNCTION bool contains(IdxRange<DDims...> idx_range) const
     {
         static_assert(
                 (ddc::in_tags_v<DDims, tags_seq> && ...),
                 "Requested Tag absent from IdxRangeSlice");
-        return contains(dom.front())
-               && (((dom.template extent<DDims>().value() == 1)
+        return contains(idx_range.front())
+               && (((idx_range.template extent<DDims>().value() == 1)
                     || (ddc::select<DDims>(m_stride) == 1))
                    && ...);
     }

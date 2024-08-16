@@ -22,24 +22,24 @@ KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(Idx<GridVx> const& inde
 
 template <class VDim>
 std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
-        build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& dom)
+        build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range)
 {
     static_assert(
             std::is_same_v<VDim, GridVx>,
             "The function is only designed to work with the GridVx dimension");
 
-    CoordVx const v0 = ddc::coordinate(dom.front());
-    CoordVx const v1 = ddc::coordinate(dom.front() + 1);
-    CoordVx const vN = ddc::coordinate(dom.back());
-    CoordVx const vNm1 = ddc::coordinate(dom.back() - 1);
-    int const ncells(dom.size() - 1);
+    CoordVx const v0 = ddc::coordinate(idx_range.front());
+    CoordVx const v1 = ddc::coordinate(idx_range.front() + 1);
+    CoordVx const vN = ddc::coordinate(idx_range.back());
+    CoordVx const vNm1 = ddc::coordinate(idx_range.back() - 1);
+    int const ncells(idx_range.size() - 1);
 
     // ghosted points
     int const npoints(ncells + 3);
     std::vector<CoordVx> breaks(npoints);
     breaks[0] = v0 - (v1 - v0);
     breaks[npoints - 1] = vN + (vN - vNm1);
-    ddc::for_each(dom, [&](IdxVx const iv) {
+    ddc::for_each(idx_range, [&](IdxVx const iv) {
         breaks[to_index<GhostedVx>(iv).uid()] = ddc::coordinate(iv);
     });
     ddc::init_discrete_space<GhostedVx>(breaks);
@@ -49,7 +49,7 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
     std::vector<CoordVx> breaks_stag(npoints_stag);
     breaks_stag[0] = v0 - (v1 - v0) / 2.;
     breaks_stag[npoints_stag - 1] = vN + (vN - vNm1) / 2.;
-    IdxRangeVx const gridv_less(dom.remove_last(IdxStepVx(1)));
+    IdxRangeVx const gridv_less(idx_range.remove_last(IdxStepVx(1)));
     ddc::for_each(gridv_less, [&](IdxVx const iv) {
         breaks_stag[iv.uid() + 1] = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
     });
@@ -58,15 +58,15 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
 
 template <class VDim>
 std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
-        build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& dom)
+        build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range)
 {
     static_assert(
             std::is_same_v<VDim, GridVx>,
             "The function is only designed to work with the GridVx dimension");
 
-    CoordVx const v0 = ddc::coordinate(dom.front());
-    CoordVx const vN = ddc::coordinate(dom.back());
-    int const ncells(dom.size() - 1);
+    CoordVx const v0 = ddc::coordinate(idx_range.front());
+    CoordVx const vN = ddc::coordinate(idx_range.back());
+    int const ncells(idx_range.size() - 1);
     double const step(ddc::step<VDim>());
 
     // ghosted points

@@ -80,20 +80,20 @@ public:
     ~SplineInterpolator() override = default;
 
     batched_derivs_idx_range_type batched_derivs_idx_range_xmin(
-            IdxRange<Grid1D...> dom) const override
+            IdxRange<Grid1D...> idx_range) const override
     {
         return ddc::replace_dim_of<GridInterp, deriv_type>(
-                dom,
+                idx_range,
                 IdxRange<deriv_type>(
                         Idx<deriv_type>(1),
                         IdxStep<deriv_type>(BuilderType::s_nbc_xmin)));
     }
 
     batched_derivs_idx_range_type batched_derivs_idx_range_xmax(
-            IdxRange<Grid1D...> dom) const override
+            IdxRange<Grid1D...> idx_range) const override
     {
         return ddc::replace_dim_of<GridInterp, deriv_type>(
-                dom,
+                idx_range,
                 IdxRange<deriv_type>(
                         Idx<deriv_type>(1),
                         IdxStep<deriv_type>(BuilderType::s_nbc_xmax)));

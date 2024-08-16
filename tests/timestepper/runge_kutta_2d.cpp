@@ -114,20 +114,20 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     std::array<double, Ntests - 1> order;
 
     ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
-    IdxRangeX dom_x(start_x, x_size);
+    IdxRangeX idx_range_x(start_x, x_size);
     ddc::init_discrete_space<GridY>(GridY::init(y_min, y_max, y_size));
-    IdxRangeY dom_y(start_y, y_size);
+    IdxRangeY idx_range_y(start_y, y_size);
 
-    IdxRangeXY dom(dom_x, dom_y);
+    IdxRangeXY idx_range(idx_range_x, idx_range_y);
 
-    RungeKutta runge_kutta(dom);
+    RungeKutta runge_kutta(idx_range);
 
-    AdvectionFieldMem vals(dom);
-    AdvectionFieldMem result(dom);
+    AdvectionFieldMem vals(idx_range);
+    AdvectionFieldMem result(idx_range);
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(dom, [&](IdxXY ixy) {
+    ddc::for_each(idx_range, [&](IdxXY ixy) {
         double const dist_x = (coordinate(select<GridX>(ixy)) - xc);
         double const dist_y = (coordinate(select<GridY>(ixy)) - yc);
 
@@ -136,7 +136,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(dom, [&](IdxXY ixy) {
+        ddc::for_each(idx_range, [&](IdxXY ixy) {
             ddcHelper::get<X>(vals)(ixy) = coordinate(select<GridX>(ixy));
             ddcHelper::get<Y>(vals)(ixy) = coordinate(select<GridY>(ixy));
         });
@@ -146,14 +146,14 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
                     Kokkos::DefaultHostExecutionSpace(),
                     vals,
                     dt,
-                    [yc, xc, &dom, omega](AdvectionField dy, ConstAdvectionField y) {
-                        ddc::for_each(dom, [&](IdxXY ixy) {
+                    [yc, xc, &idx_range, omega](AdvectionField dy, ConstAdvectionField y) {
+                        ddc::for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(dy)(ixy) = omega * (yc - ddcHelper::get<Y>(y)(ixy));
                             ddcHelper::get<Y>(dy)(ixy) = omega * (ddcHelper::get<X>(y)(ixy) - xc);
                         });
                     },
-                    [&dom](AdvectionField y, ConstAdvectionField dy, double dt) {
-                        ddc::for_each(dom, [&](IdxXY ixy) {
+                    [&idx_range](AdvectionField y, ConstAdvectionField dy, double dt) {
+                        ddc::for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(y)(ixy) += ddcHelper::get<X>(dy)(ixy) * dt;
                             ddcHelper::get<Y>(y)(ixy) += ddcHelper::get<Y>(dy)(ixy) * dt;
                         });
@@ -161,7 +161,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
         }
 
         double linf_err = 0.0;
-        ddc::for_each(dom, [&](IdxXY ixy) {
+        ddc::for_each(idx_range, [&](IdxXY ixy) {
             double const err_x = ddcHelper::get<X>(result)(ixy) - ddcHelper::get<X>(vals)(ixy);
             double const err_y = ddcHelper::get<Y>(result)(ixy) - ddcHelper::get<Y>(vals)(ixy);
             double const err = std::sqrt(err_x * err_x + err_y * err_y);

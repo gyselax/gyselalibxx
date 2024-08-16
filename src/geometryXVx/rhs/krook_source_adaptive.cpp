@@ -74,11 +74,11 @@ KrookSourceAdaptive::KrookSourceAdaptive(
 void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx const allfdistribu)
         const
 {
-    IdxRangeSp const dom_sp(get_idx_range<Species>(allfdistribu));
-    assert(dom_sp.size() == 2);
-    assert(charge(dom_sp.front()) * charge(dom_sp.back()) < 0.);
+    IdxRangeSp const idx_range_sp(get_idx_range<Species>(allfdistribu));
+    assert(idx_range_sp.size() == 2);
+    assert(charge(idx_range_sp.front()) * charge(idx_range_sp.back()) < 0.);
     std::optional<IdxSp> iion_opt;
-    for (IdxSp const isp : dom_sp) {
+    for (IdxSp const isp : idx_range_sp) {
         if (charge(isp) > 0.) {
             iion_opt = isp;
         }

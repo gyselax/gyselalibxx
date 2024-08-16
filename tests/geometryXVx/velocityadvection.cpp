@@ -21,31 +21,31 @@ std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
     ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
-    IdxRange<GridX> x_dom = SplineInterpPointsX::get_domain<GridX>();
-    IdxRange<GridVx> vx_dom = SplineInterpPointsVx::get_domain<GridVx>();
-    return {x_dom, vx_dom};
+    IdxRange<GridX> idx_range_x = SplineInterpPointsX::get_domain<GridX>();
+    IdxRange<GridVx> idx_range_vx = SplineInterpPointsVx::get_domain<GridVx>();
+    return {idx_range_x, idx_range_vx};
 }
 
 
 template <class Geometry, class GridV>
 double VelocityAdvection(
         IAdvectionVelocity<Geometry, GridV> const& advection_vx,
-        IdxRange<GridX> x_dom,
-        IdxRange<GridVx> vx_dom)
+        IdxRange<GridX> idx_range_x,
+        IdxRange<GridVx> idx_range_vx)
 {
     //kinetic species
     IdxStepSp const nb_species(2);
-    IdxRangeSp const dom_allsp(IdxSp(0), nb_species);
-    IdxSp const i_elec = dom_allsp.front();
-    IdxSp const i_ion = dom_allsp.back();
+    IdxRangeSp const idx_range_allsp(IdxSp(0), nb_species);
+    IdxSp const i_elec = idx_range_allsp.front();
+    IdxSp const i_ion = idx_range_allsp.back();
     //Mesh Initialization
-    IdxRangeSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
+    IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
     IdxRangeX const gridx = ddc::select<GridX>(meshSpXVx);
     IdxRangeVx const gridvx = ddc::select<GridVx>(meshSpXVx);
     // Charge Initialization
-    host_t<DFieldMemSp> masses_host(dom_allsp);
-    host_t<DFieldMemSp> charges_host(dom_allsp);
-    host_t<DFieldMemSp> init_perturb_amplitude_host(dom_allsp);
+    host_t<DFieldMemSp> masses_host(idx_range_allsp);
+    host_t<DFieldMemSp> charges_host(idx_range_allsp);
+    host_t<DFieldMemSp> init_perturb_amplitude_host(idx_range_allsp);
     // Mass ratio is fixed to one
     masses_host(i_elec) = 1.;
     init_perturb_amplitude_host(i_elec) = 0.;
@@ -100,7 +100,7 @@ double VelocityAdvection(
 
 TEST(VelocityAdvection, BatchedLagrange)
 {
-    auto [x_dom, vx_dom] = Init_idx_range_velocity_adv();
+    auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
     IdxStepVx static constexpr n_ghosts_vx {0};
     LagrangeInterpolator<GridVx, BCond::DIRICHLET, BCond::DIRICHLET, GridX, GridVx> const
             lagrange_vx_non_preallocatable_interpolator(3, n_ghosts_vx);
@@ -111,14 +111,15 @@ TEST(VelocityAdvection, BatchedLagrange)
             GridX,
             GridVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
     BslAdvectionVelocity<GeometryXVx, GridVx> const lag_advection_vx(lagrange_vx_interpolator);
-    double const err = VelocityAdvection<GeometryXVx, GridVx>(lag_advection_vx, x_dom, vx_dom);
+    double const err
+            = VelocityAdvection<GeometryXVx, GridVx>(lag_advection_vx, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1e-3);
 }
 
 TEST(VelocityAdvection, SplineBatched)
 {
-    auto [x_dom, vx_dom] = Init_idx_range_velocity_adv();
-    IdxRangeXVx meshXVx(x_dom, vx_dom);
+    auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
+    IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
 
     SplineVxBuilder const builder_vx(meshXVx);
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
@@ -126,6 +127,8 @@ TEST(VelocityAdvection, SplineBatched)
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
     BslAdvectionVelocity<GeometryXVx, GridVx> const spline_advection_vx(spline_vx_interpolator);
-    double const err = VelocityAdvection<GeometryXVx, GridVx>(spline_advection_vx, x_dom, vx_dom);
+    double const err = VelocityAdvection<
+            GeometryXVx,
+            GridVx>(spline_advection_vx, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1e-5);
 }

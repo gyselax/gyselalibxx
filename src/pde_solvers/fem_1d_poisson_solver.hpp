@@ -265,9 +265,10 @@ public:
      */
     field_type operator()(field_type phi, field_type rho) const override
     {
-        batch_idx_range_type batch_dom(get_idx_range(phi));
-        IdxRangeBatchedFEMBSplines
-                phi_coefs_idx_range(batch_dom, ddc::discrete_space<FEMBSplines>().full_domain());
+        batch_idx_range_type idx_range_batch(get_idx_range(phi));
+        IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
+                idx_range_batch,
+                ddc::discrete_space<FEMBSplines>().full_domain());
         BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
@@ -303,9 +304,10 @@ public:
      */
     field_type operator()(field_type phi, vector_field_type E, field_type rho) const override
     {
-        batch_idx_range_type batch_dom(get_idx_range(phi));
-        IdxRangeBatchedFEMBSplines
-                phi_coefs_idx_range(batch_dom, ddc::discrete_space<FEMBSplines>().full_domain());
+        batch_idx_range_type idx_range_batch(get_idx_range(phi));
+        IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
+                idx_range_batch,
+                ddc::discrete_space<FEMBSplines>().full_domain());
         BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
@@ -378,13 +380,13 @@ private:
         // Impose the boundary conditions
         IdxRangeFEMBSplines const bspline_full_idx_range
                 = ddc::discrete_space<FEMBSplines>().full_domain();
-        IdxRangeFEMBSplines const bspline_dom
+        IdxRangeFEMBSplines const idx_range_bspline
                 = bspline_full_idx_range.take_first(IdxStep<FEMBSplines>(nbasis));
 
-        host_t<FEMBSplinesCoeffMem> int_vals(bspline_dom);
+        host_t<FEMBSplinesCoeffMem> int_vals(idx_range_bspline);
         ddc::discrete_space<InputBSplines>().integrals(get_field(int_vals));
 
-        for (IdxFEMBSplines const ix : bspline_dom) {
+        for (IdxFEMBSplines const ix : idx_range_bspline) {
             int const i = (ix - first_bspline_idx).value();
             m_fem_matrix->set_element(nbasis, i, int_vals(ix));
             m_fem_matrix->set_element(i, nbasis, int_vals(ix));

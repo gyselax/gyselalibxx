@@ -50,7 +50,7 @@ std::string to_lower(std::string s)
  *      The coordinate to be printed.
  * @param[in] mapping
  *      The mapping function from the logical index range to the physical index range.
- * @param[in] p_dom
+ * @param[in] idx_range_p
  *      The index range to which the poloidal coordinate should be restricted.
  */
 template <class Mapping>
@@ -58,10 +58,10 @@ void print_coordinate(
         std::ofstream& out_file,
         CoordRTheta coord_rp,
         Mapping const& mapping,
-        IdxRangeTheta p_dom)
+        IdxRangeTheta idx_range_p)
 {
     double const r = ddc::get<R>(coord_rp);
-    double const th = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rp), p_dom);
+    double const th = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rp), idx_range_p);
 
     CoordXY coord_xy(mapping(coord_rp));
     double const x = ddc::get<X>(coord_xy);
@@ -88,19 +88,19 @@ void print_coordinate(
 template <class Mapping>
 void save_feet(
         Mapping const& mapping,
-        IdxRangeRTheta const& rp_dom,
+        IdxRangeRTheta const& idx_range_rp,
         FieldRTheta<CoordRTheta> const& feet_coords_rp,
         std::string const& name)
 {
     std::ofstream file_feet(name, std::ofstream::out);
     file_feet << std::fixed << std::setprecision(16);
-    ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
-        IdxRangeTheta p_dom = ddc::select<GridTheta>(rp_dom);
+    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
+        IdxRangeTheta idx_range_p = ddc::select<GridTheta>(idx_range_rp);
 
         file_feet << std::setw(15) << ddc::select<GridR>(irp).uid() << std::setw(15)
                   << ddc::select<GridTheta>(irp).uid();
-        print_coordinate(file_feet, ddc::coordinate(irp), mapping, p_dom);
-        print_coordinate(file_feet, feet_coords_rp(irp), mapping, p_dom);
+        print_coordinate(file_feet, ddc::coordinate(irp), mapping, idx_range_p);
+        print_coordinate(file_feet, feet_coords_rp(irp), mapping, idx_range_p);
         file_feet << std::endl;
     });
     file_feet.close();
@@ -126,13 +126,13 @@ void saving_computed(Mapping const& mapping, DFieldRTheta function, std::string 
     out_file << std::fixed << std::setprecision(16);
 
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        IdxRangeTheta p_dom = ddc::select<GridTheta>(grid);
+        IdxRangeTheta idx_range_p = ddc::select<GridTheta>(grid);
 
         IdxR const ir(ddc::select<GridR>(irp));
         IdxTheta const ip(ddc::select<GridTheta>(irp));
 
         out_file << std::setw(15) << ir.uid() << std::setw(15) << ip.uid();
-        print_coordinate(out_file, ddc::coordinate(irp), mapping, p_dom);
+        print_coordinate(out_file, ddc::coordinate(irp), mapping, idx_range_p);
         out_file << std::setw(25) << function(irp);
         out_file << std::endl;
     });
@@ -143,7 +143,7 @@ void saving_computed(Mapping const& mapping, DFieldRTheta function, std::string 
  * @brief Get the exact characteristic feet of the simulation
  * at a given time.
  *
- * @param[in] rp_dom
+ * @param[in] idx_range_rp
  *      The logical index range where the characteristic feet are defined.
  * @param[in] mapping
  *      The mapping function from the logical index range to the physical
@@ -158,7 +158,7 @@ void saving_computed(Mapping const& mapping, DFieldRTheta function, std::string 
  */
 template <class AdvectionField, class Mapping>
 FieldMemRTheta<CoordRTheta> compute_exact_feet_rp(
-        IdxRangeRTheta const& rp_dom,
+        IdxRangeRTheta const& idx_range_rp,
         Mapping const& mapping,
         AdvectionField const& advection_field,
         double const time)
@@ -167,10 +167,10 @@ FieldMemRTheta<CoordRTheta> compute_exact_feet_rp(
                   Mapping,
                   DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>>);
 
-    FieldMemRTheta<CoordRTheta> feet_coords_rp(rp_dom);
+    FieldMemRTheta<CoordRTheta> feet_coords_rp(idx_range_rp);
     CoordXY const coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));
 
-    ddc::for_each(rp_dom, [&](IdxRTheta const irp) {
+    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp = ddc::coordinate(irp);
         CoordXY const coord_xy = advection_field.exact_feet(mapping(coord_rp), time);
 

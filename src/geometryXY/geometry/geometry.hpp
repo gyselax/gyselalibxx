@@ -135,11 +135,11 @@ using IdxX = Idx<GridX>;
 using IdxY = Idx<GridY>;
 using IdxXY = Idx<GridX, GridY>;
 
-// IVect definitions
+// Index Step definitions
 using IdxStepX = IdxStep<GridX>;
 using IdxStepY = IdxStep<GridY>;
 
-// IDomain definitions
+// Index Range definitions
 using IdxRangeX = IdxRange<GridX>;
 using IdxRangeY = IdxRange<GridY>;
 using IdxRangeXY = IdxRange<GridX, GridY>;

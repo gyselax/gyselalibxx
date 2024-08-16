@@ -126,17 +126,17 @@ using SplineXEvaluator = ddc::SplineEvaluator<
 class Spatial1DAdvectionTest : public ::testing::Test
 {
 protected:
-    IdxRangeX const x_dom;
-    IdxRangeVx const vx_dom;
-    IdxRangeSp const dom_allsp;
+    IdxRangeX const idx_range_x;
+    IdxRangeVx const idx_range_vx;
+    IdxRangeSp const idx_range_allsp;
 
     static constexpr IdxStepSp nb_species = IdxStepSp(2);
 
 public:
     Spatial1DAdvectionTest()
-        : x_dom(SplineInterpPointsX::get_domain<GridX>())
-        , vx_dom(SplineInterpPointsVx::get_domain<GridVx>())
-        , dom_allsp(IdxSp(0), nb_species) {};
+        : idx_range_x(SplineInterpPointsX::get_domain<GridX>())
+        , idx_range_vx(SplineInterpPointsVx::get_domain<GridVx>())
+        , idx_range_allsp(IdxSp(0), nb_species) {};
 
     ~Spatial1DAdvectionTest() = default;
 
@@ -162,14 +162,14 @@ public:
     double SpatialAdvection(AdvectionOperator const& advection_x)
     {
         // Mesh ----------------------------------------------------------------------------------
-        IdxRangeSpXVx const meshSpXVx(dom_allsp, x_dom, vx_dom);
-        IdxSp const i_elec = dom_allsp.front();
-        IdxSp const i_ion = dom_allsp.back();
+        IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
+        IdxSp const i_elec = idx_range_allsp.front();
+        IdxSp const i_ion = idx_range_allsp.back();
 
 
         // INITIALISATION ------------------------------------------------------------------------
         // Initialization of the masses
-        host_t<DFieldMemSp> masses_host(dom_allsp);
+        host_t<DFieldMemSp> masses_host(idx_range_allsp);
         masses_host(i_elec) = 1;
         masses_host(i_ion) = 1;
         auto masses_alloc = ddc::
@@ -226,7 +226,7 @@ public:
 
 TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
 {
-    IdxRangeSpXVx meshSpXVx(dom_allsp, x_dom, vx_dom);
+    IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
     SplineXBuilder const builder_x(meshSpXVx);
 

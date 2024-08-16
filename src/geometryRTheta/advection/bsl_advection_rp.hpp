@@ -45,8 +45,8 @@
  * Different time integration methods are implemented to solve the characteristic equation.
  * They are defined in the IFootFinder class.
  *
- * The feet can be advected in different index ranges.
- * Theses index ranges are defined in the AdvectionDomain class.
+ * The feet can be advected on different domains.
+ * Theses domains are defined in the AdvectionDomain class.
  *
  * The interpolation of the function is always done in the logical index range.
  *

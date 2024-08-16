@@ -62,29 +62,31 @@ public:
 
 
         Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
-        IdxRangeFdistribu const dom = get_idx_range(allfdistribu);
-        IdxRange<GridV> const v_dom = ddc::select<GridV>(dom);
-        IdxRange<Species> const sp_dom = ddc::select<Species>(dom);
+        IdxRangeFdistribu const idx_range = get_idx_range(allfdistribu);
+        IdxRange<GridV> const idx_range_v = ddc::select<GridV>(idx_range);
+        IdxRange<Species> const idx_range_sp = ddc::select<Species>(idx_range);
 
         FieldMem<double, typename InterpolatorType::batched_derivs_idx_range_type> derivs_min(
-                m_interpolator_v.batched_derivs_idx_range_xmin(ddc::remove_dims_of<Species>(dom)));
+                m_interpolator_v.batched_derivs_idx_range_xmin(
+                        ddc::remove_dims_of<Species>(idx_range)));
         FieldMem<double, typename InterpolatorType::batched_derivs_idx_range_type> derivs_max(
-                m_interpolator_v.batched_derivs_idx_range_xmax(ddc::remove_dims_of<Species>(dom)));
+                m_interpolator_v.batched_derivs_idx_range_xmax(
+                        ddc::remove_dims_of<Species>(idx_range)));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);
 
         // pre-allocate some memory to prevent allocation later in loop
-        IdxRangeSpaceVelocity batched_feet_idx_range(dom);
+        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
         FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
         std::unique_ptr<InterpolatorType> const interpolator_v_ptr = m_interpolator_v.preallocate();
         InterpolatorType const& interpolator_v = *interpolator_v_ptr;
 
-        IdxRangeSpatial const spatial_dom(get_idx_range(allfdistribu));
+        IdxRangeSpatial const idx_range_spatial(get_idx_range(allfdistribu));
 
-        IdxRangeBatch batch_idx_range(dom);
+        IdxRangeBatch batch_idx_range(idx_range);
 
-        ddc::for_each(sp_dom, [&](IdxSp const isp) {
+        ddc::for_each(idx_range_sp, [&](IdxSp const isp) {
             double const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
@@ -98,7 +100,7 @@ public:
                                 = charge_proxy * sqrt_me_on_mspecies * dt * electric_field(ix);
 
                         // compute the coordinates of the feet
-                        for (IdxV const iv : v_dom) {
+                        for (IdxV const iv : idx_range_v) {
                             feet_coords(iv, ib) = Coord<DimV>(ddc::coordinate(iv) - dvx);
                         }
                     });

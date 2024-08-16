@@ -169,12 +169,12 @@ using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
 using IdxRTheta = Idx<GridR, GridTheta>;
 
-// --- IVect definitions
+// --- Index Step definitions
 using IdxStepR = IdxStep<GridR>;
 using IdxStepTheta = IdxStep<GridTheta>;
 using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 
-// --- Domain definitions
+// --- Index Range definitions
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
@@ -185,7 +185,7 @@ using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
 
 
-// --- Field definitions
+// --- FieldMem definitions
 template <class ElementType>
 using FieldMemR = host_t<FieldMem<ElementType, IdxRangeR>>;
 
@@ -218,7 +218,7 @@ using DFieldR = FieldR<double>;
 using DFieldTheta = FieldTheta<double>;
 using DFieldRTheta = FieldRTheta<double>;
 
-// --- View definitions
+// --- Const Field definitions
 template <class ElementType>
 using ConstFieldR = host_t<ConstField<ElementType, IdxRangeR>>;
 

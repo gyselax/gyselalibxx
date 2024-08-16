@@ -132,15 +132,15 @@ protected:
     static constexpr CoordVx vx_max = CoordVx(6);
     static constexpr IdxStepVx vx_size = IdxStepVx(50);
 
-    IdxRangeX const x_dom;
-    IdxRangeVx const vx_dom;
-    IdxRangeXVx const xvx_dom;
+    IdxRangeX const idx_range_x;
+    IdxRangeVx const idx_range_vx;
+    IdxRangeXVx const idx_range_xvx;
 
 public:
     XVxAdvection1DTest()
-        : x_dom(SplineInterpPointsX::get_domain<GridX>())
-        , vx_dom(SplineInterpPointsVx::get_domain<GridVx>())
-        , xvx_dom(x_dom, vx_dom) {};
+        : idx_range_x(SplineInterpPointsX::get_domain<GridX>())
+        , idx_range_vx(SplineInterpPointsVx::get_domain<GridVx>())
+        , idx_range_xvx(idx_range_x, idx_range_vx) {};
 
     ~XVxAdvection1DTest() = default;
 
@@ -163,15 +163,15 @@ public:
         int const time_iter = int(final_t / dt);
 
         // INITIALISATION ----------------------------------------------------------------------------
-        DFieldMemXVx function_alloc(xvx_dom);
+        DFieldMemXVx function_alloc(idx_range_xvx);
         DFieldXVx function = get_field(function_alloc);
 
-        DFieldMemXVx advection_field_alloc(xvx_dom);
+        DFieldMemXVx advection_field_alloc(idx_range_xvx);
         DFieldXVx advection_field = get_field(advection_field_alloc);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                xvx_dom,
+                idx_range_xvx,
                 KOKKOS_LAMBDA(IdxXVx const xv_idx) {
                     double const x = ddc::coordinate(IdxX(xv_idx));
                     function(xv_idx) = Kokkos::cos(x);
@@ -182,8 +182,8 @@ public:
 
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
-        host_t<DFieldMemXVx> exact_function(xvx_dom);
-        ddc::for_each(xvx_dom, [&](IdxXVx const xv_idx) {
+        host_t<DFieldMemXVx> exact_function(idx_range_xvx);
+        ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
             double const x0 = ddc::coordinate(IdxX(xv_idx));
             double const v = ddc::coordinate(IdxVx(xv_idx));
             double x = x0 - final_t * v;
@@ -207,7 +207,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(xvx_dom, [&](IdxXVx const xv_idx) {
+        ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
             double const relative_error = abs(function_host(xv_idx) - exact_function(xv_idx));
             EXPECT_LE(relative_error, 5.e-7);
             max_relative_error
@@ -225,7 +225,7 @@ public:
 TEST_F(XVxAdvection1DTest, AdvectionXVx)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(xvx_dom);
+    SplineXBuilder const builder_x(idx_range_xvx);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
@@ -233,7 +233,7 @@ TEST_F(XVxAdvection1DTest, AdvectionXVx)
 
     PreallocatableSplineInterpolator const spline_interpolator_x(builder_x, spline_evaluator_x);
 
-    RK2<FieldMemXVx<CoordX>, DFieldMemXVx> time_stepper(xvx_dom);
+    RK2<FieldMemXVx<CoordX>, DFieldMemXVx> time_stepper(idx_range_xvx);
     BslAdvection1D<
             GridX,
             IdxRangeXVx,

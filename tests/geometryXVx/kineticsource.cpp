@@ -25,9 +25,9 @@ TEST(KineticSource, Moments)
     IdxStepVx const vx_size(30);
 
     IdxStepSp const nb_species(2);
-    IdxRangeSp const dom_sp(IdxSp(0), nb_species);
-    IdxSp const my_iion = dom_sp.front();
-    IdxSp const my_ielec = dom_sp.back();
+    IdxRangeSp const idx_range_sp(IdxSp(0), nb_species);
+    IdxSp const my_iion = idx_range_sp.front();
+    IdxSp const my_ielec = idx_range_sp.back();
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -55,10 +55,10 @@ TEST(KineticSource, Moments)
     host_t<Quadrature<IdxRangeX>> const integrate_x(get_const_field(quadrature_coeffs_x));
     host_t<Quadrature<IdxRangeVx>> const integrate_v(get_const_field(quadrature_coeffs_vx));
 
-    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldMemSp> charges(idx_range_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldMemSp> masses(dom_sp);
+    host_t<DFieldMemSp> masses(idx_range_sp);
     ddc::parallel_fill(masses, 1.);
 
     // Initialization of the distribution function
@@ -101,7 +101,7 @@ TEST(KineticSource, Moments)
     host_t<DFieldMemVx> values_temperature(gridvx);
     ddc::for_each(gridx, [&](IdxX const ix) {
         // density
-        ddc::parallel_deepcopy(values_density, allfdistribu_host[dom_sp.front()][ix]);
+        ddc::parallel_deepcopy(values_density, allfdistribu_host[idx_range_sp.front()][ix]);
         density(ix)
                 = integrate_v(Kokkos::DefaultHostExecutionSpace(), get_const_field(values_density));
 

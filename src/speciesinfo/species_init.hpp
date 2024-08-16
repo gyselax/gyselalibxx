@@ -19,8 +19,8 @@
  * @param[in] nb_fluidspecies number of fluid species
  */
 void init_all_species(
-        IdxRangeSp& dom_kinsp,
-        IdxRangeSp& dom_fluidsp,
+        IdxRangeSp& idx_range_kinsp,
+        IdxRangeSp& idx_range_fluidsp,
         PC_tree_t conf_voicexx,
         int nb_kinspecies,
         int nb_fluidspecies);
@@ -39,4 +39,7 @@ IdxRangeSp init_species(PC_tree_t conf_voicexx);
  * @param[out] fluid species domain 
  * @param[in] conf_voicexx is the YAML input file
  */
-void init_species_withfluid(IdxRangeSp& dom_kinsp, IdxRangeSp& dom_fluidsp, PC_tree_t conf_voicexx);
+void init_species_withfluid(
+        IdxRangeSp& idx_range_kinsp,
+        IdxRangeSp& idx_range_fluidsp,
+        PC_tree_t conf_voicexx);

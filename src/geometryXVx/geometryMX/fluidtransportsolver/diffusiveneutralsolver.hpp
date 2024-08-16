@@ -69,7 +69,7 @@ private:
 
     DConstFieldVx const m_quadrature_coeffs;
 
-    IdxSp find_ion(IdxRangeSp const dom_kinsp) const;
+    IdxSp find_ion(IdxRangeSp const idx_range_kinsp) const;
 
 public:
     /**
@@ -80,7 +80,7 @@ public:
      * @param[in] normalization_coeff A normalization coefficient for the diffusive neutral model.
      * @param[in] spline_x_builder A one-dimensional spline builder.
      * @param[in] spline_x_evaluator A one-dimensional spline evaluator.
-     * @param[in] quadrature_coeffs A View referencing coefficients for a quadrature.
+     * @param[in] quadrature_coeffs A constant field referencing coefficients for a quadrature.
      */
     DiffusiveNeutralSolver(
             IReactionRate const& charge_exchange,
@@ -100,8 +100,8 @@ public:
      * only fluid moments we consider.
      *
      * @param[inout] neutrals The fluid moments describing the neutrals.
-     * @param[in] allfdistribu A Field referencing a constant view of the distribution function.
-     * @param[in] efield A Field referencing a constant view of the electric field.
+     * @param[in] allfdistribu A constant Field referencing the distribution function.
+     * @param[in] efield A constant Field referencing the electric field.
      * @param[in] dt The time step.
      *
      * @return A field referencing the neutral fluid moments passed as argument.

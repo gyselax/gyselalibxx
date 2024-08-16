@@ -107,7 +107,7 @@ struct ExtractRDim<Field<ElementType, IdxRange, Layout, MemSpace>>
     static_assert(
             std::is_same_v<ElementType, const double>,
             "The radial profile should be a double and should not be modifiable. Please use a "
-            "constant view.");
+            "constant field.");
     static_assert(
             std::is_same_v<MemSpace, Kokkos::DefaultExecutionSpace::memory_space>,
             "The radial profile should be provided on the GPU");
@@ -165,7 +165,7 @@ struct ExtractThetaDim<Field<ElementType, IdxRange, Layout, MemSpace>, GridR>
     static_assert(
             std::is_same_v<ElementType, const double>,
             "The poloidal profile should be a double and should not be modifiable. Please use a "
-            "constant view.");
+            "constant field.");
     static_assert(
             std::is_same_v<MemSpace, Kokkos::DefaultExecutionSpace::memory_space>,
             "The poloidal profile should be provided on the GPU");

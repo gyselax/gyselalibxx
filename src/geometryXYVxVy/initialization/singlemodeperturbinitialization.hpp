@@ -56,12 +56,12 @@ public:
      * @brief Read init_perturb_mode and init_perturb amplitude in a YAML input file 
      *      to initialize the perturbation. 
      * @param[in] allfequilibrium equilibrium distribution function.
-     * @param[in] dom_kinsp Discrete Domain for the kinetic species.
+     * @param[in] idx_range_kinsp Index range for the kinetic species.
      * @param[in] yaml_input_file YAML input file.
      * @return an instance of SingleModePerturbInitialization class.
      */
     static SingleModePerturbInitialization init_from_input(
             DConstFieldSpVxVy allfequilibrium,
-            IdxRangeSp dom_kinsp,
+            IdxRangeSp idx_range_kinsp,
             PC_tree_t const& yaml_input_file);
 };

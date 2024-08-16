@@ -23,29 +23,29 @@ public:
         template <class ODDim, class OMemorySpace>
         friend class Impl;
 
-        /// alias of the discrete element of this discrete dimension
+        /// alias of the discrete element of this discrete dimension. This is a DDC keyword
         using discrete_element_type = Idx<Grid1D>;
 
-        /// alias of the discrete domain of this discrete dimension
+        /// alias of the discrete domain of this discrete dimension. This is a DDC keyword
         using discrete_domain_type = IdxRange<Grid1D>;
+        /// alias of the index range for the species
+        using index_range_type = discrete_domain_type;
 
-        /// alias of the discrete vector of this discrete dimension
+        /// alias of the discrete vector of this discrete dimension. This is a DDC keyword
         using discrete_vector_type = IdxStep<Grid1D>;
 
     private:
         // charge of the particles (kinetic + adiabatic)
-        FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_charge;
+        DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> m_charge;
 
         // mass of the particles of all kinetic species
-        FieldMem<double, discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
+        DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
 
         // workaround to access charges on the device
-        ConstField<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
-                m_charge_view;
+        DConstField<index_range_type, std::experimental::layout_right, MemorySpace> m_charge_view;
 
         // workaround to access masses on the device
-        ConstField<double, discrete_domain_type, std::experimental::layout_right, MemorySpace>
-                m_mass_view;
+        DConstField<index_range_type, std::experimental::layout_right, MemorySpace> m_mass_view;
 
         discrete_element_type m_ielec;
 
@@ -74,8 +74,8 @@ public:
          * @param[in] charge array storing both kinetic and adiabatic charges
          * @param[in] mass array storing both kinetic and adiabatic masses
          */
-        Impl(DFieldMem<discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> charge,
-             DFieldMem<discrete_domain_type, ddc::KokkosAllocator<double, MemorySpace>> mass)
+        Impl(DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> charge,
+             DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> mass)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
         {

@@ -140,7 +140,7 @@ public:
 
     /**
      * @brief A method for accessing the radial profile variable of the class.
-     * @return A view containing the radial profile of the grid. 
+     * @return A field containing the radial profile of the grid. 
      */
     DConstFieldR rg() const
     {
@@ -149,7 +149,7 @@ public:
 
     /**
      * @brief A method for accessing the safety factor variable of the class.
-     * @return A view containing the radial profile of the safety_factor. 
+     * @return A field containing the radial profile of the safety_factor. 
      */
     DConstFieldR safety_factor() const
     {
@@ -158,7 +158,7 @@ public:
 
     /**
      * @brief A method for accessing nustar0_r (the radial profile of nustar0) variable of the class.
-     * @return A view containing the radial profile of nustar0.
+     * @return A field containing the radial profile of nustar0.
      */
     DConstFieldR nustar0() const
     {

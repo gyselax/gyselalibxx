@@ -269,13 +269,13 @@ protected:
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
                 // Physical dimension along which derivatives are known
                 // If information is available about the physical index range
-                IdxRange<QueryDDim> requested_dom(slice_idx_range);
+                IdxRange<QueryDDim> idx_range_requested(slice_idx_range);
                 if (array_idx & (1 << ddc::type_seq_rank_v<ddc::Deriv<QueryDDim>, deriv_tags>)) {
                     // If the derivative is being requested
-                    assert(m_cross_derivative_idx_range.contains(requested_dom));
+                    assert(m_cross_derivative_idx_range.contains(idx_range_requested));
                     return std::pair<std::size_t, std::size_t>(
-                            m_cross_derivative_idx_range.get_index(requested_dom.front()),
-                            m_cross_derivative_idx_range.get_index(requested_dom.back()) + 1);
+                            m_cross_derivative_idx_range.get_index(idx_range_requested.front()),
+                            m_cross_derivative_idx_range.get_index(idx_range_requested.back()) + 1);
                 }
             }
             if constexpr (ddc::in_tags_v<QueryDDim, physical_grids>) {
@@ -311,12 +311,12 @@ protected:
      * If information about a derivative is missing then it is assumed that the 0-th order derivative
      * is requested.
      *
-     * @param dom The index range used to slice the mdspan.
+     * @param idx_range The index range used to slice the mdspan.
      *
      * @returns Field The subset of the internal mdspan.
      */
     template <class... ODims>
-    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> dom) const
+    KOKKOS_FUNCTION auto get_internal_field(IdxRange<ODims...> idx_range) const
     {
         // Get the types related to the provided information
         using provided_tags = ddc::detail::TypeSeq<ODims...>;
@@ -330,11 +330,11 @@ protected:
         // Find the index range of the derivatives (either provided or an index range containing only the 0-th derivative)
         remaining_deriv_idx_range_type no_deriv_idx_range = detail::get_idx_range_from_element(
                 detail::no_derivative_element<remaining_deriv_tags>());
-        discrete_deriv_idx_range_type deriv_idx_range(dom, no_deriv_idx_range);
+        discrete_deriv_idx_range_type deriv_idx_range(idx_range, no_deriv_idx_range);
 
         // Find the physical index range of the field
         physical_idx_range_type local_physical_idx_range(
-                detail::select_default(dom, m_physical_idx_range));
+                detail::select_default(idx_range, m_physical_idx_range));
 
         // Find the discrete index range of the field
         index_range_type full_idx_range(local_physical_idx_range, deriv_idx_range);
@@ -569,7 +569,7 @@ public:
     /**
      * @brief Get the Field which holds the values of the function.
      *
-     * This function is equivalent to calling operator[] with a Domain of rank 0.
+     * This function is equivalent to calling operator[] with a 0D IdxRange.
      *
      * @returns Field The field on the physical index range.
      */
@@ -582,7 +582,7 @@ public:
     /**
      * @brief Get the Field which holds the values of the function.
      *
-     * This function is equivalent to calling operator[] with a Domain of rank 0.
+     * This function is equivalent to calling operator[] with a 0D IdxRange.
      *
      * @returns Field The field on the physical index range.
      */

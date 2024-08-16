@@ -31,9 +31,9 @@ TEST(CollisionsInter, CollisionsInter)
 
     IdxStepSp const nb_kinspecies(2);
 
-    IdxRangeSp const dom_sp(IdxSp(0), nb_kinspecies);
-    IdxSp const my_iion = dom_sp.front();
-    IdxSp const my_ielec = dom_sp.back();
+    IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
+    IdxSp const my_iion = idx_range_sp.front();
+    IdxSp const my_ielec = idx_range_sp.back();
 
     PC_tree_t conf_pdi = PC_parse_string("");
     PDI_init(conf_pdi);
@@ -52,12 +52,12 @@ TEST(CollisionsInter, CollisionsInter)
     SplineXBuilder_1d const builder_x(gridx);
     SplineVxBuilder_1d const builder_vx(gridvx);
 
-    IdxRangeSpXVx const mesh(dom_sp, gridx, gridvx);
+    IdxRangeSpXVx const mesh(idx_range_sp, gridx, gridvx);
 
-    host_t<DFieldMemSp> charges(dom_sp);
+    host_t<DFieldMemSp> charges(idx_range_sp);
     charges(my_ielec) = -1.;
     charges(my_iion) = 1.;
-    host_t<DFieldMemSp> masses(dom_sp);
+    host_t<DFieldMemSp> masses(idx_range_sp);
     double const mass_ion(400.), mass_elec(1.);
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
@@ -72,7 +72,7 @@ TEST(CollisionsInter, CollisionsInter)
         // Initialization of the distribution function as a maxwellian with a
         // different electron and ion temperatures
         double const density_init(1.);
-        host_t<DFieldMemSp> temperature_init(dom_sp);
+        host_t<DFieldMemSp> temperature_init(idx_range_sp);
         temperature_init(my_iion) = 1.;
         temperature_init(my_ielec) = 1.2;
         double const fluid_velocity_init(0.);

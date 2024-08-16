@@ -93,25 +93,25 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx(meshXVx);
     SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
-    IdxRangeSp dom_kinsp;
-    IdxRangeSp dom_fluidsp;
-    init_species_withfluid(dom_kinsp, dom_fluidsp, conf_voicexx);
+    IdxRangeSp idx_range_kinsp;
+    IdxRangeSp idx_range_fluidsp;
+    init_species_withfluid(idx_range_kinsp, idx_range_fluidsp, conf_voicexx);
 
     // Initialization of kinetic species distribution function
-    IdxRangeSpVx const meshSpVx(dom_kinsp, mesh_vx);
+    IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
     DFieldMemSpVx allfequilibrium(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(dom_kinsp, conf_voicexx);
+            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
     init_fequilibrium(allfequilibrium);
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
-    IdxRangeSpXVx const meshSpXVx(dom_kinsp, meshXVx);
+    IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
     DFieldMemSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialization const init = SingleModePerturbInitialization::
-                init_from_input(allfequilibrium, dom_kinsp, conf_voicexx);
+                init_from_input(allfequilibrium, idx_range_kinsp, conf_voicexx);
         init(allfdistribu);
     } else {
         RestartInitialization const restart(iter_start, time_start);
@@ -125,15 +125,15 @@ int main(int argc, char** argv)
     ddc::init_discrete_space<GridMom>();
 
     // Neutral species initialization
-    DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(dom_fluidsp, meshM, mesh_x));
+    DFieldMemSpMomX neutrals_alloc(IdxRangeSpMomX(idx_range_fluidsp, meshM, mesh_x));
     auto neutrals = get_field(neutrals_alloc);
-    host_t<DFieldMemSpMom> moments_init_host(IdxRangeSpMom(dom_fluidsp, meshM));
+    host_t<DFieldMemSpMom> moments_init_host(IdxRangeSpMom(idx_range_fluidsp, meshM));
 
-    for (IdxSp const isp : dom_fluidsp) {
+    for (IdxSp const isp : idx_range_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_voicexx,
                 ".NeutralSpeciesInfo[%d]",
-                (isp - dom_fluidsp.front()).value());
+                (isp - idx_range_fluidsp.front()).value());
         ddc::parallel_fill(moments_init_host[isp], PCpp_double(conf_nisp, ".density_eq"));
     }
     ConstantFluidInitialization fluid_init(get_const_field(moments_init_host));
@@ -292,10 +292,16 @@ int main(int argc, char** argv)
     expose_mesh_to_pdi("MeshVx", mesh_vx);
     ddc::expose_to_pdi("Lx", ddcHelper::total_interval_length(mesh_x));
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
-    ddc::expose_to_pdi("Nkinspecies", dom_kinsp.size());
-    ddc::expose_to_pdi("fdistribu_charges", ddc::discrete_space<Species>().charges()[dom_kinsp]);
-    ddc::expose_to_pdi("fdistribu_masses", ddc::discrete_space<Species>().masses()[dom_kinsp]);
-    ddc::expose_to_pdi("neutrals_masses", ddc::discrete_space<Species>().masses()[dom_fluidsp]);
+    ddc::expose_to_pdi("Nkinspecies", idx_range_kinsp.size());
+    ddc::expose_to_pdi(
+            "fdistribu_charges",
+            ddc::discrete_space<Species>().charges()[idx_range_kinsp]);
+    ddc::expose_to_pdi(
+            "fdistribu_masses",
+            ddc::discrete_space<Species>().masses()[idx_range_kinsp]);
+    ddc::expose_to_pdi(
+            "neutrals_masses",
+            ddc::discrete_space<Species>().masses()[idx_range_fluidsp]);
     ddc::expose_to_pdi("normalization_coeff_neutrals", normalization_coeff);
     ddc::expose_to_pdi("norm_coeff_rate_neutrals", norm_coeff_rate);
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);

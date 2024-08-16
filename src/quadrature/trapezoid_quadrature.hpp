@@ -30,11 +30,11 @@ trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
            std::experimental::layout_right,
            typename ExecSpace::memory_space> const coefficients
             = get_field(coefficients_alloc);
-    IdxRange<Grid1D> middle_domain = idx_range.remove(IdxStep<Grid1D>(1), IdxStep<Grid1D>(1));
+    IdxRange<Grid1D> middle_idx_range = idx_range.remove(IdxStep<Grid1D>(1), IdxStep<Grid1D>(1));
 
     ddc::parallel_for_each(
             ExecSpace(),
-            middle_domain,
+            middle_idx_range,
             KOKKOS_LAMBDA(Idx<Grid1D> const idx) {
                 coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));
             });

@@ -95,11 +95,11 @@ private:
 
     template <class VDim>
     std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>>
-    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& dom);
+    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range);
 
     template <class VDim>
     std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>>
-    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& dom);
+    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range);
 
     double m_nustar0;
     double m_fthresh;

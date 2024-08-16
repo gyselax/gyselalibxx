@@ -16,11 +16,11 @@ namespace {
  *  - kernel maxwellian moments
  * Warning: only meaningful for the collision operator!
  */
-IdxSp find_ion(IdxRangeSp const dom_sp)
+IdxSp find_ion(IdxRangeSp const idx_range_sp)
 {
-    assert(dom_sp.size() == 2);
+    assert(idx_range_sp.size() == 2);
     std::optional<IdxSp> iion_opt;
-    for (IdxSp const isp : dom_sp) {
+    for (IdxSp const isp : idx_range_sp) {
         if (charge(isp) > 0.) {
             iion_opt = isp;
         }

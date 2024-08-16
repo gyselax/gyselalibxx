@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <mpilayout.hpp>
+#include "mpilayout.hpp"
 
 namespace {
 
@@ -46,13 +46,13 @@ TEST(Layout, MinimalDomainDistribution)
     IdxStepY const y_size(16);
 
     IdxXY const idx_range_start(0, 0);
-    IdxStepXY const dom_size(x_size, y_size);
-    IdxRangeXY const global_idx_range(idx_range_start, dom_size);
+    IdxStepXY const idx_range_size(x_size, y_size);
+    IdxRangeXY const global_idx_range(idx_range_start, idx_range_size);
 
     int n_procs = 4;
     int expected_local_x_extent = x_size.value() / n_procs;
 
-    IdxX const dom_x_start(idx_range_start);
+    IdxX const idx_range_x_start(idx_range_start);
 
     XYDistribLayout layout;
     for (int i(0); i < n_procs; ++i) {
@@ -61,7 +61,7 @@ TEST(Layout, MinimalDomainDistribution)
         EXPECT_EQ(local_idx_range.extent<GridX>().value(), expected_local_x_extent);
         EXPECT_EQ(
                 ddc::select<GridX>(local_idx_range.front()),
-                dom_x_start + i * expected_local_x_extent);
+                idx_range_x_start + i * expected_local_x_extent);
         EXPECT_EQ(local_idx_range.extent<GridY>().value(), y_size.value());
     }
 }
@@ -72,8 +72,8 @@ TEST(Layout, SpreadDomainDistribution)
     IdxStepY const y_size(15);
 
     IdxXY const idx_range_start(0, 0);
-    IdxStepXY const dom_size(x_size, y_size);
-    IdxRangeXY const global_idx_range(idx_range_start, dom_size);
+    IdxStepXY const idx_range_size(x_size, y_size);
+    IdxRangeXY const global_idx_range(idx_range_start, idx_range_size);
 
     int const n_procs = 6;
     int const expected_procs_x = 2;
@@ -81,8 +81,8 @@ TEST(Layout, SpreadDomainDistribution)
     int const expected_local_x_extent = x_size / expected_procs_x;
     int const expected_local_y_extent = y_size / expected_procs_y;
 
-    IdxX const dom_x_start(idx_range_start);
-    IdxY const dom_y_start(idx_range_start);
+    IdxX const idx_range_x_start(idx_range_start);
+    IdxY const idx_range_y_start(idx_range_start);
 
     XYDistribLayout layout;
     for (int i(0); i < n_procs; ++i) {
@@ -94,10 +94,10 @@ TEST(Layout, SpreadDomainDistribution)
         int const y_rank = i % expected_procs_y;
         EXPECT_EQ(
                 ddc::select<GridX>(local_idx_range.front()),
-                dom_x_start + x_rank * expected_local_x_extent);
+                idx_range_x_start + x_rank * expected_local_x_extent);
         EXPECT_EQ(
                 ddc::select<GridY>(local_idx_range.front()),
-                dom_y_start + y_rank * expected_local_y_extent);
+                idx_range_y_start + y_rank * expected_local_y_extent);
     }
 }
 
@@ -107,13 +107,13 @@ TEST(Layout, DomainSelection)
     IdxStepY const y_size(15);
 
     IdxXY const idx_range_start(0, 0);
-    IdxStepXY const dom_size(x_size, y_size);
-    IdxRangeXY const global_idx_range(idx_range_start, dom_size);
+    IdxStepXY const idx_range_size(x_size, y_size);
+    IdxRangeXY const global_idx_range(idx_range_start, idx_range_size);
 
     int n_procs = 5;
     int expected_local_y_extent = 3;
 
-    IdxY const dom_y_start(idx_range_start);
+    IdxY const idx_range_y_start(idx_range_start);
 
     YDistribLayout layout;
     for (int i(0); i < n_procs; ++i) {
@@ -122,7 +122,7 @@ TEST(Layout, DomainSelection)
         EXPECT_EQ(local_idx_range.extent<GridX>(), global_idx_range.extent<GridX>());
         EXPECT_EQ(
                 ddc::select<GridY>(local_idx_range.front()),
-                dom_y_start + i * expected_local_y_extent);
+                idx_range_y_start + i * expected_local_y_extent);
         EXPECT_EQ(local_idx_range.extent<GridY>().value(), expected_local_y_extent);
     }
 }

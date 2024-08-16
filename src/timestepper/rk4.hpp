@@ -50,14 +50,14 @@ private:
     using DerivFieldMem = typename DerivFieldMemType::span_type;
     using DerivConstField = typename DerivFieldMemType::view_type;
 
-    IdxRange const m_dom;
+    IdxRange const m_idx_range;
 
 public:
     /**
      * @brief Create a RK4 object.
-     * @param[in] dom The index range on which the points which evolve over time are defined.
+     * @param[in] idx_range The index range on which the points which evolve over time are defined.
      */
-    explicit RK4(IdxRange dom) : m_dom(dom) {}
+    explicit RK4(IdxRange idx_range) : m_idx_range(idx_range) {}
 
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
@@ -154,12 +154,12 @@ public:
                 Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        FieldMemType m_y_prime_alloc(m_dom);
-        DerivFieldMemType m_k1_alloc(m_dom);
-        DerivFieldMemType m_k2_alloc(m_dom);
-        DerivFieldMemType m_k3_alloc(m_dom);
-        DerivFieldMemType m_k4_alloc(m_dom);
-        DerivFieldMemType m_k_total_alloc(m_dom);
+        FieldMemType m_y_prime_alloc(m_idx_range);
+        DerivFieldMemType m_k1_alloc(m_idx_range);
+        DerivFieldMemType m_k2_alloc(m_idx_range);
+        DerivFieldMemType m_k3_alloc(m_idx_range);
+        DerivFieldMemType m_k4_alloc(m_idx_range);
+        DerivFieldMemType m_k_total_alloc(m_idx_range);
         ValField m_y_prime = get_field(m_y_prime_alloc);
         DerivFieldMem m_k1 = get_field(m_k1_alloc);
         DerivFieldMem m_k2 = get_field(m_k2_alloc);

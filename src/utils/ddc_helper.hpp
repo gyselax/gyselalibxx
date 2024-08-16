@@ -19,15 +19,15 @@ namespace ddcHelper {
 /**
  * Calculate the total length of a non-periodic domain.
  *
- * @param dom The domain on which the length should be calculated.
+ * @param idx_range The domain on which the length should be calculated.
  *
  * @return The length of the domain.
  */
 template <class IDim>
 constexpr std::enable_if_t<!IDim::continuous_dimension_type::PERIODIC, double>
-total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
+total_interval_length(ddc::DiscreteDomain<IDim> const& idx_range)
 {
-    return std::fabs(ddc::rlength(dom));
+    return std::fabs(ddc::rlength(idx_range));
 }
 
 //TODO: this should be directly handled by ddc::Discretization really,
@@ -35,7 +35,7 @@ total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
 /**
  * Calculate the total length of a uniform periodic domain.
  *
- * @param dom The domain on which the length should be calculated.
+ * @param idx_range The domain on which the length should be calculated.
  *
  * @return The length of the domain.
  */
@@ -43,9 +43,9 @@ template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC && ddc::is_uniform_point_sampling_v<IDim>,
         double>
-total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
+total_interval_length(ddc::DiscreteDomain<IDim> const& idx_range)
 {
-    return std::fabs(ddc::rlength(dom) + ddc::step<IDim>());
+    return std::fabs(ddc::rlength(idx_range) + ddc::step<IDim>());
 }
 
 //TODO: this should be directly handled by ddc::Discretization really,
@@ -53,7 +53,7 @@ total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
 /**
  * Calculate the total length of a non-uniform periodic domain.
  *
- * @param dom The domain on which the length should be calculated.
+ * @param idx_range The domain on which the length should be calculated.
  *
  * @return The length of the domain.
  */
@@ -61,9 +61,9 @@ template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC && ddc::is_non_uniform_point_sampling_v<IDim>,
         double>
-total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
+total_interval_length(ddc::DiscreteDomain<IDim> const& idx_range)
 {
-    ddc::DiscreteDomain<IDim> dom_periodic(dom.front(), dom.extents() + 1);
+    ddc::DiscreteDomain<IDim> dom_periodic(idx_range.front(), idx_range.extents() + 1);
     return std::fabs(ddc::rlength(dom_periodic));
 }
 
@@ -79,7 +79,7 @@ total_interval_length(ddc::DiscreteDomain<IDim> const& dom)
  *
  * @param[in] coord
  *      The 1D coordinate we want to compute inside the domain.
- * @param[in] dom
+ * @param[in] idx_range
  *      The domain where the coordinate is defined.
  *
  * @return The equivalent coordinate inside the domain.
@@ -90,11 +90,11 @@ constexpr std::enable_if_t<
         typename IDim::continuous_element_type>
 restrict_to_idx_range(
         typename IDim::continuous_element_type coord,
-        ddc::DiscreteDomain<IDim> const& dom)
+        ddc::DiscreteDomain<IDim> const& idx_range)
 {
     using Coord = typename IDim::continuous_element_type;
-    double const x_min = ddc::rmin(dom);
-    double const length = total_interval_length(dom);
+    double const x_min = ddc::rmin(idx_range);
+    double const length = total_interval_length(idx_range);
     double const x_max = x_min + length;
 
     assert(length > 0);

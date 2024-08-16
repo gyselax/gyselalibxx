@@ -15,7 +15,7 @@ In order to facilitate the usage of VectorField the utility functions `get_idx_r
 The classes DerivFieldMem and DerivField provide a way to represent a field with its associated derivatives. The two classes are required as DerivFieldMem contains FieldMem objects while DerivField contains Field objects.
 
 The values and the different combinations of derivatives are each stored in their own field as these objects usually have different index ranges. The field itself can be accessed using slicing methods (`operator[]`). The values additionally have a helper method `get_values_field`.
-When slicing a DerivField, you can use either domains or elements. These describe the derivatives which should appear in the field of interest and any additional information necessary to obtain a Field. If a dimension is not described then it is assumed that the derivative in this direction is not of interest.
+When slicing a DerivField, you can use either idx ranges or individual indices. These describe the derivatives which should appear in the field of interest and any additional information necessary to obtain a Field. If a dimension is not described then it is assumed that the derivative in this direction is not of interest.
 
 Beware: A DDC Field cannot store data defined on a non-contiguous index range (e.g. an IdxRangeSlice) so when accessing derivatives the position of the derivative must also be included in the slice index.
 

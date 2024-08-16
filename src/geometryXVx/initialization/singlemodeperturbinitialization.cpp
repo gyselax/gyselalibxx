@@ -52,13 +52,13 @@ DFieldSpXVx SingleModePerturbInitialization::operator()(DFieldSpXVx const allfdi
 
 SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input(
         DConstFieldSpVx allfequilibrium,
-        IdxRangeSp dom_kinsp,
+        IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<IFieldMemSp> init_perturb_mode(dom_kinsp);
-    host_t<DFieldMemSp> init_perturb_amplitude(dom_kinsp);
+    host_t<IFieldMemSp> init_perturb_mode(idx_range_kinsp);
+    host_t<DFieldMemSp> init_perturb_amplitude(idx_range_kinsp);
 
-    for (IdxSp const isp : dom_kinsp) {
+    for (IdxSp const isp : idx_range_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
 
         init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");

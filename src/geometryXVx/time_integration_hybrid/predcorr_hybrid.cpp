@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: MIT
 
 #include <cmath>
-#include <iostream>
 
 #include <ddc/ddc.hpp>
 
-#include <iboltzmannsolver.hpp>
-#include <ifluidtransportsolver.hpp>
-#include <iqnsolver.hpp>
-
+#include "iboltzmannsolver.hpp"
+#include "ifluidtransportsolver.hpp"
+#include "iqnsolver.hpp"
 #include "predcorr_hybrid.hpp"
 
 PredCorrHybrid::PredCorrHybrid(
@@ -33,13 +31,13 @@ DFieldSpXVx PredCorrHybrid::operator()(
     auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
     host_t<DFieldSpXVx> allfdistribu_host = get_field(allfdistribu_alloc);
 
-    IdxRangeX const dom_x = get_idx_range<GridX>(allfdistribu);
+    IdxRangeX const idx_range_x = get_idx_range<GridX>(allfdistribu);
 
     // electrostatic potential and electric field (depending only on x)
-    host_t<DFieldMemX> electrostatic_potential_host(dom_x);
-    DFieldMemX electrostatic_potential(dom_x);
+    host_t<DFieldMemX> electrostatic_potential_host(idx_range_x);
+    DFieldMemX electrostatic_potential(idx_range_x);
 
-    DFieldMemX electric_field(dom_x);
+    DFieldMemX electric_field(idx_range_x);
 
     host_t<DFieldMemSpMomX> fluid_moments_host(get_idx_range(fluid_moments));
 

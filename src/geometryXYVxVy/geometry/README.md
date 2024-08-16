@@ -6,12 +6,12 @@ The shortcuts defined in the geometry file represent:
 1.  The spatial, and velocity dimensions in real space (RDimX, RDimY, RDimVx, and RDimVy).
 2.  The type of coordinates of objects represented on the dimensions (`CoordX`, `CoordY`, `CoordXY`, `CoordVx`, `CoordVy`).
 3.  The type of the B-Spline bases used on the spatial and velocity dimensions (`BsplinesX`, `BsplinesY`, `BsplinesVx`, `BsplinesVy`,).
-4.  The type which will describe the grid points (representing space, velocity and species) on which the simulation will evolve (`IDimX`, `IDimY`, `IDimVx`, `IDimVy`, `IDimSp`).
+4.  The type which will describe the grid points (representing space, velocity and species) on which the simulation will evolve (`GridX`, `GridY`, `GridVx`, `GridVy`, `GridSp`).
 5.  The type of the helper class which initialises grid points in space and velocity which are compatible with the defined splines (`SplineInterpPointsX`, `SplineInterpPointsY`, `SplineInterpPointsVx`, `SplineInterpPointsVy`).
 6.  The type of the objects used to build splines (`SplineXBuilder`, `SplineYBuilder`, `SplineVxBuilder`, `SplineVyBuilder`).
 7.  The type which describes the index of a grid point (representing space, velocity and/or species) (e.g. `IndexX`).
-8.  The type which describes a distance between grid points (e.g. `IVectX`).
-9.  The type which describes the domain on which the grid points are defined (e.g. `IDomainX`).
+8.  The type which describes a distance between the indices of grid points (e.g. `IdxStepX`).
+9.  The type which describes the index range on which the grid points are defined (e.g. `IdxRangeX`).
 10. The templated type of a field memory block defined on each of the domains (e.g. `FieldMemX<ElementType>`). A field memory block allocates values at each grid point in the provided domain.
 11. The type of a field memory block of doubles defined on each of the domains (e.g. `DFieldMemX`).
 12. The templated type of a field defined on each of the domains (e.g. `FieldX<ElementType>`). A field is similar to a reference. It provides access to a field memory block or a sub-set of a field memory block, but does not own the data itself.
