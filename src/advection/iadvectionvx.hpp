@@ -3,9 +3,8 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <ddc_helper.hpp>
-
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 /**
  * @brief A class which provides an advection operator.
@@ -28,8 +27,8 @@ public:
      *
      * @return A reference to an array containing the value of distribution the function at the updated time t+dt.
      */
-    virtual Field<double, typename Geometry::FdistribuIdxRange> operator()(
-            Field<double, typename Geometry::FdistribuIdxRange> allfdistribu,
-            Field<const double, typename Geometry::SpatialIdxRange> electric_field,
+    virtual DField<typename Geometry::IdxRangeFdistribu> operator()(
+            DField<typename Geometry::IdxRangeFdistribu> allfdistribu,
+            DConstField<typename Geometry::IdxRangeSpatial> electric_field,
             double dt) const = 0;
 };

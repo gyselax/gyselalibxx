@@ -71,9 +71,9 @@ struct Patch<grid1, grid2, bsplines_dim1, bsplines_dim2>
     using IdxRange12 = IdxRange<Grid1, Grid2>;
 
     /// @brief Index range of a grids over the first spline dimension.
-    using BSIdxRange1 = IdxRange<BSplines1>;
+    using IdxRangeBS1 = IdxRange<BSplines1>;
     /// @brief Index range of a grids over the second spline dimension.
-    using BSIdxRange2 = IdxRange<BSplines2>;
+    using IdxRangeBS2 = IdxRange<BSplines2>;
     /// @brief Index range of a grids over the first and second spline dimension.
-    using BSIdxRange12 = IdxRange<BSplines1, BSplines2>;
+    using IdxRangeBS12 = IdxRange<BSplines1, BSplines2>;
 };

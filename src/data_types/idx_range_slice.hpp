@@ -449,14 +449,14 @@ public:
 
 /// A class to create a IdxRangeSlice type from a TypeSeq.
 template <class T>
-struct ToIdxRangeSlice;
+struct IdxRangeToSlice;
 
 template <class... Dims>
-struct ToIdxRangeSlice<ddc::detail::TypeSeq<Dims...>>
+struct IdxRangeToSlice<ddc::detail::TypeSeq<Dims...>>
 {
     using value = IdxRangeSlice<Dims...>;
 };
 
 /// @brief A templated type for creating a IdxRangeSlice from a TypeSeq.
 template <class T>
-using to_subidx_range_collection = typename ToIdxRangeSlice<T>::value;
+using to_subidx_range_collection = typename IdxRangeToSlice<T>::value;

@@ -14,25 +14,25 @@
 /**
  * @brief A class providing an operator for integrating functions defined on a discrete index range.
  *
- * @tparam QuadratureIdxRange The index range over which the function is integrated.
- * @tparam TotalIdxRange The index range of the chunk which can be passed to the operator(). This is the
- *                      QuadratureIdxRange combined with any batch dimensions. If there are no
+ * @tparam IdxRangeQuadrature The index range over which the function is integrated.
+ * @tparam IdxRangeTotal The index range of the chunk which can be passed to the operator(). This is the
+ *                      IdxRangeQuadrature combined with any batch dimensions. If there are no
  *                      batch dimensions then this argument does not need to be provided as by
- *                      default it is equal to the QuadratureIdxRange.
+ *                      default it is equal to the IdxRangeQuadrature.
  * @tparam MemorySpace The memory space (cpu/gpu) where the quadrature coefficients are saved.
  */
 template <
-        class QuadratureIdxRange,
-        class TotalIdxRange = QuadratureIdxRange,
+        class IdxRangeQuadrature,
+        class IdxRangeTotal = IdxRangeQuadrature,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
 private:
     /// The tyoe of an element of an index of the quadrature coefficients.
-    using QuadratureIdx = typename QuadratureIdxRange::discrete_element_type;
+    using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
     using QuadConstField
-            = DConstField<QuadratureIdxRange, std::experimental::layout_right, MemorySpace>;
+            = DConstField<IdxRangeQuadrature, std::experimental::layout_right, MemorySpace>;
 
     QuadConstField m_coefficients;
 
@@ -64,7 +64,7 @@ public:
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
         static_assert(
-                std::is_invocable_v<IntegratorFunction, QuadratureIdx>,
+                std::is_invocable_v<IntegratorFunction, IdxQuadrature>,
                 "The object passed to Quadrature::operator() is not defined on the quadrature "
                 "idx_range.");
 
@@ -79,7 +79,7 @@ public:
                     get_idx_range(coeff_proxy),
                     0.0,
                     ddc::reducer::sum<double>(),
-                    KOKKOS_LAMBDA(QuadratureIdx const ix) {
+                    KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
         } else {
@@ -88,7 +88,7 @@ public:
                     get_idx_range(coeff_proxy),
                     0.0,
                     ddc::reducer::sum<double>(),
-                    KOKKOS_LAMBDA(QuadratureIdx const ix) {
+                    KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
         }
@@ -123,24 +123,24 @@ public:
                 "Kokkos::TeamPolicy only works with the default execution space. Please use "
                 "DefaultExecutionSpace to call this batched operator.");
         using ExpectedBatchDims = ddc::type_seq_remove_t<
-                ddc::to_type_seq_t<TotalIdxRange>,
-                ddc::to_type_seq_t<QuadratureIdxRange>>;
+                ddc::to_type_seq_t<IdxRangeTotal>,
+                ddc::to_type_seq_t<IdxRangeQuadrature>>;
         static_assert(
                 ddc::type_seq_same_v<ddc::to_type_seq_t<BatchIdxRange>, ExpectedBatchDims>,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
 
         // Get useful index types
-        using TotalIdx = typename TotalIdxRange::discrete_element_type;
-        using BatchIdx = typename BatchIdxRange::discrete_element_type;
+        using IdxTotal = typename IdxRangeTotal::discrete_element_type;
+        using IdxBatch = typename BatchIdxRange::discrete_element_type;
 
         static_assert(
-                std::is_invocable_v<IntegratorFunction, TotalIdx>,
+                std::is_invocable_v<IntegratorFunction, IdxTotal>,
                 "The object passed to Quadrature::operator() is not defined on the total "
                 "idx_range.");
 
         // Get index ranges
-        QuadratureIdxRange quad_idx_range(get_idx_range(m_coefficients));
+        IdxRangeQuadrature quad_idx_range(get_idx_range(m_coefficients));
         BatchIdxRange batch_idx_range(get_idx_range(result));
 
         QuadConstField const coeff_proxy = m_coefficients;
@@ -149,16 +149,16 @@ public:
                 Kokkos::TeamPolicy<>(exec_space, batch_idx_range.size(), Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     const int idx = team.league_rank();
-                    BatchIdx ib = to_discrete_element(idx, batch_idx_range);
+                    IdxBatch ib = to_discrete_element(idx, batch_idx_range);
 
                     // Sum over quadrature dimensions
                     double teamSum = 0;
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
                             [&](int const& thread_index, double& sum) {
-                                QuadratureIdx iq
+                                IdxQuadrature iq
                                         = to_discrete_element(thread_index, quad_idx_range);
-                                TotalIdx it(ib, iq);
+                                IdxTotal it(ib, iq);
                                 sum += coeff_proxy(iq) * integrated_function(it);
                             },
                             teamSum);
@@ -194,9 +194,9 @@ private:
 };
 
 namespace detail {
-template <class NewMemorySpace, class QuadratureIdxRange, class TotalIdxRange, class MemorySpace>
-struct OnMemorySpace<NewMemorySpace, Quadrature<QuadratureIdxRange, TotalIdxRange, MemorySpace>>
+template <class NewMemorySpace, class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace>
+struct OnMemorySpace<NewMemorySpace, Quadrature<IdxRangeQuadrature, IdxRangeTotal, MemorySpace>>
 {
-    using type = Quadrature<QuadratureIdxRange, TotalIdxRange, NewMemorySpace>;
+    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, NewMemorySpace>;
 };
 } // namespace detail

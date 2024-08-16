@@ -15,7 +15,7 @@
  */
 template <
         class CollInfo,
-        class FDistribIdxRange,
+        class IdxRangeFDistrib,
         class GridVpar,
         class GridMu,
         class InputDFieldThetaR>
@@ -23,14 +23,14 @@ class CollisionSpVparMu /* : public IRightHandSide */
 {
 private:
     using InputDFieldR = typename CollInfo::radial_chunk_type;
-    using fdistrib_grids = ddc::to_type_seq_t<FDistribIdxRange>;
+    using fdistrib_grids = ddc::to_type_seq_t<IdxRangeFDistrib>;
     using GridR = typename collisions_dimensions::ExtractRDim<InputDFieldR>::type;
     using GridTheta =
             typename collisions_dimensions::ExtractThetaDim<InputDFieldThetaR, GridR>::type;
 
     // Validate template types
-    static_assert(ddc::is_discrete_domain_v<FDistribIdxRange>);
-    static_assert(FDistribIdxRange::rank() >= 3 && FDistribIdxRange::rank() <= 6);
+    static_assert(ddc::is_discrete_domain_v<IdxRangeFDistrib>);
+    static_assert(IdxRangeFDistrib::rank() >= 3 && IdxRangeFDistrib::rank() <= 6);
     static_assert((std::is_same_v<InputDFieldR, double>) || ddc::is_borrowed_chunk_v<InputDFieldR>);
     static_assert(
             (std::is_same_v<InputDFieldThetaR, double>)
@@ -98,7 +98,7 @@ public:
                     memory_space>; // Equivalent to Field<double const, IdxRangeMu>
 
     /// Type alias for the distribution function stored on GPU.
-    using FDistribField = DField<FDistribIdxRange>;
+    using FDistribField = DField<IdxRangeFDistrib>;
 
 private:
     /**
@@ -163,7 +163,7 @@ public:
      */
     CollisionSpVparMu(
             CollInfo const& collision_info,
-            FDistribIdxRange fdistrib_idx_range,
+            IdxRangeFDistrib fdistrib_idx_range,
             DConstFieldMu coeff_intdmu,
             DConstFieldVpar coeff_intdvpar,
             InputDFieldThetaR B_norm)

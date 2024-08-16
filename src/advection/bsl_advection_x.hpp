@@ -15,22 +15,22 @@ template <class Geometry, class GridX>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
 {
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
-    using FdistribIdxRange = typename Geometry::FdistribuIdxRange;
+    using IdxRangeFdistrib = typename Geometry::IdxRangeFdistribu;
     using IdxX = Idx<GridX>;
     using IdxV = Idx<GridV>;
     using DimX = typename GridX::continuous_dimension_type;
     using DimV = typename GridV::continuous_dimension_type;
-    using SpaceVelocityIdxRange = ddc::cartesian_prod_t<
-            typename Geometry::SpatialIdxRange,
-            typename Geometry::VelocityIdxRange>;
+    using IdxRangeSpaceVelocity = ddc::cartesian_prod_t<
+            typename Geometry::IdxRangeSpatial,
+            typename Geometry::IdxRangeVelocity>;
 
 private:
     using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             GridX,
-            SpaceVelocityIdxRange>;
+            IdxRangeSpaceVelocity>;
     using InterpolatorType
-            = interpolator_on_idx_range_t<IInterpolator, GridX, SpaceVelocityIdxRange>;
+            = interpolator_on_idx_range_t<IInterpolator, GridX, IdxRangeSpaceVelocity>;
     PreallocatableInterpolatorType const& m_interpolator_x;
 
 public:
@@ -51,34 +51,34 @@ public:
      * @param[in] dt Time step
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
-    Field<double, FdistribIdxRange> operator()(
-            Field<double, FdistribIdxRange> const allfdistribu,
+    Field<double, IdxRangeFdistrib> operator()(
+            Field<double, IdxRangeFdistrib> const allfdistribu,
             double const dt) const override
     {
-        using BatchedIdxRange = ddc::remove_dims_of_t<FdistribIdxRange, Species, GridX>;
-        using BatchedIdx = typename BatchedIdxRange::discrete_element_type;
+        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFdistrib, Species, GridX>;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
         Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
-        FdistribIdxRange const dom = get_idx_range(allfdistribu);
+        IdxRangeFdistrib const dom = get_idx_range(allfdistribu);
         IdxRange<GridX> const x_idx_range = ddc::select<GridX>(dom);
         IdxRange<GridV> const v_idx_range = ddc::select<GridV>(dom);
         IdxRange<Species> const sp_idx_range = ddc::select<Species>(dom);
 
         // pre-allocate some memory to prevent allocation later in loop
-        SpaceVelocityIdxRange batched_feet_idx_range(dom);
-        FieldMem<Coord<DimX>, SpaceVelocityIdxRange> feet_coords_alloc(batched_feet_idx_range);
-        Field<Coord<DimX>, SpaceVelocityIdxRange> feet_coords(get_field(feet_coords_alloc));
+        IdxRangeSpaceVelocity batched_feet_idx_range(dom);
+        FieldMem<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
+        Field<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
         std::unique_ptr<InterpolatorType> const interpolator_x_ptr = m_interpolator_x.preallocate();
         InterpolatorType const& interpolator_x = *interpolator_x_ptr;
 
-        BatchedIdxRange batch_idx_range(dom);
+        IdxRangeBatch batch_idx_range(dom);
 
         for (IdxSp const isp : sp_idx_range) {
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
-                    KOKKOS_LAMBDA(BatchedIdx const ib) {
+                    KOKKOS_LAMBDA(IdxBatch const ib) {
                         // compute the displacement
                         IdxV const iv(ib);
                         Coord<DimV> const coord_iv = ddc::coordinate(iv);

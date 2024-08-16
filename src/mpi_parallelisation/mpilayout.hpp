@@ -2,9 +2,8 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <impilayout.hpp>
-
 #include "ddc_aliases.hpp"
+#include "impilayout.hpp"
 
 /**
  * @brief A class describing a way in which data may be laid out across MPI processes.
@@ -24,20 +23,20 @@
  * over 6 processes, the X dimension will be distributed over 2 processes and the Y
  * dimension will be distributed over 3 processes.
  *
- * @tparam DataIdxRange The IdxRange on which the data is defined.
+ * @tparam IdxRangeData The IdxRange on which the data is defined.
  * @tparam DistributedDim The tags of the discrete dimensions which are distributed
  *              across MPI processes.
  */
-template <class DataIdxRange, class... DistributedDim>
-class MPILayout : public IMPILayout<DataIdxRange, DistributedDim...>
+template <class IdxRangeData, class... DistributedDim>
+class MPILayout : public IMPILayout<IdxRangeData, DistributedDim...>
 {
-    static_assert(ddc::is_discrete_domain_v<DataIdxRange>);
+    static_assert(ddc::is_discrete_domain_v<IdxRangeData>);
 
-    using base_type = IMPILayout<DataIdxRange, DistributedDim...>;
+    using base_type = IMPILayout<IdxRangeData, DistributedDim...>;
 
 public:
     /// The index range of the data
-    using idx_range_type = DataIdxRange;
+    using idx_range_type = IdxRangeData;
     /// The index range of the distributed section of the data
     using distributed_sub_idx_range = typename base_type::distributed_sub_idx_range;
     /// A type sequence describing the dimensions which are distributed across MPI processes.

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -28,8 +29,8 @@ struct InternalSpoofGridTheta : InternalSpoofGrid
 };
 
 /// Check if a dimension is spoofed but is not present in the actual simulation
-template <class Grid>
-inline constexpr bool is_spoofed_dim_v = std::is_base_of_v<InternalSpoofGrid, Grid>;
+template <class Grid1D>
+inline constexpr bool is_spoofed_dim_v = std::is_base_of_v<InternalSpoofGrid, Grid1D>;
 
 /**
  * Class to get the type of the radial dimension from a field containing a radial profile.
@@ -61,27 +62,27 @@ struct ExtractThetaDim
  * @param idx_range The multi-D index range.
  * @returns The index range for the specific grid.
  */
-template <class Grid, class FDistribIdxRange>
-inline IdxRange<Grid> get_1d_idx_range(FDistribIdxRange idx_range)
+template <class Grid1D, class IdxRangeFDistrib>
+inline IdxRange<Grid1D> get_1d_idx_range(IdxRangeFDistrib idx_range)
 {
-    if constexpr (is_spoofed_dim_v<Grid>) {
-        return IdxRange<Grid>(Idx<Grid> {0}, IdxStep<Grid> {1});
+    if constexpr (is_spoofed_dim_v<Grid1D>) {
+        return IdxRange<Grid1D>(Idx<Grid1D> {0}, IdxStep<Grid1D> {1});
     } else {
-        return ddc::select<Grid>(idx_range);
+        return ddc::select<Grid1D>(idx_range);
     }
 }
 
 /**
  * @brief Get the index range for specific grid dimensions from a multi-D index range.
  *
- * @tparam Grid The tags for the specific grid dimensions.
+ * @tparam Grid1D The tags for the specific grid dimensions.
  * @param idx_range The multi-D index range.
  * @returns The index range for the specific grid.
  */
-template <class... Grid, class FDistribIdxRange>
-inline IdxRange<Grid...> get_idx_range(FDistribIdxRange idx_range)
+template <class... Grid1D, class IdxRangeFDistrib>
+inline IdxRange<Grid1D...> get_idx_range(IdxRangeFDistrib idx_range)
 {
-    return IdxRange<Grid...>(get_1d_idx_range<Grid>(idx_range)...);
+    return IdxRange<Grid1D...>(get_1d_idx_range<Grid1D>(idx_range)...);
 }
 
 /// If radial profile is stored in a double then the grid tag must be spoofed.
