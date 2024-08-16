@@ -3,11 +3,12 @@
 #include <cmath>
 #include <optional>
 
+#include <ddc_helper.hpp>
+#include <quadrature.hpp>
+#include <species_info.hpp>
+#include <trapezoid_quadrature.hpp>
+
 #include "collisions_utils.hpp"
-#include "ddc_helper.hpp"
-#include "quadrature.hpp"
-#include "species_info.hpp"
-#include "trapezoid_quadrature.hpp"
 
 namespace {
 

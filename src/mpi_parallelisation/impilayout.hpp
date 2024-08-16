@@ -7,18 +7,18 @@
 /**
  * @brief A super class describing a way in which data may be laid out across MPI processes.
  *
- * @tparam IdxRangeData The index range on which the data is defined.
+ * @tparam DataIdxRange The index range on which the data is defined.
  * @tparam DistributedDim The tags of the discrete dimensions which are distributed
  *              across MPI processes.
  */
-template <class IdxRangeData, class... DistributedDim>
+template <class DataIdxRange, class... DistributedDim>
 class IMPILayout
 {
-    static_assert(ddc::is_discrete_domain_v<IdxRangeData>);
+    static_assert(ddc::is_discrete_domain_v<DataIdxRange>);
 
 public:
     /// The index range of the data
-    using discrete_domain_type = IdxRangeData;
+    using discrete_domain_type = DataIdxRange;
     /// The index range of the distributed section of the data
     using distributed_sub_idx_range = IdxRange<DistributedDim...>;
     /// A type sequence describing the dimensions which are distributed across MPI processes.

@@ -143,11 +143,11 @@ void CollisionsIntra::compute_matrix_coeff(
                 IdxX const ix = ddc::select<GridX>(ispxvx);
                 IdxVx const ivx = ddc::select<GridVx>(ispxvx);
 
-                IdxVx_ghosted ivx_ghosted(to_index<GhostedVx>(ivx));
-                IdxVx_ghosted_staggered ivx_ghosted_staggered(to_index<GhostedVxStaggered>(ivx));
-                IdxVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
-                IdxVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
-                IdxVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
+                IndexVx_ghosted ivx_ghosted(to_index<GhostedVx>(ivx));
+                IndexVx_ghosted_staggered ivx_ghosted_staggered(to_index<GhostedVxStaggered>(ivx));
+                IndexVx_ghosted ivx_next_ghosted(ivx_ghosted + 1);
+                IndexVx_ghosted ivx_prev_ghosted(ivx_ghosted - 1);
+                IndexVx_ghosted_staggered ivx_prev_ghosted_staggered(ivx_ghosted_staggered - 1);
 
                 double const dv_i
                         = ddc::coordinate(ivx_next_ghosted) - ddc::coordinate(ivx_ghosted);

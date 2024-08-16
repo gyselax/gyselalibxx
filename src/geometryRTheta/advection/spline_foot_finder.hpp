@@ -11,28 +11,28 @@
  *
  * @tparam TimeStepper
  *      A child class of ITimeStepper providing a time integration method.
- * @tparam IdxRangeAdvection
- *      A child class of IdxRangeAdvection providing the informations about the advection index range.
+ * @tparam AdvectionIdxRange
+ *      A child class of AdvectionIdxRange providing the informations about the advection index range.
  *
  * @see BslAdvectionRTheta
  */
-template <class TimeStepper, class IdxRangeAdvection>
+template <class TimeStepper, class AdvectionIdxRange>
 class SplineFootFinder : public IFootFinder
 {
 private:
     /**
      * @brief Tag the first dimension in the advection index range.
      */
-    using X_adv = typename IdxRangeAdvection::X_adv;
+    using X_adv = typename AdvectionIdxRange::X_adv;
     /**
      * @brief Tag the second dimension in the advection index range.
      */
-    using Y_adv = typename IdxRangeAdvection::Y_adv;
+    using Y_adv = typename AdvectionIdxRange::Y_adv;
 
 
     TimeStepper const& m_time_stepper;
 
-    IdxRangeAdvection const& m_advection_idx_range;
+    AdvectionIdxRange const& m_advection_idx_range;
 
     SplineRThetaBuilder const& m_builder_advection_field;
     SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
@@ -47,7 +47,7 @@ public:
      *      The time integration method used to solve the characteristic
      *      equation (ITimeStepper).
      * @param[in] advection_idx_range
-     *      An IdxRangeAdvection object which defines in which index range we
+     *      An AdvectionIdxRange object which defines in which index range we
      *      advect the characteristics.
      * @param[in] builder_advection_field
      *      The spline builder which computes the spline representation
@@ -57,14 +57,14 @@ public:
      *
      * @tparam TimeStepper
      *      A child class of ITimeStepper providing a time integration method.
-     * @tparam IdxRangeAdvection
-     *      A child class of IdxRangeAdvection providing the informations about the advection index range.
+     * @tparam AdvectionIdxRange
+     *      A child class of AdvectionIdxRange providing the informations about the advection index range.
      *
      * @see ITimeStepper
      */
     SplineFootFinder(
             TimeStepper const& time_stepper,
-            IdxRangeAdvection const& advection_idx_range,
+            AdvectionIdxRange const& advection_idx_range,
             SplineRThetaBuilder const& builder_advection_field,
             SplineRThetaEvaluatorConstBound const& evaluator_advection_field)
         : m_time_stepper(time_stepper)

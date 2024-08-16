@@ -245,15 +245,15 @@ using SplineVyBuilder_1d = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK,
         GridVy>;
 
-using IdxRangeBSX = IdxRange<BSplinesX>;
-using IdxRangeBSY = IdxRange<BSplinesY>;
-using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;
-using IdxRangeBSVx = IdxRange<BSplinesVx>;
-using IdxRangeBSVy = IdxRange<BSplinesVy>;
-using IdxRangeBSVxVy = IdxRange<BSplinesVx, BSplinesVy>;
+using BSIdxRangeX = IdxRange<BSplinesX>;
+using BSIdxRangeY = IdxRange<BSplinesY>;
+using BSIdxRangeXY = IdxRange<BSplinesX, BSplinesY>;
+using BSIdxRangeVx = IdxRange<BSplinesVx>;
+using BSIdxRangeVy = IdxRange<BSplinesVy>;
+using BSIdxRangeVxVy = IdxRange<BSplinesVx, BSplinesVy>;
 
 template <class ElementType>
-using BSConstFieldXY = Field<ElementType const, IdxRangeBSXY>;
+using BSConstFieldXY = Field<ElementType const, BSIdxRangeXY>;
 using DBSConstFieldXY = BSConstFieldXY<double>;
 
 // Index
@@ -404,15 +404,15 @@ public:
     /**
      * @brief An alias for the spatial discrete index range type.
      */
-    using IdxRangeSpatial = IdxRangeXY;
+    using SpatialIdxRange = IdxRangeXY;
 
     /**
      * @brief An alias for the velocity discrete index range type.
      */
-    using IdxRangeVelocity = IdxRangeVxVy;
+    using VelocityIdxRange = IdxRangeVxVy;
 
     /**
      * @brief An alias for the whole distribution function discrete index range type.
      */
-    using IdxRangeFdistribu = IdxRangeSpXYVxVy;
+    using FdistribuIdxRange = IdxRangeSpXYVxVy;
 };

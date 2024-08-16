@@ -68,11 +68,11 @@ int main(int argc, char** argv)
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IdxStepR const r_ncells(PCpp_int(conf_voicexx, ".SplineMesh.r_ncells"));
+    IdxStepR const r_ncells(PCpp_int(conf_voicexx, ".Mesh.r_ncells"));
 
     CoordTheta const p_min(0.0);
     CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_ncells(PCpp_int(conf_voicexx, ".SplineMesh.p_ncells"));
+    IdxStepTheta const p_ncells(PCpp_int(conf_voicexx, ".Mesh.p_ncells"));
 
     std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
     std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);

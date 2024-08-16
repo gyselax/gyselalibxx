@@ -71,22 +71,22 @@ public:
     /**
      * A type representing a ghosted vx index. 
      */
-    using IdxVx_ghosted = Idx<GhostedVx>;
+    using IndexVx_ghosted = Idx<GhostedVx>;
 
     /**
      * A type representing a ghosted staggered vx index. 
      */
-    using IdxVx_ghosted_staggered = Idx<GhostedVxStaggered>;
+    using IndexVx_ghosted_staggered = Idx<GhostedVxStaggered>;
 
     /**
      * A type representing a species, space and ghosted vx index. 
      */
-    using IdxSpXVx_ghosted = Idx<Species, GridX, GhostedVx>;
+    using IndexSpXVx_ghosted = Idx<Species, GridX, GhostedVx>;
 
     /**
      * A type representing a species, space and ghosted staggered vx index. 
      */
-    using IdxSpXVx_ghosted_staggered = Idx<Species, GridX, GhostedVxStaggered>;
+    using IndexSpXVx_ghosted_staggered = Idx<Species, GridX, GhostedVxStaggered>;
 
 
 private:

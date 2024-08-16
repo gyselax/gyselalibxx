@@ -4,7 +4,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include <geometry.hpp>
 
 /**
  * @brief Base class for a Quasi-Neutrality solver.

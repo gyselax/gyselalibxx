@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 #include <chrono>
 #include <cstring>
 #include <filesystem>
@@ -11,6 +10,8 @@
 #include <sll/math_tools.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
+
+#include <stdio.h>
 
 #include "bsl_advection_rp.hpp"
 #include "compute_norms.hpp"
@@ -274,7 +275,7 @@ void display_time(
  *      The time integration method used to solve the characteristic
  *      equation.
  * @param[in] advection_index range
- *      The IdxRangeAdvection type object defining the index range where we
+ *      The AdvectionIdxRange type object defining the index range where we
  *      advect the characteristic feet.
  * @param[in] simulation
  *      The selected test cases.
@@ -305,28 +306,28 @@ void display_time(
  *      A child class of AnalyticalInvertibleCurvilinearToCartesian.
  * @tparam TimeStepper
  *      A child class of ITimeStepper.
- * @tparam IdxRangeAdvection
- *      A child class of IdxRangeAdvection.
+ * @tparam AdvectionIdxRange
+ *      A child class of AdvectionIdxRange.
  * @tparam Simulation
  *      A child class of AdvectionSimulation.
  *
  * @see BslAdvection
  * @see ITimeStepper
- * @see IdxRangeAdvection
+ * @see AdvectionIdxRange
  * @see Simulation
  */
 template <
         class Mapping,
         class AnalyticalMapping,
         class TimeStepper,
-        class IdxRangeAdvection,
+        class AdvectionIdxRange,
         class Simulation>
 void simulate(
         Mapping const& mapping,
         AnalyticalMapping const& analytical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper const& time_stepper,
-        IdxRangeAdvection& advection_idx_range,
+        AdvectionIdxRange& advection_idx_range,
         Simulation& simulation,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
@@ -338,7 +339,7 @@ void simulate(
         bool if_save_feet,
         std::string const& output_folder)
 {
-    SplineFootFinder<TimeStepper, IdxRangeAdvection> const
+    SplineFootFinder<TimeStepper, AdvectionIdxRange> const
             foot_finder(time_stepper, advection_idx_range, advection_builder, advection_evaluator);
 
     BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, mapping);
@@ -506,7 +507,7 @@ void simulate(
  *      The time integration method used to solve the characteristic
  *      equation.
  * @param[in] advection_index range
- *      The IdxRangeAdvection type object defining the index range where we
+ *      The AdvectionIdxRange type object defining the index range where we
  *      advect the characteristic feet.
  * @param[in] function_interpolator
  *      The B-splines interpolator used to interpolate the function at
@@ -533,16 +534,16 @@ void simulate(
  *
  * @see BslAdvection
  * @see ITimeStepper
- * @see IdxRangeAdvection
+ * @see AdvectionIdxRange
  * @see Simulation
  */
-template <class Mapping, class AnalyticalMapping, class TimeStepper, class IdxRangeAdvection>
+template <class Mapping, class AnalyticalMapping, class TimeStepper, class AdvectionIdxRange>
 void simulate_the_3_simulations(
         Mapping const& mapping,
         AnalyticalMapping const& analytical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper& time_stepper,
-        IdxRangeAdvection& advection_idx_range,
+        AdvectionIdxRange& advection_idx_range,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
         SplineRThetaBuilder const& advection_builder,

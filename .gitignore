@@ -2,4 +2,3 @@
 *.pyc
 /log.build.*
 /log.prepare.*
-*.dump

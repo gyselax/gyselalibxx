@@ -2,12 +2,12 @@
 
 #pragma once
 
+#include <geometry.hpp>
 #include <paraconf.h>
+#include <species_info.hpp>
 
-#include "geometry.hpp"
 #include "iinitialization.hpp"
 #include "paraconfpp.hpp"
-#include "species_info.hpp"
 
 /// Initialization operator with a sinusoidal perturbation of a Maxwellian. This initializes all species.
 class SingleModePerturbInitialization : public IInitialization

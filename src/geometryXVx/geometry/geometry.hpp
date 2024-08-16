@@ -5,11 +5,12 @@
 #include <ddc/kernels/fft.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include <ddc_helper.hpp>
+#include <moments.hpp>
+#include <species_info.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
-#include "moments.hpp"
-#include "species_info.hpp"
 
 /**
  * @brief A class which describes the real space in the spatial X direction
@@ -221,9 +222,9 @@ using IdxStepXVx = IdxStep<GridX, GridVx>;
 
 
 
-using IdxRangeBSX = IdxRange<BSplinesX>;
+using BSIdxRangeX = IdxRange<BSplinesX>;
 
-using IdxRangeBSVx = IdxRange<BSplinesVx>;
+using BSIdxRangeVx = IdxRange<BSplinesVx>;
 
 
 
@@ -253,7 +254,7 @@ template <class ElementType>
 using FieldMemX = FieldMem<ElementType, IdxRangeX>;
 
 template <class ElementType>
-using BSFieldMemX = FieldMem<ElementType, IdxRangeBSX>;
+using BSFieldMemX = FieldMem<ElementType, BSIdxRangeX>;
 
 
 template <class ElementType>
@@ -293,7 +294,7 @@ using DFieldMemSpXVx = FieldMemSpXVx<double>;
 
 
 template <class ElementType>
-using BSFieldX = Field<ElementType, IdxRangeBSX>;
+using BSFieldX = Field<ElementType, BSIdxRangeX>;
 
 template <class ElementType>
 using FieldX = Field<ElementType, IdxRangeX>;
@@ -342,7 +343,7 @@ using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
 
 template <class ElementType>
-using BSConstFieldX = ConstField<ElementType, IdxRangeBSX>;
+using BSConstFieldX = ConstField<ElementType, BSIdxRangeX>;
 
 template <class ElementType>
 using ConstFieldSpMom = ConstField<ElementType, IdxRangeSpMom>;
@@ -405,17 +406,17 @@ public:
     /**
      * @brief An alias for the spatial discrete index range type.
      */
-    using IdxRangeSpatial = IdxRangeX;
+    using SpatialIdxRange = IdxRangeX;
 
     /**
      * @brief An alias for the velocity discrete index range type.
      */
-    using IdxRangeVelocity = IdxRangeVx;
+    using VelocityIdxRange = IdxRangeVx;
 
 
     // using FdistribuIdxRange = IdxRange<DimSp, typename decltype(SpatialDDom), typename decltype(VelocityDDom)>(IdxRange());
     /**
      * @brief An alias for the whole distribution function discrete index range type.
      */
-    using IdxRangeFdistribu = IdxRangeSpXVx;
+    using FdistribuIdxRange = IdxRangeSpXVx;
 };

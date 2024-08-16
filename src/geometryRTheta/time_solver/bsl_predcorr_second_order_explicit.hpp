@@ -55,13 +55,13 @@
  *
  * @tparam Mapping
  *      A Curvilinear2DToCartesian class or one of its child classes.
- * @tparam IdxRangeAdvection
- *      An IdxRangeAdvection class.
+ * @tparam AdvectionIdxRange
+ *      An AdvectionIdxRange class.
  * @tparam FootFinder
  *      A IFootFinder class.
  *
  */
-template <class Mapping, class IdxRangeAdvection>
+template <class Mapping, class AdvectionIdxRange>
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -70,11 +70,11 @@ private:
 
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<SplineFootFinder<EulerMethod, IdxRangeAdvection>, Mapping> const&
+    BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionIdxRange>, Mapping> const&
             m_advection_solver;
 
     EulerMethod const m_euler;
-    SplineFootFinder<EulerMethod, IdxRangeAdvection> const m_find_feet;
+    SplineFootFinder<EulerMethod, AdvectionIdxRange> const m_find_feet;
 
     PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
@@ -88,7 +88,7 @@ public:
      * @brief Instantiate a BslExplicitPredCorrRTheta.
      *
      * @param[in] advection_idx_range
-     *      An IdxRangeAdvection object which gives the information
+     *      An AdvectionIdxRange object which gives the information
      *      in which index range we advect.
      * @param[in] mapping
      *      The mapping function from the logical index range to the
@@ -109,9 +109,9 @@ public:
      *      An evaluator of B-splines for the spline advection field.
      */
     BslExplicitPredCorrRTheta(
-            IdxRangeAdvection const& advection_idx_range,
+            AdvectionIdxRange const& advection_idx_range,
             Mapping const& mapping,
-            BslAdvectionRTheta<SplineFootFinder<EulerMethod, IdxRangeAdvection>, Mapping>&
+            BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionIdxRange>, Mapping>&
                     advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
@@ -146,16 +146,16 @@ public:
         FieldMemRTheta<CoordRTheta> coords(grid);
         ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
-        IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+        BSIdxRangeR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
-        IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
+        BSIdxRangeTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
         DFieldMemRTheta electrical_potential(grid);
 
         SplinePolar electrostatic_potential_coef(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
-                IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
+                BSIdxRangeRTheta(radial_bsplines, polar_idx_range));
 
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>

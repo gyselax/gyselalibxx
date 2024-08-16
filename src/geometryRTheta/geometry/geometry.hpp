@@ -179,10 +179,10 @@ using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
-using IdxRangeBSR = IdxRange<BSplinesR>;
-using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
-using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
-using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
+using BSIdxRangeR = IdxRange<BSplinesR>;
+using BSIdxRangeTheta = IdxRange<BSplinesTheta>;
+using BSIdxRangeRTheta = IdxRange<BSplinesR, BSplinesTheta>;
+using BSIdxRangePolar = IdxRange<PolarBSplinesRTheta>;
 
 
 // --- Field definitions
@@ -233,9 +233,9 @@ using DConstFieldTheta = ConstFieldTheta<double>;
 using DConstFieldRTheta = ConstFieldRTheta<double>;
 
 // --- Spline representation definitions
-using Spline2D = host_t<DFieldMem<IdxRangeBSRTheta>>;
-using Spline2DField = host_t<DField<IdxRangeBSRTheta>>;
-using Spline2DConstField = host_t<DConstField<IdxRangeBSRTheta>>;
+using Spline2D = host_t<DFieldMem<BSIdxRangeRTheta>>;
+using Spline2DField = host_t<DField<BSIdxRangeRTheta>>;
+using Spline2DConstField = host_t<DConstField<BSIdxRangeRTheta>>;
 
 /**
  * @brief Tag the polar B-splines decomposition of a function.
@@ -263,13 +263,13 @@ using DConstVectorFieldRTheta = VectorConstField<double, IdxRangeRTheta, NDTag<D
 
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffsMem2D = VectorFieldMem<double, IdxRangeBSRTheta, NDTag<Dim1, Dim2>>;
+using VectorSplineCoeffsMem2D = VectorFieldMem<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffs2D = VectorField<double, IdxRangeBSRTheta, NDTag<Dim1, Dim2>>;
+using VectorSplineCoeffs2D = VectorField<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using ConstVectorSplineCoeffs2D = VectorConstField<double, IdxRangeBSRTheta, NDTag<Dim1, Dim2>>;
+using ConstVectorSplineCoeffs2D = VectorConstField<double, BSIdxRangeRTheta, NDTag<Dim1, Dim2>>;
 
 
 

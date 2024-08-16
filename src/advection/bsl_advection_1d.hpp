@@ -34,11 +34,11 @@
  * @tparam GridInterest
  *          The dimension along which the advection is computed. 
  *          It refers to the dimension of @f$ x_i @f$ in the equation. 
- * @tparam IdxRangeAdvection
+ * @tparam AdvectionIdxRange
  *          The index range @f$ \Omega' @f$ where the characteristic equation is solved. 
  *          It also refers to the index range of the advection field. 
  *          It had to also be defined on the GridInterest for the time integration method. 
- * @tparam IdxRangeFunction
+ * @tparam FunctionIdxRange
  *          The index range @f$ \Omega @f$ where allfdistribu is defined. 
  * @tparam AdvectionFieldBuilder
  *          The type of the spline builder for the advection field (see SplineBuilder). 
@@ -50,23 +50,23 @@
  */
 template <
         class GridInterest,
-        class IdxRangeAdvection,
-        class IdxRangeFunction,
+        class AdvectionIdxRange,
+        class FunctionIdxRange,
         class AdvectionFieldBuilder,
         class AdvectionFieldEvaluator,
         class TimeStepper
         = Euler<FieldMem<
                         Coord<typename GridInterest::continuous_dimension_type>,
-                        IdxRangeAdvection>,
-                DFieldMem<IdxRangeAdvection>>>
+                        AdvectionIdxRange>,
+                FieldMem<double, AdvectionIdxRange>>>
 class BslAdvection1D
 {
 private:
     // Advection index range element:
-    using IdxAdvection = typename IdxRangeAdvection::discrete_element_type;
+    using AdvectionIdx = typename AdvectionIdxRange::discrete_element_type;
 
     // Full index range element:
-    using IdxFunction = typename IdxRangeFunction::discrete_element_type;
+    using FunctionIdx = typename FunctionIdxRange::discrete_element_type;
 
     // Advection dimension (or Interest dimension):
     using DimInterest = typename GridInterest::continuous_dimension_type;
@@ -75,38 +75,38 @@ private:
     using IdxInterest = typename IdxRangeInterest::discrete_element_type;
 
     // Type for the feet and advection field:
-    using FeetFieldMem = FieldMem<CoordInterest, IdxRangeAdvection>;
+    using FeetFieldMem = FieldMem<CoordInterest, AdvectionIdxRange>;
     using FeetField = typename FeetFieldMem::span_type;
     using FeetConstField = typename FeetFieldMem::view_type;
 
-    using AdvecFieldMem = DFieldMem<IdxRangeAdvection>;
+    using AdvecFieldMem = FieldMem<double, AdvectionIdxRange>;
     using AdvecField = typename AdvecFieldMem::span_type;
 
-    using FunctionField = DField<IdxRangeFunction>;
+    using FunctionField = Field<double, FunctionIdxRange>;
 
     // Type for spline representation of the advection field
-    using IdxRangeBSAdvection = typename AdvectionFieldBuilder::batched_spline_domain_type;
-    using AdvecFieldSplineMem = DFieldMem<IdxRangeBSAdvection>;
-    using AdvecFieldSplineCoeffs = DField<IdxRangeBSAdvection>;
+    using BSAdvectionIdxRange = typename AdvectionFieldBuilder::batched_spline_domain_type;
+    using AdvecFieldSplineMem = FieldMem<double, BSAdvectionIdxRange>;
+    using AdvecFieldSplineCoeffs = Field<double, BSAdvectionIdxRange>;
 
     // Type for the derivatives of the advection field
     using DerivDim = ddc::Deriv<DimInterest>;
-    using IdxRangeAdvecFieldDeriv
-            = ddc::replace_dim_of_t<IdxRangeAdvection, GridInterest, DerivDim>;
-    using AdvecFieldDerivConstField = Field<const double, IdxRangeAdvecFieldDeriv>;
+    using AdvecFieldDerivIdxRange
+            = ddc::replace_dim_of_t<AdvectionIdxRange, GridInterest, DerivDim>;
+    using AdvecFieldDerivConstField = Field<const double, AdvecFieldDerivIdxRange>;
 
 
     // Interpolators:
     using FunctionPreallocatableInterpolatorType = interpolator_on_idx_range_t<
             IPreallocatableInterpolator,
             GridInterest,
-            IdxRangeFunction>;
+            FunctionIdxRange>;
     using FunctionInterpolatorType
-            = interpolator_on_idx_range_t<IInterpolator, GridInterest, IdxRangeFunction>;
+            = interpolator_on_idx_range_t<IInterpolator, GridInterest, FunctionIdxRange>;
 
     // Type for the derivatives of the function
-    using IdxRangeFunctionDeriv = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
-    using FunctionDerivFieldMem = DFieldMem<IdxRangeFunctionDeriv>;
+    using FunctionDerivIdxRange = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
+    using FunctionDerivFieldMem = FieldMem<double, FunctionDerivIdxRange>;
 
     FunctionPreallocatableInterpolatorType const& m_function_interpolator;
 
@@ -119,7 +119,7 @@ public:
     /**
      * @brief Constructor when the advection index range and the function index range are different. 
      * 
-     * When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for 
+     * When AdvectionIdxRange and FunctionIdxRange are different, we need one interpolator for 
      * each index range. 
      * 
      * We can also use it when we want two differents interpolators but defined on the same 
@@ -172,8 +172,8 @@ public:
         Kokkos::Profiling::pushRegion("BslAdvection1D");
 
         // Get index ranges and operators .............................................................
-        IdxRangeFunction const function_dom = get_idx_range(allfdistribu);
-        IdxRangeAdvection const advection_dom = get_idx_range(advection_field);
+        FunctionIdxRange const function_dom = get_idx_range(allfdistribu);
+        AdvectionIdxRange const advection_dom = get_idx_range(advection_field);
         auto const batch_dom = ddc::remove_dims_of(function_dom, advection_dom);
         IdxRangeInterest const interest_dom(advection_dom);
 
@@ -212,7 +212,7 @@ public:
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 advection_dom,
-                KOKKOS_LAMBDA(IdxAdvection const idx) {
+                KOKKOS_LAMBDA(AdvectionIdx const idx) {
                     slice_feet(idx) = ddc::coordinate(IdxInterest(idx));
                 });
 
@@ -247,13 +247,13 @@ public:
             To interpolate the function we want to advect, we build for the feet a Field defined 
             on the index range where the function is defined. 
         */
-        FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(function_dom);
-        Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
+        FieldMem<CoordInterest, FunctionIdxRange> feet_alloc(function_dom);
+        Field<CoordInterest, FunctionIdxRange> feet = get_field(feet_alloc);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 function_dom,
-                KOKKOS_LAMBDA(IdxFunction const idx) {
-                    IdxAdvection slice_foot_index(idx);
+                KOKKOS_LAMBDA(FunctionIdx const idx) {
+                    AdvectionIdx slice_foot_index(idx);
                     feet(idx) = slice_feet(slice_foot_index);
                 });
 

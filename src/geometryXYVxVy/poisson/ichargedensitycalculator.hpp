@@ -4,7 +4,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include <geometry.hpp>
 
 /**
  * @brief A class which computes charges density.

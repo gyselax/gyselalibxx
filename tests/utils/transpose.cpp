@@ -35,15 +35,15 @@ using IdxXZY = Idx<GridX, GridZ, GridY>;
 using IdxZXY = Idx<GridZ, GridX, GridY>;
 using IdxZYX = Idx<GridZ, GridY, GridX>;
 
-using IdxStepX = IdxStep<GridX>;
-using IdxStepY = IdxStep<GridY>;
-using IdxStepZ = IdxStep<GridZ>;
-using IdxStepXY = IdxStep<GridX, GridY>;
-using IdxStepYX = IdxStep<GridY, GridX>;
-using IdxStepXYZ = IdxStep<GridX, GridY, GridZ>;
-using IdxStepXZY = IdxStep<GridX, GridZ, GridY>;
-using IdxStepZXY = IdxStep<GridZ, GridX, GridY>;
-using IdxStepZYX = IdxStep<GridZ, GridY, GridX>;
+using VectX = IdxStep<GridX>;
+using VectY = IdxStep<GridY>;
+using VectZ = IdxStep<GridZ>;
+using VectXY = IdxStep<GridX, GridY>;
+using VectYX = IdxStep<GridY, GridX>;
+using VectXYZ = IdxStep<GridX, GridY, GridZ>;
+using VectXZY = IdxStep<GridX, GridZ, GridY>;
+using VectZXY = IdxStep<GridZ, GridX, GridY>;
+using VectZYX = IdxStep<GridZ, GridY, GridX>;
 
 using IdxRangeX = IdxRange<GridX>;
 using IdxRangeY = IdxRange<GridY>;
@@ -89,9 +89,9 @@ KOKKOS_FUNCTION typename Grid1D::continuous_element_type get_coordinate(Idx<Grid
 TEST(LayoutTransposition, Transpose2D_Host)
 {
     IdxXY start_idx_range_origin(0, 0);
-    IdxStepXY start_idx_range_size(10, 10);
+    VectXY start_idx_range_size(10, 10);
     IdxYX end_idx_range_origin(0, 0);
-    IdxStepYX end_idx_range_size(10, 10);
+    VectYX end_idx_range_size(10, 10);
     IdxRangeXY start_idx_range(start_idx_range_origin, start_idx_range_size);
     IdxRangeYX end_idx_range(end_idx_range_origin, end_idx_range_size);
 
@@ -122,9 +122,9 @@ TEST(LayoutTransposition, Transpose2D_Host)
 static void TestTranspose2D_Device()
 {
     IdxXY start_idx_range_origin(0, 0);
-    IdxStepXY start_idx_range_size(10, 10);
+    VectXY start_idx_range_size(10, 10);
     IdxYX end_idx_range_origin(0, 0);
-    IdxStepYX end_idx_range_size(10, 10);
+    VectYX end_idx_range_size(10, 10);
     IdxRangeXY start_idx_range(start_idx_range_origin, start_idx_range_size);
     IdxRangeYX end_idx_range(end_idx_range_origin, end_idx_range_size);
 
@@ -163,9 +163,9 @@ TEST(LayoutTransposition, Transpose2D_Device)
 TEST(LayoutTransposition, BadTranspose2D)
 {
     IdxXY start_idx_range_origin(0, 0);
-    IdxStepXY start_idx_range_size(10, 10);
+    VectXY start_idx_range_size(10, 10);
     IdxYX end_idx_range_origin(0, 0);
-    IdxStepYX end_idx_range_size(10, 5);
+    VectYX end_idx_range_size(10, 5);
     IdxRangeXY start_idx_range(start_idx_range_origin, start_idx_range_size);
     IdxRangeYX end_idx_range(end_idx_range_origin, end_idx_range_size);
 
@@ -194,9 +194,9 @@ TEST(LayoutTransposition, BadTranspose2D)
 TEST(LayoutTransposition, BatchedTranspose2D)
 {
     IdxXYZ start_idx_range_origin(0, 0, 0);
-    IdxStepXYZ start_idx_range_size(10, 10, 10);
+    VectXYZ start_idx_range_size(10, 10, 10);
     IdxXZY end_idx_range_origin(0, 0, 0);
-    IdxStepXZY end_idx_range_size(10, 10, 10);
+    VectXZY end_idx_range_size(10, 10, 10);
     IdxRangeXYZ start_idx_range(start_idx_range_origin, start_idx_range_size);
     IdxRangeXZY end_idx_range(end_idx_range_origin, end_idx_range_size);
 
@@ -229,9 +229,9 @@ TEST(LayoutTransposition, BatchedTranspose2D)
 TEST(LayoutTransposition, Permutation)
 {
     IdxXYZ start_idx_range_origin(0, 0, 0);
-    IdxStepXYZ start_idx_range_size(10, 10, 10);
+    VectXYZ start_idx_range_size(10, 10, 10);
     IdxZXY end_idx_range_origin(0, 0, 0);
-    IdxStepZXY end_idx_range_size(10, 10, 10);
+    VectZXY end_idx_range_size(10, 10, 10);
     IdxRangeXYZ start_idx_range(start_idx_range_origin, start_idx_range_size);
     IdxRangeZXY end_idx_range(end_idx_range_origin, end_idx_range_size);
 
@@ -264,9 +264,9 @@ TEST(LayoutTransposition, Permutation)
 TEST(LayoutTransposition, Transpose3D)
 {
     IdxXYZ start_idx_range_origin(0, 0, 0);
-    IdxStepXYZ start_idx_range_size(10, 10, 10);
+    VectXYZ start_idx_range_size(10, 10, 10);
     IdxZYX end_idx_range_origin(0, 0, 0);
-    IdxStepZYX end_idx_range_size(10, 10, 10);
+    VectZYX end_idx_range_size(10, 10, 10);
     IdxRangeXYZ start_idx_range(start_idx_range_origin, start_idx_range_size);
     IdxRangeZYX end_idx_range(end_idx_range_origin, end_idx_range_size);
 

@@ -9,8 +9,8 @@
  * It inherits from IAdvectionV and can be used as an advection operator but does not
  * actually modify the distribution function. This can be useful for debugging purposes.
  */
-template <class IdxRangeFdistribu, class IdxRangeSpatial>
-class NullAdvectionVelocity : public IAdvectionV<IdxRangeFdistribu, IdxRangeSpatial>
+template <class FdistribuIdxRange, class SpatialIdxRange>
+class NullAdvectionVelocity : public IAdvectionV<FdistribuIdxRange, SpatialIdxRange>
 {
 public:
     NullAdvectionVelocity() = default;
@@ -26,9 +26,9 @@ public:
      *
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
-    DField<IdxRangeFdistribu> operator()(
-            DField<IdxRangeFdistribu> allfdistribu,
-            [[maybe_unused]] DConstField<IdxRangeSpatial> electric_field,
+    Field<double, FdistribuIdxRange> operator()(
+            Field<double, FdistribuIdxRange> allfdistribu,
+            [[maybe_unused]] Field<const double, SpatialIdxRange> electric_field,
             [[maybe_unused]] double dt) const override
     {
         return allfdistribu;

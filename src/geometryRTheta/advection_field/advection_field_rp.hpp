@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 
@@ -148,7 +147,7 @@ public:
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
-        IdxRangeBSRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
+        BSIdxRangeRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
         Spline2D electrostatic_potential_coef(dom_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
@@ -364,7 +363,7 @@ public:
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
-        IdxRangeBSRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
+        BSIdxRangeRTheta const dom_bsplinesRTheta = get_spline_idx_range(builder);
         Spline2D electrostatic_potential_coef(dom_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 

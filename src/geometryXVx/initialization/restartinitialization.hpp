@@ -4,9 +4,10 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include <geometry.hpp>
+#include <species_info.hpp>
+
 #include "iinitialization.hpp"
-#include "species_info.hpp"
 
 /**
  * @brief A class that initializes the distribution function from a previous simulation.

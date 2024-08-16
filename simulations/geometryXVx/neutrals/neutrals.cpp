@@ -136,7 +136,8 @@ int main(int argc, char** argv)
                 (isp - dom_fluidsp.front()).value());
         ddc::parallel_fill(moments_init_host[isp], PCpp_double(conf_nisp, ".density_eq"));
     }
-    ConstantFluidInitialization fluid_init(get_const_field(moments_init_host));
+    auto moments_init = ddc::create_mirror_and_copy(get_field(moments_init_host));
+    ConstantFluidInitialization fluid_init(get_const_field(moments_init));
     fluid_init(neutrals);
 
     // --> Algorithm info

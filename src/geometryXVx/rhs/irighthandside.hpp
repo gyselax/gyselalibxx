@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include <geometry.hpp>
 
 /**
  * @brief An enum class representing the type of a source.

@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 
+#include <species_info.hpp>
+
 #include "ratecomputation.hpp"
 #include "recombination.hpp"
-#include "species_info.hpp"
 
 RecombinationRate::RecombinationRate(double const norm_coeff_rate)
     : m_slope_coefficient("slope_coefficient")

@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "geometry.hpp"
-#include "quadrature.hpp"
+#include <geometry.hpp>
+#include <quadrature.hpp>
 
 /**
  * @brief A class that computes fluid moments of the distribution function.

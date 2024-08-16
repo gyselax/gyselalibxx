@@ -1,9 +1,10 @@
 #include <ddc/ddc.hpp>
 
+#include <rk2.hpp>
+#include <species_info.hpp>
+#include <trapezoid_quadrature.hpp>
+
 #include "kinetic_fluid_coupling_source.hpp"
-#include "rk2.hpp"
-#include "species_info.hpp"
-#include "trapezoid_quadrature.hpp"
 
 KineticFluidCouplingSource::KineticFluidCouplingSource(
         double const density_coupling_coeff,
@@ -134,7 +135,7 @@ void KineticFluidCouplingSource::operator()(
     DFieldSpX kinsp_velocity = get_field(kinsp_velocity_alloc);
     DFieldSpX kinsp_temperature = get_field(kinsp_temperature_alloc);
 
-    DConstFieldVx quadrature_coeffs = get_const_field(m_quadrature_coeffs);
+    DConstFieldVx quadrature_coeffs = get_field(m_quadrature_coeffs);
 
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), kinsp_density, 0.);
     ddc::parallel_for_each(
