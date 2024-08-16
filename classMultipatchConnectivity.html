@@ -140,6 +140,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad753daab879bb2cdfe04c25c05fc394c"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#ad753daab879bb2cdfe04c25c05fc394c">get_all_idx_ranges_along_direction</a> (std::tuple&lt; IdxRanges... &gt; all_idx_ranges)</td></tr>
 <tr class="memdesc:ad753daab879bb2cdfe04c25c05fc394c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid.  <a href="classMultipatchConnectivity.html#ad753daab879bb2cdfe04c25c05fc394c">More...</a><br /></td></tr>
 <tr class="separator:ad753daab879bb2cdfe04c25c05fc394c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2078dc56dde3bf073f16158404c1735"><td class="memTemplParams" colspan="2">template&lt;class Grid1D , template&lt; typename P &gt; typename T, class... Patches&gt; </td></tr>
+<tr class="memitem:aa2078dc56dde3bf073f16158404c1735"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#aa2078dc56dde3bf073f16158404c1735">get_all_idx_ranges_along_direction</a> (<a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches... &gt; all_idx_ranges)</td></tr>
+<tr class="memdesc:aa2078dc56dde3bf073f16158404c1735"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid.  <a href="classMultipatchConnectivity.html#aa2078dc56dde3bf073f16158404c1735">More...</a><br /></td></tr>
+<tr class="separator:aa2078dc56dde3bf073f16158404c1735"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class... Interfaces&gt;<br />
@@ -207,7 +211,7 @@ template&lt;class QueryPatch &gt; </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad753daab879bb2cdfe04c25c05fc394c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad753daab879bb2cdfe04c25c05fc394c">&#9670;&nbsp;</a></span>get_all_idx_ranges_along_direction()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad753daab879bb2cdfe04c25c05fc394c">&#9670;&nbsp;</a></span>get_all_idx_ranges_along_direction() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,6 +248,51 @@ template&lt;class Grid1D , class... IdxRanges&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">all_idx_ranges</td><td>A tuple containing all available index ranges.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A tuple of index ranges along the line of interest. </dd></dl>
+
+</div>
+</div>
+<a id="aa2078dc56dde3bf073f16158404c1735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2078dc56dde3bf073f16158404c1735">&#9670;&nbsp;</a></span>get_all_idx_ranges_along_direction() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... Interfaces&gt; </div>
+<div class="memtemplate">
+template&lt;class Grid1D , template&lt; typename P &gt; typename T, class... Patches&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::get_all_idx_ranges_along_direction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches... &gt;&#160;</td>
+          <td class="paramname"><em>all_idx_ranges</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Grid1D</td><td>The grid indicating the direction of interest. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">all_idx_ranges</td><td>A <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> containing all available index ranges.</td></tr>
   </table>
   </dd>
 </dl>

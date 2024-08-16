@@ -1,5 +1,13 @@
 var NAVTREEINDEX7 =
 {
+"structBSplinesVpar.html":[14,32],
+"structBSplinesVx.html":[14,33],
+"structBSplinesVy.html":[14,34],
+"structBSplinesX.html":[14,35],
+"structBSplinesY.html":[14,36],
+"structCollisionsIntra_1_1GhostedVx.html":[14,49,0],
+"structCollisionsIntra_1_1GhostedVxStaggered.html":[14,49,1],
+"structDimX__pC.html":[14,67],
 "structDimY__pC.html":[14,68],
 "structEdge.html":[14,71],
 "structEdge.html#a01bafe4f74a4d717a45f57c4f7e023a9":[14,71,0],

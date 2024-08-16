@@ -105,143 +105,149 @@ $(document).ready(function(){initNavTree('docs_DDC_in_gyselalibxx.html',''); ini
 <div class="contents">
 <div class="textblock"><p><a href="https://github.com/Maison-de-la-Simulation/ddc">DDC</a> is a library which aims to provide types which represent mathematical/physical concepts. Representing these concepts with types allows the compiler to enforce the mathematical validity of expressions.</p>
 <p>The DDC library is based on templates. The template parameters are based on physical dimensions.</p>
-<p>When using DDC the first step is therefore to create structures representing each of the physical dimensions, e.g. RDimX. These objects should only contain one attribute, a static constexpr boolean called PERIODIC which indicates whether the dimension is periodic or not. The DDC types are then parametrised by this structure. The "R" in the name of the dimension stands for "real", it indicates that the dimension is in real space and is continuous.</p>
+<p>When using DDC the first step is therefore to create structures representing each of the physical dimensions, e.g. <code><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></code>. These objects should only contain one attribute, a static constexpr boolean called <code>PERIODIC</code> which indicates whether the dimension is periodic or not. The DDC types are then parametrised by this structure. The dimension is in real space and is continuous.</p>
 <p>The following sections describe some of the DDC types used in Gyselalibxx.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Contents"></a>
 Contents</h1>
 <ul>
-<li><a href="#docs_DDC_in_gyselalibxx__Coordinate">Coordinate</a></li>
-<li><a href="#docs_DDC_in_gyselalibxx__Domain_and_associated_concepts">Domain and associated concepts</a><ul>
-<li><a href="#docs_DDC_in_gyselalibxx__PointSampling">PointSampling</a></li>
-<li><a href="#docs_DDC_in_gyselalibxx__DiscreteElement">DiscreteElement</a></li>
-<li><a href="#docs_DDC_in_gyselalibxx__DiscreteVector">DiscreteVector</a></li>
-<li><a href="#docs_DDC_in_gyselalibxx__DiscreteDomain">DiscreteDomain</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Coordinates">Coordinates</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts">Indexing and associated concepts</a><ul>
+<li><a href="#docs_DDC_in_gyselalibxx__Grid">Grid</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Index">Index</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Index_Step">Index Step</a></li>
+<li><a href="#docs_DDC_in_gyselalibxx__Index_Range">Index Range</a></li>
 </ul>
 </li>
 <li><a href="#docs_DDC_in_gyselalibxx__Data_Storage">Data Storage</a></li>
 <li><a href="#docs_DDC_in_gyselalibxx__Example">Example</a></li>
 <li><a href="#docs_DDC_in_gyselalibxx__Pitfalls">Pitfalls</a></li>
 </ul>
-<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Coordinate"></a>
-Coordinate</h1>
-<p>A <code>ddc::Coordinate</code> is one of the only DDC types which represents a continuous data type. This means that it can take any value that can be represented by a double. It represents the position of a coordinate in the vector space.</p>
-<p>Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a \((r,\theta)\) slice should have the type <code>ddc::Coordinate&lt;RDimR, RDimP&gt;</code>, where <code>RDimR</code> represents the radial dimension \(r\), and <code>RDimP</code> represents the poloidal dimension \(\theta\).</p>
-<p>If the value of the coordinate needs to be used in a mathematical expression, the scalar (<code>double</code>) quantity stored in one of the dimensions of a coordinate can be extracted using <code>ddc::get&lt;RDimOfInterest&gt;(my_coord)</code>.</p>
-<p>It is also possible to extract a coordinate on a subset of the original dimensions using <code>ddc::select&lt;RDimOfInterest&gt;(my_coord)</code>. For example if we want to get the position of an object on a radial slice \((r,\theta)\), but we are given the coordinate in the full vector space \((r, \theta, \varphi, v_\parallel, \mu)\) then we can do: </p><div class="fragment"><div class="line">ddc::Coordinate&lt;RDimR, RDimP, RDimT, RDimV, RDimM&gt; full_coord(...);</div>
-<div class="line">ddc::Coordinate&lt;RDimR, RDimP&gt; slice_coord = ddc::select&lt;RDimR, RDimP&gt;(full_coord);</div>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Coordinates"></a>
+Coordinates</h1>
+<p>A <code>Coord</code> in Gysela is an alias to the DDC type <code>ddc::Coordinate</code>. It is one of the only DDC types which represents a continuous data type. This means that it can take any value that can be represented by a double. It represents the position of a coordinate in the vector space.</p>
+<p>Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a \((r,\theta)\) slice should have the type <code>Coord&lt;<a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a>, <a class="el" href="structTheta.html" title="Define periodic real Theta dimension.">Theta</a>&gt;</code>, where <code><a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a></code> represents the radial dimension \(r\), and <code><a class="el" href="structTheta.html" title="Define periodic real Theta dimension.">Theta</a></code> represents the poloidal dimension \(\theta\).</p>
+<p>If the value of the coordinate needs to be used in a mathematical expression, the scalar (<code>double</code>) quantity stored in one of the dimensions of a coordinate can be extracted using <code>ddc::get&lt;DimOfInterest&gt;(my_coord)</code>.</p>
+<p>It is also possible to extract a coordinate on a subset of the original dimensions using <code>ddc::select&lt;DimOfInterest&gt;(my_coord)</code>. For example if we want to get the position of an object on a radial slice \((r,\theta)\), but we are given the coordinate in the full vector space \((r, \theta, \varphi, v_\parallel, \mu)\) then we can do: </p><div class="fragment"><div class="line">Coord&lt;R, Theta, Phi, Vpar, Mu&gt; full_coord(...);</div>
+<div class="line">Coord&lt;R, Theta&gt; slice_coord = ddc::select&lt;R, Theta&gt;(full_coord);</div>
 </div><!-- fragment --><p>Coordinates can be combined using operators. For example, let us consider three vectors \(P\), \(Q\), and \(R\) defined on a cartesian space \((x,y)\):</p>
 <p><img src="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/docs/images/Coordinate_operations.jpg" alt="Vector Image" class="inline"/></p>
-<p>The vector \(Q\) can be written as \(Q=R-P\). Similarly in the code, we would have: </p><div class="fragment"><div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; P(5.0, 2.0);</div>
-<div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; <a class="code" href="structR.html">R</a>(7.0, 6.0);</div>
-<div class="line">ddc::Coordinate&lt;RDimX, RDimY&gt; Q = <a class="code" href="structR.html">R</a> - P;</div>
+<p>The vector \(Q\) can be written as \(Q=R-P\). Similarly in the code, we would have: </p><div class="fragment"><div class="line">Coord&lt;X, Y&gt; P(5.0, 2.0);</div>
+<div class="line">Coord&lt;X, Y&gt; <a class="code" href="structR.html">R</a>(7.0, 6.0);</div>
+<div class="line">Coord&lt;X, Y&gt; Q = <a class="code" href="structR.html">R</a> - P;</div>
 <div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:31</div></div>
-</div><!-- fragment --><p>The <code>Coordinate</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
-<p>In Gyselalibxx the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>ddc::Coordinate&lt;RDimX&gt;</code> more succinctly.</p>
-<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Domain_and_associated_concepts"></a>
-Domain and associated concepts</h1>
-<p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain \([0,1)\)). However a simulation evolves on a discrete domain. This means that the value of the function is only known at a discrete set of points. In the case of a function \(f(x)\rightarrow y \in \mathbb{R}\) with \(x \in [0,1)\), we would usually discretise the domain \([0,1)\) as follows: </p><p class="formulaDsp">
+</div><!-- fragment --><p>The <code>Coord</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
+<p>In Gyselalibxx the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>Coord&lt;<a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>&gt;</code> more succinctly.</p>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts"></a>
+Indexing and associated concepts</h1>
+<p>The physical problems that our simulations describe are defined on a domain. The domain on which the problem is defined is continuous (e.g. a radial domain \([0,1)\)). However a simulation evolves on a grid. This means that the value of the function is only known at a discrete set of points. In the case of a function \(f(x)\rightarrow y \in \mathbb{R}\) with \(x \in [0,1)\), we would usually discretise the domain \([0,1)\) as follows: </p><p class="formulaDsp">
 \[ x_0, x_1, ..., x_i, ..., x_N \]
 </p>
-<p>DDC provides multiple types to represent the concepts required to interact with such a domain.</p>
-<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__PointSampling"></a>
-PointSampling</h1>
-<p>The points \(\{x_0, ..., x_N\}\) are a point sampling. This sampling can either be uniform or non-uniform. Accordingly DDC provides the 2 classes:</p><ul>
-<li>UniformPointSampling</li>
-<li>NonUniformPointSampling</li>
+<p>DDC provides multiple types to represent the concepts required to index elements of arrays defined on this grid or to get the coordinates of the grid.</p>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Grid"></a>
+Grid</h1>
+<p>The points \(\{x_0, ..., x_N\}\) form the grid on which the simulation evolves. This sampling can either be uniform or non-uniform. Accordingly DDC provides 2 classes for which Gysela provides the following type aliases:</p><ul>
+<li><code>UniformGridBase</code> (the type alias of <code>ddc::UniformPointSampling</code>)</li>
+<li><code>NonUniformGridBase</code> (the type alias of <code>NonUniformPointSampling</code>)</li>
 </ul>
-<p>A uniform point sampling is a collection of points which are equidistant, it is therefore defined with an origin and a step. In contrast the points found in a non-uniform point sampling are arbitrary. This kind of sampling must therefore be initialised from a list of points.</p>
-<p>In Gyselalibxx the alias <code>IDimX</code> is usually defined in <code>geometry.hpp</code> to describe a point sampling along the dimension <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>. The "I" in <code>IDimX</code> stands for "Interpolation". This is because the function is only stored at the interpolation points. The point sampling contains these interpolation points.</p>
-<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteElement"></a>
-DiscreteElement</h1>
-<p>The simplest type to understand is <code>ddc::DiscreteElement</code>. This corresponds to the index of the point in the point sampling. E.g. the point <code>x_i</code> in the point sampling can be indexed using the object <code>ddc::DiscreteElement&lt;IDimX&gt;(i)</code>. A <code>ddc::DiscreteElement</code> is therefore roughly equivalent to an integer. Compared to an integer, it additionally contains information about the physical direction being examined. This allows the compiler to raise errors if typos/copy-paste errors lead to the wrong dimension being used.</p>
-<p>As a discrete concept this class does not take the continuous dimension as a template parameter, rather it takes the discrete point sampling instead.</p>
-<p>In Gyselalibxx the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of a point sampling along the dimension <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>.</p>
-<p>We can also create multi-dimensional indices. E.g. the point <code>(x_i, y_j)</code> can be indexed using the object <code>ddc::DiscreteElement&lt;IDimX, IDimY&gt;(i, j)</code></p>
-<p>It is also possible to extract an index on a subset of the original dimensions using <code>ddc::select&lt;IDimOfInterest&gt;(my_nd_index)</code>.</p>
-<p>If a point sampling has been initialised using the function <code>ddc::init_discrete_space</code>, a <code>ddc::DiscreteElement</code> defined on that sampling can be used to find the coordinates of the points in the point sampling. This is done using the function <code>ddc::coordinate</code>.</p>
-<p>E.g: </p><div class="fragment"><div class="line">ddc::init_discrete_space&lt;ddc::UniformPointSampling&lt;RDimR&gt;&gt;(0.0, 0.1);</div>
-<div class="line">ddc::DiscreteElement&lt;IDimR&gt; i(0); <span class="comment">// The first point in the point sampling</span></div>
+<p>A uniform point sampling is a collection of points which are equidistant, it is therefore defined with an origin and a step or distance between consecutive points. In contrast the points found in a non-uniform point sampling are arbitrary. This kind of sampling must therefore be initialised from a list of points.</p>
+<p>It is possible to have multiple grids defined on the same dimension (e.g. the grid points used for a Gauss-Legendre quadrature, the grid points on which the simulation evolves, the grid points which split a spline into polynomials, etc). In order for each grid that is defined to have a different type DDC requires that we define structures which inherit from <code>UniformGridBase</code> and <code>NonUniformGridBase</code> (these structures are then the base structures from which we inherit). In Gyselalibxx such structures have the keyword <code>Grid</code> in the name (e.g. <code><a class="el" href="structGridX.html">GridX</a></code>) and are usually defined in <code>geometry.hpp</code>.</p>
+<p>E.g.: </p><div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code" href="structGridX.html">GridX</a> : UniformGridBase&lt;X&gt;</div>
+<div class="line">{</div>
+<div class="line">};</div>
+<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:89</div></div>
+</div><!-- fragment --><p>Although this seems like a useful type, you should not directly create instances of this class in the code. Instead you should call <code>init_discrete_space</code> and access the points using an <code>Index</code>. For more details see the section about <code>Index</code>.</p>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Index"></a>
+Index</h1>
+<p>In order to interact with most types in Gyselalibxx we need to use an <code>Idx</code> (a type alias for <code>ddc::DiscreteElement</code>). This type describes an index of a point in the grid. E.g. the point <code>x_i</code> in the grid <code><a class="el" href="structGridX.html">GridX</a></code> can be indexed using the object <code>Idx&lt;<a class="el" href="structGridX.html">GridX</a>&gt;(i)</code>. An <code>Idx</code> is therefore roughly equivalent to an integer. Compared to an integer, it additionally contains information about the physical direction being examined. This allows the compiler to raise errors if typos/copy-paste errors lead to the wrong dimension being used.</p>
+<p>In Gyselalibxx the alias <code>IndexX</code> is usually defined in <code>geometry.hpp</code> to describe the index of the grid along the dimension <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> on which the distribution function is discretised.</p>
+<p>We can also create multi-dimensional indices. E.g. the point <code>(x_i, y_j)</code> can be indexed using the object <code>Idx&lt;<a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structGridY.html">GridY</a>&gt;(i, j)</code></p>
+<p>It is also possible to extract an index on a subset of the original dimensions using <code>ddc::select&lt;GridOfInterest&gt;(my_nd_index)</code>.</p>
+<p>Once a grid has been initialised using the function <code>ddc::init_discrete_space</code>, an <code>Idx</code> defined on that grid can be used to obtain the coordinates of the points in the grid. This is done using the function <code>ddc::coordinate</code>.</p>
+<p>E.g: </p><div class="fragment"><div class="line">Coord&lt;R&gt; r_min(0.0);</div>
+<div class="line">Coord&lt;R&gt; r_max(1.0);</div>
+<div class="line">IdxStep&lt;R&gt; r_ncells(10);</div>
+<div class="line">ddc::init_discrete_space&lt;GridR&gt;(r_min, r_max, r_ncells);</div>
+<div class="line">Idx&lt;GridR&gt; i(0); <span class="comment">// The first point in the grid</span></div>
 <div class="line">std::cout &lt;&lt; ddc::coordinate(i) &lt;&lt; std::endl;</div>
 </div><!-- fragment --><p> will output: </p><div class="fragment"><div class="line">(0.0)</div>
-</div><!-- fragment --><h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteVector"></a>
-DiscreteVector</h1>
-<p>A <code>ddc::DiscreteVector</code> describes the number of grid points between points in a sampling. E.g. <code>x_3</code> and <code>x_6</code> are separated by <code>ddc::DiscreteVector&lt;IDimX&gt;(3)</code>.</p>
-<p>As a discrete concept this class does not take the continuous dimension as a template parameter, rather it takes the discrete point sampling instead.</p>
-<p>This type is useful when we have the index of a point and we need to get the next point. A <code>ddc::DiscreteVector</code> can be added or subtracted from a <code>ddc::DiscreteElement</code> as long as both objects are templated by the same dimension. Similarly a <code>ddc::DiscreteVector</code> is the result of subtracting 2 <code>ddc::DiscreteElement</code>s.</p>
-<p>E.g: </p><div class="fragment"><div class="line">ddc::DiscreteElement&lt;IDimX&gt; i(4);</div>
-<div class="line">ddc::DiscreteElement&lt;IDimX&gt; j(6);</div>
-<div class="line">ddc::DiscreteVector&lt;IDimX&gt; k = j-i;</div>
+</div><!-- fragment --><h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Index_Step"></a>
+Index Step</h1>
+<p>An <code>IdxStep</code> (type alias for <code>ddc::DiscreteVector</code>) describes the number of steps to get from one point in a grid to another. E.g. <code>x_3</code> and <code>x_6</code> are separated by <code>IdxStep&lt;<a class="el" href="structGridX.html">GridX</a>&gt;(3)</code>.</p>
+<p>This type is useful when we have the index of a point and we need to get the next point. An <code>IdxStep</code> can be added or subtracted from an <code>Idx</code> as long as both objects are templated by the same dimension. Similarly an <code>IdxStep</code> is the result of subtracting 2 <code>Idx</code>s.</p>
+<p>E.g: </p><div class="fragment"><div class="line">Idx&lt;GridX&gt; i(4);</div>
+<div class="line">Idx&lt;GridX&gt; j(6);</div>
+<div class="line">IdxStep&lt;GridX&gt; k = j-i;</div>
 <div class="line">i += k;</div>
-</div><!-- fragment --><p>In Gyselalibxx the alias <code>IVectX</code> is usually defined in <code>geometry.hpp</code> to describe the vector from one element of a point sampling along the dimension <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> to another.</p>
-<p>As with <code>ddc::DiscreteElement</code>s, a <code>ddc::DiscreteVector</code> can be multi-dimensional and lower dimension <code>ddc::DiscreteVector</code> objects can be extracted using <code>ddc::select&lt;IDimOfInterest&gt;(my_nd_vector)</code>.</p>
-<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__DiscreteDomain"></a>
-DiscreteDomain</h1>
-<p>The last concept necessary to define a discrete domain is the concept of sub-domains. The class <code>ddc::DiscreteDomain</code> is designed to describe a sub-domain (although it can of course hold the whole domain). It is templated over each of the discrete point samplings used to describe the discrete domain on which the simulation evolves.</p>
-<p>Each subdomain is described by:</p><ul>
-<li>An origin : This is the <code>ddc::DiscreteElement</code> which indicates the first point in the domain.</li>
-<li>A size : This is a <code>ddc::DiscreteVector</code> indicating the number of elements in each dimension.</li>
+</div><!-- fragment --><p>In Gyselalibxx the alias <code>IdxStepX</code> is usually defined in <code>geometry.hpp</code> to describe the step from one element of a grid along the dimension <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> to another.</p>
+<p>As with <code>Idx</code>s, an <code>IdxStep</code> can be multi-dimensional and lower dimension <code>IdxStep</code> objects can be extracted using <code>ddc::select&lt;GridOfInterest&gt;(my_nd_vector)</code>.</p>
+<p>For a more concrete example of how this type is useful see <a href="#docs_DDC_in_gyselalibxx__Example">Example</a>.</p>
+<h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Index_Range"></a>
+Index Range</h1>
+<p>The last concept necessary to define the grid on which a simulation evolves is the concept of index ranges. The class <code>IdxRange</code> is designed to describe the indices on which a field is defined. This may be all or only a subset of the indices comprising the grid.</p>
+<p>Each index range is described by:</p><ul>
+<li>An origin : This is the <code>Idx</code> which indicates the first point in the domain.</li>
+<li>A size : This is a <code>IdxStep</code> indicating the number of elements in each dimension.</li>
 </ul>
-<p>For example if we consider the 2D domain: \([x_0, ..., x_N] \times [y_0, ... y_M]\), the domain would be described as: </p><div class="fragment"><div class="line">ddc::DiscreteElement&lt;IDimX, IDimY&gt; origin(0, 0);</div>
-<div class="line">ddc::DiscreteVector&lt;IDimX, IDimY&gt; size(N, M);</div>
-<div class="line">ddc::DiscreteDomain&lt;IDimX, IDimY&gt; domain(origin, size);</div>
-</div><!-- fragment --><p>Similarly the sub-domain: \([x_i, ..., x_j] \times [y_k, ... y_l]\) would be described as: </p><div class="fragment"><div class="line">ddc::DiscreteElement&lt;IDimX&gt; i_index(i);</div>
-<div class="line">ddc::DiscreteElement&lt;IDimX&gt; j_index(j);</div>
-<div class="line">ddc::DiscreteElement&lt;IDimY&gt; k_index(k);</div>
-<div class="line">ddc::DiscreteElement&lt;IDimY&gt; l_index(l);</div>
-<div class="line">ddc::DiscreteElement&lt;IDimX, IDimY&gt; origin(i_index, k_index);</div>
-<div class="line">ddc::DiscreteVector&lt;IDimX, IDimY&gt; size((j_index-i_index), (l_index-k_index));</div>
-<div class="line">ddc::DiscreteDomain&lt;IDimX, IDimY&gt; domain(origin, size);</div>
-</div><!-- fragment --><p>When working with domains we do not usually know if we have access to all of a domain or simply a subdomain. It is therefore important to use the domain functions to traverse the domain rather than initialising elements manually as we don't know the index of the first element of a <code>ddc::DiscreteDomain</code> at compile time.</p>
-<p>There are multiple functions available for traversing a domain. Most of the time we will traverse the entire domain. This can be done simply as <code>ddc::DiscreteDomain</code> implements the functions <code>begin()</code> and <code>end()</code>. These functions are called automatically using the modern C++ syntax for a for element in list, or using the <code>ddc::for_each</code> function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (ddc::DiscreteElement&lt;IDimX&gt; index : domain) {</div>
+<p>For example if we consider the 2D grid: \([x_0, ..., x_N] \times [y_0, ... y_M]\), the index range would be described as: </p><div class="fragment"><div class="line">Idx&lt;GridX, GridY&gt; origin(0, 0);</div>
+<div class="line">IdxStep&lt;GridX, GridY&gt; size(N, M);</div>
+<div class="line">IdxRange&lt;GridX, GridY&gt; idx_range(origin, size);</div>
+</div><!-- fragment --><p>Similarly the section of the grid: \([x_i, ..., x_j] \times [y_k, ... y_l]\) would be described as: </p><div class="fragment"><div class="line">Idx&lt;GridX&gt; i_index(i);</div>
+<div class="line">Idx&lt;GridX&gt; j_index(j);</div>
+<div class="line">Idx&lt;GridY&gt; k_index(k);</div>
+<div class="line">Idx&lt;GridY&gt; l_index(l);</div>
+<div class="line">Idx&lt;GridX, GridY&gt; origin(i_index, k_index);</div>
+<div class="line">IdxStep&lt;GridX, GridY&gt; size((j_index-i_index), (l_index-k_index));</div>
+<div class="line">IdxRange&lt;GridX, GridY&gt; idx_range(origin, size);</div>
+</div><!-- fragment --><p>When working with index ranges we do not usually know if we have access to all of the grid or just a subset. It is therefore important to use the <code>get_index_range</code> function to traverse fields rather than initialising elements manually as we don't know the index of the first element of a <code>IdxRange</code> at compile time.</p>
+<p>There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as <code>IdxRange</code> implements the functions <code>begin()</code> and <code>end()</code>. These functions are called automatically using the modern C++ syntax for a for element in list, or using the <code>ddc::for_each</code> function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (Idx&lt;GridX&gt; index : idx_range) {</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> or: </p><div class="fragment"><div class="line">ddc::for_each(domain, [&amp;](ddc::DiscreteElement&lt;IDimX&gt; index) {</div>
+</div><!-- fragment --><p> or: </p><div class="fragment"><div class="line">ddc::for_each(idx_range, [&amp;](Idx&lt;GridX&gt; index) {</div>
 <div class="line">});</div>
 </div><!-- fragment --><p> In the case of a <code>ddc::for_each</code> the second argument is a lambda function. The <code>[&amp;]</code> ensures that any variable defined outside the loop are captured by reference so they can be used inside the lamda function.</p>
-<p>It is also common to need to iterate over a sub-domain. Sub-domains can be created using the syntax described above, however <code>ddc::DiscreteDomain</code> also contains several helper functions which are designed to facilitate the creation of subdomains:</p><ul>
-<li><code>take_first(ddc::DiscreteVector&lt;..&gt; n)</code> : Returns a sub-domain, restricted to the first n elements.</li>
-<li><code>take_last(ddc::DiscreteVector&lt;..&gt; n)</code> : Returns a sub-domain, restricted to the last n elements.</li>
-<li><code>remove_first(ddc::DiscreteVector&lt;..&gt; n)</code> : Returns a sub-domain, containing all elements except the first n elements.</li>
-<li><code>remove_last(ddc::DiscreteVector&lt;..&gt; n)</code> : Returns a sub-domain, containing all elements except the last n elements.</li>
-<li><code>remove(ddc::DiscreteVector&lt;..&gt; n_first, ddc::DiscreteVector&lt;..&gt; n_last)</code> : Returns a sub-domain, containing all elements except the first n_first elements and the last n_last elements.</li>
+<p>It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however <code>IdxRange</code> also contains several helper functions which are designed to facilitate the creation of these sets:</p><ul>
+<li><code>take_first(IdxStep&lt;..&gt; n)</code> : Returns an index range containing only the first n indices of the original range.</li>
+<li><code>take_last(IdxStep&lt;..&gt; n)</code> : Returns an index range containing only the last n indices of the original range.</li>
+<li><code>remove_first(IdxStep&lt;..&gt; n)</code> : Returns an index range containing all but the first n indicie of the original range.</li>
+<li><code>remove_last(IdxStep&lt;..&gt; n)</code> : Returns an index range containing all but the last n indices of the original range.</li>
+<li><code>remove(IdxStep&lt;..&gt; n_first, IdxStep&lt;..&gt; n_last)</code> : Returns an index range containing all indices of the original range except the first n_first indices and the last n_last indices.</li>
 </ul>
-<p>It is also possible to extract a sub-domain on a subset of the original dimensions using <code>ddc::select&lt;IDimOfInterest&gt;(my_nd_domain)</code>.</p>
-<p>Finally it may not be possible to express the elements you want to iterate over as a domain. This is notably the case if you want to iterate over every j-th element. In this case it is necessary to fall back on <code>ddc::DiscreteDomainIterator</code>. The syntax in this case is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (ddc::DiscreteDomainIterator&lt;IDimX&gt; it=domain.begin(); it &lt; domain.end(); it += j) {</div>
-<div class="line">    ddc::DiscreteElement&lt;IDimX&gt; index = *it;</div>
+<p>It is also possible to extract a lower-dimensional index range from an ND index range using <code>ddc::select&lt;GridOfInterest&gt;(my_nd_idx_range)</code>.</p>
+<p>Finally it may not be possible to express the elements you want to iterate over as an index range. This is notably the case if you want to iterate over every j-th element. In this case it is necessary to fall back on <code>IdxRangeIterator</code>. The syntax in this case is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (IdxRangeIterator&lt;GridX&gt; it=idx_range.begin(); it &lt; idx_range.end(); it += j) {</div>
+<div class="line">    Idx&lt;GridX&gt; index = *it;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>In addition to the iteration functionalities, <code>ddc::DiscreteDomain</code> also has other useful functions. The following is a non-exhaustive list of useful functions:</p><ul>
-<li><code>front()</code> : Returns the first <code>ddc::DiscreteElement</code> in the domain.</li>
-<li><code>back()</code> : Returns the last <code>ddc::DiscreteElement</code> in the domain.</li>
+</div><!-- fragment --><p>In addition to the iteration functionalities, <code>IdxRange</code> also has other useful functions. The following is a non-exhaustive list of useful functions:</p><ul>
+<li><code>front()</code> : Returns the first <code>Idx</code> in the domain.</li>
+<li><code>back()</code> : Returns the last <code>Idx</code> in the domain.</li>
 <li><code>size()</code> : Returns the total number of points in the domain (the product of the number of points in each dimension).</li>
-<li><code>extents()</code> : Returns the number of points in each dimension stored in a <code>ddc::DiscreteVector</code>.</li>
+<li><code>extents()</code> : Returns the number of points in each dimension stored in an <code>IdxStep</code>.</li>
 </ul>
-<p>In Gyselalibxx the alias <code>IDomainX</code> is usually defined in <code>geometry.hpp</code> to describe the domain or sub-domain containing points from the point sampling <code>IDimX</code>.</p>
+<p>In Gyselalibxx the alias <code>IdxRangeX</code> is usually defined in <code>geometry.hpp</code> to describe the index range containing points from <code><a class="el" href="structGridX.html">GridX</a></code>.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Data_Storage"></a>
 Data Storage</h1>
-<p>DDC provides the type <code>ddc::Chunk</code> to store data. This type is parametrised by the underlying data type (e.g. <code>double</code>), and the <code>ddc::DiscreteDomain</code> on which the values are defined.</p>
-<p>In order to initialise the data storage to the correct size, a <code>ddc::Chunk</code> is initailised by providing the <code>ddc::DiscreteDomain</code> on which the values are defined.</p>
-<p>In Gyselalibxx the alias <code>FieldX</code> is usually defined in <code>geometry.hpp</code> to describe a function defined on the domain or sub-domain containing points from the point sampling <code>IDimX</code>. E.g: </p><div class="fragment"><div class="line">FieldXVx&lt;double&gt; distribution_function_2d(dom_x_vx);</div>
-</div><!-- fragment --><p>In Gyselalibxx the functions are almost all defined using real numbers. The additional alias <code>DFieldX</code> is therefore defined to represent a real function defined on the domain or sub-domain containing points from the point sampling <code>IDimX</code>. E.g: </p><div class="fragment"><div class="line">DFieldRPTVM distribution_function_2d(dom_radial_poloidal_toroidal_velocity_mu);</div>
-</div><!-- fragment --><p>A <code>ddc::Chunk</code> is indexed using either multiple 1D <code>ddc::DiscreteElement</code>s, or one ND <code>ddc::DiscreteElement</code>. As the <code>ddc::DiscreteElement</code>s contain information about the dimension on which they act it is not necessary to pass these arguments in a specific order. Thus the following two functions are equivalent: </p><div class="fragment"><div class="line"><span class="keywordtype">double</span> get_element_1(DFieldXVx my_chunk, IndexX i, IndexY j) {</div>
+<p>Data is allocated at the instantiation of a <code>FieldMem</code> (type alias for <code>ddc::Chunk</code>). This type is parametrised by the underlying data type (e.g. <code>double</code>), and the <code>IdxRange</code> on which the values are defined. By default in Gysela memory is allocated on the device (GPU).</p>
+<p>In order to initialise the data storage to the correct size, a <code>FieldMem</code> is initailised by providing the <code>IdxRange</code> on which the values are defined.</p>
+<p>In Gyselalibxx the alias <code>FieldMemX</code> is usually defined in <code>geometry.hpp</code> to describe the memory block for a field defined on the all or part of <code><a class="el" href="structGridX.html">GridX</a></code>.. E.g: </p><div class="fragment"><div class="line">FieldMemXVx&lt;double&gt; distribution_function_2d_alloc(idx_range_x_vx);</div>
+</div><!-- fragment --><p>In Gyselalibxx the functions are almost all defined using real numbers. The additional alias <code>DFieldMemX</code> is therefore defined to represent a real function defined on all or part of <code><a class="el" href="structGridX.html">GridX</a></code>. E.g: </p><div class="fragment"><div class="line">DFieldMemRThetaPhiVparMu distribution_function_2d_alloc(idx_range_radial_poloidal_toroidal_velocity_mu);</div>
+</div><!-- fragment --><p>As instantiating a <code>FieldMem</code> leads to data allocation using this type always has an associated cost. In order to avoid accidental copying DDC is structured such that the only way to copy data from one <code>FieldMem</code> to another is using the function <code>ddc::deepcopy</code>. Using an assignment or initialising from another <code>FieldMem</code> will result in a compiler error.</p>
+<p>To avoid copying data unnecessarily, DDC provides the type <code>Field</code> (type alias for <code>ddc::ChunkSpan</code>). This can be thought of as a reference to a <code>FieldMem</code>. It may at first seem surprising that a new type is required for this as a more typical approach would be to use <code>const&amp;</code>. However when code runs on a GPU a new instance of each variable must be created on the GPU. This is necessary to avoid race conditions and to ensure locality. We do not want all the data in the <code>FieldMem</code> to be copied to/from the GPU every time a kernel is started, so instead we use <code>Field</code> which only copies a pointer to the GPU memory to the new variable instance.</p>
+<p>Unless you need to allocate data, you should always use <code>Field</code> rather than <code>FieldMem</code>. A <code>Field</code> can be obtained from a <code>FieldMem</code> using the constructor of <code>Field</code> or the global function <code>get_field</code>.</p>
+<p>In Gyselalibxx the alias <code>FieldX</code> is usually defined in <code>geometry.hpp</code> to describe a reference to a function defined on the domain or sub-domain containing points from the point sampling <code><a class="el" href="structGridX.html">GridX</a></code>. E.g: </p><div class="fragment"><div class="line">FieldMemXVx&lt;double&gt; distribution_function_2d_alloc(idx_range_x_vx);</div>
+<div class="line">FieldXVx&lt;double&gt; distribution_function_2d(distribution_function_2d_alloc);</div>
+</div><!-- fragment --><p>As for <code>FieldMem</code> an additional alias <code>DFieldX</code> is defined to simplify the notation for doubles.</p>
+<p>Finally we also define the aliases <code>ConstFieldX</code> and <code>DConstFieldX</code> to represent constant versions of <code>FieldX</code> and <code>DFieldX</code>. These objects are used for function arguments when the contents of the array must not be altered. As they are aliases, not new objects, all the same functions that work for <code>Field</code> can also be used for <code>ConstField</code>. A <code>ConstField</code> can be obtained from a field using the function <code>get_const_field</code>.</p>
+<p>:warning: Beware a <code>DConstFieldX</code> is not equivalent to a <code>DFieldX const</code>. The latter indicates only that the field will always be associated with the same <code>FieldMem</code> object. Its contents can still be modified.</p>
+<p>A <code>Field</code> is indexed using either multiple 1D <code>Idx</code>s, or one ND <code>Idx</code>. As the <code>Idx</code>s contain information about the dimension on which they act it is not necessary to pass these arguments in a specific order. Thus the following two functions are equivalent: </p><div class="fragment"><div class="line"><span class="keywordtype">double</span> get_element_1(DFieldXVx my_chunk, IdxX i, IdxY j) {</div>
 <div class="line">    <span class="keywordflow">return</span> my_chunk(i, j);</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">double</span> get_element_2(DFieldXVx my_chunk, IndexX i, IndexY j) {</div>
+<div class="line"><span class="keywordtype">double</span> get_element_2(DFieldXVx my_chunk, IdxX i, IdxY j) {</div>
 <div class="line">    <span class="keywordflow">return</span> my_chunk(j, i);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p> This is particularly useful if we don't know the layout order of the data and will allow us to reorder this data without changing the way we interact with the chunk.</p>
-<p>Copying a <code>ddc::Chunk</code> is potentially costly. In order to avoid accidental copying DDC is structured such that the only way to copy data from one <code>ddc::Chunk</code> to another is using the function <code>ddc::deepcopy</code>. Using an assignment or initialising from another <code>ddc::Chunk</code> will result in a compiler error.</p>
-<p>To avoid copying data unnecessarily, DDC provides the type <code>ddc::ChunkSpan</code>. This can be thought of as a reference to a <code>ddc::Chunk</code>. However it is slightly more complex than this as a <code>ddc::ChunkSpan</code> does not have to reference the entire domain stored in the <code>ddc::Chunk</code>. The <code>[]</code> operator can be passed a <code>ddc::DiscreteDomain</code> to create a <code>ddc::ChunkSpan</code> which only references part of the <code>ddc::Chunk</code>. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a \((r, \theta)\) slice from a distribution function defined in \((r, \theta, \varphi, v_\parallel, \mu)\) we would do the following: </p><div class="fragment"><div class="line">ddc::ChunkSpan&lt;double, ddc::DiscreteDomain&lt;IDimR, IDimP&gt;&gt; get_slice(ddc::Chunk&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;IDimR, IDimP, IDimT, IDimV, IDimM&gt;&gt;&amp; distribution_function, ddc::DiscreteElement&lt;IDimT, IDimV, IDimM&gt; index)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordflow">return</span> distribution_function[index];</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>Unless you need to allocate data, you should always use <code>ddc::ChunkSpan</code> rather than <code>ddc::Chunk</code>.</p>
-<p>In Gyselalibxx the alias <code>SpanX</code> is usually defined in <code>geometry.hpp</code> to describe a reference to a function defined on the domain or sub-domain containing points from the point sampling <code>IDimX</code>. E.g: </p><div class="fragment"><div class="line">FieldXVx&lt;double&gt; distribution_function_2d(dom_x_vx);</div>
-<div class="line">SpanXVx&lt;double&gt; distribution_function_2d_ref(distribution_function_2d);</div>
-</div><!-- fragment --><p>As for <code>ddc::Chunk</code> an additional alias <code>DSpanX</code> is defined to simplify the notation for doubles.</p>
-<p>Finally we also define the aliases <code>ViewX</code> and <code>DViewX</code> to represent constant versions of <code>SpanX</code> and <code>DSpanX</code>. These objects are used for function arguments when the contents of the array must not be altered. As they are aliases, not new objects, all the same functions that work for <code>ddc::ChunkSpan</code> can also be used for <code>ddc::ChunkView</code>. For example, if we wish to get a \((r, \theta)\) constant slice from a distribution function defined in \((r, \theta, \varphi, v_\parallel, \mu)\) we would do the following: </p><div class="fragment"><div class="line">ddc::ChunkView&lt;double, ddc::DiscreteDomain&lt;IDimR, IDimP&gt;&gt; get_slice(ddc::Chunk&lt;<span class="keywordtype">double</span>, ddc::DiscreteDomain&lt;IDimR, IDimP, IDimT, IDimV, IDimM&gt;&gt;&amp; distribution_function, ddc::DiscreteElement&lt;IDimT, IDimV, IDimM&gt; index)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keywordflow">return</span> distribution_function[index];</div>
-<div class="line">}</div>
+<p>Finally a <code>Field</code> also implements a <code>[]</code> operator. A <code>Field</code> does not have to reference the entire memory block stored in the associated <code>FieldMem</code>. The <code>[]</code> operator can be passed an <code>IdxRange</code> to create a <code>Field</code> which only references part of the <code>FieldMem</code>. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a \((r, \theta)\) slice from a distribution function defined in \((r, \theta, \varphi, v_\parallel, \mu)\) we would do the following: </p><div class="fragment"><div class="line">DFieldMem&lt;IdxRange&lt;GridR, GridTheta, GridPhi, GridVpar, GridMu&gt;&gt; distribution_function_alloc(idx_range);</div>
+<div class="line">DField&lt;IdxRange&lt;GridR, GridTheta, GridPhi, GridVpar, GridMu&gt;&gt; distribution_function(distribution_function_alloc);</div>
+<div class="line">Idx&lt;GridPhi, GridVpar, GridMu&gt; index;</div>
+<div class="line">DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; distribution_function_slice = distribution_function[index];</div>
 </div><!-- fragment --><h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Example"></a>
 Example</h1>
 <p>Let us consider the following system of equations (a simple Vlasov-Poisson system): </p><p class="formulaDsp">
@@ -249,57 +255,60 @@ Example</h1>
 </p>
 <p>which evolves over a 2 dimensional domain defined by the dimensions \((x,v)\). The domain is \([0, 700]\times[-6,6]\). We can also consider the species s as a discrete dimension which is defined as [i, e].</p>
 <p>The first thing which is necessary to define our system are types describing the continuous dimensions: </p><div class="fragment"><div class="line"><span class="comment">// Tag to represent the x-dimension</span></div>
-<div class="line"><span class="keyword">struct </span>RDimX {</div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr PERIODIC = <span class="keyword">true</span>;</div>
+<div class="line"><span class="keyword">struct </span><a class="code" href="structX.html">X</a> {</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structX.html#a3f2fbdd06dd7a7479b1d5d72be648bd5">PERIODIC</a> = <span class="keyword">true</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Tag to represent the v-dimension</span></div>
-<div class="line"><span class="keyword">struct </span>RDimVx {</div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr PERIODIC = <span class="keyword">false</span>;</div>
+<div class="line"><span class="keyword">struct </span><a class="code" href="structVx.html">Vx</a> {</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structVx.html#a74ba57fd378fdaadf337f2e532c53c94">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>We also need types to define the discrete domain on which the simulation will evolve. The distribution function \(f_s(t,x,v)\) will evolve over the discrete domain \([i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]\). Point samplings are required to define the positions of the grid points in each of the three dimensions:</p><ul>
-<li>The object \([x_0,...,x_N]\) is defined with a point sampling and will be denoted \(IDimX\).</li>
-<li>The object \([v_0,...,v_{N_v}]\) is defined with a point sampling and will be denoted \(IDimVx\).</li>
-<li>The object \([&#39;i&#39;, &#39;e&#39;]\) is defined as a <code><a class="el" href="classSpeciesInformation.html" title="Species discrete dimension to access constant attributes related to species.">SpeciesInformation</a></code> collection and will be denoted \(IDimSp\).</li>
+<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:305</div></div>
+<div class="ttc" id="astructVx_html_a74ba57fd378fdaadf337f2e532c53c94"><div class="ttname"><a href="structVx.html#a74ba57fd378fdaadf337f2e532c53c94">Vx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:310</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:282</div></div>
+<div class="ttc" id="astructX_html_a3f2fbdd06dd7a7479b1d5d72be648bd5"><div class="ttname"><a href="structX.html#a3f2fbdd06dd7a7479b1d5d72be648bd5">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:287</div></div>
+</div><!-- fragment --><p>We also need types to define the grid on which the simulation will evolve. The domain is discretised on the following grid: \([i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]\). Grid types are required to define the positions of the grid points in each of the three dimensions:</p><ul>
+<li>The object \([x_0,...,x_N]\) is defined with a grid and will be denoted \(GridX\).</li>
+<li>The object \([v_0,...,v_{N_v}]\) is defined with a grid and will be denoted \(GridVx\).</li>
+<li>The object \([&#39;i&#39;, &#39;e&#39;]\) is defined as a <code><a class="el" href="classSpeciesInformation.html" title="Species discrete dimension to access constant attributes related to species.">SpeciesInformation</a></code> collection and will be denoted \(Species\).</li>
 </ul>
-<p>With these objects defined, the domain(s) can then be created. The domain for the distribution function has the type: <code>ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimVx&gt;</code> however for simplicity it is denoted <code>DomainSpXVx</code>. The electric potential \(\phi\) has a smaller domain with the type <code>ddc::DiscreteDomain&lt;IDimX&gt;</code> denoted <code>DomainX</code>.</p>
-<p>Other domains may be useful to work on slices of data or on subdomains (e.g. if we distribute our function using MPI).</p>
-<p>The data itself will be stored in <code>ddc::Chunk</code>s. For example the distribution function will be stored in a <code>ddc::Chunk&lt;double, ddc::DiscreteDomain&lt;IDimSp, IDimX, IDimVx&gt;&gt;</code>. To improve readability this type is denoted <code>DFieldSpXVx</code>. Similarly the electric potential will be stored in a <code>DFieldX</code>.</p>
-<p>The other types will be useful when interacting with the data. For example, in order to initialise the distribution function we need to loop over the domain using the coordinates and a <code>ddc::DiscreteElement&lt;IDimSp, IDimX, IDimVx&gt;</code> (denoted <code>IndexSpXVx</code> for simplicity) to fill the array: </p><div class="fragment"><div class="line">DomainSpXVx domain(..);</div>
-<div class="line">DFieldSpXVx distribution_function(domain);</div>
+<p>With these objects defined, the index range(s) can then be created. The index range for the distribution function has the type: <code>IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structGridVx.html">GridVx</a>&gt;</code> however for simplicity it is denoted <code>IdxRangeSpXVx</code>. The electric potential \(\phi\) has a smaller domain with the type <code>IdxRange&lt;<a class="el" href="structGridX.html">GridX</a>&gt;</code> denoted <code>IdxRangeX</code>.</p>
+<p>Other index ranges may be useful to work on slices of data or on subdomains (e.g. if we distribute our function using MPI).</p>
+<p>The data itself will be stored in <code>FieldMem</code>s and accessed with <code>Field</code>s. For example the distribution function will be stored in a <code>DFieldMem&lt;IdxRange&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structGridVx.html">GridVx</a>&gt;&gt;</code>. To improve readability this type is denoted <code>DFieldMemSpXVx</code>. Similarly the electric potential will be stored in a <code>DFieldMemX</code>.</p>
+<p>The other types will be useful when interacting with the data. For example, in order to initialise the distribution function we need to loop over the grid using the coordinates and an <code>Idx&lt;<a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structGridVx.html">GridVx</a>&gt;</code> (denoted <code>IdxSpXVx</code> for simplicity) to fill the array: </p><div class="fragment"><div class="line">IdxRangeSpXVx idx_range(..);</div>
+<div class="line">DFieldMemSpXVx distribution_function_alloc(idx_range);</div>
+<div class="line">DFieldSpXVx distribution_function(distribution_function_alloc);</div>
 <div class="line"> </div>
-<div class="line">ddc::for_each(domain, [&amp;](IndexSpXVx index) {</div>
-<div class="line">    CoordXVx coord = ddc::coordinate(ddc::select&lt;IDimX, IDimVx&gt;(index));</div>
-<div class="line">    <span class="keywordtype">double</span> v_pos = ddc::get&lt;RDimVx&gt;(coord);</div>
-<div class="line">    <span class="keywordtype">double</span> x_pos = ddc::get&lt;RDimX&gt;(coord);</div>
+<div class="line">ddc::for_each(idx_range, [&amp;](IdxSpXVx index) {</div>
+<div class="line">    CoordXVx coord = ddc::coordinate(ddc::select&lt;GridX, GridVx&gt;(index));</div>
+<div class="line">    <span class="keywordtype">double</span> v_pos = ddc::get&lt;Vx&gt;(coord);</div>
+<div class="line">    <span class="keywordtype">double</span> x_pos = ddc::get&lt;X&gt;(coord);</div>
 <div class="line">    distribution_function(index) = n0 / (2 * M_PI * T0) * exp(-v_pos * v_pos / T0) * cos(kx * x_pos);</div>
 <div class="line">});</div>
-</div><!-- fragment --><p><code>ddc::ChunkSpan</code> objects are required for function arguments. For example the prototype of the function which defines the electric potential would be: </p><div class="fragment"><div class="line">DSpanX operator()(DSpanX electric_potential, DViewSpXVx distribution_function);</div>
-</div><!-- fragment --><p> where <code>DSpanX</code> is a reference to the <code>DFieldX</code> object where the electric potential is stored, and <code>DViewSpXVx</code> is a constant reference to the <code>DFieldSpXVx</code> object where the distribution function is stored.</p>
-<h3><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md16"></a>
 Continuous vs. discrete objects</h3>
-<p>The majority of the DDC types represent objects in or on a discrete vector space. It may not be immediately obvious why continous objects are also needed given that simulations are necessarily discrete. Backward semi-Lagrangian advection is a good example of where this is required. In backward semi-Lagrangian advection we work on a discrete grid (a <code>ddc::DiscreteDomain</code>), for each point of the grid we trace the characteristic to find where a particle positioned at this grid point would have been located at the previous time step. This location, known as the foot of the characteristic can be located anywhere in the vector space, unlike the grid points, the foot of the characteristic is not restricted to a subset of valid positions. It must therefore be represented with a continuous object. In this case a <code>ddc::Coordinate</code> perfectly describes the position of the foot of the characteristic while also providing all pertinent information about the dimensions.</p>
+<p>The majority of the DDC types represent objects in or on a discrete vector space. It may not be immediately obvious why continous objects are also needed given that simulations are necessarily discrete. Backward semi-Lagrangian advection is a good example of where this is required. In backward semi-Lagrangian advection we work on a discrete grid (accessed via an <code>IdxRange</code>), for each point of the grid we trace the characteristic to find where a particle positioned at this grid point would have been located at the previous time step. This location, known as the foot of the characteristic can be located anywhere in the vector space, unlike the grid points, the foot of the characteristic is not restricted to a subset of valid positions. It must therefore be represented with a continuous object. In this case a <code>Coord</code> perfectly describes the position of the foot of the characteristic while also providing all pertinent information about the dimensions.</p>
 <h3><a class="anchor" id="autotoc_md17"></a>
-Example use of DiscreteVector for Finite Differences</h3>
-<p>The class <code>ddc::DiscreteVector</code> is particularly useful in cases where we wish to express a stencil. Let us consider the case of a 2D finite differences scheme on uniform meshes expressed as follows: </p><p class="formulaDsp">
+Example use of Index Step for Finite Differences</h3>
+<p>The class <code>IdxStep</code> is particularly useful in cases where we wish to express a stencil. Let us consider the case of a 2D finite differences scheme on uniform meshes expressed as follows: </p><p class="formulaDsp">
 \[ \nabla^2 f(x,y) = \frac{f(x-h_x, y) + f(x+h_x, y) + f(x, y-h_y) + f(x, y+h_y) - 4f(x,y)}{h_x h_y} \]
 </p>
-<p>This code can be written simply using <code>ddc::DiscreteElement</code> and <code>ddc::DiscreteVector</code>: </p><div class="fragment"><div class="line"><span class="keywordtype">double</span> get_laplacian_at_position(DFieldXY function_values, IndexXY position)</div>
+<p>This code can be written simply using <code>Idx</code> and <code>IdxStep</code>: </p><div class="fragment"><div class="line"><span class="keywordtype">double</span> get_laplacian_at_position(DFieldXY function_values, IndexXY position)</div>
 <div class="line">{</div>
-<div class="line">    VectX x_step(1);</div>
-<div class="line">    VectY y_step(1);</div>
+<div class="line">    IdxStepX x_step(1);</div>
+<div class="line">    IdxStepY y_step(1);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Get the uniform point sampling in the appropriate direction and use it to</span></div>
-<div class="line">    <span class="comment">// extract the step h.</span></div>
-<div class="line">    <span class="keywordtype">double</span> h_x = ddc::discrete_space&lt;RDimX&gt;().step();</div>
-<div class="line">    <span class="keywordtype">double</span> h_y = ddc::discrete_space&lt;RDimY&gt;().step();</div>
+<div class="line">    <span class="comment">// Get the uniform grid in the appropriate direction and use it to</span></div>
+<div class="line">    <span class="comment">// extract the distance h.</span></div>
+<div class="line">    <span class="keywordtype">double</span> h_x = ddc::discrete_space&lt;X&gt;().step();</div>
+<div class="line">    <span class="keywordtype">double</span> h_y = ddc::discrete_space&lt;Y&gt;().step();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> (function_values(position - x_step) + function_values(position + x_step)</div>
 <div class="line">            + function_values(position - y_step) function_values(position + y_step)</div>
 <div class="line">            - 4 * function_values(position))</div>
 <div class="line">           / (h_x * h_y);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>As you can see DDC takes care of combining elements and vectors to ensure that the resulting <code>IndexXY</code> is in the correct position. This makes it simpler to write such stencils and easier to spot errors, especially in cases involving lots of dimensions.</p>
+</div><!-- fragment --><p>As you can see DDC takes care of combining elements and vectors to ensure that the resulting <code>IdxXY</code> is in the correct position. This makes it simpler to write such stencils and easier to spot errors, especially in cases involving lots of dimensions.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Pitfalls"></a>
 Pitfalls</h1>
 <p>When using DDC there are some things that you should be careful about. These are listed here.</p>

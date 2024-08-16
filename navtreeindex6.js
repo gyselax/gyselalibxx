@@ -1,5 +1,13 @@
 var NAVTREEINDEX6 =
 {
+"mask__tanh_8hpp_source.html":[15,0,7,5,7],
+"matching__idx__slice_8hpp_source.html":[15,0,13,0,6],
+"math__tools_8hpp_source.html":[15,2,0,0,0,3],
+"matrix_8hpp_source.html":[15,2,0,0,0,4],
+"matrix__banded_8hpp_source.html":[15,2,0,0,0,5],
+"matrix__batch_8hpp_source.html":[15,2,0,0,0,6],
+"matrix__batch__csr_8hpp_source.html":[15,2,0,0,0,7],
+"matrix__batch__ell_8hpp_source.html":[15,2,0,0,0,8],
 "matrix__batch__tridiag_8hpp_source.html":[15,2,0,0,0,9],
 "matrix__center__block_8hpp_source.html":[15,2,0,0,0,10],
 "matrix__corner__block_8hpp_source.html":[15,2,0,0,0,11],
@@ -241,13 +249,5 @@ var NAVTREEINDEX6 =
 "src_utils.html#src_utils__Utility_tools":[10,18,0],
 "structBSplinesMu.html":[14,29],
 "structBSplinesR.html":[14,30],
-"structBSplinesTheta.html":[14,31],
-"structBSplinesVpar.html":[14,32],
-"structBSplinesVx.html":[14,33],
-"structBSplinesVy.html":[14,34],
-"structBSplinesX.html":[14,35],
-"structBSplinesY.html":[14,36],
-"structCollisionsIntra_1_1GhostedVx.html":[14,49,0],
-"structCollisionsIntra_1_1GhostedVxStaggered.html":[14,49,1],
-"structDimX__pC.html":[14,67]
+"structBSplinesTheta.html":[14,31]
 };

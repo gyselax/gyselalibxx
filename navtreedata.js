@@ -60,12 +60,12 @@ var NAVTREE =
     ] ],
     [ "Using DDC in Gyselalibxx", "docs_DDC_in_gyselalibxx.html", [
       [ "Contents", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Contents", null ],
-      [ "Coordinate", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinate", null ],
-      [ "Domain and associated concepts", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Domain_and_associated_concepts", null ],
-      [ "PointSampling", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__PointSampling", null ],
-      [ "DiscreteElement", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteElement", null ],
-      [ "DiscreteVector", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteVector", null ],
-      [ "DiscreteDomain", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__DiscreteDomain", null ],
+      [ "Coordinates", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Coordinates", null ],
+      [ "Indexing and associated concepts", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts", null ],
+      [ "Grid", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Grid", null ],
+      [ "Index", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index", null ],
+      [ "Index Step", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index_Step", null ],
+      [ "Index Range", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index_Range", null ],
       [ "Data Storage", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Data_Storage", null ],
       [ "Example", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Example", null ],
       [ "Pitfalls", "docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Pitfalls", null ]
@@ -90,10 +90,10 @@ var NAVTREEINDEX =
 "classCollisionSpVparMu.html#ab2872e4fc62ff27b7eb9689818e46cc1",
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445",
 "classLagrange.html#a71594722ed82a25a22c9ef7a74e4aa65",
-"classPolarBSplines_1_1Impl.html#ae0a2a5a64a66fbf151bdb4cf90e41745",
-"classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755",
-"matrix__batch__tridiag_8hpp_source.html",
-"structDimY__pC.html"
+"classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2",
+"classVectorFieldMem.html#ad5db86bbf3eb85ad904bb17efb9da91c",
+"mask__tanh_8hpp_source.html",
+"structBSplinesVpar.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

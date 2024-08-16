@@ -1,5 +1,13 @@
 var NAVTREEINDEX4 =
 {
+"classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2":[14,182,0,19],
+"classPolarBSplines_1_1Impl.html#a905027478db1a56e7ebe953b41f62d26":[14,182,0,6],
+"classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2":[14,182,0,12],
+"classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83":[14,182,0,9],
+"classPolarBSplines_1_1Impl.html#abd30c2e9003942c9d3c2bb69190df48e":[14,182,0,7],
+"classPolarBSplines_1_1Impl.html#aca84a982ed6da7a6167cd3832f23ec97":[14,182,0,15],
+"classPolarBSplines_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56":[14,182,0,23],
+"classPolarBSplines_1_1Impl.html#add59024a42b0d801aa862d95fa044370":[14,182,0,5],
 "classPolarBSplines_1_1Impl.html#ae0a2a5a64a66fbf151bdb4cf90e41745":[14,182,0,17],
 "classPolarBSplines_1_1Impl.html#af01b6b63c807ba90698ab1458300c5ba":[14,182,0,16],
 "classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352":[14,182,0,22],
@@ -241,13 +249,5 @@ var NAVTREEINDEX4 =
 "classVectorFieldMem.html#a9e9a48b66d669521bac723db61fdb196":[14,229,1],
 "classVectorFieldMem.html#ab0ab1ed0127f963ffc7369721355ff98":[14,229,22],
 "classVectorFieldMem.html#ab9df1047fd0cba12601738f007d048b1":[14,229,6],
-"classVectorFieldMem.html#ad37c64ef9b1f293b50dddf9c9e129d2f":[14,229,4],
-"classVectorFieldMem.html#ad5db86bbf3eb85ad904bb17efb9da91c":[14,229,2],
-"classVectorFieldMem.html#adb62ec619bf86a8a0a23d36dcf3b5f2b":[14,229,5],
-"classVectorFieldMem.html#af43646f272fa99b8942e3cd306cf0927":[14,229,13],
-"classVectorFieldMem.html#af76c132ff1579199c711ba96dbe6bb8b":[14,229,18],
-"classVectorFieldMem.html#af7de208542ab41eac36e20406b78479b":[14,229,11],
-"classVortexMergerDensitySolution.html":[14,230],
-"classVortexMergerDensitySolution.html#a104c4a3c0adcef0840a99f748d5a9657":[14,230,1],
-"classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[14,230,0]
+"classVectorFieldMem.html#ad37c64ef9b1f293b50dddf9c9e129d2f":[14,229,4]
 };

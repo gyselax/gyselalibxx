@@ -19,7 +19,7 @@ var simulations_geometryRTheta =
       [ "Error Message", "docs_Common_compilation_problems.html#autotoc_md14", null ],
       [ "Error Message", "docs_Common_compilation_problems.html#autotoc_md15", null ],
       [ "Continuous vs. discrete objects", "docs_DDC_in_gyselalibxx.html#autotoc_md16", null ],
-      [ "Example use of DiscreteVector for Finite Differences", "docs_DDC_in_gyselalibxx.html#autotoc_md17", null ],
+      [ "Example use of Index Step for Finite Differences", "docs_DDC_in_gyselalibxx.html#autotoc_md17", null ],
       [ "Synchronicity", "docs_DDC_in_gyselalibxx.html#autotoc_md18", [
         [ "Q: I cloned the repository but the submodules were not cloned", "docs_Using_git.html#autotoc_md19", null ],
         [ "Q: Git reports changes in the submodule but I didn't change this code", "docs_Using_git.html#autotoc_md20", null ]
