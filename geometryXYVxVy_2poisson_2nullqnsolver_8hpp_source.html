@@ -107,25 +107,24 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2poisson_2nullqnsolver_
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span><a class="code" href="classNullQNSolver.html">NullQNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classNullQNSolver.html">NullQNSolver</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    ~<a class="code" href="classNullQNSolver.html">NullQNSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classNullQNSolver.html#af216cca80bf1989bb5031c640b6e3db1">   27</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullQNSolver.html#af216cca80bf1989bb5031c640b6e3db1">operator()</a>(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DFieldXY electrostatic_potential,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DFieldXY electric_field_x,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DFieldXY electric_field_y,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            DConstFieldSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="classNullQNSolver.html">NullQNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classNullQNSolver.html">NullQNSolver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    ~<a class="code" href="classNullQNSolver.html">NullQNSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classNullQNSolver.html#af216cca80bf1989bb5031c640b6e3db1">   26</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullQNSolver.html#af216cca80bf1989bb5031c640b6e3db1">operator()</a>(</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            DFieldXY electrostatic_potential,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DFieldXY electric_field_x,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DFieldXY electric_field_y,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DConstFieldSpXYVxVy allfdistribu) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
-<div class="ttc" id="aclassNullQNSolver_html"><div class="ttname"><a href="classNullQNSolver.html">NullQNSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullqnsolver.hpp:16</div></div>
+<div class="ttc" id="aclassNullQNSolver_html"><div class="ttname"><a href="classNullQNSolver.html">NullQNSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullqnsolver.hpp:15</div></div>
 <div class="ttc" id="aclassNullQNSolver_html_af216cca80bf1989bb5031c640b6e3db1"><div class="ttname"><a href="classNullQNSolver.html#af216cca80bf1989bb5031c640b6e3db1">NullQNSolver::operator()</a></div><div class="ttdeci">void operator()(DFieldXY electrostatic_potential, DFieldXY electric_field_x, DFieldXY electric_field_y, DConstFieldSpXYVxVy allfdistribu) const override</div><div class="ttdoc">A QN Solver which does nothing.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

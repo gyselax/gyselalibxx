@@ -107,22 +107,21 @@ $(document).ready(function(){initNavTree('geometryXVx_2poisson_2nullqnsolver_8hp
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classNullQNSolver.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullQNSolver.html">NullQNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classNullQNSolver.html">NullQNSolver</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ~<a class="code" href="classNullQNSolver.html">NullQNSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classNullQNSolver.html#ac636ac6b797e8bf883a53955f191d4ed">   28</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullQNSolver.html#ac636ac6b797e8bf883a53955f191d4ed">operator()</a>(</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DFieldX <span class="keyword">const</span> electrostatic_potential,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DFieldX <span class="keyword">const</span> electric_field,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            DConstFieldSpXVx <span class="keyword">const</span> allfdistribu) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;iqnsolver.hpp&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classNullQNSolver.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNullQNSolver.html">NullQNSolver</a> : <span class="keyword">public</span> <a class="code" href="classIQNSolver.html">IQNSolver</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classNullQNSolver.html">NullQNSolver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    ~<a class="code" href="classNullQNSolver.html">NullQNSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classNullQNSolver.html#ac636ac6b797e8bf883a53955f191d4ed">   27</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNullQNSolver.html#ac636ac6b797e8bf883a53955f191d4ed">operator()</a>(</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            DFieldX <span class="keyword">const</span> electrostatic_potential,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            DFieldX <span class="keyword">const</span> electric_field,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            DConstFieldSpXVx <span class="keyword">const</span> allfdistribu) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="ttc" id="aclassIQNSolver_html"><div class="ttname"><a href="classIQNSolver.html">IQNSolver</a></div><div class="ttdoc">Base class for a Quasi-Neutrality solver.</div><div class="ttdef"><b>Definition:</b> iqnsolver.hpp:13</div></div>
-<div class="ttc" id="aclassNullQNSolver_html"><div class="ttname"><a href="classNullQNSolver.html">NullQNSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullqnsolver.hpp:16</div></div>
+<div class="ttc" id="aclassNullQNSolver_html"><div class="ttname"><a href="classNullQNSolver.html">NullQNSolver</a></div><div class="ttdoc">Null operator.</div><div class="ttdef"><b>Definition:</b> nullqnsolver.hpp:15</div></div>
 <div class="ttc" id="aclassNullQNSolver_html_ac636ac6b797e8bf883a53955f191d4ed"><div class="ttname"><a href="classNullQNSolver.html#ac636ac6b797e8bf883a53955f191d4ed">NullQNSolver::operator()</a></div><div class="ttdeci">void operator()(DFieldX const electrostatic_potential, DFieldX const electric_field, DConstFieldSpXVx const allfdistribu) const override</div><div class="ttdoc">The operator which does not solves the equation.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

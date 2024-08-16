@@ -107,29 +107,28 @@ $(document).ready(function(){initNavTree('charge__exchange_8hpp_source.html','')
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ireactionrate.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classChargeExchangeRate.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classChargeExchangeRate.html">ChargeExchangeRate</a> : <span class="keyword">public</span> <a class="code" href="classIReactionRate.html">IReactionRate</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">     * @brief Stores the linear coefficients to compute the polynomial for the charge-exchange reaction rate vs. ion temperature.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">static</span> constexpr std::size_t s_coefficients_size = 5;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    DKokkosView&lt;s_coefficients_size&gt; m_cx_coefficients;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_norm_coeff_rate;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">   34</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">ChargeExchangeRate</a>(<span class="keywordtype">double</span> norm_coeff_rate);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ~<a class="code" href="classChargeExchangeRate.html">ChargeExchangeRate</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">   46</a></span>&#160;    DFieldSpX <a class="code" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">operator()</a>(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="ttc" id="aclassChargeExchangeRate_html"><div class="ttname"><a href="classChargeExchangeRate.html">ChargeExchangeRate</a></div><div class="ttdoc">A class that describes a charge-exchange reaction rate.</div><div class="ttdef"><b>Definition:</b> charge_exchange.hpp:13</div></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ireactionrate.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classChargeExchangeRate.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classChargeExchangeRate.html">ChargeExchangeRate</a> : <span class="keyword">public</span> <a class="code" href="classIReactionRate.html">IReactionRate</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">     * @brief Stores the linear coefficients to compute the polynomial for the charge-exchange reaction rate vs. ion temperature.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">static</span> constexpr std::size_t s_coefficients_size = 5;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    DKokkosView&lt;s_coefficients_size&gt; m_cx_coefficients;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_norm_coeff_rate;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">   33</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">ChargeExchangeRate</a>(<span class="keywordtype">double</span> norm_coeff_rate);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ~<a class="code" href="classChargeExchangeRate.html">ChargeExchangeRate</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">   45</a></span>&#160;    DFieldSpX <a class="code" href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">operator()</a>(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="ttc" id="aclassChargeExchangeRate_html"><div class="ttname"><a href="classChargeExchangeRate.html">ChargeExchangeRate</a></div><div class="ttdoc">A class that describes a charge-exchange reaction rate.</div><div class="ttdef"><b>Definition:</b> charge_exchange.hpp:12</div></div>
 <div class="ttc" id="aclassChargeExchangeRate_html_a03a0f421dd456bff34cf2161d478d983"><div class="ttname"><a href="classChargeExchangeRate.html#a03a0f421dd456bff34cf2161d478d983">ChargeExchangeRate::ChargeExchangeRate</a></div><div class="ttdeci">ChargeExchangeRate(double norm_coeff_rate)</div><div class="ttdoc">Creates an instance of the ConstantChargeExchangeRate class.</div></div>
 <div class="ttc" id="aclassChargeExchangeRate_html_a73b415cda84b9f40a85da1d4f5d377b4"><div class="ttname"><a href="classChargeExchangeRate.html#a73b415cda84b9f40a85da1d4f5d377b4">ChargeExchangeRate::operator()</a></div><div class="ttdeci">DFieldSpX operator()(DFieldSpX rate, DConstFieldSpX density, DConstFieldSpX temperature) const override</div><div class="ttdoc">Compute the charge-exchange reaction rate depending on density and temperature.</div></div>
 <div class="ttc" id="aclassIReactionRate_html"><div class="ttname"><a href="classIReactionRate.html">IReactionRate</a></div><div class="ttdoc">An abstract interface representing a reaction rate that depends on temperature and density.</div><div class="ttdef"><b>Definition:</b> ireactionrate.hpp:12</div></div>

@@ -107,42 +107,41 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2vlasov_2splitvlasovsol
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ivlasovsolver.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>X&gt;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>V&gt;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span><a class="code" href="classSplitVlasovSolver.html">SplitVlasovSolver</a> : <span class="keyword">public</span> <a class="code" href="classIVlasovSolver.html">IVlasovSolver</a></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridX&gt;</a> <span class="keyword">const</span>&amp; m_advec_x;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridY&gt;</a> <span class="keyword">const</span>&amp; m_advec_y;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt;</a> <span class="keyword">const</span>&amp; m_advec_vx;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt;</a> <span class="keyword">const</span>&amp; m_advec_vy;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d">   43</a></span>&#160;    <a class="code" href="classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d">SplitVlasovSolver</a>(</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridX&gt;</a> <span class="keyword">const</span>&amp; advec_x,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridY&gt;</a> <span class="keyword">const</span>&amp; advec_y,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt;</a> <span class="keyword">const</span>&amp; advec_vx,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt;</a> <span class="keyword">const</span>&amp; advec_vy);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    ~<a class="code" href="classSplitVlasovSolver.html">SplitVlasovSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">   63</a></span>&#160;    DFieldSpXYVxVy <a class="code" href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">operator()</a>(</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            DFieldSpXYVxVy allfdistribu,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            DConstFieldXY electric_field_x,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            DConstFieldXY electric_field_y,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ivlasovsolver.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>X&gt;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>V&gt;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">class </span><a class="code" href="classSplitVlasovSolver.html">SplitVlasovSolver</a> : <span class="keyword">public</span> <a class="code" href="classIVlasovSolver.html">IVlasovSolver</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridX&gt;</a> <span class="keyword">const</span>&amp; m_advec_x;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridY&gt;</a> <span class="keyword">const</span>&amp; m_advec_y;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt;</a> <span class="keyword">const</span>&amp; m_advec_vx;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt;</a> <span class="keyword">const</span>&amp; m_advec_vy;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d">   42</a></span>&#160;    <a class="code" href="classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d">SplitVlasovSolver</a>(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridX&gt;</a> <span class="keyword">const</span>&amp; advec_x,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <a class="code" href="classIAdvectionSpatial.html">IAdvectionSpatial&lt;GeometryXYVxVy, GridY&gt;</a> <span class="keyword">const</span>&amp; advec_y,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt;</a> <span class="keyword">const</span>&amp; advec_vx,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt;</a> <span class="keyword">const</span>&amp; advec_vy);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ~<a class="code" href="classSplitVlasovSolver.html">SplitVlasovSolver</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">   62</a></span>&#160;    DFieldSpXYVxVy <a class="code" href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">operator()</a>(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            DFieldSpXYVxVy allfdistribu,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            DConstFieldXY electric_field_x,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            DConstFieldXY electric_field_y,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
 <div class="ttc" id="aclassIAdvectionSpatial_html"><div class="ttname"><a href="classIAdvectionSpatial.html">IAdvectionSpatial</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionx.hpp:16</div></div>
 <div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:17</div></div>
 <div class="ttc" id="aclassIVlasovSolver_html"><div class="ttname"><a href="classIVlasovSolver.html">IVlasovSolver</a></div><div class="ttdoc">An abstract class for solving a Vlasov equation.</div><div class="ttdef"><b>Definition:</b> ivlasovsolver.hpp:11</div></div>
-<div class="ttc" id="aclassSplitVlasovSolver_html"><div class="ttname"><a href="classSplitVlasovSolver.html">SplitVlasovSolver</a></div><div class="ttdoc">A class that solves a Vlasov equation using Strang's splitting.</div><div class="ttdef"><b>Definition:</b> splitvlasovsolver.hpp:26</div></div>
+<div class="ttc" id="aclassSplitVlasovSolver_html"><div class="ttname"><a href="classSplitVlasovSolver.html">SplitVlasovSolver</a></div><div class="ttdoc">A class that solves a Vlasov equation using Strang's splitting.</div><div class="ttdef"><b>Definition:</b> splitvlasovsolver.hpp:25</div></div>
 <div class="ttc" id="aclassSplitVlasovSolver_html_a2f5bcc6081ebb816a8e6f7655b13689d"><div class="ttname"><a href="classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d">SplitVlasovSolver::SplitVlasovSolver</a></div><div class="ttdeci">SplitVlasovSolver(IAdvectionSpatial&lt; GeometryXYVxVy, GridX &gt; const &amp;advec_x, IAdvectionSpatial&lt; GeometryXYVxVy, GridY &gt; const &amp;advec_y, IAdvectionVelocity&lt; GeometryXYVxVy, GridVx &gt; const &amp;advec_vx, IAdvectionVelocity&lt; GeometryXYVxVy, GridVy &gt; const &amp;advec_vy)</div><div class="ttdoc">Creates an instance of the split vlasov solver class.</div></div>
 <div class="ttc" id="aclassSplitVlasovSolver_html_ad980db982084e40e1777484ddc3312b0"><div class="ttname"><a href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">SplitVlasovSolver::operator()</a></div><div class="ttdeci">DFieldSpXYVxVy operator()(DFieldSpXYVxVy allfdistribu, DConstFieldXY electric_field_x, DConstFieldXY electric_field_y, double dt) const override</div><div class="ttdoc">Solves a Vlasov equation on a timestep dt.</div></div>
 </div><!-- fragment --></div><!-- contents -->

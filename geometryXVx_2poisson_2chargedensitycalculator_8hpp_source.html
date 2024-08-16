@@ -109,22 +109,21 @@ $(document).ready(function(){initNavTree('geometryXVx_2poisson_2chargedensitycal
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;geometry.hpp&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;quadrature.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ichargedensitycalculator.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classChargeDensityCalculator.html">ChargeDensityCalculator</a> : <span class="keyword">public</span> <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classQuadrature.html">Quadrature&lt;IdxRangeVx, IdxRangeXVx&gt;</a> m_quadrature;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#ae129d33bd6dcb7a675e664a53c0a4747">   31</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classChargeDensityCalculator.html#ae129d33bd6dcb7a675e664a53c0a4747">ChargeDensityCalculator</a>(DConstFieldVx coeffs);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#a164ef05aba41f41d7862c1aa216c154e">   40</a></span>&#160;    DFieldX <a class="code" href="classChargeDensityCalculator.html#a164ef05aba41f41d7862c1aa216c154e">operator()</a>(DFieldX rho, DConstFieldSpXVx allfdistribu) <span class="keyword">const</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
-<div class="ttc" id="aclassChargeDensityCalculator_html"><div class="ttname"><a href="classChargeDensityCalculator.html">ChargeDensityCalculator</a></div><div class="ttdoc">A class which computes charges density with Kokkos.</div><div class="ttdef"><b>Definition:</b> chargedensitycalculator.hpp:21</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ichargedensitycalculator.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;quadrature.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classChargeDensityCalculator.html">ChargeDensityCalculator</a> : <span class="keyword">public</span> <a class="code" href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classQuadrature.html">Quadrature&lt;IdxRangeVx, IdxRangeXVx&gt;</a> m_quadrature;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#ae129d33bd6dcb7a675e664a53c0a4747">   30</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classChargeDensityCalculator.html#ae129d33bd6dcb7a675e664a53c0a4747">ChargeDensityCalculator</a>(DConstFieldVx coeffs);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classChargeDensityCalculator.html#a164ef05aba41f41d7862c1aa216c154e">   39</a></span>&#160;    DFieldX <a class="code" href="classChargeDensityCalculator.html#a164ef05aba41f41d7862c1aa216c154e">operator()</a>(DFieldX rho, DConstFieldSpXVx allfdistribu) <span class="keyword">const</span> <span class="keyword">final</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="ttc" id="aclassChargeDensityCalculator_html"><div class="ttname"><a href="classChargeDensityCalculator.html">ChargeDensityCalculator</a></div><div class="ttdoc">A class which computes charges density with Kokkos.</div><div class="ttdef"><b>Definition:</b> chargedensitycalculator.hpp:20</div></div>
 <div class="ttc" id="aclassChargeDensityCalculator_html_a164ef05aba41f41d7862c1aa216c154e"><div class="ttname"><a href="classChargeDensityCalculator.html#a164ef05aba41f41d7862c1aa216c154e">ChargeDensityCalculator::operator()</a></div><div class="ttdeci">DFieldX operator()(DFieldX rho, DConstFieldSpXVx allfdistribu) const final</div><div class="ttdoc">Computes the charge density rho from the distribution function.</div></div>
 <div class="ttc" id="aclassChargeDensityCalculator_html_ae129d33bd6dcb7a675e664a53c0a4747"><div class="ttname"><a href="classChargeDensityCalculator.html#ae129d33bd6dcb7a675e664a53c0a4747">ChargeDensityCalculator::ChargeDensityCalculator</a></div><div class="ttdeci">ChargeDensityCalculator(DConstFieldVx coeffs)</div><div class="ttdoc">Create a ChargeDensityCalculator object.</div></div>
 <div class="ttc" id="aclassIChargeDensityCalculator_html"><div class="ttname"><a href="classIChargeDensityCalculator.html">IChargeDensityCalculator</a></div><div class="ttdoc">A class which calculates the charge density.</div><div class="ttdef"><b>Definition:</b> ichargedensitycalculator.hpp:16</div></div>
