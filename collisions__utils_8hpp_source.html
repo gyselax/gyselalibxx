@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ddc::parallel_for_each(</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(Dcoll),</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(Dcoll),</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            KOKKOS_LAMBDA(Idx&lt;Species, GridX, LocalGridVx&gt; <span class="keyword">const</span> ispxdimvx) {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> vT(</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        Kokkos::sqrt(2. * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))));</div>
@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    ddc::parallel_for_each(</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(dvDcoll),</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(dvDcoll),</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            KOKKOS_LAMBDA(Idx&lt;Species, GridX, LocalGridVx&gt; <span class="keyword">const</span> ispxdimvx) {</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> vT(</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        Kokkos::sqrt(2. * temperature(ddc::select&lt;Species, GridX&gt;(ispxdimvx))));</div>
@@ -216,11 +216,11 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    DConstFieldVx <span class="keyword">const</span> quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="comment">// computation of the integrands</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    DFieldMemSpXVx I0mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    DFieldMemSpXVx I1mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    DFieldMemSpXVx I2mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    DFieldMemSpXVx I3mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    DFieldMemSpXVx I4mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    DFieldMemSpXVx I0mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    DFieldMemSpXVx I1mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    DFieldMemSpXVx I2mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    DFieldMemSpXVx I3mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(allfdistribu));</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    DFieldMemSpXVx I4mean_integrand_alloc(<a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(allfdistribu));</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">auto</span> I0mean_integrand = get_field(I0mean_integrand_alloc);</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">auto</span> I1mean_integrand = get_field(I1mean_integrand_alloc);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">auto</span> I2mean_integrand = get_field(I2mean_integrand_alloc);</div>
@@ -229,7 +229,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    ddc::parallel_for_each(</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(allfdistribu),</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(allfdistribu),</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            KOKKOS_LAMBDA(IdxSpXVx <span class="keyword">const</span> ispxvx) {</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                Idx&lt;LocalGridVx&gt; <span class="keyword">const</span> idimvx(ddc::select&lt;GridVx&gt;(ispxvx).uid() + 1);</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                Idx&lt;Species, GridX, LocalGridVx&gt;</div>
@@ -292,7 +292,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;{</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    ddc::parallel_for_each(</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(Dcoll),</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(Dcoll),</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            KOKKOS_LAMBDA(Idx&lt;Species, GridX, LocalGridVx&gt; <span class="keyword">const</span> ispxdimvx) {</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                <span class="keywordtype">double</span> <span class="keyword">const</span> coordv(ddc::coordinate(ddc::select&lt;LocalGridVx&gt;(ispxdimvx)));</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                Nucoll(ispxdimvx) = -Dcoll(ispxdimvx)</div>
@@ -314,7 +314,7 @@ $(document).ready(function(){initNavTree('collisions__utils_8hpp_source.html',''
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        DConstFieldSpX density,</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        DConstFieldSpX mean_velocity,</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        DConstFieldSpX temperature);</div>
-<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:82</div></div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a3ed65919dbae64a2ec9f5da42b393781"><div class="ttname"><a href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid1D... &gt; get_idx_range(IdxRangeFDistrib idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:83</div></div>
 <div class="ttc" id="atrapezoid__quadrature_8hpp_html"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html">trapezoid_quadrature.hpp</a></div><div class="ttdoc">File providing quadrature coefficients via the trapezoidal method.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -13,7 +13,7 @@ var searchData=
   ['collisions_5finterspecies_1187',['collisions_interspecies',['../classCollisionInfo.html#a1fd5a0ed1e680dd18934365252712ab3',1,'CollisionInfo::collisions_interspecies()'],['../classCollisionInfoRadial.html#ac1ba453a905e26075bc28a11e9d87286',1,'CollisionInfoRadial::collisions_interspecies()']]],
   ['collisionsinter_1188',['CollisionsInter',['../classCollisionsInter.html#acdd51d6c9f1b051ec7661c1a160a31b7',1,'CollisionsInter']]],
   ['collisionsintra_1189',['CollisionsIntra',['../classCollisionsIntra.html#addf7a93d3bbdc450236e56d71609c10b',1,'CollisionsIntra']]],
-  ['collisionspvparmu_1190',['CollisionSpVparMu',['../classCollisionSpVparMu.html#a34e55216dc90ed2408b750de1441340a',1,'CollisionSpVparMu']]],
+  ['collisionspvparmu_1190',['CollisionSpVparMu',['../classCollisionSpVparMu.html#a0dbcb8d7f270291b1a19791087b30f36',1,'CollisionSpVparMu']]],
   ['compute_5fadvection_5ffield_1191',['compute_advection_field',['../classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d',1,'AdvectionPhysicalDomain::compute_advection_field()'],['../classAdvectionPseudoCartesianDomain.html#a807edcea8994101ae3a1e29aa390f803',1,'AdvectionPseudoCartesianDomain::compute_advection_field()']]],
   ['compute_5fcoeffs_5fon_5fmapping_1192',['compute_coeffs_on_mapping',['../compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885',1,'compute_norms.hpp']]],
   ['compute_5fl1_5fnorm_1193',['compute_L1_norm',['../compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671',1,'compute_norms.hpp']]],

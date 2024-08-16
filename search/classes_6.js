@@ -7,7 +7,7 @@ var searchData=
   ['ghostedvx_934',['GhostedVx',['../structCollisionsIntra_1_1GhostedVx.html',1,'CollisionsIntra']]],
   ['ghostedvxstaggered_935',['GhostedVxStaggered',['../structCollisionsIntra_1_1GhostedVxStaggered.html',1,'CollisionsIntra']]],
   ['gridbuilder_936',['GridBuilder',['../classGridBuilder.html',1,'']]],
-  ['gridfourier_937',['GridFourier',['../structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01FullIdxRange_00_01ExecSpace0e5661b22cfccf10bc7f0f673649be85.html',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, FullIdxRange, ExecSpace, LayoutSpace &gt;']]],
+  ['gridfourier_937',['GridFourier',['../structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.html',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;']]],
   ['gridmom_938',['GridMom',['../structGridMom.html',1,'']]],
   ['gridmu_939',['GridMu',['../structGridMu.html',1,'']]],
   ['gridpdedimq_940',['GridPDEDimQ',['../structFEM1DPoissonSolver_1_1GridPDEDimQ.html',1,'FEM1DPoissonSolver']]],

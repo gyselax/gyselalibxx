@@ -1,7 +1,7 @@
 var searchData=
 [
   ['get_1261',['get',['../classMultipatchType.html#a142583379ff2164a1f5494df64e41edf',1,'MultipatchType::get()'],['../classMatchingIdxSlice.html#a68ff4d4c93df3a00de3edb53f07d969a',1,'MatchingIdxSlice::get()']]],
-  ['get_5f1d_5fidx_5frange_1262',['get_1d_idx_range',['../namespacecollisions__dimensions.html#acdf7b3b63a886e508215164bbbca538f',1,'collisions_dimensions']]],
+  ['get_5f1d_5fidx_5frange_1262',['get_1d_idx_range',['../namespacecollisions__dimensions.html#af9fb0ec9b09b09992707639afef7c632',1,'collisions_dimensions']]],
   ['get_5f2d_5findex_1263',['get_2d_index',['../classPolarBSplines.html#ab56f0b5cebcd71f64d277cd1cf50ecdf',1,'PolarBSplines']]],
   ['get_5fadvection_5ffield_1264',['get_advection_field',['../classAdvectionFieldSimulation.html#a0bc3c0d1829fc8f286c5880848cf4883',1,'AdvectionFieldSimulation::get_advection_field()'],['../classAdvectionSimulation.html#a754d22f275182e9571c7d12414fd7f6f',1,'AdvectionSimulation::get_advection_field()']]],
   ['get_5fall_5fidx_5franges_5falong_5fdirection_1265',['get_all_idx_ranges_along_direction',['../classMultipatchConnectivity.html#ad753daab879bb2cdfe04c25c05fc394c',1,'MultipatchConnectivity']]],
@@ -18,7 +18,7 @@ var searchData=
   ['get_5ffrom_5fperp_1276',['get_from_perp',['../classMatchingIdxSlice.html#abf1367b60ae40635ea39cfd343e92673',1,'MatchingIdxSlice']]],
   ['get_5fgridvx_5fghosted_1277',['get_gridvx_ghosted',['../classCollisionsIntra.html#aeafed32ace7e97247558e6259328e8a1',1,'CollisionsIntra']]],
   ['get_5fgridvx_5fghosted_5fstaggered_1278',['get_gridvx_ghosted_staggered',['../classCollisionsIntra.html#a398712f845cd31322e0103a771d2db20',1,'CollisionsIntra']]],
-  ['get_5fidx_5frange_1279',['get_idx_range',['../namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155',1,'collisions_dimensions']]],
+  ['get_5fidx_5frange_1279',['get_idx_range',['../namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781',1,'collisions_dimensions']]],
   ['get_5findex_1280',['get_index',['../classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#a927c11bc990f292b5a78378737ae54e5',1,'DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_index()'],['../classIdxRangeSlice.html#a2ee4615ebb6864cdea1f6d93dc3e6add',1,'IdxRangeSlice::get_index()']]],
   ['get_5finternal_5ffield_1281',['get_internal_field',['../classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#ac7bdb7d57cf9d0ba344724a0a9797457',1,'DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_internal_field(Idx&lt; ODims... &gt; elem) const'],['../classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#a69552bfb0c1f498412d602350397bb67',1,'DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_internal_field(IdxRange&lt; ODims... &gt; dom) const']]],
   ['get_5flocal_5fidx_5frange_1282',['get_local_idx_range',['../classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8',1,'MPITransposeAllToAll']]],

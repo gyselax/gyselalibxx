@@ -121,9 +121,9 @@ Inheritance diagram for IAdvectionVelocity&lt; Geometry, GridV &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a109be8d18abe606c6cf3151647d1b08d"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, typename Geometry::FdistribuIdxRange &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionVelocity.html#a109be8d18abe606c6cf3151647d1b08d">operator()</a> (Field&lt; double, typename Geometry::FdistribuIdxRange &gt; allfdistribu, Field&lt; const double, typename Geometry::SpatialIdxRange &gt; electric_field, double dt) const =0</td></tr>
-<tr class="memdesc:a109be8d18abe606c6cf3151647d1b08d"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionVelocity.html#a109be8d18abe606c6cf3151647d1b08d">More...</a><br /></td></tr>
-<tr class="separator:a109be8d18abe606c6cf3151647d1b08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3daea164fd82a838975ff5dddf43676"><td class="memItemLeft" align="right" valign="top">virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionVelocity.html#af3daea164fd82a838975ff5dddf43676">operator()</a> (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DConstField&lt; typename Geometry::IdxRangeSpatial &gt; electric_field, double dt) const =0</td></tr>
+<tr class="memdesc:af3daea164fd82a838975ff5dddf43676"><td class="mdescLeft">&#160;</td><td class="mdescRight">operates a transport of the distribution function.  <a href="classIAdvectionVelocity.html#af3daea164fd82a838975ff5dddf43676">More...</a><br /></td></tr>
+<tr class="separator:af3daea164fd82a838975ff5dddf43676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Geometry, class GridV&gt;<br />
@@ -133,8 +133,8 @@ class IAdvectionVelocity&lt; Geometry, GridV &gt;</h3>
 <p>A generic class for a velocity advection.</p>
 <p>An abstract class which implements a function that applies the transport along a velocity direction of the phase space. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a109be8d18abe606c6cf3151647d1b08d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a109be8d18abe606c6cf3151647d1b08d">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="af3daea164fd82a838975ff5dddf43676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3daea164fd82a838975ff5dddf43676">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,15 +145,15 @@ template&lt;class Geometry , class GridV &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual Field&lt;double, typename Geometry::FdistribuIdxRange&gt; <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; Geometry, GridV &gt;::operator() </td>
+          <td class="memname">virtual DField&lt;typename Geometry::IdxRangeFdistribu&gt; <a class="el" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>&lt; Geometry, GridV &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">Field&lt; double, typename Geometry::FdistribuIdxRange &gt;&#160;</td>
+          <td class="paramtype">DField&lt; typename Geometry::IdxRangeFdistribu &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Field&lt; const double, typename Geometry::SpatialIdxRange &gt;&#160;</td>
+          <td class="paramtype">DConstField&lt; typename Geometry::IdxRangeSpatial &gt;&#160;</td>
           <td class="paramname"><em>electric_field</em>, </td>
         </tr>
         <tr>

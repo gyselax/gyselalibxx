@@ -4,7 +4,7 @@ var searchData=
   ['bernsteinpolynomialbasis_3c_20discretemapping_3a_3acartesian_5ftag_5fx_2c_20discretemapping_3a_3acartesian_5ftag_5fy_2c_20corner1tag_2c_20corner2tag_2c_20corner3tag_2c_20c_20_3e_817',['BernsteinPolynomialBasis&lt; DiscreteMapping::cartesian_tag_x, DiscreteMapping::cartesian_tag_y, Corner1Tag, Corner2Tag, Corner3Tag, C &gt;',['../classBernsteinPolynomialBasis.html',1,'']]],
   ['bsladvection1d_818',['BslAdvection1D',['../classBslAdvection1D.html',1,'']]],
   ['bsladvectionrtheta_819',['BslAdvectionRTheta',['../classBslAdvectionRTheta.html',1,'']]],
-  ['bsladvectionrtheta_3c_20splinefootfinder_3c_20euler_2c_20advectionidxrange_20_3e_2c_20mapping_20_3e_820',['BslAdvectionRTheta&lt; SplineFootFinder&lt; Euler, AdvectionIdxRange &gt;, Mapping &gt;',['../classBslAdvectionRTheta.html',1,'']]],
+  ['bsladvectionrtheta_3c_20splinefootfinder_3c_20euler_2c_20idxrangeadvection_20_3e_2c_20mapping_20_3e_820',['BslAdvectionRTheta&lt; SplineFootFinder&lt; Euler, IdxRangeAdvection &gt;, Mapping &gt;',['../classBslAdvectionRTheta.html',1,'']]],
   ['bsladvectionspatial_821',['BslAdvectionSpatial',['../classBslAdvectionSpatial.html',1,'']]],
   ['bsladvectionvelocity_822',['BslAdvectionVelocity',['../classBslAdvectionVelocity.html',1,'']]],
   ['bslexplicitpredcorrrtheta_823',['BslExplicitPredCorrRTheta',['../classBslExplicitPredCorrRTheta.html',1,'']]],

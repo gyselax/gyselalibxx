@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('ratecomputation_8hpp_source.html','');
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ddc::parallel_for_each(</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            exec_space,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(rate),</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(rate),</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ifspx) {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="keywordtype">double</span> temperature_log10</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                        = Kokkos::log10(temperature(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('ratecomputation_8hpp_source.html','');
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ddc::parallel_for_each(</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            exec_space,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(rate),</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(rate),</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            KOKKOS_LAMBDA(IdxSpX <span class="keyword">const</span> ifspx) {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordtype">double</span> temperature_log10</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        = Kokkos::log10(temperature(ielec(), ddc::select&lt;GridX&gt;(ifspx)));</div>
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('ratecomputation_8hpp_source.html','');
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> rate;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace detail</span></div>
-<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:82</div></div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a3ed65919dbae64a2ec9f5da42b393781"><div class="ttname"><a href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid1D... &gt; get_idx_range(IdxRangeFDistrib idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -18,7 +18,7 @@ var structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_
     [ "IdxRange1", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8", null ],
     [ "IdxRange2", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33", null ],
     [ "IdxRange12", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abcf91678d4dd96d85521818178d54d66", null ],
-    [ "BSIdxRange1", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a0705cf34ddbd5637f78cc26acd769b80", null ],
-    [ "BSIdxRange2", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a94523f79b825fc7e603a1d113dca0818", null ],
-    [ "BSIdxRange12", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a46a9eef62eea5c41d742c6a9de80b647", null ]
+    [ "IdxRangeBS1", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f", null ],
+    [ "IdxRangeBS2", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a281638bbfde5f496544d54ce87a89461", null ],
+    [ "IdxRangeBS12", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a4753baa1e93d836c5aaeb8ddbf9c58d2", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IMPILayout&lt; DataIdxRange, DistributedDim &gt; Class Template Reference</title>
+<title>Gyselalib++: IMPILayout&lt; IdxRangeData, DistributedDim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('classIMPILayout.html',''); initResizab
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classIMPILayout-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IMPILayout&lt; DataIdxRange, DistributedDim &gt; Class Template Reference</div>  </div>
+<div class="title">IMPILayout&lt; IdxRangeData, DistributedDim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -113,55 +113,55 @@ $(document).ready(function(){initNavTree('classIMPILayout.html',''); initResizab
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a266f0c2842eb56ebedf2dade7980cab9"><td class="memItemLeft" align="right" valign="top"><a id="a266f0c2842eb56ebedf2dade7980cab9"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a266f0c2842eb56ebedf2dade7980cab9">discrete_domain_type</a> = DataIdxRange</td></tr>
-<tr class="memdesc:a266f0c2842eb56ebedf2dade7980cab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the data. <br /></td></tr>
-<tr class="separator:a266f0c2842eb56ebedf2dade7980cab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a880c5120b4d4e28a75c64556dea84473"><td class="memItemLeft" align="right" valign="top"><a id="a880c5120b4d4e28a75c64556dea84473"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a880c5120b4d4e28a75c64556dea84473">distributed_sub_idx_range</a> = IdxRange&lt; DistributedDim... &gt;</td></tr>
-<tr class="memdesc:a880c5120b4d4e28a75c64556dea84473"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the distributed section of the data. <br /></td></tr>
-<tr class="separator:a880c5120b4d4e28a75c64556dea84473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a101c87361eab7bcefda79b996d8a6f24"><td class="memItemLeft" align="right" valign="top"><a id="a101c87361eab7bcefda79b996d8a6f24"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a101c87361eab7bcefda79b996d8a6f24">distributed_type_seq</a> = ddc::detail::TypeSeq&lt; DistributedDim... &gt;</td></tr>
-<tr class="memdesc:a101c87361eab7bcefda79b996d8a6f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
-<tr class="separator:a101c87361eab7bcefda79b996d8a6f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa958ea8d8ed3431a7d14e0333e379566"><td class="memItemLeft" align="right" valign="top"><a id="aa958ea8d8ed3431a7d14e0333e379566"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#aa958ea8d8ed3431a7d14e0333e379566">discrete_domain_type</a> = IdxRangeData</td></tr>
+<tr class="memdesc:aa958ea8d8ed3431a7d14e0333e379566"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the data. <br /></td></tr>
+<tr class="separator:aa958ea8d8ed3431a7d14e0333e379566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affaed5e5e8eba26de6e64662c6ebc7d7"><td class="memItemLeft" align="right" valign="top"><a id="affaed5e5e8eba26de6e64662c6ebc7d7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#affaed5e5e8eba26de6e64662c6ebc7d7">distributed_sub_idx_range</a> = IdxRange&lt; DistributedDim... &gt;</td></tr>
+<tr class="memdesc:affaed5e5e8eba26de6e64662c6ebc7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the distributed section of the data. <br /></td></tr>
+<tr class="separator:affaed5e5e8eba26de6e64662c6ebc7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5734be7b4782cfd49498bd2ad6610353"><td class="memItemLeft" align="right" valign="top"><a id="a5734be7b4782cfd49498bd2ad6610353"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a5734be7b4782cfd49498bd2ad6610353">distributed_type_seq</a> = ddc::detail::TypeSeq&lt; DistributedDim... &gt;</td></tr>
+<tr class="memdesc:a5734be7b4782cfd49498bd2ad6610353"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
+<tr class="separator:a5734be7b4782cfd49498bd2ad6610353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ace6ec22fc1fdc9798b7532fce56dadbf"><td class="memItemLeft" align="right" valign="top"><a id="ace6ec22fc1fdc9798b7532fce56dadbf"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#ace6ec22fc1fdc9798b7532fce56dadbf">n_distributed_dimensions</a> = sizeof...(DistributedDim)</td></tr>
-<tr class="memdesc:ace6ec22fc1fdc9798b7532fce56dadbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of dimensions that are distributed across MPI processes. <br /></td></tr>
-<tr class="separator:ace6ec22fc1fdc9798b7532fce56dadbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d4e662b2ddf07d632247d503769e3b4"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#a8d4e662b2ddf07d632247d503769e3b4">distributed_idx_ranges_are_first</a></td></tr>
-<tr class="memdesc:a8d4e662b2ddf07d632247d503769e3b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory.  <a href="classIMPILayout.html#a8d4e662b2ddf07d632247d503769e3b4">More...</a><br /></td></tr>
-<tr class="separator:a8d4e662b2ddf07d632247d503769e3b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab55757fa0972d849a94feeca30a9f465"><td class="memItemLeft" align="right" valign="top"><a id="ab55757fa0972d849a94feeca30a9f465"></a>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#ab55757fa0972d849a94feeca30a9f465">n_distributed_dimensions</a> = sizeof...(DistributedDim)</td></tr>
+<tr class="memdesc:ab55757fa0972d849a94feeca30a9f465"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of dimensions that are distributed across MPI processes. <br /></td></tr>
+<tr class="separator:ab55757fa0972d849a94feeca30a9f465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab14961802d15d51c8a1a45c7896e64d"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPILayout.html#aab14961802d15d51c8a1a45c7896e64d">distributed_idx_ranges_are_first</a></td></tr>
+<tr class="memdesc:aab14961802d15d51c8a1a45c7896e64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A flag to indicate whether the distributed dimensions are the dimensions which are the furthest from being contiguous in memory.  <a href="classIMPILayout.html#aab14961802d15d51c8a1a45c7896e64d">More...</a><br /></td></tr>
+<tr class="separator:aab14961802d15d51c8a1a45c7896e64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class DataIdxRange, class... DistributedDim&gt;<br />
-class IMPILayout&lt; DataIdxRange, DistributedDim &gt;</h3>
+<div class="textblock"><h3>template&lt;class IdxRangeData, class... DistributedDim&gt;<br />
+class IMPILayout&lt; IdxRangeData, DistributedDim &gt;</h3>
 
 <p>A super class describing a way in which data may be laid out across MPI processes. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">DataIdxRange</td><td>The index range on which the data is defined. </td></tr>
+    <tr><td class="paramname">IdxRangeData</td><td>The index range on which the data is defined. </td></tr>
     <tr><td class="paramname">DistributedDim</td><td>The tags of the discrete dimensions which are distributed across MPI processes. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8d4e662b2ddf07d632247d503769e3b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d4e662b2ddf07d632247d503769e3b4">&#9670;&nbsp;</a></span>distributed_idx_ranges_are_first</h2>
+<a id="aab14961802d15d51c8a1a45c7896e64d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab14961802d15d51c8a1a45c7896e64d">&#9670;&nbsp;</a></span>distributed_idx_ranges_are_first</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DataIdxRange , class... DistributedDim&gt; </div>
+template&lt;class IdxRangeData , class... DistributedDim&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool <a class="el" href="classIMPILayout.html">IMPILayout</a>&lt; DataIdxRange, DistributedDim &gt;::distributed_idx_ranges_are_first</td>
+          <td class="memname">constexpr bool <a class="el" href="classIMPILayout.html">IMPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::distributed_idx_ranges_are_first</td>
         </tr>
       </table>
   </td>

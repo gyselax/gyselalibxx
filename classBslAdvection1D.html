@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: BslAdvection1D&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt; Class Template Reference</title>
+<title>Gyselalib++: BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('classBslAdvection1D.html',''); initRes
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classBslAdvection1D-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">BslAdvection1D&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt; Class Template Reference</div>  </div>
+<div class="title">BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,16 +112,16 @@ $(document).ready(function(){initNavTree('classBslAdvection1D.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad3b66a654778bd7870f847c3795107a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvection1D.html#ad3b66a654778bd7870f847c3795107a0">BslAdvection1D</a> (FunctionPreallocatableInterpolatorType const &amp;function_interpolator, AdvectionFieldBuilder const &amp;adv_field_builder, AdvectionFieldEvaluator const &amp;adv_field_evaluator, TimeStepper const &amp;time_stepper)</td></tr>
-<tr class="memdesc:ad3b66a654778bd7870f847c3795107a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor when the advection index range and the function index range are different.  <a href="classBslAdvection1D.html#ad3b66a654778bd7870f847c3795107a0">More...</a><br /></td></tr>
-<tr class="separator:ad3b66a654778bd7870f847c3795107a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3654254533d03fe10b65718efb902415"><td class="memItemLeft" align="right" valign="top">FunctionField&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvection1D.html#a3654254533d03fe10b65718efb902415">operator()</a> (FunctionField const allfdistribu, AdvecField const advection_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt) const</td></tr>
-<tr class="memdesc:a3654254533d03fe10b65718efb902415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advects allfdistribu along the advection dimension GridInterest for a duration dt.  <a href="classBslAdvection1D.html#a3654254533d03fe10b65718efb902415">More...</a><br /></td></tr>
-<tr class="separator:a3654254533d03fe10b65718efb902415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ae25b90d5ed98e07638f207bb18a0a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvection1D.html#a7ae25b90d5ed98e07638f207bb18a0a6">BslAdvection1D</a> (FunctionPreallocatableInterpolatorType const &amp;function_interpolator, AdvectionFieldBuilder const &amp;adv_field_builder, AdvectionFieldEvaluator const &amp;adv_field_evaluator, TimeStepper const &amp;time_stepper)</td></tr>
+<tr class="memdesc:a7ae25b90d5ed98e07638f207bb18a0a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor when the advection index range and the function index range are different.  <a href="classBslAdvection1D.html#a7ae25b90d5ed98e07638f207bb18a0a6">More...</a><br /></td></tr>
+<tr class="separator:a7ae25b90d5ed98e07638f207bb18a0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c09fdec0ac2ec060d846a03a775766"><td class="memItemLeft" align="right" valign="top">FunctionField&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvection1D.html#ab6c09fdec0ac2ec060d846a03a775766">operator()</a> (FunctionField const allfdistribu, AdvecField const advection_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt) const</td></tr>
+<tr class="memdesc:ab6c09fdec0ac2ec060d846a03a775766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advects allfdistribu along the advection dimension GridInterest for a duration dt.  <a href="classBslAdvection1D.html#ab6c09fdec0ac2ec060d846a03a775766">More...</a><br /></td></tr>
+<tr class="separator:ab6c09fdec0ac2ec060d846a03a775766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class GridInterest, class AdvectionIdxRange, class FunctionIdxRange, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepper = Euler&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        AdvectionIdxRange&gt;,                FieldMem&lt;double, AdvectionIdxRange&gt;&gt;&gt;<br />
-class BslAdvection1D&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</h3>
+<div class="textblock"><h3>template&lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepper = Euler&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        IdxRangeAdvection&gt;,                DFieldMem&lt;IdxRangeAdvection&gt;&gt;&gt;<br />
+class BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;</h3>
 
 <p>A class which computes the advection along the dimension of interest GridInterest. </p>
 <p>This operator solves the following equation type</p>
@@ -136,8 +136,8 @@ class BslAdvection1D&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, Adve
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">GridInterest</td><td>The dimension along which the advection is computed. It refers to the dimension of \( x_i \) in the equation. </td></tr>
-    <tr><td class="paramname">AdvectionIdxRange</td><td>The index range \( \Omega&#39; \) where the characteristic equation is solved. It also refers to the index range of the advection field. It had to also be defined on the GridInterest for the time integration method. </td></tr>
-    <tr><td class="paramname">FunctionIdxRange</td><td>The index range \( \Omega \) where allfdistribu is defined. </td></tr>
+    <tr><td class="paramname">IdxRangeAdvection</td><td>The index range \( \Omega&#39; \) where the characteristic equation is solved. It also refers to the index range of the advection field. It had to also be defined on the GridInterest for the time integration method. </td></tr>
+    <tr><td class="paramname">IdxRangeFunction</td><td>The index range \( \Omega \) where allfdistribu is defined. </td></tr>
     <tr><td class="paramname">AdvectionFieldBuilder</td><td>The type of the spline builder for the advection field (see SplineBuilder). </td></tr>
     <tr><td class="paramname">AdvectionFieldEvaluator</td><td>The type of the spline evalutor for the advection field (see SplineEvaluator). <br  />
  </td></tr>
@@ -146,19 +146,19 @@ class BslAdvection1D&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, Adve
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad3b66a654778bd7870f847c3795107a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3b66a654778bd7870f847c3795107a0">&#9670;&nbsp;</a></span>BslAdvection1D()</h2>
+<a id="a7ae25b90d5ed98e07638f207bb18a0a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ae25b90d5ed98e07638f207bb18a0a6">&#9670;&nbsp;</a></span>BslAdvection1D()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class GridInterest , class AdvectionIdxRange , class FunctionIdxRange , class AdvectionFieldBuilder , class AdvectionFieldEvaluator , class TimeStepper  = Euler&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        AdvectionIdxRange&gt;,                FieldMem&lt;double, AdvectionIdxRange&gt;&gt;&gt; </div>
+template&lt;class GridInterest , class IdxRangeAdvection , class IdxRangeFunction , class AdvectionFieldBuilder , class AdvectionFieldEvaluator , class TimeStepper  = Euler&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        IdxRangeAdvection&gt;,                DFieldMem&lt;IdxRangeAdvection&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBslAdvection1D.html">BslAdvection1D</a>&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::<a class="el" href="classBslAdvection1D.html">BslAdvection1D</a> </td>
+          <td class="memname"><a class="el" href="classBslAdvection1D.html">BslAdvection1D</a>&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::<a class="el" href="classBslAdvection1D.html">BslAdvection1D</a> </td>
           <td>(</td>
           <td class="paramtype">FunctionPreallocatableInterpolatorType const &amp;&#160;</td>
           <td class="paramname"><em>function_interpolator</em>, </td>
@@ -195,7 +195,7 @@ template&lt;class GridInterest , class AdvectionIdxRange , class FunctionIdxRang
 </div><div class="memdoc">
 
 <p>Constructor when the advection index range and the function index range are different. </p>
-<p>When AdvectionIdxRange and FunctionIdxRange are different, we need one interpolator for each index range.</p>
+<p>When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for each index range.</p>
 <p>We can also use it when we want two differents interpolators but defined on the same index range (e.g. different boundary conditions for the evaluators).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -211,19 +211,19 @@ template&lt;class GridInterest , class AdvectionIdxRange , class FunctionIdxRang
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3654254533d03fe10b65718efb902415"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3654254533d03fe10b65718efb902415">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="ab6c09fdec0ac2ec060d846a03a775766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6c09fdec0ac2ec060d846a03a775766">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class GridInterest , class AdvectionIdxRange , class FunctionIdxRange , class AdvectionFieldBuilder , class AdvectionFieldEvaluator , class TimeStepper  = Euler&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        AdvectionIdxRange&gt;,                FieldMem&lt;double, AdvectionIdxRange&gt;&gt;&gt; </div>
+template&lt;class GridInterest , class IdxRangeAdvection , class IdxRangeFunction , class AdvectionFieldBuilder , class AdvectionFieldEvaluator , class TimeStepper  = Euler&lt;FieldMem&lt;                        Coord&lt;typename GridInterest::continuous_dimension_type&gt;,                        IdxRangeAdvection&gt;,                DFieldMem&lt;IdxRangeAdvection&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">FunctionField <a class="el" href="classBslAdvection1D.html">BslAdvection1D</a>&lt; GridInterest, AdvectionIdxRange, FunctionIdxRange, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::operator() </td>
+          <td class="memname">FunctionField <a class="el" href="classBslAdvection1D.html">BslAdvection1D</a>&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">FunctionField const&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>

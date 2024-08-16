@@ -2,7 +2,7 @@ var searchData=
 [
   ['n_5fsingular_5fbasis_1341',['n_singular_basis',['../classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3',1,'PolarBSplines']]],
   ['nbasis_1342',['nbasis',['../classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa',1,'PolarBSplines::Impl']]],
-  ['negative_5fdifferentiate_5fequation_1343',['negative_differentiate_equation',['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01FullIdxRange_00_01ExecSpace_00_01LayoutSpace_01_4.html#a1917af88071ea1d7de079707b6702329',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, FullIdxRange, ExecSpace, LayoutSpace &gt;']]],
+  ['negative_5fdifferentiate_5fequation_1343',['negative_differentiate_equation',['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ae7398f552996b17d7ee0493288d2281d',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;']]],
   ['neumann_5fspline_5fquadrature_5fcoefficients_1344',['neumann_spline_quadrature_coefficients',['../neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797',1,'neumann_spline_quadrature.hpp']]],
   ['neumann_5fspline_5fquadrature_5fcoefficients_5f1d_1345',['neumann_spline_quadrature_coefficients_1d',['../neumann__spline__quadrature_8hpp.html#a6c16c5257236f20ed676298bea99c837',1,'neumann_spline_quadrature.hpp']]],
   ['non_5fsingular_5fsolution_1346',['non_singular_solution',['../classManufacturedPoissonTest.html#a636a16b0d706ca238349b1d2e7eac1a7',1,'ManufacturedPoissonTest']]],

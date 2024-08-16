@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: SplineFootFinder&lt; TimeStepper, AdvectionIdxRange &gt; Class Template Reference</title>
+<title>Gyselalib++: SplineFootFinder&lt; TimeStepper, IdxRangeAdvection &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,58 +103,58 @@ $(document).ready(function(){initNavTree('classSplineFootFinder.html',''); initR
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSplineFootFinder-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">SplineFootFinder&lt; TimeStepper, AdvectionIdxRange &gt; Class Template Reference</div>  </div>
+<div class="title">SplineFootFinder&lt; TimeStepper, IdxRangeAdvection &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Define a base class for all the time integration methods used for the advection.  
  <a href="classSplineFootFinder.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for SplineFootFinder&lt; TimeStepper, AdvectionIdxRange &gt;:</div>
+Inheritance diagram for SplineFootFinder&lt; TimeStepper, IdxRangeAdvection &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classSplineFootFinder.png" usemap="#SplineFootFinder_3C_20TimeStepper_2C_20AdvectionIdxRange_20_3E_map" alt=""/>
-  <map id="SplineFootFinder_3C_20TimeStepper_2C_20AdvectionIdxRange_20_3E_map" name="SplineFootFinder_3C_20TimeStepper_2C_20AdvectionIdxRange_20_3E_map">
+  <img src="classSplineFootFinder.png" usemap="#SplineFootFinder_3C_20TimeStepper_2C_20IdxRangeAdvection_20_3E_map" alt=""/>
+  <map id="SplineFootFinder_3C_20TimeStepper_2C_20IdxRangeAdvection_20_3E_map" name="SplineFootFinder_3C_20TimeStepper_2C_20IdxRangeAdvection_20_3E_map">
 <area href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection." alt="IFootFinder" shape="rect" coords="0,0,321,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a03964695b7dea994020ae983467d4c22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a03964695b7dea994020ae983467d4c22">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, AdvectionIdxRange const &amp;advection_idx_range, SplineRThetaBuilder const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound const &amp;evaluator_advection_field)</td></tr>
-<tr class="memdesc:a03964695b7dea994020ae983467d4c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <a href="classSplineFootFinder.html#a03964695b7dea994020ae983467d4c22">More...</a><br /></td></tr>
-<tr class="separator:a03964695b7dea994020ae983467d4c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb2100a686bf8dc296b00f05417a5ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#abb2100a686bf8dc296b00f05417a5ffa">operator()</a> (FieldRTheta&lt; CoordRTheta &gt; feet, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, double dt) const final</td></tr>
-<tr class="memdesc:abb2100a686bf8dc296b00f05417a5ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <a href="classSplineFootFinder.html#abb2100a686bf8dc296b00f05417a5ffa">More...</a><br /></td></tr>
-<tr class="separator:abb2100a686bf8dc296b00f05417a5ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc1ac2015d8d229ee7cf66eed048129a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#acc1ac2015d8d229ee7cf66eed048129a">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, IdxRangeAdvection const &amp;advection_idx_range, SplineRThetaBuilder const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound const &amp;evaluator_advection_field)</td></tr>
+<tr class="memdesc:acc1ac2015d8d229ee7cf66eed048129a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <a href="classSplineFootFinder.html#acc1ac2015d8d229ee7cf66eed048129a">More...</a><br /></td></tr>
+<tr class="separator:acc1ac2015d8d229ee7cf66eed048129a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ef44c11afa527cbafa24330b197635"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a46ef44c11afa527cbafa24330b197635">operator()</a> (FieldRTheta&lt; CoordRTheta &gt; feet, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, double dt) const final</td></tr>
+<tr class="memdesc:a46ef44c11afa527cbafa24330b197635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <a href="classSplineFootFinder.html#a46ef44c11afa527cbafa24330b197635">More...</a><br /></td></tr>
+<tr class="separator:a46ef44c11afa527cbafa24330b197635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class TimeStepper, class AdvectionIdxRange&gt;<br />
-class SplineFootFinder&lt; TimeStepper, AdvectionIdxRange &gt;</h3>
+<div class="textblock"><h3>template&lt;class TimeStepper, class IdxRangeAdvection&gt;<br />
+class SplineFootFinder&lt; TimeStepper, IdxRangeAdvection &gt;</h3>
 
 <p>Define a base class for all the time integration methods used for the advection. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">TimeStepper</td><td>A child class of <a class="el" href="classITimeStepper.html">ITimeStepper</a> providing a time integration method. </td></tr>
-    <tr><td class="paramname">AdvectionIdxRange</td><td>A child class of AdvectionIdxRange providing the informations about the advection index range.</td></tr>
+    <tr><td class="paramname">IdxRangeAdvection</td><td>A child class of IdxRangeAdvection providing the informations about the advection index range.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a03964695b7dea994020ae983467d4c22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03964695b7dea994020ae983467d4c22">&#9670;&nbsp;</a></span>SplineFootFinder()</h2>
+<a id="acc1ac2015d8d229ee7cf66eed048129a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc1ac2015d8d229ee7cf66eed048129a">&#9670;&nbsp;</a></span>SplineFootFinder()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class AdvectionIdxRange &gt; </div>
+template&lt;class TimeStepper , class IdxRangeAdvection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, AdvectionIdxRange &gt;::<a class="el" href="classSplineFootFinder.html">SplineFootFinder</a> </td>
+          <td class="memname"><a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, IdxRangeAdvection &gt;::<a class="el" href="classSplineFootFinder.html">SplineFootFinder</a> </td>
           <td>(</td>
           <td class="paramtype">TimeStepper const &amp;&#160;</td>
           <td class="paramname"><em>time_stepper</em>, </td>
@@ -162,7 +162,7 @@ template&lt;class TimeStepper , class AdvectionIdxRange &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">AdvectionIdxRange const &amp;&#160;</td>
+          <td class="paramtype">IdxRangeAdvection const &amp;&#160;</td>
           <td class="paramname"><em>advection_idx_range</em>, </td>
         </tr>
         <tr>
@@ -194,7 +194,7 @@ template&lt;class TimeStepper , class AdvectionIdxRange &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">time_stepper</td><td>The time integration method used to solve the characteristic equation (<a class="el" href="classITimeStepper.html">ITimeStepper</a>). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_idx_range</td><td>An AdvectionIdxRange object which defines in which index range we advect the characteristics. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">advection_idx_range</td><td>An IdxRangeAdvection object which defines in which index range we advect the characteristics. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">builder_advection_field</td><td>The spline builder which computes the spline representation of the advection field. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">evaluator_advection_field</td><td>The B-splines evaluator to evaluate the advection field.</td></tr>
   </table>
@@ -203,7 +203,7 @@ template&lt;class TimeStepper , class AdvectionIdxRange &gt; </div>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">TimeStepper</td><td>A child class of <a class="el" href="classITimeStepper.html">ITimeStepper</a> providing a time integration method. </td></tr>
-    <tr><td class="paramname">AdvectionIdxRange</td><td>A child class of AdvectionIdxRange providing the informations about the advection index range.</td></tr>
+    <tr><td class="paramname">IdxRangeAdvection</td><td>A child class of IdxRangeAdvection providing the informations about the advection index range.</td></tr>
   </table>
   </dd>
 </dl>
@@ -212,19 +212,19 @@ template&lt;class TimeStepper , class AdvectionIdxRange &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abb2100a686bf8dc296b00f05417a5ffa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb2100a686bf8dc296b00f05417a5ffa">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a46ef44c11afa527cbafa24330b197635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ef44c11afa527cbafa24330b197635">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class AdvectionIdxRange &gt; </div>
+template&lt;class TimeStepper , class IdxRangeAdvection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, AdvectionIdxRange &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, IdxRangeAdvection &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">FieldRTheta&lt; CoordRTheta &gt;&#160;</td>
           <td class="paramname"><em>feet</em>, </td>

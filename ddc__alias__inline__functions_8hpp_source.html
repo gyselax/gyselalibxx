@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('ddc__alias__inline__functions_8hpp_sou
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;vector_field_common.hpp&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryGrids, <span class="keyword">class </span>FieldType&gt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keyword">auto</span> <a class="code" href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">get_idx_range</a>(FieldType <span class="keyword">const</span>&amp; field) noexcept</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;KOKKOS_INLINE_FUNCTION <span class="keyword">auto</span> <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(FieldType <span class="keyword">const</span>&amp; field) noexcept</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    static_assert(</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            ddc::is_chunk_v&lt;FieldType&gt; || is_field_v&lt;FieldType&gt;,</div>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('ddc__alias__inline__functions_8hpp_sou
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="stringliteral">&quot;Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type&quot;</span>);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> field.span_cview();</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="ttc" id="anamespacecollisions__dimensions_html_a4bb67dd29b9d3ef9f20d6246c3d2b155"><div class="ttname"><a href="namespacecollisions__dimensions.html#a4bb67dd29b9d3ef9f20d6246c3d2b155">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid... &gt; get_idx_range(FDistribIdxRange idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:82</div></div>
+<div class="ttc" id="anamespacecollisions__dimensions_html_a3ed65919dbae64a2ec9f5da42b393781"><div class="ttname"><a href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid1D... &gt; get_idx_range(IdxRangeFDistrib idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

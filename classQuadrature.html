@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Quadrature&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt; Class Template Reference</title>
+<title>Gyselalib++: Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('classQuadrature.html',''); initResizab
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classQuadrature-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Quadrature&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt; Class Template Reference</div>  </div>
+<div class="title">Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,45 +112,45 @@ $(document).ready(function(){initNavTree('classQuadrature.html',''); initResizab
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af25a40273479e6abb60f4a1ada034d38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#af25a40273479e6abb60f4a1ada034d38">Quadrature</a> (QuadConstField coeffs)</td></tr>
-<tr class="memdesc:af25a40273479e6abb60f4a1ada034d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object.  <a href="classQuadrature.html#af25a40273479e6abb60f4a1ada034d38">More...</a><br /></td></tr>
-<tr class="separator:af25a40273479e6abb60f4a1ada034d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a648c66e4caed6c0866269d59cbc5ef"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class IntegratorFunction &gt; </td></tr>
-<tr class="memitem:a8a648c66e4caed6c0866269d59cbc5ef"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a8a648c66e4caed6c0866269d59cbc5ef">operator()</a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const</td></tr>
-<tr class="memdesc:a8a648c66e4caed6c0866269d59cbc5ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range.  <a href="classQuadrature.html#a8a648c66e4caed6c0866269d59cbc5ef">More...</a><br /></td></tr>
-<tr class="separator:a8a648c66e4caed6c0866269d59cbc5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b67590831fc07948151ca0094a252c7"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </td></tr>
-<tr class="memitem:a2b67590831fc07948151ca0094a252c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a2b67590831fc07948151ca0094a252c7">operator()</a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, std::experimental::layout_right, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td></tr>
-<tr class="memdesc:a2b67590831fc07948151ca0094a252c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.  <a href="classQuadrature.html#a2b67590831fc07948151ca0094a252c7">More...</a><br /></td></tr>
-<tr class="separator:a2b67590831fc07948151ca0094a252c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add77c7dd792c607d8047825fa2097b55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQuadrature.html#add77c7dd792c607d8047825fa2097b55">Quadrature</a> (QuadConstField coeffs)</td></tr>
+<tr class="memdesc:add77c7dd792c607d8047825fa2097b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object.  <a href="classQuadrature.html#add77c7dd792c607d8047825fa2097b55">More...</a><br /></td></tr>
+<tr class="separator:add77c7dd792c607d8047825fa2097b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc3a757e91e2d185ee290c409156fd4f"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class IntegratorFunction &gt; </td></tr>
+<tr class="memitem:acc3a757e91e2d185ee290c409156fd4f"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#acc3a757e91e2d185ee290c409156fd4f">operator()</a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const</td></tr>
+<tr class="memdesc:acc3a757e91e2d185ee290c409156fd4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range.  <a href="classQuadrature.html#acc3a757e91e2d185ee290c409156fd4f">More...</a><br /></td></tr>
+<tr class="separator:acc3a757e91e2d185ee290c409156fd4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a7011a414f2f78524042fd2104342f0"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </td></tr>
+<tr class="memitem:a5a7011a414f2f78524042fd2104342f0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a5a7011a414f2f78524042fd2104342f0">operator()</a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, std::experimental::layout_right, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td></tr>
+<tr class="memdesc:a5a7011a414f2f78524042fd2104342f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.  <a href="classQuadrature.html#a5a7011a414f2f78524042fd2104342f0">More...</a><br /></td></tr>
+<tr class="separator:a5a7011a414f2f78524042fd2104342f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class QuadratureIdxRange, class TotalIdxRange = QuadratureIdxRange, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space&gt;<br />
-class Quadrature&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;</h3>
+<div class="textblock"><h3>template&lt;class IdxRangeQuadrature, class IdxRangeTotal = IdxRangeQuadrature, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space&gt;<br />
+class Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt;</h3>
 
 <p>A class providing an operator for integrating functions defined on a discrete index range. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">QuadratureIdxRange</td><td>The index range over which the function is integrated. </td></tr>
-    <tr><td class="paramname">TotalIdxRange</td><td>The index range of the chunk which can be passed to the operator(). This is the QuadratureIdxRange combined with any batch dimensions. If there are no batch dimensions then this argument does not need to be provided as by default it is equal to the QuadratureIdxRange. </td></tr>
+    <tr><td class="paramname">IdxRangeQuadrature</td><td>The index range over which the function is integrated. </td></tr>
+    <tr><td class="paramname">IdxRangeTotal</td><td>The index range of the chunk which can be passed to the operator(). This is the IdxRangeQuadrature combined with any batch dimensions. If there are no batch dimensions then this argument does not need to be provided as by default it is equal to the IdxRangeQuadrature. </td></tr>
     <tr><td class="paramname">MemorySpace</td><td>The memory space (cpu/gpu) where the quadrature coefficients are saved. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af25a40273479e6abb60f4a1ada034d38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af25a40273479e6abb60f4a1ada034d38">&#9670;&nbsp;</a></span>Quadrature()</h2>
+<a id="add77c7dd792c607d8047825fa2097b55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add77c7dd792c607d8047825fa2097b55">&#9670;&nbsp;</a></span>Quadrature()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
+template&lt;class IdxRangeQuadrature , class IdxRangeTotal  = IdxRangeQuadrature, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;::<a class="el" href="classQuadrature.html">Quadrature</a> </td>
+          <td class="memname"><a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt;::<a class="el" href="classQuadrature.html">Quadrature</a> </td>
           <td>(</td>
           <td class="paramtype">QuadConstField&#160;</td>
           <td class="paramname"><em>coeffs</em></td><td>)</td>
@@ -175,13 +175,13 @@ template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8a648c66e4caed6c0866269d59cbc5ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a648c66e4caed6c0866269d59cbc5ef">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="acc3a757e91e2d185ee290c409156fd4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3a757e91e2d185ee290c409156fd4f">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
+template&lt;class IdxRangeQuadrature , class IdxRangeTotal  = IdxRangeQuadrature, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
 <div class="memtemplate">
 template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
 <table class="mlabels">
@@ -189,7 +189,7 @@ template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;::operator() </td>
+          <td class="memname">double <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ExecutionSpace&#160;</td>
           <td class="paramname"><em>exec_space</em>, </td>
@@ -225,13 +225,13 @@ template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
 
 </div>
 </div>
-<a id="a2b67590831fc07948151ca0094a252c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b67590831fc07948151ca0094a252c7">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a5a7011a414f2f78524042fd2104342f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a7011a414f2f78524042fd2104342f0">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class QuadratureIdxRange , class TotalIdxRange  = QuadratureIdxRange, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
+template&lt;class IdxRangeQuadrature , class IdxRangeTotal  = IdxRangeQuadrature, class MemorySpace  = Kokkos::DefaultExecutionSpace::memory_space&gt; </div>
 <div class="memtemplate">
 template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </div>
 <table class="mlabels">
@@ -239,7 +239,7 @@ template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunctio
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classQuadrature.html">Quadrature</a>&lt; QuadratureIdxRange, TotalIdxRange, MemorySpace &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ExecutionSpace&#160;</td>
           <td class="paramname"><em>exec_space</em>, </td>

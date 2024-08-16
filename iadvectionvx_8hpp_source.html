@@ -108,23 +108,22 @@ $(document).ready(function(){initNavTree('iadvectionvx_8hpp_source.html',''); in
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;ddc_helper.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>V&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html#a109be8d18abe606c6cf3151647d1b08d">   31</a></span>&#160;    <span class="keyword">virtual</span> Field&lt;double, typename Geometry::FdistribuIdxRange&gt; <a class="code" href="classIAdvectionVelocity.html#a109be8d18abe606c6cf3151647d1b08d">operator()</a>(</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            Field&lt;double, typename Geometry::FdistribuIdxRange&gt; allfdistribu,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            Field&lt;const double, typename Geometry::SpatialIdxRange&gt; electric_field,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:18</div></div>
-<div class="ttc" id="aclassIAdvectionVelocity_html_a109be8d18abe606c6cf3151647d1b08d"><div class="ttname"><a href="classIAdvectionVelocity.html#a109be8d18abe606c6cf3151647d1b08d">IAdvectionVelocity::operator()</a></div><div class="ttdeci">virtual Field&lt; double, typename Geometry::FdistribuIdxRange &gt; operator()(Field&lt; double, typename Geometry::FdistribuIdxRange &gt; allfdistribu, Field&lt; const double, typename Geometry::SpatialIdxRange &gt; electric_field, double dt) const =0</div><div class="ttdoc">operates a transport of the distribution function.</div></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_helper.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Geometry, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>V&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classIAdvectionVelocity.html">IAdvectionVelocity</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classIAdvectionVelocity.html#af3daea164fd82a838975ff5dddf43676">   30</a></span>&#160;    <span class="keyword">virtual</span> DField&lt;typename Geometry::IdxRangeFdistribu&gt; <a class="code" href="classIAdvectionVelocity.html#af3daea164fd82a838975ff5dddf43676">operator()</a>(</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            DField&lt;typename Geometry::IdxRangeFdistribu&gt; allfdistribu,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            DConstField&lt;typename Geometry::IdxRangeSpatial&gt; electric_field,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="ttc" id="aclassIAdvectionVelocity_html"><div class="ttname"><a href="classIAdvectionVelocity.html">IAdvectionVelocity</a></div><div class="ttdoc">A class which provides an advection operator.</div><div class="ttdef"><b>Definition:</b> iadvectionvx.hpp:17</div></div>
+<div class="ttc" id="aclassIAdvectionVelocity_html_af3daea164fd82a838975ff5dddf43676"><div class="ttname"><a href="classIAdvectionVelocity.html#af3daea164fd82a838975ff5dddf43676">IAdvectionVelocity::operator()</a></div><div class="ttdeci">virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; operator()(DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DConstField&lt; typename Geometry::IdxRangeSpatial &gt; electric_field, double dt) const =0</div><div class="ttdoc">operates a transport of the distribution function.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -7,6 +7,6 @@ var classMPITransposeAllToAll =
     [ "field_layout_type", "classMPITransposeAllToAll.html#a79ffa0d257284fa0c6da3dd5e1b131b9", null ],
     [ "MPITransposeAllToAll", "classMPITransposeAllToAll.html#a1c663a83e6a7b770ef8d764d877d4deb", null ],
     [ "get_local_idx_range", "classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8", null ],
-    [ "operator()", "classMPITransposeAllToAll.html#a39ce203fa89367e0832e8883e7b58d72", null ],
+    [ "operator()", "classMPITransposeAllToAll.html#a15010bf5fb9a21443c9812482eb18f77", null ],
     [ "transpose_to", "classMPITransposeAllToAll.html#ab4eb14a8f1df3c01b899b5b25e5f574a", null ]
 ];
