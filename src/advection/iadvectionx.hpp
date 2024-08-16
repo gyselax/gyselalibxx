@@ -24,7 +24,7 @@ public:
      *
      * @return A reference to an array containing the value of distribution the function at the updated time T+dt.
      */
-    virtual Field<double, typename Geometry::FdistribuIdxRange> operator()(
-            Field<double, typename Geometry::FdistribuIdxRange> allfdistribu,
+    virtual DField<typename Geometry::IdxRangeFdistribu> operator()(
+            DField<typename Geometry::IdxRangeFdistribu> allfdistribu,
             double dt) const = 0;
 };

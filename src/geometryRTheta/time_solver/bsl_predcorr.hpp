@@ -8,9 +8,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-#include <utils_tools.hpp>
-
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
@@ -23,6 +20,7 @@
 #include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "utils_tools.hpp"
 
 /**
  * @brief Predictor-corrector for the Vlasov-Poisson equations.
@@ -118,13 +116,13 @@ public:
         ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
-        BSIdxRangeR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+        IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
-        BSIdxRangeTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
+        IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
 
         SplinePolar electrostatic_potential_coef(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
-                BSIdxRangeRTheta(radial_bsplines, polar_idx_range));
+                IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);

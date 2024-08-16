@@ -15,7 +15,7 @@
 
 class MockAdvectionX : public IAdvectionSpatial<GeometryXVx, GridX>
 {
-    using IdxRange = typename GeometryXVx::FdistribuIdxRange;
+    using IdxRange = typename GeometryXVx::IdxRangeFdistribu;
 
 public:
     MockAdvectionX() = default;
@@ -30,8 +30,8 @@ public:
 
 class MockAdvectionVx : public IAdvectionVelocity<GeometryXVx, GridVx>
 {
-    using IdxRange = typename GeometryXVx::FdistribuIdxRange;
-    using GridX = typename GeometryXVx::SpatialIdxRange;
+    using IdxRange = typename GeometryXVx::IdxRangeFdistribu;
+    using GridX = typename GeometryXVx::IdxRangeSpatial;
 
 public:
     MockAdvectionVx() = default;
