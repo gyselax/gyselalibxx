@@ -201,7 +201,7 @@ if __name__ == '__main__':
                     path = match_found.group(2)[1:-1]
 
                     # Replace references to READMEs with the page tag
-                    if path.endswith('.md') and not os.path.isabs(path):
+                    if path.endswith('README.md') and not os.path.isabs(path):
                         # Get the path to the referenced file directory from the root directory
                         path = os.path.normpath(os.path.join(folder, path))
                         relpath = os.path.relpath(path, start=root_dir)
@@ -210,25 +210,20 @@ if __name__ == '__main__':
                         # Get the path to the referenced file directory from the file containing the reference
                         path_from_file = os.path.relpath(os.path.dirname(path), start=os.path.dirname(file))
 
-                        called_from_root = os.path.samefile(file, os.path.join(root_dir, 'README.md'))
-                        tag_path, _ = os.path.splitext(relpath)
-
-                        link_to_README = os.path.basename(relpath) == 'README.md'
-
                         # Check if the referenced file is a subpage.
                         # It is a subpage if it is found in a sub-folder and no other README is found in a
                         # closer sub-folder
-                        is_subpage = '..' not in path_from_file and link_to_README
+                        is_subpage = '..' not in path_from_file
                         if is_subpage:
                             intermediate_folders = path_from_file.split('/')
                             for i in range(1,len(intermediate_folders)-1):
                                 # Check if a README can be found in the intermediate file
-                                if os.path.exists(os.path.join(folder, *intermediate_folders[:i], os.path.basename(path))):
+                                if os.path.exists(os.path.join(folder, *intermediate_folders[:i], "README.md")):
                                     is_subpage = False
                                     break
 
                         # Calculate the tag of the page
-                        subpage_tag = get_compatible_tag(reldir if link_to_README else tag_path)
+                        subpage_tag = get_compatible_tag(reldir)
 
                         # Create the complete doxygen command to reference the page.
                         doxygen_command = "@subpage " if is_subpage else "@ref "

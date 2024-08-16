@@ -5,6 +5,7 @@
 
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
+#include "multipatch_type.hpp"
 
 /**
  * @brief A helper class which provides functionalities to recognise how different patches are
@@ -66,6 +67,22 @@ public:
         return get_idx_range<RelevantGrids>(
                 all_idx_ranges,
                 std::make_index_sequence<ddc::type_seq_size_v<RelevantGrids>> {});
+    }
+
+    /**
+     * @brief A function to return all index ranges which can be used to obtain coordinates
+     * along a line which passes through the requested grid.
+     *
+     * @tparam Grid1D The grid indicating the direction of interest.
+     * @param all_idx_ranges A MultipatchType containing all available index ranges.
+     *
+     * @return A tuple of index ranges along the line of interest.
+     */
+    template <class Grid1D, template <typename P> typename T, class... Patches>
+    static auto get_all_idx_ranges_along_direction(MultipatchType<T, Patches...> all_idx_ranges)
+    {
+        static_assert(ddc::type_seq_same_v<all_patches, ddc::detail::TypeSeq<Patches...>>);
+        return get_all_idx_ranges_along_direction<Grid1D>(all_idx_ranges.get_tuple());
     }
 
 private:

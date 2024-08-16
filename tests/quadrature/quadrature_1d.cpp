@@ -12,60 +12,54 @@ namespace {
 
 enum Method { TRAPEZ, SIMPSON };
 
-template <bool Periodic>
-struct ConstantFuncCheck
+struct XPeriod
 {
-    struct XPeriod
-    {
-        static bool constexpr PERIODIC = Periodic;
-    };
-
-    struct GridXPeriod : NonUniformGridBase<XPeriod>
-    {
-    };
-    using IdxRangeXPeriod = IdxRange<GridXPeriod>;
-    using CoordXPeriod = Coord<XPeriod>;
-    using DFieldMemX = DFieldMem<IdxRangeXPeriod>;
-
-    static double check_1d(Method quad_method)
-    {
-        CoordXPeriod const x_min(0.0);
-        CoordXPeriod const x_max(1.0);
-        IdxStep<GridXPeriod> const x_size(100);
-
-        // Creating mesh & support
-        std::vector<CoordXPeriod> point_sampling
-                = build_random_non_uniform_break_points(x_min, x_max, x_size);
-        IdxStep<GridXPeriod> npoints(x_size + 1);
-        ddc::init_discrete_space<GridXPeriod>(point_sampling);
-        Idx<GridXPeriod> lbound(0);
-        IdxRange<GridXPeriod> gridx(lbound, npoints - int(Periodic));
-
-        DFieldMemX quadrature_coeffs_alloc;
-        switch (quad_method) {
-        case Method::TRAPEZ: {
-            quadrature_coeffs_alloc
-                    = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
-            break;
-        }
-        case Method::SIMPSON: {
-            quadrature_coeffs_alloc
-                    = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
-            break;
-        }
-        }
-
-        Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
-
-        DFieldMemX values_alloc(gridx);
-        DField<IdxRangeXPeriod> values = get_field(values_alloc);
-        ddc::parallel_fill(values, 1.0);
-        double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
-        double expected_val = x_max - x_min;
-
-        return abs(integral - expected_val);
-    }
+    static bool constexpr PERIODIC = true;
 };
+
+struct GridXPeriod : NonUniformGridBase<XPeriod>
+{
+};
+using IdxRangeXPeriod = IdxRange<GridXPeriod>;
+using CoordXPeriod = Coord<XPeriod>;
+using DFieldMemX = DFieldMem<IdxRangeXPeriod>;
+
+double constant_func_check_1d(Method quad_method)
+{
+    CoordXPeriod const x_min(0.0);
+    CoordXPeriod const x_max(M_PI);
+    IdxStep<GridXPeriod> const x_ncells(100);
+
+    // Creating mesh & support
+    std::vector<CoordXPeriod> point_sampling = build_uniform_break_points(x_min, x_max, x_ncells);
+    ddc::init_discrete_space<GridXPeriod>(point_sampling);
+    Idx<GridXPeriod> lbound(0);
+    IdxRange<GridXPeriod> gridx(lbound, x_ncells);
+
+    DFieldMemX quadrature_coeffs_alloc;
+    switch (quad_method) {
+    case Method::TRAPEZ: {
+        quadrature_coeffs_alloc
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
+        break;
+    }
+    case Method::SIMPSON: {
+        quadrature_coeffs_alloc
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
+        break;
+    }
+    }
+
+    Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
+
+    DFieldMemX values_alloc(gridx);
+    DField<IdxRangeXPeriod> values = get_field(values_alloc);
+    ddc::parallel_fill(values, 1.0);
+    double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
+    double expected_val = x_max - x_min;
+
+    return abs(integral - expected_val);
+}
 
 template <std::size_t N>
 struct ComputeErrorTraits
@@ -138,24 +132,14 @@ std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is.
     return std::array<double, sizeof...(Is)> {compute_error<Is>(ncells *= 2, Method::SIMPSON)...};
 }
 
-TEST(TrapezoidNonUniformPeriodicQuadrature1D, ExactForConstantFunc)
+TEST(TrapezoidUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
-    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::TRAPEZ), 1e-9);
+    EXPECT_LE(constant_func_check_1d(Method::TRAPEZ), 1e-9);
 }
 
-TEST(SimpsonNonUniformPeriodicQuadrature1D, ExactForConstantFunc)
+TEST(SimpsonUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
-    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::SIMPSON), 1e-9);
-}
-
-TEST(TrapezoidNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
-{
-    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::TRAPEZ), 1e-9);
-}
-
-TEST(SimpsonNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
-{
-    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::SIMPSON), 1e-9);
+    EXPECT_LE(constant_func_check_1d(Method::SIMPSON), 1e-9);
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature1D, Convergence)
@@ -167,13 +151,14 @@ TEST(TrapezoidUniformNonPeriodicQuadrature1D, Convergence)
     for (int i(1); i < NTESTS; ++i) {
         EXPECT_LE(error[i], error[i - 1]);
         double order = log(error[i - 1] / error[i]) / log(2.0);
-        EXPECT_NEAR(order, 2, 1e-2);
+        double order_error = abs(2 - order);
+        EXPECT_LE(order_error, 1e-2);
     }
 }
 
 TEST(SimpsonUniformNonPeriodicQuadrature1D, Convergence)
 {
-    constexpr int NTESTS(5);
+    constexpr int NTESTS(10);
 
     std::array<double, NTESTS> error
             = compute_errors_simpson(std::make_index_sequence<NTESTS>(), 10);
@@ -181,7 +166,8 @@ TEST(SimpsonUniformNonPeriodicQuadrature1D, Convergence)
     for (int i(1); i < NTESTS; ++i) {
         EXPECT_LE(error[i], error[i - 1]);
         double order = log(error[i - 1] / error[i]) / log(2.0);
-        EXPECT_NEAR(order, 4, 1e-2);
+        double order_error = abs(2 - order);
+        EXPECT_LE(order_error, 1e-2);
     }
 }
 

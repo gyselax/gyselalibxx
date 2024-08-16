@@ -5,10 +5,10 @@
 constexpr char const* const params_yaml = R"PDI_CFG(SplineMesh:
   vpar_min: -6.0
   vpar_max: +6.0
-  vpar_ncells: 128
+  vpar_ncells: 127
   mu_min: 0.0
   mu_max: 12.0
-  mu_ncells: 64
+  mu_ncells: 63
 
 SpeciesInfo:
 - charge: 1.

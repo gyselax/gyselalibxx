@@ -8,6 +8,8 @@
 #include "5patches_figure_of_eight.hpp"
 #include "9patches_2d_periodic_strips_uniform.hpp"
 #include "ddc_aliases.hpp"
+#include "multipatch_type.hpp"
+#include "types.hpp"
 
 namespace {
 
@@ -189,6 +191,30 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDim)
 
     auto figure_eight_grid = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(
             all_idx_ranges);
+    static_assert(std::tuple_size_v<decltype(figure_eight_grid)> == 6);
+    EXPECT_EQ(std::get<IdxRange<GridX<3>>>(figure_eight_grid), ddc::select<GridX<3>>(idx_range_3));
+    EXPECT_EQ(std::get<IdxRange<GridX<4>>>(figure_eight_grid), ddc::select<GridX<4>>(idx_range_4));
+    EXPECT_EQ(std::get<IdxRange<GridY<5>>>(figure_eight_grid), ddc::select<GridY<5>>(idx_range_5));
+    EXPECT_EQ(std::get<IdxRange<GridY<3>>>(figure_eight_grid), ddc::select<GridY<3>>(idx_range_3));
+    EXPECT_EQ(std::get<IdxRange<GridY<1>>>(figure_eight_grid), ddc::select<GridY<1>>(idx_range_1));
+    EXPECT_EQ(std::get<IdxRange<GridX<2>>>(figure_eight_grid), ddc::select<GridX<2>>(idx_range_2));
+}
+
+TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDimMultipatchType)
+{
+    using namespace figure_of_eight_5patches;
+    Patch1::IdxRange12 idx_range_1 = build_idx_range<Patch1>(0, 5, 9, 10);
+    Patch2::IdxRange12 idx_range_2 = build_idx_range<Patch2>(1, 5, 8, 10);
+    Patch3::IdxRange12 idx_range_3 = build_idx_range<Patch3>(2, 5, 7, 10);
+    Patch4::IdxRange12 idx_range_4 = build_idx_range<Patch4>(3, 5, 6, 10);
+    Patch5::IdxRange12 idx_range_5 = build_idx_range<Patch5>(4, 5, 5, 10);
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3, Patch4, Patch5>
+            all_domains(idx_range_1, idx_range_2, idx_range_3, idx_range_4, idx_range_5);
+
+    using MiddleGridX = typename Patch3::Grid1;
+
+    auto figure_eight_grid
+            = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(all_domains);
     static_assert(std::tuple_size_v<decltype(figure_eight_grid)> == 6);
     EXPECT_EQ(std::get<IdxRange<GridX<3>>>(figure_eight_grid), ddc::select<GridX<3>>(idx_range_3));
     EXPECT_EQ(std::get<IdxRange<GridX<4>>>(figure_eight_grid), ddc::select<GridX<4>>(idx_range_4));

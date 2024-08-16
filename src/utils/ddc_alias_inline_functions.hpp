@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <type_traits>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
@@ -8,6 +9,67 @@
 
 #include "derivative_field_common.hpp"
 #include "vector_field_common.hpp"
+
+namespace detail {
+
+/*
+ * A class using template magic to determine if a type has an idx_range function.
+ */
+template <typename Type>
+class HasIdxRange
+{
+private:
+    // Class for SFINAE deduction
+    template <typename U>
+    class check
+    {
+    };
+
+    // Function that will be chosen if ClassType has a method called idx_range with 0 arguments
+    template <typename ClassType>
+    static char f(check<decltype(std::declval<ClassType>().idx_range())>*);
+
+    // Function that will be chosen by default
+    template <typename ClassType>
+    static long f(...);
+
+public:
+    static constexpr bool value = (sizeof(f<Type>(0)) == sizeof(char));
+};
+
+/*
+ * A class using template magic to determine if a type is a kind of Field defined in Gyselalibxx.
+ * Such a field should define a function get_const_field.
+ */
+template <typename Type>
+class IsGslxField
+{
+private:
+    // Class for SFINAE deduction
+    template <typename U>
+    class check
+    {
+    };
+
+    // Function that will be chosen if ClassType has a method called get_const_field with 0 arguments
+    template <typename ClassType>
+    static char f(check<decltype(std::declval<ClassType>().get_const_field())>*);
+
+    // Function that will be chosen by default
+    template <typename ClassType>
+    static long f(...);
+
+public:
+    static constexpr bool value = (sizeof(f<Type>(0)) == sizeof(char));
+};
+
+} // namespace detail
+
+template <typename Type>
+static constexpr bool has_idx_range_v = detail::HasIdxRange<Type>::value;
+
+template <typename Type>
+static constexpr bool is_gslx_field_v = detail::IsGslxField<Type>::value;
 
 /**
  * A function to get the range of valid indices that can be used to index this field.
@@ -20,7 +82,7 @@ template <class... QueryGrids, class FieldType>
 KOKKOS_INLINE_FUNCTION auto get_idx_range(FieldType const& field) noexcept
 {
     static_assert(
-            ddc::is_chunk_v<FieldType> || is_field_v<FieldType>,
+            ddc::is_chunk_v<FieldType> || has_idx_range_v<FieldType>,
             "Not a DDC field (ddc::ChunkSpan) type");
     if constexpr (ddc::is_chunk_v<FieldType>) {
         if constexpr (sizeof...(QueryGrids) == 0) {
@@ -79,7 +141,7 @@ inline auto get_const_field(FieldType&& field)
     using Type = std::remove_cv_t<std::remove_reference_t<FieldType>>;
     static_assert(
             (ddc::is_chunk_v<Type>) || (is_field_v<Type>) || (is_deriv_field_v<Type>)
-                    || (is_polar_spline_v<Type>),
+                    || (is_polar_spline_v<Type>) || (is_gslx_field_v<Type>),
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_cview();
 }
