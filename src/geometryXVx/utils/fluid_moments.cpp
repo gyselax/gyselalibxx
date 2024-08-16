@@ -2,9 +2,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <fluid_moments.hpp>
-#include <quadrature.hpp>
-#include <trapezoid_quadrature.hpp>
+#include "fluid_moments.hpp"
+#include "quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 
 FluidMoments::FluidMoments(
         Quadrature<IdxRangeVx, IdxRangeSpXVx, Kokkos::DefaultExecutionSpace::memory_space>

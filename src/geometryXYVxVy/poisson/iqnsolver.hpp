@@ -3,9 +3,8 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
 
 /**
  * @brief An operator which solves the Quasi-Neutrality equation using a fast

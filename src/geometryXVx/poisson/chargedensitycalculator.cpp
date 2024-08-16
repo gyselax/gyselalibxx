@@ -17,7 +17,7 @@ DFieldX ChargeDensityCalculator::operator()(DFieldX const rho, DConstFieldSpXVx 
 
     auto kinetic_charges_alloc
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
-    DConstFieldSp kinetic_charges = get_field(kinetic_charges_alloc);
+    DConstFieldSp kinetic_charges = get_const_field(kinetic_charges_alloc);
 
     m_quadrature(
             Kokkos::DefaultExecutionSpace(),

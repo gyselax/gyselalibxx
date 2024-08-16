@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <geometry.hpp>
+#include "geometry.hpp"
 
 /**
  * @brief An abstract class for solving a Vlasov-Poisson system of equations.
