@@ -3,9 +3,8 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
 
 /**
  * @brief Define the base class of 2D advection operators in polar index range.

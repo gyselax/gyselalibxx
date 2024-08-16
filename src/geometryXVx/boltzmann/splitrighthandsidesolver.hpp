@@ -5,10 +5,9 @@
 #include <utility>
 #include <vector>
 
-#include <geometry.hpp>
-#include <irighthandside.hpp>
-
+#include "geometry.hpp"
 #include "iboltzmannsolver.hpp"
+#include "irighthandside.hpp"
 
 /**
  * @brief A class that solves a Boltzmann equation using Strang's splitting.

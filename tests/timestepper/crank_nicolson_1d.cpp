@@ -8,7 +8,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <crank_nicolson.hpp>
+#include "crank_nicolson.hpp"
 
 
 struct X
