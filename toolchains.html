@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Main Page</title>
+<title>Gyselalib++: Pre-made build settings</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('toolchains.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -100,38 +100,41 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Gyselalib++ Documentation</div>  </div>
+<div class="title">Pre-made build settings </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and similar as well as a collection of such codes.</p>
-<h1><a class="anchor" id="__Compilation"></a>
-Compilation</h1>
-<p>to compile Gyselalib++:</p>
-<div class="fragment"><div class="line">git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/gyselalibxx.git gyselalibxx</div>
-<div class="line">cd gyselalibxx</div>
-<div class="line">mkdir build</div>
-<div class="line">cd build</div>
-<div class="line">cmake -DCMAKE_TOOLCHAIN_FILE=&lt;TOOLCHAIN_FILE&gt; ..</div>
-<div class="line">make</div>
-</div><!-- fragment --><p>The toolchains are found in the folder <code>toolchains/</code>. Each toolchain is designed for specific hardware with the exception of those in the folder <code>docker.gyselalibxx_env/</code>. These toolchains can be used with the docker environment on most hardware.</p>
-<p>For more details about toolchains, see the documentation about <a class="el" href="toolchains.html">Pre-made build settings</a>.</p>
-<h1><a class="anchor" id="__Execution"></a>
-Execution</h1>
-<p>to run the tests: </p><div class="fragment"><div class="line">ctest --output-on-failure</div>
-</div><!-- fragment --><p>Then, just have a look at <code>tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png</code>:</p>
-<p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/growthrate_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/geometryXVx/landau/fft/growthrate\_t0.0to45.0.png" title="Landau damping rate" class="inline"/></p>
-<p>and <code>tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png</code>:</p>
-<p><img src="https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx/-/jobs/artifacts/main/raw/build/tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png?job=cmake_tests_Release" alt="tests/geometryXVx/landau/fft/frequency\_t0.0to45.0.png" title="Landau damping frequency" class="inline"/></p>
-<h1><a class="anchor" id="__Dependencies"></a>
-Dependencies</h1>
-<p>To install dependencies through spack, first follow the the 3 first steps of <a href="https://github.com/pdidev/spack">https://github.com/pdidev/spack</a></p>
-<p>Then execute the following: </p><div class="fragment"><div class="line">spack env create gyselalibxx spack.yaml</div>
-<div class="line">spack env activate gyselalibxx</div>
-<div class="line">spack concretize --reuse</div>
-<div class="line">spack install</div>
-</div><!-- fragment --><p>For example, you can find a Dockerfile installing these dependencies on ubuntu in <code>docker/gyselalibxx_env/Dockerfile</code>. </p>
-</div></div><!-- PageDoc -->
-</div><!-- contents -->
+<div class="textblock"><h1><a class="anchor" id="toolchains__General_usage"></a>
+General usage</h1>
+<p>Prepare the environment, source the environment, use the environment to build:</p>
+<div class="fragment"><div class="line">$ mkdir -p build &amp;&amp; cd build</div>
+<div class="line">$ ../toolchains/mi250.hipcc.adastra.spack/prepare.sh</div>
+<div class="line">$ source ../toolchains/mi250.hipcc.adastra.spack/environment.sh</div>
+<div class="line">$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake</div>
+</div><!-- fragment --><h1><a class="anchor" id="toolchains__Toolchains"></a>
+Toolchains</h1>
+<p>The <a href="https://en.wikipedia.org/wiki/Toolchain">toolchains</a> are represented using a toolchain file. It summarizes CMake build settings for the appropriate machine environment and hardware.</p>
+<p>On can use the toolchains like so:</p>
+<div class="fragment"><div class="line">$ mkdir -p build &amp;&amp; cd build</div>
+<div class="line">$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake</div>
+</div><!-- fragment --><h1><a class="anchor" id="toolchains__Environments"></a>
+Environments</h1>
+<p>Toolchains may require a non default environment. For that purpose each toolchain will expose the concept of environment script. Each toolchain should provide (a potentially empty) environment file under the <code>environment.sh</code> filename. The environment file is used like so:</p>
+<div class="fragment"><div class="line">$ source toolchains/mi250.hipcc.adastra.spack/environment.sh</div>
+</div><!-- fragment --><p>The <em>sourcing</em> of an environment file will generally happen before the build or usage of the built product.</p>
+<h1><a class="anchor" id="toolchains__Preparing_environments"></a>
+Preparing environments</h1>
+<p>The environment may need preparation (say it is not available on the machine). For that purpose each toolchain will expose the concept of preparation script. Each toolchain should provide (a potentially empty) preparation file under the <code>prepare.sh</code> filename. The preparation file is used like so:</p>
+<div class="fragment"><div class="line">$ toolchains/mi250.hipcc.adastra.spack/prepare.sh</div>
+</div><!-- fragment --><h1><a class="anchor" id="toolchains__General_notes"></a>
+General notes</h1>
+<ul>
+<li>The environment and preparation script should be <b>working directory agnostic</b>;</li>
+<li>Ideally, if producing files (such as the installation of a dependency), placing them in the appropriate location such as the WORK file system area often found on HPC machines;</li>
+<li>A way to test if a toolchain is valid is to run the <code>prepare.gyselalibxx.sh</code> script;</li>
+<li>HPC machines evolve, are notoriously heterogenous, unstable and buggy, you should document issues and workarounds explored as part of the code of the toolchain. </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

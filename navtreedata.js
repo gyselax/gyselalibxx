@@ -28,6 +28,13 @@ var NAVTREE =
     [ "Compilation", "index.html#__Compilation", null ],
     [ "Execution", "index.html#__Execution", null ],
     [ "Dependencies", "index.html#__Dependencies", null ],
+    [ "Pre-made build settings", "toolchains.html", [
+      [ "General usage", "toolchains.html#toolchains__General_usage", null ],
+      [ "Toolchains", "toolchains.html#toolchains__Toolchains", null ],
+      [ "Environments", "toolchains.html#toolchains__Environments", null ],
+      [ "Preparing environments", "toolchains.html#toolchains__Preparing_environments", null ],
+      [ "General notes", "toolchains.html#toolchains__General_notes", null ]
+    ] ],
     [ "Adding Documentation", "docs_Adding_docs.html", [
       [ "Building documentation locally", "docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally", null ],
       [ "Documentation describing code structures", "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures", null ],
