@@ -12,9 +12,9 @@ import numpy as np
 executable = sys.argv[1]
 
 with open("poisson.yaml", "w", encoding="utf-8") as f:
-    print("Mesh:", file=f)
-    print("  r_size: 64", file=f)
-    print("  p_size: 64", file=f)
+    print("SplineMesh:", file=f)
+    print("  r_ncells: 64", file=f)
+    print("  p_ncells: 64", file=f)
 
 with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()
@@ -30,9 +30,9 @@ out_lines = out.split('\n')
 error_64 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
 
 with open("poisson.yaml", "w", encoding="utf-8") as f:
-    print("Mesh:", file=f)
-    print("  r_size: 128", file=f)
-    print("  p_size: 128", file=f)
+    print("SplineMesh:", file=f)
+    print("  r_ncells: 128", file=f)
+    print("  p_ncells: 128", file=f)
 
 with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()

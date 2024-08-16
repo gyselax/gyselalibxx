@@ -1,9 +1,9 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <cmath>
 
-#include <geometry.hpp>
-
 #include "ddc_aliases.hpp"
+#include "geometry.hpp"
 #include "ikineticfluidcoupling.hpp"
 #include "ireactionrate.hpp"
 

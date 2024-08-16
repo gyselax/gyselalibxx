@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include <numeric>
-
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
@@ -49,8 +47,8 @@ class EdgeTransformation
     using IdxRangeEdge1 = IdxRange<EdgeGrid1>;
     using IdxRangeEdge2 = IdxRange<EdgeGrid2>;
 
-    using EdgeIdx1 = Idx<EdgeGrid1>;
-    using EdgeIdx2 = Idx<EdgeGrid2>;
+    using IdxEdge1 = Idx<EdgeGrid1>;
+    using IdxEdge2 = Idx<EdgeGrid2>;
 
     IdxRangeEdge1 const& m_idx_range_patch_1;
     IdxRangeEdge2 const& m_idx_range_patch_2;
@@ -94,17 +92,17 @@ public:
                 = std::conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, EdgeDim2, EdgeDim1>;
 
         // The index range of CurrentDim
-        using CurrentIdxRange = std::
+        using IdxRangeCurrent = std::
                 conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, IdxRangeEdge1, IdxRangeEdge2>;
         // The index range of other dimension
-        using TargetIdxRange = std::
+        using IdxRangeTarget = std::
                 conditional_t<std::is_same_v<CurrentDim, EdgeDim1>, IdxRangeEdge2, IdxRangeEdge1>;
 
         // Get min and length on each 1D index ranges:
         IdxRange<EdgeGrid1, EdgeGrid2> const
                 combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
-        CurrentIdxRange const current_idx_range(combined_idx_range);
-        TargetIdxRange const target_idx_range(combined_idx_range);
+        IdxRangeCurrent const current_idx_range(combined_idx_range);
+        IdxRangeTarget const target_idx_range(combined_idx_range);
 
         Coord<CurrentDim> const current_min = ddc::coordinate(current_idx_range.front());
         double const current_length = ddcHelper::total_interval_length(current_idx_range);
@@ -144,9 +142,9 @@ public:
     template <class CurrentIdx>
     auto operator()(CurrentIdx const& current_idx) const
     {
-        using TargetIdx
-                = std::conditional_t<std::is_same_v<CurrentIdx, EdgeIdx1>, EdgeIdx2, EdgeIdx1>;
-        TargetIdx target_idx;
+        using IdxTarget
+                = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, IdxEdge2, IdxEdge1>;
+        IdxTarget target_idx;
         bool is_equivalent_idx_found = search_for_match(target_idx, current_idx);
         assert(is_equivalent_idx_found);
         return target_idx;
@@ -175,9 +173,9 @@ public:
     template <class CurrentIdx>
     bool const is_match_available(CurrentIdx const& current_idx) const
     {
-        using TargetIdx
-                = std::conditional_t<std::is_same_v<CurrentIdx, EdgeIdx1>, EdgeIdx2, EdgeIdx1>;
-        TargetIdx potential_target_idx;
+        using IdxTarget
+                = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, IdxEdge2, IdxEdge1>;
+        IdxTarget potential_target_idx;
         return search_for_match(potential_target_idx, current_idx);
     }
 
@@ -225,15 +223,15 @@ public:
                 "The types of the indices should be different");
 
         // Index range of CurrentIdx.
-        using CurrentIdxRange = IdxRange<CurrentGrid>;
+        using IdxRangeCurrent = IdxRange<CurrentGrid>;
         // Index range of other dimension.
-        using TargetIdxRange = IdxRange<TargetGrid>;
+        using IdxRangeTarget = IdxRange<TargetGrid>;
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
         // Index on the target grid
-        using TargetIdx = typename TargetIdxRange::discrete_element_type;
+        using IdxTarget = typename IdxRangeTarget::discrete_element_type;
         // Index step on the target grid
-        using TargetIdxStep = typename TargetIdxRange::mlength_type;
+        using IdxStepTarget = typename IdxRangeTarget::mlength_type;
 
 
         bool is_equivalent_idx = false;
@@ -241,8 +239,8 @@ public:
         // Get the 1D index range corresponding to the current and target domains.
         IdxRange<EdgeGrid1, EdgeGrid2> const
                 combined_idx_range(m_idx_range_patch_1, m_idx_range_patch_2);
-        CurrentIdxRange const current_idx_range(combined_idx_range);
-        TargetIdxRange const target_idx_range(combined_idx_range);
+        IdxRangeCurrent const current_idx_range(combined_idx_range);
+        IdxRangeTarget const target_idx_range(combined_idx_range);
 
         int const n_cells_current = current_idx_range.size() - 1;
         int const n_cells_target = target_idx_range.size() - 1;
@@ -265,13 +263,13 @@ public:
             // If there is an equivalent index, update target_idx.
             if (is_equivalent_idx) {
                 double const rescaling_factor = double(n_cells_current) / double(n_cells_target);
-                TargetIdxStep target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
-                target_idx = TargetIdx(target_idx_range.front());
+                IdxStepTarget target_idx_step_rescaled(int(current_idx_value / rescaling_factor));
+                target_idx = IdxTarget(target_idx_range.front());
                 target_idx += target_idx_step_rescaled;
 
                 if constexpr (!Interface::orientations_agree) {
-                    TargetIdxStep target_idx_step = TargetIdx(target_idx_range.back()) - target_idx;
-                    target_idx = TargetIdx(target_idx_range.front());
+                    IdxStepTarget target_idx_step = IdxTarget(target_idx_range.back()) - target_idx;
+                    target_idx = IdxTarget(target_idx_range.front());
                     target_idx += target_idx_step;
                 }
             }
@@ -305,19 +303,19 @@ private:
         // Coordinate on the discontinuous dimension of the current grid.
         using CurrentCoord = Coord<typename CurrentGrid::continuous_dimension_type>;
         // Index on the target grid
-        using TargetIdx = Idx<TargetGrid>;
+        using IdxTarget = Idx<TargetGrid>;
         // Index step on the target grid
-        using TargetIdxStep = IdxStep<TargetGrid>;
+        using IdxStepTarget = IdxStep<TargetGrid>;
 
         // Dichotomy method
         CurrentCoord const current_coord(ddc::coordinate(current_idx));
 
-        TargetIdx target_idx_min(target_idx_range.front());
-        TargetIdx target_idx_max(target_idx_range.back());
-        TargetIdx target_idx_mid = get_mid(target_idx_min, target_idx_max);
+        IdxTarget target_idx_min(target_idx_range.front());
+        IdxTarget target_idx_max(target_idx_range.back());
+        IdxTarget target_idx_mid = get_mid(target_idx_min, target_idx_max);
 
-        TargetIdxStep target_idx_step_diff = target_idx_max - target_idx_min;
-        while (target_idx_step_diff != TargetIdxStep(1)) {
+        IdxStepTarget target_idx_step_diff = target_idx_max - target_idx_min;
+        while (target_idx_step_diff != IdxStepTarget(1)) {
             CurrentCoord target_equivalent_coord_mid((*this)(ddc::coordinate(target_idx_mid)));
 
             if ((current_coord > target_equivalent_coord_mid && Interface::orientations_agree)

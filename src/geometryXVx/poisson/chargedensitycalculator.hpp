@@ -4,10 +4,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <geometry.hpp>
-#include <quadrature.hpp>
-
+#include "geometry.hpp"
 #include "ichargedensitycalculator.hpp"
+#include "quadrature.hpp"
 
 /**
  * @brief A class which computes charges density with Kokkos.

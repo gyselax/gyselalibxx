@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include <species_info.hpp>
+#include "species_info.hpp"
 
 TEST(SpeciesInfo, Ielec)
 {
