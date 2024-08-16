@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
 #include <pdi.h>
-#include <species_info.hpp>
 
 #include "charge_exchange.hpp"
 #include "ratecomputation.hpp"
+#include "species_info.hpp"
 
 ChargeExchangeRate::ChargeExchangeRate(double const norm_coeff_rate)
     : m_cx_coefficients("chargexchange_coefficients")

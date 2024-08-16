@@ -1,20 +1,20 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/fft.hpp>
 
-#include <ddc_helper.hpp>
-#include <directional_tag.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "directional_tag.hpp"
 #include "ipoisson_solver.hpp"
 
 /**
  * See @ref FFTPoissonSolverImplementation.
  */
 template <
-        class LaplacianIdxRange,
-        class FullIdxRange,
+        class IdxRangeLaplacian,
+        class IdxRangeFull,
         class ExecSpace,
         class LayoutSpace = std::experimental::layout_right>
 class FFTPoissonSolver;
@@ -24,27 +24,27 @@ class FFTPoissonSolver;
  * @f$ -\Delta \phi = \rho @f$
  * using a Fourier transform.
  *
- * The implementation of this class can be found at FFTPoissonSolver< IdxRange<GridPDEDim1D...>, FullIdxRange, ExecSpace, LayoutSpace >.
+ * The implementation of this class can be found at FFTPoissonSolver< IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, LayoutSpace >.
  * @anchor FFTPoissonSolverImplementation
  *
- * @tparam LaplacianIdxRange The index range on which the equation is defined.
- * @tparam FullIdxRange The index range on which the operator() acts. This is equal to the
- *                      LaplacianIdxRange plus any batched dimensions.
+ * @tparam IdxRangeLaplacian The index range on which the equation is defined.
+ * @tparam IdxRangeFull The index range on which the operator() acts. This is equal to the
+ *                      IdxRangeLaplacian plus any batched dimensions.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations will take place.
  * @tparam LayoutSpace The layout space of the Fields passed to operator().
  */
-template <class... GridPDEDim1D, class FullIdxRange, class ExecSpace, class LayoutSpace>
-class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, FullIdxRange, ExecSpace, LayoutSpace>
+template <class... GridPDEDim1D, class IdxRangeFull, class ExecSpace, class LayoutSpace>
+class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, LayoutSpace>
     : public IPoissonSolver<
               IdxRange<GridPDEDim1D...>,
-              FullIdxRange,
+              IdxRangeFull,
               LayoutSpace,
               typename ExecSpace::memory_space>
 {
 private:
     using base_type = IPoissonSolver<
             IdxRange<GridPDEDim1D...>,
-            FullIdxRange,
+            IdxRangeFull,
             LayoutSpace,
             typename ExecSpace::memory_space>;
 

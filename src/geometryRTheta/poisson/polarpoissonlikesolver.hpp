@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <iomanip>
 
@@ -67,43 +68,43 @@ private:
     /**
      * @brief Tag the quadrature index range in the first dimension.
      */
-    using QuadratureIdxRangeR = IdxRange<QDimRMesh>;
+    using IdxRangeQuadratureR = IdxRange<QDimRMesh>;
     /**
      * @brief Tag the quadrature index range in the second dimension.
      */
-    using QuadratureIdxRangeTheta = IdxRange<QDimThetaMesh>;
+    using IdxRangeQuadratureTheta = IdxRange<QDimThetaMesh>;
     /**
      * @brief Tag the quadrature index range.
      */
-    using QuadratureIdxRangeRTheta = IdxRange<QDimRMesh, QDimThetaMesh>;
+    using IdxRangeQuadratureRTheta = IdxRange<QDimRMesh, QDimThetaMesh>;
     /**
      * @brief Tag the elements (index) of the quadrature index range in the first dimension.
      */
-    using QuadratureIndexR = Idx<QDimRMesh>;
+    using IdxQuadratureR = Idx<QDimRMesh>;
     /**
      * @brief Tag the elements (index) of the quadrature index range in the second dimension.
      */
-    using QuadratureIndexTheta = Idx<QDimThetaMesh>;
+    using IdxQuadratureTheta = Idx<QDimThetaMesh>;
     /**
      * @brief Tag the elements (index) of the quadrature index range.
      */
-    using QuadratureIndexRTheta = Idx<QDimRMesh, QDimThetaMesh>;
+    using IdxQuadratureRTheta = Idx<QDimRMesh, QDimThetaMesh>;
     /**
      * @brief Tag a vector on the first dimension of the quadrature mesh.
      */
-    using QuadratureLengthR = IdxStep<QDimRMesh>;
+    using IdxStepQuadratureR = IdxStep<QDimRMesh>;
     /**
      * @brief Tag a vector on the second dimension of the quadrature mesh.
      */
-    using QuadratureLengthTheta = IdxStep<QDimThetaMesh>;
+    using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
     using BSplinesR_Polar = PolarBSplinesRTheta::BSplinesR_tag;
     using BSplinesTheta_Polar = PolarBSplinesRTheta::BSplinesTheta_tag;
 
-    using IDimBSpline2D_Polar = Idx<BSplinesR_Polar, BSplinesTheta_Polar>;
+    using IdxBSpline2D_Polar = Idx<BSplinesR_Polar, BSplinesTheta_Polar>;
 
-    using BSDomainR_Polar = IdxRange<BSplinesR_Polar>;
-    using BSDomainTheta_Polar = IdxRange<BSplinesTheta_Polar>;
+    using IdxRangeBSR_Polar = IdxRange<BSplinesR_Polar>;
+    using IdxRangeBSTheta_Polar = IdxRange<BSplinesTheta_Polar>;
 
     using KnotsR = ddc::NonUniformBsplinesKnots<BSplinesR_Polar>;
     using KnotsTheta = ddc::NonUniformBsplinesKnots<BSplinesTheta_Polar>;
@@ -130,7 +131,7 @@ private:
     /**
      * @brief Tag an index of cell.
      */
-    using CellIdx = Idx<RCellDim, ThetaCellDim>;
+    using IdxCell = Idx<RCellDim, ThetaCellDim>;
 
     /**
      * @brief Tag type of matrix element.
@@ -160,19 +161,19 @@ private:
     const int nbasis_theta;
 
     // Domains
-    BSIdxRangePolar fem_non_singular_idx_range;
-    BSDomainR_Polar radial_bsplines;
-    BSDomainTheta_Polar polar_bsplines;
+    IdxRangeBSPolar fem_non_singular_idx_range;
+    IdxRangeBSR_Polar radial_bsplines;
+    IdxRangeBSTheta_Polar polar_bsplines;
 
-    QuadratureIdxRangeR quadrature_idx_range_r;
-    QuadratureIdxRangeTheta quadrature_idx_range_theta;
-    QuadratureIdxRangeRTheta quadrature_idx_range_singular;
+    IdxRangeQuadratureR quadrature_idx_range_r;
+    IdxRangeQuadratureTheta quadrature_idx_range_theta;
+    IdxRangeQuadratureRTheta quadrature_idx_range_singular;
 
     // Gauss-Legendre points and weights
-    host_t<FieldMem<Coord<R>, QuadratureIdxRangeR>> points_r;
-    host_t<FieldMem<Coord<Theta>, QuadratureIdxRangeTheta>> points_theta;
-    host_t<FieldMem<double, QuadratureIdxRangeR>> weights_r;
-    host_t<FieldMem<double, QuadratureIdxRangeTheta>> weights_theta;
+    host_t<FieldMem<Coord<R>, IdxRangeQuadratureR>> points_r;
+    host_t<FieldMem<Coord<Theta>, IdxRangeQuadratureTheta>> points_theta;
+    host_t<FieldMem<double, IdxRangeQuadratureR>> weights_r;
+    host_t<FieldMem<double, IdxRangeQuadratureTheta>> weights_theta;
 
     // Basis Spline values and derivatives at Gauss-Legendre points
     host_t<FieldMem<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>>
@@ -181,7 +182,7 @@ private:
     host_t<FieldMem<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>>
             theta_basis_vals_and_derivs;
 
-    host_t<FieldMem<double, QuadratureIdxRangeRTheta>> int_volume;
+    host_t<FieldMem<double, IdxRangeQuadratureRTheta>> int_volume;
 
     PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
@@ -250,7 +251,7 @@ public:
                   IdxRange<
                           ThetaBasisSubset,
                           QDimThetaMesh>(non_zero_bases_theta, quadrature_idx_range_theta))
-        , int_volume(QuadratureIdxRangeRTheta(quadrature_idx_range_r, quadrature_idx_range_theta))
+        , int_volume(IdxRangeQuadratureRTheta(quadrature_idx_range_r, quadrature_idx_range_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
     {
         // Get break points
@@ -291,7 +292,7 @@ public:
         ddc::init_discrete_space<QDimThetaMesh>(vect_points_theta);
 
         // Find value and derivative of 1D bsplines in radial direction
-        ddc::for_each(quadrature_idx_range_r, [&](QuadratureIndexR const ir) {
+        ddc::for_each(quadrature_idx_range_r, [&](IdxQuadratureR const ir) {
             std::array<double, 2 * n_non_zero_bases_r> data;
             DSpan2D vals(data.data(), n_non_zero_bases_r, 2);
             ddc::discrete_space<BSplinesR_Polar>()
@@ -303,7 +304,7 @@ public:
         });
 
         // Find value and derivative of 1D bsplines in poloidal direction
-        ddc::for_each(quadrature_idx_range_theta, [&](QuadratureIndexTheta const ip) {
+        ddc::for_each(quadrature_idx_range_theta, [&](IdxQuadratureTheta const ip) {
             std::array<double, 2 * n_non_zero_bases_theta> data;
             DSpan2D vals(data.data(), n_non_zero_bases_theta, 2);
             ddc::discrete_space<BSplinesTheta_Polar>()
@@ -317,7 +318,7 @@ public:
         auto singular_idx_range = PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>();
 
         // Find value and derivative of 2D bsplines covering the singular point
-        ddc::for_each(quadrature_idx_range_singular, [&](QuadratureIndexRTheta const irp) {
+        ddc::for_each(quadrature_idx_range_singular, [&](IdxQuadratureRTheta const irp) {
             std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
             std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta> data;
             // Values of the polar basis splines around the singular point
@@ -326,8 +327,8 @@ public:
             // Values of the polar basis splines, that do not cover the singular point,
             // at a given coordinate
             DSpan2D vals(data.data(), n_non_zero_bases_r, n_non_zero_bases_theta);
-            QuadratureIndexR ir = ddc::select<QDimRMesh>(irp);
-            QuadratureIndexTheta ip = ddc::select<QDimThetaMesh>(irp);
+            IdxQuadratureR ir = ddc::select<QDimRMesh>(irp);
+            IdxQuadratureTheta ip = ddc::select<QDimThetaMesh>(irp);
 
             const CoordRTheta coord(ddc::coordinate(irp));
 
@@ -353,11 +354,11 @@ public:
         });
 
         // Find the integral volume associated with each point used in the quadrature scheme
-        QuadratureIdxRangeRTheta
+        IdxRangeQuadratureRTheta
                 all_quad_points(quadrature_idx_range_r, quadrature_idx_range_theta);
-        ddc::for_each(all_quad_points, [&](QuadratureIndexRTheta const irp) {
-            QuadratureIndexR const ir = ddc::select<QDimRMesh>(irp);
-            QuadratureIndexTheta const ip = ddc::select<QDimThetaMesh>(irp);
+        ddc::for_each(all_quad_points, [&](IdxQuadratureRTheta const irp) {
+            IdxQuadratureR const ir = ddc::select<QDimRMesh>(irp);
+            IdxQuadratureTheta const ip = ddc::select<QDimThetaMesh>(irp);
             CoordRTheta coord(ddc::coordinate(irp));
             int_volume(ir, ip) = abs(mapping.jacobian(coord)) * weights_r(ir) * weights_theta(ip);
         });
@@ -409,9 +410,9 @@ public:
                         quadrature_idx_range_singular,
                         0.0,
                         ddc::reducer::sum<double>(),
-                        [&](QuadratureIndexRTheta const quad_idx) {
-                            QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
-                            QuadratureIndexTheta const ip = ddc::select<QDimThetaMesh>(quad_idx);
+                        [&](IdxQuadratureRTheta const quad_idx) {
+                            IdxQuadratureR const ir = ddc::select<QDimRMesh>(quad_idx);
+                            IdxQuadratureTheta const ip = ddc::select<QDimThetaMesh>(quad_idx);
                             return weak_integral_element(
                                     ir,
                                     ip,
@@ -429,10 +430,10 @@ public:
         assert(matrix_idx == n_elements_singular);
 
         // Create index ranges associated with the 2D splines
-        BSIdxRangeR central_radial_bspline_idx_range(
+        IdxRangeBSR central_radial_bspline_idx_range(
                 radial_bsplines.take_first(IdxStep<BSplinesR_Polar> {BSplinesR_Polar::degree()}));
 
-        BSIdxRangeRTheta non_singular_idx_range_near_centre(
+        IdxRangeBSRTheta non_singular_idx_range_near_centre(
                 central_radial_bspline_idx_range,
                 polar_bsplines);
 
@@ -440,7 +441,7 @@ public:
         ddc::for_each(singular_idx_range, [&](IdxPolarBspl const idx_test) {
             ddc::for_each(
                     non_singular_idx_range_near_centre,
-                    [&](IDimBSpline2D_Polar const idx_trial) {
+                    [&](IdxBSpline2D_Polar const idx_trial) {
                         const IdxPolarBspl polar_idx_trial(
                                 PolarBSplinesRTheta::get_polar_index<PolarBSplinesRTheta>(
                                         idx_trial));
@@ -470,12 +471,12 @@ public:
                         if (n_overlap_r > 0) {
                             double element = 0.0;
 
-                            ddc::for_each(non_zero_cells, [&](CellIdx const cell_idx) {
+                            ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
                                 const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
                                 const int cell_idx_theta(
                                         theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
 
-                                const QuadratureIdxRangeRTheta cell_quad_points(
+                                const IdxRangeQuadratureRTheta cell_quad_points(
                                         get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
                                 // Find the column where the non-zero data is stored
                                 Idx<RBasisSubset> ib_trial_r(r_idx_trial.uid() - cell_idx_r);
@@ -486,10 +487,10 @@ public:
                                         cell_quad_points,
                                         0.0,
                                         ddc::reducer::sum<double>(),
-                                        [&](QuadratureIndexRTheta const quad_idx) {
-                                            QuadratureIndexR const ir
+                                        [&](IdxQuadratureRTheta const quad_idx) {
+                                            IdxQuadratureR const ir
                                                     = ddc::select<QDimRMesh>(quad_idx);
-                                            QuadratureIndexTheta const ip
+                                            IdxQuadratureTheta const ip
                                                     = ddc::select<QDimThetaMesh>(quad_idx);
                                             return weak_integral_element<Mapping>(
                                                     ir,
@@ -523,21 +524,21 @@ public:
 
         // Calculate the matrix elements following a stencil
         ddc::for_each(fem_non_singular_idx_range, [&](IdxPolarBspl const polar_idx_test) {
-            const IDimBSpline2D_Polar idx_test(PolarBSplinesRTheta::get_2d_index(polar_idx_test));
+            const IdxBSpline2D_Polar idx_test(PolarBSplinesRTheta::get_2d_index(polar_idx_test));
             const std::size_t r_idx_test(
                     ddc::select<PolarBSplinesRTheta::BSplinesR_tag>(idx_test).uid());
             const std::size_t theta_idx_test(
                     ddc::select<PolarBSplinesRTheta::BSplinesTheta_tag>(idx_test).uid());
 
             // Calculate the index of the elements that are already filled
-            BSDomainTheta_Polar remaining_theta(
+            IdxRangeBSTheta_Polar remaining_theta(
                     Idx<BSplinesTheta_Polar> {theta_idx_test},
                     IdxStep<BSplinesTheta_Polar> {BSplinesTheta_Polar::degree() + 1});
             ddc::for_each(remaining_theta, [&](auto const theta_idx_trial) {
-                IDimBSpline2D_Polar idx_trial(Idx<BSplinesR_Polar>(r_idx_test), theta_idx_trial);
+                IdxBSpline2D_Polar idx_trial(Idx<BSplinesR_Polar>(r_idx_test), theta_idx_trial);
                 IdxPolarBspl polar_idx_trial(
                         PolarBSplinesRTheta::get_polar_index<PolarBSplinesRTheta>(
-                                IDimBSpline2D_Polar(r_idx_test, theta_mod(theta_idx_trial.uid()))));
+                                IdxBSpline2D_Polar(r_idx_test, theta_mod(theta_idx_trial.uid()))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -565,27 +566,27 @@ public:
                     matrix_idx++;
                 }
             });
-            BSIdxRangeR remaining_r(
+            IdxRangeBSR remaining_r(
                     ddc::select<BSplinesR_Polar>(idx_test) + 1,
                     IdxStep<BSplinesR_Polar> {
                             min(BSplinesR_Polar::degree(),
                                 ddc::discrete_space<BSplinesR_Polar>().nbasis() - 2 - r_idx_test)});
-            BSDomainTheta_Polar relevant_theta(
+            IdxRangeBSTheta_Polar relevant_theta(
                     Idx<BSplinesTheta_Polar> {
                             theta_idx_test + ddc::discrete_space<BSplinesTheta_Polar>().nbasis()
                             - BSplinesTheta_Polar::degree()},
                     IdxStep<BSplinesTheta_Polar> {2 * BSplinesTheta_Polar::degree() + 1});
 
-            BSIdxRangeRTheta trial_idx_range(remaining_r, relevant_theta);
+            IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
 
-            ddc::for_each(trial_idx_range, [&](IDimBSpline2D_Polar const idx_trial) {
+            ddc::for_each(trial_idx_range, [&](IdxBSpline2D_Polar const idx_trial) {
                 const int r_idx_trial(
                         ddc::select<PolarBSplinesRTheta::BSplinesR_tag>(idx_trial).uid());
                 const int theta_idx_trial(
                         ddc::select<PolarBSplinesRTheta::BSplinesTheta_tag>(idx_trial).uid());
                 IdxPolarBspl polar_idx_trial(
                         PolarBSplinesRTheta::get_polar_index<PolarBSplinesRTheta>(
-                                IDimBSpline2D_Polar(r_idx_trial, theta_mod(theta_idx_trial))));
+                                IdxBSpline2D_Polar(r_idx_trial, theta_mod(theta_idx_trial))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -651,10 +652,9 @@ public:
                             quadrature_idx_range_singular,
                             0.0,
                             ddc::reducer::sum<double>(),
-                            [&](QuadratureIndexRTheta const quad_idx) {
-                                QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
-                                QuadratureIndexTheta const ip
-                                        = ddc::select<QDimThetaMesh>(quad_idx);
+                            [&](IdxQuadratureRTheta const quad_idx) {
+                                IdxQuadratureR const ir = ddc::select<QDimRMesh>(quad_idx);
+                                IdxQuadratureTheta const ip = ddc::select<QDimThetaMesh>(quad_idx);
                                 CoordRTheta coord(ddc::coordinate(quad_idx));
                                 return rhs(coord)
                                        * singular_basis_vals_and_derivs(idx, ir, ip).value
@@ -663,7 +663,7 @@ public:
                 });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
         ddc::for_each(fem_non_singular_idx_range, [&](IdxPolarBspl const idx) {
-            const IDimBSpline2D_Polar idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
+            const IdxBSpline2D_Polar idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
             const std::size_t r_idx(ddc::select<PolarBSplinesRTheta::BSplinesR_tag>(idx_2d).uid());
             const std::size_t theta_idx(
                     ddc::select<PolarBSplinesRTheta::BSplinesTheta_tag>(idx_2d).uid());
@@ -687,11 +687,11 @@ public:
             const IdxRange<RCellDim, ThetaCellDim> non_zero_cells(r_cells, theta_cells);
             assert(r_length * theta_length > 0);
             double element = 0.0;
-            ddc::for_each(non_zero_cells, [&](CellIdx const cell_idx) {
+            ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
                 const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
                 const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
 
-                const QuadratureIdxRangeRTheta cell_quad_points(
+                const IdxRangeQuadratureRTheta cell_quad_points(
                         get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
 
                 // Find the column where the non-zero data is stored
@@ -703,9 +703,9 @@ public:
                         cell_quad_points,
                         0.0,
                         ddc::reducer::sum<double>(),
-                        [&](QuadratureIndexRTheta const quad_idx) {
-                            QuadratureIndexR const ir = ddc::select<QDimRMesh>(quad_idx);
-                            QuadratureIndexTheta const ip = ddc::select<QDimThetaMesh>(quad_idx);
+                        [&](IdxQuadratureRTheta const quad_idx) {
+                            IdxQuadratureR const ir = ddc::select<QDimRMesh>(quad_idx);
+                            IdxQuadratureTheta const ip = ddc::select<QDimThetaMesh>(quad_idx);
                             CoordRTheta coord(ddc::coordinate(quad_idx));
                             double rb = r_basis_vals_and_derivs(ib_r, ir).value;
                             double pb = theta_basis_vals_and_derivs(ib_theta, ip).value;
@@ -724,10 +724,10 @@ public:
 
         Kokkos::deep_copy(b_host, b);
         //-----------------
-        BSIdxRangeRTheta dirichlet_boundary_idx_range(
+        IdxRangeBSRTheta dirichlet_boundary_idx_range(
                 radial_bsplines.take_last(IdxStep<BSplinesR_Polar> {1}),
                 polar_bsplines);
-        BSDomainTheta_Polar polar_idx_range(
+        IdxRangeBSTheta_Polar polar_idx_range(
                 ddc::discrete_space<BSplinesTheta_Polar>().full_domain());
 
 
@@ -738,19 +738,19 @@ public:
                     spline.singular_spline_coef(idx) = b_host(0, idx.uid());
                 });
         ddc::for_each(fem_non_singular_idx_range, [&](IdxPolarBspl const idx) {
-            const IDimBSpline2D_Polar idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
+            const IdxBSpline2D_Polar idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
             spline.spline_coef(idx_2d) = b_host(0, idx.uid());
         });
-        ddc::for_each(dirichlet_boundary_idx_range, [&](IDimBSpline2D_Polar const idx) {
+        ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSpline2D_Polar const idx) {
             spline.spline_coef(idx) = 0.0;
         });
 
         // Copy the periodic elements
-        BSIdxRangeRTheta copy_idx_range(
+        IdxRangeBSRTheta copy_idx_range(
                 radial_bsplines,
                 polar_idx_range.remove_first(IdxStep<BSplinesTheta_Polar>(
                         ddc::discrete_space<BSplinesTheta_Polar>().nbasis())));
-        ddc::for_each(copy_idx_range, [&](IDimBSpline2D_Polar const idx_2d) {
+        ddc::for_each(copy_idx_range, [&](IdxBSpline2D_Polar const idx_2d) {
             spline.spline_coef(
                     ddc::select<BSplinesR_Polar>(idx_2d),
                     ddc::select<BSplinesTheta_Polar>(idx_2d))
@@ -783,11 +783,11 @@ public:
             ConstFieldRTheta<CoordRTheta> const coords_eval,
             DFieldRTheta result) const
     {
-        BSDomainTheta_Polar polar_idx_range(
+        IdxRangeBSTheta_Polar polar_idx_range(
                 ddc::discrete_space<BSplinesTheta_Polar>().full_domain());
         SplinePolar
                 spline(PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
-                       BSIdxRangeRTheta(radial_bsplines, polar_idx_range));
+                       IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
 
         (*this)(rhs, spline);
         m_polar_spline_evaluator(result, coords_eval, spline);
@@ -795,23 +795,23 @@ public:
 
 
 private:
-    static QuadratureIdxRangeRTheta get_quadrature_points_in_cell(
+    static IdxRangeQuadratureRTheta get_quadrature_points_in_cell(
             int cell_idx_r,
             int cell_idx_theta)
     {
-        const QuadratureIndexR first_quad_point_r(cell_idx_r * n_gauss_legendre_r);
-        const QuadratureIndexTheta first_quad_point_theta(cell_idx_theta * n_gauss_legendre_theta);
-        constexpr QuadratureLengthR n_GL_r(n_gauss_legendre_r);
-        constexpr QuadratureLengthTheta n_GL_theta(n_gauss_legendre_theta);
-        const QuadratureIdxRangeR quad_points_r(first_quad_point_r, n_GL_r);
-        const QuadratureIdxRangeTheta quad_points_theta(first_quad_point_theta, n_GL_theta);
-        return QuadratureIdxRangeRTheta(quad_points_r, quad_points_theta);
+        const IdxQuadratureR first_quad_point_r(cell_idx_r * n_gauss_legendre_r);
+        const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * n_gauss_legendre_theta);
+        constexpr IdxStepQuadratureR n_GL_r(n_gauss_legendre_r);
+        constexpr IdxStepQuadratureTheta n_GL_theta(n_gauss_legendre_theta);
+        const IdxRangeQuadratureR quad_points_r(first_quad_point_r, n_GL_r);
+        const IdxRangeQuadratureTheta quad_points_theta(first_quad_point_theta, n_GL_theta);
+        return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
     }
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureIndexR ir,
-            QuadratureIndexTheta ip,
+            IdxQuadratureR ir,
+            IdxQuadratureTheta ip,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             Spline2DConstField coeff_alpha,
@@ -834,8 +834,8 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureIndexR ir,
-            QuadratureIndexTheta ip,
+            IdxQuadratureR ir,
+            IdxQuadratureTheta ip,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
@@ -859,8 +859,8 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureIndexR ir,
-            QuadratureIndexTheta ip,
+            IdxQuadratureR ir,
+            IdxQuadratureTheta ip,
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
@@ -884,8 +884,8 @@ private:
 
     template <class Mapping>
     double weak_integral_element(
-            QuadratureIndexR ir,
-            QuadratureIndexTheta ip,
+            IdxQuadratureR ir,
+            IdxQuadratureTheta ip,
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
@@ -939,8 +939,8 @@ private:
 
     template <class Mapping, class TestValDerivType, class TrialValDerivType>
     double templated_weak_integral_element(
-            QuadratureIndexR ir,
-            QuadratureIndexTheta ip,
+            IdxQuadratureR ir,
+            IdxQuadratureTheta ip,
             TestValDerivType const& test_bspline_val_and_deriv,
             TrialValDerivType const& trial_bspline_val_and_deriv,
             TestValDerivType const& test_bspline_val_and_deriv_theta,
@@ -995,8 +995,8 @@ private:
      */
     template <class Mapping>
     double get_matrix_stencil_element(
-            IDimBSpline2D_Polar idx_test,
-            IDimBSpline2D_Polar idx_trial,
+            IdxBSpline2D_Polar idx_test,
+            IdxBSpline2D_Polar idx_trial,
             Spline2DConstField coeff_alpha,
             Spline2DConstField coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
@@ -1064,11 +1064,11 @@ private:
                 non_zero_cells,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](CellIdx const cell_idx) {
+                [&](IdxCell const cell_idx) {
                     const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
                     const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
 
-                    const QuadratureIdxRangeRTheta cell_quad_points(
+                    const IdxRangeQuadratureRTheta cell_quad_points(
                             get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
 
                     int ib_test_theta_idx = theta_idx_test - cell_idx_theta;
@@ -1090,9 +1090,9 @@ private:
                             cell_quad_points,
                             0.0,
                             ddc::reducer::sum<double>(),
-                            [&](QuadratureIndexRTheta const quad_idx) {
-                                QuadratureIndexR const r_idx = ddc::select<QDimRMesh>(quad_idx);
-                                QuadratureIndexTheta const theta_idx
+                            [&](IdxQuadratureRTheta const quad_idx) {
+                                IdxQuadratureR const r_idx = ddc::select<QDimRMesh>(quad_idx);
+                                IdxQuadratureTheta const theta_idx
                                         = ddc::select<QDimThetaMesh>(quad_idx);
                                 return weak_integral_element(
                                         r_idx,

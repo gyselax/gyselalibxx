@@ -1,9 +1,8 @@
 #include <ddc/ddc.hpp>
 
-#include <species_info.hpp>
-
 #include "kinetic_source.hpp"
 #include "mask_tanh.hpp"
+#include "species_info.hpp"
 
 KineticSource::KineticSource(
         IdxRangeX const& gridx,
