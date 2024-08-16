@@ -165,8 +165,8 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="comment">// Compute the spline representation of the electrostatic potential</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        SplineRThetaBuilder <span class="keyword">const</span> builder(grid);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        IdxRangeBSRTheta <span class="keyword">const</span> dom_bsplinesRTheta = get_spline_idx_range(builder);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        Spline2D electrostatic_potential_coef(dom_bsplinesRTheta);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        IdxRangeBSRTheta <span class="keyword">const</span> idx_range_bsplinesRTheta = get_spline_idx_range(builder);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        Spline2D electrostatic_potential_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        (*this)(get_field(electrostatic_potential_coef), advection_field_xy);</div>
@@ -343,8 +343,8 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="comment">// Compute the spline representation of the electrostatic potential</span></div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        SplineRThetaBuilder <span class="keyword">const</span> builder(grid);</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        IdxRangeBSRTheta <span class="keyword">const</span> dom_bsplinesRTheta = get_spline_idx_range(builder);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        Spline2D electrostatic_potential_coef(dom_bsplinesRTheta);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        IdxRangeBSRTheta <span class="keyword">const</span> idx_range_bsplinesRTheta = get_spline_idx_range(builder);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        Spline2D electrostatic_potential_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));</div>
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        (*this)(get_field(electrostatic_potential_coef),</div>

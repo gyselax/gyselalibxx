@@ -151,19 +151,19 @@ $(document).ready(function(){initNavTree('bsl__advection__x_8hpp_source.html',''
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">using</span> IdxBatch = <span class="keyword">typename</span> IdxRangeBatch::discrete_element_type;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvectionSpatial&quot;</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        IdxRangeFdistrib <span class="keyword">const</span> dom = get_idx_range(allfdistribu);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        IdxRange&lt;GridX&gt; <span class="keyword">const</span> x_idx_range = ddc::select&lt;GridX&gt;(dom);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        IdxRange&lt;GridV&gt; <span class="keyword">const</span> v_idx_range = ddc::select&lt;GridV&gt;(dom);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        IdxRange&lt;Species&gt; <span class="keyword">const</span> sp_idx_range = ddc::select&lt;Species&gt;(dom);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        IdxRangeFdistrib <span class="keyword">const</span> idx_range = get_idx_range(allfdistribu);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        IdxRange&lt;GridX&gt; <span class="keyword">const</span> x_idx_range = ddc::select&lt;GridX&gt;(idx_range);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        IdxRange&lt;GridV&gt; <span class="keyword">const</span> v_idx_range = ddc::select&lt;GridV&gt;(idx_range);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        IdxRange&lt;Species&gt; <span class="keyword">const</span> sp_idx_range = ddc::select&lt;Species&gt;(idx_range);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        IdxRangeSpaceVelocity batched_feet_idx_range(dom);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        FieldMem&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords_alloc(batched_feet_idx_range);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        Field&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords(get_field(feet_coords_alloc));</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        std::unique_ptr&lt;InterpolatorType&gt; <span class="keyword">const</span> interpolator_x_ptr = m_interpolator_x.preallocate();</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        InterpolatorType <span class="keyword">const</span>&amp; interpolator_x = *interpolator_x_ptr;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        IdxRangeBatch batch_idx_range(dom);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        IdxRangeBatch batch_idx_range(idx_range);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">for</span> (IdxSp <span class="keyword">const</span> isp : sp_idx_range) {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));</div>

@@ -121,9 +121,9 @@ Inheritance diagram for RK3&lt; FieldMemType, DerivFieldMemType &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa170e3a98017c2c200e041f9a42456b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#aa170e3a98017c2c200e041f9a42456b0">RK3</a> (IdxRange dom)</td></tr>
-<tr class="memdesc:aa170e3a98017c2c200e041f9a42456b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a> object.  <a href="classRK3.html#aa170e3a98017c2c200e041f9a42456b0">More...</a><br /></td></tr>
-<tr class="separator:aa170e3a98017c2c200e041f9a42456b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40fa67d5e9fbfb77026fedc876ecb03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03">RK3</a> (IdxRange idx_range)</td></tr>
+<tr class="memdesc:ad40fa67d5e9fbfb77026fedc876ecb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a> object.  <a href="classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03">More...</a><br /></td></tr>
+<tr class="separator:ad40fa67d5e9fbfb77026fedc876ecb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a277909007e34e4c0d757164eabcf8b45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRK3.html#a277909007e34e4c0d757164eabcf8b45">update</a> (ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy) const</td></tr>
 <tr class="memdesc:a277909007e34e4c0d757164eabcf8b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Runge-Kutta scheme.  <a href="classRK3.html#a277909007e34e4c0d757164eabcf8b45">More...</a><br /></td></tr>
 <tr class="separator:a277909007e34e4c0d757164eabcf8b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,8 +151,8 @@ class RK3&lt; FieldMemType, DerivFieldMemType &gt;</h3>
 <li>\( k_3 = f(t^{n+1/2}, y^{n} + dt ( 2 k_2 - k_1) ) \). </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa170e3a98017c2c200e041f9a42456b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa170e3a98017c2c200e041f9a42456b0">&#9670;&nbsp;</a></span>RK3()</h2>
+<a id="ad40fa67d5e9fbfb77026fedc876ecb03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad40fa67d5e9fbfb77026fedc876ecb03">&#9670;&nbsp;</a></span>RK3()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
           <td class="memname"><a class="el" href="classRK3.html">RK3</a>&lt; FieldMemType, DerivFieldMemType &gt;::<a class="el" href="classRK3.html">RK3</a> </td>
           <td>(</td>
           <td class="paramtype">IdxRange&#160;</td>
-          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -180,7 +180,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
 <p>Create a <a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range on which the points which evolve over time are defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the points which evolve over time are defined. </td></tr>
   </table>
   </dd>
 </dl>

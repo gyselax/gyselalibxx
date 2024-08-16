@@ -155,8 +155,8 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        DFieldMemRTheta phi_star(m_grid);</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        DFieldMemRTheta ci(m_grid);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">auto</span> dom_bsplinesRTheta = get_spline_idx_range(m_builder);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        Spline2D rho_coef(dom_bsplinesRTheta);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">auto</span> idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        Spline2D rho_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; coords(m_grid);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        ddc::for_each(m_grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { coords(irp) = ddc::coordinate(irp); });</div>

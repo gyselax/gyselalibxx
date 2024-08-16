@@ -143,11 +143,11 @@ class BslAdvectionRTheta&lt; FootFinder, Mapping &gt;</h3>
 <p>So the first step of the advection operator is to compute the characteristic feet \( X(t; t+dt, x_i) \) for each mesh point \( x_i \).</p>
 <p>For the second step, we interpolate the function at the characteristic feet computed, and obtain the function at the next time step: \( f(t + dt, x) = f(t, X(t + dt; t, x))\).</p>
 <p>Different time integration methods are implemented to solve the characteristic equation. They are defined in the <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> class.</p>
-<p>The feet can be advected in different index ranges. Theses index ranges are defined in the <a class="el" href="classAdvectionDomain.html" title="Define an domain for the advection.">AdvectionDomain</a> class.</p>
+<p>The feet can be advected on different domains. Theses domains are defined in the <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> class.</p>
 <p>The interpolation of the function is always done in the logical index range.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> </dd>
 <dd>
-<a class="el" href="classAdvectionDomain.html" title="Define an domain for the advection.">AdvectionDomain</a> </dd></dl>
+<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af559bba295fb3d5fcac425cae71bb972"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af559bba295fb3d5fcac425cae71bb972">&#9670;&nbsp;</a></span>BslAdvectionRTheta()</h2>

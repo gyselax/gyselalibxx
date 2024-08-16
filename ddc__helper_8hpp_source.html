@@ -123,9 +123,9 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//      in the meantime, we do it ourselves</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">class</span> IDim&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;constexpr std::enable_if_t&lt;!IDim::continuous_dimension_type::PERIODIC, double&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; dom)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; idx_range)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom));</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(idx_range));</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//TODO: this should be directly handled by ddc::Discretization really,</span></div>
@@ -134,9 +134,9 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;constexpr std::enable_if_t&lt;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        IDim::continuous_dimension_type::PERIODIC &amp;&amp; ddc::is_uniform_point_sampling_v&lt;IDim&gt;,</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">double</span>&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; dom)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; idx_range)</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom) + ddc::step&lt;IDim&gt;());</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(idx_range) + ddc::step&lt;IDim&gt;());</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">//TODO: this should be directly handled by ddc::Discretization really,</span></div>
@@ -145,9 +145,9 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;constexpr std::enable_if_t&lt;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        IDim::continuous_dimension_type::PERIODIC &amp;&amp; ddc::is_non_uniform_point_sampling_v&lt;IDim&gt;,</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">double</span>&gt;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; dom)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;total_interval_length(ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; idx_range)</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    ddc::DiscreteDomain&lt;IDim&gt; dom_periodic(dom.front(), dom.extents() + 1);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    ddc::DiscreteDomain&lt;IDim&gt; dom_periodic(idx_range.front(), idx_range.extents() + 1);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> std::fabs(ddc::rlength(dom_periodic));</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
@@ -159,11 +159,11 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">typename</span> IDim::continuous_element_type&gt;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;restrict_to_idx_range(</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">typename</span> IDim::continuous_element_type coord,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; dom)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        ddc::DiscreteDomain&lt;IDim&gt; <span class="keyword">const</span>&amp; idx_range)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">using</span> Coord = <span class="keyword">typename</span> IDim::continuous_element_type;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> x_min = ddc::rmin(dom);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> length = total_interval_length(dom);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> x_min = ddc::rmin(idx_range);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> length = total_interval_length(idx_range);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> x_max = x_min + length;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    assert(length &gt; 0);</div>

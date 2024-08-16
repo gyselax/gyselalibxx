@@ -121,9 +121,9 @@ Inheritance diagram for NullFluidSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a127fbdae4830d4c08a5c2a7f40b93040"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040">NullFluidSolver</a> (IdxRangeSp const &amp;dom_fluidsp)</td></tr>
-<tr class="memdesc:a127fbdae4830d4c08a5c2a7f40b93040"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the class.  <a href="classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040">More...</a><br /></td></tr>
-<tr class="separator:a127fbdae4830d4c08a5c2a7f40b93040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f3ed59a4e69ebd23d671529363d5fc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullFluidSolver.html#a3f3ed59a4e69ebd23d671529363d5fc4">NullFluidSolver</a> (IdxRangeSp const &amp;idx_range_fluidsp)</td></tr>
+<tr class="memdesc:a3f3ed59a4e69ebd23d671529363d5fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor for the class.  <a href="classNullFluidSolver.html#a3f3ed59a4e69ebd23d671529363d5fc4">More...</a><br /></td></tr>
+<tr class="separator:a3f3ed59a4e69ebd23d671529363d5fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57df0286d899f8278d9147aeea564292"><td class="memItemLeft" align="right" valign="top">DFieldSpMomX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">operator()</a> (DFieldSpMomX fluid_moments, DConstFieldSpXVx allfdistribu, DConstFieldX efield, double dt) const override</td></tr>
 <tr class="memdesc:a57df0286d899f8278d9147aeea564292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a dummy fluid model on a timestep dt.  <a href="classNullFluidSolver.html#a57df0286d899f8278d9147aeea564292">More...</a><br /></td></tr>
 <tr class="separator:a57df0286d899f8278d9147aeea564292"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,8 +132,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>A dommy class that solves a fluid model. </p>
 <p>The fluid model leaves the moments of the fluid species unchanged. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a127fbdae4830d4c08a5c2a7f40b93040"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a127fbdae4830d4c08a5c2a7f40b93040">&#9670;&nbsp;</a></span>NullFluidSolver()</h2>
+<a id="a3f3ed59a4e69ebd23d671529363d5fc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f3ed59a4e69ebd23d671529363d5fc4">&#9670;&nbsp;</a></span>NullFluidSolver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +142,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">NullFluidSolver::NullFluidSolver </td>
           <td>(</td>
           <td class="paramtype">IdxRangeSp const &amp;&#160;</td>
-          <td class="paramname"><em>dom_fluidsp</em></td><td>)</td>
+          <td class="paramname"><em>idx_range_fluidsp</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -151,7 +151,7 @@ Public Member Functions</h2></td></tr>
 <p>The constructor for the class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom_fluidsp</td><td>The moments index range on which the fluid species is defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range_fluidsp</td><td>The moments index range on which the fluid species is defined. </td></tr>
   </table>
   </dd>
 </dl>
@@ -209,8 +209,8 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">fluid_moments</td><td>On input : a field referencing the moments of the fluid species. On output : a field referencing the moments of the fluid species updated after solving the dummy fluid model. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>A constant view referencing the distribution function. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">efield</td><td>A constant view referencing the electric field. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>A constant field referencing the distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">efield</td><td>A constant field referencing the electric field. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The timestep. </td></tr>
   </table>
   </dd>

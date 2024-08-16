@@ -4,7 +4,7 @@ var classIdxRangeSlice =
     [ "IdxRangeSlice", "classIdxRangeSlice.html#a14b43890dfd560f54e3de3c3859bd31d", null ],
     [ "IdxRangeSlice", "classIdxRangeSlice.html#a2b89aee054545931b156449008fd8fff", null ],
     [ "contains", "classIdxRangeSlice.html#aa1cc7ec0912e5195f762b6176b2aa085", null ],
-    [ "contains", "classIdxRangeSlice.html#ada3508b46d98f3b177e905412bbe71a8", null ],
+    [ "contains", "classIdxRangeSlice.html#af94edc7f3cecfc5b987d37f7929b719f", null ],
     [ "get_index", "classIdxRangeSlice.html#a2ee4615ebb6864cdea1f6d93dc3e6add", null ],
     [ "extents", "classIdxRangeSlice.html#a3ad846d4e787b5ba6608ec804ea9b029", null ],
     [ "extent", "classIdxRangeSlice.html#a4884f8a285d429acfda5f734e202894e", null ],

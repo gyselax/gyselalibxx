@@ -222,7 +222,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">normalization_coeff</td><td>A normalization coefficient for the diffusive neutral model. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">spline_x_builder</td><td>A one-dimensional spline builder. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">spline_x_evaluator</td><td>A one-dimensional spline evaluator. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_coeffs</td><td>A View referencing coefficients for a quadrature. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_coeffs</td><td>A constant field referencing coefficients for a quadrature. </td></tr>
   </table>
   </dd>
 </dl>
@@ -281,8 +281,8 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">neutrals</td><td>The fluid moments describing the neutrals. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>A Field referencing a constant view of the distribution function. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">efield</td><td>A Field referencing a constant view of the electric field. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">allfdistribu</td><td>A constant Field referencing the distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">efield</td><td>A constant Field referencing the electric field. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step.</td></tr>
   </table>
   </dd>

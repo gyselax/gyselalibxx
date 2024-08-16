@@ -121,9 +121,9 @@ Inheritance diagram for CrankNicolson&lt; FieldMemType, DerivFieldMemType &gt;:<
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a31e81109c3158ec9c217880fc5564fdb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a31e81109c3158ec9c217880fc5564fdb">CrankNicolson</a> (IdxRange dom, int const counter=int(20), double const epsilon=1e-12)</td></tr>
-<tr class="memdesc:a31e81109c3158ec9c217880fc5564fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a> object.  <a href="classCrankNicolson.html#a31e81109c3158ec9c217880fc5564fdb">More...</a><br /></td></tr>
-<tr class="separator:a31e81109c3158ec9c217880fc5564fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25dddf708779f37a8e4060ccb9c735b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#a25dddf708779f37a8e4060ccb9c735b8">CrankNicolson</a> (IdxRange idx_range, int const counter=int(20), double const epsilon=1e-12)</td></tr>
+<tr class="memdesc:a25dddf708779f37a8e4060ccb9c735b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a> object.  <a href="classCrankNicolson.html#a25dddf708779f37a8e4060ccb9c735b8">More...</a><br /></td></tr>
+<tr class="separator:a25dddf708779f37a8e4060ccb9c735b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeffa66677ee474545531df76a8c07a6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCrankNicolson.html#aeffa66677ee474545531df76a8c07a6d">update</a> (ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy) const</td></tr>
 <tr class="memdesc:aeffa66677ee474545531df76a8c07a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the Crank-Nicolson scheme.  <a href="classCrankNicolson.html#aeffa66677ee474545531df76a8c07a6d">More...</a><br /></td></tr>
 <tr class="separator:aeffa66677ee474545531df76a8c07a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,8 +151,8 @@ class CrankNicolson&lt; FieldMemType, DerivFieldMemType &gt;</h3>
 <p>The method is an implicit method. If \( |y^{k+1} - y^{k}| &lt; \varepsilon \), then we set \( y^{n+1} = y^{k+1} \).</p>
 <p>The method is order 2. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a31e81109c3158ec9c217880fc5564fdb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31e81109c3158ec9c217880fc5564fdb">&#9670;&nbsp;</a></span>CrankNicolson()</h2>
+<a id="a25dddf708779f37a8e4060ccb9c735b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25dddf708779f37a8e4060ccb9c735b8">&#9670;&nbsp;</a></span>CrankNicolson()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
           <td class="memname"><a class="el" href="classCrankNicolson.html">CrankNicolson</a>&lt; FieldMemType, DerivFieldMemType &gt;::<a class="el" href="classCrankNicolson.html">CrankNicolson</a> </td>
           <td>(</td>
           <td class="paramtype">IdxRange&#160;</td>
-          <td class="paramname"><em>dom</em>, </td>
+          <td class="paramname"><em>idx_range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -196,7 +196,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
 <p>Create a <a class="el" href="classCrankNicolson.html" title="A class which provides an implementation of a Crank-Nicolson method.">CrankNicolson</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range on which the points which evolve over time are defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the points which evolve over time are defined. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">counter</td><td>The maximal number of loops for the implicit method. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epsilon</td><td>The \( \varepsilon \) upperbound of the difference of two steps in the implicit method: \( |y^{k+1} - y^{k}| &lt; \varepsilon \). </td></tr>
   </table>

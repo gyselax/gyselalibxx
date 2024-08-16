@@ -151,10 +151,10 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        std::ofstream&amp; out_file,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        CoordRTheta coord_rp,</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        IdxRangeTheta p_dom)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        IdxRangeTheta idx_range_p)</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> r = ddc::get&lt;R&gt;(coord_rp);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> th = ddcHelper::restrict_to_idx_range(ddc::select&lt;Theta&gt;(coord_rp), p_dom);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> th = ddcHelper::restrict_to_idx_range(ddc::select&lt;Theta&gt;(coord_rp), idx_range_p);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    CoordXY coord_xy(mapping(coord_rp));</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> x = ddc::get&lt;X&gt;(coord_xy);</div>
@@ -167,19 +167,19 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> save_feet(</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; rp_dom,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; idx_range_rp,</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        FieldRTheta&lt;CoordRTheta&gt; <span class="keyword">const</span>&amp; feet_coords_rp,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::string <span class="keyword">const</span>&amp; name)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    std::ofstream file_feet(name, std::ofstream::out);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    file_feet &lt;&lt; std::fixed &lt;&lt; std::setprecision(16);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ddc::for_each(rp_dom, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        IdxRangeTheta p_dom = ddc::select&lt;GridTheta&gt;(rp_dom);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ddc::for_each(idx_range_rp, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        IdxRangeTheta idx_range_p = ddc::select&lt;GridTheta&gt;(idx_range_rp);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        file_feet &lt;&lt; std::setw(15) &lt;&lt; ddc::select&lt;GridR&gt;(irp).uid() &lt;&lt; std::setw(15)</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                  &lt;&lt; ddc::select&lt;GridTheta&gt;(irp).uid();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        print_coordinate(file_feet, ddc::coordinate(irp), mapping, p_dom);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        print_coordinate(file_feet, feet_coords_rp(irp), mapping, p_dom);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        print_coordinate(file_feet, ddc::coordinate(irp), mapping, idx_range_p);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        print_coordinate(file_feet, feet_coords_rp(irp), mapping, idx_range_p);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        file_feet &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    });</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    file_feet.close();</div>
@@ -194,13 +194,13 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    out_file &lt;&lt; std::fixed &lt;&lt; std::setprecision(16);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        IdxRangeTheta p_dom = ddc::select&lt;GridTheta&gt;(grid);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        IdxRangeTheta idx_range_p = ddc::select&lt;GridTheta&gt;(grid);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        IdxR <span class="keyword">const</span> ir(ddc::select&lt;GridR&gt;(irp));</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        IdxTheta <span class="keyword">const</span> ip(ddc::select&lt;GridTheta&gt;(irp));</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        out_file &lt;&lt; std::setw(15) &lt;&lt; ir.uid() &lt;&lt; std::setw(15) &lt;&lt; ip.uid();</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        print_coordinate(out_file, ddc::coordinate(irp), mapping, p_dom);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        print_coordinate(out_file, ddc::coordinate(irp), mapping, idx_range_p);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        out_file &lt;&lt; std::setw(25) &lt;&lt; <span class="keyword">function</span>(irp);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        out_file &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    });</div>
@@ -209,7 +209,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> AdvectionField, <span class="keyword">class</span> Mapping&gt;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;FieldMemRTheta&lt;CoordRTheta&gt; compute_exact_feet_rp(</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; rp_dom,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; idx_range_rp,</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <a class="code" href="classAdvectionField.html">AdvectionField</a> <span class="keyword">const</span>&amp; advection_field,</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordtype">double</span> <span class="keyword">const</span> time)</div>
@@ -218,10 +218,10 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                  Mapping,</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                  <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound&gt;</a>&gt;);</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    FieldMemRTheta&lt;CoordRTheta&gt; feet_coords_rp(rp_dom);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    FieldMemRTheta&lt;CoordRTheta&gt; feet_coords_rp(idx_range_rp);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    CoordXY <span class="keyword">const</span> coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    ddc::for_each(rp_dom, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    ddc::for_each(idx_range_rp, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        CoordRTheta <span class="keyword">const</span> coord_rp = ddc::coordinate(irp);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        CoordXY <span class="keyword">const</span> coord_xy = advection_field.<a class="code" href="classAdvectionField.html#ab0c285eac8fe3ebe600c740149dbdd8c">exact_feet</a>(mapping(coord_rp), time);</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>

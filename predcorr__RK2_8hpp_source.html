@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('predcorr__RK2_8hpp_source.html',''); i
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classPredCorrRK2XY.html#a03ce8460021646ecb76554cbb4f1b088">   83</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classPredCorrRK2XY.html#a03ce8460021646ecb76554cbb4f1b088">operator()</a>(DFieldXY allfdistribu, <span class="keywordtype">double</span> <span class="keyword">const</span> dt, <span class="keywordtype">int</span> <span class="keyword">const</span> nbiter)</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">// Domain</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">// Index range</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        IdxRangeXY <span class="keyword">const</span> meshXY = get_idx_range(allfdistribu);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="comment">// Output of the Poisson solver</span></div>
@@ -163,10 +163,10 @@ $(document).ready(function(){initNavTree('predcorr__RK2_8hpp_source.html',''); i
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="comment">// Computation of the advection field: Poisson equation ---</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        std::function&lt;void(VectorFieldXY_XY, DConstFieldXY)&gt; define_electric_field</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                = [&amp;](VectorFieldXY_XY electric_field, DConstFieldXY allfdistribu_const) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                      IdxRangeXY xy_dom(get_idx_range&lt;GridX, GridY&gt;(allfdistribu_const));</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                      IdxRangeXY idx_range_xy(get_idx_range&lt;GridX, GridY&gt;(allfdistribu_const));</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                      <span class="comment">// --- compute electrostatic potential and electric field:</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                      DFieldMemXY electrostatic_potential_alloc(xy_dom);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                      DFieldMemXY electrostatic_potential_alloc(idx_range_xy);</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                      DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                      <span class="comment">/*</span></div>
@@ -175,7 +175,7 @@ $(document).ready(function(){initNavTree('predcorr__RK2_8hpp_source.html',''); i
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">                        allfdistribu_alloc chunk containing the values of the constant </span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">                        allfdistribu to solve the type conflict in the Poisson solver. </span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">                      */</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                      DFieldMemXY allfdistribu_alloc(xy_dom);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                      DFieldMemXY allfdistribu_alloc(idx_range_xy);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                      DFieldXY allfdistribu = get_field(allfdistribu_alloc);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                      ddc::parallel_deepcopy(</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                              Kokkos::DefaultExecutionSpace(),</div>
@@ -193,9 +193,9 @@ $(document).ready(function(){initNavTree('predcorr__RK2_8hpp_source.html',''); i
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                      DConstFieldXY electric_field_y(ddcHelper::get&lt;Y&gt;(electric_field));</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                      <span class="comment">// --- compute advection field:</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                      IdxRangeXY dom = get_idx_range(electric_field);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                      DFieldMemXY advection_field_x_alloc(dom);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                      DFieldMemXY advection_field_y_alloc(dom);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                      IdxRangeXY idx_range = get_idx_range(electric_field);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                      DFieldMemXY advection_field_x_alloc(idx_range);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                      DFieldMemXY advection_field_y_alloc(idx_range);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                      DFieldXY advection_field_x = get_field(advection_field_x_alloc);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                      DFieldXY advection_field_y = get_field(advection_field_y_alloc);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                      ddc::parallel_for_each(</div>

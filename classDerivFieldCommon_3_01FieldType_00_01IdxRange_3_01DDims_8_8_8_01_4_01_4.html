@@ -239,10 +239,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aaad849cccc5a3b43fb2e1e9c5566bc78"><td class="memTemplItemLeft" align="right" valign="top">constexpr KOKKOS_FUNCTION auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#aaad849cccc5a3b43fb2e1e9c5566bc78">get_slicer_for</a> (IdxRange&lt; ODDims... &gt; const &amp;slice_idx_range, int array_idx) const</td></tr>
 <tr class="memdesc:aaad849cccc5a3b43fb2e1e9c5566bc78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an object which can be used to slice an mdspan.  <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#aaad849cccc5a3b43fb2e1e9c5566bc78">More...</a><br /></td></tr>
 <tr class="separator:aaad849cccc5a3b43fb2e1e9c5566bc78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69552bfb0c1f498412d602350397bb67"><td class="memTemplParams" colspan="2">template&lt;class... ODims&gt; </td></tr>
-<tr class="memitem:a69552bfb0c1f498412d602350397bb67"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#a69552bfb0c1f498412d602350397bb67">get_internal_field</a> (IdxRange&lt; ODims... &gt; dom) const</td></tr>
-<tr class="memdesc:a69552bfb0c1f498412d602350397bb67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Field from a subset of one of the mdspans in internal_fields.  <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#a69552bfb0c1f498412d602350397bb67">More...</a><br /></td></tr>
-<tr class="separator:a69552bfb0c1f498412d602350397bb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab37c3af17859ce88bd4842eb614c75ce"><td class="memTemplParams" colspan="2">template&lt;class... ODims&gt; </td></tr>
+<tr class="memitem:ab37c3af17859ce88bd4842eb614c75ce"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#ab37c3af17859ce88bd4842eb614c75ce">get_internal_field</a> (IdxRange&lt; ODims... &gt; idx_range) const</td></tr>
+<tr class="memdesc:ab37c3af17859ce88bd4842eb614c75ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Field from a subset of one of the mdspans in internal_fields.  <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#ab37c3af17859ce88bd4842eb614c75ce">More...</a><br /></td></tr>
+<tr class="separator:ab37c3af17859ce88bd4842eb614c75ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7bdb7d57cf9d0ba344724a0a9797457"><td class="memTemplParams" colspan="2">template&lt;class... ODims&gt; </td></tr>
 <tr class="memitem:ac7bdb7d57cf9d0ba344724a0a9797457"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#ac7bdb7d57cf9d0ba344724a0a9797457">get_internal_field</a> (Idx&lt; ODims... &gt; elem) const</td></tr>
 <tr class="memdesc:ac7bdb7d57cf9d0ba344724a0a9797457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Field from a subset of one of the mdspans in internal_fields.  <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#ac7bdb7d57cf9d0ba344724a0a9797457">More...</a><br /></td></tr>
@@ -665,8 +665,8 @@ template&lt;class QueryDDim , class... ODDims&gt; </div>
 
 </div>
 </div>
-<a id="a69552bfb0c1f498412d602350397bb67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69552bfb0c1f498412d602350397bb67">&#9670;&nbsp;</a></span>get_internal_field() <span class="overload">[1/2]</span></h2>
+<a id="ab37c3af17859ce88bd4842eb614c75ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab37c3af17859ce88bd4842eb614c75ce">&#9670;&nbsp;</a></span>get_internal_field() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,7 +682,7 @@ template&lt;class... ODims&gt; </div>
           <td class="memname">KOKKOS_FUNCTION auto <a class="el" href="classDerivFieldCommon.html">DerivFieldCommon</a>&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_internal_field </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; ODims... &gt;&#160;</td>
-          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -697,7 +697,7 @@ template&lt;class... ODims&gt; </div>
 <p>The provided IdxRange is used to slice the mdspan in such a way that the resulting mdspan can be saved in a Field. This means that all information about derivatives must be provided. If information about a derivative is missing then it is assumed that the 0-th order derivative is requested.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dom</td><td>The index range used to slice the mdspan.</td></tr>
+    <tr><td class="paramname">idx_range</td><td>The index range used to slice the mdspan.</td></tr>
   </table>
   </dd>
 </dl>
@@ -999,7 +999,7 @@ template&lt;class FieldType , class... DDims&gt; </div>
 </div><div class="memdoc">
 
 <p>Get the Field which holds the values of the function. </p>
-<p>This function is equivalent to calling operator[] with a Domain of rank 0.</p>
+<p>This function is equivalent to calling operator[] with a 0D IdxRange.</p>
 <dl class="section return"><dt>Returns</dt><dd>Field The field on the physical index range. </dd></dl>
 
 </div>
@@ -1030,7 +1030,7 @@ template&lt;class FieldType , class... DDims&gt; </div>
 </div><div class="memdoc">
 
 <p>Get the Field which holds the values of the function. </p>
-<p>This function is equivalent to calling operator[] with a Domain of rank 0.</p>
+<p>This function is equivalent to calling operator[] with a 0D IdxRange.</p>
 <dl class="section return"><dt>Returns</dt><dd>Field The field on the physical index range. </dd></dl>
 
 </div>

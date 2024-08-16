@@ -121,9 +121,9 @@ Inheritance diagram for Euler&lt; FieldMemType, DerivFieldMemType &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aee564617f47b75872e782d02b6c2bde1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">Euler</a> (IdxRange dom)</td></tr>
-<tr class="memdesc:aee564617f47b75872e782d02b6c2bde1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object.  <a href="classEuler.html#aee564617f47b75872e782d02b6c2bde1">More...</a><br /></td></tr>
-<tr class="separator:aee564617f47b75872e782d02b6c2bde1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13de1fd2155ed239a1689d456abc8d45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#a13de1fd2155ed239a1689d456abc8d45">Euler</a> (IdxRange idx_range)</td></tr>
+<tr class="memdesc:a13de1fd2155ed239a1689d456abc8d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object.  <a href="classEuler.html#a13de1fd2155ed239a1689d456abc8d45">More...</a><br /></td></tr>
+<tr class="separator:a13de1fd2155ed239a1689d456abc8d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad041a4b9b4ab5d7fb453c03fe1008c60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEuler.html#ad041a4b9b4ab5d7fb453c03fe1008c60">update</a> (ValField y, double dt, std::function&lt; void(<a class="el" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy) const</td></tr>
 <tr class="memdesc:ad041a4b9b4ab5d7fb453c03fe1008c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out one step of the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> scheme.  <a href="classEuler.html#ad041a4b9b4ab5d7fb453c03fe1008c60">More...</a><br /></td></tr>
 <tr class="separator:ad041a4b9b4ab5d7fb453c03fe1008c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,8 +146,8 @@ class Euler&lt; FieldMemType, DerivFieldMemType &gt;</h3>
 <p>the explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> method is given by : \( y^{n+1} = y^{n} + dt f(t^{n}, y^{n})\).</p>
 <p>The method is order 1. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aee564617f47b75872e782d02b6c2bde1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee564617f47b75872e782d02b6c2bde1">&#9670;&nbsp;</a></span>Euler()</h2>
+<a id="a13de1fd2155ed239a1689d456abc8d45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13de1fd2155ed239a1689d456abc8d45">&#9670;&nbsp;</a></span>Euler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,7 +161,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
           <td class="memname"><a class="el" href="classEuler.html">Euler</a>&lt; FieldMemType, DerivFieldMemType &gt;::<a class="el" href="classEuler.html">Euler</a> </td>
           <td>(</td>
           <td class="paramtype">IdxRange&#160;</td>
-          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -175,7 +175,7 @@ template&lt;class FieldMemType , class DerivFieldMemType  = FieldMemType&gt; </d
 <p>Create a <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range on which the points which evolve over time are defined. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range on which the points which evolve over time are defined. </td></tr>
   </table>
   </dd>
 </dl>

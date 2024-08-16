@@ -134,10 +134,10 @@ $(document).ready(function(){initNavTree('rk4_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">using</span> <a class="code" href="classDerivFieldMem.html">DerivFieldMem</a> = <span class="keyword">typename</span> DerivFieldMemType::span_type;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">using</span> DerivConstField = <span class="keyword">typename</span> DerivFieldMemType::view_type;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    IdxRange <span class="keyword">const</span> m_dom;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    IdxRange <span class="keyword">const</span> m_idx_range;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classRK4.html#a92bd98b7466ec78e8aa1f7143a108b00">   60</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classRK4.html#a92bd98b7466ec78e8aa1f7143a108b00">RK4</a>(IdxRange dom) : m_dom(dom) {}</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classRK4.html#a01cb285ac988d4b73e9e71eef8024296">   60</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classRK4.html#a01cb285ac988d4b73e9e71eef8024296">RK4</a>(IdxRange idx_range) : m_idx_range(idx_range) {}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classRK4.html#ac74c2d32e81293af91dbe282296e5b99">   78</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK4.html#ac74c2d32e81293af91dbe282296e5b99">update</a>(ValField y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">    </span>{</div>
@@ -185,12 +185,12 @@ $(document).ready(function(){initNavTree('rk4_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                Kokkos::SpaceAccessibility&lt;ExecSpace, typename DerivFieldMemType::memory_space&gt;::</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        accessible,</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        FieldMemType m_y_prime_alloc(m_dom);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        DerivFieldMemType m_k1_alloc(m_dom);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        DerivFieldMemType m_k2_alloc(m_dom);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        DerivFieldMemType m_k3_alloc(m_dom);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        DerivFieldMemType m_k4_alloc(m_dom);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        DerivFieldMemType m_k_total_alloc(m_dom);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        FieldMemType m_y_prime_alloc(m_idx_range);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        DerivFieldMemType m_k1_alloc(m_idx_range);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        DerivFieldMemType m_k2_alloc(m_idx_range);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        DerivFieldMemType m_k3_alloc(m_idx_range);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        DerivFieldMemType m_k4_alloc(m_idx_range);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        DerivFieldMemType m_k_total_alloc(m_idx_range);</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        ValField m_y_prime = get_field(m_y_prime_alloc);</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <a class="code" href="classDerivFieldMem.html">DerivFieldMem</a> m_k1 = get_field(m_k1_alloc);</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <a class="code" href="classDerivFieldMem.html">DerivFieldMem</a> m_k2 = get_field(m_k2_alloc);</div>
@@ -276,9 +276,9 @@ $(document).ready(function(){initNavTree('rk4_8hpp_source.html',''); initResizab
 <div class="ttc" id="aclassDerivFieldMem_html"><div class="ttname"><a href="classDerivFieldMem.html">DerivFieldMem</a></div><div class="ttdoc">See DerivFieldMemImplementation.</div><div class="ttdef"><b>Definition:</b> derivative_field.hpp:10</div></div>
 <div class="ttc" id="aclassITimeStepper_html"><div class="ttname"><a href="classITimeStepper.html">ITimeStepper</a></div><div class="ttdef"><b>Definition:</b> itimestepper.hpp:8</div></div>
 <div class="ttc" id="aclassRK4_html"><div class="ttname"><a href="classRK4.html">RK4</a></div><div class="ttdoc">A class which provides an implementation of a fourth-order Runge-Kutta method.</div><div class="ttdef"><b>Definition:</b> rk4.hpp:34</div></div>
+<div class="ttc" id="aclassRK4_html_a01cb285ac988d4b73e9e71eef8024296"><div class="ttname"><a href="classRK4.html#a01cb285ac988d4b73e9e71eef8024296">RK4::RK4</a></div><div class="ttdeci">RK4(IdxRange idx_range)</div><div class="ttdoc">Create a RK4 object.</div><div class="ttdef"><b>Definition:</b> rk4.hpp:60</div></div>
 <div class="ttc" id="aclassRK4_html_a0bffdc18f1c874e94864f8bb0d4c34dc"><div class="ttname"><a href="classRK4.html#a0bffdc18f1c874e94864f8bb0d4c34dc">RK4::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk4.hpp:142</div></div>
 <div class="ttc" id="aclassRK4_html_a732a7d0bddff6dad7454d4f0da6549b0"><div class="ttname"><a href="classRK4.html#a732a7d0bddff6dad7454d4f0da6549b0">RK4::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk4.hpp:103</div></div>
-<div class="ttc" id="aclassRK4_html_a92bd98b7466ec78e8aa1f7143a108b00"><div class="ttname"><a href="classRK4.html#a92bd98b7466ec78e8aa1f7143a108b00">RK4::RK4</a></div><div class="ttdeci">RK4(IdxRange dom)</div><div class="ttdoc">Create a RK4 object.</div><div class="ttdef"><b>Definition:</b> rk4.hpp:60</div></div>
 <div class="ttc" id="aclassRK4_html_ac74c2d32e81293af91dbe282296e5b99"><div class="ttname"><a href="classRK4.html#ac74c2d32e81293af91dbe282296e5b99">RK4::update</a></div><div class="ttdeci">void update(ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk4.hpp:78</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -153,11 +153,11 @@ $(document).ready(function(){initNavTree('collisions__intra_8hpp_source.html',''
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> VDim&gt;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::enable_if_t&lt;!ddc::is_uniform_point_sampling_v&lt;VDim&gt;&gt;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    build_ghosted_staggered_vx_point_sampling(IdxRange&lt;VDim&gt; <span class="keyword">const</span>&amp; dom);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    build_ghosted_staggered_vx_point_sampling(IdxRange&lt;VDim&gt; <span class="keyword">const</span>&amp; idx_range);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> VDim&gt;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    std::enable_if_t&lt;ddc::is_uniform_point_sampling_v&lt;VDim&gt;&gt;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    build_ghosted_staggered_vx_point_sampling(IdxRange&lt;VDim&gt; <span class="keyword">const</span>&amp; dom);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    build_ghosted_staggered_vx_point_sampling(IdxRange&lt;VDim&gt; <span class="keyword">const</span>&amp; idx_range);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">double</span> m_nustar0;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">double</span> m_fthresh;</div>

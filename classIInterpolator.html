@@ -124,12 +124,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a75df9c0b077d3114892c76fd7c44567b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a75df9c0b077d3114892c76fd7c44567b">batched_derivs_idx_range_xmin</a> (IdxRange&lt; Grid1D... &gt; dom) const =0</td></tr>
-<tr class="memdesc:a75df9c0b077d3114892c76fd7c44567b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs index range on lower boundaries.  <a href="classIInterpolator.html#a75df9c0b077d3114892c76fd7c44567b">More...</a><br /></td></tr>
-<tr class="separator:a75df9c0b077d3114892c76fd7c44567b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a565cebe6edb7a4d2939c6faf1c05ba19"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a565cebe6edb7a4d2939c6faf1c05ba19">batched_derivs_idx_range_xmax</a> (IdxRange&lt; Grid1D... &gt; dom) const =0</td></tr>
-<tr class="memdesc:a565cebe6edb7a4d2939c6faf1c05ba19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs index range on upper boundaries.  <a href="classIInterpolator.html#a565cebe6edb7a4d2939c6faf1c05ba19">More...</a><br /></td></tr>
-<tr class="separator:a565cebe6edb7a4d2939c6faf1c05ba19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af664c9db9a794fb1f199ff31f8673bf8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#af664c9db9a794fb1f199ff31f8673bf8">batched_derivs_idx_range_xmin</a> (IdxRange&lt; Grid1D... &gt; idx_range) const =0</td></tr>
+<tr class="memdesc:af664c9db9a794fb1f199ff31f8673bf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs index range on lower boundaries.  <a href="classIInterpolator.html#af664c9db9a794fb1f199ff31f8673bf8">More...</a><br /></td></tr>
+<tr class="separator:af664c9db9a794fb1f199ff31f8673bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14f07a9a9cd43939de6acd999d25c195"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#a14f07a9a9cd43939de6acd999d25c195">batched_derivs_idx_range_xmax</a> (IdxRange&lt; Grid1D... &gt; idx_range) const =0</td></tr>
+<tr class="memdesc:a14f07a9a9cd43939de6acd999d25c195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the batched derivs index range on upper boundaries.  <a href="classIInterpolator.html#a14f07a9a9cd43939de6acd999d25c195">More...</a><br /></td></tr>
+<tr class="separator:a14f07a9a9cd43939de6acd999d25c195"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa5c3e3e3114ea37952ebe02f7464a00"><td class="memItemLeft" align="right" valign="top">virtual Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator.html#aaa5c3e3e3114ea37952ebe02f7464a00">operator()</a> (Field&lt; double, IdxRange&lt; Grid1D... &gt;&gt; inout_data, Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt;&gt; coordinates, std::optional&lt; Field&lt; double const, <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> &gt;&gt; derivs_xmin=std::nullopt, std::optional&lt; Field&lt; double const, <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> &gt;&gt; derivs_xmax=std::nullopt) const =0</td></tr>
 <tr class="memdesc:aaa5c3e3e3114ea37952ebe02f7464a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolator.html#aaa5c3e3e3114ea37952ebe02f7464a00">More...</a><br /></td></tr>
 <tr class="separator:aaa5c3e3e3114ea37952ebe02f7464a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,8 +141,8 @@ class IInterpolator&lt; GridInterp, Grid1D &gt;</h3>
 <p>A class which provides an interpolating function. </p>
 <p>An abstract class which implements a function allowing the value of a function to be approximated at a set of coordinates from a set of known values of the function. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a75df9c0b077d3114892c76fd7c44567b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75df9c0b077d3114892c76fd7c44567b">&#9670;&nbsp;</a></span>batched_derivs_idx_range_xmin()</h2>
+<a id="af664c9db9a794fb1f199ff31f8673bf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af664c9db9a794fb1f199ff31f8673bf8">&#9670;&nbsp;</a></span>batched_derivs_idx_range_xmin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +156,7 @@ template&lt;class GridInterp , class... Grid1D&gt; </div>
           <td class="memname">virtual <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; GridInterp, Grid1D &gt;::batched_derivs_idx_range_xmin </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; Grid1D... &gt;&#160;</td>
-          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -171,18 +171,18 @@ template&lt;class GridInterp , class... Grid1D&gt; </div>
 <p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on lower boundaries are defined.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range of a single-species distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range of a single-species distribution function. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>dom The lower boundaries of this index range. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>idx_range The lower boundaries of this index range. </dd></dl>
 
-<p>Implemented in <a class="el" href="classSplineInterpolator.html#a7bed9695df7fb688b544eb239f4823ca">SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a9e5e7e2a5c3a13f4cc3b68b0798d98a9">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a9e5e7e2a5c3a13f4cc3b68b0798d98a9">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D... &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#acf7d3034ef41a56df5e9d875d5ecd997">IPreallocatableInterpolator&lt; GridInterp, Grid1D &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#acf7d3034ef41a56df5e9d875d5ecd997">IPreallocatableInterpolator&lt; GridInterp, Grid1D... &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classSplineInterpolator.html#a9cfc0e637f271993f61b0270d12e5703">SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a08d2746b1cf2f70e18478141b3bc5ca9">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a08d2746b1cf2f70e18478141b3bc5ca9">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D... &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#a737773f79bd66f394f19a6b7d8045b52">IPreallocatableInterpolator&lt; GridInterp, Grid1D &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#a737773f79bd66f394f19a6b7d8045b52">IPreallocatableInterpolator&lt; GridInterp, Grid1D... &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a565cebe6edb7a4d2939c6faf1c05ba19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a565cebe6edb7a4d2939c6faf1c05ba19">&#9670;&nbsp;</a></span>batched_derivs_idx_range_xmax()</h2>
+<a id="a14f07a9a9cd43939de6acd999d25c195"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14f07a9a9cd43939de6acd999d25c195">&#9670;&nbsp;</a></span>batched_derivs_idx_range_xmax()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,7 +196,7 @@ template&lt;class GridInterp , class... Grid1D&gt; </div>
           <td class="memname">virtual <a class="el" href="classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c">batched_derivs_idx_range_type</a> <a class="el" href="classIInterpolator.html">IInterpolator</a>&lt; GridInterp, Grid1D &gt;::batched_derivs_idx_range_xmax </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; Grid1D... &gt;&#160;</td>
-          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -211,13 +211,13 @@ template&lt;class GridInterp , class... Grid1D&gt; </div>
 <p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on upper boundaries are defined.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom</td><td>The index range of a single-species distribution function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range</td><td>The index range of a single-species distribution function. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>dom The upper boundaries of this index range. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>idx_range The upper boundaries of this index range. </dd></dl>
 
-<p>Implemented in <a class="el" href="classSplineInterpolator.html#ae3cc72aa446dc4fac474c34d629b7936">SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#ae4bfb75dc167ecb321e94c330c14a912">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#ae4bfb75dc167ecb321e94c330c14a912">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D... &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#adb1cb33f682e174a85d78b0937995f56">IPreallocatableInterpolator&lt; GridInterp, Grid1D &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#adb1cb33f682e174a85d78b0937995f56">IPreallocatableInterpolator&lt; GridInterp, Grid1D... &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classSplineInterpolator.html#ab7b38622e403a5a5dc9e09d737a9dfe8">SplineInterpolator&lt; GridInterp, BSplines, BcMin, BcMax, LeftExtrapolationRule, RightExtrapolationRule, Solver, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a9a6515bea1958ced63980a0ecee4c707">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D &gt;</a>, <a class="el" href="classLagrangeInterpolator.html#a9a6515bea1958ced63980a0ecee4c707">LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D... &gt;</a>, <a class="el" href="classIPreallocatableInterpolator.html#aa5f6e697f47d2e64a7e079a7e0ac9745">IPreallocatableInterpolator&lt; GridInterp, Grid1D &gt;</a>, and <a class="el" href="classIPreallocatableInterpolator.html#aa5f6e697f47d2e64a7e079a7e0ac9745">IPreallocatableInterpolator&lt; GridInterp, Grid1D... &gt;</a>.</p>
 
 </div>
 </div>

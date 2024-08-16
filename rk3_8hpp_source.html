@@ -134,10 +134,10 @@ $(document).ready(function(){initNavTree('rk3_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">using</span> <a class="code" href="classDerivFieldMem.html">DerivFieldMem</a> = <span class="keyword">typename</span> DerivFieldMemType::span_type;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">using</span> DerivConstField = <span class="keyword">typename</span> DerivFieldMemType::view_type;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    IdxRange <span class="keyword">const</span> m_dom;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    IdxRange <span class="keyword">const</span> m_idx_range;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classRK3.html#aa170e3a98017c2c200e041f9a42456b0">   60</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classRK3.html#aa170e3a98017c2c200e041f9a42456b0">RK3</a>(IdxRange dom) : m_dom(dom) {}</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03">   60</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03">RK3</a>(IdxRange idx_range) : m_idx_range(idx_range) {}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classRK3.html#a277909007e34e4c0d757164eabcf8b45">   78</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK3.html#a277909007e34e4c0d757164eabcf8b45">update</a>(ValField y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">    </span>{</div>
@@ -186,11 +186,11 @@ $(document).ready(function(){initNavTree('rk3_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        accessible,</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        FieldMemType m_y_prime_alloc(m_dom);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        DerivFieldMemType m_k1_alloc(m_dom);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        DerivFieldMemType m_k2_alloc(m_dom);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        DerivFieldMemType m_k3_alloc(m_dom);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        DerivFieldMemType m_k_total_alloc(m_dom);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        FieldMemType m_y_prime_alloc(m_idx_range);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        DerivFieldMemType m_k1_alloc(m_idx_range);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        DerivFieldMemType m_k2_alloc(m_idx_range);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        DerivFieldMemType m_k3_alloc(m_idx_range);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        DerivFieldMemType m_k_total_alloc(m_idx_range);</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        ValField m_y_prime = get_field(m_y_prime_alloc);</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <a class="code" href="classDerivFieldMem.html">DerivFieldMem</a> m_k1 = get_field(m_k1_alloc);</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <a class="code" href="classDerivFieldMem.html">DerivFieldMem</a> m_k2 = get_field(m_k2_alloc);</div>
@@ -286,7 +286,7 @@ $(document).ready(function(){initNavTree('rk3_8hpp_source.html',''); initResizab
 <div class="ttc" id="aclassRK3_html_a10ec8a72fe24f3ab51d7f85905b8fda4"><div class="ttname"><a href="classRK3.html#a10ec8a72fe24f3ab51d7f85905b8fda4">RK3::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk3.hpp:142</div></div>
 <div class="ttc" id="aclassRK3_html_a165f7b293eb74b754551428df512c8e6"><div class="ttname"><a href="classRK3.html#a165f7b293eb74b754551428df512c8e6">RK3::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk3.hpp:103</div></div>
 <div class="ttc" id="aclassRK3_html_a277909007e34e4c0d757164eabcf8b45"><div class="ttname"><a href="classRK3.html#a277909007e34e4c0d757164eabcf8b45">RK3::update</a></div><div class="ttdeci">void update(ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk3.hpp:78</div></div>
-<div class="ttc" id="aclassRK3_html_aa170e3a98017c2c200e041f9a42456b0"><div class="ttname"><a href="classRK3.html#aa170e3a98017c2c200e041f9a42456b0">RK3::RK3</a></div><div class="ttdeci">RK3(IdxRange dom)</div><div class="ttdoc">Create a RK3 object.</div><div class="ttdef"><b>Definition:</b> rk3.hpp:60</div></div>
+<div class="ttc" id="aclassRK3_html_ad40fa67d5e9fbfb77026fedc876ecb03"><div class="ttname"><a href="classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03">RK3::RK3</a></div><div class="ttdeci">RK3(IdxRange idx_range)</div><div class="ttdoc">Create a RK3 object.</div><div class="ttdef"><b>Definition:</b> rk3.hpp:60</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

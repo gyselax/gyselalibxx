@@ -9,6 +9,6 @@ var searchData=
   ['noperturbinitialization_1348',['NoPerturbInitialization',['../classNoPerturbInitialization.html#a6532d67f7b2827585b9e0e6f985267e2',1,'NoPerturbInitialization']]],
   ['norm_1349',['norm',['../classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d',1,'MatrixBatchCsr::norm()'],['../classMatrixBatchEll.html#a972e124276cf81e393a6590d53986a41',1,'MatrixBatchEll::norm()']]],
   ['norm_5finf_1350',['norm_inf',['../utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009',1,'norm_inf(ddc::Coordinate&lt; Tags... &gt; coord):&#160;utils_tools.hpp'],['../utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d',1,'norm_inf(double const coord):&#160;utils_tools.hpp']]],
-  ['nullfluidsolver_1351',['NullFluidSolver',['../classNullFluidSolver.html#a127fbdae4830d4c08a5c2a7f40b93040',1,'NullFluidSolver']]],
+  ['nullfluidsolver_1351',['NullFluidSolver',['../classNullFluidSolver.html#a3f3ed59a4e69ebd23d671529363d5fc4',1,'NullFluidSolver']]],
   ['nustar0_1352',['nustar0',['../classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf',1,'CollisionInfo::nustar0()'],['../classCollisionInfoRadial.html#a5b7373ae9255469a57241d0a8a7963c5',1,'CollisionInfoRadial::nustar0()']]]
 ];

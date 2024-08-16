@@ -127,10 +127,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa1cc7ec0912e5195f762b6176b2aa085"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIdxRangeSlice.html#aa1cc7ec0912e5195f762b6176b2aa085">contains</a> (Idx&lt; DDims... &gt; elem) const</td></tr>
 <tr class="memdesc:aa1cc7ec0912e5195f762b6176b2aa085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the specified Idx is found in this index range slice.  <a href="classIdxRangeSlice.html#aa1cc7ec0912e5195f762b6176b2aa085">More...</a><br /></td></tr>
 <tr class="separator:aa1cc7ec0912e5195f762b6176b2aa085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada3508b46d98f3b177e905412bbe71a8"><td class="memTemplParams" colspan="2">template&lt;class... DDims&gt; </td></tr>
-<tr class="memitem:ada3508b46d98f3b177e905412bbe71a8"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIdxRangeSlice.html#ada3508b46d98f3b177e905412bbe71a8">contains</a> (IdxRange&lt; DDims... &gt; dom) const</td></tr>
-<tr class="memdesc:ada3508b46d98f3b177e905412bbe71a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if all elements of the specified IdxRange are found in this index range slice.  <a href="classIdxRangeSlice.html#ada3508b46d98f3b177e905412bbe71a8">More...</a><br /></td></tr>
-<tr class="separator:ada3508b46d98f3b177e905412bbe71a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94edc7f3cecfc5b987d37f7929b719f"><td class="memTemplParams" colspan="2">template&lt;class... DDims&gt; </td></tr>
+<tr class="memitem:af94edc7f3cecfc5b987d37f7929b719f"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIdxRangeSlice.html#af94edc7f3cecfc5b987d37f7929b719f">contains</a> (IdxRange&lt; DDims... &gt; idx_range) const</td></tr>
+<tr class="memdesc:af94edc7f3cecfc5b987d37f7929b719f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if all elements of the specified IdxRange are found in this index range slice.  <a href="classIdxRangeSlice.html#af94edc7f3cecfc5b987d37f7929b719f">More...</a><br /></td></tr>
+<tr class="separator:af94edc7f3cecfc5b987d37f7929b719f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ee4615ebb6864cdea1f6d93dc3e6add"><td class="memTemplParams" colspan="2">template&lt;class Dim , class  = std::enable_if_t&lt;ddc::in_tags_v&lt;Dim, tags_seq&gt;&gt;&gt; </td></tr>
 <tr class="memitem:a2ee4615ebb6864cdea1f6d93dc3e6add"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION std::size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIdxRangeSlice.html#a2ee4615ebb6864cdea1f6d93dc3e6add">get_index</a> (Idx&lt; Dim &gt; elem) const</td></tr>
 <tr class="memdesc:a2ee4615ebb6864cdea1f6d93dc3e6add"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index of the Idx within the index range slice.  <a href="classIdxRangeSlice.html#a2ee4615ebb6864cdea1f6d93dc3e6add">More...</a><br /></td></tr>
@@ -304,8 +304,8 @@ template&lt;class... DDims&gt; </div>
 
 </div>
 </div>
-<a id="ada3508b46d98f3b177e905412bbe71a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada3508b46d98f3b177e905412bbe71a8">&#9670;&nbsp;</a></span>contains() <span class="overload">[2/2]</span></h2>
+<a id="af94edc7f3cecfc5b987d37f7929b719f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af94edc7f3cecfc5b987d37f7929b719f">&#9670;&nbsp;</a></span>contains() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +321,7 @@ template&lt;class... DDims&gt; </div>
           <td class="memname">KOKKOS_FUNCTION bool <a class="el" href="classIdxRangeSlice.html">IdxRangeSlice</a>&lt; Dims &gt;::contains </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; DDims... &gt;&#160;</td>
-          <td class="paramname"><em>dom</em></td><td>)</td>
+          <td class="paramname"><em>idx_range</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -335,7 +335,7 @@ template&lt;class... DDims&gt; </div>
 <p>Check if all elements of the specified IdxRange are found in this index range slice. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dom</td><td>The index range which may or may not be in this index range slice.</td></tr>
+    <tr><td class="paramname">idx_range</td><td>The index range which may or may not be in this index range slice.</td></tr>
   </table>
   </dd>
 </dl>

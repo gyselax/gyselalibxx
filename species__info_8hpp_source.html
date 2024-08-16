@@ -128,23 +128,22 @@ $(document).ready(function(){initNavTree('species__info_8hpp_source.html',''); i
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">using</span> discrete_element_type = Idx&lt;Grid1D&gt;;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">using</span> discrete_domain_type = IdxRange&lt;Grid1D&gt;;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">using</span> discrete_vector_type = IdxStep&lt;Grid1D&gt;;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// charge of the particles (kinetic + adiabatic)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        FieldMem&lt;double, discrete_domain_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; m_charge;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">// mass of the particles of all kinetic species</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        FieldMem&lt;double, discrete_domain_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; m_mass;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">// workaround to access charges on the device</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        ConstField&lt;double, discrete_domain_type, std::experimental::layout_right, MemorySpace&gt;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                m_charge_view;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">// workaround to access masses on the device</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        ConstField&lt;double, discrete_domain_type, std::experimental::layout_right, MemorySpace&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                m_mass_view;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">using</span> index_range_type = discrete_domain_type;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">using</span> discrete_vector_type = IdxStep&lt;Grid1D&gt;;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// charge of the particles (kinetic + adiabatic)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        DFieldMem&lt;index_range_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; m_charge;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// mass of the particles of all kinetic species</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        DFieldMem&lt;index_range_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; m_mass;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// workaround to access charges on the device</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        DConstField&lt;index_range_type, std::experimental::layout_right, MemorySpace&gt; m_charge_view;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">// workaround to access masses on the device</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        DConstField&lt;index_range_type, std::experimental::layout_right, MemorySpace&gt; m_mass_view;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        discrete_element_type m_ielec;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
@@ -163,8 +162,8 @@ $(document).ready(function(){initNavTree('species__info_8hpp_source.html',''); i
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            ddc::parallel_deepcopy(m_mass, impl.m_mass);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classSpeciesInformation_1_1Impl.html#a436c3ffea1730d1cec678c3acaa86968">   77</a></span>&#160;        <a class="code" href="classSpeciesInformation_1_1Impl.html#a436c3ffea1730d1cec678c3acaa86968">Impl</a>(DFieldMem&lt;discrete_domain_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; <a class="code" href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">charge</a>,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;             DFieldMem&lt;discrete_domain_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; <a class="code" href="classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70">mass</a>)</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classSpeciesInformation_1_1Impl.html#a616fd9e1b5145c464331edba507941f0">   77</a></span>&#160;        <a class="code" href="classSpeciesInformation_1_1Impl.html#a616fd9e1b5145c464331edba507941f0">Impl</a>(DFieldMem&lt;index_range_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; <a class="code" href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">charge</a>,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;             DFieldMem&lt;index_range_type, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt; <a class="code" href="classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70">mass</a>)</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            : m_charge(std::move(<a class="code" href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">charge</a>))</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            , m_mass(std::move(<a class="code" href="classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70">mass</a>))</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div>
@@ -252,7 +251,7 @@ $(document).ready(function(){initNavTree('species__info_8hpp_source.html',''); i
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">using</span> DFieldSp = FieldSp&lt;double&gt;;</div>
 <div class="ttc" id="aclassSpeciesInformation_1_1Impl_html"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html">SpeciesInformation::Impl</a></div><div class="ttdoc">Impl object storing attributes in MemorySpace.</div><div class="ttdef"><b>Definition:</b> species_info.hpp:22</div></div>
 <div class="ttc" id="aclassSpeciesInformation_1_1Impl_html_a1b646bde625f303eb58abfd02bfa9b4d"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html#a1b646bde625f303eb58abfd02bfa9b4d">SpeciesInformation::Impl::charges</a></div><div class="ttdeci">auto charges() const</div><div class="ttdef"><b>Definition:</b> species_info.hpp:122</div></div>
-<div class="ttc" id="aclassSpeciesInformation_1_1Impl_html_a436c3ffea1730d1cec678c3acaa86968"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html#a436c3ffea1730d1cec678c3acaa86968">SpeciesInformation::Impl::Impl</a></div><div class="ttdeci">Impl(DFieldMem&lt; discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; charge, DFieldMem&lt; discrete_domain_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; mass)</div><div class="ttdoc">Main constructor taking all attributes.</div><div class="ttdef"><b>Definition:</b> species_info.hpp:77</div></div>
+<div class="ttc" id="aclassSpeciesInformation_1_1Impl_html_a616fd9e1b5145c464331edba507941f0"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html#a616fd9e1b5145c464331edba507941f0">SpeciesInformation::Impl::Impl</a></div><div class="ttdeci">Impl(DFieldMem&lt; index_range_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; charge, DFieldMem&lt; index_range_type, ddc::KokkosAllocator&lt; double, MemorySpace &gt;&gt; mass)</div><div class="ttdoc">Main constructor taking all attributes.</div><div class="ttdef"><b>Definition:</b> species_info.hpp:77</div></div>
 <div class="ttc" id="aclassSpeciesInformation_1_1Impl_html_a9db19ad040ca32c4bcd51b6aedd776c3"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html#a9db19ad040ca32c4bcd51b6aedd776c3">SpeciesInformation::Impl::Impl</a></div><div class="ttdeci">Impl(Impl&lt; Grid1D, OMemorySpace &gt; const &amp;impl)</div><div class="ttdoc">Conversion constructor between different memory spaces.</div><div class="ttdef"><b>Definition:</b> species_info.hpp:61</div></div>
 <div class="ttc" id="aclassSpeciesInformation_1_1Impl_html_ac70d3fcf55a5c234a7b405fb1061f644"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html#ac70d3fcf55a5c234a7b405fb1061f644">SpeciesInformation::Impl::masses</a></div><div class="ttdeci">auto masses() const</div><div class="ttdef"><b>Definition:</b> species_info.hpp:128</div></div>
 <div class="ttc" id="aclassSpeciesInformation_1_1Impl_html_adc4091cbb9adc9c34bc0b874b0ac5ce5"><div class="ttname"><a href="classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5">SpeciesInformation::Impl::charge</a></div><div class="ttdeci">KOKKOS_FUNCTION double charge(discrete_element_type const isp) const</div><div class="ttdef"><b>Definition:</b> species_info.hpp:107</div></div>

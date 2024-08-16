@@ -2,7 +2,7 @@ var classSpeciesInformation_1_1Impl =
 [
     [ "discrete_dimension_type", "classSpeciesInformation_1_1Impl.html#aa89c8b5db4b1bb25e001ead86f921e82", null ],
     [ "Impl", "classSpeciesInformation_1_1Impl.html#a9db19ad040ca32c4bcd51b6aedd776c3", null ],
-    [ "Impl", "classSpeciesInformation_1_1Impl.html#a436c3ffea1730d1cec678c3acaa86968", null ],
+    [ "Impl", "classSpeciesInformation_1_1Impl.html#a616fd9e1b5145c464331edba507941f0", null ],
     [ "ielec", "classSpeciesInformation_1_1Impl.html#af4f71674dfd6e0c19e53a92bfaec3711", null ],
     [ "charge", "classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5", null ],
     [ "mass", "classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70", null ],

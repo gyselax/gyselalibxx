@@ -127,9 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8d185066590f530d132ecfd4d4b315be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a8d185066590f530d132ecfd4d4b315be">operator()</a> (DFieldSpXVx const allfdistribu, DFieldSpMomX neutrals, double const dt) const override</td></tr>
 <tr class="memdesc:a8d185066590f530d132ecfd4d4b315be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the distribution function and neutral density following the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> operator.  <a href="classKineticFluidCouplingSource.html#a8d185066590f530d132ecfd4d4b315be">More...</a><br /></td></tr>
 <tr class="separator:a8d185066590f530d132ecfd4d4b315be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b0a180bb8863021aff31bd74fe158a7"><td class="memItemLeft" align="right" valign="top">IdxSp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a3b0a180bb8863021aff31bd74fe158a7">find_ion</a> (IdxRangeSp const dom_kinsp) const</td></tr>
-<tr class="memdesc:a3b0a180bb8863021aff31bd74fe158a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index of the ion species in the index range.  <a href="classKineticFluidCouplingSource.html#a3b0a180bb8863021aff31bd74fe158a7">More...</a><br /></td></tr>
-<tr class="separator:a3b0a180bb8863021aff31bd74fe158a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64a1f634ca50c85e39f6ff8671d7306f"><td class="memItemLeft" align="right" valign="top">IdxSp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#a64a1f634ca50c85e39f6ff8671d7306f">find_ion</a> (IdxRangeSp const idx_range_kinsp) const</td></tr>
+<tr class="memdesc:a64a1f634ca50c85e39f6ff8671d7306f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index of the ion species in the index range.  <a href="classKineticFluidCouplingSource.html#a64a1f634ca50c85e39f6ff8671d7306f">More...</a><br /></td></tr>
+<tr class="separator:a64a1f634ca50c85e39f6ff8671d7306f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae71a75cc436ceff96e2d3816a27a3701"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKineticFluidCouplingSource.html#ae71a75cc436ceff96e2d3816a27a3701">get_source_term</a> (DFieldX density_source_neutral, DConstFieldSpX kinsp_density, DConstFieldSpMomX neutrals, DConstFieldSpX ionization, DConstFieldSpX recombination) const</td></tr>
 <tr class="memdesc:ae71a75cc436ceff96e2d3816a27a3701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the source term density_source_neutral(x) of the <a class="el" href="classKineticFluidCouplingSource.html" title="A class that describes a source of particles due to neutrals.">KineticFluidCouplingSource</a> operator.  <a href="classKineticFluidCouplingSource.html#ae71a75cc436ceff96e2d3816a27a3701">More...</a><br /></td></tr>
 <tr class="separator:ae71a75cc436ceff96e2d3816a27a3701"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,7 +211,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ionization</td><td>The rate of the ionization reaction. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">recombination</td><td>The rate of the recombination reaction. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">normalization_coeff</td><td>The normalization coefficient of neutrals. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_coeffs</td><td>A View referencing coefficients for a quadrature. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_coeffs</td><td>A constant field referencing coefficients for a quadrature. </td></tr>
   </table>
   </dd>
 </dl>
@@ -273,8 +273,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b0a180bb8863021aff31bd74fe158a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b0a180bb8863021aff31bd74fe158a7">&#9670;&nbsp;</a></span>find_ion()</h2>
+<a id="a64a1f634ca50c85e39f6ff8671d7306f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64a1f634ca50c85e39f6ff8671d7306f">&#9670;&nbsp;</a></span>find_ion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +283,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">IdxSp KineticFluidCouplingSource::find_ion </td>
           <td>(</td>
           <td class="paramtype">IdxRangeSp const&#160;</td>
-          <td class="paramname"><em>dom_kinsp</em></td><td>)</td>
+          <td class="paramname"><em>idx_range_kinsp</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -292,7 +292,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns the index of the ion species in the index range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dom_kinsp</td><td>The index range of the kinetic species.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">idx_range_kinsp</td><td>The index range of the kinetic species.</td></tr>
   </table>
   </dd>
 </dl>

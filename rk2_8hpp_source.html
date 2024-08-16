@@ -136,10 +136,10 @@ $(document).ready(function(){initNavTree('rk2_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">using</span> DerivConstField = <span class="keyword">typename</span> DerivFieldMemType::view_type;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    IdxRange <span class="keyword">const</span> m_dom;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    IdxRange <span class="keyword">const</span> m_idx_range;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classRK2.html#af6e14aefcb425a915682ef868e1117fe">   61</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classRK2.html#af6e14aefcb425a915682ef868e1117fe">RK2</a>(IdxRange dom) : m_dom(dom) {}</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classRK2.html#aa8e7d6cdd176266f8bae167af8dd4496">   61</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classRK2.html#aa8e7d6cdd176266f8bae167af8dd4496">RK2</a>(IdxRange idx_range) : m_idx_range(idx_range) {}</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classRK2.html#afedd4b2ac6d505e801544ed4c65f7492">   79</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRK2.html#afedd4b2ac6d505e801544ed4c65f7492">update</a>(ValField y, <span class="keywordtype">double</span> dt, std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">    </span>{</div>
@@ -179,9 +179,9 @@ $(document).ready(function(){initNavTree('rk2_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classDerivFieldMem.html">DerivFieldMem</a>, ValConstField)&gt; dy,</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            std::function&lt;<span class="keywordtype">void</span>(ValField, DerivConstField, <span class="keywordtype">double</span>)&gt; y_update)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        DerivFieldMemType m_k1(m_dom);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        DerivFieldMemType m_k2(m_dom);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        FieldMemType m_y_prime(m_dom);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        DerivFieldMemType m_k1(m_idx_range);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        DerivFieldMemType m_k2(m_idx_range);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        FieldMemType m_y_prime(m_idx_range);</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="comment">// Save initial conditions</span></div>
@@ -211,8 +211,8 @@ $(document).ready(function(){initNavTree('rk2_8hpp_source.html',''); initResizab
 <div class="ttc" id="aclassITimeStepper_html"><div class="ttname"><a href="classITimeStepper.html">ITimeStepper</a></div><div class="ttdef"><b>Definition:</b> itimestepper.hpp:8</div></div>
 <div class="ttc" id="aclassRK2_html"><div class="ttname"><a href="classRK2.html">RK2</a></div><div class="ttdoc">A class which provides an implementation of a second-order Runge-Kutta method.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:34</div></div>
 <div class="ttc" id="aclassRK2_html_a7488abb4ec806238cec4e2c0568360de"><div class="ttname"><a href="classRK2.html#a7488abb4ec806238cec4e2c0568360de">RK2::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:143</div></div>
+<div class="ttc" id="aclassRK2_html_aa8e7d6cdd176266f8bae167af8dd4496"><div class="ttname"><a href="classRK2.html#aa8e7d6cdd176266f8bae167af8dd4496">RK2::RK2</a></div><div class="ttdeci">RK2(IdxRange idx_range)</div><div class="ttdoc">Create a RK2 object.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:61</div></div>
 <div class="ttc" id="aclassRK2_html_aa9d83c57da43660ee63a555957f37981"><div class="ttname"><a href="classRK2.html#aa9d83c57da43660ee63a555957f37981">RK2::update</a></div><div class="ttdeci">void update(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:104</div></div>
-<div class="ttc" id="aclassRK2_html_af6e14aefcb425a915682ef868e1117fe"><div class="ttname"><a href="classRK2.html#af6e14aefcb425a915682ef868e1117fe">RK2::RK2</a></div><div class="ttdeci">RK2(IdxRange dom)</div><div class="ttdoc">Create a RK2 object.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:61</div></div>
 <div class="ttc" id="aclassRK2_html_afedd4b2ac6d505e801544ed4c65f7492"><div class="ttname"><a href="classRK2.html#afedd4b2ac6d505e801544ed4c65f7492">RK2::update</a></div><div class="ttdeci">void update(ValField y, double dt, std::function&lt; void(DerivFieldMem, ValConstField)&gt; dy) const</div><div class="ttdoc">Carry out one step of the Runge-Kutta scheme.</div><div class="ttdef"><b>Definition:</b> rk2.hpp:79</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
