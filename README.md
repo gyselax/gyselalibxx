@@ -2,6 +2,7 @@
 
 Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes and
 similar as well as a collection of such codes.
+It is based on [DDC](https://ddc.mdls.fr/). We strongly encourage new developers to begin by reading our documentation about [Using DDC in Gyselalibxx](./docs/DDC_in_gyselalibxx.md).
 
 ## Compilation
 
