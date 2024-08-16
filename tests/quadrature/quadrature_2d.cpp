@@ -7,7 +7,6 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "quadrature.hpp"
-#include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
 
@@ -47,36 +46,24 @@ using IdxRangeXY = IdxRange<GridX, GridY>;
 
 using DFieldMemXY = DFieldMem<IdxRangeXY>;
 
-double constant_func_check_2d(Method quad_method)
+double constant_func_check_2d()
 {
     CoordX const x_min(0.0);
     CoordX const x_max(M_PI);
-    IdxStepX const x_ncells(10);
+    IdxStepX const x_size(10);
 
     CoordY const y_min(0.0);
     CoordY const y_max(20.0);
-    IdxStepY const y_ncells(10);
+    IdxStepY const y_size(10);
 
     // Creating mesh & supports
-    IdxRangeX const gridx
-            = ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_ncells + 1));
-    IdxRangeY const gridy
-            = ddc::init_discrete_space<GridY>(GridY::init(y_min, y_max, y_ncells + 1));
+    IdxRangeX const gridx = ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
+    IdxRangeY const gridy = ddc::init_discrete_space<GridY>(GridY::init(y_min, y_max, y_size));
 
     IdxRangeXY const gridxy(gridx, gridy);
 
-    DFieldMemXY quadrature_coeffs;
-    switch (quad_method) {
-    case Method::TRAPEZ: {
-        quadrature_coeffs
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-        break;
-    }
-    case Method::SIMPSON: {
-        quadrature_coeffs = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-        break;
-    }
-    }
+    DFieldMemXY quadrature_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
 
     Quadrature<IdxRangeXY> const integrate(get_const_field(quadrature_coeffs));
     DFieldMemXY values(gridxy);
@@ -88,7 +75,7 @@ double constant_func_check_2d(Method quad_method)
     return abs(integral - expected_val);
 }
 
-void integrated_function_operator(Method quad_method)
+void integrated_function_operator()
 {
     CoordX x_min(0.0);
     CoordX x_max(3.0);
@@ -97,25 +84,14 @@ void integrated_function_operator(Method quad_method)
     CoordY y_max(8.0);
     IdxStepY y_ncells(16);
 
-    IdxRangeX gridx
-            = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells + 1));
-    IdxRangeY gridy
-            = ddc::init_discrete_space<GridY>(GridY::init<GridY>(y_min, y_max, y_ncells + 1));
+    IdxRangeX gridx = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells));
+
+    IdxRangeY gridy = ddc::init_discrete_space<GridY>(GridY::init<GridY>(y_min, y_max, y_ncells));
     IdxRangeXY gridxy(gridx, gridy);
 
-    DFieldMemXY quadrature_coeffs;
-    switch (quad_method) {
-    case Method::TRAPEZ: {
-        quadrature_coeffs
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-        break;
-    }
-    case Method::SIMPSON: {
-        quadrature_coeffs = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-        break;
-    }
-    }
-    Quadrature func_operator(get_const_field(quadrature_coeffs));
+    DFieldMemXY quad_coeffs(
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
+    Quadrature func_operator(get_const_field(quad_coeffs));
 
     double const integral = func_operator(
             Kokkos::DefaultExecutionSpace(),
@@ -125,6 +101,11 @@ void integrated_function_operator(Method quad_method)
                 return x * y + 2;
             });
     EXPECT_DOUBLE_EQ(integral, 132.);
+}
+
+TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatchSecond2D)
+{
+    integrated_function_operator();
 }
 
 template <std::size_t N>
@@ -147,7 +128,7 @@ struct ComputeErrorTraits
 };
 
 template <std::size_t N>
-double compute_error(int n_elems, Method quad_method)
+double compute_error(int n_elems)
 {
     using DimX = typename ComputeErrorTraits<N>::X;
     using DimY = typename ComputeErrorTraits<N>::Y;
@@ -163,30 +144,20 @@ double compute_error(int n_elems, Method quad_method)
 
     Coord<DimX> const x_min(0.0);
     Coord<DimX> const x_max(M_PI);
-    IdxStepX x_ncells(n_elems);
+    IdxStepX x_size(n_elems);
 
     Coord<DimY> const y_min(0.0);
     Coord<DimY> const y_max(M_PI);
-    IdxStepY y_ncells(n_elems);
+    IdxStepY y_size(n_elems);
 
-    IdxRangeX const gridx = ddc::init_discrete_space<GridX>(
-            GridX::template init<GridX>(x_min, x_max, x_ncells + 1));
-    IdxRangeY const gridy = ddc::init_discrete_space<GridY>(
-            GridY::template init<GridY>(y_min, y_max, y_ncells + 1));
+    IdxRangeX const gridx
+            = ddc::init_discrete_space<GridX>(GridX::template init<GridX>(x_min, x_max, x_size));
+    IdxRangeY const gridy
+            = ddc::init_discrete_space<GridY>(GridY::template init<GridY>(y_min, y_max, y_size));
     IdxRangeXY const gridxy(gridx, gridy);
 
-    DFieldMemXY quadrature_coeffs;
-    switch (quad_method) {
-    case Method::TRAPEZ: {
-        quadrature_coeffs
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-        break;
-    }
-    case Method::SIMPSON: {
-        quadrature_coeffs = simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
-        break;
-    }
-    }
+    DFieldMemXY quadrature_coeffs
+            = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy);
     Quadrature<IdxRangeXY> const integrate(quadrature_coeffs);
 
     DFieldMemXY values_alloc(gridxy);
@@ -206,33 +177,12 @@ double compute_error(int n_elems, Method quad_method)
 template <std::size_t... Is>
 std::array<double, sizeof...(Is)> compute_trapez_errors(std::index_sequence<Is...>, int n_elems)
 {
-    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::TRAPEZ)...};
-}
-
-template <std::size_t... Is>
-std::array<double, sizeof...(Is)> compute_simps_errors(std::index_sequence<Is...>, int n_elems)
-{
-    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2, Method::SIMPSON)...};
-}
-
-TEST(TrapezoidUniformNonPeriodicQuadrature, ExactForLinearBatchSecond2D)
-{
-    integrated_function_operator(Method::TRAPEZ);
-}
-
-TEST(SimpsonUniformNonPeriodicQuadrature, ExactForLinearBatchSecond2D)
-{
-    integrated_function_operator(Method::SIMPSON);
+    return std::array<double, sizeof...(Is)> {compute_error<Is>(n_elems *= 2)...};
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
 {
-    EXPECT_LE(constant_func_check_2d(Method::TRAPEZ), 1e-9);
-}
-
-TEST(SimpsonUniformNonPeriodicQuadrature2D, ExactForConstantFunc)
-{
-    EXPECT_LE(constant_func_check_2d(Method::SIMPSON), 1e-9);
+    EXPECT_LE(constant_func_check_2d(), 1e-9);
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature2D, Convergence)
@@ -245,20 +195,8 @@ TEST(TrapezoidUniformNonPeriodicQuadrature2D, Convergence)
     for (int i(1); i < NTESTS; ++i) {
         EXPECT_LE(error[i], error[i - 1]);
         double order = log(error[i - 1] / error[i]) / log(2.0);
-        EXPECT_NEAR(order, 2, 1e-1);
-    }
-}
-
-TEST(SimpsonUniformNonPeriodicQuadrature2D, Convergence)
-{
-    constexpr int NTESTS(4);
-
-    std::array<double, NTESTS> error = compute_simps_errors(std::make_index_sequence<NTESTS>(), 50);
-
-    for (int i(1); i < NTESTS; ++i) {
-        EXPECT_LE(error[i], error[i - 1]);
-        double order = log(error[i - 1] / error[i]) / log(2.0);
-        EXPECT_NEAR(order, 4, 1e-1);
+        double order_error = abs(2 - order);
+        EXPECT_LE(order_error, 1e-1);
     }
 }
 } // namespace
