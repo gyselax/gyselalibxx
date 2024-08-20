@@ -59,6 +59,6 @@ var searchData=
   ['multipatch_20geometries_556',['Multipatch geometries',['../tests_multipatch_geometries.html',1,'tests_multipatch']]],
   ['multipatch_20geometry_20tests_557',['Multipatch geometry tests',['../tests_multipatch.html',1,'tests']]],
   ['multipatchconnectivity_558',['MultipatchConnectivity',['../classMultipatchConnectivity.html',1,'']]],
-  ['multipatchsplinebuilder_559',['MultipatchSplineBuilder',['../classMultipatchSplineBuilder.html#a9035d281f5fa48edfe9185942b43be32',1,'MultipatchSplineBuilder::MultipatchSplineBuilder()'],['../classMultipatchSplineBuilder.html',1,'MultipatchSplineBuilder&lt; Builders &gt;']]],
+  ['multipatchsplinebuilder_559',['MultipatchSplineBuilder',['../classMultipatchSplineBuilder.html#ac15662b146d7eda700925ae1caad030e',1,'MultipatchSplineBuilder::MultipatchSplineBuilder()'],['../classMultipatchSplineBuilder.html',1,'MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, Solver, ValuesOnPatch, Patches &gt;']]],
   ['multipatchtype_560',['MultipatchType',['../classMultipatchType.html',1,'MultipatchType&lt; T, Patches &gt;'],['../classMultipatchType.html#a4cda459ccaf034298db704f3e6b131c4',1,'MultipatchType::MultipatchType(T&lt; Patches &gt;... args)'],['../classMultipatchType.html#a9961856930176bea9c07c831b783eba5',1,'MultipatchType::MultipatchType(MultipatchType&lt; OT, OPatches... &gt; const &amp;other)'],['../classMultipatchType.html#ad8912efe19fdeca3f8f3e905f34a5357',1,'MultipatchType::MultipatchType(MultipatchType&lt; OT, OPatches... &gt; &amp;&amp;other)']]]
 ];
