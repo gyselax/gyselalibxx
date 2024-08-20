@@ -60,7 +60,7 @@ public:
      * @param other The equivalent MultipatchType being copied.
      */
     template <template <typename P> typename OT, class... OPatches>
-    explicit MultipatchType(MultipatchType<OT, OPatches...> const& other)
+    MultipatchType(MultipatchType<OT, OPatches...> const& other)
         : m_tuple(std::make_tuple(other.template get<Patches>()...))
     {
         static_assert(
@@ -78,8 +78,7 @@ public:
      * @param other The equivalent MultipatchType being copied.
      */
     template <template <typename P> typename OT, class... OPatches>
-    explicit MultipatchType(MultipatchType<OT, OPatches...>&& other)
-        : m_tuple(std::move(other.m_tuple))
+    MultipatchType(MultipatchType<OT, OPatches...>&& other) : m_tuple(std::move(other.m_tuple))
     {
         static_assert(
                 std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,

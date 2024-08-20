@@ -11,6 +11,7 @@ PUBLIC
         GTest::gtest
         GTest::gmock
 
+        gslx::multipatch_geometries
         gslx::multipatch_spline
         gslx::utils
         
