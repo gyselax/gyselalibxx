@@ -18,7 +18,7 @@ var searchData=
   ['idx1_379',['Idx1',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a5c42d5d066063a881abd5061ade08933',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['idx12_380',['Idx12',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af0e9d89578e2d3b2a700bd496a69a596',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['idx2_381',['Idx2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a5def95a8bd6544c11128ed4a81215f0e',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
-  ['idx_5frange_382',['idx_range',['../classMultipatchType.html#ab41820ec44e62f0906ba53b7a3f17489',1,'MultipatchType']]],
+  ['idx_5frange_382',['idx_range',['../classMultipatchType.html#a68c5a592e4ba4812e37fa6b737cdaab9',1,'MultipatchType']]],
   ['idx_5frange_5ftype_383',['idx_range_type',['../classMPILayout.html#ad8142e0f533a266313e76614698b2ccc',1,'MPILayout']]],
   ['idx_5frange_5ftype1_384',['idx_range_type1',['../classIMPITranspose.html#a280d7345bbf2d4f849a36a49bc4643f9',1,'IMPITranspose::idx_range_type1()'],['../classMPITransposeAllToAll.html#aaaab817292b16b7950c336c245618f35',1,'MPITransposeAllToAll::idx_range_type1()']]],
   ['idx_5frange_5ftype2_385',['idx_range_type2',['../classIMPITranspose.html#af0c568eecf467ecb7e913c5b3fc04f99',1,'IMPITranspose::idx_range_type2()'],['../classMPITransposeAllToAll.html#af9426bfbb72332bf45cfff384863ce21',1,'MPITransposeAllToAll::idx_range_type2()']]],

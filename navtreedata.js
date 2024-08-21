@@ -90,10 +90,10 @@ var NAVTREEINDEX =
 "classCollisionSpVparMu.html#ab2872e4fc62ff27b7eb9689818e46cc1",
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445",
 "classLagrange.html#a71594722ed82a25a22c9ef7a74e4aa65",
-"classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2",
-"classVectorFieldMem.html#ad5db86bbf3eb85ad904bb17efb9da91c",
-"mask__tanh_8hpp_source.html",
-"structBSplinesVpar.html"
+"classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2",
+"classVectorFieldMem.html#a9e9a48b66d669521bac723db61fdb196",
+"kinetic__source_8hpp_source.html",
+"src_utils.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

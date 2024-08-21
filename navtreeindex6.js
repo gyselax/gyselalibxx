@@ -1,5 +1,9 @@
 var NAVTREEINDEX6 =
 {
+"kinetic__source_8hpp_source.html":[15,0,7,5,4],
+"koliop__interface_8hpp_source.html":[15,0,1,4],
+"krook__source__adaptive_8hpp_source.html":[15,0,7,5,5],
+"krook__source__constant_8hpp_source.html":[15,0,7,5,6],
 "mask__tanh_8hpp_source.html":[15,0,7,5,7],
 "matching__idx__slice_8hpp_source.html":[15,0,13,0,6],
 "math__tools_8hpp_source.html":[15,2,0,0,0,3],
@@ -21,6 +25,7 @@ var NAVTREEINDEX6 =
 "mpitools_8hpp_source.html":[15,0,12,3],
 "mpitransposealltoall_8hpp_source.html":[15,0,12,4],
 "multipatch__spline__builder_8hpp_source.html":[15,0,13,2,0],
+"multipatch__spline__builder__2d_8hpp_source.html":[15,0,13,2,1],
 "multipatch__type_8hpp_source.html":[15,0,13,1,0],
 "neumann__spline__quadrature_8hpp.html":[15,0,16,1],
 "neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797":[15,0,16,1,1],
@@ -244,10 +249,5 @@ var NAVTREEINDEX6 =
 "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[10,14,0],
 "src_quadrature.html":[10,15],
 "src_speciesinfo.html":[10,16],
-"src_timestepper.html":[10,17],
-"src_utils.html":[10,18],
-"src_utils.html#src_utils__Utility_tools":[10,18,0],
-"structBSplinesMu.html":[14,29],
-"structBSplinesR.html":[14,30],
-"structBSplinesTheta.html":[14,31]
+"src_timestepper.html":[10,17]
 };
