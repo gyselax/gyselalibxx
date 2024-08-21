@@ -3,6 +3,7 @@
 set(test_name_gtest "multipatch_spline_builder")
 add_executable("${test_name_gtest}"
         multipatch_spline_builder.cpp
+        multipatch_spline_builder_2d.cpp
         ../../main.cpp
 )
 target_link_libraries("${test_name_gtest}"

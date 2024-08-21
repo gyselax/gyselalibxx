@@ -118,7 +118,7 @@ public:
      *
      * @returns The set of index ranges on which the set of fields stored in this class are defined.
      */
-    KOKKOS_FUNCTION auto idx_range() const
+    auto idx_range() const
     {
         return MultipatchType<InternalIdxRangeOnPatch, Patches...>(
                 get_idx_range(std::get<T<Patches>>(m_tuple))...);
