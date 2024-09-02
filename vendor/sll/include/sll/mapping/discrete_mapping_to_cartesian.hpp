@@ -20,11 +20,11 @@
  *
  * @see Curvilinear2DToCartesian
  */
-template <class DimX, class DimY, class SplineBuilder, class SplineEvaluator>
+template <class X, class Y, class SplineBuilder, class SplineEvaluator>
 class DiscreteToCartesian
     : public Curvilinear2DToCartesian<
-              DimX,
-              DimY,
+              X,
+              Y,
               typename SplineBuilder::continuous_dimension_type1,
               typename SplineBuilder::continuous_dimension_type2>
 {
@@ -36,16 +36,16 @@ public:
     /**
      * @brief Indicate the bspline type of the second logical dimension.
      */
-    using BSplineP = typename SplineBuilder::bsplines_type2;
+    using BSplineTheta = typename SplineBuilder::bsplines_type2;
 
     /**
      * @brief Indicate the first physical coordinate.
      */
-    using cartesian_tag_x = DimX;
+    using cartesian_tag_x = X;
     /**
      * @brief Indicate the second physical coordinate.
      */
-    using cartesian_tag_y = DimY;
+    using cartesian_tag_y = Y;
     /**
      * @brief Indicate the first logical coordinate.
      */
@@ -53,17 +53,17 @@ public:
     /**
      * @brief Indicate the second logical coordinate.
      */
-    using circular_tag_p = typename BSplineP::continuous_dimension_type;
+    using circular_tag_theta = typename BSplineTheta::continuous_dimension_type;
 
     /**
      * @brief Indicate the first logical coordinate in the discrete space.
      */
-    using IDimR = typename SplineBuilder::interpolation_discrete_dimension_type1;
+    using GridR = typename SplineBuilder::interpolation_discrete_dimension_type1;
 
     /**
      * @brief Indicate the second logical coordinate in the discrete space.
      */
-    using IDimP = typename SplineBuilder::interpolation_discrete_dimension_type2;
+    using GridTheta = typename SplineBuilder::interpolation_discrete_dimension_type2;
 
     /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.
@@ -72,7 +72,7 @@ public:
 
 private:
     using interpolation_domain = typename SplineBuilder::interpolation_domain_type;
-    using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineP>;
+    using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
 
     using SplineType = ddc::Chunk<
             double,
@@ -135,12 +135,12 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    ddc::Coordinate<DimX, DimY> operator()(
-            ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
+    ddc::Coordinate<X, Y> operator()(
+            ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
         const double x = spline_evaluator(coord, x_spline_representation.span_cview());
         const double y = spline_evaluator(coord, y_spline_representation.span_cview());
-        return ddc::Coordinate<DimX, DimY>(x, y);
+        return ddc::Coordinate<X, Y>(x, y);
     }
 
     /**
@@ -162,7 +162,7 @@ public:
      * @see Curvilinear2DToCartesian::jacobian_22
      */
     void jacobian_matrix(
-            ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord,
+            ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord,
             Matrix_2x2& matrix) const final
     {
         matrix[0][0] = spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
@@ -187,7 +187,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_11(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
+    double jacobian_11(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
         return spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
     }
@@ -208,7 +208,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_12(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
+    double jacobian_12(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
         return spline_evaluator.deriv_dim_2(coord, x_spline_representation.span_cview());
     }
@@ -229,7 +229,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_21(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
+    double jacobian_21(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
         return spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
     }
@@ -250,7 +250,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_22(ddc::Coordinate<circular_tag_r, circular_tag_p> const& coord) const final
+    double jacobian_22(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
         return spline_evaluator.deriv_dim_2(coord, y_spline_representation.span_cview());
     }
@@ -303,10 +303,10 @@ public:
      * @see AdvectionDomain
      */
     void to_pseudo_cartesian_jacobian_center_matrix(
-            ddc::DiscreteDomain<IDimR, IDimP> const& grid,
+            ddc::DiscreteDomain<GridR, GridTheta> const& grid,
             Matrix_2x2& matrix) const
     {
-        ddc::DiscreteDomain<IDimP> const theta_domain = ddc::select<IDimP>(grid);
+        ddc::DiscreteDomain<GridTheta> const theta_domain = ddc::select<GridTheta>(grid);
 
         matrix[0][0] = 0;
         matrix[0][1] = 0;
@@ -316,7 +316,7 @@ public:
         // Average the values at (r = 0, theta):
         ddc::for_each(theta_domain, [&](auto const ip) {
             const double th = ddc::coordinate(ip);
-            ddc::Coordinate<circular_tag_r, circular_tag_p> const coord(0, th);
+            ddc::Coordinate<circular_tag_r, circular_tag_theta> const coord(0, th);
             double const deriv_1_x
                     = spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
             double const deriv_1_2_x
@@ -365,7 +365,7 @@ public:
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_11_center(
-            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -384,7 +384,7 @@ public:
      * @see Curvilinear2DToCartesian::to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_12_center(
-            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -403,7 +403,7 @@ public:
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_21_center(
-            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -422,9 +422,9 @@ public:
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_22_center(
-            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
+            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
     {
-        ddc::DiscreteDomain<IDimP> const theta_domain = ddc::select<IDimP>(grid);
+        ddc::DiscreteDomain<GridTheta> const theta_domain = ddc::select<GridTheta>(grid);
 
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -461,11 +461,10 @@ public:
      * @see GrevilleInterpolationPoints
      * @see KnotsAsInterpolationPoints
      */
-    inline const ddc::Coordinate<DimX, DimY> control_point(
-            ddc::DiscreteElement<BSplineR, BSplineP> const& el) const
+    inline const ddc::Coordinate<X, Y> control_point(
+            ddc::DiscreteElement<BSplineR, BSplineTheta> const& el) const
     {
-        return ddc::
-                Coordinate<DimX, DimY>(x_spline_representation(el), y_spline_representation(el));
+        return ddc::Coordinate<X, Y>(x_spline_representation(el), y_spline_representation(el));
     }
 
 
@@ -492,19 +491,19 @@ public:
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator)
     {
-        using Domain = typename SplineBuilder::interpolation_domain_type;
+        using IdxRange = typename SplineBuilder::interpolation_domain_type;
         SplineType curvilinear_to_x_spline(builder.spline_domain());
         SplineType curvilinear_to_y_spline(builder.spline_domain());
-        ddc::Chunk<double, Domain> curvilinear_to_x_vals(builder.interpolation_domain());
-        ddc::Chunk<double, Domain> curvilinear_to_y_vals(builder.interpolation_domain());
+        ddc::Chunk<double, IdxRange> curvilinear_to_x_vals(builder.interpolation_domain());
+        ddc::Chunk<double, IdxRange> curvilinear_to_y_vals(builder.interpolation_domain());
         ddc::for_each(
                 builder.interpolation_domain(),
-                [&](typename Domain::discrete_element_type const& el) {
-                    ddc::Coordinate<circular_tag_r, circular_tag_p> polar_coord(
+                [&](typename IdxRange::discrete_element_type const& el) {
+                    ddc::Coordinate<circular_tag_r, circular_tag_theta> polar_coord(
                             ddc::coordinate(el));
-                    ddc::Coordinate<DimX, DimY> cart_coord = analytical_mapping(polar_coord);
-                    curvilinear_to_x_vals(el) = ddc::select<DimX>(cart_coord);
-                    curvilinear_to_y_vals(el) = ddc::select<DimY>(cart_coord);
+                    ddc::Coordinate<X, Y> cart_coord = analytical_mapping(polar_coord);
+                    curvilinear_to_x_vals(el) = ddc::select<X>(cart_coord);
+                    curvilinear_to_y_vals(el) = ddc::select<Y>(cart_coord);
                 });
         builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
         builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());
