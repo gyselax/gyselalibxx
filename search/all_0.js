@@ -25,8 +25,8 @@ var searchData=
   ['advectionsimulation_3c_20advectionfield_5frotation_2c_20functiontobeadvected_5fgaussian_3c_20mapping_20_3e_20_3e_22',['AdvectionSimulation&lt; AdvectionField_rotation, FunctionToBeAdvected_gaussian&lt; Mapping &gt; &gt;',['../classAdvectionSimulation.html',1,'']]],
   ['advectionsimulation_3c_20advectionfield_5ftranslation_2c_20functiontobeadvected_5fgaussian_3c_20mapping_20_3e_20_3e_23',['AdvectionSimulation&lt; AdvectionField_translation, FunctionToBeAdvected_gaussian&lt; Mapping &gt; &gt;',['../classAdvectionSimulation.html',1,'']]],
   ['all_5fpatches_24',['all_patches',['../classMultipatchConnectivity.html#a0683fbe5d61d4239ea8586a70a1305e7',1,'MultipatchConnectivity']]],
-  ['analytical_5fto_5fdiscrete_25',['analytical_to_discrete',['../classDiscreteToCartesian.html#a249891c4351f41b99630594efedafabb',1,'DiscreteToCartesian']]],
-  ['analytical_5fto_5frefined_26',['analytical_to_refined',['../classRefinedDiscreteToCartesian.html#a0b3349bb1ae9dd6fd6f9e92ee058646f',1,'RefinedDiscreteToCartesian']]],
+  ['analytical_5fto_5fdiscrete_25',['analytical_to_discrete',['../classDiscreteToCartesian.html#afabc96cf6ea6a8342e2590aebb845e0f',1,'DiscreteToCartesian']]],
+  ['analytical_5fto_5frefined_26',['analytical_to_refined',['../classRefinedDiscreteToCartesian.html#a275ae6787f0288d27e6321e42db5002e',1,'RefinedDiscreteToCartesian']]],
   ['analyticalinvertiblecurvilinear2dtocartesian_27',['AnalyticalInvertibleCurvilinear2DToCartesian',['../classAnalyticalInvertibleCurvilinear2DToCartesian.html',1,'']]],
   ['associated_5fpatch_28',['associated_patch',['../structEdge.html#a01bafe4f74a4d717a45f57c4f7e023a9',1,'Edge']]]
 ];

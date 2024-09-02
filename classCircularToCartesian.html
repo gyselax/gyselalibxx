@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: CircularToCartesian&lt; DimX, DimY, DimR, DimP &gt; Class Template Reference</title>
+<title>Gyselalib++: CircularToCartesian&lt; X, Y, R, Theta &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,166 +104,166 @@ $(document).ready(function(){initNavTree('classCircularToCartesian.html',''); in
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classCircularToCartesian-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">CircularToCartesian&lt; DimX, DimY, DimR, DimP &gt; Class Template Reference</div>  </div>
+<div class="title">CircularToCartesian&lt; X, Y, R, Theta &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class for describing the circular 2D mapping.  
  <a href="classCircularToCartesian.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for CircularToCartesian&lt; DimX, DimY, DimR, DimP &gt;:</div>
+Inheritance diagram for CircularToCartesian&lt; X, Y, R, Theta &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classCircularToCartesian.png" usemap="#CircularToCartesian_3C_20DimX_2C_20DimY_2C_20DimR_2C_20DimP_20_3E_map" alt=""/>
-  <map id="CircularToCartesian_3C_20DimX_2C_20DimY_2C_20DimR_2C_20DimP_20_3E_map" name="CircularToCartesian_3C_20DimX_2C_20DimY_2C_20DimR_2C_20DimP_20_3E_map">
-<area href="classAnalyticalInvertibleCurvilinear2DToCartesian.html" title="A class for describing analytical invertible curvilinear 2D mappings from the logical domain to the p..." alt="AnalyticalInvertibleCurvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;" shape="rect" coords="0,56,436,80"/>
-<area href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain." alt="Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;" shape="rect" coords="0,0,436,24"/>
+  <img src="classCircularToCartesian.png" usemap="#CircularToCartesian_3C_20X_2C_20Y_2C_20R_2C_20Theta_20_3E_map" alt=""/>
+  <map id="CircularToCartesian_3C_20X_2C_20Y_2C_20R_2C_20Theta_20_3E_map" name="CircularToCartesian_3C_20X_2C_20Y_2C_20R_2C_20Theta_20_3E_map">
+<area href="classAnalyticalInvertibleCurvilinear2DToCartesian.html" title="A class for describing analytical invertible curvilinear 2D mappings from the logical domain to the p..." alt="AnalyticalInvertibleCurvilinear2DToCartesian&lt; X, Y, R, Theta &gt;" shape="rect" coords="0,56,375,80"/>
+<area href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain." alt="Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;" shape="rect" coords="0,0,375,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a70e85d10d298749949a9711ce3eade0b"><td class="memItemLeft" align="right" valign="top"><a id="a70e85d10d298749949a9711ce3eade0b"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a70e85d10d298749949a9711ce3eade0b">cartesian_tag_x</a> = DimX</td></tr>
-<tr class="memdesc:a70e85d10d298749949a9711ce3eade0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first physical coordinate. <br /></td></tr>
-<tr class="separator:a70e85d10d298749949a9711ce3eade0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaed05c5f5e1d835ec39f96b6ef83973b"><td class="memItemLeft" align="right" valign="top"><a id="aaed05c5f5e1d835ec39f96b6ef83973b"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aaed05c5f5e1d835ec39f96b6ef83973b">cartesian_tag_y</a> = DimY</td></tr>
-<tr class="memdesc:aaed05c5f5e1d835ec39f96b6ef83973b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second physical coordinate. <br /></td></tr>
-<tr class="separator:aaed05c5f5e1d835ec39f96b6ef83973b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a542194138b7c390892767e6f142885f1"><td class="memItemLeft" align="right" valign="top"><a id="a542194138b7c390892767e6f142885f1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a542194138b7c390892767e6f142885f1">circular_tag_r</a> = DimR</td></tr>
-<tr class="memdesc:a542194138b7c390892767e6f142885f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first logical coordinate. <br /></td></tr>
-<tr class="separator:a542194138b7c390892767e6f142885f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec560df7454143d674f8ed2172ed026"><td class="memItemLeft" align="right" valign="top"><a id="abec560df7454143d674f8ed2172ed026"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#abec560df7454143d674f8ed2172ed026">circular_tag_p</a> = DimP</td></tr>
-<tr class="memdesc:abec560df7454143d674f8ed2172ed026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second logical coordinate. <br /></td></tr>
-<tr class="separator:abec560df7454143d674f8ed2172ed026"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdac5ab113c09b1b53029e479f224664"><td class="memItemLeft" align="right" valign="top"><a id="afdac5ab113c09b1b53029e479f224664"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:afdac5ab113c09b1b53029e479f224664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a 2x2 matrix with an 2D array of an 2D array. <br /></td></tr>
-<tr class="separator:afdac5ab113c09b1b53029e479f224664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a></td></tr>
-<tr class="memitem:a9cb912db07408d26313286d6e63b7bcd inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="a9cb912db07408d26313286d6e63b7bcd"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a9cb912db07408d26313286d6e63b7bcd">cartesian_tag_x</a> = DimX</td></tr>
-<tr class="memdesc:a9cb912db07408d26313286d6e63b7bcd inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first physical coordinate. <br /></td></tr>
-<tr class="separator:a9cb912db07408d26313286d6e63b7bcd inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9965205c1ab71d705776f51eea676a4 inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="ae9965205c1ab71d705776f51eea676a4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#ae9965205c1ab71d705776f51eea676a4">cartesian_tag_y</a> = DimY</td></tr>
-<tr class="memdesc:ae9965205c1ab71d705776f51eea676a4 inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second physical coordinate. <br /></td></tr>
-<tr class="separator:ae9965205c1ab71d705776f51eea676a4 inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf43cce0853afcd23bbd60a9563c50f4 inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="aaf43cce0853afcd23bbd60a9563c50f4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#aaf43cce0853afcd23bbd60a9563c50f4">curvilinear_tag_r</a> = DimR</td></tr>
-<tr class="memdesc:aaf43cce0853afcd23bbd60a9563c50f4 inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first logical coordinate. <br /></td></tr>
-<tr class="separator:aaf43cce0853afcd23bbd60a9563c50f4 inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac63520a80a234284330365afcf42c1e inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="aac63520a80a234284330365afcf42c1e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#aac63520a80a234284330365afcf42c1e">curvilinear_tag_p</a> = DimP</td></tr>
-<tr class="memdesc:aac63520a80a234284330365afcf42c1e inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second logical coordinate. <br /></td></tr>
-<tr class="separator:aac63520a80a234284330365afcf42c1e inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0f61c18363bff817f9c34f2b03e8d4c inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="ad0f61c18363bff817f9c34f2b03e8d4c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#ad0f61c18363bff817f9c34f2b03e8d4c">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:ad0f61c18363bff817f9c34f2b03e8d4c inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a 2x2 matrix with an 2D array of an 2D array. <br /></td></tr>
-<tr class="separator:ad0f61c18363bff817f9c34f2b03e8d4c inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace5c9f202a0eebaeb4beaae1dd6b0ebf"><td class="memItemLeft" align="right" valign="top"><a id="ace5c9f202a0eebaeb4beaae1dd6b0ebf"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ace5c9f202a0eebaeb4beaae1dd6b0ebf">cartesian_tag_x</a> = <a class="el" href="structX.html">X</a></td></tr>
+<tr class="memdesc:ace5c9f202a0eebaeb4beaae1dd6b0ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first physical coordinate. <br /></td></tr>
+<tr class="separator:ace5c9f202a0eebaeb4beaae1dd6b0ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff2a74cc8404be48bf9576daa8396e5"><td class="memItemLeft" align="right" valign="top"><a id="a7ff2a74cc8404be48bf9576daa8396e5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a7ff2a74cc8404be48bf9576daa8396e5">cartesian_tag_y</a> = <a class="el" href="structY.html">Y</a></td></tr>
+<tr class="memdesc:a7ff2a74cc8404be48bf9576daa8396e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second physical coordinate. <br /></td></tr>
+<tr class="separator:a7ff2a74cc8404be48bf9576daa8396e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43130f9fe54879c2eaf59efba1b21843"><td class="memItemLeft" align="right" valign="top"><a id="a43130f9fe54879c2eaf59efba1b21843"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a43130f9fe54879c2eaf59efba1b21843">circular_tag_r</a> = <a class="el" href="structR.html">R</a></td></tr>
+<tr class="memdesc:a43130f9fe54879c2eaf59efba1b21843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first logical coordinate. <br /></td></tr>
+<tr class="separator:a43130f9fe54879c2eaf59efba1b21843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a562bef7998fb9a841969067595b5de01"><td class="memItemLeft" align="right" valign="top"><a id="a562bef7998fb9a841969067595b5de01"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a562bef7998fb9a841969067595b5de01">circular_tag_theta</a> = <a class="el" href="structTheta.html">Theta</a></td></tr>
+<tr class="memdesc:a562bef7998fb9a841969067595b5de01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second logical coordinate. <br /></td></tr>
+<tr class="separator:a562bef7998fb9a841969067595b5de01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1f2d26b18b6eb6c0390ad1fa94ca55f"><td class="memItemLeft" align="right" valign="top"><a id="aa1f2d26b18b6eb6c0390ad1fa94ca55f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
+<tr class="memdesc:aa1f2d26b18b6eb6c0390ad1fa94ca55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a 2x2 matrix with an 2D array of an 2D array. <br /></td></tr>
+<tr class="separator:aa1f2d26b18b6eb6c0390ad1fa94ca55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a></td></tr>
+<tr class="memitem:a4b89f1e58ae38bc6164cdf72825647e2 inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="a4b89f1e58ae38bc6164cdf72825647e2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a4b89f1e58ae38bc6164cdf72825647e2">cartesian_tag_x</a> = <a class="el" href="structX.html">X</a></td></tr>
+<tr class="memdesc:a4b89f1e58ae38bc6164cdf72825647e2 inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first physical coordinate. <br /></td></tr>
+<tr class="separator:a4b89f1e58ae38bc6164cdf72825647e2 inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a372962787af2994b27572581cae0b2fa inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="a372962787af2994b27572581cae0b2fa"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a372962787af2994b27572581cae0b2fa">cartesian_tag_y</a> = <a class="el" href="structY.html">Y</a></td></tr>
+<tr class="memdesc:a372962787af2994b27572581cae0b2fa inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second physical coordinate. <br /></td></tr>
+<tr class="separator:a372962787af2994b27572581cae0b2fa inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6393f556942c275074488e954014e8b inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="ad6393f556942c275074488e954014e8b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#ad6393f556942c275074488e954014e8b">curvilinear_tag_r</a> = <a class="el" href="structR.html">R</a></td></tr>
+<tr class="memdesc:ad6393f556942c275074488e954014e8b inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the first logical coordinate. <br /></td></tr>
+<tr class="separator:ad6393f556942c275074488e954014e8b inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ceaa2926e8d5d6375be43bef9fc1b3f inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="a1ceaa2926e8d5d6375be43bef9fc1b3f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a1ceaa2926e8d5d6375be43bef9fc1b3f">curvilinear_tag_theta</a> = <a class="el" href="structTheta.html">Theta</a></td></tr>
+<tr class="memdesc:a1ceaa2926e8d5d6375be43bef9fc1b3f inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second logical coordinate. <br /></td></tr>
+<tr class="separator:a1ceaa2926e8d5d6375be43bef9fc1b3f inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af45b38405beee2cb46eeac1c36264dfb inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="af45b38405beee2cb46eeac1c36264dfb"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#af45b38405beee2cb46eeac1c36264dfb">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
+<tr class="memdesc:af45b38405beee2cb46eeac1c36264dfb inherit pub_types_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a 2x2 matrix with an 2D array of an 2D array. <br /></td></tr>
+<tr class="separator:af45b38405beee2cb46eeac1c36264dfb inherit pub_types_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3645bf526455fc943477bf9bdf3f26e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a3645bf526455fc943477bf9bdf3f26e4">CircularToCartesian</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a3645bf526455fc943477bf9bdf3f26e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> from another <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (lvalue).  <a href="classCircularToCartesian.html#a3645bf526455fc943477bf9bdf3f26e4">More...</a><br /></td></tr>
-<tr class="separator:a3645bf526455fc943477bf9bdf3f26e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff3665268072fb79e9acf8503e9b38f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aff3665268072fb79e9acf8503e9b38f0">CircularToCartesian</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:aff3665268072fb79e9acf8503e9b38f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another temporary <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (rvalue).  <a href="classCircularToCartesian.html#aff3665268072fb79e9acf8503e9b38f0">More...</a><br /></td></tr>
-<tr class="separator:aff3665268072fb79e9acf8503e9b38f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae413ed65e8f1312f59c073802aa7f9df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ae413ed65e8f1312f59c073802aa7f9df">operator=</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:ae413ed65e8f1312f59c073802aa7f9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> from another <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (lvalue).  <a href="classCircularToCartesian.html#ae413ed65e8f1312f59c073802aa7f9df">More...</a><br /></td></tr>
-<tr class="separator:ae413ed65e8f1312f59c073802aa7f9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a432a9c957695fa07d0ec03bceaba7d8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a432a9c957695fa07d0ec03bceaba7d8a">operator=</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:a432a9c957695fa07d0ec03bceaba7d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> from another temporary <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (rvalue).  <a href="classCircularToCartesian.html#a432a9c957695fa07d0ec03bceaba7d8a">More...</a><br /></td></tr>
-<tr class="separator:a432a9c957695fa07d0ec03bceaba7d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad70dfd0d013330c445aaa61736ebdd64"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; DimX, DimY &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ad70dfd0d013330c445aaa61736ebdd64">operator()</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ad70dfd0d013330c445aaa61736ebdd64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <a href="classCircularToCartesian.html#ad70dfd0d013330c445aaa61736ebdd64">More...</a><br /></td></tr>
-<tr class="separator:ad70dfd0d013330c445aaa61736ebdd64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb1fc7dd90639be19b4ca5a2e63e7830"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; DimR, DimP &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#adb1fc7dd90639be19b4ca5a2e63e7830">operator()</a> (ddc::Coordinate&lt; DimX, DimY &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:adb1fc7dd90639be19b4ca5a2e63e7830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the logical coordinates from the physical coordinates.  <a href="classCircularToCartesian.html#adb1fc7dd90639be19b4ca5a2e63e7830">More...</a><br /></td></tr>
-<tr class="separator:adb1fc7dd90639be19b4ca5a2e63e7830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dd085246601b9372d1da2dd679d1219"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a2dd085246601b9372d1da2dd679d1219">jacobian</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a2dd085246601b9372d1da2dd679d1219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <a href="classCircularToCartesian.html#a2dd085246601b9372d1da2dd679d1219">More...</a><br /></td></tr>
-<tr class="separator:a2dd085246601b9372d1da2dd679d1219"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13d399ea7b3b0cd46bcfd98fbcea5272"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a13d399ea7b3b0cd46bcfd98fbcea5272">jacobian_matrix</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord, <a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> &amp;matrix) const final</td></tr>
-<tr class="memdesc:a13d399ea7b3b0cd46bcfd98fbcea5272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <a href="classCircularToCartesian.html#a13d399ea7b3b0cd46bcfd98fbcea5272">More...</a><br /></td></tr>
-<tr class="separator:a13d399ea7b3b0cd46bcfd98fbcea5272"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17620bce5d7ddcfc89ed40693b2dd8cf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a17620bce5d7ddcfc89ed40693b2dd8cf">jacobian_11</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a17620bce5d7ddcfc89ed40693b2dd8cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#a17620bce5d7ddcfc89ed40693b2dd8cf">More...</a><br /></td></tr>
-<tr class="separator:a17620bce5d7ddcfc89ed40693b2dd8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a908330bf39aaa005e51e8e49f53cd196"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a908330bf39aaa005e51e8e49f53cd196">jacobian_12</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a908330bf39aaa005e51e8e49f53cd196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#a908330bf39aaa005e51e8e49f53cd196">More...</a><br /></td></tr>
-<tr class="separator:a908330bf39aaa005e51e8e49f53cd196"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af755eb64c3ad1cea47fc2c93d2df4acd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#af755eb64c3ad1cea47fc2c93d2df4acd">jacobian_21</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:af755eb64c3ad1cea47fc2c93d2df4acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#af755eb64c3ad1cea47fc2c93d2df4acd">More...</a><br /></td></tr>
-<tr class="separator:af755eb64c3ad1cea47fc2c93d2df4acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3575169c602119dafa50bab9f4c9c74"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa3575169c602119dafa50bab9f4c9c74">jacobian_22</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:aa3575169c602119dafa50bab9f4c9c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#aa3575169c602119dafa50bab9f4c9c74">More...</a><br /></td></tr>
-<tr class="separator:aa3575169c602119dafa50bab9f4c9c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40fb49c01be6924d0e2f83116d593d6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a40fb49c01be6924d0e2f83116d593d6c">inv_jacobian_matrix</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord, <a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> &amp;matrix) const final</td></tr>
-<tr class="memdesc:a40fb49c01be6924d0e2f83116d593d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <a href="classCircularToCartesian.html#a40fb49c01be6924d0e2f83116d593d6c">More...</a><br /></td></tr>
-<tr class="separator:a40fb49c01be6924d0e2f83116d593d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40e1ae5956248f31cc3776f2353374e7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a40e1ae5956248f31cc3776f2353374e7">inv_jacobian_11</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a40e1ae5956248f31cc3776f2353374e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#a40e1ae5956248f31cc3776f2353374e7">More...</a><br /></td></tr>
-<tr class="separator:a40e1ae5956248f31cc3776f2353374e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e645668c1281dbbcb8544b05234dac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a30e645668c1281dbbcb8544b05234dac">inv_jacobian_12</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a30e645668c1281dbbcb8544b05234dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#a30e645668c1281dbbcb8544b05234dac">More...</a><br /></td></tr>
-<tr class="separator:a30e645668c1281dbbcb8544b05234dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a70958358a7131b7bf02761d992f96"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa0a70958358a7131b7bf02761d992f96">inv_jacobian_21</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:aa0a70958358a7131b7bf02761d992f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#aa0a70958358a7131b7bf02761d992f96">More...</a><br /></td></tr>
-<tr class="separator:aa0a70958358a7131b7bf02761d992f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae24bc181c3639fc5bb9016fc4c07fa4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aae24bc181c3639fc5bb9016fc4c07fa4">inv_jacobian_22</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:aae24bc181c3639fc5bb9016fc4c07fa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#aae24bc181c3639fc5bb9016fc4c07fa4">More...</a><br /></td></tr>
-<tr class="separator:aae24bc181c3639fc5bb9016fc4c07fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7753cb50b18b61199e2918835563082a"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a7753cb50b18b61199e2918835563082a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a7753cb50b18b61199e2918835563082a">to_pseudo_cartesian_jacobian_center_matrix</a> (Domain const &amp;grid, <a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> &amp;matrix) const</td></tr>
-<tr class="memdesc:a7753cb50b18b61199e2918835563082a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classCircularToCartesian.html#a7753cb50b18b61199e2918835563082a">More...</a><br /></td></tr>
-<tr class="separator:a7753cb50b18b61199e2918835563082a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06f85c9ae89ac993b965b06ef7bd0f08"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a06f85c9ae89ac993b965b06ef7bd0f08"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a06f85c9ae89ac993b965b06ef7bd0f08">to_pseudo_cartesian_jacobian_11_center</a> (Domain const &amp;grid) const</td></tr>
-<tr class="memdesc:a06f85c9ae89ac993b965b06ef7bd0f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#a06f85c9ae89ac993b965b06ef7bd0f08">More...</a><br /></td></tr>
-<tr class="separator:a06f85c9ae89ac993b965b06ef7bd0f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b84c78508b9a9ac25396f7b91516b3f"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a4b84c78508b9a9ac25396f7b91516b3f"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a4b84c78508b9a9ac25396f7b91516b3f">to_pseudo_cartesian_jacobian_12_center</a> (Domain const &amp;grid) const</td></tr>
-<tr class="memdesc:a4b84c78508b9a9ac25396f7b91516b3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#a4b84c78508b9a9ac25396f7b91516b3f">More...</a><br /></td></tr>
-<tr class="separator:a4b84c78508b9a9ac25396f7b91516b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17478cc4963e6d7b61ae5e0901e709af"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a17478cc4963e6d7b61ae5e0901e709af"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a17478cc4963e6d7b61ae5e0901e709af">to_pseudo_cartesian_jacobian_21_center</a> (Domain const &amp;grid) const</td></tr>
-<tr class="memdesc:a17478cc4963e6d7b61ae5e0901e709af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#a17478cc4963e6d7b61ae5e0901e709af">More...</a><br /></td></tr>
-<tr class="separator:a17478cc4963e6d7b61ae5e0901e709af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae517bce60bd0f4f2607256aa68bc8bdc"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:ae517bce60bd0f4f2607256aa68bc8bdc"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ae517bce60bd0f4f2607256aa68bc8bdc">to_pseudo_cartesian_jacobian_22_center</a> (Domain const &amp;grid) const</td></tr>
-<tr class="memdesc:ae517bce60bd0f4f2607256aa68bc8bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#ae517bce60bd0f4f2607256aa68bc8bdc">More...</a><br /></td></tr>
-<tr class="separator:ae517bce60bd0f4f2607256aa68bc8bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a></td></tr>
-<tr class="memitem:a39cdb71fcfd111b9be3679922f99af4d inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a39cdb71fcfd111b9be3679922f99af4d">Curvilinear2DToCartesian</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a39cdb71fcfd111b9be3679922f99af4d inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (lvalue).  <a href="classCurvilinear2DToCartesian.html#a39cdb71fcfd111b9be3679922f99af4d">More...</a><br /></td></tr>
-<tr class="separator:a39cdb71fcfd111b9be3679922f99af4d inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c8fc0f9c7810362245073e56c5f09e3 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a2c8fc0f9c7810362245073e56c5f09e3">Curvilinear2DToCartesian</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:a2c8fc0f9c7810362245073e56c5f09e3 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another temporary <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (rvalue).  <a href="classCurvilinear2DToCartesian.html#a2c8fc0f9c7810362245073e56c5f09e3">More...</a><br /></td></tr>
-<tr class="separator:a2c8fc0f9c7810362245073e56c5f09e3 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a559b10a42efc10289eadae2d9cdc5364 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a559b10a42efc10289eadae2d9cdc5364">operator=</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:a559b10a42efc10289eadae2d9cdc5364 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (lvalue).  <a href="classCurvilinear2DToCartesian.html#a559b10a42efc10289eadae2d9cdc5364">More...</a><br /></td></tr>
-<tr class="separator:a559b10a42efc10289eadae2d9cdc5364 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2b963589e6ead8d7fcbaf5ab7796b4a inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#ab2b963589e6ead8d7fcbaf5ab7796b4a">operator=</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:ab2b963589e6ead8d7fcbaf5ab7796b4a inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another temporary <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (rvalue).  <a href="classCurvilinear2DToCartesian.html#ab2b963589e6ead8d7fcbaf5ab7796b4a">More...</a><br /></td></tr>
-<tr class="separator:ab2b963589e6ead8d7fcbaf5ab7796b4a inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d1a1f488cffb8a5e11c9a94dee2036a inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a">metric_tensor</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord, <a class="el" href="classCurvilinear2DToCartesian.html#ad0f61c18363bff817f9c34f2b03e8d4c">Matrix_2x2</a> &amp;matrix) const</td></tr>
-<tr class="memdesc:a5d1a1f488cffb8a5e11c9a94dee2036a inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the metric tensor assignd to the mapping.  <a href="classCurvilinear2DToCartesian.html#a5d1a1f488cffb8a5e11c9a94dee2036a">More...</a><br /></td></tr>
-<tr class="separator:a5d1a1f488cffb8a5e11c9a94dee2036a inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0d8bb4ae71f1ccdf0e9301c57c809d1 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#ae0d8bb4ae71f1ccdf0e9301c57c809d1">inverse_metric_tensor</a> (ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord, <a class="el" href="classCurvilinear2DToCartesian.html#ad0f61c18363bff817f9c34f2b03e8d4c">Matrix_2x2</a> &amp;matrix) const</td></tr>
-<tr class="memdesc:ae0d8bb4ae71f1ccdf0e9301c57c809d1 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse metric tensor associated to the mapping.  <a href="classCurvilinear2DToCartesian.html#ae0d8bb4ae71f1ccdf0e9301c57c809d1">More...</a><br /></td></tr>
-<tr class="separator:ae0d8bb4ae71f1ccdf0e9301c57c809d1 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaa5cd40c5d7e3c63574ab4d7055d664 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#afaa5cd40c5d7e3c63574ab4d7055d664">to_covariant</a> (std::array&lt; double, 2 &gt; const &amp;contravariant_vector, ddc::Coordinate&lt; DimR, DimP &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:afaa5cd40c5d7e3c63574ab4d7055d664 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the covariant vector from the contravariant vector.  <a href="classCurvilinear2DToCartesian.html#afaa5cd40c5d7e3c63574ab4d7055d664">More...</a><br /></td></tr>
-<tr class="separator:afaa5cd40c5d7e3c63574ab4d7055d664 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb197369bbc8c9dcd6a3bcf7bebe4357"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#acb197369bbc8c9dcd6a3bcf7bebe4357">CircularToCartesian</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:acb197369bbc8c9dcd6a3bcf7bebe4357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> from another <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (lvalue).  <a href="classCircularToCartesian.html#acb197369bbc8c9dcd6a3bcf7bebe4357">More...</a><br /></td></tr>
+<tr class="separator:acb197369bbc8c9dcd6a3bcf7bebe4357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78081a716b6523306168d839f53c3f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa78081a716b6523306168d839f53c3f6">CircularToCartesian</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:aa78081a716b6523306168d839f53c3f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another temporary <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (rvalue).  <a href="classCircularToCartesian.html#aa78081a716b6523306168d839f53c3f6">More...</a><br /></td></tr>
+<tr class="separator:aa78081a716b6523306168d839f53c3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a046dc85189ecf317e91e9c52726d217b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a046dc85189ecf317e91e9c52726d217b">operator=</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:a046dc85189ecf317e91e9c52726d217b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> from another <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (lvalue).  <a href="classCircularToCartesian.html#a046dc85189ecf317e91e9c52726d217b">More...</a><br /></td></tr>
+<tr class="separator:a046dc85189ecf317e91e9c52726d217b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d57282d624f28b641503b43e14843c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a86d57282d624f28b641503b43e14843c">operator=</a> (<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a86d57282d624f28b641503b43e14843c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> from another temporary <a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> (rvalue).  <a href="classCircularToCartesian.html#a86d57282d624f28b641503b43e14843c">More...</a><br /></td></tr>
+<tr class="separator:a86d57282d624f28b641503b43e14843c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a990c80884a427edf5e96360a2780088a"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a990c80884a427edf5e96360a2780088a">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a990c80884a427edf5e96360a2780088a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <a href="classCircularToCartesian.html#a990c80884a427edf5e96360a2780088a">More...</a><br /></td></tr>
+<tr class="separator:a990c80884a427edf5e96360a2780088a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd20b10dfc49eb4be70a2d6c0d7e29f"><td class="memItemLeft" align="right" valign="top">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#adbd20b10dfc49eb4be70a2d6c0d7e29f">operator()</a> (ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:adbd20b10dfc49eb4be70a2d6c0d7e29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the logical coordinates from the physical coordinates.  <a href="classCircularToCartesian.html#adbd20b10dfc49eb4be70a2d6c0d7e29f">More...</a><br /></td></tr>
+<tr class="separator:adbd20b10dfc49eb4be70a2d6c0d7e29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b2c8234e73fb23510a3847c73faa95"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a36b2c8234e73fb23510a3847c73faa95">jacobian</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a36b2c8234e73fb23510a3847c73faa95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <a href="classCircularToCartesian.html#a36b2c8234e73fb23510a3847c73faa95">More...</a><br /></td></tr>
+<tr class="separator:a36b2c8234e73fb23510a3847c73faa95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c2e7d42925e55fc4d11e44d41c6ed23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a3c2e7d42925e55fc4d11e44d41c6ed23">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> &amp;matrix) const final</td></tr>
+<tr class="memdesc:a3c2e7d42925e55fc4d11e44d41c6ed23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <a href="classCircularToCartesian.html#a3c2e7d42925e55fc4d11e44d41c6ed23">More...</a><br /></td></tr>
+<tr class="separator:a3c2e7d42925e55fc4d11e44d41c6ed23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a424ce36ca0a0fdbb297b6e2eee78cb09"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a424ce36ca0a0fdbb297b6e2eee78cb09">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a424ce36ca0a0fdbb297b6e2eee78cb09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#a424ce36ca0a0fdbb297b6e2eee78cb09">More...</a><br /></td></tr>
+<tr class="separator:a424ce36ca0a0fdbb297b6e2eee78cb09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884dac159993c6cb491304f45559231d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a884dac159993c6cb491304f45559231d">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a884dac159993c6cb491304f45559231d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#a884dac159993c6cb491304f45559231d">More...</a><br /></td></tr>
+<tr class="separator:a884dac159993c6cb491304f45559231d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902d21e4ab2b87a71af86adc123c1bb4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a902d21e4ab2b87a71af86adc123c1bb4">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a902d21e4ab2b87a71af86adc123c1bb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#a902d21e4ab2b87a71af86adc123c1bb4">More...</a><br /></td></tr>
+<tr class="separator:a902d21e4ab2b87a71af86adc123c1bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ddd5bb22fb52c7bcb5c54aa87526b86"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a9ddd5bb22fb52c7bcb5c54aa87526b86">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a9ddd5bb22fb52c7bcb5c54aa87526b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <a href="classCircularToCartesian.html#a9ddd5bb22fb52c7bcb5c54aa87526b86">More...</a><br /></td></tr>
+<tr class="separator:a9ddd5bb22fb52c7bcb5c54aa87526b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a473485b64241ac3704669f2b57f4fef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a473485b64241ac3704669f2b57f4fef7">inv_jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> &amp;matrix) const final</td></tr>
+<tr class="memdesc:a473485b64241ac3704669f2b57f4fef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <a href="classCircularToCartesian.html#a473485b64241ac3704669f2b57f4fef7">More...</a><br /></td></tr>
+<tr class="separator:a473485b64241ac3704669f2b57f4fef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28599c1d830d30de4494cdf7d81ee662"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a28599c1d830d30de4494cdf7d81ee662">inv_jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a28599c1d830d30de4494cdf7d81ee662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#a28599c1d830d30de4494cdf7d81ee662">More...</a><br /></td></tr>
+<tr class="separator:a28599c1d830d30de4494cdf7d81ee662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7df0cb84ac4cc64997b9bb24b614614"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ae7df0cb84ac4cc64997b9bb24b614614">inv_jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:ae7df0cb84ac4cc64997b9bb24b614614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#ae7df0cb84ac4cc64997b9bb24b614614">More...</a><br /></td></tr>
+<tr class="separator:ae7df0cb84ac4cc64997b9bb24b614614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac268f60284baca6a3a8c7bf3f211781f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ac268f60284baca6a3a8c7bf3f211781f">inv_jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:ac268f60284baca6a3a8c7bf3f211781f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#ac268f60284baca6a3a8c7bf3f211781f">More...</a><br /></td></tr>
+<tr class="separator:ac268f60284baca6a3a8c7bf3f211781f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e747528bade3997c3628cdd2f71240"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a12e747528bade3997c3628cdd2f71240">inv_jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const final</td></tr>
+<tr class="memdesc:a12e747528bade3997c3628cdd2f71240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCircularToCartesian.html#a12e747528bade3997c3628cdd2f71240">More...</a><br /></td></tr>
+<tr class="separator:a12e747528bade3997c3628cdd2f71240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e2456416fbd0f6c0d1c15255e27b56"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:aa2e2456416fbd0f6c0d1c15255e27b56"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa2e2456416fbd0f6c0d1c15255e27b56">to_pseudo_cartesian_jacobian_center_matrix</a> (IdxRange const &amp;grid, <a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> &amp;matrix) const</td></tr>
+<tr class="memdesc:aa2e2456416fbd0f6c0d1c15255e27b56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classCircularToCartesian.html#aa2e2456416fbd0f6c0d1c15255e27b56">More...</a><br /></td></tr>
+<tr class="separator:aa2e2456416fbd0f6c0d1c15255e27b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0080fd22697f6adb46b38b7f161bc17"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:ac0080fd22697f6adb46b38b7f161bc17"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ac0080fd22697f6adb46b38b7f161bc17">to_pseudo_cartesian_jacobian_11_center</a> (IdxRange const &amp;grid) const</td></tr>
+<tr class="memdesc:ac0080fd22697f6adb46b38b7f161bc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#ac0080fd22697f6adb46b38b7f161bc17">More...</a><br /></td></tr>
+<tr class="separator:ac0080fd22697f6adb46b38b7f161bc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3228a8b105eeab09d152ffe01c2bee5"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:ae3228a8b105eeab09d152ffe01c2bee5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ae3228a8b105eeab09d152ffe01c2bee5">to_pseudo_cartesian_jacobian_12_center</a> (IdxRange const &amp;grid) const</td></tr>
+<tr class="memdesc:ae3228a8b105eeab09d152ffe01c2bee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#ae3228a8b105eeab09d152ffe01c2bee5">More...</a><br /></td></tr>
+<tr class="separator:ae3228a8b105eeab09d152ffe01c2bee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7401f29b340f287ce4be0922a045f678"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:a7401f29b340f287ce4be0922a045f678"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a7401f29b340f287ce4be0922a045f678">to_pseudo_cartesian_jacobian_21_center</a> (IdxRange const &amp;grid) const</td></tr>
+<tr class="memdesc:a7401f29b340f287ce4be0922a045f678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#a7401f29b340f287ce4be0922a045f678">More...</a><br /></td></tr>
+<tr class="separator:a7401f29b340f287ce4be0922a045f678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05d1ae72c9c0ef8c05eaf3d85e6ac11"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:ad05d1ae72c9c0ef8c05eaf3d85e6ac11"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ad05d1ae72c9c0ef8c05eaf3d85e6ac11">to_pseudo_cartesian_jacobian_22_center</a> (IdxRange const &amp;grid) const</td></tr>
+<tr class="memdesc:ad05d1ae72c9c0ef8c05eaf3d85e6ac11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCircularToCartesian.html#ad05d1ae72c9c0ef8c05eaf3d85e6ac11">More...</a><br /></td></tr>
+<tr class="separator:ad05d1ae72c9c0ef8c05eaf3d85e6ac11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a></td></tr>
+<tr class="memitem:a18a3aee55831a657bf1e6ba6d4349f1e inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a18a3aee55831a657bf1e6ba6d4349f1e">Curvilinear2DToCartesian</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:a18a3aee55831a657bf1e6ba6d4349f1e inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (lvalue).  <a href="classCurvilinear2DToCartesian.html#a18a3aee55831a657bf1e6ba6d4349f1e">More...</a><br /></td></tr>
+<tr class="separator:a18a3aee55831a657bf1e6ba6d4349f1e inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9ebd2a3233785bada454a3d8efa18c inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#aeb9ebd2a3233785bada454a3d8efa18c">Curvilinear2DToCartesian</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:aeb9ebd2a3233785bada454a3d8efa18c inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another temporary <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (rvalue).  <a href="classCurvilinear2DToCartesian.html#aeb9ebd2a3233785bada454a3d8efa18c">More...</a><br /></td></tr>
+<tr class="separator:aeb9ebd2a3233785bada454a3d8efa18c inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dc58f86863aac54ce98dafbee910087 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a5dc58f86863aac54ce98dafbee910087">operator=</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:a5dc58f86863aac54ce98dafbee910087 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (lvalue).  <a href="classCurvilinear2DToCartesian.html#a5dc58f86863aac54ce98dafbee910087">More...</a><br /></td></tr>
+<tr class="separator:a5dc58f86863aac54ce98dafbee910087 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a32010a6b29a053ccab0ba036836501 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a9a32010a6b29a053ccab0ba036836501">operator=</a> (<a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a9a32010a6b29a053ccab0ba036836501 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> from another temporary <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> (rvalue).  <a href="classCurvilinear2DToCartesian.html#a9a32010a6b29a053ccab0ba036836501">More...</a><br /></td></tr>
+<tr class="separator:a9a32010a6b29a053ccab0ba036836501 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97ab53287eec4b6390f8d79fd9e0286d inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a97ab53287eec4b6390f8d79fd9e0286d">metric_tensor</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classCurvilinear2DToCartesian.html#af45b38405beee2cb46eeac1c36264dfb">Matrix_2x2</a> &amp;matrix) const</td></tr>
+<tr class="memdesc:a97ab53287eec4b6390f8d79fd9e0286d inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the metric tensor assignd to the mapping.  <a href="classCurvilinear2DToCartesian.html#a97ab53287eec4b6390f8d79fd9e0286d">More...</a><br /></td></tr>
+<tr class="separator:a97ab53287eec4b6390f8d79fd9e0286d inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87cda1790602a54e4d434c963ced0bb7 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#a87cda1790602a54e4d434c963ced0bb7">inverse_metric_tensor</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classCurvilinear2DToCartesian.html#af45b38405beee2cb46eeac1c36264dfb">Matrix_2x2</a> &amp;matrix) const</td></tr>
+<tr class="memdesc:a87cda1790602a54e4d434c963ced0bb7 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse metric tensor associated to the mapping.  <a href="classCurvilinear2DToCartesian.html#a87cda1790602a54e4d434c963ced0bb7">More...</a><br /></td></tr>
+<tr class="separator:a87cda1790602a54e4d434c963ced0bb7 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad585d4687905cce594af1091232d8b41 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCurvilinear2DToCartesian.html#ad585d4687905cce594af1091232d8b41">to_covariant</a> (std::array&lt; double, 2 &gt; const &amp;contravariant_vector, ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:ad585d4687905cce594af1091232d8b41 inherit pub_methods_classCurvilinear2DToCartesian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the covariant vector from the contravariant vector.  <a href="classCurvilinear2DToCartesian.html#ad585d4687905cce594af1091232d8b41">More...</a><br /></td></tr>
+<tr class="separator:ad585d4687905cce594af1091232d8b41 inherit pub_methods_classCurvilinear2DToCartesian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class DimX, class DimY, class DimR, class DimP&gt;<br />
-class CircularToCartesian&lt; DimX, DimY, DimR, DimP &gt;</h3>
+<div class="textblock"><h3>template&lt;class X, class Y, class R, class Theta&gt;<br />
+class CircularToCartesian&lt; X, Y, R, Theta &gt;</h3>
 
 <p>A class for describing the circular 2D mapping. </p>
 <p>The mapping \( (r,\theta)\mapsto (x,y) \) is defined as follow :</p>
@@ -278,21 +278,21 @@ class CircularToCartesian&lt; DimX, DimY, DimR, DimP &gt;</h3>
 <p>and the matrix determinant: \( det(J) = r \).</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html" title="A class for describing analytical invertible curvilinear 2D mappings from the logical domain to the p...">AnalyticalInvertibleCurvilinear2DToCartesian</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3645bf526455fc943477bf9bdf3f26e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3645bf526455fc943477bf9bdf3f26e4">&#9670;&nbsp;</a></span>CircularToCartesian() <span class="overload">[1/2]</span></h2>
+<a id="acb197369bbc8c9dcd6a3bcf7bebe4357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb197369bbc8c9dcd6a3bcf7bebe4357">&#9670;&nbsp;</a></span>CircularToCartesian() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> </td>
+          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -314,21 +314,21 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 
 </div>
 </div>
-<a id="aff3665268072fb79e9acf8503e9b38f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff3665268072fb79e9acf8503e9b38f0">&#9670;&nbsp;</a></span>CircularToCartesian() <span class="overload">[2/2]</span></h2>
+<a id="aa78081a716b6523306168d839f53c3f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa78081a716b6523306168d839f53c3f6">&#9670;&nbsp;</a></span>CircularToCartesian() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> </td>
+          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::<a class="el" href="classCircularToCartesian.html">CircularToCartesian</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -351,21 +351,21 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae413ed65e8f1312f59c073802aa7f9df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae413ed65e8f1312f59c073802aa7f9df">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a046dc85189ecf317e91e9c52726d217b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a046dc85189ecf317e91e9c52726d217b">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&amp; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&amp; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -388,21 +388,21 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 
 </div>
 </div>
-<a id="a432a9c957695fa07d0ec03bceaba7d8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a432a9c957695fa07d0ec03bceaba7d8a">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a86d57282d624f28b641503b43e14843c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d57282d624f28b641503b43e14843c">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&amp; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&amp; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -425,21 +425,21 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 
 </div>
 </div>
-<a id="ad70dfd0d013330c445aaa61736ebdd64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad70dfd0d013330c445aaa61736ebdd64">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a990c80884a427edf5e96360a2780088a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a990c80884a427edf5e96360a2780088a">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Coordinate&lt;DimX, DimY&gt; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::operator() </td>
+          <td class="memname">ddc::Coordinate&lt;<a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>&gt; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -461,25 +461,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The coordinates in the physical domain. </dd></dl>
 
-<p>Implements <a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html#aef1f348d864cec95dd0c7bfc4cc6481d">AnalyticalInvertibleCurvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html#acbcdcba9b2b7154df683288d7cf3593e">AnalyticalInvertibleCurvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="adb1fc7dd90639be19b4ca5a2e63e7830"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb1fc7dd90639be19b4ca5a2e63e7830">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="adbd20b10dfc49eb4be70a2d6c0d7e29f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd20b10dfc49eb4be70a2d6c0d7e29f">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ddc::Coordinate&lt;DimR, DimP&gt; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::operator() </td>
+          <td class="memname">ddc::Coordinate&lt;<a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>&gt; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimX, DimY &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -502,25 +502,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>The coordinates in the logical domain.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>Curvilinear2DToCartesian::operator() </dd></dl>
 
-<p>Implements <a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html#a49f2c6b6bdbbb0c62e4b2547a057d4f4">AnalyticalInvertibleCurvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classAnalyticalInvertibleCurvilinear2DToCartesian.html#ad79c9ecea31a7f8ec9e06869deda9b41">AnalyticalInvertibleCurvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a2dd085246601b9372d1da2dd679d1219"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dd085246601b9372d1da2dd679d1219">&#9670;&nbsp;</a></span>jacobian()</h2>
+<a id="a36b2c8234e73fb23510a3847c73faa95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b2c8234e73fb23510a3847c73faa95">&#9670;&nbsp;</a></span>jacobian()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::jacobian </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -541,31 +541,31 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the determinant of the Jacobian matrix. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a13d399ea7b3b0cd46bcfd98fbcea5272"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13d399ea7b3b0cd46bcfd98fbcea5272">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
+<a id="a3c2e7d42925e55fc4d11e44d41c6ed23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c2e7d42925e55fc4d11e44d41c6ed23">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::jacobian_matrix </td>
+          <td class="memname">void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_matrix </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -590,33 +590,33 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCurvilinear2DToCartesian.html#ae5621eb6b96912a51ec4792b34c74351" title="Compute the (1,1) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_11</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCurvilinear2DToCartesian.html#a26c008750591b7db47c8bdc3020d4c0c" title="Compute the (1,1) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_11</a> </dd>
 <dd>
-<a class="el" href="classCurvilinear2DToCartesian.html#a16b7504f90a17ae4065d4c86ae8a3260" title="Compute the (1,2) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_12</a> </dd>
+<a class="el" href="classCurvilinear2DToCartesian.html#ad8bbf538f5d1676401eb5c2d0fef0447" title="Compute the (1,2) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_12</a> </dd>
 <dd>
-<a class="el" href="classCurvilinear2DToCartesian.html#af2f6cf5d84aee801605fe30cdae6c9ce" title="Compute the (2,1) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_21</a> </dd>
+<a class="el" href="classCurvilinear2DToCartesian.html#a2d6a9f1392731a03ae1f6279d1afa135" title="Compute the (2,1) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_21</a> </dd>
 <dd>
-<a class="el" href="classCurvilinear2DToCartesian.html#a8fe963bcecfe272c3143cb987f12787a" title="Compute the (2,2) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_22</a> </dd></dl>
+<a class="el" href="classCurvilinear2DToCartesian.html#a06cf7aea01d9df2ab3849539984deeca" title="Compute the (2,2) coefficient of the Jacobian matrix.">Curvilinear2DToCartesian::jacobian_22</a> </dd></dl>
 
-<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a703838ae69a4b6118cbc5fa1beb7d09b">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a2b474cb53dee1403624b047a20e240fc">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a17620bce5d7ddcfc89ed40693b2dd8cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17620bce5d7ddcfc89ed40693b2dd8cf">&#9670;&nbsp;</a></span>jacobian_11()</h2>
+<a id="a424ce36ca0a0fdbb297b6e2eee78cb09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a424ce36ca0a0fdbb297b6e2eee78cb09">&#9670;&nbsp;</a></span>jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::jacobian_11 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_11 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -638,25 +638,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the Jacobian matrix. </dd></dl>
 
-<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#ae5621eb6b96912a51ec4792b34c74351">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a26c008750591b7db47c8bdc3020d4c0c">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a908330bf39aaa005e51e8e49f53cd196"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a908330bf39aaa005e51e8e49f53cd196">&#9670;&nbsp;</a></span>jacobian_12()</h2>
+<a id="a884dac159993c6cb491304f45559231d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884dac159993c6cb491304f45559231d">&#9670;&nbsp;</a></span>jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::jacobian_12 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_12 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -678,25 +678,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the Jacobian matrix. </dd></dl>
 
-<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a16b7504f90a17ae4065d4c86ae8a3260">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#ad8bbf538f5d1676401eb5c2d0fef0447">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="af755eb64c3ad1cea47fc2c93d2df4acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af755eb64c3ad1cea47fc2c93d2df4acd">&#9670;&nbsp;</a></span>jacobian_21()</h2>
+<a id="a902d21e4ab2b87a71af86adc123c1bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902d21e4ab2b87a71af86adc123c1bb4">&#9670;&nbsp;</a></span>jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::jacobian_21 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_21 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -718,25 +718,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the Jacobian matrix. </dd></dl>
 
-<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#af2f6cf5d84aee801605fe30cdae6c9ce">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a2d6a9f1392731a03ae1f6279d1afa135">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="aa3575169c602119dafa50bab9f4c9c74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3575169c602119dafa50bab9f4c9c74">&#9670;&nbsp;</a></span>jacobian_22()</h2>
+<a id="a9ddd5bb22fb52c7bcb5c54aa87526b86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ddd5bb22fb52c7bcb5c54aa87526b86">&#9670;&nbsp;</a></span>jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::jacobian_22 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_22 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -758,31 +758,31 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the Jacobian matrix. </dd></dl>
 
-<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a8fe963bcecfe272c3143cb987f12787a">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Implements <a class="el" href="classCurvilinear2DToCartesian.html#a06cf7aea01d9df2ab3849539984deeca">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a40fb49c01be6924d0e2f83116d593d6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40fb49c01be6924d0e2f83116d593d6c">&#9670;&nbsp;</a></span>inv_jacobian_matrix()</h2>
+<a id="a473485b64241ac3704669f2b57f4fef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a473485b64241ac3704669f2b57f4fef7">&#9670;&nbsp;</a></span>inv_jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::inv_jacobian_matrix </td>
+          <td class="memname">void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::inv_jacobian_matrix </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -807,33 +807,33 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCurvilinear2DToCartesian.html#a4a0be88153c07cdab1f6e4dcd9c9133d" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_11</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCurvilinear2DToCartesian.html#a46937cc12d1adc106d09fc4110d5ee97" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_11</a> </dd>
 <dd>
-<a class="el" href="classCurvilinear2DToCartesian.html#afbc01889defa456fd0f757435bcdfc61" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_12</a> </dd>
+<a class="el" href="classCurvilinear2DToCartesian.html#aa287b9583acc4bb1d10212c128966417" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_12</a> </dd>
 <dd>
-<a class="el" href="classCurvilinear2DToCartesian.html#a51184f1bc79b0cd2e07c240737a573e6" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_21</a> </dd>
+<a class="el" href="classCurvilinear2DToCartesian.html#ad16b91aa85c2561bec62b7068f6f4b1d" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_21</a> </dd>
 <dd>
-<a class="el" href="classCurvilinear2DToCartesian.html#a2a2a127c36b9f0e5d141d893bde33237" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_22</a> </dd></dl>
+<a class="el" href="classCurvilinear2DToCartesian.html#a9a961965b3a3faabe0a3acdb17751d40" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Curvilinear2DToCartesian::inv_jacobian_22</a> </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a35925923a15089e1965577f52f612ac3">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#ab8dd604f74c8726fc3b8e4cbc4d16067">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a40e1ae5956248f31cc3776f2353374e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40e1ae5956248f31cc3776f2353374e7">&#9670;&nbsp;</a></span>inv_jacobian_11()</h2>
+<a id="a28599c1d830d30de4494cdf7d81ee662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28599c1d830d30de4494cdf7d81ee662">&#9670;&nbsp;</a></span>inv_jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::inv_jacobian_11 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::inv_jacobian_11 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -855,25 +855,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a4a0be88153c07cdab1f6e4dcd9c9133d">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a46937cc12d1adc106d09fc4110d5ee97">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a30e645668c1281dbbcb8544b05234dac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30e645668c1281dbbcb8544b05234dac">&#9670;&nbsp;</a></span>inv_jacobian_12()</h2>
+<a id="ae7df0cb84ac4cc64997b9bb24b614614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7df0cb84ac4cc64997b9bb24b614614">&#9670;&nbsp;</a></span>inv_jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::inv_jacobian_12 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::inv_jacobian_12 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -895,25 +895,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#afbc01889defa456fd0f757435bcdfc61">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#aa287b9583acc4bb1d10212c128966417">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="aa0a70958358a7131b7bf02761d992f96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0a70958358a7131b7bf02761d992f96">&#9670;&nbsp;</a></span>inv_jacobian_21()</h2>
+<a id="ac268f60284baca6a3a8c7bf3f211781f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac268f60284baca6a3a8c7bf3f211781f">&#9670;&nbsp;</a></span>inv_jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::inv_jacobian_21 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::inv_jacobian_21 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -935,25 +935,25 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a51184f1bc79b0cd2e07c240737a573e6">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#ad16b91aa85c2561bec62b7068f6f4b1d">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="aae24bc181c3639fc5bb9016fc4c07fa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae24bc181c3639fc5bb9016fc4c07fa4">&#9670;&nbsp;</a></span>inv_jacobian_22()</h2>
+<a id="a12e747528bade3997c3628cdd2f71240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12e747528bade3997c3628cdd2f71240">&#9670;&nbsp;</a></span>inv_jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::inv_jacobian_22 </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::inv_jacobian_22 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; DimR, DimP &gt; const &amp;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -975,33 +975,33 @@ template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a2a2a127c36b9f0e5d141d893bde33237">Curvilinear2DToCartesian&lt; DimX, DimY, DimR, DimP &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classCurvilinear2DToCartesian.html#a9a961965b3a3faabe0a3acdb17751d40">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a7753cb50b18b61199e2918835563082a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7753cb50b18b61199e2918835563082a">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_center_matrix()</h2>
+<a id="aa2e2456416fbd0f6c0d1c15255e27b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e2456416fbd0f6c0d1c15255e27b56">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_center_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <div class="memtemplate">
-template&lt;class Domain &gt; </div>
+template&lt;class IdxRange &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::to_pseudo_cartesian_jacobian_center_matrix </td>
+          <td class="memname">void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::to_pseudo_cartesian_jacobian_center_matrix </td>
           <td>(</td>
-          <td class="paramtype">Domain const &amp;&#160;</td>
+          <td class="paramtype">IdxRange const &amp;&#160;</td>
           <td class="paramname"><em>grid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html#afdac5ab113c09b1b53029e479f224664">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html#aa1f2d26b18b6eb6c0390ad1fa94ca55f">Matrix_2x2</a> &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -1039,23 +1039,23 @@ BslAdvection </dd>
 
 </div>
 </div>
-<a id="a06f85c9ae89ac993b965b06ef7bd0f08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06f85c9ae89ac993b965b06ef7bd0f08">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_11_center()</h2>
+<a id="ac0080fd22697f6adb46b38b7f161bc17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0080fd22697f6adb46b38b7f161bc17">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_11_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <div class="memtemplate">
-template&lt;class Domain &gt; </div>
+template&lt;class IdxRange &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::to_pseudo_cartesian_jacobian_11_center </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::to_pseudo_cartesian_jacobian_11_center </td>
           <td>(</td>
-          <td class="paramtype">Domain const &amp;&#160;</td>
+          <td class="paramtype">IdxRange const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1076,27 +1076,27 @@ template&lt;class Domain &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a7753cb50b18b61199e2918835563082a" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#aa2e2456416fbd0f6c0d1c15255e27b56" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>
-<a id="a4b84c78508b9a9ac25396f7b91516b3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b84c78508b9a9ac25396f7b91516b3f">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_12_center()</h2>
+<a id="ae3228a8b105eeab09d152ffe01c2bee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3228a8b105eeab09d152ffe01c2bee5">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_12_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <div class="memtemplate">
-template&lt;class Domain &gt; </div>
+template&lt;class IdxRange &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::to_pseudo_cartesian_jacobian_12_center </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::to_pseudo_cartesian_jacobian_12_center </td>
           <td>(</td>
-          <td class="paramtype">Domain const &amp;&#160;</td>
+          <td class="paramtype">IdxRange const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1117,27 +1117,27 @@ template&lt;class Domain &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a7753cb50b18b61199e2918835563082a" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#aa2e2456416fbd0f6c0d1c15255e27b56" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>
-<a id="a17478cc4963e6d7b61ae5e0901e709af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17478cc4963e6d7b61ae5e0901e709af">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_21_center()</h2>
+<a id="a7401f29b340f287ce4be0922a045f678"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7401f29b340f287ce4be0922a045f678">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_21_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <div class="memtemplate">
-template&lt;class Domain &gt; </div>
+template&lt;class IdxRange &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::to_pseudo_cartesian_jacobian_21_center </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::to_pseudo_cartesian_jacobian_21_center </td>
           <td>(</td>
-          <td class="paramtype">Domain const &amp;&#160;</td>
+          <td class="paramtype">IdxRange const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1158,27 +1158,27 @@ template&lt;class Domain &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a7753cb50b18b61199e2918835563082a" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#aa2e2456416fbd0f6c0d1c15255e27b56" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>
-<a id="ae517bce60bd0f4f2607256aa68bc8bdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae517bce60bd0f4f2607256aa68bc8bdc">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_22_center()</h2>
+<a id="ad05d1ae72c9c0ef8c05eaf3d85e6ac11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05d1ae72c9c0ef8c05eaf3d85e6ac11">&#9670;&nbsp;</a></span>to_pseudo_cartesian_jacobian_22_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DimX , class DimY , class DimR , class DimP &gt; </div>
+template&lt;class X , class Y , class R , class Theta &gt; </div>
 <div class="memtemplate">
-template&lt;class Domain &gt; </div>
+template&lt;class IdxRange &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; DimX, DimY, DimR, DimP &gt;::to_pseudo_cartesian_jacobian_22_center </td>
+          <td class="memname">double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::to_pseudo_cartesian_jacobian_22_center </td>
           <td>(</td>
-          <td class="paramtype">Domain const &amp;&#160;</td>
+          <td class="paramtype">IdxRange const &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1199,7 +1199,7 @@ template&lt;class Domain &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a7753cb50b18b61199e2918835563082a" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#aa2e2456416fbd0f6c0d1c15255e27b56" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 </div>
 </div>

@@ -112,464 +112,471 @@ $(document).ready(function(){initNavTree('refined__discrete__mapping__to__cartes
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/discrete_mapping_to_cartesian.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> RDimX, <span class="keyword">class</span> RDimY, <span class="keyword">class</span> SplineRPBuilder, <span class="keyword">class</span> SplineRPEvaluator, <span class="keywordtype">int</span> Nr, <span class="keywordtype">int</span> Nt&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineRThetaBuilder, <span class="keyword">class</span> SplineRThetaEvaluator, <span class="keywordtype">int</span> Nr, <span class="keywordtype">int</span> Nt&gt;</div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a>&lt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;              RDimX,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;              RDimY,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;              typename SplineRPBuilder::continuous_dimension_type1,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;              typename SplineRPBuilder::continuous_dimension_type2&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;              X,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;              Y,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;              typename SplineRThetaBuilder::continuous_dimension_type1,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;              typename SplineRThetaBuilder::continuous_dimension_type2&gt;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> BSplineR = <span class="keyword">typename</span> SplineRPBuilder::bsplines_type1;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> BSplineP = <span class="keyword">typename</span> SplineRPBuilder::bsplines_type2;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">using</span> RDimR = <span class="keyword">typename</span> BSplineR::continuous_dimension_type;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">using</span> RDimP = <span class="keyword">typename</span> BSplineP::continuous_dimension_type;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> BSplineR = <span class="keyword">typename</span> SplineRThetaBuilder::bsplines_type1;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> BSplineTheta = <span class="keyword">typename</span> SplineRThetaBuilder::bsplines_type2;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">using</span> <a class="code" href="structR.html">R</a> = <span class="keyword">typename</span> BSplineR::continuous_dimension_type;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">using</span> <a class="code" href="structTheta.html">Theta</a> = <span class="keyword">typename</span> BSplineTheta::continuous_dimension_type;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">using</span> IDimR = <span class="keyword">typename</span> SplineRPBuilder::interpolation_discrete_dimension_type1;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">using</span> <a class="code" href="structGridR.html">GridR</a> = <span class="keyword">typename</span> SplineRThetaBuilder::interpolation_discrete_dimension_type1;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> IDimP = <span class="keyword">typename</span> SplineRPBuilder::interpolation_discrete_dimension_type2;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> <a class="code" href="structGridTheta.html">GridTheta</a> = <span class="keyword">typename</span> SplineRThetaBuilder::interpolation_discrete_dimension_type2;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> BSplineR_uniform = BSplineR::is_uniform();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> BSplineP_uniform = BSplineP::is_uniform();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> BSplineP_uniform = BSplineTheta::is_uniform();</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr BSDegreeRRefined = BSplineR::degree();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr BSDegreePRefined = BSplineP::degree();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> constexpr BSDegreePRefined = BSplineTheta::degree();</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimRRefined.html">   82</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1RDimRRefined.html">RDimRRefined</a></div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RRefined.html">   82</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1RRefined.html">RRefined</a></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimRRefined.html#a6383c5fd3f13ecc58c08b8aa0b2283ca">   88</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1RDimRRefined.html#a6383c5fd3f13ecc58c08b8aa0b2283ca">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RRefined.html#a0f2de6c0d1c935f6d66ba1f971faedb8">   88</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1RRefined.html#a0f2de6c0d1c935f6d66ba1f971faedb8">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    };</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html">   93</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html">RDimPRefined</a></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html">   93</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html">ThetaRefined</a></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    {</div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html#ad514de051dbba29c434430eff517006e">   99</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html#ad514de051dbba29c434430eff517006e">PERIODIC</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html#a109b70e74041c86ee6a58993bb1fbfe3">   99</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html#a109b70e74041c86ee6a58993bb1fbfe3">PERIODIC</a> = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    };</div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html">  104</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html">RDimXRefined</a></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1XRefined.html">  104</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1XRefined.html">XRefined</a></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    {</div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html#a5541d5de608d7fd975e314d933af9d72">  110</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html#a5541d5de608d7fd975e314d933af9d72">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1XRefined.html#a5f0f173aabf77a3e5dae29d831c6db97">  110</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1XRefined.html#a5f0f173aabf77a3e5dae29d831c6db97">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    };</div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html">  115</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html">RDimYRefined</a></div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1YRefined.html">  115</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1YRefined.html">YRefined</a></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html#a0f50a9073257f594f7c0e7cd0ebdaa23">  121</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html#a0f50a9073257f594f7c0e7cd0ebdaa23">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1YRefined.html#a6a3078d6071b64c826319b85f4e37b28">  121</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structRefinedDiscreteToCartesian_1_1YRefined.html#a6a3078d6071b64c826319b85f4e37b28">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    };</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">  125</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        : std::conditional_t&lt;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                  BSplineR_uniform,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                  ddc::UniformBSplines&lt;RDimRRefined, BSDegreeRRefined&gt;,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                  ddc::NonUniformBSplines&lt;RDimRRefined, BSDegreeRRefined&gt;&gt;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                  ddc::UniformBSplines&lt;RRefined, BSDegreeRRefined&gt;,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                  ddc::NonUniformBSplines&lt;RRefined, BSDegreeRRefined&gt;&gt;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    };</div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1BSplinePRefined.html">  132</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1BSplinePRefined.html">BSplinePRefined</a></div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1BSplineThetaRefined.html">  132</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineThetaRefined.html">BSplineThetaRefined</a></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        : std::conditional_t&lt;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                  BSplineP_uniform,</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                  ddc::UniformBSplines&lt;RDimPRefined, BSDegreePRefined&gt;,</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                  ddc::NonUniformBSplines&lt;RDimPRefined, BSDegreePRefined&gt;&gt;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                  ddc::UniformBSplines&lt;ThetaRefined, BSDegreePRefined&gt;,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                  ddc::NonUniformBSplines&lt;ThetaRefined, BSDegreePRefined&gt;&gt;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    {</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    };</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplineRBoundaryRefined_min = SplineRPBuilder::builder_type1::s_bc_xmin;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplineRBoundaryRefined_max = SplineRPBuilder::builder_type1::s_bc_xmax;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplinePBoundaryRefined_min = SplineRPBuilder::builder_type2::s_bc_xmin;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplinePBoundaryRefined_max = SplineRPBuilder::builder_type2::s_bc_xmax;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr UniformMeshR = ddc::is_uniform_point_sampling_v&lt;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keyword">typename</span> SplineRPBuilder::interpolation_discrete_dimension_type1&gt;;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr UniformMeshP = ddc::is_uniform_point_sampling_v&lt;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keyword">typename</span> SplineRPBuilder::interpolation_discrete_dimension_type2&gt;;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">  152</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">IDimRRefined</a></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        : std::conditional_t&lt;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                  UniformMeshR,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                  ddc::UniformPointSampling&lt;RDimRRefined&gt;,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                  ddc::NonUniformPointSampling&lt;RDimRRefined&gt;&gt;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    {</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    };</div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">  159</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">IDimPRefined</a></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        : std::conditional_t&lt;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                  UniformMeshP,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                  ddc::UniformPointSampling&lt;RDimPRefined&gt;,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                  ddc::NonUniformPointSampling&lt;RDimPRefined&gt;&gt;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    {</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    };</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">using</span> REvalBoundary = ddc::ConstantExtrapolationRule&lt;RDimRRefined, RDimPRefined&gt;;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">using</span> SplineRPBuilderRefined = ddc::SplineBuilder2D&lt;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a>,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplinePRefined.html">BSplinePRefined</a>,</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">IDimRRefined</a>,</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">IDimPRefined</a>,</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            SplineRBoundaryRefined_min,</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            SplineRBoundaryRefined_max,</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            SplinePBoundaryRefined_min,</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            SplinePBoundaryRefined_max,</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            ddc::SplineSolver::LAPACK,</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">IDimRRefined</a>,</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">IDimPRefined</a>&gt;;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">using</span> SplineRPEvaluatorRefined = ddc::SplineEvaluator2D&lt;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a>,</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplinePRefined.html">BSplinePRefined</a>,</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">IDimRRefined</a>,</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">IDimPRefined</a>,</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            REvalBoundary,</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            REvalBoundary,</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimPRefined&gt;,</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            ddc::PeriodicExtrapolationRule&lt;RDimPRefined&gt;,</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">IDimRRefined</a>,</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">IDimPRefined</a>&gt;;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keyword">using</span> CoordRRefined = ddc::Coordinate&lt;RDimRRefined&gt;;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keyword">using</span> CoordPRefined = ddc::Coordinate&lt;RDimPRefined&gt;;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keyword">using</span> CoordRPRefined = ddc::Coordinate&lt;RDimRRefined, RDimPRefined&gt;;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplineRBoundaryRefined_min</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            = SplineRThetaBuilder::builder_type1::s_bc_xmin;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplineRBoundaryRefined_max</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            = SplineRThetaBuilder::builder_type1::s_bc_xmax;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplinePBoundaryRefined_min</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            = SplineRThetaBuilder::builder_type2::s_bc_xmin;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> constexpr SplinePBoundaryRefined_max</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            = SplineRThetaBuilder::builder_type2::s_bc_xmax;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr UniformMeshR = ddc::is_uniform_point_sampling_v&lt;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keyword">typename</span> SplineRThetaBuilder::interpolation_discrete_dimension_type1&gt;;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr UniformMeshP = ddc::is_uniform_point_sampling_v&lt;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keyword">typename</span> SplineRThetaBuilder::interpolation_discrete_dimension_type2&gt;;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">  156</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">GridRRefined</a></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        : std::conditional_t&lt;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                  UniformMeshR,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                  ddc::UniformPointSampling&lt;RRefined&gt;,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                  ddc::NonUniformPointSampling&lt;RRefined&gt;&gt;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    };</div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">  163</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">GridThetaRefined</a></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        : std::conditional_t&lt;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                  UniformMeshP,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                  ddc::UniformPointSampling&lt;ThetaRefined&gt;,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                  ddc::NonUniformPointSampling&lt;ThetaRefined&gt;&gt;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    };</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">using</span> REvalBoundary = ddc::ConstantExtrapolationRule&lt;RRefined, ThetaRefined&gt;;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keyword">using</span> SplineRThetaBuilderRefined = ddc::SplineBuilder2D&lt;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a>,</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineThetaRefined.html">BSplineThetaRefined</a>,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">GridRRefined</a>,</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">GridThetaRefined</a>,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            SplineRBoundaryRefined_min,</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            SplineRBoundaryRefined_max,</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            SplinePBoundaryRefined_min,</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            SplinePBoundaryRefined_max,</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            ddc::SplineSolver::LAPACK,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">GridRRefined</a>,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">GridThetaRefined</a>&gt;;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keyword">using</span> SplineRThetaEvaluatorRefined = ddc::SplineEvaluator2D&lt;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a>,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineThetaRefined.html">BSplineThetaRefined</a>,</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">GridRRefined</a>,</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">GridThetaRefined</a>,</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            REvalBoundary,</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            REvalBoundary,</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            ddc::PeriodicExtrapolationRule&lt;ThetaRefined&gt;,</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            ddc::PeriodicExtrapolationRule&lt;ThetaRefined&gt;,</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">GridRRefined</a>,</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">GridThetaRefined</a>&gt;;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">using</span> SplineInterpPointsRRefined = ddc::GrevilleInterpolationPoints&lt;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a>,</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            SplineRBoundaryRefined_min,</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            SplineRBoundaryRefined_max&gt;;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">using</span> SplineInterpPointsPRefined = ddc::GrevilleInterpolationPoints&lt;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplinePRefined.html">BSplinePRefined</a>,</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            SplinePBoundaryRefined_min,</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            SplinePBoundaryRefined_max&gt;;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keyword">using</span> BSDomainRRefined = ddc::DiscreteDomain&lt;BSplineRRefined&gt;;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keyword">using</span> BSDomainPRefined = ddc::DiscreteDomain&lt;BSplinePRefined&gt;;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">using</span> BSDomainRPRefined = ddc::DiscreteDomain&lt;BSplineRRefined, BSplinePRefined&gt;;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">using</span> CoordRRefined = ddc::Coordinate&lt;RRefined&gt;;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">using</span> CoordThetaRefined = ddc::Coordinate&lt;ThetaRefined&gt;;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keyword">using</span> CoordRThetaRefined = ddc::Coordinate&lt;RRefined, ThetaRefined&gt;;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">using</span> SplineInterpThetaointsRRefined = ddc::GrevilleInterpolationPoints&lt;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">BSplineRRefined</a>,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            SplineRBoundaryRefined_min,</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            SplineRBoundaryRefined_max&gt;;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keyword">using</span> SplineInterpThetaointsThetaRefined = ddc::GrevilleInterpolationPoints&lt;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1BSplineThetaRefined.html">BSplineThetaRefined</a>,</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            SplinePBoundaryRefined_min,</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            SplinePBoundaryRefined_max&gt;;</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">using</span> IndexRRefined = ddc::DiscreteElement&lt;IDimRRefined&gt;;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">using</span> IndexPRefined = ddc::DiscreteElement&lt;IDimPRefined&gt;;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">using</span> IndexRPRefined = ddc::DiscreteElement&lt;IDimRRefined, IDimPRefined&gt;;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">using</span> BSIdxRangeRRefined = ddc::DiscreteDomain&lt;BSplineRRefined&gt;;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">using</span> BSIdxRangeThetaRefined = ddc::DiscreteDomain&lt;BSplineThetaRefined&gt;;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">using</span> BSIdxRangeRThetaRefined = ddc::DiscreteDomain&lt;BSplineRRefined, BSplineThetaRefined&gt;;</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">using</span> IVectRRefined = ddc::DiscreteVector&lt;IDimRRefined&gt;;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keyword">using</span> IVectPRefined = ddc::DiscreteVector&lt;IDimPRefined&gt;;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keyword">using</span> IVectRPRefined = ddc::DiscreteVector&lt;IDimRRefined, IDimPRefined&gt;;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">using</span> IdxRRefined = ddc::DiscreteElement&lt;GridRRefined&gt;;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keyword">using</span> IdxThetaRefined = ddc::DiscreteElement&lt;GridThetaRefined&gt;;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keyword">using</span> IdxRThetaRefined = ddc::DiscreteElement&lt;GridRRefined, GridThetaRefined&gt;;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">using</span> IDomainRRefined = ddc::DiscreteDomain&lt;IDimRRefined&gt;;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keyword">using</span> IDomainPRefined = ddc::DiscreteDomain&lt;IDimPRefined&gt;;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">using</span> IDomainRPRefined = ddc::DiscreteDomain&lt;IDimRRefined, IDimPRefined&gt;;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">using</span> IdxStepRRefined = ddc::DiscreteVector&lt;GridRRefined&gt;;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keyword">using</span> IdxStepThetaRefined = ddc::DiscreteVector&lt;GridThetaRefined&gt;;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">using</span> IdxStepRThetaRefined = ddc::DiscreteVector&lt;GridRRefined, GridThetaRefined&gt;;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keyword">using</span> spline_domain = ddc::DiscreteDomain&lt;BSplineR, BSplineP&gt;;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">  235</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a> = std::array&lt;std::array&lt;double, 2&gt;, 2&gt;;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    IDomainRPRefined <span class="keyword">const</span> m_refined_domain;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    REvalBoundary <span class="keyword">const</span> boundary_condition_r_left;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    REvalBoundary <span class="keyword">const</span> boundary_condition_r_right;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    SplineRPEvaluatorRefined <span class="keyword">const</span> refined_evaluator;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html">RDimXRefined</a>,</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html">RDimYRefined</a>,</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            SplineRPBuilderRefined,</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            SplineRPEvaluatorRefined&gt; <span class="keyword">const</span> m_mapping;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimXRefined&gt; to_refined(ddc::Coordinate&lt;RDimX&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    {</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimXRefined&gt;(ddc::get&lt;RDimX&gt;(coord));</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    }</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimYRefined&gt; to_refined(ddc::Coordinate&lt;RDimY&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimYRefined&gt;(ddc::get&lt;RDimY&gt;(coord));</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimXRefined, RDimYRefined&gt; to_refined(</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            ddc::Coordinate&lt;RDimX, RDimY&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    {</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;RDimX&gt;(coord);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;RDimY&gt;(coord);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimXRefined, RDimYRefined&gt;(coord1, coord2);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> CoordRRefined to_refined(ddc::Coordinate&lt;RDimR&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    {</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">return</span> CoordRRefined(ddc::get&lt;RDimR&gt;(coord));</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> CoordPRefined to_refined(ddc::Coordinate&lt;RDimP&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keywordflow">return</span> CoordPRefined(ddc::get&lt;RDimP&gt;(coord));</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> CoordRPRefined to_refined(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;RDimR&gt;(coord);</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;RDimP&gt;(coord);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">return</span> CoordRPRefined(coord1, coord2);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    }</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimX&gt; from_refined(ddc::Coordinate&lt;RDimXRefined&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    {</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimX&gt;(ddc::get&lt;RDimXRefined&gt;(coord));</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    }</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimY&gt; from_refined(ddc::Coordinate&lt;RDimYRefined&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    {</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimY&gt;(ddc::get&lt;RDimYRefined&gt;(coord));</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimX, RDimY&gt; from_refined(</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            ddc::Coordinate&lt;RDimXRefined, RDimYRefined&gt; <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;RDimXRefined&gt;(coord);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;RDimYRefined&gt;(coord);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimX, RDimY&gt;(coord1, coord2);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimR&gt; from_refined(CoordRRefined <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimR&gt;(ddc::get&lt;RDimRRefined&gt;(coord));</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimP&gt; from_refined(CoordPRefined <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    {</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimP&gt;(ddc::get&lt;RDimPRefined&gt;(coord));</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    }</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;RDimR, RDimP&gt; from_refined(CoordRPRefined <span class="keyword">const</span>&amp; coord)</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    {</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;RDimRRefined&gt;(coord);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;RDimPRefined&gt;(coord);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;RDimR, RDimP&gt;(coord1, coord2);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#afc2031614bda057a5d97e89ad44fe0f2">  335</a></span>&#160;    <a class="code" href="classRefinedDiscreteToCartesian.html#afc2031614bda057a5d97e89ad44fe0f2">RefinedDiscreteToCartesian</a>(</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            IDomainRPRefined <span class="keyword">const</span>&amp; refined_domain,</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            ddc::Chunk&lt;double, BSDomainRPRefined&gt;&amp;&amp; curvilinear_to_x,</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            ddc::Chunk&lt;double, BSDomainRPRefined&gt;&amp;&amp; curvilinear_to_y,</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            CoordRRefined r_min,</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            CoordRRefined r_max)</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        : m_refined_domain(refined_domain)</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        , boundary_condition_r_left(r_min)</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        , boundary_condition_r_right(r_max)</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        , refined_evaluator(</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                  boundary_condition_r_left,</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                  boundary_condition_r_right,</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                  ddc::PeriodicExtrapolationRule&lt;<a class="code" href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html">RDimPRefined</a>&gt;(),</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                  ddc::PeriodicExtrapolationRule&lt;<a class="code" href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html">RDimPRefined</a>&gt;())</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        , m_mapping(std::move(curvilinear_to_x), std::move(curvilinear_to_y), refined_evaluator)</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#ae5bba01bd6c921ef16dc603188003936">  363</a></span>&#160;    <a class="code" href="classRefinedDiscreteToCartesian.html#ae5bba01bd6c921ef16dc603188003936">RefinedDiscreteToCartesian</a>(<a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&amp;&amp; x) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00372"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#ae29f077f94f09fc84bd19d45f8e7e225">  372</a></span>&#160;    <a class="code" href="classRefinedDiscreteToCartesian.html#ae29f077f94f09fc84bd19d45f8e7e225">RefinedDiscreteToCartesian</a>(<a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> <span class="keyword">const</span>&amp; x) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a0f901e23b2dfd8a35174d35fdd7ba4b5">  388</a></span>&#160;    ddc::Coordinate&lt;RDimX, RDimY&gt; <a class="code" href="classRefinedDiscreteToCartesian.html#a0f901e23b2dfd8a35174d35fdd7ba4b5">operator()</a>(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    {</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keywordflow">return</span> from_refined(m_mapping(to_refined(coord)));</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
-<div class="line"><a name="l00413"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#aaedfa0d22464f78665eb0065a985edd3">  413</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRefinedDiscreteToCartesian.html#aaedfa0d22464f78665eb0065a985edd3">jacobian_matrix</a>(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord, <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a>&amp; matrix) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    {</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        m_mapping.jacobian_matrix(to_refined(coord), matrix);</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    }</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
-<div class="line"><a name="l00429"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a1c1f98fdaf4b64cb7084909773a85664">  429</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a1c1f98fdaf4b64cb7084909773a85664">jacobian_11</a>(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    {</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_11(to_refined(coord));</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    }</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a7c5f9aada92d9fdb721f49963ed4c931">  445</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a7c5f9aada92d9fdb721f49963ed4c931">jacobian_12</a>(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    {</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_12(to_refined(coord));</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    }</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
-<div class="line"><a name="l00461"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a308b497ac063952739c487bdce48145c">  461</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a308b497ac063952739c487bdce48145c">jacobian_21</a>(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    {</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_21(to_refined(coord));</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    }</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
-<div class="line"><a name="l00477"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#ac688e376939b25dae506045883181fb5">  477</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#ac688e376939b25dae506045883181fb5">jacobian_22</a>(ddc::Coordinate&lt;RDimR, RDimP&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    {</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_22(to_refined(coord));</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    }</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
-<div class="line"><a name="l00498"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">  498</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">to_pseudo_cartesian_jacobian_center_matrix</a>(</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;            ddc::DiscreteDomain&lt;IDimR, IDimP&gt; <span class="keyword">const</span>&amp; grid,</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;            <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a>&amp; matrix)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;        m_mapping.to_pseudo_cartesian_jacobian_center_matrix(m_refined_domain, matrix);</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;    }</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; </div>
-<div class="line"><a name="l00516"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a2db78ed9508f2ba5653cbbae7a5fe0b1">  516</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a2db78ed9508f2ba5653cbbae7a5fe0b1">to_pseudo_cartesian_jacobian_11_center</a>(</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;            ddc::DiscreteDomain&lt;IDimR, IDimP&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>;</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>);</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>[0][0];</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;    }</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160; </div>
-<div class="line"><a name="l00535"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a9ccad9ea32431d2129672501ef9ae453">  535</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a9ccad9ea32431d2129672501ef9ae453">to_pseudo_cartesian_jacobian_12_center</a>(</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;            ddc::DiscreteDomain&lt;IDimR, IDimP&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>;</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>);</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>[0][1];</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    }</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160; </div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160; </div>
-<div class="line"><a name="l00554"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a0f14e02728459802da5197828535c1e2">  554</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a0f14e02728459802da5197828535c1e2">to_pseudo_cartesian_jacobian_21_center</a>(</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;            ddc::DiscreteDomain&lt;IDimR, IDimP&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>;</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>);</div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>[1][0];</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;    }</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160; </div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160; </div>
-<div class="line"><a name="l00573"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a663d2043b6fd23ddbb86815f70f8edf4">  573</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a663d2043b6fd23ddbb86815f70f8edf4">to_pseudo_cartesian_jacobian_22_center</a>(</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;            ddc::DiscreteDomain&lt;IDimR, IDimP&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;        ddc::DiscreteDomain&lt;IDimP&gt; <span class="keyword">const</span> theta_domain = ddc::select&lt;IDimP&gt;(grid);</div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160; </div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>;</div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>);</div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">jacobian</a>[1][1];</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;    }</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160; </div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; </div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160; </div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
-<div class="line"><a name="l00602"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a0b3349bb1ae9dd6fd6f9e92ee058646f">  602</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> <a class="code" href="classRefinedDiscreteToCartesian.html#a0b3349bb1ae9dd6fd6f9e92ee058646f">analytical_to_refined</a>(</div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;            ddc::DiscreteDomain&lt;IDimR, IDimP&gt; <span class="keyword">const</span>&amp; domain)</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;    {</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> rmin = ddc::discrete_space&lt;BSplineR&gt;().rmin();</div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> rmax = ddc::discrete_space&lt;BSplineR&gt;().rmax();</div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160; </div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> pmin = ddc::discrete_space&lt;BSplineP&gt;().rmin();</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> pmax = ddc::discrete_space&lt;BSplineP&gt;().rmax();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keyword">using</span> IdxRangeRRefined = ddc::DiscreteDomain&lt;GridRRefined&gt;;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keyword">using</span> IdxRangeThetaRefined = ddc::DiscreteDomain&lt;GridThetaRefined&gt;;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keyword">using</span> IdxRangeRThetaRefined = ddc::DiscreteDomain&lt;GridRRefined, GridThetaRefined&gt;;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">using</span> spline_domain = ddc::DiscreteDomain&lt;BSplineR, BSplineTheta&gt;;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">  239</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a> = std::array&lt;std::array&lt;double, 2&gt;, 2&gt;;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    IdxRangeRThetaRefined <span class="keyword">const</span> m_refined_domain;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    REvalBoundary <span class="keyword">const</span> boundary_condition_r_left;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    REvalBoundary <span class="keyword">const</span> boundary_condition_r_right;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    SplineRThetaEvaluatorRefined <span class="keyword">const</span> refined_evaluator;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1XRefined.html">XRefined</a>,</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <a class="code" href="structRefinedDiscreteToCartesian_1_1YRefined.html">YRefined</a>,</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            SplineRThetaBuilderRefined,</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            SplineRThetaEvaluatorRefined&gt; <span class="keyword">const</span> m_mapping;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;XRefined&gt; to_refined(ddc::Coordinate&lt;X&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    {</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;XRefined&gt;(ddc::get&lt;X&gt;(coord));</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;YRefined&gt; to_refined(ddc::Coordinate&lt;Y&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;YRefined&gt;(ddc::get&lt;Y&gt;(coord));</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;XRefined, YRefined&gt; to_refined(ddc::Coordinate&lt;X, Y&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    {</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;X&gt;(coord);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;Y&gt;(coord);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;XRefined, YRefined&gt;(coord1, coord2);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> CoordRRefined to_refined(ddc::Coordinate&lt;R&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordflow">return</span> CoordRRefined(ddc::get&lt;R&gt;(coord));</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> CoordThetaRefined to_refined(ddc::Coordinate&lt;Theta&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">return</span> CoordThetaRefined(ddc::get&lt;Theta&gt;(coord));</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> CoordRThetaRefined to_refined(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;R&gt;(coord);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;Theta&gt;(coord);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keywordflow">return</span> CoordRThetaRefined(coord1, coord2);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    }</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;X&gt; from_refined(ddc::Coordinate&lt;XRefined&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;X&gt;(ddc::get&lt;XRefined&gt;(coord));</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;Y&gt; from_refined(ddc::Coordinate&lt;YRefined&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    {</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;Y&gt;(ddc::get&lt;YRefined&gt;(coord));</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;X, Y&gt; from_refined(</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            ddc::Coordinate&lt;XRefined, YRefined&gt; <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    {</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;XRefined&gt;(coord);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;YRefined&gt;(coord);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;X, Y&gt;(coord1, coord2);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;R&gt; from_refined(CoordRRefined <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    {</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;R&gt;(ddc::get&lt;RRefined&gt;(coord));</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;Theta&gt; from_refined(CoordThetaRefined <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;Theta&gt;(ddc::get&lt;ThetaRefined&gt;(coord));</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> ddc::Coordinate&lt;R, Theta&gt; from_refined(CoordRThetaRefined <span class="keyword">const</span>&amp; coord)</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord1 = ddc::get&lt;RRefined&gt;(coord);</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> coord2 = ddc::get&lt;ThetaRefined&gt;(coord);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> ddc::Coordinate&lt;R, Theta&gt;(coord1, coord2);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    }</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a81787f5a950bd9b449912e4ad510ded5">  338</a></span>&#160;    <a class="code" href="classRefinedDiscreteToCartesian.html#a81787f5a950bd9b449912e4ad510ded5">RefinedDiscreteToCartesian</a>(</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            IdxRangeRThetaRefined <span class="keyword">const</span>&amp; refined_domain,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            ddc::Chunk&lt;double, BSIdxRangeRThetaRefined&gt;&amp;&amp; curvilinear_to_x,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            ddc::Chunk&lt;double, BSIdxRangeRThetaRefined&gt;&amp;&amp; curvilinear_to_y,</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            CoordRRefined r_min,</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            CoordRRefined r_max)</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        : m_refined_domain(refined_domain)</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        , boundary_condition_r_left(r_min)</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        , boundary_condition_r_right(r_max)</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        , refined_evaluator(</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                  boundary_condition_r_left,</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                  boundary_condition_r_right,</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                  ddc::PeriodicExtrapolationRule&lt;<a class="code" href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html">ThetaRefined</a>&gt;(),</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                  ddc::PeriodicExtrapolationRule&lt;<a class="code" href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html">ThetaRefined</a>&gt;())</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        , m_mapping(std::move(curvilinear_to_x), std::move(curvilinear_to_y), refined_evaluator)</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00366"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a2e8c64f4bb6cd12f545c20110b85fd45">  366</a></span>&#160;    <a class="code" href="classRefinedDiscreteToCartesian.html#a2e8c64f4bb6cd12f545c20110b85fd45">RefinedDiscreteToCartesian</a>(<a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&amp;&amp; x) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#afc571d681ee92b43dc064489eefb6057">  375</a></span>&#160;    <a class="code" href="classRefinedDiscreteToCartesian.html#afc571d681ee92b43dc064489eefb6057">RefinedDiscreteToCartesian</a>(<a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> <span class="keyword">const</span>&amp; x) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a4e58885849c1ac4dbe3645abeaea7b92">  391</a></span>&#160;    ddc::Coordinate&lt;X, Y&gt; <a class="code" href="classRefinedDiscreteToCartesian.html#a4e58885849c1ac4dbe3645abeaea7b92">operator()</a>(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    {</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keywordflow">return</span> from_refined(m_mapping(to_refined(coord)));</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    }</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00416"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a9623b047d516e49e3fb34a01487f1a83">  416</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a9623b047d516e49e3fb34a01487f1a83">jacobian_matrix</a>(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord, <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a>&amp; matrix) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    {</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        m_mapping.jacobian_matrix(to_refined(coord), matrix);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    }</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a5b57ffd28b393a24a386dab24e3f9bdf">  432</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a5b57ffd28b393a24a386dab24e3f9bdf">jacobian_11</a>(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    {</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_11(to_refined(coord));</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
+<div class="line"><a name="l00448"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#ad2e12513c735ad78a89e3116ae755af1">  448</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#ad2e12513c735ad78a89e3116ae755af1">jacobian_12</a>(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    {</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_12(to_refined(coord));</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    }</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
+<div class="line"><a name="l00464"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a09f93b21f5fb019899fdcc5f4457e9fd">  464</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a09f93b21f5fb019899fdcc5f4457e9fd">jacobian_21</a>(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    {</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_21(to_refined(coord));</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    }</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a602f0892282d3ffbc11b483cac1a39fb">  480</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a602f0892282d3ffbc11b483cac1a39fb">jacobian_22</a>(ddc::Coordinate&lt;R, Theta&gt; <span class="keyword">const</span>&amp; coord) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    {</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;        <span class="keywordflow">return</span> m_mapping.jacobian_22(to_refined(coord));</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    }</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; </div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; </div>
+<div class="line"><a name="l00501"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">  501</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">to_pseudo_cartesian_jacobian_center_matrix</a>(</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;            ddc::DiscreteDomain&lt;GridR, GridTheta&gt; <span class="keyword">const</span>&amp; grid,</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;            <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a>&amp; matrix)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        m_mapping.to_pseudo_cartesian_jacobian_center_matrix(m_refined_domain, matrix);</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;    }</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160; </div>
+<div class="line"><a name="l00519"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#abd005086361751f3fe0de60313ac63ef">  519</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#abd005086361751f3fe0de60313ac63ef">to_pseudo_cartesian_jacobian_11_center</a>(</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;            ddc::DiscreteDomain&lt;GridR, GridTheta&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>;</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>);</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>[0][0];</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    }</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160; </div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160; </div>
+<div class="line"><a name="l00538"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#aaa317f716f0a60f2218f25a3baad22ee">  538</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#aaa317f716f0a60f2218f25a3baad22ee">to_pseudo_cartesian_jacobian_12_center</a>(</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            ddc::DiscreteDomain&lt;GridR, GridTheta&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>;</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>);</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>[0][1];</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;    }</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; </div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a3774fbe1a92264ef407afa4619f40499">  557</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a3774fbe1a92264ef407afa4619f40499">to_pseudo_cartesian_jacobian_21_center</a>(</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;            ddc::DiscreteDomain&lt;GridR, GridTheta&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>;</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>);</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>[1][0];</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;    }</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160; </div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160; </div>
+<div class="line"><a name="l00576"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a7e2657fd7776957694c68f9bdd2a080f">  576</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a7e2657fd7776957694c68f9bdd2a080f">to_pseudo_cartesian_jacobian_22_center</a>(</div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;            ddc::DiscreteDomain&lt;GridR, GridTheta&gt; <span class="keyword">const</span>&amp; grid)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;        ddc::DiscreteDomain&lt;GridTheta&gt; <span class="keyword">const</span> theta_domain = ddc::select&lt;GridTheta&gt;(grid);</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; </div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">Matrix_2x2</a> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>;</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;        <a class="code" href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">to_pseudo_cartesian_jacobian_center_matrix</a>(grid, <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>);</div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">jacobian</a>[1][1];</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;    }</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160; </div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160; </div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160; </div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
+<div class="line"><a name="l00605"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesian.html#a275ae6787f0288d27e6321e42db5002e">  605</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a> <a class="code" href="classRefinedDiscreteToCartesian.html#a275ae6787f0288d27e6321e42db5002e">analytical_to_refined</a>(</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;            ddc::DiscreteDomain&lt;GridR, GridTheta&gt; <span class="keyword">const</span>&amp; domain)</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;    {</div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> rmin = ddc::discrete_space&lt;BSplineR&gt;().rmin();</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> rmax = ddc::discrete_space&lt;BSplineR&gt;().rmax();</div>
 <div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160; </div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;        <span class="comment">// Create refined grid</span></div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;        CoordRRefined <span class="keyword">const</span> r_min(rmin);</div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;        CoordRRefined <span class="keyword">const</span> r_max(rmax);</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;        IVectRRefined <span class="keyword">const</span> r_size(Nr);</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; </div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        CoordPRefined <span class="keyword">const</span> p_min(pmin);</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        CoordPRefined <span class="keyword">const</span> p_max(pmax);</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        IVectPRefined <span class="keyword">const</span> p_size(Nt);</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160; </div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;        <span class="keywordflow">if</span> constexpr (BSplineRRefined::is_uniform()) {</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;            ddc::init_discrete_space&lt;BSplineRRefined&gt;(r_min, r_max, r_size);</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;            ddc::init_discrete_space&lt;BSplinePRefined&gt;(p_min, p_max, p_size);</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dr((r_max - r_min) / r_size);</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dp((p_max - p_min) / p_size);</div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;            std::vector&lt;CoordRRefined&gt; r_knots(r_size + 1);</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;            std::vector&lt;CoordPRefined&gt; p_knots(p_size + 1);</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> pmin = ddc::discrete_space&lt;BSplineTheta&gt;().rmin();</div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> pmax = ddc::discrete_space&lt;BSplineTheta&gt;().rmax();</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160; </div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;        <span class="comment">// Create refined grid</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;        CoordRRefined <span class="keyword">const</span> r_min(rmin);</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        CoordRRefined <span class="keyword">const</span> r_max(rmax);</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        IdxStepRRefined <span class="keyword">const</span> r_size(Nr);</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160; </div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        CoordThetaRefined <span class="keyword">const</span> theta_min(pmin);</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;        CoordThetaRefined <span class="keyword">const</span> theta_max(pmax);</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;        IdxStepThetaRefined <span class="keyword">const</span> theta_size(Nt);</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160; </div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        <span class="keywordflow">if</span> constexpr (BSplineRRefined::is_uniform()) {</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;            ddc::init_discrete_space&lt;BSplineRRefined&gt;(r_min, r_max, r_size);</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;            ddc::init_discrete_space&lt;BSplineThetaRefined&gt;(theta_min, theta_max, theta_size);</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dr((r_max - r_min) / r_size);</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> dp((theta_max - theta_min) / theta_size);</div>
 <div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160; </div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; r_size + 1; ++i) {</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;                r_knots[i] = CoordRRefined(r_min + i * dr);</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;            }</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; p_size + 1; ++i) {</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                p_knots[i] = CoordPRefined(p_min + i * dp);</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;            std::vector&lt;CoordRRefined&gt; r_knots(r_size + 1);</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;            std::vector&lt;CoordThetaRefined&gt; theta_knots(theta_size + 1);</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; r_size + 1; ++i) {</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                r_knots[i] = CoordRRefined(r_min + i * dr);</div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;            }</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160; </div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;            ddc::init_discrete_space&lt;BSplineRRefined&gt;(r_knots);</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;            ddc::init_discrete_space&lt;BSplinePRefined&gt;(p_knots);</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        }</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160; </div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;        ddc::init_discrete_space&lt;IDimRRefined&gt;(</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;                SplineInterpPointsRRefined::template get_sampling&lt;IDimRRefined&gt;());</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;        ddc::init_discrete_space&lt;IDimPRefined&gt;(</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;                SplineInterpPointsPRefined::template get_sampling&lt;IDimPRefined&gt;());</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160; </div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        IDomainRRefined <span class="keyword">const</span> interpolation_domain_R(</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;                SplineInterpPointsRRefined::template get_domain&lt;IDimRRefined&gt;());</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;        IDomainPRefined <span class="keyword">const</span> interpolation_domain_P(</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;                SplineInterpPointsPRefined::template get_domain&lt;IDimPRefined&gt;());</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        IDomainRPRefined <span class="keyword">const</span> refined_domain(interpolation_domain_R, interpolation_domain_P);</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160; </div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;        <span class="comment">// Operators on the refined grid</span></div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        SplineRPBuilderRefined <span class="keyword">const</span> refined_builder(refined_domain);</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; theta_size + 1; ++i) {</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;                theta_knots[i] = CoordThetaRefined(theta_min + i * dp);</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;            }</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160; </div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;            ddc::init_discrete_space&lt;BSplineRRefined&gt;(r_knots);</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;            ddc::init_discrete_space&lt;BSplineThetaRefined&gt;(theta_knots);</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        }</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;        ddc::init_discrete_space&lt;GridRRefined&gt;(</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;                SplineInterpThetaointsRRefined::template get_sampling&lt;GridRRefined&gt;());</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        ddc::init_discrete_space&lt;GridThetaRefined&gt;(</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;                SplineInterpThetaointsThetaRefined::template get_sampling&lt;GridThetaRefined&gt;());</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160; </div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        IdxRangeRRefined <span class="keyword">const</span> interpolation_domain_R(</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;                SplineInterpThetaointsRRefined::template get_domain&lt;GridRRefined&gt;());</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;        IdxRangeThetaRefined <span class="keyword">const</span> interpolation_domain_P(</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;                SplineInterpThetaointsThetaRefined::template get_domain&lt;GridThetaRefined&gt;());</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        IdxRangeRThetaRefined <span class="keyword">const</span> refined_domain(interpolation_domain_R, interpolation_domain_P);</div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160; </div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;        BSDomainRPRefined <span class="keyword">const</span> spline_domain = refined_builder.spline_domain();</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160; </div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;        <span class="comment">// Compute the B-splines coefficients of the analytical mapping</span></div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;        ddc::Chunk&lt;double, BSDomainRPRefined&gt; curvilinear_to_x_spline(spline_domain);</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;        ddc::Chunk&lt;double, BSDomainRPRefined&gt; curvilinear_to_y_spline(spline_domain);</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;        ddc::Chunk&lt;double, IDomainRPRefined&gt; curvilinear_to_x_vals(refined_domain);</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        ddc::Chunk&lt;double, IDomainRPRefined&gt; curvilinear_to_y_vals(refined_domain);</div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;        ddc::for_each(</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;                refined_builder.interpolation_domain(),</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;                [&amp;](<span class="keyword">typename</span> ddc::DiscreteDomain&lt;IDimRRefined, IDimPRefined&gt;::</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;                            discrete_element_type <span class="keyword">const</span>&amp; el) {</div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;                    ddc::Coordinate&lt;RDimR, RDimP&gt; polar_coord(from_refined(ddc::coordinate(el)));</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;                    ddc::Coordinate&lt;RDimXRefined, RDimYRefined&gt; cart_coord</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;                            = to_refined(analytical_mapping(polar_coord));</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;                    curvilinear_to_x_vals(el) = ddc::select&lt;RDimXRefined&gt;(cart_coord);</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                    curvilinear_to_y_vals(el) = ddc::select&lt;RDimYRefined&gt;(cart_coord);</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;                });</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;        refined_builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;        refined_builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; </div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classRefinedDiscreteToCartesian.html#afc2031614bda057a5d97e89ad44fe0f2">RefinedDiscreteToCartesian</a>(</div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;                refined_domain,</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;                std::move(curvilinear_to_x_spline),</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                std::move(curvilinear_to_y_spline),</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                r_min,</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;                r_max);</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    }</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;};</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;        <span class="comment">// Operators on the refined grid</span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;        SplineRThetaBuilderRefined <span class="keyword">const</span> refined_builder(refined_domain);</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; </div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;        BSIdxRangeRThetaRefined <span class="keyword">const</span> spline_domain = refined_builder.spline_domain();</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;        <span class="comment">// Compute the B-splines coefficients of the analytical mapping</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        ddc::Chunk&lt;double, BSIdxRangeRThetaRefined&gt; curvilinear_to_x_spline(spline_domain);</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;        ddc::Chunk&lt;double, BSIdxRangeRThetaRefined&gt; curvilinear_to_y_spline(spline_domain);</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;        ddc::Chunk&lt;double, IdxRangeRThetaRefined&gt; curvilinear_to_x_vals(refined_domain);</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;        ddc::Chunk&lt;double, IdxRangeRThetaRefined&gt; curvilinear_to_y_vals(refined_domain);</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;        ddc::for_each(</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;                refined_builder.interpolation_domain(),</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;                [&amp;](<span class="keyword">typename</span> ddc::DiscreteDomain&lt;GridRRefined, GridThetaRefined&gt;::</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;                            discrete_element_type <span class="keyword">const</span>&amp; el) {</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;                    ddc::Coordinate&lt;R, Theta&gt; polar_coord(from_refined(ddc::coordinate(el)));</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;                    ddc::Coordinate&lt;XRefined, YRefined&gt; cart_coord</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                            = to_refined(analytical_mapping(polar_coord));</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160; </div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;                    curvilinear_to_x_vals(el) = ddc::select&lt;XRefined&gt;(cart_coord);</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;                    curvilinear_to_y_vals(el) = ddc::select&lt;YRefined&gt;(cart_coord);</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;                });</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        refined_builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;        refined_builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160; </div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classRefinedDiscreteToCartesian.html#a81787f5a950bd9b449912e4ad510ded5">RefinedDiscreteToCartesian</a>(</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                refined_domain,</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;                std::move(curvilinear_to_x_spline),</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;                std::move(curvilinear_to_y_spline),</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                r_min,</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;                r_max);</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    }</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;};</div>
 <div class="ttc" id="aclassCurvilinear2DToCartesian_html"><div class="ttname"><a href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian</a></div><div class="ttdoc">A class for describing curvilinear 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition:</b> curvilinear2d_to_cartesian.hpp:15</div></div>
-<div class="ttc" id="aclassCurvilinear2DToCartesian_html_a8ebbf453340cc02315cc0f67ae798d35"><div class="ttname"><a href="classCurvilinear2DToCartesian.html#a8ebbf453340cc02315cc0f67ae798d35">Curvilinear2DToCartesian&lt; RDimX, RDimY, SplineRPBuilder::continuous_dimension_type1, SplineRPBuilder::continuous_dimension_type2 &gt;::jacobian</a></div><div class="ttdeci">virtual double jacobian(ddc::Coordinate&lt; SplineRPBuilder::continuous_dimension_type1, SplineRPBuilder::continuous_dimension_type2 &gt; const &amp;coord) const</div><div class="ttdoc">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</div><div class="ttdef"><b>Definition:</b> curvilinear2d_to_cartesian.hpp:106</div></div>
+<div class="ttc" id="aclassCurvilinear2DToCartesian_html_ab3bf2839a5d3cc608dfaab4589030e3c"><div class="ttname"><a href="classCurvilinear2DToCartesian.html#ab3bf2839a5d3cc608dfaab4589030e3c">Curvilinear2DToCartesian&lt; X, Y, SplineRThetaBuilder::continuous_dimension_type1, SplineRThetaBuilder::continuous_dimension_type2 &gt;::jacobian</a></div><div class="ttdeci">virtual double jacobian(ddc::Coordinate&lt; SplineRThetaBuilder::continuous_dimension_type1, SplineRThetaBuilder::continuous_dimension_type2 &gt; const &amp;coord) const</div><div class="ttdoc">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</div><div class="ttdef"><b>Definition:</b> curvilinear2d_to_cartesian.hpp:105</div></div>
 <div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition:</b> discrete_mapping_to_cartesian.hpp:30</div></div>
 <div class="ttc" id="aclassRefinedDiscreteToCartesian_html"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a></div><div class="ttdoc">A class for describing refined discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:32</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a0b3349bb1ae9dd6fd6f9e92ee058646f"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a0b3349bb1ae9dd6fd6f9e92ee058646f">RefinedDiscreteToCartesian::analytical_to_refined</a></div><div class="ttdeci">static RefinedDiscreteToCartesian analytical_to_refined(Mapping const &amp;analytical_mapping, ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;domain)</div><div class="ttdoc">Define a RefinedDiscreteToCartesian mapping from an analytical mapping.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:602</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a0f14e02728459802da5197828535c1e2"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a0f14e02728459802da5197828535c1e2">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_21_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_21_center(ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:554</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a0f901e23b2dfd8a35174d35fdd7ba4b5"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a0f901e23b2dfd8a35174d35fdd7ba4b5">RefinedDiscreteToCartesian::operator()</a></div><div class="ttdeci">ddc::Coordinate&lt; RDimX, RDimY &gt; operator()(ddc::Coordinate&lt; RDimR, RDimP &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the physical coordinates from the logical coordinates.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:388</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a188b82d80a44d2d7cdda04c6dce91690"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a188b82d80a44d2d7cdda04c6dce91690">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a></div><div class="ttdeci">void to_pseudo_cartesian_jacobian_center_matrix(ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid, Matrix_2x2 &amp;matrix) const</div><div class="ttdoc">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:498</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a1c1f98fdaf4b64cb7084909773a85664"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a1c1f98fdaf4b64cb7084909773a85664">RefinedDiscreteToCartesian::jacobian_11</a></div><div class="ttdeci">double jacobian_11(ddc::Coordinate&lt; RDimR, RDimP &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (1,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:429</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a1dfe8d2c7873379bc66d95b6e0637d74"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a1dfe8d2c7873379bc66d95b6e0637d74">RefinedDiscreteToCartesian::Matrix_2x2</a></div><div class="ttdeci">std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt; Matrix_2x2</div><div class="ttdoc">Define a 2x2 matrix with an 2D array of an 2D array.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:235</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a2db78ed9508f2ba5653cbbae7a5fe0b1"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a2db78ed9508f2ba5653cbbae7a5fe0b1">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_11_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_11_center(ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:516</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a308b497ac063952739c487bdce48145c"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a308b497ac063952739c487bdce48145c">RefinedDiscreteToCartesian::jacobian_21</a></div><div class="ttdeci">double jacobian_21(ddc::Coordinate&lt; RDimR, RDimP &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (2,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:461</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a663d2043b6fd23ddbb86815f70f8edf4"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a663d2043b6fd23ddbb86815f70f8edf4">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_22_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_22_center(ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:573</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a7c5f9aada92d9fdb721f49963ed4c931"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a7c5f9aada92d9fdb721f49963ed4c931">RefinedDiscreteToCartesian::jacobian_12</a></div><div class="ttdeci">double jacobian_12(ddc::Coordinate&lt; RDimR, RDimP &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (1,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:445</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a9ccad9ea32431d2129672501ef9ae453"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a9ccad9ea32431d2129672501ef9ae453">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_12_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_12_center(ddc::DiscreteDomain&lt; IDimR, IDimP &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:535</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_aaedfa0d22464f78665eb0065a985edd3"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#aaedfa0d22464f78665eb0065a985edd3">RefinedDiscreteToCartesian::jacobian_matrix</a></div><div class="ttdeci">void jacobian_matrix(ddc::Coordinate&lt; RDimR, RDimP &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const final</div><div class="ttdoc">Compute full Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:413</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_ac688e376939b25dae506045883181fb5"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#ac688e376939b25dae506045883181fb5">RefinedDiscreteToCartesian::jacobian_22</a></div><div class="ttdeci">double jacobian_22(ddc::Coordinate&lt; RDimR, RDimP &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (2,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:477</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_ae29f077f94f09fc84bd19d45f8e7e225"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#ae29f077f94f09fc84bd19d45f8e7e225">RefinedDiscreteToCartesian::RefinedDiscreteToCartesian</a></div><div class="ttdeci">RefinedDiscreteToCartesian(RefinedDiscreteToCartesian const &amp;x)=default</div><div class="ttdoc">Instantiate a RefinedDiscreteToCartesian from another temporary RefinedDiscreteToCartesian.</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_ae5bba01bd6c921ef16dc603188003936"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#ae5bba01bd6c921ef16dc603188003936">RefinedDiscreteToCartesian::RefinedDiscreteToCartesian</a></div><div class="ttdeci">RefinedDiscreteToCartesian(RefinedDiscreteToCartesian &amp;&amp;x)=default</div><div class="ttdoc">Instantiate a RefinedDiscreteToCartesian from another RefinedDiscreteToCartesian.</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_afc2031614bda057a5d97e89ad44fe0f2"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#afc2031614bda057a5d97e89ad44fe0f2">RefinedDiscreteToCartesian::RefinedDiscreteToCartesian</a></div><div class="ttdeci">RefinedDiscreteToCartesian(IDomainRPRefined const &amp;refined_domain, ddc::Chunk&lt; double, BSDomainRPRefined &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, BSDomainRPRefined &gt; &amp;&amp;curvilinear_to_y, CoordRRefined r_min, CoordRRefined r_max)</div><div class="ttdoc">Instantiate a RefinedDiscreteToCartesian from the coefficients of 2D splines approximating the mappin...</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:335</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1BSplinePRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1BSplinePRefined.html">RefinedDiscreteToCartesian::BSplinePRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:137</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a09f93b21f5fb019899fdcc5f4457e9fd"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a09f93b21f5fb019899fdcc5f4457e9fd">RefinedDiscreteToCartesian::jacobian_21</a></div><div class="ttdeci">double jacobian_21(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (2,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:464</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a0f182a6c0dd249a6714281d7fe895ccf"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a0f182a6c0dd249a6714281d7fe895ccf">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_center_matrix</a></div><div class="ttdeci">void to_pseudo_cartesian_jacobian_center_matrix(ddc::DiscreteDomain&lt; GridR, GridTheta &gt; const &amp;grid, Matrix_2x2 &amp;matrix) const</div><div class="ttdoc">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:501</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a275ae6787f0288d27e6321e42db5002e"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a275ae6787f0288d27e6321e42db5002e">RefinedDiscreteToCartesian::analytical_to_refined</a></div><div class="ttdeci">static RefinedDiscreteToCartesian analytical_to_refined(Mapping const &amp;analytical_mapping, ddc::DiscreteDomain&lt; GridR, GridTheta &gt; const &amp;domain)</div><div class="ttdoc">Define a RefinedDiscreteToCartesian mapping from an analytical mapping.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:605</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a2e8c64f4bb6cd12f545c20110b85fd45"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a2e8c64f4bb6cd12f545c20110b85fd45">RefinedDiscreteToCartesian::RefinedDiscreteToCartesian</a></div><div class="ttdeci">RefinedDiscreteToCartesian(RefinedDiscreteToCartesian &amp;&amp;x)=default</div><div class="ttdoc">Instantiate a RefinedDiscreteToCartesian from another RefinedDiscreteToCartesian.</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a3774fbe1a92264ef407afa4619f40499"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a3774fbe1a92264ef407afa4619f40499">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_21_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_21_center(ddc::DiscreteDomain&lt; GridR, GridTheta &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:557</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a4e58885849c1ac4dbe3645abeaea7b92"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a4e58885849c1ac4dbe3645abeaea7b92">RefinedDiscreteToCartesian::operator()</a></div><div class="ttdeci">ddc::Coordinate&lt; X, Y &gt; operator()(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the physical coordinates from the logical coordinates.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:391</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a5b57ffd28b393a24a386dab24e3f9bdf"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a5b57ffd28b393a24a386dab24e3f9bdf">RefinedDiscreteToCartesian::jacobian_11</a></div><div class="ttdeci">double jacobian_11(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (1,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:432</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a602f0892282d3ffbc11b483cac1a39fb"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a602f0892282d3ffbc11b483cac1a39fb">RefinedDiscreteToCartesian::jacobian_22</a></div><div class="ttdeci">double jacobian_22(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (2,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:480</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a7e2657fd7776957694c68f9bdd2a080f"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a7e2657fd7776957694c68f9bdd2a080f">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_22_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_22_center(ddc::DiscreteDomain&lt; GridR, GridTheta &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:576</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a81787f5a950bd9b449912e4ad510ded5"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a81787f5a950bd9b449912e4ad510ded5">RefinedDiscreteToCartesian::RefinedDiscreteToCartesian</a></div><div class="ttdeci">RefinedDiscreteToCartesian(IdxRangeRThetaRefined const &amp;refined_domain, ddc::Chunk&lt; double, BSIdxRangeRThetaRefined &gt; &amp;&amp;curvilinear_to_x, ddc::Chunk&lt; double, BSIdxRangeRThetaRefined &gt; &amp;&amp;curvilinear_to_y, CoordRRefined r_min, CoordRRefined r_max)</div><div class="ttdoc">Instantiate a RefinedDiscreteToCartesian from the coefficients of 2D splines approximating the mappin...</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:338</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_a9623b047d516e49e3fb34a01487f1a83"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#a9623b047d516e49e3fb34a01487f1a83">RefinedDiscreteToCartesian::jacobian_matrix</a></div><div class="ttdeci">void jacobian_matrix(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const final</div><div class="ttdoc">Compute full Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:416</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_aaa317f716f0a60f2218f25a3baad22ee"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#aaa317f716f0a60f2218f25a3baad22ee">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_12_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_12_center(ddc::DiscreteDomain&lt; GridR, GridTheta &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:538</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_abd005086361751f3fe0de60313ac63ef"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#abd005086361751f3fe0de60313ac63ef">RefinedDiscreteToCartesian::to_pseudo_cartesian_jacobian_11_center</a></div><div class="ttdeci">double to_pseudo_cartesian_jacobian_11_center(ddc::DiscreteDomain&lt; GridR, GridTheta &gt; const &amp;grid) const</div><div class="ttdoc">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:519</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_ad2e12513c735ad78a89e3116ae755af1"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#ad2e12513c735ad78a89e3116ae755af1">RefinedDiscreteToCartesian::jacobian_12</a></div><div class="ttdeci">double jacobian_12(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the (1,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:448</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_afb5ec3a2cd0118c21c9eeee21136a8b1"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#afb5ec3a2cd0118c21c9eeee21136a8b1">RefinedDiscreteToCartesian::Matrix_2x2</a></div><div class="ttdeci">std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt; Matrix_2x2</div><div class="ttdoc">Define a 2x2 matrix with an 2D array of an 2D array.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:239</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesian_html_afc571d681ee92b43dc064489eefb6057"><div class="ttname"><a href="classRefinedDiscreteToCartesian.html#afc571d681ee92b43dc064489eefb6057">RefinedDiscreteToCartesian::RefinedDiscreteToCartesian</a></div><div class="ttdeci">RefinedDiscreteToCartesian(RefinedDiscreteToCartesian const &amp;x)=default</div><div class="ttdoc">Instantiate a RefinedDiscreteToCartesian from another temporary RefinedDiscreteToCartesian.</div></div>
+<div class="ttc" id="astructGridR_html"><div class="ttname"><a href="structGridR.html">GridR</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:116</div></div>
+<div class="ttc" id="astructGridTheta_html"><div class="ttname"><a href="structGridTheta.html">GridTheta</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:119</div></div>
+<div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:31</div></div>
 <div class="ttc" id="astructRefinedDiscreteToCartesian_1_1BSplineRRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1BSplineRRefined.html">RefinedDiscreteToCartesian::BSplineRRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:130</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1IDimPRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1IDimPRefined.html">RefinedDiscreteToCartesian::IDimPRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:164</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1IDimRRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1IDimRRefined.html">RefinedDiscreteToCartesian::IDimRRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:157</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimPRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html">RefinedDiscreteToCartesian::RDimPRefined</a></div><div class="ttdoc">Define periodic real refined P dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:94</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimPRefined_html_ad514de051dbba29c434430eff517006e"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimPRefined.html#ad514de051dbba29c434430eff517006e">RefinedDiscreteToCartesian::RDimPRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:99</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimRRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimRRefined.html">RefinedDiscreteToCartesian::RDimRRefined</a></div><div class="ttdoc">Define non periodic real refined R dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:83</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimRRefined_html_a6383c5fd3f13ecc58c08b8aa0b2283ca"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimRRefined.html#a6383c5fd3f13ecc58c08b8aa0b2283ca">RefinedDiscreteToCartesian::RDimRRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:88</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimXRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html">RefinedDiscreteToCartesian::RDimXRefined</a></div><div class="ttdoc">Define non periodic real refined X dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:105</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimXRefined_html_a5541d5de608d7fd975e314d933af9d72"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimXRefined.html#a5541d5de608d7fd975e314d933af9d72">RefinedDiscreteToCartesian::RDimXRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:110</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimYRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html">RefinedDiscreteToCartesian::RDimYRefined</a></div><div class="ttdoc">Define non periodic real refined X dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:116</div></div>
-<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RDimYRefined_html_a0f50a9073257f594f7c0e7cd0ebdaa23"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RDimYRefined.html#a0f50a9073257f594f7c0e7cd0ebdaa23">RefinedDiscreteToCartesian::RDimYRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:121</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1BSplineThetaRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1BSplineThetaRefined.html">RefinedDiscreteToCartesian::BSplineThetaRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:137</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1GridRRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1GridRRefined.html">RefinedDiscreteToCartesian::GridRRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:161</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1GridThetaRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1GridThetaRefined.html">RefinedDiscreteToCartesian::GridThetaRefined</a></div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:168</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RRefined.html">RefinedDiscreteToCartesian::RRefined</a></div><div class="ttdoc">Define non periodic real refined R dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:83</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1RRefined_html_a0f2de6c0d1c935f6d66ba1f971faedb8"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1RRefined.html#a0f2de6c0d1c935f6d66ba1f971faedb8">RefinedDiscreteToCartesian::RRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:88</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1ThetaRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html">RefinedDiscreteToCartesian::ThetaRefined</a></div><div class="ttdoc">Define periodic real refined P dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:94</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1ThetaRefined_html_a109b70e74041c86ee6a58993bb1fbfe3"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1ThetaRefined.html#a109b70e74041c86ee6a58993bb1fbfe3">RefinedDiscreteToCartesian::ThetaRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:99</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1XRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1XRefined.html">RefinedDiscreteToCartesian::XRefined</a></div><div class="ttdoc">Define non periodic real refined X dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:105</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1XRefined_html_a5f0f173aabf77a3e5dae29d831c6db97"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1XRefined.html#a5f0f173aabf77a3e5dae29d831c6db97">RefinedDiscreteToCartesian::XRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:110</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1YRefined_html"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1YRefined.html">RefinedDiscreteToCartesian::YRefined</a></div><div class="ttdoc">Define non periodic real refined X dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:116</div></div>
+<div class="ttc" id="astructRefinedDiscreteToCartesian_1_1YRefined_html_a6a3078d6071b64c826319b85f4e37b28"><div class="ttname"><a href="structRefinedDiscreteToCartesian_1_1YRefined.html#a6a3078d6071b64c826319b85f4e37b28">RefinedDiscreteToCartesian::YRefined::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> refined_discrete_mapping_to_cartesian.hpp:121</div></div>
+<div class="ttc" id="astructTheta_html"><div class="ttname"><a href="structTheta.html">Theta</a></div><div class="ttdoc">Define periodic real Theta dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:42</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('compute__norms_8hpp_source.html',''); 
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    IdxRange&lt;IDim...&gt; grid = get_idx_range&lt;IDim...&gt;(coefficients);</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ddc::for_each(grid, [&amp;](Idx&lt;IDim...&gt; <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        Coord&lt;typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_p&gt; coord(</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        Coord&lt;typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_theta&gt; coord(</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                ddc::coordinate(idx));</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        coefficients(idx) *= fabs(mapping.jacobian(coord));</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    });</div>

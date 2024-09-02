@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: CartesianToBarycentricCoordinates&lt; DimX, DimY, Corner1Tag, Corner2Tag, Corner3Tag &gt; Class Template Reference</title>
+<title>Gyselalib++: CartesianToBarycentricCoordinates&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,43 +104,344 @@ $(document).ready(function(){initNavTree('classCartesianToBarycentricCoordinates
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classCartesianToBarycentricCoordinates-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">CartesianToBarycentricCoordinates&lt; DimX, DimY, Corner1Tag, Corner2Tag, Corner3Tag &gt; Class Template Reference</div>  </div>
+<div class="title">CartesianToBarycentricCoordinates&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class to convert cartesian coordinates to barycentric coordinates on a triangle.  
+ <a href="classCartesianToBarycentricCoordinates.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a7286d455745139d80bf32a989d18fa06"><td class="memItemLeft" align="right" valign="top"><a id="a7286d455745139d80bf32a989d18fa06"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BarycentricCoord</b> = ddc::Coordinate&lt; Corner1Tag, Corner2Tag, Corner3Tag &gt;</td></tr>
-<tr class="separator:a7286d455745139d80bf32a989d18fa06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a06491f726d244e055cce3ed3fcb764"><td class="memItemLeft" align="right" valign="top"><a id="a5a06491f726d244e055cce3ed3fcb764"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>CartesianCoord</b> = ddc::Coordinate&lt; DimX, DimY &gt;</td></tr>
-<tr class="separator:a5a06491f726d244e055cce3ed3fcb764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af69ba35278ef53e998a441d89b04c42d"><td class="memItemLeft" align="right" valign="top"><a id="af69ba35278ef53e998a441d89b04c42d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#af69ba35278ef53e998a441d89b04c42d">BarycentricCoord</a> = ddc::Coordinate&lt; Corner1Tag, Corner2Tag, Corner3Tag &gt;</td></tr>
+<tr class="memdesc:af69ba35278ef53e998a441d89b04c42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a coordinate in the barycentric coordinate system. <br /></td></tr>
+<tr class="separator:af69ba35278ef53e998a441d89b04c42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319d184dd23d04668432bb5a8bc64629"><td class="memItemLeft" align="right" valign="top"><a id="a319d184dd23d04668432bb5a8bc64629"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> = ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;</td></tr>
+<tr class="memdesc:a319d184dd23d04668432bb5a8bc64629"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a coordinate in the cartesian coordinate system. <br /></td></tr>
+<tr class="separator:a319d184dd23d04668432bb5a8bc64629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8948648b0522e0f19f8a2a89cef423e8"><td class="memItemLeft" align="right" valign="top"><a id="a8948648b0522e0f19f8a2a89cef423e8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CartesianToBarycentricCoordinates</b> (CartesianCoord const &amp;corner1, CartesianCoord const &amp;corner2, CartesianCoord const &amp;corner3)</td></tr>
-<tr class="separator:a8948648b0522e0f19f8a2a89cef423e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8de19d4f3c919281488bc434591cec05"><td class="memItemLeft" align="right" valign="top"><a id="a8de19d4f3c919281488bc434591cec05"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CartesianToBarycentricCoordinates</b> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> const &amp;other)=default</td></tr>
-<tr class="separator:a8de19d4f3c919281488bc434591cec05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa693e4b288472e26e29ccaa8bd5d5235"><td class="memItemLeft" align="right" valign="top"><a id="aa693e4b288472e26e29ccaa8bd5d5235"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CartesianToBarycentricCoordinates</b> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&amp;x)=default</td></tr>
-<tr class="separator:aa693e4b288472e26e29ccaa8bd5d5235"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e01e22a9587c5e19f86a19aca489677"><td class="memItemLeft" align="right" valign="top"><a id="a6e01e22a9587c5e19f86a19aca489677"></a>
-<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> const &amp;x)=default</td></tr>
-<tr class="separator:a6e01e22a9587c5e19f86a19aca489677"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f1c1a99311549708c4d890ca4eea309"><td class="memItemLeft" align="right" valign="top"><a id="a8f1c1a99311549708c4d890ca4eea309"></a>
-<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&amp;x)=default</td></tr>
-<tr class="separator:a8f1c1a99311549708c4d890ca4eea309"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae690b0d2a5322b88f4196074295d7a1c"><td class="memItemLeft" align="right" valign="top"><a id="ae690b0d2a5322b88f4196074295d7a1c"></a>
-BarycentricCoord&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (CartesianCoord const &amp;pos) const</td></tr>
-<tr class="separator:ae690b0d2a5322b88f4196074295d7a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b3e9de273ed40d430a2050cfabbd87b"><td class="memItemLeft" align="right" valign="top"><a id="a7b3e9de273ed40d430a2050cfabbd87b"></a>
-CartesianCoord&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (BarycentricCoord const &amp;pos) const</td></tr>
-<tr class="separator:a7b3e9de273ed40d430a2050cfabbd87b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a656f81cb00422bfcfb036316f675df1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#a656f81cb00422bfcfb036316f675df1c">CartesianToBarycentricCoordinates</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;corner1, <a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;corner2, <a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;corner3)</td></tr>
+<tr class="memdesc:a656f81cb00422bfcfb036316f675df1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the operator which converts between the coordinate systems.  <a href="classCartesianToBarycentricCoordinates.html#a656f81cb00422bfcfb036316f675df1c">More...</a><br /></td></tr>
+<tr class="separator:a656f81cb00422bfcfb036316f675df1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ee6efbd4ffbde3e081c0ab63b78f507"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#a5ee6efbd4ffbde3e081c0ab63b78f507">CartesianToBarycentricCoordinates</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:a5ee6efbd4ffbde3e081c0ab63b78f507"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy operator for the mapping operator.  <a href="classCartesianToBarycentricCoordinates.html#a5ee6efbd4ffbde3e081c0ab63b78f507">More...</a><br /></td></tr>
+<tr class="separator:a5ee6efbd4ffbde3e081c0ab63b78f507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3624175872a098f35b87ade5fbacb514"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#a3624175872a098f35b87ade5fbacb514">CartesianToBarycentricCoordinates</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a3624175872a098f35b87ade5fbacb514"><td class="mdescLeft">&#160;</td><td class="mdescRight">A r-value copy operator for the mapping operator.  <a href="classCartesianToBarycentricCoordinates.html#a3624175872a098f35b87ade5fbacb514">More...</a><br /></td></tr>
+<tr class="separator:a3624175872a098f35b87ade5fbacb514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8a53f12831116a821d36afa8975bea6"><td class="memItemLeft" align="right" valign="top"><a id="ac8a53f12831116a821d36afa8975bea6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#ac8a53f12831116a821d36afa8975bea6">~CartesianToBarycentricCoordinates</a> ()=default</td></tr>
+<tr class="memdesc:ac8a53f12831116a821d36afa8975bea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor of the mapping operator. <br /></td></tr>
+<tr class="separator:ac8a53f12831116a821d36afa8975bea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a9db2607b7fabe595b9c32da2c4dd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#ad5a9db2607b7fabe595b9c32da2c4dd0">operator=</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:ad5a9db2607b7fabe595b9c32da2c4dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A copy operator for the mapping operator.  <a href="classCartesianToBarycentricCoordinates.html#ad5a9db2607b7fabe595b9c32da2c4dd0">More...</a><br /></td></tr>
+<tr class="separator:ad5a9db2607b7fabe595b9c32da2c4dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3d54732029974a5915abf7aaf7ecf3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#ad3d54732029974a5915abf7aaf7ecf3d">operator=</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:ad3d54732029974a5915abf7aaf7ecf3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A r-value copy operator for the mapping operator.  <a href="classCartesianToBarycentricCoordinates.html#ad3d54732029974a5915abf7aaf7ecf3d">More...</a><br /></td></tr>
+<tr class="separator:ad3d54732029974a5915abf7aaf7ecf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f9692eba098317f2177df5c62b36bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCartesianToBarycentricCoordinates.html#af69ba35278ef53e998a441d89b04c42d">BarycentricCoord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#af7f9692eba098317f2177df5c62b36bd">operator()</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;pos) const</td></tr>
+<tr class="memdesc:af7f9692eba098317f2177df5c62b36bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator to get the equivalent barycentric coordinate of the cartesian coordinate.  <a href="classCartesianToBarycentricCoordinates.html#af7f9692eba098317f2177df5c62b36bd">More...</a><br /></td></tr>
+<tr class="separator:af7f9692eba098317f2177df5c62b36bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba61e18a3cf543cb7138d4d9f4090e2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentricCoordinates.html#aba61e18a3cf543cb7138d4d9f4090e2c">operator()</a> (<a class="el" href="classCartesianToBarycentricCoordinates.html#af69ba35278ef53e998a441d89b04c42d">BarycentricCoord</a> const &amp;pos) const</td></tr>
+<tr class="memdesc:aba61e18a3cf543cb7138d4d9f4090e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator to get the equivalent cartesian coordinate of the barycentric coordinate.  <a href="classCartesianToBarycentricCoordinates.html#aba61e18a3cf543cb7138d4d9f4090e2c">More...</a><br /></td></tr>
+<tr class="separator:aba61e18a3cf543cb7138d4d9f4090e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag&gt;<br />
+class CartesianToBarycentricCoordinates&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;</h3>
+
+<p>A class to convert cartesian coordinates to barycentric coordinates on a triangle. </p>
+<p>Tags are used to identify the corners of the triangle. This ensures that there are different types for coordinate systems related to different triangles.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname"><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></td><td>The tag of the x dimension of the cartesian coordinates. </td></tr>
+    <tr><td class="paramname"><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></td><td>The tag of the y dimension of the cartesian coordinates. </td></tr>
+    <tr><td class="paramname">Corner1Tag</td><td>A tag identifying the first corner of the triangle. </td></tr>
+    <tr><td class="paramname">Corner2Tag</td><td>A tag identifying the second corner of the triangle. </td></tr>
+    <tr><td class="paramname">Corner3Tag</td><td>A tag identifying the third corner of the triangle. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a656f81cb00422bfcfb036316f675df1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a656f81cb00422bfcfb036316f675df1c">&#9670;&nbsp;</a></span>CartesianToBarycentricCoordinates() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;&#160;</td>
+          <td class="paramname"><em>corner1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;&#160;</td>
+          <td class="paramname"><em>corner2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;&#160;</td>
+          <td class="paramname"><em>corner3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct the operator which converts between the coordinate systems. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">corner1</td><td>The coordinates of the first corner of the triangle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">corner2</td><td>The coordinates of the second corner of the triangle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">corner3</td><td>The coordinates of the third corner of the triangle. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5ee6efbd4ffbde3e081c0ab63b78f507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ee6efbd4ffbde3e081c0ab63b78f507">&#9670;&nbsp;</a></span>CartesianToBarycentricCoordinates() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A copy operator for the mapping operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The object to be copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3624175872a098f35b87ade5fbacb514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3624175872a098f35b87ade5fbacb514">&#9670;&nbsp;</a></span>CartesianToBarycentricCoordinates() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::<a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A r-value copy operator for the mapping operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The object to be consumed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad5a9db2607b7fabe595b9c32da2c4dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5a9db2607b7fabe595b9c32da2c4dd0">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&amp; <a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A copy operator for the mapping operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The object to be copied. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to this class instance. </dd></dl>
+
+</div>
+</div>
+<a id="ad3d54732029974a5915abf7aaf7ecf3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3d54732029974a5915abf7aaf7ecf3d">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&amp; <a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A r-value copy operator for the mapping operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The object to be consumed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to this class instance. </dd></dl>
+
+</div>
+</div>
+<a id="af7f9692eba098317f2177df5c62b36bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f9692eba098317f2177df5c62b36bd">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html#af69ba35278ef53e998a441d89b04c42d">BarycentricCoord</a> <a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> const &amp;&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The operator to get the equivalent barycentric coordinate of the cartesian coordinate. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>The known cartesian coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The equivalent barycentric coordinate. </dd></dl>
+
+</div>
+</div>
+<a id="aba61e18a3cf543cb7138d4d9f4090e2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba61e18a3cf543cb7138d4d9f4090e2c">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class Corner1Tag , class Corner2Tag , class Corner3Tag &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCartesianToBarycentricCoordinates.html#a319d184dd23d04668432bb5a8bc64629">CartesianCoord</a> <a class="el" href="classCartesianToBarycentricCoordinates.html">CartesianToBarycentricCoordinates</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCartesianToBarycentricCoordinates.html#af69ba35278ef53e998a441d89b04c42d">BarycentricCoord</a> const &amp;&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The operator to get the equivalent cartesian coordinate of the barycentric coordinate. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>The known barycentric coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The equivalent cartesian coordinate. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/mapping/<a class="el" href="barycentric__coordinates_8hpp_source.html">barycentric_coordinates.hpp</a></li>
 </ul>

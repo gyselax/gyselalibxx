@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['e_1239',['e',['../classCzarnyToCartesian.html#a4b4f1725b24004e0b0edc124b66396f5',1,'CzarnyToCartesian']]],
+  ['e_1239',['e',['../classCzarnyToCartesian.html#ac3ffcf3773980eb55c10233ea2ac913b',1,'CzarnyToCartesian']]],
   ['edgetransformation_1240',['EdgeTransformation',['../classEdgeTransformation.html#a11c84fec5577a58b0addfd13bd744117',1,'EdgeTransformation']]],
   ['electrostaticalpotentialsimulation_5fdecentred_5frotation_1241',['ElectrostaticalPotentialSimulation_decentred_rotation',['../classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445',1,'ElectrostaticalPotentialSimulation_decentred_rotation']]],
   ['electrostaticalpotentialsimulation_5frotation_1242',['ElectrostaticalPotentialSimulation_rotation',['../classElectrostaticalPotentialSimulation__rotation.html#a8c4dd29051c85c7365ff291f8f3f58fb',1,'ElectrostaticalPotentialSimulation_rotation']]],
   ['electrostaticalpotentialsimulation_5ftranslation_1243',['ElectrostaticalPotentialSimulation_translation',['../classElectrostaticalPotentialSimulation__translation.html#aed3279c83ba2704c2f5e52da4cc7bf64',1,'ElectrostaticalPotentialSimulation_translation']]],
   ['end_1244',['end',['../classIdxRangeSlice.html#a77ce2afa2b2a692ba19d2caa02dd57bb',1,'IdxRangeSlice']]],
-  ['epsilon_1245',['epsilon',['../classCzarnyToCartesian.html#a9e4ad729fd290d47759637b69b9aa30a',1,'CzarnyToCartesian']]],
+  ['epsilon_1245',['epsilon',['../classCzarnyToCartesian.html#a063ce8e51e3f0527f60c004aa4e0eb28',1,'CzarnyToCartesian']]],
   ['epsilon_5fbot_1246',['epsilon_bot',['../classBumpontailEquilibrium.html#a6fc7a8353d8975267668167983fb1bec',1,'BumpontailEquilibrium']]],
   ['equilibrium_1247',['equilibrium',['../classDiocotronDensitySolution.html#a9615447cc5be0e3addf4f885660af89a',1,'DiocotronDensitySolution']]],
   ['euler_1248',['Euler',['../classEuler.html#a13de1fd2155ed239a1689d456abc8d45',1,'Euler']]],
