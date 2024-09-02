@@ -52,7 +52,7 @@ class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping>
     using X = typename Mapping::cartesian_tag_x;
     using Y = typename Mapping::cartesian_tag_y;
     using R = typename Mapping::curvilinear_tag_r;
-    using Theta = typename Mapping::curvilinear_tag_theta;
+    using Theta = typename Mapping::curvilinear_tag_p;
 
     using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patches...>;
     using PatchOrdering = ddc::detail::TypeSeq<Patches...>;

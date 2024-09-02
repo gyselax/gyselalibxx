@@ -22,41 +22,41 @@
  * @see DiscreteToCartesian
  * @see Curvilinear2DToCartesian
  */
-template <class X, class Y, class SplineRThetaBuilder, class SplineRThetaEvaluator, int Nr, int Nt>
+template <class RDimX, class RDimY, class SplineRPBuilder, class SplineRPEvaluator, int Nr, int Nt>
 class RefinedDiscreteToCartesian
     : public Curvilinear2DToCartesian<
-              X,
-              Y,
-              typename SplineRThetaBuilder::continuous_dimension_type1,
-              typename SplineRThetaBuilder::continuous_dimension_type2>
+              RDimX,
+              RDimY,
+              typename SplineRPBuilder::continuous_dimension_type1,
+              typename SplineRPBuilder::continuous_dimension_type2>
 {
 private:
     /**
      * @brief Indicate the bspline type of the first logical dimension.
      */
-    using BSplineR = typename SplineRThetaBuilder::bsplines_type1;
+    using BSplineR = typename SplineRPBuilder::bsplines_type1;
     /**
      * @brief Indicate the bspline type of the second logical dimension.
      */
-    using BSplineTheta = typename SplineRThetaBuilder::bsplines_type2;
+    using BSplineP = typename SplineRPBuilder::bsplines_type2;
     /**
      * @brief Indicate the first logical coordinate.
      */
-    using R = typename BSplineR::continuous_dimension_type;
+    using RDimR = typename BSplineR::continuous_dimension_type;
     /**
      * @brief Indicate the second logical coordinate.
      */
-    using Theta = typename BSplineTheta::continuous_dimension_type;
+    using RDimP = typename BSplineP::continuous_dimension_type;
 
     /**
      * @brief Indicate the first logical coordinate in the discrete space.
      */
-    using GridR = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
+    using IDimR = typename SplineRPBuilder::interpolation_discrete_dimension_type1;
 
     /**
      * @brief Indicate the second logical coordinate in the discrete space.
      */
-    using GridTheta = typename SplineRThetaBuilder::interpolation_discrete_dimension_type2;
+    using IDimP = typename SplineRPBuilder::interpolation_discrete_dimension_type2;
 
 
 
@@ -69,17 +69,17 @@ private:
      * @brief Boolean: true is BsplineP is defined on uniform sampling;
      * false if it is on non-uniform sampling.
      */
-    static constexpr bool BSplineP_uniform = BSplineTheta::is_uniform();
+    static constexpr bool BSplineP_uniform = BSplineP::is_uniform();
 
     static int constexpr BSDegreeRRefined = BSplineR::degree();
-    static int constexpr BSDegreePRefined = BSplineTheta::degree();
+    static int constexpr BSDegreePRefined = BSplineP::degree();
 
 
 public:
     /**
      * @brief Define non periodic real refined R dimension.
      */
-    struct RRefined
+    struct RDimRRefined
     {
         /**
          * @brief Define periodicity of the dimension.
@@ -90,7 +90,7 @@ public:
     /**
      * @brief Define periodic real refined P dimension.
      */
-    struct ThetaRefined
+    struct RDimPRefined
     {
         /**
          * @brief Define periodicity of the dimension.
@@ -101,7 +101,7 @@ public:
     /**
      * @brief Define non periodic real refined X dimension.
      */
-    struct XRefined
+    struct RDimXRefined
     {
         /**
          * @brief Define periodicity of the dimension.
@@ -112,7 +112,7 @@ public:
     /**
      * @brief Define non periodic real refined X dimension.
      */
-    struct YRefined
+    struct RDimYRefined
     {
         /**
          * @brief Define periodicity of the dimension.
@@ -125,200 +125,197 @@ public:
     struct BSplineRRefined
         : std::conditional_t<
                   BSplineR_uniform,
-                  ddc::UniformBSplines<RRefined, BSDegreeRRefined>,
-                  ddc::NonUniformBSplines<RRefined, BSDegreeRRefined>>
+                  ddc::UniformBSplines<RDimRRefined, BSDegreeRRefined>,
+                  ddc::NonUniformBSplines<RDimRRefined, BSDegreeRRefined>>
     {
     };
-    struct BSplineThetaRefined
+    struct BSplinePRefined
         : std::conditional_t<
                   BSplineP_uniform,
-                  ddc::UniformBSplines<ThetaRefined, BSDegreePRefined>,
-                  ddc::NonUniformBSplines<ThetaRefined, BSDegreePRefined>>
+                  ddc::UniformBSplines<RDimPRefined, BSDegreePRefined>,
+                  ddc::NonUniformBSplines<RDimPRefined, BSDegreePRefined>>
     {
     };
 
-    static auto constexpr SplineRBoundaryRefined_min
-            = SplineRThetaBuilder::builder_type1::s_bc_xmin;
-    static auto constexpr SplineRBoundaryRefined_max
-            = SplineRThetaBuilder::builder_type1::s_bc_xmax;
-    static auto constexpr SplinePBoundaryRefined_min
-            = SplineRThetaBuilder::builder_type2::s_bc_xmin;
-    static auto constexpr SplinePBoundaryRefined_max
-            = SplineRThetaBuilder::builder_type2::s_bc_xmax;
+    static auto constexpr SplineRBoundaryRefined_min = SplineRPBuilder::builder_type1::s_bc_xmin;
+    static auto constexpr SplineRBoundaryRefined_max = SplineRPBuilder::builder_type1::s_bc_xmax;
+    static auto constexpr SplinePBoundaryRefined_min = SplineRPBuilder::builder_type2::s_bc_xmin;
+    static auto constexpr SplinePBoundaryRefined_max = SplineRPBuilder::builder_type2::s_bc_xmax;
 
 
     static bool constexpr UniformMeshR = ddc::is_uniform_point_sampling_v<
-            typename SplineRThetaBuilder::interpolation_discrete_dimension_type1>;
+            typename SplineRPBuilder::interpolation_discrete_dimension_type1>;
     static bool constexpr UniformMeshP = ddc::is_uniform_point_sampling_v<
-            typename SplineRThetaBuilder::interpolation_discrete_dimension_type2>;
+            typename SplineRPBuilder::interpolation_discrete_dimension_type2>;
 
 
-    struct GridRRefined
+    struct IDimRRefined
         : std::conditional_t<
                   UniformMeshR,
-                  ddc::UniformPointSampling<RRefined>,
-                  ddc::NonUniformPointSampling<RRefined>>
+                  ddc::UniformPointSampling<RDimRRefined>,
+                  ddc::NonUniformPointSampling<RDimRRefined>>
     {
     };
-    struct GridThetaRefined
+    struct IDimPRefined
         : std::conditional_t<
                   UniformMeshP,
-                  ddc::UniformPointSampling<ThetaRefined>,
-                  ddc::NonUniformPointSampling<ThetaRefined>>
+                  ddc::UniformPointSampling<RDimPRefined>,
+                  ddc::NonUniformPointSampling<RDimPRefined>>
     {
     };
 
 
-    using REvalBoundary = ddc::ConstantExtrapolationRule<RRefined, ThetaRefined>;
+    using REvalBoundary = ddc::ConstantExtrapolationRule<RDimRRefined, RDimPRefined>;
 
-    using SplineRThetaBuilderRefined = ddc::SplineBuilder2D<
+    using SplineRPBuilderRefined = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplineRRefined,
-            BSplineThetaRefined,
-            GridRRefined,
-            GridThetaRefined,
+            BSplinePRefined,
+            IDimRRefined,
+            IDimPRefined,
             SplineRBoundaryRefined_min,
             SplineRBoundaryRefined_max,
             SplinePBoundaryRefined_min,
             SplinePBoundaryRefined_max,
             ddc::SplineSolver::LAPACK,
-            GridRRefined,
-            GridThetaRefined>;
+            IDimRRefined,
+            IDimPRefined>;
 
-    using SplineRThetaEvaluatorRefined = ddc::SplineEvaluator2D<
+    using SplineRPEvaluatorRefined = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplineRRefined,
-            BSplineThetaRefined,
-            GridRRefined,
-            GridThetaRefined,
+            BSplinePRefined,
+            IDimRRefined,
+            IDimPRefined,
             REvalBoundary,
             REvalBoundary,
-            ddc::PeriodicExtrapolationRule<ThetaRefined>,
-            ddc::PeriodicExtrapolationRule<ThetaRefined>,
-            GridRRefined,
-            GridThetaRefined>;
+            ddc::PeriodicExtrapolationRule<RDimPRefined>,
+            ddc::PeriodicExtrapolationRule<RDimPRefined>,
+            IDimRRefined,
+            IDimPRefined>;
 
 
-    using CoordRRefined = ddc::Coordinate<RRefined>;
-    using CoordThetaRefined = ddc::Coordinate<ThetaRefined>;
-    using CoordRThetaRefined = ddc::Coordinate<RRefined, ThetaRefined>;
+    using CoordRRefined = ddc::Coordinate<RDimRRefined>;
+    using CoordPRefined = ddc::Coordinate<RDimPRefined>;
+    using CoordRPRefined = ddc::Coordinate<RDimRRefined, RDimPRefined>;
 
-    using SplineInterpThetaointsRRefined = ddc::GrevilleInterpolationPoints<
+    using SplineInterpPointsRRefined = ddc::GrevilleInterpolationPoints<
             BSplineRRefined,
             SplineRBoundaryRefined_min,
             SplineRBoundaryRefined_max>;
-    using SplineInterpThetaointsThetaRefined = ddc::GrevilleInterpolationPoints<
-            BSplineThetaRefined,
+    using SplineInterpPointsPRefined = ddc::GrevilleInterpolationPoints<
+            BSplinePRefined,
             SplinePBoundaryRefined_min,
             SplinePBoundaryRefined_max>;
 
-    using BSIdxRangeRRefined = ddc::DiscreteDomain<BSplineRRefined>;
-    using BSIdxRangeThetaRefined = ddc::DiscreteDomain<BSplineThetaRefined>;
-    using BSIdxRangeRThetaRefined = ddc::DiscreteDomain<BSplineRRefined, BSplineThetaRefined>;
+    using BSDomainRRefined = ddc::DiscreteDomain<BSplineRRefined>;
+    using BSDomainPRefined = ddc::DiscreteDomain<BSplinePRefined>;
+    using BSDomainRPRefined = ddc::DiscreteDomain<BSplineRRefined, BSplinePRefined>;
 
-    using IdxRRefined = ddc::DiscreteElement<GridRRefined>;
-    using IdxThetaRefined = ddc::DiscreteElement<GridThetaRefined>;
-    using IdxRThetaRefined = ddc::DiscreteElement<GridRRefined, GridThetaRefined>;
+    using IndexRRefined = ddc::DiscreteElement<IDimRRefined>;
+    using IndexPRefined = ddc::DiscreteElement<IDimPRefined>;
+    using IndexRPRefined = ddc::DiscreteElement<IDimRRefined, IDimPRefined>;
 
-    using IdxStepRRefined = ddc::DiscreteVector<GridRRefined>;
-    using IdxStepThetaRefined = ddc::DiscreteVector<GridThetaRefined>;
-    using IdxStepRThetaRefined = ddc::DiscreteVector<GridRRefined, GridThetaRefined>;
+    using IVectRRefined = ddc::DiscreteVector<IDimRRefined>;
+    using IVectPRefined = ddc::DiscreteVector<IDimPRefined>;
+    using IVectRPRefined = ddc::DiscreteVector<IDimRRefined, IDimPRefined>;
 
-    using IdxRangeRRefined = ddc::DiscreteDomain<GridRRefined>;
-    using IdxRangeThetaRefined = ddc::DiscreteDomain<GridThetaRefined>;
-    using IdxRangeRThetaRefined = ddc::DiscreteDomain<GridRRefined, GridThetaRefined>;
+    using IDomainRRefined = ddc::DiscreteDomain<IDimRRefined>;
+    using IDomainPRefined = ddc::DiscreteDomain<IDimPRefined>;
+    using IDomainRPRefined = ddc::DiscreteDomain<IDimRRefined, IDimPRefined>;
 
 
-    using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
+    using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineP>;
 
     /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.
      */
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
-    IdxRangeRThetaRefined const m_refined_domain;
+    IDomainRPRefined const m_refined_domain;
     REvalBoundary const boundary_condition_r_left;
     REvalBoundary const boundary_condition_r_right;
-    SplineRThetaEvaluatorRefined const refined_evaluator;
+    SplineRPEvaluatorRefined const refined_evaluator;
     DiscreteToCartesian<
-            XRefined,
-            YRefined,
-            SplineRThetaBuilderRefined,
-            SplineRThetaEvaluatorRefined> const m_mapping;
+            RDimXRefined,
+            RDimYRefined,
+            SplineRPBuilderRefined,
+            SplineRPEvaluatorRefined> const m_mapping;
 
 
-    static inline ddc::Coordinate<XRefined> to_refined(ddc::Coordinate<X> const& coord)
+    static inline ddc::Coordinate<RDimXRefined> to_refined(ddc::Coordinate<RDimX> const& coord)
     {
-        return ddc::Coordinate<XRefined>(ddc::get<X>(coord));
+        return ddc::Coordinate<RDimXRefined>(ddc::get<RDimX>(coord));
     }
 
-    static inline ddc::Coordinate<YRefined> to_refined(ddc::Coordinate<Y> const& coord)
+    static inline ddc::Coordinate<RDimYRefined> to_refined(ddc::Coordinate<RDimY> const& coord)
     {
-        return ddc::Coordinate<YRefined>(ddc::get<Y>(coord));
+        return ddc::Coordinate<RDimYRefined>(ddc::get<RDimY>(coord));
     }
 
-    static inline ddc::Coordinate<XRefined, YRefined> to_refined(ddc::Coordinate<X, Y> const& coord)
+    static inline ddc::Coordinate<RDimXRefined, RDimYRefined> to_refined(
+            ddc::Coordinate<RDimX, RDimY> const& coord)
     {
-        const double coord1 = ddc::get<X>(coord);
-        const double coord2 = ddc::get<Y>(coord);
-        return ddc::Coordinate<XRefined, YRefined>(coord1, coord2);
-    }
-
-
-    static inline CoordRRefined to_refined(ddc::Coordinate<R> const& coord)
-    {
-        return CoordRRefined(ddc::get<R>(coord));
-    }
-
-    static inline CoordThetaRefined to_refined(ddc::Coordinate<Theta> const& coord)
-    {
-        return CoordThetaRefined(ddc::get<Theta>(coord));
-    }
-
-    static inline CoordRThetaRefined to_refined(ddc::Coordinate<R, Theta> const& coord)
-    {
-        const double coord1 = ddc::get<R>(coord);
-        const double coord2 = ddc::get<Theta>(coord);
-        return CoordRThetaRefined(coord1, coord2);
+        const double coord1 = ddc::get<RDimX>(coord);
+        const double coord2 = ddc::get<RDimY>(coord);
+        return ddc::Coordinate<RDimXRefined, RDimYRefined>(coord1, coord2);
     }
 
 
-    static inline ddc::Coordinate<X> from_refined(ddc::Coordinate<XRefined> const& coord)
+    static inline CoordRRefined to_refined(ddc::Coordinate<RDimR> const& coord)
     {
-        return ddc::Coordinate<X>(ddc::get<XRefined>(coord));
+        return CoordRRefined(ddc::get<RDimR>(coord));
     }
 
-    static inline ddc::Coordinate<Y> from_refined(ddc::Coordinate<YRefined> const& coord)
+    static inline CoordPRefined to_refined(ddc::Coordinate<RDimP> const& coord)
     {
-        return ddc::Coordinate<Y>(ddc::get<YRefined>(coord));
+        return CoordPRefined(ddc::get<RDimP>(coord));
     }
 
-    static inline ddc::Coordinate<X, Y> from_refined(
-            ddc::Coordinate<XRefined, YRefined> const& coord)
+    static inline CoordRPRefined to_refined(ddc::Coordinate<RDimR, RDimP> const& coord)
     {
-        const double coord1 = ddc::get<XRefined>(coord);
-        const double coord2 = ddc::get<YRefined>(coord);
-        return ddc::Coordinate<X, Y>(coord1, coord2);
+        const double coord1 = ddc::get<RDimR>(coord);
+        const double coord2 = ddc::get<RDimP>(coord);
+        return CoordRPRefined(coord1, coord2);
     }
 
 
-    static inline ddc::Coordinate<R> from_refined(CoordRRefined const& coord)
+    static inline ddc::Coordinate<RDimX> from_refined(ddc::Coordinate<RDimXRefined> const& coord)
     {
-        return ddc::Coordinate<R>(ddc::get<RRefined>(coord));
+        return ddc::Coordinate<RDimX>(ddc::get<RDimXRefined>(coord));
     }
 
-    static inline ddc::Coordinate<Theta> from_refined(CoordThetaRefined const& coord)
+    static inline ddc::Coordinate<RDimY> from_refined(ddc::Coordinate<RDimYRefined> const& coord)
     {
-        return ddc::Coordinate<Theta>(ddc::get<ThetaRefined>(coord));
+        return ddc::Coordinate<RDimY>(ddc::get<RDimYRefined>(coord));
     }
 
-    static inline ddc::Coordinate<R, Theta> from_refined(CoordRThetaRefined const& coord)
+    static inline ddc::Coordinate<RDimX, RDimY> from_refined(
+            ddc::Coordinate<RDimXRefined, RDimYRefined> const& coord)
     {
-        const double coord1 = ddc::get<RRefined>(coord);
-        const double coord2 = ddc::get<ThetaRefined>(coord);
-        return ddc::Coordinate<R, Theta>(coord1, coord2);
+        const double coord1 = ddc::get<RDimXRefined>(coord);
+        const double coord2 = ddc::get<RDimYRefined>(coord);
+        return ddc::Coordinate<RDimX, RDimY>(coord1, coord2);
+    }
+
+
+    static inline ddc::Coordinate<RDimR> from_refined(CoordRRefined const& coord)
+    {
+        return ddc::Coordinate<RDimR>(ddc::get<RDimRRefined>(coord));
+    }
+
+    static inline ddc::Coordinate<RDimP> from_refined(CoordPRefined const& coord)
+    {
+        return ddc::Coordinate<RDimP>(ddc::get<RDimPRefined>(coord));
+    }
+
+    static inline ddc::Coordinate<RDimR, RDimP> from_refined(CoordRPRefined const& coord)
+    {
+        const double coord1 = ddc::get<RDimRRefined>(coord);
+        const double coord2 = ddc::get<RDimPRefined>(coord);
+        return ddc::Coordinate<RDimR, RDimP>(coord1, coord2);
     }
 
 
@@ -336,9 +333,9 @@ public:
      *      Bsplines coefficients of the second physical dimension in the refined logical domain.
      */
     RefinedDiscreteToCartesian(
-            IdxRangeRThetaRefined const& refined_domain,
-            ddc::Chunk<double, BSIdxRangeRThetaRefined>&& curvilinear_to_x,
-            ddc::Chunk<double, BSIdxRangeRThetaRefined>&& curvilinear_to_y,
+            IDomainRPRefined const& refined_domain,
+            ddc::Chunk<double, BSDomainRPRefined>&& curvilinear_to_x,
+            ddc::Chunk<double, BSDomainRPRefined>&& curvilinear_to_y,
             CoordRRefined r_min,
             CoordRRefined r_max)
         : m_refined_domain(refined_domain)
@@ -347,8 +344,8 @@ public:
         , refined_evaluator(
                   boundary_condition_r_left,
                   boundary_condition_r_right,
-                  ddc::PeriodicExtrapolationRule<ThetaRefined>(),
-                  ddc::PeriodicExtrapolationRule<ThetaRefined>())
+                  ddc::PeriodicExtrapolationRule<RDimPRefined>(),
+                  ddc::PeriodicExtrapolationRule<RDimPRefined>())
         , m_mapping(std::move(curvilinear_to_x), std::move(curvilinear_to_y), refined_evaluator)
     {
     }
@@ -388,7 +385,7 @@ public:
      * @see DiscreteToCartesian
      * @see SplineEvaluator2D
      */
-    ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const final
+    ddc::Coordinate<RDimX, RDimY> operator()(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
         return from_refined(m_mapping(to_refined(coord)));
     }
@@ -413,7 +410,7 @@ public:
      * @see Curvilinear2DToCartesian::jacobian_21
      * @see Curvilinear2DToCartesian::jacobian_22
      */
-    void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
+    void jacobian_matrix(ddc::Coordinate<RDimR, RDimP> const& coord, Matrix_2x2& matrix) const final
     {
         m_mapping.jacobian_matrix(to_refined(coord), matrix);
     }
@@ -429,7 +426,7 @@ public:
      * @see DiscreteToCartesian
      * @see SplineEvaluator2D
      */
-    double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_11(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
         return m_mapping.jacobian_11(to_refined(coord));
     }
@@ -445,7 +442,7 @@ public:
      * @see DiscreteToCartesian
      * @see SplineEvaluator2D
      */
-    double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_12(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
         return m_mapping.jacobian_12(to_refined(coord));
     }
@@ -461,7 +458,7 @@ public:
      * @see DiscreteToCartesian
      * @see SplineEvaluator2D
      */
-    double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_21(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
         return m_mapping.jacobian_21(to_refined(coord));
     }
@@ -477,7 +474,7 @@ public:
      * @see DiscreteToCartesian
      * @see SplineEvaluator2D
      */
-    double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_22(ddc::Coordinate<RDimR, RDimP> const& coord) const final
     {
         return m_mapping.jacobian_22(to_refined(coord));
     }
@@ -499,7 +496,7 @@ public:
      * @see AdvectionDomain
      */
     void to_pseudo_cartesian_jacobian_center_matrix(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid,
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid,
             Matrix_2x2& matrix) const
     {
         m_mapping.to_pseudo_cartesian_jacobian_center_matrix(m_refined_domain, matrix);
@@ -517,7 +514,7 @@ public:
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_11_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -536,7 +533,7 @@ public:
      * @see Curvilinear2DToCartesian::to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_12_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -555,7 +552,7 @@ public:
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_21_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -574,9 +571,9 @@ public:
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
     double to_pseudo_cartesian_jacobian_22_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+            ddc::DiscreteDomain<IDimR, IDimP> const& grid) const
     {
-        ddc::DiscreteDomain<GridTheta> const theta_domain = ddc::select<GridTheta>(grid);
+        ddc::DiscreteDomain<IDimP> const theta_domain = ddc::select<IDimP>(grid);
 
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
@@ -604,75 +601,75 @@ public:
     template <class Mapping>
     static RefinedDiscreteToCartesian analytical_to_refined(
             Mapping const& analytical_mapping,
-            ddc::DiscreteDomain<GridR, GridTheta> const& domain)
+            ddc::DiscreteDomain<IDimR, IDimP> const& domain)
     {
         const double rmin = ddc::discrete_space<BSplineR>().rmin();
         const double rmax = ddc::discrete_space<BSplineR>().rmax();
 
-        const double pmin = ddc::discrete_space<BSplineTheta>().rmin();
-        const double pmax = ddc::discrete_space<BSplineTheta>().rmax();
+        const double pmin = ddc::discrete_space<BSplineP>().rmin();
+        const double pmax = ddc::discrete_space<BSplineP>().rmax();
 
         // Create refined grid
         CoordRRefined const r_min(rmin);
         CoordRRefined const r_max(rmax);
-        IdxStepRRefined const r_size(Nr);
+        IVectRRefined const r_size(Nr);
 
-        CoordThetaRefined const theta_min(pmin);
-        CoordThetaRefined const theta_max(pmax);
-        IdxStepThetaRefined const theta_size(Nt);
+        CoordPRefined const p_min(pmin);
+        CoordPRefined const p_max(pmax);
+        IVectPRefined const p_size(Nt);
 
         if constexpr (BSplineRRefined::is_uniform()) {
             ddc::init_discrete_space<BSplineRRefined>(r_min, r_max, r_size);
-            ddc::init_discrete_space<BSplineThetaRefined>(theta_min, theta_max, theta_size);
+            ddc::init_discrete_space<BSplinePRefined>(p_min, p_max, p_size);
         } else {
             double const dr((r_max - r_min) / r_size);
-            double const dp((theta_max - theta_min) / theta_size);
+            double const dp((p_max - p_min) / p_size);
 
             std::vector<CoordRRefined> r_knots(r_size + 1);
-            std::vector<CoordThetaRefined> theta_knots(theta_size + 1);
+            std::vector<CoordPRefined> p_knots(p_size + 1);
 
             for (int i(0); i < r_size + 1; ++i) {
                 r_knots[i] = CoordRRefined(r_min + i * dr);
             }
-            for (int i(0); i < theta_size + 1; ++i) {
-                theta_knots[i] = CoordThetaRefined(theta_min + i * dp);
+            for (int i(0); i < p_size + 1; ++i) {
+                p_knots[i] = CoordPRefined(p_min + i * dp);
             }
 
             ddc::init_discrete_space<BSplineRRefined>(r_knots);
-            ddc::init_discrete_space<BSplineThetaRefined>(theta_knots);
+            ddc::init_discrete_space<BSplinePRefined>(p_knots);
         }
 
-        ddc::init_discrete_space<GridRRefined>(
-                SplineInterpThetaointsRRefined::template get_sampling<GridRRefined>());
-        ddc::init_discrete_space<GridThetaRefined>(
-                SplineInterpThetaointsThetaRefined::template get_sampling<GridThetaRefined>());
+        ddc::init_discrete_space<IDimRRefined>(
+                SplineInterpPointsRRefined::template get_sampling<IDimRRefined>());
+        ddc::init_discrete_space<IDimPRefined>(
+                SplineInterpPointsPRefined::template get_sampling<IDimPRefined>());
 
-        IdxRangeRRefined const interpolation_domain_R(
-                SplineInterpThetaointsRRefined::template get_domain<GridRRefined>());
-        IdxRangeThetaRefined const interpolation_domain_P(
-                SplineInterpThetaointsThetaRefined::template get_domain<GridThetaRefined>());
-        IdxRangeRThetaRefined const refined_domain(interpolation_domain_R, interpolation_domain_P);
+        IDomainRRefined const interpolation_domain_R(
+                SplineInterpPointsRRefined::template get_domain<IDimRRefined>());
+        IDomainPRefined const interpolation_domain_P(
+                SplineInterpPointsPRefined::template get_domain<IDimPRefined>());
+        IDomainRPRefined const refined_domain(interpolation_domain_R, interpolation_domain_P);
 
         // Operators on the refined grid
-        SplineRThetaBuilderRefined const refined_builder(refined_domain);
+        SplineRPBuilderRefined const refined_builder(refined_domain);
 
-        BSIdxRangeRThetaRefined const spline_domain = refined_builder.spline_domain();
+        BSDomainRPRefined const spline_domain = refined_builder.spline_domain();
 
         // Compute the B-splines coefficients of the analytical mapping
-        ddc::Chunk<double, BSIdxRangeRThetaRefined> curvilinear_to_x_spline(spline_domain);
-        ddc::Chunk<double, BSIdxRangeRThetaRefined> curvilinear_to_y_spline(spline_domain);
-        ddc::Chunk<double, IdxRangeRThetaRefined> curvilinear_to_x_vals(refined_domain);
-        ddc::Chunk<double, IdxRangeRThetaRefined> curvilinear_to_y_vals(refined_domain);
+        ddc::Chunk<double, BSDomainRPRefined> curvilinear_to_x_spline(spline_domain);
+        ddc::Chunk<double, BSDomainRPRefined> curvilinear_to_y_spline(spline_domain);
+        ddc::Chunk<double, IDomainRPRefined> curvilinear_to_x_vals(refined_domain);
+        ddc::Chunk<double, IDomainRPRefined> curvilinear_to_y_vals(refined_domain);
         ddc::for_each(
                 refined_builder.interpolation_domain(),
-                [&](typename ddc::DiscreteDomain<GridRRefined, GridThetaRefined>::
+                [&](typename ddc::DiscreteDomain<IDimRRefined, IDimPRefined>::
                             discrete_element_type const& el) {
-                    ddc::Coordinate<R, Theta> polar_coord(from_refined(ddc::coordinate(el)));
-                    ddc::Coordinate<XRefined, YRefined> cart_coord
+                    ddc::Coordinate<RDimR, RDimP> polar_coord(from_refined(ddc::coordinate(el)));
+                    ddc::Coordinate<RDimXRefined, RDimYRefined> cart_coord
                             = to_refined(analytical_mapping(polar_coord));
 
-                    curvilinear_to_x_vals(el) = ddc::select<XRefined>(cart_coord);
-                    curvilinear_to_y_vals(el) = ddc::select<YRefined>(cart_coord);
+                    curvilinear_to_x_vals(el) = ddc::select<RDimXRefined>(cart_coord);
+                    curvilinear_to_y_vals(el) = ddc::select<RDimYRefined>(cart_coord);
                 });
         refined_builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
         refined_builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());

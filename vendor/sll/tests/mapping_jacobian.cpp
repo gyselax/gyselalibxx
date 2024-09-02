@@ -25,88 +25,86 @@ struct R
     static bool constexpr PERIODIC = false;
 };
 
-struct Theta
+struct P
 {
     static bool constexpr PERIODIC = true;
 };
 
 using CoordR = ddc::Coordinate<R>;
-using CoordTheta = ddc::Coordinate<Theta>;
-using CoordRTheta = ddc::Coordinate<R, Theta>;
+using CoordP = ddc::Coordinate<P>;
+using CoordRP = ddc::Coordinate<R, P>;
 
 int constexpr BSDegree = 3;
 
 struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 {
 };
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
+struct BSplinesP : ddc::NonUniformBSplines<P, BSDegree>
 {
 };
 
 using InterpPointsR = ddc::
         GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
-        BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+using InterpPointsP = ddc::
+        GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
 
 struct GridR : InterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
+struct GridP : InterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineRPBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesTheta,
+        BSplinesP,
         GridR,
-        GridTheta,
+        GridP,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
         ddc::SplineSolver::LAPACK,
         GridR,
-        GridTheta>;
+        GridP>;
 
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
+using SplineRPEvaluator = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesTheta,
+        BSplinesP,
         GridR,
-        GridTheta,
+        GridP,
         ddc::NullExtrapolationRule,
         ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
+        ddc::PeriodicExtrapolationRule<P>,
+        ddc::PeriodicExtrapolationRule<P>,
         GridR,
-        GridTheta>;
+        GridP>;
 
 using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
-using BSIdxRangeTheta = ddc::DiscreteDomain<BSplinesTheta>;
-using BSIdxRangeRTheta = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
+using BSIdxRangeP = ddc::DiscreteDomain<BSplinesP>;
+using BSIdxRangeRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
 using IdxRangeR = ddc::DiscreteDomain<GridR>;
-using IdxRangeTheta = ddc::DiscreteDomain<GridTheta>;
-using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
+using IdxRangeP = ddc::DiscreteDomain<GridP>;
+using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 using IdxR = ddc::DiscreteElement<GridR>;
-using IdxTheta = ddc::DiscreteElement<GridTheta>;
-using IdxRTheta = ddc::DiscreteElement<GridR, GridTheta>;
+using IdxP = ddc::DiscreteElement<GridP>;
+using IdxRP = ddc::DiscreteElement<GridR, GridP>;
 
 using IdxStepR = ddc::DiscreteVector<GridR>;
-using IdxStepTheta = ddc::DiscreteVector<GridTheta>;
-using IdxStepRTheta = ddc::DiscreteVector<GridR, GridTheta>;
+using IdxStepP = ddc::DiscreteVector<GridP>;
+using IdxStepRP = ddc::DiscreteVector<GridR, GridP>;
 
-using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
+using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 
 template <class ElementType>
-using FieldMemRTheta = ddc::Chunk<ElementType, IdxRangeRTheta>;
+using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
 
 using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -151,35 +149,35 @@ class InverseJacobianMatrix : public testing::TestWithParam<std::tuple<std::size
 TEST_P(InverseJacobianMatrix, InverseMatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CircularToCartesian<X, Y, R, Theta> mapping;
+    const CircularToCartesian<X, Y, R, P> mapping;
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
     IdxStepR const r_size(Nr);
 
-    CoordTheta const theta_min(0.0);
-    CoordTheta const theta_max(2.0 * M_PI);
-    IdxStepTheta const theta_size(Nt);
+    CoordP const p_min(0.0);
+    CoordP const p_max(2.0 * M_PI);
+    IdxStepP const p_size(Nt);
 
     IdxR const r_start(1); // avoid singular point at r = 0.
-    IdxTheta const theta_start(0);
+    IdxP const p_start(0);
 
     double const dr((r_max - r_min) / r_size);
-    double const dtheta((theta_max - theta_min) / theta_size);
+    double const dp((p_max - p_min) / p_size);
 
     ddc::DiscreteDomain<GridR> idx_range_r(r_start, r_size);
-    ddc::DiscreteDomain<GridTheta> idx_range_theta(theta_start, theta_size);
-    ddc::DiscreteDomain<GridR, GridTheta> grid(idx_range_r, idx_range_theta);
+    ddc::DiscreteDomain<GridP> idx_range_p(p_start, p_size);
+    ddc::DiscreteDomain<GridR, GridP> grid(idx_range_r, idx_range_p);
 
-    FieldMemRTheta<CoordRTheta> coords(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        coords(irp) = CoordRTheta(
+    FieldMemRP<CoordRP> coords(grid);
+    ddc::for_each(grid, [&](IdxRP const irp) {
+        coords(irp) = CoordRP(
                 r_min + dr * ddc::select<GridR>(irp).uid(),
-                theta_min + dtheta * ddc::select<GridR>(irp).uid());
+                p_min + dp * ddc::select<GridR>(irp).uid());
     });
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 Jacobian_matrix;
         Matrix_2x2 inv_Jacobian_matrix;
 
@@ -194,35 +192,35 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCircMap)
 TEST_P(InverseJacobianMatrix, InverseMatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    const CzarnyToCartesian<X, Y, R, P> mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
     IdxStepR const r_size(Nr);
 
-    CoordTheta const theta_min(0.0);
-    CoordTheta const theta_max(2.0 * M_PI);
-    IdxStepTheta const theta_size(Nt);
+    CoordP const p_min(0.0);
+    CoordP const p_max(2.0 * M_PI);
+    IdxStepP const p_size(Nt);
 
     IdxR const r_start(1); // avoid singular point at r = 0.
-    IdxTheta const theta_start(0);
+    IdxP const p_start(0);
 
     double const dr((r_max - r_min) / r_size);
-    double const dtheta((theta_max - theta_min) / theta_size);
+    double const dp((p_max - p_min) / p_size);
 
     ddc::DiscreteDomain<GridR> idx_range_r(r_start, r_size);
-    ddc::DiscreteDomain<GridTheta> idx_range_theta(theta_start, theta_size);
-    ddc::DiscreteDomain<GridR, GridTheta> grid(idx_range_r, idx_range_theta);
+    ddc::DiscreteDomain<GridP> idx_range_p(p_start, p_size);
+    ddc::DiscreteDomain<GridR, GridP> grid(idx_range_r, idx_range_p);
 
-    FieldMemRTheta<CoordRTheta> coords(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        coords(irp) = CoordRTheta(
+    FieldMemRP<CoordRP> coords(grid);
+    ddc::for_each(grid, [&](IdxRP const irp) {
+        coords(irp) = CoordRP(
                 r_min + dr * ddc::select<GridR>(irp).uid(),
-                theta_min + dtheta * ddc::select<GridTheta>(irp).uid());
+                p_min + dp * ddc::select<GridP>(irp).uid());
     });
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
+    ddc::for_each(grid, [&](IdxRP const irp) {
         Matrix_2x2 Jacobian_matrix;
         Matrix_2x2 inv_Jacobian_matrix;
 
@@ -237,55 +235,54 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCzarMap)
 TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(0.3, 1.4);
+    const CzarnyToCartesian<X, Y, R, P> analytical_mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
     IdxStepR const r_size(Nr);
 
-    CoordTheta const theta_min(0.0);
-    CoordTheta const theta_max(2.0 * M_PI);
-    IdxStepTheta const theta_size(Nt);
+    CoordP const p_min(0.0);
+    CoordP const p_max(2.0 * M_PI);
+    IdxStepP const p_size(Nt);
 
     double const dr((r_max - r_min) / r_size);
-    double const dtheta((theta_max - theta_min) / theta_size);
+    double const dp((p_max - p_min) / p_size);
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordTheta> theta_knots(theta_size + 1);
+    std::vector<CoordP> p_knots(p_size + 1);
 
     for (int i(0); i < r_size + 1; ++i) {
         r_knots[i] = CoordR(r_min + i * dr);
     }
     r_knots[r_size] = CoordR(r_max);
-    for (int i(0); i < theta_size + 1; ++i) {
-        theta_knots[i] = CoordTheta(theta_min + i * dtheta);
+    for (int i(0); i < p_size + 1; ++i) {
+        p_knots[i] = CoordP(p_min + i * dp);
     }
 
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
+    ddc::init_discrete_space<BSplinesP>(p_knots);
 
     ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
-    ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
+    ddc::init_discrete_space<GridP>(InterpPointsP::get_sampling<GridP>());
 
     IdxRangeR interpolation_idx_range_R(InterpPointsR::get_domain<GridR>());
-    IdxRangeTheta interpolation_idx_range_Theta(InterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
+    IdxRangeP interpolation_idx_range_P(InterpPointsP::get_domain<GridP>());
+    IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    SplineRThetaBuilder builder(grid);
+    SplineRPBuilder builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator evaluator(
+    ddc::PeriodicExtrapolationRule<P> p_extrapolation_rule;
+    SplineRPEvaluator evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    DiscreteToCartesian mapping
-            = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>::
-                    analytical_to_discrete(analytical_mapping, builder, evaluator);
+            p_extrapolation_rule,
+            p_extrapolation_rule);
+    DiscreteToCartesian mapping = DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator>::
+            analytical_to_discrete(analytical_mapping, builder, evaluator);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        const CoordRTheta coord_rp(ddc::coordinate(irp));
+    ddc::for_each(grid, [&](IdxRP const irp) {
+        const CoordRP coord_rp(ddc::coordinate(irp));
         const double r = ddc::get<R>(coord_rp);
         if (fabs(r) > 1e-15) {
             Matrix_2x2 Jacobian_matrix;

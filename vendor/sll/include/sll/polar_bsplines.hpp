@@ -245,7 +245,7 @@ public:
             using DimY = typename DiscreteMapping::cartesian_tag_y;
             using mapping_tensor_product_index_type = ddc::DiscreteElement<
                     typename DiscreteMapping::BSplineR,
-                    typename DiscreteMapping::BSplineTheta>;
+                    typename DiscreteMapping::BSplineP>;
             if constexpr (C > -1) {
                 const ddc::Coordinate<DimX, DimY> pole
                         = curvilinear_to_cartesian(ddc::Coordinate<DimR, DimTheta>(0.0, 0.0));
@@ -530,13 +530,13 @@ public:
         }
 
     private:
-        template <class EvalTypeR, class EvalTypeTheta>
+        template <class EvalTypeR, class EvalTypeP>
         ddc::DiscreteElement<BSplinesR, BSplinesTheta> eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 ddc::Coordinate<DimR, DimTheta> coord_eval,
                 EvalTypeR const,
-                EvalTypeTheta const) const;
+                EvalTypeP const) const;
     };
 };
 
@@ -586,14 +586,14 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
 
 template <class BSplinesR, class BSplinesTheta, int C>
 template <class DDim, class MemorySpace>
-template <class EvalTypeR, class EvalTypeTheta>
+template <class EvalTypeR, class EvalTypeP>
 ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
         Impl<DDim, MemorySpace>::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 ddc::Coordinate<DimR, DimTheta> coord_eval,
                 EvalTypeR const,
-                EvalTypeTheta const) const
+                EvalTypeP const) const
 {
     assert(singular_values.extent(0) == n_singular_basis());
     assert(values.extent(0) == BSplinesR::degree() + 1);
@@ -601,9 +601,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
     static_assert(
             std::is_same_v<EvalTypeR, eval_type> || std::is_same_v<EvalTypeR, eval_deriv_type>);
     static_assert(
-            std::is_same_v<
-                    EvalTypeTheta,
-                    eval_type> || std::is_same_v<EvalTypeTheta, eval_deriv_type>);
+            std::is_same_v<EvalTypeP, eval_type> || std::is_same_v<EvalTypeP, eval_deriv_type>);
 
     ddc::DiscreteElement<BSplinesR> jmin_r;
     ddc::DiscreteElement<BSplinesTheta> jmin_theta;
@@ -621,10 +619,10 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
     } else if constexpr (std::is_same_v<EvalTypeR, eval_deriv_type>) {
         jmin_r = ddc::discrete_space<BSplinesR>().eval_deriv(vals_r, ddc::select<DimR>(coord_eval));
     }
-    if constexpr (std::is_same_v<EvalTypeTheta, eval_type>) {
+    if constexpr (std::is_same_v<EvalTypeP, eval_type>) {
         jmin_theta = ddc::discrete_space<BSplinesTheta>()
                              .eval_basis(vals_theta, ddc::select<DimTheta>(coord_eval));
-    } else if constexpr (std::is_same_v<EvalTypeTheta, eval_deriv_type>) {
+    } else if constexpr (std::is_same_v<EvalTypeP, eval_deriv_type>) {
         jmin_theta = ddc::discrete_space<BSplinesTheta>()
                              .eval_deriv(vals_theta, ddc::select<DimTheta>(coord_eval));
     }

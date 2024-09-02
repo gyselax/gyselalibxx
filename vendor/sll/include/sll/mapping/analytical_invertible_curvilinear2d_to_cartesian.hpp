@@ -13,13 +13,15 @@
  *
  * @see Curvilinear2DToCartesian
  */
-template <class X, class Y, class R, class Theta>
-class AnalyticalInvertibleCurvilinear2DToCartesian : public Curvilinear2DToCartesian<X, Y, R, Theta>
+template <class DimX, class DimY, class DimR, class DimP>
+class AnalyticalInvertibleCurvilinear2DToCartesian
+    : public Curvilinear2DToCartesian<DimX, DimY, DimR, DimP>
 {
 public:
     virtual ~AnalyticalInvertibleCurvilinear2DToCartesian() {};
 
-    virtual ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    virtual ddc::Coordinate<DimX, DimY> operator()(
+            ddc::Coordinate<DimR, DimP> const& coord) const = 0;
 
     /**
      * @brief Compute the logical coordinates from the physical coordinates.
@@ -34,5 +36,6 @@ public:
      *
      * @see Curvilinear2DToCartesian::operator()
      */
-    virtual ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const = 0;
+    virtual ddc::Coordinate<DimR, DimP> operator()(
+            ddc::Coordinate<DimX, DimY> const& coord) const = 0;
 };
