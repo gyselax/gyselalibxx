@@ -31,7 +31,7 @@ private:
     using X = typename CurvilinearToCartesian::cartesian_tag_x;
     using Y = typename CurvilinearToCartesian::cartesian_tag_y;
     using R = typename CurvilinearToCartesian::curvilinear_tag_r;
-    using Theta = typename CurvilinearToCartesian::curvilinear_tag_p;
+    using Theta = typename CurvilinearToCartesian::curvilinear_tag_theta;
 
 protected:
     /**
