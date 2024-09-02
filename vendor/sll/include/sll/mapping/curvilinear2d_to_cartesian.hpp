@@ -10,26 +10,26 @@
 /**
  * @brief A class for describing curvilinear 2D mappings from the logical domain to the physical domain.
  * */
-template <class X, class Y, class R, class Theta>
+template <class DimX, class DimY, class DimR, class DimP>
 class Curvilinear2DToCartesian
 {
 public:
     /**
      * @brief Indicate the first physical coordinate.
      */
-    using cartesian_tag_x = X;
+    using cartesian_tag_x = DimX;
     /**
      * @brief Indicate the second physical coordinate.
      */
-    using cartesian_tag_y = Y;
+    using cartesian_tag_y = DimY;
     /**
      * @brief Indicate the first logical coordinate.
      */
-    using curvilinear_tag_r = R;
+    using curvilinear_tag_r = DimR;
     /**
      * @brief Indicate the second logical coordinate.
      */
-    using curvilinear_tag_theta = Theta;
+    using curvilinear_tag_p = DimP;
     /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.
      */
@@ -92,7 +92,8 @@ public:
      * @return The coordinates in the physical domain.
      *
      */
-    virtual ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    virtual ddc::Coordinate<DimX, DimY> operator()(
+            ddc::Coordinate<DimR, DimP> const& coord) const = 0;
 
     /**
      * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
@@ -102,7 +103,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    virtual double jacobian(ddc::Coordinate<R, Theta> const& coord) const
+    virtual double jacobian(ddc::Coordinate<DimR, DimP> const& coord) const
     {
         const double j_rr = jacobian_11(coord);
         const double j_rp = jacobian_12(coord);
@@ -130,7 +131,7 @@ public:
      * @see Curvilinear2DToCartesian::jacobian_21
      * @see Curvilinear2DToCartesian::jacobian_22
      */
-    virtual void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix)
+    virtual void jacobian_matrix(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix)
             const = 0;
 
     /**
@@ -144,7 +145,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    virtual double jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const = 0;
     /**
      * @brief Compute the (1,2) coefficient of the Jacobian matrix.
      *
@@ -156,7 +157,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    virtual double jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const = 0;
     /**
      * @brief Compute the (2,1) coefficient of the Jacobian matrix.
      *
@@ -168,7 +169,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    virtual double jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const = 0;
     /**
      * @brief Compute the (2,2) coefficient of the Jacobian matrix.
      *
@@ -180,7 +181,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    virtual double jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const = 0;
 
     /**
      * @brief Compute full inverse Jacobian matrix.
@@ -201,7 +202,7 @@ public:
      * @see Curvilinear2DToCartesian::inv_jacobian_21
      * @see Curvilinear2DToCartesian::inv_jacobian_22
      */
-    virtual void inv_jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix)
+    virtual void inv_jacobian_matrix(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix)
             const
     {
         double jacob = jacobian(coord);
@@ -222,7 +223,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const
+    virtual double inv_jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const
     {
         assert(fabs(jacobian(coord)) >= 1e-15);
         return jacobian_22(coord) / jacobian(coord);
@@ -238,7 +239,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const
+    virtual double inv_jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const
     {
         assert(fabs(jacobian(coord)) >= 1e-15);
         return -jacobian_12(coord) / jacobian(coord);
@@ -254,7 +255,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const
+    virtual double inv_jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const
     {
         assert(fabs(jacobian(coord)) >= 1e-15);
         return -jacobian_21(coord) / jacobian(coord);
@@ -270,7 +271,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const
+    virtual double inv_jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const
     {
         assert(fabs(jacobian(coord)) >= 1e-15);
         return jacobian_11(coord) / jacobian(coord);
@@ -288,7 +289,7 @@ public:
      * @param[out] matrix
      * 				The metric tensor matrix.
      */
-    virtual void metric_tensor(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const
+    virtual void metric_tensor(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix) const
     {
         const double J_rr = jacobian_11(coord);
         const double J_rp = jacobian_12(coord);
@@ -308,10 +309,10 @@ public:
      * @param[out] matrix
      * 				The metric tensor matrix.
      */
-    virtual void inverse_metric_tensor(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix)
+    virtual void inverse_metric_tensor(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix)
             const
     {
-        assert(fabs(ddc::get<R>(coord)) >= 1e-15);
+        assert(fabs(ddc::get<DimR>(coord)) >= 1e-15);
         const double J_rr = jacobian_11(coord);
         const double J_rp = jacobian_12(coord);
         const double J_pr = jacobian_21(coord);
@@ -335,7 +336,7 @@ public:
      */
     std::array<double, 2> to_covariant(
             std::array<double, 2> const& contravariant_vector,
-            ddc::Coordinate<R, Theta> const& coord) const
+            ddc::Coordinate<DimR, DimP> const& coord) const
     {
         Matrix_2x2 inv_metric_tensor;
         inverse_metric_tensor(coord, inv_metric_tensor);

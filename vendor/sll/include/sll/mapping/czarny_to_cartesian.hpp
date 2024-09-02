@@ -41,26 +41,27 @@
  *
  * @see AnalyticalInvertibleCurvilinear2DToCartesian
  */
-template <class X, class Y, class R, class Theta>
-class CzarnyToCartesian : public AnalyticalInvertibleCurvilinear2DToCartesian<X, Y, R, Theta>
+template <class DimX, class DimY, class DimR, class DimP>
+class CzarnyToCartesian
+    : public AnalyticalInvertibleCurvilinear2DToCartesian<DimX, DimY, DimR, DimP>
 {
 public:
     /**
      * @brief Indicate the first physical coordinate.
      */
-    using cartesian_tag_x = X;
+    using cartesian_tag_x = DimX;
     /**
      * @brief Indicate the second physical coordinate.
      */
-    using cartesian_tag_y = Y;
+    using cartesian_tag_y = DimY;
     /**
      * @brief Indicate the first logical coordinate.
      */
-    using circular_tag_r = R;
+    using circular_tag_r = DimR;
     /**
      * @brief Indicate the second logical coordinate.
      */
-    using circular_tag_theta = Theta;
+    using circular_tag_p = DimP;
     /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.
      */
@@ -146,23 +147,23 @@ public:
         return m_e;
     }
 
-    ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const
+    ddc::Coordinate<DimX, DimY> operator()(ddc::Coordinate<DimR, DimP> const& coord) const
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         const double tmp1 = std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
 
         const double x = (1.0 - tmp1) / m_epsilon;
         const double y = m_e * r * std::sin(theta)
                          / (std::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1));
 
-        return ddc::Coordinate<X, Y>(x, y);
+        return ddc::Coordinate<DimX, DimY>(x, y);
     }
 
-    ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const
+    ddc::Coordinate<DimR, DimP> operator()(ddc::Coordinate<DimX, DimY> const& coord) const
     {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
+        const double x = ddc::get<DimX>(coord);
+        const double y = ddc::get<DimY>(coord);
         const double ex = 1. + m_epsilon * x;
         const double ex2 = (m_epsilon * x * x - 2. * x - m_epsilon);
         const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
@@ -173,23 +174,23 @@ public:
         if (theta < 0) {
             theta = 2 * M_PI + theta;
         }
-        return ddc::Coordinate<R, Theta>(r, theta);
+        return ddc::Coordinate<DimR, DimP>(r, theta);
     }
 
-    double jacobian(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         return -r / std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta))) * m_e * xi
                / (2 - std::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta))));
     }
 
 
-    void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
+    void jacobian_matrix(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);
@@ -209,26 +210,26 @@ public:
                           + m_e * cos_theta * xi / sqrt_eps_2);
     }
 
-    double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         return -std::cos(theta)
                / std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     }
 
-    double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
         return r * std::sin(theta)
                / std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     }
 
-    double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);
@@ -240,10 +241,10 @@ public:
                + m_e * sin_theta * xi / tmp2;
     }
 
-    double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    double jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);
@@ -256,10 +257,11 @@ public:
                   + m_e * cos_theta * xi / tmp2);
     }
 
-    void inv_jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
+    void inv_jacobian_matrix(ddc::Coordinate<DimR, DimP> const& coord, Matrix_2x2& matrix)
+            const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         assert(r >= 1e-15);
 
@@ -280,10 +282,10 @@ public:
 
 
 
-    double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    double inv_jacobian_11(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);
@@ -297,10 +299,10 @@ public:
         return -1 / fact_1 * (-sin_theta * fact_2 + cos_theta * fact_3) / fact_3;
     }
 
-    double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
+    double inv_jacobian_12(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         const double sin_theta = std::sin(theta);
         const double cos_theta = std::cos(theta);
@@ -311,10 +313,10 @@ public:
         return sin_theta / fact_3;
     }
 
-    double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
+    double inv_jacobian_21(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         assert(r >= 1e-15);
 
@@ -330,10 +332,10 @@ public:
         return 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
     }
 
-    double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    double inv_jacobian_22(ddc::Coordinate<DimR, DimP> const& coord) const final
     {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
+        const double r = ddc::get<DimR>(coord);
+        const double theta = ddc::get<DimP>(coord);
 
         assert(r >= 1e-15);
 
@@ -369,8 +371,8 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    template <class IdxRange>
-    void to_pseudo_cartesian_jacobian_center_matrix(IdxRange const& grid, Matrix_2x2& matrix) const
+    template <class Domain>
+    void to_pseudo_cartesian_jacobian_center_matrix(Domain const& grid, Matrix_2x2& matrix) const
     {
         const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         const double sqrt_eps_2 = std::sqrt(1. + m_epsilon * m_epsilon);
@@ -392,8 +394,8 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_11_center(IdxRange const& grid) const
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_11_center(Domain const& grid) const
     {
         return -std::sqrt(1 + m_epsilon * m_epsilon);
     }
@@ -410,8 +412,8 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_12_center(IdxRange const& grid) const
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_12_center(Domain const& grid) const
     {
         return 0;
     }
@@ -428,8 +430,8 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_21_center(IdxRange const& grid) const
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_21_center(Domain const& grid) const
     {
         return 0;
     }
@@ -446,8 +448,8 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_22_center(IdxRange const& grid) const
+    template <class Domain>
+    double to_pseudo_cartesian_jacobian_22_center(Domain const& grid) const
     {
         const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         return (2 - std::sqrt(1 + m_epsilon * m_epsilon)) / m_e / xi;

@@ -103,7 +103,7 @@ host_t<FieldMem<double, IdxRange<IDim...>>> compute_coeffs_on_mapping(
 {
     IdxRange<IDim...> grid = get_idx_range<IDim...>(coefficients);
     ddc::for_each(grid, [&](Idx<IDim...> const idx) {
-        Coord<typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_theta> coord(
+        Coord<typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_p> coord(
                 ddc::coordinate(idx));
         coefficients(idx) *= fabs(mapping.jacobian(coord));
     });
