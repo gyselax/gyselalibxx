@@ -108,131 +108,130 @@ $(document).ready(function(){initNavTree('bsl__advection__rp_8hpp_source.html','
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/curvilinear2d_to_cartesian.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/discrete_mapping_to_cartesian.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;advection_domain.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;directional_tag.hpp&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;i_interpolator_2d_rp.hpp&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;iadvectionrp.hpp&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;spline_foot_finder.hpp&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;vector_field.hpp&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;vector_field_mem.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;advection_domain.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;directional_tag.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;i_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;iadvectionrp.hpp&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;spline_foot_finder.hpp&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;vector_field.hpp&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;vector_field_mem.hpp&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FootFinder, <span class="keyword">class</span> Mapping&gt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a> : <span class="keyword">public</span> <a class="code" href="classIAdvectionRTheta.html">IAdvectionRTheta</a></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt;ddc::NullExtrapolationRule&gt;</a> <span class="keyword">const</span>&amp; m_interpolator;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    FootFinder <span class="keyword">const</span>&amp; m_find_feet;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    Mapping <span class="keyword">const</span>&amp; m_mapping;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> FootFinder, <span class="keyword">class</span> Mapping&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html">   59</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a> : <span class="keyword">public</span> <a class="code" href="classIAdvectionRTheta.html">IAdvectionRTheta</a></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt;ddc::NullExtrapolationRule&gt;</a> <span class="keyword">const</span>&amp; m_interpolator;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    FootFinder <span class="keyword">const</span>&amp; m_find_feet;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    Mapping <span class="keyword">const</span>&amp; m_mapping;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">   86</a></span>&#160;    <a class="code" href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">BslAdvectionRTheta</a>(</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt;ddc::NullExtrapolationRule&gt;</a> <span class="keyword">const</span>&amp;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    function_interpolator,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            FootFinder <span class="keyword">const</span>&amp; foot_finder,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        : m_interpolator(function_interpolator)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        , m_find_feet(foot_finder)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        , m_mapping(mapping)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ~<a class="code" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">   85</a></span>&#160;    <a class="code" href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">BslAdvectionRTheta</a>(</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt;ddc::NullExtrapolationRule&gt;</a> <span class="keyword">const</span>&amp;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    function_interpolator,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            FootFinder <span class="keyword">const</span>&amp; foot_finder,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        : m_interpolator(function_interpolator)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        , m_find_feet(foot_finder)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        , m_mapping(mapping)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ~<a class="code" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">  113</a></span>&#160;    DFieldRTheta <a class="code" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">operator()</a>(</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            DFieldRTheta allfdistribu,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="classVectorField.html">DConstVectorFieldRTheta&lt;X, Y&gt;</a> advection_field_xy,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">// Pre-allocate some memory to prevent allocation later in loop</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        std::unique_ptr&lt;IInterpolatorRTheta&gt; <span class="keyword">const</span> interpolator_ptr = m_interpolator.<a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">preallocate</a>();</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">// Initialise the feet</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; feet_rp(get_idx_range(advection_field_xy));</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        ddc::for_each(get_idx_range(advection_field_xy), [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            feet_rp(irp) = ddc::coordinate(irp);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        });</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="comment">// Compute the characteristic feet at tn ----------------------------------------------------</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        m_find_feet(get_field(feet_rp), advection_field_xy, dt);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="comment">// Interpolate the function on the characteristic feet. -------------------------------------</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">  112</a></span>&#160;    DFieldRTheta <a class="code" href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">operator()</a>(</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            DFieldRTheta allfdistribu,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <a class="code" href="classVectorField.html">DConstVectorFieldRTheta&lt;X, Y&gt;</a> advection_field_xy,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">// Pre-allocate some memory to prevent allocation later in loop</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        std::unique_ptr&lt;IInterpolatorRTheta&gt; <span class="keyword">const</span> interpolator_ptr = m_interpolator.<a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">preallocate</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="comment">// Initialise the feet</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; feet_rp(get_idx_range(advection_field_xy));</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        ddc::for_each(get_idx_range(advection_field_xy), [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            feet_rp(irp) = ddc::coordinate(irp);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        });</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="comment">// Compute the characteristic feet at tn ----------------------------------------------------</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        m_find_feet(get_field(feet_rp), advection_field_xy, dt);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="comment">// Interpolate the function on the characteristic feet. -------------------------------------</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">  153</a></span>&#160;    DFieldRTheta <a class="code" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">operator()</a>(</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            DFieldRTheta allfdistribu,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="classVectorField.html">DConstVectorFieldRTheta&lt;R, Theta&gt;</a> advection_field_rp,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            CoordXY <span class="keyword">const</span>&amp; advection_field_xy_center,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        IdxRangeRTheta grid(get_idx_range&lt;GridR, GridTheta&gt;(allfdistribu));</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> npoints_p = IdxRangeTheta(grid).size();</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        IdxRangeRTheta <span class="keyword">const</span> grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        IdxRangeRTheta <span class="keyword">const</span> Opoint_grid(grid.take_first(IdxStepRTheta(1, npoints_p)));</div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">  152</a></span>&#160;    DFieldRTheta <a class="code" href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">operator()</a>(</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            DFieldRTheta allfdistribu,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <a class="code" href="classVectorField.html">DConstVectorFieldRTheta&lt;R, Theta&gt;</a> advection_field_rp,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            CoordXY <span class="keyword">const</span>&amp; advection_field_xy_center,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordtype">double</span> dt)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        IdxRangeRTheta grid(get_idx_range&lt;GridR, GridTheta&gt;(allfdistribu));</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> npoints_p = IdxRangeTheta(grid).size();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        IdxRangeRTheta <span class="keyword">const</span> grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        IdxRangeRTheta <span class="keyword">const</span> Opoint_grid(grid.take_first(IdxStepRTheta(1, npoints_p)));</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="comment">// Convert advection field on RTheta to advection field on XY</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="classVectorFieldMem.html">DVectorFieldMemRTheta&lt;X, Y&gt;</a> advection_field_xy(grid);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        ddc::for_each(grid_without_Opoint, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            CoordRTheta <span class="keyword">const</span> coord_rp(ddc::coordinate(irp));</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            std::array&lt;std::array&lt;double, 2&gt;, 2&gt; J; <span class="comment">// Jacobian matrix</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            m_mapping.jacobian_matrix(coord_rp, J);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            std::array&lt;std::array&lt;double, 2&gt;, 2&gt; G; <span class="comment">// Metric tensor</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            m_mapping.metric_tensor(coord_rp, G);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            ddcHelper::get&lt;X&gt;(advection_field_xy)(irp)</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                    = ddcHelper::get&lt;R&gt;(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                      + ddcHelper::get&lt;Theta&gt;(advection_field_rp)(irp) * -J[1][0]</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                / std::sqrt(G[0][0]);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            ddcHelper::get&lt;Y&gt;(advection_field_xy)(irp)</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                    = ddcHelper::get&lt;R&gt;(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                      + ddcHelper::get&lt;Theta&gt;(advection_field_rp)(irp) * J[0][0]</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                                / std::sqrt(G[0][0]);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        });</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        ddc::for_each(Opoint_grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            ddcHelper::get&lt;X&gt;(advection_field_xy)(irp) = CoordX(advection_field_xy_center);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            ddcHelper::get&lt;Y&gt;(advection_field_xy)(irp) = CoordY(advection_field_xy_center);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        });</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="comment">// Pre-allocate some memory to prevent allocation later in loop</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        std::unique_ptr&lt;IInterpolatorRTheta&gt; <span class="keyword">const</span> interpolator_ptr = m_interpolator.<a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">preallocate</a>();</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="comment">// Initialise the feet</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; feet_rp(grid);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { feet_rp(irp) = ddc::coordinate(irp); });</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="comment">// Compute the characteristic feet at tn ----------------------------------------------------</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        m_find_feet(get_field(feet_rp), advection_field_xy, dt);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="comment">// Interpolate the function on the characteristic feet. -------------------------------------</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;};</div>
-<div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:61</div></div>
-<div class="ttc" id="aclassBslAdvectionRTheta_html_a8ec3143116ac05ac379f74130bdff00f"><div class="ttname"><a href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">BslAdvectionRTheta::operator()</a></div><div class="ttdeci">DFieldRTheta operator()(DFieldRTheta allfdistribu, DConstVectorFieldRTheta&lt; X, Y &gt; advection_field_xy, double dt) const</div><div class="ttdoc">Allocate a Field of the advected function.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:113</div></div>
-<div class="ttc" id="aclassBslAdvectionRTheta_html_ad039fe94bfb0a44e719464206b0825aa"><div class="ttname"><a href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">BslAdvectionRTheta::operator()</a></div><div class="ttdeci">DFieldRTheta operator()(DFieldRTheta allfdistribu, DConstVectorFieldRTheta&lt; R, Theta &gt; advection_field_rp, CoordXY const &amp;advection_field_xy_center, double dt) const</div><div class="ttdoc">Allocate a Field to the advected function.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:153</div></div>
-<div class="ttc" id="aclassBslAdvectionRTheta_html_af559bba295fb3d5fcac425cae71bb972"><div class="ttname"><a href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">BslAdvectionRTheta::BslAdvectionRTheta</a></div><div class="ttdeci">BslAdvectionRTheta(PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt; const &amp;function_interpolator, FootFinder const &amp;foot_finder, Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate an advection operator.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:86</div></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="comment">// Convert advection field on RTheta to advection field on XY</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <a class="code" href="classVectorFieldMem.html">DVectorFieldMemRTheta&lt;X, Y&gt;</a> advection_field_xy(grid);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        ddc::for_each(grid_without_Opoint, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            CoordRTheta <span class="keyword">const</span> coord_rp(ddc::coordinate(irp));</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            std::array&lt;std::array&lt;double, 2&gt;, 2&gt; J; <span class="comment">// Jacobian matrix</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            m_mapping.jacobian_matrix(coord_rp, J);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            std::array&lt;std::array&lt;double, 2&gt;, 2&gt; G; <span class="comment">// Metric tensor</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            m_mapping.metric_tensor(coord_rp, G);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            ddcHelper::get&lt;X&gt;(advection_field_xy)(irp)</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    = ddcHelper::get&lt;R&gt;(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                      + ddcHelper::get&lt;Theta&gt;(advection_field_rp)(irp) * -J[1][0]</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                / std::sqrt(G[0][0]);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            ddcHelper::get&lt;Y&gt;(advection_field_xy)(irp)</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    = ddcHelper::get&lt;R&gt;(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                      + ddcHelper::get&lt;Theta&gt;(advection_field_rp)(irp) * J[0][0]</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                                / std::sqrt(G[0][0]);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        });</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        ddc::for_each(Opoint_grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            ddcHelper::get&lt;X&gt;(advection_field_xy)(irp) = CoordX(advection_field_xy_center);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            ddcHelper::get&lt;Y&gt;(advection_field_xy)(irp) = CoordY(advection_field_xy_center);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        });</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="comment">// Pre-allocate some memory to prevent allocation later in loop</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        std::unique_ptr&lt;IInterpolatorRTheta&gt; <span class="keyword">const</span> interpolator_ptr = m_interpolator.<a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">preallocate</a>();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="comment">// Initialise the feet</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; feet_rp(grid);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { feet_rp(irp) = ddc::coordinate(irp); });</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="comment">// Compute the characteristic feet at tn ----------------------------------------------------</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        m_find_feet(get_field(feet_rp), advection_field_xy, dt);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="comment">// Interpolate the function on the characteristic feet. -------------------------------------</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;};</div>
+<div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:60</div></div>
+<div class="ttc" id="aclassBslAdvectionRTheta_html_a8ec3143116ac05ac379f74130bdff00f"><div class="ttname"><a href="classBslAdvectionRTheta.html#a8ec3143116ac05ac379f74130bdff00f">BslAdvectionRTheta::operator()</a></div><div class="ttdeci">DFieldRTheta operator()(DFieldRTheta allfdistribu, DConstVectorFieldRTheta&lt; X, Y &gt; advection_field_xy, double dt) const</div><div class="ttdoc">Allocate a Field of the advected function.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:112</div></div>
+<div class="ttc" id="aclassBslAdvectionRTheta_html_ad039fe94bfb0a44e719464206b0825aa"><div class="ttname"><a href="classBslAdvectionRTheta.html#ad039fe94bfb0a44e719464206b0825aa">BslAdvectionRTheta::operator()</a></div><div class="ttdeci">DFieldRTheta operator()(DFieldRTheta allfdistribu, DConstVectorFieldRTheta&lt; R, Theta &gt; advection_field_rp, CoordXY const &amp;advection_field_xy_center, double dt) const</div><div class="ttdoc">Allocate a Field to the advected function.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:152</div></div>
+<div class="ttc" id="aclassBslAdvectionRTheta_html_af559bba295fb3d5fcac425cae71bb972"><div class="ttname"><a href="classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972">BslAdvectionRTheta::BslAdvectionRTheta</a></div><div class="ttdeci">BslAdvectionRTheta(PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt; const &amp;function_interpolator, FootFinder const &amp;foot_finder, Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate an advection operator.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:85</div></div>
 <div class="ttc" id="aclassIAdvectionRTheta_html"><div class="ttname"><a href="classIAdvectionRTheta.html">IAdvectionRTheta</a></div><div class="ttdoc">Define the base class of 2D advection operators in polar index range.</div><div class="ttdef"><b>Definition:</b> iadvectionrp.hpp:13</div></div>
 <div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;</a></div></div>
 <div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_acef8faad99837d409dafb5dd4df5bfbf"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">PreallocatableSplineInterpolatorRTheta::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorRTheta &gt; preallocate() const override</div><div class="ttdoc">Create a pointer to an instance of the SplineInterpolatorRTheta class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:149</div></div>

@@ -5,6 +5,6 @@ var dir_401f8b249764c6753d0f677d3a20782c =
     [ "circular_to_cartesian.hpp", "circular__to__cartesian_8hpp_source.html", null ],
     [ "curvilinear2d_to_cartesian.hpp", "curvilinear2d__to__cartesian_8hpp_source.html", null ],
     [ "czarny_to_cartesian.hpp", "czarny__to__cartesian_8hpp_source.html", null ],
-    [ "discrete_mapping_to_cartesian.hpp", "discrete__mapping__to__cartesian_8hpp_source.html", null ],
-    [ "refined_discrete_mapping_to_cartesian.hpp", "refined__discrete__mapping__to__cartesian_8hpp_source.html", null ]
+    [ "discrete_mapping_builder.hpp", "discrete__mapping__builder_8hpp_source.html", null ],
+    [ "discrete_to_cartesian.hpp", "discrete__to__cartesian_8hpp_source.html", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: RefinedDiscreteToCartesian&lt; X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, Nr, Nt &gt;::RRefined Struct Reference</title>
+<title>Gyselalib++: RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structRefinedDiscreteToCartesian_1_1RRefined.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -99,65 +99,33 @@ $(document).ready(function(){initNavTree('structRefinedDiscreteToCartesian_1_1RR
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="structRefinedDiscreteToCartesian_1_1RRefined-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">RefinedDiscreteToCartesian&lt; X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, Nr, Nt &gt;::RRefined Struct Reference</div>  </div>
+<div class="title">RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Define non periodic real refined <a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a> dimension.  
- <a href="structRefinedDiscreteToCartesian_1_1RRefined.html#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a0f2de6c0d1c935f6d66ba1f971faedb8"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRefinedDiscreteToCartesian_1_1RRefined.html#a0f2de6c0d1c935f6d66ba1f971faedb8">PERIODIC</a> = false</td></tr>
-<tr class="memdesc:a0f2de6c0d1c935f6d66ba1f971faedb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define periodicity of the dimension.  <a href="structRefinedDiscreteToCartesian_1_1RRefined.html#a0f2de6c0d1c935f6d66ba1f971faedb8">More...</a><br /></td></tr>
-<tr class="separator:a0f2de6c0d1c935f6d66ba1f971faedb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<p>The type of the radial bsplines on which the new mapping will be defined.  
+ <a href="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.png" alt=""/>
+ </div></div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class X, class Y, class SplineRThetaBuilder, class SplineRThetaEvaluator, int Nr, int Nt&gt;<br />
-struct RefinedDiscreteToCartesian&lt; X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, Nr, Nt &gt;::RRefined</h3>
+<div class="textblock"><h3>template&lt;class X, class Y, class SplineBuilder, class SplineEvaluator, int ncells_r, int ncells_theta&gt;<br />
+struct RefinedDiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator, ncells_r, ncells_theta &gt;::BSplinesRRefined</h3>
 
-<p>Define non periodic real refined <a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a> dimension. </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a0f2de6c0d1c935f6d66ba1f971faedb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f2de6c0d1c935f6d66ba1f971faedb8">&#9670;&nbsp;</a></span>PERIODIC</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class X , class Y , class SplineRThetaBuilder , class SplineRThetaEvaluator , int Nr, int Nt&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool <a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineRThetaBuilder, SplineRThetaEvaluator, Nr, Nt &gt;::RRefined::PERIODIC = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Define periodicity of the dimension. </p>
-<p>Here, not periodic. </p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/mapping/<a class="el" href="refined__discrete__mapping__to__cartesian_8hpp_source.html">refined_discrete_mapping_to_cartesian.hpp</a></li>
+<p>The type of the radial bsplines on which the new mapping will be defined. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/mapping/<a class="el" href="discrete__mapping__builder_8hpp_source.html">discrete_mapping_builder.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classRefinedDiscreteToCartesian.html">RefinedDiscreteToCartesian</a></li><li class="navelem"><a class="el" href="structRefinedDiscreteToCartesian_1_1RRefined.html">RRefined</a></li>
+    <li class="navelem"><a class="el" href="classRefinedDiscreteToCartesianBuilder.html">RefinedDiscreteToCartesianBuilder</a></li><li class="navelem"><a class="el" href="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.html">BSplinesRRefined</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
