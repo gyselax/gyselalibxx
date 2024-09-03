@@ -9,7 +9,8 @@
 #include "sll/mapping/circular_to_cartesian.hpp"
 #include "sll/mapping/curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
-#include "sll/mapping/refined_discrete_mapping_to_cartesian.hpp"
+#include "sll/mapping/discrete_mapping_builder.hpp"
+#include "sll/mapping/discrete_to_cartesian.hpp"
 
 #include "test_utils.hpp"
 
@@ -60,7 +61,7 @@ struct GridP : SplineInterpPointsP::interpolation_discrete_dimension_type
 {
 };
 
-using SplineRPBuilder = ddc::SplineBuilder2D<
+using SplineRThetaBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
@@ -75,7 +76,7 @@ using SplineRPBuilder = ddc::SplineBuilder2D<
         GridR,
         GridP>;
 
-using SplineRPEvaluator = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
@@ -239,19 +240,15 @@ double check_value_not_on_grid(
 }
 
 
-template <class Mapping, int refined_Nr, int refined_Nt>
+template <class Mapping, class DiscreteMapping, class RefinedDiscreteMapping>
 double test_on_grid_and_not_on_grid(
         int const Nr,
         int const Nt,
+        int const refined_Nr,
+        int const refined_Nt,
         Mapping const& analytical_mapping,
-        RefinedDiscreteToCartesian<
-                X,
-                Y,
-                SplineRPBuilder,
-                SplineRPEvaluator,
-                refined_Nr,
-                refined_Nt> const& refined_mapping,
-        DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator> const& discrete_mapping,
+        RefinedDiscreteMapping const& refined_mapping,
+        DiscreteMapping const& discrete_mapping,
         IdxRangeRP const& grid)
 {
     std::cout << std::endl
@@ -396,19 +393,15 @@ double check_Jacobian_not_on_grid(
 
 
 
-template <class Mapping, int refined_Nr, int refined_Nt>
+template <class Mapping, class RefinedDiscreteMapping, class DiscreteMapping>
 double test_Jacobian(
         int const Nr,
         int const Nt,
+        int const refined_Nr,
+        int const refined_Nt,
         Mapping const& analytical_mapping,
-        RefinedDiscreteToCartesian<
-                X,
-                Y,
-                SplineRPBuilder,
-                SplineRPEvaluator,
-                refined_Nr,
-                refined_Nt> const& refined_mapping,
-        DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator> const& discrete_mapping,
+        RefinedDiscreteMapping const& refined_mapping,
+        DiscreteMapping const& discrete_mapping,
         IdxRangeRP const& grid)
 {
     std::cout << std::endl
@@ -455,9 +448,8 @@ double check_pseudo_Cart(
     double max_err = 0.;
     Matrix_2x2 discrete_pseudo_Cart;
     Matrix_2x2 analytical_pseudo_Cart;
-    mapping.to_pseudo_cartesian_jacobian_center_matrix(idx_range, discrete_pseudo_Cart);
-    analytical_mapping
-            .to_pseudo_cartesian_jacobian_center_matrix(idx_range, analytical_pseudo_Cart);
+    mapping.to_pseudo_cartesian_jacobian_center_matrix(discrete_pseudo_Cart);
+    analytical_mapping.to_pseudo_cartesian_jacobian_center_matrix(analytical_pseudo_Cart);
 
     const double diff_11 = double(discrete_pseudo_Cart[0][0] - analytical_pseudo_Cart[0][0]);
     const double diff_12 = double(discrete_pseudo_Cart[0][1] - analytical_pseudo_Cart[0][1]);
@@ -474,19 +466,15 @@ double check_pseudo_Cart(
 
 
 
-template <class Mapping, int refined_Nr, int refined_Nt>
+template <class Mapping, class RefinedDiscreteMapping, class DiscreteMapping>
 double test_pseudo_Cart(
         int const Nr,
         int const Nt,
+        int const refined_Nr,
+        int const refined_Nt,
         Mapping const& analytical_mapping,
-        RefinedDiscreteToCartesian<
-                X,
-                Y,
-                SplineRPBuilder,
-                SplineRPEvaluator,
-                refined_Nr,
-                refined_Nt> const& refined_mapping,
-        DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator> const& discrete_mapping,
+        RefinedDiscreteMapping const& refined_mapping,
+        DiscreteMapping const& discrete_mapping,
         IdxRangeRP const& grid)
 {
     std::cout << std::endl
@@ -555,10 +543,10 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
 
 
     // Operators ---
-    SplineRPBuilder builder(grid);
+    SplineRThetaBuilder builder(grid);
     ddc::ConstantExtrapolationRule<R, P> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, P> boundary_condition_r_right(r_max);
-    SplineRPEvaluator spline_evaluator(
+    SplineRThetaEvaluator spline_evaluator(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<P>(),
@@ -568,22 +556,36 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     // Tests ---
     std::array<double, 3> results;
 
-    DiscreteToCartesian discrete_mapping
-            = DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator>::
-                    analytical_to_discrete(analytical_mapping, builder, spline_evaluator);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            analytical_mapping,
+            builder,
+            spline_evaluator);
+    DiscreteToCartesian discrete_mapping = mapping_builder();
 
-    RefinedDiscreteToCartesian refined_mapping_16x32
-            = RefinedDiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator, 16, 32>::
-                    analytical_to_refined(analytical_mapping, grid);
+    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, 16, 32>
+            mapping_builder_16x32(
+                    Kokkos::DefaultHostExecutionSpace(),
+                    analytical_mapping,
+                    builder,
+                    spline_evaluator);
+    DiscreteToCartesian refined_mapping_16x32 = mapping_builder_16x32();
 
-    RefinedDiscreteToCartesian refined_mapping_32x64
-            = RefinedDiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator, 32, 64>::
-                    analytical_to_refined(analytical_mapping, grid);
+    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, 32, 64>
+            mapping_builder_32x64(
+                    Kokkos::DefaultHostExecutionSpace(),
+                    analytical_mapping,
+                    builder,
+                    spline_evaluator);
+    DiscreteToCartesian refined_mapping_32x64 = mapping_builder_32x64();
 
-
-    RefinedDiscreteToCartesian refined_mapping_64x128
-            = RefinedDiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator, 64, 128>::
-                    analytical_to_refined(analytical_mapping, grid);
+    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, 64, 128>
+            mapping_builder_64x128(
+                    Kokkos::DefaultHostExecutionSpace(),
+                    analytical_mapping,
+                    builder,
+                    spline_evaluator);
+    DiscreteToCartesian refined_mapping_64x128 = mapping_builder_64x128();
 
 
     std::cout << std::endl
@@ -591,6 +593,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[0] = test_on_grid_and_not_on_grid(
             Nr,
             Nt,
+            16,
+            32,
             analytical_mapping,
             refined_mapping_16x32,
             discrete_mapping,
@@ -599,6 +603,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[1] = test_on_grid_and_not_on_grid(
             Nr,
             Nt,
+            32,
+            64,
             analytical_mapping,
             refined_mapping_32x64,
             discrete_mapping,
@@ -608,6 +614,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[2] = test_on_grid_and_not_on_grid(
             Nr,
             Nt,
+            64,
+            128,
             analytical_mapping,
             refined_mapping_64x128,
             discrete_mapping,
@@ -629,6 +637,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[0] = test_Jacobian(
             Nr,
             Nt,
+            16,
+            32,
             analytical_mapping,
             refined_mapping_16x32,
             discrete_mapping,
@@ -637,6 +647,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[1] = test_Jacobian(
             Nr,
             Nt,
+            32,
+            64,
             analytical_mapping,
             refined_mapping_32x64,
             discrete_mapping,
@@ -646,6 +658,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[2] = test_Jacobian(
             Nr,
             Nt,
+            64,
+            128,
             analytical_mapping,
             refined_mapping_64x128,
             discrete_mapping,
@@ -667,6 +681,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[0] = test_pseudo_Cart(
             Nr,
             Nt,
+            16,
+            32,
             analytical_mapping,
             refined_mapping_16x32,
             discrete_mapping,
@@ -675,6 +691,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[1] = test_pseudo_Cart(
             Nr,
             Nt,
+            32,
+            64,
             analytical_mapping,
             refined_mapping_32x64,
             discrete_mapping,
@@ -684,6 +702,8 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     results[2] = test_pseudo_Cart(
             Nr,
             Nt,
+            64,
+            128,
             analytical_mapping,
             refined_mapping_64x128,
             discrete_mapping,

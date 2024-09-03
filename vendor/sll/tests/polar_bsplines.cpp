@@ -2,8 +2,11 @@
 #include <random>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <sll/mapping/circular_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/polar_bsplines.hpp>
 #include <sll/view.hpp>
 
@@ -118,7 +121,6 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             ddc::PeriodicExtrapolationRule<Theta>,
             GridR,
             GridTheta>;
-    using DiscreteMapping = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>;
     using BSplines = typename TestFixture::BSplines;
     using CoordR = ddc::Coordinate<R>;
     using CoordTheta = ddc::Coordinate<Theta>;
@@ -173,8 +175,12 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             theta_extrapolation_rule);
 
     const CircToCart coord_changer;
-    DiscreteMapping const mapping
-            = DiscreteMapping::analytical_to_discrete(coord_changer, builder_rp, evaluator_rp);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            coord_changer,
+            builder_rp,
+            evaluator_rp);
+    DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     int const n_eval = (BSplinesR::degree() + 1) * (BSplinesTheta::degree() + 1);

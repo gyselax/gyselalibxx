@@ -6,7 +6,7 @@
 
 #include <sll/bernstein.hpp>
 #include <sll/mapping/barycentric_coordinates.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/view.hpp>
 

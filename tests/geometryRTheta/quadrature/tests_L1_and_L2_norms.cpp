@@ -3,7 +3,8 @@
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 
 #include <gtest/gtest.h>
 
@@ -262,9 +263,13 @@ TEST_P(SplineQuadrature, TestFunctions)
     SplineRThetaEvaluatorConstBound
             spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
 
-    DiscreteToCartesian const discrete_mapping
-            = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>::
-                    analytical_to_discrete(mapping_1, builder, spline_evaluator_extrapol);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound> const
+            discrete_mapping_builder(
+                    Kokkos::DefaultHostExecutionSpace(),
+                    mapping_1,
+                    builder,
+                    spline_evaluator_extrapol);
+    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;
     TOLs[1][0] = 5e-3;

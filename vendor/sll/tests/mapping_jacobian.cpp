@@ -7,7 +7,8 @@
 #include "sll/mapping/circular_to_cartesian.hpp"
 #include "sll/mapping/curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
-#include "sll/mapping/discrete_mapping_to_cartesian.hpp"
+#include "sll/mapping/discrete_mapping_builder.hpp"
+#include "sll/mapping/discrete_to_cartesian.hpp"
 
 #include "test_utils.hpp"
 
@@ -279,9 +280,12 @@ TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesian mapping
-            = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>::
-                    analytical_to_discrete(analytical_mapping, builder, evaluator);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            analytical_mapping,
+            builder,
+            evaluator);
+    DiscreteToCartesian mapping = mapping_builder();
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {

@@ -1,10 +1,10 @@
+// SPDX-License-Identifier: MIT
 #pragma once
+#include <iostream>
 
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines.hpp>
 
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
-
 
 /**
  * @brief A class for describing discrete 2D mappings from the logical domain to the physical domain.
@@ -20,23 +20,23 @@
  *
  * @see Curvilinear2DToCartesian
  */
-template <class X, class Y, class SplineBuilder, class SplineEvaluator>
+template <class X, class Y, class SplineEvaluator>
 class DiscreteToCartesian
     : public Curvilinear2DToCartesian<
               X,
               Y,
-              typename SplineBuilder::continuous_dimension_type1,
-              typename SplineBuilder::continuous_dimension_type2>
+              typename SplineEvaluator::continuous_dimension_type1,
+              typename SplineEvaluator::continuous_dimension_type2>
 {
 public:
     /**
      * @brief Indicate the bspline type of the first logical dimension.
      */
-    using BSplineR = typename SplineBuilder::bsplines_type1;
+    using BSplineR = typename SplineEvaluator::bsplines_type1;
     /**
      * @brief Indicate the bspline type of the second logical dimension.
      */
-    using BSplineTheta = typename SplineBuilder::bsplines_type2;
+    using BSplineTheta = typename SplineEvaluator::bsplines_type2;
 
     /**
      * @brief Indicate the first physical coordinate.
@@ -56,33 +56,26 @@ public:
     using circular_tag_theta = typename BSplineTheta::continuous_dimension_type;
 
     /**
-     * @brief Indicate the first logical coordinate in the discrete space.
-     */
-    using GridR = typename SplineBuilder::interpolation_discrete_dimension_type1;
-
-    /**
-     * @brief Indicate the second logical coordinate in the discrete space.
-     */
-    using GridTheta = typename SplineBuilder::interpolation_discrete_dimension_type2;
-
-    /**
      * @brief Define a 2x2 matrix with an 2D array of an 2D array.
      */
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
 private:
-    using interpolation_domain = typename SplineBuilder::interpolation_domain_type;
-    using spline_domain = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
+    using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
 
-    using SplineType = ddc::Chunk<
+    using SplineType = ddc::ChunkView<
             double,
-            spline_domain,
-            ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>;
+            spline_idx_range,
+            std::experimental::layout_right,
+            typename SplineEvaluator::memory_space>;
+
+    using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
 
 private:
-    SplineType x_spline_representation;
-    SplineType y_spline_representation;
-    SplineEvaluator const& spline_evaluator;
+    SplineType m_x_spline_representation;
+    SplineType m_y_spline_representation;
+    SplineEvaluator m_spline_evaluator;
+    IdxRangeTheta m_idx_range_theta;
 
 public:
     /**
@@ -107,18 +100,24 @@ public:
      * @param[in] evaluator
      * 		The evaluator used to evaluate the mapping.
      *
+     * @param[in] idx_range_theta
+     *      The index range describing the poloidal points which should be used to average the derivatives of
+     *      the pseudo-Cartesian matrix at the central point.
+     *
      *
      * @see SplineBuilder2D
      * @see DiscreteToCartesian::operator()
      * @see SplineBoundaryValue
      */
     DiscreteToCartesian(
-            SplineType&& curvilinear_to_x,
-            SplineType&& curvilinear_to_y,
-            SplineEvaluator const& evaluator)
-        : x_spline_representation(std::move(curvilinear_to_x))
-        , y_spline_representation(std::move(curvilinear_to_y))
-        , spline_evaluator(evaluator)
+            SplineType curvilinear_to_x,
+            SplineType curvilinear_to_y,
+            SplineEvaluator const& evaluator,
+            IdxRangeTheta idx_range_theta)
+        : m_x_spline_representation(curvilinear_to_x)
+        , m_y_spline_representation(curvilinear_to_y)
+        , m_spline_evaluator(evaluator)
+        , m_idx_range_theta(idx_range_theta)
     {
     }
 
@@ -138,8 +137,8 @@ public:
     ddc::Coordinate<X, Y> operator()(
             ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
-        const double x = spline_evaluator(coord, x_spline_representation.span_cview());
-        const double y = spline_evaluator(coord, y_spline_representation.span_cview());
+        const double x = m_spline_evaluator(coord, m_x_spline_representation.span_cview());
+        const double y = m_spline_evaluator(coord, m_y_spline_representation.span_cview());
         return ddc::Coordinate<X, Y>(x, y);
     }
 
@@ -165,10 +164,14 @@ public:
             ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord,
             Matrix_2x2& matrix) const final
     {
-        matrix[0][0] = spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
-        matrix[0][1] = spline_evaluator.deriv_dim_2(coord, x_spline_representation.span_cview());
-        matrix[1][0] = spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
-        matrix[1][1] = spline_evaluator.deriv_dim_2(coord, y_spline_representation.span_cview());
+        matrix[0][0]
+                = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
+        matrix[0][1]
+                = m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
+        matrix[1][0]
+                = m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
+        matrix[1][1]
+                = m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
     }
 
     /**
@@ -189,7 +192,7 @@ public:
      */
     double jacobian_11(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
     }
 
     /**
@@ -210,7 +213,7 @@ public:
      */
     double jacobian_12(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_2(coord, x_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
     }
 
     /**
@@ -231,7 +234,7 @@ public:
      */
     double jacobian_21(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
     }
 
     /**
@@ -252,7 +255,7 @@ public:
      */
     double jacobian_22(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
-        return spline_evaluator.deriv_dim_2(coord, y_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
     }
 
 
@@ -292,8 +295,6 @@ public:
      *
      *
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
      * @param[out] matrix
      *      The pseudo-Cartesian matrix evaluated at the central point.
      *
@@ -302,29 +303,27 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    void to_pseudo_cartesian_jacobian_center_matrix(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid,
-            Matrix_2x2& matrix) const
+    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const
     {
-        ddc::DiscreteDomain<GridTheta> const theta_domain = ddc::select<GridTheta>(grid);
-
         matrix[0][0] = 0;
         matrix[0][1] = 0;
         matrix[1][0] = 0;
         matrix[1][1] = 0;
 
         // Average the values at (r = 0, theta):
-        ddc::for_each(theta_domain, [&](auto const ip) {
+        ddc::for_each(m_idx_range_theta, [&](auto const ip) {
             const double th = ddc::coordinate(ip);
             ddc::Coordinate<circular_tag_r, circular_tag_theta> const coord(0, th);
             double const deriv_1_x
-                    = spline_evaluator.deriv_dim_1(coord, x_spline_representation.span_cview());
+                    = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
             double const deriv_1_2_x
-                    = spline_evaluator.deriv_1_and_2(coord, x_spline_representation.span_cview());
+                    = m_spline_evaluator
+                              .deriv_1_and_2(coord, m_x_spline_representation.span_cview());
             double const deriv_1_y
-                    = spline_evaluator.deriv_dim_1(coord, y_spline_representation.span_cview());
+                    = m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
             double const deriv_1_2_y
-                    = spline_evaluator.deriv_1_and_2(coord, y_spline_representation.span_cview());
+                    = m_spline_evaluator
+                              .deriv_1_and_2(coord, m_y_spline_representation.span_cview());
 
             // Matrix from pseudo-Cart domain to physical domain by logical domain
             double const j11 = deriv_1_x * std::cos(th) - deriv_1_2_x * std::sin(th);
@@ -346,7 +345,7 @@ public:
             matrix[1][1] += j11 / jacobian;
         });
 
-        int const theta_size = theta_domain.size();
+        int const theta_size = m_idx_range_theta.size();
         matrix[0][0] /= theta_size;
         matrix[0][1] /= theta_size;
         matrix[1][0] /= theta_size;
@@ -357,18 +356,14 @@ public:
     /**
      * @brief Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_11_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+    double to_pseudo_cartesian_jacobian_11_center() const
     {
         Matrix_2x2 jacobian;
-        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        to_pseudo_cartesian_jacobian_center_matrix(jacobian);
         return jacobian[0][0];
     }
 
@@ -376,18 +371,14 @@ public:
     /**
      * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see Curvilinear2DToCartesian::to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_12_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+    double to_pseudo_cartesian_jacobian_12_center() const
     {
         Matrix_2x2 jacobian;
-        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        to_pseudo_cartesian_jacobian_center_matrix(jacobian);
         return jacobian[0][1];
     }
 
@@ -395,18 +386,14 @@ public:
     /**
      * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_21_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+    double to_pseudo_cartesian_jacobian_21_center() const
     {
         Matrix_2x2 jacobian;
-        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        to_pseudo_cartesian_jacobian_center_matrix(jacobian);
         return jacobian[1][0];
     }
 
@@ -414,24 +401,16 @@ public:
     /**
      * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_22_center(
-            ddc::DiscreteDomain<GridR, GridTheta> const& grid) const
+    double to_pseudo_cartesian_jacobian_22_center() const
     {
-        ddc::DiscreteDomain<GridTheta> const theta_domain = ddc::select<GridTheta>(grid);
-
         Matrix_2x2 jacobian;
-        to_pseudo_cartesian_jacobian_center_matrix(grid, jacobian);
+        to_pseudo_cartesian_jacobian_center_matrix(jacobian);
         return jacobian[1][1];
     }
-
-
 
     /**
      * @brief Get a control point of the mapping on B-splines.
@@ -464,52 +443,6 @@ public:
     inline const ddc::Coordinate<X, Y> control_point(
             ddc::DiscreteElement<BSplineR, BSplineTheta> const& el) const
     {
-        return ddc::Coordinate<X, Y>(x_spline_representation(el), y_spline_representation(el));
-    }
-
-
-    /**
-     * @brief Define a DiscreteToCartesian mapping from an analytical mapping.
-     *
-     * @param[in] analytical_mapping
-     * 			The mapping defined analytically.
-     * @param[in] builder
-     * 			The spline builder on the B-splines on which we want to decompose the mapping.
-     * @param[in] evaluator
-     * 			The spline evaluator with which we want to evaluate the mapping.
-     * @tparam Mapping
-     * 			The analytical mapping described by this discrete mapping.
-     *
-     * @return A DiscreteToCartesian version of the analytical mapping.
-     *
-     * @see ddc::SplineBuilder2D
-     * @see ddc::SplineEvaluator2D
-     */
-    template <class Mapping>
-    static DiscreteToCartesian analytical_to_discrete(
-            Mapping const& analytical_mapping,
-            SplineBuilder const& builder,
-            SplineEvaluator const& evaluator)
-    {
-        using IdxRange = typename SplineBuilder::interpolation_domain_type;
-        SplineType curvilinear_to_x_spline(builder.spline_domain());
-        SplineType curvilinear_to_y_spline(builder.spline_domain());
-        ddc::Chunk<double, IdxRange> curvilinear_to_x_vals(builder.interpolation_domain());
-        ddc::Chunk<double, IdxRange> curvilinear_to_y_vals(builder.interpolation_domain());
-        ddc::for_each(
-                builder.interpolation_domain(),
-                [&](typename IdxRange::discrete_element_type const& el) {
-                    ddc::Coordinate<circular_tag_r, circular_tag_theta> polar_coord(
-                            ddc::coordinate(el));
-                    ddc::Coordinate<X, Y> cart_coord = analytical_mapping(polar_coord);
-                    curvilinear_to_x_vals(el) = ddc::select<X>(cart_coord);
-                    curvilinear_to_y_vals(el) = ddc::select<Y>(cart_coord);
-                });
-        builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
-        builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());
-        return DiscreteToCartesian(
-                std::move(curvilinear_to_x_spline),
-                std::move(curvilinear_to_y_spline),
-                evaluator);
+        return ddc::Coordinate<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
     }
 };

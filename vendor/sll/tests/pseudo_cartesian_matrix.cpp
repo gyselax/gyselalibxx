@@ -3,7 +3,8 @@
 
 #include "sll/mapping/circular_to_cartesian.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
-#include "sll/mapping/discrete_mapping_to_cartesian.hpp"
+#include "sll/mapping/discrete_mapping_builder.hpp"
+#include "sll/mapping/discrete_to_cartesian.hpp"
 #include "sll/math_tools.hpp"
 
 #include "test_utils.hpp"
@@ -85,7 +86,7 @@ public:
     using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 
-    using SplineRPBuilder = ddc::SplineBuilder2D<
+    using SplineRThetaBuilder = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
@@ -100,7 +101,7 @@ public:
             GridR,
             GridP>;
 
-    using SplineRPEvaluator = ddc::SplineEvaluator2D<
+    using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
@@ -114,8 +115,6 @@ public:
             GridR,
             GridP>;
 
-
-    using DiscreteMapping = DiscreteToCartesian<X, Y, SplineRPBuilder, SplineRPEvaluator>;
 
     using spline_idx_range = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
 
@@ -186,10 +185,10 @@ public:
         IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
         // --- Define the operators. ----------------------------------------------------------------------
-        SplineRPBuilder const builder(grid);
+        SplineRThetaBuilder const builder(grid);
         ddc::NullExtrapolationRule r_extrapolation_rule;
         ddc::PeriodicExtrapolationRule<P> p_extrapolation_rule;
-        SplineRPEvaluator spline_evaluator(
+        SplineRThetaEvaluator spline_evaluator(
                 r_extrapolation_rule,
                 r_extrapolation_rule,
                 p_extrapolation_rule,
@@ -203,11 +202,16 @@ public:
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
                   << "   - Circular mapping: ";
         const CircularToCartesian<X, Y, R, P> analytical_mapping_circ;
-        DiscreteMapping const discrete_mapping_circ = DiscreteMapping::
-                analytical_to_discrete(analytical_mapping_circ, builder, spline_evaluator);
+        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
+                mapping_builder_circ(
+                        Kokkos::DefaultHostExecutionSpace(),
+                        analytical_mapping_circ,
+                        builder,
+                        spline_evaluator);
+        DiscreteToCartesian discrete_mapping_circ = mapping_builder_circ();
 
-        analytical_mapping_circ.to_pseudo_cartesian_jacobian_center_matrix(grid, analytical_matrix);
-        discrete_mapping_circ.to_pseudo_cartesian_jacobian_center_matrix(grid, discrete_matrix);
+        analytical_mapping_circ.to_pseudo_cartesian_jacobian_center_matrix(analytical_matrix);
+        discrete_mapping_circ.to_pseudo_cartesian_jacobian_center_matrix(discrete_matrix);
         double max_diff_circ
                 = check_same(analytical_matrix, discrete_matrix, 1e-5 * ipow(16. / double(N), 4));
         std::cout << max_diff_circ << std::endl;
@@ -217,11 +221,16 @@ public:
         // --- CZARNY MAPPING -----------------------------------------------------------------------------
         std::cout << "   - Czarny mapping:   ";
         const CzarnyToCartesian<X, Y, R, P> analytical_mapping_czar(0.3, 1.4);
-        DiscreteMapping const discrete_mapping_czar = DiscreteMapping::
-                analytical_to_discrete(analytical_mapping_czar, builder, spline_evaluator);
+        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
+                mapping_builder_czar(
+                        Kokkos::DefaultHostExecutionSpace(),
+                        analytical_mapping_czar,
+                        builder,
+                        spline_evaluator);
+        DiscreteToCartesian discrete_mapping_czar = mapping_builder_czar();
 
-        analytical_mapping_czar.to_pseudo_cartesian_jacobian_center_matrix(grid, analytical_matrix);
-        discrete_mapping_czar.to_pseudo_cartesian_jacobian_center_matrix(grid, discrete_matrix);
+        analytical_mapping_czar.to_pseudo_cartesian_jacobian_center_matrix(analytical_matrix);
+        discrete_mapping_czar.to_pseudo_cartesian_jacobian_center_matrix(discrete_matrix);
         double max_diff_czar
                 = check_same(analytical_matrix, discrete_matrix, 1e-5 * ipow(16. / double(N), 4));
         std::cout << max_diff_czar << std::endl;

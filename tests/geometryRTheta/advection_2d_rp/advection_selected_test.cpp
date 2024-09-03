@@ -11,7 +11,8 @@
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
@@ -52,9 +53,9 @@ using Y_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<X, Y, R,
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
 using X_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>>::X_adv;
+        DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>::X_adv;
 using Y_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>>::Y_adv;
+        DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>::Y_adv;
 #endif
 
 } //end namespace
@@ -191,9 +192,13 @@ int main(int argc, char** argv)
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
-    DiscreteToCartesian mapping
-            = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>::
-                    analytical_to_discrete(analytical_mapping, builder, spline_evaluator_extrapol);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
+            mapping_builder(
+                    Kokkos::DefaultHostExecutionSpace(),
+                    analytical_mapping,
+                    builder,
+                    spline_evaluator_extrapol);
+    DiscreteToCartesian mapping = mapping_builder();
     AdvectionPseudoCartesianDomain advection_idx_range(mapping);
     std::string const mapping_name = "DISCRETE";
     std::string const idx_range_name = "PSEUDO CARTESIAN";

@@ -8,7 +8,8 @@
 
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 
 #include <paraconf.h>
 #include <pdi.h>
@@ -45,8 +46,8 @@
 
 namespace {
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
-using DiscreteMapping
-        = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using Mapping = CircularToCartesian<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
@@ -108,8 +109,12 @@ int main(int argc, char** argv)
             ddc::PeriodicExtrapolationRule<Theta>());
 
     const Mapping mapping;
-    DiscreteMapping const discrete_mapping
-            = DiscreteMapping::analytical_to_discrete(mapping, builder, spline_evaluator_extrapol);
+    DiscreteMappingBuilder const discrete_mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            mapping,
+            builder,
+            spline_evaluator_extrapol);
+    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
