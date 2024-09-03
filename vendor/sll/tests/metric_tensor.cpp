@@ -1,4 +1,6 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
+#include <ddc/kernels/splines.hpp>
+
 #include <sll/polar_bsplines.hpp>
 
 #include "sll/mapping/circular_to_cartesian.hpp"

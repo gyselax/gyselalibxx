@@ -2,9 +2,12 @@
 #include <random>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/polar_bsplines.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
@@ -104,7 +107,6 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::PeriodicExtrapolationRule<Theta>,
             GridR,
             GridTheta>;
-    using DiscreteMapping = DiscreteToCartesian<X, Y, BuilderRTheta, EvaluatorRTheta>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -157,8 +159,12 @@ TEST(PolarSplineTest, ConstantEval)
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteMapping const mapping = DiscreteMapping::
-            analytical_to_discrete(coord_changer, builder_rtheta, evaluator_rtheta);
+    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            coord_changer,
+            builder_rtheta,
+            evaluator_rtheta);
+    DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     Spline coef(builder_rtheta.spline_domain());

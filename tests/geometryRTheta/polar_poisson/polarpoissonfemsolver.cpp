@@ -8,7 +8,8 @@
 
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 
 #include <paraconf.h>
 #include <pdi.h>
@@ -28,8 +29,8 @@ using Mapping = CircularToCartesian<X, Y, R, Theta>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<X, Y, R, Theta>;
 #endif
-using DiscreteMapping
-        = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -101,8 +102,12 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<Theta> bv_p_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_p_max;
     SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
-    DiscreteMapping const discrete_mapping
-            = DiscreteMapping::analytical_to_discrete(mapping, builder, evaluator);
+    DiscreteMappingBuilder const discrete_mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            mapping,
+            builder,
+            evaluator);
+    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 

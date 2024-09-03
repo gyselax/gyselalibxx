@@ -357,10 +357,6 @@ public:
      * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. @f$
      *
      *
-     *
-     *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
      * @param[out] matrix
      *      The pseudo-Cartesian matrix at the central point evaluated.
      *
@@ -369,8 +365,7 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    template <class IdxRange>
-    void to_pseudo_cartesian_jacobian_center_matrix(IdxRange const& grid, Matrix_2x2& matrix) const
+    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const
     {
         const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         const double sqrt_eps_2 = std::sqrt(1. + m_epsilon * m_epsilon);
@@ -385,15 +380,11 @@ public:
      *
      * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}. @f$
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_11_center(IdxRange const& grid) const
+    double to_pseudo_cartesian_jacobian_11_center() const
     {
         return -std::sqrt(1 + m_epsilon * m_epsilon);
     }
@@ -403,15 +394,11 @@ public:
      *
      * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0. @f$
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_12_center(IdxRange const& grid) const
+    double to_pseudo_cartesian_jacobian_12_center() const
     {
         return 0;
     }
@@ -421,15 +408,11 @@ public:
      *
      * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0. @f$
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_21_center(IdxRange const& grid) const
+    double to_pseudo_cartesian_jacobian_21_center() const
     {
         return 0;
     }
@@ -439,15 +422,11 @@ public:
      *
      * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. @f$
      *
-     * @param[in] grid
-     *      The domain where the mapping is defined.
-     *
      * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    template <class IdxRange>
-    double to_pseudo_cartesian_jacobian_22_center(IdxRange const& grid) const
+    double to_pseudo_cartesian_jacobian_22_center() const
     {
         const double xi = std::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         return (2 - std::sqrt(1 + m_epsilon * m_epsilon)) / m_e / xi;

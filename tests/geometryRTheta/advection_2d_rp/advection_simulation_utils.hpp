@@ -163,9 +163,8 @@ FieldMemRTheta<CoordRTheta> compute_exact_feet_rp(
         AdvectionField const& advection_field,
         double const time)
 {
-    static_assert(!std::is_same_v<
-                  Mapping,
-                  DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>>);
+    static_assert(
+            !std::is_same_v<Mapping, DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>);
 
     FieldMemRTheta<CoordRTheta> feet_coords_rp(idx_range_rp);
     CoordXY const coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));

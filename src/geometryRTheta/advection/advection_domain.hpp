@@ -6,7 +6,6 @@
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
 
 #include "advection_domain.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -383,7 +382,7 @@ public:
 
             } else {
                 Matrix2x2 J_0;
-                m_mapping.to_pseudo_cartesian_jacobian_center_matrix(idx_range_rp, J_0);
+                m_mapping.to_pseudo_cartesian_jacobian_center_matrix(J_0);
 
                 CoordRTheta const coord_rp_epsilon(m_epsilon, th);
 

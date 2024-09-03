@@ -3,7 +3,6 @@
 #pragma once
 #include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
 
 #include "advection_domain.hpp"
 #include "ddc_alias_inline_functions.hpp"

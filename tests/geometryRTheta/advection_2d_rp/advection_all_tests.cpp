@@ -15,7 +15,8 @@
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
@@ -50,8 +51,8 @@ using CurvilinearMapping = Curvilinear2DToCartesian<X, Y, R, Theta>;
 using AnalyticalInvertibleMapping = AnalyticalInvertibleCurvilinear2DToCartesian<X, Y, R, Theta>;
 using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
 using CzarnyMapping = CzarnyToCartesian<X, Y, R, Theta>;
-using DiscreteMapping
-        = DiscreteToCartesian<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
@@ -303,9 +304,12 @@ int main(int argc, char** argv)
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
     CircularMapping const circ_map;
     CzarnyMapping const czarny_map(0.3, 1.4);
-    DiscreteMapping const discrete_czarny_map(
-            DiscreteMapping::
-                    analytical_to_discrete(czarny_map, builder, spline_evaluator_extrapol));
+    DiscreteMappingBuilder const discrete_czarny_map_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            czarny_map,
+            builder,
+            spline_evaluator_extrapol);
+    DiscreteToCartesian const discrete_czarny_map = discrete_czarny_map_builder();
 
     AdvectionPhysicalDomain<AnalyticalInvertibleMapping> const physical_circular_mapping(circ_map);
     AdvectionPhysicalDomain<AnalyticalInvertibleMapping> const physical_czarny_mapping(czarny_map);
