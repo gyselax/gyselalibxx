@@ -90,7 +90,7 @@ void Interpolation_on_random_coord(
             IdxR ir(ddc::select<GridR>(irp));
             IdxTheta ip(ddc::select<GridTheta>(irp));
 
-            auto r_idx_range = get_idx_range<GridR>(random_coords);
+            IdxRangeR r_idx_range = get_idx_range<GridR>(random_coords);
             IdxR ir_max(r_idx_range.back());
             CoordR delta_coord_r;
             if (ir + 1 <= ir_max) {
@@ -99,7 +99,7 @@ void Interpolation_on_random_coord(
                 delta_coord_r = CoordR(0.);
             }
 
-            auto theta_idx_range = get_idx_range<GridTheta>(random_coords);
+            IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(random_coords);
             IdxTheta ip_min(theta_idx_range.front());
             IdxTheta ip_max(theta_idx_range.back());
             CoordTheta delta_coord_p;

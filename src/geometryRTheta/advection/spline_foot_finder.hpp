@@ -172,8 +172,8 @@ private:
     template <class T>
     void is_unified(FieldRTheta<T> const& values) const
     {
-        auto const r_idx_range = get_idx_range<GridR>(values);
-        auto const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
+        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
             ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
                 if (norm_inf(
@@ -205,8 +205,8 @@ private:
     template <class T>
     void unify_value_at_center_pt(FieldRTheta<T> values) const
     {
-        auto const r_idx_range = get_idx_range<GridR>(values);
-        auto const theta_idx_range = get_idx_range<GridTheta>(values);
+        IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
+        IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
             ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
                 values(r_idx_range.front(), ip)

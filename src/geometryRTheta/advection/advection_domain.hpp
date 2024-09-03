@@ -136,7 +136,7 @@ public:
     {
         using namespace ddc;
 
-        auto const idx_range_rp = get_idx_range<GridR, GridTheta>(feet_coords_rp);
+        IdxRangeRTheta const idx_range_rp = get_idx_range<GridR, GridTheta>(feet_coords_rp);
         CoordXY coord_center(m_mapping(CoordRTheta(0, 0)));
 
         ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
@@ -316,7 +316,7 @@ public:
             double const dt) const
     {
         static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
-        auto const idx_range_rp = get_idx_range(advection_field);
+        IdxRangeRTheta const idx_range_rp = get_idx_range(advection_field);
 
         CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
         CoordXY_adv const center_xy_pseudo_cart

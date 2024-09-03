@@ -315,7 +315,7 @@ int main(int argc, char** argv)
     AdvectionPhysicalDomain<AnalyticalInvertibleMapping> const physical_czarny_mapping(czarny_map);
     AdvectionPseudoCartesianDomain<CzarnyMapping> const pseudo_cartesian_czarny_mapping(czarny_map);
 
-    auto simulations = std::make_tuple(
+    std::tuple simulations = std::make_tuple(
             SimulationParameters(
                     circ_map,
                     circ_map,

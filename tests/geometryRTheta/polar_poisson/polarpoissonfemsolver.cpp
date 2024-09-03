@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    auto idx_range_bsplinesRTheta = get_spline_idx_range(builder);
+    IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
     DFieldMemRTheta coeff_alpha(grid); // values of the coefficent alpha
     DFieldMemRTheta coeff_beta(grid);
@@ -125,7 +125,7 @@ int main(int argc, char** argv)
         Coord<R, Theta>
                 coord(ddc::coordinate(ddc::select<GridR>(irp)),
                       ddc::coordinate(ddc::select<GridTheta>(irp)));
-        auto cartesian_coord = mapping(coord);
+        Coord<X, Y> cartesian_coord = mapping(coord);
         x(irp) = ddc::get<X>(cartesian_coord);
         y(irp) = ddc::get<Y>(cartesian_coord);
     });

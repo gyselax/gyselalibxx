@@ -103,8 +103,8 @@ struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
 {
 };
 
-auto constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
-auto constexpr SplinePBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
+ddc::BoundCond constexpr SplinePBoundary = ddc::BoundCond::PERIODIC;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;

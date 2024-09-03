@@ -553,7 +553,7 @@ void simulate_the_3_simulations(
         std::string const& output_stem,
         std::string const& title)
 {
-    auto const r_idx_range = ddc::select<GridR>(grid);
+    IdxRangeR const r_idx_range = ddc::select<GridR>(grid);
     double const rmin = ddc::coordinate(r_idx_range.front());
     double const rmax = ddc::coordinate(r_idx_range.back());
 

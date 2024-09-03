@@ -316,7 +316,8 @@ public:
             }
         });
 
-        auto singular_idx_range = PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>();
+        IdxRangeBSPolar singular_idx_range
+                = PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>();
 
         // Find value and derivative of 2D bsplines covering the singular point
         ddc::for_each(quadrature_idx_range_singular, [&](IdxQuadratureRTheta const irp) {

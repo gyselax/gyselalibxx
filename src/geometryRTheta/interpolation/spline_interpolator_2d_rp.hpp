@@ -75,13 +75,17 @@ public:
 #ifndef NDEBUG
         // To ensure that the interpolator is C0, we ensure that
         // the value at (r=0,theta) is the same for all theta.
-        auto r_idx_range = get_idx_range<GridR>(inout_data);
-        auto theta_idx_range = get_idx_range<GridTheta>(inout_data);
+        IdxRangeR r_idx_range = get_idx_range<GridR>(inout_data);
+        IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(inout_data);
         if (ddc::coordinate(r_idx_range.front()) == 0) {
             ddc::for_each(theta_idx_range, [&](IdxTheta const ip) {
-                assert(("Unicity of the value at the center point:",
-                        inout_data(r_idx_range.front(), ip)
-                                == inout_data(r_idx_range.front(), theta_idx_range.front())));
+                bool const unicity_center_point
+                        = inout_data(r_idx_range.front(), ip)
+                          == inout_data(r_idx_range.front(), theta_idx_range.front());
+                if (!unicity_center_point) {
+                    std::printf("Unicity of the value at the center point is not verified.");
+                    assert(unicity_center_point);
+                }
             });
         }
 #endif
