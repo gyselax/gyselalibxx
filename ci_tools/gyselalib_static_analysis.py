@@ -21,8 +21,9 @@ import numpy as np
 FATAL = "\033[1m\033[31mfatal\033[0m"
 ERROR = "\033[1m\033[31merror\033[0m"
 STYLE = "\033[1m\033[33mstyle error\033[0m"
+WARNING = "\033[1m\033[33mwarning\033[0m"
 
-possible_error_levels = {STYLE: 1, ERROR: 2, FATAL: 3}
+possible_error_levels = {WARNING: 0, STYLE: 1, ERROR: 2, FATAL: 3}
 
 error_level = 0
 
@@ -104,7 +105,7 @@ class FileObject:
         using_indices = [i for i, d in enumerate(self.raw) if d['str'] == 'using']
         expr_end = [i for i, d in enumerate(self.raw) if d['str'] == ';']
         self.aliases = {self.raw[idx+1]['str']: self.raw[idx+3:expr_end[np.searchsorted(expr_end, idx)]]
-                    for idx in using_indices}
+                    for idx in using_indices if self.raw[idx+2]['str'] == '='}
 
         self.type_names = [{'str': line[1]['str'], 'linenr': line[0]['linenr']} for line in self.lines \
                             if line and line[0]['str'] in ('struct', 'class')]
@@ -242,12 +243,15 @@ def search_for_unnecessary_auto(file):
         if not any(v['str'] in chain(mirror_functions, auto_functions) for v in file.data[start:end]):
             report_error(ERROR, file, file.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
+    if not file.data_xml:
+        return
+
     # Find auto in arguments of lambda functions
     for elem in file.data_xml.findall(".token[@str='[']"):
         start_idx = file.data.index(elem.attrib)+1
         end_idx = next(j for j,a in enumerate(file.data[start_idx:], start_idx) if a['str'] == ']')
         keys = ''.join(a['str'] for a in file.data[start_idx:end_idx]).split(',')
-        if not all(k[0] in ('&', '=') for k in keys):
+        if not all(len(k) == 0 or k[0] in ('&', '=') for k in keys):
             continue
         end_args_idx = next(j for j,a in enumerate(file.data[end_idx:], end_idx) if a['str'] == ')')
         lambda_args = ' '.join(a['str'] for a in file.data[end_idx+2:end_args_idx]).split(',')
@@ -429,6 +433,36 @@ def check_directives(file):
         elif not possible_matches and include_str == '"':
             report_error(STYLE, file, linenr, f'Angle brackets should be used to include files from external libraries ({include_str}-><{include_file}>)')
 
+def update_aliases(all_files):
+    """
+    Update the aliases using information from geometry.hpp and species_info.hpp. This ensures that as much information
+    as possible is available to describe the type. E.g. this helps identify the memory space of a Field.
+    """
+    if len(all_files) == 0:
+        return
+
+    spec_file = next(f for f in all_files if f.file == HOME_DIR / 'src/speciesinfo/species_info.hpp')
+    geom_files = [f for f in all_files if f.file.name == 'geometry.hpp' or 'geometries' in f.file.parts]
+    multipatch_geom_file_names = {f.file.name: f for f in geom_files if f.file.name != 'geometry.hpp'}
+
+    for file in all_files:
+        if file.data_xml is None:
+            continue
+        directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
+                            if Path(d.attrib['file']) == file.file}
+        include_directives = {linenr: words[1] for linenr, words in directives.items() if len(words)>1 and words[0] == '#include'}
+        for linenr, include_str in include_directives.items():
+            include_file = include_str[1:-1]
+            if include_file == 'species_info.hpp':
+                file.aliases.update(spec_file.aliases)
+            elif include_file == 'geometry.hpp':
+                relevant_geom = next(p for p in file.file.parts if p.startswith('geometry'))
+                geom_file = next(f for f in geom_files if relevant_geom in f.file.parts)
+                file.aliases.update(geom_file.aliases)
+            elif include_file in multipatch_geom_file_names:
+                file.aliases.update(multipatch_geom_file_names[include_file].aliases)
+
+
 def check_kokkos_lambda_use(file):
     """
     Check that KOKKOS_LAMBDA expressions are present and that they are correctly used.
@@ -437,6 +471,9 @@ def check_kokkos_lambda_use(file):
     - Check that lambda functions passed to ddc::parallel_X functions use KOKKOS_LAMBDA or KOKKOS_CLASS_LAMBDA
     - Check that class variables are not used in lambda functions passed to ddc::parallel_X functions.
     """
+    if not file.data_xml:
+        return
+
     for p in parallel_functions:
         for elem in file.data_xml.findall(f".token[@str='{p}']"):
             idx = file.data.index(elem.attrib)
@@ -484,6 +521,196 @@ def check_licence_presence(file):
     if file.raw[0]['str'] != '// SPDX-License-Identifier: MIT':
         report_error(ERROR, file, 1, "Licence missing from the top of the file (// SPDX-License-Identifier: MIT)")
 
+def check_exec_space_usage(file):
+    """
+    Test to ensure that the operator() of a Field or FieldMem is not used from the wrong space (CPU/GPU)
+    """
+    # Treat each configuration separately
+    for config in file.root.findall('./dump'):
+        tokenlist = [t.attrib for t in config.find('./tokenlist')]
+
+        # Find all scopes and specify DefaultHostExecutionSpace by default
+        scopes = {s.attrib['id'] : s.attrib for s in config.findall(".//scope")}
+        for s in scopes.values():
+            s['exec_space'] = 'DefaultHostExecutionSpace'
+
+        known_execution_spaces = ('DefaultHostExecutionSpace', 'DefaultExecutionSpace')
+
+        # Find all markers indicating a Kokkos scope and note the correct execution space
+        kokkos_scope_markers = chain(config.findall(".//token[@str='KOKKOS_LAMBDA']"),
+                                     config.findall(".//token[@str='KOKKOS_FUNCTION']"),
+                                     config.findall(".//token[@str='KOKKOS_INLINE_FUNCTION']"))
+
+        for m in kokkos_scope_markers:
+            # Identify scope id
+            current_idx = tokenlist.index(m.attrib)
+            start_idx = next(i for i,t in enumerate(tokenlist[current_idx:],current_idx) if t['str'] =='{' or t['str'] == ';')
+            if tokenlist[start_idx]['str'] == ';':
+                continue
+
+            scope_id = tokenlist[start_idx+1]['scope']
+            scope = scopes[scope_id]
+
+            if tokenlist[current_idx]['str'] == 'KOKKOS_LAMBDA':
+                ast_parent = config.find(f".//token[@id='{tokenlist[current_idx-1]['astParent']}']").attrib
+                parallel_func_start_idx = tokenlist.index(ast_parent)
+                args = [t['str'] for t in tokenlist[parallel_func_start_idx+1:current_idx]]
+                if 'DefaultHostExecutionSpace' in args:
+                    continue
+
+            # Update execution space
+            scopes[scope_id]['exec_space'] = 'DefaultExecutionSpace'
+
+            # Ensure that any nested scopes are also updated
+            to_pass_down = set([scope_id])
+            while to_pass_down:
+                new_to_pass_down = set()
+                for s in scopes.values():
+                    if s.get('nestedIn', None) in to_pass_down:
+                        new_to_pass_down.add(s['id'])
+                        s['exec_space'] = 'DefaultExecutionSpace'
+                to_pass_down = new_to_pass_down
+
+        field_types = ('Field', 'FieldMem', 'DField', 'DFieldMem', 'ConstField', 'DConstField')
+
+        # Find all variables that may be defined on either CPU or GPU
+        field_variables = {}
+        auto_variables = {}
+        for v in config.findall("./variables/var"):
+            # Identify the type
+            type_start_token = v.get('typeStartToken')
+            type_end_token = v.get('typeEndToken')
+            name_token = v.get('nameToken')
+            type_start_idx = tokenlist.index(config.find(f"./tokenlist/token[@id='{type_start_token}']").attrib)
+            type_end_idx = tokenlist.index(config.find(f"./tokenlist/token[@id='{type_end_token}']").attrib)
+            type_elements = [t['str'] for t in tokenlist[type_start_idx:type_end_idx+1]]
+            name = config.find(f"./tokenlist/token[@id='{name_token}']").attrib['str'] if name_token != '0' else ''
+            type_descr = ' '.join(type_elements)
+            if type_descr in file.aliases:
+                type_elements = [t['str'] for t in file.aliases[type_descr]]
+                type_descr = ' '.join(type_elements)
+
+            # If the type is a Field or a FieldMem then identify the space where the memory is located
+            if (type_elements[0] in field_types) or (type_elements[0] == 'host_t' and type_elements[1] in field_types):
+                attribs = v.attrib
+                attribs['type'] = type_descr
+                field_variables[name] = attribs
+                if 'host_t' == type_elements[0]:
+                    attribs['exec_space'] = 'DefaultHostExecutionSpace'
+                elif 'DefaultExecutionSpace' in type_elements:
+                    attribs['exec_space'] = 'DefaultExecutionSpace'
+                elif 'DefaultHostExecutionSpace' in type_elements:
+                    attribs['exec_space'] = 'DefaultHostExecutionSpace'
+                else:
+                    if '<' in type_descr:
+                        start_template_args = type_descr.index('<')
+                        end_template_args = type_descr.rindex('>')
+                        template_args = type_descr[start_template_args+1:end_template_args].split(' ')
+                        args = []
+                        last_idx = 0
+                        template_depth = 0
+                        for i,a in enumerate(template_args):
+                            if a == '<':
+                                template_depth += 1
+                            elif a == '>':
+                                template_depth -= 1
+                            elif template_depth == 0 and a == ',':
+                                args.append(' '.join(template_args[last_idx:i]))
+                                last_idx = i+1
+                        args.append(' '.join(template_args[last_idx:]))
+                        if type_elements[0].startswith('D'):
+                            args.insert(0,'double')
+                        if 'Mem' in type_descr and len(args) > 2:
+                            if 'DeviceAllocator' in args[-1]:
+                                attribs['exec_space'] = 'DefaultExecutionSpace'
+                            elif 'HostAllocator' in args[-1]:
+                                attribs['exec_space'] = 'DefaultHostExecutionSpace'
+                            else:
+                                attribs['exec_space'] = args[-1].split(',')[-1].strip(' >')
+                        elif 'Mem' not in type_descr and len(args) > 3:
+                            attribs['exec_space'] = args[-1]
+                        else:
+                            attribs['exec_space'] = 'DefaultExecutionSpace'
+                    else:
+                        attribs['exec_space'] = 'DefaultExecutionSpace?'
+            # If a type is auto then further checks are required
+            elif type_descr == 'auto':
+                attribs = v.attrib
+                attribs['type'] = type_descr
+                auto_variables[name] = attribs
+
+        # Check auto variables to identify Field/FieldMem types
+        for name, v in auto_variables.items():
+            v_id = v['id']
+            var_usage = config.findall(f"./tokenlist/token[@variable='{v_id}']")
+            for u in var_usage:
+                idx = tokenlist.index(u.attrib)
+                if tokenlist[idx+1]['str'] == '=':
+                    phrase_end = next(i for i,t in enumerate(tokenlist[idx+2:],idx+2) if t['str'] == ';')
+                    keys = [t['str'] for t in tokenlist[idx+2:phrase_end]]
+                    # If the auto variable is created by a call to a mirror function then identify the memory space
+                    if any(k in mirror_functions for k in keys):
+                        if 'DefaultExecutionSpace' in keys:
+                            v['exec_space'] = 'DefaultExecutionSpace'
+                        elif 'DefaultHostExecutionSpace' in keys:
+                            v['exec_space'] = 'DefaultHostExecutionSpace'
+                        else:
+                            v['exec_space'] = 'DefaultHostExecutionSpace'
+                        field_variables[name] = v
+
+        # For each Field/FieldMem type check that it's contents are only accessed on the correct memory space
+        for name, v in field_variables.items():
+            v_id = v['id']
+            var_usage = config.findall(f"./tokenlist/token[@variable='{v_id}']")
+            for u in var_usage:
+                idx = tokenlist.index(u.attrib)
+                scope_id = tokenlist[idx]['scope']
+                scope = scopes[scope_id]
+                if tokenlist[idx]['file'] != str(file.file):
+                    continue
+                # Exclude initialisation where the variable is followed by ( but the operator() is not called
+                if tokenlist[idx-1]['id'] == v['typeEndToken'] or scope['type'] in ('Class', 'Struct'):
+                    continue
+                # If accessing the contents then we must be on the correct execution space
+                if tokenlist[idx+1]['str'] == '(':
+                    exec_space = scope['exec_space']
+                    memory_space = v['exec_space']
+                    level = None
+
+                    if exec_space in known_execution_spaces and memory_space in known_execution_spaces and exec_space != memory_space:
+                        level = FATAL
+                    elif exec_space == 'DefaultHostExecutionSpace' and exec_space != memory_space:
+                        level = WARNING
+                        if file.file.name == 'species_info.hpp':
+                            # Deactivate warning for species_info constructor which purposely has different constructors for different spaces
+                            level = None
+
+                    if level:
+                        msg = ("Attempted memory access from the wrong execution space. "
+                               f"The current execution space is \"{scope['exec_space']}\" but the variable "
+                               f"{name} is stored on a space compatible with \"{v['exec_space']}\"")
+                        report_error(level, file, tokenlist[idx]['linenr'], msg)
+
+                    if scope['exec_space'] == 'DefaultExecutionSpace' and (v['type'] == 'auto' or 'FieldMem' in v['type']):
+                        msg = ''
+                        if v['type'] == 'auto':
+                            msg = "An auto type may be either a Field or a FieldMem depending on compilation paramaters. "
+                        msg += ("The FieldMem copy operator is deleted to avoid accidental memory allocation. "
+                                "You probably do not want a copy of the FieldMem allocated on each GPU thread. "
+                                "Please use a Field to access the data that has already been allocated.")
+                        report_error(FATAL, file, tokenlist[idx]['linenr'], msg)
+
+        for s_id, scope in scopes.items():
+            if scope['exec_space'] == 'DefaultHostExecutionSpace':
+                continue
+            relevant_code = config.findall(f".//token[@scope='{s_id}']")
+            code_keys = [c.attrib['str'] for c in relevant_code]
+            if 'std' in code_keys:
+                idx = code_keys.index('std')
+                if code_keys[idx+1] == '::':
+                    msg = "Std functions are not designed to run on GPU. You may wish to check if there is an equivalent Kokkos:: function?"
+                    report_error(FATAL, file, relevant_code[idx].attrib['linenr'], msg)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("A static analysis scipt to search for common errors using cppcheck")
     parser.add_argument('files', type=str, nargs='*')
@@ -491,15 +718,17 @@ if __name__ == '__main__':
 
     no_file_filter = not args.files
     filter_files = [Path(f).absolute() for f in args.files]
+    spec_info = HOME_DIR / 'src/speciesinfo/species_info.hpp'
 
     relevant_files = get_relevant_files()
 
     multipatch_geom = list(relevant_files.pop('multipatch'))
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
-                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--error-exitcode=1']
+                        '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
+                        '--error-exitcode=1']
     for f in multipatch_geom:
-        if no_file_filter or f in filter_files:
+        if no_file_filter or f in (*filter_files, spec_info):
             print("------------- Checking ", f, " -------------")
             p = subprocess.run([*cppcheck_command, f], check=False)
             if p.returncode:
@@ -508,7 +737,7 @@ if __name__ == '__main__':
     for geom, files in relevant_files.items():
         if no_file_filter or any(f in filter_files for f in files):
             print("------------- Checking ", geom, " -------------")
-            p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in filter_files], check=False)
+            p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in filter_files+['*geometry.hpp', str(spec_info)]], check=False)
             if p.returncode:
                 error_level = max(error_level, possible_error_levels[STYLE])
 
@@ -520,9 +749,14 @@ if __name__ == '__main__':
         search_for_bad_aliases(myfile)
         check_struct_names(myfile)
         search_for_uid(myfile)
-        search_for_bad_memory(myfile)
         check_directives(myfile)
         check_licence_presence(myfile)
         check_kokkos_lambda_use(myfile)
+
+    update_aliases(files)
+
+    for myfile in files:
+        search_for_bad_memory(myfile)
+        check_exec_space_usage(myfile)
 
     sys.exit(error_level)
