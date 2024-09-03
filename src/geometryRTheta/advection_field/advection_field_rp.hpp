@@ -144,7 +144,7 @@ public:
             DFieldRTheta electrostatic_potential,
             DVectorFieldRTheta<X, Y> advection_field_xy) const
     {
-        auto const grid = get_idx_range(advection_field_xy);
+        IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
@@ -360,7 +360,7 @@ public:
             DVectorFieldRTheta<R, Theta> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
-        auto const grid = get_idx_range(electrostatic_potential);
+        IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);

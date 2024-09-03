@@ -108,7 +108,7 @@ public:
         DFieldMemRTheta phi_star(m_grid);
         DFieldMemRTheta ci(m_grid);
 
-        auto idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
+        IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
         Spline2D rho_coef(idx_range_bsplinesRTheta);
 
         FieldMemRTheta<CoordRTheta> coords(m_grid);
@@ -164,8 +164,8 @@ public:
         });
 
         // Unify at the center point:
-        auto r_idx_range = get_idx_range<GridR>(rho_eq);
-        auto theta_idx_range = get_idx_range<GridTheta>(rho_eq);
+        IdxRangeR r_idx_range = get_idx_range<GridR>(rho_eq);
+        IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(rho_eq);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
             ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
                 rho_eq(r_idx_range.front(), ip)
