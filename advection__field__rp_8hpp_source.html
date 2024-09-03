@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            DFieldRTheta electrostatic_potential,</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="classVectorField.html">DVectorFieldRTheta&lt;X, Y&gt;</a> advection_field_xy)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> grid = get_idx_range(advection_field_xy);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        IdxRangeRTheta <span class="keyword">const</span> grid = get_idx_range(advection_field_xy);</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="comment">// Compute the spline representation of the electrostatic potential</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        SplineRThetaBuilder <span class="keyword">const</span> builder(grid);</div>
@@ -339,7 +339,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            <a class="code" href="classVectorField.html">DVectorFieldRTheta&lt;R, Theta&gt;</a> advection_field_rp,</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            CoordXY&amp; advection_field_xy_center)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> grid = get_idx_range(electrostatic_potential);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        IdxRangeRTheta <span class="keyword">const</span> grid = get_idx_range(electrostatic_potential);</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="comment">// Compute the spline representation of the electrostatic potential</span></div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        SplineRThetaBuilder <span class="keyword">const</span> builder(grid);</div>

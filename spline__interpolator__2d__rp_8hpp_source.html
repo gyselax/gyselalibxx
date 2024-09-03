@@ -157,71 +157,75 @@ $(document).ready(function(){initNavTree('spline__interpolator__2d__rp_8hpp_sour
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#ifndef NDEBUG</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="comment">// To ensure that the interpolator is C0, we ensure that</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment">// the value at (r=0,theta) is the same for all theta.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">auto</span> r_idx_range = get_idx_range&lt;GridR&gt;(inout_data);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">auto</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(inout_data);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        IdxRangeR r_idx_range = get_idx_range&lt;GridR&gt;(inout_data);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        IdxRangeTheta theta_idx_range = get_idx_range&lt;GridTheta&gt;(inout_data);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">if</span> (ddc::coordinate(r_idx_range.front()) == 0) {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            ddc::for_each(theta_idx_range, [&amp;](IdxTheta <span class="keyword">const</span> ip) {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                assert((<span class="stringliteral">&quot;Unicity of the value at the center point:&quot;</span>,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        inout_data(r_idx_range.front(), ip)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                                == inout_data(r_idx_range.front(), theta_idx_range.front())));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            });</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        m_builder(get_field(m_coefs), get_const_field(inout_data));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        m_evaluator(get_field(inout_data), coordinates, get_const_field(m_coefs));</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> inout_data;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> RadialExtrapolationRule&gt;</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html">  105</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a> : <span class="keyword">public</span> <a class="code" href="classIPreallocatableInterpolatorRTheta.html">IPreallocatableInterpolatorRTheta</a></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">  109</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">evaluator_type</a> = ddc::SplineEvaluator2D&lt;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <a class="code" href="structBSplinesR.html">BSplinesR</a>,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <a class="code" href="structBSplinesTheta.html">BSplinesTheta</a>,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            RadialExtrapolationRule,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            RadialExtrapolationRule,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>&gt;;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    SplineRThetaBuilder <span class="keyword">const</span>&amp; m_builder;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">evaluator_type</a> <span class="keyword">const</span>&amp; m_evaluator;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html#a287999d623b0be81355069fa64f88ba2">  134</a></span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a287999d623b0be81355069fa64f88ba2">PreallocatableSplineInterpolatorRTheta</a>(</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            SplineRThetaBuilder <span class="keyword">const</span>&amp; builder,</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">evaluator_type</a> <span class="keyword">const</span>&amp; evaluator)</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        : m_builder(builder)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        , m_evaluator(evaluator)</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    ~<a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">  149</a></span>&#160;    std::unique_ptr&lt;IInterpolatorRTheta&gt; <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">preallocate</a>()<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <a class="code" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt;RadialExtrapolationRule&gt;</a>&gt;(m_builder, m_evaluator);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordtype">bool</span> <span class="keyword">const</span> unicity_center_point</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        = inout_data(r_idx_range.front(), ip)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                          == inout_data(r_idx_range.front(), theta_idx_range.front());</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">if</span> (!unicity_center_point) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    std::printf(<span class="stringliteral">&quot;Unicity of the value at the center point is not verified.&quot;</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    assert(unicity_center_point);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            });</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        m_builder(get_field(m_coefs), get_const_field(inout_data));</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        m_evaluator(get_field(inout_data), coordinates, get_const_field(m_coefs));</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> inout_data;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> RadialExtrapolationRule&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html">  109</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a> : <span class="keyword">public</span> <a class="code" href="classIPreallocatableInterpolatorRTheta.html">IPreallocatableInterpolatorRTheta</a></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">  113</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">evaluator_type</a> = ddc::SplineEvaluator2D&lt;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <a class="code" href="structBSplinesR.html">BSplinesR</a>,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <a class="code" href="structBSplinesTheta.html">BSplinesTheta</a>,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            RadialExtrapolationRule,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            RadialExtrapolationRule,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>&gt;;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    SplineRThetaBuilder <span class="keyword">const</span>&amp; m_builder;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">evaluator_type</a> <span class="keyword">const</span>&amp; m_evaluator;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html#a287999d623b0be81355069fa64f88ba2">  138</a></span>&#160;    <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a287999d623b0be81355069fa64f88ba2">PreallocatableSplineInterpolatorRTheta</a>(</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            SplineRThetaBuilder <span class="keyword">const</span>&amp; builder,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">evaluator_type</a> <span class="keyword">const</span>&amp; evaluator)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        : m_builder(builder)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        , m_evaluator(evaluator)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    ~<a class="code" href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">  153</a></span>&#160;    std::unique_ptr&lt;IInterpolatorRTheta&gt; <a class="code" href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">preallocate</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <a class="code" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt;RadialExtrapolationRule&gt;</a>&gt;(m_builder, m_evaluator);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;};</div>
 <div class="ttc" id="aclassIInterpolatorRTheta_html"><div class="ttname"><a href="classIInterpolatorRTheta.html">IInterpolatorRTheta</a></div><div class="ttdoc">A class which provides an interpolating function.</div><div class="ttdef"><b>Definition:</b> i_interpolator_2d_rp.hpp:17</div></div>
 <div class="ttc" id="aclassIPreallocatableInterpolatorRTheta_html"><div class="ttname"><a href="classIPreallocatableInterpolatorRTheta.html">IPreallocatableInterpolatorRTheta</a></div><div class="ttdoc">A class which provides access to an interpolating function which can be preallocated where useful.</div><div class="ttdef"><b>Definition:</b> i_interpolator_2d_rp.hpp:54</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a></div><div class="ttdoc">A class which stores information necessary to create a pointer to an instance of the SplineInterpolat...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:106</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_a287999d623b0be81355069fa64f88ba2"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#a287999d623b0be81355069fa64f88ba2">PreallocatableSplineInterpolatorRTheta::PreallocatableSplineInterpolatorRTheta</a></div><div class="ttdeci">PreallocatableSplineInterpolatorRTheta(SplineRThetaBuilder const &amp;builder, evaluator_type const &amp;evaluator)</div><div class="ttdoc">Create an object capable of creating SplineInterpolatorRTheta objects.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:134</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_a3a381be78090ced5ef0864a9acd2a444"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">PreallocatableSplineInterpolatorRTheta::evaluator_type</a></div><div class="ttdeci">ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, GridR, GridTheta &gt; evaluator_type</div><div class="ttdoc">The type of the 2D Spline Evaluator used by this class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:121</div></div>
-<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_acef8faad99837d409dafb5dd4df5bfbf"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">PreallocatableSplineInterpolatorRTheta::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorRTheta &gt; preallocate() const override</div><div class="ttdoc">Create a pointer to an instance of the SplineInterpolatorRTheta class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:149</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta</a></div><div class="ttdoc">A class which stores information necessary to create a pointer to an instance of the SplineInterpolat...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:110</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_a287999d623b0be81355069fa64f88ba2"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#a287999d623b0be81355069fa64f88ba2">PreallocatableSplineInterpolatorRTheta::PreallocatableSplineInterpolatorRTheta</a></div><div class="ttdeci">PreallocatableSplineInterpolatorRTheta(SplineRThetaBuilder const &amp;builder, evaluator_type const &amp;evaluator)</div><div class="ttdoc">Create an object capable of creating SplineInterpolatorRTheta objects.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:138</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_a3a381be78090ced5ef0864a9acd2a444"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#a3a381be78090ced5ef0864a9acd2a444">PreallocatableSplineInterpolatorRTheta::evaluator_type</a></div><div class="ttdeci">ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, GridR, GridTheta &gt; evaluator_type</div><div class="ttdoc">The type of the 2D Spline Evaluator used by this class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:125</div></div>
+<div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html_acef8faad99837d409dafb5dd4df5bfbf"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html#acef8faad99837d409dafb5dd4df5bfbf">PreallocatableSplineInterpolatorRTheta::preallocate</a></div><div class="ttdeci">std::unique_ptr&lt; IInterpolatorRTheta &gt; preallocate() const override</div><div class="ttdoc">Create a pointer to an instance of the SplineInterpolatorRTheta class.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:153</div></div>
 <div class="ttc" id="aclassSplineInterpolatorRTheta_html"><div class="ttname"><a href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta</a></div><div class="ttdoc">A class for interpolating a function using splines in polar coordinates.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:16</div></div>
 <div class="ttc" id="aclassSplineInterpolatorRTheta_html_a2c28ea1cced04c4c16800d05be861b6c"><div class="ttname"><a href="classSplineInterpolatorRTheta.html#a2c28ea1cced04c4c16800d05be861b6c">SplineInterpolatorRTheta::operator()</a></div><div class="ttdeci">DFieldRTheta operator()(DFieldRTheta const inout_data, host_t&lt; Field&lt; CoordRTheta const, IdxRangeRTheta &gt;&gt; const coordinates) const override</div><div class="ttdoc">Approximate the value of a function at a set of polar coordinates using the current values at a known...</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:71</div></div>
 <div class="ttc" id="aclassSplineInterpolatorRTheta_html_a494f3eceeddaea2b82f0934360be29d7"><div class="ttname"><a href="classSplineInterpolatorRTheta.html#a494f3eceeddaea2b82f0934360be29d7">SplineInterpolatorRTheta::SplineInterpolatorRTheta</a></div><div class="ttdeci">SplineInterpolatorRTheta(SplineRThetaBuilder const &amp;builder, evaluator_type const &amp;evaluator)</div><div class="ttdoc">Create a spline interpolator object.</div><div class="ttdef"><b>Definition:</b> spline_interpolator_2d_rp.hpp:50</div></div>

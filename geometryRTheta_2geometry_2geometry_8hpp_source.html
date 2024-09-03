@@ -180,8 +180,8 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">auto</span> constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">auto</span> constexpr SplinePBoundary = ddc::BoundCond::PERIODIC;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;ddc::BoundCond constexpr SplinePBoundary = ddc::BoundCond::PERIODIC;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">using</span> SplineInterpPointsR</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesR, SplineRBoundary, SplineRBoundary&gt;;</div>

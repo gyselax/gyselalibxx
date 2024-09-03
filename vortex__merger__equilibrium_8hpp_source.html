@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        DFieldMemRTheta phi_star(m_grid);</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        DFieldMemRTheta ci(m_grid);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">auto</span> idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        Spline2D rho_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; coords(m_grid);</div>
@@ -211,8 +211,8 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        });</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="comment">// Unify at the center point:</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keyword">auto</span> r_idx_range = get_idx_range&lt;GridR&gt;(rho_eq);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keyword">auto</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(rho_eq);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        IdxRangeR r_idx_range = get_idx_range&lt;GridR&gt;(rho_eq);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        IdxRangeTheta theta_idx_range = get_idx_range&lt;GridTheta&gt;(rho_eq);</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">if</span> (std::fabs(ddc::coordinate(r_idx_range.front())) &lt; 1e-15) {</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            ddc::for_each(theta_idx_range, [&amp;](<span class="keyword">const</span> IdxTheta ip) {</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                rho_eq(r_idx_range.front(), ip)</div>
