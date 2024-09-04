@@ -30,7 +30,7 @@ private:
     static constexpr Patch2::IdxStep2 theta2_size = Patch2::IdxStep2(10);
 
 public:
-    static constexpr int outside_domain = IPatchLocator<X, Y>::outside_domain;
+    static constexpr int outside_domain = IPatchLocator::outside_domain;
 
     Patch1::IdxRange1 const idx_range_r1;
     Patch1::IdxRange2 const idx_range_theta1;
@@ -72,6 +72,25 @@ public:
     }
 };
 
+template <class PatchLocator>
+void test_operator_assignement(
+        PatchLocator const& patch_locator,
+        Kokkos::View<Coord<X, Y>*> coords,
+        Kokkos::View<int*> patches)
+{
+    std::size_t failed_attempt = 0;
+    Kokkos::parallel_reduce(
+            coords.extent(0),
+            KOKKOS_LAMBDA(int const i, std::size_t& attempt) {
+                int patch_idx = patch_locator(coords(i));
+                if (patch_idx != patches(i)) {
+                    attempt++;
+                }
+            },
+            failed_attempt);
+    EXPECT_EQ(failed_attempt, 0);
+}
+
 } // namespace
 
 
@@ -99,7 +118,7 @@ TEST_F(OnionPatchLocator2PatchesTest, CheckPatchOrderingDeathTest)
 
 
 
-TEST_F(OnionPatchLocator2PatchesTest, CircularOnionPatchLocator2PatchesTest)
+TEST_F(OnionPatchLocator2PatchesTest, DeviceCircularOnionPatchLocator2PatchesTest)
 {
     Patch1::IdxRange12 idx_range_1(idx_range_r1, idx_range_theta1);
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
@@ -108,6 +127,72 @@ TEST_F(OnionPatchLocator2PatchesTest, CircularOnionPatchLocator2PatchesTest)
     CircularToCartesian<X, Y, R, Theta> mapping;
 
     OnionPatchLocator patch_locator(all_idx_ranges, mapping);
+
+    Kokkos::View<Coord<X, Y>*> coords("coords 1", 3);
+    Kokkos::View<int*> patches("patches 1", 3);
+
+    Kokkos::View<Coord<X, Y>*, Kokkos::DefaultHostExecutionSpace> coords_host("coords_host 1", 3);
+    Kokkos::View<int*, Kokkos::DefaultHostExecutionSpace> patches_host("patches_host 1", 3);
+
+    coords_host(0) = PhysicalCoordXY(0.25, .03);
+    coords_host(1) = PhysicalCoordXY(1, 1);
+    coords_host(2) = PhysicalCoordXY(-2.1, 0);
+
+    patches_host(0) = 0;
+    patches_host(1) = 1;
+    patches_host(2) = outside_domain;
+
+    Kokkos::deep_copy(coords, coords_host);
+    Kokkos::deep_copy(patches, patches_host);
+
+    test_operator_assignement(patch_locator, coords, patches);
+}
+
+
+TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
+{
+    Patch1::IdxRange12 idx_range_1(idx_range_r1, idx_range_theta1);
+    Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
+
+    CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+
+    OnionPatchLocator patch_locator(all_idx_ranges, mapping);
+
+    Kokkos::View<Coord<X, Y>*> coords("coords 2", 3);
+    Kokkos::View<int*> patches("patches 2", 3);
+
+    Kokkos::View<Coord<X, Y>*, Kokkos::DefaultHostExecutionSpace> coords_host("coords_host 2", 3);
+    Kokkos::View<int*, Kokkos::DefaultHostExecutionSpace> patches_host("patches_host 2", 3);
+
+    coords_host(0) = PhysicalCoordXY(0.25, .03);
+    coords_host(1) = PhysicalCoordXY(1, 1);
+    coords_host(2) = PhysicalCoordXY(-2.1, 0);
+
+    patches_host(0) = 0;
+    patches_host(1) = 1;
+    patches_host(2) = outside_domain;
+
+    Kokkos::deep_copy(coords, coords_host);
+    Kokkos::deep_copy(patches, patches_host);
+
+    test_operator_assignement(patch_locator, coords, patches);
+}
+
+
+TEST_F(OnionPatchLocator2PatchesTest, HostCircularOnionPatchLocator2PatchesTest)
+{
+    Patch1::IdxRange12 idx_range_1(idx_range_r1, idx_range_theta1);
+    Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
+
+    CircularToCartesian<X, Y, R, Theta> mapping;
+
+    using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+    using Mapping = CircularToCartesian<X, Y, R, Theta>;
+
+    OnionPatchLocator<MultipatchIdxRanges, Mapping, Kokkos::DefaultHostExecutionSpace>
+            patch_locator(all_idx_ranges, mapping);
 
     PhysicalCoordXY coord(0.25, .03);
     int patch = patch_locator(coord);
@@ -123,7 +208,7 @@ TEST_F(OnionPatchLocator2PatchesTest, CircularOnionPatchLocator2PatchesTest)
 }
 
 
-TEST_F(OnionPatchLocator2PatchesTest, CzarnyOnionPatchLocator2PatchesTest)
+TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
 {
     Patch1::IdxRange12 idx_range_1(idx_range_r1, idx_range_theta1);
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
@@ -131,7 +216,11 @@ TEST_F(OnionPatchLocator2PatchesTest, CzarnyOnionPatchLocator2PatchesTest)
 
     CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
 
-    OnionPatchLocator patch_locator(all_idx_ranges, mapping);
+    using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+    using Mapping = CzarnyToCartesian<X, Y, R, Theta>;
+
+    OnionPatchLocator<MultipatchIdxRanges, Mapping, Kokkos::DefaultHostExecutionSpace>
+            patch_locator(all_idx_ranges, mapping);
 
     PhysicalCoordXY coord(0.25, .03);
     int patch = patch_locator(coord);
