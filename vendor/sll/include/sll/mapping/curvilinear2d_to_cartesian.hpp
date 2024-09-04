@@ -45,7 +45,7 @@ public:
      * @param[in] other
      * 		Curvilinear2DToCartesian mapping used to instantiate the new one.
      */
-    Curvilinear2DToCartesian(Curvilinear2DToCartesian const& other) = default;
+    KOKKOS_FUNCTION Curvilinear2DToCartesian(Curvilinear2DToCartesian const& other) {}
 
     /**
      * @brief Instantiate a Curvilinear2DToCartesian from another temporary
@@ -56,7 +56,7 @@ public:
      */
     Curvilinear2DToCartesian(Curvilinear2DToCartesian&& x) = default;
 
-    virtual ~Curvilinear2DToCartesian() = default;
+    KOKKOS_FUNCTION virtual ~Curvilinear2DToCartesian() {}
 
     /**
      * @brief Assign a Curvilinear2DToCartesian from another Curvilinear2DToCartesian (lvalue).
@@ -92,7 +92,8 @@ public:
      * @return The coordinates in the physical domain.
      *
      */
-    virtual ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    KOKKOS_FUNCTION virtual ddc::Coordinate<X, Y> operator()(
+            ddc::Coordinate<R, Theta> const& coord) const = 0;
 
     /**
      * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.

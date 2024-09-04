@@ -90,7 +90,11 @@ public:
      * @param[in] other
      * 		CzarnyToCartesian mapping used to instantiate the new one.
      */
-    CzarnyToCartesian(CzarnyToCartesian const& other) = default;
+    KOKKOS_FUNCTION CzarnyToCartesian(CzarnyToCartesian const& other)
+        : m_epsilon(other.epsilon())
+        , m_e(other.e())
+    {
+    }
 
     /**
      * @brief Instantiate a CzarnyToCartesian from another temporary CzarnyToCartesian (rvalue).
@@ -129,7 +133,7 @@ public:
      *
      * @see CzarnyToCartesian
      */
-    double epsilon() const
+    KOKKOS_FUNCTION double epsilon() const
     {
         return m_epsilon;
     }
@@ -141,35 +145,38 @@ public:
      *
      * @see CzarnyToCartesian
      */
-    double e() const
+    KOKKOS_FUNCTION double e() const
     {
         return m_e;
     }
 
-    ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
+            ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        const double tmp1 = std::sqrt(m_epsilon * (m_epsilon + 2.0 * r * std::cos(theta)) + 1.0);
+        const double tmp1
+                = Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
 
         const double x = (1.0 - tmp1) / m_epsilon;
-        const double y = m_e * r * std::sin(theta)
-                         / (std::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1));
+        const double y = m_e * r * Kokkos::sin(theta)
+                         / (Kokkos::sqrt(1.0 - 0.25 * m_epsilon * m_epsilon) * (2.0 - tmp1));
 
         return ddc::Coordinate<X, Y>(x, y);
     }
 
-    ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const
+    KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(
+            ddc::Coordinate<X, Y> const& coord) const final
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         const double ex = 1. + m_epsilon * x;
         const double ex2 = (m_epsilon * x * x - 2. * x - m_epsilon);
         const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
-        const double xi = std::sqrt(xi2);
-        const double r = std::sqrt(y * y * ex * ex / (m_e * m_e * xi2) + ex2 * ex2 * 0.25);
+        const double xi = Kokkos::sqrt(xi2);
+        const double r = Kokkos::sqrt(y * y * ex * ex / (m_e * m_e * xi2) + ex2 * ex2 * 0.25);
         double theta
-                = std::atan2(2. * y * ex, (m_e * xi * (m_epsilon * x * x - 2. * x - m_epsilon)));
+                = Kokkos::atan2(2. * y * ex, (m_e * xi * (m_epsilon * x * x - 2. * x - m_epsilon)));
         if (theta < 0) {
             theta = 2 * M_PI + theta;
         }

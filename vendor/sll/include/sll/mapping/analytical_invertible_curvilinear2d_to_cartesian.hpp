@@ -17,9 +17,10 @@ template <class X, class Y, class R, class Theta>
 class AnalyticalInvertibleCurvilinear2DToCartesian : public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
 public:
-    virtual ~AnalyticalInvertibleCurvilinear2DToCartesian() {};
+    KOKKOS_FUNCTION virtual ~AnalyticalInvertibleCurvilinear2DToCartesian() {}
 
-    virtual ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const = 0;
+    KOKKOS_FUNCTION virtual ddc::Coordinate<X, Y> operator()(
+            ddc::Coordinate<R, Theta> const& coord) const = 0;
 
     /**
      * @brief Compute the logical coordinates from the physical coordinates.
@@ -34,5 +35,6 @@ public:
      *
      * @see Curvilinear2DToCartesian::operator()
      */
-    virtual ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const = 0;
+    KOKKOS_FUNCTION virtual ddc::Coordinate<R, Theta> operator()(
+            ddc::Coordinate<X, Y> const& coord) const = 0;
 };
