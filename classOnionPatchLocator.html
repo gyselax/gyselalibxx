@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: OnionPatchLocator&lt; MultipatchIdxRanges, Mapping &gt; Class Template Reference</title>
+<title>Gyselalib++: OnionPatchLocator&lt; MultipatchIdxRanges, Mapping, ExecSpace &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,24 +100,26 @@ $(document).ready(function(){initNavTree('classOnionPatchLocator.html',''); init
 
 <div class="header">
   <div class="headertitle">
-<div class="title">OnionPatchLocator&lt; MultipatchIdxRanges, Mapping &gt; Class Template Reference</div>  </div>
+<div class="title">OnionPatchLocator&lt; MultipatchIdxRanges, Mapping, ExecSpace &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> locator specialised for "onion" geometry.  
  <a href="classOnionPatchLocator.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class MultipatchIdxRanges, class Mapping&gt;<br />
-class OnionPatchLocator&lt; MultipatchIdxRanges, Mapping &gt;</h3>
+<div class="textblock"><h3>template&lt;class MultipatchIdxRanges, class Mapping, class ExecSpace = Kokkos::DefaultExecutionSpace&gt;<br />
+class OnionPatchLocator&lt; MultipatchIdxRanges, Mapping, ExecSpace &gt;</h3>
 
 <p><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> locator specialised for "onion" geometry. </p>
 <p>We define an "onion" geometry a set of patches mapping to the physical domain in a shape of concentrical rings. The first patch is supposed to be a disk containing the O-point. The other patches are ordered as concentrical rings drawing away from the O-point. The order of patches is made by MultipatchIdxRanges and it is important for the dichotomy method.</p>
 <p>We also suppose that we can define a global logical grid that we can split into the different logical grids of the patches.</p>
 <p>This operator locates on which patch a given physical coordinate is.</p>
+<dl class="section warning"><dt>Warning</dt><dd>The operator can works on GPU or CPU according to the given execution space ExecSpace. The ExecSpace by default is device. The constructor will still need to be called from CPU, but the operator() needs to be called from the given ExecSpace.</dd></dl>
 <p><a class="anchor" id="OnionPatchLocatorImplementation"></a> </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">MultipatchIdxRanges</td><td>A <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> type containing the 2D index ranges on each patch. </td></tr>
     <tr><td class="paramname">Mapping</td><td>A mapping type for all the patches. </td></tr>
+    <tr><td class="paramname">ExecSpace</td><td>The space (CPU/GPU) where the calculations are carried out. By default it is on device. </td></tr>
   </table>
   </dd>
 </dl>

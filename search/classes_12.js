@@ -1,7 +1,7 @@
 var searchData=
 [
   ['t_1110',['T',['../structT.html',1,'']]],
-  ['theta_1111',['Theta',['../structonion__shape__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_uniform_2d_2patches::Theta'],['../structTheta.html',1,'Theta']]],
+  ['theta_1111',['Theta',['../structonion__shape__non__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_non_uniform_2d_2patches::Theta'],['../structonion__shape__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_uniform_2d_2patches::Theta'],['../structTheta.html',1,'Theta']]],
   ['thetabasissubset_1112',['ThetaBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['thetacelldim_1113',['ThetaCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['to_5ftuple_1114',['to_tuple',['../structto__tuple.html',1,'']]],

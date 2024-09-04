@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IPatchLocator&lt; X, Y &gt; Class Template Reference</title>
+<title>Gyselalib++: IPatchLocator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,82 +100,36 @@ $(document).ready(function(){initNavTree('classIPatchLocator.html',''); initResi
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classIPatchLocator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">IPatchLocator&lt; X, Y &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">IPatchLocator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Base class to locate on which patch a given physical coordinate is.  
  <a href="classIPatchLocator.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for IPatchLocator:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classIPatchLocator.png" usemap="#IPatchLocator_map" alt=""/>
+  <map id="IPatchLocator_map" name="IPatchLocator_map">
+<area href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html" title="Patch locator specialised for &quot;onion&quot; geometry." alt="OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt;" shape="rect" coords="0,56,553,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ab0e4beddff967a7b48b454829666f1c3"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPatchLocator.html#ab0e4beddff967a7b48b454829666f1c3">operator()</a> (Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;coord) const =0</td></tr>
-<tr class="memdesc:ab0e4beddff967a7b48b454829666f1c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the patch index where the physical coordinate is.  <a href="classIPatchLocator.html#ab0e4beddff967a7b48b454829666f1c3">More...</a><br /></td></tr>
-<tr class="separator:ab0e4beddff967a7b48b454829666f1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a904332415176f262278aac06114ffd05"><td class="memItemLeft" align="right" valign="top"><a id="a904332415176f262278aac06114ffd05"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPatchLocator.html#a904332415176f262278aac06114ffd05">outside_domain</a> = -1</td></tr>
-<tr class="memdesc:a904332415176f262278aac06114ffd05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value to define outside domain (not a patch). <br /></td></tr>
-<tr class="separator:a904332415176f262278aac06114ffd05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bbbe7b20783325bebdd435ecfaa9802"><td class="memItemLeft" align="right" valign="top"><a id="a3bbbe7b20783325bebdd435ecfaa9802"></a>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPatchLocator.html#a3bbbe7b20783325bebdd435ecfaa9802">outside_domain</a> = -1</td></tr>
+<tr class="memdesc:a3bbbe7b20783325bebdd435ecfaa9802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value to define outside domain (not a patch). <br /></td></tr>
+<tr class="separator:a3bbbe7b20783325bebdd435ecfaa9802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class X, class Y&gt;<br />
-class IPatchLocator&lt; X, Y &gt;</h3>
-
-<p>Base class to locate on which patch a given physical coordinate is. </p>
-<p>The physical coordinates are supposed to be global and the logical coordinates are supposed to be locally defined.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname"><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></td><td>First physical coordinate. </td></tr>
-    <tr><td class="paramname"><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></td><td>Second physical coordinate. </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab0e4beddff967a7b48b454829666f1c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0e4beddff967a7b48b454829666f1c3">&#9670;&nbsp;</a></span>operator()()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class X , class Y &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int <a class="el" href="classIPatchLocator.html">IPatchLocator</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::operator() </td>
-          <td>(</td>
-          <td class="paramtype">Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the patch index where the physical coordinate is. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">coord</td><td>Physical coordinate we want to identify the associated patch. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>[int] <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> index of the associated patch. </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>Base class to locate on which patch a given physical coordinate is. </p>
+<p>The physical coordinates are supposed to be global and the logical coordinates are supposed to be locally defined. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/<a class="el" href="ipatch__locator_8hpp_source.html">ipatch_locator.hpp</a></li>
 </ul>
 </div><!-- contents -->

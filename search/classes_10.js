@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['r_1082',['R',['../structonion__shape__uniform__2d__2patches_1_1R.html',1,'onion_shape_uniform_2d_2patches::R'],['../structR.html',1,'R']]],
+  ['r_1082',['R',['../structonion__shape__non__uniform__2d__2patches_1_1R.html',1,'onion_shape_non_uniform_2d_2patches::R'],['../structonion__shape__uniform__2d__2patches_1_1R.html',1,'onion_shape_uniform_2d_2patches::R'],['../structR.html',1,'R']]],
   ['rbasissubset_1083',['RBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['rcelldim_1084',['RCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['recombinationrate_1085',['RecombinationRate',['../classRecombinationRate.html',1,'']]],

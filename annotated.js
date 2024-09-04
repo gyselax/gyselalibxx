@@ -95,6 +95,14 @@ var annotated =
       [ "BSplinesX", "structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html", null ],
       [ "BSplinesY", "structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html", null ]
     ] ],
+    [ "onion_shape_non_uniform_2d_2patches", null, [
+      [ "R", "structonion__shape__non__uniform__2d__2patches_1_1R.html", null ],
+      [ "Theta", "structonion__shape__non__uniform__2d__2patches_1_1Theta.html", null ],
+      [ "GridR", "structonion__shape__non__uniform__2d__2patches_1_1GridR.html", null ],
+      [ "GridTheta", "structonion__shape__non__uniform__2d__2patches_1_1GridTheta.html", null ],
+      [ "BSplinesR", "structonion__shape__non__uniform__2d__2patches_1_1BSplinesR.html", null ],
+      [ "BSplinesTheta", "structonion__shape__non__uniform__2d__2patches_1_1BSplinesTheta.html", null ]
+    ] ],
     [ "onion_shape_uniform_2d_2patches", null, [
       [ "R", "structonion__shape__uniform__2d__2patches_1_1R.html", null ],
       [ "Theta", "structonion__shape__uniform__2d__2patches_1_1Theta.html", null ],
@@ -237,7 +245,7 @@ var annotated =
     [ "interpolator_on_idx_range", "structinterpolator__on__idx__range.html", null ],
     [ "interpolator_on_idx_range< Interp, GridInterp, IdxRange< Grid1D... > >", "structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.html", "structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4" ],
     [ "IonizationRate", "classIonizationRate.html", "classIonizationRate" ],
-    [ "IPatchLocator", "classIPatchLocator.html", "classIPatchLocator" ],
+    [ "IPatchLocator", "classIPatchLocator.html", null ],
     [ "IPoissonSolver", "classIPoissonSolver.html", null ],
     [ "IPoissonSolver< IdxRange< ODims... >, IdxRangeFull, LayoutSpace, MemorySpace >", "classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01LayoutSpace_00_01MemorySpace_01_4.html", "classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01LayoutSpace_00_01MemorySpace_01_4" ],
     [ "IPreallocatableInterpolator", "classIPreallocatableInterpolator.html", "classIPreallocatableInterpolator" ],
@@ -287,7 +295,7 @@ var annotated =
     [ "NullFluidSolver", "classNullFluidSolver.html", "classNullFluidSolver" ],
     [ "NullQNSolver", "classNullQNSolver.html", "classNullQNSolver" ],
     [ "OnionPatchLocator", "classOnionPatchLocator.html", null ],
-    [ "OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, Mapping >", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_01_4.html", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_01_4" ],
+    [ "OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, Mapping, ExecSpace >", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4" ],
     [ "OutsideEdge", "structOutsideEdge.html", null ],
     [ "Patch", "structPatch.html", null ],
     [ "Patch< grid1, grid2, bsplines_dim1, bsplines_dim2 >", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4" ],
