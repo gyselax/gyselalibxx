@@ -5,10 +5,12 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/gauss_legendre_integration.hpp>
+#include <sll/mapping/metric_tensor.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/matrix_batch_csr.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
+#include <sll/view.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -982,12 +984,14 @@ private:
                 trial_bspline_val_and_deriv,
                 trial_bspline_val_and_deriv_theta);
 
+        MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
+
         // Assemble the weak integral element
         return int_volume(ir, ip)
                * (alpha
                           * dot_product(
                                   basis_gradient_test_space,
-                                  mapping.to_covariant(basis_gradient_trial_space, coord))
+                                  metric_tensor.to_covariant(basis_gradient_trial_space, coord))
                   + beta * basis_val_test_space * basis_val_trial_space);
     }
 
