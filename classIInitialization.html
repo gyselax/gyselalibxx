@@ -124,6 +124,9 @@ Inheritance diagram for IInitialization:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a6588f6592eaceff813dd509afce2d052"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpV2DTor2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInitialization.html#a6588f6592eaceff813dd509afce2d052">operator()</a> (DFieldSpV2DTor2D allfdistribu) const =0</td></tr>
+<tr class="memdesc:a6588f6592eaceff813dd509afce2d052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing a distribution function.  <a href="classIInitialization.html#a6588f6592eaceff813dd509afce2d052">More...</a><br /></td></tr>
+<tr class="separator:a6588f6592eaceff813dd509afce2d052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc23a07c3e1a7852b4be401e57526061"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpVparMu&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInitialization.html#abc23a07c3e1a7852b4be401e57526061">operator()</a> (DFieldSpVparMu allfdistribu) const =0</td></tr>
 <tr class="memdesc:abc23a07c3e1a7852b4be401e57526061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing a distribution function.  <a href="classIInitialization.html#abc23a07c3e1a7852b4be401e57526061">More...</a><br /></td></tr>
 <tr class="separator:abc23a07c3e1a7852b4be401e57526061"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,8 +140,43 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class that allows for initializing a distribution function. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6588f6592eaceff813dd509afce2d052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6588f6592eaceff813dd509afce2d052">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DFieldSpV2DTor2D IInitialization::operator() </td>
+          <td>(</td>
+          <td class="paramtype">DFieldSpV2DTor2D&#160;</td>
+          <td class="paramname"><em>allfdistribu</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operator for initializing a distribution function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>On input: the uninitialized distribution function. On output: the initialized distribution function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The initialized distribution function. </dd></dl>
+
+</div>
+</div>
 <a id="abc23a07c3e1a7852b4be401e57526061"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc23a07c3e1a7852b4be401e57526061">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abc23a07c3e1a7852b4be401e57526061">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,7 +213,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ac70366059a8d5679ff45c1a3eed5ad6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac70366059a8d5679ff45c1a3eed5ad6b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac70366059a8d5679ff45c1a3eed5ad6b">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,7 +250,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a6fd840a3367ef39aed60a036fc196618"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fd840a3367ef39aed60a036fc196618">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fd840a3367ef39aed60a036fc196618">&#9670;&nbsp;</a></span>operator()() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +287,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialization/<a class="el" href="geometryVparMu_2initialization_2iinitialization_8hpp_source.html">iinitialization.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryTokamAxi/initialization/<a class="el" href="geometryTokamAxi_2initialization_2iinitialization_8hpp_source.html">iinitialization.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

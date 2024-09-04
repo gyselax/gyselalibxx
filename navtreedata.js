@@ -76,6 +76,7 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
+    [ "Initialization methods", "src_geometryTokamAxi_initialization.html", null ],
     [ "Gyselalib++ tests", "tests.html", "tests" ],
     [ "Collisions test", "tests_geometry5D_collisions.html", null ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
@@ -89,11 +90,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionSpVparMu.html#ab1c899d9734c38957f3d2efbd8190f2e",
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a0a5322b2df29b69ab4c5438b5b0207af",
-"classLagrangeInterpolator.html",
-"classPolarBSplines.html#af53c68e9827efcffeee27e353ac3ef7e",
-"constantrate_8hpp_source.html",
-"neumann__spline__quadrature_8hpp_source.html",
-"structGridVy.html"
+"classKrookSourceConstant.html#ae881ed7d8768c9f8bb103d10a1b625cb",
+"classPoissonSolution.html#a88e27ab5b89c3992369e44ca7ecb56de",
+"collisions__intra_8hpp_source.html",
+"matrix__periodic__banded_8hpp_source.html",
+"structEdge.html#a17c65ef78459378e78d6327af23bc017"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
