@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"onion__patch__locator_8hpp_source.html":[15,0,13,0,7],
 "output_8hpp_source.html":[15,0,11,1],
 "pages.html":[],
 "paraconfpp_8hpp_source.html":[15,0,14,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structGridVy.html":[14,103],
 "structGridX.html":[14,104],
 "structGridY.html":[14,105],
-"structIdxRangeSliceIterator.html":[14,112],
-"structIdxRangeSliceIterator.html#a0bf9255c2ed25e24bda95077a79513f1":[14,112,18]
+"structIdxRangeSliceIterator.html":[14,112]
 };

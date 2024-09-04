@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classPolarBSplines_1_1Impl.html#a04bf8e840ca2083b28cda49cc54a5bfe":[14,184,0,13],
 "classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa":[14,184,0,20],
 "classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7":[14,184,0,21],
 "classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2":[14,184,0,11],
@@ -82,8 +83,8 @@ var NAVTREEINDEX4 =
 "classQNSolver.html":[14,198],
 "classQNSolver.html#a7a295c1742a016b2f154a35a315a608c":[14,198,5],
 "classQNSolver.html#a866ea0a8cd34e7789d8847aaf963fdf2":[14,198,4],
-"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[14,198,0],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[14,198,2],
+"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[14,198,0],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[14,198,1],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[14,198,3],
 "classQuadrature.html":[14,199],
@@ -162,8 +163,8 @@ var NAVTREEINDEX4 =
 "classSplitRightHandSideSolver.html#a2e6bd2d8daa2dc2d7883c1dd47cb9b4a":[14,215,1],
 "classSplitRightHandSideSolver.html#a350971eed31753861f6e2917b9b6b968":[14,215,2],
 "classSplitVlasovSolver.html":[14,216],
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[14,216,1],
 "classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[14,216,3],
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[14,216,1],
 "classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d":[14,216,2],
 "classSplitVlasovSolver.html#a958b142757ef330191c9c25188294f15":[14,216,4],
 "classSplitVlasovSolver.html#aad8ce76367a0be688bfbd8e5a2830040":[14,216,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "constantfluidinitialization_8hpp_source.html":[15,0,7,2,0,2],
 "constantrate_8hpp_source.html":[15,0,7,2,3,1],
 "cosine__evaluator_8hpp_source.html":[15,2,0,1,0],
-"crank__nicolson_8hpp_source.html":[15,0,18,0],
-"curvilinear2d__to__cartesian_8hpp_source.html":[15,2,0,0,0,0,3]
+"crank__nicolson_8hpp_source.html":[15,0,18,0]
 };

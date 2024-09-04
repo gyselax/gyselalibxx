@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8":[14,147,1],
 "classKrookSourceConstant.html#ae881ed7d8768c9f8bb103d10a1b625cb":[14,147,2],
 "classLagrange.html":[14,148],
 "classLagrange.html#a71594722ed82a25a22c9ef7a74e4aa65":[14,148,0],
@@ -159,16 +160,16 @@ var NAVTREEINDEX3 =
 "classMaxwellianEquilibrium.html#a0cc2b9bdb6300dd5661cedbfc27957b3":[14,163,6],
 "classMaxwellianEquilibrium.html#a168179a3980e6851b5f8195b10f0d9ac":[14,163,8],
 "classMaxwellianEquilibrium.html#a168179a3980e6851b5f8195b10f0d9ac":[14,163,12],
-"classMaxwellianEquilibrium.html#a1bd2bd317c1073d9675dd5ce344d7cad":[14,163,13],
 "classMaxwellianEquilibrium.html#a1bd2bd317c1073d9675dd5ce344d7cad":[14,163,9],
+"classMaxwellianEquilibrium.html#a1bd2bd317c1073d9675dd5ce344d7cad":[14,163,13],
 "classMaxwellianEquilibrium.html#a5086199fdf9503559b32930a79ff6748":[14,163,16],
 "classMaxwellianEquilibrium.html#a52616624ef6c0da7107c05d680a11a74":[14,163,0],
 "classMaxwellianEquilibrium.html#a58646ccdf0a4422bed79508bc90c0ec3":[14,163,17],
 "classMaxwellianEquilibrium.html#a714053f07bf2fe8f2b7b56cc0deb00c2":[14,163,7],
 "classMaxwellianEquilibrium.html#a883dfc9d838b53deeb47e93f178c7655":[14,163,15],
+"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[14,163,1],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[14,163,3],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[14,163,5],
-"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[14,163,1],
 "classMaxwellianEquilibrium.html#a9afec632ce82858142e939416967a6cc":[14,163,18],
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a":[14,163,11],
 "classMoments.html":[14,164],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2":[14,184,3],
 "classPolarBSplines.html#af53c68e9827efcffeee27e353ac3ef7e":[14,184,1],
 "classPolarBSplines_1_1Impl.html":[14,184,0],
-"classPolarBSplines_1_1Impl.html#a00a05a8522a019c5e4324e26ecc780d3":[14,184,0,4],
-"classPolarBSplines_1_1Impl.html#a04bf8e840ca2083b28cda49cc54a5bfe":[14,184,0,13]
+"classPolarBSplines_1_1Impl.html#a00a05a8522a019c5e4324e26ecc780d3":[14,184,0,4]
 };

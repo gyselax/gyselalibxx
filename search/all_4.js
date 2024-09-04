@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['e_205',['e',['../classCzarnyToCartesian.html#ac3ffcf3773980eb55c10233ea2ac913b',1,'CzarnyToCartesian']]],
+  ['e_205',['e',['../classCzarnyToCartesian.html#aa498d040e249956cc4084d818260d6ba',1,'CzarnyToCartesian']]],
   ['edge_206',['Edge',['../structEdge.html',1,'']]],
   ['edge1_207',['Edge1',['../structInterface.html#a0eba2d684c513fce67db0f0f977d1315',1,'Interface']]],
   ['edge2_208',['Edge2',['../structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a',1,'Interface']]],
@@ -11,7 +11,7 @@ var searchData=
   ['electrostaticalpotentialsimulation_5ftranslation_213',['ElectrostaticalPotentialSimulation_translation',['../classElectrostaticalPotentialSimulation__translation.html',1,'ElectrostaticalPotentialSimulation_translation'],['../classElectrostaticalPotentialSimulation__translation.html#aed3279c83ba2704c2f5e52da4cc7bf64',1,'ElectrostaticalPotentialSimulation_translation::ElectrostaticalPotentialSimulation_translation()']]],
   ['element_5ftype_214',['element_type',['../classVectorFieldMem.html#a9e9a48b66d669521bac723db61fdb196',1,'VectorFieldMem::element_type()'],['../classVectorField.html#ae13c97a0057d92fd9bf857a5fca5ed03',1,'VectorField::element_type()'],['../classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#ac6c9600b94137af3a3656cc089c2857c',1,'DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, Allocator &gt;::element_type()'],['../classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#a8df83185147fa5fdbcf1d54fbbb734a2',1,'DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::element_type()'],['../classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01LayoutStridedPolicy_00_01MemorySpace_01_4.html#a7d48306a40ccaa986d3294c95d81bbd7',1,'DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, LayoutStridedPolicy, MemorySpace &gt;::element_type()']]],
   ['end_215',['end',['../classIdxRangeSlice.html#a77ce2afa2b2a692ba19d2caa02dd57bb',1,'IdxRangeSlice']]],
-  ['epsilon_216',['epsilon',['../classCzarnyToCartesian.html#a063ce8e51e3f0527f60c004aa4e0eb28',1,'CzarnyToCartesian']]],
+  ['epsilon_216',['epsilon',['../classCzarnyToCartesian.html#a93166e72836a8dbedc892e61f5a0cdf2',1,'CzarnyToCartesian']]],
   ['epsilon_5fbot_217',['epsilon_bot',['../classBumpontailEquilibrium.html#a6fc7a8353d8975267668167983fb1bec',1,'BumpontailEquilibrium']]],
   ['equilibrium_218',['equilibrium',['../classDiocotronDensitySolution.html#a9615447cc5be0e3addf4f885660af89a',1,'DiocotronDensitySolution']]],
   ['euler_219',['Euler',['../classEuler.html',1,'Euler&lt; FieldMemType, DerivFieldMemType &gt;'],['../classEuler.html#a13de1fd2155ed239a1689d456abc8d45',1,'Euler::Euler()']]],
