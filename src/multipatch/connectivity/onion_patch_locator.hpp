@@ -27,13 +27,20 @@
  * 
  * This operator locates on which patch a given physical coordinate is. 
  * 
+ * @warning The operator can works on GPU or CPU according to the given 
+ * execution  space ExecSpace. The ExecSpace by default is device. 
+ * The constructor  will still need to be called from CPU, but the operator() 
+ * needs to be called from the given ExecSpace. 
+ * 
  * @anchor OnionPatchLocatorImplementation
  * 
  * @tparam MultipatchIdxRanges A MultipatchType type containing the 2D index ranges 
  *          on each patch. 
  * @tparam Mapping A mapping type for all the patches. 
+ * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
+ *          By default it is on device. 
  */
-template <class MultipatchIdxRanges, class Mapping>
+template <class MultipatchIdxRanges, class Mapping, class ExecSpace = Kokkos::DefaultExecutionSpace>
 class OnionPatchLocator;
 
 
@@ -42,12 +49,13 @@ class OnionPatchLocator;
  * 
  * See @ref OnionPatchLocatorImplementation
  * 
+ * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  * @tparam Patches Patch types. Their order is important.  
  * @tparam Mapping A mapping type for all the patches. 
  */
-template <class... Patches, class Mapping>
-class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping>
-    : public IPatchLocator<typename Mapping::cartesian_tag_x, typename Mapping::cartesian_tag_y>
+template <class... Patches, class Mapping, class ExecSpace>
+class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping, ExecSpace>
+    : public IPatchLocator
 {
     using X = typename Mapping::cartesian_tag_x;
     using Y = typename Mapping::cartesian_tag_y;
@@ -69,11 +77,10 @@ class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping>
              && ...),
             "The mappings and the patches have to be defined on the same dimensions.");
 
+    Mapping const m_mapping;
+    MultipatchIdxRanges const m_all_idx_ranges;
 
-    Mapping const& m_mapping;
-    MultipatchIdxRanges const& m_all_idx_ranges;
-
-    std::array<Coord<R>, n_patches + 1> m_radii;
+    Kokkos::View<Coord<R>*, typename ExecSpace::memory_space> m_radii;
 
 public:
     /** 
@@ -88,6 +95,7 @@ public:
     OnionPatchLocator(MultipatchIdxRanges const& all_idx_ranges, Mapping const& mapping)
         : m_mapping(mapping)
         , m_all_idx_ranges(all_idx_ranges)
+        , m_radii("m_radii", n_patches + 1)
     {
         set_and_check_radii();
     }
@@ -111,14 +119,12 @@ public:
      * 
      * @see IPatchLocator
      */
-    int operator()(Coord<X, Y> const& coord) const
+    KOKKOS_INLINE_FUNCTION int operator()(Coord<X, Y> const coord) const
     {
-        // Dichotomy to find the right patch.
         int patch_index_min = 0;
         int patch_index_max = n_patches - 1;
 
-        // Check if the physical coordinate corresponds to rmax of the domain.
-        Coord<R> r_max = m_radii[patch_index_max + 1];
+        Coord<R> r_max = m_radii(patch_index_max + 1);
         Coord<R> r(m_mapping(coord));
         if (r == r_max) {
             return patch_index_max;
@@ -126,8 +132,8 @@ public:
 
         while (patch_index_max >= patch_index_min) {
             int patch_index_mid = (patch_index_min + patch_index_max) / 2;
-            Coord<R> r_min = m_radii[patch_index_mid];
-            r_max = m_radii[patch_index_mid + 1];
+            Coord<R> r_min = m_radii(patch_index_mid);
+            r_max = m_radii(patch_index_mid + 1);
 
             if (r_min <= r && r < r_max) {
                 return patch_index_mid;
@@ -137,8 +143,25 @@ public:
                 patch_index_min = patch_index_mid + 1;
             }
         };
-        return IPatchLocator<X, Y>::outside_domain;
+        return IPatchLocator::outside_domain;
     }
+
+
+    /**
+     * @brief Get the mapping on the given Patch. 
+     * The function can run on device and host. 
+     * @tparam Patch Patch type. 
+     * @return The mapping on the given Patch. 
+     */
+    template <class Patch>
+    KOKKOS_FUNCTION Mapping get_mapping_on_patch() const
+    {
+        return m_mapping;
+    }
+
+    /// @brief Get the type of the mapping on the given Patch.
+    template <class Patch>
+    using get_mapping_on_patch_t = Mapping;
 
 
 private:
@@ -147,24 +170,28 @@ private:
      */
     void set_and_check_radii()
     {
+        Kokkos::View<Coord<R>*, Kokkos::HostSpace> radii_host("radii_host", n_patches + 1);
+
         std::array<Coord<R>, n_patches> r_min {
                 (Coord<R>(ddc::coordinate(m_all_idx_ranges.template get<Patches>().front())))...};
         std::array<Coord<R>, n_patches> r_max {
                 (Coord<R>(ddc::coordinate(m_all_idx_ranges.template get<Patches>().back())))...};
 
-        m_radii[0] = r_min[0];
+        radii_host(0) = r_min[0];
         for (std::size_t i(0); i < n_patches - 1; i++) {
             if (abs(double(r_min[i + 1] - r_max[i])) > 1e-14) {
                 throw std::invalid_argument("The patches listed in PatchOrdering must be ordered.");
             }
-            m_radii[i + 1] = r_max[i];
+            radii_host(i + 1) = r_max[i];
         }
-        m_radii[n_patches] = r_max[n_patches - 1];
+        radii_host(n_patches) = r_max[n_patches - 1];
+
+        Kokkos::deep_copy(m_radii, radii_host);
     }
 };
 
 
-
-template <class MultipatchIdxRanges, class Mapping>
+// To help the template deduction.
+template <class MultipatchIdxRanges, class Mapping, class ExecSpace = Kokkos::DefaultExecutionSpace>
 OnionPatchLocator(MultipatchIdxRanges const& all_idx_ranges, Mapping const& mapping)
-        -> OnionPatchLocator<MultipatchIdxRanges, Mapping>;
+        -> OnionPatchLocator<MultipatchIdxRanges, Mapping, ExecSpace>;

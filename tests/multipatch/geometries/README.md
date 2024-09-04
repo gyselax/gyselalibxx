@@ -3,8 +3,11 @@
 This folder contains a variety of geometries that can be used to test different parts of the multipatch code. These geometries are created for testing purposes only so some may seem unnecessarily complex or describe domains that cannot be visualised in 2D.
 
 The available geometries are:
+
 - `2patches_2d_non_periodic_non_uniform.hpp` : A rectangular domain arbitrarily split into 2 patches with non-uniform grids.
 - `2patches_2d_non_periodic_uniform.hpp` : A rectangular domain arbitrarily split into 2 patches with uniform grids.
+- `2patches_2d_onion_shape_non_uniform.hpp` : A circular domain split into 2 patches along the radial direction with non uniform grids. 
+                                    The grids of the patches are defined on the same `R` and `Theta` dimensions.
 - `2patches_2d_onion_shape_uniform.hpp` : A circular domain split into 2 patches along the radial direction with uniform grids. 
                                     The grids of the patches are defined on the same `R` and `Theta` dimensions. 
 - `3patches_2d_non_periodic_non_uniform.hpp` : A rectangular domain arbitrarily split into 3 patches with non-uniform grids.

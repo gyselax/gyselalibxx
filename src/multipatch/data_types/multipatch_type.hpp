@@ -60,7 +60,7 @@ public:
      * @param other The equivalent MultipatchType being copied.
      */
     template <template <typename P> typename OT, class... OPatches>
-    MultipatchType(MultipatchType<OT, OPatches...> const& other)
+    KOKKOS_FUNCTION MultipatchType(MultipatchType<OT, OPatches...> const& other)
         : m_tuple(std::make_tuple(other.template get<Patches>()...))
     {
         static_assert(
@@ -89,7 +89,7 @@ public:
                 "MultipatchTypes are not equivalent");
     }
 
-    ~MultipatchType() = default;
+    KOKKOS_FUNCTION ~MultipatchType() {}
 
     /**
      * Retrieve an object from the patch that it is defined on.
@@ -98,7 +98,7 @@ public:
      * @return The object on the given patch.
      */
     template <class Patch>
-    T<Patch> get() const
+    KOKKOS_FUNCTION T<Patch> get() const
     {
         return std::get<T<Patch>>(m_tuple);
     }

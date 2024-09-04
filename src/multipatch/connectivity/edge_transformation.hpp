@@ -171,7 +171,7 @@ public:
      * @return Boolean stating if there is an equivalent index. 
     */
     template <class CurrentIdx>
-    bool const is_match_available(CurrentIdx const& current_idx) const
+    bool is_match_available(CurrentIdx const& current_idx) const
     {
         using IdxTarget
                 = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, IdxEdge2, IdxEdge1>;
@@ -209,8 +209,7 @@ public:
      * 
      */
     template <class CurrentGrid, class TargetGrid>
-    bool const search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> const& current_idx)
-            const
+    bool search_for_match(Idx<TargetGrid>& target_idx, Idx<CurrentGrid> const& current_idx) const
     {
         static_assert(
                 std::is_same_v<CurrentGrid, EdgeGrid1> || std::is_same_v<CurrentGrid, EdgeGrid2>,
