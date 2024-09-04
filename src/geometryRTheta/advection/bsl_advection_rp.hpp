@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-#include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
+#include <sll/mapping/metric_tensor.hpp>
 
 #include "advection_domain.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -165,13 +165,15 @@ public:
         // Convert advection field on RTheta to advection field on XY
         DVectorFieldMemRTheta<X, Y> advection_field_xy(grid);
 
+        MetricTensor<Mapping, CoordRTheta> metric_tensor(m_mapping);
+
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
 
             std::array<std::array<double, 2>, 2> J; // Jacobian matrix
             m_mapping.jacobian_matrix(coord_rp, J);
             std::array<std::array<double, 2>, 2> G; // Metric tensor
-            m_mapping.metric_tensor(coord_rp, G);
+            metric_tensor(G, coord_rp);
 
             ddcHelper::get<X>(advection_field_xy)(irp)
                     = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])

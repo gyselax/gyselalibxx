@@ -2,6 +2,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/metric_tensor.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/polar_spline_evaluator.hpp>
 
@@ -69,8 +70,8 @@
  * 2- In the second case, the advection field along the logical index range axis
  * is computed with 
  * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j@f$, 
- * - with @f$g^{ij}@f$, the coefficients of the inverse metrix tensor,
- * - @f$g_{jj}@f$, the coefficients of the metrix tensor,
+ * - with @f$g^{ij}@f$, the coefficients of the inverse metric tensor,
+ * - @f$g_{jj}@f$, the coefficients of the metric tensor,
  * - @f$\hat{e}_j@f$, the normalized covariants vectors.
  * 
  * Then, we compute @f$ E = -\nabla \phi  @f$ and @f$A = E \wedge e_z@f$.
@@ -474,6 +475,8 @@ private:
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
+        MetricTensor<Mapping, CoordRTheta> metric_tensor(m_mapping);
+
         // > computation of the advection field
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
@@ -481,9 +484,9 @@ private:
             Matrix_2x2 J; // Jacobian matrix
             m_mapping.jacobian_matrix(coord_rp, J);
             Matrix_2x2 inv_G; // Inverse metric tensor
-            m_mapping.inverse_metric_tensor(coord_rp, inv_G);
+            metric_tensor.inverse(inv_G, coord_rp);
             Matrix_2x2 G; // Metric tensor
-            m_mapping.metric_tensor(coord_rp, G);
+            metric_tensor(G, coord_rp);
 
             // E = -grad phi
             double const electric_field_r
