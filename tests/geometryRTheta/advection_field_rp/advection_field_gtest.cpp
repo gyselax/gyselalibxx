@@ -222,15 +222,13 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     DVectorFieldMemRTheta<X, Y> difference_between_fields_xy_and_rp(grid);
-
-    MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
 
         std::array<std::array<double, 2>, 2> J; // Jacobian matrix
         mapping.jacobian_matrix(coord_rp, J);
         std::array<std::array<double, 2>, 2> G; // Metric tensor
-        metric_tensor(G, coord_rp);
+        mapping.metric_tensor(coord_rp, G);
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rp)(irp)

@@ -72,7 +72,7 @@ int constexpr BSDegreeTheta = 3;
 int constexpr BSDegreeVpar = 3;
 int constexpr BSDegreeMu = 3;
 
-bool constexpr BsplineOnUniformCellsR = false;
+bool constexpr BsplineOnUniformCellsR = true;
 bool constexpr BsplineOnUniformCellsTheta = true;
 bool constexpr BsplineOnUniformCellsVpar = true;
 bool constexpr BsplineOnUniformCellsMu = true;
@@ -132,32 +132,51 @@ struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type
 {
 };
 
+using SplineVparBuilder_1d = ddc::SplineBuilder<
+        Kokkos::DefaultHostExecutionSpace,
+        Kokkos::DefaultHostExecutionSpace::memory_space,
+        BSplinesVpar,
+        GridVpar,
+        SplineVparBoundary,
+        SplineVparBoundary,
+        ddc::SplineSolver::LAPACK,
+        GridVpar>;
+
 // Idx = index of the point in the point sampling
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
 using IdxVpar = Idx<GridVpar>;
-using IdxCS = Idx<GridR, GridTheta>;
 using IdxMu = Idx<GridMu>;
-using IdxVparMu = Idx<GridVpar, GridMu>;
-using IdxSpVparMu = Idx<Species, GridVpar, GridMu>;
+using IdxTor2D = Idx<GridR, GridTheta>;
+using IdxV2D = Idx<GridVpar, GridMu>;
+using IdxV2DTor2D = Idx<GridVpar, GridMu, GridR, GridTheta>;
+using IdxSpTor2D = Idx<Species, GridR, GridTheta>;
+using IdxSpV2D = Idx<Species, GridVpar, GridMu>;
+using IdxSpV2DTor2D = Idx<Species, GridVpar, GridMu, GridR, GridTheta>;
 
 // IdxStep = number of grid points between points in a sampling
 using IdxStepR = IdxStep<GridR>;
 using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepCS = IdxStep<GridCS>;
 using IdxStepVpar = IdxStep<GridVpar>;
 using IdxStepMu = IdxStep<GridMu>;
-using IdxStepVparMu = IdxStep<GridVpar, GridMu>;
-using IdxStepSpVparMu = IdxStep<Species, GridVpar, GridMu>;
+using IdxStepTor2D = IdxStep<GridR, GridTheta>;
+using IdxStepV2D = IdxStep<GridVpar, GridMu>;
+using IdxStepV2DTor2D = IdxStep<GridVpar, GridMu, GridR, GridTheta>;
+using IdxStepSpTor2D = IdxStep<Species, GridR, GridTheta>;
+using IdxStepSpV2D = IdxStep<Species, GridVpar, GridMu>;
+using IdxStepSpV2DTor2D = IdxStep<Species, GridVpar, GridMu, GridR, GridTheta>;
 
 // IdxRange = to describe the wole index range (or a sub-index range)
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeCS = IdxRange<GridCS>;
 using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
-using IdxRangeVparMu = IdxRange<GridVpar, GridMu>;
-using IdxRangeSpVparMu = IdxRange<Species, GridVpar, GridMu>;
+using IdxRangeTor2D = IdxRange<GridR, GridTheta>;
+using IdxRangeV2D = IdxRange<GridVpar, GridMu>;
+using IdxRangeV2DTor2D = IdxRange<GridVpar, GridMu, GridR, GridTheta>;
+using IdxRangeSpTor2D = IdxRange<Species, GridR, GridTheta>;
+using IdxRangeSpV2D = IdxRange<Species, GridVpar, GridMu>;
+using IdxRangeSpV2DTor2D = IdxRange<Species, GridVpar, GridMu, GridR, GridTheta>;
 
 // template for the fields
 // --> For FieldMem template
@@ -170,10 +189,6 @@ using FieldMemTheta = FieldMem<ElementType, IdxRangeTheta>;
 using DFieldMemTheta = FieldMemTheta<double>;
 
 template <class ElementType>
-using FieldMemCS = FieldMem<ElementType, IdxRangeCS>;
-using DFieldMemCS = FieldMemCS<double>;
-
-template <class ElementType>
 using FieldMemVpar = FieldMem<ElementType, IdxRangeVpar>;
 using DFieldMemVpar = FieldMemVpar<double>;
 
@@ -182,14 +197,30 @@ using FieldMemMu = FieldMem<ElementType, IdxRangeMu>;
 using DFieldMemMu = FieldMemMu<double>;
 
 template <class ElementType>
-using FieldMemVparMu = FieldMem<ElementType, IdxRangeVparMu>;
-using DFieldMemVparMu = FieldMemVparMu<double>;
+using FieldMemTor2D = FieldMem<ElementType, IdxRangeTor2D>;
+using DFieldMemTor2D = FieldMemTor2D<double>;
+
+template <class ElementType>
+using FieldMemV2D = FieldMem<ElementType, IdxRangeV2D>;
+using DFieldMemV2D = FieldMemV2D<double>;
+
+template <class ElementType>
+using FieldMemV2DTor2D = FieldMem<ElementType, IdxRangeV2DTor2D>;
+using DFieldMemV2DTor2D = FieldMemV2DTor2D<double>;
+
+template <class ElementType>
+using FieldMemSpTor2D = FieldMem<ElementType, IdxRangeSpTor2D>;
+using DFieldMemSpTor2D = FieldMemSpTor2D<double>;
+
+template <class ElementType>
+using FieldMemSpV2D = FieldMem<ElementType, IdxRangeSpV2D>;
+using DFieldMemSpV2D = FieldMemSpV2D<double>;
+
+template <class ElementType>
+using FieldMemSpV2DTor2D = FieldMem<ElementType, IdxRangeSpV2DTor2D>;
+using DFieldMemSpV2DTor2D = FieldMemSpV2DTor2D<double>;
 
 // --> For Field template
-template <class ElementType>
-using FieldMemSpVparMu = FieldMem<ElementType, IdxRangeSpVparMu>;
-using DFieldMemSpVparMu = FieldMemSpVparMu<double>;
-
 template <class ElementType>
 using FieldR = Field<ElementType, IdxRangeR>;
 using DFieldR = FieldR<double>;
@@ -197,10 +228,6 @@ using DFieldR = FieldR<double>;
 template <class ElementType>
 using FieldTheta = Field<ElementType, IdxRangeTheta>;
 using DFieldTheta = FieldTheta<double>;
-
-template <class ElementType>
-using FieldCS = Field<ElementType, IdxRangeCS>;
-using DFieldCS = FieldCS<double>;
 
 template <class ElementType>
 using FieldVpar = Field<ElementType, IdxRangeVpar>;
@@ -211,12 +238,28 @@ using FieldMu = Field<ElementType, IdxRangeMu>;
 using DFieldMu = FieldMu<double>;
 
 template <class ElementType>
-using FieldVparMu = Field<ElementType, IdxRangeVparMu>;
-using DFieldVparMu = FieldVparMu<double>;
+using FieldTor2D = Field<ElementType, IdxRangeTor2D>;
+using DFieldTor2D = FieldTor2D<double>;
 
 template <class ElementType>
-using FieldSpVparMu = Field<ElementType, IdxRangeSpVparMu>;
-using DFieldSpVparMu = FieldSpVparMu<double>;
+using FieldV2D = Field<ElementType, IdxRangeV2D>;
+using DFieldV2D = FieldV2D<double>;
+
+template <class ElementType>
+using FieldV2DTor2D = Field<ElementType, IdxRangeV2DTor2D>;
+using DFieldV2DTor2D = FieldV2DTor2D<double>;
+
+template <class ElementType>
+using FieldSpTor2D = Field<ElementType, IdxRangeSpTor2D>;
+using DFieldSpTor2D = FieldSpTor2D<double>;
+
+template <class ElementType>
+using FieldSpV2D = Field<ElementType, IdxRangeSpV2D>;
+using DFieldSpV2D = FieldSpV2D<double>;
+
+template <class ElementType>
+using FieldSpV2DTor2D = Field<ElementType, IdxRangeSpV2DTor2D>;
+using DFieldSpV2DTor2D = FieldSpV2DTor2D<double>;
 
 // --> For ConstField template
 template <class ElementType>
@@ -228,10 +271,6 @@ using ConstFieldTheta = ConstField<ElementType, IdxRangeTheta>;
 using DConstFieldTheta = ConstFieldTheta<double>;
 
 template <class ElementType>
-using ConstFieldCS = ConstField<ElementType, IdxRangeCS>;
-using DConstFieldCS = ConstFieldCS<double>;
-
-template <class ElementType>
 using ConstFieldVpar = ConstField<ElementType, IdxRangeVpar>;
 using DConstFieldVpar = ConstFieldVpar<double>;
 
@@ -240,9 +279,25 @@ using ConstFieldMu = ConstField<ElementType, IdxRangeMu>;
 using DConstFieldMu = ConstFieldMu<double>;
 
 template <class ElementType>
-using ConstFieldVparMu = ConstField<ElementType, IdxRangeVparMu>;
-using DConstFieldVparMu = ConstFieldVparMu<double>;
+using ConstFieldTor2D = ConstField<ElementType, IdxRangeTor2D>;
+using DConstFieldTor2D = ConstFieldTor2D<double>;
 
 template <class ElementType>
-using ConstFieldSpVparMu = ConstField<ElementType, IdxRangeSpVparMu>;
-using DConstFieldSpVparMu = ConstFieldSpVparMu<double>;
+using ConstFieldV2D = ConstField<ElementType, IdxRangeV2D>;
+using DConstFieldV2D = ConstFieldV2D<double>;
+
+template <class ElementType>
+using ConstFieldV2DTor2D = ConstField<ElementType, IdxRangeV2DTor2D>;
+using DConstFieldV2DTor2D = ConstFieldV2DTor2D<double>;
+
+template <class ElementType>
+using ConstFieldSpTor2D = ConstField<ElementType, IdxRangeSpTor2D>;
+using DConstFieldSpTor2D = ConstFieldSpTor2D<double>;
+
+template <class ElementType>
+using ConstFieldSpV2D = ConstField<ElementType, IdxRangeSpV2D>;
+using DConstFieldSpV2D = ConstFieldSpV2D<double>;
+
+template <class ElementType>
+using ConstFieldSpV2DTor2D = ConstField<ElementType, IdxRangeSpV2DTor2D>;
+using DConstFieldSpV2DTor2D = ConstFieldSpV2DTor2D<double>;
