@@ -705,10 +705,15 @@ def check_exec_space_usage(file):
                 continue
             relevant_code = config.findall(f".//token[@scope='{s_id}']")
             code_keys = [c.attrib['str'] for c in relevant_code]
+            exception_keys = ('is_same','is_same_v', 'tie', 'tuple_size', 'tuple_element', 'make_tuple', 'get', 'array', 'tuple',
+                              'conditional', 'conditional_t', 'enable_if', 'enable_if_t', 'is_base_of', 'is_base_of_v',
+                              'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
+                              'optional')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
-                if code_keys[idx+1] == '::':
-                    msg = "Std functions are not designed to run on GPU. You may wish to check if there is an equivalent Kokkos:: function?"
+                if code_keys[idx+1] == '::' and code_keys[idx+2] not in exception_keys:
+                    func = ' '.join(code_keys[idx:idx+3])
+                    msg = f"Std functions are not designed to run on GPU. You may wish to check if there is an equivalent Kokkos:: function? ({func})"
                     report_error(FATAL, file, relevant_code[idx].attrib['linenr'], msg)
 
 if __name__ == '__main__':
