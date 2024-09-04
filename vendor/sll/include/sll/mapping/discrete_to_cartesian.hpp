@@ -134,7 +134,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    ddc::Coordinate<X, Y> operator()(
+    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
             ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
     {
         const double x = m_spline_evaluator(coord, m_x_spline_representation.span_cview());

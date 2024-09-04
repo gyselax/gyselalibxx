@@ -79,13 +79,6 @@ public:
         , m_curvilinear_to_y_spline_alloc(builder.spline_domain())
         , m_evaluator(evaluator)
     {
-        static_assert(
-                std::is_same_v<ExecSpace, Kokkos::DefaultHostExecutionSpace>,
-                "GPU version is not yet implemented as mappings are not ported to GPU.");
-        using CurvilinearCoeff = ddc::
-                Coordinate<typename Mapping::circular_tag_r, typename Mapping::circular_tag_theta>;
-        using CartesianCoeff = ddc::Coordinate<X, Y>;
-
         SplineCoeffs curvilinear_to_x_spline = m_curvilinear_to_x_spline_alloc.span_view();
         SplineCoeffs curvilinear_to_y_spline = m_curvilinear_to_y_spline_alloc.span_view();
         InterpolationFieldMem curvilinear_to_x_vals_alloc(builder.interpolation_domain());
@@ -93,12 +86,11 @@ public:
         InterpolationField curvilinear_to_x_vals = curvilinear_to_x_vals_alloc.span_view();
         InterpolationField curvilinear_to_y_vals = curvilinear_to_y_vals_alloc.span_view();
 
-        ddc::for_each(builder.interpolation_domain(), [&](IdxInterpolationPoints el) {
-            CurvilinearCoeff polar_coord(ddc::coordinate(el));
-            CartesianCoeff cart_coord = analytical_mapping(polar_coord);
-            curvilinear_to_x_vals(el) = ddc::select<X>(cart_coord);
-            curvilinear_to_y_vals(el) = ddc::select<Y>(cart_coord);
-        });
+        set_curvilinear_to_cartesian_values(
+                curvilinear_to_x_vals,
+                curvilinear_to_y_vals,
+                analytical_mapping,
+                builder.interpolation_domain());
 
         builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
         builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());
@@ -118,6 +110,38 @@ public:
                 m_curvilinear_to_y_spline_alloc.span_cview(),
                 m_evaluator,
                 m_idx_range_theta);
+    }
+
+    /**
+     * @brief Fill in the curvilinear fields with interpolation 
+     * points mapped with the given analytical mapping. 
+     * Public method used for the constructor of the class. 
+     * @tparam Mapping Type of the analytical mapping. 
+     * @param[out] curvilinear_to_x_vals Field of coordinate on X. 
+     * @param[out] curvilinear_to_y_vals Field of coordinate on Y. 
+     * @param[in] analytical_mapping Analytical mapping. 
+     * @param[in] interpolation_idx_range Index range of an interpolation grid. 
+     */
+    template <class Mapping>
+    void set_curvilinear_to_cartesian_values(
+            InterpolationField const& curvilinear_to_x_vals,
+            InterpolationField const& curvilinear_to_y_vals,
+            Mapping const& analytical_mapping,
+            IdxRangeInterpolationPoints const& interpolation_idx_range)
+    {
+        using CurvilinearCoeff = ddc::
+                Coordinate<typename Mapping::circular_tag_r, typename Mapping::circular_tag_theta>;
+        using CartesianCoeff = ddc::Coordinate<X, Y>;
+
+        ddc::parallel_for_each(
+                ExecSpace(),
+                interpolation_idx_range,
+                KOKKOS_LAMBDA(IdxInterpolationPoints el) {
+                    CurvilinearCoeff polar_coord(ddc::coordinate(el));
+                    CartesianCoeff cart_coord = analytical_mapping(polar_coord);
+                    curvilinear_to_x_vals(el) = ddc::select<X>(cart_coord);
+                    curvilinear_to_y_vals(el) = ddc::select<Y>(cart_coord);
+                });
     }
 };
 

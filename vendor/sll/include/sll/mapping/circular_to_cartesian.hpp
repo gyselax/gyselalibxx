@@ -68,7 +68,7 @@ public:
      * @param[in] other
      * 		CircularToCartesian mapping used to instantiate the new one.
      */
-    CircularToCartesian(CircularToCartesian const& other) = default;
+    KOKKOS_FUNCTION CircularToCartesian(CircularToCartesian const& other) {}
 
     /**
      * @brief Instantiate a Curvilinear2DToCartesian from another temporary CircularToCartesian (rvalue).
@@ -100,21 +100,23 @@ public:
      */
     CircularToCartesian& operator=(CircularToCartesian&& x) = default;
 
-    ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
+            ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        const double x = r * std::cos(theta);
-        const double y = r * std::sin(theta);
+        const double x = r * Kokkos::cos(theta);
+        const double y = r * Kokkos::sin(theta);
         return ddc::Coordinate<X, Y>(x, y);
     }
 
-    ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const
+    KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(
+            ddc::Coordinate<X, Y> const& coord) const final
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        const double r = std::sqrt(x * x + y * y);
-        const double theta = std::atan2(y, x);
+        const double r = Kokkos::sqrt(x * x + y * y);
+        const double theta = Kokkos::atan2(y, x);
         return ddc::Coordinate<R, Theta>(r, theta);
     }
 

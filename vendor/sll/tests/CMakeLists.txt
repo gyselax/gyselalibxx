@@ -117,6 +117,19 @@ target_link_libraries(refined_discrete_mapping_test
 )
 gtest_discover_tests(refined_discrete_mapping_test DISCOVERY_MODE PRE_TEST)
 
+add_executable(mapping_execution_space_access
+  main.cpp
+	mapping_execution_space_access.cpp
+)
+target_compile_features(mapping_execution_space_access PUBLIC cxx_std_17)
+target_link_libraries(mapping_execution_space_access
+    PUBLIC
+        GTest::gtest
+        sll::SLL
+)
+gtest_discover_tests(mapping_execution_space_access DISCOVERY_MODE PRE_TEST)
+
+
 foreach(CONTINUITY RANGE -1 1)
   math(EXPR MIN_DEGREE "${CONTINUITY}+1")
   if (${MIN_DEGREE} LESS 1)
