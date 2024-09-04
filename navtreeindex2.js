@@ -1,8 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classElectrostaticalPotentialSimulation.html#a445037f02ef92015762871398e8fd471":[14,75,1],
-"classElectrostaticalPotentialSimulation.html#acf93729d91941c8db9f9b73d761f4821":[14,75,2],
-"classElectrostaticalPotentialSimulation__decentred__rotation.html":[14,76],
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a0a5322b2df29b69ab4c5438b5b0207af":[14,76,2],
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a6a741279515929335be52f35905b3445":[14,76,0],
 "classElectrostaticalPotentialSimulation__decentred__rotation.html#a8977c7e8d5d831b844ee6457e7f2db94":[14,76,1],
@@ -249,5 +246,8 @@ var NAVTREEINDEX2 =
 "classKrookSourceConstant.html#a23f3846feea732e1d57eae70823c546e":[14,148,0],
 "classKrookSourceConstant.html#a266237a1a58a6f8f000ee4e910353dcc":[14,148,3],
 "classKrookSourceConstant.html#a94d8fa0b721fbe980a11a9edc298b9c8":[14,148,1],
-"classKrookSourceConstant.html#ae881ed7d8768c9f8bb103d10a1b625cb":[14,148,2]
+"classKrookSourceConstant.html#ae881ed7d8768c9f8bb103d10a1b625cb":[14,148,2],
+"classLagrange.html":[14,149],
+"classLagrange.html#a71594722ed82a25a22c9ef7a74e4aa65":[14,149,0],
+"classLagrange.html#a74b5dae43695245aaf9063c1dedc0523":[14,149,1]
 };

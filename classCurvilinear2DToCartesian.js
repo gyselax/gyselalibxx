@@ -22,8 +22,5 @@ var classCurvilinear2DToCartesian =
     [ "inv_jacobian_11", "classCurvilinear2DToCartesian.html#a46937cc12d1adc106d09fc4110d5ee97", null ],
     [ "inv_jacobian_12", "classCurvilinear2DToCartesian.html#aa287b9583acc4bb1d10212c128966417", null ],
     [ "inv_jacobian_21", "classCurvilinear2DToCartesian.html#ad16b91aa85c2561bec62b7068f6f4b1d", null ],
-    [ "inv_jacobian_22", "classCurvilinear2DToCartesian.html#a9a961965b3a3faabe0a3acdb17751d40", null ],
-    [ "metric_tensor", "classCurvilinear2DToCartesian.html#a97ab53287eec4b6390f8d79fd9e0286d", null ],
-    [ "inverse_metric_tensor", "classCurvilinear2DToCartesian.html#a87cda1790602a54e4d434c963ced0bb7", null ],
-    [ "to_covariant", "classCurvilinear2DToCartesian.html#ad585d4687905cce594af1091232d8b41", null ]
+    [ "inv_jacobian_22", "classCurvilinear2DToCartesian.html#a9a961965b3a3faabe0a3acdb17751d40", null ]
 ];

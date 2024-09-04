@@ -281,6 +281,7 @@ var annotated =
     [ "MatrixBatchEll", "classMatrixBatchEll.html", "classMatrixBatchEll" ],
     [ "MatrixBatchTridiag", "classMatrixBatchTridiag.html", "classMatrixBatchTridiag" ],
     [ "MaxwellianEquilibrium", "classMaxwellianEquilibrium.html", "classMaxwellianEquilibrium" ],
+    [ "MetricTensor", "classMetricTensor.html", "classMetricTensor" ],
     [ "Moments", "classMoments.html", "classMoments" ],
     [ "MPIDim", "structMPIDim.html", "structMPIDim" ],
     [ "MPILayout", "classMPILayout.html", "classMPILayout" ],
