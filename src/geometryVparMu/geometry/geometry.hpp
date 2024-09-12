@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
