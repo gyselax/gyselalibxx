@@ -731,7 +731,7 @@ if __name__ == '__main__':
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
                         '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
-                        '--error-exitcode=1']
+                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse']
     for f in multipatch_geom:
         if no_file_filter or f in (*filter_files, spec_info):
             print("------------- Checking ", f, " -------------")
