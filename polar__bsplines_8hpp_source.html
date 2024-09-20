@@ -581,8 +581,8 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();</div>
 <div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    ddc::ChunkSpan theta_integrals = theta_integrals_alloc.span_view();</div>
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160; </div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    r_bspl_space.integrals(r_integrals);</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    theta_bspl_space.integrals(theta_integrals);</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    ddc::integrals(Kokkos::DefaultHostExecutionSpace(), r_integrals);</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    ddc::integrals(Kokkos::DefaultHostExecutionSpace(), theta_integrals);</div>
 <div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160; </div>
 <div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    ddc::for_each(singular_idx_range&lt;DDim&gt;(), [&amp;](<span class="keyword">auto</span> k) {</div>
 <div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        int_vals.<a class="code" href="structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e">singular_spline_coef</a>(k) = ddc::transform_reduce(</div>

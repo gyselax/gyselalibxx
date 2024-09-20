@@ -433,7 +433,7 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                = bspline_full_idx_range.take_first(IdxStep&lt;FEMBSplines&gt;(nbasis));</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        host_t&lt;FEMBSplinesCoeffMem&gt; int_vals(idx_range_bspline);</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        ddc::discrete_space&lt;InputBSplines&gt;().integrals(get_field(int_vals));</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        ddc::integrals(Kokkos::DefaultHostExecutionSpace(), get_field(int_vals));</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordflow">for</span> (IdxFEMBSplines <span class="keyword">const</span> ix : idx_range_bspline) {</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            <span class="keywordtype">int</span> <span class="keyword">const</span> i = (ix - first_bspline_idx).value();</div>
