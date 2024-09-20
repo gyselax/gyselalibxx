@@ -384,7 +384,7 @@ private:
                 = bspline_full_idx_range.take_first(IdxStep<FEMBSplines>(nbasis));
 
         host_t<FEMBSplinesCoeffMem> int_vals(idx_range_bspline);
-        ddc::discrete_space<InputBSplines>().integrals(get_field(int_vals));
+        ddc::integrals(Kokkos::DefaultHostExecutionSpace(), get_field(int_vals));
 
         for (IdxFEMBSplines const ix : idx_range_bspline) {
             int const i = (ix - first_bspline_idx).value();
