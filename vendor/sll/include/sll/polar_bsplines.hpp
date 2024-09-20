@@ -688,8 +688,8 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
     ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();
     ddc::ChunkSpan theta_integrals = theta_integrals_alloc.span_view();
 
-    r_bspl_space.integrals(r_integrals);
-    theta_bspl_space.integrals(theta_integrals);
+    ddc::integrals(Kokkos::DefaultHostExecutionSpace(), r_integrals);
+    ddc::integrals(Kokkos::DefaultHostExecutionSpace(), theta_integrals);
 
     ddc::for_each(singular_idx_range<DDim>(), [&](auto k) {
         int_vals.singular_spline_coef(k) = ddc::transform_reduce(
