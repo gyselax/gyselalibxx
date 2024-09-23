@@ -47,6 +47,8 @@ public:
     void operator()(DFieldXY allfdistribu, DFieldXY allfdistribu_equilibrium)
     {
         IdxRangeXY const idx_range = get_idx_range(allfdistribu);
+        double const epsilon_proxy = m_epsilon;
+        double const mode_k_proxy = m_mode_k;
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
@@ -57,7 +59,7 @@ public:
                     double const y = CoordY(coord_xy);
                     allfdistribu_equilibrium(i_xy) = Kokkos::sin(y);
                     allfdistribu(i_xy) = allfdistribu_equilibrium(i_xy)
-                                         + m_epsilon * Kokkos::cos(m_mode_k * x);
+                                         + epsilon_proxy * Kokkos::cos(mode_k_proxy * x);
                 });
     };
 };
