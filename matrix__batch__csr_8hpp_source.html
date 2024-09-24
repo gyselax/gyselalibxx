@@ -228,194 +228,202 @@ $(document).ready(function(){initNavTree('matrix__batch__csr_8hpp_source.html','
 <div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="classMatrixBatchCsr.html#ad037e66bbdfdfa674e678f49d36f78df">  189</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMatrixBatchCsr.html#ad037e66bbdfdfa674e678f49d36f78df">setup_solver</a>() final</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    {</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        std::shared_ptr <span class="keyword">const</span> gko_exec = m_batch_matrix_csr-&gt;get_executor();</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">if</span> constexpr (</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="comment">// Create the solver factory</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            std::shared_ptr <span class="keyword">const</span> residual_criterion</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                    = gko::stop::ResidualNorm&lt;double&gt;::build().with_reduction_factor(m_tol).on(</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                            gko_exec);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            std::shared_ptr <span class="keyword">const</span> iterations_criterion</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    = gko::stop::Iteration::build().with_max_iters(m_max_iter).on(gko_exec);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            std::shared_ptr <span class="keyword">const</span> preconditioner</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                    = gko::preconditioner::Jacobi&lt;double&gt;::build()</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                              .with_max_block_size(m_preconditionner_max_block_size)</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                              .on(gko_exec);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="comment">//Check if the indices array is sorted, and sort it if necessary.</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="comment">//The values array corresponding to the indices is also reordered.</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(); i++) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            std::unique_ptr&lt;gko::matrix::Csr&lt;double, int&gt;&gt; tmp_matrix</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                    = m_batch_matrix_csr-&gt;create_view_for_item(i);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">if</span> (!tmp_matrix-&gt;is_sorted_by_column_index()) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                tmp_matrix-&gt;sort_by_column_index();</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">if</span> constexpr (</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="comment">// Create the solver factory</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            std::shared_ptr <span class="keyword">const</span> residual_criterion</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                    = gko::stop::ResidualNorm&lt;double&gt;::build().with_reduction_factor(m_tol).on(</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                            gko_exec);</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            std::unique_ptr <span class="keyword">const</span> solver_factory</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                    = solver_type::build()</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                              .with_preconditioner(preconditioner)</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                              .with_criteria(residual_criterion, iterations_criterion)</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                              .on(gko_exec);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="comment">// Create the solvers</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(); i++) {</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                m_solver.emplace_back(solver_factory-&gt;generate(</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                        m_batch_matrix_csr-&gt;create_const_view_for_item(i)));</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            }</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <span class="comment">// Create the solver factory</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            std::shared_ptr <span class="keyword">const</span> preconditioner</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                    = gko::batch::preconditioner::Jacobi&lt;double, int&gt;::build()</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                              .with_max_block_size(m_preconditionner_max_block_size)</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                              .on(gko_exec);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            std::shared_ptr solver_factory = solver_type::build()</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                                                     .with_max_iterations(m_max_iter)</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                                                     .with_tolerance(m_tol)</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                                     .with_preconditioner(preconditioner)</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                                                     .on(gko_exec);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="comment">// Create the solver</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            m_solver = solver_factory-&gt;generate(m_batch_matrix_csr);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        }</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        gko_exec-&gt;synchronize();</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">  243</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">solve</a>(<a class="code" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> <span class="keyword">const</span> b) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    {</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <a class="code" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> x_view(<span class="stringliteral">&quot;x_view&quot;</span>, <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(), <a class="code" href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">size</a>());</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        Kokkos::deep_copy(x_view, b);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">if</span> constexpr (</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(); i++) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                std::shared_ptr <span class="keyword">const</span> gko_exec = m_solver[i]-&gt;get_executor();</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                <span class="comment">// Create a logger to obtain the iteration counts and &quot;implicit&quot; residual norms for every system after the solve.</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                std::shared_ptr <span class="keyword">const</span> logger = gko::log::Convergence&lt;double&gt;::create();</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            std::shared_ptr <span class="keyword">const</span> iterations_criterion</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                    = gko::stop::Iteration::build().with_max_iters(m_max_iter).on(gko_exec);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            std::shared_ptr <span class="keyword">const</span> preconditioner</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                    = gko::preconditioner::Jacobi&lt;double&gt;::build()</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                              .with_max_block_size(m_preconditionner_max_block_size)</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                              .on(gko_exec);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            std::unique_ptr <span class="keyword">const</span> solver_factory</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                    = solver_type::build()</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                              .with_preconditioner(preconditioner)</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                              .with_criteria(residual_criterion, iterations_criterion)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                              .on(gko_exec);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="comment">// Create the solvers</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(); i++) {</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                m_solver.emplace_back(solver_factory-&gt;generate(</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                        m_batch_matrix_csr-&gt;create_const_view_for_item(i)));</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            <span class="comment">// Create the solver factory</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            std::shared_ptr <span class="keyword">const</span> preconditioner</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    = gko::batch::preconditioner::Jacobi&lt;double, int&gt;::build()</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                              .with_max_block_size(m_preconditionner_max_block_size)</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                              .on(gko_exec);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            std::shared_ptr solver_factory = solver_type::build()</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                                                     .with_max_iterations(m_max_iter)</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                                                     .with_tolerance(m_tol)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                                                     .with_preconditioner(preconditioner)</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                                                     .on(gko_exec);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="comment">// Create the solver</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            m_solver = solver_factory-&gt;generate(m_batch_matrix_csr);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        gko_exec-&gt;synchronize();</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">  251</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">solve</a>(<a class="code" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> <span class="keyword">const</span> b) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <a class="code" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> x_view(<span class="stringliteral">&quot;x_view&quot;</span>, <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(), <a class="code" href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">size</a>());</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        Kokkos::deep_copy(x_view, b);</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                <span class="comment">// Solve &amp; log</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                m_solver[i]-&gt;add_logger(logger);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                m_solver[i]</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                        -&gt;apply(to_gko_multivector(gko_exec, b)-&gt;create_const_view_for_item(i),</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                                to_gko_multivector(gko_exec, x_view)-&gt;create_view_for_item(i));</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                m_solver[i]-&gt;remove_logger(logger);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                <span class="comment">// Check convergency</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                <span class="keywordflow">if</span> (!logger-&gt;has_converged()) {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Ginkgo did not converge in MatrixBatchCsr&quot;</span>);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                }</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                <span class="comment">// save logger data</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                <span class="keywordflow">if</span> (m_with_logger) {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                    std::fstream log_file(<span class="stringliteral">&quot;csr_log.txt&quot;</span>, std::ios::out | std::ios::app);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                    save_logger(</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                            log_file,</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                            i,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                            m_batch_matrix_csr-&gt;create_const_view_for_item(i),</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                            Kokkos::subview(x_view, i, Kokkos::ALL),</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                            Kokkos::subview(b, i, Kokkos::ALL),</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                            logger,</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                            m_tol);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                    log_file.close();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                }</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            }</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            std::shared_ptr <span class="keyword">const</span> gko_exec = m_solver-&gt;get_executor();</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            <span class="comment">// Create a logger to obtain the iteration counts and &quot;implicit&quot; residual norms for every system after the solve.</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            std::shared_ptr <span class="keyword">const</span> logger = gko::batch::log::BatchConvergence&lt;double&gt;::create();</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="comment">// Solve &amp; log</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            m_solver-&gt;add_logger(logger);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            m_solver-&gt;apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x_view));</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            m_solver-&gt;remove_logger(logger);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">if</span> constexpr (</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(); i++) {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                std::shared_ptr <span class="keyword">const</span> gko_exec = m_solver[i]-&gt;get_executor();</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                <span class="comment">// Create a logger to obtain the iteration counts and &quot;implicit&quot; residual norms for every system after the solve.</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                std::shared_ptr <span class="keyword">const</span> logger = gko::log::Convergence&lt;double&gt;::create();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                <span class="comment">// Solve &amp; log</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                m_solver[i]-&gt;add_logger(logger);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                m_solver[i]</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                        -&gt;apply(to_gko_multivector(gko_exec, b)-&gt;create_const_view_for_item(i),</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                                to_gko_multivector(gko_exec, x_view)-&gt;create_view_for_item(i));</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                m_solver[i]-&gt;remove_logger(logger);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                <span class="comment">// Check convergency</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                <span class="keywordflow">if</span> (!logger-&gt;has_converged()) {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Ginkgo did not converge in MatrixBatchCsr&quot;</span>);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                <span class="comment">// save logger data</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                <span class="keywordflow">if</span> (m_with_logger) {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                    std::fstream log_file(<span class="stringliteral">&quot;csr_log.txt&quot;</span>, std::ios::out | std::ios::app);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                    save_logger(</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                            log_file,</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                            i,</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                            m_batch_matrix_csr-&gt;create_const_view_for_item(i),</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                            Kokkos::subview(x_view, i, Kokkos::ALL),</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                            Kokkos::subview(b, i, Kokkos::ALL),</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                            logger,</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                            m_tol);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                    log_file.close();</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            std::shared_ptr <span class="keyword">const</span> gko_exec = m_solver-&gt;get_executor();</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="comment">// Check convergency</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            check_conv(<a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(), m_tol, gko_exec, logger);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="comment">// Create a logger to obtain the iteration counts and &quot;implicit&quot; residual norms for every system after the solve.</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            std::shared_ptr <span class="keyword">const</span> logger = gko::batch::log::BatchConvergence&lt;double&gt;::create();</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="comment">// Save logger data</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            <span class="keywordflow">if</span> (m_with_logger) {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                std::fstream log_file(<span class="stringliteral">&quot;csr_log.txt&quot;</span>, std::ios::out | std::ios::app);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                save_logger(log_file, m_batch_matrix_csr, x_view, b, logger, m_tol);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                log_file.close();</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="comment">// Solve &amp; log</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            m_solver-&gt;add_logger(logger);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            m_solver-&gt;apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x_view));</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            m_solver-&gt;remove_logger(logger);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <span class="comment">// Check convergency</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            check_conv(<a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>(), m_tol, gko_exec, logger);</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        Kokkos::deep_copy(b, x_view);</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">  312</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">norm</a>(<span class="keywordtype">int</span> batch_idx)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> tmp_mat_size = <a class="code" href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">size</a>();</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> tmp_batch_size = <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>();</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="keywordtype">double</span> result = 0.;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordtype">double</span>* vals_proxy = m_batch_matrix_csr-&gt;get_values();</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keywordtype">int</span>* row_ptr_proxy = m_batch_matrix_csr-&gt;get_row_ptrs();</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        Kokkos::View&lt;double**, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt; vals_view(</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                vals_proxy,</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                tmp_batch_size,</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                m_batch_matrix_csr-&gt;get_num_elements_per_item());</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        Kokkos::View&lt;int*, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                row_ptr_view(row_ptr_proxy, tmp_mat_size + 1);</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        Kokkos::parallel_reduce(</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                <span class="stringliteral">&quot;L-infinity norm&quot;</span>,</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, tmp_mat_size),</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                KOKKOS_LAMBDA(<span class="keywordtype">int</span> <span class="keyword">const</span> i, <span class="keywordtype">double</span>&amp; res) {</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                    <span class="keywordtype">double</span> row_sum = 0.;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = row_ptr_view[i]; k &lt; row_ptr_view[i + 1]; k++) {</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                        row_sum += Kokkos::abs(vals_view(batch_idx, k));</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    }</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                    <span class="keywordflow">if</span> (row_sum &gt; res) {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        res = row_sum;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                    }</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                },</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                Kokkos::Max&lt;double&gt;(result));</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    }</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;};</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="keyword">template</span> &lt;MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="keywordtype">void</span> convert_coo_to_csr(</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        std::unique_ptr&lt;<a class="code" href="classMatrixBatchCsr.html">MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, Solver&gt;</a>&gt;&amp; matrix,</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        Kokkos::View&lt;double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; vals_coo_host,</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; row_coo_host,</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; col_coo_host)</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;{</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> mat_size = matrix-&gt;size();</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> batch_size = matrix-&gt;batch_size();</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> non_zero_per_system = vals_coo_host.extent(0) / batch_size;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            values_view_host(<span class="stringliteral">&quot;&quot;</span>, batch_size, non_zero_per_system);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            idx_view_host(<span class="stringliteral">&quot;&quot;</span>, non_zero_per_system);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            nnz_per_row_view_host(<span class="stringliteral">&quot;&quot;</span>, mat_size + 1);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    nnz_per_row_view_host(0) = 0;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    nnz_per_row_view_host(mat_size) = non_zero_per_system;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; mat_size; i++) {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordtype">int</span> n_non_zero_in_row = 0;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; non_zero_per_system; k++) {</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            <span class="keywordflow">if</span> (row_coo_host(k) == i) {</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> idx = nnz_per_row_view_host(i) + n_non_zero_in_row;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                idx_view_host(idx) = col_coo_host(k);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                values_view_host(0, idx) = vals_coo_host(k);</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                n_non_zero_in_row++;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            }</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        }</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        nnz_per_row_view_host(i + 1) = nnz_per_row_view_host(i) + n_non_zero_in_row;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> batch_idx = 1; batch_idx &lt; batch_size; batch_idx++) {</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; non_zero_per_system; idx++) {</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            values_view_host(batch_idx, idx) = vals_coo_host(batch_idx * non_zero_per_system + idx);</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        }</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    }</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keyword">auto</span> [values, col_idx, nnz_per_row] = matrix-&gt;get_batch_csr();</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    Kokkos::deep_copy(values, values_view_host);</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    Kokkos::deep_copy(col_idx, idx_view_host);</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    Kokkos::deep_copy(nnz_per_row, nnz_per_row_view_host);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;}</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <span class="comment">// Save logger data</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="keywordflow">if</span> (m_with_logger) {</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                std::fstream log_file(<span class="stringliteral">&quot;csr_log.txt&quot;</span>, std::ios::out | std::ios::app);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                save_logger(log_file, m_batch_matrix_csr, x_view, b, logger, m_tol);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                log_file.close();</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        Kokkos::deep_copy(b, x_view);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">  320</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">norm</a>(<span class="keywordtype">int</span> batch_idx)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> tmp_mat_size = <a class="code" href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">size</a>();</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordtype">int</span> <span class="keyword">const</span> tmp_batch_size = <a class="code" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>();</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        <span class="keywordtype">double</span> result = 0.;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordtype">double</span>* vals_proxy = m_batch_matrix_csr-&gt;get_values();</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordtype">int</span>* row_ptr_proxy = m_batch_matrix_csr-&gt;get_row_ptrs();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        Kokkos::View&lt;double**, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt; vals_view(</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                vals_proxy,</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                tmp_batch_size,</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                m_batch_matrix_csr-&gt;get_num_elements_per_item());</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        Kokkos::View&lt;int*, Kokkos::LayoutRight, typename ExecSpace::memory_space&gt;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                row_ptr_view(row_ptr_proxy, tmp_mat_size + 1);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        Kokkos::parallel_reduce(</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <span class="stringliteral">&quot;L-infinity norm&quot;</span>,</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, tmp_mat_size),</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                KOKKOS_LAMBDA(<span class="keywordtype">int</span> <span class="keyword">const</span> i, <span class="keywordtype">double</span>&amp; res) {</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                    <span class="keywordtype">double</span> row_sum = 0.;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = row_ptr_view[i]; k &lt; row_ptr_view[i + 1]; k++) {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                        row_sum += Kokkos::abs(vals_view(batch_idx, k));</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    }</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                    <span class="keywordflow">if</span> (row_sum &gt; res) {</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                        res = row_sum;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                },</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                Kokkos::Max&lt;double&gt;(result));</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;};</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keyword">template</span> &lt;MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keywordtype">void</span> convert_coo_to_csr(</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        std::unique_ptr&lt;<a class="code" href="classMatrixBatchCsr.html">MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, Solver&gt;</a>&gt;&amp; matrix,</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        Kokkos::View&lt;double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; vals_coo_host,</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; row_coo_host,</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt; col_coo_host)</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> mat_size = matrix-&gt;size();</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> batch_size = matrix-&gt;batch_size();</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> non_zero_per_system = vals_coo_host.extent(0) / batch_size;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    Kokkos::View&lt;double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            values_view_host(<span class="stringliteral">&quot;&quot;</span>, batch_size, non_zero_per_system);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            idx_view_host(<span class="stringliteral">&quot;&quot;</span>, non_zero_per_system);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    Kokkos::View&lt;int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace&gt;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            nnz_per_row_view_host(<span class="stringliteral">&quot;&quot;</span>, mat_size + 1);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    nnz_per_row_view_host(0) = 0;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    nnz_per_row_view_host(mat_size) = non_zero_per_system;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; mat_size; i++) {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="keywordtype">int</span> n_non_zero_in_row = 0;</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; non_zero_per_system; k++) {</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <span class="keywordflow">if</span> (row_coo_host(k) == i) {</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                <span class="keywordtype">int</span> <span class="keyword">const</span> idx = nnz_per_row_view_host(i) + n_non_zero_in_row;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                idx_view_host(idx) = col_coo_host(k);</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                values_view_host(0, idx) = vals_coo_host(k);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                n_non_zero_in_row++;</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            }</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        }</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        nnz_per_row_view_host(i + 1) = nnz_per_row_view_host(i) + n_non_zero_in_row;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> batch_idx = 1; batch_idx &lt; batch_size; batch_idx++) {</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; non_zero_per_system; idx++) {</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            values_view_host(batch_idx, idx) = vals_coo_host(batch_idx * non_zero_per_system + idx);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        }</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    }</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keyword">auto</span> [values, col_idx, nnz_per_row] = matrix-&gt;get_batch_csr();</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    Kokkos::deep_copy(values, values_view_host);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    Kokkos::deep_copy(col_idx, idx_view_host);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    Kokkos::deep_copy(nnz_per_row, nnz_per_row_view_host);</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;}</div>
 <div class="ttc" id="aclassMatrixBatchCsr_html"><div class="ttname"><a href="classMatrixBatchCsr.html">MatrixBatchCsr</a></div><div class="ttdoc">Matrix class which is able to manage and solve a batch of sparse linear systems.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:36</div></div>
 <div class="ttc" id="aclassMatrixBatchCsr_html_a3b7820a5bd67452226c742f08cf37544"><div class="ttname"><a href="classMatrixBatchCsr.html#a3b7820a5bd67452226c742f08cf37544">MatrixBatchCsr::MatrixBatchCsr</a></div><div class="ttdeci">MatrixBatchCsr(const int batch_size, const int mat_size, const int nnz_per_system, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</div><div class="ttdoc">The constructor for MatrixBatchCsr class.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:79</div></div>
-<div class="ttc" id="aclassMatrixBatchCsr_html_a5d7f76fc2c25fb4867b50181779b4c3c"><div class="ttname"><a href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">MatrixBatchCsr::solve</a></div><div class="ttdeci">void solve(BatchedRHS const b) const final</div><div class="ttdoc">Solve the batched linear problem Ax=b.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:243</div></div>
-<div class="ttc" id="aclassMatrixBatchCsr_html_a6eca63a806974a62a376ae271d6fb14d"><div class="ttname"><a href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">MatrixBatchCsr::norm</a></div><div class="ttdeci">double norm(int batch_idx) const</div><div class="ttdoc">A function returning the norm of a matrix located at batch_idx.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:312</div></div>
+<div class="ttc" id="aclassMatrixBatchCsr_html_a5d7f76fc2c25fb4867b50181779b4c3c"><div class="ttname"><a href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">MatrixBatchCsr::solve</a></div><div class="ttdeci">void solve(BatchedRHS const b) const final</div><div class="ttdoc">Solve the batched linear problem Ax=b.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:251</div></div>
+<div class="ttc" id="aclassMatrixBatchCsr_html_a6eca63a806974a62a376ae271d6fb14d"><div class="ttname"><a href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">MatrixBatchCsr::norm</a></div><div class="ttdeci">double norm(int batch_idx) const</div><div class="ttdoc">A function returning the norm of a matrix located at batch_idx.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:320</div></div>
 <div class="ttc" id="aclassMatrixBatchCsr_html_abd4f443cdafa27a91df836e05cbc6f64"><div class="ttname"><a href="classMatrixBatchCsr.html#abd4f443cdafa27a91df836e05cbc6f64">MatrixBatchCsr::get_batch_csr</a></div><div class="ttdeci">std::tuple&lt; Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt;, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; &gt; get_batch_csr()</div><div class="ttdoc">A function to update information about values,indices and the number of non-zero per row for the whol...</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:163</div></div>
 <div class="ttc" id="aclassMatrixBatchCsr_html_ad037e66bbdfdfa674e678f49d36f78df"><div class="ttname"><a href="classMatrixBatchCsr.html#ad037e66bbdfdfa674e678f49d36f78df">MatrixBatchCsr::setup_solver</a></div><div class="ttdeci">void setup_solver() final</div><div class="ttdoc">Perform a pre-process operation on the solver.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:189</div></div>
 <div class="ttc" id="aclassMatrixBatchCsr_html_aeb35ced3575736b99178638e1a21aa71"><div class="ttname"><a href="classMatrixBatchCsr.html#aeb35ced3575736b99178638e1a21aa71">MatrixBatchCsr::MatrixBatchCsr</a></div><div class="ttdeci">MatrixBatchCsr(Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; batch_values, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; cols_idx, Kokkos::View&lt; int *, Kokkos::LayoutRight, ExecSpace &gt; nnz_per_row, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; logger=std::nullopt, std::optional&lt; int &gt; preconditionner_max_block_size=1u)</div><div class="ttdoc">Constructor for MatrixBatchCsr class.</div><div class="ttdef"><b>Definition:</b> matrix_batch_csr.hpp:119</div></div>
