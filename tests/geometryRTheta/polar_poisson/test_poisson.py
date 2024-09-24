@@ -13,6 +13,24 @@ executable = sys.argv[1]
 
 with open("poisson.yaml", "w", encoding="utf-8") as f:
     print("SplineMesh:", file=f)
+    print("  r_ncells: 32", file=f)
+    print("  p_ncells: 32", file=f)
+
+with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE) as p:
+    out, err = p.communicate()
+out = out.decode('ascii').strip()
+
+assert p.returncode == 0
+print(out)
+if err:
+    err = err.decode('ascii')
+    print(err)
+
+out_lines = out.split('\n')
+error_32 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
+
+with open("poisson.yaml", "w", encoding="utf-8") as f:
+    print("SplineMesh:", file=f)
     print("  r_ncells: 64", file=f)
     print("  p_ncells: 64", file=f)
 
@@ -29,25 +47,7 @@ if err:
 out_lines = out.split('\n')
 error_64 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
 
-with open("poisson.yaml", "w", encoding="utf-8") as f:
-    print("SplineMesh:", file=f)
-    print("  r_ncells: 128", file=f)
-    print("  p_ncells: 128", file=f)
-
-with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE) as p:
-    out, err = p.communicate()
-out = out.decode('ascii').strip()
-
-assert p.returncode == 0
-print(out)
-if err:
-    err = err.decode('ascii')
-    print(err)
-
-out_lines = out.split('\n')
-error_128 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
-
-order = np.log(error_64/error_128) / np.log(2)
+order = np.log(error_32/error_64) / np.log(2)
 
 print("Measured order : ", order)
 
