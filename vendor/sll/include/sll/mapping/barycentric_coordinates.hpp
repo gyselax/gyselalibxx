@@ -2,6 +2,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "coordinate_converter.hpp"
+
 /**
  * @brief A class to convert cartesian coordinates to barycentric coordinates
  * on a triangle.
@@ -17,6 +19,12 @@
  */
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag>
 class CartesianToBarycentricCoordinates
+    : public CoordinateConverter<
+              ddc::Coordinate<X, Y>,
+              ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>>
+    , public CoordinateConverter<
+              ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>,
+              ddc::Coordinate<X, Y>>
 {
 public:
     /// The type of a coordinate in the barycentric coordinate system.
@@ -85,7 +93,7 @@ public:
      *
      * @return The equivalent barycentric coordinate.
      */
-    BarycentricCoord operator()(CartesianCoord const& pos) const
+    KOKKOS_FUNCTION BarycentricCoord operator()(CartesianCoord const& pos) const final
     {
         const double x = ddc::get<X>(pos);
         const double y = ddc::get<Y>(pos);
@@ -110,7 +118,7 @@ public:
      *
      * @return The equivalent cartesian coordinate.
      */
-    CartesianCoord operator()(BarycentricCoord const& pos) const
+    KOKKOS_FUNCTION CartesianCoord operator()(BarycentricCoord const& pos) const final
     {
         const double l1 = ddc::get<Corner1Tag>(pos);
         const double l2 = ddc::get<Corner2Tag>(pos);

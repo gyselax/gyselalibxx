@@ -4,7 +4,12 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/curvilinear2d_to_cartesian.hpp>
+#include <sll/view.hpp>
+
+#include "coordinate_converter.hpp"
+#include "curvilinear2d_to_cartesian.hpp"
+#include "jacobian.hpp"
+#include "pseudo_cartesian_compatible_mapping.hpp"
 
 /**
  * @brief A class for describing discrete 2D mappings from the logical domain to the physical domain.
@@ -20,13 +25,17 @@
  *
  * @see Curvilinear2DToCartesian
  */
-template <class X, class Y, class SplineEvaluator>
+template <
+        class X,
+        class Y,
+        class SplineEvaluator,
+        class R = typename SplineEvaluator::continuous_dimension_type1,
+        class Theta = typename SplineEvaluator::continuous_dimension_type2>
 class DiscreteToCartesian
-    : public Curvilinear2DToCartesian<
-              X,
-              Y,
-              typename SplineEvaluator::continuous_dimension_type1,
-              typename SplineEvaluator::continuous_dimension_type2>
+    : public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
+    , public NonAnalyticalJacobian<ddc::Coordinate<R, Theta>>
+    , public PseudoCartesianCompatibleMapping
+    , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
 public:
     /**
@@ -38,27 +47,17 @@ public:
      */
     using BSplineTheta = typename SplineEvaluator::bsplines_type2;
 
-    /**
-     * @brief Indicate the first physical coordinate.
-     */
-    using cartesian_tag_x = X;
-    /**
-     * @brief Indicate the second physical coordinate.
-     */
-    using cartesian_tag_y = Y;
-    /**
-     * @brief Indicate the first logical coordinate.
-     */
-    using circular_tag_r = typename BSplineR::continuous_dimension_type;
-    /**
-     * @brief Indicate the second logical coordinate.
-     */
-    using circular_tag_theta = typename BSplineTheta::continuous_dimension_type;
-
-    /**
-     * @brief Define a 2x2 matrix with an 2D array of an 2D array.
-     */
-    using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
+    /// @brief Indicate the first physical coordinate.
+    using cartesian_tag_x = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_x;
+    /// @brief Indicate the second physical coordinate.
+    using cartesian_tag_y = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_y;
+    /// @brief Indicate the first logical coordinate.
+    using curvilinear_tag_r = typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_r;
+    /// @brief Indicate the second logical coordinate.
+    using curvilinear_tag_theta =
+            typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
+    /// The type of the Jacobian matrix and its inverse
+    using Matrix_2x2 = typename Jacobian<ddc::Coordinate<R, Theta>>::Matrix_2x2;
 
 private:
     using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
@@ -135,7 +134,7 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
-            ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         const double x = m_spline_evaluator(coord, m_x_spline_representation.span_cview());
         const double y = m_spline_evaluator(coord, m_y_spline_representation.span_cview());
@@ -161,7 +160,7 @@ public:
      * @see Curvilinear2DToCartesian::jacobian_22
      */
     void jacobian_matrix(
-            ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord,
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
             Matrix_2x2& matrix) const final
     {
         matrix[0][0]
@@ -190,7 +189,8 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_11(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
+    double jacobian_11(
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
     }
@@ -211,7 +211,8 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_12(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
+    double jacobian_12(
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
     }
@@ -232,7 +233,8 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_21(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
+    double jacobian_21(
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
     }
@@ -253,7 +255,8 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_22(ddc::Coordinate<circular_tag_r, circular_tag_theta> const& coord) const final
+    double jacobian_22(
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
     }
@@ -291,7 +294,7 @@ public:
      *
      *
      * So the pseudo-Cartesian Jacobian matrix at the central point,
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) @f$, is obtained by inversing this matrix.     *
+     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) @f$, is obtained by inversing this matrix. 
      *
      *
      *
@@ -303,7 +306,7 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const
+    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
     {
         matrix[0][0] = 0;
         matrix[0][1] = 0;
@@ -313,7 +316,7 @@ public:
         // Average the values at (r = 0, theta):
         ddc::for_each(m_idx_range_theta, [&](auto const ip) {
             const double th = ddc::coordinate(ip);
-            ddc::Coordinate<circular_tag_r, circular_tag_theta> const coord(0, th);
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const coord(0, th);
             double const deriv_1_x
                     = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
             double const deriv_1_2_x
@@ -360,7 +363,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_11_center() const
+    double to_pseudo_cartesian_jacobian_11_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -373,9 +376,9 @@ public:
      *
      * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @see Curvilinear2DToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_12_center() const
+    double to_pseudo_cartesian_jacobian_12_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -390,7 +393,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_21_center() const
+    double to_pseudo_cartesian_jacobian_21_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -405,7 +408,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_22_center() const
+    double to_pseudo_cartesian_jacobian_22_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
