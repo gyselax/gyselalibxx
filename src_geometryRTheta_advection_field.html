@@ -130,7 +130,7 @@ Advection field along the physical domain axis</h3>
 <li>If \(r &gt; \varepsilon\), we use <p class="formulaDsp">
 \[\begin{bmatrix} \partial_x \phi \\ \partial_y \phi \\ \end{bmatrix} = J^{-T} \begin{bmatrix} \partial_r \phi \\ \partial_\theta \phi \\ \end{bmatrix} \]
 </p>
- with \(J\) the Jacobian matrix of the mapping \(\mathcal{F}: (r,\theta)\mapsto(x,y)\). Then the electric field is given by <p class="formulaDsp">
+ with \(J\) the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping \(\mathcal{F}: (r,\theta)\mapsto(x,y)\). Then the electric field is given by <p class="formulaDsp">
 \[E = -\nabla \phi = \begin{bmatrix} - \partial_x \phi \\ - \partial_y \phi \\ \end{bmatrix} \]
 </p>
  and the advection field by <p class="formulaDsp">
@@ -144,7 +144,7 @@ Advection field along the physical domain axis</h3>
 <p class="formulaDsp">
 \[\begin{bmatrix} \partial_x \phi (0, \theta) \\ \partial_y \phi (0, \theta) \\ \end{bmatrix} = \begin{bmatrix} \partial_r x (0, \theta_1) &amp; \partial_r y (0, \theta_1) \\ \partial_r x (0, \theta_2) &amp; \partial_r y (0, \theta_2) \\ \end{bmatrix} ^{-1} \begin{bmatrix} \partial_r \phi (0, \theta_1) \\ \partial_r \phi (0, \theta_2) \\ \end{bmatrix}. \]
 </p>
-<p> Then we compute \(E\) at \((x,y) = (0,0)\) and \((x,y) = \mathcal{F}(\varepsilon,\theta)\) \(\forall \theta\) (for \(\varepsilon\neq 0\), we use the Jacobian matrix as previously) and we linearise</p>
+<p> Then we compute \(E\) at \((x,y) = (0,0)\) and \((x,y) = \mathcal{F}(\varepsilon,\theta)\) \(\forall \theta\) (for \(\varepsilon\neq 0\), we use the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix as previously) and we linearise</p>
 <p class="formulaDsp">
 \[E_x(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right) E_x(0, \theta) + \frac{r}{\varepsilon} E_x(\varepsilon, \theta), \\ E_y(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right) E_y(0, \theta) + \frac{r}{\varepsilon} E_y(\varepsilon, \theta), \]
 </p>
@@ -166,7 +166,7 @@ General coordinates system</h4>
 </p>
 <p> with</p>
 </li>
-<li>\(J\) the Jacobian matrix associated the the mapping function of the system \(\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)\),</li>
+<li>\(J\) the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix associated the the mapping function of the system \(\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)\),</li>
 <li>\(G = J^T J = [g_{ij}]_{ij}\) the metric tensor,</li>
 <li>\(G^{-1} = [g^{ij}]_{ij}\) the inverse metric tensor</li>
 <li>and \(\hat{e}_j\) the normalized covariant vectors.</li>

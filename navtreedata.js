@@ -88,13 +88,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html#ab1c899d9734c38957f3d2efbd8190f2e",
-"classElectrostaticalPotentialSimulation__decentred__rotation.html#a0a5322b2df29b69ab4c5438b5b0207af",
-"classKrookSourceConstant.html#ae881ed7d8768c9f8bb103d10a1b625cb",
-"classPoissonSolution.html#a88e27ab5b89c3992369e44ca7ecb56de",
-"collisions__intra_8hpp_source.html",
-"matrix__periodic__banded_8hpp_source.html",
-"structEdge.html#a17c65ef78459378e78d6327af23bc017"
+"classCollisionSpVparMu.html#adb7897dbc85afd138b4b3a5e27ace58b",
+"classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74",
+"classLagrangeInterpolator.html#ac43d96b4a41419a6a1ff79a68c542be8",
+"classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703",
+"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb",
+"matrix__batch_8hpp_source.html",
+"structBSplinesVy.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

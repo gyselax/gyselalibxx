@@ -8,6 +8,6 @@ var classCartesianToBarycentricCoordinates =
     [ "~CartesianToBarycentricCoordinates", "classCartesianToBarycentricCoordinates.html#ac8a53f12831116a821d36afa8975bea6", null ],
     [ "operator=", "classCartesianToBarycentricCoordinates.html#ad5a9db2607b7fabe595b9c32da2c4dd0", null ],
     [ "operator=", "classCartesianToBarycentricCoordinates.html#ad3d54732029974a5915abf7aaf7ecf3d", null ],
-    [ "operator()", "classCartesianToBarycentricCoordinates.html#af7f9692eba098317f2177df5c62b36bd", null ],
-    [ "operator()", "classCartesianToBarycentricCoordinates.html#aba61e18a3cf543cb7138d4d9f4090e2c", null ]
+    [ "operator()", "classCartesianToBarycentricCoordinates.html#ae50d67d32dd5d0ba69ca7d0972d34fda", null ],
+    [ "operator()", "classCartesianToBarycentricCoordinates.html#a5ca03e3d3d4f19dbc155224de01628b0", null ]
 ];

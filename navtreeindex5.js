@@ -1,5 +1,11 @@
 var NAVTREEINDEX5 =
 {
+"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[15,238,1],
+"classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[15,238,0],
+"collisioninfo_8hpp_source.html":[16,0,1,0],
+"collisioninfo__radial_8hpp_source.html":[16,0,1,1],
+"collisions__dimensions_8hpp_source.html":[16,0,1,2],
+"collisions__inter_8hpp_source.html":[16,0,7,5,0],
 "collisions__intra_8hpp_source.html":[16,0,7,5,1],
 "collisions__utils_8hpp_source.html":[16,0,7,5,2],
 "compute__norms_8hpp.html":[16,0,16,0],
@@ -11,6 +17,7 @@ var NAVTREEINDEX5 =
 "connectivity__details_8hpp_source.html":[16,0,13,0,1],
 "constantfluidinitialization_8hpp_source.html":[16,0,7,2,0,2],
 "constantrate_8hpp_source.html":[16,0,7,2,3,1],
+"coordinate__converter_8hpp_source.html":[16,2,0,0,0,0,2],
 "cosine__evaluator_8hpp_source.html":[16,2,0,1,0],
 "crank__nicolson_8hpp_source.html":[16,0,18,0],
 "curvilinear2d__to__cartesian_8hpp_source.html":[16,2,0,0,0,0,3],
@@ -232,6 +239,7 @@ var NAVTREEINDEX5 =
 "itimesolver__hybrid_8hpp_source.html":[16,0,7,7,0],
 "itimestepper_8hpp_source.html":[16,0,18,2],
 "ivlasovsolver_8hpp_source.html":[16,0,9,4,0],
+"jacobian_8hpp_source.html":[16,2,0,0,0,0,7],
 "kinetic__fluid__coupling__source_8hpp_source.html":[16,0,7,2,2,1],
 "kinetic__source_8hpp_source.html":[16,0,7,5,4],
 "koliop__interface_8hpp_source.html":[16,0,1,4],
@@ -241,13 +249,5 @@ var NAVTREEINDEX5 =
 "matching__idx__slice_8hpp_source.html":[16,0,13,0,6],
 "math__tools_8hpp_source.html":[16,2,0,0,0,3],
 "matrix_8hpp_source.html":[16,2,0,0,0,4],
-"matrix__banded_8hpp_source.html":[16,2,0,0,0,5],
-"matrix__batch_8hpp_source.html":[16,2,0,0,0,6],
-"matrix__batch__csr_8hpp_source.html":[16,2,0,0,0,7],
-"matrix__batch__ell_8hpp_source.html":[16,2,0,0,0,8],
-"matrix__batch__tridiag_8hpp_source.html":[16,2,0,0,0,9],
-"matrix__center__block_8hpp_source.html":[16,2,0,0,0,10],
-"matrix__corner__block_8hpp_source.html":[16,2,0,0,0,11],
-"matrix__dense_8hpp_source.html":[16,2,0,0,0,12],
-"matrix__pds__tridiag_8hpp_source.html":[16,2,0,0,0,13]
+"matrix__banded_8hpp_source.html":[16,2,0,0,0,5]
 };

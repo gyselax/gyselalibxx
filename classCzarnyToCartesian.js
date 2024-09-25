@@ -1,10 +1,10 @@
 var classCzarnyToCartesian =
 [
-    [ "cartesian_tag_x", "classCzarnyToCartesian.html#a5af5f4e56952163501bf70f3a6bb9826", null ],
-    [ "cartesian_tag_y", "classCzarnyToCartesian.html#a8619d486820413bb89c49632d96dd7b3", null ],
-    [ "circular_tag_r", "classCzarnyToCartesian.html#a3e21acae0597c89ef10a6e7125b85a22", null ],
-    [ "circular_tag_theta", "classCzarnyToCartesian.html#a89160bbd5cc5f6a4d5e7eb06db5295d3", null ],
-    [ "Matrix_2x2", "classCzarnyToCartesian.html#aee6019077136a1588b18808ce5af5bb2", null ],
+    [ "cartesian_tag_x", "classCzarnyToCartesian.html#a76a1f189a06843103766c9c71c9a576d", null ],
+    [ "cartesian_tag_y", "classCzarnyToCartesian.html#a7862fd179224f763c03aa61e7b12c8ef", null ],
+    [ "curvilinear_tag_r", "classCzarnyToCartesian.html#a1a130e08fb2f297d65c175dc06f534fc", null ],
+    [ "curvilinear_tag_theta", "classCzarnyToCartesian.html#a98c891086ba341cf83a7697367e6af85", null ],
+    [ "Matrix_2x2", "classCzarnyToCartesian.html#abca37e67236a525fc055c1659c89a754", null ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html#ac4ac0f90203572db5cc3cf6b91882a3f", null ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html#a85c2d8d3103f8719f01cf245a713882d", null ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html#a07b17ee6c852625acc9194e8aae8e082", null ],
@@ -26,9 +26,9 @@ var classCzarnyToCartesian =
     [ "inv_jacobian_12", "classCzarnyToCartesian.html#aedcda251beebac4a82a1291738077be0", null ],
     [ "inv_jacobian_21", "classCzarnyToCartesian.html#ad64a90949014b54cf23fb6ea2774005f", null ],
     [ "inv_jacobian_22", "classCzarnyToCartesian.html#a62a3e740c526118ca65f159c5230bf68", null ],
-    [ "to_pseudo_cartesian_jacobian_center_matrix", "classCzarnyToCartesian.html#a8652d9c811a6259ed1b6c8ee05601d7f", null ],
-    [ "to_pseudo_cartesian_jacobian_11_center", "classCzarnyToCartesian.html#a1ed1b0f92bd095543ebab5d2383b450d", null ],
-    [ "to_pseudo_cartesian_jacobian_12_center", "classCzarnyToCartesian.html#a89217dd7dfdf92a38864bdfe597abab9", null ],
-    [ "to_pseudo_cartesian_jacobian_21_center", "classCzarnyToCartesian.html#a917d02437c249b870a1af5d570d6aa89", null ],
-    [ "to_pseudo_cartesian_jacobian_22_center", "classCzarnyToCartesian.html#aced354f6f2cf75ef9528568d69e16623", null ]
+    [ "to_pseudo_cartesian_jacobian_center_matrix", "classCzarnyToCartesian.html#a47a88eedb483c7644ff4245f707f6564", null ],
+    [ "to_pseudo_cartesian_jacobian_11_center", "classCzarnyToCartesian.html#a9d68da373ce751980d3e819c98f8b677", null ],
+    [ "to_pseudo_cartesian_jacobian_12_center", "classCzarnyToCartesian.html#a80d82df2ec1a7140aee1d2670756f393", null ],
+    [ "to_pseudo_cartesian_jacobian_21_center", "classCzarnyToCartesian.html#a253871b39fb7cf8ee5d45dbf272d42ed", null ],
+    [ "to_pseudo_cartesian_jacobian_22_center", "classCzarnyToCartesian.html#ad8208330e76f66241947cd39aa0969c4", null ]
 ];

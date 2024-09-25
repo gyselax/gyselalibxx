@@ -1,15 +1,19 @@
 var searchData=
 [
-  ['vectorfield_1127',['VectorField',['../classVectorField.html',1,'']]],
-  ['vectorfieldcommon_1128',['VectorFieldCommon',['../classVectorFieldCommon.html',1,'']]],
-  ['vectorfieldcommon_3c_20field_3c_20elementtype_2c_20idxrangetype_2c_20layoutstridedpolicy_2c_20memoryspace_20_3e_2c_20ndtag_20_3e_1129',['VectorFieldCommon&lt; Field&lt; ElementType, IdxRangeType, LayoutStridedPolicy, MemorySpace &gt;, NDTag &gt;',['../classVectorFieldCommon.html',1,'']]],
-  ['vectorfieldcommon_3c_20fieldmem_3c_20elementtype_2c_20idxrangetype_2c_20allocator_20_3e_2c_20ndtag_20_3e_1130',['VectorFieldCommon&lt; FieldMem&lt; ElementType, IdxRangeType, Allocator &gt;, NDTag &gt;',['../classVectorFieldCommon.html',1,'']]],
-  ['vectorfieldmem_1131',['VectorFieldMem',['../classVectorFieldMem.html',1,'']]],
-  ['vortexmergerdensitysolution_1132',['VortexMergerDensitySolution',['../classVortexMergerDensitySolution.html',1,'']]],
-  ['vortexmergerequilibria_1133',['VortexMergerEquilibria',['../classVortexMergerEquilibria.html',1,'']]],
-  ['vpar_1134',['Vpar',['../structVpar.html',1,'']]],
-  ['vr_1135',['Vr',['../structVr.html',1,'']]],
-  ['vtheta_1136',['Vtheta',['../structVtheta.html',1,'']]],
-  ['vx_1137',['Vx',['../structVx.html',1,'']]],
-  ['vy_1138',['Vy',['../structVy.html',1,'']]]
+  ['t_1129',['T',['../structT.html',1,'']]],
+  ['theta_1130',['Theta',['../structonion__shape__non__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_non_uniform_2d_2patches::Theta'],['../structonion__shape__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_uniform_2d_2patches::Theta'],['../structTheta.html',1,'Theta']]],
+  ['thetabasissubset_1131',['ThetaBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['thetacelldim_1132',['ThetaCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['to_5ftuple_1133',['to_tuple',['../structto__tuple.html',1,'']]],
+  ['to_5ftuple_3c_20std_3a_3ainteger_5fsequence_3c_20t_2c_20ints_2e_2e_2e_20_3e_20_3e_1134',['to_tuple&lt; std::integer_sequence&lt; T, Ints... &gt; &gt;',['../structto__tuple_3_01std_1_1integer__sequence_3_01T_00_01Ints_8_8_8_01_4_01_4.html',1,'']]],
+  ['to_5ftuple_3c_20std_3a_3apair_3c_20t_2c_20u_20_3e_20_3e_1135',['to_tuple&lt; std::pair&lt; T, U &gt; &gt;',['../structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4.html',1,'']]],
+  ['tor1_1136',['Tor1',['../structTor1.html',1,'']]],
+  ['tor2_1137',['Tor2',['../structTor2.html',1,'']]],
+  ['tor3_1138',['Tor3',['../structTor3.html',1,'']]],
+  ['totuple_1139',['ToTuple',['../structconnectivity__details_1_1ToTuple.html',1,'connectivity_details']]],
+  ['totuple_3c_20ddc_3a_3adetail_3a_3atypeseq_3c_20i_2e_2e_2e_20_3e_20_3e_1140',['ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;',['../structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4.html',1,'connectivity_details']]],
+  ['translationadvectionfieldsimulation_1141',['TranslationAdvectionFieldSimulation',['../classTranslationAdvectionFieldSimulation.html',1,'']]],
+  ['translationsimulation_1142',['TranslationSimulation',['../classTranslationSimulation.html',1,'']]],
+  ['tuple_5fto_5ftypes_1143',['tuple_to_types',['../structtuple__to__types.html',1,'']]],
+  ['tuple_5fto_5ftypes_3c_20std_3a_3atuple_3c_20args_2e_2e_2e_20_3e_20_3e_1144',['tuple_to_types&lt; std::tuple&lt; Args... &gt; &gt;',['../structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html',1,'']]]
 ];

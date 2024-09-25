@@ -197,7 +197,7 @@ Advection domain</h1>
 </p>
 <p> Then the four previous steps become</p><ul>
 <li>calculate the mesh points in the pseudo-Cartesian domain using \(\mathcal{G}\);</li>
-<li>calculate the advection field \(A\) in the pseudo-Cartesian domain using the Jacobian matrix of \((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\);</li>
+<li>calculate the advection field \(A\) in the pseudo-Cartesian domain using the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of \((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\);</li>
 <li>calculate the characteristic feet in the pseudo_Cartesian domain;</li>
 <li>calculate the characteristic feet in the logical domain (polar grid) using \(\mathcal{G}^{-1}\);</li>
 <li>interpolate the advection function at the characteristic feet in the logical domain.</li>
@@ -224,7 +224,7 @@ Advection Field</h1>
 <p> In <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>, we show that </p><p class="formulaDsp">
 \[\nabla_{xy} \phi = J D_{G}^{-1}\nabla_{r\theta} \phi, \]
 </p>
-<p> with <em>J</em> the Jacobian matrix and the following diagonal matrix </p><p class="formulaDsp">
+<p> with <em>J</em> the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and the following diagonal matrix </p><p class="formulaDsp">
 \[D_{G} = \begin{bmatrix} \sqrt{g_{11}} &amp; 0 \\ 0 &amp; \sqrt{g_{22}} \\ \end{bmatrix} \]
 </p>
 <p> with the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\).</p>
