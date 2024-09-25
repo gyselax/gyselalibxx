@@ -4,7 +4,7 @@ The `mapping/` folder containts the code defining the mappings used in simulatio
 All mappings inherit from Curvilinear2DToCartesian.
 The current mappings implemented are:
 
-- Analytically invertible mappings (AnalyticalInvertibleCurvilinear2DToCartesian) such as:
+- Analytically invertible mappings such as:
 	-  Circular mapping (CircularToCartesian):
 		-  $x(r,\theta) = r \cos(\theta),$
 	 	-  $y(r,\theta) = r \sin(\theta).$

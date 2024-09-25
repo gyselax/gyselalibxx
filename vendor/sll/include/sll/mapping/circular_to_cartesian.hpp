@@ -5,7 +5,10 @@
 
 #include <ddc/ddc.hpp>
 
-#include "analytical_invertible_curvilinear2d_to_cartesian.hpp"
+#include "coordinate_converter.hpp"
+#include "curvilinear2d_to_cartesian.hpp"
+#include "jacobian.hpp"
+#include "pseudo_cartesian_compatible_mapping.hpp"
 
 /**
  * @brief A class for describing the circular 2D mapping.
@@ -30,34 +33,27 @@
  *
  * and the matrix determinant: @f$ det(J) = r @f$.
  *
- *
- * @see AnalyticalInvertibleCurvilinear2DToCartesian
  */
 template <class X, class Y, class R, class Theta>
-class CircularToCartesian : public AnalyticalInvertibleCurvilinear2DToCartesian<X, Y, R, Theta>
+class CircularToCartesian
+    : public CoordinateConverter<ddc::Coordinate<X, Y>, ddc::Coordinate<R, Theta>>
+    , public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
+    , public Jacobian<ddc::Coordinate<R, Theta>>
+    , public PseudoCartesianCompatibleMapping
+    , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
 public:
-    /**
-     * @brief Indicate the first physical coordinate.
-     */
-    using cartesian_tag_x = X;
-    /**
-     * @brief Indicate the second physical coordinate.
-     */
-    using cartesian_tag_y = Y;
-    /**
-     * @brief Indicate the first logical coordinate.
-     */
-    using circular_tag_r = R;
-    /**
-     * @brief Indicate the second logical coordinate.
-     */
-    using circular_tag_theta = Theta;
-
-    /**
-     * @brief Define a 2x2 matrix with an 2D array of an 2D array.
-     */
-    using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
+    /// @brief Indicate the first physical coordinate.
+    using cartesian_tag_x = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_x;
+    /// @brief Indicate the second physical coordinate.
+    using cartesian_tag_y = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_y;
+    /// @brief Indicate the first logical coordinate.
+    using curvilinear_tag_r = typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_r;
+    /// @brief Indicate the second logical coordinate.
+    using curvilinear_tag_theta =
+            typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
+    /// The type of the Jacobian matrix and its inverse
+    using Matrix_2x2 = typename Jacobian<ddc::Coordinate<R, Theta>>::Matrix_2x2;
 
 public:
     CircularToCartesian() = default;
@@ -127,6 +123,19 @@ public:
     }
 
 
+    /**
+     * @brief Compute full Jacobian matrix.
+     *
+     * For some computations, we need the complete Jacobian matrix or just the
+     * coefficients.
+     * The coefficients can be given indendently with the functions
+     * jacobian_11, jacobian_12,  jacobian_21 and jacobian_22.
+     *
+     * @param[in] coord
+     * 				The coordinate where we evaluate the Jacobian matrix.
+     * @param[out] matrix
+     * 				The Jacobian matrix returned.
+     */
     void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
     {
         const double r = ddc::get<R>(coord);
@@ -164,6 +173,25 @@ public:
     }
 
 
+    /**
+     * @brief Compute full inverse Jacobian matrix.
+     *
+     * For some computations, we need the complete inverse Jacobian matrix or just the
+     * coefficients.
+     * The coefficients can be given indendently with the functions
+     * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
+     *
+     * @param[in] coord
+     * 				The coordinate where we evaluate the Jacobian matrix.
+     * @param[out] matrix
+     * 				The inverse Jacobian matrix returned.
+     *
+     *
+     * @see Jacobian::inv_jacobian_11
+     * @see Jacobian::inv_jacobian_12
+     * @see Jacobian::inv_jacobian_21
+     * @see Jacobian::inv_jacobian_22
+     */
     void inv_jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
     {
         const double r = ddc::get<R>(coord);
@@ -209,7 +237,7 @@ public:
      * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
      *
      *
-     * Here, as @f$ \mathcal{G} =  \mathcal{F} @f$ (see DiscreteToCartesian), the Jacobian matrix of
+     * Here, as @f$ \mathcal{G} =  \mathcal{F} @f$ (see PseudoCartesianCompatibleMapping), the Jacobian matrix of
      * @f$(\mathcal{F} \circ \mathcal{G}^{-1})^{-1} @f$ is the identity matrix.
      * So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
      * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, @f$
@@ -226,7 +254,7 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const
+    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
     {
         matrix[0][0] = 1.;
         matrix[0][1] = 0.;
@@ -241,9 +269,9 @@ public:
      *
      * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_11_center() const
+    double to_pseudo_cartesian_jacobian_11_center() const final
     {
         return 1.;
     }
@@ -255,9 +283,9 @@ public:
      *
      * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_12_center() const
+    double to_pseudo_cartesian_jacobian_12_center() const final
     {
         return 0.;
     }
@@ -269,9 +297,9 @@ public:
      *
      * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_21_center() const
+    double to_pseudo_cartesian_jacobian_21_center() const final
     {
         return 0.;
     }
@@ -283,9 +311,9 @@ public:
      *
      * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
-     * @see CircularToCartesian::to_pseudo_cartesian_jacobian_center_matrix
+     * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_22_center() const
+    double to_pseudo_cartesian_jacobian_22_center() const final
     {
         return 1.;
     }

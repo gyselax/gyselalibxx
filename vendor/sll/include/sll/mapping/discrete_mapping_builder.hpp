@@ -129,8 +129,9 @@ public:
             Mapping const& analytical_mapping,
             IdxRangeInterpolationPoints const& interpolation_idx_range)
     {
-        using CurvilinearCoeff = ddc::
-                Coordinate<typename Mapping::circular_tag_r, typename Mapping::circular_tag_theta>;
+        using CurvilinearCoeff = ddc::Coordinate<
+                typename Mapping::curvilinear_tag_r,
+                typename Mapping::curvilinear_tag_theta>;
         using CartesianCoeff = ddc::Coordinate<X, Y>;
 
         ddc::parallel_for_each(

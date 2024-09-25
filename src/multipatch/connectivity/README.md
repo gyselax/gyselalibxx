@@ -217,8 +217,6 @@ We can easily apply $`(\mathcal{F})^{-1}`$ to identify the equivalent logical co
 We check then for each patch if the logical coordinate is on a rectangular logical patch $\hat{\Omega}^{(i)}$, 
 i.e. if $`(\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}`$. 
 
-The global analytically invertible mappings implemented are child class of `AnalyticalInvertibleCurvilinear2DToCartesian`.
-
 #### Onion shape geometry 
 We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches.
 The patches are defined on the same dimensions `R` and `Theta`. 

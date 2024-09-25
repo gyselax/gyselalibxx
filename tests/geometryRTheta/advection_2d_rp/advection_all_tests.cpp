@@ -11,7 +11,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/analytical_invertible_curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
@@ -48,7 +47,6 @@ namespace {
 namespace fs = std::filesystem;
 
 using CurvilinearMapping = Curvilinear2DToCartesian<X, Y, R, Theta>;
-using AnalyticalInvertibleMapping = AnalyticalInvertibleCurvilinear2DToCartesian<X, Y, R, Theta>;
 using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
 using CzarnyMapping = CzarnyToCartesian<X, Y, R, Theta>;
 using DiscreteMappingBuilder
@@ -311,8 +309,8 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_czarny_map = discrete_czarny_map_builder();
 
-    AdvectionPhysicalDomain<AnalyticalInvertibleMapping> const physical_circular_mapping(circ_map);
-    AdvectionPhysicalDomain<AnalyticalInvertibleMapping> const physical_czarny_mapping(czarny_map);
+    AdvectionPhysicalDomain<CircularMapping> const physical_circular_mapping(circ_map);
+    AdvectionPhysicalDomain<CzarnyMapping> const physical_czarny_mapping(czarny_map);
     AdvectionPseudoCartesianDomain<CzarnyMapping> const pseudo_cartesian_czarny_mapping(czarny_map);
 
     std::tuple simulations = std::make_tuple(
