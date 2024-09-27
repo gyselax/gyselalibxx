@@ -92,9 +92,9 @@ var NAVTREEINDEX =
 "classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74",
 "classLagrangeInterpolator.html#ac43d96b4a41419a6a1ff79a68c542be8",
 "classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703",
-"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb",
-"matrix__batch_8hpp_source.html",
-"structBSplinesVy.html"
+"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212",
+"matrix__banded_8hpp_source.html",
+"structBSplinesVx.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

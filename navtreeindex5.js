@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[15,238,3],
 "classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[15,238,1],
 "classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[15,238,0],
 "collisioninfo_8hpp_source.html":[16,0,1,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "mask__tanh_8hpp_source.html":[16,0,7,5,7],
 "matching__idx__slice_8hpp_source.html":[16,0,13,0,6],
 "math__tools_8hpp_source.html":[16,2,0,0,0,3],
-"matrix_8hpp_source.html":[16,2,0,0,0,4],
-"matrix__banded_8hpp_source.html":[16,2,0,0,0,5]
+"matrix_8hpp_source.html":[16,2,0,0,0,4]
 };

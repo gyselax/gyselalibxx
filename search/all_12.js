@@ -8,7 +8,7 @@ var searchData=
   ['selalib_2b_2b_683',['Selalib++',['../vendor_sll.html',1,'']]],
   ['selectrelevantidxrangetype_684',['SelectRelevantIdxRangeType',['../structconnectivity__details_1_1SelectRelevantIdxRangeType.html',1,'connectivity_details']]],
   ['selectrelevantidxrangetype_3c_20querygrid1d_2c_20idxrange_3c_20idxrangegrids_2e_2e_2e_20_3e_20_3e_685',['SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;',['../structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.html',1,'connectivity_details']]],
-  ['set_5fcurvilinear_5fto_5fcartesian_5fvalues_686',['set_curvilinear_to_cartesian_values',['../classDiscreteToCartesianBuilder.html#a458cd2e7da2eed26ed4f64612cef71ec',1,'DiscreteToCartesianBuilder']]],
+  ['set_5fcurvilinear_5fto_5fcartesian_5fvalues_686',['set_curvilinear_to_cartesian_values',['../classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481',1,'RefinedDiscreteToCartesianBuilder::set_curvilinear_to_cartesian_values()'],['../classDiscreteToCartesianBuilder.html#a458cd2e7da2eed26ed4f64612cef71ec',1,'DiscreteToCartesianBuilder::set_curvilinear_to_cartesian_values()']]],
   ['set_5fell_5felement_687',['set_ell_element',['../classMatrixBatchEll.html#aa3d7d4b0603c631839070708ff574ba6',1,'MatrixBatchEll']]],
   ['set_5fequilibrium_688',['set_equilibrium',['../classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212',1,'VortexMergerEquilibria']]],
   ['set_5finitialisation_689',['set_initialisation',['../classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755',1,'VortexMergerDensitySolution']]],

@@ -1,8 +1,8 @@
 var classMetricTensor =
 [
     [ "Matrix_2x2", "classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a", null ],
-    [ "MetricTensor", "classMetricTensor.html#af0d7a122e2d3f09c5f74ab2664c602f9", null ],
-    [ "operator()", "classMetricTensor.html#a1ffe016242c83182d88b4906b6ff9711", null ],
-    [ "inverse", "classMetricTensor.html#acc16731e155b578c66979ca12003fbd3", null ],
-    [ "to_covariant", "classMetricTensor.html#af0105fd929d4028ae0326e4e269ede36", null ]
+    [ "MetricTensor", "classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8", null ],
+    [ "operator()", "classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe", null ],
+    [ "inverse", "classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d", null ],
+    [ "to_covariant", "classMetricTensor.html#a19aee76bdd1760c4ea69bc28369686c2", null ]
 ];

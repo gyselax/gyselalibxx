@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"structBSplinesVx.html":[15,33],
 "structBSplinesVy.html":[15,34],
 "structBSplinesX.html":[15,35],
 "structBSplinesY.html":[15,36],

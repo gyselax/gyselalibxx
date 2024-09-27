@@ -7,7 +7,7 @@ var searchData=
   ['batch_5ftags_1502',['batch_tags',['../classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01LayoutSpace_00_01MemorySpace_01_4.html#aba435fa37d034f4bab962f62ce30f099',1,'IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, LayoutSpace, MemorySpace &gt;']]],
   ['batched_5fderivs_5fidx_5frange_5ftype_1503',['batched_derivs_idx_range_type',['../classIInterpolator.html#a34da0d56a4983e66979c56014fd5436c',1,'IInterpolator::batched_derivs_idx_range_type()'],['../classIPreallocatableInterpolator.html#a84c8637a225b4aa749251fb6b7217783',1,'IPreallocatableInterpolator::batched_derivs_idx_range_type()']]],
   ['batchedrhs_1504',['BatchedRHS',['../classMatrixBatch.html#aaefa005779305b357172ff993db97030',1,'MatrixBatch']]],
-  ['bspliner_1505',['BSplineR',['../classDiscreteToCartesian.html#afd2b245e4b0ec239ba34f5ab2d1a7bc0',1,'DiscreteToCartesian']]],
+  ['bspliner_1505',['BSplineR',['../classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e',1,'DiscreteToCartesian']]],
   ['bsplines1_1506',['BSplines1',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abf58b838d30e05fa91d71feec6dde132',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['bsplines2_1507',['BSplines2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a79f96be697217aefd52077b6449f47b2',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['bsplines_5ftype_1508',['bsplines_type',['../classPolarSplineEvaluator.html#a4fda8acef6472fb27ffe42d078943f26',1,'PolarSplineEvaluator']]],
@@ -15,5 +15,5 @@ var searchData=
   ['bsplinesr_5ftag_1510',['BSplinesR_tag',['../classPolarBSplines.html#af53c68e9827efcffeee27e353ac3ef7e',1,'PolarBSplines']]],
   ['bsplinestheta_1511',['BSplinesTheta',['../structPolarSpline.html#a7c8f6b5fe8b2135859bcc090a24d9cbe',1,'PolarSpline::BSplinesTheta()'],['../structPolarSplineSpan.html#ab348d2e93cdd02478236f2df425fcf4d',1,'PolarSplineSpan::BSplinesTheta()'],['../structPolarSplineView.html#a2ed33ea8a0a2fa434bd1b8a52e409a9d',1,'PolarSplineView::BSplinesTheta()'],['../classPolarSplineEvaluator.html#a66468d51237ba05121d617991da901f3',1,'PolarSplineEvaluator::BSplinesTheta()']]],
   ['bsplinestheta_5ftag_1512',['BSplinesTheta_tag',['../classPolarBSplines.html#a7c93c1bedcf655bff666950a59eff9ea',1,'PolarBSplines']]],
-  ['bsplinetheta_1513',['BSplineTheta',['../classDiscreteToCartesian.html#aae2f71adb90103843b89c7cd64062c2b',1,'DiscreteToCartesian']]]
+  ['bsplinetheta_1513',['BSplineTheta',['../classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc',1,'DiscreteToCartesian']]]
 ];

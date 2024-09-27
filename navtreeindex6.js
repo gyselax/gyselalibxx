@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"matrix__banded_8hpp_source.html":[16,2,0,0,0,5],
 "matrix__batch_8hpp_source.html":[16,2,0,0,0,6],
 "matrix__batch__csr_8hpp_source.html":[16,2,0,0,0,7],
 "matrix__batch__ell_8hpp_source.html":[16,2,0,0,0,8],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structBSplinesMu.html":[15,29],
 "structBSplinesR.html":[15,30],
 "structBSplinesTheta.html":[15,31],
-"structBSplinesVpar.html":[15,32],
-"structBSplinesVx.html":[15,33]
+"structBSplinesVpar.html":[15,32]
 };
