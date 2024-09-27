@@ -55,7 +55,8 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    virtual void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const = 0;
+    virtual KOKKOS_FUNCTION void to_pseudo_cartesian_jacobian_center_matrix(
+            Matrix_2x2& matrix) const = 0;
 
     /**
      * @brief Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -69,7 +70,7 @@ public:
      * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
      *
      */
-    virtual double to_pseudo_cartesian_jacobian_11_center() const = 0;
+    virtual KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_11_center() const = 0;
 
     /**
      * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -84,7 +85,7 @@ public:
      *
      *
      */
-    virtual double to_pseudo_cartesian_jacobian_12_center() const = 0;
+    virtual KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_12_center() const = 0;
 
     /**
      * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -99,7 +100,7 @@ public:
      *
      *
      */
-    virtual double to_pseudo_cartesian_jacobian_21_center() const = 0;
+    virtual KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_21_center() const = 0;
 
     /**
      * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
@@ -114,5 +115,5 @@ public:
      *
      * 
      */
-    virtual double to_pseudo_cartesian_jacobian_22_center() const = 0;
+    virtual KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_22_center() const = 0;
 };

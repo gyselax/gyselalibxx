@@ -27,7 +27,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    virtual double jacobian(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double jacobian(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute full Jacobian matrix.
@@ -48,7 +48,9 @@ public:
      * @see Jacobian::jacobian_21
      * @see Jacobian::jacobian_22
      */
-    virtual void jacobian_matrix(PositionCoordinate const& coord, Matrix_2x2& matrix) const = 0;
+    virtual KOKKOS_FUNCTION void jacobian_matrix(
+            PositionCoordinate const& coord,
+            Matrix_2x2& matrix) const = 0;
 
     /**
      * @brief Compute the (1,1) coefficient of the Jacobian matrix.
@@ -61,7 +63,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_11(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double jacobian_11(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute the (1,2) coefficient of the Jacobian matrix.
@@ -74,7 +76,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_12(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double jacobian_12(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute the (2,1) coefficient of the Jacobian matrix.
@@ -87,7 +89,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_21(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double jacobian_21(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute the (2,2) coefficient of the Jacobian matrix.
@@ -100,7 +102,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
      */
-    virtual double jacobian_22(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double jacobian_22(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute full inverse Jacobian matrix.
@@ -121,7 +123,9 @@ public:
      * @see Jacobian::inv_jacobian_21
      * @see Jacobian::inv_jacobian_22
      */
-    virtual void inv_jacobian_matrix(PositionCoordinate const& coord, Matrix_2x2& matrix) const = 0;
+    virtual KOKKOS_FUNCTION void inv_jacobian_matrix(
+            PositionCoordinate const& coord,
+            Matrix_2x2& matrix) const = 0;
 
     /**
      * @brief Compute the (1,1) coefficient of the inverse Jacobian matrix.
@@ -133,7 +137,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_11(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double inv_jacobian_11(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute the (1,2) coefficient of the inverse Jacobian matrix.
@@ -145,7 +149,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_12(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double inv_jacobian_12(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute the (2,1) coefficient of the inverse Jacobian matrix.
@@ -157,7 +161,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_21(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double inv_jacobian_21(PositionCoordinate const& coord) const = 0;
 
     /**
      * @brief Compute the (2,2) coefficient of the inverse Jacobian matrix.
@@ -169,7 +173,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the inverse Jacobian matrix.
      */
-    virtual double inv_jacobian_22(PositionCoordinate const& coord) const = 0;
+    virtual KOKKOS_FUNCTION double inv_jacobian_22(PositionCoordinate const& coord) const = 0;
 };
 
 /**
@@ -195,7 +199,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    double jacobian(PositionCoordinate const& coord) const final
+    KOKKOS_FUNCTION double jacobian(PositionCoordinate const& coord) const final
     {
         const double j_rr = this->jacobian_11(coord);
         const double j_rp = this->jacobian_12(coord);
@@ -223,7 +227,8 @@ public:
      * @see Jacobian::inv_jacobian_21
      * @see Jacobian::inv_jacobian_22
      */
-    void inv_jacobian_matrix(PositionCoordinate const& coord, Matrix_2x2& matrix) const final
+    KOKKOS_FUNCTION void inv_jacobian_matrix(PositionCoordinate const& coord, Matrix_2x2& matrix)
+            const final
     {
         double jacob = jacobian(coord);
         assert(fabs(jacob) > 1e-15);
@@ -243,7 +248,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    double inv_jacobian_11(PositionCoordinate const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_11(PositionCoordinate const& coord) const final
     {
         double jacob = jacobian(coord);
         assert(fabs(jacob) > 1e-15);
@@ -260,7 +265,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the inverse Jacobian matrix.
      */
-    double inv_jacobian_12(PositionCoordinate const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_12(PositionCoordinate const& coord) const final
     {
         double jacob = jacobian(coord);
         assert(fabs(jacob) > 1e-15);
@@ -277,7 +282,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the inverse Jacobian matrix.
      */
-    double inv_jacobian_21(PositionCoordinate const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_21(PositionCoordinate const& coord) const final
     {
         double jacob = jacobian(coord);
         assert(fabs(jacob) > 1e-15);
@@ -294,7 +299,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the inverse Jacobian matrix.
      */
-    double inv_jacobian_22(PositionCoordinate const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_22(PositionCoordinate const& coord) const final
     {
         double jacob = jacobian(coord);
         assert(fabs(jacob) > 1e-15);

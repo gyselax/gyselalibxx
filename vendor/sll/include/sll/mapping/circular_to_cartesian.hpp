@@ -116,7 +116,7 @@ public:
         return ddc::Coordinate<R, Theta>(r, theta);
     }
 
-    double jacobian(ddc::Coordinate<R, Theta> const& coord) const final
+    KOKKOS_FUNCTION double jacobian(ddc::Coordinate<R, Theta> const& coord) const final
     {
         double r = ddc::get<R>(coord);
         return r;
@@ -136,40 +136,41 @@ public:
      * @param[out] matrix
      * 				The Jacobian matrix returned.
      */
-    void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
+    KOKKOS_FUNCTION void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix)
+            const final
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        matrix[0][0] = std::cos(theta);
-        matrix[0][1] = -r * std::sin(theta);
-        matrix[1][0] = std::sin(theta);
-        matrix[1][1] = r * std::cos(theta);
+        matrix[0][0] = Kokkos::cos(theta);
+        matrix[0][1] = -r * Kokkos::sin(theta);
+        matrix[1][0] = Kokkos::sin(theta);
+        matrix[1][1] = r * Kokkos::cos(theta);
     }
 
-    double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    KOKKOS_FUNCTION double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double theta = ddc::get<Theta>(coord);
-        return std::cos(theta);
+        return Kokkos::cos(theta);
     }
 
-    double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-        return -r * std::sin(theta);
-    }
-
-    double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
-    {
-        const double theta = ddc::get<Theta>(coord);
-        return std::sin(theta);
-    }
-
-    double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    KOKKOS_FUNCTION double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
-        return r * std::cos(theta);
+        return -r * Kokkos::sin(theta);
+    }
+
+    KOKKOS_FUNCTION double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
+    {
+        const double theta = ddc::get<Theta>(coord);
+        return Kokkos::sin(theta);
+    }
+
+    KOKKOS_FUNCTION double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    {
+        const double r = ddc::get<R>(coord);
+        const double theta = ddc::get<Theta>(coord);
+        return r * Kokkos::cos(theta);
     }
 
 
@@ -192,43 +193,45 @@ public:
      * @see Jacobian::inv_jacobian_21
      * @see Jacobian::inv_jacobian_22
      */
-    void inv_jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix) const final
+    KOKKOS_FUNCTION void inv_jacobian_matrix(
+            ddc::Coordinate<R, Theta> const& coord,
+            Matrix_2x2& matrix) const final
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
         assert(fabs(r) >= 1e-15);
-        matrix[0][0] = std::cos(theta);
-        matrix[0][1] = std::sin(theta);
-        matrix[1][0] = -1 / r * std::sin(theta);
-        matrix[1][1] = 1 / r * std::cos(theta);
+        matrix[0][0] = Kokkos::cos(theta);
+        matrix[0][1] = Kokkos::sin(theta);
+        matrix[1][0] = -1 / r * Kokkos::sin(theta);
+        matrix[1][1] = 1 / r * Kokkos::cos(theta);
     }
 
-    double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double theta = ddc::get<Theta>(coord);
-        return std::cos(theta);
+        return Kokkos::cos(theta);
     }
 
-    double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double theta = ddc::get<Theta>(coord);
-        return std::sin(theta);
+        return Kokkos::sin(theta);
     }
 
-    double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
-    {
-        const double r = ddc::get<R>(coord);
-        const double theta = ddc::get<Theta>(coord);
-        assert(fabs(r) >= 1e-15);
-        return -1 / r * std::sin(theta);
-    }
-
-    double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    KOKKOS_FUNCTION double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
         assert(fabs(r) >= 1e-15);
-        return 1 / r * std::cos(theta);
+        return -1 / r * Kokkos::sin(theta);
+    }
+
+    KOKKOS_FUNCTION double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    {
+        const double r = ddc::get<R>(coord);
+        const double theta = ddc::get<Theta>(coord);
+        assert(fabs(r) >= 1e-15);
+        return 1 / r * Kokkos::cos(theta);
     }
 
 
@@ -254,7 +257,7 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
+    KOKKOS_FUNCTION void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
     {
         matrix[0][0] = 1.;
         matrix[0][1] = 0.;
@@ -271,7 +274,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_11_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_11_center() const final
     {
         return 1.;
     }
@@ -285,7 +288,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_12_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_12_center() const final
     {
         return 0.;
     }
@@ -299,7 +302,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_21_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_21_center() const final
     {
         return 0.;
     }
@@ -313,7 +316,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_22_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_22_center() const final
     {
         return 1.;
     }

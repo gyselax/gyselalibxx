@@ -28,7 +28,7 @@ public:
      *
      * @param[in] mapping The mapping which can be used to calculate the Jacobian.
      */
-    MetricTensor(Mapping mapping) : m_mapping(mapping) {}
+    KOKKOS_FUNCTION MetricTensor(Mapping mapping) : m_mapping(mapping) {}
 
     /**
      * @brief Compute the metric tensor assignd to the mapping.
@@ -42,7 +42,7 @@ public:
      * @param[out] matrix
      * 				The metric tensor matrix.
      */
-    void operator()(Matrix_2x2& matrix, PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION void operator()(Matrix_2x2& matrix, PositionCoordinate const& coord) const
     {
         const double J_11 = m_mapping.jacobian_11(coord);
         const double J_12 = m_mapping.jacobian_12(coord);
@@ -62,7 +62,7 @@ public:
      * @param[out] matrix
      * 				The metric tensor matrix.
      */
-    void inverse(Matrix_2x2& matrix, PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION void inverse(Matrix_2x2& matrix, PositionCoordinate const& coord) const
     {
         const double J_11 = m_mapping.jacobian_11(coord);
         const double J_12 = m_mapping.jacobian_12(coord);
@@ -85,7 +85,7 @@ public:
      *
      * @return A vector of the covariant
      */
-    std::array<double, 2> to_covariant(
+    KOKKOS_FUNCTION std::array<double, 2> to_covariant(
             std::array<double, 2> const& contravariant_vector,
             PositionCoordinate const& coord) const
     {

@@ -30,13 +30,16 @@ template <
         class Y,
         class SplineEvaluator,
         class R = typename SplineEvaluator::continuous_dimension_type1,
-        class Theta = typename SplineEvaluator::continuous_dimension_type2>
+        class Theta = typename SplineEvaluator::continuous_dimension_type2,
+        class MemorySpace = typename SplineEvaluator::memory_space>
 class DiscreteToCartesian
     : public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
     , public NonAnalyticalJacobian<ddc::Coordinate<R, Theta>>
     , public PseudoCartesianCompatibleMapping
     , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
+    static_assert(std::is_same_v<MemorySpace, typename SplineEvaluator::memory_space>);
+
 public:
     /**
      * @brief Indicate the bspline type of the first logical dimension.
@@ -62,13 +65,11 @@ public:
 private:
     using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
 
-    using SplineType = ddc::ChunkView<
-            double,
-            spline_idx_range,
-            std::experimental::layout_right,
-            typename SplineEvaluator::memory_space>;
+    using SplineType = ddc::
+            ChunkView<double, spline_idx_range, std::experimental::layout_right, MemorySpace>;
 
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
+    using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
 private:
     SplineType m_x_spline_representation;
@@ -108,7 +109,7 @@ public:
      * @see DiscreteToCartesian::operator()
      * @see SplineBoundaryValue
      */
-    DiscreteToCartesian(
+    KOKKOS_FUNCTION DiscreteToCartesian(
             SplineType curvilinear_to_x,
             SplineType curvilinear_to_y,
             SplineEvaluator const& evaluator,
@@ -159,7 +160,7 @@ public:
      * @see Curvilinear2DToCartesian::jacobian_21
      * @see Curvilinear2DToCartesian::jacobian_22
      */
-    void jacobian_matrix(
+    KOKKOS_FUNCTION void jacobian_matrix(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
             Matrix_2x2& matrix) const final
     {
@@ -189,7 +190,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_11(
+    KOKKOS_FUNCTION double jacobian_11(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
@@ -211,7 +212,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_12(
+    KOKKOS_FUNCTION double jacobian_12(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
@@ -233,7 +234,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_21(
+    KOKKOS_FUNCTION double jacobian_21(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
@@ -255,7 +256,7 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    double jacobian_22(
+    KOKKOS_FUNCTION double jacobian_22(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         return m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
@@ -306,7 +307,7 @@ public:
      * @see BslAdvection
      * @see AdvectionDomain
      */
-    void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
+    KOKKOS_FUNCTION void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
     {
         matrix[0][0] = 0;
         matrix[0][1] = 0;
@@ -314,7 +315,7 @@ public:
         matrix[1][1] = 0;
 
         // Average the values at (r = 0, theta):
-        ddc::for_each(m_idx_range_theta, [&](auto const ip) {
+        for (IdxTheta ip : m_idx_range_theta) {
             const double th = ddc::coordinate(ip);
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const coord(0, th);
             double const deriv_1_x
@@ -329,24 +330,20 @@ public:
                               .deriv_1_and_2(coord, m_y_spline_representation.span_cview());
 
             // Matrix from pseudo-Cart domain to physical domain by logical domain
-            double const j11 = deriv_1_x * std::cos(th) - deriv_1_2_x * std::sin(th);
-            double const j12 = deriv_1_x * std::sin(th) + deriv_1_2_x * std::cos(th);
-            double const j21 = deriv_1_y * std::cos(th) - deriv_1_2_y * std::sin(th);
-            double const j22 = deriv_1_y * std::sin(th) + deriv_1_2_y * std::cos(th);
+            double const j11 = deriv_1_x * Kokkos::cos(th) - deriv_1_2_x * Kokkos::sin(th);
+            double const j12 = deriv_1_x * Kokkos::sin(th) + deriv_1_2_x * Kokkos::cos(th);
+            double const j21 = deriv_1_y * Kokkos::cos(th) - deriv_1_2_y * Kokkos::sin(th);
+            double const j22 = deriv_1_y * Kokkos::sin(th) + deriv_1_2_y * Kokkos::cos(th);
 
             double const jacobian = j11 * j22 - j12 * j21;
             // Matrix from physical domain to pseudo_cart domain by logical domain
-            if (fabs(jacobian) <= 1e-16) {
-                std::cout << "WARNING! - Non invertible Jacobian matrix. ((r, theta) = (0, " << th
-                          << "))" << std::endl;
-            }
             assert(fabs(jacobian) >= 1e-16);
 
             matrix[0][0] += j22 / jacobian;
             matrix[0][1] += -j12 / jacobian;
             matrix[1][0] += -j21 / jacobian;
             matrix[1][1] += j11 / jacobian;
-        });
+        }
 
         int const theta_size = m_idx_range_theta.size();
         matrix[0][0] /= theta_size;
@@ -363,7 +360,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_11_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_11_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -378,7 +375,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_12_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_12_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -393,7 +390,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_21_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_21_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -408,7 +405,7 @@ public:
      *
      * @see to_pseudo_cartesian_jacobian_center_matrix
      */
-    double to_pseudo_cartesian_jacobian_22_center() const final
+    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_22_center() const final
     {
         Matrix_2x2 jacobian;
         to_pseudo_cartesian_jacobian_center_matrix(jacobian);
@@ -443,7 +440,7 @@ public:
      * @see GrevilleInterpolationPoints
      * @see KnotsAsInterpolationPoints
      */
-    inline const ddc::Coordinate<X, Y> control_point(
+    KOKKOS_INLINE_FUNCTION const ddc::Coordinate<X, Y> control_point(
             ddc::DiscreteElement<BSplineR, BSplineTheta> const& el) const
     {
         return ddc::Coordinate<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
