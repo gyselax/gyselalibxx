@@ -1,0 +1,50 @@
+#!/bin/bash
+
+CURRENT_BRANCH=$(git branch --show-current)
+
+REMOTE=$(git for-each-ref --format='%(upstream:short)' "$(git symbolic-ref -q HEAD)")
+
+git fetch
+
+if [ -z "${REMOTE}" ]
+then
+  REMOTE=origin/main
+fi
+
+
+CHANGED_FILES_IN_PUSH=$(git diff ${REMOTE}..${CURRENT_BRANCH} --name-only)
+
+CLANG_FORMAT=$(which clang-format)
+if [ "$(hostname)" == "persee.partenaires.cea.fr" ]
+then
+    CLANG_FORMAT=/data/gyselarunner/clang-format
+fi
+
+if [ -n "{CLANG_FORMAT}" ]
+then
+  # Get all C++ files that were changed in this commit
+  HEADER_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep .hpp)
+  SOURCE_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep .cpp)
+  CHANGED_CPP_FILES="${HEADER_FILES} ${SOURCE_FILES}"
+
+  if [[ "${CHANGED_CPP_FILES}" == " " ]]
+  then
+    exit 0
+  fi
+  ${CLANG_FORMAT} ${CHANGED_CPP_FILES} --dry-run --Werror
+  
+  FAILURE=$?
+  
+  if [ ${FAILURE} -ne 0 ]
+  then
+    RED='\033[0;31m'
+    echo "Please run clang format on your files before pushing."
+    echo "This can be done using the following commands (you may need to stash any local changes):"
+    echo ""
+    echo "  bin/indent -d"
+    echo "  git commit -am \"Clang formatting\""
+    echo ""
+    echo -e "${RED}Push aborted"
+    exit 1
+  fi
+fi 
