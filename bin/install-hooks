@@ -1,0 +1,14 @@
+#!/bin/bash
+# SPDX-License-Identifier: MIT
+
+set -e
+
+cd "$(dirname "$0")"
+cd ..
+GYSELALIBXX_HOME=$(pwd)
+
+cp ${GYSELALIBXX_HOME}/bin/pre-commit ${GYSELALIBXX_HOME}/.git/hooks/pre-commit
+cp ${GYSELALIBXX_HOME}/bin/pre-push ${GYSELALIBXX_HOME}/.git/hooks/pre-push
+
+chmod +x ${GYSELALIBXX_HOME}/.git/hooks/pre-commit
+chmod +x ${GYSELALIBXX_HOME}/.git/hooks/pre-push

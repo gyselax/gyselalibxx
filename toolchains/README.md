@@ -2,7 +2,12 @@
 
 ## General usage
 
-Prepare the environment, source the environment, use the environment to build:
+In order to build Gyselalib++ the necessary steps are:
+1. Prepare the environment
+2. Source the environment
+3. Use the environment to build
+
+For example on Adastra the necessary commands are:
 
 ```
 $ mkdir -p build && cd build
@@ -15,19 +20,23 @@ $ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolch
 
 The [toolchains](https://en.wikipedia.org/wiki/Toolchain) are represented using a toolchain file. It summarizes CMake build settings for the appropriate machine environment and hardware.
 
-On can use the toolchains like so:
+You can use the toolchains like so:
 
 ```
 $ mkdir -p build && cd build
-$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/mi250.hipcc.adastra.spack/toolchain.cmake
+$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/<CONFIG>/toolchain.cmake
 ```
+
+The toolchains files are found in the `toolchains` folder and have the extension `.cmake`. The `CONFIG` folders are named after the environment where they run. E.g. `mi250.hipcc.adastra.spack` contains the files necessary to run on MI250 GPUs using `hipcc` on Adastra. `v100.persee` contains the files necessary to run on V100 GPUs on Persee.
+
+Additionally the folder `docker.gyselalibxx_env` provides toolchains which will work on most platforms. These toolchains are designed to work with the docker environment.
 
 ## Environments
 
-Toolchains may require a non default environment. For that purpose each toolchain will expose the concept of environment script. Each toolchain should provide (a potentially empty) environment file under the `environment.sh` filename. The environment file is used like so:
+Toolchains may require a non default environment. For that purpose environment scripts are provided. Each `CONFIG` folder in `toolchains` should contain (a potentially empty) environment file named `environment.sh`. The environment file is used like so:
 
 ```
-$ source toolchains/mi250.hipcc.adastra.spack/environment.sh
+$ source toolchains/<CONFIG>/environment.sh
 ```
 
 The *sourcing* of an environment file will generally happen before the build or usage of the built product.
@@ -35,10 +44,10 @@ The *sourcing* of an environment file will generally happen before the build or 
 
 ## Preparing environments
 
-The environment may need preparation (say it is not available on the machine). For that purpose each toolchain will expose the concept of preparation script. Each toolchain should provide (a potentially empty) preparation file under the `prepare.sh` filename. The preparation file is used like so:
+The environment may need preparation (for example if the dependencies are not available on the machine). For that purpose the `CONFIG` folders should contain (a potentially empty) preparation file named `prepare.sh`. The preparation file is used like so:
 
 ```
-$ toolchains/mi250.hipcc.adastra.spack/prepare.sh
+$ toolchains/<CONFIG>/prepare.sh
 ```
 
 ## General notes

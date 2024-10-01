@@ -4,13 +4,36 @@ Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagra
 similar as well as a collection of such codes.
 It is based on [DDC](https://ddc.mdls.fr/). We strongly encourage new developers to begin by reading our documentation about [Using DDC in Gyselalibxx](./docs/DDC_in_gyselalibxx.md).
 
-## Compilation
+## Set-up
 
-to compile Gyselalib++:
-
+In order to set up Gyselalib++ on a new machine, simply run:
 ```
 git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/install-hooks
+```
+or
+```
+git clone --recurse-submodules https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git gyselalibxx
+cd gyselalibxx
+./bin/install-hooks
+```
+
+on a machine for which Gyselalib++ is already used an environment script may be available to set up the necessary modules etc.
+
+Please check the folder toolchains to find the existing configurations. See the documentation about [toolchains](./toolchains/README.md) for more information on the provided files.
+
+For example in order to set up the environment on the Adastra supercalculator simply run:
+```
+source toolchains/mi250.hipcc.adastra.spack/prepare.sh
+source toolchains/mi250.hipcc.adastra.spack/environment.sh
+```
+
+## Compilation
+
+To compile Gyselalib++, navigate to the folder where the library was cloned to and run:
+
+```
 mkdir build
 cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=<TOOLCHAIN_FILE> ..

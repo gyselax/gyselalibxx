@@ -69,9 +69,14 @@ else
     RUN_IF_OK='true'
 fi
 
+CLANG_FORMAT=clang-format
+if [ "$(hostname)" == "persee.partenaires.cea.fr" ]
+then
+    CLANG_FORMAT=/data/gyselarunner/clang-format
+fi
 
 ${DOCKER_COMMAND} find \
     src tests vendor/sll simulations \
     '(' -name '*.h' -o -name '*.hpp' -o -name '*.cpp' ')' \
-    -exec clang-format ${FORMAT_PARAMS} '{}' '+' \
+    -exec ${CLANG_FORMAT} ${FORMAT_PARAMS} '{}' '+' \
 && ${RUN_IF_OK}
