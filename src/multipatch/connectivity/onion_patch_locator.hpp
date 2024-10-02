@@ -6,7 +6,6 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
-#include "ipatch_locator.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 
@@ -55,16 +54,33 @@ class OnionPatchLocator;
  */
 template <class... Patches, class Mapping, class ExecSpace>
 class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping, ExecSpace>
-    : public IPatchLocator
 {
     using X = typename Mapping::cartesian_tag_x;
     using Y = typename Mapping::cartesian_tag_y;
     using R = typename Mapping::curvilinear_tag_r;
     using Theta = typename Mapping::curvilinear_tag_theta;
 
+    static_assert(Theta::PERIODIC, "Theta dimension must be periodic.");
+
+public:
+    /// @brief MultipatchType storing the index range.
     using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patches...>;
+
+    /// @brief Sequence ddc::detail::TypeSeq of patch tags.
     using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
 
+    /// @brief The space (CPU/GPU) where the calculations are carried out.
+    using exec_space = ExecSpace;
+
+    /// @brief Default value to define outside domain (not a patch)
+    /// for radius bigger than the maximum radius.
+    static constexpr int outside_rmax_domain = -1;
+
+    /// @brief Default value to define outside domain (not a patch)
+    /// for radius smaller than the minimun radius.
+    static constexpr int outside_rmin_domain = -2;
+
+private:
     static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
 
     static_assert(
@@ -76,6 +92,7 @@ class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping, Ex
                      std::is_same_v<typename Patches::Dim2, Theta>))
              && ...),
             "The mappings and the patches have to be defined on the same dimensions.");
+
 
     Mapping const m_mapping;
     MultipatchIdxRanges const m_all_idx_ranges;
@@ -114,25 +131,27 @@ public:
      * 
      * @param coord [in] The given physical coordinate. 
      * @return [int] The patch index where the physical coordinate. If the coordinate
-     *              is outside of the domain, it returns outside_domain value 
-     *              (defined in IPatchLocator). 
-     * 
-     * @see IPatchLocator
+     *              is outside of the domain, it returns a negative value.
      */
     KOKKOS_INLINE_FUNCTION int operator()(Coord<X, Y> const coord) const
     {
         int patch_index_min = 0;
         int patch_index_max = n_patches - 1;
 
+        Coord<R> r_min = m_radii(patch_index_min);
         Coord<R> r_max = m_radii(patch_index_max + 1);
         Coord<R> r(m_mapping(coord));
-        if (r == r_max) {
-            return patch_index_max;
+
+        if (r > r_max) {
+            return outside_rmax_domain;
+        }
+        if (r < r_min) {
+            return outside_rmin_domain;
         }
 
         while (patch_index_max >= patch_index_min) {
             int patch_index_mid = (patch_index_min + patch_index_max) / 2;
-            Coord<R> r_min = m_radii(patch_index_mid);
+            r_min = m_radii(patch_index_mid);
             r_max = m_radii(patch_index_mid + 1);
 
             if (r_min <= r && r < r_max) {
@@ -143,7 +162,11 @@ public:
                 patch_index_min = patch_index_mid + 1;
             }
         };
-        return IPatchLocator::outside_domain;
+
+        if (r != m_radii(n_patches)) {
+            Kokkos::abort("Dichotomy method failed to find the right patch.");
+        }
+        return n_patches - 1;
     }
 
 
@@ -162,7 +185,6 @@ public:
     /// @brief Get the type of the mapping on the given Patch.
     template <class Patch>
     using get_mapping_on_patch_t = Mapping;
-
 
 private:
     /** @brief Set the m_radii array containing all the boundary radial coordinates.

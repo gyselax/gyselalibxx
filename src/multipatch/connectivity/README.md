@@ -13,7 +13,7 @@ The following sections decribe the structures and methods implemented:
         - [Index transformation](#src_multipatch_connectivity__Interfaces__Index_transformation) - Algorithm of the index transformation in EdgeTransformation. 
         - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`.
 - [Patch locator](#src_multipatch_connectivity__Patch_locator) - Definition of child classes `IPatchLocator` operator to identify the patch where a given physical coordinate is.
-    - [Onion shape geometry ](#src_multipatch_connectivity__Onion_shape_geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
+    - [Onion shape geometry ](#src_multipatch_connectivity__Patch_Locator__Global_analytical_invertible_mapping__Onion_shape_geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
 - [References](#src_multipatch_connectivity__References) - References. 
 - [Contents](#src_multipatch_connectivity__Contents) - List of files in the folder. 
 
