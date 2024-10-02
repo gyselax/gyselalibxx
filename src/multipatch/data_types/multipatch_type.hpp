@@ -141,7 +141,7 @@ public:
      *
      * @returns A constant reference to the tuple of objects stored inside this MultipatchType.
      */
-    std::tuple<T<Patches>...> const& get_tuple() const
+    KOKKOS_FUNCTION std::tuple<T<Patches>...> const& get_tuple() const
     {
         return m_tuple;
     }

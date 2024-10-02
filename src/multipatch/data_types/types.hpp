@@ -2,6 +2,7 @@
 
 #pragma once
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 
 // GRIDS -----------------------------------------------------------------------------------------
@@ -29,6 +30,10 @@ using DFieldOnPatch = DField<typename Patch::IdxRange12>;
 /// @brief Type for MultipatchType: A constant Field defined on the Patch's 2D logical domain.
 template <class Patch>
 using DConstFieldOnPatch = DConstField<typename Patch::IdxRange12>;
+
+/// @brief Type for MultipatchType: A Field defined on host on the Patch's 2D logical domain.
+template <class Patch>
+using DFieldOnPatch_host = host_t<DFieldOnPatch<Patch>>;
 
 
 /// @brief Type for MultipatchType: A Field of doubles on the first of the Patch's logical dimensions.
@@ -106,10 +111,7 @@ using ConstSplineCoeffOnPatch_2D = DConstField<typename Patch::IdxRangeBS12>;
  * on both of the Patch's logical dimensions. Defined on host. 
  */
 template <class Patch>
-using HostConstSplineCoeffOnPatch_2D = DConstField<
-        typename Patch::IdxRangeBS12,
-        std::experimental::layout_right,
-        Kokkos::DefaultHostExecutionSpace::memory_space>;
+using ConstSplineCoeffOnPatch_2D_host = host_t<ConstSplineCoeffOnPatch_2D<Patch>>;
 
 /**
  * @brief Type for MultipatchType: A field of spline coefficients batched over the second of the Patch's
