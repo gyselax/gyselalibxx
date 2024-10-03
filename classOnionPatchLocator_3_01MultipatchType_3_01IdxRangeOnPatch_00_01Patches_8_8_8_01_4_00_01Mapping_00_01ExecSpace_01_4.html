@@ -102,6 +102,7 @@ $(document).ready(function(){initNavTree('classOnionPatchLocator_3_01MultipatchT
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt; Class Template Reference</div>  </div>
@@ -110,18 +111,21 @@ $(document).ready(function(){initNavTree('classOnionPatchLocator_3_01MultipatchT
 
 <p><a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> locator specialised for "onion" geometry.  
  <a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.png" usemap="#OnionPatchLocator_3C_20MultipatchType_3C_20IdxRangeOnPatch_2C_20Patches..._20_3E_2C_20Mapping_2C_20ExecSpace_20_3E_map" alt=""/>
-  <map id="OnionPatchLocator_3C_20MultipatchType_3C_20IdxRangeOnPatch_2C_20Patches..._20_3E_2C_20Mapping_2C_20ExecSpace_20_3E_map" name="OnionPatchLocator_3C_20MultipatchType_3C_20IdxRangeOnPatch_2C_20Patches..._20_3E_2C_20Mapping_2C_20ExecSpace_20_3E_map">
-<area href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is." alt="IPatchLocator" shape="rect" coords="0,0,553,24"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a06c0eb2d5db735241213e796a4b44c01"><td class="memItemLeft" align="right" valign="top"><a id="a06c0eb2d5db735241213e796a4b44c01"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a06c0eb2d5db735241213e796a4b44c01">MultipatchIdxRanges</a> = <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; IdxRangeOnPatch, Patches... &gt;</td></tr>
+<tr class="memdesc:a06c0eb2d5db735241213e796a4b44c01"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> storing the index range. <br /></td></tr>
+<tr class="separator:a06c0eb2d5db735241213e796a4b44c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f1ec4da66cf449aa7c7f5b6e85e81f"><td class="memItemLeft" align="right" valign="top"><a id="aa9f1ec4da66cf449aa7c7f5b6e85e81f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#aa9f1ec4da66cf449aa7c7f5b6e85e81f">PatchOrdering</a> = ddc::detail::TypeSeq&lt; Patches... &gt;</td></tr>
+<tr class="memdesc:aa9f1ec4da66cf449aa7c7f5b6e85e81f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence ddc::detail::TypeSeq of patch tags. <br /></td></tr>
+<tr class="separator:aa9f1ec4da66cf449aa7c7f5b6e85e81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0816807b4ca1b94d8d85e2a7c0c33148"><td class="memItemLeft" align="right" valign="top"><a id="a0816807b4ca1b94d8d85e2a7c0c33148"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a0816807b4ca1b94d8d85e2a7c0c33148">exec_space</a> = ExecSpace</td></tr>
+<tr class="memdesc:a0816807b4ca1b94d8d85e2a7c0c33148"><td class="mdescLeft">&#160;</td><td class="mdescRight">The space (CPU/GPU) where the calculations are carried out. <br /></td></tr>
+<tr class="separator:a0816807b4ca1b94d8d85e2a7c0c33148"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bd64f072f0fb3988a9e43d9dc1d0b9d"><td class="memTemplParams" colspan="2"><a id="a1bd64f072f0fb3988a9e43d9dc1d0b9d"></a>
 template&lt;class Patch &gt; </td></tr>
 <tr class="memitem:a1bd64f072f0fb3988a9e43d9dc1d0b9d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a1bd64f072f0fb3988a9e43d9dc1d0b9d">get_mapping_on_patch_t</a> = Mapping</td></tr>
@@ -130,7 +134,7 @@ template&lt;class Patch &gt; </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a243164d83738d38e20df707cd6169cee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a243164d83738d38e20df707cd6169cee">OnionPatchLocator</a> (<a class="el" href="classMultipatchType.html">MultipatchIdxRanges</a> const &amp;all_idx_ranges, Mapping const &amp;mapping)</td></tr>
+<tr class="memitem:a243164d83738d38e20df707cd6169cee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a243164d83738d38e20df707cd6169cee">OnionPatchLocator</a> (<a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a06c0eb2d5db735241213e796a4b44c01">MultipatchIdxRanges</a> const &amp;all_idx_ranges, Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:a243164d83738d38e20df707cd6169cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiante the operator with <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of index ranges and a mapping on all the patches.  <a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a243164d83738d38e20df707cd6169cee">More...</a><br /></td></tr>
 <tr class="separator:a243164d83738d38e20df707cd6169cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae26cedcd2f3684cba126c4d400065724"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#ae26cedcd2f3684cba126c4d400065724">operator()</a> (Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const coord) const</td></tr>
@@ -141,13 +145,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad8987a3540b00b2333cf7c36e4f89a86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mapping on the given <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a>.  <a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#ad8987a3540b00b2333cf7c36e4f89a86">More...</a><br /></td></tr>
 <tr class="separator:ad8987a3540b00b2333cf7c36e4f89a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_attribs_classIPatchLocator"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classIPatchLocator')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classIPatchLocator.html">IPatchLocator</a></td></tr>
-<tr class="memitem:a3bbbe7b20783325bebdd435ecfaa9802 inherit pub_static_attribs_classIPatchLocator"><td class="memItemLeft" align="right" valign="top"><a id="a3bbbe7b20783325bebdd435ecfaa9802"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPatchLocator.html#a3bbbe7b20783325bebdd435ecfaa9802">outside_domain</a> = -1</td></tr>
-<tr class="memdesc:a3bbbe7b20783325bebdd435ecfaa9802 inherit pub_static_attribs_classIPatchLocator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value to define outside domain (not a patch). <br /></td></tr>
-<tr class="separator:a3bbbe7b20783325bebdd435ecfaa9802 inherit pub_static_attribs_classIPatchLocator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a6f544a73872e78644e3ba61d3f3450b1"><td class="memItemLeft" align="right" valign="top"><a id="a6f544a73872e78644e3ba61d3f3450b1"></a>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a6f544a73872e78644e3ba61d3f3450b1">outside_rmax_domain</a> = -1</td></tr>
+<tr class="memdesc:a6f544a73872e78644e3ba61d3f3450b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value to define outside domain (not a patch) for radius bigger than the maximum radius. <br /></td></tr>
+<tr class="separator:a6f544a73872e78644e3ba61d3f3450b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdb0d90ca61c9ed5d8f6338bf3e7dd98"><td class="memItemLeft" align="right" valign="top"><a id="afdb0d90ca61c9ed5d8f6338bf3e7dd98"></a>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#afdb0d90ca61c9ed5d8f6338bf3e7dd98">outside_rmin_domain</a> = -2</td></tr>
+<tr class="memdesc:afdb0d90ca61c9ed5d8f6338bf3e7dd98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value to define outside domain (not a patch) for radius smaller than the minimun radius. <br /></td></tr>
+<tr class="separator:afdb0d90ca61c9ed5d8f6338bf3e7dd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class... Patches, class Mapping, class ExecSpace&gt;<br />
@@ -179,7 +186,7 @@ template&lt;class... Patches, class Mapping , class ExecSpace &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classOnionPatchLocator.html">OnionPatchLocator</a>&lt; <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt;::<a class="el" href="classOnionPatchLocator.html">OnionPatchLocator</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMultipatchType.html">MultipatchIdxRanges</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a06c0eb2d5db735241213e796a4b44c01">MultipatchIdxRanges</a> const &amp;&#160;</td>
           <td class="paramname"><em>all_idx_ranges</em>, </td>
         </tr>
         <tr>
@@ -249,8 +256,7 @@ template&lt;class... Patches, class Mapping , class ExecSpace &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>[int] The patch index where the physical coordinate. If the coordinate is outside of the domain, it returns outside_domain value (defined in <a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a>).</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>[int] The patch index where the physical coordinate. If the coordinate is outside of the domain, it returns a negative value. </dd></dl>
 
 </div>
 </div>

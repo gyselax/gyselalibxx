@@ -118,8 +118,8 @@ $(document).ready(function(){initNavTree('src_multipatch_connectivity.html','');
 </li>
 </ul>
 </li>
-<li><a href="#src_multipatch_connectivity__Patch_locator">Patch locator</a> - Definition of child classes <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> operator to identify the patch where a given physical coordinate is.<ul>
-<li><a href="#src_multipatch_connectivity__Onion_shape_geometry">Onion shape geometry</a> - Definition of <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code>, a specialisation of <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> for "onion" shape geometries. <br  />
+<li><a href="#src_multipatch_connectivity__Patch_locator">Patch locator</a> - Definition of child classes <code>IPatchLocator</code> operator to identify the patch where a given physical coordinate is.<ul>
+<li><a href="#src_multipatch_connectivity__Patch_Locator__Global_analytical_invertible_mapping__Onion_shape_geometry">Onion shape geometry</a> - Definition of <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code>, a specialisation of <code>IPatchLocator</code> for "onion" shape geometries. <br  />
 </li>
 </ul>
 </li>
@@ -212,7 +212,7 @@ Conformity of the meshes</h4>
 <p>If the grids are uniform, we know that the index steps between the conforming indices are regular. Moreover the index steps are given by the number of cells divided by the greatest common divisor of the two numbers of cells. (E.g. if the first example was on uniform grids: \(\gcd(8,4) = 4\). On the first edge, the index step is \(\frac{8}{4} = 2\) and on the second edge, \(\frac{4}{4} = 1\).)</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__Patch_locator"></a>
 Patch locator</h1>
-<p>The <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> is a base class of operators to identify the patch where a given physical coordinate is.</p>
+<p>The <code>IPatchLocator</code> is a base class of operators to identify the patch where a given physical coordinate is.</p>
 <h3><a class="anchor" id="autotoc_md70"></a>
 Mappings</h3>
 <p>On each patch, we define a mapping from the logical domain to the physical domain. </p><p class="formulaDsp">
@@ -240,7 +240,7 @@ Contents</h1>
 <li><code><a class="el" href="edge__transformation_8hpp_source.html">edge_transformation.hpp</a></code>: Define the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator to transform the coordinate from one edge to the other (see above).</li>
 <li><code><a class="el" href="edge_8hpp_source.html">edge.hpp</a></code>: Define the <code><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a></code> structure.</li>
 <li><code><a class="el" href="interface_8hpp_source.html">interface.hpp</a></code>: Define the <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure.</li>
-<li><code><a class="el" href="ipatch__locator_8hpp_source.html">ipatch_locator.hpp</a></code>: Define the base class <code><a class="el" href="classIPatchLocator.html" title="Base class to locate on which patch a given physical coordinate is.">IPatchLocator</a></code> for the operators identifying the patch where a physical coordinate is.<ul>
+<li><code>ipatch_locator.hpp</code>: Define the base class <code>IPatchLocator</code> for the operators identifying the patch where a physical coordinate is.<ul>
 <li><code><a class="el" href="onion__patch__locator_8hpp_source.html">onion_patch_locator.hpp</a></code>: Define a child class <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code> specialised for "onion" type geometries.</li>
 </ul>
 </li>

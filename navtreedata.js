@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Gyselalib++", "index.html", [
+    [ "Set-up", "index.html#__Set-up", null ],
     [ "Compilation", "index.html#__Compilation", null ],
     [ "Execution", "index.html#__Execution", null ],
     [ "Dependencies", "index.html#__Dependencies", null ],
@@ -90,11 +91,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionSpVparMu.html#adb7897dbc85afd138b4b3a5e27ace58b",
 "classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74",
-"classLagrangeInterpolator.html#ac43d96b4a41419a6a1ff79a68c542be8",
-"classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703",
-"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212",
-"matrix__banded_8hpp_source.html",
-"structBSplinesVx.html"
+"classMPILayout.html",
+"classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0",
+"classVortexMergerEquilibria.html",
+"math__tools_8hpp_source.html",
+"structBSplinesTheta.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
