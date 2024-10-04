@@ -5,9 +5,8 @@
 
 #include <ddc/ddc.hpp>
 
-#include <iboltzmannsolver.hpp>
-#include <iqnsolver.hpp>
-
+#include "iboltzmannsolver.hpp"
+#include "iqnsolver.hpp"
 #include "predcorr.hpp"
 
 PredCorr::PredCorr(IBoltzmannSolver const& boltzmann_solver, IQNSolver const& poisson_solver)

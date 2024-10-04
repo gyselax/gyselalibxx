@@ -412,26 +412,28 @@ def check_directives(file):
     if file.data_xml is None:
         if file.file.suffix != '.hpp':
             return
+        raw_strs = [r['str'] for r in file.raw]
         try:
-            pragma_idx = file.raw.index('pragma')
+            pragma_idx = raw_strs.index('pragma')
         except ValueError:
             pragma_idx = None
-        if pragma_idx is None or file.raw[pragma_idx-1] != '#' or file.raw[pragma_idx+1] != 'once':
+        if pragma_idx is None or raw_strs[pragma_idx-1] != '#' or raw_strs[pragma_idx+1] != 'once':
             report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
-    if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
-        report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
+    else:
+        if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
+            report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
-    directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
-                        if Path(d.attrib['file']) == file.file}
-    include_directives = {linenr: words[1] for linenr, words in directives.items() if len(words)>1 and words[0] == '#include'}
-    for linenr, include_str in include_directives.items():
-        include_file = include_str[1:-1]
-        possible_matches = [match for f in global_folders for match in f.glob(f'**/{include_file}')]
-        if possible_matches and include_str[0] != '"':
-            report_error(STYLE, file, linenr, f'Quotes should be used to include files from the gyselalibxx project ({include_str}->"{include_file}")')
-        elif not possible_matches and include_str == '"':
-            report_error(STYLE, file, linenr, f'Angle brackets should be used to include files from external libraries ({include_str}-><{include_file}>)')
+        directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
+                            if Path(d.attrib['file']) == file.file}
+        include_directives = {linenr: words[1] for linenr, words in directives.items() if len(words)>1 and words[0] == '#include'}
+        for linenr, include_str in include_directives.items():
+            include_file = include_str[1:-1]
+            possible_matches = [match for f in global_folders for match in f.glob(f'**/{include_file}')]
+            if possible_matches and include_str[0] != '"':
+                report_error(STYLE, file, linenr, f'Quotes should be used to include files from the gyselalibxx project ({include_str}->"{include_file}")')
+            elif not possible_matches and include_str == '"':
+                report_error(STYLE, file, linenr, f'Angle brackets should be used to include files from external libraries ({include_str}-><{include_file}>)')
 
 def update_aliases(all_files):
     """
@@ -703,16 +705,23 @@ def check_exec_space_usage(file):
         for s_id, scope in scopes.items():
             if scope['exec_space'] == 'DefaultHostExecutionSpace':
                 continue
-            relevant_code = config.findall(f".//token[@scope='{s_id}']")
+            relevant_code = [c for c in config.findall(f".//token[@scope='{s_id}']") if c.attrib['file'] == str(file.file)]
             code_keys = [c.attrib['str'] for c in relevant_code]
             exception_keys = ('is_same','is_same_v', 'tie', 'tuple_size', 'tuple_element', 'make_tuple', 'get', 'array', 'tuple',
                               'conditional', 'conditional_t', 'enable_if', 'enable_if_t', 'is_base_of', 'is_base_of_v',
                               'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
-                              'optional')
+                              'make_integer_sequence', 'make_index_sequence', 'index_sequence',
+                              'experimental::full_extent', 'experimental::submdspan')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
-                if code_keys[idx+1] == '::' and code_keys[idx+2] not in exception_keys:
-                    func = ' '.join(code_keys[idx:idx+3])
+                func = None
+                if code_keys[idx+1] == '::':
+                    func = code_keys[idx+2]
+                    idx += 2
+                    while code_keys[idx+1] == '::':
+                        func += '::' + code_keys[idx+2]
+                        idx += 2
+                if func and func not in exception_keys:
                     msg = f"Std functions are not designed to run on GPU. You may wish to check if there is an equivalent Kokkos:: function? ({func})"
                     report_error(FATAL, file, relevant_code[idx].attrib['linenr'], msg)
 
@@ -740,9 +749,11 @@ if __name__ == '__main__':
                 error_level = max(error_level, possible_error_levels[STYLE])
 
     for geom, files in relevant_files.items():
+        print(geom, files)
         if no_file_filter or any(f in filter_files for f in files):
             print("------------- Checking ", geom, " -------------")
-            p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in filter_files+['*geometry.hpp', str(spec_info)]], check=False)
+            geom_file_filter = [] if no_file_filter else filter_files+['*geometry.hpp', str(spec_info)]
+            p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in geom_file_filter], check=False)
             if p.returncode:
                 error_level = max(error_level, possible_error_levels[STYLE])
 

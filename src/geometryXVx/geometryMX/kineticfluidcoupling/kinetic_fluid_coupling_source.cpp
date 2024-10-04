@@ -136,6 +136,8 @@ void KineticFluidCouplingSource::operator()(
 
     DConstFieldVx quadrature_coeffs = get_const_field(m_quadrature_coeffs);
 
+    IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
+
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), kinsp_density, 0.);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -143,7 +145,7 @@ void KineticFluidCouplingSource::operator()(
             KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IdxVx const ivx : get_idx_range<GridVx>(allfdistribu)) {
+                for (IdxVx const ivx : idx_range_vx) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(ispx, ivx));
                     kinsp_density(ispx) += val;
