@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"krook__source__constant_8hpp_source.html":[16,0,7,5,6],
+"mask__tanh_8hpp_source.html":[16,0,7,5,7],
 "matching__idx__slice_8hpp_source.html":[16,0,13,0,5],
 "math__tools_8hpp_source.html":[16,2,0,0,0,3],
 "matrix_8hpp_source.html":[16,2,0,0,0,4],
@@ -27,6 +29,7 @@ var NAVTREEINDEX6 =
 "neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797":[16,0,16,1,1],
 "neumann__spline__quadrature_8hpp.html#a6c16c5257236f20ed676298bea99c837":[16,0,16,1,0],
 "neumann__spline__quadrature_8hpp_source.html":[16,0,16,1],
+"non__uniform__interpolation__points_8hpp_source.html":[16,0,19,6],
 "noperturbinitialization_8hpp_source.html":[16,0,6,1,3],
 "null__extrapolation__rules_8hpp_source.html":[16,0,13,2,3],
 "nulladvectionvx_8hpp_source.html":[16,0,0,5],
@@ -48,7 +51,7 @@ var NAVTREEINDEX6 =
 "polynomial__evaluator_8hpp_source.html":[16,2,0,1,2],
 "predcorr__RK2_8hpp_source.html":[16,0,8,2,0],
 "predcorr__hybrid_8hpp_source.html":[16,0,7,7,1],
-"preprocessor_8hpp_source.html":[16,0,19,6],
+"preprocessor_8hpp_source.html":[16,0,19,7],
 "pseudo__cartesian__compatible__mapping_8hpp_source.html":[16,2,0,0,0,0,9],
 "quadrature_8hpp_source.html":[16,0,16,2],
 "quadrature__coeffs__nd_8hpp.html":[16,0,16,3],
@@ -246,8 +249,5 @@ var NAVTREEINDEX6 =
 "src_multipatch_spline.html#src_multipatch_spline__Spline_builder":[11,12,2,0],
 "src_pde_solvers.html":[11,14],
 "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[11,14,0],
-"src_quadrature.html":[11,15],
-"src_speciesinfo.html":[11,16],
-"src_timestepper.html":[11,17],
-"src_utils.html":[11,18]
+"src_quadrature.html":[11,15]
 };

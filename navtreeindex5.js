@@ -1,10 +1,12 @@
 var NAVTREEINDEX5 =
 {
-"classVortexMergerEquilibria.html":[15,241],
-"classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f":[15,241,2],
-"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[15,241,3],
-"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[15,241,1],
-"classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[15,241,0],
+"classVortexMergerEquilibria.html":[15,242],
+"classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f":[15,242,2],
+"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[15,242,3],
+"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[15,242,1],
+"classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[15,242,0],
+"classddcHelper_1_1NonUniformInterpolationPoints.html":[15,2,0],
+"classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[15,2,0,0],
 "collisioninfo_8hpp_source.html":[16,0,1,0],
 "collisioninfo__radial_8hpp_source.html":[16,0,1,1],
 "collisions__dimensions_8hpp_source.html":[16,0,1,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "kinetic__fluid__coupling__source_8hpp_source.html":[16,0,7,2,2,1],
 "kinetic__source_8hpp_source.html":[16,0,7,5,4],
 "koliop__interface_8hpp_source.html":[16,0,1,4],
-"krook__source__adaptive_8hpp_source.html":[16,0,7,5,5],
-"krook__source__constant_8hpp_source.html":[16,0,7,5,6],
-"mask__tanh_8hpp_source.html":[16,0,7,5,7]
+"krook__source__adaptive_8hpp_source.html":[16,0,7,5,5]
 };

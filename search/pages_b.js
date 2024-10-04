@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['quadrature_20methods_1714',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
-  ['quasi_2dneutrality_20solver_1715',['Quasi-Neutrality Solver',['../src_geometryXVx_poisson.html',1,'src_geometryXVx'],['../src_geometryXYVxVy_poisson.html',1,'src_geometryXYVxVy']]]
+  ['quadrature_20methods_1730',['Quadrature Methods',['../src_quadrature.html',1,'src']]],
+  ['quasi_2dneutrality_20solver_1731',['Quasi-Neutrality Solver',['../src_geometryXVx_poisson.html',1,'src_geometryXVx'],['../src_geometryXYVxVy_poisson.html',1,'src_geometryXYVxVy']]]
 ];

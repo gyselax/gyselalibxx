@@ -55,6 +55,11 @@ var annotated =
       [ "FindRelevantIdxRangeType< QueryGrid1D, std::tuple<> >", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.html", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4" ],
       [ "FindRelevantIdxRangeType< QueryGrid1D, std::tuple< HeadIdxRangeType, IdxRangeTypes... > >", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Hed66dc578e5ec2933e9a94e7607690f6a.html", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Hed66dc578e5ec2933e9a94e7607690f6a" ]
     ] ],
+    [ "ddcHelper", null, [
+      [ "NonUniformInterpolationPoints", "classddcHelper_1_1NonUniformInterpolationPoints.html", "classddcHelper_1_1NonUniformInterpolationPoints" ],
+      [ "is_non_uniform_interpolation_points", "structddcHelper_1_1is__non__uniform__interpolation__points.html", null ],
+      [ "is_non_uniform_interpolation_points< NonUniformInterpolationPoints< BSplines, BcXmin, BcXmax > >", "structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.html", null ]
+    ] ],
     [ "figure_of_eight_5patches", null, [
       [ "X", "structfigure__of__eight__5patches_1_1X.html", null ],
       [ "Y", "structfigure__of__eight__5patches_1_1Y.html", null ],
