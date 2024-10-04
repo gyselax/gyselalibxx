@@ -20,13 +20,18 @@ KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(Idx<GridVx> const& inde
     }
 }
 
-template <class VDim>
-std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
-        build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range)
+// The "Spoof" variables will be identical to the non-spoof versions. They are simply used
+// to prevent the compiler from trying to compile code for the non-uniform case when splines
+// are uniform.
+template <class GridVxSpoof, class GhostedVxSpoof, class GhostedVxStaggeredSpoof>
+std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra::
+        build_ghosted_staggered_vx_point_sampling(IdxRange<GridVxSpoof> const& idx_range)
 {
     static_assert(
-            std::is_same_v<VDim, GridVx>,
+            std::is_same_v<GridVxSpoof, GridVx>,
             "The function is only designed to work with the GridVx dimension");
+    static_assert(std::is_same_v<GhostedVxSpoof, GhostedVx>);
+    static_assert(std::is_same_v<GhostedVxStaggeredSpoof, GhostedVxStaggered>);
 
     CoordVx const v0 = ddc::coordinate(idx_range.front());
     CoordVx const v1 = ddc::coordinate(idx_range.front() + 1);
@@ -42,7 +47,7 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
     ddc::for_each(idx_range, [&](IdxVx const iv) {
         breaks[to_index<GhostedVx>(iv).uid()] = ddc::coordinate(iv);
     });
-    ddc::init_discrete_space<GhostedVx>(breaks);
+    ddc::init_discrete_space<GhostedVxSpoof>(breaks);
 
     // ghosted staggered points
     int const npoints_stag(ncells + 2);
@@ -53,29 +58,34 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
     ddc::for_each(gridv_less, [&](IdxVx const iv) {
         breaks_stag[iv.uid() + 1] = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
     });
-    ddc::init_discrete_space<GhostedVxStaggered>(breaks_stag);
+    ddc::init_discrete_space<GhostedVxStaggeredSpoof>(breaks_stag);
 }
 
-template <class VDim>
-std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>> CollisionsIntra::
-        build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range)
+// The "Spoof" variables will be identical to the non-spoof versions. They are simply used
+// to prevent the compiler from trying to compile code for the uniform case when splines
+// are non-uniform.
+template <class GridVxSpoof, class GhostedVxSpoof, class GhostedVxStaggeredSpoof>
+std::enable_if_t<ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra::
+        build_ghosted_staggered_vx_point_sampling(IdxRange<GridVxSpoof> const& idx_range)
 {
     static_assert(
-            std::is_same_v<VDim, GridVx>,
+            std::is_same_v<GridVxSpoof, GridVx>,
             "The function is only designed to work with the GridVx dimension");
+    static_assert(std::is_same_v<GhostedVxSpoof, GhostedVx>);
+    static_assert(std::is_same_v<GhostedVxStaggeredSpoof, GhostedVxStaggered>);
 
     CoordVx const v0 = ddc::coordinate(idx_range.front());
     CoordVx const vN = ddc::coordinate(idx_range.back());
     int const ncells(idx_range.size() - 1);
-    double const step(ddc::step<VDim>());
+    double const step(ddc::step<GridVxSpoof>());
 
     // ghosted points
     ddc::init_discrete_space<GhostedVx>(
-            GhostedVx::init(v0 - step, vN + step, IdxStep<GhostedVx>(ncells + 3)));
+            GhostedVxSpoof::init(v0 - step, vN + step, IdxStep<GhostedVx>(ncells + 3)));
 
     // ghosted staggered points
     ddc::init_discrete_space<GhostedVxStaggered>(
-            GhostedVxStaggered::
+            GhostedVxStaggeredSpoof::
                     init(v0 - step / 2, vN + step / 2, IdxStep<GhostedVxStaggered>(ncells + 2)));
 }
 

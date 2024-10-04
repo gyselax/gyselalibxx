@@ -93,13 +93,25 @@ private:
     template <class TargetDim>
     KOKKOS_FUNCTION static Idx<TargetDim> to_index(Idx<GridVx> const& index);
 
-    template <class VDim>
-    std::enable_if_t<!ddc::is_uniform_point_sampling_v<VDim>>
-    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range);
+    // The "Spoof" variables will be identical to the non-spoof versions. They are simply used
+    // to prevent the compiler from trying to compile code for the non-uniform case when splines
+    // are uniform.
+    template <
+            class GridVxSpoof,
+            class GhostedVxSpoof = GhostedVx,
+            class GhostedVxStaggeredSpoof = GhostedVxStaggered>
+    std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>>
+    build_ghosted_staggered_vx_point_sampling(IdxRange<GridVxSpoof> const& idx_range);
 
-    template <class VDim>
-    std::enable_if_t<ddc::is_uniform_point_sampling_v<VDim>>
-    build_ghosted_staggered_vx_point_sampling(IdxRange<VDim> const& idx_range);
+    // The "Spoof" variables will be identical to the non-spoof versions. They are simply used
+    // to prevent the compiler from trying to compile code for the uniform case when splines
+    // are non-uniform.
+    template <
+            class GridVxSpoof,
+            class GhostedVxSpoof = GhostedVx,
+            class GhostedVxStaggeredSpoof = GhostedVxStaggered>
+    std::enable_if_t<ddc::is_uniform_point_sampling_v<GridVxSpoof>>
+    build_ghosted_staggered_vx_point_sampling(IdxRange<GridVxSpoof> const& idx_range);
 
     double m_nustar0;
     double m_fthresh;

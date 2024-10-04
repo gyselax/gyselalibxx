@@ -2,7 +2,19 @@
 
 #pragma once
 
-constexpr char const* const params_yaml = R"PARAMS_CFG(SplineMesh:
+#ifdef INPUT_MESH
+constexpr char const* const mesh_params_yaml = R"PARAMS_CFG(SplineMesh:
+  x_min: 0.0
+  x_max: 50
+  x_ncells: 512
+  vx_min: -6.0
+  vx_max: +6.0
+  vx_ncells: 256
+  grid_file: "grids.h5"
+
+)PARAMS_CFG";
+#else
+constexpr char const* const mesh_params_yaml = R"PARAMS_CFG(SplineMesh:
   x_min: 0.0
   x_max: 50
   x_ncells: 512
@@ -10,7 +22,10 @@ constexpr char const* const params_yaml = R"PARAMS_CFG(SplineMesh:
   vx_max: +6.0
   vx_ncells: 256
 
-SpeciesInfo:
+)PARAMS_CFG";
+#endif
+
+constexpr char const* const params_yaml = R"PARAMS_CFG(SpeciesInfo:
 - charge: -1.
   mass: 1.
   density_eq: 1.

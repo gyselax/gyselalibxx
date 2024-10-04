@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+#pragma once
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
@@ -10,6 +11,16 @@ metadata:
   nbstep_diag: int
   iter_saved : int
   Lx : double
+  grid_x_extents: { type: array, subtype: int64, size: 1 }
+  grid_x:
+    type: array
+    subtype: double
+    size: [ '$grid_x_extents[0]' ]
+  grid_vx_extents: { type: array, subtype: int64, size: 1 }
+  grid_vx:
+    type: array
+    subtype: double
+    size: [ '$grid_vx_extents[0]' ]
   MeshX_extents: { type: array, subtype: int64, size: 1 }
   MeshX:
     type: array
@@ -88,6 +99,9 @@ metadata:
     subtype: double
     size: [ '$kinetic_source_spatial_extent_extents[0]' ]
 
+  filename_size: size_t
+  filename: {type: array, subtype: char, size: "$filename_size"}
+
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 3 }
   fdistribu:
@@ -161,5 +175,21 @@ plugins:
     - file: 'VOICEXX_${iter_start:05}.h5'
       on_event: restart
       read: [time_saved, fdistribu]
+    - file: '${filename}'
+      on_event: [read_x_extents]
+      read:
+        grid_x_extents: {size_of: grid_x}
+    - file: '${filename}'
+      on_event: [read_x]
+      read:
+        grid_x: ~
+    - file: '${filename}'
+      on_event: [read_vx_extents]
+      read:
+        grid_vx_extents: {size_of: grid_vx}
+    - file: '${filename}'
+      on_event: [read_vx]
+      read:
+        grid_vx: ~
   #trace: ~
 )PDI_CFG";
