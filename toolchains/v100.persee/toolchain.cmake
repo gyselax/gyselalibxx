@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE Release)
 
 # Compiler options
 set(CMAKE_CXX_COMPILER ${PROJECT_SOURCE_DIR}/vendor/kokkos/bin/nvcc_wrapper)
-set(CMAKE_CXX_FLAGS "-Wall -Wno-sign-compare -Xcudafe --diag_suppress=unsigned_compare_with_zero -Xcudafe --diag_suppress=integer_sign_change")
+set(CMAKE_CXX_FLAGS "-Wall -Wno-sign-compare --Werror cross-execution-space-call -Xcudafe --diag_suppress=unsigned_compare_with_zero -Xcudafe --diag_suppress=integer_sign_change")
 
 # Kokkos options
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "Allow serial code to run" FORCE)
