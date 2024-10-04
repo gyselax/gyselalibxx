@@ -59,13 +59,32 @@ int main(int argc, char** argv)
 
     long int iter_start;
     PC_tree_t conf_voicexx;
-    parse_executable_arguments(conf_voicexx, iter_start, argc, argv, params_yaml);
+    parse_executable_arguments(
+            conf_voicexx,
+            iter_start,
+            argc,
+            argv,
+            (std::string(mesh_params_yaml) + std::string(params_yaml)).c_str());
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
 
     Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
+
+#ifdef INPUT_MESH
+    std::string spline_mesh_filename(PCpp_string(conf_voicexx, ".SplineMesh.grid_file"));
+    size_t spline_mesh_filename_size = spline_mesh_filename.size();
+    PDI_multi_expose(
+            "setFilename",
+            "filename_size",
+            &spline_mesh_filename_size,
+            PDI_OUT,
+            "filename",
+            spline_mesh_filename.c_str(),
+            PDI_OUT,
+            NULL);
+#endif
 
     // Reading config
     // --> Mesh info
@@ -85,7 +104,7 @@ int main(int argc, char** argv)
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
 
     SplineXBuilder const builder_x(meshXVx);
-#ifndef PERIODIC_RDIMX
+#if !defined(PERIODIC_RDIMX) || defined(INPUT_MESH)
     SplineXBuilder_1d const builder_x_poisson(mesh_x);
 #endif
     SplineVxBuilder const builder_vx(meshXVx);
@@ -133,7 +152,7 @@ int main(int argc, char** argv)
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
-#ifndef PERIODIC_RDIMX
+#if !defined(PERIODIC_RDIMX) || defined(INPUT_MESH)
     SplineXEvaluator_1d const spline_x_evaluator_poisson(bv_x_min, bv_x_max);
 #endif
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator);
@@ -215,7 +234,7 @@ int main(int argc, char** argv)
                     Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
 
     ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
-#ifdef PERIODIC_RDIMX
+#if defined(PERIODIC_RDIMX) && !defined(INPUT_MESH)
     FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(mesh_x);
 #else
     FEM1DPoissonSolver poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);

@@ -9,6 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "moments.hpp"
+#include "non_uniform_interpolation_points.hpp"
 #include "species_info.hpp"
 
 /**
@@ -80,10 +81,17 @@ struct BSplinesVx
 auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
 auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
 
+#ifdef INPUT_MESH
+using SplineInterpPointsX
+        = ddcHelper::NonUniformInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+using SplineInterpPointsVx
+        = ddcHelper::NonUniformInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+#else
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+#endif
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {

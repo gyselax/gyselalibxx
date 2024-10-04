@@ -1,12 +1,17 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <sstream>
+
 #include <ddc/ddc.hpp>
 
 #include <paraconf.h>
+#include <pdi.h>
 
 #include "ddc_aliases.hpp"
 #include "mesh_builder.hpp"
+#include "non_uniform_interpolation_points.hpp"
 #include "paraconfpp.hpp"
+#include "pdi_helper.hpp"
 
 /**
  * @brief Extract the paraconf configuration and the restart iteration from the executable arguments.
@@ -57,18 +62,45 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
         PC_tree_t const& conf_voicexx,
         std::string const& mesh_identifier)
 {
+    using Dim = typename Grid1D::continuous_dimension_type;
+    using Coord1D = ddc::Coordinate<Dim>;
+
+    std::vector<Coord1D> breakpoints;
+
     if constexpr (BSplines::is_uniform()) {
-        using Dim = typename Grid1D::continuous_dimension_type;
-        using Coord1D = Coord<Dim>;
+        // If uniform BSplines are used and interpolation points are calculated from them
         Coord1D min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
         Coord1D max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
         IdxStep<Grid1D> ncells(
                 PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
         ddc::init_discrete_space<BSplines>(min, max, ncells);
-    } else {
-        throw "Non-uniform bspline initialisation is not yet handled";
+    } else if constexpr (!ddcHelper::is_non_uniform_interpolation_points_v<InterpPointInitMethod>) {
+        PDI_get_arrays("read_" + mesh_identifier, "breakpoints_" + mesh_identifier, breakpoints);
+        ddc::init_discrete_space<BSplines>(breakpoints);
     }
-    ddc::init_discrete_space<Grid1D>(InterpPointInitMethod::template get_sampling<Grid1D>());
+
+    if constexpr (ddcHelper::is_non_uniform_interpolation_points_v<InterpPointInitMethod>) {
+        // If uniform BSplines are used but the interpolation points are provided by the user
+        // This may be the case if you want to test a new choice of interpolation points or
+        // if you want to ensure that the interpolation points used match exactly the points
+        // used to initialise values passed into the simulation.
+        std::vector<Coord1D> mesh;
+        if constexpr (BSplines::is_uniform()) {
+            PDI_get_arrays("read_" + mesh_identifier, "grid_" + mesh_identifier, mesh);
+        } else {
+            PDI_get_arrays(
+                    "read_" + mesh_identifier,
+                    "breakpoints_" + mesh_identifier,
+                    breakpoints,
+                    "grid_" + mesh_identifier,
+                    mesh);
+            ddc::init_discrete_space<BSplines>(breakpoints);
+        }
+        ddc::init_discrete_space<Grid1D>(
+                InterpPointInitMethod::template get_sampling<Grid1D>(mesh));
+    } else {
+        ddc::init_discrete_space<Grid1D>(InterpPointInitMethod::template get_sampling<Grid1D>());
+    }
     IdxRange<Grid1D> interpolation_idx_range(InterpPointInitMethod::template get_domain<Grid1D>());
     return interpolation_idx_range;
 }

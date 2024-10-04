@@ -36,6 +36,9 @@ RSTDIR="${TMPDIR}/RST"
 mkdir "${RSTDIR}"
 cd "${RSTDIR}"
 
+${PYTHON3_EXE} ${VOICEXX_SRCDIR}/pre-process/PythonScripts/geometryXVx/suggested_points_refinement.py ${RSTDIR}/grids.h5 --edge-domains 0.0 50.0 --ncells 16 --name grid_x --periodic --xmin 0.0 --xmax 50.0
+${PYTHON3_EXE} ${VOICEXX_SRCDIR}/pre-process/PythonScripts/geometryXVx/suggested_points_refinement.py ${RSTDIR}/grids.h5 --edge-domains -6.0 6.0 --ncells 16 --name grid_vx
+
 "${VOICEXX_EXEC}" "--dump-config" "${PWD}/sheath.yaml"
 sed -i 's/^  x_ncells: .*/  x_ncells: 16/' sheath.yaml
 sed -i 's/^  vx_ncells: .*/  vx_ncells: 16/' sheath.yaml
@@ -49,6 +52,7 @@ cd "${TMPDIR}"
 cp "${RSTDIR}/VOICEXX_initstate.h5" .
 cp "${RSTDIR}/VOICEXX_00003.h5" .
 cp "${RSTDIR}/sheath.yaml" sheath_restart.yaml
+cp "${RSTDIR}/grids.h5" .
 
 "${VOICEXX_EXEC}" --iter-restart 3 "${PWD}/sheath_restart.yaml"
 sed -i 's/^  nbiter: .*/  nbiter: 2/' sheath_restart.yaml

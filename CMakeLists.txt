@@ -177,7 +177,7 @@ add_compile_definitions(KP_KERNEL_TIMER_PATH="${CMAKE_CURRENT_BINARY_DIR}/kokkos
 ## Change the C++ flags to the voice specific ones
 set(CMAKE_CXX_FLAGS "${GYSELALIBXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
-set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx)
+set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
 
 ## Get the main code in `src/`
 add_subdirectory(src/)

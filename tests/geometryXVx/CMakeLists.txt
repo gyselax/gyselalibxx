@@ -2,7 +2,9 @@
 
 include(GoogleTest)
 
-foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
+set(BASIC_GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx)
+
+foreach(GEOMETRY_VARIANT IN LISTS BASIC_GEOMETRY_XVx_VARIANTS_LIST)
 
 add_executable(unit_tests_${GEOMETRY_VARIANT}
     collisions_inter.cpp
