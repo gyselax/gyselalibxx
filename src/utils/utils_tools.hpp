@@ -23,7 +23,7 @@ template <class... Tags>
 KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
 {
     double result = 0.0;
-    ((result = Kokkos::max(result, Kokkos::fabs(coord.template get<Tags>()))), ...);
+    ((result = std::max(result, fabs(coord.template get<Tags>()))), ...);
     return result;
 }
 

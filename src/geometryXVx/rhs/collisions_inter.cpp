@@ -36,10 +36,9 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
     auto fluid_velocity = get_field(fluid_velocity_f);
     auto temperature = get_field(temperature_f);
 
-    IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
-
     DFieldMemVx quadrature_coeffs_alloc(
-            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idx_range_vx));
+            trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    get_idx_range<GridVx>(allfdistribu)));
     DFieldVx quadrature_coeffs = get_field(quadrature_coeffs_alloc);
 
     //Moments computation
@@ -52,7 +51,7 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
                 IdxX ix(ddc::select<GridX>(ispx));
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IdxVx ivx : idx_range_vx) {
+                for (IdxVx ivx : get_idx_range<GridVx>(allfdistribu)) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(isp, ix, ivx));
                     density(isp, ix) += val;

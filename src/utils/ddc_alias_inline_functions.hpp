@@ -79,7 +79,7 @@ static constexpr bool is_gslx_field_v = detail::IsGslxField<Type>::value;
  * @returns The index range.
  */
 template <class... QueryGrids, class FieldType>
-auto get_idx_range(FieldType const& field) noexcept
+KOKKOS_INLINE_FUNCTION auto get_idx_range(FieldType const& field) noexcept
 {
     static_assert(
             ddc::is_chunk_v<FieldType> || has_idx_range_v<FieldType>,
