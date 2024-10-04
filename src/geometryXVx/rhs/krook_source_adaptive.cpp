@@ -99,7 +99,7 @@ void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx 
                 double density_ion = 0.;
                 double density_electron = 0.;
 
-                for (IdxVx ivx : gridvx) {
+                for (IdxVx ivx : get_idx_range<GridVx>(allfdistribu)) {
                     density_ion += quadrature_coeffs(ivx) * allfdistribu(iion, ix, ivx);
                     density_electron += quadrature_coeffs(ivx) * allfdistribu(ielec(), ix, ivx);
                 }

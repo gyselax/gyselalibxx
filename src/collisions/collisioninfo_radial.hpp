@@ -67,7 +67,7 @@ public:
                     double rpeak_on_r = rpeak / radial_profile(idx);
                     double q_on_qrpeak = safety_factor(idx) / q_rpeak;
                     nustar0_r(idx)
-                            = nustar0_rpeak * q_on_qrpeak * rpeak_on_r * Kokkos::sqrt(rpeak_on_r);
+                            = nustar0_rpeak * q_on_qrpeak * rpeak_on_r * std::sqrt(rpeak_on_r);
                 });
     }
 

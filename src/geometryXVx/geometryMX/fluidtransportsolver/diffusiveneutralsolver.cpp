@@ -201,8 +201,6 @@ DFieldSpMomX DiffusiveNeutralSolver::operator()(
 
     DConstFieldVx quadrature_coeffs = m_quadrature_coeffs;
 
-    IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
-
     // fluid moments computation
     ddc::parallel_fill(density, 0.);
     ddc::parallel_for_each(
@@ -211,7 +209,7 @@ DFieldSpMomX DiffusiveNeutralSolver::operator()(
             KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IdxVx const ivx : idx_range_vx) {
+                for (IdxVx const ivx : get_idx_range<GridVx>(allfdistribu)) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(ispx, ivx));
                     density(ispx) += val;

@@ -148,7 +148,7 @@ KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, GridInterp, BcMin, BcMax>::app
     CoordDimI bc_val = x_interp;
     const double d = m_right_bound - m_left_bound;
     if constexpr (BcMin == BCond::PERIODIC) {
-        bc_val -= Kokkos::floor((x_interp - m_left_bound) / d) * d;
+        bc_val -= std::floor((x_interp - m_left_bound) / d) * d;
     } else {
         if (x_interp < m_left_bound && BcMin == BCond::DIRICHLET) {
             bc_val = m_left_bound;
@@ -181,9 +181,9 @@ KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, GridInterp, BcMin, BcMax>::eva
     IdxInterp mid = icell;
     if (mid >= m_inner_idx_range.back() && BcMax == BCond::PERIODIC) {
         begin = mid - m_poly_support / 2;
-        end = Kokkos::min(m_inner_idx_range.back(), begin + m_poly_support);
+        end = std::min(m_inner_idx_range.back(), begin + m_poly_support);
     } else if (mid <= m_inner_idx_range.front() && BcMin == BCond::PERIODIC) {
-        begin = Kokkos::max(m_idx_range.front(), mid - m_poly_support / 2);
+        begin = std::max(m_idx_range.front(), mid - m_poly_support / 2);
         end = begin + m_poly_support;
     } else {
         if (m_inner_idx_range.front() + m_poly_support / 2 > mid) {
@@ -191,7 +191,7 @@ KOKKOS_INLINE_FUNCTION double Lagrange<Execspace, GridInterp, BcMin, BcMax>::eva
         } else {
             begin = mid - m_poly_support / 2;
         }
-        end = Kokkos::min(m_idx_range.back() + IdxStepInterp(1), begin + m_poly_support);
+        end = std::min(m_idx_range.back() + IdxStepInterp(1), begin + m_poly_support);
     }
 
     if (end == m_idx_range.back())

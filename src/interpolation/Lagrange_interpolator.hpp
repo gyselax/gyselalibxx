@@ -89,14 +89,16 @@ public:
                 = ddc::create_mirror_and_copy(Kokkos::DefaultExecutionSpace(), inout_data);
         auto inout_data_tmp = get_field(inout_data_tmp_alloc);
         auto batch_idx_range = ddc::remove_dims_of<GridInterp>(get_idx_range(inout_data));
-        auto const interp_range = get_idx_range<GridInterp>(inout_data);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 batch_idx_range,
                 KOKKOS_LAMBDA(typename decltype(batch_idx_range)::discrete_element_type const i) {
-                    Lagrange<Kokkos::DefaultExecutionSpace, GridInterp, BcMin, BcMax>
-                            evaluator(deg, inout_data_tmp[i], interp_range, ghost);
-                    for (Idx<GridInterp> j : interp_range) {
+                    Lagrange<Kokkos::DefaultExecutionSpace, GridInterp, BcMin, BcMax> evaluator(
+                            deg,
+                            inout_data_tmp[i],
+                            get_idx_range<GridInterp>(inout_data),
+                            ghost);
+                    for (Idx<GridInterp> j : get_idx_range<GridInterp>(inout_data)) {
                         inout_data(i, j) = evaluator.evaluate(coordinates(i, j));
                     }
                 });

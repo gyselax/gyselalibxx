@@ -225,8 +225,6 @@ void CollisionsIntra::compute_rhs_vector(
         DConstFieldSpXVx allfdistribu,
         double fthresh) const
 {
-    IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(AA));
-
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(RR),
@@ -238,12 +236,12 @@ void CollisionsIntra::compute_rhs_vector(
                 IdxVx const ivx_next = ivx + 1;
                 IdxVx const ivx_prev = ivx - 1;
 
-                if (ivx == idx_range_vx.front()) {
+                if (ivx == get_idx_range<GridVx>(AA).front()) {
                     RR(isp, ix, ivx) = (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
                                        + (-CC(isp, ix, ivx)) * allfdistribu(isp, ix, ivx_next)
                                        - 2. * AA(isp, ix, ivx) * fthresh;
 
-                } else if (ivx == idx_range_vx.back()) {
+                } else if (ivx == get_idx_range<GridVx>(AA).back()) {
                     RR(isp, ix, ivx) = (2. - BB(isp, ix, ivx)) * allfdistribu(isp, ix, ivx)
                                        + (-AA(isp, ix, ivx)) * allfdistribu(isp, ix, ivx_prev)
                                        - 2. * CC(isp, ix, ivx) * fthresh;
@@ -278,8 +276,6 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
                     get_idx_range<GridVx>(allfdistribu)));
     DConstFieldVx quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
-    IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
-
     //Moments computation
     ddc::parallel_fill(density, 0.);
     ddc::parallel_for_each(
@@ -288,7 +284,7 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
             KOKKOS_LAMBDA(IdxSpX const ispx) {
                 double particle_flux(0);
                 double momentum_flux(0);
-                for (IdxVx const ivx : idx_range_vx) {
+                for (IdxVx const ivx : get_idx_range<GridVx>(allfdistribu)) {
                     CoordVx const coordv = ddc::coordinate(ivx);
                     double const val(quadrature_coeffs(ivx) * allfdistribu(ispx, ivx));
                     density(ispx) += val;
