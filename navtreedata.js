@@ -79,7 +79,6 @@ var NAVTREE =
     [ "Gyselalib++ contents", "src.html", "src" ],
     [ "Initialization methods", "src_geometryTokamAxi_initialization.html", null ],
     [ "Gyselalib++ tests", "tests.html", "tests" ],
-    [ "Collisions test", "tests_geometry5D_collisions.html", null ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
@@ -95,7 +94,7 @@ var NAVTREEINDEX =
 "classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0",
 "classVortexMergerEquilibria.html",
 "matching__idx__slice_8hpp_source.html",
-"structBSplinesMu.html"
+"src_utils.html#src_utils__Utility_tools"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
