@@ -206,11 +206,13 @@ void compute_Vcoll_Tcoll(
     ddc::parallel_fill(I3mean, 0.);
     ddc::parallel_fill(I4mean, 0.);
 
+    IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
+
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IdxSpX const ispx) {
-                for (IdxVx const ivx : get_idx_range<GridVx>(allfdistribu)) {
+                for (IdxVx const ivx : idx_range_vx) {
                     I0mean(ispx) += quadrature_coeffs(ivx) * I0mean_integrand(ispx, ivx);
                     I1mean(ispx) += quadrature_coeffs(ivx) * I1mean_integrand(ispx, ivx);
                     I2mean(ispx) += quadrature_coeffs(ivx) * I2mean_integrand(ispx, ivx);
