@@ -1,15 +1,30 @@
 #!/bin/bash
 set -xe
 
+# Collisions test
+#
+#Script to automise :
+# - the creation of the initial restart file with the python script `init_distribution.py`
+# - the creation of the input YAML file required as input of the C++ simulation `testcollision`
+#
+#For instance, the following command
+#`./testcollisions.sh ${GYSELALIBXX_SRC}/build/simulations/geometry5D/testcollisions input_params_twospecies_geom5D.yaml`
+#
+#creates the folder `D_INPUT_PARAMS_TWOSPECIES_GEOM5D.YAML` containing:
+#  - `GysX_rst_00000.h5` : output of the python script `init_distribution.py`
+#  - `GysX_rst_00001.h5` : output of the C++ collision executable
+#  - `coll_ref.yml` : input for C++ collision executable automatically created by the bash script `testcollision.sh`
+#  - `diff_f_vpar_mu_itor1eq0_itor2eq0_itor3eq0_ispeq0.png` : output figure to compare the results between `GysX_rst_00000.h5` and `GysX_rst_00001.h5`
+
+
 # module load cray-python
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <INPUT_YAML_FILE>"
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <TESTCOLLISION_EXE> <INPUT_YAML_FILE>"
     exit 1
 fi
 
-# TESTCOLL_EXE="$(pwd)/../../../build.mi250.hipcc.adastra.spack/simulations/geometry5D/testcollisions/testcollisions"
-TESTCOLL_EXE="$(pwd)/../../../build-v100/simulations/geometry5D/testcollisions/testcollisions"
+TESTCOLL_EXE=$(realpath $1)
 
 GYSELA_IO_PATH="$(pwd)/gysela_io"
 
@@ -23,7 +38,7 @@ else
 fi
 export PYTHONPATH="${GYSELA_IO_PATH}:${PYTHONPATH}"
 
-INPUT_YAML_FILE="${1}"
+INPUT_YAML_FILE="$2"
 
 CASENAME=$(basename "${INPUT_YAML_FILE}" | tr '[:lower:]' '[:upper:]')
 RESDIR="D_${CASENAME}"
@@ -51,7 +66,7 @@ EOF
 cp -- "${INPUT_YAML_FILE}" "${RESDIR}"
 mv -- "${INPUT_CXX_YAML_FILE}" "${RESDIR}"
 cd -- "${RESDIR}"
-python3 "${GYSELA_IO_PATH}/initialisation/init_distribution.py" -i "${INPUT_YAML_FILE}" -o "${INIT_RST_FILE}"
+python3 "${GYSELA_IO_PATH}/initialisation/init_distribution.py"  -i "${INPUT_YAML_FILE}" -o "${INIT_RST_FILE}"
 if [ -f ${SAVE_RST_FILE} ]; then
   rm -- "${SAVE_RST_FILE}"
 fi

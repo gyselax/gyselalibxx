@@ -18,6 +18,7 @@
 #include "geometry.hpp"
 #include "input.hpp"
 #include "paraconfpp.hpp"
+#include "pdi_helper.hpp"
 #include "pdi_out.yml.hpp"
 #include "simpson_quadrature.hpp"
 #include "testcollisions.yaml.hpp"
@@ -65,76 +66,33 @@ int main(int argc, char** argv)
             PDI_OUT,
             NULL);
 
-    std::vector<size_t> grid_tor1_extents(1);
-    std::vector<size_t> grid_tor2_extents(1);
-    std::vector<size_t> grid_tor3_extents(1);
-    std::vector<size_t> grid_vpar_extents(1);
-    std::vector<size_t> grid_mu_extents(1);
-    std::vector<size_t> species_extents(1);
-    std::vector<size_t> charges_extents(1);
-    std::vector<size_t> masses_extents(1);
-    PDI_multi_expose(
-            "read_grid_extents",
-            "grid_tor1_extents",
-            grid_tor1_extents.data(),
-            PDI_INOUT,
-            "grid_tor2_extents",
-            grid_tor2_extents.data(),
-            PDI_INOUT,
-            "grid_tor3_extents",
-            grid_tor3_extents.data(),
-            PDI_INOUT,
-            "grid_vpar_extents",
-            grid_vpar_extents.data(),
-            PDI_INOUT,
-            "grid_mu_extents",
-            grid_mu_extents.data(),
-            PDI_INOUT,
-            "species_extents",
-            species_extents.data(),
-            PDI_INOUT,
-            "charges_extents",
-            charges_extents.data(),
-            PDI_INOUT,
-            "masses_extents",
-            masses_extents.data(),
-            PDI_INOUT,
-            NULL);
-    std::vector<double> grid_tor1(grid_tor1_extents[0]);
-    std::vector<double> grid_tor2(grid_tor2_extents[0]);
-    std::vector<double> grid_tor3(grid_tor3_extents[0]);
-    std::vector<double> grid_vpar(grid_vpar_extents[0]);
-    std::vector<double> grid_mu(grid_mu_extents[0]);
-    std::vector<int> species(species_extents[0]);
-    std::vector<double> charges(charges_extents[0]);
-    std::vector<double> masses(masses_extents[0]);
-    PDI_multi_expose(
+    std::vector<double> grid_tor1;
+    std::vector<double> grid_tor2;
+    std::vector<double> grid_tor3;
+    std::vector<double> grid_vpar;
+    std::vector<double> grid_mu;
+    std::vector<int> species;
+    std::vector<double> charges;
+    std::vector<double> masses;
+    PDI_get_arrays(
             "read_grid",
             "grid_tor1",
-            grid_tor1.data(),
-            PDI_INOUT,
+            grid_tor1,
             "grid_tor2",
-            grid_tor2.data(),
-            PDI_INOUT,
+            grid_tor2,
             "grid_tor3",
-            grid_tor3.data(),
-            PDI_INOUT,
+            grid_tor3,
             "grid_vpar",
-            grid_vpar.data(),
-            PDI_INOUT,
+            grid_vpar,
             "grid_mu",
-            grid_mu.data(),
-            PDI_INOUT,
+            grid_mu,
             "species",
-            species.data(),
-            PDI_INOUT,
+            species,
             "charges",
-            charges.data(),
-            PDI_INOUT,
+            charges,
             "masses",
-            masses.data(),
-            PDI_INOUT,
-            NULL);
+            masses);
+
     ddc::init_discrete_space<GridTor1>(grid_tor1);
     IdxRangeTor1 idx_range_tor1(IdxTor1(0), IdxStepTor1(grid_tor1.size()));
     ddc::init_discrete_space<GridTor2>(grid_tor2);
