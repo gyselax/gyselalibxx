@@ -26,7 +26,7 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpXYVxVy allfd
             rho,
             KOKKOS_LAMBDA(IdxXYVxVy idx) {
                 double sum = 0.0;
-                for (auto isp : get_idx_range(kinetic_charges)) {
+                for (auto isp : kin_species_idx_range) {
                     sum += kinetic_charges(isp) * allfdistribu(isp, idx);
                 }
                 return sum;
