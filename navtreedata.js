@@ -94,8 +94,8 @@ var NAVTREEINDEX =
 "classMPILayout.html",
 "classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0",
 "classVortexMergerEquilibria.html",
-"math__tools_8hpp_source.html",
-"structBSplinesTheta.html"
+"matching__idx__slice_8hpp_source.html",
+"structBSplinesMu.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

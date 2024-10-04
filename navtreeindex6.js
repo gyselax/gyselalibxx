@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"matching__idx__slice_8hpp_source.html":[17,0,13,0,5],
 "math__tools_8hpp_source.html":[17,2,0,0,0,3],
 "matrix_8hpp_source.html":[17,2,0,0,0,4],
 "matrix__banded_8hpp_source.html":[17,2,0,0,0,5],
@@ -19,14 +20,15 @@ var NAVTREEINDEX6 =
 "mpilayout_8hpp_source.html":[17,0,12,2],
 "mpitools_8hpp_source.html":[17,0,12,3],
 "mpitransposealltoall_8hpp_source.html":[17,0,12,4],
-"multipatch__spline__builder_8hpp_source.html":[17,0,13,2,0],
-"multipatch__spline__builder__2d_8hpp_source.html":[17,0,13,2,1],
+"multipatch__spline__builder_8hpp_source.html":[17,0,13,2,1],
+"multipatch__spline__builder__2d_8hpp_source.html":[17,0,13,2,2],
 "multipatch__type_8hpp_source.html":[17,0,13,1,0],
 "neumann__spline__quadrature_8hpp.html":[17,0,16,1],
 "neumann__spline__quadrature_8hpp.html#a1aaa514e4dd786570bd2fdb9b0eb0797":[17,0,16,1,1],
 "neumann__spline__quadrature_8hpp.html#a6c16c5257236f20ed676298bea99c837":[17,0,16,1,0],
 "neumann__spline__quadrature_8hpp_source.html":[17,0,16,1],
 "noperturbinitialization_8hpp_source.html":[17,0,6,1,3],
+"null__extrapolation__rules_8hpp_source.html":[17,0,13,2,3],
 "nulladvectionvx_8hpp_source.html":[17,0,0,5],
 "nullfluidsolver_8hpp_source.html":[17,0,7,2,1,2],
 "onion__patch__locator_8hpp_source.html":[17,0,13,0,6],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "src_speciesinfo.html":[11,16],
 "src_timestepper.html":[11,17],
 "src_utils.html":[11,18],
-"src_utils.html#src_utils__Utility_tools":[11,18,0],
-"structBSplinesMu.html":[16,29],
-"structBSplinesR.html":[16,30]
+"src_utils.html#src_utils__Utility_tools":[11,18,0]
 };

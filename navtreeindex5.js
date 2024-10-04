@@ -1,10 +1,10 @@
 var NAVTREEINDEX5 =
 {
-"classVortexMergerEquilibria.html":[16,239],
-"classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f":[16,239,2],
-"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[16,239,3],
-"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[16,239,1],
-"classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[16,239,0],
+"classVortexMergerEquilibria.html":[16,241],
+"classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f":[16,241,2],
+"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[16,241,3],
+"classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[16,241,1],
+"classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[16,241,0],
 "collisioninfo_8hpp_source.html":[17,0,1,0],
 "collisioninfo__radial_8hpp_source.html":[17,0,1,1],
 "collisions__dimensions_8hpp_source.html":[17,0,1,2],
@@ -18,6 +18,7 @@ var NAVTREEINDEX5 =
 "compute__norms_8hpp_source.html":[17,0,16,0],
 "connectivity_8hpp_source.html":[17,0,13,0,0],
 "connectivity__details_8hpp_source.html":[17,0,13,0,1],
+"constant__extrapolation__rules__onion_8hpp_source.html":[17,0,13,2,0],
 "constantfluidinitialization_8hpp_source.html":[17,0,7,2,0,2],
 "constantrate_8hpp_source.html":[17,0,7,2,3,1],
 "coordinate__converter_8hpp_source.html":[17,2,0,0,0,0,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "koliop__interface_8hpp_source.html":[17,0,1,4],
 "krook__source__adaptive_8hpp_source.html":[17,0,7,5,5],
 "krook__source__constant_8hpp_source.html":[17,0,7,5,6],
-"mask__tanh_8hpp_source.html":[17,0,7,5,7],
-"matching__idx__slice_8hpp_source.html":[17,0,13,0,5]
+"mask__tanh_8hpp_source.html":[17,0,7,5,7]
 };
