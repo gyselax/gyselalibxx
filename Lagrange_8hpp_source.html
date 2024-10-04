@@ -222,7 +222,7 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    CoordDimI bc_val = x_interp;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> d = m_right_bound - m_left_bound;</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">if</span> constexpr (BcMin == BCond::PERIODIC) {</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        bc_val -= std::floor((x_interp - m_left_bound) / d) * d;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        bc_val -= Kokkos::floor((x_interp - m_left_bound) / d) * d;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">if</span> (x_interp &lt; m_left_bound &amp;&amp; BcMin == BCond::DIRICHLET) {</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            bc_val = m_left_bound;</div>
@@ -255,9 +255,9 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    IdxInterp mid = icell;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">if</span> (mid &gt;= m_inner_idx_range.back() &amp;&amp; BcMax == BCond::PERIODIC) {</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        begin = mid - m_poly_support / 2;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        end = std::min(m_inner_idx_range.back(), begin + m_poly_support);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        end = Kokkos::min(m_inner_idx_range.back(), begin + m_poly_support);</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mid &lt;= m_inner_idx_range.front() &amp;&amp; BcMin == BCond::PERIODIC) {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        begin = std::max(m_idx_range.front(), mid - m_poly_support / 2);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        begin = Kokkos::max(m_idx_range.front(), mid - m_poly_support / 2);</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        end = begin + m_poly_support;</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">if</span> (m_inner_idx_range.front() + m_poly_support / 2 &gt; mid) {</div>
@@ -265,7 +265,7 @@ $(document).ready(function(){initNavTree('Lagrange_8hpp_source.html',''); initRe
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            begin = mid - m_poly_support / 2;</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        }</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        end = std::min(m_idx_range.back() + IdxStepInterp(1), begin + m_poly_support);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        end = Kokkos::min(m_idx_range.back() + IdxStepInterp(1), begin + m_poly_support);</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span> (end == m_idx_range.back())</div>

@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('utils__tools_8hpp_source.html',''); in
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">   23</a></span>&#160;KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(ddc::Coordinate&lt;Tags...&gt; coord)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">double</span> result = 0.0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ((result = std::max(result, fabs(coord.template get&lt;Tags&gt;()))), ...);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ((result = Kokkos::max(result, Kokkos::fabs(coord.template get&lt;Tags&gt;()))), ...);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>

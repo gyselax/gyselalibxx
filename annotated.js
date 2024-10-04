@@ -53,7 +53,7 @@ var annotated =
       [ "SelectRelevantIdxRangeType< QueryGrid1D, IdxRange< IdxRangeGrids... > >", "structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.html", "structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4" ],
       [ "FindRelevantIdxRangeType", "structconnectivity__details_1_1FindRelevantIdxRangeType.html", null ],
       [ "FindRelevantIdxRangeType< QueryGrid1D, std::tuple<> >", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.html", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4" ],
-      [ "FindRelevantIdxRangeType< QueryGrid1D, std::tuple< HeadIdxRangeType, IdxRangeTypes... > >", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Hed66dc578e5ec2933e9a94e7607690f6a.html", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Hed66dc578e5ec2933e9a94e7607690f6a" ]
+      [ "FindRelevantIdxRangeType< QueryGrid1D, std::tuple< IdxRangeHead, IdxRangeTypes... > >", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.html", "structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b" ]
     ] ],
     [ "ddcHelper", null, [
       [ "NonUniformInterpolationPoints", "classddcHelper_1_1NonUniformInterpolationPoints.html", "classddcHelper_1_1NonUniformInterpolationPoints" ],

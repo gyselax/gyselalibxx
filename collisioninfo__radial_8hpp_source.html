@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('collisioninfo__radial_8hpp_source.html
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <span class="keywordtype">double</span> rpeak_on_r = rpeak / radial_profile(idx);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keywordtype">double</span> q_on_qrpeak = <a class="code" href="classCollisionInfoRadial.html#aa05294a9ef7c3c7b22bfbd2cf0f329a0">safety_factor</a>(idx) / q_rpeak;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    nustar0_r(idx)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                            = nustar0_rpeak * q_on_qrpeak * rpeak_on_r * std::sqrt(rpeak_on_r);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                            = nustar0_rpeak * q_on_qrpeak * rpeak_on_r * Kokkos::sqrt(rpeak_on_r);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                });</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
