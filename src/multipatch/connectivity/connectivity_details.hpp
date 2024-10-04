@@ -426,12 +426,12 @@ struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<>>
 };
 
 /// Specialisation of FindRelevantIdxRangeType to iterate recursively over the possible index range types.
-template <class QueryGrid1D, class HeadIdxRangeType, class... IdxRangeTypes>
-struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<HeadIdxRangeType, IdxRangeTypes...>>
+template <class QueryGrid1D, class IdxRangeHead, class... IdxRangeTypes>
+struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeHead, IdxRangeTypes...>>
 {
     /// The type found by the class.
     using type = ddc::type_seq_merge_t<
-            typename SelectRelevantIdxRangeType<QueryGrid1D, HeadIdxRangeType>::type,
+            typename SelectRelevantIdxRangeType<QueryGrid1D, IdxRangeHead>::type,
             typename FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeTypes...>>::type>;
 };
 

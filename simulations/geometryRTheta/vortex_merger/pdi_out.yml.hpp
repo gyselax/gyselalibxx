@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+#pragma once
 
 constexpr char const* const PDI_CFG = R"PDI_CFG(
 metadata:
