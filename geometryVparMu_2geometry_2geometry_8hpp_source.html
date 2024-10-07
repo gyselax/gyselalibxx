@@ -155,15 +155,15 @@ $(document).ready(function(){initNavTree('geometryVparMu_2geometry_2geometry_8hp
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> SplineInterpPointsVpar</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html">SplineInterpPointsVpar</a></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesVpar, SplineVparBoundary, SplineVparBoundary&gt;;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">using</span> SplineInterpPointsMu</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">using</span> <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html">SplineInterpPointsMu</a></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesMu, SplineMuBoundary, SplineMuBoundary&gt;;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridVpar.html">GridVpar</a> : SplineInterpPointsVpar::interpolation_discrete_dimension_type</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridVpar.html">GridVpar</a> : <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab">SplineInterpPointsVpar::interpolation_discrete_dimension_type</a></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridMu.html">GridMu</a> : SplineInterpPointsMu::interpolation_discrete_dimension_type</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridMu.html">GridMu</a> : <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab">SplineInterpPointsMu::interpolation_discrete_dimension_type</a></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
@@ -244,8 +244,10 @@ $(document).ready(function(){initNavTree('geometryVparMu_2geometry_2geometry_8hp
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">- IDomX --&gt; IdxRangeX</span></div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">- DBSsplineX --&gt; SplineCoeffX</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">*/</span></div>
-<div class="ttc" id="astructBSplinesMu_html"><div class="ttname"><a href="structBSplinesMu.html">BSplinesMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:106</div></div>
-<div class="ttc" id="astructBSplinesVpar_html"><div class="ttname"><a href="structBSplinesVpar.html">BSplinesVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:99</div></div>
+<div class="ttc" id="aclassddcHelper_1_1NonUniformInterpolationPoints_html"><div class="ttname"><a href="classddcHelper_1_1NonUniformInterpolationPoints.html">ddcHelper::NonUniformInterpolationPoints</a></div><div class="ttdoc">Helper class for the initialisation of the mesh of interpolation points.</div><div class="ttdef"><b>Definition:</b> non_uniform_interpolation_points.hpp:44</div></div>
+<div class="ttc" id="aclassddcHelper_1_1NonUniformInterpolationPoints_html_afe391dfd5787f205a4096fef58e7beab"><div class="ttname"><a href="classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab">ddcHelper::NonUniformInterpolationPoints::interpolation_discrete_dimension_type</a></div><div class="ttdeci">NonUniformGridBase&lt; Dim &gt; interpolation_discrete_dimension_type</div><div class="ttdoc">The type of the mesh.</div><div class="ttdef"><b>Definition:</b> non_uniform_interpolation_points.hpp:134</div></div>
+<div class="ttc" id="astructBSplinesMu_html"><div class="ttname"><a href="structBSplinesMu.html">BSplinesMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:89</div></div>
+<div class="ttc" id="astructBSplinesVpar_html"><div class="ttname"><a href="structBSplinesVpar.html">BSplinesVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:86</div></div>
 <div class="ttc" id="astructGridMu_html"><div class="ttname"><a href="structGridMu.html">GridMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:98</div></div>
 <div class="ttc" id="astructGridVpar_html"><div class="ttname"><a href="structGridVpar.html">GridVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:95</div></div>
 <div class="ttc" id="astructMu_html"><div class="ttname"><a href="structMu.html">Mu</a></div><div class="ttdoc">Define non periodic magnetic momentum .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:67</div></div>
