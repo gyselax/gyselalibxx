@@ -165,9 +165,9 @@ $(document).ready(function(){initNavTree('neumann__spline__quadrature_8hpp_sourc
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keyword">typename</span> Kokkos::DefaultHostExecutionSpace::memory_space&gt;),</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="stringliteral">&quot;SplineBuilder must be host allocated.&quot;</span>);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">using</span> bsplines_type = <span class="keyword">typename</span> SplineBuilder::bsplines_type;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    assert(idx_range.size() == ddc::discrete_space&lt;bsplines_type&gt;().nbasis() - nbc_xmin - nbc_xmax);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    assert(idx_range.size()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;           == ddc::discrete_space&lt;typename SplineBuilder::bsplines_type&gt;().nbasis() - nbc_xmin</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                      - nbc_xmax);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename SplineBuilder::memory_space&gt;&gt;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            quadrature_coefficients(builder.interpolation_domain());</div>
