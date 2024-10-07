@@ -6,6 +6,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "non_uniform_interpolation_points.hpp"
 #include "species_info.hpp"
 
 /*
@@ -66,69 +67,51 @@ using CoordTheta = Coord<Theta>;
 using CoordVpar = Coord<Vpar>;
 using CoordMu = Coord<Mu>;
 
+using CoordTor1 = CoordR;
+using CoordTor2 = CoordTheta;
+
 // Splines definition
 int constexpr BSDegreeR = 3;
 int constexpr BSDegreeTheta = 3;
 int constexpr BSDegreeVpar = 3;
 int constexpr BSDegreeMu = 3;
 
-bool constexpr BsplineOnUniformCellsR = true;
-bool constexpr BsplineOnUniformCellsTheta = true;
-bool constexpr BsplineOnUniformCellsVpar = true;
-bool constexpr BsplineOnUniformCellsMu = true;
-
-struct BSplinesR
-    : std::conditional_t<
-              BsplineOnUniformCellsR,
-              ddc::UniformBSplines<R, BSDegreeR>,
-              ddc::NonUniformBSplines<R, BSDegreeR>>
+struct BSplinesR : ddc::NonUniformBSplines<R, BSDegreeR>
 {
 };
-struct BSplinesTheta
-    : std::conditional_t<
-              BsplineOnUniformCellsTheta,
-              ddc::UniformBSplines<Theta, BSDegreeTheta>,
-              ddc::NonUniformBSplines<Theta, BSDegreeTheta>>
+struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegreeTheta>
 {
 };
-struct BSplinesVpar
-    : std::conditional_t<
-              BsplineOnUniformCellsVpar,
-              ddc::UniformBSplines<Vpar, BSDegreeVpar>,
-              ddc::NonUniformBSplines<Vpar, BSDegreeVpar>>
+struct BSplinesVpar : ddc::NonUniformBSplines<Vpar, BSDegreeVpar>
 {
 };
-struct BSplinesMu
-    : std::conditional_t<
-              BsplineOnUniformCellsMu,
-              ddc::UniformBSplines<Mu, BSDegreeMu>,
-              ddc::NonUniformBSplines<Mu, BSDegreeMu>>
+struct BSplinesMu : ddc::NonUniformBSplines<Mu, BSDegreeMu>
 {
 };
-ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
 ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::GREVILLE;
+ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::GREVILLE;
 
 using SplineInterpPointsR
-        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
-using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
-using SplineInterpPointsVpar
-        = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
+        = ddcHelper::NonUniformInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
+using SplineInterpPointsTheta = ddcHelper::
+        NonUniformInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
+using SplineInterpPointsVpar = ddcHelper::
+        NonUniformInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
 using SplineInterpPointsMu
-        = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
+        = ddcHelper::NonUniformInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
 
-struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
+struct GridR : NonUniformGridBase<R>
 {
 };
-struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
+struct GridTheta : NonUniformGridBase<Theta>
 {
 };
-struct GridVpar : SplineInterpPointsVpar::interpolation_discrete_dimension_type
+struct GridVpar : NonUniformGridBase<Vpar>
 {
 };
-struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type
+struct GridMu : NonUniformGridBase<Mu>
 {
 };
 
@@ -177,6 +160,7 @@ using IdxRangeV2DTor2D = IdxRange<GridVpar, GridMu, GridR, GridTheta>;
 using IdxRangeSpTor2D = IdxRange<Species, GridR, GridTheta>;
 using IdxRangeSpV2D = IdxRange<Species, GridVpar, GridMu>;
 using IdxRangeSpV2DTor2D = IdxRange<Species, GridVpar, GridMu, GridR, GridTheta>;
+using IdxRangeSpTor2DV2D = IdxRange<Species, GridTheta, GridR, GridVpar, GridMu>;
 
 // template for the fields
 // --> For FieldMem template
@@ -261,6 +245,10 @@ template <class ElementType>
 using FieldSpV2DTor2D = Field<ElementType, IdxRangeSpV2DTor2D>;
 using DFieldSpV2DTor2D = FieldSpV2DTor2D<double>;
 
+template <class ElementType>
+using FieldSpTor2DV2D = Field<ElementType, IdxRangeSpTor2DV2D>;
+using DFieldSpTor2DV2D = FieldSpTor2DV2D<double>;
+
 // --> For ConstField template
 template <class ElementType>
 using ConstFieldR = ConstField<ElementType, IdxRangeR>;
@@ -301,3 +289,16 @@ using DConstFieldSpV2D = ConstFieldSpV2D<double>;
 template <class ElementType>
 using ConstFieldSpV2DTor2D = ConstField<ElementType, IdxRangeSpV2DTor2D>;
 using DConstFieldSpV2DTor2D = ConstFieldSpV2DTor2D<double>;
+
+// --> For fields on host
+template <class ElementType>
+using FieldMemTor2D_host = host_t<FieldMem<ElementType, IdxRangeTor2D>>;
+using DFieldMemTor2D_host = FieldMemTor2D_host<double>;
+
+template <class ElementType>
+using FieldMemSpTor2D_host = host_t<FieldMem<ElementType, IdxRangeSpTor2D>>;
+using DFieldMemSpTor2D_host = FieldMemSpTor2D_host<double>;
+
+template <class ElementType>
+using FieldMemSpTor2DV2D_host = host_t<FieldMem<ElementType, IdxRangeSpTor2DV2D>>;
+using DFieldMemSpTor2DV2D_host = FieldMemSpTor2DV2D_host<double>;

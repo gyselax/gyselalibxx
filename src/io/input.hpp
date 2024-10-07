@@ -40,6 +40,7 @@ void parse_executable_arguments(
  */
 PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const params_yaml);
 
+
 /**
  * Initialise an index range which will serve as an interpolation index range for splines.
  *
@@ -85,14 +86,17 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
         // if you want to ensure that the interpolation points used match exactly the points
         // used to initialise values passed into the simulation.
         std::vector<Coord1D> mesh;
+        std::string grid_name = "grid_" + mesh_identifier;
+
         if constexpr (BSplines::is_uniform()) {
-            PDI_get_arrays("read_" + mesh_identifier, "grid_" + mesh_identifier, mesh);
+            PDI_get_arrays("read_" + mesh_identifier, grid_name, mesh);
         } else {
+            std::string breakpoints_name = "breakpoints_" + mesh_identifier;
             PDI_get_arrays(
                     "read_" + mesh_identifier,
-                    "breakpoints_" + mesh_identifier,
+                    breakpoints_name,
                     breakpoints,
-                    "grid_" + mesh_identifier,
+                    grid_name,
                     mesh);
             ddc::init_discrete_space<BSplines>(breakpoints);
         }
