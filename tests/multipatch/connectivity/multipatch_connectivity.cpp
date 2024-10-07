@@ -104,6 +104,28 @@ TEST(MultipatchConnectivityTest, GetConnections)
     EXPECT_TRUE((ddc::in_tags_v<Interface_4_5, Patch5Interfaces>));
 }
 
+TEST(MultipatchConnectivityTest, FindConnections)
+{
+    using namespace periodic_strips_uniform_2d_9patches;
+    EXPECT_TRUE((std::is_same_v<
+                 typename Connectivity::template find_connections_t<Patch1, Patch2>,
+                 ddc::detail::TypeSeq<Interface_1_2>>));
+    EXPECT_TRUE((std::is_same_v<
+                 typename Connectivity::template find_connections_t<Patch1, Patch5>,
+                 ddc::detail::TypeSeq<>>));
+    EXPECT_TRUE((std::is_same_v<
+                 typename Connectivity::template find_connections_t<Patch7, Patch9>,
+                 ddc::detail::TypeSeq<Interface_9_7>>));
+}
+
+TEST(MultipatchConnectivityTest, FindConnections2)
+{
+    using namespace figure_of_eight_5patches;
+    using Interfaces_1_2 = typename Connectivity::template find_connections_t<Patch1, Patch2>;
+    EXPECT_TRUE((ddc::in_tags_v<LoopInterface_2_1, Interfaces_1_2>));
+    EXPECT_TRUE((ddc::in_tags_v<EightInterface_2_1, Interfaces_1_2>));
+}
+
 TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
 {
     using namespace periodic_strips_uniform_2d_9patches;
