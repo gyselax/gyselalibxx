@@ -10,8 +10,21 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+
+namespace {
+
+using ExampleSplineInterpPointsR
+        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
+using ExampleSplineInterpPointsTheta
+        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
+using ExampleSplineInterpPointsVpar
+        = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
+using ExampleSplineInterpPointsMu
+        = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
+
 
 static void TestMaxwellianTokamAxi()
 {
@@ -35,20 +48,22 @@ static void TestMaxwellianTokamAxi()
     IdxStepMu const mu_size(256);
 
     // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesR>(r_min, r_max, r_size);
-    ddc::init_discrete_space<BSplinesTheta>(theta_min, theta_max, theta_size);
-    ddc::init_discrete_space<BSplinesVpar>(vpar_min, vpar_max, vpar_size);
-    ddc::init_discrete_space<BSplinesMu>(mu_min, mu_max, mu_size);
+    ddc::init_discrete_space<BSplinesR>(build_uniform_break_points(r_min, r_max, r_size));
+    ddc::init_discrete_space<BSplinesTheta>(
+            build_uniform_break_points(theta_min, theta_max, theta_size));
+    ddc::init_discrete_space<BSplinesVpar>(
+            build_uniform_break_points(vpar_min, vpar_max, vpar_size));
+    ddc::init_discrete_space<BSplinesMu>(build_uniform_break_points(mu_min, mu_max, mu_size));
 
-    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
-    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
-    ddc::init_discrete_space<GridVpar>(SplineInterpPointsVpar::get_sampling<GridVpar>());
-    ddc::init_discrete_space<GridMu>(SplineInterpPointsMu::get_sampling<GridMu>());
+    ddc::init_discrete_space<GridR>(ExampleSplineInterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(ExampleSplineInterpPointsTheta::get_sampling<GridTheta>());
+    ddc::init_discrete_space<GridVpar>(ExampleSplineInterpPointsVpar::get_sampling<GridVpar>());
+    ddc::init_discrete_space<GridMu>(ExampleSplineInterpPointsMu::get_sampling<GridMu>());
 
-    IdxRangeR gridr(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta gridtheta(SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeVpar gridvpar(SplineInterpPointsVpar::get_domain<GridVpar>());
-    IdxRangeMu gridmu(SplineInterpPointsMu::get_domain<GridMu>());
+    IdxRangeR gridr(ExampleSplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta gridtheta(ExampleSplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeVpar gridvpar(ExampleSplineInterpPointsVpar::get_domain<GridVpar>());
+    IdxRangeMu gridmu(ExampleSplineInterpPointsMu::get_domain<GridMu>());
     IdxRangeTor2D const idx_range_tor2d(gridr, gridtheta);
     IdxRangeV2D const idx_range_v2d(gridvpar, gridmu);
     IdxRangeV2DTor2D const idx_range_v2dtor2d(gridvpar, gridmu, gridr, gridtheta);
@@ -251,3 +266,5 @@ TEST(MaxwellianTokamAxi, Moments)
 {
     TestMaxwellianTokamAxi();
 }
+
+}; // namespace
