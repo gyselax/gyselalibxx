@@ -32,31 +32,22 @@ public:
             "Missing edges. There should be 4 edges for each patch.");
 
     /**
-     * @brief A tool to find a type sequence of all interfaces of a patch.
+     * @brief A tool to find a type sequence of all patches directly connected (via an interface)
+     * to the patch.
      *
      * @tparam QueryPatch The patch whose connections we are interested in.
      */
     template <class QueryPatch>
-    using get_type_seq_connections_t = interfaces_of_patch_t<QueryPatch, interface_collection>;
+    using get_type_seq_connections_t = direct_patch_connections_t<QueryPatch, interface_collection>;
 
     /**
-     * @brief A tool to find a tuple of all interfaces of a patch.
+     * @brief A tool to find a tuple of all patches directly connected (via an interface) to
+     * the patch.
      *
      * @tparam QueryPatch The patch whose connections we are interested in.
      */
     template <class QueryPatch>
     using get_connections_t = to_tuple_t<get_type_seq_connections_t<QueryPatch>>;
-
-    /**
-     * @brief A tool to find all interfaces linking 2 patches.
-     *
-     * @tparam QueryPatch1 The first patch.
-     * @tparam QueryPatch2 The second patch.
-     */
-    template <class QueryPatch1, class QueryPatch2>
-    using find_connections_t = ddcHelper::type_seq_intersection_t<
-            get_type_seq_connections_t<QueryPatch1>,
-            get_type_seq_connections_t<QueryPatch2>>;
 
     /**
      * @brief A function to return all index ranges which can be used to obtain coordinates

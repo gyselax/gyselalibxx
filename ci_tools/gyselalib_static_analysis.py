@@ -40,7 +40,8 @@ ddc_keyword_map = {'DiscreteElement': 'Idx',
                    'UniformPointSampling' : 'UniformGridBase',
                    'NonUniformPointSampling' : 'NonUniformGridBase'}
 
-mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_view', 'create_mirror_view_and_copy'}
+mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_view', 'create_mirror_view_and_copy',
+                    'create_transpose_mirror', 'create_transpose_mirror_view_and_copy'}
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
 
@@ -749,7 +750,6 @@ if __name__ == '__main__':
                 error_level = max(error_level, possible_error_levels[STYLE])
 
     for geom, files in relevant_files.items():
-        print(geom, files)
         if no_file_filter or any(f in filter_files for f in files):
             print("------------- Checking ", geom, " -------------")
             geom_file_filter = [] if no_file_filter else filter_files+['*geometry.hpp', str(spec_info)]

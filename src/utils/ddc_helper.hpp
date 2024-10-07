@@ -301,39 +301,6 @@ struct ApplyTemplateToTypeSeq<Templ, ddc::detail::TypeSeq<Tags...>>
 {
     using type = ddc::detail::TypeSeq<Templ<Tags>...>;
 };
-
-/// R contains all elements that are in A and B.
-/// Remark 1: This operation preserves the order from B.
-/// Remark 2: It is similar to the set intersection in the set theory.
-/// Example: A = [a, b, c], B = [z, c, y], R = [c]
-template <class TagSeqA, class TagSeqB, class TagSeqR>
-struct TypeSeqIntersection;
-
-template <class TypeSeqA, class TypeSeqR>
-struct TypeSeqIntersection<TypeSeqA, ddc::detail::TypeSeq<>, TypeSeqR>
-{
-    using type = TypeSeqR;
-};
-
-template <class TypeSeqA, class HeadTagsB, class... TailTagsB, class... TagsR>
-struct TypeSeqIntersection<
-        TypeSeqA,
-        ddc::detail::TypeSeq<HeadTagsB, TailTagsB...>,
-        ddc::detail::TypeSeq<TagsR...>>
-{
-    using type = std::conditional_t<
-            ddc::in_tags_v<HeadTagsB, TypeSeqA>,
-            typename TypeSeqIntersection<
-                    TypeSeqA,
-                    ddc::detail::TypeSeq<TailTagsB...>,
-                    ddc::detail::TypeSeq<TagsR..., HeadTagsB>>::type,
-            typename TypeSeqIntersection<
-                    TypeSeqA,
-                    ddc::detail::TypeSeq<TailTagsB...>,
-                    ddc::detail::TypeSeq<TagsR...>>::type>;
-};
-
-
 /// \endcond
 
 } // namespace detail
@@ -365,9 +332,4 @@ namespace ddcHelper {
 /// A helper to get a type sequence by applying a template to a sequence of type tags.
 template <template <class Tag> class Templ, class TypeSeq>
 using apply_template_to_type_seq_t = typename detail::ApplyTemplateToTypeSeq<Templ, TypeSeq>::type;
-
-/// A helper to find all types which are found in both TypeSeq1 and TypeSeq2
-template <class TypeSeq1, class TypeSeq2>
-using type_seq_intersection_t =
-        typename detail::TypeSeqIntersection<TypeSeq1, TypeSeq2, ddc::detail::TypeSeq<>>::type;
 } // namespace ddcHelper

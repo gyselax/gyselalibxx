@@ -83,9 +83,9 @@ neumann_spline_quadrature_coefficients_1d(
                     typename Kokkos::DefaultHostExecutionSpace::memory_space>),
             "SplineBuilder must be host allocated.");
 
-    using bsplines_type = typename SplineBuilder::bsplines_type;
-
-    assert(idx_range.size() == ddc::discrete_space<bsplines_type>().nbasis() - nbc_xmin - nbc_xmax);
+    assert(idx_range.size()
+           == ddc::discrete_space<typename SplineBuilder::bsplines_type>().nbasis() - nbc_xmin
+                      - nbc_xmax);
 
     DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename SplineBuilder::memory_space>>
             quadrature_coefficients(builder.interpolation_domain());
