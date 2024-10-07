@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"src_quadrature.html":[11,15],
 "src_speciesinfo.html":[11,16],
 "src_timestepper.html":[11,17],
 "src_utils.html":[11,18],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "vector__field_8hpp_source.html":[16,0,2,5],
 "vector__field__common_8hpp_source.html":[16,0,2,6],
 "vector__field__mem_8hpp_source.html":[16,0,2,7],
-"vendor_sll.html":[14],
-"vendor_sll_include_sll_mapping.html":[14,0]
+"vendor_sll.html":[14]
 };

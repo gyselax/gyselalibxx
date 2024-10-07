@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755":[15,241,2],
 "classVortexMergerEquilibria.html":[15,242],
 "classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f":[15,242,2],
 "classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[15,242,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "jacobian_8hpp_source.html":[16,2,0,0,0,0,7],
 "kinetic__fluid__coupling__source_8hpp_source.html":[16,0,7,2,2,1],
 "kinetic__source_8hpp_source.html":[16,0,7,5,4],
-"koliop__interface_8hpp_source.html":[16,0,1,4],
-"krook__source__adaptive_8hpp_source.html":[16,0,7,5,5]
+"koliop__interface_8hpp_source.html":[16,0,1,4]
 };

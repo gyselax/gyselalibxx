@@ -183,9 +183,10 @@ var NAVTREEINDEX3 =
 "classMultipatchConnectivity.html":[15,175],
 "classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab":[15,175,4],
 "classMultipatchConnectivity.html#a0683fbe5d61d4239ea8586a70a1305e7":[15,175,2],
+"classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50":[15,175,5],
+"classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b":[15,175,3],
 "classMultipatchConnectivity.html#a762ff8496d1ec32be37bad6e25f7e926":[15,175,1],
 "classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c":[15,175,0],
-"classMultipatchConnectivity.html#adf6a8d455c9b1389bbe70e66c3afd855":[15,175,3],
 "classMultipatchSplineBuilder.html":[15,176],
 "classMultipatchSplineBuilder.html#a0e9a0659e97da24ba0e5f71939ace8f6":[15,176,2],
 "classMultipatchSplineBuilder.html#ac15662b146d7eda700925ae1caad030e":[15,176,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "classPoissonLikeRHSFunction.html#a7c50bae2f22cff4e5e30081eef08c4cb":[15,190,2],
 "classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a":[15,190,3],
 "classPoissonSolution.html":[15,191],
-"classPoissonSolution.html#a6057677dfed4113f72fad7d607248868":[15,191,1],
-"classPoissonSolution.html#a6451537e7ef15aa643718b9fec5c998c":[15,191,0]
+"classPoissonSolution.html#a6057677dfed4113f72fad7d607248868":[15,191,1]
 };

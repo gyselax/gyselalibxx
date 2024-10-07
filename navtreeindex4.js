@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classPoissonSolution.html#a6451537e7ef15aa643718b9fec5c998c":[15,191,0],
 "classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0":[15,191,4],
 "classPoissonSolution.html#a88e27ab5b89c3992369e44ca7ecb56de":[15,191,3],
 "classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703":[15,191,2],
@@ -104,10 +105,10 @@ var NAVTREEINDEX4 =
 "classQNSolver.html":[15,207],
 "classQNSolver.html#a7a295c1742a016b2f154a35a315a608c":[15,207,5],
 "classQNSolver.html#a866ea0a8cd34e7789d8847aaf963fdf2":[15,207,4],
-"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[15,207,0],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[15,207,2],
-"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[15,207,1],
+"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[15,207,0],
 "classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[15,207,3],
+"classQNSolver.html#afbc0b4cd0f70f63c93dc6d8c540a2d9d":[15,207,1],
 "classQuadrature.html":[15,208],
 "classQuadrature.html#a5a7011a414f2f78524042fd2104342f0":[15,208,2],
 "classQuadrature.html#acc3a757e91e2d185ee290c409156fd4f":[15,208,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "classVectorFieldMem.html#af7de208542ab41eac36e20406b78479b":[15,240,11],
 "classVortexMergerDensitySolution.html":[15,241],
 "classVortexMergerDensitySolution.html#a104c4a3c0adcef0840a99f748d5a9657":[15,241,1],
-"classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[15,241,0],
-"classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755":[15,241,2]
+"classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[15,241,0]
 };

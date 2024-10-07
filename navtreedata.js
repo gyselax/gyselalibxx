@@ -91,11 +91,11 @@ var NAVTREEINDEX =
 "classCollisionSpVparMu.html#adb7897dbc85afd138b4b3a5e27ace58b",
 "classFEM1DPoissonSolver.html#a74360fade3d3986423b148334d88ea74",
 "classMPILayout.html",
-"classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0",
-"classVortexMergerEquilibria.html",
-"krook__source__constant_8hpp_source.html",
-"src_speciesinfo.html",
-"view_8hpp_source.html"
+"classPoissonSolution.html#a6451537e7ef15aa643718b9fec5c998c",
+"classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755",
+"krook__source__adaptive_8hpp_source.html",
+"src_quadrature.html",
+"vendor_sll_include_sll_mapping.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

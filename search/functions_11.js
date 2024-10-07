@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['recombinationrate_1422',['RecombinationRate',['../classRecombinationRate.html#a5f440c503671ccb2997d38420dd1bd0f',1,'RecombinationRate']]],
-  ['refineddiscretetocartesianbuilder_1423',['RefinedDiscreteToCartesianBuilder',['../classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a',1,'RefinedDiscreteToCartesianBuilder']]],
-  ['restartinitialization_1424',['RestartInitialization',['../classRestartInitialization.html#a9af5fa49fc9e082a38025f5d20db255f',1,'RestartInitialization']]],
-  ['rg_1425',['rg',['../classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6',1,'CollisionInfo::rg()'],['../classCollisionInfoRadial.html#a28d1c9450c89516bc061ebe3d85a8818',1,'CollisionInfoRadial::rg()']]],
-  ['rk2_1426',['RK2',['../classRK2.html#aa8e7d6cdd176266f8bae167af8dd4496',1,'RK2']]],
-  ['rk3_1427',['RK3',['../classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03',1,'RK3']]],
-  ['rk4_1428',['RK4',['../classRK4.html#a01cb285ac988d4b73e9e71eef8024296',1,'RK4']]],
-  ['rotationadvectionfieldsimulation_1429',['RotationAdvectionFieldSimulation',['../classRotationAdvectionFieldSimulation.html#a7680c2f088d504f2879865b190c5128a',1,'RotationAdvectionFieldSimulation']]],
-  ['rotationsimulation_1430',['RotationSimulation',['../classRotationSimulation.html#a24cab55207f4b65feffd1255545b92dd',1,'RotationSimulation']]]
+  ['recombinationrate_1423',['RecombinationRate',['../classRecombinationRate.html#a5f440c503671ccb2997d38420dd1bd0f',1,'RecombinationRate']]],
+  ['refineddiscretetocartesianbuilder_1424',['RefinedDiscreteToCartesianBuilder',['../classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a',1,'RefinedDiscreteToCartesianBuilder']]],
+  ['restartinitialization_1425',['RestartInitialization',['../classRestartInitialization.html#a9af5fa49fc9e082a38025f5d20db255f',1,'RestartInitialization']]],
+  ['rg_1426',['rg',['../classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6',1,'CollisionInfo::rg()'],['../classCollisionInfoRadial.html#a28d1c9450c89516bc061ebe3d85a8818',1,'CollisionInfoRadial::rg()']]],
+  ['rk2_1427',['RK2',['../classRK2.html#aa8e7d6cdd176266f8bae167af8dd4496',1,'RK2']]],
+  ['rk3_1428',['RK3',['../classRK3.html#ad40fa67d5e9fbfb77026fedc876ecb03',1,'RK3']]],
+  ['rk4_1429',['RK4',['../classRK4.html#a01cb285ac988d4b73e9e71eef8024296',1,'RK4']]],
+  ['rotationadvectionfieldsimulation_1430',['RotationAdvectionFieldSimulation',['../classRotationAdvectionFieldSimulation.html#a7680c2f088d504f2879865b190c5128a',1,'RotationAdvectionFieldSimulation']]],
+  ['rotationsimulation_1431',['RotationSimulation',['../classRotationSimulation.html#a24cab55207f4b65feffd1255545b92dd',1,'RotationSimulation']]]
 ];

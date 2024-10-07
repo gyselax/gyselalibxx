@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"krook__source__adaptive_8hpp_source.html":[16,0,7,5,5],
 "krook__source__constant_8hpp_source.html":[16,0,7,5,6],
 "mask__tanh_8hpp_source.html":[16,0,7,5,7],
 "matching__idx__slice_8hpp_source.html":[16,0,13,0,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "src_multipatch_spline.html#autotoc_md74":[12],
 "src_multipatch_spline.html#src_multipatch_spline__Spline_builder":[11,12,2,0],
 "src_pde_solvers.html":[11,14],
-"src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[11,14,0],
-"src_quadrature.html":[11,15]
+"src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[11,14,0]
 };

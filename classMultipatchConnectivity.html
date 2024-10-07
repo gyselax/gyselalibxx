@@ -125,14 +125,18 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a0683fbe5d61d4239ea8586a70a1305e7">all_patches</a> = extract_patches_t&lt; <a class="el" href="classMultipatchConnectivity.html#a762ff8496d1ec32be37bad6e25f7e926">inner_edges</a> &gt;</td></tr>
 <tr class="memdesc:a0683fbe5d61d4239ea8586a70a1305e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence of all the patches handled by this class. <br /></td></tr>
 <tr class="separator:a0683fbe5d61d4239ea8586a70a1305e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf6a8d455c9b1389bbe70e66c3afd855"><td class="memTemplParams" colspan="2">template&lt;class QueryPatch &gt; </td></tr>
-<tr class="memitem:adf6a8d455c9b1389bbe70e66c3afd855"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#adf6a8d455c9b1389bbe70e66c3afd855">get_type_seq_connections_t</a> = direct_patch_connections_t&lt; QueryPatch, <a class="el" href="classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c">interface_collection</a> &gt;</td></tr>
-<tr class="memdesc:adf6a8d455c9b1389bbe70e66c3afd855"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find a type sequence of all patches directly connected (via an interface) to the patch.  <a href="classMultipatchConnectivity.html#adf6a8d455c9b1389bbe70e66c3afd855">More...</a><br /></td></tr>
-<tr class="separator:adf6a8d455c9b1389bbe70e66c3afd855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3c042b78101bb31a9402fb6cb24f4b"><td class="memTemplParams" colspan="2">template&lt;class QueryPatch &gt; </td></tr>
+<tr class="memitem:a4a3c042b78101bb31a9402fb6cb24f4b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a> = interfaces_of_patch_t&lt; QueryPatch, <a class="el" href="classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c">interface_collection</a> &gt;</td></tr>
+<tr class="memdesc:a4a3c042b78101bb31a9402fb6cb24f4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find a type sequence of all interfaces of a patch.  <a href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">More...</a><br /></td></tr>
+<tr class="separator:a4a3c042b78101bb31a9402fb6cb24f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05d649704740c74f67f952a129f9daab"><td class="memTemplParams" colspan="2">template&lt;class QueryPatch &gt; </td></tr>
-<tr class="memitem:a05d649704740c74f67f952a129f9daab"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab">get_connections_t</a> = to_tuple_t&lt; <a class="el" href="classMultipatchConnectivity.html#adf6a8d455c9b1389bbe70e66c3afd855">get_type_seq_connections_t</a>&lt; QueryPatch &gt; &gt;</td></tr>
-<tr class="memdesc:a05d649704740c74f67f952a129f9daab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find a tuple of all patches directly connected (via an interface) to the patch.  <a href="classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab">More...</a><br /></td></tr>
+<tr class="memitem:a05d649704740c74f67f952a129f9daab"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab">get_connections_t</a> = to_tuple_t&lt; <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt; QueryPatch &gt; &gt;</td></tr>
+<tr class="memdesc:a05d649704740c74f67f952a129f9daab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find a tuple of all interfaces of a patch.  <a href="classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab">More...</a><br /></td></tr>
 <tr class="separator:a05d649704740c74f67f952a129f9daab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e53e4b857d0861bfe271be891c60f50"><td class="memTemplParams" colspan="2">template&lt;class QueryPatch1 , class QueryPatch2 &gt; </td></tr>
+<tr class="memitem:a2e53e4b857d0861bfe271be891c60f50"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50">find_connections_t</a> = ddcHelper::type_seq_intersection_t&lt; <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt; QueryPatch1 &gt;, <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt; QueryPatch2 &gt; &gt;</td></tr>
+<tr class="memdesc:a2e53e4b857d0861bfe271be891c60f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find all interfaces linking 2 patches.  <a href="classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50">More...</a><br /></td></tr>
+<tr class="separator:a2e53e4b857d0861bfe271be891c60f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -157,8 +161,8 @@ class MultipatchConnectivity&lt; Interfaces &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="adf6a8d455c9b1389bbe70e66c3afd855"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf6a8d455c9b1389bbe70e66c3afd855">&#9670;&nbsp;</a></span>get_type_seq_connections_t</h2>
+<a id="a4a3c042b78101bb31a9402fb6cb24f4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a3c042b78101bb31a9402fb6cb24f4b">&#9670;&nbsp;</a></span>get_type_seq_connections_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,12 +172,12 @@ template&lt;class... Interfaces&gt; </div>
 template&lt;class QueryPatch &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::<a class="el" href="classMultipatchConnectivity.html#adf6a8d455c9b1389bbe70e66c3afd855">get_type_seq_connections_t</a> =  direct_patch_connections_t&lt;QueryPatch, <a class="el" href="classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c">interface_collection</a>&gt;</td>
+          <td class="memname">using <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::<a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a> =  interfaces_of_patch_t&lt;QueryPatch, <a class="el" href="classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c">interface_collection</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>A tool to find a type sequence of all patches directly connected (via an interface) to the patch. </p>
+<p>A tool to find a type sequence of all interfaces of a patch. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">QueryPatch</td><td>The patch whose connections we are interested in. </td></tr>
@@ -194,15 +198,42 @@ template&lt;class... Interfaces&gt; </div>
 template&lt;class QueryPatch &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::<a class="el" href="classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab">get_connections_t</a> =  to_tuple_t&lt;<a class="el" href="classMultipatchConnectivity.html#adf6a8d455c9b1389bbe70e66c3afd855">get_type_seq_connections_t</a>&lt;QueryPatch&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::<a class="el" href="classMultipatchConnectivity.html#a05d649704740c74f67f952a129f9daab">get_connections_t</a> =  to_tuple_t&lt;<a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt;QueryPatch&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>A tool to find a tuple of all patches directly connected (via an interface) to the patch. </p>
+<p>A tool to find a tuple of all interfaces of a patch. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">QueryPatch</td><td>The patch whose connections we are interested in. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2e53e4b857d0861bfe271be891c60f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e53e4b857d0861bfe271be891c60f50">&#9670;&nbsp;</a></span>find_connections_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... Interfaces&gt; </div>
+<div class="memtemplate">
+template&lt;class QueryPatch1 , class QueryPatch2 &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::<a class="el" href="classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50">find_connections_t</a> =  ddcHelper::type_seq_intersection_t&lt; <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt;QueryPatch1&gt;, <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt;QueryPatch2&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A tool to find all interfaces linking 2 patches. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">QueryPatch1</td><td>The first patch. </td></tr>
+    <tr><td class="paramname">QueryPatch2</td><td>The second patch. </td></tr>
   </table>
   </dd>
 </dl>
