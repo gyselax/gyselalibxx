@@ -336,8 +336,6 @@ public:
     {
         using CoordR = ddc::Coordinate<R>;
         using CoordTheta = ddc::Coordinate<Theta>;
-        using CurvilinearCoeff = ddc::Coordinate<R, Theta>;
-        using CartesianCoeff = ddc::Coordinate<X, Y>;
 
         const CoordR r_min = ddc::discrete_space<BSplinesROriginal>().rmin();
         const CoordR r_max = ddc::discrete_space<BSplinesROriginal>().rmax();

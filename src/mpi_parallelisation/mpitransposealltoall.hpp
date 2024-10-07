@@ -144,10 +144,6 @@ public:
         static_assert(
                 (std::is_same_v<IdxRangeOut, typename Layout1::discrete_domain_type>)
                 || (std::is_same_v<IdxRangeOut, typename Layout2::discrete_domain_type>));
-        using InLayout = std::conditional_t<
-                std::is_same_v<InIdxRange, typename Layout1::discrete_domain_type>,
-                Layout1,
-                Layout2>;
         using OutLayout = std::conditional_t<
                 std::is_same_v<IdxRangeOut, typename Layout1::discrete_domain_type>,
                 Layout1,
