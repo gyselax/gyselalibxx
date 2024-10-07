@@ -450,9 +450,9 @@ using strip_outside_edges_t =
 template <class EdgeTypeSeq>
 using extract_patches_t = typename connectivity_details::ExtractPatches<EdgeTypeSeq>::type;
 
-/// A tool to find all patches directly connected to the start patch via an interface.
+/// A tool to find all interfaces directly connected to the start patch.
 template <class StartPatch, class InterfaceTypeSeq>
-using direct_patch_connections_t =
+using interfaces_of_patch_t =
         typename connectivity_details::PatchConnection<StartPatch, InterfaceTypeSeq>::type;
 
 /// A tool to find a patch which contains the specified grid.
