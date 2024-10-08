@@ -11,28 +11,28 @@
  *
  * @tparam TimeStepper
  *      A child class of ITimeStepper providing a time integration method.
- * @tparam IdxRangeAdvection
- *      A child class of IdxRangeAdvection providing the informations about the advection index range.
+ * @tparam AdvectionDomain
+ *      A child class of AdvectionDomain providing the informations about the advection index range.
  *
  * @see BslAdvectionRTheta
  */
-template <class TimeStepper, class IdxRangeAdvection>
+template <class TimeStepper, class AdvectionDomain>
 class SplineFootFinder : public IFootFinder
 {
 private:
     /**
      * @brief Tag the first dimension in the advection index range.
      */
-    using X_adv = typename IdxRangeAdvection::X_adv;
+    using X_adv = typename AdvectionDomain::X_adv;
     /**
      * @brief Tag the second dimension in the advection index range.
      */
-    using Y_adv = typename IdxRangeAdvection::Y_adv;
+    using Y_adv = typename AdvectionDomain::Y_adv;
 
 
     TimeStepper const& m_time_stepper;
 
-    IdxRangeAdvection const& m_advection_idx_range;
+    AdvectionDomain const& m_advection_domain;
 
     SplineRThetaBuilder const& m_builder_advection_field;
     SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
@@ -46,8 +46,8 @@ public:
      * @param[in] time_stepper
      *      The time integration method used to solve the characteristic
      *      equation (ITimeStepper).
-     * @param[in] advection_idx_range
-     *      An IdxRangeAdvection object which defines in which index range we
+     * @param[in] advection_domain
+     *      An AdvectionDomain object which defines in which index range we
      *      advect the characteristics.
      * @param[in] builder_advection_field
      *      The spline builder which computes the spline representation
@@ -57,18 +57,18 @@ public:
      *
      * @tparam TimeStepper
      *      A child class of ITimeStepper providing a time integration method.
-     * @tparam IdxRangeAdvection
-     *      A child class of IdxRangeAdvection providing the informations about the advection index range.
+     * @tparam AdvectionDomain
+     *      A child class of AdvectionDomain providing the informations about the advection index range.
      *
      * @see ITimeStepper
      */
     SplineFootFinder(
             TimeStepper const& time_stepper,
-            IdxRangeAdvection const& advection_idx_range,
+            AdvectionDomain const& advection_domain,
             SplineRThetaBuilder const& builder_advection_field,
             SplineRThetaEvaluatorConstBound const& evaluator_advection_field)
         : m_time_stepper(time_stepper)
-        , m_advection_idx_range(advection_idx_range)
+        , m_advection_domain(advection_domain)
         , m_builder_advection_field(builder_advection_field)
         , m_evaluator_advection_field(evaluator_advection_field)
     {
@@ -104,7 +104,7 @@ public:
                 get_spline_idx_range(m_builder_advection_field));
 
         // Compute the advection field in the advection index range.
-        m_advection_idx_range.compute_advection_field(
+        m_advection_domain.compute_advection_field(
                 advection_field,
                 get_field(idx_range_advection_field_in_adv));
 
@@ -144,7 +144,7 @@ public:
                                       host_t<DConstVectorFieldRTheta<X_adv, Y_adv>> advection_field,
                                       double dt) {
                     // Compute the characteristic feet at t^n:
-                    m_advection_idx_range.advect_feet(feet, advection_field, dt);
+                    m_advection_domain.advect_feet(feet, advection_field, dt);
 
                     // Treatment to conserve the C0 property of the advected function:
                     unify_value_at_center_pt(feet);
