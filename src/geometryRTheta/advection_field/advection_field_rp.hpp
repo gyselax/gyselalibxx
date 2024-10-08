@@ -150,7 +150,7 @@ public:
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
         IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
-        host_t<Spline2D> electrostatic_potential_coef(idx_range_bsplinesRTheta);
+        host_t<Spline2DMem> electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef), advection_field_xy);
@@ -168,7 +168,7 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            host_t<Spline2DField> electrostatic_potential_coef,
+            host_t<Spline2D> electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
@@ -218,7 +218,7 @@ private:
         static_assert(
                 (std::is_same_v<
                          Evaluator,
-                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2DField>>)
+                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2D>>)
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
@@ -366,7 +366,7 @@ public:
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
         IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
-        host_t<Spline2D> electrostatic_potential_coef(idx_range_bsplinesRTheta);
+        host_t<Spline2DMem> electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef),
@@ -388,7 +388,7 @@ public:
      *      The advection field on the physical axis at the O-point.  
      */
     void operator()(
-            host_t<Spline2DField> electrostatic_potential_coef,
+            host_t<Spline2D> electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
@@ -448,7 +448,7 @@ private:
         static_assert(
                 (std::is_same_v<
                          Evaluator,
-                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2DField>>)
+                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2D>>)
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<

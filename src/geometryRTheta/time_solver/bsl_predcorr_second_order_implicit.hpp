@@ -173,7 +173,7 @@ public:
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
+            host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
             PoissonLikeRHSFunction const
                     charge_density_coord_1(get_const_field(allfdistribu_coef), m_evaluator);
@@ -310,7 +310,7 @@ public:
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
+        host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);

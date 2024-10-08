@@ -133,7 +133,7 @@ public:
 
         host_t<DFieldMemRTheta> electrical_potential0(grid);
 
-        host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
+        host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
@@ -150,7 +150,7 @@ public:
                 define_advection_field = [&](host_t<DVectorFieldRTheta<X, Y>> advection_field,
                                              host_t<DConstFieldRTheta> allfdistribu) {
                     // --- compute electrostatic potential:
-                    host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
+                    host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
                     m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
                     PoissonLikeRHSFunction const charge_density_coord(
                             get_const_field(allfdistribu_coef),
@@ -179,7 +179,7 @@ public:
                             advect_allfdistribu);
 
             host_t<DFieldMemRTheta> electrical_potential(grid);
-            host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
+            host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
             PoissonLikeRHSFunction const
                     charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);

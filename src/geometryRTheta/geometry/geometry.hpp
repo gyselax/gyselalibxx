@@ -233,9 +233,9 @@ using DConstFieldTheta = ConstFieldTheta<double>;
 using DConstFieldRTheta = ConstFieldRTheta<double>;
 
 // --- Spline representation definitions
-using Spline2D = DFieldMem<IdxRangeBSRTheta>;
-using Spline2DField = DField<IdxRangeBSRTheta>;
-using Spline2DConstField = DConstField<IdxRangeBSRTheta>;
+using Spline2DMem = DFieldMem<IdxRangeBSRTheta>;
+using Spline2D = DField<IdxRangeBSRTheta>;
+using ConstSpline2D = DConstField<IdxRangeBSRTheta>;
 
 /**
  * @brief Tag the polar B-splines decomposition of a function.

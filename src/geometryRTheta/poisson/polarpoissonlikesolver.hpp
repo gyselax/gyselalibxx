@@ -215,8 +215,8 @@ public:
      */
     template <class Mapping>
     PolarSplineFEMPoissonLikeSolver(
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             Mapping const& mapping)
         : nbasis_r(ddc::discrete_space<BSplinesR_Polar>().nbasis() - n_overlap_cells - 1)
         , nbasis_theta(ddc::discrete_space<BSplinesTheta_Polar>().nbasis())
@@ -835,8 +835,8 @@ private:
             IdxQuadratureTheta ip,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
@@ -860,8 +860,8 @@ private:
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
@@ -885,8 +885,8 @@ private:
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
@@ -911,8 +911,8 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
@@ -966,8 +966,8 @@ private:
             TrialValDerivType const& trial_bspline_val_and_deriv,
             TestValDerivType const& test_bspline_val_and_deriv_theta,
             TrialValDerivType const& trial_bspline_val_and_deriv_theta,
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping)
     {
@@ -1020,8 +1020,8 @@ private:
     double get_matrix_stencil_element(
             IdxBSpline2D_Polar idx_test,
             IdxBSpline2D_Polar idx_trial,
-            host_t<Spline2DConstField> coeff_alpha,
-            host_t<Spline2DConstField> coeff_beta,
+            host_t<ConstSpline2D> coeff_alpha,
+            host_t<ConstSpline2D> coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {

@@ -172,8 +172,8 @@ int main(int argc, char** argv)
         coeff_beta(irp) = 0.0;
     });
 
-    host_t<Spline2D> coeff_alpha_spline(idx_range_bsplinesRTheta);
-    host_t<Spline2D> coeff_beta_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> coeff_alpha_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
@@ -274,7 +274,7 @@ int main(int argc, char** argv)
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     host_t<DFieldMemRTheta> phi_eq(mesh_rp);
-    host_t<Spline2D> rho_coef_eq(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_const_field(coords), get_field(phi_eq));

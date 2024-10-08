@@ -159,9 +159,6 @@ public:
         return ddc::DiscreteElement<BSplinesR, BSplinesTheta>(r_idx_elem, theta_idx_elem);
     }
 
-private:
-    using Spline2D = ddc::Chunk<double, tensor_product_idx_range_type>;
-
 public:
     /**
      * The Impl class holds the implementation of the PolarBSplines. The implementation is specific to the
