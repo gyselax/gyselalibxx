@@ -189,6 +189,7 @@ private:
     PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
+    const int batch_idx {0};
 
 public:
     /**
@@ -282,12 +283,12 @@ public:
                 get_const_field(breaks_theta));
 
         std::vector<double> vect_points_r(points_r.size());
-        for (auto i : quadrature_idx_range_r) {
-            vect_points_r[i.uid()] = points_r(i);
+        for (IdxQuadratureR i : quadrature_idx_range_r) {
+            vect_points_r[i - quadrature_idx_range_r.front()] = points_r(i);
         }
         std::vector<double> vect_points_theta(points_theta.size());
-        for (auto i : quadrature_idx_range_theta) {
-            vect_points_theta[i.uid()] = points_theta(i);
+        for (IdxQuadratureTheta i : quadrature_idx_range_theta) {
+            vect_points_theta[i - quadrature_idx_range_theta.front()] = points_theta(i);
         }
 
         // Create quadrature index range
@@ -301,8 +302,9 @@ public:
             ddc::discrete_space<BSplinesR_Polar>()
                     .eval_basis_and_n_derivs(vals, ddc::coordinate(ir), 1);
             for (auto ib : non_zero_bases_r) {
-                r_basis_vals_and_derivs(ib, ir).value = vals(ib.uid(), 0);
-                r_basis_vals_and_derivs(ib, ir).derivative = vals(ib.uid(), 1);
+                const int ib_idx = ib - non_zero_bases_r.front();
+                r_basis_vals_and_derivs(ib, ir).value = vals(ib_idx, 0);
+                r_basis_vals_and_derivs(ib, ir).derivative = vals(ib_idx, 1);
             }
         });
 
@@ -313,8 +315,9 @@ public:
             ddc::discrete_space<BSplinesTheta_Polar>()
                     .eval_basis_and_n_derivs(vals, ddc::coordinate(ip), 1);
             for (auto ib : non_zero_bases_theta) {
-                theta_basis_vals_and_derivs(ib, ip).value = vals(ib.uid(), 0);
-                theta_basis_vals_and_derivs(ib, ip).derivative = vals(ib.uid(), 1);
+                const int ib_idx = ib - non_zero_bases_theta.front();
+                theta_basis_vals_and_derivs(ib, ip).value = vals(ib_idx, 0);
+                theta_basis_vals_and_derivs(ib, ip).derivative = vals(ib_idx, 1);
             }
         });
 
@@ -339,21 +342,22 @@ public:
             // Calculate the value
             ddc::discrete_space<PolarBSplinesRTheta>().eval_basis(singular_vals, vals, coord);
             for (auto ib : singular_idx_range) {
-                singular_basis_vals_and_derivs(ib, ir, ip).value = singular_vals[ib.uid()];
+                singular_basis_vals_and_derivs(ib, ir, ip).value
+                        = singular_vals[ib - singular_idx_range.front()];
             }
 
             // Calculate the radial derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
             for (auto ib : singular_idx_range) {
                 singular_basis_vals_and_derivs(ib, ir, ip).radial_derivative
-                        = singular_vals[ib.uid()];
+                        = singular_vals[ib - singular_idx_range.front()];
             }
 
             // Calculate the poloidal derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
             for (auto ib : singular_idx_range) {
                 singular_basis_vals_and_derivs(ib, ir, ip).poloidal_derivative
-                        = singular_vals[ib.uid()];
+                        = singular_vals[ib - singular_idx_range.front()];
             }
         });
 
@@ -392,25 +396,26 @@ public:
         // non-central splines. These have a tensor product structure
         const int n_elements_stencil = n_stencil_r * n_stencil_theta;
 
+        const int batch_size = 1;
         // Matrix size is equal to the number Polar bspline
         const int matrix_size = ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - nbasis_theta;
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
 
-        Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-                vals_coo_host("vals_coo_host", n_matrix_elements);
+        //CSR data storage
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+                values_csr_host("values_csr", batch_size, n_matrix_elements);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-                row_coo_host("row_coo_host", n_matrix_elements);
+                col_idx_csr_host("idx_csr", n_matrix_elements);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
-                col_coo_host("col_coo_host", n_matrix_elements);
+                nnz_per_row_csr_host("nnz_per_row_csr", matrix_size + 1);
 
-        int matrix_idx(0);
+        init_nnz_per_line(nnz_per_row_csr_host);
+
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
         ddc::for_each(singular_idx_range, [&](IdxPolarBspl const idx_test) {
             ddc::for_each(singular_idx_range, [&](IdxPolarBspl const idx_trial) {
                 // Calculate the weak integral
-                row_coo_host(matrix_idx) = idx_test.uid();
-                col_coo_host(matrix_idx) = idx_trial.uid();
-                vals_coo_host(matrix_idx) = ddc::transform_reduce(
+                double const element = ddc::transform_reduce(
                         quadrature_idx_range_singular,
                         0.0,
                         ddc::reducer::sum<double>(),
@@ -427,11 +432,15 @@ public:
                                     spline_evaluator,
                                     mapping);
                         });
-                matrix_idx++;
+                const int row_idx = idx_test - singular_idx_range.front();
+                const int col_idx = idx_trial - singular_idx_range.front();
+                const int csr_idx_singular_area = nnz_per_row_csr_host(row_idx + 1);
+                //Fill the C matrix corresponding to the splines on the singular point
+                col_idx_csr_host(csr_idx_singular_area) = col_idx;
+                values_csr_host(batch_idx, csr_idx_singular_area) = element;
+                nnz_per_row_csr_host(row_idx + 1)++;
             });
         });
-
-        assert(matrix_idx == n_elements_singular);
 
         // Create index ranges associated with the 2D splines
         IdxRangeBSR central_radial_bspline_idx_range(
@@ -511,20 +520,20 @@ public:
                                                     mapping);
                                         });
                             });
-                            //----
-                            row_coo_host(matrix_idx) = idx_test.uid();
-                            col_coo_host(matrix_idx) = polar_idx_trial.uid();
-                            vals_coo_host(matrix_idx) = element;
-                            matrix_idx++;
-                            //-----
-                            row_coo_host(matrix_idx) = polar_idx_trial.uid();
-                            col_coo_host(matrix_idx) = idx_test.uid();
-                            vals_coo_host(matrix_idx) = element;
-                            matrix_idx++;
+
+                            int const row_idx = idx_test - singular_idx_range.front();
+                            int const col_idx = polar_idx_trial - singular_idx_range.front();
+                            //a_ij
+                            col_idx_csr_host(nnz_per_row_csr_host(row_idx + 1)) = col_idx;
+                            values_csr_host(batch_idx, nnz_per_row_csr_host(row_idx + 1)) = element;
+                            nnz_per_row_csr_host(row_idx + 1)++;
+                            //a_ji
+                            col_idx_csr_host(nnz_per_row_csr_host(col_idx + 1)) = row_idx;
+                            values_csr_host(batch_idx, nnz_per_row_csr_host(col_idx + 1)) = element;
+                            nnz_per_row_csr_host(col_idx + 1)++;
                         }
                     });
         });
-        assert(matrix_idx == n_elements_singular + n_elements_overlap);
 
         // Calculate the matrix elements following a stencil
         ddc::for_each(fem_non_singular_idx_range, [&](IdxPolarBspl const polar_idx_test) {
@@ -550,24 +559,24 @@ public:
                         coeff_beta,
                         spline_evaluator,
                         mapping);
-
-                if (polar_idx_test.uid() == polar_idx_trial.uid()) {
-                    //----
-                    row_coo_host(matrix_idx) = polar_idx_test.uid();
-                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
-                    vals_coo_host(matrix_idx) = element;
-                    matrix_idx++;
+                int const int_polar_idx_test = polar_idx_test - singular_idx_range.front();
+                if (polar_idx_test == polar_idx_trial) {
+                    const int idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
+                    col_idx_csr_host(idx) = int_polar_idx_test;
+                    values_csr_host(batch_idx, idx) = element;
+                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
                 } else {
-                    //------
-                    row_coo_host(matrix_idx) = polar_idx_test.uid();
-                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
-                    vals_coo_host(matrix_idx) = element;
-                    matrix_idx++;
-                    //--------------
-                    row_coo_host(matrix_idx) = polar_idx_trial.uid();
-                    col_coo_host(matrix_idx) = polar_idx_test.uid();
-                    vals_coo_host(matrix_idx) = element;
-                    matrix_idx++;
+                    int const int_polar_idx_trial = polar_idx_trial - singular_idx_range.front();
+
+                    const int aij_idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
+                    col_idx_csr_host(aij_idx) = int_polar_idx_trial;
+                    values_csr_host(batch_idx, aij_idx) = element;
+                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
+
+                    const int aji_idx = nnz_per_row_csr_host(int_polar_idx_trial + 1);
+                    col_idx_csr_host(aji_idx) = int_polar_idx_test;
+                    values_csr_host(batch_idx, aji_idx) = element;
+                    nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
                 }
             });
             IdxRangeBSR remaining_r(
@@ -598,31 +607,35 @@ public:
                         coeff_beta,
                         spline_evaluator,
                         mapping);
-                if (polar_idx_test.uid() == polar_idx_trial.uid()) {
-                    row_coo_host(matrix_idx) = polar_idx_test.uid();
-                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
-                    vals_coo_host(matrix_idx) = element;
-                    matrix_idx++;
+                int const int_polar_idx_test = polar_idx_test - singular_idx_range.front();
+                if (polar_idx_test == polar_idx_trial) {
+                    const int idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
+                    col_idx_csr_host(idx) = int_polar_idx_test;
+                    values_csr_host(batch_idx, idx) = element;
+                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
                 } else {
-                    // -----
-                    row_coo_host(matrix_idx) = polar_idx_test.uid();
-                    col_coo_host(matrix_idx) = polar_idx_trial.uid();
-                    vals_coo_host(matrix_idx) = element;
-                    matrix_idx++;
-                    // ----
-                    row_coo_host(matrix_idx) = polar_idx_trial.uid();
-                    col_coo_host(matrix_idx) = polar_idx_test.uid();
-                    vals_coo_host(matrix_idx) = element;
-                    matrix_idx++;
+                    int const int_polar_idx_trial = polar_idx_trial - singular_idx_range.front();
+                    const int aij_idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
+                    col_idx_csr_host(aij_idx) = int_polar_idx_trial;
+                    values_csr_host(batch_idx, aij_idx) = element;
+                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
+
+                    const int aji_idx = nnz_per_row_csr_host(int_polar_idx_trial + 1);
+                    col_idx_csr_host(aji_idx) = int_polar_idx_test;
+                    values_csr_host(batch_idx, aji_idx) = element;
+                    nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
                 }
             });
         });
-        assert(matrix_idx == n_elements_singular + n_elements_overlap + n_elements_stencil);
+        assert(nnz_per_row_csr_host(matrix_size) == n_matrix_elements);
         m_gko_matrix = std::make_unique<MatrixBatchCsr<
                 Kokkos::DefaultExecutionSpace,
                 MatrixBatchCsrSolver::CG>>(1, matrix_size, n_matrix_elements);
-        convert_coo_to_csr<
-                MatrixBatchCsrSolver::CG>(m_gko_matrix, vals_coo_host, row_coo_host, col_coo_host);
+
+        auto [values, col_idx, nnz_per_row] = m_gko_matrix->get_batch_csr();
+        Kokkos::deep_copy(values, values_csr_host);
+        Kokkos::deep_copy(col_idx, col_idx_csr_host);
+        Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
         m_gko_matrix->setup_solver();
     }
 
@@ -739,7 +752,11 @@ public:
         ddc::for_each(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
                 [&](IdxPolarBspl const idx) {
-                    spline.singular_spline_coef(idx) = b_host(0, idx.uid());
+                    const int bspl_idx
+                            = idx
+                              - PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>()
+                                        .front();
+                    spline.singular_spline_coef(idx) = b_host(0, bspl_idx);
                 });
         ddc::for_each(fem_non_singular_idx_range, [&](IdxPolarBspl const idx) {
             const IdxBSpline2D_Polar idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
@@ -1019,7 +1036,6 @@ private:
         int theta_idx_trial(theta_mod(ddc::select<BSplinesTheta_Polar>(idx_trial).uid()));
 
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR_Polar>().ncells();
-        const std::size_t nbasis_theta = ddc::discrete_space<BSplinesTheta_Polar>().nbasis();
 
         // 0<= r_offset <= degree_r
         // -degree_theta <= theta_offset <= degree_theta
@@ -1123,5 +1139,46 @@ private:
         while (idx_theta >= ncells_theta)
             idx_theta -= ncells_theta;
         return idx_theta;
+    }
+
+    void init_nnz_per_line(
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> nnz)
+    {
+        size_t const mat_size = nnz.extent(0) - 1;
+        size_t constexpr n_singular_basis = PolarBSplinesRTheta::n_singular_basis();
+        size_t constexpr degree = BSplinesR_Polar::degree();
+        size_t constexpr radial_overlap = 2 * degree + 1;
+        // overlap between singular domain splines and radial splines
+        for (size_t k = 1; k <= n_singular_basis; k++) {
+            nnz(k + 1) = n_singular_basis + degree * nbasis_theta;
+        }
+        // going from the internal boundary the overlapping possiblities between two radial splines increase
+        for (size_t i = 1; i <= degree + 1; i++) {
+            for (size_t k = n_singular_basis + (i - 1) * nbasis_theta;
+                 k < n_singular_basis + i * nbasis_theta;
+                 k++) {
+                nnz(k + 2) = n_singular_basis + (degree + i) * radial_overlap;
+            }
+        }
+        // Stencil with maximum possible overlap from two sides for radial spline
+        for (size_t k = n_singular_basis + degree * nbasis_theta;
+             k < mat_size - degree * nbasis_theta;
+             k++) {
+            nnz(k + 2) = radial_overlap * radial_overlap;
+        }
+        // Approaching the external boundary the overlapping possiblities between two radial splines decrease
+        for (size_t i = 1; i <= degree; i++) {
+            for (size_t k = mat_size - i * nbasis_theta; k < mat_size - (i - 1) * nbasis_theta;
+                 k++) {
+                nnz(k + 2) = (degree + i) * radial_overlap;
+            }
+        }
+
+        // sum non-zero elements count
+        for (size_t k = 1; k < mat_size; k++) {
+            nnz(k + 1) += nnz(k);
+        }
+        nnz(0) = 0;
+        nnz(1) = 0;
     }
 };
