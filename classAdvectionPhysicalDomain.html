@@ -140,12 +140,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad1382f8d20297da25bf969fc39937fbe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPhysicalDomain.html#ad1382f8d20297da25bf969fc39937fbe">AdvectionPhysicalDomain</a> (Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:ad1382f8d20297da25bf969fc39937fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a> advection domain.  <a href="classAdvectionPhysicalDomain.html#ad1382f8d20297da25bf969fc39937fbe">More...</a><br /></td></tr>
 <tr class="separator:ad1382f8d20297da25bf969fc39937fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac704b00e5cca632789850ce2bd3341b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8">advect_feet</a> (FieldRTheta&lt; CoordRTheta &gt; feet_coords_rp, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt; advection_field, double dt) const</td></tr>
-<tr class="memdesc:ac704b00e5cca632789850ce2bd3341b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the characteristic feet.  <a href="classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8">More...</a><br /></td></tr>
-<tr class="separator:ac704b00e5cca632789850ce2bd3341b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af539c2451bd1c3e65c53170dd729d56d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d">compute_advection_field</a> (<a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, <a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt; advection_field_physical) const</td></tr>
-<tr class="memdesc:af539c2451bd1c3e65c53170dd729d56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the advection field in the advection domain.  <a href="classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d">More...</a><br /></td></tr>
-<tr class="separator:af539c2451bd1c3e65c53170dd729d56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8c298ed699bee9630eb2c10685777d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d">advect_feet</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt; feet_coords_rp, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt;&gt; advection_field, double dt) const</td></tr>
+<tr class="memdesc:a8a8c298ed699bee9630eb2c10685777d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the characteristic feet.  <a href="classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d">More...</a><br /></td></tr>
+<tr class="separator:a8a8c298ed699bee9630eb2c10685777d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4da898c2105721336983af85092184"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPhysicalDomain.html#aeb4da898c2105721336983af85092184">compute_advection_field</a> (host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt; advection_field, host_t&lt; <a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt;&gt; advection_field_physical) const</td></tr>
+<tr class="memdesc:aeb4da898c2105721336983af85092184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the advection field in the advection domain.  <a href="classAdvectionPhysicalDomain.html#aeb4da898c2105721336983af85092184">More...</a><br /></td></tr>
+<tr class="separator:aeb4da898c2105721336983af85092184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Mapping&gt;<br />
@@ -153,7 +153,7 @@ class AdvectionPhysicalDomain&lt; Mapping &gt;</h3>
 
 <p>Define the physical domain for the advection. </p>
 <p>The physical domain can only be used for analytically invertible mappings.</p>
-<p>Here the advection field in the physical domain and the advection domain is the same. So the <a class="el" href="classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d" title="Compute the advection field in the advection domain.">AdvectionPhysicalDomain::compute_advection_field</a> return the same advection field.</p>
+<p>Here the advection field in the physical domain and the advection domain is the same. So the <a class="el" href="classAdvectionPhysicalDomain.html#aeb4da898c2105721336983af85092184" title="Compute the advection field in the advection domain.">AdvectionPhysicalDomain::compute_advection_field</a> return the same advection field.</p>
 <p>The method to advect is here given by:</p><ul>
 <li>compute \( (x,y)_{ij} = \mathcal{F} (r,\theta)_{ij} \),</li>
 <li>advect<ul>
@@ -201,8 +201,8 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac704b00e5cca632789850ce2bd3341b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac704b00e5cca632789850ce2bd3341b8">&#9670;&nbsp;</a></span>advect_feet()</h2>
+<a id="a8a8c298ed699bee9630eb2c10685777d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a8c298ed699bee9630eb2c10685777d">&#9670;&nbsp;</a></span>advect_feet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,13 +215,13 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classAdvectionPhysicalDomain.html">AdvectionPhysicalDomain</a>&lt; Mapping &gt;::advect_feet </td>
           <td>(</td>
-          <td class="paramtype">FieldRTheta&lt; CoordRTheta &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt;&#160;</td>
           <td class="paramname"><em>feet_coords_rp</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>advection_field</em>, </td>
         </tr>
         <tr>
@@ -270,8 +270,8 @@ template&lt;class Mapping &gt; </div>
 
 </div>
 </div>
-<a id="af539c2451bd1c3e65c53170dd729d56d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af539c2451bd1c3e65c53170dd729d56d">&#9670;&nbsp;</a></span>compute_advection_field()</h2>
+<a id="aeb4da898c2105721336983af85092184"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4da898c2105721336983af85092184">&#9670;&nbsp;</a></span>compute_advection_field()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,13 +284,13 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classAdvectionPhysicalDomain.html">AdvectionPhysicalDomain</a>&lt; Mapping &gt;::compute_advection_field </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>advection_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPhysicalDomain.html#a2937ef9b54930a6a3bb558c4d44cb532">X_adv</a>, <a class="el" href="classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c">Y_adv</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>advection_field_physical</em>&#160;</td>
         </tr>
         <tr>
@@ -308,7 +308,7 @@ template&lt;class Mapping &gt; </div>
 
 <p>Compute the advection field in the advection domain. </p>
 <p>The advection field is given in the physical domain. To advect, we need the advection field in the advection domain.</p>
-<p>This function is to be used before the <a class="el" href="classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8" title="Advect the characteristic feet.">AdvectionPhysicalDomain::advect_feet</a> function.</p>
+<p>This function is to be used before the <a class="el" href="classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d" title="Advect the characteristic feet.">AdvectionPhysicalDomain::advect_feet</a> function.</p>
 <p>Here, the function returns the advection field given as input.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

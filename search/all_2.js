@@ -35,7 +35,7 @@ var searchData=
   ['collisionsintra_99',['CollisionsIntra',['../classCollisionsIntra.html',1,'CollisionsIntra'],['../classCollisionsIntra.html#addf7a93d3bbdc450236e56d71609c10b',1,'CollisionsIntra::CollisionsIntra()']]],
   ['collisionspvparmu_100',['CollisionSpVparMu',['../classCollisionSpVparMu.html',1,'CollisionSpVparMu&lt; CollInfo, IdxRangeFDistrib, GridVpar, GridMu, InputDFieldThetaR &gt;'],['../classCollisionSpVparMu.html#a0dbcb8d7f270291b1a19791087b30f36',1,'CollisionSpVparMu::CollisionSpVparMu()']]],
   ['common_20compilation_20problems_101',['Common compilation problems',['../docs_Common_compilation_problems.html',1,'']]],
-  ['compute_5fadvection_5ffield_102',['compute_advection_field',['../classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d',1,'AdvectionPhysicalDomain::compute_advection_field()'],['../classAdvectionPseudoCartesianDomain.html#a807edcea8994101ae3a1e29aa390f803',1,'AdvectionPseudoCartesianDomain::compute_advection_field()']]],
+  ['compute_5fadvection_5ffield_102',['compute_advection_field',['../classAdvectionPhysicalDomain.html#aeb4da898c2105721336983af85092184',1,'AdvectionPhysicalDomain::compute_advection_field()'],['../classAdvectionPseudoCartesianDomain.html#abb7958b1b6f35e65ff6a4b712bcd3ffe',1,'AdvectionPseudoCartesianDomain::compute_advection_field()']]],
   ['compute_5fcoeffs_5fon_5fmapping_103',['compute_coeffs_on_mapping',['../compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885',1,'compute_norms.hpp']]],
   ['compute_5fl1_5fnorm_104',['compute_L1_norm',['../compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671',1,'compute_norms.hpp']]],
   ['compute_5fl2_5fnorm_105',['compute_L2_norm',['../compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2',1,'compute_norms.hpp']]],

@@ -233,9 +233,9 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classPolarSplineFEMPoissonLikeSolver.html#a22eac39c2fceb87b79f36f12d46c10f8">  216</a></span>&#160;    <a class="code" href="classPolarSplineFEMPoissonLikeSolver.html#a22eac39c2fceb87b79f36f12d46c10f8">PolarSplineFEMPoissonLikeSolver</a>(</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classPolarSplineFEMPoissonLikeSolver.html#adc53e8f97f339049ed4ca22ab5df6aeb">  216</a></span>&#160;    <a class="code" href="classPolarSplineFEMPoissonLikeSolver.html#adc53e8f97f339049ed4ca22ab5df6aeb">PolarSplineFEMPoissonLikeSolver</a>(</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        : nbasis_r(ddc::discrete_space&lt;<a class="code" href="structBSplinesR.html">BSplinesR_Polar</a>&gt;().nbasis() - n_overlap_cells - 1)</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        , nbasis_theta(ddc::discrete_space&lt;<a class="code" href="structBSplinesTheta.html">BSplinesTheta_Polar</a>&gt;().nbasis())</div>
@@ -774,10 +774,10 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160; </div>
 <div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160; </div>
 <div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> RHSFunction&gt;</div>
-<div class="line"><a name="l00785"></a><span class="lineno"><a class="line" href="classPolarSplineFEMPoissonLikeSolver.html#a51ff3b53ebfaf3f3bed42f06c5ab84b3">  785</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classPolarSplineFEMPoissonLikeSolver.html#a51ff3b53ebfaf3f3bed42f06c5ab84b3">operator()</a>(</div>
+<div class="line"><a name="l00785"></a><span class="lineno"><a class="line" href="classPolarSplineFEMPoissonLikeSolver.html#aa674e69e7db91ebbe8c0862fda157232">  785</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classPolarSplineFEMPoissonLikeSolver.html#aa674e69e7db91ebbe8c0862fda157232">operator()</a>(</div>
 <div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;            RHSFunction <span class="keyword">const</span>&amp; rhs,</div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;            ConstFieldRTheta&lt;CoordRTheta&gt; <span class="keyword">const</span> coords_eval,</div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;            DFieldRTheta result)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;            host_t&lt;ConstFieldRTheta&lt;CoordRTheta&gt;&gt; <span class="keyword">const</span> coords_eval,</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;            host_t&lt;DFieldRTheta&gt; result)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;        IdxRangeBSTheta_Polar polar_idx_range(</div>
 <div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;                ddc::discrete_space&lt;BSplinesTheta_Polar&gt;().full_domain());</div>
@@ -810,8 +810,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;            IdxQuadratureTheta ip,</div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;            EvalDeriv2DType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv,</div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;            EvalDeriv2DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv,</div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;    {</div>
@@ -835,8 +835,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;            EvalDeriv2DType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv,</div>
 <div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_r,</div>
 <div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_theta,</div>
-<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;    {</div>
@@ -860,8 +860,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv_r,</div>
 <div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;            EvalDeriv2DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv,</div>
 <div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv_theta,</div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;    {</div>
@@ -886,8 +886,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_r,</div>
 <div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv_theta,</div>
 <div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;            EvalDeriv1DType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_theta,</div>
-<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;    {</div>
@@ -932,8 +932,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;            TrialValDerivType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv,</div>
 <div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;            TestValDerivType <span class="keyword">const</span>&amp; test_bspline_val_and_deriv_theta,</div>
 <div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;            TrialValDerivType <span class="keyword">const</span>&amp; trial_bspline_val_and_deriv_theta,</div>
-<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; spline_evaluator,</div>
 <div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;    {</div>
@@ -982,8 +982,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a name="l01003"></a><span class="lineno"> 1003</span>&#160;    <span class="keywordtype">double</span> get_matrix_stencil_element(</div>
 <div class="line"><a name="l01004"></a><span class="lineno"> 1004</span>&#160;            IdxBSpline2D_Polar idx_test,</div>
 <div class="line"><a name="l01005"></a><span class="lineno"> 1005</span>&#160;            IdxBSpline2D_Polar idx_trial,</div>
-<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;            Spline2DConstField coeff_alpha,</div>
-<div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;            Spline2DConstField coeff_beta,</div>
+<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_alpha,</div>
+<div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;            host_t&lt;Spline2DConstField&gt; coeff_beta,</div>
 <div class="line"><a name="l01008"></a><span class="lineno"> 1008</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; evaluator,</div>
 <div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping)</div>
 <div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160;    {</div>
@@ -1115,8 +1115,8 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="ttc" id="aclassPolarSplineEvaluator_html"><div class="ttname"><a href="classPolarSplineEvaluator.html">PolarSplineEvaluator&lt; PolarBSplinesRTheta, ddc::NullExtrapolationRule &gt;</a></div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a></div><div class="ttdoc">Define a polar PDE solver for a Poisson-like equation.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:39</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_a208c1aab7d91aedcbe30231a46979c49"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#a208c1aab7d91aedcbe30231a46979c49">PolarSplineFEMPoissonLikeSolver::operator()</a></div><div class="ttdeci">void operator()(RHSFunction const &amp;rhs, SplinePolar &amp;spline) const</div><div class="ttdoc">Solve the Poisson-like equation.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:643</div></div>
-<div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_a22eac39c2fceb87b79f36f12d46c10f8"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#a22eac39c2fceb87b79f36f12d46c10f8">PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver</a></div><div class="ttdeci">PolarSplineFEMPoissonLikeSolver(Spline2DConstField coeff_alpha, Spline2DConstField coeff_beta, Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate a polar Poisson-like solver using FEM with B-splines.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:216</div></div>
-<div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_a51ff3b53ebfaf3f3bed42f06c5ab84b3"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#a51ff3b53ebfaf3f3bed42f06c5ab84b3">PolarSplineFEMPoissonLikeSolver::operator()</a></div><div class="ttdeci">void operator()(RHSFunction const &amp;rhs, ConstFieldRTheta&lt; CoordRTheta &gt; const coords_eval, DFieldRTheta result) const</div><div class="ttdoc">Solve the Poisson-like equation.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:785</div></div>
+<div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_aa674e69e7db91ebbe8c0862fda157232"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#aa674e69e7db91ebbe8c0862fda157232">PolarSplineFEMPoissonLikeSolver::operator()</a></div><div class="ttdeci">void operator()(RHSFunction const &amp;rhs, host_t&lt; ConstFieldRTheta&lt; CoordRTheta &gt;&gt; const coords_eval, host_t&lt; DFieldRTheta &gt; result) const</div><div class="ttdoc">Solve the Poisson-like equation.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:785</div></div>
+<div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_adc53e8f97f339049ed4ca22ab5df6aeb"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#adc53e8f97f339049ed4ca22ab5df6aeb">PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver</a></div><div class="ttdeci">PolarSplineFEMPoissonLikeSolver(host_t&lt; Spline2DConstField &gt; coeff_alpha, host_t&lt; Spline2DConstField &gt; coeff_beta, Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate a polar Poisson-like solver using FEM with B-splines.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:216</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset">PolarSplineFEMPoissonLikeSolver::RBasisSubset</a></div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:42</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_structPolarSplineFEMPoissonLikeSolver_1_1RCellDim"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim">PolarSplineFEMPoissonLikeSolver::RCellDim</a></div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:48</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html_structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset">PolarSplineFEMPoissonLikeSolver::ThetaBasisSubset</a></div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:45</div></div>

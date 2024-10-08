@@ -3,7 +3,7 @@ var searchData=
   ['fem1dpoissonsolver_1286',['FEM1DPoissonSolver',['../classFEM1DPoissonSolver.html#a32cb0525a0c6b57cf325eef69dac5216',1,'FEM1DPoissonSolver']]],
   ['fftpoissonsolver_1287',['FFTPoissonSolver',['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a362273a31c591d4d99fae6e665bcea95',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;']]],
   ['fill_5fmatrix_5fwith_5fcoeff_1288',['fill_matrix_with_coeff',['../classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03',1,'CollisionsIntra']]],
-  ['find_5fequilibrium_1289',['find_equilibrium',['../classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f',1,'VortexMergerEquilibria']]],
+  ['find_5fequilibrium_1289',['find_equilibrium',['../classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b',1,'VortexMergerEquilibria']]],
   ['find_5fion_1290',['find_ion',['../classKineticFluidCouplingSource.html#a64a1f634ca50c85e39f6ff8671d7306f',1,'KineticFluidCouplingSource']]],
   ['fluidmoments_1291',['FluidMoments',['../classFluidMoments.html#a5c0e28b4c6f0f4eaf93ed730c3ab81b6',1,'FluidMoments']]],
   ['front_1292',['front',['../classIdxRangeSlice.html#a64ac692aa65cc9083a66b48754b1ebe0',1,'IdxRangeSlice']]],

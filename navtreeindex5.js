@@ -1,11 +1,11 @@
 var NAVTREEINDEX5 =
 {
-"classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755":[15,241,2],
+"classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8":[15,241,2],
 "classVortexMergerEquilibria.html":[15,242],
-"classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f":[15,242,2],
-"classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212":[15,242,3],
+"classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b":[15,242,2],
 "classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[15,242,1],
 "classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[15,242,0],
+"classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[15,242,3],
 "classddcHelper_1_1NonUniformInterpolationPoints.html":[15,2,0],
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[15,2,0,0],
 "collisioninfo_8hpp_source.html":[16,0,1,0],

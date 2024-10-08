@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acc1ac2015d8d229ee7cf66eed048129a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#acc1ac2015d8d229ee7cf66eed048129a">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, IdxRangeAdvection const &amp;advection_idx_range, SplineRThetaBuilder const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound const &amp;evaluator_advection_field)</td></tr>
 <tr class="memdesc:acc1ac2015d8d229ee7cf66eed048129a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <a href="classSplineFootFinder.html#acc1ac2015d8d229ee7cf66eed048129a">More...</a><br /></td></tr>
 <tr class="separator:acc1ac2015d8d229ee7cf66eed048129a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46ef44c11afa527cbafa24330b197635"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a46ef44c11afa527cbafa24330b197635">operator()</a> (FieldRTheta&lt; CoordRTheta &gt; feet, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, double dt) const final</td></tr>
-<tr class="memdesc:a46ef44c11afa527cbafa24330b197635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <a href="classSplineFootFinder.html#a46ef44c11afa527cbafa24330b197635">More...</a><br /></td></tr>
-<tr class="separator:a46ef44c11afa527cbafa24330b197635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab187a4c18648f75d662c050f2ad779dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#ab187a4c18648f75d662c050f2ad779dd">operator()</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt; feet, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt; advection_field, double dt) const final</td></tr>
+<tr class="memdesc:ab187a4c18648f75d662c050f2ad779dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <a href="classSplineFootFinder.html#ab187a4c18648f75d662c050f2ad779dd">More...</a><br /></td></tr>
+<tr class="separator:ab187a4c18648f75d662c050f2ad779dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class TimeStepper, class IdxRangeAdvection&gt;<br />
@@ -212,8 +212,8 @@ template&lt;class TimeStepper , class IdxRangeAdvection &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a46ef44c11afa527cbafa24330b197635"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46ef44c11afa527cbafa24330b197635">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="ab187a4c18648f75d662c050f2ad779dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab187a4c18648f75d662c050f2ad779dd">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,13 +226,13 @@ template&lt;class TimeStepper , class IdxRangeAdvection &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, IdxRangeAdvection &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">FieldRTheta&lt; CoordRTheta &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt;&#160;</td>
           <td class="paramname"><em>feet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt;&#160;</td>
           <td class="paramname"><em>advection_field</em>, </td>
         </tr>
         <tr>
@@ -265,7 +265,7 @@ template&lt;class TimeStepper , class IdxRangeAdvection &gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classIFootFinder.html#af5747864d9cb945baff22c6d67394b59">IFootFinder</a>.</p>
+<p>Implements <a class="el" href="classIFootFinder.html#a4b4e64d793fc6cd63e5771f3ebf89308">IFootFinder</a>.</p>
 
 </div>
 </div>

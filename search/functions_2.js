@@ -15,7 +15,7 @@ var searchData=
   ['collisionsinter_1222',['CollisionsInter',['../classCollisionsInter.html#acdd51d6c9f1b051ec7661c1a160a31b7',1,'CollisionsInter']]],
   ['collisionsintra_1223',['CollisionsIntra',['../classCollisionsIntra.html#addf7a93d3bbdc450236e56d71609c10b',1,'CollisionsIntra']]],
   ['collisionspvparmu_1224',['CollisionSpVparMu',['../classCollisionSpVparMu.html#a0dbcb8d7f270291b1a19791087b30f36',1,'CollisionSpVparMu']]],
-  ['compute_5fadvection_5ffield_1225',['compute_advection_field',['../classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d',1,'AdvectionPhysicalDomain::compute_advection_field()'],['../classAdvectionPseudoCartesianDomain.html#a807edcea8994101ae3a1e29aa390f803',1,'AdvectionPseudoCartesianDomain::compute_advection_field()']]],
+  ['compute_5fadvection_5ffield_1225',['compute_advection_field',['../classAdvectionPhysicalDomain.html#aeb4da898c2105721336983af85092184',1,'AdvectionPhysicalDomain::compute_advection_field()'],['../classAdvectionPseudoCartesianDomain.html#abb7958b1b6f35e65ff6a4b712bcd3ffe',1,'AdvectionPseudoCartesianDomain::compute_advection_field()']]],
   ['compute_5fcoeffs_5fon_5fmapping_1226',['compute_coeffs_on_mapping',['../compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885',1,'compute_norms.hpp']]],
   ['compute_5fl1_5fnorm_1227',['compute_L1_norm',['../compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671',1,'compute_norms.hpp']]],
   ['compute_5fl2_5fnorm_1228',['compute_L2_norm',['../compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2',1,'compute_norms.hpp']]],

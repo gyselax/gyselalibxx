@@ -4,7 +4,7 @@ var searchData=
   ['addtotypeseq_1',['AddToTypeSeq',['../structconnectivity__details_1_1AddToTypeSeq.html',1,'connectivity_details']]],
   ['addtotypeseq_3c_20toinsert_2c_20typeseq_2c_20backinsert_20_3e_2',['AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;',['../structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.html',1,'connectivity_details']]],
   ['addtotypeseq_3c_20toinsert_2c_20typeseq_2c_20frontinsert_20_3e_3',['AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;',['../structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01FrontInsert_01_4.html',1,'connectivity_details']]],
-  ['advect_5ffeet_4',['advect_feet',['../classAdvectionPseudoCartesianDomain.html#a815b8e90be679dd57d263c13f7c6fcc2',1,'AdvectionPseudoCartesianDomain::advect_feet()'],['../classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8',1,'AdvectionPhysicalDomain::advect_feet()']]],
+  ['advect_5ffeet_4',['advect_feet',['../classAdvectionPseudoCartesianDomain.html#a548829264993948f5a41f0ba8ad38454',1,'AdvectionPseudoCartesianDomain::advect_feet()'],['../classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d',1,'AdvectionPhysicalDomain::advect_feet()']]],
   ['advection_20field_20finder_5',['Advection Field finder',['../src_geometryRTheta_advection_field.html',1,'src_geometryRTheta']]],
   ['advection_20methods_6',['Advection methods',['../src_advection.html',1,'src']]],
   ['advection_20operator_7',['Advection operator',['../src_geometryRTheta_advection.html',1,'src_geometryRTheta']]],

@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> save_feet(</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; idx_range_rp,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        FieldRTheta&lt;CoordRTheta&gt; <span class="keyword">const</span>&amp; feet_coords_rp,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        host_t&lt;FieldRTheta&lt;CoordRTheta&gt;&gt; <span class="keyword">const</span>&amp; feet_coords_rp,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::string <span class="keyword">const</span>&amp; name)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    std::ofstream file_feet(name, std::ofstream::out);</div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> saving_computed(Mapping <span class="keyword">const</span>&amp; mapping, DFieldRTheta <span class="keyword">function</span>, std::string <span class="keyword">const</span>&amp; name)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> saving_computed(Mapping <span class="keyword">const</span>&amp; mapping, host_t&lt;DFieldRTheta&gt; <span class="keyword">function</span>, std::string <span class="keyword">const</span>&amp; name)</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    IdxRangeRTheta <span class="keyword">const</span> grid = <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(<span class="keyword">function</span>);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    std::ofstream out_file(name, std::ofstream::out);</div>
@@ -208,7 +208,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> AdvectionField, <span class="keyword">class</span> Mapping&gt;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;FieldMemRTheta&lt;CoordRTheta&gt; compute_exact_feet_rp(</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; compute_exact_feet_rp(</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; idx_range_rp,</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <a class="code" href="classAdvectionField.html">AdvectionField</a> <span class="keyword">const</span>&amp; advection_field,</div>
@@ -217,7 +217,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    static_assert(</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            !std::is_same_v&lt;Mapping, <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineRThetaEvaluatorConstBound&gt;</a>&gt;);</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    FieldMemRTheta&lt;CoordRTheta&gt; feet_coords_rp(idx_range_rp);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords_rp(idx_range_rp);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    CoordXY <span class="keyword">const</span> coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    ddc::for_each(idx_range_rp, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
@@ -240,18 +240,18 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keywordtype">double</span> compute_difference_L2_norm(</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        DFieldRTheta allfdistribu_advected,</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        host_t&lt;DFieldRTheta&gt; allfdistribu_advected,</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        Function&amp; function_to_be_advected,</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        FieldRTheta&lt;CoordRTheta&gt; <span class="keyword">const</span>&amp; feet_coord)</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        host_t&lt;FieldRTheta&lt;CoordRTheta&gt;&gt; <span class="keyword">const</span>&amp; feet_coord)</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;{</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    DFieldMemRTheta exact_function(grid);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    DFieldMemRTheta difference_function(grid);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    host_t&lt;DFieldMemRTheta&gt; exact_function(grid);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    host_t&lt;DFieldMemRTheta&gt; difference_function(grid);</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        exact_function(irp) = function_to_be_advected(feet_coord(irp));</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        difference_function(irp) = exact_function(irp) - allfdistribu_advected(irp);</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    });</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    DFieldMemRTheta <span class="keyword">const</span> quadrature_coeffs = <a class="code" href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">compute_coeffs_on_mapping</a>(</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    host_t&lt;DFieldMemRTheta&gt; <span class="keyword">const</span> quadrature_coeffs = <a class="code" href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">compute_coeffs_on_mapping</a>(</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            mapping,</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            trapezoid_quadrature_coefficients&lt;Kokkos::DefaultHostExecutionSpace&gt;(grid));</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    host_t&lt;Quadrature&lt;IdxRangeRTheta&gt;&gt; quadrature(get_const_field(quadrature_coeffs));</div>
@@ -322,10 +322,10 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> end_time = dt * iteration_number;</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    DFieldMemRTheta allfdistribu_test(grid);</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    DFieldRTheta allfdistribu_advected_test;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    host_t&lt;DFieldMemRTheta&gt; allfdistribu_test(grid);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    host_t&lt;DFieldRTheta&gt; allfdistribu_advected_test;</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <a class="code" href="classVectorFieldMem.html">DVectorFieldMemRTheta&lt;X, Y&gt;</a> advection_field_test_vec(grid);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_test_vec(grid);</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="comment">// START TEST -------------------------------------------------------------------------------</span></div>
@@ -373,8 +373,8 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="comment">// TREATMENT OF DATA ------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="comment">// Compute the exact characteristic feet:</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    FieldMemRTheta&lt;CoordRTheta&gt; feet_coords_rp_end_time(grid);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    FieldMemRTheta&lt;CoordRTheta&gt; feet_coords_rp_dt(grid);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords_rp_end_time(grid);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords_rp_dt(grid);</div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    feet_coords_rp_end_time</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            = compute_exact_feet_rp(grid, analytical_mapping, advection_field_test, end_time);</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    feet_coords_rp_dt = compute_exact_feet_rp(grid, analytical_mapping, advection_field_test, dt);</div>
@@ -416,7 +416,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    <span class="comment">// SAVE DATA --------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="comment">// Save the computed characteristic feet:</span></div>
 <div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keywordflow">if</span> (if_save_feet) {</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; feet(grid);</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet(grid);</div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        ddc::for_each(grid, [&amp;](<span class="keyword">const</span> IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        foot_finder(get_field(feet), advection_field_test_vec, dt);</div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        std::string <span class="keyword">const</span> name = output_folder + <span class="stringliteral">&quot;/feet_computed.txt&quot;</span>;</div>
@@ -429,8 +429,8 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        std::string <span class="keyword">const</span> name_1</div>
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                = output_folder + <span class="stringliteral">&quot;/after_&quot;</span> + std::to_string(iteration_number) + <span class="stringliteral">&quot;_exact.txt&quot;</span>;</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160; </div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        DFieldMemRTheta initial_function(grid);</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        DFieldMemRTheta end_function(grid);</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        host_t&lt;DFieldMemRTheta&gt; initial_function(grid);</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        host_t&lt;DFieldMemRTheta&gt; end_function(grid);</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;        ddc::for_each(grid, [&amp;](<span class="keyword">const</span> IdxRTheta irp) {</div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;            initial_function(irp) = function_to_be_advected_test(ddc::coordinate(irp));</div>
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; </div>
@@ -557,7 +557,6 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="ttc" id="aclassRotationSimulation_html"><div class="ttname"><a href="classRotationSimulation.html">RotationSimulation</a></div><div class="ttdoc">Simulation of a rotated Gaussian.</div><div class="ttdef"><b>Definition:</b> test_cases.hpp:521</div></div>
 <div class="ttc" id="aclassSplineFootFinder_html"><div class="ttname"><a href="classSplineFootFinder.html">SplineFootFinder</a></div><div class="ttdoc">Define a base class for all the time integration methods used for the advection.</div><div class="ttdef"><b>Definition:</b> spline_foot_finder.hpp:21</div></div>
 <div class="ttc" id="aclassTranslationSimulation_html"><div class="ttname"><a href="classTranslationSimulation.html">TranslationSimulation</a></div><div class="ttdoc">Simulation of a translated Gaussian.</div><div class="ttdef"><b>Definition:</b> test_cases.hpp:472</div></div>
-<div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition:</b> vector_field_mem.hpp:45</div></div>
 <div class="ttc" id="acompute__norms_8hpp_html"><div class="ttname"><a href="compute__norms_8hpp.html">compute_norms.hpp</a></div><div class="ttdoc">File providing the L1 and the L2 norms.</div></div>
 <div class="ttc" id="acompute__norms_8hpp_html_a48ec4ccb869cbf8afd4c2c27e88b5885"><div class="ttname"><a href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">compute_coeffs_on_mapping</a></div><div class="ttdeci">host_t&lt; FieldMem&lt; double, IdxRange&lt; IDim... &gt; &gt; &gt; compute_coeffs_on_mapping(Mapping &amp;mapping, FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::DefaultHostExecutionSpace::memory_space &gt;&gt; &amp;&amp;coefficients)</div><div class="ttdoc">Add the Jacobian determinant to the coefficients.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:96</div></div>
 <div class="ttc" id="acompute__norms_8hpp_html_ab73e82e22113366c35b71e7ba8846bc2"><div class="ttname"><a href="compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2">compute_L2_norm</a></div><div class="ttdeci">double compute_L2_norm(host_t&lt; Quadrature&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt; function)</div><div class="ttdoc">Compute L2 norm of a function with a given quadrature.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:56</div></div>

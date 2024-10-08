@@ -5,6 +5,6 @@ var classAdvectionPhysicalDomain =
     [ "CoordXY_adv", "classAdvectionPhysicalDomain.html#a5d487c6c1ba59be95ba232cd5bb9ca7f", null ],
     [ "AdvectionPhysicalDomain", "classAdvectionPhysicalDomain.html#ad1382f8d20297da25bf969fc39937fbe", null ],
     [ "~AdvectionPhysicalDomain", "classAdvectionPhysicalDomain.html#a75b58a99fa7c346d722d592e2e463b5b", null ],
-    [ "advect_feet", "classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8", null ],
-    [ "compute_advection_field", "classAdvectionPhysicalDomain.html#af539c2451bd1c3e65c53170dd729d56d", null ]
+    [ "advect_feet", "classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d", null ],
+    [ "compute_advection_field", "classAdvectionPhysicalDomain.html#aeb4da898c2105721336983af85092184", null ]
 ];

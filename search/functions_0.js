@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['advect_5ffeet_1188',['advect_feet',['../classAdvectionPhysicalDomain.html#ac704b00e5cca632789850ce2bd3341b8',1,'AdvectionPhysicalDomain::advect_feet()'],['../classAdvectionPseudoCartesianDomain.html#a815b8e90be679dd57d263c13f7c6fcc2',1,'AdvectionPseudoCartesianDomain::advect_feet()']]],
+  ['advect_5ffeet_1188',['advect_feet',['../classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d',1,'AdvectionPhysicalDomain::advect_feet()'],['../classAdvectionPseudoCartesianDomain.html#a548829264993948f5a41f0ba8ad38454',1,'AdvectionPseudoCartesianDomain::advect_feet()']]],
   ['advectionfield_5fdecentred_5frotation_1189',['AdvectionField_decentred_rotation',['../classAdvectionField__decentred__rotation.html#aa438ce9f694bb80d1dc86a99bc59913c',1,'AdvectionField_decentred_rotation']]],
   ['advectionfield_5frotation_1190',['AdvectionField_rotation',['../classAdvectionField__rotation.html#a24804e9420cb6715fa9434df57e980f1',1,'AdvectionField_rotation']]],
   ['advectionfield_5ftranslation_1191',['AdvectionField_translation',['../classAdvectionField__translation.html#a77d512ab8cb0b4a4d8612228417bcdf3',1,'AdvectionField_translation']]],

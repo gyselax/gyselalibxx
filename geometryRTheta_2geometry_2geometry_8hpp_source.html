@@ -264,13 +264,13 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">// --- FieldMem definitions</span></div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">using</span> FieldMemR = host_t&lt;FieldMem&lt;ElementType, IdxRangeR&gt;&gt;;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">using</span> FieldMemR = FieldMem&lt;ElementType, IdxRangeR&gt;;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">using</span> FieldMemTheta = host_t&lt;FieldMem&lt;ElementType, IdxRangeTheta&gt;&gt;;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">using</span> FieldMemTheta = FieldMem&lt;ElementType, IdxRangeTheta&gt;;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">using</span> FieldMemRTheta = host_t&lt;FieldMem&lt;ElementType, IdxRangeRTheta&gt;&gt;;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">using</span> FieldMemRTheta = FieldMem&lt;ElementType, IdxRangeRTheta&gt;;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword">using</span> DFieldMemR = FieldMemR&lt;double&gt;;</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">using</span> DFieldMemTheta = FieldMemTheta&lt;double&gt;;</div>
@@ -278,10 +278,10 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">// --- Field definitions</span></div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword">using</span> FieldR = host_t&lt;Field&lt;ElementType, IdxRangeR&gt;&gt;;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword">using</span> FieldR = Field&lt;ElementType, IdxRangeR&gt;;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword">using</span> FieldTheta = host_t&lt;Field&lt;ElementType, IdxRangeTheta&gt;&gt;;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword">using</span> FieldTheta = Field&lt;ElementType, IdxRangeTheta&gt;;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">// Equivalent to host_t&lt;Field&lt;ElementType, IdxRangeRTheta&gt;&gt; but used for type deductions</span></div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
@@ -297,22 +297,22 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">// --- Const Field definitions</span></div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keyword">using</span> ConstFieldR = host_t&lt;ConstField&lt;ElementType, IdxRangeR&gt;&gt;;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keyword">using</span> ConstFieldR = ConstField&lt;ElementType, IdxRangeR&gt;;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keyword">using</span> ConstFieldTheta = host_t&lt;ConstField&lt;ElementType, IdxRangeTheta&gt;&gt;;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keyword">using</span> ConstFieldTheta = ConstField&lt;ElementType, IdxRangeTheta&gt;;</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keyword">using</span> ConstFieldRTheta = host_t&lt;ConstField&lt;ElementType, IdxRangeRTheta&gt;&gt;;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keyword">using</span> ConstFieldRTheta = ConstField&lt;ElementType, IdxRangeRTheta&gt;;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="keyword">using</span> DConstFieldR = ConstFieldR&lt;double&gt;;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keyword">using</span> DConstFieldTheta = ConstFieldTheta&lt;double&gt;;</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="keyword">using</span> DConstFieldRTheta = ConstFieldRTheta&lt;double&gt;;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">// --- Spline representation definitions</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword">using</span> Spline2D = host_t&lt;DFieldMem&lt;IdxRangeBSRTheta&gt;&gt;;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">using</span> Spline2DField = host_t&lt;DField&lt;IdxRangeBSRTheta&gt;&gt;;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">using</span> Spline2DConstField = host_t&lt;DConstField&lt;IdxRangeBSRTheta&gt;&gt;;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword">using</span> Spline2D = DFieldMem&lt;IdxRangeBSRTheta&gt;;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">using</span> Spline2DField = DField&lt;IdxRangeBSRTheta&gt;;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">using</span> Spline2DConstField = DConstField&lt;IdxRangeBSRTheta&gt;;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keyword">using</span> <a class="code" href="structPolarSpline.html">SplinePolar</a> = <a class="code" href="structPolarSpline.html">PolarSpline&lt;PolarBSplinesRTheta&gt;</a>;</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>

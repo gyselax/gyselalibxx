@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a46f575dcde0db8121aee2a3d23ff6075"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslImplicitPredCorrRTheta.html#a46f575dcde0db8121aee2a3d23ff6075">BslImplicitPredCorrRTheta</a> (IdxRangeAdvection const &amp;advection_idx_range, Mapping const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, IdxRangeAdvection &gt;, Mapping &gt; const &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;poisson_solver, SplineRThetaEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
 <tr class="memdesc:a46f575dcde0db8121aee2a3d23ff6075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslImplicitPredCorrRTheta.html" title="A second order implicit predictor-corrector for the Vlasov-Poisson equations.">BslImplicitPredCorrRTheta</a>.  <a href="classBslImplicitPredCorrRTheta.html#a46f575dcde0db8121aee2a3d23ff6075">More...</a><br /></td></tr>
 <tr class="separator:a46f575dcde0db8121aee2a3d23ff6075"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a396c933d12a0dd377085da972bdc5208"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslImplicitPredCorrRTheta.html#a396c933d12a0dd377085da972bdc5208">operator()</a> (DFieldRTheta allfdistribu, double const dt, int const steps) const</td></tr>
-<tr class="memdesc:a396c933d12a0dd377085da972bdc5208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves on \( T = dt*N \) the equations system.  <a href="classBslImplicitPredCorrRTheta.html#a396c933d12a0dd377085da972bdc5208">More...</a><br /></td></tr>
-<tr class="separator:a396c933d12a0dd377085da972bdc5208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5310347a427526da1ed4e80ba867b680"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslImplicitPredCorrRTheta.html#a5310347a427526da1ed4e80ba867b680">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const</td></tr>
+<tr class="memdesc:a5310347a427526da1ed4e80ba867b680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves on \( T = dt*N \) the equations system.  <a href="classBslImplicitPredCorrRTheta.html#a5310347a427526da1ed4e80ba867b680">More...</a><br /></td></tr>
+<tr class="separator:a5310347a427526da1ed4e80ba867b680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -270,8 +270,8 @@ template&lt;class Mapping , class IdxRangeAdvection &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a396c933d12a0dd377085da972bdc5208"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a396c933d12a0dd377085da972bdc5208">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a5310347a427526da1ed4e80ba867b680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5310347a427526da1ed4e80ba867b680">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -282,9 +282,9 @@ template&lt;class Mapping , class IdxRangeAdvection &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DFieldRTheta <a class="el" href="classBslImplicitPredCorrRTheta.html">BslImplicitPredCorrRTheta</a>&lt; Mapping, IdxRangeAdvection &gt;::operator() </td>
+          <td class="memname">host_t&lt;DFieldRTheta&gt; <a class="el" href="classBslImplicitPredCorrRTheta.html">BslImplicitPredCorrRTheta</a>&lt; Mapping, IdxRangeAdvection &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -323,7 +323,7 @@ template&lt;class Mapping , class IdxRangeAdvection &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A Field toward allfdistribu. </dd></dl>
 
-<p>Implements <a class="el" href="classITimeSolverRTheta.html#ad22daa390ba9d818897c6105dfac70f7">ITimeSolverRTheta</a>.</p>
+<p>Implements <a class="el" href="classITimeSolverRTheta.html#a6b757c78184c80859037e523cac13e31">ITimeSolverRTheta</a>.</p>
 
 </div>
 </div>

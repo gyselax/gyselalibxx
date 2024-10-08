@@ -143,22 +143,22 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    ~<a class="code" href="classVortexMergerEquilibria.html">VortexMergerEquilibria</a>() {};</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f">   99</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f">find_equilibrium</a>(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            DFieldRTheta sigma,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            DFieldRTheta phi_eq,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            DFieldRTheta rho_eq,</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">   99</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">find_equilibrium</a>(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            host_t&lt;DFieldRTheta&gt; sigma,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            host_t&lt;DFieldRTheta&gt; phi_eq,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            host_t&lt;DFieldRTheta&gt; rho_eq,</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            std::function&lt;<span class="keywordtype">double</span>(<span class="keywordtype">double</span> <span class="keyword">const</span>)&gt; <span class="keyword">const</span>&amp; <span class="keyword">function</span>,</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> phi_max, <span class="comment">// ToDo: ADD CASE WHERE RHO_MAX IS GIVEN.</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> tau,</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">int</span> count_max = 25)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        DFieldMemRTheta phi_star(m_grid);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        DFieldMemRTheta ci(m_grid);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        host_t&lt;DFieldMemRTheta&gt; phi_star(m_grid);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        host_t&lt;DFieldMemRTheta&gt; ci(m_grid);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        Spline2D rho_coef(idx_range_bsplinesRTheta);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        host_t&lt;Spline2D&gt; rho_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        FieldMemRTheta&lt;CoordRTheta&gt; coords(m_grid);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; coords(m_grid);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        ddc::for_each(m_grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { coords(irp) = ddc::coordinate(irp); });</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">double</span> difference_sigma(0.);</div>
@@ -222,8 +222,8 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    };</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212">  192</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212">set_equilibrium</a>(</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            DFieldRTheta rho_eq,</div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019">  192</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019">set_equilibrium</a>(</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            host_t&lt;DFieldRTheta&gt; rho_eq,</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            std::function&lt;<span class="keywordtype">double</span>(<span class="keywordtype">double</span> <span class="keyword">const</span>)&gt; <span class="keyword">function</span>,</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> phi_max,</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span> tau)</div>
@@ -231,8 +231,8 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        IdxRangeRTheta grid = get_idx_range&lt;GridR, GridTheta&gt;(rho_eq);</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="comment">// Equilibrium:</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        DFieldMemRTheta sigma_0(grid);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        DFieldMemRTheta phi_eq(grid);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        host_t&lt;DFieldMemRTheta&gt; sigma_0(grid);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        host_t&lt;DFieldMemRTheta&gt; phi_eq(grid);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> sig = 0.3;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="keyword">const</span> CoordRTheta coord_rp(ddc::coordinate(irp));</div>
@@ -242,7 +242,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            sigma_0(irp) = sig;</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            phi_eq(irp) = std::exp(-(x * x + y * y) / (2 * sig * sig));</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        });</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <a class="code" href="classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f">find_equilibrium</a>(</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <a class="code" href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">find_equilibrium</a>(</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                get_field(sigma_0),</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                get_field(phi_eq),</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                get_field(rho_eq),</div>
@@ -254,9 +254,9 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="ttc" id="aclassPoissonLikeRHSFunction_html"><div class="ttname"><a href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a></div><div class="ttdoc">Type of right-hand side (rhs) function of the Poisson equation.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:16</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a></div><div class="ttdoc">Define a polar PDE solver for a Poisson-like equation.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:39</div></div>
 <div class="ttc" id="aclassVortexMergerEquilibria_html"><div class="ttname"><a href="classVortexMergerEquilibria.html">VortexMergerEquilibria</a></div><div class="ttdoc">Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:24</div></div>
-<div class="ttc" id="aclassVortexMergerEquilibria_html_a60902e45f7fc406ff7c560e7ab7a693f"><div class="ttname"><a href="classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f">VortexMergerEquilibria::find_equilibrium</a></div><div class="ttdeci">void find_equilibrium(DFieldRTheta sigma, DFieldRTheta phi_eq, DFieldRTheta rho_eq, std::function&lt; double(double const)&gt; const &amp;function, double const phi_max, double const tau, int count_max=25) const</div><div class="ttdoc">Get an equilibrium.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:99</div></div>
-<div class="ttc" id="aclassVortexMergerEquilibria_html_a7e5e2b5f02cbb79fea4bece9037a6212"><div class="ttname"><a href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212">VortexMergerEquilibria::set_equilibrium</a></div><div class="ttdeci">void set_equilibrium(DFieldRTheta rho_eq, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau)</div><div class="ttdoc">Set an equilibrium.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:192</div></div>
+<div class="ttc" id="aclassVortexMergerEquilibria_html_ad3b9139693f6f2aeabf9355d14c7c37b"><div class="ttname"><a href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">VortexMergerEquilibria::find_equilibrium</a></div><div class="ttdeci">void find_equilibrium(host_t&lt; DFieldRTheta &gt; sigma, host_t&lt; DFieldRTheta &gt; phi_eq, host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; const &amp;function, double const phi_max, double const tau, int count_max=25) const</div><div class="ttdoc">Get an equilibrium.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:99</div></div>
 <div class="ttc" id="aclassVortexMergerEquilibria_html_af23e2c37c7123475eb4ad7d7ced40ab6"><div class="ttname"><a href="classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6">VortexMergerEquilibria::VortexMergerEquilibria</a></div><div class="ttdeci">VortexMergerEquilibria(Mapping const &amp;mapping, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;evaluator, PolarSplineFEMPoissonLikeSolver const &amp;poisson_solver)</div><div class="ttdoc">Instantiate a VortexMergerEquilibria.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:50</div></div>
+<div class="ttc" id="aclassVortexMergerEquilibria_html_afcf358db72fd433f4470facfecd25019"><div class="ttname"><a href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019">VortexMergerEquilibria::set_equilibrium</a></div><div class="ttdeci">void set_equilibrium(host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau)</div><div class="ttdoc">Set an equilibrium.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:192</div></div>
 <div class="ttc" id="autils__tools_8hpp_html"><div class="ttname"><a href="utils__tools_8hpp.html">utils_tools.hpp</a></div><div class="ttdoc">File Describing useful functions.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

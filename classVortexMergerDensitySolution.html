@@ -115,9 +115,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75">VortexMergerDensitySolution</a> (Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classVortexMergerDensitySolution.html" title="Initial condition for the vortex merger simulation.">VortexMergerDensitySolution</a>.  <a href="classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75">More...</a><br /></td></tr>
 <tr class="separator:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade5c5e5fd1cbafef4ed6743e87b86755"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755">set_initialisation</a> (DFieldRTheta rho_init, DConstFieldRTheta rho_eq, const double eps, const double sigma, const double x_star_1, const double y_star_1, const double x_star_2, const double y_star_2)</td></tr>
-<tr class="memdesc:ade5c5e5fd1cbafef4ed6743e87b86755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an initial condition for the vortex merger simulation.  <a href="classVortexMergerDensitySolution.html#ade5c5e5fd1cbafef4ed6743e87b86755">More...</a><br /></td></tr>
-<tr class="separator:ade5c5e5fd1cbafef4ed6743e87b86755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebe20037b60ca33bd8020faba80fe4f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8">set_initialisation</a> (host_t&lt; DFieldRTheta &gt; rho_init, host_t&lt; DConstFieldRTheta &gt; rho_eq, const double eps, const double sigma, const double x_star_1, const double y_star_1, const double x_star_2, const double y_star_2)</td></tr>
+<tr class="memdesc:aebe20037b60ca33bd8020faba80fe4f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an initial condition for the vortex merger simulation.  <a href="classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8">More...</a><br /></td></tr>
+<tr class="separator:aebe20037b60ca33bd8020faba80fe4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Mapping&gt;<br />
@@ -168,8 +168,8 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ade5c5e5fd1cbafef4ed6743e87b86755"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade5c5e5fd1cbafef4ed6743e87b86755">&#9670;&nbsp;</a></span>set_initialisation()</h2>
+<a id="aebe20037b60ca33bd8020faba80fe4f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebe20037b60ca33bd8020faba80fe4f8">&#9670;&nbsp;</a></span>set_initialisation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,13 +182,13 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a>&lt; Mapping &gt;::set_initialisation </td>
           <td>(</td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>rho_init</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DConstFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DConstFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>rho_eq</em>, </td>
         </tr>
         <tr>
@@ -242,12 +242,12 @@ template&lt;class Mapping &gt; </div>
 
 <p>Set an initial condition for the vortex merger simulation. </p>
 <p>The initial condition is given by \( \rho(0, x, y) = \rho_{eq}(x,y) + \varepsilon \left( \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right] + \exp\left[-\frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2\sigma^2}\right] \right)\)</p>
-<p>with \( \rho_{eq}\) given by <a class="el" href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212" title="Set an equilibrium.">VortexMergerEquilibria::set_equilibrium</a>.</p>
+<p>with \( \rho_{eq}\) given by <a class="el" href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019" title="Set an equilibrium.">VortexMergerEquilibria::set_equilibrium</a>.</p>
 <p>The initial condition is also given in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">rho_init</td><td>The initial condition of the density. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">rho_eq</td><td>The equilibrium density solution computed thanks to <a class="el" href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212" title="Set an equilibrium.">VortexMergerEquilibria::set_equilibrium</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rho_eq</td><td>The equilibrium density solution computed thanks to <a class="el" href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019" title="Set an equilibrium.">VortexMergerEquilibria::set_equilibrium</a>. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">eps</td><td>The \( \varepsilon \) amplitude of the perturbation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">sigma</td><td>The \( \sigma \) of the Gaussian functions. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x_star_1</td><td>The \( x_1^*\) parameter. </td></tr>

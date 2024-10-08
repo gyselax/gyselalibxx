@@ -115,12 +115,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af23e2c37c7123475eb4ad7d7ced40ab6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6">VortexMergerEquilibria</a> (Mapping const &amp;mapping, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;poisson_solver)</td></tr>
 <tr class="memdesc:af23e2c37c7123475eb4ad7d7ced40ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classVortexMergerEquilibria.html" title="Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.">VortexMergerEquilibria</a>.  <a href="classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6">More...</a><br /></td></tr>
 <tr class="separator:af23e2c37c7123475eb4ad7d7ced40ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60902e45f7fc406ff7c560e7ab7a693f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f">find_equilibrium</a> (DFieldRTheta sigma, DFieldRTheta phi_eq, DFieldRTheta rho_eq, std::function&lt; double(double const)&gt; const &amp;function, double const phi_max, double const tau, int count_max=25) const</td></tr>
-<tr class="memdesc:a60902e45f7fc406ff7c560e7ab7a693f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an equilibrium.  <a href="classVortexMergerEquilibria.html#a60902e45f7fc406ff7c560e7ab7a693f">More...</a><br /></td></tr>
-<tr class="separator:a60902e45f7fc406ff7c560e7ab7a693f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e5e2b5f02cbb79fea4bece9037a6212"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212">set_equilibrium</a> (DFieldRTheta rho_eq, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau)</td></tr>
-<tr class="memdesc:a7e5e2b5f02cbb79fea4bece9037a6212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an equilibrium.  <a href="classVortexMergerEquilibria.html#a7e5e2b5f02cbb79fea4bece9037a6212">More...</a><br /></td></tr>
-<tr class="separator:a7e5e2b5f02cbb79fea4bece9037a6212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3b9139693f6f2aeabf9355d14c7c37b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">find_equilibrium</a> (host_t&lt; DFieldRTheta &gt; sigma, host_t&lt; DFieldRTheta &gt; phi_eq, host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; const &amp;function, double const phi_max, double const tau, int count_max=25) const</td></tr>
+<tr class="memdesc:ad3b9139693f6f2aeabf9355d14c7c37b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an equilibrium.  <a href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">More...</a><br /></td></tr>
+<tr class="separator:ad3b9139693f6f2aeabf9355d14c7c37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf358db72fd433f4470facfecd25019"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019">set_equilibrium</a> (host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau)</td></tr>
+<tr class="memdesc:afcf358db72fd433f4470facfecd25019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an equilibrium.  <a href="classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019">More...</a><br /></td></tr>
+<tr class="separator:afcf358db72fd433f4470facfecd25019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Mapping&gt;<br />
@@ -203,8 +203,8 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a60902e45f7fc406ff7c560e7ab7a693f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60902e45f7fc406ff7c560e7ab7a693f">&#9670;&nbsp;</a></span>find_equilibrium()</h2>
+<a id="ad3b9139693f6f2aeabf9355d14c7c37b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3b9139693f6f2aeabf9355d14c7c37b">&#9670;&nbsp;</a></span>find_equilibrium()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,19 +217,19 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classVortexMergerEquilibria.html">VortexMergerEquilibria</a>&lt; Mapping &gt;::find_equilibrium </td>
           <td>(</td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>sigma</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>phi_eq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>rho_eq</em>, </td>
         </tr>
         <tr>
@@ -295,8 +295,8 @@ template&lt;class Mapping &gt; </div>
 
 </div>
 </div>
-<a id="a7e5e2b5f02cbb79fea4bece9037a6212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e5e2b5f02cbb79fea4bece9037a6212">&#9670;&nbsp;</a></span>set_equilibrium()</h2>
+<a id="afcf358db72fd433f4470facfecd25019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf358db72fd433f4470facfecd25019">&#9670;&nbsp;</a></span>set_equilibrium()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +309,7 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classVortexMergerEquilibria.html">VortexMergerEquilibria</a>&lt; Mapping &gt;::set_equilibrium </td>
           <td>(</td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>rho_eq</em>, </td>
         </tr>
         <tr>

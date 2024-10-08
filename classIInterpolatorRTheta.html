@@ -124,16 +124,16 @@ Inheritance diagram for IInterpolatorRTheta:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a69b7130c9254502ada6f7bde85c43274"><td class="memItemLeft" align="right" valign="top">virtual DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolatorRTheta.html#a69b7130c9254502ada6f7bde85c43274">operator()</a> (DFieldRTheta inout_data, ConstFieldRTheta&lt; CoordRTheta &gt; coordinates) const =0</td></tr>
-<tr class="memdesc:a69b7130c9254502ada6f7bde85c43274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolatorRTheta.html#a69b7130c9254502ada6f7bde85c43274">More...</a><br /></td></tr>
-<tr class="separator:a69b7130c9254502ada6f7bde85c43274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced5e14f8fab92a58c72a12e563850ff"><td class="memItemLeft" align="right" valign="top">virtual host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolatorRTheta.html#aced5e14f8fab92a58c72a12e563850ff">operator()</a> (host_t&lt; DFieldRTheta &gt; inout_data, host_t&lt; ConstFieldRTheta&lt; CoordRTheta &gt;&gt; coordinates) const =0</td></tr>
+<tr class="memdesc:aced5e14f8fab92a58c72a12e563850ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <a href="classIInterpolatorRTheta.html#aced5e14f8fab92a58c72a12e563850ff">More...</a><br /></td></tr>
+<tr class="separator:aced5e14f8fab92a58c72a12e563850ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class which provides an interpolating function. </p>
 <p>An abstract class which implements a function allowing the value of a function to be approximated at a set of coordinates from a set of known values of the function. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a69b7130c9254502ada6f7bde85c43274"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69b7130c9254502ada6f7bde85c43274">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="aced5e14f8fab92a58c72a12e563850ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced5e14f8fab92a58c72a12e563850ff">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,15 +142,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DFieldRTheta IInterpolatorRTheta::operator() </td>
+          <td class="memname">virtual host_t&lt;DFieldRTheta&gt; IInterpolatorRTheta::operator() </td>
           <td>(</td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>inout_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ConstFieldRTheta&lt; CoordRTheta &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; ConstFieldRTheta&lt; CoordRTheta &gt;&gt;&#160;</td>
           <td class="paramname"><em>coordinates</em>&#160;</td>
         </tr>
         <tr>
@@ -176,7 +176,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the inout_data array containing the value of the function at the coordinates. </dd></dl>
 
-<p>Implemented in <a class="el" href="classIPreallocatableInterpolatorRTheta.html#a4d28bfece4da02e58796a300634426e2">IPreallocatableInterpolatorRTheta</a>.</p>
+<p>Implemented in <a class="el" href="classIPreallocatableInterpolatorRTheta.html#a46845d7c3ff21e134629490f4e879f3a">IPreallocatableInterpolatorRTheta</a>.</p>
 
 </div>
 </div>
