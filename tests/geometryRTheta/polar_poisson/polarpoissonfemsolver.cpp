@@ -130,16 +130,16 @@ int main(int argc, char** argv)
         y(irp) = ddc::get<Y>(cartesian_coord);
     });
 
-    host_t<Spline2D> coeff_alpha_spline(idx_range_bsplinesRTheta);
-    host_t<Spline2D> coeff_beta_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> coeff_alpha_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline),
             get_const_field(coeff_alpha)); // coeff_alpha_spline are the coefficients
     // of the spline representation of the values given by coeff_alpha.
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    host_t<Spline2D> x_spline_representation(idx_range_bsplinesRTheta);
-    host_t<Spline2D> y_spline_representation(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> x_spline_representation(idx_range_bsplinesRTheta);
+    host_t<Spline2DMem> y_spline_representation(idx_range_bsplinesRTheta);
 
     builder(get_field(x_spline_representation), get_const_field(x));
     builder(get_field(y_spline_representation), get_const_field(y));
@@ -171,7 +171,7 @@ int main(int argc, char** argv)
     if (discrete_rhs) {
         // Build the spline approximation of the rhs
 
-        host_t<Spline2D> rhs_spline(idx_range_bsplinesRTheta);
+        host_t<Spline2DMem> rhs_spline(idx_range_bsplinesRTheta);
         host_t<DFieldMemRTheta> rhs_vals(grid);
         ddc::for_each(grid, [&](IdxRTheta const irp) { rhs_vals(irp) = rhs(coords(irp)); });
         builder(get_field(rhs_spline), get_const_field(rhs_vals));

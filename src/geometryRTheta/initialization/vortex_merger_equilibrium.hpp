@@ -109,7 +109,7 @@ public:
         host_t<DFieldMemRTheta> ci(m_grid);
 
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        host_t<Spline2D> rho_coef(idx_range_bsplinesRTheta);
+        host_t<Spline2DMem> rho_coef(idx_range_bsplinesRTheta);
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(m_grid);
         ddc::for_each(m_grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
