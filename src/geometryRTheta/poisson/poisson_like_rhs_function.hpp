@@ -31,7 +31,7 @@ public:
             GridTheta>;
 
 private:
-    Spline2DConstField const m_coefs;
+    host_t<Spline2DConstField> const m_coefs;
     evaluator_type const& m_evaluator;
 
 public:
@@ -43,7 +43,7 @@ public:
 	 * @param[in] evaluator
 	 *      Evaluator on bsplines.
 	 */
-    PoissonLikeRHSFunction(Spline2DConstField coefs, evaluator_type const& evaluator)
+    PoissonLikeRHSFunction(host_t<Spline2DConstField> coefs, evaluator_type const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {

@@ -142,15 +142,15 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            DFieldRTheta electrostatic_potential,
-            DVectorFieldRTheta<X, Y> advection_field_xy) const
+            host_t<DFieldRTheta> electrostatic_potential,
+            host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
 
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
         IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
-        Spline2D electrostatic_potential_coef(idx_range_bsplinesRTheta);
+        host_t<Spline2D> electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef), advection_field_xy);
@@ -168,8 +168,8 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            Spline2DField electrostatic_potential_coef,
-            DVectorFieldRTheta<X, Y> advection_field_xy) const
+            host_t<Spline2DField> electrostatic_potential_coef,
+            host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
                 m_spline_evaluator,
@@ -189,7 +189,7 @@ public:
      */
     void operator()(
             SplinePolar& electrostatic_potential_coef,
-            DVectorFieldRTheta<X, Y> advection_field_xy) const
+            host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
                 m_polar_spline_evaluator,
@@ -213,12 +213,12 @@ private:
     void compute_advection_field_XY(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            DVectorFieldRTheta<X, Y> advection_field_xy) const
+            host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         static_assert(
                 (std::is_same_v<
                          Evaluator,
-                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, Spline2DField>)
+                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2DField>>)
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
@@ -226,14 +226,14 @@ private:
                                     ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, SplinePolar>));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
-        DVectorFieldMemRTheta<X, Y> electric_field(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
 
-        FieldMemRTheta<CoordRTheta> coords(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
         ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
         // > computation of the phi derivatives
-        DFieldMemRTheta deriv_r_phi(grid);
-        DFieldMemRTheta deriv_p_phi(grid);
+        host_t<DFieldMemRTheta> deriv_r_phi(grid);
+        host_t<DFieldMemRTheta> deriv_p_phi(grid);
 
         evaluator.deriv_dim_1(
                 get_field(deriv_r_phi),
@@ -357,8 +357,8 @@ public:
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
-            DFieldRTheta electrostatic_potential,
-            DVectorFieldRTheta<R, Theta> advection_field_rp,
+            host_t<DFieldRTheta> electrostatic_potential,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
@@ -366,7 +366,7 @@ public:
         // Compute the spline representation of the electrostatic potential
         SplineRThetaBuilder const builder(grid);
         IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
-        Spline2D electrostatic_potential_coef(idx_range_bsplinesRTheta);
+        host_t<Spline2D> electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef),
@@ -388,8 +388,8 @@ public:
      *      The advection field on the physical axis at the O-point.  
      */
     void operator()(
-            Spline2DField electrostatic_potential_coef,
-            DVectorFieldRTheta<R, Theta> advection_field_rp,
+            host_t<Spline2DField> electrostatic_potential_coef,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         compute_advection_field_RTheta(
@@ -413,7 +413,7 @@ public:
      */
     void operator()(
             SplinePolar& electrostatic_potential_coef,
-            DVectorFieldRTheta<R, Theta> advection_field_rp,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         compute_advection_field_RTheta(
@@ -442,13 +442,13 @@ private:
     void compute_advection_field_RTheta(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            DVectorFieldRTheta<R, Theta> advection_field_rp,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         static_assert(
                 (std::is_same_v<
                          Evaluator,
-                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, Spline2DField>)
+                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2DField>>)
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
@@ -457,14 +457,14 @@ private:
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rp);
 
-        FieldMemRTheta<CoordRTheta> coords(grid_without_Opoint);
+        host_t<FieldMemRTheta<CoordRTheta>> coords(grid_without_Opoint);
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             coords(irp) = ddc::coordinate(irp);
         });
 
         // > computation of the phi derivatives
-        DFieldMemRTheta deriv_r_phi(grid_without_Opoint);
-        DFieldMemRTheta deriv_p_phi(grid_without_Opoint);
+        host_t<DFieldMemRTheta> deriv_r_phi(grid_without_Opoint);
+        host_t<DFieldMemRTheta> deriv_p_phi(grid_without_Opoint);
 
         evaluator.deriv_dim_1(
                 get_field(deriv_r_phi),

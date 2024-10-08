@@ -187,13 +187,13 @@ using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
 
 // --- FieldMem definitions
 template <class ElementType>
-using FieldMemR = host_t<FieldMem<ElementType, IdxRangeR>>;
+using FieldMemR = FieldMem<ElementType, IdxRangeR>;
 
 template <class ElementType>
-using FieldMemTheta = host_t<FieldMem<ElementType, IdxRangeTheta>>;
+using FieldMemTheta = FieldMem<ElementType, IdxRangeTheta>;
 
 template <class ElementType>
-using FieldMemRTheta = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
+using FieldMemRTheta = FieldMem<ElementType, IdxRangeRTheta>;
 
 using DFieldMemR = FieldMemR<double>;
 using DFieldMemTheta = FieldMemTheta<double>;
@@ -201,10 +201,10 @@ using DFieldMemRTheta = FieldMemRTheta<double>;
 
 // --- Field definitions
 template <class ElementType>
-using FieldR = host_t<Field<ElementType, IdxRangeR>>;
+using FieldR = Field<ElementType, IdxRangeR>;
 
 template <class ElementType>
-using FieldTheta = host_t<Field<ElementType, IdxRangeTheta>>;
+using FieldTheta = Field<ElementType, IdxRangeTheta>;
 
 // Equivalent to host_t<Field<ElementType, IdxRangeRTheta>> but used for type deductions
 template <class ElementType>
@@ -220,22 +220,22 @@ using DFieldRTheta = FieldRTheta<double>;
 
 // --- Const Field definitions
 template <class ElementType>
-using ConstFieldR = host_t<ConstField<ElementType, IdxRangeR>>;
+using ConstFieldR = ConstField<ElementType, IdxRangeR>;
 
 template <class ElementType>
-using ConstFieldTheta = host_t<ConstField<ElementType, IdxRangeTheta>>;
+using ConstFieldTheta = ConstField<ElementType, IdxRangeTheta>;
 
 template <class ElementType>
-using ConstFieldRTheta = host_t<ConstField<ElementType, IdxRangeRTheta>>;
+using ConstFieldRTheta = ConstField<ElementType, IdxRangeRTheta>;
 
 using DConstFieldR = ConstFieldR<double>;
 using DConstFieldTheta = ConstFieldTheta<double>;
 using DConstFieldRTheta = ConstFieldRTheta<double>;
 
 // --- Spline representation definitions
-using Spline2D = host_t<DFieldMem<IdxRangeBSRTheta>>;
-using Spline2DField = host_t<DField<IdxRangeBSRTheta>>;
-using Spline2DConstField = host_t<DConstField<IdxRangeBSRTheta>>;
+using Spline2D = DFieldMem<IdxRangeBSRTheta>;
+using Spline2DField = DField<IdxRangeBSRTheta>;
+using Spline2DConstField = DConstField<IdxRangeBSRTheta>;
 
 /**
  * @brief Tag the polar B-splines decomposition of a function.

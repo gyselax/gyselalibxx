@@ -129,8 +129,8 @@ public:
      *      The time step.
      */
     void advect_feet(
-            FieldRTheta<CoordRTheta> feet_coords_rp,
-            DConstVectorFieldRTheta<X_adv, Y_adv> advection_field,
+            host_t<FieldRTheta<CoordRTheta>> feet_coords_rp,
+            host_t<DConstVectorFieldRTheta<X_adv, Y_adv>> advection_field,
             double dt) const
     {
         using namespace ddc;
@@ -171,8 +171,8 @@ public:
      *      The advection field in the advection domain which is here the physical domain.
      */
     void compute_advection_field(
-            DConstVectorFieldRTheta<X, Y> advection_field,
-            DVectorFieldRTheta<X_adv, Y_adv> advection_field_physical) const
+            host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
+            host_t<DVectorFieldRTheta<X_adv, Y_adv>> advection_field_physical) const
     {
         ddc::parallel_deepcopy(
                 ddcHelper::get<X_adv>(advection_field_physical),
@@ -310,8 +310,8 @@ public:
      *      The time step.
      */
     void advect_feet(
-            FieldRTheta<CoordRTheta> feet_coords_rp,
-            DConstVectorFieldRTheta<X_adv, Y_adv> const& advection_field,
+            host_t<FieldRTheta<CoordRTheta>> feet_coords_rp,
+            host_t<DConstVectorFieldRTheta<X_adv, Y_adv>> const& advection_field,
             double const dt) const
     {
         static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
@@ -353,8 +353,8 @@ public:
      *      The advection field in the advection domain which is here the pseudo-Cartesian domain.
      */
     void compute_advection_field(
-            DConstVectorFieldRTheta<X, Y> advection_field,
-            DVectorFieldRTheta<X_adv, Y_adv> advection_field_pseudo_Cart) const
+            host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
+            host_t<DVectorFieldRTheta<X_adv, Y_adv>> advection_field_pseudo_Cart) const
     {
         static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
 

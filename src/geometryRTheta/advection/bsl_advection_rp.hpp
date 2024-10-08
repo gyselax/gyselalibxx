@@ -109,16 +109,16 @@ public:
      *
      * @return A Field to allfdistribu advected on the time step given.
      */
-    DFieldRTheta operator()(
-            DFieldRTheta allfdistribu,
-            DConstVectorFieldRTheta<X, Y> advection_field_xy,
+    host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> allfdistribu,
+            host_t<DConstVectorFieldRTheta<X, Y>> advection_field_xy,
             double dt) const
     {
         // Pre-allocate some memory to prevent allocation later in loop
         std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
 
         // Initialise the feet
-        FieldMemRTheta<CoordRTheta> feet_rp(get_idx_range(advection_field_xy));
+        host_t<FieldMemRTheta<CoordRTheta>> feet_rp(get_idx_range(advection_field_xy));
         ddc::for_each(get_idx_range(advection_field_xy), [&](IdxRTheta const irp) {
             feet_rp(irp) = ddc::coordinate(irp);
         });
@@ -149,9 +149,9 @@ public:
      *
      * @return A Field to allfdistribu advected on the time step given.
      */
-    DFieldRTheta operator()(
-            DFieldRTheta allfdistribu,
-            DConstVectorFieldRTheta<R, Theta> advection_field_rp,
+    host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> allfdistribu,
+            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY const& advection_field_xy_center,
             double dt) const
     {
@@ -163,7 +163,7 @@ public:
 
 
         // Convert advection field on RTheta to advection field on XY
-        DVectorFieldMemRTheta<X, Y> advection_field_xy(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy(grid);
 
         MetricTensor<Mapping, CoordRTheta> metric_tensor(m_mapping);
 
@@ -194,7 +194,7 @@ public:
         std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
 
         // Initialise the feet
-        FieldMemRTheta<CoordRTheta> feet_rp(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> feet_rp(grid);
         ddc::for_each(grid, [&](IdxRTheta const irp) { feet_rp(irp) = ddc::coordinate(irp); });
 
         // Compute the characteristic feet at tn ----------------------------------------------------

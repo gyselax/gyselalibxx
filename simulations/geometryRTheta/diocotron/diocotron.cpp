@@ -89,7 +89,7 @@ int main(int argc, char** argv)
 
     IdxRangeRTheta const mesh_rp(mesh_r, mesh_p);
 
-    FieldMemRTheta<CoordRTheta> coords(mesh_rp);
+    host_t<FieldMemRTheta<CoordRTheta>> coords(mesh_rp);
     ddc::for_each(mesh_rp, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
 
@@ -123,18 +123,21 @@ int main(int argc, char** argv)
 
     // --- Time integration method --------------------------------------------------------------------
 #if defined(EULER_METHOD)
-    Euler<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(mesh_rp);
+    Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
+            time_stepper(mesh_rp);
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const
+    CrankNicolson<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
             time_stepper(mesh_rp, 20, epsilon_CN);
 
 #elif defined(RK3_METHOD)
-    RK3<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(mesh_rp);
+    RK3<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
+            time_stepper(mesh_rp);
 
 #elif defined(RK4_METHOD)
-    RK4<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(mesh_rp);
+    RK4<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
+            time_stepper(mesh_rp);
 
 #endif
 
@@ -161,16 +164,16 @@ int main(int argc, char** argv)
 
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
-    DFieldMemRTheta coeff_alpha(mesh_rp);
-    DFieldMemRTheta coeff_beta(mesh_rp);
+    host_t<DFieldMemRTheta> coeff_alpha(mesh_rp);
+    host_t<DFieldMemRTheta> coeff_beta(mesh_rp);
 
     ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
         coeff_alpha(irp) = -1.0;
         coeff_beta(irp) = 0.0;
     });
 
-    Spline2D coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2D coeff_beta_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2D> coeff_alpha_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2D> coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
@@ -248,9 +251,9 @@ int main(int argc, char** argv)
     // INITIALISATION                                                                                 |
     // ================================================================================================
     // Cartesian coordinates and jacobian ****************************
-    FieldMemRTheta<CoordX> coords_x(mesh_rp);
-    FieldMemRTheta<CoordY> coords_y(mesh_rp);
-    DFieldMemRTheta jacobian(mesh_rp);
+    host_t<FieldMemRTheta<CoordX>> coords_x(mesh_rp);
+    host_t<FieldMemRTheta<CoordY>> coords_y(mesh_rp);
+    host_t<DFieldMemRTheta> jacobian(mesh_rp);
     ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
         CoordXY coords_xy = mapping(ddc::coordinate(irp));
         coords_x(irp) = ddc::select<X>(coords_xy);
@@ -260,8 +263,8 @@ int main(int argc, char** argv)
 
 
 
-    DFieldMemRTheta rho(mesh_rp);
-    DFieldMemRTheta rho_eq(mesh_rp);
+    host_t<DFieldMemRTheta> rho(mesh_rp);
+    host_t<DFieldMemRTheta> rho_eq(mesh_rp);
 
     // Initialize rho and rho equilibrium ****************************
     ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
@@ -270,8 +273,8 @@ int main(int argc, char** argv)
     });
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldMemRTheta phi_eq(mesh_rp);
-    Spline2D rho_coef_eq(idx_range_bsplinesRTheta);
+    host_t<DFieldMemRTheta> phi_eq(mesh_rp);
+    host_t<Spline2D> rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_const_field(coords), get_field(phi_eq));

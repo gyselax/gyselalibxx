@@ -36,7 +36,7 @@ namespace {
  */
 void check_norm_L1(
         host_t<Quadrature<IdxRangeRTheta>> quadrature,
-        DFieldRTheta function,
+        host_t<DFieldRTheta> function,
         double const expected_norm,
         double const TOL)
 {
@@ -64,7 +64,7 @@ void check_norm_L1(
  */
 void check_norm_L2(
         host_t<Quadrature<IdxRangeRTheta>> quadrature,
-        DFieldRTheta function,
+        host_t<DFieldRTheta> function,
         double const expected_norm,
         double const TOL)
 {
@@ -90,7 +90,7 @@ void check_norm_L2(
  */
 void check_norms(
         host_t<Quadrature<IdxRangeRTheta>> quadrature,
-        DFieldRTheta function,
+        host_t<DFieldRTheta> function,
         std::array<double, 2> const& expected_norms,
         std::array<double, 2> const& TOLs)
 {
@@ -130,13 +130,13 @@ void launch_tests(
     SplinePBuilder p_builder(ddc::select<GridTheta>(grid));
     // Test spline quadrature: ------------------------------------------------------------------------
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
-    DFieldMemRTheta const quadrature_coeffs = compute_coeffs_on_mapping(
+    host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
             spline_quadrature_coefficients<
                     Kokkos::DefaultHostExecutionSpace>(grid, r_builder, p_builder));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
 
-    DFieldMemRTheta test(grid);
+    host_t<DFieldMemRTheta> test(grid);
 
     // --- TEST 1 -------------------------------------------------------------------------------------
     std::cout << "TEST 1: f(r,theta ) = 1. " << std::endl;

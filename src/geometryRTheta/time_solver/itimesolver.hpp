@@ -25,8 +25,10 @@ public:
      *
      * @return A Field toward allfdistribu.
      */
-    virtual DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps = 1)
-            const = 0;
+    virtual host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> allfdistribu,
+            double const dt,
+            int const steps = 1) const = 0;
 
 
 protected:

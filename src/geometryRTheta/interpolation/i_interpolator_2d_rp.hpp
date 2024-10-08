@@ -30,9 +30,9 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    virtual DFieldRTheta operator()(
-            DFieldRTheta inout_data,
-            ConstFieldRTheta<CoordRTheta> coordinates) const = 0;
+    virtual host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> inout_data,
+            host_t<ConstFieldRTheta<CoordRTheta>> coordinates) const = 0;
 };
 
 
@@ -67,9 +67,9 @@ public:
      */
     virtual std::unique_ptr<IInterpolatorRTheta> preallocate() const = 0;
 
-    DFieldRTheta operator()(
-            DFieldRTheta const inout_data,
-            ConstFieldRTheta<CoordRTheta> const coordinates) const override
+    host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> const inout_data,
+            host_t<ConstFieldRTheta<CoordRTheta>> const coordinates) const override
     {
         return (*preallocate())(inout_data, coordinates);
     }

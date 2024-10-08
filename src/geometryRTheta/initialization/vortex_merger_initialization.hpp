@@ -71,8 +71,8 @@ public:
      *
      */
     void set_initialisation(
-            DFieldRTheta rho_init,
-            DConstFieldRTheta rho_eq,
+            host_t<DFieldRTheta> rho_init,
+            host_t<DConstFieldRTheta> rho_eq,
             const double eps,
             const double sigma,
             const double x_star_1,

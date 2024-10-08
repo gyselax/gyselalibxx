@@ -97,21 +97,21 @@ public:
      *       implicit loop.
      */
     void find_equilibrium(
-            DFieldRTheta sigma,
-            DFieldRTheta phi_eq,
-            DFieldRTheta rho_eq,
+            host_t<DFieldRTheta> sigma,
+            host_t<DFieldRTheta> phi_eq,
+            host_t<DFieldRTheta> rho_eq,
             std::function<double(double const)> const& function,
             double const phi_max, // ToDo: ADD CASE WHERE RHO_MAX IS GIVEN.
             double const tau,
             int count_max = 25) const
     {
-        DFieldMemRTheta phi_star(m_grid);
-        DFieldMemRTheta ci(m_grid);
+        host_t<DFieldMemRTheta> phi_star(m_grid);
+        host_t<DFieldMemRTheta> ci(m_grid);
 
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2D rho_coef(idx_range_bsplinesRTheta);
+        host_t<Spline2D> rho_coef(idx_range_bsplinesRTheta);
 
-        FieldMemRTheta<CoordRTheta> coords(m_grid);
+        host_t<FieldMemRTheta<CoordRTheta>> coords(m_grid);
         ddc::for_each(m_grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
         double difference_sigma(0.);
@@ -190,7 +190,7 @@ public:
      *
      */
     void set_equilibrium(
-            DFieldRTheta rho_eq,
+            host_t<DFieldRTheta> rho_eq,
             std::function<double(double const)> function,
             double const phi_max,
             double const tau)
@@ -198,8 +198,8 @@ public:
         IdxRangeRTheta grid = get_idx_range<GridR, GridTheta>(rho_eq);
 
         // Equilibrium:
-        DFieldMemRTheta sigma_0(grid);
-        DFieldMemRTheta phi_eq(grid);
+        host_t<DFieldMemRTheta> sigma_0(grid);
+        host_t<DFieldMemRTheta> phi_eq(grid);
         const double sig = 0.3;
         ddc::for_each(grid, [&](IdxRTheta const irp) {
             const CoordRTheta coord_rp(ddc::coordinate(irp));

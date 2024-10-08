@@ -94,13 +94,13 @@ public:
      *      The time step.
      */
     void operator()(
-            FieldRTheta<CoordRTheta> feet,
-            DConstVectorFieldRTheta<X, Y> advection_field,
+            host_t<FieldRTheta<CoordRTheta>> feet,
+            host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
             double dt) const final
     {
-        DVectorFieldMemRTheta<X_adv, Y_adv> idx_range_advection_field_in_adv(
+        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>> idx_range_advection_field_in_adv(
                 get_idx_range(advection_field));
-        VectorSplineCoeffsMem2D<X_adv, Y_adv> advection_field_in_adv_idx_range_coefs(
+        host_t<VectorSplineCoeffsMem2D<X_adv, Y_adv>> advection_field_in_adv_idx_range_coefs(
                 get_spline_idx_range(m_builder_advection_field));
 
         // Compute the advection field in the advection index range.
@@ -118,9 +118,11 @@ public:
 
 
         // The function describing how the derivative of the evolve function is calculated.
-        std::function<void(DVectorFieldRTheta<X_adv, Y_adv>, ConstFieldRTheta<CoordRTheta>)> dy =
-                [&](DVectorFieldRTheta<X_adv, Y_adv> updated_advection_field,
-                    ConstFieldRTheta<CoordRTheta> feet) {
+        std::function<
+                void(host_t<DVectorFieldRTheta<X_adv, Y_adv>>,
+                     host_t<ConstFieldRTheta<CoordRTheta>>)>
+                dy = [&](host_t<DVectorFieldRTheta<X_adv, Y_adv>> updated_advection_field,
+                         host_t<ConstFieldRTheta<CoordRTheta>> feet) {
                     m_evaluator_advection_field(
                             get_field(ddcHelper::get<X_adv>(updated_advection_field)),
                             get_const_field(feet),
@@ -134,9 +136,12 @@ public:
                 };
 
         // The function describing how the value(s) are updated using the derivative.
-        std::function<void(FieldRTheta<CoordRTheta>, DConstVectorFieldRTheta<X_adv, Y_adv>, double)>
-                update_function = [&](FieldRTheta<CoordRTheta> feet,
-                                      DConstVectorFieldRTheta<X_adv, Y_adv> advection_field,
+        std::function<
+                void(host_t<FieldRTheta<CoordRTheta>>,
+                     host_t<DConstVectorFieldRTheta<X_adv, Y_adv>>,
+                     double)>
+                update_function = [&](host_t<FieldRTheta<CoordRTheta>> feet,
+                                      host_t<DConstVectorFieldRTheta<X_adv, Y_adv>> advection_field,
                                       double dt) {
                     // Compute the characteristic feet at t^n:
                     m_advection_idx_range.advect_feet(feet, advection_field, dt);
@@ -170,7 +175,9 @@ private:
      *
      */
     template <class T>
-    void is_unified(FieldRTheta<T> const& values) const
+    void is_unified(
+            Field<T, IdxRangeRTheta, std::experimental::layout_right, Kokkos::HostSpace> const&
+                    values) const
     {
         IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
         IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);

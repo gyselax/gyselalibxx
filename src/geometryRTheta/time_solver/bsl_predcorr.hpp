@@ -103,7 +103,10 @@ public:
     ~BslPredCorrRTheta() {};
 
 
-    DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps) const
+    host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> allfdistribu,
+            double const dt,
+            int const steps) const
     {
         std::chrono::time_point<std::chrono::system_clock> start_time
                 = std::chrono::system_clock::now();
@@ -112,7 +115,7 @@ public:
 
         // Grid. ------------------------------------------------------------------------------------------
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
-        FieldMemRTheta<CoordRTheta> coords(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
         ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
@@ -128,9 +131,9 @@ public:
                 polar_spline_evaluator(extrapolation_rule);
 
 
-        DFieldMemRTheta electrical_potential0(grid);
+        host_t<DFieldMemRTheta> electrical_potential0(grid);
 
-        Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+        host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
@@ -143,26 +146,28 @@ public:
                 .and_with("electrical_potential", electrical_potential0);
 
 
-        std::function<void(DVectorFieldRTheta<X, Y>, DConstFieldRTheta)> define_advection_field
-                = [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta allfdistribu) {
-                      // --- compute electrostatic potential:
-                      Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
-                      m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
-                      PoissonLikeRHSFunction const charge_density_coord(
-                              get_const_field(allfdistribu_coef),
-                              m_spline_evaluator);
-                      m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
+        std::function<void(host_t<DVectorFieldRTheta<X, Y>>, host_t<DConstFieldRTheta>)>
+                define_advection_field = [&](host_t<DVectorFieldRTheta<X, Y>> advection_field,
+                                             host_t<DConstFieldRTheta> allfdistribu) {
+                    // --- compute electrostatic potential:
+                    host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
+                    m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
+                    PoissonLikeRHSFunction const charge_density_coord(
+                            get_const_field(allfdistribu_coef),
+                            m_spline_evaluator);
+                    m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
 
-                      // --- compute advection field:
-                      advection_field_computer(electrostatic_potential_coef, advection_field);
-                  };
+                    // --- compute advection field:
+                    advection_field_computer(electrostatic_potential_coef, advection_field);
+                };
 
-        std::function<void(DFieldRTheta, DConstVectorFieldRTheta<X, Y>, double)> advect_allfdistribu
-                = [&](DFieldRTheta allfdistribu,
-                      DConstVectorFieldRTheta<X, Y> advection_field,
+        std::function<void(host_t<DFieldRTheta>, host_t<DConstVectorFieldRTheta<X, Y>>, double)>
+                advect_allfdistribu
+                = [&](host_t<DFieldRTheta> allfdistribu,
+                      host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
                       double dt) { m_advection_solver(allfdistribu, advection_field, dt); };
 
-        RK2<DFieldMemRTheta, DVectorFieldMemRTheta<X, Y>> time_stepper(grid);
+        RK2<host_t<DFieldMemRTheta>, host_t<DVectorFieldMemRTheta<X, Y>>> time_stepper(grid);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
@@ -173,8 +178,8 @@ public:
                             define_advection_field,
                             advect_allfdistribu);
 
-            DFieldMemRTheta electrical_potential(grid);
-            Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+            host_t<DFieldMemRTheta> electrical_potential(grid);
+            host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
             PoissonLikeRHSFunction const
                     charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);

@@ -116,8 +116,8 @@ public:
     using X_adv = typename IdxRangeAdvection::X_adv;
     using Y_adv = typename IdxRangeAdvection::Y_adv;
 
-    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
-    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
+    using ValFieldMem = host_t<FieldMemRTheta<CoordRTheta>>;
+    using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
 
     using NumericalTuple = std::tuple<
             NumericalMethodParameters<Euler<ValFieldMem, DerivFieldMem>>,
