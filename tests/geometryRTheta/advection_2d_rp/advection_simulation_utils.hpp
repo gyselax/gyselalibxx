@@ -89,7 +89,7 @@ template <class Mapping>
 void save_feet(
         Mapping const& mapping,
         IdxRangeRTheta const& idx_range_rp,
-        FieldRTheta<CoordRTheta> const& feet_coords_rp,
+        host_t<FieldRTheta<CoordRTheta>> const& feet_coords_rp,
         std::string const& name)
 {
     std::ofstream file_feet(name, std::ofstream::out);
@@ -119,7 +119,7 @@ void save_feet(
  *      The name of the file where the feet are saved.
  */
 template <class Mapping>
-void saving_computed(Mapping const& mapping, DFieldRTheta function, std::string const& name)
+void saving_computed(Mapping const& mapping, host_t<DFieldRTheta> function, std::string const& name)
 {
     IdxRangeRTheta const grid = get_idx_range(function);
     std::ofstream out_file(name, std::ofstream::out);
@@ -157,7 +157,7 @@ void saving_computed(Mapping const& mapping, DFieldRTheta function, std::string 
  * @return A FieldMem with the exact characteristic feet at the given time.
  */
 template <class AdvectionField, class Mapping>
-FieldMemRTheta<CoordRTheta> compute_exact_feet_rp(
+host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
         IdxRangeRTheta const& idx_range_rp,
         Mapping const& mapping,
         AdvectionField const& advection_field,
@@ -166,7 +166,7 @@ FieldMemRTheta<CoordRTheta> compute_exact_feet_rp(
     static_assert(
             !std::is_same_v<Mapping, DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>);
 
-    FieldMemRTheta<CoordRTheta> feet_coords_rp(idx_range_rp);
+    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp(idx_range_rp);
     CoordXY const coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));
 
     ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
@@ -209,18 +209,18 @@ template <class Mapping, class Function>
 double compute_difference_L2_norm(
         Mapping const& mapping,
         IdxRangeRTheta const& grid,
-        DFieldRTheta allfdistribu_advected,
+        host_t<DFieldRTheta> allfdistribu_advected,
         Function& function_to_be_advected,
-        FieldRTheta<CoordRTheta> const& feet_coord)
+        host_t<FieldRTheta<CoordRTheta>> const& feet_coord)
 {
-    DFieldMemRTheta exact_function(grid);
-    DFieldMemRTheta difference_function(grid);
+    host_t<DFieldMemRTheta> exact_function(grid);
+    host_t<DFieldMemRTheta> difference_function(grid);
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         exact_function(irp) = function_to_be_advected(feet_coord(irp));
         difference_function(irp) = exact_function(irp) - allfdistribu_advected(irp);
     });
 
-    DFieldMemRTheta const quadrature_coeffs = compute_coeffs_on_mapping(
+    host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
             mapping,
             trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(grid));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
@@ -357,10 +357,10 @@ void simulate(
     double const end_time = dt * iteration_number;
 
 
-    DFieldMemRTheta allfdistribu_test(grid);
-    DFieldRTheta allfdistribu_advected_test;
+    host_t<DFieldMemRTheta> allfdistribu_test(grid);
+    host_t<DFieldRTheta> allfdistribu_advected_test;
 
-    DVectorFieldMemRTheta<X, Y> advection_field_test_vec(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec(grid);
 
 
     // START TEST -------------------------------------------------------------------------------
@@ -408,8 +408,8 @@ void simulate(
 
     // TREATMENT OF DATA ------------------------------------------------------------------------
     // Compute the exact characteristic feet:
-    FieldMemRTheta<CoordRTheta> feet_coords_rp_end_time(grid);
-    FieldMemRTheta<CoordRTheta> feet_coords_rp_dt(grid);
+    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_end_time(grid);
+    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_dt(grid);
     feet_coords_rp_end_time
             = compute_exact_feet_rp(grid, analytical_mapping, advection_field_test, end_time);
     feet_coords_rp_dt = compute_exact_feet_rp(grid, analytical_mapping, advection_field_test, dt);
@@ -451,7 +451,7 @@ void simulate(
     // SAVE DATA --------------------------------------------------------------------------------
     // Save the computed characteristic feet:
     if (if_save_feet) {
-        FieldMemRTheta<CoordRTheta> feet(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> feet(grid);
         ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
         foot_finder(get_field(feet), advection_field_test_vec, dt);
         std::string const name = output_folder + "/feet_computed.txt";
@@ -464,8 +464,8 @@ void simulate(
         std::string const name_1
                 = output_folder + "/after_" + std::to_string(iteration_number) + "_exact.txt";
 
-        DFieldMemRTheta initial_function(grid);
-        DFieldMemRTheta end_function(grid);
+        host_t<DFieldMemRTheta> initial_function(grid);
+        host_t<DFieldMemRTheta> end_function(grid);
         ddc::for_each(grid, [&](const IdxRTheta irp) {
             initial_function(irp) = function_to_be_advected_test(ddc::coordinate(irp));
 

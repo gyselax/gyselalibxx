@@ -139,7 +139,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     AdvectionPhysicalDomain advection_idx_range(mapping);
 
-    RK3<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(grid);
+    RK3<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
+            time_stepper(grid);
     SplineFootFinder
             find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
 
@@ -168,16 +169,16 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // ================================================================================================
     // INITIALISATION                                                                                 |
     // ================================================================================================
-    DFieldMemRTheta allfdistribu_rp(grid);
-    DFieldMemRTheta allfdistribu_xy(grid);
+    host_t<DFieldMemRTheta> allfdistribu_rp(grid);
+    host_t<DFieldMemRTheta> allfdistribu_xy(grid);
 
-    DVectorFieldMemRTheta<X, Y> advection_field_exact(grid);
-    DVectorFieldMemRTheta<R, Theta> advection_field_rp(grid_without_Opoint);
-    DVectorFieldMemRTheta<X, Y> advection_field_xy(grid);
-    DVectorFieldMemRTheta<X, Y> advection_field_xy_from_rp(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact(grid);
+    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rp(grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rp(grid);
     CoordXY advection_field_xy_center;
 
-    DFieldMemRTheta electrostatic_potential(grid);
+    host_t<DFieldMemRTheta> electrostatic_potential(grid);
 
 
 
@@ -208,7 +209,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // Compare advection fields ---
-    DVectorFieldMemRTheta<X, Y> difference_between_fields_exact_and_xy(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_exact_and_xy(grid);
     // > Compare the advection field computed on XY to the exact advection field
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irp)
@@ -221,7 +222,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // > Compare the advection field computed on RTheta to the advection field computed on XY
-    DVectorFieldMemRTheta<X, Y> difference_between_fields_xy_and_rp(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rp(grid);
 
     MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {

@@ -52,7 +52,7 @@ void Interpolation_on_random_coord(
 
 
     // Evaluation of the function on the grid. -----------------------------------------------
-    DFieldMemRTheta function_evaluated(grid);
+    host_t<DFieldMemRTheta> function_evaluated(grid);
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta
                 coord(coordinate(ddc::select<GridR>(irp)), coordinate(ddc::select<GridTheta>(irp)));
@@ -66,7 +66,7 @@ void Interpolation_on_random_coord(
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
     IdxRangeRTheta random_grid(grid);
-    FieldMemRTheta<CoordRTheta> random_coords(random_grid);
+    host_t<FieldMemRTheta<CoordRTheta>> random_coords(random_grid);
 
     int number_r(0);
     int number_p(0);
@@ -125,7 +125,7 @@ void Interpolation_on_random_coord(
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    DFieldRTheta function_interpolated;
+    host_t<DFieldRTheta> function_interpolated;
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     function_interpolated = interpolator(function_evaluated, random_coords);
 

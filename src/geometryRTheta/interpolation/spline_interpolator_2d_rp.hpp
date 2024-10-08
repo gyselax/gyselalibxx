@@ -68,8 +68,8 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    DFieldRTheta operator()(
-            DFieldRTheta const inout_data,
+    host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> const inout_data,
             host_t<Field<CoordRTheta const, IdxRangeRTheta>> const coordinates) const override
     {
 #ifndef NDEBUG

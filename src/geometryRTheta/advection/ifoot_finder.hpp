@@ -26,7 +26,7 @@ public:
      *      The time step.
      */
     virtual void operator()(
-            FieldRTheta<CoordRTheta> feet,
-            DConstVectorFieldRTheta<X, Y> advection_field,
+            host_t<FieldRTheta<CoordRTheta>> feet,
+            host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
             double dt) const = 0;
 };

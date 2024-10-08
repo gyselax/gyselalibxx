@@ -90,7 +90,7 @@ int main(int argc, char** argv)
             SplineInterpPointsTheta>(conf_gyselalibxx, "p");
     IdxRangeRTheta const grid(mesh_r, mesh_p);
 
-    FieldMemRTheta<CoordRTheta> coords(grid);
+    host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
     ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
 
@@ -123,7 +123,8 @@ int main(int argc, char** argv)
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>> const time_stepper(grid);
+    Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
+            time_stepper(grid);
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -148,16 +149,16 @@ int main(int argc, char** argv)
 
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
-    DFieldMemRTheta coeff_alpha(grid);
-    DFieldMemRTheta coeff_beta(grid);
+    host_t<DFieldMemRTheta> coeff_alpha(grid);
+    host_t<DFieldMemRTheta> coeff_beta(grid);
 
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         coeff_alpha(irp) = -1.0;
         coeff_beta(irp) = 0.0;
     });
 
-    Spline2D coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2D coeff_beta_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2D> coeff_alpha_spline(idx_range_bsplinesRTheta);
+    host_t<Spline2D> coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
@@ -194,8 +195,8 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("r_size", Nr);
     ddc::expose_to_pdi("p_size", Nt);
 
-    FieldMemR<CoordR> coords_r(ddc::select<GridR>(grid));
-    FieldMemTheta<CoordTheta> coords_p(ddc::select<GridTheta>(grid));
+    host_t<FieldMemR<CoordR>> coords_r(ddc::select<GridR>(grid));
+    host_t<FieldMemTheta<CoordTheta>> coords_p(ddc::select<GridTheta>(grid));
     ddc::for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
         coords_r(ir) = ddc::coordinate(ir);
     });
@@ -215,9 +216,9 @@ int main(int argc, char** argv)
     // INITIALISATION                                                                                 |
     // ================================================================================================
     // Cartesian coordinates and jacobian ****************************
-    FieldMemRTheta<CoordX> coords_x(grid);
-    FieldMemRTheta<CoordY> coords_y(grid);
-    DFieldMemRTheta jacobian(grid);
+    host_t<FieldMemRTheta<CoordX>> coords_x(grid);
+    host_t<FieldMemRTheta<CoordY>> coords_y(grid);
+    host_t<DFieldMemRTheta> jacobian(grid);
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordXY coords_xy = mapping(ddc::coordinate(irp));
         coords_x(irp) = ddc::select<X>(coords_xy);
@@ -231,18 +232,18 @@ int main(int argc, char** argv)
 
     VortexMergerEquilibria equilibrium(mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
-    DFieldMemRTheta rho_eq(grid);
+    host_t<DFieldMemRTheta> rho_eq(grid);
     equilibrium.set_equilibrium(rho_eq, function, phi_max, tau);
 
 
     VortexMergerDensitySolution solution(mapping);
-    DFieldMemRTheta rho(grid);
+    host_t<DFieldMemRTheta> rho(grid);
     solution.set_initialisation(rho, rho_eq, eps, sigma, x_star_1, y_star_1, x_star_2, y_star_2);
 
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldMemRTheta phi_eq(grid);
-    Spline2D rho_coef_eq(idx_range_bsplinesRTheta);
+    host_t<DFieldMemRTheta> phi_eq(grid);
+    host_t<Spline2D> rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(get_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_const_field(coords), get_field(phi_eq));

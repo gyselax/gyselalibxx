@@ -65,7 +65,8 @@ template <class Mapping, class IdxRangeAdvection>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using EulerMethod = Euler<FieldMemRTheta<CoordRTheta>, DVectorFieldMemRTheta<X, Y>>;
+    using EulerMethod
+            = Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>>;
 
     Mapping const& m_mapping;
 
@@ -133,7 +134,10 @@ public:
 
 
 
-    DFieldRTheta operator()(DFieldRTheta allfdistribu, double const dt, int const steps) const
+    host_t<DFieldRTheta> operator()(
+            host_t<DFieldRTheta> allfdistribu,
+            double const dt,
+            int const steps) const
     {
         std::chrono::time_point<std::chrono::system_clock> start_time
                 = std::chrono::system_clock::now();
@@ -142,7 +146,7 @@ public:
         // Grid. ------------------------------------------------------------------------------------------
         IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(allfdistribu));
 
-        FieldMemRTheta<CoordRTheta> coords(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
         ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
         IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
@@ -150,7 +154,7 @@ public:
         IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
-        DFieldMemRTheta electrical_potential(grid);
+        host_t<DFieldMemRTheta> electrical_potential(grid);
 
         SplinePolar electrostatic_potential_coef(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
@@ -161,17 +165,15 @@ public:
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        DVectorFieldMemRTheta<X, Y> electric_field(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field(grid);
 
         AdvectionFieldFinder advection_field_computer(m_mapping);
-
-
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
-            Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+            host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
             PoissonLikeRHSFunction const
                     charge_density_coord_1(get_const_field(allfdistribu_coef), m_evaluator);
@@ -194,8 +196,8 @@ public:
 
 
             // STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation
-            DVectorFieldMemRTheta<X, Y> advection_field_k(grid);
-            DVectorFieldMemRTheta<X, Y> advection_field_k_tot(grid);
+            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k(grid);
+            host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot(grid);
 
             VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_k(get_spline_idx_range(m_builder));
             m_builder(
@@ -205,8 +207,8 @@ public:
                     ddcHelper::get<Y>(advection_field_coefs_k),
                     ddcHelper::get<Y>(get_const_field(advection_field)));
 
-            FieldMemRTheta<CoordRTheta> feet_coords(grid);
-            FieldMemRTheta<CoordRTheta> feet_coords_tmp(grid);
+            host_t<FieldMemRTheta<CoordRTheta>> feet_coords(grid);
+            host_t<FieldMemRTheta<CoordRTheta>> feet_coords_tmp(grid);
 
 
             // initialisation:
@@ -242,7 +244,7 @@ public:
 
             // X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:
             // --- Copy phi^n because it will be modified:
-            DFieldMemRTheta allfdistribu_predicted(grid);
+            host_t<DFieldMemRTheta> allfdistribu_predicted(grid);
             ddc::parallel_deepcopy(allfdistribu_predicted, allfdistribu);
             m_advection_solver(
                     get_field(allfdistribu_predicted),
@@ -308,7 +310,7 @@ public:
         }
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
-        Spline2D allfdistribu_coef(get_spline_idx_range(m_builder));
+        host_t<Spline2D> allfdistribu_coef(get_spline_idx_range(m_builder));
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
@@ -346,16 +348,16 @@ private:
 
 
     void implicit_loop(
-            DVectorFieldRTheta<X, Y> advection_field,
-            ConstVectorSplineCoeffs2D<X, Y> advection_field_coefs_k,
-            FieldRTheta<CoordRTheta> feet_coords,
+            host_t<DVectorFieldRTheta<X, Y>> advection_field,
+            host_t<ConstVectorSplineCoeffs2D<X, Y>> advection_field_coefs_k,
+            host_t<FieldRTheta<CoordRTheta>> feet_coords,
             double const dt,
             double const tau) const
     {
         IdxRangeRTheta const grid = get_idx_range(advection_field);
-        DVectorFieldMemRTheta<X, Y> advection_field_k(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_k_tot(grid);
-        FieldMemRTheta<CoordRTheta> feet_coords_tmp(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot(grid);
+        host_t<FieldMemRTheta<CoordRTheta>> feet_coords_tmp(grid);
 
         double square_difference_feet = 0.;
         int count = 0;
