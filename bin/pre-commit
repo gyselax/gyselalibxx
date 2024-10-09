@@ -8,12 +8,6 @@ EMAIL_DOMAIN=$(echo ${CURR_EMAIL} | cut -d @ -f 2)
 
 SUCCESS=0
 
-if [[ "${EMAIL_DOMAIN}" == "" ]]
-then
-  echo "The git email and user name have not been set on this machine. Please set them to ensure proper attribution of commits."
-  SUCCESS=1
-fi
-
 if [[ "${EMAIL_DOMAIN}" == "login"* ]]
 then
   echo "The current email adress is ${CURR_EMAIL}. This looks like a default email for this machine rather than the email associated with your git account."

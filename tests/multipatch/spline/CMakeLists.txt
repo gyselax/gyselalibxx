@@ -2,10 +2,12 @@
 
 set(test_name_gtest "multipatch_spline_tests")
 add_executable("${test_name_gtest}"
+        constant_extrapolation_rules_onion.cpp
+        multipatch_spline_evaluator.cpp
         multipatch_spline_builder.cpp
         multipatch_spline_builder_2d.cpp
-        constant_extrapolation_rules_onion.cpp
         null_extrapolation_rules.cpp
+        spline_testing_tools.cpp
         ../../main.cpp
 )
 target_link_libraries("${test_name_gtest}"
