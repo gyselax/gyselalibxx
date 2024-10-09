@@ -12,7 +12,7 @@ then
 fi
 
 
-CHANGED_FILES_IN_PUSH=$(git diff ${REMOTE}..${CURRENT_BRANCH} --name-only)
+CHANGED_FILES_IN_PUSH=$(git diff ${REMOTE}..${CURRENT_BRANCH} --name-only --diff-filter=d)
 
 CLANG_FORMAT=$(which clang-format)
 if [ "$(hostname)" == "persee.partenaires.cea.fr" ]
