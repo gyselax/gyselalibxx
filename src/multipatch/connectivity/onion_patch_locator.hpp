@@ -182,9 +182,28 @@ public:
         return m_mapping;
     }
 
+    /**
+     * @brief Get the mapping from given logical continuous dimensions. 
+     * The function can run on device and host. 
+     * @tparam Patch Patch type. 
+     * @return The mapping on the given Patch. 
+     */
+    template <class Dim1, class Dim2>
+    KOKKOS_FUNCTION Mapping get_mapping_on_logical_dim() const
+    {
+        static_assert(
+                (std::is_same_v<Dim1, R>)&&(std::is_same_v<Dim2, Theta>),
+                "Wrong continuous dimensions.");
+        return m_mapping;
+    }
+
     /// @brief Get the type of the mapping on the given Patch.
     template <class Patch>
     using get_mapping_on_patch_t = Mapping;
+
+    /// @brief Get the type of the mapping from given logical continuous dimensions.
+    template <class Dim1, class Dim2>
+    using get_mapping_on_logical_dim_t = Mapping;
 
 private:
     /** @brief Set the m_radii array containing all the boundary radial coordinates.

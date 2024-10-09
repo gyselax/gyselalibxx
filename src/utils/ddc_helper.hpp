@@ -115,6 +115,34 @@ restrict_to_idx_range(
 }
 
 /**
+ * @brief Calculate the Coordinate inside the domain.
+ *
+ * In the case of a periodic domain, a Coordinate can sometimes be found
+ * outside the domain. In this case it is useful to be able to find the
+ * equivalent coordinate inside the domain. This function makes that
+ * possible.
+ *
+ * @param[inout] coord
+ *      The 1D coordinate we want to compute inside the domain.
+ *
+ * @return The equivalent coordinate inside the domain.
+ */
+template <class BSpline>
+KOKKOS_INLINE_FUNCTION void restrict_to_bspline_domain(
+        Coord<typename BSpline::continuous_dimension_type>& coord)
+{
+    if constexpr (BSpline::is_periodic()) {
+        if (coord < ddc::discrete_space<BSpline>().rmin()
+            || coord > ddc::discrete_space<BSpline>().rmax()) {
+            coord -= Kokkos::floor(
+                             (coord - ddc::discrete_space<BSpline>().rmin())
+                             / ddc::discrete_space<BSpline>().length())
+                     * ddc::discrete_space<BSpline>().length();
+        }
+    }
+}
+
+/**
  * @brief Dump the coordinates found on a domain into a span.
  *
  * @param[out] dump_coord The span which will contain the coordinates.

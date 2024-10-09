@@ -12,7 +12,7 @@ The following sections decribe the structures and methods implemented:
         - [Sticking and Coordinate Transformation](#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation) - Mathematical defintion of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation). 
         - [Index transformation](#src_multipatch_connectivity__Interfaces__Index_transformation) - Algorithm of the index transformation in EdgeTransformation. 
         - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`.
-- [Patch locator](#src_multipatch_connectivity__Patch_locator) - Definition of child classes `IPatchLocator` operator to identify the patch where a given physical coordinate is.
+- [Patch locator](#src_multipatch_connectivity__Patch_locator) - Definition of patch locator operators to identify the patch where a given physical coordinate is.
     - [Onion shape geometry ](#src_multipatch_connectivity__Patch_Locator__Global_analytical_invertible_mapping__Onion_shape_geometry) - Definition of `OnionPatchLocator`, a specialisation of `IPatchLocator` for "onion" shape geometries.  
 - [References](#src_multipatch_connectivity__References) - References. 
 - [Contents](#src_multipatch_connectivity__Contents) - List of files in the folder. 
@@ -193,7 +193,7 @@ on the second edge, $`\frac{4}{4} = 1`$.)
 
 
 ## Patch locator
-The `IPatchLocator` is a base class of operators to identify the patch where a given physical coordinate is. 
+The patch locator operators identify the patch where a given physical coordinate is. 
 
 ### Mappings
 On each patch, we define a mapping from the logical domain to the physical domain. 
