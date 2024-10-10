@@ -15,15 +15,15 @@
         - The X edges (eastern/western) of Patch 1 are connected to the northern edges of Patches 2 and 4
         - The X edges (eastern/western) of Patch 5 are connected to the southern edges of Patches 2 and 4
 
-    → → → ↘
-  ↗ 
- ↑     ↙ |  1  |↖ 
- ↑   -----------------
-  ↖   2  |  3  |  4
-    ----------------- ↖
-       ↘ |  5  |↗      ↑
-             ↘        ↗
-                → → →
+    ← ← ← ↖
+  ↙
+ ↓     ↙ |  1  |↖
+ ↓   -----------------
+  ↘   2  |  3  |  4
+    ----------------- ↘
+       ↘ |  5  |↗      ↓
+             ↖        ↙
+                ← ← ←
 */
 #pragma once
 
@@ -151,8 +151,8 @@ using WestEdge
 
 // INTERFACES ------------------------------------------------------------------------------------
 using Patch3InterfaceNorth = Interface<NorthEdge<3>, SouthEdge<1>, true>;
-using Patch3InterfaceSouth = Interface<SouthEdge<3>, NorthEdge<5>, false>;
-using Patch3InterfaceEast = Interface<EastEdge<3>, WestEdge<4>, false>;
+using Patch3InterfaceSouth = Interface<SouthEdge<3>, NorthEdge<5>, true>;
+using Patch3InterfaceEast = Interface<EastEdge<3>, WestEdge<4>, true>;
 using Patch3InterfaceWest = Interface<WestEdge<3>, EastEdge<2>, true>;
 
 using LoopInterface_2_1 = Interface<NorthEdge<2>, WestEdge<1>, false>;

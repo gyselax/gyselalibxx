@@ -126,6 +126,37 @@ TEST(MultipatchConnectivityTest, FindConnections2)
     EXPECT_TRUE((ddc::in_tags_v<EightInterface_2_1, Interfaces_1_2>));
 }
 
+TEST(MultipatchConnectivityTest, GetAllInterfacesAlongDim)
+{
+    using namespace periodic_strips_uniform_2d_9patches;
+    using StartGridNonPeriodic = typename Patch2::Grid2;
+
+    using InterfaceTypeSeqY
+            = Connectivity::template get_all_interfaces_along_direction_t<StartGridNonPeriodic>;
+    static_assert(ddc::type_seq_size_v<InterfaceTypeSeqY> == 4);
+    static_assert((std::is_same_v<
+                   ddc::type_seq_element_t<0, InterfaceTypeSeqY>,
+                   Interface<OutsideEdge, SouthEdge<8>, true>>));
+    static_assert((std::is_same_v<
+                   ddc::type_seq_element_t<1, InterfaceTypeSeqY>,
+                   Interface<NorthEdge<8>, SouthEdge<5>, true>>));
+    static_assert((std::is_same_v<
+                   ddc::type_seq_element_t<2, InterfaceTypeSeqY>,
+                   Interface<NorthEdge<5>, SouthEdge<2>, true>>));
+    static_assert((std::is_same_v<
+                   ddc::type_seq_element_t<3, InterfaceTypeSeqY>,
+                   Interface<NorthEdge<2>, OutsideEdge, true>>));
+
+    using StartGridPeriodic = typename Patch2::Grid1;
+
+    using InterfaceTypeSeqX
+            = Connectivity::template get_all_interfaces_along_direction_t<StartGridPeriodic>;
+    static_assert(ddc::type_seq_size_v<InterfaceTypeSeqX> == 3);
+    static_assert((ddc::in_tags_v<Interface_1_2, InterfaceTypeSeqX>));
+    static_assert((ddc::in_tags_v<Interface_2_3, InterfaceTypeSeqX>));
+    static_assert((ddc::in_tags_v<Interface<EastEdge<3>, WestEdge<1>, true>, InterfaceTypeSeqX>));
+}
+
 TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
 {
     using namespace periodic_strips_uniform_2d_9patches;
@@ -244,6 +275,23 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDimMultipatc
     EXPECT_EQ(std::get<IdxRange<GridY<3>>>(figure_eight_grid), ddc::select<GridY<3>>(idx_range_3));
     EXPECT_EQ(std::get<IdxRange<GridY<1>>>(figure_eight_grid), ddc::select<GridY<1>>(idx_range_1));
     EXPECT_EQ(std::get<IdxRange<GridX<2>>>(figure_eight_grid), ddc::select<GridX<2>>(idx_range_2));
+}
+
+TEST(MultipatchConnectivityTest, GetAllInterfacesAlongFigureOfEightDim)
+{
+    using namespace figure_of_eight_5patches;
+
+    using MiddleGridX = typename Patch3::Grid1;
+
+    using InterfaceTypeSeq
+            = Connectivity::template get_all_interfaces_along_direction_t<MiddleGridX>;
+    static_assert(ddc::type_seq_size_v<InterfaceTypeSeq> == 6);
+    static_assert((ddc::in_tags_v<Interface<EastEdge<3>, WestEdge<4>, true>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<EastEdge<4>, SouthEdge<5>, false>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<NorthEdge<5>, SouthEdge<3>, true>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<NorthEdge<3>, SouthEdge<1>, true>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<NorthEdge<1>, WestEdge<2>, false>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<EastEdge<2>, WestEdge<3>, true>, InterfaceTypeSeq>));
 }
 
 TEST(MultipatchConnectivityDetailsTest, FilterEdges)

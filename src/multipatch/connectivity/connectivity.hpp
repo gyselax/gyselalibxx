@@ -59,6 +59,17 @@ public:
             get_type_seq_connections_t<QueryPatch2>>;
 
     /**
+     * @brief A tool to find all interfaces along a line which passes through the requested grid.
+     *
+     * @tparam Grid1D The grid indicating the direction of interest.
+     */
+    template <class Grid1D>
+    using get_all_interfaces_along_direction_t = collect_interfaces_on_dim_t<
+            find_patch_t<Grid1D, all_patches>,
+            Grid1D,
+            interface_collection>;
+
+    /**
      * @brief A function to return all index ranges which can be used to obtain coordinates
      * along a line which passes through the requested grid.
      *

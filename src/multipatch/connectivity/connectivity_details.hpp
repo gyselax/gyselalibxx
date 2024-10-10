@@ -221,6 +221,35 @@ struct FindInterface<
 };
 
 /**
+ * @brief A class to flip the edges in an interface to ensure that the correct edge comes first.
+ * @tparam InterfaceType The interface being modified.
+ * @tparam FirstEdge The edge which should be first in the interface.
+ */
+template <class InterfaceType, class FirstEdge>
+struct EnforceFirstInterfaceEdge;
+
+/// Specialisation of EnforceFirstInterfaceEdge for an interface which is already correctly arranged.
+template <class FirstEdge, class Edge2, bool Orientations>
+struct EnforceFirstInterfaceEdge<Interface<FirstEdge, Edge2, Orientations>, FirstEdge>
+{
+    /// The interface type
+    using type = Interface<FirstEdge, Edge2, Orientations>;
+};
+
+/// Specialisation of EnforceFirstInterfaceEdge for an interface which needs rearranging.
+template <class FirstEdge, class Edge2, bool Orientations>
+struct EnforceFirstInterfaceEdge<Interface<Edge2, FirstEdge, Orientations>, FirstEdge>
+{
+    /// The interface type
+    using type = Interface<FirstEdge, Edge2, Orientations>;
+};
+
+/// A tool to flip the edges in an interface to ensure that the correct edge comes first.
+template <class InterfaceType, class FirstEdge>
+using enforce_first_interface_edge_t =
+        typename EnforceFirstInterfaceEdge<InterfaceType, FirstEdge>::type;
+
+/**
  * @brief A class to get the opposite edge of a grid line from one of the edges.
  * @tparam EdgeType The start edge connected to a grid line.
  */
@@ -281,6 +310,98 @@ struct AddToTypeSeq<ToInsert, TypeSeq, BackInsert>
 {
     /// The type found by the class.
     using type = ddc::type_seq_merge_t<ddc::detail::TypeSeq<ToInsert>, TypeSeq>;
+};
+
+/**
+ * @brief A class which collects interfaces along a given dimension on a specified direction
+ *          from a starting edge.
+ *
+ * @tparam StartEdge The edge from which the collection should begin.
+ * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
+ * @tparam insert_pos The position where the element should be inserted (back/front).
+ * @tparam FoundInterfaces The interfaces that have been discovered so far along the given
+ *                      dimension and direction.
+ */
+template <
+        class StartEdge,
+        class InterfaceTypeSeq,
+        InsertPosition insert_pos,
+        class FoundInterfaces = ddc::detail::TypeSeq<>,
+        class MatchingEdge = equivalent_edge_t<StartEdge, InterfaceTypeSeq>,
+        bool interface_already_found // Periodic case
+        = ddc::in_tags_v<
+                enforce_first_interface_edge_t<
+                        typename FindInterface<StartEdge, InterfaceTypeSeq>::type,
+                        std::conditional_t<StartEdge::extremity == FRONT, MatchingEdge, StartEdge>>,
+                FoundInterfaces>>
+struct CollectInterfacesAlongDim;
+
+/// Specialisation of CollectGridsAlongDim to iterate recursively over the grids on the dimension.
+template <
+        class StartEdge,
+        class InterfaceTypeSeq,
+        InsertPosition insert_pos,
+        class FoundInterfaces,
+        class MatchingEdge>
+struct CollectInterfacesAlongDim<
+        StartEdge,
+        InterfaceTypeSeq,
+        insert_pos,
+        FoundInterfaces,
+        MatchingEdge,
+        false>
+{
+    /// The new list of interfaces that have been found including the interface from the current patch.
+    using NewInterfaceList = typename AddToTypeSeq<
+            enforce_first_interface_edge_t<
+                    typename FindInterface<StartEdge, InterfaceTypeSeq>::type,
+                    std::conditional_t<StartEdge::extremity == FRONT, MatchingEdge, StartEdge>>,
+            FoundInterfaces,
+            insert_pos>::type;
+    /// The type found by the class.
+    using type = typename CollectInterfacesAlongDim<
+            typename SwapExtremity<MatchingEdge>::type,
+            InterfaceTypeSeq,
+            insert_pos,
+            NewInterfaceList>::type;
+};
+
+/// Specialisation of CollectInterfacesAlongDim to stop when the interface has already been identified (due to periodicity).
+template <
+        class StartEdge,
+        class InterfaceTypeSeq,
+        InsertPosition insert_pos,
+        class FoundInterfaces,
+        class MatchingEdge>
+struct CollectInterfacesAlongDim<
+        StartEdge,
+        InterfaceTypeSeq,
+        insert_pos,
+        FoundInterfaces,
+        MatchingEdge,
+        true>
+{
+    /// The type found by the class.
+    using type = FoundInterfaces;
+};
+
+/// Specialisation of CollectGridsAlongDim to stop when there are no more grids.
+template <class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, class FoundInterfaces>
+struct CollectInterfacesAlongDim<
+        StartEdge,
+        InterfaceTypeSeq,
+        insert_pos,
+        FoundInterfaces,
+        OutsideEdge,
+        false>
+{
+    /// The type found by the class.
+    using type = typename AddToTypeSeq<
+            enforce_first_interface_edge_t<
+                    typename FindInterface<StartEdge, InterfaceTypeSeq>::type,
+                    std::conditional_t<StartEdge::extremity == FRONT, OutsideEdge, StartEdge>>,
+            FoundInterfaces,
+            insert_pos>::type;
 };
 
 /**
@@ -387,6 +508,39 @@ struct CollectAllGridsOnDim
 };
 
 /**
+ * @brief A class which collects all grids along a given dimension in both directions.
+ *
+ * @tparam StartPatch The patch from which the collection should begin.
+ * @tparam Grid1D The first grid to be included (this describes the dimension along which
+ *                  grids are collected).
+ * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
+ */
+template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
+struct CollectAllInterfacesOnDim
+{
+    /**
+     * @brief The type sequence describing all grids found by iterating along this
+     * dimension in the backwards direction.
+     *
+     * This is found by working backward from front (start) of grid inserting each
+     * new grid at the start of the sequence.
+     */
+    using BackwardTypeSeq = typename CollectInterfacesAlongDim<
+            Edge<StartPatch, Grid1D, FRONT>,
+            InterfaceTypeSeq,
+            BackInsert>::type;
+    /// The type found by the class.
+    using type = ddc::type_seq_merge_t<
+            BackwardTypeSeq,
+            // Work forward from back (end) of grid inserting each new grid at the end of the sequence
+            typename CollectInterfacesAlongDim<
+                    Edge<StartPatch, Grid1D, BACK>,
+                    InterfaceTypeSeq,
+                    FrontInsert,
+                    BackwardTypeSeq>::type>;
+};
+
+/**
  * @brief A class to create a type sequence which contains the index range if it can be used to index the grid.
  * @tparam QueryGrid1D The grid which may or may not be present in the index range.
  * @tparam IdxRangeType The index range type being checked.
@@ -468,6 +622,11 @@ using find_associated_interface_t =
 template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
 using collect_grids_on_dim_t = typename connectivity_details::
         CollectAllGridsOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
+
+/// A tool to collect all interfaces along a given line including the specified grid.
+template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
+using collect_interfaces_on_dim_t = typename connectivity_details::
+        CollectAllInterfacesOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
 
 /// A tool to find the first multi-D index range which contains a specific grid.
 template <class QueryGrid1D, class IdxRangeTuple>

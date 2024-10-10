@@ -357,7 +357,9 @@ def search_for_bad_aliases(file):
             msg = ("The name 'Grid' is too general and should be avoided as it implies that the type "
                    "can be multi-D. Please use Grid1D")
             report_error(STYLE, file, linenr, msg)
-        if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx')):
+        # Beginning with verbs is ok as are some specific prefixes
+        valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find')
+        if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
             prefix = 'Multipatch' if 'Multipatch' in a_name else ''
             name = a_name.replace('Multipatch','')
             if 'IdxRange' in a_name:
