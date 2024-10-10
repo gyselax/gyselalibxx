@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['s_5fdensity_1516',['s_density',['../classFluidMoments.html#a51b8fc4fc4530a3cad0836bb997c4c3d',1,'FluidMoments']]],
-  ['s_5ftemperature_1517',['s_temperature',['../classFluidMoments.html#a4648e3f7abc452675a0ed4bdecd59a80',1,'FluidMoments']]],
-  ['s_5fvelocity_1518',['s_velocity',['../classFluidMoments.html#a0e36a0f2a4851525413ad0f033ffe37f',1,'FluidMoments']]],
-  ['singular_5fspline_5fcoef_1519',['singular_spline_coef',['../structPolarSpline.html#a8f45100e4b9b9983843edd05fae6fd60',1,'PolarSpline::singular_spline_coef()'],['../structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e',1,'PolarSplineSpan::singular_spline_coef()'],['../structPolarSplineView.html#a1bb22b7a2d02c40118e23b6239a8d456',1,'PolarSplineView::singular_spline_coef()']]],
-  ['spline_5fcoef_1520',['spline_coef',['../structPolarSpline.html#acbb483cc3e0cf77a84dd877c4e9939c1',1,'PolarSpline::spline_coef()'],['../structPolarSplineSpan.html#a7d2cfa28c1fd76863477755b25df9de4',1,'PolarSplineSpan::spline_coef()'],['../structPolarSplineView.html#ac05a82982fbdeac94eca2c0e8cd14c93',1,'PolarSplineView::spline_coef()']]]
+  ['orientations_5fagree_1579',['orientations_agree',['../structInterface.html#af2dbae0b5ea4505116a20eeb5179e72d',1,'Interface']]],
+  ['outside_5frmax_5fdomain_1580',['outside_rmax_domain',['../classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a6f544a73872e78644e3ba61d3f3450b1',1,'OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt;']]],
+  ['outside_5frmin_5fdomain_1581',['outside_rmin_domain',['../classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#afdb0d90ca61c9ed5d8f6338bf3e7dd98',1,'OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt;']]]
 ];

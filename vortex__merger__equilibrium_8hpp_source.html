@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classVortexMergerEquilibria.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classVortexMergerEquilibria.html">VortexMergerEquilibria</a></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    Mapping <span class="keyword">const</span>&amp; m_mapping;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; m_mapping;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    IdxRangeRTheta <span class="keyword">const</span>&amp; m_grid;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    SplineRThetaBuilder <span class="keyword">const</span>&amp; m_builder;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; m_evaluator;</div>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6">   50</a></span>&#160;    <a class="code" href="classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6">VortexMergerEquilibria</a>(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            SplineRThetaBuilder <span class="keyword">const</span>&amp; builder,</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            SplineRThetaEvaluatorNullBound <span class="keyword">const</span>&amp; evaluator,</div>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        host_t&lt;DFieldMemRTheta&gt; ci(m_grid);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        host_t&lt;Spline2D&gt; rho_coef(idx_range_bsplinesRTheta);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        host_t&lt;Spline2DMem&gt; rho_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; coords(m_grid);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        ddc::for_each(m_grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { coords(irp) = ddc::coordinate(irp); });</div>
@@ -251,6 +251,7 @@ $(document).ready(function(){initNavTree('vortex__merger__equilibrium_8hpp_sourc
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                tau);</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    };</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;};</div>
+<div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition:</b> circular_to_cartesian.hpp:44</div></div>
 <div class="ttc" id="aclassPoissonLikeRHSFunction_html"><div class="ttname"><a href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a></div><div class="ttdoc">Type of right-hand side (rhs) function of the Poisson equation.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:16</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a></div><div class="ttdoc">Define a polar PDE solver for a Poisson-like equation.</div><div class="ttdef"><b>Definition:</b> polarpoissonlikesolver.hpp:39</div></div>
 <div class="ttc" id="aclassVortexMergerEquilibria_html"><div class="ttname"><a href="classVortexMergerEquilibria.html">VortexMergerEquilibria</a></div><div class="ttdoc">Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.</div><div class="ttdef"><b>Definition:</b> vortex_merger_equilibrium.hpp:24</div></div>

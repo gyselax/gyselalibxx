@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extremity_1483',['extremity',['../structEdge.html#ab30ccf4f66cb1a094ab1d771965a9154',1,'Edge']]]
+  ['distributed_5fidx_5franges_5fare_5ffirst_1544',['distributed_idx_ranges_are_first',['../classIMPILayout.html#aab14961802d15d51c8a1a45c7896e64d',1,'IMPILayout']]]
 ];

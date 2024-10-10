@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> print_coordinate(</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        std::ofstream&amp; out_file,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        CoordRTheta coord_rp,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        IdxRangeTheta idx_range_p)</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> r = ddc::get&lt;R&gt;(coord_rp);</div>
@@ -166,7 +166,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> save_feet(</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; idx_range_rp,</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        host_t&lt;FieldRTheta&lt;CoordRTheta&gt;&gt; <span class="keyword">const</span>&amp; feet_coords_rp,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::string <span class="keyword">const</span>&amp; name)</div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> saving_computed(Mapping <span class="keyword">const</span>&amp; mapping, host_t&lt;DFieldRTheta&gt; <span class="keyword">function</span>, std::string <span class="keyword">const</span>&amp; name)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> saving_computed(<a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping, host_t&lt;DFieldRTheta&gt; <span class="keyword">function</span>, std::string <span class="keyword">const</span>&amp; name)</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    IdxRangeRTheta <span class="keyword">const</span> grid = <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(<span class="keyword">function</span>);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    std::ofstream out_file(name, std::ofstream::out);</div>
@@ -210,12 +210,12 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> AdvectionField, <span class="keyword">class</span> Mapping&gt;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; compute_exact_feet_rp(</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; idx_range_rp,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <a class="code" href="classAdvectionField.html">AdvectionField</a> <span class="keyword">const</span>&amp; advection_field,</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordtype">double</span> <span class="keyword">const</span> time)</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;{</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            !std::is_same_v&lt;Mapping, <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineRThetaEvaluatorConstBound&gt;</a>&gt;);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            !std::is_same_v&lt;<a class="code" href="classCircularToCartesian.html">Mapping</a>, <a class="code" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineRThetaEvaluatorConstBound&gt;</a>&gt;);</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords_rp(idx_range_rp);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    CoordXY <span class="keyword">const</span> coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));</div>
@@ -238,7 +238,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping, <span class="keyword">class</span> Function&gt;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keywordtype">double</span> compute_difference_L2_norm(</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        host_t&lt;DFieldRTheta&gt; allfdistribu_advected,</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        Function&amp; function_to_be_advected,</div>
@@ -280,13 +280,13 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">template</span> &lt;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keyword">class </span>Mapping,</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keyword">class </span><a class="code" href="classCircularToCartesian.html">Mapping</a>,</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keyword">class </span>AnalyticalMapping,</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keyword">class </span>TimeStepper,</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keyword">class </span>IdxRangeAdvection,</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keyword">class </span>Simulation&gt;</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keywordtype">void</span> simulate(</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        AnalyticalMapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        TimeStepper <span class="keyword">const</span>&amp; time_stepper,</div>
@@ -457,7 +457,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping, <span class="keyword">class</span> AnalyticalMapping, <span class="keyword">class</span> TimeStepper, <span class="keyword">class</span> IdxRangeAdvection&gt;</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="keywordtype">void</span> simulate_the_3_simulations(</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;        Mapping <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;        AnalyticalMapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
 <div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;        IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;        TimeStepper&amp; time_stepper,</div>
@@ -551,6 +551,7 @@ $(document).ready(function(){initNavTree('advection__simulation__utils_8hpp_sour
 <div class="ttc" id="aclassAdvectionField_html"><div class="ttname"><a href="classAdvectionField.html">AdvectionField</a></div><div class="ttdoc">Base class for the advection field for the tests of the 2D polar advection operator.</div><div class="ttdef"><b>Definition:</b> test_cases.hpp:190</div></div>
 <div class="ttc" id="aclassAdvectionField_html_ab0c285eac8fe3ebe600c740149dbdd8c"><div class="ttname"><a href="classAdvectionField.html#ab0c285eac8fe3ebe600c740149dbdd8c">AdvectionField::exact_feet</a></div><div class="ttdeci">virtual CoordXY exact_feet(CoordXY coord, double t) const =0</div><div class="ttdoc">Get the characteristic feet in the physical index range.</div></div>
 <div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition:</b> bsl_advection_rp.hpp:60</div></div>
+<div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition:</b> circular_to_cartesian.hpp:44</div></div>
 <div class="ttc" id="aclassDecentredRotationSimulation_html"><div class="ttname"><a href="classDecentredRotationSimulation.html">DecentredRotationSimulation</a></div><div class="ttdoc">Simulation of a decentred rotated elipse-type function.</div><div class="ttdef"><b>Definition:</b> test_cases.hpp:571</div></div>
 <div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition:</b> discrete_to_cartesian.hpp:40</div></div>
 <div class="ttc" id="aclassPreallocatableSplineInterpolatorRTheta_html"><div class="ttname"><a href="classPreallocatableSplineInterpolatorRTheta.html">PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;</a></div></div>

@@ -121,7 +121,7 @@ Inheritance diagram for BslExplicitPredCorrRTheta&lt; Mapping, IdxRangeAdvection
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae36c44a957553444d4bfa2c806671a1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslExplicitPredCorrRTheta.html#ae36c44a957553444d4bfa2c806671a1b">BslExplicitPredCorrRTheta</a> (IdxRangeAdvection const &amp;advection_idx_range, Mapping const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, IdxRangeAdvection &gt;, Mapping &gt; &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;poisson_solver, SplineRThetaEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
+<tr class="memitem:ae36c44a957553444d4bfa2c806671a1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslExplicitPredCorrRTheta.html#ae36c44a957553444d4bfa2c806671a1b">BslExplicitPredCorrRTheta</a> (IdxRangeAdvection const &amp;advection_idx_range, <a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, IdxRangeAdvection &gt;, <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt; &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;poisson_solver, SplineRThetaEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
 <tr class="memdesc:ae36c44a957553444d4bfa2c806671a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslExplicitPredCorrRTheta.html" title="A second order explicit predictor-corrector for the Vlasov-Poisson equations.">BslExplicitPredCorrRTheta</a>.  <a href="classBslExplicitPredCorrRTheta.html#ae36c44a957553444d4bfa2c806671a1b">More...</a><br /></td></tr>
 <tr class="separator:ae36c44a957553444d4bfa2c806671a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31bbe7ba82d5161f1771a78d5f8ae495"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslExplicitPredCorrRTheta.html#a31bbe7ba82d5161f1771a78d5f8ae495">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const</td></tr>
@@ -182,7 +182,7 @@ template&lt;class Mapping , class IdxRangeAdvection &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; Mapping, IdxRangeAdvection &gt;::<a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a> </td>
+          <td class="memname"><a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, IdxRangeAdvection &gt;::<a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a> </td>
           <td>(</td>
           <td class="paramtype">IdxRangeAdvection const &amp;&#160;</td>
           <td class="paramname"><em>advection_idx_range</em>, </td>
@@ -190,13 +190,13 @@ template&lt;class Mapping , class IdxRangeAdvection &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Mapping const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, IdxRangeAdvection &gt;, Mapping &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; <a class="el" href="classEuler.html">EulerMethod</a>, IdxRangeAdvection &gt;, <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>advection_solver</em>, </td>
         </tr>
         <tr>
@@ -272,7 +272,7 @@ template&lt;class Mapping , class IdxRangeAdvection &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;DFieldRTheta&gt; <a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; Mapping, IdxRangeAdvection &gt;::operator() </td>
+          <td class="memname">host_t&lt;DFieldRTheta&gt; <a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, IdxRangeAdvection &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>

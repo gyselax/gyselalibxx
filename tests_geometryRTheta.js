@@ -34,7 +34,7 @@ var tests_geometryRTheta =
             [ "Onion shape geometry", "src_multipatch_connectivity.html#autotoc_md72", null ]
           ] ],
           [ "Types", "src_multipatch_data_types.html#autotoc_md73", null ],
-          [ "Example of use", "src_multipatch_spline.html#autotoc_md74", null ],
+          [ "Example of use of MultipatchSplineBuilder", "src_multipatch_spline.html#autotoc_md74", null ],
           [ "- The mapping and the domain used for the advection:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md81", null ],
           [ "- The time integration method used to solve the characteristic equation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md82", null ],
           [ "- The test simulation:", "tests_geometryRTheta_advection_2d_rp.html#autotoc_md83", null ]

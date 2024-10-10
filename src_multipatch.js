@@ -11,6 +11,9 @@ var src_multipatch =
       [ "MultipatchType", "src_multipatch_data_types.html#src_multipatch_data_types__MultipatchType", null ]
     ] ],
     [ "Spline on multipatch geometry", "src_multipatch_spline.html", [
-      [ "Spline builder", "src_multipatch_spline.html#src_multipatch_spline__Spline_builder", null ]
+      [ "Multipatch spline builder", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_builder", null ],
+      [ "Multipatch spline evaluator", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_evaluator", null ],
+      [ "Multipatch extrapolation rules", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_extrapolation_rules", null ],
+      [ "Contents", "src_multipatch_spline.html#src_multipatch_spline__Contents", null ]
     ] ]
 ];

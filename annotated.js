@@ -298,6 +298,8 @@ var annotated =
     [ "MultipatchConnectivity", "classMultipatchConnectivity.html", "classMultipatchConnectivity" ],
     [ "MultipatchSplineBuilder", "classMultipatchSplineBuilder.html", "classMultipatchSplineBuilder" ],
     [ "MultipatchSplineBuilder2D", "classMultipatchSplineBuilder2D.html", "classMultipatchSplineBuilder2D" ],
+    [ "MultipatchSplineEvaluator2D", "classMultipatchSplineEvaluator2D.html", "classMultipatchSplineEvaluator2D" ],
+    [ "MultipatchSplineOnionShapeTest", "classMultipatchSplineOnionShapeTest.html", "classMultipatchSplineOnionShapeTest" ],
     [ "MultipatchType", "classMultipatchType.html", "classMultipatchType" ],
     [ "NonAnalyticalJacobian", "classNonAnalyticalJacobian.html", "classNonAnalyticalJacobian" ],
     [ "NoPerturbInitialization", "classNoPerturbInitialization.html", "classNoPerturbInitialization" ],

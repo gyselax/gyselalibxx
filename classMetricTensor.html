@@ -120,7 +120,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a393526b8a48b0a5841351e11c7cc73f8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">MetricTensor</a> (Mapping mapping)</td></tr>
+<tr class="memitem:a393526b8a48b0a5841351e11c7cc73f8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">MetricTensor</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> mapping)</td></tr>
 <tr class="memdesc:a393526b8a48b0a5841351e11c7cc73f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the metric tensor operator.  <a href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">More...</a><br /></td></tr>
 <tr class="separator:a393526b8a48b0a5841351e11c7cc73f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa4a1d1ac34eb5fc3a2464d3844151fe"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">operator()</a> (<a class="el" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> &amp;matrix, PositionCoordinate const &amp;coord) const</td></tr>
@@ -158,9 +158,9 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; Mapping, PositionCoordinate &gt;::<a class="el" href="classMetricTensor.html">MetricTensor</a> </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::<a class="el" href="classMetricTensor.html">MetricTensor</a> </td>
           <td>(</td>
-          <td class="paramtype">Mapping&#160;</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a>&#160;</td>
           <td class="paramname"><em>mapping</em></td><td>)</td>
           <td></td>
         </tr>
@@ -195,7 +195,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; Mapping, PositionCoordinate &gt;::operator() </td>
+          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>, </td>
@@ -243,7 +243,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; Mapping, PositionCoordinate &gt;::inverse </td>
+          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::inverse </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>, </td>
@@ -290,7 +290,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION std::array&lt;double, 2&gt; <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; Mapping, PositionCoordinate &gt;::to_covariant </td>
+          <td class="memname">KOKKOS_FUNCTION std::array&lt;double, 2&gt; <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::to_covariant </td>
           <td>(</td>
           <td class="paramtype">std::array&lt; double, 2 &gt; const &amp;&#160;</td>
           <td class="paramname"><em>contravariant_vector</em>, </td>

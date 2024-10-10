@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('src_multipatch_connectivity.html','');
 </li>
 </ul>
 </li>
-<li><a href="#src_multipatch_connectivity__Patch_locator">Patch locator</a> - Definition of child classes <code>IPatchLocator</code> operator to identify the patch where a given physical coordinate is.<ul>
+<li><a href="#src_multipatch_connectivity__Patch_locator">Patch locator</a> - Definition of patch locator operators to identify the patch where a given physical coordinate is.<ul>
 <li><a href="#src_multipatch_connectivity__Patch_Locator__Global_analytical_invertible_mapping__Onion_shape_geometry">Onion shape geometry</a> - Definition of <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code>, a specialisation of <code>IPatchLocator</code> for "onion" shape geometries. <br  />
 </li>
 </ul>
@@ -212,7 +212,7 @@ Conformity of the meshes</h4>
 <p>If the grids are uniform, we know that the index steps between the conforming indices are regular. Moreover the index steps are given by the number of cells divided by the greatest common divisor of the two numbers of cells. (E.g. if the first example was on uniform grids: \(\gcd(8,4) = 4\). On the first edge, the index step is \(\frac{8}{4} = 2\) and on the second edge, \(\frac{4}{4} = 1\).)</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__Patch_locator"></a>
 Patch locator</h1>
-<p>The <code>IPatchLocator</code> is a base class of operators to identify the patch where a given physical coordinate is.</p>
+<p>The patch locator operators identify the patch where a given physical coordinate is.</p>
 <h3><a class="anchor" id="autotoc_md70"></a>
 Mappings</h3>
 <p>On each patch, we define a mapping from the logical domain to the physical domain. </p><p class="formulaDsp">

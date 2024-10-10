@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['distributed_5fidx_5franges_5fare_5ffirst_1482',['distributed_idx_ranges_are_first',['../classIMPILayout.html#aab14961802d15d51c8a1a45c7896e64d',1,'IMPILayout']]]
+  ['continuity_1543',['continuity',['../classPolarBSplines.html#ae187bdd3ed2fd780c51fa644c45386a9',1,'PolarBSplines::continuity()'],['../classPolarSplineEvaluator.html#a8c79ae1222acad5fdce6d148582c67ad',1,'PolarSplineEvaluator::continuity()']]]
 ];
