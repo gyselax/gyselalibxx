@@ -120,15 +120,15 @@ $(document).ready(function(){initNavTree('5patches__figure__of__eight_8hpp_sourc
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">        - The X edges (eastern/western) of Patch 1 are connected to the northern edges of Patches 2 and 4</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">        - The X edges (eastern/western) of Patch 5 are connected to the southern edges of Patches 2 and 4</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    → → → ↘</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  ↗ </span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> ↑     ↙ |  1  |↖ </span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> ↑   -----------------</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  ↖   2  |  3  |  4</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    ----------------- ↖</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">       ↘ |  5  |↗      ↑</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">             ↘        ↗</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">                → → →</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    ← ← ← ↖</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  ↙</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> ↓     ↙ |  1  |↖</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> ↓   -----------------</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  ↘   2  |  3  |  4</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    ----------------- ↘</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">       ↘ |  5  |↗      ↓</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">             ↖        ↙</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">                ← ← ←</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
@@ -224,8 +224,8 @@ $(document).ready(function(){initNavTree('5patches__figure__of__eight_8hpp_sourc
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">// INTERFACES ------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">Patch3InterfaceNorth</a> = <a class="code" href="structInterface.html">Interface&lt;NorthEdge&lt;3&gt;</a>, <a class="code" href="structEdge.html">SouthEdge&lt;1&gt;</a>, <span class="keyword">true</span>&gt;;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">Patch3InterfaceSouth</a> = <a class="code" href="structInterface.html">Interface&lt;SouthEdge&lt;3&gt;</a>, <a class="code" href="structEdge.html">NorthEdge&lt;5&gt;</a>, <span class="keyword">false</span>&gt;;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">Patch3InterfaceEast</a> = <a class="code" href="structInterface.html">Interface&lt;EastEdge&lt;3&gt;</a>, <a class="code" href="structEdge.html">WestEdge&lt;4&gt;</a>, <span class="keyword">false</span>&gt;;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">Patch3InterfaceSouth</a> = <a class="code" href="structInterface.html">Interface&lt;SouthEdge&lt;3&gt;</a>, <a class="code" href="structEdge.html">NorthEdge&lt;5&gt;</a>, <span class="keyword">true</span>&gt;;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">Patch3InterfaceEast</a> = <a class="code" href="structInterface.html">Interface&lt;EastEdge&lt;3&gt;</a>, <a class="code" href="structEdge.html">WestEdge&lt;4&gt;</a>, <span class="keyword">true</span>&gt;;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">Patch3InterfaceWest</a> = <a class="code" href="structInterface.html">Interface&lt;WestEdge&lt;3&gt;</a>, <a class="code" href="structEdge.html">EastEdge&lt;2&gt;</a>, <span class="keyword">true</span>&gt;;</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">using</span> <a class="code" href="structInterface.html">LoopInterface_2_1</a> = <a class="code" href="structInterface.html">Interface&lt;NorthEdge&lt;2&gt;</a>, <a class="code" href="structEdge.html">WestEdge&lt;1&gt;</a>, <span class="keyword">false</span>&gt;;</div>

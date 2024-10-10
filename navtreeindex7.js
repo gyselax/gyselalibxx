@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"src_geometryXVx_poisson.html":[11,7,4],
 "src_geometryXVx_poisson.html#src_geometryXVx_poisson__Charge_Density":[11,7,4,0],
 "src_geometryXVx_poisson.html#src_geometryXVx_poisson__Poisson_Solver":[11,7,4,1],
 "src_geometryXVx_rhs.html":[11,7,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "structonion__shape__uniform__2d__2patches_1_1R.html":[15,9,0],
 "structonion__shape__uniform__2d__2patches_1_1Theta.html":[15,9,1],
 "structperiodic__strips__uniform__2d__9patches_1_1BSplinesX.html":[15,10,4],
-"structperiodic__strips__uniform__2d__9patches_1_1BSplinesY.html":[15,10,5],
-"structperiodic__strips__uniform__2d__9patches_1_1GridX.html":[15,10,2]
+"structperiodic__strips__uniform__2d__9patches_1_1BSplinesY.html":[15,10,5]
 };

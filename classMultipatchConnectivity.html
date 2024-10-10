@@ -137,6 +137,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="memitem:a2e53e4b857d0861bfe271be891c60f50"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50">find_connections_t</a> = ddcHelper::type_seq_intersection_t&lt; <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt; QueryPatch1 &gt;, <a class="el" href="classMultipatchConnectivity.html#a4a3c042b78101bb31a9402fb6cb24f4b">get_type_seq_connections_t</a>&lt; QueryPatch2 &gt; &gt;</td></tr>
 <tr class="memdesc:a2e53e4b857d0861bfe271be891c60f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find all interfaces linking 2 patches.  <a href="classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50">More...</a><br /></td></tr>
 <tr class="separator:a2e53e4b857d0861bfe271be891c60f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3ca501f45f19a8e38724147f4b0b97"><td class="memTemplParams" colspan="2">template&lt;class Grid1D &gt; </td></tr>
+<tr class="memitem:a9e3ca501f45f19a8e38724147f4b0b97"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchConnectivity.html#a9e3ca501f45f19a8e38724147f4b0b97">get_all_interfaces_along_direction_t</a> = collect_interfaces_on_dim_t&lt; find_patch_t&lt; Grid1D, <a class="el" href="classMultipatchConnectivity.html#a0683fbe5d61d4239ea8586a70a1305e7">all_patches</a> &gt;, Grid1D, <a class="el" href="classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c">interface_collection</a> &gt;</td></tr>
+<tr class="memdesc:a9e3ca501f45f19a8e38724147f4b0b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tool to find all interfaces along a line which passes through the requested grid.  <a href="classMultipatchConnectivity.html#a9e3ca501f45f19a8e38724147f4b0b97">More...</a><br /></td></tr>
+<tr class="separator:a9e3ca501f45f19a8e38724147f4b0b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -234,6 +238,32 @@ template&lt;class QueryPatch1 , class QueryPatch2 &gt; </div>
   <table class="tparams">
     <tr><td class="paramname">QueryPatch1</td><td>The first patch. </td></tr>
     <tr><td class="paramname">QueryPatch2</td><td>The second patch. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9e3ca501f45f19a8e38724147f4b0b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e3ca501f45f19a8e38724147f4b0b97">&#9670;&nbsp;</a></span>get_all_interfaces_along_direction_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... Interfaces&gt; </div>
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classMultipatchConnectivity.html">MultipatchConnectivity</a>&lt; Interfaces &gt;::<a class="el" href="classMultipatchConnectivity.html#a9e3ca501f45f19a8e38724147f4b0b97">get_all_interfaces_along_direction_t</a> =  collect_interfaces_on_dim_t&lt; find_patch_t&lt;Grid1D, <a class="el" href="classMultipatchConnectivity.html#a0683fbe5d61d4239ea8586a70a1305e7">all_patches</a>&gt;, Grid1D, <a class="el" href="classMultipatchConnectivity.html#abde3a24c33217daec8074c6ab527f84c">interface_collection</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A tool to find all interfaces along a line which passes through the requested grid. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Grid1D</td><td>The grid indicating the direction of interest. </td></tr>
   </table>
   </dd>
 </dl>
