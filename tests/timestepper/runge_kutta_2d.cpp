@@ -53,7 +53,7 @@ public:
     using IdxRangeY = IdxRange<GridY>;
     using IdxXY = Idx<GridX, GridY>;
     using IdxRangeXY = IdxRange<GridX, GridY>;
-    using AdvectionFieldMem = VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>;
+    using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
             RK2<AdvectionFieldMem>,
@@ -87,8 +87,8 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     using IdxRangeXY = typename TestFixture::IdxRangeXY;
     using RungeKutta = typename TestFixture::RungeKutta;
     using AdvectionFieldMem = typename TestFixture::AdvectionFieldMem;
-    using AdvectionField = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
-    using ConstAdvectionField = VectorConstField<double, IdxRangeXY, NDTag<X, Y>>;
+    using AdvectionField = host_t<VectorField<double, IdxRangeXY, NDTag<X, Y>>>;
+    using ConstAdvectionField = host_t<VectorConstField<double, IdxRangeXY, NDTag<X, Y>>>;
 
     CoordX x_min(-1.0);
     CoordX x_max(1.0);

@@ -13,7 +13,8 @@ template <
         class ElementType,
         class IdxRangeType,
         class,
-        class Allocator = ddc::HostAllocator<ElementType>>
+        class Allocator
+        = ddc::KokkosAllocator<ElementType, Kokkos::DefaultExecutionSpace::memory_space>>
 class VectorFieldMem;
 
 

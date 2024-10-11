@@ -5,6 +5,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -26,7 +27,7 @@ using Idx0D = Idx<>;
 using IdxStep0D = IdxStep<>;
 using IdxRange0D = IdxRange<>;
 
-using DVectorFieldMem0D = VectorFieldMem<double, IdxRange0D, Direction>;
+using DVectorFieldMem0D = host_t<VectorFieldMem<double, IdxRange0D, Direction>>;
 
 struct GridX
 {
@@ -35,11 +36,11 @@ using IdxX = Idx<GridX>;
 using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
-using DVectorFieldMemX = VectorFieldMem<double, IdxRangeX, Direction>;
-using DVectorFieldX = VectorField<double, IdxRangeX, Direction>;
-using DVectorConstFieldX = VectorField<double const, IdxRangeX, Direction>;
+using DVectorFieldMemX = host_t<VectorFieldMem<double, IdxRangeX, Direction>>;
+using DVectorFieldX = host_t<VectorField<double, IdxRangeX, Direction>>;
+using DVectorConstFieldX = host_t<VectorField<double const, IdxRangeX, Direction>>;
 using DVectorConstFieldSliceX
-        = VectorField<double const, IdxRangeX, Direction, std::experimental::layout_stride>;
+        = host_t<VectorField<double const, IdxRangeX, Direction, std::experimental::layout_stride>>;
 
 
 struct GridY
@@ -49,9 +50,9 @@ using IdxY = Idx<GridY>;
 using IdxStepY = IdxStep<GridY>;
 using IdxRangeY = IdxRange<GridY>;
 
-using DVectorFieldMemY = VectorFieldMem<double, IdxRangeY, Direction>;
-using DVectorFieldY = VectorField<double, IdxRangeY, Direction>;
-using DVectorConstFieldY = VectorField<double const, IdxRangeY, Direction>;
+using DVectorFieldMemY = host_t<VectorFieldMem<double, IdxRangeY, Direction>>;
+using DVectorFieldY = host_t<VectorField<double, IdxRangeY, Direction>>;
+using DVectorConstFieldY = host_t<VectorField<double const, IdxRangeY, Direction>>;
 
 
 struct GridZ
@@ -66,17 +67,17 @@ using IdxXY = Idx<GridX, GridY>;
 using IdxStepXY = IdxStep<GridX, GridY>;
 using IdxRangeXY = IdxRange<GridX, GridY>;
 
-using DVectorFieldMemXY = VectorFieldMem<double, IdxRangeXY, Direction>;
-using DVectorConstFieldXY = VectorField<double const, IdxRangeXY, Direction>;
-using DVectorConstFieldSliceXY
-        = VectorField<double const, IdxRangeXY, Direction, std::experimental::layout_stride>;
+using DVectorFieldMemXY = host_t<VectorFieldMem<double, IdxRangeXY, Direction>>;
+using DVectorConstFieldXY = host_t<VectorField<double const, IdxRangeXY, Direction>>;
+using DVectorConstFieldSliceXY = host_t<
+        VectorField<double const, IdxRangeXY, Direction, std::experimental::layout_stride>>;
 
 using IdxYX = Idx<GridY, GridX>;
 using IdxStepYX = IdxStep<GridY, GridX>;
 using IdxRangeYX = IdxRange<GridY, GridX>;
 
-using DVectorFieldMemYX = VectorFieldMem<double, IdxRangeYX, Direction>;
-using DVectorConstFieldYX = VectorField<double const, IdxRangeYX, Direction>;
+using DVectorFieldMemYX = host_t<VectorFieldMem<double, IdxRangeYX, Direction>>;
+using DVectorConstFieldYX = host_t<VectorField<double const, IdxRangeYX, Direction>>;
 
 
 static Idx0D constexpr lbound_0d {};
@@ -600,7 +601,7 @@ TEST(VectorField2DTest, DeepcopyReordered)
         }
     }
     DVectorFieldMemYX field2_alloc(ddc::select<GridY, GridX>(get_idx_range(field)));
-    VectorField<double, IdxRangeXY, Direction, std::experimental::layout_left>
+    host_t<VectorField<double, IdxRangeXY, Direction, std::experimental::layout_left>>
             field2(get_idx_range(field),
                    field2_alloc.get<Tag1>().data_handle(),
                    field2_alloc.get<Tag2>().data_handle());

@@ -199,7 +199,8 @@ public:
             host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k(grid);
             host_t<DVectorFieldMemRTheta<X, Y>> advection_field_k_tot(grid);
 
-            VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_k(get_spline_idx_range(m_builder));
+            host_t<VectorSplineCoeffsMem2D<X, Y>> advection_field_coefs_k(
+                    get_spline_idx_range(m_builder));
             m_builder(
                     ddcHelper::get<X>(advection_field_coefs_k),
                     ddcHelper::get<X>(get_const_field(advection_field)));

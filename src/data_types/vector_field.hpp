@@ -10,7 +10,7 @@ template <
         class IdxRangeType,
         class NDTag,
         class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::DefaultHostExecutionSpace::memory_space>
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class VectorField;
 
 template <
@@ -352,6 +352,6 @@ template <
         class IdxRangeType,
         class NDTag,
         class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::DefaultHostExecutionSpace::memory_space>
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 using VectorConstField
         = VectorField<const ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;
