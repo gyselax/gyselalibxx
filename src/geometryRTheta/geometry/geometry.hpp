@@ -122,7 +122,7 @@ struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_typ
 // --- Operators
 using SplineRThetaBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesR,
         BSplinesTheta,
         GridR,
@@ -137,7 +137,7 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
 
 using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesR,
         BSplinesTheta,
         GridR,
@@ -151,7 +151,7 @@ using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
 
 using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesR,
         BSplinesTheta,
         GridR,
@@ -209,10 +209,7 @@ using FieldTheta = Field<ElementType, IdxRangeTheta>;
 // Equivalent to host_t<Field<ElementType, IdxRangeRTheta>> but used for type deductions
 template <class ElementType>
 using FieldRTheta
-        = Field<ElementType,
-                IdxRangeRTheta,
-                std::experimental::layout_right,
-                Kokkos::DefaultHostExecutionSpace::memory_space>;
+        = Field<ElementType, IdxRangeRTheta, std::experimental::layout_right, Kokkos::HostSpace>;
 
 using DFieldR = FieldR<double>;
 using DFieldTheta = FieldTheta<double>;

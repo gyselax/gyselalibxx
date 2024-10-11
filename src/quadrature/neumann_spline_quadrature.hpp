@@ -78,9 +78,7 @@ neumann_spline_quadrature_coefficients_1d(
     // Since spline builder quadrature coeffs are not available on device, need host allocated builder.
     // See https://github.com/CExA-project/ddc/issues/598
     static_assert(
-            (std::is_same_v<
-                    typename SplineBuilder::memory_space,
-                    typename Kokkos::DefaultHostExecutionSpace::memory_space>),
+            (std::is_same_v<typename SplineBuilder::memory_space, Kokkos::HostSpace>),
             "SplineBuilder must be host allocated.");
 
     assert(idx_range.size()

@@ -109,7 +109,7 @@ void launch_tests(
 {
     using SplineRBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesR,
             GridR,
             ddc::BoundCond::GREVILLE, // boundary at r=0
@@ -118,7 +118,7 @@ void launch_tests(
             GridR>;
     using SplinePBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesTheta,
             GridTheta,
             ddc::BoundCond::PERIODIC,

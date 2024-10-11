@@ -167,7 +167,7 @@ using SplineXEvaluator_1d = ddc::SplineEvaluator<
         GridX>;
 using SplineVxBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesVx,
         GridVx,
         SplineVxBoundary,
@@ -176,7 +176,7 @@ using SplineVxBuilder_1d = ddc::SplineBuilder<
         GridVx>;
 using SplineVxEvaluator_1d = ddc::SplineEvaluator<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesVx,
         GridVx,
         ddc::ConstantExtrapolationRule<Vx>,

@@ -31,7 +31,7 @@ struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 
 using SplineXBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesX,
         GridX,
         SplineXBoundary,
@@ -123,7 +123,7 @@ double compute_error(int n_elems)
     using GridY = typename ComputeErrorTraits<N>::GridY;
     using SplineYBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesY,
             GridY,
             ddc::BoundCond::HERMITE,

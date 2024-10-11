@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <ddc/ddc.hpp>
@@ -18,7 +19,7 @@ public:
     /// The type of the 2D Spline Evaluator used by this class
     using evaluator_type = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesR,
             BSplinesTheta,
             GridR,

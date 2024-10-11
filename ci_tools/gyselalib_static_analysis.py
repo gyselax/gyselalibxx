@@ -631,9 +631,16 @@ def check_exec_space_usage(file):
                             elif 'HostAllocator' in args[-1]:
                                 attribs['exec_space'] = 'DefaultHostExecutionSpace'
                             else:
-                                attribs['exec_space'] = args[-1].split(',')[-1].strip(' >')
+                                space = args[-1].split(',')[-1].strip(' >')
+                                if space == 'Kokkos :: HostSpace':
+                                    attribs['exec_space'] = 'DefaultHostExecutionSpace'
+                                else:
+                                    attribs['exec_space'] = space
                         elif 'Mem' not in type_descr and len(args) > 3:
-                            attribs['exec_space'] = args[-1]
+                            if args[-1].strip() == 'Kokkos :: HostSpace':
+                                attribs['exec_space'] = 'DefaultHostExecutionSpace'
+                            else:
+                                attribs['exec_space'] = args[-1]
                         else:
                             attribs['exec_space'] = 'DefaultExecutionSpace'
                     else:

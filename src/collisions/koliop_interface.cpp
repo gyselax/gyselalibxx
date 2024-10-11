@@ -116,7 +116,7 @@ template <typename Extent>
 using UHL = Kokkos::View<
         Extent,
         Kokkos::LayoutLeft,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::Restrict>>;
 
 void DoCombMatComputation(MDL<double[6][6]>& comb_mat)

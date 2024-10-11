@@ -228,7 +228,7 @@ using SplineVyEvaluator = ddc::SplineEvaluator<
 
 using SplineVxBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesVx,
         GridVx,
         SplineVxBoundary,
@@ -237,7 +237,7 @@ using SplineVxBuilder_1d = ddc::SplineBuilder<
         GridVx>;
 using SplineVyBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesVy,
         GridVy,
         SplineVyBoundary,

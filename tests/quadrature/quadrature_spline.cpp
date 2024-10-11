@@ -49,7 +49,7 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
 
     using SplineXBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesX,
             GridX,
             SplineXBoundary,
@@ -105,7 +105,7 @@ double compute_error(int n_elems)
     auto constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
     using SplineYBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesY,
             GridY,
             SplineYBoundary,

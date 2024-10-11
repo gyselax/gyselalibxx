@@ -117,7 +117,7 @@ struct GridMu : NonUniformGridBase<Mu>
 
 using SplineVparBuilder_1d = ddc::SplineBuilder<
         Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        Kokkos::HostSpace,
         BSplinesVpar,
         GridVpar,
         SplineVparBoundary,

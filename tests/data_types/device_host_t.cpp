@@ -104,10 +104,7 @@ TEST(MemorySpace, VectorFieldOnDeviceT)
 TEST(MemorySpace, FieldMemOnHostT)
 {
     host_t<FieldMemX<double>> field_test_alloc(idx_range_x);
-    DFieldMem<
-            IdxRangeX,
-            ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
-            field_alloc(idx_range_x);
+    DFieldMem<IdxRangeX, ddc::KokkosAllocator<double, Kokkos::HostSpace>> field_alloc(idx_range_x);
     EXPECT_TRUE(typeid(field_test_alloc) == typeid(field_alloc));
 }
 
@@ -116,10 +113,8 @@ TEST(MemorySpace, FieldOnHostT)
 {
     host_t<FieldMemX<double>> field_test_alloc(idx_range_x);
     host_t<FieldX<double>> field_test = get_field(field_test_alloc);
-    host_t<DFieldMem<
-            IdxRangeX,
-            ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>>
-            field_alloc(idx_range_x);
+    host_t<DFieldMem<IdxRangeX, ddc::KokkosAllocator<double, Kokkos::HostSpace>>> field_alloc(
+            idx_range_x);
     host_t<DField<IdxRangeX>> field = get_field(field_alloc);
     EXPECT_TRUE(typeid(field_test) == typeid(field));
 }
@@ -128,11 +123,7 @@ TEST(MemorySpace, FieldOnHostT)
 TEST(MemorySpace, VectorFieldMemOnHostT)
 {
     host_t<VectorFieldMemX<double>> vector_field_test_alloc(idx_range_x);
-    VectorFieldMem<
-            double,
-            IdxRangeX,
-            Direction,
-            ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
+    VectorFieldMem<double, IdxRangeX, Direction, ddc::KokkosAllocator<double, Kokkos::HostSpace>>
             vector_field_alloc(idx_range_x);
     EXPECT_TRUE(typeid(vector_field_test_alloc) == typeid(vector_field_alloc));
 }
@@ -142,11 +133,7 @@ TEST(MemorySpace, VectorFieldOnHostT)
 {
     host_t<VectorFieldMemX<double>> vector_field_test_alloc(idx_range_x);
     host_t<VectorFieldX<double>> vector_field_test = get_field(vector_field_test_alloc);
-    VectorFieldMem<
-            double,
-            IdxRangeX,
-            Direction,
-            ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>
+    VectorFieldMem<double, IdxRangeX, Direction, ddc::KokkosAllocator<double, Kokkos::HostSpace>>
             vector_field_alloc(idx_range_x);
     VectorField vector_field = get_field(vector_field_alloc);
     EXPECT_TRUE(typeid(vector_field_test) == typeid(vector_field));

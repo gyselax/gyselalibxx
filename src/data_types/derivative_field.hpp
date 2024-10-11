@@ -16,7 +16,7 @@ template <
         class ElementType,
         class SupportType,
         class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::DefaultHostExecutionSpace::memory_space>
+        class MemorySpace = Kokkos::HostSpace>
 class DerivField;
 
 template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>

@@ -27,10 +27,7 @@
 template <class IdxRange>
 double compute_L1_norm(
         host_t<Quadrature<IdxRange>> quadrature,
-        Field<double,
-              IdxRange,
-              std::experimental::layout_right,
-              Kokkos::DefaultHostExecutionSpace::memory_space> function)
+        Field<double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace> function)
 {
     using Idx = typename IdxRange::discrete_element_type;
     return quadrature(
@@ -55,10 +52,7 @@ double compute_L1_norm(
 template <class IdxRange>
 double compute_L2_norm(
         host_t<Quadrature<IdxRange>> quadrature,
-        Field<double,
-              IdxRange,
-              std::experimental::layout_right,
-              Kokkos::DefaultHostExecutionSpace::memory_space> function)
+        Field<double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace> function)
 {
     using Idx = typename IdxRange::discrete_element_type;
     return std::sqrt(quadrature(
@@ -95,10 +89,7 @@ double compute_L2_norm(
 template <class Mapping, class... IDim>
 host_t<FieldMem<double, IdxRange<IDim...>>> compute_coeffs_on_mapping(
         Mapping& mapping,
-        FieldMem<
-                double,
-                IdxRange<IDim...>,
-                ddc::KokkosAllocator<double, Kokkos::DefaultHostExecutionSpace::memory_space>>&&
+        FieldMem<double, IdxRange<IDim...>, ddc::KokkosAllocator<double, Kokkos::HostSpace>>&&
                 coefficients)
 {
     IdxRange<IDim...> grid = get_idx_range<IDim...>(coefficients);
