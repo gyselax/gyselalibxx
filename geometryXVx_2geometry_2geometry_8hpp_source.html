@@ -254,7 +254,7 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="structGridX.html">GridX</a>&gt;;</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword">using</span> SplineVxBuilder_1d = ddc::SplineBuilder&lt;</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        Kokkos::DefaultHostExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        Kokkos::HostSpace,</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <a class="code" href="structBSplinesVx.html">BSplinesVx</a>,</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <a class="code" href="structGridVx.html">GridVx</a>,</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        SplineVxBoundary,</div>
@@ -263,7 +263,7 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <a class="code" href="structGridVx.html">GridVx</a>&gt;;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">using</span> SplineVxEvaluator_1d = ddc::SplineEvaluator&lt;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        Kokkos::DefaultHostExecutionSpace::memory_space,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        Kokkos::HostSpace,</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <a class="code" href="structBSplinesVx.html">BSplinesVx</a>,</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <a class="code" href="structGridVx.html">GridVx</a>,</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        ddc::ConstantExtrapolationRule&lt;Vx&gt;,</div>
@@ -511,10 +511,10 @@ $(document).ready(function(){initNavTree('geometryXVx_2geometry_2geometry_8hpp_s
 <div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:97</div></div>
 <div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:45</div></div>
 <div class="ttc" id="astructT_html_a056fd337c941cd154b021d57dd12b0cb"><div class="ttname"><a href="structT.html#a056fd337c941cd154b021d57dd12b0cb">T::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">A boolean indicating if the dimension is periodic.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:49</div></div>
-<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:305</div></div>
-<div class="ttc" id="astructVx_html_a74ba57fd378fdaadf337f2e532c53c94"><div class="ttname"><a href="structVx.html#a74ba57fd378fdaadf337f2e532c53c94">Vx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:310</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:282</div></div>
-<div class="ttc" id="astructX_html_a3f2fbdd06dd7a7479b1d5d72be648bd5"><div class="ttname"><a href="structX.html#a3f2fbdd06dd7a7479b1d5d72be648bd5">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:287</div></div>
+<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:302</div></div>
+<div class="ttc" id="astructVx_html_a74ba57fd378fdaadf337f2e532c53c94"><div class="ttname"><a href="structVx.html#a74ba57fd378fdaadf337f2e532c53c94">Vx::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:307</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:279</div></div>
+<div class="ttc" id="astructX_html_a3f2fbdd06dd7a7479b1d5d72be648bd5"><div class="ttname"><a href="structX.html#a3f2fbdd06dd7a7479b1d5d72be648bd5">X::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:284</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

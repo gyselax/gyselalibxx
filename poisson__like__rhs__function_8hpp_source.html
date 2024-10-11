@@ -103,55 +103,56 @@ $(document).ready(function(){initNavTree('poisson__like__rhs__function_8hpp_sour
 <div class="title">poisson_like_rhs_function.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> RadialExtrapolationRule&gt;</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">   19</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">evaluator_type</a> = ddc::SplineEvaluator2D&lt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            Kokkos::DefaultHostExecutionSpace::memory_space,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <a class="code" href="structBSplinesR.html">BSplinesR</a>,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <a class="code" href="structBSplinesTheta.html">BSplinesTheta</a>,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            RadialExtrapolationRule,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> RadialExtrapolationRule&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">   20</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> = ddc::SplineEvaluator2D&lt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            Kokkos::DefaultHostExecutionSpace,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            Kokkos::HostSpace,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <a class="code" href="structBSplinesR.html">BSplinesR</a>,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <a class="code" href="structBSplinesTheta.html">BSplinesTheta</a>,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            RadialExtrapolationRule,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            RadialExtrapolationRule,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>&gt;;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    host_t&lt;ConstSpline2D&gt; <span class="keyword">const</span> m_coefs;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">evaluator_type</a> <span class="keyword">const</span>&amp; m_evaluator;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">   46</a></span>&#160;    <a class="code" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction</a>(host_t&lt;ConstSpline2D&gt; coefs, <a class="code" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">evaluator_type</a> <span class="keyword">const</span>&amp; evaluator)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        : m_coefs(coefs)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        , m_evaluator(evaluator)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ~<a class="code" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a>() {};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">   62</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">operator()</a>(CoordRTheta <span class="keyword">const</span>&amp; coord_rp)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> m_evaluator(coord_rp, m_coefs);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="ttc" id="aclassPoissonLikeRHSFunction_html"><div class="ttname"><a href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a></div><div class="ttdoc">Type of right-hand side (rhs) function of the Poisson equation.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:16</div></div>
-<div class="ttc" id="aclassPoissonLikeRHSFunction_html_a14277b6f22e61928118f7cc2712111fe"><div class="ttname"><a href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">PoissonLikeRHSFunction::evaluator_type</a></div><div class="ttdeci">ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, GridR, GridTheta &gt; evaluator_type</div><div class="ttdoc">The type of the 2D Spline Evaluator used by this class.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:31</div></div>
-<div class="ttc" id="aclassPoissonLikeRHSFunction_html_a87f656365ccc4fe8d8fb650c0264679a"><div class="ttname"><a href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">PoissonLikeRHSFunction::operator()</a></div><div class="ttdeci">double operator()(CoordRTheta const &amp;coord_rp) const</div><div class="ttdoc">Get the value of the function at a given coordinate.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:62</div></div>
-<div class="ttc" id="aclassPoissonLikeRHSFunction_html_a8e139a35bc001862fd4ce97c68b2946b"><div class="ttname"><a href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction::PoissonLikeRHSFunction</a></div><div class="ttdeci">PoissonLikeRHSFunction(host_t&lt; ConstSpline2D &gt; coefs, evaluator_type const &amp;evaluator)</div><div class="ttdoc">Instantiate a PoissonLikeRHSFunction.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:46</div></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            ddc::PeriodicExtrapolationRule&lt;Theta&gt;,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="structGridR.html">GridR</a>,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <a class="code" href="structGridTheta.html">GridTheta</a>&gt;;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    host_t&lt;ConstSpline2D&gt; <span class="keyword">const</span> m_coefs;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> <span class="keyword">const</span>&amp; m_evaluator;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">   47</a></span>&#160;    <a class="code" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction</a>(host_t&lt;ConstSpline2D&gt; coefs, <a class="code" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> <span class="keyword">const</span>&amp; evaluator)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        : m_coefs(coefs)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        , m_evaluator(evaluator)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ~<a class="code" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a>() {};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">   63</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">operator()</a>(CoordRTheta <span class="keyword">const</span>&amp; coord_rp)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> m_evaluator(coord_rp, m_coefs);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
+<div class="ttc" id="aclassPoissonLikeRHSFunction_html"><div class="ttname"><a href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a></div><div class="ttdoc">Type of right-hand side (rhs) function of the Poisson equation.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:17</div></div>
+<div class="ttc" id="aclassPoissonLikeRHSFunction_html_a87f656365ccc4fe8d8fb650c0264679a"><div class="ttname"><a href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">PoissonLikeRHSFunction::operator()</a></div><div class="ttdeci">double operator()(CoordRTheta const &amp;coord_rp) const</div><div class="ttdoc">Get the value of the function at a given coordinate.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:63</div></div>
+<div class="ttc" id="aclassPoissonLikeRHSFunction_html_a8a5be6904f96090542b2a617dbfb7bd9"><div class="ttname"><a href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">PoissonLikeRHSFunction::evaluator_type</a></div><div class="ttdeci">ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, ddc::PeriodicExtrapolationRule&lt; Theta &gt;, GridR, GridTheta &gt; evaluator_type</div><div class="ttdoc">The type of the 2D Spline Evaluator used by this class.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:32</div></div>
+<div class="ttc" id="aclassPoissonLikeRHSFunction_html_a8e139a35bc001862fd4ce97c68b2946b"><div class="ttname"><a href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction::PoissonLikeRHSFunction</a></div><div class="ttdeci">PoissonLikeRHSFunction(host_t&lt; ConstSpline2D &gt; coefs, evaluator_type const &amp;evaluator)</div><div class="ttdoc">Instantiate a PoissonLikeRHSFunction.</div><div class="ttdef"><b>Definition:</b> poisson_like_rhs_function.hpp:47</div></div>
 <div class="ttc" id="astructBSplinesR_html"><div class="ttname"><a href="structBSplinesR.html">BSplinesR</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:93</div></div>
 <div class="ttc" id="astructBSplinesTheta_html"><div class="ttname"><a href="structBSplinesTheta.html">BSplinesTheta</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:100</div></div>
 <div class="ttc" id="astructGridR_html"><div class="ttname"><a href="structGridR.html">GridR</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:116</div></div>

@@ -113,14 +113,14 @@ $(document).ready(function(){initNavTree('classPoissonLikeRHSFunction.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a14277b6f22e61928118f7cc2712111fe"><td class="memItemLeft" align="right" valign="top"><a id="a14277b6f22e61928118f7cc2712111fe"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">evaluator_type</a> = ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a> &gt;</td></tr>
-<tr class="memdesc:a14277b6f22e61928118f7cc2712111fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 2D Spline Evaluator used by this class. <br /></td></tr>
-<tr class="separator:a14277b6f22e61928118f7cc2712111fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a5be6904f96090542b2a617dbfb7bd9"><td class="memItemLeft" align="right" valign="top"><a id="a8a5be6904f96090542b2a617dbfb7bd9"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> = ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a> &gt;</td></tr>
+<tr class="memdesc:a8a5be6904f96090542b2a617dbfb7bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 2D Spline Evaluator used by this class. <br /></td></tr>
+<tr class="separator:a8a5be6904f96090542b2a617dbfb7bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8e139a35bc001862fd4ce97c68b2946b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction</a> (host_t&lt; ConstSpline2D &gt; coefs, <a class="el" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">evaluator_type</a> const &amp;evaluator)</td></tr>
+<tr class="memitem:a8e139a35bc001862fd4ce97c68b2946b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction</a> (host_t&lt; ConstSpline2D &gt; coefs, <a class="el" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> const &amp;evaluator)</td></tr>
 <tr class="memdesc:a8e139a35bc001862fd4ce97c68b2946b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a>.  <a href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">More...</a><br /></td></tr>
 <tr class="separator:a8e139a35bc001862fd4ce97c68b2946b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87f656365ccc4fe8d8fb650c0264679a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">operator()</a> (CoordRTheta const &amp;coord_rp) const</td></tr>
@@ -159,7 +159,7 @@ template&lt;class RadialExtrapolationRule &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPoissonLikeRHSFunction.html#a14277b6f22e61928118f7cc2712111fe">evaluator_type</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>evaluator</em>&#160;</td>
         </tr>
         <tr>

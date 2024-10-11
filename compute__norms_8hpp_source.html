@@ -113,60 +113,51 @@ $(document).ready(function(){initNavTree('compute__norms_8hpp_source.html',''); 
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671">   28</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671">compute_L1_norm</a>(</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="compute__norms_8hpp.html#a618a39f8df118bbfcce1f81c124716dc">   28</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="compute__norms_8hpp.html#a618a39f8df118bbfcce1f81c124716dc">compute_L1_norm</a>(</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        host_t&lt;<a class="code" href="classQuadrature.html">Quadrature&lt;IdxRange&gt;</a>&gt; quadrature,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        Field&lt;<span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;              IdxRange,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;              std::experimental::layout_right,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;              Kokkos::DefaultHostExecutionSpace::memory_space&gt; <span class="keyword">function</span>)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> Idx = <span class="keyword">typename</span> IdxRange::discrete_element_type;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> quadrature(</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            Kokkos::DefaultHostExecutionSpace(),</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            KOKKOS_LAMBDA(Idx <span class="keyword">const</span> idx) { <span class="keywordflow">return</span> Kokkos::fabs(<span class="keyword">function</span>(idx)); });</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2">   56</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2">compute_L2_norm</a>(</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        host_t&lt;<a class="code" href="classQuadrature.html">Quadrature&lt;IdxRange&gt;</a>&gt; quadrature,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        Field&lt;<span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;              IdxRange,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;              std::experimental::layout_right,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;              Kokkos::DefaultHostExecutionSpace::memory_space&gt; <span class="keyword">function</span>)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">using</span> Idx = <span class="keyword">typename</span> IdxRange::discrete_element_type;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> std::sqrt(quadrature(</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            Kokkos::DefaultHostExecutionSpace(),</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            KOKKOS_LAMBDA(Idx <span class="keyword">const</span> idx) { <span class="keywordflow">return</span> <span class="keyword">function</span>(idx) * <span class="keyword">function</span>(idx); }));</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span><a class="code" href="classCircularToCartesian.html">Mapping</a>, <span class="keyword">class</span>... IDim&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">   96</a></span>&#160;host_t&lt;FieldMem&lt;double, IdxRange&lt;IDim...&gt;&gt;&gt; <a class="code" href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">compute_coeffs_on_mapping</a>(</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a>&amp; mapping,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        FieldMem&lt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">double</span>,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                IdxRange&lt;IDim...&gt;,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                ddc::KokkosAllocator&lt;double, Kokkos::DefaultHostExecutionSpace::memory_space&gt;&gt;&amp;&amp;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                coefficients)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    IdxRange&lt;IDim...&gt; grid = get_idx_range&lt;IDim...&gt;(coefficients);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ddc::for_each(grid, [&amp;](Idx&lt;IDim...&gt; <span class="keyword">const</span> idx) {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        Coord&lt;typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_theta&gt; coord(</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                ddc::coordinate(idx));</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        coefficients(idx) *= fabs(mapping.<a class="code" href="classCircularToCartesian.html#aa43271cf07b37c5e51cb43ce3764c3b9">jacobian</a>(coord));</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    });</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> std::move(coefficients);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        Field&lt;double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace&gt; <span class="keyword">function</span>)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> Idx = <span class="keyword">typename</span> IdxRange::discrete_element_type;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> quadrature(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            Kokkos::DefaultHostExecutionSpace(),</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            KOKKOS_LAMBDA(Idx <span class="keyword">const</span> idx) { <span class="keywordflow">return</span> Kokkos::fabs(<span class="keyword">function</span>(idx)); });</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRange&gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="compute__norms_8hpp.html#a8a0f5288836a6d04e0a9780d85a54822">   53</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="compute__norms_8hpp.html#a8a0f5288836a6d04e0a9780d85a54822">compute_L2_norm</a>(</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        host_t&lt;<a class="code" href="classQuadrature.html">Quadrature&lt;IdxRange&gt;</a>&gt; quadrature,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        Field&lt;double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace&gt; <span class="keyword">function</span>)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">using</span> Idx = <span class="keyword">typename</span> IdxRange::discrete_element_type;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> std::sqrt(quadrature(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            Kokkos::DefaultHostExecutionSpace(),</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            KOKKOS_LAMBDA(Idx <span class="keyword">const</span> idx) { <span class="keywordflow">return</span> <span class="keyword">function</span>(idx) * <span class="keyword">function</span>(idx); }));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span><a class="code" href="classCircularToCartesian.html">Mapping</a>, <span class="keyword">class</span>... IDim&gt;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="compute__norms_8hpp.html#a3441ff8ea7b1ee04ecac8571a253a7fd">   90</a></span>&#160;host_t&lt;FieldMem&lt;double, IdxRange&lt;IDim...&gt;&gt;&gt; <a class="code" href="compute__norms_8hpp.html#a3441ff8ea7b1ee04ecac8571a253a7fd">compute_coeffs_on_mapping</a>(</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <a class="code" href="classCircularToCartesian.html">Mapping</a>&amp; mapping,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        FieldMem&lt;<span class="keywordtype">double</span>, IdxRange&lt;IDim...&gt;, ddc::KokkosAllocator&lt;double, Kokkos::HostSpace&gt;&gt;&amp;&amp;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                coefficients)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    IdxRange&lt;IDim...&gt; grid = get_idx_range&lt;IDim...&gt;(coefficients);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ddc::for_each(grid, [&amp;](Idx&lt;IDim...&gt; <span class="keyword">const</span> idx) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        Coord&lt;typename Mapping::curvilinear_tag_r, typename Mapping::curvilinear_tag_theta&gt; coord(</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                ddc::coordinate(idx));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        coefficients(idx) *= fabs(mapping.<a class="code" href="classCircularToCartesian.html#aa43271cf07b37c5e51cb43ce3764c3b9">jacobian</a>(coord));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    });</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> std::move(coefficients);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
 <div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition:</b> circular_to_cartesian.hpp:44</div></div>
 <div class="ttc" id="aclassCircularToCartesian_html_aa43271cf07b37c5e51cb43ce3764c3b9"><div class="ttname"><a href="classCircularToCartesian.html#aa43271cf07b37c5e51cb43ce3764c3b9">CircularToCartesian::jacobian</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian(ddc::Coordinate&lt; R, Theta &gt; const &amp;coord) const final</div><div class="ttdoc">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</div><div class="ttdef"><b>Definition:</b> circular_to_cartesian.hpp:119</div></div>
 <div class="ttc" id="aclassQuadrature_html"><div class="ttname"><a href="classQuadrature.html">Quadrature</a></div><div class="ttdoc">A class providing an operator for integrating functions defined on a discrete index range.</div><div class="ttdef"><b>Definition:</b> quadrature.hpp:29</div></div>
-<div class="ttc" id="acompute__norms_8hpp_html_a48ec4ccb869cbf8afd4c2c27e88b5885"><div class="ttname"><a href="compute__norms_8hpp.html#a48ec4ccb869cbf8afd4c2c27e88b5885">compute_coeffs_on_mapping</a></div><div class="ttdeci">host_t&lt; FieldMem&lt; double, IdxRange&lt; IDim... &gt; &gt; &gt; compute_coeffs_on_mapping(Mapping &amp;mapping, FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::DefaultHostExecutionSpace::memory_space &gt;&gt; &amp;&amp;coefficients)</div><div class="ttdoc">Add the Jacobian determinant to the coefficients.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:96</div></div>
-<div class="ttc" id="acompute__norms_8hpp_html_aac8bd99a8afa015df12150b998bf5671"><div class="ttname"><a href="compute__norms_8hpp.html#aac8bd99a8afa015df12150b998bf5671">compute_L1_norm</a></div><div class="ttdeci">double compute_L1_norm(host_t&lt; Quadrature&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt; function)</div><div class="ttdoc">Compute L1 norm of a function with a given quadrature.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:28</div></div>
-<div class="ttc" id="acompute__norms_8hpp_html_ab73e82e22113366c35b71e7ba8846bc2"><div class="ttname"><a href="compute__norms_8hpp.html#ab73e82e22113366c35b71e7ba8846bc2">compute_L2_norm</a></div><div class="ttdeci">double compute_L2_norm(host_t&lt; Quadrature&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::DefaultHostExecutionSpace::memory_space &gt; function)</div><div class="ttdoc">Compute L2 norm of a function with a given quadrature.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:56</div></div>
+<div class="ttc" id="acompute__norms_8hpp_html_a3441ff8ea7b1ee04ecac8571a253a7fd"><div class="ttname"><a href="compute__norms_8hpp.html#a3441ff8ea7b1ee04ecac8571a253a7fd">compute_coeffs_on_mapping</a></div><div class="ttdeci">host_t&lt; FieldMem&lt; double, IdxRange&lt; IDim... &gt; &gt; &gt; compute_coeffs_on_mapping(Mapping &amp;mapping, FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::HostSpace &gt;&gt; &amp;&amp;coefficients)</div><div class="ttdoc">Add the Jacobian determinant to the coefficients.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:90</div></div>
+<div class="ttc" id="acompute__norms_8hpp_html_a618a39f8df118bbfcce1f81c124716dc"><div class="ttname"><a href="compute__norms_8hpp.html#a618a39f8df118bbfcce1f81c124716dc">compute_L1_norm</a></div><div class="ttdeci">double compute_L1_norm(host_t&lt; Quadrature&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt; function)</div><div class="ttdoc">Compute L1 norm of a function with a given quadrature.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:28</div></div>
+<div class="ttc" id="acompute__norms_8hpp_html_a8a0f5288836a6d04e0a9780d85a54822"><div class="ttname"><a href="compute__norms_8hpp.html#a8a0f5288836a6d04e0a9780d85a54822">compute_L2_norm</a></div><div class="ttdeci">double compute_L2_norm(host_t&lt; Quadrature&lt; IdxRange &gt;&gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt; function)</div><div class="ttdoc">Compute L2 norm of a function with a given quadrature.</div><div class="ttdef"><b>Definition:</b> compute_norms.hpp:53</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

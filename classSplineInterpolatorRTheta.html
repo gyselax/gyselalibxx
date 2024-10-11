@@ -122,14 +122,14 @@ Inheritance diagram for SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ae2a374cb8cb882d7d704a7b4aadc6387"><td class="memItemLeft" align="right" valign="top"><a id="ae2a374cb8cb882d7d704a7b4aadc6387"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorRTheta.html#ae2a374cb8cb882d7d704a7b4aadc6387">evaluator_type</a> = ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::DefaultHostExecutionSpace::memory_space, <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a> &gt;</td></tr>
-<tr class="memdesc:ae2a374cb8cb882d7d704a7b4aadc6387"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 2D Spline Evaluator used by this class. <br /></td></tr>
-<tr class="separator:ae2a374cb8cb882d7d704a7b4aadc6387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf12ff5881094af3162809f6ece1bf6e"><td class="memItemLeft" align="right" valign="top"><a id="abf12ff5881094af3162809f6ece1bf6e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorRTheta.html#abf12ff5881094af3162809f6ece1bf6e">evaluator_type</a> = ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a class="el" href="structTheta.html">Theta</a> &gt;, <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a> &gt;</td></tr>
+<tr class="memdesc:abf12ff5881094af3162809f6ece1bf6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 2D Spline Evaluator used by this class. <br /></td></tr>
+<tr class="separator:abf12ff5881094af3162809f6ece1bf6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a494f3eceeddaea2b82f0934360be29d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorRTheta.html#a494f3eceeddaea2b82f0934360be29d7">SplineInterpolatorRTheta</a> (SplineRThetaBuilder const &amp;builder, <a class="el" href="classSplineInterpolatorRTheta.html#ae2a374cb8cb882d7d704a7b4aadc6387">evaluator_type</a> const &amp;evaluator)</td></tr>
+<tr class="memitem:a494f3eceeddaea2b82f0934360be29d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorRTheta.html#a494f3eceeddaea2b82f0934360be29d7">SplineInterpolatorRTheta</a> (SplineRThetaBuilder const &amp;builder, <a class="el" href="classSplineInterpolatorRTheta.html#abf12ff5881094af3162809f6ece1bf6e">evaluator_type</a> const &amp;evaluator)</td></tr>
 <tr class="memdesc:a494f3eceeddaea2b82f0934360be29d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a spline interpolator object.  <a href="classSplineInterpolatorRTheta.html#a494f3eceeddaea2b82f0934360be29d7">More...</a><br /></td></tr>
 <tr class="separator:a494f3eceeddaea2b82f0934360be29d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49e46f474710a43e2c8d0d49491f16f4"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineInterpolatorRTheta.html#a49e46f474710a43e2c8d0d49491f16f4">operator()</a> (host_t&lt; DFieldRTheta &gt; const inout_data, host_t&lt; Field&lt; CoordRTheta const, IdxRangeRTheta &gt;&gt; const coordinates) const override</td></tr>
@@ -172,7 +172,7 @@ template&lt;class RadialExtrapolationRule &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSplineInterpolatorRTheta.html#ae2a374cb8cb882d7d704a7b4aadc6387">evaluator_type</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classSplineInterpolatorRTheta.html#abf12ff5881094af3162809f6ece1bf6e">evaluator_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>evaluator</em>&#160;</td>
         </tr>
         <tr>
