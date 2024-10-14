@@ -54,27 +54,27 @@ using DiscreteMappingBuilder
 
 
 } // end namespace
-template <class Mapping, class AnalyticalMapping, class IdxRangeAdvection>
+template <class Mapping, class AnalyticalMapping, class AdvectionDomain>
 struct SimulationParameters
 {
 public:
     Mapping const& mapping;
     AnalyticalMapping const& analytical_mapping;
-    IdxRangeAdvection const& advection_idx_range;
+    AdvectionDomain const& advection_domain;
     std::string mapping_name;
-    std::string idx_range_name;
-    using IdxRangeSimulationAdvection = IdxRangeAdvection;
+    std::string domain_name;
+    using IdxRangeSimulationAdvection = AdvectionDomain;
     SimulationParameters(
             Mapping const& map,
             AnalyticalMapping const& a_map,
-            IdxRangeAdvection const& idx_range,
+            AdvectionDomain const& advection_dom,
             std::string m_name,
             std::string dom_name)
         : mapping(map)
         , analytical_mapping(a_map)
-        , advection_idx_range(idx_range)
+        , advection_domain(advection_dom)
         , mapping_name(m_name)
-        , idx_range_name(dom_name)
+        , domain_name(dom_name)
     {
     }
 };
@@ -105,16 +105,16 @@ struct NumericalParams
 };
 
 
-template <class IdxRangeAdvection>
+template <class AdvectionDomain>
 struct Numerics
 {
 private:
-    IdxRangeAdvection advection_idx_range;
+    AdvectionDomain advection_domain;
     NumericalParams params;
 
 public:
-    using X_adv = typename IdxRangeAdvection::X_adv;
-    using Y_adv = typename IdxRangeAdvection::Y_adv;
+    using X_adv = typename AdvectionDomain::X_adv;
+    using Y_adv = typename AdvectionDomain::Y_adv;
 
     using ValFieldMem = host_t<FieldMemRTheta<CoordRTheta>>;
     using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
@@ -129,8 +129,8 @@ public:
 
     NumericalTuple numerics;
 
-    Numerics(IdxRangeAdvection m_advection_idx_range, NumericalParams m_params)
-        : advection_idx_range(m_advection_idx_range)
+    Numerics(AdvectionDomain m_advection_domain, NumericalParams m_params)
+        : advection_domain(m_advection_domain)
         , params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
@@ -174,16 +174,16 @@ void run_simulations_with_methods(
 {
     auto& sim = std::get<i_map>(simulations);
 
-    Numerics methods(sim.advection_idx_range, num_params);
+    Numerics methods(sim.advection_domain, num_params);
     auto& num = std::get<i_feet>(methods.numerics);
 
     std::ostringstream name_stream;
-    name_stream << sim.mapping_name << " MAPPING - " << sim.idx_range_name << " DOMAIN - "
+    name_stream << sim.mapping_name << " MAPPING - " << sim.domain_name << " DOMAIN - "
                 << num.method_name << " - ";
     std::string simulation_name = name_stream.str();
 
     std::ostringstream output_stream;
-    output_stream << to_lower(sim.mapping_name) << "_" << to_lower(sim.idx_range_name) << "-"
+    output_stream << to_lower(sim.mapping_name) << "_" << to_lower(sim.domain_name) << "-"
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
@@ -192,7 +192,7 @@ void run_simulations_with_methods(
             sim.analytical_mapping,
             params.grid,
             num.time_stepper,
-            sim.advection_idx_range,
+            sim.advection_domain,
             params.interpolator,
             params.advection_builder,
             params.advection_evaluator,

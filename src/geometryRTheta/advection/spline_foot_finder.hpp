@@ -100,7 +100,7 @@ public:
     {
         host_t<DVectorFieldMemRTheta<X_adv, Y_adv>> idx_range_advection_field_in_adv(
                 get_idx_range(advection_field));
-        host_t<VectorSplineCoeffsMem2D<X_adv, Y_adv>> advection_field_in_adv_idx_range_coefs(
+        host_t<VectorSplineCoeffsMem2D<X_adv, Y_adv>> advection_field_in_adv_domain_coefs(
                 get_spline_idx_range(m_builder_advection_field));
 
         // Compute the advection field in the advection index range.
@@ -110,10 +110,10 @@ public:
 
         // Get the coefficients of the advection field in the advection index range.
         m_builder_advection_field(
-                ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs),
+                ddcHelper::get<X_adv>(advection_field_in_adv_domain_coefs),
                 ddcHelper::get<X_adv>(get_const_field(idx_range_advection_field_in_adv)));
         m_builder_advection_field(
-                ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs),
+                ddcHelper::get<Y_adv>(advection_field_in_adv_domain_coefs),
                 ddcHelper::get<Y_adv>(get_const_field(idx_range_advection_field_in_adv)));
 
 
@@ -127,12 +127,12 @@ public:
                             get_field(ddcHelper::get<X_adv>(updated_advection_field)),
                             get_const_field(feet),
                             get_const_field(
-                                    ddcHelper::get<X_adv>(advection_field_in_adv_idx_range_coefs)));
+                                    ddcHelper::get<X_adv>(advection_field_in_adv_domain_coefs)));
                     m_evaluator_advection_field(
                             get_field(ddcHelper::get<Y_adv>(updated_advection_field)),
                             get_const_field(feet),
                             get_const_field(
-                                    ddcHelper::get<Y_adv>(advection_field_in_adv_idx_range_coefs)));
+                                    ddcHelper::get<Y_adv>(advection_field_in_adv_domain_coefs)));
                 };
 
         // The function describing how the value(s) are updated using the derivative.

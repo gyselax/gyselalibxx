@@ -273,7 +273,7 @@ void display_time(
  *      The time integration method used to solve the characteristic
  *      equation.
  * @param[in] advection_index range
- *      The IdxRangeAdvection type object defining the index range where we
+ *      The AdvectionDomain type object defining the index range where we
  *      advect the characteristic feet.
  * @param[in] simulation
  *      The selected test cases.
@@ -304,28 +304,28 @@ void display_time(
  *      A child class of AnalyticalInvertibleCurvilinearToCartesian.
  * @tparam TimeStepper
  *      A child class of ITimeStepper.
- * @tparam IdxRangeAdvection
- *      A child class of IdxRangeAdvection.
+ * @tparam AdvectionDomain
+ *      A child class of AdvectionDomain.
  * @tparam Simulation
  *      A child class of AdvectionSimulation.
  *
  * @see BslAdvection
  * @see ITimeStepper
- * @see IdxRangeAdvection
+ * @see AdvectionDomain
  * @see Simulation
  */
 template <
         class Mapping,
         class AnalyticalMapping,
         class TimeStepper,
-        class IdxRangeAdvection,
+        class AdvectionDomain,
         class Simulation>
 void simulate(
         Mapping const& mapping,
         AnalyticalMapping const& analytical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper const& time_stepper,
-        IdxRangeAdvection& advection_idx_range,
+        AdvectionDomain& advection_domain,
         Simulation& simulation,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
@@ -337,8 +337,8 @@ void simulate(
         bool if_save_feet,
         std::string const& output_folder)
 {
-    SplineFootFinder<TimeStepper, IdxRangeAdvection> const
-            foot_finder(time_stepper, advection_idx_range, advection_builder, advection_evaluator);
+    SplineFootFinder<TimeStepper, AdvectionDomain> const
+            foot_finder(time_stepper, advection_domain, advection_builder, advection_evaluator);
 
     BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, mapping);
     auto function_to_be_advected_test = simulation.get_test_function();
@@ -505,7 +505,7 @@ void simulate(
  *      The time integration method used to solve the characteristic
  *      equation.
  * @param[in] advection_index range
- *      The IdxRangeAdvection type object defining the index range where we
+ *      The AdvectionDomain type object defining the index range where we
  *      advect the characteristic feet.
  * @param[in] function_interpolator
  *      The B-splines interpolator used to interpolate the function at
@@ -532,16 +532,16 @@ void simulate(
  *
  * @see BslAdvection
  * @see ITimeStepper
- * @see IdxRangeAdvection
+ * @see AdvectionDomain
  * @see Simulation
  */
-template <class Mapping, class AnalyticalMapping, class TimeStepper, class IdxRangeAdvection>
+template <class Mapping, class AnalyticalMapping, class TimeStepper, class AdvectionDomain>
 void simulate_the_3_simulations(
         Mapping const& mapping,
         AnalyticalMapping const& analytical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper& time_stepper,
-        IdxRangeAdvection& advection_idx_range,
+        AdvectionDomain& advection_domain,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
         SplineRThetaBuilder const& advection_builder,
@@ -575,7 +575,7 @@ void simulate_the_3_simulations(
             analytical_mapping,
             grid,
             time_stepper,
-            advection_idx_range,
+            advection_domain,
             simulation_1,
             function_interpolator,
             advection_builder,
@@ -596,7 +596,7 @@ void simulate_the_3_simulations(
             analytical_mapping,
             grid,
             time_stepper,
-            advection_idx_range,
+            advection_domain,
             simulation_2,
             function_interpolator,
             advection_builder,
@@ -617,7 +617,7 @@ void simulate_the_3_simulations(
             analytical_mapping,
             grid,
             time_stepper,
-            advection_idx_range,
+            advection_domain,
             simulation_3,
             function_interpolator,
             advection_builder,

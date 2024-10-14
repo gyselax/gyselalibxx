@@ -55,13 +55,13 @@
  *
  * @tparam Mapping
  *      A Curvilinear2DToCartesian class or one of its child classes.
- * @tparam IdxRangeAdvection
- *      An IdxRangeAdvection class.
+ * @tparam AdvectionDomain
+ *      An AdvectionDomain class.
  * @tparam FootFinder
  *      A IFootFinder class.
  *
  */
-template <class Mapping, class IdxRangeAdvection>
+template <class Mapping, class AdvectionDomain>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -70,11 +70,11 @@ private:
 
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<SplineFootFinder<EulerMethod, IdxRangeAdvection>, Mapping> const&
+    BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
             m_advection_solver;
 
     EulerMethod const m_euler;
-    SplineFootFinder<EulerMethod, IdxRangeAdvection> const m_foot_finder;
+    SplineFootFinder<EulerMethod, AdvectionDomain> const m_foot_finder;
 
     PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
@@ -87,8 +87,8 @@ public:
     /**
      * @brief Instantiate a BslImplicitPredCorrRTheta.
      *
-     * @param[in] advection_idx_range
-     *      An IdxRangeAdvection object which gives the information
+     * @param[in] advection_domain
+     *      An AdvectionDomain object which gives the information
      *      in which index range we advect.
      * @param[in] mapping
      *      The mapping function from the logical index range to the
@@ -109,9 +109,9 @@ public:
      *      An evaluator of B-splines for the spline advection field.
      */
     BslImplicitPredCorrRTheta(
-            IdxRangeAdvection const& advection_idx_range,
+            AdvectionDomain const& advection_domain,
             Mapping const& mapping,
-            BslAdvectionRTheta<SplineFootFinder<EulerMethod, IdxRangeAdvection>, Mapping> const&
+            BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
                     advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
@@ -121,7 +121,7 @@ public:
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
-        , m_foot_finder(m_euler, advection_idx_range, builder, advection_evaluator)
+        , m_foot_finder(m_euler, advection_domain, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)

@@ -138,10 +138,9 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_idx_range(mapping);
+    AdvectionPhysicalDomain advection_domain(mapping);
 
-    SplineFootFinder
-            find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
+    SplineFootFinder find_feet(time_stepper, advection_domain, builder, spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
 
@@ -167,7 +166,7 @@ int main(int argc, char** argv)
 
     // --- Predictor corrector operator ---------------------------------------------------------------
     BslImplicitPredCorrRTheta predcorr_operator(
-            advection_idx_range,
+            advection_domain,
             mapping,
             advection_operator,
             grid,

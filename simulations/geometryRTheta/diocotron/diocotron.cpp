@@ -153,10 +153,9 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_idx_range(mapping);
+    AdvectionPhysicalDomain advection_domain(mapping);
 
-    SplineFootFinder
-            find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
+    SplineFootFinder find_feet(time_stepper, advection_domain, builder, spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
 
@@ -190,7 +189,7 @@ int main(int argc, char** argv)
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
-            advection_idx_range,
+            advection_domain,
             mapping,
             advection_operator,
             mesh_rp,
@@ -200,7 +199,7 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
-            advection_idx_range,
+            advection_domain,
             mapping,
             advection_operator,
             mesh_rp,

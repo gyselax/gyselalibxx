@@ -164,9 +164,9 @@ int main(int argc, char** argv)
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
     CircularToCartesian<X, Y, R, Theta> analytical_mapping;
     CircularToCartesian<X, Y, R, Theta> mapping;
-    AdvectionPhysicalDomain advection_idx_range(analytical_mapping);
+    AdvectionPhysicalDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
-    std::string const idx_range_name = "PHYSICAL";
+    std::string const adv_domain_name = "PHYSICAL";
     key += "circular_physical";
 #else
 
@@ -176,17 +176,17 @@ int main(int argc, char** argv)
 #if defined(CZARNY_MAPPING_PHYSICAL)
     CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<X, Y, R, Theta> mapping(czarny_e, czarny_epsilon);
-    AdvectionPhysicalDomain advection_idx_range(analytical_mapping);
+    AdvectionPhysicalDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CZARNY";
-    std::string const idx_range_name = "PHYSICAL";
+    std::string const adv_domain_name = "PHYSICAL";
     key += "czarny_physical";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<X, Y, R, Theta> mapping(czarny_e, czarny_epsilon);
-    AdvectionPseudoCartesianDomain advection_idx_range(mapping);
+    AdvectionPseudoCartesianDomain advection_domain(mapping);
     std::string const mapping_name = "CZARNY";
-    std::string const idx_range_name = "PSEUDO CARTESIAN";
+    std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
@@ -198,9 +198,9 @@ int main(int argc, char** argv)
                     builder,
                     spline_evaluator_extrapol);
     DiscreteToCartesian mapping = mapping_builder();
-    AdvectionPseudoCartesianDomain advection_idx_range(mapping);
+    AdvectionPseudoCartesianDomain advection_domain(mapping);
     std::string const mapping_name = "DISCRETE";
-    std::string const idx_range_name = "PSEUDO CARTESIAN";
+    std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "discrete_pseudo_cartesian";
 #endif
 #endif
@@ -258,14 +258,14 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    std::cout << mapping_name << " MAPPING - " << idx_range_name << " DOMAIN - " << method_name
+    std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;
     simulate(
             mapping,
             analytical_mapping,
             grid,
             time_stepper,
-            advection_idx_range,
+            advection_domain,
             simulation,
             interpolator,
             builder,
