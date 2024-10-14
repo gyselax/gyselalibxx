@@ -1,4 +1,28 @@
 var searchData=
 [
-  ['kinetic_20fluid_20coupling_20_28mx_29_1837',['Kinetic fluid coupling (MX)',['../src_geometryXVx_geometryMX_kineticfluidcoupling.html',1,'src_geometryXVx_geometryMX']]]
+  ['geometries_0',['Multipatch geometries',['../tests_multipatch_geometries.html',1,'tests_multipatch']]],
+  ['geometry_1',['geometry',['../src_multipatch_data_types.html',1,'Data Types for Multipatch Geometry'],['../src_geometryXY_initialization.html',1,'Initialization on (x,y) geometry'],['../simulations_geometryRTheta.html',1,'Simulations in (r, theta) geometry'],['../simulations_geometryXVx.html',1,'Simulations in (x, vx) geometry'],['../simulations_geometryXY.html',1,'Simulations in (x, y) geometry'],['../src_multipatch_spline.html',1,'Spline on multipatch geometry']]],
+  ['geometry_20mu_20vpar_20r_20theta_2',['Geometry (mu, vpar, r, theta)',['../src_geometryTokamAxi.html',1,'src']]],
+  ['geometry_20mu_20vpar_20r_20theta_20phi_3',['Geometry (mu, vpar, r, theta, phi)',['../src_geometry5D.html',1,'src']]],
+  ['geometry_20r_20theta_4',['geometry r theta',['../src_geometryRTheta.html',1,'Geometry (r, theta)'],['../tests_geometryRTheta.html',1,'Tests : Geometry (r, theta)']]],
+  ['geometry_20rtheta_5',['Geometry RTheta',['../src_geometryRTheta_geometry.html',1,'src_geometryRTheta']]],
+  ['geometry_20tests_6',['Multipatch geometry tests',['../tests_multipatch.html',1,'tests']]],
+  ['geometry_20vpar_20mu_7',['Geometry (vpar, mu)',['../src_geometryVparMu.html',1,'src']]],
+  ['geometry_20x_8',['Geometry (x)',['../src_geometryXVx_geometryMX.html',1,'src_geometryXVx']]],
+  ['geometry_20x_20v_5fx_9',['Geometry (x, v_x)',['../src_geometryXVx.html',1,'src']]],
+  ['geometry_20x_20vx_10',['Geometry X-Vx',['../src_geometryXVx_geometry.html',1,'src_geometryXVx']]],
+  ['geometry_20x_20y_11',['Geometry (x, y)',['../src_geometryXY.html',1,'src']]],
+  ['geometry_20x_20y_20v_5fx_20v_5fy_12',['Geometry (x, y, v_x, v_y)',['../src_geometryXYVxVy.html',1,'src']]],
+  ['geometry_20x_20y_20vx_20vy_13',['Geometry X Y-Vx Vy',['../src_geometryXYVxVy_geometry.html',1,'src_geometryXYVxVy']]],
+  ['geometry_20xy_14',['Geometry XY',['../src_geometryXY_geometry.html',1,'src_geometryXY']]],
+  ['geometry5d_20_3a_15',['Geometry5D :',['../src_geometry5D_geometry.html',1,'src_geometry5D']]],
+  ['geometrytokamaxi_20_3a_16',['GeometryTokamAxi :',['../src_geometryTokamAxi_geometry.html',1,'src_geometryTokamAxi']]],
+  ['geometryvparmu_20_3a_17',['GeometryVparMu :',['../src_geometryVparMu_geometry.html',1,'src_geometryVparMu']]],
+  ['git_18',['Using Git',['../docs_Using_git.html',1,'']]],
+  ['guiding_20center_20x_20y_20simulation_19',['Guiding center (X,Y) simulation',['../simulations_geometryXY_guiding_center.html',1,'simulations_geometryXY']]],
+  ['gyselalib_20',['Gyselalib++',['../index.html',1,'']]],
+  ['gyselalib_20contents_21',['Gyselalib++ contents',['../src.html',1,'']]],
+  ['gyselalib_20simulations_22',['Gyselalib++ simulations',['../simulations.html',1,'']]],
+  ['gyselalib_20tests_23',['Gyselalib++ tests',['../tests.html',1,'']]],
+  ['gyselalibxx_24',['Using DDC in Gyselalibxx',['../docs_DDC_in_gyselalibxx.html',1,'']]]
 ];

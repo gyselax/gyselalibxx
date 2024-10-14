@@ -16,7 +16,6 @@ var classCollisionSpVparMu =
     [ "DConstFieldVpar", "classCollisionSpVparMu.html#ada3029785a65cfcb35ce7c8153d9853c", null ],
     [ "FDistribField", "classCollisionSpVparMu.html#aa124f06917e3e118eb7ea54f1278d245", null ],
     [ "CollisionSpVparMu", "classCollisionSpVparMu.html#a0dbcb8d7f270291b1a19791087b30f36", null ],
-    [ "~CollisionSpVparMu", "classCollisionSpVparMu.html#af93505710cd7455929ba9c4b90f0ff88", null ],
     [ "deepcopy_poloidal_plane", "classCollisionSpVparMu.html#a13586739213fb82717b22ed83698ec83", null ],
     [ "operator()", "classCollisionSpVparMu.html#a87ae0a4bf2125a89b0f5235d6217b545", null ],
     [ "m_operator_handle", "classCollisionSpVparMu.html#a90e212422787d34d61945d67b4af12d0", null ],

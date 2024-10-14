@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['mappings_1838',['Mappings',['../vendor_sll_include_sll_mapping.html',1,'vendor_sll']]],
-  ['multipatch_1839',['Multipatch',['../src_multipatch.html',1,'src']]],
-  ['multipatch_20connectivity_1840',['Multipatch connectivity',['../src_multipatch_connectivity.html',1,'src_multipatch']]],
-  ['multipatch_20geometries_1841',['Multipatch geometries',['../tests_multipatch_geometries.html',1,'tests_multipatch']]],
-  ['multipatch_20geometry_20tests_1842',['Multipatch geometry tests',['../tests_multipatch.html',1,'tests']]]
+  ['hybrid_0',['Time integration hybrid',['../src_geometryXVx_time_integration_hybrid.html',1,'src_geometryXVx']]]
 ];

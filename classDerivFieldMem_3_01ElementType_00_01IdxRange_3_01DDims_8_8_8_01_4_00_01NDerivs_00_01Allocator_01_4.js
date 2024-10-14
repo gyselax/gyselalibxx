@@ -13,12 +13,11 @@ var classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01N
     [ "DerivFieldMem", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a88ccaa3ce74256a74dff2dc9e32de83f", null ],
     [ "DerivFieldMem", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a6469a2c7961e6d84124869cdecc14f65", null ],
     [ "~DerivFieldMem", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a826001d4e2d07123f25a3fd4666337c0", null ],
-    [ "operator=", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a1b44a97364de273cffecbfab8f98706b", null ],
-    [ "operator=", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#aeb251cf35d63872cecbfcddf5b32596f", null ],
-    [ "operator()", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#aedda55b259d847293c547ec870ab359f", null ],
-    [ "operator()", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a9730bda5de9eaa018e097bbdc1f14914", null ],
+    [ "operator=", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a5241ebc3ad7f24d5323228677a5c2a79", null ],
+    [ "operator=", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#aa1b6067a16118938e13a979143b982a1", null ],
+    [ "operator()", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#adadae97ab0474700a3e0fd7449987d8e", null ],
+    [ "operator()", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#aebb8187d27601927e1c2aa837d895215", null ],
     [ "span_cview", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#ae89a846f81bbbfa9092f94c9a46c5a5b", null ],
     [ "span_view", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a51968d26ca103d3b45b3cf9382a75254", null ],
-    [ "span_view", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a2a0dad6a0350b4163a0ca46fe0f61ff2", null ],
-    [ "DerivField", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#ab44eabd629c8780fcc2a0e67e9650691", null ]
+    [ "span_view", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html#a2a0dad6a0350b4163a0ca46fe0f61ff2", null ]
 ];
