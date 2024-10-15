@@ -141,6 +141,7 @@ public:
         Coord<R> r_min = m_radii(patch_index_min);
         Coord<R> r_max = m_radii(patch_index_max + 1);
         Coord<R> r(m_mapping(coord));
+        KOKKOS_ASSERT(!Kokkos::isnan(double(r)));
 
         if (r > r_max) {
             return outside_rmax_domain;
@@ -158,7 +159,7 @@ public:
                 return patch_index_mid;
             } else if (r < r_min) {
                 patch_index_max = patch_index_mid - 1;
-            } else if (r_max < r) {
+            } else if (r_max <= r) {
                 patch_index_min = patch_index_mid + 1;
             }
         };
