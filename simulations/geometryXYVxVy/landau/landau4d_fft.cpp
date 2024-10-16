@@ -82,8 +82,6 @@ int main(int argc, char** argv)
     SplineYBuilder const builder_y(meshXYVxVy);
     SplineVxBuilder const builder_vx(meshXYVxVy);
     SplineVyBuilder const builder_vy(meshXYVxVy);
-    SplineVxBuilder_1d const builder_vx_1d(mesh_vx);
-    SplineVyBuilder_1d const builder_vy_1d(mesh_vy);
 
     // Initialization of the distribution function
     DFieldMemSpVxVy allfequilibrium(meshSpVxVy);
@@ -139,7 +137,7 @@ int main(int argc, char** argv)
 
     DFieldMemVxVy const quadrature_coeffs(
             neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(mesh_vxvy, builder_vx_1d, builder_vy_1d));
+                    Kokkos::DefaultExecutionSpace>(mesh_vxvy, builder_vx, builder_vy));
 
     FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
             mesh_xy);

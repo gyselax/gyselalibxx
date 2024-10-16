@@ -73,12 +73,6 @@ neumann_spline_quadrature_coefficients_1d(
             nbc_xmax == 1,
             "The neumann spline quadrature requires a builder which uses the value of the "
             "derivative.");
-    // Since spline builder quadrature coeffs are not available on device, need host allocated builder.
-    // See https://github.com/CExA-project/ddc/issues/598
-    static_assert(
-            (std::is_same_v<typename SplineBuilder::memory_space, Kokkos::HostSpace>),
-            "SplineBuilder must be host allocated.");
-
     assert(idx_range.size()
            == ddc::discrete_space<typename SplineBuilder::bsplines_type>().nbasis() - nbc_xmin
                       - nbc_xmax);

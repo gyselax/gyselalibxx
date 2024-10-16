@@ -75,7 +75,6 @@ int main(int argc, char** argv)
     SplineXBuilder const builder_x(meshXVx);
     SplineXBuilder_1d const builder_x_poisson(mesh_x);
     SplineVxBuilder const builder_vx(meshXVx);
-    SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
     // Initialization of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
@@ -129,9 +128,8 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    DFieldMemVx const quadrature_coeffs(
-            neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx_poisson));
+    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                        Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
     ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
     FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
     QNSolver const poisson(fem_solver, rhs);

@@ -226,25 +226,6 @@ using SplineVyEvaluator = ddc::SplineEvaluator<
         GridVx,
         GridVy>;
 
-using SplineVxBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesVx,
-        GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVx>;
-using SplineVyBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesVy,
-        GridVy,
-        SplineVyBoundary,
-        SplineVyBoundary,
-        ddc::SplineSolver::LAPACK,
-        GridVy>;
-
 using IdxRangeBSX = IdxRange<BSplinesX>;
 using IdxRangeBSY = IdxRange<BSplinesY>;
 using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;

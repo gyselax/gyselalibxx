@@ -75,7 +75,6 @@ int main(int argc, char** argv)
     SplineXBuilder const builder_x(meshXVx);
     SplineXBuilder_1d const builder_x_poisson(mesh_x);
     SplineVxBuilder const builder_vx(meshXVx);
-    SplineVxBuilder_1d const builder_vx_poisson(mesh_vx);
 
     // Initialization of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
@@ -131,7 +130,7 @@ int main(int argc, char** argv)
 
     FEM1DPoissonSolver fem_solver(builder_x_poisson, spline_x_evaluator_poisson);
     host_t<DFieldMemVx> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients<
-            Kokkos::DefaultHostExecutionSpace>(mesh_vx, builder_vx_poisson);
+            Kokkos::DefaultHostExecutionSpace>(mesh_vx, builder_vx);
     auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             get_field(quadrature_coeffs_host));

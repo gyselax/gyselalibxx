@@ -30,8 +30,8 @@ struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 };
 
 using SplineXBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
         SplineXBoundary,
