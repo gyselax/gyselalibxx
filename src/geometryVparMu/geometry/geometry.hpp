@@ -78,6 +78,42 @@ struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type
 {
 };
 
+using SplineVparBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVpar,
+        GridVpar,
+        SplineVparBoundary,
+        SplineVparBoundary,
+        ddc::SplineSolver::LAPACK,
+        GridVpar>;
+using SplineVparEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVpar,
+        GridVpar,
+        ddc::ConstantExtrapolationRule<Vpar>,
+        ddc::ConstantExtrapolationRule<Vpar>,
+        GridVpar>;
+
+using SplineMuBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesMu,
+        GridMu,
+        SplineMuBoundary,
+        SplineMuBoundary,
+        ddc::SplineSolver::LAPACK,
+        GridMu>;
+using SplineMuEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesMu,
+        GridMu,
+        ddc::ConstantExtrapolationRule<Mu>,
+        ddc::ConstantExtrapolationRule<Mu>,
+        GridMu>;
+
 // Idx = index of the point in the point sampling
 using IdxVpar = Idx<GridVpar>;
 using IdxMu = Idx<GridMu>;
