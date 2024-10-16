@@ -13,7 +13,7 @@ multiline_math_tag = re.compile(r'(?<!\$)\$\$(?!\$)')
 reference_tag = re.compile(r'(\[[^\]]*\])(\([^\)]*\))')
 section_tag = re.compile(r'\n## ([^\n]*)\n')
 
-doxygen_tag_dict = {" ":"_", "+":"x", "'":'_', os.path.sep: '_'}
+doxygen_tag_dict = {" ":"_", "+":"x", "'":'_', os.path.sep: '_', '?':'', '!':'', ',':'', r'\_': '_'}
 
 def get_compatible_tag(tag):
     """
