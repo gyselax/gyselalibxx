@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_builder":[12,12,2,0],
 "src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_evaluator":[12,12,2,1],
 "src_pde_solvers.html":[12,14],
 "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation":[12,14,0],
@@ -230,8 +231,8 @@ var NAVTREEINDEX6 =
 "toolchains.html#toolchains__Toolchains":[4,1],
 "transpose_8hpp_source.html":[17,0,19,8],
 "trapezoid__quadrature_8hpp.html":[17,0,16,6],
-"trapezoid__quadrature_8hpp.html#a220b4a0484661bdef8d874a2c733a0b8":[17,0,16,6,0],
-"trapezoid__quadrature_8hpp.html#af862b2fdb36d28cee451eb56f9e14459":[17,0,16,6,1],
+"trapezoid__quadrature_8hpp.html#a00b23ab6bb69740215a7962df6bcb2f8":[17,0,16,6,0],
+"trapezoid__quadrature_8hpp.html#a70e64a14c696ce6d674297e947ff7074":[17,0,16,6,1],
 "trapezoid__quadrature_8hpp_source.html":[17,0,16,6],
 "types_8hpp_source.html":[17,0,13,1,1],
 "utils__patch__locators_8hpp_source.html":[17,0,13,0,8],

@@ -171,10 +171,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>fourier_idx_range_ty
 using&#160;</td><td class="memItemRight" valign="bottom"><b>fourier_index_type</b> = typename fourier_idx_range_type::discrete_element_type</td></tr>
 <tr class="memdesc:ab12b55b0f5ea7fda912b72de4e3f3178"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index of the Fourier space index range. <br /></td></tr>
 <tr class="separator:ab12b55b0f5ea7fda912b72de4e3f3178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc955307048fe88208cf4d26954ef6e7" id="r_acc955307048fe88208cf4d26954ef6e7"><td class="memItemLeft" align="right" valign="top"><a id="acc955307048fe88208cf4d26954ef6e7" name="acc955307048fe88208cf4d26954ef6e7"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>fourier_field_mem_type</b> = FieldMem&lt; Kokkos::complex&lt; double &gt;, <a class="el" href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a03297d4504878bc4e3b4a858cb51b200">fourier_idx_range_type</a>, ddc::KokkosAllocator&lt; Kokkos::complex&lt; double &gt;, <a class="el" href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a6e31dd601d961ee711979be414fd2036">memory_space</a> &gt; &gt;</td></tr>
-<tr class="memdesc:acc955307048fe88208cf4d26954ef6e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Field storing the Fourier transform of a function. <br /></td></tr>
-<tr class="separator:acc955307048fe88208cf4d26954ef6e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8590dd393f09bf3381a6f81ff8ab0034" id="r_a8590dd393f09bf3381a6f81ff8ab0034"><td class="memItemLeft" align="right" valign="top"><a id="a8590dd393f09bf3381a6f81ff8ab0034" name="a8590dd393f09bf3381a6f81ff8ab0034"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>fourier_field_mem_type</b> = FieldMem&lt; Kokkos::complex&lt; double &gt;, <a class="el" href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a03297d4504878bc4e3b4a858cb51b200">fourier_idx_range_type</a>, <a class="el" href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a6e31dd601d961ee711979be414fd2036">memory_space</a> &gt;</td></tr>
+<tr class="memdesc:a8590dd393f09bf3381a6f81ff8ab0034"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Field storing the Fourier transform of a function. <br /></td></tr>
+<tr class="separator:a8590dd393f09bf3381a6f81ff8ab0034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0bc6c14fcb18c5426da0c57a1758115" id="r_ac0bc6c14fcb18c5426da0c57a1758115"><td class="memItemLeft" align="right" valign="top"><a id="ac0bc6c14fcb18c5426da0c57a1758115" name="ac0bc6c14fcb18c5426da0c57a1758115"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>fourier_field_type</b> = typename fourier_field_mem_type::span_type</td></tr>
 <tr class="memdesc:ac0bc6c14fcb18c5426da0c57a1758115"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Field storing the Fourier transform of a function. <br /></td></tr>
@@ -234,7 +234,7 @@ template&lt;class... GridPDEDim1D, class IdxRangeFull , class ExecSpace , class 
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

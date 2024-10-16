@@ -192,7 +192,7 @@ var annotated =
     [ "DerivFieldCommon", "classDerivFieldCommon.html", null ],
     [ "DerivFieldCommon< FieldType, IdxRange< DDims... > >", "classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html", "classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4" ],
     [ "DerivFieldMem", "classDerivFieldMem.html", null ],
-    [ "DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, Allocator >", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4.html", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01Allocator_01_4" ],
+    [ "DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html", "classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4" ],
     [ "DiffusiveNeutralSolver", "classDiffusiveNeutralSolver.html", "classDiffusiveNeutralSolver" ],
     [ "DimX_pC", "structDimX__pC.html", null ],
     [ "DimY_pC", "structDimY__pC.html", null ],

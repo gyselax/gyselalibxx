@@ -116,51 +116,45 @@ $(document).ready(function(){initNavTree('quadrature__coeffs__nd_8hpp_source.htm
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using </span>CoefficientFieldMem1D = DFieldMem&lt;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        IdxRange&lt;Grid1D&gt;,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">using </span>CoefficientField1D = DField&lt;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        IdxRange&lt;Grid1D&gt;,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::experimental::layout_right,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">typename</span> ExecSpace::memory_space&gt;;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>} <span class="comment">// namespace</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... DDims&gt;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>DFieldMem&lt;IdxRange&lt;DDims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="quadrature__coeffs__nd_8hpp.html#a0d882ea2244bc575a6013a52509637d2">   37</a></span><a class="code hl_function" href="quadrature__coeffs__nd_8hpp.html#a0d882ea2244bc575a6013a52509637d2">quadrature_coeffs_nd</a>(</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        IdxRange&lt;DDims...&gt; <span class="keyword">const</span>&amp; idx_range,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        std::function&lt;DFieldMem&lt;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                IdxRange&lt;DDims&gt;,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;(</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                IdxRange&lt;DDims&gt;)&gt;... funcs)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    DFieldMem&lt;IdxRange&lt;DDims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            coefficients_alloc(idx_range);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    DField&lt;IdxRange&lt;DDims...&gt;, std::experimental::layout_right, <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            coefficients(get_field(coefficients_alloc));</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// Get coefficients for each dimension</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    std::tuple&lt;CoefficientFieldMem1D&lt;ExecSpace, DDims&gt;...&gt; current_dim_coeffs_alloc(</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            funcs(ddc::select&lt;DDims&gt;(idx_range))...);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    std::tuple&lt;CoefficientField1D&lt;ExecSpace, DDims&gt;...&gt; current_dim_coeffs(get_field(</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            std::get&lt;CoefficientFieldMem1D&lt;ExecSpace, DDims&gt;&gt;(current_dim_coeffs_alloc))...);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using </span>CoefficientFieldMem1D = DFieldMem&lt;IdxRange&lt;Grid1D&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">using </span>CoefficientField1D = DField&lt;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        IdxRange&lt;Grid1D&gt;,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        std::experimental::layout_right,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">typename</span> ExecSpace::memory_space&gt;;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>} <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... DDims&gt;</div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6">   34</a></span>DFieldMem&lt;IdxRange&lt;DDims...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; <a class="code hl_function" href="quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6">quadrature_coeffs_nd</a>(</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        IdxRange&lt;DDims...&gt; <span class="keyword">const</span>&amp; idx_range,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        std::function&lt;DFieldMem&lt;IdxRange&lt;DDims&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;(</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                IdxRange&lt;DDims&gt;)&gt;... funcs)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    DFieldMem&lt;IdxRange&lt;DDims...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; coefficients_alloc(idx_range);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    DField&lt;IdxRange&lt;DDims...&gt;, std::experimental::layout_right, <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            coefficients(get_field(coefficients_alloc));</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// Get coefficients for each dimension</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    std::tuple&lt;CoefficientFieldMem1D&lt;ExecSpace, DDims&gt;...&gt; current_dim_coeffs_alloc(</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            funcs(ddc::select&lt;DDims&gt;(idx_range))...);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    std::tuple&lt;CoefficientField1D&lt;ExecSpace, DDims&gt;...&gt; current_dim_coeffs(get_field(</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            std::get&lt;CoefficientFieldMem1D&lt;ExecSpace, DDims&gt;&gt;(current_dim_coeffs_alloc))...);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    ddc::parallel_for_each(</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            ExecSpace(),</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            idx_range,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            KOKKOS_LAMBDA(Idx&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="comment">// multiply the 1D coefficients by one another</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    ddc::parallel_for_each(</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            ExecSpace(),</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            idx_range,</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            KOKKOS_LAMBDA(Idx&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="comment">// multiply the 1D coefficients by one another</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                coefficients(idim)</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                        = (std::get&lt;CoefficientField1D&lt;ExecSpace, DDims&gt;&gt;(current_dim_coeffs)(</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                                   ddc::select&lt;DDims&gt;(idim))</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                           * ... * 1);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            });</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> coefficients_alloc;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                coefficients(idim)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                        = (std::get&lt;CoefficientField1D&lt;ExecSpace, DDims&gt;&gt;(current_dim_coeffs)(</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                                   ddc::select&lt;DDims&gt;(idim))</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                           * ... * 1);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            });</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> coefficients_alloc;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
 </div>
-<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_a0d882ea2244bc575a6013a52509637d2"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#a0d882ea2244bc575a6013a52509637d2">quadrature_coeffs_nd</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; quadrature_coeffs_nd(IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition</b> quadrature_coeffs_nd.hpp:37</div></div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_a56334602cc056e84c19d35f298a13aa6"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6">quadrature_coeffs_nd</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt; quadrature_coeffs_nd(IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, typename ExecSpace::memory_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition</b> quadrature_coeffs_nd.hpp:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -124,10 +124,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a7ba2798b4e65365dc3ddf922cad024ae"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; DFieldMem&lt; IdxRange&lt; Grid1D &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spline__quadrature_8hpp.html#a7ba2798b4e65365dc3ddf922cad024ae">spline_quadrature_coefficients_1d</a> (IdxRange&lt; Grid1D &gt; const &amp;idx_range, SplineBuilder const &amp;builder)</td></tr>
 <tr class="memdesc:a7ba2798b4e65365dc3ddf922cad024ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients.  <br /></td></tr>
 <tr class="separator:a7ba2798b4e65365dc3ddf922cad024ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5db43d97332e2b77b02803b34cd6a4c" id="r_ab5db43d97332e2b77b02803b34cd6a4c"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class... DDims, class... SplineBuilders&gt; </td></tr>
-<tr class="memitem:ab5db43d97332e2b77b02803b34cd6a4c"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spline__quadrature_8hpp.html#ab5db43d97332e2b77b02803b34cd6a4c">spline_quadrature_coefficients</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</td></tr>
-<tr class="memdesc:ab5db43d97332e2b77b02803b34cd6a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.  <br /></td></tr>
-<tr class="separator:ab5db43d97332e2b77b02803b34cd6a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23fc7a03f5433595ee746bbddafded55" id="r_a23fc7a03f5433595ee746bbddafded55"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class... DDims, class... SplineBuilders&gt; </td></tr>
+<tr class="memitem:a23fc7a03f5433595ee746bbddafded55"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55">spline_quadrature_coefficients</a> (IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</td></tr>
+<tr class="memdesc:a23fc7a03f5433595ee746bbddafded55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.  <br /></td></tr>
+<tr class="separator:a23fc7a03f5433595ee746bbddafded55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing quadrature coefficients via a spline quadrature. </p>
@@ -188,8 +188,8 @@ in the 5D GYSELA Code". December 2022.</p>
 
 </div>
 </div>
-<a id="ab5db43d97332e2b77b02803b34cd6a4c" name="ab5db43d97332e2b77b02803b34cd6a4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5db43d97332e2b77b02803b34cd6a4c">&#9670;&#160;</a></span>spline_quadrature_coefficients()</h2>
+<a id="a23fc7a03f5433595ee746bbddafded55" name="a23fc7a03f5433595ee746bbddafded55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23fc7a03f5433595ee746bbddafded55">&#9670;&#160;</a></span>spline_quadrature_coefficients()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +197,7 @@ in the 5D GYSELA Code". December 2022.</p>
 template&lt;class ExecSpace , class... DDims, class... SplineBuilders&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; spline_quadrature_coefficients </td>
+          <td class="memname">DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt; spline_quadrature_coefficients </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; DDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em>, </td>

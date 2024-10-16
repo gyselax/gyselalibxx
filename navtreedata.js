@@ -288,8 +288,8 @@ var NAVTREEINDEX =
 "classIEquilibrium.html",
 "classMultipatchSplineBuilder.html#ac15662b146d7eda700925ae1caad030e",
 "classSplineInterpolatorRTheta.html#a9668b330c6f20ffd37b9712668a8b80b",
-"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html",
-"src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_evaluator"
+"geometryXYVxVy_2geometry_2geometry_8hpp_source.html",
+"src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_builder"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

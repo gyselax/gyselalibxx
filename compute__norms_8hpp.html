@@ -124,14 +124,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a929cb12afa35ce232b7c6df36b7e04f5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a929cb12afa35ce232b7c6df36b7e04f5">compute_L1_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt; &gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt; function)</td></tr>
 <tr class="memdesc:a929cb12afa35ce232b7c6df36b7e04f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L1 norm of a function with a given quadrature.  <br /></td></tr>
 <tr class="separator:a929cb12afa35ce232b7c6df36b7e04f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86b79a189ac75dc017e1740ba711d25e" id="r_a86b79a189ac75dc017e1740ba711d25e"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
-<tr class="memitem:a86b79a189ac75dc017e1740ba711d25e"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a86b79a189ac75dc017e1740ba711d25e">compute_L2_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt; &gt; quadrature, Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt; function)</td></tr>
-<tr class="memdesc:a86b79a189ac75dc017e1740ba711d25e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L2 norm of a function with a given quadrature.  <br /></td></tr>
-<tr class="separator:a86b79a189ac75dc017e1740ba711d25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af987783d1d3988075ae7335c6c046ad7" id="r_af987783d1d3988075ae7335c6c046ad7"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="classCircularToCartesian.html">Mapping</a> , class... IDim&gt; </td></tr>
-<tr class="memitem:af987783d1d3988075ae7335c6c046ad7"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; FieldMem&lt; double, IdxRange&lt; IDim... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#af987783d1d3988075ae7335c6c046ad7">compute_coeffs_on_mapping</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> &amp;mapping, FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::HostSpace &gt; &gt; &amp;&amp;coefficients)</td></tr>
-<tr class="memdesc:af987783d1d3988075ae7335c6c046ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the coefficients.  <br /></td></tr>
-<tr class="separator:af987783d1d3988075ae7335c6c046ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe7ba18fa880b31dcbc97478b1e4e89" id="r_a6fe7ba18fa880b31dcbc97478b1e4e89"><td class="memTemplParams" colspan="2">template&lt;class IdxRange &gt; </td></tr>
+<tr class="memitem:a6fe7ba18fa880b31dcbc97478b1e4e89"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a6fe7ba18fa880b31dcbc97478b1e4e89">compute_L2_norm</a> (host_t&lt; <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRange &gt; &gt; quadrature, DField&lt; IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt; function)</td></tr>
+<tr class="memdesc:a6fe7ba18fa880b31dcbc97478b1e4e89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L2 norm of a function with a given quadrature.  <br /></td></tr>
+<tr class="separator:a6fe7ba18fa880b31dcbc97478b1e4e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2240206dc01df84afab6258c0e6446c7" id="r_a2240206dc01df84afab6258c0e6446c7"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="classCircularToCartesian.html">Mapping</a> , class... IDim&gt; </td></tr>
+<tr class="memitem:a2240206dc01df84afab6258c0e6446c7"><td class="memTemplItemLeft" align="right" valign="top">host_t&lt; DFieldMem&lt; IdxRange&lt; IDim... &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="compute__norms_8hpp.html#a2240206dc01df84afab6258c0e6446c7">compute_coeffs_on_mapping</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> &amp;mapping, DFieldMem&lt; IdxRange&lt; IDim... &gt;, Kokkos::HostSpace &gt; &amp;&amp;coefficients)</td></tr>
+<tr class="memdesc:a2240206dc01df84afab6258c0e6446c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the coefficients.  <br /></td></tr>
+<tr class="separator:a2240206dc01df84afab6258c0e6446c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File providing the L1 and the L2 norms. </p>
@@ -177,8 +177,8 @@ template&lt;class IdxRange &gt; </div>
 
 </div>
 </div>
-<a id="a86b79a189ac75dc017e1740ba711d25e" name="a86b79a189ac75dc017e1740ba711d25e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86b79a189ac75dc017e1740ba711d25e">&#9670;&#160;</a></span>compute_L2_norm()</h2>
+<a id="a6fe7ba18fa880b31dcbc97478b1e4e89" name="a6fe7ba18fa880b31dcbc97478b1e4e89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe7ba18fa880b31dcbc97478b1e4e89">&#9670;&#160;</a></span>compute_L2_norm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +194,7 @@ template&lt;class IdxRange &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Field&lt; double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt;&#160;</td>
+          <td class="paramtype">DField&lt; IdxRange, std::experimental::layout_right, Kokkos::HostSpace &gt;&#160;</td>
           <td class="paramname"><em>function</em>&#160;</td>
         </tr>
         <tr>
@@ -218,8 +218,8 @@ template&lt;class IdxRange &gt; </div>
 
 </div>
 </div>
-<a id="af987783d1d3988075ae7335c6c046ad7" name="af987783d1d3988075ae7335c6c046ad7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af987783d1d3988075ae7335c6c046ad7">&#9670;&#160;</a></span>compute_coeffs_on_mapping()</h2>
+<a id="a2240206dc01df84afab6258c0e6446c7" name="a2240206dc01df84afab6258c0e6446c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2240206dc01df84afab6258c0e6446c7">&#9670;&#160;</a></span>compute_coeffs_on_mapping()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +227,7 @@ template&lt;class IdxRange &gt; </div>
 template&lt;class <a class="el" href="classCircularToCartesian.html">Mapping</a> , class... IDim&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt; FieldMem&lt; double, IdxRange&lt; IDim... &gt; &gt; &gt; compute_coeffs_on_mapping </td>
+          <td class="memname">host_t&lt; DFieldMem&lt; IdxRange&lt; IDim... &gt; &gt; &gt; compute_coeffs_on_mapping </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
@@ -235,7 +235,7 @@ template&lt;class <a class="el" href="classCircularToCartesian.html">Mapping</a>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FieldMem&lt; double, IdxRange&lt; IDim... &gt;, ddc::KokkosAllocator&lt; double, Kokkos::HostSpace &gt; &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype">DFieldMem&lt; IdxRange&lt; IDim... &gt;, Kokkos::HostSpace &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>coefficients</em>&#160;</td>
         </tr>
         <tr>

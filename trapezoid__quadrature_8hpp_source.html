@@ -114,70 +114,66 @@ $(document).ready(function(){initNavTree('trapezoid__quadrature_8hpp_source.html
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="quadrature__coeffs__nd_8hpp.html">quadrature_coeffs_nd.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> Gr<span class="keywordtype">id</span>1D&gt;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>FieldMem&lt;double, IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="trapezoid__quadrature_8hpp.html#a220b4a0484661bdef8d874a2c733a0b8">   25</a></span><a class="code hl_function" href="trapezoid__quadrature_8hpp.html#a220b4a0484661bdef8d874a2c733a0b8">trapezoid_quadrature_coefficients_1d</a>(IdxRange&lt;Grid1D&gt; <span class="keyword">const</span>&amp; idx_range)</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="trapezoid__quadrature_8hpp.html#a00b23ab6bb69740215a7962df6bcb2f8">   24</a></span>DFieldMem&lt;IdxRange&lt;Grid1D&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; <a class="code hl_function" href="trapezoid__quadrature_8hpp.html#a00b23ab6bb69740215a7962df6bcb2f8">trapezoid_quadrature_coefficients_1d</a>(</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        IdxRange&lt;Grid1D&gt; <span class="keyword">const</span>&amp; idx_range)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            coefficients_alloc(idx_range);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    DField&lt;IdxRange&lt;Grid1D&gt;,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>           std::experimental::layout_right,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>           <span class="keyword">typename</span> ExecSpace::memory_space&gt; <span class="keyword">const</span> coefficients</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            = get_field(coefficients_alloc);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    IdxRange&lt;Grid1D&gt; middle_idx_range</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            = idx_range</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                      .remove(IdxStep&lt;Grid1D&gt;(1),</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                              IdxStep&lt;Grid1D&gt;(!Grid1D::continuous_dimension_type::PERIODIC));</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    ddc::parallel_for_each(</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            ExecSpace(),</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            middle_idx_range,</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            KOKKOS_LAMBDA(Idx&lt;Grid1D&gt; <span class="keyword">const</span> idx) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            });</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Grid1D::continuous_dimension_type::PERIODIC) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        Kokkos::parallel_for(</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="stringliteral">&quot;bounds&quot;</span>,</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    Idx&lt;Grid1D&gt; idx = idx_range.front();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    coefficients(idx)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                            = 0.5 * (distance_at_right(idx_range.back()) + distance_at_right(idx));</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                });</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        Kokkos::parallel_for(</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                <span class="stringliteral">&quot;bounds&quot;</span>,</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    coefficients(idx_range.front()) = 0.5 * distance_at_right(idx_range.front());</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    coefficients(idx_range.back()) = 0.5 * distance_at_left(idx_range.back());</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                });</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> coefficients_alloc;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; coefficients_alloc(idx_range);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    DField&lt;IdxRange&lt;Grid1D&gt;,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>           std::experimental::layout_right,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>           <span class="keyword">typename</span> ExecSpace::memory_space&gt; <span class="keyword">const</span> coefficients</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            = get_field(coefficients_alloc);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    IdxRange&lt;Grid1D&gt; middle_idx_range</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            = idx_range</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                      .remove(IdxStep&lt;Grid1D&gt;(1),</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                              IdxStep&lt;Grid1D&gt;(!Grid1D::continuous_dimension_type::PERIODIC));</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    ddc::parallel_for_each(</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            ExecSpace(),</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            middle_idx_range,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            KOKKOS_LAMBDA(Idx&lt;Grid1D&gt; <span class="keyword">const</span> idx) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                coefficients(idx) = 0.5 * (distance_at_left(idx) + distance_at_right(idx));</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            });</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Grid1D::continuous_dimension_type::PERIODIC) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        Kokkos::parallel_for(</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="stringliteral">&quot;bounds&quot;</span>,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    Idx&lt;Grid1D&gt; idx = idx_range.front();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    coefficients(idx)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                            = 0.5 * (distance_at_right(idx_range.back()) + distance_at_right(idx));</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                });</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        Kokkos::parallel_for(</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                <span class="stringliteral">&quot;bounds&quot;</span>,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                Kokkos::RangePolicy&lt;ExecSpace&gt;(0, 1),</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    coefficients(idx_range.front()) = 0.5 * distance_at_right(idx_range.front());</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    coefficients(idx_range.back()) = 0.5 * distance_at_left(idx_range.back());</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                });</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> coefficients_alloc;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
 </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... ODims&gt;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>FieldMem&lt;double, IdxRange&lt;ODims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="trapezoid__quadrature_8hpp.html#af862b2fdb36d28cee451eb56f9e14459">   83</a></span><a class="code hl_function" href="trapezoid__quadrature_8hpp.html#af862b2fdb36d28cee451eb56f9e14459">trapezoid_quadrature_coefficients</a>(IdxRange&lt;ODims...&gt; <span class="keyword">const</span>&amp; idx_range)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>{</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="quadrature__coeffs__nd_8hpp.html#a0d882ea2244bc575a6013a52509637d2">quadrature_coeffs_nd</a>&lt;ExecSpace, ODims...&gt;(</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            idx_range,</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            (std::function&lt;FieldMem&lt;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                     double,</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                     IdxRange&lt;ODims&gt;,</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                     ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;(</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                     IdxRange&lt;ODims&gt;)&gt;(trapezoid_quadrature_coefficients_1d&lt;ExecSpace, ODims&gt;))...);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... ODims&gt;</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="trapezoid__quadrature_8hpp.html#a70e64a14c696ce6d674297e947ff7074">   81</a></span>DFieldMem&lt;IdxRange&lt;ODims...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; <a class="code hl_function" href="trapezoid__quadrature_8hpp.html#a70e64a14c696ce6d674297e947ff7074">trapezoid_quadrature_coefficients</a>(</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        IdxRange&lt;ODims...&gt; <span class="keyword">const</span>&amp; idx_range)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6">quadrature_coeffs_nd</a>&lt;ExecSpace, ODims...&gt;(</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            idx_range,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            (std::function&lt;DFieldMem&lt;IdxRange&lt;ODims&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;(</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                     IdxRange&lt;ODims&gt;)&gt;(trapezoid_quadrature_coefficients_1d&lt;ExecSpace, ODims&gt;))...);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
 </div>
 <div class="ttc" id="aquadrature__coeffs__nd_8hpp_html"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html">quadrature_coeffs_nd.hpp</a></div><div class="ttdoc">File providing helper functions for defining multi-dimensional quadrature methods.</div></div>
-<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_a0d882ea2244bc575a6013a52509637d2"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#a0d882ea2244bc575a6013a52509637d2">quadrature_coeffs_nd</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; quadrature_coeffs_nd(IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition</b> quadrature_coeffs_nd.hpp:37</div></div>
-<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a220b4a0484661bdef8d874a2c733a0b8"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a220b4a0484661bdef8d874a2c733a0b8">trapezoid_quadrature_coefficients_1d</a></div><div class="ttdeci">FieldMem&lt; double, IdxRange&lt; Grid1D &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; trapezoid_quadrature_coefficients_1d(IdxRange&lt; Grid1D &gt; const &amp;idx_range)</div><div class="ttdoc">Get the trapezoid coefficients in 1D.</div><div class="ttdef"><b>Definition</b> trapezoid_quadrature.hpp:25</div></div>
-<div class="ttc" id="atrapezoid__quadrature_8hpp_html_af862b2fdb36d28cee451eb56f9e14459"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#af862b2fdb36d28cee451eb56f9e14459">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">FieldMem&lt; double, IdxRange&lt; ODims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; trapezoid_quadrature_coefficients(IdxRange&lt; ODims... &gt; const &amp;idx_range)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition</b> trapezoid_quadrature.hpp:83</div></div>
+<div class="ttc" id="aquadrature__coeffs__nd_8hpp_html_a56334602cc056e84c19d35f298a13aa6"><div class="ttname"><a href="quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6">quadrature_coeffs_nd</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt; quadrature_coeffs_nd(IdxRange&lt; DDims... &gt; const &amp;idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, typename ExecSpace::memory_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs)</div><div class="ttdoc">Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</div><div class="ttdef"><b>Definition</b> quadrature_coeffs_nd.hpp:34</div></div>
+<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a00b23ab6bb69740215a7962df6bcb2f8"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a00b23ab6bb69740215a7962df6bcb2f8">trapezoid_quadrature_coefficients_1d</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory_space &gt; trapezoid_quadrature_coefficients_1d(IdxRange&lt; Grid1D &gt; const &amp;idx_range)</div><div class="ttdoc">Get the trapezoid coefficients in 1D.</div><div class="ttdef"><b>Definition</b> trapezoid_quadrature.hpp:24</div></div>
+<div class="ttc" id="atrapezoid__quadrature_8hpp_html_a70e64a14c696ce6d674297e947ff7074"><div class="ttname"><a href="trapezoid__quadrature_8hpp.html#a70e64a14c696ce6d674297e947ff7074">trapezoid_quadrature_coefficients</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; ODims... &gt;, typename ExecSpace::memory_space &gt; trapezoid_quadrature_coefficients(IdxRange&lt; ODims... &gt; const &amp;idx_range)</div><div class="ttdoc">Get the trapezoid coefficients in ND.</div><div class="ttdef"><b>Definition</b> trapezoid_quadrature.hpp:81</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

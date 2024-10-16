@@ -12,6 +12,6 @@ var searchData=
   ['translationadvectionfieldsimulation_9',['TranslationAdvectionFieldSimulation',['../classTranslationAdvectionFieldSimulation.html#aa89e869c6d580ce70c186d3a3ec99272',1,'TranslationAdvectionFieldSimulation']]],
   ['translationsimulation_10',['TranslationSimulation',['../classTranslationSimulation.html#a93ef880e4bde7812610f07198d620be1',1,'TranslationSimulation']]],
   ['transpose_5fto_11',['transpose_to',['../classMPITransposeAllToAll.html#ab4eb14a8f1df3c01b899b5b25e5f574a',1,'MPITransposeAllToAll']]],
-  ['trapezoid_5fquadrature_5fcoefficients_12',['trapezoid_quadrature_coefficients',['../trapezoid__quadrature_8hpp.html#af862b2fdb36d28cee451eb56f9e14459',1,'trapezoid_quadrature.hpp']]],
-  ['trapezoid_5fquadrature_5fcoefficients_5f1d_13',['trapezoid_quadrature_coefficients_1d',['../trapezoid__quadrature_8hpp.html#a220b4a0484661bdef8d874a2c733a0b8',1,'trapezoid_quadrature.hpp']]]
+  ['trapezoid_5fquadrature_5fcoefficients_12',['trapezoid_quadrature_coefficients',['../trapezoid__quadrature_8hpp.html#a70e64a14c696ce6d674297e947ff7074',1,'trapezoid_quadrature.hpp']]],
+  ['trapezoid_5fquadrature_5fcoefficients_5f1d_13',['trapezoid_quadrature_coefficients_1d',['../trapezoid__quadrature_8hpp.html#a00b23ab6bb69740215a7962df6bcb2f8',1,'trapezoid_quadrature.hpp']]]
 ];

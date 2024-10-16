@@ -10,7 +10,7 @@ var searchData=
   ['quadrature_3c_20idxrangevx_2c_20idxrangespxvx_20_3e_7',['Quadrature&lt; IdxRangeVx, IdxRangeSpXVx &gt;',['../classQuadrature.html',1,'']]],
   ['quadrature_3c_20idxrangevx_2c_20idxrangexvx_20_3e_8',['Quadrature&lt; IdxRangeVx, IdxRangeXVx &gt;',['../classQuadrature.html',1,'']]],
   ['quadrature_3c_20idxrangevxvy_2c_20idxrangexyvxvy_20_3e_9',['Quadrature&lt; IdxRangeVxVy, IdxRangeXYVxVy &gt;',['../classQuadrature.html',1,'']]],
-  ['quadrature_5fcoeffs_5fnd_10',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#a0d882ea2244bc575a6013a52509637d2',1,'quadrature_coeffs_nd.hpp']]],
+  ['quadrature_5fcoeffs_5fnd_10',['quadrature_coeffs_nd',['../quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6',1,'quadrature_coeffs_nd.hpp']]],
   ['quadrature_5fcoeffs_5fnd_2ehpp_11',['quadrature_coeffs_nd.hpp',['../quadrature__coeffs__nd_8hpp.html',1,'']]],
   ['quasi_20neutrality_20solver_12',['quasi neutrality solver',['../src_geometryXVx_poisson.html',1,'Quasi-Neutrality Solver'],['../src_geometryXYVxVy_poisson.html',1,'Quasi-Neutrality Solver'],['../src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver',1,'Quasi-Neutrality Solver']]]
 ];

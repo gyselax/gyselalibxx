@@ -146,8 +146,8 @@ $(document).ready(function(){initNavTree('spline__quadrature_8hpp_source.html','
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            (std::is_same_v&lt;typename SplineBuilder::memory_space, Kokkos::HostSpace&gt;),</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="stringliteral">&quot;SplineBuilder must be host allocated.&quot;</span>);</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, ddc::KokkosAllocator&lt;double, typename SplineBuilder::memory_space&gt;&gt;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            quadrature_coefficients(builder.interpolation_domain());</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, <span class="keyword">typename</span> SplineBuilder::memory_space&gt; quadrature_coefficients(</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            builder.interpolation_domain());</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    std::tie(std::ignore, quadrature_coefficients, std::ignore) = builder.quadrature_coefficients();</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">return</span> ddc::create_mirror_and_copy(quadrature_coefficients[idx_range]);</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
@@ -156,39 +156,37 @@ $(document).ready(function(){initNavTree('spline__quadrature_8hpp_source.html','
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... DDims, <span class="keyword">class</span>... SplineBuilders&gt;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>DFieldMem&lt;IdxRange&lt;DDims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="spline__quadrature_8hpp.html#ab5db43d97332e2b77b02803b34cd6a4c">  100</a></span><a class="code hl_function" href="spline__quadrature_8hpp.html#ab5db43d97332e2b77b02803b34cd6a4c">spline_quadrature_coefficients</a>(</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        IdxRange&lt;DDims...&gt; <span class="keyword">const</span>&amp; idx_range,</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        SplineBuilders <span class="keyword">const</span>&amp;... builders)</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>{</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    assert((std::is_same_v&lt;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    <span class="keyword">typename</span> DDims::continuous_dimension_type,</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    <span class="keyword">typename</span> SplineBuilders::continuous_dimension_type&gt; and ...));</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">// Get coefficients for each dimension</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    std::tuple&lt;CoefficientFieldMem1D_host&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <a class="code hl_function" href="spline__quadrature_8hpp.html#a7ba2798b4e65365dc3ddf922cad024ae">spline_quadrature_coefficients_1d</a>(ddc::select&lt;DDims&gt;(idx_range), builders)...);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="comment">// Allocate ND coefficients</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    DFieldMem&lt;IdxRange&lt;DDims...&gt;, ddc::KokkosAllocator&lt;double, typename ExecSpace::memory_space&gt;&gt;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            coefficients(idx_range);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">auto</span> coefficients_host = ddc::create_mirror(get_field(coefficients));</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// Serial loop is used due to nvcc bug concerning functions with variadic template arguments</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="comment">// (see https://github.com/kokkos/kokkos/pull/7059)</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    ddc::for_each(idx_range, [&amp;](Idx&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="comment">// multiply the 1D coefficients by one another</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        coefficients_host(idim)</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                = (std::get&lt;CoefficientFieldMem1D_host&lt;DDims&gt;&gt;(current_dim_coeffs)(</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                           ddc::select&lt;DDims&gt;(idim))</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                   * ... * 1);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    });</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    ddc::parallel_deepcopy(coefficients, coefficients_host);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55">   99</a></span>DFieldMem&lt;IdxRange&lt;DDims...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; <a class="code hl_function" href="spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55">spline_quadrature_coefficients</a>(</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        IdxRange&lt;DDims...&gt; <span class="keyword">const</span>&amp; idx_range,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        SplineBuilders <span class="keyword">const</span>&amp;... builders)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>{</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    assert((std::is_same_v&lt;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                    <span class="keyword">typename</span> DDims::continuous_dimension_type,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    <span class="keyword">typename</span> SplineBuilders::continuous_dimension_type&gt; and ...));</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="comment">// Get coefficients for each dimension</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    std::tuple&lt;CoefficientFieldMem1D_host&lt;DDims&gt;...&gt; current_dim_coeffs(</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <a class="code hl_function" href="spline__quadrature_8hpp.html#a7ba2798b4e65365dc3ddf922cad024ae">spline_quadrature_coefficients_1d</a>(ddc::select&lt;DDims&gt;(idx_range), builders)...);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="comment">// Allocate ND coefficients</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    DFieldMem&lt;IdxRange&lt;DDims...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt; coefficients(idx_range);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">auto</span> coefficients_host = ddc::create_mirror(get_field(coefficients));</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="comment">// Serial loop is used due to nvcc bug concerning functions with variadic template arguments</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="comment">// (see https://github.com/kokkos/kokkos/pull/7059)</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    ddc::for_each(idx_range, [&amp;](Idx&lt;DDims...&gt; <span class="keyword">const</span> idim) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="comment">// multiply the 1D coefficients by one another</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        coefficients_host(idim)</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                = (std::get&lt;CoefficientFieldMem1D_host&lt;DDims&gt;&gt;(current_dim_coeffs)(</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                           ddc::select&lt;DDims&gt;(idim))</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                   * ... * 1);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    });</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    ddc::parallel_deepcopy(coefficients, coefficients_host);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
 </div>
+<div class="ttc" id="aspline__quadrature_8hpp_html_a23fc7a03f5433595ee746bbddafded55"><div class="ttname"><a href="spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55">spline_quadrature_coefficients</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt; spline_quadrature_coefficients(IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</div><div class="ttdoc">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</div><div class="ttdef"><b>Definition</b> spline_quadrature.hpp:99</div></div>
 <div class="ttc" id="aspline__quadrature_8hpp_html_a7ba2798b4e65365dc3ddf922cad024ae"><div class="ttname"><a href="spline__quadrature_8hpp.html#a7ba2798b4e65365dc3ddf922cad024ae">spline_quadrature_coefficients_1d</a></div><div class="ttdeci">host_t&lt; DFieldMem&lt; IdxRange&lt; Grid1D &gt; &gt; &gt; spline_quadrature_coefficients_1d(IdxRange&lt; Grid1D &gt; const &amp;idx_range, SplineBuilder const &amp;builder)</div><div class="ttdoc">Get the spline quadrature coefficients.</div><div class="ttdef"><b>Definition</b> spline_quadrature.hpp:60</div></div>
-<div class="ttc" id="aspline__quadrature_8hpp_html_ab5db43d97332e2b77b02803b34cd6a4c"><div class="ttname"><a href="spline__quadrature_8hpp.html#ab5db43d97332e2b77b02803b34cd6a4c">spline_quadrature_coefficients</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; DDims... &gt;, ddc::KokkosAllocator&lt; double, typename ExecSpace::memory_space &gt; &gt; spline_quadrature_coefficients(IdxRange&lt; DDims... &gt; const &amp;idx_range, SplineBuilders const &amp;... builders)</div><div class="ttdoc">Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</div><div class="ttdef"><b>Definition</b> spline_quadrature.hpp:100</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
