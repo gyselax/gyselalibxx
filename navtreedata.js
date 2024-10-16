@@ -75,6 +75,10 @@ var NAVTREE =
       [ "Branches", "docs_Using_git.html#docs_Using_git__Branches", null ],
       [ "Submodules", "docs_Using_git.html#docs_Using_git__Submodules", null ]
     ] ],
+    [ "Developer's FAQ", "docs_developer_FAQ.html", [
+      [ "What is the difference between Debug and Release mode?", "docs_developer_FAQ.html#docs_developer_FAQ__What_is_the_difference_between_Debug_and_Release_mode", null ],
+      [ "Should I use abort, assert, or static_assert to raise an error?", "docs_developer_FAQ.html#docs_developer_FAQ__Should_I_use_abort_assert_or_static_assert_to_raise_an_error", null ]
+    ] ],
     [ "Gyselalib++ simulations", "simulations.html", [
       [ "Simulations in (r, theta) geometry", "simulations_geometryRTheta.html", [
         [ "Diocotron instability", "simulations_geometryRTheta_diocotron.html", [
@@ -284,8 +288,8 @@ var NAVTREEINDEX =
 "classIEquilibrium.html",
 "classMultipatchSplineBuilder.html#ac15662b146d7eda700925ae1caad030e",
 "classSplineInterpolatorRTheta.html#a9668b330c6f20ffd37b9712668a8b80b",
-"geometryXYVxVy_2initialization_2singlemodeperturbinitialization_8hpp_source.html",
-"src_quadrature.html"
+"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html",
+"src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_evaluator"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
