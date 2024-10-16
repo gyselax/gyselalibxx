@@ -12,9 +12,7 @@
 
 namespace {
 template <class ExecSpace, class Grid1D>
-using CoefficientFieldMem1D = DFieldMem<
-        IdxRange<Grid1D>,
-        ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>;
+using CoefficientFieldMem1D = DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 template <class ExecSpace, class Grid1D>
 using CoefficientField1D = DField<
         IdxRange<Grid1D>,
@@ -33,16 +31,12 @@ using CoefficientField1D = DField<
  * @returns The coefficients which define the quadrature method in ND.
  */
 template <class ExecSpace, class... DDims>
-DFieldMem<IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-quadrature_coeffs_nd(
+DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeffs_nd(
         IdxRange<DDims...> const& idx_range,
-        std::function<DFieldMem<
-                IdxRange<DDims>,
-                ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>(
+        std::function<DFieldMem<IdxRange<DDims>, typename ExecSpace::memory_space>(
                 IdxRange<DDims>)>... funcs)
 {
-    DFieldMem<IdxRange<DDims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-            coefficients_alloc(idx_range);
+    DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
     DField<IdxRange<DDims...>, std::experimental::layout_right, typename ExecSpace::memory_space>
             coefficients(get_field(coefficients_alloc));
     // Get coefficients for each dimension

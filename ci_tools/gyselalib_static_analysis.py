@@ -228,8 +228,9 @@ def search_for_unnecessary_auto(file):
                       for v,t in zip(variables, variable_types) if t is not None and t.attrib['str'] == 'auto']
 
     # Find the name and location of the first use of the auto variables
-    var_data_idx = [file.data.index(v.attrib) for v in auto_variables if v is not None]
-    var_names = [v.attrib['str'] for v in auto_variables if v is not None]
+    var_attribs = [v.attrib for v in auto_variables if v is not None and v.attrib['file'] == str(file.file)]
+    var_data_idx = [file.data.index(a) for a in var_attribs]
+    var_names = [a['str'] for a in var_attribs]
     for idx, var_name in enumerate(var_names):
         start = var_data_idx[idx]
         end = next(i for i,v in enumerate(file.data[start:], start) if v['str'] == ';')
@@ -337,8 +338,9 @@ def search_for_bad_aliases(file):
     forbidden_substrings = ('Chunk', 'Span', 'DDom', 'IDom')
     for a_name, val in file.aliases.items():
         val_str = ''.join(v['str'] for v in val)
-        if re.search(r'\bField<(const )?double', val_str) or \
-                re.search(r'\bFieldMem<(const )?double', val_str):
+        if (re.search(r'\bField<(const )?double', val_str) or \
+                re.search(r'\bFieldMem<(const )?double', val_str)) and \
+                file.file != HOME_DIR / 'src' / 'utils' / 'ddc_aliases.hpp':
             report_error(STYLE, file, val[0]['linenr'], f'double does not need to be a template parameter. Please use DField/DFieldMem ({val_str})')
         if a_name[0].isupper():
             if val_str.startswith('Idx<') and not a_name.startswith('Idx'):

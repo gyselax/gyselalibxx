@@ -122,7 +122,7 @@ TEST(FftPoissonSolver, BatchedCosineSource)
 
     // Initialization of the distribution function --> fill values
     for (IdxX const ix : gridx) {
-        double const c = ix.uid() + 1;
+        double const c = (ix - gridx.front()) + 1;
         for (IdxY const iy : gridy) {
             rhs_host(ix, iy) = ipow(c, 2) * cos(c * ddc::coordinate(iy));
         }
@@ -140,7 +140,7 @@ TEST(FftPoissonSolver, BatchedCosineSource)
     double error_field = 0.0;
 
     for (IdxX const ix : gridx) {
-        double const c = ix.uid() + 1;
+        double const c = (ix - gridx.front()) + 1;
         for (IdxY const iy : gridy) {
             double const exact_pot = cos(c * ddc::coordinate(iy));
             error_pot = fmax(fabs(electrostatic_potential_host(ix, iy) - exact_pot), error_pot);
@@ -174,8 +174,7 @@ static void TestFftPoissonSolver2DCosineSource()
     FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> poisson(gridxy);
 
     DFieldMemXY electrostatic_potential_alloc(gridxy);
-    VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>, ddc::DeviceAllocator<double>>
-            electric_field_alloc(gridxy);
+    VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>> electric_field_alloc(gridxy);
     DFieldMemXY rhs_alloc(gridxy);
 
     DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);

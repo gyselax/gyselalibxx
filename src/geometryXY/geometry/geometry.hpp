@@ -191,6 +191,6 @@ using VectorFieldMemXY_XY = VectorFieldMem<
         double,
         IdxRangeXY,
         NDTag<X, Y>,
-        ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>;
+        Kokkos::DefaultExecutionSpace::memory_space>;
 using VectorFieldXY_XY = typename VectorFieldMemXY_XY::span_type;
 using VectorConstFieldXY_XY = typename VectorFieldMemXY_XY::view_type;

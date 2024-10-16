@@ -88,7 +88,7 @@ private:
      *
      * @tparam ElementType The type of the elements in the chunk.
      */
-    using DQFieldMem = DFieldMem<IdxRangeQ, ddc::KokkosAllocator<double, memory_space>>;
+    using DQFieldMem = DFieldMem<IdxRangeQ, memory_space>;
     /// The accessor type for the DQFieldMem type
     using DQConstField = DConstField<IdxRangeQ, std::experimental::layout_right, memory_space>;
 
@@ -147,11 +147,9 @@ private:
 
     using IdxRangeBatchedFEMBSplines = typename FEMSplineEvaluator::batched_spline_domain_type;
 
-    using FEMBSplinesCoeffMem
-            = DFieldMem<IdxRangeFEMBSplines, ddc::KokkosAllocator<double, memory_space>>;
+    using FEMBSplinesCoeffMem = DFieldMem<IdxRangeFEMBSplines, memory_space>;
 
-    using BatchedFEMBSplinesCoeffMem
-            = DFieldMem<IdxRangeBatchedFEMBSplines, ddc::KokkosAllocator<double, memory_space>>;
+    using BatchedFEMBSplinesCoeffMem = DFieldMem<IdxRangeBatchedFEMBSplines, memory_space>;
 
     using BatchedFEMBSplinesCoeff = typename BatchedFEMBSplinesCoeffMem::span_type;
 
@@ -167,7 +165,7 @@ private:
     using CoordFieldMem = FieldMem<
             CoordPDEDim,
             typename FEMSplineEvaluator::batched_evaluation_domain_type,
-            ddc::KokkosAllocator<CoordPDEDim, memory_space>>;
+            memory_space>;
 
     using CoordField
             = Field<CoordPDEDim,
@@ -178,8 +176,7 @@ private:
 private:
     using RHSBSplines = InputBSplines;
 
-    using RHSSplineCoeffMem
-            = DFieldMem<IdxRangeBatchedBSplines, ddc::KokkosAllocator<double, memory_space>>;
+    using RHSSplineCoeffMem = DFieldMem<IdxRangeBatchedBSplines, memory_space>;
     using RHSSplineCoeff = typename RHSSplineCoeffMem::span_type;
 
     using RHSQuadTags = ddc::

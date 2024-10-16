@@ -52,7 +52,7 @@ double compute_L1_norm(
 template <class IdxRange>
 double compute_L2_norm(
         host_t<Quadrature<IdxRange>> quadrature,
-        Field<double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace> function)
+        DField<IdxRange, std::experimental::layout_right, Kokkos::HostSpace> function)
 {
     using Idx = typename IdxRange::discrete_element_type;
     return std::sqrt(quadrature(
@@ -87,10 +87,9 @@ double compute_L2_norm(
  * @return A rvalue FieldMem to the modified coefficients  @f$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} @f$.
  */
 template <class Mapping, class... IDim>
-host_t<FieldMem<double, IdxRange<IDim...>>> compute_coeffs_on_mapping(
+host_t<DFieldMem<IdxRange<IDim...>>> compute_coeffs_on_mapping(
         Mapping& mapping,
-        FieldMem<double, IdxRange<IDim...>, ddc::KokkosAllocator<double, Kokkos::HostSpace>>&&
-                coefficients)
+        DFieldMem<IdxRange<IDim...>, Kokkos::HostSpace>&& coefficients)
 {
     IdxRange<IDim...> grid = get_idx_range<IDim...>(coefficients);
     ddc::for_each(grid, [&](Idx<IDim...> const idx) {

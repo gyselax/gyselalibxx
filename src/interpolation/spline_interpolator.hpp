@@ -57,11 +57,7 @@ private:
 
     EvaluatorType const& m_evaluator;
 
-    mutable FieldMem<
-            double,
-            typename BuilderType::batched_spline_domain_type,
-            ddc::DeviceAllocator<double>>
-            m_coefs;
+    mutable DFieldMem<typename BuilderType::batched_spline_domain_type> m_coefs;
 
 
 public:

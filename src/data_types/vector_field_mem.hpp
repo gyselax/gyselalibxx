@@ -12,15 +12,14 @@
 template <
         class ElementType,
         class IdxRangeType,
-        class,
-        class Allocator
-        = ddc::KokkosAllocator<ElementType, Kokkos::DefaultExecutionSpace::memory_space>>
+        class NDTag,
+        class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
 class VectorFieldMem;
 
 
-template <class ElementType, class IdxRangeType, class DimSeq, class Allocator>
+template <class ElementType, class IdxRangeType, class DimSeq, class MemSpace>
 inline constexpr bool
-        enable_field<VectorFieldMem<ElementType, IdxRangeType, DimSeq, Allocator>> = true;
+        enable_field<VectorFieldMem<ElementType, IdxRangeType, DimSeq, MemSpace>> = true;
 
 /**
  * @brief Pre-declaration of VectorField.
@@ -38,11 +37,11 @@ class VectorField;
  * @tparam ElementType The data type of a scalar element of the vector field.
  * @tparam IdxRangeType
  * @tparam NDTag A NDTag describing the dimensions described by the scalar elements of a vector field element.
- * @tparam Allocator The type describing how/where memory is allocated. See DDC.
+ * @tparam MemSpace The type describing where the memory is allocated. See DDC.
  */
-template <class ElementType, class IdxRangeType, class NDTag, class Allocator>
+template <class ElementType, class IdxRangeType, class NDTag, class MemSpace>
 class VectorFieldMem
-    : public VectorFieldCommon<FieldMem<ElementType, IdxRangeType, Allocator>, NDTag>
+    : public VectorFieldCommon<FieldMem<ElementType, IdxRangeType, MemSpace>, NDTag>
 {
 public:
     /**
@@ -52,7 +51,7 @@ public:
      * In DDC FieldMem types are referred to as Chunk types and Field types are
      * referred to as ChunkSpan/ChunkView.
      */
-    using chunk_type = FieldMem<ElementType, IdxRangeType, Allocator>;
+    using chunk_type = FieldMem<ElementType, IdxRangeType, MemSpace>;
 
 private:
     using base_type = VectorFieldCommon<chunk_type, NDTag>;
@@ -60,6 +59,9 @@ private:
 public:
     /// The type of an element in one of the FieldMems comprising the VectorFieldMem
     using element_type = typename base_type::element_type;
+
+    /// The type of allocator that will be used to allocate the data.
+    using Allocator = ddc::KokkosAllocator<ElementType, MemSpace>;
 
 public:
     /**
@@ -72,7 +74,7 @@ public:
             IdxRangeType,
             NDTag,
             std::experimental::layout_right,
-            typename Allocator::memory_space>;
+            MemSpace>;
 
     /**
      * @brief A type which can hold a constant reference to this VectorFieldMem.
@@ -84,7 +86,7 @@ public:
             IdxRangeType,
             NDTag,
             std::experimental::layout_right,
-            typename Allocator::memory_space>;
+            MemSpace>;
 
     /**
      * @brief The type of the index range on which the field is defined.

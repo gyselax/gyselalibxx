@@ -21,11 +21,10 @@
  * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
 template <class ExecSpace, class Grid1D>
-FieldMem<double, IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
+DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> trapezoid_quadrature_coefficients_1d(
+        IdxRange<Grid1D> const& idx_range)
 {
-    DFieldMem<IdxRange<Grid1D>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-            coefficients_alloc(idx_range);
+    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
     DField<IdxRange<Grid1D>,
            std::experimental::layout_right,
            typename ExecSpace::memory_space> const coefficients
@@ -79,14 +78,11 @@ trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
  *         The allocation place (host or device ) will depend on the ExecSpace.
  */
 template <class ExecSpace, class... ODims>
-FieldMem<double, IdxRange<ODims...>, ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>
-trapezoid_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
+DFieldMem<IdxRange<ODims...>, typename ExecSpace::memory_space> trapezoid_quadrature_coefficients(
+        IdxRange<ODims...> const& idx_range)
 {
     return quadrature_coeffs_nd<ExecSpace, ODims...>(
             idx_range,
-            (std::function<FieldMem<
-                     double,
-                     IdxRange<ODims>,
-                     ddc::KokkosAllocator<double, typename ExecSpace::memory_space>>(
+            (std::function<DFieldMem<IdxRange<ODims>, typename ExecSpace::memory_space>(
                      IdxRange<ODims>)>(trapezoid_quadrature_coefficients_1d<ExecSpace, ODims>))...);
 }

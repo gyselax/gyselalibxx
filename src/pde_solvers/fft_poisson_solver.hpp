@@ -83,10 +83,8 @@ public:
     using fourier_index_type = typename fourier_idx_range_type::discrete_element_type;
 
     /// @brief The type of a Field storing the Fourier transform of a function.
-    using fourier_field_mem_type = FieldMem<
-            Kokkos::complex<double>,
-            fourier_idx_range_type,
-            ddc::KokkosAllocator<Kokkos::complex<double>, memory_space>>;
+    using fourier_field_mem_type
+            = FieldMem<Kokkos::complex<double>, fourier_idx_range_type, memory_space>;
     /// @brief The type of a Field storing the Fourier transform of a function.
     using fourier_field_type = typename fourier_field_mem_type::span_type;
 
@@ -246,7 +244,7 @@ public:
      *
      * @param laplacian_idx_range The index range on which the equation should be solved.
      */
-    FFTPoissonSolver(laplacian_idx_range_type laplacian_idx_range)
+    explicit FFTPoissonSolver(laplacian_idx_range_type laplacian_idx_range)
     {
         ((init_fourier_space<GridPDEDim1D>(ddc::select<GridPDEDim1D>(laplacian_idx_range))), ...);
     }

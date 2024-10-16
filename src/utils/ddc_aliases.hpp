@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <ddc/ddc.hpp>
@@ -30,15 +31,12 @@ using IdxRange = ddc::DiscreteDomain<GridTypes...>;
 template <
         class ElementType,
         class IdxRange,
-        class Allocator
-        = ddc::KokkosAllocator<ElementType, Kokkos::DefaultExecutionSpace::memory_space>>
-using FieldMem = ddc::Chunk<ElementType, IdxRange, Allocator>;
+        class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
+using FieldMem = ddc::Chunk<ElementType, IdxRange, ddc::KokkosAllocator<ElementType, MemSpace>>;
 
 /// An alias describing the type of an object which will allocate memory for a field of doubles when it is created.
-template <
-        class IdxRange,
-        class Allocator = ddc::KokkosAllocator<double, Kokkos::DefaultExecutionSpace::memory_space>>
-using DFieldMem = FieldMem<double, IdxRange, Allocator>;
+template <class IdxRange, class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
+using DFieldMem = FieldMem<double, IdxRange, MemSpace>;
 
 /// An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid @f${x_0, x_1, .., x_N}@f$)
 template <

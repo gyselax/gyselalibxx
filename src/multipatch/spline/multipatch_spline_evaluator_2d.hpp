@@ -568,11 +568,11 @@ public:
         using bsplines_2 = bsplines_type2<Patch>;
         using IdxBS12 = typename spline_idx_range_type<Patch>::discrete_element_type;
 
-        DFieldMem<IdxRange<bsplines_1>, ddc::KokkosAllocator<double, memory_space>> values1_alloc(
+        DFieldMem<IdxRange<bsplines_1>, memory_space> values1_alloc(
                 get_idx_range<bsplines_1>(spline_coef));
         DField<IdxRange<bsplines_1>, std::experimental::layout_right, memory_space> values1
                 = get_field(values1_alloc);
-        DFieldMem<IdxRange<bsplines_2>, ddc::KokkosAllocator<double, memory_space>> values2_alloc(
+        DFieldMem<IdxRange<bsplines_2>, memory_space> values2_alloc(
                 get_idx_range<bsplines_2>(spline_coef));
         DField<IdxRange<bsplines_2>, std::experimental::layout_right, memory_space> values2
                 = get_field(values2_alloc);

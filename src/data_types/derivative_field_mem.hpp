@@ -10,16 +10,12 @@
 /**
  * See @ref DerivFieldMemImplementation
  */
-template <
-        class ElementType,
-        class Domain,
-        int NDerivs,
-        class Allocator = ddc::HostAllocator<ElementType>>
+template <class ElementType, class Domain, int NDerivs, class MemSpace = Kokkos::HostSpace>
 class DerivFieldMem;
 
-template <class ElementType, class SupportType, int NDerivs, class Allocator>
+template <class ElementType, class SupportType, int NDerivs, class MemSpace>
 inline constexpr bool
-        enable_deriv_field<DerivFieldMem<ElementType, SupportType, NDerivs, Allocator>> = true;
+        enable_deriv_field<DerivFieldMem<ElementType, SupportType, NDerivs, MemSpace>> = true;
 
 
 /**
@@ -36,19 +32,18 @@ inline constexpr bool
  *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<IDimX>, IDimX, IDimY>).
  * @tparam NDerivs The number of derivatives which are defined in the dimensions where derivatives
  *          appear.
- * @tparam Allocator The Allocator which is used to build the FieldMem. This provides information
- *          about the memory space where the data will be saved.
+ * @tparam MemSpace The memory space where the data will be saved.
  */
-template <class ElementType, class... DDims, int NDerivs, class Allocator>
-class DerivFieldMem<ElementType, IdxRange<DDims...>, NDerivs, Allocator>
+template <class ElementType, class... DDims, int NDerivs, class MemSpace>
+class DerivFieldMem<ElementType, IdxRange<DDims...>, NDerivs, MemSpace>
     : public DerivFieldCommon<
-              FieldMem<ElementType, IdxRange<DDims...>, Allocator>,
+              FieldMem<ElementType, IdxRange<DDims...>, MemSpace>,
               IdxRange<DDims...>>
 {
 private:
     /// @brief The class from which this object inherits.
     using base_type = DerivFieldCommon<
-            FieldMem<ElementType, IdxRange<DDims...>, Allocator>,
+            FieldMem<ElementType, IdxRange<DDims...>, MemSpace>,
             IdxRange<DDims...>>;
 
 public:
@@ -212,8 +207,7 @@ private:
     /// @brief Make the internal mdspan that will be saved in internal_fields at the index ArrayIndex.
     template <std::size_t ArrayIndex>
     std::enable_if_t<std::is_constructible_v<mapping_type, extents_type>, internal_mdspan_type>
-    make_internal_mdspan(
-            ddc::KokkosAllocator<element_type, typename chunk_type::memory_space> allocator)
+    make_internal_mdspan(allocator_type allocator)
     {
         std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
         element_type* ptr = allocator.allocate("", alloc_size);
@@ -365,13 +359,9 @@ public:
 };
 
 namespace detail {
-template <class NewMemorySpace, class ElementType, class SupportType, int NDerivs, class Allocator>
-struct OnMemorySpace<NewMemorySpace, DerivFieldMem<ElementType, SupportType, NDerivs, Allocator>>
+template <class NewMemorySpace, class ElementType, class SupportType, int NDerivs, class MemSpace>
+struct OnMemorySpace<NewMemorySpace, DerivFieldMem<ElementType, SupportType, NDerivs, MemSpace>>
 {
-    using type = DerivFieldMem<
-            ElementType,
-            SupportType,
-            NDerivs,
-            ddc::KokkosAllocator<ElementType, NewMemorySpace>>;
+    using type = DerivFieldMem<ElementType, SupportType, NDerivs, NewMemorySpace>;
 };
 } // namespace detail

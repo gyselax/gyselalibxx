@@ -7,6 +7,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
 #include "transpose.hpp"
 #include "vector_field.hpp"
@@ -25,7 +26,7 @@ namespace ddcHelper {
  */
 template <class IDim>
 constexpr std::enable_if_t<!IDim::continuous_dimension_type::PERIODIC, double>
-total_interval_length(ddc::DiscreteDomain<IDim> const& idx_range)
+total_interval_length(IdxRange<IDim> const& idx_range)
 {
     return std::fabs(ddc::rlength(idx_range));
 }
@@ -43,7 +44,7 @@ template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC && ddc::is_uniform_point_sampling_v<IDim>,
         double>
-total_interval_length(ddc::DiscreteDomain<IDim> const& idx_range)
+total_interval_length(IdxRange<IDim> const& idx_range)
 {
     return std::fabs(ddc::rlength(idx_range) + ddc::step<IDim>());
 }
@@ -61,9 +62,9 @@ template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC && ddc::is_non_uniform_point_sampling_v<IDim>,
         double>
-total_interval_length(ddc::DiscreteDomain<IDim> const& idx_range)
+total_interval_length(IdxRange<IDim> const& idx_range)
 {
-    ddc::DiscreteDomain<IDim> dom_periodic(idx_range.front(), idx_range.extents() + 1);
+    IdxRange<IDim> dom_periodic(idx_range.front(), idx_range.extents() + 1);
     return std::fabs(ddc::rlength(dom_periodic));
 }
 
@@ -88,9 +89,7 @@ template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC,
         typename IDim::continuous_element_type>
-restrict_to_idx_range(
-        typename IDim::continuous_element_type coord,
-        ddc::DiscreteDomain<IDim> const& idx_range)
+restrict_to_idx_range(typename IDim::continuous_element_type coord, IdxRange<IDim> const& idx_range)
 {
     using Coord = typename IDim::continuous_element_type;
     double const x_min = ddc::rmin(idx_range);
@@ -151,12 +150,12 @@ KOKKOS_INLINE_FUNCTION void restrict_to_bspline_domain(
 template <class ExecSpace, class Dim, class Layout, class MemorySpace>
 inline void dump_coordinates(
         ExecSpace exec_space,
-        ddc::ChunkSpan<double, ddc::DiscreteDomain<Dim>, Layout, MemorySpace> dump_coord)
+        DField<IdxRange<Dim>, Layout, MemorySpace> dump_coord)
 {
     ddc::parallel_for_each(
             exec_space,
             dump_coord.domain(),
-            KOKKOS_LAMBDA(ddc::DiscreteElement<Dim> i) { dump_coord(i) = ddc::coordinate(i); });
+            KOKKOS_LAMBDA(Idx<Dim> i) { dump_coord(i) = ddc::coordinate(i); });
 }
 
 /**
@@ -173,12 +172,12 @@ template <
         class TargetDomain,
         class ElementType,
         class Domain,
-        class ChunkLayoutType,
+        class FieldLayoutType,
         class ExecSpace,
         class MemSpace>
 auto create_transpose_mirror_view_and_copy(
         ExecSpace const& execution_space,
-        ddc::ChunkSpan<ElementType, Domain, ChunkLayoutType, MemSpace> src)
+        Field<ElementType, Domain, FieldLayoutType, MemSpace> src)
 {
     static_assert(
             ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
@@ -187,10 +186,9 @@ auto create_transpose_mirror_view_and_copy(
     } else {
         TargetDomain transposed_domain(src.domain());
         using ElemType = std::remove_const_t<ElementType>;
-        ddc::Chunk<ElemType, TargetDomain, ddc::KokkosAllocator<ElemType, MemSpace>> chunk(
-                transposed_domain);
-        transpose_layout(execution_space, chunk.span_view(), src.span_cview());
-        return chunk;
+        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
+        transpose_layout(execution_space, field_alloc.span_view(), src.span_cview());
+        return field_alloc;
     }
 }
 
@@ -208,12 +206,12 @@ template <
         class TargetDomain,
         class ElementType,
         class Domain,
-        class ChunkLayoutType,
+        class FieldLayoutType,
         class ExecSpace,
         class MemSpace>
 auto create_transpose_mirror(
         ExecSpace const& execution_space,
-        ddc::ChunkSpan<ElementType, Domain, ChunkLayoutType, MemSpace> src)
+        Field<ElementType, Domain, FieldLayoutType, MemSpace> src)
 {
     static_assert(
             ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
@@ -222,9 +220,8 @@ auto create_transpose_mirror(
     } else {
         TargetDomain transposed_domain(src.domain());
         using ElemType = std::remove_const_t<ElementType>;
-        ddc::Chunk<ElemType, TargetDomain, ddc::KokkosAllocator<ElemType, MemSpace>> chunk(
-                transposed_domain);
-        return chunk;
+        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
+        return field_alloc;
     }
 }
 
@@ -281,17 +278,13 @@ struct OnMemorySpace<NewMemorySpace, ddc::ChunkSpan<ElementType, SupportType, La
  * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
  * @tparam NDTag NDTag object storing the dimensions along which the VectorFieldMem is defined.
  *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
- * @tparam Allocator Allocator type (see ddc::KokkosAllocator).
+ * @tparam MemSpace The old memory space.
  * @see VectorFieldMem
  */
-template <class NewMemorySpace, class ElementType, class SupportType, class NDTag, class Allocator>
-struct OnMemorySpace<NewMemorySpace, VectorFieldMem<ElementType, SupportType, NDTag, Allocator>>
+template <class NewMemorySpace, class ElementType, class SupportType, class NDTag, class MemSpace>
+struct OnMemorySpace<NewMemorySpace, VectorFieldMem<ElementType, SupportType, NDTag, MemSpace>>
 {
-    using type = VectorFieldMem<
-            ElementType,
-            SupportType,
-            NDTag,
-            ddc::KokkosAllocator<ElementType, NewMemorySpace>>;
+    using type = VectorFieldMem<ElementType, SupportType, NDTag, NewMemorySpace>;
 };
 
 /**

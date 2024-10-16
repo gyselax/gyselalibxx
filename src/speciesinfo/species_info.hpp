@@ -36,10 +36,10 @@ public:
 
     private:
         // charge of the particles (kinetic + adiabatic)
-        DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> m_charge;
+        DFieldMem<index_range_type, MemorySpace> m_charge;
 
         // mass of the particles of all kinetic species
-        DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> m_mass;
+        DFieldMem<index_range_type, MemorySpace> m_mass;
 
         // workaround to access charges on the device
         DConstField<index_range_type, std::experimental::layout_right, MemorySpace> m_charge_view;
@@ -74,8 +74,8 @@ public:
          * @param[in] charge array storing both kinetic and adiabatic charges
          * @param[in] mass array storing both kinetic and adiabatic masses
          */
-        Impl(DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> charge,
-             DFieldMem<index_range_type, ddc::KokkosAllocator<double, MemorySpace>> mass)
+        Impl(DFieldMem<index_range_type, MemorySpace> charge,
+             DFieldMem<index_range_type, MemorySpace> mass)
             : m_charge(std::move(charge))
             , m_mass(std::move(mass))
         {
