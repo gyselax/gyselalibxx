@@ -150,7 +150,7 @@ public:
      * @brief Create instance of CollisionSpVparMu class
      *
      * @param[in] collision_info
-     *      class containing rg, safety_factor and nustar0
+     *      class containing rg, safety_factor, nustar0 and coeff_AD 
      * @param[in] fdistrib_idx_range
      *      index range (species, 3D space, 2D velocity space) on which the collision operator acts
      *      ATTENTION it must contain the all index range in species and 2D velocity.
@@ -168,22 +168,16 @@ public:
             DConstFieldVpar coeff_intdvpar,
             InputDFieldThetaR B_norm)
         : m_operator_handle {}
-        , m_comb_mat {Kokkos::view_alloc(Kokkos::WithoutInitializing, "m_comb_mat")}
         , m_hat_As {"m_hat_As", collisions_dimensions::get_idx_range<Species>(fdistrib_idx_range)}
         , m_hat_Zs {"m_hat_Zs", collisions_dimensions::get_idx_range<Species>(fdistrib_idx_range)}
-        , m_nustar0_r {"m_nustar0_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
-        , m_rg {"m_rg", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
-        , m_safety_factor {"m_safety_factor", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
         , m_mask_buffer_r {"m_mask_buffer_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
         , m_mask_LIM {"m_mask_LIM", IdxRangeThetaR {collisions_dimensions::get_idx_range<GridTheta, GridR>(fdistrib_idx_range)}}
         , m_B_norm {"m_B_norm", IdxRangeThetaR {collisions_dimensions::get_idx_range<GridTheta, GridR>(fdistrib_idx_range)}}
         , m_Bstar_s {"m_Bstar_s", IdxRangeSpThetaRVpar {collisions_dimensions::get_idx_range<Species, GridTheta, GridR, GridVpar>(fdistrib_idx_range)}}
+        , m_coeff_AD {"m_coeff_AD", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
         , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_idx_range)}
         , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_idx_range)}
     {
-        // Check that the distribution function is correctly ordered
-        koliop_interface::DoCombMatComputation(m_comb_mat);
-
         IdxRangeSp idxrange_sp = ddc::select<Species>(fdistrib_idx_range);
         // --> Initialize the mass species
         host_t<DConstFieldSp> hat_As_host
@@ -219,9 +213,7 @@ public:
         std::size_t const n_batch
                 = fdistrib_idx_range.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 
-        deepcopy_radial_profile(get_field(m_rg), collision_info.rg());
-        deepcopy_radial_profile(get_field(m_safety_factor), collision_info.safety_factor());
-        deepcopy_radial_profile(get_field(m_nustar0_r), collision_info.nustar0());
+        deepcopy_radial_profile(get_field(m_coeff_AD), collision_info.coeff_AD());
         deepcopy_poloidal_plane(get_field(m_B_norm), B_norm);
 
         m_operator_handle = koliop_interface::DoOperatorInitialization(
@@ -233,16 +225,13 @@ public:
                 n_sp,
                 collision_info.collisions_interspecies(),
                 /* the_local_index range_r_offset */ 0 + n_r - 1,
+                m_hat_As.data_handle(),
+                m_hat_Zs.data_handle(),
                 m_mug.data_handle(),
                 m_vparg.data_handle(),
                 coeff_intdmu.data_handle(),
                 coeff_intdvpar.data_handle(),
-                m_nustar0_r.data_handle(),
-                m_comb_mat.data(),
-                m_hat_As.data_handle(),
-                m_hat_Zs.data_handle(),
-                m_rg.data_handle(),
-                m_safety_factor.data_handle(),
+                m_coeff_AD.data_handle(),
                 m_mask_buffer_r.data_handle(),
                 m_mask_LIM.data_handle(),
                 m_B_norm.data_handle(),
@@ -294,13 +283,8 @@ protected:
     DFieldMemSp m_hat_As;
     /// Normalized charges for all species
     DFieldMemSp m_hat_Zs;
-    /// Radial profile of nustar0_r
-    DFieldMemR m_nustar0_r;
-    /// Mesh points in the radial direction
-    // [TODO]: See if we need m_rg ?
-    DFieldMemR m_rg;
-    /// Radial safety factor profile
-    DFieldMemR m_safety_factor;
+    /// Radial AD coefficients
+    DFieldMemR m_coeff_AD;
     /// Mask used to avoid to apply collision in certain region
     // [TODO]: This mask should maybe be deleted in C++ version
     DFieldMemR m_mask_buffer_r;

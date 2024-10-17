@@ -16,12 +16,12 @@
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "neumann_spline_quadrature.hpp"
 #include "noperturbinitialization.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
-#include "simpson_quadrature.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
 
@@ -86,13 +86,12 @@ int main(int argc, char** argv)
     // ---> Initialisation of the Collision operator
     double const B_norm = 1.0;
 
-    // TODO: Simplify the construction of coeff_intdmu and coeff_indmu as soon as the possibililty to define the quadrature coefficients directly on GPU is available
-    DFieldMemVpar const coeff_intdvpar(
-            simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-                    get_idx_range<GridVpar>(allfdistribu)));
-    DFieldMemMu const coeff_intdmu(
-            simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(
-                    get_idx_range<GridMu>(allfdistribu)));
+    SplineVparBuilder const builder_vpar(idxrange_vpar);
+    DFieldMemVpar const coeff_intdvpar(neumann_spline_quadrature_coefficients<
+                                       Kokkos::DefaultExecutionSpace>(idxrange_vpar, builder_vpar));
+    SplineMuBuilder const builder_mu(idxrange_mu);
+    DFieldMemMu const coeff_intdmu(neumann_spline_quadrature_coefficients<
+                                   Kokkos::DefaultExecutionSpace>(idxrange_mu, builder_mu));
     CollisionInfo const collision_info(conf_collision);
     CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
             collision_info,

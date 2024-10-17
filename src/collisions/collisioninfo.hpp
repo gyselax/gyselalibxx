@@ -25,6 +25,8 @@ class CollisionInfo
     // safety factor fixed to 1. => because already included in nustar
     double const m_q_rpeak = 1.;
     double const m_safety_factor = 1.;
+    // AD coefficient
+    double m_coeff_AD;
 
 public:
     /// radial_chunk_type used to treat the 0D case for radial profile
@@ -34,7 +36,7 @@ public:
      * @brief The constructor for the CollisionFrequency class.
      * @param[in] yaml_input_file YAML input file containing CollisionsInfo
      */
-    CollisionInfo(PC_tree_t const& yaml_input_file)
+    explicit CollisionInfo(PC_tree_t const& yaml_input_file)
         : m_nustar0 {PCpp_double(yaml_input_file, ".CollisionsInfo.nustar0_rpeak")}
         , m_collisions_interspecies {
                   PCpp_bool(yaml_input_file, ".CollisionsInfo.collisions_interspecies")}
@@ -43,6 +45,8 @@ public:
         if (m_nustar0 != 1.0) {
             throw std::invalid_argument("nustar0 must be equal to 1");
         }
+
+        m_coeff_AD = Kokkos::sqrt(2.);
     };
 
     ~CollisionInfo() = default;
@@ -81,5 +85,14 @@ public:
     double nustar0() const
     {
         return m_nustar0;
+    }
+
+    /**
+     * @brief A method for accessing the coeff_AD variable of the class.
+     * @return A double containing the coeff_AD value. 
+     */
+    double coeff_AD() const
+    {
+        return m_coeff_AD;
     }
 };
