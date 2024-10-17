@@ -120,10 +120,14 @@ public:
     using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
 
     using NumericalTuple = std::tuple<
-            NumericalMethodParameters<Euler<ValFieldMem, DerivFieldMem>>,
-            NumericalMethodParameters<CrankNicolson<ValFieldMem, DerivFieldMem>>,
-            NumericalMethodParameters<RK3<ValFieldMem, DerivFieldMem>>,
-            NumericalMethodParameters<RK4<ValFieldMem, DerivFieldMem>>>;
+            NumericalMethodParameters<
+                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+            NumericalMethodParameters<
+                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+            NumericalMethodParameters<
+                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+            NumericalMethodParameters<
+                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -134,19 +138,25 @@ public:
         , params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
-                          Euler<ValFieldMem, DerivFieldMem>(params.grid),
+                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                                  params.grid),
                           params.dt * 0.1,
                           "EULER"),
                   NumericalMethodParameters(
-                          CrankNicolson<ValFieldMem, DerivFieldMem>(params.grid, 20, 1e-12),
+                          CrankNicolson<
+                                  ValFieldMem,
+                                  DerivFieldMem,
+                                  Kokkos::DefaultHostExecutionSpace>(params.grid, 20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
                   NumericalMethodParameters(
-                          RK3<ValFieldMem, DerivFieldMem>(params.grid),
+                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                                  params.grid),
                           params.dt,
                           "RK3"),
                   NumericalMethodParameters(
-                          RK4<ValFieldMem, DerivFieldMem>(params.grid),
+                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                                  params.grid),
                           params.dt,
                           "RK4")))
     {

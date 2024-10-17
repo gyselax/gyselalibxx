@@ -45,19 +45,20 @@ TEST(CrankNicolsonFixture, CrankNicolsonOrder)
     ddc::init_discrete_space<GridX>(GridX::init(x_min, x_max, x_size));
     IdxRangeX idx_range(start, x_size);
 
-    CrankNicolson<DFieldMemX> crank_nicolson(idx_range);
+    CrankNicolson<DFieldMemX, DFieldMemX, Kokkos::DefaultHostExecutionSpace> crank_nicolson(
+            idx_range);
 
     DFieldMemX vals(idx_range);
     DFieldMemX result(idx_range);
 
     double exp_val = exp(5.0 * dt * Nt);
     ddc::for_each(idx_range, [&](IdxX ix) {
-        double const C = (double(ix.uid()) - 0.6);
+        double const C = (double(ix - idx_range.front()) - 0.6);
         result(ix) = C * exp_val + 0.6;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix.uid()); });
+        ddc::for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix - idx_range.front()); });
 
         for (int i(0); i < Nt; ++i) {
             crank_nicolson

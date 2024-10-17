@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <ddc/ddc.hpp>
@@ -37,13 +36,16 @@ using MDL = Kokkos::View<
  * @param[in] the_species_extent The number of species.
  * @param[in] collision_interspecies Boolean that is equal to true if inter-species collisions are taken into account.
  * @param[in] ir_SOL_separatrix The index in the radial dimension where the SOL separatrix is found.
- * @param[in] hat_As The normalized masses for all species.
- * @param[in] hat_Zs The normalized charges for all species.
  * @param[in] mug The coordinates of the grid of magnetic moments.
  * @param[in] vparg The coordinates of the grid of parallel velocities.
  * @param[in] coeff_intdmu The quadrature coefficients to integrate on the grid of magnetic moments.
  * @param[in] coeff_intdvpar The quadrature coefficients to integrate on the grid of parallel velocities.
- * @param[in] coeff_AD_r
+ * @param[in] nustar The radial profile of the collisionality.
+ * @param[in] comb_mat The combinatory (6x6) matrix.
+ * @param[in] hat_As The normalized masses for all species.
+ * @param[in] hat_Zs The normalized charges for all species.
+ * @param[in] rg The coordinates of the grid of radial points.
+ * @param[in] safety_factor The radial profile of the safety factor.
  * @param[in] mask_buffer_r The mask used to avoid applying collisions in certain radial region.
  * @param[in] mask_LIM The limiter mask defined over the polar slice.
  * @param[in] B_norm The norm of the magnetic field defined over the polar slice.
@@ -60,13 +62,16 @@ using MDL = Kokkos::View<
         std::size_t the_species_extent,
         std::int8_t collision_interspecies,
         std::int64_t ir_SOL_separatrix,
-        const double* hat_As,
-        const double* hat_Zs,
         const double* mug,
         const double* vparg,
         const double* coeff_intdmu,
         const double* coeff_intdvpar,
-        const double* coeff_AD_r,
+        const double* nustar,
+        const double* comb_mat,
+        const double* hat_As,
+        const double* hat_Zs,
+        const double* rg,
+        const double* safety_factor,
         const double* mask_buffer_r,
         const double* mask_LIM,
         const double* B_norm,

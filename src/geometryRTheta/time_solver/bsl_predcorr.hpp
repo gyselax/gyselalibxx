@@ -167,7 +167,10 @@ public:
                       host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
                       double dt) { m_advection_solver(allfdistribu, advection_field, dt); };
 
-        RK2<host_t<DFieldMemRTheta>, host_t<DVectorFieldMemRTheta<X, Y>>> time_stepper(grid);
+        RK2<host_t<DFieldMemRTheta>,
+            host_t<DVectorFieldMemRTheta<X, Y>>,
+            Kokkos::DefaultHostExecutionSpace>
+                time_stepper(grid);
 
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {

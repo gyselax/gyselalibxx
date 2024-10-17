@@ -56,8 +56,11 @@ public:
     using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
-            RK2<AdvectionFieldMem>,
-            std::conditional_t<ORDER == 3, RK3<AdvectionFieldMem>, RK4<AdvectionFieldMem>>>;
+            RK2<AdvectionFieldMem, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>,
+            std::conditional_t<
+                    ORDER == 3,
+                    RK3<AdvectionFieldMem, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>,
+                    RK4<AdvectionFieldMem, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>>>;
 };
 
 using runge_kutta_2d_types = testing::Types<
@@ -144,7 +147,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
         for (int i(0); i < Nt; ++i) {
             runge_kutta.update(
                     Kokkos::DefaultHostExecutionSpace(),
-                    vals,
+                    get_field(vals),
                     dt,
                     [yc, xc, &idx_range, omega](AdvectionField dy, ConstAdvectionField y) {
                         ddc::for_each(idx_range, [&](IdxXY ixy) {

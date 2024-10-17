@@ -58,7 +58,12 @@ private:
 
 public:
     /// The type of an element in one of the FieldMems comprising the VectorFieldMem
-    using element_type = typename base_type::element_type;
+    using typename base_type::element_type;
+
+    using typename base_type::NDTypeTag;
+
+    using typename base_type::chunk_span_type;
+    using typename base_type::chunk_view_type;
 
     /// The type of allocator that will be used to allocate the data.
     using Allocator = ddc::KokkosAllocator<ElementType, MemSpace>;
@@ -282,5 +287,33 @@ public:
     auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
         return span_view()[oidx_range];
+    }
+
+    /**
+     * @brief Get the Field describing the component in the QueryTag direction.
+     *
+     * @return The field in the specified direction.
+     */
+    template <class QueryTag>
+    inline constexpr chunk_span_type get() noexcept
+    {
+        static_assert(
+                ddc::in_tags_v<QueryTag, NDTypeTag>,
+                "requested Tag absent from TaggedVector");
+        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
+    }
+
+    /**
+     * @brief Get the Field describing the component in the QueryTag direction.
+     *
+     * @return The constant field in the specified direction.
+     */
+    template <class QueryTag>
+    inline constexpr chunk_view_type get() const noexcept
+    {
+        static_assert(
+                ddc::in_tags_v<QueryTag, NDTypeTag>,
+                "requested Tag absent from TaggedVector");
+        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_cview();
     }
 };

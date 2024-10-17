@@ -41,10 +41,7 @@ private:
     DConstFieldR m_safety_factor;
 
     /// radial profile of nustar0
-    DFieldMemR m_nustar0;
-
-    /// radial coefficients of AD
-    DFieldMemR m_coeff_AD;
+    DFieldMemR m_nustar0_r;
 
 public:
     /**
@@ -54,7 +51,7 @@ public:
      * 
      * This function should be private but is public due to Kokkos restrictions.
     */
-    void compute_nustar0()
+    void compute_nustar0_r()
     {
         double const rpeak = m_rpeak;
         double const q_rpeak = m_q_rpeak;
@@ -62,41 +59,15 @@ public:
         DConstFieldR safety_factor = get_const_field(m_safety_factor);
         double const nustar0_rpeak = m_nustar0_rpeak;
 
-        DFieldR nustar0 = get_field(m_nustar0);
+        DFieldR nustar0_r = get_field(m_nustar0_r);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(radial_profile),
                 KOKKOS_LAMBDA(Idx<GridR> idx) {
                     double rpeak_on_r = rpeak / radial_profile(idx);
                     double q_on_qrpeak = safety_factor(idx) / q_rpeak;
-                    nustar0(idx)
+                    nustar0_r(idx)
                             = nustar0_rpeak * q_on_qrpeak * rpeak_on_r * Kokkos::sqrt(rpeak_on_r);
-                });
-    }
-
-    /**
-     * Computation of the radial profile of AD
-     *  @f[ AD(r) = \sqrt(2)*eps^(3/2)/(q R0)*nustar0_r(r) @f]
-     * where R0, q(r), nustar0(r) are given as input data and
-     * eps = r/R0 is the aspect ratio.
-     * 
-     * This function should be private but is public due to Kokkos restrictions.
-    */
-    void compute_coeff_AD()
-    {
-        double const R0 = 1.; //TODO: Must be imported
-        DConstFieldR radial_profile = get_const_field(m_rg);
-        DConstFieldR safety_factor = get_const_field(m_safety_factor);
-        DConstFieldR nustar0 = get_const_field(m_nustar0);
-
-        DFieldR coeff_AD = get_field(m_coeff_AD);
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                get_idx_range(radial_profile),
-                KOKKOS_LAMBDA(Idx<GridR> idx) {
-                    double eps = radial_profile(idx) / R0;
-                    coeff_AD(idx) = Kokkos::sqrt(2.) * eps * Kokkos::sqrt(eps) * nustar0(idx)
-                                    / (safety_factor(idx) * R0);
                 });
     }
 
@@ -123,11 +94,9 @@ public:
         , m_q_rpeak(q_rpeak)
         , m_rg(radial_profile)
         , m_safety_factor(safety_factor)
-        , m_nustar0(get_idx_range(radial_profile))
-        , m_coeff_AD(get_idx_range(radial_profile))
+        , m_nustar0_r(get_idx_range(radial_profile))
     {
-        compute_nustar0();
-        compute_coeff_AD();
+        compute_nustar0_r();
     };
 
     /**
@@ -153,11 +122,9 @@ public:
         , m_q_rpeak(q_rpeak)
         , m_rg(radial_profile)
         , m_safety_factor(safety_factor)
-        , m_nustar0(get_idx_range(radial_profile))
-        , m_coeff_AD(get_idx_range(radial_profile))
+        , m_nustar0_r(get_idx_range(radial_profile))
     {
-        compute_nustar0();
-        compute_coeff_AD();
+        compute_nustar0_r();
     };
 
     ~CollisionInfoRadial() = default;
@@ -195,15 +162,6 @@ public:
      */
     DConstFieldR nustar0() const
     {
-        return m_nustar0;
-    }
-
-    /**
-     * @brief A method for accessing coeff_AD (the radial profile of AD coeff) variable of the class.
-     * @return A field containing the radial profile of the AD coefficients.
-     */
-    DConstFieldR coeff_AD() const
-    {
-        return m_coeff_AD;
+        return m_nustar0_r;
     }
 };

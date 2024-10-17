@@ -209,26 +209,35 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>>
+    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
+          host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
+          Kokkos::DefaultHostExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "EULER";
     key += "euler";
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>>
+    CrankNicolson<
+            host_t<FieldMemRTheta<CoordRTheta>>,
+            host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
+            Kokkos::DefaultHostExecutionSpace>
             time_stepper(grid, 20, epsilon_CN);
     std::string const method_name = "CRANK NICOLSON";
     key += "crank_nicolson";
 
 #elif defined(RK3_METHOD)
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>>
+    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
+        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
+        Kokkos::DefaultHostExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "RK3";
     key += "rk3";
 
 #elif defined(RK4_METHOD)
-    RK4<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>>
+    RK4<host_t<FieldMemRTheta<CoordRTheta>>,
+        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
+        Kokkos::DefaultHostExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "RK4";
     key += "rk4";

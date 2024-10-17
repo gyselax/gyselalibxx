@@ -139,8 +139,9 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     AdvectionPhysicalDomain advection_idx_range(mapping);
 
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
-            time_stepper(grid);
+    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
+        host_t<DVectorFieldMemRTheta<X, Y>>,
+        Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
     SplineFootFinder
             find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
 
@@ -169,16 +170,25 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // ================================================================================================
     // INITIALISATION                                                                                 |
     // ================================================================================================
-    host_t<DFieldMemRTheta> allfdistribu_rp(grid);
-    host_t<DFieldMemRTheta> allfdistribu_xy(grid);
+    host_t<DFieldMemRTheta> allfdistribu_rp_alloc(grid);
+    host_t<DFieldMemRTheta> allfdistribu_xy_alloc(grid);
 
-    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact(grid);
-    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rp(grid_without_Opoint);
-    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy(grid);
-    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rp(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
+    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rp_alloc(grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rp_alloc(grid);
     CoordXY advection_field_xy_center;
 
-    host_t<DFieldMemRTheta> electrostatic_potential(grid);
+    host_t<DFieldMemRTheta> electrostatic_potential_alloc(grid);
+
+    host_t<DFieldRTheta> allfdistribu_rp(allfdistribu_rp_alloc);
+    host_t<DFieldRTheta> allfdistribu_xy(allfdistribu_xy_alloc);
+    host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
+
+    host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
+    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp(advection_field_rp_alloc);
+    host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
+    host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rp(advection_field_xy_from_rp_alloc);
 
 
 

@@ -49,7 +49,7 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
     using IdxRangeXY = IdxRange<GridX, GridY>;
     using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>>;
     using CFieldXY = host_t<FieldMem<CoordXY, IdxRangeXY>>;
-    using Methods = Euler<CFieldXY, AdvectionFieldMem>;
+    using Methods = Euler<CFieldXY, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>;
     using AdvectionField = host_t<VectorField<double, IdxRangeXY, NDTag<X, Y>>>;
     using ConstAdvectionField = host_t<VectorConstField<double, IdxRangeXY, NDTag<X, Y>>>;
 

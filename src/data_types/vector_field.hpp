@@ -65,6 +65,11 @@ public:
     /// The type of an element in one of the Fields comprising the VectorField
     using element_type = typename base_type::element_type;
 
+    using typename base_type::NDTypeTag;
+
+    using typename base_type::chunk_span_type;
+    using typename base_type::chunk_view_type;
+
 public:
     /**
      * @brief A type which can hold a modifiable reference to a VectorFieldMem.
@@ -145,7 +150,7 @@ private:
                     LayoutStridedPolicy,
                     MemorySpace> const& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other))...)
+        : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
     {
     }
 
@@ -195,7 +200,7 @@ public:
      * @param other the VectorFieldMem to view
      */
     template <class OElementType, class Allocator>
-    KOKKOS_FUNCTION constexpr VectorField(
+    KOKKOS_FUNCTION explicit constexpr VectorField(
             VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>& other) noexcept
         : VectorField(other, std::make_index_sequence<base_type::NDims> {})
     {
@@ -210,11 +215,14 @@ public:
             class SFINAEElementType = ElementType,
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
             class Allocator>
-    KOKKOS_FUNCTION constexpr VectorField(
+    KOKKOS_FUNCTION explicit constexpr VectorField(
             VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator> const& other) noexcept
         : VectorField(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
+
+    template <class OElementType, class Allocator>
+    VectorField(VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>&& other) = delete;
 
     /** Constructs a new VectorField by copy of a chunk, yields a new view to the same data
      * @param other the VectorField to move
@@ -344,6 +352,20 @@ public:
     constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
     {
         return get_slice(oidx_range, std::make_index_sequence<base_type::NDims> {});
+    }
+
+    /**
+     * @brief Get the Field describing the component in the QueryTag direction.
+     *
+     * @return The field in the specified direction.
+     */
+    template <class QueryTag>
+    inline constexpr chunk_span_type get() const noexcept
+    {
+        static_assert(
+                ddc::in_tags_v<QueryTag, NDTypeTag>,
+                "requested Tag absent from TaggedVector");
+        return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
     }
 };
 

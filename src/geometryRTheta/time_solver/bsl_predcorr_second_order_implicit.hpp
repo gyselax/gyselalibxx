@@ -66,7 +66,9 @@ class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
     using EulerMethod
-            = Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>>;
+            = Euler<host_t<FieldMemRTheta<CoordRTheta>>,
+                    host_t<DVectorFieldMemRTheta<X, Y>>,
+                    Kokkos::DefaultHostExecutionSpace>;
 
     Mapping const& m_mapping;
 
@@ -165,8 +167,10 @@ public:
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
-        host_t<DVectorFieldMemRTheta<X, Y>> advection_field(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> electric_field_alloc(grid);
+        host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc(grid);
+        host_t<DVectorFieldRTheta<X, Y>> electric_field(electric_field_alloc);
+        host_t<DVectorFieldRTheta<X, Y>> advection_field(advection_field_alloc);
 
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
@@ -218,7 +222,12 @@ public:
             });
 
             const double tau = 1e-6;
-            implicit_loop(advection_field, advection_field_coefs_k, feet_coords, dt / 4., tau);
+            implicit_loop(
+                    advection_field,
+                    get_const_field(advection_field_coefs_k),
+                    feet_coords,
+                    dt / 4.,
+                    tau);
 
             // Evaluate A^n at X^P:
             m_evaluator(
@@ -283,7 +292,12 @@ public:
                 feet_coords(irp) = CoordRTheta(ddc::coordinate(irp));
             });
 
-            implicit_loop(advection_field, advection_field_coefs_k, feet_coords, dt / 2., tau);
+            implicit_loop(
+                    advection_field,
+                    get_const_field(advection_field_coefs_k),
+                    feet_coords,
+                    dt / 2.,
+                    tau);
 
             // Evaluate A^P at X^P:
             m_evaluator(

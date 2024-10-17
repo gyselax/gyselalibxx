@@ -58,11 +58,11 @@ public:
     using CFieldXY = host_t<FieldMem<CoordXY, IdxRangeXY>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
-            RK2<CFieldXY, AdvectionFieldMem>,
+            RK2<CFieldXY, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>,
             std::conditional_t<
                     ORDER == 3,
-                    RK3<CFieldXY, AdvectionFieldMem>,
-                    RK4<CFieldXY, AdvectionFieldMem>>>;
+                    RK3<CFieldXY, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>,
+                    RK4<CFieldXY, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>>>;
 };
 
 using runge_kutta_2d_types = testing::Types<

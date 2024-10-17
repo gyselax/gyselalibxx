@@ -453,7 +453,7 @@ void simulate(
     if (if_save_feet) {
         host_t<FieldMemRTheta<CoordRTheta>> feet(grid);
         ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
-        foot_finder(get_field(feet), advection_field_test_vec, dt);
+        foot_finder(get_field(feet), get_const_field(advection_field_test_vec), dt);
         std::string const name = output_folder + "/feet_computed.txt";
         save_feet(mapping, grid, get_field(feet), name);
     }

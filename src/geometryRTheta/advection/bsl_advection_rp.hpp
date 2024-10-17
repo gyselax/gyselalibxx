@@ -198,7 +198,7 @@ public:
         ddc::for_each(grid, [&](IdxRTheta const irp) { feet_rp(irp) = ddc::coordinate(irp); });
 
         // Compute the characteristic feet at tn ----------------------------------------------------
-        m_find_feet(get_field(feet_rp), advection_field_xy, dt);
+        m_find_feet(get_field(feet_rp), get_const_field(advection_field_xy), dt);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
         (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));

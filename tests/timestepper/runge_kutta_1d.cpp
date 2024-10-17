@@ -37,8 +37,11 @@ public:
     using DFieldMemX = host_t<DFieldMem<IdxRangeX>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
-            RK2<DFieldMemX>,
-            std::conditional_t<ORDER == 3, RK3<DFieldMemX>, RK4<DFieldMemX>>>;
+            RK2<DFieldMemX, DFieldMemX, Kokkos::DefaultHostExecutionSpace>,
+            std::conditional_t<
+                    ORDER == 3,
+                    RK3<DFieldMemX, DFieldMemX, Kokkos::DefaultHostExecutionSpace>,
+                    RK4<DFieldMemX, DFieldMemX, Kokkos::DefaultHostExecutionSpace>>>;
 };
 
 using runge_kutta_types = testing::Types<
@@ -82,12 +85,12 @@ TYPED_TEST(RungeKuttaFixture, RungeKuttaOrder)
 
     double exp_val = exp(5.0 * dt * Nt);
     ddc::for_each(idx_range, [&](IdxX ix) {
-        double const C = (double(ix.uid()) - 0.6);
+        double const C = (double(ix - IdxX(0)) - 0.6);
         result(ix) = C * exp_val + 0.6;
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix.uid()); });
+        ddc::for_each(idx_range, [&](IdxX ix) { vals(ix) = double(ix - IdxX(0)); });
 
         for (int i(0); i < Nt; ++i) {
             runge_kutta

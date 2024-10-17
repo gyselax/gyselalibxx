@@ -123,21 +123,26 @@ int main(int argc, char** argv)
 
     // --- Time integration method --------------------------------------------------------------------
 #if defined(EULER_METHOD)
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
-            time_stepper(mesh_rp);
+    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
+          host_t<DVectorFieldMemRTheta<X, Y>>,
+          Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp);
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
-    CrankNicolson<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
-            time_stepper(mesh_rp, 20, epsilon_CN);
+    CrankNicolson<
+            host_t<FieldMemRTheta<CoordRTheta>>,
+            host_t<DVectorFieldMemRTheta<X, Y>>,
+            Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp, 20, epsilon_CN);
 
 #elif defined(RK3_METHOD)
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
-            time_stepper(mesh_rp);
+    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
+        host_t<DVectorFieldMemRTheta<X, Y>>,
+        Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp);
 
 #elif defined(RK4_METHOD)
-    RK4<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
-            time_stepper(mesh_rp);
+    RK4<host_t<FieldMemRTheta<CoordRTheta>>,
+        host_t<DVectorFieldMemRTheta<X, Y>>,
+        Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp);
 
 #endif
 

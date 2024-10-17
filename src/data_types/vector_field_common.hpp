@@ -42,16 +42,8 @@ auto deepcopy(FieldDst&& dst, FieldSrc&& src)
     return get_field(dst);
 }
 
-template <class QueryTag, class FieldType, class NDTypeTag>
-inline constexpr typename FieldType::span_type get(
-        VectorFieldCommon<FieldType, NDTypeTag>& field) noexcept
-{
-    return field.template get<QueryTag>();
-}
-
-template <class QueryTag, class FieldType, class NDTypeTag>
-inline constexpr typename FieldType::view_type get(
-        VectorFieldCommon<FieldType, NDTypeTag> const& field) noexcept
+template <class QueryTag, class VectorFieldType>
+inline constexpr auto get(VectorFieldType&& field) noexcept
 {
     return field.template get<QueryTag>();
 }
@@ -146,24 +138,9 @@ public:
     template <class FieldSrc>
     void deepcopy(FieldSrc const& src)
     {
-        ((ddc::parallel_deepcopy(this->get<DDims>(), src.template get<DDims>())), ...);
-    }
-
-    template <class QueryTag>
-    inline constexpr chunk_span_type get() noexcept
-    {
-        static_assert(
-                ddc::in_tags_v<QueryTag, NDTypeTag>,
-                "requested Tag absent from TaggedVector");
-        return m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
-    }
-
-    template <class QueryTag>
-    inline constexpr chunk_view_type get() const noexcept
-    {
-        static_assert(
-                ddc::in_tags_v<QueryTag, NDTypeTag>,
-                "requested Tag absent from TaggedVector");
-        return m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_cview();
+        ((ddc::parallel_deepcopy(
+                 m_values[ddc::type_seq_rank_v<DDims, NDTypeTag>].span_view(),
+                 ddcHelper::get<DDims>(src))),
+         ...);
     }
 };

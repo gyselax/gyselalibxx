@@ -123,8 +123,9 @@ int main(int argc, char** argv)
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>, host_t<DVectorFieldMemRTheta<X, Y>>> const
-            time_stepper(grid);
+    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
+          host_t<DVectorFieldMemRTheta<X, Y>>,
+          Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
 
 
     // --- Advection operator -------------------------------------------------------------------------

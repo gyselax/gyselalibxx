@@ -193,7 +193,9 @@ static void TestFftPoissonSolver2DCosineSource()
                 rhs(ixy) = Kokkos::cos(x) + Kokkos::cos(y);
             });
 
-    poisson(electrostatic_potential_alloc, electric_field_alloc, rhs_alloc);
+    poisson(get_field(electrostatic_potential_alloc),
+            get_field(electric_field_alloc),
+            get_field(rhs_alloc));
 
     double error_pot = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
