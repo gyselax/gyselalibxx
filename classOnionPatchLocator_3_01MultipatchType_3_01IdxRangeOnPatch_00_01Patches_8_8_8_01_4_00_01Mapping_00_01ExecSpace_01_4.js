@@ -6,6 +6,7 @@ var classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8
     [ "get_mapping_on_patch_t", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a1bd64f072f0fb3988a9e43d9dc1d0b9d", null ],
     [ "get_mapping_on_logical_dim_t", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#ac247ba3f14e9c30d47127bee7fc096a9", null ],
     [ "OnionPatchLocator", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a243164d83738d38e20df707cd6169cee", null ],
+    [ "~OnionPatchLocator", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#ac9046fa4becd68736bf40131914435b1", null ],
     [ "operator()", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#ae26cedcd2f3684cba126c4d400065724", null ],
     [ "get_mapping_on_patch", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#ad8987a3540b00b2333cf7c36e4f89a86", null ],
     [ "get_mapping_on_logical_dim", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a0c7ba185380ca8d6e5f68b6495e78789", null ]

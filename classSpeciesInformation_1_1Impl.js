@@ -7,5 +7,6 @@ var classSpeciesInformation_1_1Impl =
     [ "charge", "classSpeciesInformation_1_1Impl.html#adc4091cbb9adc9c34bc0b874b0ac5ce5", null ],
     [ "mass", "classSpeciesInformation_1_1Impl.html#aefacfb3787f7fa87c5b08ef13f315e70", null ],
     [ "charges", "classSpeciesInformation_1_1Impl.html#a1b646bde625f303eb58abfd02bfa9b4d", null ],
-    [ "masses", "classSpeciesInformation_1_1Impl.html#ac70d3fcf55a5c234a7b405fb1061f644", null ]
+    [ "masses", "classSpeciesInformation_1_1Impl.html#ac70d3fcf55a5c234a7b405fb1061f644", null ],
+    [ "Impl", "classSpeciesInformation_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56", null ]
 ];

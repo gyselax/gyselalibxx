@@ -8,5 +8,5 @@ var classPolarSplineFEMPoissonLikeSolver =
     [ "ThetaCellDim", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim", null ],
     [ "PolarSplineFEMPoissonLikeSolver", "classPolarSplineFEMPoissonLikeSolver.html#a928d82499e77033869533b47c658ef51", null ],
     [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#a208c1aab7d91aedcbe30231a46979c49", null ],
-    [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#abd2d3acae1795858702d7e45312812d4", null ]
+    [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#aa674e69e7db91ebbe8c0862fda157232", null ]
 ];

@@ -1,0 +1,4 @@
+var namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Gridefb14dd7b92083f6c86f080a59b9ace4_dup =
+[
+    [ "type", "namespacecollisions__dimensions.html#a24f2f8c0139e38b6444f0121f2c01ed7", null ]
+];

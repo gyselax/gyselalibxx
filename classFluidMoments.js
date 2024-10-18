@@ -4,6 +4,7 @@ var classFluidMoments =
     [ "MomentTemperature", "classFluidMoments.html#structFluidMoments_1_1MomentTemperature", null ],
     [ "MomentVelocity", "classFluidMoments.html#structFluidMoments_1_1MomentVelocity", null ],
     [ "FluidMoments", "classFluidMoments.html#a5c0e28b4c6f0f4eaf93ed730c3ab81b6", null ],
+    [ "~FluidMoments", "classFluidMoments.html#a1627a95ed02643b0dc08c2f64dbf5ae8", null ],
     [ "operator()", "classFluidMoments.html#aeb2a3f97d8a00b2c5eed9df9e1317fd7", null ],
     [ "operator()", "classFluidMoments.html#a2ae74d24f0db28d93e39b88d885b90cd", null ],
     [ "operator()", "classFluidMoments.html#a4ab19d391047e94ce2dcc8e73bf94faa", null ],

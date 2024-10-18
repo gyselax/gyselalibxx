@@ -1,6 +1,7 @@
 var classKineticFluidCouplingSource =
 [
     [ "KineticFluidCouplingSource", "classKineticFluidCouplingSource.html#aad58fde1975e1ff8736d196030b5d105", null ],
+    [ "~KineticFluidCouplingSource", "classKineticFluidCouplingSource.html#acda905984acbb065de0d07b187aa39eb", null ],
     [ "operator()", "classKineticFluidCouplingSource.html#a8d185066590f530d132ecfd4d4b315be", null ],
     [ "find_ion", "classKineticFluidCouplingSource.html#a64a1f634ca50c85e39f6ff8671d7306f", null ],
     [ "get_source_term", "classKineticFluidCouplingSource.html#ae71a75cc436ceff96e2d3816a27a3701", null ],

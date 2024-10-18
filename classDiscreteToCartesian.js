@@ -8,7 +8,7 @@ var classDiscreteToCartesian =
     [ "curvilinear_tag_theta", "classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8", null ],
     [ "Matrix_2x2", "classDiscreteToCartesian.html#af667832a699d8471d832806c135d851a", null ],
     [ "DiscreteToCartesian", "classDiscreteToCartesian.html#aeca87d471e8ae73d639a8c335a6799a1", null ],
-    [ "operator()", "classDiscreteToCartesian.html#a400592756f244c40b31728b8adef196a", null ],
+    [ "operator()", "classDiscreteToCartesian.html#ad065663545d04ef95605491b2a623f71", null ],
     [ "jacobian_matrix", "classDiscreteToCartesian.html#a92ce5b12b2180cf02e0a86a1d3822a80", null ],
     [ "jacobian_11", "classDiscreteToCartesian.html#aea7205fa1c05ec182e784fcc8d6e17a9", null ],
     [ "jacobian_12", "classDiscreteToCartesian.html#a47778edf570f9a63d365421ee114ef12", null ],
@@ -19,5 +19,5 @@ var classDiscreteToCartesian =
     [ "to_pseudo_cartesian_jacobian_12_center", "classDiscreteToCartesian.html#abe8925e34b2178056ec22c96ea8503f9", null ],
     [ "to_pseudo_cartesian_jacobian_21_center", "classDiscreteToCartesian.html#ac53184ed0d596f38e8d982fe6f8bdab3", null ],
     [ "to_pseudo_cartesian_jacobian_22_center", "classDiscreteToCartesian.html#ac87a9b1e640011bcffe9e27af0bcfd5d", null ],
-    [ "control_point", "classDiscreteToCartesian.html#abca1c36c8c422aba25af218dac17f56e", null ]
+    [ "control_point", "classDiscreteToCartesian.html#ad9ae64db98cdc2e30f92cdf913147b9e", null ]
 ];
