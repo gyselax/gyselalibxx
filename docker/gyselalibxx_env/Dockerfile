@@ -36,7 +36,8 @@ RUN chmod +x /bin/bash_run \
     openssh-client \
     pdidev-archive-keyring \
     hdf5-tools \
-    pdiplugin-decl-hdf5-serial \
+    pdiplugin-mpi-openmpi \
+    pdiplugin-decl-hdf5-openmpi \
     pdiplugin-set-value \
     python3-pip \
     libpdi-dev \
