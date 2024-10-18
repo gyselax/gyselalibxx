@@ -55,7 +55,10 @@ for commit_to_copy in ${commits_to_choose}
 do
     cd ${SRC_DIR}
     git checkout ${commit_to_copy} -f
-    git config --global --add safe.directory "${SRC_DIR}/vendor"
+    git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | while read path_key path_val
+    do
+        git config --global --add safe.directory "${SRC_DIR}/${path_val}"
+    done
     git submodule update --init -f
     git clean -fd
     deleted_submodules=$(git ls-files --others --exclude-standard)
