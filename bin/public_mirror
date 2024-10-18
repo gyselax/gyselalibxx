@@ -54,7 +54,14 @@ git switch public
 for commit_to_copy in ${commits_to_choose}
 do
     cd ${SRC_DIR}
-    git checkout ${commit_to_copy}
+    git checkout ${commit_to_copy} -f
+    git submodule update --init -f
+    git clean -fd
+    deleted_submodules=$(git ls-files --others --exclude-standard)
+    if [ -n "${deleted_submodules}" ]
+    then
+     rm -r ${deleted_submodules}
+    fi
     COMMIT_MESSAGE=$(git log -1 --pretty=%s%n%n%b)
 
     user_name=$(git log -1 --pretty=%an)
@@ -66,7 +73,7 @@ do
     git config user.email "${user_email}"
     git config user.name "${user_name}"
 
-    git submodule deinit --all
+    git submodule deinit --all -f
     git rm -rf .
     find "$SRC_DIR" -maxdepth 1 -mindepth 1 '!' -name .git -exec cp -a -t "$NEWSRC_DIR" '{}' '+'
     find . -name .private -print0 | xargs -r0 dirname -z | xargs -r0 rm -rf
@@ -75,7 +82,7 @@ do
         url_key="$(echo $path_key | sed 's/\.path/.url/')"
         url="$(git config -f .gitmodules --get "$url_key")"
         git config --global --add safe.directory "${SRC_DIR}/${path_val}"
-        commit_sha1="$(git -C "${SRC_DIR}" submodule status -- "${path_val}" | awk '{print $1}')"
+        commit_sha1="$(git -C "${SRC_DIR}" submodule status -- "${path_val}" | awk '{print $1}' | sed 's/^-//g')"
         rm -r "$path_val"
         git submodule add --force "$url" "$path_val"
         git submodule init -- "${path_val}"
@@ -85,7 +92,7 @@ do
         git add -A "${path_val}"
     done
     git add -A .
-    git commit -m "${COMMIT_MESSAGE}" --date="${date}" || true
+    GIT_COMMITTER_DATE="${date}" git commit -m "${COMMIT_MESSAGE}" --date="${date}" || true
 
 done
 
