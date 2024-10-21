@@ -9,6 +9,6 @@ var classMultipatchSplineOnionShapeTest =
     [ "spline_idx_range_rtheta2", "classMultipatchSplineOnionShapeTest.html#a17b2ac5b29dec24cfdce735ef25cc057", null ],
     [ "function_1_coef_alloc", "classMultipatchSplineOnionShapeTest.html#a2d2fc93568955e117461eeed34c62319", null ],
     [ "function_2_coef_alloc", "classMultipatchSplineOnionShapeTest.html#a840198196926cfb5dbaa179c8c4cd98e", null ],
-    [ "splines", "classMultipatchSplineOnionShapeTest.html#afa0e9a4bde003e784a79b5c3642dcc5c", null ],
+    [ "splines", "classMultipatchSplineOnionShapeTest.html#a75d3b5817423b6248568461e88e2cfd0", null ],
     [ "all_idx_ranges", "classMultipatchSplineOnionShapeTest.html#a49d609e758c5e8fbf09eccf5accb8873", null ]
 ];

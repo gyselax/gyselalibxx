@@ -102,6 +102,7 @@ $(document).ready(function(){initNavTree('classMultipatchType.html',''); initRes
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classMultipatchType-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MultipatchType&lt; T, Patches &gt; Class Template Reference</div>  </div>
@@ -110,6 +111,15 @@ $(document).ready(function(){initNavTree('classMultipatchType.html',''); initRes
 
 <p>A class to store several objects that are of a type which is templated by the patch.  
  <a href="classMultipatchType.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for MultipatchType&lt; T, Patches &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classMultipatchType.png" usemap="#MultipatchType_3C_20T_2C_20Patches_20_3E_map" alt=""/>
+  <map id="MultipatchType_3C_20T_2C_20Patches_20_3E_map" name="MultipatchType_3C_20T_2C_20Patches_20_3E_map">
+<area href="classMultipatchField.html" alt="MultipatchField&lt; ConstSplineCoeffOnPatch_2D, Patch1, Patch2 &gt;" shape="rect" coords="0,56,388,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -120,9 +130,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4cda459ccaf034298db704f3e6b131c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a4cda459ccaf034298db704f3e6b131c4">MultipatchType</a> (<a class="el" href="structT.html">T</a>&lt; Patches &gt;... args)</td></tr>
-<tr class="memdesc:a4cda459ccaf034298db704f3e6b131c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> class from an arbitrary number of objects.  <a href="classMultipatchType.html#a4cda459ccaf034298db704f3e6b131c4">More...</a><br /></td></tr>
-<tr class="separator:a4cda459ccaf034298db704f3e6b131c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a63de3f7e30ad01b0a2634abacba57d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a7a63de3f7e30ad01b0a2634abacba57d">MultipatchType</a> (<a class="el" href="structT.html">T</a>&lt; Patches &gt;... args)</td></tr>
+<tr class="memdesc:a7a63de3f7e30ad01b0a2634abacba57d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> class from an arbitrary number of objects.  <a href="classMultipatchType.html#a7a63de3f7e30ad01b0a2634abacba57d">More...</a><br /></td></tr>
+<tr class="separator:a7a63de3f7e30ad01b0a2634abacba57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab445e03c70a998905c8bdc97c2ccc785"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename P &gt; typename OT, class... OPatches&gt; </td></tr>
 <tr class="memitem:ab445e03c70a998905c8bdc97c2ccc785"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#ab445e03c70a998905c8bdc97c2ccc785">MultipatchType</a> (<a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; OT, OPatches... &gt; const &amp;other)</td></tr>
 <tr class="memdesc:ab445e03c70a998905c8bdc97c2ccc785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> class by copying an instance of another compatible <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a>.  <a href="classMultipatchType.html#ab445e03c70a998905c8bdc97c2ccc785">More...</a><br /></td></tr>
@@ -138,15 +148,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a14854eb7707b84e0dc4d8837519ada"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada">size</a> () const</td></tr>
 <tr class="memdesc:a1a14854eb7707b84e0dc4d8837519ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of objects stored inside the class.  <a href="classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada">More...</a><br /></td></tr>
 <tr class="separator:a1a14854eb7707b84e0dc4d8837519ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68c5a592e4ba4812e37fa6b737cdaab9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a68c5a592e4ba4812e37fa6b737cdaab9">idx_range</a> () const</td></tr>
-<tr class="memdesc:a68c5a592e4ba4812e37fa6b737cdaab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> containing the index ranges on which the fields are defined.  <a href="classMultipatchType.html#a68c5a592e4ba4812e37fa6b737cdaab9">More...</a><br /></td></tr>
-<tr class="separator:a68c5a592e4ba4812e37fa6b737cdaab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7aec1ee3750fbe57ac5eb49e3ef61dc"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#ab7aec1ee3750fbe57ac5eb49e3ef61dc">get_const_field</a> () const</td></tr>
-<tr class="memdesc:ab7aec1ee3750fbe57ac5eb49e3ef61dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> containing constant fields so the values cannot be modified.  <a href="classMultipatchType.html#ab7aec1ee3750fbe57ac5eb49e3ef61dc">More...</a><br /></td></tr>
-<tr class="separator:ab7aec1ee3750fbe57ac5eb49e3ef61dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafa35714e8858701dc671c4b546fea29"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION std::tuple&lt; <a class="el" href="structT.html">T</a>&lt; Patches &gt;... &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#aafa35714e8858701dc671c4b546fea29">get_tuple</a> () const</td></tr>
 <tr class="memdesc:aafa35714e8858701dc671c4b546fea29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to the tuple of objects stored inside this <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a>.  <a href="classMultipatchType.html#aafa35714e8858701dc671c4b546fea29">More...</a><br /></td></tr>
 <tr class="separator:aafa35714e8858701dc671c4b546fea29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ae7480fdbb95f4018d1cd39f809001c14"><td class="memItemLeft" align="right" valign="top"><a id="ae7480fdbb95f4018d1cd39f809001c14"></a>
+std::tuple&lt; <a class="el" href="structT.html">T</a>&lt; Patches &gt;... &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#ae7480fdbb95f4018d1cd39f809001c14">m_tuple</a></td></tr>
+<tr class="memdesc:ae7480fdbb95f4018d1cd39f809001c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">The internal tuple containing the data. <br /></td></tr>
+<tr class="separator:ae7480fdbb95f4018d1cd39f809001c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;template&lt; typename P &gt; typename T, class... Patches&gt;<br />
@@ -163,8 +174,8 @@ class MultipatchType&lt; T, Patches &gt;</h3>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>The objects have to be defined on different patches. Otherwise retrieving them by their patch is ill-defined. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4cda459ccaf034298db704f3e6b131c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cda459ccaf034298db704f3e6b131c4">&#9670;&nbsp;</a></span>MultipatchType() <span class="overload">[1/3]</span></h2>
+<a id="a7a63de3f7e30ad01b0a2634abacba57d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a63de3f7e30ad01b0a2634abacba57d">&#9670;&nbsp;</a></span>MultipatchType() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,7 +186,7 @@ template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::<a class="el" href="classMultipatchType.html">MultipatchType</a> </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::<a class="el" href="classMultipatchType.html">MultipatchType</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structT.html">T</a>&lt; Patches &gt;...&#160;</td>
           <td class="paramname"><em>args</em></td><td>)</td>
@@ -342,68 +353,6 @@ template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
 
 <p>Get the number of objects stored inside the class. </p>
 <p>This is equal to the number of patches. </p><dl class="section return"><dt>Returns</dt><dd>Number of elements stored in the tuple of the class. </dd></dl>
-
-</div>
-</div>
-<a id="a68c5a592e4ba4812e37fa6b737cdaab9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68c5a592e4ba4812e37fa6b737cdaab9">&#9670;&nbsp;</a></span>idx_range()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::idx_range </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get a <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> containing the index ranges on which the fields are defined. </p>
-<p>This function can only be called if the current <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> stores fields.</p>
-<dl class="section return"><dt>Returns</dt><dd>The set of index ranges on which the set of fields stored in this class are defined. </dd></dl>
-
-</div>
-</div>
-<a id="ab7aec1ee3750fbe57ac5eb49e3ef61dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7aec1ee3750fbe57ac5eb49e3ef61dc">&#9670;&nbsp;</a></span>get_const_field()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::get_const_field </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get a <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> containing constant fields so the values cannot be modified. </p>
-<p>This function can only be called if the current <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> stores fields.</p>
-<dl class="section return"><dt>Returns</dt><dd>A set of constant fields providing access to the fields stored in this class. </dd></dl>
 
 </div>
 </div>

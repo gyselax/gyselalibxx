@@ -304,6 +304,8 @@ var annotated =
     [ "MPITransposeAllToAll", "classMPITransposeAllToAll.html", "classMPITransposeAllToAll" ],
     [ "Mu", "structMu.html", null ],
     [ "MultipatchConnectivity", "classMultipatchConnectivity.html", "classMultipatchConnectivity" ],
+    [ "MultipatchField", "classMultipatchField.html", "classMultipatchField" ],
+    [ "MultipatchFieldMem", "classMultipatchFieldMem.html", "classMultipatchFieldMem" ],
     [ "MultipatchSplineBuilder", "classMultipatchSplineBuilder.html", "classMultipatchSplineBuilder" ],
     [ "MultipatchSplineBuilder2D", "classMultipatchSplineBuilder2D.html", "classMultipatchSplineBuilder2D" ],
     [ "MultipatchSplineEvaluator2D", "classMultipatchSplineEvaluator2D.html", "classMultipatchSplineEvaluator2D" ],
