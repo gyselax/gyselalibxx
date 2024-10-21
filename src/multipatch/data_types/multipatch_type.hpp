@@ -5,6 +5,13 @@
 #include "ddc_aliases.hpp"
 #include "types.hpp"
 
+template <class T>
+inline constexpr bool enable_multipatch_type = false;
+
+template <class T>
+inline constexpr bool is_multipatch_type_v
+        = enable_multipatch_type<std::remove_const_t<std::remove_reference_t<T>>>;
+
 
 /**
  * @brief A class to store several objects that are of a type which is templated by the patch.
@@ -27,16 +34,9 @@ public:
     /// @brief A tag storing the order of Patches in this MultipatchType
     using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
 
-private:
+protected:
+    /// The internal tuple containing the data
     std::tuple<T<Patches>...> m_tuple;
-
-    /// An internal type alias that is only instantiated if the idx_range method is called.
-    template <class Patch>
-    using InternalIdxRangeOnPatch = typename T<Patch>::discrete_domain_type;
-
-    /// An internal type alias that is only instantiated if the get_const_field method is called.
-    template <class Patch>
-    using InternalConstFieldOnPatch = typename T<Patch>::view_type;
 
     template <template <typename P> typename OT, class... OPatches>
     friend class MultipatchType;
@@ -47,7 +47,10 @@ public:
      * 
      * @param args The objects to be stored in the class.
      */
-    explicit MultipatchType(T<Patches>... args) : m_tuple(std::make_tuple(args...)) {}
+    explicit KOKKOS_FUNCTION MultipatchType(T<Patches>... args)
+        : m_tuple(std::make_tuple(std::move(args)...))
+    {
+    }
 
     /**
      * Create a MultipatchType class by copying an instance of another compatible MultipatchType.
@@ -113,30 +116,6 @@ public:
     }
 
     /**
-     * @brief Get a MultipatchType containing the index ranges on which the fields are defined.
-     * This function can only be called if the current MultipatchType stores fields.
-     *
-     * @returns The set of index ranges on which the set of fields stored in this class are defined.
-     */
-    auto idx_range() const
-    {
-        return MultipatchType<InternalIdxRangeOnPatch, Patches...>(
-                get_idx_range(std::get<T<Patches>>(m_tuple))...);
-    }
-
-    /**
-     * @brief Get a MultipatchType containing constant fields so the values cannot be modified.
-     * This function can only be called if the current MultipatchType stores fields.
-     *
-     * @returns A set of constant fields providing access to the fields stored in this class.
-     */
-    auto get_const_field() const
-    {
-        return MultipatchType<InternalConstFieldOnPatch, Patches...>(
-                ::get_const_field(std::get<T<Patches>>(m_tuple))...);
-    }
-
-    /**
      * @brief Get a constant reference to the tuple of objects stored inside this MultipatchType.
      *
      * @returns A constant reference to the tuple of objects stored inside this MultipatchType.
@@ -146,3 +125,6 @@ public:
         return m_tuple;
     }
 };
+
+template <template <typename P> typename T, class... Patches>
+inline constexpr bool enable_multipatch_type<MultipatchType<T, Patches...>> = true;

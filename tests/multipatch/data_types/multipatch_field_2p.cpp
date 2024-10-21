@@ -13,6 +13,7 @@
 #include "2patches_2d_non_periodic_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "patch.hpp"
 #include "types.hpp"
@@ -124,7 +125,7 @@ TEST_F(MultiPatchField2Patches, ZeroOnFirstPatchOneOnSecond)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field1, 0.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field2, 1.0);
 
-    MultipatchType<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -150,7 +151,7 @@ TEST_F(MultiPatchField2Patches, Polynomials)
 
     initialize_non_const_fields(field1, field2);
 
-    MultipatchType<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -190,7 +191,7 @@ TEST_F(MultiPatchField2Patches, GetIdxRange)
 
     initialize_non_const_fields(field1, field2);
 
-    MultipatchType<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(get_idx_range(global_field));
 
@@ -206,9 +207,9 @@ TEST_F(MultiPatchField2Patches, ConstField)
 
     initialize_non_const_fields(field1, field2);
 
-    MultipatchType<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
-    MultipatchType<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
             global_field.get_const_field());
 
     // Act

@@ -9,6 +9,7 @@
 #include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "mesh_builder.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_spline_builder_2d.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -143,7 +144,7 @@ public:
 
     // Test method -------------------------------------------------------------------------------
     void check_if_equal_to_expected(
-            MultipatchType<SplineCoeffOnPatch_2D, Patch1, Patch2> const& function_coef,
+            MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2> const& function_coef,
             SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected,
             SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected)
     {
@@ -159,14 +160,20 @@ public:
 
         // --- check error
         double max_abs_error = 0;
-        ddc::for_each(get_idx_range(function_coef_1_expected_host), [&](auto const idx) {
-            double err = abs(function_coef_1_expected_host(idx) - function_coef_1_host(idx));
-            max_abs_error = std::max(max_abs_error, err);
-        });
-        ddc::for_each(get_idx_range(function_coef_2_expected_host), [&](auto const idx) {
-            double err = abs(function_coef_2_expected_host(idx) - function_coef_2_host(idx));
-            max_abs_error = std::max(max_abs_error, err);
-        });
+        ddc::for_each(
+                get_idx_range(function_coef_1_expected_host),
+                [&](Idx<Patch1::BSplines1, Patch1::BSplines2> const idx) {
+                    double err
+                            = abs(function_coef_1_expected_host(idx) - function_coef_1_host(idx));
+                    max_abs_error = std::max(max_abs_error, err);
+                });
+        ddc::for_each(
+                get_idx_range(function_coef_2_expected_host),
+                [&](Idx<Patch2::BSplines1, Patch2::BSplines2> const idx) {
+                    double err
+                            = abs(function_coef_2_expected_host(idx) - function_coef_2_host(idx));
+                    max_abs_error = std::max(max_abs_error, err);
+                });
         std::cout << "Max absolute error: " << max_abs_error << std::endl;
         EXPECT_LE(max_abs_error, 1e-15);
     }
@@ -223,7 +230,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
     initialize_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchType<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
 
 
 
@@ -249,7 +256,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchType<SplineCoeffOnPatch_2D, Patch1, Patch2>
+    MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2>
             function_coef(function_1_coef, function_2_coef);
 
 
@@ -310,7 +317,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
     initialize_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchType<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
 
     // Derivatives Patch1
     Idx<ddc::Deriv<X<1>>> first_deriv_x1(1);
@@ -368,10 +375,10 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
 
 
     // --- collection of values of the function on each patch
-    MultipatchType<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_xmin(derivs_xmin1, derivs_xmin2);
-    MultipatchType<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_xmax(derivs_xmax1, derivs_xmax2);
-    MultipatchType<ConstDeriv2_OnPatch_2D, Patch1, Patch2> derivs_ymin(derivs_ymin1, derivs_ymin2);
-    MultipatchType<ConstDeriv2_OnPatch_2D, Patch1, Patch2> derivs_ymax(derivs_ymax1, derivs_ymax2);
+    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_xmin(derivs_xmin1, derivs_xmin2);
+    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_xmax(derivs_xmax1, derivs_xmax2);
+    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2> derivs_ymin(derivs_ymin1, derivs_ymin2);
+    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2> derivs_ymax(derivs_ymax1, derivs_ymax2);
 
     IdxRange<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>
             cross_derivs_idx_range1(deriv_x_idx_range1, deriv_y_idx_range1);
@@ -426,16 +433,16 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
                     * (Kokkos::cos(2. * xmax2 * ymax2)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
 
-    MultipatchType<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_min1_min2(
+    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_min1_min2(
             get_const_field(mixed_derivs_min1_min2_alloc1),
             get_const_field(mixed_derivs_min1_min2_alloc2));
-    MultipatchType<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_max1_min2(
+    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_max1_min2(
             get_const_field(mixed_derivs_max1_min2_alloc1),
             get_const_field(mixed_derivs_max1_min2_alloc2));
-    MultipatchType<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_min1_max2(
+    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_min1_max2(
             get_const_field(mixed_derivs_min1_max2_alloc1),
             get_const_field(mixed_derivs_min1_max2_alloc2));
-    MultipatchType<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_max1_max2(
+    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> mixed_derivs_max1_max2(
             get_const_field(mixed_derivs_max1_max2_alloc1),
             get_const_field(mixed_derivs_max1_max2_alloc2));
 
@@ -461,7 +468,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchType<SplineCoeffOnPatch_2D, Patch1, Patch2>
+    MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2>
             function_coef(function_1_coef, function_2_coef);
 
 

@@ -9,6 +9,7 @@
 #include "ddc_helper.hpp"
 #include "directional_tag.hpp"
 #include "mesh_builder.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_spline_builder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -213,6 +214,9 @@ public:
             SplineField1 const& function_1_coef_expected,
             SplineField2 const& function_2_coef_expected)
     {
+        using Idx1 = typename SplineField1::discrete_domain_type::discrete_element_type;
+        using Idx2 = typename SplineField2::discrete_domain_type::discrete_element_type;
+
         // --- get the spline representation on CPU
         auto function_coef_1_host
                 = ddc::create_mirror_and_copy(function_coef.template get<Patch1>());
@@ -225,11 +229,11 @@ public:
 
         // --- check error
         double max_abs_error = 0;
-        ddc::for_each(get_idx_range(function_coef_1_expected_host), [&](auto const idx) {
+        ddc::for_each(get_idx_range(function_coef_1_expected_host), [&](Idx1 const idx) {
             double err = abs(function_coef_1_expected_host(idx) - function_coef_1_host(idx));
             max_abs_error = std::max(max_abs_error, err);
         });
-        ddc::for_each(get_idx_range(function_coef_2_expected_host), [&](auto const idx) {
+        ddc::for_each(get_idx_range(function_coef_2_expected_host), [&](Idx2 const idx) {
             double err = abs(function_coef_2_expected_host(idx) - function_coef_2_host(idx));
             max_abs_error = std::max(max_abs_error, err);
         });
@@ -267,7 +271,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
     initialize_1D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchType<DConstField1OnPatch, Patch1, Patch2> function_values(function_1, function_2);
+    MultipatchField<DConstField1OnPatch, Patch1, Patch2> function_values(function_1, function_2);
 
 
 
@@ -291,7 +295,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchType<SplineCoeff1OnPatch_1D, Patch1, Patch2>
+    MultipatchField<SplineCoeff1OnPatch_1D, Patch1, Patch2>
             function_coef(function_1_coef, function_2_coef);
 
 
@@ -338,7 +342,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     initialize_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchType<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
 
 
 
@@ -364,7 +368,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchType<SplineCoeff1OnPatch_2D, Patch1, Patch2>
+    MultipatchField<SplineCoeff1OnPatch_2D, Patch1, Patch2>
             function_coef(function_1_coef, function_2_coef);
 
 

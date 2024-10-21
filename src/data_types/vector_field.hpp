@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "vector_field_mem.hpp"
 
@@ -20,6 +21,15 @@ template <
         class LayoutStridedPolicy,
         class MemorySpace>
 inline constexpr bool enable_field<
+        VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
+
+template <
+        class ElementType,
+        class IdxRangeType,
+        class NDTag,
+        class LayoutStridedPolicy,
+        class MemorySpace>
+inline constexpr bool enable_data_access_methods<
         VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
 
 template <

@@ -11,6 +11,7 @@
 #include "2patches_2d_onion_shape_non_uniform.hpp"
 #include "ddc_helper.hpp"
 #include "mesh_builder.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "onion_patch_locator.hpp"
 #include "physical_geometry.hpp"
@@ -132,7 +133,7 @@ protected:
 
     /// @brief MultipatchType of const fields of the spline coefficients of the function
     // on the patches.
-    MultipatchType<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const splines;
+    MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const splines;
 
     /// @brief MultipatchType of index ranges on the patches.
     MultipatchIdxRange const all_idx_ranges;

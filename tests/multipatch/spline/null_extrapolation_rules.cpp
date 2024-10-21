@@ -6,6 +6,7 @@
 #include <gtest/gtest.h>
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "null_extrapolation_rules.hpp"
 #include "spline_testing_tools.hpp"
@@ -14,7 +15,7 @@
 
 
 namespace {
-void test_on_device(MultipatchType<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const& splines)
+void test_on_device(MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const& splines)
 {
     NullExtrapolationRule null_extrapol_rule;
 
@@ -45,7 +46,7 @@ TEST_F(MultipatchSplineOnionShapeTest, NullExtrapolationRuleHostTest)
 {
     auto function_1_coef_host = ddc::create_mirror_and_copy(splines.template get<Patch1>());
     auto function_2_coef_host = ddc::create_mirror_and_copy(splines.template get<Patch2>());
-    MultipatchType<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
+    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
             splines_host(get_field(function_1_coef_host), get_field(function_2_coef_host));
 
     NullExtrapolationRule null_extrapol_rule;

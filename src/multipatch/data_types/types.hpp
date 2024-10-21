@@ -19,9 +19,17 @@ using Grid2OnPatch = typename Patch::Grid2;
 
 // FIELDS ----------------------------------------------------------------------------------------
 
-/// @brief A FieldMem defined on the Patch's 2D logical domain. This type should not be used in a MultipatchType.
+/// @brief A FieldMem defined on the Patch's 2D logical domain.
 template <class Patch>
 using DFieldMemOnPatch = DFieldMem<typename Patch::IdxRange12>;
+
+/// @brief A FieldMem defined on the Patch's first logical domain.
+template <class Patch>
+using DFieldMem1OnPatch = DFieldMem<typename Patch::IdxRange1>;
+
+/// @brief A FieldMem defined on the Patch's first logical domain.
+template <class Patch>
+using DFieldMem2OnPatch = DFieldMem<typename Patch::IdxRange2>;
 
 /// @brief Type for MultipatchType: A Field defined on the Patch's 2D logical domain.
 template <class Patch>

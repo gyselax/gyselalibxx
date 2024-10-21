@@ -27,6 +27,10 @@ template <class ElementType, class SupportType, class LayoutStridedPolicy, class
 inline constexpr bool enable_borrowed_deriv_field<
         DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
 
+template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>
+inline constexpr bool enable_data_access_methods<
+        DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
+
 namespace ddcHelper {
 
 /**
@@ -170,7 +174,7 @@ private:
     using reference = typename chunk_type::reference;
 
     /// @brief The number of chunks which must be created to describe this object.
-    static constexpr int n_fields = base_type::n_fields;
+    using base_type::n_fields;
 
 private:
     /** @brief Get the subindex range to be extracted from a DerivFieldMem to build the internal_chunk at position ArrayIndex
@@ -251,7 +255,8 @@ public:
             int NDerivs,
             class Allocator,
             class = std::enable_if_t<std::is_same_v<typename Allocator::memory_space, MemorySpace>>>
-    constexpr DerivField(DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator>& field)
+    explicit constexpr DerivField(
+            DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator>& field)
         : base_type(
                 field.m_physical_idx_range,
                 field.m_deriv_idx_range,
@@ -273,7 +278,7 @@ public:
             int NDerivs,
             class Allocator,
             class = std::enable_if_t<std::is_same_v<typename Allocator::memory_space, MemorySpace>>>
-    constexpr DerivField(
+    explicit constexpr DerivField(
             DerivFieldMem<OElementType, index_range_type, NDerivs, Allocator> const& field)
         : base_type(
                 field.m_physical_idx_range,

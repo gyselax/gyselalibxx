@@ -3,6 +3,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "derivative_field.hpp"
 #include "derivative_field_common.hpp"
@@ -16,6 +17,14 @@ class DerivFieldMem;
 template <class ElementType, class SupportType, int NDerivs, class MemSpace>
 inline constexpr bool
         enable_deriv_field<DerivFieldMem<ElementType, SupportType, NDerivs, MemSpace>> = true;
+
+template <class ElementType, class SupportType, int NDerivs, class Allocator>
+inline constexpr bool enable_data_access_methods<
+        DerivFieldMem<ElementType, SupportType, NDerivs, Allocator>> = true;
+
+template <class ElementType, class SupportType, int NDerivs, class Allocator>
+inline constexpr bool
+        enable_mem_type<DerivFieldMem<ElementType, SupportType, NDerivs, Allocator>> = true;
 
 
 /**
@@ -132,7 +141,7 @@ private:
     using internal_mdspan_type = typename base_type::internal_mdspan_type;
 
     /// @brief The number of chunks which must be created to describe this object.
-    static constexpr int n_fields = base_type::n_fields;
+    using base_type::n_fields;
 
 private:
     /// @brief A function to get the index range along direction Tag for the ArrayIndex-th element of internal_fields.
@@ -354,7 +363,7 @@ public:
      */
     span_type span_view()
     {
-        return *this;
+        return span_type(*this);
     }
 };
 

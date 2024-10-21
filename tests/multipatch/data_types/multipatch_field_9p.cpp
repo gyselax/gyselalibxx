@@ -13,6 +13,7 @@
 #include "9patches_2d_periodic_strips_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 
@@ -89,7 +90,7 @@ TEST(MultipatchFieldMorePatches, ConstantOnEveryOne)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field5, 5.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field7, 7.0);
 
-    MultipatchType<DFieldOnPatch, Patch3, Patch5, Patch7> global_field(field3, field5, field7);
+    MultipatchField<DFieldOnPatch, Patch3, Patch5, Patch7> global_field(field3, field5, field7);
 
     // Act
     Field3 field3_from_multipatch = global_field.get<Patch3>();

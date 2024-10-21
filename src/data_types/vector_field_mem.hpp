@@ -3,6 +3,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "vector_field_common.hpp"
 
@@ -20,6 +21,14 @@ class VectorFieldMem;
 template <class ElementType, class IdxRangeType, class DimSeq, class MemSpace>
 inline constexpr bool
         enable_field<VectorFieldMem<ElementType, IdxRangeType, DimSeq, MemSpace>> = true;
+
+template <class ElementType, class IdxRangeType, class DimSeq, class Allocator>
+inline constexpr bool enable_data_access_methods<
+        VectorFieldMem<ElementType, IdxRangeType, DimSeq, Allocator>> = true;
+
+template <class ElementType, class IdxRangeType, class DimSeq, class Allocator>
+inline constexpr bool
+        enable_mem_type<VectorFieldMem<ElementType, IdxRangeType, DimSeq, Allocator>> = true;
 
 /**
  * @brief Pre-declaration of VectorField.

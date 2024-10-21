@@ -64,12 +64,49 @@ public:
 };
 
 } // namespace detail
+//
+template <class T>
+inline constexpr bool enable_data_access_methods = false;
+
+template <class T>
+inline constexpr bool enable_mem_type = false;
+
+template <class ElementType, class IdxRangeType, class LayoutType, class MemoryType>
+inline constexpr bool
+        enable_data_access_methods<Field<ElementType, IdxRangeType, LayoutType, MemoryType>> = true;
+
+template <class ElementType, class IdxRangeType, class MemoryType>
+inline constexpr bool
+        enable_data_access_methods<FieldMem<ElementType, IdxRangeType, MemoryType>> = true;
+
+template <class ElementType, class IdxRangeType, class MemoryType>
+inline constexpr bool enable_mem_type<FieldMem<ElementType, IdxRangeType, MemoryType>> = true;
+
+template <class PolarBSplines>
+inline constexpr bool enable_data_access_methods<PolarSpline<PolarBSplines>> = true;
+
+template <class PolarBSplines>
+inline constexpr bool enable_data_access_methods<PolarSplineView<PolarBSplines>> = true;
+
+template <class PolarBSplines>
+inline constexpr bool enable_data_access_methods<PolarSplineSpan<PolarBSplines>> = true;
+
+template <class PolarBSplines>
+inline constexpr bool enable_mem_type<PolarSpline<PolarBSplines>> = true;
 
 template <typename Type>
 static constexpr bool has_idx_range_v = detail::HasIdxRange<Type>::value;
 
 template <typename Type>
 static constexpr bool is_gslx_field_v = detail::IsGslxField<Type>::value;
+
+template <typename Type>
+inline constexpr bool has_data_access_methods_v
+        = enable_data_access_methods<std::remove_const_t<std::remove_reference_t<Type>>>;
+
+template <class Type>
+inline constexpr bool is_mem_type_v
+        = enable_mem_type<std::remove_const_t<std::remove_reference_t<Type>>>;
 
 /**
  * A function to get the range of valid indices that can be used to index this field.
@@ -118,13 +155,20 @@ inline auto get_spline_idx_range(SplineBuilder const& builder) noexcept
  * @param[in] field The field memory object.
  * @returns The modifiable field.
  */
-template <class FieldType>
+template <class FieldType, std::enable_if_t<!is_mem_type_v<FieldType>, bool> = true>
+KOKKOS_INLINE_FUNCTION auto get_field(FieldType&& field)
+{
+    static_assert(
+            has_data_access_methods_v<FieldType>,
+            "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
+    return field.span_view();
+}
+
+template <class FieldType, std::enable_if_t<is_mem_type_v<FieldType>, bool> = true>
 inline auto get_field(FieldType&& field)
 {
-    using Type = std::remove_cv_t<std::remove_reference_t<FieldType>>;
     static_assert(
-            (ddc::is_chunk_v<Type>) || (is_field_v<Type>) || (is_deriv_field_v<Type>)
-                    || (is_polar_spline_v<Type>),
+            has_data_access_methods_v<FieldType>,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_view();
 }
@@ -135,13 +179,20 @@ inline auto get_field(FieldType&& field)
  * @param[in] field The field memory object.
  * @returns The constant field.
  */
-template <class FieldType>
+template <class FieldType, std::enable_if_t<!is_mem_type_v<FieldType>, bool> = true>
+KOKKOS_INLINE_FUNCTION auto get_const_field(FieldType&& field)
+{
+    static_assert(
+            has_data_access_methods_v<FieldType>,
+            "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
+    return field.span_cview();
+}
+
+template <class FieldType, std::enable_if_t<is_mem_type_v<FieldType>, bool> = true>
 inline auto get_const_field(FieldType&& field)
 {
-    using Type = std::remove_cv_t<std::remove_reference_t<FieldType>>;
     static_assert(
-            (ddc::is_chunk_v<Type>) || (is_field_v<Type>) || (is_deriv_field_v<Type>)
-                    || (is_polar_spline_v<Type>) || (is_gslx_field_v<Type>),
+            has_data_access_methods_v<FieldType>,
             "Not a Field or FieldMem (ddc::Chunk or ddc::ChunkSpan) type");
     return field.span_cview();
 }

@@ -9,6 +9,7 @@
 #include "2patches_2d_onion_shape_non_uniform.hpp"
 #include "constant_extrapolation_rules_onion.hpp"
 #include "ddc_helper.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "onion_patch_locator.hpp"
 #include "physical_geometry.hpp"
@@ -21,7 +22,7 @@ template <class PatchLocator>
 void test_on_device(
         typename Patch1::Coord1 const& r1_min,
         typename Patch2::Coord1 const& r2_max,
-        MultipatchType<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const& splines)
+        MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const& splines)
 {
     ConstantExtrapolationRuleOnion<PatchLocator> const_extrapol_rule(r1_min, r2_max);
 
@@ -83,7 +84,7 @@ TEST_F(MultipatchSplineOnionShapeTest, ConstantExtrapolationRuleOnionShapeHostTe
 {
     auto function_1_coef_host = ddc::create_mirror_and_copy(splines.template get<Patch1>());
     auto function_2_coef_host = ddc::create_mirror_and_copy(splines.template get<Patch2>());
-    MultipatchType<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
+    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
             splines_host(get_field(function_1_coef_host), get_field(function_2_coef_host));
 
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> const_extrapol_rule(r1_min, r2_max);

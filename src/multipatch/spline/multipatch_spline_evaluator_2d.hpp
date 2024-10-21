@@ -183,8 +183,8 @@ public:
 private:
     // MultipatchTypes
     using MultipatchValues = MultipatchType<ValuesOnPatch, Patches...>;
-    using MultipatchCoordField = MultipatchType<CoordConstFieldOnPatch, Patches...>;
-    using MultipatchSplineCoeff = MultipatchType<SplineCoeffOnPatch, Patches...>;
+    using MultipatchCoordField = MultipatchField<CoordConstFieldOnPatch, Patches...>;
+    using MultipatchSplineCoeff = MultipatchField<SplineCoeffOnPatch, Patches...>;
 
     // Patches
     using PatchOrdering = ddc::detail::TypeSeq<Patches...>;

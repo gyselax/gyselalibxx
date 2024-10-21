@@ -48,7 +48,7 @@ parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_r
 HOME_DIR = Path(__file__).parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
 
-auto_functions = set()
+auto_functions = set(['build_kokkos_layout'])
 field_mem_functions = set()
 
 def report_error(level, file, linenr, message):
