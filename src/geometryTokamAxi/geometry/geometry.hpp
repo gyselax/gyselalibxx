@@ -6,6 +6,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "mpilayout.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "species_info.hpp"
 
@@ -160,6 +161,7 @@ using IdxRangeV2DTor2D = IdxRange<GridVpar, GridMu, GridR, GridTheta>;
 using IdxRangeSpTor2D = IdxRange<Species, GridR, GridTheta>;
 using IdxRangeSpV2D = IdxRange<Species, GridVpar, GridMu>;
 using IdxRangeSpV2DTor2D = IdxRange<Species, GridVpar, GridMu, GridR, GridTheta>;
+using IdxRangeTor2DV2D = IdxRange<GridTheta, GridR, GridVpar, GridMu>;
 using IdxRangeSpTor2DV2D = IdxRange<Species, GridTheta, GridR, GridVpar, GridMu>;
 
 // template for the fields
@@ -204,6 +206,14 @@ template <class ElementType>
 using FieldMemSpV2DTor2D = FieldMem<ElementType, IdxRangeSpV2DTor2D>;
 using DFieldMemSpV2DTor2D = FieldMemSpV2DTor2D<double>;
 
+template <class ElementType>
+using FieldMemTor2DV2D = FieldMem<ElementType, IdxRangeTor2DV2D>;
+using DFieldMemTor2DV2D = FieldMemTor2DV2D<double>;
+
+template <class ElementType>
+using FieldMemSpTor2DV2D = FieldMem<ElementType, IdxRangeSpTor2DV2D>;
+using DFieldMemSpTor2DV2D = FieldMemSpTor2DV2D<double>;
+
 // --> For Field template
 template <class ElementType>
 using FieldR = Field<ElementType, IdxRangeR>;
@@ -232,6 +242,10 @@ using DFieldV2D = FieldV2D<double>;
 template <class ElementType>
 using FieldV2DTor2D = Field<ElementType, IdxRangeV2DTor2D>;
 using DFieldV2DTor2D = FieldV2DTor2D<double>;
+
+template <class ElementType>
+using FieldTor2DV2D = Field<ElementType, IdxRangeTor2DV2D>;
+using DFieldTor2DV2D = FieldTor2DV2D<double>;
 
 template <class ElementType>
 using FieldSpTor2D = Field<ElementType, IdxRangeSpTor2D>;
@@ -279,6 +293,10 @@ using ConstFieldV2DTor2D = ConstField<ElementType, IdxRangeV2DTor2D>;
 using DConstFieldV2DTor2D = ConstFieldV2DTor2D<double>;
 
 template <class ElementType>
+using ConstFieldTor2DV2D = ConstField<ElementType, IdxRangeTor2DV2D>;
+using DConstFieldTor2DV2D = ConstFieldTor2DV2D<double>;
+
+template <class ElementType>
 using ConstFieldSpTor2D = ConstField<ElementType, IdxRangeSpTor2D>;
 using DConstFieldSpTor2D = ConstFieldSpTor2D<double>;
 
@@ -289,6 +307,10 @@ using DConstFieldSpV2D = ConstFieldSpV2D<double>;
 template <class ElementType>
 using ConstFieldSpV2DTor2D = ConstField<ElementType, IdxRangeSpV2DTor2D>;
 using DConstFieldSpV2DTor2D = ConstFieldSpV2DTor2D<double>;
+
+template <class ElementType>
+using ConstFieldSpTor2DV2D = ConstField<ElementType, IdxRangeSpTor2DV2D>;
+using DConstFieldSpTor2DV2D = ConstFieldSpTor2DV2D<double>;
 
 // --> For fields on host
 template <class ElementType>
@@ -302,3 +324,7 @@ using DFieldMemSpTor2D_host = FieldMemSpTor2D_host<double>;
 template <class ElementType>
 using FieldMemSpTor2DV2D_host = host_t<FieldMem<ElementType, IdxRangeSpTor2DV2D>>;
 using DFieldMemSpTor2DV2D_host = FieldMemSpTor2DV2D_host<double>;
+
+// --> MPI Layouts
+using Tor2DDistributed = MPILayout<IdxRangeSpTor2DV2D, GridR, GridTheta>;
+using V2DDistributed = MPILayout<IdxRangeSpV2DTor2D, GridVpar, GridMu>;

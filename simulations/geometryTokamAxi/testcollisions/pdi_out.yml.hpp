@@ -11,6 +11,11 @@ metadata:
   iter_saved : int
   time_saved : double
 
+  #-- Parallel data
+  local_fdistribu_starts: { type: array, subtype: size_t, size: 5 }
+  local_fdistribu_extents: { type: array, subtype: size_t, size: 5 }
+
+  #-- Species info
   species:
     type: array
     subtype: int
@@ -23,7 +28,6 @@ metadata:
     type: array
     subtype: double
     size: [ '$charges_extents[0]' ]
-  #-- Species info
   species_extents: { type: array, subtype: size_t, size: 1 }
   masses_extents: { type: array, subtype: size_t, size: 1 }
   charges_extents: { type: array, subtype: size_t, size: 1 }
@@ -102,9 +106,10 @@ data:
   fdistribu:
     type: array
     subtype: double
-    size: [ '$species_extents[0]', '$grid_tor2_extents[0]', '$grid_tor1_extents[0]', '$grid_vpar_extents[0]', '$grid_mu_extents[0]' ]
+    size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
  
 plugins:
+  mpi:
   decl_hdf5:
     #-- Read species info
     - file: '${read_restart_filename}'
@@ -181,33 +186,51 @@ plugins:
     #-- Read full distribution function
     - file: '${read_restart_filename}'
       on_event: [read_fdistribu]
+      communicator: $MPI_COMM_WORLD
+      datasets:
+        fdistribu:
+          type: array
+          subtype: double
+          size: [ '$species_extents[0]', '$grid_tor2_extents[0]', '$grid_tor1_extents[0]', '$grid_vpar_extents[0]', '$grid_mu_extents[0]' ]
       read:
-        - time_saved
-        - fdistribu
+        time_saved: ~
+        fdistribu:
+          dataset_selection:
+            size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
+            start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]' ]
 
     - file: '${write_restart_filename}'
       on_event: [write_restart]
       collision_policy: skip_and_warn
+      communicator: $MPI_COMM_WORLD
+      datasets:
+        fdistribu:
+          type: array
+          subtype: double
+          size: [ '$species_extents[0]', '$grid_tor2_extents[0]', '$grid_tor1_extents[0]', '$grid_vpar_extents[0]', '$grid_mu_extents[0]' ]
       write:
-       - iter_saved
-       - time_saved
-       - species
-       - masses
-       - charges
-       - breakpoints_tor1
-       - breakpoints_tor2
-       - breakpoints_vpar
-       - breakpoints_mu
-       - grid_tor1
-       - grid_tor2
-       - grid_vpar
-       - grid_mu
-       - R_matrix
-       - Z_matrix
-       - normB_matrix
-       - densityTorCS
-       - temperatureTorCS
-       - UparTorCS
-       - fdistribu
+       iter_saved: ~
+       time_saved: ~
+       species: ~
+       masses: ~
+       charges: ~
+       breakpoints_tor1: ~
+       breakpoints_tor2: ~
+       breakpoints_vpar: ~
+       breakpoints_mu: ~
+       grid_tor1: ~
+       grid_tor2: ~
+       grid_vpar: ~
+       grid_mu: ~
+       R_matrix: ~
+       Z_matrix: ~
+       normB_matrix: ~
+       densityTorCS: ~
+       temperatureTorCS: ~
+       UparTorCS: ~
+       fdistribu:
+         dataset_selection:
+           size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
+           start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]' ]
 trace: ~
 )PDI_CFG";

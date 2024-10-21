@@ -10,6 +10,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
+#include "mpitransposealltoall.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
@@ -28,10 +29,11 @@ int main(int argc, char** argv)
     parse_executable_arguments(conf_gyselax, iter_start, argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
-    PDI_init(conf_pdi);
 
     Kokkos::ScopeGuard scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
+    MPI_Init(&argc, &argv);
+    PDI_init(conf_pdi);
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
@@ -141,7 +143,10 @@ int main(int argc, char** argv)
             idxrange_r,
             idxrange_vpar,
             idxrange_mu);
-    DFieldMemSpTor2DV2D_host allfdistribu_host(idxrange_sptor2Dv2D);
+    MPITransposeAllToAll<Tor2DDistributed, V2DDistributed>
+            transpose(idxrange_sptor2Dv2D, MPI_COMM_WORLD);
+    DFieldMemSpTor2DV2D_host allfdistribu_host(transpose.get_local_idx_range<Tor2DDistributed>());
+    PDI_expose_idx_range(get_idx_range(allfdistribu_host), "local_fdistribu");
     double time_saved;
     ddc::PdiEvent("read_fdistribu")
             .with("time_saved", time_saved)
@@ -154,14 +159,32 @@ int main(int argc, char** argv)
     // Algorithm
     //----------------------------------------------
     steady_clock::time_point const start_algo = steady_clock::now();
-    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(
+
+    // allfdistribu on the Tor2DDistributed layout
+    auto allfdistribu_vpar_mu_alloc = ddc::create_mirror_view_and_copy(
             Kokkos::DefaultExecutionSpace(),
             get_field(allfdistribu_host));
-    DFieldSpTor2DV2D allfdistribu = get_field(allfdistribu_alloc);
+    DFieldSpTor2DV2D allfdistribu_vpar_mu = get_field(allfdistribu_vpar_mu_alloc);
+
+    // unintialised allfdistribu on the V2DDistributed layout
+    DFieldMemSpV2DTor2D allfdistribu_r_theta_alloc(transpose.get_local_idx_range<V2DDistributed>());
+    DFieldSpV2DTor2D allfdistribu_r_theta = get_field(allfdistribu_r_theta_alloc);
 
     // [TODO] Apply collision operator
 
+    // Get the values of allfdistribu on the V2DDistributed layout
+    //transpose(
+    //        Kokkos::DefaultHostExecutionSpace(),
+    //        allfdistribu_r_theta,
+    //        get_const_field(allfdistribu_vpar_mu));
+
     // [TODO] Compute the three fluid moments
+
+    // Get the values of allfdistribu on the Tor2DDistributed layout
+    //transpose(
+    //        Kokkos::DefaultHostExecutionSpace(),
+    //        allfdistribu_vpar_mu,
+    //        get_const_field(allfdistribu_r_theta));
 
     long int iter_saved(iter_start + 1);
     int iter = 1;
@@ -174,7 +197,7 @@ int main(int argc, char** argv)
     // Save the HDF5 restart file write_restart_filename
     //----------------------------------------------
     steady_clock::time_point const start_write = steady_clock::now();
-    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu_vpar_mu);
     ddc::PdiEvent("write_restart")
             .with("iter_saved", iter_saved)
             .with("time_saved", time_saved)
@@ -190,6 +213,8 @@ int main(int argc, char** argv)
     std::cout << " - Writing time : " << time_write << "s\n";
 
     PDI_finalize();
+
+    MPI_Finalize();
 
     PC_tree_destroy(&conf_pdi);
 

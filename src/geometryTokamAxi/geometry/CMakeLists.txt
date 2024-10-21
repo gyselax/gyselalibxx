@@ -8,6 +8,7 @@ target_include_directories("geometry_tokamaxi"
 target_link_libraries("geometry_tokamaxi" INTERFACE
     DDC::DDC
     gslx::speciesinfo
+    gslx::mpi_parallelisation
 )
 add_library("gslx::geometry_tokamaxi" ALIAS "geometry_tokamaxi")
 

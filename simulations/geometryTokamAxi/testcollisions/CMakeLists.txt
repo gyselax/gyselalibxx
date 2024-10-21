@@ -6,6 +6,7 @@ target_link_libraries(test_collTokamAxi PUBLIC
   DDC::PDI_Wrapper
   gslx::geometry_tokamaxi
   gslx::io
+  gslx::mpi_parallelisation
   gslx::paraconfpp
   gslx::quadrature
   gslx::speciesinfo

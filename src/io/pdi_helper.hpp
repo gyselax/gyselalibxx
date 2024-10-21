@@ -60,3 +60,24 @@ void PDI_get_arrays(
     auto out_vectors = detail::get_vector_tuple(arg_tuple, idx_sequence);
     detail::PDI_get_array(event_name, names, out_vectors, idx_sequence);
 }
+
+template <class... Grids>
+void PDI_expose_idx_range(IdxRange<Grids...> index_range, std::string name)
+{
+    IdxStep<Grids...> extents = index_range.extents();
+    Idx<Grids...> local_starts = index_range.front();
+    Idx<Grids...> global_starts(Idx<Grids> {0}...);
+    // TODO: Ghosts?
+    IdxStep<Grids...> starts = local_starts - global_starts;
+    int constexpr n_grids = sizeof...(Grids);
+    std::array<ddc::DiscreteVectorElement, n_grids> starts_arr = ddc::detail::array(starts);
+    std::array<ddc::DiscreteVectorElement, n_grids> extents_arr = ddc::detail::array(extents);
+    std::array<std::size_t, n_grids> starts_s_arr;
+    std::array<std::size_t, n_grids> extents_s_arr;
+    for (int i(0); i < n_grids; ++i) {
+        starts_s_arr[i] = std::size_t(starts_arr[i]);
+        extents_s_arr[i] = std::size_t(extents_arr[i]);
+    }
+    PDI_expose((name + "_starts").c_str(), starts_s_arr.data(), PDI_OUT);
+    PDI_expose((name + "_extents").c_str(), extents_s_arr.data(), PDI_OUT);
+}
