@@ -9,18 +9,19 @@ template <class FieldType, class NDTypeSeq>
 class VectorFieldCommon;
 
 template <class T>
-inline constexpr bool enable_field = false;
+inline constexpr bool enable_vector_field = false;
 
 template <class T>
-inline constexpr bool enable_borrowed_field = false;
+inline constexpr bool enable_borrowed_vector_field = false;
 
 template <class T>
-inline constexpr bool is_field_v = enable_field<std::remove_const_t<std::remove_reference_t<T>>>;
+inline constexpr bool is_vector_field_v
+        = enable_vector_field<std::remove_const_t<std::remove_reference_t<T>>>;
 
 template <class T>
-inline constexpr bool is_borrowed_field_v
-        = is_field_v<
-                  T> && (std::is_lvalue_reference_v<T> || enable_borrowed_field<std::remove_cv_t<std::remove_reference_t<T>>>);
+inline constexpr bool is_borrowed_vector_field_v
+        = is_vector_field_v<
+                  T> && (std::is_lvalue_reference_v<T> || enable_borrowed_vector_field<std::remove_cv_t<std::remove_reference_t<T>>>);
 
 namespace ddcHelper {
 
@@ -28,7 +29,7 @@ template <
         class FieldDst,
         class FieldSrc,
         std::enable_if_t<
-                is_borrowed_field_v<FieldDst> && is_borrowed_field_v<FieldSrc>,
+                is_borrowed_vector_field_v<FieldDst> && is_borrowed_vector_field_v<FieldSrc>,
                 bool> = true>
 auto deepcopy(FieldDst&& dst, FieldSrc&& src)
 {

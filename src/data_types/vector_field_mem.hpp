@@ -20,7 +20,7 @@ class VectorFieldMem;
 
 template <class ElementType, class IdxRangeType, class DimSeq, class MemSpace>
 inline constexpr bool
-        enable_field<VectorFieldMem<ElementType, IdxRangeType, DimSeq, MemSpace>> = true;
+        enable_vector_field<VectorFieldMem<ElementType, IdxRangeType, DimSeq, MemSpace>> = true;
 
 template <class ElementType, class IdxRangeType, class DimSeq, class Allocator>
 inline constexpr bool enable_data_access_methods<

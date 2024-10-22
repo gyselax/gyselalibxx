@@ -134,7 +134,7 @@ public:
             dy_calculator(m_k_new, y);
 
             // Calculation of step
-            if constexpr (is_field_v<DerivFieldMem>) {
+            if constexpr (is_vector_field_v<DerivFieldMem>) {
                 ddc::parallel_for_each(
                         exec_space,
                         get_idx_range(m_k_total),
@@ -210,7 +210,7 @@ public:
 private:
     void copy(ValField copy_to, ValConstField copy_from) const
     {
-        if constexpr (is_field_v<ValField>) {
+        if constexpr (is_vector_field_v<ValField>) {
             ddcHelper::deepcopy(copy_to, copy_from);
         } else {
             ddc::parallel_deepcopy(copy_to, copy_from);

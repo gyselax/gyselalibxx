@@ -20,7 +20,7 @@ template <
         class NDTag,
         class LayoutStridedPolicy,
         class MemorySpace>
-inline constexpr bool enable_field<
+inline constexpr bool enable_vector_field<
         VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
 
 template <
@@ -38,7 +38,7 @@ template <
         class NDTag,
         class LayoutStridedPolicy,
         class MemorySpace>
-inline constexpr bool enable_borrowed_field<
+inline constexpr bool enable_borrowed_vector_field<
         VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
 
 

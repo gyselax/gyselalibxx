@@ -119,7 +119,7 @@ public:
 
         // --------- Calculate k3 ------------
         // Calculation of step
-        if constexpr (is_field_v<DerivFieldMem>) {
+        if constexpr (is_vector_field_v<DerivFieldMem>) {
             ddc::parallel_for_each(
                     exec_space,
                     get_idx_range(k_total),
@@ -148,7 +148,7 @@ public:
 
         // --------- Update y ------------
         // Calculation of step
-        if constexpr (is_field_v<DerivFieldMem>) {
+        if constexpr (is_vector_field_v<DerivFieldMem>) {
             ddc::parallel_for_each(
                     exec_space,
                     get_idx_range(k_total),
@@ -173,7 +173,7 @@ public:
 private:
     void copy(ValField copy_to, ValConstField copy_from) const
     {
-        if constexpr (is_field_v<ValField>) {
+        if constexpr (is_vector_field_v<ValField>) {
             ddcHelper::deepcopy(copy_to, copy_from);
         } else {
             ddc::parallel_deepcopy(copy_to, copy_from);

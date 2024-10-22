@@ -92,7 +92,7 @@ public:
         ValField y_prime(y_prime_alloc);
 
         // Save initial conditions
-        if constexpr (is_field_v<FieldMem>) {
+        if constexpr (is_vector_field_v<FieldMem>) {
             ddcHelper::deepcopy(y_prime, y);
         } else {
             ddc::parallel_deepcopy(y_prime, y);

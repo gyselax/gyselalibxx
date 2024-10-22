@@ -18,8 +18,8 @@ template <
         class ExecSpace = Kokkos::DefaultExecutionSpace>
 class ITimeStepper
 {
-    static_assert(ddc::is_chunk_v<FieldMem> or is_field_v<FieldMem>);
-    static_assert(ddc::is_chunk_v<DerivFieldMem> or is_field_v<DerivFieldMem>);
+    static_assert(ddc::is_chunk_v<FieldMem> or is_vector_field_v<FieldMem>);
+    static_assert(ddc::is_chunk_v<DerivFieldMem> or is_vector_field_v<DerivFieldMem>);
 
     static_assert(std::is_same_v<
                   typename FieldMem::discrete_domain_type,
