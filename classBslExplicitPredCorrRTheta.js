@@ -1,6 +1,6 @@
 var classBslExplicitPredCorrRTheta =
 [
     [ "BslExplicitPredCorrRTheta", "classBslExplicitPredCorrRTheta.html#a798b7348c59ee58fb5bdc09d2792b6cc", null ],
-    [ "~BslExplicitPredCorrRTheta", "classBslExplicitPredCorrRTheta.html#ab5b5e97a788d1556035afad5cdffb4db", null ],
-    [ "operator()", "classBslExplicitPredCorrRTheta.html#a4a0d13a36c04660e9416fd8dba361e43", null ]
+    [ "~BslExplicitPredCorrRTheta", "classBslExplicitPredCorrRTheta.html#a26b8afb30dc2978dab211c9b8cab1508", null ],
+    [ "operator()", "classBslExplicitPredCorrRTheta.html#aaf7de730188384e04d3121a0aab47d95", null ]
 ];
