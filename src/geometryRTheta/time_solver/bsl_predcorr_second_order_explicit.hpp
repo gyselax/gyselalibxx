@@ -133,17 +133,16 @@ public:
     }
 
 
-    ~BslExplicitPredCorrRTheta() {};
+    ~BslExplicitPredCorrRTheta() override {}
 
 
 
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
             double const dt,
-            int const steps) const
+            int const steps) const final
     {
-        std::chrono::time_point<std::chrono::system_clock> start_time
-                = std::chrono::system_clock::now();
+        std::chrono::time_point<std::chrono::system_clock> start_time;
         std::chrono::time_point<std::chrono::system_clock> end_time;
 
         // Grid. ------------------------------------------------------------------------------------------
@@ -223,7 +222,7 @@ public:
 
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
-            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
+            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted));
             PoissonLikeRHSFunction const
                     charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);
             m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);
@@ -232,7 +231,7 @@ public:
             advection_field_computer(electrostatic_potential_coef, advection_field_predicted);
 
 
-            // ---  we evaluate the advection field A^n at the characteristic feet X^Theta
+            // ---  we evaluate the advection field A^n at the characteristic feet X^P
             host_t<DVectorFieldMemRTheta<X, Y>> advection_field_evaluated(grid);
             host_t<VectorSplineCoeffsMem2D<X, Y>> advection_field_coefs(
                     get_spline_idx_range(m_builder));
