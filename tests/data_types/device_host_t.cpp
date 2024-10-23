@@ -28,7 +28,7 @@ struct GridX
 {
 };
 using IdxX = Idx<GridX>;
-using IdxSteptX = IdxStep<GridX>;
+using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
 
@@ -45,7 +45,7 @@ using VectorFieldX = VectorField<Datatype, IdxRangeX, Direction>;
 
 
 static IdxX constexpr lbound_x(50);
-static IdxSteptX constexpr nelems_x(3);
+static IdxStepX constexpr nelems_x(3);
 static IdxRangeX constexpr idx_range_x(lbound_x, nelems_x);
 
 } // end namespace

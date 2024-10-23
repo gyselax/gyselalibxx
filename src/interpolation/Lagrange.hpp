@@ -27,8 +27,7 @@ class Lagrange
 private:
     IdxRangeInterp m_idx_range;
     IdxRangeInterp m_inner_idx_range;
-    Field<double, IdxRangeInterp, std::experimental::layout_right, typename Execspace::memory_space>
-            m_lagrange_coeffs;
+    Field<double, IdxRangeInterp, typename Execspace::memory_space> m_lagrange_coeffs;
     CoordDimI m_left_bound;
     CoordDimI m_right_bound;
     IdxStepInterp m_poly_support;
@@ -44,10 +43,7 @@ public:
      */
     KOKKOS_FUNCTION Lagrange(
             int degree,
-            Field<double,
-                  IdxRangeInterp,
-                  std::experimental::layout_right,
-                  typename Execspace::memory_space> x_nodes_fnodes,
+            Field<double, IdxRangeInterp, typename Execspace::memory_space> x_nodes_fnodes,
             IdxRangeInterp idx_range,
             IdxStepInterp ghost)
         : m_idx_range(idx_range)

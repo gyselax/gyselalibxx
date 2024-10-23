@@ -31,8 +31,7 @@ private:
     /// The tyoe of an element of an index of the quadrature coefficients.
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
-    using QuadConstField
-            = DConstField<IdxRangeQuadrature, std::experimental::layout_right, MemorySpace>;
+    using QuadConstField = DConstField<IdxRangeQuadrature, MemorySpace>;
 
     QuadConstField m_coefficients;
 
@@ -112,7 +111,7 @@ public:
     template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>
     void operator()(
             ExecutionSpace exec_space,
-            Field<double, BatchIdxRange, std::experimental::layout_right, MemorySpace> const result,
+            Field<double, BatchIdxRange, MemorySpace> const result,
             IntegratorFunction integrated_function) const
     {
         static_assert(

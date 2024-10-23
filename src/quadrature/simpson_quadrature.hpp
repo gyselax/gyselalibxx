@@ -35,9 +35,7 @@ DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature
         }
     }
     DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
-    DField<IdxRange<Grid1D>,
-           std::experimental::layout_right,
-           typename ExecSpace::memory_space> const coefficients
+    DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> const coefficients
             = get_field(coefficients_alloc);
 
     Kokkos::parallel_for(

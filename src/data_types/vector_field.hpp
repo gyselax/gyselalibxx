@@ -10,36 +10,36 @@ template <
         class ElementType,
         class IdxRangeType,
         class NDTag,
-        class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = std::experimental::layout_right>
 class VectorField;
 
 template <
         class ElementType,
         class IdxRangeType,
         class NDTag,
-        class LayoutStridedPolicy,
-        class MemorySpace>
+        class MemorySpace,
+        class LayoutStridedPolicy>
 inline constexpr bool enable_vector_field<
-        VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
+        VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>> = true;
 
 template <
         class ElementType,
         class IdxRangeType,
         class NDTag,
-        class LayoutStridedPolicy,
-        class MemorySpace>
+        class MemorySpace,
+        class LayoutStridedPolicy>
 inline constexpr bool enable_data_access_methods<
-        VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
+        VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>> = true;
 
 template <
         class ElementType,
         class IdxRangeType,
         class NDTag,
-        class LayoutStridedPolicy,
-        class MemorySpace>
+        class MemorySpace,
+        class LayoutStridedPolicy>
 inline constexpr bool enable_borrowed_vector_field<
-        VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>> = true;
+        VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>> = true;
 
 
 /**
@@ -48,25 +48,25 @@ inline constexpr bool enable_borrowed_vector_field<
  * @tparam ElementType The data type of a scalar element of the vector field.
  * @tparam IdxRangeType
  * @tparam NDTag A NDTag describing the dimensions described by the scalar elements of a vector field element.
- * @tparam LayoutStridedPolicy The memory layout. See DDC.
  * @tparam MemorySpace The memory space (CPU/GPU).
+ * @tparam LayoutStridedPolicy The memory layout. See DDC.
  */
 template <
         class ElementType,
         class IdxRangeType,
         class NDTag,
-        class LayoutStridedPolicy,
-        class MemorySpace>
+        class MemorySpace,
+        class LayoutStridedPolicy>
 class VectorField
     : public VectorFieldCommon<
-              Field<ElementType, IdxRangeType, LayoutStridedPolicy, MemorySpace>,
+              Field<ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy>,
               NDTag>
 {
 public:
     /**
      * @brief Type describing the object which can be extracted from this VectorField using the get<> function.
      */
-    using field_type = Field<ElementType, IdxRangeType, LayoutStridedPolicy, MemorySpace>;
+    using field_type = Field<ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy>;
 
 private:
     using base_type = VectorFieldCommon<field_type, NDTag>;
@@ -89,13 +89,13 @@ public:
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
     using span_type
-            = VectorField<ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;
+            = VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
     /**
      * @brief A type which can hold a constant reference to a VectorFieldMem.
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
     using view_type
-            = VectorField<const ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;
+            = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
 
     /**
      * @brief Type describing the way in which the data is laid out in the Field memory.
@@ -157,8 +157,8 @@ private:
                     OElementType,
                     index_range_type,
                     NDTag,
-                    LayoutStridedPolicy,
-                    MemorySpace> const& other,
+                    MemorySpace,
+                    LayoutStridedPolicy> const& other,
             std::index_sequence<Is...> const&) noexcept
         : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
     {
@@ -174,8 +174,8 @@ private:
                 ElementType,
                 typename FieldType::discrete_domain_type,
                 NDTag,
-                typename FieldType::layout_type,
-                typename FieldType::memory_space>(std::move(std::get<Is>(chunk_slices))...);
+                typename FieldType::memory_space,
+                typename FieldType::layout_type>(std::move(std::get<Is>(chunk_slices))...);
     }
 
     /** Element access using a multi-dimensional Idx
@@ -242,8 +242,8 @@ public:
                                           OElementType,
                                           index_range_type,
                                           NDTag,
-                                          LayoutStridedPolicy,
-                                          MemorySpace> const& other) noexcept
+                                          MemorySpace,
+                                          LayoutStridedPolicy> const& other) noexcept
         : VectorField(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
@@ -383,7 +383,7 @@ template <
         class ElementType,
         class IdxRangeType,
         class NDTag,
-        class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = std::experimental::layout_right>
 using VectorConstField
-        = VectorField<const ElementType, IdxRangeType, NDTag, LayoutStridedPolicy, MemorySpace>;
+        = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;

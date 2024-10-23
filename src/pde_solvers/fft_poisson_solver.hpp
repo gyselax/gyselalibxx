@@ -38,15 +38,15 @@ class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, Layou
     : public IPoissonSolver<
               IdxRange<GridPDEDim1D...>,
               IdxRangeFull,
-              LayoutSpace,
-              typename ExecSpace::memory_space>
+              typename ExecSpace::memory_space,
+              LayoutSpace>
 {
 private:
     using base_type = IPoissonSolver<
             IdxRange<GridPDEDim1D...>,
             IdxRangeFull,
-            LayoutSpace,
-            typename ExecSpace::memory_space>;
+            typename ExecSpace::memory_space,
+            LayoutSpace>;
 
 public:
     template <class Dim>
@@ -119,7 +119,7 @@ private:
      */
     template <class Dim>
     void differentiate_and_invert_fourier_values(
-            DField<laplacian_idx_range_type, LayoutSpace, memory_space> derivative,
+            DField<laplacian_idx_range_type, memory_space, LayoutSpace> derivative,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -140,7 +140,7 @@ private:
      * @param[in] values The Field containing the values of the function in Fourier space.
      */
     void get_gradient(
-            DField<laplacian_idx_range_type, LayoutSpace, memory_space> gradient,
+            DField<laplacian_idx_range_type, memory_space, LayoutSpace> gradient,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -164,8 +164,8 @@ private:
                     double,
                     laplacian_idx_range_type,
                     NDTag<Dims...>,
-                    layout_space,
-                    memory_space> gradient,
+                    memory_space,
+                    layout_space> gradient,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -192,7 +192,7 @@ public:
     template <class Layout>
     void solve_poisson_equation(
             fourier_field_type intermediate_chunk,
-            DField<laplacian_idx_range_type, Layout, memory_space> rho) const
+            DField<laplacian_idx_range_type, memory_space, Layout> rho) const
     {
         // Compute FFT(rho)
         ddc::fft(ExecSpace(), intermediate_chunk, rho, ddc::kwArgs_fft {m_norm});

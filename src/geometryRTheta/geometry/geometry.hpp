@@ -208,8 +208,7 @@ using FieldTheta = Field<ElementType, IdxRangeTheta>;
 
 // Equivalent to host_t<Field<ElementType, IdxRangeRTheta>> but used for type deductions
 template <class ElementType>
-using FieldRTheta
-        = Field<ElementType, IdxRangeRTheta, std::experimental::layout_right, Kokkos::HostSpace>;
+using FieldRTheta = Field<ElementType, IdxRangeRTheta, Kokkos::HostSpace>;
 
 using DFieldR = FieldR<double>;
 using DFieldTheta = FieldTheta<double>;

@@ -25,9 +25,7 @@ DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> trapezoid_quadratu
         IdxRange<Grid1D> const& idx_range)
 {
     DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
-    DField<IdxRange<Grid1D>,
-           std::experimental::layout_right,
-           typename ExecSpace::memory_space> const coefficients
+    DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> const coefficients
             = get_field(coefficients_alloc);
 
     IdxRange<Grid1D> middle_idx_range

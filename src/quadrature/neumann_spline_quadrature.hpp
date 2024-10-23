@@ -22,10 +22,7 @@ namespace {
 template <class ExecSpace, class Grid1D>
 using CoefficientFieldMem1D = DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 template <class ExecSpace, class Grid1D>
-using CoefficientField1D = DField<
-        IdxRange<Grid1D>,
-        std::experimental::layout_right,
-        typename ExecSpace::memory_space>;
+using CoefficientField1D = DField<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 
 } // namespace
 

@@ -15,21 +15,21 @@ class DerivFieldMem;
 template <
         class ElementType,
         class SupportType,
-        class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::HostSpace>
+        class MemorySpace = Kokkos::HostSpace,
+        class LayoutStridedPolicy = std::experimental::layout_right>
 class DerivField;
 
-template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>
+template <class ElementType, class SupportType, class MemorySpace, class LayoutStridedPolicy>
 inline constexpr bool enable_deriv_field<
-        DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
+        DerivField<ElementType, SupportType, MemorySpace, LayoutStridedPolicy>> = true;
 
-template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>
+template <class ElementType, class SupportType, class MemorySpace, class LayoutStridedPolicy>
 inline constexpr bool enable_borrowed_deriv_field<
-        DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
+        DerivField<ElementType, SupportType, MemorySpace, LayoutStridedPolicy>> = true;
 
-template <class ElementType, class SupportType, class LayoutStridedPolicy, class MemorySpace>
+template <class ElementType, class SupportType, class MemorySpace, class LayoutStridedPolicy>
 inline constexpr bool enable_data_access_methods<
-        DerivField<ElementType, SupportType, LayoutStridedPolicy, MemorySpace>> = true;
+        DerivField<ElementType, SupportType, MemorySpace, LayoutStridedPolicy>> = true;
 
 namespace ddcHelper {
 
@@ -95,20 +95,20 @@ auto deepcopy(ExecSpace const& execution_space, FieldDst&& dst, FieldSrc&& src)
  * @tparam IdxRange<DDims...> The index range on which the internal fields are defined.
  *          This index range is the physical index range on which the values are defined combined with
  *          the index range of the derivatives of interest (e.g. IdxRange<Deriv<IDimX>, IDimX, IDimY>).
+ * @tparam MemorySpace The memory space where the data is saved (CPU/GPU).
  * @tparam LayoutStridedPolicy The way in which the memory is laid out in memory (contiguous in
  *          the leading/trailing dimension, strided, etc).
- * @tparam MemorySpace The memory space where the data is saved (CPU/GPU).
  */
-template <class ElementType, class... DDims, class LayoutStridedPolicy, class MemorySpace>
-class DerivField<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>
+template <class ElementType, class... DDims, class MemorySpace, class LayoutStridedPolicy>
+class DerivField<ElementType, IdxRange<DDims...>, MemorySpace, LayoutStridedPolicy>
     : public DerivFieldCommon<
-              Field<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>,
+              Field<ElementType, IdxRange<DDims...>, MemorySpace, LayoutStridedPolicy>,
               IdxRange<DDims...>>
 {
 private:
     /// @brief The class from which this object inherits.
     using base_type = DerivFieldCommon<
-            Field<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>,
+            Field<ElementType, IdxRange<DDims...>, MemorySpace, LayoutStridedPolicy>,
             IdxRange<DDims...>>;
 
 public:
@@ -155,11 +155,11 @@ public:
     using chunk_type = typename base_type::chunk_type;
 
     /// @brief The type of a modifiable span of this field. This is a DDC keyword used to make this class interchangeable with Field.
-    using span_type = DerivField<ElementType, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>;
+    using span_type = DerivField<ElementType, IdxRange<DDims...>, MemorySpace, LayoutStridedPolicy>;
 
     /// @brief The type of a constant view of this field. This is a DDC keyword used to make this class interchangeable with Field.
     using view_type
-            = DerivField<ElementType const, IdxRange<DDims...>, LayoutStridedPolicy, MemorySpace>;
+            = DerivField<ElementType const, IdxRange<DDims...>, MemorySpace, LayoutStridedPolicy>;
 
 private:
     /// @brief The IdxRange which describes the derivatives present on each chunk.
@@ -296,7 +296,7 @@ public:
      */
     template <class OElementType>
     KOKKOS_FUNCTION constexpr DerivField(
-            DerivField<OElementType, index_range_type, LayoutStridedPolicy, MemorySpace> const&
+            DerivField<OElementType, index_range_type, MemorySpace, LayoutStridedPolicy> const&
                     field)
         : base_type(
                 field.m_physical_idx_range,
@@ -327,7 +327,7 @@ public:
      */
     template <class OElementType, class OLayoutStridedPolicy, class OMemorySpace>
     void deepcopy(
-            DerivField<OElementType, index_range_type, OLayoutStridedPolicy, OMemorySpace> src)
+            DerivField<OElementType, index_range_type, OMemorySpace, OLayoutStridedPolicy> src)
     {
         for (int i(0); i < n_fields; ++i) {
             auto kokkos_span = get_kokkos_view_from_internal_chunk(i);
@@ -342,10 +342,10 @@ public:
      * @param execution_space The execution space on which the copy will be carried out.
      * @param src The DerivField containing the data to be copied.
      */
-    template <class ExecSpace, class OElementType, class OLayoutStridedPolicy, class OMemorySpace>
+    template <class ExecSpace, class OElementType, class OMemorySpace, class OLayoutStridedPolicy>
     void deepcopy(
             ExecSpace const& execution_space,
-            DerivField<OElementType, index_range_type, OLayoutStridedPolicy, OMemorySpace> src)
+            DerivField<OElementType, index_range_type, OMemorySpace, OLayoutStridedPolicy> src)
     {
         for (int i(0); i < n_fields; ++i) {
             auto kokkos_span = get_kokkos_view_from_internal_chunk(i);
@@ -402,20 +402,20 @@ public:
 template <
         class ElementType,
         class SupportType,
-        class LayoutStridedPolicy = std::experimental::layout_right,
-        class MemorySpace = Kokkos::HostSpace>
+        class MemorySpace = Kokkos::HostSpace,
+        class LayoutStridedPolicy = std::experimental::layout_right>
 using DerivConstField
-        = DerivField<ElementType const, SupportType, LayoutStridedPolicy, MemorySpace>;
+        = DerivField<ElementType const, SupportType, MemorySpace, LayoutStridedPolicy>;
 
 namespace detail {
 template <
         class NewMemorySpace,
         class ElementType,
         class SupportType,
-        class Layout,
-        class MemorySpace>
-struct OnMemorySpace<NewMemorySpace, DerivField<ElementType, SupportType, Layout, MemorySpace>>
+        class MemorySpace,
+        class Layout>
+struct OnMemorySpace<NewMemorySpace, DerivField<ElementType, SupportType, MemorySpace, Layout>>
 {
-    using type = DerivField<ElementType, SupportType, Layout, NewMemorySpace>;
+    using type = DerivField<ElementType, SupportType, NewMemorySpace, Layout>;
 };
 }; // namespace detail

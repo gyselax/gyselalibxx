@@ -37,8 +37,8 @@ void QNSolver::operator()(
             double,
             IdxRangeXY,
             NDTag<X, Y>,
-            typename DFieldMemXY::layout_type,
-            Kokkos::DefaultExecutionSpace::memory_space>
+            Kokkos::DefaultExecutionSpace::memory_space,
+            typename DFieldMemXY::layout_type>
             electric_field(electric_field_x, electric_field_y);
     m_solve_poisson(electrostatic_potential, electric_field, rho);
 

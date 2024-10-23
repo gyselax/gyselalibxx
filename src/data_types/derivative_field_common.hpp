@@ -350,8 +350,8 @@ protected:
         // Create a Field with the expected index range
         Field<element_type,
               index_range_type,
-              typename decltype(subview)::layout_type,
-              typename chunk_type::memory_space>
+              typename chunk_type::memory_space,
+              typename decltype(subview)::layout_type>
                 local_field(subview, full_idx_range);
 
         // If necessary, slice off the derivative dimensions deduced implicitly
@@ -424,8 +424,8 @@ protected:
         // Create a Field with the expected index range
         Field<element_type,
               final_idx_range_type,
-              typename decltype(subview)::layout_type,
-              typename chunk_type::memory_space>
+              typename chunk_type::memory_space,
+              typename decltype(subview)::layout_type>
                 local_field(subview, final_idx_range);
 
         return local_field;

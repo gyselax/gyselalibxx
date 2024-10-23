@@ -638,11 +638,11 @@ def check_exec_space_usage(file):
                                     attribs['exec_space'] = 'DefaultHostExecutionSpace'
                                 else:
                                     attribs['exec_space'] = space
-                        elif 'Mem' not in type_descr and len(args) > 3:
-                            if args[-1].strip() == 'Kokkos :: HostSpace':
+                        elif 'Mem' not in type_descr and len(args) > 2:
+                            if args[2].strip() == 'Kokkos :: HostSpace':
                                 attribs['exec_space'] = 'DefaultHostExecutionSpace'
                             else:
-                                attribs['exec_space'] = args[-1]
+                                attribs['exec_space'] = args[2]
                         else:
                             attribs['exec_space'] = 'DefaultExecutionSpace'
                     else:

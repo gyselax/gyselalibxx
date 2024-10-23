@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "type_seq_tools.hpp"
@@ -24,14 +23,14 @@ template <
         class ExecSpace,
         class ElementType,
         class IdxRangeOut,
-        class LayoutStridedPolicyIn,
         class MemorySpace,
         class IdxRangeIn,
+        class LayoutStridedPolicyIn,
         class LayoutStridedPolicyOut>
-Field<ElementType, IdxRangeIn, LayoutStridedPolicyOut, MemorySpace> transpose_layout(
+Field<ElementType, IdxRangeIn, MemorySpace, LayoutStridedPolicyOut> transpose_layout(
         ExecSpace const& execution_space,
-        Field<ElementType, IdxRangeIn, LayoutStridedPolicyOut, MemorySpace> transposed_field,
-        ConstField<ElementType, IdxRangeOut, LayoutStridedPolicyIn, MemorySpace> field_to_transpose)
+        Field<ElementType, IdxRangeIn, MemorySpace, LayoutStridedPolicyOut> transposed_field,
+        ConstField<ElementType, IdxRangeOut, MemorySpace, LayoutStridedPolicyIn> field_to_transpose)
 {
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,

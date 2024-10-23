@@ -87,13 +87,11 @@ public:
     /// Type alias for a constant field on GPU defined on a grid of magnetic moments.
     using DConstFieldMu = DConstField<
             IdxRangeMu,
-            std::experimental::layout_right,
             Kokkos::DefaultExecutionSpace::
                     memory_space>; // Equivalent to Field<double const, IdxRangeMu>
     /// Type alias for a constant field on GPU defined on a grid of parallel velocities.
     using DConstFieldVpar = DConstField<
             IdxRangeVpar,
-            std::experimental::layout_right,
             Kokkos::DefaultExecutionSpace::
                     memory_space>; // Equivalent to Field<double const, IdxRangeMu>
 

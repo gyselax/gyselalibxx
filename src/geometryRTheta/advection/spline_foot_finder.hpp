@@ -74,9 +74,6 @@ public:
     {
     }
 
-    ~SplineFootFinder() {};
-
-
     /**
      * @brief Advect the feet over @f$ dt @f$.
      *
@@ -175,9 +172,7 @@ private:
      *
      */
     template <class T>
-    void is_unified(
-            Field<T, IdxRangeRTheta, std::experimental::layout_right, Kokkos::HostSpace> const&
-                    values) const
+    void is_unified(Field<T, IdxRangeRTheta, Kokkos::HostSpace> const& values) const
     {
         IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
         IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);

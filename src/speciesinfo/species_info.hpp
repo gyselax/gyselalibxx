@@ -42,10 +42,10 @@ public:
         DFieldMem<index_range_type, MemorySpace> m_mass;
 
         // workaround to access charges on the device
-        DConstField<index_range_type, std::experimental::layout_right, MemorySpace> m_charge_view;
+        DConstField<index_range_type, MemorySpace> m_charge_view;
 
         // workaround to access masses on the device
-        DConstField<index_range_type, std::experimental::layout_right, MemorySpace> m_mass_view;
+        DConstField<index_range_type, MemorySpace> m_mass_view;
 
         discrete_element_type m_ielec;
 

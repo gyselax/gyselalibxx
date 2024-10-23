@@ -74,9 +74,7 @@ class MultipatchSplineBuilder
     };
 
     template <class Patch, class... Grid1D>
-    struct Build_BuilderType<
-            Patch,
-            DConstField<IdxRange<Grid1D...>, std::experimental::layout_right, MemorySpace>>
+    struct Build_BuilderType<Patch, DConstField<IdxRange<Grid1D...>, MemorySpace>>
     {
         using type = ddc::SplineBuilder<
                 ExecSpace,
@@ -95,17 +93,13 @@ class MultipatchSplineBuilder
 
     /// A type alias to get the batched spline coefficients on a specific patch.
     template <class Patch>
-    using SplineOnPatch = DField<
-            typename BuilderOnPatch<Patch>::batched_spline_domain_type,
-            std::experimental::layout_right,
-            MemorySpace>;
+    using SplineOnPatch
+            = DField<typename BuilderOnPatch<Patch>::batched_spline_domain_type, MemorySpace>;
 
     /// A type alias to get the batched derivatives on a specific patch.
     template <class Patch>
-    using DerivsOnPatch = DConstField<
-            typename BuilderOnPatch<Patch>::batched_derivs_domain_type,
-            std::experimental::layout_right,
-            MemorySpace>;
+    using DerivsOnPatch
+            = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type, MemorySpace>;
 
     /// The type of the batched spline coefficients.
     using MultipatchSplineCoeffs = MultipatchType<SplineOnPatch, Patches...>;

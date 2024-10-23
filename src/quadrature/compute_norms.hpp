@@ -27,7 +27,7 @@
 template <class IdxRange>
 double compute_L1_norm(
         host_t<Quadrature<IdxRange>> quadrature,
-        Field<double, IdxRange, std::experimental::layout_right, Kokkos::HostSpace> function)
+        Field<double, IdxRange, Kokkos::HostSpace> function)
 {
     using Idx = typename IdxRange::discrete_element_type;
     return quadrature(
@@ -52,7 +52,7 @@ double compute_L1_norm(
 template <class IdxRange>
 double compute_L2_norm(
         host_t<Quadrature<IdxRange>> quadrature,
-        DField<IdxRange, std::experimental::layout_right, Kokkos::HostSpace> function)
+        DField<IdxRange, Kokkos::HostSpace> function)
 {
     using Idx = typename IdxRange::discrete_element_type;
     return std::sqrt(quadrature(

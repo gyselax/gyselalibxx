@@ -95,14 +95,14 @@ struct ExtractRDim<double>
 /// If radial profile is stored in a 1D chunk then the grid tag is extracted.
 template <class GridR, class Layout>
 struct ExtractRDim<
-        ConstField<double, IdxRange<GridR>, Layout, Kokkos::DefaultExecutionSpace::memory_space>>
+        ConstField<double, IdxRange<GridR>, Kokkos::DefaultExecutionSpace::memory_space, Layout>>
 {
     using type = GridR;
 };
 
 /// If radial profile is stored in a chunk then information about why the chunk has the wrong type is provided
-template <class ElementType, class IdxRange, class Layout, class MemSpace>
-struct ExtractRDim<Field<ElementType, IdxRange, Layout, MemSpace>>
+template <class ElementType, class IdxRange, class MemSpace, class Layout>
+struct ExtractRDim<Field<ElementType, IdxRange, MemSpace, Layout>>
 {
     static_assert(
             std::is_same_v<ElementType, const double>,
@@ -126,7 +126,7 @@ struct ExtractThetaDim<double, InternalSpoofGridR>
 /// If the profile on the poloidal plane is stored in a chunk on radial values then the grid tag must be spoofed.
 template <class GridR, class Layout>
 struct ExtractThetaDim<
-        ConstField<double, IdxRange<GridR>, Layout, Kokkos::DefaultExecutionSpace::memory_space>,
+        ConstField<double, IdxRange<GridR>, Kokkos::DefaultExecutionSpace::memory_space, Layout>,
         GridR>
 {
     using type = InternalSpoofGridTheta;
@@ -138,8 +138,8 @@ struct ExtractThetaDim<
         ConstField<
                 double,
                 IdxRange<GridTheta>,
-                Layout,
-                Kokkos::DefaultExecutionSpace::memory_space>,
+                Kokkos::DefaultExecutionSpace::memory_space,
+                Layout>,
         GridR>
 {
     using type = GridTheta;
@@ -151,16 +151,16 @@ struct ExtractThetaDim<
         ConstField<
                 double,
                 IdxRange<GridTheta, GridR>,
-                Layout,
-                Kokkos::DefaultExecutionSpace::memory_space>,
+                Kokkos::DefaultExecutionSpace::memory_space,
+                Layout>,
         GridR>
 {
     using type = GridTheta;
 };
 
 /// If poloidal profile is stored in a chunk then information about why the chunk has the wrong type is provided
-template <class GridR, class ElementType, class IdxRange, class Layout, class MemSpace>
-struct ExtractThetaDim<Field<ElementType, IdxRange, Layout, MemSpace>, GridR>
+template <class GridR, class ElementType, class IdxRange, class MemSpace, class Layout>
+struct ExtractThetaDim<Field<ElementType, IdxRange, MemSpace, Layout>, GridR>
 {
     static_assert(
             std::is_same_v<ElementType, const double>,

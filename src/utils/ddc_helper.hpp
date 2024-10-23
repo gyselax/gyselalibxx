@@ -172,12 +172,12 @@ template <
         class TargetDomain,
         class ElementType,
         class Domain,
-        class FieldLayoutType,
         class ExecSpace,
-        class MemSpace>
+        class MemSpace,
+        class FieldLayoutType>
 auto create_transpose_mirror_view_and_copy(
         ExecSpace const& execution_space,
-        Field<ElementType, Domain, FieldLayoutType, MemSpace> src)
+        Field<ElementType, Domain, MemSpace, FieldLayoutType> src)
 {
     static_assert(
             ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
@@ -206,12 +206,12 @@ template <
         class TargetDomain,
         class ElementType,
         class Domain,
-        class FieldLayoutType,
         class ExecSpace,
-        class MemSpace>
+        class MemSpace,
+        class FieldLayoutType>
 auto create_transpose_mirror(
         ExecSpace const& execution_space,
-        Field<ElementType, Domain, FieldLayoutType, MemSpace> src)
+        Field<ElementType, Domain, MemSpace, FieldLayoutType> src)
 {
     static_assert(
             ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
@@ -304,13 +304,13 @@ template <
         class ElementType,
         class SupportType,
         class NDTag,
-        class Layout,
-        class MemorySpace>
+        class MemorySpace,
+        class Layout>
 struct OnMemorySpace<
         NewMemorySpace,
-        VectorField<ElementType, SupportType, NDTag, Layout, MemorySpace>>
+        VectorField<ElementType, SupportType, NDTag, MemorySpace, Layout>>
 {
-    using type = VectorField<ElementType, SupportType, NDTag, Layout, NewMemorySpace>;
+    using type = VectorField<ElementType, SupportType, NDTag, NewMemorySpace, Layout>;
 };
 
 

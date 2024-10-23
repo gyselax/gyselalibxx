@@ -14,10 +14,7 @@ namespace {
 template <class ExecSpace, class Grid1D>
 using CoefficientFieldMem1D = DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 template <class ExecSpace, class Grid1D>
-using CoefficientField1D = DField<
-        IdxRange<Grid1D>,
-        std::experimental::layout_right,
-        typename ExecSpace::memory_space>;
+using CoefficientField1D = DField<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 } // namespace
 
 /**
@@ -37,8 +34,8 @@ DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeff
                 IdxRange<DDims>)>... funcs)
 {
     DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
-    DField<IdxRange<DDims...>, std::experimental::layout_right, typename ExecSpace::memory_space>
-            coefficients(get_field(coefficients_alloc));
+    DField<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients(
+            get_field(coefficients_alloc));
     // Get coefficients for each dimension
     std::tuple<CoefficientFieldMem1D<ExecSpace, DDims>...> current_dim_coeffs_alloc(
             funcs(ddc::select<DDims>(idx_range))...);

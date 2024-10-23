@@ -103,15 +103,15 @@ public:
     using span_type = DerivField<
             ElementType,
             IdxRange<DDims...>,
-            typename chunk_type::layout_type,
-            typename chunk_type::memory_space>;
+            typename chunk_type::memory_space,
+            typename chunk_type::layout_type>;
 
     /// @brief The type of a constant view of this field. This is a DDC keyword used to make this class interchangeable with Field.
     using view_type = DerivField<
             ElementType const,
             IdxRange<DDims...>,
-            typename chunk_type::layout_type,
-            typename chunk_type::memory_space>;
+            typename chunk_type::memory_space,
+            typename chunk_type::layout_type>;
 
 private:
     /**

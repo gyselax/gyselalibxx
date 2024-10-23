@@ -162,11 +162,8 @@ private:
 
     // Fields
     template <class Patch>
-    using CoordConstFieldOnPatch = ConstField<
-            CoordOnPatch<Patch>,
-            evaluation_idx_range_type<Patch>,
-            std::experimental::layout_right,
-            MemorySpace>;
+    using CoordConstFieldOnPatch
+            = ConstField<CoordOnPatch<Patch>, evaluation_idx_range_type<Patch>, MemorySpace>;
 
 public:
     /**
@@ -175,10 +172,7 @@ public:
      * Needed public for functions on GPU. 
      */
     template <class Patch>
-    using SplineCoeffOnPatch = DConstField<
-            spline_idx_range_type<Patch>,
-            std::experimental::layout_right,
-            MemorySpace>;
+    using SplineCoeffOnPatch = DConstField<spline_idx_range_type<Patch>, MemorySpace>;
 
 private:
     // MultipatchTypes
@@ -570,12 +564,10 @@ public:
 
         DFieldMem<IdxRange<bsplines_1>, memory_space> values1_alloc(
                 get_idx_range<bsplines_1>(spline_coef));
-        DField<IdxRange<bsplines_1>, std::experimental::layout_right, memory_space> values1
-                = get_field(values1_alloc);
+        DField<IdxRange<bsplines_1>, memory_space> values1 = get_field(values1_alloc);
         DFieldMem<IdxRange<bsplines_2>, memory_space> values2_alloc(
                 get_idx_range<bsplines_2>(spline_coef));
-        DField<IdxRange<bsplines_2>, std::experimental::layout_right, memory_space> values2
-                = get_field(values2_alloc);
+        DField<IdxRange<bsplines_2>, memory_space> values2 = get_field(values2_alloc);
         ddc::integrals(exec_space(), values1);
         ddc::integrals(exec_space(), values2);
 
@@ -722,7 +714,7 @@ private:
     template <class EvalType1, class EvalType2, class Patch, class Layout>
     KOKKOS_INLINE_FUNCTION double eval_no_bc(
             CoordOnPatch<Patch> const& coord_eval,
-            DConstField<spline_idx_range_type<Patch>, Layout, memory_space> const& spline_coef)
+            DConstField<spline_idx_range_type<Patch>, memory_space, Layout> const& spline_coef)
             const
     {
         static_assert(

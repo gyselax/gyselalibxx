@@ -23,8 +23,8 @@ class FEM1DPoissonSolver
     : public IPoissonSolver<
               typename SplineEvaluator::evaluation_domain_type,
               typename SplineEvaluator::batched_evaluation_domain_type,
-              std::experimental::layout_right,
-              typename SplineEvaluator::memory_space>
+              typename SplineEvaluator::memory_space,
+              std::experimental::layout_right>
 {
     static_assert(std::is_same_v<
                   typename SplineBuilder::batched_interpolation_domain_type,
@@ -37,8 +37,8 @@ private:
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
             typename SplineEvaluator::batched_evaluation_domain_type,
-            std::experimental::layout_right,
-            typename SplineEvaluator::memory_space>;
+            typename SplineEvaluator::memory_space,
+            std::experimental::layout_right>;
 
 private:
     /// The interpolation mesh type
@@ -90,15 +90,14 @@ private:
      */
     using DQFieldMem = DFieldMem<IdxRangeQ, memory_space>;
     /// The accessor type for the DQFieldMem type
-    using DQConstField = DConstField<IdxRangeQ, std::experimental::layout_right, memory_space>;
+    using DQConstField = DConstField<IdxRangeQ, memory_space>;
 
     /**
      * @brief An array of coordinates defined at the quadrature points.
      *
      * @tparam ElementType The type of the elements in the chunk.
      */
-    using CoordQField
-            = Field<CoordPDEDim, IdxRangeQ, std::experimental::layout_right, memory_space>;
+    using CoordQField = Field<CoordPDEDim, IdxRangeQ, memory_space>;
 
 public:
     /**
@@ -170,7 +169,6 @@ private:
     using CoordField
             = Field<CoordPDEDim,
                     typename FEMSplineEvaluator::batched_evaluation_domain_type,
-                    std::experimental::layout_right,
                     memory_space>;
 
 private:

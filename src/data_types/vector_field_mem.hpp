@@ -87,8 +87,8 @@ public:
             ElementType,
             IdxRangeType,
             NDTag,
-            std::experimental::layout_right,
-            MemSpace>;
+            MemSpace,
+            std::experimental::layout_right>;
 
     /**
      * @brief A type which can hold a constant reference to this VectorFieldMem.
@@ -99,8 +99,8 @@ public:
             const ElementType,
             IdxRangeType,
             NDTag,
-            std::experimental::layout_right,
-            MemSpace>;
+            MemSpace,
+            std::experimental::layout_right>;
 
     /**
      * @brief The type of the index range on which the field is defined.
