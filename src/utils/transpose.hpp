@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "type_seq_tools.hpp"
 
 /**
  * @brief Copy data from a view in one layout into a span in a transposed layout.
@@ -10,47 +13,71 @@
  * physical dimensions.
  *
  * @param execution_space The execution space (Host/Device) where the code will run.
- * @param end_span The span describing the data object which the data will be copied into.
- * @param start_view The constant span describing the data object where the original
+ * @param transposed_field The span describing the data object which the data will be copied into.
+ * @param field_to_transpose The constant span describing the data object where the original
  *                  data is found.
  *
- * @returns The end_span describing the data object which the data
+ * @returns The transposed_field describing the data object which the data
  *          was copied into.
  */
 template <
         class ExecSpace,
         class ElementType,
-        class StartDomain,
-        class StartLayoutStridedPolicy,
+        class IdxRangeOut,
+        class LayoutStridedPolicyIn,
         class MemorySpace,
-        class EndDomain,
-        class EndLayoutStridedPolicy>
-ddc::ChunkSpan<ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace> transpose_layout(
+        class IdxRangeIn,
+        class LayoutStridedPolicyOut>
+Field<ElementType, IdxRangeIn, LayoutStridedPolicyOut, MemorySpace> transpose_layout(
         ExecSpace const& execution_space,
-        ddc::ChunkSpan<ElementType, EndDomain, EndLayoutStridedPolicy, MemorySpace> end_span,
-        ddc::ChunkView<ElementType, StartDomain, StartLayoutStridedPolicy, MemorySpace> start_view)
+        Field<ElementType, IdxRangeIn, LayoutStridedPolicyOut, MemorySpace> transposed_field,
+        ConstField<ElementType, IdxRangeOut, LayoutStridedPolicyIn, MemorySpace> field_to_transpose)
 {
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,
             "MemorySpace has to be accessible for ExecutionSpace.");
-    // assert that ddc::DiscreteDomain<Dims...> is a transposed discrete domain by
-    // checking that it is a subset of StartDomain and that StartDomain is a subset
+    // assert that IdxRange<Dims...> is a transposed discrete domain by
+    // checking that it is a subset of IdxRangeOut and that IdxRangeOut is a subset
     // of it.
     static_assert(ddc::type_seq_contains_v<
-                  ddc::to_type_seq_t<StartDomain>,
-                  ddc::to_type_seq_t<EndDomain>>);
+                  ddc::to_type_seq_t<IdxRangeOut>,
+                  ddc::to_type_seq_t<IdxRangeIn>>);
     static_assert(ddc::type_seq_contains_v<
-                  ddc::to_type_seq_t<EndDomain>,
-                  ddc::to_type_seq_t<StartDomain>>);
+                  ddc::to_type_seq_t<IdxRangeIn>,
+                  ddc::to_type_seq_t<IdxRangeOut>>);
 
     // Check that both views have the same domain (just reordered)
-    assert(start_view.domain() == end_span.domain());
+    assert(get_idx_range(field_to_transpose) == get_idx_range(transposed_field));
 
-    using StartIndex = typename StartDomain::discrete_element_type;
+    IdxRangeOut idx_range(field_to_transpose.domain());
 
-    ddc::parallel_for_each(
-            execution_space,
-            start_view.domain(),
-            KOKKOS_LAMBDA(StartIndex idx) { end_span(idx) = start_view(idx); });
-    return end_span;
+    constexpr std::size_t n_dims(ddc::type_seq_size_v<ddc::to_type_seq_t<IdxRangeOut>>);
+
+    if constexpr (n_dims < 7) {
+        using ToTransposeIndex = typename IdxRangeOut::discrete_element_type;
+        ddc::parallel_for_each(
+                execution_space,
+                idx_range,
+                KOKKOS_LAMBDA(ToTransposeIndex idx) {
+                    transposed_field(idx) = field_to_transpose(idx);
+                });
+    } else {
+        using IdxRangeParallel = ddc::detail::convert_type_seq_to_discrete_domain_t<
+                type_seq_range_t<ddc::to_type_seq_t<IdxRangeOut>, 0, 6>>;
+        using IdxRangeSerial = ddc::detail::convert_type_seq_to_discrete_domain_t<
+                type_seq_range_t<ddc::to_type_seq_t<IdxRangeOut>, 6, n_dims>>;
+        using IdxParallel = typename IdxRangeParallel::discrete_element_type;
+        using IdxSerial = typename IdxRangeSerial::discrete_element_type;
+        IdxRangeParallel parallel_idx_range(idx_range);
+        IdxRangeSerial serial_idx_range(idx_range);
+        ddc::parallel_for_each(
+                execution_space,
+                parallel_idx_range,
+                KOKKOS_LAMBDA(IdxParallel p_idx) {
+                    for (IdxSerial s_idx : serial_idx_range) {
+                        transposed_field(p_idx, s_idx) = field_to_transpose(p_idx, s_idx);
+                    }
+                });
+    }
+    return transposed_field;
 }

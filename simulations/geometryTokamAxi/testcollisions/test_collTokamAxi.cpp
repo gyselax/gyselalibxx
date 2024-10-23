@@ -173,18 +173,18 @@ int main(int argc, char** argv)
     // [TODO] Apply collision operator
 
     // Get the values of allfdistribu on the V2DDistributed layout
-    //transpose(
-    //        Kokkos::DefaultHostExecutionSpace(),
-    //        allfdistribu_r_theta,
-    //        get_const_field(allfdistribu_vpar_mu));
+    transpose(
+            Kokkos::DefaultExecutionSpace(),
+            allfdistribu_r_theta,
+            get_const_field(allfdistribu_vpar_mu));
 
     // [TODO] Compute the three fluid moments
 
     // Get the values of allfdistribu on the Tor2DDistributed layout
-    //transpose(
-    //        Kokkos::DefaultHostExecutionSpace(),
-    //        allfdistribu_vpar_mu,
-    //        get_const_field(allfdistribu_r_theta));
+    transpose(
+            Kokkos::DefaultExecutionSpace(),
+            allfdistribu_vpar_mu,
+            get_const_field(allfdistribu_r_theta));
 
     long int iter_saved(iter_start + 1);
     int iter = 1;
