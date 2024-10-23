@@ -9,5 +9,6 @@ var dir_a6b7057cb1432410798a61ba57a7ee60 =
     [ "non_uniform_interpolation_points.hpp", "non__uniform__interpolation__points_8hpp_source.html", null ],
     [ "preprocessor.hpp", "preprocessor_8hpp_source.html", null ],
     [ "transpose.hpp", "transpose_8hpp_source.html", null ],
+    [ "type_seq_tools.hpp", "type__seq__tools_8hpp_source.html", null ],
     [ "utils_tools.hpp", "utils__tools_8hpp.html", "utils__tools_8hpp" ]
 ];
