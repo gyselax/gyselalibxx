@@ -241,6 +241,7 @@ var NAVTREEINDEX0 =
 "classCollisionSpVparMu.html#a55ed59f7dc1fb78f028dc8d9802d3b98":[16,51,23],
 "classCollisionSpVparMu.html#a869f47891e577219e11d6fcfa1da73df":[16,51,20],
 "classCollisionSpVparMu.html#a87ae0a4bf2125a89b0f5235d6217b545":[16,51,18],
+"classCollisionSpVparMu.html#a8d89f26fe87de3ee63f8e7d92e5785a0":[16,51,12],
 "classCollisionSpVparMu.html#a8f98c8f578998f9668cc30f0f141df5f":[16,51,0],
 "classCollisionSpVparMu.html#a90e212422787d34d61945d67b4af12d0":[16,51,19],
 "classCollisionSpVparMu.html#a96078427a19cbe8729130fe3fbb5ed7c":[16,51,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classCollisionSpVparMu.html#aa124f06917e3e118eb7ea54f1278d245":[16,51,14],
 "classCollisionSpVparMu.html#aab8041a3d2578231f6d09e1c7d5c8a67":[16,51,26],
 "classCollisionSpVparMu.html#aad31ef5fca3104428002482c9fb0584d":[16,51,22],
-"classCollisionSpVparMu.html#ab2872e4fc62ff27b7eb9689818e46cc1":[16,51,9],
-"classCollisionSpVparMu.html#ac01474294ab1950cacb75dce2d735a7e":[16,51,27]
+"classCollisionSpVparMu.html#ab2872e4fc62ff27b7eb9689818e46cc1":[16,51,9]
 };

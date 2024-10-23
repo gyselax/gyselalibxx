@@ -14,7 +14,7 @@ var classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRange
     [ "fourier_field_mem_type", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a8590dd393f09bf3381a6f81ff8ab0034", null ],
     [ "fourier_field_type", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ac0bc6c14fcb18c5426da0c57a1758115", null ],
     [ "FFTPoissonSolver", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a362273a31c591d4d99fae6e665bcea95", null ],
-    [ "solve_poisson_equation", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a920e8e7f25922b4ec129ce01075382db", null ],
+    [ "solve_poisson_equation", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a18dfb44f63e620c688742c15de99e207", null ],
     [ "negative_differentiate_equation", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ae7398f552996b17d7ee0493288d2281d", null ],
     [ "operator()", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a4bb7415769d706c9b48d3a66efd76c71", null ],
     [ "operator()", "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a852a2a09220eabd3122cec7c741cacb2", null ]

@@ -129,12 +129,12 @@ Public Types</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ab6843ef4ce35f82030ab13b20ad2cff8">Allocator</a> = ddc::KokkosAllocator&lt; ElementType, MemSpace &gt;</td></tr>
 <tr class="memdesc:ab6843ef4ce35f82030ab13b20ad2cff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of allocator that will be used to allocate the data. <br /></td></tr>
 <tr class="separator:ab6843ef4ce35f82030ab13b20ad2cff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8b86e7dabf8c43fb8004626d8d1d562"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#aa8b86e7dabf8c43fb8004626d8d1d562">span_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, std::experimental::layout_right, MemSpace &gt;</td></tr>
-<tr class="memdesc:aa8b86e7dabf8c43fb8004626d8d1d562"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a reference to this <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <a href="classVectorFieldMem.html#aa8b86e7dabf8c43fb8004626d8d1d562">More...</a><br /></td></tr>
-<tr class="separator:aa8b86e7dabf8c43fb8004626d8d1d562"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80db45db1e30b8093dec1d371e85b49e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">view_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, NDTag, std::experimental::layout_right, MemSpace &gt;</td></tr>
-<tr class="memdesc:a80db45db1e30b8093dec1d371e85b49e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a constant reference to this <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <a href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">More...</a><br /></td></tr>
-<tr class="separator:a80db45db1e30b8093dec1d371e85b49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e6e0f2811aab4e945c7cecd68bbc236"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a6e6e0f2811aab4e945c7cecd68bbc236">span_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace, std::experimental::layout_right &gt;</td></tr>
+<tr class="memdesc:a6e6e0f2811aab4e945c7cecd68bbc236"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a reference to this <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <a href="classVectorFieldMem.html#a6e6e0f2811aab4e945c7cecd68bbc236">More...</a><br /></td></tr>
+<tr class="separator:a6e6e0f2811aab4e945c7cecd68bbc236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4227ecdc128e946c15f32a10d98b697c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">view_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, NDTag, MemSpace, std::experimental::layout_right &gt;</td></tr>
+<tr class="memdesc:a4227ecdc128e946c15f32a10d98b697c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a constant reference to this <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <a href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">More...</a><br /></td></tr>
+<tr class="separator:a4227ecdc128e946c15f32a10d98b697c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0a08af8a2ce7e9f534cdd88c6bbf907"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ae0a08af8a2ce7e9f534cdd88c6bbf907">discrete_domain_type</a> = typename base_type::discrete_domain_type</td></tr>
 <tr class="memdesc:ae0a08af8a2ce7e9f534cdd88c6bbf907"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the index range on which the field is defined.  <a href="classVectorFieldMem.html#ae0a08af8a2ce7e9f534cdd88c6bbf907">More...</a><br /></td></tr>
 <tr class="separator:ae0a08af8a2ce7e9f534cdd88c6bbf907"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,13 +170,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a754b877a7b8ebc76a2fc0f8b2777c606"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html">VectorFieldMem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a754b877a7b8ebc76a2fc0f8b2777c606">operator=</a> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a> &amp;&amp;other)=default</td></tr>
 <tr class="memdesc:a754b877a7b8ebc76a2fc0f8b2777c606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns a new value to this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>.  <a href="classVectorFieldMem.html#a754b877a7b8ebc76a2fc0f8b2777c606">More...</a><br /></td></tr>
 <tr class="separator:a754b877a7b8ebc76a2fc0f8b2777c606"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5471c76103f09c32122b368b915a2c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ab5471c76103f09c32122b368b915a2c3">span_cview</a> () const</td></tr>
+<tr class="memitem:ab5471c76103f09c32122b368b915a2c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ab5471c76103f09c32122b368b915a2c3">span_cview</a> () const</td></tr>
 <tr class="memdesc:ab5471c76103f09c32122b368b915a2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to this vector field.  <a href="classVectorFieldMem.html#ab5471c76103f09c32122b368b915a2c3">More...</a><br /></td></tr>
 <tr class="separator:ab5471c76103f09c32122b368b915a2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a058f97831fe1b44846456c793fd82a5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a058f97831fe1b44846456c793fd82a5b">span_view</a> () const</td></tr>
+<tr class="memitem:a058f97831fe1b44846456c793fd82a5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a058f97831fe1b44846456c793fd82a5b">span_view</a> () const</td></tr>
 <tr class="memdesc:a058f97831fe1b44846456c793fd82a5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to this vector field.  <a href="classVectorFieldMem.html#a058f97831fe1b44846456c793fd82a5b">More...</a><br /></td></tr>
 <tr class="separator:a058f97831fe1b44846456c793fd82a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae510519021346e3efbc9e45bdc30d774"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#aa8b86e7dabf8c43fb8004626d8d1d562">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ae510519021346e3efbc9e45bdc30d774">span_view</a> ()</td></tr>
+<tr class="memitem:ae510519021346e3efbc9e45bdc30d774"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#a6e6e0f2811aab4e945c7cecd68bbc236">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ae510519021346e3efbc9e45bdc30d774">span_view</a> ()</td></tr>
 <tr class="memdesc:ae510519021346e3efbc9e45bdc30d774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to this vector field.  <a href="classVectorFieldMem.html#ae510519021346e3efbc9e45bdc30d774">More...</a><br /></td></tr>
 <tr class="separator:ae510519021346e3efbc9e45bdc30d774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b2e8ceb5595ef98d07d42d12b41601d"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
@@ -248,8 +248,8 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
 
 </div>
 </div>
-<a id="aa8b86e7dabf8c43fb8004626d8d1d562"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8b86e7dabf8c43fb8004626d8d1d562">&#9670;&nbsp;</a></span>span_type</h2>
+<a id="a6e6e0f2811aab4e945c7cecd68bbc236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e6e0f2811aab4e945c7cecd68bbc236">&#9670;&nbsp;</a></span>span_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,7 +257,7 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
 template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::<a class="el" href="classVectorFieldMem.html#aa8b86e7dabf8c43fb8004626d8d1d562">span_type</a> =  <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, std::experimental::layout_right, MemSpace&gt;</td>
+          <td class="memname">using <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::<a class="el" href="classVectorFieldMem.html#a6e6e0f2811aab4e945c7cecd68bbc236">span_type</a> =  <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace, std::experimental::layout_right&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -267,8 +267,8 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
 
 </div>
 </div>
-<a id="a80db45db1e30b8093dec1d371e85b49e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80db45db1e30b8093dec1d371e85b49e">&#9670;&nbsp;</a></span>view_type</h2>
+<a id="a4227ecdc128e946c15f32a10d98b697c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4227ecdc128e946c15f32a10d98b697c">&#9670;&nbsp;</a></span>view_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,7 +276,7 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
 template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::<a class="el" href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">view_type</a> =  <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, NDTag, std::experimental::layout_right, MemSpace&gt;</td>
+          <td class="memname">using <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::<a class="el" href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">view_type</a> =  <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, NDTag, MemSpace, std::experimental::layout_right&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -439,7 +439,7 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">view_type</a> <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::span_cview </td>
+          <td class="memname"><a class="el" href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">view_type</a> <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::span_cview </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -470,7 +470,7 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e">view_type</a> <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::span_view </td>
+          <td class="memname"><a class="el" href="classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c">view_type</a> <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::span_view </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -501,7 +501,7 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classVectorFieldMem.html#aa8b86e7dabf8c43fb8004626d8d1d562">span_type</a> <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::span_view </td>
+          <td class="memname"><a class="el" href="classVectorFieldMem.html#a6e6e0f2811aab4e945c7cecd68bbc236">span_type</a> <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::span_view </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

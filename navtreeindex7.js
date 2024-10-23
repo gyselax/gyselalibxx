@@ -1,7 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"species__info_8hpp_source.html":[17,0,17,1],
-"species__init_8hpp_source.html":[17,0,17,2],
 "spline__foot__finder_8hpp_source.html":[17,0,4,0,5],
 "spline__interpolator_8hpp_source.html":[17,0,10,3],
 "spline__interpolator__2d__rp_8hpp_source.html":[17,0,4,4,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX7 =
 "structPolarSpline.html#acbb483cc3e0cf77a84dd877c4e9939c1":[16,198,6],
 "structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html":[16,200,0],
 "structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html":[16,200,1],
-"structPolarSplineSpan.html":[16,201]
+"structPolarSplineSpan.html":[16,201],
+"structPolarSplineSpan.html#a45eb7d04a2d06b64b271833860501b1c":[16,201,2],
+"structPolarSplineSpan.html#a5290247e142af3a83effa2ba073a6c1c":[16,201,4]
 };

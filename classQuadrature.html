@@ -119,10 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acc3a757e91e2d185ee290c409156fd4f"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#acc3a757e91e2d185ee290c409156fd4f">operator()</a> (ExecutionSpace exec_space, IntegratorFunction integrated_function) const</td></tr>
 <tr class="memdesc:acc3a757e91e2d185ee290c409156fd4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range.  <a href="classQuadrature.html#acc3a757e91e2d185ee290c409156fd4f">More...</a><br /></td></tr>
 <tr class="separator:acc3a757e91e2d185ee290c409156fd4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7011a414f2f78524042fd2104342f0"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </td></tr>
-<tr class="memitem:a5a7011a414f2f78524042fd2104342f0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#a5a7011a414f2f78524042fd2104342f0">operator()</a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, std::experimental::layout_right, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td></tr>
-<tr class="memdesc:a5a7011a414f2f78524042fd2104342f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.  <a href="classQuadrature.html#a5a7011a414f2f78524042fd2104342f0">More...</a><br /></td></tr>
-<tr class="separator:a5a7011a414f2f78524042fd2104342f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7645c75af6af6bdf3f2d13eaa7cd6ff"><td class="memTemplParams" colspan="2">template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunction &gt; </td></tr>
+<tr class="memitem:ad7645c75af6af6bdf3f2d13eaa7cd6ff"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classQuadrature.html#ad7645c75af6af6bdf3f2d13eaa7cd6ff">operator()</a> (ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</td></tr>
+<tr class="memdesc:ad7645c75af6af6bdf3f2d13eaa7cd6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator for calculating the integral of a function defined on a discrete index range by cycling over batch dimensions.  <a href="classQuadrature.html#ad7645c75af6af6bdf3f2d13eaa7cd6ff">More...</a><br /></td></tr>
+<tr class="separator:ad7645c75af6af6bdf3f2d13eaa7cd6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class IdxRangeQuadrature, class IdxRangeTotal = IdxRangeQuadrature, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space&gt;<br />
@@ -225,8 +225,8 @@ template&lt;class ExecutionSpace , class IntegratorFunction &gt; </div>
 
 </div>
 </div>
-<a id="a5a7011a414f2f78524042fd2104342f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a7011a414f2f78524042fd2104342f0">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="ad7645c75af6af6bdf3f2d13eaa7cd6ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7645c75af6af6bdf3f2d13eaa7cd6ff">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +247,7 @@ template&lt;class ExecutionSpace , class BatchIdxRange , class IntegratorFunctio
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Field&lt; double, BatchIdxRange, std::experimental::layout_right, MemorySpace &gt; const&#160;</td>
+          <td class="paramtype">Field&lt; double, BatchIdxRange, MemorySpace &gt; const&#160;</td>
           <td class="paramname"><em>result</em>, </td>
         </tr>
         <tr>

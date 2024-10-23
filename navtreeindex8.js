@@ -1,7 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"structPolarSplineSpan.html#a45eb7d04a2d06b64b271833860501b1c":[16,201,2],
-"structPolarSplineSpan.html#a5290247e142af3a83effa2ba073a6c1c":[16,201,4],
 "structPolarSplineSpan.html#a70a68be0eda4182137ada4b7c294a6b7":[16,201,3],
 "structPolarSplineSpan.html#a7d2cfa28c1fd76863477755b25df9de4":[16,201,5],
 "structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e":[16,201,6],

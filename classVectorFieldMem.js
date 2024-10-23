@@ -2,8 +2,8 @@ var classVectorFieldMem =
 [
     [ "chunk_type", "classVectorFieldMem.html#a6fbafc8fe3d9c0430a17c62cf3d1eee0", null ],
     [ "Allocator", "classVectorFieldMem.html#ab6843ef4ce35f82030ab13b20ad2cff8", null ],
-    [ "span_type", "classVectorFieldMem.html#aa8b86e7dabf8c43fb8004626d8d1d562", null ],
-    [ "view_type", "classVectorFieldMem.html#a80db45db1e30b8093dec1d371e85b49e", null ],
+    [ "span_type", "classVectorFieldMem.html#a6e6e0f2811aab4e945c7cecd68bbc236", null ],
+    [ "view_type", "classVectorFieldMem.html#a4227ecdc128e946c15f32a10d98b697c", null ],
     [ "discrete_domain_type", "classVectorFieldMem.html#ae0a08af8a2ce7e9f534cdd88c6bbf907", null ],
     [ "index_range_type", "classVectorFieldMem.html#ac91e05db87f7dbcbc29c63ef94e900ac", null ],
     [ "memory_space", "classVectorFieldMem.html#aa8982cad694327899224f75eb691f888", null ],

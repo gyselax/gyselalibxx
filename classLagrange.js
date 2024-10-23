@@ -1,5 +1,5 @@
 var classLagrange =
 [
-    [ "Lagrange", "classLagrange.html#a71594722ed82a25a22c9ef7a74e4aa65", null ],
+    [ "Lagrange", "classLagrange.html#a774c7976c0cb9bdbe1797cfcd9734a9f", null ],
     [ "evaluate", "classLagrange.html#a74b5dae43695245aaf9063c1dedc0523", null ]
 ];

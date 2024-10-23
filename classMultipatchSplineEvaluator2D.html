@@ -184,10 +184,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="memitem:a1b17cff3afde8b9caf66f2fcfacce553"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553">spline_idx_range_type</a> = IdxRange&lt; <a class="el" href="classMultipatchSplineEvaluator2D.html#ad08ecc980aef2d532d97dc29ab78e026">bsplines_type1</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;, <a class="el" href="classMultipatchSplineEvaluator2D.html#aa53d94a26dca1d27ed126e7e2417f5b6">bsplines_type2</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; &gt;</td></tr>
 <tr class="memdesc:a1b17cff3afde8b9caf66f2fcfacce553"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 2D spline domain corresponding to the dimensions of interest.  <a href="classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553">More...</a><br /></td></tr>
 <tr class="separator:a1b17cff3afde8b9caf66f2fcfacce553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cb2167bc59f836334985533b8c28d4e"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
-<tr class="memitem:a4cb2167bc59f836334985533b8c28d4e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a4cb2167bc59f836334985533b8c28d4e">SplineCoeffOnPatch</a> = DConstField&lt; <a class="el" href="classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553">spline_idx_range_type</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;, std::experimental::layout_right, MemorySpace &gt;</td></tr>
-<tr class="memdesc:a4cb2167bc59f836334985533b8c28d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type for <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a>: A field of 2D spline coefficients for a non-batched spline defined on both of the <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a>'s logical dimensions.  <a href="classMultipatchSplineEvaluator2D.html#a4cb2167bc59f836334985533b8c28d4e">More...</a><br /></td></tr>
-<tr class="separator:a4cb2167bc59f836334985533b8c28d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad2106e82884ea55e8fa063b0d425e0b"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
+<tr class="memitem:aad2106e82884ea55e8fa063b0d425e0b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#aad2106e82884ea55e8fa063b0d425e0b">SplineCoeffOnPatch</a> = DConstField&lt; <a class="el" href="classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553">spline_idx_range_type</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;, MemorySpace &gt;</td></tr>
+<tr class="memdesc:aad2106e82884ea55e8fa063b0d425e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type for <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a>: A field of 2D spline coefficients for a non-batched spline defined on both of the <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a>'s logical dimensions.  <a href="classMultipatchSplineEvaluator2D.html#aad2106e82884ea55e8fa063b0d425e0b">More...</a><br /></td></tr>
+<tr class="separator:aad2106e82884ea55e8fa063b0d425e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -234,7 +234,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3def2c5f1369f1aea6b42fbea68e2147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the values or the derivatives of a given patch at the coordinates defined on the given patch.  <a href="classMultipatchSplineEvaluator2D.html#a3def2c5f1369f1aea6b42fbea68e2147">More...</a><br /></td></tr>
 <tr class="separator:a3def2c5f1369f1aea6b42fbea68e2147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a053be081cbf738651cad0794dce5e579"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
-<tr class="memitem:a053be081cbf738651cad0794dce5e579"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a053be081cbf738651cad0794dce5e579">apply_integrate</a> (double &amp;integral, <a class="el" href="classMultipatchSplineEvaluator2D.html#a4cb2167bc59f836334985533b8c28d4e">SplineCoeffOnPatch</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; const &amp;spline_coef) const</td></tr>
+<tr class="memitem:a053be081cbf738651cad0794dce5e579"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a053be081cbf738651cad0794dce5e579">apply_integrate</a> (double &amp;integral, <a class="el" href="classMultipatchSplineEvaluator2D.html#aad2106e82884ea55e8fa063b0d425e0b">SplineCoeffOnPatch</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; const &amp;spline_coef) const</td></tr>
 <tr class="memdesc:a053be081cbf738651cad0794dce5e579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate the spline defined on the given patch.  <a href="classMultipatchSplineEvaluator2D.html#a053be081cbf738651cad0794dce5e579">More...</a><br /></td></tr>
 <tr class="separator:a053be081cbf738651cad0794dce5e579"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -645,8 +645,8 @@ template&lt;class Patch &gt; </div>
 
 </div>
 </div>
-<a id="a4cb2167bc59f836334985533b8c28d4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cb2167bc59f836334985533b8c28d4e">&#9670;&nbsp;</a></span>SplineCoeffOnPatch</h2>
+<a id="aad2106e82884ea55e8fa063b0d425e0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2106e82884ea55e8fa063b0d425e0b">&#9670;&nbsp;</a></span>SplineCoeffOnPatch</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,7 +656,7 @@ template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; t
 template&lt;class Patch &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classMultipatchSplineEvaluator2D.html">MultipatchSplineEvaluator2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, <a class="el" href="classOnionPatchLocator.html">PatchLocator</a>, Patches &gt;::<a class="el" href="classMultipatchSplineEvaluator2D.html#a4cb2167bc59f836334985533b8c28d4e">SplineCoeffOnPatch</a> =  DConstField&lt; <a class="el" href="classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553">spline_idx_range_type</a>&lt;<a class="el" href="structPatch.html">Patch</a>&gt;, std::experimental::layout_right, MemorySpace&gt;</td>
+          <td class="memname">using <a class="el" href="classMultipatchSplineEvaluator2D.html">MultipatchSplineEvaluator2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, <a class="el" href="classOnionPatchLocator.html">PatchLocator</a>, Patches &gt;::<a class="el" href="classMultipatchSplineEvaluator2D.html#aad2106e82884ea55e8fa063b0d425e0b">SplineCoeffOnPatch</a> =  DConstField&lt;<a class="el" href="classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553">spline_idx_range_type</a>&lt;<a class="el" href="structPatch.html">Patch</a>&gt;, MemorySpace&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1362,7 +1362,7 @@ template&lt;class Patch &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classMultipatchSplineEvaluator2D.html#a4cb2167bc59f836334985533b8c28d4e">SplineCoeffOnPatch</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classMultipatchSplineEvaluator2D.html#aad2106e82884ea55e8fa063b0d425e0b">SplineCoeffOnPatch</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>

@@ -1,7 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"docs_Adding_docs.html#autotoc_md4":[4],
-"docs_Adding_docs.html#autotoc_md5":[5],
 "docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally":[5,0],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures":[5,1],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[5,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX6 =
 "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Contents":[11,2,0,2],
 "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations":[11,2,0,0],
 "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References":[11,2,0,3],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation":[11,2,0,1]
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation":[11,2,0,1],
+"species__info_8hpp_source.html":[17,0,17,1],
+"species__init_8hpp_source.html":[17,0,17,2]
 };
