@@ -13,7 +13,7 @@ var searchData=
   ['polarbsplinesrtheta_1187',['PolarBSplinesRTheta',['../structPolarBSplinesRTheta.html',1,'']]],
   ['polarspline_1188',['PolarSpline',['../structPolarSpline.html',1,'']]],
   ['polarsplineevaluator_1189',['PolarSplineEvaluator',['../classPolarSplineEvaluator.html',1,'']]],
-  ['polarsplineevaluator_3c_20polarbsplinesrtheta_2c_20ddc_3a_3anullextrapolationrule_20_3e_1190',['PolarSplineEvaluator&lt; PolarBSplinesRTheta, ddc::NullExtrapolationRule &gt;',['../classPolarSplineEvaluator.html',1,'']]],
+  ['polarsplineevaluator_3c_20polarbsplinesrtheta_2c_20ddc_3a_3anullextrapolationrule_2c_20kokkos_3a_3ahostspace_20_3e_1190',['PolarSplineEvaluator&lt; PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace &gt;',['../classPolarSplineEvaluator.html',1,'']]],
   ['polarsplinefempoissonlikesolver_1191',['PolarSplineFEMPoissonLikeSolver',['../classPolarSplineFEMPoissonLikeSolver.html',1,'']]],
   ['polarsplinespan_1192',['PolarSplineSpan',['../structPolarSplineSpan.html',1,'']]],
   ['polarsplineview_1193',['PolarSplineView',['../structPolarSplineView.html',1,'']]],

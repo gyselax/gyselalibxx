@@ -183,9 +183,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7216a3146fbf30c16899bd0f508a0352"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarBSplines.html#aafa27d2710cd09d6713d6dafcb2ae564">tensor_product_index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a7216a3146fbf30c16899bd0f508a0352">eval_deriv_r_and_theta</a> (DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; <a class="el" href="classPolarBSplines.html#acdb7056a76b2985ddced01f3ca5610f2">DimR</a>, <a class="el" href="classPolarBSplines.html#a963f3ab10c79d029e0908ee597bc41dd">DimTheta</a> &gt; p) const</td></tr>
 <tr class="memdesc:a7216a3146fbf30c16899bd0f508a0352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions, at the coordinate p.  <a href="classPolarBSplines_1_1Impl.html#a7216a3146fbf30c16899bd0f508a0352">More...</a><br /></td></tr>
 <tr class="separator:a7216a3146fbf30c16899bd0f508a0352"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a842b3b423e4b7fd7abf28ffa606380c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2">integrals</a> (<a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim &gt; int_vals) const</td></tr>
-<tr class="memdesc:a842b3b423e4b7fd7abf28ffa606380c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the integrals of each of the basis splines.  <a href="classPolarBSplines_1_1Impl.html#a842b3b423e4b7fd7abf28ffa606380c2">More...</a><br /></td></tr>
-<tr class="separator:a842b3b423e4b7fd7abf28ffa606380c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4792a99a8176775c823b048d62fc56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a0d4792a99a8176775c823b048d62fc56">integrals</a> (<a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim, MemorySpace &gt; int_vals) const</td></tr>
+<tr class="memdesc:a0d4792a99a8176775c823b048d62fc56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the integrals of each of the basis splines.  <a href="classPolarBSplines_1_1Impl.html#a0d4792a99a8176775c823b048d62fc56">More...</a><br /></td></tr>
+<tr class="separator:a0d4792a99a8176775c823b048d62fc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a> () const noexcept</td></tr>
 <tr class="memdesc:a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total number of basis functions.  <a href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">More...</a><br /></td></tr>
 <tr class="separator:a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -703,8 +703,8 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a842b3b423e4b7fd7abf28ffa606380c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a842b3b423e4b7fd7abf28ffa606380c2">&#9670;&nbsp;</a></span>integrals()</h2>
+<a id="a0d4792a99a8176775c823b048d62fc56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4792a99a8176775c823b048d62fc56">&#9670;&nbsp;</a></span>integrals()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -716,7 +716,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classPolarBSplines.html">PolarBSplines</a>&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a>, C &gt;::<a class="el" href="classPolarBSplines_1_1Impl.html">Impl</a>&lt; DDim, MemorySpace &gt;::integrals </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="structPolarSplineSpan.html">PolarSplineSpan</a>&lt; DDim, MemorySpace &gt;&#160;</td>
           <td class="paramname"><em>int_vals</em></td><td>)</td>
           <td> const</td>
         </tr>

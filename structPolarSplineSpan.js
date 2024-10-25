@@ -1,10 +1,10 @@
 var structPolarSplineSpan =
 [
-    [ "BSplinesR", "structPolarSplineSpan.html#adfef3be094df10396ec4be0d8f72171d", null ],
-    [ "BSplinesTheta", "structPolarSplineSpan.html#ab348d2e93cdd02478236f2df425fcf4d", null ],
-    [ "PolarSplineSpan", "structPolarSplineSpan.html#a45eb7d04a2d06b64b271833860501b1c", null ],
-    [ "span_view", "structPolarSplineSpan.html#a70a68be0eda4182137ada4b7c294a6b7", null ],
-    [ "span_cview", "structPolarSplineSpan.html#a5290247e142af3a83effa2ba073a6c1c", null ],
-    [ "spline_coef", "structPolarSplineSpan.html#a7d2cfa28c1fd76863477755b25df9de4", null ],
-    [ "singular_spline_coef", "structPolarSplineSpan.html#a872d8a78e91be044b0756f8b171ca19e", null ]
+    [ "BSplinesR", "structPolarSplineSpan.html#a12d5dfac7a9deb9c15738773a51b11b3", null ],
+    [ "BSplinesTheta", "structPolarSplineSpan.html#a1f39c4c6ea9d020a58eec4b8507691bd", null ],
+    [ "PolarSplineSpan", "structPolarSplineSpan.html#a09f1d7d4e23574060fce940f93bb97fd", null ],
+    [ "span_view", "structPolarSplineSpan.html#a841baf3a383d2e69f21d43600199a68f", null ],
+    [ "span_cview", "structPolarSplineSpan.html#a0014a8cd152de1bb694e48b70afb40cc", null ],
+    [ "spline_coef", "structPolarSplineSpan.html#ac78b0b0811f9793f6d6c4a001fcec14c", null ],
+    [ "singular_spline_coef", "structPolarSplineSpan.html#ab074bc73b37047c2db435311452724c2", null ]
 ];
