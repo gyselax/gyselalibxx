@@ -145,3 +145,14 @@ cppcheck_static_analysis:
     python3 ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
   allow_failure:
     exit_codes: [1, 2] # Allow failure due to style or error but not fatal
+
+cmake_static_analysis:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  stage: static_analysis
+  needs: [ setup_env_mr ]
+  image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script: |
+    python3 ci_tools/cmake_checker.py
