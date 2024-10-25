@@ -6,17 +6,21 @@ Inputs: the executable associated with the file polarpoissonfemsolver.cpp.
 """
 import subprocess
 import sys
+import pathlib
 
 import numpy as np
 
 executable = sys.argv[1]
+exe_path=pathlib.PurePath(executable)
+test_case=exe_path.stem.removeprefix('polar_poisson_convergence_')
+input_file=test_case+".yaml"
 
-with open("poisson.yaml", "w", encoding="utf-8") as f:
+with open(input_file, "w", encoding="utf-8") as f:
     print("SplineMesh:", file=f)
     print("  r_ncells: 32", file=f)
     print("  p_ncells: 32", file=f)
 
-with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE) as p:
+with subprocess.Popen([executable, input_file], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()
 out = out.decode('ascii').strip()
 
@@ -29,12 +33,12 @@ if err:
 out_lines = out.split('\n')
 error_32 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
 
-with open("poisson.yaml", "w", encoding="utf-8") as f:
+with open(input_file, "w", encoding="utf-8") as f:
     print("SplineMesh:", file=f)
     print("  r_ncells: 64", file=f)
     print("  p_ncells: 64", file=f)
 
-with subprocess.Popen([executable, "poisson.yaml"], stdout=subprocess.PIPE) as p:
+with subprocess.Popen([executable, input_file], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()
 out = out.decode('ascii').strip()
 
