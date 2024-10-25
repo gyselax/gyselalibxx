@@ -117,14 +117,50 @@ struct GridMu : NonUniformGridBase<Mu>
 };
 
 using SplineVparBuilder_1d = ddc::SplineBuilder<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVpar,
         GridVpar,
         SplineVparBoundary,
         SplineVparBoundary,
         ddc::SplineSolver::LAPACK,
         GridVpar>;
+
+using SplineVparEvaluator_1d = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVpar,
+        GridVpar,
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule,
+        GridVpar>;
+
+using SplineVparBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVpar,
+        GridVpar,
+        SplineVparBoundary,
+        SplineVparBoundary,
+        ddc::SplineSolver::LAPACK,
+        Species,
+        GridTheta,
+        GridR,
+        GridVpar,
+        GridMu>;
+
+using SplineVparEvaluator = ddc::SplineEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesVpar,
+        GridVpar,
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule,
+        Species,
+        GridTheta,
+        GridR,
+        GridVpar,
+        GridMu>;
 
 // Idx = index of the point in the point sampling
 using IdxR = Idx<GridR>;

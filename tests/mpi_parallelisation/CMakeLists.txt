@@ -17,7 +17,7 @@ target_link_libraries(unit_tests_parallelisation_layout
 
 )
 
-gtest_discover_tests(unit_tests_parallelisation_layout DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_parallelisation_layout)
 
 add_executable(unit_tests_parallelisation
     alltoall.cpp
@@ -34,21 +34,7 @@ target_link_libraries(unit_tests_parallelisation
 
 )
 
-function(make_mpi_test test_name)
-    add_test(NAME ${test_name}
-        COMMAND
-        "${MPIEXEC_EXECUTABLE}"
-        "-n"
-        "2"
-        "$<TARGET_FILE:unit_tests_parallelisation>"
-        "--gtest_filter=${test_name}"
-    )
-endfunction()
+set_property(TARGET unit_tests_parallelisation PROPERTY CROSSCOMPILING_EMULATOR '${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2')
 
-make_mpi_test(MPIParallelisation.AllToAll2D_CPU)
-make_mpi_test(MPIParallelisation.AllToAll2D_GPU)
-make_mpi_test(MPIParallelisation.AllToAll3D_CPU)
-make_mpi_test(MPIParallelisation.AllToAll4D_CPU)
-make_mpi_test(Layout.MinimalDomainDistribution)
-make_mpi_test(Layout.SpreadDomainDistribution)
-make_mpi_test(Layout.DomainSelection)
+gtest_discover_tests(unit_tests_parallelisation)
+

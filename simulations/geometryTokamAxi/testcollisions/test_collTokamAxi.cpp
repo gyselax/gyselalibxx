@@ -7,7 +7,9 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "bsl_advection_1d.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "mpitransposealltoall.hpp"
@@ -15,12 +17,21 @@
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_out.yml.hpp"
+#include "spline_interpolator.hpp"
 #include "test_collTokamAxi.yaml.hpp"
 
 using std::cerr;
 using std::cout;
 using std::endl;
 using std::chrono::steady_clock;
+
+// Define aliases for operators
+using AdvectionVpar = BslAdvection1D<
+        GridVpar,
+        IdxRangeVpar,
+        IdxRangeSpTor2DV2D,
+        SplineVparBuilder_1d,
+        SplineVparEvaluator_1d>;
 
 int main(int argc, char** argv)
 {
@@ -85,68 +96,71 @@ int main(int argc, char** argv)
 
     // - Read mesh
     // -- Read breakpoints and grid
-    IdxRangeR const idxrange_r = init_spline_dependent_idx_range<
+    IdxRangeR const global_idxrange_r = init_spline_dependent_idx_range<
             GridR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselax, "tor1");
-    IdxRangeTheta const idxrange_theta = init_spline_dependent_idx_range<
+    IdxRangeTheta const global_idxrange_theta = init_spline_dependent_idx_range<
             GridTheta,
             BSplinesTheta,
             SplineInterpPointsTheta>(conf_gyselax, "tor2");
-    IdxRangeVpar const idxrange_vpar = init_spline_dependent_idx_range<
+    IdxRangeVpar const global_idxrange_vpar = init_spline_dependent_idx_range<
             GridVpar,
             BSplinesVpar,
             SplineInterpPointsVpar>(conf_gyselax, "vpar");
-    IdxRangeMu const idxrange_mu = init_spline_dependent_idx_range<
+    IdxRangeMu const global_idxrange_mu = init_spline_dependent_idx_range<
             GridMu,
             BSplinesMu,
             SplineInterpPointsMu>(conf_gyselax, "mu");
     expose_mesh_to_pdi("breakpoints_tor1", ddc::discrete_space<BSplinesR>().break_point_domain());
-    expose_mesh_to_pdi("grid_tor1", idxrange_r);
+    expose_mesh_to_pdi("grid_tor1", global_idxrange_r);
     expose_mesh_to_pdi(
             "breakpoints_tor2",
             ddc::discrete_space<BSplinesTheta>().break_point_domain());
-    expose_mesh_to_pdi("grid_tor2", idxrange_theta);
+    expose_mesh_to_pdi("grid_tor2", global_idxrange_theta);
     expose_mesh_to_pdi(
             "breakpoints_vpar",
             ddc::discrete_space<BSplinesVpar>().break_point_domain());
-    expose_mesh_to_pdi("grid_vpar", idxrange_vpar);
+    expose_mesh_to_pdi("grid_vpar", global_idxrange_vpar);
     expose_mesh_to_pdi("breakpoints_mu", ddc::discrete_space<BSplinesMu>().break_point_domain());
-    expose_mesh_to_pdi("grid_mu", idxrange_mu);
+    expose_mesh_to_pdi("grid_mu", global_idxrange_mu);
 
     // - Read magnetic configuration
     // -- Read R_matrix and Z_matrix
     // -- Read normB_matrix
-    IdxRangeTor2D const idxrange_tor2D(idxrange_r, idxrange_theta);
-    DFieldMemTor2D_host R_matrix_host(idxrange_tor2D);
-    DFieldMemTor2D_host Z_matrix_host(idxrange_tor2D);
-    DFieldMemTor2D_host normB_matrix_host(idxrange_tor2D);
+    IdxRangeTor2D const global_idxrange_tor2D(global_idxrange_r, global_idxrange_theta);
+    DFieldMemTor2D_host R_matrix_host(global_idxrange_tor2D);
+    DFieldMemTor2D_host Z_matrix_host(global_idxrange_tor2D);
+    DFieldMemTor2D_host normB_matrix_host(global_idxrange_tor2D);
     ddc::PdiEvent("read_magnetic_config")
             .with("R_matrix", R_matrix_host)
             .with("Z_matrix", Z_matrix_host)
             .with("normB_matrix", normB_matrix_host);
 
     // - Read poloidal cross-section of the 3 moments: density, temperature and Upar
-    IdxRangeSpTor2D const idxrange_sptor2D(idxrange_kinsp, idxrange_r, idxrange_theta);
-    DFieldMemSpTor2D_host density_torCS_host(idxrange_sptor2D);
-    DFieldMemSpTor2D_host temperature_torCS_host(idxrange_sptor2D);
-    DFieldMemSpTor2D_host Upar_torCS_host(idxrange_sptor2D);
+    IdxRangeSpTor2D const
+            global_idxrange_sptor2D(idxrange_kinsp, global_idxrange_r, global_idxrange_theta);
+    DFieldMemSpTor2D_host density_torCS_host(global_idxrange_sptor2D);
+    DFieldMemSpTor2D_host temperature_torCS_host(global_idxrange_sptor2D);
+    DFieldMemSpTor2D_host Upar_torCS_host(global_idxrange_sptor2D);
     ddc::PdiEvent("read_profiles")
             .with("densityTorCS", density_torCS_host)
             .with("temperatureTorCS", temperature_torCS_host)
             .with("UparTorCS", Upar_torCS_host);
 
     // - Read the distribution function
-    IdxRangeSpTor2DV2D const idxrange_sptor2Dv2D(
+    IdxRangeSpTor2DV2D const global_idxrange_sptor2Dv2D(
             idxrange_kinsp,
-            idxrange_theta,
-            idxrange_r,
-            idxrange_vpar,
-            idxrange_mu);
+            global_idxrange_theta,
+            global_idxrange_r,
+            global_idxrange_vpar,
+            global_idxrange_mu);
     MPITransposeAllToAll<Tor2DDistributed, V2DDistributed>
-            transpose(idxrange_sptor2Dv2D, MPI_COMM_WORLD);
-    DFieldMemSpTor2DV2D_host allfdistribu_host(transpose.get_local_idx_range<Tor2DDistributed>());
-    PDI_expose_idx_range(get_idx_range(allfdistribu_host), "local_fdistribu");
+            transpose(global_idxrange_sptor2Dv2D, MPI_COMM_WORLD);
+    IdxRangeSpTor2DV2D local_idxrange_sptor2Dv2D(transpose.get_local_idx_range<Tor2DDistributed>());
+    IdxRangeSpV2DTor2D local_idxrange_spv2Dtor2D(transpose.get_local_idx_range<V2DDistributed>());
+    DFieldMemSpTor2DV2D_host allfdistribu_host(local_idxrange_sptor2Dv2D);
+    PDI_expose_idx_range(local_idxrange_sptor2Dv2D, "local_fdistribu");
     double time_saved;
     ddc::PdiEvent("read_fdistribu")
             .with("time_saved", time_saved)
@@ -167,8 +181,47 @@ int main(int argc, char** argv)
     DFieldSpTor2DV2D allfdistribu_vpar_mu = get_field(allfdistribu_vpar_mu_alloc);
 
     // unintialised allfdistribu on the V2DDistributed layout
-    DFieldMemSpV2DTor2D allfdistribu_r_theta_alloc(transpose.get_local_idx_range<V2DDistributed>());
+    DFieldMemSpV2DTor2D allfdistribu_r_theta_alloc(local_idxrange_spv2Dtor2D);
     DFieldSpV2DTor2D allfdistribu_r_theta = get_field(allfdistribu_r_theta_alloc);
+
+    // Create extrapolation rules for the spline evaluators
+    ddc::NullExtrapolationRule extrapol_vpar_min;
+    ddc::NullExtrapolationRule extrapol_vpar_max;
+
+    // Create a builder and evaluator for splines in the vpar direction batched over all other directions
+    SplineVparBuilder spline_builder_vpar(local_idxrange_sptor2Dv2D);
+    SplineVparEvaluator spline_eval_vpar(extrapol_vpar_min, extrapol_vpar_max);
+
+    // Create a builder and evaluator for splines in the vpar direction without a batch direction
+    // This is used for the null advection field which only depends on the vpar direction
+    SplineVparBuilder_1d spline_builder_adv_field_vpar(global_idxrange_vpar);
+    SplineVparEvaluator_1d spline_eval_adv_field_vpar(extrapol_vpar_min, extrapol_vpar_max);
+
+    // Create a spline interpolator
+    PreallocatableSplineInterpolator const
+            spline_interpolator_vpar(spline_builder_vpar, spline_eval_vpar);
+
+    // Create a timestepper to calculate the foot of the characteristics in the advection
+    Euler<FieldMemVpar<CoordVpar>, DFieldMemVpar> characteristic_timestepper(global_idxrange_vpar);
+
+    // unintialised advection field A(vpar)
+    DFieldMemVpar null_advection_field_alloc(global_idxrange_vpar);
+    DFieldVpar null_advection_field(get_field(null_advection_field_alloc));
+    // initialise the advection field A(vpar) = 0.0
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            global_idxrange_vpar,
+            KOKKOS_LAMBDA(IdxVpar idx) { null_advection_field(idx) = 0.0; });
+
+    // Create a vpar advection operator
+    AdvectionVpar vpar_advection(
+            spline_interpolator_vpar,
+            spline_builder_adv_field_vpar,
+            spline_eval_adv_field_vpar,
+            characteristic_timestepper);
+
+    // Null advection in vpar direction
+    vpar_advection(allfdistribu_vpar_mu, null_advection_field, deltat);
 
     // [TODO] Apply collision operator
 
