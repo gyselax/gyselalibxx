@@ -77,11 +77,11 @@ TEST(PolarSplineTest, ConstantEval)
     using PolarCoord = ddc::Coordinate<R, Theta>;
     using CoordR = ddc::Coordinate<R>;
     using CoordTheta = ddc::Coordinate<Theta>;
-    using Spline = PolarSpline<BSplines>;
-    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule>;
+    using Spline = PolarSpline<BSplines, Kokkos::HostSpace>;
+    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule, Kokkos::HostSpace>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -96,7 +96,7 @@ TEST(PolarSplineTest, ConstantEval)
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
-            Kokkos::DefaultHostExecutionSpace::memory_space,
+            Kokkos::HostSpace,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -199,7 +199,7 @@ TEST(PolarSplineTest, ConstantEval)
     }
 
     Spline integrals(builder_rtheta.spline_domain());
-    ddc::discrete_space<BSplines>().integrals(integrals);
+    ddc::host_discrete_space<BSplines>().integrals(integrals.span_view());
     double area = ddc::transform_reduce(
                           integrals.singular_spline_coef.domain(),
                           0.0,

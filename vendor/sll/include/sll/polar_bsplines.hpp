@@ -490,7 +490,7 @@ public:
          *
          * @param[out] int_vals The integrals of the basis splines.
          */
-        void integrals(PolarSplineSpan<DDim> int_vals) const;
+        void integrals(PolarSplineSpan<DDim, MemorySpace> int_vals) const;
 
         /**
          * Get the total number of basis functions.
@@ -662,7 +662,7 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
 template <class BSplinesR, class BSplinesTheta, int C>
 template <class DDim, class MemorySpace>
 void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integrals(
-        PolarSplineSpan<DDim> int_vals) const
+        PolarSplineSpan<DDim, MemorySpace> int_vals) const
 {
     auto r_bspl_space = ddc::discrete_space<BSplinesR>();
     auto theta_bspl_space = ddc::discrete_space<BSplinesTheta>();
@@ -676,11 +676,14 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
            || int_vals.spline_coef.domain().template extent<BSplinesTheta>()
                       == theta_bspl_space.size());
 
-    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesR>> r_integrals_alloc(
-            r_bspl_space.full_domain().take_first(
+    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesR>, ddc::KokkosAllocator<double, MemorySpace>>
+            r_integrals_alloc(r_bspl_space.full_domain().take_first(
                     ddc::DiscreteVector<BSplinesR> {r_bspl_space.nbasis()}));
-    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesTheta>> theta_integrals_alloc(
-            theta_bspl_space.full_domain().take_first(
+    ddc::Chunk<
+            double,
+            ddc::DiscreteDomain<BSplinesTheta>,
+            ddc::KokkosAllocator<double, MemorySpace>>
+            theta_integrals_alloc(theta_bspl_space.full_domain().take_first(
                     ddc::DiscreteVector<BSplinesTheta> {theta_bspl_space.size()}));
     ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();
     ddc::ChunkSpan theta_integrals = theta_integrals_alloc.span_view();
@@ -688,9 +691,13 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
     ddc::integrals(Kokkos::DefaultHostExecutionSpace(), r_integrals);
     ddc::integrals(Kokkos::DefaultHostExecutionSpace(), theta_integrals);
 
-    ddc::for_each(singular_idx_range<DDim>(), [&](auto k) {
-        int_vals.singular_spline_coef(k) = ddc::transform_reduce(
-                ddc::select<BSplinesR, BSplinesTheta>(m_singular_basis_elements.domain()),
+    auto singular_domain
+            = ddc::select<BSplinesR, BSplinesTheta>(m_singular_basis_elements.domain());
+    ddc::ChunkSpan singular_spline_integrals = int_vals.singular_spline_coef.span_view();
+
+    ddc::for_each(singular_idx_range<DDim>(), [&](ddc::DiscreteElement<DDim> k) {
+        singular_spline_integrals(k) = ddc::transform_reduce(
+                singular_domain,
                 0.0,
                 ddc::reducer::sum<double>(),
                 [&](tensor_product_index_type const idx) {
@@ -702,19 +709,20 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
 
     ddc::DiscreteDomain<BSplinesR> r_tensor_product_dom(
             ddc::select<BSplinesR>(int_vals.spline_coef.domain()));
-
     tensor_product_idx_range_type
             tensor_bspline_idx_range(r_tensor_product_dom, theta_integrals.domain());
+    ddc::ChunkSpan spline_integrals = int_vals.spline_coef.span_view();
 
-    ddc::for_each(tensor_bspline_idx_range, [&](auto idx) {
-        int_vals.spline_coef(idx) = r_integrals(ddc::select<BSplinesR>(idx))
-                                    * theta_integrals(ddc::select<BSplinesTheta>(idx));
+    ddc::for_each(tensor_bspline_idx_range, [&](tensor_product_index_type idx) {
+        spline_integrals(idx) = r_integrals(ddc::select<BSplinesR>(idx))
+                                * theta_integrals(ddc::select<BSplinesTheta>(idx));
     });
-
     if (int_vals.spline_coef.domain().template extent<BSplinesTheta>() == theta_bspl_space.size()) {
         ddc::DiscreteDomain<BSplinesTheta> periodic_points(theta_integrals.domain().take_last(
                 ddc::DiscreteVector<BSplinesTheta> {BSplinesTheta::degree()}));
         tensor_product_idx_range_type repeat_idx_range(r_tensor_product_dom, periodic_points);
-        ddc::for_each(repeat_idx_range, [&](auto idx) { int_vals.spline_coef(idx) = 0.0; });
+        ddc::for_each(repeat_idx_range, [&](tensor_product_index_type idx) {
+            spline_integrals(idx) = 0.0;
+        });
     }
 }
