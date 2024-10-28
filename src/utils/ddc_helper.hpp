@@ -7,8 +7,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/polar_spline.hpp>
-
 #include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
 #include "transpose.hpp"
@@ -313,20 +311,6 @@ struct OnMemorySpace<
         VectorField<ElementType, SupportType, NDTag, MemorySpace, Layout>>
 {
     using type = VectorField<ElementType, SupportType, NDTag, NewMemorySpace, Layout>;
-};
-
-/**
- * @brief Get a new `PolarSpline` type with the same parametrisation
- * except in the memory space which is set to NewMemorySpace.
- * @tparam NewMemorySpace The new memory space. 
- * @tparam PolarSplineType Type of the B-splines.
- * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
- * @see VectorField
- */
-template <class NewMemorySpace, class PolarSplineType, class MemorySpace>
-struct OnMemorySpace<NewMemorySpace, PolarSpline<PolarSplineType, MemorySpace>>
-{
-    using type = PolarSpline<PolarSplineType, NewMemorySpace>;
 };
 
 

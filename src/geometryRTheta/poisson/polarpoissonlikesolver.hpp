@@ -186,8 +186,7 @@ private:
 
     host_t<FieldMem<double, IdxRangeQuadratureRTheta>> int_volume;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
-            m_polar_spline_evaluator;
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     const int batch_idx {0};
@@ -654,7 +653,7 @@ public:
      *      The spline representation of the solution @f$\phi@f$.
      */
     template <class RHSFunction>
-    void operator()(RHSFunction const& rhs, host_t<SplinePolar>& spline) const
+    void operator()(RHSFunction const& rhs, SplinePolar& spline) const
     {
         const int b_size = ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                            - ddc::discrete_space<BSplinesTheta_Polar>().nbasis();
@@ -807,7 +806,7 @@ public:
     {
         IdxRangeBSTheta_Polar polar_idx_range(
                 ddc::discrete_space<BSplinesTheta_Polar>().full_domain());
-        host_t<SplinePolar>
+        SplinePolar
                 spline(PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
                        IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
 

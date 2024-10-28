@@ -98,7 +98,7 @@ public:
 private:
     Mapping const& m_mapping;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace> const
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> const
             m_polar_spline_evaluator;
 
     SplineRThetaEvaluatorNullBound const m_spline_evaluator;
@@ -188,7 +188,7 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            host_t<SplinePolar>& electrostatic_potential_coef,
+            SplinePolar& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
@@ -223,8 +223,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator<
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule,
-                                    Kokkos::HostSpace>> && std::is_same_v<SplineType, host_t<SplinePolar>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, SplinePolar>));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
@@ -413,7 +412,7 @@ public:
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
-            host_t<SplinePolar>& electrostatic_potential_coef,
+            SplinePolar& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
@@ -454,8 +453,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator<
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule,
-                                    Kokkos::HostSpace>> && std::is_same_v<SplineType, host_t<SplinePolar>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, SplinePolar>));
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rp);
 

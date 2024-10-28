@@ -130,8 +130,7 @@ int main(int argc, char** argv)
                                         Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
 
     ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
-    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
-            mesh_x);
+    FFTPoissonSolver<IdxRangeX> fft_poisson_solver(mesh_x);
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);

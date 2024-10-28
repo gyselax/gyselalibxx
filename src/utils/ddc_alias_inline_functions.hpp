@@ -82,19 +82,17 @@ inline constexpr bool
 template <class ElementType, class IdxRangeType, class MemoryType>
 inline constexpr bool enable_mem_type<FieldMem<ElementType, IdxRangeType, MemoryType>> = true;
 
-template <class PolarBSplines, class MemorySpace>
-inline constexpr bool enable_data_access_methods<PolarSpline<PolarBSplines, MemorySpace>> = true;
+template <class PolarBSplines>
+inline constexpr bool enable_data_access_methods<PolarSpline<PolarBSplines>> = true;
 
-template <class PolarBSplines, class MemorySpace>
-inline constexpr bool
-        enable_data_access_methods<PolarSplineView<PolarBSplines, MemorySpace>> = true;
+template <class PolarBSplines>
+inline constexpr bool enable_data_access_methods<PolarSplineView<PolarBSplines>> = true;
 
-template <class PolarBSplines, class MemorySpace>
-inline constexpr bool
-        enable_data_access_methods<PolarSplineSpan<PolarBSplines, MemorySpace>> = true;
+template <class PolarBSplines>
+inline constexpr bool enable_data_access_methods<PolarSplineSpan<PolarBSplines>> = true;
 
-template <class PolarBSplines, class MemorySpace>
-inline constexpr bool enable_mem_type<PolarSpline<PolarBSplines, MemorySpace>> = true;
+template <class PolarBSplines>
+inline constexpr bool enable_mem_type<PolarSpline<PolarBSplines>> = true;
 
 template <typename Type>
 static constexpr bool has_idx_range_v = detail::HasIdxRange<Type>::value;

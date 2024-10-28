@@ -260,7 +260,7 @@ int main(int argc, char** argv)
                                               Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
     ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs_alloc));
 #if defined(PERIODIC_RDIMX) && !defined(INPUT_MESH)
-    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(mesh_x);
+    FFTPoissonSolver<IdxRangeX> poisson_solver(mesh_x);
 #else
     FEM1DPoissonSolver poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif

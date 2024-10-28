@@ -112,8 +112,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
-            polar_spline_evaluator(r_extrapolation_rule);
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> polar_spline_evaluator(
+            r_extrapolation_rule);
 
     // --- Define the mapping. ------------------------------------------------------------------------
     const Mapping mapping;

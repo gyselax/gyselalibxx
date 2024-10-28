@@ -2,10 +2,10 @@
 
 #include <ddc/ddc.hpp>
 
-template <class PolarBSplinesType, class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
+template <class PolarBSplinesType>
 struct PolarSplineSpan;
 
-template <class PolarBSplinesType, class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
+template <class PolarBSplinesType>
 struct PolarSplineView;
 
 
@@ -15,7 +15,7 @@ struct PolarSplineView;
  *
  * @tparam PolarBSplinesType The type of the polar bsplines on which this spline is defined.
  */
-template <class PolarBSplinesType, class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
+template <class PolarBSplinesType>
 struct PolarSpline
 {
 public:
@@ -29,21 +29,13 @@ public:
      * A Chunk containing the coefficients in front of the b-spline elements which can be
      * expressed as a tensor product of 1D bsplines.
      */
-    ddc::Chunk<
-            double,
-            ddc::DiscreteDomain<BSplinesR, BSplinesTheta>,
-            ddc::KokkosAllocator<double, MemSpace>>
-            spline_coef;
+    ddc::Chunk<double, ddc::DiscreteDomain<BSplinesR, BSplinesTheta>> spline_coef;
 
     /**
      * A Chunk containing the coefficients in front of the b-spline elements near the
      * singular point which cannot be expressed as a tensor product of 1D bsplines.
      */
-    ddc::Chunk<
-            double,
-            ddc::DiscreteDomain<PolarBSplinesType>,
-            ddc::KokkosAllocator<double, MemSpace>>
-            singular_spline_coef;
+    ddc::Chunk<double, ddc::DiscreteDomain<PolarBSplinesType>> singular_spline_coef;
 
 public:
     /**
@@ -55,7 +47,7 @@ public:
      *
      * @param domain A 2D domain of bsplines.
      */
-    PolarSpline<PolarBSplinesType, MemSpace>(ddc::DiscreteDomain<BSplinesR, BSplinesTheta> domain)
+    PolarSpline<PolarBSplinesType>(ddc::DiscreteDomain<BSplinesR, BSplinesTheta> domain)
         : spline_coef(ddc::DiscreteDomain<BSplinesR, BSplinesTheta>(
                 ddc::select<BSplinesR>(domain).remove_first(
                         ddc::DiscreteVector<BSplinesR>(PolarBSplinesType::continuity + 1)),
@@ -75,7 +67,7 @@ public:
      * @param domain          The domain for the coefficients in front of the b-spline elements
      *                        which can be expressed as a tensor product of 1D bsplines.
      */
-    PolarSpline<PolarBSplinesType, MemSpace>(
+    PolarSpline<PolarBSplinesType>(
             ddc::DiscreteDomain<PolarBSplinesType> singular_domain,
             ddc::DiscreteDomain<BSplinesR, BSplinesTheta> domain)
         : spline_coef(domain)
@@ -89,9 +81,9 @@ public:
      *
      * @return A modifiable reference to this polar spline.
      */
-    PolarSplineSpan<PolarBSplinesType, MemSpace> span_view()
+    PolarSplineSpan<PolarBSplinesType> span_view()
     {
-        return PolarSplineSpan<PolarBSplinesType, MemSpace>(*this);
+        return PolarSplineSpan<PolarBSplinesType>(*this);
     }
 
     /**
@@ -99,9 +91,9 @@ public:
      *
      * @return A constant reference to this polar spline.
      */
-    PolarSplineView<PolarBSplinesType, MemSpace> span_cview() const
+    PolarSplineView<PolarBSplinesType> span_cview() const
     {
-        return PolarSplineView<PolarBSplinesType, MemSpace>(*this);
+        return PolarSplineView<PolarBSplinesType>(*this);
     }
 };
 
@@ -111,7 +103,7 @@ public:
  *
  * @tparam PolarBSplinesType The type of the polar bsplines on which this spline is defined.
  */
-template <class PolarBSplinesType, class MemSpace>
+template <class PolarBSplinesType>
 struct PolarSplineSpan
 {
 public:
@@ -125,23 +117,13 @@ public:
      * A ChunkSpan containing the coefficients in front of the b-spline elements which can be
      * expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<
-            double,
-            ddc::DiscreteDomain<BSplinesR, BSplinesTheta>,
-            std::experimental::layout_right,
-            MemSpace>
-            spline_coef;
+    ddc::ChunkSpan<double, ddc::DiscreteDomain<BSplinesR, BSplinesTheta>> spline_coef;
 
     /**
      * A ChunkSpan containing the coefficients in front of the b-spline elements near the
      * singular point which cannot be expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<
-            double,
-            ddc::DiscreteDomain<PolarBSplinesType>,
-            std::experimental::layout_right,
-            MemSpace>
-            singular_spline_coef;
+    ddc::ChunkSpan<double, ddc::DiscreteDomain<PolarBSplinesType>> singular_spline_coef;
 
 public:
     /**
@@ -149,7 +131,7 @@ public:
      *
      * @param spl The PolarSpline being referenced.
      */
-    PolarSplineSpan<PolarBSplinesType, MemSpace>(PolarSpline<PolarBSplinesType, MemSpace>& spl)
+    PolarSplineSpan<PolarBSplinesType>(PolarSpline<PolarBSplinesType>& spl)
         : spline_coef(spl.spline_coef.span_view())
         , singular_spline_coef(spl.singular_spline_coef.span_view())
     {
@@ -160,7 +142,7 @@ public:
      *
      * @return A modifiable reference to a polar spline.
      */
-    PolarSplineSpan<PolarBSplinesType, MemSpace> span_view()
+    PolarSplineSpan<PolarBSplinesType> span_view()
     {
         return *this;
     }
@@ -170,9 +152,9 @@ public:
      *
      * @return A constant reference to a polar spline.
      */
-    PolarSplineView<PolarBSplinesType, MemSpace> span_cview() const
+    PolarSplineView<PolarBSplinesType> span_cview() const
     {
-        return PolarSplineView<PolarBSplinesType, MemSpace>(*this);
+        return PolarSplineView<PolarBSplinesType>(*this);
     }
 };
 
@@ -182,7 +164,7 @@ public:
  *
  * @tparam PolarBSplinesType The type of the polar bsplines on which this spline is defined.
  */
-template <class PolarBSplinesType, class MemSpace>
+template <class PolarBSplinesType>
 struct PolarSplineView
 {
 public:
@@ -196,21 +178,13 @@ public:
      * A ChunkView containing the coefficients in front of the b-spline elements which can be
      * expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<
-            double const,
-            ddc::DiscreteDomain<BSplinesR, BSplinesTheta>,
-            std::experimental::layout_right,
-            MemSpace> const spline_coef;
+    ddc::ChunkSpan<double const, ddc::DiscreteDomain<BSplinesR, BSplinesTheta>> const spline_coef;
 
     /**
      * A ChunkView containing the coefficients in front of the b-spline elements near the
      * singular point which cannot be expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<
-            double const,
-            ddc::DiscreteDomain<PolarBSplinesType>,
-            std::experimental::layout_right,
-            MemSpace> const singular_spline_coef;
+    ddc::ChunkSpan<double const, ddc::DiscreteDomain<PolarBSplinesType>> const singular_spline_coef;
 
 public:
     /**
@@ -218,8 +192,7 @@ public:
      *
      * @param spl The PolarSpline being referenced.
      */
-    PolarSplineView<PolarBSplinesType, MemSpace>(
-            PolarSpline<PolarBSplinesType, MemSpace> const& spl)
+    PolarSplineView<PolarBSplinesType>(PolarSpline<PolarBSplinesType> const& spl)
         : spline_coef(spl.spline_coef.span_cview())
         , singular_spline_coef(spl.singular_spline_coef.span_cview())
     {
@@ -230,8 +203,7 @@ public:
      *
      * @param spl The PolarSpline being referenced.
      */
-    PolarSplineView<PolarBSplinesType, MemSpace>(
-            PolarSplineSpan<PolarBSplinesType, MemSpace> const& spl)
+    PolarSplineView<PolarBSplinesType>(PolarSplineSpan<PolarBSplinesType> const& spl)
         : spline_coef(spl.spline_coef.span_cview())
         , singular_spline_coef(spl.singular_spline_coef.span_cview())
     {
@@ -242,7 +214,7 @@ public:
      *
      * @return A reference to a polar spline.
      */
-    PolarSplineSpan<PolarBSplinesType, MemSpace> span_view() const
+    PolarSplineSpan<PolarBSplinesType> span_view() const
     {
         return *this;
     }
@@ -252,7 +224,7 @@ public:
      *
      * @return A constant reference to a polar spline.
      */
-    PolarSplineView<PolarBSplinesType, MemSpace> span_cview() const
+    PolarSplineView<PolarBSplinesType> span_cview() const
     {
         return *this;
     }
@@ -261,11 +233,11 @@ public:
 template <class T>
 inline constexpr bool is_polar_spline_v = false;
 
-template <class PolarBSplinesType, class MemSpace>
-inline constexpr bool is_polar_spline_v<PolarSpline<PolarBSplinesType, MemSpace>> = true;
+template <class PolarBSplinesType>
+inline constexpr bool is_polar_spline_v<PolarSpline<PolarBSplinesType>> = true;
 
-template <class PolarBSplinesType, class MemSpace>
-inline constexpr bool is_polar_spline_v<PolarSplineSpan<PolarBSplinesType, MemSpace>> = true;
+template <class PolarBSplinesType>
+inline constexpr bool is_polar_spline_v<PolarSplineSpan<PolarBSplinesType>> = true;
 
-template <class PolarBSplinesType, class MemSpace>
-inline constexpr bool is_polar_spline_v<PolarSplineView<PolarBSplinesType, MemSpace>> = true;
+template <class PolarBSplinesType>
+inline constexpr bool is_polar_spline_v<PolarSplineView<PolarBSplinesType>> = true;
