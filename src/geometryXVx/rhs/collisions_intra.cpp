@@ -261,8 +261,6 @@ void CollisionsIntra::compute_rhs_vector(
 DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) const
 {
     Kokkos::Profiling::pushRegion("CollisionsIntra");
-    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    host_t<DFieldSpXVx> allfdistribu_host = get_field(allfdistribu_alloc);
 
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
     // density and temperature
@@ -303,9 +301,7 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     // collision frequency
     DFieldMemSpX collfreq_alloc(grid_sp_x);
     DFieldSpX collfreq = get_field(collfreq_alloc);
-    DFieldMemSpX nustar_profile(grid_sp_x);
-    ddc::parallel_deepcopy(nustar_profile, m_nustar_profile);
-    compute_collfreq(collfreq, nustar_profile, density, temperature);
+    compute_collfreq(collfreq, get_const_field(m_nustar_profile), density, temperature);
 
     // diffusion coefficient
     DFieldMem<IdxRangeSpXVx_ghosted> Dcoll_alloc(m_mesh_ghosted);
