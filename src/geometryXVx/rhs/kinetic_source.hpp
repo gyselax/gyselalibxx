@@ -35,8 +35,8 @@ private:
     double m_density;
     double m_energy;
     double m_temperature;
-    host_t<DFieldMemX> m_spatial_extent;
-    host_t<DFieldMemVx> m_velocity_shape;
+    DFieldMemX m_spatial_extent;
+    DFieldMemVx m_velocity_shape;
 
 public:
     /**

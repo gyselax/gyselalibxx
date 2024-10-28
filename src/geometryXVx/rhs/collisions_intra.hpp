@@ -133,8 +133,6 @@ public:
      */
     CollisionsIntra(IdxRangeSpXVx const& mesh, double nustar0);
 
-    ~CollisionsIntra() = default;
-
     /**
      * @brief Update the distribution function for intra-species collision.
      *
