@@ -139,8 +139,7 @@ int main(int argc, char** argv)
             neumann_spline_quadrature_coefficients<
                     Kokkos::DefaultExecutionSpace>(mesh_vxvy, builder_vx, builder_vy));
 
-    FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> fft_poisson_solver(
-            mesh_xy);
+    FFTPoissonSolver<IdxRangeXY> fft_poisson_solver(mesh_xy);
     ChargeDensityCalculator const rhs(get_const_field(quadrature_coeffs));
     QNSolver const poisson(fft_poisson_solver, rhs);
 

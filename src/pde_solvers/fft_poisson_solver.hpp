@@ -14,8 +14,8 @@
  */
 template <
         class IdxRangeLaplacian,
-        class IdxRangeFull,
-        class ExecSpace,
+        class IdxRangeFull = IdxRangeLaplacian,
+        class ExecSpace = Kokkos::DefaultExecutionSpace,
         class LayoutSpace = std::experimental::layout_right>
 class FFTPoissonSolver;
 
