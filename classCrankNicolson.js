@@ -1,7 +1,6 @@
 var classCrankNicolson =
 [
     [ "IdxRange", "classCrankNicolson.html#a468e0909ac8b50f109dc810879253134", null ],
-    [ "Idx", "classCrankNicolson.html#a6ba089a40300c060822896ae399470de", null ],
     [ "ValConstField", "classCrankNicolson.html#ad0949984fa0c2d0004f6b7a10e19cd69", null ],
     [ "ValField", "classCrankNicolson.html#aaba53f61442e763c05fbd7614c3e1c05", null ],
     [ "DerivConstField", "classCrankNicolson.html#a7ee2d8a1e9031e625d0861031891bd52", null ],

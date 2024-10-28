@@ -115,10 +115,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af9e46e05ba3bc87e5df2f8d1f7a6393d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">ConstantExtrapolationRuleOnion</a> (Coord&lt; R_min &gt; const &amp;r_min, Coord&lt; R_max &gt; const &amp;r_max)</td></tr>
 <tr class="memdesc:af9e46e05ba3bc87e5df2f8d1f7a6393d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="structConstantExtrapolationRuleOnion.html" title="Define constant extrapolation rule for onion shape geometries.">ConstantExtrapolationRuleOnion</a>.  <a href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">More...</a><br /></td></tr>
 <tr class="separator:af9e46e05ba3bc87e5df2f8d1f7a6393d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7949720967a9f6332b6cdf3edc16d6d8"><td class="memTemplParams" colspan="2">template&lt;class... Dim, template&lt; typename P &gt; typename SplinesOnPatch, class... Patches&gt; </td></tr>
-<tr class="memitem:a7949720967a9f6332b6cdf3edc16d6d8"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structConstantExtrapolationRuleOnion.html#a7949720967a9f6332b6cdf3edc16d6d8">operator()</a> (Coord&lt; Dim... &gt; const &amp;coord_extrap, <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</td></tr>
-<tr class="memdesc:a7949720967a9f6332b6cdf3edc16d6d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate at a given outside coordinate.  <a href="structConstantExtrapolationRuleOnion.html#a7949720967a9f6332b6cdf3edc16d6d8">More...</a><br /></td></tr>
-<tr class="separator:a7949720967a9f6332b6cdf3edc16d6d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc1ed58f951dd2d5ae6878853524664"><td class="memTemplParams" colspan="2">template&lt;class... Dim, template&lt; typename P &gt; typename SplinesOnPatch, class... Patches&gt; </td></tr>
+<tr class="memitem:a2fc1ed58f951dd2d5ae6878853524664"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664">operator()</a> (Coord&lt; Dim... &gt; const &amp;coord_extrap, <a class="el" href="classMultipatchField.html">MultipatchField</a>&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</td></tr>
+<tr class="memdesc:a2fc1ed58f951dd2d5ae6878853524664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate at a given outside coordinate.  <a href="structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664">More...</a><br /></td></tr>
+<tr class="separator:a2fc1ed58f951dd2d5ae6878853524664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class PatchLocator&gt;<br />
@@ -188,8 +188,8 @@ template&lt;class PatchLocator &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7949720967a9f6332b6cdf3edc16d6d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7949720967a9f6332b6cdf3edc16d6d8">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a2fc1ed58f951dd2d5ae6878853524664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fc1ed58f951dd2d5ae6878853524664">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +210,7 @@ template&lt;class... Dim, template&lt; typename P &gt; typename SplinesOnPatch, 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; SplinesOnPatch, Patches... &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classMultipatchField.html">MultipatchField</a>&lt; SplinesOnPatch, Patches... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>patches_splines</em>, </td>
         </tr>
         <tr>

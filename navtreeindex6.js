@@ -1,5 +1,14 @@
 var NAVTREEINDEX6 =
 {
+"discrete__mapping__builder_8hpp_source.html":[17,2,0,0,0,0,5],
+"discrete__to__cartesian_8hpp_source.html":[17,2,0,0,0,0,6],
+"docs_Adding_docs.html":[5],
+"docs_Adding_docs.html#autotoc_md0":[0],
+"docs_Adding_docs.html#autotoc_md1":[1],
+"docs_Adding_docs.html#autotoc_md2":[2],
+"docs_Adding_docs.html#autotoc_md3":[3],
+"docs_Adding_docs.html#autotoc_md4":[4],
+"docs_Adding_docs.html#autotoc_md5":[5],
 "docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally":[5,0],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures":[5,1],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[5,2],
@@ -240,14 +249,5 @@ var NAVTREEINDEX6 =
 "simulations_geometryXY_guiding_center.html#autotoc_md32":[11],
 "simulations_geometryXY_guiding_center.html#autotoc_md33":[12],
 "simulations_geometryXY_guiding_center.html#autotoc_md34":[13],
-"simulations_geometryXY_guiding_center.html#autotoc_md35":[14],
-"simulations_geometryXY_guiding_center.html#autotoc_md36":[15],
-"simulations_geometryXY_guiding_center.html#autotoc_md37":[16],
-"simulations_geometryXY_guiding_center.html#autotoc_md38":[17],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Contents":[11,2,0,2],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations":[11,2,0,0],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References":[11,2,0,3],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation":[11,2,0,1],
-"species__info_8hpp_source.html":[17,0,17,1],
-"species__init_8hpp_source.html":[17,0,17,2]
+"simulations_geometryXY_guiding_center.html#autotoc_md35":[14]
 };

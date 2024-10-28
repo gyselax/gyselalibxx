@@ -116,7 +116,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a83da50da842986b47db703fd42296c4e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#a83da50da842986b47db703fd42296c4e">MultipatchSplineBuilder2D</a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders)</td></tr>
 <tr class="memdesc:a83da50da842986b47db703fd42296c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the <a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a> from a std::tuple of all the builder on each patch.  <a href="classMultipatchSplineBuilder2D.html#a83da50da842986b47db703fd42296c4e">More...</a><br /></td></tr>
 <tr class="separator:a83da50da842986b47db703fd42296c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa348d62045660886c7d1d5b6798f475c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#aa348d62045660886c7d1d5b6798f475c">operator()</a> (<a class="el" href="classMultipatchType.html">MultipatchSplineCoeffs</a> splines, <a class="el" href="classMultipatchType.html">MultipatchValues</a> const &amp;values, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs1</a> &gt; derivs_min1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs1</a> &gt; derivs_max1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs2</a> &gt; derivs_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs2</a> &gt; derivs_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_max2=std::nullopt) const</td></tr>
+<tr class="memitem:aa348d62045660886c7d1d5b6798f475c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#aa348d62045660886c7d1d5b6798f475c">operator()</a> (<a class="el" href="classMultipatchField.html">MultipatchSplineCoeffs</a> splines, <a class="el" href="classMultipatchField.html">MultipatchValues</a> const &amp;values, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt; derivs_min1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt; derivs_max1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt; derivs_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt; derivs_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_max2=std::nullopt) const</td></tr>
 <tr class="memdesc:aa348d62045660886c7d1d5b6798f475c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the spline representation of each given function.  <a href="classMultipatchSplineBuilder2D.html#aa348d62045660886c7d1d5b6798f475c">More...</a><br /></td></tr>
 <tr class="separator:aa348d62045660886c7d1d5b6798f475c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -125,7 +125,7 @@ Public Member Functions</h2></td></tr>
 class MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt;</h3>
 
 <p>A class to call all the builders of all the patches once. </p>
-<p>We need to instantiate all the builders for all the pacthes in the main code. We process the same way for the Field containing the spline coefficients and the values of the function on each patch. The Fields are stored in <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
+<p>We need to instantiate all the builders for all the pacthes in the main code. We process the same way for the Field containing the spline coefficients and the values of the function on each patch. The Fields are stored in <a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
 <p>This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -197,61 +197,61 @@ template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; t
         <tr>
           <td class="memname">void <a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMultipatchType.html">MultipatchSplineCoeffs</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classMultipatchField.html">MultipatchSplineCoeffs</a>&#160;</td>
           <td class="paramname"><em>splines</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classMultipatchType.html">MultipatchValues</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classMultipatchField.html">MultipatchValues</a> const &amp;&#160;</td>
           <td class="paramname"><em>values</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs1</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt;&#160;</td>
           <td class="paramname"><em>derivs_min1</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs1</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt;&#160;</td>
           <td class="paramname"><em>derivs_max1</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs2</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt;&#160;</td>
           <td class="paramname"><em>derivs_min2</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs2</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt;&#160;</td>
           <td class="paramname"><em>derivs_max2</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt;&#160;</td>
           <td class="paramname"><em>mixed_derivs_min1_min2</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt;&#160;</td>
           <td class="paramname"><em>mixed_derivs_max1_min2</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt;&#160;</td>
           <td class="paramname"><em>mixed_derivs_min1_max2</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchType.html">MultipatchDerivs12</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt;&#160;</td>
           <td class="paramname"><em>mixed_derivs_max1_max2</em> = <code>std::nullopt</code>&#160;</td>
         </tr>
         <tr>
@@ -270,12 +270,12 @@ template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; t
 <p>Build the spline representation of each given function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">splines</td><td><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of all the Fields pointing to the spline representations. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of all the Fields pointing to the function values. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_min1</td><td><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of all the ConstFields describing the function derivatives in the first dimension at the lower bound of the second dimension. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_max1</td><td><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of all the ConstFields describing the function derivatives in the first dimension at the upper bound of the second dimension. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_min2</td><td><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of all the ConstFields describing the function derivatives in the second dimension at the lower bound of the first dimension. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_max2</td><td><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> of all the ConstFields describing the function derivatives in the second dimension at the upper bound of the first dimension. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">splines</td><td><a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> of all the Fields pointing to the spline representations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td><a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> of all the Fields pointing to the function values. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_min1</td><td><a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> of all the ConstFields describing the function derivatives in the first dimension at the lower bound of the second dimension. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_max1</td><td><a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> of all the ConstFields describing the function derivatives in the first dimension at the upper bound of the second dimension. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_min2</td><td><a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> of all the ConstFields describing the function derivatives in the second dimension at the lower bound of the first dimension. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">derivs_max2</td><td><a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> of all the ConstFields describing the function derivatives in the second dimension at the upper bound of the first dimension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mixed_derivs_min1_min2</td><td>The values of the the cross-derivatives at the lower boundary in the first dimension and the lower boundary in the second dimension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mixed_derivs_max1_min2</td><td>The values of the the cross-derivatives at the upper boundary in the first dimension and the lower boundary in the second dimension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mixed_derivs_min1_max2</td><td>The values of the the cross-derivatives at the lower boundary in the first dimension and the upper boundary in the second dimension. </td></tr>

@@ -110,66 +110,67 @@ $(document).ready(function(){initNavTree('constant__extrapolation__rules__onion_
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;multipatch_type.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;onion_patch_locator.hpp&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;utils_patch_locators.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;multipatch_field.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;multipatch_type.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;onion_patch_locator.hpp&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;utils_patch_locators.hpp&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> PatchLocator&gt;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structConstantExtrapolationRuleOnion.html">   19</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structConstantExtrapolationRuleOnion.html">ConstantExtrapolationRuleOnion</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            is_onion_patch_locator_v&lt;PatchLocator&gt;,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="stringliteral">&quot;Extrapolation rule only defined for OnionPatchLocator.&quot;</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">using</span> PatchOrdering = <span class="keyword">typename</span> PatchLocator::PatchOrdering;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">using</span> MinRadiusPatch = ddc::type_seq_element_t&lt;0, PatchOrdering&gt;;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> MaxRadiusPatch = ddc::type_seq_element_t&lt;n_patches - 1, PatchOrdering&gt;;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">using</span> R_min = <span class="keyword">typename</span> MinRadiusPatch::Dim1;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">using</span> Theta_min = <span class="keyword">typename</span> MinRadiusPatch::Dim2;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> R_max = <span class="keyword">typename</span> MaxRadiusPatch::Dim1;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> Theta_max = <span class="keyword">typename</span> MaxRadiusPatch::Dim2;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ddc::ConstantExtrapolationRule&lt;R_min, Theta_min&gt; <span class="keyword">const</span> bc_r_min;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ddc::ConstantExtrapolationRule&lt;R_max, Theta_max&gt; <span class="keyword">const</span> bc_r_max;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">   51</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">ConstantExtrapolationRuleOnion</a>(Coord&lt;R_min&gt; <span class="keyword">const</span>&amp; r_min, Coord&lt;R_max&gt; <span class="keyword">const</span>&amp; r_max)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        : bc_r_min(r_min)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        , bc_r_max(r_max)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dim, <span class="keyword">template</span> &lt;<span class="keyword">typename</span> P&gt; <span class="keyword">typename</span> SplinesOnPatch, <span class="keyword">class</span>... Patches&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="structConstantExtrapolationRuleOnion.html#a7949720967a9f6332b6cdf3edc16d6d8">   69</a></span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code" href="structConstantExtrapolationRuleOnion.html#a7949720967a9f6332b6cdf3edc16d6d8">operator()</a>(</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            Coord&lt;Dim...&gt; <span class="keyword">const</span>&amp; coord_extrap,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="classMultipatchType.html">MultipatchType&lt;SplinesOnPatch, Patches...&gt;</a> <span class="keyword">const</span>&amp; patches_splines,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">int</span> <span class="keyword">const</span> out_of_bounds_idx)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        assert((out_of_bounds_idx == PatchLocator::outside_rmin_domain)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;               || (out_of_bounds_idx == PatchLocator::outside_rmax_domain));</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span> (out_of_bounds_idx == PatchLocator::outside_rmin_domain) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            SplinesOnPatch&lt;MinRadiusPatch&gt; <span class="keyword">const</span> min_spline</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    = patches_splines.template get&lt;MinRadiusPatch&gt;();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">return</span> bc_r_min(coord_extrap, min_spline);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            SplinesOnPatch&lt;MaxRadiusPatch&gt; <span class="keyword">const</span> max_spline</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    = patches_splines.template get&lt;MaxRadiusPatch&gt;();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">return</span> bc_r_max(coord_extrap, max_spline);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="ttc" id="aclassMultipatchType_html"><div class="ttname"><a href="classMultipatchType.html">MultipatchType</a></div><div class="ttdoc">A class to store several objects that are of a type which is templated by the patch.</div><div class="ttdef"><b>Definition:</b> multipatch_type.hpp:32</div></div>
-<div class="ttc" id="astructConstantExtrapolationRuleOnion_html"><div class="ttname"><a href="structConstantExtrapolationRuleOnion.html">ConstantExtrapolationRuleOnion</a></div><div class="ttdoc">Define constant extrapolation rule for onion shape geometries.</div><div class="ttdef"><b>Definition:</b> constant_extrapolation_rules_onion.hpp:20</div></div>
-<div class="ttc" id="astructConstantExtrapolationRuleOnion_html_a7949720967a9f6332b6cdf3edc16d6d8"><div class="ttname"><a href="structConstantExtrapolationRuleOnion.html#a7949720967a9f6332b6cdf3edc16d6d8">ConstantExtrapolationRuleOnion::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION double operator()(Coord&lt; Dim... &gt; const &amp;coord_extrap, MultipatchType&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</div><div class="ttdoc">Evaluate at a given outside coordinate.</div><div class="ttdef"><b>Definition:</b> constant_extrapolation_rules_onion.hpp:69</div></div>
-<div class="ttc" id="astructConstantExtrapolationRuleOnion_html_af9e46e05ba3bc87e5df2f8d1f7a6393d"><div class="ttname"><a href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">ConstantExtrapolationRuleOnion::ConstantExtrapolationRuleOnion</a></div><div class="ttdeci">ConstantExtrapolationRuleOnion(Coord&lt; R_min &gt; const &amp;r_min, Coord&lt; R_max &gt; const &amp;r_max)</div><div class="ttdoc">Instantiate a ConstantExtrapolationRuleOnion.</div><div class="ttdef"><b>Definition:</b> constant_extrapolation_rules_onion.hpp:51</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> PatchLocator&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structConstantExtrapolationRuleOnion.html">   20</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structConstantExtrapolationRuleOnion.html">ConstantExtrapolationRuleOnion</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            is_onion_patch_locator_v&lt;PatchLocator&gt;,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="stringliteral">&quot;Extrapolation rule only defined for OnionPatchLocator.&quot;</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">using</span> PatchOrdering = <span class="keyword">typename</span> PatchLocator::PatchOrdering;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">static</span> constexpr std::size_t n_patches = ddc::type_seq_size_v&lt;PatchOrdering&gt;;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> MinRadiusPatch = ddc::type_seq_element_t&lt;0, PatchOrdering&gt;;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> MaxRadiusPatch = ddc::type_seq_element_t&lt;n_patches - 1, PatchOrdering&gt;;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">using</span> R_min = <span class="keyword">typename</span> MinRadiusPatch::Dim1;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> Theta_min = <span class="keyword">typename</span> MinRadiusPatch::Dim2;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> R_max = <span class="keyword">typename</span> MaxRadiusPatch::Dim1;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> Theta_max = <span class="keyword">typename</span> MaxRadiusPatch::Dim2;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ddc::ConstantExtrapolationRule&lt;R_min, Theta_min&gt; <span class="keyword">const</span> bc_r_min;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    ddc::ConstantExtrapolationRule&lt;R_max, Theta_max&gt; <span class="keyword">const</span> bc_r_max;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">   52</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">ConstantExtrapolationRuleOnion</a>(Coord&lt;R_min&gt; <span class="keyword">const</span>&amp; r_min, Coord&lt;R_max&gt; <span class="keyword">const</span>&amp; r_max)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        : bc_r_min(r_min)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        , bc_r_max(r_max)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dim, <span class="keyword">template</span> &lt;<span class="keyword">typename</span> P&gt; <span class="keyword">typename</span> SplinesOnPatch, <span class="keyword">class</span>... Patches&gt;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664">   70</a></span>&#160;    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code" href="structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664">operator()</a>(</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            Coord&lt;Dim...&gt; <span class="keyword">const</span>&amp; coord_extrap,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <a class="code" href="classMultipatchField.html">MultipatchField&lt;SplinesOnPatch, Patches...&gt;</a> <span class="keyword">const</span>&amp; patches_splines,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">int</span> <span class="keyword">const</span> out_of_bounds_idx)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        assert((out_of_bounds_idx == PatchLocator::outside_rmin_domain)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;               || (out_of_bounds_idx == PatchLocator::outside_rmax_domain));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span> (out_of_bounds_idx == PatchLocator::outside_rmin_domain) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            SplinesOnPatch&lt;MinRadiusPatch&gt; <span class="keyword">const</span> min_spline</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    = patches_splines.template get&lt;MinRadiusPatch&gt;();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">return</span> bc_r_min(coord_extrap, min_spline);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            SplinesOnPatch&lt;MaxRadiusPatch&gt; <span class="keyword">const</span> max_spline</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    = patches_splines.template get&lt;MaxRadiusPatch&gt;();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">return</span> bc_r_max(coord_extrap, max_spline);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="ttc" id="aclassMultipatchField_html"><div class="ttname"><a href="classMultipatchField.html">MultipatchField</a></div><div class="ttdoc">A class to store field objects on patches.</div><div class="ttdef"><b>Definition:</b> multipatch_field.hpp:30</div></div>
+<div class="ttc" id="astructConstantExtrapolationRuleOnion_html"><div class="ttname"><a href="structConstantExtrapolationRuleOnion.html">ConstantExtrapolationRuleOnion</a></div><div class="ttdoc">Define constant extrapolation rule for onion shape geometries.</div><div class="ttdef"><b>Definition:</b> constant_extrapolation_rules_onion.hpp:21</div></div>
+<div class="ttc" id="astructConstantExtrapolationRuleOnion_html_a2fc1ed58f951dd2d5ae6878853524664"><div class="ttname"><a href="structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664">ConstantExtrapolationRuleOnion::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION double operator()(Coord&lt; Dim... &gt; const &amp;coord_extrap, MultipatchField&lt; SplinesOnPatch, Patches... &gt; const &amp;patches_splines, int const out_of_bounds_idx) const</div><div class="ttdoc">Evaluate at a given outside coordinate.</div><div class="ttdef"><b>Definition:</b> constant_extrapolation_rules_onion.hpp:70</div></div>
+<div class="ttc" id="astructConstantExtrapolationRuleOnion_html_af9e46e05ba3bc87e5df2f8d1f7a6393d"><div class="ttname"><a href="structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d">ConstantExtrapolationRuleOnion::ConstantExtrapolationRuleOnion</a></div><div class="ttdeci">ConstantExtrapolationRuleOnion(Coord&lt; R_min &gt; const &amp;r_min, Coord&lt; R_max &gt; const &amp;r_max)</div><div class="ttdoc">Instantiate a ConstantExtrapolationRuleOnion.</div><div class="ttdef"><b>Definition:</b> constant_extrapolation_rules_onion.hpp:52</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

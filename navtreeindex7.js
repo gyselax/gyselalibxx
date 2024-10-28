@@ -1,5 +1,14 @@
 var NAVTREEINDEX7 =
 {
+"simulations_geometryXY_guiding_center.html#autotoc_md36":[15],
+"simulations_geometryXY_guiding_center.html#autotoc_md37":[16],
+"simulations_geometryXY_guiding_center.html#autotoc_md38":[17],
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Contents":[11,2,0,2],
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations":[11,2,0,0],
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References":[11,2,0,3],
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation":[11,2,0,1],
+"species__info_8hpp_source.html":[17,0,17,1],
+"species__init_8hpp_source.html":[17,0,17,2],
 "spline__foot__finder_8hpp_source.html":[17,0,4,0,5],
 "spline__interpolator_8hpp_source.html":[17,0,10,3],
 "spline__interpolator__2d__rp_8hpp_source.html":[17,0,4,4,1],
@@ -156,7 +165,7 @@ var NAVTREEINDEX7 =
 "structCollisionsIntra_1_1GhostedVx.html":[16,50,0],
 "structCollisionsIntra_1_1GhostedVxStaggered.html":[16,50,1],
 "structConstantExtrapolationRuleOnion.html":[16,52],
-"structConstantExtrapolationRuleOnion.html#a7949720967a9f6332b6cdf3edc16d6d8":[16,52,1],
+"structConstantExtrapolationRuleOnion.html#a2fc1ed58f951dd2d5ae6878853524664":[16,52,1],
 "structConstantExtrapolationRuleOnion.html#af9e46e05ba3bc87e5df2f8d1f7a6393d":[16,52,0],
 "structDimX__pC.html":[16,70],
 "structDimY__pC.html":[16,71],
@@ -240,14 +249,5 @@ var NAVTREEINDEX7 =
 "structPolarSpline.html#a0fba3837452a157ec0e1785ee610a4f4":[16,198,7],
 "structPolarSpline.html#a16899c9b2a639f3e67d3de861a0d2a2f":[16,198,3],
 "structPolarSpline.html#a34e62893f3710c8798ada29346a5a842":[16,198,2],
-"structPolarSpline.html#a5a692091b5e1dbccc094ec737afc5cef":[16,198,0],
-"structPolarSpline.html#ab3a28213cc6fec9de5bed1b39626ff19":[16,198,1],
-"structPolarSpline.html#ac16f19254879a0ba3ce4d500bc869952":[16,198,4],
-"structPolarSpline.html#ad25f8625b4e018a9831d40da31fbdcfb":[16,198,5],
-"structPolarSpline.html#adf1f0b99bd37c9d9fea108dcf8570adb":[16,198,6],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html":[16,200,0],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html":[16,200,1],
-"structPolarSplineSpan.html":[16,201],
-"structPolarSplineSpan.html#a0014a8cd152de1bb694e48b70afb40cc":[16,201,4],
-"structPolarSplineSpan.html#a09f1d7d4e23574060fce940f93bb97fd":[16,201,2]
+"structPolarSpline.html#a5a692091b5e1dbccc094ec737afc5cef":[16,198,0]
 };
