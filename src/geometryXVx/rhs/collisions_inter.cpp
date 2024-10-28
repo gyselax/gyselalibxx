@@ -32,9 +32,9 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
     DFieldMemSpX density_f(grid_sp_x);
     DFieldMemSpX fluid_velocity_f(grid_sp_x);
     DFieldMemSpX temperature_f(grid_sp_x);
-    DFieldSpX density = get_field(density_f);
-    DFieldSpX fluid_velocity = get_field(fluid_velocity_f);
-    DFieldSpX temperature = get_field(temperature_f);
+    auto density = get_field(density_f);
+    auto fluid_velocity = get_field(fluid_velocity_f);
+    auto temperature = get_field(temperature_f);
 
     IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
 
@@ -66,26 +66,24 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
 
     //Collision frequencies, momentum and energy exchange terms
+    DFieldMemSpX nustar_profile(grid_sp_x);
+    ddc::parallel_deepcopy(nustar_profile, m_nustar_profile);
     DFieldMemSpX collfreq_ab(grid_sp_x);
-    DFieldMemSpX momentum_exchange_ab_alloc(grid_sp_x);
-    DFieldMemSpX energy_exchange_ab_alloc(grid_sp_x);
-    DFieldSpX momentum_exchange_ab = get_field(momentum_exchange_ab_alloc);
-    DFieldSpX energy_exchange_ab = get_field(energy_exchange_ab_alloc);
-    compute_collfreq_ab(
-            get_field(collfreq_ab),
-            get_const_field(m_nustar_profile),
-            density,
-            temperature);
+    DFieldMemSpX momentum_exchange_ab_f(grid_sp_x);
+    DFieldMemSpX energy_exchange_ab_f(grid_sp_x);
+    auto momentum_exchange_ab = get_field(momentum_exchange_ab_f);
+    auto energy_exchange_ab = get_field(energy_exchange_ab_f);
+    compute_collfreq_ab(get_field(collfreq_ab), nustar_profile, density, temperature);
     compute_momentum_energy_exchange(
-            momentum_exchange_ab,
-            energy_exchange_ab,
+            get_field(momentum_exchange_ab),
+            get_field(energy_exchange_ab),
             collfreq_ab,
             density,
             fluid_velocity,
             temperature);
 
-    DFieldMemSpXVx fmaxwellian_alloc(get_idx_range(allfdistribu));
-    DFieldSpXVx fmaxwellian = get_field(fmaxwellian_alloc);
+    DFieldMemSpXVx fmaxwellian_f(get_idx_range(allfdistribu));
+    auto fmaxwellian = get_field(fmaxwellian_f);
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),

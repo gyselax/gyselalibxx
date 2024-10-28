@@ -151,7 +151,9 @@ foreach(CONTINUITY RANGE -1 1)
             sll::SLL
           )
           target_compile_definitions("${test_name}" PUBLIC -DDEGREE_R=${DEGREE_R} -DDEGREE_P=${DEGREE_P} -D${BSPLINES_TYPE} -DCONTINUITY=${CONTINUITY} -D${MAPPING_TYPE})
-          add_test("${test_name}" "${test_name}")
+          gtest_discover_tests(mapping_execution_space_access
+              DISCOVERY_MODE PRE_TEST
+              TEST_SUFFIX "${test_name}")
         endforeach()
       endforeach()
     endforeach()

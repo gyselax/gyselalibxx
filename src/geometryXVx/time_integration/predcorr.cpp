@@ -21,7 +21,7 @@ DFieldSpXVx PredCorr::operator()(
         double const dt,
         int const steps) const
 {
-    auto allfdistribu_alloc = ddc::create_mirror_view(allfdistribu);
+    auto allfdistribu_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
     host_t<DFieldSpXVx> allfdistribu_host = get_field(allfdistribu_alloc);
 
     // electrostatic potential and electric field (depending only on x)

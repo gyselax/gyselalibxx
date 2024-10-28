@@ -69,9 +69,9 @@ DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, doub
 {
     Kokkos::Profiling::pushRegion("KrookSource");
 
-    DConstFieldVx ftarget = get_const_field(m_ftarget);
-    DConstFieldX mask = get_const_field(m_mask);
-    double const amplitude = m_amplitude;
+    auto ftarget = get_field(m_ftarget);
+    auto mask = get_field(m_mask);
+    auto const& amplitude = m_amplitude;
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),

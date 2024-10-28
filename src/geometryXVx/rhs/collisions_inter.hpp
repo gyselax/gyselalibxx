@@ -37,6 +37,8 @@ public:
      */
     CollisionsInter(IdxRangeSpXVx const& mesh, double nustar0);
 
+    ~CollisionsInter() = default;
+
     /**
      * @brief Update the distribution function for inter-species collision.
      *

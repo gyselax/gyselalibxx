@@ -197,21 +197,128 @@ TEST(PolarSplineTest, ConstantEval)
             EXPECT_LE(fabs(deriv_2), 1.0e-13);
         }
     }
+}
 
-    Spline integrals(builder_rtheta.spline_domain());
-    ddc::host_discrete_space<BSplines>().integrals(integrals.span_view());
-    double area = ddc::transform_reduce(
-                          integrals.singular_spline_coef.domain(),
+void test_polar_integrals()
+{
+    using CoordR = ddc::Coordinate<R>;
+    using CoordTheta = ddc::Coordinate<Theta>;
+    using Spline = PolarSpline<BSplines>;
+    using SplineSpan = PolarSplineSpan<BSplines>;
+    using BuilderRTheta = ddc::SplineBuilder2D<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesTheta,
+            GridR,
+            GridTheta,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::GREVILLE,
+            ddc::BoundCond::PERIODIC,
+            ddc::BoundCond::PERIODIC,
+            ddc::SplineSolver::LAPACK,
+            GridR,
+            GridTheta>;
+
+    using EvaluatorRTheta = ddc::SplineEvaluator2D<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::DefaultHostExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesTheta,
+            GridR,
+            GridTheta,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            GridR,
+            GridTheta>;
+
+    CoordR constexpr r0(0.);
+    CoordR constexpr rN(1.);
+    CoordTheta constexpr theta0(0.);
+    CoordTheta constexpr thetaN(2. * M_PI);
+    std::size_t constexpr ncells = 20;
+
+    // 1. Create BSplines
+    {
+        ddc::DiscreteVector<GridR> constexpr npoints_r(ncells + 1);
+        std::vector<CoordR> breaks_r(npoints_r);
+        const double dr = (rN - r0) / ncells;
+        for (int i(0); i < npoints_r; ++i) {
+            breaks_r[i] = CoordR(r0 + i * dr);
+        }
+        ddc::init_discrete_space<BSplinesR>(breaks_r);
+#if defined(BSPLINES_TYPE_UNIFORM)
+        ddc::init_discrete_space<BSplinesTheta>(theta0, thetaN, ncells);
+#elif defined(BSPLINES_TYPE_NON_UNIFORM)
+        ddc::DiscreteVector<GridTheta> constexpr npoints_theta(ncells + 1);
+        std::vector<CoordTheta> breaks_theta(npoints_theta);
+        const double dp = (thetaN - theta0) / ncells;
+        for (int i(0); i < npoints_r; ++i) {
+            breaks_theta[i] = CoordTheta(theta0 + i * dp);
+        }
+        ddc::init_discrete_space<BSplinesTheta>(breaks_theta);
+#endif
+    }
+
+    ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
+    ddc::DiscreteDomain<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
+    ddc::DiscreteDomain<GridTheta> interpolation_idx_range_P(
+            GrevillePointsTheta::get_domain<GridTheta>());
+    ddc::DiscreteDomain<GridR, GridTheta>
+            interpolation_idx_range(interpolation_idx_range_R, interpolation_idx_range_P);
+
+    BuilderRTheta builder_rtheta(interpolation_idx_range);
+
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    EvaluatorRTheta evaluator_rtheta(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
+
+#if defined(CIRCULAR_MAPPING)
+    CircToCart const coord_changer;
+#elif defined(CZARNY_MAPPING)
+    CircToCart const coord_changer(0.3, 1.4);
+#endif
+    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            coord_changer,
+            builder_rtheta,
+            evaluator_rtheta);
+    DiscreteToCartesian mapping = mapping_builder();
+    ddc::init_discrete_space<BSplines>(mapping);
+
+    Spline bspline_integrals_alloc(builder_rtheta.spline_domain());
+    SplineSpan bspline_integrals(bspline_integrals_alloc);
+    integrals(Kokkos::DefaultExecutionSpace(), bspline_integrals);
+    double area = ddc::parallel_transform_reduce(
+                          Kokkos::DefaultExecutionSpace(),
+                          bspline_integrals.singular_spline_coef.domain(),
                           0.0,
                           ddc::reducer::sum<double>(),
-                          [&](auto idx) { return integrals.singular_spline_coef(idx); })
-                  + ddc::transform_reduce(
-                          integrals.spline_coef.domain(),
+                          KOKKOS_LAMBDA(ddc::DiscreteElement<BSplines> idx) {
+                              return bspline_integrals.singular_spline_coef(idx);
+                          })
+                  + ddc::parallel_transform_reduce(
+                          Kokkos::DefaultExecutionSpace(),
+                          bspline_integrals.spline_coef.domain(),
                           0.0,
                           ddc::reducer::sum<double>(),
-                          [&](auto idx) { return integrals.spline_coef(idx); });
+                          KOKKOS_LAMBDA(ddc::DiscreteElement<BSplinesR, BSplinesTheta> idx) {
+                              return bspline_integrals.spline_coef(idx);
+                          });
 
     EXPECT_NEAR(area, 2 * M_PI, 1e-10);
+}
+
+TEST(PolarSplineTest, Integrals)
+{
+    test_polar_integrals();
 }
 
 int main(int argc, char** argv)

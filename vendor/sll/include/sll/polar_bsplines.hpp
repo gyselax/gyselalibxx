@@ -130,7 +130,8 @@ public:
      * @returns The index of the basis spline in the PolarBSpline index range.
      */
     template <class DDim>
-    static ddc::DiscreteElement<DDim> get_polar_index(tensor_product_index_type const& idx)
+    static KOKKOS_FUNCTION ddc::DiscreteElement<DDim> get_polar_index(
+            tensor_product_index_type const& idx)
     {
         int const r_idx = ddc::select<BSplinesR>(idx).uid();
         int const theta_idx = ddc::select<BSplinesTheta>(idx).uid();
@@ -148,7 +149,8 @@ public:
      * @returns The index of the equivalent 2D BSpline expressed as a 2D tensor product of 1D BSplines.
      */
     template <class DDim>
-    static tensor_product_index_type get_2d_index(ddc::DiscreteElement<DDim> const& idx)
+    static KOKKOS_FUNCTION tensor_product_index_type
+    get_2d_index(ddc::DiscreteElement<DDim> const& idx)
     {
         assert(idx.uid() >= n_singular_basis());
         int const idx_2d = idx.uid() - n_singular_basis();
@@ -172,6 +174,11 @@ public:
         template <class ODDim, class OMemorySpace>
         friend class Impl;
 
+        template <class ExecSpace, class PBSpl, class OMemorySpace>
+        friend PolarSplineSpan<PBSpl, OMemorySpace> integrals(
+                ExecSpace const& execution_space,
+                PolarSplineSpan<PBSpl, OMemorySpace> int_vals);
+
     private:
         /**
          * The type of the index range for the linear combinations defining the bsplines which traverse the singular point.
@@ -187,7 +194,14 @@ public:
         ddc::Chunk<
                 double,
                 singular_basis_linear_combination_idx_range_type,
-                ddc::HostAllocator<double>>
+                ddc::KokkosAllocator<double, MemorySpace>>
+                m_singular_basis_elements_alloc;
+
+        ddc::ChunkSpan<
+                double,
+                singular_basis_linear_combination_idx_range_type,
+                std::experimental::layout_right,
+                MemorySpace>
                 m_singular_basis_elements;
 
     public:
@@ -238,6 +252,7 @@ public:
         template <class DiscreteMapping>
         Impl(const DiscreteMapping& curvilinear_to_cartesian)
         {
+            static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
             using DimX = typename DiscreteMapping::cartesian_tag_x;
             using DimY = typename DiscreteMapping::cartesian_tag_y;
             using mapping_tensor_product_index_type = ddc::DiscreteElement<
@@ -301,11 +316,12 @@ public:
                         tensor_product_idx_step_type(nr_in_singular, np_tot));
 
                 // Initialise memory
-                m_singular_basis_elements
+                m_singular_basis_elements_alloc
                         = ddc::Chunk<double, singular_basis_linear_combination_idx_range_type>(
                                 singular_basis_linear_combination_idx_range_type(
                                         singular_idx_range<DDim>(),
                                         dom_bsplines_inner));
+                m_singular_basis_elements = m_singular_basis_elements_alloc.span_view();
 
                 ddc::DiscreteDomain<BernsteinBasis> bernstein_idx_range(
                         ddc::DiscreteElement<BernsteinBasis> {0},
@@ -341,11 +357,12 @@ public:
                 tensor_product_idx_range_type const empty_dom_bsplines(
                         tensor_product_index_type(0, 0),
                         tensor_product_idx_step_type(0, 0));
-                m_singular_basis_elements
+                m_singular_basis_elements_alloc
                         = ddc::Chunk<double, singular_basis_linear_combination_idx_range_type>(
                                 singular_basis_linear_combination_idx_range_type(
                                         singular_idx_range<DDim>(),
                                         empty_dom_bsplines));
+                m_singular_basis_elements = m_singular_basis_elements_alloc.span_view();
             }
         }
 
@@ -356,11 +373,10 @@ public:
          */
         template <class OriginMemorySpace>
         explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
-            : m_singular_basis_elements(impl.m_singular_basis_elements.domain())
+            : m_singular_basis_elements_alloc(impl.m_singular_basis_elements.domain())
         {
-            ddc::parallel_deepcopy(
-                    m_singular_basis_elements.span_view(),
-                    impl.m_singular_basis_elements);
+            m_singular_basis_elements = m_singular_basis_elements_alloc.span_view();
+            ddc::parallel_deepcopy(m_singular_basis_elements, impl.m_singular_basis_elements);
         }
 
         /**
@@ -490,7 +506,9 @@ public:
          *
          * @param[out] int_vals The integrals of the basis splines.
          */
-        void integrals(PolarSplineSpan<DDim, MemorySpace> int_vals) const;
+        template <class MemorySpace2>
+        [[deprecated("Use `integrals` instead")]] void integrals(
+                PolarSplineSpan<DDim, MemorySpace2> int_vals) const;
 
         /**
          * Get the total number of basis functions.
@@ -659,16 +677,26 @@ ddc::DiscreteElement<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplines
     return ddc::DiscreteElement<BSplinesR, BSplinesTheta>(jmin_r, jmin_theta);
 }
 
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integrals(
-        PolarSplineSpan<DDim, MemorySpace> int_vals) const
+template <class ExecSpace, class DDim, class MemorySpace>
+PolarSplineSpan<DDim, MemorySpace> integrals(
+        ExecSpace const& execution_space,
+        PolarSplineSpan<DDim, MemorySpace> int_vals)
 {
+    static_assert(
+            Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible,
+            "MemorySpace has to be accessible for ExecutionSpace.");
+    using BSplinesR = typename DDim::BSplinesR_tag;
+    using BSplinesTheta = typename DDim::BSplinesTheta_tag;
+    using tensor_product_idx_range_type = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
+    using tensor_product_idx_type = ddc::DiscreteElement<BSplinesR, BSplinesTheta>;
+    using IdxR = ddc::DiscreteElement<BSplinesR>;
+    using IdxTheta = ddc::DiscreteElement<BSplinesTheta>;
+
     auto r_bspl_space = ddc::discrete_space<BSplinesR>();
     auto theta_bspl_space = ddc::discrete_space<BSplinesTheta>();
 
-    assert(int_vals.singular_spline_coef.domain().extents() == n_singular_basis());
-    assert(int_vals.spline_coef.domain().front().template uid<BSplinesR>() == C + 1);
+    assert(int_vals.singular_spline_coef.domain().extents() == DDim::n_singular_basis());
+    assert(int_vals.spline_coef.domain().front().template uid<BSplinesR>() == DDim::continuity + 1);
     assert(int_vals.spline_coef.domain().back().template uid<BSplinesR>()
            == r_bspl_space.nbasis() - 1);
     assert(int_vals.spline_coef.domain().template extent<BSplinesTheta>()
@@ -688,24 +716,37 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
     ddc::ChunkSpan r_integrals = r_integrals_alloc.span_view();
     ddc::ChunkSpan theta_integrals = theta_integrals_alloc.span_view();
 
-    ddc::integrals(Kokkos::DefaultHostExecutionSpace(), r_integrals);
-    ddc::integrals(Kokkos::DefaultHostExecutionSpace(), theta_integrals);
+    ddc::integrals(execution_space, r_integrals);
+    ddc::integrals(execution_space, theta_integrals);
 
-    auto singular_domain
-            = ddc::select<BSplinesR, BSplinesTheta>(m_singular_basis_elements.domain());
+    ddc::DiscreteDomain<BSplinesR, BSplinesTheta> singular_2d_idx_range(
+            ddc::discrete_space<DDim>().m_singular_basis_elements.domain());
     ddc::ChunkSpan singular_spline_integrals = int_vals.singular_spline_coef.span_view();
 
-    ddc::for_each(singular_idx_range<DDim>(), [&](ddc::DiscreteElement<DDim> k) {
-        singular_spline_integrals(k) = ddc::transform_reduce(
-                singular_domain,
-                0.0,
-                ddc::reducer::sum<double>(),
-                [&](tensor_product_index_type const idx) {
-                    IdxR i = ddc::select<BSplinesR>(idx);
-                    IdxTheta j = ddc::select<BSplinesTheta>(idx);
-                    return m_singular_basis_elements(k, i, j) * r_integrals(i) * theta_integrals(j);
-                });
-    });
+    ddc::DiscreteDomain<DDim> singular_idx_range = DDim::template singular_idx_range<DDim>();
+    Kokkos::parallel_for(
+            Kokkos::TeamPolicy<>(execution_space, singular_idx_range.size(), Kokkos::AUTO),
+            KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                const int idx = team.league_rank();
+                ddc::DiscreteElement<DDim> k(idx);
+
+                // Sum over quadrature dimensions
+                double teamSum = 0;
+                Kokkos::parallel_reduce(
+                        Kokkos::TeamThreadMDRange(
+                                team,
+                                singular_2d_idx_range.template extent<BSplinesR>().value(),
+                                singular_2d_idx_range.template extent<BSplinesTheta>().value()),
+                        [&](int r_thread_index, int theta_thread_index, double& sum) {
+                            IdxR i(r_thread_index);
+                            IdxTheta j(theta_thread_index);
+                            sum += ddc::discrete_space<DDim>().m_singular_basis_elements(k, i, j)
+                                   * r_integrals(i) * theta_integrals(j);
+                        },
+                        teamSum);
+                singular_spline_integrals(k) = teamSum;
+            });
+
 
     ddc::DiscreteDomain<BSplinesR> r_tensor_product_dom(
             ddc::select<BSplinesR>(int_vals.spline_coef.domain()));
@@ -713,16 +754,28 @@ void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integr
             tensor_bspline_idx_range(r_tensor_product_dom, theta_integrals.domain());
     ddc::ChunkSpan spline_integrals = int_vals.spline_coef.span_view();
 
-    ddc::for_each(tensor_bspline_idx_range, [&](tensor_product_index_type idx) {
-        spline_integrals(idx) = r_integrals(ddc::select<BSplinesR>(idx))
-                                * theta_integrals(ddc::select<BSplinesTheta>(idx));
-    });
+    ddc::parallel_for_each(
+            execution_space,
+            tensor_bspline_idx_range,
+            KOKKOS_LAMBDA(tensor_product_idx_type idx) {
+                int_vals.spline_coef(idx) = r_integrals(ddc::select<BSplinesR>(idx))
+                                            * theta_integrals(ddc::select<BSplinesTheta>(idx));
+            });
+
     if (int_vals.spline_coef.domain().template extent<BSplinesTheta>() == theta_bspl_space.size()) {
         ddc::DiscreteDomain<BSplinesTheta> periodic_points(theta_integrals.domain().take_last(
                 ddc::DiscreteVector<BSplinesTheta> {BSplinesTheta::degree()}));
         tensor_product_idx_range_type repeat_idx_range(r_tensor_product_dom, periodic_points);
-        ddc::for_each(repeat_idx_range, [&](tensor_product_index_type idx) {
-            spline_integrals(idx) = 0.0;
-        });
+        ddc::parallel_fill(execution_space, int_vals.spline_coef, 0.0);
     }
+    return int_vals;
+}
+
+template <class BSplinesR, class BSplinesTheta, int C>
+template <class DDim, class MemorySpace>
+template <class MemorySpace2>
+void PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<DDim, MemorySpace>::integrals(
+        PolarSplineSpan<DDim, MemorySpace2> int_vals) const
+{
+    integrals(Kokkos::DefaultHostExecutionSpace(), int_vals);
 }

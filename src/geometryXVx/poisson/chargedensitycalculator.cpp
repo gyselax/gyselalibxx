@@ -11,21 +11,27 @@ DFieldX ChargeDensityCalculator::operator()(DFieldX const rho, DConstFieldSpXVx 
 {
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
 
+    host_t<DConstFieldSp> const charges_host = ddc::host_discrete_space<Species>().charges();
     IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
+    host_t<DConstFieldSp> const kinetic_charges_host = charges_host[kin_species_idx_range];
+
+    auto kinetic_charges_alloc
+            = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
+    DConstFieldSp kinetic_charges = get_const_field(kinetic_charges_alloc);
 
     m_quadrature(
             Kokkos::DefaultExecutionSpace(),
             rho,
             KOKKOS_LAMBDA(IdxXVx ixvx) {
                 double sum = 0.0;
-                for (IdxSp isp : kin_species_idx_range) {
-                    sum += charge(isp) * allfdistribu(isp, ixvx);
+                for (auto isp : kin_species_idx_range) {
+                    sum += kinetic_charges(isp) * allfdistribu(isp, ixvx);
                 }
                 return sum;
             });
 
     IdxSp const last_kin_species = kin_species_idx_range.back();
-    IdxSp const last_species = kin_species_idx_range.back();
+    IdxSp const last_species = get_idx_range(charges_host).back();
     if (last_kin_species != last_species) {
         double const chargedens_adiabspecies = charge(last_species);
 
