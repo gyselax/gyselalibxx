@@ -176,7 +176,7 @@ public:
 
 private:
     // MultipatchTypes
-    using MultipatchValues = MultipatchType<ValuesOnPatch, Patches...>;
+    using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
     using MultipatchCoordField = MultipatchField<CoordConstFieldOnPatch, Patches...>;
     using MultipatchSplineCoeff = MultipatchField<SplineCoeffOnPatch, Patches...>;
 

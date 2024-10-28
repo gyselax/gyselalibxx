@@ -16,7 +16,7 @@
  *
  * We need to instantiate all the builders for all the pacthes in the main code.
  * We process the same way for the Field containing the spline coefficients and the
- * values of the function on each patch. The Fields are stored in MultipatchType
+ * values of the function on each patch. The Fields are stored in MultipatchField
  * objects. The builders are stored in this class.
  * This class is instantiated with all the builders.
  * The operator() allows to call all the builders stored in the member of this class in 
@@ -148,17 +148,17 @@ class MultipatchSplineBuilder2D
             = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type, MemorySpace>;
 
     /// The type of the batched spline coefficients.
-    using MultipatchSplineCoeffs = MultipatchType<SplineOnPatch, Patches...>;
+    using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
 
     // For PERIODIC or GREVILLE boundary conditions
     /// The type of the values at the batched interpolation points.
-    using MultipatchValues = MultipatchType<ValuesOnPatch, Patches...>;
+    using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
 
-    using MultipatchDerivs1 = MultipatchType<Derivs1OnPatch, Patches...>;
+    using MultipatchDerivs1 = MultipatchField<Derivs1OnPatch, Patches...>;
 
-    using MultipatchDerivs2 = MultipatchType<Derivs2OnPatch, Patches...>;
+    using MultipatchDerivs2 = MultipatchField<Derivs2OnPatch, Patches...>;
 
-    using MultipatchDerivs12 = MultipatchType<Derivs12OnPatch, Patches...>;
+    using MultipatchDerivs12 = MultipatchField<Derivs12OnPatch, Patches...>;
 
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
@@ -169,7 +169,7 @@ class MultipatchSplineBuilder2D
 private:
     template <class Patch, template <typename P> typename DerivTypeOnPatch>
     std::optional<DerivTypeOnPatch<Patch>> get_deriv_value(
-            std::optional<MultipatchType<DerivTypeOnPatch, Patches...>> derivs) const
+            std::optional<MultipatchField<DerivTypeOnPatch, Patches...>> derivs) const
     {
         if (derivs.has_value()) {
             return derivs->template get<Patch>();
@@ -197,15 +197,15 @@ public:
     /**
      * @brief Build the spline representation of each given function.
      * 
-     * @param[out] splines MultipatchType of all the Fields pointing to the spline representations. 
-     * @param[in] values MultipatchType of all the Fields pointing to the function values. 
-     * @param[in] derivs_min1 MultipatchType of all the ConstFields describing the function derivatives
+     * @param[out] splines MultipatchField of all the Fields pointing to the spline representations. 
+     * @param[in] values MultipatchField of all the Fields pointing to the function values. 
+     * @param[in] derivs_min1 MultipatchField of all the ConstFields describing the function derivatives
      *                      in the first dimension at the lower bound of the second dimension.
-     * @param[in] derivs_max1 MultipatchType of all the ConstFields describing the function derivatives
+     * @param[in] derivs_max1 MultipatchField of all the ConstFields describing the function derivatives
      *                      in the first dimension at the upper bound of the second dimension.
-     * @param[in] derivs_min2 MultipatchType of all the ConstFields describing the function derivatives
+     * @param[in] derivs_min2 MultipatchField of all the ConstFields describing the function derivatives
      *                      in the second dimension at the lower bound of the first dimension.
-     * @param[in] derivs_max2 MultipatchType of all the ConstFields describing the function derivatives
+     * @param[in] derivs_max2 MultipatchField of all the ConstFields describing the function derivatives
      *                      in the second dimension at the upper bound of the first dimension.
      * @param[in] mixed_derivs_min1_min2
      *      The values of the the cross-derivatives at the lower boundary in the first dimension

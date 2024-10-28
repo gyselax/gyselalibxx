@@ -5,6 +5,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "ddc_aliases.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "onion_patch_locator.hpp"
 #include "utils_patch_locators.hpp"
@@ -68,7 +69,7 @@ public:
     template <class... Dim, template <typename P> typename SplinesOnPatch, class... Patches>
     KOKKOS_FUNCTION double operator()(
             Coord<Dim...> const& coord_extrap,
-            MultipatchType<SplinesOnPatch, Patches...> const& patches_splines,
+            MultipatchField<SplinesOnPatch, Patches...> const& patches_splines,
             int const out_of_bounds_idx) const
     {
         assert((out_of_bounds_idx == PatchLocator::outside_rmin_domain)

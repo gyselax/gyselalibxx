@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
+
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 
 // GRIDS -----------------------------------------------------------------------------------------
@@ -53,6 +55,28 @@ template <class Patch>
 using DConstField1OnPatch = DConstField<typename Patch::IdxRange1>;
 
 
+// VECTOR FIELDS ---------------------------------------------------------------------------------
+
+/// @brief A VectorFieldMem defined on the Patch's 2D logical domain.
+template <class Patch>
+using DVectorFieldMemOnPatch = VectorFieldMem<
+        double,
+        typename Patch::IdxRange12,
+        NDTag<typename Patch::Dim1, typename Patch::Dim2>>;
+
+/// @brief A VectorField defined on the Patch's 2D logical domain.
+template <class Patch>
+using DVectorFieldOnPatch = VectorField<
+        double,
+        typename Patch::IdxRange12,
+        NDTag<typename Patch::Dim1, typename Patch::Dim2>>;
+
+/// @brief A ConstVectorField defined on the Patch's 2D logical domain.
+template <class Patch>
+using DVectorConstFieldOnPatch = VectorConstField<
+        double,
+        typename Patch::IdxRange12,
+        NDTag<typename Patch::Dim1, typename Patch::Dim2>>;
 
 // IDX, IDXRANGE ---------------------------------------------------------------------------------
 
@@ -72,6 +96,10 @@ using Idx1OnPatch = typename Patch::Idx1;
 
 
 // COORDINATES -----------------------------------------------------------------------------------
+
+/// @brief Type for MultipatchType: Field of 2D coordinates defined on the 2D Patch's logical domain.
+template <class Patch>
+using CoordFieldMemOnPatch = FieldMem<typename Patch::Coord12, typename Patch::IdxRange12>;
 
 /// @brief Type for MultipatchType: Field of 2D coordinates defined on the 2D Patch's logical domain.
 template <class Patch>

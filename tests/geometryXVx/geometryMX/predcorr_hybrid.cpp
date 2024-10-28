@@ -132,7 +132,7 @@ TEST(GeometryXM, PredCorrHybrid)
 
     // Initialization of kinetic species distribution function
     DFieldMemSpXVx allfdistribu_alloc(IdxRangeSpXVx(idx_range_kinsp, meshX, meshVx));
-    DFieldSpXVx allfdistribu = get_field(allfdistribu_alloc);
+    auto allfdistribu = get_field(allfdistribu_alloc);
 
     host_t<DFieldMemSp> kinsp_density_eq(idx_range_kinsp);
     host_t<DFieldMemSp> kinsp_velocity_eq(idx_range_kinsp);
@@ -143,7 +143,7 @@ TEST(GeometryXM, PredCorrHybrid)
     ddc::parallel_fill(kinsp_temperature_eq, 1.);
 
     DFieldMemSpVx allfequilibrium_alloc(IdxRangeSpVx(idx_range_kinsp, meshVx));
-    DFieldSpVx allfequilibrium = get_field(allfequilibrium_alloc);
+    auto allfequilibrium = get_field(allfequilibrium_alloc);
     MaxwellianEquilibrium const init_fequilibrium(
             std::move(kinsp_density_eq),
             std::move(kinsp_temperature_eq),
@@ -170,7 +170,7 @@ TEST(GeometryXM, PredCorrHybrid)
 
     // Initialization of fluid species moments
     DFieldMemSpMomX fluid_moments_alloc(IdxRangeSpMomX(idx_range_fluidsp, meshM, meshX));
-    DFieldSpMomX fluid_moments = get_field(fluid_moments_alloc);
+    auto fluid_moments = get_field(fluid_moments_alloc);
 
     host_t<DFieldMemSpMom> moments_init(IdxRangeSpMom(idx_range_fluidsp, meshM));
     ddc::parallel_fill(moments_init[idensity], 1.);
@@ -215,7 +215,7 @@ TEST(GeometryXM, PredCorrHybrid)
 
     ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
 #ifdef PERIODIC_RDIMX
-    FFTPoissonSolver<IdxRangeX> poisson_solver(meshX);
+    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace> poisson_solver(meshX);
 #else
     FEM1DPoissonSolver const poisson_solver(builder_x_poisson, spline_x_evaluator_poisson);
 #endif
@@ -241,7 +241,7 @@ TEST(GeometryXM, PredCorrHybrid)
 
     // distribution function to be evolved by predcorr without fluid species
     DFieldMemSpXVx allfdistribu_predcorr_alloc(get_idx_range(allfdistribu));
-    DFieldSpXVx allfdistribu_predcorr = get_field(allfdistribu_predcorr_alloc);
+    auto allfdistribu_predcorr = get_field(allfdistribu_predcorr_alloc);
     ddc::parallel_deepcopy(allfdistribu_predcorr, allfdistribu);
 
     double const time_start(0.);

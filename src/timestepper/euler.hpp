@@ -36,8 +36,6 @@ class Euler : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 public:
     using typename base_type::IdxRange;
 
-    using typename base_type::Idx;
-
     using typename base_type::ValConstField;
     using typename base_type::ValField;
 

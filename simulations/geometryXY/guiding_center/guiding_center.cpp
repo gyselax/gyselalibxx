@@ -100,7 +100,8 @@ int main(int argc, char** argv)
     PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
 
     // Create Poisson solver ---
-    FFTPoissonSolver<IdxRangeXY> const poisson_solver(meshXY);
+    FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> const poisson_solver(
+            meshXY);
 
     // Create advection operators ---
     Euler<FieldMemXY<CoordX>, DFieldMemXY> euler_x(meshXY);

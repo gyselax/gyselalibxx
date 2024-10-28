@@ -34,12 +34,25 @@ public:
     /// @brief A tag storing the order of Patches in this MultipatchType
     using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
 
+    /**
+     * @brief The type of one of the elements of the MultipatchType. This can be used to check that
+     * types are as expected using functions such as ddc::is_chunk_v.
+     */
+    using example_element = T<ddc::type_seq_element_t<0, PatchOrdering>>;
+
 protected:
     /// The internal tuple containing the data
     std::tuple<T<Patches>...> m_tuple;
 
     template <template <typename P> typename OT, class... OPatches>
     friend class MultipatchType;
+
+    /**
+     * A constructor for sub-classes which can build the necessary tuple directly following their own rules.
+     *
+     * @param tuple The internal tuple.
+     */
+    KOKKOS_FUNCTION explicit MultipatchType(std::tuple<T<Patches>...>&& tuple) : m_tuple(tuple) {}
 
 public:
     /**
@@ -59,6 +72,10 @@ public:
      * being copied may include more patches than this MultipatchType. Further the original
      * MultipatchType must store objects of the correct type (the type template may be different
      * but return the same type depending on how it is designed.
+     *
+     * This function is not explicit as it is helpful to be able to change between equivalent multipatch
+     * definitions if the internal type is the same but the definition comes from different locations in
+     * the code.
      * 
      * @param other The equivalent MultipatchType being copied.
      */
@@ -81,7 +98,8 @@ public:
      * @param other The equivalent MultipatchType being copied.
      */
     template <template <typename P> typename OT, class... OPatches>
-    MultipatchType(MultipatchType<OT, OPatches...>&& other) : m_tuple(std::move(other.m_tuple))
+    MultipatchType(MultipatchType<OT, OPatches...>&& other)
+        : m_tuple(std::make_tuple(std::move(other.template get<Patches>())...))
     {
         static_assert(
                 std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,
@@ -100,7 +118,7 @@ public:
      * @tparam Patch The patch of the object to be returned.
      * @return The object on the given patch.
      */
-    template <class Patch>
+    template <class Patch, std::enable_if_t<!has_data_access_methods_v<T<Patch>>, bool> = true>
     KOKKOS_FUNCTION T<Patch> get() const
     {
         return std::get<T<Patch>>(m_tuple);

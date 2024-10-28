@@ -40,8 +40,6 @@ class RK2 : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 public:
     using typename base_type::IdxRange;
 
-    using typename base_type::Idx;
-
     using typename base_type::ValConstField;
     using typename base_type::ValField;
 
@@ -92,11 +90,7 @@ public:
         ValField y_prime(y_prime_alloc);
 
         // Save initial conditions
-        if constexpr (is_vector_field_v<FieldMem>) {
-            ddcHelper::deepcopy(y_prime, y);
-        } else {
-            ddc::parallel_deepcopy(y_prime, y);
-        }
+        base_type::copy(y_prime, y);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y)

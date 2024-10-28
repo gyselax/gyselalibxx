@@ -40,8 +40,6 @@ class CrankNicolson : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 public:
     using typename base_type::IdxRange;
 
-    using typename base_type::Idx;
-
     using typename base_type::ValConstField;
     using typename base_type::ValField;
 
@@ -106,23 +104,25 @@ public:
                 Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMem::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        FieldMem m_y_init_alloc(m_idx_range);
-        FieldMem m_y_old_alloc(m_idx_range);
-        DerivFieldMem m_k1_alloc(m_idx_range);
-        DerivFieldMem m_k_new_alloc(m_idx_range);
-        DerivFieldMem m_k_total_alloc(m_idx_range);
-        ValField m_y_init = get_field(m_y_init_alloc);
-        ValField m_y_old = get_field(m_y_old_alloc);
-        DerivField m_k1 = get_field(m_k1_alloc);
-        DerivField m_k_new = get_field(m_k_new_alloc);
-        DerivField m_k_total = get_field(m_k_total_alloc);
+        using element_type = typename DerivField::element_type;
+
+        FieldMem y_init_alloc(m_idx_range);
+        FieldMem y_old_alloc(m_idx_range);
+        DerivFieldMem k1_alloc(m_idx_range);
+        DerivFieldMem k_new_alloc(m_idx_range);
+        DerivFieldMem k_total_alloc(m_idx_range);
+        ValField y_init = get_field(y_init_alloc);
+        ValField y_old = get_field(y_old_alloc);
+        DerivField k1 = get_field(k1_alloc);
+        DerivField k_new = get_field(k_new_alloc);
+        DerivField k_total = get_field(k_total_alloc);
 
 
-        copy(m_y_init, y);
+        base_type::copy(y_init, y);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(m_k1, y);
+        dy_calculator(k1, y);
 
         // -------- Calculate k_new ----------
         bool not_converged = true;
@@ -131,39 +131,29 @@ public:
             counter++;
 
             // Calculate k_new = f(y_new)
-            dy_calculator(m_k_new, y);
+            dy_calculator(k_new, y);
 
             // Calculation of step
-            if constexpr (is_vector_field_v<DerivFieldMem>) {
-                ddc::parallel_for_each(
-                        exec_space,
-                        get_idx_range(m_k_total),
-                        KOKKOS_CLASS_LAMBDA(Idx const i) {
-                            // k_total = k1 + k_new
-                            fill_k_total(i, m_k_total, m_k1(i) + m_k_new(i));
-                        });
-            } else {
-                ddc::parallel_for_each(
-                        exec_space,
-                        get_idx_range(m_k_total),
-                        KOKKOS_CLASS_LAMBDA(Idx const i) {
-                            // k_total = k1 + k_new
-                            m_k_total(i) = m_k1(i) + m_k_new(i);
-                        });
-            }
+            // k_total = k1 + k_new
+            base_type::assemble_k_total(
+                    exec_space,
+                    k_total,
+                    KOKKOS_LAMBDA(std::array<element_type, 2> k) { return k[0] + k[1]; },
+                    k1,
+                    k_new);
 
             // Save the old characteristic feet
-            copy(m_y_old, y);
+            base_type::copy(y_old, y);
 
-            // Re-initiliase the characteristic feet
-            copy(y, m_y_init);
+            // Re-initialiase the characteristic feet
+            base_type::copy(y, y_init);
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)
-            y_update(y, m_k_total, 0.5 * dt);
+            y_update(y, k_total, 0.5 * dt);
 
 
             // Check convergence
-            not_converged = not have_converged(exec_space, m_y_old, y);
+            not_converged = not have_converged(exec_space, y_old, y);
 
 
         } while (not_converged and (counter < m_max_counter));
@@ -188,6 +178,7 @@ public:
      */
     bool have_converged(ExecSpace const& exec_space, ValConstField y_old, ValConstField y_new) const
     {
+        using Idx = typename IdxRange::discrete_element_type;
         IdxRange const idx_range = get_idx_range(y_old);
 
         double norm_old = ddc::parallel_transform_reduce(
@@ -205,21 +196,5 @@ public:
                 KOKKOS_LAMBDA(Idx const idx) { return norm_inf(y_old(idx) - y_new(idx)); });
 
         return (max_diff / norm_old) < m_epsilon;
-    }
-
-private:
-    void copy(ValField copy_to, ValConstField copy_from) const
-    {
-        if constexpr (is_vector_field_v<ValField>) {
-            ddcHelper::deepcopy(copy_to, copy_from);
-        } else {
-            ddc::parallel_deepcopy(copy_to, copy_from);
-        }
-    }
-
-    template <class... DDims>
-    KOKKOS_FUNCTION void fill_k_total(Idx i, DerivField m_k_total, Coord<DDims...> new_val) const
-    {
-        ((ddcHelper::get<DDims>(m_k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }
 };

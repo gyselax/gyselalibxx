@@ -16,7 +16,7 @@
  *
  * We need to instantiate all the builders for all the patches in the main code.
  * We process the same way for the Fields containing the spline coefficients and the
- * values of the function on each patch. The Fields are stored in MultipatchType
+ * values of the function on each patch. The Fields are stored in MultipatchField
  * objects. The builders are stored in this class.
  * This class is instantiated with all the builders.
  * The operator() allows to call all the builders stored in the member of this class in 
@@ -102,13 +102,13 @@ class MultipatchSplineBuilder
             = DConstField<typename BuilderOnPatch<Patch>::batched_derivs_domain_type, MemorySpace>;
 
     /// The type of the batched spline coefficients.
-    using MultipatchSplineCoeffs = MultipatchType<SplineOnPatch, Patches...>;
+    using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
 
     // For PERIODIC or GREVILLE boundary conditions
     /// The type of the values at the batched interpolation points.
-    using MultipatchValues = MultipatchType<ValuesOnPatch, Patches...>;
+    using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
 
-    using MultipatchDerivs = MultipatchType<DerivsOnPatch, Patches...>;
+    using MultipatchDerivs = MultipatchField<DerivsOnPatch, Patches...>;
 
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
@@ -147,10 +147,10 @@ public:
     /**
      * @brief Build the spline representation of each given function.
      * 
-     * @param splines MultipatchType of all the Fields pointing to the spline representations. 
-     * @param values MultipatchType of all the Fields pointing to the function values. 
-     * @param derivs_xmin MultipatchType of all the ConstFields describing the function derivatives at the lower bound.
-     * @param derivs_xmax MultipatchType of all the ConstFields describing the function derivatives at the upper bound.
+     * @param splines MultipatchField of all the Fields pointing to the spline representations. 
+     * @param values MultipatchField of all the Fields pointing to the function values. 
+     * @param derivs_xmin MultipatchField of all the ConstFields describing the function derivatives at the lower bound.
+     * @param derivs_xmax MultipatchField of all the ConstFields describing the function derivatives at the upper bound.
      */
     void operator()(
             MultipatchSplineCoeffs splines,

@@ -40,8 +40,6 @@ class RK4 : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 public:
     using typename base_type::IdxRange;
 
-    using typename base_type::Idx;
-
     using typename base_type::ValConstField;
     using typename base_type::ValField;
 
@@ -106,7 +104,7 @@ public:
 
 
         // Save initial conditions
-        copy(y_prime, y);
+        base_type::copy(y_prime, y);
 
         // --------- Calculate k1 ------------
         // k1 = f(y)
@@ -121,7 +119,7 @@ public:
 
         // --------- Calculate k3 ------------
         // Collect initial conditions
-        copy(y_prime, y);
+        base_type::copy(y_prime, y);
 
         // Calculate y_new := y_n + h/2*k_2
         y_update(y_prime, k2, 0.5 * dt);
@@ -131,7 +129,7 @@ public:
 
         // --------- Calculate k3 ------------
         // Collect initial conditions
-        copy(y_prime, y);
+        base_type::copy(y_prime, y);
 
         // Calculate y_new := y_n + h*k_3
         y_update(y_prime, k3, dt);
@@ -141,41 +139,20 @@ public:
 
         // --------- Update y ------------
         // Calculation of step
-        if constexpr (is_vector_field_v<DerivFieldMem>) {
-            ddc::parallel_for_each(
-                    exec_space,
-                    get_idx_range(k_total),
-                    KOKKOS_CLASS_LAMBDA(Idx const i) {
-                        // k_total = k1 + 4 * k2 + k3
-                        fill_k_total(i, k_total, k1(i) + 2 * k2(i) + 2 * k3(i) + k4(i));
-                    });
-        } else {
-            ddc::parallel_for_each(
-                    exec_space,
-                    get_idx_range(k_total),
-                    KOKKOS_LAMBDA(Idx const i) {
-                        // k_total = k1 + 4 * k2 + k3
-                        k_total(i) = k1(i) + 2 * k2(i) + 2 * k3(i) + k4(i);
-                    });
-        }
+        // k_total = k1 + 4 * k2 + k3
+        using element_type = typename DerivField::element_type;
+        base_type::assemble_k_total(
+                exec_space,
+                k_total,
+                KOKKOS_LAMBDA(std::array<element_type, 4> k) {
+                    return k[0] + 2 * k[1] + 2 * k[2] + k[3];
+                },
+                k1,
+                k2,
+                k3,
+                k4);
 
         // Calculate y_{n+1} := y_n + (k1 + 2 * k2 + 2 * k3 + k4) * h/6
         y_update(y, k_total, dt / 6.);
-    }
-
-private:
-    void copy(ValField copy_to, ValConstField copy_from) const
-    {
-        if constexpr (is_vector_field_v<ValField>) {
-            ddcHelper::deepcopy(copy_to, copy_from);
-        } else {
-            ddc::parallel_deepcopy(copy_to, copy_from);
-        }
-    }
-
-    template <class... DDims>
-    KOKKOS_FUNCTION void fill_k_total(Idx i, DerivField k_total, Coord<DDims...> new_val) const
-    {
-        ((ddcHelper::get<DDims>(k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }
 };
