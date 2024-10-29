@@ -167,36 +167,36 @@ using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
 using IdxVpar = Idx<GridVpar>;
 using IdxMu = Idx<GridMu>;
-using IdxTor2D = Idx<GridR, GridTheta>;
+using IdxTor2D = Idx<GridTheta, GridR>;
 using IdxV2D = Idx<GridVpar, GridMu>;
-using IdxV2DTor2D = Idx<GridVpar, GridMu, GridR, GridTheta>;
-using IdxSpTor2D = Idx<Species, GridR, GridTheta>;
+using IdxV2DTor2D = Idx<GridVpar, GridMu, GridTheta, GridR>;
+using IdxSpTor2D = Idx<Species, GridTheta, GridR>;
 using IdxSpV2D = Idx<Species, GridVpar, GridMu>;
-using IdxSpV2DTor2D = Idx<Species, GridVpar, GridMu, GridR, GridTheta>;
+using IdxSpV2DTor2D = Idx<Species, GridVpar, GridMu, GridTheta, GridR>;
 
 // IdxStep = number of grid points between points in a sampling
 using IdxStepR = IdxStep<GridR>;
 using IdxStepTheta = IdxStep<GridTheta>;
 using IdxStepVpar = IdxStep<GridVpar>;
 using IdxStepMu = IdxStep<GridMu>;
-using IdxStepTor2D = IdxStep<GridR, GridTheta>;
+using IdxStepTor2D = IdxStep<GridTheta, GridR>;
 using IdxStepV2D = IdxStep<GridVpar, GridMu>;
-using IdxStepV2DTor2D = IdxStep<GridVpar, GridMu, GridR, GridTheta>;
-using IdxStepSpTor2D = IdxStep<Species, GridR, GridTheta>;
+using IdxStepV2DTor2D = IdxStep<GridVpar, GridMu, GridTheta, GridR>;
+using IdxStepSpTor2D = IdxStep<Species, GridTheta, GridR>;
 using IdxStepSpV2D = IdxStep<Species, GridVpar, GridMu>;
-using IdxStepSpV2DTor2D = IdxStep<Species, GridVpar, GridMu, GridR, GridTheta>;
+using IdxStepSpV2DTor2D = IdxStep<Species, GridVpar, GridMu, GridTheta, GridR>;
 
 // IdxRange = to describe the wole index range (or a sub-index range)
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
 using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
-using IdxRangeTor2D = IdxRange<GridR, GridTheta>;
+using IdxRangeTor2D = IdxRange<GridTheta, GridR>;
 using IdxRangeV2D = IdxRange<GridVpar, GridMu>;
-using IdxRangeV2DTor2D = IdxRange<GridVpar, GridMu, GridR, GridTheta>;
-using IdxRangeSpTor2D = IdxRange<Species, GridR, GridTheta>;
+using IdxRangeV2DTor2D = IdxRange<GridVpar, GridMu, GridTheta, GridR>;
+using IdxRangeSpTor2D = IdxRange<Species, GridTheta, GridR>;
 using IdxRangeSpV2D = IdxRange<Species, GridVpar, GridMu>;
-using IdxRangeSpV2DTor2D = IdxRange<Species, GridVpar, GridMu, GridR, GridTheta>;
+using IdxRangeSpV2DTor2D = IdxRange<Species, GridVpar, GridMu, GridTheta, GridR>;
 using IdxRangeTor2DV2D = IdxRange<GridTheta, GridR, GridVpar, GridMu>;
 using IdxRangeSpTor2DV2D = IdxRange<Species, GridTheta, GridR, GridVpar, GridMu>;
 
@@ -362,5 +362,5 @@ using FieldMemSpTor2DV2D_host = host_t<FieldMem<ElementType, IdxRangeSpTor2DV2D>
 using DFieldMemSpTor2DV2D_host = FieldMemSpTor2DV2D_host<double>;
 
 // --> MPI Layouts
-using Tor2DDistributed = MPILayout<IdxRangeSpTor2DV2D, GridR, GridTheta>;
+using Tor2DDistributed = MPILayout<IdxRangeSpTor2DV2D, GridTheta, GridR>;
 using V2DDistributed = MPILayout<IdxRangeSpV2DTor2D, GridVpar, GridMu>;

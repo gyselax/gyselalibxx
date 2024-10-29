@@ -22,9 +22,8 @@ MaxwellianEquilibrium::MaxwellianEquilibrium(
 
 DFieldSpV2DTor2D MaxwellianEquilibrium::operator()(DFieldSpV2DTor2D const allfequilibrium) const
 {
-    IdxRangeSp const idxrange_sp = get_idx_range<Species>(allfequilibrium);
-    IdxRangeV2DTor2D const idxrange_v2dtor2d
-            = get_idx_range<GridVpar, GridMu, GridR, GridTheta>(allfequilibrium);
+    IdxRangeSp const idxrange_sp(get_idx_range(allfequilibrium));
+    IdxRangeV2DTor2D const idxrange_v2dtor2d(get_idx_range(allfequilibrium));
 
     // Initialization of the maxwellian
     ddc::for_each(idxrange_sp, [&](IdxSp const isp) {
@@ -45,9 +44,8 @@ void MaxwellianEquilibrium::compute_maxwellian(
         DConstFieldTor2D mean_velocity,
         DConstFieldTor2D magnetic_field)
 {
-    IdxRangeV2DTor2D const idxrange_v2dtor2d
-            = get_idx_range<GridVpar, GridMu, GridR, GridTheta>(fMaxwellian);
-    IdxRangeTor2D const idxrange_tor2d = get_idx_range<GridR, GridTheta>(fMaxwellian);
+    IdxRangeV2DTor2D const idxrange_v2dtor2d(get_idx_range(fMaxwellian));
+    IdxRangeTor2D const idxrange_tor2d(get_idx_range(fMaxwellian));
 
     // Compute fM(vpar,mu) = (2*PI*T)**(-1.5)*n*exp(-energy) with
     //  - n the density, T the temperature and Upar the mean velocity

@@ -119,8 +119,8 @@ static void TestMaxwellianTokamAxi()
             Kokkos::DefaultExecutionSpace(),
             density_res,
             KOKKOS_LAMBDA(IdxSpV2DTor2D const ispv2dtor2d) {
-                IdxSp const isp = ddc::select<Species>(ispv2dtor2d);
-                IdxTor2D const itor2d = ddc::select<GridR, GridTheta>(ispv2dtor2d);
+                IdxSp const isp(ispv2dtor2d);
+                IdxTor2D const itor2d(ispv2dtor2d);
                 double const jacobian_velocity = 2. * M_PI * magnetic_field(itor2d);
                 return jacobian_velocity * allfequilibrium(ispv2dtor2d);
             });
@@ -133,9 +133,9 @@ static void TestMaxwellianTokamAxi()
             Kokkos::DefaultExecutionSpace(),
             mean_velocity_res,
             KOKKOS_LAMBDA(IdxSpV2DTor2D const ispv2dtor2d) {
-                IdxSp const isp = ddc::select<Species>(ispv2dtor2d);
-                IdxVpar const ivpar = ddc::select<GridVpar>(ispv2dtor2d);
-                IdxTor2D const itor2d = ddc::select<GridR, GridTheta>(ispv2dtor2d);
+                IdxSp const isp(ispv2dtor2d);
+                IdxVpar const ivpar(ispv2dtor2d);
+                IdxTor2D const itor2d(ispv2dtor2d);
                 double const jacobian_velocity = 2. * M_PI * magnetic_field(itor2d);
                 return jacobian_velocity * ddc::coordinate(ivpar) * allfequilibrium(ispv2dtor2d);
             });
@@ -160,10 +160,10 @@ static void TestMaxwellianTokamAxi()
             Kokkos::DefaultExecutionSpace(),
             temperature_res,
             KOKKOS_LAMBDA(IdxSpV2DTor2D const ispv2dtor2d) {
-                IdxSp const isp = ddc::select<Species>(ispv2dtor2d);
-                IdxVpar const ivpar = ddc::select<GridVpar>(ispv2dtor2d);
-                IdxMu const imu = ddc::select<GridMu>(ispv2dtor2d);
-                IdxTor2D const itor2d = ddc::select<GridR, GridTheta>(ispv2dtor2d);
+                IdxSp const isp(ispv2dtor2d);
+                IdxVpar const ivpar(ispv2dtor2d);
+                IdxMu const imu(ispv2dtor2d);
+                IdxTor2D const itor2d(ispv2dtor2d);
                 double const B = magnetic_field(itor2d);
                 double const vpar_minus_Upar
                         = ddc::coordinate(ivpar) - mean_velocity_res(isp, itor2d);
@@ -188,7 +188,7 @@ static void TestMaxwellianTokamAxi()
             Kokkos::DefaultExecutionSpace(),
             idx_range_sptor2d_reduce,
             KOKKOS_LAMBDA(IdxSpTor2D const isptor2d) {
-                IdxSp isp = ddc::select<Species>(isptor2d);
+                IdxSp isp(isptor2d);
                 Kokkos::
                         printf("density for sp %d = %e \n",
                                (isp - idx_range_kinsp.front()).value(),
