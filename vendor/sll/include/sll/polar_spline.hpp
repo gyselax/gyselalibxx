@@ -269,3 +269,126 @@ inline constexpr bool is_polar_spline_v<PolarSplineSpan<PolarBSplinesType, MemSp
 
 template <class PolarBSplinesType, class MemSpace>
 inline constexpr bool is_polar_spline_v<PolarSplineView<PolarBSplinesType, MemSpace>> = true;
+
+/**
+* @brief A function to create a PolarSpline instance, which has the same attributes as src,
+* except the memory space which is related to ExecSpace.
+*
+* @param[in] exec_space Execution space from which the result must be accessible.
+* @param[in] src A reference to PolarSpline.
+*/
+template <class ExecSpace, class PolarBSplinesType, class MemSpace>
+PolarSpline<PolarBSplinesType, typename ExecSpace::memory_space> create_mirror(
+        ExecSpace const& exec_space,
+        PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    PolarSpline<PolarBSplinesType, typename ExecSpace::memory_space>
+            dst(src.singular_spline_coef.domain(), src.spline_coef.domain());
+    return dst;
+}
+
+/**
+* @brief A function to create a PolarSpline instance, which has the same attributes as src,
+* This function allocates memory on the host.
+* @param[in] src A reference to PolarSpline.
+*/
+template <class PolarBSplinesType, class MemSpace>
+PolarSpline<PolarBSplinesType, Kokkos::HostSpace> create_mirror(
+        PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    return create_mirror(Kokkos::DefaultHostExecutionSpace(), src);
+}
+
+/**
+* @brief A function to create copies of PolarSpline class instances. It first creates an instance
+* on a memory space accessible from the specified execution space, then it copies the data to the new instance.
+*
+* @param[in] exec_space Execution space for allocation.
+* @param[in] src A reference to PolarSpline.
+*/
+template <class ExecSpace, class PolarBSplinesType, class MemSpace>
+PolarSpline<PolarBSplinesType, typename ExecSpace::memory_space> create_mirror_and_copy(
+        ExecSpace const& exec_space,
+        PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    PolarSpline<PolarBSplinesType, typename ExecSpace::memory_space> dst
+            = create_mirror(exec_space, src);
+    ddc::parallel_deepcopy(dst.spline_coef, src.spline_coef);
+    ddc::parallel_deepcopy(dst.singular_spline_coef, src.singular_spline_coef);
+    return dst;
+}
+
+/**
+* @brief A function to create copies for PolarSpline class.It first creates an instance of the class on host,
+* then it operates a copy of the data.
+*
+* @param[in] src A reference to PolarSpline.
+*/
+template <class PolarBSplinesType, class MemSpace>
+PolarSpline<PolarBSplinesType, Kokkos::HostSpace> create_mirror_and_copy(
+        PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    return create_mirror_and_copy(Kokkos::DefaultHostExecutionSpace(), src);
+}
+
+/**
+* @brief A function to create a mirror view instance for PolarSpline class on the specified execution space.
+*
+* @param[in] exec_space Execution space from which the result must be accessible.
+* @param[in] src A reference to PolarSpline.
+*/
+template <class ExecSpace, class PolarBSplinesType, class MemSpace>
+auto create_mirror_view(
+        ExecSpace const& exec_space,
+        PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    if constexpr (std::is_same_v<MemSpace, typename ExecSpace::memory_space>) {
+        return src;
+    } else {
+        PolarSpline<PolarBSplinesType, typename ExecSpace::memory_space>
+                dst(src.singular_spline_coef.domain(), src.spline_coef.domain());
+        return dst;
+    }
+}
+
+/**
+* @brief A function to create a host allocated mirror view for PolarSpline class.
+*
+* @param[in] src A reference to PolarSpline.
+*/
+template <class PolarBSplinesType, class MemSpace>
+auto create_mirror_view(PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    return create_mirror_view(Kokkos::DefaultHostExecutionSpace(), src);
+}
+
+/**
+* @brief A function to create copies for PolarSpline class.
+* If src is accessible from exec_space, src is returned, else, it first creates a mirror view of the class,
+* then it copies the data to the new instance. 
+*
+* @param[in] exec_space Execution space for allocation.
+* @param[in] src A reference to PolarSpline.
+*/
+template <class ExecSpace, class PolarBSplinesType, class MemSpace>
+auto create_mirror_view_and_copy(
+        ExecSpace const& exec_space,
+        PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    auto dst = create_mirror_view(exec_space, src);
+    ddc::parallel_deepcopy(dst.spline_coef, src.spline_coef);
+    ddc::parallel_deepcopy(dst.singular_spline_coef, src.singular_spline_coef);
+    return dst;
+}
+
+/**
+* @brief A function to create host allocated view for PolarSpline class.
+* @see create_mirror_view_and_copy.
+*
+* @param[in] src A reference to PolarSpline.
+*/
+template <class PolarBSplinesType, class MemSpace>
+auto create_mirror_view_and_copy(PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
+{
+    return create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), src);
+}

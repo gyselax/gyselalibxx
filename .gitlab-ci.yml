@@ -104,7 +104,7 @@ documentation:
   script: |
     rm -rf build || true
     # Make docs
-    cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
+    cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs .
     cmake --build build-docs
     # Get files which have changed in this merge request
     git diff origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}..HEAD --no-indent-heuristic --unified=0 --output=pull_diff.txt --no-color
