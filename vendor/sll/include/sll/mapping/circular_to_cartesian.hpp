@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <cassert>
@@ -8,6 +9,7 @@
 #include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
 #include "jacobian.hpp"
+#include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
 /**
@@ -321,3 +323,11 @@ public:
         return 1.;
     }
 };
+
+
+namespace detail {
+template <class X, class Y, class R, class Theta, class ExecSpace>
+struct MappingAccessibility<ExecSpace, CircularToCartesian<X, Y, R, Theta>> : std::true_type
+{
+};
+} // namespace detail
