@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <cmath>
@@ -9,6 +10,7 @@
 #include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
 #include "jacobian.hpp"
+#include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
 
@@ -480,3 +482,10 @@ public:
         return (2 - Kokkos::sqrt(1 + m_epsilon * m_epsilon)) / m_e / xi;
     }
 };
+
+namespace detail {
+template <class X, class Y, class R, class Theta, class ExecSpace>
+struct MappingAccessibility<ExecSpace, CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
+{
+};
+} // namespace detail

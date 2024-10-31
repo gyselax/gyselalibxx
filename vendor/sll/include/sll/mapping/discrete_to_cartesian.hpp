@@ -9,6 +9,7 @@
 #include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
 #include "jacobian.hpp"
+#include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
 /**
@@ -446,3 +447,21 @@ public:
         return ddc::Coordinate<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
     }
 };
+
+
+namespace detail {
+template <
+        class X,
+        class Y,
+        class SplineEvaluator,
+        class R,
+        class Theta,
+        class MemorySpace,
+        class ExecSpace>
+struct MappingAccessibility<
+        ExecSpace,
+        DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+{
+    static constexpr bool value = Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible;
+};
+} // namespace detail

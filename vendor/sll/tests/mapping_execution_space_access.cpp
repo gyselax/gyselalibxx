@@ -167,6 +167,7 @@ double check_logical_to_physical_coord_converter(
         CoordXY const& coord_xy)
 {
     DeviceExecSpace exec;
+    static_assert(is_accessible_v<DeviceExecSpace, Mapping>);
 
     double max_error = 0;
     Kokkos::parallel_reduce(
@@ -188,6 +189,7 @@ double check_physical_to_logical_coord_converter(
         CoordXY const& coord_xy)
 {
     DeviceExecSpace exec;
+    static_assert(is_accessible_v<DeviceExecSpace, Mapping>);
 
     double max_error = 0;
     Kokkos::parallel_reduce(
@@ -210,14 +212,17 @@ TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
 {
     // Mapping
     CircularToCartesian<X, Y, R, Theta> const mapping;
+    static_assert(is_accessible_v<
+                  Kokkos::DefaultHostExecutionSpace,
+                  CircularToCartesian<X, Y, R, Theta>>);
 
     // Test coordinates
     double const r = .75;
     double const theta = 1 / 3. * M_PI;
     CoordRTheta const coord_rtheta(r, theta);
 
-    double const x = r * Kokkos::cos(theta);
-    double const y = r * Kokkos::sin(theta);
+    double const x = r * std::cos(theta);
+    double const y = r * std::sin(theta);
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
@@ -238,16 +243,18 @@ TEST_F(MappingMemoryAccess, HostCzarnyCoordConverter)
     double const epsilon = 0.3;
     double const e = 1.4;
     CzarnyToCartesian<X, Y, R, Theta> const mapping(epsilon, e);
+    static_assert(
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
 
     // Test coordinates
     double const r = .75;
     double const theta = 1 / 3. * M_PI;
     CoordRTheta const coord_rtheta(r, theta);
 
-    const double tmp1 = Kokkos::sqrt(epsilon * (epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
+    const double tmp1 = std::sqrt(epsilon * (epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     const double x = (1.0 - tmp1) / epsilon;
-    const double y = e * r * Kokkos::sin(theta)
-                     / (Kokkos::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
+    const double y
+            = e * r * std::sin(theta) / (std::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
@@ -268,6 +275,8 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     double const epsilon = 0.3;
     double const e = 1.4;
     CzarnyToCartesian<X, Y, R, Theta> const analytical_mapping(epsilon, e);
+    static_assert(
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
 
     SplineRThetaBuilder<HostExecSpace> builder(interpolation_idx_range_rtheta);
 
@@ -286,16 +295,17 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
     DiscreteToCartesian mapping = mapping_builder();
+    static_assert(is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(mapping)>);
 
     // Test coordinates
     double const r = .75;
     double const theta = 1 / 3. * M_PI;
     CoordRTheta const coord_rtheta(r, theta);
 
-    const double tmp1 = Kokkos::sqrt(epsilon * (epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
+    const double tmp1 = std::sqrt(epsilon * (epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     const double x = (1.0 - tmp1) / epsilon;
-    const double y = e * r * Kokkos::sin(theta)
-                     / (Kokkos::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
+    const double y
+            = e * r * std::sin(theta) / (std::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
@@ -310,14 +320,16 @@ TEST_F(MappingMemoryAccess, DeviceCircularCoordConverter)
 {
     // Mapping
     CircularToCartesian<X, Y, R, Theta> const mapping;
+    static_assert(
+            is_accessible_v<Kokkos::DefaultExecutionSpace, CircularToCartesian<X, Y, R, Theta>>);
 
     // Test coordinates
     double const r = .75;
     double const theta = 1 / 3. * M_PI;
     CoordRTheta const coord_rtheta(r, theta);
 
-    double const x = r * Kokkos::cos(theta);
-    double const y = r * Kokkos::sin(theta);
+    double const x = r * std::cos(theta);
+    double const y = r * std::sin(theta);
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
@@ -336,16 +348,18 @@ TEST_F(MappingMemoryAccess, DeviceCzarnyCoordConverter)
     double const epsilon = 0.3;
     double const e = 1.4;
     CzarnyToCartesian<X, Y, R, Theta> const mapping(epsilon, e);
+    static_assert(
+            is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
 
     // Test coordinates
     double const r = .75;
     double const theta = 1 / 3. * M_PI;
     CoordRTheta const coord_rtheta(r, theta);
 
-    const double tmp1 = Kokkos::sqrt(epsilon * (epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
+    const double tmp1 = std::sqrt(epsilon * (epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     const double x = (1.0 - tmp1) / epsilon;
-    const double y = e * r * Kokkos::sin(theta)
-                     / (Kokkos::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
+    const double y
+            = e * r * std::sin(theta) / (std::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
@@ -364,6 +378,8 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     double const epsilon = 0.3;
     double const e = 1.4;
     CzarnyToCartesian<X, Y, R, Theta> const analytical_mapping(epsilon, e);
+    static_assert(
+            is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
 
     SplineRThetaBuilder<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
 
@@ -382,16 +398,17 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
             SplineRThetaEvaluator<DeviceExecSpace>>
             mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
     DiscreteToCartesian mapping = mapping_builder();
+    static_assert(is_accessible_v<Kokkos::DefaultExecutionSpace, decltype(mapping)>);
 
     // Test coordinates
     double const r = .75;
     double const theta = 1 / 3. * M_PI;
     CoordRTheta const coord_rtheta(r, theta);
 
-    const double tmp1 = Kokkos::sqrt(epsilon * (epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
+    const double tmp1 = std::sqrt(epsilon * (epsilon + 2.0 * r * std::cos(theta)) + 1.0);
     const double x = (1.0 - tmp1) / epsilon;
-    const double y = e * r * Kokkos::sin(theta)
-                     / (Kokkos::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
+    const double y
+            = e * r * std::sin(theta) / (std::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
