@@ -33,6 +33,6 @@ endif()
 add_library(sll::SLL ALIAS SLL)
 
 ## if tests are enabled, build the tests in `tests/`
-if("${BUILD_TESTING}" AND "${SLL_BUILD_TESTING}")
+if("${GYSELALIBXX_BUILD_TESTING}" AND "${SLL_BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()

@@ -15,8 +15,10 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
-option(BUILD_BENCHMARKS "Build the benchmarks." OFF)
-option(BUILD_DOCUMENTATION "Build the documentation." OFF)
+option(GYSELALIBXX_BUILD_BENCHMARKS "Build the benchmarks." OFF)
+option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
+option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
+option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this should be set to off to build documentation without the C++ dependencies)" ON)
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
@@ -35,7 +37,7 @@ option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" 
 ###############################################################################################
 
 ## if documentation is enabled, build it
-if("${BUILD_DOCUMENTATION}")
+if("${GYSELALIBXX_BUILD_DOCUMENTATION}")
   ## Look for a pre-installed Doxygen
   find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
 
@@ -70,7 +72,7 @@ find_package(PDI REQUIRED COMPONENTS C)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
-if("${BUILD_TESTING}")
+if("${GYSELALIBXX_BUILD_TESTING}")
   set(GYSELALIBXX_GTest_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `GTest` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
   set_property(CACHE GYSELALIBXX_GTest_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
 
@@ -89,7 +91,7 @@ endif()
 ## if benchmarks are enabled, use (google) benchmark from `vendor/`
 ### we use it to write our micro-benchmarks
 ### this must come after googletest
-if("${BUILD_BENCHMARKS}")
+if("${GYSELALIBXX_BUILD_BENCHMARKS}")
     set(GYSELALIBXX_benchmark_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `benchmark` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
     set_property(CACHE GYSELALIBXX_benchmark_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
 
@@ -183,10 +185,12 @@ set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_
 add_subdirectory(src/)
 
 ## Build the simulations (applications mains) in `simulations/`
+if("${GYSELALIBXX_BUILD_SIMULATIONS}")
 add_subdirectory(simulations/)
+endif()
 
 ## if tests are enabled, build the tests in `tests/`
-if("${BUILD_TESTING}")
+if("${GYSELALIBXX_BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()
 
