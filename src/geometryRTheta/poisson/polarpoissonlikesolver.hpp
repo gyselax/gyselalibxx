@@ -407,10 +407,13 @@ public:
                 values_csr_host("values_csr", batch_size, n_matrix_elements);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
                 col_idx_csr_host("idx_csr", n_matrix_elements);
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
+                nnz_per_row_csr("nnz_per_row_csr", matrix_size + 1);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", matrix_size + 1);
 
-        init_nnz_per_line(nnz_per_row_csr_host);
+        init_nnz_per_line(nnz_per_row_csr);
+        Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row_csr);
 
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
         ddc::for_each(singular_idx_range, [&](IdxPolarBspl const idx_test) {
@@ -1142,44 +1145,66 @@ private:
         return idx_theta;
     }
 
+public:
     void init_nnz_per_line(
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace> nnz)
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> nnz) const
     {
         size_t const mat_size = nnz.extent(0) - 1;
         size_t constexpr n_singular_basis = PolarBSplinesRTheta::n_singular_basis();
         size_t constexpr degree = BSplinesR_Polar::degree();
         size_t constexpr radial_overlap = 2 * degree + 1;
+        size_t const nbasis_theta_proxy = nbasis_theta;
+
         // overlap between singular domain splines and radial splines
-        for (size_t k = 1; k <= n_singular_basis; k++) {
-            nnz(k + 1) = n_singular_basis + degree * nbasis_theta;
-        }
+        Kokkos::parallel_for(
+                "overlap singular radial",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular_basis + 1),
+                KOKKOS_LAMBDA(const int k) {
+                    nnz(k + 1) = n_singular_basis + degree * nbasis_theta_proxy;
+                });
+
         // going from the internal boundary the overlapping possiblities between two radial splines increase
-        for (size_t i = 1; i <= degree + 1; i++) {
-            for (size_t k = n_singular_basis + (i - 1) * nbasis_theta;
-                 k < n_singular_basis + i * nbasis_theta;
-                 k++) {
-                nnz(k + 2) = n_singular_basis + (degree + i) * radial_overlap;
-            }
-        }
+        Kokkos::parallel_for(
+                "inner overlap",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 2),
+                KOKKOS_LAMBDA(const int i) {
+                    for (size_t k = n_singular_basis + (i - 1) * nbasis_theta_proxy;
+                         k < n_singular_basis + i * nbasis_theta_proxy;
+                         k++) {
+                        nnz(k + 2) = n_singular_basis + (degree + i) * radial_overlap;
+                    }
+                });
+
         // Stencil with maximum possible overlap from two sides for radial spline
-        for (size_t k = n_singular_basis + degree * nbasis_theta;
-             k < mat_size - degree * nbasis_theta;
-             k++) {
-            nnz(k + 2) = radial_overlap * radial_overlap;
-        }
+        Kokkos::parallel_for(
+                "Inner Stencil",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(
+                        n_singular_basis + degree * nbasis_theta_proxy,
+                        mat_size - degree * nbasis_theta_proxy),
+                KOKKOS_LAMBDA(const int k) { nnz(k + 2) = radial_overlap * radial_overlap; });
+
         // Approaching the external boundary the overlapping possiblities between two radial splines decrease
-        for (size_t i = 1; i <= degree; i++) {
-            for (size_t k = mat_size - i * nbasis_theta; k < mat_size - (i - 1) * nbasis_theta;
-                 k++) {
-                nnz(k + 2) = (degree + i) * radial_overlap;
-            }
-        }
+        Kokkos::parallel_for(
+                "outer overlap",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 1),
+                KOKKOS_LAMBDA(const int i) {
+                    for (size_t k = mat_size - i * nbasis_theta_proxy;
+                         k < mat_size - (i - 1) * nbasis_theta_proxy;
+                         k++) {
+                        nnz(k + 2) = (degree + i) * radial_overlap;
+                    }
+                });
 
         // sum non-zero elements count
-        for (size_t k = 1; k < mat_size; k++) {
-            nnz(k + 1) += nnz(k);
-        }
-        nnz(0) = 0;
-        nnz(1) = 0;
+        Kokkos::parallel_for(
+                "Sum over lines",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(0, 1),
+                KOKKOS_LAMBDA(const int idx) {
+                    for (size_t k = 1; k < mat_size; k++) {
+                        nnz(k + 1) += nnz(k);
+                    }
+                    nnz(0) = 0;
+                    nnz(1) = 0;
+                });
     }
 };
