@@ -1,0 +1,48 @@
+spack:
+  concretizer:
+    unify: when_possible
+  definitions:
+  - compilers:
+    - gcc@12
+  - packages:
+    - benchmark
+    - cmake@3.22:3
+    - cuda
+    - eigen
+    - googletest +gmock
+    - fftw precision=float,double
+    - gdb
+    - ginkgo@1.8 +cuda cuda_arch=80
+    - googletest +gmock
+    - lapack
+    - mdspan@0.6
+    - openmpi +cuda
+    - paraconf
+    - pdi@1.6:1
+    - pdiplugin-decl-hdf5
+    - pdiplugin-decl-netcdf
+    - pdiplugin-mpi
+    - pdiplugin-trace
+    - pdiplugin-set-value
+  - python-packages:
+    - py-dask
+    - py-h5py
+    - py-imageio
+    - py-matplotlib
+    - py-numpy
+    - py-scipy
+    - py-sympy
+    - py-xarray
+  specs:
+  - lapack
+  - matrix:
+    - [$packages]
+    - [$%compilers]
+  - matrix:
+    - [$python-packages]
+    - [$%compilers]
+  view: true
+  packages:
+    all:
+      variants: +mpi cxxstd=17
+
