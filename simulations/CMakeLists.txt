@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-add_subdirectory(geometry5D)
 add_subdirectory(geometryRTheta)
 add_subdirectory(geometryTokamAxi)
 add_subdirectory(geometryVparMu)

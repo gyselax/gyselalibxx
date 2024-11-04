@@ -5,7 +5,6 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [advection](./advection/README.md) - Code describing semi-Lagrangian advection routines.
 - [collisions](./collisions/README.md) - Code describing the inter and intra species collisions.
 - [data\_types](./data_types/README.md) - Code describing useful data types which are not provided by DDC.
-- [geometry5D](./geometry5D/README.md) - Code describing methods which are specific to a simulation with 3 spatial dimensions and 2 velocity dimension. This will be the general geometry used for GyselaX++ development.
 - [geometryRTheta](./geometryRTheta/README.md) - Code describing methods which are specific to a 2D curvilinear geometry containing a singular point.
 - [geometryTokamAxi](./geometryTokamAxi/README.md) - Code describing methods which are specific to a 4D geometry (r,theta,vpar,mu) dedicated to axisymmetric tokamak geometry.
 - [geometryVparMu](./geometryVparMu/README.md) - Code describing methods which are specific to a simulation operators in velocity space (vpar,mu).
