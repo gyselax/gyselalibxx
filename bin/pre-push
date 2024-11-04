@@ -20,7 +20,7 @@ then
     CLANG_FORMAT=/data/gyselarunner/clang-format
 fi
 
-if [ -n "{CLANG_FORMAT}" ]
+if [ -n "${CLANG_FORMAT}" ]
 then
   # Get all C++ files that were changed in this commit
   HEADER_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep .hpp)

@@ -13,5 +13,4 @@ TOOLCHAIN_ROOT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/nul
 
 . ${TOOLCHAIN_ROOT_DIRECTORY}/spack_0.22.2/share/spack/setup-env.sh
 
-spack load gcc@12
-spack env activate ${HOME}/gyselalib-env
+spack env activate ${HOME}/gyselalib_env

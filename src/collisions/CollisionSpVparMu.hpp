@@ -46,12 +46,8 @@ private:
             ddc::in_tags_v<GridMu, fdistrib_grids>,
             "The distribution function must be defined over the Mu direction");
     // Ensure that uniform
-    static_assert(
-            ddc::is_uniform_point_sampling_v<GridVpar>,
-            "The grid must be uniform in the vpar direction.");
-    static_assert(
-            ddc::is_uniform_point_sampling_v<GridMu>,
-            "The grid must be uniform in the mu direction.");
+    // [TODO] Restore it as soon as the geometry5D is deleted
+    //static_assert(ddc::is_uniform_point_sampling_v<GridVpar>);
 
     static_assert(
             ddc::type_seq_rank_v<Species, fdistrib_grids> == 0,
@@ -180,13 +176,7 @@ public:
         , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_idx_range)}
         , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_idx_range)}
     {
-        IdxRangeVpar idxrange_vpar(fdistrib_idx_range);
-        if (idxrange_vpar.size() % 2 != 0) {
-            throw std::runtime_error("The number of points in the vpar direction must be a "
-                                     "multiple of 2. This ensures that there is no grid point at "
-                                     "vpar=0 (this would cause division by 0).");
-        }
-        IdxRangeSp idxrange_sp(fdistrib_idx_range);
+        IdxRangeSp idxrange_sp = ddc::select<Species>(fdistrib_idx_range);
         // --> Initialize the mass species
         host_t<DConstFieldSp> hat_As_host
                 = ddc::host_discrete_space<Species>().masses()[idxrange_sp];
@@ -212,10 +202,12 @@ public:
         Kokkos::fence();
 
         std::size_t const n_mu = ddc::select<GridMu>(fdistrib_idx_range).size();
-        std::size_t const n_vpar = idxrange_vpar.size();
-        std::size_t const n_r = ::get_idx_range<GridR>(m_mask_buffer_r).size();
-        std::size_t const n_theta = ::get_idx_range<GridTheta>(m_B_norm).size();
-        std::size_t const n_sp = idxrange_sp.size();
+        std::size_t const n_vpar = ddc::select<GridVpar>(fdistrib_idx_range).size();
+        std::size_t const n_r
+                = collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range).size();
+        std::size_t const n_theta
+                = collisions_dimensions::get_idx_range<GridTheta>(fdistrib_idx_range).size();
+        std::size_t const n_sp = ddc::select<Species>(fdistrib_idx_range).size();
         std::size_t const n_batch
                 = fdistrib_idx_range.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
 

@@ -168,8 +168,12 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-ke
 set(BUILD_SHARED_LIBS_DUMP "${BUILD_SHARED_LIBS}")
 set(BUILD_SHARED_LIBS ON) #Needed to get libkp_kernel_timer.so
 add_subdirectory("vendor/kokkos-tools/profiling/simple-kernel-timer/" "kokkos-tools/profiling/simple-kernel-timer")
-set(BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS_DUMP}")
 add_compile_definitions(KP_KERNEL_TIMER_PATH="${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-kernel-timer/libkp_kernel_timer.so")
+if (${KOKKOS_ENABLE_CUDA})
+    add_subdirectory("vendor/kokkos-tools/profiling/nvtx-connector/" "kokkos-tools/profiling/nvtx-connector")
+    add_compile_definitions(KOKKOS_TOOLS_LIBS="${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/nvtx-connector/libkp_nvtx_connector.so")
+endif()
+set(BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS_DUMP}")
 
 ###############################################################################################
 #                              Build libraries and executables
