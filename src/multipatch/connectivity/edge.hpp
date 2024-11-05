@@ -1,12 +1,9 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
-
-
-enum Extremity { FRONT, BACK };
+#include "geometry_descriptors.hpp"
 
 
 /**

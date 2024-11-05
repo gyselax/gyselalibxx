@@ -4,7 +4,9 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "geometry_descriptors.hpp"
 #include "quadrature_coeffs_nd.hpp"
+#include "trapezoid_quadrature.hpp"
 
 /**
  * @brief Get the Simpson coefficients in 1D.
@@ -14,15 +16,14 @@
  *
  * (x_3-x_1)(2-(x_3-x_2)/(x_2-x_1)) / 6 f(x_1) + (x_3-x_1)^3 / 6 / (x_3-x_2) / (x_2-x_1) f(x_2) + (x_3-x_1)(2-(x_2-x_1)/(x_3-x_2)) / 6 f(x_3)
  *
- * @param[in] idx_range
- * 	The index range on which the quadrature will be carried out.
- *
- * @return The quadrature coefficients for the Simpson method defined on the provided index range.
+ * @param[in] coefficients
+ * 	The field where the quadrature coefficients should be saved.
  */
 template <class ExecSpace, class Grid1D>
-DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature_coefficients_1d(
-        IdxRange<Grid1D> const& idx_range)
+void fill_simpson_quadrature_coefficients_1d(
+        DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients)
 {
+    IdxRange<Grid1D> idx_range = get_idx_range(coefficients);
     if constexpr (Grid1D::continuous_dimension_type::PERIODIC) {
         if (idx_range.size() % 2 != 0) {
             throw std::runtime_error(
@@ -34,9 +35,6 @@ DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature
                                      "non-periodic direction.");
         }
     }
-    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
-    DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> const coefficients
-            = get_field(coefficients_alloc);
 
     Kokkos::parallel_for(
             "centre_left",
@@ -92,8 +90,86 @@ DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature
                     coefficients(idx_range.front()) += dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);
                 });
     }
+}
 
+/**
+ * @brief Get the Simpson coefficients in 1D.
+ *
+ * Calculate the quadrature coefficients for the Simpson method defined on the provided index range.
+ * The non-uniform form of the Simpson quadrature is:
+ *
+ * (x_3-x_1)(2-(x_3-x_2)/(x_2-x_1)) / 6 f(x_1) + (x_3-x_1)^3 / 6 / (x_3-x_2) / (x_2-x_1) f(x_2) + (x_3-x_1)(2-(x_2-x_1)/(x_3-x_2)) / 6 f(x_3)
+ *
+ * @param[in] idx_range
+ * 	The index range on which the quadrature will be carried out.
+ *
+ * @return The quadrature coefficients for the Simpson method defined on the provided index range.
+ */
+template <class ExecSpace, class Grid1D>
+DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature_coefficients_1d(
+        IdxRange<Grid1D> const& idx_range)
+{
+    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
+    fill_simpson_quadrature_coefficients_1d<ExecSpace>(get_field(coefficients_alloc));
     return coefficients_alloc;
+}
+
+/**
+ * @brief Get the Simpson coefficients in 1D.
+ *
+ * If the number of grid points is not compatible with the Simpson quadrature scheme then
+ * use a trapezoid formula over one cell at the specified extremity.
+ *
+ * @param[in] idx_range
+ * 	The index range on which the quadrature will be carried out.
+ * @param[in] trapezoid_extremity
+ *  The extremity where the trapezoid quadrature may be used.
+ *
+ * @return The quadrature coefficients for the Simpson method defined on the provided index range.
+ */
+template <class ExecSpace, class Grid1D>
+DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>
+simpson_trapezoid_quadrature_coefficients_1d(
+        IdxRange<Grid1D> const& idx_range,
+        Extremity trapezoid_extremity)
+{
+    static_assert(
+            !Grid1D::continuous_dimension_type::PERIODIC,
+            "The extremity is non-sensical in a Periodic dimension");
+    try {
+        return simpson_quadrature_coefficients_1d<ExecSpace>(idx_range);
+    } catch (const std::runtime_error& error) {
+        DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
+        DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients(
+                get_field(coefficients_alloc));
+        IdxStep<Grid1D> npts_to_remove(1);
+        if (trapezoid_extremity == Extremity::FRONT) {
+            fill_simpson_quadrature_coefficients_1d<ExecSpace>(
+                    coefficients_alloc[idx_range.remove_first(npts_to_remove)]);
+            Kokkos::parallel_for(
+                    "trapezoid_region",
+                    Kokkos::RangePolicy<ExecSpace>(0, 1),
+                    KOKKOS_LAMBDA(const int i) {
+                        Idx<Grid1D> idx_r = idx_range.back();
+                        double dx_cell = distance_at_left(idx_r);
+                        coefficients(idx_r) = dx_cell;
+                        coefficients(idx_r - 1) += dx_cell;
+                    });
+        } else {
+            fill_simpson_quadrature_coefficients_1d<ExecSpace>(
+                    coefficients_alloc[idx_range.remove_last(npts_to_remove)]);
+            Kokkos::parallel_for(
+                    "trapezoid_region",
+                    Kokkos::RangePolicy<ExecSpace>(0, 1),
+                    KOKKOS_LAMBDA(const int i) {
+                        Idx<Grid1D> idx_l = idx_range.front();
+                        double dx_cell = distance_at_right(idx_l);
+                        coefficients(idx_l) = dx_cell;
+                        coefficients(idx_l + 1) += dx_cell;
+                    });
+        }
+        return coefficients_alloc;
+    }
 }
 
 /**

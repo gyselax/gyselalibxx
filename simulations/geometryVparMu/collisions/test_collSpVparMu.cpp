@@ -22,6 +22,7 @@
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
+#include "simpson_quadrature.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
 
@@ -90,8 +91,8 @@ int main(int argc, char** argv)
     DFieldMemVpar const coeff_intdvpar(neumann_spline_quadrature_coefficients<
                                        Kokkos::DefaultExecutionSpace>(idxrange_vpar, builder_vpar));
     SplineMuBuilder const builder_mu(idxrange_mu);
-    DFieldMemMu const coeff_intdmu(neumann_spline_quadrature_coefficients<
-                                   Kokkos::DefaultExecutionSpace>(idxrange_mu, builder_mu));
+    DFieldMemMu const coeff_intdmu(simpson_trapezoid_quadrature_coefficients_1d<
+                                   Kokkos::DefaultExecutionSpace>(idxrange_mu, Extremity::BACK));
     CollisionInfo const collision_info(conf_collision);
     CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
             collision_info,

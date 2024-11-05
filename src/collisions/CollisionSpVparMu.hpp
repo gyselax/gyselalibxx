@@ -172,11 +172,11 @@ public:
         : m_operator_handle {}
         , m_hat_As {"m_hat_As", collisions_dimensions::get_idx_range<Species>(fdistrib_idx_range)}
         , m_hat_Zs {"m_hat_Zs", collisions_dimensions::get_idx_range<Species>(fdistrib_idx_range)}
+        , m_coeff_AD {"m_coeff_AD", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
         , m_mask_buffer_r {"m_mask_buffer_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
         , m_mask_LIM {"m_mask_LIM", IdxRangeThetaR {collisions_dimensions::get_idx_range<GridTheta, GridR>(fdistrib_idx_range)}}
         , m_B_norm {"m_B_norm", IdxRangeThetaR {collisions_dimensions::get_idx_range<GridTheta, GridR>(fdistrib_idx_range)}}
         , m_Bstar_s {"m_Bstar_s", IdxRangeSpThetaRVpar {collisions_dimensions::get_idx_range<Species, GridTheta, GridR, GridVpar>(fdistrib_idx_range)}}
-        , m_coeff_AD {"m_coeff_AD", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
         , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_idx_range)}
         , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_idx_range)}
     {
