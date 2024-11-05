@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+"""
+Plot the moment evolution
+"""
+
+from argparse import ArgumentParser
+from pathlib import Path
+
+import h5py as h5
+import matplotlib.pyplot as plt
+import xarray as xr
+import numpy as np
+
+
+def find_files(folder_path):
+    """ Return the first and last file from 'coll_*.h5' list in the given folder
+    """
+
+    # Use Path to find all files matching the pattern 'coll_*.h5' in the folder
+    folder = Path(folder_path)
+    files = sorted(folder.glob('coll_*.h5'))
+    if not files:
+        return None, None
+    return files
+
+
+def create_xarray_from_hdf5(file_path):
+    """ Create an xarray from an HDF5 file containing
+    the distribution function saved as f(vpar,mu,species)
+    """
+
+    with h5.File(file_path, 'r') as h5f:
+        if all(var in h5f for var in ['fdistribu', 'grid_mu', 'grid_vpar']):
+            fdistribu_data = h5f['fdistribu'][()]
+            fdistribu_masses = h5f['fdistribu_masses'][()]
+            grid_mu = h5f['grid_mu'][()]
+            grid_vpar = h5f['grid_vpar'][()]
+            dims = ('species','vpar','mu')
+            species_shape = h5f['fdistribu'].shape[0]  # pylint: disable=no-member
+            coords = {'species':range(species_shape), 'vpar':grid_vpar, 'mu':grid_mu}
+            xr_fdistribu = xr.DataArray(fdistribu_data, dims=dims, coords=coords, name='fdistribu')
+            time = h5f['time_saved'][()]
+            vpar_grid = xr.DataArray(grid_vpar, dims=['vpar'], coords={'vpar':grid_vpar})
+            mu_grid = xr.DataArray(grid_mu, dims=['mu'], coords={'mu':grid_mu})
+            mass = xr.DataArray(fdistribu_masses, dims=['species'],
+                    coords={'species':range(species_shape)})
+            return xr_fdistribu, time, vpar_grid, mu_grid, mass
+
+        missing_vars = [var for var in ['fdistribu', 'grid_mu', 'grid_vpar'] if var not in h5f]
+        raise ValueError(f"Missing variables in HDF5 file: {missing_vars}")
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description="Time evolution of moments of the distribution function.")
+    parser.add_argument('data_dir',
+                        action='store',
+                        nargs='?',
+                        default=Path.cwd(),
+                        type=Path,
+                        help='location of the results')
+    parser.add_argument('-o', '--output',
+                        action='store',
+                        default=None,
+                        type=Path,
+                        help='output file to generate',
+                        metavar='OUTFILE')
+    parser.add_argument('-s', '--start',
+                        action='store',
+                        default=0,
+                        type=int,
+                        help='start time index')
+    parser.add_argument('-e', '--end',
+                        action='store',
+                        default=None,
+                        type=int,
+                        help='end time index')
+    args = parser.parse_args()
+
+    # Get the number of species
+    files = find_files(args.data_dir)
+    xr_fdistribu, time_diag, vpar_grid, mu_grid, mass = create_xarray_from_hdf5(files[0])
+    Nspecies = xr_fdistribu.sizes["species"]
+
+    # Load data
+    time = np.zeros(np.size(files))
+    density = np.zeros((np.size(files),Nspecies))
+    Vpar = np.zeros((np.size(files),Nspecies))
+    Tpar = np.zeros((np.size(files),Nspecies))
+    Tperp = np.zeros((np.size(files),Nspecies))
+
+    for i in range(np.size(files)):
+        xr_fdistribu, time_diag, vpar_grid, mu_grid, mass = create_xarray_from_hdf5(files[i])
+
+        time[i] = time_diag
+        for ispecies in range(Nspecies):
+            # Warning: the velocity grid is normalized to v_Ts = sqrt(T0_s / m_s). Right now we assume T0_s = 1
+            # Density
+            xr_fdistribu_sps = xr_fdistribu.isel(species=ispecies) / (mass.isel(species=ispecies))**1.5
+            Int_Fs_dvpar = xr_fdistribu_sps.integrate("vpar")
+            N_s = 2.0 * np.pi * Int_Fs_dvpar.integrate("mu")
+            density[i,ispecies] = N_s
+
+            # Parallel velocity
+            xr_vpar_fdistribu_sps = xr_fdistribu_sps * vpar_grid
+            Int_vparFs_dvpar = xr_vpar_fdistribu_sps.integrate("vpar")
+            Vpar_s = 2.0 * np.pi * Int_vparFs_dvpar.integrate("mu") / N_s
+            Vpar[i,ispecies] = Vpar_s
+
+            # Parallel temperature
+            Energy_par = (vpar_grid - Vpar_s)**2
+            xr_Epar_fdistribu_sps = xr_fdistribu_sps * Energy_par
+            Int_EparFs_dvpar = xr_Epar_fdistribu_sps.integrate("vpar")
+            Tpar_s = 2.0 * np.pi * Int_EparFs_dvpar.integrate("mu") / N_s
+            Tpar[i,ispecies] = Tpar_s
+
+            # Perpendicular temperature
+            xr_Eperp_fdistribu_sps = xr_fdistribu_sps * mu_grid
+            Int_EperpFs_dvpar = xr_Eperp_fdistribu_sps.integrate("vpar")
+            Tperp_s = 2.0 * np.pi * Int_EperpFs_dvpar.integrate("mu") / N_s
+            Tperp[i,ispecies] = Tperp_s
+
+
+    # Plotting
+    colors_choice = ['red', 'blue', 'green', 'black'] #To discriminate between species
+
+    plt.figure(figsize=(6, 6))
+    for ispecies in range(Nspecies):
+        plt.plot(time,density[:,ispecies],color=colors_choice[ispecies], label='sp' + str(ispecies))
+    plt.xlabel('time')
+    plt.ylabel('density')
+    plt.legend()
+    plt.savefig('density.png')
+
+    plt.figure(figsize=(6, 6))
+    for ispecies in range(Nspecies):
+        plt.plot(time,Vpar[:,ispecies],color=colors_choice[ispecies], label='sp' +str(ispecies))
+    plt.xlabel('time')
+    plt.ylabel('Parallel velocity')
+    plt.legend()
+    plt.savefig('Vpar.png')
+
+    plt.figure(figsize=(6, 6))
+    for ispecies in range(Nspecies):
+        plt.plot(time,Tpar[:,ispecies], '--',color=colors_choice[ispecies], label=r'$T_{\parallel}$ of sp' + str(ispecies))
+        plt.plot(time,Tperp[:,ispecies], ':',color=colors_choice[ispecies], label=r'$T_{\perp}$ of sp' +str(ispecies))
+        plt.plot(time,Tpar[:,ispecies]/3 + 2*Tperp[:,ispecies]/3, '-', color=colors_choice[ispecies], label=r'$T$ of sp' +str(ispecies))
+    plt.xlabel('time')
+    plt.ylabel('Temperature')
+    plt.legend()
+    plt.savefig('Temperature.png')
+
+    # Comparison with theoretical predictions
+
+    if Nspecies==2:
+        deltaV = Vpar[:,0] - Vpar[:,1]
+        deltaT = (Tpar[:,0] - Tpar[:,1])/3 + 2*(Tperp[:,0] - Tperp[:,1])/3
+
+        plt.figure(figsize=(6, 6))
+        plt.plot(time, np.log(np.absolute(deltaV)))
+        plt.xlabel('time')
+        plt.ylabel(r'$\ln \|V_{\parallel,a} - V_{\parallel,b}\|$')
+        plt.savefig('Delta_Vpar.png')
+
+        plt.figure(figsize=(6, 6))
+        plt.plot(time, np.log(np.absolute(deltaT)))
+        plt.xlabel('time')
+        plt.ylabel(r'$\ln \|T_{a} - T_{b}\|$')
+        plt.savefig('Delta_T.png')
