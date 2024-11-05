@@ -24,7 +24,10 @@ void init_all_species(
 
     // Define the domain of kinetic species
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(conf_voicexx, ".SpeciesInfo[%d]", isp.uid());
+        PC_tree_t const conf_isp = PCpp_get(
+                conf_voicexx,
+                ".SpeciesInfo[%d]",
+                (isp - idx_range_kinsp.front()).value());
 
         kinetic_charges(isp) = PCpp_double(conf_isp, ".charge");
         kinetic_masses(isp) = PCpp_double(conf_isp, ".mass");
@@ -52,7 +55,7 @@ void init_all_species(
         PC_tree_t const conf_nisp = PCpp_get(
                 conf_voicexx,
                 ".NeutralSpeciesInfo[%d]",
-                isp.uid() - idx_range_fluidsp.front().uid());
+                (isp - idx_range_fluidsp.front()).value());
         fluid_charges(isp) = 0.; // neutral charge is zero
         fluid_masses(isp) = PCpp_double(conf_nisp, ".mass");
     }

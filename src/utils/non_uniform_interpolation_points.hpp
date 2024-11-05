@@ -73,6 +73,7 @@ public:
      * Get the sampling of interpolation points.
      *
      * @param[in] interp_points The grid points on which the simulation will evolve.
+     * @param[in] TOL The tolerance above which points are considered to be non-uniform.
      *
      * @return sampling The DDC point sampling of the interpolation points.
      */
