@@ -20,10 +20,6 @@ using ExampleSplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
 using ExampleSplineInterpPointsTheta
         = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
-using ExampleSplineInterpPointsVpar
-        = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
-using ExampleSplineInterpPointsMu
-        = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
 
 
 static void TestMaxwellianTokamAxi()
@@ -57,13 +53,17 @@ static void TestMaxwellianTokamAxi()
 
     ddc::init_discrete_space<GridR>(ExampleSplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(ExampleSplineInterpPointsTheta::get_sampling<GridTheta>());
-    ddc::init_discrete_space<GridVpar>(ExampleSplineInterpPointsVpar::get_sampling<GridVpar>());
-    ddc::init_discrete_space<GridMu>(ExampleSplineInterpPointsMu::get_sampling<GridMu>());
+    std::vector<CoordVpar> vpar_grid_points(
+            build_uniform_break_points(vpar_min, vpar_max, vpar_size));
+    ddc::init_discrete_space<GridVpar>(
+            SplineInterpPointsVpar::get_sampling<GridVpar>(vpar_grid_points));
+    std::vector<CoordMu> mu_grid_points(build_uniform_break_points(mu_min, mu_max, mu_size));
+    ddc::init_discrete_space<GridMu>(SplineInterpPointsMu::get_sampling<GridMu>(mu_grid_points));
 
     IdxRangeR gridr(ExampleSplineInterpPointsR::get_domain<GridR>());
     IdxRangeTheta gridtheta(ExampleSplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeVpar gridvpar(ExampleSplineInterpPointsVpar::get_domain<GridVpar>());
-    IdxRangeMu gridmu(ExampleSplineInterpPointsMu::get_domain<GridMu>());
+    IdxRangeVpar gridvpar(SplineInterpPointsVpar::get_domain<GridVpar>());
+    IdxRangeMu gridmu(SplineInterpPointsMu::get_domain<GridMu>());
     IdxRangeTor2D const idx_range_tor2d(gridr, gridtheta);
     IdxRangeV2D const idx_range_v2d(gridvpar, gridmu);
     IdxRangeV2DTor2D const idx_range_v2dtor2d(gridvpar, gridmu, gridr, gridtheta);

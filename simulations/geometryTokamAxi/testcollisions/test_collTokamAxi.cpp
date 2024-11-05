@@ -207,11 +207,32 @@ int main(int argc, char** argv)
     // unintialised advection field A(vpar)
     DFieldMemVpar null_advection_field_alloc(global_idxrange_vpar);
     DFieldVpar null_advection_field(get_field(null_advection_field_alloc));
+    DFieldMem<IdxRange<ddc::Deriv<Vpar>>> null_advection_field_deriv_vpar_min_alloc(
+            spline_builder_adv_field_vpar.batched_derivs_xmin_domain());
+    DFieldMem<IdxRange<ddc::Deriv<Vpar>>> null_advection_field_deriv_vpar_max_alloc(
+            spline_builder_adv_field_vpar.batched_derivs_xmax_domain());
+    DField<IdxRange<ddc::Deriv<Vpar>>> null_advection_field_deriv_vpar_min(
+            null_advection_field_deriv_vpar_min_alloc);
+    DField<IdxRange<ddc::Deriv<Vpar>>> null_advection_field_deriv_vpar_max(
+            null_advection_field_deriv_vpar_max_alloc);
     // initialise the advection field A(vpar) = 0.0
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             global_idxrange_vpar,
             KOKKOS_LAMBDA(IdxVpar idx) { null_advection_field(idx) = 0.0; });
+    // initialise the derivative of the advection field dA(vpar) = 0.0 at the boundaries
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(null_advection_field_deriv_vpar_min),
+            KOKKOS_LAMBDA(Idx<ddc::Deriv<Vpar>> idx) {
+                null_advection_field_deriv_vpar_min(idx) = 0.0;
+            });
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(null_advection_field_deriv_vpar_max),
+            KOKKOS_LAMBDA(Idx<ddc::Deriv<Vpar>> idx) {
+                null_advection_field_deriv_vpar_max(idx) = 0.0;
+            });
 
     // Create a vpar advection operator
     AdvectionVpar vpar_advection(
@@ -221,7 +242,12 @@ int main(int argc, char** argv)
             characteristic_timestepper);
 
     // Null advection in vpar direction
-    vpar_advection(allfdistribu_vpar_mu, null_advection_field, deltat);
+    vpar_advection(
+            allfdistribu_vpar_mu,
+            null_advection_field,
+            deltat,
+            null_advection_field_deriv_vpar_min,
+            null_advection_field_deriv_vpar_max);
 
     // [TODO] Apply collision operator
 

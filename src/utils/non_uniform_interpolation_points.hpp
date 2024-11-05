@@ -77,7 +77,7 @@ public:
      * @return sampling The DDC point sampling of the interpolation points.
      */
     template <typename Sampling, typename U = BSplines>
-    static auto get_sampling(std::vector<Coord<Dim>>& interp_points)
+    static auto get_sampling(std::vector<Coord<Dim>>& interp_points, double TOL = 2e-14)
     {
         int const expected_npoints = ddc::discrete_space<BSplines>().nbasis() - N_BE_MIN - N_BE_MAX;
         if (interp_points.size() != expected_npoints) {
@@ -109,8 +109,26 @@ public:
         }
         check_n_points_in_cell(n_points_in_cell, current_cell_end_idx);
 
-        using SamplingImpl = typename Sampling::template Impl<Sampling, Kokkos::HostSpace>;
-        return SamplingImpl(interp_points);
+        if constexpr (ddc::is_non_uniform_point_sampling_v<Sampling>) {
+            using SamplingImpl = typename Sampling::template Impl<Sampling, Kokkos::HostSpace>;
+            return SamplingImpl(interp_points);
+        } else {
+            using SamplingImpl = typename Sampling::template Impl<Sampling, Kokkos::HostSpace>;
+            SamplingImpl result(interp_points[0], interp_points[1] - interp_points[0]);
+            IdxRange<Sampling> idx_range(get_domain<Sampling>());
+            bool same_points = ddc::transform_reduce(
+                    idx_range,
+                    true,
+                    ddc::reducer::land<bool>(),
+                    [&](Idx<Sampling> idx) {
+                        return fabs(result.coordinate(idx) - interp_points[idx - idx_range.front()])
+                               < TOL;
+                    });
+            if (!same_points) {
+                throw std::runtime_error("Provided points are not uniform");
+            }
+            return result;
+        }
     }
 
 

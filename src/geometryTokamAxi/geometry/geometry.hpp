@@ -91,8 +91,8 @@ struct BSplinesMu : ddc::NonUniformBSplines<Mu, BSDegreeMu>
 };
 ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
 ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::GREVILLE;
+ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;
 
 using SplineInterpPointsR
         = ddcHelper::NonUniformInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
@@ -109,10 +109,10 @@ struct GridR : NonUniformGridBase<R>
 struct GridTheta : NonUniformGridBase<Theta>
 {
 };
-struct GridVpar : NonUniformGridBase<Vpar>
+struct GridVpar : UniformGridBase<Vpar>
 {
 };
-struct GridMu : NonUniformGridBase<Mu>
+struct GridMu : UniformGridBase<Mu>
 {
 };
 
