@@ -820,9 +820,8 @@ public:
 
 
 private:
-    static IdxRangeQuadratureRTheta get_quadrature_points_in_cell(
-            int cell_idx_r,
-            int cell_idx_theta)
+    static KOKKOS_FUNCTION IdxRangeQuadratureRTheta
+    get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta)
     {
         const IdxQuadratureR first_quad_point_r(cell_idx_r * n_gauss_legendre_r);
         const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * n_gauss_legendre_theta);
@@ -1135,7 +1134,7 @@ private:
                 });
     }
 
-    static int theta_mod(int idx_theta)
+    static KOKKOS_FUNCTION int theta_mod(int idx_theta)
     {
         int ncells_theta = ddc::discrete_space<BSplinesTheta_Polar>().ncells();
         while (idx_theta < 0)
@@ -1146,6 +1145,19 @@ private:
     }
 
 public:
+    /**
+    * @brief Fills the nnz data structure by computing the number of non-zero per line.
+    * This number is linked to the weak formulation and depends on @f$(r,\theta)@f$ splines.
+    * After this function the array will contain:
+    * nnz[0] = 0.
+    * nnz[1] = 0.
+    * nnz[2] = number of non-zero elements in line 0.
+    * nnz[3] = number of non-zero elements in lines 0-1.
+    * ...
+    * nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).
+    *
+    * @param[out]  nnz A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+    */
     void init_nnz_per_line(
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> nnz) const
     {
