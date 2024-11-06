@@ -104,6 +104,10 @@ This particular restriction comes from [Cuda](https://docs.nvidia.com/cuda/cuda-
 >
 > -  All enclosing classes must not have private or protected access within their respective parent classes.
 
+## The enclosing parent function for an extended '\_\_host\_\_' '\_\_device\_\_' lambda must allow its address to be taken
+
+Kokkos is bound by restrictions coming from various different low level languages. One of the most surprising of these is the fact that lambdas cannot be found in a function whose address cannot be taken. This includes private and protected class methods (which lead to the previous error message), but also class constructors. If you wish to put parallel loops in a class constructor, you will need to create a function for your loop and call that function from the constructor.
+
 ### Error Message
 
 When this rule is not followed you will see the following error message:
