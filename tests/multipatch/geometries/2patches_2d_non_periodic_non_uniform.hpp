@@ -12,9 +12,7 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include "connectivity.hpp"
 #include "edge.hpp"
-#include "interface.hpp"
 #include "patch.hpp"
 
 namespace non_periodic_non_uniform_2d_2patches {
@@ -122,25 +120,9 @@ using WestEdge
 
 
 // INTERFACES ------------------------------------------------------------------------------------
-using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-using SouthInterface1 = Interface<SouthEdge<1>, OutsideEdge, true>;
-using WestInterface1 = Interface<WestEdge<1>, OutsideEdge, true>;
-
-using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-using SouthInterface2 = Interface<SouthEdge<2>, OutsideEdge, true>;
-using EastInterface2 = Interface<EastEdge<2>, OutsideEdge, true>;
-
-using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
 
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
-using Connectivity = MultipatchConnectivity<
-        NorthInterface1,
-        SouthInterface1,
-        WestInterface1,
-        NorthInterface2,
-        SouthInterface2,
-        EastInterface2,
-        Interface_1_2>;
+
 
 } // namespace non_periodic_non_uniform_2d_2patches

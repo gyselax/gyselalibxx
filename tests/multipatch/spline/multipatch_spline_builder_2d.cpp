@@ -52,8 +52,6 @@ using MultipatchSplineBuilderXY = MultipatchSplineBuilder2D<
         BC,
         BC,
         BC,
-        BC,
-        Connectivity,
         ddc::SplineSolver::LAPACK,
         DConstFieldOnPatch,
         Patch1,

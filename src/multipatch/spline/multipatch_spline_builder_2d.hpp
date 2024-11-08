@@ -35,8 +35,6 @@
  * @tparam BcUpper1 The upper boundary condition on the first dimension.
  * @tparam BcLower2 The lower boundary condition on the second dimension.
  * @tparam BcUpper2 The upper boundary condition on the second dimension.
- * @tparam BcTransition The boundary condition used at the interface between 2 patches.
- * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
  * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
  * @tparam ValuesOnPatch A type alias which provides the field type which will be used to pass the values of the function
  *                      at the interpolation points. The index range of this field type should contain any batch dimensions.
@@ -56,8 +54,6 @@ template <
         ddc::BoundCond BcUpper1,
         ddc::BoundCond BcLower2,
         ddc::BoundCond BcUpper2,
-        ddc::BoundCond BcTransition,
-        class Connectivity,
         ddc::SplineSolver Solver,
         template <typename P>
         typename ValuesOnPatch,
@@ -112,18 +108,6 @@ class MultipatchSplineBuilder2D
     template <class Patch, class... Grid1D>
     struct Build_BuilderType<Patch, DConstField<IdxRange<Grid1D...>, MemorySpace>>
     {
-        using lower_matching_edge1 = equivalent_edge_t<
-                Edge<Patch, Grid1OnPatch<Patch>, FRONT>,
-                typename Connectivity::interface_collection>;
-        using upper_matching_edge1 = equivalent_edge_t<
-                Edge<Patch, Grid1OnPatch<Patch>, BACK>,
-                typename Connectivity::interface_collection>;
-        using lower_matching_edge2 = equivalent_edge_t<
-                Edge<Patch, Grid2OnPatch<Patch>, FRONT>,
-                typename Connectivity::interface_collection>;
-        using upper_matching_edge2 = equivalent_edge_t<
-                Edge<Patch, Grid2OnPatch<Patch>, BACK>,
-                typename Connectivity::interface_collection>;
         using type = ddc::SplineBuilder2D<
                 ExecSpace,
                 MemorySpace,
@@ -131,10 +115,10 @@ class MultipatchSplineBuilder2D
                 BSpline2OnPatch<Patch>,
                 Grid1OnPatch<Patch>,
                 Grid2OnPatch<Patch>,
-                std::is_same_v<lower_matching_edge1, OutsideEdge> ? BcLower1 : BcTransition,
-                std::is_same_v<upper_matching_edge1, OutsideEdge> ? BcUpper1 : BcTransition,
-                std::is_same_v<lower_matching_edge2, OutsideEdge> ? BcLower2 : BcTransition,
-                std::is_same_v<upper_matching_edge2, OutsideEdge> ? BcUpper2 : BcTransition,
+                BcLower1,
+                BcUpper1,
+                BcLower2,
+                BcUpper2,
                 Solver,
                 Grid1D...>;
     };

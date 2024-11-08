@@ -65,6 +65,32 @@ struct ConstantFuncCheck
 
         return abs(integral - expected_val);
     }
+
+    static double check_simpson_trapezoid_1d(Extremity trapezoid_extremity)
+    {
+        CoordXPeriod const x_min(0.0);
+        CoordXPeriod const x_max(1.0);
+        IdxStep<GridXPeriod> const x_size(5);
+
+        // Creating mesh & support
+        std::vector<CoordXPeriod> point_sampling
+                = build_random_non_uniform_break_points(x_min, x_max, x_size);
+        ddc::init_discrete_space<GridXPeriod>(point_sampling);
+        Idx<GridXPeriod> lbound(0);
+        IdxStep<GridXPeriod> npoints(x_size + 1);
+        IdxRange<GridXPeriod> gridx(lbound, npoints);
+
+        DFieldMemX quadrature_coeffs_alloc = simpson_trapezoid_quadrature_coefficients_1d<
+                Kokkos::DefaultExecutionSpace>(gridx, trapezoid_extremity);
+
+        Quadrature const integrate(get_const_field(quadrature_coeffs_alloc));
+
+        DFieldMemX values(gridx);
+        ddc::parallel_fill(get_field(values), 1.0);
+        double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
+        double expected_val = x_max - x_min;
+        return abs(integral - expected_val);
+    }
 };
 
 template <std::size_t N>
@@ -140,22 +166,32 @@ std::array<double, sizeof...(Is)> compute_errors_simpson(std::index_sequence<Is.
 
 TEST(TrapezoidNonUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
-    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::TRAPEZ), 1e-9);
+    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::TRAPEZ), 1e-11);
 }
 
 TEST(SimpsonNonUniformPeriodicQuadrature1D, ExactForConstantFunc)
 {
-    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::SIMPSON), 1e-9);
+    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::SIMPSON), 1e-11);
 }
 
 TEST(TrapezoidNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
 {
-    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::TRAPEZ), 1e-9);
+    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::TRAPEZ), 1e-11);
 }
 
 TEST(SimpsonNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
 {
-    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::SIMPSON), 1e-9);
+    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::SIMPSON), 1e-11);
+}
+
+TEST(SimpsonTrapezoidFrontNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<false>::check_simpson_trapezoid_1d(Extremity::FRONT), 1e-11);
+}
+
+TEST(SimpsonTrapezoidBackNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<false>::check_simpson_trapezoid_1d(Extremity::BACK), 1e-11);
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature1D, Convergence)

@@ -150,10 +150,10 @@ simpson_trapezoid_quadrature_coefficients_1d(
                     "trapezoid_region",
                     Kokkos::RangePolicy<ExecSpace>(0, 1),
                     KOKKOS_LAMBDA(const int i) {
-                        Idx<Grid1D> idx_r = idx_range.back();
-                        double dx_cell = distance_at_left(idx_r);
-                        coefficients(idx_r) = dx_cell;
-                        coefficients(idx_r - 1) += dx_cell;
+                        Idx<Grid1D> idx_l = idx_range.front();
+                        double dx_cell = 0.5 * distance_at_right(idx_l);
+                        coefficients(idx_l) = dx_cell;
+                        coefficients(idx_l + 1) += dx_cell;
                     });
         } else {
             fill_simpson_quadrature_coefficients_1d<ExecSpace>(
@@ -162,10 +162,10 @@ simpson_trapezoid_quadrature_coefficients_1d(
                     "trapezoid_region",
                     Kokkos::RangePolicy<ExecSpace>(0, 1),
                     KOKKOS_LAMBDA(const int i) {
-                        Idx<Grid1D> idx_l = idx_range.front();
-                        double dx_cell = distance_at_right(idx_l);
-                        coefficients(idx_l) = dx_cell;
-                        coefficients(idx_l + 1) += dx_cell;
+                        Idx<Grid1D> idx_r = idx_range.back();
+                        double dx_cell = 0.5 * distance_at_left(idx_r);
+                        coefficients(idx_r) = dx_cell;
+                        coefficients(idx_r - 1) += dx_cell;
                     });
         }
         return coefficients_alloc;
