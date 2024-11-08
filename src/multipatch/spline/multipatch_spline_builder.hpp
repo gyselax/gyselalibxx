@@ -31,6 +31,8 @@
  * @tparam GridOnPatch A type alias which provides the Grid type along which the interpolation points of the splines are found.
  * @tparam BcLower The lower boundary condition.
  * @tparam BcUpper The upper boundary condition.
+ * @tparam BcTransition The boundary condition used at the interface between 2 patches.
+ * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
  * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
  * @tparam ValuesOnPatch A type alias which provides the field type which will be used to pass the values of the function
  *                      at the interpolation points. The index range of this field type should contain any batch dimensions.
@@ -44,6 +46,8 @@ template <
         typename GridOnPatch,
         ddc::BoundCond BcLower,
         ddc::BoundCond BcUpper,
+        ddc::BoundCond BcTransition,
+        class Connectivity,
         ddc::SplineSolver Solver,
         template <typename P>
         typename ValuesOnPatch,
@@ -60,6 +64,10 @@ class MultipatchSplineBuilder
               || (ddc::is_non_uniform_point_sampling_v<GridOnPatch<Patches>>))
              && ...),
             "The GridOnPatch argument does not create 1D Grid objects.");
+
+    using PatchOrdering = ddc::detail::TypeSeq<Patches...>;
+    static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
+
     /**
      * A small structure allowing the multiple grids to be unpacked from a field and repacked into
      * a SplineBuilder type.
@@ -76,13 +84,20 @@ class MultipatchSplineBuilder
     template <class Patch, class... Grid1D>
     struct Build_BuilderType<Patch, DConstField<IdxRange<Grid1D...>, MemorySpace>>
     {
+        using lower_matching_edge = equivalent_edge_t<
+                Edge<Patch, GridOnPatch<Patch>, FRONT>,
+                typename Connectivity::interface_collection>;
+        using upper_matching_edge = equivalent_edge_t<
+                Edge<Patch, GridOnPatch<Patch>, BACK>,
+                typename Connectivity::interface_collection>;
+        static constexpr std::size_t patch_id = ddc::type_seq_rank_v<Patch, PatchOrdering>;
         using type = ddc::SplineBuilder<
                 ExecSpace,
                 MemorySpace,
                 BSplineOnPatch<Patch>,
                 GridOnPatch<Patch>,
-                BcLower,
-                BcUpper,
+                std::is_same_v<lower_matching_edge, OutsideEdge> ? BcLower : BcTransition,
+                std::is_same_v<upper_matching_edge, OutsideEdge> ? BcUpper : BcTransition,
                 Solver,
                 Grid1D...>;
     };

@@ -272,6 +272,8 @@ struct SwapExtremity<Edge<Patch, Grid1D, BACK>>
     using type = Edge<Patch, Grid1D, FRONT>;
 };
 
+} // namespace connectivity_details
+
 /**
  * @brief A utility to get the other edge in an interface.
  * @tparam StartEdge The edge whose equivalent we are looking for.
@@ -279,9 +281,10 @@ struct SwapExtremity<Edge<Patch, Grid1D, BACK>>
  *                  contain the start edge.
  */
 template <class StartEdge, class InterfaceTypeSeq>
-using equivalent_edge_t =
-        typename FindInterface<StartEdge, InterfaceTypeSeq>::type::template OtherEdge<StartEdge>;
+using equivalent_edge_t = typename connectivity_details::
+        FindInterface<StartEdge, InterfaceTypeSeq>::type::template OtherEdge<StartEdge>;
 
+namespace connectivity_details {
 /**
  * @brief An enumerate to help when inserting elements into a type sequence.
  */
