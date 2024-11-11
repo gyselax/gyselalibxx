@@ -26,6 +26,7 @@
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
+#include "math_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
@@ -39,7 +40,6 @@
 #include "spline_interpolator_2d_rp.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
-#include "utils_tools.hpp"
 #include "vortex_merger_equilibrium.hpp"
 #include "vortex_merger_initialization.hpp"
 

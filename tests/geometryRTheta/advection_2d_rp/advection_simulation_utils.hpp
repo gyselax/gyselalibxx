@@ -16,6 +16,7 @@
 #include "compute_norms.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
+#include "math_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "quadrature.hpp"
@@ -23,7 +24,6 @@
 #include "spline_quadrature.hpp"
 #include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"
-#include "utils_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

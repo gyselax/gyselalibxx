@@ -26,6 +26,7 @@
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
+#include "math_tools.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -40,7 +41,6 @@
 #include "spline_interpolator_2d_rp.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
-#include "utils_tools.hpp"
 
 
 

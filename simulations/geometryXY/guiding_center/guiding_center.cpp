@@ -18,6 +18,7 @@
 #include "geometry.hpp"
 #include "initialization_Kelvin_Helmholtz.hpp"
 #include "input.hpp"
+#include "math_tools.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -25,7 +26,6 @@
 #include "predcorr_RK2.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_interpolator.hpp"
-#include "utils_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

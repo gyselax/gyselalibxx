@@ -1,6 +1,6 @@
 /**
- * @file utils_tools.hpp
- * File Describing useful functions.
+ * @file math_tools.hpp
+ * File Describing useful mathematical functions.
  */
 
 #pragma once
