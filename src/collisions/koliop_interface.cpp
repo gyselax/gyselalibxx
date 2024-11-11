@@ -21,7 +21,6 @@ static inline constexpr std::int64_t mu_id
         = 0; // [TODO] Same than for pSpecies_id: must be deleted from the list of input
 static inline constexpr std::size_t the_local_idx_range_r_offset = 0;
 static inline constexpr std::size_t the_local_idx_range_theta_offset = 0;
-static inline constexpr double R0 = 1.0; //[TODO] Attention this should not be fixed.
 static inline constexpr std::int8_t SOL = false;
 static inline constexpr std::int8_t LIM = false;
 

@@ -6,7 +6,12 @@ constexpr char const* const params_yaml = R"PDI_CFG(
 InputFileNames:
   read_restart : GyselaX_twospecies16x32x128x64_00000.h5
   write_restart : GyselaX_twospecies16x32x128x64_00001.h5
- 
+
+Collisions:
+  interspecies = true
+  nustar0_rpeak = 0.
+  rhopeak = 0.5
+
 Algorithm:
   deltat: 0.125
   nbiter: 360

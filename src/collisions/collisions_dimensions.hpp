@@ -34,23 +34,23 @@ inline constexpr bool is_spoofed_dim_v = std::is_base_of_v<InternalSpoofGrid, Gr
 
 /**
  * Class to get the type of the radial dimension from a field containing a radial profile.
- * @tparam FieldMem The type of the field containing the radial profile.
+ * @tparam Field The type of the field containing the radial profile.
  */
-template <class FieldMem>
+template <class Field>
 struct ExtractRDim
 {
-    static_assert(!std::is_same_v<FieldMem, FieldMem>, "Unrecognised radial profile type");
+    static_assert(!std::is_same_v<Field, Field>, "Unrecognised radial profile type");
 };
 
 /**
  * Class to get the type of the poloidal dimension from a field containing a profile on the poloidal plane.
- * @tparam FieldMem The type of the field containing the profile on the poloidal plane.
+ * @tparam Field The type of the field containing the profile on the poloidal plane.
  * @tparam GridR The tag for the discrete radial dimension.
  */
-template <class FieldMem, class GridR>
+template <class Field, class GridR>
 struct ExtractThetaDim
 {
-    static_assert(!std::is_same_v<FieldMem, FieldMem>, "Unrecognised poloidal profile type");
+    static_assert(!std::is_same_v<Field, Field>, "Unrecognised poloidal profile type");
 };
 
 /**
@@ -80,7 +80,7 @@ inline IdxRange<Grid1D> get_1d_idx_range(IdxRangeFDistrib idx_range)
  * @returns The index range for the specific grid.
  */
 template <class... Grid1D, class IdxRangeFDistrib>
-inline IdxRange<Grid1D...> get_idx_range(IdxRangeFDistrib idx_range)
+inline IdxRange<Grid1D...> get_expanded_idx_range(IdxRangeFDistrib idx_range)
 {
     return IdxRange<Grid1D...>(get_1d_idx_range<Grid1D>(idx_range)...);
 }
@@ -172,6 +172,32 @@ struct ExtractThetaDim<Field<ElementType, IdxRange, MemSpace, Layout>, GridR>
     static_assert(
             (ddc::type_seq_size_v<ddc::to_type_seq_t<IdxRange>>) > 2,
             "The poloidal profile should not be defined on more than 2 dimensions.");
+};
+
+/**
+ * Class to get a DDC TypeSeq containing the input radial and theta tags.
+ * This is useful to construct other related input types.
+ *
+ * @tparam The type of the field containing the profile on the poloidal plane.
+ */
+template <class Field>
+struct ExtractRThetaTags
+{
+    static_assert(!std::is_same_v<Field, Field>, "Unrecognised poloidal profile type");
+};
+
+/// If the profile on the poloidal plane is stored in a double then there are no input tags
+template <>
+struct ExtractRThetaTags<double>
+{
+    using type = ddc::detail::TypeSeq<>;
+};
+
+/// If the profile on the poloidal plane is stored in a ConstField then the input tags are extracted from the index range
+template <class IdxRange>
+struct ExtractRThetaTags<DConstField<IdxRange>>
+{
+    using type = ddc::to_type_seq_t<IdxRange>;
 };
 
 /**

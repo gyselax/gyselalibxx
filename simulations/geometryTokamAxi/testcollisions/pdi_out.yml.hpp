@@ -90,6 +90,12 @@ metadata:
     subtype: double
     size: [ '$grid_tor2_extents[0]', '$grid_tor1_extents[0]' ]
 
+  #-- Magnetic config: safety_factor
+  safety_factor:
+    type: array
+    subtype: double
+    size: [ '$grid_tor1_extents[0]' ]
+
 data:
   densityTorCS:
     type: array
@@ -174,6 +180,7 @@ plugins:
         R_matrix: ~
         Z_matrix: ~
         normB_matrix: ~
+        safety_factor: ~
     
     #-- Read profiles
     - file: '${read_restart_filename}'
@@ -225,6 +232,7 @@ plugins:
        R_matrix: ~
        Z_matrix: ~
        normB_matrix: ~
+       safety_factor: ~
        densityTorCS: ~
        temperatureTorCS: ~
        UparTorCS: ~
