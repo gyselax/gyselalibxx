@@ -8,12 +8,13 @@
 
 #include <gtest/gtest.h>
 
-#include "compute_norms.hpp"
 #include "geometry.hpp"
+#include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "volume_quadrature_nd.hpp"
 
 
 
@@ -40,7 +41,7 @@ void check_norm_L1(
         double const expected_norm,
         double const TOL)
 {
-    double const norm_function = compute_L1_norm(quadrature, function);
+    double const norm_function = norm_L1(Kokkos::DefaultHostExecutionSpace(), quadrature, function);
     std::cout << "  > error on L1 norm = " << fabs(norm_function - expected_norm) << std::endl;
     EXPECT_NEAR(norm_function, expected_norm, TOL);
 }
@@ -68,7 +69,7 @@ void check_norm_L2(
         double const expected_norm,
         double const TOL)
 {
-    double const norm_function = compute_L2_norm(quadrature, function);
+    double const norm_function = norm_L2(Kokkos::DefaultHostExecutionSpace(), quadrature, function);
     std::cout << "  > error on L2 norm = " << fabs(norm_function - expected_norm) << std::endl;
     EXPECT_NEAR(norm_function, expected_norm, TOL);
 }
@@ -131,6 +132,7 @@ void launch_tests(
     // Test spline quadrature: ------------------------------------------------------------------------
     // Instantiate a quadrature with coefficients where we added the Jacobian determinant.
     host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
+            Kokkos::DefaultHostExecutionSpace(),
             mapping,
             spline_quadrature_coefficients<
                     Kokkos::DefaultHostExecutionSpace>(grid, r_builder, p_builder));

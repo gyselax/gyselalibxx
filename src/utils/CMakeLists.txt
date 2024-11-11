@@ -11,6 +11,7 @@ target_link_libraries("utils"
     INTERFACE
         DDC::DDC
         gslx::data_types
+        gslx::quadrature
 )
 
 add_library("gslx::utils" ALIAS "utils")

@@ -13,7 +13,6 @@
 #include <sll/polar_spline_evaluator.hpp>
 
 #include "bsl_advection_rp.hpp"
-#include "compute_norms.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "math_tools.hpp"
@@ -26,6 +25,7 @@
 #include "trapezoid_quadrature.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "volume_quadrature_nd.hpp"
 
 namespace fs = std::filesystem;
 
@@ -221,13 +221,17 @@ double compute_difference_L2_norm(
     });
 
     host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
+            Kokkos::DefaultHostExecutionSpace(),
             mapping,
             trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(grid));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
 
-    double const normL2_exact_function = compute_L2_norm(quadrature, get_field(exact_function));
-    double const normL2_difference_function
-            = compute_L2_norm(quadrature, get_field(difference_function));
+    double const normL2_exact_function
+            = norm_L2(Kokkos::DefaultHostExecutionSpace(), quadrature, get_field(exact_function));
+    double const normL2_difference_function = norm_L2(
+            Kokkos::DefaultHostExecutionSpace(),
+            quadrature,
+            get_field(difference_function));
 
     return normL2_difference_function / normL2_exact_function;
 }

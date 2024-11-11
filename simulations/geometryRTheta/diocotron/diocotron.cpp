@@ -19,7 +19,6 @@
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
-#include "compute_norms.hpp"
 #include "crank_nicolson.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "diocotron_initialization_equilibrium.hpp"
