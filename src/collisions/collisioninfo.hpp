@@ -17,15 +17,7 @@ class CollisionInfo
     // read in the YAML input file
     std::int8_t m_collisions_interspecies;
 
-    // [TODO] Values that are temporarily needed for the interface with koliop
-    // but that will be deleted as soon as they are no longer required
-    // rg fixed to 1. => because already included in nustar
-    double const m_rpeak = 1.;
-    double const m_rg = 1.;
-    // safety factor fixed to 1. => because already included in nustar
-    double const m_q_rpeak = 1.;
-    double const m_safety_factor = 1.;
-    // AD coefficient
+    // AD coefficient almost equivalent to the collision frequency
     double m_coeff_AD;
 
 public:
@@ -46,6 +38,14 @@ public:
             throw std::invalid_argument("nustar0 must be equal to 1");
         }
 
+        /**
+         * Computation of the radial profile of ADi that is required for koliop interface
+         *  @f[ AD(rpeak) = \sqrt(2)*eps_rpeak^(3/2)/(q_rpeak R0)*nustar0_rpeak @f]
+         * eps_rpeak = eps(rpeak) with eps(r) = r/R0 is the aspect ratio.
+         * 
+         * In this specific case, where AD is a scalar all values are forced to 1, so 
+         *   coeff_AD_atrpeak = sqrt(2)
+         **/
         m_coeff_AD = Kokkos::sqrt(2.);
     };
 
@@ -58,33 +58,6 @@ public:
     std::int8_t collisions_interspecies() const
     {
         return m_collisions_interspecies;
-    }
-
-    /**
-     * @brief A method for accessing the rg variable of the class.
-     * @return A double containing the rg value. 
-     */
-    double rg() const
-    {
-        return m_rg;
-    }
-
-    /**
-     * @brief A method for accessing the safety factor variable of the class.
-     * @return A double containing the safety factor value. 
-     */
-    double safety_factor() const
-    {
-        return m_safety_factor;
-    }
-
-    /**
-     * @brief A method for accessing the nustar0 variable of the class.
-     * @return A double containing the nustar0 value. 
-     */
-    double nustar0() const
-    {
-        return m_nustar0;
     }
 
     /**

@@ -8,6 +8,7 @@
 
 #include "ddc_helper.hpp"
 #include "paraconfpp.hpp"
+#include "pdi_helper.hpp"
 #include "species_info.hpp"
 
 /**
@@ -43,3 +44,9 @@ void init_species_withfluid(
         IdxRangeSp& idx_range_kinsp,
         IdxRangeSp& idx_range_fluidsp,
         PC_tree_t conf_voicexx);
+
+/**
+ * @brief Initialise the kinetic species domain 
+ * @return the kinetic species domain 
+ */
+IdxRangeSp init_kinetic_species();

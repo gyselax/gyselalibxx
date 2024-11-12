@@ -162,6 +162,20 @@ using SplineVparEvaluator = ddc::SplineEvaluator<
         GridVpar,
         GridMu>;
 
+using SplineMuBuilder = ddc::SplineBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplinesMu,
+        GridMu,
+        SplineMuBoundary,
+        SplineMuBoundary,
+        ddc::SplineSolver::LAPACK,
+        Species,
+        GridTheta,
+        GridR,
+        GridVpar,
+        GridMu>;
+
 // Idx = index of the point in the point sampling
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
@@ -173,6 +187,8 @@ using IdxV2DTor2D = Idx<GridVpar, GridMu, GridTheta, GridR>;
 using IdxSpTor2D = Idx<Species, GridTheta, GridR>;
 using IdxSpV2D = Idx<Species, GridVpar, GridMu>;
 using IdxSpV2DTor2D = Idx<Species, GridVpar, GridMu, GridTheta, GridR>;
+using IdxSpTor2DV2D = Idx<Species, GridTheta, GridR, GridVpar, GridMu>;
+using IdxSpTor2DVpar = Idx<Species, GridTheta, GridR, GridVpar>;
 
 // IdxStep = number of grid points between points in a sampling
 using IdxStepR = IdxStep<GridR>;
@@ -199,6 +215,7 @@ using IdxRangeSpV2D = IdxRange<Species, GridVpar, GridMu>;
 using IdxRangeSpV2DTor2D = IdxRange<Species, GridVpar, GridMu, GridTheta, GridR>;
 using IdxRangeTor2DV2D = IdxRange<GridTheta, GridR, GridVpar, GridMu>;
 using IdxRangeSpTor2DV2D = IdxRange<Species, GridTheta, GridR, GridVpar, GridMu>;
+using IdxRangeSpTor2DVpar = IdxRange<Species, GridTheta, GridR, GridVpar>;
 
 // template for the fields
 // --> For FieldMem template
@@ -250,6 +267,10 @@ template <class ElementType>
 using FieldMemSpTor2DV2D = FieldMem<ElementType, IdxRangeSpTor2DV2D>;
 using DFieldMemSpTor2DV2D = FieldMemSpTor2DV2D<double>;
 
+template <class ElementType>
+using FieldMemSpTor2DVpar = FieldMem<ElementType, IdxRangeSpTor2DVpar>;
+using DFieldMemSpTor2DVpar = FieldMemSpTor2DVpar<double>;
+
 // --> For Field template
 template <class ElementType>
 using FieldR = Field<ElementType, IdxRangeR>;
@@ -298,6 +319,10 @@ using DFieldSpV2DTor2D = FieldSpV2DTor2D<double>;
 template <class ElementType>
 using FieldSpTor2DV2D = Field<ElementType, IdxRangeSpTor2DV2D>;
 using DFieldSpTor2DV2D = FieldSpTor2DV2D<double>;
+
+template <class ElementType>
+using FieldSpTor2DVpar = Field<ElementType, IdxRangeSpTor2DVpar>;
+using DFieldSpTor2DVpar = FieldSpTor2DVpar<double>;
 
 // --> For ConstField template
 template <class ElementType>
@@ -348,7 +373,15 @@ template <class ElementType>
 using ConstFieldSpTor2DV2D = ConstField<ElementType, IdxRangeSpTor2DV2D>;
 using DConstFieldSpTor2DV2D = ConstFieldSpTor2DV2D<double>;
 
+template <class ElementType>
+using ConstFieldSpTor2DVpar = ConstField<ElementType, IdxRangeSpTor2DVpar>;
+using DConstFieldSpTor2DVpar = ConstFieldSpTor2DVpar<double>;
+
 // --> For fields on host
+template <class ElementType>
+using FieldMemR_host = host_t<FieldMem<ElementType, IdxRangeR>>;
+using DFieldMemR_host = FieldMemR_host<double>;
+
 template <class ElementType>
 using FieldMemTor2D_host = host_t<FieldMem<ElementType, IdxRangeTor2D>>;
 using DFieldMemTor2D_host = FieldMemTor2D_host<double>;

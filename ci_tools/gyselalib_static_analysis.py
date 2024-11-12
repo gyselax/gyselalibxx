@@ -360,7 +360,7 @@ def search_for_bad_aliases(file):
                    "can be multi-D. Please use Grid1D")
             report_error(STYLE, file, linenr, msg)
         # Beginning with verbs is ok as are some specific prefixes
-        valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find')
+        valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx')
         if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
             prefix = 'Multipatch' if 'Multipatch' in a_name else ''
             name = a_name.replace('Multipatch','')

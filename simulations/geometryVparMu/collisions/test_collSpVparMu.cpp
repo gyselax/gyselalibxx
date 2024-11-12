@@ -86,6 +86,10 @@ int main(int argc, char** argv)
     // --------- OPERATOR INITIALISATION ---------
     // ---> Initialisation of the Collision operator
     double const B_norm = 1.0;
+    IdxRangeSpVpar idxrange_spvpar(idxrange_spvparmu);
+    DFieldMemSpVpar Bstar_s_alloc(idxrange_spvpar);
+    DFieldSpVpar Bstar_s(get_field(Bstar_s_alloc));
+    ddc::parallel_fill(Bstar_s, 1.);
 
     SplineVparBuilder const builder_vpar(idxrange_vpar);
     DFieldMemVpar const coeff_intdvpar(neumann_spline_quadrature_coefficients<
@@ -99,7 +103,8 @@ int main(int argc, char** argv)
             idxrange_spvparmu,
             get_const_field(coeff_intdmu),
             get_const_field(coeff_intdvpar),
-            B_norm);
+            B_norm,
+            Bstar_s);
 
     // --------- TIME ITERATION ---------
     // ---> Reading of algorithm info from input YAML file
