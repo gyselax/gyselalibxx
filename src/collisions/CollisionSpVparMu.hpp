@@ -27,13 +27,6 @@ private:
     using GridR = typename collisions_dimensions::ExtractRDim<InputDFieldR>::type;
     using GridTheta =
             typename collisions_dimensions::ExtractThetaDim<InputDFieldThetaR, GridR>::type;
-    using InputThetaRTags =
-            typename collisions_dimensions::ExtractRThetaTags<InputDFieldThetaR>::type;
-    using InputSpThetaRVparTags = ddc::type_seq_merge_t<
-            ddc::detail::TypeSeq<Species>,
-            ddc::type_seq_merge_t<InputThetaRTags, ddc::detail::TypeSeq<GridVpar>>>;
-    using InputIdxRangeSpThetaRVpar
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<InputSpThetaRVparTags>;
 
     // Validate template types
     static_assert(ddc::is_discrete_domain_v<IdxRangeFDistrib>);
@@ -70,25 +63,17 @@ private:
             "Vpar, Mu)");
 
 public:
-    /// Type alias for a field on a grid of (species, theta, r, vpar) or a subset
-    using InputDFieldSpThetaRVpar = DConstField<InputIdxRangeSpThetaRVpar>;
-
     /// Type alias for the index range of the radial points
     using IdxRangeR = IdxRange<GridR>;
     /// Type alias for the index range of the poloidal plane
     using IdxRangeThetaR = IdxRange<GridTheta, GridR>;
     /// Type alias for the index range containing (species, theta, r, vpar)
     using IdxRangeSpThetaRVpar = IdxRange<Species, GridTheta, GridR, GridVpar>;
+
     /// Type alias for the index range of the magnetic moment.
     using IdxRangeMu = IdxRange<GridMu>;
     /// Type alias for the index range of the velocity parallel to the magnetic field.
     using IdxRangeVpar = IdxRange<GridVpar>;
-
-    /// Type alias for the index of the poloidal plane
-    using IdxThetaR = Idx<GridTheta, GridR>;
-    /// Type alias for the index containing (species, theta, r, vpar)
-    using IdxSpThetaRVpar = Idx<Species, GridTheta, GridR, GridVpar>;
-
     /// Type alias for a field memory block on a grid of radial values
     using DFieldMemR = DFieldMem<IdxRangeR>;
     /// Type alias for a field memory block on a grid of magnetic moments
@@ -103,8 +88,6 @@ public:
     using DFieldR = DField<IdxRangeR>;
     /// Type alias for a field defined on a grid on a poloidal plane
     using DFieldThetaR = DField<IdxRangeThetaR>;
-    /// Type alias for a field on a grid of species, poloidal plane and parallel velocities
-    using DFieldSpThetaRVpar = DField<IdxRangeSpThetaRVpar>;
     /// Type alias for a constant field on GPU defined on a grid of magnetic moments.
     using DConstFieldMu = DConstField<
             IdxRangeMu,
@@ -129,10 +112,8 @@ private:
     void deepcopy_radial_profile(DFieldR dst, InputDFieldR src)
     {
         if constexpr (collisions_dimensions::is_spoofed_dim_v<GridR>) {
-            // If InputDFieldR is a double because R is not provided
             ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), dst, src);
         } else {
-            // If InputDFieldR and DFieldR are the same type
             ddc::parallel_deepcopy(dst, src);
         }
     }
@@ -150,11 +131,9 @@ public:
     {
         if constexpr ((collisions_dimensions::is_spoofed_dim_v<GridR>)&&(
                               collisions_dimensions::is_spoofed_dim_v<GridTheta>)) {
-            // If InputDFieldThetaR is a double because R and Theta are not provided
             ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), dst, src);
         } else if constexpr ((!collisions_dimensions::is_spoofed_dim_v<GridR>)&&(
                                      !collisions_dimensions::is_spoofed_dim_v<GridTheta>)) {
-            // If InputDFieldThetaR and DFieldThetaR are the same type
             ddc::parallel_deepcopy(dst, src);
         } else {
             using NonSpoofDim = std::
@@ -168,37 +147,13 @@ public:
         }
     }
 
-    /**
-     * @brief Copy the information in src (received as an input to the class) into a 4D field defined
-     * over (species, theta, r, vpar).
-     * This function should be private but is public due to Kokkos restrictions.
-     *
-     * @param[in] src The source from which the data is copied.
-     * @param[out] dst The destination into which the data is copied.
-     */
-    void deepcopy_Bstar(DFieldSpThetaRVpar dst, InputDFieldSpThetaRVpar src)
-    {
-        if constexpr (std::is_same_v<DFieldSpThetaRVpar, InputDFieldSpThetaRVpar>) {
-            ddc::parallel_deepcopy(dst, src);
-        } else {
-            using InputIdxSpThetaRVpar = typename InputIdxRangeSpThetaRVpar::discrete_element_type;
-            ddc::parallel_for_each(
-                    Kokkos::DefaultExecutionSpace(),
-                    get_idx_range(dst),
-                    KOKKOS_LAMBDA(IdxSpThetaRVpar idx) {
-                        InputIdxSpThetaRVpar src_idx(idx);
-                        dst(idx) = src(src_idx);
-                    });
-        }
-    }
-
 public:
     /**
      * @brief Create instance of CollisionSpVparMu class
      *
      * @param[in] collision_info
      *      class containing rg, safety_factor, nustar0 and coeff_AD 
-     * @param[in] idxrange_fdistrib
+     * @param[in] fdistrib_idx_range
      *      index range (species, 3D space, 2D velocity space) on which the collision operator acts
      *      ATTENTION it must contain the all index range in species and 2D velocity.
      * @param[in] coeff_intdmu
@@ -207,34 +162,31 @@ public:
      *      quadrature coefficient in vpar direction
      * @param[in] B_norm
      *      magnetic field norm in (r,theta)
-     * @param[in] Bstar_s 
-     *      Bstar value for each species in (r,theta,vpar)
      */
     CollisionSpVparMu(
             CollInfo const& collision_info,
-            IdxRangeFDistrib idxrange_fdistrib,
+            IdxRangeFDistrib fdistrib_idx_range,
             DConstFieldMu coeff_intdmu,
             DConstFieldVpar coeff_intdvpar,
-            InputDFieldThetaR B_norm,
-            InputDFieldSpThetaRVpar Bstar_s)
+            InputDFieldThetaR B_norm)
         : m_operator_handle {}
-        , m_hat_As {"m_hat_As", collisions_dimensions::get_expanded_idx_range<Species>(idxrange_fdistrib)}
-        , m_hat_Zs {"m_hat_Zs", collisions_dimensions::get_expanded_idx_range<Species>(idxrange_fdistrib)}
-        , m_mask_buffer_r {"m_mask_buffer_r", collisions_dimensions::get_expanded_idx_range<GridR>(idxrange_fdistrib)}
-        , m_mask_LIM {"m_mask_LIM", IdxRangeThetaR {collisions_dimensions::get_expanded_idx_range<GridTheta, GridR>(idxrange_fdistrib)}}
-        , m_B_norm {"m_B_norm", IdxRangeThetaR {collisions_dimensions::get_expanded_idx_range<GridTheta, GridR>(idxrange_fdistrib)}}
-        , m_Bstar_s {"m_Bstar_s", IdxRangeSpThetaRVpar {collisions_dimensions::get_expanded_idx_range<Species, GridTheta, GridR, GridVpar>(idxrange_fdistrib)}}
-        , m_coeff_AD {"m_coeff_AD", collisions_dimensions::get_expanded_idx_range<GridR>(idxrange_fdistrib)}
-        , m_mug {"m_mug", ddc::select<GridMu>(idxrange_fdistrib)}
-        , m_vparg {"m_vparg", ddc::select<GridVpar>(idxrange_fdistrib)}
+        , m_hat_As {"m_hat_As", collisions_dimensions::get_idx_range<Species>(fdistrib_idx_range)}
+        , m_hat_Zs {"m_hat_Zs", collisions_dimensions::get_idx_range<Species>(fdistrib_idx_range)}
+        , m_coeff_AD {"m_coeff_AD", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
+        , m_mask_buffer_r {"m_mask_buffer_r", collisions_dimensions::get_idx_range<GridR>(fdistrib_idx_range)}
+        , m_mask_LIM {"m_mask_LIM", IdxRangeThetaR {collisions_dimensions::get_idx_range<GridTheta, GridR>(fdistrib_idx_range)}}
+        , m_B_norm {"m_B_norm", IdxRangeThetaR {collisions_dimensions::get_idx_range<GridTheta, GridR>(fdistrib_idx_range)}}
+        , m_Bstar_s {"m_Bstar_s", IdxRangeSpThetaRVpar {collisions_dimensions::get_idx_range<Species, GridTheta, GridR, GridVpar>(fdistrib_idx_range)}}
+        , m_mug {"m_mug", ddc::select<GridMu>(fdistrib_idx_range)}
+        , m_vparg {"m_vparg", ddc::select<GridVpar>(fdistrib_idx_range)}
     {
-        IdxRangeVpar idxrange_vpar(idxrange_fdistrib);
+        IdxRangeVpar idxrange_vpar(fdistrib_idx_range);
         if (idxrange_vpar.size() % 2 != 0) {
             throw std::runtime_error("The number of points in the vpar direction must be a "
                                      "multiple of 2. This ensures that there is no grid point at "
                                      "vpar=0 (this would cause division by 0).");
         }
-        IdxRangeSp idxrange_sp(idxrange_fdistrib);
+        IdxRangeSp idxrange_sp(fdistrib_idx_range);
         // --> Initialize the mass species
         host_t<DConstFieldSp> hat_As_host
                 = ddc::host_discrete_space<Species>().masses()[idxrange_sp];
@@ -245,9 +197,8 @@ public:
         ddc::parallel_deepcopy(get_field(m_hat_Zs), hat_Zs_host);
 
         // --> Initialize the other quantities needed in koliop
-        deepcopy_radial_profile(get_field(m_coeff_AD), collision_info.coeff_AD());
-        deepcopy_poloidal_plane(get_field(m_B_norm), B_norm);
-        deepcopy_Bstar(get_field(m_Bstar_s), Bstar_s);
+        // TODO: Put Bstar_s as an input variable of the constructor (something more specific than what is done for B_norm must be done)
+        ddc::parallel_fill(get_field(m_Bstar_s), 1.0);
 
         // --> Initialization of the masks that have no sense here to 0.
         ddc::parallel_fill(get_field(m_mask_buffer_r), 0.0); // Masked if >= 0.99
@@ -260,13 +211,16 @@ public:
         // NOTE: We need to fence because DumpCoordinates is asynchronous on GPUs.
         Kokkos::fence();
 
-        std::size_t const n_mu = ddc::select<GridMu>(idxrange_fdistrib).size();
+        std::size_t const n_mu = ddc::select<GridMu>(fdistrib_idx_range).size();
         std::size_t const n_vpar = idxrange_vpar.size();
-        std::size_t const n_r = get_idx_range<GridR>(m_mask_buffer_r).size();
-        std::size_t const n_theta = get_idx_range<GridTheta>(m_B_norm).size();
+        std::size_t const n_r = ::get_idx_range<GridR>(m_mask_buffer_r).size();
+        std::size_t const n_theta = ::get_idx_range<GridTheta>(m_B_norm).size();
         std::size_t const n_sp = idxrange_sp.size();
         std::size_t const n_batch
-                = idxrange_fdistrib.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
+                = fdistrib_idx_range.size() / (n_mu * n_vpar * n_r * n_theta * n_sp);
+
+        deepcopy_radial_profile(get_field(m_coeff_AD), collision_info.coeff_AD());
+        deepcopy_poloidal_plane(get_field(m_B_norm), B_norm);
 
         m_operator_handle = koliop_interface::DoOperatorInitialization(
                 n_mu,

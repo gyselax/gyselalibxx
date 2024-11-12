@@ -13,7 +13,6 @@ template <class GridR>
 class CollisionInfoRadial
 {
 private:
-    using IdxR = Idx<GridR>;
     using IdxRangeR = IdxRange<GridR>;
 
 public:
@@ -38,76 +37,130 @@ private:
     // but that will be deleted as soon as no more required
     double const m_rpeak;
     double const m_q_rpeak;
-    double const m_R0;
+    DConstFieldR m_rg;
+    DConstFieldR m_safety_factor;
 
-    DConstFieldR m_rg; //VG ?
-    DConstFieldR m_safety_factor; //VG?
+    /// radial profile of nustar0
+    DFieldMemR m_nustar0;
 
     /// radial coefficients of AD
     DFieldMemR m_coeff_AD;
 
 public:
     /**
-     * Computation of the radial profile of AD
-     *  @f[ AD(rpeak) = \sqrt(2)*eps_rpeak^(3/2)/(q_rpeak R0)*nustar0_rpeak @f]
-     * where R0, q_rpeak, nustar0_rpeak are given as input data and
-     * eps_rpeak = eps(rpeak) with eps(r) = r/R0 is the aspect ratio.
-     * 
-     * @param[in] idxrange_r radial index range
+     * Computation of the radial profile of nustar0 as
+     *  @f[ nustar0(r) = nustar0(rp) * q(r)/q(rp)*(rp/r)^{3/2} @f]
+     * where rp is equal to rpeak and where nustar0(rp) is given as input data.
      * 
      * This function should be private but is public due to Kokkos restrictions.
     */
-    void compute_coeff_AD(IdxRangeR idxrange_r)
+    void compute_nustar0()
     {
         double const rpeak = m_rpeak;
         double const q_rpeak = m_q_rpeak;
-        double const R0 = m_R0;
+        DConstFieldR radial_profile = get_const_field(m_rg);
+        DConstFieldR safety_factor = get_const_field(m_safety_factor);
         double const nustar0_rpeak = m_nustar0_rpeak;
 
-        // Compute coeff_AD_rpeak
-        DFieldR coeff_AD = get_field(m_coeff_AD);
-        double const eps_rpeak = rpeak / R0;
-        double const coeff_AD_rpeak
-                = std::sqrt(2.) * eps_rpeak * std::sqrt(eps_rpeak) * nustar0_rpeak / (q_rpeak * R0);
-
-        // [TODO] coeff_AD should be a scalar and not a radial profile
-        //  but to change that koliop interface must be changed
-        //  so coeff_AD(r) is fixed equal to coeff_AD_rpeak
+        DFieldR nustar0 = get_field(m_nustar0);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                idxrange_r,
-                KOKKOS_LAMBDA(Idx<GridR> idx_r) { coeff_AD(idx_r) = coeff_AD_rpeak; });
+                get_idx_range(radial_profile),
+                KOKKOS_LAMBDA(Idx<GridR> idx) {
+                    double rpeak_on_r = rpeak / radial_profile(idx);
+                    double q_on_qrpeak = safety_factor(idx) / q_rpeak;
+                    nustar0(idx)
+                            = nustar0_rpeak * q_on_qrpeak * rpeak_on_r * Kokkos::sqrt(rpeak_on_r);
+                });
+    }
+
+    /**
+     * Computation of the radial profile of AD
+     *  @f[ AD(r) = \sqrt(2)*eps^(3/2)/(q R0)*nustar0_r(r) @f]
+     * where R0, q(r), nustar0(r) are given as input data and
+     * eps = r/R0 is the aspect ratio.
+     * 
+     * This function should be private but is public due to Kokkos restrictions.
+    */
+    void compute_coeff_AD()
+    {
+        double const R0 = 1.; //TODO: Must be imported
+        DConstFieldR radial_profile = get_const_field(m_rg);
+        DConstFieldR safety_factor = get_const_field(m_safety_factor);
+        DConstFieldR nustar0 = get_const_field(m_nustar0);
+
+        DFieldR coeff_AD = get_field(m_coeff_AD);
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                get_idx_range(radial_profile),
+                KOKKOS_LAMBDA(Idx<GridR> idx) {
+                    double eps = radial_profile(idx) / R0;
+                    coeff_AD(idx) = Kokkos::sqrt(2.) * eps * Kokkos::sqrt(eps) * nustar0(idx)
+                                    / (safety_factor(idx) * R0);
+                });
     }
 
 public:
     /**
      * @brief The constructor for the CollisionInfoRadial class.
-     * @param[in] rpeak the radial reference position r = rpeak
-     * @param[in] q_rpeak the safety factor value at r = rpeak
-     * @param[in] R0 the major radius at the magnetic axis
-     * @param[in] nustar0_rpeak the value of nustar at r = rpeak
-     * @param[in] collisions_interspecies logical value equal to true if interspecies collisions are taken into account
-     * @param[in] idxrange_r radial index range
+     * @param[in] yaml_input_file YAML input file containing CollisionsInfo
+     * @param[in] rpeak radial position of the gradient
+     * @param[in] q_rpeak safety factor value at r=rpeak
+     * @param[in] radial_profile value of the grid points in the radial direction
+     * @param[in] safety_factor radial profile of the safety factor
      */
     CollisionInfoRadial(
+            PC_tree_t const& yaml_input_file,
             double const rpeak,
             double const q_rpeak,
-            double const R0,
+            DConstFieldR radial_profile,
+            DConstFieldR safety_factor)
+        : m_nustar0_rpeak {PCpp_double(yaml_input_file, ".CollisionsInfo.nustar0_rpeak")}
+        , m_collisions_interspecies {PCpp_bool(
+                  yaml_input_file,
+                  ".CollisionsInfo.collisions_interspecies")}
+        , m_rpeak(rpeak)
+        , m_q_rpeak(q_rpeak)
+        , m_rg(radial_profile)
+        , m_safety_factor(safety_factor)
+        , m_nustar0(get_idx_range(radial_profile))
+        , m_coeff_AD(get_idx_range(radial_profile))
+    {
+        compute_nustar0();
+        compute_coeff_AD();
+    };
+
+    /**
+     * @brief The constructor for the CollisionInfoRadial class.
+     * @param[in] nustar0_rpeak value of nustar0 at r=rpeak
+     * @param[in] collisions_interspecies
+     *     boolean that is equal to true if inter-species collisions are taken into account
+     * @param[in] rpeak radial position of the gradient
+     * @param[in] q_rpeak safety factor value at r=rpeak
+     * @param[in] radial_profile value of the grid points in the radial direction
+     * @param[in] safety_factor radial profile of the safety factor
+     */
+    CollisionInfoRadial(
             double const nustar0_rpeak,
             std::int8_t const collisions_interspecies,
-            IdxRangeR idxrange_r)
-        : m_rpeak(rpeak)
-        , m_q_rpeak(q_rpeak)
-        , m_R0(R0)
-        , m_nustar0_rpeak(nustar0_rpeak)
+            double const rpeak,
+            double const q_rpeak,
+            DConstFieldR radial_profile,
+            DConstFieldR safety_factor)
+        : m_nustar0_rpeak(nustar0_rpeak)
         , m_collisions_interspecies(collisions_interspecies)
-        , m_coeff_AD(idxrange_r)
+        , m_rpeak(rpeak)
+        , m_q_rpeak(q_rpeak)
+        , m_rg(radial_profile)
+        , m_safety_factor(safety_factor)
+        , m_nustar0(get_idx_range(radial_profile))
+        , m_coeff_AD(get_idx_range(radial_profile))
     {
-        compute_coeff_AD(idxrange_r);
+        compute_nustar0();
+        compute_coeff_AD();
     };
 
     ~CollisionInfoRadial() = default;
-
 
     /**
      * @brief A method for accessing the collisions_interspecies member variable of the class.
@@ -118,6 +171,32 @@ public:
         return m_collisions_interspecies;
     }
 
+    /**
+     * @brief A method for accessing the radial profile variable of the class.
+     * @return A field containing the radial profile of the grid. 
+     */
+    DConstFieldR rg() const
+    {
+        return m_rg;
+    }
+
+    /**
+     * @brief A method for accessing the safety factor variable of the class.
+     * @return A field containing the radial profile of the safety_factor. 
+     */
+    DConstFieldR safety_factor() const
+    {
+        return m_safety_factor;
+    }
+
+    /**
+     * @brief A method for accessing nustar0_r (the radial profile of nustar0) variable of the class.
+     * @return A field containing the radial profile of nustar0.
+     */
+    DConstFieldR nustar0() const
+    {
+        return m_nustar0;
+    }
 
     /**
      * @brief A method for accessing coeff_AD (the radial profile of AD coeff) variable of the class.

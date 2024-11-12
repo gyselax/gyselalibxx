@@ -128,7 +128,7 @@ public:
      * @brief Get the number of objects stored inside the class. This is equal to the number of patches.
      * @return Number of elements stored in the tuple of the class.
      */
-    std::size_t size() const
+    static constexpr std::size_t size()
     {
         return sizeof...(Patches);
     }

@@ -72,6 +72,10 @@ public:
     /// The type of the elements inside the field.
     using element_type = typename base_type::example_element::element_type;
 
+    /// The type used to index the field on the specified patch.
+    template <class Patch>
+    using idx_type = typename InternalIdxRangeOnPatch<Patch>::discrete_element_type;
+
 public:
     /**
      * Instantiate the MultipatchField class from an arbitrary number of objects.

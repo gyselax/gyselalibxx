@@ -48,7 +48,7 @@ parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_r
 HOME_DIR = Path(__file__).parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
 
-auto_functions = set(['build_kokkos_layout'])
+auto_functions = set(['build_kokkos_layout', 'get'])
 field_mem_functions = set()
 
 def report_error(level, file, linenr, message):
@@ -360,7 +360,7 @@ def search_for_bad_aliases(file):
                    "can be multi-D. Please use Grid1D")
             report_error(STYLE, file, linenr, msg)
         # Beginning with verbs is ok as are some specific prefixes
-        valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx')
+        valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find')
         if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
             prefix = 'Multipatch' if 'Multipatch' in a_name else ''
             name = a_name.replace('Multipatch','')
@@ -733,7 +733,7 @@ def check_exec_space_usage(file):
                     while code_keys[idx+1] == '::':
                         func += '::' + code_keys[idx+2]
                         idx += 2
-                if func and func not in exception_keys:
+                if func and func not in exception_keys and not func.endswith('_t'):
                     msg = f"Std functions are not designed to run on GPU. You may wish to check if there is an equivalent Kokkos:: function? ({func})"
                     report_error(FATAL, file, relevant_code[idx].attrib['linenr'], msg)
 

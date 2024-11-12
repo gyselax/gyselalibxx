@@ -119,7 +119,6 @@ using IdxVpar = Idx<GridVpar>;
 using IdxMu = Idx<GridMu>;
 using IdxVparMu = Idx<GridVpar, GridMu>;
 using IdxSpVparMu = Idx<Species, GridVpar, GridMu>;
-using IdxSpVpar = Idx<Species, GridVpar>;
 
 // IdxStep = number of grid points between points in a sampling
 using IdxStepVpar = IdxStep<GridVpar>;
@@ -132,7 +131,6 @@ using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
 using IdxRangeVparMu = IdxRange<GridVpar, GridMu>;
 using IdxRangeSpVparMu = IdxRange<Species, GridVpar, GridMu>;
-using IdxRangeSpVpar = IdxRange<Species, GridVpar>;
 
 // template for the fields
 template <class ElementType>
@@ -152,10 +150,6 @@ using FieldMemSpVparMu = FieldMem<ElementType, IdxRangeSpVparMu>;
 using DFieldMemSpVparMu = FieldMemSpVparMu<double>;
 
 template <class ElementType>
-using FieldMemSpVpar = FieldMem<ElementType, IdxRangeSpVpar>;
-using DFieldMemSpVpar = FieldMemSpVpar<double>;
-
-template <class ElementType>
 using FieldVpar = Field<ElementType, IdxRangeVpar>;
 using DFieldVpar = FieldVpar<double>;
 
@@ -170,10 +164,6 @@ using DFieldVparMu = FieldVparMu<double>;
 template <class ElementType>
 using FieldSpVparMu = Field<ElementType, IdxRangeSpVparMu>;
 using DFieldSpVparMu = FieldSpVparMu<double>;
-
-template <class ElementType>
-using FieldSpVpar = Field<ElementType, IdxRangeSpVpar>;
-using DFieldSpVpar = FieldSpVpar<double>;
 
 template <class ElementType>
 using ConstFieldVpar = ConstField<ElementType, IdxRangeVpar>;
@@ -191,9 +181,6 @@ template <class ElementType>
 using ConstFieldSpVparMu = ConstField<ElementType, IdxRangeSpVparMu>;
 using DConstFieldSpVparMu = ConstFieldSpVparMu<double>;
 
-template <class ElementType>
-using ConstFieldSpVpar = ConstField<ElementType, IdxRangeSpVpar>;
-using DConstFieldSpVpar = ConstFieldSpVpar<double>;
 
 /* A OTER
 New notation:

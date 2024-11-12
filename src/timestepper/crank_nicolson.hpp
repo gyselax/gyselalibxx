@@ -6,6 +6,7 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "math_tools.hpp"
+#include "multipatch_math_tools.hpp"
 #include "vector_field_common.hpp"
 
 
@@ -178,22 +179,9 @@ public:
      */
     bool have_converged(ExecSpace const& exec_space, ValConstField y_old, ValConstField y_new) const
     {
-        using Idx = typename IdxRange::discrete_element_type;
-        IdxRange const idx_range = get_idx_range(y_old);
+        double norm_old = norm_inf(exec_space, y_old);
 
-        double norm_old = ddc::parallel_transform_reduce(
-                exec_space,
-                idx_range,
-                0.,
-                ddc::reducer::max<double>(),
-                KOKKOS_LAMBDA(Idx const idx) { return norm_inf(y_old(idx)); });
-
-        double max_diff = ddc::parallel_transform_reduce(
-                exec_space,
-                idx_range,
-                0.,
-                ddc::reducer::max<double>(),
-                KOKKOS_LAMBDA(Idx const idx) { return norm_inf(y_old(idx) - y_new(idx)); });
+        double max_diff = error_norm_inf(exec_space, y_old, y_new);
 
         return (max_diff / norm_old) < m_epsilon;
     }

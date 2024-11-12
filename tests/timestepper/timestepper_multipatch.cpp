@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "2patches_2d_onion_shape_uniform.hpp"
+#include "crank_nicolson.hpp"
 #include "euler.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
@@ -349,6 +350,11 @@ TEST(RK4Fixture, Multipatch)
     multipatch_timestepper_test<RK4<DMultipatchFieldMemR>>(4.0);
 }
 
+TEST(CrankNicolsonFixture, Multipatch)
+{
+    multipatch_timestepper_test<CrankNicolson<DMultipatchFieldMemR>>(2.0);
+}
+
 TEST(EulerFixture, Multipatch2D)
 {
     multipatch_timestepper_2D_test<
@@ -371,6 +377,12 @@ TEST(RK4Fixture, Multipatch2D)
 {
     multipatch_timestepper_2D_test<RK4<CMultipatchFieldMemRTheta, CMultipatchVectorFieldMemRTheta>>(
             4.0);
+}
+
+TEST(CrankNicolsonFixture, Multipatch2D)
+{
+    multipatch_timestepper_2D_test<
+            CrankNicolson<CMultipatchFieldMemRTheta, CMultipatchVectorFieldMemRTheta>>(2.0);
 }
 
 } // namespace

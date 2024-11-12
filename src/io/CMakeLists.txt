@@ -11,8 +11,8 @@ target_include_directories("io"
 
 target_link_libraries("io"
     PUBLIC
-        DDC::DDC
         PDI::pdi
+        DDC::DDC
         gslx::paraconfpp
         gslx::utils
 

@@ -95,8 +95,7 @@ if __name__ == '__main__':
 
         time[i] = time_diag
         for ispecies in range(Nspecies):
-            # Warning: the velocity grid is normalized to v_Ts = sqrt(T0_s / m_s).
-            #  Right now we assume T0_s = 1
+            # Warning: the velocity grid is normalized to v_Ts = sqrt(T0_s / m_s). Right now we assume T0_s = 1
             # Density
             xr_fdistribu_sps = xr_fdistribu.isel(species=ispecies) / (mass.isel(species=ispecies))**1.5
             Int_Fs_dvpar = xr_fdistribu_sps.integrate("vpar")
@@ -126,54 +125,46 @@ if __name__ == '__main__':
     # Plotting
     colors_choice = ['red', 'blue', 'green', 'black'] #To discriminate between species
 
-    #--> Figure 1: For time evolution of the three first moments
-    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-
+    plt.figure(figsize=(6, 6))
     for ispecies in range(Nspecies):
-        axes[0].plot(time, density[:,ispecies], '-+',
-                color=colors_choice[ispecies],
-                label='sp' + str(ispecies))
-    axes[0].set_xlabel('time')
-    axes[0].set_ylabel('density')
-    axes[0].legend()
+        plt.plot(time,density[:,ispecies],color=colors_choice[ispecies], label='sp' + str(ispecies))
+    plt.xlabel('time')
+    plt.ylabel('density')
+    plt.legend()
+    plt.savefig('density.png')
 
+    plt.figure(figsize=(6, 6))
     for ispecies in range(Nspecies):
-        axes[1].plot(time,Vpar[:,ispecies], '-+',
-                color=colors_choice[ispecies],
-                label='sp' +str(ispecies))
-    axes[1].set_xlabel('time')
-    axes[1].set_ylabel('Parallel velocity')
-    axes[1].legend()
+        plt.plot(time,Vpar[:,ispecies],color=colors_choice[ispecies], label='sp' +str(ispecies))
+    plt.xlabel('time')
+    plt.ylabel('Parallel velocity')
+    plt.legend()
+    plt.savefig('Vpar.png')
 
+    plt.figure(figsize=(6, 6))
     for ispecies in range(Nspecies):
-        axes[2].plot(time,Tpar[:,ispecies], '--',
-                color=colors_choice[ispecies],
-                label=r'$T_{\parallel}$ of sp' + str(ispecies))
-        axes[2].plot(time,Tperp[:,ispecies], ':',
-                color=colors_choice[ispecies],
-                label=r'$T_{\perp}$ of sp' +str(ispecies))
-        axes[2].plot(time,Tpar[:,ispecies]/3 + 2*Tperp[:,ispecies]/3, '-',
-                color=colors_choice[ispecies],
-                label=r'$T$ of sp' +str(ispecies))
-    axes[2].set_xlabel('time')
-    axes[2].set_ylabel('Temperature')
-    axes[2].legend()
+        plt.plot(time,Tpar[:,ispecies], '--',color=colors_choice[ispecies], label=r'$T_{\parallel}$ of sp' + str(ispecies))
+        plt.plot(time,Tperp[:,ispecies], ':',color=colors_choice[ispecies], label=r'$T_{\perp}$ of sp' +str(ispecies))
+        plt.plot(time,Tpar[:,ispecies]/3 + 2*Tperp[:,ispecies]/3, '-', color=colors_choice[ispecies], label=r'$T$ of sp' +str(ispecies))
+    plt.xlabel('time')
+    plt.ylabel('Temperature')
+    plt.legend()
+    plt.savefig('Temperature.png')
 
-    plt.savefig('fig_moment_evolution.png')
+    # Comparison with theoretical predictions
 
-    #--> Figure 2: Comparison with theoretical predictions
     if Nspecies==2:
-        fig, axes = plt.subplots(1, 2, figsize=(12, 6))
-
         deltaV = Vpar[:,0] - Vpar[:,1]
         deltaT = (Tpar[:,0] - Tpar[:,1])/3 + 2*(Tperp[:,0] - Tperp[:,1])/3
 
-        axes[0].plot(time, np.log(np.absolute(deltaV)),'-+')
-        axes[0].set_xlabel('time')
-        axes[0].set_ylabel(r'$\ln \|V_{\parallel,a} - V_{\parallel,b}\|$')
+        plt.figure(figsize=(6, 6))
+        plt.plot(time, np.log(np.absolute(deltaV)))
+        plt.xlabel('time')
+        plt.ylabel(r'$\ln \|V_{\parallel,a} - V_{\parallel,b}\|$')
+        plt.savefig('Delta_Vpar.png')
 
-        axes[1].plot(time, np.log(np.absolute(deltaT)),'-+')
-        axes[1].set_xlabel('time')
-        axes[1].set_ylabel(r'$\ln \|T_{a} - T_{b}\|$')
-
-        plt.savefig('fig_VandT_convergence.png')
+        plt.figure(figsize=(6, 6))
+        plt.plot(time, np.log(np.absolute(deltaT)))
+        plt.xlabel('time')
+        plt.ylabel(r'$\ln \|T_{a} - T_{b}\|$')
+        plt.savefig('Delta_T.png')

@@ -5,7 +5,6 @@ target_link_libraries(test_collTokamAxi PUBLIC
   DDC::DDC
   DDC::PDI_Wrapper
   gslx::advection
-  gslx::collisions
   gslx::geometry_tokamaxi
   gslx::interpolation
   gslx::io

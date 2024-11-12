@@ -46,6 +46,109 @@ KOKKOS_INLINE_FUNCTION double norm_inf(double const coord)
     return coord;
 }
 
+namespace detail {
+
+// General implementation of the infinity norm. This function is in a namespace to avoid code duplication
+// without creating a function so general that it also captures multipatch types.
+template <class ExecSpace, class FuncType>
+double norm_inf(ExecSpace exec_space, FuncType function)
+{
+    static_assert(
+            Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
+    using IdxRangeFunc = typename FuncType::discrete_domain_type;
+    using IdxFunc = typename IdxRangeFunc::discrete_element_type;
+    IdxRangeFunc idx_range = get_idx_range(function);
+    return ddc::parallel_transform_reduce(
+            exec_space,
+            idx_range,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxFunc const idx) { return ::norm_inf(function(idx)); });
+}
+
+// General implementation of the infinity norm of an error. This function is in a namespace to avoid code duplication
+// without creating a function so general that it also captures multipatch types.
+template <class ExecSpace, class FuncType>
+double error_norm_inf(ExecSpace exec_space, FuncType function, FuncType exact_function)
+{
+    static_assert(
+            Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
+    using IdxRangeFunc = typename FuncType::discrete_domain_type;
+    using IdxFunc = typename IdxRangeFunc::discrete_element_type;
+    IdxRangeFunc idx_range = get_idx_range(function);
+    return ddc::parallel_transform_reduce(
+            exec_space,
+            idx_range,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxFunc const idx) {
+                return ::norm_inf(function(idx) - exact_function(idx));
+            });
+}
+
+}; // namespace detail
+
+/**
+ * @brief Compute the infinity norm for a Field.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] function The function whose norm is calcuated.
+ * @return A double containing the value of the infinty norm.
+ */
+template <class ExecSpace, class ElementType, class IdxRange>
+inline double norm_inf(
+        ExecSpace exec_space,
+        ConstField<ElementType, IdxRange, typename ExecSpace::memory_space> function)
+{
+    return detail::norm_inf(exec_space, function);
+}
+
+/**
+ * @brief Compute the infinity norm for a VectorField.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] function The function whose norm is calcuated.
+ * @return A double containing the value of the infinty norm.
+ */
+template <class ExecSpace, class ElementType, class IdxRange, class NDTag>
+inline double norm_inf(
+        ExecSpace exec_space,
+        VectorConstField<ElementType, IdxRange, NDTag, typename ExecSpace::memory_space> function)
+{
+    return detail::norm_inf(exec_space, function);
+}
+
+/**
+ * @brief Compute the infinity norm of the error between 2 Fields.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] function The calculated function.
+ * @param[in] exact_function The exact function with which the calculated function is compared.
+ * @return A double containing the value of the infinty norm.
+ */
+template <class ExecSpace, class ElementType, class IdxRange>
+inline double error_norm_inf(
+        ExecSpace exec_space,
+        ConstField<ElementType, IdxRange, typename ExecSpace::memory_space> function,
+        ConstField<ElementType, IdxRange, typename ExecSpace::memory_space> exact_function)
+{
+    return detail::error_norm_inf(exec_space, function, exact_function);
+}
+
+/**
+ * @brief Compute the infinity norm of the error between 2 VectorFields.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] function The calculated function.
+ * @param[in] exact_function The exact function with which the calculated function is compared.
+ * @return A double containing the value of the infinty norm.
+ */
+template <class ExecSpace, class ElementType, class IdxRange, class NDTag>
+inline double error_norm_inf(
+        ExecSpace exec_space,
+        VectorConstField<ElementType, IdxRange, NDTag, typename ExecSpace::memory_space> function,
+        VectorConstField<ElementType, IdxRange, NDTag, typename ExecSpace::memory_space>
+                exact_function)
+{
+    return detail::error_norm_inf(exec_space, function, exact_function);
+}
+
 /**
  * @brief Compute L1 norm of a function with a given quadrature.
  *
@@ -64,7 +167,7 @@ template <class IdxRangeQuad, class ExecSpace>
 double norm_L1(
         ExecSpace exec_space,
         Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
-        Field<double, IdxRangeQuad, typename ExecSpace::memory_space> function)
+        DField<IdxRangeQuad, typename ExecSpace::memory_space> function)
 {
     using IdxQuad = typename IdxRangeQuad::discrete_element_type;
     return quadrature(
@@ -72,6 +175,28 @@ double norm_L1(
             KOKKOS_LAMBDA(IdxQuad const idx) { return Kokkos::fabs(function(idx)); });
 }
 
+/**
+ * @brief Compute the L1 norm of the error between 2 Fields.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] quadrature The quadrature used to compute the integral.
+ * @param[in] function The calculated function.
+ * @param[in] exact_function The exact function with which the calculated function is compared.
+ * @return A double containing the value of the infinty norm.
+ */
+template <class IdxRangeQuad, class ExecSpace>
+double error_norm_L1(
+        ExecSpace exec_space,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
+        DField<IdxRangeQuad, typename ExecSpace::memory_space> function,
+        DField<IdxRangeQuad, typename ExecSpace::memory_space> exact_function)
+{
+    using IdxQuad = typename IdxRangeQuad::discrete_element_type;
+    return quadrature(
+            exec_space,
+            KOKKOS_LAMBDA(IdxQuad const idx) {
+                return Kokkos::fabs(function(idx) - exact_function(idx));
+            });
+}
 
 
 /**
@@ -98,4 +223,28 @@ double norm_L2(
     return std::sqrt(quadrature(
             exec_space,
             KOKKOS_LAMBDA(IdxQuad const idx) { return function(idx) * function(idx); }));
+}
+
+/**
+ * @brief Compute the L2 norm of the error between 2 Fields.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] quadrature The quadrature used to compute the integral.
+ * @param[in] function The calculated function.
+ * @param[in] exact_function The exact function with which the calculated function is compared.
+ * @return A double containing the value of the infinty norm.
+ */
+template <class IdxRangeQuad, class ExecSpace>
+double error_norm_L2(
+        ExecSpace exec_space,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
+        DField<IdxRangeQuad, typename ExecSpace::memory_space> function,
+        DField<IdxRangeQuad, typename ExecSpace::memory_space> exact_function)
+{
+    using IdxQuad = typename IdxRangeQuad::discrete_element_type;
+    return std::sqrt(quadrature(
+            exec_space,
+            KOKKOS_LAMBDA(IdxQuad const idx) {
+                double err = function(idx) - exact_function(idx);
+                return err * err;
+            }));
 }

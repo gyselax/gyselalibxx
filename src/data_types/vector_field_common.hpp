@@ -60,7 +60,8 @@ class VectorFieldCommon<FieldType, ddc::detail::TypeSeq<DDims...>>
 
 public:
     /// @brief The type of the elements in the fields.
-    using element_type = typename ddc::detail::TaggedVector<data_type, DDims...>;
+    using element_type =
+            typename ddc::detail::TaggedVector<std::remove_const_t<data_type>, DDims...>;
 
     /**
      * @brief The IdxRange on which the fields in this object are defined.
