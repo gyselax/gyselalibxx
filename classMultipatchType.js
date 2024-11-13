@@ -8,7 +8,6 @@ var classMultipatchType =
     [ "MultipatchType", "classMultipatchType.html#ad8912efe19fdeca3f8f3e905f34a5357", null ],
     [ "~MultipatchType", "classMultipatchType.html#a56d90fdeaa8beacf22220f8234a48864", null ],
     [ "get", "classMultipatchType.html#a38eb865df92f188656dcefea1531c6d6", null ],
-    [ "size", "classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada", null ],
     [ "get_tuple", "classMultipatchType.html#aafa35714e8858701dc671c4b546fea29", null ],
     [ "MultipatchType", "classMultipatchType.html#a6cf24fdcb53f66e89cab44921a551e1d", null ],
     [ "m_tuple", "classMultipatchType.html#ae7480fdbb95f4018d1cd39f809001c14", null ]

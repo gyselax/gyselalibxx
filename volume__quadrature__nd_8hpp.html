@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/utils_tools.hpp File Reference</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('utils__tools_8hpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('volume__quadrature__nd_8hpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -102,92 +102,81 @@ $(document).ready(function(){initNavTree('utils__tools_8hpp.html',''); initResiz
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">utils_tools.hpp File Reference</div>  </div>
+<div class="title">volume_quadrature_nd.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>File Describing useful functions.  
+<p>File providing functions to adapt quadrature coefficients so they can integrate over a N-D volume.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;ddc/ddc.hpp&gt;</code><br />
+<code>#include &quot;ddc_alias_inline_functions.hpp&quot;</code><br />
+<code>#include &quot;ddc_aliases.hpp&quot;</code><br />
+<code>#include &quot;quadrature.hpp&quot;</code><br />
 </div>
-<p><a href="utils__tools_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="volume__quadrature__nd_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a939e3995d29bdb32c073e38494563009"><td class="memTemplParams" colspan="2">template&lt;class... Tags&gt; </td></tr>
-<tr class="memitem:a939e3995d29bdb32c073e38494563009"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a> (ddc::Coordinate&lt; Tags... &gt; coord)</td></tr>
-<tr class="memdesc:a939e3995d29bdb32c073e38494563009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm.  <a href="utils__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">More...</a><br /></td></tr>
-<tr class="separator:a939e3995d29bdb32c073e38494563009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74cd2065291900b963fdc775ae5aec8d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d">norm_inf</a> (double const coord)</td></tr>
-<tr class="memdesc:a74cd2065291900b963fdc775ae5aec8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm.  <a href="utils__tools_8hpp.html#a74cd2065291900b963fdc775ae5aec8d">More...</a><br /></td></tr>
-<tr class="separator:a74cd2065291900b963fdc775ae5aec8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157da60708ba649c7895c4f32e8bd0b4"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class IdxRangeCoeffs , class ExecSpace &gt; </td></tr>
+<tr class="memitem:a157da60708ba649c7895c4f32e8bd0b4"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="volume__quadrature__nd_8hpp.html#a157da60708ba649c7895c4f32e8bd0b4">compute_coeffs_on_mapping</a> (ExecSpace exec_space, <a class="el" href="classCircularToCartesian.html">Mapping</a> &amp;mapping, DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt; &amp;&amp;coefficients_alloc)</td></tr>
+<tr class="memdesc:a157da60708ba649c7895c4f32e8bd0b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the coefficients.  <a href="volume__quadrature__nd_8hpp.html#a157da60708ba649c7895c4f32e8bd0b4">More...</a><br /></td></tr>
+<tr class="separator:a157da60708ba649c7895c4f32e8bd0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>File Describing useful functions. </p>
+<div class="textblock"><p>File providing functions to adapt quadrature coefficients so they can integrate over a N-D volume. </p>
+<p>A N-D volume is a surface in 2D and a volume in 3D. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a939e3995d29bdb32c073e38494563009"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a939e3995d29bdb32c073e38494563009">&#9670;&nbsp;</a></span>norm_inf() <span class="overload">[1/2]</span></h2>
+<a id="a157da60708ba649c7895c4f32e8bd0b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a157da60708ba649c7895c4f32e8bd0b4">&#9670;&nbsp;</a></span>compute_coeffs_on_mapping()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class... Tags&gt; </div>
+template&lt;class Mapping , class IdxRangeCoeffs , class ExecSpace &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION double norm_inf </td>
+          <td class="memname">DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt; compute_coeffs_on_mapping </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; Tags... &gt;&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td class="paramtype">ExecSpace&#160;</td>
+          <td class="paramname"><em>exec_space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>coefficients_alloc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compute the infinity norm. </p>
-<p>For a given vector \( x \) , compute \(|Vert x |Vert_{\infty} = \sup_n |x_n| \).</p>
+<p>Add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the coefficients. </p>
+<p>For polar integration, we can add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the quadrature coefficients.</p>
+<ul>
+<li><p class="startli">2D example: (but it is implemented for ND)</p>
+<p class="startli">\( \int_{\Omega_{\text{cart}}} f(x,y) dxdy = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\)</p>
+</li>
+</ul>
+<p>This function uses rvalues. It means that coefficients is a temporary input parameter and it returns a temporary coefficient object. The <a class="el" href="classQuadrature.html" title="A class providing an operator for integrating functions defined on a discrete index range.">Quadrature</a> object can only be instantiate with rvalues.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The given vector.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exec_space</td><td>The space on which the function is executed (CPU/GPU). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical index range \( (r,\theta) \) to the physical index range \( (x, y) \). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coefficients_alloc</td><td>The quadrature coefficients \(\{q_{ij}\}_{ij} \).</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double containing the value of the infinty norm. </dd></dl>
-
-</div>
-</div>
-<a id="a74cd2065291900b963fdc775ae5aec8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74cd2065291900b963fdc775ae5aec8d">&#9670;&nbsp;</a></span>norm_inf() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double norm_inf </td>
-          <td>(</td>
-          <td class="paramtype">double const&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the infinity norm. </p>
-<p>In case of scalar, the infinity norm returns the scalar.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The given double.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A double containing the value of the infinty norm. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A rvalue FieldMem to the modified coefficients \(\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} \). </dd></dl>
 
 </div>
 </div>
@@ -196,7 +185,7 @@ template&lt;class... Tags&gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_a6b7057cb1432410798a61ba57a7ee60.html">utils</a></li><li class="navelem"><a class="el" href="utils__tools_8hpp.html">utils_tools.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_42e0d6fcfa69cb3b4e97936052cc6ddf.html">quadrature</a></li><li class="navelem"><a class="el" href="volume__quadrature__nd_8hpp.html">volume_quadrature_nd.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -121,30 +121,22 @@ $(document).ready(function(){initNavTree('collisioninfo_8hpp_source.html',''); i
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">// read in the YAML input file</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::int8_t m_collisions_interspecies;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// [TODO] Values that are temporarily needed for the interface with koliop</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// but that will be deleted as soon as they are no longer required</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">// rg fixed to 1. =&gt; because already included in nustar</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_rpeak = 1.;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_rg = 1.;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// safety factor fixed to 1. =&gt; because already included in nustar</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_q_rpeak = 1.;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">double</span> <span class="keyword">const</span> m_safety_factor = 1.;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// AD coefficient</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">double</span> m_coeff_AD;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d">   33</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d">radial_chunk_type</a> = double;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674">   39</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674">CollisionInfo</a>(PC_tree_t <span class="keyword">const</span>&amp; yaml_input_file)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        : m_nustar0 {PCpp_double(yaml_input_file, <span class="stringliteral">&quot;.CollisionsInfo.nustar0_rpeak&quot;</span>)}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        , m_collisions_interspecies {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                  PCpp_bool(yaml_input_file, <span class="stringliteral">&quot;.CollisionsInfo.collisions_interspecies&quot;</span>)}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// nustar fixed to 1. =&gt; normalisation of time is equal to 1./nustar</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (m_nustar0 != 1.0) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;nustar0 must be equal to 1&quot;</span>);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// AD coefficient almost equivalent to the collision frequency</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">double</span> m_coeff_AD;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d">   25</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d">radial_chunk_type</a> = double;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674">   31</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674">CollisionInfo</a>(PC_tree_t <span class="keyword">const</span>&amp; yaml_input_file)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        : m_nustar0 {PCpp_double(yaml_input_file, <span class="stringliteral">&quot;.CollisionsInfo.nustar0_rpeak&quot;</span>)}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        , m_collisions_interspecies {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                  PCpp_bool(yaml_input_file, <span class="stringliteral">&quot;.CollisionsInfo.collisions_interspecies&quot;</span>)}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// nustar fixed to 1. =&gt; normalisation of time is equal to 1./nustar</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">if</span> (m_nustar0 != 1.0) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;nustar0 must be equal to 1&quot;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        m_coeff_AD = Kokkos::sqrt(2.);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    };</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
@@ -155,34 +147,16 @@ $(document).ready(function(){initNavTree('collisioninfo_8hpp_source.html',''); i
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> m_collisions_interspecies;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6">   67</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6">rg</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">   67</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">coeff_AD</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">return</span> m_rg;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">return</span> m_coeff_AD;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9">   76</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9">safety_factor</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">return</span> m_safety_factor;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf">   85</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf">nustar0</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> m_nustar0;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">   94</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">coeff_AD</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> m_coeff_AD;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
 <div class="ttc" id="aclassCollisionInfo_html"><div class="ttname"><a href="classCollisionInfo.html">CollisionInfo</a></div><div class="ttdoc">Class to collect information to initialize the collision operator.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:12</div></div>
 <div class="ttc" id="aclassCollisionInfo_html_a1fd5a0ed1e680dd18934365252712ab3"><div class="ttname"><a href="classCollisionInfo.html#a1fd5a0ed1e680dd18934365252712ab3">CollisionInfo::collisions_interspecies</a></div><div class="ttdeci">std::int8_t collisions_interspecies() const</div><div class="ttdoc">A method for accessing the collisions_interspecies member variable of the class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:58</div></div>
-<div class="ttc" id="aclassCollisionInfo_html_a7bb11c09eacb61eea65295c6c28dd7b6"><div class="ttname"><a href="classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6">CollisionInfo::rg</a></div><div class="ttdeci">double rg() const</div><div class="ttdoc">A method for accessing the rg variable of the class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:67</div></div>
-<div class="ttc" id="aclassCollisionInfo_html_a7ca336129be7116dd672ef1685817ebf"><div class="ttname"><a href="classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf">CollisionInfo::nustar0</a></div><div class="ttdeci">double nustar0() const</div><div class="ttdoc">A method for accessing the nustar0 variable of the class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:85</div></div>
-<div class="ttc" id="aclassCollisionInfo_html_a96238113bdf5f0ea1dd2a6d99726ac95"><div class="ttname"><a href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">CollisionInfo::coeff_AD</a></div><div class="ttdeci">double coeff_AD() const</div><div class="ttdoc">A method for accessing the coeff_AD variable of the class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:94</div></div>
-<div class="ttc" id="aclassCollisionInfo_html_a9fefefe1322ad3e9f9c42636aa0f5e1d"><div class="ttname"><a href="classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d">CollisionInfo::radial_chunk_type</a></div><div class="ttdeci">double radial_chunk_type</div><div class="ttdoc">radial_chunk_type used to treat the 0D case for radial profile</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:33</div></div>
-<div class="ttc" id="aclassCollisionInfo_html_aa6829d42161f04378b4cc0cbdec368f9"><div class="ttname"><a href="classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9">CollisionInfo::safety_factor</a></div><div class="ttdeci">double safety_factor() const</div><div class="ttdoc">A method for accessing the safety factor variable of the class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:76</div></div>
-<div class="ttc" id="aclassCollisionInfo_html_ab7c9318537e4d896021e6098aee81674"><div class="ttname"><a href="classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674">CollisionInfo::CollisionInfo</a></div><div class="ttdeci">CollisionInfo(PC_tree_t const &amp;yaml_input_file)</div><div class="ttdoc">The constructor for the CollisionFrequency class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:39</div></div>
+<div class="ttc" id="aclassCollisionInfo_html_a96238113bdf5f0ea1dd2a6d99726ac95"><div class="ttname"><a href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">CollisionInfo::coeff_AD</a></div><div class="ttdeci">double coeff_AD() const</div><div class="ttdoc">A method for accessing the coeff_AD variable of the class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:67</div></div>
+<div class="ttc" id="aclassCollisionInfo_html_a9fefefe1322ad3e9f9c42636aa0f5e1d"><div class="ttname"><a href="classCollisionInfo.html#a9fefefe1322ad3e9f9c42636aa0f5e1d">CollisionInfo::radial_chunk_type</a></div><div class="ttdeci">double radial_chunk_type</div><div class="ttdoc">radial_chunk_type used to treat the 0D case for radial profile</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:25</div></div>
+<div class="ttc" id="aclassCollisionInfo_html_ab7c9318537e4d896021e6098aee81674"><div class="ttname"><a href="classCollisionInfo.html#ab7c9318537e4d896021e6098aee81674">CollisionInfo::CollisionInfo</a></div><div class="ttdeci">CollisionInfo(PC_tree_t const &amp;yaml_input_file)</div><div class="ttdoc">The constructor for the CollisionFrequency class.</div><div class="ttdef"><b>Definition:</b> collisioninfo.hpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

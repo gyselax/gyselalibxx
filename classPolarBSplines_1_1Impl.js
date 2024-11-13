@@ -19,9 +19,10 @@ var classPolarBSplines_1_1Impl =
     [ "eval_deriv_r", "classPolarBSplines_1_1Impl.html#af01b6b63c807ba90698ab1458300c5ba", null ],
     [ "eval_deriv_theta", "classPolarBSplines_1_1Impl.html#ae0a2a5a64a66fbf151bdb4cf90e41745", null ],
     [ "eval_deriv_r_and_theta", "classPolarBSplines_1_1Impl.html#a7216a3146fbf30c16899bd0f508a0352", null ],
-    [ "integrals", "classPolarBSplines_1_1Impl.html#a0d4792a99a8176775c823b048d62fc56", null ],
+    [ "integrals", "classPolarBSplines_1_1Impl.html#aced2ee11d0967ae40b922adeefbc8a28", null ],
     [ "nbasis", "classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa", null ],
     [ "full_domain", "classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7", null ],
     [ "tensor_bspline_idx_range", "classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352", null ],
-    [ "Impl", "classPolarBSplines_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56", null ]
+    [ "Impl", "classPolarBSplines_1_1Impl.html#adcaf2527acc2c7a0a18f741240082b56", null ],
+    [ "integrals", "classPolarBSplines_1_1Impl.html#a06cbbd0c40ab1003b409effdd99badc1", null ]
 ];

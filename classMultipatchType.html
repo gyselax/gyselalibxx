@@ -102,6 +102,7 @@ $(document).ready(function(){initNavTree('classMultipatchType.html',''); initRes
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classMultipatchType-members.html">List of all members</a>  </div>
@@ -149,12 +150,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a38eb865df92f188656dcefea1531c6d6"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="structT.html">T</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a38eb865df92f188656dcefea1531c6d6">get</a> () const</td></tr>
 <tr class="memdesc:a38eb865df92f188656dcefea1531c6d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve an object from the patch that it is defined on.  <a href="classMultipatchType.html#a38eb865df92f188656dcefea1531c6d6">More...</a><br /></td></tr>
 <tr class="separator:a38eb865df92f188656dcefea1531c6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a14854eb7707b84e0dc4d8837519ada"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada">size</a> () const</td></tr>
-<tr class="memdesc:a1a14854eb7707b84e0dc4d8837519ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of objects stored inside the class.  <a href="classMultipatchType.html#a1a14854eb7707b84e0dc4d8837519ada">More...</a><br /></td></tr>
-<tr class="separator:a1a14854eb7707b84e0dc4d8837519ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafa35714e8858701dc671c4b546fea29"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION std::tuple&lt; <a class="el" href="structT.html">T</a>&lt; Patches &gt;... &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#aafa35714e8858701dc671c4b546fea29">get_tuple</a> () const</td></tr>
 <tr class="memdesc:aafa35714e8858701dc671c4b546fea29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to the tuple of objects stored inside this <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a>.  <a href="classMultipatchType.html#aafa35714e8858701dc671c4b546fea29">More...</a><br /></td></tr>
 <tr class="separator:aafa35714e8858701dc671c4b546fea29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8bd7585483ea579822748d6100ae3edb"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchType.html#a8bd7585483ea579822748d6100ae3edb">size</a> ()</td></tr>
+<tr class="memdesc:a8bd7585483ea579822748d6100ae3edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of objects stored inside the class.  <a href="classMultipatchType.html#a8bd7585483ea579822748d6100ae3edb">More...</a><br /></td></tr>
+<tr class="separator:a8bd7585483ea579822748d6100ae3edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -393,8 +397,8 @@ template&lt;class Patch , std::enable_if_t&lt;!has_data_access_methods_v&lt; T&l
 
 </div>
 </div>
-<a id="a1a14854eb7707b84e0dc4d8837519ada"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a14854eb7707b84e0dc4d8837519ada">&#9670;&nbsp;</a></span>size()</h2>
+<a id="a8bd7585483ea579822748d6100ae3edb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd7585483ea579822748d6100ae3edb">&#9670;&nbsp;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -405,15 +409,15 @@ template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::size_t <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::size </td>
+          <td class="memname">static constexpr std::size_t <a class="el" href="classMultipatchType.html">MultipatchType</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

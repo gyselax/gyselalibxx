@@ -142,6 +142,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa674e69e7db91ebbe8c0862fda157232"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#aa674e69e7db91ebbe8c0862fda157232">operator()</a> (RHSFunction const &amp;rhs, host_t&lt; ConstFieldRTheta&lt; CoordRTheta &gt;&gt; const coords_eval, host_t&lt; DFieldRTheta &gt; result) const</td></tr>
 <tr class="memdesc:aa674e69e7db91ebbe8c0862fda157232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson-like equation.  <a href="classPolarSplineFEMPoissonLikeSolver.html#aa674e69e7db91ebbe8c0862fda157232">More...</a><br /></td></tr>
 <tr class="separator:aa674e69e7db91ebbe8c0862fda157232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7210eb4925c854a35940cb0667a2a294"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a7210eb4925c854a35940cb0667a2a294">init_nnz_per_line</a> (Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; nnz) const</td></tr>
+<tr class="memdesc:a7210eb4925c854a35940cb0667a2a294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the nnz data structure by computing the number of non-zero per line.  <a href="classPolarSplineFEMPoissonLikeSolver.html#a7210eb4925c854a35940cb0667a2a294">More...</a><br /></td></tr>
+<tr class="separator:a7210eb4925c854a35940cb0667a2a294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Define a polar PDE solver for a Poisson-like equation. </p>
@@ -370,6 +373,41 @@ template&lt;class RHSFunction &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>The rhs \( \rho\) of the Poisson-like equation. The type is templated but we can use the <a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a> class. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coords_eval</td><td>A Field of coordinates where we want to compute the solution. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>The values of the solution \(\phi\) on the given coords_eval. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7210eb4925c854a35940cb0667a2a294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7210eb4925c854a35940cb0667a2a294">&#9670;&nbsp;</a></span>init_nnz_per_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PolarSplineFEMPoissonLikeSolver::init_nnz_per_line </td>
+          <td>(</td>
+          <td class="paramtype">Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt;&#160;</td>
+          <td class="paramname"><em>nnz</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fills the nnz data structure by computing the number of non-zero per line. </p>
+<p>This number is linked to the weak formulation and depends on \((r,\theta)\) splines. After this function the array will contain: nnz[0] = 0. nnz[1] = 0. nnz[2] = number of non-zero elements in line 0. nnz[3] = number of non-zero elements in lines 0-1. ... nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">nnz</td><td>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </td></tr>
   </table>
   </dd>
 </dl>

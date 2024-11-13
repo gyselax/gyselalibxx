@@ -165,6 +165,9 @@ The enclosing parent function for an extended '__host__' '__device__' lambda can
 <li>All enclosing classes must not have private or protected access within their respective parent classes. </li>
 </ul>
 </blockquote>
+<h1><a class="anchor" id="docs_Common_compilation_problems__The_enclosing_parent_function_for_an_extended____host_______device____lambda_must_allow_its_address_to_be_taken"></a>
+The enclosing parent function for an extended '__host__' '__device__' lambda must allow its address to be taken</h1>
+<p>Kokkos is bound by restrictions coming from various different low level languages. One of the most surprising of these is the fact that lambdas cannot be found in a function whose address cannot be taken. This includes private and protected class methods (which lead to the previous error message), but also class constructors. If you wish to put parallel loops in a class constructor, you will need to create a function for your loop and call that function from the constructor.</p>
 <h3><a class="anchor" id="autotoc_md15"></a>
 Error Message</h3>
 <p>When this rule is not followed you will see the following error message: </p><div class="fragment"><div class="line">&lt;PATH_TO_FILE&gt;(&lt;LINE_NUMBER&gt;): error: The enclosing parent function (&quot;&lt;FUNCTION&gt;&quot;) for an extended __host__ __device__ lambda cannot have private or protected access within its class</div>

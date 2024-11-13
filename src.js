@@ -10,7 +10,6 @@ var src =
       [ "VectorField", "src_data_types.html#src_data_types__VectorField", null ],
       [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]
     ] ],
-    [ "Geometry (mu, vpar, r, theta, phi)", "src_geometry5D.html", "src_geometry5D" ],
     [ "Geometry (r, theta)", "src_geometryRTheta.html", "src_geometryRTheta" ],
     [ "Geometry (mu, vpar, r, theta)", "src_geometryTokamAxi.html", "src_geometryTokamAxi" ],
     [ "Geometry (vpar, mu)", "src_geometryVparMu.html", "src_geometryVparMu" ],

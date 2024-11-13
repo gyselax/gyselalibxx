@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('transpose_8hpp_source.html',''); initR
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                  ddc::to_type_seq_t&lt;IdxRangeOut&gt;&gt;);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Check that both views have the same domain (just reordered)</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    assert(<a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(field_to_transpose) == <a class="code" href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">get_idx_range</a>(transposed_field));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    assert(get_idx_range(field_to_transpose) == get_idx_range(transposed_field));</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    IdxRangeOut idx_range(field_to_transpose.domain());</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
@@ -170,7 +170,6 @@ $(document).ready(function(){initNavTree('transpose_8hpp_source.html',''); initR
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> transposed_field;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="ttc" id="anamespacecollisions__dimensions_html_a3ed65919dbae64a2ec9f5da42b393781"><div class="ttname"><a href="namespacecollisions__dimensions.html#a3ed65919dbae64a2ec9f5da42b393781">collisions_dimensions::get_idx_range</a></div><div class="ttdeci">IdxRange&lt; Grid1D... &gt; get_idx_range(IdxRangeFDistrib idx_range)</div><div class="ttdoc">Get the index range for specific grid dimensions from a multi-D index range.</div><div class="ttdef"><b>Definition:</b> collisions_dimensions.hpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

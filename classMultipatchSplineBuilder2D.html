@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt; Class Template Reference</title>
+<title>Gyselalib++: MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('classMultipatchSplineBuilder2D.html','
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classMultipatchSplineBuilder2D-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt; Class Template Reference</div>  </div>
+<div class="title">MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -113,16 +113,16 @@ $(document).ready(function(){initNavTree('classMultipatchSplineBuilder2D.html','
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a83da50da842986b47db703fd42296c4e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#a83da50da842986b47db703fd42296c4e">MultipatchSplineBuilder2D</a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders)</td></tr>
-<tr class="memdesc:a83da50da842986b47db703fd42296c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the <a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a> from a std::tuple of all the builder on each patch.  <a href="classMultipatchSplineBuilder2D.html#a83da50da842986b47db703fd42296c4e">More...</a><br /></td></tr>
-<tr class="separator:a83da50da842986b47db703fd42296c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa348d62045660886c7d1d5b6798f475c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#aa348d62045660886c7d1d5b6798f475c">operator()</a> (<a class="el" href="classMultipatchField.html">MultipatchSplineCoeffs</a> splines, <a class="el" href="classMultipatchField.html">MultipatchValues</a> const &amp;values, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt; derivs_min1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt; derivs_max1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt; derivs_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt; derivs_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_max2=std::nullopt) const</td></tr>
-<tr class="memdesc:aa348d62045660886c7d1d5b6798f475c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the spline representation of each given function.  <a href="classMultipatchSplineBuilder2D.html#aa348d62045660886c7d1d5b6798f475c">More...</a><br /></td></tr>
-<tr class="separator:aa348d62045660886c7d1d5b6798f475c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f5c2073cbf7157e821adfa2383ece8d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#a3f5c2073cbf7157e821adfa2383ece8d">MultipatchSplineBuilder2D</a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders)</td></tr>
+<tr class="memdesc:a3f5c2073cbf7157e821adfa2383ece8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate the <a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a> from a std::tuple of all the builder on each patch.  <a href="classMultipatchSplineBuilder2D.html#a3f5c2073cbf7157e821adfa2383ece8d">More...</a><br /></td></tr>
+<tr class="separator:a3f5c2073cbf7157e821adfa2383ece8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08dc1aebc4ea52636be03f3888b03c49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultipatchSplineBuilder2D.html#a08dc1aebc4ea52636be03f3888b03c49">operator()</a> (<a class="el" href="classMultipatchField.html">MultipatchSplineCoeffs</a> splines, <a class="el" href="classMultipatchField.html">MultipatchValues</a> const &amp;values, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt; derivs_min1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs1</a> &gt; derivs_max1=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt; derivs_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs2</a> &gt; derivs_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_min2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_min1_max2=std::nullopt, std::optional&lt; <a class="el" href="classMultipatchField.html">MultipatchDerivs12</a> &gt; mixed_derivs_max1_max2=std::nullopt) const</td></tr>
+<tr class="memdesc:a08dc1aebc4ea52636be03f3888b03c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the spline representation of each given function.  <a href="classMultipatchSplineBuilder2D.html#a08dc1aebc4ea52636be03f3888b03c49">More...</a><br /></td></tr>
+<tr class="separator:a08dc1aebc4ea52636be03f3888b03c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;<br />
-class MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt;</h3>
+<div class="textblock"><h3>template&lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::BoundCond BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;<br />
+class MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;</h3>
 
 <p>A class to call all the builders of all the patches once. </p>
 <p>We need to instantiate all the builders for all the pacthes in the main code. We process the same way for the Field containing the spline coefficients and the values of the function on each patch. The Fields are stored in <a class="el" href="classMultipatchField.html" title="A class to store field objects on patches.">MultipatchField</a> objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
@@ -139,25 +139,27 @@ class MultipatchSplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSp
     <tr><td class="paramname">BcUpper1</td><td>The upper boundary condition on the first dimension. </td></tr>
     <tr><td class="paramname">BcLower2</td><td>The lower boundary condition on the second dimension. </td></tr>
     <tr><td class="paramname">BcUpper2</td><td>The upper boundary condition on the second dimension. </td></tr>
+    <tr><td class="paramname">BcTransition</td><td>The boundary condition used at the interface between 2 patches. </td></tr>
+    <tr><td class="paramname">Connectivity</td><td>A <a class="el" href="classMultipatchConnectivity.html" title="A helper class which provides functionalities to recognise how different patches are connected.">MultipatchConnectivity</a> object describing the interfaces between patches. </td></tr>
     <tr><td class="paramname">Solver</td><td>The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. </td></tr>
     <tr><td class="paramname">ValuesOnPatch</td><td>A type alias which provides the field type which will be used to pass the values of the function at the interpolation points. The index range of this field type should contain any batch dimensions. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a83da50da842986b47db703fd42296c4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83da50da842986b47db703fd42296c4e">&#9670;&nbsp;</a></span>MultipatchSplineBuilder2D()</h2>
+<a id="a3f5c2073cbf7157e821adfa2383ece8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f5c2073cbf7157e821adfa2383ece8d">&#9670;&nbsp;</a></span>MultipatchSplineBuilder2D()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt; </div>
+template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::BoundCond BcTransition, class Connectivity , ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt;::<a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a> </td>
+          <td class="memname"><a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::<a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a> </td>
           <td>(</td>
           <td class="paramtype">BuilderOnPatch&lt; Patches &gt; const &amp;...&#160;</td>
           <td class="paramname"><em>builders</em></td><td>)</td>
@@ -183,19 +185,19 @@ template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; t
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa348d62045660886c7d1d5b6798f475c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa348d62045660886c7d1d5b6798f475c">&#9670;&nbsp;</a></span>operator()()</h2>
+<a id="a08dc1aebc4ea52636be03f3888b03c49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08dc1aebc4ea52636be03f3888b03c49">&#9670;&nbsp;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt; </div>
+template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::BoundCond BcTransition, class Connectivity , ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver, ValuesOnPatch, Patches &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classMultipatchSplineBuilder2D.html">MultipatchSplineBuilder2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, BcLower1, BcUpper1, BcLower2, BcUpper2, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMultipatchField.html">MultipatchSplineCoeffs</a>&#160;</td>
           <td class="paramname"><em>splines</em>, </td>

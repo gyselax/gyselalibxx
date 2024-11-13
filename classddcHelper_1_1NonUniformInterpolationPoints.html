@@ -120,10 +120,10 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a291ef7452b01725178ba6e884e5239b8"><td class="memTemplParams" colspan="2">template&lt;typename Sampling , typename U  = BSplines&gt; </td></tr>
-<tr class="memitem:a291ef7452b01725178ba6e884e5239b8"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classddcHelper_1_1NonUniformInterpolationPoints.html#a291ef7452b01725178ba6e884e5239b8">get_sampling</a> (std::vector&lt; Coord&lt; Dim &gt;&gt; &amp;interp_points)</td></tr>
-<tr class="memdesc:a291ef7452b01725178ba6e884e5239b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sampling of interpolation points.  <a href="classddcHelper_1_1NonUniformInterpolationPoints.html#a291ef7452b01725178ba6e884e5239b8">More...</a><br /></td></tr>
-<tr class="separator:a291ef7452b01725178ba6e884e5239b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0fb078c4d7e193d9f4b98774a67be52"><td class="memTemplParams" colspan="2">template&lt;typename Sampling , typename U  = BSplines&gt; </td></tr>
+<tr class="memitem:ac0fb078c4d7e193d9f4b98774a67be52"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classddcHelper_1_1NonUniformInterpolationPoints.html#ac0fb078c4d7e193d9f4b98774a67be52">get_sampling</a> (std::vector&lt; Coord&lt; Dim &gt;&gt; &amp;interp_points, double TOL=2e-14)</td></tr>
+<tr class="memdesc:ac0fb078c4d7e193d9f4b98774a67be52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sampling of interpolation points.  <a href="classddcHelper_1_1NonUniformInterpolationPoints.html#ac0fb078c4d7e193d9f4b98774a67be52">More...</a><br /></td></tr>
+<tr class="separator:ac0fb078c4d7e193d9f4b98774a67be52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a4cc16e4a302a437538c0e2d8920464"><td class="memTemplParams" colspan="2">template&lt;typename Sampling &gt; </td></tr>
 <tr class="memitem:a4a4cc16e4a302a437538c0e2d8920464"><td class="memTemplItemLeft" align="right" valign="top">static IdxRange&lt; Sampling &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classddcHelper_1_1NonUniformInterpolationPoints.html#a4a4cc16e4a302a437538c0e2d8920464">get_domain</a> ()</td></tr>
 <tr class="memdesc:a4a4cc16e4a302a437538c0e2d8920464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the domain which can be used to access the interpolation points in the sampling.  <a href="classddcHelper_1_1NonUniformInterpolationPoints.html#a4a4cc16e4a302a437538c0e2d8920464">More...</a><br /></td></tr>
@@ -167,8 +167,8 @@ template&lt;class BSplines , ddc::BoundCond BcXmin, ddc::BoundCond BcXmax&gt; </
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a291ef7452b01725178ba6e884e5239b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a291ef7452b01725178ba6e884e5239b8">&#9670;&nbsp;</a></span>get_sampling()</h2>
+<a id="ac0fb078c4d7e193d9f4b98774a67be52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0fb078c4d7e193d9f4b98774a67be52">&#9670;&nbsp;</a></span>get_sampling()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,8 +184,18 @@ template&lt;typename Sampling , typename U  = BSplines&gt; </div>
           <td class="memname">static auto <a class="el" href="classddcHelper_1_1NonUniformInterpolationPoints.html">ddcHelper::NonUniformInterpolationPoints</a>&lt; BSplines, BcXmin, BcXmax &gt;::get_sampling </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; Coord&lt; Dim &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>interp_points</em></td><td>)</td>
+          <td class="paramname"><em>interp_points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>TOL</em> = <code>2e-14</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -198,7 +208,8 @@ template&lt;typename Sampling , typename U  = BSplines&gt; </div>
 <p>Get the sampling of interpolation points. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">interp_points</td><td>The grid points on which the simulation will evolve.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">interp_points</td><td>The grid points on which the simulation will evolve. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">TOL</td><td>The tolerance above which points are considered to be non-uniform.</td></tr>
   </table>
   </dd>
 </dl>

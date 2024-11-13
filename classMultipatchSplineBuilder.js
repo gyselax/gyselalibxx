@@ -1,6 +1,6 @@
 var classMultipatchSplineBuilder =
 [
-    [ "MultipatchSplineBuilder", "classMultipatchSplineBuilder.html#ac15662b146d7eda700925ae1caad030e", null ],
-    [ "~MultipatchSplineBuilder", "classMultipatchSplineBuilder.html#af96f6de545d6388fcc39c3dadfcb9575", null ],
-    [ "operator()", "classMultipatchSplineBuilder.html#a0e9a0659e97da24ba0e5f71939ace8f6", null ]
+    [ "MultipatchSplineBuilder", "classMultipatchSplineBuilder.html#a97386a9ec4fdbaddc567d3486f06317d", null ],
+    [ "~MultipatchSplineBuilder", "classMultipatchSplineBuilder.html#acb6518219b8a1e835784c9010e5aafcf", null ],
+    [ "operator()", "classMultipatchSplineBuilder.html#a0292da3c87a8bd59c429f1bc076051c3", null ]
 ];

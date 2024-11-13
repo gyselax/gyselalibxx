@@ -126,15 +126,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1fd5a0ed1e680dd18934365252712ab3"><td class="memItemLeft" align="right" valign="top">std::int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionInfo.html#a1fd5a0ed1e680dd18934365252712ab3">collisions_interspecies</a> () const</td></tr>
 <tr class="memdesc:a1fd5a0ed1e680dd18934365252712ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the collisions_interspecies member variable of the class.  <a href="classCollisionInfo.html#a1fd5a0ed1e680dd18934365252712ab3">More...</a><br /></td></tr>
 <tr class="separator:a1fd5a0ed1e680dd18934365252712ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bb11c09eacb61eea65295c6c28dd7b6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6">rg</a> () const</td></tr>
-<tr class="memdesc:a7bb11c09eacb61eea65295c6c28dd7b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the rg variable of the class.  <a href="classCollisionInfo.html#a7bb11c09eacb61eea65295c6c28dd7b6">More...</a><br /></td></tr>
-<tr class="separator:a7bb11c09eacb61eea65295c6c28dd7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6829d42161f04378b4cc0cbdec368f9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9">safety_factor</a> () const</td></tr>
-<tr class="memdesc:aa6829d42161f04378b4cc0cbdec368f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the safety factor variable of the class.  <a href="classCollisionInfo.html#aa6829d42161f04378b4cc0cbdec368f9">More...</a><br /></td></tr>
-<tr class="separator:aa6829d42161f04378b4cc0cbdec368f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ca336129be7116dd672ef1685817ebf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf">nustar0</a> () const</td></tr>
-<tr class="memdesc:a7ca336129be7116dd672ef1685817ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the nustar0 variable of the class.  <a href="classCollisionInfo.html#a7ca336129be7116dd672ef1685817ebf">More...</a><br /></td></tr>
-<tr class="separator:a7ca336129be7116dd672ef1685817ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96238113bdf5f0ea1dd2a6d99726ac95"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">coeff_AD</a> () const</td></tr>
 <tr class="memdesc:a96238113bdf5f0ea1dd2a6d99726ac95"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method for accessing the coeff_AD variable of the class.  <a href="classCollisionInfo.html#a96238113bdf5f0ea1dd2a6d99726ac95">More...</a><br /></td></tr>
 <tr class="separator:a96238113bdf5f0ea1dd2a6d99726ac95"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,6 +164,11 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>Computation of the radial profile of ADi that is required for koliop interface </p><p class="formulaDsp">
+\[ AD(rpeak) = \sqrt(2)*eps_rpeak^(3/2)/(q_rpeak R0)*nustar0_rpeak \]
+</p>
+<p> eps_rpeak = eps(rpeak) with eps(r) = r/R0 is the aspect ratio.</p>
+<p>In this specific case, where AD is a scalar all values are forced to 1, so coeff_AD_atrpeak = sqrt(2)</p>
 
 </div>
 </div>
@@ -202,90 +198,6 @@ Public Member Functions</h2></td></tr>
 
 <p>A method for accessing the collisions_interspecies member variable of the class. </p>
 <dl class="section return"><dt>Returns</dt><dd>A boolean containing the collisions_interspecies value. </dd></dl>
-
-</div>
-</div>
-<a id="a7bb11c09eacb61eea65295c6c28dd7b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bb11c09eacb61eea65295c6c28dd7b6">&#9670;&nbsp;</a></span>rg()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CollisionInfo::rg </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>A method for accessing the rg variable of the class. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double containing the rg value. </dd></dl>
-
-</div>
-</div>
-<a id="aa6829d42161f04378b4cc0cbdec368f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6829d42161f04378b4cc0cbdec368f9">&#9670;&nbsp;</a></span>safety_factor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CollisionInfo::safety_factor </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>A method for accessing the safety factor variable of the class. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double containing the safety factor value. </dd></dl>
-
-</div>
-</div>
-<a id="a7ca336129be7116dd672ef1685817ebf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ca336129be7116dd672ef1685817ebf">&#9670;&nbsp;</a></span>nustar0()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CollisionInfo::nustar0 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>A method for accessing the nustar0 variable of the class. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double containing the nustar0 value. </dd></dl>
 
 </div>
 </div>

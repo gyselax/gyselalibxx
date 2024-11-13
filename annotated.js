@@ -13,7 +13,10 @@ var annotated =
       [ "ExtractThetaDim< ConstField< double, IdxRange< GridR >, Kokkos::DefaultExecutionSpace::memory_space, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid4d06e1e2d0c2d7c6dba5eb3f62b8c1f6", "namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid4d06e1e2d0c2d7c6dba5eb3f62b8c1f6_dup" ],
       [ "ExtractThetaDim< ConstField< double, IdxRange< GridTheta >, Kokkos::DefaultExecutionSpace::memory_space, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid60b078372e4f21da53e41a7105d0e223", "namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid60b078372e4f21da53e41a7105d0e223_dup" ],
       [ "ExtractThetaDim< ConstField< double, IdxRange< GridTheta, GridR >, Kokkos::DefaultExecutionSpace::memory_space, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grida5f24db67f7287ccd8eb306d1be5d530", "namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grida5f24db67f7287ccd8eb306d1be5d530_dup" ],
-      [ "ExtractThetaDim< Field< ElementType, IdxRange, MemSpace, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01Field_3_01ElementType_00_01IdxRange_00_01Memb61e2a7adc5523dde8976f9c0d44ef20", null ]
+      [ "ExtractThetaDim< Field< ElementType, IdxRange, MemSpace, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01Field_3_01ElementType_00_01IdxRange_00_01Memb61e2a7adc5523dde8976f9c0d44ef20", null ],
+      [ "ExtractRThetaTags", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRThetaTags", null ],
+      [ "ExtractRThetaTags< double >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRThetaTags_3_01double_01_4", "namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractRThetaTags_3_01double_01_4_dup" ],
+      [ "ExtractRThetaTags< DConstField< IdxRange > >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRThetaTags_3_01DConstField_3_01IdxRange_01_4_01_4", "namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractRThetaTags_3_01DConstField_3_01IdxRange_01_4_01_4_dup" ]
     ] ],
     [ "connectivity_details", null, [
       [ "PatchConnection", "structconnectivity__details_1_1PatchConnection.html", null ],
@@ -229,9 +232,6 @@ var annotated =
     [ "GridMu", "structGridMu.html", null ],
     [ "GridR", "structGridR.html", null ],
     [ "GridTheta", "structGridTheta.html", null ],
-    [ "GridTor1", "structGridTor1.html", null ],
-    [ "GridTor2", "structGridTor2.html", null ],
-    [ "GridTor3", "structGridTor3.html", null ],
     [ "GridVpar", "structGridVpar.html", null ],
     [ "GridVx", "structGridVx.html", null ],
     [ "GridVy", "structGridVy.html", null ],
@@ -365,9 +365,6 @@ var annotated =
     [ "to_tuple", "structto__tuple.html", "structto__tuple" ],
     [ "to_tuple< std::integer_sequence< T, Ints... > >", "structto__tuple_3_01std_1_1integer__sequence_3_01T_00_01Ints_8_8_8_01_4_01_4.html", "structto__tuple_3_01std_1_1integer__sequence_3_01T_00_01Ints_8_8_8_01_4_01_4" ],
     [ "to_tuple< std::pair< T, U > >", "structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4.html", "structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4" ],
-    [ "Tor1", "structTor1.html", null ],
-    [ "Tor2", "structTor2.html", null ],
-    [ "Tor3", "structTor3.html", null ],
     [ "TranslationAdvectionFieldSimulation", "classTranslationAdvectionFieldSimulation.html", "classTranslationAdvectionFieldSimulation" ],
     [ "TranslationSimulation", "classTranslationSimulation.html", "classTranslationSimulation" ],
     [ "tuple_to_types", "structtuple__to__types.html", "structtuple__to__types" ],

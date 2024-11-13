@@ -185,40 +185,38 @@ $(document).ready(function(){initNavTree('collisions__intra_8hpp_source.html',''
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#addf7a93d3bbdc450236e56d71609c10b">  134</a></span>&#160;    <a class="code" href="classCollisionsIntra.html#addf7a93d3bbdc450236e56d71609c10b">CollisionsIntra</a>(IdxRangeSpXVx <span class="keyword">const</span>&amp; mesh, <span class="keywordtype">double</span> nustar0);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    ~<a class="code" href="classCollisionsIntra.html">CollisionsIntra</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ad066a79f6c0a9dcf3720dbfc5e9056e0">  151</a></span>&#160;    DFieldSpXVx <a class="code" href="classCollisionsIntra.html#ad066a79f6c0a9dcf3720dbfc5e9056e0">operator()</a>(DFieldSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">  158</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">get_nustar0</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#aeafed32ace7e97247558e6259328e8a1">  165</a></span>&#160;    IdxRange&lt;GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#aeafed32ace7e97247558e6259328e8a1">get_gridvx_ghosted</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a398712f845cd31322e0103a771d2db20">  172</a></span>&#160;    IdxRange&lt;GhostedVxStaggered&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a398712f845cd31322e0103a771d2db20">get_gridvx_ghosted_staggered</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a84cbeb483e27f40cbae29c42aaabc287">  179</a></span>&#160;    IdxRange&lt;Species, GridX, GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a84cbeb483e27f40cbae29c42aaabc287">get_mesh_ghosted</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">  190</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">compute_rhs_vector</a>(</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            DFieldSpXVx RR,</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            DConstFieldSpXVx AA,</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            DConstFieldSpXVx BB,</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            DConstFieldSpXVx CC,</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            DConstFieldSpXVx allfdistribu,</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <span class="keywordtype">double</span> fthresh) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050">  207</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050">compute_matrix_coeff</a>(</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            DFieldSpXVx AA,</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            DFieldSpXVx BB,</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            DFieldSpXVx CC,</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            Field&lt;double, IdxRangeSpXVx_ghosted&gt; Dcoll,</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            Field&lt;double, IdxRangeSpXVx_ghosted_staggered&gt; Dcoll_staggered,</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            Field&lt;double, IdxRangeSpXVx_ghosted&gt; Nucoll,</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordtype">double</span> deltat) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03">  223</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03">fill_matrix_with_coeff</a>(</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <a class="code" href="classMatrix__Banded.html">Matrix_Banded</a>&amp; matrix,</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            host_t&lt;DConstFieldVx&gt; AA,</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            host_t&lt;DConstFieldVx&gt; BB,</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            host_t&lt;DConstFieldVx&gt; CC) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;};</div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#ad066a79f6c0a9dcf3720dbfc5e9056e0">  149</a></span>&#160;    DFieldSpXVx <a class="code" href="classCollisionsIntra.html#ad066a79f6c0a9dcf3720dbfc5e9056e0">operator()</a>(DFieldSpXVx allfdistribu, <span class="keywordtype">double</span> dt) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">  156</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8">get_nustar0</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#aeafed32ace7e97247558e6259328e8a1">  163</a></span>&#160;    IdxRange&lt;GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#aeafed32ace7e97247558e6259328e8a1">get_gridvx_ghosted</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a398712f845cd31322e0103a771d2db20">  170</a></span>&#160;    IdxRange&lt;GhostedVxStaggered&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a398712f845cd31322e0103a771d2db20">get_gridvx_ghosted_staggered</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a84cbeb483e27f40cbae29c42aaabc287">  177</a></span>&#160;    IdxRange&lt;Species, GridX, GhostedVx&gt; <span class="keyword">const</span>&amp; <a class="code" href="classCollisionsIntra.html#a84cbeb483e27f40cbae29c42aaabc287">get_mesh_ghosted</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">  188</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">compute_rhs_vector</a>(</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            DFieldSpXVx RR,</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            DConstFieldSpXVx AA,</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            DConstFieldSpXVx BB,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            DConstFieldSpXVx CC,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            DConstFieldSpXVx allfdistribu,</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            <span class="keywordtype">double</span> fthresh) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050">  205</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#aa3c59137d3bc0e30d7ca9b413039b050">compute_matrix_coeff</a>(</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            DFieldSpXVx AA,</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            DFieldSpXVx BB,</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            DFieldSpXVx CC,</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            Field&lt;double, IdxRangeSpXVx_ghosted&gt; Dcoll,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            Field&lt;double, IdxRangeSpXVx_ghosted_staggered&gt; Dcoll_staggered,</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            Field&lt;double, IdxRangeSpXVx_ghosted&gt; Nucoll,</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="keywordtype">double</span> deltat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03">  221</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCollisionsIntra.html#a8f9e7a4e2131b1641f821f4bb4a78b03">fill_matrix_with_coeff</a>(</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <a class="code" href="classMatrix__Banded.html">Matrix_Banded</a>&amp; matrix,</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            host_t&lt;DConstFieldVx&gt; AA,</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            host_t&lt;DConstFieldVx&gt; BB,</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            host_t&lt;DConstFieldVx&gt; CC) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;};</div>
 <div class="ttc" id="aclassCollisionsIntra_html"><div class="ttname"><a href="classCollisionsIntra.html">CollisionsIntra</a></div><div class="ttdoc">Class describing the intra-species collision operator.</div><div class="ttdef"><b>Definition:</b> collisions_intra.hpp:40</div></div>
 <div class="ttc" id="aclassCollisionsIntra_html_a164c6c249095a533900a12e2f1f48e25"><div class="ttname"><a href="classCollisionsIntra.html#a164c6c249095a533900a12e2f1f48e25">CollisionsIntra::IdxVx_ghosted_staggered</a></div><div class="ttdeci">Idx&lt; GhostedVxStaggered &gt; IdxVx_ghosted_staggered</div><div class="ttdoc">A type representing a ghosted staggered vx index.</div><div class="ttdef"><b>Definition:</b> collisions_intra.hpp:79</div></div>
 <div class="ttc" id="aclassCollisionsIntra_html_a21406b811ef83d4f90a80c0139ddb5de"><div class="ttname"><a href="classCollisionsIntra.html#a21406b811ef83d4f90a80c0139ddb5de">CollisionsIntra::compute_rhs_vector</a></div><div class="ttdeci">void compute_rhs_vector(DFieldSpXVx RR, DConstFieldSpXVx AA, DConstFieldSpXVx BB, DConstFieldSpXVx CC, DConstFieldSpXVx allfdistribu, double fthresh) const</div><div class="ttdoc">Compute the right-hand-side of the collision operator linear system.</div></div>

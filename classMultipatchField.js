@@ -9,6 +9,7 @@ var classMultipatchField =
     [ "discrete_domain_type", "classMultipatchField.html#a5b3babc9be1e8e6c0c87ab4a89d87fc2", null ],
     [ "memory_space", "classMultipatchField.html#a8b5f2a92ee8624fbade15581c7276036", null ],
     [ "element_type", "classMultipatchField.html#a22720108209413ba6d27300ed253adf6", null ],
+    [ "idx_type", "classMultipatchField.html#a5a2a447cf52dda49f36c1089372e4e42", null ],
     [ "MultipatchField", "classMultipatchField.html#a888426c528c86a5049c9636d73232c2d", null ],
     [ "MultipatchField", "classMultipatchField.html#a243a3e0121a1f9d6fd081a0bc117b1ec", null ],
     [ "MultipatchField", "classMultipatchField.html#a733d459c789fa5df78b5a7f2863f537e", null ],

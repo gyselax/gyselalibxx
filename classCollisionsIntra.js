@@ -9,7 +9,6 @@ var classCollisionsIntra =
     [ "IdxSpXVx_ghosted", "classCollisionsIntra.html#aa075cab1489331085e1473960b074dd3", null ],
     [ "IdxSpXVx_ghosted_staggered", "classCollisionsIntra.html#a8bd3150e39cbad46ac340e07ca315662", null ],
     [ "CollisionsIntra", "classCollisionsIntra.html#addf7a93d3bbdc450236e56d71609c10b", null ],
-    [ "~CollisionsIntra", "classCollisionsIntra.html#a2852d761a945afbcb0ffba9326b8f79c", null ],
     [ "operator()", "classCollisionsIntra.html#ad066a79f6c0a9dcf3720dbfc5e9056e0", null ],
     [ "get_nustar0", "classCollisionsIntra.html#a6b18fb17a213025672de06d8d6b7cee8", null ],
     [ "get_gridvx_ghosted", "classCollisionsIntra.html#aeafed32ace7e97247558e6259328e8a1", null ],

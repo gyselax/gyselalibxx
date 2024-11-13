@@ -15,5 +15,6 @@ var src_multipatch =
       [ "Multipatch spline evaluator", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_evaluator", null ],
       [ "Multipatch extrapolation rules", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_extrapolation_rules", null ],
       [ "Contents", "src_multipatch_spline.html#src_multipatch_spline__Contents", null ]
-    ] ]
+    ] ],
+    [ "Multipatch utilitary functions", "src_multipatch_utils.html", null ]
 ];

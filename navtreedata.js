@@ -56,6 +56,7 @@ var NAVTREE =
       [ "Implicit capture of 'this' in extended lambda expression", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__Implicit_capture_of__this__in_extended_lambda_expression", null ],
       [ "Accessing allocated data", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__Accessing_allocated_data", null ],
       [ "The enclosing parent function for an extended '__host__' '__device__' lambda cannot have private or protected access within its class", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__The_enclosing_parent_function_for_an_extended____host_______device____lambda_cannot_have_private_or_protected_access_within_its_class", null ],
+      [ "The enclosing parent function for an extended '__host__' '__device__' lambda must allow its address to be taken", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__The_enclosing_parent_function_for_an_extended____host_______device____lambda_must_allow_its_address_to_be_taken", null ],
       [ "A nonstatic member reference must be relative to a specific object", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__A_nonstatic_member_reference_must_be_relative_to_a_specific_object", null ],
       [ "X is not defined", "docs_Common_compilation_problems.html#docs_Common_compilation_problems__X_is_not_defined", null ]
     ] ],
@@ -92,14 +93,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html#ac01474294ab1950cacb75dce2d735a7e",
-"classEuler.html#a468e0909ac8b50f109dc810879253134",
-"classKineticSource.html",
-"classMultipatchFieldMem.html#abbd97d1ad7dfdd97b1721d08de4b4c3c",
-"classRK3.html#ad0949984fa0c2d0004f6b7a10e19cd69",
-"discrete__mapping__builder_8hpp_source.html",
-"simulations_geometryXY_guiding_center.html#autotoc_md36",
-"structPolarSpline.html#ab3a28213cc6fec9de5bed1b39626ff19"
+"classCollisionSpVparMu.html#adf88b0d72b030bd51728e9c0b35896cb",
+"classEuler.html#abf7ce877cffa5f112975e0c8ebaf5b28",
+"classKrookSourceAdaptive.html#a1f7a6ce3a4f5f93214352a4787ba7888",
+"classMultipatchFieldMem.html#adc226c7e5d20ea6fa028f1054de505e4",
+"classRK4.html#a468e0909ac8b50f109dc810879253134",
+"docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally",
+"species__info_8hpp_source.html",
+"structPolarSpline.html#a5a692091b5e1dbccc094ec737afc5cef"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
