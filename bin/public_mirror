@@ -37,11 +37,13 @@ last_message_public=$(git log -1 --pretty=%s%n%n%b)
 git_log_options="git log --all-match -F --pretty=%H"
 while IFS= read -r line
 do
-    if [ -n "$line" ]
-    then
-      line=${line//"'"/"'\"'\"'"}
-      git_log_options="${git_log_options} --grep='$line'"
-    fi
+    while [ -n "$line" ]
+    do
+      truncated_line=${line:0:140}
+      quoted_line=${truncated_line//"'"/"'\"'\"'"}
+      git_log_options="${git_log_options} --grep='${quoted_line}'"
+      line=${line:140}
+    done
 done <<< ${last_message_public}
 git checkout ${current_SHA}
 
