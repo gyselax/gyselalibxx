@@ -96,7 +96,7 @@ jobs:
         shell: bash
       - name: Generate docs
         run: |
-          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs code_branch
+          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs code_branch
           cmake --build build-docs
         shell: bash
       - name: Update documentation
