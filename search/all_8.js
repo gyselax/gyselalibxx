@@ -72,7 +72,7 @@ var searchData=
   ['init_5fnnz_5fper_5fline_482',['init_nnz_per_line',['../classPolarSplineFEMPoissonLikeSolver.html#a7210eb4925c854a35940cb0667a2a294',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['initialisation_483',['initialisation',['../classDiocotronDensitySolution.html#a87def8e146e4c4104e3a3d3d7d54445d',1,'DiocotronDensitySolution']]],
   ['initialization_484',['Initialization',['../src_geometryRTheta_initialization.html',1,'src_geometryRTheta']]],
-  ['initialization_20methods_485',['Initialization methods',['../src_geometryTokamAxi_initialization.html',1,'(Global Namespace)'],['../src_geometryVparMu_initialization.html',1,'src_geometryVparMu'],['../src_geometryXVx_initialization.html',1,'src_geometryXVx']]],
+  ['initialization_20methods_485',['Initialization methods',['../src_geometryTokamAxi_initialization.html',1,'src_geometryTokamAxi'],['../src_geometryVparMu_initialization.html',1,'src_geometryVparMu'],['../src_geometryXVx_initialization.html',1,'src_geometryXVx']]],
   ['initialization_20on_20_28x_2cy_29_20geometry_486',['Initialization on (x,y) geometry',['../src_geometryXY_initialization.html',1,'src_geometryXY']]],
   ['inner_5fedges_487',['inner_edges',['../classMultipatchConnectivity.html#a762ff8496d1ec32be37bad6e25f7e926',1,'MultipatchConnectivity']]],
   ['inputdfieldspthetarvpar_488',['InputDFieldSpThetaRVpar',['../classCollisionSpVparMu.html#a11cef1817d30d02345e255b3d95c33a2',1,'CollisionSpVparMu']]],

@@ -82,7 +82,6 @@ var NAVTREE =
     ] ],
     [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
     [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Initialization methods", "src_geometryTokamAxi_initialization.html", null ],
     [ "Gyselalib++ tests", "tests.html", "tests" ],
     [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
     [ "API reference", "annotated.html", "annotated" ],
