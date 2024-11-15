@@ -11,7 +11,6 @@ var src =
       [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]
     ] ],
     [ "Geometry (r, theta)", "src_geometryRTheta.html", "src_geometryRTheta" ],
-    [ "Geometry (mu, vpar, r, theta)", "src_geometryTokamAxi.html", "src_geometryTokamAxi" ],
     [ "Geometry (vpar, mu)", "src_geometryVparMu.html", "src_geometryVparMu" ],
     [ "Geometry (x, v_x)", "src_geometryXVx.html", "src_geometryXVx" ],
     [ "Geometry (x, y)", "src_geometryXY.html", "src_geometryXY" ],

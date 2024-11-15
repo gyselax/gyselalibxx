@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('classIEquilibrium.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
-<p>An abstract class for initializing a distribution function in (species,vpar,mu,r,theta).  
+<p>An abstract class for initializing a distribution function in (species,vpar,mu).  
  <a href="classIEquilibrium.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for IEquilibrium:</div>
@@ -116,18 +116,14 @@ Inheritance diagram for IEquilibrium:</div>
   <img src="classIEquilibrium.png" usemap="#IEquilibrium_map" alt=""/>
   <map id="IEquilibrium_map" name="IEquilibrium_map">
 <area href="classBumpontailEquilibrium.html" title="A class that initializes the distribution function as a sum of two Maxwellian functions." alt="BumpontailEquilibrium" shape="rect" coords="0,56,136,80"/>
-<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as normalized Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="146,56,282,80"/>
-<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as normalized Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="292,56,428,80"/>
-<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as normalized Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="438,56,574,80"/>
-<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as normalized Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="584,56,720,80"/>
+<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="146,56,282,80"/>
+<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="292,56,428,80"/>
+<area href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species." alt="MaxwellianEquilibrium" shape="rect" coords="438,56,574,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a58d9872d82ccadfbb3f215528463e30d"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpV2DTor2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEquilibrium.html#a58d9872d82ccadfbb3f215528463e30d">operator()</a> (DFieldSpV2DTor2D allfequilibrium) const =0</td></tr>
-<tr class="memdesc:a58d9872d82ccadfbb3f215528463e30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing an equilibrium distribution function.  <a href="classIEquilibrium.html#a58d9872d82ccadfbb3f215528463e30d">More...</a><br /></td></tr>
-<tr class="separator:a58d9872d82ccadfbb3f215528463e30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a425f7b104d75900fcc769bdee9c0cdbd"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpVparMu&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIEquilibrium.html#a425f7b104d75900fcc769bdee9c0cdbd">operator()</a> (DFieldSpVparMu allfequilibrium) const =0</td></tr>
 <tr class="memdesc:a425f7b104d75900fcc769bdee9c0cdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for initializing an equilibrium distribution function.  <a href="classIEquilibrium.html#a425f7b104d75900fcc769bdee9c0cdbd">More...</a><br /></td></tr>
 <tr class="separator:a425f7b104d75900fcc769bdee9c0cdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,51 +135,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac3766d5ef01c1e949ec3dd6d55892a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An abstract class for initializing a distribution function in (species,vpar,mu,r,theta). </p>
+<div class="textblock"><p>An abstract class for initializing a distribution function in (species,vpar,mu). </p>
 <p>An abstract class for initializing the equilibrium state of the distribution function.</p>
 <p>An abstract class for initializing a distribution function that does not depend on space.</p>
-<p>An abstract class for initializing a distribution function in (species,vpar,mu).</p>
 <p>The equilibrium state does not depend on spatial dimensions. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a58d9872d82ccadfbb3f215528463e30d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58d9872d82ccadfbb3f215528463e30d">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual DFieldSpV2DTor2D IEquilibrium::operator() </td>
-          <td>(</td>
-          <td class="paramtype">DFieldSpV2DTor2D&#160;</td>
-          <td class="paramname"><em>allfequilibrium</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Operator for initializing an equilibrium distribution function. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">allfequilibrium</td><td>On input: the uninitialized distribution function. On output: the initialized distribution function. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The initialized equilibrium distribution function. </dd></dl>
-
-<p>Implemented in <a class="el" href="classMaxwellianEquilibrium.html#a0a2a1b781c2e521696ffc22c02d52282">MaxwellianEquilibrium</a>.</p>
-
-</div>
-</div>
 <a id="a425f7b104d75900fcc769bdee9c0cdbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a425f7b104d75900fcc769bdee9c0cdbd">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a425f7b104d75900fcc769bdee9c0cdbd">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +178,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a3ea3adf00a9a416a8e3fe54caba902a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea3adf00a9a416a8e3fe54caba902a4">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea3adf00a9a416a8e3fe54caba902a4">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,7 +215,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ac3766d5ef01c1e949ec3dd6d55892a75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3766d5ef01c1e949ec3dd6d55892a75">&#9670;&nbsp;</a></span>operator()() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3766d5ef01c1e949ec3dd6d55892a75">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +252,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryTokamAxi/initialization/<a class="el" href="geometryTokamAxi_2initialization_2iequilibrium_8hpp_source.html">iequilibrium.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialization/<a class="el" href="geometryVparMu_2initialization_2iequilibrium_8hpp_source.html">iequilibrium.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

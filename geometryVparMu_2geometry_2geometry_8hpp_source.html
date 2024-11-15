@@ -118,13 +118,13 @@ $(document).ready(function(){initNavTree('geometryVparMu_2geometry_2geometry_8hp
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">struct </span><a class="code" href="structVpar.html">Vpar</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structVpar.html">   19</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structVpar.html">Vpar</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structVpar.html#a463f771232ce1d607bf477d8c395eafe">   26</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structVpar.html#a463f771232ce1d607bf477d8c395eafe">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">struct </span><a class="code" href="structMu.html">Mu</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structMu.html">   31</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structMu.html">Mu</a></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structMu.html#aafb51f3460f541dac823aabc632ee400">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structMu.html#ad044685c30893649b870991b5f0e592a">   38</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> constexpr <a class="code" href="structMu.html#ad044685c30893649b870991b5f0e592a">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Coord = position of a coordinate in the vector space</span></div>
@@ -138,14 +138,14 @@ $(document).ready(function(){initNavTree('geometryVparMu_2geometry_2geometry_8hp
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsVpar = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">bool</span> constexpr BsplineOnUniformCellsMu = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesVpar.html">BSplinesVpar</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structBSplinesVpar.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesVpar.html">BSplinesVpar</a></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    : std::conditional_t&lt;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;              BsplineOnUniformCellsVpar,</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;              ddc::UniformBSplines&lt;Vpar, BSDegreeVpar&gt;,</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;              ddc::NonUniformBSplines&lt;Vpar, BSDegreeVpar&gt;&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesMu.html">BSplinesMu</a></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structBSplinesMu.html">   59</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBSplinesMu.html">BSplinesMu</a></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    : std::conditional_t&lt;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;              BsplineOnUniformCellsMu,</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;              ddc::UniformBSplines&lt;Mu, BSDegreeMu&gt;,</div>
@@ -155,15 +155,15 @@ $(document).ready(function(){initNavTree('geometryVparMu_2geometry_2geometry_8hp
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html">SplineInterpPointsVpar</a></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">using</span> SplineInterpPointsVpar</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesVpar, SplineVparBoundary, SplineVparBoundary&gt;;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">using</span> <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html">SplineInterpPointsMu</a></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">using</span> SplineInterpPointsMu</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        = ddc::GrevilleInterpolationPoints&lt;BSplinesMu, SplineMuBoundary, SplineMuBoundary&gt;;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridVpar.html">GridVpar</a> : <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab">SplineInterpPointsVpar::interpolation_discrete_dimension_type</a></div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structGridVpar.html">   74</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridVpar.html">GridVpar</a> : SplineInterpPointsVpar::interpolation_discrete_dimension_type</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">struct </span><a class="code" href="structGridMu.html">GridMu</a> : <a class="code" href="classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab">SplineInterpPointsMu::interpolation_discrete_dimension_type</a></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structGridMu.html">   77</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structGridMu.html">GridMu</a> : SplineInterpPointsMu::interpolation_discrete_dimension_type</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
@@ -293,16 +293,14 @@ $(document).ready(function(){initNavTree('geometryVparMu_2geometry_2geometry_8hp
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">- IDomX --&gt; IdxRangeX</span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">- DBSsplineX --&gt; SplineCoeffX</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">*/</span></div>
-<div class="ttc" id="aclassddcHelper_1_1NonUniformInterpolationPoints_html"><div class="ttname"><a href="classddcHelper_1_1NonUniformInterpolationPoints.html">ddcHelper::NonUniformInterpolationPoints</a></div><div class="ttdoc">Helper class for the initialisation of the mesh of interpolation points.</div><div class="ttdef"><b>Definition:</b> non_uniform_interpolation_points.hpp:44</div></div>
-<div class="ttc" id="aclassddcHelper_1_1NonUniformInterpolationPoints_html_afe391dfd5787f205a4096fef58e7beab"><div class="ttname"><a href="classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab">ddcHelper::NonUniformInterpolationPoints::interpolation_discrete_dimension_type</a></div><div class="ttdeci">NonUniformGridBase&lt; Dim &gt; interpolation_discrete_dimension_type</div><div class="ttdoc">The type of the mesh.</div><div class="ttdef"><b>Definition:</b> non_uniform_interpolation_points.hpp:153</div></div>
-<div class="ttc" id="astructBSplinesMu_html"><div class="ttname"><a href="structBSplinesMu.html">BSplinesMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:90</div></div>
-<div class="ttc" id="astructBSplinesVpar_html"><div class="ttname"><a href="structBSplinesVpar.html">BSplinesVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:87</div></div>
-<div class="ttc" id="astructGridMu_html"><div class="ttname"><a href="structGridMu.html">GridMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:116</div></div>
-<div class="ttc" id="astructGridVpar_html"><div class="ttname"><a href="structGridVpar.html">GridVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:113</div></div>
-<div class="ttc" id="astructMu_html"><div class="ttname"><a href="structMu.html">Mu</a></div><div class="ttdoc">Define non periodic magnetic momentum .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:56</div></div>
-<div class="ttc" id="astructMu_html_aafb51f3460f541dac823aabc632ee400"><div class="ttname"><a href="structMu.html#aafb51f3460f541dac823aabc632ee400">Mu::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the magnetic momentum.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:62</div></div>
-<div class="ttc" id="astructVpar_html"><div class="ttname"><a href="structVpar.html">Vpar</a></div><div class="ttdoc">Define non periodic parallel velocity .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:44</div></div>
-<div class="ttc" id="astructVpar_html_a568128c66d38f66c0bf803d0580cd494"><div class="ttname"><a href="structVpar.html#a568128c66d38f66c0bf803d0580cd494">Vpar::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the parallel velocity.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:50</div></div>
+<div class="ttc" id="astructBSplinesMu_html"><div class="ttname"><a href="structBSplinesMu.html">BSplinesMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:64</div></div>
+<div class="ttc" id="astructBSplinesVpar_html"><div class="ttname"><a href="structBSplinesVpar.html">BSplinesVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:57</div></div>
+<div class="ttc" id="astructGridMu_html"><div class="ttname"><a href="structGridMu.html">GridMu</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:78</div></div>
+<div class="ttc" id="astructGridVpar_html"><div class="ttname"><a href="structGridVpar.html">GridVpar</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:75</div></div>
+<div class="ttc" id="astructMu_html"><div class="ttname"><a href="structMu.html">Mu</a></div><div class="ttdoc">Define non periodic magnetic momentum .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:32</div></div>
+<div class="ttc" id="astructMu_html_ad044685c30893649b870991b5f0e592a"><div class="ttname"><a href="structMu.html#ad044685c30893649b870991b5f0e592a">Mu::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the magnetic momentum.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:38</div></div>
+<div class="ttc" id="astructVpar_html"><div class="ttname"><a href="structVpar.html">Vpar</a></div><div class="ttdoc">Define non periodic parallel velocity .</div><div class="ttdef"><b>Definition:</b> geometry.hpp:20</div></div>
+<div class="ttc" id="astructVpar_html_a463f771232ce1d607bf477d8c395eafe"><div class="ttname"><a href="structVpar.html#a463f771232ce1d607bf477d8c395eafe">Vpar::PERIODIC</a></div><div class="ttdeci">static constexpr bool PERIODIC</div><div class="ttdoc">The periodicity of the parallel velocity.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

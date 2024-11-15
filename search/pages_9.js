@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['neutral_20simulations_1894',['Neutral simulations',['../simulations_geometryXVx_neutrals.html',1,'simulations_geometryXVx']]]
+  ['neutral_20simulations_1890',['Neutral simulations',['../simulations_geometryXVx_neutrals.html',1,'simulations_geometryXVx']]]
 ];
