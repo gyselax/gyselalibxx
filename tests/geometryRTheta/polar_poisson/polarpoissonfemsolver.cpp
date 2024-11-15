@@ -22,7 +22,11 @@
 #include "polarpoissonlikesolver.hpp"
 #include "test_cases.hpp"
 
-using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
+        GridR,
+        GridTheta,
+        PolarBSplinesRTheta,
+        SplineRThetaEvaluatorNullBound>;
 
 #if defined(CIRCULAR_MAPPING)
 using Mapping = CircularToCartesian<X, Y, R, Theta>;
@@ -151,7 +155,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
+    PoissonSolver solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping, evaluator);
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "
@@ -187,12 +191,11 @@ int main(int argc, char** argv)
                      p_extrapolation_rule,
                      p_extrapolation_rule);
         solver([&](CoordRTheta const& coord) { return eval(coord, get_const_field(rhs_spline)); },
-               get_const_field(coords),
                get_field(result));
         end_time = std::chrono::system_clock::now();
     } else {
         start_time = std::chrono::system_clock::now();
-        solver(rhs, get_const_field(coords), get_field(result));
+        solver(rhs, get_field(result));
         end_time = std::chrono::system_clock::now();
     }
     std::cout << "Solver time : "

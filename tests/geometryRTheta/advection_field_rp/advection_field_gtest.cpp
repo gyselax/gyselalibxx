@@ -42,7 +42,6 @@
 
 
 namespace {
-using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using Mapping = CircularToCartesian<X, Y, R, Theta>;

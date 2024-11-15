@@ -79,7 +79,11 @@ private:
     EulerMethod const m_euler;
     SplineFootFinder<EulerMethod, AdvectionDomain> const m_find_feet;
 
-    PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
+    PolarSplineFEMPoissonLikeSolver<
+            GridR,
+            GridTheta,
+            PolarBSplinesRTheta,
+            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorConstBound const& m_evaluator;
@@ -119,7 +123,11 @@ public:
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& rhs_evaluator,
-            PolarSplineFEMPoissonLikeSolver const& poisson_solver,
+            PolarSplineFEMPoissonLikeSolver<
+                    GridR,
+                    GridTheta,
+                    PolarBSplinesRTheta,
+                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
@@ -274,7 +282,7 @@ public:
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
-        m_poisson_solver(charge_density_coord, coords, electrical_potential);
+        m_poisson_solver(charge_density_coord, electrical_potential);
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
