@@ -12,5 +12,6 @@ target_link_libraries("advection_field_RTheta" INTERFACE
     gslx::speciesinfo
     gslx::utils
     gslx::poisson_RTheta
+    gslx::pde_solvers
 )
 add_library("gslx::advection_field_RTheta" ALIAS "advection_field_RTheta")

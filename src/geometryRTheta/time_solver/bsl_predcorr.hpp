@@ -61,7 +61,11 @@ private:
 
     BslAdvectionRTheta<FootFinder, Mapping> const& m_advection_solver;
 
-    PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
+    PolarSplineFEMPoissonLikeSolver<
+            GridR,
+            GridTheta,
+            PolarBSplinesRTheta,
+            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorNullBound const& m_spline_evaluator;
@@ -90,7 +94,11 @@ public:
             BslAdvectionRTheta<FootFinder, Mapping> const& advection_solver,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& rhs_evaluator,
-            PolarSplineFEMPoissonLikeSolver const& poisson_solver)
+            PolarSplineFEMPoissonLikeSolver<
+                    GridR,
+                    GridTheta,
+                    PolarBSplinesRTheta,
+                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
@@ -115,8 +123,6 @@ public:
 
         // Grid. ------------------------------------------------------------------------------------------
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
-        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
         AdvectionFieldFinder advection_field_computer(m_mapping);
 
         IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
@@ -137,7 +143,7 @@ public:
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
-        m_poisson_solver(charge_density_coord, coords, electrical_potential0);
+        m_poisson_solver(charge_density_coord, electrical_potential0);
 
         ddc::PdiEvent("iteration")
                 .with("iter", 0)
@@ -186,7 +192,7 @@ public:
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
             PoissonLikeRHSFunction const
                     charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
-            m_poisson_solver(charge_density_coord, coords, electrical_potential);
+            m_poisson_solver(charge_density_coord, electrical_potential);
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter + 1)
