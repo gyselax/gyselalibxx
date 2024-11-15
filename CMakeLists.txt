@@ -25,6 +25,9 @@ set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ spec
 option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
+option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
+
+set(GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES ${GYSELALIBXX_BUILD_TESTING} CACHE BOOL "Indicates if the testing dependencies should be included. By default they are only included if the tests are built.")
 
 # Set default DDC options when included in GYSELA
 option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
@@ -72,7 +75,7 @@ find_package(PDI REQUIRED COMPONENTS C)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
-if("${GYSELALIBXX_BUILD_TESTING}")
+if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   set(GYSELALIBXX_GTest_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `GTest` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
   set_property(CACHE GYSELALIBXX_GTest_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
 
