@@ -44,11 +44,7 @@
 
 
 namespace {
-using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
-        GridR,
-        GridTheta,
-        PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound>;
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
@@ -92,6 +88,9 @@ int main(int argc, char** argv)
             BSplinesTheta,
             SplineInterpPointsTheta>(conf_gyselalibxx, "p");
     IdxRangeRTheta const grid(mesh_r, mesh_p);
+
+    host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
+    ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
 
 
     // OPERATORS ======================================================================================
@@ -163,11 +162,7 @@ int main(int argc, char** argv)
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    PoissonSolver poisson_solver(
-            coeff_alpha_spline,
-            coeff_beta_spline,
-            discrete_mapping,
-            spline_evaluator);
+    PoissonSolver poisson_solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping);
 
     // --- Predictor corrector operator ---------------------------------------------------------------
     BslImplicitPredCorrRTheta predcorr_operator(
@@ -250,7 +245,7 @@ int main(int argc, char** argv)
     host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(get_field(rho_coef_eq), spline_evaluator);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq));
+    poisson_solver(poisson_rhs_eq, get_const_field(coords), get_field(phi_eq));
 
 
     // --- Save initial data --------------------------------------------------------------------------

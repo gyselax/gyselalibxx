@@ -13,11 +13,12 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             paraconf::paraconf
             PDI::pdi
             sll::SLL
-            gslx::geometry_RTheta
-            gslx::paraconfpp
-            gslx::pde_solvers
             gslx::poisson_RTheta
+            gslx::paraconfpp
+            Eigen3::Eigen
+            gslx::geometry_RTheta
             gslx::utils
+
     )
     target_compile_definitions("${test_name}" PUBLIC -D${MAPPING_TYPE} -D${SOLUTION})
 

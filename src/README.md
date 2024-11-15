@@ -6,7 +6,6 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [collisions](./collisions/README.md) - Code describing the inter and intra species collisions.
 - [data\_types](./data_types/README.md) - Code describing useful data types which are not provided by DDC.
 - [geometryRTheta](./geometryRTheta/README.md) - Code describing methods which are specific to a 2D curvilinear geometry containing a singular point.
-- [geometryTokamAxi](./geometryTokamAxi/README.md) - Code describing methods which are specific to a 4D geometry (r,theta,vpar,mu) dedicated to axisymmetric tokamak geometry.
 - [geometryVparMu](./geometryVparMu/README.md) - Code describing methods which are specific to a simulation operators in velocity space (vpar,mu).
 - [geometryXVx](./geometryXVx/README.md) - Code describing methods which are specific to a simulation with 1 spatial dimension and 1 velocity dimension.
 - [geometryXY](./geometryXY/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions.

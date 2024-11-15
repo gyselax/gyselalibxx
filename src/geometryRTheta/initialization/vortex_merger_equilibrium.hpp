@@ -27,11 +27,7 @@ private:
     IdxRangeRTheta const& m_grid;
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorNullBound const& m_evaluator;
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarSplineFEMPoissonLikeSolver const& m_poisson_solver;
 
 public:
     /**
@@ -56,11 +52,7 @@ public:
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& evaluator,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
+            PolarSplineFEMPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
         , m_builder(builder)
@@ -119,6 +111,9 @@ public:
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
         host_t<Spline2DMem> rho_coef(idx_range_bsplinesRTheta);
 
+        host_t<FieldMemRTheta<CoordRTheta>> coords(m_grid);
+        ddc::for_each(m_grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
+
         double difference_sigma(0.);
         int count = 0;
 
@@ -133,7 +128,7 @@ public:
             // STEP 2: compute phi_star^i with PDE solver
             m_builder(get_field(rho_coef), get_const_field(rho_eq));
             PoissonLikeRHSFunction poisson_rhs(rho_coef, m_evaluator);
-            m_poisson_solver(poisson_rhs, get_field(phi_star));
+            m_poisson_solver(poisson_rhs, get_const_field(coords), get_field(phi_star));
 
             // STEP 3: compute c^i
             // If phi_max is given:
