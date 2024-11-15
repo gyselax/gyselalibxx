@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"docs_Adding_docs.html#autotoc_md4":[4],
+"docs_Adding_docs.html#autotoc_md5":[5],
 "docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally":[5,0],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures":[5,1],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[5,2],
@@ -186,7 +188,7 @@ var NAVTREEINDEX6 =
 "polar__poisson_2test__cases_8hpp_source.html":[16,1,1,3,1],
 "polar__spline_8hpp_source.html":[16,2,0,0,0,17],
 "polar__spline__evaluator_8hpp_source.html":[16,2,0,0,0,18],
-"polarpoissonlikesolver_8hpp_source.html":[16,0,3,5,2],
+"polarpoissonlikesolver_8hpp_source.html":[16,0,14,3],
 "polynomial__evaluator_8hpp_source.html":[16,2,0,1,2],
 "predcorr__RK2_8hpp_source.html":[16,0,7,2,0],
 "predcorr__hybrid_8hpp_source.html":[16,0,6,7,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "simulations_geometryXY_guiding_center.html#autotoc_md37":[16],
 "simulations_geometryXY_guiding_center.html#autotoc_md38":[17],
 "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Contents":[11,2,0,2],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations":[11,2,0,0],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References":[11,2,0,3],
-"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation":[11,2,0,1]
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations":[11,2,0,0]
 };

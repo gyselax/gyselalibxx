@@ -121,9 +121,9 @@ Inheritance diagram for BslPredCorrRTheta&lt; Mapping, FootFinder &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aadad583aa00746824d7ab288466bc564"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslPredCorrRTheta.html#aadad583aa00746824d7ab288466bc564">BslPredCorrRTheta</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; FootFinder, <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt; const &amp;advection_solver, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;poisson_solver)</td></tr>
-<tr class="memdesc:aadad583aa00746824d7ab288466bc564"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslPredCorrRTheta.html" title="Predictor-corrector for the Vlasov-Poisson equations.">BslPredCorrRTheta</a>.  <a href="classBslPredCorrRTheta.html#aadad583aa00746824d7ab288466bc564">More...</a><br /></td></tr>
-<tr class="separator:aadad583aa00746824d7ab288466bc564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd5255327ed9ba415bb2cec1363bf4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslPredCorrRTheta.html#a9bd5255327ed9ba415bb2cec1363bf4d">BslPredCorrRTheta</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; FootFinder, <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt; const &amp;advection_solver, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</td></tr>
+<tr class="memdesc:a9bd5255327ed9ba415bb2cec1363bf4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslPredCorrRTheta.html" title="Predictor-corrector for the Vlasov-Poisson equations.">BslPredCorrRTheta</a>.  <a href="classBslPredCorrRTheta.html#a9bd5255327ed9ba415bb2cec1363bf4d">More...</a><br /></td></tr>
+<tr class="separator:a9bd5255327ed9ba415bb2cec1363bf4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcf39ab7a2574a1f4bb644d74347a84b"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslPredCorrRTheta.html#afcf39ab7a2574a1f4bb644d74347a84b">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const</td></tr>
 <tr class="memdesc:afcf39ab7a2574a1f4bb644d74347a84b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves on \( T = dt*N \) the equations system.  <a href="classBslPredCorrRTheta.html#afcf39ab7a2574a1f4bb644d74347a84b">More...</a><br /></td></tr>
 <tr class="separator:afcf39ab7a2574a1f4bb644d74347a84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +167,8 @@ class BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aadad583aa00746824d7ab288466bc564"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadad583aa00746824d7ab288466bc564">&#9670;&nbsp;</a></span>BslPredCorrRTheta()</h2>
+<a id="a9bd5255327ed9ba415bb2cec1363bf4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bd5255327ed9ba415bb2cec1363bf4d">&#9670;&nbsp;</a></span>BslPredCorrRTheta()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +205,7 @@ template&lt;class Mapping , class FootFinder &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound &gt; const &amp;&#160;</td>
           <td class="paramname"><em>poisson_solver</em>&#160;</td>
         </tr>
         <tr>

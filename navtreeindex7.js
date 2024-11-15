@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References":[11,2,0,3],
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation":[11,2,0,1],
 "species__info_8hpp_source.html":[16,0,16,1],
 "species__init_8hpp_source.html":[16,0,16,2],
 "spline__foot__finder_8hpp_source.html":[16,0,3,0,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX7 =
 "structPolarBSplinesRTheta.html":[15,194],
 "structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.html":[15,193,0,3],
 "structPolarSpline.html":[15,195],
-"structPolarSpline.html#a0fba3837452a157ec0e1785ee610a4f4":[15,195,7],
-"structPolarSpline.html#a16899c9b2a639f3e67d3de861a0d2a2f":[15,195,3],
-"structPolarSpline.html#a34e62893f3710c8798ada29346a5a842":[15,195,2]
+"structPolarSpline.html#a0fba3837452a157ec0e1785ee610a4f4":[15,195,7]
 };

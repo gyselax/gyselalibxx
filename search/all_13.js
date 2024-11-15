@@ -12,7 +12,7 @@ var searchData=
   ['tests_20on_20the_202d_20polar_20advection_20operator_831',['Tests on the 2D polar advection operator',['../tests_geometryRTheta_advection_2d_rp.html',1,'tests_geometryRTheta']]],
   ['tests_20on_20the_202d_20polar_20poisson_20solver_832',['Tests on the 2D polar poisson solver',['../tests_geometryRTheta_polar_poisson.html',1,'tests_geometryRTheta']]],
   ['tests_20on_20the_20templated_20advection_20operators_833',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
-  ['theta_834',['Theta',['../structonion__shape__non__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_non_uniform_2d_2patches::Theta'],['../structonion__shape__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_uniform_2d_2patches::Theta'],['../structTheta.html',1,'Theta']]],
+  ['theta_834',['Theta',['../structonion__shape__non__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_non_uniform_2d_2patches::Theta'],['../structonion__shape__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_uniform_2d_2patches::Theta'],['../structTheta.html',1,'Theta'],['../classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417',1,'PolarSplineFEMPoissonLikeSolver::Theta()']]],
   ['theta1_5fmax_835',['theta1_max',['../classMultipatchSplineOnionShapeTest.html#a0ecc7140018d1b15747d40c47c572d08',1,'MultipatchSplineOnionShapeTest']]],
   ['theta1_5fmin_836',['theta1_min',['../classMultipatchSplineOnionShapeTest.html#af765587eab255ab043033e430915c607',1,'MultipatchSplineOnionShapeTest']]],
   ['theta1_5fncells_837',['theta1_ncells',['../classMultipatchSplineOnionShapeTest.html#a18543cf97a4482190d9aa434c0e1aa42',1,'MultipatchSplineOnionShapeTest']]],

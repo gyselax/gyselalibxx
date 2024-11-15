@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"classRK3.html#afdf22291a9a2f9180e1904d3a0728737":[15,215,9],
+"classRK4.html":[15,216],
 "classRK4.html#a468e0909ac8b50f109dc810879253134":[15,216,0],
 "classRK4.html#a58d11b9c1e57348b94e50b1ea284886f":[15,216,4],
 "classRK4.html#a5956fc372c34f2d14a030fd0dd66be5f":[15,216,5],
@@ -137,9 +139,9 @@ var NAVTREEINDEX5 =
 "classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[15,239,0],
 "classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8":[15,239,2],
 "classVortexMergerEquilibria.html":[15,240],
+"classVortexMergerEquilibria.html#aa0e09b4111f03a4bcdcd07172611bf8e":[15,240,0],
 "classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b":[15,240,2],
 "classVortexMergerEquilibria.html#adb62eb154af9f2ef0a8a5858bf375abb":[15,240,1],
-"classVortexMergerEquilibria.html#af23e2c37c7123475eb4ad7d7ced40ab6":[15,240,0],
 "classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[15,240,3],
 "classddcHelper_1_1NonUniformInterpolationPoints.html":[15,2,0],
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[15,2,0,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "docs_Adding_docs.html#autotoc_md0":[0],
 "docs_Adding_docs.html#autotoc_md1":[1],
 "docs_Adding_docs.html#autotoc_md2":[2],
-"docs_Adding_docs.html#autotoc_md3":[3],
-"docs_Adding_docs.html#autotoc_md4":[4],
-"docs_Adding_docs.html#autotoc_md5":[5]
+"docs_Adding_docs.html#autotoc_md3":[3]
 };

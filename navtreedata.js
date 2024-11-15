@@ -96,10 +96,10 @@ var NAVTREEINDEX =
 "classEuler.html#abf7ce877cffa5f112975e0c8ebaf5b28",
 "classKrookSourceAdaptive.html#a1f7a6ce3a4f5f93214352a4787ba7888",
 "classMultipatchFieldMem.html#adc226c7e5d20ea6fa028f1054de505e4",
-"classRK4.html#a468e0909ac8b50f109dc810879253134",
-"docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally",
-"species__info_8hpp_source.html",
-"structPolarSpline.html#a5a692091b5e1dbccc094ec737afc5cef"
+"classRK3.html#afdf22291a9a2f9180e1904d3a0728737",
+"docs_Adding_docs.html#autotoc_md4",
+"simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References",
+"structPolarSpline.html#a16899c9b2a639f3e67d3de861a0d2a2f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
