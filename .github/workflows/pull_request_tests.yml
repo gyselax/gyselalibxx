@@ -12,6 +12,8 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - shell: bash
         run: |
           ./bin/indent -td
@@ -84,15 +86,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          submodules: true
+          submodules: recursive
       - name: Make documenation
         run: |
           # Make docs
-          mkdir build
-          cd build
-          cmake -DBUILD_DOCUMENTATION=ON ..
-          make doc
-          cd ..
+          cmake -DBUILD_DOCUMENTATION=ON -B build -S .
+          cmake --build build --target doc
         shell: bash
       - name: Check for new errors
         run: |
