@@ -1,14 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver":[12,7,1,1],
-"src_geometryXY_geometry.html":[12,6,0],
-"src_geometryXY_initialization.html":[12,6,1],
-"src_geometryXY_initialization.html#src_geometryXY_initialization__Kelvin-Helmholtz_instability_test_case":[12,6,1,0],
-"src_geometryXY_time_integration.html":[12,6,2],
-"src_geometryXY_time_integration.html#src_geometryXY_time_integration__Predictor-corrector_based_on_RK2":[12,6,2,0],
-"src_interpolation.html":[12,8],
-"src_interpolation.html#src_interpolation__Memory_concerns":[12,8,1],
-"src_interpolation.html#src_interpolation__Spline_Interpolation":[12,8,0],
 "src_io.html":[12,9],
 "src_mpi_parallelisation.html":[12,11],
 "src_mpi_parallelisation.html#autotoc_md63":[0],
@@ -249,5 +240,14 @@ var NAVTREEINDEX7 =
 "tests_advection.html#autotoc_md78":[4],
 "tests_advection.html#tests_advection__Contents":[13,0,0],
 "tests_geometryRTheta.html":[13,1],
-"tests_geometryRTheta_2d_spline_interpolator.html":[13,1,1]
+"tests_geometryRTheta_2d_spline_interpolator.html":[13,1,1],
+"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md79":[0],
+"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md80":[1],
+"tests_geometryRTheta_advection_2d_rp.html":[13,1,0],
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md81":[4,13],
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md82":[4,14],
+"tests_geometryRTheta_advection_2d_rp.html#autotoc_md83":[4,15],
+"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents":[13,1,0,3],
+"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests":[13,1,0,1],
+"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__References":[13,1,0,2]
 };

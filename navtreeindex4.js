@@ -1,13 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classMultipatchType.html":[15,168],
-"classMultipatchType.html#a38eb865df92f188656dcefea1531c6d6":[15,168,7],
-"classMultipatchType.html#a56d90fdeaa8beacf22220f8234a48864":[15,168,6],
-"classMultipatchType.html#a6cf24fdcb53f66e89cab44921a551e1d":[15,168,9],
-"classMultipatchType.html#a7a63de3f7e30ad01b0a2634abacba57d":[15,168,3],
-"classMultipatchType.html#aafa35714e8858701dc671c4b546fea29":[15,168,8],
-"classMultipatchType.html#ab445e03c70a998905c8bdc97c2ccc785":[15,168,4],
-"classMultipatchType.html#ac09ed5edaf7d35c564ef78fe31620631":[15,168,0],
 "classMultipatchType.html#ad8912efe19fdeca3f8f3e905f34a5357":[15,168,5],
 "classMultipatchType.html#ae1ab2f08d00d74b0fd692ed0269af5c6":[15,168,2],
 "classMultipatchType.html#ae7480fdbb95f4018d1cd39f809001c14":[15,168,10],
@@ -33,8 +25,8 @@ var NAVTREEINDEX4 =
 "classNullQNSolver.html#aa191a148e484d4c9a3fda39a37ede2f7":[15,173,2],
 "classNullQNSolver.html#ac636ac6b797e8bf883a53955f191d4ed":[15,173,4],
 "classNullQNSolver.html#af216cca80bf1989bb5031c640b6e3db1":[15,173,5],
-"classNullQNSolver.html#af88ab5772e4ae0767b8d44449bd307d4":[15,173,3],
 "classNullQNSolver.html#af88ab5772e4ae0767b8d44449bd307d4":[15,173,1],
+"classNullQNSolver.html#af88ab5772e4ae0767b8d44449bd307d4":[15,173,3],
 "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html":[15,175],
 "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a06c0eb2d5db735241213e796a4b44c01":[15,175,0],
 "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a0816807b4ca1b94d8d85e2a7c0c33148":[15,175,2],
@@ -249,5 +241,13 @@ var NAVTREEINDEX4 =
 "classSplineInterpolatorRTheta.html#abf12ff5881094af3162809f6ece1bf6e":[15,210,0],
 "classSplitRightHandSideSolver.html":[15,211],
 "classSplitRightHandSideSolver.html#a0437ce68ef4e58edc866392b429bd1ac":[15,211,0],
-"classSplitRightHandSideSolver.html#a2e6bd2d8daa2dc2d7883c1dd47cb9b4a":[15,211,1]
+"classSplitRightHandSideSolver.html#a2e6bd2d8daa2dc2d7883c1dd47cb9b4a":[15,211,1],
+"classSplitRightHandSideSolver.html#a350971eed31753861f6e2917b9b6b968":[15,211,2],
+"classSplitVlasovSolver.html":[15,212],
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[15,212,1],
+"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[15,212,3],
+"classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d":[15,212,2],
+"classSplitVlasovSolver.html#a958b142757ef330191c9c25188294f15":[15,212,4],
+"classSplitVlasovSolver.html#aad8ce76367a0be688bfbd8e5a2830040":[15,212,0],
+"classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0":[15,212,5]
 };

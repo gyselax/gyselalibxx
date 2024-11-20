@@ -1,13 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"classSplitRightHandSideSolver.html#a350971eed31753861f6e2917b9b6b968":[15,211,2],
-"classSplitVlasovSolver.html":[15,212],
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[15,212,1],
-"classSplitVlasovSolver.html#a07f850f4fba0e3750db3aa95ebaa5fdd":[15,212,3],
-"classSplitVlasovSolver.html#a2f5bcc6081ebb816a8e6f7655b13689d":[15,212,2],
-"classSplitVlasovSolver.html#a958b142757ef330191c9c25188294f15":[15,212,4],
-"classSplitVlasovSolver.html#aad8ce76367a0be688bfbd8e5a2830040":[15,212,0],
-"classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0":[15,212,5],
 "classTranslationAdvectionFieldSimulation.html":[15,218],
 "classTranslationAdvectionFieldSimulation.html#aa89e869c6d580ce70c186d3a3ec99272":[15,218,0],
 "classTranslationSimulation.html":[15,219],
@@ -68,9 +60,8 @@ var NAVTREEINDEX5 =
 "classVectorFieldMem.html#aee76176c4c5311ed94893b31140ede49":[15,224,24],
 "classVectorFieldMem.html#af804fa6a46e9ada1ae5f9c9e6bbae114":[15,224,12],
 "classVortexMergerDensitySolution.html":[15,225],
-"classVortexMergerDensitySolution.html#a104c4a3c0adcef0840a99f748d5a9657":[15,225,1],
 "classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[15,225,0],
-"classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8":[15,225,2],
+"classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8":[15,225,1],
 "classVortexMergerEquilibria.html":[15,226],
 "classVortexMergerEquilibria.html#aa0e09b4111f03a4bcdcd07172611bf8e":[15,226,0],
 "classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b":[15,226,2],
@@ -249,5 +240,14 @@ var NAVTREEINDEX5 =
 "geometryXVx_2initialization_2singlemodeperturbinitialization_8hpp_source.html":[16,0,5,2,5],
 "geometryXVx_2poisson_2chargedensitycalculator_8hpp_source.html":[16,0,5,3,0],
 "geometryXVx_2poisson_2ichargedensitycalculator_8hpp_source.html":[16,0,5,3,1],
-"geometryXVx_2poisson_2iqnsolver_8hpp_source.html":[16,0,5,3,2]
+"geometryXVx_2poisson_2iqnsolver_8hpp_source.html":[16,0,5,3,2],
+"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html":[16,0,5,3,3],
+"geometryXVx_2poisson_2qnsolver_8hpp_source.html":[16,0,5,3,4],
+"geometryXVx_2time__integration_2itimesolver_8hpp_source.html":[16,0,5,5,0],
+"geometryXVx_2time__integration_2predcorr_8hpp_source.html":[16,0,5,5,1],
+"geometryXYVxVy_2geometry_2geometry_8hpp_source.html":[16,0,7,0,0],
+"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html":[16,0,7,1,0],
+"geometryXYVxVy_2initialization_2iinitialization_8hpp_source.html":[16,0,7,1,1],
+"geometryXYVxVy_2initialization_2maxwellianequilibrium_8hpp_source.html":[16,0,7,1,2],
+"geometryXYVxVy_2initialization_2singlemodeperturbinitialization_8hpp_source.html":[16,0,7,1,3]
 };

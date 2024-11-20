@@ -1,11 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a6e31dd601d961ee711979be414fd2036":[15,81,8],
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a7cdff0d96a3b6bee16f632dd1cb3d4a6":[15,81,1],
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a852a2a09220eabd3122cec7c741cacb2":[15,81,17],
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a8590dd393f09bf3381a6f81ff8ab0034":[15,81,11],
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#aae2873b9f545451d922b8be6d810b51d":[15,81,4],
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ab12b55b0f5ea7fda912b72de4e3f3178":[15,81,10],
 "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ac0bc6c14fcb18c5426da0c57a1758115":[15,81,12],
 "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ae7398f552996b17d7ee0493288d2281d":[15,81,15],
 "classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#af39085e61fa32cc40b8f2c307df46c51":[15,81,2],
@@ -26,12 +20,10 @@ var NAVTREEINDEX2 =
 "classFunctionToBeAdvected.html#a0048a5d9accc0d9a6e3a50e339079fca":[15,85,0],
 "classFunctionToBeAdvected.html#ac469846a7162037505e058f7d248dc4b":[15,85,1],
 "classFunctionToBeAdvected__cos__4__elipse.html":[15,86],
-"classFunctionToBeAdvected__cos__4__elipse.html#a2f35b8a7024c4e1e1d0a09e761abf56e":[15,86,2],
+"classFunctionToBeAdvected__cos__4__elipse.html#a2f35b8a7024c4e1e1d0a09e761abf56e":[15,86,1],
 "classFunctionToBeAdvected__cos__4__elipse.html#a3b7c4536b840b3c02e61b57b3bfb0ec6":[15,86,0],
-"classFunctionToBeAdvected__cos__4__elipse.html#a58bb0ceb25b6680ed759d04c13fd9f21":[15,86,1],
 "classFunctionToBeAdvected__gaussian.html":[15,87],
-"classFunctionToBeAdvected__gaussian.html#a49cf75cacc0f233f7365e7fe5b550124":[15,87,1],
-"classFunctionToBeAdvected__gaussian.html#a5cefc067d3394e546900673571f6e612":[15,87,2],
+"classFunctionToBeAdvected__gaussian.html#a5cefc067d3394e546900673571f6e612":[15,87,1],
 "classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360":[15,87,0],
 "classGaussLegendre.html":[15,88],
 "classGaussLegendre.html#a058094377acb718af7e409fdb363918f":[15,88,0],
@@ -249,5 +241,13 @@ var NAVTREEINDEX2 =
 "classMatchingIdxSlice.html#ab6481837fb8af1581fac27689fcdc488":[15,142,1],
 "classMatchingIdxSlice.html#abf1367b60ae40635ea39cfd343e92673":[15,142,4],
 "classMatchingIdxSlice.html#ae5374ce68d12fb78c03b90a8aedbf8f6":[15,142,0],
-"classMatrix.html":[15,143]
+"classMatrix.html":[15,143],
+"classMatrix.html#a0e72216b991d1f4af19982fe936067ab":[15,143,1],
+"classMatrix.html#a135d09d05b6e7430fdfa2c135afc4fae":[15,143,3],
+"classMatrix.html#a15badbcf214a7842a0a654f9210f39a1":[15,143,8],
+"classMatrix.html#a1d3dd4ae5b28f0f1ec3e64ae17998944":[15,143,4],
+"classMatrix.html#a490ec31dfcf14765beb1cce24ba3b985":[15,143,9],
+"classMatrix.html#a4945dc199571d35cf8e3bbcf24672030":[15,143,7],
+"classMatrix.html#a687d05d0c6cb4e1a8dc1a40e4926e9a3":[15,143,11],
+"classMatrix.html#a7abddeb70927285ae9c0a6793d115427":[15,143,10]
 };

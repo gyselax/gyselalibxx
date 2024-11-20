@@ -1,14 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md79":[0],
-"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md80":[1],
-"tests_geometryRTheta_advection_2d_rp.html":[13,1,0],
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md81":[4,13],
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md82":[4,14],
-"tests_geometryRTheta_advection_2d_rp.html#autotoc_md83":[4,15],
-"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents":[13,1,0,3],
-"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests":[13,1,0,1],
-"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__References":[13,1,0,2],
 "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator":[13,1,0,0],
 "tests_geometryRTheta_polar_poisson.html":[13,1,2],
 "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Contents":[13,1,2,2],

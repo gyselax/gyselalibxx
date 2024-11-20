@@ -1,13 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classMatrix.html#a0e72216b991d1f4af19982fe936067ab":[15,143,1],
-"classMatrix.html#a135d09d05b6e7430fdfa2c135afc4fae":[15,143,3],
-"classMatrix.html#a15badbcf214a7842a0a654f9210f39a1":[15,143,8],
-"classMatrix.html#a1d3dd4ae5b28f0f1ec3e64ae17998944":[15,143,4],
-"classMatrix.html#a490ec31dfcf14765beb1cce24ba3b985":[15,143,9],
-"classMatrix.html#a4945dc199571d35cf8e3bbcf24672030":[15,143,7],
-"classMatrix.html#a687d05d0c6cb4e1a8dc1a40e4926e9a3":[15,143,11],
-"classMatrix.html#a7abddeb70927285ae9c0a6793d115427":[15,143,10],
 "classMatrix.html#ab1bd5ff2b3826377f400a21d64c701fe":[15,143,0],
 "classMatrix.html#abdee530d859db8b14e07915573ff5650":[15,143,6],
 "classMatrix.html#aec81ac31e9c308df6db246cb98202f17":[15,143,2],
@@ -126,9 +118,9 @@ var NAVTREEINDEX3 =
 "classMaxwellianEquilibrium.html#a58646ccdf0a4422bed79508bc90c0ec3":[15,154,17],
 "classMaxwellianEquilibrium.html#a714053f07bf2fe8f2b7b56cc0deb00c2":[15,154,7],
 "classMaxwellianEquilibrium.html#a883dfc9d838b53deeb47e93f178c7655":[15,154,15],
-"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[15,154,5],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[15,154,1],
 "classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[15,154,3],
+"classMaxwellianEquilibrium.html#a93e6fba9f6003062ba29256213f22dc0":[15,154,5],
 "classMaxwellianEquilibrium.html#a9afec632ce82858142e939416967a6cc":[15,154,18],
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a":[15,154,11],
 "classMetricTensor.html":[15,155],
@@ -249,5 +241,13 @@ var NAVTREEINDEX3 =
 "classMultipatchSplineOnionShapeTest.html#a94b97040b92a6304744283cd474720a7":[15,167,3],
 "classMultipatchSplineOnionShapeTest.html#ab60ccfc573f9ef8c44488e2d66a7927b":[15,167,0],
 "classMultipatchSplineOnionShapeTest.html#af4ad9ffc0004e75fc5761dd1b6a813e1":[15,167,2],
-"classMultipatchSplineOnionShapeTest.html#afff89052dcc4d753c1ab7c666849351b":[15,167,4]
+"classMultipatchSplineOnionShapeTest.html#afff89052dcc4d753c1ab7c666849351b":[15,167,4],
+"classMultipatchType.html":[15,168],
+"classMultipatchType.html#a38eb865df92f188656dcefea1531c6d6":[15,168,7],
+"classMultipatchType.html#a56d90fdeaa8beacf22220f8234a48864":[15,168,6],
+"classMultipatchType.html#a6cf24fdcb53f66e89cab44921a551e1d":[15,168,9],
+"classMultipatchType.html#a7a63de3f7e30ad01b0a2634abacba57d":[15,168,3],
+"classMultipatchType.html#aafa35714e8858701dc671c4b546fea29":[15,168,8],
+"classMultipatchType.html#ab445e03c70a998905c8bdc97c2ccc785":[15,168,4],
+"classMultipatchType.html#ac09ed5edaf7d35c564ef78fe31620631":[15,168,0]
 };

@@ -92,14 +92,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionsInter.html",
-"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a6e31dd601d961ee711979be414fd2036",
-"classMatrix.html#a0e72216b991d1f4af19982fe936067ab",
-"classMultipatchType.html",
-"classSplitRightHandSideSolver.html#a350971eed31753861f6e2917b9b6b968",
-"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html",
-"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver",
-"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md79"
+"classCollisionsInter.html#a5c4799a989c55fd97e6572a1ee1dab3b",
+"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ac0bc6c14fcb18c5426da0c57a1758115",
+"classMatrix.html#ab1bd5ff2b3826377f400a21d64c701fe",
+"classMultipatchType.html#ad8912efe19fdeca3f8f3e905f34a5357",
+"classTranslationAdvectionFieldSimulation.html",
+"geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp_source.html",
+"src_io.html",
+"tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

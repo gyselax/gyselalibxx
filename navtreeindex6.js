@@ -1,14 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html":[16,0,5,3,3],
-"geometryXVx_2poisson_2qnsolver_8hpp_source.html":[16,0,5,3,4],
-"geometryXVx_2time__integration_2itimesolver_8hpp_source.html":[16,0,5,5,0],
-"geometryXVx_2time__integration_2predcorr_8hpp_source.html":[16,0,5,5,1],
-"geometryXYVxVy_2geometry_2geometry_8hpp_source.html":[16,0,7,0,0],
-"geometryXYVxVy_2initialization_2iequilibrium_8hpp_source.html":[16,0,7,1,0],
-"geometryXYVxVy_2initialization_2iinitialization_8hpp_source.html":[16,0,7,1,1],
-"geometryXYVxVy_2initialization_2maxwellianequilibrium_8hpp_source.html":[16,0,7,1,2],
-"geometryXYVxVy_2initialization_2singlemodeperturbinitialization_8hpp_source.html":[16,0,7,1,3],
 "geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp_source.html":[16,0,7,2,0],
 "geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp_source.html":[16,0,7,2,1],
 "geometryXYVxVy_2poisson_2iqnsolver_8hpp_source.html":[16,0,7,2,2],
@@ -249,5 +240,14 @@ var NAVTREEINDEX6 =
 "src_geometryXYVxVy.html":[12,7],
 "src_geometryXYVxVy_geometry.html":[12,7,0],
 "src_geometryXYVxVy_poisson.html":[12,7,1],
-"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density":[12,7,1,0]
+"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density":[12,7,1,0],
+"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver":[12,7,1,1],
+"src_geometryXY_geometry.html":[12,6,0],
+"src_geometryXY_initialization.html":[12,6,1],
+"src_geometryXY_initialization.html#src_geometryXY_initialization__Kelvin-Helmholtz_instability_test_case":[12,6,1,0],
+"src_geometryXY_time_integration.html":[12,6,2],
+"src_geometryXY_time_integration.html#src_geometryXY_time_integration__Predictor-corrector_based_on_RK2":[12,6,2,0],
+"src_interpolation.html":[12,8],
+"src_interpolation.html#src_interpolation__Memory_concerns":[12,8,1],
+"src_interpolation.html#src_interpolation__Spline_Interpolation":[12,8,0]
 };
