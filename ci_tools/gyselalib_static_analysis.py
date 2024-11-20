@@ -70,27 +70,28 @@ def report_error(level, file, linenr, message):
     error_level = max(error_level, possible_error_levels[level])
     print(f'{level} {file.file} : {linenr} : {message}')
 
-class FileObject:
+class Config:
     """
-    A class containing the cppcheck output which describes a file.
+    A class containing the cppcheck output which describes a configuration from a file.
 
-    A class which parses the cppcheck dump file describing a file. It unpacks useful information
-    from this, such as the variable descriptors and a list splitting the code into lines.
+    A class which parses the cppcheck dump file describing a configuration from a file.
+    It unpacks useful information from this, such as the variable descriptors and a list
+    splitting the code into lines.
+    A configuration corresponds to a specific choice for any macros appearing in the file
+    (e.g. PERIODIC_RDIMX present or not).
 
     Parameters
     ----------
-    file : pathlib.Path
-        A path to the dump file.
+    data_dump : xml.etree.ElementTree
+        The XML output from the file for this configuration.
+    file : FileObject
+        The file that was parsed.
     """
-    def __init__(self, file):
-        self._file = file.parent / file.stem
-        tree = ET.parse(file)
-        self.root = tree.getroot()
-        self.raw = [child.attrib for child in self.root.findall('./rawtokens/tok')]
-        self.data = [child.attrib for child in self.root.findall('./dump/tokenlist/token')]
-        self.raw_xml = self.root.find('./rawtokens')
-        self.data_xml = self.root.find('./dump/tokenlist')
-        self.variables = [child.attrib for child in self.root.findall('./dump/variables/var')]
+    def __init__(self, data_dump, file):
+        self.data = [child.attrib for child in data_dump.findall('./tokenlist/token')]
+        self.data_xml = data_dump.find('./tokenlist')
+        self.variables = [child.attrib for child in data_dump.findall('./variables/var')]
+        self.root = data_dump
 
         code_lines = []
         current_line = []
@@ -103,31 +104,20 @@ class FileObject:
 
         self.lines = code_lines
 
-        using_indices = [i for i, d in enumerate(self.raw) if d['str'] == 'using']
-        expr_end = [i for i, d in enumerate(self.raw) if d['str'] == ';']
-        self.aliases = {self.raw[idx+1]['str']: self.raw[idx+3:expr_end[np.searchsorted(expr_end, idx)]]
-                    for idx in using_indices if self.raw[idx+2]['str'] == '='}
-
+        using_indices = [i for i, d in enumerate(file.raw) if d['str'] == 'using']
         self.type_names = [{'str': line[1]['str'], 'linenr': line[0]['linenr']} for line in self.lines \
                             if line and line[0]['str'] in ('struct', 'class')]
-        for templated_obj in self.root.findall('./dump/TemplateSimplifier/TokenAndName'):
-            if Path(templated_obj.attrib['file']) != self._file:
+        for templated_obj in data_dump.findall('./TemplateSimplifier/TokenAndName'):
+            if Path(templated_obj.attrib['file']) != file.file:
                 continue
             linenr = templated_obj.attrib['line']
             self.type_names += [{'str': templated_obj[i+2].attrib['str'] if templated_obj[i+1].attrib['str'] == '...' \
                                         else templated_obj[i+1].attrib['str'],
                                  'linenr': linenr} for i,t in enumerate(templated_obj) \
                                 if t.attrib['str'] in ('struct', 'class')]
-        self.type_names += [{'str': self.raw[idx+1]['str'], 'linenr': self.raw[idx+1]['linenr']} for idx in using_indices]
+        self.type_names += [{'str': file.raw[idx+1]['str'], 'linenr': file.raw[idx+1]['linenr']} for idx in using_indices]
 
         self._identify_potential_bugs()
-
-    @property
-    def file(self):
-        """
-        The path to the file being analysed.
-        """
-        return self._file
 
     def _identify_potential_bugs(self):
         """
@@ -138,13 +128,45 @@ class FileObject:
         """
         for line in self.lines:
             func_idx = next((i for i,v in enumerate(line) if 'function' in v), None)
-            if func_idx is not None:
+            if func_idx is not None and line[func_idx-1]['str'] != 'class':
                 func_name = line[func_idx]['str']
                 return_type = ''.join(v['str'] for v in line[:func_idx])
                 if line[func_idx-1]['str'] == 'auto':
                     auto_functions.add(func_name)
                 elif re.search(r'\b(ddc::Chunk)|(FieldMem)\b', return_type):
                     field_mem_functions.add(func_name)
+
+class FileObject:
+    """
+    A class containing the cppcheck output which describes a file.
+
+    A class which parses the cppcheck dump file describing a file. It unpacks useful information
+    from this, such as the aliases used in the file.
+
+    Parameters
+    ----------
+    file : pathlib.Path
+        A path to the dump file.
+    """
+    def __init__(self, file):
+        self._file = file.parent / file.stem
+        tree = ET.parse(file)
+        self.root = tree.getroot()
+        self.raw = [child.attrib for child in self.root.findall('./rawtokens/tok')]
+        self.raw_xml = self.root.find('./rawtokens')
+        self.configs = [Config(c, self) for c in self.root.findall('./dump')]
+
+        using_indices = [i for i, d in enumerate(self.raw) if d['str'] == 'using']
+        expr_end = [i for i, d in enumerate(self.raw) if d['str'] == ';']
+        self.aliases = {self.raw[idx+1]['str']: self.raw[idx+3:expr_end[np.searchsorted(expr_end, idx)]]
+                    for idx in using_indices if self.raw[idx+2]['str'] == '='}
+
+    @property
+    def file(self):
+        """
+        The path to the file being analysed.
+        """
+        return self._file
 
 def get_relevant_files():
     """
@@ -221,53 +243,54 @@ def search_for_unnecessary_auto(file):
     """
     Test to ensure variable type is not 'auto' unless saving a function returning auto.
     """
-    # Find all variables in the file with a type of 'auto'
-    variables = [v for v in file.variables if v['typeStartToken'] == v['typeEndToken']]
-    variable_types = [file.data_xml.find(".token[@id='"+v['typeStartToken']+"']") for v in variables]
-    auto_variables = [file.data_xml.find(".token[@id='"+v['nameToken']+"']") \
-                      for v,t in zip(variables, variable_types) if t is not None and t.attrib['str'] == 'auto']
+    for config in file.configs:
+        # Find all variables in the file with a type of 'auto'
+        variables = [v for v in config.variables if v['typeStartToken'] == v['typeEndToken']]
+        variable_types = [config.data_xml.find(".token[@id='"+v['typeStartToken']+"']") for v in variables]
+        auto_variables = [config.data_xml.find(".token[@id='"+v['nameToken']+"']") \
+                          for v,t in zip(variables, variable_types) if t is not None and t.attrib['str'] == 'auto']
 
-    # Find the name and location of the first use of the auto variables
-    var_attribs = [v.attrib for v in auto_variables if v is not None and v.attrib['file'] == str(file.file)]
-    var_data_idx = [file.data.index(a) for a in var_attribs]
-    var_names = [a['str'] for a in var_attribs]
-    for idx, var_name in enumerate(var_names):
-        start = var_data_idx[idx]
-        end = next(i for i,v in enumerate(file.data[start:], start) if v['str'] == ';')
-        # If declaration is of the form auto x = ... instead of auto x(...) then examine next code phrase
-        if end == start + 1:
-            assert file.data[end+1]['str'] == var_name
-            start = end + 1
-            end = next(i for i,v in enumerate(file.data[start:], start) if v['str'] == ';')
+        # Find the name and location of the first use of the auto variables
+        var_attribs = [v.attrib for v in auto_variables if v is not None and v.attrib['file'] == str(file.file)]
+        var_data_idx = [config.data.index(a) for a in var_attribs]
+        var_names = [a['str'] for a in var_attribs]
+        for idx, var_name in enumerate(var_names):
+            start = var_data_idx[idx]
+            end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
+            # If declaration is of the form auto x = ... instead of auto x(...) then examine next code phrase
+            if end == start + 1:
+                assert config.data[end+1]['str'] == var_name
+                start = end + 1
+                end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
 
-        # If rhs of assignment is not a mirror function (where auto is compulsory) or a function returning auto
-        # then raise an error
-        if not any(v['str'] in chain(mirror_functions, auto_functions) for v in file.data[start:end]):
-            report_error(ERROR, file, file.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
+            # If rhs of assignment is not a mirror function (where auto is compulsory) or a function returning auto
+            # then raise an error
+            if not any(v['str'] in chain(mirror_functions, auto_functions) for v in config.data[start:end]):
+                report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
-    if not file.data_xml:
-        return
-
-    # Find auto in arguments of lambda functions
-    for elem in file.data_xml.findall(".token[@str='[']"):
-        start_idx = file.data.index(elem.attrib)+1
-        end_idx = next(j for j,a in enumerate(file.data[start_idx:], start_idx) if a['str'] == ']')
-        keys = ''.join(a['str'] for a in file.data[start_idx:end_idx]).split(',')
-        if not all(len(k) == 0 or k[0] in ('&', '=') for k in keys):
+        if not config.data_xml:
             continue
-        end_args_idx = next(j for j,a in enumerate(file.data[end_idx:], end_idx) if a['str'] == ')')
-        lambda_args = ' '.join(a['str'] for a in file.data[end_idx+2:end_args_idx]).split(',')
-        for a in lambda_args:
-            if 'auto' in a:
-                report_error(ERROR, file, file.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
 
-    for elem in chain(file.data_xml.findall(".token[@str='KOKKOS_CLASS_LAMBDA']"), file.data_xml.findall(".token[@str='KOKKOS_LAMBDA']")):
-        start_idx = file.data.index(elem.attrib)+3
-        end_args_idx = next(j for j,a in enumerate(file.data[start_idx:], start_idx) if a['str'] == ')')
-        lambda_args = ' '.join(a['str'] for a in file.data[start_idx:end_args_idx]).split(',')
-        for a in lambda_args:
-            if 'auto' in a.split():
-                report_error(ERROR, file, file.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
+        # Find auto in arguments of lambda functions
+        for elem in config.data_xml.findall(".token[@str='[']"):
+            start_idx = config.data.index(elem.attrib)+1
+            end_idx = next(j for j,a in enumerate(config.data[start_idx:], start_idx) if a['str'] == ']')
+            keys = ''.join(a['str'] for a in config.data[start_idx:end_idx]).split(',')
+            if not all(len(k) == 0 or k[0] in ('&', '=') for k in keys):
+                continue
+            end_args_idx = next(j for j,a in enumerate(config.data[end_idx:], end_idx) if a['str'] == ')')
+            lambda_args = ' '.join(a['str'] for a in config.data[end_idx+2:end_args_idx]).split(',')
+            for a in lambda_args:
+                if 'auto' in a:
+                    report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
+
+        for elem in chain(config.data_xml.findall(".token[@str='KOKKOS_CLASS_LAMBDA']"), config.data_xml.findall(".token[@str='KOKKOS_LAMBDA']")):
+            start_idx = config.data.index(elem.attrib)+3
+            end_args_idx = next(j for j,a in enumerate(config.data[start_idx:], start_idx) if a['str'] == ')')
+            lambda_args = ' '.join(a['str'] for a in config.data[start_idx:end_args_idx]).split(',')
+            for a in lambda_args:
+                if 'auto' in a.split():
+                    report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
 
 def search_for_bad_create_mirror(file):
     """
@@ -277,19 +300,20 @@ def search_for_bad_create_mirror(file):
     one which passes Kokkos::DefaultHostExecutionSpace() as the first argument (This can cause synchronicity errors leading
     to wrong results).
     """
-    for line in file.lines:
-        if any(v['str'] in mirror_functions for v in line):
-            first_elem = line[0]
-            if 'variable' not in first_elem and first_elem['str'] == 'auto':
-                report_error(FATAL, file, first_elem['linenr'], "Mirror function should be saved into auto type to handle CPU and GPU.")
-            open_bracket = next(i for i,v in enumerate(line) if v['str'] == '(')
-            comma = next((i for i,v in enumerate(line[open_bracket:], open_bracket) if v['str'] == ','), len(line)-1)
-            first_arg = ''.join(v['str'] for v in line[open_bracket+1:comma])
-            if first_arg == 'Kokkos::DefaultHostExecutionSpace()':
-                line_str = ' '.join(l['str'] for l in line)
-                msg = ('Possible synchronicity error. Kokkos::DefaultHostExecutionSpace() should never be '
-                      f'the first argument to a mirror function ({line_str})')
-                report_error(FATAL, file, first_elem['linenr'], msg)
+    for config in file.configs:
+        for line in config.lines:
+            if any(v['str'] in mirror_functions for v in line):
+                first_elem = line[0]
+                if 'variable' not in first_elem and first_elem['str'] == 'auto':
+                    report_error(FATAL, file, first_elem['linenr'], "Mirror function should be saved into auto type to handle CPU and GPU.")
+                open_bracket = next(i for i,v in enumerate(line) if v['str'] == '(')
+                comma = next((i for i,v in enumerate(line[open_bracket:], open_bracket) if v['str'] == ','), len(line)-1)
+                first_arg = ''.join(v['str'] for v in line[open_bracket+1:comma])
+                if first_arg == 'Kokkos::DefaultHostExecutionSpace()':
+                    line_str = ' '.join(l['str'] for l in line)
+                    msg = ('Possible synchronicity error. Kokkos::DefaultHostExecutionSpace() should never be '
+                          f'the first argument to a mirror function ({line_str})')
+                    report_error(FATAL, file, first_elem['linenr'], msg)
 
 def search_for_bad_memory(file):
     """
@@ -299,37 +323,38 @@ def search_for_bad_memory(file):
     a FieldMem type then the data will be deallocated leading to a memory error somewhere much later in the program when
     the Field is used.
     """
-    for line in file.lines:
-        func_idx = next((i for i,v in enumerate(line) if v['str'] in field_mem_functions), None)
-        if func_idx is None:
-            continue
-        func_use_id = line[func_idx]['id']
-        if file.root.find(f"./dump/scopes//function[@tokenDef='{func_use_id}']"):
-            # Function definition
-            continue
-        first_var_idx = next((i for i,v in enumerate(line) if 'variable' in v), None)
-        if first_var_idx is None or line[first_var_idx+1]['str'] not in ('(', '='):
-            # No variable found
-            continue
-        first_var = line[first_var_idx]
-        linenr = first_var['linenr']
-        scope = first_var['scope']
-        var_id = first_var['variable']
-        var_tag = file.root.find(f".//var[@scope='{scope}'][@id='{var_id}']")
-        while var_tag is None:
-            scope = file.root.find(f".//scopes/scope[@id='{scope}']").attrib['nestedIn']
-            var_tag = file.root.find(f".//var[@scope='{scope}'][@id='{var_id}']")
+    for config in file.configs:
+        for line in config.lines:
+            func_idx = next((i for i,v in enumerate(line) if v['str'] in field_mem_functions), None)
+            if func_idx is None:
+                continue
+            func_use_id = line[func_idx]['id']
+            if config.root.find(f"./scopes//function[@tokenDef='{func_use_id}']"):
+                # Function definition
+                continue
+            first_var_idx = next((i for i,v in enumerate(line) if 'variable' in v), None)
+            if first_var_idx is None or line[first_var_idx+1]['str'] not in ('(', '='):
+                # No variable found
+                continue
+            first_var = line[first_var_idx]
+            linenr = first_var['linenr']
+            scope = first_var['scope']
+            var_id = first_var['variable']
+            var_tag = config.root.find(f".//var[@scope='{scope}'][@id='{var_id}']")
+            while var_tag is None:
+                scope = config.root.find(f".//scopes/scope[@id='{scope}']").attrib['nestedIn']
+                var_tag = config.root.find(f".//var[@scope='{scope}'][@id='{var_id}']")
 
-        var_description = var_tag.attrib
-        start_idx = file.data.index(file.root.find(f".//token[@id='{var_description['typeStartToken']}'][@scope='{scope}']").attrib)
-        end_idx = file.data.index(file.root.find(f".//token[@id='{var_description['typeEndToken']}'][@scope='{scope}']").attrib)
-        type_name = ''.join(v['str'] for v in file.data[start_idx:end_idx+1])
-        if 'Mem' not in type_name:
-            line_str = ' '.join(l['str'] for l in line)
-            msg = ( 'Possible memory error. Mem not found in type where a FieldMem object is saved to.',
-                    'Returned FieldMem object must be saved in a FieldMem else data may be unintentionally deallocated.',
-                    f'({line_str})')
-            report_error(FATAL, file, linenr, msg)
+            var_description = var_tag.attrib
+            start_idx = config.data.index(config.root.find(f".//token[@id='{var_description['typeStartToken']}'][@scope='{scope}']").attrib)
+            end_idx = config.data.index(config.root.find(f".//token[@id='{var_description['typeEndToken']}'][@scope='{scope}']").attrib)
+            type_name = ''.join(v['str'] for v in config.data[start_idx:end_idx+1])
+            if 'Mem' not in type_name:
+                line_str = ' '.join(l['str'] for l in line)
+                msg = ( 'Possible memory error. Mem not found in type where a FieldMem object is saved to.',
+                        'Returned FieldMem object must be saved in a FieldMem else data may be unintentionally deallocated.',
+                        f'({line_str})')
+                report_error(FATAL, file, linenr, msg)
 
 def search_for_bad_aliases(file):
     """
@@ -350,27 +375,28 @@ def search_for_bad_aliases(file):
             elif val_str.startswith('IdxRange<') and not a_name.startswith('IdxRange'):
                 report_error(STYLE, file, val[0]['linenr'], f"Index type aliases should start with the keyword IdxRange ({a_name})")
 
-    for alias_key in file.type_names:
-        a_name = alias_key['str']
-        linenr = alias_key['linenr']
-        if any(bad_name in a_name for bad_name in forbidden_substrings):
-            report_error(STYLE, file, linenr, f"Name seems to contain DDC keywords. Please use the new naming conventions (using {a_name} = {val_str})")
-        if a_name == 'Grid':
-            msg = ("The name 'Grid' is too general and should be avoided as it implies that the type "
-                   "can be multi-D. Please use Grid1D")
-            report_error(STYLE, file, linenr, msg)
-        # Beginning with verbs is ok as are some specific prefixes
-        valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx')
-        if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
-            prefix = 'Multipatch' if 'Multipatch' in a_name else ''
-            name = a_name.replace('Multipatch','')
-            if 'IdxRange' in a_name:
-                expected_name = prefix + 'IdxRange' + name.replace('IdxRange','')
-            elif 'IdxStep' in a_name:
-                expected_name = prefix + 'IdxStep' + name.replace('IdxStep','')
-            else:
-                expected_name = prefix + 'Idx' + name.replace('Idx','')
-            report_error(STYLE, file, linenr, f"Type aliases should start with the type keyword ({a_name} -> {expected_name})")
+    for config in file.configs:
+        for alias_key in config.type_names:
+            a_name = alias_key['str']
+            linenr = alias_key['linenr']
+            if any(bad_name in a_name for bad_name in forbidden_substrings):
+                report_error(STYLE, file, linenr, f"Name seems to contain DDC keywords. Please use the new naming conventions (using {a_name} = {val_str})")
+            if a_name == 'Grid':
+                msg = ("The name 'Grid' is too general and should be avoided as it implies that the type "
+                       "can be multi-D. Please use Grid1D")
+                report_error(STYLE, file, linenr, msg)
+            # Beginning with verbs is ok as are some specific prefixes
+            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx')
+            if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
+                prefix = 'Multipatch' if 'Multipatch' in a_name else ''
+                name = a_name.replace('Multipatch','')
+                if 'IdxRange' in a_name:
+                    expected_name = prefix + 'IdxRange' + name.replace('IdxRange','')
+                elif 'IdxStep' in a_name:
+                    expected_name = prefix + 'IdxStep' + name.replace('IdxStep','')
+                else:
+                    expected_name = prefix + 'Idx' + name.replace('Idx','')
+                report_error(STYLE, file, linenr, f"Type aliases should start with the type keyword ({a_name} -> {expected_name})")
 
 def check_struct_names(file):
     """
@@ -380,31 +406,33 @@ def check_struct_names(file):
     - a dimension is called DimX or RDimX (ie starts with Dim or RDim followed by a non-numeric name.
     - a grid does not have Grid in the name
     """
-    for line in file.lines:
-        if line and line[0]['str'] == 'struct':
-            struct_name = line[1]['str']
-            if (struct_name.startswith('Dim') and struct_name[3:].isalpha()) or \
-                    (struct_name.startswith('RDim') and struct_name[4:].isalpha()):
-                report_error(STYLE, file, line[0]['linenr'], f'Dim prefix is unnecessary for struct ({struct_name})')
-            if len(line) > 3 and line[2] == ':' and any('GridBase' in v['str'] for v in line) and 'Grid' not in struct_name:
-                report_error(STYLE, file, line[0]['linenr'], f'Grid missing from struct name ({struct_name})')
+    for config in file.configs:
+        for line in config.lines:
+            if line and line[0]['str'] == 'struct':
+                struct_name = line[1]['str']
+                if (struct_name.startswith('Dim') and struct_name[3:].isalpha()) or \
+                        (struct_name.startswith('RDim') and struct_name[4:].isalpha()):
+                    report_error(STYLE, file, line[0]['linenr'], f'Dim prefix is unnecessary for struct ({struct_name})')
+                if len(line) > 3 and line[2] == ':' and any('GridBase' in v['str'] for v in line) and 'Grid' not in struct_name:
+                    report_error(STYLE, file, line[0]['linenr'], f'Grid missing from struct name ({struct_name})')
 
 def search_for_uid(file):
     """
     Test for use of uid(). The DDC internal unique identifier should never be used directly.
     """
-    if not file.data_xml:
-        return
-    uid_usage = [d.attrib for d in file.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
-    uid_indices = [file.data.index(d) for d in uid_usage]
-    uid_usage = [d for idx, d in zip(uid_indices, uid_usage) if file.data[idx-1]['str'] == '.'
-                                        and file.data[idx+1]['str'] == '(']
+    for config in file.configs:
+        if not config.data_xml:
+            continue
+        uid_usage = [d.attrib for d in config.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
+        uid_indices = [config.data.index(d) for d in uid_usage]
+        uid_usage = [d for idx, d in zip(uid_indices, uid_usage) if config.data[idx-1]['str'] == '.'
+                                            and config.data[idx+1]['str'] == '(']
 
-    msg = ("Idx unique identifier is not necessarily correlated to array indices.",
-           "This function should only be used in DDC's internals.",
-           "You probably need code similar to (idx-field_start_idx).value() (.uid())")
-    for d in uid_usage:
-        report_error(ERROR, file, d['linenr'], msg)
+        msg = ("Idx unique identifier is not necessarily correlated to array indices.",
+               "This function should only be used in DDC's internals.",
+               "You probably need code similar to (idx-field_start_idx).value() (.uid())")
+        for d in uid_usage:
+            report_error(ERROR, file, d['linenr'], msg)
 
 def check_directives(file):
     """
@@ -414,18 +442,7 @@ def check_directives(file):
     An error is also raised for incorrect include syntax. Correct syntax is when quotes are used to include files
     from the gyselalibxx project and angle brackets are used to include files from other libraries.
     """
-    if file.data_xml is None:
-        if file.file.suffix != '.hpp':
-            return
-        raw_strs = [r['str'] for r in file.raw]
-        try:
-            pragma_idx = raw_strs.index('pragma')
-        except ValueError:
-            pragma_idx = None
-        if pragma_idx is None or raw_strs[pragma_idx-1] != '#' or raw_strs[pragma_idx+1] != 'once':
-            report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
-
-    else:
+    if file.configs:
         if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
             report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
@@ -440,6 +457,17 @@ def check_directives(file):
             elif not possible_matches and include_str == '"':
                 report_error(STYLE, file, linenr, f'Angle brackets should be used to include files from external libraries ({include_str}-><{include_file}>)')
 
+    else:
+        if file.file.suffix != '.hpp':
+            return
+        raw_strs = [r['str'] for r in file.raw]
+        try:
+            pragma_idx = raw_strs.index('pragma')
+        except ValueError:
+            pragma_idx = None
+        if pragma_idx is None or raw_strs[pragma_idx-1] != '#' or raw_strs[pragma_idx+1] != 'once':
+            report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
+
 def update_aliases(all_files):
     """
     Update the aliases using information from geometry.hpp and species_info.hpp. This ensures that as much information
@@ -453,7 +481,7 @@ def update_aliases(all_files):
     multipatch_geom_file_names = {f.file.name: f for f in geom_files if f.file.name != 'geometry.hpp'}
 
     for file in all_files:
-        if file.data_xml is None:
+        if not file.configs:
             continue
         directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
                             if Path(d.attrib['file']) == file.file}
@@ -478,46 +506,47 @@ def check_kokkos_lambda_use(file):
     - Check that lambda functions passed to ddc::parallel_X functions use KOKKOS_LAMBDA or KOKKOS_CLASS_LAMBDA
     - Check that class variables are not used in lambda functions passed to ddc::parallel_X functions.
     """
-    if not file.data_xml:
-        return
+    for config in file.configs:
+        if not config.data_xml:
+            continue
 
-    for p in parallel_functions:
-        for elem in file.data_xml.findall(f".token[@str='{p}']"):
-            idx = file.data.index(elem.attrib)
-            open_brackets = file.data[idx+1]
-            close_brackets_id = open_brackets['link']
-            scope = open_brackets['scope']
-            end_idx = file.data.index(file.data_xml.find(f".token[@id='{close_brackets_id}'][@scope='{scope}']").attrib)
-            arg_splitters = [idx+1]
-            i = idx+3
-            while i < end_idx:
-                if file.data[i]['str'] == ',':
-                    arg_splitters.append(i)
-                    i+=1
-                elif file.data[i]['str'] in ('(','{', '['):
-                    close_brackets_id = file.data[i]['link']
-                    scope = file.data[i]['scope']
-                    i = file.data.index(file.data_xml.find(f".token[@id='{close_brackets_id}'][@scope='{scope}']").attrib)+1
-                else:
-                    i+=1
+        for p in parallel_functions:
+            for elem in config.data_xml.findall(f".token[@str='{p}']"):
+                idx = config.data.index(elem.attrib)
+                open_brackets = config.data[idx+1]
+                close_brackets_id = open_brackets['link']
+                scope = open_brackets['scope']
+                end_idx = config.data.index(config.data_xml.find(f".token[@id='{close_brackets_id}'][@scope='{scope}']").attrib)
+                arg_splitters = [idx+1]
+                i = idx+3
+                while i < end_idx:
+                    if config.data[i]['str'] == ',':
+                        arg_splitters.append(i)
+                        i+=1
+                    elif config.data[i]['str'] in ('(','{', '['):
+                        close_brackets_id = config.data[i]['link']
+                        scope = config.data[i]['scope']
+                        i = config.data.index(config.data_xml.find(f".token[@id='{close_brackets_id}'][@scope='{scope}']").attrib)+1
+                    else:
+                        i+=1
 
-            if file.data[arg_splitters[-1]+1]['str'] == '[':
-                last_arg = ' '.join(a['str'] for a in file.data[arg_splitters[-1]+1:end_idx])
-                correct_last_arg = 'KOKKOS_LAMBDA '+last_arg[last_arg.find(']')+1:]
-                report_error(ERROR, file, elem.attrib['linenr'], f'The lambda function passed to the function ddc::{p} must be a KOKKOS_LAMBDA\n{last_arg}\nShould be:\n{correct_last_arg}')
+                if config.data[arg_splitters[-1]+1]['str'] == '[':
+                    last_arg = ' '.join(a['str'] for a in config.data[arg_splitters[-1]+1:end_idx])
+                    correct_last_arg = 'KOKKOS_LAMBDA '+last_arg[last_arg.find(']')+1:]
+                    report_error(FATAL, file, elem.attrib['linenr'], f'The lambda function passed to the function ddc::{p} must be a KOKKOS_LAMBDA\n{last_arg}\nShould be:\n{correct_last_arg}')
 
-            lambda_body_start = next(i for i,a in enumerate(file.data[arg_splitters[-1]+1:], arg_splitters[-1]+1) if a['str'] == '{')
-            lambda_body_end_id = file.data[lambda_body_start]['link']
-            lambda_body_scope = file.data[lambda_body_start]['scope']
-            end_body_idx = file.data.index(file.data_xml.find(f".token[@id='{lambda_body_end_id}'][@scope='{lambda_body_scope}']").attrib)
-            for a in file.data[lambda_body_start+1:end_body_idx]:
-                var_id = a.get('variable', None)
-                if var_id:
-                    var = next(v for v in file.variables if v['id'] == var_id)
-                    var_scope = var['scope']
-                    scope_info = file.root.find(f"./dump/scopes/scope[@id='{var_scope}']").attrib
-                    if scope_info['type'] == 'Class':
-                        report_error(ERROR, file, a['linenr'], f'Please create a local variable with the suffix "_proxy" to store the class variable that is used in a parallel loop ({a["str"]})')
+                lambda_body_start = next(i for i,a in enumerate(config.data[arg_splitters[-1]+1:], arg_splitters[-1]+1) if a['str'] == '{')
+                lambda_body_end_id = config.data[lambda_body_start]['link']
+                lambda_body_scope = config.data[lambda_body_start]['scope']
+                end_body_idx = config.data.index(config.data_xml.find(f".token[@id='{lambda_body_end_id}'][@scope='{lambda_body_scope}']").attrib)
+                for a in config.data[lambda_body_start+1:end_body_idx]:
+                    var_id = a.get('variable', None)
+                    if var_id:
+                        var = next(v for v in config.variables if v['id'] == var_id)
+                        var_scope = var['scope']
+                        scope_info = config.root.find(f"./scopes/scope[@id='{var_scope}']").attrib
+                        if scope_info['type'] == 'Class':
+                            report_error(FATAL, file, a['linenr'], f'Please create a local variable with the suffix "_proxy" to store the class variable that is used in a parallel loop ({a["str"]})')
 
 def check_licence_presence(file):
     """
@@ -526,42 +555,40 @@ def check_licence_presence(file):
     if file.file.suffix != '.hpp':
         return
     if file.raw[0]['str'] != '// SPDX-License-Identifier: MIT':
-        report_error(ERROR, file, 1, "Licence missing from the top of the file (// SPDX-License-Identifier: MIT)")
+        report_error(FATAL, file, 1, "Licence missing from the top of the file (// SPDX-License-Identifier: MIT)")
 
 def check_exec_space_usage(file):
     """
     Test to ensure that the operator() of a Field or FieldMem is not used from the wrong space (CPU/GPU)
     """
     # Treat each configuration separately
-    for config in file.root.findall('./dump'):
-        tokenlist = [t.attrib for t in config.find('./tokenlist')]
-
+    for config in file.configs:
         # Find all scopes and specify DefaultHostExecutionSpace by default
-        scopes = {s.attrib['id'] : s.attrib for s in config.findall(".//scope")}
+        scopes = {s.attrib['id'] : s.attrib for s in config.root.findall(".//scope")}
         for s in scopes.values():
             s['exec_space'] = 'DefaultHostExecutionSpace'
 
         known_execution_spaces = ('DefaultHostExecutionSpace', 'DefaultExecutionSpace')
 
         # Find all markers indicating a Kokkos scope and note the correct execution space
-        kokkos_scope_markers = chain(config.findall(".//token[@str='KOKKOS_LAMBDA']"),
-                                     config.findall(".//token[@str='KOKKOS_FUNCTION']"),
-                                     config.findall(".//token[@str='KOKKOS_INLINE_FUNCTION']"))
+        kokkos_scope_markers = chain(config.data_xml.findall(".token[@str='KOKKOS_LAMBDA']"),
+                                     config.data_xml.findall(".token[@str='KOKKOS_FUNCTION']"),
+                                     config.data_xml.findall(".token[@str='KOKKOS_INLINE_FUNCTION']"))
 
         for m in kokkos_scope_markers:
             # Identify scope id
-            current_idx = tokenlist.index(m.attrib)
-            start_idx = next(i for i,t in enumerate(tokenlist[current_idx:],current_idx) if t['str'] =='{' or t['str'] == ';')
-            if tokenlist[start_idx]['str'] == ';':
+            current_idx = config.data.index(m.attrib)
+            start_idx = next(i for i,t in enumerate(config.data[current_idx:],current_idx) if t['str'] =='{' or t['str'] == ';')
+            if config.data[start_idx]['str'] == ';':
                 continue
 
-            scope_id = tokenlist[start_idx+1]['scope']
+            scope_id = config.data[start_idx+1]['scope']
             scope = scopes[scope_id]
 
-            if tokenlist[current_idx]['str'] == 'KOKKOS_LAMBDA':
-                ast_parent = config.find(f".//token[@id='{tokenlist[current_idx-1]['astParent']}']").attrib
-                parallel_func_start_idx = tokenlist.index(ast_parent)
-                args = [t['str'] for t in tokenlist[parallel_func_start_idx+1:current_idx]]
+            if config.data[current_idx]['str'] == 'KOKKOS_LAMBDA':
+                ast_parent = config.data_xml.find(f".token[@id='{config.data[current_idx-1]['astParent']}']").attrib
+                parallel_func_start_idx = config.data.index(ast_parent)
+                args = [t['str'] for t in config.data[parallel_func_start_idx+1:current_idx]]
                 if 'DefaultHostExecutionSpace' in args:
                     continue
 
@@ -583,15 +610,15 @@ def check_exec_space_usage(file):
         # Find all variables that may be defined on either CPU or GPU
         field_variables = {}
         auto_variables = {}
-        for v in config.findall("./variables/var"):
+        for v in config.root.findall("./variables/var"):
             # Identify the type
             type_start_token = v.get('typeStartToken')
             type_end_token = v.get('typeEndToken')
             name_token = v.get('nameToken')
-            type_start_idx = tokenlist.index(config.find(f"./tokenlist/token[@id='{type_start_token}']").attrib)
-            type_end_idx = tokenlist.index(config.find(f"./tokenlist/token[@id='{type_end_token}']").attrib)
-            type_elements = [t['str'] for t in tokenlist[type_start_idx:type_end_idx+1]]
-            name = config.find(f"./tokenlist/token[@id='{name_token}']").attrib['str'] if name_token != '0' else ''
+            type_start_idx = config.data.index(config.data_xml.find(f".token[@id='{type_start_token}']").attrib)
+            type_end_idx = config.data.index(config.data_xml.find(f".token[@id='{type_end_token}']").attrib)
+            type_elements = [t['str'] for t in config.data[type_start_idx:type_end_idx+1]]
+            name = config.data_xml.find(f".token[@id='{name_token}']").attrib['str'] if name_token != '0' else ''
             type_descr = ' '.join(type_elements)
             if type_descr in file.aliases:
                 type_elements = [t['str'] for t in file.aliases[type_descr]]
@@ -656,12 +683,12 @@ def check_exec_space_usage(file):
         # Check auto variables to identify Field/FieldMem types
         for name, v in auto_variables.items():
             v_id = v['id']
-            var_usage = config.findall(f"./tokenlist/token[@variable='{v_id}']")
+            var_usage = config.data_xml.findall(f".token[@variable='{v_id}']")
             for u in var_usage:
-                idx = tokenlist.index(u.attrib)
-                if tokenlist[idx+1]['str'] == '=':
-                    phrase_end = next(i for i,t in enumerate(tokenlist[idx+2:],idx+2) if t['str'] == ';')
-                    keys = [t['str'] for t in tokenlist[idx+2:phrase_end]]
+                idx = config.data.index(u.attrib)
+                if config.data[idx+1]['str'] == '=':
+                    phrase_end = next(i for i,t in enumerate(config.data[idx+2:],idx+2) if t['str'] == ';')
+                    keys = [t['str'] for t in config.data[idx+2:phrase_end]]
                     # If the auto variable is created by a call to a mirror function then identify the memory space
                     if any(k in mirror_functions for k in keys):
                         if 'DefaultExecutionSpace' in keys:
@@ -675,18 +702,18 @@ def check_exec_space_usage(file):
         # For each Field/FieldMem type check that it's contents are only accessed on the correct memory space
         for name, v in field_variables.items():
             v_id = v['id']
-            var_usage = config.findall(f"./tokenlist/token[@variable='{v_id}']")
+            var_usage = config.data_xml.findall(f".token[@variable='{v_id}']")
             for u in var_usage:
-                idx = tokenlist.index(u.attrib)
-                scope_id = tokenlist[idx]['scope']
+                idx = config.data.index(u.attrib)
+                scope_id = config.data[idx]['scope']
                 scope = scopes[scope_id]
-                if tokenlist[idx]['file'] != str(file.file):
+                if config.data[idx]['file'] != str(file.file):
                     continue
                 # Exclude initialisation where the variable is followed by ( but the operator() is not called
-                if tokenlist[idx-1]['id'] == v['typeEndToken'] or scope['type'] in ('Class', 'Struct'):
+                if config.data[idx-1]['id'] == v['typeEndToken'] or scope['type'] in ('Class', 'Struct'):
                     continue
                 # If accessing the contents then we must be on the correct execution space
-                if tokenlist[idx+1]['str'] == '(':
+                if config.data[idx+1]['str'] == '(':
                     exec_space = scope['exec_space']
                     memory_space = v['exec_space']
                     level = None
@@ -703,7 +730,7 @@ def check_exec_space_usage(file):
                         msg = ("Attempted memory access from the wrong execution space. "
                                f"The current execution space is \"{scope['exec_space']}\" but the variable "
                                f"{name} is stored on a space compatible with \"{v['exec_space']}\"")
-                        report_error(level, file, tokenlist[idx]['linenr'], msg)
+                        report_error(level, file, config.data[idx]['linenr'], msg)
 
                     if scope['exec_space'] == 'DefaultExecutionSpace' and (v['type'] == 'auto' or 'FieldMem' in v['type']):
                         msg = ''
@@ -712,12 +739,12 @@ def check_exec_space_usage(file):
                         msg += ("The FieldMem copy operator is deleted to avoid accidental memory allocation. "
                                 "You probably do not want a copy of the FieldMem allocated on each GPU thread. "
                                 "Please use a Field to access the data that has already been allocated.")
-                        report_error(FATAL, file, tokenlist[idx]['linenr'], msg)
+                        report_error(FATAL, file, config.data[idx]['linenr'], msg)
 
         for s_id, scope in scopes.items():
             if scope['exec_space'] == 'DefaultHostExecutionSpace':
                 continue
-            relevant_code = [c for c in config.findall(f".//token[@scope='{s_id}']") if c.attrib['file'] == str(file.file)]
+            relevant_code = [c for c in config.data_xml.findall(f".token[@scope='{s_id}']") if c.attrib['file'] == str(file.file)]
             code_keys = [c.attrib['str'] for c in relevant_code]
             exception_keys = ('is_same','is_same_v', 'tie', 'tuple_size', 'tuple_element', 'make_tuple', 'get', 'array', 'tuple',
                               'conditional', 'conditional_t', 'enable_if', 'enable_if_t', 'is_base_of', 'is_base_of_v',
@@ -740,7 +767,13 @@ def check_exec_space_usage(file):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("A static analysis scipt to search for common errors using cppcheck")
     parser.add_argument('files', type=str, nargs='*')
+    parser.add_argument('--errors-only', action='store_true')
     args = parser.parse_args()
+
+    if args.errors_only:
+        possible_error_levels[WARNING] = 0
+        possible_error_levels[STYLE] = 0
+        possible_error_levels[ERROR] = 0
 
     no_file_filter = not args.files
     filter_files = [Path(f).absolute() for f in args.files]

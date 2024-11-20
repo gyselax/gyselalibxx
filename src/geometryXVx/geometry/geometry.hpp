@@ -60,13 +60,8 @@ using CoordXVx = Coord<X, Vx>;
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
 
-#ifdef INPUT_MESH
-bool constexpr BsplineOnUniformCellsX = false;
-bool constexpr BsplineOnUniformCellsVx = false;
-#else
 bool constexpr BsplineOnUniformCellsX = true;
 bool constexpr BsplineOnUniformCellsVx = true;
-#endif
 
 struct BSplinesX
     : std::conditional_t<

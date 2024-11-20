@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 
@@ -73,8 +74,7 @@ public:
      * @param[in] mapping
      *      The mapping from the logical index range to the physical index range.
      */
-    FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {};
-    ~FunctionToBeAdvected_cos_4_elipse() {};
+    explicit FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {}
 
     double operator()(CoordRTheta coord_rp) final
     {
@@ -93,7 +93,7 @@ public:
         double const G_2 = std::pow(std::cos(M_PI * r_2 / 2. / a), 4) * (r_2 < a);
 
         return 1. / 2. * (G_1 + G_2);
-    };
+    }
 };
 
 
@@ -155,8 +155,9 @@ public:
         , m_sig_x(sig_x)
         , m_sig_y(sig_y)
         , m_rmin(rmin)
-        , m_rmax(rmax) {};
-    ~FunctionToBeAdvected_gaussian() {};
+        , m_rmax(rmax)
+    {
+    }
 
     double operator()(CoordRTheta coord_rp) final
     {
@@ -173,7 +174,7 @@ public:
         } else {
             return 0.0;
         }
-    };
+    }
 };
 
 
@@ -250,15 +251,16 @@ public:
         , m_xc(0.25)
         , m_yc(0.)
         , m_x_bar(0.)
-        , m_y_bar(0.) {};
-    ~AdvectionField_decentred_rotation() {};
+        , m_y_bar(0.)
+    {
+    }
 
     CoordXY operator()(CoordXY const coord, double const t) const final
     {
         double const x = m_omega * (m_yc - ddc::get<Y>(coord));
         double const y = m_omega * (ddc::get<X>(coord) - m_xc);
         return CoordXY(x, y);
-    };
+    }
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
     {
@@ -269,7 +271,7 @@ public:
         double const foot_y
                 = m_yc + (x - m_xc) * std::sin(m_omega * -t) + (y - m_yc) * std::cos(m_omega * -t);
         return CoordXY(foot_x, foot_y);
-    };
+    }
 };
 
 
@@ -304,18 +306,19 @@ public:
      *      The constant second component of the advection field in the physical index range.
      */
     AdvectionField_translation(CoordVx vx, CoordVy vy)
-        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy)) {};
-    ~AdvectionField_translation() {};
+        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy))
+    {
+    }
 
     CoordXY operator()(CoordXY const coord, double const t) const final
     {
         return m_velocity;
-    };
+    }
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
     {
         return coord - t * m_velocity;
-    };
+    }
 };
 
 
@@ -358,8 +361,9 @@ public:
     AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
         : m_vr(vr)
         , m_vtheta(vtheta)
-        , m_mapping() {};
-    ~AdvectionField_rotation() {};
+        , m_mapping()
+    {
+    }
 
     CoordXY operator()(CoordXY const coord, double const t) const final
     {
@@ -369,14 +373,14 @@ public:
         double const vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];
         double const vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];
         return CoordXY(vx, vy);
-    };
+    }
 
     CoordXY exact_feet(CoordXY coord_xy, double const t) const final
     {
         CoordRTheta const coord_rp(m_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
         return m_mapping(coord_rp - t * velocity);
-    };
+    }
 };
 
 
@@ -418,7 +422,9 @@ public:
      */
     AdvectionSimulation(AdvectionField const advection_field, FunctionToBeAdvected const function)
         : m_advection_field(advection_field)
-        , m_function(function) {};
+        , m_function(function)
+    {
+    }
     virtual ~AdvectionSimulation() = default;
 
 
@@ -430,7 +436,7 @@ public:
     AdvectionField const& get_advection_field() const
     {
         return m_advection_field;
-    };
+    }
 
     /**
      * @brief Get the test function of the simulation.
@@ -440,7 +446,7 @@ public:
     FunctionToBeAdvected const& get_test_function() const
     {
         return m_function;
-    };
+    }
 };
 
 
@@ -487,7 +493,9 @@ public:
                         CoordVx(std::cos(2 * M_PI * 511. / 4096.) / 2.),
                         CoordVy(std::sin(2 * M_PI * 511. / 4096.) / 2.)),
                 FunctionToBeAdvected_gaussian<
-                        Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)) {};
+                        Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax))
+    {
+    }
 };
 
 
@@ -534,7 +542,9 @@ public:
         : AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>(
                 AdvectionField_rotation(CoordVr(0.), CoordVtheta(2 * M_PI)),
                 FunctionToBeAdvected_gaussian<
-                        Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)) {};
+                        Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax))
+    {
+    }
 };
 
 
@@ -576,10 +586,12 @@ public:
      * @param[in] mapping
      *      The mapping from the logical index range to the physical index range.
      */
-    DecentredRotationSimulation(Mapping const& mapping)
+    explicit DecentredRotationSimulation(Mapping const& mapping)
         : AdvectionSimulation<
                 AdvectionField_decentred_rotation,
                 FunctionToBeAdvected_cos_4_elipse<Mapping>>(
                 AdvectionField_decentred_rotation(),
-                FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping)) {};
+                FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping))
+    {
+    }
 };

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <cmath>
 
@@ -31,9 +32,7 @@ public:
      *      A mapping function from the logical index range
      *      to the physical index range.
      */
-    VortexMergerDensitySolution(Mapping const& mapping) : m_mapping(mapping) {}
-
-    ~VortexMergerDensitySolution() {};
+    explicit VortexMergerDensitySolution(Mapping const& mapping) : m_mapping(mapping) {}
 
     /**
      * @brief Set an initial condition for the vortex merger simulation.

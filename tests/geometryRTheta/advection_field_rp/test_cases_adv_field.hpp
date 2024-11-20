@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 
@@ -94,15 +95,16 @@ public:
         , m_xc(0.25)
         , m_yc(0.)
         , m_x_bar(0.)
-        , m_y_bar(0.) {};
-    ~ElectrostaticalPotentialSimulation_decentred_rotation() {};
+        , m_y_bar(0.)
+    {
+    }
 
     double operator()(CoordXY const coord, double const t) const final
     {
         double const x = ddc::get<X>(coord);
         double const y = ddc::get<Y>(coord);
         return m_omega * (-0.5 * x * x + m_xc * x - 0.5 * y * y + m_yc * y);
-    };
+    }
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
     {
@@ -113,7 +115,7 @@ public:
         double const foot_y
                 = m_yc + (x - m_xc) * std::sin(m_omega * -t) + (y - m_yc) * std::cos(m_omega * -t);
         return CoordXY(foot_x, foot_y);
-    };
+    }
 };
 
 
@@ -148,20 +150,21 @@ public:
      *      The constant second component of the advection field in the physical index range.
      */
     ElectrostaticalPotentialSimulation_translation(CoordVx vx, CoordVy vy)
-        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy)) {};
-    ~ElectrostaticalPotentialSimulation_translation() {};
+        : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy))
+    {
+    }
 
     double operator()(CoordXY const coord, double const t) const final
     {
         double const vx = ddc::get<X>(m_velocity);
         double const vy = ddc::get<Y>(m_velocity);
         return -vy * ddc::get<X>(coord) + vx * ddc::get<Y>(coord);
-    };
+    }
 
     CoordXY exact_feet(CoordXY coord, double const t) const final
     {
         return coord - t * m_velocity;
-    };
+    }
 };
 
 
@@ -199,25 +202,26 @@ public:
      * @param[in] vtheta
      *      The constant second polar component of the advection field in the physical index range.
      */
-    ElectrostaticalPotentialSimulation_rotation(CoordVtheta vtheta)
+    explicit ElectrostaticalPotentialSimulation_rotation(CoordVtheta vtheta)
         : m_vr(0)
         , m_vtheta(vtheta)
-        , m_mapping() {};
-    ~ElectrostaticalPotentialSimulation_rotation() {};
+        , m_mapping()
+    {
+    }
 
     double operator()(CoordXY const coord, double const t) const final
     {
         CoordRTheta const coord_rp(m_mapping(coord));
         double const r = ddc::get<R>(coord_rp);
         return -0.5 * r * r * m_vtheta;
-    };
+    }
 
     CoordXY exact_feet(CoordXY coord_xy, double const t) const final
     {
         CoordRTheta const coord_rp(m_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
         return m_mapping(coord_rp - t * velocity);
-    };
+    }
 };
 
 
@@ -274,7 +278,9 @@ public:
             AdvectionField const advection_field)
         : m_electrostatical_potential(electrostatical_potential)
         , m_function(function)
-        , m_advection_field(advection_field) {};
+        , m_advection_field(advection_field)
+    {
+    }
     virtual ~AdvectionFieldSimulation() = default;
 
 
@@ -287,7 +293,7 @@ public:
     ElectrostaticalPotentialSimulation const& get_electrostatique_potential() const
     {
         return m_electrostatical_potential;
-    };
+    }
 
     /**
      * @brief Get the test function of the simulation.
@@ -297,7 +303,7 @@ public:
     FunctionToBeAdvected const& get_test_function() const
     {
         return m_function;
-    };
+    }
 
 
     /**
@@ -308,7 +314,7 @@ public:
     AdvectionField const& get_advection_field() const
     {
         return m_advection_field;
-    };
+    }
 };
 
 
@@ -368,7 +374,9 @@ public:
                         Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
                 AdvectionField_translation(
                         CoordVx(-std::cos(2 * M_PI * 511. / 4096.) / 2.),
-                        CoordVy(-std::sin(2 * M_PI * 511. / 4096.) / 2.))) {};
+                        CoordVy(-std::sin(2 * M_PI * 511. / 4096.) / 2.)))
+    {
+    }
 };
 
 
@@ -423,7 +431,9 @@ public:
                 ElectrostaticalPotentialSimulation_rotation(CoordVtheta(2 * M_PI)),
                 FunctionToBeAdvected_gaussian<
                         Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
-                AdvectionField_rotation(CoordVr(0), CoordVtheta(2 * M_PI))) {};
+                AdvectionField_rotation(CoordVr(0), CoordVtheta(2 * M_PI)))
+    {
+    }
 };
 
 
@@ -467,12 +477,14 @@ public:
      * @param[in] mapping
      *      The mapping from the logical index range to the physical index range.
      */
-    DecentredRotationAdvectionFieldSimulation(Mapping const& mapping)
+    explicit DecentredRotationAdvectionFieldSimulation(Mapping const& mapping)
         : AdvectionFieldSimulation<
                 ElectrostaticalPotentialSimulation_decentred_rotation,
                 FunctionToBeAdvected_cos_4_elipse<Mapping>,
                 AdvectionField_decentred_rotation>(
                 ElectrostaticalPotentialSimulation_decentred_rotation(),
                 FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping),
-                AdvectionField_decentred_rotation()) {};
+                AdvectionField_decentred_rotation())
+    {
+    }
 };
