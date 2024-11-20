@@ -27,8 +27,6 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
         paraconf::paraconf
         gslx::advection
         gslx::boltzmann_${GEOMETRY_VARIANT}
-        gslx::fluidinitialization_${GEOMETRY_VARIANT}
-        gslx::fluidsolver_${GEOMETRY_VARIANT}
         gslx::moments
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::quadrature
@@ -99,8 +97,4 @@ endif()
 
 add_subdirectory(bump_on_tail)
 
-add_subdirectory(geometryMX)
-
 add_subdirectory(landau)
-
-add_subdirectory(sheath)
