@@ -1,0 +1,164 @@
+#!/bin/bash
+# SPDX-License-Identifier: MIT
+
+# Check for the gh command
+if ! command -v gh 2>&1 >/dev/null
+then
+    echo "This script uses GitHub's command line tool 'gh' but it does not seem to be installed."
+    echo "The installation instructions can be found at https://github.com/cli/cli?tab=readme-ov-file#installation"
+    exit 1
+fi
+
+# Check that the gh command has been initialised
+if ! gh auth status -h github.com >/dev/null
+then
+    echo "Please run:"
+    echo "gh auth login -h github.com"
+    echo "To authenticate on GitHub for the first time. This will allow you to use the GitHub CLI to create new repositories"
+    exit 1
+fi
+
+# Create the directory for the new repository
+set -e
+echo "Please provide the path to the folder where you want to create the new repository:"
+
+read directory
+
+directory=$(realpath ${directory})
+
+if [ -d "${directory}" ]; then
+  echo "The specified folder already exists."
+fi
+
+# Clone the repository into the new folder
+git clone git@github.com:gyselax/gyselalibxx.git --single-branch --branch main ${directory}
+
+echo "Created ${directory}"
+
+cd ${directory}
+
+git remote rename origin gyselalibxx
+
+# Create the new private repository
+echo "What would you like to call your private repository ? [Default: gyselalibxx]"
+
+read repo_name
+
+if [ -z "${repo_name}" ]; then
+    repo_name=gyselalibxx
+fi
+echo ${repo_name}
+
+git_user=$(python3 -c "import subprocess; import json; p=subprocess.run(['gh', 'api', 'user'], capture_output=True, universal_newlines=True); d = json.loads(p.stdout); print(d['login'])")
+
+gh repo create --private ${repo_name} -r origin -s .
+
+# Setup the branches and default settings on the new private repository
+gh repo set-default ${git_user}/${repo_name}
+git push -u origin main
+
+git checkout -b devel
+git push -u origin devel
+
+gh repo edit --default-branch devel --delete-branch-on-merge --enable-squash-merge --allow-update-branch
+gh label create "Ready to review" -c "#F2DD28" -d "Label to be automatically added to a PR when it is ready to be reviewed"
+gh label create "Ready to merge" -c "#A9F543" -d "Label to be automatically added to a PR when it is approved and tests are passing"
+gh api \
+  --method PUT \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  /repos/${git_user}/${repo_name}/actions/permissions/workflow \
+   -f "default_workflow_permissions=write" -F "can_approve_pull_request_reviews=true"
+
+# Create the CI to update the main and devel branches
+cat >.github/workflows/mirror_files.yml <<EOL
+name: mirror
+on:
+  schedule:
+    - cron:  '00 03 * * *' # Run every day at 03:00
+
+jobs:
+  Update_branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          MAIN_SHA=\$(git log -1 --pretty=%H)
+          echo "MAIN_SHA=\${MAIN_SHA}" >> \$GITHUB_OUTPUT
+          git checkout devel
+          set +e
+          ./bin/update_branches
+          SUCCESS=\$?
+          echo
+          set -e
+          existing_issue=\$(gh issue list -S "Update repository" --json number)
+          if [[ \${SUCCESS} != 0 ]]
+          then
+            if [[ "\${existing_issue}" == "[]" ]]
+            then
+              gh issue create -t "Update repository" -b "This repository has conflicts with the main repository. Please run ./bin/update_branches and fix rebase conflicts manually"
+            fi
+          else
+            if [[ "\${existing_issue}" != "[]" ]]
+            then
+              issue_id=\$(python -c "import json; print(json.loads('\${existing_issue}'[1:-1])['number'])")
+              gh issue close \${issue_id} -r completed -c "Fixed as of \$(date)"
+            fi
+          fi
+        shell: bash
+        env:
+          GH_TOKEN: \${{ github.token }}
+EOL
+
+cat >bin/update_branches <<EOL
+#!/bin/bash
+# SPDX-License-Identifier: MIT
+
+git checkout main
+MAIN_SHA=\$(git log -1 --pretty=%H)
+
+if ! git config remote.gyselalibxx.url > /dev/null; then
+  git remote add gyselalibxx git@github.com:gyselax/gyselalibxx.git
+fi
+git merge gyselalibxx/main
+git checkout devel
+
+git rebase --onto main \${MAIN_SHA} devel
+SUCCESS=\$?
+
+if [[ \${SUCCESS} == 0 ]]
+then
+  git push -f --all
+  echo "Main and devel branch updated successfully"
+else
+  git status
+  exit 1
+fi
+EOL
+chmod +x bin/update_branches
+git add bin/update_branches .github/workflows/mirror_files.yml
+git commit -m "Set up repository mirroring"
+git push
+
+# Output explanations to user
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+echo -e "The new repository was created successfully."
+echo -e "This repository contains 2 branches:"
+echo -e "- main"
+echo -e "- devel"
+echo -e ""
+echo -e "The main branch is a duplicate of the main branch in the gyselax/gyselalibxx repository."
+echo -e "${RED}The main branch should not be modified manually.${NC}"
+echo -e "The devel branch contains clean commits which can be added to the main branch in the gyselax/gyselalibxx repository when the developments in this branch become public."
+echo -e "In order to develop in this repository you should create a third branch for your developments. When you are happy with the changes you can create a pull request and merge them cleanly into the devel branch."
+echo -e "At 3:00 every morning a CI will run on GitHub to update the main branch and rebase the devel branch onto the main branch. This will ensure that your developments remain up to date with the gyselax/gyselalibxx repository. If the rebase fails then an issue will be created to warn you to fix this problem manually."
+echo -e "This repository is private and can only be accessed by other developers if you give them permission in the settings."
+echo -e "If you need to make general changes to gyselalibxx which are not private and could be useful for other users please try to create issues directly in the gyselax/gyselalibxx repository. Once the pull request has been merged there you can update your branches (without waiting for 3:00 am by running ./bin/update_branches"
