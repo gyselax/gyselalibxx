@@ -92,14 +92,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html#adf88b0d72b030bd51728e9c0b35896cb",
-"classEuler.html#abf7ce877cffa5f112975e0c8ebaf5b28",
-"classKrookSourceAdaptive.html#aa21bf44587670275cda2d33049a5227c",
-"classMultipatchSplineEvaluator2D.html",
-"classRK4.html#ad0949984fa0c2d0004f6b7a10e19cd69",
-"docs_CODING_STANDARD.html#autotoc_md9",
-"src_2utils_2math__tools_8hpp.html#a45430c16dfe8e7235584fb194c65c164",
-"structPolarSplineView.html#a24a72ecf5cca4e477a31cce110c1e292"
+"classCollisionsInter.html",
+"classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a6e31dd601d961ee711979be414fd2036",
+"classMatrix.html#a0e72216b991d1f4af19982fe936067ab",
+"classMultipatchType.html",
+"classSplitRightHandSideSolver.html#a350971eed31753861f6e2917b9b6b968",
+"geometryXVx_2poisson_2nullqnsolver_8hpp_source.html",
+"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver",
+"tests_geometryRTheta_2d_spline_interpolator.html#autotoc_md79"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

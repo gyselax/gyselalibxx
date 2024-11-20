@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['mappings_1884',['Mappings',['../vendor_sll_include_sll_mapping.html',1,'vendor_sll']]],
-  ['multipatch_1885',['Multipatch',['../src_multipatch.html',1,'src']]],
-  ['multipatch_20connectivity_1886',['Multipatch connectivity',['../src_multipatch_connectivity.html',1,'src_multipatch']]],
-  ['multipatch_20geometries_1887',['Multipatch geometries',['../tests_multipatch_geometries.html',1,'tests_multipatch']]],
-  ['multipatch_20geometry_20tests_1888',['Multipatch geometry tests',['../tests_multipatch.html',1,'tests']]],
-  ['multipatch_20utilitary_20functions_1889',['Multipatch utilitary functions',['../src_multipatch_utils.html',1,'src_multipatch']]]
+  ['parallelisation_1833',['Parallelisation',['../src_mpi_parallelisation.html',1,'src']]],
+  ['pde_20solvers_1834',['PDE Solvers',['../src_pde_solvers.html',1,'src']]],
+  ['polar_20poisson_20solver_1835',['Polar Poisson solver',['../src_geometryRTheta_poisson.html',1,'src_geometryRTheta']]],
+  ['pre_2dmade_20build_20settings_1836',['Pre-made build settings',['../toolchains.html',1,'index']]],
+  ['predictor_2dcorrector_20methods_1837',['Predictor-corrector methods',['../src_geometryRTheta_time_solver.html',1,'src_geometryRTheta'],['../src_geometryXY_time_integration.html',1,'src_geometryXY']]]
 ];
