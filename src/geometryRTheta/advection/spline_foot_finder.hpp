@@ -2,9 +2,14 @@
 #pragma once
 #include <functional>
 
+#include <sll/mapping/cartesian_to_pseudo_cartesian.hpp>
+#include <sll/mapping/circular_to_cartesian.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "ifoot_finder.hpp"
+#include "vector_mapper.hpp"
 
 /**
  * @brief Define a base class for all the time integration methods used for the advection.
@@ -16,7 +21,7 @@
  *
  * @see BslAdvectionRTheta
  */
-template <class TimeStepper, class AdvectionDomain>
+template <class TimeStepper, class AdvectionDomain, class Mapping>
 class SplineFootFinder : public IFootFinder
 {
 private:
@@ -29,10 +34,13 @@ private:
      */
     using Y_adv = typename AdvectionDomain::Y_adv;
 
+    using CircularToPseudoCartesian = CircularToCartesian<X_adv, Y_adv, R, Theta>;
+    using AdvectionMapping = CartesianToPseudoCartesian<Mapping, CircularToPseudoCartesian>;
 
     TimeStepper const& m_time_stepper;
 
     AdvectionDomain const& m_advection_domain;
+    AdvectionMapping m_mapping;
 
     SplineRThetaBuilder const& m_builder_advection_field;
     SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
@@ -49,11 +57,16 @@ public:
      * @param[in] advection_domain
      *      An AdvectionDomain object which defines in which index range we
      *      advect the characteristics.
+     * @param[in] mapping
+     *      The mapping from the logical domain to the physical domain.
      * @param[in] builder_advection_field
      *      The spline builder which computes the spline representation
      *      of the advection field.
      * @param[in] evaluator_advection_field
      *      The B-splines evaluator to evaluate the advection field.
+     * @param[in] epsilon
+     *      @f$ \varepsilon @f$ parameter used for the linearization of the
+     *      advection field around the central point.
      *
      * @tparam TimeStepper
      *      A child class of ITimeStepper providing a time integration method.
@@ -65,10 +78,13 @@ public:
     SplineFootFinder(
             TimeStepper const& time_stepper,
             AdvectionDomain const& advection_domain,
+            Mapping const& mapping,
             SplineRThetaBuilder const& builder_advection_field,
-            SplineRThetaEvaluatorConstBound const& evaluator_advection_field)
+            SplineRThetaEvaluatorConstBound const& evaluator_advection_field,
+            double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
         , m_advection_domain(advection_domain)
+        , m_mapping(CircularToPseudoCartesian(), mapping, epsilon)
         , m_builder_advection_field(builder_advection_field)
         , m_evaluator_advection_field(evaluator_advection_field)
     {
@@ -95,23 +111,22 @@ public:
             host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
             double dt) const final
     {
-        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>> idx_range_advection_field_in_adv(
-                get_idx_range(advection_field));
         host_t<VectorSplineCoeffsMem2D<X_adv, Y_adv>> advection_field_in_adv_domain_coefs(
                 get_spline_idx_range(m_builder_advection_field));
 
-        // Compute the advection field in the advection index range.
-        m_advection_domain.compute_advection_field(
+        // Compute the advection field in the advection domain.
+        auto advection_field_in_adv_domain = create_geometry_mirror_view(
+                Kokkos::DefaultHostExecutionSpace(),
                 advection_field,
-                get_field(idx_range_advection_field_in_adv));
+                m_mapping);
 
-        // Get the coefficients of the advection field in the advection index range.
+        // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
                 ddcHelper::get<X_adv>(advection_field_in_adv_domain_coefs),
-                ddcHelper::get<X_adv>(get_const_field(idx_range_advection_field_in_adv)));
+                ddcHelper::get<X_adv>(get_const_field(advection_field_in_adv_domain)));
         m_builder_advection_field(
                 ddcHelper::get<Y_adv>(advection_field_in_adv_domain_coefs),
-                ddcHelper::get<Y_adv>(get_const_field(idx_range_advection_field_in_adv)));
+                ddcHelper::get<Y_adv>(get_const_field(advection_field_in_adv_domain)));
 
 
         // The function describing how the derivative of the evolve function is calculated.

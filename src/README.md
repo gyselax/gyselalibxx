@@ -12,6 +12,7 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [geometryXYVxVy](./geometryXYVxVy/README.md) - Code describing methods which are specific to a simulation with 2 spatial dimensions and 2 velocity dimension.
 - [interpolation](./interpolation/README.md) - Code describing interpolation methods.
 - [io](./io/README.md) - Code describing tools for inputting and outputting data in a simulation.
+- [mapping](./mapping/README.md) - Code describing tools for handling different coordinate systems.
 - [multipatch](./multipatch/README.md) - Code describing multipatch geometry.
 <!-- - [paraconfpp](./paraconfpp/README.md) - Paraconf utility functions. -->
 - [mpi\_parallelisation](./mpi_parallelisation/README.md) - Code describing the MPI parallelisation.

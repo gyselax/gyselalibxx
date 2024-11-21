@@ -140,8 +140,12 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     RK3<host_t<FieldMemRTheta<CoordRTheta>>,
         host_t<DVectorFieldMemRTheta<X, Y>>,
         Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
-    SplineFootFinder
-            find_feet(time_stepper, advection_idx_range, builder, spline_evaluator_extrapol);
+    SplineFootFinder find_feet(
+            time_stepper,
+            advection_idx_range,
+            mapping,
+            builder,
+            spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
 

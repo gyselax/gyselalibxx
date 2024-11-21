@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+#pragma once
 #include <chrono>
 #include <cstring>
 #include <filesystem>
@@ -94,11 +95,17 @@ void save_feet(
 {
     std::ofstream file_feet(name, std::ofstream::out);
     file_feet << std::fixed << std::setprecision(16);
-    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
-        IdxRangeTheta idx_range_p = ddc::select<GridTheta>(idx_range_rp);
 
-        file_feet << std::setw(15) << ddc::select<GridR>(irp).uid() << std::setw(15)
-                  << ddc::select<GridTheta>(irp).uid();
+    IdxRangeR idx_range_r(idx_range_rp);
+    IdxRangeTheta idx_range_p(idx_range_rp);
+    Idx<GridR> ir_start = idx_range_r.front();
+    Idx<GridTheta> ip_start = idx_range_p.front();
+
+    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
+        IdxR ir(irp);
+        IdxTheta ip(irp);
+        file_feet << std::setw(15) << (ir - ir_start).value() << std::setw(15)
+                  << (ip - ip_start).value();
         print_coordinate(file_feet, ddc::coordinate(irp), mapping, idx_range_p);
         print_coordinate(file_feet, feet_coords_rp(irp), mapping, idx_range_p);
         file_feet << std::endl;
@@ -125,13 +132,17 @@ void saving_computed(Mapping const& mapping, host_t<DFieldRTheta> function, std:
     std::ofstream out_file(name, std::ofstream::out);
     out_file << std::fixed << std::setprecision(16);
 
+    IdxRangeR idx_range_r(grid);
+    IdxRangeTheta idx_range_p(grid);
+    Idx<GridR> ir_start = idx_range_r.front();
+    Idx<GridTheta> ip_start = idx_range_p.front();
+
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        IdxRangeTheta idx_range_p = ddc::select<GridTheta>(grid);
+        IdxR const ir(irp);
+        IdxTheta const ip(irp);
 
-        IdxR const ir(ddc::select<GridR>(irp));
-        IdxTheta const ip(ddc::select<GridTheta>(irp));
-
-        out_file << std::setw(15) << ir.uid() << std::setw(15) << ip.uid();
+        out_file << std::setw(15) << (ir - ir_start).value() << std::setw(15)
+                 << (ip - ip_start).value();
         print_coordinate(out_file, ddc::coordinate(irp), mapping, idx_range_p);
         out_file << std::setw(25) << function(irp);
         out_file << std::endl;
@@ -341,8 +352,12 @@ void simulate(
         bool if_save_feet,
         std::string const& output_folder)
 {
-    SplineFootFinder<TimeStepper, AdvectionDomain> const
-            foot_finder(time_stepper, advection_domain, advection_builder, advection_evaluator);
+    SplineFootFinder<TimeStepper, AdvectionDomain, Mapping> const foot_finder(
+            time_stepper,
+            advection_domain,
+            mapping,
+            advection_builder,
+            advection_evaluator);
 
     BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, mapping);
     auto function_to_be_advected_test = simulation.get_test_function();

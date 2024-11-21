@@ -11,8 +11,9 @@ target_link_libraries(advection_rp
         sll::SLL
         Eigen3::Eigen
         gslx::data_types
-        gslx::interpolation_2D_rp
         gslx::geometry_RTheta
+        gslx::interpolation_2D_rp
+        gslx::mapping
         gslx::utils
 )
 add_library(gslx::advection_rp ALIAS advection_rp)

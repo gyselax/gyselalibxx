@@ -154,34 +154,6 @@ public:
             }
         });
     }
-
-    /**
-     * @brief Compute the advection field in the advection domain.
-     *
-     * The advection field is given in the physical domain.
-     * To advect, we need the advection field in the advection domain.
-     *
-     * This function is to be used before the AdvectionPhysicalDomain::advect_feet function.
-     *
-     * Here, the function returns the advection field given as input.
-     *
-     * @param[in] advection_field
-     *      The advection field in the physical domain.
-     * @param[out] advection_field_physical
-     *      The advection field in the advection domain which is here the physical domain.
-     */
-    void compute_advection_field(
-            host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
-            host_t<DVectorFieldRTheta<X_adv, Y_adv>> advection_field_physical) const
-    {
-        ddc::parallel_deepcopy(
-                ddcHelper::get<X_adv>(advection_field_physical),
-                ddcHelper::get<X>(advection_field));
-        ddc::parallel_deepcopy(
-                ddcHelper::get<Y_adv>(advection_field_physical),
-                ddcHelper::get<Y>(advection_field));
-        ;
-    }
 };
 
 
@@ -335,86 +307,6 @@ public:
                         ddc::select<Theta>(feet_coords_rp(irp)),
                         IdxRangeTheta(idx_range_rp));
             }
-        });
-    }
-
-    /**
-     * @brief Compute the advection field in the advection domain.
-     *
-     * The advection field is given in the physical domain.
-     * To advect, we need the advection field in the advection domain.
-     *
-     * This function is to be used before the AdvectionPhysicalDomain::advect_feet function.
-     *
-     *
-     * @param[in] advection_field
-     *      The advection field in the physical domain.
-     * @param[out] advection_field_pseudo_Cart
-     *      The advection field in the advection domain which is here the pseudo-Cartesian domain.
-     */
-    void compute_advection_field(
-            host_t<DConstVectorFieldRTheta<X, Y>> advection_field,
-            host_t<DVectorFieldRTheta<X_adv, Y_adv>> advection_field_pseudo_Cart) const
-    {
-        static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
-
-        IdxRangeRTheta const idx_range_rp = get_idx_range(advection_field);
-        CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
-
-        ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
-            CoordRTheta const coord_rp(ddc::coordinate(irp));
-            double const r(ddc::get<R>(coord_rp));
-            double const th(ddc::get<Theta>(coord_rp));
-
-            Matrix2x2 J;
-
-            if (r > m_epsilon) {
-                Matrix2x2 pseudo_Cart_J;
-                Matrix2x2 map_J;
-                pseudo_Cartesian_mapping.jacobian_matrix(coord_rp, pseudo_Cart_J);
-                m_mapping.inv_jacobian_matrix(coord_rp, map_J);
-
-                J[0][0] = pseudo_Cart_J[0][0] * map_J[0][0] + pseudo_Cart_J[0][1] * map_J[1][0];
-                J[0][1] = pseudo_Cart_J[0][0] * map_J[0][1] + pseudo_Cart_J[0][1] * map_J[1][1];
-                J[1][0] = pseudo_Cart_J[1][0] * map_J[0][0] + pseudo_Cart_J[1][1] * map_J[1][0];
-                J[1][1] = pseudo_Cart_J[1][0] * map_J[0][1] + pseudo_Cart_J[1][1] * map_J[1][1];
-
-            } else {
-                Matrix2x2 J_0;
-                m_mapping.to_pseudo_cartesian_jacobian_center_matrix(J_0);
-
-                CoordRTheta const coord_rp_epsilon(m_epsilon, th);
-
-                Matrix2x2 pseudo_Cart_J_epsilon;
-                Matrix2x2 map_J_epsilon;
-                pseudo_Cartesian_mapping.jacobian_matrix(coord_rp_epsilon, pseudo_Cart_J_epsilon);
-                m_mapping.jacobian_matrix(coord_rp_epsilon, map_J_epsilon);
-
-                Matrix2x2 J_eps;
-                J_eps[0][0] = pseudo_Cart_J_epsilon[0][0] * map_J_epsilon[1][1]
-                              - pseudo_Cart_J_epsilon[0][1] * map_J_epsilon[1][0];
-
-                J_eps[0][1] = pseudo_Cart_J_epsilon[0][1] * map_J_epsilon[0][0]
-                              - pseudo_Cart_J_epsilon[0][0] * map_J_epsilon[0][1];
-
-                J_eps[1][0] = pseudo_Cart_J_epsilon[1][0] * map_J_epsilon[1][1]
-                              - pseudo_Cart_J_epsilon[1][1] * map_J_epsilon[1][0];
-
-                J_eps[1][1] = pseudo_Cart_J_epsilon[1][1] * map_J_epsilon[0][0]
-                              - pseudo_Cart_J_epsilon[1][0] * map_J_epsilon[0][1];
-
-                J[0][0] = (1 - r / m_epsilon) * J_0[0][0] + r / m_epsilon * J_eps[0][0];
-                J[0][1] = (1 - r / m_epsilon) * J_0[0][1] + r / m_epsilon * J_eps[0][1];
-                J[1][0] = (1 - r / m_epsilon) * J_0[1][0] + r / m_epsilon * J_eps[1][0];
-                J[1][1] = (1 - r / m_epsilon) * J_0[1][1] + r / m_epsilon * J_eps[1][1];
-            }
-
-            ddcHelper::get<X_adv>(advection_field_pseudo_Cart)(irp)
-                    = ddcHelper::get<X>(advection_field)(irp) * J[0][0]
-                      + ddcHelper::get<Y>(advection_field)(irp) * J[0][1];
-            ddcHelper::get<Y_adv>(advection_field_pseudo_Cart)(irp)
-                    = ddcHelper::get<X>(advection_field)(irp) * J[1][0]
-                      + ddcHelper::get<Y>(advection_field)(irp) * J[1][1];
         });
     }
 };

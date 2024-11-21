@@ -70,13 +70,14 @@ private:
                     host_t<DVectorFieldMemRTheta<X, Y>>,
                     Kokkos::DefaultHostExecutionSpace>;
 
+    using SplineFootFinderType = SplineFootFinder<EulerMethod, AdvectionDomain, Mapping>;
+
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
-            m_advection_solver;
+    BslAdvectionRTheta<SplineFootFinderType, Mapping> const& m_advection_solver;
 
     EulerMethod const m_euler;
-    SplineFootFinder<EulerMethod, AdvectionDomain> const m_foot_finder;
+    SplineFootFinderType const m_foot_finder;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -117,8 +118,7 @@ public:
     BslImplicitPredCorrRTheta(
             AdvectionDomain const& advection_domain,
             Mapping const& mapping,
-            BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
-                    advection_solver,
+            BslAdvectionRTheta<SplineFootFinderType, Mapping> const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& rhs_evaluator,
@@ -131,7 +131,7 @@ public:
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
-        , m_foot_finder(m_euler, advection_domain, builder, advection_evaluator)
+        , m_foot_finder(m_euler, advection_domain, mapping, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
@@ -140,17 +140,13 @@ public:
     }
 
 
-    ~BslImplicitPredCorrRTheta() {};
-
-
 
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
             double const dt,
-            int const steps) const
+            int const steps) const final
     {
-        std::chrono::time_point<std::chrono::system_clock> start_time
-                = std::chrono::system_clock::now();
+        std::chrono::time_point<std::chrono::system_clock> start_time;
         std::chrono::time_point<std::chrono::system_clock> end_time;
 
         // Grid. ------------------------------------------------------------------------------------------

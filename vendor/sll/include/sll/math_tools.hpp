@@ -5,6 +5,8 @@
 
 #include <experimental/mdspan>
 
+#include <ddc/ddc.hpp>
+
 template <typename T>
 inline T sum(T* array, int size)
 {
@@ -87,7 +89,7 @@ inline std::size_t factorial(std::size_t f)
 }
 
 template <class T, std::size_t D>
-T dot_product(std::array<T, D> const& a, std::array<T, D> const& b)
+inline T dot_product(std::array<T, D> const& a, std::array<T, D> const& b)
 {
     T result = 0;
     for (std::size_t i(0); i < D; ++i) {
@@ -106,4 +108,53 @@ template <typename T>
 inline T max(T x, T y)
 {
     return x > y ? x : y;
+}
+
+template <std::size_t N, std::size_t M, std::size_t P>
+KOKKOS_INLINE_FUNCTION std::array<std::array<double, N>, P> mat_mul(
+        std::array<std::array<double, N>, M> const& a,
+        std::array<std::array<double, M>, P> const& b)
+{
+    std::array<std::array<double, N>, P> result;
+    for (std::size_t i(0); i < N; ++i) {
+        for (std::size_t j(0); j < P; ++j) {
+            result[i][j] = 0.0;
+            for (std::size_t k(0); k < M; ++k) {
+                result[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    return result;
+}
+
+template <std::size_t N, std::size_t M>
+KOKKOS_INLINE_FUNCTION std::array<double, N> mat_vec_mul(
+        std::array<std::array<double, N>, M> const& a,
+        std::array<double, M> const& b)
+{
+    std::array<double, N> result;
+    for (std::size_t i(0); i < N; ++i) {
+        result[i] = 0.0;
+        for (std::size_t k(0); k < M; ++k) {
+            result[i] += a[i][k] * b[k];
+        }
+    }
+    return result;
+}
+
+KOKKOS_INLINE_FUNCTION double determinant(std::array<std::array<double, 2>, 2> arr)
+{
+    return arr[0][0] * arr[1][1] - arr[0][1] * arr[1][0];
+}
+
+KOKKOS_INLINE_FUNCTION std::array<std::array<double, 2>, 2> inverse(
+        std::array<std::array<double, 2>, 2> arr)
+{
+    std::array<std::array<double, 2>, 2> inv;
+    double det = determinant(arr);
+    inv[0][0] = arr[1][1] / det;
+    inv[1][0] = -arr[1][0] / det;
+    inv[0][1] = -arr[0][1] / det;
+    inv[1][1] = arr[0][0] / det;
+    return inv;
 }

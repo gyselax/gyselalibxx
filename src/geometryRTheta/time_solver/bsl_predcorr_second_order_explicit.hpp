@@ -70,14 +70,15 @@ private:
                     host_t<DVectorFieldMemRTheta<X, Y>>,
                     Kokkos::DefaultHostExecutionSpace>;
 
+    using SplineFootFinderType = SplineFootFinder<EulerMethod, AdvectionDomain, Mapping>;
+
 
     Mapping const& m_mapping;
 
-    BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping> const&
-            m_advection_solver;
+    BslAdvectionRTheta<SplineFootFinderType, Mapping> const& m_advection_solver;
 
     EulerMethod const m_euler;
-    SplineFootFinder<EulerMethod, AdvectionDomain> const m_find_feet;
+    SplineFootFinderType const m_find_feet;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -118,8 +119,7 @@ public:
     BslExplicitPredCorrRTheta(
             AdvectionDomain const& advection_domain,
             Mapping const& mapping,
-            BslAdvectionRTheta<SplineFootFinder<EulerMethod, AdvectionDomain>, Mapping>&
-                    advection_solver,
+            BslAdvectionRTheta<SplineFootFinderType, Mapping>& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& rhs_evaluator,
@@ -132,16 +132,13 @@ public:
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
-        , m_find_feet(m_euler, advection_domain, builder, advection_evaluator)
+        , m_find_feet(m_euler, advection_domain, mapping, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
 
     {
     }
-
-
-    ~BslExplicitPredCorrRTheta() override {}
 
 
 

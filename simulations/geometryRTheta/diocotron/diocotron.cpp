@@ -163,7 +163,8 @@ int main(int argc, char** argv)
 
     AdvectionPhysicalDomain advection_domain(mapping);
 
-    SplineFootFinder find_feet(time_stepper, advection_domain, builder, spline_evaluator_extrapol);
+    SplineFootFinder
+            find_feet(time_stepper, advection_domain, mapping, builder, spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
 
