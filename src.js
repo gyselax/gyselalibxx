@@ -20,6 +20,7 @@ var src =
       [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ]
     ] ],
     [ "Functions used for input and output.", "src_io.html", null ],
+    [ "Mappings", "src_mapping.html", null ],
     [ "Multipatch", "src_multipatch.html", "src_multipatch" ],
     [ "Parallelisation", "src_mpi_parallelisation.html", [
       [ "Layout", "src_mpi_parallelisation.html#src_mpi_parallelisation__Layout", null ],

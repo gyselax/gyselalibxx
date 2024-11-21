@@ -147,9 +147,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a548829264993948f5a41f0ba8ad38454"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPseudoCartesianDomain.html#a548829264993948f5a41f0ba8ad38454">advect_feet</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt; feet_coords_rp, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPseudoCartesianDomain.html#af7ee7af440063f143e4059905369c6e6">X_adv</a>, <a class="el" href="classAdvectionPseudoCartesianDomain.html#a09d5b07d80ad078f09f8381d15ba1529">Y_adv</a> &gt;&gt; const &amp;advection_field, double const dt) const</td></tr>
 <tr class="memdesc:a548829264993948f5a41f0ba8ad38454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the characteristic feet.  <a href="classAdvectionPseudoCartesianDomain.html#a548829264993948f5a41f0ba8ad38454">More...</a><br /></td></tr>
 <tr class="separator:a548829264993948f5a41f0ba8ad38454"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb7958b1b6f35e65ff6a4b712bcd3ffe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionPseudoCartesianDomain.html#abb7958b1b6f35e65ff6a4b712bcd3ffe">compute_advection_field</a> (host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt; advection_field, host_t&lt; <a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPseudoCartesianDomain.html#af7ee7af440063f143e4059905369c6e6">X_adv</a>, <a class="el" href="classAdvectionPseudoCartesianDomain.html#a09d5b07d80ad078f09f8381d15ba1529">Y_adv</a> &gt;&gt; advection_field_pseudo_Cart) const</td></tr>
-<tr class="memdesc:abb7958b1b6f35e65ff6a4b712bcd3ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the advection field in the advection domain.  <a href="classAdvectionPseudoCartesianDomain.html#abb7958b1b6f35e65ff6a4b712bcd3ffe">More...</a><br /></td></tr>
-<tr class="separator:abb7958b1b6f35e65ff6a4b712bcd3ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Mapping&gt;<br />
@@ -158,7 +155,7 @@ class AdvectionPseudoCartesianDomain&lt; Mapping &gt;</h3>
 <p>Define the pseudo-Cartesian domain for the advection. </p>
 <p>The pseudo-Cartesian domain is recommended for not analytically invertible mappings.</p>
 <p>We introduce a circular mapping \( \mathcal{G}\) from the logical domain to the pseudo-Cartesian domain. The circular mapping is analytically invertible.</p>
-<p>The advection field is defined in the physical domain, so we need to define it in the pseudo-Cartesian domain before advecting (<a class="el" href="classAdvectionPseudoCartesianDomain.html#abb7958b1b6f35e65ff6a4b712bcd3ffe" title="Compute the advection field in the advection domain.">AdvectionPseudoCartesianDomain::compute_advection_field</a>). To do so, we use the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix \( J_{\mathcal{F}}J_{\mathcal{G}}^{-1} \). This matrix is invertible :</p>
+<p>The advection field is defined in the physical domain, so we need to define it in the pseudo-Cartesian domain before advecting (AdvectionPseudoCartesianDomain::compute_advection_field). To do so, we use the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix \( J_{\mathcal{F}}J_{\mathcal{G}}^{-1} \). This matrix is invertible :</p>
 <p>\( A_{\text{cart}} = (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} A \).</p>
 <p>The main difficulty is the center point. So for \( r \in [0, \varepsilon] \), we linearize the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix:</p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (r, \theta) = \left(1 - \frac{r}{\varepsilon} \right) (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (0, \theta) + \frac{r}{\varepsilon} (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (\varepsilon, \theta) \).</p>
@@ -288,55 +285,6 @@ template&lt;class Mapping &gt; </div>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">feet_coords_rp</td><td>The computed characteristic feet in the logical domain. On input: the points we want to advect. On output: the characteristic feet. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">advection_field</td><td>The advection field defined in the advection domain. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="abb7958b1b6f35e65ff6a4b712bcd3ffe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb7958b1b6f35e65ff6a4b712bcd3ffe">&#9670;&nbsp;</a></span>compute_advection_field()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Mapping &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classAdvectionPseudoCartesianDomain.html">AdvectionPseudoCartesianDomain</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::compute_advection_field </td>
-          <td>(</td>
-          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt;&#160;</td>
-          <td class="paramname"><em>advection_field</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionPseudoCartesianDomain.html#af7ee7af440063f143e4059905369c6e6">X_adv</a>, <a class="el" href="classAdvectionPseudoCartesianDomain.html#a09d5b07d80ad078f09f8381d15ba1529">Y_adv</a> &gt;&gt;&#160;</td>
-          <td class="paramname"><em>advection_field_pseudo_Cart</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the advection field in the advection domain. </p>
-<p>The advection field is given in the physical domain. To advect, we need the advection field in the advection domain.</p>
-<p>This function is to be used before the <a class="el" href="classAdvectionPhysicalDomain.html#a8a8c298ed699bee9630eb2c10685777d" title="Advect the characteristic feet.">AdvectionPhysicalDomain::advect_feet</a> function.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_field</td><td>The advection field in the physical domain. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">advection_field_pseudo_Cart</td><td>The advection field in the advection domain which is here the pseudo-Cartesian domain. </td></tr>
   </table>
   </dd>
 </dl>
