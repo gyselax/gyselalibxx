@@ -110,15 +110,6 @@ $(document).ready(function(){initNavTree('classCartesianToPseudoCartesian.html',
 
 <p>A class describing a mapping from a Cartesian domain to a pseudo-Cartesian.  
  <a href="classCartesianToPseudoCartesian.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for CartesianToPseudoCartesian&lt; MappingToCartesian, MappingToPseudoCartesian &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classCartesianToPseudoCartesian.png" usemap="#CartesianToPseudoCartesian_3C_20MappingToCartesian_2C_20MappingToPseudoCartesian_20_3E_map" alt=""/>
-  <map id="CartesianToPseudoCartesian_3C_20MappingToCartesian_2C_20MappingToPseudoCartesian_20_3E_map" name="CartesianToPseudoCartesian_3C_20MappingToCartesian_2C_20MappingToPseudoCartesian_20_3E_map">
-<area href="classJacobian.html" alt="Jacobian&lt; ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; &gt;" shape="rect" coords="0,0,635,24"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -126,10 +117,6 @@ Public Types</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> = ddc::Coordinate&lt; typename MappingToCartesian::cartesian_tag_x, typename MappingToCartesian::cartesian_tag_y &gt;</td></tr>
 <tr class="memdesc:a92e25342f10bc75c6e3cefc99a880a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a coordinate in the Cartesian geometry. <br /></td></tr>
 <tr class="separator:a92e25342f10bc75c6e3cefc99a880a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d7c3a18bfac37b8d95c615699a58269"><td class="memItemLeft" align="right" valign="top"><a id="a3d7c3a18bfac37b8d95c615699a58269"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> = typename <a class="el" href="classJacobian.html">Jacobian</a>&lt; <a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> &gt;::<a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a></td></tr>
-<tr class="memdesc:a3d7c3a18bfac37b8d95c615699a58269"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
-<tr class="separator:a3d7c3a18bfac37b8d95c615699a58269"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a422ebb8d10e3640adfee60205a48fcec"><td class="memItemLeft" align="right" valign="top"><a id="a422ebb8d10e3640adfee60205a48fcec"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a422ebb8d10e3640adfee60205a48fcec">cartesian_tag_x</a> = typename MappingToCartesian::cartesian_tag_x</td></tr>
 <tr class="memdesc:a422ebb8d10e3640adfee60205a48fcec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a> dimension in the Cartesian geometry. <br /></td></tr>
@@ -146,90 +133,53 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a21419787f5c571cad4b40f25e8ce64a3">pseudo_cartesian_tag_y</a> = typename MappingToPseudoCartesian::cartesian_tag_y</td></tr>
 <tr class="memdesc:a21419787f5c571cad4b40f25e8ce64a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a> dimension in the pseudo-Cartesian geometry. <br /></td></tr>
 <tr class="separator:a21419787f5c571cad4b40f25e8ce64a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classJacobian"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classJacobian')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classJacobian.html">Jacobian&lt; ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; &gt;</a></td></tr>
-<tr class="memitem:a97c0d05e5c20b5e484f6da1f6c7d8266 inherit pub_types_classJacobian"><td class="memItemLeft" align="right" valign="top"><a id="a97c0d05e5c20b5e484f6da1f6c7d8266"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a97c0d05e5c20b5e484f6da1f6c7d8266 inherit pub_types_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
-<tr class="separator:a97c0d05e5c20b5e484f6da1f6c7d8266 inherit pub_types_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1467a715a96082317e7d7220549cf6d8"><td class="memItemLeft" align="right" valign="top"><a id="a1467a715a96082317e7d7220549cf6d8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a1467a715a96082317e7d7220549cf6d8">CoordArg</a> = ddc::Coordinate&lt; <a class="el" href="classCartesianToPseudoCartesian.html#a422ebb8d10e3640adfee60205a48fcec">cartesian_tag_x</a>, <a class="el" href="classCartesianToPseudoCartesian.html#a45275dd1d00ea183495af52a896b7117">cartesian_tag_y</a> &gt;</td></tr>
+<tr class="memdesc:a1467a715a96082317e7d7220549cf6d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the argument of the function described by this mapping. <br /></td></tr>
+<tr class="separator:a1467a715a96082317e7d7220549cf6d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa573e2f013cdb1c2fb81cb21946379b"><td class="memItemLeft" align="right" valign="top"><a id="afa573e2f013cdb1c2fb81cb21946379b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#afa573e2f013cdb1c2fb81cb21946379b">CoordResult</a> = ddc::Coordinate&lt; <a class="el" href="classCartesianToPseudoCartesian.html#a0f5743aa957646cda3013cc6a86dba0c">pseudo_cartesian_tag_x</a>, <a class="el" href="classCartesianToPseudoCartesian.html#a21419787f5c571cad4b40f25e8ce64a3">pseudo_cartesian_tag_y</a> &gt;</td></tr>
+<tr class="memdesc:afa573e2f013cdb1c2fb81cb21946379b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the result of the function described by this mapping. <br /></td></tr>
+<tr class="separator:afa573e2f013cdb1c2fb81cb21946379b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a81eb8d59e46ca3a4611f0ff3319f0b28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a81eb8d59e46ca3a4611f0ff3319f0b28">CartesianToPseudoCartesian</a> (MappingToPseudoCartesian mapping_to_pseudo_cartesian, MappingToCartesian mapping_to_cartesian, double epsilon)</td></tr>
 <tr class="memdesc:a81eb8d59e46ca3a4611f0ff3319f0b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an instance of the class.  <a href="classCartesianToPseudoCartesian.html#a81eb8d59e46ca3a4611f0ff3319f0b28">More...</a><br /></td></tr>
 <tr class="separator:a81eb8d59e46ca3a4611f0ff3319f0b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1dd22206f1ad23456cd86aeb4c63355"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355">jacobian_matrix</a> (CoordRTheta const &amp;coord_rtheta, <a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;J) const</td></tr>
+<tr class="memitem:ad1dd22206f1ad23456cd86aeb4c63355"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355">jacobian_matrix</a> (CoordRTheta const &amp;coord_rtheta, Matrix_2x2 &amp;J) const</td></tr>
 <tr class="memdesc:ad1dd22206f1ad23456cd86aeb4c63355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355">More...</a><br /></td></tr>
 <tr class="separator:ad1dd22206f1ad23456cd86aeb4c63355"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a700b2f0b164ace53cb4fccc3f6bf3b30"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a700b2f0b164ace53cb4fccc3f6bf3b30">jacobian_matrix</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart, <a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;J) const final</td></tr>
-<tr class="memdesc:a700b2f0b164ace53cb4fccc3f6bf3b30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from a Cartesian coordinate.  <a href="classCartesianToPseudoCartesian.html#a700b2f0b164ace53cb4fccc3f6bf3b30">More...</a><br /></td></tr>
-<tr class="separator:a700b2f0b164ace53cb4fccc3f6bf3b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4b4f0d6fea931d584de321ffbea013f"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#ae4b4f0d6fea931d584de321ffbea013f">jacobian</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:ae4b4f0d6fea931d584de321ffbea013f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#ae4b4f0d6fea931d584de321ffbea013f">More...</a><br /></td></tr>
-<tr class="separator:ae4b4f0d6fea931d584de321ffbea013f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dbd4ee46820ca37ce51773449b303d2"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a7dbd4ee46820ca37ce51773449b303d2">jacobian_11</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:a7dbd4ee46820ca37ce51773449b303d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a7dbd4ee46820ca37ce51773449b303d2">More...</a><br /></td></tr>
-<tr class="separator:a7dbd4ee46820ca37ce51773449b303d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae708a1a02fda3e9afcb91eb933951f27"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#ae708a1a02fda3e9afcb91eb933951f27">jacobian_12</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:ae708a1a02fda3e9afcb91eb933951f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#ae708a1a02fda3e9afcb91eb933951f27">More...</a><br /></td></tr>
-<tr class="separator:ae708a1a02fda3e9afcb91eb933951f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa09461cf2f56e85754a529cf1b197d83"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#aa09461cf2f56e85754a529cf1b197d83">jacobian_21</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:aa09461cf2f56e85754a529cf1b197d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#aa09461cf2f56e85754a529cf1b197d83">More...</a><br /></td></tr>
-<tr class="separator:aa09461cf2f56e85754a529cf1b197d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a187c2ad9e30bae3d5aac2a74f6721706"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a187c2ad9e30bae3d5aac2a74f6721706">jacobian_22</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:a187c2ad9e30bae3d5aac2a74f6721706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a187c2ad9e30bae3d5aac2a74f6721706">More...</a><br /></td></tr>
-<tr class="separator:a187c2ad9e30bae3d5aac2a74f6721706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a327ed1f83d75ff1de3d4fbb791ccb20d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d">inv_jacobian_matrix</a> (CoordRTheta const &amp;coord_rtheta, <a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;J) const</td></tr>
+<tr class="memitem:a42b41e92f3a864ba904ce0132349056c"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a42b41e92f3a864ba904ce0132349056c">jacobian</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a42b41e92f3a864ba904ce0132349056c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a42b41e92f3a864ba904ce0132349056c">More...</a><br /></td></tr>
+<tr class="separator:a42b41e92f3a864ba904ce0132349056c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab31e72603267e151d7477d6c04e06bbf"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#ab31e72603267e151d7477d6c04e06bbf">jacobian_11</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:ab31e72603267e151d7477d6c04e06bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#ab31e72603267e151d7477d6c04e06bbf">More...</a><br /></td></tr>
+<tr class="separator:ab31e72603267e151d7477d6c04e06bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3519d49e751ba89c1dbfe10e5158d220"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a3519d49e751ba89c1dbfe10e5158d220">jacobian_12</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a3519d49e751ba89c1dbfe10e5158d220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a3519d49e751ba89c1dbfe10e5158d220">More...</a><br /></td></tr>
+<tr class="separator:a3519d49e751ba89c1dbfe10e5158d220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f06025bdf503594ea8ae654622e0bba"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a2f06025bdf503594ea8ae654622e0bba">jacobian_21</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a2f06025bdf503594ea8ae654622e0bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a2f06025bdf503594ea8ae654622e0bba">More...</a><br /></td></tr>
+<tr class="separator:a2f06025bdf503594ea8ae654622e0bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456a716509d30b44da534d5eaa5f1946"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a456a716509d30b44da534d5eaa5f1946">jacobian_22</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a456a716509d30b44da534d5eaa5f1946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a456a716509d30b44da534d5eaa5f1946">More...</a><br /></td></tr>
+<tr class="separator:a456a716509d30b44da534d5eaa5f1946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a327ed1f83d75ff1de3d4fbb791ccb20d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d">inv_jacobian_matrix</a> (CoordRTheta const &amp;coord_rtheta, Matrix_2x2 &amp;J) const</td></tr>
 <tr class="memdesc:a327ed1f83d75ff1de3d4fbb791ccb20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d">More...</a><br /></td></tr>
 <tr class="separator:a327ed1f83d75ff1de3d4fbb791ccb20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e2e2d82b7f37f7fad3015ad6f5080fe"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a9e2e2d82b7f37f7fad3015ad6f5080fe">inv_jacobian_matrix</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart, <a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;J) const final</td></tr>
-<tr class="memdesc:a9e2e2d82b7f37f7fad3015ad6f5080fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from a Cartesian coordinate.  <a href="classCartesianToPseudoCartesian.html#a9e2e2d82b7f37f7fad3015ad6f5080fe">More...</a><br /></td></tr>
-<tr class="separator:a9e2e2d82b7f37f7fad3015ad6f5080fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad26098562f5379ba7919af027a9ea2b8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#ad26098562f5379ba7919af027a9ea2b8">inv_jacobian_11</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:ad26098562f5379ba7919af027a9ea2b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#ad26098562f5379ba7919af027a9ea2b8">More...</a><br /></td></tr>
-<tr class="separator:ad26098562f5379ba7919af027a9ea2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb31909a1b42550c2a356572f9f96273"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#acb31909a1b42550c2a356572f9f96273">inv_jacobian_12</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:acb31909a1b42550c2a356572f9f96273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#acb31909a1b42550c2a356572f9f96273">More...</a><br /></td></tr>
-<tr class="separator:acb31909a1b42550c2a356572f9f96273"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cdd88fc3d4a067b5d900b8ae78defd8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a0cdd88fc3d4a067b5d900b8ae78defd8">inv_jacobian_21</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:a0cdd88fc3d4a067b5d900b8ae78defd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a0cdd88fc3d4a067b5d900b8ae78defd8">More...</a><br /></td></tr>
-<tr class="separator:a0cdd88fc3d4a067b5d900b8ae78defd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4daefd82dc5fdb8a34c7a4ee02abe8fb"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a4daefd82dc5fdb8a34c7a4ee02abe8fb">inv_jacobian_22</a> (<a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;coord_cart) const final</td></tr>
-<tr class="memdesc:a4daefd82dc5fdb8a34c7a4ee02abe8fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a4daefd82dc5fdb8a34c7a4ee02abe8fb">More...</a><br /></td></tr>
-<tr class="separator:a4daefd82dc5fdb8a34c7a4ee02abe8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classJacobian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classJacobian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classJacobian.html">Jacobian&lt; ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; &gt;</a></td></tr>
-<tr class="memitem:a4caf27dda3330406918f8c7e5e04ccd1 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1">jacobian</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:a4caf27dda3330406918f8c7e5e04ccd1 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>, the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping.  <a href="classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1">More...</a><br /></td></tr>
-<tr class="separator:a4caf27dda3330406918f8c7e5e04ccd1 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44dfab8bbaa4443771f4a0b3f276258d inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">jacobian_matrix</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord, <a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> &amp;matrix) const=0</td></tr>
-<tr class="memdesc:a44dfab8bbaa4443771f4a0b3f276258d inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">More...</a><br /></td></tr>
-<tr class="separator:a44dfab8bbaa4443771f4a0b3f276258d inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed70a0fd79149f34c3fd630733926f2f inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#aed70a0fd79149f34c3fd630733926f2f">jacobian_11</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:aed70a0fd79149f34c3fd630733926f2f inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#aed70a0fd79149f34c3fd630733926f2f">More...</a><br /></td></tr>
-<tr class="separator:aed70a0fd79149f34c3fd630733926f2f inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbe992fa6d7f0747647ce2ecf5c71dd8 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#acbe992fa6d7f0747647ce2ecf5c71dd8">jacobian_12</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:acbe992fa6d7f0747647ce2ecf5c71dd8 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#acbe992fa6d7f0747647ce2ecf5c71dd8">More...</a><br /></td></tr>
-<tr class="separator:acbe992fa6d7f0747647ce2ecf5c71dd8 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7509862a562b92cf33249d811732e4bb inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a7509862a562b92cf33249d811732e4bb">jacobian_21</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:a7509862a562b92cf33249d811732e4bb inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a7509862a562b92cf33249d811732e4bb">More...</a><br /></td></tr>
-<tr class="separator:a7509862a562b92cf33249d811732e4bb inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac98e37f8fc996ebf1f2fa732e1c69ef3 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3">jacobian_22</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:ac98e37f8fc996ebf1f2fa732e1c69ef3 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3">More...</a><br /></td></tr>
-<tr class="separator:ac98e37f8fc996ebf1f2fa732e1c69ef3 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d0d12c907837c1521feaf2eb57958c6 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">inv_jacobian_matrix</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord, <a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> &amp;matrix) const=0</td></tr>
-<tr class="memdesc:a2d0d12c907837c1521feaf2eb57958c6 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">More...</a><br /></td></tr>
-<tr class="separator:a2d0d12c907837c1521feaf2eb57958c6 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58765ef06cb343d3b49cdf5cb9d98451 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a58765ef06cb343d3b49cdf5cb9d98451">inv_jacobian_11</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:a58765ef06cb343d3b49cdf5cb9d98451 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a58765ef06cb343d3b49cdf5cb9d98451">More...</a><br /></td></tr>
-<tr class="separator:a58765ef06cb343d3b49cdf5cb9d98451 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9962f95405d6b19b6065b5a88cb2b30d inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a9962f95405d6b19b6065b5a88cb2b30d">inv_jacobian_12</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:a9962f95405d6b19b6065b5a88cb2b30d inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a9962f95405d6b19b6065b5a88cb2b30d">More...</a><br /></td></tr>
-<tr class="separator:a9962f95405d6b19b6065b5a88cb2b30d inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa098a842712f5fad5a80d94a82848eb2 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#aa098a842712f5fad5a80d94a82848eb2">inv_jacobian_21</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:aa098a842712f5fad5a80d94a82848eb2 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#aa098a842712f5fad5a80d94a82848eb2">More...</a><br /></td></tr>
-<tr class="separator:aa098a842712f5fad5a80d94a82848eb2 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42519886c006b8343824532d3f04c983 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a42519886c006b8343824532d3f04c983">inv_jacobian_22</a> (ddc::Coordinate&lt; MappingToCartesian::cartesian_tag_x, MappingToCartesian::cartesian_tag_y &gt; const &amp;coord) const=0</td></tr>
-<tr class="memdesc:a42519886c006b8343824532d3f04c983 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a42519886c006b8343824532d3f04c983">More...</a><br /></td></tr>
-<tr class="separator:a42519886c006b8343824532d3f04c983 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db0df7fd2a167e0bc84161ee8066897"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a1db0df7fd2a167e0bc84161ee8066897">inv_jacobian_11</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a1db0df7fd2a167e0bc84161ee8066897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a1db0df7fd2a167e0bc84161ee8066897">More...</a><br /></td></tr>
+<tr class="separator:a1db0df7fd2a167e0bc84161ee8066897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbbe0fddbdab467ddab8e4d577dcfbe"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#a3cbbe0fddbdab467ddab8e4d577dcfbe">inv_jacobian_12</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a3cbbe0fddbdab467ddab8e4d577dcfbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#a3cbbe0fddbdab467ddab8e4d577dcfbe">More...</a><br /></td></tr>
+<tr class="separator:a3cbbe0fddbdab467ddab8e4d577dcfbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadbe1eff89bc6c2c4e01e3d81a6d7630"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#aadbe1eff89bc6c2c4e01e3d81a6d7630">inv_jacobian_21</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:aadbe1eff89bc6c2c4e01e3d81a6d7630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#aadbe1eff89bc6c2c4e01e3d81a6d7630">More...</a><br /></td></tr>
+<tr class="separator:aadbe1eff89bc6c2c4e01e3d81a6d7630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af26e6f1c75582f7ebab4d134d72a058d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToPseudoCartesian.html#af26e6f1c75582f7ebab4d134d72a058d">inv_jacobian_22</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:af26e6f1c75582f7ebab4d134d72a058d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCartesianToPseudoCartesian.html#af26e6f1c75582f7ebab4d134d72a058d">More...</a><br /></td></tr>
+<tr class="separator:af26e6f1c75582f7ebab4d134d72a058d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class MappingToCartesian, class MappingToPseudoCartesian&gt;<br />
@@ -294,7 +244,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad1dd22206f1ad23456cd86aeb4c63355"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1dd22206f1ad23456cd86aeb4c63355">&#9670;&nbsp;</a></span>jacobian_matrix() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1dd22206f1ad23456cd86aeb4c63355">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,7 +263,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
           <td class="paramname"><em>J</em>&#160;</td>
         </tr>
         <tr>
@@ -342,56 +292,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="a700b2f0b164ace53cb4fccc3f6bf3b30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a700b2f0b164ace53cb4fccc3f6bf3b30">&#9670;&nbsp;</a></span>jacobian_matrix() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION void <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::jacobian_matrix </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;&#160;</td>
-          <td class="paramname"><em>J</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from a Cartesian coordinate. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">J</td><td>The <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix returned. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ae4b4f0d6fea931d584de321ffbea013f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4b4f0d6fea931d584de321ffbea013f">&#9670;&nbsp;</a></span>jacobian()</h2>
+<a id="a42b41e92f3a864ba904ce0132349056c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b41e92f3a864ba904ce0132349056c">&#9670;&nbsp;</a></span>jacobian()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,14 +306,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::jacobian </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -420,7 +322,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -428,8 +330,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="a7dbd4ee46820ca37ce51773449b303d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dbd4ee46820ca37ce51773449b303d2">&#9670;&nbsp;</a></span>jacobian_11()</h2>
+<a id="ab31e72603267e151d7477d6c04e06bbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab31e72603267e151d7477d6c04e06bbf">&#9670;&nbsp;</a></span>jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,14 +344,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::jacobian_11 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -458,7 +360,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -466,8 +368,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="ae708a1a02fda3e9afcb91eb933951f27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae708a1a02fda3e9afcb91eb933951f27">&#9670;&nbsp;</a></span>jacobian_12()</h2>
+<a id="a3519d49e751ba89c1dbfe10e5158d220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3519d49e751ba89c1dbfe10e5158d220">&#9670;&nbsp;</a></span>jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -480,14 +382,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::jacobian_12 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -496,7 +398,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -504,8 +406,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="aa09461cf2f56e85754a529cf1b197d83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa09461cf2f56e85754a529cf1b197d83">&#9670;&nbsp;</a></span>jacobian_21()</h2>
+<a id="a2f06025bdf503594ea8ae654622e0bba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f06025bdf503594ea8ae654622e0bba">&#9670;&nbsp;</a></span>jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -518,14 +420,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::jacobian_21 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -534,7 +436,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -542,8 +444,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="a187c2ad9e30bae3d5aac2a74f6721706"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a187c2ad9e30bae3d5aac2a74f6721706">&#9670;&nbsp;</a></span>jacobian_22()</h2>
+<a id="a456a716509d30b44da534d5eaa5f1946"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456a716509d30b44da534d5eaa5f1946">&#9670;&nbsp;</a></span>jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -556,14 +458,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::jacobian_22 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -572,7 +474,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -581,7 +483,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 </div>
 </div>
 <a id="a327ed1f83d75ff1de3d4fbb791ccb20d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a327ed1f83d75ff1de3d4fbb791ccb20d">&#9670;&nbsp;</a></span>inv_jacobian_matrix() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a327ed1f83d75ff1de3d4fbb791ccb20d">&#9670;&nbsp;</a></span>inv_jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -600,7 +502,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
           <td class="paramname"><em>J</em>&#160;</td>
         </tr>
         <tr>
@@ -629,56 +531,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="a9e2e2d82b7f37f7fad3015ad6f5080fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e2e2d82b7f37f7fad3015ad6f5080fe">&#9670;&nbsp;</a></span>inv_jacobian_matrix() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION void <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::inv_jacobian_matrix </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a3d7c3a18bfac37b8d95c615699a58269">Matrix_2x2</a> &amp;&#160;</td>
-          <td class="paramname"><em>J</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the full inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from a Cartesian coordinate. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#ad1dd22206f1ad23456cd86aeb4c63355" title="Compute the full Jacobian matrix.">jacobian_matrix</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">J</td><td>The <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix returned. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad26098562f5379ba7919af027a9ea2b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad26098562f5379ba7919af027a9ea2b8">&#9670;&nbsp;</a></span>inv_jacobian_11()</h2>
+<a id="a1db0df7fd2a167e0bc84161ee8066897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1db0df7fd2a167e0bc84161ee8066897">&#9670;&nbsp;</a></span>inv_jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -691,14 +545,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::inv_jacobian_11 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -707,7 +561,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d" title="Compute the full inverse of the Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -715,8 +569,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="acb31909a1b42550c2a356572f9f96273"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb31909a1b42550c2a356572f9f96273">&#9670;&nbsp;</a></span>inv_jacobian_12()</h2>
+<a id="a3cbbe0fddbdab467ddab8e4d577dcfbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cbbe0fddbdab467ddab8e4d577dcfbe">&#9670;&nbsp;</a></span>inv_jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -729,14 +583,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::inv_jacobian_12 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -745,7 +599,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d" title="Compute the full inverse of the Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -753,8 +607,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="a0cdd88fc3d4a067b5d900b8ae78defd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cdd88fc3d4a067b5d900b8ae78defd8">&#9670;&nbsp;</a></span>inv_jacobian_21()</h2>
+<a id="aadbe1eff89bc6c2c4e01e3d81a6d7630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadbe1eff89bc6c2c4e01e3d81a6d7630">&#9670;&nbsp;</a></span>inv_jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -767,14 +621,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::inv_jacobian_21 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -783,7 +637,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d" title="Compute the full inverse of the Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -791,8 +645,8 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 
 </div>
 </div>
-<a id="a4daefd82dc5fdb8a34c7a4ee02abe8fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4daefd82dc5fdb8a34c7a4ee02abe8fb">&#9670;&nbsp;</a></span>inv_jacobian_22()</h2>
+<a id="af26e6f1c75582f7ebab4d134d72a058d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af26e6f1c75582f7ebab4d134d72a058d">&#9670;&nbsp;</a></span>inv_jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -805,14 +659,14 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian</a>&lt; MappingToCartesian, MappingToPseudoCartesian &gt;::inv_jacobian_22 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCartesianToPseudoCartesian.html#a92e25342f10bc75c6e3cefc99a880a96">CartesianCoordinate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord_cart</em></td><td>)</td>
+          <td class="paramtype">CoordRTheta const &amp;&#160;</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -821,7 +675,7 @@ template&lt;class MappingToCartesian , class MappingToPseudoCartesian &gt; </div
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCartesianToPseudoCartesian.html#a327ed1f83d75ff1de3d4fbb791ccb20d" title="Compute the full inverse of the Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_cart</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the inverse of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
   </table>
   </dd>
 </dl>

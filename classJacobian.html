@@ -100,7 +100,6 @@ $(document).ready(function(){initNavTree('classJacobian.html',''); initResizable
 
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classJacobian-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -122,19 +121,12 @@ Inheritance diagram for Jacobian&lt; PositionCoordinate &gt;:</div>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a97c0d05e5c20b5e484f6da1f6c7d8266"><td class="memItemLeft" align="right" valign="top"><a id="a97c0d05e5c20b5e484f6da1f6c7d8266"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a97c0d05e5c20b5e484f6da1f6c7d8266"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
-<tr class="separator:a97c0d05e5c20b5e484f6da1f6c7d8266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4caf27dda3330406918f8c7e5e04ccd1"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1">jacobian</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
 <tr class="memdesc:a4caf27dda3330406918f8c7e5e04ccd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>, the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping.  <a href="classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1">More...</a><br /></td></tr>
 <tr class="separator:a4caf27dda3330406918f8c7e5e04ccd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44dfab8bbaa4443771f4a0b3f276258d"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">jacobian_matrix</a> (PositionCoordinate const &amp;coord, <a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> &amp;matrix) const =0</td></tr>
+<tr class="memitem:a44dfab8bbaa4443771f4a0b3f276258d"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">jacobian_matrix</a> (PositionCoordinate const &amp;coord, Matrix_2x2 &amp;matrix) const =0</td></tr>
 <tr class="memdesc:a44dfab8bbaa4443771f4a0b3f276258d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">More...</a><br /></td></tr>
 <tr class="separator:a44dfab8bbaa4443771f4a0b3f276258d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed70a0fd79149f34c3fd630733926f2f"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#aed70a0fd79149f34c3fd630733926f2f">jacobian_11</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
@@ -149,7 +141,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac98e37f8fc996ebf1f2fa732e1c69ef3"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3">jacobian_22</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
 <tr class="memdesc:ac98e37f8fc996ebf1f2fa732e1c69ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3">More...</a><br /></td></tr>
 <tr class="separator:ac98e37f8fc996ebf1f2fa732e1c69ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d0d12c907837c1521feaf2eb57958c6"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">inv_jacobian_matrix</a> (PositionCoordinate const &amp;coord, <a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> &amp;matrix) const =0</td></tr>
+<tr class="memitem:a2d0d12c907837c1521feaf2eb57958c6"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">inv_jacobian_matrix</a> (PositionCoordinate const &amp;coord, Matrix_2x2 &amp;matrix) const =0</td></tr>
 <tr class="memdesc:a2d0d12c907837c1521feaf2eb57958c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">More...</a><br /></td></tr>
 <tr class="separator:a2d0d12c907837c1521feaf2eb57958c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58765ef06cb343d3b49cdf5cb9d98451"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a58765ef06cb343d3b49cdf5cb9d98451">inv_jacobian_11</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
@@ -213,7 +205,7 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a6e304cd20b310fa3ecb1fc2e5cd38389">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#a8349f72c72995e3f601fcaebd8fa3bf6">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#aa43271cf07b37c5e51cb43ce3764c3b9">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a6e304cd20b310fa3ecb1fc2e5cd38389">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>.</p>
 
 </div>
 </div>
@@ -237,7 +229,7 @@ template&lt;class PositionCoordinate &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -308,8 +300,6 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classCzarnyToCartesian.html#ae8e3762ddb6572b518d4c8e34d4426b0">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a04f05508525f76ba74594d949e69a9a3">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
-
 </div>
 </div>
 <a id="acbe992fa6d7f0747647ce2ecf5c71dd8"></a>
@@ -347,8 +337,6 @@ template&lt;class PositionCoordinate &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
-
-<p>Implemented in <a class="el" href="classCzarnyToCartesian.html#ad0f3716d9342d49180bee3f6de15bd74">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a158196e93b0c866451600c7c2388f156">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
 </div>
 </div>
@@ -388,8 +376,6 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classCzarnyToCartesian.html#a4a592cbefdf091a59c4baf6fff016711">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a0ffd23e0beb0fa34a4c08786da7f6f89">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
-
 </div>
 </div>
 <a id="ac98e37f8fc996ebf1f2fa732e1c69ef3"></a>
@@ -428,8 +414,6 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classCzarnyToCartesian.html#ad75c73521c643d22f65bde30e833019f">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a9865200a7096518fc81f03a5f69a9f6b">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
-
 </div>
 </div>
 <a id="a2d0d12c907837c1521feaf2eb57958c6"></a>
@@ -452,7 +436,7 @@ template&lt;class PositionCoordinate &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -525,7 +509,7 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#acdd79e5d79e2b335227a81740c56d375">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#a2cb2e976676d4de0110e6711371c9ea9">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#aec9cb81fe433ea9ab901d45e95b28a93">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#acdd79e5d79e2b335227a81740c56d375">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>.</p>
 
 </div>
 </div>
@@ -565,7 +549,7 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a1156003966a5ed72cfdce2fc10cfabc8">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#aff288a5c825d0f2bb550f77282d36134">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#acac346849dfa3dbf5394ca32abf7461b">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a1156003966a5ed72cfdce2fc10cfabc8">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>.</p>
 
 </div>
 </div>
@@ -605,7 +589,7 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a3ebc3981218d5a2f1190e52368a81184">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#a33d0a32dcde9fcb991260c9036658376">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a4a1c87ee98718d49ac43d79500513bd7">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a3ebc3981218d5a2f1190e52368a81184">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>.</p>
 
 </div>
 </div>
@@ -645,7 +629,7 @@ template&lt;class PositionCoordinate &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
 
-<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a11d03e1f0b98864ed59f11bedbd0af16">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#a98b31809eacc7d432d42dc8eca76e410">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#ace40d42e7673729ebf56b9129ad929af">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNonAnalyticalJacobian.html#a11d03e1f0b98864ed59f11bedbd0af16">NonAnalyticalJacobian&lt; PositionCoordinate &gt;</a>.</p>
 
 </div>
 </div>

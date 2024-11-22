@@ -93,9 +93,9 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionSpVparMu.html#a96078427a19cbe8729130fe3fbb5ed7c",
-"classFEM1DPoissonSolver.html#a066aa2568bdfd946f04c1d831debd663",
-"classManufacturedPoissonTest.html#a636a16b0d706ca238349b1d2e7eac1a7",
-"classMultipatchSplineOnionShapeTest.html#a2d2fc93568955e117461eeed34c62319",
+"classEuler.html#afdf22291a9a2f9180e1904d3a0728737",
+"classManufacturedPoissonTest.html#a40a7b55a4f8fcd51db865ba5ee0a86f8",
+"classMultipatchSplineOnionShapeTest.html#a17b2ac5b29dec24cfdce735ef25cc057",
 "classSplineInterpolator.html#ab7b38622e403a5a5dc9e09d737a9dfe8",
 "geometryRTheta_2geometry_2geometry_8hpp_source.html",
 "src_geometryVparMu_initialization.html",

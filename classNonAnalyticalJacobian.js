@@ -1,6 +1,5 @@
 var classNonAnalyticalJacobian =
 [
-    [ "Matrix_2x2", "classNonAnalyticalJacobian.html#af2c309fbce24c31476e4949d50c45f5e", null ],
     [ "jacobian", "classNonAnalyticalJacobian.html#a6e304cd20b310fa3ecb1fc2e5cd38389", null ],
     [ "inv_jacobian_matrix", "classNonAnalyticalJacobian.html#afdbf9d1f8128540bb0f0de7ad43f03a1", null ],
     [ "inv_jacobian_11", "classNonAnalyticalJacobian.html#acdd79e5d79e2b335227a81740c56d375", null ],

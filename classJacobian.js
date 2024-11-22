@@ -1,6 +1,5 @@
 var classJacobian =
 [
-    [ "Matrix_2x2", "classJacobian.html#a97c0d05e5c20b5e484f6da1f6c7d8266", null ],
     [ "jacobian", "classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1", null ],
     [ "jacobian_matrix", "classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d", null ],
     [ "jacobian_11", "classJacobian.html#aed70a0fd79149f34c3fd630733926f2f", null ],
