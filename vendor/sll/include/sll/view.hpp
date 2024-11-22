@@ -138,6 +138,9 @@ using DView1D = View1D<double>;
 
 using DView2D = View2D<double>;
 
+/// The type of the Jacobian matrix and its inverse
+using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
+
 // template <class C>
 // constexpr bool is_contiguous_v = detail::IsContiguous<C>::val;
 

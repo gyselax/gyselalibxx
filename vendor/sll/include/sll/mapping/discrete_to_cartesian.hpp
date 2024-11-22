@@ -60,8 +60,11 @@ public:
     /// @brief Indicate the second logical coordinate.
     using curvilinear_tag_theta =
             typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
-    /// The type of the Jacobian matrix and its inverse
-    using Matrix_2x2 = typename Jacobian<ddc::Coordinate<R, Theta>>::Matrix_2x2;
+
+    /// The type of the argument of the function described by this mapping
+    using CoordArg = ddc::Coordinate<R, Theta>;
+    /// The type of the result of the function described by this mapping
+    using CoordResult = ddc::Coordinate<X, Y>;
 
 private:
     using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
@@ -449,7 +452,7 @@ public:
 };
 
 
-namespace detail {
+namespace mapping_detail {
 template <
         class X,
         class Y,
@@ -464,4 +467,4 @@ struct MappingAccessibility<
 {
     static constexpr bool value = Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible;
 };
-} // namespace detail
+} // namespace mapping_detail

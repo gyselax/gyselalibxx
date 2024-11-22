@@ -9,7 +9,6 @@
 
 #include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
-#include "jacobian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
@@ -49,8 +48,6 @@
 template <class X, class Y, class R, class Theta>
 class CzarnyToCartesian
     : public CoordinateConverter<ddc::Coordinate<X, Y>, ddc::Coordinate<R, Theta>>
-    , public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
-    , public Jacobian<ddc::Coordinate<R, Theta>>
     , public PseudoCartesianCompatibleMapping
     , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
@@ -64,8 +61,11 @@ public:
     /// @brief Indicate the second logical coordinate.
     using curvilinear_tag_theta =
             typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
-    /// The type of the Jacobian matrix and its inverse
-    using Matrix_2x2 = typename Jacobian<ddc::Coordinate<R, Theta>>::Matrix_2x2;
+
+    /// The type of the argument of the function described by this mapping
+    using CoordArg = ddc::Coordinate<R, Theta>;
+    /// The type of the result of the function described by this mapping
+    using CoordResult = ddc::Coordinate<X, Y>;
 
 private:
     double m_epsilon;
@@ -151,8 +151,14 @@ public:
         return m_e;
     }
 
-    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
-            ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Convert the @f$ (r, \theta) @f$ coordinate to the equivalent (x,y) coordinate.
+     *
+     * @param[in] coord The coordinate to be converted.
+     *
+     * @return The equivalent coordinate.
+     */
+    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -166,6 +172,13 @@ public:
         return ddc::Coordinate<X, Y>(x, y);
     }
 
+    /**
+     * @brief Convert the coordinate (x,y) to the equivalent @f$ (r, \theta) @f$ coordinate.
+     *
+     * @param[in] coord The coordinate to be converted.
+     *
+     * @return The equivalent coordinate.
+     */
     KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(
             ddc::Coordinate<X, Y> const& coord) const final
     {
@@ -184,7 +197,15 @@ public:
         return ddc::Coordinate<R, Theta>(r, theta);
     }
 
-    KOKKOS_FUNCTION double jacobian(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
+     *
+     * @param[in] coord
+     *          The coordinate where we evaluate the Jacobian.
+     *
+     * @return A double with the value of the determinant of the Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double jacobian(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -215,7 +236,7 @@ public:
      * @see Jacobian::jacobian_22
      */
     KOKKOS_FUNCTION void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix)
-            const final
+            const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -238,7 +259,18 @@ public:
                           + m_e * cos_theta * xi / sqrt_eps_2);
     }
 
-    KOKKOS_FUNCTION double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (1,1) coefficient of the Jacobian matrix.
+     *
+     * For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
+     * (1,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial x}{\partial r} @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix.
+     *
+     * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -246,7 +278,18 @@ public:
                / Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
     }
 
-    KOKKOS_FUNCTION double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (1,2) coefficient of the Jacobian matrix.
+     *
+     * For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
+     * (1,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial x}{\partial \theta} @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix.
+     *
+     * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -254,7 +297,18 @@ public:
                / Kokkos::sqrt(m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta)) + 1.0);
     }
 
-    KOKKOS_FUNCTION double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (2,1) coefficient of the Jacobian matrix.
+     *
+     * For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
+     * (2,1) coefficient of the Jacobian matrix is given by @f$ \frac{\partial y}{\partial r} @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix. .
+     *
+     * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -269,7 +323,18 @@ public:
                + m_e * sin_theta * xi / tmp2;
     }
 
-    KOKKOS_FUNCTION double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (2,2) coefficient of the Jacobian matrix.
+     *
+     * For a mapping given by @f$ \mathcal{F} : (r,\theta)\mapsto (x,y) @f$, the
+     * (2,2) coefficient of the Jacobian matrix is given by @f$ \frac{\partial y}{\partial \theta} @f$.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the Jacobian matrix.
+     *
+     * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -306,7 +371,7 @@ public:
      */
     KOKKOS_FUNCTION void inv_jacobian_matrix(
             ddc::Coordinate<R, Theta> const& coord,
-            Matrix_2x2& matrix) const final
+            Matrix_2x2& matrix) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -330,7 +395,17 @@ public:
 
 
 
-    KOKKOS_FUNCTION double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (1,1) coefficient of the inverse Jacobian matrix.
+     *
+     * Be careful because not all mappings are invertible, especially at the center point.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the inverse Jacobian matrix.
+     *
+     * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -347,7 +422,17 @@ public:
         return -1 / fact_1 * (-sin_theta * fact_2 + cos_theta * fact_3) / fact_3;
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (1,2) coefficient of the inverse Jacobian matrix.
+     *
+     * Be careful because not all mappings are invertible, especially at the center point.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the inverse Jacobian matrix.
+     *
+     * @return A double with the value of the (1,2) coefficient of the inverse Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -361,7 +446,17 @@ public:
         return sin_theta / fact_3;
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (2,1) coefficient of the inverse Jacobian matrix.
+     *
+     * Be careful because not all mappings are invertible, especially at the center point.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the inverse Jacobian matrix.
+     *
+     * @return A double with the value of the (2,1) coefficient of the inverse Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -380,7 +475,17 @@ public:
         return 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
     }
 
-    KOKKOS_FUNCTION double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const final
+    /**
+     * @brief Compute the (2,2) coefficient of the inverse Jacobian matrix.
+     *
+     * Be careful because not all mappings are invertible, especially at the center point.
+     *
+     * @param[in] coord
+     *              The coordinate where we evaluate the inverse Jacobian matrix.
+     *
+     * @return A double with the value of the (2,2) coefficient of the inverse Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -483,9 +588,9 @@ public:
     }
 };
 
-namespace detail {
+namespace mapping_detail {
 template <class X, class Y, class R, class Theta, class ExecSpace>
 struct MappingAccessibility<ExecSpace, CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
 {
 };
-} // namespace detail
+} // namespace mapping_detail

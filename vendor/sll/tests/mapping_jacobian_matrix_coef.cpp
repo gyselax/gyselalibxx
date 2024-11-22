@@ -176,6 +176,9 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
                 theta_min + dtheta * ddc::select<GridR>(irp).uid());
     });
 
+    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
+
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
@@ -239,6 +242,9 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
                 r_min + dr * ddc::select<GridR>(irp).uid(),
                 theta_min + dtheta * ddc::select<GridR>(irp).uid());
     });
+
+    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
@@ -325,6 +331,9 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
             builder,
             evaluator);
     DiscreteToCartesian mapping = mapping_builder();
+
+    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.

@@ -4,6 +4,7 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/gauss_legendre_integration.hpp>
+#include <sll/mapping/mapping_tools.hpp>
 #include <sll/mapping/metric_tensor.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/matrix_batch_csr.hpp>
@@ -305,6 +306,7 @@ public:
                   IdxRangeQuadratureRTheta(m_idxrange_quadrature_r, m_idxrange_quadrature_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
     {
+        static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
         // Get break points
         IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
         IdxRange<KnotsTheta> idxrange_theta_edges

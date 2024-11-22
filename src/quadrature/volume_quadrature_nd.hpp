@@ -8,6 +8,8 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/mapping_tools.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "quadrature.hpp"
@@ -46,6 +48,7 @@ DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_ma
         Mapping& mapping,
         DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space>&& coefficients_alloc)
 {
+    static_assert(has_2d_jacobian_v<Mapping, Coord<R, Theta>>);
     using R = typename Mapping::curvilinear_tag_r;
     using Theta = typename Mapping::curvilinear_tag_theta;
     using IdxCoeffs = typename IdxRangeCoeffs::discrete_element_type;

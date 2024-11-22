@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <sll/view.hpp>
+
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -34,9 +36,6 @@ public:
     using vector_element_type_in = typename ddc::detail::TaggedVector<double, XIn, YIn>;
     /// The vector type in the coordinate system returned as output.
     using vector_element_type_out = typename ddc::detail::TaggedVector<double, XOut, YOut>;
-
-private:
-    using Matrix_2x2 = typename Mapping::Matrix_2x2;
 
 private:
     Mapping m_mapping;

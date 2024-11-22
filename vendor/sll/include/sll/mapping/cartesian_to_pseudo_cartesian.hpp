@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <sll/view.hpp>
+
 /**
  * @brief A class describing a mapping from a Cartesian domain to a pseudo-Cartesian.
  * This operation is carried out using 2 curvilinear to Cartesian mappings.
@@ -8,9 +10,6 @@
  */
 template <class MappingToCartesian, class MappingToPseudoCartesian>
 class CartesianToPseudoCartesian
-    : public Jacobian<ddc::Coordinate<
-              typename MappingToCartesian::cartesian_tag_x,
-              typename MappingToCartesian::cartesian_tag_y>>
 {
     static_assert(
             std::is_same_v<
@@ -29,9 +28,6 @@ public:
             typename MappingToCartesian::cartesian_tag_x,
             typename MappingToCartesian::cartesian_tag_y>;
 
-    /// The type of the Jacobian matrix and its inverse.
-    using Matrix_2x2 = typename Jacobian<CartesianCoordinate>::Matrix_2x2;
-
     /// The X dimension in the Cartesian geometry.
     using cartesian_tag_x = typename MappingToCartesian::cartesian_tag_x;
     /// The Y dimension in the Cartesian geometry.
@@ -41,6 +37,11 @@ public:
     using pseudo_cartesian_tag_x = typename MappingToPseudoCartesian::cartesian_tag_x;
     /// The Y dimension in the pseudo-Cartesian geometry.
     using pseudo_cartesian_tag_y = typename MappingToPseudoCartesian::cartesian_tag_y;
+
+    /// The type of the argument of the function described by this mapping
+    using CoordArg = ddc::Coordinate<cartesian_tag_x, cartesian_tag_y>;
+    /// The type of the result of the function described by this mapping
+    using CoordResult = ddc::Coordinate<pseudo_cartesian_tag_x, pseudo_cartesian_tag_y>;
 
 private:
     using R = typename MappingToCartesian::curvilinear_tag_r;
@@ -114,87 +115,67 @@ public:
     }
 
     /**
-     * @brief Compute the full Jacobian matrix from a Cartesian coordinate.
-     * @see jacobian_matrix
-     *
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] J The Jacobian matrix returned.
-     */
-    KOKKOS_INLINE_FUNCTION void jacobian_matrix(
-            CartesianCoordinate const& coord_cart,
-            Matrix_2x2& J) const final
-    {
-        if constexpr (std::is_invocable_r_v<CoordRTheta, MappingToCartesian, CartesianCoordinate>) {
-            CoordRTheta coord_rtheta = m_mapping_to_cartesian(coord_cart);
-            jacobian_matrix(coord_rtheta, J);
-        } else {
-            Kokkos::abort("The provided MappingToCartesian class does not allow the Jacobian "
-                          "matrix to be calculated from a Cartesian coordinate.");
-        }
-    }
-
-    /**
      * @brief Compute the determinant of the Jacobian matrix.
      * @see jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @returns The determinant of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double jacobian(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        jacobian_matrix(coord_cart, J);
+        jacobian_matrix(coord_rtheta, J);
         return determinant(J);
     }
 
     /**
      * @brief Compute the (1,1) coefficient of the Jacobian matrix.
      * @see jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_11(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double jacobian_11(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        jacobian_matrix(coord_cart, J);
+        jacobian_matrix(coord_rtheta, J);
         return J[0][0];
     }
 
     /**
      * @brief Compute the (1,2) coefficient of the Jacobian matrix.
      * @see jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (1,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_12(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double jacobian_12(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        jacobian_matrix(coord_cart, J);
+        jacobian_matrix(coord_rtheta, J);
         return J[0][1];
     }
 
     /**
      * @brief Compute the (2,1) coefficient of the Jacobian matrix.
      * @see jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (2,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_21(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double jacobian_21(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        jacobian_matrix(coord_cart, J);
+        jacobian_matrix(coord_rtheta, J);
         return J[1][0];
     }
 
     /**
      * @brief Compute the (2,2) coefficient of the Jacobian matrix.
      * @see jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (2,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_22(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double jacobian_22(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        jacobian_matrix(coord_cart, J);
+        jacobian_matrix(coord_rtheta, J);
         return J[1][1];
     }
 
@@ -242,79 +223,59 @@ public:
     }
 
     /**
-     * @brief Compute the full inverse of the Jacobian matrix from a Cartesian coordinate.
-     * @see jacobian_matrix
-     *
-     * @param[in] coord_cart The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] J The Jacobian matrix returned.
-     */
-    KOKKOS_INLINE_FUNCTION void inv_jacobian_matrix(
-            CartesianCoordinate const& coord_cart,
-            Matrix_2x2& J) const final
-    {
-        if constexpr (std::is_invocable_r_v<CoordRTheta, MappingToCartesian, CartesianCoordinate>) {
-            CoordRTheta coord_rtheta = m_mapping_to_cartesian(coord_cart);
-            jacobian_matrix(coord_rtheta, J);
-        } else {
-            Kokkos::abort("The provided MappingToCartesian class does not allow the Jacobian "
-                          "matrix to be calculated from a Cartesian coordinate.");
-        }
-    }
-
-    /**
      * @brief Compute the (1,1) coefficient of the inverse of the Jacobian matrix.
      * @see inv_jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the inverse of the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the inverse of the Jacobian matrix.
      * @return The (1,1) coefficient of the inverse of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_11(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double inv_jacobian_11(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        inv_jacobian_matrix(coord_cart, J);
+        inv_jacobian_matrix(coord_rtheta, J);
         return J[0][0];
     }
 
     /**
      * @brief Compute the (1,2) coefficient of the inverse of the Jacobian matrix.
      * @see inv_jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the inverse of the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the inverse of the Jacobian matrix.
      * @return The (1,2) coefficient of the inverse of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_12(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double inv_jacobian_12(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        inv_jacobian_matrix(coord_cart, J);
+        inv_jacobian_matrix(coord_rtheta, J);
         return J[0][1];
     }
 
     /**
      * @brief Compute the (2,1) coefficient of the inverse of the Jacobian matrix.
      * @see inv_jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the inverse of the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the inverse of the Jacobian matrix.
      * @return The (2,1) coefficient of the inverse of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_21(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double inv_jacobian_21(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        inv_jacobian_matrix(coord_cart, J);
+        inv_jacobian_matrix(coord_rtheta, J);
         return J[1][0];
     }
 
     /**
      * @brief Compute the (2,2) coefficient of the inverse of the Jacobian matrix.
      * @see inv_jacobian_matrix
-     * @param[in] coord_cart The coordinate where we evaluate the inverse of the Jacobian matrix.
+     * @param[in] coord_rtheta The coordinate where we evaluate the inverse of the Jacobian matrix.
      * @return The (2,2) coefficient of the inverse of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_22(CartesianCoordinate const& coord_cart) const final
+    KOKKOS_FUNCTION double inv_jacobian_22(CoordRTheta const& coord_rtheta) const
     {
         Matrix_2x2 J;
-        inv_jacobian_matrix(coord_cart, J);
+        inv_jacobian_matrix(coord_rtheta, J);
         return J[1][1];
     }
 };
 
-namespace detail {
+namespace mapping_detail {
 template <class ExecSpace, class MappingToPseudoCartesian, class MappingToCartesian>
 struct MappingAccessibility<
         ExecSpace,
@@ -324,4 +285,4 @@ struct MappingAccessibility<
                                   && MappingAccessibility<ExecSpace, MappingToCartesian>::value;
 };
 
-} // namespace detail
+} // namespace mapping_detail

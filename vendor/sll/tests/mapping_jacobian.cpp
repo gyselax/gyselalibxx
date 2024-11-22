@@ -178,6 +178,9 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCircMap)
                 theta_min + dtheta * ddc::select<GridR>(irp).uid());
     });
 
+    static_assert(has_2d_jacobian_v<CircularToCartesian<X, Y, R, Theta>, CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<CircularToCartesian<X, Y, R, Theta>, CoordRTheta>);
+
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         Matrix_2x2 Jacobian_matrix;
@@ -220,6 +223,9 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCzarMap)
                 r_min + dr * ddc::select<GridR>(irp).uid(),
                 theta_min + dtheta * ddc::select<GridTheta>(irp).uid());
     });
+
+    static_assert(has_2d_jacobian_v<CzarnyToCartesian<X, Y, R, Theta>, CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<CzarnyToCartesian<X, Y, R, Theta>, CoordRTheta>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
@@ -285,6 +291,9 @@ TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
             builder,
             evaluator);
     DiscreteToCartesian mapping = mapping_builder();
+
+    static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {

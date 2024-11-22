@@ -4,6 +4,7 @@
 #include <sll/view.hpp>
 
 #include "jacobian.hpp"
+#include "mapping_tools.hpp"
 
 /**
  * @brief An operator for calculating the metric tensor.
@@ -13,7 +14,8 @@
 template <class Mapping, class PositionCoordinate>
 class MetricTensor
 {
-    static_assert(std::is_base_of_v<Jacobian<PositionCoordinate>, Mapping>);
+    static_assert(is_2d_mapping_v<Mapping>);
+    static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
 
 public:
     /// The type of the Jacobian matrix and its inverse

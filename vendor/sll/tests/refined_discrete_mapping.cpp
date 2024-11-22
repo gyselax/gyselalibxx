@@ -27,14 +27,14 @@ struct R
     static bool constexpr PERIODIC = false;
 };
 
-struct P
+struct Theta
 {
     static bool constexpr PERIODIC = true;
 };
 
 using CoordR = ddc::Coordinate<R>;
-using CoordP = ddc::Coordinate<P>;
-using CoordRP = ddc::Coordinate<R, P>;
+using CoordTheta = ddc::Coordinate<Theta>;
+using CoordRTheta = ddc::Coordinate<R, Theta>;
 
 using CoordXY = ddc::Coordinate<X, Y>;
 
@@ -43,20 +43,22 @@ int constexpr BSDegree = 3;
 struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 {
 };
-struct BSplinesP : ddc::NonUniformBSplines<P, BSDegree>
+struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
 
 
 using SplineInterpPointsR = ddc::
         GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using SplineInterpPointsP = ddc::
-        GrevilleInterpolationPoints<BSplinesP, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
+using SplineInterpPointsTheta = ddc::GrevilleInterpolationPoints<
+        BSplinesTheta,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC>;
 
 struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
 {
 };
-struct GridP : SplineInterpPointsP::interpolation_discrete_dimension_type
+struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
 
@@ -64,67 +66,67 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesP,
+        BSplinesTheta,
         GridR,
-        GridP,
+        GridTheta,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::PERIODIC,
         ddc::BoundCond::PERIODIC,
         ddc::SplineSolver::LAPACK,
         GridR,
-        GridP>;
+        GridTheta>;
 
 using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
-        BSplinesP,
+        BSplinesTheta,
         GridR,
-        GridP,
-        ddc::ConstantExtrapolationRule<R, P>,
-        ddc::ConstantExtrapolationRule<R, P>,
-        ddc::PeriodicExtrapolationRule<P>,
-        ddc::PeriodicExtrapolationRule<P>,
+        GridTheta,
+        ddc::ConstantExtrapolationRule<R, Theta>,
+        ddc::ConstantExtrapolationRule<R, Theta>,
+        ddc::PeriodicExtrapolationRule<Theta>,
+        ddc::PeriodicExtrapolationRule<Theta>,
         GridR,
-        GridP>;
+        GridTheta>;
 
 using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
-using BSIdxRangeP = ddc::DiscreteDomain<BSplinesP>;
-using BSIdxRangeRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+using BSIdxRangeTheta = ddc::DiscreteDomain<BSplinesTheta>;
+using BSIdxRangeRTheta = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
 
 using IdxRangeR = ddc::DiscreteDomain<GridR>;
-using IdxRangeP = ddc::DiscreteDomain<GridP>;
-using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
+using IdxRangeTheta = ddc::DiscreteDomain<GridTheta>;
+using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
 
 using IdxR = ddc::DiscreteElement<GridR>;
-using IdxP = ddc::DiscreteElement<GridP>;
-using IdxRP = ddc::DiscreteElement<GridR, GridP>;
+using IdxTheta = ddc::DiscreteElement<GridTheta>;
+using IdxRTheta = ddc::DiscreteElement<GridR, GridTheta>;
 
 using IdxStepR = ddc::DiscreteVector<GridR>;
-using IdxStepP = ddc::DiscreteVector<GridP>;
-using IdxStepRP = ddc::DiscreteVector<GridR, GridP>;
+using IdxStepTheta = ddc::DiscreteVector<GridTheta>;
+using IdxStepRTheta = ddc::DiscreteVector<GridR, GridTheta>;
 
 template <class ElementType>
 using FieldMemR = ddc::Chunk<ElementType, IdxRangeR>;
 
 template <class ElementType>
-using FieldMemP = ddc::Chunk<ElementType, IdxRangeP>;
+using FieldMemTheta = ddc::Chunk<ElementType, IdxRangeTheta>;
 
 template <class ElementType>
-using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
+using FieldMemRTheta = ddc::Chunk<ElementType, IdxRangeRTheta>;
 
 
 
-using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
+using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
 
 
-using CzarnyMapping = CzarnyToCartesian<X, Y, R, P>;
-using CircularMapping = CircularToCartesian<X, Y, R, P>;
+using CzarnyMapping = CzarnyToCartesian<X, Y, R, Theta>;
+using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
 
 
 template <class ElementType>
-using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
+using FieldMemRTheta = ddc::Chunk<ElementType, IdxRangeRTheta>;
 
 using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -145,12 +147,12 @@ template <class Mapping, class DiscreteMapping>
 double check_value_on_grid(
         DiscreteMapping const& mapping,
         Mapping const& analytical_mapping,
-        IdxRangeRP const& idx_range)
+        IdxRangeRTheta const& idx_range)
 {
     const double TOL = 1e-7;
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRP const irp) {
-        const CoordRP coord(ddc::coordinate(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
+        const CoordRTheta coord(ddc::coordinate(irp));
         const CoordXY discrete_coord = mapping(coord);
         const CoordXY analytical_coord = analytical_mapping(coord);
 
@@ -186,42 +188,42 @@ template <class Mapping, class DiscreteMapping>
 double check_value_not_on_grid(
         DiscreteMapping const& mapping,
         Mapping const& analytical_mapping,
-        IdxRangeRP const& idx_range)
+        IdxRangeRTheta const& idx_range)
 {
     std::srand(100);
 
-    FieldMemRP<CoordRP> coords(idx_range);
+    FieldMemRTheta<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
-    IdxP ip_max(ddc::select<GridP>(idx_range).back());
-    ddc::for_each(idx_range, [&](IdxRP const irp) {
+    IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
+    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
         IdxR ir(ddc::select<GridR>(irp));
-        CoordR coordr_0 = ddc::coordinate(ir);
-        CoordR coordr_1 = ddc::coordinate(ir + 1);
+        CoordR coord_r_0 = ddc::coordinate(ir);
+        CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
         if (ir.uid() < ir_max.uid()) {
             double factor = double(std::rand()) / RAND_MAX;
-            coord_r = coordr_0 + (coordr_1 - coordr_0) * factor;
+            coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
-            coord_r = coordr_0;
+            coord_r = coord_r_0;
         }
 
-        IdxP ip(ddc::select<GridP>(irp));
-        CoordP coordp_0 = ddc::coordinate(ip);
-        CoordP coordp_1 = ddc::coordinate(ip + 1);
-        double coord_p;
-        if (ip.uid() < ip_max.uid()) {
+        IdxTheta ip(ddc::select<GridTheta>(irp));
+        CoordTheta coord_theta_0 = ddc::coordinate(ip);
+        CoordTheta coord_theta_1 = ddc::coordinate(ip + 1);
+        double coord_theta;
+        if (ip.uid() < itheta_max.uid()) {
             double factor = double(std::rand()) / RAND_MAX;
-            coord_p = coordp_0 + (coordp_1 - coordp_0) * factor;
+            coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
-            coord_p = coordp_0;
+            coord_theta = coord_theta_0;
         }
-        coords(irp) = CoordRP(coord_r, coord_p);
+        coords(irp) = CoordRTheta(coord_r, coord_theta);
     });
 
     const double TOL = 5e-5;
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRP const irp) {
-        const CoordRP coord(coords(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
+        const CoordRTheta coord(coords(irp));
         const CoordXY discrete_coord = mapping(coord);
         const CoordXY analytical_coord = analytical_mapping(coord);
 
@@ -248,7 +250,7 @@ double test_on_grid_and_not_on_grid(
         Mapping const& analytical_mapping,
         RefinedDiscreteMapping const& refined_mapping,
         DiscreteMapping const& discrete_mapping,
-        IdxRangeRP const& grid)
+        IdxRangeRTheta const& grid)
 {
     std::cout << std::endl
               << "DOMAIN Nr x Nt = " << Nr << " x " << Nt
@@ -288,11 +290,12 @@ template <class Mapping, class DiscreteMapping>
 double check_Jacobian_on_grid(
         DiscreteMapping const& mapping,
         Mapping const& analytical_mapping,
-        IdxRangeRP const& idx_range)
+        IdxRangeRTheta const& idx_range)
 {
+    static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRP const irp) {
-        const CoordRP coord(ddc::coordinate(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
+        const CoordRTheta coord(ddc::coordinate(irp));
 
         Matrix_2x2 discrete_Jacobian;
         Matrix_2x2 analytical_Jacobian;
@@ -334,42 +337,42 @@ template <class Mapping, class DiscreteMapping>
 double check_Jacobian_not_on_grid(
         DiscreteMapping const& mapping,
         Mapping const& analytical_mapping,
-        IdxRangeRP const& idx_range)
+        IdxRangeRTheta const& idx_range)
 {
     std::srand(100);
 
-    FieldMemRP<CoordRP> coords(idx_range);
+    FieldMemRTheta<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
-    IdxP ip_max(ddc::select<GridP>(idx_range).back());
-    ddc::for_each(idx_range, [&](IdxRP const irp) {
+    IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
+    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
         IdxR ir(ddc::select<GridR>(irp));
-        CoordR coordr_0 = ddc::coordinate(ir);
-        CoordR coordr_1 = ddc::coordinate(ir + 1);
+        CoordR coord_r_0 = ddc::coordinate(ir);
+        CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
         if (ir.uid() < ir_max.uid()) {
             double factor = double(std::rand()) / RAND_MAX;
-            coord_r = coordr_0 + (coordr_1 - coordr_0) * factor;
+            coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
-            coord_r = coordr_0;
+            coord_r = coord_r_0;
         }
 
-        IdxP ip(ddc::select<GridP>(irp));
-        CoordP coordp_0 = ddc::coordinate(ip);
-        CoordP coordp_1 = ddc::coordinate(ip + 1);
-        double coord_p;
-        if (ip.uid() < ip_max.uid()) {
+        IdxTheta ip(ddc::select<GridTheta>(irp));
+        CoordTheta coord_theta_0 = ddc::coordinate(ip);
+        CoordTheta coord_theta_1 = ddc::coordinate(ip + 1);
+        double coord_theta;
+        if (ip.uid() < itheta_max.uid()) {
             double factor = double(std::rand()) / RAND_MAX;
-            coord_p = coordp_0 + (coordp_1 - coordp_0) * factor;
+            coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
-            coord_p = coordp_0;
+            coord_theta = coord_theta_0;
         }
-        coords(irp) = CoordRP(coord_r, coord_p);
+        coords(irp) = CoordRTheta(coord_r, coord_theta);
     });
 
 
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRP const irp) {
-        const CoordRP coord(coords(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
+        const CoordRTheta coord(coords(irp));
 
         Matrix_2x2 discrete_Jacobian;
         Matrix_2x2 analytical_Jacobian;
@@ -401,7 +404,7 @@ double test_Jacobian(
         Mapping const& analytical_mapping,
         RefinedDiscreteMapping const& refined_mapping,
         DiscreteMapping const& discrete_mapping,
-        IdxRangeRP const& grid)
+        IdxRangeRTheta const& grid)
 {
     std::cout << std::endl
               << "DOMAIN Nr x Nt = " << Nr << " x " << Nt
@@ -442,7 +445,7 @@ template <class Mapping, class DiscreteMapping>
 double check_pseudo_Cart(
         DiscreteMapping const& mapping,
         Mapping const& analytical_mapping,
-        IdxRangeRP const& idx_range)
+        IdxRangeRTheta const& idx_range)
 {
     double max_err = 0.;
     Matrix_2x2 discrete_pseudo_Cart;
@@ -474,7 +477,7 @@ double test_pseudo_Cart(
         Mapping const& analytical_mapping,
         RefinedDiscreteMapping const& refined_mapping,
         DiscreteMapping const& discrete_mapping,
-        IdxRangeRP const& grid)
+        IdxRangeRTheta const& grid)
 {
     std::cout << std::endl
               << "DOMAIN Nr x Nt = " << Nr << " x " << Nt
@@ -509,47 +512,47 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     CoordR const r_max(1.0);
     IdxStepR const r_size(Nr);
 
-    CoordP const p_min(0.0);
-    CoordP const p_max(2.0 * M_PI);
-    IdxStepP const p_size(Nt);
+    CoordTheta const theta_min(0.0);
+    CoordTheta const theta_max(2.0 * M_PI);
+    IdxStepTheta const theta_size(Nt);
 
     double const dr((r_max - r_min) / r_size);
-    double const dp((p_max - p_min) / p_size);
+    double const dp((theta_max - theta_min) / theta_size);
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordP> p_knots(p_size + 1);
+    std::vector<CoordTheta> theta_knots(theta_size + 1);
 
     for (int i(1); i < r_size + 1; ++i) {
         r_knots[i] = CoordR(r_min + i * dr);
     }
     r_knots[0] = CoordR(r_min);
     r_knots[r_size] = CoordR(r_max);
-    for (int i(1); i < p_size; ++i) {
-        p_knots[i] = CoordP(p_min + i * dp);
+    for (int i(1); i < theta_size; ++i) {
+        theta_knots[i] = CoordTheta(theta_min + i * dp);
     }
-    p_knots[0] = CoordP(p_min);
-    p_knots[p_size] = CoordP(p_max);
+    theta_knots[0] = CoordTheta(theta_min);
+    theta_knots[theta_size] = CoordTheta(theta_max);
 
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesP>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
 
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
-    ddc::init_discrete_space<GridP>(SplineInterpPointsP::get_sampling<GridP>());
+    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
     IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeP interpolation_idx_range_P(SplineInterpPointsP::get_domain<GridP>());
-    IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
+    IdxRangeTheta interpolation_idx_range_Theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 
 
     // Operators ---
     SplineRThetaBuilder builder(grid);
-    ddc::ConstantExtrapolationRule<R, P> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<R, P> boundary_condition_r_right(r_max);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
+    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
     SplineRThetaEvaluator spline_evaluator(
             boundary_condition_r_left,
             boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<P>(),
-            ddc::PeriodicExtrapolationRule<P>());
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
 
 
     // Tests ---

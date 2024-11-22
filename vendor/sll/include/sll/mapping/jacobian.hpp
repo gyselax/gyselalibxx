@@ -15,10 +15,6 @@ template <class PositionCoordinate>
 class Jacobian
 {
 public:
-    /// The type of the Jacobian matrix and its inverse
-    using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
-
-public:
     /**
      * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
      *
@@ -186,10 +182,6 @@ public:
 template <class PositionCoordinate>
 class NonAnalyticalJacobian : public Jacobian<PositionCoordinate>
 {
-public:
-    /// The type of the Jacobian matrix and its inverse
-    using Matrix_2x2 = typename Jacobian<PositionCoordinate>::Matrix_2x2;
-
 public:
     /**
      * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
