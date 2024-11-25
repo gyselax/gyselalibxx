@@ -3,6 +3,9 @@
 
 #include <sll/view.hpp>
 
+#include "inverse_jacobian_matrix.hpp"
+#include "mapping_tools.hpp"
+
 /**
  * @brief A class describing a mapping from a Cartesian domain to a pseudo-Cartesian.
  * This operation is carried out using 2 curvilinear to Cartesian mappings.
@@ -48,6 +51,11 @@ private:
     using Theta = typename MappingToCartesian::curvilinear_tag_theta;
     using CoordRTheta = ddc::Coordinate<R, Theta>;
 
+    static_assert(is_2d_mapping_v<MappingToCartesian>);
+    static_assert(is_2d_mapping_v<MappingToPseudoCartesian>);
+    static_assert(has_2d_jacobian_v<MappingToCartesian, CoordRTheta>);
+    static_assert(has_2d_jacobian_v<MappingToPseudoCartesian, CoordRTheta>);
+
 private:
     MappingToCartesian m_mapping_to_cartesian;
     MappingToPseudoCartesian m_mapping_to_pseudo_cartesian;
@@ -91,13 +99,14 @@ public:
 
         Matrix_2x2 inv_jacobian_from_cartesian;
         Matrix_2x2 jacobian_from_pseudo_cartesian;
+        InverseJacobianMatrix inv_jacobian_cartesian(m_mapping_to_cartesian);
         if (r < m_epsilon) {
             Matrix_2x2 J_0;
             m_mapping_to_cartesian.to_pseudo_cartesian_jacobian_center_matrix(J_0);
 
             CoordRTheta coord_eps(m_epsilon, ddc::get<Theta>(coord_rtheta));
 
-            m_mapping_to_cartesian.inv_jacobian_matrix(coord_eps, inv_jacobian_from_cartesian);
+            inv_jacobian_from_cartesian = inv_jacobian_cartesian(coord_eps);
             m_mapping_to_pseudo_cartesian
                     .jacobian_matrix(coord_eps, jacobian_from_pseudo_cartesian);
             Matrix_2x2 J_eps = mat_mul(jacobian_from_pseudo_cartesian, inv_jacobian_from_cartesian);
@@ -107,7 +116,7 @@ public:
             J[1][0] = (1 - r / m_epsilon) * J_0[1][0] + r / m_epsilon * J_eps[1][0];
             J[1][1] = (1 - r / m_epsilon) * J_0[1][1] + r / m_epsilon * J_eps[1][1];
         } else {
-            m_mapping_to_cartesian.inv_jacobian_matrix(coord_rtheta, inv_jacobian_from_cartesian);
+            inv_jacobian_from_cartesian = inv_jacobian_cartesian(coord_rtheta);
             m_mapping_to_pseudo_cartesian
                     .jacobian_matrix(coord_rtheta, jacobian_from_pseudo_cartesian);
             J = mat_mul(jacobian_from_pseudo_cartesian, inv_jacobian_from_cartesian);
@@ -198,6 +207,7 @@ public:
 
         Matrix_2x2 jacobian_from_cartesian;
         Matrix_2x2 inv_jacobian_from_pseudo_cartesian;
+        InverseJacobianMatrix inv_jacobian_pseudo_cartesian(m_mapping_to_pseudo_cartesian);
         if (r < m_epsilon) {
             Matrix_2x2 J_0;
             m_mapping_to_cartesian.to_pseudo_cartesian_jacobian_center_matrix(J_0);
@@ -206,8 +216,7 @@ public:
             CoordRTheta coord_eps(m_epsilon, ddc::get<Theta>(coord_rtheta));
 
             m_mapping_to_cartesian.jacobian_matrix(coord_eps, jacobian_from_cartesian);
-            m_mapping_to_pseudo_cartesian
-                    .inv_jacobian_matrix(coord_eps, inv_jacobian_from_pseudo_cartesian);
+            inv_jacobian_from_pseudo_cartesian = inv_jacobian_pseudo_cartesian(coord_eps);
             Matrix_2x2 J_eps = mat_mul(inv_jacobian_from_pseudo_cartesian, jacobian_from_cartesian);
 
             J[0][0] = (1 - r / m_epsilon) * J_0_inv[0][0] + r / m_epsilon * J_eps[0][0];
@@ -216,8 +225,7 @@ public:
             J[1][1] = (1 - r / m_epsilon) * J_0_inv[1][1] + r / m_epsilon * J_eps[1][1];
         } else {
             m_mapping_to_cartesian.jacobian_matrix(coord_rtheta, jacobian_from_cartesian);
-            m_mapping_to_pseudo_cartesian
-                    .inv_jacobian_matrix(coord_rtheta, inv_jacobian_from_pseudo_cartesian);
+            inv_jacobian_from_pseudo_cartesian = inv_jacobian_pseudo_cartesian(coord_rtheta);
             J = mat_mul(jacobian_from_cartesian, inv_jacobian_from_pseudo_cartesian);
         }
     }

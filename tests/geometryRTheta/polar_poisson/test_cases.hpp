@@ -116,6 +116,9 @@ public:
 template <class CurvilinearToCartesian>
 class CartesianSolution : public PoissonSolution<CurvilinearToCartesian>
 {
+private:
+    InverseJacobianMatrix<CurvilinearToCartesian, Coord<R, Theta>> m_inverse_jacobian;
+
 public:
     /**
      * @brief Instantiate a CartesianSolution.
@@ -126,6 +129,7 @@ public:
      */
     explicit CartesianSolution(CurvilinearToCartesian const& coordinate_converter)
         : PoissonSolution<CurvilinearToCartesian>(coordinate_converter)
+        , m_inverse_jacobian(coordinate_converter)
     {
     }
 
@@ -156,9 +160,7 @@ public:
         const double y = ddc::get<Y>(cart_coord);
 
         const double r = ddc::get<R>(coord);
-        const double dx_r
-                = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter.inv_jacobian_11(
-                        coord);
+        const double dx_r = m_inverse_jacobian.inv_jacobian_11(coord);
 
         const double C = 1e-4 * ipow(2., 12);
         return C * std::sin(2 * M_PI * y)
@@ -182,9 +184,7 @@ public:
         const double y = ddc::get<Y>(cart_coord);
 
         const double r = ddc::get<R>(coord);
-        const double dy_r
-                = PoissonSolution<CurvilinearToCartesian>::m_coordinate_converter.inv_jacobian_12(
-                        coord);
+        const double dy_r = m_inverse_jacobian.inv_jacobian_12(coord);
 
         const double C = 1e-4 * ipow(2., 12);
         return C * std::cos(2 * M_PI * x)

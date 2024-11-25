@@ -8,6 +8,7 @@
 #include "sll/mapping/czarny_to_cartesian.hpp"
 #include "sll/mapping/discrete_mapping_builder.hpp"
 #include "sll/mapping/discrete_to_cartesian.hpp"
+#include "sll/mapping/inverse_jacobian_matrix.hpp"
 
 #include "test_utils.hpp"
 
@@ -142,13 +143,13 @@ void check_inverse(Matrix_2x2 matrix, Matrix_2x2 inv_matrix)
 /**
  * @brief A class for the Google tests.
  */
-class InverseJacobianMatrix : public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>
+class InvJacobianMatrix : public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>
 {
 };
 
 
 
-TEST_P(InverseJacobianMatrix, InverseMatrixCircMap)
+TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
     const CircularToCartesian<X, Y, R, Theta> mapping;
@@ -179,22 +180,21 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCircMap)
     });
 
     static_assert(has_2d_jacobian_v<CircularToCartesian<X, Y, R, Theta>, CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<CircularToCartesian<X, Y, R, Theta>, CoordRTheta>);
+    InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix;
+        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irp));
 
         mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-        mapping.inv_jacobian_matrix(coords(irp), inv_Jacobian_matrix);
 
         check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
     });
 }
 
 
-TEST_P(InverseJacobianMatrix, InverseMatrixCzarMap)
+TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
     const CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
@@ -240,7 +240,7 @@ TEST_P(InverseJacobianMatrix, InverseMatrixCzarMap)
 }
 
 
-TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
+TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
     const CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(0.3, 1.4);
@@ -293,7 +293,7 @@ TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
     DiscreteToCartesian mapping = mapping_builder();
 
     static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
+    InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
@@ -301,10 +301,9 @@ TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
         const double r = ddc::get<R>(coord_rp);
         if (fabs(r) > 1e-15) {
             Matrix_2x2 Jacobian_matrix;
-            Matrix_2x2 inv_Jacobian_matrix;
+            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rp);
 
             mapping.jacobian_matrix(coord_rp, Jacobian_matrix);
-            mapping.inv_jacobian_matrix(coord_rp, inv_Jacobian_matrix);
 
             check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
         }
@@ -315,5 +314,5 @@ TEST_P(InverseJacobianMatrix, InverseMatrixDiscCzarMap)
 
 INSTANTIATE_TEST_SUITE_P(
         MyGroup,
-        InverseJacobianMatrix,
+        InvJacobianMatrix,
         testing::Combine(testing::Values<std::size_t>(64), testing::Values<std::size_t>(128)));

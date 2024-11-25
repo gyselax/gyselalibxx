@@ -4,11 +4,11 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/math_tools.hpp>
 #include <sll/view.hpp>
 
 #include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
-#include "jacobian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
@@ -35,7 +35,6 @@ template <
         class MemorySpace = typename SplineEvaluator::memory_space>
 class DiscreteToCartesian
     : public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
-    , public NonAnalyticalJacobian<ddc::Coordinate<R, Theta>>
     , public PseudoCartesianCompatibleMapping
     , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
@@ -166,7 +165,7 @@ public:
      */
     KOKKOS_FUNCTION void jacobian_matrix(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
-            Matrix_2x2& matrix) const final
+            Matrix_2x2& matrix) const
     {
         matrix[0][0]
                 = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
@@ -195,7 +194,7 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_11(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         return m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
     }
@@ -217,7 +216,7 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_12(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         return m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
     }
@@ -239,7 +238,7 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_21(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         return m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
     }
@@ -261,11 +260,26 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_22(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         return m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
     }
 
+    /**
+     * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
+     *
+     * @param[in] coord
+     *          The coordinate where we evaluate the Jacobian.
+     *
+     * @return A double with the value of the determinant of the Jacobian matrix.
+     */
+    KOKKOS_FUNCTION double jacobian(
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+    {
+        Matrix_2x2 J;
+        jacobian_matrix(coord, J);
+        return determinant(J);
+    }
 
 
     /**

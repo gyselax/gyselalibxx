@@ -117,7 +117,7 @@ public:
      *      The parameter @f$ \varepsilon @f$ for the linearization of the
      *      electric field.
      */
-    AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)
+    explicit AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)
         : m_mapping(mapping)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_spline_evaluator {ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule(), ddc::PeriodicExtrapolationRule<Theta>(), ddc::PeriodicExtrapolationRule<Theta>()}
@@ -245,6 +245,8 @@ private:
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
+        InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
+
         // > computation of the electric field
         ddc::for_each(grid, [&](IdxRTheta const irp) {
             double const r = ddc::coordinate(ddc::select<GridR>(irp));
@@ -253,8 +255,7 @@ private:
             if (r > m_epsilon) {
                 CoordRTheta const coord_rp(r, th);
 
-                Matrix_2x2 inv_J; // Inverse Jacobian matrix
-                m_mapping.inv_jacobian_matrix(coord_rp, inv_J);
+                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rp);
 
                 // Gradiant of phi in the physical index range (Cartesian index range)
                 double const deriv_x_phi
@@ -304,8 +305,7 @@ private:
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rp_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps; // Jacobian matrix
-                m_mapping.inv_jacobian_matrix(coord_rp_epsilon, inv_J_eps);
+                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rp_epsilon);
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
                         coord_rp_epsilon,

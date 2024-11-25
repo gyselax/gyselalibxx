@@ -3,7 +3,6 @@
 
 #include <sll/view.hpp>
 
-#include "jacobian.hpp"
 #include "mapping_tools.hpp"
 
 /**

@@ -8,6 +8,7 @@
 #include "sll/mapping/czarny_to_cartesian.hpp"
 #include "sll/mapping/discrete_mapping_builder.hpp"
 #include "sll/mapping/discrete_to_cartesian.hpp"
+#include "sll/mapping/inverse_jacobian_matrix.hpp"
 
 #include "test_utils.hpp"
 
@@ -244,7 +245,6 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
     });
 
     static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
@@ -262,16 +262,16 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
         check_matrix(Jacobian_matrix, Jacobian_matrix_coeff);
     });
 
+    InverseJacobianMatrix inv_jacobian(mapping);
     // --- for the inverseJacobian matrix:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 inv_Jacobian_matrix;
+        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irp));
         Matrix_2x2 inv_Jacobian_matrix_coeff;
 
-        mapping.inv_jacobian_matrix(coords(irp), inv_Jacobian_matrix);
-        inv_Jacobian_matrix_coeff[0][0] = mapping.inv_jacobian_11(coords(irp));
-        inv_Jacobian_matrix_coeff[0][1] = mapping.inv_jacobian_12(coords(irp));
-        inv_Jacobian_matrix_coeff[1][0] = mapping.inv_jacobian_21(coords(irp));
-        inv_Jacobian_matrix_coeff[1][1] = mapping.inv_jacobian_22(coords(irp));
+        inv_Jacobian_matrix_coeff[0][0] = inv_jacobian.inv_jacobian_11(coords(irp));
+        inv_Jacobian_matrix_coeff[0][1] = inv_jacobian.inv_jacobian_12(coords(irp));
+        inv_Jacobian_matrix_coeff[1][0] = inv_jacobian.inv_jacobian_21(coords(irp));
+        inv_Jacobian_matrix_coeff[1][1] = inv_jacobian.inv_jacobian_22(coords(irp));
 
         check_matrix(inv_Jacobian_matrix, inv_Jacobian_matrix_coeff);
     });
@@ -333,7 +333,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     DiscreteToCartesian mapping = mapping_builder();
 
     static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<decltype(mapping), CoordRTheta>);
+    InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
@@ -355,14 +355,15 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
 
 
             // --- for the inverse Jacobian matrix:
-            Matrix_2x2 inv_Jacobian_matrix;
+            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rp);
             Matrix_2x2 inv_Jacobian_matrix_coeff;
 
-            mapping.inv_jacobian_matrix(coord_rp, inv_Jacobian_matrix);
-            inv_Jacobian_matrix_coeff[0][0] = mapping.inv_jacobian_11(coord_rp);
-            inv_Jacobian_matrix_coeff[0][1] = mapping.inv_jacobian_12(coord_rp);
-            inv_Jacobian_matrix_coeff[1][0] = mapping.inv_jacobian_21(coord_rp);
-            inv_Jacobian_matrix_coeff[1][1] = mapping.inv_jacobian_22(coord_rp);
+            inv_Jacobian_matrix_coeff[0][0] = inv_jacobian.inv_jacobian_11(coord_rp);
+            inv_Jacobian_matrix_coeff[0][1] = inv_jacobian.inv_jacobian_12(coord_rp);
+            inv_Jacobian_matrix_coeff[1][0] = inv_jacobian.inv_jacobian_21(coord_rp);
+            inv_Jacobian_matrix_coeff[1][1] = inv_jacobian.inv_jacobian_22(coord_rp);
+
+            check_matrix(inv_Jacobian_matrix, inv_Jacobian_matrix_coeff);
         }
     });
 }
