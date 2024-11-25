@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('classMetricTensor.html',''); initResiz
 Public Types</h2></td></tr>
 <tr class="memitem:a8f5d8e41ab5e9d9a2cc84ba42b67843a"><td class="memItemLeft" align="right" valign="top"><a id="a8f5d8e41ab5e9d9a2cc84ba42b67843a"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a8f5d8e41ab5e9d9a2cc84ba42b67843a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
+<tr class="memdesc:a8f5d8e41ab5e9d9a2cc84ba42b67843a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the Jacobian matrix and its inverse. <br /></td></tr>
 <tr class="separator:a8f5d8e41ab5e9d9a2cc84ba42b67843a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -140,7 +140,7 @@ class MetricTensor&lt; Mapping, PositionCoordinate &gt;</h3>
 <p>An operator for calculating the metric tensor. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Mapping</td><td>The mapping providing the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> operator. </td></tr>
+    <tr><td class="paramname">Mapping</td><td>The mapping providing the Jacobian operator. </td></tr>
     <tr><td class="paramname">PositionCoordinate</td><td>The coordinate type where the metric tensor can be evaluated. </td></tr>
   </table>
   </dd>
@@ -175,7 +175,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
 <p>A constructor for the metric tensor operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping which can be used to calculate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping which can be used to calculate the Jacobian. </td></tr>
   </table>
   </dd>
 </dl>
@@ -220,7 +220,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the metric tensor assignd to the mapping. </p>
-<p>The metric tensor matrix is defined as: \( G = (J_{\mathcal{F}})^T J_{\mathcal{F}} \). with \( J_{\mathcal{F}} \) the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</p>
+<p>The metric tensor matrix is defined as: \( G = (J_{\mathcal{F}})^T J_{\mathcal{F}} \). with \( J_{\mathcal{F}} \) the Jacobian matrix.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the metric tensor. </td></tr>

@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['nonanalyticaljacobian_1144',['NonAnalyticalJacobian',['../classNonAnalyticalJacobian.html',1,'']]],
-  ['nonanalyticaljacobian_3c_20ddc_3a_3acoordinate_3c_20typename_20splineevaluator_3a_3acontinuous_5fdimension_5ftype1_2c_20typename_20splineevaluator_3a_3acontinuous_5fdimension_5ftype2_20_3e_20_3e_1145',['NonAnalyticalJacobian&lt; ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; &gt;',['../classNonAnalyticalJacobian.html',1,'']]],
-  ['nonuniforminterpolationpoints_1146',['NonUniformInterpolationPoints',['../classddcHelper_1_1NonUniformInterpolationPoints.html',1,'ddcHelper']]],
-  ['noperturbinitialization_1147',['NoPerturbInitialization',['../classNoPerturbInitialization.html',1,'']]],
-  ['nulladvectionvelocity_1148',['NullAdvectionVelocity',['../classNullAdvectionVelocity.html',1,'']]],
-  ['nullextrapolationrule_1149',['NullExtrapolationRule',['../structNullExtrapolationRule.html',1,'']]],
-  ['nullqnsolver_1150',['NullQNSolver',['../classNullQNSolver.html',1,'']]]
+  ['onionpatchlocator_1149',['OnionPatchLocator',['../classOnionPatchLocator.html',1,'']]],
+  ['onionpatchlocator_3c_20multipatchtype_3c_20idxrangeonpatch_2c_20patches_2e_2e_2e_20_3e_2c_20mapping_2c_20execspace_20_3e_1150',['OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, Mapping, ExecSpace &gt;',['../classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Mapping_00_01ExecSpace_01_4.html',1,'']]],
+  ['outsideedge_1151',['OutsideEdge',['../structOutsideEdge.html',1,'']]]
 ];

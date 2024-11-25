@@ -1,13 +1,19 @@
 var searchData=
 [
-  ['r_1186',['R',['../structonion__shape__non__uniform__2d__2patches_1_1R.html',1,'onion_shape_non_uniform_2d_2patches::R'],['../structonion__shape__uniform__2d__2patches_1_1R.html',1,'onion_shape_uniform_2d_2patches::R'],['../structR.html',1,'R']]],
-  ['rbasissubset_1187',['RBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
-  ['rcelldim_1188',['RCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
-  ['refineddiscretetocartesianbuilder_1189',['RefinedDiscreteToCartesianBuilder',['../classRefinedDiscreteToCartesianBuilder.html',1,'']]],
-  ['restartinitialization_1190',['RestartInitialization',['../classRestartInitialization.html',1,'']]],
-  ['rk2_1191',['RK2',['../classRK2.html',1,'']]],
-  ['rk3_1192',['RK3',['../classRK3.html',1,'']]],
-  ['rk4_1193',['RK4',['../classRK4.html',1,'']]],
-  ['rotationadvectionfieldsimulation_1194',['RotationAdvectionFieldSimulation',['../classRotationAdvectionFieldSimulation.html',1,'']]],
-  ['rotationsimulation_1195',['RotationSimulation',['../classRotationSimulation.html',1,'']]]
+  ['selectrelevantidxrangetype_1194',['SelectRelevantIdxRangeType',['../structconnectivity__details_1_1SelectRelevantIdxRangeType.html',1,'connectivity_details']]],
+  ['selectrelevantidxrangetype_3c_20querygrid1d_2c_20idxrange_3c_20idxrangegrids_2e_2e_2e_20_3e_20_3e_1195',['SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;',['../structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.html',1,'connectivity_details']]],
+  ['singlemodeperturbinitialization_1196',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'']]],
+  ['species_1197',['Species',['../structSpecies.html',1,'']]],
+  ['speciesinformation_1198',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
+  ['splinefootfinder_1199',['SplineFootFinder',['../classSplineFootFinder.html',1,'']]],
+  ['splineinterpolator_1200',['SplineInterpolator',['../classSplineInterpolator.html',1,'']]],
+  ['splineinterpolatorrtheta_1201',['SplineInterpolatorRTheta',['../classSplineInterpolatorRTheta.html',1,'']]],
+  ['splitrighthandsidesolver_1202',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html',1,'']]],
+  ['splitvlasovsolver_1203',['SplitVlasovSolver',['../classSplitVlasovSolver.html',1,'']]],
+  ['stripoutsideedges_1204',['StripOutsideEdges',['../structconnectivity__details_1_1StripOutsideEdges.html',1,'connectivity_details']]],
+  ['stripoutsideedges_3c_20ddc_3a_3adetail_3a_3atypeseq_3c_20edgetype_20_3e_20_3e_1205',['StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;',['../structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType_01_4_01_4.html',1,'connectivity_details']]],
+  ['stripoutsideedges_3c_20ddc_3a_3adetail_3a_3atypeseq_3c_20edgetype1_2c_20remainingedgetypes_2e_2e_2e_20_3e_20_3e_1206',['StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType1, RemainingEdgeTypes... &gt; &gt;',['../structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_036e9ce7e4506982efa52c09ca049ae90.html',1,'connectivity_details']]],
+  ['swapextremity_1207',['SwapExtremity',['../structconnectivity__details_1_1SwapExtremity.html',1,'connectivity_details']]],
+  ['swapextremity_3c_20edge_3c_20patch_2c_20grid1d_2c_20back_20_3e_20_3e_1208',['SwapExtremity&lt; Edge&lt; Patch, Grid1D, BACK &gt; &gt;',['../structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01BACK_01_4_01_4.html',1,'connectivity_details']]],
+  ['swapextremity_3c_20edge_3c_20patch_2c_20grid1d_2c_20front_20_3e_20_3e_1209',['SwapExtremity&lt; Edge&lt; Patch, Grid1D, FRONT &gt; &gt;',['../structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01FRONT_01_4_01_4.html',1,'connectivity_details']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['kelvinhelmholtzinstabilityinitialization_1104',['KelvinHelmholtzInstabilityInitialization',['../classKelvinHelmholtzInstabilityInitialization.html',1,'']]],
-  ['kineticsource_1105',['KineticSource',['../classKineticSource.html',1,'']]],
-  ['krooksourceadaptive_1106',['KrookSourceAdaptive',['../classKrookSourceAdaptive.html',1,'']]],
-  ['krooksourceconstant_1107',['KrookSourceConstant',['../classKrookSourceConstant.html',1,'']]]
+  ['lagrange_1108',['Lagrange',['../classLagrange.html',1,'']]],
+  ['lagrangeinterpolator_1109',['LagrangeInterpolator',['../classLagrangeInterpolator.html',1,'']]],
+  ['lagrangeinterpolator_3c_20gridinterp_2c_20bcmin_2c_20bcmax_2c_20grid1d_2e_2e_2e_20_3e_1110',['LagrangeInterpolator&lt; GridInterp, BcMin, BcMax, Grid1D... &gt;',['../classLagrangeInterpolator.html',1,'']]]
 ];

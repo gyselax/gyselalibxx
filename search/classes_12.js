@@ -1,19 +1,16 @@
 var searchData=
 [
-  ['selectrelevantidxrangetype_1196',['SelectRelevantIdxRangeType',['../structconnectivity__details_1_1SelectRelevantIdxRangeType.html',1,'connectivity_details']]],
-  ['selectrelevantidxrangetype_3c_20querygrid1d_2c_20idxrange_3c_20idxrangegrids_2e_2e_2e_20_3e_20_3e_1197',['SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;',['../structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.html',1,'connectivity_details']]],
-  ['singlemodeperturbinitialization_1198',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'']]],
-  ['species_1199',['Species',['../structSpecies.html',1,'']]],
-  ['speciesinformation_1200',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
-  ['splinefootfinder_1201',['SplineFootFinder',['../classSplineFootFinder.html',1,'']]],
-  ['splineinterpolator_1202',['SplineInterpolator',['../classSplineInterpolator.html',1,'']]],
-  ['splineinterpolatorrtheta_1203',['SplineInterpolatorRTheta',['../classSplineInterpolatorRTheta.html',1,'']]],
-  ['splitrighthandsidesolver_1204',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html',1,'']]],
-  ['splitvlasovsolver_1205',['SplitVlasovSolver',['../classSplitVlasovSolver.html',1,'']]],
-  ['stripoutsideedges_1206',['StripOutsideEdges',['../structconnectivity__details_1_1StripOutsideEdges.html',1,'connectivity_details']]],
-  ['stripoutsideedges_3c_20ddc_3a_3adetail_3a_3atypeseq_3c_20edgetype_20_3e_20_3e_1207',['StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType &gt; &gt;',['../structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType_01_4_01_4.html',1,'connectivity_details']]],
-  ['stripoutsideedges_3c_20ddc_3a_3adetail_3a_3atypeseq_3c_20edgetype1_2c_20remainingedgetypes_2e_2e_2e_20_3e_20_3e_1208',['StripOutsideEdges&lt; ddc::detail::TypeSeq&lt; EdgeType1, RemainingEdgeTypes... &gt; &gt;',['../structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1detail_1_1TypeSeq_3_01EdgeType1_00_036e9ce7e4506982efa52c09ca049ae90.html',1,'connectivity_details']]],
-  ['swapextremity_1209',['SwapExtremity',['../structconnectivity__details_1_1SwapExtremity.html',1,'connectivity_details']]],
-  ['swapextremity_3c_20edge_3c_20patch_2c_20grid1d_2c_20back_20_3e_20_3e_1210',['SwapExtremity&lt; Edge&lt; Patch, Grid1D, BACK &gt; &gt;',['../structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01BACK_01_4_01_4.html',1,'connectivity_details']]],
-  ['swapextremity_3c_20edge_3c_20patch_2c_20grid1d_2c_20front_20_3e_20_3e_1211',['SwapExtremity&lt; Edge&lt; Patch, Grid1D, FRONT &gt; &gt;',['../structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01FRONT_01_4_01_4.html',1,'connectivity_details']]]
+  ['t_1210',['T',['../structT.html',1,'']]],
+  ['theta_1211',['Theta',['../structonion__shape__non__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_non_uniform_2d_2patches::Theta'],['../structonion__shape__uniform__2d__2patches_1_1Theta.html',1,'onion_shape_uniform_2d_2patches::Theta'],['../structTheta.html',1,'Theta']]],
+  ['thetabasissubset_1212',['ThetaBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['thetacelldim_1213',['ThetaCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
+  ['to_5ftuple_1214',['to_tuple',['../structto__tuple.html',1,'']]],
+  ['to_5ftuple_3c_20std_3a_3ainteger_5fsequence_3c_20t_2c_20ints_2e_2e_2e_20_3e_20_3e_1215',['to_tuple&lt; std::integer_sequence&lt; T, Ints... &gt; &gt;',['../structto__tuple_3_01std_1_1integer__sequence_3_01T_00_01Ints_8_8_8_01_4_01_4.html',1,'']]],
+  ['to_5ftuple_3c_20std_3a_3apair_3c_20t_2c_20u_20_3e_20_3e_1216',['to_tuple&lt; std::pair&lt; T, U &gt; &gt;',['../structto__tuple_3_01std_1_1pair_3_01T_00_01U_01_4_01_4.html',1,'']]],
+  ['totuple_1217',['ToTuple',['../structconnectivity__details_1_1ToTuple.html',1,'connectivity_details']]],
+  ['totuple_3c_20ddc_3a_3adetail_3a_3atypeseq_3c_20i_2e_2e_2e_20_3e_20_3e_1218',['ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;',['../structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4.html',1,'connectivity_details']]],
+  ['translationadvectionfieldsimulation_1219',['TranslationAdvectionFieldSimulation',['../classTranslationAdvectionFieldSimulation.html',1,'']]],
+  ['translationsimulation_1220',['TranslationSimulation',['../classTranslationSimulation.html',1,'']]],
+  ['tuple_5fto_5ftypes_1221',['tuple_to_types',['../structtuple__to__types.html',1,'']]],
+  ['tuple_5fto_5ftypes_3c_20std_3a_3atuple_3c_20args_2e_2e_2e_20_3e_20_3e_1222',['tuple_to_types&lt; std::tuple&lt; Args... &gt; &gt;',['../structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html',1,'']]]
 ];

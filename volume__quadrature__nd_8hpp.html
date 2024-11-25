@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('volume__quadrature__nd_8hpp.html','');
 Functions</h2></td></tr>
 <tr class="memitem:a157da60708ba649c7895c4f32e8bd0b4"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class IdxRangeCoeffs , class ExecSpace &gt; </td></tr>
 <tr class="memitem:a157da60708ba649c7895c4f32e8bd0b4"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="volume__quadrature__nd_8hpp.html#a157da60708ba649c7895c4f32e8bd0b4">compute_coeffs_on_mapping</a> (ExecSpace exec_space, <a class="el" href="classCircularToCartesian.html">Mapping</a> &amp;mapping, DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt; &amp;&amp;coefficients_alloc)</td></tr>
-<tr class="memdesc:a157da60708ba649c7895c4f32e8bd0b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the coefficients.  <a href="volume__quadrature__nd_8hpp.html#a157da60708ba649c7895c4f32e8bd0b4">More...</a><br /></td></tr>
+<tr class="memdesc:a157da60708ba649c7895c4f32e8bd0b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the Jacobian determinant to the coefficients.  <a href="volume__quadrature__nd_8hpp.html#a157da60708ba649c7895c4f32e8bd0b4">More...</a><br /></td></tr>
 <tr class="separator:a157da60708ba649c7895c4f32e8bd0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -161,8 +161,8 @@ template&lt;class Mapping , class IdxRangeCoeffs , class ExecSpace &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the coefficients. </p>
-<p>For polar integration, we can add the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> determinant to the quadrature coefficients.</p>
+<p>Add the Jacobian determinant to the coefficients. </p>
+<p>For polar integration, we can add the Jacobian determinant to the quadrature coefficients.</p>
 <ul>
 <li><p class="startli">2D example: (but it is implemented for ND)</p>
 <p class="startli">\( \int_{\Omega_{\text{cart}}} f(x,y) dxdy = \int_{\Omega} f(r,\theta) |det(J(r,\theta))| drd\theta \simeq \sum_{i,j} [q_{i,j}| det(J(r_i,\theta_j))|] f_{ij}\)</p>

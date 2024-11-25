@@ -151,7 +151,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="inherit_header pub_types_classPseudoCartesianCompatibleMapping"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classPseudoCartesianCompatibleMapping')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classPseudoCartesianCompatibleMapping.html">PseudoCartesianCompatibleMapping</a></td></tr>
 <tr class="memitem:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="memItemLeft" align="right" valign="top"><a id="a70dac40dbdb219ab3f2a775c06f53f74"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
+<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian Jacobian matrix and its inverse. <br /></td></tr>
 <tr class="separator:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; X, Y, R, Theta &gt;</a></td></tr>
 <tr class="memitem:a4b89f1e58ae38bc6164cdf72825647e2 inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="a4b89f1e58ae38bc6164cdf72825647e2"></a>
@@ -201,52 +201,52 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1de36110060cd5b600e737390eb99150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the coordinate (x,y) to the equivalent \( (r, \theta) \) coordinate.  <a href="classCzarnyToCartesian.html#a1de36110060cd5b600e737390eb99150">More...</a><br /></td></tr>
 <tr class="separator:a1de36110060cd5b600e737390eb99150"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad61205c9ee5f4fad9dd627ea6446d3ec"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#ad61205c9ee5f4fad9dd627ea6446d3ec">jacobian</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ad61205c9ee5f4fad9dd627ea6446d3ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>, the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping.  <a href="classCzarnyToCartesian.html#ad61205c9ee5f4fad9dd627ea6446d3ec">More...</a><br /></td></tr>
+<tr class="memdesc:ad61205c9ee5f4fad9dd627ea6446d3ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <a href="classCzarnyToCartesian.html#ad61205c9ee5f4fad9dd627ea6446d3ec">More...</a><br /></td></tr>
 <tr class="separator:ad61205c9ee5f4fad9dd627ea6446d3ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad77e6aaa7bb0d7da88be04de71722937"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#ad77e6aaa7bb0d7da88be04de71722937">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const</td></tr>
-<tr class="memdesc:ad77e6aaa7bb0d7da88be04de71722937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#ad77e6aaa7bb0d7da88be04de71722937">More...</a><br /></td></tr>
+<tr class="memdesc:ad77e6aaa7bb0d7da88be04de71722937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <a href="classCzarnyToCartesian.html#ad77e6aaa7bb0d7da88be04de71722937">More...</a><br /></td></tr>
 <tr class="separator:ad77e6aaa7bb0d7da88be04de71722937"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b131fbd096c86c1feca02f1aa4db681"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a3b131fbd096c86c1feca02f1aa4db681">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a3b131fbd096c86c1feca02f1aa4db681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#a3b131fbd096c86c1feca02f1aa4db681">More...</a><br /></td></tr>
+<tr class="memdesc:a3b131fbd096c86c1feca02f1aa4db681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <a href="classCzarnyToCartesian.html#a3b131fbd096c86c1feca02f1aa4db681">More...</a><br /></td></tr>
 <tr class="separator:a3b131fbd096c86c1feca02f1aa4db681"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb2fa6095b5c74bb734fba9f3517b5b9"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#abb2fa6095b5c74bb734fba9f3517b5b9">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:abb2fa6095b5c74bb734fba9f3517b5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#abb2fa6095b5c74bb734fba9f3517b5b9">More...</a><br /></td></tr>
+<tr class="memdesc:abb2fa6095b5c74bb734fba9f3517b5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <a href="classCzarnyToCartesian.html#abb2fa6095b5c74bb734fba9f3517b5b9">More...</a><br /></td></tr>
 <tr class="separator:abb2fa6095b5c74bb734fba9f3517b5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31bc9875ffdc03f90491f3205a56e69f"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a31bc9875ffdc03f90491f3205a56e69f">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a31bc9875ffdc03f90491f3205a56e69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#a31bc9875ffdc03f90491f3205a56e69f">More...</a><br /></td></tr>
+<tr class="memdesc:a31bc9875ffdc03f90491f3205a56e69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <a href="classCzarnyToCartesian.html#a31bc9875ffdc03f90491f3205a56e69f">More...</a><br /></td></tr>
 <tr class="separator:a31bc9875ffdc03f90491f3205a56e69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dc11cc5bcf1d6024ec63cd0acb29367"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a9dc11cc5bcf1d6024ec63cd0acb29367">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a9dc11cc5bcf1d6024ec63cd0acb29367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#a9dc11cc5bcf1d6024ec63cd0acb29367">More...</a><br /></td></tr>
+<tr class="memdesc:a9dc11cc5bcf1d6024ec63cd0acb29367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <a href="classCzarnyToCartesian.html#a9dc11cc5bcf1d6024ec63cd0acb29367">More...</a><br /></td></tr>
 <tr class="separator:a9dc11cc5bcf1d6024ec63cd0acb29367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6712f3f6b38d65605b8d846f8f43db88"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a6712f3f6b38d65605b8d846f8f43db88">inv_jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const</td></tr>
-<tr class="memdesc:a6712f3f6b38d65605b8d846f8f43db88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#a6712f3f6b38d65605b8d846f8f43db88">More...</a><br /></td></tr>
+<tr class="memdesc:a6712f3f6b38d65605b8d846f8f43db88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <a href="classCzarnyToCartesian.html#a6712f3f6b38d65605b8d846f8f43db88">More...</a><br /></td></tr>
 <tr class="separator:a6712f3f6b38d65605b8d846f8f43db88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48d90f7ffd60f72ebe88d6d3b300abae"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a48d90f7ffd60f72ebe88d6d3b300abae">inv_jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a48d90f7ffd60f72ebe88d6d3b300abae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#a48d90f7ffd60f72ebe88d6d3b300abae">More...</a><br /></td></tr>
+<tr class="memdesc:a48d90f7ffd60f72ebe88d6d3b300abae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <a href="classCzarnyToCartesian.html#a48d90f7ffd60f72ebe88d6d3b300abae">More...</a><br /></td></tr>
 <tr class="separator:a48d90f7ffd60f72ebe88d6d3b300abae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0b7e3e10d37844f12f94d5a25c82990"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#ad0b7e3e10d37844f12f94d5a25c82990">inv_jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ad0b7e3e10d37844f12f94d5a25c82990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#ad0b7e3e10d37844f12f94d5a25c82990">More...</a><br /></td></tr>
+<tr class="memdesc:ad0b7e3e10d37844f12f94d5a25c82990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse Jacobian matrix.  <a href="classCzarnyToCartesian.html#ad0b7e3e10d37844f12f94d5a25c82990">More...</a><br /></td></tr>
 <tr class="separator:ad0b7e3e10d37844f12f94d5a25c82990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bcc7dbb109d68fef485c1b85b385b44"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a0bcc7dbb109d68fef485c1b85b385b44">inv_jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a0bcc7dbb109d68fef485c1b85b385b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#a0bcc7dbb109d68fef485c1b85b385b44">More...</a><br /></td></tr>
+<tr class="memdesc:a0bcc7dbb109d68fef485c1b85b385b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse Jacobian matrix.  <a href="classCzarnyToCartesian.html#a0bcc7dbb109d68fef485c1b85b385b44">More...</a><br /></td></tr>
 <tr class="separator:a0bcc7dbb109d68fef485c1b85b385b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af882cc707a07de918385c2d563857e0b"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#af882cc707a07de918385c2d563857e0b">inv_jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:af882cc707a07de918385c2d563857e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classCzarnyToCartesian.html#af882cc707a07de918385c2d563857e0b">More...</a><br /></td></tr>
+<tr class="memdesc:af882cc707a07de918385c2d563857e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse Jacobian matrix.  <a href="classCzarnyToCartesian.html#af882cc707a07de918385c2d563857e0b">More...</a><br /></td></tr>
 <tr class="separator:af882cc707a07de918385c2d563857e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e3ac704c48b6e905a0535c8d256293"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293">to_pseudo_cartesian_jacobian_center_matrix</a> (<a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const final</td></tr>
-<tr class="memdesc:a40e3ac704c48b6e905a0535c8d256293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293">More...</a><br /></td></tr>
+<tr class="memdesc:a40e3ac704c48b6e905a0535c8d256293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293">More...</a><br /></td></tr>
 <tr class="separator:a40e3ac704c48b6e905a0535c8d256293"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58e28af487947147efaca1b6f2bb141e"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#a58e28af487947147efaca1b6f2bb141e">to_pseudo_cartesian_jacobian_11_center</a> () const final</td></tr>
-<tr class="memdesc:a58e28af487947147efaca1b6f2bb141e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classCzarnyToCartesian.html#a58e28af487947147efaca1b6f2bb141e">More...</a><br /></td></tr>
+<tr class="memdesc:a58e28af487947147efaca1b6f2bb141e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCzarnyToCartesian.html#a58e28af487947147efaca1b6f2bb141e">More...</a><br /></td></tr>
 <tr class="separator:a58e28af487947147efaca1b6f2bb141e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae84331a4bcc0faa0fb536bf6c5e310dd"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#ae84331a4bcc0faa0fb536bf6c5e310dd">to_pseudo_cartesian_jacobian_12_center</a> () const final</td></tr>
-<tr class="memdesc:ae84331a4bcc0faa0fb536bf6c5e310dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classCzarnyToCartesian.html#ae84331a4bcc0faa0fb536bf6c5e310dd">More...</a><br /></td></tr>
+<tr class="memdesc:ae84331a4bcc0faa0fb536bf6c5e310dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCzarnyToCartesian.html#ae84331a4bcc0faa0fb536bf6c5e310dd">More...</a><br /></td></tr>
 <tr class="separator:ae84331a4bcc0faa0fb536bf6c5e310dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc54fd080a650c411f5693c4e3d4c2c6"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#abc54fd080a650c411f5693c4e3d4c2c6">to_pseudo_cartesian_jacobian_21_center</a> () const final</td></tr>
-<tr class="memdesc:abc54fd080a650c411f5693c4e3d4c2c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classCzarnyToCartesian.html#abc54fd080a650c411f5693c4e3d4c2c6">More...</a><br /></td></tr>
+<tr class="memdesc:abc54fd080a650c411f5693c4e3d4c2c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCzarnyToCartesian.html#abc54fd080a650c411f5693c4e3d4c2c6">More...</a><br /></td></tr>
 <tr class="separator:abc54fd080a650c411f5693c4e3d4c2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc6acee06607ab507ec6b0fe764967d4"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCzarnyToCartesian.html#afc6acee06607ab507ec6b0fe764967d4">to_pseudo_cartesian_jacobian_22_center</a> () const final</td></tr>
-<tr class="memdesc:afc6acee06607ab507ec6b0fe764967d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classCzarnyToCartesian.html#afc6acee06607ab507ec6b0fe764967d4">More...</a><br /></td></tr>
+<tr class="memdesc:afc6acee06607ab507ec6b0fe764967d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classCzarnyToCartesian.html#afc6acee06607ab507ec6b0fe764967d4">More...</a><br /></td></tr>
 <tr class="separator:afc6acee06607ab507ec6b0fe764967d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -257,8 +257,8 @@ class CzarnyToCartesian&lt; X, Y, R, Theta &gt;</h3>
 <p>The mapping \( (r,\theta)\mapsto (x,y) \) is defined by</p>
 <p>\( x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right),\)</p>
 <p>\( y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} },\)</p>
-<p>with \( \xi = 1/\sqrt{1 - \epsilon^2 /4} \) and \( e \) and \( \epsilon \) given as parameters. It and its <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix are invertible everywhere except for \( r = 0 \).</p>
-<p>Its <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> coefficients are defined as follow</p>
+<p>with \( \xi = 1/\sqrt{1 - \epsilon^2 /4} \) and \( e \) and \( \epsilon \) given as parameters. It and its Jacobian matrix are invertible everywhere except for \( r = 0 \).</p>
+<p>Its Jacobian coefficients are defined as follow</p>
 <p>\( J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } \)</p>
 <p>\( J_{12}(r,\theta) = r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } \)</p>
 <p>\( J_{21}(r,\theta) = \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left( 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 } + \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }\)</p>
@@ -624,14 +624,14 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>, the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping. </p>
+<p>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the determinant of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -671,22 +671,22 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For some computations, we need the complete <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix or just the coefficients. The coefficients can be given indendently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
+<p>Compute full Jacobian matrix. </p>
+<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix returned.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The Jacobian matrix returned.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classJacobian.html#aed70a0fd79149f34c3fd630733926f2f" title="Compute the (1,1) coefficient of the Jacobian matrix.">Jacobian::jacobian_11</a> </dd>
+<dl class="section see"><dt>See also</dt><dd>Jacobian::jacobian_11 </dd>
 <dd>
-<a class="el" href="classJacobian.html#acbe992fa6d7f0747647ce2ecf5c71dd8" title="Compute the (1,2) coefficient of the Jacobian matrix.">Jacobian::jacobian_12</a> </dd>
+Jacobian::jacobian_12 </dd>
 <dd>
-<a class="el" href="classJacobian.html#a7509862a562b92cf33249d811732e4bb" title="Compute the (2,1) coefficient of the Jacobian matrix.">Jacobian::jacobian_21</a> </dd>
+Jacobian::jacobian_21 </dd>
 <dd>
-<a class="el" href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3" title="Compute the (2,2) coefficient of the Jacobian matrix.">Jacobian::jacobian_22</a> </dd></dl>
+Jacobian::jacobian_22 </dd></dl>
 
 </div>
 </div>
@@ -716,15 +716,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial x}{\partial r} \).</p>
+<p>Compute the (1,1) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial r} \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -754,15 +754,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial x}{\partial \theta} \).</p>
+<p>Compute the (1,2) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial \theta} \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -792,15 +792,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial y}{\partial r} \).</p>
+<p>Compute the (2,1) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial r} \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. .</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. .</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -830,15 +830,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial y}{\partial \theta} \).</p>
+<p>Compute the (2,2) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial \theta} \).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -878,22 +878,22 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute full inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For some computations, we need the complete inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix or just the coefficients. The coefficients can be given indendently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</p>
+<p>Compute full inverse Jacobian matrix. </p>
+<p>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix returned.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The inverse Jacobian matrix returned.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classJacobian.html#a58765ef06cb343d3b49cdf5cb9d98451" title="Compute the (1,1) coefficient of the inverse Jacobian matrix.">Jacobian::inv_jacobian_11</a> </dd>
+<dl class="section see"><dt>See also</dt><dd>Jacobian::inv_jacobian_11 </dd>
 <dd>
-<a class="el" href="classJacobian.html#a9962f95405d6b19b6065b5a88cb2b30d" title="Compute the (1,2) coefficient of the inverse Jacobian matrix.">Jacobian::inv_jacobian_12</a> </dd>
+Jacobian::inv_jacobian_12 </dd>
 <dd>
-<a class="el" href="classJacobian.html#aa098a842712f5fad5a80d94a82848eb2" title="Compute the (2,1) coefficient of the inverse Jacobian matrix.">Jacobian::inv_jacobian_21</a> </dd>
+Jacobian::inv_jacobian_21 </dd>
 <dd>
-<a class="el" href="classJacobian.html#a42519886c006b8343824532d3f04c983" title="Compute the (2,2) coefficient of the inverse Jacobian matrix.">Jacobian::inv_jacobian_22</a> </dd></dl>
+Jacobian::inv_jacobian_22 </dd></dl>
 
 </div>
 </div>
@@ -923,15 +923,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
+<p>Compute the (1,1) coefficient of the inverse Jacobian matrix. </p>
 <p>Be careful because not all mappings are invertible, especially at the center point.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the inverse Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -961,15 +961,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
+<p>Compute the (1,2) coefficient of the inverse Jacobian matrix. </p>
 <p>Be careful because not all mappings are invertible, especially at the center point.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the inverse Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -999,15 +999,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
+<p>Compute the (2,1) coefficient of the inverse Jacobian matrix. </p>
 <p>Be careful because not all mappings are invertible, especially at the center point.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the inverse Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -1037,15 +1037,15 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
+<p>Compute the (2,2) coefficient of the inverse Jacobian matrix. </p>
 <p>Be careful because not all mappings are invertible, especially at the center point.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -1075,8 +1075,8 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
-<p>The pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix for a Czarny mapping is given by :</p><ul>
+<p>Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
+<p>The pseudo-Cartesian Jacobian matrix for a Czarny mapping is given by :</p><ul>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}, \)</li>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, \)</li>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, \)</li>
@@ -1123,9 +1123,9 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#afcf9d2dca6c2fe57e6c0b84c09b0b370">PseudoCartesianCompatibleMapping</a>.</p>
@@ -1157,9 +1157,9 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#a87ff023bb5db96e733101aa1b19ea7f8">PseudoCartesianCompatibleMapping</a>.</p>
@@ -1191,9 +1191,9 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#aad1eb909fc3971c0f7cf956b9f37940c">PseudoCartesianCompatibleMapping</a>.</p>
@@ -1225,9 +1225,9 @@ template&lt;class X , class Y , class R , class Theta &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classCzarnyToCartesian.html#a40e3ac704c48b6e905a0535c8d256293" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#aba10e56e71e974c1c4907b5d8f41f521">PseudoCartesianCompatibleMapping</a>.</p>

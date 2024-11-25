@@ -155,9 +155,9 @@ class AdvectionPseudoCartesianDomain&lt; Mapping &gt;</h3>
 <p>Define the pseudo-Cartesian domain for the advection. </p>
 <p>The pseudo-Cartesian domain is recommended for not analytically invertible mappings.</p>
 <p>We introduce a circular mapping \( \mathcal{G}\) from the logical domain to the pseudo-Cartesian domain. The circular mapping is analytically invertible.</p>
-<p>The advection field is defined in the physical domain, so we need to define it in the pseudo-Cartesian domain before advecting (AdvectionPseudoCartesianDomain::compute_advection_field). To do so, we use the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix \( J_{\mathcal{F}}J_{\mathcal{G}}^{-1} \). This matrix is invertible :</p>
+<p>The advection field is defined in the physical domain, so we need to define it in the pseudo-Cartesian domain before advecting (AdvectionPseudoCartesianDomain::compute_advection_field). To do so, we use the Jacobian matrix \( J_{\mathcal{F}}J_{\mathcal{G}}^{-1} \). This matrix is invertible :</p>
 <p>\( A_{\text{cart}} = (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} A \).</p>
-<p>The main difficulty is the center point. So for \( r \in [0, \varepsilon] \), we linearize the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix:</p>
+<p>The main difficulty is the center point. So for \( r \in [0, \varepsilon] \), we linearize the Jacobian matrix:</p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (r, \theta) = \left(1 - \frac{r}{\varepsilon} \right) (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (0, \theta) + \frac{r}{\varepsilon} (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (\varepsilon, \theta) \).</p>
 <p>The \( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1} (0, \theta) \) matrices are implemented in the Curvilinear2DToCartesian::to_pseudo_cartesian_jacobian_center_matrix child classes.</p>
 <p>The method to advect is here given by:</p><ul>

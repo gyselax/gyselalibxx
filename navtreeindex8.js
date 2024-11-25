@@ -1,16 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"structperiodic__strips__uniform__2d__9patches_1_1GridX.html":[15,10,2],
-"structperiodic__strips__uniform__2d__9patches_1_1GridY.html":[15,10,3],
-"structperiodic__strips__uniform__2d__9patches_1_1X.html":[15,10,0],
-"structperiodic__strips__uniform__2d__9patches_1_1Y.html":[15,10,1],
-"structphysical__geometry_1_1X.html":[15,11,0],
-"structphysical__geometry_1_1Y.html":[15,11,1],
-"test__cases__adv__field_8hpp_source.html":[16,1,1,2,0],
-"test__utils_8hpp_source.html":[16,2,0,1,3],
-"tests.html":[13],
-"tests_advection.html":[13,0],
-"tests_advection.html#autotoc_md75":[1],
 "tests_advection.html#autotoc_md76":[2],
 "tests_advection.html#autotoc_md77":[3],
 "tests_advection.html#autotoc_md78":[4],

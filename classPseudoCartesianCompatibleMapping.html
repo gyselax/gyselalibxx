@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('classPseudoCartesianCompatibleMapping.
 </div><!--header-->
 <div class="contents">
 
-<p>An operator to calculate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping from the physical domain to the pseudo-Cartesian domain at the central point.  
+<p>An operator to calculate the Jacobian matrix of the mapping from the physical domain to the pseudo-Cartesian domain at the central point.  
  <a href="classPseudoCartesianCompatibleMapping.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PseudoCartesianCompatibleMapping:</div>
@@ -126,31 +126,31 @@ Inheritance diagram for PseudoCartesianCompatibleMapping:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:a70dac40dbdb219ab3f2a775c06f53f74"><td class="memItemLeft" align="right" valign="top"><a id="a70dac40dbdb219ab3f2a775c06f53f74"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
+<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian Jacobian matrix and its inverse. <br /></td></tr>
 <tr class="separator:a70dac40dbdb219ab3f2a775c06f53f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5509bac8df3f0b44c36222b9ac4f537a"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a5509bac8df3f0b44c36222b9ac4f537a">to_pseudo_cartesian_jacobian_center_matrix</a> (<a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const =0</td></tr>
-<tr class="memdesc:a5509bac8df3f0b44c36222b9ac4f537a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#a5509bac8df3f0b44c36222b9ac4f537a">More...</a><br /></td></tr>
+<tr class="memdesc:a5509bac8df3f0b44c36222b9ac4f537a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#a5509bac8df3f0b44c36222b9ac4f537a">More...</a><br /></td></tr>
 <tr class="separator:a5509bac8df3f0b44c36222b9ac4f537a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcf9d2dca6c2fe57e6c0b84c09b0b370"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#afcf9d2dca6c2fe57e6c0b84c09b0b370">to_pseudo_cartesian_jacobian_11_center</a> () const =0</td></tr>
-<tr class="memdesc:afcf9d2dca6c2fe57e6c0b84c09b0b370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#afcf9d2dca6c2fe57e6c0b84c09b0b370">More...</a><br /></td></tr>
+<tr class="memdesc:afcf9d2dca6c2fe57e6c0b84c09b0b370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#afcf9d2dca6c2fe57e6c0b84c09b0b370">More...</a><br /></td></tr>
 <tr class="separator:afcf9d2dca6c2fe57e6c0b84c09b0b370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87ff023bb5db96e733101aa1b19ea7f8"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a87ff023bb5db96e733101aa1b19ea7f8">to_pseudo_cartesian_jacobian_12_center</a> () const =0</td></tr>
-<tr class="memdesc:a87ff023bb5db96e733101aa1b19ea7f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#a87ff023bb5db96e733101aa1b19ea7f8">More...</a><br /></td></tr>
+<tr class="memdesc:a87ff023bb5db96e733101aa1b19ea7f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#a87ff023bb5db96e733101aa1b19ea7f8">More...</a><br /></td></tr>
 <tr class="separator:a87ff023bb5db96e733101aa1b19ea7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad1eb909fc3971c0f7cf956b9f37940c"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#aad1eb909fc3971c0f7cf956b9f37940c">to_pseudo_cartesian_jacobian_21_center</a> () const =0</td></tr>
-<tr class="memdesc:aad1eb909fc3971c0f7cf956b9f37940c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#aad1eb909fc3971c0f7cf956b9f37940c">More...</a><br /></td></tr>
+<tr class="memdesc:aad1eb909fc3971c0f7cf956b9f37940c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#aad1eb909fc3971c0f7cf956b9f37940c">More...</a><br /></td></tr>
 <tr class="separator:aad1eb909fc3971c0f7cf956b9f37940c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba10e56e71e974c1c4907b5d8f41f521"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#aba10e56e71e974c1c4907b5d8f41f521">to_pseudo_cartesian_jacobian_22_center</a> () const =0</td></tr>
-<tr class="memdesc:aba10e56e71e974c1c4907b5d8f41f521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#aba10e56e71e974c1c4907b5d8f41f521">More...</a><br /></td></tr>
+<tr class="memdesc:aba10e56e71e974c1c4907b5d8f41f521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classPseudoCartesianCompatibleMapping.html#aba10e56e71e974c1c4907b5d8f41f521">More...</a><br /></td></tr>
 <tr class="separator:aba10e56e71e974c1c4907b5d8f41f521"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An operator to calculate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping from the physical domain to the pseudo-Cartesian domain at the central point. </p>
-<p>All operators which can calculate the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> at the central point should inherit from this class.</p>
-<p>Some mapping can be difficult to invert especially at the central point. In the case of a non-analytically invertible mapping, we can work in another domain called the pseudo-Cartesian domain. In this domain, it is easier to inverse the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. The idea is detailed in Edoardo Zoni's article (<em>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</em>, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>)</p>
+<div class="textblock"><p>An operator to calculate the Jacobian matrix of the mapping from the physical domain to the pseudo-Cartesian domain at the central point. </p>
+<p>All operators which can calculate the pseudo-Cartesian Jacobian at the central point should inherit from this class.</p>
+<p>Some mapping can be difficult to invert especially at the central point. In the case of a non-analytically invertible mapping, we can work in another domain called the pseudo-Cartesian domain. In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in Edoardo Zoni's article (<em>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</em>, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>)</p>
 <p>The mapping maps from the logical domain to the physical domain \( \mathcal{F}: (r,\theta) \mapsto (x, y)\). The pseudo-Cartesian domain is built with \( \mathcal{F} \) and using the circular mapping \( \mathcal{G} \):</p><ul>
 <li>\( \mathcal{G}_{11}(r, \theta) = \cos(\theta), \qquad\quad \mathcal{G}_{12}(r, \theta) = \sin(\theta) \),</li>
 <li>\( \mathcal{G}_{21}(r, \theta) = -\frac{1}{r}\sin(\theta), \qquad\quad \mathcal{G}_{22}(r, \theta) = \frac{1}{r}\cos(\theta) \).</li>
@@ -161,7 +161,7 @@ Public Member Functions</h2></td></tr>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta) - \partial_{r \theta} y (0, \theta) \sin(\theta), \)</li>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta) + \partial_{r \theta} y (0, \theta) \cos(\theta). \)</li>
 </ul>
-<p>The pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point, \( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) \), is obtained by inversing this matrix.</p>
+<p>The pseudo-Cartesian Jacobian matrix at the central point, \( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) \), is obtained by inversing this matrix.</p>
 <p>For analytical invertible mappings, this technique is not necessary, but it is still possible to define and use the matrix in order to handle problems in a general manner. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5509bac8df3f0b44c36222b9ac4f537a"></a>
@@ -188,7 +188,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
+<p>Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The pseudo-Cartesian matrix evaluated at the central point.</td></tr>
@@ -228,7 +228,7 @@ BslAdvection </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = \partial_r x (0, \theta) \cos(\theta) - \partial_{r \theta} x (0, \theta) \sin(\theta) \)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -236,7 +236,7 @@ BslAdvection </dd>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </dd></dl>
 
 <p>Implemented in <a class="el" href="classDiscreteToCartesian.html#a0503eebb312b37e8b891120b36036a7a">DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#a58e28af487947147efaca1b6f2bb141e">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#aebe292dbd96deb0aeff8a5b6106fe1b3">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
@@ -265,7 +265,7 @@ BslAdvection </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = \partial_r x (0, \theta) \sin(\theta) + \partial_{r \theta} x (0, \theta) \cos(\theta) \)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -273,7 +273,7 @@ BslAdvection </dd>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </dd></dl>
 
 <p>Implemented in <a class="el" href="classDiscreteToCartesian.html#abe8925e34b2178056ec22c96ea8503f9">DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#ae84331a4bcc0faa0fb536bf6c5e310dd">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a19d35601942a6db55b4094763744bacc">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
@@ -302,7 +302,7 @@ BslAdvection </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta) - \partial_{r \theta} y (0, \theta) \sin(\theta)\)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -310,7 +310,7 @@ BslAdvection </dd>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </dd></dl>
 
 <p>Implemented in <a class="el" href="classDiscreteToCartesian.html#ac53184ed0d596f38e8d982fe6f8bdab3">DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#abc54fd080a650c411f5693c4e3d4c2c6">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#ade17060359b433f34e7259c733d63ca4">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 
@@ -339,7 +339,7 @@ BslAdvection </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
+<p>Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
 <p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta) + \partial_{r \theta} y (0, \theta) \cos(\theta) \)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -347,7 +347,7 @@ BslAdvection </dd>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </dd></dl>
 
 <p>Implemented in <a class="el" href="classDiscreteToCartesian.html#ac87a9b1e640011bcffe9e27af0bcfd5d">DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;</a>, <a class="el" href="classCzarnyToCartesian.html#afc6acee06607ab507ec6b0fe764967d4">CzarnyToCartesian&lt; X, Y, R, Theta &gt;</a>, and <a class="el" href="classCircularToCartesian.html#a272a0287e4f3467a683f6b2f3c0eb96a">CircularToCartesian&lt; X, Y, R, Theta &gt;</a>.</p>
 

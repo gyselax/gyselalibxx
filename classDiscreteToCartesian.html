@@ -116,11 +116,9 @@ Inheritance diagram for DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta,
  <div class="center">
   <img src="classDiscreteToCartesian.png" usemap="#DiscreteToCartesian_3C_20X_2C_20Y_2C_20SplineEvaluator_2C_20R_2C_20Theta_2C_20MemorySpace_20_3E_map" alt=""/>
   <map id="DiscreteToCartesian_3C_20X_2C_20Y_2C_20SplineEvaluator_2C_20R_2C_20Theta_2C_20MemorySpace_20_3E_map" name="DiscreteToCartesian_3C_20X_2C_20Y_2C_20SplineEvaluator_2C_20R_2C_20Theta_2C_20MemorySpace_20_3E_map">
-<area href="classCoordinateConverter.html" alt="CoordinateConverter&lt; ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt;, ddc::Coordinate&lt; X, Y &gt; &gt;" shape="rect" coords="0,56,1058,80"/>
-<area href="classNonAnalyticalJacobian.html" alt="NonAnalyticalJacobian&lt; ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; &gt;" shape="rect" coords="1068,56,2126,80"/>
-<area href="classPseudoCartesianCompatibleMapping.html" title="An operator to calculate the Jacobian matrix of the mapping from the physical domain to the pseudo-Ca..." alt="PseudoCartesianCompatibleMapping" shape="rect" coords="2136,56,3194,80"/>
-<area href="classCurvilinear2DToCartesian.html" alt="Curvilinear2DToCartesian&lt; X, Y, typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt;" shape="rect" coords="3204,56,4262,80"/>
-<area href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse." alt="Jacobian&lt; PositionCoordinate &gt;" shape="rect" coords="1068,0,2126,24"/>
+<area href="classCoordinateConverter.html" alt="CoordinateConverter&lt; ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt;, ddc::Coordinate&lt; X, Y &gt; &gt;" shape="rect" coords="0,0,1058,24"/>
+<area href="classPseudoCartesianCompatibleMapping.html" title="An operator to calculate the Jacobian matrix of the mapping from the physical domain to the pseudo-Ca..." alt="PseudoCartesianCompatibleMapping" shape="rect" coords="1068,0,2126,24"/>
+<area href="classCurvilinear2DToCartesian.html" alt="Curvilinear2DToCartesian&lt; X, Y, typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt;" shape="rect" coords="2136,0,3194,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -161,7 +159,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="inherit_header pub_types_classPseudoCartesianCompatibleMapping"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classPseudoCartesianCompatibleMapping')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classPseudoCartesianCompatibleMapping.html">PseudoCartesianCompatibleMapping</a></td></tr>
 <tr class="memitem:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="memItemLeft" align="right" valign="top"><a id="a70dac40dbdb219ab3f2a775c06f53f74"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix and its inverse. <br /></td></tr>
+<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian Jacobian matrix and its inverse. <br /></td></tr>
 <tr class="separator:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classCurvilinear2DToCartesian"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classCurvilinear2DToCartesian')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classCurvilinear2DToCartesian.html">Curvilinear2DToCartesian&lt; X, Y, typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt;</a></td></tr>
 <tr class="memitem:a4b89f1e58ae38bc6164cdf72825647e2 inherit pub_types_classCurvilinear2DToCartesian"><td class="memItemLeft" align="right" valign="top"><a id="a4b89f1e58ae38bc6164cdf72825647e2"></a>
@@ -189,35 +187,38 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad065663545d04ef95605491b2a623f71"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ad065663545d04ef95605491b2a623f71">operator()</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const final</td></tr>
 <tr class="memdesc:ad065663545d04ef95605491b2a623f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <a href="classDiscreteToCartesian.html#ad065663545d04ef95605491b2a623f71">More...</a><br /></td></tr>
 <tr class="separator:ad065663545d04ef95605491b2a623f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92ce5b12b2180cf02e0a86a1d3822a80"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a92ce5b12b2180cf02e0a86a1d3822a80">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord, <a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const final</td></tr>
-<tr class="memdesc:a92ce5b12b2180cf02e0a86a1d3822a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classDiscreteToCartesian.html#a92ce5b12b2180cf02e0a86a1d3822a80">More...</a><br /></td></tr>
-<tr class="separator:a92ce5b12b2180cf02e0a86a1d3822a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7205fa1c05ec182e784fcc8d6e17a9"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aea7205fa1c05ec182e784fcc8d6e17a9">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:aea7205fa1c05ec182e784fcc8d6e17a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classDiscreteToCartesian.html#aea7205fa1c05ec182e784fcc8d6e17a9">More...</a><br /></td></tr>
-<tr class="separator:aea7205fa1c05ec182e784fcc8d6e17a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47778edf570f9a63d365421ee114ef12"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a47778edf570f9a63d365421ee114ef12">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a47778edf570f9a63d365421ee114ef12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classDiscreteToCartesian.html#a47778edf570f9a63d365421ee114ef12">More...</a><br /></td></tr>
-<tr class="separator:a47778edf570f9a63d365421ee114ef12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fe3c6f3dde48ecdc751d9d17c4d78c8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a2fe3c6f3dde48ecdc751d9d17c4d78c8">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a2fe3c6f3dde48ecdc751d9d17c4d78c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classDiscreteToCartesian.html#a2fe3c6f3dde48ecdc751d9d17c4d78c8">More...</a><br /></td></tr>
-<tr class="separator:a2fe3c6f3dde48ecdc751d9d17c4d78c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32292d1423a3181797d4dc3a1e7a6ddc"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a32292d1423a3181797d4dc3a1e7a6ddc">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a32292d1423a3181797d4dc3a1e7a6ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classDiscreteToCartesian.html#a32292d1423a3181797d4dc3a1e7a6ddc">More...</a><br /></td></tr>
-<tr class="separator:a32292d1423a3181797d4dc3a1e7a6ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76bde74e050bc01bd6c1b202aacc6e99"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a76bde74e050bc01bd6c1b202aacc6e99">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord, <a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const</td></tr>
+<tr class="memdesc:a76bde74e050bc01bd6c1b202aacc6e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <a href="classDiscreteToCartesian.html#a76bde74e050bc01bd6c1b202aacc6e99">More...</a><br /></td></tr>
+<tr class="separator:a76bde74e050bc01bd6c1b202aacc6e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e87d92fe31c692a1af0654b6dafc7da"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a5e87d92fe31c692a1af0654b6dafc7da">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a5e87d92fe31c692a1af0654b6dafc7da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <a href="classDiscreteToCartesian.html#a5e87d92fe31c692a1af0654b6dafc7da">More...</a><br /></td></tr>
+<tr class="separator:a5e87d92fe31c692a1af0654b6dafc7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa610388748eb8edbd00e0a96c35eefb0"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aa610388748eb8edbd00e0a96c35eefb0">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:aa610388748eb8edbd00e0a96c35eefb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <a href="classDiscreteToCartesian.html#aa610388748eb8edbd00e0a96c35eefb0">More...</a><br /></td></tr>
+<tr class="separator:aa610388748eb8edbd00e0a96c35eefb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3eab18bbc994e9b2c11a7390cc26b28"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ad3eab18bbc994e9b2c11a7390cc26b28">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:ad3eab18bbc994e9b2c11a7390cc26b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <a href="classDiscreteToCartesian.html#ad3eab18bbc994e9b2c11a7390cc26b28">More...</a><br /></td></tr>
+<tr class="separator:ad3eab18bbc994e9b2c11a7390cc26b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab37474592e73c91bdba2fd9d64cbd623"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ab37474592e73c91bdba2fd9d64cbd623">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:ab37474592e73c91bdba2fd9d64cbd623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <a href="classDiscreteToCartesian.html#ab37474592e73c91bdba2fd9d64cbd623">More...</a><br /></td></tr>
+<tr class="separator:ab37474592e73c91bdba2fd9d64cbd623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a23d7cd9954ebc51a700d7029b46b1f"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a9a23d7cd9954ebc51a700d7029b46b1f">jacobian</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a9a23d7cd9954ebc51a700d7029b46b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <a href="classDiscreteToCartesian.html#a9a23d7cd9954ebc51a700d7029b46b1f">More...</a><br /></td></tr>
+<tr class="separator:a9a23d7cd9954ebc51a700d7029b46b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60756c019401b5f55ab23da16a7200a3"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3">to_pseudo_cartesian_jacobian_center_matrix</a> (<a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const final</td></tr>
-<tr class="memdesc:a60756c019401b5f55ab23da16a7200a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3">More...</a><br /></td></tr>
+<tr class="memdesc:a60756c019401b5f55ab23da16a7200a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <a href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3">More...</a><br /></td></tr>
 <tr class="separator:a60756c019401b5f55ab23da16a7200a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0503eebb312b37e8b891120b36036a7a"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a0503eebb312b37e8b891120b36036a7a">to_pseudo_cartesian_jacobian_11_center</a> () const final</td></tr>
-<tr class="memdesc:a0503eebb312b37e8b891120b36036a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classDiscreteToCartesian.html#a0503eebb312b37e8b891120b36036a7a">More...</a><br /></td></tr>
+<tr class="memdesc:a0503eebb312b37e8b891120b36036a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classDiscreteToCartesian.html#a0503eebb312b37e8b891120b36036a7a">More...</a><br /></td></tr>
 <tr class="separator:a0503eebb312b37e8b891120b36036a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe8925e34b2178056ec22c96ea8503f9"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#abe8925e34b2178056ec22c96ea8503f9">to_pseudo_cartesian_jacobian_12_center</a> () const final</td></tr>
-<tr class="memdesc:abe8925e34b2178056ec22c96ea8503f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classDiscreteToCartesian.html#abe8925e34b2178056ec22c96ea8503f9">More...</a><br /></td></tr>
+<tr class="memdesc:abe8925e34b2178056ec22c96ea8503f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classDiscreteToCartesian.html#abe8925e34b2178056ec22c96ea8503f9">More...</a><br /></td></tr>
 <tr class="separator:abe8925e34b2178056ec22c96ea8503f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac53184ed0d596f38e8d982fe6f8bdab3"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ac53184ed0d596f38e8d982fe6f8bdab3">to_pseudo_cartesian_jacobian_21_center</a> () const final</td></tr>
-<tr class="memdesc:ac53184ed0d596f38e8d982fe6f8bdab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classDiscreteToCartesian.html#ac53184ed0d596f38e8d982fe6f8bdab3">More...</a><br /></td></tr>
+<tr class="memdesc:ac53184ed0d596f38e8d982fe6f8bdab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classDiscreteToCartesian.html#ac53184ed0d596f38e8d982fe6f8bdab3">More...</a><br /></td></tr>
 <tr class="separator:ac53184ed0d596f38e8d982fe6f8bdab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac87a9b1e640011bcffe9e27af0bcfd5d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ac87a9b1e640011bcffe9e27af0bcfd5d">to_pseudo_cartesian_jacobian_22_center</a> () const final</td></tr>
-<tr class="memdesc:ac87a9b1e640011bcffe9e27af0bcfd5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.  <a href="classDiscreteToCartesian.html#ac87a9b1e640011bcffe9e27af0bcfd5d">More...</a><br /></td></tr>
+<tr class="memdesc:ac87a9b1e640011bcffe9e27af0bcfd5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <a href="classDiscreteToCartesian.html#ac87a9b1e640011bcffe9e27af0bcfd5d">More...</a><br /></td></tr>
 <tr class="separator:ac87a9b1e640011bcffe9e27af0bcfd5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9ae64db98cdc2e30f92cdf913147b9e"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION const ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ad9ae64db98cdc2e30f92cdf913147b9e">control_point</a> (ddc::DiscreteElement&lt; <a class="el" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> &gt; const &amp;el) const</td></tr>
 <tr class="memdesc:ad9ae64db98cdc2e30f92cdf913147b9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a control point of the mapping on B-splines.  <a href="classDiscreteToCartesian.html#ad9ae64db98cdc2e30f92cdf913147b9e">More...</a><br /></td></tr>
@@ -226,59 +227,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e7ef7ef5ff4be5859b156ea9275b083 inherit pub_methods_classCoordinateConverter"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCoordinateConverter.html#a4e7ef7ef5ff4be5859b156ea9275b083">operator()</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord) const=0</td></tr>
 <tr class="memdesc:a4e7ef7ef5ff4be5859b156ea9275b083 inherit pub_methods_classCoordinateConverter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the coordinate to the equivalent coordinate in a different coordinate system.  <a href="classCoordinateConverter.html#a4e7ef7ef5ff4be5859b156ea9275b083">More...</a><br /></td></tr>
 <tr class="separator:a4e7ef7ef5ff4be5859b156ea9275b083 inherit pub_methods_classCoordinateConverter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classNonAnalyticalJacobian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNonAnalyticalJacobian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNonAnalyticalJacobian.html">NonAnalyticalJacobian&lt; ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; &gt;</a></td></tr>
-<tr class="memitem:a6e304cd20b310fa3ecb1fc2e5cd38389 inherit pub_methods_classNonAnalyticalJacobian"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonAnalyticalJacobian.html#a6e304cd20b310fa3ecb1fc2e5cd38389">jacobian</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a6e304cd20b310fa3ecb1fc2e5cd38389 inherit pub_methods_classNonAnalyticalJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>, the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping.  <a href="classNonAnalyticalJacobian.html#a6e304cd20b310fa3ecb1fc2e5cd38389">More...</a><br /></td></tr>
-<tr class="separator:a6e304cd20b310fa3ecb1fc2e5cd38389 inherit pub_methods_classNonAnalyticalJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdbf9d1f8128540bb0f0de7ad43f03a1 inherit pub_methods_classNonAnalyticalJacobian"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonAnalyticalJacobian.html#afdbf9d1f8128540bb0f0de7ad43f03a1">inv_jacobian_matrix</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const final</td></tr>
-<tr class="memdesc:afdbf9d1f8128540bb0f0de7ad43f03a1 inherit pub_methods_classNonAnalyticalJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classNonAnalyticalJacobian.html#afdbf9d1f8128540bb0f0de7ad43f03a1">More...</a><br /></td></tr>
-<tr class="separator:afdbf9d1f8128540bb0f0de7ad43f03a1 inherit pub_methods_classNonAnalyticalJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdd79e5d79e2b335227a81740c56d375 inherit pub_methods_classNonAnalyticalJacobian"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonAnalyticalJacobian.html#acdd79e5d79e2b335227a81740c56d375">inv_jacobian_11</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:acdd79e5d79e2b335227a81740c56d375 inherit pub_methods_classNonAnalyticalJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classNonAnalyticalJacobian.html#acdd79e5d79e2b335227a81740c56d375">More...</a><br /></td></tr>
-<tr class="separator:acdd79e5d79e2b335227a81740c56d375 inherit pub_methods_classNonAnalyticalJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1156003966a5ed72cfdce2fc10cfabc8 inherit pub_methods_classNonAnalyticalJacobian"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonAnalyticalJacobian.html#a1156003966a5ed72cfdce2fc10cfabc8">inv_jacobian_12</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a1156003966a5ed72cfdce2fc10cfabc8 inherit pub_methods_classNonAnalyticalJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classNonAnalyticalJacobian.html#a1156003966a5ed72cfdce2fc10cfabc8">More...</a><br /></td></tr>
-<tr class="separator:a1156003966a5ed72cfdce2fc10cfabc8 inherit pub_methods_classNonAnalyticalJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ebc3981218d5a2f1190e52368a81184 inherit pub_methods_classNonAnalyticalJacobian"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonAnalyticalJacobian.html#a3ebc3981218d5a2f1190e52368a81184">inv_jacobian_21</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a3ebc3981218d5a2f1190e52368a81184 inherit pub_methods_classNonAnalyticalJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classNonAnalyticalJacobian.html#a3ebc3981218d5a2f1190e52368a81184">More...</a><br /></td></tr>
-<tr class="separator:a3ebc3981218d5a2f1190e52368a81184 inherit pub_methods_classNonAnalyticalJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11d03e1f0b98864ed59f11bedbd0af16 inherit pub_methods_classNonAnalyticalJacobian"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonAnalyticalJacobian.html#a11d03e1f0b98864ed59f11bedbd0af16">inv_jacobian_22</a> (ddc::Coordinate&lt; typename SplineEvaluator::continuous_dimension_type1, typename SplineEvaluator::continuous_dimension_type2 &gt; const &amp;coord) const final</td></tr>
-<tr class="memdesc:a11d03e1f0b98864ed59f11bedbd0af16 inherit pub_methods_classNonAnalyticalJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classNonAnalyticalJacobian.html#a11d03e1f0b98864ed59f11bedbd0af16">More...</a><br /></td></tr>
-<tr class="separator:a11d03e1f0b98864ed59f11bedbd0af16 inherit pub_methods_classNonAnalyticalJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classJacobian"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classJacobian')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classJacobian.html">Jacobian&lt; PositionCoordinate &gt;</a></td></tr>
-<tr class="memitem:a4caf27dda3330406918f8c7e5e04ccd1 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1">jacobian</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:a4caf27dda3330406918f8c7e5e04ccd1 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a>, the determinant of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix of the mapping.  <a href="classJacobian.html#a4caf27dda3330406918f8c7e5e04ccd1">More...</a><br /></td></tr>
-<tr class="separator:a4caf27dda3330406918f8c7e5e04ccd1 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44dfab8bbaa4443771f4a0b3f276258d inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">jacobian_matrix</a> (PositionCoordinate const &amp;coord, Matrix_2x2 &amp;matrix) const =0</td></tr>
-<tr class="memdesc:a44dfab8bbaa4443771f4a0b3f276258d inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a44dfab8bbaa4443771f4a0b3f276258d">More...</a><br /></td></tr>
-<tr class="separator:a44dfab8bbaa4443771f4a0b3f276258d inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed70a0fd79149f34c3fd630733926f2f inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#aed70a0fd79149f34c3fd630733926f2f">jacobian_11</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:aed70a0fd79149f34c3fd630733926f2f inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#aed70a0fd79149f34c3fd630733926f2f">More...</a><br /></td></tr>
-<tr class="separator:aed70a0fd79149f34c3fd630733926f2f inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbe992fa6d7f0747647ce2ecf5c71dd8 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#acbe992fa6d7f0747647ce2ecf5c71dd8">jacobian_12</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:acbe992fa6d7f0747647ce2ecf5c71dd8 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#acbe992fa6d7f0747647ce2ecf5c71dd8">More...</a><br /></td></tr>
-<tr class="separator:acbe992fa6d7f0747647ce2ecf5c71dd8 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7509862a562b92cf33249d811732e4bb inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a7509862a562b92cf33249d811732e4bb">jacobian_21</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:a7509862a562b92cf33249d811732e4bb inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a7509862a562b92cf33249d811732e4bb">More...</a><br /></td></tr>
-<tr class="separator:a7509862a562b92cf33249d811732e4bb inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac98e37f8fc996ebf1f2fa732e1c69ef3 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3">jacobian_22</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:ac98e37f8fc996ebf1f2fa732e1c69ef3 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#ac98e37f8fc996ebf1f2fa732e1c69ef3">More...</a><br /></td></tr>
-<tr class="separator:ac98e37f8fc996ebf1f2fa732e1c69ef3 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d0d12c907837c1521feaf2eb57958c6 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">inv_jacobian_matrix</a> (PositionCoordinate const &amp;coord, Matrix_2x2 &amp;matrix) const =0</td></tr>
-<tr class="memdesc:a2d0d12c907837c1521feaf2eb57958c6 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a2d0d12c907837c1521feaf2eb57958c6">More...</a><br /></td></tr>
-<tr class="separator:a2d0d12c907837c1521feaf2eb57958c6 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58765ef06cb343d3b49cdf5cb9d98451 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a58765ef06cb343d3b49cdf5cb9d98451">inv_jacobian_11</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:a58765ef06cb343d3b49cdf5cb9d98451 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a58765ef06cb343d3b49cdf5cb9d98451">More...</a><br /></td></tr>
-<tr class="separator:a58765ef06cb343d3b49cdf5cb9d98451 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9962f95405d6b19b6065b5a88cb2b30d inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a9962f95405d6b19b6065b5a88cb2b30d">inv_jacobian_12</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:a9962f95405d6b19b6065b5a88cb2b30d inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a9962f95405d6b19b6065b5a88cb2b30d">More...</a><br /></td></tr>
-<tr class="separator:a9962f95405d6b19b6065b5a88cb2b30d inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa098a842712f5fad5a80d94a82848eb2 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#aa098a842712f5fad5a80d94a82848eb2">inv_jacobian_21</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:aa098a842712f5fad5a80d94a82848eb2 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#aa098a842712f5fad5a80d94a82848eb2">More...</a><br /></td></tr>
-<tr class="separator:aa098a842712f5fad5a80d94a82848eb2 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42519886c006b8343824532d3f04c983 inherit pub_methods_classJacobian"><td class="memItemLeft" align="right" valign="top">virtual KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJacobian.html#a42519886c006b8343824532d3f04c983">inv_jacobian_22</a> (PositionCoordinate const &amp;coord) const =0</td></tr>
-<tr class="memdesc:a42519886c006b8343824532d3f04c983 inherit pub_methods_classJacobian"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.  <a href="classJacobian.html#a42519886c006b8343824532d3f04c983">More...</a><br /></td></tr>
-<tr class="separator:a42519886c006b8343824532d3f04c983 inherit pub_methods_classJacobian"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class X, class Y, class SplineEvaluator, class R = typename SplineEvaluator::continuous_dimension_type1, class Theta = typename SplineEvaluator::continuous_dimension_type2, class MemorySpace = typename SplineEvaluator::memory_space&gt;<br />
@@ -399,8 +347,8 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 
 </div>
 </div>
-<a id="a92ce5b12b2180cf02e0a86a1d3822a80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92ce5b12b2180cf02e0a86a1d3822a80">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
+<a id="a76bde74e050bc01bd6c1b202aacc6e99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76bde74e050bc01bd6c1b202aacc6e99">&#9670;&nbsp;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -430,17 +378,17 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For some computations, we need the complete <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix or just the coefficients. The coefficients can be given indendently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
+<p>Compute full Jacobian matrix. </p>
+<p>For some computations, we need the complete Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions jacobian_11, jacobian_12, jacobian_21 and jacobian_22.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix returned.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The Jacobian matrix returned.</td></tr>
   </table>
   </dd>
 </dl>
@@ -454,8 +402,8 @@ Curvilinear2DToCartesian::jacobian_22 </dd></dl>
 
 </div>
 </div>
-<a id="aea7205fa1c05ec182e784fcc8d6e17a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea7205fa1c05ec182e784fcc8d6e17a9">&#9670;&nbsp;</a></span>jacobian_11()</h2>
+<a id="a5e87d92fe31c692a1af0654b6dafc7da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e87d92fe31c692a1af0654b6dafc7da">&#9670;&nbsp;</a></span>jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,26 +423,26 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial x}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines \( \frac{\partial x}{\partial r} (r,\theta)= \sum_k c_{x,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives are implemented in SplineEvaluator2D).</p>
+<p>Compute the (1,1) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,1) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes the derivatives of B-splines \( \frac{\partial x}{\partial r} (r,\theta)= \sum_k c_{x,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives are implemented in SplineEvaluator2D).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,1) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="a47778edf570f9a63d365421ee114ef12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47778edf570f9a63d365421ee114ef12">&#9670;&nbsp;</a></span>jacobian_12()</h2>
+<a id="aa610388748eb8edbd00e0a96c35eefb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa610388748eb8edbd00e0a96c35eefb0">&#9670;&nbsp;</a></span>jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -514,26 +462,26 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial x}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial x}{\partial \theta}(r,\theta) = \sum_k c_{x,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in SplineEvaluator2D).</p>
+<p>Compute the (1,2) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (1,2) coefficient of the Jacobian matrix is given by \( \frac{\partial x}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial x}{\partial \theta}(r,\theta) = \sum_k c_{x,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in SplineEvaluator2D).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (1,2) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="a2fe3c6f3dde48ecdc751d9d17c4d78c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fe3c6f3dde48ecdc751d9d17c4d78c8">&#9670;&nbsp;</a></span>jacobian_21()</h2>
+<a id="ad3eab18bbc994e9b2c11a7390cc26b28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3eab18bbc994e9b2c11a7390cc26b28">&#9670;&nbsp;</a></span>jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -553,26 +501,26 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial y}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial r}(r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives of B-splines are implemented in SplineEvaluator2D).</p>
+<p>Compute the (2,1) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,1) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial r} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial r}(r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial r}(r,\theta)\) (the derivatives of B-splines are implemented in SplineEvaluator2D).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. .</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. .</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,1) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>SplineEvaluator2D </dd></dl>
 
 </div>
 </div>
-<a id="a32292d1423a3181797d4dc3a1e7a6ddc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32292d1423a3181797d4dc3a1e7a6ddc">&#9670;&nbsp;</a></span>jacobian_22()</h2>
+<a id="ab37474592e73c91bdba2fd9d64cbd623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab37474592e73c91bdba2fd9d64cbd623">&#9670;&nbsp;</a></span>jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -592,21 +540,58 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. </p>
-<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix is given by \( \frac{\partial y}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial \theta} (r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in SplineEvaluator2D).</p>
+<p>Compute the (2,2) coefficient of the Jacobian matrix. </p>
+<p>For a mapping given by \( \mathcal{F} : (r,\theta)\mapsto (x,y) \), the (2,2) coefficient of the Jacobian matrix is given by \( \frac{\partial y}{\partial \theta} \). As the mapping is decomposed on B-splines, it means it computes \( \frac{\partial y}{\partial \theta} (r,\theta) = \sum_k c_{y,k} \frac{\partial B_k}{\partial \theta}(r,\theta) \) (the derivatives of B-splines are implemented in SplineEvaluator2D).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>SplineEvaluator2D </dd></dl>
+
+</div>
+</div>
+<a id="a9a23d7cd9954ebc51a700d7029b46b1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a23d7cd9954ebc51a700d7029b46b1f">&#9670;&nbsp;</a></span>jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class X , class Y , class SplineEvaluator , class R  = typename SplineEvaluator::continuous_dimension_type1, class Theta  = typename SplineEvaluator::continuous_dimension_type2, class MemorySpace  = typename SplineEvaluator::memory_space&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian </td>
+          <td>(</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aaa6131eada0fa36691c0bf003f76271a">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a1bc95c28b262b8bac0f84ef091a19cf8">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A double with the value of the determinant of the Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -636,8 +621,8 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 </table>
 </div><div class="memdoc">
 
-<p>Compute the full <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
-<p>The discrete mappings can be difficult to inverse especially at the central point. In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain. In this domain, it is easier to inverse the <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix. The idea is detailed in Edoardo Zoni's article (<em>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</em>, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>)</p>
+<p>Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
+<p>The discrete mappings can be difficult to inverse especially at the central point. In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain. In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in Edoardo Zoni's article (<em>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</em>, <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>)</p>
 <p>The current mapping maps from the logical domain to the physical domain \( \mathcal{F}: (r,\theta) \mapsto (x, y)\). The pseudo-Cartesian domain is built with \( \mathcal{F} \) and using the circular mapping \( \mathcal{G} \):</p><ul>
 <li>\( \mathcal{G}_{11}(r, \theta) = \cos(\theta), \qquad\quad \mathcal{G}_{12}(r, \theta) = \sin(\theta) \),</li>
 <li>\( \mathcal{G}_{21}(r, \theta) = -\frac{1}{r}\sin(\theta), \qquad\quad \mathcal{G}_{22}(r, \theta) = \frac{1}{r}\cos(\theta) \).</li>
@@ -648,7 +633,7 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta) - \partial_{r \theta} y (0, \theta) \sin(\theta), \)</li>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta) + \partial_{r \theta} y (0, \theta) \cos(\theta). \)</li>
 </ul>
-<p>So the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point, \( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) \), is obtained by inversing this matrix.</p>
+<p>So the pseudo-Cartesian Jacobian matrix at the central point, \( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) \), is obtained by inversing this matrix.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The pseudo-Cartesian matrix evaluated at the central point.</td></tr>
@@ -690,8 +675,8 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<p>Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#afcf9d2dca6c2fe57e6c0b84c09b0b370">PseudoCartesianCompatibleMapping</a>.</p>
@@ -723,8 +708,8 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<p>Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#a87ff023bb5db96e733101aa1b19ea7f8">PseudoCartesianCompatibleMapping</a>.</p>
@@ -756,8 +741,8 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<p>Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#aad1eb909fc3971c0f7cf956b9f37940c">PseudoCartesianCompatibleMapping</a>.</p>
@@ -789,8 +774,8 @@ template&lt;class X , class Y , class SplineEvaluator , class R  = typename Spli
 </table>
 </div><div class="memdoc">
 
-<p>Compute the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point. </p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian <a class="el" href="classJacobian.html" title="An operator to calculate the Jacobian matrix and its inverse.">Jacobian</a> matrix at the central point.</dd></dl>
+<p>Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
+<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html#a60756c019401b5f55ab23da16a7200a3" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
 
 <p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#aba10e56e71e974c1c4907b5d8f41f521">PseudoCartesianCompatibleMapping</a>.</p>
