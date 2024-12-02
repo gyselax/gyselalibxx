@@ -1,0 +1,17 @@
+name: Draft flags
+
+on:
+  pull_request:
+    types:
+      - converted_to_draft
+
+jobs:
+  Remove_flags:
+    name: Remove flags
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: |
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"

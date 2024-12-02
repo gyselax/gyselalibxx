@@ -1,0 +1,39 @@
+name: Install linux dependencies for static analyses
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup tar to allow cache to use sudo
+      run: |
+        sudo chown root /bin/tar
+        sudo chmod u+s /bin/tar
+      shell: bash
+    - name: Restore cached cppcheck
+      id: cache-cppcheck-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          /usr/local/share/Cppcheck/
+          /usr/local/bin/cppcheck
+        key: cppcheck-2-14-2
+    - name: Install cppcheck
+      if: steps.cache-cppcheck-restore.outputs.cache-hit != 'true'
+      run: |
+        git clone -b 2.14.2 https://github.com/danmar/cppcheck.git
+        cd cppcheck
+        cmake -S . -B build
+        cmake --build build
+        sudo cmake --install build
+        cd ..
+        rm -rf cppcheck
+      shell: bash
+    - name: Save cppcache
+      id: cache-cppcheck-save
+      if: steps.cache-cppcheck-restore.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          /usr/local/share/Cppcheck/
+          /usr/local/bin/cppcheck
+        key: ${{ steps.cache-cppcheck-restore.outputs.cache-primary-key }}
+

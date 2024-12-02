@@ -1,0 +1,9 @@
+name: Install Python dependencies for static analyses
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        pip install --upgrade pip
+        pip install numpy
+      shell: bash

@@ -1,0 +1,78 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+    - 'main'
+
+
+jobs:
+  docker:
+    if: github.repository == 'gyselax/gyselalibxx'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push to tag
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/gyselalibxx_env
+          cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+          pull: true
+          push: true
+          tags: ghcr.io/gyselax/gyselalibxx_env:${{ inputs.SHA }}
+      - name: Build and push latest
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/gyselalibxx_env
+          cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
+          pull: true
+          push: true
+          tags: ghcr.io/gyselax/gyselalibxx_env:latest
+
+  Docs:
+    if: github.repository == 'gyselax/gyselalibxx'
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: code_branch
+      - name: Checkout documentation
+        uses: actions/checkout@v4
+        with:
+          ref: documentation
+          path: doc_branch
+      - name: Install doxygen
+        run: |
+          sudo apt install doxygen
+        shell: bash
+      - name: Generate docs
+        run: |
+          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs code_branch
+          cmake --build build-docs
+        shell: bash
+      - name: Update documentation
+        run: |
+          cd doc_branch
+          git rm -r *
+          cp -r ../build-docs/docs/html/* .
+          git add .
+          git config --global user.name "GitHub CI Documentation builder"
+          git config --global user.email "username@users.noreply.github.com"
+          git commit -m "Update docs" || true
+          git push
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}

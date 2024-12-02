@@ -1,114 +1,128 @@
-name: docker
+name: Acceptance tests
 
 on:
-  push:
-    branches:
-    - 'main'
-  pull_request: 
-jobs:
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-    -
-      name: Checkout
-      uses: actions/checkout@v4
-    -
-      name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-    -
-      name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    -
-      name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    -
-      name: Build and push to tag
-      uses: docker/build-push-action@v3
-      with:
-        context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
-        pull: true
-        push: true
-        tags: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-    -
-      name: Build and push latest
-      if: github.event_name == 'push' && github.ref_name == 'main'
-      uses: docker/build-push-action@v3
-      with:
-        context: ./docker/gyselalibxx_env
-        cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
-        pull: true
-        push: true
-        tags: ghcr.io/gyselax/gyselalibxx_env:latest
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  merge_group:
+    types:
+      - checks_requested
 
-  tests:
+jobs:
+  pre_job:
+    # continue-on-error: true # Uncomment once integration is finished
     runs-on: ubuntu-latest
-    needs: docker
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
-      options: --user root
+    if: github.event.pull_request.draft == false
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          # All of these options are optional, so you can remove them if you are happy with the defaults
+          skip_after_successful_duplicate: 'true'
+          paths:
+            - "src/**/*.hpp"
+            - "src/**/*.cpp"
+            - "tests/**/*.hpp"
+            - "tests/**/*.cpp"
+            - "simulations/**/*.hpp"
+            - "simulations/**/*.cpp"
+            - "**/CMakeLists.txt"
+            - "vendor/**"
+          cancel_others: 'false'
+
+  cpu_tests:
     strategy:
       matrix:
-        toolchain: [tests_toolchain.cmake, tests_release_toolchain.cmake]
-    steps:
-    - 
-      name: Checkout gyselalibxx
-      uses: actions/checkout@v4
-      with: { submodules: recursive }
-    - 
-      name: Run tests
-      run: |
-        mkdir build
-        cd build
-        cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/docker.gyselalibxx_env/${{ matrix.toolchain }} ..
-        cmake --build . -j 4
-        ctest -j 2 --timeout 5 --output-junit tests.xml
-      env:
-        OMPI_ALLOW_RUN_AS_ROOT: 1 # OpenMPI can run as root safely inside a docker container
-        OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v4
-      if: success() || failure() # always run even if the previous step fails
-      with:
-        report_paths: './build/test.xml'
+        toolchain: [tests_toolchain, tests_release_toolchain, tests_release_omp_toolchain]
+      fail-fast: false
+    name: CPU Test (${{ matrix.toolchain }})
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false
+    uses: ./.github/workflows/cpu_tests.yml
+    with:
+      toolchain: ${{ matrix.toolchain }}
+      merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+      pr_number: ${{ github.event.pull_request.number }}
 
-  Docs:
-    if: github.event_name == 'push' && github.ref_name == 'main'
-    needs: docker
+  gpu_tests:
+    name: GPU Test
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false
+    uses: ./.github/workflows/gpu_tests.yml
+    with:
+      merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+      pr_number: ${{ github.event.pull_request.number }}
+
+  set_draft_failing:
     runs-on: ubuntu-latest
+    needs: [cpu_tests, gpu_tests]
+    if: github.event_name == 'pull_request' && failure()
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          path: code_branch
-      - name: Checkout documentation
-        uses: actions/checkout@v4
+          ref: main
+      - name: Set PR to draft to avoid unnecessary runs
+        run: |
+          isDraft=$(gh pr view ${{ github.event.pull_request.number }} --json isDraft | jq ."isDraft")
+          if [[ "${isDraft}" != "true" ]]
+          then
+            gh pr ready ${{ github.event.pull_request.number }} --undo
+            gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
+            gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          fi
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  set_draft_cancelled:
+    runs-on: ubuntu-latest
+    needs: [cpu_tests, gpu_tests]
+    if: github.event_name == 'pull_request' && cancelled()
+    steps:
+      - uses: actions/checkout@v4
         with:
-          ref: documentation
-          path: doc_branch
-      - name: Install doxygen
+          ref: main
+      - name: Set PR to draft to avoid unnecessary runs
         run: |
-          sudo apt install doxygen
+          isDraft=$(gh pr view ${{ github.event.pull_request.number }} --json isDraft | jq ."isDraft")
+          if [[ "${isDraft}" != "true" ]]
+          then
+            gh pr ready ${{ github.event.pull_request.number }} --undo
+            gh pr comment ${{ github.event.pull_request.number }} -b "It seems like you haven't finished working on this PR so it has been put back into draft. Please remove the draft status when the PR can run tests without being interrupted."
+            gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+          fi
         shell: bash
-      - name: Generate docs
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  set_labels:
+    runs-on: ubuntu-latest
+    needs: [cpu_tests, gpu_tests]
+    name: Set PR labels
+    if: github.event_name == 'pull_request' && success()
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Set PR labels for reviews
         run: |
-          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs code_branch
-          cmake --build build-docs
-        shell: bash
-      - name: Update documentation
-        run: |
-          cd doc_branch
-          git rm -r *
-          cp -r ../build-docs/docs/html/* .
-          git add .
-          git config --global user.name "GitHub CI Documentation builder"
-          git config --global user.email "username@users.noreply.github.com"
-          git commit -m "Update docs" || true
-          git push
-        shell: bash
+          isDraft=$(gh pr view ${{ github.event.pull_request.number }} --json isDraft | jq ."isDraft")
+          if [[ "${isDraft}" != "true" ]]
+          then
+            STATES=$(gh pr checks ${{ github.event.pull_request.number }} --required --json state)
+            N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
+            if [[ ${N_PASSES} == 10 ]]
+            then
+              # If all required tests are passing then mark as ready to review
+              gh pr edit ${{ github.event.pull_request.number }} --add-label "Ready to review"
+            fi
+          fi
         env:
           GH_TOKEN: ${{ github.token }}

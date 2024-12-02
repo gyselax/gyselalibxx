@@ -1,0 +1,16 @@
+name: "Build code"
+
+inputs:
+  toolchain:
+    description: "The toolchain that describes the parameters for cmake"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Compile code
+      run: |
+        cmake -DCMAKE_TOOLCHAIN=${{ inputs.toolchain }} -B build -S .
+        cmake --build build
+      shell: bash
+

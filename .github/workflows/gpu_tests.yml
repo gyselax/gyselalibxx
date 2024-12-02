@@ -1,0 +1,49 @@
+name: GPU acceptance tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      merge_target:
+        description: "The branch to which this branch should be compared to filter out costly tests (default: main)"
+        required: false
+        default: main
+        type: string
+  workflow_call:
+    inputs:
+      merge_target:
+        description: "The branch to which this branch should be compared to filter out costly tests"
+        required: true
+        type: string
+      pr_number:
+        description: "The number of the pull request that triggered the test"
+        required: false
+        type: number
+
+concurrency:
+  group: ${{ github.event_name != 'workflow_dispatch' && format('{0}-{1}', github.workflow, inputs.pr_number) || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  gpu_tests:
+    runs-on: self-hosted
+    environment: development
+    steps:
+      - name: Checkout gyselalibxx
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: "Filter tests"
+        uses: ./.github/actions/test_filter
+        with:
+          base: ${{ inputs.merge_target }}
+          trigger_type: ${{ github.event_name }}
+      - name: Setup environment
+        run: |
+          . toolchains/v100.persee/environment.sh
+        shell: bash
+      - name: Build code
+        uses: ./.github/actions/build_code
+        with:
+          toolchain: toolchains/v100.persee/toolchain.cmake
+      - name: Run tests
+        uses: ./.github/actions/run_tests
