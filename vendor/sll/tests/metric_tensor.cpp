@@ -108,7 +108,7 @@ class InverseMetricTensor : public testing::TestWithParam<std::tuple<std::size_t
 TEST_P(InverseMetricTensor, InverseMatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CircularToCartesian<X, Y, R, Theta> mapping;
+    const CircularToCartesian<R, Theta, X, Y> mapping;
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
@@ -135,7 +135,7 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
                 theta_min + dp * ddc::select<GridR>(irp).uid());
     });
 
-    MetricTensor<CircularToCartesian<X, Y, R, Theta>, CoordRTheta> metric_tensor(mapping);
+    MetricTensor<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         Matrix_2x2 matrix;
@@ -153,7 +153,7 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
 TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    const CzarnyToCartesian<R, Theta, X, Y> mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
@@ -180,7 +180,7 @@ TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
                 theta_min + dp * ddc::select<GridR>(irp).uid());
     });
 
-    MetricTensor<CzarnyToCartesian<X, Y, R, Theta>, CoordRTheta> metric_tensor(mapping);
+    MetricTensor<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         Matrix_2x2 matrix;

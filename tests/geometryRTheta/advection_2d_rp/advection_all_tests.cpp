@@ -11,6 +11,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
+#include <sll/mapping/cartesian_to_czarny.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
@@ -47,30 +49,39 @@ namespace {
 namespace fs = std::filesystem;
 
 using CurvilinearMapping = Curvilinear2DToCartesian<X, Y, R, Theta>;
-using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
-using CzarnyMapping = CzarnyToCartesian<X, Y, R, Theta>;
+using CircularToCartMapping = CircularToCartesian<R, Theta, X, Y>;
+using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
+using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
+using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
-template <class Mapping, class AnalyticalMapping, class AdvectionDomain>
+template <
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
+        class AnalyticalMapping,
+        class AdvectionDomain>
 struct SimulationParameters
 {
 public:
-    Mapping const& mapping;
+    LogicalToPhysicalMapping const& to_physical_mapping;
+    PhysicalToLogicalMapping const to_logical_mapping;
     AnalyticalMapping const& analytical_mapping;
     AdvectionDomain const& advection_domain;
     std::string mapping_name;
     std::string domain_name;
     using IdxRangeSimulationAdvection = AdvectionDomain;
     SimulationParameters(
-            Mapping const& map,
+            LogicalToPhysicalMapping const& map,
+            PhysicalToLogicalMapping const& rev_map,
             AnalyticalMapping const& a_map,
             AdvectionDomain const& advection_dom,
             std::string m_name,
             std::string dom_name)
-        : mapping(map)
+        : to_physical_mapping(map)
+        , to_logical_mapping(rev_map)
         , analytical_mapping(a_map)
         , advection_domain(advection_dom)
         , mapping_name(m_name)
@@ -198,7 +209,8 @@ void run_simulations_with_methods(
     std::string output_stem = output_stream.str();
 
     simulate_the_3_simulations(
-            sim.mapping,
+            sim.to_physical_mapping,
+            sim.to_logical_mapping,
             sim.analytical_mapping,
             params.grid,
             num.time_stepper,
@@ -281,7 +293,7 @@ int main(int argc, char** argv)
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
-    // --- Builders for the test function and the mapping:
+    // --- Builders for the test function and the to_physical_mapping:
     SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
@@ -310,41 +322,50 @@ int main(int argc, char** argv)
 
 
     // SET THE DIFFERENT PARAMETERS OF THE TESTS ------------------------------------------------
-    CircularMapping const circ_map;
-    CzarnyMapping const czarny_map(0.3, 1.4);
+    CircularToCartMapping const from_circ_map;
+    CartesianToCircular<X, Y, R, Theta> to_circ_map;
+    CzarnyToCartMapping const from_czarny_map(0.3, 1.4);
+    CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4);
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultHostExecutionSpace(),
-            czarny_map,
+            from_czarny_map,
             builder,
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_czarny_map = discrete_czarny_map_builder();
 
-    AdvectionPhysicalDomain<CircularMapping> const physical_circular_mapping(circ_map);
-    AdvectionPhysicalDomain<CzarnyMapping> const physical_czarny_mapping(czarny_map);
-    AdvectionPseudoCartesianDomain<CzarnyMapping> const pseudo_cartesian_czarny_mapping(czarny_map);
+    AdvectionPhysicalDomain<CircularToCartMapping, CartToCircularMapping> const
+            physical_circular_mapping(from_circ_map, to_circ_map);
+    AdvectionPhysicalDomain<CzarnyToCartMapping, CartToCzarnyMapping> const
+            physical_czarny_mapping(from_czarny_map, to_czarny_map);
+    AdvectionPseudoCartesianDomain<CzarnyToCartMapping> const pseudo_cartesian_czarny_mapping(
+            from_czarny_map);
 
     std::tuple simulations = std::make_tuple(
             SimulationParameters(
-                    circ_map,
-                    circ_map,
+                    from_circ_map,
+                    to_circ_map,
+                    from_circ_map,
                     physical_circular_mapping,
                     "CIRCULAR",
                     "PHYSICAL"),
             SimulationParameters(
-                    czarny_map,
-                    czarny_map,
+                    from_czarny_map,
+                    to_czarny_map,
+                    from_czarny_map,
                     physical_czarny_mapping,
                     "CZARNY",
                     "PHYSICAL"),
             SimulationParameters(
-                    czarny_map,
-                    czarny_map,
+                    from_czarny_map,
+                    to_czarny_map,
+                    from_czarny_map,
                     pseudo_cartesian_czarny_mapping,
                     "CZARNY",
                     "PSEUDO CARTESIAN"),
             SimulationParameters(
                     discrete_czarny_map,
-                    czarny_map,
+                    to_czarny_map,
+                    from_czarny_map,
                     pseudo_cartesian_czarny_mapping,
                     "DISCRETE",
                     "PSEUDO CARTESIAN"));

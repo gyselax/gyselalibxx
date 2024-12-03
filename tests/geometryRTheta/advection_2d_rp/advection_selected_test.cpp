@@ -8,6 +8,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
+#include <sll/mapping/cartesian_to_czarny.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_builder.hpp>
@@ -40,15 +42,23 @@ namespace fs = std::filesystem;
 
 namespace {
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-using X_adv = typename AdvectionPhysicalDomain<CircularToCartesian<X, Y, R, Theta>>::X_adv;
-using Y_adv = typename AdvectionPhysicalDomain<CircularToCartesian<X, Y, R, Theta>>::Y_adv;
+using X_adv = typename AdvectionPhysicalDomain<
+        CircularToCartesian<R, Theta, X, Y>,
+        CartesianToCircular<X, Y, R, Theta>>::X_adv;
+using Y_adv = typename AdvectionPhysicalDomain<
+        CircularToCartesian<R, Theta, X, Y>,
+        CartesianToCircular<X, Y, R, Theta>>::Y_adv;
 #elif defined(CZARNY_MAPPING_PHYSICAL)
-using X_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<X, Y, R, Theta>>::X_adv;
-using Y_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<X, Y, R, Theta>>::Y_adv;
+using X_adv = typename AdvectionPhysicalDomain<
+        CzarnyToCartesian<R, Theta, X, Y>,
+        CartesianToCzarny<X, Y, R, Theta>>::X_adv;
+using Y_adv = typename AdvectionPhysicalDomain<
+        CzarnyToCartesian<R, Theta, X, Y>,
+        CartesianToCzarny<X, Y, R, Theta>>::Y_adv;
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-using X_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<X, Y, R, Theta>>::X_adv;
-using Y_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<X, Y, R, Theta>>::Y_adv;
+using X_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<R, Theta, X, Y>>::X_adv;
+using Y_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<R, Theta, X, Y>>::Y_adv;
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
 using X_adv = typename AdvectionPseudoCartesianDomain<
@@ -132,7 +142,7 @@ int main(int argc, char** argv)
 
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
-    // --- Builders for the test function and the mapping:
+    // --- Builders for the test function and the to_physical_mapping:
     SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
@@ -162,9 +172,10 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE MAPPING AND THE ADVECTION DOMAIN.
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-    CircularToCartesian<X, Y, R, Theta> analytical_mapping;
-    CircularToCartesian<X, Y, R, Theta> mapping;
-    AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    CircularToCartesian<R, Theta, X, Y> analytical_mapping;
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
+    AdvectionPhysicalDomain advection_domain(analytical_mapping, to_logical_mapping);
     std::string const mapping_name = "CIRCULAR";
     std::string const adv_domain_name = "PHYSICAL";
     key += "circular_physical";
@@ -174,31 +185,34 @@ int main(int argc, char** argv)
     double const czarny_epsilon = 1.4;
 
 #if defined(CZARNY_MAPPING_PHYSICAL)
-    CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<X, Y, R, Theta> mapping(czarny_e, czarny_epsilon);
-    AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
+    AdvectionPhysicalDomain advection_domain(analytical_mapping, to_logical_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PHYSICAL";
     key += "czarny_physical";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<X, Y, R, Theta> mapping(czarny_e, czarny_epsilon);
-    AdvectionPseudoCartesianDomain advection_domain(mapping);
+    CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
+    AdvectionPseudoCartesianDomain advection_domain(to_physical_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
-    DiscreteToCartesian mapping = mapping_builder();
-    AdvectionPseudoCartesianDomain advection_domain(mapping);
+    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    AdvectionPseudoCartesianDomain advection_domain(to_physical_mapping);
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "discrete_pseudo_cartesian";
@@ -247,17 +261,17 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE SIMULATION.
 #if defined(TRANSLATION_SIMULATION)
-    TranslationSimulation simulation(mapping, rmin, rmax);
+    TranslationSimulation simulation(to_physical_mapping, rmin, rmax);
     std::string const simu_type = "TRANSLATION";
     key += "Translation";
 
 #elif defined(ROTATION_SIMULATION)
-    RotationSimulation simulation(mapping, rmin, rmax);
+    RotationSimulation simulation(to_physical_mapping, rmin, rmax);
     std::string const simu_type = "ROTATION";
     key += "Rotation";
 
 #elif defined(DECENTRED_ROTATION_SIMULATION)
-    DecentredRotationSimulation simulation(mapping);
+    DecentredRotationSimulation simulation(to_physical_mapping);
     std::string const simu_type = "DECENTRED ROTATION";
     key += "Decentred_rotation";
 #endif
@@ -270,7 +284,8 @@ int main(int argc, char** argv)
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;
     simulate(
-            mapping,
+            to_physical_mapping,
+            to_logical_mapping,
             analytical_mapping,
             grid,
             time_stepper,

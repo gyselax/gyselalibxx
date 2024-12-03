@@ -2,14 +2,14 @@
 #include "test_cases.hpp"
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<R, Theta, X, Y>>>::
         solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<R, Theta, X, Y>>>::
         non_singular_solution(Coord<R, Theta> const& coord) const
 {
     const double r = ddc::get<R>(coord);
@@ -75,14 +75,14 @@ double ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Th
 //---------------------------------------------------------------------
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
         solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
         non_singular_solution(Coord<R, Theta> const& coord) const
 {
     const double r = ddc::get<R>(coord);
@@ -1723,14 +1723,14 @@ double ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Thet
 //---------------------------------------------------------------------
 
 template <>
-double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<R, Theta, X, Y>>>::
         solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<R, Theta, X, Y>>>::
         non_singular_solution(Coord<R, Theta> const& coord) const
 {
     const double r = ddc::get<R>(coord);
@@ -1763,14 +1763,14 @@ double ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, 
 //---------------------------------------------------------------------
 
 template <>
-double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
         solution_at_pole(Coord<R, Theta> const& coord) const
 {
     return 0.0;
 }
 
 template <>
-double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Theta>>>::
+double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<R, Theta, X, Y>>>::
         non_singular_solution(Coord<R, Theta> const& coord) const
 {
     const double r = ddc::get<R>(coord);
@@ -3315,7 +3315,7 @@ double ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Th
                                                        + 1.0)));
 }
 
-template class ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<X, Y, R, Theta>>>;
-template class ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<X, Y, R, Theta>>>;
-template class ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<X, Y, R, Theta>>>;
-template class ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<X, Y, R, Theta>>>;
+template class ManufacturedPoissonTest<CurvilinearSolution<CircularToCartesian<R, Theta, X, Y>>>;
+template class ManufacturedPoissonTest<CurvilinearSolution<CzarnyToCartesian<R, Theta, X, Y>>>;
+template class ManufacturedPoissonTest<CartesianSolution<CircularToCartesian<R, Theta, X, Y>>>;
+template class ManufacturedPoissonTest<CartesianSolution<CzarnyToCartesian<R, Theta, X, Y>>>;

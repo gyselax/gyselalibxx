@@ -51,7 +51,8 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         SplineRThetaEvaluatorNullBound>;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
-using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
+using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
 } // end namespace
 
@@ -109,10 +110,11 @@ int main(int argc, char** argv)
             ddc::PeriodicExtrapolationRule<Theta>(),
             ddc::PeriodicExtrapolationRule<Theta>());
 
-    const CircularMapping mapping;
+    const LogicalToPhysicalMapping to_physical_mapping;
+    const PhysicalToLogicalMapping to_logical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
-            mapping,
+            to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
@@ -139,12 +141,16 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_domain(mapping);
+    AdvectionPhysicalDomain advection_domain(to_physical_mapping, to_logical_mapping);
 
-    SplineFootFinder
-            find_feet(time_stepper, advection_domain, mapping, builder, spline_evaluator_extrapol);
+    SplineFootFinder find_feet(
+            time_stepper,
+            advection_domain,
+            to_physical_mapping,
+            builder,
+            spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
+    BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
 
 
 
@@ -173,7 +179,7 @@ int main(int argc, char** argv)
     // --- Predictor corrector operator ---------------------------------------------------------------
     BslImplicitPredCorrRTheta predcorr_operator(
             advection_domain,
-            mapping,
+            to_physical_mapping,
             advection_operator,
             grid,
             builder,
@@ -225,23 +231,24 @@ int main(int argc, char** argv)
     host_t<FieldMemRTheta<CoordY>> coords_y(grid);
     host_t<DFieldMemRTheta> jacobian(grid);
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        CoordXY coords_xy = mapping(ddc::coordinate(irp));
+        CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irp));
         coords_x(irp) = ddc::select<X>(coords_xy);
         coords_y(irp) = ddc::select<Y>(coords_xy);
-        jacobian(irp) = mapping.jacobian(ddc::coordinate(irp));
+        jacobian(irp) = to_physical_mapping.jacobian(ddc::coordinate(irp));
     });
 
     double const tau(1e-10);
     double const phi_max(1.);
 
 
-    VortexMergerEquilibria equilibrium(mapping, grid, builder, spline_evaluator, poisson_solver);
+    VortexMergerEquilibria
+            equilibrium(to_physical_mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
     host_t<DFieldMemRTheta> rho_eq(grid);
     equilibrium.set_equilibrium(rho_eq, function, phi_max, tau);
 
 
-    VortexMergerDensitySolution solution(mapping);
+    VortexMergerDensitySolution solution(to_physical_mapping);
     host_t<DFieldMemRTheta> rho(grid);
     solution.set_initialisation(rho, rho_eq, eps, sigma, x_star_1, y_star_1, x_star_2, y_star_2);
 

@@ -3,6 +3,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include "sll/mapping/cartesian_to_circular.hpp"
+#include "sll/mapping/cartesian_to_czarny.hpp"
 #include "sll/mapping/circular_to_cartesian.hpp"
 #include "sll/mapping/curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
@@ -162,7 +164,7 @@ public:
 
 template <class Mapping>
 double check_logical_to_physical_coord_converter(
-        Mapping const& mapping,
+        Mapping const& to_physical_mapping,
         CoordRTheta const& coord_rtheta,
         CoordXY const& coord_xy)
 {
@@ -174,7 +176,7 @@ double check_logical_to_physical_coord_converter(
             Kokkos::RangePolicy<DeviceExecSpace>(exec, 0, 1),
             KOKKOS_LAMBDA(int const i, double& err) {
                 // Coord converter: logical -> physical.
-                CoordXY diff_coord_xy = mapping(coord_rtheta) - coord_xy;
+                CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
                 err = Kokkos::max(ddc::get<X>(diff_coord_xy), err);
                 err = Kokkos::max(ddc::get<Y>(diff_coord_xy), err);
             },
@@ -184,7 +186,7 @@ double check_logical_to_physical_coord_converter(
 
 template <class Mapping>
 double check_physical_to_logical_coord_converter(
-        Mapping const& mapping,
+        Mapping const& to_physical_mapping,
         CoordRTheta const& coord_rtheta,
         CoordXY const& coord_xy)
 {
@@ -196,7 +198,7 @@ double check_physical_to_logical_coord_converter(
             Kokkos::RangePolicy<DeviceExecSpace>(exec, 0, 1),
             KOKKOS_LAMBDA(int const i, double& err) {
                 // Coord converter: physical -> logical.
-                CoordRTheta diff_coord_rtheta = mapping(coord_xy) - coord_rtheta;
+                CoordRTheta diff_coord_rtheta = to_physical_mapping(coord_xy) - coord_rtheta;
                 err = Kokkos::max(ddc::get<R>(diff_coord_rtheta), err);
                 err = Kokkos::max(ddc::get<Theta>(diff_coord_rtheta), err);
             },
@@ -207,14 +209,19 @@ double check_physical_to_logical_coord_converter(
 } // namespace
 
 
-
 TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
 {
     // Mapping
-    CircularToCartesian<X, Y, R, Theta> const mapping;
+    CircularToCartesian<R, Theta, X, Y> const to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> const to_logical_mapping;
+    static_assert(is_2d_mapping_v<CartesianToCircular<X, Y, R, Theta>>);
+    static_assert(is_2d_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
     static_assert(is_accessible_v<
                   Kokkos::DefaultHostExecutionSpace,
-                  CircularToCartesian<X, Y, R, Theta>>);
+                  CartesianToCircular<X, Y, R, Theta>>);
+    static_assert(is_accessible_v<
+                  Kokkos::DefaultHostExecutionSpace,
+                  CircularToCartesian<R, Theta, X, Y>>);
 
     // Test coordinates
     double const r = .75;
@@ -226,12 +233,12 @@ TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
-    CoordXY diff_coord_xy = mapping(coord_rtheta) - coord_xy;
+    CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
     EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-15);
     EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-15);
 
     // Coord converter: physical--> logical.
-    CoordRTheta diff_coord_rtheta = mapping(coord_xy) - coord_rtheta;
+    CoordRTheta diff_coord_rtheta = to_logical_mapping(coord_xy) - coord_rtheta;
     EXPECT_LE(ddc::get<R>(diff_coord_rtheta), 1e-15);
     EXPECT_LE(ddc::get<Theta>(diff_coord_rtheta), 1e-15);
 }
@@ -242,9 +249,14 @@ TEST_F(MappingMemoryAccess, HostCzarnyCoordConverter)
     // Mapping
     double const epsilon = 0.3;
     double const e = 1.4;
-    CzarnyToCartesian<X, Y, R, Theta> const mapping(epsilon, e);
+    CzarnyToCartesian<R, Theta, X, Y> const to_physical_mapping(epsilon, e);
+    CartesianToCzarny<X, Y, R, Theta> const to_logical_mapping(epsilon, e);
+    static_assert(is_2d_mapping_v<CartesianToCzarny<X, Y, R, Theta>>);
+    static_assert(is_2d_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(
-            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CartesianToCzarny<X, Y, R, Theta>>);
+    static_assert(
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
     // Test coordinates
     double const r = .75;
@@ -258,12 +270,12 @@ TEST_F(MappingMemoryAccess, HostCzarnyCoordConverter)
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
-    CoordXY diff_coord_xy = mapping(coord_rtheta) - coord_xy;
+    CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
     EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-15);
     EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-15);
 
     // Coord converter: physical -> logical.
-    CoordRTheta diff_coord_rtheta = mapping(coord_xy) - coord_rtheta;
+    CoordRTheta diff_coord_rtheta = to_logical_mapping(coord_xy) - coord_rtheta;
     EXPECT_LE(ddc::get<R>(diff_coord_rtheta), 1e-15);
     EXPECT_LE(ddc::get<Theta>(diff_coord_rtheta), 1e-15);
 }
@@ -274,9 +286,9 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     // Mapping
     double const epsilon = 0.3;
     double const e = 1.4;
-    CzarnyToCartesian<X, Y, R, Theta> const analytical_mapping(epsilon, e);
+    CzarnyToCartesian<R, Theta, X, Y> const analytical_mapping(epsilon, e);
     static_assert(
-            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
     SplineRThetaBuilder<HostExecSpace> builder(interpolation_idx_range_rtheta);
 
@@ -294,8 +306,9 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
             SplineRThetaBuilder<HostExecSpace>,
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
-    DiscreteToCartesian mapping = mapping_builder();
-    static_assert(is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(mapping)>);
+    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    static_assert(
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
 
     // Test coordinates
     double const r = .75;
@@ -309,19 +322,19 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
-    CoordXY diff_coord_xy = mapping(coord_rtheta) - coord_xy;
+    CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
     EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-7);
     EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-7);
 }
 
 
-
 TEST_F(MappingMemoryAccess, DeviceCircularCoordConverter)
 {
     // Mapping
-    CircularToCartesian<X, Y, R, Theta> const mapping;
+    CircularToCartesian<R, Theta, X, Y> const to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> const to_logical_mapping;
     static_assert(
-            is_accessible_v<Kokkos::DefaultExecutionSpace, CircularToCartesian<X, Y, R, Theta>>);
+            is_accessible_v<Kokkos::DefaultExecutionSpace, CircularToCartesian<R, Theta, X, Y>>);
 
     // Test coordinates
     double const r = .75;
@@ -333,11 +346,14 @@ TEST_F(MappingMemoryAccess, DeviceCircularCoordConverter)
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
-    double err = check_logical_to_physical_coord_converter(mapping, coord_rtheta, coord_xy);
+    double err = check_logical_to_physical_coord_converter(
+            to_physical_mapping,
+            coord_rtheta,
+            coord_xy);
     EXPECT_LE(err, 1e-15);
 
     // Coord converter: physical--> logical.
-    err = check_physical_to_logical_coord_converter(mapping, coord_rtheta, coord_xy);
+    err = check_physical_to_logical_coord_converter(to_logical_mapping, coord_rtheta, coord_xy);
     EXPECT_LE(err, 1e-15);
 }
 
@@ -347,9 +363,11 @@ TEST_F(MappingMemoryAccess, DeviceCzarnyCoordConverter)
     // Mapping
     double const epsilon = 0.3;
     double const e = 1.4;
-    CzarnyToCartesian<X, Y, R, Theta> const mapping(epsilon, e);
+    CzarnyToCartesian<R, Theta, X, Y> const to_physical_mapping(epsilon, e);
+    CartesianToCzarny<X, Y, R, Theta> const to_logical_mapping(epsilon, e);
+
     static_assert(
-            is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
+            is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
     // Test coordinates
     double const r = .75;
@@ -363,11 +381,14 @@ TEST_F(MappingMemoryAccess, DeviceCzarnyCoordConverter)
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
-    double err = check_logical_to_physical_coord_converter(mapping, coord_rtheta, coord_xy);
+    double err = check_logical_to_physical_coord_converter(
+            to_physical_mapping,
+            coord_rtheta,
+            coord_xy);
     EXPECT_LE(err, 1e-15);
 
     // Coord converter: physical--> logical.
-    err = check_physical_to_logical_coord_converter(mapping, coord_rtheta, coord_xy);
+    err = check_physical_to_logical_coord_converter(to_logical_mapping, coord_rtheta, coord_xy);
     EXPECT_LE(err, 1e-15);
 }
 
@@ -377,9 +398,9 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     // Mapping
     double const epsilon = 0.3;
     double const e = 1.4;
-    CzarnyToCartesian<X, Y, R, Theta> const analytical_mapping(epsilon, e);
+    CzarnyToCartesian<R, Theta, X, Y> const analytical_mapping(epsilon, e);
     static_assert(
-            is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<X, Y, R, Theta>>);
+            is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
     SplineRThetaBuilder<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
 
@@ -397,8 +418,8 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
             SplineRThetaBuilder<DeviceExecSpace>,
             SplineRThetaEvaluator<DeviceExecSpace>>
             mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
-    DiscreteToCartesian mapping = mapping_builder();
-    static_assert(is_accessible_v<Kokkos::DefaultExecutionSpace, decltype(mapping)>);
+    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    static_assert(is_accessible_v<DeviceExecSpace, decltype(to_physical_mapping)>);
 
     // Test coordinates
     double const r = .75;
@@ -412,6 +433,9 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     CoordXY const coord_xy(x, y);
 
     // Coord converter: logical -> physical.
-    double err = check_logical_to_physical_coord_converter(mapping, coord_rtheta, coord_xy);
+    double err = check_logical_to_physical_coord_converter(
+            to_physical_mapping,
+            coord_rtheta,
+            coord_xy);
     EXPECT_LE(err, 1e-7);
 }

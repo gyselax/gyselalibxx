@@ -201,7 +201,7 @@ public:
         // --- CIRCULAR MAPPING ---------------------------------------------------------------------------
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
                   << "   - Circular mapping: ";
-        const CircularToCartesian<X, Y, R, P> analytical_mapping_circ;
+        const CircularToCartesian<R, P, X, Y> analytical_mapping_circ;
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
                 mapping_builder_circ(
                         Kokkos::DefaultHostExecutionSpace(),
@@ -220,7 +220,7 @@ public:
 
         // --- CZARNY MAPPING -----------------------------------------------------------------------------
         std::cout << "   - Czarny mapping:   ";
-        const CzarnyToCartesian<X, Y, R, P> analytical_mapping_czar(0.3, 1.4);
+        const CzarnyToCartesian<R, P, X, Y> analytical_mapping_czar(0.3, 1.4);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
                 mapping_builder_czar(
                         Kokkos::DefaultHostExecutionSpace(),

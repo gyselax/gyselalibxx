@@ -3,6 +3,7 @@
 #include <cassert>
 #include <typeinfo>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 
@@ -35,7 +36,7 @@
  * @see BslAdvectionRTheta
  * @see IFootFinder
  */
-template <class Mapping>
+template <class LogicalToPhysicalMapping>
 class AdvectionDomain
 {
 public:
@@ -62,8 +63,8 @@ public:
  *
  *
  */
-template <class Mapping>
-class AdvectionPhysicalDomain : public AdvectionDomain<Mapping>
+template <class LogicalToPhysicalMapping, class PhysicalToLogicalMapping>
+class AdvectionPhysicalDomain : public AdvectionDomain<LogicalToPhysicalMapping>
 {
 public:
     /**
@@ -80,16 +81,23 @@ public:
     using CoordXY_adv = Coord<X_adv, Y_adv>;
 
 private:
-    Mapping const& m_mapping;
+    LogicalToPhysicalMapping const& m_to_cartesian_mapping;
+    PhysicalToLogicalMapping const& m_to_curvilinear_mapping;
 
 public:
     /**
      * @brief Instantiate a AdvectionPhysicalDomain advection domain.
      *
-     * @param[in] mapping
+     * @param[in] to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
+     * @param[in] to_logical_mapping
+     *      The mapping from the physical domain to the logical domain.
      */
-    AdvectionPhysicalDomain(Mapping const& mapping) : m_mapping(mapping) {};
+    AdvectionPhysicalDomain(
+            LogicalToPhysicalMapping const& to_physical_mapping,
+            PhysicalToLogicalMapping const& to_logical_mapping)
+        : m_to_cartesian_mapping(to_physical_mapping)
+        , m_to_curvilinear_mapping(to_logical_mapping) {};
     ~AdvectionPhysicalDomain() {};
 
     /**
@@ -136,18 +144,18 @@ public:
         using namespace ddc;
 
         IdxRangeRTheta const idx_range_rp = get_idx_range<GridR, GridTheta>(feet_coords_rp);
-        CoordXY coord_center(m_mapping(CoordRTheta(0, 0)));
+        CoordXY coord_center(m_to_cartesian_mapping(CoordRTheta(0, 0)));
 
         ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(feet_coords_rp(irp));
-            CoordXY const coord_xy = m_mapping(coord_rp);
+            CoordXY const coord_xy = m_to_cartesian_mapping(coord_rp);
 
             CoordXY const feet_xy = coord_xy - dt * advection_field(irp);
 
             if (norm_inf(feet_xy - coord_center) < 1e-15) {
                 feet_coords_rp(irp) = CoordRTheta(0, 0);
             } else {
-                feet_coords_rp(irp) = m_mapping(feet_xy);
+                feet_coords_rp(irp) = m_to_curvilinear_mapping(feet_xy);
                 ddc::select<Theta>(feet_coords_rp(irp)) = ddcHelper::restrict_to_idx_range(
                         ddc::select<Theta>(feet_coords_rp(irp)),
                         IdxRangeTheta(idx_range_rp));
@@ -203,8 +211,8 @@ public:
  * @see Curvilinear2DToCartesian
  * @see DiscreteToCartesian
  */
-template <class Mapping>
-class AdvectionPseudoCartesianDomain : public AdvectionDomain<Mapping>
+template <class LogicalToPhysicalMapping>
+class AdvectionPseudoCartesianDomain : public AdvectionDomain<LogicalToPhysicalMapping>
 {
 public:
     /**
@@ -227,21 +235,23 @@ public:
 
 
 private:
-    Mapping const& m_mapping;
+    LogicalToPhysicalMapping const& m_to_cartesian_mapping;
     double m_epsilon;
 
 public:
     /**
      * @brief Instantiate an AdvectionPseudoCartesianDomain advection domain.
      *
-     * @param[in] mapping
+     * @param[in] to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
      * @param[in] epsilon
      *      @f$ \varepsilon @f$ parameter used for the linearization of the
      *      advection field around the central point.
      */
-    AdvectionPseudoCartesianDomain(Mapping const& mapping, double epsilon = 1e-12)
-        : m_mapping(mapping)
+    AdvectionPseudoCartesianDomain(
+            LogicalToPhysicalMapping const& to_physical_mapping,
+            double epsilon = 1e-12)
+        : m_to_cartesian_mapping(to_physical_mapping)
         , m_epsilon(epsilon) {};
     ~AdvectionPseudoCartesianDomain() {};
 
@@ -286,10 +296,11 @@ public:
             host_t<DConstVectorFieldRTheta<X_adv, Y_adv>> const& advection_field,
             double const dt) const
     {
-        static_assert(!std::is_same_v<Mapping, CircularToCartesian<X, Y, R, Theta>>);
+        static_assert(
+                !std::is_same_v<LogicalToPhysicalMapping, CircularToCartesian<R, Theta, X, Y>>);
         IdxRangeRTheta const idx_range_rp = get_idx_range(advection_field);
 
-        CircularToCartesian<X_adv, Y_adv, R, Theta> const pseudo_Cartesian_mapping;
+        CircularToCartesian<R, Theta, X_adv, Y_adv> const pseudo_Cartesian_mapping;
         CoordXY_adv const center_xy_pseudo_cart
                 = CoordXY_adv(pseudo_Cartesian_mapping(CoordRTheta(0., 0.)));
 
@@ -302,7 +313,8 @@ public:
             if (norm_inf(feet_xy_pseudo_cart - center_xy_pseudo_cart) < 1e-15) {
                 feet_coords_rp(irp) = CoordRTheta(0, 0);
             } else {
-                feet_coords_rp(irp) = pseudo_Cartesian_mapping(feet_xy_pseudo_cart);
+                CartesianToCircular<X_adv, Y_adv, R, Theta> const inv_pseudo_Cartesian_mapping;
+                feet_coords_rp(irp) = inv_pseudo_Cartesian_mapping(feet_xy_pseudo_cart);
                 ddc::select<Theta>(feet_coords_rp(irp)) = ddcHelper::restrict_to_idx_range(
                         ddc::select<Theta>(feet_coords_rp(irp)),
                         IdxRangeTheta(idx_range_rp));

@@ -67,9 +67,9 @@ struct BSplines : PolarBSplines<BSplinesR, BSplinesTheta, continuity>
 };
 
 #if defined(CIRCULAR_MAPPING)
-using CircToCart = CircularToCartesian<X, Y, R, Theta>;
+using CircToCart = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
-using CircToCart = CzarnyToCartesian<X, Y, R, Theta>;
+using CircToCart = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
 
 TEST(PolarSplineTest, ConstantEval)

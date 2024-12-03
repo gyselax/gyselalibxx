@@ -8,7 +8,6 @@
 
 #include <sll/view.hpp>
 
-#include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
@@ -37,10 +36,9 @@
  * and the matrix determinant: @f$ det(J) = r @f$.
  *
  */
-template <class X, class Y, class R, class Theta>
+template <class R, class Theta, class X, class Y>
 class CircularToCartesian
-    : public CoordinateConverter<ddc::Coordinate<X, Y>, ddc::Coordinate<R, Theta>>
-    , public PseudoCartesianCompatibleMapping
+    : public PseudoCartesianCompatibleMapping
     , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
 public:
@@ -117,23 +115,6 @@ public:
     }
 
     /**
-     * @brief Convert the coordinate (x,y) to the equivalent @f$ (r, \theta) @f$ coordinate.
-     *
-     * @param[in] coord The coordinate to be converted.
-     *
-     * @return The equivalent coordinate.
-     */
-    KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(
-            ddc::Coordinate<X, Y> const& coord) const final
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        const double r = Kokkos::sqrt(x * x + y * y);
-        const double theta = Kokkos::atan2(y, x);
-        return ddc::Coordinate<R, Theta>(r, theta);
-    }
-
-    /**
      * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
      *
      * @param[in] coord
@@ -147,13 +128,12 @@ public:
         return r;
     }
 
-
     /**
      * @brief Compute full Jacobian matrix.
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given indendently with the functions
+     * The coefficients can be given independently with the functions
      * jacobian_11, jacobian_12,  jacobian_21 and jacobian_22.
      *
      * @param[in] coord
@@ -248,7 +228,7 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given indendently with the functions
+     * The coefficients can be given independently with the functions
      * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
      *
      * @param[in] coord
@@ -431,10 +411,9 @@ public:
     }
 };
 
-
 namespace mapping_detail {
 template <class X, class Y, class R, class Theta, class ExecSpace>
-struct MappingAccessibility<ExecSpace, CircularToCartesian<X, Y, R, Theta>> : std::true_type
+struct MappingAccessibility<ExecSpace, CircularToCartesian<R, Theta, X, Y>> : std::true_type
 {
 };
 } // namespace mapping_detail

@@ -49,22 +49,22 @@ std::string to_lower(std::string s)
  *      The stream to which the output is printed.
  * @param[in] coord_rp
  *      The coordinate to be printed.
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical index range.
  * @param[in] idx_range_p
  *      The index range to which the poloidal coordinate should be restricted.
  */
-template <class Mapping>
+template <class LogicalToPhysicalMapping>
 void print_coordinate(
         std::ofstream& out_file,
         CoordRTheta coord_rp,
-        Mapping const& mapping,
+        LogicalToPhysicalMapping const& to_physical_mapping,
         IdxRangeTheta idx_range_p)
 {
     double const r = ddc::get<R>(coord_rp);
     double const th = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rp), idx_range_p);
 
-    CoordXY coord_xy(mapping(coord_rp));
+    CoordXY coord_xy(to_physical_mapping(coord_rp));
     double const x = ddc::get<X>(coord_xy);
     double const y = ddc::get<Y>(coord_xy);
 
@@ -76,7 +76,7 @@ void print_coordinate(
  * @brief Save the characteristic feet in the logical index range
  * and the physical index range.
  *
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical
  *      index range.
  * @param[in] rp_index range
@@ -86,9 +86,9 @@ void print_coordinate(
  * @param[in] name
  *      The name of the file where the feet are saved.
  */
-template <class Mapping>
+template <class LogicalToPhysicalMapping>
 void save_feet(
-        Mapping const& mapping,
+        LogicalToPhysicalMapping const& to_physical_mapping,
         IdxRangeRTheta const& idx_range_rp,
         host_t<FieldRTheta<CoordRTheta>> const& feet_coords_rp,
         std::string const& name)
@@ -106,8 +106,8 @@ void save_feet(
         IdxTheta ip(irp);
         file_feet << std::setw(15) << (ir - ir_start).value() << std::setw(15)
                   << (ip - ip_start).value();
-        print_coordinate(file_feet, ddc::coordinate(irp), mapping, idx_range_p);
-        print_coordinate(file_feet, feet_coords_rp(irp), mapping, idx_range_p);
+        print_coordinate(file_feet, ddc::coordinate(irp), to_physical_mapping, idx_range_p);
+        print_coordinate(file_feet, feet_coords_rp(irp), to_physical_mapping, idx_range_p);
         file_feet << std::endl;
     });
     file_feet.close();
@@ -117,7 +117,7 @@ void save_feet(
 /**
  * @brief Save the advected function.
  *
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical
  *      index range.
  * @param[in] function
@@ -125,8 +125,11 @@ void save_feet(
  * @param[in] name
  *      The name of the file where the feet are saved.
  */
-template <class Mapping>
-void saving_computed(Mapping const& mapping, host_t<DFieldRTheta> function, std::string const& name)
+template <class LogicalToPhysicalMapping>
+void saving_computed(
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        host_t<DFieldRTheta> function,
+        std::string const& name)
 {
     IdxRangeRTheta const grid = get_idx_range(function);
     std::ofstream out_file(name, std::ofstream::out);
@@ -143,7 +146,7 @@ void saving_computed(Mapping const& mapping, host_t<DFieldRTheta> function, std:
 
         out_file << std::setw(15) << (ir - ir_start).value() << std::setw(15)
                  << (ip - ip_start).value();
-        print_coordinate(out_file, ddc::coordinate(irp), mapping, idx_range_p);
+        print_coordinate(out_file, ddc::coordinate(irp), to_physical_mapping, idx_range_p);
         out_file << std::setw(25) << function(irp);
         out_file << std::endl;
     });
@@ -156,7 +159,7 @@ void saving_computed(Mapping const& mapping, host_t<DFieldRTheta> function, std:
  *
  * @param[in] idx_range_rp
  *      The logical index range where the characteristic feet are defined.
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical
  *      index range.
  * @param[in] advection_field
@@ -167,28 +170,30 @@ void saving_computed(Mapping const& mapping, host_t<DFieldRTheta> function, std:
  *
  * @return A FieldMem with the exact characteristic feet at the given time.
  */
-template <class AdvectionField, class Mapping>
+template <class AdvectionField, class LogicalToPhysicalMapping, class PhysicalToLogicalMapping>
 host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
         IdxRangeRTheta const& idx_range_rp,
-        Mapping const& mapping,
+        LogicalToPhysicalMapping const& logical_to_physical_mapping,
+        PhysicalToLogicalMapping const& physical_to_logical_mapping,
         AdvectionField const& advection_field,
         double const time)
 {
-    static_assert(
-            !std::is_same_v<Mapping, DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>);
+    static_assert(!std::is_same_v<
+                  LogicalToPhysicalMapping,
+                  DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>);
 
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp(idx_range_rp);
-    CoordXY const coord_xy_center = CoordXY(mapping(CoordRTheta(0, 0)));
-
+    CoordXY const coord_xy_center = CoordXY(logical_to_physical_mapping(CoordRTheta(0, 0)));
     ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp = ddc::coordinate(irp);
-        CoordXY const coord_xy = advection_field.exact_feet(mapping(coord_rp), time);
+        CoordXY const coord_xy
+                = advection_field.exact_feet(logical_to_physical_mapping(coord_rp), time);
 
         CoordXY const coord_diff = coord_xy - coord_xy_center;
         if (norm_inf(coord_diff) < 1e-15) {
             feet_coords_rp(irp) = CoordRTheta(0, 0);
         } else {
-            feet_coords_rp(irp) = mapping(coord_xy);
+            feet_coords_rp(irp) = physical_to_logical_mapping(coord_xy);
         }
     });
 
@@ -201,7 +206,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
  * the computed advected function and the exact
  * solution.
  *
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical
  *      index range.
  * @param[in] grid
@@ -216,9 +221,9 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
  * @return The L2 norm of the difference between 
  * the computed function and the exact solution.
  */
-template <class Mapping, class Function>
+template <class LogicalToPhysicalMapping, class Function>
 double compute_difference_L2_norm(
-        Mapping const& mapping,
+        LogicalToPhysicalMapping const& to_physical_mapping,
         IdxRangeRTheta const& grid,
         host_t<DFieldRTheta> allfdistribu_advected,
         Function& function_to_be_advected,
@@ -233,7 +238,7 @@ double compute_difference_L2_norm(
 
     host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
             Kokkos::DefaultHostExecutionSpace(),
-            mapping,
+            to_physical_mapping,
             trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(grid));
     host_t<Quadrature<IdxRangeRTheta>> quadrature(get_const_field(quadrature_coeffs));
 
@@ -276,7 +281,7 @@ void display_time(
 /**
  * @brief Run an advection simulation.
  *
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical
  *      index range.
  * @param[in] analytical_mapping
@@ -313,7 +318,7 @@ void display_time(
  * @param[in] counter_function
  *      A integer referring to a test case for the name of the saved files.
  *
- * @tparam Mapping
+ * @tparam LogicalToPhysicalMapping
  *      A child class of CurvilinearToCartesian.
  * @tparam AnalyticalMapping
  *      A child class of AnalyticalInvertibleCurvilinearToCartesian.
@@ -330,13 +335,15 @@ void display_time(
  * @see Simulation
  */
 template <
-        class Mapping,
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
         class AnalyticalMapping,
         class TimeStepper,
         class AdvectionDomain,
         class Simulation>
 void simulate(
-        Mapping const& mapping,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        PhysicalToLogicalMapping const& to_logical_mapping,
         AnalyticalMapping const& analytical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper const& time_stepper,
@@ -352,14 +359,14 @@ void simulate(
         bool if_save_feet,
         std::string const& output_folder)
 {
-    SplineFootFinder<TimeStepper, AdvectionDomain, Mapping> const foot_finder(
+    SplineFootFinder<TimeStepper, AdvectionDomain, LogicalToPhysicalMapping> const foot_finder(
             time_stepper,
             advection_domain,
-            mapping,
+            to_physical_mapping,
             advection_builder,
             advection_evaluator);
 
-    BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, mapping);
+    BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, to_physical_mapping);
     auto function_to_be_advected_test = simulation.get_test_function();
     auto advection_field_test = simulation.get_advection_field();
 
@@ -399,7 +406,7 @@ void simulate(
     // Definition of advection field:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         // Moving the coordinates in the physical index range:
-        CoordXY const coord_xy = mapping(ddc::coordinate(irp));
+        CoordXY const coord_xy = to_physical_mapping(ddc::coordinate(irp));
         CoordXY const advection_field = advection_field_test(coord_xy, 0.);
 
         // Define the advection field on the physical index range:
@@ -419,7 +426,7 @@ void simulate(
         // Save the advected function for each iteration:
         if (if_save_curves) {
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
-            saving_computed(mapping, get_field(allfdistribu_advected_test), name);
+            saving_computed(to_physical_mapping, get_field(allfdistribu_advected_test), name);
         }
     }
 
@@ -429,9 +436,18 @@ void simulate(
     // Compute the exact characteristic feet:
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_end_time(grid);
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_dt(grid);
-    feet_coords_rp_end_time
-            = compute_exact_feet_rp(grid, analytical_mapping, advection_field_test, end_time);
-    feet_coords_rp_dt = compute_exact_feet_rp(grid, analytical_mapping, advection_field_test, dt);
+    feet_coords_rp_end_time = compute_exact_feet_rp(
+            grid,
+            analytical_mapping,
+            to_logical_mapping,
+            advection_field_test,
+            end_time);
+    feet_coords_rp_dt = compute_exact_feet_rp(
+            grid,
+            analytical_mapping,
+            to_logical_mapping,
+            advection_field_test,
+            dt);
 
 
     // Compute the maximal absolute error on the space at the end of the simulation:
@@ -452,7 +468,7 @@ void simulate(
     std::cout << "   ... "
               << "Relative L2 norm error: "
               << compute_difference_L2_norm(
-                         mapping,
+                         to_physical_mapping,
                          grid,
                          allfdistribu_advected_test,
                          function_to_be_advected_test,
@@ -474,7 +490,7 @@ void simulate(
         ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
         foot_finder(get_field(feet), get_const_field(advection_field_test_vec), dt);
         std::string const name = output_folder + "/feet_computed.txt";
-        save_feet(mapping, grid, get_field(feet), name);
+        save_feet(to_physical_mapping, grid, get_field(feet), name);
     }
 
     // Save the values of the exact function at the initial and final states:
@@ -491,8 +507,8 @@ void simulate(
             // Exact final state
             end_function(irp) = function_to_be_advected_test(feet_coords_rp_end_time(irp));
         });
-        saving_computed(mapping, get_field(initial_function), name_0);
-        saving_computed(mapping, get_field(end_function), name_1);
+        saving_computed(to_physical_mapping, get_field(initial_function), name_0);
+        saving_computed(to_physical_mapping, get_field(end_function), name_1);
     }
 
 
@@ -500,7 +516,7 @@ void simulate(
     // Save the exact characteristic feet for a displacement on dt:
     if (if_save_feet) {
         std::string const name = output_folder + "/feet_exact.txt";
-        save_feet(mapping, grid, get_field(feet_coords_rp_dt), name);
+        save_feet(to_physical_mapping, grid, get_field(feet_coords_rp_dt), name);
     }
 
 
@@ -512,7 +528,7 @@ void simulate(
 /**
  * @brief Run three advection simulations for each test cases in the Simulation class.
  *
- * @param[in] mapping
+ * @param[in] to_physical_mapping
  *      The mapping function from the logical index range to the physical
  *      index range.
  * @param[in] analytical_mapping
@@ -554,9 +570,15 @@ void simulate(
  * @see AdvectionDomain
  * @see Simulation
  */
-template <class Mapping, class AnalyticalMapping, class TimeStepper, class AdvectionDomain>
+template <
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
+        class AnalyticalMapping,
+        class TimeStepper,
+        class AdvectionDomain>
 void simulate_the_3_simulations(
-        Mapping const& mapping,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        PhysicalToLogicalMapping const& to_logical_mapping,
         AnalyticalMapping const& analytical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper& time_stepper,
@@ -576,9 +598,9 @@ void simulate_the_3_simulations(
     double const rmin = ddc::coordinate(r_idx_range.front());
     double const rmax = ddc::coordinate(r_idx_range.back());
 
-    TranslationSimulation simulation_1(mapping, rmin, rmax);
-    RotationSimulation simulation_2(mapping, rmin, rmax);
-    DecentredRotationSimulation simulation_3(mapping);
+    TranslationSimulation simulation_1(to_physical_mapping, rmin, rmax);
+    RotationSimulation simulation_2(to_physical_mapping, rmin, rmax);
+    DecentredRotationSimulation simulation_3(to_physical_mapping);
 
     std::string const title_simu_1 = " TRANSLATION : ";
     std::string const title_simu_2 = " ROTATION : ";
@@ -590,7 +612,8 @@ void simulate_the_3_simulations(
     }
     std::cout << title + title_simu_1 << std::endl;
     simulate(
-            mapping,
+            to_physical_mapping,
+            to_logical_mapping,
             analytical_mapping,
             grid,
             time_stepper,
@@ -611,7 +634,8 @@ void simulate_the_3_simulations(
     }
     std::cout << title + title_simu_2 << std::endl;
     simulate(
-            mapping,
+            to_physical_mapping,
+            to_logical_mapping,
             analytical_mapping,
             grid,
             time_stepper,
@@ -632,7 +656,8 @@ void simulate_the_3_simulations(
     }
     std::cout << title + title_simu_3 << std::endl;
     simulate(
-            mapping,
+            to_physical_mapping,
+            to_logical_mapping,
             analytical_mapping,
             grid,
             time_stepper,

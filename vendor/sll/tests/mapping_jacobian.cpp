@@ -152,7 +152,7 @@ class InvJacobianMatrix : public testing::TestWithParam<std::tuple<std::size_t, 
 TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CircularToCartesian<X, Y, R, Theta> mapping;
+    const CircularToCartesian<R, Theta, X, Y> mapping;
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
@@ -179,7 +179,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
                 theta_min + dtheta * ddc::select<GridR>(irp).uid());
     });
 
-    static_assert(has_2d_jacobian_v<CircularToCartesian<X, Y, R, Theta>, CoordRTheta>);
+    static_assert(has_2d_jacobian_v<CircularToCartesian<R, Theta, X, Y>, CoordRTheta>);
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
@@ -197,7 +197,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
 TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    const CzarnyToCartesian<R, Theta, X, Y> mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
@@ -224,8 +224,8 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
                 theta_min + dtheta * ddc::select<GridTheta>(irp).uid());
     });
 
-    static_assert(has_2d_jacobian_v<CzarnyToCartesian<X, Y, R, Theta>, CoordRTheta>);
-    static_assert(has_2d_inv_jacobian_v<CzarnyToCartesian<X, Y, R, Theta>, CoordRTheta>);
+    static_assert(has_2d_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
+    static_assert(has_2d_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
@@ -243,7 +243,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
 TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(0.3, 1.4);
+    const CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);

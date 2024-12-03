@@ -12,53 +12,65 @@
 
 
 /**
- * @brief Patch locator specialised for "onion" geometry. 
- * 
- * We define an "onion" geometry a set of patches mapping to the 
+ * @brief Patch locator specialised for "onion" geometry.
+ *
+ * We define an "onion" geometry a set of patches mapping to the
  * physical domain in a shape of concentrical rings. The first patch
- * is supposed to be a disk containing the O-point. The other patches 
- * are ordered as concentrical rings drawing away from the O-point. 
- * The order of patches is made by MultipatchIdxRanges and it is important 
+ * is supposed to be a disk containing the O-point. The other patches
+ * are ordered as concentrical rings drawing away from the O-point.
+ * The order of patches is made by MultipatchIdxRanges and it is important
  * for the dichotomy method.
- * 
- * We also suppose that we can define a global logical grid that we can split 
- * into the different logical grids of the patches. 
- * 
- * This operator locates on which patch a given physical coordinate is. 
- * 
- * @warning The operator can works on GPU or CPU according to the given 
- * execution  space ExecSpace. The ExecSpace by default is device. 
- * The constructor  will still need to be called from CPU, but the operator() 
- * needs to be called from the given ExecSpace. 
- * 
+ *
+ * We also suppose that we can define a global logical grid that we can split
+ * into the different logical grids of the patches.
+ *
+ * This operator locates on which patch a given physical coordinate is.
+ *
+ * @warning The operator can works on GPU or CPU according to the given
+ * execution  space ExecSpace. The ExecSpace by default is device.
+ * The constructor  will still need to be called from CPU, but the operator()
+ * needs to be called from the given ExecSpace.
+ *
  * @anchor OnionPatchLocatorImplementation
- * 
- * @tparam MultipatchIdxRanges A MultipatchType type containing the 2D index ranges 
- *          on each patch. 
- * @tparam Mapping A mapping type for all the patches. 
+ *
+ * @tparam MultipatchIdxRanges A MultipatchType type containing the 2D index ranges
+ *          on each patch.
+ * @tparam LogicalToPhysicalMapping A mapping type for all the patches.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
- *          By default it is on device. 
+ *          By default it is on device.
  */
-template <class MultipatchIdxRanges, class Mapping, class ExecSpace = Kokkos::DefaultExecutionSpace>
+template <
+        class MultipatchIdxRanges,
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
+        class ExecSpace = Kokkos::DefaultExecutionSpace>
 class OnionPatchLocator;
 
 
 /**
- * @brief Patch locator specialised for "onion" geometry. 
- * 
+ * @brief Patch locator specialised for "onion" geometry.
+ *
  * See @ref OnionPatchLocatorImplementation
- * 
+ *
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
- * @tparam Patches Patch types. Their order is important.  
- * @tparam Mapping A mapping type for all the patches. 
+ * @tparam Patches Patch types. Their order is important.
+ * @tparam LogicalToPhysicalMapping A mapping type for all the patches.
  */
-template <class... Patches, class Mapping, class ExecSpace>
-class OnionPatchLocator<MultipatchType<IdxRangeOnPatch, Patches...>, Mapping, ExecSpace>
+template <
+        class... Patches,
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
+        class ExecSpace>
+class OnionPatchLocator<
+        MultipatchType<IdxRangeOnPatch, Patches...>,
+        LogicalToPhysicalMapping,
+        PhysicalToLogicalMapping,
+        ExecSpace>
 {
-    using X = typename Mapping::cartesian_tag_x;
-    using Y = typename Mapping::cartesian_tag_y;
-    using R = typename Mapping::curvilinear_tag_r;
-    using Theta = typename Mapping::curvilinear_tag_theta;
+    using X = typename LogicalToPhysicalMapping::cartesian_tag_x;
+    using Y = typename LogicalToPhysicalMapping::cartesian_tag_y;
+    using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
+    using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
     static_assert(Theta::PERIODIC, "Theta dimension must be periodic.");
 
@@ -84,7 +96,7 @@ private:
     static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
 
     static_assert(
-            std::is_invocable_r_v<Coord<R, Theta>, Mapping, Coord<X, Y>>,
+            std::is_invocable_r_v<Coord<R, Theta>, PhysicalToLogicalMapping, Coord<X, Y>>,
             "The mapping has to contain an operator from the physical domain to the logical "
             "domain.");
     static_assert(
@@ -94,23 +106,29 @@ private:
             "The mappings and the patches have to be defined on the same dimensions.");
 
 
-    Mapping const m_mapping;
+    LogicalToPhysicalMapping const m_to_cartesian_mapping;
+    PhysicalToLogicalMapping const m_to_curvilinear_mapping;
     MultipatchIdxRanges const m_all_idx_ranges;
 
     Kokkos::View<Coord<R>*, typename ExecSpace::memory_space> m_radii;
 
 public:
-    /** 
-     * @brief Instantiante the operator with MultipatchType of index ranges and 
-     * a mapping on all the patches. 
-     * 
+    /**
+     * @brief Instantiante the operator with MultipatchType of index ranges and
+     * a mapping on all the patches.
+     *
      * The order of the elements in the tuple or the MultipatchType doesn't matter.
-     * 
+     *
      * @param all_idx_ranges A MultipatchType of index ranges defined on the logical domain of each patch.
-     * @param mapping Mapping from the logical domains of every patch to the global physical domain. 
+     * @param to_physical_mapping Mapping from the logical domains of every patch to the global physical domain.
+     * @param to_logical_mapping Mapping from the global physical domain to the logical domain of every patch.
     */
-    OnionPatchLocator(MultipatchIdxRanges const& all_idx_ranges, Mapping const& mapping)
-        : m_mapping(mapping)
+    OnionPatchLocator(
+            MultipatchIdxRanges const& all_idx_ranges,
+            LogicalToPhysicalMapping const& to_physical_mapping,
+            PhysicalToLogicalMapping const& to_logical_mapping)
+        : m_to_cartesian_mapping(to_physical_mapping)
+        , m_to_curvilinear_mapping(to_logical_mapping)
         , m_all_idx_ranges(all_idx_ranges)
         , m_radii("m_radii", n_patches + 1)
     {
@@ -121,15 +139,15 @@ public:
     ~OnionPatchLocator() = default;
 
     /**
-     * @brief Get the patch where the given physical coordinate is. 
-     * 
-     * We use a dichotomy method to find the patch the physical coordinate is on. 
-     * 
-     * Each logical grid of the patches are defined on the same dimensions. 
+     * @brief Get the patch where the given physical coordinate is.
+     *
+     * We use a dichotomy method to find the patch the physical coordinate is on.
+     *
+     * Each logical grid of the patches are defined on the same dimensions.
      * Knowing that, we can compare the logical coordinates between the patches
-     * in the dichotomy. 
-     * 
-     * @param coord [in] The given physical coordinate. 
+     * in the dichotomy.
+     *
+     * @param coord [in] The given physical coordinate.
      * @return [int] The patch index where the physical coordinate. If the coordinate
      *              is outside of the domain, it returns a negative value.
      */
@@ -140,7 +158,7 @@ public:
 
         Coord<R> r_min = m_radii(patch_index_min);
         Coord<R> r_max = m_radii(patch_index_max + 1);
-        Coord<R> r(m_mapping(coord));
+        Coord<R> r(m_to_curvilinear_mapping(coord));
         KOKKOS_ASSERT(!Kokkos::isnan(double(r)));
 
         if (r > r_max) {
@@ -172,43 +190,43 @@ public:
 
 
     /**
-     * @brief Get the mapping on the given Patch. 
-     * The function can run on device and host. 
-     * @tparam Patch Patch type. 
-     * @return The mapping on the given Patch. 
+     * @brief Get the mapping on the given Patch.
+     * The function can run on device and host.
+     * @tparam Patch Patch type.
+     * @return The mapping on the given Patch.
      */
     template <class Patch>
-    KOKKOS_FUNCTION Mapping get_mapping_on_patch() const
+    KOKKOS_FUNCTION LogicalToPhysicalMapping get_mapping_on_patch() const
     {
-        return m_mapping;
+        return m_to_cartesian_mapping;
     }
 
     /**
-     * @brief Get the mapping from given logical continuous dimensions. 
-     * The function can run on device and host. 
-     * @tparam Patch Patch type. 
-     * @return The mapping on the given Patch. 
+     * @brief Get the mapping from given logical continuous dimensions.
+     * The function can run on device and host.
+     * @tparam Patch Patch type.
+     * @return The mapping on the given Patch.
      */
     template <class Dim1, class Dim2>
-    KOKKOS_FUNCTION Mapping get_mapping_on_logical_dim() const
+    KOKKOS_FUNCTION LogicalToPhysicalMapping get_mapping_on_logical_dim() const
     {
         static_assert(
                 (std::is_same_v<Dim1, R>)&&(std::is_same_v<Dim2, Theta>),
                 "Wrong continuous dimensions.");
-        return m_mapping;
+        return m_to_cartesian_mapping;
     }
 
     /// @brief Get the type of the mapping on the given Patch.
     template <class Patch>
-    using get_mapping_on_patch_t = Mapping;
+    using get_mapping_on_patch_t = LogicalToPhysicalMapping;
 
     /// @brief Get the type of the mapping from given logical continuous dimensions.
     template <class Dim1, class Dim2>
-    using get_mapping_on_logical_dim_t = Mapping;
+    using get_mapping_on_logical_dim_t = LogicalToPhysicalMapping;
 
 private:
     /** @brief Set the m_radii array containing all the boundary radial coordinates.
-     *         Check if the patches are well ordered by comparing the radii. 
+     *         Check if the patches are well ordered by comparing the radii.
      */
     void set_and_check_radii()
     {
@@ -234,6 +252,17 @@ private:
 
 
 // To help the template deduction.
-template <class MultipatchIdxRanges, class Mapping, class ExecSpace = Kokkos::DefaultExecutionSpace>
-OnionPatchLocator(MultipatchIdxRanges const& all_idx_ranges, Mapping const& mapping)
-        -> OnionPatchLocator<MultipatchIdxRanges, Mapping, ExecSpace>;
+template <
+        class MultipatchIdxRanges,
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
+        class ExecSpace = Kokkos::DefaultExecutionSpace>
+OnionPatchLocator(
+        MultipatchIdxRanges const& all_idx_ranges,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        PhysicalToLogicalMapping const& to_logical_mapping)
+        -> OnionPatchLocator<
+                MultipatchIdxRanges,
+                LogicalToPhysicalMapping,
+                PhysicalToLogicalMapping,
+                ExecSpace>;

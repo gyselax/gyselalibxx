@@ -31,7 +31,7 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given indendently with the functions
+     * The coefficients can be given independently with the functions
      * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
      *
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.

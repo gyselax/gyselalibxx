@@ -34,7 +34,7 @@ private:
      */
     using Y_adv = typename AdvectionDomain::Y_adv;
 
-    using CircularToPseudoCartesian = CircularToCartesian<X_adv, Y_adv, R, Theta>;
+    using CircularToPseudoCartesian = CircularToCartesian<R, Theta, X_adv, Y_adv>;
     using AdvectionMapping = CartesianToPseudoCartesian<Mapping, CircularToPseudoCartesian>;
 
     TimeStepper const& m_time_stepper;

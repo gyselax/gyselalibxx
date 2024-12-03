@@ -29,9 +29,9 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         SplineRThetaEvaluatorNullBound>;
 
 #if defined(CIRCULAR_MAPPING)
-using Mapping = CircularToCartesian<X, Y, R, Theta>;
+using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
-using Mapping = CzarnyToCartesian<X, Y, R, Theta>;
+using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;

@@ -7,7 +7,6 @@
 
 #include <sll/view.hpp>
 
-#include "coordinate_converter.hpp"
 #include "curvilinear2d_to_cartesian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
@@ -45,11 +44,8 @@
  *  \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}. @f$
  *
  */
-template <class X, class Y, class R, class Theta>
-class CzarnyToCartesian
-    : public CoordinateConverter<ddc::Coordinate<X, Y>, ddc::Coordinate<R, Theta>>
-    , public PseudoCartesianCompatibleMapping
-    , public Curvilinear2DToCartesian<X, Y, R, Theta>
+template <class R, class Theta, class X, class Y>
+class CzarnyToCartesian : public PseudoCartesianCompatibleMapping
 {
 public:
     /// @brief Indicate the first physical coordinate.
@@ -173,31 +169,6 @@ public:
     }
 
     /**
-     * @brief Convert the coordinate (x,y) to the equivalent @f$ (r, \theta) @f$ coordinate.
-     *
-     * @param[in] coord The coordinate to be converted.
-     *
-     * @return The equivalent coordinate.
-     */
-    KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(
-            ddc::Coordinate<X, Y> const& coord) const final
-    {
-        const double x = ddc::get<X>(coord);
-        const double y = ddc::get<Y>(coord);
-        const double ex = 1. + m_epsilon * x;
-        const double ex2 = (m_epsilon * x * x - 2. * x - m_epsilon);
-        const double xi2 = 1. / (1. - m_epsilon * m_epsilon * 0.25);
-        const double xi = Kokkos::sqrt(xi2);
-        const double r = Kokkos::sqrt(y * y * ex * ex / (m_e * m_e * xi2) + ex2 * ex2 * 0.25);
-        double theta
-                = Kokkos::atan2(2. * y * ex, (m_e * xi * (m_epsilon * x * x - 2. * x - m_epsilon)));
-        if (theta < 0) {
-            theta = 2 * M_PI + theta;
-        }
-        return ddc::Coordinate<R, Theta>(r, theta);
-    }
-
-    /**
      * @brief Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.
      *
      * @param[in] coord
@@ -215,13 +186,12 @@ public:
                / (2 - Kokkos::sqrt(1 + m_epsilon * (m_epsilon + 2.0 * r * Kokkos::cos(theta))));
     }
 
-
     /**
      * @brief Compute full Jacobian matrix.
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given indendently with the functions
+     * The coefficients can be given independently with the functions
      * jacobian_11, jacobian_12,  jacobian_21 and jacobian_22.
      *
      * @param[in] coord
@@ -355,7 +325,7 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given indendently with the functions
+     * The coefficients can be given independently with the functions
      * inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.
      *
      * @param[in] coord
@@ -392,8 +362,6 @@ public:
         matrix[1][0] = 1 / r / fact_1 * (cos_theta * fact_2 + sin_theta * fact_3) / fact_3;
         matrix[1][1] = 1 / r * cos_theta / fact_3;
     }
-
-
 
     /**
      * @brief Compute the (1,1) coefficient of the inverse Jacobian matrix.
@@ -500,7 +468,6 @@ public:
         return 1 / r * cos_theta / fact_3;
     }
 
-
     /**
      * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
      *
@@ -590,7 +557,7 @@ public:
 
 namespace mapping_detail {
 template <class X, class Y, class R, class Theta, class ExecSpace>
-struct MappingAccessibility<ExecSpace, CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
+struct MappingAccessibility<ExecSpace, CzarnyToCartesian<R, Theta, X, Y>> : std::true_type
 {
 };
 } // namespace mapping_detail

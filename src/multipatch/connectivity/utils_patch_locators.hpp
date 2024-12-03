@@ -16,8 +16,15 @@ template <class T>
 inline constexpr bool is_onion_patch_locator_v = is_onion_patch_locator<T>::value;
 
 
-template <class MultipatchIdxRanges, class Mapping, class ExecSpace>
-struct is_onion_patch_locator<OnionPatchLocator<MultipatchIdxRanges, Mapping, ExecSpace>>
-    : std::true_type
+template <
+        class MultipatchIdxRanges,
+        class LogicalToPhysicalMapping,
+        class PhysicalToLogicalMapping,
+        class ExecSpace>
+struct is_onion_patch_locator<OnionPatchLocator<
+        MultipatchIdxRanges,
+        LogicalToPhysicalMapping,
+        PhysicalToLogicalMapping,
+        ExecSpace>> : std::true_type
 {
 };

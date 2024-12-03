@@ -193,7 +193,7 @@ class ElectrostaticalPotentialSimulation_rotation : public ElectrostaticalPotent
 private:
     double const m_vr;
     double const m_vtheta;
-    CircularToCartesian<X, Y, R, Theta> const m_mapping;
+    CartesianToCircular<X, Y, R, Theta> const m_mapping;
 
 public:
     /**
@@ -220,7 +220,8 @@ public:
     {
         CoordRTheta const coord_rp(m_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
-        return m_mapping(coord_rp - t * velocity);
+        CircularToCartesian<R, Theta, X, Y> logical_to_physical_mapping;
+        return logical_to_physical_mapping(coord_rp - t * velocity);
     }
 };
 

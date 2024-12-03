@@ -3,6 +3,7 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/gauss_legendre_integration.hpp>
+#include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/polar_spline.hpp>
@@ -347,7 +348,9 @@ class AdvectionField_rotation : public AdvectionField
 private:
     double const m_vr;
     double const m_vtheta;
-    CircularToCartesian<X, Y, R, Theta> const m_mapping;
+    CartesianToCircular<X, Y, R, Theta> const m_physical_to_logical_mapping;
+    CircularToCartesian<R, Theta, X, Y> const m_logical_to_physical_mapping;
+
 
 public:
     /**
@@ -361,15 +364,16 @@ public:
     AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
         : m_vr(vr)
         , m_vtheta(vtheta)
-        , m_mapping()
+        , m_physical_to_logical_mapping()
+        , m_logical_to_physical_mapping()
     {
     }
 
     CoordXY operator()(CoordXY const coord, double const t) const final
     {
-        CoordRTheta const coord_rp(m_mapping(coord));
+        CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord));
         std::array<std::array<double, 2>, 2> jacobian;
-        m_mapping.jacobian_matrix(coord_rp, jacobian);
+        m_logical_to_physical_mapping.jacobian_matrix(coord_rp, jacobian);
         double const vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];
         double const vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];
         return CoordXY(vx, vy);
@@ -377,9 +381,9 @@ public:
 
     CoordXY exact_feet(CoordXY coord_xy, double const t) const final
     {
-        CoordRTheta const coord_rp(m_mapping(coord_xy));
+        CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
-        return m_mapping(coord_rp - t * velocity);
+        return m_logical_to_physical_mapping(coord_rp - t * velocity);
     }
 };
 

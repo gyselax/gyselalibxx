@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 
 #include <gtest/gtest.h>

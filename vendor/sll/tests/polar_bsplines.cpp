@@ -93,7 +93,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     using PolarCoord = ddc::Coordinate<R, Theta>;
     using BSplinesR = typename TestFixture::BSplinesR;
     using BSplinesTheta = typename TestFixture::BSplinesTheta;
-    using CircToCart = CircularToCartesian<X, Y, R, Theta>;
+    using CircToCart = CircularToCartesian<R, Theta, X, Y>;
     using SplineRThetaBuilder = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,

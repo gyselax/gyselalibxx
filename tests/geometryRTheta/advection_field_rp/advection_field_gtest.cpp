@@ -44,7 +44,8 @@
 namespace {
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
-using Mapping = CircularToCartesian<X, Y, R, Theta>;
+using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
 
@@ -113,11 +114,12 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
             polar_spline_evaluator(r_extrapolation_rule);
 
-    // --- Define the mapping. ------------------------------------------------------------------------
-    const Mapping mapping;
+    // --- Define the to_physical_mapping. ------------------------------------------------------------------------
+    const LogicalToPhysicalMapping to_physical_mapping;
+    const PhysicalToLogicalMapping to_logical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
-            mapping,
+            to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
@@ -135,7 +137,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_idx_range(mapping);
+    AdvectionPhysicalDomain advection_idx_range(to_physical_mapping, to_logical_mapping);
 
     RK3<host_t<FieldMemRTheta<CoordRTheta>>,
         host_t<DVectorFieldMemRTheta<X, Y>>,
@@ -143,23 +145,23 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     SplineFootFinder find_feet(
             time_stepper,
             advection_idx_range,
-            mapping,
+            to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
+    BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
-    AdvectionFieldFinder advection_field_computer(mapping);
+    AdvectionFieldFinder advection_field_computer(to_physical_mapping);
 
 
     // --- Choice of the simulation -------------------------------------------------------------------
 #if defined(TRANSLATION)
-    TranslationAdvectionFieldSimulation simulation(mapping, rmin, rmax);
+    TranslationAdvectionFieldSimulation simulation(to_physical_mapping, rmin, rmax);
 #elif defined(ROTATION)
-    RotationAdvectionFieldSimulation simulation(mapping, rmin, rmax);
+    RotationAdvectionFieldSimulation simulation(to_physical_mapping, rmin, rmax);
 #elif defined(DECENTRED_ROTATION)
-    DecentredRotationAdvectionFieldSimulation simulation(mapping);
+    DecentredRotationAdvectionFieldSimulation simulation(to_physical_mapping);
 #endif
 
     // ================================================================================================
@@ -200,7 +202,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     auto advection_field = simulation.get_advection_field();
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
-        CoordXY const coord_xy(mapping(coord_rp));
+        CoordXY const coord_xy(to_physical_mapping(coord_rp));
 
         allfdistribu_rp(irp) = function(coord_rp);
         allfdistribu_xy(irp) = allfdistribu_rp(irp);
@@ -236,12 +238,12 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rp(grid);
 
-    MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
+    MetricTensor<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
 
         std::array<std::array<double, 2>, 2> J; // Jacobian matrix
-        mapping.jacobian_matrix(coord_rp, J);
+        to_physical_mapping.jacobian_matrix(coord_rp, J);
         std::array<std::array<double, 2>, 2> G; // Metric tensor
         metric_tensor(G, coord_rp);
 

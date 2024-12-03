@@ -150,7 +150,7 @@ class JacobianMatrixAndJacobianCoefficients
 TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CircularToCartesian<X, Y, R, Theta> mapping;
+    const CircularToCartesian<R, Theta, X, Y> mapping;
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
@@ -217,7 +217,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
 TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    const CzarnyToCartesian<R, Theta, X, Y> mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
@@ -283,7 +283,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
 TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
 {
     auto const [Nr, Nt] = GetParam();
-    const CzarnyToCartesian<X, Y, R, Theta> analytical_mapping(0.3, 1.4);
+    const CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(0.3, 1.4);
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);

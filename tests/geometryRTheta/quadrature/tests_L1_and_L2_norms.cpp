@@ -227,7 +227,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     // ------------------------------------------------------------------------------------------------
     std::cout << "CIRCULAR MAPPING ---------------------------------------------------"
               << std::endl;
-    const CircularToCartesian<X, Y, R, Theta> mapping_1;
+    const CircularToCartesian<R, Theta, X, Y> mapping_1;
     std::array<std::array<double, 2>, 5> expected_norms;
     expected_norms[0][0] = M_PI;
     expected_norms[0][1] = std::sqrt(M_PI);

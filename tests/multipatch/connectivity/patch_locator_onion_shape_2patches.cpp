@@ -2,6 +2,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
+#include <sll/mapping/cartesian_to_czarny.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 
@@ -32,7 +34,8 @@ private:
 public:
     using PatchLocator = OnionPatchLocator<
             MultipatchType<IdxRangeOnPatch, Patch1, Patch2>,
-            CircularToCartesian<X, Y, R, Theta>>;
+            CircularToCartesian<R, Theta, X, Y>,
+            CartesianToCircular<X, Y, R, Theta>>;
 
     Patch1::IdxRange1 const idx_range_r1;
     Patch1::IdxRange2 const idx_range_theta1;
@@ -102,9 +105,10 @@ TEST_F(OnionPatchLocator2PatchesTest, CheckPatchOrderingTest)
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
 
-    CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(0.3, 1.4);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(0.3, 1.4);
 
-    EXPECT_NO_THROW(OnionPatchLocator(all_idx_ranges, mapping));
+    EXPECT_NO_THROW((OnionPatchLocator(all_idx_ranges, to_physical_mapping, to_logical_mapping)));
 }
 
 TEST_F(OnionPatchLocator2PatchesTest, CheckPatchOrderingDeathTest)
@@ -113,12 +117,20 @@ TEST_F(OnionPatchLocator2PatchesTest, CheckPatchOrderingDeathTest)
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
     MultipatchType<IdxRangeOnPatch, Patch2, Patch1> all_idx_ranges(idx_range_2, idx_range_1);
 
-    CircularToCartesian<X, Y, R, Theta> mapping;
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
 
-    EXPECT_THROW(OnionPatchLocator(all_idx_ranges, mapping), std::invalid_argument);
+    EXPECT_THROW(
+            (OnionPatchLocator<
+                    MultipatchType<IdxRangeOnPatch, Patch2, Patch1>,
+                    CircularToCartesian<R, Theta, X, Y>,
+                    CartesianToCircular<X, Y, R, Theta>,
+                    Kokkos::DefaultExecutionSpace>(
+                    all_idx_ranges,
+                    to_physical_mapping,
+                    to_logical_mapping)),
+            std::invalid_argument);
 }
-
-
 
 TEST_F(OnionPatchLocator2PatchesTest, DeviceCircularOnionPatchLocator2PatchesTest)
 {
@@ -126,9 +138,15 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCircularOnionPatchLocator2PatchesTes
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
 
-    CircularToCartesian<X, Y, R, Theta> mapping;
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
 
-    OnionPatchLocator patch_locator(all_idx_ranges, mapping);
+    OnionPatchLocator<
+            MultipatchType<IdxRangeOnPatch, Patch1, Patch2>,
+            CircularToCartesian<R, Theta, X, Y>,
+            CartesianToCircular<X, Y, R, Theta>,
+            Kokkos::DefaultExecutionSpace>
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
 
     int constexpr n_elements = 7;
     Kokkos::View<Coord<X, Y>*> coords("coords 1", n_elements);
@@ -168,9 +186,15 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
 
-    CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(0.3, 1.4);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(0.3, 1.4);
 
-    OnionPatchLocator patch_locator(all_idx_ranges, mapping);
+    OnionPatchLocator<
+            MultipatchType<IdxRangeOnPatch, Patch1, Patch2>,
+            CzarnyToCartesian<R, Theta, X, Y>,
+            CartesianToCzarny<X, Y, R, Theta>,
+            Kokkos::DefaultExecutionSpace>
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
 
     int constexpr n_elements = 7;
     Kokkos::View<Coord<X, Y>*> coords("coords 1", n_elements);
@@ -181,12 +205,12 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     Kokkos::View<int*, Kokkos::DefaultHostExecutionSpace>
             patches_host("patches_host 1", n_elements);
 
-    coords_host(0) = PhysicalCoordXY(mapping(Coord<R, Theta>(0, 0)));
-    coords_host(1) = PhysicalCoordXY(mapping(Coord<R, Theta>(0.2, 0)));
+    coords_host(0) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0, 0)));
+    coords_host(1) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
     coords_host(2) = PhysicalCoordXY(0.25, .03);
     coords_host(3) = PhysicalCoordXY(1, 1);
-    coords_host(4) = PhysicalCoordXY(mapping(Coord<R, Theta>(1, 0)));
-    coords_host(5) = PhysicalCoordXY(mapping(Coord<R, Theta>(1.5, 0)));
+    coords_host(4) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
+    coords_host(5) = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
     coords_host(6) = PhysicalCoordXY(-2.1, 0);
 
     patches_host(0) = PatchLocator::outside_rmin_domain;
@@ -210,13 +234,18 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCircularOnionPatchLocator2PatchesTest)
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
 
-    CircularToCartesian<X, Y, R, Theta> mapping;
-
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
     using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
-    using Mapping = CircularToCartesian<X, Y, R, Theta>;
+    using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+    using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
-    OnionPatchLocator<MultipatchIdxRanges, Mapping, Kokkos::DefaultHostExecutionSpace>
-            patch_locator(all_idx_ranges, mapping);
+    OnionPatchLocator<
+            MultipatchIdxRanges,
+            LogicalToPhysicalMapping,
+            PhysicalToLogicalMapping,
+            Kokkos::DefaultHostExecutionSpace>
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
 
     PhysicalCoordXY coord(0.15, .03);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
@@ -247,18 +276,23 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
     Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
 
-    CzarnyToCartesian<X, Y, R, Theta> mapping(0.3, 1.4);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(0.3, 1.4);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(0.3, 1.4);
 
     using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
-    using Mapping = CzarnyToCartesian<X, Y, R, Theta>;
-
-    OnionPatchLocator<MultipatchIdxRanges, Mapping, Kokkos::DefaultHostExecutionSpace>
-            patch_locator(all_idx_ranges, mapping);
+    using LogicalToPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
+    using PhysicalToLogicalMapping = CartesianToCzarny<X, Y, R, Theta>;
+    OnionPatchLocator<
+            MultipatchIdxRanges,
+            LogicalToPhysicalMapping,
+            PhysicalToLogicalMapping,
+            Kokkos::DefaultHostExecutionSpace>
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
 
     PhysicalCoordXY coord(-0.05, .03);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
 
-    coord = PhysicalCoordXY(mapping(Coord<R, Theta>(0.2, 0)));
+    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(0.2, 0)));
     EXPECT_EQ(patch_locator(coord), 0);
 
     coord = PhysicalCoordXY(0.25, .03);
@@ -267,10 +301,10 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
     coord = PhysicalCoordXY(1, 1);
     EXPECT_EQ(patch_locator(coord), 1);
 
-    coord = PhysicalCoordXY(mapping(Coord<R, Theta>(1, 0)));
+    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1, 0)));
     EXPECT_EQ(patch_locator(coord), 1);
 
-    coord = PhysicalCoordXY(mapping(Coord<R, Theta>(1.5, 0)));
+    coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(1.5, 0)));
     EXPECT_EQ(patch_locator(coord), 1);
 
     coord = PhysicalCoordXY(-2.1, 0);

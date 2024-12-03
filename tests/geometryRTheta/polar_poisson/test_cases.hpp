@@ -6,6 +6,7 @@
 
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
+#include <sll/mapping/inverse_jacobian_matrix.hpp>
 #include <sll/math_tools.hpp>
 
 #include "ddc_aliases.hpp"

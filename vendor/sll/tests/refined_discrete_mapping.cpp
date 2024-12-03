@@ -121,8 +121,8 @@ using FieldMemRTheta = ddc::Chunk<ElementType, IdxRangeRTheta>;
 using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
 
 
-using CzarnyMapping = CzarnyToCartesian<X, Y, R, Theta>;
-using CircularMapping = CircularToCartesian<X, Y, R, Theta>;
+using CzarnyMapping = CzarnyToCartesian<R, Theta, X, Y>;
+using CircularMapping = CircularToCartesian<R, Theta, X, Y>;
 
 
 template <class ElementType>

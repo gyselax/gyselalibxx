@@ -4,6 +4,7 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 
 #include <gtest/gtest.h>
@@ -70,11 +71,16 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         GridTheta<PatchIdx>>;
 
 
-using Mapping = CircularToCartesian<X, Y, R, Theta>;
+using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
 
 template <class ExecSpace>
-using PatchLocator = OnionPatchLocator<MultipatchIdxRange, Mapping, ExecSpace>;
+using PatchLocator = OnionPatchLocator<
+        MultipatchIdxRange,
+        LogicalToPhysicalMapping,
+        PhysicalToLogicalMapping,
+        ExecSpace>;
 
 
 /**

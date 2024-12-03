@@ -6,8 +6,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_builder.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
 
@@ -51,7 +51,8 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         SplineRThetaEvaluatorNullBound>;
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
-using Mapping = CircularToCartesian<X, Y, R, Theta>;
+using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
 
@@ -111,10 +112,11 @@ int main(int argc, char** argv)
             ddc::PeriodicExtrapolationRule<Theta>(),
             ddc::PeriodicExtrapolationRule<Theta>());
 
-    const Mapping mapping;
+    const LogicalToPhysicalMapping to_physical_mapping;
+    const PhysicalToLogicalMapping to_logical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
-            mapping,
+            to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
@@ -161,12 +163,16 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_domain(mapping);
+    AdvectionPhysicalDomain advection_domain(to_physical_mapping, to_logical_mapping);
 
-    SplineFootFinder
-            find_feet(time_stepper, advection_domain, mapping, builder, spline_evaluator_extrapol);
+    SplineFootFinder find_feet(
+            time_stepper,
+            advection_domain,
+            to_physical_mapping,
+            builder,
+            spline_evaluator_extrapol);
 
-    BslAdvectionRTheta advection_operator(interpolator, find_feet, mapping);
+    BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
 
 
 
@@ -195,7 +201,7 @@ int main(int argc, char** argv)
     // --- Predictor corrector operator ---------------------------------------------------------------
 #if defined(PREDCORR)
     BslPredCorrRTheta predcorr_operator(
-            mapping,
+            to_physical_mapping,
             advection_operator,
             builder,
             spline_evaluator,
@@ -203,7 +209,7 @@ int main(int argc, char** argv)
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
             advection_domain,
-            mapping,
+            to_physical_mapping,
             advection_operator,
             mesh_rp,
             builder,
@@ -213,7 +219,7 @@ int main(int argc, char** argv)
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
             advection_domain,
-            mapping,
+            to_physical_mapping,
             advection_operator,
             mesh_rp,
             builder,
@@ -267,10 +273,10 @@ int main(int argc, char** argv)
     host_t<FieldMemRTheta<CoordY>> coords_y(mesh_rp);
     host_t<DFieldMemRTheta> jacobian(mesh_rp);
     ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
-        CoordXY coords_xy = mapping(ddc::coordinate(irp));
+        CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irp));
         coords_x(irp) = ddc::select<X>(coords_xy);
         coords_y(irp) = ddc::select<Y>(coords_xy);
-        jacobian(irp) = mapping.jacobian(ddc::coordinate(irp));
+        jacobian(irp) = to_physical_mapping.jacobian(ddc::coordinate(irp));
     });
 
 

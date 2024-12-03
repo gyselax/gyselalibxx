@@ -150,7 +150,7 @@ public:
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given indendently with the functions
+     * The coefficients can be given independently with the functions
      * jacobian_11, jacobian_12, jacobian_21 and jacobian_22.
      *
      * @param[in] coord
