@@ -54,7 +54,7 @@
  * (With @f$X^C@f$ the characteristic feet such that @f$\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2} @f$.)
  *
  * @tparam Mapping
- *      A Curvilinear2DToCartesian class or one of its child classes.
+ *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
  * @tparam AdvectionDomain
  *      An AdvectionDomain class.
  * @tparam FootFinder

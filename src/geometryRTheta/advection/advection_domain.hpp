@@ -5,7 +5,6 @@
 
 #include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 
 #include "advection_domain.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -208,7 +207,6 @@ public:
  * More details can be found in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
- * @see Curvilinear2DToCartesian
  * @see DiscreteToCartesian
  */
 template <class LogicalToPhysicalMapping>

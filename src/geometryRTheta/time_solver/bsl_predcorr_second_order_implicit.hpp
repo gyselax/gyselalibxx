@@ -54,7 +54,7 @@
  *
  *
  * @tparam Mapping
- *      A Curvilinear2DToCartesian class or one of its child classes.
+ *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
  * @tparam AdvectionDomain
  *      An AdvectionDomain class.
  * @tparam FootFinder

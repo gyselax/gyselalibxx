@@ -7,7 +7,6 @@
 
 #include <sll/view.hpp>
 
-#include "curvilinear2d_to_cartesian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
@@ -49,14 +48,13 @@ class CzarnyToCartesian : public PseudoCartesianCompatibleMapping
 {
 public:
     /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_x;
+    using cartesian_tag_x = X;
     /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_y;
+    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
-    using curvilinear_tag_r = typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_r;
+    using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
-    using curvilinear_tag_theta =
-            typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
+    using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
     using CoordArg = ddc::Coordinate<R, Theta>;
@@ -560,4 +558,10 @@ template <class X, class Y, class R, class Theta, class ExecSpace>
 struct MappingAccessibility<ExecSpace, CzarnyToCartesian<R, Theta, X, Y>> : std::true_type
 {
 };
+
+template <class X, class Y, class R, class Theta>
+struct IsCurvilinear2DMapping<CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
+{
+};
+
 } // namespace mapping_detail

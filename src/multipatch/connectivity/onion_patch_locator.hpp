@@ -5,6 +5,8 @@
 
 #include <ddc/ddc.hpp>
 
+#include <sll/mapping/mapping_tools.hpp>
+
 #include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
@@ -67,6 +69,8 @@ class OnionPatchLocator<
         PhysicalToLogicalMapping,
         ExecSpace>
 {
+    static_assert(is_curvilinear_2d_mapping_v<LogicalToPhysicalMapping>);
+
     using X = typename LogicalToPhysicalMapping::cartesian_tag_x;
     using Y = typename LogicalToPhysicalMapping::cartesian_tag_y;
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;

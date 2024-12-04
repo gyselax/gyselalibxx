@@ -8,7 +8,6 @@
 
 #include <sll/view.hpp>
 
-#include "curvilinear2d_to_cartesian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
@@ -37,20 +36,17 @@
  *
  */
 template <class R, class Theta, class X, class Y>
-class CircularToCartesian
-    : public PseudoCartesianCompatibleMapping
-    , public Curvilinear2DToCartesian<X, Y, R, Theta>
+class CircularToCartesian : public PseudoCartesianCompatibleMapping
 {
 public:
     /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_x;
+    using cartesian_tag_x = X;
     /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_y;
+    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
-    using curvilinear_tag_r = typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_r;
+    using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
-    using curvilinear_tag_theta =
-            typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
+    using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
     using CoordArg = ddc::Coordinate<R, Theta>;
@@ -69,10 +65,10 @@ public:
     KOKKOS_FUNCTION CircularToCartesian(CircularToCartesian const& other) {}
 
     /**
-     * @brief Instantiate a Curvilinear2DToCartesian from another temporary CircularToCartesian (rvalue).
+     * @brief Instantiate a CircularToCartesian from another temporary CircularToCartesian (rvalue).
      *
      * @param[in] x
-     * 		Curvilinear2DToCartesian mapping used to instantiate the new one.
+     * 		CircularToCartesian mapping used to instantiate the new one.
      */
     CircularToCartesian(CircularToCartesian&& x) = default;
 
@@ -416,4 +412,10 @@ template <class X, class Y, class R, class Theta, class ExecSpace>
 struct MappingAccessibility<ExecSpace, CircularToCartesian<R, Theta, X, Y>> : std::true_type
 {
 };
+
+template <class X, class Y, class R, class Theta>
+struct IsCurvilinear2DMapping<CircularToCartesian<X, Y, R, Theta>> : std::true_type
+{
+};
+
 } // namespace mapping_detail

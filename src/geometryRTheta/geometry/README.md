@@ -5,7 +5,7 @@ The geometry folder contains a helper file `geometry.hpp` which provides shortcu
 * 2 spatial dimensions (denoted `X` and `Y`) in Cartesian coordinates.
 
 We suppose $`r`$ positive non periodic, $`\theta`$ periodic, $`x`$ and $`y`$ non periodic. We denote in the code `Theta` the polar coordinate $`\theta`$. 
-The polar coordinates represent a **logical domain**, and the Cartesian coordinates the **physical domain**. Some mappings from the logical domain to the physical domain $`(r,\theta) \mapsto (x,y)`$ are defined in Curvilinear2DToCartesian. 
+The polar coordinates represent a **logical domain**, and the Cartesian coordinates the **physical domain**. Some mappings from the logical domain to the physical domain $`(r,\theta) \mapsto (x,y)`$ are defined in `vendor/sll/mapping/`.
 
 The splines applied are cubic and only defined on the logical domain. 
 

@@ -8,7 +8,6 @@
 #include <sll/view.hpp>
 
 #include "coordinate_converter.hpp"
-#include "curvilinear2d_to_cartesian.hpp"
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
@@ -23,8 +22,6 @@
  * @f$ y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).@f$
  *
  * This mapping could be costly to inverse.
- *
- * @see Curvilinear2DToCartesian
  */
 template <
         class X,
@@ -36,7 +33,6 @@ template <
 class DiscreteToCartesian
     : public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
     , public PseudoCartesianCompatibleMapping
-    , public Curvilinear2DToCartesian<X, Y, R, Theta>
 {
     static_assert(std::is_same_v<MemorySpace, typename SplineEvaluator::memory_space>);
 
@@ -51,14 +47,13 @@ public:
     using BSplineTheta = typename SplineEvaluator::bsplines_type2;
 
     /// @brief Indicate the first physical coordinate.
-    using cartesian_tag_x = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_x;
+    using cartesian_tag_x = X;
     /// @brief Indicate the second physical coordinate.
-    using cartesian_tag_y = typename Curvilinear2DToCartesian<X, Y, R, Theta>::cartesian_tag_y;
+    using cartesian_tag_y = Y;
     /// @brief Indicate the first logical coordinate.
-    using curvilinear_tag_r = typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_r;
+    using curvilinear_tag_r = R;
     /// @brief Indicate the second logical coordinate.
-    using curvilinear_tag_theta =
-            typename Curvilinear2DToCartesian<X, Y, R, Theta>::curvilinear_tag_theta;
+    using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
     using CoordArg = ddc::Coordinate<R, Theta>;
@@ -157,11 +152,6 @@ public:
      * 				The coordinate where we evaluate the Jacobian matrix.
      * @param[out] matrix
      * 				The Jacobian matrix returned.
-     *
-     * @see Curvilinear2DToCartesian::jacobian_11
-     * @see Curvilinear2DToCartesian::jacobian_12
-     * @see Curvilinear2DToCartesian::jacobian_21
-     * @see Curvilinear2DToCartesian::jacobian_22
      */
     KOKKOS_FUNCTION void jacobian_matrix(
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
@@ -321,7 +311,6 @@ public:
      *      The pseudo-Cartesian matrix evaluated at the central point.
      *
      *
-     * @see Curvilinear2DToCartesian
      * @see BslAdvection
      * @see AdvectionDomain
      */
@@ -480,5 +469,11 @@ struct MappingAccessibility<
         DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
 {
     static constexpr bool value = Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible;
+};
+
+template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
+struct IsCurvilinear2DMapping<DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+    : std::true_type
+{
 };
 } // namespace mapping_detail

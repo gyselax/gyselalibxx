@@ -15,7 +15,7 @@
  * @brief Initial condition for the vortex merger simulation.
  *
  * @tparam Mapping
- *      A Curvilinear2DToCartesian mapping function class.
+ *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
  */
 template <class Mapping>
 class VortexMergerDensitySolution

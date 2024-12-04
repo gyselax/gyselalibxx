@@ -288,11 +288,16 @@ public:
     static constexpr const char* error_msg = std::get<const char*>(has_2d_inv_jacobian_output);
 };
 
+template <class Mapping>
+struct IsCurvilinear2DMapping : std::false_type
+{
+};
+
 } // namespace mapping_detail
 
 template <class ExecSpace, class Type>
-static constexpr bool is_accessible_v
-        = mapping_detail::MappingAccessibility<ExecSpace, Type>::value;
+static constexpr bool is_accessible_v = mapping_detail::
+        MappingAccessibility<ExecSpace, std::remove_const_t<std::remove_reference_t<Type>>>::value;
 
 template <class Mapping>
 static constexpr bool is_2d_mapping_v = mapping_detail::Is2DMapping<Mapping>::value;
@@ -304,3 +309,7 @@ static constexpr bool has_2d_jacobian_v
 template <class Mapping, class CoordinateType>
 static constexpr bool has_2d_inv_jacobian_v
         = mapping_detail::Defines2DInvJacobian<Mapping, CoordinateType>::value;
+
+template <class Mapping>
+static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping<
+        std::remove_const_t<std::remove_reference_t<Mapping>>>::value;

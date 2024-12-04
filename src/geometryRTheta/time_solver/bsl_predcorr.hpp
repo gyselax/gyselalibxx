@@ -48,7 +48,7 @@
  * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$dt@f$.
  *
  * @tparam Mapping
- *      A Curvilinear2DToCartesian class or one of its child classes.
+ *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
  * @tparam FootFinder
  *      A IFootFinder class.
  *

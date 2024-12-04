@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-#include <sll/mapping/curvilinear2d_to_cartesian.hpp>
 #include <sll/mapping/metric_tensor.hpp>
 
 #include "advection_domain.hpp"

@@ -80,7 +80,8 @@
  * The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
  *
  *
- * @tparam Mapping A Curvilinear2DToCartesian class.
+ * @tparam Mapping
+ *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
  *
  *
  * @see PolarSplineFEMPoissonLikeSolver

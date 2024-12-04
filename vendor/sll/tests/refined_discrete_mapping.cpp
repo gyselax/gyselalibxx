@@ -6,7 +6,6 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "sll/mapping/circular_to_cartesian.hpp"
-#include "sll/mapping/curvilinear2d_to_cartesian.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
 #include "sll/mapping/discrete_mapping_builder.hpp"
 #include "sll/mapping/discrete_to_cartesian.hpp"

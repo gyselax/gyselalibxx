@@ -670,10 +670,12 @@ private:
             using TargetMapping =
                     typename PatchLocator::get_mapping_on_logical_dim_t<TargetDim1, TargetDim2>;
 
+            static_assert(is_curvilinear_2d_mapping_v<CurrentMapping>);
             static_assert((std::is_same_v<
                            Coord<typename CurrentMapping::curvilinear_tag_r,
                                  typename CurrentMapping::curvilinear_tag_theta>,
                            Coord<CurrentDim1, CurrentDim2>>));
+            static_assert(is_curvilinear_2d_mapping_v<TargetMapping>);
             static_assert((std::is_same_v<
                            Coord<typename TargetMapping::curvilinear_tag_r,
                                  typename TargetMapping::curvilinear_tag_theta>,

@@ -1,7 +1,6 @@
 # Mappings
 
 The `mapping/` folder containts the code defining the mappings used in simulations.
-All mappings inherit from Curvilinear2DToCartesian.
 The current mappings implemented are:
 
 - Analytically invertible mappings such as:

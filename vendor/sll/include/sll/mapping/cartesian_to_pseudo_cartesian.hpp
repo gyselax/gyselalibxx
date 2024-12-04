@@ -14,6 +14,8 @@
 template <class MappingToCartesian, class MappingToPseudoCartesian>
 class CartesianToPseudoCartesian
 {
+    static_assert(is_curvilinear_2d_mapping_v<MappingToCartesian>);
+    static_assert(is_curvilinear_2d_mapping_v<MappingToPseudoCartesian>);
     static_assert(
             std::is_same_v<
                     typename MappingToCartesian::curvilinear_tag_r,

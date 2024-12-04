@@ -259,7 +259,7 @@ public:
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on (r, theta)
      *
-     * @tparam Mapping A Curvilinear2DToCartesian class.
+     * @tparam Mapping A class describing a mapping from curvilinear coordinates to cartesian coordinates.
      */
     template <class Mapping>
     PolarSplineFEMPoissonLikeSolver(
