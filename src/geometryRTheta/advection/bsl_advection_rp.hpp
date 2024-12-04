@@ -154,6 +154,7 @@ public:
             CoordXY const& advection_field_xy_center,
             double dt) const
     {
+        Kokkos::Profiling::pushRegion("PolarAdvection");
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
 
         const int npoints_p = IdxRangeTheta(grid).size();
@@ -201,6 +202,7 @@ public:
 
         // Interpolate the function on the characteristic feet. -------------------------------------
         (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));
+        Kokkos::Profiling::popRegion();
 
         return allfdistribu;
     }

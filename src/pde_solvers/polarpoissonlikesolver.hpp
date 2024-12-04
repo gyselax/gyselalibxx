@@ -457,6 +457,7 @@ public:
         init_nnz_per_line(nnz_per_row_csr);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row_csr);
 
+        Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
@@ -676,6 +677,7 @@ public:
         Kokkos::deep_copy(col_idx, col_idx_csr_host);
         Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
         m_gko_matrix->setup_solver();
+        Kokkos::Profiling::popRegion();
     }
 
     /**
@@ -694,6 +696,8 @@ public:
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, host_t<SplinePolar>& spline) const
     {
+        Kokkos::Profiling::pushRegion("PolarPoissonRHS");
+
         static_assert(
                 std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
@@ -777,11 +781,13 @@ public:
             b_host(0, idx.uid()) = element;
         });
 
-        // Solve the matrix equation
         Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
                 b("b", batch_size, b_size);
         Kokkos::deep_copy(b, b_host);
+        Kokkos::Profiling::popRegion();
 
+        // Solve the matrix equation
+        Kokkos::Profiling::pushRegion("PolarPoissonSolve");
         m_gko_matrix->solve(b);
 
         Kokkos::deep_copy(b_host, b);
@@ -822,6 +828,7 @@ public:
                             ddc::select<BSplinesTheta>(idx_2d)
                                     - ddc::discrete_space<BSplinesTheta>().nbasis());
         });
+        Kokkos::Profiling::popRegion();
     }
 
 
@@ -1201,6 +1208,7 @@ public:
     void init_nnz_per_line(
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> nnz) const
     {
+        Kokkos::Profiling::pushRegion("PolarPoissonInitNnz");
         size_t const mat_size = nnz.extent(0) - 1;
         size_t constexpr n_singular_basis = PolarBSplinesRTheta::n_singular_basis();
         size_t constexpr degree = BSplinesR::degree();
@@ -1258,5 +1266,6 @@ public:
                     nnz(0) = 0;
                     nnz(1) = 0;
                 });
+        Kokkos::Profiling::popRegion();
     }
 };

@@ -62,6 +62,9 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
+    // Environments variables for profiling
+    setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, true);
+    setenv("KOKKOS_TOOLS_TIMER_JSON", "true", true);
     // SETUP ==========================================================================================
     fs::create_directory("output");
 

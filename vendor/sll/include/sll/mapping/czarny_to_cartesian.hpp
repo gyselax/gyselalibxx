@@ -10,9 +10,6 @@
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
-// Pre-declaration of analytical inverse
-template <class X, class Y, class R, class Theta>
-class CartesianToCzarny;
 
 /**
  * @brief A class for describing the Czarny 2D mapping.
@@ -553,16 +550,6 @@ public:
     {
         const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
         return (2 - Kokkos::sqrt(1 + m_epsilon * m_epsilon)) / m_e / xi;
-    }
-
-    /**
-     * @brief Get the inverse mapping.
-     *
-     * @return The inverse mapping.
-     */
-    CartesianToCzarny<X, Y, R, Theta> get_inverse_mapping() const
-    {
-        return CartesianToCzarny<X, Y, R, Theta>(m_epsilon, m_e);
     }
 };
 

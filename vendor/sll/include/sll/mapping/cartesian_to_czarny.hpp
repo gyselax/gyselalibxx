@@ -7,9 +7,6 @@
 
 #include "mapping_tools.hpp"
 
-// Pre-declaration of analytical inverse
-template <class R, class Theta, class X, class Y>
-class CzarnyToCartesian;
 
 /**
  * @brief A class for describing the Czarny 2D mapping.
@@ -145,16 +142,6 @@ public:
             theta = 2 * M_PI + theta;
         }
         return ddc::Coordinate<R, Theta>(r, theta);
-    }
-
-    /**
-     * @brief Get the inverse mapping.
-     *
-     * @return The inverse mapping.
-     */
-    CzarnyToCartesian<R, Theta, X, Y> get_inverse_mapping() const
-    {
-        return CzarnyToCartesian<R, Theta, X, Y>(m_epsilon, m_e);
     }
 };
 
