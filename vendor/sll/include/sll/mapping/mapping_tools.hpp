@@ -3,6 +3,7 @@
 
 #include <array>
 #include <type_traits>
+#include <utility>
 
 #include <sll/view.hpp>
 
@@ -61,7 +62,7 @@ class Is2DMapping
             using CoordResult = typename Type::CoordResult;
             return std::is_invocable_r_v<CoordResult, Type, CoordArg>;
         }
-        return true;
+        return success;
     }
 
 public:
@@ -293,6 +294,27 @@ struct IsCurvilinear2DMapping : std::false_type
 {
 };
 
+template <typename Type>
+class IsAnalyticalMapping
+{
+private:
+    template <typename ClassType>
+    using inverse_mapping = decltype(&ClassType::get_inverse_mapping);
+
+    static bool constexpr is_analytical_mapping()
+    {
+        constexpr bool success = CheckClassAttributeExistence<Type, inverse_mapping>::has_attribute;
+        if constexpr (success) {
+            return std::is_invocable_v<inverse_mapping<Type>, Type>;
+        }
+        return success;
+    }
+
+public:
+    /// True if the type describes an analytical mapping, false otherwise
+    static constexpr bool value = is_analytical_mapping();
+};
+
 } // namespace mapping_detail
 
 template <class ExecSpace, class Type>
@@ -313,3 +335,9 @@ static constexpr bool has_2d_inv_jacobian_v
 template <class Mapping>
 static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping<
         std::remove_const_t<std::remove_reference_t<Mapping>>>::value;
+
+template <class Mapping>
+static constexpr bool is_analytical_mapping_v = mapping_detail::IsAnalyticalMapping<Mapping>::value;
+
+template <class Mapping>
+using inverse_mapping_t = decltype(std::declval<Mapping>().get_inverse_mapping());

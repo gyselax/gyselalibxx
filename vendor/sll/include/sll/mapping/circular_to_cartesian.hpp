@@ -11,6 +11,10 @@
 #include "mapping_tools.hpp"
 #include "pseudo_cartesian_compatible_mapping.hpp"
 
+// Pre-declaration of analytical inverse
+template <class X, class Y, class R, class Theta>
+class CartesianToCircular;
+
 /**
  * @brief A class for describing the circular 2D mapping.
  *
@@ -404,6 +408,16 @@ public:
     KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_22_center() const final
     {
         return 1.;
+    }
+
+    /**
+     * @brief Get the inverse mapping.
+     *
+     * @return The inverse mapping.
+     */
+    CartesianToCircular<X, Y, R, Theta> get_inverse_mapping() const
+    {
+        return CartesianToCircular<X, Y, R, Theta>();
     }
 };
 

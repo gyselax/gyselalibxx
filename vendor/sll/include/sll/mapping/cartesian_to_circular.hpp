@@ -7,6 +7,10 @@
 
 #include "mapping_tools.hpp"
 
+// Pre-declaration of analytical inverse
+template <class R, class Theta, class X, class Y>
+class CircularToCartesian;
+
 /**
  * @brief A class for describing the circular 2D mapping.
  *
@@ -222,6 +226,16 @@ public:
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         return x / Kokkos::pow(x * x + y * y, 2.);
+    }
+
+    /**
+     * @brief Get the inverse mapping.
+     *
+     * @return The inverse mapping.
+     */
+    CircularToCartesian<R, Theta, X, Y> get_inverse_mapping() const
+    {
+        return CircularToCartesian<R, Theta, X, Y>();
     }
 };
 

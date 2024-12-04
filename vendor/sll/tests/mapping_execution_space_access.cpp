@@ -210,17 +210,23 @@ double check_physical_to_logical_coord_converter(
 
 TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
 {
-    // Mapping
-    CircularToCartesian<R, Theta, X, Y> const to_physical_mapping;
-    CartesianToCircular<X, Y, R, Theta> const to_logical_mapping;
     static_assert(is_2d_mapping_v<CartesianToCircular<X, Y, R, Theta>>);
     static_assert(is_2d_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
+    static_assert(is_analytical_mapping_v<CartesianToCircular<X, Y, R, Theta>>);
+    static_assert(std::is_same_v<
+                  inverse_mapping_t<CartesianToCircular<X, Y, R, Theta>>,
+                  CircularToCartesian<R, Theta, X, Y>>);
     static_assert(is_accessible_v<
                   Kokkos::DefaultHostExecutionSpace,
                   CartesianToCircular<X, Y, R, Theta>>);
     static_assert(is_accessible_v<
                   Kokkos::DefaultHostExecutionSpace,
                   CircularToCartesian<R, Theta, X, Y>>);
+
+    // Mapping
+    CircularToCartesian<R, Theta, X, Y> const to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> const to_logical_mapping
+            = to_physical_mapping.get_inverse_mapping();
 
     // Test coordinates
     double const r = .75;
@@ -245,17 +251,23 @@ TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
 
 TEST_F(MappingMemoryAccess, HostCzarnyCoordConverter)
 {
-    // Mapping
-    double const epsilon = 0.3;
-    double const e = 1.4;
-    CzarnyToCartesian<R, Theta, X, Y> const to_physical_mapping(epsilon, e);
-    CartesianToCzarny<X, Y, R, Theta> const to_logical_mapping(epsilon, e);
     static_assert(is_2d_mapping_v<CartesianToCzarny<X, Y, R, Theta>>);
     static_assert(is_2d_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
+    static_assert(is_analytical_mapping_v<CartesianToCzarny<X, Y, R, Theta>>);
+    static_assert(std::is_same_v<
+                  inverse_mapping_t<CartesianToCzarny<X, Y, R, Theta>>,
+                  CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, CartesianToCzarny<X, Y, R, Theta>>);
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
+
+    // Mapping
+    double const epsilon = 0.3;
+    double const e = 1.4;
+    CzarnyToCartesian<R, Theta, X, Y> const to_physical_mapping(epsilon, e);
+    CartesianToCzarny<X, Y, R, Theta> const to_logical_mapping
+            = to_physical_mapping.get_inverse_mapping();
 
     // Test coordinates
     double const r = .75;
