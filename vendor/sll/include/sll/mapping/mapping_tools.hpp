@@ -315,6 +315,11 @@ public:
     static constexpr bool value = is_analytical_mapping();
 };
 
+template <class Mapping>
+struct SingularOPointInvJacobian : std::false_type
+{
+};
+
 } // namespace mapping_detail
 
 template <class ExecSpace, class Type>
@@ -341,3 +346,8 @@ static constexpr bool is_analytical_mapping_v = mapping_detail::IsAnalyticalMapp
 
 template <class Mapping>
 using inverse_mapping_t = decltype(std::declval<Mapping>().get_inverse_mapping());
+
+template <class Mapping>
+static constexpr bool has_singular_o_point_inv_jacobian_v
+        = mapping_detail::SingularOPointInvJacobian<
+                std::remove_const_t<std::remove_reference_t<Mapping>>>::value;

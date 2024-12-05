@@ -476,4 +476,11 @@ struct IsCurvilinear2DMapping<DiscreteToCartesian<X, Y, SplineEvaluator, R, Thet
     : std::true_type
 {
 };
+
+template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
+struct SingularOPointInvJacobian<DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+    : std::true_type
+{
+};
+
 } // namespace mapping_detail

@@ -577,4 +577,9 @@ struct IsCurvilinear2DMapping<CzarnyToCartesian<X, Y, R, Theta>> : std::true_typ
 {
 };
 
+template <class X, class Y, class R, class Theta>
+struct SingularOPointInvJacobian<CzarnyToCartesian<R, Theta, X, Y>> : std::true_type
+{
+};
+
 } // namespace mapping_detail
