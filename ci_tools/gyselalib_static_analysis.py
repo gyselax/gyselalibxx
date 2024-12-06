@@ -768,7 +768,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser("A static analysis scipt to search for common errors using cppcheck")
     parser.add_argument('files', type=str, nargs='*')
     parser.add_argument('--errors-only', action='store_true')
+    parser.add_argument('--home-dir', type=Path, default=None)
     args = parser.parse_args()
+
+    if args.home_dir:
+        HOME_DIR = args.home_dir
 
     if args.errors_only:
         possible_error_levels[WARNING] = 0

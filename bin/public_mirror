@@ -39,20 +39,15 @@ while IFS= read -r line
 do
     while [ -n "$line" ]
     do
-      # Truncate at first ` as git grep does not handle this well
-      searchstring='`'
-      truncated_line=${line%%$searchstring*}
-      # Truncate after 140 chars as git grep does not handle more than this
-      truncated_line=${truncated_line:0:140}
+      truncated_line=${line:0:140}
       quoted_line=${truncated_line//"'"/"'\"'\"'"}
       git_log_options="${git_log_options} --grep='${quoted_line}'"
-      line=${truncated_line:140}
+      line=${line:140}
     done
 done <<< ${last_message_public}
 git checkout ${current_SHA}
 
 last_match=$(eval ${git_log_options})
-echo ${last_match}
 
 commits_to_choose=$(git rev-list ${last_match}..HEAD --reverse)
 
