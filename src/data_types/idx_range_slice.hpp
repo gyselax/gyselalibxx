@@ -439,7 +439,7 @@ public:
             IdxRangeSliceIterator const& xx,
             IdxRangeSliceIterator const& yy)
     {
-        assert(xx.stride() == yy.stride());
+        assert(xx.m_stride == yy.m_stride);
         return (yy.m_value > xx.m_value)
                        ? ((-static_cast<difference_type>(yy.m_value - xx.m_value))
                           / ddc::get<Grid1D>(xx.m_stride))
