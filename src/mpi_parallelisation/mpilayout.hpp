@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+
+#include <numeric>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
