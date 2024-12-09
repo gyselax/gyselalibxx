@@ -221,11 +221,11 @@ public:
     /**
      * @brief The first dimension in the advection domain.
      */
-    using X_adv = DimX_pC;
+    using X_adv = X_pC;
     /**
      * @brief The second dimension in the advection domain.
      */
-    using Y_adv = DimY_pC;
+    using Y_adv = Y_pC;
     /**
      * @brief The coordinate type associated to the dimensions in the advection domain.
      */

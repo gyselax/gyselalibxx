@@ -9,7 +9,7 @@
  * @brief Tag the first non periodic dimension
  * in the pseudo_Cartesian index range.
  */
-struct DimX_pC
+struct X_pC
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -21,7 +21,7 @@ struct DimX_pC
  * @brief Tag the second non periodic dimension
  * in the pseudo_Cartesian index range.
  */
-struct DimY_pC
+struct Y_pC
 {
     /**
      * @brief Define periodicity of the dimension.
@@ -30,6 +30,6 @@ struct DimY_pC
     static bool constexpr PERIODIC = false;
 };
 
-using CoordX_pC = Coord<DimX_pC>;
-using CoordY_pC = Coord<DimY_pC>;
-using CoordXY_pC = Coord<DimX_pC, DimY_pC>;
+using CoordX_pC = Coord<X_pC>;
+using CoordY_pC = Coord<Y_pC>;
+using CoordXY_pC = Coord<X_pC, Y_pC>;
