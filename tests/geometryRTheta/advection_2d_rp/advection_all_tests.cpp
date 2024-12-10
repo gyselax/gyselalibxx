@@ -331,8 +331,10 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_czarny_map = discrete_czarny_map_builder();
 
-    AdvectionPhysicalDomain<CircularToCartMapping> const physical_circular_mapping(from_circ_map);
-    AdvectionPhysicalDomain<CzarnyToCartMapping> const physical_czarny_mapping(from_czarny_map);
+    AdvectionPhysicalDomain<CircularToCartMapping, CartToCircularMapping> const
+            physical_circular_mapping(from_circ_map, to_circ_map);
+    AdvectionPhysicalDomain<CzarnyToCartMapping, CartToCzarnyMapping> const
+            physical_czarny_mapping(from_czarny_map, to_czarny_map);
     AdvectionPseudoCartesianDomain<CzarnyToCartMapping> const pseudo_cartesian_czarny_mapping(
             from_czarny_map);
 

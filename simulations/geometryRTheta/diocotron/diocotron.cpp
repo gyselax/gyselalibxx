@@ -52,6 +52,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
 
@@ -115,6 +116,7 @@ int main(int argc, char** argv)
             ddc::PeriodicExtrapolationRule<Theta>());
 
     const LogicalToPhysicalMapping to_physical_mapping;
+    const PhysicalToLogicalMapping to_logical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
@@ -164,7 +166,7 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_domain(to_physical_mapping);
+    AdvectionPhysicalDomain advection_domain(to_physical_mapping, to_logical_mapping);
 
     SplineFootFinder find_feet(
             time_stepper,

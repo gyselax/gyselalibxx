@@ -53,8 +53,8 @@ private:
     using Theta = typename MappingToCartesian::curvilinear_tag_theta;
     using CoordRTheta = ddc::Coordinate<R, Theta>;
 
-    static_assert(is_2d_mapping_v<MappingToCartesian>);
-    static_assert(is_2d_mapping_v<MappingToPseudoCartesian>);
+    static_assert(is_mapping_v<MappingToCartesian>);
+    static_assert(is_mapping_v<MappingToPseudoCartesian>);
     static_assert(has_2d_jacobian_v<MappingToCartesian, CoordRTheta>);
     static_assert(has_2d_jacobian_v<MappingToPseudoCartesian, CoordRTheta>);
 

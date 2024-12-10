@@ -45,6 +45,7 @@ namespace {
 using DiscreteMappingBuilder
         = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
 
@@ -115,6 +116,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Define the to_physical_mapping. ------------------------------------------------------------------------
     const LogicalToPhysicalMapping to_physical_mapping;
+    const PhysicalToLogicalMapping to_logical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
@@ -135,7 +137,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_idx_range(to_physical_mapping);
+    AdvectionPhysicalDomain advection_idx_range(to_physical_mapping, to_logical_mapping);
 
     RK3<host_t<FieldMemRTheta<CoordRTheta>>,
         host_t<DVectorFieldMemRTheta<X, Y>>,
