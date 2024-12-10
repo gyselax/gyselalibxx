@@ -83,24 +83,15 @@ public:
      *
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using span_type = VectorField<
-            ElementType,
-            IdxRangeType,
-            NDTag,
-            MemSpace,
-            std::experimental::layout_right>;
+    using span_type = VectorField<ElementType, IdxRangeType, NDTag, MemSpace, Kokkos::layout_right>;
 
     /**
      * @brief A type which can hold a constant reference to this VectorFieldMem.
      *
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using view_type = VectorField<
-            const ElementType,
-            IdxRangeType,
-            NDTag,
-            MemSpace,
-            std::experimental::layout_right>;
+    using view_type
+            = VectorField<const ElementType, IdxRangeType, NDTag, MemSpace, Kokkos::layout_right>;
 
     /**
      * @brief The type of the index range on which the field is defined.
@@ -218,7 +209,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    element_type operator()(Idx<ODDims> const&... delems) const noexcept
+    element_type operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->

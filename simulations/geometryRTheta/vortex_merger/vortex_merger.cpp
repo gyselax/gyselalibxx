@@ -169,8 +169,8 @@ int main(int argc, char** argv)
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
     PoissonSolver poisson_solver(
-            coeff_alpha_spline,
-            coeff_beta_spline,
+            get_const_field(coeff_alpha_spline),
+            get_const_field(coeff_beta_spline),
             discrete_mapping,
             spline_evaluator);
 
@@ -243,19 +243,27 @@ int main(int argc, char** argv)
             equilibrium(to_physical_mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
     host_t<DFieldMemRTheta> rho_eq(grid);
-    equilibrium.set_equilibrium(rho_eq, function, phi_max, tau);
+    equilibrium.set_equilibrium(get_field(rho_eq), function, phi_max, tau);
 
 
     VortexMergerDensitySolution solution(to_physical_mapping);
     host_t<DFieldMemRTheta> rho(grid);
-    solution.set_initialisation(rho, rho_eq, eps, sigma, x_star_1, y_star_1, x_star_2, y_star_2);
+    solution.set_initialisation(
+            get_field(rho),
+            get_const_field(rho_eq),
+            eps,
+            sigma,
+            x_star_1,
+            y_star_1,
+            x_star_2,
+            y_star_2);
 
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     host_t<DFieldMemRTheta> phi_eq(grid);
     host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_field(rho_coef_eq), spline_evaluator);
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
 
 

@@ -140,7 +140,7 @@ DFieldSpXVx KrookSourceAdaptive::operator()(DFieldSpXVx const allfdistribu, doub
     RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
     timestepper.update(allfdistribu, dt, [&](DFieldSpXVx df, DConstFieldSpXVx f) {
-        get_derivative(df, f, allfdistribu);
+        get_derivative(df, f, get_const_field(allfdistribu));
     });
     Kokkos::Profiling::popRegion();
     return allfdistribu;

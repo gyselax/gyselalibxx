@@ -88,7 +88,7 @@ int main(int argc, char** argv)
     DFieldMemSpVx allfequilibrium(meshSpVx);
     BumpontailEquilibrium const init_fequilibrium
             = BumpontailEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
-    init_fequilibrium(allfequilibrium);
+    init_fequilibrium(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
@@ -96,11 +96,11 @@ int main(int argc, char** argv)
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialization const init = SingleModePerturbInitialization::
-                init_from_input(allfequilibrium, idx_range_kinsp, conf_voicexx);
-        init(allfdistribu);
+                init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
+        init(get_field(allfdistribu));
     } else {
         RestartInitialization const restart(iter_start, time_start);
-        restart(allfdistribu);
+        restart(get_field(allfdistribu));
     }
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
 
@@ -160,7 +160,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(allfdistribu, time_start, deltat, nbiter);
+    predcorr(get_field(allfdistribu), time_start, deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 

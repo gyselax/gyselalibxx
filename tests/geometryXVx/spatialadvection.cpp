@@ -66,7 +66,7 @@ double SpatialAdvection(
     DFieldMemSpXVx allfdistribu(meshSpXVx);
 
     ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
-    advection_x(allfdistribu, timestep);
+    advection_x(get_field(allfdistribu), timestep);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {

@@ -2,14 +2,13 @@
 #include <memory>
 #include <sstream>
 
-#include <experimental/mdspan>
-
 #include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 using namespace std;
-using namespace std::experimental;
 
 TEST(View1DTest, Constructor)
 {

@@ -16,7 +16,7 @@ template <
         class IdxRangeLaplacian,
         class IdxRangeFull = IdxRangeLaplacian,
         class ExecSpace = Kokkos::DefaultExecutionSpace,
-        class LayoutSpace = std::experimental::layout_right>
+        class LayoutSpace = Kokkos::layout_right>
 class FFTPoissonSolver;
 
 /**
@@ -266,7 +266,7 @@ public:
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
 
         // Build a mesh in the fourier space, for N points
-        fourier_idx_range_type const k_mesh = ddc::FourierMesh<
+        fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
         fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
@@ -307,7 +307,7 @@ public:
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
 
         // Build a mesh in the fourier space, for N points
-        fourier_idx_range_type const k_mesh = ddc::FourierMesh<
+        fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
         fourier_field_mem_type intermediate_chunk_alloc(k_mesh);

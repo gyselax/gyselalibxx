@@ -31,7 +31,7 @@ void QNSolver::operator()(
     // Compute the RHS of the Quasi-Neutrality equation.
     DFieldMemXY rho(idx_range_xy);
     DFieldMemVxVy contiguous_slice_vxvy(get_idx_range<GridVx, GridVy>(allfdistribu));
-    m_compute_rho(rho, allfdistribu);
+    m_compute_rho(get_field(rho), allfdistribu);
 
     VectorField<
             double,
@@ -40,7 +40,7 @@ void QNSolver::operator()(
             Kokkos::DefaultExecutionSpace::memory_space,
             typename DFieldMemXY::layout_type>
             electric_field(electric_field_x, electric_field_y);
-    m_solve_poisson(electrostatic_potential, electric_field, rho);
+    m_solve_poisson(electrostatic_potential, electric_field, get_field(rho));
 
     Kokkos::Profiling::popRegion();
 }

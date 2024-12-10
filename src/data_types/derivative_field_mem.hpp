@@ -226,7 +226,7 @@ private:
 
         std::array<std::size_t, sizeof...(DDims)> strides_s {
                 mapping_r.stride(ddc::type_seq_rank_v<DDims, ddc::detail::TypeSeq<DDims...>>)...};
-        std::experimental::layout_stride::mapping<extents_type> mapping_s(extents_r, strides_s);
+        Kokkos::layout_stride::mapping<extents_type> mapping_s(extents_r, strides_s);
         return internal_mdspan_type(ptr, mapping_s);
     }
 

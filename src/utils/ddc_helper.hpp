@@ -184,12 +184,12 @@ auto create_transpose_mirror_view_and_copy(
     static_assert(
             ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
     if constexpr (std::is_same_v<TargetDomain, Domain>) {
-        return src.span_view();
+        return get_field(src);
     } else {
         TargetDomain transposed_domain(src.domain());
         using ElemType = std::remove_const_t<ElementType>;
         FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
-        transpose_layout(execution_space, field_alloc.span_view(), src.span_cview());
+        transpose_layout(execution_space, get_field(field_alloc), get_const_field(src));
         return field_alloc;
     }
 }
@@ -218,7 +218,7 @@ auto create_transpose_mirror(
     static_assert(
             ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
     if constexpr (std::is_same_v<TargetDomain, Domain>) {
-        return src.span_view();
+        return get_field(src);
     } else {
         TargetDomain transposed_domain(src.domain());
         using ElemType = std::remove_const_t<ElementType>;

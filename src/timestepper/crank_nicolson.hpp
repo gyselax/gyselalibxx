@@ -119,11 +119,11 @@ public:
         DerivField k_total = get_field(k_total_alloc);
 
 
-        base_type::copy(y_init, y);
+        base_type::copy(y_init, get_const_field(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(k1, y);
+        dy_calculator(k1, get_const_field(y));
 
         // -------- Calculate k_new ----------
         bool not_converged = true;
@@ -132,7 +132,7 @@ public:
             counter++;
 
             // Calculate k_new = f(y_new)
-            dy_calculator(k_new, y);
+            dy_calculator(k_new, get_const_field(y));
 
             // Calculation of step
             // k_total = k1 + k_new
@@ -144,17 +144,18 @@ public:
                     k_new);
 
             // Save the old characteristic feet
-            base_type::copy(y_old, y);
+            base_type::copy(y_old, get_const_field(y));
 
             // Re-initialiase the characteristic feet
-            base_type::copy(y, y_init);
+            base_type::copy(y, get_const_field(y_init));
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)
-            y_update(y, k_total, 0.5 * dt);
+            y_update(y, get_const_field(k_total), 0.5 * dt);
 
 
             // Check convergence
-            not_converged = not have_converged(exec_space, y_old, y);
+            not_converged
+                    = not have_converged(exec_space, get_const_field(y_old), get_const_field(y));
 
 
         } while (not_converged and (counter < m_max_counter));

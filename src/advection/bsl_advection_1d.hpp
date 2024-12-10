@@ -261,9 +261,9 @@ public:
         // Interpolate the function at the characteristic feet
         function_interpolator(
                 allfdistribu,
-                feet,
-                function_derivatives_min,
-                function_derivatives_max);
+                get_const_field(feet),
+                get_const_field(function_derivatives_min),
+                get_const_field(function_derivatives_max));
 
 
         Kokkos::Profiling::popRegion();

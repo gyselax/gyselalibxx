@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <cmath>
 
-#include <experimental/mdspan>
-
 #include <ddc/ddc.hpp>
+
+#include <Kokkos_Core.hpp>
 
 template <typename T>
 inline T sum(T* array, int size)
@@ -18,9 +18,9 @@ inline T sum(T* array, int size)
 }
 
 template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
-inline ElementType sum(std::experimental::mdspan<
+inline ElementType sum(Kokkos::mdspan<
                        ElementType,
-                       std::experimental::extents<std::size_t, Ext>,
+                       Kokkos::extents<std::size_t, Ext>,
                        LayoutPolicy,
                        AccessorPolicy> const& array)
 {
@@ -33,9 +33,9 @@ inline ElementType sum(std::experimental::mdspan<
 
 template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
 inline ElementType sum(
-        std::experimental::mdspan<
+        Kokkos::mdspan<
                 ElementType,
-                std::experimental::extents<std::size_t, Ext>,
+                Kokkos::extents<std::size_t, Ext>,
                 LayoutPolicy,
                 AccessorPolicy> const& array,
         int start,

@@ -62,7 +62,7 @@ TEST(Masks, Ordering)
     // tests if integral of normalized mask equals 1
     DFieldMemX const quadrature_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
-    Quadrature<IdxRangeX> const integrate_x(quadrature_coeffs);
+    Quadrature<IdxRangeX> const integrate_x(get_const_field(quadrature_coeffs));
 
     host_t<DFieldMemX> mask_normalized_host
             = mask_tanh(gridx, extent, stiffness, MaskType::Normal, true);
