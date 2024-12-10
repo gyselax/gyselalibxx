@@ -42,19 +42,11 @@ namespace fs = std::filesystem;
 
 namespace {
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-using X_adv = typename AdvectionPhysicalDomain<
-        CircularToCartesian<R, Theta, X, Y>,
-        CartesianToCircular<X, Y, R, Theta>>::X_adv;
-using Y_adv = typename AdvectionPhysicalDomain<
-        CircularToCartesian<R, Theta, X, Y>,
-        CartesianToCircular<X, Y, R, Theta>>::Y_adv;
+using X_adv = typename AdvectionPhysicalDomain<CircularToCartesian<R, Theta, X, Y>>::X_adv;
+using Y_adv = typename AdvectionPhysicalDomain<CircularToCartesian<R, Theta, X, Y>>::Y_adv;
 #elif defined(CZARNY_MAPPING_PHYSICAL)
-using X_adv = typename AdvectionPhysicalDomain<
-        CzarnyToCartesian<R, Theta, X, Y>,
-        CartesianToCzarny<X, Y, R, Theta>>::X_adv;
-using Y_adv = typename AdvectionPhysicalDomain<
-        CzarnyToCartesian<R, Theta, X, Y>,
-        CartesianToCzarny<X, Y, R, Theta>>::Y_adv;
+using X_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<R, Theta, X, Y>>::X_adv;
+using Y_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<R, Theta, X, Y>>::Y_adv;
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
 using X_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<R, Theta, X, Y>>::X_adv;
@@ -175,7 +167,7 @@ int main(int argc, char** argv)
     CircularToCartesian<R, Theta, X, Y> analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
     CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
-    AdvectionPhysicalDomain advection_domain(analytical_mapping, to_logical_mapping);
+    AdvectionPhysicalDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
     std::string const adv_domain_name = "PHYSICAL";
     key += "circular_physical";
@@ -188,7 +180,7 @@ int main(int argc, char** argv)
     CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
-    AdvectionPhysicalDomain advection_domain(analytical_mapping, to_logical_mapping);
+    AdvectionPhysicalDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PHYSICAL";
     key += "czarny_physical";
