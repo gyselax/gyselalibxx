@@ -13,7 +13,7 @@
 template <class Mapping, class PositionCoordinate>
 class MetricTensor
 {
-    static_assert(is_2d_mapping_v<Mapping>);
+    static_assert(is_mapping_v<Mapping>);
     static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
 
 public:

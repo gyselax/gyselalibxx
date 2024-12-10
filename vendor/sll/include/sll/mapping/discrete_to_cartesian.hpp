@@ -30,9 +30,7 @@ template <
         class R = typename SplineEvaluator::continuous_dimension_type1,
         class Theta = typename SplineEvaluator::continuous_dimension_type2,
         class MemorySpace = typename SplineEvaluator::memory_space>
-class DiscreteToCartesian
-    : public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
-    , public PseudoCartesianCompatibleMapping
+class DiscreteToCartesian : public PseudoCartesianCompatibleMapping
 {
     static_assert(std::is_same_v<MemorySpace, typename SplineEvaluator::memory_space>);
 
@@ -132,7 +130,7 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         const double x = m_spline_evaluator(coord, m_x_spline_representation.span_cview());
         const double y = m_spline_evaluator(coord, m_y_spline_representation.span_cview());

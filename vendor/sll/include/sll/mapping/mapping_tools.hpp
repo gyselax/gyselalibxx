@@ -42,17 +42,17 @@ public:
 };
 
 /**
- * @brief A helper class to determine if a type is a 2D mapping.
+ * @brief A helper class to determine if a type is a mapping.
  */
 template <typename Type>
-class Is2DMapping
+class IsMapping
 {
     template <typename ClassType>
     using coord_arg_type = typename ClassType::CoordArg;
     template <typename ClassType>
     using coord_result_type = typename ClassType::CoordResult;
 
-    static bool constexpr is_2d_mapping()
+    static bool constexpr is_mapping()
     {
         constexpr bool success
                 = CheckClassAttributeExistence<Type, coord_arg_type>::has_attribute
@@ -66,8 +66,8 @@ class Is2DMapping
     }
 
 public:
-    /// True if the type describes a 2d mapping, false otherwise
-    static constexpr bool value = is_2d_mapping();
+    /// True if the type describes a mapping, false otherwise
+    static constexpr bool value = is_mapping();
 };
 
 template <typename Type, typename CoordinateType>
@@ -327,7 +327,7 @@ static constexpr bool is_accessible_v = mapping_detail::
         MappingAccessibility<ExecSpace, std::remove_const_t<std::remove_reference_t<Type>>>::value;
 
 template <class Mapping>
-static constexpr bool is_2d_mapping_v = mapping_detail::Is2DMapping<Mapping>::value;
+static constexpr bool is_mapping_v = mapping_detail::IsMapping<Mapping>::value;
 
 template <class Mapping, class CoordinateType>
 static constexpr bool has_2d_jacobian_v

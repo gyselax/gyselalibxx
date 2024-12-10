@@ -2,35 +2,32 @@
 
 #include <ddc/ddc.hpp>
 
-#include "coordinate_converter.hpp"
+#include "mapping_tools.hpp"
 
 /**
- * @brief A class to convert cartesian coordinates to barycentric coordinates
+ * @brief A class to convert barycentric coordinates to cartesian coordinates
  * on a triangle.
  *
  * Tags are used to identify the corners of the triangle. This ensures that
  * there are different types for coordinate systems related to different triangles.
  *
- * @tparam X The tag of the x dimension of the cartesian coordinates.
- * @tparam Y The tag of the y dimension of the cartesian coordinates.
  * @tparam Corner1Tag A tag identifying the first corner of the triangle.
  * @tparam Corner2Tag A tag identifying the second corner of the triangle.
  * @tparam Corner3Tag A tag identifying the third corner of the triangle.
+ * @tparam X The tag of the x dimension of the cartesian coordinates.
+ * @tparam Y The tag of the y dimension of the cartesian coordinates.
  */
-template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag>
-class CartesianToBarycentricCoordinates
-    : public CoordinateConverter<
-              ddc::Coordinate<X, Y>,
-              ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>>
-    , public CoordinateConverter<
-              ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>,
-              ddc::Coordinate<X, Y>>
+template <class Corner1Tag, class Corner2Tag, class Corner3Tag, class X, class Y>
+class BarycentricToCartesian
 {
 public:
     /// The type of a coordinate in the barycentric coordinate system.
-    using BarycentricCoord = ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>;
+    using CoordArg = ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>;
 
     /// The type of a coordinate in the cartesian coordinate system.
+    using CoordResult = ddc::Coordinate<X, Y>;
+
+private:
     using CartesianCoord = ddc::Coordinate<X, Y>;
 
 private:
@@ -46,7 +43,7 @@ public:
      * @param[in] corner2 The coordinates of the second corner of the triangle.
      * @param[in] corner3 The coordinates of the third corner of the triangle.
      */
-    CartesianToBarycentricCoordinates(
+    BarycentricToCartesian(
             CartesianCoord const& corner1,
             CartesianCoord const& corner2,
             CartesianCoord const& corner3)
@@ -60,56 +57,30 @@ public:
      * @brief A copy operator for the mapping operator.
      * @param other The object to be copied.
      */
-    CartesianToBarycentricCoordinates(CartesianToBarycentricCoordinates const& other) = default;
+    BarycentricToCartesian(BarycentricToCartesian const& other) = default;
 
     /**
      * @brief A r-value copy operator for the mapping operator.
      * @param x The object to be consumed.
      */
-    CartesianToBarycentricCoordinates(CartesianToBarycentricCoordinates&& x) = default;
+    BarycentricToCartesian(BarycentricToCartesian&& x) = default;
 
     /// @brief The destructor of the mapping operator.
-    ~CartesianToBarycentricCoordinates() = default;
+    ~BarycentricToCartesian() = default;
 
     /**
      * @brief A copy operator for the mapping operator.
      * @param x The object to be copied.
      * @return A reference to this class instance.
      */
-    CartesianToBarycentricCoordinates& operator=(CartesianToBarycentricCoordinates const& x)
-            = default;
+    BarycentricToCartesian& operator=(BarycentricToCartesian const& x) = default;
 
     /**
      * @brief A r-value copy operator for the mapping operator.
      * @param x The object to be consumed.
      * @return A reference to this class instance.
      */
-    CartesianToBarycentricCoordinates& operator=(CartesianToBarycentricCoordinates&& x) = default;
-
-    /**
-     * @brief The operator to get the equivalent barycentric coordinate of the cartesian coordinate.
-     *
-     * @param[in] pos The known cartesian coordinate.
-     *
-     * @return The equivalent barycentric coordinate.
-     */
-    KOKKOS_FUNCTION BarycentricCoord operator()(CartesianCoord const& pos) const final
-    {
-        const double x = ddc::get<X>(pos);
-        const double y = ddc::get<Y>(pos);
-        const double x1 = ddc::get<X>(m_corner1);
-        const double x2 = ddc::get<X>(m_corner2);
-        const double x3 = ddc::get<X>(m_corner3);
-        const double y1 = ddc::get<Y>(m_corner1);
-        const double y2 = ddc::get<Y>(m_corner2);
-        const double y3 = ddc::get<Y>(m_corner3);
-
-        const double div = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3));
-        const double lam1 = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / div;
-        const double lam2 = ((y - y3) * (x1 - x3) + (x3 - x) * (y1 - y3)) / div;
-        const double lam3 = 1 - lam1 - lam2;
-        return BarycentricCoord(lam1, lam2, lam3);
-    }
+    BarycentricToCartesian& operator=(BarycentricToCartesian&& x) = default;
 
     /**
      * @brief The operator to get the equivalent cartesian coordinate of the barycentric coordinate.
@@ -118,7 +89,7 @@ public:
      *
      * @return The equivalent cartesian coordinate.
      */
-    KOKKOS_FUNCTION CartesianCoord operator()(BarycentricCoord const& pos) const final
+    KOKKOS_FUNCTION CoordResult operator()(CoordArg const& pos) const
     {
         const double l1 = ddc::get<Corner1Tag>(pos);
         const double l2 = ddc::get<Corner2Tag>(pos);

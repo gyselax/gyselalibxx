@@ -5,7 +5,7 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/bernstein.hpp>
-#include <sll/mapping/barycentric_coordinates.hpp>
+#include <sll/mapping/cartesian_to_barycentric.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/view.hpp>
@@ -220,7 +220,7 @@ public:
 
         template <class DiscreteMapping>
         struct IntermediateBernsteinBasis
-            : BernsteinPolynomialBasis<
+            : TriangularBernsteinPolynomialBasis<
                       typename DiscreteMapping::cartesian_tag_x,
                       typename DiscreteMapping::cartesian_tag_y,
                       Corner1Tag,
@@ -286,12 +286,7 @@ public:
                 const ddc::Coordinate<DimX, DimY>
                         corner3(x0 - 0.5 * tau, y0 - 0.5 * tau * sqrt(3.0));
 
-                const CartesianToBarycentricCoordinates<
-                        DimX,
-                        DimY,
-                        Corner1Tag,
-                        Corner2Tag,
-                        Corner3Tag>
+                const CartesianToBarycentric<DimX, DimY, Corner1Tag, Corner2Tag, Corner3Tag>
                         barycentric_coordinate_converter(corner1, corner2, corner3);
 
                 using BernsteinBasis = IntermediateBernsteinBasis<DiscreteMapping>;
