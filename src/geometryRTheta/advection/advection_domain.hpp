@@ -62,9 +62,11 @@ public:
  *
  *
  */
-template <class LogicalToPhysicalMapping, class PhysicalToLogicalMapping>
+template <class LogicalToPhysicalMapping>
 class AdvectionPhysicalDomain : public AdvectionDomain<LogicalToPhysicalMapping>
 {
+    static_assert(is_analytical_mapping_v<LogicalToPhysicalMapping>);
+
 public:
     /**
      * @brief The first dimension in the advection domain.
@@ -80,8 +82,11 @@ public:
     using CoordXY_adv = Coord<X_adv, Y_adv>;
 
 private:
-    LogicalToPhysicalMapping const& m_to_cartesian_mapping;
-    PhysicalToLogicalMapping const& m_to_curvilinear_mapping;
+    using PhysicalToLogicalMapping = inverse_mapping_t<LogicalToPhysicalMapping>;
+
+private:
+    LogicalToPhysicalMapping m_to_cartesian_mapping;
+    PhysicalToLogicalMapping m_to_curvilinear_mapping;
 
 public:
     /**
@@ -89,15 +94,12 @@ public:
      *
      * @param[in] to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
-     * @param[in] to_logical_mapping
-     *      The mapping from the physical domain to the logical domain.
      */
-    AdvectionPhysicalDomain(
-            LogicalToPhysicalMapping const& to_physical_mapping,
-            PhysicalToLogicalMapping const& to_logical_mapping)
+    AdvectionPhysicalDomain(LogicalToPhysicalMapping const& to_physical_mapping)
         : m_to_cartesian_mapping(to_physical_mapping)
-        , m_to_curvilinear_mapping(to_logical_mapping) {};
-    ~AdvectionPhysicalDomain() {};
+        , m_to_curvilinear_mapping(to_physical_mapping.get_inverse_mapping())
+    {
+    }
 
     /**
      * @brief Advect the characteristic feet.
