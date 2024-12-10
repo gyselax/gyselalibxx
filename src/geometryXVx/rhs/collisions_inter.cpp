@@ -74,15 +74,15 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
     compute_collfreq_ab(
             get_field(collfreq_ab),
             get_const_field(m_nustar_profile),
-            get_const_field(density),
-            get_const_field(temperature));
+            density,
+            temperature);
     compute_momentum_energy_exchange(
             momentum_exchange_ab,
             energy_exchange_ab,
-            get_const_field(collfreq_ab),
-            get_const_field(density),
-            get_const_field(fluid_velocity),
-            get_const_field(temperature));
+            collfreq_ab,
+            density,
+            fluid_velocity,
+            temperature);
 
     DFieldMemSpXVx fmaxwellian_alloc(get_idx_range(allfdistribu));
     DFieldSpXVx fmaxwellian = get_field(fmaxwellian_alloc);

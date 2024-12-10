@@ -649,7 +649,7 @@ private:
     template <class Dim1, class Dim2>
     KOKKOS_INLINE_FUNCTION int get_patch_idx(Coord<Dim1, Dim2> const coord) const
     {
-        using Mapping = typename PatchLocator::template get_mapping_on_logical_dim_t<Dim1, Dim2>;
+        using Mapping = typename PatchLocator::get_mapping_on_logical_dim_t<Dim1, Dim2>;
         Mapping const mapping(m_patch_locator.template get_mapping_on_logical_dim<Dim1, Dim2>());
         return m_patch_locator(mapping(coord));
     }
@@ -665,10 +665,10 @@ private:
                               Coord<CurrentDim1, CurrentDim2>>) {
             return current_coord;
         } else {
-            using CurrentMapping = typename PatchLocator::
-                    template get_mapping_on_logical_dim_t<CurrentDim1, CurrentDim2>;
-            using TargetMapping = typename PatchLocator::
-                    template get_mapping_on_logical_dim_t<TargetDim1, TargetDim2>;
+            using CurrentMapping =
+                    typename PatchLocator::get_mapping_on_logical_dim_t<CurrentDim1, CurrentDim2>;
+            using TargetMapping =
+                    typename PatchLocator::get_mapping_on_logical_dim_t<TargetDim1, TargetDim2>;
 
             static_assert(is_curvilinear_2d_mapping_v<CurrentMapping>);
             static_assert((std::is_same_v<

@@ -61,7 +61,8 @@ public:
 private:
     using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
 
-    using SplineType = ddc::ChunkView<double, spline_idx_range, Kokkos::layout_right, MemorySpace>;
+    using SplineType = ddc::
+            ChunkView<double, spline_idx_range, std::experimental::layout_right, MemorySpace>;
 
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;

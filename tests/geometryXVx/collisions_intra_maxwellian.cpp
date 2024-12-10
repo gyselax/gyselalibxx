@@ -140,11 +140,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     DFieldMemSpX temperature_init(get_idx_range<Species, GridX>(allfdistribu_host));
     ddc::parallel_deepcopy(temperature_init, temperature_init_host);
 
-    compute_collfreq(
-            collfreq,
-            get_const_field(nustar_profile),
-            get_const_field(density_init),
-            get_const_field(temperature_init));
+    compute_collfreq(collfreq, nustar_profile, density_init, temperature_init);
 
     host_t<DFieldMemSpX> collfreq_host(get_idx_range<Species, GridX>(allfdistribu_host));
     ddc::parallel_deepcopy(collfreq_host, collfreq);
@@ -167,32 +163,19 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     FieldMem<double, IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> Dcoll_f(
             collisions.get_mesh_ghosted());
     auto Dcoll = get_field(Dcoll_f);
-    compute_Dcoll<CollisionsIntra::GhostedVx>(
-            Dcoll,
-            get_const_field(collfreq),
-            get_const_field(density_init),
-            get_const_field(temperature_init));
+    compute_Dcoll<CollisionsIntra::GhostedVx>(Dcoll, collfreq, density_init, temperature_init);
 
     FieldMem<double, IdxRange<Species, GridX, CollisionsIntra::GhostedVx>> dvDcoll_f(
             collisions.get_mesh_ghosted());
     auto dvDcoll = get_field(dvDcoll_f);
-    compute_dvDcoll<CollisionsIntra::GhostedVx>(
-            dvDcoll,
-            get_const_field(collfreq),
-            get_const_field(density_init),
-            get_const_field(temperature_init));
+    compute_dvDcoll<CollisionsIntra::GhostedVx>(dvDcoll, collfreq, density_init, temperature_init);
 
     // kernel maxwellian fluid moments
     DFieldMemSpX Vcoll_f(get_idx_range<Species, GridX>(allfdistribu_host));
     DFieldMemSpX Tcoll_f(get_idx_range<Species, GridX>(allfdistribu_host));
     auto Vcoll = get_field(Vcoll_f);
     auto Tcoll = get_field(Tcoll_f);
-    compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(
-            Vcoll,
-            get_field(Tcoll),
-            get_const_field(allfdistribu),
-            get_field(Dcoll),
-            get_field(dvDcoll));
+    compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
 
     host_t<DFieldMemSpX> Vcoll_host(get_idx_range<Species, GridX>(allfdistribu_host));
     host_t<DFieldMemSpX> Tcoll_host(get_idx_range<Species, GridX>(allfdistribu_host));
@@ -204,7 +187,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
         EXPECT_LE(std::fabs(Tcoll_host(ispx) - temperature_init_host(ispx)), 1e-12);
     });
 
-    collisions(get_field(allfdistribu), deltat);
+    collisions(allfdistribu, deltat);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // collision operator should not change densiy, mean_velocity and temperature
@@ -308,35 +291,18 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     int const nbsteps = 300;
     for (int iter = 0; iter < nbsteps; ++iter) {
-        collisions(get_field(allfdistribu), deltat);
+        collisions(allfdistribu, deltat);
     };
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // Vcoll and Tcoll calculation
-    compute_collfreq(
-            collfreq,
-            get_const_field(nustar_profile),
-            get_const_field(density_init),
-            get_const_field(temperature_init));
+    compute_collfreq(collfreq, nustar_profile, density_init, temperature_init);
 
-    compute_Dcoll<CollisionsIntra::GhostedVx>(
-            Dcoll,
-            get_const_field(collfreq),
-            get_const_field(density_init),
-            get_const_field(temperature_init));
+    compute_Dcoll<CollisionsIntra::GhostedVx>(Dcoll, collfreq, density_init, temperature_init);
 
-    compute_dvDcoll<CollisionsIntra::GhostedVx>(
-            dvDcoll,
-            get_const_field(collfreq),
-            get_const_field(density_init),
-            get_const_field(temperature_init));
+    compute_dvDcoll<CollisionsIntra::GhostedVx>(dvDcoll, collfreq, density_init, temperature_init);
 
-    compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(
-            Vcoll,
-            get_field(Tcoll),
-            get_const_field(allfdistribu),
-            get_field(Dcoll),
-            get_field(dvDcoll));
+    compute_Vcoll_Tcoll<CollisionsIntra::GhostedVx>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
 
     moments(get_field(density_res), get_const_field(allfdistribu), FluidMoments::s_density);
     moments(get_field(mean_velocity_res),

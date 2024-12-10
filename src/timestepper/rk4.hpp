@@ -104,38 +104,38 @@ public:
 
 
         // Save initial conditions
-        base_type::copy(y_prime, get_const_field(y));
+        base_type::copy(y_prime, y);
 
         // --------- Calculate k1 ------------
         // k1 = f(y)
-        dy_calculator(k1, get_const_field(y));
+        dy_calculator(k1, y);
 
         // --------- Calculate k2 ------------
         // Calculate y_new := y_n + h/2*k_1
-        y_update(y_prime, get_const_field(k1), 0.5 * dt);
+        y_update(y_prime, k1, 0.5 * dt);
 
         // Calculate k2 = f(y_new)
-        dy_calculator(k2, get_const_field(y_prime));
+        dy_calculator(k2, y_prime);
 
         // --------- Calculate k3 ------------
         // Collect initial conditions
-        base_type::copy(y_prime, get_const_field(y));
+        base_type::copy(y_prime, y);
 
         // Calculate y_new := y_n + h/2*k_2
-        y_update(y_prime, get_const_field(k2), 0.5 * dt);
+        y_update(y_prime, k2, 0.5 * dt);
 
         // Calculate k3 = f(y_new)
-        dy_calculator(k3, get_const_field(y_prime));
+        dy_calculator(k3, y_prime);
 
         // --------- Calculate k3 ------------
         // Collect initial conditions
-        base_type::copy(y_prime, get_const_field(y));
+        base_type::copy(y_prime, y);
 
         // Calculate y_new := y_n + h*k_3
-        y_update(y_prime, get_const_field(k3), dt);
+        y_update(y_prime, k3, dt);
 
         // Calculate k4 = f(y_new)
-        dy_calculator(k4, get_const_field(y_prime));
+        dy_calculator(k4, y_prime);
 
         // --------- Update y ------------
         // Calculation of step
@@ -153,6 +153,6 @@ public:
                 k4);
 
         // Calculate y_{n+1} := y_n + (k1 + 2 * k2 + 2 * k3 + k4) * h/6
-        y_update(y, get_const_field(k_total), dt / 6.);
+        y_update(y, k_total, dt / 6.);
     }
 };

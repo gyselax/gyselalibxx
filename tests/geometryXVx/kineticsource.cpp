@@ -89,7 +89,7 @@ TEST(KineticSource, Moments)
             energy_amplitude,
             temperature_source);
 
-    kinetic_source(get_field(allfdistribu), deltat);
+    kinetic_source(allfdistribu, deltat);
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
 
     host_t<DFieldMemX> density(gridx);

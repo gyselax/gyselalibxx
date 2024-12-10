@@ -98,7 +98,7 @@ void batched_operator_1d()
 
     DFieldMemX quad_coeffs(trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
 
-    Quadrature<IdxRangeX, IdxRangeB1X> quad_batched_operator(get_const_field(quad_coeffs));
+    Quadrature<IdxRangeX, IdxRangeB1X> quad_batched_operator(get_field(quad_coeffs));
 
     DFieldMemBatch1 results(gridb);
     quad_batched_operator(
@@ -148,7 +148,7 @@ void batched_operator_2d()
 
     DFieldMemXY quad_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
-    Quadrature<IdxRangeXY, IdxRangeB1B2XY> quad_batched_operator(get_const_field(quad_coeffs));
+    Quadrature<IdxRangeXY, IdxRangeB1B2XY> quad_batched_operator(get_field(quad_coeffs));
 
     IdxRangeB1B2 gridb(gridb1, gridb2);
 
@@ -204,7 +204,7 @@ void batched_operator_1d_2d()
     DFieldMemXY quad_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
 
-    Quadrature<IdxRangeXY, IdxRangeB1XY> quad_batched_operator(get_const_field(quad_coeffs));
+    Quadrature<IdxRangeXY, IdxRangeB1XY> quad_batched_operator(get_field(quad_coeffs));
 
     DFieldMemBatch1 results(gridb1);
     quad_batched_operator(
@@ -251,7 +251,7 @@ void batched_operator_2d_1d()
     IdxRangeX gridx = ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_ncells));
 
     DFieldMemX quad_coeffs(trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx));
-    Quadrature<IdxRangeX, IdxRangeB1B2X> quad_batched_operator(get_const_field(quad_coeffs));
+    Quadrature<IdxRangeX, IdxRangeB1B2X> quad_batched_operator(get_field(quad_coeffs));
 
     IdxRangeB1B2 gridb(gridb1, gridb2);
 
@@ -305,7 +305,7 @@ void batched_operator_2d_reordered()
 
     DFieldMemXY quad_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridxy));
-    Quadrature<IdxRangeXY, IdxRangeXB1YB2> quad_batched_operator(get_const_field(quad_coeffs));
+    Quadrature<IdxRangeXY, IdxRangeXB1YB2> quad_batched_operator(get_field(quad_coeffs));
 
     IdxRangeB1B2 gridb(gridb1, gridb2);
 

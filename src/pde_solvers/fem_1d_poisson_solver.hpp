@@ -24,7 +24,7 @@ class FEM1DPoissonSolver
               typename SplineEvaluator::evaluation_domain_type,
               typename SplineEvaluator::batched_evaluation_domain_type,
               typename SplineEvaluator::memory_space,
-              Kokkos::layout_right>
+              std::experimental::layout_right>
 {
     static_assert(std::is_same_v<
                   typename SplineBuilder::batched_interpolation_domain_type,
@@ -38,7 +38,7 @@ private:
             typename SplineEvaluator::evaluation_domain_type,
             typename SplineEvaluator::batched_evaluation_domain_type,
             typename SplineEvaluator::memory_space,
-            Kokkos::layout_right>;
+            std::experimental::layout_right>;
 
 private:
     /// The interpolation mesh type

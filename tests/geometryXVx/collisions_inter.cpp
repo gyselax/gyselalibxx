@@ -104,7 +104,7 @@ TEST(CollisionsInter, CollisionsInter)
 
         int const nbiter(100);
         for (int iter(0); iter < nbiter; iter++) {
-            collisions(get_field(allfdistribu), deltat);
+            collisions(allfdistribu, deltat);
         }
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
@@ -116,15 +116,13 @@ TEST(CollisionsInter, CollisionsInter)
         host_t<DFieldMemSpX> temperature_host(get_idx_range<Species, GridX>(allfdistribu_host));
 
         ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
-            moments(density_host(ispx),
-                    get_const_field(allfdistribu[ispx]),
-                    FluidMoments::s_density);
+            moments(density_host(ispx), allfdistribu[ispx], FluidMoments::s_density);
             moments(fluid_velocity_host(ispx),
-                    get_const_field(allfdistribu[ispx]),
+                    allfdistribu[ispx],
                     density_host(ispx),
                     FluidMoments::s_velocity);
             moments(temperature_host(ispx),
-                    get_const_field(allfdistribu[ispx]),
+                    allfdistribu[ispx],
                     density_host(ispx),
                     fluid_velocity_host(ispx),
                     FluidMoments::s_temperature);
@@ -134,11 +132,7 @@ TEST(CollisionsInter, CollisionsInter)
 
         //Collision frequencies, momentum and energy exchange terms
         DFieldMemSpX collfreq_ab(get_idx_range<Species, GridX>(allfdistribu_host));
-        compute_collfreq_ab(
-                get_field(collfreq_ab),
-                get_const_field(nustar_profile),
-                get_const_field(density),
-                get_const_field(temperature));
+        compute_collfreq_ab(get_field(collfreq_ab), nustar_profile, density, temperature);
         auto collfreq_ab_host = ddc::create_mirror_view_and_copy(get_field(collfreq_ab));
 
         double const me_on_memi(mass(my_ielec) / (mass(my_ielec) + mass(my_iion)));

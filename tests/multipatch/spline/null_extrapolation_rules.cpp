@@ -47,9 +47,8 @@ TEST_F(MultipatchSplineOnionShapeTest, NullExtrapolationRuleHostTest)
 {
     auto function_1_coef_host = ddc::create_mirror_and_copy(splines.template get<Patch1>());
     auto function_2_coef_host = ddc::create_mirror_and_copy(splines.template get<Patch2>());
-    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const splines_host(
-            get_const_field(function_1_coef_host),
-            get_const_field(function_2_coef_host));
+    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
+            splines_host(get_field(function_1_coef_host), get_field(function_2_coef_host));
 
     NullExtrapolationRule null_extrapol_rule;
 

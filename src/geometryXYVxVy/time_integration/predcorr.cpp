@@ -35,9 +35,9 @@ DFieldSpXYVxVy PredCorr::operator()(
     DFieldMemSpXYVxVy allfdistribu_half_t(get_idx_range(allfdistribu));
 
     m_poisson_solver(
-            get_field(electrostatic_potential),
-            get_field(electric_field_x),
-            get_field(electric_field_y),
+            electrostatic_potential,
+            electric_field_x,
+            electric_field_y,
             get_const_field(allfdistribu));
 
     int iter = 0;
@@ -47,9 +47,9 @@ DFieldSpXYVxVy PredCorr::operator()(
         // computation of the electrostatic potential at time tn and
         // the associated electric field
         m_poisson_solver(
-                get_field(electrostatic_potential),
-                get_field(electric_field_x),
-                get_field(electric_field_y),
+                electrostatic_potential,
+                electric_field_x,
+                electric_field_y,
                 get_const_field(allfdistribu));
         // copies necessary to PDI
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
@@ -64,34 +64,22 @@ DFieldSpXYVxVy PredCorr::operator()(
         ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu);
 
         // predictor
-        m_vlasov_solver(
-                get_field(allfdistribu_half_t),
-                get_const_field(electric_field_x),
-                get_const_field(electric_field_y),
-                dt / 2);
+        m_vlasov_solver(allfdistribu_half_t, electric_field_x, electric_field_y, dt / 2);
 
         // computation of the electrostatic potential at time tn+1/2
         // and the associated electric field
         m_poisson_solver(
-                get_field(electrostatic_potential),
-                get_field(electric_field_x),
-                get_field(electric_field_y),
-                get_const_field(allfdistribu_half_t));
+                electrostatic_potential,
+                electric_field_x,
+                electric_field_y,
+                allfdistribu_half_t);
 
         // correction on a dt
-        m_vlasov_solver(
-                get_field(allfdistribu),
-                get_const_field(electric_field_x),
-                get_const_field(electric_field_y),
-                dt);
+        m_vlasov_solver(allfdistribu, electric_field_x, electric_field_y, dt);
     }
 
     double const final_time = iter * dt;
-    m_poisson_solver(
-            get_field(electrostatic_potential),
-            get_field(electric_field_x),
-            get_field(electric_field_y),
-            get_const_field(allfdistribu));
+    m_poisson_solver(electrostatic_potential, electric_field_x, electric_field_y, allfdistribu);
 
     //copies necessary to PDI
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);

@@ -87,11 +87,11 @@ int main(int argc, char** argv)
     DFieldMemSpVxVy allfequilibrium(meshSpVxVy);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
-    init_fequilibrium(get_field(allfequilibrium));
+    init_fequilibrium(allfequilibrium);
     DFieldMemSpXYVxVy allfdistribu(meshSpXYVxVy);
     SingleModePerturbInitialization const init = SingleModePerturbInitialization::
-            init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
-    init(get_field(allfdistribu));
+            init_from_input(allfequilibrium, idx_range_kinsp, conf_voicexx);
+    init(allfdistribu);
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
 
     // --> Algorithm info

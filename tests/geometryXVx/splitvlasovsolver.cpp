@@ -77,5 +77,5 @@ TEST(SplitVlasovSolver, Ordering)
         EXPECT_CALL(advec_x, CallOp).WillOnce(Return(fdistribu_s));
     }
 
-    solver(fdistribu_s, get_const_field(efield), dt);
+    solver(fdistribu_s, efield, dt);
 }

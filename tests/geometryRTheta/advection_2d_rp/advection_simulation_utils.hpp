@@ -419,7 +419,7 @@ void simulate(
     // Advect "iteration_number" times:
     for (int i(0); i < iteration_number; ++i) {
         allfdistribu_advected_test = advection_operator(
-                get_field(allfdistribu_test),
+                allfdistribu_test,
                 get_const_field(advection_field_test_vec),
                 dt);
 

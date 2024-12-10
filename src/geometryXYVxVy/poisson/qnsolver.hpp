@@ -24,7 +24,7 @@ class QNSolver : public IQNSolver
             IdxRangeXY,
             IdxRangeXY,
             typename Kokkos::DefaultExecutionSpace::memory_space,
-            Kokkos::layout_right>;
+            std::experimental::layout_right>;
     PoissonSolver const& m_solve_poisson;
     IChargeDensityCalculator const& m_compute_rho;
 

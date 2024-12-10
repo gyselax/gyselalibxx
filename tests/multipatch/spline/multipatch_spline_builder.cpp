@@ -275,8 +275,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
     initialize_1D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstField1OnPatch, Patch1, Patch2>
-            function_values(get_const_field(function_1), get_const_field(function_2));
+    MultipatchField<DConstField1OnPatch, Patch1, Patch2> function_values(function_1, function_2);
 
 
 
@@ -347,8 +346,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     initialize_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
-            function_values(get_const_field(function_1), get_const_field(function_2));
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
 
 
 

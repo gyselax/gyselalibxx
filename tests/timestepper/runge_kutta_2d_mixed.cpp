@@ -147,7 +147,7 @@ TYPED_TEST(RungeKutta2DFixtureMixedTypes, RungeKutta2DOrderMixedTypes)
         for (int i(0); i < Nt; ++i) {
             runge_kutta.update(
                     Kokkos::DefaultHostExecutionSpace(),
-                    get_field(vals),
+                    vals,
                     dt,
                     [yc,
                      xc,

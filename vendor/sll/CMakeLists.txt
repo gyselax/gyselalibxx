@@ -23,7 +23,7 @@ target_include_directories(SLL
 target_link_libraries(SLL
     PUBLIC
         DDC::DDC
-				Kokkos::kokkos
+				std::mdspan
 )
 if(CMAKE_VERSION GREATER_EQUAL 3.18)
     target_link_libraries(SLL PRIVATE LAPACK::LAPACK)

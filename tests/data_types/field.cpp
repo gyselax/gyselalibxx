@@ -39,8 +39,12 @@ using IdxRangeX = IdxRange<GridX>;
 using DVectorFieldMemX = host_t<VectorFieldMem<double, IdxRangeX, Direction>>;
 using DVectorFieldX = host_t<VectorField<double, IdxRangeX, Direction>>;
 using DVectorConstFieldX = host_t<VectorField<double const, IdxRangeX, Direction>>;
-using DVectorConstFieldSliceX
-        = VectorField<double const, IdxRangeX, Direction, Kokkos::HostSpace, Kokkos::layout_stride>;
+using DVectorConstFieldSliceX = VectorField<
+        double const,
+        IdxRangeX,
+        Direction,
+        Kokkos::HostSpace,
+        std::experimental::layout_stride>;
 
 
 struct GridY
@@ -74,7 +78,7 @@ using DVectorConstFieldSliceXY = VectorField<
         IdxRangeXY,
         Direction,
         Kokkos::HostSpace,
-        Kokkos::layout_stride>;
+        std::experimental::layout_stride>;
 
 using IdxYX = Idx<GridY, GridX>;
 using IdxStepYX = IdxStep<GridY, GridX>;
@@ -105,7 +109,9 @@ static IdxRangeXY constexpr idx_range_x_y(lbound_x_y, nelems_x_y);
 
 TEST(VectorFieldMem0DTest, LayoutType)
 {
-    EXPECT_TRUE((std::is_same_v<DVectorFieldMem0D::chunk_type::layout_type, Kokkos::layout_right>));
+    EXPECT_TRUE((std::is_same_v<
+                 DVectorFieldMem0D::chunk_type::layout_type,
+                 std::experimental::layout_right>));
 }
 
 TEST(VectorField1DTest, LayoutType)
@@ -114,7 +120,7 @@ TEST(VectorField1DTest, LayoutType)
 
     EXPECT_TRUE((std::is_same_v<
                  std::decay_t<decltype(field)::chunk_type>::layout_type,
-                 Kokkos::layout_right>));
+                 std::experimental::layout_right>));
 }
 
 // TODO: many missing types
@@ -434,8 +440,9 @@ TEST(VectorField2DTest, SliceCoordX)
     }
 
     DVectorConstFieldY field_y = field_cref[slice_x_val];
-    EXPECT_TRUE(
-            (std::is_same_v<std::decay_t<decltype(field_y)>::layout_type, Kokkos::layout_right>));
+    EXPECT_TRUE((std::is_same_v<
+                 std::decay_t<decltype(field_y)>::layout_type,
+                 std::experimental::layout_right>));
     EXPECT_EQ(
             ddcHelper::get<Tag1>(field_y).extent<GridY>(),
             ddcHelper::get<Tag1>(field).extent<GridY>());
@@ -464,8 +471,9 @@ TEST(VectorField2DTest, SliceCoordY)
     }
 
     DVectorConstFieldSliceX field_x = field_cref[slice_y_val];
-    EXPECT_TRUE(
-            (std::is_same_v<std::decay_t<decltype(field_x)>::layout_type, Kokkos::layout_stride>));
+    EXPECT_TRUE((std::is_same_v<
+                 std::decay_t<decltype(field_x)>::layout_type,
+                 std::experimental::layout_stride>));
     EXPECT_EQ(
             ddcHelper::get<Tag1>(field_x).extent<GridX>(),
             ddcHelper::get<Tag1>(field).extent<GridX>());
@@ -494,8 +502,9 @@ TEST(VectorField2DTest, IdxRangeSliceX)
     }
 
     DVectorConstFieldXY subfield_x = field_cref[subidx_range_x];
-    EXPECT_TRUE((
-            std::is_same_v<std::decay_t<decltype(subfield_x)>::layout_type, Kokkos::layout_right>));
+    EXPECT_TRUE((std::is_same_v<
+                 std::decay_t<decltype(subfield_x)>::layout_type,
+                 std::experimental::layout_right>));
 
     EXPECT_EQ(ddcHelper::get<Tag1>(subfield_x).extent<GridX>(), subidx_range_x.size());
     EXPECT_EQ(ddcHelper::get<Tag2>(subfield_x).extent<GridY>(), get_idx_range<GridY>(field).size());
@@ -553,7 +562,7 @@ TEST(VectorField2DTest, IdxRangeSliceY)
     DVectorConstFieldSliceXY subfield_y = field_cref[subidx_range_y];
     EXPECT_TRUE((std::is_same_v<
                  std::decay_t<decltype(subfield_y)>::layout_type,
-                 Kokkos::layout_stride>));
+                 std::experimental::layout_stride>));
 
     EXPECT_EQ(ddcHelper::get<Tag1>(subfield_y).extent<GridX>(), get_idx_range<GridX>(field).size());
     EXPECT_EQ(ddcHelper::get<Tag1>(subfield_y).extent<GridY>(), subidx_range_y.size());
@@ -600,7 +609,7 @@ TEST(VectorField2DTest, DeepcopyReordered)
         }
     }
     DVectorFieldMemYX field2_alloc(ddc::select<GridY, GridX>(get_idx_range(field)));
-    VectorField<double, IdxRangeXY, Direction, Kokkos::HostSpace, Kokkos::layout_left>
+    VectorField<double, IdxRangeXY, Direction, Kokkos::HostSpace, std::experimental::layout_left>
             field2(get_idx_range(field),
                    field2_alloc.get<Tag1>().data_handle(),
                    field2_alloc.get<Tag2>().data_handle());

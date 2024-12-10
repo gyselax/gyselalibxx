@@ -382,8 +382,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceEvaluateOnSingleCoord)
             evaluator_2,
             coords,
             splines,
-            get_const_field(function_1_coef),
-            get_const_field(function_2_coef));
+            function_1_coef,
+            function_2_coef);
 
     /*
         REMARK: here Patch1::Coord12 == Patch2::Coord12 == Coord<R, Theta>.
@@ -631,8 +631,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
             evaluator_2,
             coords,
             splines,
-            get_const_field(function_1_coef),
-            get_const_field(function_2_coef));
+            function_1_coef,
+            function_2_coef);
 
     // --- derivativative 2 ----------------------
     test_deriv_dim_2(
@@ -641,8 +641,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
             evaluator_2,
             coords,
             splines,
-            get_const_field(function_1_coef),
-            get_const_field(function_2_coef));
+            function_1_coef,
+            function_2_coef);
 
     // --- cross-derivativative ------------------
     test_deriv_1_and_2(
@@ -651,8 +651,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
             evaluator_2,
             coords,
             splines,
-            get_const_field(function_1_coef),
-            get_const_field(function_2_coef));
+            function_1_coef,
+            function_2_coef);
 
     // --- derivatives on template dimension -----
     test_deriv<R>(
@@ -661,8 +661,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
             evaluator_2,
             coords,
             splines,
-            get_const_field(function_1_coef),
-            get_const_field(function_2_coef));
+            function_1_coef,
+            function_2_coef);
 
     test_deriv<Theta>(
             evaluators,
@@ -670,8 +670,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
             evaluator_2,
             coords,
             splines,
-            get_const_field(function_1_coef),
-            get_const_field(function_2_coef));
+            function_1_coef,
+            function_2_coef);
 }
 
 
@@ -908,9 +908,8 @@ TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
 {
     auto function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
     auto function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
-    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const splines_host(
-            get_const_field(function_1_coef_host),
-            get_const_field(function_2_coef_host));
+    MultipatchField<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
+            splines_host(get_field(function_1_coef_host), get_field(function_2_coef_host));
 
     // Definition of MultipatchSplineEvaluator2D
     PatchLocator<HostExecSpace> const

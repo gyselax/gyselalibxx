@@ -143,7 +143,7 @@ void launch_tests(
     // --- TEST 1 -------------------------------------------------------------------------------------
     std::cout << "TEST 1: f(r,theta ) = 1. " << std::endl;
     ddc::for_each(grid, [&](IdxRTheta const irp) { test(irp) = 1.; });
-    check_norms(quadrature, get_field(test), expected_norms[0], TOLs[0]);
+    check_norms(quadrature, test, expected_norms[0], TOLs[0]);
 
     // --- TEST 2 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 2: f(r,theta ) = cos(theta) " << std::endl;
@@ -151,7 +151,7 @@ void launch_tests(
         double const th = ddc::select<Theta>(ddc::coordinate(irp));
         test(irp) = std::cos(th);
     });
-    check_norms(quadrature, get_field(test), expected_norms[1], TOLs[1]);
+    check_norms(quadrature, test, expected_norms[1], TOLs[1]);
     std::cout << "Remark: (r, theta) -> |cos(theta)| not C¹." << std::endl;
 
     // --- TEST 3 -------------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ void launch_tests(
         double const r = ddc::select<R>(ddc::coordinate(irp));
         test(irp) = r;
     });
-    check_norms(quadrature, get_field(test), expected_norms[2], TOLs[2]);
+    check_norms(quadrature, test, expected_norms[2], TOLs[2]);
 
     // --- TEST 4 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 4: f(r,theta ) = r cos(theta) " << std::endl;
@@ -169,7 +169,7 @@ void launch_tests(
         double const th = ddc::select<Theta>(ddc::coordinate(irp));
         test(irp) = r * std::cos(th);
     });
-    check_norms(quadrature, get_field(test), expected_norms[3], TOLs[3]);
+    check_norms(quadrature, test, expected_norms[3], TOLs[3]);
     std::cout << "Remark: (r, theta) -> |r cos(theta)| not C¹." << std::endl;
 
     // --- TEST 5 -------------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ void launch_tests(
         double const th = ddc::select<Theta>(ddc::coordinate(irp));
         test(irp) = std::pow(r, 5) * std::cos(10 * th);
     });
-    check_norms(quadrature, get_field(test), expected_norms[4], TOLs[4]);
+    check_norms(quadrature, test, expected_norms[4], TOLs[4]);
     std::cout << "Remark: (r, theta) -> |r⁵ cos(10*theta)| not C¹." << std::endl;
 }
 

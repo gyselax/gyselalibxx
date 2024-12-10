@@ -161,8 +161,8 @@ public:
                   ddc::discrete_space<BSplinesTheta<2>>().full_domain())
         , function_1_coef_alloc(spline_idx_range_rtheta1)
         , function_2_coef_alloc(spline_idx_range_rtheta2)
-        , splines(get_const_field(set_spline_1(get_field(function_1_coef_alloc))),
-                  get_const_field(set_spline_2(get_field(function_2_coef_alloc))))
+        , splines(set_spline_1(get_field(function_1_coef_alloc)),
+                  set_spline_2(get_field(function_2_coef_alloc)))
         , all_idx_ranges(idx_range_rtheta1, idx_range_rtheta2)
     {
     }

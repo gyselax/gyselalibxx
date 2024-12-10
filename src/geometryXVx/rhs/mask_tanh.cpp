@@ -47,7 +47,7 @@ host_t<DFieldMemX> mask_tanh(
     if (normalized) {
         host_t<DFieldMemX> const quadrature_coeffs
                 = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
-        host_t<Quadrature<IdxRangeX>> const integrate_x(get_const_field(quadrature_coeffs));
+        host_t<Quadrature<IdxRangeX>> const integrate_x(quadrature_coeffs);
         double const coeff_norm
                 = integrate_x(Kokkos::DefaultHostExecutionSpace(), get_const_field(mask));
         ddc::for_each(gridx, [&](IdxX const ix) { mask(ix) = mask(ix) / coeff_norm; });

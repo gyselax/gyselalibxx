@@ -187,7 +187,7 @@ double compute_error(int n_elems, Method quad_method)
         break;
     }
     }
-    Quadrature<IdxRangeXY> const integrate(get_const_field(quadrature_coeffs));
+    Quadrature<IdxRangeXY> const integrate(quadrature_coeffs);
 
     DFieldMemXY values_alloc(gridxy);
     DFieldXY values = get_field(values_alloc);

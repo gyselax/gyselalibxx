@@ -83,7 +83,7 @@ public:
      */
     host_t<DConstFieldSp> epsilon_bot() const
     {
-        return get_const_field(m_epsilon_bot);
+        return m_epsilon_bot;
     }
 
     /**
@@ -92,7 +92,7 @@ public:
      */
     host_t<DConstFieldSp> temperature_bot() const
     {
-        return get_const_field(m_temperature_bot);
+        return m_temperature_bot;
     }
 
     /**
@@ -101,6 +101,6 @@ public:
      */
     host_t<DConstFieldSp> mean_velocity_bot() const
     {
-        return get_const_field(m_mean_velocity_bot);
+        return m_mean_velocity_bot;
     }
 };

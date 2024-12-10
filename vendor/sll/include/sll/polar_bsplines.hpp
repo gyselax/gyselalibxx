@@ -200,7 +200,7 @@ public:
         ddc::ChunkSpan<
                 double,
                 singular_basis_linear_combination_idx_range_type,
-                Kokkos::layout_right,
+                std::experimental::layout_right,
                 MemorySpace>
                 m_singular_basis_elements;
 
@@ -332,8 +332,7 @@ public:
                                         mapping_tensor_product_index_type(ir, ip));
                         ddc::Chunk<double, ddc::DiscreteDomain<BernsteinBasis>> bernstein_vals(
                                 bernstein_idx_range);
-                        ddc::discrete_space<BernsteinBasis>()
-                                .eval_basis(bernstein_vals.span_view(), point);
+                        ddc::discrete_space<BernsteinBasis>().eval_basis(bernstein_vals, point);
                         // Fill spline coefficients
                         for (auto k : bernstein_idx_range) {
                             m_singular_basis_elements(discrete_element_type {k.uid()}, ir, ip)

@@ -1,7 +1,8 @@
 #include <cassert>
 #include <utility>
 
-#include <Kokkos_Core.hpp>
+#include <experimental/mdspan>
+
 #include <string.h>
 
 #include "sll/matrix_corner_block.hpp"

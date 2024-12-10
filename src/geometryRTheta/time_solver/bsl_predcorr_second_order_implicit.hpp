@@ -229,7 +229,7 @@ public:
             implicit_loop(
                     advection_field,
                     get_const_field(advection_field_coefs_k),
-                    get_field(feet_coords),
+                    feet_coords,
                     dt / 4.,
                     tau);
 
@@ -299,7 +299,7 @@ public:
             implicit_loop(
                     advection_field,
                     get_const_field(advection_field_coefs_k),
-                    get_field(feet_coords),
+                    feet_coords,
                     dt / 2.,
                     tau);
 
@@ -333,7 +333,7 @@ public:
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
-        m_poisson_solver(charge_density_coord, get_field(electrical_potential));
+        m_poisson_solver(charge_density_coord, electrical_potential);
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)

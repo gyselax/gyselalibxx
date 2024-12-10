@@ -132,7 +132,7 @@ public:
 
             // STEP 2: compute phi_star^i with PDE solver
             m_builder(get_field(rho_coef), get_const_field(rho_eq));
-            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef), m_evaluator);
+            PoissonLikeRHSFunction poisson_rhs(rho_coef, m_evaluator);
             m_poisson_solver(poisson_rhs, get_field(phi_star));
 
             // STEP 3: compute c^i

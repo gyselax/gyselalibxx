@@ -4,6 +4,8 @@
 #include <ostream>
 #include <utility>
 
+#include <experimental/mdspan>
+
 #include <Kokkos_Core.hpp>
 
 namespace detail {
@@ -14,15 +16,19 @@ struct ViewNDMaker;
 template <std::size_t N, class ElementType>
 struct ViewNDMaker<N, ElementType, true>
 {
-    using type
-            = Kokkos::mdspan<ElementType, Kokkos::dextents<std::size_t, N>, Kokkos::layout_right>;
+    using type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<std::size_t, N>,
+            std::experimental::layout_right>;
 };
 
 template <std::size_t N, class ElementType>
 struct ViewNDMaker<N, ElementType, false>
 {
-    using type
-            = Kokkos::mdspan<ElementType, Kokkos::dextents<std::size_t, N>, Kokkos::layout_stride>;
+    using type = std::experimental::mdspan<
+            ElementType,
+            std::experimental::dextents<std::size_t, N>,
+            std::experimental::layout_stride>;
 };
 
 /// Note: We use the comma operator to fill the input parameters
@@ -39,7 +45,7 @@ template <
         std::size_t... Is>
 std::ostream& stream_impl(
         std::ostream& os,
-        Kokkos::mdspan<ElementType, Extents, Layout, Accessor> const& s,
+        std::experimental::mdspan<ElementType, Extents, Layout, Accessor> const& s,
         std::index_sequence<I0, Is...>)
 {
     if constexpr (sizeof...(Is) > 0) {
@@ -47,7 +53,8 @@ std::ostream& stream_impl(
         for (std::size_t i0 = 0; i0 < s.extent(I0); ++i0) {
             stream_impl(
                     os,
-                    Kokkos::submdspan(s, i0, ((void)Is, Kokkos::full_extent)...),
+                    std::experimental::
+                            submdspan(s, i0, ((void)Is, std::experimental::full_extent)...),
                     std::make_index_sequence<sizeof...(Is)>());
         }
         os << ']';
@@ -65,17 +72,17 @@ std::ostream& stream_impl(
 // template <class>
 // struct IsContiguous;
 // template <>
-// struct IsContiguous<Kokkos::layout_stride>
+// struct IsContiguous<std::experimental::layout_stride>
 // {
 //     static constexpr bool val = false;
 // };
 // template <>
-// struct IsContiguous<Kokkos::layout_right>
+// struct IsContiguous<std::experimental::layout_right>
 // {
 //     static constexpr bool val = true;
 // };
 // template <class ElementType, class Extents, class LayoutPolicy, class AccessorPolicy>
-// struct IsContiguous<Kokkos::mdspan<ElementType, Extents, LayoutPolicy, AccessorPolicy>>
+// struct IsContiguous<std::experimental::mdspan<ElementType, Extents, LayoutPolicy, AccessorPolicy>>
 // {
 //     static constexpr bool val = IsContiguous<LayoutPolicy>::val;
 // };
@@ -84,7 +91,7 @@ std::ostream& stream_impl(
 
 
 template <std::size_t N, class ElementType>
-using SpanND = Kokkos::mdspan<ElementType, Kokkos::dextents<std::size_t, N>>;
+using SpanND = std::experimental::mdspan<ElementType, std::experimental::dextents<std::size_t, N>>;
 
 template <std::size_t N, class ElementType>
 using ViewND = SpanND<N, ElementType const>;
@@ -142,7 +149,7 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 template <class ElementType, class Extents, class Layout, class Accessor>
 std::ostream& operator<<(
         std::ostream& os,
-        Kokkos::mdspan<ElementType, Extents, Layout, Accessor> const& s)
+        std::experimental::mdspan<ElementType, Extents, Layout, Accessor> const& s)
 {
     return detail::stream_impl(os, s, std::make_index_sequence<Extents::rank()>());
 }

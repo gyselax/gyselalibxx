@@ -128,7 +128,7 @@ public:
     ddc::ChunkSpan<
             double,
             ddc::DiscreteDomain<BSplinesR, BSplinesTheta>,
-            Kokkos::layout_right,
+            std::experimental::layout_right,
             MemSpace>
             spline_coef;
 
@@ -136,7 +136,11 @@ public:
      * A ChunkSpan containing the coefficients in front of the b-spline elements near the
      * singular point which cannot be expressed as a tensor product of 1D bsplines.
      */
-    ddc::ChunkSpan<double, ddc::DiscreteDomain<PolarBSplinesType>, Kokkos::layout_right, MemSpace>
+    ddc::ChunkSpan<
+            double,
+            ddc::DiscreteDomain<PolarBSplinesType>,
+            std::experimental::layout_right,
+            MemSpace>
             singular_spline_coef;
 
 public:
@@ -195,7 +199,7 @@ public:
     ddc::ChunkSpan<
             double const,
             ddc::DiscreteDomain<BSplinesR, BSplinesTheta>,
-            Kokkos::layout_right,
+            std::experimental::layout_right,
             MemSpace> const spline_coef;
 
     /**
@@ -205,7 +209,7 @@ public:
     ddc::ChunkSpan<
             double const,
             ddc::DiscreteDomain<PolarBSplinesType>,
-            Kokkos::layout_right,
+            std::experimental::layout_right,
             MemSpace> const singular_spline_coef;
 
 public:

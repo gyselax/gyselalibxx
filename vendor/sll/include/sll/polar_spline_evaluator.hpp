@@ -158,11 +158,12 @@ public:
      */
     template <class Domain>
     void operator()(
-            ddc::ChunkSpan<double, Domain, Kokkos::layout_right, MemSpace> const spline_eval,
+            ddc::ChunkSpan<double, Domain, std::experimental::layout_right, MemSpace> const
+                    spline_eval,
             ddc::ChunkSpan<
                     ddc::Coordinate<DimR, DimTheta> const,
                     Domain,
-                    Kokkos::layout_right,
+                    std::experimental::layout_right,
                     MemSpace> const coords_eval,
             PolarSplineView<PolarBSplinesType, MemSpace> const spline_coef) const
     {

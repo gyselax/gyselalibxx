@@ -79,7 +79,7 @@ TEST(FftPoissonSolver, CosineSource)
     DFieldMemX rhs(gridx);
 
     ddc::parallel_deepcopy(rhs, rhs_host);
-    poisson(get_field(electrostatic_potential), get_field(electric_field), get_field(rhs));
+    poisson(electrostatic_potential, electric_field, rhs);
     ddc::parallel_deepcopy(electric_field_host, electric_field);
     ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
 
@@ -132,7 +132,7 @@ TEST(FftPoissonSolver, BatchedCosineSource)
     DFieldMemXY rhs(gridxy);
 
     ddc::parallel_deepcopy(rhs, rhs_host);
-    poisson(get_field(electrostatic_potential), get_field(electric_field), get_field(rhs));
+    poisson(electrostatic_potential, electric_field, rhs);
     ddc::parallel_deepcopy(electric_field_host, electric_field);
     ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
 

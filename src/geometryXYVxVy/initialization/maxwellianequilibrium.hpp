@@ -76,7 +76,7 @@ public:
      */
     host_t<ConstFieldSp<double>> density_eq() const
     {
-        return get_const_field(m_density_eq);
+        return m_density_eq;
     }
 
     /**
@@ -85,7 +85,7 @@ public:
      */
     host_t<ConstFieldSp<double>> temperature_eq() const
     {
-        return get_const_field(m_temperature_eq);
+        return m_temperature_eq;
     }
 
     /**
@@ -94,6 +94,6 @@ public:
      */
     host_t<ConstFieldSp<double>> mean_velocity_eq() const
     {
-        return get_const_field(m_mean_velocity_eq);
+        return m_mean_velocity_eq;
     }
 };

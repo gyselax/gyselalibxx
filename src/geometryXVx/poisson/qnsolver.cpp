@@ -27,9 +27,9 @@ void QNSolver::operator()(
     // Compute the RHS of the Quasi-Neutrality equation.
     DFieldMemX rho(idx_range_x);
 
-    m_compute_rho(get_field(rho), allfdistribu);
+    m_compute_rho(rho, allfdistribu);
 
-    m_solve_poisson(electrostatic_potential, electric_field, get_field(rho));
+    m_solve_poisson(electrostatic_potential, electric_field, rho);
 
     Kokkos::Profiling::popRegion();
 }

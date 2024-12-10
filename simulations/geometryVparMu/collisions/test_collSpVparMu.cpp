@@ -64,12 +64,12 @@ int main(int argc, char** argv)
     DFieldMemSpVparMu allfequilibrium(idxrange_spvparmu);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idxrange_kinsp, conf_collision);
-    init_fequilibrium(get_field(allfequilibrium));
+    init_fequilibrium(allfequilibrium);
 
     // ---> Initialisation of the distribution function as a pertubed Maxwellian
     DFieldMemSpVparMu allfdistribu(idxrange_spvparmu);
-    NoPerturbInitialization const init(get_const_field(allfequilibrium));
-    init(get_field(allfdistribu));
+    NoPerturbInitialization const init(allfequilibrium);
+    init(allfdistribu);
 
     // ---> Expose unchanged data (related to mesh and species) to PDI
     ddc::expose_to_pdi("Nvpar_spline_cells", idxrange_vpar.size());
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
             get_const_field(coeff_intdmu),
             get_const_field(coeff_intdvpar),
             B_norm,
-            get_const_field(Bstar_s));
+            Bstar_s);
 
     // --------- TIME ITERATION ---------
     // ---> Reading of algorithm info from input YAML file
@@ -145,7 +145,7 @@ int main(int argc, char** argv)
                 .and_with("fdistribu", allfdistribu_host);
 
         // Apply collision operator
-        collision_operator(get_field(allfdistribu), deltat);
+        collision_operator(allfdistribu, deltat);
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     }
 

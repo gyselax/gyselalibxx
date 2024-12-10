@@ -11,7 +11,7 @@ template <
         class IdxRangeType,
         class NDTag,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
-        class LayoutStridedPolicy = Kokkos::layout_right>
+        class LayoutStridedPolicy = std::experimental::layout_right>
 class VectorField;
 
 template <
@@ -315,8 +315,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    KOKKOS_FUNCTION element_type
-    operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION element_type operator()(Idx<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->
@@ -385,6 +384,6 @@ template <
         class IdxRangeType,
         class NDTag,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
-        class LayoutStridedPolicy = Kokkos::layout_right>
+        class LayoutStridedPolicy = std::experimental::layout_right>
 using VectorConstField
         = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
