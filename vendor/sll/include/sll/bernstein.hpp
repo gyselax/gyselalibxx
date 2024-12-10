@@ -1,70 +1,37 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/cartesian_to_barycentric.hpp>
+#include <sll/mapping/barycentric_coordinates.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/view.hpp>
 
-/**
- * @brief A class which evaluates the triangular Bernstein polynomials.
- *
- * Triangular Bernstein polynomials of degree @f$ D @f$ are defined as:
- * @f$ T_{i_1,i_2,i_3}(x,y) = \binom{D}{i_1\,i_2\,i_3} \lambda_1^{i_1} \lambda_2^{i_2} \lambda_3^{i_3}, \quad i_1 +i_2+i_3 =D @f$
- *
- * Where @f$ \lambda_1 @f$, @f$ \lambda_2 @f$, and @f$ \lambda_3 @f$ are the barycentric coordinates of @f$ (x,y) @f$
- *
- * c.f. Toshniwal et al. 2017
- * Multi-degree smooth polar splines: A framework for geometric modeling and isogeometric analysis
- * https://doi.org/10.1016/j.cma.2016.11.009
- *
- * @tparam X The first dimension of the cartesian coordinate system.
- * @tparam Y The second dimension of the cartesian coordinate system.
- * @tparam Corner1Tag A class to identify the first corner.
- * @tparam Corner2Tag A class to identify the second corner.
- * @tparam Corner3Tag A class to identify the third corner.
- * @tparam D The degree of the polynomial.
- */
-template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag, std::size_t D>
-class TriangularBernsteinPolynomialBasis
+template <
+        class Tag1,
+        class Tag2,
+        class Corner1Tag,
+        class Corner2Tag,
+        class Corner3Tag,
+        std::size_t D>
+class BernsteinPolynomialBasis
 {
 public:
-    /// A tag for DDC to recognise the discrete dimension type.
-    using discrete_dimension_type = TriangularBernsteinPolynomialBasis;
+    using discrete_dimension_type = BernsteinPolynomialBasis;
 
-    /**
-     * @brief The rank of the system of equations. This is equal to the number of dimensions
-     * in the coordinates on which the polynomials are evaluated.
-     *
-     * @return The rank of the system.
-     */
     static constexpr std::size_t rank()
     {
         return 2;
     }
 
-    /**
-     * @brief The degree of the triangular Bernstein polynomials.
-     * @return The degree of the triangular Bernstein polynomials.
-     */
     static constexpr std::size_t degree() noexcept
     {
         return D;
     }
 
-    /**
-     * @brief The number of basis elements.
-     * @return The number of basis elements.
-     */
     static constexpr std::size_t nbasis()
     {
         return (D + 1) * (D + 2) / 2;
     }
 
-    /**
-     * The Impl class holds the implementation of the TriangularBernsteinPolynomialBasis.
-     *
-     * @tparam MemorySpace Indicates where the object is saved. This is either on the host or the device.
-     */
     template <class DDim, class MemorySpace>
     class Impl
     {
@@ -72,89 +39,62 @@ public:
         friend class Impl;
 
     private:
-        CartesianToBarycentric<X, Y, Corner1Tag, Corner2Tag, Corner3Tag> m_coord_changer;
+        CartesianToBarycentricCoordinates<Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag>
+                m_coord_changer;
 
     public:
-        /// The tag which identifies the basis.
-        using discrete_dimension_type = TriangularBernsteinPolynomialBasis;
+        using discrete_dimension_type = BernsteinPolynomialBasis;
 
-        /// The type of an index of an element of the basis.
         using discrete_element_type = ddc::DiscreteElement<DDim>;
 
-        /// The type of the index range of the basis.
         using discrete_domain_type = ddc::DiscreteDomain<DDim>;
 
-        /// The type of an index step from one element of the basis to another.
         using discrete_vector_type = ddc::DiscreteVector<DDim>;
 
-        /**
-         * @brief Construct the basis from the barycentric coordinate mapping.
-         * @param[in] coord_changer The class which converts cartesian coordinates to
-         * barycentric coordinates.
-         */
-        Impl(CartesianToBarycentric<X, Y, Corner1Tag, Corner2Tag, Corner3Tag> const& coord_changer)
+        Impl(CartesianToBarycentricCoordinates<
+                Tag1,
+                Tag2,
+                Corner1Tag,
+                Corner2Tag,
+                Corner3Tag> const& coord_changer)
             : m_coord_changer(coord_changer)
         {
         }
 
-        /**
-         * @brief Construct the basis by copy. This constructor is used to create
-         * the class on a different memory space.
-         * @param[in] impl The implementation of the origin memory space.
-         */
         template <class OriginMemorySpace>
         explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
             : m_coord_changer(impl.m_coord_changer)
         {
         }
 
-        /**
-         * @brief Construct the basis by copy.
-         * @param[in] x The basis to be copied.
-         */
         Impl(Impl const& x) = default;
 
-        /**
-         * @brief Construct the basis from an r-value.
-         * @param[in] x The temporary basis to be copied.
-         */
         Impl(Impl&& x) = default;
 
         ~Impl() = default;
 
-        /**
-         * @brief Copy-assign the class.
-         *
-         * @param x An reference to another Impl.
-         * @return A reference to this object.
-         */
         Impl& operator=(Impl const& x) = default;
 
-        /**
-         * @brief Move-assign the class.
-         *
-         * @param x An rvalue to another Impl.
-         * @return A reference to this object.
-         */
         Impl& operator=(Impl&& x) = default;
 
-        /**
-         * @brief Evaluate the basis at the given coordinate.
-         * @param[out] values The values of the basis functions at the coordinate.
-         * @param[in] x The coordinate where the polynomials should be evaluated.
-         */
         void eval_basis(
                 ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> values,
-                ddc::Coordinate<X, Y> const& x) const;
+                ddc::Coordinate<Tag1, Tag2> const& x) const;
     };
 };
 
-template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag, std::size_t D>
+template <
+        class Tag1,
+        class Tag2,
+        class Corner1Tag,
+        class Corner2Tag,
+        class Corner3Tag,
+        std::size_t D>
 template <class DDim, class MemorySpace>
-void TriangularBernsteinPolynomialBasis<X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D>::
+void BernsteinPolynomialBasis<Tag1, Tag2, Corner1Tag, Corner2Tag, Corner3Tag, D>::
         Impl<DDim, MemorySpace>::eval_basis(
                 ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> values,
-                ddc::Coordinate<X, Y> const& x) const
+                ddc::Coordinate<Tag1, Tag2> const& x) const
 {
     const ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag> bary_coords = m_coord_changer(x);
     const double l1 = ddc::get<Corner1Tag>(bary_coords);

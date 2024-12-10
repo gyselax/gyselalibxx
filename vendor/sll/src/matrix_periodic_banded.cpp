@@ -3,7 +3,7 @@
 #include <cmath>
 #include <utility>
 
-#include <experimental/mdspan>
+#include <Kokkos_Core.hpp>
 
 #include "sll/matrix.hpp"
 #include "sll/matrix_dense.hpp"

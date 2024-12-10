@@ -92,7 +92,7 @@ public:
      */
     host_t<DConstFieldSp> mass() const
     {
-        return m_mass;
+        return get_const_field(m_mass);
     }
 
     /**
@@ -101,7 +101,7 @@ public:
      */
     host_t<DConstFieldSp> density_eq() const
     {
-        return m_density_eq;
+        return get_const_field(m_density_eq);
     }
 
     /**
@@ -110,7 +110,7 @@ public:
      */
     host_t<DConstFieldSp> temperature_eq() const
     {
-        return m_temperature_eq;
+        return get_const_field(m_temperature_eq);
     }
 
     /**
@@ -119,6 +119,6 @@ public:
      */
     host_t<DConstFieldSp> mean_velocity_eq() const
     {
-        return m_mean_velocity_eq;
+        return get_const_field(m_mean_velocity_eq);
     }
 };

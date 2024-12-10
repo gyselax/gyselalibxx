@@ -127,7 +127,8 @@ void Interpolation_on_random_coord(
 
     host_t<DFieldRTheta> function_interpolated;
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
-    function_interpolated = interpolator(function_evaluated, random_coords);
+    function_interpolated
+            = interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err(0.0);

@@ -86,16 +86,16 @@ public:
 
 protected:
     /// @brief The type of the memory block stored in the array internal_fields
-    using internal_mdspan_type = std::experimental::mdspan<
+    using internal_mdspan_type = Kokkos::mdspan<
             element_type,
-            std::experimental::dextents<std::size_t, sizeof...(DDims)>,
-            std::experimental::layout_stride>;
+            Kokkos::dextents<std::size_t, sizeof...(DDims)>,
+            Kokkos::layout_stride>;
 
     /// @brief The type of a constant view on the memory block stored in the array internal_fields
-    using internal_mdview_type = std::experimental::mdspan<
+    using internal_mdview_type = Kokkos::mdspan<
             const element_type,
-            std::experimental::dextents<std::size_t, sizeof...(DDims)>,
-            std::experimental::layout_stride>;
+            Kokkos::dextents<std::size_t, sizeof...(DDims)>,
+            Kokkos::layout_stride>;
 
     /// @brief The type of a modifiable span of this field. This is a DDC keyword used to make this class interchangeable with Field.
     using chunk_span = typename FieldType::span_type;
@@ -217,7 +217,7 @@ protected:
             const
     {
         if constexpr (!ddc::in_tags_v<QueryDDim, ddc::detail::TypeSeq<ODDims...>>) {
-            return std::experimental::full_extent;
+            return Kokkos::full_extent;
         } else {
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
                 // Physical dimension along which derivatives are known
@@ -264,7 +264,7 @@ protected:
             int array_idx) const
     {
         if constexpr (!ddc::in_tags_v<QueryDDim, ddc::detail::TypeSeq<ODDims...>>) {
-            return std::experimental::full_extent;
+            return Kokkos::full_extent;
         } else {
             if constexpr (ddc::in_tags_v<QueryDDim, physical_deriv_grids>) {
                 // Physical dimension along which derivatives are known
@@ -345,7 +345,7 @@ protected:
         // Get the relevant internal field
         internal_mdspan_type internal_view = internal_fields[array_idx];
         // Slice the relevant section of the internal field
-        auto subview = std::experimental::
+        auto subview = Kokkos::
                 submdspan(internal_view, get_slicer_for<DDims>(full_idx_range, array_idx)...);
         // Create a Field with the expected index range
         Field<element_type,
@@ -419,8 +419,8 @@ protected:
         // Get the relevant internal field
         internal_mdspan_type internal_view = internal_fields[array_idx];
         // Slice the relevant section of the internal field
-        auto subview = std::experimental::
-                submdspan(internal_view, get_slicer_for<DDims>(slice_idx, array_idx)...);
+        auto subview
+                = Kokkos::submdspan(internal_view, get_slicer_for<DDims>(slice_idx, array_idx)...);
         // Create a Field with the expected index range
         Field<element_type,
               final_idx_range_type,
@@ -547,10 +547,10 @@ public:
         int const array_idx = get_array_index(deriv_index);
 
         internal_mdspan_type internal_view = internal_fields[array_idx];
-        auto subview_all_dims = std::experimental::submdspan(
+        auto subview_all_dims = Kokkos::submdspan(
                 internal_view,
                 get_slicer_for<DDims>(provided_deriv_idx_range, array_idx)...);
-        auto subview = std::experimental::
+        auto subview = Kokkos::
                 submdspan(subview_all_dims, get_slicer_for<DDims>(deriv_elements, array_idx)...);
         return subview;
     }

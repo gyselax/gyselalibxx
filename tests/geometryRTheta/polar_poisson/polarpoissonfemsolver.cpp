@@ -155,7 +155,11 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(coeff_alpha_spline, coeff_beta_spline, discrete_mapping, evaluator);
+    PoissonSolver
+            solver(get_const_field(coeff_alpha_spline),
+                   get_const_field(coeff_beta_spline),
+                   discrete_mapping,
+                   evaluator);
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "

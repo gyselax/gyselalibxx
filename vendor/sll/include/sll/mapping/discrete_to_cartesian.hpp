@@ -30,7 +30,9 @@ template <
         class R = typename SplineEvaluator::continuous_dimension_type1,
         class Theta = typename SplineEvaluator::continuous_dimension_type2,
         class MemorySpace = typename SplineEvaluator::memory_space>
-class DiscreteToCartesian : public PseudoCartesianCompatibleMapping
+class DiscreteToCartesian
+    : public CoordinateConverter<ddc::Coordinate<R, Theta>, ddc::Coordinate<X, Y>>
+    , public PseudoCartesianCompatibleMapping
 {
     static_assert(std::is_same_v<MemorySpace, typename SplineEvaluator::memory_space>);
 
@@ -61,8 +63,7 @@ public:
 private:
     using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
 
-    using SplineType = ddc::
-            ChunkView<double, spline_idx_range, std::experimental::layout_right, MemorySpace>;
+    using SplineType = ddc::ChunkView<double, spline_idx_range, Kokkos::layout_right, MemorySpace>;
 
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
@@ -131,7 +132,7 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const final
     {
         const double x = m_spline_evaluator(coord, m_x_spline_representation.span_cview());
         const double y = m_spline_evaluator(coord, m_y_spline_representation.span_cview());

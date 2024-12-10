@@ -76,7 +76,7 @@ double VelocityAdvection(
 
     ddc::parallel_deepcopy(allfdistribu, allfdistribu_host);
     ddc::parallel_deepcopy(electric_field, adv_speed_host);
-    advection_vx(allfdistribu, electric_field, timestep);
+    advection_vx(get_field(allfdistribu), get_const_field(electric_field), timestep);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     double const m_advection_error = ddc::transform_reduce(

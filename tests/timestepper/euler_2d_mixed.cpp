@@ -104,7 +104,7 @@ TEST(Euler2DFixtureMixedTypes, Euler2DOrderMixedTypes)
         for (int i(0); i < Nt; ++i) {
             euler.update(
                     Kokkos::DefaultHostExecutionSpace(),
-                    vals,
+                    get_field(vals),
                     dt,
                     [yc,
                      xc,

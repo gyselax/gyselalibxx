@@ -90,21 +90,21 @@ public:
         ValField y_prime(y_prime_alloc);
 
         // Save initial conditions
-        base_type::copy(y_prime, y);
+        base_type::copy(y_prime, get_const_field(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y)
-        dy_calculator(k1, y);
+        dy_calculator(k1, get_const_field(y));
 
         // --------- Calculate k2 ------------
         // Calculate y_new := y_n + h/2*k_1
-        y_update(y_prime, k1, 0.5 * dt);
+        y_update(y_prime, get_const_field(k1), 0.5 * dt);
 
         // Calculate k2 = f(y_new)
-        dy_calculator(k2, y_prime);
+        dy_calculator(k2, get_const_field(y_prime));
 
         // ----------- Update y --------------
         // Calculate y_{n+1} := y_n + h*k_2
-        y_update(y, k2, dt);
+        y_update(y, get_const_field(k2), dt);
     }
 };

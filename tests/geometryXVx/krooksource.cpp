@@ -96,10 +96,10 @@ TEST(KrookSource, Adaptive)
         DFieldMemVx finit(gridvx);
         if (charge(ddc::select<Species>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
+                    compute_maxwellian(get_field(finit), density_init_ion, temperature_init, 0.);
         } else {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
+                    compute_maxwellian(get_field(finit), density_init_elec, temperature_init, 0.);
         }
         auto finit_host = ddc::create_mirror_view_and_copy(get_field(finit));
         ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
@@ -107,7 +107,7 @@ TEST(KrookSource, Adaptive)
 
     // error with a given deltat
     double const deltat = 0.1;
-    rhs_krook(allfdistribu, deltat);
+    rhs_krook(get_field(allfdistribu), deltat);
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
 
     host_t<DFieldMemSpX> densities(get_idx_range<Species, GridX>(allfdistribu));
@@ -128,17 +128,17 @@ TEST(KrookSource, Adaptive)
         DFieldMemVx finit(gridvx);
         if (charge(ddc::select<Species>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit, density_init_ion, temperature_init, 0.);
+                    compute_maxwellian(get_field(finit), density_init_ion, temperature_init, 0.);
         } else {
             MaxwellianEquilibrium::
-                    compute_maxwellian(finit, density_init_elec, temperature_init, 0.);
+                    compute_maxwellian(get_field(finit), density_init_elec, temperature_init, 0.);
         }
         auto finit_host = ddc::create_mirror_view_and_copy(get_field(finit));
         ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
     // error with a deltat 10 times smaller
-    rhs_krook(allfdistribu, 0.01);
+    rhs_krook(get_field(allfdistribu), 0.01);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
         densities(ispx) = integrate_v(Kokkos::DefaultExecutionSpace(), allfdistribu[ispx]);
@@ -230,7 +230,7 @@ TEST(KrookSource, Constant)
     double const density_init = 1.;
     double const temperature_init = 1.;
     DFieldMemVx finit(gridvx);
-    MaxwellianEquilibrium::compute_maxwellian(finit, density_init, temperature_init, 0.);
+    MaxwellianEquilibrium::compute_maxwellian(get_field(finit), density_init, temperature_init, 0.);
     auto finit_host = ddc::create_mirror_view_and_copy(get_field(finit));
     DFieldMemSpXVx allfdistribu(mesh);
     ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
@@ -239,13 +239,14 @@ TEST(KrookSource, Constant)
 
     int const nbsteps = 100;
     for (int iter = 0; iter < nbsteps; ++iter) {
-        rhs_krook(allfdistribu, deltat);
+        rhs_krook(get_field(allfdistribu), deltat);
     };
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
 
     // tests if distribution function matches theoretical prediction
     DFieldMemVx ftarget(gridvx);
-    MaxwellianEquilibrium::compute_maxwellian(ftarget, density_target, temperature_target, 0.);
+    MaxwellianEquilibrium::
+            compute_maxwellian(get_field(ftarget), density_target, temperature_target, 0.);
     auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(ftarget));
 
     ddc::for_each(get_idx_range(allfdistribu), [&](IdxSpXVx const ispxvx) {

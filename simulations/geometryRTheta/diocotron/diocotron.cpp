@@ -194,8 +194,8 @@ int main(int argc, char** argv)
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
     PoissonSolver poisson_solver(
-            coeff_alpha_spline,
-            coeff_beta_spline,
+            get_const_field(coeff_alpha_spline),
+            get_const_field(coeff_beta_spline),
             discrete_mapping,
             spline_evaluator);
 
@@ -295,7 +295,7 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> phi_eq(mesh_rp);
     host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(rho_coef_eq, spline_evaluator);
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
 
 

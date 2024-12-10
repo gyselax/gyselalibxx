@@ -3,7 +3,6 @@
 #include <ddc/ddc.hpp>
 
 #include <sll/bernstein.hpp>
-#include <sll/mapping/mapping_tools.hpp>
 
 #include <gtest/gtest.h>
 
@@ -60,8 +59,7 @@ struct BernsteinFixture<std::tuple<std::integral_constant<std::size_t, D>>> : pu
     {
     };
     static constexpr std::size_t poly_degree = D;
-    struct Bernstein
-        : TriangularBernsteinPolynomialBasis<X, Y, Corner1, Corner2, Corner3, poly_degree>
+    struct Bernstein : BernsteinPolynomialBasis<X, Y, Corner1, Corner2, Corner3, poly_degree>
     {
     };
 };
@@ -86,8 +84,8 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
     const CoordXY c2(0.0, 1.0);
     const CoordXY c3(1.0, -1.0);
 
-    CartesianToBarycentric<X, Y, Corner1, Corner2, Corner3> coordinate_converter(c1, c2, c3);
-    static_assert(is_mapping_v<CartesianToBarycentric<X, Y, Corner1, Corner2, Corner3>>);
+    CartesianToBarycentricCoordinates<X, Y, Corner1, Corner2, Corner3>
+            coordinate_converter(c1, c2, c3);
     ddc::init_discrete_space<Bernstein>(coordinate_converter);
 
     ddc::DiscreteDomain<Bernstein> idx_range(
@@ -99,7 +97,7 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
     std::size_t const n_test_points = 100;
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordXY const test_point = generate_random_point_in_triangle(c1, c2, c3);
-        ddc::discrete_space<Bernstein>().eval_basis(values, test_point);
+        ddc::discrete_space<Bernstein>().eval_basis(values.span_view(), test_point);
         double total = ddc::transform_reduce(
                 idx_range,
                 0.0,

@@ -210,8 +210,8 @@ double check_physical_to_logical_coord_converter(
 
 TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
 {
-    static_assert(is_mapping_v<CartesianToCircular<X, Y, R, Theta>>);
-    static_assert(is_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
+    static_assert(is_2d_mapping_v<CartesianToCircular<X, Y, R, Theta>>);
+    static_assert(is_2d_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
     static_assert(is_analytical_mapping_v<CartesianToCircular<X, Y, R, Theta>>);
     static_assert(std::is_same_v<
                   inverse_mapping_t<CartesianToCircular<X, Y, R, Theta>>,
@@ -251,8 +251,8 @@ TEST_F(MappingMemoryAccess, HostCircularCoordConverter)
 
 TEST_F(MappingMemoryAccess, HostCzarnyCoordConverter)
 {
-    static_assert(is_mapping_v<CartesianToCzarny<X, Y, R, Theta>>);
-    static_assert(is_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
+    static_assert(is_2d_mapping_v<CartesianToCzarny<X, Y, R, Theta>>);
+    static_assert(is_2d_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(is_analytical_mapping_v<CartesianToCzarny<X, Y, R, Theta>>);
     static_assert(std::is_same_v<
                   inverse_mapping_t<CartesianToCzarny<X, Y, R, Theta>>,

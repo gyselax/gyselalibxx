@@ -16,7 +16,7 @@ template <
         class ElementType,
         class SupportType,
         class MemorySpace = Kokkos::HostSpace,
-        class LayoutStridedPolicy = std::experimental::layout_right>
+        class LayoutStridedPolicy = Kokkos::layout_right>
 class DerivField;
 
 template <class ElementType, class SupportType, class MemorySpace, class LayoutStridedPolicy>
@@ -49,8 +49,8 @@ auto deepcopy(FieldDst&& dst, FieldSrc&& src)
 {
     assert(dst.get_values_field().domain().extents() == src.get_values_field().domain().extents());
 
-    DerivField dst_field = dst.span_view();
-    DerivField src_field = src.span_view();
+    DerivField dst_field = get_field(dst);
+    DerivField src_field = get_field(src);
 
     dst_field.deepcopy(src_field);
 
@@ -403,7 +403,7 @@ template <
         class ElementType,
         class SupportType,
         class MemorySpace = Kokkos::HostSpace,
-        class LayoutStridedPolicy = std::experimental::layout_right>
+        class LayoutStridedPolicy = Kokkos::layout_right>
 using DerivConstField
         = DerivField<ElementType const, SupportType, MemorySpace, LayoutStridedPolicy>;
 

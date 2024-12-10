@@ -232,7 +232,8 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
     initialize_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
+            function_values(get_const_field(function_1), get_const_field(function_2));
 
 
 
@@ -319,7 +320,8 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
     initialize_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values(function_1, function_2);
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
+            function_values(get_const_field(function_1), get_const_field(function_2));
 
     // Derivatives Patch1
     Idx<ddc::Deriv<X<1>>> first_deriv_x1(1);
@@ -377,10 +379,14 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
 
 
     // --- collection of values of the function on each patch
-    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_xmin(derivs_xmin1, derivs_xmin2);
-    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_xmax(derivs_xmax1, derivs_xmax2);
-    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2> derivs_ymin(derivs_ymin1, derivs_ymin2);
-    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2> derivs_ymax(derivs_ymax1, derivs_ymax2);
+    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
+            derivs_xmin(get_const_field(derivs_xmin1), get_const_field(derivs_xmin2));
+    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
+            derivs_xmax(get_const_field(derivs_xmax1), get_const_field(derivs_xmax2));
+    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
+            derivs_ymin(get_const_field(derivs_ymin1), get_const_field(derivs_ymin2));
+    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
+            derivs_ymax(get_const_field(derivs_ymax1), get_const_field(derivs_ymax2));
 
     IdxRange<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>
             cross_derivs_idx_range1(deriv_x_idx_range1, deriv_y_idx_range1);

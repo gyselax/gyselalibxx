@@ -301,32 +301,48 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     // collision frequency
     DFieldMemSpX collfreq_alloc(grid_sp_x);
     DFieldSpX collfreq = get_field(collfreq_alloc);
-    compute_collfreq(collfreq, get_const_field(m_nustar_profile), density, temperature);
+    compute_collfreq(
+            collfreq,
+            get_const_field(m_nustar_profile),
+            get_const_field(density),
+            get_const_field(temperature));
 
     // diffusion coefficient
     DFieldMem<IdxRangeSpXVx_ghosted> Dcoll_alloc(m_mesh_ghosted);
     DField<IdxRangeSpXVx_ghosted> Dcoll = get_field(Dcoll_alloc);
-    compute_Dcoll<GhostedVx>(Dcoll, collfreq, density, temperature);
+    compute_Dcoll<GhostedVx>(
+            Dcoll,
+            get_const_field(collfreq),
+            get_const_field(density),
+            get_const_field(temperature));
 
     DFieldMem<IdxRangeSpXVx_ghosted> dvDcoll_alloc(m_mesh_ghosted);
     DField<IdxRangeSpXVx_ghosted> dvDcoll = get_field(dvDcoll_alloc);
-    compute_dvDcoll<GhostedVx>(dvDcoll, collfreq, density, temperature);
+    compute_dvDcoll<GhostedVx>(
+            dvDcoll,
+            get_const_field(collfreq),
+            get_const_field(density),
+            get_const_field(temperature));
 
     DFieldMem<IdxRangeSpXVx_ghosted_staggered> Dcoll_staggered_alloc(m_mesh_ghosted_staggered);
     DField<IdxRangeSpXVx_ghosted_staggered> Dcoll_staggered = get_field(Dcoll_staggered_alloc);
-    compute_Dcoll<GhostedVxStaggered>(Dcoll_staggered, collfreq, density, temperature);
+    compute_Dcoll<GhostedVxStaggered>(
+            Dcoll_staggered,
+            get_const_field(collfreq),
+            get_const_field(density),
+            get_const_field(temperature));
 
     // kernel maxwellian fluid moments
     DFieldMemSpX Vcoll_alloc(grid_sp_x);
     DFieldMemSpX Tcoll_alloc(grid_sp_x);
     DFieldSpX Vcoll = get_field(Vcoll_alloc);
     DFieldSpX Tcoll = get_field(Tcoll_alloc);
-    compute_Vcoll_Tcoll<GhostedVx>(Vcoll, Tcoll, allfdistribu, Dcoll, dvDcoll);
+    compute_Vcoll_Tcoll<GhostedVx>(Vcoll, Tcoll, get_const_field(allfdistribu), Dcoll, dvDcoll);
 
     // convection coefficient Nucoll
     DFieldMem<IdxRangeSpXVx_ghosted> Nucoll_alloc(m_mesh_ghosted);
     DField<IdxRangeSpXVx_ghosted> Nucoll = get_field(Nucoll_alloc);
-    compute_Nucoll<GhostedVx>(Nucoll, Dcoll, Vcoll, Tcoll);
+    compute_Nucoll<GhostedVx>(Nucoll, Dcoll, get_const_field(Vcoll), get_const_field(Tcoll));
 
     // matrix coefficients
     DFieldMemSpXVx AA_alloc(get_idx_range(allfdistribu));
@@ -341,7 +357,13 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     // rhs vector coefficient
     DFieldMemSpXVx RR_alloc(get_idx_range(allfdistribu));
     DFieldSpXVx RR = get_field(RR_alloc);
-    compute_rhs_vector(RR, AA, BB, CC, allfdistribu, m_fthresh);
+    compute_rhs_vector(
+            RR,
+            get_const_field(AA),
+            get_const_field(BB),
+            get_const_field(CC),
+            get_const_field(allfdistribu),
+            m_fthresh);
 
     int const batch_size = get_idx_range<Species, GridX>(allfdistribu).size();
     int const mat_size = get_idx_range<GridVx>(allfdistribu).size();

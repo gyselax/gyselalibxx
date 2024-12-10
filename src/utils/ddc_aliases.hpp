@@ -43,14 +43,14 @@ template <
         class ElementType,
         class IdxRange,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
-        class LayoutStridedPolicy = std::experimental::layout_right>
+        class LayoutStridedPolicy = Kokkos::layout_right>
 using Field = ddc::ChunkSpan<ElementType, IdxRange, LayoutStridedPolicy, MemorySpace>;
 
 /// An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid @f${x_0, x_1, .., x_N}@f$)
 template <
         class IdxRange,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
-        class LayoutStridedPolicy = std::experimental::layout_right>
+        class LayoutStridedPolicy = Kokkos::layout_right>
 using DField = Field<double, IdxRange, MemorySpace, LayoutStridedPolicy>;
 
 /// An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid @f${x_0, x_1, .., x_N}@f$)
@@ -58,14 +58,14 @@ template <
         class ElementType,
         class IdxRange,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
-        class LayoutStridedPolicy = std::experimental::layout_right>
+        class LayoutStridedPolicy = Kokkos::layout_right>
 using ConstField = ddc::ChunkView<ElementType, IdxRange, LayoutStridedPolicy, MemorySpace>;
 
 /// An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid @f${x_0, x_1, .., x_N}@f$)
 template <
         class IdxRange,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
-        class LayoutStridedPolicy = std::experimental::layout_right>
+        class LayoutStridedPolicy = Kokkos::layout_right>
 using DConstField = ConstField<double, IdxRange, MemorySpace, LayoutStridedPolicy>;
 
 /// An alias describing the type from which a uniform grid must inherit.

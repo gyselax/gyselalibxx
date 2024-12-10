@@ -105,7 +105,7 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
         for (int i(0); i < Nt; ++i) {
             crank_nicolson.update(
                     Kokkos::DefaultHostExecutionSpace(),
-                    vals,
+                    get_field(vals),
                     dt,
                     [yc,
                      xc,

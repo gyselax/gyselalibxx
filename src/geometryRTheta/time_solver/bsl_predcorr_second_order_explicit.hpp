@@ -279,7 +279,7 @@ public:
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
-        m_poisson_solver(charge_density_coord, electrical_potential);
+        m_poisson_solver(charge_density_coord, get_field(electrical_potential));
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
