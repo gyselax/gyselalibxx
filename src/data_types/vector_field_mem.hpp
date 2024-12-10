@@ -209,7 +209,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    element_type operator()(Idx<ODDims> const&... delems) const noexcept
+    element_type operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->

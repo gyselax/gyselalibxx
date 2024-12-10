@@ -315,7 +315,8 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    KOKKOS_FUNCTION element_type operator()(Idx<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION element_type
+    operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->
