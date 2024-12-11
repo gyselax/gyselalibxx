@@ -139,7 +139,7 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionDomain advection_domain(to_physical_mapping);
+    AdvectionPhysicalDomain advection_domain(to_physical_mapping);
 
     SplineFootFinder find_feet(
             time_stepper,

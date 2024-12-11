@@ -30,7 +30,7 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
           pull: true
           push: true
-          tags: ghcr.io/gyselax/gyselalibxx_env:${{ inputs.SHA }}
+          tags: ghcr.io/gyselax/gyselalibxx_env:${{ github.sha }}
       - name: Build and push latest
         uses: docker/build-push-action@v3
         with:
