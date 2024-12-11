@@ -133,8 +133,6 @@ public:
         dispersion_relation(m_omega_Re, m_omega_Im);
     };
 
-    ~DiocotronDensitySolution() {};
-
     /**
      * @brief Get the frequency of the perturbation.
      *

@@ -107,10 +107,6 @@ public:
     {
     }
 
-
-    ~BslPredCorrRTheta() {};
-
-
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
             double const dt,

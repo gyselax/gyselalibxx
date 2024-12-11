@@ -124,10 +124,6 @@ public:
         , m_spline_evaluator {ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule(), ddc::PeriodicExtrapolationRule<Theta>(), ddc::PeriodicExtrapolationRule<Theta>()}
         , m_epsilon(epsilon) {};
 
-    ~AdvectionFieldFinder() {};
-
-
-
     // -------------------------------------------------------------------------------------------
     // COMPUTE ADVECTION FIELD IN XY:                                                            |
     // Advection field along the physical directions.                                            |

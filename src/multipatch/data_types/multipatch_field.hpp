@@ -140,7 +140,7 @@ public:
                 "MultipatchFields are not equivalent");
     }
 
-    KOKKOS_FUNCTION ~MultipatchField() {}
+    KOKKOS_DEFAULTED_FUNCTION ~MultipatchField() noexcept = default;
 
     /**
      * Retrieve an object from the patch that it is defined on.

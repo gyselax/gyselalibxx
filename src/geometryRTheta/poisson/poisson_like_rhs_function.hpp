@@ -50,8 +50,6 @@ public:
     {
     }
 
-    ~PoissonLikeRHSFunction() {};
-
     /**
 	 * @brief Get the value of the function at a given coordinate.
 	 *
