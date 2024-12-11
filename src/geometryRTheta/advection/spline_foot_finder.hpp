@@ -2,8 +2,8 @@
 #pragma once
 #include <functional>
 
-#include <sll/mapping/cartesian_to_pseudo_cartesian.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
+#include <sll/mapping/combined_mapping.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -34,13 +34,13 @@ private:
      */
     using Y_adv = typename AdvectionDomain::Y_adv;
 
-    using CircularToPseudoCartesian = CircularToCartesian<R, Theta, X_adv, Y_adv>;
-    using AdvectionMapping = CartesianToPseudoCartesian<Mapping, CircularToPseudoCartesian>;
+    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
+    using InvAdvectionMapping = CombinedMapping<Mapping, PseudoCartesianToCircular>;
 
     TimeStepper const& m_time_stepper;
 
     AdvectionDomain const& m_advection_domain;
-    AdvectionMapping m_mapping;
+    InvAdvectionMapping m_mapping;
 
     SplineRThetaBuilder const& m_builder_advection_field;
     SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
@@ -84,7 +84,7 @@ public:
             double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
         , m_advection_domain(advection_domain)
-        , m_mapping(CircularToPseudoCartesian(), mapping, epsilon)
+        , m_mapping(mapping, PseudoCartesianToCircular(), epsilon)
         , m_builder_advection_field(builder_advection_field)
         , m_evaluator_advection_field(evaluator_advection_field)
     {

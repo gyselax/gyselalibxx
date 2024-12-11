@@ -63,6 +63,7 @@ private:
 
     using SplineType = ddc::ChunkView<double, spline_idx_range, Kokkos::layout_right, MemorySpace>;
 
+    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
@@ -70,7 +71,7 @@ private:
     SplineType m_x_spline_representation;
     SplineType m_y_spline_representation;
     SplineEvaluator m_spline_evaluator;
-    IdxRangeTheta m_idx_range_theta;
+    IdxRangeRTheta m_idx_range_singular_point;
 
 public:
     /**
@@ -95,9 +96,8 @@ public:
      * @param[in] evaluator
      * 		The evaluator used to evaluate the mapping.
      *
-     * @param[in] idx_range_theta
-     *      The index range describing the poloidal points which should be used to average the derivatives of
-     *      the pseudo-Cartesian matrix at the central point.
+     * @param[in] idx_range_singular_point
+     *      The index range describing the points which should be used to evaluate functions at the central point.
      *
      *
      * @see SplineBuilder2D
@@ -108,11 +108,11 @@ public:
             SplineType curvilinear_to_x,
             SplineType curvilinear_to_y,
             SplineEvaluator const& evaluator,
-            IdxRangeTheta idx_range_theta)
+            IdxRangeRTheta idx_range_singular_point)
         : m_x_spline_representation(curvilinear_to_x)
         , m_y_spline_representation(curvilinear_to_y)
         , m_spline_evaluator(evaluator)
-        , m_idx_range_theta(idx_range_theta)
+        , m_idx_range_singular_point(idx_range_singular_point)
     {
     }
 
@@ -268,6 +268,45 @@ public:
         return determinant(J);
     }
 
+    /**
+     * @brief Get the first order expansion of the Jacobian matrix with the theta component divided by r.
+     * The expansion is carried out around @f$ r=0 @f$.
+     * The returned matrix @f$ J@f$ is defined as:
+     * @f$ J_{00} = \frac{\partial x}{\partial r}(r, \theta) @f$
+     * @f$ J_{01} = \frac{1}{r} \frac{\partial x}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 x}{\partial r \partial \theta}(0, \theta) @f$
+     * @f$ J_{10} = \frac{\partial y}{\partial r}(r, \theta) @f$
+     * @f$ J_{11} = \frac{1}{r} \frac{\partial y}{\partial \theta}(r, \theta) + O(r^2) = \frac{\partial^2 y}{\partial r \partial \theta}(0, \theta) @f$
+     *
+     * @param[in] coord
+     *          The coordinate where we evaluate the Jacobian.
+     *
+     * @return The first order expansion of the Jacobian matrix with the theta component divided by r.
+     */
+    KOKKOS_INLINE_FUNCTION Matrix_2x2 first_order_jacobian_matrix_r_rtheta(
+            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+    {
+        Matrix_2x2 matrix;
+        matrix[0][0]
+                = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
+        matrix[0][1]
+                = m_spline_evaluator.deriv_1_and_2(coord, m_x_spline_representation.span_cview());
+        matrix[1][0]
+                = m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
+        matrix[1][1]
+                = m_spline_evaluator.deriv_1_and_2(coord, m_y_spline_representation.span_cview());
+        return matrix;
+    }
+
+    /**
+     * @brief Get the index range describing the points which should be used to evaluate functions at the central point.
+     *
+     * @return An index range covering the O-point.
+     */
+    KOKKOS_INLINE_FUNCTION IdxRangeRTheta idx_range_singular_point() const
+    {
+        return m_idx_range_singular_point;
+    }
+
 
     /**
      * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
@@ -319,7 +358,7 @@ public:
         matrix[1][1] = 0;
 
         // Average the values at (r = 0, theta):
-        for (IdxTheta ip : m_idx_range_theta) {
+        for (IdxTheta ip : IdxRangeTheta(m_idx_range_singular_point)) {
             const double th = ddc::coordinate(ip);
             ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const coord(0, th);
             double const deriv_1_x
@@ -349,7 +388,7 @@ public:
             matrix[1][1] += j11 / jacobian;
         }
 
-        int const theta_size = m_idx_range_theta.size();
+        int const theta_size = m_idx_range_singular_point.size();
         matrix[0][0] /= theta_size;
         matrix[0][1] /= theta_size;
         matrix[1][0] /= theta_size;
