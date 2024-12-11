@@ -78,8 +78,8 @@ int main(int argc, char** argv)
     start_simulation = std::chrono::system_clock::now();
 
     // Build the grid for the space. ------------------------------------------------------------------
-    int const Nr(PCpp_int(conf_gyselalibxx, ".Mesh.r_size"));
-    int const Nt(PCpp_int(conf_gyselalibxx, ".Mesh.p_size"));
+    int const Nr(PCpp_int(conf_gyselalibxx, ".SplineMesh.r_ncells"));
+    int const Nt(PCpp_int(conf_gyselalibxx, ".SplineMesh.p_ncells"));
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
