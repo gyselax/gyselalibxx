@@ -38,6 +38,7 @@ private:
     using BSplinesR = typename SplineBuilder::bsplines_type1;
     using BSplinesTheta = typename SplineBuilder::bsplines_type2;
 
+    using GridR = typename SplineBuilder::interpolation_domain_type1;
     using GridTheta = typename SplineBuilder::interpolation_domain_type2;
 
     using IdxRangeSplines = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
@@ -58,7 +59,7 @@ private:
     SplineCoeffsMem m_curvilinear_to_x_spline_alloc;
     SplineCoeffsMem m_curvilinear_to_y_spline_alloc;
     SplineEvaluator m_evaluator;
-    ddc::DiscreteDomain<GridTheta> m_idx_range_theta;
+    ddc::DiscreteDomain<GridR, GridTheta> m_idx_range_singular_point;
 
 public:
     /**
@@ -95,7 +96,10 @@ public:
         builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
         builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());
 
-        m_idx_range_theta = ddc::select<GridTheta>(builder.interpolation_domain());
+        ddc::DiscreteDomain<GridR, GridTheta> interp_domain(builder.interpolation_domain());
+        ddc::DiscreteVector<GridR, GridTheta>
+                n_points_singular_domain(1, interp_domain.template extent<GridTheta>().value());
+        m_idx_range_singular_point = interp_domain.take_first(n_points_singular_domain);
     }
 
     /**
@@ -109,7 +113,7 @@ public:
                 m_curvilinear_to_x_spline_alloc.span_cview(),
                 m_curvilinear_to_y_spline_alloc.span_cview(),
                 m_evaluator,
-                m_idx_range_theta);
+                m_idx_range_singular_point);
     }
 
     /**
@@ -311,7 +315,7 @@ private:
     SplineCoeffsMem m_curvilinear_to_x_spline_alloc;
     SplineCoeffsMem m_curvilinear_to_y_spline_alloc;
     RefinedSplineEvaluator m_evaluator;
-    ddc::DiscreteDomain<GridThetaRefined> m_idx_range_theta;
+    ddc::DiscreteDomain<GridRRefined, GridThetaRefined> m_idx_range_singular_point;
 
 public:
     /**
@@ -380,7 +384,10 @@ public:
         ddc::DiscreteDomain<GridRRefined, GridThetaRefined> const
                 refined_domain(interpolation_domain_r, interpolation_domain_theta);
 
-        m_idx_range_theta = interpolation_domain_theta;
+        ddc::DiscreteVector<GridRRefined, GridThetaRefined> n_points_singular_domain(
+                1,
+                refined_domain.template extent<GridThetaRefined>().value());
+        m_idx_range_singular_point = refined_domain.take_first(n_points_singular_domain);
 
         // Operators on the refined grid
         RefinedSplineBuilder refined_builder(refined_domain);
@@ -419,7 +426,7 @@ public:
                 m_curvilinear_to_x_spline_alloc.span_cview(),
                 m_curvilinear_to_y_spline_alloc.span_cview(),
                 m_evaluator,
-                m_idx_range_theta);
+                m_idx_range_singular_point);
     }
 
     /**
