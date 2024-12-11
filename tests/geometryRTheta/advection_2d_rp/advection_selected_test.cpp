@@ -25,6 +25,7 @@
 #include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "input.hpp"
 #include "itimestepper.hpp"
 #include "mesh_builder.hpp"
@@ -42,21 +43,19 @@ namespace fs = std::filesystem;
 
 namespace {
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-using X_adv = typename AdvectionPhysicalDomain<CircularToCartesian<R, Theta, X, Y>>::X_adv;
-using Y_adv = typename AdvectionPhysicalDomain<CircularToCartesian<R, Theta, X, Y>>::Y_adv;
+using X_adv = X;
+using Y_adv = Y;
 #elif defined(CZARNY_MAPPING_PHYSICAL)
-using X_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<R, Theta, X, Y>>::X_adv;
-using Y_adv = typename AdvectionPhysicalDomain<CzarnyToCartesian<R, Theta, X, Y>>::Y_adv;
+using X_adv = X;
+using Y_adv = Y;
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-using X_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<R, Theta, X, Y>>::X_adv;
-using Y_adv = typename AdvectionPseudoCartesianDomain<CzarnyToCartesian<R, Theta, X, Y>>::Y_adv;
+using X_adv = X_pC;
+using Y_adv = Y_pC;
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-using X_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>::X_adv;
-using Y_adv = typename AdvectionPseudoCartesianDomain<
-        DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>::Y_adv;
+using X_adv = X_pC;
+using Y_adv = Y_pC;
 #endif
 
 } //end namespace
@@ -167,7 +166,7 @@ int main(int argc, char** argv)
     CircularToCartesian<R, Theta, X, Y> analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
     CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
-    AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    AdvectionDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
     std::string const adv_domain_name = "PHYSICAL";
     key += "circular_physical";
@@ -180,7 +179,7 @@ int main(int argc, char** argv)
     CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
-    AdvectionPhysicalDomain advection_domain(analytical_mapping);
+    AdvectionDomain advection_domain(analytical_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PHYSICAL";
     key += "czarny_physical";
@@ -189,7 +188,8 @@ int main(int argc, char** argv)
     CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
-    AdvectionPseudoCartesianDomain advection_domain(to_physical_mapping);
+    CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
+    AdvectionDomain advection_domain(logical_to_pseudo_cart_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
@@ -204,7 +204,8 @@ int main(int argc, char** argv)
                     builder,
                     spline_evaluator_extrapol);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
-    AdvectionPseudoCartesianDomain advection_domain(to_physical_mapping);
+    CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
+    AdvectionDomain advection_domain(logical_to_pseudo_cart_mapping);
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "discrete_pseudo_cartesian";
