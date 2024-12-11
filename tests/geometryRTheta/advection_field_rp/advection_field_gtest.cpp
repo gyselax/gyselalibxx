@@ -135,7 +135,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionPhysicalDomain advection_idx_range(to_physical_mapping);
+    AdvectionDomain advection_idx_range(to_physical_mapping);
 
     RK3<host_t<FieldMemRTheta<CoordRTheta>>,
         host_t<DVectorFieldMemRTheta<X, Y>>,

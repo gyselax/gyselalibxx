@@ -111,7 +111,7 @@ public:
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
             host_t<DConstVectorFieldRTheta<X, Y>> advection_field_xy,
-            double dt) const override
+            double dt) const
     {
         // Pre-allocate some memory to prevent allocation later in loop
         std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
@@ -152,7 +152,7 @@ public:
             host_t<DFieldRTheta> allfdistribu,
             host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY const& advection_field_xy_center,
-            double dt) const override
+            double dt) const
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
         IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));

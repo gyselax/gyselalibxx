@@ -87,7 +87,7 @@ void print_coordinate(
  *      The name of the file where the feet are saved.
  */
 template <class LogicalToPhysicalMapping>
-void save_feet(
+void output_feet(
         LogicalToPhysicalMapping const& to_physical_mapping,
         IdxRangeRTheta const& idx_range_rp,
         host_t<FieldRTheta<CoordRTheta>> const& feet_coords_rp,
@@ -355,8 +355,8 @@ void simulate(
         SplineRThetaEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
-        bool if_save_curves,
-        bool if_save_feet,
+        bool save_curves,
+        bool save_feet,
         std::string const& output_folder)
 {
     SplineFootFinder<TimeStepper, AdvectionDomain, LogicalToPhysicalMapping> const foot_finder(
@@ -424,7 +424,7 @@ void simulate(
                 dt);
 
         // Save the advected function for each iteration:
-        if (if_save_curves) {
+        if (save_curves) {
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
             saving_computed(to_physical_mapping, get_field(allfdistribu_advected_test), name);
         }
@@ -485,16 +485,16 @@ void simulate(
 
     // SAVE DATA --------------------------------------------------------------------------------
     // Save the computed characteristic feet:
-    if (if_save_feet) {
+    if (save_feet) {
         host_t<FieldMemRTheta<CoordRTheta>> feet(grid);
         ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
         foot_finder(get_field(feet), get_const_field(advection_field_test_vec), dt);
         std::string const name = output_folder + "/feet_computed.txt";
-        save_feet(to_physical_mapping, grid, get_field(feet), name);
+        output_feet(to_physical_mapping, grid, get_field(feet), name);
     }
 
     // Save the values of the exact function at the initial and final states:
-    if (if_save_curves) {
+    if (save_curves) {
         std::string const name_0 = output_folder + "/after_" + std::to_string(0) + ".txt";
         std::string const name_1
                 = output_folder + "/after_" + std::to_string(iteration_number) + "_exact.txt";
@@ -514,9 +514,9 @@ void simulate(
 
 
     // Save the exact characteristic feet for a displacement on dt:
-    if (if_save_feet) {
+    if (save_feet) {
         std::string const name = output_folder + "/feet_exact.txt";
-        save_feet(to_physical_mapping, grid, get_field(feet_coords_rp_dt), name);
+        output_feet(to_physical_mapping, grid, get_field(feet_coords_rp_dt), name);
     }
 
 
