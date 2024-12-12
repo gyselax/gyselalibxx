@@ -8,7 +8,7 @@ target_link_libraries(Li_norms_spline_quadrature_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
-        DDC::DDC
+        DDC::core
         sll::SLL
         gslx::geometry_RTheta
         gslx::quadrature

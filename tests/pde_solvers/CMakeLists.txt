@@ -11,7 +11,7 @@ add_executable(unit_tests_pde_solvers
 )
 target_link_libraries(unit_tests_pde_solvers
     PUBLIC
-        DDC::DDC
+        DDC::core
         GTest::gtest
         GTest::gmock
         gslx::pde_solvers

@@ -9,7 +9,7 @@ target_include_directories("geometry_${GEOMETRY_VARIANT}"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
-    DDC::DDC
+    DDC::core
     gslx::speciesinfo
     gslx::moments
     gslx::utils

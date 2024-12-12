@@ -7,7 +7,7 @@ target_include_directories("geometry_RTheta"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("geometry_RTheta" INTERFACE
-    DDC::DDC
+    DDC::core
     sll::SLL
     gslx::data_types
     gslx::utils

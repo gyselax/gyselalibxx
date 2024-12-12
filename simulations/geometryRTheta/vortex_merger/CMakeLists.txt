@@ -5,8 +5,8 @@ add_executable(vortex_merger
 )
 target_link_libraries(vortex_merger
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper
+        DDC::core
+        DDC::pdi
         paraconf::paraconf
         PDI::pdi
 

@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
 
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
@@ -106,10 +107,6 @@ public:
         , m_spline_evaluator(rhs_evaluator)
     {
     }
-
-
-    ~BslPredCorrRTheta() {};
-
 
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,

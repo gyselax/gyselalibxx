@@ -110,7 +110,7 @@ public:
                 "MultipatchTypes are not equivalent");
     }
 
-    KOKKOS_FUNCTION ~MultipatchType() {}
+    KOKKOS_DEFAULTED_FUNCTION ~MultipatchType() noexcept = default;
 
     /**
      * Retrieve an object from the patch that it is defined on.

@@ -164,12 +164,12 @@ or:
 ddc::for_each(idx_range, [&](Idx<GridX> index) {
 });
 ```
-In the case of a `ddc::for_each` the second argument is a lambda function. The `[&]` ensures that any variable defined outside the loop are captured by reference so they can be used inside the lamda function.
+In the case of a `ddc::for_each` the second argument is a lambda function. The `[&]` ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.
 
 It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however `IdxRange` also contains several helper functions which are designed to facilitate the creation of these sets:
 - `take_first(IdxStep<..> n)` : Returns an index range containing only the first n indices of the original range.
 - `take_last(IdxStep<..> n)` : Returns an index range containing only the last n indices of the original range.
-- `remove_first(IdxStep<..> n)` : Returns an index range containing all but the first n indicie of the original range.
+- `remove_first(IdxStep<..> n)` : Returns an index range containing all but the first n indices of the original range.
 - `remove_last(IdxStep<..> n)` : Returns an index range containing all but the last n indices of the original range.
 - `remove(IdxStep<..> n_first, IdxStep<..> n_last)` : Returns an index range containing all indices of the original range except the first n\_first indices and the last n\_last indices.
 
@@ -194,7 +194,7 @@ In Gyselalibxx the alias `IdxRangeX` is usually defined in `geometry.hpp` to des
 
 Data is allocated at the instantiation of a `FieldMem` (type alias for `ddc::Chunk`). This type is parametrised by the underlying data type (e.g. `double`), and the `IdxRange` on which the values are defined. By default in Gysela memory is allocated on the device (GPU).
 
-In order to initialise the data storage to the correct size, a `FieldMem` is initailised by providing the `IdxRange` on which the values are defined.
+In order to initialise the data storage to the correct size, a `FieldMem` is initialised by providing the `IdxRange` on which the values are defined.
 
 In Gyselalibxx the alias `FieldMemX` is usually defined in `geometry.hpp` to describe the memory block for a field defined on the all or part of `GridX`.. E.g:
 ```cpp

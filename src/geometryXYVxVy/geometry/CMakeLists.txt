@@ -7,7 +7,7 @@ target_include_directories("geometry_xyvxvy"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("geometry_xyvxvy" INTERFACE
-    DDC::DDC
+    DDC::core
     gslx::speciesinfo
     gslx::utils
 )

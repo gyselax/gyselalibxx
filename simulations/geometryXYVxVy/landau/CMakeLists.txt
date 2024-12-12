@@ -3,8 +3,8 @@
 add_executable(landau4d_fft landau4d_fft.cpp)
 target_link_libraries(landau4d_fft
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper
+        DDC::core
+        DDC::pdi
         paraconf::paraconf
         PDI::pdi
         gslx::paraconfpp

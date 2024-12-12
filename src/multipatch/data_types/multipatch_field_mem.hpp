@@ -115,7 +115,7 @@ public:
                 "MultipatchFieldMems are not equivalent");
     }
 
-    ~MultipatchFieldMem() {}
+    ~MultipatchFieldMem() noexcept = default;
 
     /**
      * Retrieve an object from the patch that it is defined on.

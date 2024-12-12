@@ -12,8 +12,8 @@ target_include_directories("time_integration_${GEOMETRY_VARIANT}"
 
 target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper
+        DDC::core
+        DDC::pdi
         gslx::poisson_${GEOMETRY_VARIANT}
         gslx::speciesinfo
         gslx::boltzmann_${GEOMETRY_VARIANT}

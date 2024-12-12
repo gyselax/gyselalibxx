@@ -67,9 +67,6 @@ public:
         , m_evaluator(evaluator)
         , m_poisson_solver(poisson_solver) {};
 
-
-    ~VortexMergerEquilibria() {};
-
     /**
      * @brief Get an equilibrium.
      *
