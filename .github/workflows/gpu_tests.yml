@@ -18,6 +18,11 @@ on:
         description: "The number of the pull request that triggered the test"
         required: false
         type: number
+      is_duplicate:
+        description: "Indicate if the run would be a duplicate"
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: ${{ github.event_name != 'workflow_dispatch' && format('{0}-{1}', github.workflow, inputs.pr_number) || github.run_id }}
@@ -27,6 +32,7 @@ jobs:
   gpu_tests:
     runs-on: self-hosted
     environment: development
+    if: ${{ (! inputs.is_duplicate) || true }}
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
