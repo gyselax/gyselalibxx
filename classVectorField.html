@@ -203,10 +203,10 @@ template&lt;class OElementType , class Allocator &gt; </td></tr>
 <tr class="memitem:a895dc47dcab8f241c7fac1b01ae0be06"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorField.html#a200cc004afdaf07fa28dd6df74ac21e4">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a895dc47dcab8f241c7fac1b01ae0be06">span_view</a> () const</td></tr>
 <tr class="memdesc:a895dc47dcab8f241c7fac1b01ae0be06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to the vector field referred to by this vector field span.  <a href="classVectorField.html#a895dc47dcab8f241c7fac1b01ae0be06">More...</a><br /></td></tr>
 <tr class="separator:a895dc47dcab8f241c7fac1b01ae0be06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ad1cf544149c3832441604a50a700c1"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
-<tr class="memitem:a4ad1cf544149c3832441604a50a700c1"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a4ad1cf544149c3832441604a50a700c1">operator()</a> (Idx&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
-<tr class="memdesc:a4ad1cf544149c3832441604a50a700c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of Idxs.  <a href="classVectorField.html#a4ad1cf544149c3832441604a50a700c1">More...</a><br /></td></tr>
-<tr class="separator:a4ad1cf544149c3832441604a50a700c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a660ef0b0f3f4791ab5540f533e148f09"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
+<tr class="memitem:a660ef0b0f3f4791ab5540f533e148f09"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a660ef0b0f3f4791ab5540f533e148f09">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
+<tr class="memdesc:a660ef0b0f3f4791ab5540f533e148f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of Idxs.  <a href="classVectorField.html#a660ef0b0f3f4791ab5540f533e148f09">More...</a><br /></td></tr>
+<tr class="separator:a660ef0b0f3f4791ab5540f533e148f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a081ddf837d169a837141e18446730b1d"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
 <tr class="memitem:a081ddf837d169a837141e18446730b1d"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a081ddf837d169a837141e18446730b1d">operator()</a> (Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
 <tr class="memdesc:a081ddf837d169a837141e18446730b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional Idx.  <a href="classVectorField.html#a081ddf837d169a837141e18446730b1d">More...</a><br /></td></tr>
@@ -728,8 +728,8 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a4ad1cf544149c3832441604a50a700c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ad1cf544149c3832441604a50a700c1">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a660ef0b0f3f4791ab5540f533e148f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a660ef0b0f3f4791ab5540f533e148f09">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,7 +744,7 @@ template&lt;class... ODDims&gt; </div>
         <tr>
           <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">Idx&lt; ODDims &gt; const &amp;...&#160;</td>
+          <td class="paramtype">ddc::DiscreteElement&lt; ODDims &gt; const &amp;...&#160;</td>
           <td class="paramname"><em>delems</em></td><td>)</td>
           <td> const</td>
         </tr>

@@ -151,11 +151,11 @@ $(document).ready(function(){initNavTree('euler_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment">// Calculate k1 = f(y_n)</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        dy_calculator(k1, y);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        dy_calculator(k1, get_const_field(y));</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="comment">// Calculate y_new := y_n + h*k_1</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        y_update(y, k1, dt);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        y_update(y, get_const_field(k1), dt);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
 <div class="ttc" id="aclassDerivFieldMem_html"><div class="ttname"><a href="classDerivFieldMem.html">DerivFieldMem</a></div><div class="ttdoc">See DerivFieldMemImplementation.</div><div class="ttdef"><b>Definition:</b> derivative_field.hpp:10</div></div>

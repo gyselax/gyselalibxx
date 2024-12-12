@@ -226,10 +226,10 @@ $(document).ready(function(){initNavTree('gauss__legendre__integration_8hpp_sour
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        assert(weights.size() == m_wx.size() * nbcells);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keyword">typename</span> Domain1::discrete_element_type start = weights.domain().front();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keyword">typename</span> Domain1::mlength_type step(npts_gauss);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keyword">typename</span> Domain1::discrete_vector_type step(npts_gauss);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">typename</span> Domain1::discrete_element_type local_domain_start = start;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        ddc::for_each(</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                mesh_edges.domain().remove_last(<span class="keyword">typename</span> Domain2::mlength_type(1)),</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                mesh_edges.domain().remove_last(<span class="keyword">typename</span> Domain2::discrete_vector_type(1)),</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                [&amp;](<span class="keyword">auto</span> icell) {</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    ddc::Coordinate&lt;Dim&gt; const x0 = mesh_edges(icell);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    ddc::Coordinate&lt;Dim&gt; const x1 = mesh_edges(icell + 1);</div>

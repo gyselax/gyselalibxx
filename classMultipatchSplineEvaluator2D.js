@@ -13,7 +13,7 @@ var classMultipatchSplineEvaluator2D =
     [ "evaluation_idx_range_type1", "classMultipatchSplineEvaluator2D.html#ac15a2686cc2db98d2f76f771a800271b", null ],
     [ "evaluation_idx_range_type2", "classMultipatchSplineEvaluator2D.html#a997e1d9fd600799e618bfcab353a645d", null ],
     [ "evaluation_idx_range_type", "classMultipatchSplineEvaluator2D.html#aa1018dece7d47119f04db0f2359bc129", null ],
-    [ "batched_evaluation_idx_range_type", "classMultipatchSplineEvaluator2D.html#a467bd4183a1002ae386b3e7a1b99df69", null ],
+    [ "batched_evaluation_idx_range_type", "classMultipatchSplineEvaluator2D.html#a9119f42a71e32d73ec5dbf1d7c835962", null ],
     [ "spline_idx_range_type1", "classMultipatchSplineEvaluator2D.html#a89581b13c5342e2a4202bcfe36f01d23", null ],
     [ "spline_idx_range_type2", "classMultipatchSplineEvaluator2D.html#acf8c87496d43c9d876e4e41d78db178c", null ],
     [ "spline_idx_range_type", "classMultipatchSplineEvaluator2D.html#a1b17cff3afde8b9caf66f2fcfacce553", null ],

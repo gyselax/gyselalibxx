@@ -391,7 +391,7 @@ $(document).ready(function(){initNavTree('idx__range__slice_8hpp_source.html',''
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;            <a class="code" href="structIdxRangeSliceIterator.html">IdxRangeSliceIterator</a> <span class="keyword">const</span>&amp; xx,</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;            <a class="code" href="structIdxRangeSliceIterator.html">IdxRangeSliceIterator</a> <span class="keyword">const</span>&amp; yy)</div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    {</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        assert(xx.stride() == yy.stride());</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        assert(xx.m_stride == yy.m_stride);</div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        <span class="keywordflow">return</span> (yy.m_value &gt; xx.m_value)</div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;                       ? ((-<span class="keyword">static_cast&lt;</span><a class="code" href="structIdxRangeSliceIterator.html#a96c7777c808fa57c6fa4da36a6e9830e">difference_type</a><span class="keyword">&gt;</span>(yy.m_value - xx.m_value))</div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;                          / ddc::get&lt;Grid1D&gt;(xx.m_stride))</div>

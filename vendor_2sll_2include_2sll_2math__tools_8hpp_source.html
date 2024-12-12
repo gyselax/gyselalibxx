@@ -108,9 +108,9 @@ $(document).ready(function(){initNavTree('vendor_2sll_2include_2sll_2math__tools
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;experimental/mdspan&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">inline</span> <a class="code" href="structT.html">T</a> sum(<a class="code" href="structT.html">T</a>* array, <span class="keywordtype">int</span> size)</div>
@@ -123,9 +123,9 @@ $(document).ready(function(){initNavTree('vendor_2sll_2include_2sll_2math__tools
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> LayoutPolicy, <span class="keyword">class</span> AccessorPolicy, std::<span class="keywordtype">size_t</span> Ext&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">inline</span> ElementType sum(std::experimental::mdspan&lt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">inline</span> ElementType sum(Kokkos::mdspan&lt;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                       ElementType,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                       std::experimental::extents&lt;std::size_t, Ext&gt;,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                       Kokkos::extents&lt;std::size_t, Ext&gt;,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                       LayoutPolicy,</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                       AccessorPolicy&gt; <span class="keyword">const</span>&amp; array)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
@@ -138,9 +138,9 @@ $(document).ready(function(){initNavTree('vendor_2sll_2include_2sll_2math__tools
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> LayoutPolicy, <span class="keyword">class</span> AccessorPolicy, std::<span class="keywordtype">size_t</span> Ext&gt;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">inline</span> ElementType sum(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        std::experimental::mdspan&lt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        Kokkos::mdspan&lt;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                ElementType,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                std::experimental::extents&lt;std::size_t, Ext&gt;,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                Kokkos::extents&lt;std::size_t, Ext&gt;,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                LayoutPolicy,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                AccessorPolicy&gt; <span class="keyword">const</span>&amp; array,</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">int</span> start,</div>
@@ -263,7 +263,7 @@ $(document).ready(function(){initNavTree('vendor_2sll_2include_2sll_2math__tools
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    inv[1][1] = arr[0][0] / det;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">return</span> inv;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
-<div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:45</div></div>
+<div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

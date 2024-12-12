@@ -175,10 +175,10 @@ $(document).ready(function(){initNavTree('multipatch__field__mem_8hpp_source.htm
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="stringliteral">&quot;MultipatchFieldMems are not equivalent&quot;</span>);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    ~<a class="code" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>() {}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    ~<a class="code" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>() noexcept = default;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Patch&gt;</div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classMultipatchFieldMem.html#a579cfff022a37682e4677b6298559d4f">  127</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="classMultipatchFieldMem.html#a579cfff022a37682e4677b6298559d4f">get</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    template &lt;class <a class="code" href="structPatch.html">Patch</a>&gt;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classMultipatchFieldMem.html#a579cfff022a37682e4677b6298559d4f">  127</a></span>&#160;    auto <a class="code" href="classMultipatchFieldMem.html#a579cfff022a37682e4677b6298559d4f">get</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        return ::get_const_field(std::get&lt;<a class="code" href="structT.html">T&lt;Patch&gt;</a>&gt;(<a class="code" href="classMultipatchType.html#ae7480fdbb95f4018d1cd39f809001c14">base_type::m_tuple</a>));</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
@@ -249,7 +249,8 @@ $(document).ready(function(){initNavTree('multipatch__field__mem_8hpp_source.htm
 <div class="ttc" id="aclassMultipatchType_html"><div class="ttname"><a href="classMultipatchType.html">MultipatchType</a></div><div class="ttdoc">A class to store several objects that are of a type which is templated by the patch.</div><div class="ttdef"><b>Definition:</b> multipatch_type.hpp:32</div></div>
 <div class="ttc" id="aclassMultipatchType_html_ac09ed5edaf7d35c564ef78fe31620631"><div class="ttname"><a href="classMultipatchType.html#ac09ed5edaf7d35c564ef78fe31620631">MultipatchType&lt; T, Patches... &gt;::PatchOrdering</a></div><div class="ttdeci">ddc::detail::TypeSeq&lt; Patches... &gt; PatchOrdering</div><div class="ttdoc">A tag storing the order of Patches in this MultipatchType.</div><div class="ttdef"><b>Definition:</b> multipatch_type.hpp:35</div></div>
 <div class="ttc" id="aclassMultipatchType_html_ae7480fdbb95f4018d1cd39f809001c14"><div class="ttname"><a href="classMultipatchType.html#ae7480fdbb95f4018d1cd39f809001c14">MultipatchType&lt; T, Patches... &gt;::m_tuple</a></div><div class="ttdeci">std::tuple&lt; T&lt; Patches &gt;... &gt; m_tuple</div><div class="ttdoc">The internal tuple containing the data.</div><div class="ttdef"><b>Definition:</b> multipatch_type.hpp:45</div></div>
-<div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:45</div></div>
+<div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition:</b> patch.hpp:14</div></div>
+<div class="ttc" id="astructT_html"><div class="ttname"><a href="structT.html">T</a></div><div class="ttdoc">A class which describes the real space in the temporal direction.</div><div class="ttdef"><b>Definition:</b> geometry.hpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

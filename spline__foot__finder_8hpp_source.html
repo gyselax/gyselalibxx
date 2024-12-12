@@ -107,8 +107,8 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/cartesian_to_pseudo_cartesian.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/circular_to_cartesian.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/circular_to_cartesian.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sll/mapping/combined_mapping.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
@@ -120,16 +120,16 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classSplineFootFinder.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSplineFootFinder.html">SplineFootFinder</a> : <span class="keyword">public</span> <a class="code" href="classIFootFinder.html">IFootFinder</a></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> X_adv = <span class="keyword">typename</span> AdvectionDomain::X_adv;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> Y_adv = <span class="keyword">typename</span> AdvectionDomain::Y_adv;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> X_adv = <span class="keyword">typename</span> <a class="code" href="classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe">AdvectionDomain::X_adv</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> Y_adv = <span class="keyword">typename</span> <a class="code" href="classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25">AdvectionDomain::Y_adv</a>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> <a class="code" href="classCircularToCartesian.html">CircularToPseudoCartesian</a> = <a class="code" href="classCircularToCartesian.html">CircularToCartesian&lt;X_adv, Y_adv, R, Theta&gt;</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> <a class="code" href="classCartesianToPseudoCartesian.html">AdvectionMapping</a> = <a class="code" href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian&lt;Mapping, CircularToPseudoCartesian&gt;</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> <a class="code" href="classCartesianToCircular.html">PseudoCartesianToCircular</a> = <a class="code" href="classCartesianToCircular.html">CartesianToCircular&lt;X_adv, Y_adv, R, Theta&gt;</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> <a class="code" href="classCombinedMapping.html">InvAdvectionMapping</a> = <a class="code" href="classCombinedMapping.html">CombinedMapping&lt;Mapping, PseudoCartesianToCircular&gt;</a>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    TimeStepper <span class="keyword">const</span>&amp; m_time_stepper;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classAdvectionDomain.html">AdvectionDomain</a> <span class="keyword">const</span>&amp; m_advection_domain;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classCartesianToPseudoCartesian.html">AdvectionMapping</a> m_mapping;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classCombinedMapping.html">InvAdvectionMapping</a> m_mapping;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    SplineRThetaBuilder <span class="keyword">const</span>&amp; m_builder_advection_field;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    SplineRThetaEvaluatorConstBound <span class="keyword">const</span>&amp; m_evaluator_advection_field;</div>
@@ -139,13 +139,13 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classSplineFootFinder.html#aa188b86baa1df673cc32f3503a044dda">   78</a></span>&#160;    <a class="code" href="classSplineFootFinder.html#aa188b86baa1df673cc32f3503a044dda">SplineFootFinder</a>(</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            TimeStepper <span class="keyword">const</span>&amp; time_stepper,</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <a class="code" href="classAdvectionDomain.html">AdvectionDomain</a> <span class="keyword">const</span>&amp; advection_domain,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <a class="code" href="classCircularToCartesian.html">Mapping</a> <span class="keyword">const</span>&amp; mapping,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            Mapping <span class="keyword">const</span>&amp; mapping,</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            SplineRThetaBuilder <span class="keyword">const</span>&amp; builder_advection_field,</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            SplineRThetaEvaluatorConstBound <span class="keyword">const</span>&amp; evaluator_advection_field,</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordtype">double</span> epsilon = 1e-12)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        : m_time_stepper(time_stepper)</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        , m_advection_domain(advection_domain)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        , m_mapping(<a class="code" href="classCircularToCartesian.html">CircularToPseudoCartesian</a>(), mapping, epsilon)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        , m_mapping(mapping, <a class="code" href="classCartesianToCircular.html">PseudoCartesianToCircular</a>(), epsilon)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        , m_builder_advection_field(builder_advection_field)</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        , m_evaluator_advection_field(evaluator_advection_field)</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
@@ -201,7 +201,7 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                      host_t&lt;DConstVectorFieldRTheta&lt;X_adv, Y_adv&gt;&gt; advection_field,</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                                      <span class="keywordtype">double</span> dt) {</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                    <span class="comment">// Compute the characteristic feet at t^n:</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    m_advection_domain.advect_feet(feet, advection_field, dt);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    m_advection_domain.<a class="code" href="classAdvectionDomain.html#a63d1f575bbe10c3111147f51ef9c504f">advect_feet</a>(feet, advection_field, dt);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    <span class="comment">// Treatment to conserve the C0 property of the advected function:</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                    unify_value_at_center_pt(feet);</div>
@@ -253,8 +253,11 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    }</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;};</div>
 <div class="ttc" id="aclassAdvectionDomain_html"><div class="ttname"><a href="classAdvectionDomain.html">AdvectionDomain</a></div><div class="ttdoc">Define a domain for the advection.</div><div class="ttdef"><b>Definition:</b> advection_domain.hpp:40</div></div>
-<div class="ttc" id="aclassCartesianToPseudoCartesian_html"><div class="ttname"><a href="classCartesianToPseudoCartesian.html">CartesianToPseudoCartesian&lt; Mapping, CircularToPseudoCartesian &gt;</a></div></div>
-<div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition:</b> circular_to_cartesian.hpp:45</div></div>
+<div class="ttc" id="aclassAdvectionDomain_html_a4e65364cdd4ebf2d6e2e3e110dc62b25"><div class="ttname"><a href="classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25">AdvectionDomain::Y_adv</a></div><div class="ttdeci">typename PhysicalToLogicalMapping::cartesian_tag_y Y_adv</div><div class="ttdoc">The second dimension in the advection domain.</div><div class="ttdef"><b>Definition:</b> advection_domain.hpp:54</div></div>
+<div class="ttc" id="aclassAdvectionDomain_html_a63d1f575bbe10c3111147f51ef9c504f"><div class="ttname"><a href="classAdvectionDomain.html#a63d1f575bbe10c3111147f51ef9c504f">AdvectionDomain::advect_feet</a></div><div class="ttdeci">void advect_feet(host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt; feet_coords_rp, host_t&lt; DConstVectorFieldRTheta&lt; X_adv, Y_adv &gt;&gt; advection_field, double dt) const</div><div class="ttdoc">Advect the characteristic feet.</div><div class="ttdef"><b>Definition:</b> advection_domain.hpp:113</div></div>
+<div class="ttc" id="aclassAdvectionDomain_html_aea8431dcc84daf29f4b948a3090a0efe"><div class="ttname"><a href="classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe">AdvectionDomain::X_adv</a></div><div class="ttdeci">typename PhysicalToLogicalMapping::cartesian_tag_x X_adv</div><div class="ttdoc">The first dimension in the advection domain.</div><div class="ttdef"><b>Definition:</b> advection_domain.hpp:50</div></div>
+<div class="ttc" id="aclassCartesianToCircular_html"><div class="ttname"><a href="classCartesianToCircular.html">CartesianToCircular</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition:</b> cartesian_to_circular.hpp:40</div></div>
+<div class="ttc" id="aclassCombinedMapping_html"><div class="ttname"><a href="classCombinedMapping.html">CombinedMapping&lt; Mapping, PseudoCartesianToCircular &gt;</a></div></div>
 <div class="ttc" id="aclassIFootFinder_html"><div class="ttname"><a href="classIFootFinder.html">IFootFinder</a></div><div class="ttdoc">Define a base class for all the time integration methods used for the advection.</div><div class="ttdef"><b>Definition:</b> ifoot_finder.hpp:14</div></div>
 <div class="ttc" id="aclassSplineFootFinder_html"><div class="ttname"><a href="classSplineFootFinder.html">SplineFootFinder</a></div><div class="ttdoc">Define a base class for all the time integration methods used for the advection.</div><div class="ttdef"><b>Definition:</b> spline_foot_finder.hpp:26</div></div>
 <div class="ttc" id="aclassSplineFootFinder_html_a6de43a124ff3d378dd3bf7eccf113650"><div class="ttname"><a href="classSplineFootFinder.html#a6de43a124ff3d378dd3bf7eccf113650">SplineFootFinder::operator()</a></div><div class="ttdeci">void operator()(host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt; feet, host_t&lt; DConstVectorFieldRTheta&lt; X, Y &gt;&gt; advection_field, double dt) const final</div><div class="ttdoc">Advect the feet over .</div><div class="ttdef"><b>Definition:</b> spline_foot_finder.hpp:109</div></div>

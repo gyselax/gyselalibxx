@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;              typename SplineEvaluator::evaluation_domain_type,</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;              typename SplineEvaluator::batched_evaluation_domain_type,</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;              typename SplineEvaluator::memory_space,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;              std::experimental::layout_right&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;              Kokkos::layout_right&gt;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    static_assert(std::is_same_v&lt;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                  <span class="keyword">typename</span> SplineBuilder::batched_interpolation_domain_type,</div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::evaluation_domain_type,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::batched_evaluation_domain_type,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">typename</span> SplineEvaluator::memory_space,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::experimental::layout_right&gt;;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            Kokkos::layout_right&gt;;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">using</span> GridPDEDim = <span class="keyword">typename</span> SplineBuilder::interpolation_discrete_dimension_type;</div>

@@ -168,10 +168,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="memitem:aa1018dece7d47119f04db0f2359bc129"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#aa1018dece7d47119f04db0f2359bc129">evaluation_idx_range_type</a> = IdxRange&lt; <a class="el" href="classMultipatchSplineEvaluator2D.html#a292ea65ac876b0f331c12925773791fe">evaluation_discrete_dimension_type1</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt;, <a class="el" href="classMultipatchSplineEvaluator2D.html#a5f152bddb4de59d7c25fde30e538c8df">evaluation_discrete_dimension_type2</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; &gt;</td></tr>
 <tr class="memdesc:aa1018dece7d47119f04db0f2359bc129"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the domain for the 2D evaluation mesh used by this class.  <a href="classMultipatchSplineEvaluator2D.html#aa1018dece7d47119f04db0f2359bc129">More...</a><br /></td></tr>
 <tr class="separator:aa1018dece7d47119f04db0f2359bc129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a467bd4183a1002ae386b3e7a1b99df69"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
-<tr class="memitem:a467bd4183a1002ae386b3e7a1b99df69"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a467bd4183a1002ae386b3e7a1b99df69">batched_evaluation_idx_range_type</a> = typename ValuesOnPatch&lt; <a class="el" href="structPatch.html">Patch</a> &gt;::mdomain_type</td></tr>
-<tr class="memdesc:a467bd4183a1002ae386b3e7a1b99df69"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the whole domain representing evaluation points.  <a href="classMultipatchSplineEvaluator2D.html#a467bd4183a1002ae386b3e7a1b99df69">More...</a><br /></td></tr>
-<tr class="separator:a467bd4183a1002ae386b3e7a1b99df69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9119f42a71e32d73ec5dbf1d7c835962"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
+<tr class="memitem:a9119f42a71e32d73ec5dbf1d7c835962"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a9119f42a71e32d73ec5dbf1d7c835962">batched_evaluation_idx_range_type</a> = typename ValuesOnPatch&lt; <a class="el" href="structPatch.html">Patch</a> &gt;::discrete_domain_type</td></tr>
+<tr class="memdesc:a9119f42a71e32d73ec5dbf1d7c835962"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the whole domain representing evaluation points.  <a href="classMultipatchSplineEvaluator2D.html#a9119f42a71e32d73ec5dbf1d7c835962">More...</a><br /></td></tr>
+<tr class="separator:a9119f42a71e32d73ec5dbf1d7c835962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89581b13c5342e2a4202bcfe36f01d23"><td class="memTemplParams" colspan="2">template&lt;class Patch &gt; </td></tr>
 <tr class="memitem:a89581b13c5342e2a4202bcfe36f01d23"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchSplineEvaluator2D.html#a89581b13c5342e2a4202bcfe36f01d23">spline_idx_range_type1</a> = IdxRange&lt; <a class="el" href="classMultipatchSplineEvaluator2D.html#ad08ecc980aef2d532d97dc29ab78e026">bsplines_type1</a>&lt; <a class="el" href="structPatch.html">Patch</a> &gt; &gt;</td></tr>
 <tr class="memdesc:a89581b13c5342e2a4202bcfe36f01d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the 1D spline domain corresponding to the first dimension of interest.  <a href="classMultipatchSplineEvaluator2D.html#a89581b13c5342e2a4202bcfe36f01d23">More...</a><br /></td></tr>
@@ -541,8 +541,8 @@ template&lt;class Patch &gt; </div>
 
 </div>
 </div>
-<a id="a467bd4183a1002ae386b3e7a1b99df69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a467bd4183a1002ae386b3e7a1b99df69">&#9670;&nbsp;</a></span>batched_evaluation_idx_range_type</h2>
+<a id="a9119f42a71e32d73ec5dbf1d7c835962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9119f42a71e32d73ec5dbf1d7c835962">&#9670;&nbsp;</a></span>batched_evaluation_idx_range_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -552,7 +552,7 @@ template&lt;class ExecSpace , class MemorySpace , template&lt; typename P &gt; t
 template&lt;class Patch &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classMultipatchSplineEvaluator2D.html">MultipatchSplineEvaluator2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, <a class="el" href="classOnionPatchLocator.html">PatchLocator</a>, Patches &gt;::<a class="el" href="classMultipatchSplineEvaluator2D.html#a467bd4183a1002ae386b3e7a1b99df69">batched_evaluation_idx_range_type</a> =  typename ValuesOnPatch&lt;<a class="el" href="structPatch.html">Patch</a>&gt;::mdomain_type</td>
+          <td class="memname">using <a class="el" href="classMultipatchSplineEvaluator2D.html">MultipatchSplineEvaluator2D</a>&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, <a class="el" href="classOnionPatchLocator.html">PatchLocator</a>, Patches &gt;::<a class="el" href="classMultipatchSplineEvaluator2D.html#a9119f42a71e32d73ec5dbf1d7c835962">batched_evaluation_idx_range_type</a> =  typename ValuesOnPatch&lt;<a class="el" href="structPatch.html">Patch</a>&gt;::discrete_domain_type</td>
         </tr>
       </table>
 </div><div class="memdoc">

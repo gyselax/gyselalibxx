@@ -148,17 +148,17 @@ $(document).ready(function(){initNavTree('geometryXYVxVy_2initialization_2maxwel
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a5086199fdf9503559b32930a79ff6748">   77</a></span>&#160;    host_t&lt;ConstFieldSp&lt;double&gt;&gt; <a class="code" href="classMaxwellianEquilibrium.html#a5086199fdf9503559b32930a79ff6748">density_eq</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> m_density_eq;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> get_const_field(m_density_eq);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a58646ccdf0a4422bed79508bc90c0ec3">   86</a></span>&#160;    host_t&lt;ConstFieldSp&lt;double&gt;&gt; <a class="code" href="classMaxwellianEquilibrium.html#a58646ccdf0a4422bed79508bc90c0ec3">temperature_eq</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">return</span> m_temperature_eq;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">return</span> get_const_field(m_temperature_eq);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classMaxwellianEquilibrium.html#a9afec632ce82858142e939416967a6cc">   95</a></span>&#160;    host_t&lt;ConstFieldSp&lt;double&gt;&gt; <a class="code" href="classMaxwellianEquilibrium.html#a9afec632ce82858142e939416967a6cc">mean_velocity_eq</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> m_mean_velocity_eq;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> get_const_field(m_mean_velocity_eq);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
 <div class="ttc" id="aclassIEquilibrium_html"><div class="ttname"><a href="classIEquilibrium.html">IEquilibrium</a></div><div class="ttdoc">An abstract class for initializing a distribution function in (species,vpar,mu).</div><div class="ttdef"><b>Definition:</b> iequilibrium.hpp:11</div></div>

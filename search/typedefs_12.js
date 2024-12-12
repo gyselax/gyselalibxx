@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_5fadv_1802',['Y_adv',['../classAdvectionPhysicalDomain.html#a0de84994faf88d68f7c2e2176e2dcd7c',1,'AdvectionPhysicalDomain::Y_adv()'],['../classAdvectionPseudoCartesianDomain.html#a09d5b07d80ad078f09f8381d15ba1529',1,'AdvectionPseudoCartesianDomain::Y_adv()']]]
+  ['y_5fadv_1820',['Y_adv',['../classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25',1,'AdvectionDomain']]]
 ];

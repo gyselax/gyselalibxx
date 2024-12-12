@@ -120,7 +120,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3086cce87c971e57d63e4ee31c0dadb6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionFieldFinder.html#a3086cce87c971e57d63e4ee31c0dadb6">AdvectionFieldFinder</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping, double const epsilon=1e-12)</td></tr>
+<tr class="memitem:a3086cce87c971e57d63e4ee31c0dadb6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionFieldFinder.html#a3086cce87c971e57d63e4ee31c0dadb6">AdvectionFieldFinder</a> (Mapping const &amp;mapping, double const epsilon=1e-12)</td></tr>
 <tr class="memdesc:a3086cce87c971e57d63e4ee31c0dadb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a AdvectionFieldRTheta .  <a href="classAdvectionFieldFinder.html#a3086cce87c971e57d63e4ee31c0dadb6">More...</a><br /></td></tr>
 <tr class="separator:a3086cce87c971e57d63e4ee31c0dadb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ae332726478b50a6234b22b9ab977e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionFieldFinder.html#a16ae332726478b50a6234b22b9ab977e">operator()</a> (host_t&lt; DFieldRTheta &gt; electrostatic_potential, host_t&lt; <a class="el" href="classVectorField.html">DVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&gt; advection_field_xy) const</td></tr>
@@ -178,7 +178,7 @@ class AdvectionFieldFinder&lt; Mapping &gt;</h3>
 <p>The equation (1) is solved thanks to advection operator (<a class="el" href="classIAdvectionRTheta.html" title="Define the base class of 2D advection operators in polar index range.">IAdvectionRTheta</a>).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Mapping</td><td>A <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> class.</td></tr>
+    <tr><td class="paramname">Mapping</td><td>A class describing a mapping from curvilinear coordinates to cartesian coordinates.</td></tr>
   </table>
   </dd>
 </dl>
@@ -196,9 +196,9 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::<a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a> </td>
+          <td class="memname"><a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::<a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;&#160;</td>
+          <td class="paramtype">Mapping const &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -244,7 +244,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>electrostatic_potential</em>, </td>
@@ -291,7 +291,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; Spline2D &gt;&#160;</td>
           <td class="paramname"><em>electrostatic_potential_coef</em>, </td>
@@ -339,7 +339,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; <a class="el" href="structPolarSpline.html">SplinePolar</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>electrostatic_potential_coef</em>, </td>
@@ -387,7 +387,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>electrostatic_potential</em>, </td>
@@ -441,7 +441,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; Spline2D &gt;&#160;</td>
           <td class="paramname"><em>electrostatic_potential_coef</em>, </td>
@@ -497,7 +497,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a>&lt; Mapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; <a class="el" href="structPolarSpline.html">SplinePolar</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>electrostatic_potential_coef</em>, </td>

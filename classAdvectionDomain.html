@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: AdvectionDomain&lt; Mapping &gt; Class Template Reference</title>
+<title>Gyselalib++: AdvectionDomain&lt; LogicalToPhysicalMapping &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,36 +100,160 @@ $(document).ready(function(){initNavTree('classAdvectionDomain.html',''); initRe
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classAdvectionDomain-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">AdvectionDomain&lt; Mapping &gt; Class Template Reference</div>  </div>
+<div class="title">AdvectionDomain&lt; LogicalToPhysicalMapping &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Define a domain for the advection.  
  <a href="classAdvectionDomain.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for AdvectionDomain&lt; Mapping &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classAdvectionDomain.png" usemap="#AdvectionDomain_3C_20Mapping_20_3E_map" alt=""/>
-  <map id="AdvectionDomain_3C_20Mapping_20_3E_map" name="AdvectionDomain_3C_20Mapping_20_3E_map">
-<area href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection." alt="AdvectionPhysicalDomain&lt; Mapping &gt;" shape="rect" coords="0,56,280,80"/>
-<area href="classAdvectionPseudoCartesianDomain.html" title="Define the pseudo-Cartesian domain for the advection." alt="AdvectionPseudoCartesianDomain&lt; Mapping &gt;" shape="rect" coords="290,56,570,80"/>
-  </map>
-</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aea8431dcc84daf29f4b948a3090a0efe"><td class="memItemLeft" align="right" valign="top"><a id="aea8431dcc84daf29f4b948a3090a0efe"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe">X_adv</a> = typename <a class="el" href="classCartesianToCircular.html#a3a8d1753956c80af0e2069197560b3a5">PhysicalToLogicalMapping::cartesian_tag_x</a></td></tr>
+<tr class="memdesc:aea8431dcc84daf29f4b948a3090a0efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first dimension in the advection domain. <br /></td></tr>
+<tr class="separator:aea8431dcc84daf29f4b948a3090a0efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e65364cdd4ebf2d6e2e3e110dc62b25"><td class="memItemLeft" align="right" valign="top"><a id="a4e65364cdd4ebf2d6e2e3e110dc62b25"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25">Y_adv</a> = typename <a class="el" href="classCartesianToCircular.html#a177d7877c5bf73f643f771a91613ce15">PhysicalToLogicalMapping::cartesian_tag_y</a></td></tr>
+<tr class="memdesc:a4e65364cdd4ebf2d6e2e3e110dc62b25"><td class="mdescLeft">&#160;</td><td class="mdescRight">The second dimension in the advection domain. <br /></td></tr>
+<tr class="separator:a4e65364cdd4ebf2d6e2e3e110dc62b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab09e95979aa3d15ef615b7852b68a307"><td class="memItemLeft" align="right" valign="top"><a id="ab09e95979aa3d15ef615b7852b68a307"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionDomain.html#ab09e95979aa3d15ef615b7852b68a307">CoordXY_adv</a> = Coord&lt; <a class="el" href="classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe">X_adv</a>, <a class="el" href="classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25">Y_adv</a> &gt;</td></tr>
+<tr class="memdesc:ab09e95979aa3d15ef615b7852b68a307"><td class="mdescLeft">&#160;</td><td class="mdescRight">The coordinate type associated to the dimensions in the advection domain. <br /></td></tr>
+<tr class="separator:ab09e95979aa3d15ef615b7852b68a307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:afc88e9b851d7768a1425a9a022205996"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionDomain.html#afc88e9b851d7768a1425a9a022205996">AdvectionDomain</a> (<a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> const &amp;to_physical_mapping)</td></tr>
+<tr class="memdesc:afc88e9b851d7768a1425a9a022205996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> advection domain.  <a href="classAdvectionDomain.html#afc88e9b851d7768a1425a9a022205996">More...</a><br /></td></tr>
+<tr class="separator:afc88e9b851d7768a1425a9a022205996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d1f575bbe10c3111147f51ef9c504f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAdvectionDomain.html#a63d1f575bbe10c3111147f51ef9c504f">advect_feet</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt; feet_coords_rp, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe">X_adv</a>, <a class="el" href="classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25">Y_adv</a> &gt;&gt; advection_field, double dt) const</td></tr>
+<tr class="memdesc:a63d1f575bbe10c3111147f51ef9c504f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the characteristic feet.  <a href="classAdvectionDomain.html#a63d1f575bbe10c3111147f51ef9c504f">More...</a><br /></td></tr>
+<tr class="separator:a63d1f575bbe10c3111147f51ef9c504f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Mapping&gt;<br />
-class AdvectionDomain&lt; Mapping &gt;</h3>
+<div class="textblock"><h3>template&lt;class LogicalToPhysicalMapping&gt;<br />
+class AdvectionDomain&lt; LogicalToPhysicalMapping &gt;</h3>
 
 <p>Define a domain for the advection. </p>
-<p>The natural advection domain is the physical domain (<a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a>), where the studied equation is given. However, not all the mappings used are analytically invertible and inverting the Jacobian matrix of the mapping could be costly. That is why, we also introduce a pseudo-Cartesian domain (<a class="el" href="classAdvectionPseudoCartesianDomain.html" title="Define the pseudo-Cartesian domain for the advection.">AdvectionPseudoCartesianDomain</a>).</p>
+<p>The natural advection domain is the physical domain (<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a>), where the studied equation is given. However, not all the mappings used are analytically invertible and inverting the Jacobian matrix of the mapping could be costly. That is why, we also introduce a pseudo-Cartesian domain (AdvectionPseudoCartesianDomain).</p>
 <p>The method used to advect the characteristic feet depends on the advection domain.</p>
 <p>More details can be found in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> </dd>
 <dd>
 <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="afc88e9b851d7768a1425a9a022205996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc88e9b851d7768a1425a9a022205996">&#9670;&nbsp;</a></span>AdvectionDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class LogicalToPhysicalMapping &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>&lt; <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> &gt;::<a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> const &amp;&#160;</td>
+          <td class="paramname"><em>to_physical_mapping</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instantiate a <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> advection domain. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">to_physical_mapping</td><td>The mapping from the logical domain to the physical domain. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a63d1f575bbe10c3111147f51ef9c504f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63d1f575bbe10c3111147f51ef9c504f">&#9670;&nbsp;</a></span>advect_feet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class LogicalToPhysicalMapping &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>&lt; <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> &gt;::advect_feet </td>
+          <td>(</td>
+          <td class="paramtype">host_t&lt; FieldRTheta&lt; CoordRTheta &gt;&gt;&#160;</td>
+          <td class="paramname"><em>feet_coords_rp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe">X_adv</a>, <a class="el" href="classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25">Y_adv</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>advection_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Advect the characteristic feet. </p>
+<p>In the Backward Semi-Lagrangian method, the advection of a function uses the conservation along the characteristic property. So, we firstly compute the characteristic feet and then interpolate the function at these characteristic feet.</p>
+<p>The function implemented here deals with the computation of the characteristic feet. The <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> class uses a time integration method to solve the characteristic equation. The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> class calls advect_feet to compute the characteristic feet and interpolate the function we want to advect.</p>
+<p>The advect_feet implemented here computes only</p>
+<ul>
+<li>\( (\text{feet}_r, \text{feet}_\theta) = \mathcal{F}^{-1} (\text{feet}_x, \text{feet}_y) \)</li>
+</ul>
+<p>with</p><ul>
+<li>\( \text{feet}_x = x_{ij} - dt A_x(x_{ij}, y_{ij}) \),</li>
+<li>\( \text{feet}_y = y_{ij} - dt A_y(x_{ij}, y_{ij}) \),</li>
+</ul>
+<p>and</p><ul>
+<li>\( (x,y)_{ij} = \mathcal{F}(r_{ij}, \theta_{ij})\), with \(\{(r, \theta)_{ij}\}_{ij} \) the logical mesh points,</li>
+<li>\( A \) the advection field in the advection domain,</li>
+<li>\( \mathcal{F} \) the mapping from the logical domain to the advection domain.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">feet_coords_rp</td><td>The computed characteristic feet in the logical domain. On input: the points we want to advect. On output: the characteristic feet. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">advection_field</td><td>The advection field defined on the advection domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The time step. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/<a class="el" href="advection__domain_8hpp_source.html">advection_domain.hpp</a></li>
 </ul>
 </div><!-- contents -->

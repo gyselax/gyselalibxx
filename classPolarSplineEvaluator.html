@@ -156,10 +156,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a936ad154152aab8185954b19e6e25b86"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a936ad154152aab8185954b19e6e25b86">operator()</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; coord_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
 <tr class="memdesc:a936ad154152aab8185954b19e6e25b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the spline function at a given coordinate.  <a href="classPolarSplineEvaluator.html#a936ad154152aab8185954b19e6e25b86">More...</a><br /></td></tr>
 <tr class="separator:a936ad154152aab8185954b19e6e25b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a830b24d7d956fe437f4ceb9f4b330e67"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a830b24d7d956fe437f4ceb9f4b330e67"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a830b24d7d956fe437f4ceb9f4b330e67">operator()</a> (ddc::ChunkSpan&lt; double, Domain, std::experimental::layout_right, MemSpace &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain, std::experimental::layout_right, MemSpace &gt; const coords_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a830b24d7d956fe437f4ceb9f4b330e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the spline function on a domain.  <a href="classPolarSplineEvaluator.html#a830b24d7d956fe437f4ceb9f4b330e67">More...</a><br /></td></tr>
-<tr class="separator:a830b24d7d956fe437f4ceb9f4b330e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c59720235b1edcb3cc354a20e33155"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
+<tr class="memitem:a68c59720235b1edcb3cc354a20e33155"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a68c59720235b1edcb3cc354a20e33155">operator()</a> (ddc::ChunkSpan&lt; double, Domain, Kokkos::layout_right, MemSpace &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain, Kokkos::layout_right, MemSpace &gt; const coords_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:a68c59720235b1edcb3cc354a20e33155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the spline function on a domain.  <a href="classPolarSplineEvaluator.html#a68c59720235b1edcb3cc354a20e33155">More...</a><br /></td></tr>
+<tr class="separator:a68c59720235b1edcb3cc354a20e33155"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4220f9856e3e0fa46be34dbfcc2f1616"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a4220f9856e3e0fa46be34dbfcc2f1616">deriv_dim_1</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; coord_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
 <tr class="memdesc:a4220f9856e3e0fa46be34dbfcc2f1616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the derivative of the spline function on the first dimension.  <a href="classPolarSplineEvaluator.html#a4220f9856e3e0fa46be34dbfcc2f1616">More...</a><br /></td></tr>
 <tr class="separator:a4220f9856e3e0fa46be34dbfcc2f1616"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,7 +182,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a48a9f6fc82ad489c4ad8ec40cdabf1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the cross derivative of the spline function.  <a href="classPolarSplineEvaluator.html#a48a9f6fc82ad489c4ad8ec40cdabf1da">More...</a><br /></td></tr>
 <tr class="separator:a48a9f6fc82ad489c4ad8ec40cdabf1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4138c63cadd45444a7d820eda652b64b"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
-<tr class="memitem:a4138c63cadd45444a7d820eda652b64b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a4138c63cadd45444a7d820eda652b64b">integrate</a> (<a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef, <a class="el" href="classCircularToCartesian.html">Mapping</a> const mapping) const</td></tr>
+<tr class="memitem:a4138c63cadd45444a7d820eda652b64b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a4138c63cadd45444a7d820eda652b64b">integrate</a> (<a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef, Mapping const mapping) const</td></tr>
 <tr class="memdesc:a4138c63cadd45444a7d820eda652b64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the in integral of a spline function over the domain.  <a href="classPolarSplineEvaluator.html#a4138c63cadd45444a7d820eda652b64b">More...</a><br /></td></tr>
 <tr class="separator:a4138c63cadd45444a7d820eda652b64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -432,8 +432,8 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="a830b24d7d956fe437f4ceb9f4b330e67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a830b24d7d956fe437f4ceb9f4b330e67">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a68c59720235b1edcb3cc354a20e33155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c59720235b1edcb3cc354a20e33155">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -448,13 +448,13 @@ template&lt;class Domain &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, Domain, std::experimental::layout_right, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; double, Domain, Kokkos::layout_right, MemSpace &gt; const&#160;</td>
           <td class="paramname"><em>spline_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain, std::experimental::layout_right, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain, Kokkos::layout_right, MemSpace &gt; const&#160;</td>
           <td class="paramname"><em>coords_eval</em>, </td>
         </tr>
         <tr>
@@ -822,7 +822,7 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> const&#160;</td>
+          <td class="paramtype">Mapping const&#160;</td>
           <td class="paramname"><em>mapping</em>&#160;</td>
         </tr>
         <tr>

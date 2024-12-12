@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('classVortexMergerDensitySolution.html'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75">VortexMergerDensitySolution</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping)</td></tr>
+<tr class="memitem:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75">VortexMergerDensitySolution</a> (Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classVortexMergerDensitySolution.html" title="Initial condition for the vortex merger simulation.">VortexMergerDensitySolution</a>.  <a href="classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75">More...</a><br /></td></tr>
 <tr class="separator:a75f051a4a9d1ccfee6c1976e4a914c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebe20037b60ca33bd8020faba80fe4f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8">set_initialisation</a> (host_t&lt; DFieldRTheta &gt; rho_init, host_t&lt; DConstFieldRTheta &gt; rho_eq, const double eps, const double sigma, const double x_star_1, const double y_star_1, const double x_star_2, const double y_star_2)</td></tr>
@@ -126,7 +126,7 @@ class VortexMergerDensitySolution&lt; Mapping &gt;</h3>
 <p>Initial condition for the vortex merger simulation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Mapping</td><td>A <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> mapping function class. </td></tr>
+    <tr><td class="paramname">Mapping</td><td>A class describing a mapping from curvilinear coordinates to cartesian coordinates. </td></tr>
   </table>
   </dd>
 </dl>
@@ -143,9 +143,9 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::<a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a> </td>
+          <td class="memname"><a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a>&lt; Mapping &gt;::<a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;&#160;</td>
+          <td class="paramtype">Mapping const &amp;&#160;</td>
           <td class="paramname"><em>mapping</em></td><td>)</td>
           <td></td>
         </tr>
@@ -180,7 +180,7 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt;::set_initialisation </td>
+          <td class="memname">void <a class="el" href="classVortexMergerDensitySolution.html">VortexMergerDensitySolution</a>&lt; Mapping &gt;::set_initialisation </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>rho_init</em>, </td>

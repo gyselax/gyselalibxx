@@ -154,7 +154,7 @@ Grid</h1>
 <p>E.g.: </p><div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code" href="structGridX.html">GridX</a> : UniformGridBase&lt;X&gt;</div>
 <div class="line">{</div>
 <div class="line">};</div>
-<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:102</div></div>
+<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition:</b> geometry.hpp:94</div></div>
 </div><!-- fragment --><p>Although this seems like a useful type, you should not directly create instances of this class in the code. Instead you should call <code>init_discrete_space</code> and access the points using an <code>Index</code>. For more details see the section about <code>Index</code>.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Index"></a>
 Index</h1>
@@ -203,11 +203,11 @@ Index Range</h1>
 <div class="line">}</div>
 </div><!-- fragment --><p> or: </p><div class="fragment"><div class="line">ddc::for_each(idx_range, [&amp;](Idx&lt;GridX&gt; index) {</div>
 <div class="line">});</div>
-</div><!-- fragment --><p> In the case of a <code>ddc::for_each</code> the second argument is a lambda function. The <code>[&amp;]</code> ensures that any variable defined outside the loop are captured by reference so they can be used inside the lamda function.</p>
+</div><!-- fragment --><p> In the case of a <code>ddc::for_each</code> the second argument is a lambda function. The <code>[&amp;]</code> ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.</p>
 <p>It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however <code>IdxRange</code> also contains several helper functions which are designed to facilitate the creation of these sets:</p><ul>
 <li><code>take_first(IdxStep&lt;..&gt; n)</code> : Returns an index range containing only the first n indices of the original range.</li>
 <li><code>take_last(IdxStep&lt;..&gt; n)</code> : Returns an index range containing only the last n indices of the original range.</li>
-<li><code>remove_first(IdxStep&lt;..&gt; n)</code> : Returns an index range containing all but the first n indicie of the original range.</li>
+<li><code>remove_first(IdxStep&lt;..&gt; n)</code> : Returns an index range containing all but the first n indices of the original range.</li>
 <li><code>remove_last(IdxStep&lt;..&gt; n)</code> : Returns an index range containing all but the last n indices of the original range.</li>
 <li><code>remove(IdxStep&lt;..&gt; n_first, IdxStep&lt;..&gt; n_last)</code> : Returns an index range containing all indices of the original range except the first n_first indices and the last n_last indices.</li>
 </ul>
@@ -225,7 +225,7 @@ Index Range</h1>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Data_Storage"></a>
 Data Storage</h1>
 <p>Data is allocated at the instantiation of a <code>FieldMem</code> (type alias for <code>ddc::Chunk</code>). This type is parametrised by the underlying data type (e.g. <code>double</code>), and the <code>IdxRange</code> on which the values are defined. By default in Gysela memory is allocated on the device (GPU).</p>
-<p>In order to initialise the data storage to the correct size, a <code>FieldMem</code> is initailised by providing the <code>IdxRange</code> on which the values are defined.</p>
+<p>In order to initialise the data storage to the correct size, a <code>FieldMem</code> is initialised by providing the <code>IdxRange</code> on which the values are defined.</p>
 <p>In Gyselalibxx the alias <code>FieldMemX</code> is usually defined in <code>geometry.hpp</code> to describe the memory block for a field defined on the all or part of <code><a class="el" href="structGridX.html">GridX</a></code>.. E.g: </p><div class="fragment"><div class="line">FieldMemXVx&lt;double&gt; distribution_function_2d_alloc(idx_range_x_vx);</div>
 </div><!-- fragment --><p>In Gyselalibxx the functions are almost all defined using real numbers. The additional alias <code>DFieldMemX</code> is therefore defined to represent a real function defined on all or part of <code><a class="el" href="structGridX.html">GridX</a></code>. E.g: </p><div class="fragment"><div class="line">DFieldMemRThetaPhiVparMu distribution_function_2d_alloc(idx_range_radial_poloidal_toroidal_velocity_mu);</div>
 </div><!-- fragment --><p>As instantiating a <code>FieldMem</code> leads to data allocation using this type always has an associated cost. In order to avoid accidental copying DDC is structured such that the only way to copy data from one <code>FieldMem</code> to another is using the function <code>ddc::deepcopy</code>. Using an assignment or initialising from another <code>FieldMem</code> will result in a compiler error.</p>

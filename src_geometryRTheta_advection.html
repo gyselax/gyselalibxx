@@ -176,8 +176,8 @@ RK4 method</h3>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Advection_domain"></a>
 Advection domain</h1>
 <p>There are two advection domains implemented:</p><ul>
-<li>the physical domain: <a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a>;</li>
-<li>the pseudo-Cartesian domain: <a class="el" href="classAdvectionPhysicalDomain.html" title="Define the physical domain for the advection.">AdvectionPhysicalDomain</a>.</li>
+<li>the physical domain: AdvectionPhysicalDomain;</li>
+<li>the pseudo-Cartesian domain: AdvectionPhysicalDomain.</li>
 </ul>
 <p>It seems logical to use the <b>physical domain</b>, where the studied equation is given, as the advection domain.</p>
 <p>However, we want to solve this equation on a polar grid. So before advecting, we have to compute the mesh points in the physical domain using a mapping function \(\mathcal{F}\):</p>

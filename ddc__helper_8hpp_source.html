@@ -224,12 +224,12 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    static_assert(</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            ddc::type_seq_same_v&lt;ddc::to_type_seq_t&lt;Domain&gt;, ddc::to_type_seq_t&lt;TargetDomain&gt;&gt;);</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;TargetDomain, Domain&gt;) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> src.span_view();</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> get_field(src);</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        TargetDomain transposed_domain(src.domain());</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keyword">using</span> ElemType = std::remove_const_t&lt;ElementType&gt;;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        FieldMem&lt;ElemType, TargetDomain, MemSpace&gt; field_alloc(transposed_domain);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        transpose_layout(execution_space, field_alloc.span_view(), src.span_cview());</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        transpose_layout(execution_space, get_field(field_alloc), get_const_field(src));</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">return</span> field_alloc;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    }</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
@@ -248,7 +248,7 @@ $(document).ready(function(){initNavTree('ddc__helper_8hpp_source.html',''); ini
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    static_assert(</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            ddc::type_seq_same_v&lt;ddc::to_type_seq_t&lt;Domain&gt;, ddc::to_type_seq_t&lt;TargetDomain&gt;&gt;);</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;TargetDomain, Domain&gt;) {</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">return</span> src.span_view();</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">return</span> get_field(src);</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        TargetDomain transposed_domain(src.domain());</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keyword">using</span> ElemType = std::remove_const_t&lt;ElementType&gt;;</div>

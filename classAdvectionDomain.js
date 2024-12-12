@@ -1,4 +1,8 @@
 var classAdvectionDomain =
 [
-    [ "~AdvectionDomain", "classAdvectionDomain.html#a8f912a4ebea56a3c2f5dc9426b1d62dd", null ]
+    [ "X_adv", "classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe", null ],
+    [ "Y_adv", "classAdvectionDomain.html#a4e65364cdd4ebf2d6e2e3e110dc62b25", null ],
+    [ "CoordXY_adv", "classAdvectionDomain.html#ab09e95979aa3d15ef615b7852b68a307", null ],
+    [ "AdvectionDomain", "classAdvectionDomain.html#afc88e9b851d7768a1425a9a022205996", null ],
+    [ "advect_feet", "classAdvectionDomain.html#a63d1f575bbe10c3111147f51ef9c504f", null ]
 ];

@@ -121,7 +121,7 @@ Inheritance diagram for BslExplicitPredCorrRTheta&lt; Mapping, AdvectionDomain &
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17140990cac2f0e062b46e35a9b8a516"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslExplicitPredCorrRTheta.html#a17140990cac2f0e062b46e35a9b8a516">BslExplicitPredCorrRTheta</a> (<a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, <a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinderType</a>, <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt; &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver, SplineRThetaEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
+<tr class="memitem:a17140990cac2f0e062b46e35a9b8a516"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslExplicitPredCorrRTheta.html#a17140990cac2f0e062b46e35a9b8a516">BslExplicitPredCorrRTheta</a> (<a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, Mapping const &amp;mapping, <a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinderType</a>, Mapping &gt; &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver, SplineRThetaEvaluatorConstBound const &amp;advection_evaluator)</td></tr>
 <tr class="memdesc:a17140990cac2f0e062b46e35a9b8a516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classBslExplicitPredCorrRTheta.html" title="A second order explicit predictor-corrector for the Vlasov-Poisson equations.">BslExplicitPredCorrRTheta</a>.  <a href="classBslExplicitPredCorrRTheta.html#a17140990cac2f0e062b46e35a9b8a516">More...</a><br /></td></tr>
 <tr class="separator:a17140990cac2f0e062b46e35a9b8a516"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf7de730188384e04d3121a0aab47d95"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslExplicitPredCorrRTheta.html#aaf7de730188384e04d3121a0aab47d95">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const final</td></tr>
@@ -163,7 +163,7 @@ class BslExplicitPredCorrRTheta&lt; Mapping, AdvectionDomain &gt;</h3>
 <p>(With \(X^C\) the characteristic feet such that \(\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2} \).)</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Mapping</td><td>A <a class="el" href="classCurvilinear2DToCartesian.html" title="A class for describing curvilinear 2D mappings from the logical domain to the physical domain.">Curvilinear2DToCartesian</a> class or one of its child classes. </td></tr>
+    <tr><td class="paramname">Mapping</td><td>A class describing a mapping from curvilinear coordinates to cartesian coordinates. </td></tr>
     <tr><td class="paramname"><a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a></td><td>An <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> class. </td></tr>
     <tr><td class="paramname">FootFinder</td><td>A <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> class. </td></tr>
   </table>
@@ -182,7 +182,7 @@ template&lt;class Mapping , class AdvectionDomain &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> &gt;::<a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a> </td>
+          <td class="memname"><a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; Mapping, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> &gt;::<a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;&#160;</td>
           <td class="paramname"><em>advection_domain</em>, </td>
@@ -190,13 +190,13 @@ template&lt;class Mapping , class AdvectionDomain &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;&#160;</td>
+          <td class="paramtype">Mapping const &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinderType</a>, <a class="el" href="classCircularToCartesian.html">Mapping</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a>&lt; <a class="el" href="classSplineFootFinder.html">SplineFootFinderType</a>, Mapping &gt; &amp;&#160;</td>
           <td class="paramname"><em>advection_solver</em>, </td>
         </tr>
         <tr>
@@ -272,7 +272,7 @@ template&lt;class Mapping , class AdvectionDomain &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt;DFieldRTheta&gt; <a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> &gt;::operator() </td>
+          <td class="memname">host_t&lt;DFieldRTheta&gt; <a class="el" href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a>&lt; Mapping, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; DFieldRTheta &gt;&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>

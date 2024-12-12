@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('classInverseJacobianMatrix.html',''); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8484531e5dbf59a3ab2a6ef08711a84d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#a8484531e5dbf59a3ab2a6ef08711a84d">InverseJacobianMatrix</a> (<a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;mapping)</td></tr>
+<tr class="memitem:a8484531e5dbf59a3ab2a6ef08711a84d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#a8484531e5dbf59a3ab2a6ef08711a84d">InverseJacobianMatrix</a> (Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:a8484531e5dbf59a3ab2a6ef08711a84d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="classInverseJacobianMatrix.html" title="A class to calculate the inverse of the Jacobian matrix.">InverseJacobianMatrix</a>.  <a href="classInverseJacobianMatrix.html#a8484531e5dbf59a3ab2a6ef08711a84d">More...</a><br /></td></tr>
 <tr class="separator:a8484531e5dbf59a3ab2a6ef08711a84d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad33e3bab6bf8473ddbb65ca77661b3a2"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#ad33e3bab6bf8473ddbb65ca77661b3a2">operator()</a> (PositionCoordinate const &amp;coord) const</td></tr>
@@ -157,9 +157,9 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::<a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a> </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::<a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">Mapping</a> const &amp;&#160;</td>
+          <td class="paramtype">Mapping const &amp;&#160;</td>
           <td class="paramname"><em>mapping</em></td><td>)</td>
           <td></td>
         </tr>
@@ -194,7 +194,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::operator() </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -209,7 +209,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
 </div><div class="memdoc">
 
 <p>Compute full inverse Jacobian matrix. </p>
-<p>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given indendently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</p>
+<p>For some computations, we need the complete inverse Jacobian matrix or just the coefficients. The coefficients can be given independently with the functions inv_jacobian_11, inv_jacobian_12, inv_jacobian_21 and inv_jacobian_22.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -239,7 +239,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::inv_jacobian_11 </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_11 </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -277,7 +277,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::inv_jacobian_12 </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_12 </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -315,7 +315,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::inv_jacobian_21 </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_21 </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -353,7 +353,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; <a class="el" href="classCircularToCartesian.html">Mapping</a>, PositionCoordinate &gt;::inv_jacobian_22 </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION double <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::inv_jacobian_22 </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>

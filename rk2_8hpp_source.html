@@ -156,22 +156,22 @@ $(document).ready(function(){initNavTree('rk2_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="classRK2.html#aaba53f61442e763c05fbd7614c3e1c05">ValField</a> y_prime(y_prime_alloc);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="comment">// Save initial conditions</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="classITimeStepper.html#ac976ff8bc85dbfed9f7b378f69bd52b4">base_type::copy</a>(y_prime, y);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="classITimeStepper.html#ac976ff8bc85dbfed9f7b378f69bd52b4">base_type::copy</a>(y_prime, get_const_field(y));</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="comment">// --------- Calculate k1 ------------</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="comment">// Calculate k1 = f(y)</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        dy_calculator(k1, y);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        dy_calculator(k1, get_const_field(y));</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="comment">// --------- Calculate k2 ------------</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="comment">// Calculate y_new := y_n + h/2*k_1</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        y_update(y_prime, k1, 0.5 * dt);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        y_update(y_prime, get_const_field(k1), 0.5 * dt);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment">// Calculate k2 = f(y_new)</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        dy_calculator(k2, y_prime);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        dy_calculator(k2, get_const_field(y_prime));</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">// ----------- Update y --------------</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="comment">// Calculate y_{n+1} := y_n + h*k_2</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        y_update(y, k2, dt);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        y_update(y, get_const_field(k2), dt);</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
 <div class="ttc" id="aclassDerivFieldMem_html"><div class="ttname"><a href="classDerivFieldMem.html">DerivFieldMem</a></div><div class="ttdoc">See DerivFieldMemImplementation.</div><div class="ttdef"><b>Definition:</b> derivative_field.hpp:10</div></div>
