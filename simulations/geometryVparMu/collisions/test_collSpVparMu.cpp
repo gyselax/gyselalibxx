@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
 
 #include <paraconf.h>
 #include <pdi.h>

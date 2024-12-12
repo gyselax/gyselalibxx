@@ -8,7 +8,7 @@ target_include_directories("simulation_utils"
 
 target_link_libraries("simulation_utils"
     INTERFACE
-        DDC::DDC
+        DDC::core
 )
 
 add_library("gslx::simulation_utils" ALIAS "simulation_utils")

@@ -9,7 +9,7 @@ target_include_directories("utils"
 
 target_link_libraries("utils"
     INTERFACE
-        DDC::DDC
+        DDC::core
         gslx::data_types
         gslx::quadrature
 )

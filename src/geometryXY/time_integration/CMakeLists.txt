@@ -6,7 +6,7 @@ target_include_directories("predcorr_rk2_xy"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("predcorr_rk2_xy" INTERFACE
-    DDC::DDC
+    DDC::core
     
     gslx::advection
     gslx::interpolation

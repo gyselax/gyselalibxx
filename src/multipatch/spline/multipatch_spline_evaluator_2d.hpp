@@ -137,7 +137,7 @@ public:
     /// @brief The type of the whole domain representing evaluation points.
     /// @tparam Patch Patch type.
     template <class Patch>
-    using batched_evaluation_idx_range_type = typename ValuesOnPatch<Patch>::mdomain_type;
+    using batched_evaluation_idx_range_type = typename ValuesOnPatch<Patch>::discrete_domain_type;
 
 
     /// @brief The type of the 1D spline domain corresponding to the first dimension of interest.

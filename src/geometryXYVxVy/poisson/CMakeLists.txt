@@ -12,7 +12,8 @@ target_include_directories("poisson_xy"
 
 target_link_libraries("poisson_xy"
     PUBLIC
-        DDC::DDC
+        DDC::core
+        DDC::fft
         sll::SLL
         gslx::geometry_xyvxvy
         gslx::pde_solvers

@@ -10,8 +10,8 @@ target_include_directories(diocotron_init_eq
 
 target_link_libraries(diocotron_init_eq
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper        
+        DDC::core
+        DDC::pdi        
         Eigen3::Eigen
         
         sll::SLL
@@ -32,8 +32,8 @@ target_include_directories(vortex_merger_init_eq
 )
 target_link_libraries(vortex_merger_init_eq
     INTERFACE
-        DDC::DDC
-        #DDC::PDI_Wrapper        
+        DDC::core
+        #DDC::pdi        
         #Eigen3::Eigen
         
         sll::SLL

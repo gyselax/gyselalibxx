@@ -14,7 +14,8 @@ target_include_directories("poisson_${GEOMETRY_VARIANT}"
 
 target_link_libraries("poisson_${GEOMETRY_VARIANT}"
     PUBLIC
-        DDC::DDC
+        DDC::core
+        DDC::fft
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::pde_solvers
         gslx::quadrature

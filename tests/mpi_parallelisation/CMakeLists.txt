@@ -9,7 +9,7 @@ add_executable(unit_tests_parallelisation_layout
 
 target_link_libraries(unit_tests_parallelisation_layout
     PUBLIC
-        DDC::DDC
+        DDC::core
         GTest::gtest
         GTest::gmock
         gslx::mpi_parallelisation
@@ -26,7 +26,7 @@ add_executable(unit_tests_parallelisation
 )
 target_link_libraries(unit_tests_parallelisation
     PUBLIC
-        DDC::DDC
+        DDC::core
         GTest::gtest
         GTest::gmock
         gslx::mpi_parallelisation

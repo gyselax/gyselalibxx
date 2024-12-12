@@ -7,7 +7,7 @@ target_include_directories(advection_rp
 )
 target_link_libraries(advection_rp 
     INTERFACE
-        DDC::DDC
+        DDC::core
         sll::SLL
         Eigen3::Eigen
         gslx::data_types
