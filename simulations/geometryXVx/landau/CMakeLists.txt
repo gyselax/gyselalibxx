@@ -7,8 +7,8 @@ foreach(GEOMETRY_VARIANT IN LISTS BASIC_GEOMETRY_XVx_VARIANTS_LIST)
 add_executable(landau_fem_uniform_${GEOMETRY_VARIANT} landau_fem_uniform.cpp)
 target_link_libraries(landau_fem_uniform_${GEOMETRY_VARIANT}
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper
+        DDC::core
+        DDC::pdi
         paraconf::paraconf
         PDI::pdi
         gslx::initialization_${GEOMETRY_VARIANT}
@@ -32,8 +32,8 @@ endforeach()
 add_executable(landau_fft landau_fft.cpp)
 target_link_libraries(landau_fft
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper
+        DDC::core
+        DDC::pdi
         paraconf::paraconf
         PDI::pdi
         gslx::initialization_xperiod_vx

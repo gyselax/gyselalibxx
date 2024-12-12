@@ -28,8 +28,8 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
         )
         target_link_libraries("${test_name}"
             PUBLIC
-                DDC::DDC
-                DDC::PDI_Wrapper
+                DDC::core
+                DDC::pdi
                 paraconf::paraconf
                 PDI::pdi
                 Eigen3::Eigen
@@ -68,8 +68,8 @@ add_executable(advection_ALL
 )
 target_link_libraries(advection_ALL
     PUBLIC
-		DDC::DDC
-		DDC::PDI_Wrapper
+		DDC::core
+		DDC::pdi
 		paraconf::paraconf
 		PDI::pdi
 		Eigen3::Eigen

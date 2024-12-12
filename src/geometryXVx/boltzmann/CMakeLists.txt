@@ -13,7 +13,7 @@ target_include_directories("boltzmann_${GEOMETRY_VARIANT}"
 
 target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
     PUBLIC
-        DDC::DDC
+        DDC::core
         gslx::interpolation
         gslx::speciesinfo
         gslx::geometry_${GEOMETRY_VARIANT}

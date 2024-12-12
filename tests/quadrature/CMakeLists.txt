@@ -9,7 +9,7 @@ add_executable(unit_tests_quadrature
 )
 target_link_libraries(unit_tests_quadrature
     PUBLIC
-        DDC::DDC
+        DDC::core
         GTest::gtest
         GTest::gmock
 
@@ -29,7 +29,7 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	)
 	target_link_libraries(spline_quadrature_tests_${GEOMETRY_VARIANT}
 	    PUBLIC
-            DDC::DDC
+            DDC::core
 	        GTest::gtest
 	        GTest::gmock
 	        paraconf::paraconf

@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
 
 #include "advection_domain.hpp"
 #include "advection_field_rp.hpp"

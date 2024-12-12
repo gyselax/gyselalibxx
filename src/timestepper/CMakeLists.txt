@@ -7,7 +7,7 @@ target_include_directories(timestepper
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries(timestepper INTERFACE
-    DDC::DDC
+    DDC::core
     gslx::data_types
     gslx::multipatch_data_types
     gslx::multipatch_utils
