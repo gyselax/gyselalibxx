@@ -12,7 +12,7 @@ add_executable("unit_tests_connectivity"
 )
 target_link_libraries("unit_tests_connectivity"
 PUBLIC
-        DDC::core
+        DDC::DDC
         GTest::gtest
         GTest::gmock
 

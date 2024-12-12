@@ -2,7 +2,6 @@
 #include <string>
 
 #include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
 
 #include "krook_source_constant.hpp"
 #include "mask_tanh.hpp"

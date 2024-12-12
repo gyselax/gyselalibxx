@@ -6,7 +6,7 @@ target_include_directories("advection_field_RTheta"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("advection_field_RTheta" INTERFACE
-    DDC::core
+    DDC::DDC
     sll::SLL
     gslx::data_types
     gslx::speciesinfo

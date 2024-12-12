@@ -12,7 +12,7 @@ add_executable("${test_name_gtest}"
 )
 target_link_libraries("${test_name_gtest}"
 PUBLIC
-        DDC::core
+        DDC::DDC
         GTest::gtest
         GTest::gmock
 

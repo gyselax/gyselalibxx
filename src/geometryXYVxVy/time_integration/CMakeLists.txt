@@ -10,8 +10,8 @@ target_include_directories("time_integration_xyvxvy"
 
 target_link_libraries("time_integration_xyvxvy"
     PUBLIC
-        DDC::core
-        DDC::pdi
+        DDC::DDC
+        DDC::PDI_Wrapper
         gslx::poisson_xy
         gslx::speciesinfo
         gslx::vlasov_xyvxvy

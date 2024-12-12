@@ -11,7 +11,7 @@ target_include_directories("initialization_xyvxvy"
 
 target_link_libraries("initialization_xyvxvy"
     PUBLIC
-        DDC::core
+        DDC::DDC
         gslx::speciesinfo
         gslx::geometry_xyvxvy
         gslx::utils

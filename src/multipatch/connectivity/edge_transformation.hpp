@@ -232,7 +232,7 @@ public:
         // Index on the target grid
         using IdxTarget = typename IdxRangeTarget::discrete_element_type;
         // Index step on the target grid
-        using IdxStepTarget = typename IdxRangeTarget::discrete_vector_type;
+        using IdxStepTarget = typename IdxRangeTarget::mlength_type;
 
 
         bool is_equivalent_idx = false;

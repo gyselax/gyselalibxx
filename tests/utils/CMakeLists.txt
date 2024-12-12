@@ -11,7 +11,7 @@ add_executable(unit_tests_utils
 )
 target_link_libraries(unit_tests_utils
     PUBLIC
-        DDC::pdi
+        DDC::PDI_Wrapper
         GTest::gtest
         GTest::gmock
         paraconf::paraconf

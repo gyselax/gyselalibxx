@@ -3,8 +3,8 @@
 add_executable(test_collSpVparMu test_collSpVparMu.cpp)
 target_link_libraries(test_collSpVparMu
   PUBLIC
-  DDC::core
-  DDC::pdi
+  DDC::DDC
+  DDC::PDI_Wrapper
   PDI::pdi
   gslx::collisions
   gslx::geometry_vparmu

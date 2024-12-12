@@ -11,7 +11,7 @@ target_include_directories("initialization_vparmu"
 
 target_link_libraries("initialization_vparmu"
     PUBLIC
-        DDC::core
+        DDC::DDC
         gslx::speciesinfo
         gslx::geometry_vparmu
         gslx::utils
