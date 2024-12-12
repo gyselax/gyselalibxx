@@ -10,6 +10,7 @@ It is broken up into the following sub-folders:
  - geometryVparMu - Tests in the vpar-mu geometry.
  - geometryXVx - Tests in the x-vx geometry.
  - geometryXYVxVy - Tests in the x,y-vx,vy geometry.
+ - math_tools - Test for mathematical functions.
  - MPI parallelism - Tests for the templated MPI operators.
  - [multipatch](./multipatch/README.md) - Tests for the classes that work over multipatch geometries.
  - PDE solvers - Tests for the templated Partial Differential Equation solvers.
