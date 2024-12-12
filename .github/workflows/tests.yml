@@ -13,7 +13,7 @@ on:
 
 jobs:
   pre_job:
-    # continue-on-error: true # Uncomment once integration is finished
+    name: 'Check for unnecessary runs'
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
     # Map a step output to a job output
@@ -25,15 +25,7 @@ jobs:
         with:
           # All of these options are optional, so you can remove them if you are happy with the defaults
           skip_after_successful_duplicate: 'true'
-          paths:
-            - "src/**/*.hpp"
-            - "src/**/*.cpp"
-            - "tests/**/*.hpp"
-            - "tests/**/*.cpp"
-            - "simulations/**/*.hpp"
-            - "simulations/**/*.cpp"
-            - "**/CMakeLists.txt"
-            - "vendor/**"
+          paths: '["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**"]'
           cancel_others: 'false'
 
   cpu_tests:
@@ -43,12 +35,12 @@ jobs:
       fail-fast: false
     name: CPU Test (${{ matrix.toolchain }})
     needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false
     uses: ./.github/workflows/cpu_tests.yml
     with:
       toolchain: ${{ matrix.toolchain }}
       merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
       pr_number: ${{ github.event.pull_request.number }}
+      is_duplicate: needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false
 
   gpu_tests:
     name: GPU Test
@@ -58,6 +50,7 @@ jobs:
     with:
       merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
       pr_number: ${{ github.event.pull_request.number }}
+      is_duplicate: needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false
 
   set_draft_failing:
     runs-on: ubuntu-latest

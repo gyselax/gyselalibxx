@@ -16,6 +16,11 @@ on:
         required: false
         default: main
         type: string
+      is_duplicate:
+        description: "Indicate if the run would be a duplicate"
+        required: false
+        default: false
+        type: boolean
   workflow_call:
     inputs:
       toolchain:
@@ -42,6 +47,7 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
     name: CPU Test (${{ inputs.toolchain }})
+    if: ${{ (! inputs.is_duplicate) || true }}
     steps:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
