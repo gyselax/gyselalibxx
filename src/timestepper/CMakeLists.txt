@@ -1,6 +1,4 @@
 
-
-
 add_library(timestepper INTERFACE)
 target_include_directories(timestepper
     INTERFACE
@@ -9,6 +7,7 @@ target_include_directories(timestepper
 target_link_libraries(timestepper INTERFACE
     DDC::DDC
     gslx::data_types
+    gslx::math_tools
     gslx::multipatch_data_types
     gslx::multipatch_utils
     gslx::utils

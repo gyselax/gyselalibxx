@@ -15,6 +15,7 @@ target_link_libraries(unit_tests_utils
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
+	gslx::math_tools
         gslx::utils
 )
 

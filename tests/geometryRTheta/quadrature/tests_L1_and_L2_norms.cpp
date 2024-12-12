@@ -9,7 +9,7 @@
 #include <gtest/gtest.h>
 
 #include "geometry.hpp"
-#include "math_tools.hpp"
+#include "Lnorm_tools.hpp"
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
