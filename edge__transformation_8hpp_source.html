@@ -199,7 +199,7 @@ $(document).ready(function(){initNavTree('edge__transformation_8hpp_source.html'
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">using</span> IdxTarget</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                = std::conditional_t&lt;std::is_same_v&lt;CurrentIdx, IdxEdge1&gt;, IdxEdge2, IdxEdge1&gt;;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        IdxTarget target_idx;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordtype">bool</span> is_equivalent_idx_found = <a class="code" href="classEdgeTransformation.html#a0259680760413ed6fbbdfc9ffda44fc4">search_for_match</a>(target_idx, current_idx);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        [[maybe_unused]] <span class="keywordtype">bool</span> is_equivalent_idx_found = <a class="code" href="classEdgeTransformation.html#a0259680760413ed6fbbdfc9ffda44fc4">search_for_match</a>(target_idx, current_idx);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        assert(is_equivalent_idx_found);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keywordflow">return</span> target_idx;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
