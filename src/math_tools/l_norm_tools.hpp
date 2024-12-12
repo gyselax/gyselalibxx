@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * @file Lnorm_tools.hpp
+ * @file l_norm_tools.hpp
  * File Describing useful mathematical functions to compute Lnorms
  */
 

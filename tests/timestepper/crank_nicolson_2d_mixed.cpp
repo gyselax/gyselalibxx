@@ -10,7 +10,7 @@
 
 #include "crank_nicolson.hpp"
 #include "directional_tag.hpp"
-#include "Lnorm_tools.hpp"
+#include "l_norm_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

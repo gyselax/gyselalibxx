@@ -28,7 +28,7 @@
 #include "crank_nicolson.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
-#include "Lnorm_tools.hpp"
+#include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"

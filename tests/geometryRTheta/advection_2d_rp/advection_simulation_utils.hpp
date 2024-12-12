@@ -16,7 +16,7 @@
 #include "bsl_advection_rp.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
-#include "Lnorm_tools.hpp"
+#include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "quadrature.hpp"

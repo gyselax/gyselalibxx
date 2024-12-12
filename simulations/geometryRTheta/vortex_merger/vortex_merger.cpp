@@ -25,7 +25,7 @@
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
-#include "Lnorm_tools.hpp"
+#include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"

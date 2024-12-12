@@ -13,7 +13,7 @@
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "geometry_pseudo_cartesian.hpp"
-#include "Lnorm_tools.hpp"
+#include "l_norm_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

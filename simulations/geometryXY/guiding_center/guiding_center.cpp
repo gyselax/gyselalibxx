@@ -18,7 +18,7 @@
 #include "geometry.hpp"
 #include "initialization_Kelvin_Helmholtz.hpp"
 #include "input.hpp"
-#include "Lnorm_tools.hpp"
+#include "l_norm_tools.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
