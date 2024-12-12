@@ -125,6 +125,6 @@ public:
      */
     DConstFieldR coeff_AD() const
     {
-        return get_const_field(m_coeff_AD);
+        return m_coeff_AD;
     }
 };
