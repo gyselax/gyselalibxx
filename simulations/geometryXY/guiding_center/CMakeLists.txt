@@ -3,8 +3,8 @@
 add_executable(guiding_center_XY guiding_center.cpp)
 target_link_libraries(guiding_center_XY
     PUBLIC
-        DDC::core
-        DDC::pdi
+        DDC::DDC
+        DDC::PDI_Wrapper
         paraconf::paraconf
         PDI::pdi
 

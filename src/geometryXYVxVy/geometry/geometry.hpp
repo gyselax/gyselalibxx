@@ -2,6 +2,7 @@
 
 #pragma once
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/fft.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include "ddc_alias_inline_functions.hpp"

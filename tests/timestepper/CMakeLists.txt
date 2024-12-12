@@ -16,7 +16,7 @@ add_executable(unit_tests_timestepper
 )
 target_link_libraries(unit_tests_timestepper
     PUBLIC
-        DDC::pdi
+        DDC::PDI_Wrapper
         GTest::gtest
         GTest::gmock
         paraconf::paraconf

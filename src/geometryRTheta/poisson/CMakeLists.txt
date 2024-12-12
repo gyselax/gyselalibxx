@@ -7,7 +7,7 @@ target_include_directories(poisson_RTheta
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries(poisson_RTheta INTERFACE
-        DDC::core
+        DDC::DDC
         sll::SLL
         gslx::data_types
         gslx::geometry_RTheta

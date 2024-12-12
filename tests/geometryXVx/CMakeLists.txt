@@ -21,7 +21,7 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
 
 target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
     PUBLIC
-        DDC::pdi
+        DDC::PDI_Wrapper
         GTest::gtest
         GTest::gmock
         paraconf::paraconf

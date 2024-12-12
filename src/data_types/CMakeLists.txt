@@ -8,7 +8,7 @@ target_include_directories("data_types"
 
 target_link_libraries("data_types"
     INTERFACE
-        DDC::core
+        DDC::DDC
         sll::SLL
         gslx::utils
 )

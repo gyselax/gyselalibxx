@@ -1,5 +1,4 @@
 #include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
 
 #include "kinetic_source.hpp"
 #include "mask_tanh.hpp"

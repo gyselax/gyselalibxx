@@ -122,7 +122,7 @@ protected:
     /** @brief The Idx which describes the order of the derivatives in each dimension.
      * (e.g. second-order derivative).
      */
-    using discrete_deriv_vector_type = typename discrete_deriv_idx_range_type::discrete_vector_type;
+    using discrete_deriv_vector_type = typename discrete_deriv_idx_range_type::mlength_type;
 
     /// @brief The number of fields which must be created to describe this object.
     static constexpr int n_fields = 1 << ddc::type_seq_size_v<deriv_tags>;
