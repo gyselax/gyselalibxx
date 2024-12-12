@@ -22,8 +22,7 @@ target_include_directories(SLL
 )
 target_link_libraries(SLL
     PUBLIC
-        DDC::core
-        DDC::splines
+        DDC::DDC
 				Kokkos::kokkos
 )
 if(CMAKE_VERSION GREATER_EQUAL 3.18)

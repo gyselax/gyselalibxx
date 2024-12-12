@@ -5,7 +5,7 @@ target_include_directories(quadrature
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries(quadrature INTERFACE
-    DDC::core
+    DDC::DDC
     sll::SLL
     gslx::utils
 )

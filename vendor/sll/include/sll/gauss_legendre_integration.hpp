@@ -121,10 +121,10 @@ public:
         assert(weights.size() == m_wx.size() * nbcells);
 
         typename Domain1::discrete_element_type start = weights.domain().front();
-        typename Domain1::discrete_vector_type step(npts_gauss);
+        typename Domain1::mlength_type step(npts_gauss);
         typename Domain1::discrete_element_type local_domain_start = start;
         ddc::for_each(
-                mesh_edges.domain().remove_last(typename Domain2::discrete_vector_type(1)),
+                mesh_edges.domain().remove_last(typename Domain2::mlength_type(1)),
                 [&](auto icell) {
                     ddc::Coordinate<Dim> const x0 = mesh_edges(icell);
                     ddc::Coordinate<Dim> const x1 = mesh_edges(icell + 1);

@@ -13,7 +13,7 @@ add_executable(1d_advection
 )
 target_link_libraries(1d_advection
     PUBLIC
-        DDC::core
+        DDC::DDC
         GTest::gtest
         GTest::gmock
 

@@ -5,7 +5,7 @@ target_include_directories("multipatch_data_types"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("multipatch_data_types" INTERFACE
-    DDC::core
+    DDC::DDC
 
     gslx::data_types
     gslx::utils

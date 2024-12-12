@@ -5,6 +5,7 @@ set(CMAKE_C_COMPILER amdclang)
 set(CMAKE_Fortran_COMPILER amdflang)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
+# NOTE: We are not supposed to define CMAKE_BUILD_TYPE here.
 set(CMAKE_BUILD_TYPE Release) # Debug, Release, RelWithDebInfo and MinSizeRel
 
 # Kokkos options:
@@ -36,8 +37,12 @@ set(koliop_ENABLE_LTO OFF CACHE BOOL "")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Wcast-align -Wformat=2 -Winit-self -Woverloaded-virtual -Wsign-promo -Wstrict-aliasing -Wdisabled-optimization -Wtautological-compare -Wpacked -Wunreachable-code -Wno-sign-compare -Wno-unused-parameter -Wno-unused-but-set-variable")
 
 # FIXME: blas are not properly detected.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem $ENV{CRAY_PE_LIBSCI_PREFIX}/include")
-set(BLAS_LIBRARIES "$ENV{CRAY_PE_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem $ENV{CRAY_LIBSCI_PREFIX}/include" CACHE STRING "")
+
+# NOTE: People often export this as environment variable instead.
+set(BLAS_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
+# set(LAPACK_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
+# set(LAPACKE_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_cray.so;" CACHE STRING "")
 
 # FIXME: SLL compiler crash
 set(SLL_BUILD_TESTING OFF CACHE BOOL "")

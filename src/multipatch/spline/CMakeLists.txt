@@ -6,7 +6,7 @@ target_include_directories("multipatch_spline"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("multipatch_spline" INTERFACE
-    DDC::core
+    DDC::DDC
     gslx::multipatch_data_types
     gslx::multipatch_connectivity
     gslx::utils

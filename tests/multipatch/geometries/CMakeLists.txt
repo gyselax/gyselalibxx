@@ -5,7 +5,7 @@ target_include_directories("multipatch_geometries"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("multipatch_geometries" INTERFACE
-    DDC::core
+    DDC::DDC
     gslx::multipatch_connectivity
     gslx::utils
 

@@ -17,8 +17,8 @@ target_include_directories("rhs_${GEOMETRY_VARIANT}"
 
 target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
-        DDC::core
-        DDC::pdi
+        DDC::DDC
+        DDC::PDI_Wrapper
         sll::SLL
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::quadrature

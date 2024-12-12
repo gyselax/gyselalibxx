@@ -21,9 +21,9 @@ cd gyselalibxx
 
 on a machine for which Gyselalib++ is already used an environment script may be available to set up the necessary modules etc.
 
-Please check the `toolchains/` folder to find the existing configurations. See the documentation about [toolchains](./toolchains/README.md) for more information on the provided files.
+Please check the folder toolchains to find the existing configurations. See the documentation about [toolchains](./toolchains/README.md) for more information on the provided files.
 
-For example in order to set up the environment on the Adastra supercomputer simply run:
+For example in order to set up the environment on the Adastra supercalculator simply run:
 ```
 source toolchains/mi250.hipcc.adastra.spack/prepare.sh
 source toolchains/mi250.hipcc.adastra.spack/environment.sh
@@ -61,7 +61,7 @@ and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
 
 ## Dependencies
 
-To install dependencies through spack, first follow the the 3 first steps of
+To install dependencies through spack, first follow the the 3 first steps of 
 https://github.com/pdidev/spack
 
 Then execute the following:
@@ -72,5 +72,5 @@ spack concretize --reuse
 spack install
 ```
 
-For example, you can find a Dockerfile installing these dependencies on ubuntu in
+For example, you can find a Dockerfile installing these dependencies on ubuntu in 
 `docker/gyselalibxx_env/Dockerfile`.

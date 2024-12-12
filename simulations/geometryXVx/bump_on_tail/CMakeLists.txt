@@ -7,8 +7,8 @@ foreach(GEOMETRY_VARIANT IN LISTS BASIC_GEOMETRY_XVx_VARIANTS_LIST)
 add_executable(bumpontail_fem_uniform_${GEOMETRY_VARIANT} bumpontail_fem_uniform.cpp)
 target_link_libraries(bumpontail_fem_uniform_${GEOMETRY_VARIANT}
     PUBLIC
-        DDC::core
-        DDC::pdi
+        DDC::DDC
+        DDC::PDI_Wrapper
         paraconf::paraconf
         PDI::pdi
         gslx::initialization_${GEOMETRY_VARIANT}
@@ -31,8 +31,8 @@ endforeach()
 add_executable(bumpontail_fft bumpontail_fft.cpp)
 target_link_libraries(bumpontail_fft
     PUBLIC
-        DDC::core
-        DDC::pdi
+        DDC::DDC
+        DDC::PDI_Wrapper
         paraconf::paraconf
         PDI::pdi
         gslx::initialization_xperiod_vx

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z ${1+x} ]] && echo -e "Gyselalibxx preparation shortcut script:\n    ./prepare.gyselalibxx.sh <toolchain/machine [mi250.cce.adastra.spack|...]> <do prepare [default: TRUE|FALSE]> <force a fresh build [default: TRUE|FALSE]> <extra CMake flags>" && exit 1
+[[ -z ${1+x} ]] && echo -e "Gyselalibxx preparation shortcut script:\n    ./prepare.gyselalibxx.sh <machine file name [mi250.cce.adastra.spack|...]> <do prepare [default: TRUE|FALSE]> <force a fresh build [default: TRUE|FALSE]> <extra CMake flags>\n $ ./prepare.gyselalibxx.sh mi250.hipcc.adastra.spack FALSE TRUE" && exit 1
 
 PREPARE_ROOT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)"
 
@@ -59,6 +59,7 @@ echo "[PREPARE] Using build system: '${PREPARE_BUILD_GENERATOR}'."
 
 PREPARE_BUILD_CMAKE_FLAG="${@:4}"
 
+# NOTE: Use this do debug CMake generation: --debug-trycompile
 cmake \
     -B "${PREPARE_BUILD_DIRECTORY}" \
     -S . \

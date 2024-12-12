@@ -8,8 +8,7 @@ target_include_directories("pde_solvers"
 
 target_link_libraries("pde_solvers"
     INTERFACE
-        DDC::core
-        DDC::fft
+        DDC::DDC
         sll::SLL
         gslx::data_types
         gslx::utils

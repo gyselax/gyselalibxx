@@ -12,7 +12,7 @@ target_include_directories("utils_${GEOMETRY_VARIANT}"
 
 target_link_libraries("utils_${GEOMETRY_VARIANT}"
     PUBLIC
-        DDC::core
+        DDC::DDC
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::quadrature
         gslx::utils

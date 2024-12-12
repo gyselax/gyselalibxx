@@ -1,7 +1,6 @@
 #include <iomanip>
 
-#include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
+#include <pdi.h>
 
 #include "sll/matrix_batch_tridiag.hpp"
 

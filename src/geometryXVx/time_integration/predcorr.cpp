@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
 
 #include "iboltzmannsolver.hpp"
 #include "iqnsolver.hpp"

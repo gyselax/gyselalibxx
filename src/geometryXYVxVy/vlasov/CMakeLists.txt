@@ -10,7 +10,7 @@ target_include_directories("vlasov_xyvxvy"
 
 target_link_libraries("vlasov_xyvxvy"
     PUBLIC
-        DDC::core
+        DDC::DDC
         sll::SLL
         gslx::speciesinfo
         gslx::geometry_xyvxvy

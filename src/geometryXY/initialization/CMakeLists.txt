@@ -6,7 +6,7 @@ target_include_directories("initialization_Kelvin_Helmholtz"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("initialization_Kelvin_Helmholtz" INTERFACE
-    DDC::core
+    DDC::DDC
     gslx::geometry_XY
     gslx::utils
 
