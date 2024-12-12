@@ -9,7 +9,7 @@ add_executable(2d_spline_interpolator_tests
 )
 target_link_libraries(2d_spline_interpolator_tests
     PUBLIC
-        DDC::DDC
+        DDC::core
         sll::SLL
         gslx::geometry_RTheta
         gslx::interpolation_2D_rp

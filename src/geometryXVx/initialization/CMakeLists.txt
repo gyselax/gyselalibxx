@@ -15,8 +15,8 @@ target_include_directories("initialization_${GEOMETRY_VARIANT}"
 
 target_link_libraries("initialization_${GEOMETRY_VARIANT}"
     PUBLIC
-        DDC::DDC
-        DDC::PDI_Wrapper
+        DDC::core
+        DDC::pdi
         gslx::speciesinfo
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::utils

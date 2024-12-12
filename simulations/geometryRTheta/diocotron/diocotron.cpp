@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
 
 #include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>

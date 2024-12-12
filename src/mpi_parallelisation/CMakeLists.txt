@@ -8,7 +8,7 @@ target_include_directories("mpi_parallelisation"
 
 target_link_libraries("mpi_parallelisation"
     INTERFACE
-        DDC::DDC
+        DDC::core
         gslx::utils
         MPI::MPI_CXX
 )
