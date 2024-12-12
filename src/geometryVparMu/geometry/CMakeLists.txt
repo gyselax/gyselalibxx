@@ -6,7 +6,7 @@ target_include_directories("geometry_vparmu"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 target_link_libraries("geometry_vparmu" INTERFACE
-    DDC::DDC
+    DDC::core
     sll::SLL
     gslx::speciesinfo
     gslx::utils

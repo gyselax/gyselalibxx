@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
 
 #include "restartinitialization.hpp"
 

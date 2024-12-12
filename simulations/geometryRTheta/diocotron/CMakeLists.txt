@@ -18,8 +18,8 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
     )
     target_link_libraries("${test_name}"
         PUBLIC
-            DDC::DDC
-            DDC::PDI_Wrapper
+            DDC::core
+            DDC::pdi
             paraconf::paraconf
             PDI::pdi
 

@@ -17,8 +17,8 @@ function (advection_field_test_executable SIMULATION)
     )
     target_link_libraries("${test_name_gtest}"
     PUBLIC
-            DDC::DDC
-            DDC::PDI_Wrapper
+            DDC::core
+            DDC::pdi
             paraconf::paraconf
             PDI::pdi
             

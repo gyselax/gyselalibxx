@@ -10,7 +10,7 @@ target_include_directories("collisions"
 
 target_link_libraries("collisions"
     PUBLIC
-        DDC::DDC
+        DDC::core
         gslx::paraconfpp
         gslx::speciesinfo
         gslx::utils
