@@ -62,7 +62,8 @@ using SplineXBuilder = ddc::SplineBuilder<
         SplineXBoundary,
         SplineXBoundary,
         ddc::SplineSolver::LAPACK,
-        GridX>;
+        GridX,
+        GridY>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -94,12 +95,13 @@ TEST(PartialDerivative, PartialDerivativeDx)
     ddc::init_discrete_space<GridY>(SplineInterpPointsY::get_sampling<GridY>());
     IdxRangeY idxrange_y(SplineInterpPointsY::get_domain<GridY>());
 
-    SplineXBuilder const builder_x(idxrange_x);
+    IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+
+    SplineXBuilder const builder_x(idxrange_xy);
     ddc::ConstantExtrapolationRule<X> bv_x_min(x_min);
     ddc::ConstantExtrapolationRule<X> bv_x_max(x_max);
     SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
 
-    IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
     DFieldMemXY field_xy_alloc(idxrange_xy);
     DFieldXY field_xy = get_field(field_xy_alloc);
 
