@@ -9,11 +9,10 @@ var classCartesianToCzarny =
     [ "CartesianToCzarny", "classCartesianToCzarny.html#a80ca5099b71f0cdc2e0fafc64e5e574f", null ],
     [ "CartesianToCzarny", "classCartesianToCzarny.html#a80547f490f808df5d5b9402eab77f4a1", null ],
     [ "CartesianToCzarny", "classCartesianToCzarny.html#a4ce68c3eff3e32b912a64e0b47f5b8c2", null ],
-    [ "~CartesianToCzarny", "classCartesianToCzarny.html#a0ef70cb1ea793791b103402bb21b5b78", null ],
-    [ "operator=", "classCartesianToCzarny.html#a32fef3e8b18ddd02b2a3d35be5947931", null ],
-    [ "operator=", "classCartesianToCzarny.html#a6e47f56899d917d5cb974cf8dc3193a0", null ],
+    [ "operator=", "classCartesianToCzarny.html#a88a3b7b0002d6855bde7331117c883cb", null ],
+    [ "operator=", "classCartesianToCzarny.html#a4de5a9270d8b199bdcebc30d93751e71", null ],
     [ "epsilon", "classCartesianToCzarny.html#ad07227744d116c27999558d962d1fe35", null ],
     [ "e", "classCartesianToCzarny.html#adecffb5ebcb81bf40068adbc53d2c268", null ],
-    [ "operator()", "classCartesianToCzarny.html#a5577b333ed1906f3d77f735a5f4bfcb6", null ],
-    [ "get_inverse_mapping", "classCartesianToCzarny.html#ab0be08f50029d65a8ce581223f320acb", null ]
+    [ "operator()", "classCartesianToCzarny.html#a2a409a220bb1d0d67b6128e7c6f92347", null ],
+    [ "get_inverse_mapping", "classCartesianToCzarny.html#a208767628db193c5b3b727e5ea8dbc7e", null ]
 ];

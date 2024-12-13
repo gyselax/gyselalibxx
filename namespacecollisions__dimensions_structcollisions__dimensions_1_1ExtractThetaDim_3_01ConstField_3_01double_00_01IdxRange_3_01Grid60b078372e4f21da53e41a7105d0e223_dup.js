@@ -1,4 +1,0 @@
-var namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid60b078372e4f21da53e41a7105d0e223_dup =
-[
-    [ "type", "namespacecollisions__dimensions.html#a46c69b863383af3d1b0fe1f093eea82d", null ]
-];

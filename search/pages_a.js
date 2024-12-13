@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rhs_1873',['RHS',['../src_geometryXVx_rhs.html',1,'src_geometryXVx']]]
+  ['neutrality_20solver_0',['neutrality solver',['../src_geometryXVx_poisson.html',1,'Quasi-Neutrality Solver'],['../src_geometryXYVxVy_poisson.html',1,'Quasi-Neutrality Solver']]]
 ];

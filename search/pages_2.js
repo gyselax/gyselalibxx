@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['coding_20standards_1834',['Coding Standards',['../docs_CODING_STANDARD.html',1,'']]],
-  ['collisions_1835',['Collisions',['../src_collisions.html',1,'src']]],
-  ['common_20compilation_20problems_1836',['Common compilation problems',['../docs_Common_compilation_problems.html',1,'']]]
+  ['adding_20documentation_0',['Adding Documentation',['../docs_Adding_docs.html',1,'']]],
+  ['advection_20field_20finder_1',['Advection Field finder',['../src_geometryRTheta_advection_field.html',1,'src_geometryRTheta']]],
+  ['advection_20methods_2',['Advection methods',['../src_advection.html',1,'src']]],
+  ['advection_20operator_3',['advection operator',['../src_geometryRTheta_advection.html',1,'Advection operator'],['../tests_geometryRTheta_advection_2d_rp.html',1,'Tests on the 2D polar advection operator']]],
+  ['advection_20operators_4',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
+  ['and_20output_5',['Functions used for input and output.',['../src_io.html',1,'src']]]
 ];

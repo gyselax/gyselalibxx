@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['adding_20documentation_1829',['Adding Documentation',['../docs_Adding_docs.html',1,'']]],
-  ['advection_20field_20finder_1830',['Advection Field finder',['../src_geometryRTheta_advection_field.html',1,'src_geometryRTheta']]],
-  ['advection_20methods_1831',['Advection methods',['../src_advection.html',1,'src']]],
-  ['advection_20operator_1832',['Advection operator',['../src_geometryRTheta_advection.html',1,'src_geometryRTheta']]]
+  ['2d_20polar_20advection_20operator_0',['Tests on the 2D polar advection operator',['../tests_geometryRTheta_advection_2d_rp.html',1,'tests_geometryRTheta']]],
+  ['2d_20polar_20poisson_20solver_1',['Tests on the 2D polar poisson solver',['../tests_geometryRTheta_polar_poisson.html',1,'tests_geometryRTheta']]]
 ];

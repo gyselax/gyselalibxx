@@ -6,13 +6,11 @@ var classCircularToCartesian =
     [ "curvilinear_tag_theta", "classCircularToCartesian.html#ad391094efa9fde76191826ee2bf7fdd7", null ],
     [ "CoordArg", "classCircularToCartesian.html#a10590c88cadb0c1698d92aa6dbf79099", null ],
     [ "CoordResult", "classCircularToCartesian.html#a49a1f001259ff7e801cf3e67caf7d1f0", null ],
-    [ "CircularToCartesian", "classCircularToCartesian.html#ac39f2ab4023db1dbc141b56d5935d662", null ],
     [ "CircularToCartesian", "classCircularToCartesian.html#aeba375a683dde37d82a2a837961b91f1", null ],
     [ "CircularToCartesian", "classCircularToCartesian.html#aa3817016c3dfae92ba0d48248eff156d", null ],
-    [ "~CircularToCartesian", "classCircularToCartesian.html#afe4e0650bc1ad414b62031e58a82a7be", null ],
-    [ "operator=", "classCircularToCartesian.html#a0b06bdce8aea4b61e1db657c9f6dd801", null ],
-    [ "operator=", "classCircularToCartesian.html#a71b51c0fc3b27a6ae3a14669c624d652", null ],
-    [ "operator()", "classCircularToCartesian.html#a97b79fc6a8f51489c4eb1f18cb2afc83", null ],
+    [ "operator=", "classCircularToCartesian.html#a64c96bba014d3d4dd7e8a61cb39a3760", null ],
+    [ "operator=", "classCircularToCartesian.html#a15f1433a21a446994169a7d06fd0b49c", null ],
+    [ "operator()", "classCircularToCartesian.html#a6ecdc63bdc19d5f267559d674c48aa9c", null ],
     [ "jacobian", "classCircularToCartesian.html#a6373fe2a806be2fb9cf78ae4850a519d", null ],
     [ "jacobian_matrix", "classCircularToCartesian.html#aa440345ad57c81eecca646985be99954", null ],
     [ "jacobian_11", "classCircularToCartesian.html#a85804e48d393855b708cabeea26e79eb", null ],
@@ -29,5 +27,5 @@ var classCircularToCartesian =
     [ "to_pseudo_cartesian_jacobian_12_center", "classCircularToCartesian.html#a10a8a08aa0d25a7d27409c8a611ab4ee", null ],
     [ "to_pseudo_cartesian_jacobian_21_center", "classCircularToCartesian.html#a0f1efb7743ea352adb5fd291af9dbad9", null ],
     [ "to_pseudo_cartesian_jacobian_22_center", "classCircularToCartesian.html#a93a48a661eaaf971a0106609ca7acaf0", null ],
-    [ "get_inverse_mapping", "classCircularToCartesian.html#aa2345066b2f18a42b160ccd48d873b05", null ]
+    [ "get_inverse_mapping", "classCircularToCartesian.html#a933c7fa215c360fe24e6fa3b2e2cb646", null ]
 ];

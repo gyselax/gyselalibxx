@@ -9,12 +9,11 @@ var classCzarnyToCartesian =
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html#ac86693dda1f089062598e4bb31fb67b5", null ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html#ae821b68a527f54c5da9aabfa2a5b6995", null ],
     [ "CzarnyToCartesian", "classCzarnyToCartesian.html#ad999ca35e162f88c5e84a11afeb18301", null ],
-    [ "~CzarnyToCartesian", "classCzarnyToCartesian.html#aa861160186fb490018b352b2b4fe2c55", null ],
-    [ "operator=", "classCzarnyToCartesian.html#a42bf2d1e08c07575ee860695c72da650", null ],
-    [ "operator=", "classCzarnyToCartesian.html#ac1f0d617ecd83b499c84d8888b0feac0", null ],
+    [ "operator=", "classCzarnyToCartesian.html#a9447c8ec44ae0e2bb26ece0e450a33c1", null ],
+    [ "operator=", "classCzarnyToCartesian.html#af66a2728aa39532d16926223b65d8b8d", null ],
     [ "epsilon", "classCzarnyToCartesian.html#a52971f527d1e9cd03a16c4c4dd2df48f", null ],
     [ "e", "classCzarnyToCartesian.html#a04b554d096dec68781d36d57680e59a0", null ],
-    [ "operator()", "classCzarnyToCartesian.html#ab8ecedf65ca2b91c636194cdd9f3eeae", null ],
+    [ "operator()", "classCzarnyToCartesian.html#ac792805cabfd26bb39f768845b86388c", null ],
     [ "jacobian", "classCzarnyToCartesian.html#af8d86af7ae8aaa1cd741aca4923b9064", null ],
     [ "jacobian_matrix", "classCzarnyToCartesian.html#a97e4abe7eb2970ab1b5c1ff63cce94c0", null ],
     [ "jacobian_11", "classCzarnyToCartesian.html#a7747c07ad1cc9237bf3fe0f0f49cf46d", null ],
@@ -31,5 +30,5 @@ var classCzarnyToCartesian =
     [ "to_pseudo_cartesian_jacobian_12_center", "classCzarnyToCartesian.html#aa6a2a64766b2ecb6476a41d6184393ec", null ],
     [ "to_pseudo_cartesian_jacobian_21_center", "classCzarnyToCartesian.html#af1058dee5fdf55dd8652df199e070d5b", null ],
     [ "to_pseudo_cartesian_jacobian_22_center", "classCzarnyToCartesian.html#a03d059a135be104a83d410b1de99ed54", null ],
-    [ "get_inverse_mapping", "classCzarnyToCartesian.html#a88ea1fbd63abd8561babe5effd820c34", null ]
+    [ "get_inverse_mapping", "classCzarnyToCartesian.html#a3db743b369fe2c5b63c993abb1429bb1", null ]
 ];

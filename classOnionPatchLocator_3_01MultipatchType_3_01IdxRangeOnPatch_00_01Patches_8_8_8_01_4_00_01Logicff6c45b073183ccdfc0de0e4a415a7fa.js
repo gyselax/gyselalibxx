@@ -6,7 +6,6 @@ var classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8
     [ "get_mapping_on_patch_t", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#a22a6aaf47e4c677a8f4ad88143ec2d07", null ],
     [ "get_mapping_on_logical_dim_t", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#a3e5fd579574bdae3d4ecc7881c668859", null ],
     [ "OnionPatchLocator", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#a6c548d2343e842859e4164eec8192537", null ],
-    [ "~OnionPatchLocator", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#ad61de72cc697967bdb53b5e9d04d20ac", null ],
     [ "operator()", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#a02e7fbec0ed664f9ad20d20d48c85ab4", null ],
     [ "get_mapping_on_patch", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#a83853bf96978cf43658602ed45fea3cb", null ],
     [ "get_mapping_on_logical_dim", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html#a6989dccaab70d5b5974a0d3f5263edff", null ]

@@ -1,4 +1,0 @@
-var namespacecollisions__dimensions_structcollisions__dimensions_1_1ExtractRDim_3_01ConstField_3_01double_00_01IdxRange_3_01GridR_01d49ad374498953b7d2b9069aa134d214_dup =
-[
-    [ "type", "namespacecollisions__dimensions.html#a699115e00181feeb01d513193158a528", null ]
-];

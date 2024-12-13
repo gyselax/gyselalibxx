@@ -80,10 +80,179 @@ var NAVTREE =
       [ "What is the difference between Debug and Release mode?", "docs_developer_FAQ.html#docs_developer_FAQ__What_is_the_difference_between_Debug_and_Release_mode", null ],
       [ "Should I use abort, assert, or static_assert to raise an error?", "docs_developer_FAQ.html#docs_developer_FAQ__Should_I_use_abort_assert_or_static_assert_to_raise_an_error", null ]
     ] ],
-    [ "Gyselalib++ simulations", "simulations.html", "simulations" ],
-    [ "Gyselalib++ contents", "src.html", "src" ],
-    [ "Gyselalib++ tests", "tests.html", "tests" ],
-    [ "Selalib++", "vendor_sll.html", "vendor_sll" ],
+    [ "Gyselalib++ simulations", "simulations.html", [
+      [ "Simulations in (r, theta) geometry", "simulations_geometryRTheta.html", [
+        [ "Diocotron instability", "simulations_geometryRTheta_diocotron.html", [
+          [ "Studied problem", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Studied_problem", null ],
+          [ "Test case - diocotron instability", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Test_case_-_diocotron_instability", null ],
+          [ "References", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References", null ],
+          [ "Contents", "simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Contents", null ]
+        ] ],
+        [ "Vortex merger", "simulations_geometryRTheta_vortex_merger.html", [
+          [ "Studied problem", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Studied_problem", null ],
+          [ "Test case - vortex merger", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Test_case_-_vortex_merger", null ],
+          [ "References", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__References", null ],
+          [ "Useful references", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Useful_references", null ],
+          [ "Contents", "simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Contents", null ]
+        ] ]
+      ] ],
+      [ "Simulations in (x, vx) geometry", "simulations_geometryXVx.html", null ],
+      [ "Simulations in (x, y) geometry", "simulations_geometryXY.html", [
+        [ "Guiding center (X,Y) simulation", "simulations_geometryXY_guiding_center.html", [
+          [ "Equations", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations", null ],
+          [ "Simulation", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation", null ],
+          [ "Contents", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Contents", null ],
+          [ "References", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References", null ]
+        ] ]
+      ] ]
+    ] ],
+    [ "Gyselalib++ contents", "src.html", [
+      [ "Advection methods", "src_advection.html", [
+        [ "Spatial advection", "src_advection.html#src_advection__Spatial_advection", null ],
+        [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ],
+        [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ]
+      ] ],
+      [ "Collisions", "src_collisions.html", null ],
+      [ "Data Storage Types", "src_data_types.html", [
+        [ "VectorField", "src_data_types.html#src_data_types__VectorField", null ],
+        [ "DerivField", "src_data_types.html#src_data_types__DerivField", null ]
+      ] ],
+      [ "Geometry (r, theta)", "src_geometryRTheta.html", [
+        [ "Advection operator", "src_geometryRTheta_advection.html", [
+          [ "Studied equation", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Studied_equation", null ],
+          [ "Backward Semi-Lagrangian method", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Backward_Semi-Lagrangian_method", null ],
+          [ "Time integration methods", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Time_integration_methods", null ],
+          [ "Advection domain", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_domain", null ],
+          [ "Advection Field", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_Field", null ],
+          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md45", null ],
+          [ "References", "src_geometryRTheta_advection.html#autotoc_md46", null ],
+          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md47", null ]
+        ] ],
+        [ "Advection Field finder", "src_geometryRTheta_advection_field.html", [
+          [ "Guiding center case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case", null ],
+          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md52", null ],
+          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md53", null ]
+        ] ],
+        [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
+          [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
+        ] ],
+        [ "Initialization", "src_geometryRTheta_initialization.html", [
+          [ "Diocotron instability", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Diocotron_instability", null ],
+          [ "Vortex merger", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Vortex_merger", null ],
+          [ "Contents", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Contents", null ]
+        ] ],
+        [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ],
+        [ "Polar Poisson solver", "src_geometryRTheta_poisson.html", [
+          [ "The Poisson-like equation", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson-like_equation", null ],
+          [ "Unit tests", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests", null ],
+          [ "References", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__References", null ],
+          [ "Contents", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Contents", null ]
+        ] ],
+        [ "Predictor-corrector methods", "src_geometryRTheta_time_solver.html", [
+          [ "Predictor-corrector", "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Predictor-corrector", null ],
+          [ "Explicit predictor-corrector", "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Explicit_predictor-corrector", null ],
+          [ "Implicit predictor-corrector", "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Implicit_predictor-corrector", null ],
+          [ "References", "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__References", null ],
+          [ "Contents", "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Contents", null ]
+        ] ]
+      ] ],
+      [ "Geometry (vpar, mu)", "src_geometryVparMu.html", [
+        [ "GeometryVparMu :", "src_geometryVparMu_geometry.html", null ],
+        [ "Initialization methods", "src_geometryVparMu_initialization.html", null ]
+      ] ],
+      [ "Geometry (x, v_x)", "src_geometryXVx.html", [
+        [ "Boltzmann solver", "src_geometryXVx_boltzmann.html", null ],
+        [ "Geometry X-Vx", "src_geometryXVx_geometry.html", null ],
+        [ "Initialization methods", "src_geometryXVx_initialization.html", null ],
+        [ "Quasi-Neutrality Solver", "src_geometryXVx_poisson.html", [
+          [ "Charge Density", "src_geometryXVx_poisson.html#src_geometryXVx_poisson__Charge_Density", null ],
+          [ "Poisson Solver", "src_geometryXVx_poisson.html#src_geometryXVx_poisson__Poisson_Solver", null ]
+        ] ],
+        [ "RHS", "src_geometryXVx_rhs.html", null ],
+        [ "Time integration", "src_geometryXVx_time_integration.html", null ],
+        [ "Utils", "src_geometryXVx_utils.html", null ]
+      ] ],
+      [ "Geometry (x, y)", "src_geometryXY.html", [
+        [ "Geometry XY", "src_geometryXY_geometry.html", null ],
+        [ "Initialization on (x,y) geometry", "src_geometryXY_initialization.html", [
+          [ "Kelvin-Helmholtz instability test case", "src_geometryXY_initialization.html#src_geometryXY_initialization__Kelvin-Helmholtz_instability_test_case", null ]
+        ] ],
+        [ "Predictor-corrector methods", "src_geometryXY_time_integration.html", [
+          [ "Predictor-corrector based on RK2", "src_geometryXY_time_integration.html#src_geometryXY_time_integration__Predictor-corrector_based_on_RK2", null ]
+        ] ]
+      ] ],
+      [ "Geometry (x, y, v_x, v_y)", "src_geometryXYVxVy.html", [
+        [ "Geometry X Y-Vx Vy", "src_geometryXYVxVy_geometry.html", null ],
+        [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html", [
+          [ "Charge Density", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density", null ],
+          [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver", null ]
+        ] ]
+      ] ],
+      [ "Interpolation Methods", "src_interpolation.html", [
+        [ "Spline Interpolation", "src_interpolation.html#src_interpolation__Spline_Interpolation", null ],
+        [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ]
+      ] ],
+      [ "Functions used for input and output.", "src_io.html", null ],
+      [ "Mappings", "src_mapping.html", null ],
+      [ "Multipatch", "src_multipatch.html", [
+        [ "Multipatch connectivity", "src_multipatch_connectivity.html", [
+          [ "Patch", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch", null ],
+          [ "Interfaces", "src_multipatch_connectivity.html#src_multipatch_connectivity__Interfaces", null ],
+          [ "Patch locator", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_locator", null ],
+          [ "References", "src_multipatch_connectivity.html#src_multipatch_connectivity__References", null ],
+          [ "Contents", "src_multipatch_connectivity.html#src_multipatch_connectivity__Contents", null ]
+        ] ],
+        [ "Data Types for Multipatch Geometry", "src_multipatch_data_types.html", [
+          [ "MultipatchType", "src_multipatch_data_types.html#src_multipatch_data_types__MultipatchType", null ]
+        ] ],
+        [ "Spline on multipatch geometry", "src_multipatch_spline.html", [
+          [ "Multipatch spline builder", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_builder", null ],
+          [ "Multipatch spline evaluator", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_spline_evaluator", null ],
+          [ "Multipatch extrapolation rules", "src_multipatch_spline.html#src_multipatch_spline__Multipatch_extrapolation_rules", null ],
+          [ "Contents", "src_multipatch_spline.html#src_multipatch_spline__Contents", null ]
+        ] ],
+        [ "Multipatch utilitary functions", "src_multipatch_utils.html", null ]
+      ] ],
+      [ "Parallelisation", "src_mpi_parallelisation.html", [
+        [ "Layout", "src_mpi_parallelisation.html#src_mpi_parallelisation__Layout", null ],
+        [ "TransposeOperator", "src_mpi_parallelisation.html#src_mpi_parallelisation__TransposeOperator", null ],
+        [ "Alltoall Transpose Operator", "src_mpi_parallelisation.html#src_mpi_parallelisation__Alltoall_Transpose_Operator", null ]
+      ] ],
+      [ "PDE Solvers", "src_pde_solvers.html", [
+        [ "Poisson's equation", "src_pde_solvers.html#src_pde_solvers__Poisson_s_equation", null ]
+      ] ],
+      [ "Quadrature Methods", "src_quadrature.html", null ],
+      [ "SpeciesInfo (x, v_x)", "src_speciesinfo.html", null ],
+      [ "Time Stepping Methods", "src_timestepper.html", null ],
+      [ "Utility Functions", "src_utils.html", [
+        [ "Utility tools", "src_utils.html#src_utils__Utility_tools", null ]
+      ] ]
+    ] ],
+    [ "Gyselalib++ tests", "tests.html", [
+      [ "Tests on the templated advection operators", "tests_advection.html", [
+        [ "Contents", "tests_advection.html#tests_advection__Contents", null ]
+      ] ],
+      [ "Tests : Geometry (r, theta)", "tests_geometryRTheta.html", [
+        [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_2d_rp.html", [
+          [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator", null ],
+          [ "Python tests", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests", null ],
+          [ "References", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__References", null ],
+          [ "Contents", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents", null ]
+        ] ],
+        [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_2d_spline_interpolator.html", null ],
+        [ "Tests on the 2D polar poisson solver", "tests_geometryRTheta_polar_poisson.html", [
+          [ "Polar Poisson solver", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Polar_Poisson_solver", null ],
+          [ "References", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__References", null ],
+          [ "Contents", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Contents", null ]
+        ] ]
+      ] ],
+      [ "Multipatch geometry tests", "tests_multipatch.html", [
+        [ "Multipatch geometries", "tests_multipatch_geometries.html", null ]
+      ] ]
+    ] ],
+    [ "Selalib++", "vendor_sll.html", [
+      [ "Mappings", "vendor_sll_include_sll_mapping.html", null ]
+    ] ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
   ] ]
@@ -92,14 +261,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionSpVparMu.html",
-"classDiscreteToCartesianBuilder.html",
-"classKineticSource.html#a384f4c655ebe246d99964de77ee780d2",
-"classMultipatchSplineBuilder.html",
-"classRestartInitialization.html#a9af5fa49fc9e082a38025f5d20db255f",
-"docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation",
-"src_geometryRTheta_advection.html",
-"structddcHelper_1_1is__non__uniform__interpolation__points.html"
+"classCollisionSpVparMu.html#a887cc19e117fd2386eb29c5e097e12d6",
+"classElectrostaticalPotentialSimulation__translation.html",
+"classMatrixBatchCsr.html#aeb35ced3575736b99178638e1a21aa71",
+"classPreallocatableLagrangeInterpolator.html#ae427633c86b7699ce59d9db59bbf50ae",
+"dir_62fb0cd09e3355ddaf1a057c98aa9642.html",
+"src_2utils_2math__tools_8hpp.html#a4c8219dfeea80b86bff16a853e188f8d",
+"structnon__periodic__non__uniform__2d__2patches_1_1BSplinesY.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -14,12 +14,10 @@ var classMultipatchField =
     [ "MultipatchField", "classMultipatchField.html#a243a3e0121a1f9d6fd081a0bc117b1ec", null ],
     [ "MultipatchField", "classMultipatchField.html#a733d459c789fa5df78b5a7f2863f537e", null ],
     [ "MultipatchField", "classMultipatchField.html#a523e5ff6817c8f428df5ccda5fa985c8", null ],
-    [ "~MultipatchField", "classMultipatchField.html#a56cfbacfcac49a2a205e1aa5ff6ffeeb", null ],
     [ "get", "classMultipatchField.html#a5ce7a43366b076c562a4eeaf9e7e14d2", null ],
     [ "idx_range", "classMultipatchField.html#a9a4cb73606c74a79ac3bc33438320647", null ],
     [ "get_field", "classMultipatchField.html#a91a470e7def55ebe6311b178dce36d23", null ],
     [ "span_view", "classMultipatchField.html#aad6d9590fbc8731d5e25885da11ed142", null ],
     [ "get_const_field", "classMultipatchField.html#a70e93ac539f73e00e629dde3bdd39fae", null ],
-    [ "span_cview", "classMultipatchField.html#a6f9e5cd86edb626f778aef311c3a92d6", null ],
-    [ "MultipatchField", "classMultipatchField.html#affc748ee952450daee6dddc1a2020a9e", null ]
+    [ "span_cview", "classMultipatchField.html#a6f9e5cd86edb626f778aef311c3a92d6", null ]
 ];
