@@ -150,7 +150,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double jacobian_11(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double jacobian_11(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         jacobian_matrix(coord_rtheta, J);
@@ -163,7 +163,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (1,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double jacobian_12(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double jacobian_12(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         jacobian_matrix(coord_rtheta, J);
@@ -176,7 +176,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (2,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double jacobian_21(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double jacobian_21(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         jacobian_matrix(coord_rtheta, J);
@@ -189,7 +189,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (2,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double jacobian_22(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double jacobian_22(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         jacobian_matrix(coord_rtheta, J);
@@ -202,7 +202,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @returns The determinant of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double jacobian(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double jacobian(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         jacobian_matrix(coord_rtheta, J);
@@ -230,6 +230,7 @@ public:
                 (has_singular_o_point_inv_jacobian_v<Mapping1>)
                 || (has_singular_o_point_inv_jacobian_v<InverseMapping2>)) {
             using R = ddc::type_seq_element_t<0, ddc::to_type_seq_t<CoordJacobian>>;
+            using Theta = ddc::type_seq_element_t<1, ddc::to_type_seq_t<CoordJacobian>>;
             double r = ddc::get<R>(coord);
             if (r < m_epsilon) {
                 InvJacobianOPoint<CombinedMapping<Mapping1, Mapping2>, CoordJacobian> o_point_val(
@@ -256,7 +257,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_11(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         inv_jacobian_matrix(coord_rtheta, J);
@@ -269,7 +270,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (1,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_12(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         inv_jacobian_matrix(coord_rtheta, J);
@@ -282,7 +283,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (2,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_21(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         inv_jacobian_matrix(coord_rtheta, J);
@@ -295,7 +296,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @return The (2,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian_22(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         inv_jacobian_matrix(coord_rtheta, J);
@@ -308,7 +309,7 @@ public:
      * @param[in] coord_rtheta The coordinate where we evaluate the Jacobian matrix.
      * @returns The determinant of the Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordJacobian const& coord_rtheta) const
     {
         Matrix_2x2 J;
         inv_jacobian_matrix(coord_rtheta, J);

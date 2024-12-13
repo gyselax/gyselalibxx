@@ -6,9 +6,11 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "sll/mapping/circular_to_cartesian.hpp"
+#include "sll/mapping/combined_mapping.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
 #include "sll/mapping/discrete_mapping_builder.hpp"
 #include "sll/mapping/discrete_to_cartesian.hpp"
+#include "sll/mapping/inv_jacobian_o_point.hpp"
 
 #include "test_utils.hpp"
 
@@ -19,6 +21,12 @@ struct X
 {
 };
 struct Y
+{
+};
+struct Xpc
+{
+};
+struct Ypc
 {
 };
 struct R
@@ -446,17 +454,27 @@ double check_pseudo_Cart(
         Mapping const& analytical_mapping,
         IdxRangeRTheta const& idx_range)
 {
-    double max_err = 0.;
-    Matrix_2x2 discrete_pseudo_Cart;
-    Matrix_2x2 analytical_pseudo_Cart;
-    mapping.to_pseudo_cartesian_jacobian_center_matrix(discrete_pseudo_Cart);
-    analytical_mapping.to_pseudo_cartesian_jacobian_center_matrix(analytical_pseudo_Cart);
+    const double epsilon(1.e-16);
+    using PseudoCartToCirc = CartesianToCircular<Xpc, Ypc, R, Theta>;
+    PseudoCartToCirc pseudo_cart_to_circ;
+    CombinedMapping<DiscreteMapping, PseudoCartToCirc>
+            pseudo_cart_to_cart(mapping, pseudo_cart_to_circ, epsilon);
+    CombinedMapping<Mapping, PseudoCartToCirc>
+            analytical_pseudo_cart_to_cart(analytical_mapping, pseudo_cart_to_circ, epsilon);
+    InvJacobianOPoint<CombinedMapping<DiscreteMapping, PseudoCartToCirc>, CoordRTheta>
+            inv_jacob_mapping(pseudo_cart_to_cart);
+    InvJacobianOPoint<CombinedMapping<Mapping, PseudoCartToCirc>, CoordRTheta>
+            inv_jacob_analytical_mapping(analytical_pseudo_cart_to_cart);
+
+    Matrix_2x2 discrete_pseudo_Cart = inv_jacob_mapping();
+    Matrix_2x2 analytical_pseudo_Cart = inv_jacob_analytical_mapping();
 
     const double diff_11 = double(discrete_pseudo_Cart[0][0] - analytical_pseudo_Cart[0][0]);
     const double diff_12 = double(discrete_pseudo_Cart[0][1] - analytical_pseudo_Cart[0][1]);
     const double diff_21 = double(discrete_pseudo_Cart[1][0] - analytical_pseudo_Cart[1][0]);
     const double diff_22 = double(discrete_pseudo_Cart[1][1] - analytical_pseudo_Cart[1][1]);
 
+    double max_err = 0.;
     max_err = max_err > diff_11 ? max_err : diff_11;
     max_err = max_err > diff_12 ? max_err : diff_12;
     max_err = max_err > diff_21 ? max_err : diff_21;

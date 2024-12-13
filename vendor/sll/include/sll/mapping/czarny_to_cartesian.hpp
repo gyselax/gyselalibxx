@@ -8,7 +8,6 @@
 #include <sll/view.hpp>
 
 #include "mapping_tools.hpp"
-#include "pseudo_cartesian_compatible_mapping.hpp"
 
 // Pre-declaration of analytical inverse
 template <class X, class Y, class R, class Theta>
@@ -47,7 +46,7 @@ class CartesianToCzarny;
  *
  */
 template <class R, class Theta, class X, class Y>
-class CzarnyToCartesian : public PseudoCartesianCompatibleMapping
+class CzarnyToCartesian
 {
 public:
     /// @brief Indicate the first physical coordinate.
@@ -467,92 +466,6 @@ public:
 
         const double fact_3 = m_e * xi / divisor;
         return 1 / r * cos_theta / fact_3;
-    }
-
-    /**
-     * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
-     *
-     *
-     * The pseudo-Cartesian Jacobian matrix for a Czarny mapping is given by :
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}, @f$
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, @f$
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, @f$
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. @f$
-     *
-     *
-     * @param[out] matrix
-     *      The pseudo-Cartesian matrix at the central point evaluated.
-     *
-     *
-     * @see DiscreteToCartesian
-     * @see BslAdvection
-     * @see AdvectionDomain
-     */
-    KOKKOS_FUNCTION void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
-    {
-        const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
-        const double sqrt_eps_2 = Kokkos::sqrt(1. + m_epsilon * m_epsilon);
-        matrix[0][0] = -sqrt_eps_2;
-        matrix[0][1] = 0.;
-        matrix[1][0] = 0.;
-        matrix[1][1] = (2 - sqrt_eps_2) / m_e / xi;
-    }
-
-    /**
-     * @brief Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}. @f$
-     *
-     * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_11_center() const final
-    {
-        return -Kokkos::sqrt(1 + m_epsilon * m_epsilon);
-    }
-
-    /**
-     * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0. @f$
-     *
-     * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_12_center() const final
-    {
-        return 0;
-    }
-
-    /**
-     * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0. @f$
-     *
-     * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_21_center() const final
-    {
-        return 0;
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. @f$
-     *
-     * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_22_center() const final
-    {
-        const double xi = Kokkos::sqrt(1. / (1. - m_epsilon * m_epsilon * 0.25));
-        return (2 - Kokkos::sqrt(1 + m_epsilon * m_epsilon)) / m_e / xi;
     }
 
     /**

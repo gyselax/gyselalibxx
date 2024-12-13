@@ -96,7 +96,7 @@ gtest_discover_tests(jacobian_mapping_matrix_coef_tests_sll DISCOVERY_MODE PRE_T
 
 add_executable(pseudo_cartesian_tests_sll
   main.cpp
-	pseudo_cartesian_matrix.cpp
+	pseudo_cartesian_jacobian_matrix.cpp
 )
 target_compile_features(pseudo_cartesian_tests_sll PUBLIC cxx_std_17)
 target_link_libraries(pseudo_cartesian_tests_sll

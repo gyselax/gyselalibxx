@@ -2,6 +2,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "sll/mapping/circular_to_cartesian.hpp"
+#include "sll/mapping/combined_mapping.hpp"
 #include "sll/mapping/czarny_to_cartesian.hpp"
 #include "sll/mapping/discrete_mapping_builder.hpp"
 #include "sll/mapping/discrete_to_cartesian.hpp"
@@ -24,26 +25,32 @@ public:
     struct Y
     {
     };
+    struct X_pc
+    {
+    };
+    struct Y_pc
+    {
+    };
     struct R
     {
         static bool constexpr PERIODIC = false;
     };
-    struct P
+    struct Theta
     {
         static bool constexpr PERIODIC = true;
     };
 
 
     using CoordR = ddc::Coordinate<R>;
-    using CoordP = ddc::Coordinate<P>;
-    using CoordRP = ddc::Coordinate<R, P>;
+    using CoordTheta = ddc::Coordinate<Theta>;
+    using CoordRTheta = ddc::Coordinate<R, Theta>;
 
     static int constexpr BSDegree = 3;
 
     struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
     {
     };
-    struct BSplinesP : ddc::NonUniformBSplines<P, BSDegree>
+    struct BSplinesP : ddc::NonUniformBSplines<Theta, BSDegree>
     {
     };
 
@@ -110,8 +117,8 @@ public:
             GridP,
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<P>,
-            ddc::PeriodicExtrapolationRule<P>,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            ddc::PeriodicExtrapolationRule<Theta>,
             GridR,
             GridP>;
 
@@ -152,8 +159,8 @@ public:
         CoordR const r_max(1.0);
         IdxStepR const r_size(Nr);
 
-        CoordP const p_min(0.0);
-        CoordP const p_max(2.0 * M_PI);
+        CoordTheta const p_min(0.0);
+        CoordTheta const p_max(2.0 * M_PI);
         IdxStepP const p_size(Nt);
 
         double const dr((r_max - r_min) / r_size);
@@ -161,7 +168,7 @@ public:
 
 
         std::vector<CoordR> r_knots(r_size + 1);
-        std::vector<CoordP> p_knots(p_size + 1);
+        std::vector<CoordTheta> p_knots(p_size + 1);
 
 
         r_knots[0] = r_min;
@@ -170,7 +177,7 @@ public:
         }
         r_knots[r_size] = r_max;
         for (int i(0); i < p_size + 1; ++i) {
-            p_knots[i] = CoordP(p_min + i * dp);
+            p_knots[i] = CoordTheta(p_min + i * dp);
         }
 
         // Creating mesh & supports
@@ -187,7 +194,7 @@ public:
         // --- Define the operators. ----------------------------------------------------------------------
         SplineRThetaBuilder const builder(grid);
         ddc::NullExtrapolationRule r_extrapolation_rule;
-        ddc::PeriodicExtrapolationRule<P> p_extrapolation_rule;
+        ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
         SplineRThetaEvaluator spline_evaluator(
                 r_extrapolation_rule,
                 r_extrapolation_rule,
@@ -201,17 +208,34 @@ public:
         // --- CIRCULAR MAPPING ---------------------------------------------------------------------------
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
                   << "   - Circular mapping: ";
-        const CircularToCartesian<R, P, X, Y> analytical_mapping_circ;
+        const CircularToCartesian<R, Theta, X, Y> circ_to_cart;
+        const CartesianToCircular<X_pc, Y_pc, R, Theta> pseudo_cart_to_circ;
+        using PseudoCartToCircToCart = CombinedMapping<
+                CircularToCartesian<R, Theta, X, Y>,
+                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+        const PseudoCartToCircToCart
+                pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
                 mapping_builder_circ(
                         Kokkos::DefaultHostExecutionSpace(),
-                        analytical_mapping_circ,
+                        circ_to_cart,
                         builder,
                         spline_evaluator);
-        DiscreteToCartesian discrete_mapping_circ = mapping_builder_circ();
+        DiscreteToCartesian discrete_mapping_circ_to_cart = mapping_builder_circ();
+        using DiscreteMappingCirc = CombinedMapping<
+                decltype(discrete_mapping_circ_to_cart),
+                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+        DiscreteMappingCirc discrete_pseudo_cart_to_circ_to_cart(
+                discrete_mapping_circ_to_cart,
+                pseudo_cart_to_circ,
+                1e-12);
 
-        analytical_mapping_circ.to_pseudo_cartesian_jacobian_center_matrix(analytical_matrix);
-        discrete_mapping_circ.to_pseudo_cartesian_jacobian_center_matrix(discrete_matrix);
+        InvJacobianOPoint<PseudoCartToCircToCart, CoordRTheta> inv_o_point_analytical_circ(
+                pseudo_cart_to_circ_to_cart);
+        InvJacobianOPoint<DiscreteMappingCirc, CoordRTheta> inv_o_point_discrete_circ(
+                discrete_pseudo_cart_to_circ_to_cart);
+        analytical_matrix = inv_o_point_analytical_circ();
+        discrete_matrix = inv_o_point_discrete_circ();
         double max_diff_circ
                 = check_same(analytical_matrix, discrete_matrix, 1e-5 * ipow(16. / double(N), 4));
         std::cout << max_diff_circ << std::endl;
@@ -219,26 +243,42 @@ public:
 
 
         // --- CZARNY MAPPING -----------------------------------------------------------------------------
-        std::cout << "   - Czarny mapping:   ";
-        const CzarnyToCartesian<R, P, X, Y> analytical_mapping_czar(0.3, 1.4);
+        //std::cout << "   - Czarny mapping:   ";
+        const CzarnyToCartesian<R, Theta, X, Y> czarny_to_cart(0.3, 1.4);
+        using PseudoCartToCzarnyToCart = CombinedMapping<
+                CzarnyToCartesian<R, Theta, X, Y>,
+                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+        const PseudoCartToCzarnyToCart
+                pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
-                mapping_builder_czar(
+                mapping_builder_czarny(
                         Kokkos::DefaultHostExecutionSpace(),
-                        analytical_mapping_czar,
+                        czarny_to_cart,
                         builder,
                         spline_evaluator);
-        DiscreteToCartesian discrete_mapping_czar = mapping_builder_czar();
+        DiscreteToCartesian discrete_mapping_czarny_to_cart = mapping_builder_czarny();
+        using DiscreteMappingCzarny = CombinedMapping<
+                decltype(discrete_mapping_czarny_to_cart),
+                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+        DiscreteMappingCzarny discrete_pseudo_cart_to_czarny_to_cart(
+                discrete_mapping_czarny_to_cart,
+                pseudo_cart_to_circ,
+                1e-12);
 
-        analytical_mapping_czar.to_pseudo_cartesian_jacobian_center_matrix(analytical_matrix);
-        discrete_mapping_czar.to_pseudo_cartesian_jacobian_center_matrix(discrete_matrix);
-        double max_diff_czar
+        InvJacobianOPoint<PseudoCartToCzarnyToCart, CoordRTheta> inv_o_point_analytical_czarny(
+                pseudo_cart_to_czarny_to_cart);
+        InvJacobianOPoint<DiscreteMappingCzarny, CoordRTheta> inv_o_point_discrete_czarny(
+                discrete_pseudo_cart_to_czarny_to_cart);
+        analytical_matrix = inv_o_point_analytical_czarny();
+        discrete_matrix = inv_o_point_discrete_czarny();
+        double max_diff_czarny
                 = check_same(analytical_matrix, discrete_matrix, 1e-5 * ipow(16. / double(N), 4));
-        std::cout << max_diff_czar << std::endl;
+        std::cout << max_diff_czarny << std::endl;
 
 
         std::array<double, 2> results;
         results[0] = max_diff_circ;
-        results[1] = max_diff_czar;
+        results[1] = max_diff_czarny;
         return results;
     };
 

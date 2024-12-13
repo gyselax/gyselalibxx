@@ -96,6 +96,7 @@ public:
         , function_1_coef(get_field(function_1_coef_alloc))
         , function_2_coef(get_field(function_2_coef_alloc))
         , to_logical_mapping()
+        , to_physical_mapping()
     {
     }
 
