@@ -41,18 +41,12 @@ jobs:
           pip install numpy
       - name: Check files
         id: markdown
-        continue-on-error: true
         shell: bash
         run: |
           MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
           MARKDOWN_FILES="$MARKDOWN_FILES $(find ./vendor/sll/ -name '*.md')"
           echo $MARKDOWN_FILES
           python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
-          echo "EXIT_CODE=$?" >> $GITHUB_OUTPUT
-      - name: Check error code
-        shell: python
-        run: |
-          assert ${{ steps.markdown.outputs.EXIT_CODE }} in (0, 2)
 
   Python:
     name: Python Best Practices
