@@ -114,7 +114,7 @@ TEST(PartialDerivative, PartialDerivativeDx)
                 field_xy(idx_xy) = ddc::coordinate(idx_x)*ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
             });
 
-    PartialDerivative<GridX, GridX, GridY, SplineXBuilder, SplineXEvaluator> partial_dx(builder_x, spline_evaluator_x);
+    PartialDerivative<SplineXBuilder, SplineXEvaluator> partial_dx(builder_x, spline_evaluator_x);
     DFieldMemXY dfield_dx_xy_alloc(idxrange_xy);
     DFieldXY dfield_dx_xy = get_field(dfield_dx_xy_alloc);
     partial_dx(dfield_dx_xy, get_const_field(field_xy));
@@ -130,7 +130,7 @@ TEST(PartialDerivative, PartialDerivativeDx)
                 double const dfield_dx_anal = 2. * ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
                 return Kokkos::abs(dfield_dx_xy(idx_xy) - dfield_dx_anal);
             });
-    EXPECT_LE(max_error, 1e-12);
+    EXPECT_LE(max_error, 1e-14);
 }
 
 } // namespace

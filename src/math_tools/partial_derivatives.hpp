@@ -26,48 +26,44 @@
  */
 
 template <
-        class GridXi,
-        class GridX1,
-        class GridX2,
-        class FieldX1Builder,
-        class FieldX1Evaluator>
+        class FieldXiBuilderBatched,
+        class FieldXiEvaluatorBatched>
 class PartialDerivative
 {
 private:
-    using IdxRangeX1X2 = IdxRange<GridX1, GridX2>;
-    using IdxX1X2 = typename IdxRangeX1X2::discrete_element_type;
-    using DFieldX1X2 = DField<IdxRangeX1X2>;
-    using DConstFieldX1X2 = DConstField<IdxRangeX1X2>;
+    using IdxRangeFieldVal = typename FieldXiBuilderBatched::batched_interpolation_domain_type;
+    using DFieldVal = DField<IdxRangeFieldVal>;
+    using DConstFieldVal = DConstField<IdxRangeFieldVal>;
 
     // Type for spline representation of the field
-    using IdxRangeBSFieldX1 = typename FieldX1Builder::batched_spline_domain_type;
-    using FieldX1SplineMem = DFieldMem<IdxRangeBSFieldX1>;
-    using FieldX1SplineCoeffs = DField<IdxRangeBSFieldX1>;
+    using IdxRangeBSFieldXi = typename FieldXiBuilderBatched::batched_spline_domain_type;
+    using FieldXiSplineMem = DFieldMem<IdxRangeBSFieldXi>;
+    using FieldXiSplineCoeffs = DField<IdxRangeBSFieldXi>;
 
-    FieldX1Builder const& m_fieldx1_builder;
-    FieldX1Evaluator const& m_fieldx1_evaluator;
+    FieldXiBuilderBatched const& m_fieldxi_builder;
+    FieldXiEvaluatorBatched const& m_fieldxi_evaluator;
 
 public:
     explicit PartialDerivative(
-        FieldX1Builder const& fieldx1_builder,
-        FieldX1Evaluator const& fieldx1_evaluator)
-        : m_fieldx1_builder(fieldx1_builder)
-        , m_fieldx1_evaluator(fieldx1_evaluator)             
+        FieldXiBuilderBatched const& fieldxi_builder,
+        FieldXiEvaluatorBatched const& fieldxi_evaluator)
+        : m_fieldxi_builder(fieldxi_builder)
+        , m_fieldxi_evaluator(fieldxi_evaluator)             
     {    
     }
 
     ~PartialDerivative() = default;
 
-    DFieldX1X2 operator()(DFieldX1X2 dfield_dx1_x1x2, DConstFieldX1X2 field_x1x2)
+    DFieldVal operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval)
     {
         // Build spline representation of the field ....................................
-        FieldX1SplineMem fieldx1_coefs_alloc(
-            m_fieldx1_builder.batched_spline_domain());
-        FieldX1SplineCoeffs fieldx1_coefs = get_field(fieldx1_coefs_alloc);
+        FieldXiSplineMem fieldxi_coefs_alloc(
+            m_fieldxi_builder.batched_spline_domain());
+        FieldXiSplineCoeffs fieldxi_coefs = get_field(fieldxi_coefs_alloc);
 
-        m_fieldx1_builder(fieldx1_coefs, get_const_field(field_x1x2));
-        m_fieldx1_evaluator.deriv(dfield_dx1_x1x2, get_const_field(fieldx1_coefs));
+        m_fieldxi_builder(fieldxi_coefs, get_const_field(fieldval));
+        m_fieldxi_evaluator.deriv(dfieldval_dxi, get_const_field(fieldxi_coefs));
 
-        return dfield_dx1_x1x2;
+        return dfieldval_dxi;
     }
 };
