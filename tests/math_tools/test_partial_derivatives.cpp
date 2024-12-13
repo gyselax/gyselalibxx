@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-//VG//#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-//VG//#include "ddc_helper.hpp"
 #include "partial_derivatives.hpp"
 
 namespace {
