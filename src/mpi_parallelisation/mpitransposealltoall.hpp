@@ -74,11 +74,9 @@ public:
         MPI_Comm_size(comm, &m_comm_size);
         MPI_Comm_rank(comm, &rank);
         distributed_idx_range_type1 distrib_idx_range(global_idx_range_layout_1);
-        int n_cores_max = distrib_idx_range.size();
-        assert(m_comm_size <= n_cores_max);
-        int n_elems = n_cores_max / m_comm_size;
+        assert(m_comm_size <= distrib_idx_range.size());
         // Ensure that the load balancing is good
-        assert(n_cores_max - m_comm_size * n_elems == 0);
+        assert(distrib_idx_range.size() % m_comm_size == 0);
         m_local_idx_range_1
                 = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);
         m_local_idx_range_2

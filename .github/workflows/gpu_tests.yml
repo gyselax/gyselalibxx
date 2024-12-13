@@ -18,6 +18,11 @@ on:
         description: "The number of the pull request that triggered the test"
         required: false
         type: number
+      is_duplicate:
+        description: "Indicate if the run would be a duplicate"
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: ${{ github.event_name != 'workflow_dispatch' && format('{0}-{1}', github.workflow, inputs.pr_number) || github.run_id }}
@@ -29,21 +34,26 @@ jobs:
     environment: development
     steps:
       - name: Checkout gyselalibxx
+        if: ${{ (! inputs.is_duplicate) || true }}
         uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: "Filter tests"
+        if: ${{ (! inputs.is_duplicate) || true }}
         uses: ./.github/actions/test_filter
         with:
           base: ${{ inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
       - name: Setup environment
+        if: ${{ (! inputs.is_duplicate) || true }}
         run: |
           . toolchains/v100.persee/environment.sh
         shell: bash
       - name: Build code
+        if: ${{ (! inputs.is_duplicate) || true }}
         uses: ./.github/actions/build_code
         with:
           toolchain: toolchains/v100.persee/toolchain.cmake
       - name: Run tests
+        if: ${{ (! inputs.is_duplicate) || true }}
         uses: ./.github/actions/run_tests
