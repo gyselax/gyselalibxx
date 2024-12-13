@@ -9,7 +9,6 @@
 #include <sll/view.hpp>
 
 #include "mapping_tools.hpp"
-#include "pseudo_cartesian_compatible_mapping.hpp"
 
 // Pre-declaration of analytical inverse
 template <class X, class Y, class R, class Theta>
@@ -40,7 +39,7 @@ class CartesianToCircular;
  *
  */
 template <class R, class Theta, class X, class Y>
-class CircularToCartesian : public PseudoCartesianCompatibleMapping
+class CircularToCartesian
 {
 public:
     /// @brief Indicate the first physical coordinate.
@@ -321,93 +320,6 @@ public:
         const double theta = ddc::get<Theta>(coord);
         assert(fabs(r) >= 1e-15);
         return 1 / r * Kokkos::cos(theta);
-    }
-
-
-
-    /**
-     * @brief  Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.
-     *
-     *
-     * Here, as @f$ \mathcal{G} =  \mathcal{F} @f$ (see PseudoCartesianCompatibleMapping), the Jacobian matrix of
-     * @f$(\mathcal{F} \circ \mathcal{G}^{-1})^{-1} @f$ is the identity matrix.
-     * So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, @f$
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, @f$
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, @f$
-     * - @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. @f$
-     *
-     *
-     * @param[out] matrix
-     *      The pseudo-Cartesian matrix evaluated at the central point.
-     *
-     *
-     * @see DiscreteToCartesian
-     * @see BslAdvection
-     * @see AdvectionDomain
-     */
-    KOKKOS_FUNCTION void to_pseudo_cartesian_jacobian_center_matrix(Matrix_2x2& matrix) const final
-    {
-        matrix[0][0] = 1.;
-        matrix[0][1] = 0.;
-        matrix[1][0] = 0.;
-        matrix[1][1] = 1.;
-    }
-
-    /**
-     * @brief Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1. @f$
-     *
-     * @return A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_11_center() const final
-    {
-        return 1.;
-    }
-
-    /**
-     * @brief Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0. @f$
-     *
-     * @return A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_12_center() const final
-    {
-        return 0.;
-    }
-
-    /**
-     * @brief Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0. @f$
-     *
-     * @return A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_21_center() const final
-    {
-        return 0.;
-    }
-
-    /**
-     * @brief Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @f$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. @f$
-     *
-     * @return A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.
-     *
-     * @see to_pseudo_cartesian_jacobian_center_matrix
-     */
-    KOKKOS_FUNCTION double to_pseudo_cartesian_jacobian_22_center() const final
-    {
-        return 1.;
     }
 
     /**
