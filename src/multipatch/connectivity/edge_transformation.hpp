@@ -147,7 +147,7 @@ public:
         using IdxTarget
                 = std::conditional_t<std::is_same_v<CurrentIdx, IdxEdge1>, IdxEdge2, IdxEdge1>;
         IdxTarget target_idx;
-        bool is_equivalent_idx_found = search_for_match(target_idx, current_idx);
+        [[maybe_unused]] bool is_equivalent_idx_found = search_for_match(target_idx, current_idx);
         assert(is_equivalent_idx_found);
         return target_idx;
     }
