@@ -252,7 +252,19 @@ public:
     {
         BatchedRHS x_view("x_view", batch_size(), size());
         Kokkos::deep_copy(x_view, b);
+        solve(x_view, b);
+        Kokkos::deep_copy(b, x_view);
+    }
 
+    /**
+     * @brief Solve the batched linear problem Ax=b.
+     *
+     * @param[in] x A 2D Kokkos::View storing the batched  inital guests (useful for iterative solver) of the problems, and receiving the corresponding solutions.
+     *
+     * @param[in] b A 2D Kokkos::View storing the batched right-hand side of the problems.
+     */
+    void solve(BatchedRHS const x, BatchedRHS const b) const
+    {
         if constexpr (
                 Solver == MatrixBatchCsrSolver::CG || Solver == MatrixBatchCsrSolver::BICGSTAB) {
             for (size_t i = 0; i < batch_size(); i++) {
@@ -265,14 +277,8 @@ public:
                 m_solver[i]->add_logger(logger);
                 m_solver[i]
                         ->apply(to_gko_multivector(gko_exec, b)->create_const_view_for_item(i),
-                                to_gko_multivector(gko_exec, x_view)->create_view_for_item(i));
+                                to_gko_multivector(gko_exec, x)->create_view_for_item(i));
                 m_solver[i]->remove_logger(logger);
-
-                // Check convergency
-                if (!logger->has_converged()) {
-                    throw std::runtime_error("Ginkgo did not converge in MatrixBatchCsr");
-                }
-
                 // save logger data
                 if (m_with_logger) {
                     std::fstream log_file("csr_log.txt", std::ios::out | std::ios::app);
@@ -280,11 +286,15 @@ public:
                             log_file,
                             i,
                             m_batch_matrix_csr->create_const_view_for_item(i),
-                            Kokkos::subview(x_view, i, Kokkos::ALL),
+                            Kokkos::subview(x, i, Kokkos::ALL),
                             Kokkos::subview(b, i, Kokkos::ALL),
                             logger,
                             m_tol);
                     log_file.close();
+                }
+                // Check convergency
+                if (!logger->has_converged()) {
+                    throw std::runtime_error("Ginkgo did not converge in MatrixBatchCsr");
                 }
             }
         } else {
@@ -295,21 +305,18 @@ public:
 
             // Solve & log
             m_solver->add_logger(logger);
-            m_solver->apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x_view));
+            m_solver->apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x));
             m_solver->remove_logger(logger);
-
-            // Check convergency
-            check_conv(batch_size(), m_tol, gko_exec, logger);
 
             // Save logger data
             if (m_with_logger) {
                 std::fstream log_file("csr_log.txt", std::ios::out | std::ios::app);
-                save_logger(log_file, m_batch_matrix_csr, x_view, b, logger, m_tol);
+                save_logger(log_file, m_batch_matrix_csr, x, b, logger, m_tol);
                 log_file.close();
             }
+            // Check convergence
+            check_conv(batch_size(), m_tol, gko_exec, logger);
         }
-
-        Kokkos::deep_copy(b, x_view);
     }
 
     /**

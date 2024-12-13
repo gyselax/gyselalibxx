@@ -235,6 +235,9 @@ private:
             m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
+    mutable host_t<SplinePolar> m_phi_spline_coef;
+    Kokkos::View<double**, Kokkos::LayoutRight> m_x_init;
+
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
 public:
@@ -305,8 +308,20 @@ public:
         , m_int_volume(
                   IdxRangeQuadratureRTheta(m_idxrange_quadrature_r, m_idxrange_quadrature_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
+        , m_phi_spline_coef(
+                  PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
+                  IdxRangeBSRTheta(
+                          m_idxrange_bsplines_r,
+                          ddc::discrete_space<BSplinesTheta>().full_domain()))
+        , m_x_init(
+                  "x_init",
+                  1,
+                  ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
+                          - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
         static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
+        //initialize x_init
+        Kokkos::deep_copy(m_x_init, 0);
         // Get break points
         IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
         IdxRange<KnotsTheta> idxrange_theta_edges
@@ -445,13 +460,13 @@ public:
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
 
         //CSR data storage
-        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace>
                 values_csr_host("values_csr", batch_size, n_matrix_elements);
-        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 col_idx_csr_host("idx_csr", n_matrix_elements);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
                 nnz_per_row_csr("nnz_per_row_csr", matrix_size + 1);
-        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", matrix_size + 1);
 
         init_nnz_per_line(nnz_per_row_csr);
@@ -690,8 +705,8 @@ public:
      *      The rhs @f$ \rho@f$ of the Poisson-like equation.
      *      The type is templated but we can use the PoissonLikeRHSFunction
      *      class.
-     * @param[out] spline
-     *      The spline representation of the solution @f$\phi@f$.
+     * @param[inout] spline
+     *      The spline representation of the solution @f$\phi@f$, also used as initial data for the iterative solver.
      */
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, host_t<SplinePolar>& spline) const
@@ -705,14 +720,21 @@ public:
         const int b_size = ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                            - ddc::discrete_space<BSplinesTheta>().nbasis();
         const int batch_size = 1;
-        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
+        // Create b for rhs
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace>
                 b_host("b_host", batch_size, b_size);
-
+        //Create an initial guess
+        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace>
+                x_init_host("x_init_host", batch_size, b_size);
         // Fill b
         ddc::for_each(
                 PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
                 [&](IdxBSPolar const idx) {
-                    b_host(0, idx.uid()) = ddc::transform_reduce(
+                    const int bspl_idx = idx
+                                         - PolarBSplinesRTheta::template singular_idx_range<
+                                                   PolarBSplinesRTheta>()
+                                                   .front();
+                    b_host(0, bspl_idx) = ddc::transform_reduce(
                             m_idxrange_quadrature_singular,
                             0.0,
                             ddc::reducer::sum<double>(),
@@ -778,19 +800,20 @@ public:
                             return rhs(coord) * rb * pb * m_int_volume(idx_r, idx_theta);
                         });
             });
-            b_host(0, idx.uid()) = element;
+            const std::size_t singular_index
+                    = idx - ddc::discrete_space<PolarBSplinesRTheta>().full_domain().front();
+            b_host(0, singular_index) = element;
         });
 
-        Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
-                b("b", batch_size, b_size);
+        Kokkos::View<double**, Kokkos::LayoutRight> b("b", batch_size, b_size);
         Kokkos::deep_copy(b, b_host);
         Kokkos::Profiling::popRegion();
 
+        Kokkos::deep_copy(m_x_init, x_init_host);
         // Solve the matrix equation
         Kokkos::Profiling::pushRegion("PolarPoissonSolve");
-        m_gko_matrix->solve(b);
-
-        Kokkos::deep_copy(b_host, b);
+        m_gko_matrix->solve(m_x_init, b);
+        Kokkos::deep_copy(x_init_host, m_x_init);
         //-----------------
         IdxRangeBSRTheta dirichlet_boundary_idx_range(
                 m_idxrange_bsplines_r.take_last(IdxStep<BSplinesR> {1}),
@@ -806,11 +829,11 @@ public:
                                          - PolarBSplinesRTheta::template singular_idx_range<
                                                    PolarBSplinesRTheta>()
                                                    .front();
-                    spline.singular_spline_coef(idx) = b_host(0, bspl_idx);
+                    spline.singular_spline_coef(idx) = x_init_host(0, bspl_idx);
                 });
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
             const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            spline.spline_coef(idx_2d) = b_host(0, idx.uid());
+            spline.spline_coef(idx_2d) = x_init_host(0, idx.uid());
         });
         ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
             spline.spline_coef(idx) = 0.0;
@@ -842,8 +865,8 @@ public:
      *      The rhs @f$ \rho@f$ of the Poisson-like equation.
      *      The type is templated but we can use the PoissonLikeRHSFunction
      *      class.
-     * @param[out] phi
-     *      The values of the solution @f$\phi@f$ on the given coords_eval.
+     * @param[inout] phi
+     *      The values of the solution @f$\phi@f$ on the given coords_eval, also used as initial data for the iterative solver.
      */
     template <class RHSFunction>
     void operator()(RHSFunction const& rhs, host_t<DFieldRTheta> phi) const
@@ -852,18 +875,15 @@ public:
                 std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
-        IdxRangeBSTheta idxrange_polar(ddc::discrete_space<BSplinesTheta>().full_domain());
-        host_t<SplinePolar>
-                spline(PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
-                       IdxRangeBSRTheta(m_idxrange_bsplines_r, idxrange_polar));
 
-        (*this)(rhs, spline);
+
+        (*this)(rhs, m_phi_spline_coef);
         host_t<CoordFieldMemRTheta> coords_eval_alloc(get_idx_range(phi));
         host_t<CoordFieldRTheta> coords_eval(get_field(coords_eval_alloc));
         ddc::for_each(get_idx_range(phi), [&](IdxRTheta idx) {
             coords_eval(idx) = ddc::coordinate(idx);
         });
-        m_polar_spline_evaluator(phi, get_const_field(coords_eval), spline);
+        m_polar_spline_evaluator(phi, get_const_field(coords_eval), m_phi_spline_coef);
     }
 
 private:
@@ -1205,8 +1225,7 @@ public:
     *
     * @param[out]  nnz A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
     */
-    void init_nnz_per_line(
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> nnz) const
+    void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonInitNnz");
         size_t const mat_size = nnz.extent(0) - 1;
