@@ -16,15 +16,14 @@
 /**
  * @brief Compute the partial derivative of a 
  *
- * For a given field @f$F(X1,X2)@f$ , compute
- * @f$\partial_{Xi} F(X1,X2)@f$ with i=1 or 2.
+ * For a given field @f$F(X)@f$ with ,@f$X=(X1,..,Xn)@f$ compute
+ * @f$\partial_{Xi} F(X1,..,Xn)@f$
  *
  * @param[in] Xi
  *      The given coordinate for the partial derivative.
  *
- * @return @f$\partial_{Xi} F(X1,X2)@f$ 
+ * @return @f$\partial_{Xi} F(X1,..,Xn)@f$ 
  */
-
 template <
         class FieldXiBuilderBatched,
         class FieldXiEvaluatorBatched>
@@ -48,6 +47,12 @@ private:
     FieldXiEvaluatorBatched const& m_fieldxi_evaluator;
 
 public:
+    /**
+    * @brief Construct an instance of the class PartialDerivative.
+    *
+    * @param fieldxi_builder Builder for intermediate interpolation representation.
+    * @param fieldxi_evaluator Evaluator for intermediate interpolation representation.
+    */
     explicit PartialDerivative(
         FieldXiBuilderBatched const& fieldxi_builder,
         FieldXiEvaluatorBatched const& fieldxi_evaluator)
@@ -56,8 +61,12 @@ public:
     {
     }
 
-    ~PartialDerivative() = default;
-
+    /**
+    * @brief Compute the partial derivative of @f$ F(X1,..,Xn)@f$ in Xi direction.
+    *
+    * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
+    * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
+    */
     DFieldVal operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval)
     {
         // Build spline representation of the field ....................................
