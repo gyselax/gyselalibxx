@@ -28,7 +28,7 @@ using IdxStepX = IdxStep<GridX>;
 using IdxRangeX = IdxRange<GridX>;
 
 struct Y
-{  
+{
     static bool constexpr PERIODIC = false;
 };
 using CoordY = Coord<Y>;
@@ -109,7 +109,8 @@ TEST(PartialDerivative, PartialDerivativeDx)
             KOKKOS_LAMBDA(IdxXY const idx_xy) {
                 IdxX idx_x(idx_xy);
                 IdxY idx_y(idx_xy);
-                field_xy(idx_xy) = ddc::coordinate(idx_x)*ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
+                field_xy(idx_xy)
+                        = ddc::coordinate(idx_x) * ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
             });
 
     PartialDerivative<SplineXBuilder, SplineXEvaluator> partial_dx(builder_x, spline_evaluator_x);

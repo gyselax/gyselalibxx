@@ -24,15 +24,16 @@
  *
  * @return @f$\partial_{Xi} F(X1,..,Xn)@f$ 
  */
-template <
-        class FieldXiBuilderBatched,
-        class FieldXiEvaluatorBatched>
-class PartialDerivative{
-    static_assert(std::is_same_v<typename FieldXiBuilderBatched::batched_spline_domain_type, 
-        typename FieldXiEvaluatorBatched::batched_spline_domain_type>);
-    static_assert(std::is_same_v<typename FieldXiBuilderBatched::batched_interpolation_domain_type, 
-        typename FieldXiEvaluatorBatched::batched_evaluation_domain_type>);
-    
+template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
+class PartialDerivative
+{
+    static_assert(std::is_same_v<
+                  typename FieldXiBuilderBatched::batched_spline_domain_type,
+                  typename FieldXiEvaluatorBatched::batched_spline_domain_type>);
+    static_assert(std::is_same_v<
+                  typename FieldXiBuilderBatched::batched_interpolation_domain_type,
+                  typename FieldXiEvaluatorBatched::batched_evaluation_domain_type>);
+
 private:
     using IdxRangeFieldVal = typename FieldXiBuilderBatched::batched_interpolation_domain_type;
     using DFieldVal = DField<IdxRangeFieldVal>;
@@ -54,10 +55,10 @@ public:
     * @param fieldxi_evaluator Evaluator for intermediate interpolation representation.
     */
     explicit PartialDerivative(
-        FieldXiBuilderBatched const& fieldxi_builder,
-        FieldXiEvaluatorBatched const& fieldxi_evaluator)
+            FieldXiBuilderBatched const& fieldxi_builder,
+            FieldXiEvaluatorBatched const& fieldxi_evaluator)
         : m_fieldxi_builder(fieldxi_builder)
-        , m_fieldxi_evaluator(fieldxi_evaluator)             
+        , m_fieldxi_evaluator(fieldxi_evaluator)
     {
     }
 
@@ -70,8 +71,7 @@ public:
     DFieldVal operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval)
     {
         // Build spline representation of the field ....................................
-        FieldXiSplineMem fieldxi_coefs_alloc(
-            m_fieldxi_builder.batched_spline_domain());
+        FieldXiSplineMem fieldxi_coefs_alloc(m_fieldxi_builder.batched_spline_domain());
         FieldXiSplineCoeffs fieldxi_coefs = get_field(fieldxi_coefs_alloc);
 
         m_fieldxi_builder(fieldxi_coefs, get_const_field(fieldval));
