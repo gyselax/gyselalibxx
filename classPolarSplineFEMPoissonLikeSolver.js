@@ -11,5 +11,5 @@ var classPolarSplineFEMPoissonLikeSolver =
     [ "PolarSplineFEMPoissonLikeSolver", "classPolarSplineFEMPoissonLikeSolver.html#a81085f1da1e8dd8e12f1e34ac2215305", null ],
     [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#a2ffbf750c185ff40c8a4697b3937bc63", null ],
     [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#ab4b11b8cba2279a5a4f20a7fd4e2c477", null ],
-    [ "init_nnz_per_line", "classPolarSplineFEMPoissonLikeSolver.html#a7e6997e8b603afd0bd2833667053debf", null ]
+    [ "init_nnz_per_line", "classPolarSplineFEMPoissonLikeSolver.html#ad1b92b440d6e5c71e14b09d53beefd84", null ]
 ];

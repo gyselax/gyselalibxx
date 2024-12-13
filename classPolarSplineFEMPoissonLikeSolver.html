@@ -157,9 +157,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4b11b8cba2279a5a4f20a7fd4e2c477"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#ab4b11b8cba2279a5a4f20a7fd4e2c477">operator()</a> (RHSFunction const &amp;rhs, host_t&lt; DFieldRTheta &gt; phi) const</td></tr>
 <tr class="memdesc:ab4b11b8cba2279a5a4f20a7fd4e2c477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson-like equation.  <br /></td></tr>
 <tr class="separator:ab4b11b8cba2279a5a4f20a7fd4e2c477"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e6997e8b603afd0bd2833667053debf" id="r_a7e6997e8b603afd0bd2833667053debf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a7e6997e8b603afd0bd2833667053debf">init_nnz_per_line</a> (Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; nnz) const</td></tr>
-<tr class="memdesc:a7e6997e8b603afd0bd2833667053debf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the nnz data structure by computing the number of non-zero per line.  <br /></td></tr>
-<tr class="separator:a7e6997e8b603afd0bd2833667053debf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1b92b440d6e5c71e14b09d53beefd84" id="r_ad1b92b440d6e5c71e14b09d53beefd84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#ad1b92b440d6e5c71e14b09d53beefd84">init_nnz_per_line</a> (Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz) const</td></tr>
+<tr class="memdesc:ad1b92b440d6e5c71e14b09d53beefd84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the nnz data structure by computing the number of non-zero per line.  <br /></td></tr>
+<tr class="separator:ad1b92b440d6e5c71e14b09d53beefd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="structGridR.html">GridR</a>, class <a class="el" href="structGridTheta.html">GridTheta</a>, class <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, class SplineRThetaEvaluatorNullBound, class IdxRangeFull = IdxRange&lt;GridR, GridTheta&gt;&gt;<br />
@@ -358,7 +358,7 @@ template&lt;class RHSFunction &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>The rhs \( \rho\) of the Poisson-like equation. The type is templated but we can use the <a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a> class. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">spline</td><td>The spline representation of the solution \(\phi\). </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">spline</td><td>The spline representation of the solution \(\phi\), also used as initial data for the iterative solver. </td></tr>
   </table>
   </dd>
 </dl>
@@ -408,15 +408,15 @@ template&lt;class RHSFunction &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>The rhs \( \rho\) of the Poisson-like equation. The type is templated but we can use the <a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a> class. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">phi</td><td>The values of the solution \(\phi\) on the given coords_eval. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">phi</td><td>The values of the solution \(\phi\) on the given coords_eval, also used as initial data for the iterative solver. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a7e6997e8b603afd0bd2833667053debf" name="a7e6997e8b603afd0bd2833667053debf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e6997e8b603afd0bd2833667053debf">&#9670;&#160;</a></span>init_nnz_per_line()</h2>
+<a id="ad1b92b440d6e5c71e14b09d53beefd84" name="ad1b92b440d6e5c71e14b09d53beefd84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1b92b440d6e5c71e14b09d53beefd84">&#9670;&#160;</a></span>init_nnz_per_line()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,7 +429,7 @@ template&lt;class <a class="el" href="structGridR.html">GridR</a> , class <a cla
         <tr>
           <td class="memname">void <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::init_nnz_per_line </td>
           <td>(</td>
-          <td class="paramtype">Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt;&#160;</td>
+          <td class="paramtype">Kokkos::View&lt; int *, Kokkos::LayoutRight &gt;&#160;</td>
           <td class="paramname"><em>nnz</em></td><td>)</td>
           <td> const</td>
         </tr>

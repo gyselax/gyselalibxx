@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a":[15,155,8],
 "classMetricTensor.html":[15,156],
 "classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8":[15,156,1],
 "classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a":[15,156,0],
@@ -202,9 +203,9 @@ var NAVTREEINDEX3 =
 "classPolarSplineFEMPoissonLikeSolver.html":[15,185],
 "classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417":[15,185,7],
 "classPolarSplineFEMPoissonLikeSolver.html#a2ffbf750c185ff40c8a4697b3937bc63":[15,185,9],
-"classPolarSplineFEMPoissonLikeSolver.html#a7e6997e8b603afd0bd2833667053debf":[15,185,11],
 "classPolarSplineFEMPoissonLikeSolver.html#a81085f1da1e8dd8e12f1e34ac2215305":[15,185,8],
 "classPolarSplineFEMPoissonLikeSolver.html#ab4b11b8cba2279a5a4f20a7fd4e2c477":[15,185,10],
+"classPolarSplineFEMPoissonLikeSolver.html#ad1b92b440d6e5c71e14b09d53beefd84":[15,185,11],
 "classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9":[15,185,6],
 "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset":[15,185,2],
 "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim":[15,185,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "classRK2.html#ad0949984fa0c2d0004f6b7a10e19cd69":[15,199,1],
 "classRK2.html#af39ff8c3200cb2b37a4254030288963d":[15,199,6],
 "classRK2.html#afdf22291a9a2f9180e1904d3a0728737":[15,199,9],
-"classRK3.html":[15,200],
-"classRK3.html#a468e0909ac8b50f109dc810879253134":[15,200,0]
+"classRK3.html":[15,200]
 };

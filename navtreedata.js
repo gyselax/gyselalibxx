@@ -263,11 +263,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionsIntra.html#a164c6c249095a533900a12e2f1f48e25",
 "classFluidMoments.html",
-"classMetricTensor.html",
-"classRK3.html#a58d11b9c1e57348b94e50b1ea284886f",
-"docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation",
-"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__References",
-"tests_advection.html#tests_advection__Contents"
+"classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a",
+"classRK3.html#a468e0909ac8b50f109dc810879253134",
+"docs_CODING_STANDARD.html",
+"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Predictor-corrector",
+"tests_advection.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

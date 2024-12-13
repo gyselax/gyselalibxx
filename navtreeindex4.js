@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classRK3.html#a468e0909ac8b50f109dc810879253134":[15,200,0],
 "classRK3.html#a58d11b9c1e57348b94e50b1ea284886f":[15,200,4],
 "classRK3.html#a5b66359b6132c575734d8970fda25a56":[15,200,6],
 "classRK3.html#a7ee2d8a1e9031e625d0861031891bd52":[15,200,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures":[5,1],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[5,2],
 "docs_Adding_docs.html#docs_Adding_docs__Documenting_functions":[5,3],
-"docs_Adding_docs.html#docs_Adding_docs__Mathematical_notation_in_documentation":[5,4],
-"docs_CODING_STANDARD.html":[6]
+"docs_Adding_docs.html#docs_Adding_docs__Mathematical_notation_in_documentation":[5,4]
 };

@@ -139,6 +139,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5d7f76fc2c25fb4867b50181779b4c3c" id="r_a5d7f76fc2c25fb4867b50181779b4c3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c">solve</a> (<a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> const b) const final</td></tr>
 <tr class="memdesc:a5d7f76fc2c25fb4867b50181779b4c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the batched linear problem Ax=b.  <br /></td></tr>
 <tr class="separator:a5d7f76fc2c25fb4867b50181779b4c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3b37df4fa1caf358a4f08a7ae08865" id="r_a5d3b37df4fa1caf358a4f08a7ae08865"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a5d3b37df4fa1caf358a4f08a7ae08865">solve</a> (<a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> const x, <a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> const b) const</td></tr>
+<tr class="memdesc:a5d3b37df4fa1caf358a4f08a7ae08865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the batched linear problem Ax=b.  <br /></td></tr>
+<tr class="separator:a5d3b37df4fa1caf358a4f08a7ae08865"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eca63a806974a62a376ae271d6fb14d" id="r_a6eca63a806974a62a376ae271d6fb14d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d">norm</a> (int batch_idx) const</td></tr>
 <tr class="memdesc:a6eca63a806974a62a376ae271d6fb14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function returning the norm of a matrix located at batch_idx.  <br /></td></tr>
 <tr class="separator:a6eca63a806974a62a376ae271d6fb14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -411,7 +414,7 @@ template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver
 </div>
 </div>
 <a id="a5d7f76fc2c25fb4867b50181779b4c3c" name="a5d7f76fc2c25fb4867b50181779b4c3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d7f76fc2c25fb4867b50181779b4c3c">&#9670;&#160;</a></span>solve()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d7f76fc2c25fb4867b50181779b4c3c">&#9670;&#160;</a></span>solve() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -445,6 +448,53 @@ template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver
 </dl>
 
 <p>Implements <a class="el" href="classMatrixBatch.html#aed90bf340060a7bc8c24cf61771e212e">MatrixBatch&lt; ExecSpace &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a5d3b37df4fa1caf358a4f08a7ae08865" name="a5d3b37df4fa1caf358a4f08a7ae08865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d3b37df4fa1caf358a4f08a7ae08865">&#9670;&#160;</a></span>solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMatrixBatchCsr.html">MatrixBatchCsr</a>&lt; ExecSpace, Solver &gt;::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> const&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">BatchedRHS</a> const&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve the batched linear problem Ax=b. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>A 2D Kokkos::View storing the batched inital guests (useful for iterative solver) of the problems, and receiving the corresponding solutions.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>A 2D Kokkos::View storing the batched right-hand side of the problems. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

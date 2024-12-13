@@ -5,5 +5,6 @@ var classMatrixBatchCsr =
     [ "get_batch_csr", "classMatrixBatchCsr.html#a06d8671618226f37e29927733d416b7b", null ],
     [ "setup_solver", "classMatrixBatchCsr.html#ad037e66bbdfdfa674e678f49d36f78df", null ],
     [ "solve", "classMatrixBatchCsr.html#a5d7f76fc2c25fb4867b50181779b4c3c", null ],
+    [ "solve", "classMatrixBatchCsr.html#a5d3b37df4fa1caf358a4f08a7ae08865", null ],
     [ "norm", "classMatrixBatchCsr.html#a6eca63a806974a62a376ae271d6fb14d", null ]
 ];

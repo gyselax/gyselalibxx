@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"docs_CODING_STANDARD.html":[6],
 "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation":[6,5],
 "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Cxx_Features":[6,0],
 "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Naming":[6,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "src_geometryRTheta_time_solver.html":[12,3,6],
 "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Contents":[12,3,6,4],
 "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Explicit_predictor-corrector":[12,3,6,1],
-"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Implicit_predictor-corrector":[12,3,6,2],
-"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Predictor-corrector":[12,3,6,0]
+"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Implicit_predictor-corrector":[12,3,6,2]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Predictor-corrector":[12,3,6,0],
 "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__References":[12,3,6,3],
 "src_geometryVparMu.html":[12,4],
 "src_geometryVparMu_geometry.html":[12,4,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structphysical__geometry_1_1Y.html":[15,11,1],
 "test__cases__adv__field_8hpp_source.html":[16,1,1,2,0],
 "test__utils_8hpp_source.html":[16,2,0,1,3],
-"tests.html":[13],
-"tests_advection.html":[13,0]
+"tests.html":[13]
 };
