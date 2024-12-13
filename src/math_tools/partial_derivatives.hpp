@@ -67,5 +67,7 @@ public:
 
         m_fieldx1_builder(fieldx1_coefs, get_const_field(field_x1x2));
         m_fieldx1_evaluator.deriv(dfield_dx1_x1x2, get_const_field(fieldx1_coefs));
+
+        return dfield_dx1_x1x2;
     }
 };
