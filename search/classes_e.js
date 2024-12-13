@@ -23,6 +23,5 @@ var searchData=
   ['preallocatablesplineinterpolatorrtheta_20',['PreallocatableSplineInterpolatorRTheta',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
   ['preallocatablesplineinterpolatorrtheta_3c_20ddc_3a_3anullextrapolationrule_20_3e_21',['PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
   ['predcorr_22',['PredCorr',['../classPredCorr.html',1,'']]],
-  ['predcorrrk2xy_23',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]],
-  ['pseudocartesiancompatiblemapping_24',['PseudoCartesianCompatibleMapping',['../classPseudoCartesianCompatibleMapping.html',1,'']]]
+  ['predcorrrk2xy_23',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
 ];

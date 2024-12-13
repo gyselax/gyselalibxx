@@ -22,10 +22,5 @@ var classCircularToCartesian =
     [ "inv_jacobian_12", "classCircularToCartesian.html#a6a6a8ce8a56f37456954985bc5555573", null ],
     [ "inv_jacobian_21", "classCircularToCartesian.html#ada4943d56e137e909c05f4a65695f32c", null ],
     [ "inv_jacobian_22", "classCircularToCartesian.html#a48349b38c6381e571f4028c5284ee504", null ],
-    [ "to_pseudo_cartesian_jacobian_center_matrix", "classCircularToCartesian.html#a5e81246615ecef2e0087a38990ecbbb0", null ],
-    [ "to_pseudo_cartesian_jacobian_11_center", "classCircularToCartesian.html#a852e5b86cd049dde3501fbafda0c8879", null ],
-    [ "to_pseudo_cartesian_jacobian_12_center", "classCircularToCartesian.html#a10a8a08aa0d25a7d27409c8a611ab4ee", null ],
-    [ "to_pseudo_cartesian_jacobian_21_center", "classCircularToCartesian.html#a0f1efb7743ea352adb5fd291af9dbad9", null ],
-    [ "to_pseudo_cartesian_jacobian_22_center", "classCircularToCartesian.html#a93a48a661eaaf971a0106609ca7acaf0", null ],
     [ "get_inverse_mapping", "classCircularToCartesian.html#a933c7fa215c360fe24e6fa3b2e2cb646", null ]
 ];

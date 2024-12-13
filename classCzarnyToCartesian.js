@@ -25,10 +25,5 @@ var classCzarnyToCartesian =
     [ "inv_jacobian_12", "classCzarnyToCartesian.html#a2558af0463cf8a93b5a6e1941bd3d0fb", null ],
     [ "inv_jacobian_21", "classCzarnyToCartesian.html#a4b1e9eb7caeeaf338d5ab83b1f269855", null ],
     [ "inv_jacobian_22", "classCzarnyToCartesian.html#a0b29c13b61c5e33d93e24890f06faf61", null ],
-    [ "to_pseudo_cartesian_jacobian_center_matrix", "classCzarnyToCartesian.html#ac33a26a0f124bb959cbdfc93c7b47984", null ],
-    [ "to_pseudo_cartesian_jacobian_11_center", "classCzarnyToCartesian.html#ae32dbd27eb5bd2c31949a0ab7a833abe", null ],
-    [ "to_pseudo_cartesian_jacobian_12_center", "classCzarnyToCartesian.html#aa6a2a64766b2ecb6476a41d6184393ec", null ],
-    [ "to_pseudo_cartesian_jacobian_21_center", "classCzarnyToCartesian.html#af1058dee5fdf55dd8652df199e070d5b", null ],
-    [ "to_pseudo_cartesian_jacobian_22_center", "classCzarnyToCartesian.html#a03d059a135be104a83d410b1de99ed54", null ],
     [ "get_inverse_mapping", "classCzarnyToCartesian.html#a3db743b369fe2c5b63c993abb1429bb1", null ]
 ];

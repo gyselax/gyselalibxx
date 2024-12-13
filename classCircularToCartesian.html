@@ -113,15 +113,6 @@ $(document).ready(function(){initNavTree('classCircularToCartesian.html',''); in
 
 <p>A class for describing the circular 2D mapping.  
  <a href="classCircularToCartesian.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for CircularToCartesian&lt; R, Theta, X, Y &gt;:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classCircularToCartesian.png" usemap="#CircularToCartesian_3C_20R_2C_20Theta_2C_20X_2C_20Y_20_3E_map" alt=""/>
-  <map id="CircularToCartesian_3C_20R_2C_20Theta_2C_20X_2C_20Y_20_3E_map" name="CircularToCartesian_3C_20R_2C_20Theta_2C_20X_2C_20Y_20_3E_map">
-<area href="classPseudoCartesianCompatibleMapping.html" title="An operator to calculate the Jacobian matrix of the mapping from the physical domain to the pseudo-Ca..." alt="PseudoCartesianCompatibleMapping" shape="rect" coords="0,0,234,24"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -149,11 +140,6 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordArg</b> = ddc::
 using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordResult</b> = ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;</td></tr>
 <tr class="memdesc:a49a1f001259ff7e801cf3e67caf7d1f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the result of the function described by this mapping. <br /></td></tr>
 <tr class="separator:a49a1f001259ff7e801cf3e67caf7d1f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classPseudoCartesianCompatibleMapping"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classPseudoCartesianCompatibleMapping')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classPseudoCartesianCompatibleMapping.html">PseudoCartesianCompatibleMapping</a></td></tr>
-<tr class="memitem:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping" id="r_a70dac40dbdb219ab3f2a775c06f53f74"><td class="memItemLeft" align="right" valign="top">
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Matrix_2x2</b> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
-<tr class="memdesc:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the pseudo-Cartesian Jacobian matrix and its inverse. <br /></td></tr>
-<tr class="separator:a70dac40dbdb219ab3f2a775c06f53f74 inherit pub_types_classPseudoCartesianCompatibleMapping"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -175,7 +161,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6373fe2a806be2fb9cf78ae4850a519d" id="r_a6373fe2a806be2fb9cf78ae4850a519d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a6373fe2a806be2fb9cf78ae4850a519d">jacobian</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
 <tr class="memdesc:a6373fe2a806be2fb9cf78ae4850a519d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <br /></td></tr>
 <tr class="separator:a6373fe2a806be2fb9cf78ae4850a519d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa440345ad57c81eecca646985be99954" id="r_aa440345ad57c81eecca646985be99954"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa440345ad57c81eecca646985be99954">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const</td></tr>
+<tr class="memitem:aa440345ad57c81eecca646985be99954" id="r_aa440345ad57c81eecca646985be99954"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#aa440345ad57c81eecca646985be99954">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</td></tr>
 <tr class="memdesc:aa440345ad57c81eecca646985be99954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
 <tr class="separator:aa440345ad57c81eecca646985be99954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85804e48d393855b708cabeea26e79eb" id="r_a85804e48d393855b708cabeea26e79eb"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a85804e48d393855b708cabeea26e79eb">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
@@ -190,7 +176,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3026ca8eae0d0c2c97e43622f74f4538" id="r_a3026ca8eae0d0c2c97e43622f74f4538"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a3026ca8eae0d0c2c97e43622f74f4538">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
 <tr class="memdesc:a3026ca8eae0d0c2c97e43622f74f4538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a3026ca8eae0d0c2c97e43622f74f4538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab32fc8c4571885fb58a6580b2c1bad5e" id="r_ab32fc8c4571885fb58a6580b2c1bad5e"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ab32fc8c4571885fb58a6580b2c1bad5e">inv_jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, <a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const</td></tr>
+<tr class="memitem:ab32fc8c4571885fb58a6580b2c1bad5e" id="r_ab32fc8c4571885fb58a6580b2c1bad5e"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#ab32fc8c4571885fb58a6580b2c1bad5e">inv_jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</td></tr>
 <tr class="memdesc:ab32fc8c4571885fb58a6580b2c1bad5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <br /></td></tr>
 <tr class="separator:ab32fc8c4571885fb58a6580b2c1bad5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf4cdbc7b10f47056aa3f41a3e340811" id="r_abf4cdbc7b10f47056aa3f41a3e340811"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#abf4cdbc7b10f47056aa3f41a3e340811">inv_jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
@@ -205,21 +191,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a48349b38c6381e571f4028c5284ee504" id="r_a48349b38c6381e571f4028c5284ee504"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a48349b38c6381e571f4028c5284ee504">inv_jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; const &amp;coord) const</td></tr>
 <tr class="memdesc:a48349b38c6381e571f4028c5284ee504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the inverse Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a48349b38c6381e571f4028c5284ee504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e81246615ecef2e0087a38990ecbbb0" id="r_a5e81246615ecef2e0087a38990ecbbb0"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a5e81246615ecef2e0087a38990ecbbb0">to_pseudo_cartesian_jacobian_center_matrix</a> (<a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;matrix) const final</td></tr>
-<tr class="memdesc:a5e81246615ecef2e0087a38990ecbbb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point.  <br /></td></tr>
-<tr class="separator:a5e81246615ecef2e0087a38990ecbbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a852e5b86cd049dde3501fbafda0c8879" id="r_a852e5b86cd049dde3501fbafda0c8879"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a852e5b86cd049dde3501fbafda0c8879">to_pseudo_cartesian_jacobian_11_center</a> () const final</td></tr>
-<tr class="memdesc:a852e5b86cd049dde3501fbafda0c8879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <br /></td></tr>
-<tr class="separator:a852e5b86cd049dde3501fbafda0c8879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a8a08aa0d25a7d27409c8a611ab4ee" id="r_a10a8a08aa0d25a7d27409c8a611ab4ee"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a10a8a08aa0d25a7d27409c8a611ab4ee">to_pseudo_cartesian_jacobian_12_center</a> () const final</td></tr>
-<tr class="memdesc:a10a8a08aa0d25a7d27409c8a611ab4ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <br /></td></tr>
-<tr class="separator:a10a8a08aa0d25a7d27409c8a611ab4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f1efb7743ea352adb5fd291af9dbad9" id="r_a0f1efb7743ea352adb5fd291af9dbad9"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a0f1efb7743ea352adb5fd291af9dbad9">to_pseudo_cartesian_jacobian_21_center</a> () const final</td></tr>
-<tr class="memdesc:a0f1efb7743ea352adb5fd291af9dbad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <br /></td></tr>
-<tr class="separator:a0f1efb7743ea352adb5fd291af9dbad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a48a661eaaf971a0106609ca7acaf0" id="r_a93a48a661eaaf971a0106609ca7acaf0"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a93a48a661eaaf971a0106609ca7acaf0">to_pseudo_cartesian_jacobian_22_center</a> () const final</td></tr>
-<tr class="memdesc:a93a48a661eaaf971a0106609ca7acaf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.  <br /></td></tr>
-<tr class="separator:a93a48a661eaaf971a0106609ca7acaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a933c7fa215c360fe24e6fa3b2e2cb646" id="r_a933c7fa215c360fe24e6fa3b2e2cb646"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularToCartesian.html#a933c7fa215c360fe24e6fa3b2e2cb646">get_inverse_mapping</a> () const</td></tr>
 <tr class="memdesc:a933c7fa215c360fe24e6fa3b2e2cb646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the inverse mapping.  <br /></td></tr>
 <tr class="separator:a933c7fa215c360fe24e6fa3b2e2cb646"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -479,7 +450,7 @@ template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -679,7 +650,7 @@ template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;&#160;</td>
+          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -863,191 +834,6 @@ template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" 
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A double with the value of the (2,2) coefficient of the inverse Jacobian matrix. </dd></dl>
-
-</div>
-</div>
-<a id="a5e81246615ecef2e0087a38990ecbbb0" name="a5e81246615ecef2e0087a38990ecbbb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e81246615ecef2e0087a38990ecbbb0">&#9670;&#160;</a></span>to_pseudo_cartesian_jacobian_center_matrix()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::to_pseudo_cartesian_jacobian_center_matrix </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classPseudoCartesianCompatibleMapping.html#a70dac40dbdb219ab3f2a775c06f53f74">Matrix_2x2</a> &amp;&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central point. </p>
-<p>Here, as \( \mathcal{G} =  \mathcal{F} \) (see <a class="el" href="classPseudoCartesianCompatibleMapping.html" title="An operator to calculate the Jacobian matrix of the mapping from the physical domain to the pseudo-Ca...">PseudoCartesianCompatibleMapping</a>), the Jacobian matrix of \((\mathcal{F} \circ \mathcal{G}^{-1})^{-1} \) is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :</p><ul>
-<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, \)</li>
-<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, \)</li>
-<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, \)</li>
-<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. \)</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The pseudo-Cartesian matrix evaluated at the central point.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> </dd>
-<dd>
-BslAdvection </dd>
-<dd>
-<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> </dd></dl>
-
-<p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#a5509bac8df3f0b44c36222b9ac4f537a">PseudoCartesianCompatibleMapping</a>.</p>
-
-</div>
-</div>
-<a id="a852e5b86cd049dde3501fbafda0c8879" name="a852e5b86cd049dde3501fbafda0c8879"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a852e5b86cd049dde3501fbafda0c8879">&#9670;&#160;</a></span>to_pseudo_cartesian_jacobian_11_center()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::to_pseudo_cartesian_jacobian_11_center </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
-<p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a5e81246615ecef2e0087a38990ecbbb0" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
-
-<p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#afcf9d2dca6c2fe57e6c0b84c09b0b370">PseudoCartesianCompatibleMapping</a>.</p>
-
-</div>
-</div>
-<a id="a10a8a08aa0d25a7d27409c8a611ab4ee" name="a10a8a08aa0d25a7d27409c8a611ab4ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10a8a08aa0d25a7d27409c8a611ab4ee">&#9670;&#160;</a></span>to_pseudo_cartesian_jacobian_12_center()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::to_pseudo_cartesian_jacobian_12_center </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
-<p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (1,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a5e81246615ecef2e0087a38990ecbbb0" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
-
-<p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#a87ff023bb5db96e733101aa1b19ea7f8">PseudoCartesianCompatibleMapping</a>.</p>
-
-</div>
-</div>
-<a id="a0f1efb7743ea352adb5fd291af9dbad9" name="a0f1efb7743ea352adb5fd291af9dbad9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f1efb7743ea352adb5fd291af9dbad9">&#9670;&#160;</a></span>to_pseudo_cartesian_jacobian_21_center()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::to_pseudo_cartesian_jacobian_21_center </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
-<p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,1) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a5e81246615ecef2e0087a38990ecbbb0" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
-
-<p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#aad1eb909fc3971c0f7cf956b9f37940c">PseudoCartesianCompatibleMapping</a>.</p>
-
-</div>
-</div>
-<a id="a93a48a661eaaf971a0106609ca7acaf0" name="a93a48a661eaaf971a0106609ca7acaf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93a48a661eaaf971a0106609ca7acaf0">&#9670;&#160;</a></span>to_pseudo_cartesian_jacobian_22_center()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structR.html">R</a> , class <a class="el" href="structTheta.html">Theta</a> , class <a class="el" href="structX.html">X</a> , class <a class="el" href="structY.html">Y</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;::to_pseudo_cartesian_jacobian_22_center </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point. </p>
-<p>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. \)</p>
-<dl class="section return"><dt>Returns</dt><dd>A double with the (2,2) coefficient of the pseudo-Cartesian Jacobian matrix at the central point.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCircularToCartesian.html#a5e81246615ecef2e0087a38990ecbbb0" title="Compute the full Jacobian matrix from the mapping to the pseudo-Cartesian mapping at the central poin...">to_pseudo_cartesian_jacobian_center_matrix</a> </dd></dl>
-
-<p>Implements <a class="el" href="classPseudoCartesianCompatibleMapping.html#aba10e56e71e974c1c4907b5d8f41f521">PseudoCartesianCompatibleMapping</a>.</p>
 
 </div>
 </div>
