@@ -119,17 +119,16 @@ TEST(PartialDerivative, PartialDerivativeDx)
     DFieldXY dfield_dx_xy = get_field(dfield_dx_xy_alloc);
     partial_dx(dfield_dx_xy, get_const_field(field_xy));
 
-    double max_error = 0;
-
-    ddc::parallel_for_each(
+    double max_error = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             idxrange_xy,
+            0.,
+            ddc::reducer::max<double>(),
             KOKKOS_LAMBDA(IdxXY const idx_xy) {
                 IdxX idx_x(idx_xy);
                 IdxY idx_y(idx_xy);
-                dfield_dx_xy(idx_xy) = 
-                Kokkos::max(abs(dfield_dx_xy(idx_xy) -
-                    2. * ddc::coordinate(idx_x) * ddc::coordinate(idx_y)), max_error);
+                double const dfield_dx_anal = 2. * ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
+                return Kokkos::abs(dfield_dx_xy(idx_xy) - dfield_dx_anal);
             });
     EXPECT_LE(max_error, 1e-12);
 }
