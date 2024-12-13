@@ -68,7 +68,7 @@ public:
     * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
     */
-    DFieldVal operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval)
+    void operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval)
     {
         // Build spline representation of the field ....................................
         FieldXiSplineMem fieldxi_coefs_alloc(m_fieldxi_builder.batched_spline_domain());
@@ -76,7 +76,5 @@ public:
 
         m_fieldxi_builder(fieldxi_coefs, get_const_field(fieldval));
         m_fieldxi_evaluator.deriv(dfieldval_dxi, get_const_field(fieldxi_coefs));
-
-        return dfieldval_dxi;
     }
 };
