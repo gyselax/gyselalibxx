@@ -5,7 +5,7 @@ runs:
   steps:
     - name: "Run tests"
       run: |
-        ctest -j 2 --timeout 5 --output-junit tests.xml
+        ctest -j 2 --timeout 5 --output-junit tests.xml --output-on-failure
       shell: bash
       working-directory:
         ./build
