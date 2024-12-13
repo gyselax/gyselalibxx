@@ -28,8 +28,12 @@
 template <
         class FieldXiBuilderBatched,
         class FieldXiEvaluatorBatched>
-class PartialDerivative
-{
+class PartialDerivative{
+    static_assert(std::is_same_v<typename FieldXiBuilderBatched::batched_spline_domain_type, 
+        typename FieldXiEvaluatorBatched::batched_spline_domain_type>);
+    static_assert(std::is_same_v<typename FieldXiBuilderBatched::batched_interpolation_domain_type, 
+        typename FieldXiEvaluatorBatched::batched_evaluation_domain_type>);
+    
 private:
     using IdxRangeFieldVal = typename FieldXiBuilderBatched::batched_interpolation_domain_type;
     using DFieldVal = DField<IdxRangeFieldVal>;
@@ -49,7 +53,7 @@ public:
         FieldXiEvaluatorBatched const& fieldxi_evaluator)
         : m_fieldxi_builder(fieldxi_builder)
         , m_fieldxi_evaluator(fieldxi_evaluator)             
-    {    
+    {
     }
 
     ~PartialDerivative() = default;
