@@ -5,7 +5,6 @@ include(GoogleTest)
 
 add_executable(unit_tests_utils
     test_ddcHelpers.cpp
-    test_math_tools.cpp
     transpose.cpp
     ../main.cpp
 )
