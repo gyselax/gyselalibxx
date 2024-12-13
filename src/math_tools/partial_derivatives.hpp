@@ -36,8 +36,8 @@ class PartialDerivative
 private:
     using IdxRangeX1X2 = IdxRange<GridX1, GridX2>;
     using IdxX1X2 = typename IdxRangeX1X2::discrete_element_type;
-    using DFieldX1X2 = DField<double, IdxRangeX1X2>;
-    using DConstFieldX1X2 = DConstField<double, IdxRangeX1X2>;
+    using DFieldX1X2 = DField<IdxRangeX1X2>;
+    using DConstFieldX1X2 = DConstField<IdxRangeX1X2>;
 
     // Type for spline representation of the field
     using IdxRangeBSFieldX1 = typename FieldX1Builder::batched_spline_domain_type;
@@ -66,6 +66,6 @@ public:
         FieldX1SplineCoeffs fieldx1_coefs = get_field(fieldx1_coefs_alloc);
 
         m_fieldx1_builder(fieldx1_coefs, get_const_field(field_x1x2));
-        m_fieldx1_evaluator.deriv(dfield_dx1_x1x2, fieldx1_coefs);
+        m_fieldx1_evaluator.deriv(dfield_dx1_x1x2, get_const_field(fieldx1_coefs));
     }
 };

@@ -115,7 +115,21 @@ TEST(PartialDerivative, PartialDerivativeDx)
     PartialDerivative<GridX, GridX, GridY, SplineXBuilder, SplineXEvaluator> partial_dx(builder_x, spline_evaluator_x);
     DFieldMemXY dfield_dx_xy_alloc(idxrange_xy);
     DFieldXY dfield_dx_xy = get_field(dfield_dx_xy_alloc);
-    partial_dx(dfield_dx_xy, field_xy);
+    partial_dx(dfield_dx_xy, get_const_field(field_xy));
+
+    double max_error = 0;
+
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            idxrange_xy,
+            KOKKOS_LAMBDA(IdxXY const idx_xy) {
+                IdxX idx_x(idx_xy);
+                IdxY idx_y(idx_xy);
+                dfield_dx_xy(idx_xy) = 
+                Kokkos::max(abs(dfield_dx_xy(idx_xy) -
+                    2. * ddc::coordinate(idx_x) * ddc::coordinate(idx_y)), max_error);
+            });
+    EXPECT_LE(max_error, 1e-12);
 }
 
 } // namespace
