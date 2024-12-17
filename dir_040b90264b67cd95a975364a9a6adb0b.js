@@ -3,7 +3,7 @@ var dir_040b90264b67cd95a975364a9a6adb0b =
     [ "mapping", "dir_401f8b249764c6753d0f677d3a20782c.html", "dir_401f8b249764c6753d0f677d3a20782c" ],
     [ "bernstein.hpp", "bernstein_8hpp_source.html", null ],
     [ "gauss_legendre_integration.hpp", "gauss__legendre__integration_8hpp_source.html", null ],
-    [ "math_tools.hpp", "vendor_2sll_2include_2sll_2math__tools_8hpp_source.html", null ],
+    [ "math_tools.hpp", "math__tools_8hpp_source.html", null ],
     [ "matrix.hpp", "matrix_8hpp_source.html", null ],
     [ "matrix_banded.hpp", "matrix__banded_8hpp_source.html", null ],
     [ "matrix_batch.hpp", "matrix__batch_8hpp_source.html", null ],

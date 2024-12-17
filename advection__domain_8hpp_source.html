@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('advection__domain_8hpp_source.html',''
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;directional_tag.hpp&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;geometry_pseudo_cartesian.hpp&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;math_tools.hpp&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="l__norm__tools_8hpp.html">l_norm_tools.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;vector_field.hpp&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;vector_field_mem.hpp&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('advection__domain_8hpp_source.html',''
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <a class="code hl_typedef" href="classAdvectionDomain.html#ab09e95979aa3d15ef615b7852b68a307">CoordXY_adv</a> <span class="keyword">const</span> feet_xy = coord_xy - dt * advection_field(irp);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">if</span> (norm_inf(feet_xy - coord_center) &lt; 1e-15) {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(feet_xy - coord_center) &lt; 1e-15) {</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                feet_coords_rp(irp) = CoordRTheta(0, 0);</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                feet_coords_rp(irp) = m_to_curvilinear_mapping(feet_xy);</div>
@@ -191,6 +191,8 @@ $(document).ready(function(){initNavTree('advection__domain_8hpp_source.html',''
 <div class="ttc" id="aclassCartesianToCircular_html_a3a8d1753956c80af0e2069197560b3a5"><div class="ttname"><a href="classCartesianToCircular.html#a3a8d1753956c80af0e2069197560b3a5">CartesianToCircular::cartesian_tag_x</a></div><div class="ttdeci">X cartesian_tag_x</div><div class="ttdoc">Indicate the first physical coordinate.</div><div class="ttdef"><b>Definition</b> cartesian_to_circular.hpp:43</div></div>
 <div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition</b> circular_to_cartesian.hpp:43</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:64</div></div>
+<div class="ttc" id="al__norm__tools_8hpp_html"><div class="ttname"><a href="l__norm__tools_8hpp.html">l_norm_tools.hpp</a></div><div class="ttdoc">File Describing useful mathematical functions to compute Lnorms.</div></div>
+<div class="ttc" id="al__norm__tools_8hpp_html_a939e3995d29bdb32c073e38494563009"><div class="ttname"><a href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a></div><div class="ttdeci">KOKKOS_FUNCTION double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition</b> l_norm_tools.hpp:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -194,6 +194,9 @@ var NAVTREE =
       ] ],
       [ "Functions used for input and output.", "src_io.html", null ],
       [ "Mappings", "src_mapping.html", null ],
+      [ "Utility Functions", "src_math_tools.html", [
+        [ "Utility tools", "src_math_tools.html#src_math_tools__Utility_tools", null ]
+      ] ],
       [ "Multipatch", "src_multipatch.html", [
         [ "Multipatch connectivity", "src_multipatch_connectivity.html", [
           [ "Patch", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch", null ],
@@ -224,9 +227,7 @@ var NAVTREE =
       [ "Quadrature Methods", "src_quadrature.html", null ],
       [ "SpeciesInfo (x, v_x)", "src_speciesinfo.html", null ],
       [ "Time Stepping Methods", "src_timestepper.html", null ],
-      [ "Utility Functions", "src_utils.html", [
-        [ "Utility tools", "src_utils.html#src_utils__Utility_tools", null ]
-      ] ]
+      [ "Utility Functions", "src_utils.html", null ]
     ] ],
     [ "Gyselalib++ tests", "tests.html", [
       [ "Tests on the templated advection operators", "tests_advection.html", [
@@ -265,9 +266,9 @@ var NAVTREEINDEX =
 "classFluidMoments.html",
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a",
 "classRK3.html#a468e0909ac8b50f109dc810879253134",
-"docs_CODING_STANDARD.html",
-"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Predictor-corrector",
-"tests_advection.html"
+"docs_Adding_docs.html#docs_Adding_docs__Mathematical_notation_in_documentation",
+"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Explicit_predictor-corrector",
+"test__cases__adv__field_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

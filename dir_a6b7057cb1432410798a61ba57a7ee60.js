@@ -6,7 +6,6 @@ var dir_a6b7057cb1432410798a61ba57a7ee60 =
     [ "ddc_helper.hpp", "ddc__helper_8hpp_source.html", null ],
     [ "directional_tag.hpp", "directional__tag_8hpp_source.html", null ],
     [ "geometry_descriptors.hpp", "geometry__descriptors_8hpp_source.html", null ],
-    [ "math_tools.hpp", "src_2utils_2math__tools_8hpp.html", "src_2utils_2math__tools_8hpp" ],
     [ "mesh_builder.hpp", "mesh__builder_8hpp_source.html", null ],
     [ "non_uniform_interpolation_points.hpp", "non__uniform__interpolation__points_8hpp_source.html", null ],
     [ "preprocessor.hpp", "preprocessor_8hpp_source.html", null ],
