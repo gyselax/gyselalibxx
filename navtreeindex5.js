@@ -1,5 +1,12 @@
 var NAVTREEINDEX5 =
 {
+"dir_fff31245b39ef81c8e6b4b2456b9c284.html":[16,0,5,1],
+"directional__tag_8hpp_source.html":[16,0,19,4],
+"discrete__mapping__builder_8hpp_source.html":[16,2,0,0,0,0,7],
+"discrete__to__cartesian_8hpp_source.html":[16,2,0,0,0,0,8],
+"docs_Adding_docs.html":[5],
+"docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally":[5,0],
+"docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_code_structures":[5,1],
 "docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[5,2],
 "docs_Adding_docs.html#docs_Adding_docs__Documenting_functions":[5,3],
 "docs_Adding_docs.html#docs_Adding_docs__Mathematical_notation_in_documentation":[5,4],
@@ -162,6 +169,8 @@ var NAVTREEINDEX5 =
 "output_8hpp_source.html":[16,0,9,1],
 "pages.html":[],
 "paraconfpp_8hpp_source.html":[16,0,14,0],
+"partial__derivatives_8hpp.html":[16,0,11,1],
+"partial__derivatives_8hpp_source.html":[16,0,11,1],
 "patch_8hpp_source.html":[16,0,13,0,7],
 "pdi__helper_8hpp_source.html":[16,0,9,2],
 "physical__geometry_8hpp_source.html":[16,1,2,0,8],
@@ -240,14 +249,5 @@ var NAVTREEINDEX5 =
 "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case":[12,3,1,0],
 "src_geometryRTheta_geometry.html":[12,3,2],
 "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts":[12,3,2,0],
-"src_geometryRTheta_initialization.html":[12,3,3],
-"src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Contents":[12,3,3,2],
-"src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Diocotron_instability":[12,3,3,0],
-"src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Vortex_merger":[12,3,3,1],
-"src_geometryRTheta_interpolation.html":[12,3,4],
-"src_geometryRTheta_poisson.html":[12,3,5],
-"src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Contents":[12,3,5,3],
-"src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__References":[12,3,5,2],
-"src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson-like_equation":[12,3,5,0],
-"src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests":[12,3,5,1]
+"src_geometryRTheta_initialization.html":[12,3,3]
 };

@@ -1,5 +1,15 @@
 var NAVTREEINDEX7 =
 {
+"structonion__shape__uniform__2d__2patches_1_1GridR.html":[15,9,2],
+"structonion__shape__uniform__2d__2patches_1_1GridTheta.html":[15,9,3],
+"structonion__shape__uniform__2d__2patches_1_1R.html":[15,9,4],
+"structonion__shape__uniform__2d__2patches_1_1Theta.html":[15,9,5],
+"structperiodic__strips__uniform__2d__9patches_1_1BSplinesX.html":[15,10,0],
+"structperiodic__strips__uniform__2d__9patches_1_1BSplinesY.html":[15,10,1],
+"structperiodic__strips__uniform__2d__9patches_1_1GridX.html":[15,10,2],
+"structperiodic__strips__uniform__2d__9patches_1_1GridY.html":[15,10,3],
+"structperiodic__strips__uniform__2d__9patches_1_1X.html":[15,10,4],
+"structperiodic__strips__uniform__2d__9patches_1_1Y.html":[15,10,5],
 "structphysical__geometry_1_1X.html":[15,11,0],
 "structphysical__geometry_1_1Y.html":[15,11,1],
 "test__cases__adv__field_8hpp_source.html":[16,1,1,2,0],

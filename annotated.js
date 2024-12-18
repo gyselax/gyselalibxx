@@ -304,6 +304,7 @@ var annotated =
     [ "OnionPatchLocator", "classOnionPatchLocator.html", null ],
     [ "OnionPatchLocator< MultipatchType< IdxRangeOnPatch, Patches... >, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace >", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html", "classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa" ],
     [ "OutsideEdge", "structOutsideEdge.html", null ],
+    [ "PartialDerivative", "classPartialDerivative.html", "classPartialDerivative" ],
     [ "Patch", "structPatch.html", null ],
     [ "Patch< grid1, grid2, bsplines_dim1, bsplines_dim2 >", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html", "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4" ],
     [ "PoissonLikeRHSFunction", "classPoissonLikeRHSFunction.html", "classPoissonLikeRHSFunction" ],

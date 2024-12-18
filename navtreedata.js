@@ -195,6 +195,7 @@ var NAVTREE =
       [ "Functions used for input and output.", "src_io.html", null ],
       [ "Mappings", "src_mapping.html", null ],
       [ "Utility Functions", "src_math_tools.html", [
+        [ "Derivative tools", "src_math_tools.html#src_math_tools__Derivative_tools", null ],
         [ "Utility tools", "src_math_tools.html#src_math_tools__Utility_tools", null ]
       ] ],
       [ "Multipatch", "src_multipatch.html", [
@@ -265,10 +266,10 @@ var NAVTREEINDEX =
 "classCollisionsIntra.html#a164c6c249095a533900a12e2f1f48e25",
 "classFluidMoments.html",
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a",
-"classRK3.html#a468e0909ac8b50f109dc810879253134",
-"docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods",
-"src_geometryRTheta_time_solver.html",
-"structphysical__geometry_1_1X.html"
+"classRK2.html#a9a7f95c2396c54b9f6323cbd444dd8c1",
+"dir_fff31245b39ef81c8e6b4b2456b9c284.html",
+"src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Contents",
+"structonion__shape__uniform__2d__2patches_1_1GridR.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
