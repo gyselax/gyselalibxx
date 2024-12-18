@@ -39,9 +39,9 @@ public:
     using memory_space = typename ExecSpace::memory_space;
 
     /// The vector type in the coordinate system taken as input.
-    using vector_element_type_in = typename ddc::detail::TaggedVector<double, XIn, YIn>;
+    using vector_element_type_in = DVector<XIn, YIn>;
     /// The vector type in the coordinate system returned as output.
-    using vector_element_type_out = typename ddc::detail::TaggedVector<double, XOut, YOut>;
+    using vector_element_type_out = DVector<XOut, YOut>;
 
 private:
     Mapping m_mapping;

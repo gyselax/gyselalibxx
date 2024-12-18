@@ -14,7 +14,6 @@ target_link_libraries(advection_rp
         gslx::geometry_RTheta
         gslx::interpolation_2D_rp
         gslx::mapping
-        gslx::math_tools
         gslx::utils
 )
 add_library(gslx::advection_rp ALIAS advection_rp)

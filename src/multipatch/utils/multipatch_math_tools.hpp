@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-#include "l_norm_tools.hpp"
+#include "math_tools.hpp"
 #include "multipatch_field.hpp"
 
 /**

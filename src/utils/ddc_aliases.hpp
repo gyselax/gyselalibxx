@@ -75,3 +75,27 @@ using UniformGridBase = ddc::UniformPointSampling<GridType>;
 /// An alias describing the type from which a non-uniform grid must inherit.
 template <class GridType>
 using NonUniformGridBase = ddc::NonUniformPointSampling<GridType>;
+
+/// A type describing a vector e.g. (E_x, E_y)
+template <class ElementType, class... Dims>
+class Vector : public ddc::detail::TaggedVector<ElementType, Dims...>
+{
+public:
+    /**
+     * @brief A constructor for a Vector to build from individual elements:
+     * E.g. Vector<double, X, Y>(1.0, 2.0)
+     *
+     * or to build from component vectors
+     * E.g. Vector<double, X, Y>(vec_x, vec_y)
+     *
+     * @param[in] p The element of the Vector.
+     */
+    template <class... Params>
+    KOKKOS_FUNCTION Vector(Params... p) : ddc::detail::TaggedVector<ElementType, Dims...>(p...)
+    {
+    }
+};
+
+/// A type describing a vector whose elements are doubles e.g. (E_x, E_y)
+template <class... Dims>
+using DVector = Vector<double, Dims...>;

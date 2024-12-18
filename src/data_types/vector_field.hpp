@@ -373,9 +373,7 @@ public:
     template <class QueryTag>
     inline constexpr chunk_span_type get() const noexcept
     {
-        static_assert(
-                ddc::in_tags_v<QueryTag, NDTypeTag>,
-                "requested Tag absent from TaggedVector");
+        static_assert(ddc::in_tags_v<QueryTag, NDTypeTag>, "requested Tag absent from Vector");
         return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_view();
     }
 };

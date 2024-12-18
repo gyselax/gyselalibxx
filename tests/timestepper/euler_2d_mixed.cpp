@@ -11,7 +11,7 @@
 #include "crank_nicolson.hpp"
 #include "directional_tag.hpp"
 #include "euler.hpp"
-#include "l_norm_tools.hpp"
+#include "math_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

@@ -60,8 +60,7 @@ class VectorFieldCommon<FieldType, ddc::detail::TypeSeq<DDims...>>
 
 public:
     /// @brief The type of the elements in the fields.
-    using element_type =
-            typename ddc::detail::TaggedVector<std::remove_const_t<data_type>, DDims...>;
+    using element_type = Vector<std::remove_const_t<data_type>, DDims...>;
 
     /**
      * @brief The IdxRange on which the fields in this object are defined.
@@ -74,7 +73,7 @@ public:
     using index_range_type = discrete_domain_type;
 
     /// @brief The type of the element returned when indexing this field (e.g. a tuple of doubles).
-    using element_ref_type = typename ddc::detail::TaggedVector<data_type&, DDims...>;
+    using element_ref_type = Vector<data_type&, DDims...>;
 
     /// @brief The tags describing the dimensions which make up the elements of the vector.
     using NDTypeTag = ddc::detail::TypeSeq<DDims...>;

@@ -4,7 +4,7 @@
 
 The classes VectorFieldMem and VectorField provide a way to represent a vector field. The two classes are required as VectorFieldMem contains FieldMem objects while VectorField contains Field objects.
 
-A VectorFieldMem or VectorField contains an array of FieldMem or Field objects. When the VectorField is indexed using the `operator()` a ddc::detail::TaggedVector type is returned. This is similiar to a `ddc::Coordinate` and can be accessed in the same way.
+A VectorFieldMem or VectorField contains an array of FieldMem or Field objects. When the VectorField is indexed using the `operator()` a Vector type is returned. This is similiar to a `ddc::Coordinate` and can be accessed in the same way.
 Internally the information for the vector fields along each dimension is stored in separate memory chunks. As a result it is not possible to obtain a reference to an element of a VectorField. Instead you must access the internal chunk using `ddcHelper::get`.
 
 In order to facilitate the usage of VectorField the utility functions `get_idx_range`, `ddcHelper::deepcopy`, and `ddcHelper::get` are provided. However for the best access it is advised to retrieve the Field and use this directly.

@@ -26,7 +26,7 @@
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
-#include "l_norm_tools.hpp"
+#include "math_tools.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
