@@ -12,6 +12,7 @@ target_link_libraries(Li_norms_spline_quadrature_tests
         sll::SLL
         gslx::geometry_RTheta
         gslx::quadrature
+        gslx::math_tools
         gslx::utils
 
 )
