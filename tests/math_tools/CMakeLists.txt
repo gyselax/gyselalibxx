@@ -5,6 +5,7 @@ include(GoogleTest)
 
 add_executable(unit_tests_math_tools
     test_lnorm_tools.cpp
+    test_partial_derivatives.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_math_tools
@@ -13,7 +14,7 @@ target_link_libraries(unit_tests_math_tools
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-	gslx::math_tools
+        gslx::math_tools
         gslx::utils
 )
 
