@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"docs_Adding_docs.html#docs_Adding_docs__Documentation_describing_general_methods":[5,2],
+"docs_Adding_docs.html#docs_Adding_docs__Documenting_functions":[5,3],
 "docs_Adding_docs.html#docs_Adding_docs__Mathematical_notation_in_documentation":[5,4],
 "docs_CODING_STANDARD.html":[6],
 "docs_CODING_STANDARD.html#docs_CODING_STANDARD__Code_Organisation":[6,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Contents":[12,3,5,3],
 "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__References":[12,3,5,2],
 "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson-like_equation":[12,3,5,0],
-"src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests":[12,3,5,1],
-"src_geometryRTheta_time_solver.html":[12,3,6],
-"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Contents":[12,3,6,4]
+"src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests":[12,3,5,1]
 };

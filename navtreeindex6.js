@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"src_geometryRTheta_time_solver.html":[12,3,6],
+"src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Contents":[12,3,6,4],
 "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Explicit_predictor-corrector":[12,3,6,1],
 "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Implicit_predictor-corrector":[12,3,6,2],
 "src_geometryRTheta_time_solver.html#src_geometryRTheta_time_solver__Predictor-corrector":[12,3,6,0],
@@ -181,15 +183,15 @@ var NAVTREEINDEX6 =
 "structSpecies.html":[15,205],
 "structT.html":[15,212],
 "structTheta.html":[15,213],
-"structVpar.html":[15,229],
-"structVr.html":[15,230],
-"structVtheta.html":[15,231],
-"structVx.html":[15,232],
-"structVy.html":[15,233],
-"structX.html":[15,234],
-"structX__pC.html":[15,235],
-"structY.html":[15,236],
-"structY__pC.html":[15,237],
+"structVpar.html":[15,230],
+"structVr.html":[15,231],
+"structVtheta.html":[15,232],
+"structVx.html":[15,233],
+"structVy.html":[15,234],
+"structX.html":[15,235],
+"structX__pC.html":[15,236],
+"structY.html":[15,237],
+"structY__pC.html":[15,238],
 "structcartesian__product__impl_3_01std_1_1tuple_3_01std_1_1tuple_3_01HeadArgs_8_8_8_01_4_00_01Ta2e54ffdefaa524ceede7a120148cdbe5.html":[15,38],
 "structcollisions__dimensions_1_1InternalSpoofGrid.html":[15,0,13],
 "structcollisions__dimensions_1_1InternalSpoofGridR.html":[15,0,14],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "structperiodic__strips__uniform__2d__9patches_1_1GridX.html":[15,10,2],
 "structperiodic__strips__uniform__2d__9patches_1_1GridY.html":[15,10,3],
 "structperiodic__strips__uniform__2d__9patches_1_1X.html":[15,10,4],
-"structperiodic__strips__uniform__2d__9patches_1_1Y.html":[15,10,5],
-"structphysical__geometry_1_1X.html":[15,11,0],
-"structphysical__geometry_1_1Y.html":[15,11,1]
+"structperiodic__strips__uniform__2d__9patches_1_1Y.html":[15,10,5]
 };

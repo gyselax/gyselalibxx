@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"structphysical__geometry_1_1X.html":[15,11,0],
+"structphysical__geometry_1_1Y.html":[15,11,1],
 "test__cases__adv__field_8hpp_source.html":[16,1,1,2,0],
 "test__utils_8hpp_source.html":[16,2,0,1,3],
 "tests.html":[13],

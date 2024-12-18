@@ -349,6 +349,7 @@ var annotated =
     [ "TriangularBernsteinPolynomialBasis", "classTriangularBernsteinPolynomialBasis.html", "classTriangularBernsteinPolynomialBasis" ],
     [ "tuple_to_types", "structtuple__to__types.html", null ],
     [ "tuple_to_types< std::tuple< Args... > >", "structtuple__to__types_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", null ],
+    [ "Vector", "classVector.html", "classVector" ],
     [ "VectorField", "classVectorField.html", "classVectorField" ],
     [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
     [ "VectorFieldMem", "classVectorFieldMem.html", "classVectorFieldMem" ],
