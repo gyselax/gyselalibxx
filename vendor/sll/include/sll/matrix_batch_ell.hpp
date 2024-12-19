@@ -207,14 +207,14 @@ public:
         Kokkos::deep_copy(x_view, b);
         m_solver->apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x_view));
         m_solver->remove_logger(logger);
-        //check convergence
-        check_conv(batch_size(), m_tol, gko_exec, logger);
         // save logger data
         if (m_with_logger) {
             std::fstream log_file("ell_log.txt", std::ios::out | std::ios::app);
             save_logger(log_file, m_batch_matrix_ell, x_view, b, logger, m_tol);
             log_file.close();
         }
+        //check convergence
+        check_conv(batch_size(), m_tol, gko_exec, logger);
 
         Kokkos::deep_copy(b, x_view);
     }
