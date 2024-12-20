@@ -3,7 +3,6 @@ spack:
     unify: when_possible
   specs:
   - 'cmake@3.15:'
-  - 'benchmark'
   - 'googletest +gmock'
   - 'fftw ~mpi precision=double'
   - 'lapack'

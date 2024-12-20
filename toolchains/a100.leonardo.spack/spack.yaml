@@ -5,7 +5,6 @@ spack:
   - compilers:
     - gcc@12
   - packages:
-    - benchmark
     - cmake@3.22:3
     - cuda
     - eigen

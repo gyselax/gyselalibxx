@@ -15,7 +15,6 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
-option(GYSELALIBXX_BUILD_BENCHMARKS "Build the benchmarks." OFF)
 option(GYSELALIBXX_BUILD_DOCUMENTATION "Build the documentation." OFF)
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
 option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
@@ -89,29 +88,6 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
     find_package(GTest "1.12" REQUIRED)
   endif()
-endif()
-
-## if benchmarks are enabled, use (google) benchmark from `vendor/`
-### we use it to write our micro-benchmarks
-### this must come after googletest
-if("${GYSELALIBXX_BUILD_BENCHMARKS}")
-    set(GYSELALIBXX_benchmark_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `benchmark` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
-    set_property(CACHE GYSELALIBXX_benchmark_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
-
-    if("${GYSELALIBXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "AUTO")
-      find_package(benchmark "1.6" QUIET)
-      if(NOT "${benchmark_FOUND}")
-        option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
-        option(BENCHMARK_ENABLE_INSTALL "Enable installation of benchmark. (Projects embedding benchmark may want to turn this OFF.)" OFF)
-        add_subdirectory("vendor/benchmark/" "benchmark") # SYSTEM)
-      endif()
-    elseif("${GYSELALIBXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
-      option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
-      option(BENCHMARK_ENABLE_INSTALL "Enable installation of benchmark. (Projects embedding benchmark may want to turn this OFF.)" OFF)
-      add_subdirectory("vendor/benchmark/" "benchmark") # SYSTEM)
-    elseif("${GYSELALIBXX_benchmark_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
-      find_package(benchmark "1.6" REQUIRED)
-    endif()
 endif()
 
 ## Use Kokkos from `vendor/`
