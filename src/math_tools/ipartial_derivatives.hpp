@@ -15,7 +15,9 @@
 
 
 /**
- * @brief A super class for a partial derivative operator
+ * @brief A super class for a partial derivative operator.
+ * @tparam DFieldValue The type of the field on which the operator acts.
+ * @tparam DerivDirection The dimension Xi on which the partial derivative is calculated.
  */
 template <class DFieldValue, class DerivDirection>
 class IPartialDerivative
