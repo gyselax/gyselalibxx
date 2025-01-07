@@ -8,7 +8,8 @@
 
 /**
  * @brief A class which implementes a partial derivative operator
- * using a spline interpolation.
+ * using a central finite differences calculation. Forward and
+ * backward finite differences are used at the boundaries.
  */
 template <class DFieldValue, class DerivDirection>
 class CentralFDMPartialDerivative : public IPartialDerivative<DFieldValue, DerivDirection>
