@@ -1,10 +1,4 @@
-
 // SPDX-License-Identifier: MIT
-/**
- * @file partial_derivatives.hpp
- * File containing functions to compute the partial derivatives
- */
-
 #pragma once
 
 #include <ddc/ddc.hpp>
