@@ -8,6 +8,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ipartial_derivatives.hpp"
 
 
 /**
@@ -16,7 +17,7 @@
  */
 template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
 class SplinePartialDerivative
-    : IPartialDerivative<
+    : public IPartialDerivative<
               DField<typename FieldXiBuilderBatched::batched_interpolation_domain_type>,
               typename FieldXiBuilderBatched::continuous_dimension_type>
 {
@@ -34,16 +35,16 @@ private:
 
 public:
     /// The dimension Xi on which the partial derivative is calculated.
-    using base_type::DerivativeDirection;
+    using typename base_type::DerivativeDirection;
 
     /// The index range on which this operator acts.
-    using base_type::IdxRangeFieldVal;
+    using typename base_type::IdxRangeFieldVal;
 
     /// The type of the object that will be differentiated.
-    using base_type::DFieldVal;
+    using typename base_type::DFieldVal;
 
     /// The type of the calculated derivative.
-    using base_type::DConstFieldVal;
+    using typename base_type::DConstFieldVal;
 
 private:
     // Type for spline representation of the field
@@ -75,7 +76,7 @@ public:
     * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
     */
-    void operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval) final
+    void operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval) const final
     {
         // Build spline representation of the field ....................................
         FieldXiSplineMem fieldxi_coefs_alloc(m_fieldxi_builder.batched_spline_domain());
