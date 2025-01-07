@@ -15,9 +15,13 @@
 
 /**
  * @brief A class which implementes a partial derivative operator
+ * using a spline interpolation.
  */
 template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
-class PartialDerivative
+class SplinePartialDerivative
+    : IPartialDerivative<
+              DField<typename FieldXiBuilderBatched::batched_interpolation_domain_type>,
+              typename FieldXiBuilderBatched::continuous_dimension_type>
 {
     static_assert(std::is_same_v<
                   typename FieldXiBuilderBatched::batched_spline_domain_type,
@@ -26,18 +30,23 @@ class PartialDerivative
                   typename FieldXiBuilderBatched::batched_interpolation_domain_type,
                   typename FieldXiEvaluatorBatched::batched_evaluation_domain_type>);
 
+private:
+    using base_type = IPartialDerivative<
+            DField<typename FieldXiBuilderBatched::batched_interpolation_domain_type>,
+            typename FieldXiBuilderBatched::continuous_dimension_type>;
+
 public:
     /// The dimension Xi on which the partial derivative is calculated.
-    using DerivativeDirection = typename FieldXiBuilderBatched::continuous_dimension_type;
+    using base_type::DerivativeDirection;
 
     /// The index range on which this operator acts.
-    using IdxRangeFieldVal = typename FieldXiBuilderBatched::batched_interpolation_domain_type;
+    using base_type::IdxRangeFieldVal;
 
     /// The type of the object that will be differentiated.
-    using DFieldVal = DField<IdxRangeFieldVal>;
+    using base_type::DFieldVal;
 
     /// The type of the calculated derivative.
-    using DConstFieldVal = DConstField<IdxRangeFieldVal>;
+    using base_type::DConstFieldVal;
 
 private:
     // Type for spline representation of the field
@@ -50,12 +59,12 @@ private:
 
 public:
     /**
-    * @brief Construct an instance of the class PartialDerivative.
+    * @brief Construct an instance of the class SplinePartialDerivative.
     *
     * @param fieldxi_builder Builder for intermediate interpolation representation.
     * @param fieldxi_evaluator Evaluator for intermediate interpolation representation.
     */
-    explicit PartialDerivative(
+    explicit SplinePartialDerivative(
             FieldXiBuilderBatched const& fieldxi_builder,
             FieldXiEvaluatorBatched const& fieldxi_evaluator)
         : m_fieldxi_builder(fieldxi_builder)
@@ -69,7 +78,7 @@ public:
     * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
     */
-    void operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval)
+    void operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval) final
     {
         // Build spline representation of the field ....................................
         FieldXiSplineMem fieldxi_coefs_alloc(m_fieldxi_builder.batched_spline_domain());

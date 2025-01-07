@@ -74,7 +74,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         GridY>;
 
 
-static void TestPartialDerivativeDx()
+static void TestSplinePartialDerivativeDx()
 {
     int n_elems_x(10);
     int n_elems_y(20);
@@ -115,7 +115,7 @@ static void TestPartialDerivativeDx()
                         = ddc::coordinate(idx_x) * ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
             });
 
-    PartialDerivative<SplineXBuilder, SplineXEvaluator> partial_dx(builder_x, spline_evaluator_x);
+    SplinePartialDerivative<SplineXBuilder, SplineXEvaluator> partial_dx(builder_x, spline_evaluator_x);
     DFieldMemXY dfield_dx_xy_alloc(idxrange_xy);
     DFieldXY dfield_dx_xy = get_field(dfield_dx_xy_alloc);
     partial_dx(dfield_dx_xy, get_const_field(field_xy));
@@ -135,9 +135,9 @@ static void TestPartialDerivativeDx()
 }
 
 
-TEST(PartialDerivative, PartialDerivativeDx)
+TEST(PartialDerivative, SplinePartialDerivativeDx)
 {
-    TestPartialDerivativeDx();
+    TestSplinePartialDerivativeDx();
 }
 
 } // namespace
