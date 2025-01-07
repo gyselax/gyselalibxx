@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "ddc_aliases.hpp"
-#include "partial_derivatives.hpp"
+#include "spline_partial_derivatives.hpp"
 
 namespace {
 

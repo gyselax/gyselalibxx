@@ -16,14 +16,14 @@
 /**
  * @brief A super class for a partial derivative operator
  */
-template <class DFieldValue, class DerivativeDirection>
+template <class DFieldValue, class DerivDirection>
 class IPartialDerivative
 {
     static_assert(is_borrowed_chunk_v<DFieldValue>);
 
 public:
     /// The dimension Xi on which the partial derivative is calculated.
-    using DerivativeDirection = typename FieldXiBuilderBatched::continuous_dimension_type;
+    using DerivativeDirection = DerivDirection;
 
     /// The index range on which this operator acts.
     using IdxRangeFieldVal = typename DFieldValue::discrete_domain_type;

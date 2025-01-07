@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MIT
 /**
  * @file partial_derivatives.hpp
@@ -6,8 +5,6 @@
  */
 
 #pragma once
-
-#include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
