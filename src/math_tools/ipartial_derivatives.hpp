@@ -36,7 +36,8 @@ public:
     using DConstFieldVal = typename DFieldValue::view_type;
 
     /// The type of the grid on the dimension Xi on which the partial derivative is calculated.
-    using GridDerivativeDirection = find_grid_t<DerivativeDirection, ddc::to_type_seq_t<IdxRangeFieldVal>>;
+    using GridDerivativeDirection
+            = find_grid_t<DerivativeDirection, ddc::to_type_seq_t<IdxRangeFieldVal>>;
 
     /// The index range of the dimension Xi on which the partial derivative is calculated.
     using IdxRangeDeriv = IdxRange<GridDerivativeDirection>;

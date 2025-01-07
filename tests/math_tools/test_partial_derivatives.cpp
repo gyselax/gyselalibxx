@@ -75,7 +75,9 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         GridX,
         GridY>;
 
-void test_partial_derivative_dx(IPartialDerivative<DFieldXY, X>const & partial_dx, IdxRangeXY idxrange_xy)
+void test_partial_derivative_dx(
+        IPartialDerivative<DFieldXY, X> const& partial_dx,
+        IdxRangeXY idxrange_xy)
 {
     DFieldMemXY field_xy_alloc(idxrange_xy);
     DFieldXY field_xy = get_field(field_xy_alloc);
