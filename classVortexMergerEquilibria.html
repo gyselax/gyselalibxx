@@ -115,9 +115,9 @@ $(document).ready(function(){initNavTree('classVortexMergerEquilibria.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa0e09b4111f03a4bcdcd07172611bf8e" id="r_aa0e09b4111f03a4bcdcd07172611bf8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#aa0e09b4111f03a4bcdcd07172611bf8e">VortexMergerEquilibria</a> (Mapping const &amp;mapping, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</td></tr>
-<tr class="memdesc:aa0e09b4111f03a4bcdcd07172611bf8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classVortexMergerEquilibria.html" title="Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.">VortexMergerEquilibria</a>.  <br /></td></tr>
-<tr class="separator:aa0e09b4111f03a4bcdcd07172611bf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e5ac553bd6628804db325b59ca8605d" id="r_a8e5ac553bd6628804db325b59ca8605d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#a8e5ac553bd6628804db325b59ca8605d">VortexMergerEquilibria</a> (Mapping const &amp;mapping, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;evaluator, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound_host &gt; const &amp;poisson_solver)</td></tr>
+<tr class="memdesc:a8e5ac553bd6628804db325b59ca8605d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classVortexMergerEquilibria.html" title="Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.">VortexMergerEquilibria</a>.  <br /></td></tr>
+<tr class="separator:a8e5ac553bd6628804db325b59ca8605d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3b9139693f6f2aeabf9355d14c7c37b" id="r_ad3b9139693f6f2aeabf9355d14c7c37b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b">find_equilibrium</a> (host_t&lt; DFieldRTheta &gt; sigma, host_t&lt; DFieldRTheta &gt; phi_eq, host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; const &amp;function, double const phi_max, double const tau, int count_max=25) const</td></tr>
 <tr class="memdesc:ad3b9139693f6f2aeabf9355d14c7c37b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an equilibrium.  <br /></td></tr>
 <tr class="separator:ad3b9139693f6f2aeabf9355d14c7c37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,8 +135,8 @@ class VortexMergerEquilibria&lt; Mapping &gt;</div><p>Equilibrium solution of a 
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa0e09b4111f03a4bcdcd07172611bf8e" name="aa0e09b4111f03a4bcdcd07172611bf8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0e09b4111f03a4bcdcd07172611bf8e">&#9670;&#160;</a></span>VortexMergerEquilibria()</h2>
+<a id="a8e5ac553bd6628804db325b59ca8605d" name="a8e5ac553bd6628804db325b59ca8605d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e5ac553bd6628804db325b59ca8605d">&#9670;&#160;</a></span>VortexMergerEquilibria()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,19 +161,19 @@ template&lt;class Mapping &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SplineRThetaBuilder const &amp;&#160;</td>
+          <td class="paramtype">SplineRThetaBuilder_host const &amp;&#160;</td>
           <td class="paramname"><em>builder</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SplineRThetaEvaluatorNullBound const &amp;&#160;</td>
+          <td class="paramtype">SplineRThetaEvaluatorNullBound_host const &amp;&#160;</td>
           <td class="paramname"><em>evaluator</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound_host &gt; const &amp;&#160;</td>
           <td class="paramname"><em>poisson_solver</em>&#160;</td>
         </tr>
         <tr>

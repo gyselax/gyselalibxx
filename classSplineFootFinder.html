@@ -124,9 +124,9 @@ Inheritance diagram for SplineFootFinder&lt; TimeStepper, AdvectionDomain, Mappi
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa188b86baa1df673cc32f3503a044dda" id="r_aa188b86baa1df673cc32f3503a044dda"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#aa188b86baa1df673cc32f3503a044dda">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, Mapping const &amp;mapping, SplineRThetaBuilder const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound const &amp;evaluator_advection_field, double epsilon=1e-12)</td></tr>
-<tr class="memdesc:aa188b86baa1df673cc32f3503a044dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <br /></td></tr>
-<tr class="separator:aa188b86baa1df673cc32f3503a044dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea35ec36fccba4a249ae710346ac9db3" id="r_aea35ec36fccba4a249ae710346ac9db3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#aea35ec36fccba4a249ae710346ac9db3">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, Mapping const &amp;mapping, SplineRThetaBuilder_host const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound_host const &amp;evaluator_advection_field, double epsilon=1e-12)</td></tr>
+<tr class="memdesc:aea35ec36fccba4a249ae710346ac9db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <br /></td></tr>
+<tr class="separator:aea35ec36fccba4a249ae710346ac9db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae557bc9c915b40ddfecad5332dced74c" id="r_ae557bc9c915b40ddfecad5332dced74c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#ae557bc9c915b40ddfecad5332dced74c">operator()</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt; &gt; feet, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; &gt; advection_field, double dt) const final</td></tr>
 <tr class="memdesc:ae557bc9c915b40ddfecad5332dced74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <br /></td></tr>
 <tr class="separator:ae557bc9c915b40ddfecad5332dced74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,8 +143,8 @@ class SplineFootFinder&lt; TimeStepper, AdvectionDomain, Mapping &gt;</div><p>De
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa188b86baa1df673cc32f3503a044dda" name="aa188b86baa1df673cc32f3503a044dda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa188b86baa1df673cc32f3503a044dda">&#9670;&#160;</a></span>SplineFootFinder()</h2>
+<a id="aea35ec36fccba4a249ae710346ac9db3" name="aea35ec36fccba4a249ae710346ac9db3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea35ec36fccba4a249ae710346ac9db3">&#9670;&#160;</a></span>SplineFootFinder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,13 +175,13 @@ template&lt;class TimeStepper , class <a class="el" href="classAdvectionDomain.h
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SplineRThetaBuilder const &amp;&#160;</td>
+          <td class="paramtype">SplineRThetaBuilder_host const &amp;&#160;</td>
           <td class="paramname"><em>builder_advection_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SplineRThetaEvaluatorConstBound const &amp;&#160;</td>
+          <td class="paramtype">SplineRThetaEvaluatorConstBound_host const &amp;&#160;</td>
           <td class="paramname"><em>evaluator_advection_field</em>, </td>
         </tr>
         <tr>

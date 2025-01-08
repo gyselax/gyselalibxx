@@ -23,7 +23,7 @@ var searchData=
   ['volume_5fquadrature_5fnd_2ehpp_20',['volume_quadrature_nd.hpp',['../volume__quadrature__nd_8hpp.html',1,'']]],
   ['vortex_20merger_21',['vortex merger',['../simulations_geometryRTheta_vortex_merger.html#simulations_geometryRTheta_vortex_merger__Test_case_-_vortex_merger',1,'Test case - vortex merger'],['../simulations_geometryRTheta_vortex_merger.html',1,'Vortex merger'],['../src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Vortex_merger',1,'Vortex merger']]],
   ['vortexmergerdensitysolution_22',['vortexmergerdensitysolution',['../classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75',1,'VortexMergerDensitySolution::VortexMergerDensitySolution()'],['../classVortexMergerDensitySolution.html',1,'VortexMergerDensitySolution&lt; Mapping &gt;']]],
-  ['vortexmergerequilibria_23',['vortexmergerequilibria',['../classVortexMergerEquilibria.html#aa0e09b4111f03a4bcdcd07172611bf8e',1,'VortexMergerEquilibria::VortexMergerEquilibria()'],['../classVortexMergerEquilibria.html',1,'VortexMergerEquilibria&lt; Mapping &gt;']]],
+  ['vortexmergerequilibria_23',['vortexmergerequilibria',['../classVortexMergerEquilibria.html#a8e5ac553bd6628804db325b59ca8605d',1,'VortexMergerEquilibria::VortexMergerEquilibria()'],['../classVortexMergerEquilibria.html',1,'VortexMergerEquilibria&lt; Mapping &gt;']]],
   ['vpar_24',['Vpar',['../structVpar.html',1,'']]],
   ['vpar_20mu_25',['Geometry (vpar, mu)',['../src_geometryVparMu.html',1,'src']]],
   ['vr_26',['Vr',['../structVr.html',1,'']]],

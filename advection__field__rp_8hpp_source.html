@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_class" href="classPolarSplineEvaluator.html">PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace&gt;</a> <span class="keyword">const</span></div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            m_polar_spline_evaluator;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    SplineRThetaEvaluatorNullBound <span class="keyword">const</span> m_spline_evaluator;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    SplineRThetaEvaluatorNullBound_host <span class="keyword">const</span> m_spline_evaluator;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">double</span> <span class="keyword">const</span> m_epsilon;</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        IdxRangeRTheta <span class="keyword">const</span> grid = get_idx_range(advection_field_xy);</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="comment">// Compute the spline representation of the electrostatic potential</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        SplineRThetaBuilder <span class="keyword">const</span> builder(grid);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        SplineRThetaBuilder_host <span class="keyword">const</span> builder(grid);</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        IdxRangeBSRTheta <span class="keyword">const</span> idx_range_bsplinesRTheta = get_spline_idx_range(builder);</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        host_t&lt;Spline2DMem&gt; electrostatic_potential_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));</div>
@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keyword">static_assert</span>(</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                (std::is_same_v&lt;</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                         Evaluator,</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                         SplineRThetaEvaluatorNullBound&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;Spline2D&gt;&gt;)</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                         SplineRThetaEvaluatorNullBound_host&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;Spline2D&gt;&gt;)</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                || (std::is_same_v&lt;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                            Evaluator,</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                            <a class="code hl_class" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt;</div>
@@ -353,7 +353,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        IdxRangeRTheta <span class="keyword">const</span> grid = get_idx_range(electrostatic_potential);</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <span class="comment">// Compute the spline representation of the electrostatic potential</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        SplineRThetaBuilder <span class="keyword">const</span> builder(grid);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        SplineRThetaBuilder_host <span class="keyword">const</span> builder(grid);</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        IdxRangeBSRTheta <span class="keyword">const</span> idx_range_bsplinesRTheta = get_spline_idx_range(builder);</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        host_t&lt;Spline2DMem&gt; electrostatic_potential_coef(idx_range_bsplinesRTheta);</div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));</div>
@@ -408,7 +408,7 @@ $(document).ready(function(){initNavTree('advection__field__rp_8hpp_source.html'
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>        <span class="keyword">static_assert</span>(</div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>                (std::is_same_v&lt;</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>                         Evaluator,</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>                         SplineRThetaEvaluatorNullBound&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;Spline2D&gt;&gt;)</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>                         SplineRThetaEvaluatorNullBound_host&gt; &amp;&amp; std::is_same_v&lt;SplineType, host_t&lt;Spline2D&gt;&gt;)</div>
 <div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>                || (std::is_same_v&lt;</div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>                            Evaluator,</div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>                            <a class="code hl_class" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt;</div>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['r_0',['r',['../structonion__shape__uniform__2d__2patches_1_1R.html',1,'onion_shape_uniform_2d_2patches::R'],['../structR.html',1,'R'],['../structonion__shape__non__uniform__2d__2patches_1_1R.html',1,'onion_shape_non_uniform_2d_2patches::R'],['../classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9',1,'PolarSplineFEMPoissonLikeSolver::R']]],
+  ['r_0',['r',['../structonion__shape__uniform__2d__2patches_1_1R.html',1,'onion_shape_uniform_2d_2patches::R'],['../structR.html',1,'R'],['../structonion__shape__non__uniform__2d__2patches_1_1R.html',1,'onion_shape_non_uniform_2d_2patches::R'],['../classPolarSplineFEMPoissonLikeSolver.html#a4be4b0150bea8b8972bf3400e52d1bcb',1,'PolarSplineFEMPoissonLikeSolver::R']]],
   ['r_20theta_1',['r theta',['../src_geometryRTheta.html',1,'Geometry (r, theta)'],['../tests_geometryRTheta.html',1,'Tests : Geometry (r, theta)']]],
   ['r_20theta_20geometry_2',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
   ['r1_5fmax_3',['r1_max',['../classMultipatchSplineOnionShapeTest.html#a397a53a5abf7d9072f1fae5c4bae6f86',1,'MultipatchSplineOnionShapeTest']]],

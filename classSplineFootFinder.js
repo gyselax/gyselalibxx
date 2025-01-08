@@ -1,5 +1,5 @@
 var classSplineFootFinder =
 [
-    [ "SplineFootFinder", "classSplineFootFinder.html#aa188b86baa1df673cc32f3503a044dda", null ],
+    [ "SplineFootFinder", "classSplineFootFinder.html#aea35ec36fccba4a249ae710346ac9db3", null ],
     [ "operator()", "classSplineFootFinder.html#ae557bc9c915b40ddfecad5332dced74c", null ]
 ];
