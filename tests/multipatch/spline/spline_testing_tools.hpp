@@ -39,7 +39,7 @@ using SplineInterpPointsTheta = ddc::GrevilleInterpolationPoints<
 
 
 template <int PatchIdx, class ExecSpace>
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         ExecSpace,
         typename ExecSpace::memory_space,
         BSplinesR<PatchIdx>,

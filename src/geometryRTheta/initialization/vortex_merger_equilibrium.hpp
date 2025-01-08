@@ -25,13 +25,13 @@ class VortexMergerEquilibria
 private:
     Mapping const& m_mapping;
     IdxRangeRTheta const& m_grid;
-    SplineRThetaBuilder const& m_builder;
-    SplineRThetaEvaluatorNullBound const& m_evaluator;
+    SplineRThetaBuilder_host const& m_builder;
+    SplineRThetaEvaluatorNullBound_host const& m_evaluator;
     PolarSplineFEMPoissonLikeSolver<
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+            SplineRThetaEvaluatorNullBound_host> const& m_poisson_solver;
 
 public:
     /**
@@ -54,13 +54,13 @@ public:
     VortexMergerEquilibria(
             Mapping const& mapping,
             IdxRangeRTheta const& grid,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& evaluator,
+            SplineRThetaBuilder_host const& builder,
+            SplineRThetaEvaluatorNullBound_host const& evaluator,
             PolarSplineFEMPoissonLikeSolver<
                     GridR,
                     GridTheta,
                     PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
+                    SplineRThetaEvaluatorNullBound_host> const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
         , m_builder(builder)

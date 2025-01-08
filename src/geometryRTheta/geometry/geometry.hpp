@@ -120,7 +120,7 @@ struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_typ
 };
 
 // --- Operators
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
         BSplinesR,
@@ -135,7 +135,7 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         GridR,
         GridTheta>;
 
-using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
         BSplinesR,
@@ -149,7 +149,7 @@ using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
         GridR,
         GridTheta>;
 
-using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
         BSplinesR,
