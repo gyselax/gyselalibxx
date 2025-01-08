@@ -29,9 +29,10 @@ var searchData=
   ['vr_26',['Vr',['../structVr.html',1,'']]],
   ['vs_20discrete_20objects_27',['Continuous vs. discrete objects',['../docs_DDC_in_gyselalibxx.html#autotoc_md16',1,'']]],
   ['vs_20functional_20programming_28',['Object-Oriented vs. Functional Programming',['../docs_CODING_STANDARD.html#autotoc_md8',1,'']]],
-  ['vtheta_29',['Vtheta',['../structVtheta.html',1,'']]],
-  ['vx_30',['vx',['../tests_advection.html#autotoc_md76',1,'Advection along x on (t, x, vx)'],['../src_geometryXVx_geometry.html',1,'Geometry X-Vx'],['../structVx.html',1,'Vx']]],
-  ['vx_20geometry_31',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
-  ['vx_20vy_32',['vx vy',['../tests_advection.html#autotoc_md77',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy']]],
-  ['vy_33',['vy',['../tests_advection.html#autotoc_md77',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy'],['../structVy.html',1,'Vy']]]
+  ['vs_20object_20oriented_20programming_20oop_29',['Key Difference: Functional vs. Object-Oriented Programming (OOP)',['../docs_getting_started.html#autotoc_md22',1,'']]],
+  ['vtheta_30',['Vtheta',['../structVtheta.html',1,'']]],
+  ['vx_31',['vx',['../tests_advection.html#autotoc_md82',1,'Advection along x on (t, x, vx)'],['../src_geometryXVx_geometry.html',1,'Geometry X-Vx'],['../structVx.html',1,'Vx']]],
+  ['vx_20geometry_32',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
+  ['vx_20vy_33',['vx vy',['../tests_advection.html#autotoc_md83',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy']]],
+  ['vy_34',['vy',['../tests_advection.html#autotoc_md83',1,'Advection along x and y on (t, x, y, vx, vy)'],['../src_geometryXYVxVy_geometry.html',1,'Geometry X Y-Vx Vy'],['../structVy.html',1,'Vy']]]
 ];

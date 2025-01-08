@@ -80,6 +80,11 @@ var NAVTREE =
       [ "What is the difference between Debug and Release mode?", "docs_developer_FAQ.html#docs_developer_FAQ__What_is_the_difference_between_Debug_and_Release_mode", null ],
       [ "Should I use abort, assert, or static_assert to raise an error?", "docs_developer_FAQ.html#docs_developer_FAQ__Should_I_use_abort_assert_or_static_assert_to_raise_an_error", null ]
     ] ],
+    [ "Getting Started with Gyselalib++", "docs_getting_started.html", [
+      [ "Understanding Functional Programming in Gyselalib++", "docs_getting_started.html#docs_getting_started__Understanding_Functional_Programming_in_Gyselalibxx", null ],
+      [ "Navigating the Gyselalib++ Codebase", "docs_getting_started.html#docs_getting_started__Navigating_the_Gyselalibxx_Codebase", null ],
+      [ "Recommended Steps for Getting Started", "docs_getting_started.html#docs_getting_started__Recommended_Steps_for_Getting_Started", null ]
+    ] ],
     [ "Gyselalib++ simulations", "simulations.html", [
       [ "Simulations in (r, theta) geometry", "simulations_geometryRTheta.html", [
         [ "Diocotron instability", "simulations_geometryRTheta_diocotron.html", [
@@ -124,14 +129,14 @@ var NAVTREE =
           [ "Time integration methods", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Time_integration_methods", null ],
           [ "Advection domain", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_domain", null ],
           [ "Advection Field", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_Field", null ],
-          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md45", null ],
-          [ "References", "src_geometryRTheta_advection.html#autotoc_md46", null ],
-          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md47", null ]
+          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md51", null ],
+          [ "References", "src_geometryRTheta_advection.html#autotoc_md52", null ],
+          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md53", null ]
         ] ],
         [ "Advection Field finder", "src_geometryRTheta_advection_field.html", [
           [ "Guiding center case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case", null ],
-          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md52", null ],
-          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md53", null ]
+          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md58", null ],
+          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md59", null ]
         ] ],
         [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
           [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
@@ -268,8 +273,8 @@ var NAVTREEINDEX =
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a",
 "classRK2.html#a9a7f95c2396c54b9f6323cbd444dd8c1",
 "dir_fff31245b39ef81c8e6b4b2456b9c284.html",
-"src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Contents",
-"structonion__shape__uniform__2d__2patches_1_1GridR.html"
+"src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case",
+"structonion__shape__non__uniform__2d__2patches_1_1R.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

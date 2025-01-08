@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['b_20splines_0',['The B-splines',['../src_geometryRTheta_poisson.html#autotoc_md60',1,'']]],
-  ['b_20splines_20fem_1',['B-splines FEM',['../src_geometryRTheta_poisson.html#autotoc_md59',1,'']]],
+  ['b_20splines_0',['The B-splines',['../src_geometryRTheta_poisson.html#autotoc_md66',1,'']]],
+  ['b_20splines_20fem_1',['B-splines FEM',['../src_geometryRTheta_poisson.html#autotoc_md65',1,'']]],
   ['back_2',['back',['../classIdxRangeSlice.html#ae9abf3cd2e4f039672b79ceb7967c682',1,'IdxRangeSlice']]],
   ['backward_20semi_20lagrangian_20method_3',['Backward Semi-Lagrangian method',['../src_geometryRTheta_advection.html#src_geometryRTheta_advection__Backward_Semi-Lagrangian_method',1,'']]],
   ['backwardtypeseq_4',['backwardtypeseq',['../structconnectivity__details_1_1CollectAllInterfacesOnDim.html#af231202bb9b639a1829a4bba04b72bbc',1,'connectivity_details::CollectAllInterfacesOnDim::BackwardTypeSeq'],['../structconnectivity__details_1_1CollectAllGridsOnDim.html#af63c952e5dd5c666fe92c78d7dfe46fd',1,'connectivity_details::CollectAllGridsOnDim::BackwardTypeSeq']]],
@@ -28,8 +28,8 @@ var searchData=
   ['bsladvectionrtheta_25',['bsladvectionrtheta',['../classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972',1,'BslAdvectionRTheta::BslAdvectionRTheta()'],['../classBslAdvectionRTheta.html',1,'BslAdvectionRTheta&lt; FootFinder, Mapping &gt;']]],
   ['bsladvectionrtheta_3c_20splinefootfinder_2c_20mapping_20_3e_26',['BslAdvectionRTheta&lt; SplineFootFinder, Mapping &gt;',['../classBslAdvectionRTheta.html',1,'']]],
   ['bsladvectionspatial_27',['bsladvectionspatial',['../classBslAdvectionSpatial.html',1,'BslAdvectionSpatial&lt; Geometry, GridX &gt;'],['../classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d',1,'BslAdvectionSpatial::BslAdvectionSpatial()']]],
-  ['bsladvectionspatial_20and_20bsladvectionvelocity_28',['Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity',['../tests_advection.html#autotoc_md78',1,'']]],
-  ['bsladvectionvelocity_29',['bsladvectionvelocity',['../classBslAdvectionVelocity.html',1,'BslAdvectionVelocity&lt; Geometry, GridV &gt;'],['../classBslAdvectionVelocity.html#a85c69c265dbb2410fdd60f7b78117593',1,'BslAdvectionVelocity::BslAdvectionVelocity()'],['../tests_advection.html#autotoc_md78',1,'Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity']]],
+  ['bsladvectionspatial_20and_20bsladvectionvelocity_28',['Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity',['../tests_advection.html#autotoc_md84',1,'']]],
+  ['bsladvectionvelocity_29',['bsladvectionvelocity',['../classBslAdvectionVelocity.html',1,'BslAdvectionVelocity&lt; Geometry, GridV &gt;'],['../classBslAdvectionVelocity.html#a85c69c265dbb2410fdd60f7b78117593',1,'BslAdvectionVelocity::BslAdvectionVelocity()'],['../tests_advection.html#autotoc_md84',1,'Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity']]],
   ['bslexplicitpredcorrrtheta_30',['bslexplicitpredcorrrtheta',['../classBslExplicitPredCorrRTheta.html#a17140990cac2f0e062b46e35a9b8a516',1,'BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta()'],['../classBslExplicitPredCorrRTheta.html',1,'BslExplicitPredCorrRTheta&lt; Mapping, AdvectionDomain &gt;']]],
   ['bslimplicitpredcorrrtheta_31',['bslimplicitpredcorrrtheta',['../classBslImplicitPredCorrRTheta.html#a8e74ce30ea2255db8f24d0320c528821',1,'BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta()'],['../classBslImplicitPredCorrRTheta.html',1,'BslImplicitPredCorrRTheta&lt; Mapping, AdvectionDomain &gt;']]],
   ['bslpredcorrrtheta_32',['bslpredcorrrtheta',['../classBslPredCorrRTheta.html',1,'BslPredCorrRTheta&lt; Mapping, FootFinder &gt;'],['../classBslPredCorrRTheta.html#a9bd5255327ed9ba415bb2cec1363bf4d',1,'BslPredCorrRTheta::BslPredCorrRTheta()']]],

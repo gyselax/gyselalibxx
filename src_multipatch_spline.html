@@ -117,7 +117,7 @@ Multipatch spline builder</h1>
 <p>The <code><a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a></code> and <code><a class="el" href="classMultipatchSplineBuilder2D.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder2D</a></code> allow all the given spline builders to be called in one single line.</p>
 <p>The template parameters of this class reproduce the <code>SplineBuilder</code> and <code>SplineBuilder2D</code> classes from DDC. The spline coefficients and values of the functions are stored in <code><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a></code> objects. The spline builders are stored inside the class in a <code>std::tuple</code>.</p>
 <p>For Hermite boundary conditions, derivatives have to be provided. They are also stored in <code><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a></code> objects.</p>
-<h3><a class="anchor" id="autotoc_md74"></a>
+<h3><a class="anchor" id="autotoc_md80"></a>
 Example of use of MultipatchSplineBuilder</h3>
 <p>We define all the builders for each patch, </p><div class="fragment"><div class="line">SplineBuilderType1 builder_1(idx_range_1); </div>
 <div class="line">SplineBuilderType2 builder_2(idx_range_2); </div>
