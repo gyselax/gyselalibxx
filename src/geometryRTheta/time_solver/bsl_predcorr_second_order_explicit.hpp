@@ -85,7 +85,7 @@ private:
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound_host> const& m_poisson_solver;
+            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
     SplineRThetaBuilder_host const& m_builder;
     SplineRThetaEvaluatorConstBound_host const& m_evaluator;
@@ -128,7 +128,7 @@ public:
                     GridR,
                     GridTheta,
                     PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound_host> const& poisson_solver,
+                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
             SplineRThetaEvaluatorConstBound_host const& advection_evaluator)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
@@ -162,7 +162,8 @@ public:
         IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
-        host_t<DFieldMemRTheta> electrical_potential(grid);
+        DFieldMemRTheta electrical_potential(grid);
+        host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
         host_t<SplinePolar> electrostatic_potential_coef(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
@@ -199,7 +200,7 @@ public:
             m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);
 
             polar_spline_evaluator(
-                    get_field(electrical_potential),
+                    get_field(electrical_potential_host),
                     get_const_field(coords),
                     electrostatic_potential_coef);
 
@@ -207,7 +208,7 @@ public:
                     .with("iter", iter)
                     .and_with("time", time)
                     .and_with("density", allfdistribu)
-                    .and_with("electrical_potential", electrical_potential);
+                    .and_with("electrical_potential", electrical_potential_host);
 
             // STEP 2: From phi^n, we compute A^n:
             advection_field_computer(electrostatic_potential_coef, advection_field);
@@ -281,12 +282,12 @@ public:
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);
         m_poisson_solver(charge_density_coord, get_field(electrical_potential));
-
+        ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
                 .and_with("time", steps * dt)
                 .and_with("density", allfdistribu)
-                .and_with("electrical_potential", electrical_potential);
+                .and_with("electrical_potential", electrical_potential_host);
 
 
         end_time = std::chrono::system_clock::now();

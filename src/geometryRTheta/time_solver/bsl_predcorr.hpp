@@ -66,7 +66,7 @@ private:
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound_host> const& m_poisson_solver;
+            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
     SplineRThetaBuilder_host const& m_builder;
     SplineRThetaEvaluatorNullBound_host const& m_spline_evaluator;
@@ -99,7 +99,7 @@ public:
                     GridR,
                     GridTheta,
                     PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound_host> const& poisson_solver)
+                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)
@@ -134,19 +134,19 @@ public:
                 polar_spline_evaluator(extrapolation_rule);
 
 
-        host_t<DFieldMemRTheta> electrical_potential0(grid);
-
+        host_t<DFieldMemRTheta> electrical_potential0_host(grid);
+        DFieldMemRTheta electrical_potential0(grid);
         host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
         m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
         PoissonLikeRHSFunction const
                 charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
         m_poisson_solver(charge_density_coord, get_field(electrical_potential0));
-
+        ddc::parallel_deepcopy(electrical_potential0, electrical_potential0_host);
         ddc::PdiEvent("iteration")
                 .with("iter", 0)
                 .and_with("time", 0)
                 .and_with("density", allfdistribu)
-                .and_with("electrical_potential", electrical_potential0);
+                .and_with("electrical_potential", electrical_potential0_host);
 
 
         std::function<void(host_t<DVectorFieldRTheta<X, Y>>, host_t<DConstFieldRTheta>)>
@@ -174,7 +174,8 @@ public:
             host_t<DVectorFieldMemRTheta<X, Y>>,
             Kokkos::DefaultHostExecutionSpace>
                 time_stepper(grid);
-        host_t<DFieldMemRTheta> electrical_potential(grid);
+        DFieldMemRTheta electrical_potential(grid);
+        host_t<DFieldMemRTheta> electrical_potential_host(grid);
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             time_stepper
@@ -189,12 +190,12 @@ public:
             PoissonLikeRHSFunction const
                     charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
             m_poisson_solver(charge_density_coord, get_field(electrical_potential));
-
+            ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
             ddc::PdiEvent("iteration")
                     .with("iter", iter + 1)
                     .and_with("time", iter * dt)
                     .and_with("density", allfdistribu)
-                    .and_with("electrical_potential", electrical_potential);
+                    .and_with("electrical_potential", electrical_potential_host);
         }
         end_time = std::chrono::system_clock::now();
 

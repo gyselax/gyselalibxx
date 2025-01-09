@@ -22,18 +22,22 @@
 #include "polarpoissonlikesolver.hpp"
 #include "test_cases.hpp"
 
+
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound_host>;
+        SplineRThetaEvaluatorNullBound>;
 
 #if defined(CIRCULAR_MAPPING)
 using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+
+using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -97,56 +101,74 @@ int main(int argc, char** argv)
     IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder const builder(grid);
+    SplineRThetaBuilder_host const builder_host(grid);
+
 
 #if defined(CIRCULAR_MAPPING)
     const Mapping mapping;
 #elif defined(CZARNY_MAPPING)
     const Mapping mapping(0.3, 1.4);
 #endif
+
     ddc::NullExtrapolationRule bv_r_min;
     ddc::NullExtrapolationRule bv_r_max;
     ddc::PeriodicExtrapolationRule<Theta> bv_p_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_p_max;
-    SplineRThetaEvaluatorNullBound_host evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
-    DiscreteMappingBuilder const discrete_mapping_builder(
+    SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
+    SplineRThetaEvaluatorNullBound_host evaluator_host(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
+
+    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
             mapping,
-            builder,
-            evaluator);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+            builder_host,
+            evaluator_host);
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
+
+    DiscreteMappingBuilder const
+            discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
+    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
+
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
 
     IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
-    host_t<DFieldMemRTheta> coeff_alpha(grid); // values of the coefficent alpha
-    host_t<DFieldMemRTheta> coeff_beta(grid);
-    host_t<DFieldMemRTheta> x(grid);
-    host_t<DFieldMemRTheta> y(grid);
+    DFieldMemRTheta coeff_alpha_alloc(grid); // values of the coefficent alpha
+    DFieldMemRTheta coeff_beta_alloc(grid);
+    DFieldMemRTheta x_alloc(grid);
+    DFieldMemRTheta y_alloc(grid);
 
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        coeff_alpha(irp)
-                = std::exp(-std::tanh((ddc::coordinate(ddc::select<GridR>(irp)) - 0.7) / 0.05));
-        coeff_beta(irp) = 1.0 / coeff_alpha(irp);
-        Coord<R, Theta>
-                coord(ddc::coordinate(ddc::select<GridR>(irp)),
-                      ddc::coordinate(ddc::select<GridTheta>(irp)));
-        Coord<X, Y> cartesian_coord = mapping(coord);
-        x(irp) = ddc::get<X>(cartesian_coord);
-        y(irp) = ddc::get<Y>(cartesian_coord);
-    });
+    DFieldRTheta coeff_alpha = get_field(coeff_alpha_alloc); // values of the coefficent alpha
+    DFieldRTheta coeff_beta = get_field(coeff_beta_alloc);
+    DFieldRTheta x = get_field(x_alloc);
+    DFieldRTheta y = get_field(y_alloc);
 
-    host_t<Spline2DMem> coeff_alpha_spline(idx_range_bsplinesRTheta);
-    host_t<Spline2DMem> coeff_beta_spline(idx_range_bsplinesRTheta);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            grid,
+            KOKKOS_LAMBDA(IdxRTheta const irp) {
+                coeff_alpha(irp) = Kokkos::exp(
+                        -Kokkos::tanh((ddc::coordinate(ddc::select<GridR>(irp)) - 0.7) / 0.05));
+                coeff_beta(irp) = 1.0 / coeff_alpha(irp);
+                Coord<R, Theta>
+                        coord(ddc::coordinate(ddc::select<GridR>(irp)),
+                              ddc::coordinate(ddc::select<GridTheta>(irp)));
+                Coord<X, Y> cartesian_coord = mapping(coord);
+                x(irp) = ddc::get<X>(cartesian_coord);
+                y(irp) = ddc::get<Y>(cartesian_coord);
+            });
+
+    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
+    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline),
             get_const_field(coeff_alpha)); // coeff_alpha_spline are the coefficients
     // of the spline representation of the values given by coeff_alpha.
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    host_t<Spline2DMem> x_spline_representation(idx_range_bsplinesRTheta);
-    host_t<Spline2DMem> y_spline_representation(idx_range_bsplinesRTheta);
+    Spline2DMem x_spline_representation(idx_range_bsplinesRTheta);
+    Spline2DMem y_spline_representation(idx_range_bsplinesRTheta);
 
     builder(get_field(x_spline_representation), get_const_field(x));
     builder(get_field(y_spline_representation), get_const_field(y));
@@ -173,7 +195,9 @@ int main(int argc, char** argv)
     LHSFunction lhs(mapping);
     RHSFunction rhs(mapping);
     host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-    host_t<DFieldMemRTheta> result(grid);
+    DFieldMemRTheta result_alloc(grid);
+    DField<IdxRangeRTheta> result = get_field(result_alloc);
+
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         coords(irp) = CoordRTheta(
                 ddc::coordinate(ddc::select<GridR>(irp)),
@@ -181,30 +205,30 @@ int main(int argc, char** argv)
     });
     if (discrete_rhs) {
         // Build the spline approximation of the rhs
+        Spline2DMem rhs_spline(idx_range_bsplinesRTheta);
+        host_t<DFieldMemRTheta> rhs_vals_host(grid);
 
-        host_t<Spline2DMem> rhs_spline(idx_range_bsplinesRTheta);
-        host_t<DFieldMemRTheta> rhs_vals(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irp) { rhs_vals(irp) = rhs(coords(irp)); });
+        ddc::for_each(grid, [&](IdxRTheta const irp) { rhs_vals_host(irp) = rhs(coords(irp)); });
+        auto rhs_vals = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(rhs_vals_host));
+
         builder(get_field(rhs_spline), get_const_field(rhs_vals));
-
-
-
+        ConstSpline2D rhs_spline_field = get_const_field(rhs_spline);
         start_time = std::chrono::system_clock::now();
-        ddc::NullExtrapolationRule r_extrapolation_rule;
-        ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-        SplineRThetaEvaluatorNullBound_host
-                eval(r_extrapolation_rule,
-                     r_extrapolation_rule,
-                     p_extrapolation_rule,
-                     p_extrapolation_rule);
-        solver([&](CoordRTheta const& coord) { return eval(coord, get_const_field(rhs_spline)); },
-               get_field(result));
+        solver(
+                KOKKOS_LAMBDA(CoordRTheta const& coord) {
+                    return evaluator(coord, rhs_spline_field);
+                },
+                get_field(result));
         end_time = std::chrono::system_clock::now();
     } else {
         start_time = std::chrono::system_clock::now();
         solver(rhs, get_field(result));
         end_time = std::chrono::system_clock::now();
     }
+    auto result_alloc_host = ddc::create_mirror_view_and_copy(result);
+    host_t<DFieldRTheta> result_host = get_field(result_alloc_host);
     std::cout << "Solver time : "
               << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time)
                          .count()
@@ -212,7 +236,7 @@ int main(int argc, char** argv)
 
     double max_err = 0.0;
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        const double err = result(irp) - lhs(coords(irp));
+        const double err = result_host(irp) - lhs(coords(irp));
         if (err > 0) {
             max_err = max_err > err ? max_err : err;
         } else {

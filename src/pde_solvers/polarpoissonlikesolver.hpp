@@ -15,6 +15,7 @@
 #include "ddc_aliases.hpp"
 #include "matrix_batch_csr.hpp"
 
+
 /**
 * @brief Define a polar PDE solver for a Poisson-like equation.
  *
@@ -36,15 +37,15 @@
  * @tparam GridR The radial grid type.
  * @tparam GridR The poloidal grid type.
  * @tparam PolarBSplinesRTheta The type of the 2D polar bsplines (on the coordinate
- * system (r,theta) including bsplines which traverse the O point).
- * @tparam SplineRThetaEvaluatorNullBound_host The type of the 2D (cross-product) spline evaluator.
+ * system @f$(r,\theta)@f$ including bsplines which traverse the O point).
+ * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
 template <
         class GridR,
         class GridTheta,
         class PolarBSplinesRTheta,
-        class SplineRThetaEvaluatorNullBound_host,
+        class SplineRThetaEvaluatorNullBound,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
 {
@@ -90,7 +91,6 @@ public:
 
 private:
     using CoordRTheta = Coord<R, Theta>;
-
     /// The 1D bsplines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
     /// The 1D bsplines in the poloidal direction
@@ -159,19 +159,21 @@ private:
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
     using DFieldRTheta = DField<IdxRangeRTheta>;
 
+public:
     /**
-     * @brief Object storing a value and a value of the derivative
-     * of a 1D function.
-     */
+    * @brief Object storing a value and a value of the derivative
+    * of a 1D function.
+    */
     struct EvalDeriv1DType
     {
         double value;
         double derivative;
     };
+
     /**
-     * @brief Object storing a value and a value of the derivatives
-     * in each direction of a 2D function.
-     */
+    * @brief Object storing a value and a value of the derivatives
+    * in each direction of a 2D function.
+    */
     struct EvalDeriv2DType
     {
         double value;
@@ -207,6 +209,9 @@ private:
     const int m_nbasis_r;
     const int m_nbasis_theta;
 
+    // Matrix size is equal to the number of Polar bspline
+    const int m_matrix_size;
+
     // Domains
     IdxRangeBSPolar m_idxrange_fem_non_singular;
     IdxRangeBSR m_idxrange_bsplines_r;
@@ -225,11 +230,11 @@ private:
     // Basis Spline values and derivatives at Gauss-Legendre points
     host_t<FieldMem<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>>
             m_singular_basis_vals_and_derivs;
-    host_t<FieldMem<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>>> r_basis_vals_and_derivs;
+    host_t<FieldMem<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>>> m_r_basis_vals_and_derivs;
     host_t<FieldMem<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>>
             m_theta_basis_vals_and_derivs;
 
-    host_t<FieldMem<double, IdxRangeQuadratureRTheta>> m_int_volume;
+    FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume;
 
     PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
             m_polar_spline_evaluator;
@@ -239,7 +244,6 @@ private:
     Kokkos::View<double**, Kokkos::LayoutRight> m_x_init;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
-
 public:
     /**
      * @brief Instantiate a polar Poisson-like solver using FEM with B-splines.
@@ -260,18 +264,19 @@ public:
      *      The mapping from the logical index range to the physical index range where
      *      the equation is defined.
      * @param[in] spline_evaluator
-     *      An evaluator for evaluating 2D splines on (r, theta)
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to cartesian coordinates.
      */
     template <class Mapping>
     PolarSplineFEMPoissonLikeSolver(
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound_host const& spline_evaluator)
+            SplineRThetaEvaluatorNullBound const& spline_evaluator)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
+        , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
         , m_idxrange_fem_non_singular(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
                           IdxStep<PolarBSplinesRTheta> {m_nbasis_theta}))
@@ -299,7 +304,7 @@ public:
                   PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
                   ddc::select<QDimRMesh>(m_idxrange_quadrature_singular),
                   ddc::select<QDimThetaMesh>(m_idxrange_quadrature_singular)))
-        , r_basis_vals_and_derivs(
+        , m_r_basis_vals_and_derivs(
                   IdxRange<RBasisSubset, QDimRMesh>(m_non_zero_bases_r, m_idxrange_quadrature_r))
         , m_theta_basis_vals_and_derivs(
                   IdxRange<
@@ -367,8 +372,8 @@ public:
                     .eval_basis_and_n_derivs(vals, ddc::coordinate(idx_r), 1);
             for (auto ib : m_non_zero_bases_r) {
                 const int ib_idx = ib - m_non_zero_bases_r.front();
-                r_basis_vals_and_derivs(ib, idx_r).value = vals(ib_idx, 0);
-                r_basis_vals_and_derivs(ib, idx_r).derivative = vals(ib_idx, 1);
+                m_r_basis_vals_and_derivs(ib, idx_r).value = vals(ib_idx, 0);
+                m_r_basis_vals_and_derivs(ib, idx_r).derivative = vals(ib_idx, 1);
             }
         });
 
@@ -398,8 +403,8 @@ public:
             // Values of the polar basis splines, that do not cover the singular point,
             // at a given coordinate
             DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
-            IdxQuadratureR idx_r = ddc::select<QDimRMesh>(irp);
-            IdxQuadratureTheta idx_theta = ddc::select<QDimThetaMesh>(irp);
+            IdxQuadratureR const idx_r(irp);
+            IdxQuadratureTheta const idx_theta(irp);
 
             const CoordRTheta coord(ddc::coordinate(irp));
 
@@ -425,17 +430,6 @@ public:
             }
         });
 
-        // Find the integral volume associated with each point used in the quadrature scheme
-        IdxRangeQuadratureRTheta
-                all_quad_points(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
-        ddc::for_each(all_quad_points, [&](IdxQuadratureRTheta const irp) {
-            IdxQuadratureR const idx_r = ddc::select<QDimRMesh>(irp);
-            IdxQuadratureTheta const idx_theta = ddc::select<QDimThetaMesh>(irp);
-            CoordRTheta coord(ddc::coordinate(irp));
-            m_int_volume(idx_r, idx_theta) = abs(mapping.jacobian(coord)) * m_weights_r(idx_r)
-                                             * m_weights_theta(idx_theta);
-        });
-
         // Number of elements in the matrix that correspond to the splines
         // that cover the singular point
         constexpr int n_elements_singular
@@ -454,9 +448,7 @@ public:
         const int n_elements_stencil = n_stencil_r * n_stencil_theta;
 
         const int batch_size = 1;
-        // Matrix size is equal to the number Polar bspline
-        const int matrix_size
-                = ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta;
+
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
 
         //CSR data storage
@@ -465,35 +457,159 @@ public:
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 col_idx_csr_host("idx_csr", n_matrix_elements);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
-                nnz_per_row_csr("nnz_per_row_csr", matrix_size + 1);
+                nnz_per_row_csr("nnz_per_row_csr", m_matrix_size + 1);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
-                nnz_per_row_csr_host("nnz_per_row_csr", matrix_size + 1);
+                nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
-        init_nnz_per_line(nnz_per_row_csr);
-        Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row_csr);
+        fill_int_volume(mapping);
+
+        m_gko_matrix = std::make_unique<MatrixBatchCsr<
+                Kokkos::DefaultExecutionSpace,
+                MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements);
+        auto [values, col_idx, nnz_per_row] = m_gko_matrix->get_batch_csr();
+        init_nnz_per_line(nnz_per_row);
+        Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
+
+        compute_singular_elements(
+                coeff_alpha,
+                coeff_beta,
+                mapping,
+                spline_evaluator,
+                values_csr_host,
+                col_idx_csr_host,
+                nnz_per_row_csr_host);
+        compute_overlapping_singular_elements(
+                coeff_alpha,
+                coeff_beta,
+                mapping,
+                spline_evaluator,
+                values_csr_host,
+                col_idx_csr_host,
+                nnz_per_row_csr_host);
+        compute_stencil_elements(
+                coeff_alpha,
+                coeff_beta,
+                mapping,
+                spline_evaluator,
+                values_csr_host,
+                col_idx_csr_host,
+                nnz_per_row_csr_host);
+
+        assert(nnz_per_row_csr_host(m_matrix_size) == n_matrix_elements);
+        Kokkos::deep_copy(values, values_csr_host);
+        Kokkos::deep_copy(col_idx, col_idx_csr_host);
+        Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
+        m_gko_matrix->setup_solver();
+    }
+
+    /**
+     * @brief Compute the volume integrals and stores the values in a member variable.
+     *
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     *
+     * @tparam Mapping A class describing a mapping from curvilinear coordinates to cartesian coordinates.
+     */
+    template <class Mapping>
+    void fill_int_volume(Mapping const& mapping)
+    {
+        auto weights_r_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_weights_r));
+        auto weights_theta_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_weights_theta));
+        DField<IdxRangeQuadratureR> weights_r = get_field(weights_r_alloc);
+        DField<IdxRangeQuadratureTheta> weights_theta = get_field(weights_theta_alloc);
+        // Find the integral volume associated with each point used in the quadrature scheme
+        IdxRangeQuadratureRTheta const
+                all_quad_points(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
+        auto int_volume_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_int_volume));
+        auto int_volume = get_field(int_volume_alloc);
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                all_quad_points,
+                KOKKOS_LAMBDA(IdxQuadratureRTheta const irp) {
+                    IdxQuadratureR const idx_r(irp);
+                    IdxQuadratureTheta const idx_theta(irp);
+                    CoordRTheta coord(ddc::coordinate(irp));
+                    int_volume(idx_r, idx_theta) = Kokkos::abs(mapping.jacobian(coord))
+                                                   * weights_r(idx_r) * weights_theta(idx_theta);
+                });
+    }
+
+    /**
+     * @brief Computes the matrix element corresponding to the singular area.
+     *        ie: the region enclosing the O-point.
+     *
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     * @param[in] spline_evaluator
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[out] values_csr_host
+     *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
+     * @param[out] col_idx_csr_host
+     *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix).
+     * @param[inout] nnz_per_row_csr_host
+     *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+     */
+    template <class Mapping>
+    void compute_singular_elements(
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            Mapping const& mapping,
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace> const values_csr_host,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const col_idx_csr_host,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const nnz_per_row_csr_host)
+    {
+        IdxRangeBSPolar idxrange_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+        IdxRangeQuadratureRTheta idxrange_quadrature_singular = m_idxrange_quadrature_singular;
+
+        auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_singular_basis_vals_and_derivs));
+        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_r_basis_vals_and_derivs));
+        Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
+                singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
         // Calculate the matrix elements corresponding to the bsplines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
                 // Calculate the weak integral
-                double const element = ddc::transform_reduce(
-                        m_idxrange_quadrature_singular,
+                double const element = ddc::parallel_transform_reduce(
+                        Kokkos::DefaultExecutionSpace(),
+                        idxrange_quadrature_singular,
                         0.0,
                         ddc::reducer::sum<double>(),
-                        [&](IdxQuadratureRTheta const idx_quad) {
-                            IdxQuadratureR const idx_r = ddc::select<QDimRMesh>(idx_quad);
-                            IdxQuadratureTheta const idx_theta
-                                    = ddc::select<QDimThetaMesh>(idx_quad);
+                        KOKKOS_LAMBDA(Idx<QDimRMesh, QDimThetaMesh> const& idx_quad) {
+                            Idx<QDimRMesh> const idx_r(idx_quad);
+                            Idx<QDimThetaMesh> const idx_theta(idx_quad);
                             return weak_integral_element(
                                     idx_r,
                                     idx_theta,
-                                    m_singular_basis_vals_and_derivs(idx_test, idx_r, idx_theta),
-                                    m_singular_basis_vals_and_derivs(idx_trial, idx_r, idx_theta),
+                                    singular_basis_vals_and_derivs(idx_test, idx_r, idx_theta),
+                                    singular_basis_vals_and_derivs(idx_trial, idx_r, idx_theta),
                                     coeff_alpha,
                                     coeff_beta,
                                     spline_evaluator,
-                                    mapping);
+                                    mapping,
+                                    int_volume_proxy);
                         });
                 const int row_idx = idx_test - idxrange_singular.front();
                 const int col_idx = idx_trial - idxrange_singular.front();
@@ -504,8 +620,43 @@ public:
                 nnz_per_row_csr_host(row_idx + 1)++;
             });
         });
+    }
 
+    /**
+     * @brief Computes the matrix element corresponding to singular elements overlapping
+     *        with regular grid.
+     *
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     * @param[in] spline_evaluator
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[out] values_csr_host
+     *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
+     * @param[out] col_idx_csr_host
+     *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
+     * @param[inout] nnz_per_row_csr_host
+     *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+     */
+    template <class Mapping>
+    void compute_overlapping_singular_elements(
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            Mapping const& mapping,
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace> const values_csr_host,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const col_idx_csr_host,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const nnz_per_row_csr_host)
+    {
         // Create index ranges associated with the 2D splines
+        IdxRangeBSPolar idxrange_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
 
@@ -513,6 +664,22 @@ public:
                 central_radial_bspline_idx_range,
                 m_idxrange_bsplines_theta);
 
+        auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_singular_basis_vals_and_derivs));
+        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_r_basis_vals_and_derivs));
+        auto theta_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_theta_basis_vals_and_derivs));
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
+        Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
+                singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
+        Field<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>> r_basis_vals_and_derivs
+                = get_field(r_basis_vals_and_derivs_alloc);
+        Field<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>
+                theta_basis_vals_and_derivs = get_field(theta_basis_vals_and_derivs_alloc);
         // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
@@ -554,29 +721,28 @@ public:
                         Idx<ThetaBasisSubset> ib_trial_theta(
                                 theta_mod(idx_trial_theta.uid() - cell_idx_theta));
                         // Calculate the weak integral
-                        element += ddc::transform_reduce(
+                        element += ddc::parallel_transform_reduce(
+                                Kokkos::DefaultExecutionSpace(),
                                 cell_quad_points,
                                 0.0,
                                 ddc::reducer::sum<double>(),
-                                [&](IdxQuadratureRTheta const idx_quad) {
-                                    IdxQuadratureR const idx_r = ddc::select<QDimRMesh>(idx_quad);
-                                    IdxQuadratureTheta const idx_theta
-                                            = ddc::select<QDimThetaMesh>(idx_quad);
+                                KOKKOS_LAMBDA(IdxQuadratureRTheta const idx_quad) {
+                                    IdxQuadratureR const idx_r(idx_quad);
+                                    IdxQuadratureTheta const idx_theta(idx_quad);
                                     return weak_integral_element<Mapping>(
                                             idx_r,
                                             idx_theta,
-                                            m_singular_basis_vals_and_derivs(
+                                            singular_basis_vals_and_derivs(
                                                     idx_test,
                                                     idx_r,
                                                     idx_theta),
                                             r_basis_vals_and_derivs(ib_trial_r, idx_r),
-                                            m_theta_basis_vals_and_derivs(
-                                                    ib_trial_theta,
-                                                    idx_theta),
+                                            theta_basis_vals_and_derivs(ib_trial_theta, idx_theta),
                                             coeff_alpha,
                                             coeff_beta,
                                             spline_evaluator,
-                                            mapping);
+                                            mapping,
+                                            int_volume_proxy);
                                 });
                     });
 
@@ -593,6 +759,42 @@ public:
                 }
             });
         });
+    }
+
+    /**
+     * @brief Computes the matrix element corresponding to the regular stencil
+     *        ie: out to singular or overlapping areas.
+     *
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     * @param[in] spline_evaluator
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[out] values_csr_host
+     *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
+     * @param[out] col_idx_csr_host
+     *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
+     * @param[inout] nnz_per_row_csr_host
+     *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+     */
+    template <class Mapping>
+    void compute_stencil_elements(
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            Mapping const& mapping,
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace> const values_csr_host,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const col_idx_csr_host,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const nnz_per_row_csr_host)
+    {
+        IdxRangeBSPolar idxrange_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
         // Calculate the matrix elements following a stencil
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
@@ -682,19 +884,9 @@ public:
                 }
             });
         });
-        assert(nnz_per_row_csr_host(matrix_size) == n_matrix_elements);
-        m_gko_matrix = std::make_unique<MatrixBatchCsr<
-                Kokkos::DefaultExecutionSpace,
-                MatrixBatchCsrSolver::CG>>(1, matrix_size, n_matrix_elements);
 
-        auto [values, col_idx, nnz_per_row] = m_gko_matrix->get_batch_csr();
-        Kokkos::deep_copy(values, values_csr_host);
-        Kokkos::deep_copy(col_idx, col_idx_csr_host);
-        Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
-        m_gko_matrix->setup_solver();
         Kokkos::Profiling::popRegion();
     }
-
     /**
      * @brief Solve the Poisson-like equation.
      *
@@ -727,6 +919,7 @@ public:
         Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace>
                 x_init_host("x_init_host", batch_size, b_size);
         // Fill b
+        auto int_volume_host = ddc::create_mirror_view_and_copy(get_field(m_int_volume));
         ddc::for_each(
                 PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
                 [&](IdxBSPolar const idx) {
@@ -739,17 +932,17 @@ public:
                             0.0,
                             ddc::reducer::sum<double>(),
                             [&](IdxQuadratureRTheta const idx_quad) {
-                                IdxQuadratureR const idx_r = ddc::select<QDimRMesh>(idx_quad);
-                                IdxQuadratureTheta const idx_theta
-                                        = ddc::select<QDimThetaMesh>(idx_quad);
+                                IdxQuadratureR const idx_r(idx_quad);
+                                IdxQuadratureTheta const idx_theta(idx_quad);
                                 CoordRTheta coord(ddc::coordinate(idx_quad));
                                 return rhs(coord)
                                        * m_singular_basis_vals_and_derivs(idx, idx_r, idx_theta)
                                                  .value
-                                       * m_int_volume(idx_r, idx_theta);
+                                       * int_volume_host(idx_r, idx_theta);
                             });
                 });
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
+
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
             const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
             const std::size_t idx_r(ddc::select<BSplinesR>(idx_2d).uid());
@@ -791,13 +984,12 @@ public:
                         0.0,
                         ddc::reducer::sum<double>(),
                         [&](IdxQuadratureRTheta const idx_quad) {
-                            IdxQuadratureR const idx_r = ddc::select<QDimRMesh>(idx_quad);
-                            IdxQuadratureTheta const idx_theta
-                                    = ddc::select<QDimThetaMesh>(idx_quad);
+                            IdxQuadratureR const idx_r(idx_quad);
+                            IdxQuadratureTheta const idx_theta(idx_quad);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
-                            double rb = r_basis_vals_and_derivs(ib_r, idx_r).value;
+                            double rb = m_r_basis_vals_and_derivs(ib_r, idx_r).value;
                             double pb = m_theta_basis_vals_and_derivs(ib_theta, idx_theta).value;
-                            return rhs(coord) * rb * pb * m_int_volume(idx_r, idx_theta);
+                            return rhs(coord) * rb * pb * int_volume_host(idx_r, idx_theta);
                         });
             });
             const std::size_t singular_index
@@ -819,7 +1011,6 @@ public:
                 m_idxrange_bsplines_r.take_last(IdxStep<BSplinesR> {1}),
                 m_idxrange_bsplines_theta);
         IdxRangeBSTheta idxrange_polar(ddc::discrete_space<BSplinesTheta>().full_domain());
-
 
         // Fill the spline
         ddc::for_each(
@@ -854,7 +1045,6 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
-
     /**
      * @brief Solve the Poisson-like equation.
      *
@@ -869,24 +1059,39 @@ public:
      *      The values of the solution @f$\phi@f$ on the given coords_eval, also used as initial data for the iterative solver.
      */
     template <class RHSFunction>
-    void operator()(RHSFunction const& rhs, host_t<DFieldRTheta> phi) const
+    void operator()(RHSFunction const& rhs, DFieldRTheta phi) const
     {
         static_assert(
                 std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
-
         (*this)(rhs, m_phi_spline_coef);
-        host_t<CoordFieldMemRTheta> coords_eval_alloc(get_idx_range(phi));
-        host_t<CoordFieldRTheta> coords_eval(get_field(coords_eval_alloc));
-        ddc::for_each(get_idx_range(phi), [&](IdxRTheta idx) {
-            coords_eval(idx) = ddc::coordinate(idx);
-        });
-        m_polar_spline_evaluator(phi, get_const_field(coords_eval), m_phi_spline_coef);
+        CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
+        CoordFieldRTheta coords_eval(get_field(coords_eval_alloc));
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                get_idx_range(phi),
+                KOKKOS_LAMBDA(IdxRTheta idx) { coords_eval(idx) = ddc::coordinate(idx); });
+        auto coords_eval_host = ddc::create_mirror_and_copy(coords_eval);
+        auto phi_host = ddc::create_mirror_and_copy(phi);
+        m_polar_spline_evaluator(
+                get_field(phi_host),
+                get_const_field(coords_eval_host),
+                get_const_field(m_phi_spline_coef));
+        ddc::parallel_deepcopy(phi, phi_host);
     }
 
-private:
+    /**
+     * @brief compute the quadrature range for a given pair of indices
+     *
+     * @param[in] cell_idx_r
+     *      The index for radial direction
+     * @param[in] cell_idx_theta
+     *      The index for poloidal direction
+     * @return 
+     *      The quadrature range corresponding to the  @f$(r,\theta)@f$ indices.
+     */
     static KOKKOS_FUNCTION IdxRangeQuadratureRTheta
     get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta)
     {
@@ -899,16 +1104,44 @@ private:
         return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
     }
 
+    /**
+     * @brief compute the weak integral value.
+     *
+     * @param[in] idx_r
+     *      The index for radial direction.
+     * @param[in] idx_theta
+     *      The index for poloidal direction
+     * @param[in] test_bspline_val_and_deriv
+     *      The data structure containing the derivatives over radial and poloidal directions for test space.
+     * @param[in] trial_bspline_val_and_deriv
+     *      The data structure containing the derivatives over radial and poloidal directions for trial space.
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     * @param[in] evaluator
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[in] int_volume
+     *      The integral volume associated with each point used in the quadrature scheme.
+     * @return 
+     *      The value of the weak integral.
+     */
     template <class Mapping>
-    double weak_integral_element(
+    static KOKKOS_FUNCTION double weak_integral_element(
             IdxQuadratureR idx_r,
             IdxQuadratureTheta idx_theta,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
-            Mapping const& mapping)
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            SplineRThetaEvaluatorNullBound const& evaluator,
+            Mapping const& mapping,
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
         return templated_weak_integral_element(
                 idx_r,
@@ -920,20 +1153,23 @@ private:
                 coeff_alpha,
                 coeff_beta,
                 evaluator,
-                mapping);
+                mapping,
+                int_volume);
     }
 
+    ///@cond
     template <class Mapping>
-    double weak_integral_element(
+    static KOKKOS_FUNCTION double weak_integral_element(
             IdxQuadratureR idx_r,
             IdxQuadratureTheta idx_theta,
             EvalDeriv2DType const& test_bspline_val_and_deriv,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
-            Mapping const& mapping)
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            SplineRThetaEvaluatorNullBound const& evaluator,
+            Mapping const& mapping,
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
         return templated_weak_integral_element(
                 idx_r,
@@ -945,20 +1181,22 @@ private:
                 coeff_alpha,
                 coeff_beta,
                 evaluator,
-                mapping);
+                mapping,
+                int_volume);
     }
 
     template <class Mapping>
-    double weak_integral_element(
+    static KOKKOS_FUNCTION double weak_integral_element(
             IdxQuadratureR idx_r,
             IdxQuadratureTheta idx_theta,
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
-            Mapping const& mapping)
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            SplineRThetaEvaluatorNullBound const& evaluator,
+            Mapping const& mapping,
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
         return templated_weak_integral_element(
                 idx_r,
@@ -970,21 +1208,23 @@ private:
                 coeff_alpha,
                 coeff_beta,
                 evaluator,
-                mapping);
+                mapping,
+                int_volume);
     }
 
     template <class Mapping>
-    double weak_integral_element(
+    static KOKKOS_FUNCTION double weak_integral_element(
             IdxQuadratureR idx_r,
             IdxQuadratureTheta idx_theta,
             EvalDeriv1DType const& test_bspline_val_and_deriv_r,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_r,
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
-            Mapping const& mapping)
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            SplineRThetaEvaluatorNullBound const& evaluator,
+            Mapping const& mapping,
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
         return templated_weak_integral_element(
                 idx_r,
@@ -996,24 +1236,47 @@ private:
                 coeff_alpha,
                 coeff_beta,
                 evaluator,
-                mapping);
+                mapping,
+                int_volume);
     }
+    ///@endcond
 
-    inline void get_value_and_gradient(
+    /**
+     * @brief Computes the value and gradient from r_basis and theta_basis inputs.
+     * 
+     * @param[out] value The product of radial and poloidal values.
+     *
+     * @param[out] gradient derivatives over @f$ (r, \theta) @f$ directions. 
+     *
+     * @param[in] r_basis A data structure containing values and derivative over radial direction.
+     *
+     * @param[in] theta_basis A data structure containing values and derivative over poloidal direction.
+     */
+    static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
             std::array<double, 2>& gradient,
             EvalDeriv1DType const& r_basis,
-            EvalDeriv1DType const& theta_basis) const
+            EvalDeriv1DType const& theta_basis)
     {
         value = r_basis.value * theta_basis.value;
         gradient = {r_basis.derivative * theta_basis.value, r_basis.value * theta_basis.derivative};
     }
 
-    inline void get_value_and_gradient(
+    /**
+     * @brief Computes the value and gradient from r_basis and theta_basis inputs.
+     * 
+     * @param[out] value The product of radial and poloidal values.
+     *
+     * @param[out] gradient derivatives over @f$ (r, \theta) @f$ directions. 
+     *
+     * @param[in] basis A data structure containing values and derivative over radial and poloidal directions.
+     *
+     */
+    static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
             std::array<double, 2>& gradient,
             EvalDeriv2DType const& basis,
-            EvalDeriv2DType const&) const // Last argument is duplicate
+            EvalDeriv2DType const&) // Last argument is duplicate
     {
         value = basis.value;
         gradient = {basis.radial_derivative, basis.poloidal_derivative};
@@ -1021,25 +1284,51 @@ private:
 
     /**
      * @brief Computes a quadrature summand corresponding to the 
-     *        inner product
-     * 
-     * The inner product of the test and trial spline is computed using a 
+     *        inner product.
+     *
+     * @param[in] idx_r
+     *      The index for radial direction.
+     * @param[in] idx_theta
+     *      The index for poloidal direction
+     * @param[in] test_bspline_val_and_deriv
+     *      The data structure containing the derivatives over radial and poloidal directions for test space.
+     * @param[in] trial_bspline_val_and_deriv
+     *      The data structure containing the derivatives over radial and poloidal directions for trial space.
+     * @param[in] test_bspline_val_and_deriv_theta
+     *       The data structure containing the value and derivative along poloidal direction for test space.
+     * @param[in] trial_bspline_val_and_deriv_theta
+     *       The data structure containing the value and derivative along poloidal direction for trial space.
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] spline_evaluator
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     * @param[in] int_volume
+     *      The integral volume associated with each point used in the quadrature scheme.
+     * @return
+      inner product of the test and trial spline is computed using a 
      * quadrature. This function returns one summand of the quadrature for 
      * the quadrature point given by the indices.
      */
-
     template <class Mapping, class TestValDerivType, class TrialValDerivType>
-    double templated_weak_integral_element(
+    static KOKKOS_FUNCTION double templated_weak_integral_element(
             IdxQuadratureR idx_r,
             IdxQuadratureTheta idx_theta,
             TestValDerivType const& test_bspline_val_and_deriv,
             TrialValDerivType const& trial_bspline_val_and_deriv,
             TestValDerivType const& test_bspline_val_and_deriv_theta,
             TrialValDerivType const& trial_bspline_val_and_deriv_theta,
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& spline_evaluator,
-            Mapping const& mapping)
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            Mapping const& mapping,
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
         static_assert(
                 std::is_same_v<
@@ -1074,7 +1363,7 @@ private:
         MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
 
         // Assemble the weak integral element
-        return m_int_volume(idx_r, idx_theta)
+        return int_volume(idx_r, idx_theta)
                * (alpha
                           * dot_product(
                                   basis_gradient_test_space,
@@ -1085,14 +1374,32 @@ private:
     /**
      * @brief Computes the matrix element corresponding to two tensor product splines
      *        with index idx_test and idx_trial
+     *
+     * @param[in] idx_test
+     *      The index for polar B-spline in the test space.
+     * @param[in] idx_trial
+     *      The index for polar B-spline in the trial space.
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] evaluator
+     *      An evaluator for evaluating 2D splines on @f$ (r, \theta) @f$.
+     * @param[in] mapping
+     *      The mapping from the logical index range to the physical index range where
+     *      the equation is defined.
+     * @return 
+     *      The value of the matrix element.
      */
     template <class Mapping>
     double get_matrix_stencil_element(
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
-            host_t<ConstSpline2D> coeff_alpha,
-            host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         // 0 <= idx_test_r < 8
@@ -1151,6 +1458,19 @@ private:
         const IdxRange<ThetaCellDim> theta_cells(first_overlap_element_theta, n_overlap_theta);
         const IdxRange<RCellDim, ThetaCellDim> non_zero_cells(r_cells, theta_cells);
 
+        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_r_basis_vals_and_derivs));
+        auto theta_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_theta_basis_vals_and_derivs));
+
+        Field<EvalDeriv1DType, IdxRange<RBasisSubset, QDimRMesh>> r_basis_vals_and_derivs
+                = get_field(r_basis_vals_and_derivs_alloc);
+        Field<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>
+                theta_basis_vals_and_derivs = get_field(theta_basis_vals_and_derivs_alloc);
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
+
         assert(n_overlap_r * n_overlap_theta > 0);
         return ddc::transform_reduce(
                 non_zero_cells,
@@ -1178,29 +1498,37 @@ private:
                     assert(ib_trial_theta.uid() < BSplinesTheta::degree() + 1);
 
                     // Calculate the weak integral
-                    return ddc::transform_reduce(
+                    return ddc::parallel_transform_reduce(
+                            Kokkos::DefaultExecutionSpace(),
                             cell_quad_points,
                             0.0,
                             ddc::reducer::sum<double>(),
-                            [&](IdxQuadratureRTheta const idx_quad) {
-                                IdxQuadratureR const idx_r = ddc::select<QDimRMesh>(idx_quad);
-                                IdxQuadratureTheta const idx_theta
-                                        = ddc::select<QDimThetaMesh>(idx_quad);
+                            KOKKOS_LAMBDA(IdxQuadratureRTheta const idx_quad) {
+                                IdxQuadratureR const idx_r(idx_quad);
+                                IdxQuadratureTheta const idx_theta(idx_quad);
                                 return weak_integral_element(
                                         idx_r,
                                         idx_theta,
                                         r_basis_vals_and_derivs(ib_test_r, idx_r),
                                         r_basis_vals_and_derivs(ib_trial_r, idx_r),
-                                        m_theta_basis_vals_and_derivs(ib_test_theta, idx_theta),
-                                        m_theta_basis_vals_and_derivs(ib_trial_theta, idx_theta),
+                                        theta_basis_vals_and_derivs(ib_test_theta, idx_theta),
+                                        theta_basis_vals_and_derivs(ib_trial_theta, idx_theta),
                                         coeff_alpha,
                                         coeff_beta,
                                         evaluator,
-                                        mapping);
+                                        mapping,
+                                        int_volume_proxy);
                             });
                 });
     }
 
+    /**
+     * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction .
+     *
+     * @param[in] idx_theta @f$ \theta @f$ index.
+     *
+     * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
+     */
     static KOKKOS_FUNCTION int theta_mod(int idx_theta)
     {
         int ncells_theta = ddc::discrete_space<BSplinesTheta>().ncells();
@@ -1211,20 +1539,19 @@ private:
         return idx_theta;
     }
 
-public:
     /**
-    * @brief Fills the nnz data structure by computing the number of non-zero per line.
-    * This number is linked to the weak formulation and depends on @f$(r,\theta)@f$ splines.
-    * After this function the array will contain:
-    * nnz[0] = 0.
-    * nnz[1] = 0.
-    * nnz[2] = number of non-zero elements in line 0.
-    * nnz[3] = number of non-zero elements in lines 0-1.
-    * ...
-    * nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).
-    *
-    * @param[out]  nnz A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
-    */
+     * @brief Fills the nnz data structure by computing the number of non-zero per line.
+     * This number is linked to the weak formulation and depends on @f$(r,\theta)@f$ splines.
+     * After this function the array will contain:
+     * nnz[0] = 0.
+     * nnz[1] = 0.
+     * nnz[2] = number of non-zero elements in line 0.
+     * nnz[3] = number of non-zero elements in lines 0-1.
+     * ...
+     * nnz[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).
+     *
+     * @param[out]  nnz A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
+     */
     void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonInitNnz");

@@ -31,7 +31,7 @@ private:
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound_host> const& m_poisson_solver;
+            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
 
 public:
     /**
@@ -60,7 +60,7 @@ public:
                     GridR,
                     GridTheta,
                     PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound_host> const& poisson_solver)
+                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
         , m_builder(builder)
@@ -110,7 +110,7 @@ public:
             double const tau,
             int count_max = 25) const
     {
-        host_t<DFieldMemRTheta> phi_star(m_grid);
+        DFieldMemRTheta phi_star(m_grid);
         host_t<DFieldMemRTheta> ci(m_grid);
 
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
@@ -131,12 +131,13 @@ public:
             m_builder(get_field(rho_coef), get_const_field(rho_eq));
             PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef), m_evaluator);
             m_poisson_solver(poisson_rhs, get_field(phi_star));
+            auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star));
 
             // STEP 3: compute c^i
             // If phi_max is given:
             double norm_Linf_phi_star(0.);
             ddc::for_each(m_grid, [&](IdxRTheta const irp) {
-                double const abs_phi_star = fabs(phi_star(irp));
+                double const abs_phi_star = fabs(phi_star_host(irp));
                 norm_Linf_phi_star
                         = norm_Linf_phi_star > abs_phi_star ? norm_Linf_phi_star : abs_phi_star;
             });
@@ -154,7 +155,7 @@ public:
                         = difference_sigma > abs_diff_sigma ? difference_sigma : abs_diff_sigma;
 
                 sigma(irp) = ci(irp) * sigma(irp);
-                phi_eq(irp) = ci(irp) * phi_star(irp);
+                phi_eq(irp) = ci(irp) * phi_star_host(irp);
             });
 
         } while ((difference_sigma > tau) and (count < count_max));

@@ -89,7 +89,7 @@ inline std::size_t factorial(std::size_t f)
 }
 
 template <class T, std::size_t D>
-inline T dot_product(std::array<T, D> const& a, std::array<T, D> const& b)
+KOKKOS_INLINE_FUNCTION T dot_product(std::array<T, D> const& a, std::array<T, D> const& b)
 {
     T result = 0;
     for (std::size_t i(0); i < D; ++i) {

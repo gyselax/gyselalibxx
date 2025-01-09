@@ -7,6 +7,7 @@
 #include <sll/bernstein.hpp>
 #include <sll/mapping/cartesian_to_barycentric.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
+#include <sll/mapping/mapping_tools.hpp>
 #include <sll/polar_spline.hpp>
 #include <sll/view.hpp>
 
@@ -252,6 +253,7 @@ public:
         template <class DiscreteMapping>
         Impl(const DiscreteMapping& curvilinear_to_cartesian)
         {
+            static_assert(is_accessible_v<Kokkos::DefaultHostExecutionSpace, DiscreteMapping>);
             static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
             using DimX = typename DiscreteMapping::cartesian_tag_x;
             using DimY = typename DiscreteMapping::cartesian_tag_y;

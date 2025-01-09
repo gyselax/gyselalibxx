@@ -49,8 +49,10 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound_host>;
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+        SplineRThetaEvaluatorNullBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -104,7 +106,9 @@ int main(int argc, char** argv)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder_host const builder(mesh_rp);
+    SplineRThetaBuilder const builder(mesh_rp);
+    SplineRThetaBuilder_host const builder_host(mesh_rp);
+
 
     // --- Define the mapping. ------------------------------------------------------------------------
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
@@ -112,7 +116,13 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
             ddc::coordinate(mesh_r.back()));
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -120,15 +130,22 @@ int main(int argc, char** argv)
 
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
-            Kokkos::DefaultHostExecutionSpace(),
+            Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
+    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
+            Kokkos::DefaultHostExecutionSpace(),
+            to_physical_mapping,
+            builder_host,
+            spline_evaluator_extrapol_host);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
-    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
+
+    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder_host);
 
 
     // --- Time integration method --------------------------------------------------------------------
@@ -160,13 +177,18 @@ int main(int argc, char** argv)
     // --- Advection operator -------------------------------------------------------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            p_extrapolation_rule,
+            p_extrapolation_rule);
+    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
 
     AdvectionDomain advection_domain(to_physical_mapping);
 
@@ -174,8 +196,8 @@ int main(int argc, char** argv)
             time_stepper,
             advection_domain,
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+            builder_host,
+            spline_evaluator_extrapol_host);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -183,16 +205,14 @@ int main(int argc, char** argv)
 
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
-    host_t<DFieldMemRTheta> coeff_alpha(mesh_rp);
-    host_t<DFieldMemRTheta> coeff_beta(mesh_rp);
+    DFieldMemRTheta coeff_alpha(mesh_rp);
+    DFieldMemRTheta coeff_beta(mesh_rp);
+    ddc::parallel_fill(coeff_alpha, -1);
+    ddc::parallel_fill(coeff_beta, 0);
 
-    ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
-        coeff_alpha(irp) = -1.0;
-        coeff_beta(irp) = 0.0;
-    });
 
-    host_t<Spline2DMem> coeff_alpha_spline(idx_range_bsplinesRTheta);
-    host_t<Spline2DMem> coeff_beta_spline(idx_range_bsplinesRTheta);
+    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
+    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
 
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
@@ -208,8 +228,8 @@ int main(int argc, char** argv)
     BslPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             advection_operator,
-            builder,
-            spline_evaluator,
+            builder_host,
+            spline_evaluator_host,
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
@@ -217,20 +237,20 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             mesh_rp,
-            builder,
-            spline_evaluator,
+            builder_host,
+            spline_evaluator_host,
             poisson_solver,
-            spline_evaluator_extrapol);
+            spline_evaluator_extrapol_host);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
             advection_domain,
             to_physical_mapping,
             advection_operator,
             mesh_rp,
-            builder,
-            spline_evaluator,
+            builder_host,
+            spline_evaluator_host,
             poisson_solver,
-            spline_evaluator_extrapol);
+            spline_evaluator_extrapol_host);
 #endif
 
     // ================================================================================================
@@ -296,12 +316,13 @@ int main(int argc, char** argv)
     });
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    host_t<DFieldMemRTheta> phi_eq(mesh_rp);
+    DFieldMemRTheta phi_eq(mesh_rp);
+    host_t<DFieldMemRTheta> phi_eq_host(mesh_rp);
     host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
-    builder(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
+    builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator_host);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
-
+    ddc::parallel_deepcopy(phi_eq, phi_eq_host);
 
     // --- Save initial data --------------------------------------------------------------------------
     ddc::PdiEvent("initialization")
@@ -309,7 +330,7 @@ int main(int argc, char** argv)
             .and_with("y_coords", coords_y)
             .and_with("jacobian", jacobian)
             .and_with("density_eq", rho_eq)
-            .and_with("electrical_potential_eq", phi_eq);
+            .and_with("electrical_potential_eq", phi_eq_host);
 
 
     // ================================================================================================

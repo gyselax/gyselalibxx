@@ -602,7 +602,8 @@ def check_exec_space_usage(file):
             scope = scopes[scope_id]
 
             if config.data[current_idx]['str'] == 'KOKKOS_LAMBDA':
-                ast_parent = config.data_xml.find(f".token[@id='{config.data[current_idx-1]['astParent']}']").attrib
+                ast_parent_id = config.data[current_idx-1].get('astParent', config.data[current_idx-1]['id'])
+                ast_parent = config.data_xml.find(f".token[@id='{ast_parent_id}']").attrib
                 parallel_func_start_idx = config.data.index(ast_parent)
                 args = [t['str'] for t in config.data[parallel_func_start_idx+1:current_idx]]
                 if 'DefaultHostExecutionSpace' in args:
