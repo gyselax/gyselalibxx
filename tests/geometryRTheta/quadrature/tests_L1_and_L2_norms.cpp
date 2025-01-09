@@ -103,7 +103,7 @@ void check_norms(
 template <class Mapping>
 void launch_tests(
         Mapping const& mapping,
-        SplineRThetaBuilder const& builder,
+        SplineRThetaBuilder_host const& builder,
         IdxRangeRTheta const& grid,
         std::array<std::array<double, 2>, 5> const& expected_norms,
         std::array<std::array<double, 2>, 5> const& TOLs)
@@ -221,7 +221,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    SplineRThetaBuilder builder(grid);
+    SplineRThetaBuilder_host builder(grid);
 
 
     // ------------------------------------------------------------------------------------------------
@@ -262,10 +262,14 @@ TEST_P(SplineQuadrature, TestFunctions)
     ddc::ConstantExtrapolationRule<R, Theta> bv_r_max(r_max);
     ddc::PeriodicExtrapolationRule<Theta> bv_p_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_p_max;
-    SplineRThetaEvaluatorConstBound
+    SplineRThetaEvaluatorConstBound_host
             spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
 
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound> const
+    DiscreteToCartesianBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluatorConstBound_host> const
             discrete_mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     mapping_1,

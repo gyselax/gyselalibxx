@@ -42,8 +42,8 @@ private:
     AdvectionDomain const& m_advection_domain;
     InvAdvectionMapping m_mapping;
 
-    SplineRThetaBuilder const& m_builder_advection_field;
-    SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
+    SplineRThetaBuilder_host const& m_builder_advection_field;
+    SplineRThetaEvaluatorConstBound_host const& m_evaluator_advection_field;
 
 
 public:
@@ -79,8 +79,8 @@ public:
             TimeStepper const& time_stepper,
             AdvectionDomain const& advection_domain,
             Mapping const& mapping,
-            SplineRThetaBuilder const& builder_advection_field,
-            SplineRThetaEvaluatorConstBound const& evaluator_advection_field,
+            SplineRThetaBuilder_host const& builder_advection_field,
+            SplineRThetaEvaluatorConstBound_host const& evaluator_advection_field,
             double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
         , m_advection_domain(advection_domain)
@@ -220,7 +220,7 @@ private:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_center_pt(FieldRTheta<T> values) const
+    void unify_value_at_center_pt(Field<T, IdxRangeRTheta, Kokkos::HostSpace> values) const
     {
         IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
         IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);

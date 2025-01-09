@@ -102,7 +102,7 @@ private:
     PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace> const
             m_polar_spline_evaluator;
 
-    SplineRThetaEvaluatorNullBound const m_spline_evaluator;
+    SplineRThetaEvaluatorNullBound_host const m_spline_evaluator;
 
     double const m_epsilon;
 
@@ -145,7 +145,7 @@ public:
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
 
         // Compute the spline representation of the electrostatic potential
-        SplineRThetaBuilder const builder(grid);
+        SplineRThetaBuilder_host const builder(grid);
         IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
         host_t<Spline2DMem> electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
@@ -215,7 +215,7 @@ private:
         static_assert(
                 (std::is_same_v<
                          Evaluator,
-                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2D>>)
+                         SplineRThetaEvaluatorNullBound_host> && std::is_same_v<SplineType, host_t<Spline2D>>)
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
@@ -362,7 +362,7 @@ public:
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
 
         // Compute the spline representation of the electrostatic potential
-        SplineRThetaBuilder const builder(grid);
+        SplineRThetaBuilder_host const builder(grid);
         IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
         host_t<Spline2DMem> electrostatic_potential_coef(idx_range_bsplinesRTheta);
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
@@ -446,7 +446,7 @@ private:
         static_assert(
                 (std::is_same_v<
                          Evaluator,
-                         SplineRThetaEvaluatorNullBound> && std::is_same_v<SplineType, host_t<Spline2D>>)
+                         SplineRThetaEvaluatorNullBound_host> && std::is_same_v<SplineType, host_t<Spline2D>>)
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<

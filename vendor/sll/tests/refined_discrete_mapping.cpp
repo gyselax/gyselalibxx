@@ -69,7 +69,7 @@ struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_typ
 {
 };
 
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
+using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
@@ -562,7 +562,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
 
 
     // Operators ---
-    SplineRThetaBuilder builder(grid);
+    SplineRThetaBuilder_host builder(grid);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
     SplineRThetaEvaluator spline_evaluator(
@@ -575,14 +575,15 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     // Tests ---
     std::array<double, 3> results;
 
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator> mapping_builder(
-            Kokkos::DefaultHostExecutionSpace(),
-            analytical_mapping,
-            builder,
-            spline_evaluator);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+            mapping_builder(
+                    Kokkos::DefaultHostExecutionSpace(),
+                    analytical_mapping,
+                    builder,
+                    spline_evaluator);
     DiscreteToCartesian discrete_mapping = mapping_builder();
 
-    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, 16, 32>
+    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator, 16, 32>
             mapping_builder_16x32(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
@@ -590,7 +591,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     spline_evaluator);
     DiscreteToCartesian refined_mapping_16x32 = mapping_builder_16x32();
 
-    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, 32, 64>
+    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator, 32, 64>
             mapping_builder_32x64(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
@@ -598,7 +599,13 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     spline_evaluator);
     DiscreteToCartesian refined_mapping_32x64 = mapping_builder_32x64();
 
-    RefinedDiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator, 64, 128>
+    RefinedDiscreteToCartesianBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluator,
+            64,
+            128>
             mapping_builder_64x128(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
