@@ -220,7 +220,7 @@ private:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_center_pt(FieldRTheta<T> values) const
+    void unify_value_at_center_pt(Field<T, IdxRangeRTheta, Kokkos::HostSpace> values) const
     {
         IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
         IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
