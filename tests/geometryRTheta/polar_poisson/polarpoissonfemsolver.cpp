@@ -26,18 +26,15 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound_host>;
+        SplineRThetaEvaluatorNullBound>;
 
 #if defined(CIRCULAR_MAPPING)
 using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorNullBound_host>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -97,7 +94,7 @@ int main(int argc, char** argv)
     IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
 #if defined(CIRCULAR_MAPPING)
     const Mapping mapping;
@@ -108,7 +105,7 @@ int main(int argc, char** argv)
     ddc::NullExtrapolationRule bv_r_max;
     ddc::PeriodicExtrapolationRule<Theta> bv_p_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_p_max;
-    SplineRThetaEvaluatorNullBound_host evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
+    SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             mapping,
@@ -192,7 +189,7 @@ int main(int argc, char** argv)
         start_time = std::chrono::system_clock::now();
         ddc::NullExtrapolationRule r_extrapolation_rule;
         ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-        SplineRThetaEvaluatorNullBound_host
+        SplineRThetaEvaluatorNullBound
                 eval(r_extrapolation_rule,
                      r_extrapolation_rule,
                      p_extrapolation_rule,

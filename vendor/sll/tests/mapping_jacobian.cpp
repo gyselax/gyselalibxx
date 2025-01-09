@@ -57,7 +57,7 @@ struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
 
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
+using SplineRThetaBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::DefaultHostExecutionSpace::memory_space,
         BSplinesR,
@@ -276,7 +276,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     IdxRangeTheta interpolation_idx_range_Theta(InterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 
-    SplineRThetaBuilder_host builder(grid);
+    SplineRThetaBuilder builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluator evaluator(
@@ -284,12 +284,11 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
-            mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    analytical_mapping,
-                    builder,
-                    evaluator);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            analytical_mapping,
+            builder,
+            evaluator);
     DiscreteToCartesian mapping = mapping_builder();
 
     static_assert(has_2d_jacobian_v<decltype(mapping), CoordRTheta>);

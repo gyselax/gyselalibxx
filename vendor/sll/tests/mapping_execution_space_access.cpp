@@ -64,7 +64,7 @@ using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 using DeviceExecSpace = Kokkos::DefaultExecutionSpace;
 
 template <class ExecSpace>
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
+using SplineRThetaBuilder = ddc::SplineBuilder2D<
         ExecSpace,
         typename ExecSpace::memory_space,
         BSplinesR,
@@ -301,7 +301,7 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
-    SplineRThetaBuilder_host<HostExecSpace> builder(interpolation_idx_range_rtheta);
+    SplineRThetaBuilder<HostExecSpace> builder(interpolation_idx_range_rtheta);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
@@ -314,7 +314,7 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     DiscreteToCartesianBuilder<
             X,
             Y,
-            SplineRThetaBuilder_host<HostExecSpace>,
+            SplineRThetaBuilder<HostExecSpace>,
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
@@ -413,7 +413,7 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     static_assert(
             is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
-    SplineRThetaBuilder_host<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
+    SplineRThetaBuilder<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
@@ -426,7 +426,7 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     DiscreteToCartesianBuilder<
             X,
             Y,
-            SplineRThetaBuilder_host<DeviceExecSpace>,
+            SplineRThetaBuilder<DeviceExecSpace>,
             SplineRThetaEvaluator<DeviceExecSpace>>
             mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
     DiscreteToCartesian to_physical_mapping = mapping_builder();

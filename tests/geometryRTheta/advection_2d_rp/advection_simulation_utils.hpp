@@ -180,7 +180,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
 {
     static_assert(!std::is_same_v<
                   LogicalToPhysicalMapping,
-                  DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound_host>>);
+                  DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound>>);
 
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp(idx_range_rp);
     CoordXY const coord_xy_center = CoordXY(logical_to_physical_mapping(CoordRTheta(0, 0)));
@@ -351,8 +351,8 @@ void simulate(
         Simulation& simulation,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
-        SplineRThetaBuilder_host const& advection_builder,
-        SplineRThetaEvaluatorConstBound_host& advection_evaluator,
+        SplineRThetaBuilder const& advection_builder,
+        SplineRThetaEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
         bool save_curves,
@@ -585,8 +585,8 @@ void simulate_the_3_simulations(
         AdvectionDomain& advection_domain,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
-        SplineRThetaBuilder_host const& advection_builder,
-        SplineRThetaEvaluatorConstBound_host& advection_evaluator,
+        SplineRThetaBuilder const& advection_builder,
+        SplineRThetaEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
         bool const& save_curves,

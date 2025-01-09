@@ -37,14 +37,14 @@
  * @tparam GridR The poloidal grid type.
  * @tparam PolarBSplinesRTheta The type of the 2D polar bsplines (on the coordinate
  * system (r,theta) including bsplines which traverse the O point).
- * @tparam SplineRThetaEvaluatorNullBound_host The type of the 2D (cross-product) spline evaluator.
+ * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
 template <
         class GridR,
         class GridTheta,
         class PolarBSplinesRTheta,
-        class SplineRThetaEvaluatorNullBound_host,
+        class SplineRThetaEvaluatorNullBound,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
 {
@@ -269,7 +269,7 @@ public:
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound_host const& spline_evaluator)
+            SplineRThetaEvaluatorNullBound const& spline_evaluator)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_idxrange_fem_non_singular(
@@ -907,7 +907,7 @@ private:
             EvalDeriv2DType const& trial_bspline_val_and_deriv,
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
+            SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -932,7 +932,7 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
+            SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -957,7 +957,7 @@ private:
             EvalDeriv1DType const& test_bspline_val_and_deriv_theta,
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
+            SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -983,7 +983,7 @@ private:
             EvalDeriv1DType const& trial_bspline_val_and_deriv_theta,
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
+            SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         return templated_weak_integral_element(
@@ -1038,7 +1038,7 @@ private:
             TrialValDerivType const& trial_bspline_val_and_deriv_theta,
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& spline_evaluator,
+            SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping)
     {
         static_assert(
@@ -1092,7 +1092,7 @@ private:
             IdxBSRTheta idx_trial,
             host_t<ConstSpline2D> coeff_alpha,
             host_t<ConstSpline2D> coeff_beta,
-            SplineRThetaEvaluatorNullBound_host const& evaluator,
+            SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping)
     {
         // 0 <= idx_test_r < 8

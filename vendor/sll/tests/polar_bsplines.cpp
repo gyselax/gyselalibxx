@@ -94,7 +94,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     using BSplinesR = typename TestFixture::BSplinesR;
     using BSplinesTheta = typename TestFixture::BSplinesTheta;
     using CircToCart = CircularToCartesian<R, Theta, X, Y>;
-    using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
+    using SplineRThetaBuilder = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
@@ -164,7 +164,7 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
     ddc::DiscreteDomain<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    SplineRThetaBuilder_host builder_rp(interpolation_idx_range);
+    SplineRThetaBuilder builder_rp(interpolation_idx_range);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
@@ -175,12 +175,11 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             theta_extrapolation_rule);
 
     const CircToCart coord_changer;
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
-            mapping_builder(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    coord_changer,
-                    builder_rp,
-                    evaluator_rp);
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator> mapping_builder(
+            Kokkos::DefaultHostExecutionSpace(),
+            coord_changer,
+            builder_rp,
+            evaluator_rp);
     DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
