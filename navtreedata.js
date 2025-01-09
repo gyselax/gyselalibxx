@@ -273,9 +273,9 @@ var NAVTREEINDEX =
 "classFluidMoments.html",
 "classMatrix__Center__Block.html",
 "classPolarBSplines_1_1Impl.html#aca84a982ed6da7a6167cd3832f23ec97",
-"ddc__alias__inline__functions_8hpp_source.html",
-"poisson__like__rhs__function_8hpp_source.html",
-"structPolarSplineSpan.html#ab7972e7eda2e01153051dfef63695bde"
+"collisions__intra_8hpp_source.html",
+"output_8hpp_source.html",
+"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

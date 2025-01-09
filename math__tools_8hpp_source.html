@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('math__tools_8hpp_source.html',''); ini
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, std::<span class="keywordtype">size_t</span> D&gt;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">inline</span> <a class="code hl_struct" href="structT.html">T</a> dot_product(std::array&lt;T, D&gt; <span class="keyword">const</span>&amp; a, std::array&lt;T, D&gt; <span class="keyword">const</span>&amp; b)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>KOKKOS_INLINE_FUNCTION <a class="code hl_struct" href="structT.html">T</a> dot_product(std::array&lt;T, D&gt; <span class="keyword">const</span>&amp; a, std::array&lt;T, D&gt; <span class="keyword">const</span>&amp; b)</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>{</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_struct" href="structT.html">T</a> result = 0;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">for</span> (std::size_t i(0); i &lt; D; ++i) {</div>

@@ -1,5 +1,13 @@
 var NAVTREEINDEX7 =
 {
+"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html":[16,184,2],
+"structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html":[16,184,3],
+"structPolarSplineSpan.html":[16,185],
+"structPolarSplineSpan.html#a09f1d7d4e23574060fce940f93bb97fd":[16,185,2],
+"structPolarSplineSpan.html#a0ad2c2a3ed2a32668983b487f676eaa3":[16,185,5],
+"structPolarSplineSpan.html#a12d5dfac7a9deb9c15738773a51b11b3":[16,185,0],
+"structPolarSplineSpan.html#a1f39c4c6ea9d020a58eec4b8507691bd":[16,185,1],
+"structPolarSplineSpan.html#a8a7719af1d76ece52c9f66071b8f05e9":[16,185,3],
 "structPolarSplineSpan.html#ab7972e7eda2e01153051dfef63695bde":[16,185,4],
 "structPolarSplineSpan.html#ad314615b5ac228a7e487def09baed1a7":[16,185,6],
 "structPolarSplineView.html":[16,186],

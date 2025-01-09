@@ -1,5 +1,13 @@
 var NAVTREEINDEX6 =
 {
+"output_8hpp_source.html":[17,0,9,1],
+"pages.html":[],
+"paraconfpp_8hpp_source.html":[17,0,15,0],
+"partial__derivatives_8hpp.html":[17,0,11,1],
+"partial__derivatives_8hpp_source.html":[17,0,11,1],
+"patch_8hpp_source.html":[17,0,14,0,7],
+"pdi__helper_8hpp_source.html":[17,0,9,2],
+"physical__geometry_8hpp_source.html":[17,1,2,0,8],
 "poisson__like__rhs__function_8hpp_source.html":[17,0,3,5,1],
 "polar__bsplines_8hpp_source.html":[17,2,0,0,0,4],
 "polar__poisson_2params_8yaml_8hpp_source.html":[17,1,1,3,0],
@@ -241,13 +249,5 @@ var NAVTREEINDEX6 =
 "structPolarSpline.html#a34e62893f3710c8798ada29346a5a842":[16,182,2],
 "structPolarSpline.html#a5a692091b5e1dbccc094ec737afc5cef":[16,182,0],
 "structPolarSpline.html#ab3a28213cc6fec9de5bed1b39626ff19":[16,182,1],
-"structPolarSpline.html#adf1f0b99bd37c9d9fea108dcf8570adb":[16,182,6],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html":[16,184,0],
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html":[16,184,1],
-"structPolarSplineSpan.html":[16,185],
-"structPolarSplineSpan.html#a09f1d7d4e23574060fce940f93bb97fd":[16,185,2],
-"structPolarSplineSpan.html#a0ad2c2a3ed2a32668983b487f676eaa3":[16,185,5],
-"structPolarSplineSpan.html#a12d5dfac7a9deb9c15738773a51b11b3":[16,185,0],
-"structPolarSplineSpan.html#a1f39c4c6ea9d020a58eec4b8507691bd":[16,185,1],
-"structPolarSplineSpan.html#a8a7719af1d76ece52c9f66071b8f05e9":[16,185,3]
+"structPolarSpline.html#adf1f0b99bd37c9d9fea108dcf8570adb":[16,182,6]
 };
