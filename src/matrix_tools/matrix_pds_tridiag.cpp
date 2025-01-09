@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "sll/matrix_pds_tridiag.hpp"
+#include "matrix_pds_tridiag.hpp"
 
 extern "C" int dpttrf_(int const* n, double* d, double* e, int* info);
 extern "C" int dpttrs_(

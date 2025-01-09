@@ -5,11 +5,10 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/matrix_banded.hpp>
-
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
+#include "matrix_banded.hpp"
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 

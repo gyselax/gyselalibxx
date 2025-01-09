@@ -14,6 +14,7 @@ The `src/` folder contains all the code necessary to build a gyrokinetic semi-La
 - [io](./io/README.md) - Code describing tools for inputting and outputting data in a simulation.
 - [mapping](./mapping/README.md) - Code describing tools for handling different coordinate systems.
 - [math\_tools](./math_tools/README.md) - Code describing math tools functions.
+- [matrix\_tools](./matrix_tools/README.md) - Code describing both matrix storage and the functions to solve matrix equations.
 - [multipatch](./multipatch/README.md) - Code describing multipatch geometry.
 <!-- - [paraconfpp](./paraconfpp/README.md) - Paraconf utility functions. -->
 - [mpi\_parallelisation](./mpi_parallelisation/README.md) - Code describing the MPI parallelisation.

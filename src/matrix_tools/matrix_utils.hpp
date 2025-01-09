@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ginkgo/ginkgo.hpp>
 
@@ -123,7 +124,7 @@ void save_logger(
     auto res = gko::matrix::Dense<double>::create(gko_exec, gko::dim<2>(b_view.extent(0), 1));
     res->copy_from(b);
 
-    auto norm_dim = gko::dim<2>(1, 1);
+    gko::dim<2> norm_dim(1, 1);
     // allocate rhs norm on host.
     auto b_norm_host = gko::matrix::Dense<double>::create(gko_exec->get_master(), norm_dim);
     b_norm_host->fill(0.0);
@@ -188,7 +189,7 @@ void save_logger(
             create(gko_exec, gko::batch_dim<2>(batch_size, gko::dim<2>(b_view.extent(1), 1)));
     res->copy_from(b);
 
-    auto norm_dim = gko::batch_dim<2>(batch_size, gko::dim<2>(1, 1));
+    gko::batch_dim<2> norm_dim(batch_size, gko::dim<2>(1, 1));
     // allocate rhs norm on host.
     auto b_norm_host = gko::batch::MultiVector<double>::create(gko_exec->get_master(), norm_dim);
     b_norm_host->fill(0.0);

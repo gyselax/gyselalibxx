@@ -1,12 +1,12 @@
+// SPDX-License-Identifier: MIT
 // Copyright (C) The DDC development team, see COPYRIGHT.md file
 //
-// SPDX-License-Identifier: MIT
 
 #pragma once
 
-#include <sll/matrix_batch.hpp>
-
 #include <Kokkos_Core.hpp>
+
+#include "matrix_batch.hpp"
 
 /**
  * @brief A structure for solving a set of independant tridiagonal systems using a direct method.

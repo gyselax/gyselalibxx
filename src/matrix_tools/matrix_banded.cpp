@@ -2,7 +2,7 @@
 #include <cassert>
 #include <cmath>
 
-#include "sll/matrix_banded.hpp"
+#include "matrix_banded.hpp"
 
 extern "C" int dgbtrf_(
         int const* m,

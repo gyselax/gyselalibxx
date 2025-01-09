@@ -134,12 +134,12 @@ int main(int argc, char** argv)
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
     // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
@@ -152,7 +152,7 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -197,7 +197,7 @@ int main(int argc, char** argv)
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,

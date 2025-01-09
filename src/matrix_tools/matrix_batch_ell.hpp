@@ -1,12 +1,13 @@
+// SPDX-License-Identifier: MIT
 #pragma once
-
-#include <sll/matrix_batch.hpp>
-#include <sll/matrix_utils.hpp>
 
 #include <ginkgo/extensions/kokkos.hpp>
 #include <ginkgo/ginkgo.hpp>
 
 #include <Kokkos_Core.hpp>
+
+#include "matrix_batch.hpp"
+#include "matrix_utils.hpp"
 
 /**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.

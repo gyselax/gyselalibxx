@@ -7,7 +7,7 @@
 DField<Patch1::IdxRangeBS12> MultipatchSplineOnionShapeTest::set_spline_1(
         DField<Patch1::IdxRangeBS12> const& function_1_coef)
 {
-    SplineRThetaBuilder_host<1, DeviceExecSpace> const builder_1(idx_range_rtheta1);
+    SplineRThetaBuilder<1, DeviceExecSpace> const builder_1(idx_range_rtheta1);
 
     // Exact function
     DFieldMem<Patch1::IdxRange12> function_1_alloc(idx_range_rtheta1);
@@ -31,7 +31,7 @@ DField<Patch1::IdxRangeBS12> MultipatchSplineOnionShapeTest::set_spline_1(
 DField<Patch2::IdxRangeBS12> MultipatchSplineOnionShapeTest::set_spline_2(
         DField<Patch2::IdxRangeBS12> const& function_2_coef)
 {
-    SplineRThetaBuilder_host<2, DeviceExecSpace> const builder_2(idx_range_rtheta2);
+    SplineRThetaBuilder<2, DeviceExecSpace> const builder_2(idx_range_rtheta2);
 
     // Exact function
     DFieldMem<Patch2::IdxRange12> function_2_alloc(idx_range_rtheta2);

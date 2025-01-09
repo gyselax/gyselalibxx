@@ -49,12 +49,9 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound_host>;
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
+        SplineRThetaEvaluatorNullBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 namespace fs = std::filesystem;
@@ -104,7 +101,7 @@ int main(int argc, char** argv)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder_host const builder(mesh_rp);
+    SplineRThetaBuilder const builder(mesh_rp);
 
     // --- Define the mapping. ------------------------------------------------------------------------
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
@@ -112,7 +109,7 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(
             ddc::coordinate(mesh_r.back()));
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -160,7 +157,7 @@ int main(int argc, char** argv)
     // --- Advection operator -------------------------------------------------------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,

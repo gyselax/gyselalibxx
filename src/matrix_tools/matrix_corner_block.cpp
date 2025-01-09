@@ -4,7 +4,7 @@
 #include <Kokkos_Core.hpp>
 #include <string.h>
 
-#include "sll/matrix_corner_block.hpp"
+#include "matrix_corner_block.hpp"
 
 Matrix_Corner_Block::Matrix_Corner_Block(int const n, int const k, std::unique_ptr<Matrix> q)
     : Matrix(n)
@@ -98,11 +98,16 @@ void Matrix_Corner_Block::calculate_delta_to_factorize()
 
 void Matrix_Corner_Block::factorize()
 {
+    /// Factorise Q
     q_block->factorize();
+
+    /// Solve Q \beta = \gamma for \beta
     q_block->solve_multiple_inplace(Abm_1_gamma);
 
+    /// Calculate \delta' = \delta - \lambda \beta
     calculate_delta_to_factorize();
 
+    /// Factorise \delta'
     delta.factorize();
 }
 
@@ -159,12 +164,32 @@ DSpan1D Matrix_Corner_Block::solve_inplace(DSpan1D const bx) const
     DSpan1D const u(bx.data_handle(), nb);
     DSpan1D const v(bx.data_handle() + nb, k);
 
+    //-------------------------------
+    // Solve the equation:
+    // Lx=f':
+    // |    Q    |    0    | |x| = |u|
+    // | \lambda | \delta' | |y|   |v|
+    //-------------------------------
+
+    // Solve Q h = u for h inplace
     q_block->solve_inplace(u);
 
+    // Calculate y' = v - \lambda x
     solve_lambda_section(v, u);
 
+    // Solve \delta' y = y' for y
     delta.solve_inplace(v);
 
+    //-------------------------------
+    // Solve the equation:
+    // Uc=x:
+    // | I | \beta | |d| = |x|
+    // | 0 |   I   | |e|   |y|
+    //-------------------------------
+
+    // y = e
+
+    // Calculate d = x - \beta e
     solve_gamma_section(u, v);
 
     return bx;
@@ -176,12 +201,31 @@ DSpan1D Matrix_Corner_Block::solve_transpose_inplace(DSpan1D const bx) const
     DSpan1D const u(bx.data_handle(), nb);
     DSpan1D const v(bx.data_handle() + nb, k);
 
+    //-------------------------------
+    // Solve the equation:
+    // U^T x = f':
+    // |   I   | 0 | |x| = |u|
+    // | \beta | I | |y|   |v|
+    //-------------------------------
+
+    // u = x
+    // Calculate y = v - \beta x
     solve_gamma_section_transpose(v, u);
 
+    //-------------------------------
+    // Solve the equation:
+    // Lx=f':
+    // | Q | \lambda | |d| = |x|
+    // | 0 | \delta' | |e|   |y|
+    //-------------------------------
+
+    // Solve \delta' e = y for e
     delta.solve_transpose_inplace(v);
 
+    // Calculate d' = x - \lambda e
     solve_lambda_section_transpose(u, v);
 
+    // Solve Qd = d' for d
     q_block->solve_transpose_inplace(u);
 
     return bx;

@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
-#include <Kokkos_Core.hpp>
+#include <sll/view.hpp>
 
-#include "sll/view.hpp"
+#include <Kokkos_Core.hpp>
 
 
 /**

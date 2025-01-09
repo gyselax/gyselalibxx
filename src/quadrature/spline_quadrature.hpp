@@ -11,8 +11,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/matrix.hpp>
-
 #include "ddc_aliases.hpp"
 
 

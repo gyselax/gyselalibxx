@@ -31,21 +31,6 @@ target_link_libraries(bsplines_tests_sll
 
 gtest_discover_tests(bsplines_tests_sll DISCOVERY_MODE PRE_TEST)
 
-add_executable(matrix_tests_sll
-  main.cpp
-  matrix.cpp
-  matrix_batch_ell.cpp
-  matrix_batch_csr.cpp
-  matrix_batch_tridiag.cpp
-)
-target_compile_features(matrix_tests_sll PUBLIC cxx_std_17)
-target_link_libraries(matrix_tests_sll
-    PUBLIC
-        GTest::gtest
-        sll::SLL
-)
-gtest_discover_tests(matrix_tests_sll DISCOVERY_MODE PRE_TEST)
-
 add_executable(bernstein_tests_sll
   main.cpp
 	bernstein.cpp

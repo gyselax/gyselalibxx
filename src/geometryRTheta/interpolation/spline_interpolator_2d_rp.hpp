@@ -31,16 +31,15 @@ public:
             GridTheta>;
 
 private:
-    SplineRThetaBuilder_host const& m_builder;
+    SplineRThetaBuilder const& m_builder;
 
     evaluator_type const& m_evaluator;
 
     mutable host_t<DFieldMem<IdxRangeBSRTheta>> m_coefs;
 
-    using r_deriv_type = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type1>>;
-    using p_deriv_type = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type2>>;
-    using mixed_deriv_type
-            = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type>>;
+    using r_deriv_type = host_t<DConstField<SplineRThetaBuilder::batched_derivs_domain_type1>>;
+    using p_deriv_type = host_t<DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>>;
+    using mixed_deriv_type = host_t<DConstField<SplineRThetaBuilder::batched_derivs_domain_type>>;
 
 public:
     /**
@@ -48,9 +47,7 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolatorRTheta(
-            SplineRThetaBuilder_host const& builder,
-            evaluator_type const& evaluator)
+    SplineInterpolatorRTheta(SplineRThetaBuilder const& builder, evaluator_type const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(get_spline_idx_range(builder))
@@ -128,7 +125,7 @@ public:
             GridTheta>;
 
 private:
-    SplineRThetaBuilder_host const& m_builder;
+    SplineRThetaBuilder const& m_builder;
 
     evaluator_type const& m_evaluator;
 
@@ -139,7 +136,7 @@ public:
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
     PreallocatableSplineInterpolatorRTheta(
-            SplineRThetaBuilder_host const& builder,
+            SplineRThetaBuilder const& builder,
             evaluator_type const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)

@@ -52,11 +52,8 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorConstBound_host>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
@@ -182,8 +179,8 @@ struct GeneralParameters
 {
     IdxRangeRTheta grid;
     PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& interpolator;
-    SplineRThetaBuilder_host const& advection_builder;
-    SplineRThetaEvaluatorConstBound_host& advection_evaluator;
+    SplineRThetaBuilder const& advection_builder;
+    SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
@@ -296,12 +293,12 @@ int main(int argc, char** argv)
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
     // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
@@ -315,7 +312,7 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
 
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),

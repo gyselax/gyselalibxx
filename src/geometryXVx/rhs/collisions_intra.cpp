@@ -3,11 +3,10 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "sll/matrix_batch_tridiag.hpp"
-
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
 #include "fluid_moments.hpp"
+#include "matrix_batch_tridiag.hpp"
 
 template <class TargetDim>
 KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(Idx<GridVx> const& index)

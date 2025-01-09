@@ -1,13 +1,20 @@
-#ifndef MATRIX_DENSE_H
-#define MATRIX_DENSE_H
+// SPDX-License-Identifier: MIT
+#pragma once
 #include <memory>
 
-#include "sll/matrix.hpp"
+#include "matrix.hpp"
 
+/**
+ * @brief A class describing a dense matrix.
+ */
 class Matrix_Dense : public Matrix
 {
 public:
-    Matrix_Dense(int);
+    /**
+     * @brief A constructor for the matrix.
+     * @param[in] n The size of the n x n Matrix.
+     */
+    explicit Matrix_Dense(int n);
     virtual double get_element(int i, int j) const override;
     virtual void set_element(int i, int j, double aij) override;
 
@@ -17,5 +24,3 @@ private:
     std::unique_ptr<int[]> ipiv;
     std::unique_ptr<double[]> a;
 };
-
-#endif // MATRIX_DENSE_H

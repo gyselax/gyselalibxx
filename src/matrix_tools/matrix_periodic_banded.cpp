@@ -5,9 +5,9 @@
 
 #include <Kokkos_Core.hpp>
 
-#include "sll/matrix.hpp"
-#include "sll/matrix_dense.hpp"
-#include "sll/matrix_periodic_banded.hpp"
+#include "matrix.hpp"
+#include "matrix_dense.hpp"
+#include "matrix_periodic_banded.hpp"
 
 using std::max;
 

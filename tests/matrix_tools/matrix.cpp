@@ -3,13 +3,11 @@
 #include <memory>
 
 #include <sll/math_tools.hpp>
-#include <sll/matrix.hpp>
+#include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 
-#include "sll/view.hpp"
-
-#include "test_utils.hpp"
+#include "matrix.hpp"
 
 namespace {
 

@@ -93,7 +93,7 @@ public:
     using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
 
 
-    using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
+    using SplineRThetaBuilder = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
@@ -192,7 +192,7 @@ public:
         IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
 
         // --- Define the operators. ----------------------------------------------------------------------
-        SplineRThetaBuilder_host const builder(grid);
+        SplineRThetaBuilder const builder(grid);
         ddc::NullExtrapolationRule r_extrapolation_rule;
         ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
         SplineRThetaEvaluator spline_evaluator(
@@ -215,7 +215,7 @@ public:
                 CartesianToCircular<X_pc, Y_pc, R, Theta>>;
         const PseudoCartToCircToCart
                 pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
                 mapping_builder_circ(
                         Kokkos::DefaultHostExecutionSpace(),
                         circ_to_cart,
@@ -250,7 +250,7 @@ public:
                 CartesianToCircular<X_pc, Y_pc, R, Theta>>;
         const PseudoCartToCzarnyToCart
                 pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluator>
                 mapping_builder_czarny(
                         Kokkos::DefaultHostExecutionSpace(),
                         czarny_to_cart,

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "sll/matrix_batch_tridiag.hpp"
+#include "matrix_batch_tridiag.hpp"
 
 using ConstField2d = Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>;
 

@@ -12,8 +12,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/matrix.hpp>
-
 #include "ddc_aliases.hpp"
 
 

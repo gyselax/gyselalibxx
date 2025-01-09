@@ -48,7 +48,7 @@ parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_r
 HOME_DIR = Path(__file__).parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
 
-auto_functions = set(['build_kokkos_layout', 'get', 'create_geometry_mirror_view'])
+auto_functions = set(['build_kokkos_layout', 'get', 'create_geometry_mirror_view', 'make_temporary_clone'])
 field_mem_functions = set()
 
 def report_error(level, file, linenr, message):
@@ -256,12 +256,23 @@ def search_for_unnecessary_auto(file):
         var_names = [a['str'] for a in var_attribs]
         for idx, var_name in enumerate(var_names):
             start = var_data_idx[idx]
+
+            auto_idx = next(i for i,v in reversed(list(enumerate(config.data[:start]))) if v['str'] == 'auto')
+
+            # If declaration is of the form auto [x,y] = ...
+            # then allow this tuple collection
+            if config.data[auto_idx+1]['str'] == '[':
+                continue
+
             end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
             # If declaration is of the form auto x = ... instead of auto x(...) then examine next code phrase
             if end == start + 1:
                 assert config.data[end+1]['str'] == var_name
                 start = end + 1
                 end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
+
+            if any(v['str'] == 'gko' for v in config.data[start:end]) and any(v['str'] == 'create' for v in config.data[start:end]):
+                continue
 
             # If rhs of assignment is not a mirror function (where auto is compulsory) or a function returning auto
             # then raise an error
@@ -275,6 +286,11 @@ def search_for_unnecessary_auto(file):
         for elem in config.data_xml.findall(".token[@str='[']"):
             start_idx = config.data.index(elem.attrib)+1
             end_idx = next(j for j,a in enumerate(config.data[start_idx:], start_idx) if a['str'] == ']')
+
+            # Ignore non-lambda use of []
+            if config.data[end_idx+1]['str'] != '(':
+                continue
+
             keys = ''.join(a['str'] for a in config.data[start_idx:end_idx]).split(',')
             if not all(len(k) == 0 or k[0] in ('&', '=') for k in keys):
                 continue

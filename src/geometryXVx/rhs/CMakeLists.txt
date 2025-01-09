@@ -19,11 +19,11 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
         DDC::pdi
-        sll::SLL
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::quadrature
         gslx::speciesinfo
         gslx::initialization_${GEOMETRY_VARIANT}
+        gslx::matrix_tools
         gslx::timestepper
         gslx::utils_${GEOMETRY_VARIANT}
         gslx::utils
