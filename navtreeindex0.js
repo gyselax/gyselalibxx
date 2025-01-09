@@ -18,7 +18,7 @@ var NAVTREEINDEX0 =
 "advection__field__rp_8hpp_source.html":[17,0,3,1,0],
 "advection__simulation__utils_8hpp_source.html":[17,1,1,1,0],
 "annotated.html":[16],
-"assert_8hpp_source.html":[17,0,19,0],
+"assert_8hpp_source.html":[17,0,20,0],
 "barycentric__to__cartesian_8hpp_source.html":[17,2,0,0,0,0,0],
 "bernstein_8hpp_source.html":[17,2,0,0,0,1],
 "bsl__advection__1d_8hpp_source.html":[17,0,0,0],

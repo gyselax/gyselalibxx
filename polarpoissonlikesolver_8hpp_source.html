@@ -115,13 +115,13 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sll/mapping/mapping_tools.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;sll/mapping/metric_tensor.hpp&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;sll/math_tools.hpp&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;sll/matrix_batch_csr.hpp&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;sll/polar_spline.hpp&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;sll/polar_spline_evaluator.hpp&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;sll/view.hpp&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;sll/polar_spline.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;sll/polar_spline_evaluator.hpp&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;sll/view.hpp&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;matrix_batch_csr.hpp&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">template</span> &lt;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">class </span><a class="code hl_struct" href="structGridR.html">GridR</a>,</div>
@@ -1273,7 +1273,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l01290" name="l01290"></a><span class="lineno"> 1290</span>};</div>
 </div>
 <div class="ttc" id="aclassGaussLegendre_html"><div class="ttname"><a href="classGaussLegendre.html">GaussLegendre</a></div><div class="ttdef"><b>Definition</b> gauss_legendre_integration.hpp:27</div></div>
-<div class="ttc" id="aclassMatrixBatchCsr_html"><div class="ttname"><a href="classMatrixBatchCsr.html">MatrixBatchCsr</a></div><div class="ttdoc">Matrix class which is able to manage and solve a batch of sparse linear systems.</div><div class="ttdef"><b>Definition</b> matrix_batch_csr.hpp:36</div></div>
+<div class="ttc" id="aclassMatrixBatchCsr_html"><div class="ttname"><a href="classMatrixBatchCsr.html">MatrixBatchCsr</a></div><div class="ttdoc">Matrix class which is able to manage and solve a batch of sparse linear systems.</div><div class="ttdef"><b>Definition</b> matrix_batch_csr.hpp:37</div></div>
 <div class="ttc" id="aclassMetricTensor_html"><div class="ttname"><a href="classMetricTensor.html">MetricTensor</a></div><div class="ttdoc">An operator for calculating the metric tensor.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:15</div></div>
 <div class="ttc" id="aclassPolarBSplines_html_a5708202332817d9a7b526c7f8dbd23d8"><div class="ttname"><a href="classPolarBSplines.html#a5708202332817d9a7b526c7f8dbd23d8">PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;::get_2d_index</a></div><div class="ttdeci">static KOKKOS_FUNCTION tensor_product_index_type get_2d_index(ddc::DiscreteElement&lt; DDim &gt; const &amp;idx)</div><div class="ttdoc">Get the 2D index of the tensor product bspline which, when evaluated at the same point,...</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:153</div></div>
 <div class="ttc" id="aclassPolarBSplines_html_a7c93c1bedcf655bff666950a59eff9ea"><div class="ttname"><a href="classPolarBSplines.html#a7c93c1bedcf655bff666950a59eff9ea">PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;::BSplinesTheta_tag</a></div><div class="ttdeci">BSplinesTheta BSplinesTheta_tag</div><div class="ttdoc">The poloidal bspline from which the polar bsplines are constructed.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:50</div></div>

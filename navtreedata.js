@@ -203,6 +203,7 @@ var NAVTREE =
         [ "Derivative tools", "src_math_tools.html#src_math_tools__Derivative_tools", null ],
         [ "Utility tools", "src_math_tools.html#src_math_tools__Utility_tools", null ]
       ] ],
+      [ "Matrix tools", "src_matrix_tools.html", null ],
       [ "Multipatch", "src_multipatch.html", [
         [ "Multipatch connectivity", "src_multipatch_connectivity.html", [
           [ "Patch", "src_multipatch_connectivity.html#src_multipatch_connectivity__Patch", null ],
@@ -270,11 +271,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionsIntra.html#a164c6c249095a533900a12e2f1f48e25",
 "classFluidMoments.html",
-"classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a",
-"classRK2.html#a9a7f95c2396c54b9f6323cbd444dd8c1",
-"directional__tag_8hpp_source.html",
-"src_geometryRTheta_initialization.html",
-"structonion__shape__uniform__2d__2patches_1_1BSplinesTheta.html"
+"classMatrix__Center__Block.html",
+"classPolarBSplines_1_1Impl.html#aca84a982ed6da7a6167cd3832f23ec97",
+"ddc__alias__inline__functions_8hpp_source.html",
+"poisson__like__rhs__function_8hpp_source.html",
+"structPolarSplineSpan.html#ab7972e7eda2e01153051dfef63695bde"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

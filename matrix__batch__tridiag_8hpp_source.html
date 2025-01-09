@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/matrix_batch_tridiag.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_batch_tridiag.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,15 +106,15 @@ $(document).ready(function(){initNavTree('matrix__batch__tridiag_8hpp_source.htm
   <div class="headertitle"><div class="title">matrix_batch_tridiag.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright (C) The DDC development team, see COPYRIGHT.md file</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// SPDX-License-Identifier: MIT</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Copyright (C) The DDC development team, see COPYRIGHT.md file</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sll/matrix_batch.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;matrix_batch.hpp&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace&gt;</div>
 <div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
@@ -260,16 +260,16 @@ $(document).ready(function(){initNavTree('matrix__batch__tridiag_8hpp_source.htm
 <div class="ttc" id="aclassMatrixBatchTridiag_html_a5951ed8d2a582543b1962b6f0ecfe490"><div class="ttname"><a href="classMatrixBatchTridiag.html#a5951ed8d2a582543b1962b6f0ecfe490">MatrixBatchTridiag::check_stability</a></div><div class="ttdeci">bool check_stability() const</div><div class="ttdoc">Check if the matrices are in the stability area of the solver.</div><div class="ttdef"><b>Definition</b> matrix_batch_tridiag.hpp:79</div></div>
 <div class="ttc" id="aclassMatrixBatchTridiag_html_a8a5d2103f1c49bf4c23f61a330587c03"><div class="ttname"><a href="classMatrixBatchTridiag.html#a8a5d2103f1c49bf4c23f61a330587c03">MatrixBatchTridiag::MatrixBatchTridiag</a></div><div class="ttdeci">MatrixBatchTridiag(const int batch_size, const int mat_size, DKokkosView2D const aa, DKokkosView2D const bb, DKokkosView2D const cc)</div><div class="ttdoc">Creates an instance of the MatrixBatchTridiag class.</div><div class="ttdef"><b>Definition</b> matrix_batch_tridiag.hpp:54</div></div>
 <div class="ttc" id="aclassMatrixBatchTridiag_html_a92c40d724831cfe30419dadbb6dfa4f1"><div class="ttname"><a href="classMatrixBatchTridiag.html#a92c40d724831cfe30419dadbb6dfa4f1">MatrixBatchTridiag::setup_solver</a></div><div class="ttdeci">void setup_solver() final</div><div class="ttdoc">Perform a pre-process operation on the solver.</div><div class="ttdef"><b>Definition</b> matrix_batch_tridiag.hpp:130</div></div>
-<div class="ttc" id="aclassMatrixBatch_html"><div class="ttname"><a href="classMatrixBatch.html">MatrixBatch</a></div><div class="ttdoc">MatrixBatch superclass for managing a collection of linear systems.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:23</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_a4ca6fc98c1b218c3aa0a534d04b2a06a"><div class="ttname"><a href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">MatrixBatch::batch_size</a></div><div class="ttdeci">std::size_t batch_size() const</div><div class="ttdoc">Get the batch size of the linear problem.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:76</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_a62a55966b021f64906841fb38764dbc0"><div class="ttname"><a href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">MatrixBatch::size</a></div><div class="ttdeci">std::size_t size() const</div><div class="ttdoc">Get the size of the square matrix corresponding to a single batch in one of its dimensions.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:66</div></div>
-<div class="ttc" id="aclassMatrixBatch_html_aaefa005779305b357172ff993db97030"><div class="ttname"><a href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">MatrixBatch::BatchedRHS</a></div><div class="ttdeci">Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; BatchedRHS</div><div class="ttdoc">The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:26</div></div>
+<div class="ttc" id="aclassMatrixBatch_html"><div class="ttname"><a href="classMatrixBatch.html">MatrixBatch</a></div><div class="ttdoc">MatrixBatch superclass for managing a collection of linear systems.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:24</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_a4ca6fc98c1b218c3aa0a534d04b2a06a"><div class="ttname"><a href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">MatrixBatch::batch_size</a></div><div class="ttdeci">std::size_t batch_size() const</div><div class="ttdoc">Get the batch size of the linear problem.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:77</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_a62a55966b021f64906841fb38764dbc0"><div class="ttname"><a href="classMatrixBatch.html#a62a55966b021f64906841fb38764dbc0">MatrixBatch::size</a></div><div class="ttdeci">std::size_t size() const</div><div class="ttdoc">Get the size of the square matrix corresponding to a single batch in one of its dimensions.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:67</div></div>
+<div class="ttc" id="aclassMatrixBatch_html_aaefa005779305b357172ff993db97030"><div class="ttname"><a href="classMatrixBatch.html#aaefa005779305b357172ff993db97030">MatrixBatch::BatchedRHS</a></div><div class="ttdeci">Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt; BatchedRHS</div><div class="ttdoc">The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension.</div><div class="ttdef"><b>Definition</b> matrix_batch.hpp:27</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_21841c3627e393781c2c07b5dcb1ed74.html">vendor</a></li><li class="navelem"><a class="el" href="dir_7249a6277f2cda29b1cef92f993ab78b.html">sll</a></li><li class="navelem"><a class="el" href="dir_c17d180aaa37ca880baaf9afd44e0ad0.html">include</a></li><li class="navelem"><a class="el" href="dir_040b90264b67cd95a975364a9a6adb0b.html">sll</a></li><li class="navelem"><b>matrix_batch_tridiag.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_8b14063be5793e6a6e053b58e8d30115.html">matrix_tools</a></li><li class="navelem"><b>matrix_batch_tridiag.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

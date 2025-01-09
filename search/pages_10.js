@@ -14,6 +14,7 @@ var searchData=
   ['theta_20geometry_11',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
   ['time_20integration_12',['Time integration',['../src_geometryXVx_time_integration.html',1,'src_geometryXVx']]],
   ['time_20stepping_20methods_13',['Time Stepping Methods',['../src_timestepper.html',1,'src']]],
-  ['types_14',['Data Storage Types',['../src_data_types.html',1,'src']]],
-  ['types_20for_20multipatch_20geometry_15',['Data Types for Multipatch Geometry',['../src_multipatch_data_types.html',1,'src_multipatch']]]
+  ['tools_14',['Matrix tools',['../src_matrix_tools.html',1,'src']]],
+  ['types_15',['Data Storage Types',['../src_data_types.html',1,'src']]],
+  ['types_20for_20multipatch_20geometry_16',['Data Types for Multipatch Geometry',['../src_multipatch_data_types.html',1,'src_multipatch']]]
 ];

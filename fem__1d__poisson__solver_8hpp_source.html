@@ -112,11 +112,11 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;sll/gauss_legendre_integration.hpp&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sll/matrix.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;ipoisson_solver.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;ipoisson_solver.hpp&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;matrix.hpp&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> SplineBuilder, <span class="keyword">class</span> SplineEvaluator&gt;</div>
@@ -402,7 +402,7 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="comment">// Matrix with block is used instead of periodic to contain the</span></div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="comment">// Dirichlet boundary conditions</span></div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        m_fem_matrix = Matrix::make_new_block_with_banded_region(</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        m_fem_matrix = <a class="code hl_function" href="classMatrix.html#a7208b45ef3e9d102bcccb765a0d6f3bd">Matrix::make_new_block_with_banded_region</a>(</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>                m_matrix_size,</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                n_lower_diags,</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                n_lower_diags,</div>
@@ -465,7 +465,7 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <span class="comment">// Matrix with block is used instead of periodic to contain the</span></div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        <span class="comment">// Dirichlet boundary conditions</span></div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        m_fem_matrix = Matrix::make_new_banded(</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        m_fem_matrix = <a class="code hl_function" href="classMatrix.html#a7131ef0c6ddd91ee57924099c3e33748">Matrix::make_new_banded</a>(</div>
 <div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>                m_matrix_size,</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>                n_lower_diags,</div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>                n_lower_diags,</div>
@@ -638,6 +638,8 @@ $(document).ready(function(){initNavTree('fem__1d__poisson__solver_8hpp_source.h
 <div class="ttc" id="aclassFEM1DPoissonSolver_html_a9092c2bf702042ebc4cbf1a6d48bbdbc"><div class="ttname"><a href="classFEM1DPoissonSolver.html#a9092c2bf702042ebc4cbf1a6d48bbdbc">FEM1DPoissonSolver::solve_matrix_system</a></div><div class="ttdeci">void solve_matrix_system(BatchedFEMBSplinesCoeff phi_spline_coef, field_type rho) const</div><div class="ttdoc">[SHOULD BE PRIVATE (Kokkos limitation)]</div><div class="ttdef"><b>Definition</b> fem_1d_poisson_solver.hpp:453</div></div>
 <div class="ttc" id="aclassGaussLegendre_html"><div class="ttname"><a href="classGaussLegendre.html">GaussLegendre</a></div><div class="ttdef"><b>Definition</b> gauss_legendre_integration.hpp:27</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition</b> ipoisson_solver.hpp:10</div></div>
+<div class="ttc" id="aclassMatrix_html_a7131ef0c6ddd91ee57924099c3e33748"><div class="ttname"><a href="classMatrix.html#a7131ef0c6ddd91ee57924099c3e33748">Matrix::make_new_banded</a></div><div class="ttdeci">static std::unique_ptr&lt; Matrix &gt; make_new_banded(int n, int kl, int ku, bool pds)</div><div class="ttdoc">Get a new Matrix representing a banded matrix.</div></div>
+<div class="ttc" id="aclassMatrix_html_a7208b45ef3e9d102bcccb765a0d6f3bd"><div class="ttname"><a href="classMatrix.html#a7208b45ef3e9d102bcccb765a0d6f3bd">Matrix::make_new_block_with_banded_region</a></div><div class="ttdeci">static std::unique_ptr&lt; Matrix &gt; make_new_block_with_banded_region(int n, int kl, int ku, bool pds, int block1_size, int block2_size=0)</div><div class="ttdoc">Get a new Matrix representing a matrix which has a banded region.</div></div>
 <div class="ttc" id="astructFEM1DPoissonSolver_1_1GridPDEDimQ_html"><div class="ttname"><a href="structFEM1DPoissonSolver_1_1GridPDEDimQ.html">FEM1DPoissonSolver::GridPDEDimQ</a></div><div class="ttdoc">The grid of quadrature points along the PDEDim direction.</div><div class="ttdef"><b>Definition</b> fem_1d_poisson_solver.hpp:73</div></div>
 <div class="ttc" id="astructFEM1DPoissonSolver_1_1HiddenFEMBSplines_html"><div class="ttname"><a href="structFEM1DPoissonSolver_1_1HiddenFEMBSplines.html">FEM1DPoissonSolver::HiddenFEMBSplines</a></div><div class="ttdoc">The internal type of the FEM basis.</div><div class="ttdef"><b>Definition</b> fem_1d_poisson_solver.hpp:110</div></div>
 </div><!-- fragment --></div><!-- contents -->

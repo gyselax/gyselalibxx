@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['using_5fvector_5ffield_0',['using_vector_field',['../classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#a40c5df7afd1c779c57b27d3d5fec93ab',1,'IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;']]]
+  ['q_0',['q',['../classMatrix__Banded.html#a4b9dff91919d3b67163fd788c266dfc2',1,'Matrix_Banded']]],
+  ['q_5fblock_1',['q_block',['../classMatrix__Corner__Block.html#a2ba0aa809c557ad1d2c710ddf8248cb2',1,'Matrix_Corner_Block']]]
 ];

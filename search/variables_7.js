@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['n_5fbe_5fmax_0',['N_BE_MAX',['../classddcHelper_1_1NonUniformInterpolationPoints.html#a846681c7521c62de2bb62cf4e8ee4402',1,'ddcHelper::NonUniformInterpolationPoints']]],
-  ['n_5fbe_5fmin_1',['N_BE_MIN',['../classddcHelper_1_1NonUniformInterpolationPoints.html#a7bcc5b181b0ee337b8dd9373490ef32c',1,'ddcHelper::NonUniformInterpolationPoints']]],
-  ['n_5fdims_2',['n_dims',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a93b365cc045659654e44ba77b6ff51c3',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
-  ['n_5fdistributed_5fdimensions_3',['n_distributed_dimensions',['../classIMPILayout.html#ab55757fa0972d849a94feeca30a9f465',1,'IMPILayout']]],
-  ['n_5ffields_4',['n_fields',['../classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#abdb00d99665d2aa999c71e9b3fd2df5e',1,'DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;']]],
-  ['n_5fpatches_5',['n_patches',['../classMultipatchSplineEvaluator2D.html#af1908eecf950a49dcee5c0606cf4659e',1,'MultipatchSplineEvaluator2D']]]
+  ['k_0',['k',['../classMatrix__Corner__Block.html#ae4272c855b07fbdf88cc781702145ab0',1,'Matrix_Corner_Block']]],
+  ['kl_1',['kl',['../classMatrix__Banded.html#ab8fe5741b3b61c8351ab6be287e6d98f',1,'Matrix_Banded::kl'],['../classMatrix__Periodic__Banded.html#a09b01718963b20a11501eb6d525cd0dd',1,'Matrix_Periodic_Banded::kl']]],
+  ['ku_2',['ku',['../classMatrix__Banded.html#ad7b9a08a95f612d924e4b074e1772247',1,'Matrix_Banded::ku'],['../classMatrix__Periodic__Banded.html#a24550036b45b869c5b1e7d97c4bf395b',1,'Matrix_Periodic_Banded::ku']]]
 ];

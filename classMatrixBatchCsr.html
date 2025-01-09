@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('classMatrixBatchCsr.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classMatrix.html">Matrix</a> class which is able to manage and solve a batch of sparse linear systems.  
+<p><a class="el" href="classMatrix.html" title="The super class from which matrix classes should inherit.">Matrix</a> class which is able to manage and solve a batch of sparse linear systems.  
  <a href="classMatrixBatchCsr.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for MatrixBatchCsr&lt; ExecSpace, Solver &gt;:</div>
@@ -171,7 +171,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>BatchedRHS</b> = Kok
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class ExecSpace, MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver::BICGSTAB&gt;<br />
-class MatrixBatchCsr&lt; ExecSpace, Solver &gt;</div><p><a class="el" href="classMatrix.html">Matrix</a> class which is able to manage and solve a batch of sparse linear systems. </p>
+class MatrixBatchCsr&lt; ExecSpace, Solver &gt;</div><p><a class="el" href="classMatrix.html" title="The super class from which matrix classes should inherit.">Matrix</a> class which is able to manage and solve a batch of sparse linear systems. </p>
 <p>Executes on either CPU or GPU. It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilized Bicg. This class uses the CSR storage format which needs three arrays, one stores values, the other column indices. The third array contains the count of non-zero inside the matrix lines.(eg:for a given line index i nn_per_row[i]= sum of non-zeros until line i) The class returns these arrays (as Kokkos views) with the get_csr_views function, it is then possible to fill them outside the class. The sparsity pattern is the same for all matrices, hence column indices are stored only for one system. Tolerance and maximal number of iterations, which are parameters for the iterative solver, are set in the constructor. It is possibile to get convergence information by activating the logger at constructor call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ExecSpace</td><td>Execution space,needed by Kokkos for allocations and parallelism. The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace </td></tr>
@@ -536,7 +536,7 @@ template&lt;class ExecSpace , MatrixBatchCsrSolver Solver = MatrixBatchCsrSolver
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="matrix__batch__csr_8hpp_source.html">matrix_batch_csr.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/<a class="el" href="matrix__batch__csr_8hpp_source.html">matrix_batch_csr.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

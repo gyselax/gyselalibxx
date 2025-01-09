@@ -12,6 +12,7 @@ var dir_2cb1bf5254cdb852c9c33e2ec5cf247b =
     [ "io", "dir_4877fc66b34f0bed3307622046ff6a0c.html", "dir_4877fc66b34f0bed3307622046ff6a0c" ],
     [ "mapping", "dir_e7c4876a3b83397f47c7a235181b3f48.html", "dir_e7c4876a3b83397f47c7a235181b3f48" ],
     [ "math_tools", "dir_12b80a83f8a0fcf90cd05b166ef8bdf1.html", "dir_12b80a83f8a0fcf90cd05b166ef8bdf1" ],
+    [ "matrix_tools", "dir_8b14063be5793e6a6e053b58e8d30115.html", "dir_8b14063be5793e6a6e053b58e8d30115" ],
     [ "mpi_parallelisation", "dir_3edf76bff63ac0040676a04cfe70b091.html", "dir_3edf76bff63ac0040676a04cfe70b091" ],
     [ "multipatch", "dir_eb7da54727e91e3ad0949acc1ce0f18c.html", "dir_eb7da54727e91e3ad0949acc1ce0f18c" ],
     [ "paraconfpp", "dir_2c0ad391030bc4839817fbcc879b28f0.html", "dir_2c0ad391030bc4839817fbcc879b28f0" ],
