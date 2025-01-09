@@ -42,8 +42,11 @@
 
 
 namespace {
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder_host,
+        SplineRThetaEvaluatorConstBound_host>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 namespace fs = std::filesystem;
@@ -97,12 +100,12 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder const builder(grid);
+    SplineRThetaBuilder_host const builder(grid);
 
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -127,7 +130,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
+    SplineRThetaEvaluatorNullBound_host spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,

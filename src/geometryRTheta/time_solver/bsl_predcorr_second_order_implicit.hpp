@@ -84,10 +84,10 @@ private:
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+            SplineRThetaEvaluatorNullBound_host> const& m_poisson_solver;
 
-    SplineRThetaBuilder const& m_builder;
-    SplineRThetaEvaluatorConstBound const& m_evaluator;
+    SplineRThetaBuilder_host const& m_builder;
+    SplineRThetaEvaluatorConstBound_host const& m_evaluator;
 
 
 
@@ -121,14 +121,14 @@ public:
             Mapping const& mapping,
             BslAdvectionRTheta<SplineFootFinderType, Mapping> const& advection_solver,
             IdxRangeRTheta const& grid,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& rhs_evaluator,
+            SplineRThetaBuilder_host const& builder,
+            SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<
                     GridR,
                     GridTheta,
                     PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
-            SplineRThetaEvaluatorConstBound const& advection_evaluator)
+                    SplineRThetaEvaluatorNullBound_host> const& poisson_solver,
+            SplineRThetaEvaluatorConstBound_host const& advection_evaluator)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
