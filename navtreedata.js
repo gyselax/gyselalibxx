@@ -272,9 +272,9 @@ var NAVTREEINDEX =
 "classFluidMoments.html",
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a",
 "classRK2.html#a9a7f95c2396c54b9f6323cbd444dd8c1",
-"dir_fff31245b39ef81c8e6b4b2456b9c284.html",
-"src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case",
-"structonion__shape__non__uniform__2d__2patches_1_1R.html"
+"directional__tag_8hpp_source.html",
+"src_geometryRTheta_initialization.html",
+"structonion__shape__uniform__2d__2patches_1_1BSplinesTheta.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

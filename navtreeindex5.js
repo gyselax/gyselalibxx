@@ -1,6 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"dir_fff31245b39ef81c8e6b4b2456b9c284.html":[17,0,5,1],
 "directional__tag_8hpp_source.html":[17,0,19,4],
 "discrete__mapping__builder_8hpp_source.html":[17,2,0,0,0,0,7],
 "discrete__to__cartesian_8hpp_source.html":[17,2,0,0,0,0,8],
@@ -49,7 +48,6 @@ var NAVTREEINDEX5 =
 "edge_8hpp_source.html":[17,0,13,0,2],
 "edge__transformation_8hpp_source.html":[17,0,13,0,3],
 "euler_8hpp_source.html":[17,0,18,1],
-"evaluator__2d_8hpp_source.html":[17,2,0,1,1],
 "fem__1d__poisson__solver_8hpp_source.html":[17,0,15,0],
 "fft__poisson__solver_8hpp_source.html":[17,0,15,1],
 "files.html":[17],
@@ -185,7 +183,6 @@ var NAVTREEINDEX5 =
 "polar__spline_8hpp_source.html":[17,2,0,0,0,17],
 "polar__spline__evaluator_8hpp_source.html":[17,2,0,0,0,18],
 "polarpoissonlikesolver_8hpp_source.html":[17,0,15,3],
-"polynomial__evaluator_8hpp_source.html":[17,2,0,1,2],
 "predcorr__RK2_8hpp_source.html":[17,0,6,2,0],
 "preprocessor_8hpp_source.html":[17,0,19,8],
 "quadrature_8hpp_source.html":[17,0,16,1],
@@ -249,5 +246,8 @@ var NAVTREEINDEX5 =
 "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Time_integration_methods":[13,3,0,2],
 "src_geometryRTheta_advection_field.html":[13,3,1],
 "src_geometryRTheta_advection_field.html#autotoc_md58":[13,3,1,1],
-"src_geometryRTheta_advection_field.html#autotoc_md59":[13,3,1,2]
+"src_geometryRTheta_advection_field.html#autotoc_md59":[13,3,1,2],
+"src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case":[13,3,1,0],
+"src_geometryRTheta_geometry.html":[13,3,2],
+"src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts":[13,3,2,0]
 };

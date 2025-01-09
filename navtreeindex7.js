@@ -1,8 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"structonion__shape__non__uniform__2d__2patches_1_1R.html":[16,8,4],
-"structonion__shape__non__uniform__2d__2patches_1_1Theta.html":[16,8,5],
-"structonion__shape__uniform__2d__2patches_1_1BSplinesR.html":[16,9,0],
 "structonion__shape__uniform__2d__2patches_1_1BSplinesTheta.html":[16,9,1],
 "structonion__shape__uniform__2d__2patches_1_1GridR.html":[16,9,2],
 "structonion__shape__uniform__2d__2patches_1_1GridTheta.html":[16,9,3],
@@ -17,7 +14,7 @@ var NAVTREEINDEX7 =
 "structphysical__geometry_1_1X.html":[16,11,0],
 "structphysical__geometry_1_1Y.html":[16,11,1],
 "test__cases__adv__field_8hpp_source.html":[17,1,1,2,0],
-"test__utils_8hpp_source.html":[17,2,0,1,3],
+"test__utils_8hpp_source.html":[17,2,0,1,0],
 "tests.html":[14],
 "tests_advection.html":[14,0],
 "tests_advection.html#tests_advection__Contents":[14,0,0],

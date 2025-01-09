@@ -18,11 +18,10 @@ var searchData=
   ['polarsplinefempoissonlikesolver_15',['PolarSplineFEMPoissonLikeSolver',['../classPolarSplineFEMPoissonLikeSolver.html',1,'']]],
   ['polarsplinespan_16',['PolarSplineSpan',['../structPolarSplineSpan.html',1,'']]],
   ['polarsplineview_17',['PolarSplineView',['../structPolarSplineView.html',1,'']]],
-  ['polynomialevaluator_18',['PolynomialEvaluator',['../structPolynomialEvaluator.html',1,'']]],
-  ['preallocatablelagrangeinterpolator_19',['PreallocatableLagrangeInterpolator',['../classPreallocatableLagrangeInterpolator.html',1,'']]],
-  ['preallocatablesplineinterpolator_20',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html',1,'']]],
-  ['preallocatablesplineinterpolatorrtheta_21',['PreallocatableSplineInterpolatorRTheta',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
-  ['preallocatablesplineinterpolatorrtheta_3c_20ddc_3a_3anullextrapolationrule_20_3e_22',['PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
-  ['predcorr_23',['PredCorr',['../classPredCorr.html',1,'']]],
-  ['predcorrrk2xy_24',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
+  ['preallocatablelagrangeinterpolator_18',['PreallocatableLagrangeInterpolator',['../classPreallocatableLagrangeInterpolator.html',1,'']]],
+  ['preallocatablesplineinterpolator_19',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html',1,'']]],
+  ['preallocatablesplineinterpolatorrtheta_20',['PreallocatableSplineInterpolatorRTheta',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
+  ['preallocatablesplineinterpolatorrtheta_3c_20ddc_3a_3anullextrapolationrule_20_3e_21',['PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
+  ['predcorr_22',['PredCorr',['../classPredCorr.html',1,'']]],
+  ['predcorrrk2xy_23',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
 ];

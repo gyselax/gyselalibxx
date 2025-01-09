@@ -35,8 +35,7 @@ var searchData=
   ['corner1tag_32',['Corner1Tag',['../classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner1Tag',1,'PolarBSplines::Impl']]],
   ['corner2tag_33',['Corner2Tag',['../classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner2Tag',1,'PolarBSplines::Impl']]],
   ['corner3tag_34',['Corner3Tag',['../classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner3Tag',1,'PolarBSplines::Impl']]],
-  ['cosineevaluator_35',['CosineEvaluator',['../structCosineEvaluator.html',1,'']]],
-  ['cranknicolson_36',['CrankNicolson',['../classCrankNicolson.html',1,'']]],
-  ['curvilinearsolution_37',['CurvilinearSolution',['../classCurvilinearSolution.html',1,'']]],
-  ['czarnytocartesian_38',['CzarnyToCartesian',['../classCzarnyToCartesian.html',1,'']]]
+  ['cranknicolson_35',['CrankNicolson',['../classCrankNicolson.html',1,'']]],
+  ['curvilinearsolution_36',['CurvilinearSolution',['../classCurvilinearSolution.html',1,'']]],
+  ['czarnytocartesian_37',['CzarnyToCartesian',['../classCzarnyToCartesian.html',1,'']]]
 ];
