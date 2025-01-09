@@ -248,7 +248,7 @@ $(document).ready(function(){initNavTree('spline__foot__finder_8hpp_source.html'
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">void</span> unify_value_at_center_pt(FieldRTheta&lt;T&gt; values)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">void</span> unify_value_at_center_pt(Field&lt;T, IdxRangeRTheta, Kokkos::HostSpace&gt; values)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">    </span>{</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        IdxRangeR <span class="keyword">const</span> r_idx_range = get_idx_range&lt;GridR&gt;(values);</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        IdxRangeTheta <span class="keyword">const</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(values);</div>

@@ -304,96 +304,95 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="keyword">using </span>FieldTheta = Field&lt;ElementType, IdxRangeTheta&gt;;</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">// Equivalent to host_t&lt;Field&lt;ElementType, IdxRangeRTheta&gt;&gt; but used for type deductions</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="keyword">using </span>FieldRTheta = Field&lt;ElementType, IdxRangeRTheta, Kokkos::HostSpace&gt;;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keyword">using </span>DFieldR = FieldR&lt;double&gt;;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">using </span>DFieldTheta = FieldTheta&lt;double&gt;;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keyword">using </span>DFieldRTheta = FieldRTheta&lt;double&gt;;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">// --- Const Field definitions</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="keyword">using </span>ConstFieldR = ConstField&lt;ElementType, IdxRangeR&gt;;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="keyword">using </span>ConstFieldTheta = ConstField&lt;ElementType, IdxRangeTheta&gt;;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">using </span>ConstFieldRTheta = ConstField&lt;ElementType, IdxRangeRTheta&gt;;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="keyword">using </span>DConstFieldR = ConstFieldR&lt;double&gt;;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keyword">using </span>DConstFieldTheta = ConstFieldTheta&lt;double&gt;;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="keyword">using </span>DConstFieldRTheta = ConstFieldRTheta&lt;double&gt;;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">// --- Spline representation definitions</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keyword">using </span>Spline2DMem = DFieldMem&lt;IdxRangeBSRTheta&gt;;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="keyword">using </span>Spline2D = DField&lt;IdxRangeBSRTheta&gt;;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="keyword">using </span>ConstSpline2D = DConstField&lt;IdxRangeBSRTheta&gt;;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="keyword">using </span><a class="code hl_struct" href="structPolarSpline.html">SplinePolar</a> = <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;PolarBSplinesRTheta&gt;</a>;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="keyword">using </span>IdxPolarBspl = Idx&lt;PolarBSplinesRTheta&gt;;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keyword">using </span>FieldRTheta = Field&lt;ElementType, IdxRangeRTheta&gt;;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="keyword">using </span>DFieldR = FieldR&lt;double&gt;;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keyword">using </span>DFieldTheta = FieldTheta&lt;double&gt;;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">using </span>DFieldRTheta = FieldRTheta&lt;double&gt;;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">// --- Const Field definitions</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="keyword">using </span>ConstFieldR = ConstField&lt;ElementType, IdxRangeR&gt;;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keyword">using </span>ConstFieldTheta = ConstField&lt;ElementType, IdxRangeTheta&gt;;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType&gt;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">using </span>ConstFieldRTheta = ConstField&lt;ElementType, IdxRangeRTheta&gt;;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="keyword">using </span>DConstFieldR = ConstFieldR&lt;double&gt;;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="keyword">using </span>DConstFieldTheta = ConstFieldTheta&lt;double&gt;;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keyword">using </span>DConstFieldRTheta = ConstFieldRTheta&lt;double&gt;;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">// --- Spline representation definitions</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="keyword">using </span>Spline2DMem = DFieldMem&lt;IdxRangeBSRTheta&gt;;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keyword">using </span>Spline2D = DField&lt;IdxRangeBSRTheta&gt;;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="keyword">using </span>ConstSpline2D = DConstField&lt;IdxRangeBSRTheta&gt;;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="keyword">using </span><a class="code hl_struct" href="structPolarSpline.html">SplinePolar</a> = <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;PolarBSplinesRTheta&gt;</a>;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="keyword">using </span>IdxPolarBspl = Idx&lt;PolarBSplinesRTheta&gt;;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">// --- VectorFieldMem definitions</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keyword">using </span><a class="code hl_class" href="classVectorFieldMem.html">DVectorFieldMemRTheta</a> = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;double, IdxRangeRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">DVectorFieldRTheta</a> = <a class="code hl_class" href="classVectorField.html">VectorField&lt;double, IdxRangeRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">DConstVectorFieldRTheta</a> = <a class="code hl_class" href="classVectorField.html">VectorConstField&lt;double, IdxRangeRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">// --- VectorFieldMem definitions</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="keyword">using </span><a class="code hl_class" href="classVectorFieldMem.html">DVectorFieldMemRTheta</a> = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;double, IdxRangeRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">DVectorFieldRTheta</a> = <a class="code hl_class" href="classVectorField.html">VectorField&lt;double, IdxRangeRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">DConstVectorFieldRTheta</a> = <a class="code hl_class" href="classVectorField.html">VectorConstField&lt;double, IdxRangeRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="keyword">using </span><a class="code hl_class" href="classVectorFieldMem.html">VectorSplineCoeffsMem2D</a> = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;double, IdxRangeBSRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">VectorSplineCoeffs2D</a> = <a class="code hl_class" href="classVectorField.html">VectorField&lt;double, IdxRangeBSRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">ConstVectorSplineCoeffs2D</a> = <a class="code hl_class" href="classVectorField.html">VectorConstField&lt;double, IdxRangeBSRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keyword">using </span><a class="code hl_class" href="classVectorFieldMem.html">VectorSplineCoeffsMem2D</a> = <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem&lt;double, IdxRangeBSRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">VectorSplineCoeffs2D</a> = <a class="code hl_class" href="classVectorField.html">VectorField&lt;double, IdxRangeBSRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Dim1, <span class="keyword">class</span> Dim2&gt;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="keyword">using </span><a class="code hl_class" href="classVectorField.html">ConstVectorSplineCoeffs2D</a> = <a class="code hl_class" href="classVectorField.html">VectorConstField&lt;double, IdxRangeBSRTheta, NDTag&lt;Dim1, Dim2&gt;</a>&gt;;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">// CARTESIAN SPACE AND VELOCITY ------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment">// --- Continuous dimensions</span></div>
-<div class="foldopen" id="foldopen00277" data-start="{" data-end="};">
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="structX.html">  277</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structX.html">X</a></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>{</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">  283</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>};</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">// CARTESIAN SPACE AND VELOCITY ------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">// --- Continuous dimensions</span></div>
+<div class="foldopen" id="foldopen00276" data-start="{" data-end="};">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="structX.html">  276</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structX.html">X</a></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>{</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">  282</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>};</div>
 </div>
-<div class="foldopen" id="foldopen00288" data-start="{" data-end="};">
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="structY.html">  288</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structY.html">Y</a></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>{</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="structY.html#a0333176b598ab1ac9bf749dfca10cc2f">  294</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structY.html#a0333176b598ab1ac9bf749dfca10cc2f">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>};</div>
+<div class="foldopen" id="foldopen00287" data-start="{" data-end="};">
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno"><a class="line" href="structY.html">  287</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structY.html">Y</a></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>{</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="structY.html#a0333176b598ab1ac9bf749dfca10cc2f">  293</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structY.html#a0333176b598ab1ac9bf749dfca10cc2f">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>};</div>
 </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="foldopen" id="foldopen00300" data-start="{" data-end="};">
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="structVx.html">  300</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVx.html">Vx</a></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>{</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">  306</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>};</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="foldopen" id="foldopen00299" data-start="{" data-end="};">
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="structVx.html">  299</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVx.html">Vx</a></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>{</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno"><a class="line" href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">  305</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>};</div>
 </div>
-<div class="foldopen" id="foldopen00311" data-start="{" data-end="};">
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="structVy.html">  311</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVy.html">Vy</a></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>{</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="structVy.html#aebef90bce85084cc54c7c89419dce525">  317</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structVy.html#aebef90bce85084cc54c7c89419dce525">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>};</div>
+<div class="foldopen" id="foldopen00310" data-start="{" data-end="};">
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="structVy.html">  310</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structVy.html">Vy</a></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>{</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="structVy.html#aebef90bce85084cc54c7c89419dce525">  316</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structVy.html#aebef90bce85084cc54c7c89419dce525">PERIODIC</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>};</div>
 </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="keyword">using </span>CoordX = Coord&lt;X&gt;;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">using </span>CoordY = Coord&lt;Y&gt;;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="keyword">using </span>CoordXY = Coord&lt;X, Y&gt;;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="keyword">using </span>CoordVx = Coord&lt;Vx&gt;;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="keyword">using </span>CoordVy = Coord&lt;Vy&gt;;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="keyword">using </span>CoordX = Coord&lt;X&gt;;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="keyword">using </span>CoordY = Coord&lt;Y&gt;;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">using </span>CoordXY = Coord&lt;X, Y&gt;;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="keyword">using </span>CoordVx = Coord&lt;Vx&gt;;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="keyword">using </span>CoordVy = Coord&lt;Vy&gt;;</div>
 <div class="ttc" id="aclassPolarBSplines_html"><div class="ttname"><a href="classPolarBSplines.html">PolarBSplines</a></div><div class="ttdoc">A class containing all information describing polar bsplines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:28</div></div>
 <div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition</b> vector_field_mem.hpp:54</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:64</div></div>
@@ -411,14 +410,14 @@ $(document).ready(function(){initNavTree('geometryRTheta_2geometry_2geometry_8hp
 <div class="ttc" id="astructVr_html_a733812a6bf008791d6c94ba7b0d44938"><div class="ttname"><a href="structVr.html#a733812a6bf008791d6c94ba7b0d44938">Vr::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:59</div></div>
 <div class="ttc" id="astructVtheta_html"><div class="ttname"><a href="structVtheta.html">Vtheta</a></div><div class="ttdoc">Define periodic real Theta velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:65</div></div>
 <div class="ttc" id="astructVtheta_html_ac43f31c6191f5f73ced3251f4472c080"><div class="ttname"><a href="structVtheta.html#ac43f31c6191f5f73ced3251f4472c080">Vtheta::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:70</div></div>
-<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:301</div></div>
-<div class="ttc" id="astructVx_html_aabb61a786e12232d6e6adaf41a545a4a"><div class="ttname"><a href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">Vx::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:306</div></div>
-<div class="ttc" id="astructVy_html"><div class="ttname"><a href="structVy.html">Vy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:312</div></div>
-<div class="ttc" id="astructVy_html_aebef90bce85084cc54c7c89419dce525"><div class="ttname"><a href="structVy.html#aebef90bce85084cc54c7c89419dce525">Vy::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:317</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:278</div></div>
-<div class="ttc" id="astructX_html_aa1915e83f5e8d1363cbc25d737b52a9c"><div class="ttname"><a href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">X::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:283</div></div>
-<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:289</div></div>
-<div class="ttc" id="astructY_html_a0333176b598ab1ac9bf749dfca10cc2f"><div class="ttname"><a href="structY.html#a0333176b598ab1ac9bf749dfca10cc2f">Y::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:294</div></div>
+<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:300</div></div>
+<div class="ttc" id="astructVx_html_aabb61a786e12232d6e6adaf41a545a4a"><div class="ttname"><a href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">Vx::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:305</div></div>
+<div class="ttc" id="astructVy_html"><div class="ttname"><a href="structVy.html">Vy</a></div><div class="ttdoc">Define non periodic real Y velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:311</div></div>
+<div class="ttc" id="astructVy_html_aebef90bce85084cc54c7c89419dce525"><div class="ttname"><a href="structVy.html#aebef90bce85084cc54c7c89419dce525">Vy::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:316</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:277</div></div>
+<div class="ttc" id="astructX_html_aa1915e83f5e8d1363cbc25d737b52a9c"><div class="ttname"><a href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">X::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:282</div></div>
+<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:288</div></div>
+<div class="ttc" id="astructY_html_a0333176b598ab1ac9bf749dfca10cc2f"><div class="ttname"><a href="structY.html#a0333176b598ab1ac9bf749dfca10cc2f">Y::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:293</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
