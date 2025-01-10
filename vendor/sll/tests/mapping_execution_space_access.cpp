@@ -3,14 +3,14 @@
 
 #include <ddc/ddc.hpp>
 
-#include "sll/mapping/cartesian_to_circular.hpp"
-#include "sll/mapping/cartesian_to_czarny.hpp"
-#include "sll/mapping/circular_to_cartesian.hpp"
-#include "sll/mapping/czarny_to_cartesian.hpp"
-#include "sll/mapping/discrete_mapping_builder.hpp"
-#include "sll/mapping/discrete_to_cartesian.hpp"
+#include <sll/mapping/cartesian_to_circular.hpp>
+#include <sll/mapping/cartesian_to_czarny.hpp>
+#include <sll/mapping/circular_to_cartesian.hpp>
+#include <sll/mapping/czarny_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
 
-#include "test_utils.hpp"
+#include <gtest/gtest.h>
 
 
 

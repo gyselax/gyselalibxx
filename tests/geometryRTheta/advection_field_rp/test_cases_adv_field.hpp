@@ -5,13 +5,13 @@
 #include <sll/gauss_legendre_integration.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/polar_spline.hpp>
-#include <sll/polar_spline_evaluator.hpp>
 
 #include "../advection_2d_rp/test_cases.hpp"
 
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
+#include "polar_spline.hpp"
+#include "polar_spline_evaluator.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 
 /*

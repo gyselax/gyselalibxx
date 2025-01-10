@@ -14,3 +14,5 @@ target_link_libraries("interpolation"
 )
 
 add_library("gslx::interpolation" ALIAS "interpolation")
+
+add_subdirectory(polar_splines)

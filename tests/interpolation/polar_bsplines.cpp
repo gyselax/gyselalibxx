@@ -7,12 +7,12 @@
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_builder.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
-#include <sll/polar_bsplines.hpp>
+#include <sll/test_utils.hpp>
 #include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 
-#include "test_utils.hpp"
+#include "polar_bsplines.hpp"
 
 template <class T>
 struct PolarBsplineFixture;

@@ -318,6 +318,8 @@ def search_for_bad_create_mirror(file):
     """
     for config in file.configs:
         for line in config.lines:
+            if line and line[0]['file'] != file.file:
+                continue
             if any(v['str'] in mirror_functions for v in line):
                 first_elem = line[0]
                 if 'variable' not in first_elem and first_elem['str'] == 'auto':

@@ -7,13 +7,13 @@
 #include <sll/mapping/mapping_tools.hpp>
 #include <sll/mapping/metric_tensor.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/polar_spline.hpp>
-#include <sll/polar_spline_evaluator.hpp>
 #include <sll/view.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "matrix_batch_csr.hpp"
+#include "polar_spline.hpp"
+#include "polar_spline_evaluator.hpp"
 
 
 /**

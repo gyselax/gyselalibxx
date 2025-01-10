@@ -10,6 +10,7 @@ target_link_libraries("geometry_RTheta" INTERFACE
     DDC::core
     sll::SLL
     gslx::data_types
+    gslx::polar_splines
     gslx::utils
 )
 add_library("gslx::geometry_RTheta" ALIAS "geometry_RTheta")

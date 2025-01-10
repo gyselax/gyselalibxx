@@ -6,10 +6,7 @@
 
 #include <gtest/gtest.h>
 
-/// Transform a sequence S to a tuple:
-/// - a std::integer_sequence<T, Ints...> to a std::tuple<std::integral_constant<T, Ints>...>
-/// - a std::pair<T, U> to a std::tuple<T, U>
-/// - identity otherwise (std::tuple)
+namespace detail {
 template <class S>
 struct to_tuple
 {
@@ -27,10 +24,16 @@ struct to_tuple<std::pair<T, U>>
 {
     using type = std::tuple<T, U>;
 };
+} // namespace detail
 
+/// Transform a sequence S to a tuple:
+/// - a std::integer_sequence<T, Ints...> to a std::tuple<std::integral_constant<T, Ints>...>
+/// - a std::pair<T, U> to a std::tuple<T, U>
+/// - identity otherwise (std::tuple)
 template <class S>
-using to_tuple_t = typename to_tuple<S>::type;
+using to_tuple_t = typename detail::to_tuple<S>::type;
 
+namespace detail {
 template <class TupleOfTuples, class Tuple>
 struct for_each_tuple_cat;
 
@@ -41,9 +44,11 @@ struct for_each_tuple_cat<std::tuple<Tuples...>, Tuple>
             decltype(std::tuple_cat(std::declval<Tuples>(), std::declval<Tuple>()))...>;
 };
 
+} // namespace detail
+
 /// Construct a tuple of tuples that is the result of the concatenation of the tuples in TupleOfTuples with Tuple.
 template <class TupleOfTuples, class Tuple>
-using for_each_tuple_cat_t = typename for_each_tuple_cat<TupleOfTuples, Tuple>::type;
+using for_each_tuple_cat_t = typename detail::for_each_tuple_cat<TupleOfTuples, Tuple>::type;
 
 static_assert(std::is_same_v<
               for_each_tuple_cat_t<
@@ -55,6 +60,7 @@ static_assert(std::is_same_v<
               for_each_tuple_cat_t<std::tuple<std::tuple<double, double>>, std::tuple<int>>,
               std::tuple<std::tuple<double, double, int>>>);
 
+namespace detail {
 template <class InTupleOfTuples, class OutTupleOfTuples>
 struct cartesian_product_impl;
 
@@ -73,11 +79,12 @@ struct cartesian_product_impl<std::tuple<>, OutTupleOfTuples>
 {
     using type = OutTupleOfTuples;
 };
+} // namespace detail
 
 /// Generate a std::tuple cartesian product from multiple tuple-like structures (std::tuple, std::integer_sequence and std::pair)
 /// Do not rely on the ordering result.
 template <class... InTuplesLike>
-using cartesian_product_t = typename cartesian_product_impl<
+using cartesian_product_t = typename detail::cartesian_product_impl<
         std::tuple<to_tuple_t<InTuplesLike>...>,
         std::tuple<std::tuple<>>>::type;
 
@@ -85,7 +92,7 @@ static_assert(std::is_same_v<
               cartesian_product_t<std::tuple<int, float>, std::tuple<double>>,
               std::tuple<std::tuple<int, double>, std::tuple<float, double>>>);
 
-/// Transform a std::tuple<Args...> to a testing::Types<Args...>, identity otherwise
+namespace detail {
 template <class T>
 struct tuple_to_types
 {
@@ -97,6 +104,8 @@ struct tuple_to_types<std::tuple<Args...>>
 {
     using type = testing::Types<Args...>;
 };
+} // namespace detail
 
+/// Transform a std::tuple<Args...> to a testing::Types<Args...>, identity otherwise
 template <class T>
-using tuple_to_types_t = typename tuple_to_types<T>::type;
+using tuple_to_types_t = typename detail::tuple_to_types<T>::type;

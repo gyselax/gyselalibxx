@@ -1,14 +1,12 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
 #include <ddc/kernels/splines.hpp>
 
+#include <sll/mapping/circular_to_cartesian.hpp>
+#include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/metric_tensor.hpp>
-#include <sll/polar_bsplines.hpp>
 #include <sll/view.hpp>
 
-#include "sll/mapping/circular_to_cartesian.hpp"
-#include "sll/mapping/czarny_to_cartesian.hpp"
-
-#include "test_utils.hpp"
+#include <gtest/gtest.h>
 
 struct X
 {
@@ -40,9 +38,6 @@ struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
-struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
-{
-};
 
 using InterpPointsR = ddc::
         GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
@@ -61,7 +56,6 @@ struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
 using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
 using BSIdxRangeTheta = ddc::DiscreteDomain<BSplinesTheta>;
 using BSIdxRangeRTheta = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
-using BSIdxRangePolar = ddc::DiscreteDomain<PolarBSplinesRTheta>;
 
 using IdxR = ddc::DiscreteElement<GridR>;
 using IdxTheta = ddc::DiscreteElement<GridTheta>;

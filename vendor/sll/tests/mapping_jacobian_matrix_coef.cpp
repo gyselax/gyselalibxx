@@ -3,13 +3,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include "sll/mapping/circular_to_cartesian.hpp"
-#include "sll/mapping/czarny_to_cartesian.hpp"
-#include "sll/mapping/discrete_mapping_builder.hpp"
-#include "sll/mapping/discrete_to_cartesian.hpp"
-#include "sll/mapping/inverse_jacobian_matrix.hpp"
+#include <sll/mapping/circular_to_cartesian.hpp>
+#include <sll/mapping/czarny_to_cartesian.hpp>
+#include <sll/mapping/discrete_mapping_builder.hpp>
+#include <sll/mapping/discrete_to_cartesian.hpp>
+#include <sll/mapping/inverse_jacobian_matrix.hpp>
 
-#include "test_utils.hpp"
+#include <gtest/gtest.h>
 
 
 

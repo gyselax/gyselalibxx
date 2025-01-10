@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
-#include <sll/polar_spline.hpp>
 #include <sll/view.hpp>
+
+#include "polar_spline.hpp"
 
 /**
  * @brief Define an evaluator on polar B-splines.

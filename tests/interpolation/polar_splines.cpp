@@ -8,12 +8,13 @@
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_builder.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
-#include <sll/polar_bsplines.hpp>
-#include <sll/polar_spline.hpp>
-#include <sll/polar_spline_evaluator.hpp>
 #include <sll/view.hpp>
 
 #include <gtest/gtest.h>
+
+#include "polar_bsplines.hpp"
+#include "polar_spline.hpp"
+#include "polar_spline_evaluator.hpp"
 
 struct R
 {

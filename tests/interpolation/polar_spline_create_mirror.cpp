@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/polar_bsplines.hpp>
-#include <sll/polar_spline.hpp>
-
 #include <gtest/gtest.h>
+
+#include "polar_bsplines.hpp"
+#include "polar_spline.hpp"
 
 struct R
 {

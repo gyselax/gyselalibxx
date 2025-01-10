@@ -1,6 +1,10 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <ddc/ddc.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 
 template <class PolarBSplinesType, class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
 struct PolarSplineSpan;
@@ -292,7 +296,9 @@ template <class PolarBSplinesType, class MemSpace>
 PolarSpline<PolarBSplinesType, Kokkos::HostSpace> create_mirror(
         PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
 {
-    return create_mirror(Kokkos::DefaultHostExecutionSpace(), src);
+    PolarSpline<PolarBSplinesType, Kokkos::HostSpace>
+            dst(src.singular_spline_coef.domain(), src.spline_coef.domain());
+    return dst;
 }
 
 /**
@@ -324,7 +330,10 @@ template <class PolarBSplinesType, class MemSpace>
 PolarSpline<PolarBSplinesType, Kokkos::HostSpace> create_mirror_and_copy(
         PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
 {
-    return create_mirror_and_copy(Kokkos::DefaultHostExecutionSpace(), src);
+    PolarSpline<PolarBSplinesType, Kokkos::HostSpace> dst = create_mirror(src);
+    ddc::parallel_deepcopy(dst.spline_coef, src.spline_coef);
+    ddc::parallel_deepcopy(dst.singular_spline_coef, src.singular_spline_coef);
+    return dst;
 }
 
 /**
@@ -355,7 +364,13 @@ auto create_mirror_view(
 template <class PolarBSplinesType, class MemSpace>
 auto create_mirror_view(PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
 {
-    return create_mirror_view(Kokkos::DefaultHostExecutionSpace(), src);
+    if constexpr (std::is_same_v<MemSpace, Kokkos::HostSpace>) {
+        return src;
+    } else {
+        PolarSpline<PolarBSplinesType, Kokkos::HostSpace>
+                dst(src.singular_spline_coef.domain(), src.spline_coef.domain());
+        return dst;
+    }
 }
 
 /**
@@ -386,5 +401,40 @@ auto create_mirror_view_and_copy(
 template <class PolarBSplinesType, class MemSpace>
 auto create_mirror_view_and_copy(PolarSplineSpan<PolarBSplinesType, MemSpace> const& src)
 {
-    return create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), src);
+    auto dst = create_mirror_view(src);
+    ddc::parallel_deepcopy(dst.spline_coef, src.spline_coef);
+    ddc::parallel_deepcopy(dst.singular_spline_coef, src.singular_spline_coef);
+    return dst;
 }
+
+template <class PolarBSplines, class MemorySpace>
+inline constexpr bool enable_data_access_methods<PolarSpline<PolarBSplines, MemorySpace>> = true;
+
+template <class PolarBSplines, class MemorySpace>
+inline constexpr bool
+        enable_data_access_methods<PolarSplineView<PolarBSplines, MemorySpace>> = true;
+
+template <class PolarBSplines, class MemorySpace>
+inline constexpr bool
+        enable_data_access_methods<PolarSplineSpan<PolarBSplines, MemorySpace>> = true;
+
+template <class PolarBSplines, class MemorySpace>
+inline constexpr bool enable_mem_type<PolarSpline<PolarBSplines, MemorySpace>> = true;
+
+namespace detail {
+
+/**
+ * @brief Get a new `PolarSpline` type with the same parametrisation
+ * except in the memory space which is set to NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam PolarSplineType Type of the B-splines.
+ * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
+ * @see VectorField
+ */
+template <class NewMemorySpace, class PolarSplineType, class MemorySpace>
+struct OnMemorySpace<NewMemorySpace, PolarSpline<PolarSplineType, MemorySpace>>
+{
+    using type = PolarSpline<PolarSplineType, NewMemorySpace>;
+};
+
+} // namespace detail

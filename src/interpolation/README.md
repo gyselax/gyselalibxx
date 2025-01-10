@@ -4,12 +4,15 @@ Interpolation methods are any methods which, given values $`f_j=f(x_j)`$, allow 
 
 $`\phi(x_j)=f_j=f(x_j)`$
 
-and return the value of that interpolating function $\phi(x)$ at the desired coordinates.
+which can return the value of that interpolating function $\phi(x)$ at the desired coordinates.
 
-The general interface for this method is defined via IInterpolator.
+This folder describes an operator IInterpolator which takes the values of the function to be interpolated and returns its values at the provided points.
 
 The interpolation methods implemented are:
 -  SplineInterpolator
+-  LagrangeInterpolator
+
+The folder also contains tools useful for constructing and evaluating interpolating functions. The sub-folder [polar\_splines](./polar_splines/README.md) contains methods specific to polar splines.
 
 ## Spline Interpolation
 
@@ -18,6 +21,9 @@ Interpolation by a spline interpolating function is implemented in the class Spl
 In order for the interpolation to function correctly the values $`f_j=f(x_j)`$ provided must be located at the points $`x_j`$ identified as the spline interpolation points.
 
 The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in DDC.
+
+### Polar Spline Interpolation
+There is no method to construct a polar spline from the values of a function. It should be possible to construct such a `PolarSplineBuilder`, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder [polar\_splines](./polar_splines/README.md).
 
 ## Memory concerns
 

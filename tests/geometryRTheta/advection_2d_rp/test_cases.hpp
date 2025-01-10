@@ -6,13 +6,13 @@
 #include <sll/mapping/cartesian_to_circular.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/polar_spline.hpp>
-#include <sll/polar_spline_evaluator.hpp>
 
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "polar_spline.hpp"
+#include "polar_spline_evaluator.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 
 /*

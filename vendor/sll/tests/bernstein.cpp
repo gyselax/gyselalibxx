@@ -4,10 +4,9 @@
 
 #include <sll/bernstein.hpp>
 #include <sll/mapping/mapping_tools.hpp>
+#include <sll/test_utils.hpp>
 
 #include <gtest/gtest.h>
-
-#include "test_utils.hpp"
 
 template <class Tag1, class Tag2>
 ddc::Coordinate<Tag1, Tag2> generate_random_point_in_triangle(

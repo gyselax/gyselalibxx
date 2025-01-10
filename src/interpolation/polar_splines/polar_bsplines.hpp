@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
 #include <vector>
@@ -8,8 +9,9 @@
 #include <sll/mapping/cartesian_to_barycentric.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/mapping/mapping_tools.hpp>
-#include <sll/polar_spline.hpp>
 #include <sll/view.hpp>
+
+#include "polar_spline.hpp"
 
 /**
  * A class containing all information describing polar bsplines.

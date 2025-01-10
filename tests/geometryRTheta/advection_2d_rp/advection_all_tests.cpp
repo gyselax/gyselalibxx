@@ -18,8 +18,6 @@
 #include <sll/mapping/discrete_mapping_builder.hpp>
 #include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
-#include <sll/polar_spline.hpp>
-#include <sll/polar_spline_evaluator.hpp>
 
 #include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
@@ -33,6 +31,8 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "polar_spline.hpp"
+#include "polar_spline_evaluator.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
