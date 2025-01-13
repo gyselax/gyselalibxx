@@ -113,8 +113,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
-            polar_spline_evaluator(r_extrapolation_rule);
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> polar_spline_evaluator(
+            r_extrapolation_rule);
 
     // --- Define the to_physical_mapping. ------------------------------------------------------------------------
     const LogicalToPhysicalMapping to_physical_mapping;

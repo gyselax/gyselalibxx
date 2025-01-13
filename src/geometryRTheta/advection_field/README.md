@@ -27,12 +27,12 @@ It has two types of `operator()`:
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
 * a Field of values of the solution on the mesh points of the grid; 
-* a PolarSpline representation of the solution. 
+* a PolarSplineMem representation of the solution. 
 
 The AdvectionFieldFinder can handle as input the two forms. 
 If a Field is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. 
 The spline representation is needed to compute the derivatives of the function $`\phi`$. 
-If the PolarSpline representation is given as input, it can directly compute the derivatives of the function $`\phi`$. 
+If the PolarSplineMem representation is given as input, it can directly compute the derivatives of the function $`\phi`$. 
 
 Once the advection field computed, it is given as input to the BslAdvectionRP operator to advect the density $`\rho`$ function. 
 The BslAdvectionRP operator can handle the advection with an advection field along $`(x,y)`$ and with an advection field along $`(r,\theta)`$. 

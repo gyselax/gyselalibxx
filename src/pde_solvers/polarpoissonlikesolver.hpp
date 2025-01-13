@@ -153,7 +153,7 @@ private:
     using KnotsTheta = ddc::NonUniformBsplinesKnots<BSplinesTheta>;
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
-    using SplinePolar = PolarSpline<PolarBSplinesRTheta>;
+    using PolarSplineMemRTheta = PolarSplineMem<PolarBSplinesRTheta>;
 
     using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
@@ -236,11 +236,10 @@ private:
 
     FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
-            m_polar_spline_evaluator;
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
-    mutable host_t<SplinePolar> m_phi_spline_coef;
+    mutable host_t<PolarSplineMemRTheta> m_phi_spline_coef;
     Kokkos::View<double**, Kokkos::LayoutRight> m_x_init;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
@@ -901,7 +900,7 @@ public:
      *      The spline representation of the solution @f$\phi@f$, also used as initial data for the iterative solver.
      */
     template <class RHSFunction>
-    void operator()(RHSFunction const& rhs, host_t<SplinePolar>& spline) const
+    void operator()(RHSFunction const& rhs, host_t<PolarSplineMemRTheta>& spline) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonRHS");
 

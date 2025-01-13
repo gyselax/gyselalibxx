@@ -277,7 +277,7 @@ using ConstSpline2D = DConstField<IdxRangeBSRTheta>;
  *
  * Store the polar B-splines coefficients of the function.
  */
-using SplinePolar = PolarSpline<PolarBSplinesRTheta>;
+using PolarSplineMemRTheta = PolarSplineMem<PolarBSplinesRTheta>;
 
 /**
  * @brief Type of the index of an element of polar B-splines.

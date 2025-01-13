@@ -99,7 +99,7 @@ public:
 private:
     Mapping const& m_mapping;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace> const
+    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> const
             m_polar_spline_evaluator;
 
     SplineRThetaEvaluatorNullBound_host const m_spline_evaluator;
@@ -177,7 +177,7 @@ public:
 
     /**
      * @brief Compute the advection field from the Poisson-like equation solution.
-     * The B-splines basis used is the polar B-splines (PolarSpline). 
+     * The B-splines basis used is the polar B-splines (PolarSplineMem). 
      *
      * @param[in] electrostatic_potential_coef
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
@@ -185,7 +185,7 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            host_t<SplinePolar>& electrostatic_potential_coef,
+            host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
@@ -220,8 +220,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator<
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule,
-                                    Kokkos::HostSpace>> && std::is_same_v<SplineType, host_t<SplinePolar>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
@@ -400,7 +399,7 @@ public:
 
     /**
      * @brief Compute the advection field from the Poisson-like equation.
-     * The B-splines basis used is the polar B-splines (PolarSpline). 
+     * The B-splines basis used is the polar B-splines (PolarSplineMem). 
      *
      * @param[in] electrostatic_potential_coef
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
@@ -410,7 +409,7 @@ public:
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
-            host_t<SplinePolar>& electrostatic_potential_coef,
+            host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
@@ -451,8 +450,7 @@ private:
                             Evaluator,
                             PolarSplineEvaluator<
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule,
-                                    Kokkos::HostSpace>> && std::is_same_v<SplineType, host_t<SplinePolar>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rp);
 

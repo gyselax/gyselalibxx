@@ -126,11 +126,11 @@ public:
                 IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
         IdxRangeBSTheta polar_idx_range(ddc::discrete_space<BSplinesTheta>().full_domain());
 
-        host_t<SplinePolar> electrostatic_potential_coef(
+        host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
                 IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
+        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
 
 

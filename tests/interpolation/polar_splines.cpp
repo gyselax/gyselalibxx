@@ -16,6 +16,8 @@
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 
+namespace {
+
 struct R
 {
     static constexpr bool PERIODIC = false;
@@ -75,11 +77,11 @@ using CircToCart = CzarnyToCartesian<R, Theta, X, Y>;
 
 TEST(PolarSplineTest, ConstantEval)
 {
-    using PolarCoord = ddc::Coordinate<R, Theta>;
-    using CoordR = ddc::Coordinate<R>;
-    using CoordTheta = ddc::Coordinate<Theta>;
-    using Spline = PolarSpline<BSplines, Kokkos::HostSpace>;
-    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule, Kokkos::HostSpace>;
+    using PolarCoord = Coord<R, Theta>;
+    using CoordR = Coord<R>;
+    using CoordTheta = Coord<Theta>;
+    using SplineMem = PolarSplineMem<BSplines, Kokkos::HostSpace>;
+    using Evaluator = PolarSplineEvaluator<BSplines, ddc::NullExtrapolationRule>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
@@ -117,7 +119,7 @@ TEST(PolarSplineTest, ConstantEval)
 
     // 1. Create BSplines
     {
-        ddc::DiscreteVector<GridR> constexpr npoints_r(ncells + 1);
+        IdxStep<GridR> constexpr npoints_r(ncells + 1);
         std::vector<CoordR> breaks_r(npoints_r);
         const double dr = (rN - r0) / ncells;
         for (int i(0); i < npoints_r; ++i) {
@@ -127,7 +129,7 @@ TEST(PolarSplineTest, ConstantEval)
 #if defined(BSPLINES_TYPE_UNIFORM)
         ddc::init_discrete_space<BSplinesTheta>(theta0, thetaN, ncells);
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
-        ddc::DiscreteVector<GridTheta> constexpr npoints_theta(ncells + 1);
+        IdxStep<GridTheta> constexpr npoints_theta(ncells + 1);
         std::vector<CoordTheta> breaks_theta(npoints_theta);
         const double dp = (thetaN - theta0) / ncells;
         for (int i(0); i < npoints_r; ++i) {
@@ -139,10 +141,9 @@ TEST(PolarSplineTest, ConstantEval)
 
     ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
-    ddc::DiscreteDomain<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
-    ddc::DiscreteDomain<GridTheta> interpolation_idx_range_P(
-            GrevillePointsTheta::get_domain<GridTheta>());
-    ddc::DiscreteDomain<GridR, GridTheta>
+    IdxRange<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_P(GrevillePointsTheta::get_domain<GridTheta>());
+    IdxRange<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_R, interpolation_idx_range_P);
 
     BuilderRTheta builder_rtheta(interpolation_idx_range);
@@ -168,16 +169,14 @@ TEST(PolarSplineTest, ConstantEval)
     DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
-    Spline coef(builder_rtheta.spline_domain());
+    SplineMem coef(get_spline_idx_range(builder_rtheta));
 
-    ddc::for_each(coef.singular_spline_coef.domain(), [&](ddc::DiscreteElement<BSplines> const i) {
+    ddc::for_each(get_idx_range(coef.singular_spline_coef), [&](Idx<BSplines> const i) {
         coef.singular_spline_coef(i) = 1.0;
     });
-    ddc::for_each(
-            coef.spline_coef.domain(),
-            [&](ddc::DiscreteElement<BSplinesR, BSplinesTheta> const i) {
-                coef.spline_coef(i) = 1.0;
-            });
+    ddc::for_each(get_idx_range(coef.spline_coef), [&](Idx<BSplinesR, BSplinesTheta> const i) {
+        coef.spline_coef(i) = 1.0;
+    });
 
     ddc::NullExtrapolationRule extrapolation_rule;
     const Evaluator spline_evaluator(extrapolation_rule);
@@ -189,9 +188,9 @@ TEST(PolarSplineTest, ConstantEval)
     for (std::size_t i(0); i < n_test_points; ++i) {
         for (std::size_t j(0); j < n_test_points; ++j) {
             PolarCoord const test_point(r0 + i * dr, theta0 + j * dp);
-            const double val = spline_evaluator(test_point, coef);
-            const double deriv_1 = spline_evaluator.deriv_dim_1(test_point, coef);
-            const double deriv_2 = spline_evaluator.deriv_dim_2(test_point, coef);
+            const double val = spline_evaluator(test_point, get_const_field(coef));
+            const double deriv_1 = spline_evaluator.deriv_dim_1(test_point, get_const_field(coef));
+            const double deriv_2 = spline_evaluator.deriv_dim_2(test_point, get_const_field(coef));
 
             EXPECT_LE(fabs(val - 1.0), 1.0e-14);
             EXPECT_LE(fabs(deriv_1), 1.0e-13);
@@ -202,10 +201,10 @@ TEST(PolarSplineTest, ConstantEval)
 
 void test_polar_integrals()
 {
-    using CoordR = ddc::Coordinate<R>;
-    using CoordTheta = ddc::Coordinate<Theta>;
+    using CoordR = Coord<R>;
+    using CoordTheta = Coord<Theta>;
+    using SplineMem = PolarSplineMem<BSplines>;
     using Spline = PolarSpline<BSplines>;
-    using SplineSpan = PolarSplineSpan<BSplines>;
     using BuilderRTheta = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
@@ -243,7 +242,7 @@ void test_polar_integrals()
 
     // 1. Create BSplines
     {
-        ddc::DiscreteVector<GridR> constexpr npoints_r(ncells + 1);
+        IdxStep<GridR> constexpr npoints_r(ncells + 1);
         std::vector<CoordR> breaks_r(npoints_r);
         const double dr = (rN - r0) / ncells;
         for (int i(0); i < npoints_r; ++i) {
@@ -253,7 +252,7 @@ void test_polar_integrals()
 #if defined(BSPLINES_TYPE_UNIFORM)
         ddc::init_discrete_space<BSplinesTheta>(theta0, thetaN, ncells);
 #elif defined(BSPLINES_TYPE_NON_UNIFORM)
-        ddc::DiscreteVector<GridTheta> constexpr npoints_theta(ncells + 1);
+        IdxStep<GridTheta> constexpr npoints_theta(ncells + 1);
         std::vector<CoordTheta> breaks_theta(npoints_theta);
         const double dp = (thetaN - theta0) / ncells;
         for (int i(0); i < npoints_r; ++i) {
@@ -265,10 +264,9 @@ void test_polar_integrals()
 
     ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
-    ddc::DiscreteDomain<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
-    ddc::DiscreteDomain<GridTheta> interpolation_idx_range_P(
-            GrevillePointsTheta::get_domain<GridTheta>());
-    ddc::DiscreteDomain<GridR, GridTheta>
+    IdxRange<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_P(GrevillePointsTheta::get_domain<GridTheta>());
+    IdxRange<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_R, interpolation_idx_range_P);
 
     BuilderRTheta builder_rtheta(interpolation_idx_range);
@@ -294,23 +292,23 @@ void test_polar_integrals()
     DiscreteToCartesian mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
-    Spline bspline_integrals_alloc(builder_rtheta.spline_domain());
-    SplineSpan bspline_integrals(bspline_integrals_alloc);
+    SplineMem bspline_integrals_alloc(get_spline_idx_range(builder_rtheta));
+    Spline bspline_integrals(bspline_integrals_alloc);
     integrals(Kokkos::DefaultExecutionSpace(), bspline_integrals);
     double area = ddc::parallel_transform_reduce(
                           Kokkos::DefaultExecutionSpace(),
-                          bspline_integrals.singular_spline_coef.domain(),
+                          get_idx_range(bspline_integrals.singular_spline_coef),
                           0.0,
                           ddc::reducer::sum<double>(),
-                          KOKKOS_LAMBDA(ddc::DiscreteElement<BSplines> idx) {
+                          KOKKOS_LAMBDA(Idx<BSplines> idx) {
                               return bspline_integrals.singular_spline_coef(idx);
                           })
                   + ddc::parallel_transform_reduce(
                           Kokkos::DefaultExecutionSpace(),
-                          bspline_integrals.spline_coef.domain(),
+                          get_idx_range(bspline_integrals.spline_coef),
                           0.0,
                           ddc::reducer::sum<double>(),
-                          KOKKOS_LAMBDA(ddc::DiscreteElement<BSplinesR, BSplinesTheta> idx) {
+                          KOKKOS_LAMBDA(Idx<BSplinesR, BSplinesTheta> idx) {
                               return bspline_integrals.spline_coef(idx);
                           });
 
@@ -321,6 +319,8 @@ TEST(PolarSplineTest, Integrals)
 {
     test_polar_integrals();
 }
+
+} // namespace
 
 int main(int argc, char** argv)
 {

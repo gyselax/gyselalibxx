@@ -48,7 +48,7 @@ parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_r
 HOME_DIR = Path(__file__).parent.parent.absolute()
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
 
-auto_functions = set(['build_kokkos_layout', 'get', 'create_geometry_mirror_view', 'make_temporary_clone'])
+auto_functions = set(['build_kokkos_layout', 'get', 'create_geometry_mirror_view', 'make_temporary_clone', 'discrete_space'])
 field_mem_functions = set()
 
 def report_error(level, file, linenr, message):
@@ -741,8 +741,14 @@ def check_exec_space_usage(file):
                         level = FATAL
                     elif exec_space == 'DefaultHostExecutionSpace' and exec_space != memory_space:
                         level = WARNING
-                        if file.file.name == 'species_info.hpp':
-                            # Deactivate warning for species_info constructor which purposely has different constructors for different spaces
+                        # Find function scope
+                        parent_scope = scope
+                        parent_id = scope.get('nestedIn', None)
+                        while parent_id and parent_scope['type'] != 'Function':
+                            parent_scope = scopes[parent_id]
+                            parent_id = parent_scope.get('nestedIn', None)
+                        if parent_scope['className'] == 'Impl':
+                            # Deactivate warning for Impl constructors which purposely has different constructors for different spaces
                             level = None
 
                     if level:

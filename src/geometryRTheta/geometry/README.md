@@ -30,5 +30,5 @@ The shortcuts defined in the geometry file represent:
 13. The type of a field of doubles defined on each of the domains (e.g. `DFieldR`).
 14. The templated type of a constant field defined on each of the domains (e.g. `ConstFieldR<ElementType>`).
 15. The type of a constant field of doubles defined on each of the domains (e.g. `DConstFieldR`).
-16. The type of a field of doubles defined on the spline domains representing a spline on the Cartesian product base (e.g. `Spline2D`), and a spline on the polar spline base (e.g. `SplinePolar`).
+16. The type of a field of doubles defined on the spline domains representing a spline on the Cartesian product base (e.g. `Spline2D`), and a spline on the polar spline base (e.g. `PolarSplineRTheta`).
 17. The type of VectorField defined on the index range `IdxRangeRTheta` on the template directions `NDTag<Dim1, Dim2>` (`VectorDFieldRTheta<Dim1, Dim2>`). The directions used in the code are either `<R, Theta>` or `<X, Y>`. 

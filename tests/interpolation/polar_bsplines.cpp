@@ -84,13 +84,13 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
 {
     using R = typename TestFixture::R;
     using GridR = typename TestFixture::GridR;
-    using IdxStepR = ddc::DiscreteVector<GridR>;
+    using IdxStepR = IdxStep<GridR>;
     using Theta = typename TestFixture::Theta;
     using GridTheta = typename TestFixture::GridTheta;
-    using IdxStepTheta = ddc::DiscreteVector<GridTheta>;
+    using IdxStepTheta = IdxStep<GridTheta>;
     using X = typename TestFixture::X;
     using Y = typename TestFixture::Y;
-    using PolarCoord = ddc::Coordinate<R, Theta>;
+    using PolarCoord = Coord<R, Theta>;
     using BSplinesR = typename TestFixture::BSplinesR;
     using BSplinesTheta = typename TestFixture::BSplinesTheta;
     using CircToCart = CircularToCartesian<R, Theta, X, Y>;
@@ -122,8 +122,8 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             GridR,
             GridTheta>;
     using BSplines = typename TestFixture::BSplines;
-    using CoordR = ddc::Coordinate<R>;
-    using CoordTheta = ddc::Coordinate<Theta>;
+    using CoordR = Coord<R>;
+    using CoordTheta = Coord<Theta>;
     using GrevillePointsR = typename TestFixture::GrevillePointsR;
     using GrevillePointsTheta = typename TestFixture::GrevillePointsTheta;
 
@@ -157,11 +157,10 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
 
     ddc::init_discrete_space<GridR>(GrevillePointsR::template get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::template get_sampling<GridTheta>());
-    ddc::DiscreteDomain<GridR> interpolation_idx_range_r(
-            GrevillePointsR::template get_domain<GridR>());
-    ddc::DiscreteDomain<GridTheta> interpolation_idx_range_theta(
+    IdxRange<GridR> interpolation_idx_range_r(GrevillePointsR::template get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_theta(
             GrevillePointsTheta::template get_domain<GridTheta>());
-    ddc::DiscreteDomain<GridR, GridTheta>
+    IdxRange<GridR, GridTheta>
             interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     SplineRThetaBuilder_host builder_rp(interpolation_idx_range);

@@ -165,12 +165,12 @@ public:
         DFieldMemRTheta electrical_potential(grid);
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
-        host_t<SplinePolar> electrostatic_potential_coef(
+        host_t<PolarSplineMemRTheta> electrostatic_potential_coef(
                 PolarBSplinesRTheta::singular_idx_range<PolarBSplinesRTheta>(),
                 IdxRangeBSRTheta(radial_bsplines, polar_idx_range));
 
         ddc::NullExtrapolationRule extrapolation_rule;
-        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace>
+        PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
@@ -202,7 +202,7 @@ public:
             polar_spline_evaluator(
                     get_field(electrical_potential_host),
                     get_const_field(coords),
-                    electrostatic_potential_coef);
+                    get_const_field(electrostatic_potential_coef));
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
