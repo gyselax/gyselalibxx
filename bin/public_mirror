@@ -51,7 +51,7 @@ do
 done <<< ${last_message_public}
 git checkout ${current_SHA}
 
-last_match=$(eval ${git_log_options})
+last_match=$(eval "${git_log_options}")
 echo ${last_match}
 
 commits_to_choose=$(git rev-list ${last_match}..HEAD --reverse)
