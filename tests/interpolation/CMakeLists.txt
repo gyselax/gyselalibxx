@@ -14,6 +14,20 @@ endif()
 
 include(GoogleTest)
 
+add_executable(bernstein_tests
+    ../main.cpp
+    bernstein.cpp
+)
+target_compile_features(bernstein_tests PUBLIC cxx_std_17)
+target_link_libraries(bernstein_tests
+    PUBLIC
+        GTest::gtest
+        GTest::gmock
+        gslx::polar_splines
+        sll::SLL
+)
+gtest_discover_tests(bernstein_tests DISCOVERY_MODE PRE_TEST)
+
 add_executable(polar_bsplines_tests
     ../main.cpp
     polar_bsplines.cpp

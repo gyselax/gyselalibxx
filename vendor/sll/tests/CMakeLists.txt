@@ -11,18 +11,6 @@ target_link_libraries(misc_tests_sll
         sll::SLL
 )
 
-add_executable(bernstein_tests_sll
-  main.cpp
-	bernstein.cpp
-)
-target_compile_features(bernstein_tests_sll PUBLIC cxx_std_17)
-target_link_libraries(bernstein_tests_sll
-    PUBLIC
-        GTest::gtest
-        sll::SLL
-)
-gtest_discover_tests(bernstein_tests_sll DISCOVERY_MODE PRE_TEST)
-
 add_executable(metric_tensor_tests_sll
   main.cpp
 	metric_tensor.cpp

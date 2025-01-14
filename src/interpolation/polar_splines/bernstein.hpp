@@ -1,9 +1,13 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
 
 #include <sll/mapping/cartesian_to_barycentric.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/view.hpp>
+
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 /**
  * @brief A class which evaluates the triangular Bernstein polynomials.
@@ -79,20 +83,21 @@ public:
         using discrete_dimension_type = TriangularBernsteinPolynomialBasis;
 
         /// The type of an index of an element of the basis.
-        using discrete_element_type = ddc::DiscreteElement<DDim>;
+        using discrete_element_type = Idx<DDim>;
 
         /// The type of the index range of the basis.
-        using discrete_domain_type = ddc::DiscreteDomain<DDim>;
+        using discrete_domain_type = IdxRange<DDim>;
 
         /// The type of an index step from one element of the basis to another.
-        using discrete_vector_type = ddc::DiscreteVector<DDim>;
+        using discrete_vector_type = IdxStep<DDim>;
 
         /**
          * @brief Construct the basis from the barycentric coordinate mapping.
          * @param[in] coord_changer The class which converts cartesian coordinates to
          * barycentric coordinates.
          */
-        Impl(CartesianToBarycentric<X, Y, Corner1Tag, Corner2Tag, Corner3Tag> const& coord_changer)
+        explicit Impl(CartesianToBarycentric<X, Y, Corner1Tag, Corner2Tag, Corner3Tag> const&
+                              coord_changer)
             : m_coord_changer(coord_changer)
         {
         }
@@ -143,26 +148,23 @@ public:
          * @param[out] values The values of the basis functions at the coordinate.
          * @param[in] x The coordinate where the polynomials should be evaluated.
          */
-        void eval_basis(
-                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> values,
-                ddc::Coordinate<X, Y> const& x) const;
+        void eval_basis(host_t<DField<IdxRange<DDim>>> values, Coord<X, Y> const& x) const;
     };
 };
 
 template <class X, class Y, class Corner1Tag, class Corner2Tag, class Corner3Tag, std::size_t D>
 template <class DDim, class MemorySpace>
-void TriangularBernsteinPolynomialBasis<X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D>::
-        Impl<DDim, MemorySpace>::eval_basis(
-                ddc::ChunkSpan<double, ddc::DiscreteDomain<DDim>> values,
-                ddc::Coordinate<X, Y> const& x) const
+void TriangularBernsteinPolynomialBasis<X, Y, Corner1Tag, Corner2Tag, Corner3Tag, D>::Impl<
+        DDim,
+        MemorySpace>::eval_basis(host_t<DField<IdxRange<DDim>>> values, Coord<X, Y> const& x) const
 {
-    const ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag> bary_coords = m_coord_changer(x);
+    const Coord<Corner1Tag, Corner2Tag, Corner3Tag> bary_coords = m_coord_changer(x);
     const double l1 = ddc::get<Corner1Tag>(bary_coords);
     const double l2 = ddc::get<Corner2Tag>(bary_coords);
     const double l3 = ddc::get<Corner3Tag>(bary_coords);
     assert(values.size() == nbasis());
 
-    ddc::DiscreteElement<DDim> idx(0);
+    Idx<DDim> idx(0);
     for (std::size_t i(0); i < D + 1; ++i) {
         for (std::size_t j(0); j < D + 1 - i; ++j, ++idx) {
             const int k = D - i - j;

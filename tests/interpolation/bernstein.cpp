@@ -2,17 +2,19 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/bernstein.hpp>
 #include <sll/mapping/mapping_tools.hpp>
 #include <sll/test_utils.hpp>
 
 #include <gtest/gtest.h>
 
+#include "bernstein.hpp"
+#include "ddc_alias_inline_functions.hpp"
+
 template <class Tag1, class Tag2>
-ddc::Coordinate<Tag1, Tag2> generate_random_point_in_triangle(
-        ddc::Coordinate<Tag1, Tag2> const& corner1,
-        ddc::Coordinate<Tag1, Tag2> const& corner2,
-        ddc::Coordinate<Tag1, Tag2> const& corner3)
+Coord<Tag1, Tag2> generate_random_point_in_triangle(
+        Coord<Tag1, Tag2> const& corner1,
+        Coord<Tag1, Tag2> const& corner2,
+        Coord<Tag1, Tag2> const& corner3)
 {
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -32,7 +34,7 @@ ddc::Coordinate<Tag1, Tag2> generate_random_point_in_triangle(
     const double point_x = c1_x + (c2_x - c1_x) * rand1 + (c3_x - c1_x) * rand2;
     const double point_y = c1_y + (c2_y - c1_y) * rand1 + (c3_y - c1_y) * rand2;
 
-    return ddc::Coordinate<Tag1, Tag2>(point_x, point_y);
+    return Coord<Tag1, Tag2>(point_x, point_y);
 }
 
 template <class T>
@@ -79,7 +81,7 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
     using Corner2 = typename TestFixture::Corner2;
     using Corner3 = typename TestFixture::Corner3;
     using Bernstein = typename TestFixture::Bernstein;
-    using CoordXY = ddc::Coordinate<X, Y>;
+    using CoordXY = Coord<X, Y>;
 
     const CoordXY c1(-1.0, -1.0);
     const CoordXY c2(0.0, 1.0);
@@ -89,21 +91,19 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
     static_assert(is_mapping_v<CartesianToBarycentric<X, Y, Corner1, Corner2, Corner3>>);
     ddc::init_discrete_space<Bernstein>(coordinate_converter);
 
-    ddc::DiscreteDomain<Bernstein> idx_range(
-            ddc::DiscreteElement<Bernstein>(0),
-            ddc::DiscreteVector<Bernstein>(Bernstein::nbasis()));
+    IdxRange<Bernstein> idx_range(Idx<Bernstein>(0), IdxStep<Bernstein>(Bernstein::nbasis()));
 
-    ddc::Chunk<double, ddc::DiscreteDomain<Bernstein>> values(idx_range);
+    host_t<DFieldMem<IdxRange<Bernstein>>> values(idx_range);
 
     std::size_t const n_test_points = 100;
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordXY const test_point = generate_random_point_in_triangle(c1, c2, c3);
-        ddc::discrete_space<Bernstein>().eval_basis(values.span_view(), test_point);
+        ddc::discrete_space<Bernstein>().eval_basis(get_field(values), test_point);
         double total = ddc::transform_reduce(
                 idx_range,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](ddc::DiscreteElement<Bernstein> const ix) { return values(ix); });
+                [&](Idx<Bernstein> const ix) { return values(ix); });
         EXPECT_LE(fabs(total - 1.0), 1.0e-15);
     }
 }
