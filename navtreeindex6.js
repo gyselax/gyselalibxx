@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"neumann__spline__quadrature_8hpp_source.html":[17,0,17,1],
+"non__uniform__interpolation__points_8hpp_source.html":[17,0,20,7],
 "noperturbinitialization_8hpp_source.html":[17,0,4,1,3],
 "null__extrapolation__rules_8hpp_source.html":[17,0,14,2,4],
 "nulladvectionvx_8hpp_source.html":[17,0,0,5],
@@ -11,7 +13,7 @@ var NAVTREEINDEX6 =
 "partial__derivatives_8hpp_source.html":[17,0,11,1],
 "patch_8hpp_source.html":[17,0,14,0,7],
 "pdi__helper_8hpp_source.html":[17,0,9,2],
-"physical__geometry_8hpp_source.html":[17,1,2,0,8],
+"physical__geometry_8hpp_source.html":[17,1,3,0,8],
 "poisson__like__rhs__function_8hpp_source.html":[17,0,3,5,1],
 "polar__bsplines_8hpp_source.html":[17,0,8,0,1],
 "polar__poisson_2params_8yaml_8hpp_source.html":[17,1,1,3,0],
@@ -59,7 +61,7 @@ var NAVTREEINDEX6 =
 "spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55":[17,0,17,5,1],
 "spline__quadrature_8hpp.html#a7ba2798b4e65365dc3ddf922cad024ae":[17,0,17,5,0],
 "spline__quadrature_8hpp_source.html":[17,0,17,5],
-"spline__testing__tools_8hpp_source.html":[17,1,2,1,0],
+"spline__testing__tools_8hpp_source.html":[17,1,3,1,0],
 "splitrighthandsidesolver_8hpp_source.html":[17,0,5,0,1],
 "src.html":[13],
 "src_advection.html":[13,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abf58b838d30e05fa91d71feec6dde132":[16,173,4],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f":[16,173,18],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8":[16,173,15],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33":[16,173,16],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2":[16,173,7],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036":[16,173,6]
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33":[16,173,16]
 };

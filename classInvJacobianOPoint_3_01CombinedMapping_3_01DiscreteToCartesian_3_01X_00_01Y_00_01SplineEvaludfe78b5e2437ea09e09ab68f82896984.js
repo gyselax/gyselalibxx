@@ -1,5 +1,0 @@
-var classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvaludfe78b5e2437ea09e09ab68f82896984 =
-[
-    [ "InvJacobianOPoint", "classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvaludfe78b5e2437ea09e09ab68f82896984.html#a0c6cc46cdae9a3e6754060bb54148578", null ],
-    [ "operator()", "classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvaludfe78b5e2437ea09e09ab68f82896984.html#a7db69865b918559feb0abfef1964973b", null ]
-];

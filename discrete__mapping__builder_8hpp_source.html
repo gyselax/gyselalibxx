@@ -112,44 +112,44 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;discrete_to_cartesian.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineBuilder, <span class="keyword">class</span> SplineEvaluator&gt;</div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classDiscreteToCartesianBuilder.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="classDiscreteToCartesianBuilder.html">DiscreteToCartesianBuilder</a></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                  <span class="keyword">typename</span> SplineBuilder::memory_space,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                  <span class="keyword">typename</span> SplineEvaluator::memory_space&gt;);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                  <span class="keyword">typename</span> SplineBuilder::exec_space,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                  <span class="keyword">typename</span> SplineEvaluator::exec_space&gt;);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;typename SplineBuilder::batch_domain_type, ddc::DiscreteDomain&lt;&gt;&gt;);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classDiscreteToCartesianBuilder.html#a502be02cf17241c3bf0c5cc45c5c6c0e">   32</a></span>    <span class="keyword">using </span><a class="code hl_class" href="classDiscreteToCartesian.html">MappingType</a> = <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineEvaluator&gt;</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">using </span>ExecSpace = <span class="keyword">typename</span> SplineBuilder::exec_space;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">using </span>MemorySpace = <span class="keyword">typename</span> SplineBuilder::memory_space;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesR.html">BSplinesR</a> = <span class="keyword">typename</span> SplineBuilder::bsplines_type1;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesTheta.html">BSplinesTheta</a> = <span class="keyword">typename</span> SplineBuilder::bsplines_type2;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">using </span><a class="code hl_struct" href="structGridR.html">GridR</a> = <span class="keyword">typename</span> SplineBuilder::interpolation_domain_type1;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">using </span><a class="code hl_struct" href="structGridTheta.html">GridTheta</a> = <span class="keyword">typename</span> SplineBuilder::interpolation_domain_type2;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">using </span>IdxRangeSplines = ddc::DiscreteDomain&lt;BSplinesR, BSplinesTheta&gt;;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">using </span>IdxRangeInterpolationPoints = <span class="keyword">typename</span> SplineBuilder::interpolation_domain_type;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">using </span>IdxInterpolationPoints = <span class="keyword">typename</span> IdxRangeInterpolationPoints::discrete_element_type;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">using </span>SplineCoeffsMem</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            = ddc::Chunk&lt;double, IdxRangeSplines, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt;;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">using </span>SplineCoeffs = <span class="keyword">typename</span> SplineCoeffsMem::span_type;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">using </span>InterpolationFieldMem = ddc::</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            Chunk&lt;double, IdxRangeInterpolationPoints, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt;;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;discrete_to_cartesian.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineBuilder, <span class="keyword">class</span> SplineEvaluator&gt;</div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classDiscreteToCartesianBuilder.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="classDiscreteToCartesianBuilder.html">DiscreteToCartesianBuilder</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                  <span class="keyword">typename</span> SplineBuilder::memory_space,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                  <span class="keyword">typename</span> SplineEvaluator::memory_space&gt;);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                  <span class="keyword">typename</span> SplineBuilder::exec_space,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                  <span class="keyword">typename</span> SplineEvaluator::exec_space&gt;);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;typename SplineBuilder::batch_domain_type, IdxRange&lt;&gt;&gt;);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classDiscreteToCartesianBuilder.html#a502be02cf17241c3bf0c5cc45c5c6c0e">   34</a></span>    <span class="keyword">using </span><a class="code hl_class" href="classDiscreteToCartesian.html">MappingType</a> = <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineEvaluator&gt;</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">using </span>ExecSpace = <span class="keyword">typename</span> SplineBuilder::exec_space;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">using </span>MemorySpace = <span class="keyword">typename</span> SplineBuilder::memory_space;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesR.html">BSplinesR</a> = <span class="keyword">typename</span> SplineBuilder::bsplines_type1;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesTheta.html">BSplinesTheta</a> = <span class="keyword">typename</span> SplineBuilder::bsplines_type2;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">using </span><a class="code hl_struct" href="structGridR.html">GridR</a> = <span class="keyword">typename</span> SplineBuilder::interpolation_domain_type1;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">using </span><a class="code hl_struct" href="structGridTheta.html">GridTheta</a> = <span class="keyword">typename</span> SplineBuilder::interpolation_domain_type2;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">using </span>IdxRangeSplines = IdxRange&lt;BSplinesR, BSplinesTheta&gt;;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">using </span>IdxRangeInterpolationPoints = <span class="keyword">typename</span> SplineBuilder::interpolation_domain_type;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">using </span>IdxInterpolationPoints = <span class="keyword">typename</span> IdxRangeInterpolationPoints::discrete_element_type;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">using </span>SplineCoeffsMem = DFieldMem&lt;IdxRangeSplines, MemorySpace&gt;;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">using </span>SplineCoeffs = <span class="keyword">typename</span> SplineCoeffsMem::span_type;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">using </span>InterpolationFieldMem = DFieldMem&lt;IdxRangeInterpolationPoints, MemorySpace&gt;;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">using </span>InterpolationField = <span class="keyword">typename</span> InterpolationFieldMem::span_type;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    SplineCoeffsMem m_curvilinear_to_x_spline_alloc;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    SplineCoeffsMem m_curvilinear_to_y_spline_alloc;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    SplineEvaluator m_evaluator;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    ddc::DiscreteDomain&lt;GridR, GridTheta&gt; m_idx_range_singular_point;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    IdxRange&lt;GridR, GridTheta&gt; m_idx_range_singular_point;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
@@ -167,16 +167,16 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            SplineBuilder <span class="keyword">const</span>&amp; builder,</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            SplineEvaluator <span class="keyword">const</span>&amp; evaluator)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        : m_curvilinear_to_x_spline_alloc(builder.spline_domain())</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        , m_curvilinear_to_y_spline_alloc(builder.spline_domain())</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        : m_curvilinear_to_x_spline_alloc(get_spline_idx_range(builder))</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        , m_curvilinear_to_y_spline_alloc(get_spline_idx_range(builder))</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        , m_evaluator(evaluator)</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        SplineCoeffs curvilinear_to_x_spline = m_curvilinear_to_x_spline_alloc.span_view();</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        SplineCoeffs curvilinear_to_y_spline = m_curvilinear_to_y_spline_alloc.span_view();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        InterpolationFieldMem curvilinear_to_x_vals_alloc(builder.interpolation_domain());</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        InterpolationFieldMem curvilinear_to_y_vals_alloc(builder.interpolation_domain());</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        InterpolationField curvilinear_to_x_vals = curvilinear_to_x_vals_alloc.span_view();</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        InterpolationField curvilinear_to_y_vals = curvilinear_to_y_vals_alloc.span_view();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_function" href="classDiscreteToCartesianBuilder.html#a458cd2e7da2eed26ed4f64612cef71ec">set_curvilinear_to_cartesian_values</a>(</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                curvilinear_to_x_vals,</div>
@@ -184,11 +184,11 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                analytical_mapping,</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                builder.interpolation_domain());</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        builder(get_field(curvilinear_to_x_spline), get_const_field(curvilinear_to_x_vals));</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        builder(get_field(curvilinear_to_y_spline), get_const_field(curvilinear_to_y_vals));</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        ddc::DiscreteDomain&lt;GridR, GridTheta&gt; interp_domain(builder.interpolation_domain());</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        ddc::DiscreteVector&lt;GridR, GridTheta&gt;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        IdxRange&lt;GridR, GridTheta&gt; interp_domain(builder.interpolation_domain());</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        IdxStep&lt;GridR, GridTheta&gt;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                n_points_singular_domain(1, interp_domain.template extent&lt;GridTheta&gt;().value());</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        m_idx_range_singular_point = interp_domain.take_first(n_points_singular_domain);</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
@@ -198,8 +198,8 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classDiscreteToCartesianBuilder.html#ae85a1541fb4b1695515c7d97526b8d40">  110</a></span>    <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineEvaluator&gt;</a> <a class="code hl_function" href="classDiscreteToCartesianBuilder.html#ae85a1541fb4b1695515c7d97526b8d40">operator()</a>()<span class="keyword"> const</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">    </span>{</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, SplineEvaluator&gt;</a>(</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                m_curvilinear_to_x_spline_alloc.span_cview(),</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                m_curvilinear_to_y_spline_alloc.span_cview(),</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                get_const_field(m_curvilinear_to_x_spline_alloc),</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                get_const_field(m_curvilinear_to_y_spline_alloc),</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                m_evaluator,</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                m_idx_range_singular_point);</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
@@ -213,10 +213,10 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            IdxRangeInterpolationPoints <span class="keyword">const</span>&amp; interpolation_idx_range)</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    {</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keyword">using </span>CurvilinearCoeff = ddc::Coordinate&lt;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                <span class="keyword">typename</span> Mapping::curvilinear_tag_r,</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                <span class="keyword">typename</span> Mapping::curvilinear_tag_theta&gt;;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keyword">using </span>CartesianCoeff = ddc::Coordinate&lt;X, Y&gt;;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keyword">using </span>CurvilinearCoeff</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                = Coord&lt;<span class="keyword">typename</span> Mapping::curvilinear_tag_r,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                        <span class="keyword">typename</span> Mapping::curvilinear_tag_theta&gt;;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keyword">using </span>CartesianCoeff = Coord&lt;X, Y&gt;;</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        ddc::parallel_for_each(</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                ExecSpace(),</div>
@@ -364,167 +364,165 @@ $(document).ready(function(){initNavTree('discrete__mapping__builder_8hpp_source
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            GridRRefined,</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>            GridThetaRefined&gt;;</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keyword">using </span>IdxRangeSplines = ddc::DiscreteDomain&lt;BSplinesRRefined, BSplinesThetaRefined&gt;;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keyword">using </span>IdxRangeInterpolationPoints = ddc::DiscreteDomain&lt;GridRRefined, GridThetaRefined&gt;;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keyword">using </span>IdxRangeSplines = IdxRange&lt;BSplinesRRefined, BSplinesThetaRefined&gt;;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keyword">using </span>IdxRangeInterpolationPoints = IdxRange&lt;GridRRefined, GridThetaRefined&gt;;</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keyword">using </span>IdxInterpolationPoints = <span class="keyword">typename</span> IdxRangeInterpolationPoints::discrete_element_type;</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keyword">using </span>SplineCoeffsMem</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            = ddc::Chunk&lt;double, IdxRangeSplines, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt;;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="keyword">using </span>SplineCoeffs = <span class="keyword">typename</span> SplineCoeffsMem::span_type;</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keyword">using </span>InterpolationFieldMem = ddc::</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>            Chunk&lt;double, IdxRangeInterpolationPoints, ddc::KokkosAllocator&lt;double, MemorySpace&gt;&gt;;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keyword">using </span>SplineCoeffsMem = DFieldMem&lt;IdxRangeSplines, MemorySpace&gt;;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keyword">using </span>SplineCoeffs = <span class="keyword">typename</span> SplineCoeffsMem::span_type;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keyword">using </span>InterpolationFieldMem = DFieldMem&lt;IdxRangeInterpolationPoints, MemorySpace&gt;;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keyword">using </span>InterpolationField = <span class="keyword">typename</span> InterpolationFieldMem::span_type;</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keyword">using </span>InterpolationField = <span class="keyword">typename</span> InterpolationFieldMem::span_type;</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#aa275ab992ce75c4f25a36802144b614d">  312</a></span>    <span class="keyword">using </span><a class="code hl_class" href="classDiscreteToCartesian.html">MappingType</a> = <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</a>;</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    SplineCoeffsMem m_curvilinear_to_x_spline_alloc;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    SplineCoeffsMem m_curvilinear_to_y_spline_alloc;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    RefinedSplineEvaluator m_evaluator;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    ddc::DiscreteDomain&lt;GridRRefined, GridThetaRefined&gt; m_idx_range_singular_point;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
-<div class="foldopen" id="foldopen00330" data-start="{" data-end="}">
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a">  330</a></span>    <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a">RefinedDiscreteToCartesianBuilder</a>(</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            ExecSpace exec_space,</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            SplineBuilder <span class="keyword">const</span>&amp; builder,</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>            SplineEvaluator <span class="keyword">const</span>&amp; evaluator)</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        : m_evaluator(</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                evaluator.lower_extrapolation_rule_dim_1(),</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                evaluator.upper_extrapolation_rule_dim_1(),</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                evaluator.lower_extrapolation_rule_dim_2(),</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                evaluator.upper_extrapolation_rule_dim_2())</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    {</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keyword">using </span>CoordR = ddc::Coordinate&lt;R&gt;;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keyword">using </span>CoordTheta = ddc::Coordinate&lt;Theta&gt;;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keyword">const</span> CoordR r_min = ddc::discrete_space&lt;BSplinesROriginal&gt;().rmin();</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keyword">const</span> CoordR r_max = ddc::discrete_space&lt;BSplinesROriginal&gt;().rmax();</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keyword">const</span> CoordTheta theta_min = ddc::discrete_space&lt;BSplinesThetaOriginal&gt;().rmin();</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keyword">const</span> CoordTheta theta_max = ddc::discrete_space&lt;BSplinesThetaOriginal&gt;().rmax();</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        ddc::DiscreteVector&lt;BSplinesRRefined&gt; <span class="keyword">const</span> r_ncells_idx_step(ncells_r);</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        ddc::DiscreteVector&lt;BSplinesThetaRefined&gt; <span class="keyword">const</span> theta_ncells_idx_step(ncells_theta);</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (BSplinesRRefined::is_uniform()) {</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            ddc::init_discrete_space&lt;BSplinesRRefined&gt;(r_min, r_max, r_ncells_idx_step);</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            ddc::init_discrete_space&lt;</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                    <a class="code hl_struct" href="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined.html">BSplinesThetaRefined</a>&gt;(theta_min, theta_max, theta_ncells_idx_step);</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dr((r_max - r_min) / ncells_r);</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dp((theta_max - theta_min) / ncells_theta);</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            std::vector&lt;CoordR&gt; r_break_points(ncells_r + 1);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            std::vector&lt;CoordTheta&gt; theta_break_points(ncells_theta + 1);</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; ncells_r + 1; ++i) {</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>                r_break_points[i] = r_min + i * dr;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            }</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; ncells_theta + 1; ++i) {</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>                theta_break_points[i] = theta_min + i * dp;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            }</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            ddc::init_discrete_space&lt;BSplinesRRefined&gt;(r_break_points);</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>            ddc::init_discrete_space&lt;BSplinesThetaRefined&gt;(theta_break_points);</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        }</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        ddc::init_discrete_space&lt;GridRRefined&gt;(</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                GrevillePointsR::template get_sampling&lt;GridRRefined&gt;());</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        ddc::init_discrete_space&lt;GridThetaRefined&gt;(</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                GrevillePointsTheta::template get_sampling&lt;GridThetaRefined&gt;());</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        ddc::DiscreteDomain&lt;GridRRefined&gt; <span class="keyword">const</span> interpolation_domain_r(</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>                GrevillePointsR::template get_domain&lt;GridRRefined&gt;());</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        ddc::DiscreteDomain&lt;GridThetaRefined&gt; <span class="keyword">const</span> interpolation_domain_theta(</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>                GrevillePointsTheta::template get_domain&lt;GridThetaRefined&gt;());</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        ddc::DiscreteDomain&lt;GridRRefined, GridThetaRefined&gt; <span class="keyword">const</span></div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>                refined_domain(interpolation_domain_r, interpolation_domain_theta);</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        ddc::DiscreteVector&lt;GridRRefined, GridThetaRefined&gt; n_points_singular_domain(</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>                1,</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>                refined_domain.template extent&lt;GridThetaRefined&gt;().value());</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        m_idx_range_singular_point = refined_domain.take_first(n_points_singular_domain);</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <span class="comment">// Operators on the refined grid</span></div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        RefinedSplineBuilder refined_builder(refined_domain);</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        ddc::DiscreteDomain&lt;BSplinesRRefined, BSplinesThetaRefined&gt; <span class="keyword">const</span> spline_domain</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                = refined_builder.spline_domain();</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        <span class="comment">// Compute the B-splines coefficients of the analytical mapping</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        m_curvilinear_to_x_spline_alloc = SplineCoeffsMem(spline_domain);</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        m_curvilinear_to_y_spline_alloc = SplineCoeffsMem(spline_domain);</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        SplineCoeffs curvilinear_to_x_spline = m_curvilinear_to_x_spline_alloc.span_view();</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        SplineCoeffs curvilinear_to_y_spline = m_curvilinear_to_y_spline_alloc.span_view();</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        InterpolationFieldMem curvilinear_to_x_vals_alloc(refined_domain);</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        InterpolationFieldMem curvilinear_to_y_vals_alloc(refined_domain);</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        InterpolationField curvilinear_to_x_vals = curvilinear_to_x_vals_alloc.span_view();</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        InterpolationField curvilinear_to_y_vals = curvilinear_to_y_vals_alloc.span_view();</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">set_curvilinear_to_cartesian_values</a>(</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>                curvilinear_to_x_vals,</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>                curvilinear_to_y_vals,</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>                analytical_mapping,</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>                refined_builder.interpolation_domain());</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        refined_builder(curvilinear_to_x_spline, curvilinear_to_x_vals.span_cview());</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        refined_builder(curvilinear_to_y_spline, curvilinear_to_y_vals.span_cview());</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    }</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#aa275ab992ce75c4f25a36802144b614d">  310</a></span>    <span class="keyword">using </span><a class="code hl_class" href="classDiscreteToCartesian.html">MappingType</a> = <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</a>;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    SplineCoeffsMem m_curvilinear_to_x_spline_alloc;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    SplineCoeffsMem m_curvilinear_to_y_spline_alloc;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    RefinedSplineEvaluator m_evaluator;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    IdxRange&lt;GridRRefined, GridThetaRefined&gt; m_idx_range_singular_point;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a">  328</a></span>    <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a">RefinedDiscreteToCartesianBuilder</a>(</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            ExecSpace exec_space,</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            SplineBuilder <span class="keyword">const</span>&amp; builder,</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            SplineEvaluator <span class="keyword">const</span>&amp; evaluator)</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        : m_evaluator(</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                evaluator.lower_extrapolation_rule_dim_1(),</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                evaluator.upper_extrapolation_rule_dim_1(),</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                evaluator.lower_extrapolation_rule_dim_2(),</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                evaluator.upper_extrapolation_rule_dim_2())</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keyword">using </span>CoordR = Coord&lt;R&gt;;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keyword">using </span>CoordTheta = Coord&lt;Theta&gt;;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keyword">const</span> CoordR r_min = ddc::discrete_space&lt;BSplinesROriginal&gt;().rmin();</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keyword">const</span> CoordR r_max = ddc::discrete_space&lt;BSplinesROriginal&gt;().rmax();</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keyword">const</span> CoordTheta theta_min = ddc::discrete_space&lt;BSplinesThetaOriginal&gt;().rmin();</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keyword">const</span> CoordTheta theta_max = ddc::discrete_space&lt;BSplinesThetaOriginal&gt;().rmax();</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        IdxStep&lt;BSplinesRRefined&gt; <span class="keyword">const</span> r_ncells_idx_step(ncells_r);</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        IdxStep&lt;BSplinesThetaRefined&gt; <span class="keyword">const</span> theta_ncells_idx_step(ncells_theta);</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (BSplinesRRefined::is_uniform()) {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            ddc::init_discrete_space&lt;BSplinesRRefined&gt;(r_min, r_max, r_ncells_idx_step);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            ddc::init_discrete_space&lt;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>                    <a class="code hl_struct" href="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined.html">BSplinesThetaRefined</a>&gt;(theta_min, theta_max, theta_ncells_idx_step);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dr((r_max - r_min) / ncells_r);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dp((theta_max - theta_min) / ncells_theta);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            std::vector&lt;CoordR&gt; r_break_points(ncells_r + 1);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            std::vector&lt;CoordTheta&gt; theta_break_points(ncells_theta + 1);</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; ncells_r + 1; ++i) {</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>                r_break_points[i] = r_min + i * dr;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i(0); i &lt; ncells_theta + 1; ++i) {</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>                theta_break_points[i] = theta_min + i * dp;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            }</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            ddc::init_discrete_space&lt;BSplinesRRefined&gt;(r_break_points);</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>            ddc::init_discrete_space&lt;BSplinesThetaRefined&gt;(theta_break_points);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        }</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        ddc::init_discrete_space&lt;GridRRefined&gt;(</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                GrevillePointsR::template get_sampling&lt;GridRRefined&gt;());</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        ddc::init_discrete_space&lt;GridThetaRefined&gt;(</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                GrevillePointsTheta::template get_sampling&lt;GridThetaRefined&gt;());</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        IdxRange&lt;GridRRefined&gt; <span class="keyword">const</span> interpolation_domain_r(</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>                GrevillePointsR::template get_domain&lt;GridRRefined&gt;());</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        IdxRange&lt;GridThetaRefined&gt; <span class="keyword">const</span> interpolation_domain_theta(</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>                GrevillePointsTheta::template get_domain&lt;GridThetaRefined&gt;());</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        IdxRange&lt;GridRRefined, GridThetaRefined&gt; <span class="keyword">const</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>                refined_domain(interpolation_domain_r, interpolation_domain_theta);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        IdxStep&lt;GridRRefined, GridThetaRefined&gt; n_points_singular_domain(</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>                1,</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>                refined_domain.template extent&lt;GridThetaRefined&gt;().value());</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        m_idx_range_singular_point = refined_domain.take_first(n_points_singular_domain);</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        <span class="comment">// Operators on the refined grid</span></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        RefinedSplineBuilder refined_builder(refined_domain);</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        IdxRange&lt;BSplinesRRefined, BSplinesThetaRefined&gt; <span class="keyword">const</span> spline_domain</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>                = get_spline_idx_range(refined_builder);</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        <span class="comment">// Compute the B-splines coefficients of the analytical mapping</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        m_curvilinear_to_x_spline_alloc = SplineCoeffsMem(spline_domain);</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        m_curvilinear_to_y_spline_alloc = SplineCoeffsMem(spline_domain);</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        InterpolationFieldMem curvilinear_to_x_vals_alloc(refined_domain);</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        InterpolationFieldMem curvilinear_to_y_vals_alloc(refined_domain);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">set_curvilinear_to_cartesian_values</a>(</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>                curvilinear_to_x_vals,</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>                curvilinear_to_y_vals,</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>                analytical_mapping,</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>                refined_builder.interpolation_domain());</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> </div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        refined_builder(curvilinear_to_x_spline, get_const_field(curvilinear_to_x_vals));</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        refined_builder(curvilinear_to_y_spline, get_const_field(curvilinear_to_y_vals));</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    }</div>
 </div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
-<div class="foldopen" id="foldopen00423" data-start="{" data-end="}">
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#ad569e80c83f31dfec64813d24bfb2e25">  423</a></span>    <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</a> <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#ad569e80c83f31dfec64813d24bfb2e25">operator()</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</a>(</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                m_curvilinear_to_x_spline_alloc.span_cview(),</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>                m_curvilinear_to_y_spline_alloc.span_cview(),</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>                m_evaluator,</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>                m_idx_range_singular_point);</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    }</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="foldopen" id="foldopen00421" data-start="{" data-end="}">
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#ad569e80c83f31dfec64813d24bfb2e25">  421</a></span>    <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</a> <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#ad569e80c83f31dfec64813d24bfb2e25">operator()</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian&lt;X, Y, RefinedSplineEvaluator&gt;</a>(</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>                get_const_field(m_curvilinear_to_x_spline_alloc),</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>                get_const_field(m_curvilinear_to_y_spline_alloc),</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                m_evaluator,</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>                m_idx_range_singular_point);</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    }</div>
 </div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
-<div class="foldopen" id="foldopen00445" data-start="{" data-end="}">
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">  445</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">set_curvilinear_to_cartesian_values</a>(</div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>            InterpolationField curvilinear_to_x_vals,</div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>            InterpolationField curvilinear_to_y_vals,</div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>            IdxRangeInterpolationPoints <span class="keyword">const</span>&amp; interpolation_idx_range)</div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    {</div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>        <span class="keyword">using </span>CurvilinearCoeff = ddc::Coordinate&lt;</div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>                <span class="keyword">typename</span> Mapping::curvilinear_tag_r,</div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>                <span class="keyword">typename</span> Mapping::curvilinear_tag_theta&gt;;</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        <span class="keyword">using </span>CartesianCoeff = ddc::Coordinate&lt;X, Y&gt;;</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>        ddc::parallel_for_each(</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>                ExecSpace(),</div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>                interpolation_idx_range,</div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>                KOKKOS_LAMBDA(IdxInterpolationPoints el) {</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>                    CurvilinearCoeff polar_coord(ddc::coordinate(el));</div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>                    CartesianCoeff cart_coord = analytical_mapping(polar_coord);</div>
-<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>                    curvilinear_to_x_vals(el) = ddc::select&lt;X&gt;(cart_coord);</div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>                    curvilinear_to_y_vals(el) = ddc::select&lt;Y&gt;(cart_coord);</div>
-<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>                });</div>
-<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    }</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span> </div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping&gt;</div>
+<div class="foldopen" id="foldopen00443" data-start="{" data-end="}">
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno"><a class="line" href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">  443</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">set_curvilinear_to_cartesian_values</a>(</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>            InterpolationField curvilinear_to_x_vals,</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>            InterpolationField curvilinear_to_y_vals,</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>            Mapping <span class="keyword">const</span>&amp; analytical_mapping,</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>            IdxRangeInterpolationPoints <span class="keyword">const</span>&amp; interpolation_idx_range)</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    {</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>        <span class="keyword">using </span>CurvilinearCoeff</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>                = Coord&lt;<span class="keyword">typename</span> Mapping::curvilinear_tag_r,</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>                        <span class="keyword">typename</span> Mapping::curvilinear_tag_theta&gt;;</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>        <span class="keyword">using </span>CartesianCoeff = Coord&lt;X, Y&gt;;</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span> </div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        ddc::parallel_for_each(</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>                ExecSpace(),</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>                interpolation_idx_range,</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>                KOKKOS_LAMBDA(IdxInterpolationPoints el) {</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>                    CurvilinearCoeff polar_coord(ddc::coordinate(el));</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>                    CartesianCoeff cart_coord = analytical_mapping(polar_coord);</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>                    curvilinear_to_x_vals(el) = ddc::select&lt;X&gt;(cart_coord);</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>                    curvilinear_to_y_vals(el) = ddc::select&lt;Y&gt;(cart_coord);</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>                });</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    }</div>
 </div>
-<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>};</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>};</div>
 </div>
-<div class="ttc" id="aclassDiscreteToCartesianBuilder_html"><div class="ttname"><a href="classDiscreteToCartesianBuilder.html">DiscreteToCartesianBuilder</a></div><div class="ttdoc">A class to create a DiscreteToCartesian instance from an analytical mapping.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:21</div></div>
+<div class="ttc" id="aclassDiscreteToCartesianBuilder_html"><div class="ttname"><a href="classDiscreteToCartesianBuilder.html">DiscreteToCartesianBuilder</a></div><div class="ttdoc">A class to create a DiscreteToCartesian instance from an analytical mapping.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:23</div></div>
 <div class="ttc" id="aclassDiscreteToCartesianBuilder_html_a458cd2e7da2eed26ed4f64612cef71ec"><div class="ttname"><a href="classDiscreteToCartesianBuilder.html#a458cd2e7da2eed26ed4f64612cef71ec">DiscreteToCartesianBuilder::set_curvilinear_to_cartesian_values</a></div><div class="ttdeci">void set_curvilinear_to_cartesian_values(InterpolationField const &amp;curvilinear_to_x_vals, InterpolationField const &amp;curvilinear_to_y_vals, Mapping const &amp;analytical_mapping, IdxRangeInterpolationPoints const &amp;interpolation_idx_range)</div><div class="ttdoc">Fill in the curvilinear fields with interpolation points mapped with the given analytical mapping.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:132</div></div>
 <div class="ttc" id="aclassDiscreteToCartesianBuilder_html_aaceea5d628916172449bdbdc4c08eb76"><div class="ttname"><a href="classDiscreteToCartesianBuilder.html#aaceea5d628916172449bdbdc4c08eb76">DiscreteToCartesianBuilder::DiscreteToCartesianBuilder</a></div><div class="ttdeci">DiscreteToCartesianBuilder(ExecSpace exec_space, Mapping const &amp;analytical_mapping, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator)</div><div class="ttdoc">Create an instance of the class capable of providing a DiscreteToCartesian class instance.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:74</div></div>
 <div class="ttc" id="aclassDiscreteToCartesianBuilder_html_ae85a1541fb4b1695515c7d97526b8d40"><div class="ttname"><a href="classDiscreteToCartesianBuilder.html#ae85a1541fb4b1695515c7d97526b8d40">DiscreteToCartesianBuilder::operator()</a></div><div class="ttdeci">DiscreteToCartesian&lt; X, Y, SplineEvaluator &gt; operator()() const</div><div class="ttdoc">Get a DiscreteToCartesian class instance.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:110</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:32</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:34</div></div>
 <div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html">RefinedDiscreteToCartesianBuilder</a></div><div class="ttdoc">A class to create a DiscreteToCartesian instance from an analytical mapping.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:177</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html_aa499a9cf34b44f04e5fc0cc29892256a"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a">RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder</a></div><div class="ttdeci">RefinedDiscreteToCartesianBuilder(ExecSpace exec_space, Mapping const &amp;analytical_mapping, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator)</div><div class="ttdoc">Create an instance of the class capable of providing a DiscreteToCartesian class instance.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:330</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html_ad569e80c83f31dfec64813d24bfb2e25"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html#ad569e80c83f31dfec64813d24bfb2e25">RefinedDiscreteToCartesianBuilder::operator()</a></div><div class="ttdeci">DiscreteToCartesian&lt; X, Y, RefinedSplineEvaluator &gt; operator()() const</div><div class="ttdoc">Get a DiscreteToCartesian class instance.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:423</div></div>
-<div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html_af736d95b521a444e5e24ed3632ae9481"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">RefinedDiscreteToCartesianBuilder::set_curvilinear_to_cartesian_values</a></div><div class="ttdeci">void set_curvilinear_to_cartesian_values(InterpolationField curvilinear_to_x_vals, InterpolationField curvilinear_to_y_vals, Mapping const &amp;analytical_mapping, IdxRangeInterpolationPoints const &amp;interpolation_idx_range)</div><div class="ttdoc">Fill in the curvilinear fields with interpolation points mapped with the given analytical mapping.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:445</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html_aa499a9cf34b44f04e5fc0cc29892256a"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html#aa499a9cf34b44f04e5fc0cc29892256a">RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder</a></div><div class="ttdeci">RefinedDiscreteToCartesianBuilder(ExecSpace exec_space, Mapping const &amp;analytical_mapping, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator)</div><div class="ttdoc">Create an instance of the class capable of providing a DiscreteToCartesian class instance.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:328</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html_ad569e80c83f31dfec64813d24bfb2e25"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html#ad569e80c83f31dfec64813d24bfb2e25">RefinedDiscreteToCartesianBuilder::operator()</a></div><div class="ttdeci">DiscreteToCartesian&lt; X, Y, RefinedSplineEvaluator &gt; operator()() const</div><div class="ttdoc">Get a DiscreteToCartesian class instance.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:421</div></div>
+<div class="ttc" id="aclassRefinedDiscreteToCartesianBuilder_html_af736d95b521a444e5e24ed3632ae9481"><div class="ttname"><a href="classRefinedDiscreteToCartesianBuilder.html#af736d95b521a444e5e24ed3632ae9481">RefinedDiscreteToCartesianBuilder::set_curvilinear_to_cartesian_values</a></div><div class="ttdeci">void set_curvilinear_to_cartesian_values(InterpolationField curvilinear_to_x_vals, InterpolationField curvilinear_to_y_vals, Mapping const &amp;analytical_mapping, IdxRangeInterpolationPoints const &amp;interpolation_idx_range)</div><div class="ttdoc">Fill in the curvilinear fields with interpolation points mapped with the given analytical mapping.</div><div class="ttdef"><b>Definition</b> discrete_mapping_builder.hpp:443</div></div>
 <div class="ttc" id="astructBSplinesR_html"><div class="ttname"><a href="structBSplinesR.html">BSplinesR</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:92</div></div>
 <div class="ttc" id="astructBSplinesTheta_html"><div class="ttname"><a href="structBSplinesTheta.html">BSplinesTheta</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:99</div></div>
 <div class="ttc" id="astructGridR_html"><div class="ttname"><a href="structGridR.html">GridR</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:115</div></div>

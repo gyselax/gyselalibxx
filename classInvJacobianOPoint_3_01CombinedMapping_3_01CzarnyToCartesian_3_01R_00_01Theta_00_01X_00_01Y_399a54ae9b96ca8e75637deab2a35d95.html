@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, ddc::Coordinate&lt; R, Theta &gt; &gt; Class Template Reference</title>
+<title>Gyselalib++: InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_0179fdb551d5240572466d89e3eb7a8bfc.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -105,30 +105,30 @@ $(document).ready(function(){initNavTree('classInvJacobianOPoint_3_01CombinedMap
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_0187c56a56bfbd0bba20ae8b08fb9d1ed6.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, ddc::Coordinate&lt; R, Theta &gt; &gt; Class Template Reference</div></div>
+<a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_828eb92620f5b9a77bf7210136c2b53e.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A specialisation of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a> for a combined mapping FoG where F is a circular mapping from logical to physical, and G is an inverse circular mapping from physical to logical.  
- <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_0179fdb551d5240572466d89e3eb7a8bfc.html#details">More...</a></p>
+<p>A specialisation of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a> for a combined mapping FoG where F is a Czarny mapping from logical to physical, and G is an inverse circular mapping from physical to logical.  
+ <a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab5cee9dca84420eb59677cc2dd5b79d5" id="r_ab5cee9dca84420eb59677cc2dd5b79d5"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_0179fdb551d5240572466d89e3eb7a8bfc.html#ab5cee9dca84420eb59677cc2dd5b79d5">InvJacobianOPoint</a> (<a class="el" href="classCombinedMapping.html">Mapping</a> const &amp;mapping)</td></tr>
-<tr class="memdesc:ab5cee9dca84420eb59677cc2dd5b79d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a>.  <br /></td></tr>
-<tr class="separator:ab5cee9dca84420eb59677cc2dd5b79d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20a9f506fb02601083c84533d0e6209e" id="r_a20a9f506fb02601083c84533d0e6209e"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_0179fdb551d5240572466d89e3eb7a8bfc.html#a20a9f506fb02601083c84533d0e6209e">operator()</a> () const</td></tr>
-<tr class="memdesc:a20a9f506fb02601083c84533d0e6209e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y).  <br /></td></tr>
-<tr class="separator:a20a9f506fb02601083c84533d0e6209e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a419eebcc414e7455d782c1bf800215b4" id="r_a419eebcc414e7455d782c1bf800215b4"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html#a419eebcc414e7455d782c1bf800215b4">InvJacobianOPoint</a> (<a class="el" href="classCombinedMapping.html">Mapping</a> const &amp;mapping)</td></tr>
+<tr class="memdesc:a419eebcc414e7455d782c1bf800215b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a>.  <br /></td></tr>
+<tr class="separator:a419eebcc414e7455d782c1bf800215b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d3695a5df1e67e2c97fc6245c917460" id="r_a6d3695a5df1e67e2c97fc6245c917460"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html#a6d3695a5df1e67e2c97fc6245c917460">operator()</a> () const</td></tr>
+<tr class="memdesc:a6d3695a5df1e67e2c97fc6245c917460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y) at the central point.  <br /></td></tr>
+<tr class="separator:a6d3695a5df1e67e2c97fc6245c917460"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="structX.html">X</a>, class <a class="el" href="structY.html">Y</a>, class <a class="el" href="structR.html">R</a>, class <a class="el" href="structTheta.html">Theta</a>, class Xpc, class Ypc&gt;<br />
-class InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, ddc::Coordinate&lt; R, Theta &gt; &gt;</div><p>A specialisation of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a> for a combined mapping FoG where F is a circular mapping from logical to physical, and G is an inverse circular mapping from physical to logical. </p>
-<p>The combined mapping FoG therefore maps from a physical domain (Xpc, Ypc) to a physical domain (<a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>,<a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a>) (this mapping is equivalent to the identity). </p>
+class InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</div><p>A specialisation of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a> for a combined mapping FoG where F is a Czarny mapping from logical to physical, and G is an inverse circular mapping from physical to logical. </p>
+<p>The combined mapping FoG therefore maps from a physical domain (Xpc, Ypc) to a physical domain (<a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>,<a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a>). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab5cee9dca84420eb59677cc2dd5b79d5" name="ab5cee9dca84420eb59677cc2dd5b79d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5cee9dca84420eb59677cc2dd5b79d5">&#9670;&#160;</a></span>InvJacobianOPoint()</h2>
+<a id="a419eebcc414e7455d782c1bf800215b4" name="a419eebcc414e7455d782c1bf800215b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a419eebcc414e7455d782c1bf800215b4">&#9670;&#160;</a></span>InvJacobianOPoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,7 +139,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classInvJacobianOPoint.html">InvJacobianOPoint</a>&lt; <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; Xpc, Ypc, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;, ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;<a class="el" href="classInvJacobianOPoint.html">::InvJacobianOPoint</a> </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classInvJacobianOPoint.html">InvJacobianOPoint</a>&lt; <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; Xpc, Ypc, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;, Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;<a class="el" href="classInvJacobianOPoint.html">::InvJacobianOPoint</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCombinedMapping.html">Mapping</a> const &amp;&#160;</td>
           <td class="paramname"><em>mapping</em></td><td>)</td>
@@ -164,8 +164,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a20a9f506fb02601083c84533d0e6209e" name="a20a9f506fb02601083c84533d0e6209e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20a9f506fb02601083c84533d0e6209e">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a6d3695a5df1e67e2c97fc6245c917460" name="a6d3695a5df1e67e2c97fc6245c917460"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d3695a5df1e67e2c97fc6245c917460">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +176,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="el" href="classInvJacobianOPoint.html">InvJacobianOPoint</a>&lt; <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; <a class="el" href="classCircularToCartesian.html">CircularToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; Xpc, Ypc, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;, ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;::operator() </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="el" href="classInvJacobianOPoint.html">InvJacobianOPoint</a>&lt; <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; <a class="el" href="classCzarnyToCartesian.html">CzarnyToCartesian</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; Xpc, Ypc, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;, Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;::operator() </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -189,12 +189,12 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 </table>
 </div><div class="memdoc">
 
-<p>Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y). </p>
-<p>Here, as \( \mathcal{G}^{-1} =  \mathcal{F} \), the Jacobian matrix of \((\mathcal{F} \circ \mathcal{G}^{-1})^{-1} \) is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :</p><ul>
-<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1, \)</li>
+<p>Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y) at the central point. </p>
+<p>The pseudo-Cartesian Jacobian matrix for a Czarny mapping is given by :</p><ul>
+<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = - \sqrt{1 + \varepsilon^2}, \)</li>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0, \)</li>
 <li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0, \)</li>
-<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1. \)</li>
+<li>\( (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = \frac{2 - \sqrt{1 + \varepsilon^2}}{e \xi}. \)</li>
 </ul>
 <dl class="section return"><dt>Returns</dt><dd>The matrix evaluated at the central point. </dd></dl>
 
@@ -208,7 +208,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_0179fdb551d5240572466d89e3eb7a8bfc.html">InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, ddc::Coordinate&lt; R, Theta &gt; &gt;</a></li>
+    <li class="navelem"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_399a54ae9b96ca8e75637deab2a35d95.html">InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

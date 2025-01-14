@@ -273,8 +273,8 @@ var NAVTREEINDEX =
 "classMatrix__Banded.html#a5b048b1936941d7188b996cd531cd630",
 "classPolarBSplines_1_1Impl.html#a76ae9aee443a828ec5f62ddabbda37fb",
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab",
-"noperturbinitialization_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af0e9d89578e2d3b2a700bd496a69a596"
+"neumann__spline__quadrature_8hpp_source.html",
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

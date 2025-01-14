@@ -140,50 +140,50 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>curvilinear_tag_r</b
 using&#160;</td><td class="memItemRight" valign="bottom"><b>curvilinear_tag_theta</b> = <a class="el" href="structTheta.html">Theta</a></td></tr>
 <tr class="memdesc:a44d272af350574b3d72f696e38f2159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate the second logical coordinate. <br /></td></tr>
 <tr class="separator:a44d272af350574b3d72f696e38f2159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad59cf6c437f00c984b321d88c0c08d46" id="r_ad59cf6c437f00c984b321d88c0c08d46"><td class="memItemLeft" align="right" valign="top"><a id="ad59cf6c437f00c984b321d88c0c08d46" name="ad59cf6c437f00c984b321d88c0c08d46"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordArg</b> = ddc::Coordinate&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;</td></tr>
-<tr class="memdesc:ad59cf6c437f00c984b321d88c0c08d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the argument of the function described by this mapping. <br /></td></tr>
-<tr class="separator:ad59cf6c437f00c984b321d88c0c08d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c48f05ea7569f0b211927c4eff9b3c8" id="r_a6c48f05ea7569f0b211927c4eff9b3c8"><td class="memItemLeft" align="right" valign="top"><a id="a6c48f05ea7569f0b211927c4eff9b3c8" name="a6c48f05ea7569f0b211927c4eff9b3c8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordResult</b> = ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;</td></tr>
-<tr class="memdesc:a6c48f05ea7569f0b211927c4eff9b3c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the result of the function described by this mapping. <br /></td></tr>
-<tr class="separator:a6c48f05ea7569f0b211927c4eff9b3c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2e0b6ec7ee087fdb814f9fa22aec01" id="r_a2b2e0b6ec7ee087fdb814f9fa22aec01"><td class="memItemLeft" align="right" valign="top"><a id="a2b2e0b6ec7ee087fdb814f9fa22aec01" name="a2b2e0b6ec7ee087fdb814f9fa22aec01"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordArg</b> = Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;</td></tr>
+<tr class="memdesc:a2b2e0b6ec7ee087fdb814f9fa22aec01"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the argument of the function described by this mapping. <br /></td></tr>
+<tr class="separator:a2b2e0b6ec7ee087fdb814f9fa22aec01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3524c5f93fade40f00a204901975a33" id="r_ad3524c5f93fade40f00a204901975a33"><td class="memItemLeft" align="right" valign="top"><a id="ad3524c5f93fade40f00a204901975a33" name="ad3524c5f93fade40f00a204901975a33"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordResult</b> = Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;</td></tr>
+<tr class="memdesc:ad3524c5f93fade40f00a204901975a33"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the result of the function described by this mapping. <br /></td></tr>
+<tr class="separator:ad3524c5f93fade40f00a204901975a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5e720020cc2407eec06bc0af1f13ef52" id="r_a5e720020cc2407eec06bc0af1f13ef52"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">DiscreteToCartesian</a> (SplineType curvilinear_to_x, SplineType curvilinear_to_y, SplineEvaluator const &amp;evaluator, IdxRangeRTheta <a class="el" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>)</td></tr>
 <tr class="memdesc:a5e720020cc2407eec06bc0af1f13ef52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> from the coefficients of 2D splines approximating the mapping.  <br /></td></tr>
 <tr class="separator:a5e720020cc2407eec06bc0af1f13ef52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6915fcec41468d6d03ba9fd6cac374" id="r_a6b6915fcec41468d6d03ba9fd6cac374"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a6b6915fcec41468d6d03ba9fd6cac374">operator()</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a6b6915fcec41468d6d03ba9fd6cac374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <br /></td></tr>
-<tr class="separator:a6b6915fcec41468d6d03ba9fd6cac374"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76bde74e050bc01bd6c1b202aacc6e99" id="r_a76bde74e050bc01bd6c1b202aacc6e99"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a76bde74e050bc01bd6c1b202aacc6e99">jacobian_matrix</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</td></tr>
-<tr class="memdesc:a76bde74e050bc01bd6c1b202aacc6e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a76bde74e050bc01bd6c1b202aacc6e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e87d92fe31c692a1af0654b6dafc7da" id="r_a5e87d92fe31c692a1af0654b6dafc7da"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a5e87d92fe31c692a1af0654b6dafc7da">jacobian_11</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a5e87d92fe31c692a1af0654b6dafc7da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a5e87d92fe31c692a1af0654b6dafc7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa610388748eb8edbd00e0a96c35eefb0" id="r_aa610388748eb8edbd00e0a96c35eefb0"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aa610388748eb8edbd00e0a96c35eefb0">jacobian_12</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:aa610388748eb8edbd00e0a96c35eefb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:aa610388748eb8edbd00e0a96c35eefb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3eab18bbc994e9b2c11a7390cc26b28" id="r_ad3eab18bbc994e9b2c11a7390cc26b28"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ad3eab18bbc994e9b2c11a7390cc26b28">jacobian_21</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ad3eab18bbc994e9b2c11a7390cc26b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:ad3eab18bbc994e9b2c11a7390cc26b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab37474592e73c91bdba2fd9d64cbd623" id="r_ab37474592e73c91bdba2fd9d64cbd623"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ab37474592e73c91bdba2fd9d64cbd623">jacobian_22</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:ab37474592e73c91bdba2fd9d64cbd623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <br /></td></tr>
-<tr class="separator:ab37474592e73c91bdba2fd9d64cbd623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a23d7cd9954ebc51a700d7029b46b1f" id="r_a9a23d7cd9954ebc51a700d7029b46b1f"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a9a23d7cd9954ebc51a700d7029b46b1f">jacobian</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a9a23d7cd9954ebc51a700d7029b46b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <br /></td></tr>
-<tr class="separator:a9a23d7cd9954ebc51a700d7029b46b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a498beca5028315a8c94c31d4bf141a1a" id="r_a498beca5028315a8c94c31d4bf141a1a"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a498beca5028315a8c94c31d4bf141a1a">first_order_jacobian_matrix_r_rtheta</a> (ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
-<tr class="memdesc:a498beca5028315a8c94c31d4bf141a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first order expansion of the Jacobian matrix with the theta component divided by r.  <br /></td></tr>
-<tr class="separator:a498beca5028315a8c94c31d4bf141a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e0ebea2c8a75a561ed90494e0fc201" id="r_ae9e0ebea2c8a75a561ed90494e0fc201"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">operator()</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:ae9e0ebea2c8a75a561ed90494e0fc201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the physical coordinates from the logical coordinates.  <br /></td></tr>
+<tr class="separator:ae9e0ebea2c8a75a561ed90494e0fc201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93994bbc737a93fb291d248cb5881fe8" id="r_a93994bbc737a93fb291d248cb5881fe8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">jacobian_matrix</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</td></tr>
+<tr class="memdesc:a93994bbc737a93fb291d248cb5881fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a93994bbc737a93fb291d248cb5881fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa7e00dc75fb6d06ddf11f1ecc3a4962" id="r_aaa7e00dc75fb6d06ddf11f1ecc3a4962"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">jacobian_11</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:aaa7e00dc75fb6d06ddf11f1ecc3a4962"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <br /></td></tr>
+<tr class="separator:aaa7e00dc75fb6d06ddf11f1ecc3a4962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b2acc352fca7e4d634d6eb9d0707010" id="r_a3b2acc352fca7e4d634d6eb9d0707010"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">jacobian_12</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a3b2acc352fca7e4d634d6eb9d0707010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,2) coefficient of the Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a3b2acc352fca7e4d634d6eb9d0707010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f400d21cd055ca1ca98d50a02d184fb" id="r_a6f400d21cd055ca1ca98d50a02d184fb"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">jacobian_21</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a6f400d21cd055ca1ca98d50a02d184fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,1) coefficient of the Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a6f400d21cd055ca1ca98d50a02d184fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935d65394072b77d2c4cdb9becf66090" id="r_a935d65394072b77d2c4cdb9becf66090"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">jacobian_22</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a935d65394072b77d2c4cdb9becf66090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (2,2) coefficient of the Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a935d65394072b77d2c4cdb9becf66090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af13e543668b38ffc52ac252997e9f1e8" id="r_af13e543668b38ffc52ac252997e9f1e8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">jacobian</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:af13e543668b38ffc52ac252997e9f1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <br /></td></tr>
+<tr class="separator:af13e543668b38ffc52ac252997e9f1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab06f432d9091e0568045f5d5e5bd7d29" id="r_ab06f432d9091e0568045f5d5e5bd7d29"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">first_order_jacobian_matrix_r_rtheta</a> (Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:ab06f432d9091e0568045f5d5e5bd7d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first order expansion of the Jacobian matrix with the theta component divided by r.  <br /></td></tr>
+<tr class="separator:ab06f432d9091e0568045f5d5e5bd7d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeade6cd026d0d03df92d00b0f2651195" id="r_aeade6cd026d0d03df92d00b0f2651195"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION IdxRangeRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a> () const</td></tr>
 <tr class="memdesc:aeade6cd026d0d03df92d00b0f2651195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index range describing the points which should be used to evaluate functions at the central point.  <br /></td></tr>
 <tr class="separator:aeade6cd026d0d03df92d00b0f2651195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abca1c36c8c422aba25af218dac17f56e" id="r_abca1c36c8c422aba25af218dac17f56e"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION const ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#abca1c36c8c422aba25af218dac17f56e">control_point</a> (ddc::DiscreteElement&lt; <a class="el" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> &gt; const &amp;el) const</td></tr>
-<tr class="memdesc:abca1c36c8c422aba25af218dac17f56e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a control point of the mapping on B-splines.  <br /></td></tr>
-<tr class="separator:abca1c36c8c422aba25af218dac17f56e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c57fdeacc0c42720881993b7905ef38" id="r_a6c57fdeacc0c42720881993b7905ef38"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION const Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">control_point</a> (Idx&lt; <a class="el" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> &gt; const &amp;el) const</td></tr>
+<tr class="memdesc:a6c57fdeacc0c42720881993b7905ef38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a control point of the mapping on B-splines.  <br /></td></tr>
+<tr class="separator:a6c57fdeacc0c42720881993b7905ef38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="structX.html">X</a>, class <a class="el" href="structY.html">Y</a>, class SplineEvaluator, class <a class="el" href="structR.html">R</a> = typename SplineEvaluator::continuous_dimension_type1, class <a class="el" href="structTheta.html">Theta</a> = typename SplineEvaluator::continuous_dimension_type2, class MemorySpace = typename SplineEvaluator::memory_space&gt;<br />
@@ -262,8 +262,8 @@ SplineBoundaryValue </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6b6915fcec41468d6d03ba9fd6cac374" name="a6b6915fcec41468d6d03ba9fd6cac374"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b6915fcec41468d6d03ba9fd6cac374">&#9670;&#160;</a></span>operator()()</h2>
+<a id="ae9e0ebea2c8a75a561ed90494e0fc201" name="ae9e0ebea2c8a75a561ed90494e0fc201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9e0ebea2c8a75a561ed90494e0fc201">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,9 +274,9 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::operator() </td>
+          <td class="memname">KOKKOS_FUNCTION Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -301,8 +301,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="a76bde74e050bc01bd6c1b202aacc6e99" name="a76bde74e050bc01bd6c1b202aacc6e99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76bde74e050bc01bd6c1b202aacc6e99">&#9670;&#160;</a></span>jacobian_matrix()</h2>
+<a id="a93994bbc737a93fb291d248cb5881fe8" name="a93994bbc737a93fb291d248cb5881fe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93994bbc737a93fb291d248cb5881fe8">&#9670;&#160;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,7 +315,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian_matrix </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em>, </td>
         </tr>
         <tr>
@@ -349,8 +349,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="a5e87d92fe31c692a1af0654b6dafc7da" name="a5e87d92fe31c692a1af0654b6dafc7da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e87d92fe31c692a1af0654b6dafc7da">&#9670;&#160;</a></span>jacobian_11()</h2>
+<a id="aaa7e00dc75fb6d06ddf11f1ecc3a4962" name="aaa7e00dc75fb6d06ddf11f1ecc3a4962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa7e00dc75fb6d06ddf11f1ecc3a4962">&#9670;&#160;</a></span>jacobian_11()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -363,7 +363,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian_11 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -388,8 +388,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="aa610388748eb8edbd00e0a96c35eefb0" name="aa610388748eb8edbd00e0a96c35eefb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa610388748eb8edbd00e0a96c35eefb0">&#9670;&#160;</a></span>jacobian_12()</h2>
+<a id="a3b2acc352fca7e4d634d6eb9d0707010" name="a3b2acc352fca7e4d634d6eb9d0707010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b2acc352fca7e4d634d6eb9d0707010">&#9670;&#160;</a></span>jacobian_12()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -402,7 +402,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian_12 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -427,8 +427,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="ad3eab18bbc994e9b2c11a7390cc26b28" name="ad3eab18bbc994e9b2c11a7390cc26b28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3eab18bbc994e9b2c11a7390cc26b28">&#9670;&#160;</a></span>jacobian_21()</h2>
+<a id="a6f400d21cd055ca1ca98d50a02d184fb" name="a6f400d21cd055ca1ca98d50a02d184fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f400d21cd055ca1ca98d50a02d184fb">&#9670;&#160;</a></span>jacobian_21()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -441,7 +441,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian_21 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -466,8 +466,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="ab37474592e73c91bdba2fd9d64cbd623" name="ab37474592e73c91bdba2fd9d64cbd623"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab37474592e73c91bdba2fd9d64cbd623">&#9670;&#160;</a></span>jacobian_22()</h2>
+<a id="a935d65394072b77d2c4cdb9becf66090" name="a935d65394072b77d2c4cdb9becf66090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a935d65394072b77d2c4cdb9becf66090">&#9670;&#160;</a></span>jacobian_22()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -480,7 +480,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian_22 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -505,8 +505,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="a9a23d7cd9954ebc51a700d7029b46b1f" name="a9a23d7cd9954ebc51a700d7029b46b1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a23d7cd9954ebc51a700d7029b46b1f">&#9670;&#160;</a></span>jacobian()</h2>
+<a id="af13e543668b38ffc52ac252997e9f1e8" name="af13e543668b38ffc52ac252997e9f1e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af13e543668b38ffc52ac252997e9f1e8">&#9670;&#160;</a></span>jacobian()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -519,7 +519,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_FUNCTION double <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::jacobian </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -542,8 +542,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="a498beca5028315a8c94c31d4bf141a1a" name="a498beca5028315a8c94c31d4bf141a1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a498beca5028315a8c94c31d4bf141a1a">&#9670;&#160;</a></span>first_order_jacobian_matrix_r_rtheta()</h2>
+<a id="ab06f432d9091e0568045f5d5e5bd7d29" name="ab06f432d9091e0568045f5d5e5bd7d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab06f432d9091e0568045f5d5e5bd7d29">&#9670;&#160;</a></span>first_order_jacobian_matrix_r_rtheta()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -556,7 +556,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
         <tr>
           <td class="memname">KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::first_order_jacobian_matrix_r_rtheta </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">curvilinear_tag_r</a>, <a class="el" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">curvilinear_tag_theta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -610,8 +610,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="abca1c36c8c422aba25af218dac17f56e" name="abca1c36c8c422aba25af218dac17f56e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abca1c36c8c422aba25af218dac17f56e">&#9670;&#160;</a></span>control_point()</h2>
+<a id="a6c57fdeacc0c42720881993b7905ef38" name="a6c57fdeacc0c42720881993b7905ef38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c57fdeacc0c42720881993b7905ef38">&#9670;&#160;</a></span>control_point()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -622,9 +622,9 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION const ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::control_point </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION const Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;::control_point </td>
           <td>(</td>
-          <td class="paramtype">ddc::DiscreteElement&lt; <a class="el" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Idx&lt; <a class="el" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a>, <a class="el" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>el</em></td><td>)</td>
           <td> const</td>
         </tr>
