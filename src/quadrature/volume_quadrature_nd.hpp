@@ -8,10 +8,9 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/mapping_tools.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "mapping_tools.hpp"
 #include "quadrature.hpp"
 
 

@@ -10,11 +10,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_builder.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
-
 #include <gtest/gtest.h>
 
 #include <paraconf.h>
@@ -25,7 +20,11 @@
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
+#include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
+#include "czarny_to_cartesian.hpp"
+#include "discrete_mapping_builder.hpp"
+#include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"

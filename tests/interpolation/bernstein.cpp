@@ -2,13 +2,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/mapping_tools.hpp>
 #include <sll/test_utils.hpp>
 
 #include <gtest/gtest.h>
 
 #include "bernstein.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "mapping_tools.hpp"
 
 template <class Tag1, class Tag2>
 Coord<Tag1, Tag2> generate_random_point_in_triangle(

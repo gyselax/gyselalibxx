@@ -5,13 +5,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/cartesian_to_barycentric.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
-#include <sll/mapping/mapping_tools.hpp>
 #include <sll/view.hpp>
 
 #include "bernstein.hpp"
+#include "cartesian_to_barycentric.hpp"
 #include "ddc_helper.hpp"
+#include "discrete_to_cartesian.hpp"
+#include "mapping_tools.hpp"
 #include "polar_spline.hpp"
 
 /**

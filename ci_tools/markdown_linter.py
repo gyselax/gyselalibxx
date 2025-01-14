@@ -106,6 +106,7 @@ if __name__ == '__main__':
             suggestion = expr.contents
             start_code = '$'
             end_code = '$'
+            line_info = expr.start_pos
             if expr.contents[0] == ' ' or expr.contents[-1] == ' ':
                 success = False
                 print(f"::error file={file},line={line_info.line}:: Simple inline maths expressions should not start or end with a space. ({file}: Line {expr.start_pos.line}, position {expr.start_pos.char})", file=sys.stderr)

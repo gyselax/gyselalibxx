@@ -11,20 +11,20 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/cartesian_to_circular.hpp>
-#include <sll/mapping/cartesian_to_czarny.hpp>
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_builder.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 
 #include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
+#include "cartesian_to_circular.hpp"
+#include "cartesian_to_czarny.hpp"
+#include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
+#include "discrete_mapping_builder.hpp"
+#include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"

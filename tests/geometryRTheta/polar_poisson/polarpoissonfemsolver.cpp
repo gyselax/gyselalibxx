@@ -6,15 +6,14 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_builder.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
-
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "discrete_mapping_builder.hpp"
+#include "discrete_to_cartesian.hpp"
 #include "geometry.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"

@@ -2,14 +2,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/cartesian_to_circular.hpp>
-#include <sll/mapping/cartesian_to_czarny.hpp>
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-
 #include <gtest/gtest.h>
 
 #include "2patches_2d_onion_shape_uniform.hpp"
+#include "cartesian_to_circular.hpp"
+#include "cartesian_to_czarny.hpp"
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "multipatch_type.hpp"
 #include "onion_patch_locator.hpp"
 #include "patch.hpp"

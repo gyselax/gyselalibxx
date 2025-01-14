@@ -2,13 +2,12 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/metric_tensor.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "iqnsolver.hpp"
+#include "metric_tensor.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"

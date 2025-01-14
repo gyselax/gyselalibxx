@@ -2,9 +2,8 @@
 #pragma once
 #include <functional>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/combined_mapping.hpp>
-
+#include "circular_to_cartesian.hpp"
+#include "combined_mapping.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
-#include <sll/mapping/metric_tensor.hpp>
 
 #include "advection_domain.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -10,6 +8,7 @@
 #include "geometry.hpp"
 #include "i_interpolator_2d_rp.hpp"
 #include "iadvectionrp.hpp"
+#include "metric_tensor.hpp"
 #include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 #include "vector_field.hpp"

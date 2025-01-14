@@ -1,12 +1,11 @@
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_builder.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
-
 #include <gtest/gtest.h>
 
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
+#include "discrete_mapping_builder.hpp"
+#include "discrete_to_cartesian.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"

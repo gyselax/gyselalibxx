@@ -2,11 +2,11 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 
 #include "../advection_2d_rp/test_cases.hpp"
 
+#include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "polar_spline.hpp"

@@ -2,10 +2,10 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/cartesian_to_barycentric.hpp>
 #include <sll/math_tools.hpp>
 #include <sll/view.hpp>
 
+#include "cartesian_to_barycentric.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 

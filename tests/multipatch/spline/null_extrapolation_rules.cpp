@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/cartesian_to_circular.hpp>
-#include <sll/mapping/circular_to_cartesian.hpp>
-
 #include <gtest/gtest.h>
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
+#include "cartesian_to_circular.hpp"
+#include "circular_to_cartesian.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "null_extrapolation_rules.hpp"

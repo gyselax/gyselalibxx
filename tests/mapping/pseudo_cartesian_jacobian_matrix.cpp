@@ -1,14 +1,15 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/combined_mapping.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_builder.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 
 #include <gtest/gtest.h>
+
+#include "circular_to_cartesian.hpp"
+#include "combined_mapping.hpp"
+#include "czarny_to_cartesian.hpp"
+#include "discrete_mapping_builder.hpp"
+#include "discrete_to_cartesian.hpp"
 
 
 namespace {

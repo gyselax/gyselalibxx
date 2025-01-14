@@ -10,6 +10,7 @@ target_link_libraries("polar_splines"
     INTERFACE
         DDC::core
         sll::SLL
+        gslx::mapping
         gslx::utils
 )
 

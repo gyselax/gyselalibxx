@@ -36,7 +36,7 @@ grep = shutil.which('grep')
 for code_folder in ('src', 'simulations', 'tests', 'vendor/sll'):
     all_readme_files = glob.glob(f'{code_folder}/**/README.md', recursive=True)
 
-    p = subprocess.run([grep, 'README.md', '-r', str(gyselalibxx_root / code_folder)], capture_output=True, check=True, encoding='utf-8')
+    p = subprocess.run([grep, 'README.md', '-r', str(gyselalibxx_root / code_folder)], capture_output=True, check=False, encoding='utf-8')
     references = {gyselalibxx_root / readme: False for readme in all_readme_files}
     references[gyselalibxx_root / code_folder / 'README.md'] = True
 

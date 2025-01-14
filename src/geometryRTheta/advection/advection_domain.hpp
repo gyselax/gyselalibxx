@@ -3,10 +3,9 @@
 #include <cassert>
 #include <typeinfo>
 
-#include <sll/mapping/cartesian_to_circular.hpp>
-#include <sll/mapping/circular_to_cartesian.hpp>
-
 #include "advection_domain.hpp"
+#include "cartesian_to_circular.hpp"
+#include "circular_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"

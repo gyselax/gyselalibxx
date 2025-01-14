@@ -4,14 +4,14 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/discrete_mapping_builder.hpp>
-#include <sll/mapping/discrete_to_cartesian.hpp>
 #include <sll/view.hpp>
 
 #include <gtest/gtest.h>
 
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
+#include "discrete_mapping_builder.hpp"
+#include "discrete_to_cartesian.hpp"
 #include "polar_bsplines.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"

@@ -1,12 +1,13 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/metric_tensor.hpp>
 #include <sll/view.hpp>
 
 #include <gtest/gtest.h>
+
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
+#include "metric_tensor.hpp"
 
 struct X
 {

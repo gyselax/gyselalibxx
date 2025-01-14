@@ -4,13 +4,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/mapping/circular_to_cartesian.hpp>
-#include <sll/mapping/czarny_to_cartesian.hpp>
-#include <sll/mapping/inverse_jacobian_matrix.hpp>
 #include <sll/math_tools.hpp>
 
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
+#include "inverse_jacobian_matrix.hpp"
 
 /**
  * @brief Base class for the exact solutions of the Poisson equation.

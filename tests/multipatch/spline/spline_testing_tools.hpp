@@ -4,12 +4,11 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/mapping/cartesian_to_circular.hpp>
-#include <sll/mapping/circular_to_cartesian.hpp>
-
 #include <gtest/gtest.h>
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
+#include "cartesian_to_circular.hpp"
+#include "circular_to_cartesian.hpp"
 #include "ddc_helper.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
