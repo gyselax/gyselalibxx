@@ -176,10 +176,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a161e772a03b980ad5cb19bdeb6b02925"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925">compute_stencil_elements</a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values_csr_host, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col_idx_csr_host, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz_per_row_csr_host)</td></tr>
 <tr class="memdesc:a161e772a03b980ad5cb19bdeb6b02925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas.  <br /></td></tr>
 <tr class="separator:a161e772a03b980ad5cb19bdeb6b02925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ffbf750c185ff40c8a4697b3937bc63" id="r_a2ffbf750c185ff40c8a4697b3937bc63"><td class="memTemplParams" colspan="2">template&lt;class RHSFunction &gt; </td></tr>
-<tr class="memitem:a2ffbf750c185ff40c8a4697b3937bc63"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a2ffbf750c185ff40c8a4697b3937bc63">operator()</a> (RHSFunction const &amp;rhs, host_t&lt; <a class="el" href="structPolarSpline.html">SplinePolar</a> &gt; &amp;spline) const</td></tr>
-<tr class="memdesc:a2ffbf750c185ff40c8a4697b3937bc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson-like equation.  <br /></td></tr>
-<tr class="separator:a2ffbf750c185ff40c8a4697b3937bc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9963fa7157d221f701133a42bda9e9a" id="r_ab9963fa7157d221f701133a42bda9e9a"><td class="memTemplParams" colspan="2">template&lt;class RHSFunction &gt; </td></tr>
+<tr class="memitem:ab9963fa7157d221f701133a42bda9e9a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#ab9963fa7157d221f701133a42bda9e9a">operator()</a> (RHSFunction const &amp;rhs, host_t&lt; <a class="el" href="structPolarSplineMem.html">PolarSplineMemRTheta</a> &gt; &amp;spline) const</td></tr>
+<tr class="memdesc:ab9963fa7157d221f701133a42bda9e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson-like equation.  <br /></td></tr>
+<tr class="separator:ab9963fa7157d221f701133a42bda9e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac699f74359d1f9160bed57ffcf325861" id="r_ac699f74359d1f9160bed57ffcf325861"><td class="memTemplParams" colspan="2">template&lt;class RHSFunction &gt; </td></tr>
 <tr class="memitem:ac699f74359d1f9160bed57ffcf325861"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#ac699f74359d1f9160bed57ffcf325861">operator()</a> (RHSFunction const &amp;rhs, DFieldRTheta phi) const</td></tr>
 <tr class="memdesc:ac699f74359d1f9160bed57ffcf325861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the Poisson-like equation.  <br /></td></tr>
@@ -734,8 +734,8 @@ template&lt;class Mapping &gt; </div>
 
 </div>
 </div>
-<a id="a2ffbf750c185ff40c8a4697b3937bc63" name="a2ffbf750c185ff40c8a4697b3937bc63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ffbf750c185ff40c8a4697b3937bc63">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="ab9963fa7157d221f701133a42bda9e9a" name="ab9963fa7157d221f701133a42bda9e9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9963fa7157d221f701133a42bda9e9a">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -756,7 +756,7 @@ template&lt;class RHSFunction &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; <a class="el" href="structPolarSpline.html">SplinePolar</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structPolarSplineMem.html">PolarSplineMemRTheta</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>spline</em>&#160;</td>
         </tr>
         <tr>

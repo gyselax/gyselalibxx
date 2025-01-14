@@ -195,7 +195,8 @@ var NAVTREE =
       ] ],
       [ "Interpolation Methods", "src_interpolation.html", [
         [ "Spline Interpolation", "src_interpolation.html#src_interpolation__Spline_Interpolation", null ],
-        [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ]
+        [ "Memory concerns", "src_interpolation.html#src_interpolation__Memory_concerns", null ],
+        [ "Polar Splines", "src_interpolation_polar_splines.html", null ]
       ] ],
       [ "Functions used for input and output.", "src_io.html", null ],
       [ "Mappings", "src_mapping.html", null ],
@@ -258,9 +259,7 @@ var NAVTREE =
         [ "Multipatch geometries", "tests_multipatch_geometries.html", null ]
       ] ]
     ] ],
-    [ "Selalib++", "vendor_sll.html", [
-      [ "Mappings", "vendor_sll_include_sll_mapping.html", null ]
-    ] ],
+    [ "Selalib++", "vendor_sll.html", null ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
   ] ]
@@ -271,11 +270,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCollisionsIntra.html#a164c6c249095a533900a12e2f1f48e25",
 "classFluidMoments.html",
-"classMatrix__Center__Block.html",
-"classPolarBSplines_1_1Impl.html#aca84a982ed6da7a6167cd3832f23ec97",
-"collisions__intra_8hpp_source.html",
-"output_8hpp_source.html",
-"structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html"
+"classMatrix__Banded.html#a5b048b1936941d7188b996cd531cd630",
+"classPolarBSplines_1_1Impl.html#a76ae9aee443a828ec5f62ddabbda37fb",
+"classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab",
+"noperturbinitialization_8hpp_source.html",
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af0e9d89578e2d3b2a700bd496a69a596"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

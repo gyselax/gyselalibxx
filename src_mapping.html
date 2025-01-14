@@ -107,7 +107,39 @@ $(document).ready(function(){initNavTree('src_mapping.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This folder contains code describing tools for handling different coordinate systems.</p>
-<p>The <a class="el" href="classVectorMapper.html" title="The general predeclaration of VectorMapper.">VectorMapper</a> tool helps when converting vectors stored in a <code><a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a></code> from one coordinate system to another. </p>
+<p>The current coordinate transformations implemented are:</p>
+<ul>
+<li>Analytically invertible coordinate transformations such as:<ul>
+<li>Circular coordinate transformation (CircularToCartesian/CartesianToCircular):<ul>
+<li>\(x(r,\theta) = r \cos(\theta),\)</li>
+<li>\(y(r,\theta) = r \sin(\theta).\)</li>
+</ul>
+</li>
+<li>Czarny coordinate transformation (CzarnyToCartesian/CartesianToCzarny):<ul>
+<li>\(x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right),\)</li>
+<li>\(y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} },\) with \(\xi = 1/\sqrt{1 - \epsilon^2 /4}\) and \(e\) and \(\epsilon\) given as parameters.</li>
+</ul>
+</li>
+<li>Barycentric coordinate transformation (<a class="el" href="classBarycentricToCartesian.html" title="A class to convert barycentric coordinates to cartesian coordinates on a triangle.">BarycentricToCartesian</a>):<ul>
+<li>\((c_1, c_2, c_3) -&gt; (x,y)\)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Discrete coordinate transformation defined on bsplines (<a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a>):<ul>
+<li>\(x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),\)</li>
+<li>\(y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).\)</li>
+</ul>
+</li>
+<li>Combined coordinate transformation which combines two of the coordinate transformations above.</li>
+</ul>
+<p>The tools are:</p><ul>
+<li><a class="el" href="classInverseJacobianMatrix.html" title="A class to calculate the inverse of the Jacobian matrix.">InverseJacobianMatrix</a> : this tool calculates the inverse Jacobian matrix on the specified coordinate system.</li>
+<li><a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a> : this tool calculates the inverse Jacobian matrix at the O-point on the specified coordinate system.</li>
+<li><a class="el" href="classMetricTensor.html" title="An operator for calculating the metric tensor.">MetricTensor</a> : this tool calculates the metric tensor associated with a coordinate transformation.</li>
+<li><a class="el" href="classVectorMapper.html" title="The general predeclaration of VectorMapper.">VectorMapper</a> : this tool helps when converting vectors stored in a <code><a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a></code> from one coordinate system to another.</li>
+<li>other static analysis tools found in <code><a class="el" href="mapping__tools_8hpp_source.html">mapping_tools.hpp</a></code> </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

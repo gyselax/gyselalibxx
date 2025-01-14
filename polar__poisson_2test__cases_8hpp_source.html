@@ -112,13 +112,13 @@ $(document).ready(function(){initNavTree('polar__poisson_2test__cases_8hpp_sourc
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sll/mapping/circular_to_cartesian.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;sll/mapping/czarny_to_cartesian.hpp&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;sll/mapping/inverse_jacobian_matrix.hpp&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;sll/math_tools.hpp&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sll/math_tools.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;circular_to_cartesian.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;czarny_to_cartesian.hpp&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;inverse_jacobian_matrix.hpp&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> CurvilinearToCartesian&gt;</div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
@@ -293,10 +293,10 @@ $(document).ready(function(){initNavTree('polar__poisson_2test__cases_8hpp_sourc
 <div class="ttc" id="aclassPoissonSolution_html_a85694a84b02f52d5dacdf98dda53fba0"><div class="ttname"><a href="classPoissonSolution.html#a85694a84b02f52d5dacdf98dda53fba0">PoissonSolution::m_coordinate_converter</a></div><div class="ttdeci">CurvilinearToCartesian const  &amp; m_coordinate_converter</div><div class="ttdoc">The mapping function which converts the logical (polar) coordinates into the physical (Cartesian) coo...</div><div class="ttdef"><b>Definition</b> test_cases.hpp:43</div></div>
 <div class="ttc" id="aclassPoissonSolution_html_a88e27ab5b89c3992369e44ca7ecb56de"><div class="ttname"><a href="classPoissonSolution.html#a88e27ab5b89c3992369e44ca7ecb56de">PoissonSolution::operator()</a></div><div class="ttdeci">virtual double operator()(Coord&lt; R, Theta &gt; const &amp;coord) const =0</div><div class="ttdoc">Get the value of the function at a given coordinate.</div></div>
 <div class="ttc" id="aclassPoissonSolution_html_ab858595c50946f5077ed256c5b01f703"><div class="ttname"><a href="classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703">PoissonSolution::PoissonSolution</a></div><div class="ttdeci">PoissonSolution(CurvilinearToCartesian const &amp;coordinate_converter)</div><div class="ttdoc">Instantiate a PoissonSolution.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:55</div></div>
-<div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:31</div></div>
-<div class="ttc" id="astructTheta_html"><div class="ttname"><a href="structTheta.html">Theta</a></div><div class="ttdoc">Define periodic real Theta dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:42</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:318</div></div>
-<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:329</div></div>
+<div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:30</div></div>
+<div class="ttc" id="astructTheta_html"><div class="ttname"><a href="structTheta.html">Theta</a></div><div class="ttdoc">Define periodic real Theta dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:41</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:317</div></div>
+<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:328</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

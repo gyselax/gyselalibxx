@@ -14,14 +14,13 @@ var searchData=
   ['polarbsplinesrtheta_11',['PolarBSplinesRTheta',['../structPolarBSplinesRTheta.html',1,'']]],
   ['polarspline_12',['PolarSpline',['../structPolarSpline.html',1,'']]],
   ['polarsplineevaluator_13',['PolarSplineEvaluator',['../classPolarSplineEvaluator.html',1,'']]],
-  ['polarsplineevaluator_3c_20polarbsplinesrtheta_2c_20ddc_3a_3anullextrapolationrule_2c_20kokkos_3a_3ahostspace_20_3e_14',['PolarSplineEvaluator&lt; PolarBSplinesRTheta, ddc::NullExtrapolationRule, Kokkos::HostSpace &gt;',['../classPolarSplineEvaluator.html',1,'']]],
+  ['polarsplineevaluator_3c_20polarbsplinesrtheta_2c_20ddc_3a_3anullextrapolationrule_20_3e_14',['PolarSplineEvaluator&lt; PolarBSplinesRTheta, ddc::NullExtrapolationRule &gt;',['../classPolarSplineEvaluator.html',1,'']]],
   ['polarsplinefempoissonlikesolver_15',['PolarSplineFEMPoissonLikeSolver',['../classPolarSplineFEMPoissonLikeSolver.html',1,'']]],
-  ['polarsplinespan_16',['PolarSplineSpan',['../structPolarSplineSpan.html',1,'']]],
-  ['polarsplineview_17',['PolarSplineView',['../structPolarSplineView.html',1,'']]],
-  ['preallocatablelagrangeinterpolator_18',['PreallocatableLagrangeInterpolator',['../classPreallocatableLagrangeInterpolator.html',1,'']]],
-  ['preallocatablesplineinterpolator_19',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html',1,'']]],
-  ['preallocatablesplineinterpolatorrtheta_20',['PreallocatableSplineInterpolatorRTheta',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
-  ['preallocatablesplineinterpolatorrtheta_3c_20ddc_3a_3anullextrapolationrule_20_3e_21',['PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
-  ['predcorr_22',['PredCorr',['../classPredCorr.html',1,'']]],
-  ['predcorrrk2xy_23',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
+  ['polarsplinemem_16',['PolarSplineMem',['../structPolarSplineMem.html',1,'']]],
+  ['preallocatablelagrangeinterpolator_17',['PreallocatableLagrangeInterpolator',['../classPreallocatableLagrangeInterpolator.html',1,'']]],
+  ['preallocatablesplineinterpolator_18',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html',1,'']]],
+  ['preallocatablesplineinterpolatorrtheta_19',['PreallocatableSplineInterpolatorRTheta',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
+  ['preallocatablesplineinterpolatorrtheta_3c_20ddc_3a_3anullextrapolationrule_20_3e_20',['PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
+  ['predcorr_21',['PredCorr',['../classPredCorr.html',1,'']]],
+  ['predcorrrk2xy_22',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt; Class Template Reference</title>
+<title>Gyselalib++: PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('classPolarSplineEvaluator.html',''); i
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classPolarSplineEvaluator-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -118,102 +118,102 @@ $(document).ready(function(){initNavTree('classPolarSplineEvaluator.html',''); i
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a2fa3c9292612a5ca03feb02adb465efc" id="r_a2fa3c9292612a5ca03feb02adb465efc"><td class="memItemLeft" align="right" valign="top"><a id="a2fa3c9292612a5ca03feb02adb465efc" name="a2fa3c9292612a5ca03feb02adb465efc"></a>
+<tr class="memitem:a4fda8acef6472fb27ffe42d078943f26" id="r_a4fda8acef6472fb27ffe42d078943f26"><td class="memItemLeft" align="right" valign="top"><a id="a4fda8acef6472fb27ffe42d078943f26" name="a4fda8acef6472fb27ffe42d078943f26"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>bsplines_type</b> = PolarBSplinesType</td></tr>
-<tr class="memdesc:a2fa3c9292612a5ca03feb02adb465efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the type of B-splines. <br /></td></tr>
-<tr class="separator:a2fa3c9292612a5ca03feb02adb465efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80d8f6b0ba3f69a056dea16f01368068" id="r_a80d8f6b0ba3f69a056dea16f01368068"><td class="memItemLeft" align="right" valign="top"><a id="a80d8f6b0ba3f69a056dea16f01368068" name="a80d8f6b0ba3f69a056dea16f01368068"></a>
+<tr class="memdesc:a4fda8acef6472fb27ffe42d078943f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the type of B-splines. <br /></td></tr>
+<tr class="separator:a4fda8acef6472fb27ffe42d078943f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af825f47ac1278302e5dd3ac0d906f09c" id="r_af825f47ac1278302e5dd3ac0d906f09c"><td class="memItemLeft" align="right" valign="top"><a id="af825f47ac1278302e5dd3ac0d906f09c" name="af825f47ac1278302e5dd3ac0d906f09c"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesR</b> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
-<tr class="memdesc:a80d8f6b0ba3f69a056dea16f01368068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the type of first dimension B-splines. <br /></td></tr>
-<tr class="separator:a80d8f6b0ba3f69a056dea16f01368068"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec66ea4c32e5f71af0587862981b077" id="r_abec66ea4c32e5f71af0587862981b077"><td class="memItemLeft" align="right" valign="top"><a id="abec66ea4c32e5f71af0587862981b077" name="abec66ea4c32e5f71af0587862981b077"></a>
+<tr class="memdesc:af825f47ac1278302e5dd3ac0d906f09c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the type of first dimension B-splines. <br /></td></tr>
+<tr class="separator:af825f47ac1278302e5dd3ac0d906f09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66468d51237ba05121d617991da901f3" id="r_a66468d51237ba05121d617991da901f3"><td class="memItemLeft" align="right" valign="top"><a id="a66468d51237ba05121d617991da901f3" name="a66468d51237ba05121d617991da901f3"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesTheta</b> = typename PolarBSplinesType::BSplinesTheta_tag</td></tr>
-<tr class="memdesc:abec66ea4c32e5f71af0587862981b077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the type of second dimension B-splines. <br /></td></tr>
-<tr class="separator:abec66ea4c32e5f71af0587862981b077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62c8d089db6f324d7a4762a38bc19ae8" id="r_a62c8d089db6f324d7a4762a38bc19ae8"><td class="memItemLeft" align="right" valign="top"><a id="a62c8d089db6f324d7a4762a38bc19ae8" name="a62c8d089db6f324d7a4762a38bc19ae8"></a>
+<tr class="memdesc:a66468d51237ba05121d617991da901f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the type of second dimension B-splines. <br /></td></tr>
+<tr class="separator:a66468d51237ba05121d617991da901f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa879b12728771565d1e10a6591b49db0" id="r_aa879b12728771565d1e10a6591b49db0"><td class="memItemLeft" align="right" valign="top"><a id="aa879b12728771565d1e10a6591b49db0" name="aa879b12728771565d1e10a6591b49db0"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>DimR</b> = typename BSplinesR::continuous_dimension_type</td></tr>
-<tr class="memdesc:a62c8d089db6f324d7a4762a38bc19ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the first dimension of the space. <br /></td></tr>
-<tr class="separator:a62c8d089db6f324d7a4762a38bc19ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab654a3e14048034f4083b801a3c4cffe" id="r_ab654a3e14048034f4083b801a3c4cffe"><td class="memItemLeft" align="right" valign="top"><a id="ab654a3e14048034f4083b801a3c4cffe" name="ab654a3e14048034f4083b801a3c4cffe"></a>
+<tr class="memdesc:aa879b12728771565d1e10a6591b49db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the first dimension of the space. <br /></td></tr>
+<tr class="separator:aa879b12728771565d1e10a6591b49db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf99dc8e8d1141f1881627a6e5218791" id="r_adf99dc8e8d1141f1881627a6e5218791"><td class="memItemLeft" align="right" valign="top"><a id="adf99dc8e8d1141f1881627a6e5218791" name="adf99dc8e8d1141f1881627a6e5218791"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>DimTheta</b> = typename BSplinesTheta::continuous_dimension_type</td></tr>
-<tr class="memdesc:ab654a3e14048034f4083b801a3c4cffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the second dimension of the space. <br /></td></tr>
-<tr class="separator:ab654a3e14048034f4083b801a3c4cffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:adf99dc8e8d1141f1881627a6e5218791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the second dimension of the space. <br /></td></tr>
+<tr class="separator:adf99dc8e8d1141f1881627a6e5218791"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8ccb414d5d9022278cc31f19ee3c77f1" id="r_a8ccb414d5d9022278cc31f19ee3c77f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a8ccb414d5d9022278cc31f19ee3c77f1">PolarSplineEvaluator</a> (OuterExtrapolationRule const &amp;outer_bc)</td></tr>
-<tr class="memdesc:a8ccb414d5d9022278cc31f19ee3c77f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> with boundary evaluation conditions.  <br /></td></tr>
-<tr class="separator:a8ccb414d5d9022278cc31f19ee3c77f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff023d9beff16f85fa01f2cf45e6433a" id="r_aff023d9beff16f85fa01f2cf45e6433a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#aff023d9beff16f85fa01f2cf45e6433a">PolarSplineEvaluator</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:aff023d9beff16f85fa01f2cf45e6433a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another.  <br /></td></tr>
-<tr class="separator:aff023d9beff16f85fa01f2cf45e6433a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad09e22ffcc4addf7c2560bf20a3d4d85" id="r_ad09e22ffcc4addf7c2560bf20a3d4d85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#ad09e22ffcc4addf7c2560bf20a3d4d85">PolarSplineEvaluator</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:ad09e22ffcc4addf7c2560bf20a3d4d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another temporary.  <br /></td></tr>
-<tr class="separator:ad09e22ffcc4addf7c2560bf20a3d4d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7103c0398e7689a35b2b8d325b3c45a7" id="r_a7103c0398e7689a35b2b8d325b3c45a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a7103c0398e7689a35b2b8d325b3c45a7">operator=</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> const &amp;x)=default</td></tr>
-<tr class="memdesc:a7103c0398e7689a35b2b8d325b3c45a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another.  <br /></td></tr>
-<tr class="separator:a7103c0398e7689a35b2b8d325b3c45a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a596d9fb7460cee0c4974a0720e6b3206" id="r_a596d9fb7460cee0c4974a0720e6b3206"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a596d9fb7460cee0c4974a0720e6b3206">operator=</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&amp;x)=default</td></tr>
-<tr class="memdesc:a596d9fb7460cee0c4974a0720e6b3206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another temporary.  <br /></td></tr>
-<tr class="separator:a596d9fb7460cee0c4974a0720e6b3206"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a936ad154152aab8185954b19e6e25b86" id="r_a936ad154152aab8185954b19e6e25b86"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a936ad154152aab8185954b19e6e25b86">operator()</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; coord_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a936ad154152aab8185954b19e6e25b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the spline function at a given coordinate.  <br /></td></tr>
-<tr class="separator:a936ad154152aab8185954b19e6e25b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68c59720235b1edcb3cc354a20e33155" id="r_a68c59720235b1edcb3cc354a20e33155"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a68c59720235b1edcb3cc354a20e33155"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a68c59720235b1edcb3cc354a20e33155">operator()</a> (ddc::ChunkSpan&lt; double, Domain, Kokkos::layout_right, MemSpace &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain, Kokkos::layout_right, MemSpace &gt; const coords_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a68c59720235b1edcb3cc354a20e33155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the spline function on a domain.  <br /></td></tr>
-<tr class="separator:a68c59720235b1edcb3cc354a20e33155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4220f9856e3e0fa46be34dbfcc2f1616" id="r_a4220f9856e3e0fa46be34dbfcc2f1616"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a4220f9856e3e0fa46be34dbfcc2f1616">deriv_dim_1</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; coord_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a4220f9856e3e0fa46be34dbfcc2f1616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the derivative of the spline function on the first dimension.  <br /></td></tr>
-<tr class="separator:a4220f9856e3e0fa46be34dbfcc2f1616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cc19a347426531afec4830fbeb59448" id="r_a6cc19a347426531afec4830fbeb59448"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a6cc19a347426531afec4830fbeb59448">deriv_dim_2</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; coord_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a6cc19a347426531afec4830fbeb59448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the derivative of the spline function on the second dimension.  <br /></td></tr>
-<tr class="separator:a6cc19a347426531afec4830fbeb59448"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc1c3699cba47ea9b6bc525ea2689580" id="r_adc1c3699cba47ea9b6bc525ea2689580"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#adc1c3699cba47ea9b6bc525ea2689580">deriv_1_and_2</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; coord_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:adc1c3699cba47ea9b6bc525ea2689580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the cross derivative of the spline function.  <br /></td></tr>
-<tr class="separator:adc1c3699cba47ea9b6bc525ea2689580"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b0b853c7f6f8cba26665625ef2a790b" id="r_a1b0b853c7f6f8cba26665625ef2a790b"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a1b0b853c7f6f8cba26665625ef2a790b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a1b0b853c7f6f8cba26665625ef2a790b">deriv_dim_1</a> (ddc::ChunkSpan&lt; double, Domain &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain &gt; const coords_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a1b0b853c7f6f8cba26665625ef2a790b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the derivative of the spline function on the first dimension.  <br /></td></tr>
-<tr class="separator:a1b0b853c7f6f8cba26665625ef2a790b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a875bb4fdfb69ec7f48e6e410d5313d3d" id="r_a875bb4fdfb69ec7f48e6e410d5313d3d"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a875bb4fdfb69ec7f48e6e410d5313d3d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a875bb4fdfb69ec7f48e6e410d5313d3d">deriv_dim_2</a> (ddc::ChunkSpan&lt; double, Domain &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain &gt; const coords_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a875bb4fdfb69ec7f48e6e410d5313d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the derivative of the spline function on the second dimension.  <br /></td></tr>
-<tr class="separator:a875bb4fdfb69ec7f48e6e410d5313d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a9f6fc82ad489c4ad8ec40cdabf1da" id="r_a48a9f6fc82ad489c4ad8ec40cdabf1da"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a48a9f6fc82ad489c4ad8ec40cdabf1da"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a48a9f6fc82ad489c4ad8ec40cdabf1da">deriv_dim_1_and_2</a> (ddc::ChunkSpan&lt; double, Domain &gt; const spline_eval, ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain &gt; const coords_eval, <a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef) const</td></tr>
-<tr class="memdesc:a48a9f6fc82ad489c4ad8ec40cdabf1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the cross derivative of the spline function.  <br /></td></tr>
-<tr class="separator:a48a9f6fc82ad489c4ad8ec40cdabf1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4138c63cadd45444a7d820eda652b64b" id="r_a4138c63cadd45444a7d820eda652b64b"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
-<tr class="memitem:a4138c63cadd45444a7d820eda652b64b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a4138c63cadd45444a7d820eda652b64b">integrate</a> (<a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const spline_coef, Mapping const mapping) const</td></tr>
-<tr class="memdesc:a4138c63cadd45444a7d820eda652b64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the in integral of a spline function over the domain.  <br /></td></tr>
-<tr class="separator:a4138c63cadd45444a7d820eda652b64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8960c721f4ef12c2343fae7c36dae0da" id="r_a8960c721f4ef12c2343fae7c36dae0da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a8960c721f4ef12c2343fae7c36dae0da">PolarSplineEvaluator</a> (OuterExtrapolationRule const &amp;outer_bc)</td></tr>
+<tr class="memdesc:a8960c721f4ef12c2343fae7c36dae0da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> with boundary evaluation conditions.  <br /></td></tr>
+<tr class="separator:a8960c721f4ef12c2343fae7c36dae0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13c5887c37f94a933cdd431c122a0124" id="r_a13c5887c37f94a933cdd431c122a0124"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a13c5887c37f94a933cdd431c122a0124">PolarSplineEvaluator</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:a13c5887c37f94a933cdd431c122a0124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another.  <br /></td></tr>
+<tr class="separator:a13c5887c37f94a933cdd431c122a0124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b7163ab815cc562d0222b1d5dcd27e" id="r_a87b7163ab815cc562d0222b1d5dcd27e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a87b7163ab815cc562d0222b1d5dcd27e">PolarSplineEvaluator</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:a87b7163ab815cc562d0222b1d5dcd27e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another temporary.  <br /></td></tr>
+<tr class="separator:a87b7163ab815cc562d0222b1d5dcd27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d675b7b73943862d1ffb2930f886213" id="r_a6d675b7b73943862d1ffb2930f886213"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a6d675b7b73943862d1ffb2930f886213">operator=</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> const &amp;x)=default</td></tr>
+<tr class="memdesc:a6d675b7b73943862d1ffb2930f886213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another.  <br /></td></tr>
+<tr class="separator:a6d675b7b73943862d1ffb2930f886213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad283c37ae44c6a72f43bf2b6e48d43a8" id="r_ad283c37ae44c6a72f43bf2b6e48d43a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#ad283c37ae44c6a72f43bf2b6e48d43a8">operator=</a> (<a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp;&amp;x)=default</td></tr>
+<tr class="memdesc:ad283c37ae44c6a72f43bf2b6e48d43a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a <a class="el" href="classPolarSplineEvaluator.html" title="Define an evaluator on polar B-splines.">PolarSplineEvaluator</a> from another temporary.  <br /></td></tr>
+<tr class="separator:ad283c37ae44c6a72f43bf2b6e48d43a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6eafb664ed50f902c2a07236d1c062d" id="r_ae6eafb664ed50f902c2a07236d1c062d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#ae6eafb664ed50f902c2a07236d1c062d">operator()</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt; coord_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:ae6eafb664ed50f902c2a07236d1c062d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the spline function at a given coordinate.  <br /></td></tr>
+<tr class="separator:ae6eafb664ed50f902c2a07236d1c062d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4fffa5d618015f463908c3fd9d019f0" id="r_ae4fffa5d618015f463908c3fd9d019f0"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
+<tr class="memitem:ae4fffa5d618015f463908c3fd9d019f0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#ae4fffa5d618015f463908c3fd9d019f0">operator()</a> (DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:ae4fffa5d618015f463908c3fd9d019f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the spline function on a domain.  <br /></td></tr>
+<tr class="separator:ae4fffa5d618015f463908c3fd9d019f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356422a6f27926627564ed93467a70cc" id="r_a356422a6f27926627564ed93467a70cc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a356422a6f27926627564ed93467a70cc">deriv_dim_1</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt; coord_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:a356422a6f27926627564ed93467a70cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the derivative of the spline function on the first dimension.  <br /></td></tr>
+<tr class="separator:a356422a6f27926627564ed93467a70cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a2c68c9daadb1253edbfc7e8361b8e" id="r_ab9a2c68c9daadb1253edbfc7e8361b8e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#ab9a2c68c9daadb1253edbfc7e8361b8e">deriv_dim_2</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt; coord_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:ab9a2c68c9daadb1253edbfc7e8361b8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the derivative of the spline function on the second dimension.  <br /></td></tr>
+<tr class="separator:ab9a2c68c9daadb1253edbfc7e8361b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d593b5d3e4428e9f21e5ad466ae681" id="r_a91d593b5d3e4428e9f21e5ad466ae681"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a91d593b5d3e4428e9f21e5ad466ae681">deriv_1_and_2</a> (ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt; coord_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:a91d593b5d3e4428e9f21e5ad466ae681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the cross derivative of the spline function.  <br /></td></tr>
+<tr class="separator:a91d593b5d3e4428e9f21e5ad466ae681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60df7dfcabe059e03db5f2fbb79e1427" id="r_a60df7dfcabe059e03db5f2fbb79e1427"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
+<tr class="memitem:a60df7dfcabe059e03db5f2fbb79e1427"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a60df7dfcabe059e03db5f2fbb79e1427">deriv_dim_1</a> (DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:a60df7dfcabe059e03db5f2fbb79e1427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the derivative of the spline function on the first dimension.  <br /></td></tr>
+<tr class="separator:a60df7dfcabe059e03db5f2fbb79e1427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9abd2555ecadb05d2b22481c348514f3" id="r_a9abd2555ecadb05d2b22481c348514f3"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
+<tr class="memitem:a9abd2555ecadb05d2b22481c348514f3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a9abd2555ecadb05d2b22481c348514f3">deriv_dim_2</a> (DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:a9abd2555ecadb05d2b22481c348514f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the derivative of the spline function on the second dimension.  <br /></td></tr>
+<tr class="separator:a9abd2555ecadb05d2b22481c348514f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0101fa4d466cd4ea6d04eb6b83362445" id="r_a0101fa4d466cd4ea6d04eb6b83362445"><td class="memTemplParams" colspan="2">template&lt;class Domain &gt; </td></tr>
+<tr class="memitem:a0101fa4d466cd4ea6d04eb6b83362445"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a0101fa4d466cd4ea6d04eb6b83362445">deriv_dim_1_and_2</a> (DField&lt; Domain, Kokkos::HostSpace &gt; const spline_eval, ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const coords_eval, host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef) const</td></tr>
+<tr class="memdesc:a0101fa4d466cd4ea6d04eb6b83362445"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the cross derivative of the spline function.  <br /></td></tr>
+<tr class="separator:a0101fa4d466cd4ea6d04eb6b83362445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69142a057d1608a206282a44d33bc080" id="r_a69142a057d1608a206282a44d33bc080"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
+<tr class="memitem:a69142a057d1608a206282a44d33bc080"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineEvaluator.html#a69142a057d1608a206282a44d33bc080">integrate</a> (host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const spline_coef, Mapping const mapping) const</td></tr>
+<tr class="memdesc:a69142a057d1608a206282a44d33bc080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the in integral of a spline function over the domain.  <br /></td></tr>
+<tr class="separator:a69142a057d1608a206282a44d33bc080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:aff3a579842265d1c1573d5017d4386b0" id="r_aff3a579842265d1c1573d5017d4386b0"><td class="memItemLeft" align="right" valign="top"><a id="aff3a579842265d1c1573d5017d4386b0" name="aff3a579842265d1c1573d5017d4386b0"></a>
+<tr class="memitem:ace6e568d7d0ea1accb2fa3496ce6e781" id="r_ace6e568d7d0ea1accb2fa3496ce6e781"><td class="memItemLeft" align="right" valign="top"><a id="ace6e568d7d0ea1accb2fa3496ce6e781" name="ace6e568d7d0ea1accb2fa3496ce6e781"></a>
 static int constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>continuity</b> = PolarBSplinesType::continuity</td></tr>
-<tr class="memdesc:aff3a579842265d1c1573d5017d4386b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the order of continuity of the B-splines basis at the O-point. <br /></td></tr>
-<tr class="separator:aff3a579842265d1c1573d5017d4386b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ace6e568d7d0ea1accb2fa3496ce6e781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag the order of continuity of the B-splines basis at the O-point. <br /></td></tr>
+<tr class="separator:ace6e568d7d0ea1accb2fa3496ce6e781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class PolarBSplinesType, class OuterExtrapolationRule, class MemSpace&gt;<br />
-class PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;</div><p>Define an evaluator on polar B-splines. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class PolarBSplinesType, class OuterExtrapolationRule&gt;<br />
+class PolarSplineEvaluator&lt; PolarBSplinesType, OuterExtrapolationRule &gt;</div><p>Define an evaluator on polar B-splines. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classPolarBSplines.html" title="A class containing all information describing polar bsplines.">PolarBSplines</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8ccb414d5d9022278cc31f19ee3c77f1" name="a8ccb414d5d9022278cc31f19ee3c77f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ccb414d5d9022278cc31f19ee3c77f1">&#9670;&#160;</a></span>PolarSplineEvaluator() <span class="overload">[1/3]</span></h2>
+<a id="a8960c721f4ef12c2343fae7c36dae0da" name="a8960c721f4ef12c2343fae7c36dae0da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8960c721f4ef12c2343fae7c36dae0da">&#9670;&#160;</a></span>PolarSplineEvaluator() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;<a class="el" href="classPolarSplineEvaluator.html">::PolarSplineEvaluator</a> </td>
+          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;<a class="el" href="classPolarSplineEvaluator.html">::PolarSplineEvaluator</a> </td>
           <td>(</td>
           <td class="paramtype">OuterExtrapolationRule const &amp;&#160;</td>
           <td class="paramname"><em>outer_bc</em></td><td>)</td>
@@ -238,21 +238,21 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="aff023d9beff16f85fa01f2cf45e6433a" name="aff023d9beff16f85fa01f2cf45e6433a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff023d9beff16f85fa01f2cf45e6433a">&#9670;&#160;</a></span>PolarSplineEvaluator() <span class="overload">[2/3]</span></h2>
+<a id="a13c5887c37f94a933cdd431c122a0124" name="a13c5887c37f94a933cdd431c122a0124"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13c5887c37f94a933cdd431c122a0124">&#9670;&#160;</a></span>PolarSplineEvaluator() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;<a class="el" href="classPolarSplineEvaluator.html">::PolarSplineEvaluator</a> </td>
+          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;<a class="el" href="classPolarSplineEvaluator.html">::PolarSplineEvaluator</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -274,21 +274,21 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="ad09e22ffcc4addf7c2560bf20a3d4d85" name="ad09e22ffcc4addf7c2560bf20a3d4d85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad09e22ffcc4addf7c2560bf20a3d4d85">&#9670;&#160;</a></span>PolarSplineEvaluator() <span class="overload">[3/3]</span></h2>
+<a id="a87b7163ab815cc562d0222b1d5dcd27e" name="a87b7163ab815cc562d0222b1d5dcd27e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b7163ab815cc562d0222b1d5dcd27e">&#9670;&#160;</a></span>PolarSplineEvaluator() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;<a class="el" href="classPolarSplineEvaluator.html">::PolarSplineEvaluator</a> </td>
+          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;<a class="el" href="classPolarSplineEvaluator.html">::PolarSplineEvaluator</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -311,21 +311,21 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7103c0398e7689a35b2b8d325b3c45a7" name="a7103c0398e7689a35b2b8d325b3c45a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7103c0398e7689a35b2b8d325b3c45a7">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a6d675b7b73943862d1ffb2930f886213" name="a6d675b7b73943862d1ffb2930f886213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d675b7b73943862d1ffb2930f886213">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp; <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp; <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -348,21 +348,21 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="a596d9fb7460cee0c4974a0720e6b3206" name="a596d9fb7460cee0c4974a0720e6b3206"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a596d9fb7460cee0c4974a0720e6b3206">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="ad283c37ae44c6a72f43bf2b6e48d43a8" name="ad283c37ae44c6a72f43bf2b6e48d43a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad283c37ae44c6a72f43bf2b6e48d43a8">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp; <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a> &amp; <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -385,27 +385,27 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="a936ad154152aab8185954b19e6e25b86" name="a936ad154152aab8185954b19e6e25b86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a936ad154152aab8185954b19e6e25b86">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="ae6eafb664ed50f902c2a07236d1c062d" name="ae6eafb664ed50f902c2a07236d1c062d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6eafb664ed50f902c2a07236d1c062d">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::operator() </td>
+          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>coord_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -433,13 +433,13 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="a68c59720235b1edcb3cc354a20e33155" name="a68c59720235b1edcb3cc354a20e33155"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68c59720235b1edcb3cc354a20e33155">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="ae4fffa5d618015f463908c3fd9d019f0" name="ae4fffa5d618015f463908c3fd9d019f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4fffa5d618015f463908c3fd9d019f0">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <div class="memtemplate">
 template&lt;class Domain &gt; </div>
 <table class="mlabels">
@@ -447,21 +447,21 @@ template&lt;class Domain &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, Domain, Kokkos::layout_right, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">DField&lt; Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>spline_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain, Kokkos::layout_right, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>coords_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -489,27 +489,27 @@ template&lt;class Domain &gt; </div>
 
 </div>
 </div>
-<a id="a4220f9856e3e0fa46be34dbfcc2f1616" name="a4220f9856e3e0fa46be34dbfcc2f1616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4220f9856e3e0fa46be34dbfcc2f1616">&#9670;&#160;</a></span>deriv_dim_1() <span class="overload">[1/2]</span></h2>
+<a id="a356422a6f27926627564ed93467a70cc" name="a356422a6f27926627564ed93467a70cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a356422a6f27926627564ed93467a70cc">&#9670;&#160;</a></span>deriv_dim_1() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::deriv_dim_1 </td>
+          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>coord_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -537,27 +537,27 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="a6cc19a347426531afec4830fbeb59448" name="a6cc19a347426531afec4830fbeb59448"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6cc19a347426531afec4830fbeb59448">&#9670;&#160;</a></span>deriv_dim_2() <span class="overload">[1/2]</span></h2>
+<a id="ab9a2c68c9daadb1253edbfc7e8361b8e" name="ab9a2c68c9daadb1253edbfc7e8361b8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a2c68c9daadb1253edbfc7e8361b8e">&#9670;&#160;</a></span>deriv_dim_2() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::deriv_dim_2 </td>
+          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>coord_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -585,27 +585,27 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="adc1c3699cba47ea9b6bc525ea2689580" name="adc1c3699cba47ea9b6bc525ea2689580"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc1c3699cba47ea9b6bc525ea2689580">&#9670;&#160;</a></span>deriv_1_and_2()</h2>
+<a id="a91d593b5d3e4428e9f21e5ad466ae681" name="a91d593b5d3e4428e9f21e5ad466ae681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91d593b5d3e4428e9f21e5ad466ae681">&#9670;&#160;</a></span>deriv_1_and_2()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::deriv_1_and_2 </td>
+          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_1_and_2 </td>
           <td>(</td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt;&#160;</td>
+          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;&#160;</td>
           <td class="paramname"><em>coord_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -633,13 +633,13 @@ template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSp
 
 </div>
 </div>
-<a id="a1b0b853c7f6f8cba26665625ef2a790b" name="a1b0b853c7f6f8cba26665625ef2a790b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b0b853c7f6f8cba26665625ef2a790b">&#9670;&#160;</a></span>deriv_dim_1() <span class="overload">[2/2]</span></h2>
+<a id="a60df7dfcabe059e03db5f2fbb79e1427" name="a60df7dfcabe059e03db5f2fbb79e1427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60df7dfcabe059e03db5f2fbb79e1427">&#9670;&#160;</a></span>deriv_dim_1() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <div class="memtemplate">
 template&lt;class Domain &gt; </div>
 <table class="mlabels">
@@ -647,21 +647,21 @@ template&lt;class Domain &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::deriv_dim_1 </td>
+          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1 </td>
           <td>(</td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, Domain &gt; const&#160;</td>
+          <td class="paramtype">DField&lt; Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>spline_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain &gt; const&#160;</td>
+          <td class="paramtype">ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>coords_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -689,13 +689,13 @@ template&lt;class Domain &gt; </div>
 
 </div>
 </div>
-<a id="a875bb4fdfb69ec7f48e6e410d5313d3d" name="a875bb4fdfb69ec7f48e6e410d5313d3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a875bb4fdfb69ec7f48e6e410d5313d3d">&#9670;&#160;</a></span>deriv_dim_2() <span class="overload">[2/2]</span></h2>
+<a id="a9abd2555ecadb05d2b22481c348514f3" name="a9abd2555ecadb05d2b22481c348514f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9abd2555ecadb05d2b22481c348514f3">&#9670;&#160;</a></span>deriv_dim_2() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <div class="memtemplate">
 template&lt;class Domain &gt; </div>
 <table class="mlabels">
@@ -703,21 +703,21 @@ template&lt;class Domain &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::deriv_dim_2 </td>
+          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_2 </td>
           <td>(</td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, Domain &gt; const&#160;</td>
+          <td class="paramtype">DField&lt; Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>spline_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain &gt; const&#160;</td>
+          <td class="paramtype">ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>coords_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -745,13 +745,13 @@ template&lt;class Domain &gt; </div>
 
 </div>
 </div>
-<a id="a48a9f6fc82ad489c4ad8ec40cdabf1da" name="a48a9f6fc82ad489c4ad8ec40cdabf1da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48a9f6fc82ad489c4ad8ec40cdabf1da">&#9670;&#160;</a></span>deriv_dim_1_and_2()</h2>
+<a id="a0101fa4d466cd4ea6d04eb6b83362445" name="a0101fa4d466cd4ea6d04eb6b83362445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0101fa4d466cd4ea6d04eb6b83362445">&#9670;&#160;</a></span>deriv_dim_1_and_2()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <div class="memtemplate">
 template&lt;class Domain &gt; </div>
 <table class="mlabels">
@@ -759,21 +759,21 @@ template&lt;class Domain &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::deriv_dim_1_and_2 </td>
+          <td class="memname">void <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::deriv_dim_1_and_2 </td>
           <td>(</td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, Domain &gt; const&#160;</td>
+          <td class="paramtype">DField&lt; Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>spline_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::ChunkSpan&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#a62c8d089db6f324d7a4762a38bc19ae8">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#ab654a3e14048034f4083b801a3c4cffe">DimTheta</a> &gt; const, Domain &gt; const&#160;</td>
+          <td class="paramtype">ConstField&lt; ddc::Coordinate&lt; <a class="el" href="classPolarSplineEvaluator.html#aa879b12728771565d1e10a6591b49db0">DimR</a>, <a class="el" href="classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791">DimTheta</a> &gt;, Domain, Kokkos::HostSpace &gt; const&#160;</td>
           <td class="paramname"><em>coords_eval</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>&#160;</td>
         </tr>
         <tr>
@@ -801,13 +801,13 @@ template&lt;class Domain &gt; </div>
 
 </div>
 </div>
-<a id="a4138c63cadd45444a7d820eda652b64b" name="a4138c63cadd45444a7d820eda652b64b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4138c63cadd45444a7d820eda652b64b">&#9670;&#160;</a></span>integrate()</h2>
+<a id="a69142a057d1608a206282a44d33bc080" name="a69142a057d1608a206282a44d33bc080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69142a057d1608a206282a44d33bc080">&#9670;&#160;</a></span>integrate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class PolarBSplinesType , class OuterExtrapolationRule , class MemSpace &gt; </div>
+template&lt;class PolarBSplinesType , class OuterExtrapolationRule &gt; </div>
 <div class="memtemplate">
 template&lt;class Mapping &gt; </div>
 <table class="mlabels">
@@ -815,9 +815,9 @@ template&lt;class Mapping &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule, MemSpace &gt;::integrate </td>
+          <td class="memname">double <a class="el" href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a>&lt; PolarBSplinesType, OuterExtrapolationRule &gt;::integrate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structPolarSplineView.html">PolarSplineView</a>&lt; PolarBSplinesType, MemSpace &gt; const&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="structConstPolarSpline.html">ConstPolarSpline</a>&lt; PolarBSplinesType &gt; &gt; const&#160;</td>
           <td class="paramname"><em>spline_coef</em>, </td>
         </tr>
         <tr>
@@ -852,7 +852,7 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="polar__spline__evaluator_8hpp_source.html">polar_spline_evaluator.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/<a class="el" href="polar__spline__evaluator_8hpp_source.html">polar_spline_evaluator.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

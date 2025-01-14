@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: GaussLegendreCoefficients Struct Reference</title>
+<title>Gyselalib++: GaussLegendreCoefficients&lt; NPoints &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,27 +106,35 @@ $(document).ready(function(){initNavTree('structGaussLegendreCoefficients.html',
   <div class="summary">
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structGaussLegendreCoefficients-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">GaussLegendreCoefficients Struct Reference</div></div>
+  <div class="headertitle"><div class="title">GaussLegendreCoefficients&lt; NPoints &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points.  
+ <a href="structGaussLegendreCoefficients.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a60a5777b3695ae83ad8fdf64c13fb86b" id="r_a60a5777b3695ae83ad8fdf64c13fb86b"><td class="memItemLeft" align="right" valign="top"><a id="a60a5777b3695ae83ad8fdf64c13fb86b" name="a60a5777b3695ae83ad8fdf64c13fb86b"></a>
-static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_order</b> = 10u</td></tr>
-<tr class="separator:a60a5777b3695ae83ad8fdf64c13fb86b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fd21988f096dbfc4597680b3915747c" id="r_a8fd21988f096dbfc4597680b3915747c"><td class="memItemLeft" align="right" valign="top"><a id="a8fd21988f096dbfc4597680b3915747c" name="a8fd21988f096dbfc4597680b3915747c"></a>
-static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>nb_coefficients</b> = max_order * (max_order + 1) / 2</td></tr>
-<tr class="separator:a8fd21988f096dbfc4597680b3915747c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a816b4bcfaf6bd9bc21df463f23b0280d" id="r_a816b4bcfaf6bd9bc21df463f23b0280d"><td class="memItemLeft" align="right" valign="top"><a id="a816b4bcfaf6bd9bc21df463f23b0280d" name="a816b4bcfaf6bd9bc21df463f23b0280d"></a>
-static std::array&lt; long double, nb_coefficients &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>weight</b></td></tr>
-<tr class="separator:a816b4bcfaf6bd9bc21df463f23b0280d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabbfd22fdd6b298bf6c3527323545d0e" id="r_aabbfd22fdd6b298bf6c3527323545d0e"><td class="memItemLeft" align="right" valign="top"><a id="aabbfd22fdd6b298bf6c3527323545d0e" name="aabbfd22fdd6b298bf6c3527323545d0e"></a>
-static std::array&lt; long double, nb_coefficients &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b></td></tr>
-<tr class="separator:aabbfd22fdd6b298bf6c3527323545d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3310b51b205aeda0dab17f4925c4d2" id="r_a0c3310b51b205aeda0dab17f4925c4d2"><td class="memItemLeft" align="right" valign="top"><a id="a0c3310b51b205aeda0dab17f4925c4d2" name="a0c3310b51b205aeda0dab17f4925c4d2"></a>
+static std::array&lt; long double, NPoints &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b></td></tr>
+<tr class="memdesc:a0c3310b51b205aeda0dab17f4925c4d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The positions on the domain [-1,1] where the function should be evaluated. <br /></td></tr>
+<tr class="separator:a0c3310b51b205aeda0dab17f4925c4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe529976684244a390c122afe1b8bb86" id="r_afe529976684244a390c122afe1b8bb86"><td class="memItemLeft" align="right" valign="top"><a id="afe529976684244a390c122afe1b8bb86" name="afe529976684244a390c122afe1b8bb86"></a>
+static std::array&lt; long double, NPoints &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>weight</b></td></tr>
+<tr class="memdesc:afe529976684244a390c122afe1b8bb86"><td class="mdescLeft">&#160;</td><td class="mdescRight">The weights that the function should be multiplied by in the Gauss-Legendre quadrature. <br /></td></tr>
+<tr class="separator:afe529976684244a390c122afe1b8bb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="gauss__legendre__integration_8hpp_source.html">gauss_legendre_integration.hpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;std::size_t NPoints&gt;<br />
+struct GaussLegendreCoefficients&lt; NPoints &gt;</div><p>A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">NPoints</td><td>The number of points in the quadrature scheme. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/<a class="el" href="gauss__legendre__integration_8hpp_source.html">gauss_legendre_integration.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -16,7 +16,7 @@ var classPolarSplineFEMPoissonLikeSolver =
     [ "compute_singular_elements", "classPolarSplineFEMPoissonLikeSolver.html#ae5645f014d26559165955e51746f3e70", null ],
     [ "compute_overlapping_singular_elements", "classPolarSplineFEMPoissonLikeSolver.html#a36be84f08a082b52a73f5134b8f1a8e2", null ],
     [ "compute_stencil_elements", "classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925", null ],
-    [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#a2ffbf750c185ff40c8a4697b3937bc63", null ],
+    [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#ab9963fa7157d221f701133a42bda9e9a", null ],
     [ "operator()", "classPolarSplineFEMPoissonLikeSolver.html#ac699f74359d1f9160bed57ffcf325861", null ],
     [ "get_matrix_stencil_element", "classPolarSplineFEMPoissonLikeSolver.html#a90ab8ff1603bc0a3f36b5a0c5077de5b", null ],
     [ "init_nnz_per_line", "classPolarSplineFEMPoissonLikeSolver.html#ad1b92b440d6e5c71e14b09d53beefd84", null ]

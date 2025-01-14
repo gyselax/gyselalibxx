@@ -120,18 +120,18 @@ Public Types</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_dimension_type</b> = <a class="el" href="classTriangularBernsteinPolynomialBasis.html">TriangularBernsteinPolynomialBasis</a></td></tr>
 <tr class="memdesc:a63bcc9ebdf4914eaffdc9fb3fa15d873"><td class="mdescLeft">&#160;</td><td class="mdescRight">The tag which identifies the basis. <br /></td></tr>
 <tr class="separator:a63bcc9ebdf4914eaffdc9fb3fa15d873"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2238a51918f9721560016444e1eb413" id="r_af2238a51918f9721560016444e1eb413"><td class="memItemLeft" align="right" valign="top"><a id="af2238a51918f9721560016444e1eb413" name="af2238a51918f9721560016444e1eb413"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_element_type</b> = ddc::DiscreteElement&lt; DDim &gt;</td></tr>
-<tr class="memdesc:af2238a51918f9721560016444e1eb413"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index of an element of the basis. <br /></td></tr>
-<tr class="separator:af2238a51918f9721560016444e1eb413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae311ef4259e8b891d2656a946bdc70cc" id="r_ae311ef4259e8b891d2656a946bdc70cc"><td class="memItemLeft" align="right" valign="top"><a id="ae311ef4259e8b891d2656a946bdc70cc" name="ae311ef4259e8b891d2656a946bdc70cc"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_domain_type</b> = ddc::DiscreteDomain&lt; DDim &gt;</td></tr>
-<tr class="memdesc:ae311ef4259e8b891d2656a946bdc70cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the index range of the basis. <br /></td></tr>
-<tr class="separator:ae311ef4259e8b891d2656a946bdc70cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c00927d24f9f46a92d67873854f2ebc" id="r_a1c00927d24f9f46a92d67873854f2ebc"><td class="memItemLeft" align="right" valign="top"><a id="a1c00927d24f9f46a92d67873854f2ebc" name="a1c00927d24f9f46a92d67873854f2ebc"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_vector_type</b> = ddc::DiscreteVector&lt; DDim &gt;</td></tr>
-<tr class="memdesc:a1c00927d24f9f46a92d67873854f2ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index step from one element of the basis to another. <br /></td></tr>
-<tr class="separator:a1c00927d24f9f46a92d67873854f2ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a408488bf707bb2678905cb845fc57765" id="r_a408488bf707bb2678905cb845fc57765"><td class="memItemLeft" align="right" valign="top"><a id="a408488bf707bb2678905cb845fc57765" name="a408488bf707bb2678905cb845fc57765"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_element_type</b> = Idx&lt; DDim &gt;</td></tr>
+<tr class="memdesc:a408488bf707bb2678905cb845fc57765"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index of an element of the basis. <br /></td></tr>
+<tr class="separator:a408488bf707bb2678905cb845fc57765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e3244ac6b9b4d1427b01bd0b9357bc" id="r_aa6e3244ac6b9b4d1427b01bd0b9357bc"><td class="memItemLeft" align="right" valign="top"><a id="aa6e3244ac6b9b4d1427b01bd0b9357bc" name="aa6e3244ac6b9b4d1427b01bd0b9357bc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_domain_type</b> = IdxRange&lt; DDim &gt;</td></tr>
+<tr class="memdesc:aa6e3244ac6b9b4d1427b01bd0b9357bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the index range of the basis. <br /></td></tr>
+<tr class="separator:aa6e3244ac6b9b4d1427b01bd0b9357bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87262d09f449e4b7a76ea38807a034fc" id="r_a87262d09f449e4b7a76ea38807a034fc"><td class="memItemLeft" align="right" valign="top"><a id="a87262d09f449e4b7a76ea38807a034fc" name="a87262d09f449e4b7a76ea38807a034fc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>discrete_vector_type</b> = IdxStep&lt; DDim &gt;</td></tr>
+<tr class="memdesc:a87262d09f449e4b7a76ea38807a034fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an index step from one element of the basis to another. <br /></td></tr>
+<tr class="separator:a87262d09f449e4b7a76ea38807a034fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -154,9 +154,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9472f9e52588af85652f93907a6a27a" id="r_aa9472f9e52588af85652f93907a6a27a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTriangularBernsteinPolynomialBasis_1_1Impl.html">Impl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTriangularBernsteinPolynomialBasis_1_1Impl.html#aa9472f9e52588af85652f93907a6a27a">operator=</a> (<a class="el" href="classTriangularBernsteinPolynomialBasis_1_1Impl.html">Impl</a> &amp;&amp;x)=default</td></tr>
 <tr class="memdesc:aa9472f9e52588af85652f93907a6a27a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assign the class.  <br /></td></tr>
 <tr class="separator:aa9472f9e52588af85652f93907a6a27a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99752cf66c5ac4c3ec9c2c1ec85c96ae" id="r_a99752cf66c5ac4c3ec9c2c1ec85c96ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTriangularBernsteinPolynomialBasis_1_1Impl.html#a99752cf66c5ac4c3ec9c2c1ec85c96ae">eval_basis</a> (ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt; values, ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;x) const</td></tr>
-<tr class="memdesc:a99752cf66c5ac4c3ec9c2c1ec85c96ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the basis at the given coordinate.  <br /></td></tr>
-<tr class="separator:a99752cf66c5ac4c3ec9c2c1ec85c96ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0e07fde6ca3d85eb5530591b80ff3c" id="r_a8b0e07fde6ca3d85eb5530591b80ff3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTriangularBernsteinPolynomialBasis_1_1Impl.html#a8b0e07fde6ca3d85eb5530591b80ff3c">eval_basis</a> (host_t&lt; DField&lt; IdxRange&lt; DDim &gt; &gt; &gt; values, Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;x) const</td></tr>
+<tr class="memdesc:a8b0e07fde6ca3d85eb5530591b80ff3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the basis at the given coordinate.  <br /></td></tr>
+<tr class="separator:a8b0e07fde6ca3d85eb5530591b80ff3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="structX.html">X</a>, class <a class="el" href="structY.html">Y</a>, class Corner1Tag, class Corner2Tag, class Corner3Tag, std::size_t D&gt;<br />
@@ -192,7 +192,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -402,8 +402,8 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 
 </div>
 </div>
-<a id="a99752cf66c5ac4c3ec9c2c1ec85c96ae" name="a99752cf66c5ac4c3ec9c2c1ec85c96ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99752cf66c5ac4c3ec9c2c1ec85c96ae">&#9670;&#160;</a></span>eval_basis()</h2>
+<a id="a8b0e07fde6ca3d85eb5530591b80ff3c" name="a8b0e07fde6ca3d85eb5530591b80ff3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b0e07fde6ca3d85eb5530591b80ff3c">&#9670;&#160;</a></span>eval_basis()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -415,13 +415,13 @@ template&lt;class DDim , class MemorySpace &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classTriangularBernsteinPolynomialBasis.html">TriangularBernsteinPolynomialBasis</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, Corner1Tag, Corner2Tag, Corner3Tag, D &gt;::Impl&lt; DDim, MemorySpace &gt;::eval_basis </td>
           <td>(</td>
-          <td class="paramtype">ddc::ChunkSpan&lt; double, ddc::DiscreteDomain&lt; DDim &gt; &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; DField&lt; IdxRange&lt; DDim &gt; &gt; &gt;&#160;</td>
           <td class="paramname"><em>values</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ddc::Coordinate&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;&#160;</td>
+          <td class="paramtype">Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>x</em>&#160;</td>
         </tr>
         <tr>
@@ -444,7 +444,7 @@ template&lt;class DDim , class MemorySpace &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="bernstein_8hpp_source.html">bernstein.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/<a class="el" href="bernstein_8hpp_source.html">bernstein.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

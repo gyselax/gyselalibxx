@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: GaussLegendre&lt; Dim &gt; Class Template Reference</title>
+<title>Gyselalib++: GaussLegendre&lt; GLGrid, NPoints &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,55 +107,269 @@ $(document).ready(function(){initNavTree('classGaussLegendre.html',''); initResi
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classGaussLegendre-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">GaussLegendre&lt; Dim &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">GaussLegendre&lt; GLGrid, NPoints &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>An operator for constructing a Gauss-Legendre quadrature.  
+ <a href="classGaussLegendre.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a058094377acb718af7e409fdb363918f" id="r_a058094377acb718af7e409fdb363918f"><td class="memItemLeft" align="right" valign="top"><a id="a058094377acb718af7e409fdb363918f" name="a058094377acb718af7e409fdb363918f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GaussLegendre</b> (std::size_t n)</td></tr>
-<tr class="separator:a058094377acb718af7e409fdb363918f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d2da08c2f7734b50cc71ea5e5c31b01" id="r_a7d2da08c2f7734b50cc71ea5e5c31b01"><td class="memItemLeft" align="right" valign="top"><a id="a7d2da08c2f7734b50cc71ea5e5c31b01" name="a7d2da08c2f7734b50cc71ea5e5c31b01"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GaussLegendre</b> (<a class="el" href="classGaussLegendre.html">GaussLegendre</a> const &amp;x)=default</td></tr>
-<tr class="separator:a7d2da08c2f7734b50cc71ea5e5c31b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa05d17a5ed14375874be2533f04f67fe" id="r_aa05d17a5ed14375874be2533f04f67fe"><td class="memItemLeft" align="right" valign="top"><a id="aa05d17a5ed14375874be2533f04f67fe" name="aa05d17a5ed14375874be2533f04f67fe"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GaussLegendre</b> (<a class="el" href="classGaussLegendre.html">GaussLegendre</a> &amp;&amp;x)=default</td></tr>
-<tr class="separator:aa05d17a5ed14375874be2533f04f67fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c6a5d0c278095db755975ee23e554af" id="r_a1c6a5d0c278095db755975ee23e554af"><td class="memItemLeft" align="right" valign="top"><a id="a1c6a5d0c278095db755975ee23e554af" name="a1c6a5d0c278095db755975ee23e554af"></a>
-<a class="el" href="classGaussLegendre.html">GaussLegendre</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classGaussLegendre.html">GaussLegendre</a> const &amp;x)=default</td></tr>
-<tr class="separator:a1c6a5d0c278095db755975ee23e554af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20c87aa66e71c21b433d9d23c8801320" id="r_a20c87aa66e71c21b433d9d23c8801320"><td class="memItemLeft" align="right" valign="top"><a id="a20c87aa66e71c21b433d9d23c8801320" name="a20c87aa66e71c21b433d9d23c8801320"></a>
-<a class="el" href="classGaussLegendre.html">GaussLegendre</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classGaussLegendre.html">GaussLegendre</a> &amp;&amp;x)=default</td></tr>
-<tr class="separator:a20c87aa66e71c21b433d9d23c8801320"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5386739833790deea724c6d1031d65" id="r_a6a5386739833790deea724c6d1031d65"><td class="memItemLeft" align="right" valign="top"><a id="a6a5386739833790deea724c6d1031d65" name="a6a5386739833790deea724c6d1031d65"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>order</b> () const</td></tr>
-<tr class="separator:a6a5386739833790deea724c6d1031d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6da1b38bbf3e322de468c6fef8ba8cc5" id="r_a6da1b38bbf3e322de468c6fef8ba8cc5"><td class="memTemplParams" colspan="2"><a id="a6da1b38bbf3e322de468c6fef8ba8cc5" name="a6da1b38bbf3e322de468c6fef8ba8cc5"></a>
-template&lt;class F &gt; </td></tr>
-<tr class="memitem:a6da1b38bbf3e322de468c6fef8ba8cc5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><b>integrate</b> (F &amp;&amp;f, double x0, double x1) const</td></tr>
-<tr class="separator:a6da1b38bbf3e322de468c6fef8ba8cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86e853a422e16eaacdd85b99b408de7a" id="r_a86e853a422e16eaacdd85b99b408de7a"><td class="memTemplParams" colspan="2"><a id="a86e853a422e16eaacdd85b99b408de7a" name="a86e853a422e16eaacdd85b99b408de7a"></a>
-template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a86e853a422e16eaacdd85b99b408de7a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>compute_points</b> (ddc::ChunkSpan&lt; ddc::Coordinate&lt; Dim &gt;, Domain &gt; points, double x0, double x1) const</td></tr>
-<tr class="separator:a86e853a422e16eaacdd85b99b408de7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fda7de5ce284406823b3d1d08b58b0b" id="r_a1fda7de5ce284406823b3d1d08b58b0b"><td class="memTemplParams" colspan="2"><a id="a1fda7de5ce284406823b3d1d08b58b0b" name="a1fda7de5ce284406823b3d1d08b58b0b"></a>
-template&lt;class Domain &gt; </td></tr>
-<tr class="memitem:a1fda7de5ce284406823b3d1d08b58b0b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>compute_points_and_weights</b> (ddc::ChunkSpan&lt; ddc::Coordinate&lt; Dim &gt;, Domain &gt; points, ddc::ChunkSpan&lt; double, Domain &gt; weights, ddc::Coordinate&lt; Dim &gt; const &amp;x0, ddc::Coordinate&lt; Dim &gt; const &amp;x1) const</td></tr>
-<tr class="separator:a1fda7de5ce284406823b3d1d08b58b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bc4af9e9415cf151196bc42991be6a6" id="r_a5bc4af9e9415cf151196bc42991be6a6"><td class="memTemplParams" colspan="2"><a id="a5bc4af9e9415cf151196bc42991be6a6" name="a5bc4af9e9415cf151196bc42991be6a6"></a>
-template&lt;class Domain1 , class Domain2 &gt; </td></tr>
-<tr class="memitem:a5bc4af9e9415cf151196bc42991be6a6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>compute_points_and_weights_on_mesh</b> (ddc::ChunkSpan&lt; ddc::Coordinate&lt; Dim &gt;, Domain1 &gt; points, ddc::ChunkSpan&lt; double, Domain1 &gt; weights, ddc::ChunkSpan&lt; const ddc::Coordinate&lt; Dim &gt;, Domain2 &gt; mesh_edges) const</td></tr>
-<tr class="separator:a5bc4af9e9415cf151196bc42991be6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95e7e25b98a2ccf293b2462b3817a84" id="r_ab95e7e25b98a2ccf293b2462b3817a84"><td class="memTemplParams" colspan="2">template&lt;class InputIt &gt; </td></tr>
+<tr class="memitem:ab95e7e25b98a2ccf293b2462b3817a84"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGaussLegendre.html#ab95e7e25b98a2ccf293b2462b3817a84">GaussLegendre</a> (InputIt mesh_edges_begin, InputIt mesh_edges_end)</td></tr>
+<tr class="memdesc:ab95e7e25b98a2ccf293b2462b3817a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor of the <a class="el" href="classGaussLegendre.html" title="An operator for constructing a Gauss-Legendre quadrature.">GaussLegendre</a> class.  <br /></td></tr>
+<tr class="separator:ab95e7e25b98a2ccf293b2462b3817a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb70874897c85fa6df64c91511e2d24e" id="r_abb70874897c85fa6df64c91511e2d24e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGaussLegendre.html#abb70874897c85fa6df64c91511e2d24e">GaussLegendre</a> (std::initializer_list&lt; Coord&lt; Dim &gt; &gt; const mesh_edges)</td></tr>
+<tr class="memdesc:abb70874897c85fa6df64c91511e2d24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor of the <a class="el" href="classGaussLegendre.html" title="An operator for constructing a Gauss-Legendre quadrature.">GaussLegendre</a> class.  <br /></td></tr>
+<tr class="separator:abb70874897c85fa6df64c91511e2d24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f220a3c718cd167fc78e412c734a3c2" id="r_a9f220a3c718cd167fc78e412c734a3c2"><td class="memTemplParams" colspan="2">template&lt;class Grid1D &gt; </td></tr>
+<tr class="memitem:a9f220a3c718cd167fc78e412c734a3c2"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGaussLegendre.html#a9f220a3c718cd167fc78e412c734a3c2">GaussLegendre</a> (ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; Grid1D &gt;, Kokkos::HostSpace &gt; mesh_edges)</td></tr>
+<tr class="memdesc:a9f220a3c718cd167fc78e412c734a3c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor of the <a class="el" href="classGaussLegendre.html" title="An operator for constructing a Gauss-Legendre quadrature.">GaussLegendre</a> class.  <br /></td></tr>
+<tr class="separator:a9f220a3c718cd167fc78e412c734a3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeeb0f98363b55a366f009b2fb77ed2f" id="r_aaeeb0f98363b55a366f009b2fb77ed2f"><td class="memItemLeft" align="right" valign="top">IdxRange&lt; GLGrid &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGaussLegendre.html#aaeeb0f98363b55a366f009b2fb77ed2f">get_idx_range</a> () const</td></tr>
+<tr class="memdesc:aaeeb0f98363b55a366f009b2fb77ed2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index range of the points of the Gauss-Legendre quadrature.  <br /></td></tr>
+<tr class="separator:aaeeb0f98363b55a366f009b2fb77ed2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a421cde58db551c40987077ee12b4e954" id="r_a421cde58db551c40987077ee12b4e954"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace &gt; </td></tr>
+<tr class="memitem:a421cde58db551c40987077ee12b4e954"><td class="memTemplItemLeft" align="right" valign="top">DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGaussLegendre.html#a421cde58db551c40987077ee12b4e954">gauss_legendre_coefficients</a> () const</td></tr>
+<tr class="memdesc:a421cde58db551c40987077ee12b4e954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature.  <br /></td></tr>
+<tr class="separator:a421cde58db551c40987077ee12b4e954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afd1e59d8585db0e77d43c1d65878010e" id="r_afd1e59d8585db0e77d43c1d65878010e"><td class="memItemLeft" align="right" valign="top"><a id="afd1e59d8585db0e77d43c1d65878010e" name="afd1e59d8585db0e77d43c1d65878010e"></a>
-static std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_order</b> ()</td></tr>
-<tr class="separator:afd1e59d8585db0e77d43c1d65878010e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24a562fa02d5517588d6c4b4daa8c171" id="r_a24a562fa02d5517588d6c4b4daa8c171"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGaussLegendre.html#a24a562fa02d5517588d6c4b4daa8c171">order</a> ()</td></tr>
+<tr class="memdesc:a24a562fa02d5517588d6c4b4daa8c171"><td class="mdescLeft">&#160;</td><td class="mdescRight">The order of the quadrature scheme.  <br /></td></tr>
+<tr class="separator:a24a562fa02d5517588d6c4b4daa8c171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class GLGrid, std::size_t NPoints&gt;<br />
+class GaussLegendre&lt; GLGrid, NPoints &gt;</div><p>An operator for constructing a Gauss-Legendre quadrature. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">GLGrid</td><td>The grid describing the Gauss-Legendre points. </td></tr>
+    <tr><td class="paramname">NPoints</td><td>The number of points in the Gauss-Legendre scheme </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab95e7e25b98a2ccf293b2462b3817a84" name="ab95e7e25b98a2ccf293b2462b3817a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95e7e25b98a2ccf293b2462b3817a84">&#9670;&#160;</a></span>GaussLegendre() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class GLGrid , std::size_t NPoints&gt; </div>
+<div class="memtemplate">
+template&lt;class InputIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGaussLegendre.html">GaussLegendre</a>&lt; GLGrid, NPoints &gt;<a class="el" href="classGaussLegendre.html">::GaussLegendre</a> </td>
+          <td>(</td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>mesh_edges_begin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>mesh_edges_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor of the <a class="el" href="classGaussLegendre.html" title="An operator for constructing a Gauss-Legendre quadrature.">GaussLegendre</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mesh_edges_begin</td><td>An iterator pointing to the first element in an iterable decscribing the edges of the cells on which the Gauss-Legendre quadrature is calculated. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mesh_edges_end</td><td>An iterator pointing to the end of an iterable decscribing the edges of the cells on which the Gauss-Legendre quadrature is calculated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abb70874897c85fa6df64c91511e2d24e" name="abb70874897c85fa6df64c91511e2d24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb70874897c85fa6df64c91511e2d24e">&#9670;&#160;</a></span>GaussLegendre() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class GLGrid , std::size_t NPoints&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGaussLegendre.html">GaussLegendre</a>&lt; GLGrid, NPoints &gt;<a class="el" href="classGaussLegendre.html">::GaussLegendre</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; Coord&lt; Dim &gt; &gt; const&#160;</td>
+          <td class="paramname"><em>mesh_edges</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor of the <a class="el" href="classGaussLegendre.html" title="An operator for constructing a Gauss-Legendre quadrature.">GaussLegendre</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mesh_edges</td><td>An initialiser list containing the edges of the cells on which the Gauss-Legendre quadrature is calculated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9f220a3c718cd167fc78e412c734a3c2" name="a9f220a3c718cd167fc78e412c734a3c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f220a3c718cd167fc78e412c734a3c2">&#9670;&#160;</a></span>GaussLegendre() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class GLGrid , std::size_t NPoints&gt; </div>
+<div class="memtemplate">
+template&lt;class Grid1D &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGaussLegendre.html">GaussLegendre</a>&lt; GLGrid, NPoints &gt;<a class="el" href="classGaussLegendre.html">::GaussLegendre</a> </td>
+          <td>(</td>
+          <td class="paramtype">ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; Grid1D &gt;, Kokkos::HostSpace &gt;&#160;</td>
+          <td class="paramname"><em>mesh_edges</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constructor of the <a class="el" href="classGaussLegendre.html" title="An operator for constructing a Gauss-Legendre quadrature.">GaussLegendre</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mesh_edges</td><td>A constant Field containing the edges of the cells on which the Gauss-Legendre quadrature is calculated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a24a562fa02d5517588d6c4b4daa8c171" name="a24a562fa02d5517588d6c4b4daa8c171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24a562fa02d5517588d6c4b4daa8c171">&#9670;&#160;</a></span>order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class GLGrid , std::size_t NPoints&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr std::size_t <a class="el" href="classGaussLegendre.html">GaussLegendre</a>&lt; GLGrid, NPoints &gt;::order </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The order of the quadrature scheme. </p>
+<dl class="section return"><dt>Returns</dt><dd>The order of the quadrature scheme. </dd></dl>
+
+</div>
+</div>
+<a id="aaeeb0f98363b55a366f009b2fb77ed2f" name="aaeeb0f98363b55a366f009b2fb77ed2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeeb0f98363b55a366f009b2fb77ed2f">&#9670;&#160;</a></span>get_idx_range()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class GLGrid , std::size_t NPoints&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IdxRange&lt; GLGrid &gt; <a class="el" href="classGaussLegendre.html">GaussLegendre</a>&lt; GLGrid, NPoints &gt;::get_idx_range </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the index range of the points of the Gauss-Legendre quadrature. </p>
+<dl class="section return"><dt>Returns</dt><dd>The index range where functions should be evaluated. </dd></dl>
+
+</div>
+</div>
+<a id="a421cde58db551c40987077ee12b4e954" name="a421cde58db551c40987077ee12b4e954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a421cde58db551c40987077ee12b4e954">&#9670;&#160;</a></span>gauss_legendre_coefficients()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class GLGrid , std::size_t NPoints&gt; </div>
+<div class="memtemplate">
+template&lt;class ExecSpace &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt; <a class="el" href="classGaussLegendre.html">GaussLegendre</a>&lt; GLGrid, NPoints &gt;::gauss_legendre_coefficients </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature. </p>
+<dl class="section return"><dt>Returns</dt><dd>The Gauss-Legendre quadrature. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/vendor/sll/include/sll/<a class="el" href="gauss__legendre__integration_8hpp_source.html">gauss_legendre_integration.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/<a class="el" href="gauss__legendre__integration_8hpp_source.html">gauss_legendre_integration.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
