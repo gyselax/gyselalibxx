@@ -42,16 +42,16 @@ public:
     };
 
 
-    using CoordR = ddc::Coordinate<R>;
-    using CoordTheta = ddc::Coordinate<Theta>;
-    using CoordRTheta = ddc::Coordinate<R, Theta>;
+    using CoordR = Coord<R>;
+    using CoordTheta = Coord<Theta>;
+    using CoordRTheta = Coord<R, Theta>;
 
     static int constexpr BSDegree = 3;
 
     struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
     {
     };
-    struct BSplinesP : ddc::NonUniformBSplines<Theta, BSDegree>
+    struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
     {
     };
 
@@ -60,8 +60,8 @@ public:
             BSplinesR,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE>;
-    using InterpPointsP = ddc::GrevilleInterpolationPoints<
-            BSplinesP,
+    using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
+            BSplinesTheta,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC>;
 
@@ -69,65 +69,57 @@ public:
     struct GridR : InterpPointsR::interpolation_discrete_dimension_type
     {
     };
-    struct GridP : InterpPointsP::interpolation_discrete_dimension_type
+    struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
     {
     };
 
 
-    using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
-    using BSIdxRangeP = ddc::DiscreteDomain<BSplinesP>;
-    using BSIdxRangeRP = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
+    using IdxR = Idx<GridR>;
+    using IdxTheta = Idx<GridTheta>;
+    using IdxRTheta = Idx<GridR, GridTheta>;
 
 
-    using IdxR = ddc::DiscreteElement<GridR>;
-    using IdxP = ddc::DiscreteElement<GridP>;
-    using IdxRP = ddc::DiscreteElement<GridR, GridP>;
+    using IdxStepR = IdxStep<GridR>;
+    using IdxStepTheta = IdxStep<GridTheta>;
+    using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 
 
-    using IdxStepR = ddc::DiscreteVector<GridR>;
-    using IdxStepP = ddc::DiscreteVector<GridP>;
-    using IdxStepRP = ddc::DiscreteVector<GridR, GridP>;
-
-
-    using IdxRangeR = ddc::DiscreteDomain<GridR>;
-    using IdxRangeP = ddc::DiscreteDomain<GridP>;
-    using IdxRangeRP = ddc::DiscreteDomain<GridR, GridP>;
+    using IdxRangeR = IdxRange<GridR>;
+    using IdxRangeTheta = IdxRange<GridTheta>;
+    using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
 
     using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
-            BSplinesP,
+            BSplinesTheta,
             GridR,
-            GridP,
+            GridTheta,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
             ddc::SplineSolver::LAPACK,
             GridR,
-            GridP>;
+            GridTheta>;
 
     using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
             BSplinesR,
-            BSplinesP,
+            BSplinesTheta,
             GridR,
-            GridP,
+            GridTheta,
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule,
             ddc::PeriodicExtrapolationRule<Theta>,
             ddc::PeriodicExtrapolationRule<Theta>,
             GridR,
-            GridP>;
+            GridTheta>;
 
 
-    using spline_idx_range = ddc::DiscreteDomain<BSplinesR, BSplinesP>;
-
-    template <class ElementType>
-    using FieldMemRP = ddc::Chunk<ElementType, IdxRangeRP>;
+    using spline_idx_range = IdxRange<BSplinesR, BSplinesTheta>;
 
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -160,16 +152,16 @@ public:
         CoordR const r_max(1.0);
         IdxStepR const r_size(Nr);
 
-        CoordTheta const p_min(0.0);
-        CoordTheta const p_max(2.0 * M_PI);
-        IdxStepP const p_size(Nt);
+        CoordTheta const theta_min(0.0);
+        CoordTheta const theta_max(2.0 * M_PI);
+        IdxStepTheta const theta_size(Nt);
 
         double const dr((r_max - r_min) / r_size);
-        double const dp((p_max - p_min) / p_size);
+        double const dtheta((theta_max - theta_min) / theta_size);
 
 
         std::vector<CoordR> r_knots(r_size + 1);
-        std::vector<CoordTheta> p_knots(p_size + 1);
+        std::vector<CoordTheta> theta_knots(theta_size + 1);
 
 
         r_knots[0] = r_min;
@@ -177,30 +169,31 @@ public:
             r_knots[i] = CoordR(r_min + i * dr);
         }
         r_knots[r_size] = r_max;
-        for (int i(0); i < p_size + 1; ++i) {
-            p_knots[i] = CoordTheta(p_min + i * dp);
+        for (int i(0); i < theta_size + 1; ++i) {
+            theta_knots[i] = CoordTheta(theta_min + i * dtheta);
         }
 
         // Creating mesh & supports
         ddc::init_discrete_space<BSplinesR>(r_knots);
-        ddc::init_discrete_space<BSplinesP>(p_knots);
+        ddc::init_discrete_space<BSplinesTheta>(theta_knots);
 
         ddc::init_discrete_space<GridR>(InterpPointsR::template get_sampling<GridR>());
-        ddc::init_discrete_space<GridP>(InterpPointsP::template get_sampling<GridP>());
+        ddc::init_discrete_space<GridTheta>(InterpPointsTheta::template get_sampling<GridTheta>());
 
         IdxRangeR interpolation_idx_range_R(InterpPointsR::template get_domain<GridR>());
-        IdxRangeP interpolation_idx_range_P(InterpPointsP::template get_domain<GridP>());
-        IdxRangeRP grid(interpolation_idx_range_R, interpolation_idx_range_P);
+        IdxRangeTheta interpolation_idx_range_Theta(
+                InterpPointsTheta::template get_domain<GridTheta>());
+        IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 
         // --- Define the operators. ----------------------------------------------------------------------
         SplineRThetaBuilder_host const builder(grid);
         ddc::NullExtrapolationRule r_extrapolation_rule;
-        ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+        ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
         SplineRThetaEvaluator spline_evaluator(
                 r_extrapolation_rule,
                 r_extrapolation_rule,
-                p_extrapolation_rule,
-                p_extrapolation_rule);
+                theta_extrapolation_rule,
+                theta_extrapolation_rule);
 
         Matrix_2x2 analytical_matrix;
         Matrix_2x2 discrete_matrix;

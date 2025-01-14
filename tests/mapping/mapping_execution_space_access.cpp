@@ -31,11 +31,11 @@ struct Theta
     static bool constexpr PERIODIC = true;
 };
 
-using CoordR = ddc::Coordinate<R>;
-using CoordTheta = ddc::Coordinate<Theta>;
-using CoordRTheta = ddc::Coordinate<R, Theta>;
+using CoordR = Coord<R>;
+using CoordTheta = Coord<Theta>;
+using CoordRTheta = Coord<R, Theta>;
 
-using CoordXY = ddc::Coordinate<X, Y>;
+using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegree = 3;
 
@@ -94,23 +94,23 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         GridR,
         GridTheta>;
 
-using IdxRangeBSR = ddc::DiscreteDomain<BSplinesR>;
-using IdxRangeBSTheta = ddc::DiscreteDomain<BSplinesTheta>;
-using IdxRangeBSRTheta = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
+using IdxRangeBSR = IdxRange<BSplinesR>;
+using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
+using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 
-using IdxRangeR = ddc::DiscreteDomain<GridR>;
-using IdxRangeTheta = ddc::DiscreteDomain<GridTheta>;
-using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
+using IdxRangeR = IdxRange<GridR>;
+using IdxRangeTheta = IdxRange<GridTheta>;
+using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
-using IdxR = ddc::DiscreteElement<GridR>;
-using IdxTheta = ddc::DiscreteElement<GridTheta>;
-using IdxRTheta = ddc::DiscreteElement<GridR, GridTheta>;
+using IdxR = Idx<GridR>;
+using IdxTheta = Idx<GridTheta>;
+using IdxRTheta = Idx<GridR, GridTheta>;
 
-using IdxStepR = ddc::DiscreteVector<GridR>;
-using IdxStepTheta = ddc::DiscreteVector<GridTheta>;
-using IdxStepRTheta = ddc::DiscreteVector<GridR, GridTheta>;
+using IdxStepR = IdxStep<GridR>;
+using IdxStepTheta = IdxStep<GridTheta>;
+using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 
-using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
+using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
 
 class MappingMemoryAccess : public ::testing::Test

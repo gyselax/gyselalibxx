@@ -5,6 +5,7 @@
 
 #include <sll/view.hpp>
 
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 // Pre-declaration of analytical inverse
@@ -49,9 +50,9 @@ public:
     using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
-    using CoordArg = ddc::Coordinate<X, Y>;
+    using CoordArg = Coord<X, Y>;
     /// The type of the result of the function described by this mapping
-    using CoordResult = ddc::Coordinate<R, Theta>;
+    using CoordResult = Coord<R, Theta>;
 
 public:
     CartesianToCircular() = default;
@@ -101,13 +102,13 @@ public:
      *
      * @return The equivalent coordinate.
      */
-    KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const
+    KOKKOS_FUNCTION Coord<R, Theta> operator()(Coord<X, Y> const& coord) const
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
         const double r = Kokkos::sqrt(x * x + y * y);
         const double theta = Kokkos::atan2(y, x);
-        return ddc::Coordinate<R, Theta>(r, theta);
+        return Coord<R, Theta>(r, theta);
     }
 
     /**
@@ -118,7 +119,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian(ddc::Coordinate<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian(Coord<X, Y> const& coord)
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
@@ -144,7 +145,7 @@ public:
      * @see Jacobian::jacobian_21
      * @see Jacobian::jacobian_22
      */
-    KOKKOS_FUNCTION void jacobian_matrix(ddc::Coordinate<X, Y> const& coord, Matrix_2x2& matrix)
+    KOKKOS_FUNCTION void jacobian_matrix(Coord<X, Y> const& coord, Matrix_2x2& matrix)
 
     {
         const double x = ddc::get<X>(coord);
@@ -166,7 +167,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_11(ddc::Coordinate<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian_11(Coord<X, Y> const& coord)
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
@@ -185,7 +186,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_12(ddc::Coordinate<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian_12(Coord<X, Y> const& coord)
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
@@ -203,7 +204,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_21(ddc::Coordinate<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian_21(Coord<X, Y> const& coord)
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
@@ -221,7 +222,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_22(ddc::Coordinate<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian_22(Coord<X, Y> const& coord)
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);

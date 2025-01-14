@@ -307,7 +307,7 @@ private:
         if constexpr (success) {
             return std::is_invocable_v<inverse_mapping<Type>, Type>;
         }
-        return success;
+        return false;
     }
 
 public:

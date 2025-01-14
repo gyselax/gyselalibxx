@@ -8,6 +8,7 @@
 
 #include <sll/view.hpp>
 
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 // Pre-declaration of analytical inverse
@@ -52,9 +53,9 @@ public:
     using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
-    using CoordArg = ddc::Coordinate<R, Theta>;
+    using CoordArg = Coord<R, Theta>;
     /// The type of the result of the function described by this mapping
-    using CoordResult = ddc::Coordinate<X, Y>;
+    using CoordResult = Coord<X, Y>;
 
 public:
     CircularToCartesian() = default;
@@ -104,13 +105,13 @@ public:
      *
      * @return The equivalent coordinate.
      */
-    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION Coord<X, Y> operator()(Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
         const double x = r * Kokkos::cos(theta);
         const double y = r * Kokkos::sin(theta);
-        return ddc::Coordinate<X, Y>(x, y);
+        return Coord<X, Y>(x, y);
     }
 
     /**
@@ -121,7 +122,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double jacobian(Coord<R, Theta> const& coord) const
     {
         double r = ddc::get<R>(coord);
         return r;
@@ -140,8 +141,7 @@ public:
      * @param[out] matrix
      * 				The Jacobian matrix returned.
      */
-    KOKKOS_FUNCTION void jacobian_matrix(ddc::Coordinate<R, Theta> const& coord, Matrix_2x2& matrix)
-            const
+    KOKKOS_FUNCTION void jacobian_matrix(Coord<R, Theta> const& coord, Matrix_2x2& matrix) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -162,7 +162,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_11(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double jacobian_11(Coord<R, Theta> const& coord) const
     {
         const double theta = ddc::get<Theta>(coord);
         return Kokkos::cos(theta);
@@ -179,7 +179,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_12(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double jacobian_12(Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -197,7 +197,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_21(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double jacobian_21(Coord<R, Theta> const& coord) const
     {
         const double theta = ddc::get<Theta>(coord);
         return Kokkos::sin(theta);
@@ -214,7 +214,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian_22(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double jacobian_22(Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -241,9 +241,7 @@ public:
      * @see Jacobian::inv_jacobian_21
      * @see Jacobian::inv_jacobian_22
      */
-    KOKKOS_FUNCTION void inv_jacobian_matrix(
-            ddc::Coordinate<R, Theta> const& coord,
-            Matrix_2x2& matrix) const
+    KOKKOS_FUNCTION void inv_jacobian_matrix(Coord<R, Theta> const& coord, Matrix_2x2& matrix) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -264,7 +262,7 @@ public:
      *
      * @return A double with the value of the (1,1) coefficient of the inverse Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_11(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double inv_jacobian_11(Coord<R, Theta> const& coord) const
     {
         const double theta = ddc::get<Theta>(coord);
         return Kokkos::cos(theta);
@@ -280,7 +278,7 @@ public:
      *
      * @return A double with the value of the (1,2) coefficient of the inverse Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_12(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double inv_jacobian_12(Coord<R, Theta> const& coord) const
     {
         const double theta = ddc::get<Theta>(coord);
         return Kokkos::sin(theta);
@@ -296,7 +294,7 @@ public:
      *
      * @return A double with the value of the (2,1) coefficient of the inverse Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_21(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double inv_jacobian_21(Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);
@@ -314,7 +312,7 @@ public:
      *
      * @return A double with the value of the (2,2) coefficient of the inverse Jacobian matrix.
      */
-    KOKKOS_FUNCTION double inv_jacobian_22(ddc::Coordinate<R, Theta> const& coord) const
+    KOKKOS_FUNCTION double inv_jacobian_22(Coord<R, Theta> const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double theta = ddc::get<Theta>(coord);

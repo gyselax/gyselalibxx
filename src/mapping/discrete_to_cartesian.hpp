@@ -7,6 +7,8 @@
 #include <sll/math_tools.hpp>
 #include <sll/view.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 /**
@@ -52,14 +54,14 @@ public:
     using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
-    using CoordArg = ddc::Coordinate<R, Theta>;
+    using CoordArg = Coord<R, Theta>;
     /// The type of the result of the function described by this mapping
-    using CoordResult = ddc::Coordinate<X, Y>;
+    using CoordResult = Coord<X, Y>;
 
 private:
-    using spline_idx_range = ddc::DiscreteDomain<BSplineR, BSplineTheta>;
+    using spline_idx_range = IdxRange<BSplineR, BSplineTheta>;
 
-    using SplineType = ddc::ChunkView<double, spline_idx_range, Kokkos::layout_right, MemorySpace>;
+    using SplineType = DConstField<spline_idx_range, MemorySpace>;
 
     using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
@@ -127,12 +129,12 @@ public:
      *
      * @see SplineEvaluator2D
      */
-    KOKKOS_FUNCTION ddc::Coordinate<X, Y> operator()(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+    KOKKOS_FUNCTION Coord<X, Y> operator()(
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        const double x = m_spline_evaluator(coord, m_x_spline_representation.span_cview());
-        const double y = m_spline_evaluator(coord, m_y_spline_representation.span_cview());
-        return ddc::Coordinate<X, Y>(x, y);
+        const double x = m_spline_evaluator(coord, get_const_field(m_x_spline_representation));
+        const double y = m_spline_evaluator(coord, get_const_field(m_y_spline_representation));
+        return Coord<X, Y>(x, y);
     }
 
     /**
@@ -149,17 +151,17 @@ public:
      * 				The Jacobian matrix returned.
      */
     KOKKOS_FUNCTION void jacobian_matrix(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
             Matrix_2x2& matrix) const
     {
         matrix[0][0]
-                = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
+                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
         matrix[0][1]
-                = m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
+                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));
         matrix[1][0]
-                = m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
+                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
         matrix[1][1]
-                = m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
+                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));
     }
 
     /**
@@ -179,9 +181,9 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_11(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        return m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
     }
 
     /**
@@ -201,9 +203,9 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_12(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        return m_spline_evaluator.deriv_dim_2(coord, m_x_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));
     }
 
     /**
@@ -223,9 +225,9 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_21(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        return m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
     }
 
     /**
@@ -245,9 +247,9 @@ public:
      * @see SplineEvaluator2D
      */
     KOKKOS_FUNCTION double jacobian_22(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        return m_spline_evaluator.deriv_dim_2(coord, m_y_spline_representation.span_cview());
+        return m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));
     }
 
     /**
@@ -259,7 +261,7 @@ public:
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
     KOKKOS_FUNCTION double jacobian(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         Matrix_2x2 J;
         jacobian_matrix(coord, J);
@@ -281,17 +283,17 @@ public:
      * @return The first order expansion of the Jacobian matrix with the theta component divided by r.
      */
     KOKKOS_INLINE_FUNCTION Matrix_2x2 first_order_jacobian_matrix_r_rtheta(
-            ddc::Coordinate<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
+            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
         Matrix_2x2 matrix;
         matrix[0][0]
-                = m_spline_evaluator.deriv_dim_1(coord, m_x_spline_representation.span_cview());
-        matrix[0][1]
-                = m_spline_evaluator.deriv_1_and_2(coord, m_x_spline_representation.span_cview());
+                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
+        matrix[0][1] = m_spline_evaluator
+                               .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
         matrix[1][0]
-                = m_spline_evaluator.deriv_dim_1(coord, m_y_spline_representation.span_cview());
-        matrix[1][1]
-                = m_spline_evaluator.deriv_1_and_2(coord, m_y_spline_representation.span_cview());
+                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
+        matrix[1][1] = m_spline_evaluator
+                               .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
         return matrix;
     }
 
@@ -333,10 +335,10 @@ public:
      * @see GrevilleInterpolationPoints
      * @see KnotsAsInterpolationPoints
      */
-    KOKKOS_INLINE_FUNCTION const ddc::Coordinate<X, Y> control_point(
-            ddc::DiscreteElement<BSplineR, BSplineTheta> const& el) const
+    KOKKOS_INLINE_FUNCTION const Coord<X, Y> control_point(
+            Idx<BSplineR, BSplineTheta> const& el) const
     {
-        return ddc::Coordinate<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
+        return Coord<X, Y>(m_x_spline_representation(el), m_y_spline_representation(el));
     }
 };
 

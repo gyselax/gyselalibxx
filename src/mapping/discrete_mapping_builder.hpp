@@ -4,6 +4,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "discrete_to_cartesian.hpp"
 
 /**
@@ -25,7 +27,7 @@ class DiscreteToCartesianBuilder
     static_assert(std::is_same_v<
                   typename SplineBuilder::exec_space,
                   typename SplineEvaluator::exec_space>);
-    static_assert(std::is_same_v<typename SplineBuilder::batch_domain_type, ddc::DiscreteDomain<>>);
+    static_assert(std::is_same_v<typename SplineBuilder::batch_domain_type, IdxRange<>>);
 
 public:
     /// The type of the mapping that will be created.
@@ -41,17 +43,15 @@ private:
     using GridR = typename SplineBuilder::interpolation_domain_type1;
     using GridTheta = typename SplineBuilder::interpolation_domain_type2;
 
-    using IdxRangeSplines = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
+    using IdxRangeSplines = IdxRange<BSplinesR, BSplinesTheta>;
     using IdxRangeInterpolationPoints = typename SplineBuilder::interpolation_domain_type;
     using IdxInterpolationPoints = typename IdxRangeInterpolationPoints::discrete_element_type;
 
-    using SplineCoeffsMem
-            = ddc::Chunk<double, IdxRangeSplines, ddc::KokkosAllocator<double, MemorySpace>>;
+    using SplineCoeffsMem = DFieldMem<IdxRangeSplines, MemorySpace>;
 
     using SplineCoeffs = typename SplineCoeffsMem::span_type;
 
-    using InterpolationFieldMem = ddc::
-            Chunk<double, IdxRangeInterpolationPoints, ddc::KokkosAllocator<double, MemorySpace>>;
+    using InterpolationFieldMem = DFieldMem<IdxRangeInterpolationPoints, MemorySpace>;
 
     using InterpolationField = typename InterpolationFieldMem::span_type;
 
@@ -59,7 +59,7 @@ private:
     SplineCoeffsMem m_curvilinear_to_x_spline_alloc;
     SplineCoeffsMem m_curvilinear_to_y_spline_alloc;
     SplineEvaluator m_evaluator;
-    ddc::DiscreteDomain<GridR, GridTheta> m_idx_range_singular_point;
+    IdxRange<GridR, GridTheta> m_idx_range_singular_point;
 
 public:
     /**
@@ -76,16 +76,16 @@ public:
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator)
-        : m_curvilinear_to_x_spline_alloc(builder.spline_domain())
-        , m_curvilinear_to_y_spline_alloc(builder.spline_domain())
+        : m_curvilinear_to_x_spline_alloc(get_spline_idx_range(builder))
+        , m_curvilinear_to_y_spline_alloc(get_spline_idx_range(builder))
         , m_evaluator(evaluator)
     {
-        SplineCoeffs curvilinear_to_x_spline = m_curvilinear_to_x_spline_alloc.span_view();
-        SplineCoeffs curvilinear_to_y_spline = m_curvilinear_to_y_spline_alloc.span_view();
+        SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
+        SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
         InterpolationFieldMem curvilinear_to_x_vals_alloc(builder.interpolation_domain());
         InterpolationFieldMem curvilinear_to_y_vals_alloc(builder.interpolation_domain());
-        InterpolationField curvilinear_to_x_vals = curvilinear_to_x_vals_alloc.span_view();
-        InterpolationField curvilinear_to_y_vals = curvilinear_to_y_vals_alloc.span_view();
+        InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
+        InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
         set_curvilinear_to_cartesian_values(
                 curvilinear_to_x_vals,
@@ -93,11 +93,11 @@ public:
                 analytical_mapping,
                 builder.interpolation_domain());
 
-        builder(curvilinear_to_x_spline.span_view(), curvilinear_to_x_vals.span_cview());
-        builder(curvilinear_to_y_spline.span_view(), curvilinear_to_y_vals.span_cview());
+        builder(get_field(curvilinear_to_x_spline), get_const_field(curvilinear_to_x_vals));
+        builder(get_field(curvilinear_to_y_spline), get_const_field(curvilinear_to_y_vals));
 
-        ddc::DiscreteDomain<GridR, GridTheta> interp_domain(builder.interpolation_domain());
-        ddc::DiscreteVector<GridR, GridTheta>
+        IdxRange<GridR, GridTheta> interp_domain(builder.interpolation_domain());
+        IdxStep<GridR, GridTheta>
                 n_points_singular_domain(1, interp_domain.template extent<GridTheta>().value());
         m_idx_range_singular_point = interp_domain.take_first(n_points_singular_domain);
     }
@@ -110,8 +110,8 @@ public:
     DiscreteToCartesian<X, Y, SplineEvaluator> operator()() const
     {
         return DiscreteToCartesian<X, Y, SplineEvaluator>(
-                m_curvilinear_to_x_spline_alloc.span_cview(),
-                m_curvilinear_to_y_spline_alloc.span_cview(),
+                get_const_field(m_curvilinear_to_x_spline_alloc),
+                get_const_field(m_curvilinear_to_y_spline_alloc),
                 m_evaluator,
                 m_idx_range_singular_point);
     }
@@ -135,10 +135,10 @@ public:
             Mapping const& analytical_mapping,
             IdxRangeInterpolationPoints const& interpolation_idx_range)
     {
-        using CurvilinearCoeff = ddc::Coordinate<
-                typename Mapping::curvilinear_tag_r,
-                typename Mapping::curvilinear_tag_theta>;
-        using CartesianCoeff = ddc::Coordinate<X, Y>;
+        using CurvilinearCoeff
+                = Coord<typename Mapping::curvilinear_tag_r,
+                        typename Mapping::curvilinear_tag_theta>;
+        using CartesianCoeff = Coord<X, Y>;
 
         ddc::parallel_for_each(
                 ExecSpace(),
@@ -293,17 +293,15 @@ private:
             GridRRefined,
             GridThetaRefined>;
 
-    using IdxRangeSplines = ddc::DiscreteDomain<BSplinesRRefined, BSplinesThetaRefined>;
-    using IdxRangeInterpolationPoints = ddc::DiscreteDomain<GridRRefined, GridThetaRefined>;
+    using IdxRangeSplines = IdxRange<BSplinesRRefined, BSplinesThetaRefined>;
+    using IdxRangeInterpolationPoints = IdxRange<GridRRefined, GridThetaRefined>;
     using IdxInterpolationPoints = typename IdxRangeInterpolationPoints::discrete_element_type;
 
-    using SplineCoeffsMem
-            = ddc::Chunk<double, IdxRangeSplines, ddc::KokkosAllocator<double, MemorySpace>>;
+    using SplineCoeffsMem = DFieldMem<IdxRangeSplines, MemorySpace>;
 
     using SplineCoeffs = typename SplineCoeffsMem::span_type;
 
-    using InterpolationFieldMem = ddc::
-            Chunk<double, IdxRangeInterpolationPoints, ddc::KokkosAllocator<double, MemorySpace>>;
+    using InterpolationFieldMem = DFieldMem<IdxRangeInterpolationPoints, MemorySpace>;
 
     using InterpolationField = typename InterpolationFieldMem::span_type;
 
@@ -315,7 +313,7 @@ private:
     SplineCoeffsMem m_curvilinear_to_x_spline_alloc;
     SplineCoeffsMem m_curvilinear_to_y_spline_alloc;
     RefinedSplineEvaluator m_evaluator;
-    ddc::DiscreteDomain<GridRRefined, GridThetaRefined> m_idx_range_singular_point;
+    IdxRange<GridRRefined, GridThetaRefined> m_idx_range_singular_point;
 
 public:
     /**
@@ -338,8 +336,8 @@ public:
                 evaluator.lower_extrapolation_rule_dim_2(),
                 evaluator.upper_extrapolation_rule_dim_2())
     {
-        using CoordR = ddc::Coordinate<R>;
-        using CoordTheta = ddc::Coordinate<Theta>;
+        using CoordR = Coord<R>;
+        using CoordTheta = Coord<Theta>;
 
         const CoordR r_min = ddc::discrete_space<BSplinesROriginal>().rmin();
         const CoordR r_max = ddc::discrete_space<BSplinesROriginal>().rmax();
@@ -347,8 +345,8 @@ public:
         const CoordTheta theta_min = ddc::discrete_space<BSplinesThetaOriginal>().rmin();
         const CoordTheta theta_max = ddc::discrete_space<BSplinesThetaOriginal>().rmax();
 
-        ddc::DiscreteVector<BSplinesRRefined> const r_ncells_idx_step(ncells_r);
-        ddc::DiscreteVector<BSplinesThetaRefined> const theta_ncells_idx_step(ncells_theta);
+        IdxStep<BSplinesRRefined> const r_ncells_idx_step(ncells_r);
+        IdxStep<BSplinesThetaRefined> const theta_ncells_idx_step(ncells_theta);
 
         if constexpr (BSplinesRRefined::is_uniform()) {
             ddc::init_discrete_space<BSplinesRRefined>(r_min, r_max, r_ncells_idx_step);
@@ -377,14 +375,14 @@ public:
         ddc::init_discrete_space<GridThetaRefined>(
                 GrevillePointsTheta::template get_sampling<GridThetaRefined>());
 
-        ddc::DiscreteDomain<GridRRefined> const interpolation_domain_r(
+        IdxRange<GridRRefined> const interpolation_domain_r(
                 GrevillePointsR::template get_domain<GridRRefined>());
-        ddc::DiscreteDomain<GridThetaRefined> const interpolation_domain_theta(
+        IdxRange<GridThetaRefined> const interpolation_domain_theta(
                 GrevillePointsTheta::template get_domain<GridThetaRefined>());
-        ddc::DiscreteDomain<GridRRefined, GridThetaRefined> const
+        IdxRange<GridRRefined, GridThetaRefined> const
                 refined_domain(interpolation_domain_r, interpolation_domain_theta);
 
-        ddc::DiscreteVector<GridRRefined, GridThetaRefined> n_points_singular_domain(
+        IdxStep<GridRRefined, GridThetaRefined> n_points_singular_domain(
                 1,
                 refined_domain.template extent<GridThetaRefined>().value());
         m_idx_range_singular_point = refined_domain.take_first(n_points_singular_domain);
@@ -392,18 +390,18 @@ public:
         // Operators on the refined grid
         RefinedSplineBuilder refined_builder(refined_domain);
 
-        ddc::DiscreteDomain<BSplinesRRefined, BSplinesThetaRefined> const spline_domain
-                = refined_builder.spline_domain();
+        IdxRange<BSplinesRRefined, BSplinesThetaRefined> const spline_domain
+                = get_spline_idx_range(refined_builder);
 
         // Compute the B-splines coefficients of the analytical mapping
         m_curvilinear_to_x_spline_alloc = SplineCoeffsMem(spline_domain);
         m_curvilinear_to_y_spline_alloc = SplineCoeffsMem(spline_domain);
-        SplineCoeffs curvilinear_to_x_spline = m_curvilinear_to_x_spline_alloc.span_view();
-        SplineCoeffs curvilinear_to_y_spline = m_curvilinear_to_y_spline_alloc.span_view();
+        SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
+        SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
         InterpolationFieldMem curvilinear_to_x_vals_alloc(refined_domain);
         InterpolationFieldMem curvilinear_to_y_vals_alloc(refined_domain);
-        InterpolationField curvilinear_to_x_vals = curvilinear_to_x_vals_alloc.span_view();
-        InterpolationField curvilinear_to_y_vals = curvilinear_to_y_vals_alloc.span_view();
+        InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
+        InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
         set_curvilinear_to_cartesian_values(
                 curvilinear_to_x_vals,
@@ -411,8 +409,8 @@ public:
                 analytical_mapping,
                 refined_builder.interpolation_domain());
 
-        refined_builder(curvilinear_to_x_spline, curvilinear_to_x_vals.span_cview());
-        refined_builder(curvilinear_to_y_spline, curvilinear_to_y_vals.span_cview());
+        refined_builder(curvilinear_to_x_spline, get_const_field(curvilinear_to_x_vals));
+        refined_builder(curvilinear_to_y_spline, get_const_field(curvilinear_to_y_vals));
     }
 
     /**
@@ -423,8 +421,8 @@ public:
     DiscreteToCartesian<X, Y, RefinedSplineEvaluator> operator()() const
     {
         return DiscreteToCartesian<X, Y, RefinedSplineEvaluator>(
-                m_curvilinear_to_x_spline_alloc.span_cview(),
-                m_curvilinear_to_y_spline_alloc.span_cview(),
+                get_const_field(m_curvilinear_to_x_spline_alloc),
+                get_const_field(m_curvilinear_to_y_spline_alloc),
                 m_evaluator,
                 m_idx_range_singular_point);
     }
@@ -448,10 +446,10 @@ public:
             Mapping const& analytical_mapping,
             IdxRangeInterpolationPoints const& interpolation_idx_range)
     {
-        using CurvilinearCoeff = ddc::Coordinate<
-                typename Mapping::curvilinear_tag_r,
-                typename Mapping::curvilinear_tag_theta>;
-        using CartesianCoeff = ddc::Coordinate<X, Y>;
+        using CurvilinearCoeff
+                = Coord<typename Mapping::curvilinear_tag_r,
+                        typename Mapping::curvilinear_tag_theta>;
+        using CartesianCoeff = Coord<X, Y>;
 
         ddc::parallel_for_each(
                 ExecSpace(),

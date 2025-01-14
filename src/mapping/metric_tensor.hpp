@@ -4,6 +4,7 @@
 
 #include <sll/view.hpp>
 
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 /**
@@ -30,7 +31,7 @@ public:
      *
      * @param[in] mapping The mapping which can be used to calculate the Jacobian.
      */
-    KOKKOS_FUNCTION MetricTensor(Mapping mapping) : m_mapping(mapping) {}
+    explicit KOKKOS_FUNCTION MetricTensor(Mapping mapping) : m_mapping(mapping) {}
 
     /**
      * @brief Compute the metric tensor assignd to the mapping.

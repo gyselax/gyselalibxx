@@ -3,6 +3,7 @@
 
 #include <sll/view.hpp>
 
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 /**

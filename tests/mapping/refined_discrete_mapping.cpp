@@ -10,6 +10,7 @@
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
 #include "czarny_to_cartesian.hpp"
+#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "inv_jacobian_o_point.hpp"
@@ -38,11 +39,11 @@ struct Theta
     static bool constexpr PERIODIC = true;
 };
 
-using CoordR = ddc::Coordinate<R>;
-using CoordTheta = ddc::Coordinate<Theta>;
-using CoordRTheta = ddc::Coordinate<R, Theta>;
+using CoordR = Coord<R>;
+using CoordTheta = Coord<Theta>;
+using CoordRTheta = Coord<R, Theta>;
 
-using CoordXY = ddc::Coordinate<X, Y>;
+using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegree = 3;
 
@@ -97,42 +98,28 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         GridR,
         GridTheta>;
 
-using BSIdxRangeR = ddc::DiscreteDomain<BSplinesR>;
-using BSIdxRangeTheta = ddc::DiscreteDomain<BSplinesTheta>;
-using BSIdxRangeRTheta = ddc::DiscreteDomain<BSplinesR, BSplinesTheta>;
+using IdxRangeR = IdxRange<GridR>;
+using IdxRangeTheta = IdxRange<GridTheta>;
+using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
-using IdxRangeR = ddc::DiscreteDomain<GridR>;
-using IdxRangeTheta = ddc::DiscreteDomain<GridTheta>;
-using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
+using IdxR = Idx<GridR>;
+using IdxTheta = Idx<GridTheta>;
+using IdxRTheta = Idx<GridR, GridTheta>;
 
-using IdxR = ddc::DiscreteElement<GridR>;
-using IdxTheta = ddc::DiscreteElement<GridTheta>;
-using IdxRTheta = ddc::DiscreteElement<GridR, GridTheta>;
-
-using IdxStepR = ddc::DiscreteVector<GridR>;
-using IdxStepTheta = ddc::DiscreteVector<GridTheta>;
-using IdxStepRTheta = ddc::DiscreteVector<GridR, GridTheta>;
+using IdxStepR = IdxStep<GridR>;
+using IdxStepTheta = IdxStep<GridTheta>;
+using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 
 template <class ElementType>
-using FieldMemR = ddc::Chunk<ElementType, IdxRangeR>;
-
-template <class ElementType>
-using FieldMemTheta = ddc::Chunk<ElementType, IdxRangeTheta>;
-
-template <class ElementType>
-using FieldMemRTheta = ddc::Chunk<ElementType, IdxRangeRTheta>;
+using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
 
 
 
-using IdxRangeRTheta = ddc::DiscreteDomain<GridR, GridTheta>;
+using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
 
 using CzarnyMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CircularMapping = CircularToCartesian<R, Theta, X, Y>;
-
-
-template <class ElementType>
-using FieldMemRTheta = ddc::Chunk<ElementType, IdxRangeRTheta>;
 
 using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -198,7 +185,7 @@ double check_value_not_on_grid(
 {
     std::srand(100);
 
-    FieldMemRTheta<CoordRTheta> coords(idx_range);
+    FieldMemRTheta_host<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
     IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
     ddc::for_each(idx_range, [&](IdxRTheta const irp) {
@@ -206,7 +193,7 @@ double check_value_not_on_grid(
         CoordR coord_r_0 = ddc::coordinate(ir);
         CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
-        if (ir.uid() < ir_max.uid()) {
+        if (ir < ir_max) {
             double factor = double(std::rand()) / RAND_MAX;
             coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
@@ -217,7 +204,7 @@ double check_value_not_on_grid(
         CoordTheta coord_theta_0 = ddc::coordinate(ip);
         CoordTheta coord_theta_1 = ddc::coordinate(ip + 1);
         double coord_theta;
-        if (ip.uid() < itheta_max.uid()) {
+        if (ip < itheta_max) {
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
@@ -347,7 +334,7 @@ double check_Jacobian_not_on_grid(
 {
     std::srand(100);
 
-    FieldMemRTheta<CoordRTheta> coords(idx_range);
+    FieldMemRTheta_host<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
     IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
     ddc::for_each(idx_range, [&](IdxRTheta const irp) {
@@ -355,7 +342,7 @@ double check_Jacobian_not_on_grid(
         CoordR coord_r_0 = ddc::coordinate(ir);
         CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
-        if (ir.uid() < ir_max.uid()) {
+        if (ir < ir_max) {
             double factor = double(std::rand()) / RAND_MAX;
             coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
@@ -366,7 +353,7 @@ double check_Jacobian_not_on_grid(
         CoordTheta coord_theta_0 = ddc::coordinate(ip);
         CoordTheta coord_theta_1 = ddc::coordinate(ip + 1);
         double coord_theta;
-        if (ip.uid() < itheta_max.uid()) {
+        if (ip < itheta_max) {
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {

@@ -3,6 +3,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 /**
@@ -23,10 +24,10 @@ class CartesianToBarycentric
 {
 public:
     /// The type of a coordinate in the barycentric coordinate system.
-    using CoordResult = ddc::Coordinate<Corner1Tag, Corner2Tag, Corner3Tag>;
+    using CoordResult = Coord<Corner1Tag, Corner2Tag, Corner3Tag>;
 
     /// The type of a coordinate in the cartesian coordinate system.
-    using CoordArg = ddc::Coordinate<X, Y>;
+    using CoordArg = Coord<X, Y>;
 
 private:
     using CartesianCoord = CoordArg;

@@ -5,6 +5,7 @@
 
 #include <sll/view.hpp>
 
+#include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 
 // Pre-declaration of analytical inverse
@@ -36,9 +37,9 @@ public:
     using curvilinear_tag_theta = Theta;
 
     /// The type of the argument of the function described by this mapping
-    using CoordArg = ddc::Coordinate<X, Y>;
+    using CoordArg = Coord<X, Y>;
     /// The type of the result of the function described by this mapping
-    using CoordResult = ddc::Coordinate<R, Theta>;
+    using CoordResult = Coord<R, Theta>;
 
 private:
     double m_epsilon;
@@ -131,7 +132,7 @@ public:
      *
      * @return The equivalent coordinate.
      */
-    KOKKOS_FUNCTION ddc::Coordinate<R, Theta> operator()(ddc::Coordinate<X, Y> const& coord) const
+    KOKKOS_FUNCTION Coord<R, Theta> operator()(Coord<X, Y> const& coord) const
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
@@ -144,7 +145,7 @@ public:
         if (theta < 0) {
             theta = 2 * M_PI + theta;
         }
-        return ddc::Coordinate<R, Theta>(r, theta);
+        return Coord<R, Theta>(r, theta);
     }
 
     /**

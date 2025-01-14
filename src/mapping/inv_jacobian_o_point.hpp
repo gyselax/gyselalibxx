@@ -42,10 +42,10 @@ class InvJacobianOPoint<
         CombinedMapping<
                 CircularToCartesian<R, Theta, X, Y>,
                 CartesianToCircular<Xpc, Ypc, R, Theta>>,
-        ddc::Coordinate<R, Theta>>
+        Coord<R, Theta>>
 {
     /// The coordinate system in which the inverse of the Jacobian is calculated.
-    using CoordRTheta = ddc::Coordinate<R, Theta>;
+    using CoordRTheta = Coord<R, Theta>;
 
 private:
     using Mapping = CombinedMapping<
@@ -96,10 +96,10 @@ public:
 template <class X, class Y, class R, class Theta, class Xpc, class Ypc>
 class InvJacobianOPoint<
         CombinedMapping<CzarnyToCartesian<R, Theta, X, Y>, CartesianToCircular<Xpc, Ypc, R, Theta>>,
-        ddc::Coordinate<R, Theta>>
+        Coord<R, Theta>>
 {
     /// The coordinate system in which the inverse of the Jacobian is calculated.
-    using CoordRTheta = ddc::Coordinate<R, Theta>;
+    using CoordRTheta = Coord<R, Theta>;
 
 private:
     using Mapping = CombinedMapping<
@@ -163,10 +163,10 @@ class InvJacobianOPoint<
         CombinedMapping<
                 DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
                 CartesianToCircular<Xpc, Ypc, R, Theta>>,
-        ddc::Coordinate<R, Theta>>
+        Coord<R, Theta>>
 {
     /// The coordinate system in which the inverse of the Jacobian is calculated.
-    using CoordRTheta = ddc::Coordinate<R, Theta>;
+    using CoordRTheta = Coord<R, Theta>;
 
 private:
     using Mapping = CombinedMapping<
@@ -175,6 +175,7 @@ private:
 
     using IdxRangeR = typename SplineEvaluator::evaluation_domain_type1;
     using IdxRangeTheta = typename SplineEvaluator::evaluation_domain_type2;
+    using IdxRangeRTheta = typename SplineEvaluator::evaluation_domain_type;
     using IdxR = typename IdxRangeR::discrete_element_type;
     using IdxTheta = typename IdxRangeTheta::discrete_element_type;
 
@@ -236,11 +237,11 @@ public:
         J[0][1] = 0;
         J[1][0] = 0;
         J[1][1] = 0;
-        ddc::DiscreteDomain idx_range_singular_point = discrete_mapping.idx_range_singular_point();
+        IdxRangeRTheta idx_range_singular_point = discrete_mapping.idx_range_singular_point();
         // Average the values at (r = 0, theta):
         IdxR ir(idx_range_singular_point.front());
         for (IdxTheta ip : IdxRangeTheta(idx_range_singular_point)) {
-            ddc::Coordinate<R, Theta> coord(ddc::coordinate(ir), ddc::coordinate(ip));
+            Coord<R, Theta> coord(ddc::coordinate(ir), ddc::coordinate(ip));
             Matrix_2x2 J_first_order = discrete_mapping.first_order_jacobian_matrix_r_rtheta(coord);
 
             double th = ddc::get<Theta>(coord);
