@@ -5,25 +5,17 @@ project(SLL CXX)
 option(SLL_BUILD_TESTING "Build sll tests" ON)
 
 ## The library itself
-add_library(SLL STATIC
-    src/gauss_legendre_integration.cpp
-)
-target_compile_features(SLL PUBLIC cxx_std_17)
+add_library(SLL INTERFACE)
 target_include_directories(SLL
-    PUBLIC
+    INTERFACE
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
 )
 target_link_libraries(SLL
-    PUBLIC
+    INTERFACE
         DDC::core
         DDC::splines
         Kokkos::kokkos
 )
-if(CMAKE_VERSION GREATER_EQUAL 3.18)
-    target_link_libraries(SLL PRIVATE LAPACK::LAPACK)
-else()
-    target_link_libraries(SLL PRIVATE ${LAPACK_LIBRARIES})
-endif()
 add_library(sll::SLL ALIAS SLL)
 
 ## if tests are enabled, build the tests in `tests/`

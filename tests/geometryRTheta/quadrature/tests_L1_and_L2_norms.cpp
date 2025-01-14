@@ -1,6 +1,5 @@
 #include <ddc/ddc.hpp>
 
-#include <sll/gauss_legendre_integration.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/mapping/czarny_to_cartesian.hpp>
 #include <sll/mapping/discrete_mapping_builder.hpp>

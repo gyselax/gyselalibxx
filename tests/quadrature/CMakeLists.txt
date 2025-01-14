@@ -5,6 +5,7 @@ add_executable(unit_tests_quadrature
     quadrature_2d.cpp
 	neumann_quadrature_spline.cpp
     batched_quadrature.cpp
+    gauss_legendre_integration.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_quadrature
@@ -18,6 +19,7 @@ target_link_libraries(unit_tests_quadrature
         gslx::quadrature
         gslx::utils
 )
+target_include_directories(unit_tests_quadrature PRIVATE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/..")
 gtest_discover_tests(unit_tests_quadrature
         DISCOVERY_MODE PRE_TEST)
 target_compile_definitions(unit_tests_quadrature PUBLIC)

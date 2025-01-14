@@ -3,10 +3,10 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/gauss_legendre_integration.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "gauss_legendre_integration.hpp"
 #include "ipoisson_solver.hpp"
 #include "matrix.hpp"
 
@@ -215,32 +215,20 @@ public:
         : m_spline_builder(spline_builder)
         , m_spline_evaluator(spline_evaluator)
         , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))
-        , m_quad_coef(IdxRangeQ(
-                  IdxQ(0),
-                  IdxStepQ(s_npts_gauss * ddc::discrete_space<InputBSplines>().ncells())))
     {
         using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
         IdxRange<break_point_grid> break_point_idx_range
                 = ddc::discrete_space<InputBSplines>().break_point_domain();
-        host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points(
+        host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
                 break_point_idx_range);
-
-        for (Idx<break_point_grid> const idx : break_point_idx_range) {
-            break_points(idx) = ddc::coordinate(idx);
-        }
+        ddcHelper::dump_coordinates(
+                Kokkos::DefaultHostExecutionSpace(),
+                get_field(break_points_alloc));
 
         // Calculate the integration coefficients
-        GaussLegendre<PDEDim> const gl(s_npts_gauss);
-        std::vector<CoordPDEDim> eval_pts_data(get_idx_range(m_quad_coef).size());
-        host_t<CoordQField> const eval_pts(eval_pts_data.data(), get_idx_range(m_quad_coef));
-        auto quad_coef_host = ddc::create_mirror_and_copy(get_field(m_quad_coef));
-        gl.compute_points_and_weights_on_mesh(
-                eval_pts,
-                get_field(quad_coef_host),
-                get_const_field(break_points));
-        ddc::parallel_deepcopy(m_quad_coef, quad_coef_host);
+        GaussLegendre<GridPDEDimQ, s_npts_gauss> const gl(get_const_field(break_points_alloc));
+        m_quad_coef = gl.template gauss_legendre_coefficients<memory_space>();
 
-        ddc::init_discrete_space<GridPDEDimQ>(eval_pts_data);
         // Build the finite elements matrix
         if constexpr (InputBSplines::is_periodic()) {
             build_periodic_matrix();

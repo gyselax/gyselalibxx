@@ -2,7 +2,6 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/gauss_legendre_integration.hpp>
 #include <sll/mapping/circular_to_cartesian.hpp>
 #include <sll/math_tools.hpp>
 

@@ -147,15 +147,35 @@ KOKKOS_INLINE_FUNCTION void restrict_to_bspline_domain(
  * @param[out] dump_coord The span which will contain the coordinates.
  * @param[in] sampler The domain indicating the coordinates.
  */
-template <class ExecSpace, class Dim, class Layout, class MemorySpace>
+template <class ExecSpace, class Grid1D, class Layout, class MemorySpace>
 inline void dump_coordinates(
         ExecSpace exec_space,
-        DField<IdxRange<Dim>, Layout, MemorySpace> dump_coord)
+        DField<IdxRange<Grid1D>, Layout, MemorySpace> dump_coord)
 {
     ddc::parallel_for_each(
             exec_space,
             dump_coord.domain(),
-            KOKKOS_LAMBDA(Idx<Dim> i) { dump_coord(i) = ddc::coordinate(i); });
+            KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
+}
+
+/**
+ * @brief Dump the coordinates found on a domain into a span.
+ *
+ * @param[out] dump_coord The span which will contain the coordinates.
+ * @param[in] sampler The domain indicating the coordinates.
+ */
+template <class ExecSpace, class Grid1D, class Layout, class MemorySpace>
+inline void dump_coordinates(
+        ExecSpace exec_space,
+        Field<Coord<typename Grid1D::continuous_dimension_type>,
+              IdxRange<Grid1D>,
+              Layout,
+              MemorySpace> dump_coord)
+{
+    ddc::parallel_for_each(
+            exec_space,
+            dump_coord.domain(),
+            KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
 }
 
 /**

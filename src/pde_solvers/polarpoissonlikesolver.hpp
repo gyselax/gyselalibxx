@@ -3,7 +3,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/gauss_legendre_integration.hpp>
 #include <sll/mapping/mapping_tools.hpp>
 #include <sll/mapping/metric_tensor.hpp>
 #include <sll/math_tools.hpp>
@@ -11,6 +10,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "gauss_legendre_integration.hpp"
 #include "matrix_batch_csr.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
@@ -187,8 +187,8 @@ public:
     using IdxCell = Idx<RCellDim, ThetaCellDim>;
 
 private:
-    static constexpr int m_n_gauss_legendre_r = BSplinesR::degree() + 1;
-    static constexpr int m_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
+    static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
+    static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
     static constexpr int m_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
 
@@ -286,14 +286,14 @@ public:
         , m_idxrange_quadrature_r(
                   Idx<QDimRMesh>(0),
                   IdxStep<QDimRMesh>(
-                          m_n_gauss_legendre_r * ddc::discrete_space<BSplinesR>().ncells()))
+                          s_n_gauss_legendre_r * ddc::discrete_space<BSplinesR>().ncells()))
         , m_idxrange_quadrature_theta(
                   Idx<QDimThetaMesh>(0),
                   IdxStep<QDimThetaMesh>(
-                          m_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
+                          s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
         , m_idxrange_quadrature_singular(
                   m_idxrange_quadrature_r.take_first(
-                          IdxStep<QDimRMesh> {m_n_overlap_cells * m_n_gauss_legendre_r}),
+                          IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
         , m_points_r(m_idxrange_quadrature_r)
         , m_points_theta(m_idxrange_quadrature_theta)
@@ -333,35 +333,13 @@ public:
         host_t<FieldMem<Coord<R>, IdxRange<KnotsR>>> breaks_r(idxrange_r_edges);
         host_t<FieldMem<Coord<Theta>, IdxRange<KnotsTheta>>> breaks_theta(idxrange_theta_edges);
 
-        ddc::for_each(idxrange_r_edges, [&](Idx<KnotsR> i) { breaks_r(i) = ddc::coordinate(i); });
-        ddc::for_each(idxrange_theta_edges, [&](Idx<KnotsTheta> i) {
-            breaks_theta(i) = ddc::coordinate(i);
-        });
+        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_r));
+        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_theta));
 
         // Define quadrature points and weights
-        GaussLegendre<R> gl_coeffs_r(m_n_gauss_legendre_r);
-        GaussLegendre<Theta> gl_coeffs_theta(m_n_gauss_legendre_theta);
-        gl_coeffs_r.compute_points_and_weights_on_mesh(
-                get_field(m_points_r),
-                get_field(m_weights_r),
-                get_const_field(breaks_r));
-        gl_coeffs_theta.compute_points_and_weights_on_mesh(
-                get_field(m_points_theta),
-                get_field(m_weights_theta),
+        GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(get_const_field(breaks_r));
+        GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
                 get_const_field(breaks_theta));
-
-        std::vector<double> vect_points_r(m_points_r.size());
-        for (IdxQuadratureR i : m_idxrange_quadrature_r) {
-            vect_points_r[i - m_idxrange_quadrature_r.front()] = m_points_r(i);
-        }
-        std::vector<double> vect_points_theta(m_points_theta.size());
-        for (IdxQuadratureTheta i : m_idxrange_quadrature_theta) {
-            vect_points_theta[i - m_idxrange_quadrature_theta.front()] = m_points_theta(i);
-        }
-
-        // Create quadrature index range
-        ddc::init_discrete_space<QDimRMesh>(vect_points_r);
-        ddc::init_discrete_space<QDimThetaMesh>(vect_points_theta);
 
         // Find value and derivative of 1D bsplines in radial direction
         ddc::for_each(m_idxrange_quadrature_r, [&](IdxQuadratureR const idx_r) {
@@ -1094,10 +1072,10 @@ public:
     static KOKKOS_FUNCTION IdxRangeQuadratureRTheta
     get_quadrature_points_in_cell(int cell_idx_r, int cell_idx_theta)
     {
-        const IdxQuadratureR first_quad_point_r(cell_idx_r * m_n_gauss_legendre_r);
-        const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * m_n_gauss_legendre_theta);
-        constexpr IdxStepQuadratureR n_GL_r(m_n_gauss_legendre_r);
-        constexpr IdxStepQuadratureTheta n_GL_theta(m_n_gauss_legendre_theta);
+        const IdxQuadratureR first_quad_point_r(cell_idx_r * s_n_gauss_legendre_r);
+        const IdxQuadratureTheta first_quad_point_theta(cell_idx_theta * s_n_gauss_legendre_theta);
+        constexpr IdxStepQuadratureR n_GL_r(s_n_gauss_legendre_r);
+        constexpr IdxStepQuadratureTheta n_GL_theta(s_n_gauss_legendre_theta);
         const IdxRangeQuadratureR quad_points_r(first_quad_point_r, n_GL_r);
         const IdxRangeQuadratureTheta quad_points_theta(first_quad_point_theta, n_GL_theta);
         return IdxRangeQuadratureRTheta(quad_points_r, quad_points_theta);
