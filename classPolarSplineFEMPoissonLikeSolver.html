@@ -160,10 +160,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6e4d95b7b1ce10cf43579ff77b9ea88b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b">PolarSplineFEMPoissonLikeSolver</a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator)</td></tr>
 <tr class="memdesc:a6e4d95b7b1ce10cf43579ff77b9ea88b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a polar Poisson-like solver using FEM with B-splines.  <br /></td></tr>
 <tr class="separator:a6e4d95b7b1ce10cf43579ff77b9ea88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d5abf61af4436e3bb7ee922b035447a" id="r_a0d5abf61af4436e3bb7ee922b035447a"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
-<tr class="memitem:a0d5abf61af4436e3bb7ee922b035447a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a0d5abf61af4436e3bb7ee922b035447a">fill_int_volume</a> (Mapping const &amp;mapping)</td></tr>
-<tr class="memdesc:a0d5abf61af4436e3bb7ee922b035447a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the volume integrals and stores the values in a member variable.  <br /></td></tr>
-<tr class="separator:a0d5abf61af4436e3bb7ee922b035447a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5645f014d26559165955e51746f3e70" id="r_ae5645f014d26559165955e51746f3e70"><td class="memTemplParams" colspan="2">template&lt;class Mapping &gt; </td></tr>
 <tr class="memitem:ae5645f014d26559165955e51746f3e70"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#ae5645f014d26559165955e51746f3e70">compute_singular_elements</a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values_csr_host, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col_idx_csr_host, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz_per_row_csr_host)</td></tr>
 <tr class="memdesc:ae5645f014d26559165955e51746f3e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the matrix element corresponding to the singular area.  <br /></td></tr>
@@ -437,50 +433,6 @@ template&lt;class Mapping &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0d5abf61af4436e3bb7ee922b035447a" name="a0d5abf61af4436e3bb7ee922b035447a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d5abf61af4436e3bb7ee922b035447a">&#9670;&#160;</a></span>fill_int_volume()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class <a class="el" href="structGridR.html">GridR</a> , class <a class="el" href="structGridTheta.html">GridTheta</a> , class <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a> , class SplineRThetaEvaluatorNullBound , class IdxRangeFull  = IdxRange&lt;GridR, GridTheta&gt;&gt; </div>
-<div class="memtemplate">
-template&lt;class Mapping &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt; <a class="el" href="structGridR.html">GridR</a>, <a class="el" href="structGridTheta.html">GridTheta</a>, <a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::fill_int_volume </td>
-          <td>(</td>
-          <td class="paramtype">Mapping const &amp;&#160;</td>
-          <td class="paramname"><em>mapping</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the volume integrals and stores the values in a member variable. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping from the logical index range to the physical index range where the equation is defined.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Mapping</td><td>A class describing a mapping from curvilinear coordinates to cartesian coordinates. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="ae5645f014d26559165955e51746f3e70" name="ae5645f014d26559165955e51746f3e70"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5645f014d26559165955e51746f3e70">&#9670;&#160;</a></span>compute_singular_elements()</h2>
 

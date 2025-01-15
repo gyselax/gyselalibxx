@@ -12,7 +12,6 @@ var classPolarSplineFEMPoissonLikeSolver =
     [ "Theta", "classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417", null ],
     [ "IdxCell", "classPolarSplineFEMPoissonLikeSolver.html#aea010ac6bec8090ec2686ad2110befd4", null ],
     [ "PolarSplineFEMPoissonLikeSolver", "classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b", null ],
-    [ "fill_int_volume", "classPolarSplineFEMPoissonLikeSolver.html#a0d5abf61af4436e3bb7ee922b035447a", null ],
     [ "compute_singular_elements", "classPolarSplineFEMPoissonLikeSolver.html#ae5645f014d26559165955e51746f3e70", null ],
     [ "compute_overlapping_singular_elements", "classPolarSplineFEMPoissonLikeSolver.html#a36be84f08a082b52a73f5134b8f1a8e2", null ],
     [ "compute_stencil_elements", "classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925", null ],

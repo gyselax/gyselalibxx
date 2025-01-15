@@ -244,10 +244,10 @@ var NAVTREEINDEX1 =
 "classFunctionToBeAdvected__gaussian.html#a5cefc067d3394e546900673571f6e612":[16,76,1],
 "classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360":[16,76,0],
 "classGaussLegendre.html":[16,77],
-"classGaussLegendre.html#a421cde58db551c40987077ee12b4e954":[16,77,4],
-"classGaussLegendre.html#a9f220a3c718cd167fc78e412c734a3c2":[16,77,2],
-"classGaussLegendre.html#aaeeb0f98363b55a366f009b2fb77ed2f":[16,77,3],
-"classGaussLegendre.html#ab95e7e25b98a2ccf293b2462b3817a84":[16,77,0],
-"classGaussLegendre.html#abb70874897c85fa6df64c91511e2d24e":[16,77,1],
-"classGridBuilder.html":[16,81]
+"classGaussLegendre.html#a421cde58db551c40987077ee12b4e954":[16,77,5],
+"classGaussLegendre.html#a9f220a3c718cd167fc78e412c734a3c2":[16,77,3],
+"classGaussLegendre.html#aaeeb0f98363b55a366f009b2fb77ed2f":[16,77,4],
+"classGaussLegendre.html#ab95e7e25b98a2ccf293b2462b3817a84":[16,77,1],
+"classGaussLegendre.html#abb70874897c85fa6df64c91511e2d24e":[16,77,2],
+"classGaussLegendre.html#ad4beb0ab162fcd8fd6961ae9013c3f61":[16,77,0]
 };
