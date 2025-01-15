@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 add_library("collisions" STATIC
-    koliop_interface.cpp
+    collision_operator.cpp
 )
 
 target_include_directories("collisions"

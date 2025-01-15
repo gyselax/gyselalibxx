@@ -11,8 +11,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "CollisionSpVparMu.hpp"
-#include "collisioninfo.hpp"
+#include "collision_configuration.hpp"
+#include "collision_operator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
             = MaxwellianEquilibrium::init_from_input(idxrange_kinsp, conf_collision);
     init_fequilibrium(get_field(allfequilibrium));
 
-    // ---> Initialisation of the distribution function as a pertubed Maxwellian
+    // ---> Initialisation of the distribution function as a perturbed Maxwellian
     DFieldMemSpVparMu allfdistribu(idxrange_spvparmu);
     NoPerturbInitialization const init(get_const_field(allfequilibrium));
     init(get_field(allfdistribu));
@@ -98,14 +98,14 @@ int main(int argc, char** argv)
     SplineMuBuilder const builder_mu(idxrange_mu);
     DFieldMemMu const coeff_intdmu(simpson_trapezoid_quadrature_coefficients_1d<
                                    Kokkos::DefaultExecutionSpace>(idxrange_mu, Extremity::BACK));
-    CollisionInfo const collision_info(conf_collision);
-    CollisionSpVparMu<CollisionInfo, IdxRangeSpVparMu, GridVpar, GridMu, double> collision_operator(
-            collision_info,
+    CollisionConfiguration const collision_configuration(
+            conf_collision,
             idxrange_spvparmu,
             get_const_field(coeff_intdmu),
             get_const_field(coeff_intdvpar),
             B_norm,
             get_const_field(Bstar_s));
+    CollisionOperator collision_operator(collision_configuration);
 
     // --------- TIME ITERATION ---------
     // ---> Reading of algorithm info from input YAML file

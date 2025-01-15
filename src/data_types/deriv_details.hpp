@@ -139,7 +139,7 @@ KOKKOS_FUNCTION Container<HeadQueryTag, QueryTags...> select_default(
  * describing derivatives from a type sequence of derivative dimensions.
  */
 template <class DerivSeq>
-class DefaultDerivElem;
+struct DefaultDerivElem;
 
 template <class... Tags>
 struct DefaultDerivElem<ddc::detail::TypeSeq<Tags...>>

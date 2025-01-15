@@ -48,6 +48,8 @@ eigen%gcc~ipo build_system=cmake build_type=Release generator=ninja arch=linux-r
 "
 # openblas@0.3.26%gcc@12.1.generic~bignuma~consistent_fpcsr+dynamic_dispatch+fortran~ilp64+locking+pic+shared build_system=makefile symbol_suffix=none threads=none arch=linux-rhel8-zen3
 
+which spack
+
 # If we start preparing a new environment, ensure we wont get name clashes by
 # uninstalling previous products.
 # NOTE: This may fail if the product are not already installed. IMO this is a

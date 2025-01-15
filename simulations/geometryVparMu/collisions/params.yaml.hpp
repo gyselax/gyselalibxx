@@ -22,9 +22,9 @@ SpeciesInfo:
   temperature_eq: 1.1
   mean_velocity_eq: 0.
 
-CollisionsInfo:
+Collisions:
   nustar0_rpeak: 1.
-  collisions_interspecies: true
+  interspecies: true
 
 Algorithm:
   deltat: 0.01

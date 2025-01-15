@@ -107,7 +107,7 @@ The `README.md` file should begin with a title:
 ```markdown
 # <title>
 ```
-If the folder doesn't contain a `.private` file (indicating that the folder is not yet ready to be shared publically), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in `src/`, you should add the following line to the list of folders in `src/README.md`:
+If the folder doesn't contain a `.private` file (indicating that the folder is not yet ready to be shared publicly), the new page can be referenced from any enclosing page that may exist. For example if you create a new folder in `src/`, you should add the following line to the list of folders in `src/README.md`:
 ```markdown
 - [my_new_folder](./my_new_folder/README.md) : Short description of contents.
 ```
@@ -150,4 +150,4 @@ $$
 ```
 The first syntax can be used when the expression fits in one line and doesn't use markdown special characters. The second syntax can be used in all contexts.
 
-In C++ header files it should be blocked with Doxagen syntax, i.e. `@f$` instead of `$`, and `@f[` and `@f]` instead of `$$`.
+In C++ header files it should be blocked with Doxygen syntax, i.e. `@f$` instead of `$`, and `@f[` and `@f]` instead of `$$`.

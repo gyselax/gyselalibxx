@@ -127,7 +127,7 @@ using IdxStepMu = IdxStep<GridMu>;
 using IdxStepVparMu = IdxStep<GridVpar, GridMu>;
 using IdxStepSpVparMu = IdxStep<Species, GridVpar, GridMu>;
 
-// IdxRange = to describe the wole index range (or a sub-index range)
+// IdxRange = to describe the whole index range (or a sub-index range)
 using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
 using IdxRangeVparMu = IdxRange<GridVpar, GridMu>;
