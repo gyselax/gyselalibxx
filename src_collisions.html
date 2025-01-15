@@ -106,8 +106,10 @@ $(document).ready(function(){initNavTree('src_collisions.html',''); initResizabl
   <div class="headertitle"><div class="title">Collisions</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Collision operator in (vpar,mu) applied to all species at the same time.</p>
-<p>Rk: translated from Fortran version in C++ in koliop submodule </p>
+<div class="textblock"><p>Collision operator in (vpar,mu) applied to all against all species at the same time. As such, the operator is O(N^2) in number of species.</p>
+<p>It was rewritten from Fortran into C++. The operator's name is KOkkos coLIsion OPerator (KOLIOP) and is provided as a submodule (see <code>/vendor</code>).</p>
+<p>While the operator is in C++, the interface with Fortran and other C++ code is made through a C layer. This is also known as the hourglass pattern (conceptually, the narrow neck of the device represent the lowering to C).</p>
+<p>To integrate Koliop into gyselalibxx, we wrap its functionalities into a DDC aware operator present in <code><a class="el" href="collision__operator_8hpp_source.html">collision_operator.hpp</a></code>. In gyselalibxx, operator are expected to support multiple if not all kind of geometries. But Koliop expect some data in layout right [sp, phi, theta, r, vpar, mu] instead of the [sp, phi, r, theta, vpar, mu] layout that is going to be favored in gyselalibxx. We have some machinery that setup input configuration data depending on the geometry. These are in <code>collision_configuration_sprvparmu.hpp</code>, <code>collision_configuration_spvparmu.hpp</code>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

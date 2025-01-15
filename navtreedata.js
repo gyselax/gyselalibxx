@@ -162,6 +162,7 @@ var NAVTREE =
         ] ]
       ] ],
       [ "Geometry (vpar, mu)", "src_geometryVparMu.html", [
+        [ "CollisionConfiguration :", "src_geometryVparMu_collisions.html", null ],
         [ "GeometryVparMu :", "src_geometryVparMu_geometry.html", null ],
         [ "Initialization methods", "src_geometryVparMu_initialization.html", null ]
       ] ],
@@ -268,13 +269,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCollisionsIntra.html#a164c6c249095a533900a12e2f1f48e25",
-"classFluidMoments.html",
-"classMatrix__Banded.html#a5b048b1936941d7188b996cd531cd630",
-"classPolarBSplines_1_1Impl.html#a76ae9aee443a828ec5f62ddabbda37fb",
-"classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab",
-"neumann__spline__quadrature_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2"
+"classCombinedMapping.html#a967567a14f47ca5d71be6aab594b1f14",
+"classGridBuilder.html#a070eaf99580a98f094ee4e42f66ea2dd",
+"classMatrix__Corner__Block.html#a5af1055a64ebe2f66469e3522411dd73",
+"classPolarSplineEvaluator.html#a91d593b5d3e4428e9f21e5ad466ae681",
+"dir_1565b715753ffeaa27b85f9d3e8ee903.html",
+"quadrature__coeffs__nd_8hpp_source.html",
+"structPolarSplineMem.html#adc977e4404b46ee447c69e7b735f078f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

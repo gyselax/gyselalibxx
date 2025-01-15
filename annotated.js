@@ -1,23 +1,5 @@
 var annotated =
 [
-    [ "collisions_dimensions", "namespacecollisions__dimensions.html", [
-      [ "ExtractRDim", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRDim", null ],
-      [ "ExtractRDim< ConstField< double, IdxRange< GridR >, Kokkos::DefaultExecutionSpace::memory_space, Layout > >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRDim_3_01ConstField_3_01double_00_01IdxRange_3_01GridR_01d49ad374498953b7d2b9069aa134d214", null ],
-      [ "ExtractRDim< double >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRDim_3_01double_01_4", null ],
-      [ "ExtractRDim< Field< ElementType, IdxRange, MemSpace, Layout > >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRDim_3_01Field_3_01ElementType_00_01IdxRange_00_01MemSpace_00_01Layout_01_4_01_4", null ],
-      [ "ExtractRThetaTags", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRThetaTags", null ],
-      [ "ExtractRThetaTags< DConstField< IdxRange > >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRThetaTags_3_01DConstField_3_01IdxRange_01_4_01_4", null ],
-      [ "ExtractRThetaTags< double >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractRThetaTags_3_01double_01_4", null ],
-      [ "ExtractThetaDim", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim", null ],
-      [ "ExtractThetaDim< ConstField< double, IdxRange< GridR >, Kokkos::DefaultExecutionSpace::memory_space, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid4d06e1e2d0c2d7c6dba5eb3f62b8c1f6", null ],
-      [ "ExtractThetaDim< ConstField< double, IdxRange< GridTheta >, Kokkos::DefaultExecutionSpace::memory_space, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grid60b078372e4f21da53e41a7105d0e223", null ],
-      [ "ExtractThetaDim< ConstField< double, IdxRange< GridTheta, GridR >, Kokkos::DefaultExecutionSpace::memory_space, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01ConstField_3_01double_00_01IdxRange_3_01Grida5f24db67f7287ccd8eb306d1be5d530", null ],
-      [ "ExtractThetaDim< double, InternalSpoofGridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01double_00_01InternalSpoofGridR_01_4", null ],
-      [ "ExtractThetaDim< Field< ElementType, IdxRange, MemSpace, Layout >, GridR >", "namespacecollisions__dimensions.html#structcollisions__dimensions_1_1ExtractThetaDim_3_01Field_3_01ElementType_00_01IdxRange_00_01Memb61e2a7adc5523dde8976f9c0d44ef20", null ],
-      [ "InternalSpoofGrid", "structcollisions__dimensions_1_1InternalSpoofGrid.html", null ],
-      [ "InternalSpoofGridR", "structcollisions__dimensions_1_1InternalSpoofGridR.html", null ],
-      [ "InternalSpoofGridTheta", "structcollisions__dimensions_1_1InternalSpoofGridTheta.html", null ]
-    ] ],
     [ "connectivity_details", null, [
       [ "AddToTypeSeq", "structconnectivity__details_1_1AddToTypeSeq.html", null ],
       [ "AddToTypeSeq< ToInsert, TypeSeq, BackInsert >", "structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.html", "structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4" ],
@@ -170,11 +152,10 @@ var annotated =
     [ "CartesianToCzarny", "classCartesianToCzarny.html", "classCartesianToCzarny" ],
     [ "ChargeDensityCalculator", "classChargeDensityCalculator.html", "classChargeDensityCalculator" ],
     [ "CircularToCartesian", "classCircularToCartesian.html", "classCircularToCartesian" ],
-    [ "CollisionInfo", "classCollisionInfo.html", "classCollisionInfo" ],
-    [ "CollisionInfoRadial", "classCollisionInfoRadial.html", "classCollisionInfoRadial" ],
+    [ "CollisionConfiguration", "classCollisionConfiguration.html", "classCollisionConfiguration" ],
+    [ "CollisionOperator", "classCollisionOperator.html", "classCollisionOperator" ],
     [ "CollisionsInter", "classCollisionsInter.html", "classCollisionsInter" ],
     [ "CollisionsIntra", "classCollisionsIntra.html", "classCollisionsIntra" ],
-    [ "CollisionSpVparMu", "classCollisionSpVparMu.html", "classCollisionSpVparMu" ],
     [ "CombinedMapping", "classCombinedMapping.html", "classCombinedMapping" ],
     [ "ConstantExtrapolationRuleOnion", "structConstantExtrapolationRuleOnion.html", "structConstantExtrapolationRuleOnion" ],
     [ "ConstPolarSpline", "structConstPolarSpline.html", "structConstPolarSpline" ],
