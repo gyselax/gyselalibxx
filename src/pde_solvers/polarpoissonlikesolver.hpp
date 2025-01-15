@@ -14,6 +14,8 @@
 #include "metric_tensor.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
+#include "quadrature_coeffs_nd.hpp"
+#include "volume_quadrature_nd.hpp"
 
 
 /**
@@ -222,10 +224,8 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
 
     // Gauss-Legendre points and weights
-    host_t<FieldMem<Coord<R>, IdxRangeQuadratureR>> m_points_r;
-    host_t<FieldMem<Coord<Theta>, IdxRangeQuadratureTheta>> m_points_theta;
-    host_t<FieldMem<double, IdxRangeQuadratureR>> m_weights_r;
-    host_t<FieldMem<double, IdxRangeQuadratureTheta>> m_weights_theta;
+    FieldMem<double, IdxRangeQuadratureR> m_weights_r;
+    FieldMem<double, IdxRangeQuadratureTheta> m_weights_theta;
 
     // Basis Spline values and derivatives at Gauss-Legendre points
     host_t<FieldMem<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>>
@@ -295,8 +295,6 @@ public:
                   m_idxrange_quadrature_r.take_first(
                           IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
-        , m_points_r(m_idxrange_quadrature_r)
-        , m_points_theta(m_idxrange_quadrature_theta)
         , m_weights_r(m_idxrange_quadrature_r)
         , m_weights_theta(m_idxrange_quadrature_theta)
         , m_singular_basis_vals_and_derivs(IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>(
@@ -309,8 +307,6 @@ public:
                   IdxRange<
                           ThetaBasisSubset,
                           QDimThetaMesh>(m_non_zero_bases_theta, m_idxrange_quadrature_theta))
-        , m_int_volume(
-                  IdxRangeQuadratureRTheta(m_idxrange_quadrature_r, m_idxrange_quadrature_theta))
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef(
                   PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>(),
@@ -340,6 +336,11 @@ public:
         GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(get_const_field(breaks_r));
         GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
                 get_const_field(breaks_theta));
+        m_int_volume = compute_coeffs_on_mapping(
+                Kokkos::DefaultExecutionSpace(),
+                mapping,
+                gauss_legendre_quadrature_coefficients<
+                        Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
 
         // Find value and derivative of 1D bsplines in radial direction
         ddc::for_each(m_idxrange_quadrature_r, [&](IdxQuadratureR const idx_r) {
@@ -438,8 +439,6 @@ public:
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
-        fill_int_volume(mapping);
-
         m_gko_matrix = std::make_unique<MatrixBatchCsr<
                 Kokkos::DefaultExecutionSpace,
                 MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements);
@@ -477,45 +476,6 @@ public:
         Kokkos::deep_copy(col_idx, col_idx_csr_host);
         Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
         m_gko_matrix->setup_solver();
-    }
-
-    /**
-     * @brief Compute the volume integrals and stores the values in a member variable.
-     *
-     * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range where
-     *      the equation is defined.
-     *
-     * @tparam Mapping A class describing a mapping from curvilinear coordinates to cartesian coordinates.
-     */
-    template <class Mapping>
-    void fill_int_volume(Mapping const& mapping)
-    {
-        auto weights_r_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_weights_r));
-        auto weights_theta_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_weights_theta));
-        DField<IdxRangeQuadratureR> weights_r = get_field(weights_r_alloc);
-        DField<IdxRangeQuadratureTheta> weights_theta = get_field(weights_theta_alloc);
-        // Find the integral volume associated with each point used in the quadrature scheme
-        IdxRangeQuadratureRTheta const
-                all_quad_points(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
-        auto int_volume_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_int_volume));
-        auto int_volume = get_field(int_volume_alloc);
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                all_quad_points,
-                KOKKOS_LAMBDA(IdxQuadratureRTheta const irp) {
-                    IdxQuadratureR const idx_r(irp);
-                    IdxQuadratureTheta const idx_theta(irp);
-                    CoordRTheta coord(ddc::coordinate(irp));
-                    int_volume(idx_r, idx_theta) = Kokkos::abs(mapping.jacobian(coord))
-                                                   * weights_r(idx_r) * weights_theta(idx_theta);
-                });
     }
 
     /**

@@ -8,6 +8,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 /**
  * @brief A structure containing the weights and positions associated
@@ -52,6 +53,10 @@ class GaussLegendre
     static_assert(ddc::is_non_uniform_point_sampling_v<GLGrid>);
 
     using Dim = typename GLGrid::continuous_dimension_type;
+
+public:
+    /// The grid on which the quadrature scheme is defined.
+    using Grid1D = GLGrid;
 
 public:
     /**
@@ -199,3 +204,43 @@ private:
         return grid;
     }
 };
+
+/**
+ * @brief Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.
+ *
+ * Calculate the quadrature coefficients for the spline quadrature method defined on the provided index range.
+ *
+ * @param[in] idx_range
+ *      The index range on which the coefficients will be defined.
+ * @param[in] builders
+ *      The spline builder used for the quadrature coefficients in the different dimensions.
+ *
+ * @return The coefficients which define the spline quadrature method in ND.
+ */
+template <class ExecSpace, class... GaussLegendreQuad>
+DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D...>, typename ExecSpace::memory_space>
+gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
+{
+    // Get coefficients for each dimension
+    std::tuple<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>...>
+    current_dim_coeffs(gl.template gauss_legendre_coefficients<Kokkos::HostSpace>()...);
+
+    IdxRange<typename GaussLegendreQuad::Grid1D...> idx_range(gl.get_idx_range()...);
+
+    // Allocate ND coefficients
+    DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D...>, typename ExecSpace::memory_space>
+            coefficients(idx_range);
+    auto coefficients_host = ddc::create_mirror(get_field(coefficients));
+    // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
+    // (see https://github.com/kokkos/kokkos/pull/7059)
+    ddc::for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
+        // multiply the 1D coefficients by one another
+        coefficients_host(idim)
+                = (std::get<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>>(
+                           current_dim_coeffs)(
+                           ddc::select<typename GaussLegendreQuad::Grid1D>(idim))
+                   * ... * 1);
+    });
+    ddc::parallel_deepcopy(coefficients, coefficients_host);
+    return coefficients;
+}

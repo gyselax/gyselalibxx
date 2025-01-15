@@ -9,8 +9,8 @@
     - FOUND_SLL=$(grep "vendor/sll/.*" -x changed_files.txt || true)
     - if [ -z "$FOUND_SLL" ]; then echo "SLL_BUILD_TESTING=OFF" >> build.env; else echo "SLL_BUILD_TESTING=ON" >> build.env; fi
     - FOUND_POLAR_SPLINES=$(grep "src/interpolation/polar_splines/.*" -x changed_files.txt || true)
-    - if [ -z "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> build.env; fi
-    - FOUND_POISSON_2D=$(grep "\(src/geometryRTheta/poisson/.*\)\|\(geometryRTheta/polar_poisson/.*\)" -x changed_files.txt || true)
+    - if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> build.env; fi
+    - FOUND_POISSON_2D=$(grep "\(src/pde_solvers/polarpoissonlikesolver.hpp\)\|\(tests/geometryRTheta/polar_poisson/.*\)" -x changed_files.txt || true)
     - if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> build.env; else echo "POISSON_2D_BUILD_TESTING=ON" >> build.env; fi
     - FOUND_DDC=$(grep "vendor/ddc" changed_files.txt || true)
     - if [ -z "$FOUND_DDC" ]; then echo "DDC_BUILD_TESTING=OFF" >> build.env; else echo "DDC_BUILD_TESTING=ON" >> build.env; fi
