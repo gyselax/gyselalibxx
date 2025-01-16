@@ -110,79 +110,78 @@ $(document).ready(function(){initNavTree('metric__tensor_8hpp_source.html',''); 
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;sll/view.hpp&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;mapping_tools.hpp&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping, <span class="keyword">class</span> PositionCoordinate&gt;</div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classMetricTensor.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classMetricTensor.html">MetricTensor</a></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static_assert</span>(is_mapping_v&lt;Mapping&gt;);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">static_assert</span>(has_2d_jacobian_v&lt;Mapping, PositionCoordinate&gt;);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">   23</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> = std::array&lt;std::array&lt;double, 2&gt;, 2&gt;;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    Mapping m_mapping;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">   34</a></span>    <span class="keyword">explicit</span> KOKKOS_FUNCTION <a class="code hl_function" href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">MetricTensor</a>(Mapping mapping) : m_mapping(mapping) {}</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">   48</a></span>    KOKKOS_FUNCTION <span class="keywordtype">void</span> <a class="code hl_function" href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">operator()</a>(<a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a>&amp; matrix, PositionCoordinate <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_11 = m_mapping.jacobian_11(coord);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_12 = m_mapping.jacobian_12(coord);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_21 = m_mapping.jacobian_21(coord);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_22 = m_mapping.jacobian_22(coord);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        matrix[0][0] = (J_11 * J_11 + J_21 * J_21);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        matrix[0][1] = (J_11 * J_12 + J_21 * J_22);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        matrix[1][0] = (J_11 * J_12 + J_21 * J_22);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        matrix[1][1] = (J_12 * J_12 + J_22 * J_22);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;mapping_tools.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;view.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping, <span class="keyword">class</span> PositionCoordinate&gt;</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classMetricTensor.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classMetricTensor.html">MetricTensor</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static_assert</span>(is_mapping_v&lt;Mapping&gt;);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static_assert</span>(has_2d_jacobian_v&lt;Mapping, PositionCoordinate&gt;);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">   22</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> = std::array&lt;std::array&lt;double, 2&gt;, 2&gt;;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    Mapping m_mapping;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">   33</a></span>    <span class="keyword">explicit</span> KOKKOS_FUNCTION <a class="code hl_function" href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">MetricTensor</a>(Mapping mapping) : m_mapping(mapping) {}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">   47</a></span>    KOKKOS_FUNCTION <span class="keywordtype">void</span> <a class="code hl_function" href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">operator()</a>(<a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a>&amp; matrix, PositionCoordinate <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_11 = m_mapping.jacobian_11(coord);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_12 = m_mapping.jacobian_12(coord);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_21 = m_mapping.jacobian_21(coord);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_22 = m_mapping.jacobian_22(coord);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        matrix[0][0] = (J_11 * J_11 + J_21 * J_21);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        matrix[0][1] = (J_11 * J_12 + J_21 * J_22);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        matrix[1][0] = (J_11 * J_12 + J_21 * J_22);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        matrix[1][1] = (J_12 * J_12 + J_22 * J_22);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
 </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">   68</a></span>    KOKKOS_FUNCTION <span class="keywordtype">void</span> <a class="code hl_function" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">inverse</a>(<a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a>&amp; matrix, PositionCoordinate <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_11 = m_mapping.jacobian_11(coord);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_12 = m_mapping.jacobian_12(coord);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_21 = m_mapping.jacobian_21(coord);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_22 = m_mapping.jacobian_22(coord);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        matrix[0][0] = (J_12 * J_12 + J_22 * J_22) / jacob_2;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        matrix[0][1] = (-J_11 * J_12 - J_21 * J_22) / jacob_2;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        matrix[1][0] = (-J_11 * J_12 - J_21 * J_22) / jacob_2;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        matrix[1][1] = (J_11 * J_11 + J_21 * J_21) / jacob_2;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">   67</a></span>    KOKKOS_FUNCTION <span class="keywordtype">void</span> <a class="code hl_function" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">inverse</a>(<a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a>&amp; matrix, PositionCoordinate <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_11 = m_mapping.jacobian_11(coord);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_12 = m_mapping.jacobian_12(coord);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_21 = m_mapping.jacobian_21(coord);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> J_22 = m_mapping.jacobian_22(coord);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        matrix[0][0] = (J_12 * J_12 + J_22 * J_22) / jacob_2;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        matrix[0][1] = (-J_11 * J_12 - J_21 * J_22) / jacob_2;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        matrix[1][0] = (-J_11 * J_12 - J_21 * J_22) / jacob_2;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        matrix[1][1] = (J_11 * J_11 + J_21 * J_21) / jacob_2;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
 </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">   91</a></span>    KOKKOS_FUNCTION std::array&lt;double, 2&gt; <a class="code hl_function" href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">to_covariant</a>(</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            std::array&lt;double, 2&gt; <span class="keyword">const</span>&amp; contravariant_vector,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            PositionCoordinate <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> inv_metric_tensor;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_function" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">inverse</a>(inv_metric_tensor, coord);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        std::array&lt;double, 2&gt; covariant_vector;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        covariant_vector[0] = inv_metric_tensor[0][0] * contravariant_vector[0]</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                              + inv_metric_tensor[0][1] * contravariant_vector[1];</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        covariant_vector[1] = inv_metric_tensor[1][0] * contravariant_vector[0]</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                              + inv_metric_tensor[1][1] * contravariant_vector[1];</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">return</span> covariant_vector;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">   90</a></span>    KOKKOS_FUNCTION std::array&lt;double, 2&gt; <a class="code hl_function" href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">to_covariant</a>(</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            std::array&lt;double, 2&gt; <span class="keyword">const</span>&amp; contravariant_vector,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            PositionCoordinate <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <a class="code hl_typedef" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> inv_metric_tensor;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_function" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">inverse</a>(inv_metric_tensor, coord);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        std::array&lt;double, 2&gt; covariant_vector;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        covariant_vector[0] = inv_metric_tensor[0][0] * contravariant_vector[0]</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                              + inv_metric_tensor[0][1] * contravariant_vector[1];</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        covariant_vector[1] = inv_metric_tensor[1][0] * contravariant_vector[0]</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                              + inv_metric_tensor[1][1] * contravariant_vector[1];</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">return</span> covariant_vector;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
 </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
 </div>
-<div class="ttc" id="aclassMetricTensor_html"><div class="ttname"><a href="classMetricTensor.html">MetricTensor</a></div><div class="ttdoc">An operator for calculating the metric tensor.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:17</div></div>
-<div class="ttc" id="aclassMetricTensor_html_a393526b8a48b0a5841351e11c7cc73f8"><div class="ttname"><a href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">MetricTensor::MetricTensor</a></div><div class="ttdeci">KOKKOS_FUNCTION MetricTensor(Mapping mapping)</div><div class="ttdoc">A constructor for the metric tensor operator.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:34</div></div>
-<div class="ttc" id="aclassMetricTensor_html_a8f5d8e41ab5e9d9a2cc84ba42b67843a"><div class="ttname"><a href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">MetricTensor::Matrix_2x2</a></div><div class="ttdeci">std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt; Matrix_2x2</div><div class="ttdoc">The type of the Jacobian matrix and its inverse.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:23</div></div>
-<div class="ttc" id="aclassMetricTensor_html_aa6a650351eb694fef48334a192469d25"><div class="ttname"><a href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">MetricTensor::to_covariant</a></div><div class="ttdeci">KOKKOS_FUNCTION std::array&lt; double, 2 &gt; to_covariant(std::array&lt; double, 2 &gt; const &amp;contravariant_vector, PositionCoordinate const &amp;coord) const</div><div class="ttdoc">Compute the covariant vector from the contravariant vector.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:91</div></div>
-<div class="ttc" id="aclassMetricTensor_html_aad3d46ec6f7910bcacd5075de429a08d"><div class="ttname"><a href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">MetricTensor::inverse</a></div><div class="ttdeci">KOKKOS_FUNCTION void inverse(Matrix_2x2 &amp;matrix, PositionCoordinate const &amp;coord) const</div><div class="ttdoc">Compute the inverse metric tensor associated to the mapping.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:68</div></div>
-<div class="ttc" id="aclassMetricTensor_html_afa4a1d1ac34eb5fc3a2464d3844151fe"><div class="ttname"><a href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">MetricTensor::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION void operator()(Matrix_2x2 &amp;matrix, PositionCoordinate const &amp;coord) const</div><div class="ttdoc">Compute the metric tensor assignd to the mapping.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:48</div></div>
+<div class="ttc" id="aclassMetricTensor_html"><div class="ttname"><a href="classMetricTensor.html">MetricTensor</a></div><div class="ttdoc">An operator for calculating the metric tensor.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:16</div></div>
+<div class="ttc" id="aclassMetricTensor_html_a393526b8a48b0a5841351e11c7cc73f8"><div class="ttname"><a href="classMetricTensor.html#a393526b8a48b0a5841351e11c7cc73f8">MetricTensor::MetricTensor</a></div><div class="ttdeci">KOKKOS_FUNCTION MetricTensor(Mapping mapping)</div><div class="ttdoc">A constructor for the metric tensor operator.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:33</div></div>
+<div class="ttc" id="aclassMetricTensor_html_a8f5d8e41ab5e9d9a2cc84ba42b67843a"><div class="ttname"><a href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">MetricTensor::Matrix_2x2</a></div><div class="ttdeci">std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt; Matrix_2x2</div><div class="ttdoc">The type of the Jacobian matrix and its inverse.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:22</div></div>
+<div class="ttc" id="aclassMetricTensor_html_aa6a650351eb694fef48334a192469d25"><div class="ttname"><a href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">MetricTensor::to_covariant</a></div><div class="ttdeci">KOKKOS_FUNCTION std::array&lt; double, 2 &gt; to_covariant(std::array&lt; double, 2 &gt; const &amp;contravariant_vector, PositionCoordinate const &amp;coord) const</div><div class="ttdoc">Compute the covariant vector from the contravariant vector.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:90</div></div>
+<div class="ttc" id="aclassMetricTensor_html_aad3d46ec6f7910bcacd5075de429a08d"><div class="ttname"><a href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">MetricTensor::inverse</a></div><div class="ttdeci">KOKKOS_FUNCTION void inverse(Matrix_2x2 &amp;matrix, PositionCoordinate const &amp;coord) const</div><div class="ttdoc">Compute the inverse metric tensor associated to the mapping.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:67</div></div>
+<div class="ttc" id="aclassMetricTensor_html_afa4a1d1ac34eb5fc3a2464d3844151fe"><div class="ttname"><a href="classMetricTensor.html#afa4a1d1ac34eb5fc3a2464d3844151fe">MetricTensor::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION void operator()(Matrix_2x2 &amp;matrix, PositionCoordinate const &amp;coord) const</div><div class="ttdoc">Compute the metric tensor assignd to the mapping.</div><div class="ttdef"><b>Definition</b> metric_tensor.hpp:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -260,7 +260,6 @@ var NAVTREE =
         [ "Multipatch geometries", "tests_multipatch_geometries.html", null ]
       ] ]
     ] ],
-    [ "Selalib++", "vendor_sll.html", null ],
     [ "API reference", "annotated.html", "annotated" ],
     [ "Files", "files.html", "files" ]
   ] ]
@@ -273,9 +272,9 @@ var NAVTREEINDEX =
 "classGridBuilder.html",
 "classMatrix__Corner__Block.html#a4a86d05bdf1716db3c228a921b6a80b0",
 "classPolarSplineEvaluator.html#a8960c721f4ef12c2343fae7c36dae0da",
-"dir_1565b715753ffeaa27b85f9d3e8ee903.html",
-"quadrature__coeffs__nd_8hpp_source.html",
-"structPolarSplineMem.html#adc977e4404b46ee447c69e7b735f078f"
+"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html",
+"rk4_8hpp_source.html",
+"structRefinedDiscreteToCartesianBuilder_1_1GridRRefined.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

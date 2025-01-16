@@ -112,215 +112,214 @@ $(document).ready(function(){initNavTree('discrete__to__cartesian_8hpp_source.ht
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;sll/math_tools.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;sll/view.hpp&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;mapping_tools.hpp&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">class </span><a class="code hl_struct" href="structX.html">X</a>,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">class </span><a class="code hl_struct" href="structY.html">Y</a>,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">class </span>SplineEvaluator,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">class </span><a class="code hl_struct" href="structR.html">R</a> = <span class="keyword">typename</span> SplineEvaluator::continuous_dimension_type1,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">class </span><a class="code hl_struct" href="structTheta.html">Theta</a> = <span class="keyword">typename</span> SplineEvaluator::continuous_dimension_type2,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">class </span>MemorySpace = <span class="keyword">typename</span> SplineEvaluator::memory_space&gt;</div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html">   33</a></span><span class="keyword">class </span><a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;MemorySpace, typename SplineEvaluator::memory_space&gt;);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">   41</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a> = <span class="keyword">typename</span> SplineEvaluator::bsplines_type1;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">   45</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> = <span class="keyword">typename</span> SplineEvaluator::bsplines_type2;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a7e46471be9fce4ff796a971c9a660c97">   48</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structX.html">cartesian_tag_x</a> = <a class="code hl_struct" href="structX.html">X</a>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a6c115a3ce558a2d1d1256a09f8e7408a">   50</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structY.html">cartesian_tag_y</a> = <a class="code hl_struct" href="structY.html">Y</a>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">   52</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structR.html">curvilinear_tag_r</a> = <a class="code hl_struct" href="structR.html">R</a>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">   54</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structTheta.html">curvilinear_tag_theta</a> = <a class="code hl_struct" href="structTheta.html">Theta</a>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a2b2e0b6ec7ee087fdb814f9fa22aec01">   57</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#a2b2e0b6ec7ee087fdb814f9fa22aec01">CoordArg</a> = Coord&lt;R, Theta&gt;;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#ad3524c5f93fade40f00a204901975a33">   59</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#ad3524c5f93fade40f00a204901975a33">CoordResult</a> = Coord&lt;X, Y&gt;;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">using </span>spline_idx_range = IdxRange&lt;BSplineR, BSplineTheta&gt;;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">using </span>SplineType = DConstField&lt;spline_idx_range, MemorySpace&gt;;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">using </span>IdxRangeRTheta = <span class="keyword">typename</span> SplineEvaluator::evaluation_domain_type;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">using </span>IdxRangeTheta = <span class="keyword">typename</span> SplineEvaluator::evaluation_domain_type2;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">using </span>IdxTheta = <span class="keyword">typename</span> IdxRangeTheta::discrete_element_type;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    SplineType m_x_spline_representation;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    SplineType m_y_spline_representation;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    SplineEvaluator m_spline_evaluator;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    IdxRangeRTheta m_idx_range_singular_point;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">  107</a></span>    KOKKOS_FUNCTION <a class="code hl_function" href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">DiscreteToCartesian</a>(</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            SplineType curvilinear_to_x,</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            SplineType curvilinear_to_y,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            SplineEvaluator <span class="keyword">const</span>&amp; evaluator,</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            IdxRangeRTheta <a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>)</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        : m_x_spline_representation(curvilinear_to_x)</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        , m_y_spline_representation(curvilinear_to_y)</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        , m_spline_evaluator(evaluator)</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        , m_idx_range_singular_point(<a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>)</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;mapping_tools.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;math_tools.hpp&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;view.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">template</span> &lt;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keyword">class </span><a class="code hl_struct" href="structX.html">X</a>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">class </span><a class="code hl_struct" href="structY.html">Y</a>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">class </span>SplineEvaluator,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">class </span><a class="code hl_struct" href="structR.html">R</a> = <span class="keyword">typename</span> SplineEvaluator::continuous_dimension_type1,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">class </span><a class="code hl_struct" href="structTheta.html">Theta</a> = <span class="keyword">typename</span> SplineEvaluator::continuous_dimension_type2,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">class </span>MemorySpace = <span class="keyword">typename</span> SplineEvaluator::memory_space&gt;</div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html">   32</a></span><span class="keyword">class </span><a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;MemorySpace, typename SplineEvaluator::memory_space&gt;);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">   40</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">BSplineR</a> = <span class="keyword">typename</span> SplineEvaluator::bsplines_type1;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">   44</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">BSplineTheta</a> = <span class="keyword">typename</span> SplineEvaluator::bsplines_type2;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a7e46471be9fce4ff796a971c9a660c97">   47</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structX.html">cartesian_tag_x</a> = <a class="code hl_struct" href="structX.html">X</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a6c115a3ce558a2d1d1256a09f8e7408a">   49</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structY.html">cartesian_tag_y</a> = <a class="code hl_struct" href="structY.html">Y</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aec413130c64ea6b59a0c177566eb9d7e">   51</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structR.html">curvilinear_tag_r</a> = <a class="code hl_struct" href="structR.html">R</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a44d272af350574b3d72f696e38f2159d">   53</a></span>    <span class="keyword">using </span><a class="code hl_struct" href="structTheta.html">curvilinear_tag_theta</a> = <a class="code hl_struct" href="structTheta.html">Theta</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a2b2e0b6ec7ee087fdb814f9fa22aec01">   56</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#a2b2e0b6ec7ee087fdb814f9fa22aec01">CoordArg</a> = Coord&lt;R, Theta&gt;;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#ad3524c5f93fade40f00a204901975a33">   58</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classDiscreteToCartesian.html#ad3524c5f93fade40f00a204901975a33">CoordResult</a> = Coord&lt;X, Y&gt;;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">using </span>spline_idx_range = IdxRange&lt;BSplineR, BSplineTheta&gt;;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">using </span>SplineType = DConstField&lt;spline_idx_range, MemorySpace&gt;;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">using </span>IdxRangeRTheta = <span class="keyword">typename</span> SplineEvaluator::evaluation_domain_type;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">using </span>IdxRangeTheta = <span class="keyword">typename</span> SplineEvaluator::evaluation_domain_type2;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">using </span>IdxTheta = <span class="keyword">typename</span> IdxRangeTheta::discrete_element_type;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    SplineType m_x_spline_representation;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    SplineType m_y_spline_representation;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    SplineEvaluator m_spline_evaluator;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    IdxRangeRTheta m_idx_range_singular_point;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">  106</a></span>    KOKKOS_FUNCTION <a class="code hl_function" href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">DiscreteToCartesian</a>(</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            SplineType curvilinear_to_x,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            SplineType curvilinear_to_y,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            SplineEvaluator <span class="keyword">const</span>&amp; evaluator,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            IdxRangeRTheta <a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        : m_x_spline_representation(curvilinear_to_x)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        , m_y_spline_representation(curvilinear_to_y)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        , m_spline_evaluator(evaluator)</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        , m_idx_range_singular_point(<a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
 </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">  132</a></span>    KOKKOS_FUNCTION Coord&lt;X, Y&gt; <a class="code hl_function" href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">operator()</a>(</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> x = m_spline_evaluator(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> y = m_spline_evaluator(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">return</span> Coord&lt;X, Y&gt;(x, y);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">  131</a></span>    KOKKOS_FUNCTION Coord&lt;X, Y&gt; <a class="code hl_function" href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">operator()</a>(</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> x = m_spline_evaluator(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> y = m_spline_evaluator(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">return</span> Coord&lt;X, Y&gt;(x, y);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
 </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">  153</a></span>    KOKKOS_FUNCTION <span class="keywordtype">void</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">jacobian_matrix</a>(</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord,</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            Matrix_2x2&amp; matrix)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        matrix[0][0]</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        matrix[0][1]</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        matrix[1][0]</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        matrix[1][1]</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">  152</a></span>    KOKKOS_FUNCTION <span class="keywordtype">void</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">jacobian_matrix</a>(</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord,</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            Matrix_2x2&amp; matrix)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        matrix[0][0]</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        matrix[0][1]</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        matrix[1][0]</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        matrix[1][1]</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
 </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">  183</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">jacobian_11</a>(</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">  182</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">jacobian_11</a>(</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    }</div>
 </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">  205</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">jacobian_12</a>(</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="foldopen" id="foldopen00204" data-start="{" data-end="}">
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">  204</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">jacobian_12</a>(</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
 </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
-<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">  227</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">jacobian_21</a>(</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="foldopen" id="foldopen00226" data-start="{" data-end="}">
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">  226</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">jacobian_21</a>(</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    }</div>
 </div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="foldopen" id="foldopen00249" data-start="{" data-end="}">
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">  249</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">jacobian_22</a>(</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="foldopen" id="foldopen00248" data-start="{" data-end="}">
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">  248</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">jacobian_22</a>(</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordflow">return</span> m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
 </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
-<div class="foldopen" id="foldopen00263" data-start="{" data-end="}">
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">  263</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">jacobian</a>(</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        Matrix_2x2 J;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <a class="code hl_function" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">jacobian_matrix</a>(coord, J);</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">return</span> determinant(J);</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="foldopen" id="foldopen00262" data-start="{" data-end="}">
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">  262</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">jacobian</a>(</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        Matrix_2x2 J;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <a class="code hl_function" href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">jacobian_matrix</a>(coord, J);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">return</span> determinant(J);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    }</div>
 </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="foldopen" id="foldopen00285" data-start="{" data-end="}">
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">  285</a></span>    KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="code hl_function" href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">first_order_jacobian_matrix_r_rtheta</a>(</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        Matrix_2x2 matrix;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        matrix[0][0]</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        matrix[0][1] = m_spline_evaluator</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                               .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        matrix[1][0]</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        matrix[1][1] = m_spline_evaluator</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                               .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        <span class="keywordflow">return</span> matrix;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    }</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
+<div class="foldopen" id="foldopen00284" data-start="{" data-end="}">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">  284</a></span>    KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="code hl_function" href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">first_order_jacobian_matrix_r_rtheta</a>(</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; <span class="keyword">const</span>&amp; coord)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        Matrix_2x2 matrix;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        matrix[0][0]</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        matrix[0][1] = m_spline_evaluator</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                               .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        matrix[1][0]</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        matrix[1][1] = m_spline_evaluator</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                               .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        <span class="keywordflow">return</span> matrix;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    }</div>
 </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
-<div class="foldopen" id="foldopen00305" data-start="{" data-end="}">
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">  305</a></span>    KOKKOS_INLINE_FUNCTION IdxRangeRTheta <a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">return</span> m_idx_range_singular_point;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    }</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="foldopen" id="foldopen00304" data-start="{" data-end="}">
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">  304</a></span>    KOKKOS_INLINE_FUNCTION IdxRangeRTheta <a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        <span class="keywordflow">return</span> m_idx_range_singular_point;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    }</div>
 </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
-<div class="foldopen" id="foldopen00338" data-start="{" data-end="}">
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">  338</a></span>    KOKKOS_INLINE_FUNCTION <span class="keyword">const</span> Coord&lt;X, Y&gt; <a class="code hl_function" href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">control_point</a>(</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            Idx&lt;BSplineR, BSplineTheta&gt; <span class="keyword">const</span>&amp; el)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keywordflow">return</span> Coord&lt;X, Y&gt;(m_x_spline_representation(el), m_y_spline_representation(el));</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    }</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
+<div class="foldopen" id="foldopen00337" data-start="{" data-end="}">
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno"><a class="line" href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">  337</a></span>    KOKKOS_INLINE_FUNCTION <span class="keyword">const</span> Coord&lt;X, Y&gt; <a class="code hl_function" href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">control_point</a>(</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            Idx&lt;BSplineR, BSplineTheta&gt; <span class="keyword">const</span>&amp; el)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keywordflow">return</span> Coord&lt;X, Y&gt;(m_x_spline_representation(el), m_y_spline_representation(el));</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    }</div>
 </div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>};</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>};</div>
 </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="keyword">namespace </span>mapping_detail {</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="keyword">template</span> &lt;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keyword">class </span><a class="code hl_struct" href="structX.html">X</a>,</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keyword">class </span><a class="code hl_struct" href="structY.html">Y</a>,</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="keyword">class </span>SplineEvaluator,</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keyword">class </span><a class="code hl_struct" href="structR.html">R</a>,</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="keyword">class </span><a class="code hl_struct" href="structTheta.html">Theta</a>,</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keyword">class </span>MemorySpace,</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="keyword">class </span>ExecSpace&gt;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="keyword">struct </span>MappingAccessibility&lt;</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        ExecSpace,</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code hl_struct" href="structX.html">X</a>, <a class="code hl_struct" href="structY.html">Y</a>, SplineEvaluator, <a class="code hl_struct" href="structR.html">R</a>, <a class="code hl_struct" href="structTheta.html">Theta</a>, MemorySpace&gt;&gt;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>{</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> value = Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>};</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineEvaluator, <span class="keyword">class</span> R, <span class="keyword">class</span> Theta, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="keyword">struct </span>IsCurvilinear2DMapping&lt;<a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code hl_struct" href="structX.html">X</a>, <a class="code hl_struct" href="structY.html">Y</a>, SplineEvaluator, <a class="code hl_struct" href="structR.html">R</a>, <a class="code hl_struct" href="structTheta.html">Theta</a>, MemorySpace&gt;&gt;</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    : std::true_type</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>{</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>};</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineEvaluator, <span class="keyword">class</span> R, <span class="keyword">class</span> Theta, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="keyword">struct </span>SingularOPointInvJacobian&lt;<a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code hl_struct" href="structX.html">X</a>, <a class="code hl_struct" href="structY.html">Y</a>, SplineEvaluator, <a class="code hl_struct" href="structR.html">R</a>, <a class="code hl_struct" href="structTheta.html">Theta</a>, MemorySpace&gt;&gt;</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    : std::true_type</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>{</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>};</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>} <span class="comment">// namespace mapping_detail</span></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:34</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a2b2e0b6ec7ee087fdb814f9fa22aec01"><div class="ttname"><a href="classDiscreteToCartesian.html#a2b2e0b6ec7ee087fdb814f9fa22aec01">DiscreteToCartesian::CoordArg</a></div><div class="ttdeci">Coord&lt; R, Theta &gt; CoordArg</div><div class="ttdoc">The type of the argument of the function described by this mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:57</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a3b2acc352fca7e4d634d6eb9d0707010"><div class="ttname"><a href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">DiscreteToCartesian::jacobian_12</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_12(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (1,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:205</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a5e720020cc2407eec06bc0af1f13ef52"><div class="ttname"><a href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">DiscreteToCartesian::DiscreteToCartesian</a></div><div class="ttdeci">KOKKOS_FUNCTION DiscreteToCartesian(SplineType curvilinear_to_x, SplineType curvilinear_to_y, SplineEvaluator const &amp;evaluator, IdxRangeRTheta idx_range_singular_point)</div><div class="ttdoc">Instantiate a DiscreteToCartesian from the coefficients of 2D splines approximating the mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:107</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a6c57fdeacc0c42720881993b7905ef38"><div class="ttname"><a href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">DiscreteToCartesian::control_point</a></div><div class="ttdeci">KOKKOS_INLINE_FUNCTION const Coord&lt; X, Y &gt; control_point(Idx&lt; BSplineR, BSplineTheta &gt; const &amp;el) const</div><div class="ttdoc">Get a control point of the mapping on B-splines.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:338</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a6f400d21cd055ca1ca98d50a02d184fb"><div class="ttname"><a href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">DiscreteToCartesian::jacobian_21</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_21(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (2,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:227</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a77815368f1e5e77222cf4a66b3589c2e"><div class="ttname"><a href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">DiscreteToCartesian::BSplineR</a></div><div class="ttdeci">typename SplineEvaluator::bsplines_type1 BSplineR</div><div class="ttdoc">Indicate the bspline type of the first logical dimension.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:41</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a935d65394072b77d2c4cdb9becf66090"><div class="ttname"><a href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">DiscreteToCartesian::jacobian_22</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_22(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (2,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:249</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_a93994bbc737a93fb291d248cb5881fe8"><div class="ttname"><a href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">DiscreteToCartesian::jacobian_matrix</a></div><div class="ttdeci">KOKKOS_FUNCTION void jacobian_matrix(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</div><div class="ttdoc">Compute full Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:153</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_aaa7e00dc75fb6d06ddf11f1ecc3a4962"><div class="ttname"><a href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">DiscreteToCartesian::jacobian_11</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_11(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (1,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:183</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_ab06f432d9091e0568045f5d5e5bd7d29"><div class="ttname"><a href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">DiscreteToCartesian::first_order_jacobian_matrix_r_rtheta</a></div><div class="ttdeci">KOKKOS_INLINE_FUNCTION Matrix_2x2 first_order_jacobian_matrix_r_rtheta(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Get the first order expansion of the Jacobian matrix with the theta component divided by r.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:285</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_ad3524c5f93fade40f00a204901975a33"><div class="ttname"><a href="classDiscreteToCartesian.html#ad3524c5f93fade40f00a204901975a33">DiscreteToCartesian::CoordResult</a></div><div class="ttdeci">Coord&lt; X, Y &gt; CoordResult</div><div class="ttdoc">The type of the result of the function described by this mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:59</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_ae9e0ebea2c8a75a561ed90494e0fc201"><div class="ttname"><a href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">DiscreteToCartesian::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION Coord&lt; X, Y &gt; operator()(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the physical coordinates from the logical coordinates.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:132</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_aeade6cd026d0d03df92d00b0f2651195"><div class="ttname"><a href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">DiscreteToCartesian::idx_range_singular_point</a></div><div class="ttdeci">KOKKOS_INLINE_FUNCTION IdxRangeRTheta idx_range_singular_point() const</div><div class="ttdoc">Get the index range describing the points which should be used to evaluate functions at the central p...</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:305</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_aee74ab0f1f920e05ef94fbb15b36f6fc"><div class="ttname"><a href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">DiscreteToCartesian::BSplineTheta</a></div><div class="ttdeci">typename SplineEvaluator::bsplines_type2 BSplineTheta</div><div class="ttdoc">Indicate the bspline type of the second logical dimension.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:45</div></div>
-<div class="ttc" id="aclassDiscreteToCartesian_html_af13e543668b38ffc52ac252997e9f1e8"><div class="ttname"><a href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">DiscreteToCartesian::jacobian</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:263</div></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">namespace </span>mapping_detail {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="keyword">template</span> &lt;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keyword">class </span><a class="code hl_struct" href="structX.html">X</a>,</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keyword">class </span><a class="code hl_struct" href="structY.html">Y</a>,</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keyword">class </span>SplineEvaluator,</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="keyword">class </span><a class="code hl_struct" href="structR.html">R</a>,</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keyword">class </span><a class="code hl_struct" href="structTheta.html">Theta</a>,</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="keyword">class </span>MemorySpace,</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keyword">class </span>ExecSpace&gt;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="keyword">struct </span>MappingAccessibility&lt;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        ExecSpace,</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        <a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code hl_struct" href="structX.html">X</a>, <a class="code hl_struct" href="structY.html">Y</a>, SplineEvaluator, <a class="code hl_struct" href="structR.html">R</a>, <a class="code hl_struct" href="structTheta.html">Theta</a>, MemorySpace&gt;&gt;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>{</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> value = Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>};</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineEvaluator, <span class="keyword">class</span> R, <span class="keyword">class</span> Theta, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="keyword">struct </span>IsCurvilinear2DMapping&lt;<a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code hl_struct" href="structX.html">X</a>, <a class="code hl_struct" href="structY.html">Y</a>, SplineEvaluator, <a class="code hl_struct" href="structR.html">R</a>, <a class="code hl_struct" href="structTheta.html">Theta</a>, MemorySpace&gt;&gt;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    : std::true_type</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>{</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>};</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> X, <span class="keyword">class</span> Y, <span class="keyword">class</span> SplineEvaluator, <span class="keyword">class</span> R, <span class="keyword">class</span> Theta, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="keyword">struct </span>SingularOPointInvJacobian&lt;<a class="code hl_class" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt;<a class="code hl_struct" href="structX.html">X</a>, <a class="code hl_struct" href="structY.html">Y</a>, SplineEvaluator, <a class="code hl_struct" href="structR.html">R</a>, <a class="code hl_struct" href="structTheta.html">Theta</a>, MemorySpace&gt;&gt;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    : std::true_type</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>{</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>};</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>} <span class="comment">// namespace mapping_detail</span></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html"><div class="ttname"><a href="classDiscreteToCartesian.html">DiscreteToCartesian</a></div><div class="ttdoc">A class for describing discrete 2D mappings from the logical domain to the physical domain.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:33</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a2b2e0b6ec7ee087fdb814f9fa22aec01"><div class="ttname"><a href="classDiscreteToCartesian.html#a2b2e0b6ec7ee087fdb814f9fa22aec01">DiscreteToCartesian::CoordArg</a></div><div class="ttdeci">Coord&lt; R, Theta &gt; CoordArg</div><div class="ttdoc">The type of the argument of the function described by this mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:56</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a3b2acc352fca7e4d634d6eb9d0707010"><div class="ttname"><a href="classDiscreteToCartesian.html#a3b2acc352fca7e4d634d6eb9d0707010">DiscreteToCartesian::jacobian_12</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_12(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (1,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:204</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a5e720020cc2407eec06bc0af1f13ef52"><div class="ttname"><a href="classDiscreteToCartesian.html#a5e720020cc2407eec06bc0af1f13ef52">DiscreteToCartesian::DiscreteToCartesian</a></div><div class="ttdeci">KOKKOS_FUNCTION DiscreteToCartesian(SplineType curvilinear_to_x, SplineType curvilinear_to_y, SplineEvaluator const &amp;evaluator, IdxRangeRTheta idx_range_singular_point)</div><div class="ttdoc">Instantiate a DiscreteToCartesian from the coefficients of 2D splines approximating the mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:106</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a6c57fdeacc0c42720881993b7905ef38"><div class="ttname"><a href="classDiscreteToCartesian.html#a6c57fdeacc0c42720881993b7905ef38">DiscreteToCartesian::control_point</a></div><div class="ttdeci">KOKKOS_INLINE_FUNCTION const Coord&lt; X, Y &gt; control_point(Idx&lt; BSplineR, BSplineTheta &gt; const &amp;el) const</div><div class="ttdoc">Get a control point of the mapping on B-splines.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:337</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a6f400d21cd055ca1ca98d50a02d184fb"><div class="ttname"><a href="classDiscreteToCartesian.html#a6f400d21cd055ca1ca98d50a02d184fb">DiscreteToCartesian::jacobian_21</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_21(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (2,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:226</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a77815368f1e5e77222cf4a66b3589c2e"><div class="ttname"><a href="classDiscreteToCartesian.html#a77815368f1e5e77222cf4a66b3589c2e">DiscreteToCartesian::BSplineR</a></div><div class="ttdeci">typename SplineEvaluator::bsplines_type1 BSplineR</div><div class="ttdoc">Indicate the bspline type of the first logical dimension.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:40</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a935d65394072b77d2c4cdb9becf66090"><div class="ttname"><a href="classDiscreteToCartesian.html#a935d65394072b77d2c4cdb9becf66090">DiscreteToCartesian::jacobian_22</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_22(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (2,2) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:248</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_a93994bbc737a93fb291d248cb5881fe8"><div class="ttname"><a href="classDiscreteToCartesian.html#a93994bbc737a93fb291d248cb5881fe8">DiscreteToCartesian::jacobian_matrix</a></div><div class="ttdeci">KOKKOS_FUNCTION void jacobian_matrix(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</div><div class="ttdoc">Compute full Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:152</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_aaa7e00dc75fb6d06ddf11f1ecc3a4962"><div class="ttname"><a href="classDiscreteToCartesian.html#aaa7e00dc75fb6d06ddf11f1ecc3a4962">DiscreteToCartesian::jacobian_11</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian_11(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the (1,1) coefficient of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:182</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_ab06f432d9091e0568045f5d5e5bd7d29"><div class="ttname"><a href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">DiscreteToCartesian::first_order_jacobian_matrix_r_rtheta</a></div><div class="ttdeci">KOKKOS_INLINE_FUNCTION Matrix_2x2 first_order_jacobian_matrix_r_rtheta(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Get the first order expansion of the Jacobian matrix with the theta component divided by r.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:284</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_ad3524c5f93fade40f00a204901975a33"><div class="ttname"><a href="classDiscreteToCartesian.html#ad3524c5f93fade40f00a204901975a33">DiscreteToCartesian::CoordResult</a></div><div class="ttdeci">Coord&lt; X, Y &gt; CoordResult</div><div class="ttdoc">The type of the result of the function described by this mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:58</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_ae9e0ebea2c8a75a561ed90494e0fc201"><div class="ttname"><a href="classDiscreteToCartesian.html#ae9e0ebea2c8a75a561ed90494e0fc201">DiscreteToCartesian::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION Coord&lt; X, Y &gt; operator()(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the physical coordinates from the logical coordinates.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:131</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_aeade6cd026d0d03df92d00b0f2651195"><div class="ttname"><a href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">DiscreteToCartesian::idx_range_singular_point</a></div><div class="ttdeci">KOKKOS_INLINE_FUNCTION IdxRangeRTheta idx_range_singular_point() const</div><div class="ttdoc">Get the index range describing the points which should be used to evaluate functions at the central p...</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:304</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_aee74ab0f1f920e05ef94fbb15b36f6fc"><div class="ttname"><a href="classDiscreteToCartesian.html#aee74ab0f1f920e05ef94fbb15b36f6fc">DiscreteToCartesian::BSplineTheta</a></div><div class="ttdeci">typename SplineEvaluator::bsplines_type2 BSplineTheta</div><div class="ttdoc">Indicate the bspline type of the second logical dimension.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:44</div></div>
+<div class="ttc" id="aclassDiscreteToCartesian_html_af13e543668b38ffc52ac252997e9f1e8"><div class="ttname"><a href="classDiscreteToCartesian.html#af13e543668b38ffc52ac252997e9f1e8">DiscreteToCartesian::jacobian</a></div><div class="ttdeci">KOKKOS_FUNCTION double jacobian(Coord&lt; curvilinear_tag_r, curvilinear_tag_theta &gt; const &amp;coord) const</div><div class="ttdoc">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</div><div class="ttdef"><b>Definition</b> discrete_to_cartesian.hpp:262</div></div>
 <div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:30</div></div>
 <div class="ttc" id="astructTheta_html"><div class="ttname"><a href="structTheta.html">Theta</a></div><div class="ttdoc">Define periodic real Theta dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:41</div></div>
 <div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:317</div></div>
