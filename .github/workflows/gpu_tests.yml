@@ -32,6 +32,7 @@ jobs:
   gpu_tests:
     runs-on: self-hosted
     environment: development
+    if: ${{ (! inputs.is_duplicate) || true }}
     steps:
       - name: Checkout gyselalibxx
         if: ${{ (! inputs.is_duplicate) || true }}

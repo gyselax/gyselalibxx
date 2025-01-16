@@ -47,6 +47,7 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user root
     name: CPU Test (${{ inputs.toolchain }})
+    if: ${{ (! inputs.is_duplicate) || true }}
     steps:
       - name: Checkout gyselalibxx
         if: ${{ (! inputs.is_duplicate) || true }}
