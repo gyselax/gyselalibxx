@@ -1,8 +1,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/math_tools.hpp>
-
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
@@ -10,6 +8,7 @@
 #include "czarny_to_cartesian.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "math_tools.hpp"
 
 
 namespace {

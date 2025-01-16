@@ -2,8 +2,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"
@@ -13,6 +11,7 @@
 #include "derivative_field_mem.hpp"
 #include "directional_tag.hpp"
 #include "grid_builder.hpp"
+#include "view.hpp"
 
 namespace {
 

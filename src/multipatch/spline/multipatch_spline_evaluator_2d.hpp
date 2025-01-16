@@ -6,13 +6,12 @@
 
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/view.hpp>
-
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "utils_patch_locators.hpp"
+#include "view.hpp"
 
 
 /**

@@ -11,7 +11,6 @@ target_include_directories("vlasov_xyvxvy"
 target_link_libraries("vlasov_xyvxvy"
     PUBLIC
         DDC::core
-        sll::SLL
         gslx::speciesinfo
         gslx::geometry_xyvxvy
         gslx::advection

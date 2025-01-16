@@ -11,7 +11,6 @@ target_include_directories("interpolation_2D_rp"
 target_link_libraries("interpolation_2D_rp"
     INTERFACE
         DDC::core
-        sll::SLL
         gslx::geometry_RTheta
         gslx::utils
 

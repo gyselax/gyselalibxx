@@ -6,10 +6,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/view.hpp>
-
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "view.hpp"
 
 // Pre-declaration of analytical inverse
 template <class X, class Y, class R, class Theta>

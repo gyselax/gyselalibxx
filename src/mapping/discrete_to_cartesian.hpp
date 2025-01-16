@@ -4,12 +4,11 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/math_tools.hpp>
-#include <sll/view.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "math_tools.hpp"
+#include "view.hpp"
 
 /**
  * @brief A class for describing discrete 2D mappings from the logical domain to the physical domain.

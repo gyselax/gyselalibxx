@@ -1,10 +1,9 @@
 #include <ddc/ddc.hpp>
 
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
 #include "matrix_batch_ell.hpp"
+#include "view.hpp"
 
 
 

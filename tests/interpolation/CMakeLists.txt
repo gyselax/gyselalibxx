@@ -24,7 +24,10 @@ target_link_libraries(bernstein_tests
         GTest::gtest
         GTest::gmock
         gslx::polar_splines
-        sll::SLL
+)
+target_include_directories(bernstein_tests
+    PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/.."
 )
 gtest_discover_tests(bernstein_tests DISCOVERY_MODE PRE_TEST)
 
@@ -39,7 +42,10 @@ target_link_libraries(polar_bsplines_tests
         GTest::gtest
         GTest::gmock
         gslx::polar_splines
-        sll::SLL
+)
+target_include_directories(polar_bsplines_tests
+    PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/.."
 )
 
 gtest_discover_tests(polar_bsplines_tests DISCOVERY_MODE PRE_TEST)
@@ -64,7 +70,6 @@ foreach(CONTINUITY RANGE -1 1)
             GTest::gtest
             GTest::gmock
             gslx::polar_splines
-            sll::SLL
           )
           target_compile_definitions("${test_name}" PUBLIC -DDEGREE_R=${DEGREE_R} -DDEGREE_P=${DEGREE_P} -D${BSPLINES_TYPE} -DCONTINUITY=${CONTINUITY} -D${MAPPING_TYPE})
           gtest_discover_tests("${test_name}"

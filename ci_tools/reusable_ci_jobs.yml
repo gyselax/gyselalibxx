@@ -6,8 +6,6 @@
   script:
     - changed_files=$(awk '{printf("%s ",$0)} END { printf "\n" }' changed_files.txt)
     - echo "CHANGED_FILES=${changed_files}" >> build.env
-    - FOUND_SLL=$(grep "vendor/sll/.*" -x changed_files.txt || true)
-    - if [ -z "$FOUND_SLL" ]; then echo "SLL_BUILD_TESTING=OFF" >> build.env; else echo "SLL_BUILD_TESTING=ON" >> build.env; fi
     - FOUND_POLAR_SPLINES=$(grep "src/interpolation/polar_splines/.*" -x changed_files.txt || true)
     - if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> build.env; fi
     - FOUND_POISSON_2D=$(grep "\(src/pde_solvers/polarpoissonlikesolver.hpp\)\|\(tests/geometryRTheta/polar_poisson/.*\)" -x changed_files.txt || true)

@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <utility>
 
-#include <sll/view.hpp>
+#include "view.hpp"
 
 namespace mapping_detail {
 template <class ExecSpace, class Type>

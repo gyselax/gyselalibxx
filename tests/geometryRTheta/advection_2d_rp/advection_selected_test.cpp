@@ -8,8 +8,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/math_tools.hpp>
-
 #include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
@@ -26,6 +24,7 @@
 #include "geometry_pseudo_cartesian.hpp"
 #include "input.hpp"
 #include "itimestepper.hpp"
+#include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"

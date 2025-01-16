@@ -9,7 +9,6 @@ target_include_directories("mapping"
 target_link_libraries("mapping"
     INTERFACE
         DDC::core
-        sll::SLL
         gslx::data_types
         gslx::utils
 )

@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: MIT
 #include <ddc/ddc.hpp>
 
-#include <sll/math_tools.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
+#include "math_tools.hpp"
 
 namespace FFTPoissonSolverTest {
 

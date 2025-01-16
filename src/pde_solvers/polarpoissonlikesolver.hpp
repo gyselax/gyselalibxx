@@ -3,18 +3,17 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/math_tools.hpp>
-#include <sll/view.hpp>
-
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "gauss_legendre_integration.hpp"
 #include "mapping_tools.hpp"
+#include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
 #include "metric_tensor.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
+#include "view.hpp"
 #include "volume_quadrature_nd.hpp"
 
 

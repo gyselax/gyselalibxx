@@ -9,7 +9,6 @@ target_include_directories(time_integration_rp
 target_link_libraries(time_integration_rp 
     INTERFACE
         DDC::core
-        sll::SLL
         Eigen3::Eigen
         gslx::interpolation_2D_rp
         gslx::geometry_RTheta

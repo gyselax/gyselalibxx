@@ -4,15 +4,14 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/test_utils.hpp>
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "polar_bsplines.hpp"
+#include "test_utils.hpp"
+#include "view.hpp"
 
 template <class T>
 struct PolarBsplineFixture;

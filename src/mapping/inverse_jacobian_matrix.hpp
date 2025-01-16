@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <sll/view.hpp>
-
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "view.hpp"
 
 /**
  * A class to calculate the inverse of the Jacobian matrix.

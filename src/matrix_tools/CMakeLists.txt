@@ -16,8 +16,8 @@ target_link_libraries(matrix_tools
     PUBLIC
         DDC::core
         DDC::splines
-        sll::SLL
         Kokkos::kokkos
+        gslx::utils
 )
 if(CMAKE_VERSION GREATER_EQUAL 3.18)
     target_link_libraries(matrix_tools PRIVATE LAPACK::LAPACK)

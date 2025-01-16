@@ -123,7 +123,6 @@ markdown_best_practices:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
-    MARKDOWN_FILES="$MARKDOWN_FILES $(find ./vendor/sll/ -name '*.md')"
     echo $MARKDOWN_FILES
     set +e
     python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}

@@ -8,7 +8,6 @@ target_include_directories(advection_rp
 target_link_libraries(advection_rp 
     INTERFACE
         DDC::core
-        sll::SLL
         Eigen3::Eigen
         gslx::data_types
         gslx::geometry_RTheta

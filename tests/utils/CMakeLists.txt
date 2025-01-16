@@ -6,6 +6,7 @@ include(GoogleTest)
 add_executable(unit_tests_utils
     test_ddcHelpers.cpp
     transpose.cpp
+    view.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_utils

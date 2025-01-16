@@ -7,7 +7,6 @@ target_include_directories("geometry_vparmu"
 )
 target_link_libraries("geometry_vparmu" INTERFACE
     DDC::core
-    sll::SLL
     gslx::speciesinfo
     gslx::utils
 )

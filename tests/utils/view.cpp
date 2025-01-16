@@ -2,11 +2,11 @@
 #include <memory>
 #include <sstream>
 
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
 #include <Kokkos_Core.hpp>
+
+#include "view.hpp"
 
 using namespace std;
 

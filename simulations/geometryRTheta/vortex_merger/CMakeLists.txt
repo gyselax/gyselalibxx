@@ -12,7 +12,6 @@ target_link_libraries(vortex_merger
 
         Eigen3::Eigen
 
-        sll::SLL
 
         gslx::advection_rp
         gslx::geometry_RTheta

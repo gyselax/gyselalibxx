@@ -3,12 +3,11 @@
 #include <limits>
 #include <map>
 
-#include <sll/test_utils.hpp>
-
 #include <gtest/gtest.h>
 
 #include "gauss_legendre_integration.hpp"
 #include "quadrature.hpp"
+#include "test_utils.hpp"
 
 namespace {
 

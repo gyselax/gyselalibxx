@@ -6,11 +6,10 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp> // Needed for ddc::Deriv
 
-#include <sll/math_tools.hpp>
-
 #include "ddc_aliases.hpp"
 #include "deriv_details.hpp"
 #include "idx_range_slice.hpp"
+#include "math_tools.hpp"
 
 template <class T>
 inline constexpr bool enable_deriv_field = false;

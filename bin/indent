@@ -76,7 +76,7 @@ then
 fi
 
 ${DOCKER_COMMAND} find \
-    src tests vendor/sll simulations \
+    src tests simulations \
     '(' -name '*.h' -o -name '*.hpp' -o -name '*.cpp' ')' \
     -exec ${CLANG_FORMAT} ${FORMAT_PARAMS} '{}' '+' \
 && ${RUN_IF_OK}

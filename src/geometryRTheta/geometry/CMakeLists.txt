@@ -8,7 +8,6 @@ target_include_directories("geometry_RTheta"
 )
 target_link_libraries("geometry_RTheta" INTERFACE
     DDC::core
-    sll::SLL
     gslx::data_types
     gslx::polar_splines
     gslx::utils

@@ -9,7 +9,6 @@ target_include_directories("advection"
 target_link_libraries("advection"
     INTERFACE
         DDC::core
-        sll::SLL
         gslx::interpolation
         gslx::speciesinfo
         gslx::timestepper

@@ -114,9 +114,6 @@ endif (NOT EIGEN3_FOUND)
 ## Use the discrete domain computation library (ddc) from `vendor/`
 add_subdirectory("vendor/ddc/" "ddc") # SYSTEM)
 
-## Use selalib's splines from `vendor/`
-add_subdirectory("vendor/sll/" "sll") # SYSTEM)
-
 set(koliop_BUILD_TESTING OFF CACHE BOOL "")
 set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
 set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")

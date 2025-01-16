@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <sll/view.hpp>
-
 #include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "view.hpp"
 
 /** The general predeclaration of VectorMapper.
  * @see @ref VectorMapperImplementation

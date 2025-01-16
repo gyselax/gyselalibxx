@@ -9,7 +9,6 @@ target_include_directories(quadrature
 
 target_link_libraries(quadrature PUBLIC
     DDC::core
-    sll::SLL
     gslx::mapping
     gslx::utils
 )

@@ -2,12 +2,11 @@
 #include <cmath>
 #include <memory>
 
-#include <sll/math_tools.hpp>
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
+#include "math_tools.hpp"
 #include "matrix.hpp"
+#include "view.hpp"
 
 namespace {
 

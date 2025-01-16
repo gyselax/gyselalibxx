@@ -1,10 +1,9 @@
 #include <ddc/ddc.hpp>
 
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
 #include "matrix_batch_csr.hpp"
+#include "view.hpp"
 
 template <MatrixBatchCsrSolver Solver>
 void solve_system(

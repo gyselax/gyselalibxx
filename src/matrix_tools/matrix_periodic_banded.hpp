@@ -2,9 +2,8 @@
 #pragma once
 #include <memory>
 
-#include <sll/view.hpp>
-
 #include "matrix_corner_block.hpp"
+#include "view.hpp"
 
 class Matrix;
 

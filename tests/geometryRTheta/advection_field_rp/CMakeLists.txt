@@ -24,7 +24,6 @@ function (advection_field_test_executable SIMULATION)
             
             Eigen3::Eigen
             
-            sll::SLL
             gslx::paraconfpp
 
             GTest::gtest

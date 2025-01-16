@@ -1,8 +1,6 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
 #include <ddc/kernels/splines.hpp>
 
-#include <sll/view.hpp>
-
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
@@ -10,6 +8,7 @@
 #include "ddc_helper.hpp"
 #include "mapping_testing_tools.hpp"
 #include "metric_tensor.hpp"
+#include "view.hpp"
 
 struct X
 {

@@ -7,7 +7,6 @@ target_include_directories("advection_field_RTheta"
 )
 target_link_libraries("advection_field_RTheta" INTERFACE
     DDC::core
-    sll::SLL
     gslx::data_types
     gslx::mapping
     gslx::pde_solvers

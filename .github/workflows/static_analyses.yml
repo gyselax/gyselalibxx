@@ -44,7 +44,6 @@ jobs:
         shell: bash
         run: |
           MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
-          MARKDOWN_FILES="$MARKDOWN_FILES $(find ./vendor/sll/ -name '*.md')"
           echo $MARKDOWN_FILES
           python3 ci_tools/markdown_linter.py ${MARKDOWN_FILES}
 

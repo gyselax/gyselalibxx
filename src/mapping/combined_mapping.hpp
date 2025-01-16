@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "sll/math_tools.hpp"
-
 #include "inv_jacobian_o_point.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "mapping_tools.hpp"
+#include "math_tools.hpp"
 
 /**
  * @brief A class which describes a mapping which is constructed by

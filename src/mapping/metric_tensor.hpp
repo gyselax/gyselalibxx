@@ -2,10 +2,9 @@
 #pragma once
 #include <type_traits>
 
-#include <sll/view.hpp>
-
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "view.hpp"
 
 /**
  * @brief An operator for calculating the metric tensor.

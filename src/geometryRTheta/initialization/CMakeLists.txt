@@ -14,7 +14,6 @@ target_link_libraries(diocotron_init_eq
         DDC::pdi        
         Eigen3::Eigen
         
-        sll::SLL
         gslx::geometry_RTheta
         gslx::utils
 
@@ -36,7 +35,6 @@ target_link_libraries(vortex_merger_init_eq
         #DDC::pdi        
         #Eigen3::Eigen
         
-        sll::SLL
         gslx::geometry_RTheta
         gslx::utils
         gslx::poisson_RTheta

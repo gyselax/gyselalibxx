@@ -2,10 +2,9 @@
 #pragma once
 #include <memory>
 
-#include <sll/view.hpp>
-
 #include "matrix.hpp"
 #include "matrix_dense.hpp"
+#include "view.hpp"
 
 /**
  * @brief A class representing a matrix with the following block pattern:

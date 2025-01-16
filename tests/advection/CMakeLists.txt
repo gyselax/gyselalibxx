@@ -17,7 +17,6 @@ target_link_libraries(1d_advection
         GTest::gtest
         GTest::gmock
 
-        sll::SLL
 
         gslx::advection
         gslx::speciesinfo

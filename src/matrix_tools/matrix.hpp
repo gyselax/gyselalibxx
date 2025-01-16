@@ -4,7 +4,7 @@
 #include <iosfwd>
 #include <memory>
 
-#include <sll/view.hpp>
+#include "view.hpp"
 
 /**
  * @brief The super class from which matrix classes should inherit.

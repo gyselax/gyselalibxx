@@ -14,7 +14,6 @@ target_link_libraries("poisson_xy"
     PUBLIC
         DDC::core
         DDC::fft
-        sll::SLL
         gslx::geometry_xyvxvy
         gslx::pde_solvers
         gslx::quadrature

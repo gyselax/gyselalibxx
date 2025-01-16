@@ -5,14 +5,13 @@
 
 #include <ddc/ddc.hpp>
 
-#include <sll/view.hpp>
-
 #include "bernstein.hpp"
 #include "cartesian_to_barycentric.hpp"
 #include "ddc_helper.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "mapping_tools.hpp"
 #include "polar_spline.hpp"
+#include "view.hpp"
 
 /**
  * A class containing all information describing polar bsplines.

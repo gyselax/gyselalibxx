@@ -2,12 +2,11 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include <sll/math_tools.hpp>
-#include <sll/view.hpp>
-
 #include "cartesian_to_barycentric.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "math_tools.hpp"
+#include "view.hpp"
 
 /**
  * @brief A class which evaluates the triangular Bernstein polynomials.

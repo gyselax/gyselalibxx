@@ -14,7 +14,6 @@ target_link_libraries(unit_tests_quadrature
         GTest::gtest
         GTest::gmock
 
-        sll::SLL
 
         gslx::quadrature
         gslx::utils
@@ -35,7 +34,6 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 	        GTest::gtest
 	        GTest::gmock
 	        paraconf::paraconf
-	        sll::SLL
 	        gslx::quadrature
             gslx::utils
 	)
