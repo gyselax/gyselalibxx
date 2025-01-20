@@ -248,6 +248,6 @@ var NAVTREEINDEX6 =
 "structPolarSplineMem.html#adc81b7076342562cd55fc113c0a6bbcb":[15,179,4],
 "structPolarSplineMem.html#adc977e4404b46ee447c69e7b735f078f":[15,179,1],
 "structR.html":[15,187],
-"structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.html":[15,188,0],
-"structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined.html":[15,188,1]
+"structR.html#a35006d7e5031a9bd48e5af62534c421f":[15,187,0],
+"structR__cov.html":[15,188]
 };

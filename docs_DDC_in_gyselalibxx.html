@@ -128,7 +128,7 @@ Contents</h1>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Coordinates"></a>
 Coordinates</h1>
 <p>A <code>Coord</code> in Gysela is an alias to the DDC type <code>ddc::Coordinate</code>. It is one of the only DDC types which represents a continuous data type. This means that it can take any value that can be represented by a double. It represents the position of a coordinate in the vector space.</p>
-<p>Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a \((r,\theta)\) slice should have the type <code>Coord&lt;<a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a>, <a class="el" href="structTheta.html" title="Define periodic real Theta dimension.">Theta</a>&gt;</code>, where <code><a class="el" href="structR.html" title="Define non periodic real R dimension.">R</a></code> represents the radial dimension \(r\), and <code><a class="el" href="structTheta.html" title="Define periodic real Theta dimension.">Theta</a></code> represents the poloidal dimension \(\theta\).</p>
+<p>Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a \((r,\theta)\) slice should have the type <code>Coord&lt;<a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a>, <a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a>&gt;</code>, where <code><a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a></code> represents the radial dimension \(r\), and <code><a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a></code> represents the poloidal dimension \(\theta\).</p>
 <p>If the value of the coordinate needs to be used in a mathematical expression, the scalar (<code>double</code>) quantity stored in one of the dimensions of a coordinate can be extracted using <code>ddc::get&lt;DimOfInterest&gt;(my_coord)</code>.</p>
 <p>It is also possible to extract a coordinate on a subset of the original dimensions using <code>ddc::select&lt;DimOfInterest&gt;(my_coord)</code>. For example if we want to get the position of an object on a radial slice \((r,\theta)\), but we are given the coordinate in the full vector space \((r, \theta, \varphi, v_\parallel, \mu)\) then we can do: </p><div class="fragment"><div class="line">Coord&lt;R, Theta, Phi, Vpar, Mu&gt; full_coord(...);</div>
 <div class="line">Coord&lt;R, Theta&gt; slice_coord = ddc::select&lt;R, Theta&gt;(full_coord);</div>
@@ -137,7 +137,7 @@ Coordinates</h1>
 <p>The vector \(Q\) can be written as \(Q=R-P\). Similarly in the code, we would have: </p><div class="fragment"><div class="line">Coord&lt;X, Y&gt; P(5.0, 2.0);</div>
 <div class="line">Coord&lt;X, Y&gt; <a class="code hl_struct" href="structR.html">R</a>(7.0, 6.0);</div>
 <div class="line">Coord&lt;X, Y&gt; Q = <a class="code hl_struct" href="structR.html">R</a> - P;</div>
-<div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real R dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:30</div></div>
+<div class="ttc" id="astructR_html"><div class="ttname"><a href="structR.html">R</a></div><div class="ttdoc">Define non periodic real contravariant R dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:32</div></div>
 </div><!-- fragment --><p>The <code>Coord</code> class also provides an addition operator, comparison operators, and an output operator for easy printing using <code>cout</code>.</p>
 <p>In Gyselalibxx the alias <code>CoordX</code> is usually defined in <code>geometry.hpp</code> to describe the type <code>Coord&lt;<a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a>&gt;</code> more succinctly.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Indexing_and_associated_concepts"></a>
@@ -161,7 +161,7 @@ Grid</h1>
 <p>E.g.: </p><div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structGridX.html">GridX</a> : UniformGridBase&lt;X&gt;</div>
 <div class="line">{</div>
 <div class="line">};</div>
-<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:94</div></div>
+<div class="ttc" id="astructGridX_html"><div class="ttname"><a href="structGridX.html">GridX</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:102</div></div>
 </div><!-- fragment --><p>Although this seems like a useful type, you should not directly create instances of this class in the code. Instead you should call <code>init_discrete_space</code> and access the points using an <code>Index</code>. For more details see the section about <code>Index</code>.</p>
 <h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Index"></a>
 Index</h1>
@@ -278,10 +278,10 @@ f_s(0,x,v) = \frac{n_0}{2\pi T_0}\exp\left(-\frac{v^2}{T_0}\right)\cos(k_xx)
 <div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structVx.html">Vx</a> {</div>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">PERIODIC</a> = <span class="keyword">false</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:340</div></div>
-<div class="ttc" id="astructVx_html_aabb61a786e12232d6e6adaf41a545a4a"><div class="ttname"><a href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">Vx::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:345</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:317</div></div>
-<div class="ttc" id="astructX_html_aa1915e83f5e8d1363cbc25d737b52a9c"><div class="ttname"><a href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">X::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:322</div></div>
+<div class="ttc" id="astructVx_html"><div class="ttname"><a href="structVx.html">Vx</a></div><div class="ttdoc">Define non periodic real X velocity dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:401</div></div>
+<div class="ttc" id="astructVx_html_aabb61a786e12232d6e6adaf41a545a4a"><div class="ttname"><a href="structVx.html#aabb61a786e12232d6e6adaf41a545a4a">Vx::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:406</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:378</div></div>
+<div class="ttc" id="astructX_html_aa1915e83f5e8d1363cbc25d737b52a9c"><div class="ttname"><a href="structX.html#aa1915e83f5e8d1363cbc25d737b52a9c">X::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Define periodicity of the dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:383</div></div>
 </div><!-- fragment --><p>We also need types to define the grid on which the simulation will evolve. The domain is discretised on the following grid: \([i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]\). Grid types are required to define the positions of the grid points in each of the three dimensions:</p><ul>
 <li>The object \([x_0,...,x_N]\) is defined with a grid and will be denoted \(GridX\).</li>
 <li>The object \([v_0,...,v_{N_v}]\) is defined with a grid and will be denoted \(GridVx\).</li>
