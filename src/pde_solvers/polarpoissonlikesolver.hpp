@@ -61,9 +61,6 @@ public:
     /// The poloidal dimension
     using Theta = typename GridTheta::continuous_dimension_type;
 
-    static_assert(R::IS_CONTRAVARIANT);
-    static_assert(Theta::IS_CONTRAVARIANT);
-
 public:
     struct RBasisSubset
     {

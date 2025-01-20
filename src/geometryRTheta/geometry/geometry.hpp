@@ -23,10 +23,8 @@
 
 // POLAR SPACE AND VELOCITY ----------------------------------------------------------------------
 // --- Continuous dimensions
-struct R_cov;
-struct Theta_cov;
 /**
- * @brief Define non periodic real contravariant R dimension.
+ * @brief Define non periodic real R dimension.
  */
 struct R
 {
@@ -35,18 +33,9 @@ struct R
      * Here, not periodic.
      */
     static bool constexpr PERIODIC = false;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = false;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = true;
-
-    /// A type-alias mapping to the covariant counterpart.
-    using Dual = R_cov;
 };
 /**
- * @brief Define periodic real contravariant Theta dimension.
+ * @brief Define periodic real Theta dimension.
  */
 struct Theta
 {
@@ -55,56 +44,6 @@ struct Theta
      * Here, periodic.
      */
     static bool constexpr PERIODIC = true;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = false;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = true;
-
-    /// A type-alias mapping to the covariant counterpart.
-    using Dual = Theta_cov;
-};
-
-/**
- * @brief Define non periodic real covariant R dimension.
- */
-struct R_cov
-{
-    /**
-     * @brief Define periodicity of the dimension.
-     * Here, not periodic.
-     */
-    static bool constexpr PERIODIC = false;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = true;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = false;
-
-    /// A type-alias mapping to the covariant counterpart.
-    using Dual = R;
-};
-/**
- * @brief Define periodic real covariant Theta dimension.
- */
-struct Theta_cov
-{
-    /**
-     * @brief Define periodicity of the dimension.
-     * Here, periodic.
-     */
-    static bool constexpr PERIODIC = true;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = true;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = false;
-
-    /// A type-alias mapping to the covariant counterpart.
-    using Dual = Theta;
 };
 
 /**

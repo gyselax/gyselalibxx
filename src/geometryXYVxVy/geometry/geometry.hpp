@@ -18,15 +18,6 @@ struct X
      * @brief A boolean indicating if the dimension is periodic.
      */
     static bool constexpr PERIODIC = true;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = true;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = true;
-
-    /// A type-alias mapping to the co/contra-variant counterpart.
-    using Dual = X;
 };
 
 /**
@@ -38,15 +29,6 @@ struct Y
      * @brief A boolean indicating if the dimension is periodic.
      */
     static bool constexpr PERIODIC = true;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = true;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = true;
-
-    /// A type-alias mapping to the co/contra-variant counterpart.
-    using Dual = Y;
 };
 
 /**
