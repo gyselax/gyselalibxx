@@ -24,6 +24,14 @@ struct X
 #else
     static bool constexpr PERIODIC = false;
 #endif
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+
+    /// A type-alias mapping to the co/contra-variant counterpart.
+    using Dual = X;
 };
 
 /**
