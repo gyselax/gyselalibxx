@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "advection_domain.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "directional_tag.hpp"
@@ -50,7 +49,6 @@
  *
  *
  * @see IFootFinder
- * @see AdvectionDomain
  *
  */
 template <class FootFinder, class Mapping>
@@ -74,8 +72,8 @@ public:
      * @param[in] foot_finder
      *      An IFootFinder which computes the characteristic feet.
      * @param[in] mapping
-     *      The mapping function from the logical index range to the physical
-     *      index range. 
+     *      The mapping function from the logical domain to the physical
+     *      domain. 
      *
      * @tparam IFootFinder
      *      A child class of IFootFinder.
@@ -101,7 +99,7 @@ public:
      *      A Field containing the values of the function we want to advect.
      * @param [in] advection_field_xy
      *      A DConstVectorFieldRTheta containing the values of the advection field
-     *      on the physical index range axes.
+     *      on the physical domain axes.
      * @param [in] dt
      *      A time step used.
      *

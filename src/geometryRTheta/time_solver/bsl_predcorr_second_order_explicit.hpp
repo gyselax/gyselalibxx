@@ -9,7 +9,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -54,15 +53,12 @@
  *
  * (With @f$X^C@f$ the characteristic feet such that @f$\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2} @f$.)
  *
- * @tparam Mapping
- *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
- * @tparam AdvectionDomain
- *      An AdvectionDomain class.
- * @tparam FootFinder
- *      A IFootFinder class.
- *
+ * @tparam LogicalToPhysicalMapping
+ *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
+ * @tparam LogicalToPseudoPhysicalMapping
+ *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
  */
-template <class Mapping, class AdvectionDomain>
+template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -71,12 +67,15 @@ private:
                     host_t<DVectorFieldMemRTheta<X, Y>>,
                     Kokkos::DefaultHostExecutionSpace>;
 
-    using SplineFootFinderType = SplineFootFinder<EulerMethod, AdvectionDomain, Mapping>;
+    using SplineFootFinderType = SplineFootFinder<
+            EulerMethod,
+            LogicalToPhysicalMapping,
+            LogicalToPseudoPhysicalMapping>;
 
 
-    Mapping const& m_mapping;
+    LogicalToPhysicalMapping const& m_logical_to_physical;
 
-    BslAdvectionRTheta<SplineFootFinderType, Mapping> const& m_advection_solver;
+    BslAdvectionRTheta<SplineFootFinderType, LogicalToPhysicalMapping> const& m_advection_solver;
 
     EulerMethod const m_euler;
     SplineFootFinderType const m_find_feet;
@@ -96,12 +95,10 @@ public:
     /**
      * @brief Instantiate a BslExplicitPredCorrRTheta.
      *
-     * @param[in] advection_domain
-     *      An AdvectionDomain object which gives the information
-     *      in which index range we advect.
-     * @param[in] mapping
-     *      The mapping function from the logical index range to the
-     *      physical index range.
+     * @param[in] logical_to_physical
+     *      The mapping from the logical domain to the physical domain.
+     * @param[in] logical_to_pseudo_physical
+     *      The mapping from the logical domain to the pseudo-physical domain.
      * @param[in] advection_solver
      *      The advection operator with an Euler method.
      * @param[in] grid
@@ -118,9 +115,9 @@ public:
      *      An evaluator of B-splines for the spline advection field.
      */
     BslExplicitPredCorrRTheta(
-            AdvectionDomain const& advection_domain,
-            Mapping const& mapping,
-            BslAdvectionRTheta<SplineFootFinderType, Mapping>& advection_solver,
+            LogicalToPhysicalMapping const& logical_to_physical,
+            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
+            BslAdvectionRTheta<SplineFootFinderType, LogicalToPhysicalMapping>& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
             SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
@@ -130,10 +127,15 @@ public:
                     PolarBSplinesRTheta,
                     SplineRThetaEvaluatorNullBound> const& poisson_solver,
             SplineRThetaEvaluatorConstBound_host const& advection_evaluator)
-        : m_mapping(mapping)
+        : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
         , m_euler(grid)
-        , m_find_feet(m_euler, advection_domain, mapping, builder, advection_evaluator)
+        , m_find_feet(
+                  m_euler,
+                  logical_to_physical,
+                  logical_to_pseudo_physical,
+                  builder,
+                  advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
@@ -184,7 +186,7 @@ public:
         host_t<DVectorFieldRTheta<X, Y>> advection_field(advection_field_alloc);
         host_t<DVectorFieldRTheta<X, Y>> advection_field_predicted(advection_field_predicted_alloc);
 
-        AdvectionFieldFinder advection_field_computer(m_mapping);
+        AdvectionFieldFinder advection_field_computer(m_logical_to_physical);
 
 
 

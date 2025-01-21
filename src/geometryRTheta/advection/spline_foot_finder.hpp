@@ -11,35 +11,62 @@
 #include "vector_mapper.hpp"
 
 /**
- * @brief Define a base class for all the time integration methods used for the advection.
+ * @brief A class to find the foot of the characteristics on the @f$ (r,\theta) @f$
+ * plane.
+ *
+ * The natural advection domain is the physical domain,
+ * where the studied equation is given.
+ * However, not all the mappings used are analytically invertible and inverting
+ * the Jacobian matrix of the mapping could be costly and could introduce numerical
+ * errors. That is why, we also introduce a pseudo-Cartesian domain.
+ *
+ * More details can be found in Edoardo Zoni's article
+ * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
  * @tparam TimeStepper
  *      A child class of ITimeStepper providing a time integration method.
- * @tparam AdvectionDomain
- *      A child class of AdvectionDomain providing the informations about the advection index range.
+ * @tparam LogicalToPhysicalMapping
+ *      A mapping from the logical domain to the physical domain.
+ * @tparam LogicalToPseudoPhysicalMapping
+ *      A mapping from the logical domain to the domain where the advection is
+ *      carried out. This may be a pseudo-physical domain or the physical domain
+ *      itself.
  *
  * @see BslAdvectionRTheta
  */
-template <class TimeStepper, class AdvectionDomain, class Mapping>
+template <class TimeStepper, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
 class SplineFootFinder : public IFootFinder
 {
+    static_assert(is_mapping_v<LogicalToPhysicalMapping>);
+    static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
+    static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
+
+private:
+    using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
+
 private:
     /**
      * @brief Tag the first dimension in the advection index range.
      */
-    using X_adv = typename AdvectionDomain::X_adv;
+    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     /**
      * @brief Tag the second dimension in the advection index range.
      */
-    using Y_adv = typename AdvectionDomain::Y_adv;
+    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    /**
+     * @brief The coordinate type associated to the dimensions in the advection domain.
+     */
+    using CoordXY_adv = Coord<X_adv, Y_adv>;
 
     using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
-    using InvAdvectionMapping = CombinedMapping<Mapping, PseudoCartesianToCircular>;
+    using PseudoPhysicalToPhysicalMapping
+            = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
     TimeStepper const& m_time_stepper;
 
-    AdvectionDomain const& m_advection_domain;
-    InvAdvectionMapping m_mapping;
+    LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
+    PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
+    PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
 
     SplineRThetaBuilder_host const& m_builder_advection_field;
     SplineRThetaEvaluatorConstBound_host const& m_evaluator_advection_field;
@@ -53,11 +80,10 @@ public:
      * @param[in] time_stepper
      *      The time integration method used to solve the characteristic
      *      equation (ITimeStepper).
-     * @param[in] advection_domain
-     *      An AdvectionDomain object which defines in which index range we
-     *      advect the characteristics.
-     * @param[in] mapping
+     * @param[in] logical_to_physical_mapping
      *      The mapping from the logical domain to the physical domain.
+     * @param[in] logical_to_pseudo_physical_mapping
+     *      The mapping from the logical domain to the pseudo-physical domain.
      * @param[in] builder_advection_field
      *      The spline builder which computes the spline representation
      *      of the advection field.
@@ -67,23 +93,22 @@ public:
      *      @f$ \varepsilon @f$ parameter used for the linearization of the
      *      advection field around the central point.
      *
-     * @tparam TimeStepper
-     *      A child class of ITimeStepper providing a time integration method.
-     * @tparam AdvectionDomain
-     *      A child class of AdvectionDomain providing the informations about the advection index range.
-     *
      * @see ITimeStepper
      */
     SplineFootFinder(
             TimeStepper const& time_stepper,
-            AdvectionDomain const& advection_domain,
-            Mapping const& mapping,
+            LogicalToPhysicalMapping const& logical_to_physical_mapping,
+            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical_mapping,
             SplineRThetaBuilder_host const& builder_advection_field,
             SplineRThetaEvaluatorConstBound_host const& evaluator_advection_field,
             double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
-        , m_advection_domain(advection_domain)
-        , m_mapping(mapping, PseudoCartesianToCircular(), epsilon)
+        , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
+        , m_pseudo_physical_to_logical(logical_to_pseudo_physical_mapping.get_inverse_mapping())
+        , m_pseudo_physical_to_physical(
+                  logical_to_physical_mapping,
+                  PseudoCartesianToCircular(),
+                  epsilon)
         , m_builder_advection_field(builder_advection_field)
         , m_evaluator_advection_field(evaluator_advection_field)
     {
@@ -117,7 +142,7 @@ public:
         auto advection_field_in_adv_domain = create_geometry_mirror_view(
                 Kokkos::DefaultHostExecutionSpace(),
                 advection_field,
-                m_mapping);
+                m_pseudo_physical_to_physical);
 
         // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
@@ -146,6 +171,10 @@ public:
                                     ddcHelper::get<Y_adv>(advection_field_in_adv_domain_coefs)));
                 };
 
+        IdxRangeRTheta const idx_range_rp = get_idx_range<GridR, GridTheta>(feet);
+
+        CoordXY_adv coord_center(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
+
         // The function describing how the value(s) are updated using the derivative.
         std::function<
                 void(host_t<FieldRTheta<CoordRTheta>>,
@@ -155,7 +184,21 @@ public:
                                       host_t<DConstVectorFieldRTheta<X_adv, Y_adv>> advection_field,
                                       double dt) {
                     // Compute the characteristic feet at t^n:
-                    m_advection_domain.advect_feet(feet, advection_field, dt);
+                    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
+                        CoordRTheta const coord_rp(feet(irp));
+                        CoordXY_adv const coord_xy = m_logical_to_pseudo_physical(coord_rp);
+
+                        CoordXY_adv const feet_xy = coord_xy - dt * advection_field(irp);
+
+                        if (norm_inf(feet_xy - coord_center) < 1e-15) {
+                            feet(irp) = CoordRTheta(0, 0);
+                        } else {
+                            feet(irp) = m_pseudo_physical_to_logical(feet_xy);
+                            ddc::select<Theta>(feet(irp)) = ddcHelper::restrict_to_idx_range(
+                                    ddc::select<Theta>(feet(irp)),
+                                    IdxRangeTheta(idx_range_rp));
+                        }
+                    });
 
                     // Treatment to conserve the C0 property of the advected function:
                     unify_value_at_center_pt(feet);

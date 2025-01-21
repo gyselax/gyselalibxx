@@ -13,8 +13,8 @@
  * This class creates and stores splines memory spaces describing the analytical mapping.
  * The discrete mapping is then created using the splines without copying data.
  *
- * @tparam X The first cartesian dimension.
- * @tparam Y The second cartesian dimension.
+ * @tparam X The first Cartesian dimension.
+ * @tparam Y The second Cartesian dimension.
  * @tparam SplineBuilder An operator for building spline coefficients.
  * @tparam SplineEvaluator An operator for evaluating a spline.
  */
@@ -159,8 +159,8 @@ public:
  * This class creates and stores splines memory spaces describing the analytical mapping.
  * The discrete mapping is then created using the splines without copying data.
  *
- * @tparam X The first cartesian dimension.
- * @tparam Y The second cartesian dimension.
+ * @tparam X The first Cartesian dimension.
+ * @tparam Y The second Cartesian dimension.
  * @tparam SplineBuilder An operator for building spline coefficients.
  * @tparam SplineEvaluator An operator for evaluating a spline.
  * @tparam ncells_r The number of cells in the refined spline in the radial direction.

@@ -7,14 +7,14 @@
 #include "mapping_tools.hpp"
 
 /**
- * @brief A class to convert cartesian coordinates to barycentric coordinates
+ * @brief A class to convert Cartesian coordinates to barycentric coordinates
  * on a triangle.
  *
  * Tags are used to identify the corners of the triangle. This ensures that
  * there are different types for coordinate systems related to different triangles.
  *
- * @tparam X The tag of the x dimension of the cartesian coordinates.
- * @tparam Y The tag of the y dimension of the cartesian coordinates.
+ * @tparam X The tag of the x dimension of the Cartesian coordinates.
+ * @tparam Y The tag of the y dimension of the Cartesian coordinates.
  * @tparam Corner1Tag A tag identifying the first corner of the triangle.
  * @tparam Corner2Tag A tag identifying the second corner of the triangle.
  * @tparam Corner3Tag A tag identifying the third corner of the triangle.
@@ -26,7 +26,7 @@ public:
     /// The type of a coordinate in the barycentric coordinate system.
     using CoordResult = Coord<Corner1Tag, Corner2Tag, Corner3Tag>;
 
-    /// The type of a coordinate in the cartesian coordinate system.
+    /// The type of a coordinate in the Cartesian coordinate system.
     using CoordArg = Coord<X, Y>;
 
 private:
@@ -86,9 +86,9 @@ public:
     CartesianToBarycentric& operator=(CartesianToBarycentric&& x) = default;
 
     /**
-     * @brief The operator to get the equivalent barycentric coordinate of the cartesian coordinate.
+     * @brief The operator to get the equivalent barycentric coordinate of the Cartesian coordinate.
      *
-     * @param[in] pos The known cartesian coordinate.
+     * @param[in] pos The known Cartesian coordinate.
      *
      * @return The equivalent barycentric coordinate.
      */

@@ -10,7 +10,7 @@
 #include "species_info.hpp"
 
 /**
- * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every cartesian geometry.
+ * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry.
  */
 template <class Geometry, class GridV>
 class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>

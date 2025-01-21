@@ -10,7 +10,6 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "advection_domain.hpp"
 #include "bsl_advection_rp.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
@@ -189,11 +188,9 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
 
-    AdvectionDomain advection_domain(to_physical_mapping);
-
     SplineFootFinder find_feet(
             time_stepper,
-            advection_domain,
+            to_physical_mapping,
             to_physical_mapping,
             builder_host,
             spline_evaluator_extrapol_host);
@@ -232,7 +229,7 @@ int main(int argc, char** argv)
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
-            advection_domain,
+            to_physical_mapping,
             to_physical_mapping,
             advection_operator,
             mesh_rp,
@@ -242,7 +239,7 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol_host);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
-            advection_domain,
+            to_physical_mapping,
             to_physical_mapping,
             advection_operator,
             mesh_rp,

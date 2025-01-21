@@ -83,7 +83,7 @@ The PolarSplineFEMPoissonLikeSolver is tested on a circular mapping (CircularToC
  * for the following test functions: 
  	* polar solution: $\phi(x, y) = C r(x,y)^6 (r(x,y) -1)^6 \cos(m\theta)$,
  		* with $C = 2^{12}1e-4$ and $m = 11$; 
- 	* cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$, 
+ 	* Cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$, 
  		* with  $C = 2^{12}1e-4$. 
  		
 

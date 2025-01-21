@@ -17,7 +17,7 @@
  * in polar coordinates.
  *
  * @tparam Mapping
- *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
+ *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  */
 template <class Mapping>
 class VortexMergerEquilibria

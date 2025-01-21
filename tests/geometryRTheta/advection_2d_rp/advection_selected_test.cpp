@@ -8,7 +8,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
 #include "cartesian_to_circular.hpp"
@@ -162,10 +161,11 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE MAPPING AND THE ADVECTION DOMAIN.
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-    CircularToCartesian<R, Theta, X, Y> analytical_mapping;
+    CircularToCartesian<R, Theta, X, Y> to_physical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
-    CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
-    AdvectionDomain advection_domain(analytical_mapping);
+    CartesianToCircular<X, Y, R, Theta> to_logical_analytical_mapping;
+    CircularToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
+            to_physical_analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
     std::string const adv_domain_name = "PHYSICAL";
     key += "circular_physical";
@@ -175,36 +175,35 @@ int main(int argc, char** argv)
     double const czarny_epsilon = 1.4;
 
 #if defined(CZARNY_MAPPING_PHYSICAL)
-    CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
-    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
-    AdvectionDomain advection_domain(analytical_mapping);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
+            to_physical_analytical_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PHYSICAL";
     key += "czarny_physical";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
-    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
-    AdvectionDomain advection_domain(logical_to_pseudo_cart_mapping);
     std::string const mapping_name = "CZARNY";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<R, Theta, X, Y> analytical_mapping(czarny_e, czarny_epsilon);
-    CartesianToCzarny<X, Y, R, Theta> to_logical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
-                    analytical_mapping,
+                    to_physical_analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
-    AdvectionDomain advection_domain(logical_to_pseudo_cart_mapping);
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "discrete_pseudo_cartesian";
@@ -277,11 +276,11 @@ int main(int argc, char** argv)
               << " - " << simu_type << " : " << std::endl;
     simulate(
             to_physical_mapping,
-            to_logical_mapping,
-            analytical_mapping,
+            to_logical_analytical_mapping,
+            logical_to_pseudo_cart_mapping,
+            to_physical_analytical_mapping,
             grid,
             time_stepper,
-            advection_domain,
             simulation,
             interpolator,
             builder,

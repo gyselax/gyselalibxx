@@ -9,7 +9,7 @@
 #include "species_info.hpp"
 
 /**
- * @brief A class which computes the spatial advection along the dimension of interest GridX. Working for every cartesian geometry. 
+ * @brief A class which computes the spatial advection along the dimension of interest GridX. Working for every Cartesian geometry. 
  */
 template <class Geometry, class GridX>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>

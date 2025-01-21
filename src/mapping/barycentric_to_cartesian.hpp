@@ -7,7 +7,7 @@
 #include "mapping_tools.hpp"
 
 /**
- * @brief A class to convert barycentric coordinates to cartesian coordinates
+ * @brief A class to convert barycentric coordinates to Cartesian coordinates
  * on a triangle.
  *
  * Tags are used to identify the corners of the triangle. This ensures that
@@ -16,8 +16,8 @@
  * @tparam Corner1Tag A tag identifying the first corner of the triangle.
  * @tparam Corner2Tag A tag identifying the second corner of the triangle.
  * @tparam Corner3Tag A tag identifying the third corner of the triangle.
- * @tparam X The tag of the x dimension of the cartesian coordinates.
- * @tparam Y The tag of the y dimension of the cartesian coordinates.
+ * @tparam X The tag of the x dimension of the Cartesian coordinates.
+ * @tparam Y The tag of the y dimension of the Cartesian coordinates.
  */
 template <class Corner1Tag, class Corner2Tag, class Corner3Tag, class X, class Y>
 class BarycentricToCartesian
@@ -26,7 +26,7 @@ public:
     /// The type of a coordinate in the barycentric coordinate system.
     using CoordArg = Coord<Corner1Tag, Corner2Tag, Corner3Tag>;
 
-    /// The type of a coordinate in the cartesian coordinate system.
+    /// The type of a coordinate in the Cartesian coordinate system.
     using CoordResult = Coord<X, Y>;
 
 private:
@@ -85,11 +85,11 @@ public:
     BarycentricToCartesian& operator=(BarycentricToCartesian&& x) = default;
 
     /**
-     * @brief The operator to get the equivalent cartesian coordinate of the barycentric coordinate.
+     * @brief The operator to get the equivalent Cartesian coordinate of the barycentric coordinate.
      *
      * @param[in] pos The known barycentric coordinate.
      *
-     * @return The equivalent cartesian coordinate.
+     * @return The equivalent Cartesian coordinate.
      */
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& pos) const
     {

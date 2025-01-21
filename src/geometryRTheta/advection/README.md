@@ -96,9 +96,9 @@ $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
 
 ## Advection domain 
 
-There are two advection domains implemented: 
- - the physical domain: AdvectionPhysicalDomain; 
- - the pseudo-Cartesian domain: AdvectionPhysicalDomain. 
+There are two advection domains to consider: 
+ - the physical domain;
+ - the pseudo-Cartesian domain.
 
 It seems logical to use the **physical domain**, where the studied equation is given, as the advection domain. 
 
@@ -305,7 +305,6 @@ Journal of Computational Physics (2019).
 # Contents
 
 This folder contains:
- - advection\_domain.hpp : define the different advection domains (AdvectionDomain). 
  - iadvectionrp.hpp : define the base class for advection operator (IAdvectionRP): 
  	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRP); 
  - foot\_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder): 

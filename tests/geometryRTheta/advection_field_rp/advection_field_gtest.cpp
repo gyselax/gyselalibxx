@@ -15,7 +15,6 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "advection_domain.hpp"
 #include "bsl_advection_rp.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
@@ -137,14 +136,12 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    AdvectionDomain advection_idx_range(to_physical_mapping);
-
     RK3<host_t<FieldMemRTheta<CoordRTheta>>,
         host_t<DVectorFieldMemRTheta<X, Y>>,
         Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
     SplineFootFinder find_feet(
             time_stepper,
-            advection_idx_range,
+            to_physical_mapping,
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);

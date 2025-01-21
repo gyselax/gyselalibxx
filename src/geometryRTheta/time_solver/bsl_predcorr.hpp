@@ -9,7 +9,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "advection_domain.hpp"
 #include "advection_field_rp.hpp"
 #include "bsl_advection_rp.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -49,7 +48,7 @@
  * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionRTheta on @f$dt@f$.
  *
  * @tparam Mapping
- *      A class describing a mapping from curvilinear coordinates to cartesian coordinates.
+ *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam FootFinder
  *      A IFootFinder class.
  *

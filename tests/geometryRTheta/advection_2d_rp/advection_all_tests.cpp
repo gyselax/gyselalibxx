@@ -11,7 +11,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include "advection_domain.hpp"
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_rp.hpp"
 #include "cartesian_to_circular.hpp"
@@ -61,30 +60,33 @@ using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
 } // end namespace
 template <
         class LogicalToPhysicalMapping,
-        class PhysicalToLogicalMapping,
-        class AnalyticalMapping,
-        class AdvectionDomain>
+        class LogicalToPseudoPhysicalMapping,
+        class AnalyticalPhysicalToLogicalMapping,
+        class AnalyticalLogicalToPhysicalMapping>
 struct SimulationParameters
 {
 public:
+    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+
+public:
     LogicalToPhysicalMapping const& to_physical_mapping;
-    PhysicalToLogicalMapping const to_logical_mapping;
-    AnalyticalMapping const& analytical_mapping;
-    AdvectionDomain const& advection_domain;
+    AnalyticalPhysicalToLogicalMapping const to_logical_mapping;
+    LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping;
+    AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping;
     std::string mapping_name;
     std::string domain_name;
-    using IdxRangeSimulationAdvection = AdvectionDomain;
     SimulationParameters(
             LogicalToPhysicalMapping const& map,
-            PhysicalToLogicalMapping const& rev_map,
-            AnalyticalMapping const& a_map,
-            AdvectionDomain const& advection_dom,
+            LogicalToPseudoPhysicalMapping const& pseudo_cart_map,
+            AnalyticalPhysicalToLogicalMapping const& rev_map,
+            AnalyticalLogicalToPhysicalMapping const& a_map,
             std::string m_name,
             std::string dom_name)
         : to_physical_mapping(map)
         , to_logical_mapping(rev_map)
-        , analytical_mapping(a_map)
-        , advection_domain(advection_dom)
+        , analytical_to_pseudo_physical_mapping(pseudo_cart_map)
+        , analytical_to_physical_mapping(a_map)
         , mapping_name(m_name)
         , domain_name(dom_name)
     {
@@ -108,8 +110,8 @@ struct NumericalMethodParameters
 
 struct NumericalParams
 {
-    IdxRangeRTheta grid;
-    double dt;
+    IdxRangeRTheta const grid;
+    double const dt;
 
     NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {};
     NumericalParams(NumericalParams&& params) = default;
@@ -117,17 +119,13 @@ struct NumericalParams
 };
 
 
-template <class AdvectionDomain>
+template <class X_adv, class Y_adv>
 struct Numerics
 {
 private:
-    AdvectionDomain advection_domain;
     NumericalParams params;
 
 public:
-    using X_adv = typename AdvectionDomain::X_adv;
-    using Y_adv = typename AdvectionDomain::Y_adv;
-
     using ValFieldMem = host_t<FieldMemRTheta<CoordRTheta>>;
     using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
 
@@ -145,9 +143,8 @@ public:
 
     NumericalTuple numerics;
 
-    Numerics(AdvectionDomain m_advection_domain, NumericalParams m_params)
-        : advection_domain(m_advection_domain)
-        , params(m_params)
+    explicit Numerics(NumericalParams m_params)
+        : params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
                           Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
@@ -196,7 +193,10 @@ void run_simulations_with_methods(
 {
     auto& sim = std::get<i_map>(simulations);
 
-    Numerics methods(sim.advection_domain, num_params);
+    using X_adv = typename std::remove_const_t<std::remove_reference_t<decltype(sim)>>::X_adv;
+    using Y_adv = typename std::remove_const_t<std::remove_reference_t<decltype(sim)>>::Y_adv;
+
+    Numerics<X_adv, Y_adv> methods(num_params);
     auto& num = std::get<i_feet>(methods.numerics);
 
     std::ostringstream name_stream;
@@ -212,10 +212,10 @@ void run_simulations_with_methods(
     simulate_the_3_simulations(
             sim.to_physical_mapping,
             sim.to_logical_mapping,
-            sim.analytical_mapping,
+            sim.analytical_to_pseudo_physical_mapping,
+            sim.analytical_to_physical_mapping,
             params.grid,
             num.time_stepper,
-            sim.advection_domain,
             params.interpolator,
             params.advection_builder,
             params.advection_evaluator,
@@ -333,40 +333,35 @@ int main(int argc, char** argv)
             from_czarny_map,
             builder,
             spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_czarny_map = discrete_czarny_map_builder();
-
-    AdvectionDomain<CircularToCartMapping> const physical_circular_mapping(from_circ_map);
-    AdvectionDomain<CzarnyToCartMapping> const physical_czarny_mapping(from_czarny_map);
-    AdvectionDomain<CircularToPseudoCartMapping> const pseudo_cartesian_czarny_mapping(
-            to_pseudo_circ_map);
+    DiscreteToCartesian const from_discrete_czarny_map = discrete_czarny_map_builder();
 
     std::tuple simulations = std::make_tuple(
             SimulationParameters(
                     from_circ_map,
+                    from_circ_map,
                     to_circ_map,
                     from_circ_map,
-                    physical_circular_mapping,
                     "CIRCULAR",
                     "PHYSICAL"),
             SimulationParameters(
                     from_czarny_map,
+                    from_czarny_map,
                     to_czarny_map,
                     from_czarny_map,
-                    physical_czarny_mapping,
                     "CZARNY",
                     "PHYSICAL"),
             SimulationParameters(
                     from_czarny_map,
+                    to_pseudo_circ_map,
                     to_czarny_map,
                     from_czarny_map,
-                    pseudo_cartesian_czarny_mapping,
                     "CZARNY",
                     "PSEUDO CARTESIAN"),
             SimulationParameters(
-                    discrete_czarny_map,
+                    from_discrete_czarny_map,
+                    to_pseudo_circ_map,
                     to_czarny_map,
                     from_czarny_map,
-                    pseudo_cartesian_czarny_mapping,
                     "DISCRETE",
                     "PSEUDO CARTESIAN"));
 

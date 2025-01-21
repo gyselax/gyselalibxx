@@ -49,7 +49,7 @@ std::string to_lower(std::string s)
  * @param[in] coord_rp
  *      The coordinate to be printed.
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical index range.
+ *      The mapping function from the logical domain to the physical domain.
  * @param[in] idx_range_p
  *      The index range to which the poloidal coordinate should be restricted.
  */
@@ -72,16 +72,16 @@ void print_coordinate(
 }
 
 /**
- * @brief Save the characteristic feet in the logical index range
- * and the physical index range.
+ * @brief Save the characteristic feet in the logical domain
+ * and the physical domain.
  *
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical
- *      index range.
- * @param[in] rp_index range
- *      The logical index range where the feet are defined.
+ *      The mapping function from the logical domain to the physical
+ *      domain.
+ * @param[in] idx_range_rp
+ *      The index range in the logical domain where the feet are defined.
  * @param[in] feet_coords_rp
- *      The characteristic feet in the logical index range.
+ *      The characteristic feet in the logical domain.
  * @param[in] name
  *      The name of the file where the feet are saved.
  */
@@ -117,8 +117,8 @@ void output_feet(
  * @brief Save the advected function.
  *
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical
- *      index range.
+ *      The mapping function from the logical domain to the physical
+ *      domain.
  * @param[in] function
  *      The advected function.
  * @param[in] name
@@ -157,10 +157,10 @@ void saving_computed(
  * at a given time.
  *
  * @param[in] idx_range_rp
- *      The logical index range where the characteristic feet are defined.
+ *      The logical domain where the characteristic feet are defined.
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical
- *      index range.
+ *      The mapping function from the logical domain to the physical
+ *      domain.
  * @param[in] advection_field
  *      The exact advection field in a AdvectionField object.
  * @param[in] time
@@ -206,8 +206,8 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
  * solution.
  *
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical
- *      index range.
+ *      The mapping function from the logical domain to the physical
+ *      domain.
  * @param[in] grid
  *      The logical index range where the function is defined.
  * @param[in] allfdistribu_advected
@@ -281,9 +281,15 @@ void display_time(
  * @brief Run an advection simulation.
  *
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical
- *      index range.
- * @param[in] analytical_mapping
+ *      The mapping function from the logical domain to the physical
+ *      domain.
+ * @param[in] to_logical_mapping
+ *      The mapping function from the physical domain to the logical
+ *      domain.
+ * @param[in] analytical_to_pseudo_physical_mapping
+ *      The mapping function from the logical domain to the pseudo-physical
+ *      domain.
+ * @param[in] analytical_to_physical_mapping
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
  * @param[in] grid
@@ -291,9 +297,6 @@ void display_time(
  * @param[in] time_stepper
  *      The time integration method used to solve the characteristic
  *      equation.
- * @param[in] advection_index range
- *      The AdvectionDomain type object defining the index range where we
- *      advect the characteristic feet.
  * @param[in] simulation
  *      The selected test cases.
  * @param[in] function_interpolator
@@ -317,36 +320,24 @@ void display_time(
  * @param[in] counter_function
  *      A integer referring to a test case for the name of the saved files.
  *
- * @tparam LogicalToPhysicalMapping
- *      A child class of CurvilinearToCartesian.
- * @tparam AnalyticalMapping
- *      A child class of AnalyticalInvertibleCurvilinearToCartesian.
- * @tparam TimeStepper
- *      A child class of ITimeStepper.
- * @tparam AdvectionDomain
- *      A child class of AdvectionDomain.
- * @tparam Simulation
- *      A child class of AdvectionSimulation.
- *
  * @see BslAdvection
  * @see ITimeStepper
- * @see AdvectionDomain
  * @see Simulation
  */
 template <
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
-        class AnalyticalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class AnalyticalLogicalToPhysicalMapping,
         class TimeStepper,
-        class AdvectionDomain,
         class Simulation>
 void simulate(
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
-        AnalyticalMapping const& analytical_mapping,
+        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
+        AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper const& time_stepper,
-        AdvectionDomain& advection_domain,
         Simulation& simulation,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
@@ -358,12 +349,13 @@ void simulate(
         bool save_feet,
         std::string const& output_folder)
 {
-    SplineFootFinder<TimeStepper, AdvectionDomain, LogicalToPhysicalMapping> const foot_finder(
-            time_stepper,
-            advection_domain,
-            to_physical_mapping,
-            advection_builder,
-            advection_evaluator);
+    SplineFootFinder<TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping> const
+            foot_finder(
+                    time_stepper,
+                    to_physical_mapping,
+                    analytical_to_pseudo_physical_mapping,
+                    advection_builder,
+                    advection_evaluator);
 
     BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, to_physical_mapping);
     auto function_to_be_advected_test = simulation.get_test_function();
@@ -404,11 +396,11 @@ void simulate(
 
     // Definition of advection field:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        // Moving the coordinates in the physical index range:
+        // Moving the coordinates in the physical domain:
         CoordXY const coord_xy = to_physical_mapping(ddc::coordinate(irp));
         CoordXY const advection_field = advection_field_test(coord_xy, 0.);
 
-        // Define the advection field on the physical index range:
+        // Define the advection field on the physical domain:
         ddcHelper::get<X>(advection_field_test_vec)(irp) = ddc::get<X>(advection_field);
         ddcHelper::get<Y>(advection_field_test_vec)(irp) = ddc::get<Y>(advection_field);
     });
@@ -437,13 +429,13 @@ void simulate(
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_dt(grid);
     feet_coords_rp_end_time = compute_exact_feet_rp(
             grid,
-            analytical_mapping,
+            analytical_to_physical_mapping,
             to_logical_mapping,
             advection_field_test,
             end_time);
     feet_coords_rp_dt = compute_exact_feet_rp(
             grid,
-            analytical_mapping,
+            analytical_to_physical_mapping,
             to_logical_mapping,
             advection_field_test,
             dt);
@@ -528,9 +520,15 @@ void simulate(
  * @brief Run three advection simulations for each test cases in the Simulation class.
  *
  * @param[in] to_physical_mapping
- *      The mapping function from the logical index range to the physical
- *      index range.
- * @param[in] analytical_mapping
+ *      The mapping function from the logical domain to the physical
+ *      domain.
+ * @param[in] to_logical_mapping
+ *      The mapping function from the physical domain to the logical
+ *      domain.
+ * @param[in] analytical_to_pseudo_physical_mapping
+ *      The mapping function from the logical domain to the pseudo-physical
+ *      domain.
+ * @param[in] analytical_to_physical_mapping
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
  * @param[in] grid
@@ -538,9 +536,6 @@ void simulate(
  * @param[in] time_stepper
  *      The time integration method used to solve the characteristic
  *      equation.
- * @param[in] advection_index range
- *      The AdvectionDomain type object defining the index range where we
- *      advect the characteristic feet.
  * @param[in] function_interpolator
  *      The B-splines interpolator used to interpolate the function at
  *      the characteristic feet.
@@ -566,22 +561,21 @@ void simulate(
  *
  * @see BslAdvection
  * @see ITimeStepper
- * @see AdvectionDomain
  * @see Simulation
  */
 template <
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
-        class AnalyticalMapping,
-        class TimeStepper,
-        class AdvectionDomain>
+        class LogicalToPseudoPhysicalMapping,
+        class AnalyticalLogicalToPhysicalMapping,
+        class TimeStepper>
 void simulate_the_3_simulations(
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
-        AnalyticalMapping const& analytical_mapping,
+        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
+        AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
         IdxRangeRTheta const& grid,
         TimeStepper& time_stepper,
-        AdvectionDomain& advection_domain,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
         SplineRThetaBuilder_host const& advection_builder,
@@ -613,10 +607,10 @@ void simulate_the_3_simulations(
     simulate(
             to_physical_mapping,
             to_logical_mapping,
-            analytical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            analytical_to_physical_mapping,
             grid,
             time_stepper,
-            advection_domain,
             simulation_1,
             function_interpolator,
             advection_builder,
@@ -635,10 +629,10 @@ void simulate_the_3_simulations(
     simulate(
             to_physical_mapping,
             to_logical_mapping,
-            analytical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            analytical_to_physical_mapping,
             grid,
             time_stepper,
-            advection_domain,
             simulation_2,
             function_interpolator,
             advection_builder,
@@ -657,10 +651,10 @@ void simulate_the_3_simulations(
     simulate(
             to_physical_mapping,
             to_logical_mapping,
-            analytical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            analytical_to_physical_mapping,
             grid,
             time_stepper,
-            advection_domain,
             simulation_3,
             function_interpolator,
             advection_builder,
