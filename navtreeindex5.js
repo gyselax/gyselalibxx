@@ -1,12 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html":[16,0,6,0],
-"dir_1768338d22a236895abd99fb8317b81f.html":[16,0,14,2],
-"dir_198f4eba1c2ed3c02ad3281d01a546ac.html":[16,0,18],
-"dir_2bbbd2b8376432461f1d83e1c0b26a30.html":[16,0,3,6],
-"dir_2c0ad391030bc4839817fbcc879b28f0.html":[16,0,15],
-"dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html":[16,0],
-"dir_2daa31455a745d8a4b29bdb1d755058a.html":[16,0,3],
 "dir_37c8df5729473ef02021306da35712e0.html":[16,0,5,3],
 "dir_3a7f4923128d720945c0dd581ae97adf.html":[16,1,3],
 "dir_3edf76bff63ac0040676a04cfe70b091.html":[16,0,13],
@@ -149,12 +142,12 @@ var NAVTREEINDEX5 =
 "geometry__pseudo__cartesian_8hpp_source.html":[16,0,10,9],
 "grid__builder_8hpp_source.html":[16,1,0,0],
 "i__interpolator__2d__rp_8hpp_source.html":[16,0,3,4,0],
-"iadvectionrp_8hpp_source.html":[16,0,3,0,2],
+"iadvectionrp_8hpp_source.html":[16,0,3,0,1],
 "iadvectionvx_8hpp_source.html":[16,0,0,3],
 "iadvectionx_8hpp_source.html":[16,0,0,4],
 "iboltzmannsolver_8hpp_source.html":[16,0,5,0,0],
 "idx__range__slice_8hpp_source.html":[16,0,2,4],
-"ifoot__finder_8hpp_source.html":[16,0,3,0,3],
+"ifoot__finder_8hpp_source.html":[16,0,3,0,2],
 "iinterpolator_8hpp_source.html":[16,0,8,1],
 "impilayout_8hpp_source.html":[16,0,13,0],
 "impitranspose_8hpp_source.html":[16,0,13,1],
@@ -249,5 +242,12 @@ var NAVTREEINDEX5 =
 "quadrature__coeffs__nd_8hpp_source.html":[16,0,17,3],
 "restartinitialization_8hpp_source.html":[16,0,5,2,4],
 "rk2_8hpp_source.html":[16,0,19,3],
-"rk3_8hpp_source.html":[16,0,19,4]
+"rk3_8hpp_source.html":[16,0,19,4],
+"rk4_8hpp_source.html":[16,0,19,5],
+"simpson__quadrature_8hpp_source.html":[16,0,17,4],
+"simulations.html":[12],
+"simulations_geometryRTheta.html":[12,0],
+"simulations_geometryRTheta_diocotron.html":[12,0,0],
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Contents":[12,0,0,3],
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References":[12,0,0,2]
 };

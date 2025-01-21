@@ -268,13 +268,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCombinedMapping.html#a967567a14f47ca5d71be6aab594b1f14",
-"classGridBuilder.html",
-"classMatrix__Corner__Block.html#a4a86d05bdf1716db3c228a921b6a80b0",
-"classPolarSplineEvaluator.html#a8960c721f4ef12c2343fae7c36dae0da",
-"dir_15ba7e3bcb16c7ed7b7b7c9810b42a25.html",
-"rk4_8hpp_source.html",
-"structR__cov.html#a8730d9a5eb3d718d402cad8cbbc93f0d"
+"classCombinedMapping.html#ae6bdf142f7b26378f0dc1326e9045fde",
+"classIAdvectionSpatial.html#a1ca175ba280c8d9f82a96b285a0a56f2",
+"classMatrix__Corner__Block.html#aa5b5120141de32446632becd4a258088",
+"classPolarSplineEvaluator.html#ae4fffa5d618015f463908c3fd9d019f0",
+"dir_37c8df5729473ef02021306da35712e0.html",
+"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Studied_problem",
+"structTheta.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

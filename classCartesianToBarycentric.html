@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('classCartesianToBarycentric.html','');
 </div><!--header-->
 <div class="contents">
 
-<p>A class to convert cartesian coordinates to barycentric coordinates on a triangle.  
+<p>A class to convert Cartesian coordinates to barycentric coordinates on a triangle.  
  <a href="classCartesianToBarycentric.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -122,7 +122,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordResult</b> = Co
 <tr class="separator:a70561133dc99e67073a2b6079b9fa71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add315dc9c3efd0d306bf29b8f17bf03e" id="r_add315dc9c3efd0d306bf29b8f17bf03e"><td class="memItemLeft" align="right" valign="top"><a id="add315dc9c3efd0d306bf29b8f17bf03e" name="add315dc9c3efd0d306bf29b8f17bf03e"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordArg</b> = Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;</td></tr>
-<tr class="memdesc:add315dc9c3efd0d306bf29b8f17bf03e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a coordinate in the cartesian coordinate system. <br /></td></tr>
+<tr class="memdesc:add315dc9c3efd0d306bf29b8f17bf03e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a coordinate in the Cartesian coordinate system. <br /></td></tr>
 <tr class="separator:add315dc9c3efd0d306bf29b8f17bf03e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -147,17 +147,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa08861cb08d34846d4ccb4d4c8d2ca73"><td class="mdescLeft">&#160;</td><td class="mdescRight">A r-value copy operator for the mapping operator.  <br /></td></tr>
 <tr class="separator:aa08861cb08d34846d4ccb4d4c8d2ca73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a067e2af8444be27e98f571604aa939" id="r_a2a067e2af8444be27e98f571604aa939"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classCartesianToBarycentric.html#a70561133dc99e67073a2b6079b9fa71d">CoordResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToBarycentric.html#a2a067e2af8444be27e98f571604aa939">operator()</a> (<a class="el" href="classCartesianToBarycentric.html#add315dc9c3efd0d306bf29b8f17bf03e">CoordArg</a> const &amp;pos) const</td></tr>
-<tr class="memdesc:a2a067e2af8444be27e98f571604aa939"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator to get the equivalent barycentric coordinate of the cartesian coordinate.  <br /></td></tr>
+<tr class="memdesc:a2a067e2af8444be27e98f571604aa939"><td class="mdescLeft">&#160;</td><td class="mdescRight">The operator to get the equivalent barycentric coordinate of the Cartesian coordinate.  <br /></td></tr>
 <tr class="separator:a2a067e2af8444be27e98f571604aa939"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="structX.html">X</a>, class <a class="el" href="structY.html">Y</a>, class Corner1Tag, class Corner2Tag, class Corner3Tag&gt;<br />
-class CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;</div><p>A class to convert cartesian coordinates to barycentric coordinates on a triangle. </p>
+class CartesianToBarycentric&lt; X, Y, Corner1Tag, Corner2Tag, Corner3Tag &gt;</div><p>A class to convert Cartesian coordinates to barycentric coordinates on a triangle. </p>
 <p>Tags are used to identify the corners of the triangle. This ensures that there are different types for coordinate systems related to different triangles.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname"><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></td><td>The tag of the x dimension of the cartesian coordinates. </td></tr>
-    <tr><td class="paramname"><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></td><td>The tag of the y dimension of the cartesian coordinates. </td></tr>
+    <tr><td class="paramname"><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></td><td>The tag of the x dimension of the Cartesian coordinates. </td></tr>
+    <tr><td class="paramname"><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></td><td>The tag of the y dimension of the Cartesian coordinates. </td></tr>
     <tr><td class="paramname">Corner1Tag</td><td>A tag identifying the first corner of the triangle. </td></tr>
     <tr><td class="paramname">Corner2Tag</td><td>A tag identifying the second corner of the triangle. </td></tr>
     <tr><td class="paramname">Corner3Tag</td><td>A tag identifying the third corner of the triangle. </td></tr>
@@ -392,10 +392,10 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 </table>
 </div><div class="memdoc">
 
-<p>The operator to get the equivalent barycentric coordinate of the cartesian coordinate. </p>
+<p>The operator to get the equivalent barycentric coordinate of the Cartesian coordinate. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>The known cartesian coordinate.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>The known Cartesian coordinate.</td></tr>
   </table>
   </dd>
 </dl>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: SplineFootFinder&lt; TimeStepper, AdvectionDomain, Mapping &gt; Class Template Reference</title>
+<title>Gyselalib++: SplineFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,56 +106,59 @@ $(document).ready(function(){initNavTree('classSplineFootFinder.html',''); initR
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSplineFootFinder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SplineFootFinder&lt; TimeStepper, AdvectionDomain, Mapping &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">SplineFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Define a base class for all the time integration methods used for the advection.  
+<p>A class to find the foot of the characteristics on the \( (r,\theta) \) plane.  
  <a href="classSplineFootFinder.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for SplineFootFinder&lt; TimeStepper, AdvectionDomain, Mapping &gt;:</div>
+Inheritance diagram for SplineFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classSplineFootFinder.png" usemap="#SplineFootFinder_3C_20TimeStepper_2C_20AdvectionDomain_2C_20Mapping_20_3E_map" alt=""/>
-  <map id="SplineFootFinder_3C_20TimeStepper_2C_20AdvectionDomain_2C_20Mapping_20_3E_map" name="SplineFootFinder_3C_20TimeStepper_2C_20AdvectionDomain_2C_20Mapping_20_3E_map">
-<area href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection." alt="IFootFinder" shape="rect" coords="0,0,369,24"/>
+  <img src="classSplineFootFinder.png" usemap="#SplineFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_20_3E_map" alt=""/>
+  <map id="SplineFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_20_3E_map" name="SplineFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_20_3E_map">
+<area href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection." alt="IFootFinder" shape="rect" coords="0,0,567,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aea35ec36fccba4a249ae710346ac9db3" id="r_aea35ec36fccba4a249ae710346ac9db3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#aea35ec36fccba4a249ae710346ac9db3">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;advection_domain, Mapping const &amp;mapping, SplineRThetaBuilder_host const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound_host const &amp;evaluator_advection_field, double epsilon=1e-12)</td></tr>
-<tr class="memdesc:aea35ec36fccba4a249ae710346ac9db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <br /></td></tr>
-<tr class="separator:aea35ec36fccba4a249ae710346ac9db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae557bc9c915b40ddfecad5332dced74c" id="r_ae557bc9c915b40ddfecad5332dced74c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#ae557bc9c915b40ddfecad5332dced74c">operator()</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt; &gt; feet, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; &gt; advection_field, double dt) const final</td></tr>
-<tr class="memdesc:ae557bc9c915b40ddfecad5332dced74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <br /></td></tr>
-<tr class="separator:ae557bc9c915b40ddfecad5332dced74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca90d9ea712be0cf935e9219a014fa5" id="r_a7ca90d9ea712be0cf935e9219a014fa5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a7ca90d9ea712be0cf935e9219a014fa5">SplineFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> const &amp;logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical_mapping, SplineRThetaBuilder_host const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound_host const &amp;evaluator_advection_field, double epsilon=1e-12)</td></tr>
+<tr class="memdesc:a7ca90d9ea712be0cf935e9219a014fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <br /></td></tr>
+<tr class="separator:a7ca90d9ea712be0cf935e9219a014fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551f8ce45ae5f9db5019487226185872" id="r_a551f8ce45ae5f9db5019487226185872"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplineFootFinder.html#a551f8ce45ae5f9db5019487226185872">operator()</a> (host_t&lt; FieldRTheta&lt; CoordRTheta &gt; &gt; feet, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; &gt; advection_field, double dt) const final</td></tr>
+<tr class="memdesc:a551f8ce45ae5f9db5019487226185872"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <br /></td></tr>
+<tr class="separator:a551f8ce45ae5f9db5019487226185872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class TimeStepper, class <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>, class Mapping&gt;<br />
-class SplineFootFinder&lt; TimeStepper, AdvectionDomain, Mapping &gt;</div><p>Define a base class for all the time integration methods used for the advection. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class TimeStepper, class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, class LogicalToPseudoPhysicalMapping&gt;<br />
+class SplineFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</div><p>A class to find the foot of the characteristics on the \( (r,\theta) \) plane. </p>
+<p>The natural advection domain is the physical domain, where the studied equation is given. However, not all the mappings used are analytically invertible and inverting the Jacobian matrix of the mapping could be costly and could introduce numerical errors. That is why, we also introduce a pseudo-Cartesian domain.</p>
+<p>More details can be found in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">TimeStepper</td><td>A child class of <a class="el" href="classITimeStepper.html" title="The superclass from which all timestepping methods inherit.">ITimeStepper</a> providing a time integration method. </td></tr>
-    <tr><td class="paramname"><a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a></td><td>A child class of <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> providing the informations about the advection index range.</td></tr>
+    <tr><td class="paramname">LogicalToPhysicalMapping</td><td>A mapping from the logical domain to the physical domain. </td></tr>
+    <tr><td class="paramname">LogicalToPseudoPhysicalMapping</td><td>A mapping from the logical domain to the domain where the advection is carried out. This may be a pseudo-physical domain or the physical domain itself.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aea35ec36fccba4a249ae710346ac9db3" name="aea35ec36fccba4a249ae710346ac9db3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea35ec36fccba4a249ae710346ac9db3">&#9670;&#160;</a></span>SplineFootFinder()</h2>
+<a id="a7ca90d9ea712be0cf935e9219a014fa5" name="a7ca90d9ea712be0cf935e9219a014fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca90d9ea712be0cf935e9219a014fa5">&#9670;&#160;</a></span>SplineFootFinder()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> , class Mapping &gt; </div>
+template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>, Mapping &gt;<a class="el" href="classSplineFootFinder.html">::SplineFootFinder</a> </td>
+          <td class="memname"><a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping &gt;<a class="el" href="classSplineFootFinder.html">::SplineFootFinder</a> </td>
           <td>(</td>
           <td class="paramtype">TimeStepper const &amp;&#160;</td>
           <td class="paramname"><em>time_stepper</em>, </td>
@@ -163,14 +166,14 @@ template&lt;class TimeStepper , class <a class="el" href="classAdvectionDomain.h
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> const &amp;&#160;</td>
-          <td class="paramname"><em>advection_domain</em>, </td>
+          <td class="paramtype"><a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> const &amp;&#160;</td>
+          <td class="paramname"><em>logical_to_physical_mapping</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Mapping const &amp;&#160;</td>
-          <td class="paramname"><em>mapping</em>, </td>
+          <td class="paramtype">LogicalToPseudoPhysicalMapping const &amp;&#160;</td>
+          <td class="paramname"><em>logical_to_pseudo_physical_mapping</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -207,18 +210,11 @@ template&lt;class TimeStepper , class <a class="el" href="classAdvectionDomain.h
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">time_stepper</td><td>The time integration method used to solve the characteristic equation (<a class="el" href="classITimeStepper.html" title="The superclass from which all timestepping methods inherit.">ITimeStepper</a>). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_domain</td><td>An <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> object which defines in which index range we advect the characteristics. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping from the logical domain to the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logical_to_physical_mapping</td><td>The mapping from the logical domain to the physical domain. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logical_to_pseudo_physical_mapping</td><td>The mapping from the logical domain to the pseudo-physical domain. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">builder_advection_field</td><td>The spline builder which computes the spline representation of the advection field. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">evaluator_advection_field</td><td>The B-splines evaluator to evaluate the advection field. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epsilon</td><td>\( \varepsilon \) parameter used for the linearization of the advection field around the central point.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">TimeStepper</td><td>A child class of <a class="el" href="classITimeStepper.html" title="The superclass from which all timestepping methods inherit.">ITimeStepper</a> providing a time integration method. </td></tr>
-    <tr><td class="paramname"><a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a></td><td>A child class of <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> providing the informations about the advection index range.</td></tr>
   </table>
   </dd>
 </dl>
@@ -227,19 +223,19 @@ template&lt;class TimeStepper , class <a class="el" href="classAdvectionDomain.h
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae557bc9c915b40ddfecad5332dced74c" name="ae557bc9c915b40ddfecad5332dced74c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae557bc9c915b40ddfecad5332dced74c">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a551f8ce45ae5f9db5019487226185872" name="a551f8ce45ae5f9db5019487226185872"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551f8ce45ae5f9db5019487226185872">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a> , class Mapping &gt; </div>
+template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, <a class="el" href="classAdvectionDomain.html">AdvectionDomain</a>, Mapping &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classSplineFootFinder.html">SplineFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">host_t&lt; FieldRTheta&lt; CoordRTheta &gt; &gt;&#160;</td>
           <td class="paramname"><em>feet</em>, </td>

@@ -121,7 +121,6 @@ var annotated =
       [ "X", "structphysical__geometry_1_1X.html", null ],
       [ "Y", "structphysical__geometry_1_1Y.html", null ]
     ] ],
-    [ "AdvectionDomain", "classAdvectionDomain.html", "classAdvectionDomain" ],
     [ "AdvectionField", "classAdvectionField.html", "classAdvectionField" ],
     [ "AdvectionField_decentred_rotation", "classAdvectionField__decentred__rotation.html", "classAdvectionField__decentred__rotation" ],
     [ "AdvectionField_rotation", "classAdvectionField__rotation.html", "classAdvectionField__rotation" ],

@@ -13,7 +13,6 @@ var searchData=
   ['x_20y_20simulation_10',['Guiding center (X,Y) simulation',['../simulations_geometryXY_guiding_center.html',1,'simulations_geometryXY']]],
   ['x_20y_20v_5fx_20v_5fy_11',['Geometry (x, y, v_x, v_y)',['../src_geometryXYVxVy.html',1,'src']]],
   ['x_20y_20vx_20vy_12',['Geometry X Y-Vx Vy',['../src_geometryXYVxVy_geometry.html',1,'src_geometryXYVxVy']]],
-  ['x_5fadv_13',['X_adv',['../classAdvectionDomain.html#aea8431dcc84daf29f4b948a3090a0efe',1,'AdvectionDomain']]],
-  ['x_5fpc_14',['X_pC',['../structX__pC.html',1,'']]],
-  ['xy_15',['Geometry XY',['../src_geometryXY_geometry.html',1,'src_geometryXY']]]
+  ['x_5fpc_13',['X_pC',['../structX__pC.html',1,'']]],
+  ['xy_14',['Geometry XY',['../src_geometryXY_geometry.html',1,'src_geometryXY']]]
 ];

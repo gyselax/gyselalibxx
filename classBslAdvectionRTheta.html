@@ -144,11 +144,9 @@ class BslAdvectionRTheta&lt; FootFinder, Mapping &gt;</div><p>Define an advectio
 <p>So the first step of the advection operator is to compute the characteristic feet \( X(t; t+dt, x_i) \) for each mesh point \( x_i \).</p>
 <p>For the second step, we interpolate the function at the characteristic feet computed, and obtain the function at the next time step: \( f(t + dt, x) = f(t, X(t + dt; t, x))\).</p>
 <p>Different time integration methods are implemented to solve the characteristic equation. They are defined in the <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> class.</p>
-<p>The feet can be advected on different domains. Theses domains are defined in the <a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> class.</p>
+<p>The feet can be advected on different domains. Theses domains are defined in the AdvectionDomain class.</p>
 <p>The interpolation of the function is always done in the logical index range.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> </dd>
-<dd>
-<a class="el" href="classAdvectionDomain.html" title="Define a domain for the advection.">AdvectionDomain</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af559bba295fb3d5fcac425cae71bb972" name="af559bba295fb3d5fcac425cae71bb972"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af559bba295fb3d5fcac425cae71bb972">&#9670;&#160;</a></span>BslAdvectionRTheta()</h2>
@@ -197,7 +195,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">function_interpolator</td><td>The polar interpolator to interpolate the function once the characteristic computed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">foot_finder</td><td>An <a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a> which computes the characteristic feet. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical index range to the physical index range.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical domain to the physical domain.</td></tr>
   </table>
   </dd>
 </dl>
@@ -257,7 +255,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu</td><td>A Field containing the values of the function we want to advect. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_xy</td><td>A DConstVectorFieldRTheta containing the values of the advection field on the physical index range axes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_xy</td><td>A DConstVectorFieldRTheta containing the values of the advection field on the physical domain axes. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>A time step used.</td></tr>
   </table>
   </dd>
