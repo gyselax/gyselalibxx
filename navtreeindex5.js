@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"dir_2c0ad391030bc4839817fbcc879b28f0.html":[16,0,15],
+"dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html":[16,0],
+"dir_2daa31455a745d8a4b29bdb1d755058a.html":[16,0,3],
 "dir_37c8df5729473ef02021306da35712e0.html":[16,0,5,3],
 "dir_3a7f4923128d720945c0dd581ae97adf.html":[16,1,3],
 "dir_3edf76bff63ac0040676a04cfe70b091.html":[16,0,13],
@@ -226,7 +229,7 @@ var NAVTREEINDEX5 =
 "partial__derivatives_8hpp_source.html":[16,0,11,2],
 "patch_8hpp_source.html":[16,0,14,0,7],
 "pdi__helper_8hpp_source.html":[16,0,9,2],
-"physical__geometry_8hpp_source.html":[16,1,3,0,8],
+"physical__geometry_8hpp_source.html":[16,1,3,0,11],
 "poisson__like__rhs__function_8hpp_source.html":[16,0,3,5,1],
 "polar__bsplines_8hpp_source.html":[16,0,8,0,1],
 "polar__poisson_2params_8yaml_8hpp_source.html":[16,1,1,3,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "rk4_8hpp_source.html":[16,0,19,5],
 "simpson__quadrature_8hpp_source.html":[16,0,17,4],
 "simulations.html":[12],
-"simulations_geometryRTheta.html":[12,0],
-"simulations_geometryRTheta_diocotron.html":[12,0,0],
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__Contents":[12,0,0,3],
-"simulations_geometryRTheta_diocotron.html#simulations_geometryRTheta_diocotron__References":[12,0,0,2]
+"simulations_geometryRTheta.html":[12,0]
 };

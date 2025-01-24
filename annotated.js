@@ -61,53 +61,19 @@ var annotated =
       [ "X", "structfigure__of__eight__5patches_1_1X.html", null ],
       [ "Y", "structfigure__of__eight__5patches_1_1Y.html", null ]
     ] ],
-    [ "non_periodic_non_uniform_2d_2patches", null, [
-      [ "BSplinesX", "structnon__periodic__non__uniform__2d__2patches_1_1BSplinesX.html", null ],
-      [ "BSplinesY", "structnon__periodic__non__uniform__2d__2patches_1_1BSplinesY.html", null ],
-      [ "GridX", "structnon__periodic__non__uniform__2d__2patches_1_1GridX.html", null ],
-      [ "GridY", "structnon__periodic__non__uniform__2d__2patches_1_1GridY.html", null ],
-      [ "X", "structnon__periodic__non__uniform__2d__2patches_1_1X.html", null ],
-      [ "Y", "structnon__periodic__non__uniform__2d__2patches_1_1Y.html", null ]
-    ] ],
-    [ "non_periodic_non_uniform_2d_3patches", null, [
-      [ "BSplinesX", "structnon__periodic__non__uniform__2d__3patches_1_1BSplinesX.html", null ],
-      [ "BSplinesY", "structnon__periodic__non__uniform__2d__3patches_1_1BSplinesY.html", null ],
-      [ "GridX", "structnon__periodic__non__uniform__2d__3patches_1_1GridX.html", null ],
-      [ "GridY", "structnon__periodic__non__uniform__2d__3patches_1_1GridY.html", null ],
-      [ "X", "structnon__periodic__non__uniform__2d__3patches_1_1X.html", null ],
-      [ "Y", "structnon__periodic__non__uniform__2d__3patches_1_1Y.html", null ]
-    ] ],
-    [ "non_periodic_uniform_2d_2patches", null, [
-      [ "BSplinesX", "structnon__periodic__uniform__2d__2patches_1_1BSplinesX.html", null ],
-      [ "BSplinesY", "structnon__periodic__uniform__2d__2patches_1_1BSplinesY.html", null ],
-      [ "GridX", "structnon__periodic__uniform__2d__2patches_1_1GridX.html", null ],
-      [ "GridY", "structnon__periodic__uniform__2d__2patches_1_1GridY.html", null ],
-      [ "X", "structnon__periodic__uniform__2d__2patches_1_1X.html", null ],
-      [ "Y", "structnon__periodic__uniform__2d__2patches_1_1Y.html", null ]
-    ] ],
-    [ "non_periodic_uniform_2d_3patches", null, [
-      [ "BSplinesX", "structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html", null ],
-      [ "BSplinesY", "structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html", null ],
-      [ "GridX", "structnon__periodic__uniform__2d__3patches_1_1GridX.html", null ],
-      [ "GridY", "structnon__periodic__uniform__2d__3patches_1_1GridY.html", null ],
-      [ "X", "structnon__periodic__uniform__2d__3patches_1_1X.html", null ],
-      [ "Y", "structnon__periodic__uniform__2d__3patches_1_1Y.html", null ]
-    ] ],
-    [ "onion_shape_non_uniform_2d_2patches", null, [
-      [ "BSplinesR", "structonion__shape__non__uniform__2d__2patches_1_1BSplinesR.html", null ],
-      [ "BSplinesTheta", "structonion__shape__non__uniform__2d__2patches_1_1BSplinesTheta.html", null ],
-      [ "GridR", "structonion__shape__non__uniform__2d__2patches_1_1GridR.html", null ],
-      [ "GridTheta", "structonion__shape__non__uniform__2d__2patches_1_1GridTheta.html", null ],
-      [ "R", "structonion__shape__non__uniform__2d__2patches_1_1R.html", null ],
-      [ "Theta", "structonion__shape__non__uniform__2d__2patches_1_1Theta.html", null ]
-    ] ],
-    [ "onion_shape_uniform_2d_2patches", null, [
-      [ "BSplinesR", "structonion__shape__uniform__2d__2patches_1_1BSplinesR.html", null ],
-      [ "BSplinesTheta", "structonion__shape__uniform__2d__2patches_1_1BSplinesTheta.html", null ],
-      [ "GridR", "structonion__shape__uniform__2d__2patches_1_1GridR.html", null ],
-      [ "GridTheta", "structonion__shape__uniform__2d__2patches_1_1GridTheta.html", null ],
-      [ "R", "structonion__shape__uniform__2d__2patches_1_1R.html", null ],
-      [ "Theta", "structonion__shape__uniform__2d__2patches_1_1Theta.html", null ]
+    [ "GEOM_NAMESPACE_NAME", null, [
+      [ "BSplinesR", "structGEOM__NAMESPACE__NAME_1_1BSplinesR.html", null ],
+      [ "BSplinesTheta", "structGEOM__NAMESPACE__NAME_1_1BSplinesTheta.html", null ],
+      [ "BSplinesX", "structGEOM__NAMESPACE__NAME_1_1BSplinesX.html", null ],
+      [ "BSplinesY", "structGEOM__NAMESPACE__NAME_1_1BSplinesY.html", null ],
+      [ "GridR", "structGEOM__NAMESPACE__NAME_1_1GridR.html", null ],
+      [ "GridTheta", "structGEOM__NAMESPACE__NAME_1_1GridTheta.html", null ],
+      [ "GridX", "structGEOM__NAMESPACE__NAME_1_1GridX.html", null ],
+      [ "GridY", "structGEOM__NAMESPACE__NAME_1_1GridY.html", null ],
+      [ "R", "structGEOM__NAMESPACE__NAME_1_1R.html", null ],
+      [ "Theta", "structGEOM__NAMESPACE__NAME_1_1Theta.html", null ],
+      [ "X", "structGEOM__NAMESPACE__NAME_1_1X.html", null ],
+      [ "Y", "structGEOM__NAMESPACE__NAME_1_1Y.html", null ]
     ] ],
     [ "periodic_strips_uniform_2d_9patches", null, [
       [ "BSplinesX", "structperiodic__strips__uniform__2d__9patches_1_1BSplinesX.html", null ],

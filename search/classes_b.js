@@ -27,7 +27,7 @@ var searchData=
   ['mu_24',['Mu',['../structMu.html',1,'']]],
   ['multipatchconnectivity_25',['MultipatchConnectivity',['../classMultipatchConnectivity.html',1,'']]],
   ['multipatchfield_26',['MultipatchField',['../classMultipatchField.html',1,'']]],
-  ['multipatchfield_3c_20constsplinecoeffonpatch_5f2d_2c_20patch_2c_20patch_20_3e_27',['MultipatchField&lt; ConstSplineCoeffOnPatch_2D, Patch, Patch &gt;',['../classMultipatchField.html',1,'']]],
+  ['multipatchfield_3c_20constsplinecoeffonpatch_5f2d_2c_20patch1_2c_20patch2_20_3e_27',['MultipatchField&lt; ConstSplineCoeffOnPatch_2D, Patch1, Patch2 &gt;',['../classMultipatchField.html',1,'']]],
   ['multipatchfieldmem_28',['MultipatchFieldMem',['../classMultipatchFieldMem.html',1,'']]],
   ['multipatchsplinebuilder_29',['MultipatchSplineBuilder',['../classMultipatchSplineBuilder.html',1,'']]],
   ['multipatchsplinebuilder2d_30',['MultipatchSplineBuilder2D',['../classMultipatchSplineBuilder2D.html',1,'']]],

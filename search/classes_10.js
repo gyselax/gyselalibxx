@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['r_0',['r',['../structonion__shape__non__uniform__2d__2patches_1_1R.html',1,'onion_shape_non_uniform_2d_2patches::R'],['../structonion__shape__uniform__2d__2patches_1_1R.html',1,'onion_shape_uniform_2d_2patches::R'],['../structR.html',1,'R']]],
+  ['r_0',['r',['../structGEOM__NAMESPACE__NAME_1_1R.html',1,'GEOM_NAMESPACE_NAME::R'],['../structR.html',1,'R']]],
   ['r_5fcov_1',['R_cov',['../structR__cov.html',1,'']]],
   ['rbasissubset_2',['RBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['rcelldim_3',['RCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],

@@ -107,127 +107,13 @@ $(document).ready(function(){initNavTree('3patches__2d__non__periodic__uniform_8
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// SPDX-License-Identifier: MIT</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">    Geometry defined here: 3 * 2D patches.</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">        - for all patches: </span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">            - non-periodic on X and Y;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">            - uniform cubic splines;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">            - uniform Grid1 and Grid2; </span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;ddc/kernels/splines.hpp&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;edge.hpp&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;patch.hpp&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>non_periodic_uniform_2d_3patches {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">int</span> <span class="keyword">constexpr</span> BSplineDegree = 3;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// CONTINUOUS DIMENSIONS -------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1X.html">   29</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1X.html">X</a></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1X.html#ab1b8cf3db11d4c6e02b3cd53de689a3f">   32</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structnon__periodic__uniform__2d__3patches_1_1X.html#ab1b8cf3db11d4c6e02b3cd53de689a3f">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
-</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1Y.html">   40</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1Y.html">Y</a></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1Y.html#a289c74408655649a6a7e9eb0643028bf">   43</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="structnon__periodic__uniform__2d__3patches_1_1Y.html#a289c74408655649a6a7e9eb0643028bf">PERIODIC</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>};</div>
-</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">// DISCRETE DIMENSIONS ---------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1GridX.html">   54</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridX.html">GridX</a> : UniformGridBase&lt;X&lt;PatchIdx&gt;&gt;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
-</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">   63</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">GridY</a> : UniformGridBase&lt;Y&lt;PatchIdx&gt;&gt;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
-</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">// SPLINE DIMENSIONS -----------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="foldopen" id="foldopen00075" data-start="{" data-end="};">
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html">   75</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html">BSplinesX</a> : ddc::UniformBSplines&lt;X&lt;PatchIdx&gt;, BSplineDegree&gt;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
-</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="};">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html">   84</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html">BSplinesY</a> : ddc::UniformBSplines&lt;Y&lt;PatchIdx&gt;, BSplineDegree&gt;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>{</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
-</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">// PATCHES ---------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">using </span><a class="code hl_struct" href="structPatch.html">Patch1</a> = <a class="code hl_struct" href="structPatch.html">Patch&lt;GridX&lt;1&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">GridY&lt;1&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html">BSplinesX&lt;1&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html">BSplinesY&lt;1&gt;</a>&gt;;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">using </span><a class="code hl_struct" href="structPatch.html">Patch2</a> = <a class="code hl_struct" href="structPatch.html">Patch&lt;GridX&lt;2&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">GridY&lt;2&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html">BSplinesX&lt;2&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html">BSplinesY&lt;2&gt;</a>&gt;;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">using </span><a class="code hl_struct" href="structPatch.html">Patch3</a> = <a class="code hl_struct" href="structPatch.html">Patch&lt;GridX&lt;3&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">GridY&lt;3&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html">BSplinesX&lt;3&gt;</a>, <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html">BSplinesY&lt;3&gt;</a>&gt;;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">using </span>PatchOrdering = ddc::detail::TypeSeq&lt;Patch1, Patch2, Patch3&gt;;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">// EDGES -----------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">using </span><a class="code hl_struct" href="structEdge.html">NorthEdge</a></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        = <a class="code hl_struct" href="structEdge.html">Edge</a>&lt;<span class="keyword">typename</span> ddc::type_seq_element_t&lt;PatchIdx - 1, PatchOrdering&gt;,</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>               <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">GridY&lt;PatchIdx&gt;</a>,</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>               BACK&gt;;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keyword">using </span><a class="code hl_struct" href="structEdge.html">SouthEdge</a></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        = <a class="code hl_struct" href="structEdge.html">Edge</a>&lt;<span class="keyword">typename</span> ddc::type_seq_element_t&lt;PatchIdx - 1, PatchOrdering&gt;,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>               <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">GridY&lt;PatchIdx&gt;</a>,</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>               FRONT&gt;;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">using </span><a class="code hl_struct" href="structEdge.html">EastEdge</a></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        = <a class="code hl_struct" href="structEdge.html">Edge</a>&lt;<span class="keyword">typename</span> ddc::type_seq_element_t&lt;PatchIdx - 1, PatchOrdering&gt;,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>               <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridX.html">GridX&lt;PatchIdx&gt;</a>,</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>               BACK&gt;;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> PatchIdx&gt;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">using </span><a class="code hl_struct" href="structEdge.html">WestEdge</a></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        = <a class="code hl_struct" href="structEdge.html">Edge</a>&lt;<span class="keyword">typename</span> ddc::type_seq_element_t&lt;PatchIdx - 1, PatchOrdering&gt;,</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>               <a class="code hl_struct" href="structnon__periodic__uniform__2d__3patches_1_1GridX.html">GridX&lt;PatchIdx&gt;</a>,</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>               FRONT&gt;;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">// INTERFACES ------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">// CONNECTIVITY ----------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>} <span class="comment">// namespace non_periodic_uniform_2d_3patches</span></div>
-<div class="ttc" id="astructEdge_html"><div class="ttname"><a href="structEdge.html">Edge</a></div><div class="ttdoc">Define an edge of a given patch.</div><div class="ttdef"><b>Definition</b> edge.hpp:25</div></div>
-<div class="ttc" id="astructPatch_html"><div class="ttname"><a href="structPatch.html">Patch</a></div><div class="ttdoc">Base tag for a patch.</div><div class="ttdef"><b>Definition</b> patch.hpp:14</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1BSplinesX_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1BSplinesX.html">non_periodic_uniform_2d_3patches::BSplinesX</a></div><div class="ttdoc">First spline dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:76</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1BSplinesY_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1BSplinesY.html">non_periodic_uniform_2d_3patches::BSplinesY</a></div><div class="ttdoc">Second spline dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:85</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1GridX_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1GridX.html">non_periodic_uniform_2d_3patches::GridX</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:55</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1GridY_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1GridY.html">non_periodic_uniform_2d_3patches::GridY</a></div><div class="ttdoc">Points sequence on the second logical dimension of patch 1.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:64</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1X_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1X.html">non_periodic_uniform_2d_3patches::X</a></div><div class="ttdoc">First continuous dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:30</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1X_html_ab1b8cf3db11d4c6e02b3cd53de689a3f"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1X.html#ab1b8cf3db11d4c6e02b3cd53de689a3f">non_periodic_uniform_2d_3patches::X::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:32</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1Y_html"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1Y.html">non_periodic_uniform_2d_3patches::Y</a></div><div class="ttdoc">Second continuous dimension of patch PatchIdx.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:41</div></div>
-<div class="ttc" id="astructnon__periodic__uniform__2d__3patches_1_1Y_html_a289c74408655649a6a7e9eb0643028bf"><div class="ttname"><a href="structnon__periodic__uniform__2d__3patches_1_1Y.html#a289c74408655649a6a7e9eb0643028bf">non_periodic_uniform_2d_3patches::Y::PERIODIC</a></div><div class="ttdeci">static bool constexpr PERIODIC</div><div class="ttdoc">Non periodic dimension.</div><div class="ttdef"><b>Definition</b> 3patches_2d_non_periodic_uniform.hpp:43</div></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#define UNIFORM</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define GEOM_NAMESPACE_NAME non_periodic_uniform_2d_3patches</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;3patches_2d_non_periodic.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#undef GEOM_NAMESPACE_NAME</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#undef UNIFORM</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
