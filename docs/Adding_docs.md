@@ -8,7 +8,7 @@ There are two types of documentation which are described in detail below:
 
 The documentation can be built locally by running the following commands from the root directory:
 ```
-cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DBUILD_DOCUMENTATION=1 -B build-docs .
+cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
 cmake --build build-docs
 ```
 The option `-DGYSELALIBXX_COMPILE_SOURCE=OFF` ensures that the C++ code is not built, thereby avoiding the need to have all the C++ dependencies installed on your system.
