@@ -8,7 +8,7 @@ target_include_directories("math_tools"
 
 target_link_libraries("math_tools"
     INTERFACE
-        DDC::DDC
+        DDC::core
         gslx::data_types
 )
 
