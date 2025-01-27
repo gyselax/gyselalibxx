@@ -10,6 +10,7 @@ target_link_libraries("math_tools"
     INTERFACE
         DDC::core
         gslx::data_types
+        gslx::quadrature
 )
 
 add_library("gslx::math_tools" ALIAS "math_tools")

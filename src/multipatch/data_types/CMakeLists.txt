@@ -6,6 +6,7 @@ target_include_directories("multipatch_data_types"
 )
 target_link_libraries("multipatch_data_types" INTERFACE
     DDC::core
+    DDC::splines
 
     gslx::data_types
     gslx::utils

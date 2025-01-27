@@ -80,3 +80,74 @@ Field<ElementType, IdxRangeIn, MemorySpace, LayoutStridedPolicyOut> transpose_la
     }
     return transposed_field;
 }
+
+namespace ddcHelper {
+
+/**
+ * @brief If necessary transpose data into the requested dimension ordering.
+ *
+ * @param[in] execution_space The execution space (Host/Device) where the code will run.
+ * @param[in] src The object to be transposed.
+ *
+ * @returns If src is already in the correct dimension ordering, return a view on src.
+ *          Otherwise return a chunk with the correct dimension ordering in which the data
+ *          from src has been copied.
+ */
+template <
+        class TargetDomain,
+        class ElementType,
+        class Domain,
+        class ExecSpace,
+        class MemSpace,
+        class FieldLayoutType>
+auto create_transpose_mirror_view_and_copy(
+        ExecSpace const& execution_space,
+        Field<ElementType, Domain, MemSpace, FieldLayoutType> src)
+{
+    static_assert(
+            ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
+    if constexpr (std::is_same_v<TargetDomain, Domain>) {
+        return get_field(src);
+    } else {
+        TargetDomain transposed_domain(src.domain());
+        using ElemType = std::remove_const_t<ElementType>;
+        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
+        transpose_layout(execution_space, get_field(field_alloc), get_const_field(src));
+        return field_alloc;
+    }
+}
+
+/**
+ * @brief Create a data object in the requested dimension ordering using as allocations as possible.
+ * This function does not copy data.
+ *
+ * @param[in] execution_space The execution space (Host/Device) where the code will run.
+ * @param[in] src The object to be transposed.
+ *
+ * @returns If src is already in the correct dimension ordering, return a view on src.
+ *          Otherwise return a chunk with the correct dimension ordering.
+ */
+template <
+        class TargetDomain,
+        class ElementType,
+        class Domain,
+        class ExecSpace,
+        class MemSpace,
+        class FieldLayoutType>
+auto create_transpose_mirror(
+        ExecSpace const& execution_space,
+        Field<ElementType, Domain, MemSpace, FieldLayoutType> src)
+{
+    static_assert(
+            ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
+    if constexpr (std::is_same_v<TargetDomain, Domain>) {
+        return get_field(src);
+    } else {
+        TargetDomain transposed_domain(src.domain());
+        using ElemType = std::remove_const_t<ElementType>;
+        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
+        return field_alloc;
+    }
+}
+
+} // namespace ddcHelper

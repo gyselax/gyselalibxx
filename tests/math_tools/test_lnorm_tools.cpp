@@ -6,7 +6,10 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "directional_tag.hpp"
 #include "l_norm_tools.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 namespace {
 

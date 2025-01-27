@@ -3,6 +3,7 @@
 #pragma once
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "vector_field_mem.hpp"
 
 
@@ -386,3 +387,33 @@ template <
         class LayoutStridedPolicy = Kokkos::layout_right>
 using VectorConstField
         = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+
+namespace detail {
+
+/**
+ * @brief Get a new `VectorField` type with the same parametrisation
+ * except in the memory space which is set to NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
+ * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
+ * @tparam NDTag NDTag object storing directions of the VectorFieldMem as dimensions. 
+ *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
+ * @tparam Layout Layout tag (see Kokkos).
+ * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
+ * @see VectorField
+ */
+template <
+        class NewMemorySpace,
+        class ElementType,
+        class SupportType,
+        class NDTag,
+        class MemorySpace,
+        class Layout>
+struct OnMemorySpace<
+        NewMemorySpace,
+        VectorField<ElementType, SupportType, NDTag, MemorySpace, Layout>>
+{
+    using type = VectorField<ElementType, SupportType, NDTag, NewMemorySpace, Layout>;
+};
+
+} // namespace detail

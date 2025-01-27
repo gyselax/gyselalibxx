@@ -5,6 +5,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "vector_field_common.hpp"
 
 /**
@@ -313,3 +314,21 @@ public:
         return base_type::m_values[ddc::type_seq_rank_v<QueryTag, NDTypeTag>].span_cview();
     }
 };
+
+namespace detail {
+/**
+ * @brief Set a `VectorFieldMem` on a given NewMemorySpace.
+ * @tparam NewMemorySpace The new memory space. 
+ * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
+ * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
+ * @tparam NDTag NDTag object storing the dimensions along which the VectorFieldMem is defined.
+ *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
+ * @tparam MemSpace The old memory space.
+ * @see VectorFieldMem
+ */
+template <class NewMemorySpace, class ElementType, class SupportType, class NDTag, class MemSpace>
+struct OnMemorySpace<NewMemorySpace, VectorFieldMem<ElementType, SupportType, NDTag, MemSpace>>
+{
+    using type = VectorFieldMem<ElementType, SupportType, NDTag, NewMemorySpace>;
+};
+} // namespace detail

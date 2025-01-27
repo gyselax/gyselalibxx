@@ -10,7 +10,6 @@ target_link_libraries("data_types"
     INTERFACE
         DDC::core
         DDC::splines
-        gslx::math_tools
         gslx::utils
 )
 

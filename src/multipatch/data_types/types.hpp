@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <ddc/kernels/splines.hpp>
+
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

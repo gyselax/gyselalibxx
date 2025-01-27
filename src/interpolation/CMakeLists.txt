@@ -9,6 +9,7 @@ target_include_directories("interpolation"
 target_link_libraries("interpolation"
     INTERFACE
         DDC::core
+        gslx::math_tools
         gslx::utils
 )
 

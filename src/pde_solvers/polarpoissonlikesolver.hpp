@@ -28,17 +28,17 @@
  * 
  * As finite element basis functions we will use polar b-splines which are divided into two types:
  * 1) Basis splines that can be written as a tensor product of 1d basis splines
- *    ("non-singular B-splines")
+ *    ("non-singular bsplines")
  * 2) Basis splines that cover the centre point and are defined as a linear combination
- *    of basis splines of type 1 ("singular B-splines")
+ *    of basis splines of type 1 ("singular bsplines")
  * 
  * (see in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
  * in the 5D GYSELA Code". December 2022.)
  *
  * @tparam GridR The radial grid type.
  * @tparam GridR The poloidal grid type.
- * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
- * system @f$(r,\theta)@f$ including B-splines which traverse the O point).
+ * @tparam PolarBSplinesRTheta The type of the 2D polar bsplines (on the coordinate
+ * system @f$(r,\theta)@f$ including bsplines which traverse the O point).
  * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
@@ -95,15 +95,15 @@ public:
 
 private:
     using CoordRTheta = Coord<R, Theta>;
-    /// The 1D B-splines in the radial direction
+    /// The 1D bsplines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
-    /// The 1D B-splines in the poloidal direction
+    /// The 1D bsplines in the poloidal direction
     using BSplinesTheta = typename PolarBSplinesRTheta::BSplinesTheta_tag;
 
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRTheta = Idx<GridR, GridTheta>;
 
-    /// The type of an index range over the polar B-splines
+    /// The type of an index range over the polar bsplines
     using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
     using IdxBSPolar = Idx<PolarBSplinesRTheta>;
 
@@ -344,7 +344,7 @@ public:
                 gauss_legendre_quadrature_coefficients<
                         Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
 
-        // Find value and derivative of 1D B-splines in radial direction
+        // Find value and derivative of 1D bsplines in radial direction
         ddc::for_each(m_idxrange_quadrature_r, [&](IdxQuadratureR const idx_r) {
             std::array<double, 2 * m_n_non_zero_bases_r> data;
             DSpan2D vals(data.data(), m_n_non_zero_bases_r, 2);
@@ -357,7 +357,7 @@ public:
             }
         });
 
-        // Find value and derivative of 1D B-splines in poloidal direction
+        // Find value and derivative of 1D bsplines in poloidal direction
         ddc::for_each(m_idxrange_quadrature_theta, [&](IdxQuadratureTheta const idx_theta) {
             std::array<double, 2 * m_n_non_zero_bases_theta> data;
             DSpan2D vals(data.data(), m_n_non_zero_bases_theta, 2);
@@ -373,7 +373,7 @@ public:
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
-        // Find value and derivative of 2D B-splines covering the singular point
+        // Find value and derivative of 2D bsplines covering the singular point
         ddc::for_each(m_idxrange_quadrature_singular, [&](IdxQuadratureRTheta const irp) {
             std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
             std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
@@ -527,7 +527,7 @@ public:
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
-        // Calculate the matrix elements corresponding to the B-splines which cover the singular point
+        // Calculate the matrix elements corresponding to the bsplines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
                 // Calculate the weak integral
@@ -619,7 +619,7 @@ public:
                 = get_field(r_basis_vals_and_derivs_alloc);
         Field<EvalDeriv1DType, IdxRange<ThetaBasisSubset, QDimThetaMesh>>
                 theta_basis_vals_and_derivs = get_field(theta_basis_vals_and_derivs_alloc);
-        // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
+        // Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point
         ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
                 const IdxBSPolar idx_trial_polar(

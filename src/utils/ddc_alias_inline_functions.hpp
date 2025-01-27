@@ -5,8 +5,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "derivative_field_common.hpp"
-#include "vector_field_common.hpp"
+#include "ddc_aliases.hpp"
 
 namespace detail {
 

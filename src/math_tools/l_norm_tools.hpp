@@ -9,6 +9,7 @@
 #include <ddc/ddc.hpp>
 
 #include "quadrature.hpp"
+#include "vector_field.hpp"
 
 /**
  * @brief Compute the infinity norm.

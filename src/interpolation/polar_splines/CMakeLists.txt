@@ -9,7 +9,9 @@ target_include_directories("polar_splines"
 target_link_libraries("polar_splines"
     INTERFACE
         DDC::core
+        DDC::splines
         gslx::mapping
+        gslx::math_tools
         gslx::utils
 )
 

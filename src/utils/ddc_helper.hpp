@@ -8,10 +8,6 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
-#include "directional_tag.hpp"
-#include "transpose.hpp"
-#include "vector_field.hpp"
-#include "vector_field_mem.hpp"
 
 
 namespace ddcHelper {
@@ -178,73 +174,6 @@ inline void dump_coordinates(
             KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
 }
 
-/**
- * @brief If necessary transpose data into the requested dimension ordering.
- *
- * @param[in] execution_space The execution space (Host/Device) where the code will run.
- * @param[in] src The object to be transposed.
- *
- * @returns If src is already in the correct dimension ordering, return a view on src.
- *          Otherwise return a chunk with the correct dimension ordering in which the data
- *          from src has been copied.
- */
-template <
-        class TargetDomain,
-        class ElementType,
-        class Domain,
-        class ExecSpace,
-        class MemSpace,
-        class FieldLayoutType>
-auto create_transpose_mirror_view_and_copy(
-        ExecSpace const& execution_space,
-        Field<ElementType, Domain, MemSpace, FieldLayoutType> src)
-{
-    static_assert(
-            ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
-    if constexpr (std::is_same_v<TargetDomain, Domain>) {
-        return get_field(src);
-    } else {
-        TargetDomain transposed_domain(src.domain());
-        using ElemType = std::remove_const_t<ElementType>;
-        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
-        transpose_layout(execution_space, get_field(field_alloc), get_const_field(src));
-        return field_alloc;
-    }
-}
-
-/**
- * @brief Create a data object in the requested dimension ordering using as allocations as possible.
- * This function does not copy data.
- *
- * @param[in] execution_space The execution space (Host/Device) where the code will run.
- * @param[in] src The object to be transposed.
- *
- * @returns If src is already in the correct dimension ordering, return a view on src.
- *          Otherwise return a chunk with the correct dimension ordering.
- */
-template <
-        class TargetDomain,
-        class ElementType,
-        class Domain,
-        class ExecSpace,
-        class MemSpace,
-        class FieldLayoutType>
-auto create_transpose_mirror(
-        ExecSpace const& execution_space,
-        Field<ElementType, Domain, MemSpace, FieldLayoutType> src)
-{
-    static_assert(
-            ddc::type_seq_same_v<ddc::to_type_seq_t<Domain>, ddc::to_type_seq_t<TargetDomain>>);
-    if constexpr (std::is_same_v<TargetDomain, Domain>) {
-        return get_field(src);
-    } else {
-        TargetDomain transposed_domain(src.domain());
-        using ElemType = std::remove_const_t<ElementType>;
-        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
-        return field_alloc;
-    }
-}
-
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------
@@ -289,48 +218,6 @@ template <
 struct OnMemorySpace<NewMemorySpace, ddc::ChunkSpan<ElementType, SupportType, Layout, MemorySpace>>
 {
     using type = typename ddc::ChunkSpan<ElementType, SupportType, Layout, NewMemorySpace>;
-};
-
-/**
- * @brief Set a `VectorFieldMem` on a given NewMemorySpace.
- * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
- * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
- * @tparam NDTag NDTag object storing the dimensions along which the VectorFieldMem is defined.
- *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
- * @tparam MemSpace The old memory space.
- * @see VectorFieldMem
- */
-template <class NewMemorySpace, class ElementType, class SupportType, class NDTag, class MemSpace>
-struct OnMemorySpace<NewMemorySpace, VectorFieldMem<ElementType, SupportType, NDTag, MemSpace>>
-{
-    using type = VectorFieldMem<ElementType, SupportType, NDTag, NewMemorySpace>;
-};
-
-/**
- * @brief Get a new `VectorField` type with the same parametrisation
- * except in the memory space which is set to NewMemorySpace.
- * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
- * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
- * @tparam NDTag NDTag object storing directions of the VectorFieldMem as dimensions. 
- *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
- * @tparam Layout Layout tag (see Kokkos).
- * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
- * @see VectorField
- */
-template <
-        class NewMemorySpace,
-        class ElementType,
-        class SupportType,
-        class NDTag,
-        class MemorySpace,
-        class Layout>
-struct OnMemorySpace<
-        NewMemorySpace,
-        VectorField<ElementType, SupportType, NDTag, MemorySpace, Layout>>
-{
-    using type = VectorField<ElementType, SupportType, NDTag, NewMemorySpace, Layout>;
 };
 
 template <template <class Tag> class Templ, class TypeSeq>

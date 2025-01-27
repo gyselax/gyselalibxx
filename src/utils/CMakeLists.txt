@@ -10,8 +10,7 @@ target_include_directories("utils"
 target_link_libraries("utils"
     INTERFACE
         DDC::core
-        gslx::data_types
-        gslx::quadrature
+        DDC::splines
 )
 
 add_library("gslx::utils" ALIAS "utils")

@@ -5,6 +5,8 @@
 
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "mapping_testing_tools.hpp"
 #include "metric_tensor.hpp"

@@ -10,6 +10,7 @@ target_link_libraries("mapping"
     INTERFACE
         DDC::core
         gslx::data_types
+        gslx::math_tools
         gslx::utils
 )
 
