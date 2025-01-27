@@ -119,11 +119,11 @@ $(document).ready(function(){initNavTree('structConstPolarSpline.html',''); init
 Public Types</h2></td></tr>
 <tr class="memitem:abb8ad3be7f39e385d8fa90e991437648" id="r_abb8ad3be7f39e385d8fa90e991437648"><td class="memItemLeft" align="right" valign="top"><a id="abb8ad3be7f39e385d8fa90e991437648" name="abb8ad3be7f39e385d8fa90e991437648"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesR</b> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
-<tr class="memdesc:abb8ad3be7f39e385d8fa90e991437648"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radial bspline from which the polar bsplines are constructed. <br /></td></tr>
+<tr class="memdesc:abb8ad3be7f39e385d8fa90e991437648"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radial bspline from which the polar B-splines are constructed. <br /></td></tr>
 <tr class="separator:abb8ad3be7f39e385d8fa90e991437648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45b2e9a326fa2fcfac0a2ef640be63f2" id="r_a45b2e9a326fa2fcfac0a2ef640be63f2"><td class="memItemLeft" align="right" valign="top"><a id="a45b2e9a326fa2fcfac0a2ef640be63f2" name="a45b2e9a326fa2fcfac0a2ef640be63f2"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesTheta</b> = typename PolarBSplinesType::BSplinesTheta_tag</td></tr>
-<tr class="memdesc:a45b2e9a326fa2fcfac0a2ef640be63f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The poloidal bspline from which the polar bsplines are constructed. <br /></td></tr>
+<tr class="memdesc:a45b2e9a326fa2fcfac0a2ef640be63f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The poloidal bspline from which the polar B-splines are constructed. <br /></td></tr>
 <tr class="separator:a45b2e9a326fa2fcfac0a2ef640be63f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -145,11 +145,11 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aedd7d1c4f010858e8f1e6a3bd59e4619" id="r_aedd7d1c4f010858e8f1e6a3bd59e4619"><td class="memItemLeft" align="right" valign="top"><a id="aedd7d1c4f010858e8f1e6a3bd59e4619" name="aedd7d1c4f010858e8f1e6a3bd59e4619"></a>
 DConstField&lt; IdxRange&lt; <a class="el" href="structConstPolarSpline.html#abb8ad3be7f39e385d8fa90e991437648">BSplinesR</a>, <a class="el" href="structConstPolarSpline.html#a45b2e9a326fa2fcfac0a2ef640be63f2">BSplinesTheta</a> &gt;, MemSpace &gt; const&#160;</td><td class="memItemRight" valign="bottom"><b>spline_coef</b></td></tr>
-<tr class="memdesc:aedd7d1c4f010858e8f1e6a3bd59e4619"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ConstField containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D bsplines. <br /></td></tr>
+<tr class="memdesc:aedd7d1c4f010858e8f1e6a3bd59e4619"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ConstField containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D B-splines. <br /></td></tr>
 <tr class="separator:aedd7d1c4f010858e8f1e6a3bd59e4619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad65bed77b967e94437734b18bfcb8e49" id="r_ad65bed77b967e94437734b18bfcb8e49"><td class="memItemLeft" align="right" valign="top"><a id="ad65bed77b967e94437734b18bfcb8e49" name="ad65bed77b967e94437734b18bfcb8e49"></a>
 DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemSpace &gt; const&#160;</td><td class="memItemRight" valign="bottom"><b>singular_spline_coef</b></td></tr>
-<tr class="memdesc:ad65bed77b967e94437734b18bfcb8e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ConstField containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D bsplines. <br /></td></tr>
+<tr class="memdesc:ad65bed77b967e94437734b18bfcb8e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ConstField containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines. <br /></td></tr>
 <tr class="separator:ad65bed77b967e94437734b18bfcb8e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -157,7 +157,7 @@ DConstField&lt; IdxRange&lt; PolarBSplinesType &gt;, MemSpace &gt; const&#160;</
 struct ConstPolarSpline&lt; PolarBSplinesType, MemSpace &gt;</div><p>A structure containing the two ConstFields necessary to define a constant reference to a spline on a set of polar basis splines. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">PolarBSplinesType</td><td>The type of the polar bsplines on which this spline is defined. </td></tr>
+    <tr><td class="paramname">PolarBSplinesType</td><td>The type of the polar B-splines on which this spline is defined. </td></tr>
   </table>
   </dd>
 </dl>

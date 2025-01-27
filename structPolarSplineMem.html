@@ -119,11 +119,11 @@ $(document).ready(function(){initNavTree('structPolarSplineMem.html',''); initRe
 Public Types</h2></td></tr>
 <tr class="memitem:a645cf4762b94732224d68ee16258ca66" id="r_a645cf4762b94732224d68ee16258ca66"><td class="memItemLeft" align="right" valign="top"><a id="a645cf4762b94732224d68ee16258ca66" name="a645cf4762b94732224d68ee16258ca66"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesR</b> = typename PolarBSplinesType::BSplinesR_tag</td></tr>
-<tr class="memdesc:a645cf4762b94732224d68ee16258ca66"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radial bspline from which the polar bsplines are constructed. <br /></td></tr>
+<tr class="memdesc:a645cf4762b94732224d68ee16258ca66"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radial bspline from which the polar B-splines are constructed. <br /></td></tr>
 <tr class="separator:a645cf4762b94732224d68ee16258ca66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc977e4404b46ee447c69e7b735f078f" id="r_adc977e4404b46ee447c69e7b735f078f"><td class="memItemLeft" align="right" valign="top"><a id="adc977e4404b46ee447c69e7b735f078f" name="adc977e4404b46ee447c69e7b735f078f"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BSplinesTheta</b> = typename PolarBSplinesType::BSplinesTheta_tag</td></tr>
-<tr class="memdesc:adc977e4404b46ee447c69e7b735f078f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The poloidal bspline from which the polar bsplines are constructed. <br /></td></tr>
+<tr class="memdesc:adc977e4404b46ee447c69e7b735f078f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The poloidal bspline from which the polar B-splines are constructed. <br /></td></tr>
 <tr class="separator:adc977e4404b46ee447c69e7b735f078f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -145,11 +145,11 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a1d181d3665490dc1c902bdda5f375c93" id="r_a1d181d3665490dc1c902bdda5f375c93"><td class="memItemLeft" align="right" valign="top"><a id="a1d181d3665490dc1c902bdda5f375c93" name="a1d181d3665490dc1c902bdda5f375c93"></a>
 DFieldMem&lt; IdxRange&lt; <a class="el" href="structPolarSplineMem.html#a645cf4762b94732224d68ee16258ca66">BSplinesR</a>, <a class="el" href="structPolarSplineMem.html#adc977e4404b46ee447c69e7b735f078f">BSplinesTheta</a> &gt;, MemSpace &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spline_coef</b></td></tr>
-<tr class="memdesc:a1d181d3665490dc1c902bdda5f375c93"><td class="mdescLeft">&#160;</td><td class="mdescRight">A FieldMem containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D bsplines. <br /></td></tr>
+<tr class="memdesc:a1d181d3665490dc1c902bdda5f375c93"><td class="mdescLeft">&#160;</td><td class="mdescRight">A FieldMem containing the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D B-splines. <br /></td></tr>
 <tr class="separator:a1d181d3665490dc1c902bdda5f375c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6de765c22305f6ae148d1a7f5661d8a2" id="r_a6de765c22305f6ae148d1a7f5661d8a2"><td class="memItemLeft" align="right" valign="top"><a id="a6de765c22305f6ae148d1a7f5661d8a2" name="a6de765c22305f6ae148d1a7f5661d8a2"></a>
 DFieldMem&lt; IdxRange&lt; PolarBSplinesType &gt;, MemSpace &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>singular_spline_coef</b></td></tr>
-<tr class="memdesc:a6de765c22305f6ae148d1a7f5661d8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A FieldMem containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D bsplines. <br /></td></tr>
+<tr class="memdesc:a6de765c22305f6ae148d1a7f5661d8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A FieldMem containing the coefficients in front of the b-spline elements near the singular point which cannot be expressed as a tensor product of 1D B-splines. <br /></td></tr>
 <tr class="separator:a6de765c22305f6ae148d1a7f5661d8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -157,7 +157,7 @@ DFieldMem&lt; IdxRange&lt; PolarBSplinesType &gt;, MemSpace &gt;&#160;</td><td c
 struct PolarSplineMem&lt; PolarBSplinesType, MemSpace &gt;</div><p>A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">PolarBSplinesType</td><td>The type of the polar bsplines on which this spline is defined. </td></tr>
+    <tr><td class="paramname">PolarBSplinesType</td><td>The type of the polar B-splines on which this spline is defined. </td></tr>
   </table>
   </dd>
 </dl>
@@ -189,10 +189,10 @@ template&lt;class PolarBSplinesType , class MemSpace  = Kokkos::DefaultExecution
 </div><div class="memdoc">
 
 <p>A constructor for the <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a>. </p>
-<p>A constructor for the <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> which takes a 2D domain of bsplines. This domain is then split into the domains which are relevant for a polar bspline constructed from these 2D bsplines. These new domains are then used to create the chunks which define the spline.</p>
+<p>A constructor for the <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> which takes a 2D domain of B-splines. This domain is then split into the domains which are relevant for a polar bspline constructed from these 2D B-splines. These new domains are then used to create the chunks which define the spline.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">domain</td><td>A 2D domain of bsplines. </td></tr>
+    <tr><td class="paramname">domain</td><td>A 2D domain of B-splines. </td></tr>
   </table>
   </dd>
 </dl>
@@ -238,8 +238,8 @@ template&lt;class PolarBSplinesType , class MemSpace  = Kokkos::DefaultExecution
 <p>Initialise the FieldMems containing the coefficients of the spline representation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">singular_domain</td><td>The domain for the coefficients in front of the b-spline elements near the singular point. These are the elements which cannot be expressed as a tensor product of 1D bsplines. </td></tr>
-    <tr><td class="paramname">domain</td><td>The domain for the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D bsplines. </td></tr>
+    <tr><td class="paramname">singular_domain</td><td>The domain for the coefficients in front of the b-spline elements near the singular point. These are the elements which cannot be expressed as a tensor product of 1D B-splines. </td></tr>
+    <tr><td class="paramname">domain</td><td>The domain for the coefficients in front of the b-spline elements which can be expressed as a tensor product of 1D B-splines. </td></tr>
   </table>
   </dd>
 </dl>
