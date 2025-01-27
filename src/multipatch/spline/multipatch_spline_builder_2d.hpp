@@ -88,13 +88,13 @@ class MultipatchSplineBuilder2D
             ((std::is_same_v<
                     typename BSpline1OnPatch<Patches>::continuous_dimension_type,
                     typename Grid1OnPatch<Patches>::continuous_dimension_type>)&&...),
-            "The BSpline1OnPatch argument does not define bsplines on the dimension where the "
+            "The BSpline1OnPatch argument does not define B-splines on the dimension where the "
             "grids defined by Grid1OnPatch are defined.");
     static_assert(
             ((std::is_same_v<
                     typename BSpline2OnPatch<Patches>::continuous_dimension_type,
                     typename Grid2OnPatch<Patches>::continuous_dimension_type>)&&...),
-            "The BSpline2OnPatch argument does not define bsplines on the dimension where the "
+            "The BSpline2OnPatch argument does not define B-splines on the dimension where the "
             "grids defined by Grid2OnPatch are defined.");
     /**
      * A small structure allowing the multiple grids to be unpacked from a field and repacked into

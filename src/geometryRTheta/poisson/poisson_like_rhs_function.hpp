@@ -40,9 +40,9 @@ public:
 	 * @brief Instantiate a PoissonLikeRHSFunction.
 	 *
 	 * @param[in] coefs
-	 *      The bsplines coefficients of the right-hand side function.
+	 *      The B-splines coefficients of the right-hand side function.
 	 * @param[in] evaluator
-	 *      Evaluator on bsplines.
+	 *      Evaluator on B-splines.
 	 */
     PoissonLikeRHSFunction(host_t<ConstSpline2D> coefs, evaluator_type const& evaluator)
         : m_coefs(coefs)

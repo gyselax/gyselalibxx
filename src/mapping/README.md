@@ -14,7 +14,7 @@ The current coordinate transformations implemented are:
 		 with $\xi = 1/\sqrt{1 - \epsilon^2 /4}$ and $e$ and $\epsilon$ given as parameters.
     - Barycentric coordinate transformation (BarycentricToCartesian):
         -  $`(c_1, c_2, c_3) -> (x,y)`$
-- Discrete coordinate transformation defined on bsplines (DiscreteToCartesian):
+- Discrete coordinate transformation defined on B-splines (DiscreteToCartesian):
 	-  $`x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),`$
 	-  $`y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).`$
 - Combined coordinate transformation which combines two of the coordinate transformations above.

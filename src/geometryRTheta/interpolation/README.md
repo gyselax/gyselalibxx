@@ -5,4 +5,4 @@ Use a function basis built from a product of two 1D spline bases in $r$ and in $
 The interpolator is built from a product of b-splines if $r$ and $\theta$ rather than using a polar spline basis as the former is significantly less costly than the latter. Therefore the polar spline basis should only be used when additional smoothness is required.
 
 
-The `operator()` takes as input the values of the function we want to interpolate and the coordinates where we want to interpolate. It computes the coefficients on the 2D bsplines basis and evaluates the decomposition on the coordinates given as input. 
+The `operator()` takes as input the values of the function we want to interpolate and the coordinates where we want to interpolate. It computes the coefficients on the 2D B-splines basis and evaluates the decomposition on the coordinates given as input. 

@@ -14,14 +14,14 @@
 #include "view.hpp"
 
 /**
- * A class containing all information describing polar bsplines.
+ * A class containing all information describing polar B-splines.
  *
- * Polar bsplines are 2D bsplines with a special treatment for the central singular point
- * of a polar index range. At this singular point new bsplines are created which traverse the
+ * Polar B-splines are 2D B-splines with a special treatment for the central singular point
+ * of a polar index range. At this singular point new B-splines are created which traverse the
  * singular point and ensure the desired continuity condition.
  *
- * @tparam BSplinesR  The basis of radial bsplines from which the polar bsplines are constructed.
- * @tparam BSplinesTheta  The poloidal bspline from which the polar bsplines are constructed.
+ * @tparam BSplinesR  The basis of radial B-splines from which the polar B-splines are constructed.
+ * @tparam BSplinesTheta  The poloidal bspline from which the polar B-splines are constructed.
  * @tparam C          The continuity condition. The resulting splines will be continuously
  *                    differentiable C times. If C == -1 then the resulting spline representation
  *                    will be discontinuous at the singular point.
@@ -31,9 +31,9 @@ class PolarBSplines
 {
     static_assert(C >= -1, "Parameter `C` cannot be less than -1");
     static_assert(C < 2, "Values larger than 1 are not implemented for parameter `C`");
-    static_assert(!BSplinesR::is_periodic(), "Radial bsplines must not be periodic.");
-    static_assert(!BSplinesR::is_uniform(), "Radial bsplines must have knots at the boundary.");
-    static_assert(BSplinesTheta::is_periodic(), "Poloidal bsplines should be periodic.");
+    static_assert(!BSplinesR::is_periodic(), "Radial B-splines must not be periodic.");
+    static_assert(!BSplinesR::is_uniform(), "Radial B-splines must have knots at the boundary.");
+    static_assert(BSplinesTheta::is_periodic(), "Poloidal B-splines should be periodic.");
 
 private:
     // Tags to determine what to evaluate
@@ -46,21 +46,21 @@ private:
     };
 
 public:
-    /// The radial bspline from which the polar bsplines are constructed.
+    /// The radial bspline from which the polar B-splines are constructed.
     using BSplinesR_tag = BSplinesR;
 
-    /// The poloidal bspline from which the polar bsplines are constructed.
+    /// The poloidal bspline from which the polar B-splines are constructed.
     using BSplinesTheta_tag = BSplinesTheta;
 
 
-    /// The tag for the radial direction of the bsplines.
+    /// The tag for the radial direction of the B-splines.
     using DimR = typename BSplinesR::continuous_dimension_type;
 
-    /// The tag for the poloidal direction of the bsplines.
+    /// The tag for the poloidal direction of the B-splines.
     using DimTheta = typename BSplinesTheta::continuous_dimension_type;
 
 public:
-    /// The continuity enforced by the bsplines at the singular point.
+    /// The continuity enforced by the B-splines at the singular point.
     static int constexpr continuity = C;
 
 public:
@@ -74,20 +74,20 @@ public:
     using discrete_dimension_type = PolarBSplines;
 
     /**
-     * The type of a 2D index for the subset of the polar bsplines which can be expressed as a tensor
-     * product of 1D bsplines.
+     * The type of a 2D index for the subset of the polar B-splines which can be expressed as a tensor
+     * product of 1D B-splines.
      */
     using tensor_product_index_type = Idx<BSplinesR, BSplinesTheta>;
 
     /**
-     * The type of the 2D idx_range for the subset of the polar bsplines which can be expressed as a tensor
-     * product of 1D bsplines.
+     * The type of the 2D idx_range for the subset of the polar B-splines which can be expressed as a tensor
+     * product of 1D B-splines.
      */
     using tensor_product_idx_range_type = IdxRange<BSplinesR, BSplinesTheta>;
 
     /**
-     * The type of a 2D vector for the subset of the polar bsplines which can be expressed as a tensor
-     * product of 1D bsplines.
+     * The type of a 2D vector for the subset of the polar B-splines which can be expressed as a tensor
+     * product of 1D B-splines.
      */
     using tensor_product_idx_step_type = IdxStep<BSplinesR, BSplinesTheta>;
 
@@ -99,9 +99,9 @@ private:
 
 public:
     /**
-     * Get the number of singular bsplines i.e. bsplines which traverse the singular point.
+     * Get the number of singular B-splines i.e. B-splines which traverse the singular point.
      *
-     * @returns The number of bsplines which traverse the singular point.
+     * @returns The number of B-splines which traverse the singular point.
      */
     static constexpr std::size_t n_singular_basis()
     {
@@ -182,10 +182,10 @@ public:
 
     private:
         /**
-         * The type of the index range for the linear combinations defining the bsplines which traverse the singular point.
+         * The type of the index range for the linear combinations defining the B-splines which traverse the singular point.
          *
-         * The bsplines which traverse the singular O-point are constructed from a linear combination of 2D
-         * bsplines. These 2D bsplines can be expressed as a tensor product of 1D bsplines. This type
+         * The B-splines which traverse the singular O-point are constructed from a linear combination of 2D
+         * B-splines. These 2D B-splines can be expressed as a tensor product of 1D B-splines. This type
          * describes the index range on which the coefficients of these linear combinations are defined. There is
          * an index for the polar bspline being constructed, and 2 indices for the 2D bspline.
          */
@@ -239,7 +239,7 @@ public:
         /**
          * A constructor for the PolarBSplines.
          *
-         * @param curvilinear_to_cartesian  A mapping from curvilinear to cartesian coordinates. This is used to find the
+         * @param curvilinear_to_cartesian  A mapping from curvilinear to Cartesian coordinates. This is used to find the
          *                                  singular point and determine the Barycentric coordinates which are used to define
          *                                  the new basis splines which cross the singular point.
          */
@@ -288,18 +288,18 @@ public:
 
                 ddc::init_discrete_space<BernsteinBasis>(barycentric_coordinate_converter);
 
-                // The number of radial bases used to construct the bsplines traversing the singular point.
+                // The number of radial bases used to construct the B-splines traversing the singular point.
                 constexpr IdxStepR nr_in_singular(C + 1);
                 assert(nr_in_singular.value() < int(ddc::discrete_space<BSplinesR>().size()));
 
-                // The number of poloidal bases used to construct the bsplines traversing the singular point.
+                // The number of poloidal bases used to construct the B-splines traversing the singular point.
                 const IdxStepTheta np_in_singular(ddc::discrete_space<BSplinesTheta>().nbasis());
 
                 // The number of elements of the poloidal basis which will have an associated coefficient
                 // (This will be larger than np_in_singular as it includes the periodicity)
                 const IdxStepTheta np_tot(ddc::discrete_space<BSplinesTheta>().size());
 
-                // The index range of the 2D bsplines in the innermost circles from which the polar bsplines
+                // The index range of the 2D B-splines in the innermost circles from which the polar B-splines
                 // traversing the singular point will be constructed.
                 tensor_product_idx_range_type const dom_bsplines_inner(
                         tensor_product_index_type(0, 0),
@@ -415,14 +415,14 @@ public:
          * @brief Evaluate the polar basis splines at the coordinate p.
          *
          * Evaluate all the b-spline elements near the singular point which cannot be
-         * expressed as a tensor product of 1D bsplines, as well as the non-zero b-spline
-         * elements which can be expressed as a tensor product of 1D bsplines.
+         * expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline
+         * elements which can be expressed as a tensor product of 1D B-splines.
          *
          * @param[out] singular_values  The value of the b-spline elements near the singular point
-         *                              which cannot be expressed as a tensor product of 1D bsplines,
+         *                              which cannot be expressed as a tensor product of 1D B-splines,
          *                              evaluated at the coordinate p.
          * @param[out] values           The value of the non-zero b-spline elements which can be
-         *                              expressed as a tensor product of 1D bsplines.
+         *                              expressed as a tensor product of 1D B-splines.
          * @param[in] p                 The coordinate where the basis functions are evaluated.
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
@@ -436,14 +436,14 @@ public:
          * @brief Evaluate the radial derivative of the polar basis splines at the coordinate p.
          *
          * Evaluate the radial derivative of all the b-spline elements near the singular point which
-         * cannot be expressed as a tensor product of 1D bsplines, as well as the non-zero b-spline
-         * elements which can be expressed as a tensor product of 1D bsplines.
+         * cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline
+         * elements which can be expressed as a tensor product of 1D B-splines.
          *
          * @param[out] singular_derivs  The value of the radial derivative b-spline elements near the
          *                              singular point which cannot be expressed as a tensor product
-         *                              of 1D bsplines, evaluated at the coordinate p.
+         *                              of 1D B-splines, evaluated at the coordinate p.
          * @param[out] derivs           The value of the radial derivative of the non-zero b-spline
-         *                              elements which can be expressed as a tensor product of 1D bsplines.
+         *                              elements which can be expressed as a tensor product of 1D B-splines.
          * @param[in] p                 The coordinate where the basis functions are evaluated.
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
@@ -457,14 +457,14 @@ public:
          * @brief Evaluate the poloidal derivative of the polar basis splines at the coordinate p.
          *
          * Evaluate the poloidal derivative of all the b-spline elements near the singular point which
-         * cannot be expressed as a tensor product of 1D bsplines, as well as the non-zero b-spline
-         * elements which can be expressed as a tensor product of 1D bsplines.
+         * cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline
+         * elements which can be expressed as a tensor product of 1D B-splines.
          *
          * @param[out] singular_derivs  The value of the poloidal derivative b-spline elements near the
          *                              singular point which cannot be expressed as a tensor product
-         *                              of 1D bsplines, evaluated at the coordinate p.
+         *                              of 1D B-splines, evaluated at the coordinate p.
          * @param[out] derivs           The value of the poloidal derivative of the non-zero b-spline
-         *                              elements which can be expressed as a tensor product of 1D bsplines.
+         *                              elements which can be expressed as a tensor product of 1D B-splines.
          * @param[in] p                 The coordinate where the basis functions are evaluated.
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
@@ -479,14 +479,14 @@ public:
          * directions, at the coordinate p.
          *
          * Evaluate the 2nd order derivative of all the b-spline elements near the singular point which
-         * cannot be expressed as a tensor product of 1D bsplines, as well as the non-zero b-spline
-         * elements which can be expressed as a tensor product of 1D bsplines.
+         * cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline
+         * elements which can be expressed as a tensor product of 1D B-splines.
          *
          * @param[out] singular_derivs  The value of the 2nd order derivative b-spline elements near the
          *                              singular point which cannot be expressed as a tensor product
-         *                              of 1D bsplines, evaluated at the coordinate p.
+         *                              of 1D B-splines, evaluated at the coordinate p.
          * @param[out] derivs           The value of the 2nd order derivative of the non-zero b-spline
-         *                              elements which can be expressed as a tensor product of 1D bsplines.
+         *                              elements which can be expressed as a tensor product of 1D B-splines.
          * @param[in] p                 The coordinate where the basis functions are evaluated.
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.

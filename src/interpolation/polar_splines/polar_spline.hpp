@@ -17,27 +17,27 @@ struct ConstPolarSpline;
  * @brief A structure containing the two FieldMems necessary to define a spline on a set of
  * polar basis splines.
  *
- * @tparam PolarBSplinesType The type of the polar bsplines on which this spline is defined.
+ * @tparam PolarBSplinesType The type of the polar B-splines on which this spline is defined.
  */
 template <class PolarBSplinesType, class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
 struct PolarSplineMem
 {
 public:
-    /// The radial bspline from which the polar bsplines are constructed.
+    /// The radial bspline from which the polar B-splines are constructed.
     using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
-    /// The poloidal bspline from which the polar bsplines are constructed.
+    /// The poloidal bspline from which the polar B-splines are constructed.
     using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
 
 public:
     /**
      * A FieldMem containing the coefficients in front of the b-spline elements which can be
-     * expressed as a tensor product of 1D bsplines.
+     * expressed as a tensor product of 1D B-splines.
      */
     DFieldMem<IdxRange<BSplinesR, BSplinesTheta>, MemSpace> spline_coef;
 
     /**
      * A FieldMem containing the coefficients in front of the b-spline elements near the
-     * singular point which cannot be expressed as a tensor product of 1D bsplines.
+     * singular point which cannot be expressed as a tensor product of 1D B-splines.
      */
     DFieldMem<IdxRange<PolarBSplinesType>, MemSpace> singular_spline_coef;
 
@@ -45,11 +45,11 @@ public:
     /**
      * @brief A constructor for the PolarSplineMem.
      *
-     * A constructor for the PolarSplineMem which takes a 2D domain of bsplines. This domain is then
-     * split into the domains which are relevant for a polar bspline constructed from these 2D bsplines.
+     * A constructor for the PolarSplineMem which takes a 2D domain of B-splines. This domain is then
+     * split into the domains which are relevant for a polar bspline constructed from these 2D B-splines.
      * These new domains are then used to create the chunks which define the spline.
      *
-     * @param domain A 2D domain of bsplines.
+     * @param domain A 2D domain of B-splines.
      */
     explicit PolarSplineMem<PolarBSplinesType, MemSpace>(IdxRange<BSplinesR, BSplinesTheta> domain)
         : spline_coef(IdxRange<BSplinesR, BSplinesTheta>(
@@ -67,9 +67,9 @@ public:
      *
      * @param singular_domain The domain for the coefficients in front of the b-spline elements
      *                        near the singular point. These are the elements which cannot be
-     *                        expressed as a tensor product of 1D bsplines.
+     *                        expressed as a tensor product of 1D B-splines.
      * @param domain          The domain for the coefficients in front of the b-spline elements
-     *                        which can be expressed as a tensor product of 1D bsplines.
+     *                        which can be expressed as a tensor product of 1D B-splines.
      */
     PolarSplineMem<PolarBSplinesType, MemSpace>(
             IdxRange<PolarBSplinesType> singular_domain,
@@ -105,27 +105,27 @@ public:
  * @brief A structure containing the two Fields necessary to define a reference to a spline
  * on a set of polar basis splines.
  *
- * @tparam PolarBSplinesType The type of the polar bsplines on which this spline is defined.
+ * @tparam PolarBSplinesType The type of the polar B-splines on which this spline is defined.
  */
 template <class PolarBSplinesType, class MemSpace>
 struct PolarSpline
 {
 public:
-    /// The radial bspline from which the polar bsplines are constructed.
+    /// The radial bspline from which the polar B-splines are constructed.
     using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
-    /// The poloidal bspline from which the polar bsplines are constructed.
+    /// The poloidal bspline from which the polar B-splines are constructed.
     using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
 
 public:
     /**
      * A Field containing the coefficients in front of the b-spline elements which can be
-     * expressed as a tensor product of 1D bsplines.
+     * expressed as a tensor product of 1D B-splines.
      */
     DField<IdxRange<BSplinesR, BSplinesTheta>, MemSpace> spline_coef;
 
     /**
      * A Field containing the coefficients in front of the b-spline elements near the
-     * singular point which cannot be expressed as a tensor product of 1D bsplines.
+     * singular point which cannot be expressed as a tensor product of 1D B-splines.
      */
     DField<IdxRange<PolarBSplinesType>, MemSpace> singular_spline_coef;
 
@@ -167,27 +167,27 @@ public:
  * @brief A structure containing the two ConstFields necessary to define a constant reference to a
  * spline on a set of polar basis splines.
  *
- * @tparam PolarBSplinesType The type of the polar bsplines on which this spline is defined.
+ * @tparam PolarBSplinesType The type of the polar B-splines on which this spline is defined.
  */
 template <class PolarBSplinesType, class MemSpace>
 struct ConstPolarSpline
 {
 public:
-    /// The radial bspline from which the polar bsplines are constructed.
+    /// The radial bspline from which the polar B-splines are constructed.
     using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
-    /// The poloidal bspline from which the polar bsplines are constructed.
+    /// The poloidal bspline from which the polar B-splines are constructed.
     using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
 
 public:
     /**
      * A ConstField containing the coefficients in front of the b-spline elements which can be
-     * expressed as a tensor product of 1D bsplines.
+     * expressed as a tensor product of 1D B-splines.
      */
     DConstField<IdxRange<BSplinesR, BSplinesTheta>, MemSpace> const spline_coef;
 
     /**
      * A ConstField containing the coefficients in front of the b-spline elements near the
-     * singular point which cannot be expressed as a tensor product of 1D bsplines.
+     * singular point which cannot be expressed as a tensor product of 1D B-splines.
      */
     DConstField<IdxRange<PolarBSplinesType>, MemSpace> const singular_spline_coef;
 

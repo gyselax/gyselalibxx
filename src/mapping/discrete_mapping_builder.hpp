@@ -193,7 +193,7 @@ private:
     using Theta = typename BSplinesThetaOriginal::continuous_dimension_type;
 
 public:
-    /// @brief The type of the radial bsplines on which the new mapping will be defined.
+    /// @brief The type of the radial B-splines on which the new mapping will be defined.
     struct BSplinesRRefined
         : std::conditional_t<
                   BSplinesROriginal::is_uniform(),
@@ -202,7 +202,7 @@ public:
     {
     };
 
-    /// @brief The type of the poloidal bsplines on which the new mapping will be defined.
+    /// @brief The type of the poloidal B-splines on which the new mapping will be defined.
     struct BSplinesThetaRefined
         : std::conditional_t<
                   BSplinesThetaOriginal::is_uniform(),

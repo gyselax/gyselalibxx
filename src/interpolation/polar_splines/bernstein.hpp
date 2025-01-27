@@ -20,8 +20,8 @@
  * Multi-degree smooth polar splines: A framework for geometric modeling and isogeometric analysis
  * https://doi.org/10.1016/j.cma.2016.11.009
  *
- * @tparam X The first dimension of the cartesian coordinate system.
- * @tparam Y The second dimension of the cartesian coordinate system.
+ * @tparam X The first dimension of the Cartesian coordinate system.
+ * @tparam Y The second dimension of the Cartesian coordinate system.
  * @tparam Corner1Tag A class to identify the first corner.
  * @tparam Corner2Tag A class to identify the second corner.
  * @tparam Corner3Tag A class to identify the third corner.
@@ -92,7 +92,7 @@ public:
 
         /**
          * @brief Construct the basis from the barycentric coordinate mapping.
-         * @param[in] coord_changer The class which converts cartesian coordinates to
+         * @param[in] coord_changer The class which converts Cartesian coordinates to
          * barycentric coordinates.
          */
         explicit Impl(CartesianToBarycentric<X, Y, Corner1Tag, Corner2Tag, Corner3Tag> const&

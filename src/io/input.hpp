@@ -45,17 +45,17 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
  * Initialise an index range which will serve as an interpolation index range for splines.
  *
  * The index range is initialised using information from an input yaml file.
- * If the bsplines are uniform then the information to be read is:
+ * If the B-splines are uniform then the information to be read is:
  * - .SplineMesh.<mesh_identifier>_min
  * - .SplineMesh.<mesh_identifier>_max
  * - .SplineMesh.<mesh_identifier>_ncells
  *
- * If the bsplines are non-uniform then the information to be read is:
+ * If the B-splines are non-uniform then the information to be read is:
  * - .SplineMesh.<mesh_identifier>_MeshFile
  *
  * This string indicates the name of a file which contains the knots of the bspline.
  *
- * This information is used to initialise the bsplines. The interpolation index range
+ * This information is used to initialise the B-splines. The interpolation index range
  * is then created using the specified method.
  */
 template <class Grid1D, class BSplines, class InterpPointInitMethod>
@@ -113,7 +113,7 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
  * Initialise an index range which will serve as an interpolation index range for splines.
  *
  * The index range is initialised using information from an input yaml file.
- * This function should be used for non-uniform bsplines, but it initialises
+ * This function should be used for non-uniform B-splines, but it initialises
  * the break points uniformly. Such splines are referred to as pseudo-uniform
  * as the cells on which the polynomials are defined are uniform. However they
  * are not strictly uniform as multiple knots will be found at the same

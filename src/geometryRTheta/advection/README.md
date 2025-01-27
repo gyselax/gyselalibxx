@@ -305,10 +305,9 @@ Journal of Computational Physics (2019).
 # Contents
 
 This folder contains:
- - iadvectionrp.hpp : define the base class for advection operator (IAdvectionRP): 
- 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRP); 
- - foot\_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder): 
- - maths\_tools.hpp : useful functions used in several files.  
+ - iadvectionrp.hpp : define the base class for advection operator (IAdvectionRP). 
+ 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRP). 
+ - spline\_foot\_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder).
 
 
 
