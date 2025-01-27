@@ -376,7 +376,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                gauss_legendre_quadrature_coefficients&lt;</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                        Kokkos::DefaultExecutionSpace&gt;(gl_coeffs_r, gl_coeffs_theta));</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="comment">// Find value and derivative of 1D bsplines in radial direction</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="comment">// Find value and derivative of 1D B-splines in radial direction</span></div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        ddc::for_each(m_idxrange_quadrature_r, [&amp;](IdxQuadratureR <span class="keyword">const</span> idx_r) {</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            std::array&lt;double, 2 * m_n_non_zero_bases_r&gt; data;</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            DSpan2D vals(data.data(), m_n_non_zero_bases_r, 2);</div>
@@ -389,7 +389,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>            }</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        });</div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="comment">// Find value and derivative of 1D bsplines in poloidal direction</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="comment">// Find value and derivative of 1D B-splines in poloidal direction</span></div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        ddc::for_each(m_idxrange_quadrature_theta, [&amp;](IdxQuadratureTheta <span class="keyword">const</span> idx_theta) {</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            std::array&lt;double, 2 * m_n_non_zero_bases_theta&gt; data;</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            DSpan2D vals(data.data(), m_n_non_zero_bases_theta, 2);</div>
@@ -405,7 +405,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        IdxRangeBSPolar idxrange_singular</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                = PolarBSplinesRTheta::template singular_idx_range&lt;PolarBSplinesRTheta&gt;();</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <span class="comment">// Find value and derivative of 2D bsplines covering the singular point</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <span class="comment">// Find value and derivative of 2D B-splines covering the singular point</span></div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        ddc::for_each(m_idxrange_quadrature_singular, [&amp;](IdxQuadratureRTheta <span class="keyword">const</span> irp) {</div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>            std::array&lt;double, <a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">PolarBSplinesRTheta::n_singular_basis</a>()&gt; singular_data;</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>            std::array&lt;double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta&gt; data;</div>
@@ -539,7 +539,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>        DField&lt;IdxRangeQuadratureRTheta&gt; int_volume_proxy = get_field(m_int_volume);</div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;PolarPoissonFillFemMatrix&quot;</span>);</div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>        <span class="comment">// Calculate the matrix elements corresponding to the bsplines which cover the singular point</span></div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>        <span class="comment">// Calculate the matrix elements corresponding to the B-splines which cover the singular point</span></div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>        ddc::for_each(idxrange_singular, [&amp;](IdxBSPolar <span class="keyword">const</span> idx_test) {</div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>            ddc::for_each(idxrange_singular, [&amp;](IdxBSPolar <span class="keyword">const</span> idx_trial) {</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>                <span class="comment">// Calculate the weak integral</span></div>
@@ -611,7 +611,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>                = get_field(r_basis_vals_and_derivs_alloc);</div>
 <div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>        Field&lt;EvalDeriv1DType, IdxRange&lt;ThetaBasisSubset, QDimThetaMesh&gt;&gt;</div>
 <div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>                theta_basis_vals_and_derivs = get_field(theta_basis_vals_and_derivs_alloc);</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>        <span class="comment">// Calculate the matrix elements where bspline products overlap the bsplines which cover the singular point</span></div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>        <span class="comment">// Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point</span></div>
 <div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>        ddc::for_each(idxrange_singular, [&amp;](IdxBSPolar <span class="keyword">const</span> idx_test) {</div>
 <div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>            ddc::for_each(idxrange_non_singular_near_centre, [&amp;](IdxBSRTheta <span class="keyword">const</span> idx_trial) {</div>
 <div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>                <span class="keyword">const</span> IdxBSPolar idx_trial_polar(</div>

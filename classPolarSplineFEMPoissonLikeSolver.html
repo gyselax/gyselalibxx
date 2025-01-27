@@ -217,14 +217,14 @@ class PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta,
 <p>Solve the following Partial Differential Equation</p>
 <p>(1) \(  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho \), in \( \Omega\),</p>
 <p>\(  \phi = 0 \), on \( \partial \Omega\),</p>
-<p>As finite element basis functions we will use polar b-splines which are divided into two types: 1) Basis splines that can be written as a tensor product of 1d basis splines ("non-singular bsplines") 2) Basis splines that cover the centre point and are defined as a linear combination of basis splines of type 1 ("singular bsplines")</p>
+<p>As finite element basis functions we will use polar b-splines which are divided into two types: 1) Basis splines that can be written as a tensor product of 1d basis splines ("non-singular B-splines") 2) Basis splines that cover the centre point and are defined as a linear combination of basis splines of type 1 ("singular B-splines")</p>
 <p>(see in Emily Bourne's thesis "Non-Uniform Numerical Schemes for the Modelling of Turbulence
  in the 5D GYSELA Code". December 2022.)</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname"><a class="el" href="structGridR.html">GridR</a></td><td>The radial grid type. </td></tr>
     <tr><td class="paramname"><a class="el" href="structGridR.html">GridR</a></td><td>The poloidal grid type. </td></tr>
-    <tr><td class="paramname"><a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a></td><td>The type of the 2D polar bsplines (on the coordinate system \((r,\theta)\) including bsplines which traverse the O point). </td></tr>
+    <tr><td class="paramname"><a class="el" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a></td><td>The type of the 2D polar B-splines (on the coordinate system \((r,\theta)\) including B-splines which traverse the O point). </td></tr>
     <tr><td class="paramname">SplineRThetaEvaluatorNullBound</td><td>The type of the 2D (cross-product) spline evaluator. </td></tr>
     <tr><td class="paramname">IdxRangeFull</td><td>The full index range of \( \phi \) including any batch dimensions. </td></tr>
   </table>
