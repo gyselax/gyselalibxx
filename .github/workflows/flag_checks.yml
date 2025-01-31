@@ -9,6 +9,12 @@ jobs:
   Check_flags:
     name: Check flags
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+      repository-projects: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
         with:

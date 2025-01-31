@@ -125,6 +125,7 @@ MAIN_SHA=\$(git log -1 --pretty=%H)
 
 if ! git config remote.gyselalibxx.url > /dev/null; then
   git remote add gyselalibxx git@github.com:gyselax/gyselalibxx.git
+  git fetch gyselalibxx
 fi
 git merge gyselalibxx/main
 git checkout devel
@@ -136,6 +137,7 @@ if [[ \${SUCCESS} == 0 ]]
 then
   git push -f --all
   echo "Main and devel branch updated successfully"
+  git status
 else
   git status
   exit 1

@@ -279,7 +279,7 @@ def search_for_unnecessary_auto(file):
             if not any(v['str'] in chain(mirror_functions, auto_functions) for v in config.data[start:end]):
                 report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
 
         # Find auto in arguments of lambda functions
@@ -298,7 +298,7 @@ def search_for_unnecessary_auto(file):
             lambda_args = ' '.join(a['str'] for a in config.data[end_idx+2:end_args_idx]).split(',')
             for a in lambda_args:
                 if 'auto' in a:
-                    report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
+                    report_error(ERROR, file, config.data[start_idx]['linenr'], f"Please use explicit types instead of auto ({a})")
 
         for elem in chain(config.data_xml.findall(".token[@str='KOKKOS_CLASS_LAMBDA']"), config.data_xml.findall(".token[@str='KOKKOS_LAMBDA']")):
             start_idx = config.data.index(elem.attrib)+3
@@ -306,7 +306,7 @@ def search_for_unnecessary_auto(file):
             lambda_args = ' '.join(a['str'] for a in config.data[start_idx:end_args_idx]).split(',')
             for a in lambda_args:
                 if 'auto' in a.split():
-                    report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
+                    report_error(ERROR, file, config.data[start_idx]['linenr'], f"Please use explicit types instead of auto ({a})")
 
 def search_for_bad_create_mirror(file):
     """
@@ -439,7 +439,7 @@ def search_for_uid(file):
     Test for use of uid(). The DDC internal unique identifier should never be used directly.
     """
     for config in file.configs:
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
         uid_usage = [d.attrib for d in config.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
         uid_indices = [config.data.index(d) for d in uid_usage]
@@ -525,7 +525,7 @@ def check_kokkos_lambda_use(file):
     - Check that class variables are not used in lambda functions passed to ddc::parallel_X functions.
     """
     for config in file.configs:
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
 
         for p in parallel_functions:

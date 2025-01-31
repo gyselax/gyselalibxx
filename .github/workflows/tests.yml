@@ -7,6 +7,7 @@ on:
       - reopened
       - synchronize
       - ready_for_review
+      - labeled
   merge_group:
     types:
       - checks_requested
@@ -15,7 +16,10 @@ jobs:
   pre_job:
     name: 'Check for unnecessary runs'
     runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
+    if: |
+      (github.repository == 'gyselax/gyselalibxx' && github.event.action != 'labeled' && github.event.pull_request.draft == false) ||
+      (github.repository != 'gyselax/gyselalibxx' && github.event.action == 'labeled' && github.event.label.name == 'Ready to review') ||
+      (github.repository != 'gyselax/gyselalibxx' && github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'Ready to review'))
     # Map a step output to a job output
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
@@ -46,6 +50,7 @@ jobs:
     name: GPU Test
     needs: pre_job
     uses: ./.github/workflows/gpu_tests.yml
+    if: github.repository == 'gyselax/gyselalibxx'
     with:
       merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
       pr_number: ${{ github.event.pull_request.number }}
@@ -55,16 +60,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     if: github.event_name == 'pull_request' && failure()
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+      repository-projects: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
       - name: Set PR to draft to avoid unnecessary runs
+        if: github.repository == 'gyselax/gyselalibxx'
         run: |
-          isDraft=$(gh pr view ${{ github.event.pull_request.number }} --json isDraft | jq ."isDraft")
-          if [[ "${isDraft}" != "true" ]]
+          isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
+          if [ "${isDraft}" != "true" ]
           then
-            gh pr ready ${{ github.event.pull_request.number }} --undo
+            if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
+            then
+              gh pr ready ${{ github.event.pull_request.number }} --undo
+            fi
             gh pr comment ${{ github.event.pull_request.number }} -b "This PR is failing tests so it has been put back into draft. Please remove the draft status when the tests pass."
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
@@ -76,16 +89,23 @@ jobs:
     runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     if: github.event_name == 'pull_request' && cancelled()
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+      repository-projects: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
       - name: Set PR to draft to avoid unnecessary runs
         run: |
-          isDraft=$(gh pr view ${{ github.event.pull_request.number }} --json isDraft | jq ."isDraft")
-          if [[ "${isDraft}" != "true" ]]
+          isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
+          if [ "${isDraft}" != "true" ]
           then
-            gh pr ready ${{ github.event.pull_request.number }} --undo
+            if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
+            then
+               gh pr ready ${{ github.event.pull_request.number }} --undo
+            fi
             gh pr comment ${{ github.event.pull_request.number }} -b "It seems like you haven't finished working on this PR so it has been put back into draft. Please remove the draft status when the PR can run tests without being interrupted."
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
@@ -97,16 +117,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     name: Set PR labels
-    if: github.event_name == 'pull_request' && success()
+    if: github.event_name == 'pull_request' && success() && github.repository == 'gyselax/gyselalibxx'
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+      repository-projects: read
+      issues: write
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
       - name: Set PR labels for reviews
         run: |
-          isDraft=$(gh pr view ${{ github.event.pull_request.number }} --json isDraft | jq ."isDraft")
-          if [[ "${isDraft}" != "true" ]]
+          if [ "${{ github.event.pull_request.draft }}" != "true" ]
           then
             STATES=$(gh pr checks ${{ github.event.pull_request.number }} --required --json state)
             N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
