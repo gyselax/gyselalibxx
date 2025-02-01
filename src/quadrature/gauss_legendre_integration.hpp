@@ -31,16 +31,16 @@ struct GaussLegendreCoefficients
     static std::array<long double, NPoints> weight;
 };
 
-template struct GaussLegendreCoefficients<1>;
-template struct GaussLegendreCoefficients<2>;
-template struct GaussLegendreCoefficients<3>;
-template struct GaussLegendreCoefficients<4>;
-template struct GaussLegendreCoefficients<5>;
-template struct GaussLegendreCoefficients<6>;
-template struct GaussLegendreCoefficients<7>;
-template struct GaussLegendreCoefficients<8>;
-template struct GaussLegendreCoefficients<9>;
-template struct GaussLegendreCoefficients<10>;
+extern template struct GaussLegendreCoefficients<1>;
+extern template struct GaussLegendreCoefficients<2>;
+extern template struct GaussLegendreCoefficients<3>;
+extern template struct GaussLegendreCoefficients<4>;
+extern template struct GaussLegendreCoefficients<5>;
+extern template struct GaussLegendreCoefficients<6>;
+extern template struct GaussLegendreCoefficients<7>;
+extern template struct GaussLegendreCoefficients<8>;
+extern template struct GaussLegendreCoefficients<9>;
+extern template struct GaussLegendreCoefficients<10>;
 
 /**
  * @brief An operator for constructing a Gauss-Legendre quadrature.
