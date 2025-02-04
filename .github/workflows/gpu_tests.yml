@@ -46,6 +46,7 @@ jobs:
         if: ${{ (! inputs.is_duplicate) || true }}
         run: |
           git clone https://ci_bot:MdlS_Gitlab_ZXxKzhcDox1hxsouxdSW@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
+          cd gyselalibxx
           echo "${GITHUB_REPOSITORY}" > repo
           echo "${GITHUB_SHA}" > commit
           git commit -m "Test commit ${GITHUB_SHA}" repo commit
