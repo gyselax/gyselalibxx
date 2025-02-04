@@ -55,6 +55,7 @@ jobs:
       merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
       pr_number: ${{ github.event.pull_request.number }}
       is_duplicate: ${{ needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false }}
+      secrets: inherit
 
   #set_draft_failing:
   #  runs-on: ubuntu-latest
