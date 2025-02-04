@@ -30,7 +30,8 @@ concurrency:
 
 jobs:
   gpu_tests:
-    runs-on: self-hosted
+    #runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: 'GitLab GPU trigger'
     #environment: development
     steps:
