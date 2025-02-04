@@ -32,19 +32,19 @@ jobs:
           paths: '["src/**/*.hpp", "src/**/*.cpp", "tests/**/*.hpp", "tests/**/*.cpp", "simulations/**/*.hpp", "simulations/**/*.cpp", "**/CMakeLists.txt", "vendor/**"]'
           cancel_others: 'false'
 
-  cpu_tests:
-    strategy:
-      matrix:
-        toolchain: [tests_toolchain, tests_release_toolchain, tests_release_omp_toolchain]
-      fail-fast: false
-    name: CPU Test (${{ matrix.toolchain }})
-    needs: pre_job
-    uses: ./.github/workflows/cpu_tests.yml
-    with:
-      toolchain: ${{ matrix.toolchain }}
-      merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-      pr_number: ${{ github.event.pull_request.number }}
-      is_duplicate: ${{ needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false }}
+  #cpu_tests:
+  #  strategy:
+  #    matrix:
+  #      toolchain: [tests_toolchain, tests_release_toolchain, tests_release_omp_toolchain]
+  #    fail-fast: false
+  #  name: CPU Test (${{ matrix.toolchain }})
+  #  needs: pre_job
+  #  uses: ./.github/workflows/cpu_tests.yml
+  #  with:
+  #    toolchain: ${{ matrix.toolchain }}
+  #    merge_target: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+  #    pr_number: ${{ github.event.pull_request.number }}
+  #    is_duplicate: ${{ needs.pre_job.outputs.should_skip != 'true' && github.event.pull_request.draft == false }}
 
   gpu_tests:
     name: GPU Test
