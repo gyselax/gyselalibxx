@@ -7,13 +7,13 @@ If this is your first interaction with gyselalib++ please check out the document
 
 In order to set up Gyselalib++ on a new machine, simply run:
 ```
-git clone --recurse-submodules git@gitlab.maisondelasimulation.fr:gysela-developpers/gyselalibxx.git gyselalibxx
+git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
 ./bin/install-hooks
 ```
 or
 ```
-git clone --recurse-submodules https://gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git gyselalibxx
+git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
 ./bin/install-hooks
 ```
