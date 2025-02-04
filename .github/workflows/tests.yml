@@ -111,6 +111,7 @@ jobs:
           isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
           if [ "${isDraft}" != "true" ]
           then
+            gh auth login --with-token ${{ steps.token.outputs.TOKEN }}
             if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
             then
                gh pr ready ${{ github.event.pull_request.number }} --undo
@@ -119,8 +120,6 @@ jobs:
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
         shell: bash
-        env:
-          GH_TOKEN: ${{ steps.token.outputs.TOKEN }}
 
   set_labels:
     runs-on: ubuntu-latest
