@@ -30,4 +30,4 @@ runs:
         with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
           fh.write(f"TOKEN={jw_token}\n")
         print("::add-mask::$TOKEN")
-
+      shell: python
