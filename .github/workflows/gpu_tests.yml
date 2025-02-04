@@ -31,7 +31,8 @@ concurrency:
 jobs:
   gpu_tests:
     runs-on: self-hosted
-    environment: development
+    environment: 'GitLab GPU trigger'
+    #environment: development
     steps:
       - name: Checkout gyselalibxx
         if: ${{ (! inputs.is_duplicate) || true }}
@@ -44,16 +45,23 @@ jobs:
         with:
           base: ${{ inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
-      - name: Setup environment
-        if: ${{ (! inputs.is_duplicate) || true }}
+      - name: "Send to persee"
         run: |
-          . toolchains/v100.persee/environment.sh
-        shell: bash
-      - name: Build code
-        if: ${{ (! inputs.is_duplicate) || true }}
-        uses: ./.github/actions/build_code
-        with:
-          toolchain: toolchains/v100.persee/toolchain.cmake
-      - name: Run tests
-        if: ${{ (! inputs.is_duplicate) || true }}
-        uses: ./.github/actions/run_tests
+          git clone "https://ci_bot:${{secrets.GITLAB_PAT}}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git" --single-branch --branch trigger_persee
+          echo "${GITHUB_REPOSITORY}" > repo
+          echo "${GITHUB_SHA}" > commit
+          git commit -m "Test commit ${GITHUB_SHA}" repo commit
+          git push
+      #- name: Setup environment
+      #  if: ${{ (! inputs.is_duplicate) || true }}
+      #  run: |
+      #    . toolchains/v100.persee/environment.sh
+      #  shell: bash
+      #- name: Build code
+      #  if: ${{ (! inputs.is_duplicate) || true }}
+      #  uses: ./.github/actions/build_code
+      #  with:
+      #    toolchain: toolchains/v100.persee/toolchain.cmake
+      #- name: Run tests
+      #  if: ${{ (! inputs.is_duplicate) || true }}
+      #  uses: ./.github/actions/run_tests
