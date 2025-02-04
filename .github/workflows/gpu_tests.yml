@@ -45,14 +45,14 @@ jobs:
       - name: "Send to persee"
         if: ${{ (! inputs.is_duplicate) || true }}
         run: |
-          git clone https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
+          git clone https://ci_bot:MdlS_Gitlab_ZXxKzhcDox1hxsouxdSW@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
           echo "${GITHUB_REPOSITORY}" > repo
           echo "${GITHUB_SHA}" > commit
           git commit -m "Test commit ${GITHUB_SHA}" repo commit
           git push
         shell: bash
-        env:
-          GITLAB_PAT: ${{secrets.GITLAB_PAT}}
+        #env:
+        #  GITLAB_PAT: ${{secrets.GITLAB_PAT}}
 
   #gpu_tests:
   #  runs-on: self-hosted
