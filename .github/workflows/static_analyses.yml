@@ -186,4 +186,4 @@ jobs:
           fi
         shell: bash
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.BOT_PEM }}
