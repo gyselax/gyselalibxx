@@ -21,7 +21,7 @@ runs:
         # Get PEM file path
         # Get the Client ID
         client_id = "1132905"
-        signing_key = jwt.jwk_from_pem(${{ inputs.pem }})
+        signing_key = jwt.jwk_from_pem("${{ inputs.pem }}")
         # Issued at time
         # JWT expiration time (10 minutes maximum)
         # GitHub App's identifier
