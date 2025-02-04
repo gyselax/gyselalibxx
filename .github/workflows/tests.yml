@@ -73,6 +73,8 @@ jobs:
       - name: ""
         id: token
         uses: ./.github/actions/generate_token
+        with:
+          pem: ${{secrets.BOT_PEM }}
       - name: Set PR to draft to avoid unnecessary runs
         if: github.repository == 'gyselax/gyselalibxx'
         run: |
@@ -102,6 +104,8 @@ jobs:
       - name: ""
         id: token
         uses: ./.github/actions/generate_token
+        with:
+          pem: ${{secrets.BOT_PEM }}
       - name: Set PR to draft to avoid unnecessary runs
         run: |
           isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
@@ -132,6 +136,8 @@ jobs:
       - name: ""
         id: token
         uses: ./.github/actions/generate_token
+        with:
+          pem: ${{secrets.BOT_PEM }}
       - name: Set PR labels for reviews
         run: |
           if [ "${{ github.event.pull_request.draft }}" != "true" ]
