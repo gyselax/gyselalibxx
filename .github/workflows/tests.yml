@@ -63,18 +63,11 @@ jobs:
     if: github.event_name == 'pull_request' && failure()
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python_version }}
-        uses: actions/setup-python@v5
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          python-version: ${{ matrix.python_version }}
-      - name: "Install dependencies"
-        run: |
-          pip install jwt
-      - name: ""
-        id: token
-        uses: ./.github/actions/generate_token
-        with:
-          pem: ${{secrets.BOT_PEM }}
+          app-id: 1132905
+          private-key: ${{ secrets.BOT_PEM }}
       - name: Set PR to draft to avoid unnecessary runs
         if: github.repository == 'gyselax/gyselalibxx'
         run: |
@@ -90,7 +83,7 @@ jobs:
           fi
         shell: bash
         env:
-          GH_TOKEN: ${{ steps.token.outputs.TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
   set_draft_cancelled:
     runs-on: ubuntu-latest
@@ -98,21 +91,16 @@ jobs:
     if: github.event_name == 'pull_request' && cancelled()
     steps:
       - uses: actions/checkout@v4
-      - name: "Install dependencies"
-        run: |
-          pip install jwt
-      - name: ""
-        id: token
-        uses: ./.github/actions/generate_token
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          pem: ${{secrets.BOT_PEM }}
+          app-id: 1132905
+          private-key: ${{ secrets.BOT_PEM }}
       - name: Set PR to draft to avoid unnecessary runs
         run: |
           isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
           if [ "${isDraft}" != "true" ]
           then
-            echo "${{ steps.token.outputs.TEST }}"
-            export GH_TOKEN=${{ steps.token.outputs.TOKEN }}
             if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
             then
                gh pr ready ${{ github.event.pull_request.number }} --undo
@@ -121,6 +109,8 @@ jobs:
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
         shell: bash
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
   set_labels:
     runs-on: ubuntu-latest
@@ -130,14 +120,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: "Install dependencies"
-        run: |
-          pip install jwt
-      - name: ""
-        id: token
-        uses: ./.github/actions/generate_token
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          pem: ${{secrets.BOT_PEM }}
+          app-id: 1132905
+          private-key: ${{ secrets.BOT_PEM }}
       - name: Set PR labels for reviews
         run: |
           if [ "${{ github.event.pull_request.draft }}" != "true" ]
@@ -150,5 +137,6 @@ jobs:
               gh pr edit ${{ github.event.pull_request.number }} --add-label "Ready to review"
             fi
           fi
+        shell: bash
         env:
-          GH_TOKEN: ${{ steps.token.outputs.TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
