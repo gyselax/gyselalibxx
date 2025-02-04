@@ -111,7 +111,8 @@ jobs:
           isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
           if [ "${isDraft}" != "true" ]
           then
-            gh auth login --with-token ${{ steps.token.outputs.TOKEN }}
+            export GH_TOKEN=${{ steps.token.outputs.TOKEN }}
+            gh auth login
             if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
             then
                gh pr ready ${{ github.event.pull_request.number }} --undo
