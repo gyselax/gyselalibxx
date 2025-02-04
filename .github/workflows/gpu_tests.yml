@@ -47,6 +47,8 @@ jobs:
         run: |
           git clone https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
           cd gyselalibxx
+          git config --global user.name "GitHub CI Documentation builder"
+          git config --global user.email "username@users.noreply.github.com"
           echo "${GITHUB_REPOSITORY}" > repo
           echo "${GITHUB_SHA}" > commit
           git commit -m "Test commit ${GITHUB_SHA}" repo commit
