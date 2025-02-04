@@ -61,14 +61,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     if: github.event_name == 'pull_request' && failure()
-    permissions:
-      contents: read
-      packages: read
-      pull-requests: write
-      repository-projects: read
-      issues: write
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python_version }}
+      - name: "Install dependencies"
+        run: |
+          pip install jwt
+      - name: ""
+        id: token
+        uses: ./.github/actions/generate_token
       - name: Set PR to draft to avoid unnecessary runs
         if: github.repository == 'gyselax/gyselalibxx'
         run: |
@@ -84,20 +88,20 @@ jobs:
           fi
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.BOT_PEM }}
+          GH_TOKEN: ${{ outputs.token.TOKEN }}
 
   set_draft_cancelled:
     runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     if: github.event_name == 'pull_request' && cancelled()
-    permissions:
-      contents: read
-      packages: read
-      pull-requests: write
-      repository-projects: read
-      issues: write
     steps:
       - uses: actions/checkout@v4
+      - name: "Install dependencies"
+        run: |
+          pip install jwt
+      - name: ""
+        id: token
+        uses: ./.github/actions/generate_token
       - name: Set PR to draft to avoid unnecessary runs
         run: |
           isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
@@ -112,22 +116,22 @@ jobs:
           fi
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.BOT_PEM }}
+          GH_TOKEN: ${{ outputs.token.TOKEN }}
 
   set_labels:
     runs-on: ubuntu-latest
     needs: [cpu_tests, gpu_tests]
     name: Set PR labels
     if: github.event_name == 'pull_request' && success() && github.repository == 'gyselax/gyselalibxx'
-    permissions:
-      contents: read
-      packages: read
-      pull-requests: write
-      repository-projects: read
-      issues: write
 
     steps:
       - uses: actions/checkout@v4
+      - name: "Install dependencies"
+        run: |
+          pip install jwt
+      - name: ""
+        id: token
+        uses: ./.github/actions/generate_token
       - name: Set PR labels for reviews
         run: |
           if [ "${{ github.event.pull_request.draft }}" != "true" ]
@@ -141,4 +145,4 @@ jobs:
             fi
           fi
         env:
-          GH_TOKEN: ${{ secrets.BOT_PEM }}
+          GH_TOKEN: ${{ outputs.token.TOKEN }}
