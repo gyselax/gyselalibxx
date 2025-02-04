@@ -4,9 +4,12 @@ inputs:
     description: "The PEM that needs to be used to generate the token"
     required: true
 outputs:
-  token:
+  TOKEN:
     description: "The generated token"
     value: ${{ steps.token_gen.outputs.TOKEN }}
+  TEST:
+    description: "Testing"
+    value: ${{ steps.token_gen.outputs.TEST }}
 
 runs:
   using: "composite"
@@ -29,6 +32,7 @@ runs:
         jw_token=jwt.JWT().encode(payload, signing_key, alg='RS256')
         with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
           fh.write(f"TOKEN={jw_token}\n")
+          fh.write(f"TEST=helloworld\n")
         print("::add-mask::$TOKEN")
       shell: python
       env:
