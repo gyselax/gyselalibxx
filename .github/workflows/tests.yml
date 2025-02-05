@@ -83,7 +83,7 @@ jobs:
           fi
         shell: bash
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
 
   set_draft_cancelled:
     runs-on: ubuntu-latest
@@ -103,12 +103,9 @@ jobs:
           then
             if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
             then
-               echo "Ready to draft"
                gh pr ready ${{ github.event.pull_request.number }} --undo
             fi
-            echo "Ready to comment"
             gh pr comment ${{ github.event.pull_request.number }} -b "It seems like you haven't finished working on this PR so it has been put back into draft. Please remove the draft status when the PR can run tests without being interrupted."
-            echo "Ready to review"
             gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           fi
         shell: bash
@@ -142,4 +139,4 @@ jobs:
           fi
         shell: bash
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
