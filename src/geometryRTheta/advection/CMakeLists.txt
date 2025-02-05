@@ -9,6 +9,7 @@ target_link_libraries(advection_rp
     INTERFACE
         DDC::core
         Eigen3::Eigen
+        gslx::advection
         gslx::data_types
         gslx::geometry_RTheta
         gslx::interpolation_2D_rp

@@ -388,6 +388,21 @@ template <
 using VectorConstField
         = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
 
+template <
+        class IdxRangeType,
+        class NDTag,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = Kokkos::layout_right>
+using DVectorField = VectorField<double, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+
+template <
+        class IdxRangeType,
+        class NDTag,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = Kokkos::layout_right>
+using DVectorConstField
+        = VectorConstField<double, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+
 namespace detail {
 
 /**

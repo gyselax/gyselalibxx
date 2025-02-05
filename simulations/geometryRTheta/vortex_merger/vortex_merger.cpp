@@ -34,8 +34,8 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vortex_merger_equilibrium.hpp"
@@ -160,7 +160,7 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
 
-    SplineFootFinder find_feet(
+    SplinePolarFootFinder find_feet(
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

@@ -8,8 +8,8 @@
 #include "i_interpolator_2d_rp.hpp"
 #include "iadvectionrp.hpp"
 #include "metric_tensor.hpp"
-#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 

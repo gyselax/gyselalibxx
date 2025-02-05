@@ -32,8 +32,8 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases_adv_field.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -139,7 +139,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     RK3<host_t<FieldMemRTheta<CoordRTheta>>,
         host_t<DVectorFieldMemRTheta<X, Y>>,
         Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
-    SplineFootFinder find_feet(
+    SplinePolarFootFinder find_feet(
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,

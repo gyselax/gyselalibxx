@@ -349,13 +349,12 @@ void simulate(
         bool save_feet,
         std::string const& output_folder)
 {
-    SplineFootFinder<TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping> const
-            foot_finder(
-                    time_stepper,
-                    to_physical_mapping,
-                    analytical_to_pseudo_physical_mapping,
-                    advection_builder,
-                    advection_evaluator);
+    SplinePolarFootFinder const foot_finder(
+            time_stepper,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            advection_builder,
+            advection_evaluator);
 
     BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, to_physical_mapping);
     auto function_to_be_advected_test = simulation.get_test_function();
