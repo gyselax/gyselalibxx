@@ -91,11 +91,6 @@ jobs:
     if: github.event_name == 'pull_request' && cancelled()
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: 1132905
-          private-key: ${{ secrets.BOT_PEM }}
       - name: Set PR to draft to avoid unnecessary runs
         run: |
           isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
