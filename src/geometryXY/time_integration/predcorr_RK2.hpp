@@ -170,11 +170,11 @@ public:
                     = ddc::create_mirror_and_copy(ddcHelper::get<Y>(electric_field));
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
-                    .and_with("time_saved", iter * dt)
-                    .and_with("fdistribu", allfdistribu_host)
-                    .and_with("electrostatic_potential", electrostatic_potential_host)
-                    .and_with("electric_field_x", electric_field_x_host)
-                    .and_with("electric_field_y", electric_field_y_host);
+                    .with("time_saved", iter * dt)
+                    .with("fdistribu", allfdistribu_host)
+                    .with("electrostatic_potential", electrostatic_potential_host)
+                    .with("electric_field_x", electric_field_x_host)
+                    .with("electric_field_y", electric_field_y_host);
         }
     };
 };

@@ -202,9 +202,9 @@ public:
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
-                    .and_with("time", iter * dt)
-                    .and_with("density", allfdistribu)
-                    .and_with("electrical_potential", electrical_potential_host);
+                    .with("time", iter * dt)
+                    .with("density", allfdistribu)
+                    .with("electrical_potential", electrical_potential_host);
 
 
             // STEP 2: From phi^n, we compute A^n:
@@ -346,9 +346,9 @@ public:
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
-                .and_with("time", steps * dt)
-                .and_with("density", allfdistribu)
-                .and_with("electrical_potential", electrical_potential_host);
+                .with("time", steps * dt)
+                .with("density", allfdistribu)
+                .with("electrical_potential", electrical_potential_host);
 
         end_time = std::chrono::system_clock::now();
         display_time_difference("Iterations time: ", start_time, end_time);

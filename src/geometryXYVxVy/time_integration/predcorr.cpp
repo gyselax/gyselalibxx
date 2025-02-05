@@ -57,9 +57,9 @@ DFieldSpXYVxVy PredCorr::operator()(
         ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
-                .and_with("time_saved", iter_time)
-                .and_with("fdistribu", allfdistribu_host)
-                .and_with("electrostatic_potential", electrostatic_potential_host);
+                .with("time_saved", iter_time)
+                .with("fdistribu", allfdistribu_host)
+                .with("electrostatic_potential", electrostatic_potential_host);
 
         // copy fdistribu
         ddc::parallel_deepcopy(allfdistribu_half_t, allfdistribu);
@@ -99,9 +99,9 @@ DFieldSpXYVxVy PredCorr::operator()(
     ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
-            .and_with("time_saved", final_time)
-            .and_with("fdistribu", allfdistribu_host)
-            .and_with("electrostatic_potential", electrostatic_potential_host);
+            .with("time_saved", final_time)
+            .with("fdistribu", allfdistribu_host)
+            .with("electrostatic_potential", electrostatic_potential_host);
 
     return allfdistribu;
 }

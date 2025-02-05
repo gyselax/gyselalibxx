@@ -323,10 +323,10 @@ int main(int argc, char** argv)
     // --- Save initial data --------------------------------------------------------------------------
     ddc::PdiEvent("initialization")
             .with("x_coords", coords_x)
-            .and_with("y_coords", coords_y)
-            .and_with("jacobian", jacobian)
-            .and_with("density_eq", rho_eq)
-            .and_with("electrical_potential_eq", phi_eq_host);
+            .with("y_coords", coords_y)
+            .with("jacobian", jacobian)
+            .with("density_eq", rho_eq)
+            .with("electrical_potential_eq", phi_eq_host);
 
 
     // ================================================================================================

@@ -212,9 +212,9 @@ public:
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
-                    .and_with("time", time)
-                    .and_with("density", allfdistribu)
-                    .and_with("electrical_potential", electrical_potential_host);
+                    .with("time", time)
+                    .with("density", allfdistribu)
+                    .with("electrical_potential", electrical_potential_host);
 
             // STEP 2: From phi^n, we compute A^n:
             advection_field_computer(electrostatic_potential_coef, advection_field);
@@ -291,9 +291,9 @@ public:
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
-                .and_with("time", steps * dt)
-                .and_with("density", allfdistribu)
-                .and_with("electrical_potential", electrical_potential_host);
+                .with("time", steps * dt)
+                .with("density", allfdistribu)
+                .with("electrical_potential", electrical_potential_host);
 
 
         end_time = std::chrono::system_clock::now();
