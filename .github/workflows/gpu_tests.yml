@@ -14,6 +14,10 @@ on:
         description: "The branch to which this branch should be compared to filter out costly tests"
         required: true
         type: string
+      SHA:
+        description: "The SHA of the commit being tested"
+        required: true
+        type: string
       pr_number:
         description: "The number of the pull request that triggered the test"
         required: false
@@ -50,7 +54,7 @@ jobs:
           git config --global user.name "GitHub CI Documentation builder"
           git config --global user.email "username@users.noreply.github.com"
           echo "${GITHUB_REPOSITORY}" > repo
-          echo "${GITHUB_SHA}" > commit
+          echo "${{ inputs.SHA || github.sha }}" > commit
           git commit -m "Test commit ${GITHUB_SHA}" repo commit
           git push
         shell: bash
