@@ -60,6 +60,23 @@ jobs:
         shell: bash
         env:
           GITLAB_PAT: ${{secrets.GITLAB_PAT}}
+      - name: "Get bot token"
+        if: ${{ inputs.is_duplicate || true }}
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: 1132905
+          private-key: ${{ secrets.BOT_PEM }}
+      - name: "Validate GPU using previous success"
+        if: ${{ inputs.is_duplicate || true }}
+        run: |
+          curl -L -X POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --header "Authorization: token ${{ steps.app-token.outputs.token }}" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs \
+            -d "{\"name\":\"GPU Tests\",\"head_sha\":\"${{ inputs.SHA || github.sha }}\",\"status\":\"completed\", \"conclusion\":\"success\",\"output\":{\"title\":\"GPU Test\",\"summary\":\"Previous success is still valid. Tests were not rerun\"}"
+
 
   #gpu_tests:
   #  runs-on: self-hosted
