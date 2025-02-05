@@ -38,16 +38,16 @@ jobs:
     environment: 'GitLab GPU trigger'
     steps:
       - name: Checkout gyselalibxx
-        if: ${{ (! inputs.is_duplicate) || true }}
+        if: ${{ ! inputs.is_duplicate }}
         uses: actions/checkout@v4
       - name: "Filter tests"
-        if: ${{ (! inputs.is_duplicate) || true }}
+        if: ${{ ! inputs.is_duplicate }}
         uses: ./.github/actions/test_filter
         with:
           base_sha: ${{ inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
       - name: "Send to persee"
-        if: ${{ (! inputs.is_duplicate) || true }}
+        if: ${{ ! inputs.is_duplicate }}
         run: |
           git clone https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
           cd gyselalibxx
@@ -61,14 +61,14 @@ jobs:
         env:
           GITLAB_PAT: ${{secrets.GITLAB_PAT}}
       - name: "Get bot token"
-        if: ${{ inputs.is_duplicate || true }}
+        if: ${{ inputs.is_duplicate }}
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
           app-id: 1132905
           private-key: ${{ secrets.BOT_PEM }}
       - name: "Validate GPU using previous success"
-        if: ${{ inputs.is_duplicate || true }}
+        if: ${{ inputs.is_duplicate }}
         run: |
           curl -L -X POST \
             --header "Accept: application/vnd.github+json" \
@@ -83,26 +83,26 @@ jobs:
   #  environment: development
   #  steps:
   #    - name: Checkout gyselalibxx
-  #      if: ${{ (! inputs.is_duplicate) || true }}
+  #      if: ${{ ! inputs.is_duplicate }}
   #      uses: actions/checkout@v4
   #      with:
   #        submodules: recursive
   #    - name: "Filter tests"
-  #      if: ${{ (! inputs.is_duplicate) || true }}
+  #      if: ${{ ! inputs.is_duplicate }}
   #      uses: ./.github/actions/test_filter
   #      with:
   #        base_sha: ${{ inputs.merge_target }}
   #        trigger_type: ${{ github.event_name }}
   #    - name: Setup environment
-  #      if: ${{ (! inputs.is_duplicate) || true }}
+  #      if: ${{ ! inputs.is_duplicate }}
   #      run: |
   #        . toolchains/v100.persee/environment.sh
   #      shell: bash
   #    - name: Build code
-  #      if: ${{ (! inputs.is_duplicate) || true }}
+  #      if: ${{ ! inputs.is_duplicate }}
   #      uses: ./.github/actions/build_code
   #      with:
   #        toolchain: toolchains/v100.persee/toolchain.cmake
   #    - name: Run tests
-  #      if: ${{ (! inputs.is_duplicate) || true }}
+  #      if: ${{ ! inputs.is_duplicate }}
   #      uses: ./.github/actions/run_tests
