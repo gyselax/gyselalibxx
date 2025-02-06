@@ -15,4 +15,4 @@ runs:
       uses: mikepenz/action-junit-report@v4
       if: success() || failure() # always run even if the previous step fails
       with:
-        report_paths: './build/test.xml'
+        report_paths: './build/tests.xml'

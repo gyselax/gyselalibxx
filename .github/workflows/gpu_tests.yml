@@ -14,6 +14,10 @@ on:
         description: "The branch to which this branch should be compared to filter out costly tests"
         required: true
         type: string
+      SHA:
+        description: "The SHA of the commit being tested"
+        required: true
+        type: string
       pr_number:
         description: "The number of the pull request that triggered the test"
         required: false
@@ -29,31 +33,76 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  gpu_tests:
-    runs-on: self-hosted
-    environment: development
+  trigger_gpu_tests:
+    runs-on: ubuntu-latest
+    environment: 'GitLab GPU trigger'
     steps:
       - name: Checkout gyselalibxx
-        if: ${{ (! inputs.is_duplicate) || true }}
+        if: ${{ ! inputs.is_duplicate }}
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
       - name: "Filter tests"
-        if: ${{ (! inputs.is_duplicate) || true }}
+        if: ${{ ! inputs.is_duplicate }}
         uses: ./.github/actions/test_filter
         with:
-          base: ${{ inputs.merge_target }}
+          base_sha: ${{ inputs.merge_target }}
           trigger_type: ${{ github.event_name }}
-      - name: Setup environment
-        if: ${{ (! inputs.is_duplicate) || true }}
+      - name: "Send to persee"
+        if: ${{ ! inputs.is_duplicate }}
         run: |
-          . toolchains/v100.persee/environment.sh
+          git clone https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git --single-branch --branch trigger_persee
+          cd gyselalibxx
+          git config --global user.name "GitHub CI Documentation builder"
+          git config --global user.email "username@users.noreply.github.com"
+          echo "${GITHUB_REPOSITORY}" > repo
+          echo "${{ inputs.SHA || github.sha }}" > commit
+          git commit -m "Test commit ${GITHUB_SHA}" repo commit
+          git push
         shell: bash
-      - name: Build code
-        if: ${{ (! inputs.is_duplicate) || true }}
-        uses: ./.github/actions/build_code
+        env:
+          GITLAB_PAT: ${{secrets.GITLAB_PAT}}
+      - name: "Get bot token"
+        if: ${{ inputs.is_duplicate }}
+        uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          toolchain: toolchains/v100.persee/toolchain.cmake
-      - name: Run tests
-        if: ${{ (! inputs.is_duplicate) || true }}
-        uses: ./.github/actions/run_tests
+          app-id: 1132905
+          private-key: ${{ secrets.BOT_PEM }}
+      - name: "Validate GPU using previous success"
+        if: ${{ inputs.is_duplicate }}
+        run: |
+          curl -L -X POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --header "Authorization: token ${{ steps.app-token.outputs.token }}" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs \
+            -d "{\"name\":\"GPU Tests\",\"head_sha\":\"${{ inputs.SHA || github.sha }}\",\"status\":\"completed\", \"conclusion\":\"success\",\"output\":{\"title\":\"GPU Test\",\"summary\":\"Previous success is still valid. Tests were not rerun\"}"
+
+
+  #gpu_tests:
+  #  runs-on: self-hosted
+  #  environment: development
+  #  steps:
+  #    - name: Checkout gyselalibxx
+  #      if: ${{ ! inputs.is_duplicate }}
+  #      uses: actions/checkout@v4
+  #      with:
+  #        submodules: recursive
+  #    - name: "Filter tests"
+  #      if: ${{ ! inputs.is_duplicate }}
+  #      uses: ./.github/actions/test_filter
+  #      with:
+  #        base_sha: ${{ inputs.merge_target }}
+  #        trigger_type: ${{ github.event_name }}
+  #    - name: Setup environment
+  #      if: ${{ ! inputs.is_duplicate }}
+  #      run: |
+  #        . toolchains/v100.persee/environment.sh
+  #      shell: bash
+  #    - name: Build code
+  #      if: ${{ ! inputs.is_duplicate }}
+  #      uses: ./.github/actions/build_code
+  #      with:
+  #        toolchain: toolchains/v100.persee/toolchain.cmake
+  #    - name: Run tests
+  #      if: ${{ ! inputs.is_duplicate }}
+  #      uses: ./.github/actions/run_tests
