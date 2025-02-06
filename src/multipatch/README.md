@@ -6,6 +6,8 @@ The `multipatch` folder contains all the code describing methods and classes whi
 
 - [data\_types](./data_types/README.md) - Defines classes to handle objects on a multipatch domain more conveniently.
 
+- [interface\_derivatives](./interface_derivatives/README.md) - Ongoing work only available on GitLab.
+
 - [spline](./spline/README.md) - Defines structures and methods to deal with different splines on every patches.
 
 - [utils](./utils/README.md) - Defines utility functions to operate over multiple patches.
