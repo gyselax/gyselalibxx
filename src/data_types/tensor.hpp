@@ -290,7 +290,7 @@ using Vector = Tensor<ElementType, VectorIndexSet<Dims...>>;
 template <class... Dims>
 using DVector = Vector<double, Dims...>;
 
-}
+} // namespace tensor_tools
 
 //////////////////////////////////////////////////////////////////////////
 //                         Operators
