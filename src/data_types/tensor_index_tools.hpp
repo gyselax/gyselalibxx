@@ -145,19 +145,19 @@ public:
 namespace details {
 
 template <class TypeSeqValidIndexSet>
-struct ToTensorIdxSet;
+struct ToTensorIndexSet;
 
 template <class... ValidIndexSet>
-struct ToTensorIdxSet<ddc::detail::TypeSeq<ValidIndexSet...>>
+struct ToTensorIndexSet<ddc::detail::TypeSeq<ValidIndexSet...>>
 {
     using type = TensorIndexSet<typename ValidIndexSet::possible_idx_values...>;
 };
 
 template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
-struct ToTensorIdxElement;
+struct ToTensorIndexElement;
 
 template <class ValidatingTensorIndexSet, class... ValidIndexSet>
-struct ToTensorIdxElement<ValidatingTensorIndexSet, ddc::detail::TypeSeq<ValidIndexSet...>>
+struct ToTensorIndexElement<ValidatingTensorIndexSet, ddc::detail::TypeSeq<ValidIndexSet...>>
 {
     using type = TensorIndexElement<ValidatingTensorIndexSet, ValidIndexSet...>;
 };
@@ -165,35 +165,35 @@ struct ToTensorIdxElement<ValidatingTensorIndexSet, ddc::detail::TypeSeq<ValidIn
 } // namespace details
 
 template <class TypeSeqValidIndexSet>
-using to_tensor_idx_set_t = typename details::ToTensorIdxSet<TypeSeqValidIndexSet>::type;
+using to_tensor_index_set_t = typename details::ToTensorIndexSet<TypeSeqValidIndexSet>::type;
 
 template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
-using to_tensor_idx_element_t =
-        typename details::ToTensorIdxElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
+using to_tensor_index_element_t = typename details::
+        ToTensorIndexElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
 
 namespace details {
 
-template <std::size_t Elem, std::size_t DimIdxHint, class TensorIndexSetType>
+template <std::size_t Elem, std::size_t IdxDimHint, class TensorIndexSetType>
 struct GetNthTensorIndexElement
 {
-    static constexpr std::size_t DimIdx = DimIdxHint - 1;
+    static constexpr std::size_t IdxDim = IdxDimHint - 1;
     using VectorIndexSetAlongDim =
-            typename TensorIndexSetType::get_vector_index_set_along_dim_t<DimIdx>;
-    using tensor_idx_type_seq = type_seq_cat_t<
+            typename TensorIndexSetType::get_vector_index_set_along_dim_t<IdxDim>;
+    using tensor_index_type_seq = type_seq_cat_t<
             typename GetNthTensorIndexElement<
                     Elem / ddc::type_seq_size_v<VectorIndexSetAlongDim>,
-                    DimIdxHint - 1,
-                    TensorIndexSetType>::tensor_idx_type_seq,
+                    IdxDimHint - 1,
+                    TensorIndexSetType>::tensor_index_type_seq,
             ddc::detail::TypeSeq<ddc::type_seq_element_t<
                     Elem % ddc::type_seq_size_v<VectorIndexSetAlongDim>,
                     VectorIndexSetAlongDim>>>;
-    using type = to_tensor_idx_element_t<TensorIndexSetType, tensor_idx_type_seq>;
+    using type = to_tensor_index_element_t<TensorIndexSetType, tensor_index_type_seq>;
 };
 
 template <std::size_t Elem, class TensorIndexSetType>
 struct GetNthTensorIndexElement<Elem, 0, TensorIndexSetType>
 {
-    using tensor_idx_type_seq = ddc::detail::TypeSeq<>;
+    using tensor_index_type_seq = ddc::detail::TypeSeq<>;
 };
 
 } // namespace details
