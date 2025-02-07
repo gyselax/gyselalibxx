@@ -87,7 +87,7 @@ jobs:
         run: |
           git remote add gitlab https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git
           git fetch gitlab public
-          git push
+          git push gitlab main:public
         shell: bash
         env:
           GITLAB_PAT: ${{secrets.GITLAB_PAT}}
