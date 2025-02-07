@@ -56,4 +56,3 @@ using type_seq_range_t = typename detail::TypeSeqRange<TypeSeqIn, Start, End, St
  */
 template <class... TypeSeqs>
 using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
-
