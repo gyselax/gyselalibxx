@@ -183,11 +183,11 @@ int main(int argc, char** argv)
     auto electric_field_y_host = ddc::create_mirror_and_copy(ddcHelper::get<Y>(electric_field));
     ddc::PdiEvent("iteration")
             .with("iter", iter)
-            .and_with("time_saved", iter * delta_t)
-            .and_with("fdistribu", allfdistribu_host)
-            .and_with("electrostatic_potential", electrostatic_potential_host)
-            .and_with("electric_field_x", electric_field_x_host)
-            .and_with("electric_field_y", electric_field_y_host);
+            .with("time_saved", iter * delta_t)
+            .with("fdistribu", allfdistribu_host)
+            .with("electrostatic_potential", electrostatic_potential_host)
+            .with("electric_field_x", electric_field_x_host)
+            .with("electric_field_y", electric_field_y_host);
 
     // // SIMULATION --------------------------------------------------------------------------------
     std::chrono::time_point<std::chrono::system_clock> const start

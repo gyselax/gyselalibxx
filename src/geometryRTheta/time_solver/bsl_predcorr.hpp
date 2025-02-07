@@ -14,7 +14,6 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
-#include "ifoot_finder.hpp"
 #include "itimesolver.hpp"
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
@@ -110,10 +109,9 @@ public:
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
             double const dt,
-            int const steps) const
+            int const steps) const override
     {
-        std::chrono::time_point<std::chrono::system_clock> start_time
-                = std::chrono::system_clock::now();
+        std::chrono::time_point<std::chrono::system_clock> start_time;
         std::chrono::time_point<std::chrono::system_clock> end_time;
 
 
@@ -143,9 +141,9 @@ public:
         ddc::parallel_deepcopy(electrical_potential0, electrical_potential0_host);
         ddc::PdiEvent("iteration")
                 .with("iter", 0)
-                .and_with("time", 0)
-                .and_with("density", allfdistribu)
-                .and_with("electrical_potential", electrical_potential0_host);
+                .with("time", 0)
+                .with("density", allfdistribu)
+                .with("electrical_potential", electrical_potential0_host);
 
 
         std::function<void(host_t<DVectorFieldRTheta<X, Y>>, host_t<DConstFieldRTheta>)>
@@ -154,9 +152,6 @@ public:
                     // --- compute electrostatic potential:
                     host_t<Spline2DMem> allfdistribu_coef(get_spline_idx_range(m_builder));
                     m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
-                    PoissonLikeRHSFunction const charge_density_coord(
-                            get_const_field(allfdistribu_coef),
-                            m_spline_evaluator);
                     m_poisson_solver(charge_density_coord, electrostatic_potential_coef);
 
                     // --- compute advection field:
@@ -186,15 +181,13 @@ public:
 
 
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));
-            PoissonLikeRHSFunction const
-                    charge_density_coord(get_const_field(allfdistribu_coef), m_spline_evaluator);
             m_poisson_solver(charge_density_coord, get_field(electrical_potential));
             ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
             ddc::PdiEvent("iteration")
                     .with("iter", iter + 1)
-                    .and_with("time", iter * dt)
-                    .and_with("density", allfdistribu)
-                    .and_with("electrical_potential", electrical_potential_host);
+                    .with("time", iter * dt)
+                    .with("density", allfdistribu)
+                    .with("electrical_potential", electrical_potential_host);
         }
         end_time = std::chrono::system_clock::now();
 

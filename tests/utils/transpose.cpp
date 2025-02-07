@@ -76,7 +76,7 @@ using DFieldZXY = host_t<DField<IdxRangeZXY>>;
 using DFieldZYX = host_t<DField<IdxRangeZYX>>;
 
 template <class Grid1D>
-KOKKOS_FUNCTION typename Grid1D::continuous_element_type get_coordinate(Idx<Grid1D> x)
+KOKKOS_FUNCTION Coord<typename Grid1D::continuous_dimension_type> get_coordinate(Idx<Grid1D> x)
 {
     using Dim = typename Grid1D::continuous_dimension_type;
     CoordXYZ const origin(-1.0, 10.0, 100.0);

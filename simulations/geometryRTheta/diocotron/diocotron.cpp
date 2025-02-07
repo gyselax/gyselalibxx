@@ -35,8 +35,8 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
@@ -188,7 +188,7 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
 
-    SplineFootFinder find_feet(
+    SplinePolarFootFinder find_feet(
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
@@ -323,10 +323,10 @@ int main(int argc, char** argv)
     // --- Save initial data --------------------------------------------------------------------------
     ddc::PdiEvent("initialization")
             .with("x_coords", coords_x)
-            .and_with("y_coords", coords_y)
-            .and_with("jacobian", jacobian)
-            .and_with("density_eq", rho_eq)
-            .and_with("electrical_potential_eq", phi_eq_host);
+            .with("y_coords", coords_y)
+            .with("jacobian", jacobian)
+            .with("density_eq", rho_eq)
+            .with("electrical_potential_eq", phi_eq_host);
 
 
     // ================================================================================================

@@ -46,7 +46,7 @@ using DFieldXY = DField<IdxRangeXY>;
 using DVectorFieldXY = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
 
 template <class Grid1D>
-KOKKOS_FUNCTION typename Grid1D::continuous_element_type get_coordinate(Idx<Grid1D> x)
+KOKKOS_FUNCTION Coord<typename Grid1D::continuous_dimension_type> get_coordinate(Idx<Grid1D> x)
 {
     using Dim = typename Grid1D::continuous_dimension_type;
     CoordXY const origin(0.0, 0.0);

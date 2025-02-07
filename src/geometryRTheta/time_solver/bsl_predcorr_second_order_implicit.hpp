@@ -17,8 +17,8 @@
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
-#include "spline_foot_finder.hpp"
 #include "spline_interpolator_2d_rp.hpp"
+#include "spline_polar_foot_finder.hpp"
 
 
 
@@ -67,17 +67,20 @@ private:
                     host_t<DVectorFieldMemRTheta<X, Y>>,
                     Kokkos::DefaultHostExecutionSpace>;
 
-    using SplineFootFinderType = SplineFootFinder<
+    using SplinePolarFootFinderType = SplinePolarFootFinder<
             EulerMethod,
             LogicalToPhysicalMapping,
-            LogicalToPseudoPhysicalMapping>;
+            LogicalToPseudoPhysicalMapping,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluatorConstBound_host>;
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
-    BslAdvectionRTheta<SplineFootFinderType, LogicalToPhysicalMapping> const& m_advection_solver;
+    BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
+            m_advection_solver;
 
     EulerMethod const m_euler;
-    SplineFootFinderType const m_foot_finder;
+    SplinePolarFootFinderType const m_foot_finder;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -116,7 +119,7 @@ public:
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            BslAdvectionRTheta<SplineFootFinderType, LogicalToPhysicalMapping> const&
+            BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
                     advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
@@ -199,9 +202,9 @@ public:
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
-                    .and_with("time", iter * dt)
-                    .and_with("density", allfdistribu)
-                    .and_with("electrical_potential", electrical_potential_host);
+                    .with("time", iter * dt)
+                    .with("density", allfdistribu)
+                    .with("electrical_potential", electrical_potential_host);
 
 
             // STEP 2: From phi^n, we compute A^n:
@@ -343,9 +346,9 @@ public:
 
         ddc::PdiEvent("last_iteration")
                 .with("iter", steps)
-                .and_with("time", steps * dt)
-                .and_with("density", allfdistribu)
-                .and_with("electrical_potential", electrical_potential_host);
+                .with("time", steps * dt)
+                .with("density", allfdistribu)
+                .with("electrical_potential", electrical_potential_host);
 
         end_time = std::chrono::system_clock::now();
         display_time_difference("Iterations time: ", start_time, end_time);

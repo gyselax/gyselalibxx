@@ -84,10 +84,12 @@ total_interval_length(IdxRange<IDim> const& idx_range)
 template <class IDim>
 constexpr std::enable_if_t<
         IDim::continuous_dimension_type::PERIODIC,
-        typename IDim::continuous_element_type>
-restrict_to_idx_range(typename IDim::continuous_element_type coord, IdxRange<IDim> const& idx_range)
+        Coord<typename IDim::continuous_dimension_type>>
+restrict_to_idx_range(
+        Coord<typename IDim::continuous_dimension_type> coord,
+        IdxRange<IDim> const& idx_range)
 {
-    using Coord = typename IDim::continuous_element_type;
+    using Coord1D = Coord<typename IDim::continuous_dimension_type>;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
     double const x_max = x_min + length;
@@ -98,8 +100,8 @@ restrict_to_idx_range(typename IDim::continuous_element_type coord, IdxRange<IDi
         double periodic_factor = 2 * M_PI / length;
         double coord_2pi = double(coord) * periodic_factor;
         coord_2pi = std::copysign(std::acos(std::cos(coord_2pi)), std::sin(coord_2pi));
-        coord = coord_2pi < 0 ? Coord((coord_2pi + 2 * M_PI) / periodic_factor)
-                              : Coord((coord_2pi) / periodic_factor);
+        coord = coord_2pi < 0 ? Coord1D((coord_2pi + 2 * M_PI) / periodic_factor)
+                              : Coord1D((coord_2pi) / periodic_factor);
     }
     coord += x_min;
     while (coord < x_min)

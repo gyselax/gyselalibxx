@@ -142,8 +142,8 @@ int main(int argc, char** argv)
         // Write distribution function
         ddc::PdiEvent("write_fdistribu")
                 .with("iter", iter)
-                .and_with("time_saved", time_iter)
-                .and_with("fdistribu", allfdistribu_host);
+                .with("time_saved", time_iter)
+                .with("fdistribu", allfdistribu_host);
 
         // Apply collision operator
         collision_operator(get_field(allfdistribu), deltat);
