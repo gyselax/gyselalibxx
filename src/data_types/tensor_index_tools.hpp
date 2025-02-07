@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-#include <tuple>
-
+#include "type_seq_tools.hpp"
 #include "vector_index_tools.hpp"
 
 namespace tensor_tools {
@@ -11,6 +10,29 @@ class TensorIndexSet;
 
 template <class ValidatingTensorIndexSet, class... Dims>
 class TensorIndexElement;
+
+namespace details {
+template <class T>
+inline constexpr bool enable_tensor_index_set = false;
+
+template <class... ValidIndexSet>
+inline constexpr bool enable_tensor_index_set<TensorIndexSet<ValidIndexSet...>> = true;
+
+template <class T>
+inline constexpr bool enable_tensor_index_element = false;
+
+template <class ValidatingTensorIndexSet, class... Dims>
+inline constexpr bool
+        enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>> = true;
+} // namespace details
+
+template <typename Type>
+inline constexpr bool is_tensor_index_set_v
+        = details::enable_tensor_index_set<std::remove_const_t<std::remove_reference_t<Type>>>;
+
+template <typename Type>
+inline constexpr bool is_tensor_index_element_v
+        = details::enable_tensor_index_element<std::remove_const_t<std::remove_reference_t<Type>>>;
 
 template <class... ValidIndexSet>
 class TensorIndexSet
@@ -121,18 +143,6 @@ public:
 };
 
 namespace details {
-template <class T>
-inline constexpr bool enable_tensor_index_set = false;
-
-template <class... ValidIndexSet>
-inline constexpr bool enable_tensor_index_set<TensorIndexSet<ValidIndexSet...>> = true;
-
-template <class T>
-inline constexpr bool enable_tensor_index_element = false;
-
-template <class ValidatingTensorIndexSet, class... Dims>
-inline constexpr bool
-        enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>> = true;
 
 template <class TypeSeqValidIndexSet>
 struct ToTensorIdxSet;
@@ -151,20 +161,45 @@ struct ToTensorIdxElement<ValidatingTensorIndexSet, ddc::detail::TypeSeq<ValidIn
 {
     using type = TensorIndexElement<ValidatingTensorIndexSet, ValidIndexSet...>;
 };
-}
 
-template <typename Type>
-inline constexpr bool is_tensor_index_set_v
-        = details::enable_tensor_index_set<std::remove_const_t<std::remove_reference_t<Type>>>;
+} // namespace details
 
 template <class TypeSeqValidIndexSet>
-using to_tensor_idx_set_t = typename ToTensorIdxSet<TypeSeqValidIndexSet>::type;
-
-template <typename Type>
-inline constexpr bool is_tensor_index_element_v
-        = details::enable_tensor_index_element<std::remove_const_t<std::remove_reference_t<Type>>>;
+using to_tensor_idx_set_t = typename details::ToTensorIdxSet<TypeSeqValidIndexSet>::type;
 
 template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
 using to_tensor_idx_element_t =
-        typename ToTensorIdxElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
+        typename details::ToTensorIdxElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
 
+namespace details {
+
+template <std::size_t Elem, std::size_t DimIdxHint, class TensorIndexSetType>
+struct GetNthTensorIndexElement
+{
+    static constexpr std::size_t DimIdx = DimIdxHint - 1;
+    using VectorIndexSetAlongDim =
+            typename TensorIndexSetType::get_vector_index_set_along_dim_t<DimIdx>;
+    using tensor_idx_type_seq = type_seq_cat_t<
+            typename GetNthTensorIndexElement<
+                    Elem / ddc::type_seq_size_v<VectorIndexSetAlongDim>,
+                    DimIdxHint - 1,
+                    TensorIndexSetType>::tensor_idx_type_seq,
+            ddc::detail::TypeSeq<ddc::type_seq_element_t<
+                    Elem % ddc::type_seq_size_v<VectorIndexSetAlongDim>,
+                    VectorIndexSetAlongDim>>>;
+    using type = to_tensor_idx_element_t<TensorIndexSetType, tensor_idx_type_seq>;
+};
+
+template <std::size_t Elem, class TensorIndexSetType>
+struct GetNthTensorIndexElement<Elem, 0, TensorIndexSetType>
+{
+    using tensor_idx_type_seq = ddc::detail::TypeSeq<>;
+};
+
+} // namespace details
+
+template <std::size_t Elem, class TensorIndexSetType>
+using get_nth_tensor_index_element_t = typename details::
+        GetNthTensorIndexElement<Elem, TensorIndexSetType::rank(), TensorIndexSetType>::type;
+
+} // namespace tensor_tools
