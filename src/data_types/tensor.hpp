@@ -43,8 +43,6 @@ public:
 
 private:
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-
-public:
     std::array<ElementType, s_n_elements> m_data;
 
 public:
