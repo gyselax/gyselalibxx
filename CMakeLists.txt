@@ -90,12 +90,15 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-## Use Kokkos from `vendor/`
-if("${Kokkos_ENABLE_CUDA}")
-  option(Kokkos_ENABLE_CUDA_CONSTEXPR "Whether to activate experimental relaxed constexpr functions" ON)
-  option(Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE "Whether to enable relocatable device code (RDC) for CUDA" ON)
+find_package(Kokkos 4.4.1)
+if(NOT "${Kokkos_FOUND}")
+  ## Use Kokkos from `vendor/`
+  if("${Kokkos_ENABLE_CUDA}")
+    option(Kokkos_ENABLE_CUDA_CONSTEXPR "Whether to activate experimental relaxed constexpr functions" ON)
+    option(Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE "Whether to enable relocatable device code (RDC) for CUDA" ON)
+  endif()
+  add_subdirectory("vendor/kokkos/" "kokkos") # SYSTEM)
 endif()
-add_subdirectory("vendor/kokkos/" "kokkos") # SYSTEM)
 
 # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
 set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
