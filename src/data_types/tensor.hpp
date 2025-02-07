@@ -248,19 +248,19 @@ public:
 
 namespace detail {
 
-template <class ElementType, class TypeSeqValidIdxSet>
+template <class ElementType, class TypeSeqValidIndexSet>
 struct ToTensor;
 
-template <class ElementType, class... ValidIdxSet>
-struct ToTensor<ElementType, ddc::detail::TypeSeq<ValidIdxSet...>>
+template <class ElementType, class... ValidIndexSet>
+struct ToTensor<ElementType, ddc::detail::TypeSeq<ValidIndexSet...>>
 {
-    using type = Tensor<ElementType, ValidIdxSet...>;
+    using type = Tensor<ElementType, ValidIndexSet...>;
 };
 
 } // namespace detail
 
-template <class ElementType, class TypeSeqValidIdxSet>
-using to_tensor_t = typename detail::ToTensor<ElementType, TypeSeqValidIdxSet>::type;
+template <class ElementType, class TypeSeqValidIndexSet>
+using to_tensor_t = typename detail::ToTensor<ElementType, TypeSeqValidIndexSet>::type;
 
 //////////////////////////////////////////////////////////////////////////
 //                         Type aliases
