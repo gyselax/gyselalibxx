@@ -92,5 +92,5 @@ jobs:
         run: |
           git remote add github https://github.com/gyselax/gyselalibxx.git
           git fetch github ${{ github.SHA }}
-          git push gitlab ${{ github.SHA }}:public
+          git push origin ${{ github.SHA }}:public
         shell: bash
