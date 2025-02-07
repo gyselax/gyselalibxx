@@ -43,6 +43,7 @@ pdi%gcc~benchs~docs+fortran~ipo+python~tests build_system=cmake build_type=Relea
 pdiplugin-decl-hdf5%gcc~benchs~fortran~ipo~mpi~tests build_system=cmake build_type=Release generator==ninja arch=linux-rhel8-zen3
 pdiplugin-set-value%gcc~ipo~tests build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3
 pdiplugin-trace%gcc~ipo~tests build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3
+pdiplugin-mpi%gcc~ipo~tests build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3
 ginkgo%gcc~cuda~develtools~full_optimizations~hwloc~ipo~mpi+openmp+rocm~sde~shared~sycl amdgpu_target=gfx90a build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3
 eigen%gcc~ipo build_system=cmake build_type=Release generator=ninja arch=linux-rhel8-zen3
 "
