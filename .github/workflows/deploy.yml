@@ -76,3 +76,18 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+
+  Mirror:
+    if: github.repository == 'gyselax/gyselalibxx'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Update GitLab
+        run: |
+          git remote add gitlab https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git
+          git fetch gitlab public
+          git push
+        shell: bash
+        env:
+          GITLAB_PAT: ${{secrets.GITLAB_PAT}}
