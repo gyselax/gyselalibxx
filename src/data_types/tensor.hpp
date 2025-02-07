@@ -38,7 +38,10 @@ class Tensor
                           tensor_tools::is_covariant_vector_index_set<ValidIndexSet>,
                           tensor_tools::is_contravariant_vector_index_set<ValidIndexSet>>...>);
 
+    using AllIndexSets = ddc::detail::TypeSeq<ValidIndexSet...>;
+
 public:
+    /// The TensorIndexSet describing the possible indices.
     using index_set = tensor_tools::TensorIndexSet<ValidIndexSet...>;
 
 private:
@@ -71,8 +74,6 @@ public:
     {
         return s_n_elements;
     }
-
-    using AllIndexSets = ddc::detail::TypeSeq<ValidIndexSet...>;
 
 private:
     static_assert(rank() > 0);
