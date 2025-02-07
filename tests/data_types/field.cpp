@@ -132,13 +132,13 @@ TEST(VectorFieldMem0DTest, MoveConstructor)
 {
     Coord2D constexpr factor(1.391, 2.444);
     DVectorFieldMem0D field(idx_range_0d);
-    ddcHelper::get<Tag1>(field)() = ddcHelper::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(field)() = ddcHelper::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(field)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(field)() = ddc::get<Tag2>(factor);
 
     DVectorFieldMem0D field2(std::move(field));
     EXPECT_EQ(get_idx_range(field2), idx_range_0d);
-    EXPECT_DOUBLE_EQ(ddcHelper::get<Tag1>(factor), ddcHelper::get<Tag1>(field2()));
-    EXPECT_DOUBLE_EQ(ddcHelper::get<Tag2>(factor), ddcHelper::get<Tag2>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddcHelper::get<Tag1>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddcHelper::get<Tag2>(field2()));
 }
 
 TEST(VectorField1DTest, MoveConstructor)
@@ -147,8 +147,8 @@ TEST(VectorField1DTest, MoveConstructor)
     DVectorFieldMemX field(idx_range_x);
     for (IdxX ix : idx_range_x) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
     }
 
     DVectorFieldMemX field2(std::move(field));
@@ -156,8 +156,8 @@ TEST(VectorField1DTest, MoveConstructor)
     for (IdxX ix : get_idx_range(field2)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(field2(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field2(ix)));
     }
 }
 
@@ -165,14 +165,14 @@ TEST(VectorFieldMem0DTest, MoveAssignment)
 {
     Coord2D constexpr factor(1.391, 2.444);
     DVectorFieldMem0D field(idx_range_0d);
-    ddcHelper::get<Tag1>(field)() = ddcHelper::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(field)() = ddcHelper::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(field)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(field)() = ddc::get<Tag2>(factor);
 
     DVectorFieldMem0D field2(IdxRange0D(lbound_0d, IdxStep0D()));
     field2 = std::move(field);
     EXPECT_EQ(get_idx_range(field2), idx_range_0d);
-    EXPECT_DOUBLE_EQ(ddcHelper::get<Tag1>(factor), ddcHelper::get<Tag1>(field2()));
-    EXPECT_DOUBLE_EQ(ddcHelper::get<Tag2>(factor), ddcHelper::get<Tag2>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddcHelper::get<Tag1>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddcHelper::get<Tag2>(field2()));
 }
 
 TEST(VectorField1DTest, MoveAssignment)
@@ -181,8 +181,8 @@ TEST(VectorField1DTest, MoveAssignment)
     DVectorFieldMemX field(idx_range_x);
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
     }
 
     DVectorFieldMemX field2(IdxRangeX(lbound_x, IdxStepX(0)));
@@ -191,8 +191,8 @@ TEST(VectorField1DTest, MoveAssignment)
     for (IdxX ix : get_idx_range(field2)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(field2(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field2(ix)));
     }
 }
 
@@ -200,8 +200,8 @@ TEST(VectorFieldMem0DTest, Swap)
 {
     Coord2D constexpr factor(1.391, 2.444);
     DVectorFieldMem0D field(idx_range_0d);
-    ddcHelper::get<Tag1>(field)() = ddcHelper::get<Tag1>(factor);
-    ddcHelper::get<Tag2>(field)() = ddcHelper::get<Tag2>(factor);
+    ddcHelper::get<Tag1>(field)() = ddc::get<Tag1>(factor);
+    ddcHelper::get<Tag2>(field)() = ddc::get<Tag2>(factor);
 
     IdxRange0D empty_idx_range(lbound_0d, IdxStep0D());
     DVectorFieldMem0D field2(empty_idx_range);
@@ -209,8 +209,8 @@ TEST(VectorFieldMem0DTest, Swap)
     std::swap(field2, field);
     EXPECT_EQ(get_idx_range(field), empty_idx_range);
     EXPECT_EQ(get_idx_range(field2), idx_range_0d);
-    EXPECT_DOUBLE_EQ(ddcHelper::get<Tag1>(factor), ddcHelper::get<Tag1>(field2()));
-    EXPECT_DOUBLE_EQ(ddcHelper::get<Tag2>(factor), ddcHelper::get<Tag2>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag1>(factor), ddcHelper::get<Tag1>(field2()));
+    EXPECT_DOUBLE_EQ(ddc::get<Tag2>(factor), ddcHelper::get<Tag2>(field2()));
 }
 
 TEST(VectorField1DTest, Swap)
@@ -219,8 +219,8 @@ TEST(VectorField1DTest, Swap)
     DVectorFieldMemX field(idx_range_x);
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
     }
 
     IdxRangeX empty_idx_range(lbound_x, IdxStepX(0));
@@ -232,8 +232,8 @@ TEST(VectorField1DTest, Swap)
     for (IdxX ix : get_idx_range(field2)) {
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(field2(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field2(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field2(ix)));
     }
 }
 
@@ -246,11 +246,11 @@ TEST(VectorField1DTest, AccessConst)
     DVectorFieldMemX const& field_cref = field;
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(field_cref(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(field_cref(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field_cref(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field_cref(ix)));
     }
 }
 
@@ -260,11 +260,11 @@ TEST(VectorField1DTest, Access)
     DVectorFieldMemX field(idx_range_x);
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(field(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(field(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field(ix)));
     }
 }
 
@@ -274,11 +274,11 @@ TEST(VectorField1DTest, GetConstField)
     DVectorFieldMemX field(idx_range_x);
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(get_const_field(field)(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(get_const_field(field)(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(get_const_field(field)(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(get_const_field(field)(ix)));
     }
 }
 
@@ -289,11 +289,11 @@ TEST(VectorField1DTest, GetFieldFromConst)
     DVectorFieldMemX const& field_cref = field;
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(get_field(field_cref)(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(get_field(field_cref)(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(get_field(field_cref)(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(get_field(field_cref)(ix)));
     }
 }
 
@@ -304,11 +304,11 @@ TEST(VectorField1DTest, GetField)
     DVectorFieldX field = get_field(field_alloc);
     for (IdxX ix : get_idx_range(field)) {
         Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
-        ddcHelper::get<Tag1>(field)(ix) = ddcHelper::get<Tag1>(val);
-        ddcHelper::get<Tag2>(field)(ix) = ddcHelper::get<Tag2>(val);
+        ddcHelper::get<Tag1>(field)(ix) = ddc::get<Tag1>(val);
+        ddcHelper::get<Tag2>(field)(ix) = ddc::get<Tag2>(val);
         // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
-        EXPECT_EQ(ddcHelper::get<Tag1>(val), ddcHelper::get<Tag1>(field_alloc(ix)));
-        EXPECT_EQ(ddcHelper::get<Tag2>(val), ddcHelper::get<Tag2>(field_alloc(ix)));
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field_alloc(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field_alloc(ix)));
     }
 }
 
