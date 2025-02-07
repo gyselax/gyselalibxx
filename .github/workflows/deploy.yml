@@ -83,11 +83,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          repository: gysela-developpers/gyselalibxx
+          token: ${{secrets.GITLAB_PAT}}
+          ref: public
+          github-server-url: https://gitlab.maisondelasimulation.fr
       - name: Update GitLab
         run: |
-          git remote add gitlab https://ci_bot:${GITLAB_PAT}@gitlab.maisondelasimulation.fr/gysela-developpers/gyselalibxx.git
-          git fetch gitlab public
-          git push gitlab main:public
+          git remote add github https://github.com/gyselax/gyselalibxx.git
+          git fetch github ${{ github.SHA }}
+          git push gitlab ${{ github.SHA }}:public
         shell: bash
-        env:
-          GITLAB_PAT: ${{secrets.GITLAB_PAT}}
