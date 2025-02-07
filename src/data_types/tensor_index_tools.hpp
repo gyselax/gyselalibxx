@@ -5,9 +5,27 @@
 
 namespace tensor_tools {
 
+/**
+ * @brief A class describing all possible indices of a tensor.
+ * For example for a 2x2 metric tensor on an (x,y) plane can take 4 indices:
+ * @f$ g_{xx} @f$, @f$ g_{xy} @f$, @f$ g_{yx} @f$, @f$ g_{yy} @f$
+ * the first index can be either @f$ x @f$ or @f$ y @f$.
+ * This is represented by VectorIndexSet<X, Y>.
+ * The second index behaves similarly so the final type of the possible
+ * indices is:
+ * TensorIndexSet<VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>
+ * @tparam ValidIndexSet The values which the index at this position can take.
+ */
 template <class... ValidIndexSet>
 class TensorIndexSet;
 
+/**
+ * @brief A class describing an index of a tensor.
+ * For example for a 2x2 metric tensor on an (x,y) plane the element @f$ g_{xx} @f$
+ * would have the index TensorIndexElement<TensorIndexSetXY, X, X>.
+ * @tparam ValidatingTensorIndexSet The TensorIndexSet in which this element can be found.
+ * @tparam Dims The dimensions at which the tensor is accessed.
+ */
 template <class ValidatingTensorIndexSet, class... Dims>
 class TensorIndexElement;
 
@@ -68,19 +86,29 @@ public:
         return s_n_elements;
     }
 
-    template <std::size_t Idx>
+    /**
+     * @brief Get the stride from one index to the next in the I-th dimension.
+     * @tparam I The index of interest.
+     * @return The stride from one index to the next.
+     */
+    template <std::size_t I>
     static constexpr std::size_t get_stride()
     {
-        static_assert(Idx < rank());
-        if constexpr (Idx >= rank() - 1) {
+        static_assert(I < rank());
+        if constexpr (I >= rank() - 1) {
             return 1;
         } else {
             std::size_t shape_elem
-                    = ddc::type_seq_size_v<ddc::type_seq_element_t<Idx + 1, AllIndexSets>>;
-            return shape_elem * get_stride<Idx + 1>();
+                    = ddc::type_seq_size_v<ddc::type_seq_element_t<I + 1, AllIndexSets>>;
+            return shape_elem * get_stride<I + 1>();
         }
     }
 
+    /**
+     * @brief Get a VectorIndexSet describing all the types that can be used to describe
+     * an index in dimension IDim.
+     * @tparam IDim The index of interest.
+     */
     template <std::size_t IDim>
     using get_vector_index_set_along_dim_t = ddc::type_seq_element_t<IDim, AllIndexSets>;
 
@@ -131,14 +159,26 @@ private:
     }
 
 public:
+    /**
+     * @brief Get an integer which describes the position of this element in
+     * a 1D array which stores a tensor described by the TensorIndexSet.
+     * @return The index of this element in a 1D array.
+     */
     KOKKOS_FUNCTION static constexpr std::size_t index()
     {
         return internal_index(std::make_index_sequence<rank()>());
     }
 
-    template <std::size_t dim_idx>
-    using index_on_dim_t = ddc::type_seq_element_t<dim_idx, IdxTypeSeq>;
+    /**
+     * @brief Get the types that describes the index in dimension IDim.
+     * @tparam IDim The index of interest.
+     */
+    template <std::size_t IDim>
+    using index_on_dim_t = ddc::type_seq_element_t<IDim, IdxTypeSeq>;
 
+    /**
+     * @brief Get the TensorIndexSet that this element indexes.
+     */
     using tensor_index_set = ValidatingTensorIndexSet;
 };
 

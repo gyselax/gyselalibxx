@@ -23,6 +23,7 @@ struct GetContravariantDims;
 template <class... Dims>
 struct GetContravariantDims<VectorIndexSet<Dims...>>
 {
+    /// The type of the VectorIndexSet containing only contravariant dimensions.
     using type = VectorIndexSet<
             std::conditional_t<Dims::IS_CONTRAVARIANT, Dims, typename Dims::Dual>...>;
 };
@@ -41,6 +42,7 @@ struct GetCovariantDims;
 template <class... Dims>
 struct GetCovariantDims<VectorIndexSet<Dims...>>
 {
+    /// The type of the VectorIndexSet containing only covariant dimensions.
     using type
             = VectorIndexSet<std::conditional_t<Dims::IS_COVARIANT, Dims, typename Dims::Dual>...>;
 };
