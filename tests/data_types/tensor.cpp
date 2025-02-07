@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include "tensor.hpp"
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
 
@@ -42,7 +43,9 @@ struct Theta_cov
     using Dual = Theta;
 };
 
-int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
+int dot_product(
+        tensor_tools::Vector<int, R_cov, Theta_cov> a,
+        tensor_tools::Vector<int, R, Theta> b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
@@ -50,8 +53,8 @@ int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
 
 TEST(TensorTest, ExplicitDotProduct)
 {
-    Vector<int, R_cov, Theta_cov> a;
-    Vector<int, R, Theta> b;
+    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    tensor_tools::Vector<int, R, Theta> b;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R>(b) = 5;
@@ -62,7 +65,7 @@ TEST(TensorTest, ExplicitDotProduct)
 
 TEST(TensorTest, TensorScalarMul)
 {
-    Vector<int, R_cov, Theta_cov> a;
+    tensor_tools::Vector<int, R_cov, Theta_cov> a;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     a *= 4;

@@ -6,8 +6,8 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
-#include "tensor_index_set.hpp"
-#include "vector_index_set.hpp"
+#include "tensor_index_tools.hpp"
+#include "vector_index_tools.hpp"
 
 namespace detail {
 
@@ -271,6 +271,9 @@ using to_tensor_t = typename detail::ToTensor<ElementType, TypeSeqValidIndexSet>
 template <class... ValidIndexSet>
 using DTensor = Tensor<double, ValidIndexSet...>;
 
+// These objects should be extricated from the namespace in a later PR
+namespace tensor_tools {
+
 /**
  * @brief A helper type alias to get a 1D tensor (a vector).
  * @tparam ElementType The type of the elements of the tensor (usually double/complex).
@@ -285,6 +288,8 @@ using Vector = Tensor<ElementType, VectorIndexSet<Dims...>>;
  */
 template <class... Dims>
 using DVector = Vector<double, Dims...>;
+
+}
 
 //////////////////////////////////////////////////////////////////////////
 //                         Operators
