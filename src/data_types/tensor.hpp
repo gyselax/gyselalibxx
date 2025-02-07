@@ -85,7 +85,8 @@ public:
     explicit KOKKOS_FUNCTION Tensor() {}
 
     /**
-     * @brief Construct an uninitialised tensor object.
+     * @brief Construct a tensor object initialised with a value.
+     * @param fill_value The value with which the tensor should be filled.
      */
     explicit KOKKOS_FUNCTION Tensor(ElementType fill_value)
     {
