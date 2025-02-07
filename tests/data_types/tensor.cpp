@@ -42,6 +42,36 @@ struct Theta_cov
     using Dual = Theta;
 };
 
+int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
+{
+    return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
+           + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
+}
+
+TEST(TensorTest, ExplicitDotProduct)
+{
+    Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R, Theta> b;
+    ddcHelper::get<R_cov>(a) = -6;
+    ddcHelper::get<Theta_cov>(a) = 8;
+    ddcHelper::get<R>(b) = 5;
+    ddcHelper::get<Theta>(b) = 12;
+    int val = dot_product(a, b);
+    EXPECT_EQ(val, 66);
+}
+
+TEST(TensorTest, TensorScalarMul)
+{
+    Vector<int, R_cov, Theta_cov> a;
+    ddcHelper::get<R_cov>(a) = -6;
+    ddcHelper::get<Theta_cov>(a) = 8;
+    a *= 4;
+    int val = ddcHelper::get<R_cov>(a);
+    EXPECT_EQ(val, -24);
+    val = ddcHelper::get<Theta_cov>(a);
+    EXPECT_EQ(val, 32);
+}
+
 TEST(TensorTools, TensorIndexSet)
 {
     using IdxSet = VectorIndexSet<R, Theta>;
