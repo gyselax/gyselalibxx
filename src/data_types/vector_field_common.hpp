@@ -4,6 +4,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "tensor.hpp"
 
 template <class FieldType, class NDTypeSeq>
 class VectorFieldCommon;

@@ -16,15 +16,22 @@
 
 using namespace ddc;
 
+namespace {
 
 struct X
 {
     bool PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = X;
 };
 
 struct Y
 {
     bool PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Y;
 };
 
 struct GridX : UniformGridBase<X>
@@ -258,6 +265,8 @@ void CrankNicolson2DOrderMixedTypesTest()
         EXPECT_NEAR(order[j], 2., 1e-1);
     }
 }
+
+} // namespace
 
 TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypesGPU)
 {

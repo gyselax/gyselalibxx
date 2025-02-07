@@ -98,9 +98,16 @@ public:
                         Matrix_2x2 map_J = inv_mapping(ddc::coordinate(idx));
 
                         vector_element_type_out vector_out;
-                        vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
-                        ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
+                        Coord<XOut, YOut> tmp_vector_out;
+                        // mat_vec_mul should be replaced with a tensor calculus function
+                        // when map_J is stored in a Tensor
+                        tmp_vector_out.array() = mat_vec_mul(
+                                map_J,
+                                ddcHelper::to_coord(vector_field_input(idx)).array());
+                        ddcHelper::get<XOut>(vector_field_output)(idx)
+                                = ddc::get<XOut>(tmp_vector_out);
+                        ddcHelper::get<YOut>(vector_field_output)(idx)
+                                = ddc::get<YOut>(tmp_vector_out);
                     });
         }
     }
