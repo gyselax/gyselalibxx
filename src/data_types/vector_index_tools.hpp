@@ -9,6 +9,8 @@
 template <class... Dims>
 using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
 
+namespace tensor_tools {
+
 /**
  * @brief A class to get a VectorIndexSet containing only contravariant dimensions.
  * @tparam AnyVectorIndexSet The original VectorIndexSet.
@@ -46,11 +48,6 @@ struct GetCovariantDims<VectorIndexSet<Dims...>>
     using type
             = VectorIndexSet<std::conditional_t<Dims::IS_COVARIANT, Dims, typename Dims::Dual>...>;
 };
-
-} // namespace tensor_tools
-
-
-namespace tensor_tools {
 
 /**
  * @brief A helper structure to recognise a VectorIndexSet type.
