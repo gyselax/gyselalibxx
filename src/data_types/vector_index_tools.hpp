@@ -9,39 +9,17 @@
 template <class... Dims>
 using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
 
-namespace tensor_tools {
 /**
- * @brief A class representing a vector index identifier.
- *
- * A vector is indexed at a certain position using an identifier (a character)
- * which can take one of multiple possible values (types).
- *
- * @tparam Id The character identifying the index.
- * @tparam ValidVectorIdxSet The VectorIndexSet describing valid indices.
+ * @brief A class to get a VectorIndexSet containing only contravariant dimensions.
+ * @tparam AnyVectorIndexSet The original VectorIndexSet.
  */
-template <char Id, class ValidVectorIdxSet>
-struct VectorIndexIdMap
-{
-    static constexpr char id = Id;
-    using possible_idx_values = ValidVectorIdxSet;
-};
-
-namespace details {
-template <class T>
-inline constexpr bool enable_vector_index_id_map = false;
-
-template <char Id, class ValidVectorIdxSet>
-inline constexpr bool enable_vector_index_id_map<VectorIndexIdMap<Id, ValidVectorIdxSet>> = true;
-
-} // namespace details
-
-template <typename Type>
-inline constexpr bool is_vector_index_id_map_v
-        = details::enable_vector_index_id_map<std::remove_const_t<std::remove_reference_t<Type>>>;
-
 template <class AnyVectorIndexSet>
 struct GetContravariantDims;
 
+/**
+ * @brief A class to get a VectorIndexSet containing only contravariant dimensions.
+ * @tparam AnyVectorIndexSet The original VectorIndexSet.
+ */
 template <class... Dims>
 struct GetContravariantDims<VectorIndexSet<Dims...>>
 {
@@ -49,9 +27,17 @@ struct GetContravariantDims<VectorIndexSet<Dims...>>
             std::conditional_t<Dims::IS_CONTRAVARIANT, Dims, typename Dims::Dual>...>;
 };
 
+/**
+ * @brief A class to get a VectorIndexSet containing only covariant dimensions.
+ * @tparam AnyVectorIndexSet The original VectorIndexSet.
+ */
 template <class AnyVectorIndexSet>
 struct GetCovariantDims;
 
+/**
+ * @brief A class to get a VectorIndexSet containing only covariant dimensions.
+ * @tparam AnyVectorIndexSet The original VectorIndexSet.
+ */
 template <class... Dims>
 struct GetCovariantDims<VectorIndexSet<Dims...>>
 {
