@@ -80,6 +80,7 @@ jobs:
   Mirror:
     if: github.repository == 'gyselax/gyselalibxx'
     runs-on: ubuntu-latest
+    environment: 'GitLab GPU trigger'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
