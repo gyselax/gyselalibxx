@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_initialization.html
 Diocotron instability</h1>
 <p>More details about the diocotron simulation are given in <a class="el" href="simulations_geometryRTheta_diocotron.html">Diocotron instability</a>.</p>
 <p>The initializatrion and equilibrium fonctions are defined in the <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> class.</p>
-<h3><a class="anchor" id="autotoc_md60"></a>
+<h3><a class="anchor" id="autotoc_md62"></a>
 Initialization</h3>
 <p>We suppose as perturbed initial condition</p><ul>
 <li>\(\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\)</li>
@@ -123,7 +123,7 @@ Initialization</h3>
 </li>
 </ul>
 <p>with \(p = 50\), \(\bar{r} = \frac{R_1 + R_2}{2}\) and \(d = \frac{R_2 - R_1}{2}\). This last version is implemented in the code.</p>
-<h3><a class="anchor" id="autotoc_md61"></a>
+<h3><a class="anchor" id="autotoc_md63"></a>
 Equilibirum</h3>
 <p>The associated equilibrium is</p><ul>
 <li>\(\rho_0(r) = \mathbb{I}_{ R_1 \leq r \leq R_2 }\)</li>
@@ -131,7 +131,7 @@ Equilibirum</h3>
 <p>or</p><ul>
 <li>\(\rho_0(r) = \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\) in Edoardo Zoni's article [1].</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md62"></a>
+<h3><a class="anchor" id="autotoc_md64"></a>
 Dispersion relation</h3>
 <p>The <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> also solves the dispersion relation:</p>
 <p class="formulaDsp">
@@ -151,7 +151,7 @@ Dispersion relation</h3>
 <h1><a class="anchor" id="src_geometryRTheta_initialization__Vortex_merger"></a>
 Vortex merger</h1>
 <p>More details about the diocotron simulation are given in <a class="el" href="simulations_geometryRTheta_vortex_merger.html">Vortex merger</a>.</p>
-<h3><a class="anchor" id="autotoc_md63"></a>
+<h3><a class="anchor" id="autotoc_md65"></a>
 Equilibirum</h3>
 <p>The equilibrium is determined by the eigenvalue problem of finding \((\sigma, \phi)\) such that</p>
 <p class="formulaDsp">
@@ -170,7 +170,7 @@ Equilibirum</h3>
 </ul>
 <p>Then, we repeat all the steps until \(|\sigma^i - \sigma^{i-1}| \leq \tau\) for a given tolerance.</p>
 <p>For the vortex merger simulation, we choose \(f(\phi)= \phi^2\) and \(\phi_{\text{max}} = 1\).</p>
-<h3><a class="anchor" id="autotoc_md64"></a>
+<h3><a class="anchor" id="autotoc_md66"></a>
 References</h3>
 <p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>

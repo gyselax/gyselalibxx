@@ -126,8 +126,8 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__explicit
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;itimesolver.hpp&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;poisson_like_rhs_function.hpp&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;polarpoissonlikesolver.hpp&quot;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;spline_foot_finder.hpp&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;spline_polar_foot_finder.hpp&quot;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
@@ -141,226 +141,230 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__explicit
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt;,</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                    Kokkos::DefaultHostExecutionSpace&gt;;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">using </span><a class="code hl_class" href="classSplineFootFinder.html">SplineFootFinderType</a> = <a class="code hl_class" href="classSplineFootFinder.html">SplineFootFinder</a>&lt;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">using </span><a class="code hl_class" href="classSplinePolarFootFinder.html">SplinePolarFootFinderType</a> = <a class="code hl_class" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <a class="code hl_class" href="classEuler.html">EulerMethod</a>,</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <a class="code hl_class" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            LogicalToPseudoPhysicalMapping&gt;;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_class" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> <span class="keyword">const</span>&amp; m_logical_to_physical;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            LogicalToPseudoPhysicalMapping,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            SplineRThetaBuilder_host,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            SplineRThetaEvaluatorConstBound_host&gt;;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_class" href="classBslAdvectionRTheta.html">BslAdvectionRTheta&lt;SplineFootFinderType, LogicalToPhysicalMapping&gt;</a> <span class="keyword">const</span>&amp; m_advection_solver;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_class" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> <span class="keyword">const</span>&amp; m_logical_to_physical;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_class" href="classEuler.html">EulerMethod</a> <span class="keyword">const</span> m_euler;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_class" href="classSplineFootFinder.html">SplineFootFinderType</a> <span class="keyword">const</span> m_find_feet;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_class" href="classBslAdvectionRTheta.html">BslAdvectionRTheta&lt;SplinePolarFootFinderType, LogicalToPhysicalMapping&gt;</a> <span class="keyword">const</span>&amp;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            m_advection_solver;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_class" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <a class="code hl_struct" href="structGridR.html">GridR</a>,</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_struct" href="structGridTheta.html">GridTheta</a>,</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <a class="code hl_struct" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>,</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            SplineRThetaEvaluatorNullBound&gt; <span class="keyword">const</span>&amp; m_poisson_solver;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    SplineRThetaBuilder_host <span class="keyword">const</span>&amp; m_builder;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    SplineRThetaEvaluatorConstBound_host <span class="keyword">const</span>&amp; m_evaluator;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_class" href="classEuler.html">EulerMethod</a> <span class="keyword">const</span> m_euler;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_class" href="classSplinePolarFootFinder.html">SplinePolarFootFinderType</a> <span class="keyword">const</span> m_find_feet;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_class" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <a class="code hl_struct" href="structGridR.html">GridR</a>,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <a class="code hl_struct" href="structGridTheta.html">GridTheta</a>,</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <a class="code hl_struct" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            SplineRThetaEvaluatorNullBound&gt; <span class="keyword">const</span>&amp; m_poisson_solver;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classBslExplicitPredCorrRTheta.html#a40fd8069c399dd0e4894c8926ff64d29">  117</a></span>    <a class="code hl_function" href="classBslExplicitPredCorrRTheta.html#a40fd8069c399dd0e4894c8926ff64d29">BslExplicitPredCorrRTheta</a>(</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <a class="code hl_class" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> <span class="keyword">const</span>&amp; logical_to_physical,</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            LogicalToPseudoPhysicalMapping <span class="keyword">const</span>&amp; logical_to_pseudo_physical,</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <a class="code hl_class" href="classBslAdvectionRTheta.html">BslAdvectionRTheta&lt;SplineFootFinderType, LogicalToPhysicalMapping&gt;</a>&amp; advection_solver,</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            SplineRThetaBuilder_host <span class="keyword">const</span>&amp; builder,</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            SplineRThetaEvaluatorNullBound_host <span class="keyword">const</span>&amp; rhs_evaluator,</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <a class="code hl_class" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    <a class="code hl_struct" href="structGridR.html">GridR</a>,</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    <a class="code hl_struct" href="structGridTheta.html">GridTheta</a>,</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                    <a class="code hl_struct" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>,</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                    SplineRThetaEvaluatorNullBound&gt; <span class="keyword">const</span>&amp; poisson_solver,</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            SplineRThetaEvaluatorConstBound_host <span class="keyword">const</span>&amp; advection_evaluator)</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        : m_logical_to_physical(logical_to_physical)</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        , m_advection_solver(advection_solver)</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        , m_euler(grid)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        , m_find_feet(</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                  m_euler,</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                  logical_to_physical,</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                  logical_to_pseudo_physical,</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                  builder,</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                  advection_evaluator)</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        , m_poisson_solver(poisson_solver)</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        , m_builder(builder)</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        , m_evaluator(advection_evaluator)</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    {</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
-</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    SplineRThetaBuilder_host <span class="keyword">const</span>&amp; m_builder;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    SplineRThetaEvaluatorConstBound_host <span class="keyword">const</span>&amp; m_evaluator;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classBslExplicitPredCorrRTheta.html#a005c9db87bcecc3fe2062b120a78db17">  120</a></span>    <a class="code hl_function" href="classBslExplicitPredCorrRTheta.html#a005c9db87bcecc3fe2062b120a78db17">BslExplicitPredCorrRTheta</a>(</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <a class="code hl_class" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> <span class="keyword">const</span>&amp; logical_to_physical,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            LogicalToPseudoPhysicalMapping <span class="keyword">const</span>&amp; logical_to_pseudo_physical,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <a class="code hl_class" href="classBslAdvectionRTheta.html">BslAdvectionRTheta&lt;SplinePolarFootFinderType, LogicalToPhysicalMapping&gt;</a>&amp;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    advection_solver,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            IdxRangeRTheta <span class="keyword">const</span>&amp; grid,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            SplineRThetaBuilder_host <span class="keyword">const</span>&amp; builder,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            SplineRThetaEvaluatorNullBound_host <span class="keyword">const</span>&amp; rhs_evaluator,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <a class="code hl_class" href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a>&lt;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                    <a class="code hl_struct" href="structGridR.html">GridR</a>,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                    <a class="code hl_struct" href="structGridTheta.html">GridTheta</a>,</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                    <a class="code hl_struct" href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a>,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                    SplineRThetaEvaluatorNullBound&gt; <span class="keyword">const</span>&amp; poisson_solver,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            SplineRThetaEvaluatorConstBound_host <span class="keyword">const</span>&amp; advection_evaluator)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        : m_logical_to_physical(logical_to_physical)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        , m_advection_solver(advection_solver)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        , m_euler(grid)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        , m_find_feet(</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                  m_euler,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                  logical_to_physical,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                  logical_to_pseudo_physical,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                  builder,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                  advection_evaluator)</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        , m_poisson_solver(poisson_solver)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        , m_builder(builder)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        , m_evaluator(advection_evaluator)</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classBslExplicitPredCorrRTheta.html#ae35408f5e1b28e93b01318a24958bdf1">  148</a></span>    host_t&lt;DFieldRTheta&gt; <a class="code hl_function" href="classBslExplicitPredCorrRTheta.html#ae35408f5e1b28e93b01318a24958bdf1">operator()</a>(</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            host_t&lt;DFieldRTheta&gt; allfdistribu,</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dt,</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <span class="keywordtype">int</span> <span class="keyword">const</span> steps) <span class="keyword">const</span> <span class="keyword">final</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        std::chrono::time_point&lt;std::chrono::system_clock&gt; start_time;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        std::chrono::time_point&lt;std::chrono::system_clock&gt; end_time;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="comment">// Grid. ------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        IdxRangeRTheta <span class="keyword">const</span> grid(get_idx_range&lt;GridR, GridTheta&gt;(allfdistribu));</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; coords(grid);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { coords(irp) = ddc::coordinate(irp); });</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        IdxRangeBSR radial_bsplines(ddc::discrete_space&lt;BSplinesR&gt;().full_domain().remove_first(</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                IdxStep&lt;BSplinesR&gt; {<a class="code hl_variable" href="classPolarBSplines.html#ae4895a87f3e1ed953614a3546c319762">PolarBSplinesRTheta::continuity</a> + 1}));</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        IdxRangeBSTheta polar_idx_range(ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain());</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classBslExplicitPredCorrRTheta.html#ae35408f5e1b28e93b01318a24958bdf1">  152</a></span>    host_t&lt;DFieldRTheta&gt; <a class="code hl_function" href="classBslExplicitPredCorrRTheta.html#ae35408f5e1b28e93b01318a24958bdf1">operator()</a>(</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            host_t&lt;DFieldRTheta&gt; allfdistribu,</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dt,</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordtype">int</span> <span class="keyword">const</span> steps) <span class="keyword">const</span> <span class="keyword">final</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        std::chrono::time_point&lt;std::chrono::system_clock&gt; start_time;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        std::chrono::time_point&lt;std::chrono::system_clock&gt; end_time;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="comment">// Grid. ------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        IdxRangeRTheta <span class="keyword">const</span> grid(get_idx_range&lt;GridR, GridTheta&gt;(allfdistribu));</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; coords(grid);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) { coords(irp) = ddc::coordinate(irp); });</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="comment">// --- Electrostatic potential (phi). -------------------------------------------------------------</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        DFieldMemRTheta electrical_potential(grid);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        host_t&lt;DFieldMemRTheta&gt; electrical_potential_host(grid);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        IdxRangeBSR radial_bsplines(ddc::discrete_space&lt;BSplinesR&gt;().full_domain().remove_first(</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                IdxStep&lt;BSplinesR&gt; {<a class="code hl_variable" href="classPolarBSplines.html#ae4895a87f3e1ed953614a3546c319762">PolarBSplinesRTheta::continuity</a> + 1}));</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        IdxRangeBSTheta polar_idx_range(ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain());</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        host_t&lt;PolarSplineMemRTheta&gt; electrostatic_potential_coef(</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                PolarBSplinesRTheta::singular_idx_range&lt;PolarBSplinesRTheta&gt;(),</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                IdxRangeBSRTheta(radial_bsplines, polar_idx_range));</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="comment">// --- Electrostatic potential (phi). -------------------------------------------------------------</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        DFieldMemRTheta electrical_potential(grid);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        host_t&lt;DFieldMemRTheta&gt; electrical_potential_host(grid);</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        ddc::NullExtrapolationRule extrapolation_rule;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_class" href="classPolarSplineEvaluator.html">PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt;</a></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                polar_spline_evaluator(extrapolation_rule);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        host_t&lt;PolarSplineMemRTheta&gt; electrostatic_potential_coef(</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                PolarBSplinesRTheta::singular_idx_range&lt;PolarBSplinesRTheta&gt;(),</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                IdxRangeBSRTheta(radial_bsplines, polar_idx_range));</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="comment">// --- For the computation of advection field from the electrostatic potential (phi): -------------</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; electric_field_alloc(grid);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; electric_field_predicted_alloc(grid);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_alloc(grid);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_predicted_alloc(grid);</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; electric_field(electric_field_alloc);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; electric_field_predicted(electric_field_predicted_alloc);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; advection_field(advection_field_alloc);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; advection_field_predicted(advection_field_predicted_alloc);</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <a class="code hl_class" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a> advection_field_computer(m_logical_to_physical);</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        ddc::NullExtrapolationRule extrapolation_rule;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <a class="code hl_class" href="classPolarSplineEvaluator.html">PolarSplineEvaluator&lt;PolarBSplinesRTheta, ddc::NullExtrapolationRule&gt;</a></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                polar_spline_evaluator(extrapolation_rule);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="comment">// --- For the computation of advection field from the electrostatic potential (phi): -------------</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; electric_field_alloc(grid);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; electric_field_predicted_alloc(grid);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_alloc(grid);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_predicted_alloc(grid);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; electric_field(electric_field_alloc);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; electric_field_predicted(electric_field_predicted_alloc);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; advection_field(advection_field_alloc);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        host_t&lt;DVectorFieldRTheta&lt;X, Y&gt;&gt; advection_field_predicted(advection_field_predicted_alloc);</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="comment">// --- Parameter for linearisation of advection field: --------------------------------------------</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        start_time = std::chrono::system_clock::now();</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> iter(0); iter &lt; steps; ++iter) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> time = iter * dt;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="comment">// STEP 1: From rho^n, we compute phi^n: Poisson equation</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            host_t&lt;Spline2DMem&gt; allfdistribu_coef(get_spline_idx_range(m_builder));</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                    charge_density_coord_1(get_const_field(allfdistribu_coef), m_evaluator);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            polar_spline_evaluator(</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                    get_field(electrical_potential_host),</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                    get_const_field(coords),</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                    get_const_field(electrostatic_potential_coef));</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            ddc::PdiEvent(<span class="stringliteral">&quot;iteration&quot;</span>)</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                    .with(<span class="stringliteral">&quot;iter&quot;</span>, iter)</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                    .and_with(<span class="stringliteral">&quot;time&quot;</span>, time)</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                    .and_with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu)</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                    .and_with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential_host);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <span class="comment">// STEP 2: From phi^n, we compute A^n:</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            advection_field_computer(electrostatic_potential_coef, advection_field);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <a class="code hl_class" href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a> advection_field_computer(m_logical_to_physical);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="comment">// --- Parameter for linearisation of advection field: --------------------------------------------</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        start_time = std::chrono::system_clock::now();</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> iter(0); iter &lt; steps; ++iter) {</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> time = iter * dt;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <span class="comment">// STEP 1: From rho^n, we compute phi^n: Poisson equation</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            host_t&lt;Spline2DMem&gt; allfdistribu_coef(get_spline_idx_range(m_builder));</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                    charge_density_coord_1(get_const_field(allfdistribu_coef), m_evaluator);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            m_poisson_solver(charge_density_coord_1, electrostatic_potential_coef);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            polar_spline_evaluator(</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                    get_field(electrical_potential_host),</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                    get_const_field(coords),</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                    get_const_field(electrostatic_potential_coef));</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            ddc::PdiEvent(<span class="stringliteral">&quot;iteration&quot;</span>)</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                    .with(<span class="stringliteral">&quot;iter&quot;</span>, iter)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                    .with(<span class="stringliteral">&quot;time&quot;</span>, time)</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                    .with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                    .with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential_host);</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="comment">// STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation</span></div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="comment">// --- Copy rho^n because it will be modified:</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            host_t&lt;DFieldMemRTheta&gt; allfdistribu_predicted(grid);</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            ddc::parallel_deepcopy(get_field(allfdistribu_predicted), allfdistribu);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            m_advection_solver(get_field(allfdistribu_predicted), get_field(advection_field), dt);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="comment">// --- advect also the feet because it is needed for the next step</span></div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords(grid);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>                feet_coords(irp) = CoordRTheta(ddc::coordinate(irp));</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            });</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            m_find_feet(get_field(feet_coords), get_field(advection_field), dt);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="comment">// STEP 4: From rho^P, we compute phi^P: Poisson equation</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted));</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                    charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <span class="comment">// STEP 5: From phi^P, we compute A^P:</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            advection_field_computer(electrostatic_potential_coef, advection_field_predicted);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="comment">// STEP 2: From phi^n, we compute A^n:</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            advection_field_computer(electrostatic_potential_coef, advection_field);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            <span class="comment">// STEP 3: From rho^n and A^n, we compute rho^P: Vlasov equation</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            <span class="comment">// --- Copy rho^n because it will be modified:</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            host_t&lt;DFieldMemRTheta&gt; allfdistribu_predicted(grid);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            ddc::parallel_deepcopy(get_field(allfdistribu_predicted), allfdistribu);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            m_advection_solver(get_field(allfdistribu_predicted), get_field(advection_field), dt);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="comment">// --- advect also the feet because it is needed for the next step</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords(grid);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>                feet_coords(irp) = CoordRTheta(ddc::coordinate(irp));</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            });</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            m_find_feet(get_field(feet_coords), get_field(advection_field), dt);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            <span class="comment">// STEP 4: From rho^P, we compute phi^P: Poisson equation</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted));</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                    charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            <span class="comment">// ---  we evaluate the advection field A^n at the characteristic feet X^P</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_evaluated(grid);</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            host_t&lt;VectorSplineCoeffsMem2D&lt;X, Y&gt;&gt; advection_field_coefs(</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                    get_spline_idx_range(m_builder));</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            m_builder(</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                    ddcHelper::get&lt;X&gt;(advection_field_coefs),</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field)));</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            m_builder(</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                    ddcHelper::get&lt;Y&gt;(advection_field_coefs),</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field)));</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            m_evaluator(</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                    get_field(ddcHelper::get&lt;X&gt;(advection_field_evaluated)),</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                    get_const_field(feet_coords),</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field_coefs)));</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            <span class="comment">// STEP 5: From phi^P, we compute A^P:</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            advection_field_computer(electrostatic_potential_coef, advection_field_predicted);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            <span class="comment">// ---  we evaluate the advection field A^n at the characteristic feet X^P</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_evaluated(grid);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            host_t&lt;VectorSplineCoeffsMem2D&lt;X, Y&gt;&gt; advection_field_coefs(</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                    get_spline_idx_range(m_builder));</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            m_builder(</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                    ddcHelper::get&lt;X&gt;(advection_field_coefs),</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field)));</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            m_builder(</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                    ddcHelper::get&lt;Y&gt;(advection_field_coefs),</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field)));</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            m_evaluator(</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                    get_field(ddcHelper::get&lt;Y&gt;(advection_field_evaluated)),</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                    get_field(ddcHelper::get&lt;X&gt;(advection_field_evaluated)),</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                    get_const_field(feet_coords),</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field_coefs)));</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="comment">// STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                ddcHelper::get&lt;X&gt;(advection_field)(irp)</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                        = (ddcHelper::get&lt;X&gt;(advection_field_evaluated)(irp)</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                           + ddcHelper::get&lt;X&gt;(advection_field_predicted)(irp))</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                          / 2.;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                ddcHelper::get&lt;Y&gt;(advection_field)(irp)</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                        = (ddcHelper::get&lt;Y&gt;(advection_field_evaluated)(irp)</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                           + ddcHelper::get&lt;Y&gt;(advection_field_predicted)(irp))</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field_coefs)));</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            m_evaluator(</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                    get_field(ddcHelper::get&lt;Y&gt;(advection_field_evaluated)),</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                    get_const_field(feet_coords),</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field_coefs)));</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="comment">// STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                ddcHelper::get&lt;X&gt;(advection_field)(irp)</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                        = (ddcHelper::get&lt;X&gt;(advection_field_evaluated)(irp)</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                           + ddcHelper::get&lt;X&gt;(advection_field_predicted)(irp))</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                          / 2.;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            });</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            m_advection_solver(allfdistribu, get_field(advection_field), dt);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                ddcHelper::get&lt;Y&gt;(advection_field)(irp)</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                        = (ddcHelper::get&lt;Y&gt;(advection_field_evaluated)(irp)</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                           + ddcHelper::get&lt;Y&gt;(advection_field_predicted)(irp))</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                          / 2.;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            });</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <span class="comment">// STEP 1: From rho^n, we compute phi^n: Poisson equation</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        host_t&lt;Spline2DMem&gt; allfdistribu_coef(get_spline_idx_range(m_builder));</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        m_poisson_solver(charge_density_coord, get_field(electrical_potential));</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        ddc::PdiEvent(<span class="stringliteral">&quot;last_iteration&quot;</span>)</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                .with(<span class="stringliteral">&quot;iter&quot;</span>, steps)</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                .and_with(<span class="stringliteral">&quot;time&quot;</span>, steps * dt)</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                .and_with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu)</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                .and_with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential_host);</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        end_time = std::chrono::system_clock::now();</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        <a class="code hl_function" href="classITimeSolverRTheta.html#a5503beee2f7240e8b09ef8ac3be2af24">display_time_difference</a>(<span class="stringliteral">&quot;Iterations time: &quot;</span>, start_time, end_time);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            m_advection_solver(allfdistribu, get_field(advection_field), dt);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        }</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="comment">// STEP 1: From rho^n, we compute phi^n: Poisson equation</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        host_t&lt;Spline2DMem&gt; allfdistribu_coef(get_spline_idx_range(m_builder));</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu));</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        m_poisson_solver(charge_density_coord, get_field(electrical_potential));</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        ddc::PdiEvent(<span class="stringliteral">&quot;last_iteration&quot;</span>)</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                .with(<span class="stringliteral">&quot;iter&quot;</span>, steps)</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                .with(<span class="stringliteral">&quot;time&quot;</span>, steps * dt)</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                .with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu)</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                .with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential_host);</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        end_time = std::chrono::system_clock::now();</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        <a class="code hl_function" href="classITimeSolverRTheta.html#a5503beee2f7240e8b09ef8ac3be2af24">display_time_difference</a>(<span class="stringliteral">&quot;Iterations time: &quot;</span>, start_time, end_time);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    }</div>
 </div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>};</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>};</div>
 </div>
 <div class="ttc" id="aclassAdvectionFieldFinder_html"><div class="ttname"><a href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a></div><div class="ttdoc">Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.</div><div class="ttdef"><b>Definition</b> advection_field_rp.hpp:91</div></div>
 <div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition</b> bsl_advection_rp.hpp:56</div></div>
 <div class="ttc" id="aclassBslExplicitPredCorrRTheta_html"><div class="ttname"><a href="classBslExplicitPredCorrRTheta.html">BslExplicitPredCorrRTheta</a></div><div class="ttdoc">A second order explicit predictor-corrector for the Vlasov-Poisson equations.</div><div class="ttdef"><b>Definition</b> bsl_predcorr_second_order_explicit.hpp:63</div></div>
-<div class="ttc" id="aclassBslExplicitPredCorrRTheta_html_a40fd8069c399dd0e4894c8926ff64d29"><div class="ttname"><a href="classBslExplicitPredCorrRTheta.html#a40fd8069c399dd0e4894c8926ff64d29">BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta</a></div><div class="ttdeci">BslExplicitPredCorrRTheta(LogicalToPhysicalMapping const &amp;logical_to_physical, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical, BslAdvectionRTheta&lt; SplineFootFinderType, LogicalToPhysicalMapping &gt; &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;rhs_evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver, SplineRThetaEvaluatorConstBound_host const &amp;advection_evaluator)</div><div class="ttdoc">Instantiate a BslExplicitPredCorrRTheta.</div><div class="ttdef"><b>Definition</b> bsl_predcorr_second_order_explicit.hpp:117</div></div>
-<div class="ttc" id="aclassBslExplicitPredCorrRTheta_html_ae35408f5e1b28e93b01318a24958bdf1"><div class="ttname"><a href="classBslExplicitPredCorrRTheta.html#ae35408f5e1b28e93b01318a24958bdf1">BslExplicitPredCorrRTheta::operator()</a></div><div class="ttdeci">host_t&lt; DFieldRTheta &gt; operator()(host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const final</div><div class="ttdoc">Solves on  the equations system.</div><div class="ttdef"><b>Definition</b> bsl_predcorr_second_order_explicit.hpp:148</div></div>
+<div class="ttc" id="aclassBslExplicitPredCorrRTheta_html_a005c9db87bcecc3fe2062b120a78db17"><div class="ttname"><a href="classBslExplicitPredCorrRTheta.html#a005c9db87bcecc3fe2062b120a78db17">BslExplicitPredCorrRTheta::BslExplicitPredCorrRTheta</a></div><div class="ttdeci">BslExplicitPredCorrRTheta(LogicalToPhysicalMapping const &amp;logical_to_physical, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical, BslAdvectionRTheta&lt; SplinePolarFootFinderType, LogicalToPhysicalMapping &gt; &amp;advection_solver, IdxRangeRTheta const &amp;grid, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;rhs_evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver, SplineRThetaEvaluatorConstBound_host const &amp;advection_evaluator)</div><div class="ttdoc">Instantiate a BslExplicitPredCorrRTheta.</div><div class="ttdef"><b>Definition</b> bsl_predcorr_second_order_explicit.hpp:120</div></div>
+<div class="ttc" id="aclassBslExplicitPredCorrRTheta_html_ae35408f5e1b28e93b01318a24958bdf1"><div class="ttname"><a href="classBslExplicitPredCorrRTheta.html#ae35408f5e1b28e93b01318a24958bdf1">BslExplicitPredCorrRTheta::operator()</a></div><div class="ttdeci">host_t&lt; DFieldRTheta &gt; operator()(host_t&lt; DFieldRTheta &gt; allfdistribu, double const dt, int const steps) const final</div><div class="ttdoc">Solves on  the equations system.</div><div class="ttdef"><b>Definition</b> bsl_predcorr_second_order_explicit.hpp:152</div></div>
 <div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition</b> circular_to_cartesian.hpp:43</div></div>
 <div class="ttc" id="aclassEuler_html"><div class="ttname"><a href="classEuler.html">Euler</a></div><div class="ttdoc">A class which provides an implementation of an explicit Euler method.</div><div class="ttdef"><b>Definition</b> euler.hpp:33</div></div>
 <div class="ttc" id="aclassITimeSolverRTheta_html"><div class="ttname"><a href="classITimeSolverRTheta.html">ITimeSolverRTheta</a></div><div class="ttdoc">Base class for the time solvers.</div><div class="ttdef"><b>Definition</b> itimesolver.hpp:11</div></div>
@@ -369,7 +373,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__explicit
 <div class="ttc" id="aclassPolarBSplines_html_ae4895a87f3e1ed953614a3546c319762"><div class="ttname"><a href="classPolarBSplines.html#ae4895a87f3e1ed953614a3546c319762">PolarBSplines&lt; BSplinesR, BSplinesTheta, 1 &gt;::continuity</a></div><div class="ttdeci">static int constexpr continuity</div><div class="ttdoc">The continuity enforced by the B-splines at the singular point.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:64</div></div>
 <div class="ttc" id="aclassPolarSplineEvaluator_html"><div class="ttname"><a href="classPolarSplineEvaluator.html">PolarSplineEvaluator</a></div><div class="ttdoc">Define an evaluator on polar B-splines.</div><div class="ttdef"><b>Definition</b> polar_spline_evaluator.hpp:14</div></div>
 <div class="ttc" id="aclassPolarSplineFEMPoissonLikeSolver_html"><div class="ttname"><a href="classPolarSplineFEMPoissonLikeSolver.html">PolarSplineFEMPoissonLikeSolver</a></div><div class="ttdoc">Define a polar PDE solver for a Poisson-like equation.</div><div class="ttdef"><b>Definition</b> polarpoissonlikesolver.hpp:52</div></div>
-<div class="ttc" id="aclassSplineFootFinder_html"><div class="ttname"><a href="classSplineFootFinder.html">SplineFootFinder</a></div><div class="ttdoc">A class to find the foot of the characteristics on the  plane.</div><div class="ttdef"><b>Definition</b> spline_foot_finder.hpp:39</div></div>
+<div class="ttc" id="aclassSplinePolarFootFinder_html"><div class="ttname"><a href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a></div><div class="ttdoc">A class to find the foot of the characteristics on the  plane.</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:64</div></div>
 <div class="ttc" id="astructGridR_html"><div class="ttname"><a href="structGridR.html">GridR</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:176</div></div>
 <div class="ttc" id="astructGridTheta_html"><div class="ttname"><a href="structGridTheta.html">GridTheta</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:179</div></div>
 <div class="ttc" id="astructPolarBSplinesRTheta_html"><div class="ttname"><a href="structPolarBSplinesRTheta.html">PolarBSplinesRTheta</a></div><div class="ttdef"><b>Definition</b> geometry.hpp:163</div></div>

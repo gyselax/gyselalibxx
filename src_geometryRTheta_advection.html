@@ -141,19 +141,19 @@ Time integration methods</h1>
 </ul>
 <p>We are listing the different schemes for this equation \(\partial_t X (t) = A_x(t, X(t),Y(t))\).</p>
 <p>We write \(X (t) = X (t; s, x, y)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1},  \forall n\}_n\).</p>
-<h3><a class="anchor" id="autotoc_md47"></a>
+<h3><a class="anchor" id="autotoc_md49"></a>
 Explicit Euler method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - dt A^{n+1}(X^{n+1})\)</li>
 <li>Convergence order : 1.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md48"></a>
+<h3><a class="anchor" id="autotoc_md50"></a>
 Crank-Nicolson method</h3>
 <ul>
 <li>Scheme: \(X^{k+1} = X^{n+1} - \frac{dt}{2} \left( A^{n+1}(X^{n+1}) + A^k(X^k) \right)\) and \(X^{n+1} = X^{k+1}\) once converged.</li>
 <li>Convergence order : 2.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md49"></a>
+<h3><a class="anchor" id="autotoc_md51"></a>
 RK3 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)\)<ul>
@@ -167,7 +167,7 @@ RK3 method</h3>
 </li>
 <li>Convergence order : 3.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md50"></a>
+<h3><a class="anchor" id="autotoc_md52"></a>
 RK4 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)\)<ul>
@@ -319,7 +319,7 @@ J D_{G}^{-1}
 \]
 </p>
 <p> to get the advection field along the physical domain axis.</p>
-<h1><a class="anchor" id="autotoc_md51"></a>
+<h1><a class="anchor" id="autotoc_md53"></a>
 Unit tests</h1>
 <p>The test of the advection operator are implemented in the <code>tests/geometryRTheta/advection_2d_rp/</code> folder (<a class="el" href="tests_geometryRTheta_advection_2d_rp.html">Tests on the 2D polar advection operator</a>).</p>
 <p>It tests:</p><ul>
@@ -360,18 +360,18 @@ Unit tests</h1>
 </ul>
 <p>The tests of the convergence order are made for constant CFL which means it checks the slope of the errors (infinity norm of the difference at the final time) <br  />
  for \((N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)\) and then \((n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)\) for \(n = 1, 2, 4, 8,  ...\).</p>
-<h1><a class="anchor" id="autotoc_md52"></a>
+<h1><a class="anchor" id="autotoc_md54"></a>
 References</h1>
 <p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019).</p>
-<h1><a class="anchor" id="autotoc_md53"></a>
+<h1><a class="anchor" id="autotoc_md55"></a>
 Contents</h1>
 <p>This folder contains:</p><ul>
 <li><a class="el" href="iadvectionrp_8hpp_source.html">iadvectionrp.hpp</a> : define the base class for advection operator (IAdvectionRP).<ul>
 <li><a class="el" href="bsl__advection__rp_8hpp_source.html">bsl_advection_rp.hpp</a> : define the advection operator described just before (BslAdvectionRP).</li>
 </ul>
 </li>
-<li><a class="el" href="spline__foot__finder_8hpp_source.html">spline_foot_finder.hpp</a> : solve the characteristic equation thanks to a given time integration method (<a class="el" href="classIFootFinder.html" title="Define a base class for all the time integration methods used for the advection.">IFootFinder</a>). </li>
+<li>spline_foot_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder). </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

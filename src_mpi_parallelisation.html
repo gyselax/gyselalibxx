@@ -120,7 +120,7 @@ TransposeOperator</h1>
 <h1><a class="anchor" id="src_mpi_parallelisation__Alltoall_Transpose_Operator"></a>
 Alltoall Transpose Operator</h1>
 <p>The alltoall transpose operator is based on the transpose operator present in the Fortran version of Gysela. It uses MPI's Alltoall operator to move from a layout distributed over a given set of dimensions to another layout distributed over an orthogonal set of dimensions. This is achieved by reordering the data such that the data blocks to be sent to each MPI rank are contiguous. Finally after the Alltoall call the data is reordered back into the expected final layout.</p>
-<h3><a class="anchor" id="autotoc_md70"></a>
+<h3><a class="anchor" id="autotoc_md72"></a>
 Example</h3>
 <p>Let us consider the 5D domain (Sp, <a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a>, <a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a>, <a class="el" href="structVpar.html" title="Define non periodic parallel velocity .">Vpar</a>, <a class="el" href="structMu.html" title="Define non periodic magnetic momentum .">Mu</a>) with the following number of points in each dimension : \((n_{sp} = 2, n_r = 4, n_\theta = 16, n_{vpar} = 8, n_\mu = 4)\).</p>
 <p>Suppose that we distribute this data in two different ways:</p><ol type="1">

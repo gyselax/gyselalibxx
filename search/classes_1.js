@@ -3,7 +3,7 @@ var searchData=
   ['barycentrictocartesian_0',['BarycentricToCartesian',['../classBarycentricToCartesian.html',1,'']]],
   ['bsladvection1d_1',['BslAdvection1D',['../classBslAdvection1D.html',1,'']]],
   ['bsladvectionrtheta_2',['BslAdvectionRTheta',['../classBslAdvectionRTheta.html',1,'']]],
-  ['bsladvectionrtheta_3c_20splinefootfinder_2c_20circulartocartesian_20_3e_3',['BslAdvectionRTheta&lt; SplineFootFinder, CircularToCartesian &gt;',['../classBslAdvectionRTheta.html',1,'']]],
+  ['bsladvectionrtheta_3c_20splinepolarfootfinder_2c_20circulartocartesian_20_3e_3',['BslAdvectionRTheta&lt; SplinePolarFootFinder, CircularToCartesian &gt;',['../classBslAdvectionRTheta.html',1,'']]],
   ['bsladvectionspatial_4',['BslAdvectionSpatial',['../classBslAdvectionSpatial.html',1,'']]],
   ['bsladvectionvelocity_5',['BslAdvectionVelocity',['../classBslAdvectionVelocity.html',1,'']]],
   ['bslexplicitpredcorrrtheta_6',['BslExplicitPredCorrRTheta',['../classBslExplicitPredCorrRTheta.html',1,'']]],

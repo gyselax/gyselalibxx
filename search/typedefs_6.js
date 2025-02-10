@@ -10,8 +10,10 @@ var searchData=
   ['grid2_7',['Grid2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a10e13ba81718c97997111ded99c2276c',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['gridmutype_8',['GridMuType',['../classCollisionConfiguration.html#a77e5d69224da2c41da3bb3ed08f316e2',1,'CollisionConfiguration']]],
   ['gridphitype_9',['GridPhiType',['../classCollisionConfiguration.html#ad23e1c19b3c9ad3ec57abf9faeded4a2',1,'CollisionConfiguration']]],
-  ['gridrtype_10',['GridRType',['../classCollisionConfiguration.html#af70141c99127445cd13f1538bcd5b1b6',1,'CollisionConfiguration']]],
-  ['gridsptype_11',['GridSpType',['../classCollisionConfiguration.html#a8519967631bca4d1974d92445159e363',1,'CollisionConfiguration']]],
-  ['gridthetatype_12',['GridThetaType',['../classCollisionConfiguration.html#aec3210b40ef49f0c8d361e6eeeaeac16',1,'CollisionConfiguration']]],
-  ['gridvpartype_13',['GridVparType',['../classCollisionConfiguration.html#abad505b2c709e1f9a0b2eca642819576',1,'CollisionConfiguration']]]
+  ['gridr_10',['GridR',['../classIPolarFootFinder.html#a90af5e545602e06dc6d8b0fd86399bb3',1,'IPolarFootFinder']]],
+  ['gridrtype_11',['GridRType',['../classCollisionConfiguration.html#af70141c99127445cd13f1538bcd5b1b6',1,'CollisionConfiguration']]],
+  ['gridsptype_12',['GridSpType',['../classCollisionConfiguration.html#a8519967631bca4d1974d92445159e363',1,'CollisionConfiguration']]],
+  ['gridtheta_13',['GridTheta',['../classIPolarFootFinder.html#a579ff11bd08281036e353000ec2e3c39',1,'IPolarFootFinder']]],
+  ['gridthetatype_14',['GridThetaType',['../classCollisionConfiguration.html#aec3210b40ef49f0c8d361e6eeeaeac16',1,'CollisionConfiguration']]],
+  ['gridvpartype_15',['GridVparType',['../classCollisionConfiguration.html#abad505b2c709e1f9a0b2eca642819576',1,'CollisionConfiguration']]]
 ];

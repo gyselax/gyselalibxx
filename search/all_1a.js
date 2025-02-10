@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['weak_20formulation_0',['Weak formulation',['../src_geometryRTheta_poisson.html#autotoc_md68',1,'']]],
+  ['weak_20formulation_0',['Weak formulation',['../src_geometryRTheta_poisson.html#autotoc_md70',1,'']]],
   ['weak_5fintegral_5felement_1',['weak_integral_element',['../classPolarSplineFEMPoissonLikeSolver.html#af97748fe740d17247902a8b1d4b1f2ac',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['weight_2',['weight',['../structGaussLegendreCoefficients.html#afe529976684244a390c122afe1b8bb86',1,'GaussLegendreCoefficients']]],
   ['were_20not_20cloned_3',['Q: I cloned the repository but the submodules were not cloned',['../docs_Using_git.html#autotoc_md19',1,'']]],

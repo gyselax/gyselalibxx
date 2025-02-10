@@ -10,8 +10,8 @@ var searchData=
   ['bsladvectionrtheta_7',['BslAdvectionRTheta',['../classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972',1,'BslAdvectionRTheta']]],
   ['bsladvectionspatial_8',['BslAdvectionSpatial',['../classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d',1,'BslAdvectionSpatial']]],
   ['bsladvectionvelocity_9',['BslAdvectionVelocity',['../classBslAdvectionVelocity.html#a85c69c265dbb2410fdd60f7b78117593',1,'BslAdvectionVelocity']]],
-  ['bslexplicitpredcorrrtheta_10',['BslExplicitPredCorrRTheta',['../classBslExplicitPredCorrRTheta.html#a40fd8069c399dd0e4894c8926ff64d29',1,'BslExplicitPredCorrRTheta']]],
-  ['bslimplicitpredcorrrtheta_11',['BslImplicitPredCorrRTheta',['../classBslImplicitPredCorrRTheta.html#a4c15c1556d28d836364f994c1a94c03f',1,'BslImplicitPredCorrRTheta']]],
+  ['bslexplicitpredcorrrtheta_10',['BslExplicitPredCorrRTheta',['../classBslExplicitPredCorrRTheta.html#a005c9db87bcecc3fe2062b120a78db17',1,'BslExplicitPredCorrRTheta']]],
+  ['bslimplicitpredcorrrtheta_11',['BslImplicitPredCorrRTheta',['../classBslImplicitPredCorrRTheta.html#a55349ee09de6871cc01b1db35d29e749',1,'BslImplicitPredCorrRTheta']]],
   ['bslpredcorrrtheta_12',['BslPredCorrRTheta',['../classBslPredCorrRTheta.html#ac5a6457ec7d54f8fbb926aca93a55069',1,'BslPredCorrRTheta']]],
   ['bumpontailequilibrium_13',['BumpontailEquilibrium',['../classBumpontailEquilibrium.html#af3995062c5408eea2ae7761113d30c52',1,'BumpontailEquilibrium']]]
 ];

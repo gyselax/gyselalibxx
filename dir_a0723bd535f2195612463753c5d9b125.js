@@ -5,5 +5,7 @@ var dir_a0723bd535f2195612463753c5d9b125 =
     [ "bsl_advection_x.hpp", "bsl__advection__x_8hpp_source.html", null ],
     [ "iadvectionvx.hpp", "iadvectionvx_8hpp_source.html", null ],
     [ "iadvectionx.hpp", "iadvectionx_8hpp_source.html", null ],
-    [ "nulladvectionvx.hpp", "nulladvectionvx_8hpp_source.html", null ]
+    [ "ipolar_foot_finder.hpp", "ipolar__foot__finder_8hpp_source.html", null ],
+    [ "nulladvectionvx.hpp", "nulladvectionvx_8hpp_source.html", null ],
+    [ "spline_polar_foot_finder.hpp", "spline__polar__foot__finder_8hpp_source.html", null ]
 ];

@@ -115,7 +115,9 @@ var NAVTREE =
       [ "Advection methods", "src_advection.html", [
         [ "Spatial advection", "src_advection.html#src_advection__Spatial_advection", null ],
         [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ],
-        [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ]
+        [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ],
+        [ "PolarFootFinder", "src_advection.html#src_advection__PolarFootFinder", null ],
+        [ "References", "src_advection.html#autotoc_md48", null ]
       ] ],
       [ "Collisions", "src_collisions.html", null ],
       [ "Data Storage Types", "src_data_types.html", [
@@ -129,14 +131,14 @@ var NAVTREE =
           [ "Time integration methods", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Time_integration_methods", null ],
           [ "Advection domain", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_domain", null ],
           [ "Advection Field", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_Field", null ],
-          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md51", null ],
-          [ "References", "src_geometryRTheta_advection.html#autotoc_md52", null ],
-          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md53", null ]
+          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md53", null ],
+          [ "References", "src_geometryRTheta_advection.html#autotoc_md54", null ],
+          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md55", null ]
         ] ],
         [ "Advection Field finder", "src_geometryRTheta_advection_field.html", [
           [ "Guiding center case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case", null ],
-          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md58", null ],
-          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md59", null ]
+          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md60", null ],
+          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md61", null ]
         ] ],
         [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
           [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
@@ -270,11 +272,11 @@ var NAVTREEINDEX =
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d",
 "classIAdvectionRTheta.html#a346eaaf9a5ce416b0f3011efe94458b7",
-"classMatrix__Corner__Block.html#a824a9d43ce28eef0836510f68deaf7dd",
-"classPolarSplineEvaluator.html#ab9a2c68c9daadb1253edbfc7e8361b8e",
-"dir_2c0ad391030bc4839817fbcc879b28f0.html",
-"simulations_geometryRTheta_diocotron.html",
-"structPolarSplineMem.html#a6ebb9d820a34d4b6a1bbd638f9ba6a3a"
+"classMatrix__Corner__Block.html#a09a6ff9a2b9912b3ee5d2df4d4b37ee1",
+"classPolarSplineEvaluator.html#a66468d51237ba05121d617991da901f3",
+"ddc__helper_8hpp_source.html",
+"polar__spline__evaluator_8hpp_source.html",
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af6492b7437a05bffcae91ec488fb3ebc"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
