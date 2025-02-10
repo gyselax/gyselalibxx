@@ -40,10 +40,6 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    // Environments variables for profiling
-    setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, false);
-    setenv("KOKKOS_TOOLS_TIMER_JSON", "true", false);
-
     PC_tree_t conf_voicexx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
