@@ -297,74 +297,6 @@ using DVector = Vector<double, Dims...>;
 //                         Operators
 //////////////////////////////////////////////////////////////////////////
 
-/**
- * @brief An operator to multiply all the element of the current tensor by
- * a value.
- * @param val The value by which the elements should be multiplied.
- * @return A new tensor containing the result of the multiplication.
- */
-template <class ElementType, class OElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
-        OElementType val,
-        Tensor<ElementType, ValidIndexSet...> tensor)
-{
-    return tensor * val;
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param tensor The tensor to be converted.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(Coord<Dims...> coord, DVector<Dims...> tensor)
-{
-    return Coord<Dims...>((ddc::get<Dims>(coord) + tensor.template get<Dims>())...);
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param tensor The tensor to be converted.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(Coord<Dims...> coord, DVector<Dims...> tensor)
-{
-    return Coord<Dims...>((ddc::get<Dims>(coord) - tensor.template get<Dims>())...);
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param tensor The tensor to be converted.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(Coord<Dims...>& coord, DVector<Dims...> tensor)
-{
-    ((ddc::get<Dims>(coord) += tensor.template get<Dims>()), ...);
-    return coord;
-}
-
-/**
- * An operator to add the elements of a tensor to a coordinate.
- * This can be useful in some calculations, e.g when calculating the foot
- * of a characteristic.
- * @param tensor The tensor to be converted.
- * @return The new coordinate.
- */
-template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(Coord<Dims...>& coord, DVector<Dims...> tensor)
-{
-    ((ddc::get<Dims>(coord) -= tensor.template get<Dims>()), ...);
-    return coord;
-}
-
 namespace ddcHelper {
 
 /**
@@ -408,3 +340,71 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> tens
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
 } // namespace ddcHelper
+
+/**
+ * @brief An operator to multiply all the element of the current tensor by
+ * a value.
+ * @param val The value by which the elements should be multiplied.
+ * @return A new tensor containing the result of the multiplication.
+ */
+template <class ElementType, class OElementType, class... ValidIndexSet>
+KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
+        OElementType val,
+        Tensor<ElementType, ValidIndexSet...> tensor)
+{
+    return tensor * val;
+}
+
+/**
+ * An operator to add the elements of a tensor to a coordinate.
+ * This can be useful in some calculations, e.g when calculating the foot
+ * of a characteristic.
+ * @param tensor The tensor to be converted.
+ * @return The new coordinate.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(Coord<Dims...> coord, DVector<Dims...> tensor)
+{
+    return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
+}
+
+/**
+ * An operator to add the elements of a tensor to a coordinate.
+ * This can be useful in some calculations, e.g when calculating the foot
+ * of a characteristic.
+ * @param tensor The tensor to be converted.
+ * @return The new coordinate.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(Coord<Dims...> coord, DVector<Dims...> tensor)
+{
+    return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
+}
+
+/**
+ * An operator to add the elements of a tensor to a coordinate.
+ * This can be useful in some calculations, e.g when calculating the foot
+ * of a characteristic.
+ * @param tensor The tensor to be converted.
+ * @return The new coordinate.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(Coord<Dims...>& coord, DVector<Dims...> tensor)
+{
+    ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
+    return coord;
+}
+
+/**
+ * An operator to add the elements of a tensor to a coordinate.
+ * This can be useful in some calculations, e.g when calculating the foot
+ * of a characteristic.
+ * @param tensor The tensor to be converted.
+ * @return The new coordinate.
+ */
+template <class... Dims>
+KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(Coord<Dims...>& coord, DVector<Dims...> tensor)
+{
+    ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
+    return coord;
+}
