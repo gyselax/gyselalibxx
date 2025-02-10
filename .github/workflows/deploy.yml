@@ -76,3 +76,22 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+
+  Mirror:
+    if: github.repository == 'gyselax/gyselalibxx'
+    runs-on: ubuntu-latest
+    environment: 'GitLab GPU trigger'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: gysela-developpers/gyselalibxx
+          token: ${{secrets.GITLAB_PAT}}
+          ref: public
+          github-server-url: https://gitlab.maisondelasimulation.fr
+      - name: Update GitLab
+        run: |
+          git remote add github https://github.com/gyselax/gyselalibxx.git
+          git fetch github ${{ github.SHA }}
+          git push origin ${{ github.SHA }}:public
+        shell: bash
