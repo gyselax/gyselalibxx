@@ -48,7 +48,7 @@ with $\det(J) = r$.
 \right.
 ```
 
-with $ \xi = 1/\sqrt{1 - \varepsilon^2 /4}$.
+with $\xi = 1/\sqrt{1 - \varepsilon^2 /4}$.
 
 ```math
 J (r,\theta) 
