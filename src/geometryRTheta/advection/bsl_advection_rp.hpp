@@ -106,7 +106,7 @@ public:
      * @return A Field to allfdistribu advected on the time step given.
      */
     host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
+            host_t<DFieldRTheta> allfdistribu_host,
             host_t<DConstVectorFieldRTheta<X, Y>> advection_field_xy,
             double dt) const override
     {
@@ -114,18 +114,26 @@ public:
         std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
 
         // Initialise the feet
-        host_t<FieldMemRTheta<CoordRTheta>> feet_rp(get_idx_range(advection_field_xy));
+        host_t<FieldMemRTheta<CoordRTheta>> feet_rp_host(get_idx_range(advection_field_xy));
         ddc::for_each(get_idx_range(advection_field_xy), [&](IdxRTheta const irp) {
-            feet_rp(irp) = ddc::coordinate(irp);
+            feet_rp_host(irp) = ddc::coordinate(irp);
         });
 
         // Compute the characteristic feet at tn ----------------------------------------------------
-        m_find_feet(get_field(feet_rp), advection_field_xy, dt);
+        m_find_feet(get_field(feet_rp_host), advection_field_xy, dt);
+
+        auto feet_rp = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(feet_rp_host));
+        auto allfdistribu = ddc::
+                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
-        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));
+        (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rp));
 
-        return allfdistribu;
+        ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
+
+        return allfdistribu_host;
     }
 
 
@@ -146,13 +154,13 @@ public:
      * @return A Field to allfdistribu advected on the time step given.
      */
     host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
+            host_t<DFieldRTheta> allfdistribu_host,
             host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY const& advection_field_xy_center,
             double dt) const override
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
-        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
+        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu_host));
 
         const int npoints_p = IdxRangeTheta(grid).size();
         IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
@@ -191,16 +199,24 @@ public:
         std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
 
         // Initialise the feet
-        host_t<FieldMemRTheta<CoordRTheta>> feet_rp(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irp) { feet_rp(irp) = ddc::coordinate(irp); });
+        host_t<FieldMemRTheta<CoordRTheta>> feet_rp_host(grid);
+        ddc::for_each(grid, [&](IdxRTheta const irp) { feet_rp_host(irp) = ddc::coordinate(irp); });
 
         // Compute the characteristic feet at tn ----------------------------------------------------
-        m_find_feet(get_field(feet_rp), get_const_field(advection_field_xy), dt);
+        m_find_feet(get_field(feet_rp_host), get_const_field(advection_field_xy), dt);
+
+        auto feet_rp = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(feet_rp_host));
+        auto allfdistribu = ddc::
+                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
-        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp));
+        (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rp));
+
+        ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
         Kokkos::Profiling::popRegion();
 
-        return allfdistribu;
+        return allfdistribu_host;
     }
 };

@@ -52,11 +52,11 @@ void Interpolation_on_random_coord(
 
 
     // Evaluation of the function on the grid. -----------------------------------------------
-    host_t<DFieldMemRTheta> function_evaluated(grid);
+    host_t<DFieldMemRTheta> function_evaluated_host(grid);
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta
                 coord(coordinate(ddc::select<GridR>(irp)), coordinate(ddc::select<GridTheta>(irp)));
-        function_evaluated(irp) = exact_function(coord);
+        function_evaluated_host(irp) = exact_function(coord);
     });
 
 
@@ -66,7 +66,7 @@ void Interpolation_on_random_coord(
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
     IdxRangeRTheta random_grid(grid);
-    host_t<FieldMemRTheta<CoordRTheta>> random_coords(random_grid);
+    host_t<FieldMemRTheta<CoordRTheta>> random_coords_host(random_grid);
 
     int number_r(0);
     int number_p(0);
@@ -77,7 +77,7 @@ void Interpolation_on_random_coord(
         CoordTheta coord_p(coordinate(ddc::select<GridTheta>(irp)));
 
         if (On_the_nodes) {
-            random_coords(irp) = CoordRTheta(coord_r, coord_p);
+            random_coords_host(irp) = CoordRTheta(coord_r, coord_p);
         } else {
             unsigned index_r = ddc::select<GridR>(irp).uid();
             unsigned index_p = ddc::select<GridTheta>(irp).uid();
@@ -90,7 +90,7 @@ void Interpolation_on_random_coord(
             IdxR ir(ddc::select<GridR>(irp));
             IdxTheta ip(ddc::select<GridTheta>(irp));
 
-            IdxRangeR r_idx_range = get_idx_range<GridR>(random_coords);
+            IdxRangeR r_idx_range = get_idx_range<GridR>(random_coords_host);
             IdxR ir_max(r_idx_range.back());
             CoordR delta_coord_r;
             if (ir + 1 <= ir_max) {
@@ -99,7 +99,7 @@ void Interpolation_on_random_coord(
                 delta_coord_r = CoordR(0.);
             }
 
-            IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(random_coords);
+            IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(random_coords_host);
             IdxTheta ip_min(theta_idx_range.front());
             IdxTheta ip_max(theta_idx_range.back());
             CoordTheta delta_coord_p;
@@ -109,7 +109,7 @@ void Interpolation_on_random_coord(
                 delta_coord_p = CoordTheta(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
             }
 
-            random_coords(irp) = CoordRTheta(
+            random_coords_host(irp) = CoordRTheta(
                     coord_r + delta_coord_r * random_factor_r,
                     CoordTheta(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
         }
@@ -125,15 +125,20 @@ void Interpolation_on_random_coord(
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    host_t<DFieldRTheta> function_interpolated;
+    auto function_evaluated = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), function_evaluated_host);
+    auto random_coords = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), random_coords_host);
+
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
-    function_interpolated
-            = interpolator(get_field(function_evaluated), get_const_field(random_coords));
+    interpolator(get_field(function_evaluated), get_const_field(random_coords));
+
+    ddc::parallel_deepcopy(function_evaluated_host, function_evaluated);
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err(0.0);
-    ddc::for_each(get_idx_range(random_coords), [&](IdxRTheta const irp) {
-        double err = fabs(function_interpolated(irp) - exact_function(random_coords(irp)));
+    ddc::for_each(get_idx_range(random_coords_host), [&](IdxRTheta const irp) {
+        double err = fabs(function_evaluated_host(irp) - exact_function(random_coords_host(irp)));
         max_err = max_err > err ? max_err : err;
     });
     std::cout << "   Max absolute error : " << max_err;
