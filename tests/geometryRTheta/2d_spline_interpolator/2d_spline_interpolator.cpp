@@ -137,17 +137,16 @@ void Interpolation_on_random_coord(
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
-    auto random_coords_host = ddc::create_mirror_view_and_copy(get_const_field(random_coords));
-
-    auto function_evaluated_host
-            = ddc::create_mirror_view_and_copy(get_const_field(function_evaluated));
-
     // Compare the obtained values with the exact function. ----------------------------------
-    double max_err(0.0);
-    ddc::for_each(get_idx_range(random_coords_host), [&](IdxRTheta const irp) {
-        double err = fabs(function_evaluated_host(irp) - exact_function(random_coords_host(irp)));
-        max_err = max_err > err ? max_err : err;
-    });
+    double max_err = ddc::parallel_transform_reduce(
+            Kokkos::DefaultExecutionSpace(),
+            grid,
+            0.0,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxRTheta const irp) {
+                return Kokkos::fabs(function_evaluated(irp) - exact_function(random_coords(irp)));
+            });
+
     std::cout << "   Max absolute error : " << max_err;
     if (max_err < TOL) {
         std::cout << "  PASSED" << std::endl;
