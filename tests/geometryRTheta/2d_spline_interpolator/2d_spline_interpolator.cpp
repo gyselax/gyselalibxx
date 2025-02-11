@@ -52,12 +52,15 @@ void Interpolation_on_random_coord(
 
 
     // Evaluation of the function on the grid. -----------------------------------------------
-    host_t<DFieldMemRTheta> function_evaluated_host(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        CoordRTheta
-                coord(coordinate(ddc::select<GridR>(irp)), coordinate(ddc::select<GridTheta>(irp)));
-        function_evaluated_host(irp) = exact_function(coord);
-    });
+    DFieldMemRTheta function_evaluated_alloc(grid);
+    DFieldRTheta function_evaluated = get_field(function_evaluated_alloc);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            grid,
+            KOKKOS_LAMBDA(IdxRTheta const irp) {
+                CoordRTheta coord(ddc::coordinate(irp));
+                function_evaluated(irp) = exact_function(coord);
+            });
 
 
     // Build the decomposition of the function on Bsplines. ----------------------------------
@@ -65,56 +68,61 @@ void Interpolation_on_random_coord(
 
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
-    IdxRangeRTheta random_grid(grid);
-    FieldMemRTheta<CoordRTheta> random_coords_alloc(random_grid);
+    FieldMemRTheta<CoordRTheta> random_coords_alloc(grid);
     FieldRTheta<CoordRTheta> random_coords = get_field(random_coords_alloc);
 
-    ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), random_grid, KOKKOS_LAMBDA(IdxRTheta const irp) {
-        CoordR coord_r(coordinate(ddc::select<GridR>(irp)));
-        CoordTheta coord_p(coordinate(ddc::select<GridTheta>(irp)));
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            grid,
+            KOKKOS_LAMBDA(IdxRTheta const irp) {
+                CoordR coord_r(coordinate(ddc::select<GridR>(irp)));
+                CoordTheta coord_p(coordinate(ddc::select<GridTheta>(irp)));
 
-        if (On_the_nodes) {
-            random_coords(irp) = CoordRTheta(coord_r, coord_p);
-        } else {
-            IdxRangeR r_idx_range(random_grid);
-            IdxRangeTheta theta_idx_range(random_grid);
+                if (On_the_nodes) {
+                    random_coords(irp) = CoordRTheta(coord_r, coord_p);
+                } else {
+                    IdxRangeR r_idx_range(grid);
+                    IdxRangeTheta theta_idx_range(grid);
 
-            IdxR ir_min(r_idx_range.front());
-            IdxTheta ip_min(theta_idx_range.front());
+                    IdxR ir_min(r_idx_range.front());
+                    IdxTheta ip_min(theta_idx_range.front());
 
-            IdxR ir_max(r_idx_range.back());
-            IdxTheta ip_max(theta_idx_range.back());
+                    IdxR ir_max(r_idx_range.back());
+                    IdxTheta ip_max(theta_idx_range.back());
 
-            IdxR ir(irp);
-            IdxTheta ip(irp);
+                    IdxR ir(irp);
+                    IdxTheta ip(irp);
 
-            unsigned index_r = ir - ir_min;
-            unsigned index_p = ip - ip_min;
-            int const number_r = (301 * index_r + 3) % (Nr * Nt);
-            int const number_p = (103 * index_p + 2) % (Nr * Nt);
-            // Pseudo-random number between 0 and 1 generated :
-            double const random_factor_r = double(number_r) / Nr / Nt * (1 - double(number_p) / Nr / Nt);
-            double const random_factor_p = double(number_p) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
+                    unsigned index_r = ir - ir_min;
+                    unsigned index_p = ip - ip_min;
+                    int const number_r = (301 * index_r + 3) % (Nr * Nt);
+                    int const number_p = (103 * index_p + 2) % (Nr * Nt);
+                    // Pseudo-random number between 0 and 1 generated :
+                    double const random_factor_r
+                            = double(number_r) / Nr / Nt * (1 - double(number_p) / Nr / Nt);
+                    double const random_factor_p
+                            = double(number_p) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
 
-            CoordR delta_coord_r;
-            if (ir + 1 <= ir_max) {
-                delta_coord_r = CoordR(ddc::coordinate(ir + 1) - ddc::coordinate(ir));
-            } else {
-                delta_coord_r = CoordR(0.);
-            }
+                    CoordR delta_coord_r;
+                    if (ir + 1 <= ir_max) {
+                        delta_coord_r = CoordR(ddc::coordinate(ir + 1) - ddc::coordinate(ir));
+                    } else {
+                        delta_coord_r = CoordR(0.);
+                    }
 
-            CoordTheta delta_coord_p;
-            if (ip + 1 <= ip_max) {
-                delta_coord_p = CoordTheta(ddc::coordinate(ip + 1) - ddc::coordinate(ip));
-            } else {
-                delta_coord_p = CoordTheta(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
-            }
+                    CoordTheta delta_coord_p;
+                    if (ip + 1 <= ip_max) {
+                        delta_coord_p = CoordTheta(ddc::coordinate(ip + 1) - ddc::coordinate(ip));
+                    } else {
+                        delta_coord_p
+                                = CoordTheta(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
+                    }
 
-            random_coords(irp) = CoordRTheta(
-                    coord_r + delta_coord_r * random_factor_r,
-                    CoordTheta(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
-        }
-    });
+                    random_coords(irp) = CoordRTheta(
+                            coord_r + delta_coord_r * random_factor_r,
+                            CoordTheta(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
+                }
+            });
 
 
     // Interpolate the function on Bsplines on the "random" grid. ----------------------------
@@ -126,16 +134,13 @@ void Interpolation_on_random_coord(
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    auto function_evaluated = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(function_evaluated_host));
-
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
-    ddc::parallel_deepcopy(function_evaluated_host, function_evaluated);
+    auto random_coords_host = ddc::create_mirror_view_and_copy(get_const_field(random_coords));
 
-    auto random_coords_host = ddc::
-            create_mirror_view_and_copy(get_const_field(random_coords));
+    auto function_evaluated_host
+            = ddc::create_mirror_view_and_copy(get_const_field(function_evaluated));
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err(0.0);
@@ -151,41 +156,24 @@ void Interpolation_on_random_coord(
     }
 }
 
-/**
- * @brief A class of function on polar coordinates.
- */
-class ExactFunction
-{
-public:
-    virtual ~ExactFunction() = default;
-
-    /**
-     * @brief Evaluate the function.
-     * @param[in] coord Point in polar coordinates.
-     * @return The value (double) of the function at the point.
-     */
-    virtual double operator()(CoordRTheta const& coord) const = 0;
-};
-
 
 /**
  * @brief A class of r polynomial functions on polar coordinates.
  */
-class ExactFunction_r_degree : public ExactFunction
+class ExactFunction_r_degree
 {
 private:
     const int m_d;
 
 public:
-    ExactFunction_r_degree(int d) : m_d(d) {};
-    ~ExactFunction_r_degree() {};
+    KOKKOS_FUNCTION ExactFunction_r_degree(int d) : m_d(d) {}
 
     /**
      * @brief Evaluate the function.
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    double operator()(CoordRTheta const& coord) const override
+    KOKKOS_FUNCTION double operator()(CoordRTheta const& coord) const
     {
         const double r = ddc::get<R>(coord);
         double val = 1.0;
@@ -199,18 +187,15 @@ public:
  * @brief A class of function on polar coordinates such that
  * f(r, theta) = r *cos(theta).
  */
-class ExactFunction_r_cos_theta : public ExactFunction
+class ExactFunction_r_cos_theta
 {
 public:
-    ExactFunction_r_cos_theta() {};
-    ~ExactFunction_r_cos_theta() {};
-
     /**
      * @brief Evaluate the function.
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    double operator()(CoordRTheta const& coord) const override
+    KOKKOS_FUNCTION double operator()(CoordRTheta const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double t = ddc::get<Theta>(coord);
@@ -221,18 +206,15 @@ public:
 /**
  * @brief A class of Gaussian function on polar coordinates.
  */
-class ExactFunction_gaussian : public ExactFunction
+class ExactFunction_gaussian
 {
 public:
-    ExactFunction_gaussian() {};
-    ~ExactFunction_gaussian() {};
-
     /**
      * @brief Evaluate the function.
      * @param[in] coord Point in polar coordinates.
      * @return The value (double) of the function at the point.
      */
-    double operator()(CoordRTheta const& coord) const override
+    KOKKOS_FUNCTION double operator()(CoordRTheta const& coord) const
     {
         const double r = ddc::get<R>(coord);
         const double t = ddc::get<Theta>(coord);

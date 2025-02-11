@@ -72,7 +72,6 @@ public:
             DFieldRTheta const inout_data,
             ConstField<CoordRTheta, IdxRangeRTheta> const coordinates) const override
     {
-
 #ifndef NDEBUG
         // To ensure that the interpolator is C0, we ensure that
         // the value at (r=0,theta) is the same for all theta.
