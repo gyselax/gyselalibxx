@@ -55,7 +55,7 @@ inline constexpr bool is_tensor_index_element_v
 template <class... ValidIndexSet>
 class TensorIndexSet
 {
-    static_assert(std::conjunction_v<is_vector_index_set<ValidIndexSet>...>);
+    static_assert((is_vector_index_set_v<ValidIndexSet> && ...));
 
 private:
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
