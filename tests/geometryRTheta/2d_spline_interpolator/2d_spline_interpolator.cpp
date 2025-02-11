@@ -165,7 +165,7 @@ private:
     const int m_d;
 
 public:
-    KOKKOS_FUNCTION ExactFunction_r_degree(int d) : m_d(d) {}
+    explicit KOKKOS_FUNCTION ExactFunction_r_degree(int d) : m_d(d) {}
 
     /**
      * @brief Evaluate the function.
