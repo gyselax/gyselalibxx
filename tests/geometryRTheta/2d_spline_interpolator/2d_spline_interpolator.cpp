@@ -126,9 +126,9 @@ void Interpolation_on_random_coord(
             p_extrapolation_rule);
 
     auto function_evaluated = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), function_evaluated_host);
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(function_evaluated_host));
     auto random_coords = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), random_coords_host);
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_const_field(random_coords_host));
 
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
