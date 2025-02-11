@@ -37,15 +37,9 @@ private:
 
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
-    using r_deriv_type_host
-            = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type1>>;
-    using p_deriv_type_host
-            = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type2>>;
-    using mixed_deriv_type_host
-            = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type>>;
-    using r_deriv_type = DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type1>;
-    using p_deriv_type = DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type2>;
-    using mixed_deriv_type = DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type>;
+    using r_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type1>;
+    using p_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>;
+    using mixed_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type>;
 
 public:
     /**
@@ -74,17 +68,10 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> const inout_data_host,
-            host_t<ConstField<CoordRTheta, IdxRangeRTheta>> const coordinates_host) const override
+    DFieldRTheta operator()(
+            DFieldRTheta const inout_data,
+            ConstField<CoordRTheta, IdxRangeRTheta> const coordinates) const override
     {
-        auto inout_data_alloc = ddc::
-                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), inout_data_host);
-        auto coordinates_alloc = ddc::
-                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), coordinates_host);
-
-        DFieldRTheta inout_data = get_field(inout_data_alloc);
-        ConstField<CoordRTheta, IdxRangeRTheta> coordinates = get_const_field(coordinates_alloc);
 
 #ifndef NDEBUG
         // To ensure that the interpolator is C0, we ensure that
@@ -105,9 +92,7 @@ public:
         m_builder(get_field(m_coefs), get_const_field(inout_data));
         m_evaluator(get_field(inout_data), coordinates, get_const_field(m_coefs));
 
-        ddc::parallel_deepcopy(inout_data_host, inout_data);
-
-        return inout_data_host;
+        return inout_data;
     }
 };
 
