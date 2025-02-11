@@ -61,7 +61,7 @@ void Interpolation_on_random_coord(
 
 
     // Build the decomposition of the function on Bsplines. ----------------------------------
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder const builder(grid);
 
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
@@ -119,7 +119,7 @@ void Interpolation_on_random_coord(
     // Interpolate the function on Bsplines on the "random" grid. ----------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,

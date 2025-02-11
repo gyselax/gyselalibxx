@@ -76,12 +76,15 @@ public:
      */
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> const inout_data_host,
-            host_t<Field<CoordRTheta const, IdxRangeRTheta>> const coordinates_host) const override
+            host_t<ConstField<CoordRTheta, IdxRangeRTheta>> const coordinates_host) const override
     {
-        auto inout_data = ddc::
+        auto inout_data_alloc = ddc::
                 create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), inout_data_host);
-        auto coordinates = ddc::
+        auto coordinates_alloc = ddc::
                 create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), coordinates_host);
+
+        DFieldRTheta inout_data = get_field(inout_data_alloc);
+        ConstField<CoordRTheta, IdxRangeRTheta> coordinates = get_const_field(coordinates_alloc);
 
 #ifndef NDEBUG
         // To ensure that the interpolator is C0, we ensure that
@@ -104,7 +107,7 @@ public:
 
         ddc::parallel_deepcopy(inout_data_host, inout_data);
 
-        return inout_data;
+        return inout_data_host;
     }
 };
 
