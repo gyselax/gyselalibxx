@@ -198,7 +198,7 @@ public:
     {
         const double r = ddc::get<R>(coord);
         const double t = ddc::get<Theta>(coord);
-        return r * std::cos(t);
+        return r * Kokkos::cos(t);
     }
 };
 
@@ -222,9 +222,9 @@ public:
         double y0 = 0.;
         double sig_x = 0.25;
         double sig_y = 0.25;
-        return std::exp(
-                -pow(r * std::cos(t) - x0, 2) / (2 * sig_x * sig_x)
-                - pow(r * std::sin(t) - y0, 2) / (2 * sig_y * sig_y));
+        return Kokkos::exp(
+                -ipow(r * Kokkos::cos(t) - x0, 2) / (2 * sig_x * sig_x)
+                - ipow(r * Kokkos::sin(t) - y0, 2) / (2 * sig_y * sig_y));
         ;
     }
 };
