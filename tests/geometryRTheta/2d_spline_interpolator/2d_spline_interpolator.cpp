@@ -66,32 +66,36 @@ void Interpolation_on_random_coord(
 
     // Build a "random" grid to test the interpolator. ---------------------------------------
     IdxRangeRTheta random_grid(grid);
-    host_t<FieldMemRTheta<CoordRTheta>> random_coords_host(random_grid);
+    FieldMemRTheta<CoordRTheta> random_coords_alloc(random_grid);
+    FieldRTheta<CoordRTheta> random_coords = get_field(random_coords_alloc);
 
-    int number_r(0);
-    int number_p(0);
-    double random_factor_r;
-    double random_factor_p;
-    ddc::for_each(random_grid, [&](IdxRTheta const irp) {
+    ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), random_grid, KOKKOS_LAMBDA(IdxRTheta const irp) {
         CoordR coord_r(coordinate(ddc::select<GridR>(irp)));
         CoordTheta coord_p(coordinate(ddc::select<GridTheta>(irp)));
 
         if (On_the_nodes) {
-            random_coords_host(irp) = CoordRTheta(coord_r, coord_p);
+            random_coords(irp) = CoordRTheta(coord_r, coord_p);
         } else {
-            unsigned index_r = ddc::select<GridR>(irp).uid();
-            unsigned index_p = ddc::select<GridTheta>(irp).uid();
-            number_r = (301 * index_r + 3) % (Nr * Nt);
-            number_p = (103 * index_p + 2) % (Nr * Nt);
-            // Pseudo-random number between 0 and 1 generated :
-            random_factor_r = double(number_r) / Nr / Nt * (1 - double(number_p) / Nr / Nt);
-            random_factor_p = double(number_p) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
+            IdxRangeR r_idx_range(random_grid);
+            IdxRangeTheta theta_idx_range(random_grid);
 
-            IdxR ir(ddc::select<GridR>(irp));
-            IdxTheta ip(ddc::select<GridTheta>(irp));
+            IdxR ir_min(r_idx_range.front());
+            IdxTheta ip_min(theta_idx_range.front());
 
-            IdxRangeR r_idx_range = get_idx_range<GridR>(random_coords_host);
             IdxR ir_max(r_idx_range.back());
+            IdxTheta ip_max(theta_idx_range.back());
+
+            IdxR ir(irp);
+            IdxTheta ip(irp);
+
+            unsigned index_r = ir - ir_min;
+            unsigned index_p = ip - ip_min;
+            int const number_r = (301 * index_r + 3) % (Nr * Nt);
+            int const number_p = (103 * index_p + 2) % (Nr * Nt);
+            // Pseudo-random number between 0 and 1 generated :
+            double const random_factor_r = double(number_r) / Nr / Nt * (1 - double(number_p) / Nr / Nt);
+            double const random_factor_p = double(number_p) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
+
             CoordR delta_coord_r;
             if (ir + 1 <= ir_max) {
                 delta_coord_r = CoordR(ddc::coordinate(ir + 1) - ddc::coordinate(ir));
@@ -99,9 +103,6 @@ void Interpolation_on_random_coord(
                 delta_coord_r = CoordR(0.);
             }
 
-            IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(random_coords_host);
-            IdxTheta ip_min(theta_idx_range.front());
-            IdxTheta ip_max(theta_idx_range.back());
             CoordTheta delta_coord_p;
             if (ip + 1 <= ip_max) {
                 delta_coord_p = CoordTheta(ddc::coordinate(ip + 1) - ddc::coordinate(ip));
@@ -109,7 +110,7 @@ void Interpolation_on_random_coord(
                 delta_coord_p = CoordTheta(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
             }
 
-            random_coords_host(irp) = CoordRTheta(
+            random_coords(irp) = CoordRTheta(
                     coord_r + delta_coord_r * random_factor_r,
                     CoordTheta(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
         }
@@ -127,13 +128,14 @@ void Interpolation_on_random_coord(
 
     auto function_evaluated = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(function_evaluated_host));
-    auto random_coords = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_const_field(random_coords_host));
 
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
     ddc::parallel_deepcopy(function_evaluated_host, function_evaluated);
+
+    auto random_coords_host = ddc::
+            create_mirror_view_and_copy(get_const_field(random_coords));
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err(0.0);
