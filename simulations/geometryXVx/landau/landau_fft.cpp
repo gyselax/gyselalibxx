@@ -42,10 +42,6 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    // Environments variables for profiling
-    setenv("KOKKOS_TOOLS_LIBS", KP_KERNEL_TIMER_PATH, false);
-    setenv("KOKKOS_TOOLS_TIMER_JSON", "true", false);
-
     long int iter_start;
     PC_tree_t conf_voicexx;
     parse_executable_arguments(conf_voicexx, iter_start, argc, argv, params_yaml);
