@@ -71,8 +71,8 @@ private:
             EulerMethod,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host>;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorConstBound>;
 
 
     LogicalToPhysicalMapping const& m_logical_to_physical;

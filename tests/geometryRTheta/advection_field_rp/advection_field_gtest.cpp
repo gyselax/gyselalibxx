@@ -98,12 +98,18 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder_host const builder_host(grid);
+    SplineRThetaBuilder const builder(grid);
 
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -119,8 +125,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+            builder_host,
+            spline_evaluator_extrapol_host);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
@@ -134,10 +140,10 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator);
 
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X, Y>>,
+    RK3<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X, Y>,
         Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
     SplinePolarFootFinder find_feet(
             time_stepper,

@@ -341,8 +341,8 @@ void simulate(
         Simulation& simulation,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
-        SplineRThetaBuilder_host const& advection_builder,
-        SplineRThetaEvaluatorConstBound_host& advection_evaluator,
+        SplineRThetaBuilder const& advection_builder,
+        SplineRThetaEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
         bool save_curves,
@@ -577,8 +577,8 @@ void simulate_the_3_simulations(
         TimeStepper& time_stepper,
         PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
                 function_interpolator,
-        SplineRThetaBuilder_host const& advection_builder,
-        SplineRThetaEvaluatorConstBound_host& advection_evaluator,
+        SplineRThetaBuilder const& advection_builder,
+        SplineRThetaEvaluatorConstBound& advection_evaluator,
         double const final_time,
         double const dt,
         bool const& save_curves,

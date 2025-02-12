@@ -126,18 +126,18 @@ private:
     NumericalParams params;
 
 public:
-    using ValFieldMem = host_t<FieldMemRTheta<CoordRTheta>>;
-    using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
+    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
+    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
 
     using NumericalTuple = std::tuple<
             NumericalMethodParameters<
-                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
             NumericalMethodParameters<
-                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
             NumericalMethodParameters<
-                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
             NumericalMethodParameters<
-                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>>;
+                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -147,7 +147,7 @@ public:
         : params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
-                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
                                   params.grid),
                           params.dt * 0.1,
                           "EULER"),
@@ -155,16 +155,16 @@ public:
                           CrankNicolson<
                                   ValFieldMem,
                                   DerivFieldMem,
-                                  Kokkos::DefaultHostExecutionSpace>(params.grid, 20, 1e-12),
+                                  Kokkos::DefaultExecutionSpace>(params.grid, 20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
                   NumericalMethodParameters(
-                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
                                   params.grid),
                           params.dt,
                           "RK3"),
                   NumericalMethodParameters(
-                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
                                   params.grid),
                           params.dt,
                           "RK4")))

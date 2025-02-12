@@ -63,16 +63,16 @@ class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
     using EulerMethod
-            = Euler<host_t<FieldMemRTheta<CoordRTheta>>,
-                    host_t<DVectorFieldMemRTheta<X, Y>>,
-                    Kokkos::DefaultHostExecutionSpace>;
+            = Euler<FieldMemRTheta<CoordRTheta>,
+                    DVectorFieldMemRTheta<X, Y>,
+                    Kokkos::DefaultExecutionSpace>;
 
     using SplinePolarFootFinderType = SplinePolarFootFinder<
             EulerMethod,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
-            SplineRThetaBuilder_host,
-            SplineRThetaEvaluatorConstBound_host>;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorConstBound>;
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
