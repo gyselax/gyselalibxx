@@ -4,6 +4,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "directional_tag.hpp"
 #include "vector_field_mem.hpp"
 
 
@@ -432,3 +433,28 @@ struct OnMemorySpace<
 };
 
 } // namespace detail
+
+namespace ddcHelper {
+
+template <
+        class ExecSpace,
+        class ElementType,
+        class IdxRangeType,
+        class... Dims,
+        class MemorySpace,
+        class LayoutStridedPolicy>
+auto create_mirror_view_and_copy(
+        ExecSpace exec_space,
+        VectorField<ElementType, IdxRangeType, NDTag<Dims...>, MemorySpace, LayoutStridedPolicy>
+                field)
+{
+    if constexpr (Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible) {
+        return field;
+    } else {
+        VectorFieldMem<std::remove_const_t<ElementType>, IdxRangeType, NDTag<Dims...>, MemorySpace>
+                field_alloc(get_idx_range(field));
+        ((ddc::parallel_deepcopy(field_alloc.template get<Dims>(), field.template get<Dims>())),
+         ...);
+    }
+}
+} // namespace ddcHelper
