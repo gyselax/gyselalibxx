@@ -1,15 +1,12 @@
 
-add_library(quadrature STATIC
-    gauss_legendre_integration.cpp
-    )
+add_library(quadrature INTERFACE)
 target_include_directories(quadrature
-    PUBLIC
+    INTERFACE
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 
-target_link_libraries(quadrature PUBLIC
+target_link_libraries(quadrature INTERFACE
     DDC::core
-    gslx::mapping
     gslx::utils
 )
 

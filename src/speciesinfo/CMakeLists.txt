@@ -1,15 +1,11 @@
 # SPDX-License-Identifier: MIT
 
-add_library(speciesinfo STATIC
-    species_init.cpp
-)
+add_library(speciesinfo INTERFACE)
 target_include_directories(speciesinfo
-    PUBLIC
+    INTERFACE
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
-target_link_libraries(speciesinfo 
+target_link_libraries(speciesinfo INTERFACE
     DDC::core
-    gslx::io
-    gslx::paraconfpp
     gslx::utils
 )
 add_library(gslx::speciesinfo ALIAS speciesinfo)

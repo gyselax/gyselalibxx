@@ -3,7 +3,6 @@
 #include <string>
 
 #include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
 
 #include "krook_source_adaptive.hpp"
 #include "mask_tanh.hpp"
@@ -49,27 +48,6 @@ KrookSourceAdaptive::KrookSourceAdaptive(
     // target distribution function
     MaxwellianEquilibrium::compute_maxwellian(get_field(m_ftarget), m_density, m_temperature, 0.);
     auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(m_ftarget));
-
-    switch (m_type) {
-    case RhsType::Source:
-        ddc::expose_to_pdi("krook_source_adaptive_extent", m_extent);
-        ddc::expose_to_pdi("krook_source_adaptive_stiffness", m_stiffness);
-        ddc::expose_to_pdi("krook_source_adaptive_amplitude", m_amplitude);
-        ddc::expose_to_pdi("krook_source_adaptive_density", m_density);
-        ddc::expose_to_pdi("krook_source_adaptive_temperature", m_temperature);
-        ddc::expose_to_pdi("krook_source_adaptive_ftarget", ftarget_host);
-        ddc::expose_to_pdi("krook_source_adaptive_mask", mask_host);
-        break;
-    case RhsType::Sink:
-        ddc::expose_to_pdi("krook_sink_adaptive_extent", m_extent);
-        ddc::expose_to_pdi("krook_sink_adaptive_stiffness", m_stiffness);
-        ddc::expose_to_pdi("krook_sink_adaptive_amplitude", m_amplitude);
-        ddc::expose_to_pdi("krook_sink_adaptive_density", m_density);
-        ddc::expose_to_pdi("krook_sink_adaptive_temperature", m_temperature);
-        ddc::expose_to_pdi("krook_sink_adaptive_ftarget", ftarget_host);
-        ddc::expose_to_pdi("krook_sink_adaptive_mask", mask_host);
-        break;
-    }
 }
 
 void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx const allfdistribu)

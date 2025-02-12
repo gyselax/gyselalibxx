@@ -4,9 +4,6 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("initialization_${GEOMETRY_VARIANT}" STATIC
     maxwellianequilibrium.cpp
-    bumpontailequilibrium.cpp
-    restartinitialization.cpp
-    singlemodeperturbinitialization.cpp
 )
 
 target_include_directories("initialization_${GEOMETRY_VARIANT}"
@@ -16,7 +13,6 @@ target_include_directories("initialization_${GEOMETRY_VARIANT}"
 target_link_libraries("initialization_${GEOMETRY_VARIANT}"
     PUBLIC
         DDC::core
-        DDC::pdi
         gslx::speciesinfo
         gslx::geometry_${GEOMETRY_VARIANT}
         gslx::utils

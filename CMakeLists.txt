@@ -35,21 +35,6 @@ option(DDC_BUILD_EXAMPLES         "Build DDC examples" OFF)
 option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" OFF)
 
 ###############################################################################################
-#                                  Build documentation
-###############################################################################################
-
-## if documentation is enabled, build it
-if("${GYSELALIBXX_BUILD_DOCUMENTATION}")
-  ## Look for a pre-installed Doxygen
-  find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-
-  add_subdirectory(docs/)
-endif()
-
-## Turn off documentation for subpackages
-set(BUILD_DOCUMENTATION OFF)
-
-###############################################################################################
 #                                     Get dependencies
 ###############################################################################################
 
@@ -59,18 +44,6 @@ if ("${GYSELALIBXX_COMPILE_SOURCE}")
 
 ## Use CTest for running tests
 include(CTest)
-
-## Look for a pre-installed LAPACK
-find_package(LAPACK REQUIRED)
-
-## Look for a pre-installed MPI
-find_package(MPI REQUIRED)
-
-## Look for a pre-installed paraconf
-find_package(paraconf REQUIRED COMPONENTS C)
-
-## Look for a pre-installed PDI
-find_package(PDI REQUIRED COMPONENTS C)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
@@ -109,23 +82,11 @@ if(NOT "${KokkosKernels_FOUND}")
   add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
 endif()
 
-find_package (Eigen3 3.3 NO_MODULE)
-if (NOT EIGEN3_FOUND)
-  ## Use Eigen from `vendor/`
-  set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
-  add_subdirectory("vendor/eigen/" "eigen") # SYSTEM)
-endif (NOT EIGEN3_FOUND)
-
-find_package(DDC 0.4 QUIET COMPONENTS fft pdi splines)
+find_package(DDC 0.4 QUIET COMPONENTS fft splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory("vendor/ddc/" "ddc") # SYSTEM)
 endif()
-
-set(koliop_BUILD_TESTING OFF CACHE BOOL "")
-set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
-set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
-add_subdirectory("vendor/koliop/" "koliop") # SYSTEM)
 
 ###############################################################################################
 #                              Build libraries and executables
@@ -135,15 +96,10 @@ add_subdirectory("vendor/koliop/" "koliop") # SYSTEM)
 ## Change the C++ flags to the voice specific ones
 set(CMAKE_CXX_FLAGS "${GYSELALIBXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
-set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
+set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx)
 
 ## Get the main code in `src/`
 add_subdirectory(src/)
-
-## Build the simulations (applications mains) in `simulations/`
-if("${GYSELALIBXX_BUILD_SIMULATIONS}")
-add_subdirectory(simulations/)
-endif()
 
 ## if tests are enabled, build the tests in `tests/`
 if("${GYSELALIBXX_BUILD_TESTING}")

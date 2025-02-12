@@ -2,7 +2,6 @@
 #include <string>
 
 #include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
 
 #include "krook_source_constant.hpp"
 #include "mask_tanh.hpp"
@@ -43,27 +42,6 @@ KrookSourceConstant::KrookSourceConstant(
     // target distribution function
     MaxwellianEquilibrium::compute_maxwellian(get_field(m_ftarget), m_density, m_temperature, 0.);
     auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(m_ftarget));
-
-    switch (m_type) {
-    case RhsType::Source:
-        ddc::expose_to_pdi("krook_source_constant_extent", m_extent);
-        ddc::expose_to_pdi("krook_source_constant_stiffness", m_stiffness);
-        ddc::expose_to_pdi("krook_source_constant_amplitude", m_amplitude);
-        ddc::expose_to_pdi("krook_source_constant_density", m_density);
-        ddc::expose_to_pdi("krook_source_constant_temperature", m_temperature);
-        ddc::expose_to_pdi("krook_source_constant_ftarget", ftarget_host);
-        ddc::expose_to_pdi("krook_source_constant_mask", mask_host);
-        break;
-    case RhsType::Sink:
-        ddc::expose_to_pdi("krook_sink_constant_extent", m_extent);
-        ddc::expose_to_pdi("krook_sink_constant_stiffness", m_stiffness);
-        ddc::expose_to_pdi("krook_sink_constant_amplitude", m_amplitude);
-        ddc::expose_to_pdi("krook_sink_constant_density", m_density);
-        ddc::expose_to_pdi("krook_sink_constant_temperature", m_temperature);
-        ddc::expose_to_pdi("krook_sink_constant_ftarget", ftarget_host);
-        ddc::expose_to_pdi("krook_sink_constant_mask", mask_host);
-        break;
-    }
 }
 
 DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, double const dt) const

@@ -7,9 +7,6 @@ target_include_directories(timestepper
 target_link_libraries(timestepper INTERFACE
     DDC::core
     gslx::data_types
-    gslx::math_tools
-    gslx::multipatch_data_types
-    gslx::multipatch_utils
     gslx::utils
 )
 add_library(gslx::timestepper ALIAS timestepper)

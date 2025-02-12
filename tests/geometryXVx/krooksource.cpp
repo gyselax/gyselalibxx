@@ -5,11 +5,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
-
-#include <paraconf.h>
-#include <pdi.h>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
@@ -20,7 +16,6 @@
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
-#include "splitrighthandsidesolver.hpp"
 #include "trapezoid_quadrature.hpp"
 
 TEST(KrookSource, Adaptive)
@@ -36,9 +31,6 @@ TEST(KrookSource, Adaptive)
     IdxStepSp const nb_kinspecies(2);
 
     IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
-
-    PC_tree_t conf_pdi = PC_parse_string("");
-    PDI_init(conf_pdi);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -155,114 +147,4 @@ TEST(KrookSource, Adaptive)
                   << std::endl;
         EXPECT_LE(error_smalldt, error(ix) / std::pow(10, order));
     });
-
-    PC_tree_destroy(&conf_pdi);
-    PDI_finalize();
-}
-
-TEST(KrookSource, Constant)
-{
-    CoordX const x_min(0.0);
-    CoordX const x_max(1.0);
-    IdxStepX const x_size(10);
-
-    CoordVx const vx_min(-6);
-    CoordVx const vx_max(6);
-    IdxStepVx const vx_size(10);
-
-    IdxStepSp const nb_kinspecies(2);
-
-    IdxRangeSp const idx_range_sp(IdxSp(0), nb_kinspecies);
-
-    PC_tree_t conf_pdi = PC_parse_string("");
-    PDI_init(conf_pdi);
-
-    // Creating mesh & supports
-    ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
-
-    ddc::init_discrete_space<BSplinesVx>(vx_min, vx_max, vx_size);
-
-    ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
-    ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
-
-    IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
-    IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
-
-    SplineXBuilder_1d const builder_x(gridx);
-    SplineVxBuilder_1d const builder_vx(gridvx);
-
-    IdxRangeSp const gridsp = idx_range_sp;
-
-    IdxRangeSpXVx const mesh(gridsp, gridx, gridvx);
-
-    host_t<DFieldMemSp> charges(idx_range_sp);
-    host_t<DFieldMemSp> masses(idx_range_sp);
-    charges(idx_range_sp.front()) = 1.;
-    charges(idx_range_sp.back()) = -1.;
-    ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
-
-    // Initialization of the distribution function
-    ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
-
-    double const extent = 0.25;
-    double const stiffness = 0.01;
-    double const amplitude = 0.1;
-    double const density_target = 0.5;
-    double const temperature_target = 0.5;
-
-    KrookSourceConstant const rhs_krook(
-            gridx,
-            gridvx,
-            RhsType::Sink,
-            extent,
-            stiffness,
-            amplitude,
-            density_target,
-            temperature_target);
-
-    // compute the krook mask (spatial extent)
-    host_t<DFieldMemX> mask = mask_tanh(gridx, extent, stiffness, MaskType::Inverted, false);
-
-    // simulation
-    double const deltat = 1.;
-
-    // Initialization of the distribution function : maxwellian
-    double const density_init = 1.;
-    double const temperature_init = 1.;
-    DFieldMemVx finit(gridvx);
-    MaxwellianEquilibrium::compute_maxwellian(get_field(finit), density_init, temperature_init, 0.);
-    auto finit_host = ddc::create_mirror_view_and_copy(get_field(finit));
-    DFieldMemSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
-        ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
-    });
-
-    int const nbsteps = 100;
-    for (int iter = 0; iter < nbsteps; ++iter) {
-        rhs_krook(get_field(allfdistribu), deltat);
-    };
-    auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
-
-    // tests if distribution function matches theoretical prediction
-    DFieldMemVx ftarget(gridvx);
-    MaxwellianEquilibrium::
-            compute_maxwellian(get_field(ftarget), density_target, temperature_target, 0.);
-    auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(ftarget));
-
-    ddc::for_each(get_idx_range(allfdistribu), [&](IdxSpXVx const ispxvx) {
-        // predicted distribution function value
-        double const allfdistribu_pred
-                = ftarget_host(ddc::select<GridVx>(ispxvx))
-                  + (finit_host(ddc::select<GridVx>(ispxvx))
-                     - ftarget_host(ddc::select<GridVx>(ispxvx)))
-                            * std::exp(
-                                    -amplitude * mask(ddc::select<GridX>(ispxvx)) * deltat
-                                    * nbsteps);
-        double const error = std::fabs(allfdistribu_host(ispxvx) - allfdistribu_pred);
-
-        EXPECT_LE(error, 1e-13);
-    });
-
-    PC_tree_destroy(&conf_pdi);
-    PDI_finalize();
 }

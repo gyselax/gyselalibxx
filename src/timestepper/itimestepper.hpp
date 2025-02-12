@@ -5,8 +5,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "multipatch_field.hpp"
-#include "multipatch_field_mem.hpp"
+#include <vector_field_common.hpp>
 
 /**
  * @brief The superclass from which all timestepping methods inherit.
@@ -22,17 +21,14 @@ template <
 class ITimeStepper
 {
     static_assert(
-            (ddc::is_chunk_v<FieldMem>) or (is_vector_field_v<FieldMem>)
-            or (is_multipatch_field_mem_v<FieldMem>));
+            (ddc::is_chunk_v<FieldMem>) or (is_vector_field_v<FieldMem>));
     static_assert(
-            (ddc::is_chunk_v<DerivFieldMem>) or (is_vector_field_v<DerivFieldMem>)
-            or (is_multipatch_field_mem_v<DerivFieldMem>));
+            (ddc::is_chunk_v<DerivFieldMem>) or (is_vector_field_v<DerivFieldMem>));
 
     static_assert(
             (std::is_same_v<
                     typename FieldMem::discrete_domain_type,
-                    typename DerivFieldMem::discrete_domain_type>)
-            || (is_multipatch_field_mem_v<FieldMem> && is_multipatch_field_mem_v<DerivFieldMem>));
+                    typename DerivFieldMem::discrete_domain_type>));
 
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible,
@@ -164,8 +160,7 @@ protected:
     KOKKOS_FUNCTION static void fill_k_total(DerivFieldType k_total, Idx i, Coord<DDims...> new_val)
     {
         static_assert(
-                (std::is_same_v<DerivField, DerivFieldType>)
-                || (is_multipatch_field_v<DerivField>));
+                (std::is_same_v<DerivField, DerivFieldType>));
         ((ddcHelper::get<DDims>(k_total)(i) = ddc::get<DDims>(new_val)), ...);
     }
 
@@ -190,44 +185,12 @@ protected:
         std::array<DerivField, n_args> k_arr({k...});
         if constexpr (is_vector_field_v<DerivField>) {
             assemble_vector_field_k_total(exec_space, k_total, func, k_arr);
-        } else if constexpr (is_multipatch_field_v<DerivField>) {
-            assemble_multipatch_field_k_total(exec_space, k_total, func, k_arr);
         } else {
             assemble_field_k_total(exec_space, k_total, func, k_arr);
         }
     }
 
 public:
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a Field (ddc::ChunkSpan).
-     * This function should be private but is public due to Cuda restrictions.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <class FieldType, class FuncType, std::size_t n_args>
-    void assemble_field_k_total(
-            ExecSpace const& exec_space,
-            FieldType k_total,
-            FuncType func,
-            std::array<FieldType, n_args> k_arr) const
-    {
-        static_assert(ddc::is_chunk_v<FieldType>);
-        using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        ddc::parallel_for_each(
-                exec_space,
-                get_idx_range(k_total),
-                KOKKOS_LAMBDA(Idx const i) {
-                    std::array<double, n_args> k_elems;
-                    for (int j(0); j < n_args; ++j) {
-                        k_elems[j] = k_arr[j](i);
-                    }
-                    k_total(i) = func(k_elems);
-                });
-    }
-
     /**
      * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a VectorField.
      * This function should be private but is public due to Cuda restrictions.
@@ -257,65 +220,5 @@ public:
                     }
                     fill_k_total(k_total, i, func(k_elems));
                 });
-    }
-
-private:
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) on one patch of a MultipatchField.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <
-            class Patch,
-            template <typename P>
-            typename T,
-            class... Patches,
-            class FuncType,
-            std::size_t n_args>
-    void assemble_multipatch_field_k_total_on_patch(
-            ExecSpace const& exec_space,
-            MultipatchField<T, Patches...> k_total,
-            FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr) const
-    {
-        using FieldType = T<Patch>;
-        static_assert((ddc::is_chunk_v<FieldType>) or (is_vector_field_v<FieldType>));
-        std::array<FieldType, n_args> k_arr_on_patch;
-        FieldType k_total_on_patch = k_total.template get<Patch>();
-        for (std::size_t i(0); i < n_args; ++i) {
-            k_arr_on_patch[i] = k_arr[i].template get<Patch>();
-        }
-        if constexpr (is_vector_field_v<FieldType>) {
-            assemble_vector_field_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
-        } else {
-            assemble_field_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
-        }
-    }
-
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a MultipatchField.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <
-            template <typename P>
-            typename T,
-            class... Patches,
-            class FuncType,
-            std::size_t n_args>
-    void assemble_multipatch_field_k_total(
-            ExecSpace const& exec_space,
-            MultipatchField<T, Patches...> k_total,
-            FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr) const
-    {
-        ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k_arr)),
-         ...);
     }
 };

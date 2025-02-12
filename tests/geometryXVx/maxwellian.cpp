@@ -4,7 +4,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"

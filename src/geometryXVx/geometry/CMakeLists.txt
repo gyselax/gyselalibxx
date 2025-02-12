@@ -19,6 +19,3 @@ add_library("gslx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARI
 endforeach()
 
 target_compile_definitions(geometry_xperiod_vx INTERFACE PERIODIC_RDIMX)
-target_compile_definitions(geometry_xperiod_vx_user_defined_grid INTERFACE PERIODIC_RDIMX)
-target_compile_definitions(geometry_xperiod_vx_user_defined_grid INTERFACE INPUT_MESH)
-target_compile_definitions(geometry_xnonperiod_vx_user_defined_grid INTERFACE INPUT_MESH)

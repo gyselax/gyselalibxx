@@ -1,34 +1,25 @@
 # SPDX-License-Identifier: MIT
-foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
-add_library("rhs_${GEOMETRY_VARIANT}" STATIC
-    collisions_inter.cpp
-    collisions_intra.cpp
-    collisions_utils.cpp
-    kinetic_source.cpp
+add_library("rhs_xperiod_vx" STATIC
     krook_source_adaptive.cpp
     krook_source_constant.cpp
     mask_tanh.cpp
 )
 
-target_include_directories("rhs_${GEOMETRY_VARIANT}"
+target_include_directories("rhs_xperiod_vx"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries("rhs_${GEOMETRY_VARIANT}"
+target_link_libraries("rhs_xperiod_vx"
     PUBLIC
         DDC::core
-        DDC::pdi
-        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::geometry_xperiod_vx
         gslx::quadrature
         gslx::speciesinfo
-        gslx::initialization_${GEOMETRY_VARIANT}
-        gslx::matrix_tools
+        gslx::initialization_xperiod_vx
         gslx::timestepper
-        gslx::utils_${GEOMETRY_VARIANT}
+        gslx::utils_xperiod_vx
         gslx::utils
 )
 
-add_library("gslx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
-
-endforeach()
+add_library("gslx::rhs_xperiod_vx" ALIAS "rhs_xperiod_vx")

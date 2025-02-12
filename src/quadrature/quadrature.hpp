@@ -69,19 +69,6 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
 
-        // This fence helps avoid a CPU seg fault. See #290 for more details
-        exec_space.fence();
-        // This condition is necessary to execute in serial, even in a device activated build.
-        // Without it a seg fault appears
-        if constexpr (std::is_same_v<ExecutionSpace, Kokkos::DefaultHostExecutionSpace>) {
-            return ddc::transform_reduce(
-                    get_idx_range(coeff_proxy),
-                    0.0,
-                    ddc::reducer::sum<double>(),
-                    KOKKOS_LAMBDA(IdxQuadrature const ix) {
-                        return coeff_proxy(ix) * integrated_function(ix);
-                    });
-        } else {
             return ddc::parallel_transform_reduce(
                     exec_space,
                     get_idx_range(coeff_proxy),
@@ -90,7 +77,6 @@ public:
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
-        }
     }
 
     /**
