@@ -451,7 +451,11 @@ auto create_mirror_view_and_copy(
     if constexpr (Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible) {
         return field;
     } else {
-        VectorFieldMem<std::remove_const_t<ElementType>, IdxRangeType, NDTag<Dims...>, MemorySpace>
+        VectorFieldMem<
+                std::remove_const_t<ElementType>,
+                IdxRangeType,
+                NDTag<Dims...>,
+                typename ExecSpace::memory_space>
                 field_alloc(get_idx_range(field));
         ((ddc::parallel_deepcopy(field_alloc.template get<Dims>(), field.template get<Dims>())),
          ...);
