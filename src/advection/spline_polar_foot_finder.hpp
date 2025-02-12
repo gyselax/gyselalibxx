@@ -62,9 +62,8 @@ class SplinePolarFootFinder
     static_assert(std::is_same_v<
                   typename SplineRThetaBuilder::memory_space,
                   typename SplineRThetaEvaluatorConstBound::memory_space>);
-    static_assert(is_accessible_v<
-                  typename SplineRThetaBuilder::exec_space,
-                  LogicalToPhysicalMapping>);
+    static_assert(
+            is_accessible_v<typename SplineRThetaBuilder::exec_space, LogicalToPhysicalMapping>);
     static_assert(is_accessible_v<
                   typename SplineRThetaBuilder::exec_space,
                   LogicalToPseudoPhysicalMapping>);
@@ -220,7 +219,7 @@ public:
 
         // Compute the advection field in the advection domain.
         auto advection_field_in_adv_domain = create_geometry_mirror_view(
-                Kokkos::DefaultHostExecutionSpace(),
+                Kokkos::DefaultExecutionSpace(),
                 advection_field,
                 m_pseudo_physical_to_physical);
 
