@@ -33,18 +33,12 @@
  *      A mapping from the logical domain to the domain where the advection is
  *      carried out. This may be a pseudo-physical domain or the physical domain
  *      itself.
- * @tparam SplineRThetaBuilder_host
+ * @tparam SplineRThetaBuilder
  *      A 2D SplineBuilder to construct a spline on a polar domain.
- *      The code is written generally to handle any builder but only a host
- *      builder has been tested for now. Use the GPU version at your own peril
- *      until this class has been officially ported.
- * @tparam SplineRThetaEvaluatorConstBound_host
+ * @tparam SplineRThetaEvaluatorConstBound
  *      A 2D SplineEvaluator to evaluate a spline on a polar domain.
  *      A boundary condition must be provided in case the foot of the characteristic
  *      is found outside the domain.
- *      The code is written generally to handle any evaluator but only a host
- *      evaluator has been tested for now. Use the GPU version at your own peril
- *      until this class has been officially ported.
  *
  * @see BslAdvectionRTheta
  */
@@ -52,38 +46,38 @@ template <
         class TimeStepper,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
-        class SplineRThetaBuilder_host,
-        class SplineRThetaEvaluatorConstBound_host>
+        class SplineRThetaBuilder,
+        class SplineRThetaEvaluatorConstBound>
 class SplinePolarFootFinder
     : public IPolarFootFinder<
-              typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type1,
-              typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type2,
+              typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
+              typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
               typename LogicalToPhysicalMapping::cartesian_tag_x,
               typename LogicalToPhysicalMapping::cartesian_tag_y,
-              typename SplineRThetaBuilder_host::memory_space>
+              typename SplineRThetaBuilder::memory_space>
 {
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
     static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(std::is_same_v<
-                  typename SplineRThetaBuilder_host::memory_space,
-                  typename SplineRThetaEvaluatorConstBound_host::memory_space>);
+                  typename SplineRThetaBuilder::memory_space,
+                  typename SplineRThetaEvaluatorConstBound::memory_space>);
     static_assert(is_accessible_v<
-                  typename SplineRThetaBuilder_host::exec_space,
+                  typename SplineRThetaBuilder::exec_space,
                   LogicalToPhysicalMapping>);
     static_assert(is_accessible_v<
-                  typename SplineRThetaBuilder_host::exec_space,
+                  typename SplineRThetaBuilder::exec_space,
                   LogicalToPseudoPhysicalMapping>);
 
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
     using base_type = IPolarFootFinder<
-            typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type1,
-            typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type2,
+            typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
+            typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
             typename LogicalToPhysicalMapping::cartesian_tag_x,
             typename LogicalToPhysicalMapping::cartesian_tag_y,
-            typename SplineRThetaBuilder_host::memory_space>;
+            typename SplineRThetaBuilder::memory_space>;
 
 private:
     using typename base_type::GridR;
@@ -93,7 +87,7 @@ private:
     using typename base_type::Theta;
     using typename base_type::X;
     using typename base_type::Y;
-    using ExecSpace = typename SplineRThetaBuilder_host::exec_space;
+    using ExecSpace = typename SplineRThetaBuilder::exec_space;
     /**
      * @brief Tag the first dimension in the advection index range.
      */
@@ -120,8 +114,8 @@ private:
     using PseudoPhysicalToPhysicalMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
-    using BSplinesR = typename SplineRThetaBuilder_host::bsplines_type1;
-    using BSplinesTheta = typename SplineRThetaBuilder_host::bsplines_type2;
+    using BSplinesR = typename SplineRThetaBuilder::bsplines_type1;
+    using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
 
     TimeStepper const& m_time_stepper;
 
@@ -129,8 +123,8 @@ private:
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
 
-    SplineRThetaBuilder_host const& m_builder_advection_field;
-    SplineRThetaEvaluatorConstBound_host const& m_evaluator_advection_field;
+    SplineRThetaBuilder const& m_builder_advection_field;
+    SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
 
 public:
     /// The type of a field on the polar plane on a compatible memory space.
@@ -185,8 +179,8 @@ public:
             TimeStepper const& time_stepper,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical_mapping,
-            SplineRThetaBuilder_host const& builder_advection_field,
-            SplineRThetaEvaluatorConstBound_host const& evaluator_advection_field,
+            SplineRThetaBuilder const& builder_advection_field,
+            SplineRThetaEvaluatorConstBound const& evaluator_advection_field,
             double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
