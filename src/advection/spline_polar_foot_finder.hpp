@@ -219,7 +219,7 @@ public:
 
         // Compute the advection field in the advection domain.
         auto advection_field_in_adv_domain = create_geometry_mirror_view(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 advection_field,
                 m_pseudo_physical_to_physical);
 

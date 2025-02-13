@@ -63,6 +63,11 @@ class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
     using EulerMethod
+            = Euler<FieldMemRTheta<CoordRTheta>,
+                    DVectorFieldMemRTheta<X, Y>,
+                    Kokkos::DefaultExecutionSpace>;
+
+    using EulerMethod_host
             = Euler<host_t<FieldMemRTheta<CoordRTheta>>,
                     host_t<DVectorFieldMemRTheta<X, Y>>,
                     Kokkos::DefaultHostExecutionSpace>;
@@ -74,14 +79,21 @@ private:
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
+    using SplinePolarFootFinderType_host = SplinePolarFootFinder<
+            EulerMethod_host,
+            LogicalToPhysicalMapping,
+            LogicalToPseudoPhysicalMapping,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluatorConstBound_host>;
+
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
     BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
             m_advection_solver;
 
-    EulerMethod const m_euler;
-    SplinePolarFootFinderType const m_find_feet;
+    EulerMethod_host const m_euler;
+    SplinePolarFootFinderType_host const m_find_feet;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -109,8 +121,6 @@ public:
      * @param[in] builder
      *      A spline builder to get the spline representation of the
      *      advection field and the RHS.
-     * @param[in] rhs_evaluator
-     *      The evaluator of B-splines for the RHS.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical
      *      potential.
@@ -124,7 +134,6 @@ public:
                     advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
-            SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<
                     GridR,
                     GridTheta,
@@ -143,7 +152,6 @@ public:
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
-
     {
     }
 

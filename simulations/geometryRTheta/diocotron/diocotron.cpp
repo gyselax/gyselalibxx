@@ -231,7 +231,6 @@ int main(int argc, char** argv)
             advection_operator,
             mesh_rp,
             builder_host,
-            spline_evaluator_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
 #elif defined(IMPLICIT_PREDCORR)
@@ -241,7 +240,6 @@ int main(int argc, char** argv)
             advection_operator,
             mesh_rp,
             builder_host,
-            spline_evaluator_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
 #endif
