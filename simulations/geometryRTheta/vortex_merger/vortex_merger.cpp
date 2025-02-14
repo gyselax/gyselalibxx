@@ -198,10 +198,8 @@ int main(int argc, char** argv)
             advection_operator,
             grid,
             builder_host,
-            builder,
             poisson_solver,
-            spline_evaluator_extrapol_host,
-            spline_evaluator_extrapol);
+            spline_evaluator_extrapol_host);
 
 
 

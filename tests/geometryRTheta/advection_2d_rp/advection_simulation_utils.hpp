@@ -376,7 +376,7 @@ void simulate(
     host_t<DFieldMemRTheta> allfdistribu_test(grid);
     host_t<DFieldRTheta> allfdistribu_advected_test;
 
-    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec_host(grid);
 
 
     // START TEST -------------------------------------------------------------------------------
@@ -400,8 +400,8 @@ void simulate(
         CoordXY const advection_field = advection_field_test(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<X>(advection_field_test_vec)(irp) = ddc::get<X>(advection_field);
-        ddcHelper::get<Y>(advection_field_test_vec)(irp) = ddc::get<Y>(advection_field);
+        ddcHelper::get<X>(advection_field_test_vec_host)(irp) = ddc::get<X>(advection_field);
+        ddcHelper::get<Y>(advection_field_test_vec_host)(irp) = ddc::get<Y>(advection_field);
     });
 
 
@@ -410,7 +410,7 @@ void simulate(
     for (int i(0); i < iteration_number; ++i) {
         allfdistribu_advected_test = advection_operator(
                 get_field(allfdistribu_test),
-                get_const_field(advection_field_test_vec),
+                get_const_field(advection_field_test_vec_host),
                 dt);
 
         // Save the advected function for each iteration:
@@ -476,11 +476,18 @@ void simulate(
     // SAVE DATA --------------------------------------------------------------------------------
     // Save the computed characteristic feet:
     if (save_feet) {
-        host_t<FieldMemRTheta<CoordRTheta>> feet(grid);
-        ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
+        FieldMemRTheta<CoordRTheta> feet_alloc(grid);
+        FieldRTheta<CoordRTheta> feet = get_field(feet_alloc);
+        auto advection_field_test_vec = ddcHelper::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(advection_field_test_vec_host));
+        ddc::parallel_for_each(
+                grid,
+                KOKKOS_LAMBDA(const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
         foot_finder(get_field(feet), get_const_field(advection_field_test_vec), dt);
         std::string const name = output_folder + "/feet_computed.txt";
-        output_feet(to_physical_mapping, grid, get_field(feet), name);
+        auto feet_host = ddc::create_mirror_view_and_copy(feet);
+        output_feet(to_physical_mapping, grid, get_field(feet_host), name);
     }
 
     // Save the values of the exact function at the initial and final states:
