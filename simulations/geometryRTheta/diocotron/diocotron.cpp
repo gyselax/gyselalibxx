@@ -16,6 +16,7 @@
 #include "bsl_predcorr_second_order_implicit.hpp"
 #include "cartesian_to_circular.hpp"
 #include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "diocotron_initialization_equilibrium.hpp"
@@ -55,7 +56,8 @@ using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
-using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+// using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+using LogicalToPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
 
 namespace fs = std::filesystem;
 
@@ -123,7 +125,7 @@ int main(int argc, char** argv)
             ddc::PeriodicExtrapolationRule<Theta>(),
             ddc::PeriodicExtrapolationRule<Theta>());
 
-    const LogicalToPhysicalMapping to_physical_mapping;
+    const LogicalToPhysicalMapping to_physical_mapping(0.3,1.4);
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
