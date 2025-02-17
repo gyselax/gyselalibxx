@@ -90,7 +90,7 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-find_package(Kokkos 4.4.1)
+find_package(Kokkos 4.5.1)
 if(NOT "${Kokkos_FOUND}")
   ## Use Kokkos from `vendor/`
   if("${Kokkos_ENABLE_CUDA}")
@@ -121,21 +121,6 @@ set(koliop_BUILD_TESTING OFF CACHE BOOL "")
 set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
 set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
 add_subdirectory("vendor/koliop/" "koliop") # SYSTEM)
-
-## Use the kokkos-tools for profiling purpose from `vendor/`
-include(vendor/kokkos-tools/cmake/utils.cmake)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/vendor/kokkos-tools/common ${CMAKE_CURRENT_SOURCE_DIR}/vendor/kokkos-tools/profiling/all)
-configure_file(vendor/kokkos-tools/common/kp_config.hpp.in kokkos-tools/profiling/simple-kernel-timer/kp_config.hpp)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-kernel-timer) # Weird trick to get access to kp_config.hpp
-set(BUILD_SHARED_LIBS_DUMP "${BUILD_SHARED_LIBS}")
-set(BUILD_SHARED_LIBS ON) #Needed to get libkp_kernel_timer.so
-add_subdirectory("vendor/kokkos-tools/profiling/simple-kernel-timer/" "kokkos-tools/profiling/simple-kernel-timer")
-add_compile_definitions(KP_KERNEL_TIMER_PATH="${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/simple-kernel-timer/libkp_kernel_timer.so")
-if (${KOKKOS_ENABLE_CUDA})
-    add_subdirectory("vendor/kokkos-tools/profiling/nvtx-connector/" "kokkos-tools/profiling/nvtx-connector")
-    add_compile_definitions(KOKKOS_TOOLS_LIBS="${CMAKE_CURRENT_BINARY_DIR}/kokkos-tools/profiling/nvtx-connector/libkp_nvtx_connector.so")
-endif()
-set(BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS_DUMP}")
 
 ###############################################################################################
 #                              Build libraries and executables
