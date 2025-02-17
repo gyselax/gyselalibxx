@@ -10,7 +10,7 @@ runs:
   steps:
     - name: Compile code
       run: |
-        cmake -DCMAKE_TOOLCHAIN=${{ inputs.toolchain }} -B build -S .
+        cmake -DCMAKE_TOOLCHAIN_FILE=${{ inputs.toolchain }} -B build -S .
         cmake --build build --parallel 4
       shell: bash
 
