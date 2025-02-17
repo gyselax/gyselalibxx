@@ -33,10 +33,11 @@ using to_coord_t = typename ToCoord<ValidIndexSet>::type;
 template <class ElementType, class... ValidIndexSet>
 class Tensor
 {
-    static_assert(std::conjunction_v<tensor_tools::is_vector_index_set<ValidIndexSet>...>);
-    static_assert(std::conjunction_v<std::disjunction<
-                          tensor_tools::is_covariant_vector_index_set<ValidIndexSet>,
-                          tensor_tools::is_contravariant_vector_index_set<ValidIndexSet>>...>);
+    static_assert((is_vector_index_set_v<ValidIndexSet> && ...));
+    static_assert(
+            (((is_covariant_vector_index_set_v<ValidIndexSet>)
+              || (is_contravariant_vector_index_set_v<ValidIndexSet>))
+             && ...));
 
     using AllIndexSets = ddc::detail::TypeSeq<ValidIndexSet...>;
 
