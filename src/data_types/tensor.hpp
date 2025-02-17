@@ -83,7 +83,7 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    explicit KOKKOS_FUNCTION Tensor() {}
+    explicit KOKKOS_DEFAULTED_FUNCTION Tensor() = default;
 
     /**
      * @brief Construct a tensor object initialised with a value.
@@ -104,7 +104,7 @@ public:
             class... Params,
             class = std::enable_if_t<(std::is_convertible_v<Params, ElementType> && ...)>,
             class = std::enable_if_t<sizeof...(Params) == size()>>
-    KOKKOS_FUNCTION Tensor(Params... elements) : m_data({elements...})
+    explicit KOKKOS_FUNCTION Tensor(Params... elements) : m_data({elements...})
     {
         static_assert(
                 rank() == 1,
