@@ -63,7 +63,7 @@ jobs:
       - name: Set PR to draft to avoid unnecessary runs
         if: github.repository == 'gyselax/gyselalibxx'
         run: |
-          isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
+          isDraft=${{ github.event.pull_request.draft }}
           if [ "${isDraft}" != "true" ]
           then
             if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Set PR to draft to avoid unnecessary runs
         run: |
-          isDraft=${{ github.event.pull_request.draft || (github.repository != 'gyselax/gyselalibxx' && ! contains(github.event.pull_request.labels.*.name, 'Ready to review')) }}
+          isDraft=${{ github.event.pull_request.draft }}
           if [ "${isDraft}" != "true" ]
           then
             if [ "${{github.repository == 'gyselax/gyselalibxx'}}" == "true" ]
