@@ -40,11 +40,8 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
         X,
         Y,
