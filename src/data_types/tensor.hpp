@@ -140,7 +140,7 @@ public:
      * @return The relevant element of the tensor.
      */
     template <class QueryTensorIndexElement>
-    KOKKOS_FUNCTION ElementType get() const
+    KOKKOS_FUNCTION ElementType const& get() const
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
         return m_data[QueryTensorIndexElement::index()];
