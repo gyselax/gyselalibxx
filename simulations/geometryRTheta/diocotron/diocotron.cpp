@@ -15,10 +15,10 @@
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
 #include "cartesian_to_circular.hpp"
-#include "circular_to_cartesian.hpp"
-#include "czarny_to_cartesian.hpp"
 #include "cartesian_to_czarny.hpp"
+#include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "diocotron_initialization_equilibrium.hpp"
 #include "discrete_mapping_builder.hpp"
@@ -126,8 +126,8 @@ int main(int argc, char** argv)
             ddc::PeriodicExtrapolationRule<Theta>(),
             ddc::PeriodicExtrapolationRule<Theta>());
 
-    const LogicalToPhysicalMapping to_physical_mapping(0.3,1.4);
-    const LogicalToPseudoPhysicalMapping to_pseudo_physical_mapping(0.3,1.4);
+    const LogicalToPhysicalMapping to_physical_mapping(0.3, 1.4);
+    const LogicalToPseudoPhysicalMapping to_pseudo_physical_mapping(0.3, 1.4);
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             to_physical_mapping,
