@@ -151,7 +151,7 @@ public:
      * @param other The tensor to be copied.
      * @return A reference to the current tensor.
      */
-    KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor other) = default;
+    KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
 
     /**
      * @brief An operator to multiply all the element of the current tensor by
