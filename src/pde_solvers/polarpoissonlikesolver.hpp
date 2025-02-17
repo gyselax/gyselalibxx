@@ -441,9 +441,12 @@ public:
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
+        // m_gko_matrix = std::make_unique<MatrixBatchCsr<
+        //         Kokkos::DefaultExecutionSpace,
+        //         MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements);
         m_gko_matrix = std::make_unique<MatrixBatchCsr<
                 Kokkos::DefaultExecutionSpace,
-                MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements);
+                MatrixBatchCsrSolver::CG>>(1, m_matrix_size, n_matrix_elements, 10000, 1e-15, true);
         auto [values, col_idx, nnz_per_row] = m_gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
