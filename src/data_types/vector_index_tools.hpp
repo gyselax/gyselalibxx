@@ -75,8 +75,7 @@ template <class... Dims>
 struct is_covariant_vector_index_set<VectorIndexSet<Dims...>>
 {
     /// Compile-time boolean indicating if the vector indices are covariant.
-    static constexpr bool value
-            = std::conjunction_v<std::integral_constant<bool, Dims::IS_COVARIANT>...>;
+    static constexpr bool value = (Dims::IS_COVARIANT && ...);
 };
 
 /**
@@ -87,8 +86,7 @@ template <class... Dims>
 struct is_contravariant_vector_index_set<VectorIndexSet<Dims...>>
 {
     /// Compile-time boolean indicating if the vector indices are contravariant.
-    static constexpr bool value
-            = std::conjunction_v<std::integral_constant<bool, Dims::IS_CONTRAVARIANT>...>;
+    static constexpr bool value = (Dims::IS_CONTRAVARIANT && ...);
 };
 
 /**
