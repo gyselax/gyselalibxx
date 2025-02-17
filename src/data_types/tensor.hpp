@@ -117,7 +117,7 @@ public:
      * @param o_tensor The tensor to be copied.
      */
     template <class OElementType>
-    explicit KOKKOS_FUNCTION Tensor(Tensor<OElementType, ValidIndexSet...> o_tensor)
+    explicit KOKKOS_FUNCTION Tensor(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
         : m_data(o_tensor.m_data)
     {
     }
@@ -151,13 +151,7 @@ public:
      * @param other The tensor to be copied.
      * @return A reference to the current tensor.
      */
-    KOKKOS_FUNCTION Tensor& operator=(Tensor other)
-    {
-        for (int i(0); i < s_n_elements; ++i) {
-            m_data[i] = other.m_data[i];
-        }
-        return *this;
-    }
+    KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor other) = default;
 
     /**
      * @brief An operator to multiply all the element of the current tensor by
