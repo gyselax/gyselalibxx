@@ -1,0 +1,30 @@
+name: Clean up
+
+on:
+  check_run:
+    types: completed
+
+jobs:
+
+  set_labels:
+    runs-on: ubuntu-latest
+    name: Set PR labels
+    if: github.repository == 'gyselax/gyselalibxx' && github.event.check_run.pull_requests
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set PR labels for reviews
+        run: |
+          STATES=$(gh pr checks ${{ github.event.check_run.pull_requests.number }} --required --json state)
+          N_PASSES=$(echo $STATES | grep -o "\"state\":\"SUCCESS\"" | wc -l)
+          if [[ ${N_PASSES} == 10 ]]
+          then
+            # If all required tests are passing then mark as ready to review
+            gh pr edit ${{ github.event.check_run.pull_requests.number }} --add-label "Ready to review"
+          fi
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+
