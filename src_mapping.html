@@ -108,31 +108,132 @@ $(document).ready(function(){initNavTree('src_mapping.html',''); initResizable()
 <div class="contents">
 <div class="textblock"><p>This folder contains code describing tools for handling different coordinate systems.</p>
 <p>The current coordinate transformations implemented are:</p>
+<h1><a class="anchor" id="src_mapping__Analytically_invertible_coordinate_transformations"></a>
+Analytically invertible coordinate transformations</h1>
+<h3><a class="anchor" id="autotoc_md72"></a>
+Circular coordinate transformation</h3>
 <ul>
-<li>Analytically invertible coordinate transformations such as:<ul>
-<li>Circular coordinate transformation (CircularToCartesian/CartesianToCircular):<ul>
-<li>\(x(r,\theta) = r \cos(\theta),\)</li>
-<li>\(y(r,\theta) = r \sin(\theta).\)</li>
-</ul>
-</li>
-<li>Czarny coordinate transformation (CzarnyToCartesian/CartesianToCzarny):<ul>
-<li>\(x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} \right),\)</li>
-<li>\(y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta)} },\) with \(\xi = 1/\sqrt{1 - \epsilon^2 /4}\) and \(e\) and \(\epsilon\) given as parameters.</li>
-</ul>
-</li>
-<li>Barycentric coordinate transformation (<a class="el" href="classBarycentricToCartesian.html" title="A class to convert barycentric coordinates to Cartesian coordinates on a triangle.">BarycentricToCartesian</a>):<ul>
-<li>\((c_1, c_2, c_3) -&gt; (x,y)\)</li>
-</ul>
+<li>Mapping (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a>):  <p class="formulaDsp">
+\[\left\{
+\begin{aligned}
+    &amp; x(r,\theta) = r \cos(\theta), \\
+    &amp; y(r,\theta) = r \sin(\theta).
+\end{aligned}
+\right.
+\]
+</p>
 </li>
 </ul>
-</li>
-<li>Discrete coordinate transformation defined on B-splines (<a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a>):<ul>
-<li>\(x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),\)</li>
-<li>\(y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).\)</li>
+<p class="formulaDsp">
+\[J (r,\theta) = 
+\begin{bmatrix} 
+    \cos(\theta) &amp; -r\sin(\theta) \\
+    \sin(\theta) &amp;  r\cos(\theta) \\
+\end{bmatrix}.
+\]
+</p>
+<p> with \(\det(J) = r\).</p>
+<ul>
+<li>Inverse mapping (<a class="el" href="classCartesianToCircular.html" title="A class for describing the circular 2D mapping.">CartesianToCircular</a>):  <p class="formulaDsp">
+\[\left\{
+\begin{aligned}
+    &amp; r(x,y) = \sqrt{x^2 + y^2}, \\
+    &amp; \theta(x,y) = \text{atan2}(y, x).
+\end{aligned}
+\right.
+\]
+</p>
+ </li>
 </ul>
-</li>
-<li>Combined coordinate transformation which combines two of the coordinate transformations above.</li>
+<h3><a class="anchor" id="autotoc_md73"></a>
+Czarny coordinate transformation</h3>
+<ul>
+<li>Mapping (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a>): Taking \(\varepsilon \in ]0,1[\) and \(e\) as parameters.  <p class="formulaDsp">
+\[\left\{
+\begin{aligned}
+    &amp; x(r,\theta) = \frac{1}{\varepsilon} \left( 1 - \sqrt{1 + \varepsilon(\varepsilon + 2 r \cos(\theta))} \right), \\
+    &amp; y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \varepsilon(\varepsilon + 2 r \cos(\theta))}}.
+\end{aligned}
+\right.
+\]
+</p>
+ with \(\xi = 1/\sqrt{1 - \varepsilon^2 /4}\).</li>
 </ul>
+<p class="formulaDsp">
+\[J (r,\theta) 
+%= 
+% \begin{bmatrix} 
+%   -\frac{\cos(\theta)}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}} 
+%   &amp; 
+%   \frac{r\sin(\theta)}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}} 
+%   \\
+%   \frac{\cos(\theta)}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}} 
+%   \frac{e\varepsilon \xi r \sin(\theta)}{\left(2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}\right)^2}
+%   + 
+%   \frac{e \xi \sin(\theta)}{2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}
+%   &amp; 
+%   \frac{-r\sin(\theta)}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}} 
+%   \frac{e\varepsilon \xi r \sin(\theta)}{\left(2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}\right)^2}
+%   + 
+%   \frac{e \xi r\cos(\theta)}{2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}
+%   \\
+% \end{bmatrix}
+= 
+\frac{1}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}
+\begin{bmatrix} 
+    -1
+    &amp; 
+    0 
+    \\
+    \frac{e\varepsilon \xi r \sin(\theta)}{\left(2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}\right)^2}
+    &amp; 
+    \frac{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}{2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}
+    \\
+\end{bmatrix}
+\begin{bmatrix} 
+    \cos(\theta) &amp; -r\sin(\theta) \\
+    \sin(\theta) &amp;  r\cos(\theta) \\
+\end{bmatrix}.
+\]
+</p>
+<p> with \(\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\frac{e \xi}{2 - \sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\).</p>
+<ul>
+<li>Inverse mapping (<a class="el" href="classCartesianToCzarny.html" title="A class for describing the Czarny 2D mapping.">CartesianToCzarny</a>): Taking \(\varepsilon \in ]0,1[\) and \(e\) as parameters.  <p class="formulaDsp">
+\[\left\{
+\begin{aligned}
+    &amp; r(x,y) = \sqrt{\frac{y^2 (1+\varepsilon x)^2}{e^2\xi^2+0.25(\varepsilon x^2-2x-\varepsilon)^2}}, \\
+    &amp; \theta(x,y) = \text{atan2}(2y (1+\varepsilon x), e \xi (\varepsilon x^2 - 2x-\varepsilon)).
+\end{aligned}
+\right.
+\]
+</p>
+ </li>
+</ul>
+<h3><a class="anchor" id="autotoc_md74"></a>
+Barycentric coordinate transformation</h3>
+<ul>
+<li>Mapping (<a class="el" href="classBarycentricToCartesian.html" title="A class to convert barycentric coordinates to Cartesian coordinates on a triangle.">BarycentricToCartesian</a>):  <p class="formulaDsp">
+\[ (c_1, c_2, c_3) \rightarrow (x, y).
+\]
+</p>
+</li>
+</ul>
+<h1><a class="anchor" id="src_mapping__Discrete_coordinate_transformation_defined_on_B-splines"></a>
+Discrete coordinate transformation defined on B-splines</h1>
+<ul>
+<li>Mapping (<a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a>)  <p class="formulaDsp">
+\[\left\{
+\begin{aligned}
+    &amp; x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
+    &amp; y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
+\end{aligned}
+\right.
+\]
+</p>
+</li>
+</ul>
+<h1><a class="anchor" id="src_mapping__Combined_coordinate_transformation_which_combines_two_of_the_coordinate_transformations_above"></a>
+. Combined coordinate transformation which combines two of the coordinate transformations above.</h1>
 <p>The tools are:</p><ul>
 <li><a class="el" href="classInverseJacobianMatrix.html" title="A class to calculate the inverse of the Jacobian matrix.">InverseJacobianMatrix</a> : this tool calculates the inverse Jacobian matrix on the specified coordinate system.</li>
 <li><a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a> : this tool calculates the inverse Jacobian matrix at the O-point on the specified coordinate system.</li>

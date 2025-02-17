@@ -1,5 +1,8 @@
 var NAVTREEINDEX7 =
 {
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036":[15,165,6],
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af0e9d89578e2d3b2a700bd496a69a596":[15,165,11],
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af4933351800318b415a122d2a2ef07bd":[15,165,13],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af6492b7437a05bffcae91ec488fb3ebc":[15,165,12],
 "structPolarBSplinesRTheta.html":[15,169],
 "structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.html":[15,168,0,3],

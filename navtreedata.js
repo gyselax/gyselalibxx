@@ -202,7 +202,11 @@ var NAVTREE =
         [ "Polar Splines", "src_interpolation_polar_splines.html", null ]
       ] ],
       [ "Functions used for input and output.", "src_io.html", null ],
-      [ "Mappings", "src_mapping.html", null ],
+      [ "Mappings", "src_mapping.html", [
+        [ "Analytically invertible coordinate transformations", "src_mapping.html#src_mapping__Analytically_invertible_coordinate_transformations", null ],
+        [ "Discrete coordinate transformation defined on B-splines", "src_mapping.html#src_mapping__Discrete_coordinate_transformation_defined_on_B-splines", null ],
+        [ ". Combined coordinate transformation which combines two of the coordinate transformations above.", "src_mapping.html#src_mapping__Combined_coordinate_transformation_which_combines_two_of_the_coordinate_transformations_above", null ]
+      ] ],
       [ "Utility Functions", "src_math_tools.html", [
         [ "Derivative tools", "src_math_tools.html#src_math_tools__Derivative_tools", null ],
         [ "Utility tools", "src_math_tools.html#src_math_tools__Utility_tools", null ]
@@ -276,7 +280,7 @@ var NAVTREEINDEX =
 "classPolarSplineEvaluator.html#a66468d51237ba05121d617991da901f3",
 "ddc__helper_8hpp_source.html",
 "polar__spline__evaluator_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af6492b7437a05bffcae91ec488fb3ebc"
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

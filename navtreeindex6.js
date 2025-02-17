@@ -118,6 +118,9 @@ var NAVTREEINDEX6 =
 "src_interpolation_polar_splines.html":[13,8,2],
 "src_io.html":[13,9],
 "src_mapping.html":[13,10],
+"src_mapping.html#src_mapping__Analytically_invertible_coordinate_transformations":[13,10,0],
+"src_mapping.html#src_mapping__Combined_coordinate_transformation_which_combines_two_of_the_coordinate_transformations_above":[13,10,2],
+"src_mapping.html#src_mapping__Discrete_coordinate_transformation_defined_on_B-splines":[13,10,1],
 "src_math_tools.html":[13,11],
 "src_math_tools.html#src_math_tools__Derivative_tools":[13,11,0],
 "src_math_tools.html#src_math_tools__Utility_tools":[13,11,1],
@@ -246,8 +249,5 @@ var NAVTREEINDEX6 =
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f":[15,165,18],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8":[15,165,15],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33":[15,165,16],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2":[15,165,7],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036":[15,165,6],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af0e9d89578e2d3b2a700bd496a69a596":[15,165,11],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af4933351800318b415a122d2a2ef07bd":[15,165,13]
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2":[15,165,7]
 };
