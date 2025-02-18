@@ -102,6 +102,9 @@ template <class... Dims>
 using DVector = Vector<double, Dims...>;
 
 
+//----------------------------------------------
+//  Aliases for 1D splines
+//----------------------------------------------
 /// A type describing a spline builder
 template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class IdxRangeType>
 class GetSplineBuilder;
@@ -125,5 +128,53 @@ template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCon
 using get_spline_builder_t = typename GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType>::type;
 
 
+//----------------------------------------------
+//  Aliases for 2D splines
+//----------------------------------------------
+/// A type describing a 2D spline builder
+template<class ExecSpace, class BSplinesX1, class BSplinesX2,
+        class InterpolationGridX1, class InterpolationGridX2,
+        ddc::BoundCond BCLBoundX1, ddc::BoundCond BCUBoundX1,
+        ddc::BoundCond BCLBoundX2, ddc::BoundCond BCUBoundX2,
+        ddc::SplineSolver SolverType, class IdxRangeType>
+class GetSplineBuilder2D;
 
+template<class ExecSpace, class BSplinesX1, class BSplinesX2, 
+        class InterpolationGridX1, class InterpolationGridX2,
+        ddc::BoundCond BCLBoundX1, ddc::BoundCond BCUBoundX1, 
+        ddc::BoundCond BCLBoundX2, ddc::BoundCond BCUBoundX2, 
+        ddc::SplineSolver SolverType, class... Grid1D>
+class GetSplineBuilder2D<ExecSpace, BSplinesX1, BSplinesX2,
+        InterpolationGridX1, InterpolationGridX2,
+        BCLBoundX1, BCUBoundX1,
+        BCLBoundX2, BCUBoundX2,
+        SolverType, IdxRange<Grid1D...>> {
+public:
+    using type = ddc::SplineBuilder2D<
+        ExecSpace,
+        typename ExecSpace::memory_space,
+        BSplinesX1,
+        BSplinesX2,
+        InterpolationGridX1,
+        InterpolationGridX2,
+        BCLBoundX1,
+        BCUBoundX1,
+        BCLBoundX2,
+        BCUBoundX2,
+        SolverType,
+        Grid1D...>;
+};
+
+/// An alias describing a 2D spline builder
+template<class ExecSpace, class BSplinesX1, class BSplinesX2, 
+        class InterpolationGridX1, class InterpolationGridX2,
+        ddc::BoundCond BCLBoundX1, ddc::BoundCond BCUBoundX1, 
+        ddc::BoundCond BCLBoundX2, ddc::BoundCond BCUBoundX2, 
+        ddc::SplineSolver SolverType, class IdxRangeType>
+using get_spline_builder2d_t = typename GetSplineBuilder2D<ExecSpace, 
+        BSplinesX1, BSplinesX2,
+        InterpolationGridX1, InterpolationGridX2, 
+        BCLBoundX1, BCUBoundX1, 
+        BCLBoundX2, BCUBoundX2, 
+        SolverType, IdxRangeType>::type;
 
