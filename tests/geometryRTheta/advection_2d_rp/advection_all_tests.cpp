@@ -50,8 +50,11 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder_host,
+        SplineRThetaEvaluatorConstBound_host>;
 
 
 } // end namespace
@@ -123,18 +126,18 @@ private:
     NumericalParams params;
 
 public:
-    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
-    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
+    using ValFieldMem = host_t<FieldMemRTheta<CoordRTheta>>;
+    using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
 
     using NumericalTuple = std::tuple<
             NumericalMethodParameters<
-                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
+                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
             NumericalMethodParameters<
-                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
+                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
             NumericalMethodParameters<
-                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
+                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
             NumericalMethodParameters<
-                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>>;
+                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -144,7 +147,7 @@ public:
         : params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
-                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
+                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
                                   params.grid),
                           params.dt * 0.1,
                           "EULER"),
@@ -152,16 +155,16 @@ public:
                           CrankNicolson<
                                   ValFieldMem,
                                   DerivFieldMem,
-                                  Kokkos::DefaultExecutionSpace>(params.grid, 20, 1e-12),
+                                  Kokkos::DefaultHostExecutionSpace>(params.grid, 20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
                   NumericalMethodParameters(
-                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
+                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
                                   params.grid),
                           params.dt,
                           "RK3"),
                   NumericalMethodParameters(
-                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
+                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
                                   params.grid),
                           params.dt,
                           "RK4")))
@@ -175,8 +178,8 @@ struct GeneralParameters
 {
     IdxRangeRTheta grid;
     PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& interpolator;
-    SplineRThetaBuilder const& advection_builder;
-    SplineRThetaEvaluatorConstBound& advection_evaluator;
+    SplineRThetaBuilder_host const& advection_builder;
+    SplineRThetaEvaluatorConstBound_host& advection_evaluator;
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
@@ -292,8 +295,8 @@ int main(int argc, char** argv)
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
     // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder const builder(grid);
     SplineRThetaBuilder_host const builder_host(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
@@ -303,13 +306,8 @@ int main(int argc, char** argv)
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
-    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
 
     // --- Evaluator for the test advection field:
@@ -317,7 +315,7 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
 
 
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -332,9 +330,9 @@ int main(int argc, char** argv)
     CzarnyToCartMapping const from_czarny_map(0.3, 1.4);
     CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4);
     DiscreteMappingBuilder const discrete_czarny_map_builder(
-            Kokkos::DefaultExecutionSpace(),
+            Kokkos::DefaultHostExecutionSpace(),
             from_czarny_map,
-            builder,
+            builder_host,
             spline_evaluator_extrapol);
     DiscreteToCartesian const from_discrete_czarny_map = discrete_czarny_map_builder();
 
@@ -384,7 +382,7 @@ int main(int argc, char** argv)
     GeneralParameters params
             = {grid,
                interpolator,
-               builder,
+               builder_host,
                spline_evaluator_extrapol,
                final_time,
                if_save_curves,

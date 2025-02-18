@@ -158,7 +158,7 @@ int main(int argc, char** argv)
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
     SplinePolarFootFinder find_feet(
             time_stepper,

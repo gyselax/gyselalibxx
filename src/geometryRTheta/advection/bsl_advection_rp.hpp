@@ -95,7 +95,7 @@ public:
     /**
      * @brief Allocate a Field of the advected function.
      *
-     * @param [in, out] allfdistribu
+     * @param [in, out] allfdistribu_host
      *      A Field containing the values of the function we want to advect.
      * @param [in] advection_field_xy_host
      *      A DConstVectorFieldRTheta containing the values of the advection field
@@ -106,7 +106,7 @@ public:
      * @return A Field to allfdistribu advected on the time step given.
      */
     host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
+            host_t<DFieldRTheta> allfdistribu_host,
             host_t<DConstVectorFieldRTheta<X, Y>> advection_field_xy_host,
             double dt) const override
     {
@@ -128,19 +128,22 @@ public:
         // Compute the characteristic feet at tn ----------------------------------------------------
         m_find_feet(feet_rp, get_const_field(advection_field_xy), dt);
 
-        auto feet_rp_host = create_mirror_view_and_copy(feet_rp);
+        auto allfdistribu = ddc::
+                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
-        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp_host));
+        (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rp));
 
-        return allfdistribu;
+        ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
+
+        return allfdistribu_host;
     }
 
 
     /**
      * @brief Allocate a Field to the advected function.
      *
-     * @param [in, out] allfdistribu
+     * @param [in, out] allfdistribu_host
      *      A Field containing the values of the function we want to advect.
      * @param [in] advection_field_rp
      *      A DConstVectorFieldRTheta containing the values of the advection field
@@ -154,13 +157,13 @@ public:
      * @return A Field to allfdistribu advected on the time step given.
      */
     host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> allfdistribu,
+            host_t<DFieldRTheta> allfdistribu_host,
             host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY const& advection_field_xy_center,
             double dt) const override
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
-        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu));
+        IdxRangeRTheta grid(get_idx_range<GridR, GridTheta>(allfdistribu_host));
 
         const int npoints_p = IdxRangeTheta(grid).size();
         IdxRangeRTheta const grid_without_Opoint(grid.remove_first(IdxStepRTheta(1, 0)));
@@ -213,12 +216,15 @@ public:
         // Compute the characteristic feet at tn ----------------------------------------------------
         m_find_feet(feet_rp, get_const_field(advection_field_xy), dt);
 
-        auto feet_rp_host = create_mirror_view_and_copy(feet_rp);
+        auto allfdistribu = ddc::
+                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
 
         // Interpolate the function on the characteristic feet. -------------------------------------
-        (*interpolator_ptr)(allfdistribu, get_const_field(feet_rp_host));
+        (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rp));
+
+        ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
         Kokkos::Profiling::popRegion();
 
-        return allfdistribu;
+        return allfdistribu_host;
     }
 };

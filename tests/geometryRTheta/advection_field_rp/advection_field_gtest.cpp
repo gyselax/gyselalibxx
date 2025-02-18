@@ -40,9 +40,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -106,12 +104,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -124,20 +117,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Define the to_physical_mapping. ------------------------------------------------------------------------
     const LogicalToPhysicalMapping to_physical_mapping;
-    DiscreteMappingBuilder_host const discrete_mapping_builder_host(
+    DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
             builder_host,
-            spline_evaluator_extrapol_host);
-    DiscreteToCartesian const discrete_mapping_host = discrete_mapping_builder_host();
-    DiscreteMappingBuilder const discrete_mapping_builder(
-            Kokkos::DefaultExecutionSpace(),
-            to_physical_mapping,
-            builder,
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
+    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -147,22 +134,17 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             r_extrapolation_rule,
             p_extrapolation_rule,
             p_extrapolation_rule);
-    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    RK3<FieldMemRTheta<CoordRTheta>,
-        DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(grid);
+    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
+        host_t<DVectorFieldMemRTheta<X, Y>>,
+        Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
     SplinePolarFootFinder find_feet(
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
-            builder,
+            builder_host,
             spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
