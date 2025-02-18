@@ -129,9 +129,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a48ef53de806caa3b274a0acb1ca1cb4d" id="r_a48ef53de806caa3b274a0acb1ca1cb4d"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classIInterpolatorRTheta.html">IInterpolatorRTheta</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPreallocatableInterpolatorRTheta.html#a48ef53de806caa3b274a0acb1ca1cb4d">preallocate</a> () const =0</td></tr>
 <tr class="memdesc:a48ef53de806caa3b274a0acb1ca1cb4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate an instance of a pointer to an InterpolatorRTheta.  <br /></td></tr>
 <tr class="separator:a48ef53de806caa3b274a0acb1ca1cb4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2956ac969cedd10e25e86db83effc123" id="r_a2956ac969cedd10e25e86db83effc123"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPreallocatableInterpolatorRTheta.html#a2956ac969cedd10e25e86db83effc123">operator()</a> (host_t&lt; DFieldRTheta &gt; const inout_data, host_t&lt; ConstFieldRTheta&lt; CoordRTheta &gt; &gt; const coordinates) const override</td></tr>
-<tr class="memdesc:a2956ac969cedd10e25e86db83effc123"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <br /></td></tr>
-<tr class="separator:a2956ac969cedd10e25e86db83effc123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d28bfece4da02e58796a300634426e2" id="r_a4d28bfece4da02e58796a300634426e2"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPreallocatableInterpolatorRTheta.html#a4d28bfece4da02e58796a300634426e2">operator()</a> (DFieldRTheta const inout_data, ConstFieldRTheta&lt; CoordRTheta &gt; const coordinates) const override</td></tr>
+<tr class="memdesc:a4d28bfece4da02e58796a300634426e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <br /></td></tr>
+<tr class="separator:a4d28bfece4da02e58796a300634426e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class which provides access to an interpolating function which can be preallocated where useful. </p>
@@ -170,8 +170,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2956ac969cedd10e25e86db83effc123" name="a2956ac969cedd10e25e86db83effc123"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2956ac969cedd10e25e86db83effc123">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a4d28bfece4da02e58796a300634426e2" name="a4d28bfece4da02e58796a300634426e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d28bfece4da02e58796a300634426e2">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,15 +180,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">host_t&lt; DFieldRTheta &gt; IPreallocatableInterpolatorRTheta::operator() </td>
+          <td class="memname">DFieldRTheta IPreallocatableInterpolatorRTheta::operator() </td>
           <td>(</td>
-          <td class="paramtype">host_t&lt; DFieldRTheta &gt; const&#160;</td>
+          <td class="paramtype">DFieldRTheta const&#160;</td>
           <td class="paramname"><em>inout_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; ConstFieldRTheta&lt; CoordRTheta &gt; &gt; const&#160;</td>
+          <td class="paramtype">ConstFieldRTheta&lt; CoordRTheta &gt; const&#160;</td>
           <td class="paramname"><em>coordinates</em>&#160;</td>
         </tr>
         <tr>
@@ -214,7 +214,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the inout_data array containing the value of the function at the coordinates. </dd></dl>
 
-<p>Implements <a class="el" href="classIInterpolatorRTheta.html#aef9cc9d724e5b0191efad905d8bfaeee">IInterpolatorRTheta</a>.</p>
+<p>Implements <a class="el" href="classIInterpolatorRTheta.html#a69b7130c9254502ada6f7bde85c43274">IInterpolatorRTheta</a>.</p>
 
 </div>
 </div>

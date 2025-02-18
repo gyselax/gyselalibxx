@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('math__tools_8hpp_source.html',''); ini
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> x - y * std::floor(<span class="keywordtype">double</span>(x) / y);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">constexpr</span> <span class="keyword">inline</span> <span class="keywordtype">double</span> ipow(<span class="keywordtype">double</span> a, std::size_t i)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>KOKKOS_INLINE_FUNCTION <span class="keyword">constexpr</span> <span class="keywordtype">double</span> ipow(<span class="keywordtype">double</span> a, std::size_t i)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>{</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">double</span> r(1.0);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">for</span> (std::size_t j(0); j &lt; i; ++j) {</div>
@@ -172,7 +172,7 @@ $(document).ready(function(){initNavTree('math__tools_8hpp_source.html',''); ini
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> r;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">inline</span> <span class="keywordtype">double</span> ipow(<span class="keywordtype">double</span> a, <span class="keywordtype">int</span> i)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> ipow(<span class="keywordtype">double</span> a, <span class="keywordtype">int</span> i)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">double</span> r(1.0);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">if</span> (i &gt; 0) {</div>
