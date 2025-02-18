@@ -108,6 +108,7 @@ class GetSplineBuilder;
 
 template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class... Grid1D>
 class GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRange<Grid1D...>> {
+public:
     using type = ddc::SplineBuilder<
         ExecSpace,
         typename ExecSpace::memory_space,
