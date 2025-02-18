@@ -87,24 +87,6 @@ public:
     }
 
     /**
-     * @brief Get the stride from one index to the next in the I-th dimension.
-     * @tparam I The index of interest.
-     * @return The stride from one index to the next.
-     */
-    template <std::size_t I>
-    static constexpr std::size_t get_stride()
-    {
-        static_assert(I < rank());
-        if constexpr (I >= rank() - 1) {
-            return 1;
-        } else {
-            std::size_t shape_elem
-                    = ddc::type_seq_size_v<ddc::type_seq_element_t<I + 1, AllIndexSets>>;
-            return shape_elem * get_stride<I + 1>();
-        }
-    }
-
-    /**
      * @brief Get a VectorIndexSet describing all the types that can be used to describe
      * an index in dimension IDim.
      * @tparam IDim The index of interest.
@@ -151,11 +133,14 @@ private:
     template <std::size_t... Is>
     KOKKOS_FUNCTION static constexpr std::size_t internal_index(std::index_sequence<Is...>)
     {
-        return ((ddc::type_seq_rank_v<
-                         ddc::type_seq_element_t<Is, IdxTypeSeq>,
-                         typename ValidatingTensorIndexSet::get_vector_index_set_along_dim_t<
-                                 Is>> * ValidatingTensorIndexSet::template get_stride<Is>())
-                + ...);
+        Kokkos::layout_right::mapping<Kokkos::extents<
+                int,
+                ddc::type_seq_size_v<typename ValidatingTensorIndexSet::
+                                             get_vector_index_set_along_dim_t<Is>>...>>
+                mapping;
+        return mapping(ddc::type_seq_rank_v<
+                       ddc::type_seq_element_t<Is, IdxTypeSeq>,
+                       typename ValidatingTensorIndexSet::get_vector_index_set_along_dim_t<Is>>...);
     }
 
 public:
