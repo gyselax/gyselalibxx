@@ -103,36 +103,14 @@ using DVector = Vector<double, Dims...>;
 
 
 /// A type describing a spline builder
-//VG//template<class ExecSpace, class BSplines, class InterpolationGrid, class BCLBound, class BCUBound, class SolverType, class IdxRangeType>
-//VG//class GetSplineBuilder;
-//VG//
-//VG//template<class ExecSpace, class BSplines, class InterpolationGrid, class BCLBound, class BCUBound, class SolverType, class... Grid1D>
-//VG//class GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRange<Grid1D...>> {
-//VG//    using type = ddc::SplineBuilder<
-//VG//        ExecSpace,
-//VG//        ExecSpace::memory_space,
-//VG//        BSplines,
-//VG//        InterpolationGrid,
-//VG//        BCLBound,
-//VG//        BCUBound,
-//VG//        SolverType,
-//VG//        Grid1D...>;
-//VG//};
-//VG//
-//VG///// An alias describing a spline builder
-//VG//template<class ExecSpace, class BSplines, class InterpolationGrid, class BCLBound, class BCUBound, class SolverType, class IdxRangeType>
-//VG//using get_spline_builder_t = typename GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType>::type;
-
-
-template<class BSplines, class InterpolationGrid, class BCLBound, class BCUBound, class SolverType, class IdxRangeType>
+template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class IdxRangeType>
 class GetSplineBuilder;
 
-template<class BSplines, class InterpolationGrid, class BCLBound, class BCUBound, class SolverType, class... Grid1D>
-class GetSplineBuilder<BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRange<Grid1D...>> 
-{
+template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class... Grid1D>
+class GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRange<Grid1D...>> {
     using type = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
+        ExecSpace,
+        typename ExecSpace::memory_space,
         BSplines,
         InterpolationGrid,
         BCLBound,
@@ -142,5 +120,9 @@ class GetSplineBuilder<BSplines, InterpolationGrid, BCLBound, BCUBound, SolverTy
 };
 
 /// An alias describing a spline builder
-template<class BSplines, class InterpolationGrid, class BCLBound, class BCUBound, class SolverType, class IdxRangeType>
-using get_spline_builder_t = typename GetSplineBuilder<BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType>::type;
+template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class IdxRangeType>
+using get_spline_builder_t = typename GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType>::type;
+
+
+
+
