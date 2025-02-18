@@ -132,12 +132,13 @@ int main(int argc, char** argv)
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
     // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder_host const builder_host(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
@@ -200,7 +201,7 @@ int main(int argc, char** argv)
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
-                    builder,
+                    builder_host,
                     spline_evaluator_extrapol);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
@@ -283,7 +284,7 @@ int main(int argc, char** argv)
             time_stepper,
             simulation,
             interpolator,
-            builder,
+            builder_host,
             spline_evaluator_extrapol,
             final_time,
             dt,

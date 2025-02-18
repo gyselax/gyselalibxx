@@ -98,7 +98,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder_host const builder_host(grid);
+    SplineRThetaBuilder const builder(grid);
 
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
@@ -119,7 +120,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
-            builder,
+            builder_host,
             spline_evaluator_extrapol);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
@@ -128,7 +129,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
@@ -143,7 +144,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
-            builder,
+            builder_host,
             spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
