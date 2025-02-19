@@ -55,11 +55,8 @@ using DiscreteMappingBuilderHost = DiscreteToCartesianBuilder<
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
-        X,
-        Y,
-        SplineRThetaBuilder,
-        SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace

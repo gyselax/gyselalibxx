@@ -358,7 +358,8 @@ void simulate(
             advection_builder,
             advection_evaluator);
 
-    BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, to_physical_mapping_host);
+    BslAdvectionRTheta
+            advection_operator(function_interpolator, foot_finder, to_physical_mapping_host);
     auto function_to_be_advected_test = simulation.get_test_function();
     auto advection_field_test = simulation.get_advection_field();
 
