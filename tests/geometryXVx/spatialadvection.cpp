@@ -35,7 +35,6 @@ double SpatialAdvection(
         IdxRange<GridVx> idx_range_vx)
 {
     //kinetic species
-    IdxStepSp const nb_kinsp(1);
     IdxStepSp const nb_species(2);
     IdxRangeSp const idx_range_allsp(IdxSp(0), nb_species);
     IdxSp const i_elec = idx_range_allsp.front();

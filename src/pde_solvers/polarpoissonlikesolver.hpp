@@ -519,9 +519,6 @@ public:
         auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_singular_basis_vals_and_derivs));
-        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(m_r_basis_vals_and_derivs));
         Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
                 singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
