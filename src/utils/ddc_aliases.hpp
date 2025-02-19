@@ -105,7 +105,10 @@ using DVector = Vector<double, Dims...>;
 //----------------------------------------------
 //  Aliases for batched 1D spline builder
 //----------------------------------------------
-/// A type describing a batched 1D spline builder
+/**
+ * @brief A class for creating a 1D spline builder.
+ * @see SplineBuilder
+ */
 template <
         class ExecSpace,
         class BSplines,
@@ -116,6 +119,11 @@ template <
         class IdxRangeType>
 class GetSplineBatchedBuilder1D;
 
+
+/**
+ * @brief A class for creating a 1D spline builder.
+ * @see SplineBuilder
+ */
 template <
         class ExecSpace,
         class BSplines,
@@ -134,6 +142,7 @@ class GetSplineBatchedBuilder1D<
         IdxRange<Grid1D...>>
 {
 public:
+    /// @brief The type of the SplineBuilder used by this class to spline-approximate along first dimension.
     using type = ddc::SplineBuilder<
             ExecSpace,
             typename ExecSpace::memory_space,
@@ -145,7 +154,9 @@ public:
             Grid1D...>;
 };
 
-/// An alias describing a spline builder
+/**
+ * @brief An alias for creating a 1D spline builder based on GetSplineBatchedBuilder1D class
+ */
 template <
         class ExecSpace,
         class BSplines,
@@ -167,7 +178,10 @@ using get_spline_batched_builder1d_t = typename GetSplineBatchedBuilder1D<
 //----------------------------------------------
 //  Aliases for a batched 2D splines builder
 //----------------------------------------------
-/// A type describing a batched 2D spline builder
+/**
+ * @brief A class for creating a 2D spline builder.
+ * @see SplineBuilder2D
+ */
 template <
         class ExecSpace,
         class BSplinesX1,
@@ -182,6 +196,10 @@ template <
         class IdxRangeType>
 class GetSplineBatchedBuilder2D;
 
+/**
+ * @brief A class for creating a 2D spline builder.
+ * @see SplineBuilder2D
+ */
 template <
         class ExecSpace,
         class BSplinesX1,
@@ -208,6 +226,7 @@ class GetSplineBatchedBuilder2D<
         IdxRange<Grid1D...>>
 {
 public:
+    /// @brief The type of the SplineBuilder2D used by this class to spline-approximate along the two specified dimensions.
     using type = ddc::SplineBuilder2D<
             ExecSpace,
             typename ExecSpace::memory_space,
@@ -223,7 +242,9 @@ public:
             Grid1D...>;
 };
 
-/// An alias describing a batched 2D spline builder
+/**
+ * @brief An alias for creating a 2D spline builder based on GetSplineBatchedBuilder1D class
+ */
 template <
         class ExecSpace,
         class BSplinesX1,
@@ -253,6 +274,10 @@ using get_spline_batched_builder2d_t = typename GetSplineBatchedBuilder2D<
 //----------------------------------------------
 //  Aliases for batched 1D splines evaluator
 //----------------------------------------------
+/**
+ * @brief A class for creating a 1D spline evaluator.
+ * @see SplineEvaluator
+ */
 template <
         class ExecSpace,
         class BSplines,
@@ -262,6 +287,10 @@ template <
         class IdxRangeType>
 class GetSplineBatchedEvaluator1D;
 
+/**
+ * @brief A class for creating a 1D spline evaluator.
+ * @see SplineEvaluator
+ */
 template <
         class ExecSpace,
         class BSplines,
@@ -278,6 +307,7 @@ class GetSplineBatchedEvaluator1D<
         IdxRange<Grid1D...>>
 {
 public:
+    /// @brief The type of the SplineEvaluator used by this class to spline-approximate along the first specified dimension.
     using type = ddc::SplineEvaluator<
             ExecSpace,
             typename ExecSpace::memory_space,
@@ -288,7 +318,9 @@ public:
             Grid1D...>;
 };
 
-/// An alias describing a batched 1D spline evaluator
+/**
+ * @brief An alias for creating a 1D spline evaluator based on GetSplineBatchedEvaluator1D class
+ */
 template <
         class ExecSpace,
         class BSplines,
@@ -308,6 +340,10 @@ using get_spline_batched_evaluator1d_t = typename GetSplineBatchedEvaluator1D<
 //----------------------------------------------
 //  Aliases for 2D splines evaluator
 //----------------------------------------------
+/**
+ * @brief A class for creating a 2D spline evaluator.
+ * @see SplineEvaluator2D
+ */
 template <
         class ExecSpace,
         class BSplinesX1,
@@ -321,6 +357,10 @@ template <
         class IdxRangeType>
 class GetSplineBatchedEvaluator2D;
 
+/**
+ * @brief A class for creating a 2D spline evaluator.
+ * @see SplineEvaluator2D
+ */
 template <
         class ExecSpace,
         class BSplinesX1,
@@ -345,6 +385,7 @@ class GetSplineBatchedEvaluator2D<
         IdxRange<Grid1D...>>
 {
 public:
+    /// @brief The type of the SplineEvaluator2D used by this class to spline-approximate along the two specified dimensions.
     using type = ddc::SplineEvaluator2D<
             ExecSpace,
             typename ExecSpace::memory_space,
@@ -359,7 +400,9 @@ public:
             Grid1D...>;
 };
 
-/// An alias describing a batched 2D spline evaluator
+/**
+ * @brief An alias for creating a 2D spline evaluator based on GetSplineBatchedEvaluator2D class
+ */
 template <
         class ExecSpace,
         class BSplinesX1,
