@@ -160,42 +160,41 @@ $(document).ready(function(){initNavTree('bsl__advection__x_8hpp_source.html',''
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        Kokkos::Profiling::pushRegion(<span class="stringliteral">&quot;BslAdvectionSpatial&quot;</span>);</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        IdxRangeFdistrib <span class="keyword">const</span> idx_range = get_idx_range(allfdistribu);</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        IdxRange&lt;GridX&gt; <span class="keyword">const</span> x_idx_range = ddc::select&lt;GridX&gt;(idx_range);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        IdxRange&lt;GridV&gt; <span class="keyword">const</span> v_idx_range = ddc::select&lt;GridV&gt;(idx_range);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        IdxRange&lt;Species&gt; <span class="keyword">const</span> sp_idx_range = ddc::select&lt;Species&gt;(idx_range);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        FieldMem&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords_alloc(batched_feet_idx_range);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        Field&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords(get_field(feet_coords_alloc));</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        std::unique_ptr&lt;InterpolatorType&gt; <span class="keyword">const</span> interpolator_x_ptr = m_interpolator_x.preallocate();</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        InterpolatorType <span class="keyword">const</span>&amp; interpolator_x = *interpolator_x_ptr;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        IdxRangeBatch batch_idx_range(idx_range);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">for</span> (IdxSp <span class="keyword">const</span> isp : sp_idx_range) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            ddc::parallel_for_each(</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                    Kokkos::DefaultExecutionSpace(),</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    batch_idx_range,</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    KOKKOS_LAMBDA(IdxBatch <span class="keyword">const</span> ib) {</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                        <span class="comment">// compute the displacement</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        IdxV <span class="keyword">const</span> iv(ib);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                        Coord&lt;DimV&gt; <span class="keyword">const</span> coord_iv = ddc::coordinate(iv);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> dx = sqrt_me_on_mspecies * dt * coord_iv;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        <span class="comment">// compute the coordinates of the feet</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                        <span class="keywordflow">for</span> (IdxX <span class="keyword">const</span> ix : x_idx_range) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                            feet_coords(ix, ib) = Coord&lt;DimX&gt;(ddc::coordinate(ix) - dx);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                        }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    });</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            interpolator_x(allfdistribu[isp], get_const_field(feet_coords));</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        Kokkos::Profiling::popRegion();</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">return</span> allfdistribu;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        IdxRange&lt;Species&gt; <span class="keyword">const</span> sp_idx_range = ddc::select&lt;Species&gt;(idx_range);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="comment">// pre-allocate some memory to prevent allocation later in loop</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        FieldMem&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords_alloc(batched_feet_idx_range);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        Field&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords(get_field(feet_coords_alloc));</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        std::unique_ptr&lt;InterpolatorType&gt; <span class="keyword">const</span> interpolator_x_ptr = m_interpolator_x.preallocate();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        InterpolatorType <span class="keyword">const</span>&amp; interpolator_x = *interpolator_x_ptr;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        IdxRangeBatch batch_idx_range(idx_range);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">for</span> (IdxSp <span class="keyword">const</span> isp : sp_idx_range) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            ddc::parallel_for_each(</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    Kokkos::DefaultExecutionSpace(),</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                    batch_idx_range,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    KOKKOS_LAMBDA(IdxBatch <span class="keyword">const</span> ib) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                        <span class="comment">// compute the displacement</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                        IdxV <span class="keyword">const</span> iv(ib);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        Coord&lt;DimV&gt; <span class="keyword">const</span> coord_iv = ddc::coordinate(iv);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> dx = sqrt_me_on_mspecies * dt * coord_iv;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                        <span class="comment">// compute the coordinates of the feet</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        <span class="keywordflow">for</span> (IdxX <span class="keyword">const</span> ix : x_idx_range) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                            feet_coords(ix, ib) = Coord&lt;DimX&gt;(ddc::coordinate(ix) - dx);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                        }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    });</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            interpolator_x(allfdistribu[isp], get_const_field(feet_coords));</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        Kokkos::Profiling::popRegion();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> allfdistribu;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
 </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>};</div>
 </div>
 <div class="ttc" id="aclassBslAdvectionSpatial_html"><div class="ttname"><a href="classBslAdvectionSpatial.html">BslAdvectionSpatial</a></div><div class="ttdoc">A class which computes the spatial advection along the dimension of interest GridX.</div><div class="ttdef"><b>Definition</b> bsl_advection_x.hpp:16</div></div>
 <div class="ttc" id="aclassBslAdvectionSpatial_html_a6ee34fd8becaaf459692d47d6f59568d"><div class="ttname"><a href="classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d">BslAdvectionSpatial::BslAdvectionSpatial</a></div><div class="ttdeci">BslAdvectionSpatial(PreallocatableInterpolatorType const &amp;interpolator_x)</div><div class="ttdoc">Constructor</div><div class="ttdef"><b>Definition</b> bsl_advection_x.hpp:41</div></div>
