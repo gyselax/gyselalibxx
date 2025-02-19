@@ -39,11 +39,9 @@ class Tensor
               || (is_contravariant_vector_index_set_v<ValidIndexSet>))
              && ...));
 
-    using AllIndexSets = ddc::detail::TypeSeq<ValidIndexSet...>;
-
 public:
     /// The TensorIndexSet describing the possible indices.
-    using index_set = tensor_tools::TensorIndexSet<ValidIndexSet...>;
+    using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
 
 private:
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
@@ -238,7 +236,7 @@ public:
      * @tparam Dim The dimension of interest (0 <= dim < rank()).
      */
     template <std::size_t dim>
-    using vector_index_set_t = ddc::type_seq_element_t<dim, AllIndexSets>;
+    using vector_index_set_t = ddc::type_seq_element_t<dim, index_set>;
 };
 
 namespace detail {
@@ -304,7 +302,7 @@ template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION ElementType& get(Tensor<ElementType, ValidIndexSet...>& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
-            tensor_tools::TensorIndexSet<ValidIndexSet...>,
+            ddc::detail::TypeSeq<ValidIndexSet...>,
             QueryIndexTag...>>();
 }
 
@@ -318,7 +316,7 @@ template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION ElementType get(Tensor<ElementType, ValidIndexSet...> const& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
-            tensor_tools::TensorIndexSet<ValidIndexSet...>,
+            ddc::detail::TypeSeq<ValidIndexSet...>,
             QueryIndexTag...>>();
 }
 
