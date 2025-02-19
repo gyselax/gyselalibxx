@@ -55,7 +55,7 @@ private:
             "Wrong number of indices provided");
 
     template <std::size_t... Is>
-    static constexpr bool valid_indices(std::index_sequence<Is...>)
+    KOKKOS_FUNCTION static constexpr bool valid_indices(std::index_sequence<Is...>)
     {
         return ((ddc::in_tags_v<
                  ddc::type_seq_element_t<Is, IdxTypeSeq>,
