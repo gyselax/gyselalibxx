@@ -103,14 +103,14 @@ using DVector = Vector<double, Dims...>;
 
 
 //----------------------------------------------
-//  Aliases for 1D splines
+//  Aliases for batched 1D spline builder
 //----------------------------------------------
-/// A type describing a spline builder
+/// A type describing a batched 1D spline builder
 template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class IdxRangeType>
-class GetSplineBuilder;
+class GetSplineBatchedBuilder1D;
 
 template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class... Grid1D>
-class GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRange<Grid1D...>> {
+class GetSplineBatchedBuilder1D<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRange<Grid1D...>> {
 public:
     using type = ddc::SplineBuilder<
         ExecSpace,
@@ -125,26 +125,26 @@ public:
 
 /// An alias describing a spline builder
 template<class ExecSpace, class BSplines, class InterpolationGrid, ddc::BoundCond BCLBound, ddc::BoundCond BCUBound, ddc::SplineSolver SolverType, class IdxRangeType>
-using get_spline_builder_t = typename GetSplineBuilder<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType>::type;
+using get_spline_batched_builder1d_t = typename GetSplineBatchedBuilder1D<ExecSpace, BSplines, InterpolationGrid, BCLBound, BCUBound, SolverType, IdxRangeType>::type;
 
 
 //----------------------------------------------
-//  Aliases for 2D splines
+//  Aliases for a batched 2D splines builder
 //----------------------------------------------
-/// A type describing a 2D spline builder
+/// A type describing a batched 2D spline builder
 template<class ExecSpace, class BSplinesX1, class BSplinesX2,
         class InterpolationGridX1, class InterpolationGridX2,
         ddc::BoundCond BCLBoundX1, ddc::BoundCond BCUBoundX1,
         ddc::BoundCond BCLBoundX2, ddc::BoundCond BCUBoundX2,
         ddc::SplineSolver SolverType, class IdxRangeType>
-class GetSplineBuilder2D;
+class GetSplineBatchedBuilder2D;
 
 template<class ExecSpace, class BSplinesX1, class BSplinesX2, 
         class InterpolationGridX1, class InterpolationGridX2,
         ddc::BoundCond BCLBoundX1, ddc::BoundCond BCUBoundX1, 
         ddc::BoundCond BCLBoundX2, ddc::BoundCond BCUBoundX2, 
         ddc::SplineSolver SolverType, class... Grid1D>
-class GetSplineBuilder2D<ExecSpace, BSplinesX1, BSplinesX2,
+class GetSplineBatchedBuilder2D<ExecSpace, BSplinesX1, BSplinesX2,
         InterpolationGridX1, InterpolationGridX2,
         BCLBoundX1, BCUBoundX1,
         BCLBoundX2, BCUBoundX2,
@@ -165,16 +165,118 @@ public:
         Grid1D...>;
 };
 
-/// An alias describing a 2D spline builder
+/// An alias describing a batched 2D spline builder
 template<class ExecSpace, class BSplinesX1, class BSplinesX2, 
         class InterpolationGridX1, class InterpolationGridX2,
         ddc::BoundCond BCLBoundX1, ddc::BoundCond BCUBoundX1, 
         ddc::BoundCond BCLBoundX2, ddc::BoundCond BCUBoundX2, 
         ddc::SplineSolver SolverType, class IdxRangeType>
-using get_spline_builder2d_t = typename GetSplineBuilder2D<ExecSpace, 
+using get_spline_batched_builder2d_t = typename GetSplineBatchedBuilder2D<ExecSpace, 
         BSplinesX1, BSplinesX2,
         InterpolationGridX1, InterpolationGridX2, 
         BCLBoundX1, BCUBoundX1, 
         BCLBoundX2, BCUBoundX2, 
         SolverType, IdxRangeType>::type;
+
+
+//----------------------------------------------
+//  Aliases for batched 1D splines evaluator
+//----------------------------------------------
+template<class ExecSpace, class BSplines, class InterpolationGrid, 
+        class LowerExtrapolationRule,  
+        class UpperExtrapolationRule,  
+        class IdxRangeType>
+class GetSplineBatchedEvaluator1D;
+
+template<class ExecSpace, class BSplines, class InterpolationGrid, 
+        class LowerExtrapolationRule,  
+        class UpperExtrapolationRule,  
+        class... Grid1D>
+class GetSplineBatchedEvaluator1D<ExecSpace, BSplines, InterpolationGrid, 
+        LowerExtrapolationRule, UpperExtrapolationRule, 
+        IdxRange<Grid1D...>> {
+public:
+    using type = ddc::SplineEvaluator<
+        ExecSpace,
+        typename ExecSpace::memory_space,
+        BSplines,
+        InterpolationGrid,
+        LowerExtrapolationRule,
+        UpperExtrapolationRule,
+        Grid1D...>;
+};
+
+/// An alias describing a batched 1D spline evaluator
+template<class ExecSpace, class BSplines, class InterpolationGrid, 
+        class LowerExtrapolationRule,  
+        class UpperExtrapolationRule,  
+        class IdxRangeType>
+using get_spline_batched_evaluator1d_t = typename GetSplineBatchedEvaluator1D<ExecSpace, BSplines, InterpolationGrid, 
+        LowerExtrapolationRule, UpperExtrapolationRule,
+        IdxRangeType>::type;
+
+
+//----------------------------------------------
+//  Aliases for 2D splines evaluator
+//----------------------------------------------
+template<class ExecSpace, 
+        class BSplinesX1, 
+        class BSplinesX2, 
+        class InterpolationGridX1, 
+        class InterpolationGridX2, 
+        class LowerExtrapolationRuleX1,  
+        class UpperExtrapolationRuleX1,  
+        class LowerExtrapolationRuleX2,  
+        class UpperExtrapolationRuleX2,  
+        class IdxRangeType>
+class GetSplineBatchedEvaluator2D;
+
+template<class ExecSpace, 
+        class BSplinesX1, 
+        class BSplinesX2, 
+        class InterpolationGridX1, 
+        class InterpolationGridX2, 
+        class LowerExtrapolationRuleX1,  
+        class UpperExtrapolationRuleX1,  
+        class LowerExtrapolationRuleX2,  
+        class UpperExtrapolationRuleX2,  
+        class... Grid1D>
+class GetSplineBatchedEvaluator2D<ExecSpace, 
+        BSplinesX1, BSplinesX2, 
+        InterpolationGridX1, InterpolationGridX2, 
+        LowerExtrapolationRuleX1, UpperExtrapolationRuleX1, 
+        LowerExtrapolationRuleX2, UpperExtrapolationRuleX2, 
+        IdxRange<Grid1D...>> {
+public:
+    using type = ddc::SplineEvaluator2D<
+        ExecSpace,
+        typename ExecSpace::memory_space,
+        BSplinesX1,
+        BSplinesX2,
+        InterpolationGridX1,
+        InterpolationGridX2,
+        LowerExtrapolationRuleX1,
+        UpperExtrapolationRuleX1,
+        LowerExtrapolationRuleX2,
+        UpperExtrapolationRuleX2,
+        Grid1D...>;
+};
+
+/// An alias describing a batched 2D spline evaluator
+template<class ExecSpace,
+        class BSplinesX1, 
+        class BSplinesX2, 
+        class InterpolationGridX1, 
+        class InterpolationGridX2, 
+        class LowerExtrapolationRuleX1,  
+        class UpperExtrapolationRuleX1,  
+        class LowerExtrapolationRuleX2,  
+        class UpperExtrapolationRuleX2,  
+        class IdxRangeType>
+using get_spline_batched_evaluator2d_t = typename GetSplineBatchedEvaluator2D<ExecSpace, 
+        BSplinesX1, BSplinesX2, 
+        InterpolationGridX1, InterpolationGridX2, 
+        LowerExtrapolationRuleX1, UpperExtrapolationRuleX1, 
+        LowerExtrapolationRuleX2, UpperExtrapolationRuleX2, 
+        IdxRangeType>::type;
 
