@@ -167,6 +167,21 @@ public:
     }
 
     /**
+     * @brief An operator to divide all the element of the current tensor by
+     * a value.
+     * @param val The value by which the elements should be multiplied.
+     * @return A reference to the current modified tensor.
+     */
+    template <class OElementType>
+    KOKKOS_FUNCTION Tensor& operator/=(OElementType val)
+    {
+        for (int i(0); i < s_n_elements; ++i) {
+            m_data[i] /= val;
+        }
+        return *this;
+    }
+
+    /**
      * @brief An operator to add two tensors elementwise.
      * @param val The tensor that should be added to the current tensor.
      * @return A reference to the current modified tensor.
@@ -203,6 +218,20 @@ public:
     {
         Tensor result(*this);
         result *= val;
+        return result;
+    }
+
+    /**
+     * @brief An operator to multiply all the element of the current tensor by
+     * a value.
+     * @param val The value by which the elements should be multiplied.
+     * @return A new tensor containing the result of the multiplication.
+     */
+    template <class OElementType>
+    KOKKOS_FUNCTION Tensor operator/(OElementType val) const
+    {
+        Tensor result(*this);
+        result /= val;
         return result;
     }
 
