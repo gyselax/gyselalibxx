@@ -169,6 +169,7 @@ int main(int argc, char** argv)
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
     CircularToCartesian<R, Theta, X, Y> to_physical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping_host;
     CartesianToCircular<X, Y, R, Theta> to_logical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
             to_physical_analytical_mapping);
@@ -183,6 +184,7 @@ int main(int argc, char** argv)
 #if defined(CZARNY_MAPPING_PHYSICAL)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
             to_physical_analytical_mapping);
@@ -193,6 +195,7 @@ int main(int argc, char** argv)
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "CZARNY";
@@ -203,11 +206,18 @@ int main(int argc, char** argv)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
-            mapping_builder(
+            mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder_host,
                     spline_evaluator_extrapol_host);
+    DiscreteToCartesian to_physical_mapping_host = mapping_builder_host();
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
+            mapping_builder(
+                    Kokkos::DefaultExecutionSpace(),
+                    to_physical_analytical_mapping,
+                    builder,
+                    spline_evaluator_extrapol);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
@@ -258,17 +268,17 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE SIMULATION.
 #if defined(TRANSLATION_SIMULATION)
-    TranslationSimulation simulation(to_physical_mapping, rmin, rmax);
+    TranslationSimulation simulation(to_physical_mapping_host, rmin, rmax);
     std::string const simu_type = "TRANSLATION";
     key += "Translation";
 
 #elif defined(ROTATION_SIMULATION)
-    RotationSimulation simulation(to_physical_mapping, rmin, rmax);
+    RotationSimulation simulation(to_physical_mapping_host, rmin, rmax);
     std::string const simu_type = "ROTATION";
     key += "Rotation";
 
 #elif defined(DECENTRED_ROTATION_SIMULATION)
-    DecentredRotationSimulation simulation(to_physical_mapping);
+    DecentredRotationSimulation simulation(to_physical_mapping_host);
     std::string const simu_type = "DECENTRED ROTATION";
     key += "Decentred_rotation";
 #endif
@@ -281,6 +291,7 @@ int main(int argc, char** argv)
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_analytical_mapping,
             logical_to_pseudo_cart_mapping,
