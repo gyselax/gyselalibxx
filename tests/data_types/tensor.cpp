@@ -46,12 +46,7 @@ TEST(TensorTools, TensorIndexSet)
 {
     using IdxSet = VectorIndexSet<R, Theta>;
     using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
-    using TestIndexSet = TensorIndexSet<IdxSet, IdxSet, IdxSet_cov>;
-    static_assert(TestIndexSet::rank() == 3);
-    static_assert(TestIndexSet::size() == 8);
-    static_assert(std::is_same_v<TestIndexSet::get_vector_index_set_along_dim_t<0>, IdxSet>);
-    static_assert(std::is_same_v<TestIndexSet::get_vector_index_set_along_dim_t<1>, IdxSet>);
-    static_assert(std::is_same_v<TestIndexSet::get_vector_index_set_along_dim_t<2>, IdxSet_cov>);
+    using TestIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet, IdxSet_cov>;
     using TestIndexElement0 = get_nth_tensor_index_element_t<0, TestIndexSet>;
     static_assert(TestIndexElement0::rank() == 3);
     static_assert(std::is_same_v<TestIndexElement0, TensorIndexElement<TestIndexSet, R, R, R_cov>>);
