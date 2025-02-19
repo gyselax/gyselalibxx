@@ -172,7 +172,6 @@ private:
         Coord<Dim> x0;
         Coord<Dim> x1(*mesh_edges_begin);
 
-        Idx<GLGrid> start = m_valid_idx_range.front();
         int k(0);
         for (int i(0); i < m_nbcells; ++i) {
             x0 = x1;
@@ -194,7 +193,6 @@ private:
         Coord<Dim> x0;
         Coord<Dim> x1 = mesh_edges(mesh_idx);
 
-        Idx<GLGrid> start = m_valid_idx_range.front();
         int k(0);
         for (int i(0); i < m_nbcells; ++i) {
             x0 = x1;

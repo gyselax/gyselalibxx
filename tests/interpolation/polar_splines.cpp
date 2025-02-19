@@ -27,11 +27,9 @@ struct Theta
 };
 struct X
 {
-    static constexpr bool PERIODIC = false;
 };
 struct Y
 {
-    static constexpr bool PERIODIC = false;
 };
 
 static constexpr std::size_t spline_r_degree = DEGREE_R;
