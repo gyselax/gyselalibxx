@@ -140,7 +140,7 @@ int main(int argc, char** argv)
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping_host);
 
-    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder_host);
+    IdxRangeBSRTheta const idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
 
     // --- Time integration method --------------------------------------------------------------------
@@ -183,7 +183,7 @@ int main(int argc, char** argv)
             p_extrapolation_rule,
             p_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder_host, spline_evaluator_host);
+    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
     SplinePolarFootFinder find_feet(
             time_stepper,

@@ -55,7 +55,7 @@ inline T modulo(T x, T y)
     return x - y * std::floor(double(x) / y);
 }
 
-constexpr inline double ipow(double a, std::size_t i)
+KOKKOS_INLINE_FUNCTION constexpr double ipow(double a, std::size_t i)
 {
     double r(1.0);
     for (std::size_t j(0); j < i; ++j) {
@@ -64,7 +64,7 @@ constexpr inline double ipow(double a, std::size_t i)
     return r;
 }
 
-inline double ipow(double a, int i)
+KOKKOS_INLINE_FUNCTION double ipow(double a, int i)
 {
     double r(1.0);
     if (i > 0) {
