@@ -75,6 +75,48 @@ TEST(TensorTest, TensorScalarMul)
     EXPECT_EQ(val, 32);
 }
 
+TEST(TensorTest, TensorScalarDiv)
+{
+    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    ddcHelper::get<R_cov>(a) = -6;
+    ddcHelper::get<Theta_cov>(a) = 8;
+    a /= 2;
+    int val = ddcHelper::get<R_cov>(a);
+    EXPECT_EQ(val, -3);
+    val = ddcHelper::get<Theta_cov>(a);
+    EXPECT_EQ(val, 4);
+}
+
+TEST(TensorTest, TensorAdd)
+{
+    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    tensor_tools::Vector<int, R_cov, Theta_cov> b;
+    ddcHelper::get<R_cov>(a) = -6;
+    ddcHelper::get<Theta_cov>(a) = 8;
+    ddcHelper::get<R_cov>(b) = 6;
+    ddcHelper::get<Theta_cov>(b) = -16;
+    a += b;
+    int val = ddcHelper::get<R_cov>(a);
+    EXPECT_EQ(val, 0);
+    val = ddcHelper::get<Theta_cov>(a);
+    EXPECT_EQ(val, -8);
+}
+
+TEST(TensorTest, TensorMinus)
+{
+    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    tensor_tools::Vector<int, R_cov, Theta_cov> b;
+    ddcHelper::get<R_cov>(a) = -6;
+    ddcHelper::get<Theta_cov>(a) = 8;
+    ddcHelper::get<R_cov>(b) = 6;
+    ddcHelper::get<Theta_cov>(b) = -16;
+    a -= b;
+    int val = ddcHelper::get<R_cov>(a);
+    EXPECT_EQ(val, -12);
+    val = ddcHelper::get<Theta_cov>(a);
+    EXPECT_EQ(val, 24);
+}
+
 TEST(TensorTools, TensorIndexSet)
 {
     using IdxSet = VectorIndexSet<R, Theta>;
