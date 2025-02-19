@@ -151,7 +151,12 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -202,7 +207,7 @@ int main(int argc, char** argv)
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder_host,
-                    spline_evaluator_extrapol);
+                    spline_evaluator_extrapol_host);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
@@ -215,9 +220,9 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
-          host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-          Kokkos::DefaultHostExecutionSpace>
+    Euler<FieldMemRTheta<CoordRTheta>,
+          DVectorFieldMemRTheta<X_adv, Y_adv>,
+          Kokkos::DefaultExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "EULER";
     key += "euler";
@@ -225,25 +230,25 @@ int main(int argc, char** argv)
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
     CrankNicolson<
-            host_t<FieldMemRTheta<CoordRTheta>>,
-            host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-            Kokkos::DefaultHostExecutionSpace>
+            FieldMemRTheta<CoordRTheta>,
+            DVectorFieldMemRTheta<X_adv, Y_adv>,
+            Kokkos::DefaultExecutionSpace>
             time_stepper(grid, 20, epsilon_CN);
     std::string const method_name = "CRANK NICOLSON";
     key += "crank_nicolson";
 
 #elif defined(RK3_METHOD)
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-        Kokkos::DefaultHostExecutionSpace>
+    RK3<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X_adv, Y_adv>,
+        Kokkos::DefaultExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "RK3";
     key += "rk3";
 
 #elif defined(RK4_METHOD)
-    RK4<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-        Kokkos::DefaultHostExecutionSpace>
+    RK4<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X_adv, Y_adv>,
+        Kokkos::DefaultExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "RK4";
     key += "rk4";
@@ -284,7 +289,7 @@ int main(int argc, char** argv)
             time_stepper,
             simulation,
             interpolator,
-            builder_host,
+            builder,
             spline_evaluator_extrapol,
             final_time,
             dt,
