@@ -67,7 +67,7 @@ executable, yaml_parameters, plot_results, verbose = set_input(0, 1, 32, 64, 0.1
 if plot_results:
     list_pow = [0, 1, 2, 3]
 else :
-    list_pow = [0, 2]
+    list_pow = [0, 1]
 
 yaml_configs = [deepcopy(yaml_parameters) for _ in list_pow]
 
