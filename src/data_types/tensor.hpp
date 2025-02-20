@@ -81,7 +81,7 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    explicit KOKKOS_DEFAULTED_FUNCTION Tensor() = default;
+    KOKKOS_DEFAULTED_FUNCTION Tensor() = default;
 
     /**
      * @brief Construct a tensor object initialised with a value.
