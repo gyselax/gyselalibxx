@@ -110,6 +110,22 @@ public:
     }
 
     /**
+     * @brief Construct a 1D tensor object from a coordinate.
+     *
+     * @param elements The elements of the tensor.
+     */
+    template <class... Dims>
+    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) : m_data(coord.array())
+    {
+        static_assert(
+                rank() == 1,
+                "Filling the tensor on initialisation is only permitted for 1D vector objects");
+        static_assert(
+                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+    }
+
+    /**
      * @brief Construct a tensor object by copying an existing tensor.
      *
      * @param o_tensor The tensor to be copied.
@@ -150,6 +166,18 @@ public:
      * @return A reference to the current tensor.
      */
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
+
+    template <class... Dims>
+    KOKKOS_FUNCTION Tensor& operator=(Coord<Dims...> coord)
+    {
+        static_assert(
+                rank() == 1,
+                "Filling the tensor on initialisation is only permitted for 1D vector objects");
+        static_assert(
+                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data = coord.array();
+    }
 
     /**
      * @brief An operator to multiply all the element of the current tensor by
