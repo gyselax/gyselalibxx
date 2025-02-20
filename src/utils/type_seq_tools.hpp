@@ -27,8 +27,32 @@ struct TypeSeqRange<TypeSeqIn, Start, End, End, TypeSeqOut>
     using type = TypeSeqOut;
 };
 
+template <class... TypeSeqs>
+struct TypeSeqCat;
+
+template <class... First, class... Second, class... TailTypeSeqs>
+struct TypeSeqCat<ddc::detail::TypeSeq<First...>, ddc::detail::TypeSeq<Second...>, TailTypeSeqs...>
+{
+    using type =
+            typename TypeSeqCat<ddc::detail::TypeSeq<First..., Second...>, TailTypeSeqs...>::type;
+};
+
+template <class... First, class... Second>
+struct TypeSeqCat<ddc::detail::TypeSeq<First...>, ddc::detail::TypeSeq<Second...>>
+{
+    using type = ddc::detail::TypeSeq<First..., Second...>;
+};
+
 } // namespace detail
 
 /// A tool to get a subset of a TypeSeq by slicing [Start:End]
 template <class TypeSeqIn, std::size_t Start, std::size_t End>
 using type_seq_range_t = typename detail::TypeSeqRange<TypeSeqIn, Start, End, Start>::type;
+
+/**
+ * @brief Concatenate type sequences into a new type sequence.
+ * This is similar to type_seq_merge_t but it does not remove duplicate elements.
+ * @tparam TypeSeqs The type sequences to be concatenated.
+ */
+template <class... TypeSeqs>
+using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
