@@ -519,6 +519,9 @@ public:
         auto singular_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(m_singular_basis_vals_and_derivs));
+        auto r_basis_vals_and_derivs_alloc = ddc::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(m_r_basis_vals_and_derivs));
         Field<EvalDeriv2DType, IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>>
                 singular_basis_vals_and_derivs = get_field(singular_basis_vals_and_derivs_alloc);
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = get_field(m_int_volume);
@@ -1182,7 +1185,7 @@ public:
      * 
      * @param[out] value The product of radial and poloidal values.
      *
-     * @param[out] gradient derivatives over @f$ (r, \theta) @f$ directions. 
+     * @param[out] derivs derivatives over @f$ (r, \theta) @f$ directions. 
      *
      * @param[in] r_basis A data structure containing values and derivative over radial direction.
      *
@@ -1190,12 +1193,12 @@ public:
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            std::array<double, 2>& gradient,
+            DVector<R, Theta>& derivs,
             EvalDeriv1DType const& r_basis,
             EvalDeriv1DType const& theta_basis)
     {
         value = r_basis.value * theta_basis.value;
-        gradient = {r_basis.derivative * theta_basis.value, r_basis.value * theta_basis.derivative};
+        derivs = {r_basis.derivative * theta_basis.value, r_basis.value * theta_basis.derivative};
     }
 
     /**
@@ -1203,19 +1206,19 @@ public:
      * 
      * @param[out] value The product of radial and poloidal values.
      *
-     * @param[out] gradient derivatives over @f$ (r, \theta) @f$ directions. 
+     * @param[out] derivs derivatives over @f$ (r, \theta) @f$ directions. 
      *
      * @param[in] basis A data structure containing values and derivative over radial and poloidal directions.
      *
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            std::array<double, 2>& gradient,
+            DVector<R, Theta>& derivs,
             EvalDeriv2DType const& basis,
             EvalDeriv2DType const&) // Last argument is duplicate
     {
         value = basis.value;
-        gradient = {basis.radial_derivative, basis.poloidal_derivative};
+        derivs = {basis.radial_derivative, basis.poloidal_derivative};
     }
 
     /**
@@ -1283,16 +1286,16 @@ public:
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
         double basis_val_trial_space;
-        std::array<double, 2> basis_gradient_test_space;
-        std::array<double, 2> basis_gradient_trial_space;
+        DVector<R, Theta> basis_derivs_test_space;
+        DVector<R, Theta> basis_derivs_trial_space;
         get_value_and_gradient(
                 basis_val_test_space,
-                basis_gradient_test_space,
+                basis_derivs_test_space,
                 test_bspline_val_and_deriv,
                 test_bspline_val_and_deriv_theta);
         get_value_and_gradient(
                 basis_val_trial_space,
-                basis_gradient_trial_space,
+                basis_derivs_trial_space,
                 trial_bspline_val_and_deriv,
                 trial_bspline_val_and_deriv_theta);
 
@@ -1302,8 +1305,8 @@ public:
         return int_volume(idx_r, idx_theta)
                * (alpha
                           * dot_product(
-                                  basis_gradient_test_space,
-                                  metric_tensor.to_covariant(basis_gradient_trial_space, coord))
+                                  basis_derivs_test_space,
+                                  metric_tensor.to_covariant(basis_derivs_trial_space, coord))
                   + beta * basis_val_test_space * basis_val_trial_space);
     }
 
