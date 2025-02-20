@@ -75,7 +75,7 @@ TEST(TensorTest, TensorScalarMul)
 
 TEST(TensorTest, TensorScalarDiv)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> a;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     a /= 2;
@@ -87,8 +87,8 @@ TEST(TensorTest, TensorScalarDiv)
 
 TEST(TensorTest, TensorAdd)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
-    tensor_tools::Vector<int, R_cov, Theta_cov> b;
+    Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> b;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R_cov>(b) = 6;
@@ -102,8 +102,8 @@ TEST(TensorTest, TensorAdd)
 
 TEST(TensorTest, TensorMinus)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
-    tensor_tools::Vector<int, R_cov, Theta_cov> b;
+    Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> b;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R_cov>(b) = 6;
