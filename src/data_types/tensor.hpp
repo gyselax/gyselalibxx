@@ -186,7 +186,7 @@ public:
      * @param val The tensor that should be added to the current tensor.
      * @return A reference to the current modified tensor.
      */
-    KOKKOS_FUNCTION Tensor& operator+=(Tensor val)
+    KOKKOS_FUNCTION Tensor& operator+=(Tensor const& val)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] += val.m_data[i];
@@ -199,7 +199,7 @@ public:
      * @param val The tensor that should be subtracted from the current tensor.
      * @return A reference to the current modified tensor.
      */
-    KOKKOS_FUNCTION Tensor& operator-=(Tensor val)
+    KOKKOS_FUNCTION Tensor& operator-=(Tensor const& val)
     {
         for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] -= val.m_data[i];
@@ -240,7 +240,7 @@ public:
      * @param val The tensor that should be added to the current tensor.
      * @return A new tensor containing the result of the addition.
      */
-    KOKKOS_FUNCTION Tensor operator+(Tensor val) const
+    KOKKOS_FUNCTION Tensor operator+(Tensor const& val) const
     {
         Tensor result(*this);
         result += val;
@@ -252,7 +252,7 @@ public:
      * @param val The tensor that should be subtracted from the current tensor.
      * @return A new tensor containing the result of the subtraction.
      */
-    KOKKOS_FUNCTION Tensor operator-(Tensor val) const
+    KOKKOS_FUNCTION Tensor operator-(Tensor const& val) const
     {
         Tensor result(*this);
         result -= val;
@@ -342,7 +342,7 @@ KOKKOS_INLINE_FUNCTION ElementType& get(Tensor<ElementType, ValidIndexSet...>& t
  * @return The relevant element of the tensor.
  */
 template <class... QueryIndexTag, class ElementType, class... ValidIndexSet>
-KOKKOS_INLINE_FUNCTION ElementType get(Tensor<ElementType, ValidIndexSet...> const& tensor)
+KOKKOS_INLINE_FUNCTION ElementType const& get(Tensor<ElementType, ValidIndexSet...> const& tensor)
 {
     return tensor.template get<tensor_tools::TensorIndexElement<
             ddc::detail::TypeSeq<ValidIndexSet...>,
@@ -357,7 +357,7 @@ KOKKOS_INLINE_FUNCTION ElementType get(Tensor<ElementType, ValidIndexSet...> con
  * @return The new coordinate.
  */
 template <class ElementType, class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> tensor)
+KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> const& tensor)
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
@@ -372,7 +372,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> tens
 template <class ElementType, class OElementType, class... ValidIndexSet>
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
         OElementType val,
-        Tensor<ElementType, ValidIndexSet...> tensor)
+        Tensor<ElementType, ValidIndexSet...> const& tensor)
 {
     return tensor * val;
 }
@@ -385,7 +385,9 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
  * @return The new coordinate.
  */
 template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(Coord<Dims...> coord, DVector<Dims...> tensor)
+KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
+        Coord<Dims...> const& coord,
+        DVector<Dims...> const& tensor)
 {
     return Coord<Dims...>((ddc::get<Dims>(coord) + ddcHelper::get<Dims>(tensor))...);
 }
@@ -398,7 +400,9 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(Coord<Dims...> coord, DVector<Di
  * @return The new coordinate.
  */
 template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(Coord<Dims...> coord, DVector<Dims...> tensor)
+KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
+        Coord<Dims...> const& coord,
+        DVector<Dims...> const& tensor)
 {
     return Coord<Dims...>((ddc::get<Dims>(coord) - ddcHelper::get<Dims>(tensor))...);
 }
@@ -411,7 +415,9 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(Coord<Dims...> coord, DVector<Di
  * @return The new coordinate.
  */
 template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(Coord<Dims...>& coord, DVector<Dims...> tensor)
+KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
+        Coord<Dims...>& coord,
+        DVector<Dims...> const& tensor)
 {
     ((ddc::get<Dims>(coord) += ddcHelper::get<Dims>(tensor)), ...);
     return coord;
@@ -425,7 +431,9 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(Coord<Dims...>& coord, DVector
  * @return The new coordinate.
  */
 template <class... Dims>
-KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(Coord<Dims...>& coord, DVector<Dims...> tensor)
+KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
+        Coord<Dims...>& coord,
+        DVector<Dims...> const& tensor)
 {
     ((ddc::get<Dims>(coord) -= ddcHelper::get<Dims>(tensor)), ...);
     return coord;
