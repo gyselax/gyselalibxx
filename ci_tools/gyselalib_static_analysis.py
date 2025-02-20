@@ -45,8 +45,10 @@ mirror_functions = {'create_mirror', 'create_mirror_and_copy', 'create_mirror_vi
 
 parallel_functions = ['parallel_for', 'parallel_for_each', 'parallel_transform_reduce']
 
-HOME_DIR = Path(__file__).parent.parent.absolute()
+GYSELALIBXX_HOME_DIR = Path(__file__).parent.parent.absolute()
+HOME_DIR = GYSELALIBXX_HOME_DIR
 global_folders = [HOME_DIR / f for f in ('src', 'simulations', 'tests')]
+DEFAULT_GEOMETRY = None
 
 auto_functions = set(['build_kokkos_layout', 'get', 'create_geometry_mirror_view', 'make_temporary_clone', 'discrete_space'])
 field_mem_functions = set()
@@ -174,6 +176,7 @@ def get_relevant_files():
     prevent errors about doubly defined aliases between geometries.
     """
     src_geometries = {f.stem: f.absolute() for f in (HOME_DIR / 'src').glob('geometry*')}
+    src_geometries.update({f.stem: f.absolute() for f in (GYSELALIBXX_HOME_DIR / 'src').glob('geometry*')})
     simu_geometries = {f.stem: f.absolute() for f in (HOME_DIR / 'simulations').glob('geometry*')}
     test_geometries = {f.stem: f.absolute() for f in (HOME_DIR / 'tests').glob('geometry*')}
     assert all(g in src_geometries for g in simu_geometries)
@@ -198,6 +201,10 @@ def get_relevant_files():
         relevant_files.setdefault('general', set()).update(files)
 
     files = set((HOME_DIR / 'src').glob('**/*.hpp')).union((HOME_DIR / 'src').glob('**/*.cpp'))
+
+    if DEFAULT_GEOMETRY:
+        files = files.union((GYSELALIBXX_HOME_DIR / 'src' / DEFAULT_GEOMETRY).glob('**/*.hpp')) \
+                     .union((GYSELALIBXX_HOME_DIR / 'src' / DEFAULT_GEOMETRY).glob('**/*.cpp'))
 
     # Collect all files in src/ and group them by geometry
     for g, folder in possible_geometries['src'].items():
@@ -494,8 +501,8 @@ def update_aliases(all_files):
     if len(all_files) == 0:
         return
 
-    spec_file = next(f for f in all_files if f.file == HOME_DIR / 'src/speciesinfo/species_info.hpp')
-    geom_files = [f for f in all_files if f.file.name == 'geometry.hpp' or 'geometries' in f.file.parts]
+    spec_file = next(f for f in all_files if f.file == GYSELALIBXX_HOME_DIR / 'src/speciesinfo/species_info.hpp')
+    geom_files = [f for f in all_files if (f.file.name.startswith('geometry') and f.file.suffix == '.hpp') or 'geometries' in f.file.parts]
     multipatch_geom_file_names = {f.file.name: f for f in geom_files if f.file.name != 'geometry.hpp'}
 
     for file in all_files:
@@ -509,8 +516,10 @@ def update_aliases(all_files):
             if include_file == 'species_info.hpp':
                 file.aliases.update(spec_file.aliases)
             elif include_file == 'geometry.hpp':
-                relevant_geom = next(p for p in file.file.parts if p.startswith('geometry'))
-                geom_file = next(f for f in geom_files if relevant_geom in f.file.parts)
+                relevant_geom = next((p for p in file.file.parts if p.startswith('geometry')), DEFAULT_GEOMETRY)
+                geom_file = next((f for f in geom_files if relevant_geom in f.file.parts), None)
+                if geom_file is None:
+                    geom_file = next(f for f in geom_files if DEFAULT_GEOMETRY in f.file.parts)
                 file.aliases.update(geom_file.aliases)
             elif include_file in multipatch_geom_file_names:
                 file.aliases.update(multipatch_geom_file_names[include_file].aliases)
@@ -794,10 +803,14 @@ if __name__ == '__main__':
     parser.add_argument('files', type=str, nargs='*')
     parser.add_argument('--errors-only', action='store_true')
     parser.add_argument('--home-dir', type=Path, default=None)
+    parser.add_argument('--default-geometry', type=str, default=None)
     args = parser.parse_args()
 
     if args.home_dir:
         HOME_DIR = args.home_dir
+
+    if args.default_geometry:
+        DEFAULT_GEOMETRY = args.default_geometry
 
     if args.errors_only:
         possible_error_levels[WARNING] = 0
@@ -806,7 +819,7 @@ if __name__ == '__main__':
 
     no_file_filter = not args.files
     filter_files = [Path(f).absolute() for f in args.files]
-    spec_info = HOME_DIR / 'src/speciesinfo/species_info.hpp'
+    spec_info = GYSELALIBXX_HOME_DIR / 'src/speciesinfo/species_info.hpp'
 
     relevant_files = get_relevant_files()
 
@@ -823,7 +836,7 @@ if __name__ == '__main__':
                 error_level = max(error_level, possible_error_levels[STYLE])
 
     for geom, files in relevant_files.items():
-        if no_file_filter or any(f in filter_files for f in files):
+        if no_file_filter or any(f in filter_files for f in files) or geom == DEFAULT_GEOMETRY:
             print("------------- Checking ", geom, " -------------")
             geom_file_filter = [] if no_file_filter else filter_files+['*geometry.hpp', str(spec_info)]
             p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in geom_file_filter], check=False)
