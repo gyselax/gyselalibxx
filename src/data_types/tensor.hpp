@@ -160,7 +160,7 @@ public:
     template <class OElementType>
     KOKKOS_FUNCTION Tensor& operator*=(OElementType val)
     {
-        for (int i(0); i < s_n_elements; ++i) {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] *= val;
         }
         return *this;
@@ -175,7 +175,7 @@ public:
     template <class OElementType>
     KOKKOS_FUNCTION Tensor& operator/=(OElementType val)
     {
-        for (int i(0); i < s_n_elements; ++i) {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] /= val;
         }
         return *this;
@@ -188,7 +188,7 @@ public:
      */
     KOKKOS_FUNCTION Tensor& operator+=(Tensor val)
     {
-        for (int i(0); i < s_n_elements; ++i) {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] += val.m_data[i];
         }
         return *this;
@@ -201,7 +201,7 @@ public:
      */
     KOKKOS_FUNCTION Tensor& operator-=(Tensor val)
     {
-        for (int i(0); i < s_n_elements; ++i) {
+        for (std::size_t i(0); i < s_n_elements; ++i) {
             m_data[i] -= val.m_data[i];
         }
         return *this;
