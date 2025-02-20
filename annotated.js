@@ -295,6 +295,7 @@ var annotated =
     [ "SplitRightHandSideSolver", "classSplitRightHandSideSolver.html", "classSplitRightHandSideSolver" ],
     [ "SplitVlasovSolver", "classSplitVlasovSolver.html", "classSplitVlasovSolver" ],
     [ "T", "structT.html", null ],
+    [ "Tensor", "classTensor.html", "classTensor" ],
     [ "Theta", "structTheta.html", "structTheta" ],
     [ "Theta_cov", "structTheta__cov.html", "structTheta__cov" ],
     [ "TranslationAdvectionFieldSimulation", "classTranslationAdvectionFieldSimulation.html", "classTranslationAdvectionFieldSimulation" ],

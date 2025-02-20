@@ -278,9 +278,9 @@ var NAVTREEINDEX =
 "classIAdvectionRTheta.html#a346eaaf9a5ce416b0f3011efe94458b7",
 "classMatrix__Corner__Block.html#a09a6ff9a2b9912b3ee5d2df4d4b37ee1",
 "classPolarSplineEvaluator.html#a66468d51237ba05121d617991da901f3",
-"ddc__helper_8hpp_source.html",
-"polar__spline__evaluator_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036"
+"classVortexMergerEquilibria.html#a3a8975ef28538c07c2a08ce9b0db3c9f",
+"neumann__spline__quadrature_8hpp_source.html",
+"structNullExtrapolationRule.html#afff2dfac58dbcfcc760da499bb23b953"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
