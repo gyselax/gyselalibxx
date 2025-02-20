@@ -112,7 +112,7 @@ public:
     /**
      * @brief Construct a 1D tensor object from a coordinate.
      *
-     * @param elements The elements of the tensor.
+     * @param coord The coordinate.
      */
     template <class... Dims>
     explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) : m_data(coord.array())
@@ -167,6 +167,11 @@ public:
      */
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
 
+    /**
+     * @brief A copy operator.
+     * @param coord The coordinate to be copied into the vector.
+     * @return A reference to the current tensor.
+     */
     template <class... Dims>
     KOKKOS_FUNCTION Tensor& operator=(Coord<Dims...> coord)
     {
