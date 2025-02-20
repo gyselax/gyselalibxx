@@ -177,6 +177,7 @@ public:
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
         m_data = coord.array();
+        return *this;
     }
 
     /**
