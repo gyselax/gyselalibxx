@@ -8,8 +8,10 @@
 
 #include <Kokkos_Core.hpp>
 
+#include "tensor.hpp"
+
 template <typename T>
-inline T sum(T* array, int size)
+KOKKOS_INLINE_FUNCTION T sum(const T* array, int size)
 {
     T val(0.0);
     for (int i(0); i < size; ++i) {
@@ -19,7 +21,7 @@ inline T sum(T* array, int size)
 }
 
 template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
-inline ElementType sum(Kokkos::mdspan<
+KOKKOS_INLINE_FUNCTION ElementType sum(Kokkos::mdspan<
                        ElementType,
                        Kokkos::extents<std::size_t, Ext>,
                        LayoutPolicy,
@@ -33,7 +35,7 @@ inline ElementType sum(Kokkos::mdspan<
 }
 
 template <class ElementType, class LayoutPolicy, class AccessorPolicy, std::size_t Ext>
-inline ElementType sum(
+KOKKOS_INLINE_FUNCTION ElementType sum(
         Kokkos::mdspan<
                 ElementType,
                 Kokkos::extents<std::size_t, Ext>,
@@ -89,15 +91,13 @@ inline std::size_t factorial(std::size_t f)
     return r;
 }
 
-template <class T, std::size_t D>
-KOKKOS_INLINE_FUNCTION T dot_product(std::array<T, D> const& a, std::array<T, D> const& b)
+template <class T, class... Dims>
+KOKKOS_INLINE_FUNCTION T
+dot_product(Vector<T, Dims...> const& a, Vector<T, typename Dims::Dual...> const& b)
 {
-    T result = 0;
-    for (std::size_t i(0); i < D; ++i) {
-        result += a[i] * b[i];
-    }
-    return result;
+    return ((ddcHelper::get<Dims>(a) * ddcHelper::get<typename Dims::Dual>(b)) + ...);
 }
+
 
 template <typename T>
 inline T min(T x, T y)
