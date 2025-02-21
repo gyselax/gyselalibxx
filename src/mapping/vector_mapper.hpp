@@ -103,10 +103,8 @@ public:
                         vector_out.array() = mat_vec_mul(
                                 map_J,
                                 ddcHelper::to_coord(vector_field_input(idx)).array());
-                        ddcHelper::get<XOut>(vector_field_output)(idx)
-                                = ddc::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx)
-                                = ddc::get<YOut>(vector_out);
+                        ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
+                        ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
                     });
         }
     }
