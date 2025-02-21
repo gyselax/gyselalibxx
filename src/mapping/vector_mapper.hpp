@@ -86,8 +86,7 @@ public:
 
                         Coord<XOut, YOut> vector_out;
                         vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
-                        ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
+                        vector_field_output(idx) = vector_out;
                     });
         } else {
             InverseJacobianMatrix<Mapping, ddc::coordinate_of_t<IdxType>> inv_mapping(m_mapping);
@@ -103,8 +102,7 @@ public:
                         vector_out.array() = mat_vec_mul(
                                 map_J,
                                 ddcHelper::to_coord(vector_field_input(idx)).array());
-                        ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
+                        vector_field_output(idx) = vector_out;
                     });
         }
     }

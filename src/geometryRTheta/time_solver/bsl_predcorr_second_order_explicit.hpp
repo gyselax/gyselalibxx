@@ -268,14 +268,8 @@ public:
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
             ddc::for_each(grid, [&](IdxRTheta const irp) {
-                ddcHelper::get<X>(advection_field)(irp)
-                        = (ddcHelper::get<X>(advection_field_evaluated)(irp)
-                           + ddcHelper::get<X>(advection_field_predicted)(irp))
-                          / 2.;
-                ddcHelper::get<Y>(advection_field)(irp)
-                        = (ddcHelper::get<Y>(advection_field_evaluated)(irp)
-                           + ddcHelper::get<Y>(advection_field_predicted)(irp))
-                          / 2.;
+                advection_field(irp)
+                        = (advection_field_evaluated(irp) + advection_field_predicted(irp)) / 2.;
             });
 
 

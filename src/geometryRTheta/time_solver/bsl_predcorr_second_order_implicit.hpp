@@ -253,16 +253,8 @@ public:
 
             // Compute the new advection field (E^n(X^n) + E^n(X^P)) /2:
             ddc::for_each(grid, [&](IdxRTheta const irp) {
-                ddcHelper::get<X>(advection_field_k_tot)(irp)
-                        = (ddcHelper::get<X>(advection_field)(irp)
-                           + ddcHelper::get<X>(advection_field_k)(irp))
-                          / 2.;
-                ddcHelper::get<Y>(advection_field_k_tot)(irp)
-                        = (ddcHelper::get<Y>(advection_field)(irp)
-                           + ddcHelper::get<Y>(advection_field_k)(irp))
-                          / 2.;
+                advection_field_k_tot(irp) = advection_field(irp) + advection_field_k(irp) / 2.;
             });
-
 
             // X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:
             // --- Copy phi^n because it will be modified:
@@ -323,14 +315,7 @@ public:
 
             // Computed advection field (A^P(X^n) + A^P(X^P)) /2:
             ddc::for_each(grid, [&](IdxRTheta const irp) {
-                ddcHelper::get<X>(advection_field_k_tot)(irp)
-                        = (ddcHelper::get<X>(advection_field)(irp)
-                           + ddcHelper::get<X>(advection_field_k)(irp))
-                          / 2.;
-                ddcHelper::get<Y>(advection_field_k_tot)(irp)
-                        = (ddcHelper::get<Y>(advection_field)(irp)
-                           + ddcHelper::get<Y>(advection_field_k)(irp))
-                          / 2.;
+                advection_field_k_tot(irp) = advection_field(irp) + advection_field_k(irp) / 2.;
             });
             // X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2
             m_advection_solver(allfdistribu, get_const_field(advection_field_k_tot), dt);
@@ -405,12 +390,7 @@ private:
 
             // Compute the new advection field A(X^n) + A(X^{k-1}):
             ddc::for_each(grid, [&](IdxRTheta const irp) {
-                ddcHelper::get<X>(advection_field_k_tot)(irp)
-                        = ddcHelper::get<X>(advection_field)(irp)
-                          + ddcHelper::get<X>(advection_field_k)(irp);
-                ddcHelper::get<Y>(advection_field_k_tot)(irp)
-                        = ddcHelper::get<Y>(advection_field)(irp)
-                          + ddcHelper::get<Y>(advection_field_k)(irp);
+                advection_field_k_tot(irp) = advection_field(irp) + advection_field_k(irp);
             });
 
             // X^{k-1} = X^k:
