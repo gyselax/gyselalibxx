@@ -23,6 +23,25 @@ struct ToCoord<VectorIndexSet<Dims...>>
 template <class ValidIndexSet>
 using to_coord_t = typename ToCoord<ValidIndexSet>::type;
 
+template <class ElementType, std::size_t N>
+class TupleOfElements
+{
+    template <typename = std::make_index_sequence<N>>
+    struct impl;
+
+    template <size_t... Is>
+    struct impl<std::index_sequence<Is...>>
+    {
+        template <size_t>
+        using wrap = ElementType;
+
+        using type = std::tuple<wrap<Is>...>;
+    };
+
+public:
+    using type = typename impl<>::type;
+};
+
 } // namespace detail
 
 /**
@@ -39,13 +58,17 @@ class Tensor
               || (is_contravariant_vector_index_set_v<ValidIndexSet>))
              && ...));
 
+    template <class OElementType, class... OValidIndexSet>
+    friend class Tensor;
+
 public:
     /// The TensorIndexSet describing the possible indices.
     using index_set = ddc::detail::TypeSeq<ValidIndexSet...>;
 
 private:
     static constexpr std::size_t s_n_elements = (ddc::type_seq_size_v<ValidIndexSet> * ...);
-    std::array<ElementType, s_n_elements> m_data;
+    using ArrayType = typename detail::TupleOfElements<ElementType, s_n_elements>::type;
+    ArrayType m_data;
 
 public:
     /// The type of the elements of the tensor.
@@ -72,6 +95,30 @@ public:
     KOKKOS_FUNCTION static constexpr std::size_t size()
     {
         return s_n_elements;
+    }
+
+    template <class OElementType, size_t... Is>
+    KOKKOS_FUNCTION void mul(OElementType val, std::index_sequence<Is...>)
+    {
+        ((std::get<Is>(m_data) *= val), ...);
+    }
+
+    template <class OElementType, size_t... Is>
+    KOKKOS_FUNCTION void div(OElementType val, std::index_sequence<Is...>)
+    {
+        ((std::get<Is>(m_data) /= val), ...);
+    }
+
+    template <size_t... Is>
+    KOKKOS_FUNCTION void sum(Tensor val, std::index_sequence<Is...>)
+    {
+        ((std::get<Is>(m_data) += std::get<Is>(val.m_data)), ...);
+    }
+
+    template <size_t... Is>
+    KOKKOS_FUNCTION void minus(Tensor val, std::index_sequence<Is...>)
+    {
+        ((std::get<Is>(m_data) -= std::get<Is>(val.m_data)), ...);
     }
 
 private:
@@ -104,6 +151,28 @@ public:
             class = std::enable_if_t<sizeof...(Params) == size() && sizeof...(Params) != 1>>
     explicit KOKKOS_FUNCTION Tensor(Params... elements) : m_data({elements...})
     {
+        static_assert(
+                rank() == 1,
+                "Filling the tensor on initialisation is only permitted for 1D vector objects");
+    }
+
+    /**
+     * @brief Construct a 1D tensor object by providing the elements that should
+     * be saved in the vector.
+     *
+     * @param elements The elements of the tensor.
+     */
+    template <
+            class... Params,
+            class = std::enable_if_t<
+                    ((std::is_reference_v<ElementType>)&&(!std::is_const_v<ElementType>)&&(
+                            std::is_convertible_v<
+                                    Params,
+                                    std::remove_reference_t<ElementType>> && ...))>,
+            class = std::enable_if_t<sizeof...(Params) == size() && sizeof...(Params) != 1>>
+    explicit KOKKOS_FUNCTION Tensor(Params&... elements) : m_data({elements...})
+    {
+        static_assert(std::is_reference_v<ElementType>);
         static_assert(
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
@@ -145,7 +214,7 @@ public:
     KOKKOS_FUNCTION ElementType& get()
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
+        return std::get<QueryTensorIndexElement::index()>(m_data);
     }
 
     /**
@@ -157,7 +226,7 @@ public:
     KOKKOS_FUNCTION ElementType const& get() const
     {
         static_assert(tensor_tools::is_tensor_index_element_v<QueryTensorIndexElement>);
-        return m_data[QueryTensorIndexElement::index()];
+        return std::get<QueryTensorIndexElement::index()>(m_data);
     }
 
     /**
@@ -166,6 +235,13 @@ public:
      * @return A reference to the current tensor.
      */
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
+
+    template <class OElementType>
+    KOKKOS_FUNCTION Tensor& operator=(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
+    {
+        m_data = o_tensor.m_data;
+        return *this;
+    }
 
     /**
      * @brief A copy operator.
@@ -194,9 +270,7 @@ public:
     template <class OElementType>
     KOKKOS_FUNCTION Tensor& operator*=(OElementType val)
     {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] *= val;
-        }
+        mul(val, std::make_index_sequence<s_n_elements>());
         return *this;
     }
 
@@ -209,9 +283,7 @@ public:
     template <class OElementType>
     KOKKOS_FUNCTION Tensor& operator/=(OElementType val)
     {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] /= val;
-        }
+        div(val, std::make_index_sequence<s_n_elements>());
         return *this;
     }
 
@@ -222,9 +294,7 @@ public:
      */
     KOKKOS_FUNCTION Tensor& operator+=(Tensor const& val)
     {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] += val.m_data[i];
-        }
+        sum(val, std::make_index_sequence<s_n_elements>());
         return *this;
     }
 
@@ -235,9 +305,7 @@ public:
      */
     KOKKOS_FUNCTION Tensor& operator-=(Tensor const& val)
     {
-        for (std::size_t i(0); i < s_n_elements; ++i) {
-            m_data[i] -= val.m_data[i];
-        }
+        minus(val, std::make_index_sequence<s_n_elements>());
         return *this;
     }
 
