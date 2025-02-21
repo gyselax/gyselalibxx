@@ -237,6 +237,11 @@ public:
      */
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
 
+    /**
+     * @brief A copy operator.
+     * @param o_tensor The tensor to be copied.
+     * @return A reference to the current tensor.
+     */
     template <class OElementType>
     KOKKOS_FUNCTION Tensor& operator=(Tensor<OElementType, ValidIndexSet...> const& o_tensor)
     {
