@@ -191,8 +191,7 @@ public:
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {
-            ddcHelper::get<X>(advection_field_xy)(irp) = CoordX(advection_field_xy_center);
-            ddcHelper::get<Y>(advection_field_xy)(irp) = CoordY(advection_field_xy_center);
+            advection_field_xy(irp) = advection_field_xy_center;
         });
 
         // Pre-allocate some memory to prevent allocation later in loop
