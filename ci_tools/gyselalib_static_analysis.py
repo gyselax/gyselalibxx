@@ -776,7 +776,7 @@ def check_exec_space_usage(file):
                               'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
                               'make_integer_sequence', 'make_index_sequence', 'index_sequence',
                               'experimental::full_extent', 'experimental::submdspan', 'conjunction_v', 'disjunction_v',
-                              'conjunction', 'disjunction')
+                              'conjunction', 'disjunction', 'is_const_v', 'is_reference_v')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
                 func = None
