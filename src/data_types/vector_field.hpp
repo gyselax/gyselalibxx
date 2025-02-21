@@ -73,8 +73,8 @@ private:
     using base_type = VectorFieldCommon<field_type, NDTag>;
 
 public:
-    /// The type of an element in one of the Fields comprising the VectorField
-    using element_type = typename base_type::element_type;
+    using typename base_type::element_type;
+    using typename base_type::element_ref_type;
 
     using typename base_type::NDTypeTag;
 
@@ -184,10 +184,14 @@ private:
      * @return copy of this element
      */
     template <class... ODDims, typename T, T... ints>
-    KOKKOS_FUNCTION element_type
-    operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>) const noexcept
+    KOKKOS_FUNCTION auto operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>)
+            const noexcept
     {
-        return element_type((base_type::m_values[ints](delems))...);
+        if constexpr (std::is_const_v<ElementType>) {
+            return element_type((base_type::m_values[ints](delems))...);
+        } else {
+            return element_ref_type((base_type::m_values[ints](delems))...);
+        }
     }
 
 public:
@@ -316,8 +320,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    KOKKOS_FUNCTION element_type
-    operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION auto operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->
@@ -329,7 +332,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    KOKKOS_FUNCTION element_type operator()(Idx<ODDims...> const& delems) const noexcept
+    KOKKOS_FUNCTION auto operator()(Idx<ODDims...> const& delems) const noexcept
     {
         return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
     }
