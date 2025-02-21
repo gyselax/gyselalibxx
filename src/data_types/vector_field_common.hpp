@@ -44,7 +44,14 @@ auto deepcopy(FieldDst&& dst, FieldSrc&& src)
 }
 
 template <class QueryTag, class VectorFieldType>
-inline constexpr auto get(VectorFieldType&& field) noexcept
+inline constexpr auto get(VectorFieldType const& field) noexcept
+{
+    static_assert(is_vector_field_v<VectorFieldType>);
+    return field.template get<QueryTag>();
+}
+
+template <class QueryTag, class VectorFieldType>
+inline constexpr auto get(VectorFieldType& field) noexcept
 {
     return field.template get<QueryTag>();
 }
