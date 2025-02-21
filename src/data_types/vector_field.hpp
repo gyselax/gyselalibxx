@@ -73,8 +73,8 @@ private:
     using base_type = VectorFieldCommon<field_type, NDTag>;
 
 public:
-    using typename base_type::element_type;
     using typename base_type::element_ref_type;
+    using typename base_type::element_type;
 
     using typename base_type::NDTypeTag;
 
