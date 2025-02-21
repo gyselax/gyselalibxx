@@ -97,6 +97,7 @@ public:
         return s_n_elements;
     }
 
+private:
     template <class OElementType, size_t... Is>
     KOKKOS_FUNCTION void mul(OElementType val, std::index_sequence<Is...>)
     {
