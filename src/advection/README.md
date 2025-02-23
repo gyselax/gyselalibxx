@@ -1,8 +1,15 @@
 # Advection methods
 
-The `advection/` folder gathers the backward semi lagrangian scheme classes. There are two main classes, AdvectionSpatial and AdvectionVelocity. Implementing these operators separately makes sense, since we are using time splitting.
+The `advection/` folder gathers the backward semi-Lagrangian scheme classes. 
+There are different classes for each direction we advect. 
+Implementing these operators separately makes sense, since we are using time splitting.
+- [Spatial advection](#src_advection__Spatial_avection): BslAdvectionSpatial.
+- [Velocity advection](#src_advection__Velocity_avection): BslAdvectionVelocity.
+- [1D advection with a given advection field](#src_advection__1D_advection_with_a_given_advection_field): BslAdvection1D
+- [Polar advection](#src_advection__2D_advection_in_the_poloidal_cross-section): currently, only IPolarFootFinder with SplinePolarFootFinder
+is implemented. We can solve the characteristics' equation, but the function we want to advect is not interpolated at the feet. 
 
-The feet of the characteristic curves are used to interpolate the updated distribution function on mesh points. It uses batched interpolators so the interpolation step is done over the whole distribution function.
+The feet of the characteristics' curves are used to interpolate the updated distribution function on mesh points. It uses batched interpolators, so the interpolation step is done over the whole distribution function.
 
 ## Spatial advection
 Here the purpose is the advection along a direction on the physical space dimension of the phase space.
@@ -12,7 +19,7 @@ $$ \frac{df_s}{dt}= \sqrt{\frac{m_e}{m_s}} v \frac{\partial f_s}{\partial x} $$
 
 ## Velocity advection
 Here the purpose is the advection along a direction on the velocity space dimension of the phase space.
-The dynamics of the motion on the velocity dimension are governed by the following equation, where E is the electric field.
+The dynamics of the motion on the velocity dimension are governed by the following equation, where *E* is the electric field.
 
 $$ \frac{df_s}{dt}= q_s \sqrt{\frac{m_e}{m_s}} E \frac{\partial f_s}{\partial v} $$
 
@@ -120,11 +127,12 @@ The operator takes as templated parameters:
 
 **Remark/Warning:** the BslAdvection1D operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the `tests/advection/` folder).
 
-**Remark/Warning:** The advection field need to use interpolation on B-splines. So we cannot use other type of interpolator for the advection field. However there is no constraint on the interpolator of the advected function.
+**Remark/Warning:** The advection field need to use interpolation on B-splines. So we cannot use other type of interpolator for the advection field. However, there is no constraint on the interpolator of the advected function.
 
-## PolarFootFinder
 
-These methods are designed to calculate the foot of the characteristic on the polar plane for a 2D transport equation of the type:
+## 2D advection in the poloidal cross-section 
+
+These methods (IPolarFootFinder) are designed to calculate the feet of the characteristic on the polar plane for a 2D transport equation of the type:
 ```math
 \partial_t f(t,x(r,\theta),y(r,\theta)) + A(t,x(r,\theta),y(r,\theta))\cdot\nabla f(t,x(r,\theta),y(r,\theta)) = 0,
 ```
@@ -139,11 +147,11 @@ X(s; s, x, y) = x,\\
 Y(s; s, x, y) = y.
 ```
 
-The characteristic feet are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
+The characteristics' feet are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
 
 ### Advection domain
 
-There are two advection domains to consider:
+There are two advection domains to consider for solving the characteristics' equation:
  - the physical domain;
  - the pseudo-Cartesian domain.
 
@@ -160,12 +168,12 @@ compute the mesh points in the physical domain using a mapping function $\mathca
 
 This adds some steps to the advection operator, we now have to compute
  1. the mesh points in the physical domain using $\mathcal{F}$;
- 2. the characteristic feet in the physical domain;
- 3. the characteristic feet in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
- 4. then interpolate the advection function at the  characteristic feet in the logical domain.
+ 2. the characteristics' feet in the physical domain;
+ 3. the characteristics' feet in the logical domain (polar grid) using $\mathcal{F}^{-1}$;
+ 4. then interpolate the advection function at the characteristic feet in the logical domain.
 
 The third step can be difficult especially if the mapping function $\mathcal{F}$ is not analytically invertible.
-It is not impossible but the computations can be costly.
+It is not impossible, but the computations can be costly.
 
 
 That is why, we introduce the **pseudo-Cartesian domain**.
@@ -178,8 +186,8 @@ We use another mapping function $\mathcal{G}$ such that:
 Then the four previous steps become
  1. calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$;
  2. calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$;
- 3. calculate the characteristic feet in the pseudo-Cartesian domain;
- 4. calculate the characteristic feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
+ 3. calculate the characteristics' feet in the pseudo-Cartesian domain;
+ 4. calculate the characteristics' feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $`\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)`$)
 and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Edoardo Zoni's article [1].
