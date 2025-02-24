@@ -123,6 +123,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a939e3995d29bdb32c073e38494563009"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a> (ddc::Coordinate&lt; Tags... &gt; coord)</td></tr>
 <tr class="memdesc:a939e3995d29bdb32c073e38494563009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm.  <br /></td></tr>
 <tr class="separator:a939e3995d29bdb32c073e38494563009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78caab94d9b010c79a18002ffc99331" id="r_ae78caab94d9b010c79a18002ffc99331"><td class="memTemplParams" colspan="2">template&lt;class... Tags&gt; </td></tr>
+<tr class="memitem:ae78caab94d9b010c79a18002ffc99331"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#ae78caab94d9b010c79a18002ffc99331">norm_inf</a> (<a class="el" href="classTensor.html">DVector</a>&lt; Tags... &gt; vec)</td></tr>
+<tr class="memdesc:ae78caab94d9b010c79a18002ffc99331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm of a vector on an orthonormal coordinate system.  <br /></td></tr>
+<tr class="separator:ae78caab94d9b010c79a18002ffc99331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af586948949594fb53ccfd4010d0a0fd6" id="r_af586948949594fb53ccfd4010d0a0fd6"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#af586948949594fb53ccfd4010d0a0fd6">norm_inf</a> (double const coord)</td></tr>
 <tr class="memdesc:af586948949594fb53ccfd4010d0a0fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm.  <br /></td></tr>
 <tr class="separator:af586948949594fb53ccfd4010d0a0fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,7 +167,7 @@ Functions</h2></td></tr>
 <div class="textblock"><p>File Describing useful mathematical functions to compute Lnorms. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a939e3995d29bdb32c073e38494563009" name="a939e3995d29bdb32c073e38494563009"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a939e3995d29bdb32c073e38494563009">&#9670;&#160;</a></span>norm_inf() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a939e3995d29bdb32c073e38494563009">&#9670;&#160;</a></span>norm_inf() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,8 +196,38 @@ template&lt;class... Tags&gt; </div>
 
 </div>
 </div>
+<a id="ae78caab94d9b010c79a18002ffc99331" name="ae78caab94d9b010c79a18002ffc99331"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78caab94d9b010c79a18002ffc99331">&#9670;&#160;</a></span>norm_inf() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... Tags&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION double norm_inf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classTensor.html">DVector</a>&lt; Tags... &gt;&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the infinity norm of a vector on an orthonormal coordinate system. </p>
+<p>For a given vector \( x \) , compute \(|Vert x |Vert_{\infty} = \sup_n |x_n| \).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vec</td><td>The given vector.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A double containing the value of the infinty norm. </dd></dl>
+
+</div>
+</div>
 <a id="af586948949594fb53ccfd4010d0a0fd6" name="af586948949594fb53ccfd4010d0a0fd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af586948949594fb53ccfd4010d0a0fd6">&#9670;&#160;</a></span>norm_inf() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af586948949594fb53ccfd4010d0a0fd6">&#9670;&#160;</a></span>norm_inf() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +255,7 @@ template&lt;class... Tags&gt; </div>
 </div>
 </div>
 <a id="a4c8219dfeea80b86bff16a853e188f8d" name="a4c8219dfeea80b86bff16a853e188f8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c8219dfeea80b86bff16a853e188f8d">&#9670;&#160;</a></span>norm_inf() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c8219dfeea80b86bff16a853e188f8d">&#9670;&#160;</a></span>norm_inf() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -269,7 +303,7 @@ template&lt;class ExecSpace , class ElementType , class IdxRange &gt; </div>
 </div>
 </div>
 <a id="ad1d0feb06070948df0746df5df7c30c9" name="ad1d0feb06070948df0746df5df7c30c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1d0feb06070948df0746df5df7c30c9">&#9670;&#160;</a></span>norm_inf() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d0feb06070948df0746df5df7c30c9">&#9670;&#160;</a></span>norm_inf() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

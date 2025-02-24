@@ -70,10 +70,12 @@ var annotated =
       [ "GridTheta", "structGEOM__NAMESPACE__NAME_1_1GridTheta.html", null ],
       [ "GridX", "structGEOM__NAMESPACE__NAME_1_1GridX.html", null ],
       [ "GridY", "structGEOM__NAMESPACE__NAME_1_1GridY.html", null ],
-      [ "R", "structGEOM__NAMESPACE__NAME_1_1R.html", null ],
-      [ "Theta", "structGEOM__NAMESPACE__NAME_1_1Theta.html", null ],
-      [ "X", "structGEOM__NAMESPACE__NAME_1_1X.html", null ],
-      [ "Y", "structGEOM__NAMESPACE__NAME_1_1Y.html", null ]
+      [ "R", "structGEOM__NAMESPACE__NAME_1_1R.html", "structGEOM__NAMESPACE__NAME_1_1R" ],
+      [ "R_cov", "structGEOM__NAMESPACE__NAME_1_1R__cov.html", "structGEOM__NAMESPACE__NAME_1_1R__cov" ],
+      [ "Theta", "structGEOM__NAMESPACE__NAME_1_1Theta.html", "structGEOM__NAMESPACE__NAME_1_1Theta" ],
+      [ "Theta_cov", "structGEOM__NAMESPACE__NAME_1_1Theta__cov.html", "structGEOM__NAMESPACE__NAME_1_1Theta__cov" ],
+      [ "X", "structGEOM__NAMESPACE__NAME_1_1X.html", "structGEOM__NAMESPACE__NAME_1_1X" ],
+      [ "Y", "structGEOM__NAMESPACE__NAME_1_1Y.html", "structGEOM__NAMESPACE__NAME_1_1Y" ]
     ] ],
     [ "periodic_strips_uniform_2d_9patches", null, [
       [ "BSplinesX", "structperiodic__strips__uniform__2d__9patches_1_1BSplinesX.html", null ],
@@ -292,7 +294,6 @@ var annotated =
     [ "Theta", "structTheta.html", "structTheta" ],
     [ "Theta_cov", "structTheta__cov.html", "structTheta__cov" ],
     [ "TriangularBernsteinPolynomialBasis", "classTriangularBernsteinPolynomialBasis.html", "classTriangularBernsteinPolynomialBasis" ],
-    [ "Vector", "classVector.html", "classVector" ],
     [ "VectorField", "classVectorField.html", "classVectorField" ],
     [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
     [ "VectorFieldMem", "classVectorFieldMem.html", "classVectorFieldMem" ],
@@ -306,7 +307,7 @@ var annotated =
     [ "Vx", "structVx.html", null ],
     [ "Vy", "structVy.html", null ],
     [ "X", "structX.html", "structX" ],
-    [ "X_pC", "structX__pC.html", null ],
+    [ "X_pC", "structX__pC.html", "structX__pC" ],
     [ "Y", "structY.html", "structY" ],
-    [ "Y_pC", "structY__pC.html", null ]
+    [ "Y_pC", "structY__pC.html", "structY__pC" ]
 ];

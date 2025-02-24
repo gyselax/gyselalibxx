@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"quadrature__coeffs__nd_8hpp_source.html":[16,0,17,3],
 "restartinitialization_8hpp_source.html":[16,0,5,2,4],
 "rk2_8hpp_source.html":[16,0,19,3],
 "rk3_8hpp_source.html":[16,0,19,4],
@@ -181,9 +180,17 @@ var NAVTREEINDEX6 =
 "structGEOM__NAMESPACE__NAME_1_1GridX.html":[15,3,6],
 "structGEOM__NAMESPACE__NAME_1_1GridY.html":[15,3,7],
 "structGEOM__NAMESPACE__NAME_1_1R.html":[15,3,8],
-"structGEOM__NAMESPACE__NAME_1_1Theta.html":[15,3,9],
-"structGEOM__NAMESPACE__NAME_1_1X.html":[15,3,10],
-"structGEOM__NAMESPACE__NAME_1_1Y.html":[15,3,11],
+"structGEOM__NAMESPACE__NAME_1_1R.html#a8340119f57eacc403c379b792f37d669":[15,3,8,0],
+"structGEOM__NAMESPACE__NAME_1_1R__cov.html":[15,3,9],
+"structGEOM__NAMESPACE__NAME_1_1R__cov.html#a9db969bd4e7d1ff53df6ef4bdb8badac":[15,3,9,0],
+"structGEOM__NAMESPACE__NAME_1_1Theta.html":[15,3,10],
+"structGEOM__NAMESPACE__NAME_1_1Theta.html#a092a79ecaf811f9309e92b66924050ce":[15,3,10,0],
+"structGEOM__NAMESPACE__NAME_1_1Theta__cov.html":[15,3,11],
+"structGEOM__NAMESPACE__NAME_1_1Theta__cov.html#aacd1ab8c4b788061cfc75277988e0f9d":[15,3,11,0],
+"structGEOM__NAMESPACE__NAME_1_1X.html":[15,3,12],
+"structGEOM__NAMESPACE__NAME_1_1X.html#a378e47afcaec02612847a19b5b4c4184":[15,3,12,0],
+"structGEOM__NAMESPACE__NAME_1_1Y.html":[15,3,13],
+"structGEOM__NAMESPACE__NAME_1_1Y.html#ac7297a3ab6e1674fd249a6850075071d":[15,3,13,0],
 "structGaussLegendreCoefficients.html":[15,68],
 "structGridMom.html":[15,72],
 "structGridMu.html":[15,73],
@@ -242,12 +249,5 @@ var NAVTREEINDEX6 =
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f":[15,161,18],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8":[15,161,15],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33":[15,161,16],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2":[15,161,7],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036":[15,161,6],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af0e9d89578e2d3b2a700bd496a69a596":[15,161,11],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af4933351800318b415a122d2a2ef07bd":[15,161,13],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af6492b7437a05bffcae91ec488fb3ebc":[15,161,12],
-"structPolarBSplinesRTheta.html":[15,165],
-"structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.html":[15,164,0,3],
-"structPolarSpline.html":[15,166]
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2":[15,161,7]
 };

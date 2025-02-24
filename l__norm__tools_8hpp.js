@@ -1,6 +1,7 @@
 var l__norm__tools_8hpp =
 [
     [ "norm_inf", "l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009", null ],
+    [ "norm_inf", "l__norm__tools_8hpp.html#ae78caab94d9b010c79a18002ffc99331", null ],
     [ "norm_inf", "l__norm__tools_8hpp.html#af586948949594fb53ccfd4010d0a0fd6", null ],
     [ "norm_inf", "l__norm__tools_8hpp.html#a4c8219dfeea80b86bff16a853e188f8d", null ],
     [ "norm_inf", "l__norm__tools_8hpp.html#ad1d0feb06070948df0746df5df7c30c9", null ],

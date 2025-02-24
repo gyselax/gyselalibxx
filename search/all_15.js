@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['r_0',['r',['../structR.html',1,'R'],['../structGEOM__NAMESPACE__NAME_1_1R.html',1,'GEOM_NAMESPACE_NAME::R'],['../classIPolarFootFinder.html#af9711742eb727888074230330e13e782',1,'IPolarFootFinder::R'],['../classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9',1,'PolarSplineFEMPoissonLikeSolver::R']]],
+  ['r_0',['r',['../structR.html',1,'R'],['../classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9',1,'PolarSplineFEMPoissonLikeSolver::R'],['../classIPolarFootFinder.html#af9711742eb727888074230330e13e782',1,'IPolarFootFinder::R'],['../structGEOM__NAMESPACE__NAME_1_1R.html',1,'GEOM_NAMESPACE_NAME::R']]],
   ['r_20theta_1',['r theta',['../src_geometryRTheta.html',1,'Geometry (r, theta)'],['../tests_geometryRTheta.html',1,'Tests : Geometry (r, theta)']]],
   ['r_20theta_20geometry_2',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
   ['r1_5fmax_3',['r1_max',['../classMultipatchSplineOnionShapeTest.html#a397a53a5abf7d9072f1fae5c4bae6f86',1,'MultipatchSplineOnionShapeTest']]],
@@ -9,7 +9,7 @@ var searchData=
   ['r2_5fmax_6',['r2_max',['../classMultipatchSplineOnionShapeTest.html#acb50d4e1afbde8b4657906caa199776b',1,'MultipatchSplineOnionShapeTest']]],
   ['r2_5fmin_7',['r2_min',['../classMultipatchSplineOnionShapeTest.html#a07861ecbdcd559df6982cf33e7077d61',1,'MultipatchSplineOnionShapeTest']]],
   ['r2_5fncells_8',['r2_ncells',['../classMultipatchSplineOnionShapeTest.html#ad5ec6f8e348cf17ea99cebacf1594d59',1,'MultipatchSplineOnionShapeTest']]],
-  ['r_5fcov_9',['R_cov',['../structR__cov.html',1,'']]],
+  ['r_5fcov_9',['r_cov',['../structR__cov.html',1,'R_cov'],['../structGEOM__NAMESPACE__NAME_1_1R__cov.html',1,'GEOM_NAMESPACE_NAME::R_cov']]],
   ['raise_20an_20error_10',['Should I use abort, assert, or static_assert to raise an error?',['../docs_developer_FAQ.html#docs_developer_FAQ__Should_I_use_abort_assert_or_static_assert_to_raise_an_error',1,'']]],
   ['range_11',['Index Range',['../docs_DDC_in_gyselalibxx.html#docs_DDC_in_gyselalibxx__Index_Range',1,'']]],
   ['rank_12',['rank',['../classTensor.html#ac7619bb6c3891c90bb2c59f7515f474f',1,'Tensor::rank()'],['../classTriangularBernsteinPolynomialBasis.html#acbf2b77f37d38639c20cef4e8a2cef13',1,'TriangularBernsteinPolynomialBasis::rank()']]],

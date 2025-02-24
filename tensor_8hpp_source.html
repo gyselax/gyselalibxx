@@ -193,241 +193,265 @@ $(document).ready(function(){initNavTree('tensor_8hpp_source.html',''); initResi
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
 </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
 <div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classTensor.html#a783dddf339a00723800683e528ef9bc3">  118</a></span>    <span class="keyword">explicit</span> KOKKOS_FUNCTION <a class="code hl_function" href="classTensor.html#a783dddf339a00723800683e528ef9bc3">Tensor</a>(<a class="code hl_class" href="classTensor.html">Tensor&lt;OElementType, ValidIndexSet...&gt;</a> <span class="keyword">const</span>&amp; o_tensor)</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        : m_data(o_tensor.m_data)</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classTensor.html#a1c1d599698457fd792ee9012fdb3b5b4">  118</a></span>    <span class="keyword">explicit</span> KOKKOS_FUNCTION <a class="code hl_function" href="classTensor.html#a1c1d599698457fd792ee9012fdb3b5b4">Tensor</a>(Coord&lt;Dims...&gt; coord) : m_data(coord.array())</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <a class="code hl_function" href="classTensor.html#ac7619bb6c3891c90bb2c59f7515f474f">rank</a>() == 1,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="stringliteral">&quot;Filling the tensor on initialisation is only permitted for 1D vector objects&quot;</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                std::is_same_v&lt;VectorIndexSet&lt;Dims...&gt;, ddc::type_seq_element_t&lt;0, index_set&gt;&gt;,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                <span class="stringliteral">&quot;The coordinate must have the same memory layout to make a clean conversion.&quot;</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
 </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> QueryTensorIndexElement&gt;</div>
-<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classTensor.html#afffb2e308bfc979b45c83c2f2cdff57d">  129</a></span>    KOKKOS_FUNCTION ElementType&amp; <a class="code hl_function" href="classTensor.html#afffb2e308bfc979b45c83c2f2cdff57d">get</a>()</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keyword">static_assert</span>(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">return</span> m_data[QueryTensorIndexElement::index()];</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="foldopen" id="foldopen00134" data-start="{" data-end="}">
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="classTensor.html#a783dddf339a00723800683e528ef9bc3">  134</a></span>    <span class="keyword">explicit</span> KOKKOS_FUNCTION <a class="code hl_function" href="classTensor.html#a783dddf339a00723800683e528ef9bc3">Tensor</a>(<a class="code hl_class" href="classTensor.html">Tensor&lt;OElementType, ValidIndexSet...&gt;</a> <span class="keyword">const</span>&amp; o_tensor)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        : m_data(o_tensor.m_data)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
 </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> QueryTensorIndexElement&gt;</div>
-<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classTensor.html#a539ea3ced7ffa549f2b6b7e282895f13">  141</a></span>    KOKKOS_FUNCTION ElementType <span class="keyword">const</span>&amp; <a class="code hl_function" href="classTensor.html#a539ea3ced7ffa549f2b6b7e282895f13">get</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keyword">static_assert</span>(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">return</span> m_data[QueryTensorIndexElement::index()];</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> QueryTensorIndexElement&gt;</div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classTensor.html#afffb2e308bfc979b45c83c2f2cdff57d">  145</a></span>    KOKKOS_FUNCTION ElementType&amp; <a class="code hl_function" href="classTensor.html#afffb2e308bfc979b45c83c2f2cdff57d">get</a>()</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keyword">static_assert</span>(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span> m_data[QueryTensorIndexElement::index()];</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
 </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classTensor.html#ab427e698416968e0341852bd84203b75">  152</a></span>    KOKKOS_DEFAULTED_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#ab427e698416968e0341852bd84203b75">operator=</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; other) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
-<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classTensor.html#af0da6591449a8769614164b605781983">  161</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#af0da6591449a8769614164b605781983">operator*=</a>(OElementType val)</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            m_data[i] *= val;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        }</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> QueryTensorIndexElement&gt;</div>
+<div class="foldopen" id="foldopen00157" data-start="{" data-end="}">
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classTensor.html#a539ea3ced7ffa549f2b6b7e282895f13">  157</a></span>    KOKKOS_FUNCTION ElementType <span class="keyword">const</span>&amp; <a class="code hl_function" href="classTensor.html#a539ea3ced7ffa549f2b6b7e282895f13">get</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keyword">static_assert</span>(tensor_tools::is_tensor_index_element_v&lt;QueryTensorIndexElement&gt;);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">return</span> m_data[QueryTensorIndexElement::index()];</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
 </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classTensor.html#ab427e698416968e0341852bd84203b75">  168</a></span>    KOKKOS_DEFAULTED_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#ab427e698416968e0341852bd84203b75">operator=</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
 <div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classTensor.html#aef89751059895c9befb75892ca348a68">  176</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#aef89751059895c9befb75892ca348a68">operator/=</a>(OElementType val)</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classTensor.html#a865e540a3ab70a849b4f181404cd9fba">  176</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#a865e540a3ab70a849b4f181404cd9fba">operator=</a>(Coord&lt;Dims...&gt; coord)</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    {</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            m_data[i] /= val;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        }</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                <a class="code hl_function" href="classTensor.html#ac7619bb6c3891c90bb2c59f7515f474f">rank</a>() == 1,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                <span class="stringliteral">&quot;Copying a coordinate into a tensor is only possible for 1D tensor objects&quot;</span>);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                std::is_same_v&lt;VectorIndexSet&lt;Dims...&gt;, ddc::type_seq_element_t&lt;0, index_set&gt;&gt;,</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                <span class="stringliteral">&quot;The coordinate must have the same memory layout to make a clean conversion.&quot;</span>);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        m_data = coord.array();</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    }</div>
 </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="classTensor.html#a4e1e34b7fc6c2fd076736053e5cf3ec6">  189</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#a4e1e34b7fc6c2fd076736053e5cf3ec6">operator+=</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    {</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            m_data[i] += val.m_data[i];</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        }</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="classTensor.html#af0da6591449a8769614164b605781983">  195</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#af0da6591449a8769614164b605781983">operator*=</a>(OElementType val)</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            m_data[i] *= val;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
 </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="foldopen" id="foldopen00202" data-start="{" data-end="}">
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classTensor.html#ab023077f54456efd237358613f819993">  202</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#ab023077f54456efd237358613f819993">operator-=</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            m_data[i] -= val.m_data[i];</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        }</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="foldopen" id="foldopen00210" data-start="{" data-end="}">
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classTensor.html#aef89751059895c9befb75892ca348a68">  210</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#aef89751059895c9befb75892ca348a68">operator/=</a>(OElementType val)</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            m_data[i] /= val;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    }</div>
 </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
-<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classTensor.html#a1b1faf34db4a030d44560352b18d0c0c">  217</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a1b1faf34db4a030d44560352b18d0c0c">operator*</a>(OElementType val)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        result *= val;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classTensor.html#a4e1e34b7fc6c2fd076736053e5cf3ec6">  223</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#a4e1e34b7fc6c2fd076736053e5cf3ec6">operator+=</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            m_data[i] += val.m_data[i];</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    }</div>
 </div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
-<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d">  231</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d">operator/</a>(OElementType val)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        result /= val;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classTensor.html#ab023077f54456efd237358613f819993">  236</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&amp; <a class="code hl_function" href="classTensor.html#ab023077f54456efd237358613f819993">operator-=</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordflow">for</span> (std::size_t i(0); i &lt; s_n_elements; ++i) {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            m_data[i] -= val.m_data[i];</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        }</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    }</div>
 </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="foldopen" id="foldopen00243" data-start="{" data-end="}">
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">  243</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">operator+</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        result += val;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    }</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="foldopen" id="foldopen00251" data-start="{" data-end="}">
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classTensor.html#a1b1faf34db4a030d44560352b18d0c0c">  251</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a1b1faf34db4a030d44560352b18d0c0c">operator*</a>(OElementType val)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        result *= val;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    }</div>
 </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
-<div class="foldopen" id="foldopen00255" data-start="{" data-end="}">
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">  255</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">operator-</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        result -= val;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> OElementType&gt;</div>
+<div class="foldopen" id="foldopen00265" data-start="{" data-end="}">
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d">  265</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d">operator/</a>(OElementType val)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        result /= val;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
 </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> dim&gt;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classTensor.html#a19169c8af9ca4025b5779c69761f4b8e">  268</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classTensor.html#a19169c8af9ca4025b5779c69761f4b8e">vector_index_set_t</a> = ddc::type_seq_element_t&lt;dim, index_set&gt;;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>};</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="foldopen" id="foldopen00277" data-start="{" data-end="}">
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">  277</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">operator+</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        result += val;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    }</div>
 </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="keyword">namespace </span>detail {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> TypeSeqVal<span class="keywordtype">id</span>IndexSet&gt;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="keyword">struct </span>ToTensor;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="keyword">struct </span>ToTensor&lt;ElementType, ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;&gt;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>{</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keyword">using </span>type = <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;ElementType, ValidIndexSet...&gt;;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>};</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>} <span class="comment">// namespace detail</span></div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> TypeSeqVal<span class="keywordtype">id</span>IndexSet&gt;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keyword">using </span>to_tensor_t = <span class="keyword">typename</span> detail::ToTensor&lt;ElementType, TypeSeqValidIndexSet&gt;::type;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment">//                         Type aliases</span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... ValidIndexSet&gt;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="keyword">using </span><a class="code hl_class" href="classTensor.html">DTensor</a> = <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;double, ValidIndexSet...&gt;;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">// These objects should be extricated from the namespace in a later PR</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="keyword">namespace </span>tensor_tools {</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="keyword">using </span><a class="code hl_class" href="classVector.html">Vector</a> = <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;ElementType, VectorIndexSet&lt;Dims...&gt;&gt;;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="keyword">using </span><a class="code hl_class" href="classVector.html">DVector</a> = <a class="code hl_class" href="classVector.html">Vector</a>&lt;double, Dims...&gt;;</div>
+<div class="foldopen" id="foldopen00289" data-start="{" data-end="}">
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">  289</a></span>    KOKKOS_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a> <a class="code hl_function" href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">operator-</a>(<a class="code hl_class" href="classTensor.html">Tensor</a> <span class="keyword">const</span>&amp; val)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <a class="code hl_class" href="classTensor.html">Tensor</a> result(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        result -= val;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    }</div>
+</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> dim&gt;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="classTensor.html#a19169c8af9ca4025b5779c69761f4b8e">  302</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classTensor.html#a19169c8af9ca4025b5779c69761f4b8e">vector_index_set_t</a> = ddc::type_seq_element_t&lt;dim, index_set&gt;;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>};</div>
+</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="keyword">namespace </span>detail {</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> TypeSeqVal<span class="keywordtype">id</span>IndexSet&gt;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="keyword">struct </span>ToTensor;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="keyword">struct </span>ToTensor&lt;ElementType, ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;&gt;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>{</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keyword">using </span>type = <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;ElementType, ValidIndexSet...&gt;;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>};</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>} <span class="comment">// namespace tensor_tools</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>} <span class="comment">// namespace detail</span></div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">//                         Operators</span></div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">namespace </span>ddcHelper {</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryIndexTag, <span class="keyword">class </span>ElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>KOKKOS_INLINE_FUNCTION ElementType&amp; get(<a class="code hl_class" href="classTensor.html">Tensor&lt;ElementType, ValidIndexSet...&gt;</a>&amp; tensor)</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>{</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">return</span> tensor.template get&lt;<a class="code hl_class" href="classtensor__tools_1_1TensorIndexElement.html">tensor_tools::TensorIndexElement</a>&lt;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>            ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            QueryIndexTag...&gt;&gt;();</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>}</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryIndexTag, <span class="keyword">class </span>ElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>KOKKOS_INLINE_FUNCTION ElementType <span class="keyword">const</span>&amp; get(<a class="code hl_class" href="classTensor.html">Tensor&lt;ElementType, ValidIndexSet...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>{</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <span class="keywordflow">return</span> tensor.template get&lt;<a class="code hl_class" href="classtensor__tools_1_1TensorIndexElement.html">tensor_tools::TensorIndexElement</a>&lt;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            QueryIndexTag...&gt;&gt;();</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>}</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; to_coord(<a class="code hl_class" href="classVector.html">Vector&lt;ElementType, Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ElementType, <span class="keyword">class</span> TypeSeqVal<span class="keywordtype">id</span>IndexSet&gt;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="keyword">using </span>to_tensor_t = <span class="keyword">typename</span> detail::ToTensor&lt;ElementType, TypeSeqValidIndexSet&gt;::type;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">//                         Type aliases</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... ValidIndexSet&gt;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="keyword">using </span><a class="code hl_class" href="classTensor.html">DTensor</a> = <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;double, ValidIndexSet...&gt;;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="keyword">using </span><a class="code hl_class" href="classTensor.html">Vector</a> = <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;ElementType, VectorIndexSet&lt;Dims...&gt;&gt;;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">using </span><a class="code hl_class" href="classTensor.html">DVector</a> = <a class="code hl_class" href="classTensor.html">Vector</a>&lt;double, Dims...&gt;;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="comment">//                         Operators</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="keyword">namespace </span>ddcHelper {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryIndexTag, <span class="keyword">class </span>ElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>KOKKOS_INLINE_FUNCTION ElementType&amp; get(<a class="code hl_class" href="classTensor.html">Tensor&lt;ElementType, ValidIndexSet...&gt;</a>&amp; tensor)</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>{</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;(get&lt;Dims&gt;(tensor)...);</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>}</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>} <span class="comment">// namespace ddcHelper</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class </span>OElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>KOKKOS_INLINE_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;ElementType, ValidIndexSet...&gt; operator*(</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        OElementType val,</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <a class="code hl_class" href="classTensor.html">Tensor&lt;ElementType, ValidIndexSet...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>{</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keywordflow">return</span> tensor * val;</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>}</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator+(</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        <a class="code hl_class" href="classVector.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>{</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) + ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>}</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordflow">return</span> tensor.template get&lt;<a class="code hl_class" href="classtensor__tools_1_1TensorIndexElement.html">tensor_tools::TensorIndexElement</a>&lt;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            QueryIndexTag...&gt;&gt;();</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>}</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... QueryIndexTag, <span class="keyword">class </span>ElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>KOKKOS_INLINE_FUNCTION ElementType <span class="keyword">const</span>&amp; get(<a class="code hl_class" href="classTensor.html">Tensor&lt;ElementType, ValidIndexSet...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>{</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">return</span> tensor.template get&lt;<a class="code hl_class" href="classtensor__tools_1_1TensorIndexElement.html">tensor_tools::TensorIndexElement</a>&lt;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>            ddc::detail::TypeSeq&lt;ValidIndexSet...&gt;,</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>            QueryIndexTag...&gt;&gt;();</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>}</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; to_coord(<a class="code hl_class" href="classTensor.html">Vector&lt;ElementType, Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>{</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;(get&lt;Dims&gt;(tensor)...);</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>}</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>} <span class="comment">// namespace ddcHelper</span></div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator-(</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        <a class="code hl_class" href="classVector.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>{</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) - ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>}</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator+=(</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>        <a class="code hl_class" href="classVector.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>{</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    ((ddc::get&lt;Dims&gt;(coord) += ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    <span class="keywordflow">return</span> coord;</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>}</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator-=(</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>        <a class="code hl_class" href="classVector.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>{</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    ((ddc::get&lt;Dims&gt;(coord) -= ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="keywordflow">return</span> coord;</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>}</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ElementType, <span class="keyword">class </span>OElementType, <span class="keyword">class</span>... ValidIndexSet&gt;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>KOKKOS_INLINE_FUNCTION <a class="code hl_class" href="classTensor.html">Tensor</a>&lt;ElementType, ValidIndexSet...&gt; operator*(</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        OElementType val,</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        <a class="code hl_class" href="classTensor.html">Tensor&lt;ElementType, ValidIndexSet...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>{</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    <span class="keywordflow">return</span> tensor * val;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>}</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator+(</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>{</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) + ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>}</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator-(</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>{</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) - ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>}</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator+=(</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>{</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    ((ddc::get&lt;Dims&gt;(coord) += ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <span class="keywordflow">return</span> coord;</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>}</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span> </div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator-=(</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>{</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>    ((ddc::get&lt;Dims&gt;(coord) -= ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>    <span class="keywordflow">return</span> coord;</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>}</div>
 <div class="ttc" id="aclassTensor_html"><div class="ttname"><a href="classTensor.html">Tensor</a></div><div class="ttdoc">A class representing a Tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:35</div></div>
-<div class="ttc" id="aclassTensor_html_a02ea288d5a36d155e4c6ed3cd7e50c23"><div class="ttname"><a href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">Tensor::operator+</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator+(Tensor const &amp;val) const</div><div class="ttdoc">An operator to add two tensors elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:243</div></div>
-<div class="ttc" id="aclassTensor_html_a0f64f0f2afb76cb6f701ffd8e8b55d8d"><div class="ttname"><a href="classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d">Tensor::operator/</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator/(OElementType val) const</div><div class="ttdoc">An operator to multiply all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:231</div></div>
-<div class="ttc" id="aclassTensor_html_a19169c8af9ca4025b5779c69761f4b8e"><div class="ttname"><a href="classTensor.html#a19169c8af9ca4025b5779c69761f4b8e">Tensor::vector_index_set_t</a></div><div class="ttdeci">ddc::type_seq_element_t&lt; dim, index_set &gt; vector_index_set_t</div><div class="ttdoc">A helper type alias to get all possible indices along a specified dimension.</div><div class="ttdef"><b>Definition</b> tensor.hpp:268</div></div>
-<div class="ttc" id="aclassTensor_html_a1b1faf34db4a030d44560352b18d0c0c"><div class="ttname"><a href="classTensor.html#a1b1faf34db4a030d44560352b18d0c0c">Tensor::operator*</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator*(OElementType val) const</div><div class="ttdoc">An operator to multiply all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:217</div></div>
+<div class="ttc" id="aclassTensor_html_a02ea288d5a36d155e4c6ed3cd7e50c23"><div class="ttname"><a href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">Tensor::operator+</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator+(Tensor const &amp;val) const</div><div class="ttdoc">An operator to add two tensors elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:277</div></div>
+<div class="ttc" id="aclassTensor_html_a0f64f0f2afb76cb6f701ffd8e8b55d8d"><div class="ttname"><a href="classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d">Tensor::operator/</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator/(OElementType val) const</div><div class="ttdoc">An operator to multiply all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:265</div></div>
+<div class="ttc" id="aclassTensor_html_a19169c8af9ca4025b5779c69761f4b8e"><div class="ttname"><a href="classTensor.html#a19169c8af9ca4025b5779c69761f4b8e">Tensor::vector_index_set_t</a></div><div class="ttdeci">ddc::type_seq_element_t&lt; dim, index_set &gt; vector_index_set_t</div><div class="ttdoc">A helper type alias to get all possible indices along a specified dimension.</div><div class="ttdef"><b>Definition</b> tensor.hpp:302</div></div>
+<div class="ttc" id="aclassTensor_html_a1b1faf34db4a030d44560352b18d0c0c"><div class="ttname"><a href="classTensor.html#a1b1faf34db4a030d44560352b18d0c0c">Tensor::operator*</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator*(OElementType val) const</div><div class="ttdoc">An operator to multiply all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:251</div></div>
+<div class="ttc" id="aclassTensor_html_a1c1d599698457fd792ee9012fdb3b5b4"><div class="ttname"><a href="classTensor.html#a1c1d599698457fd792ee9012fdb3b5b4">Tensor::Tensor</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor(Coord&lt; Dims... &gt; coord)</div><div class="ttdoc">Construct a 1D tensor object from a coordinate.</div><div class="ttdef"><b>Definition</b> tensor.hpp:118</div></div>
 <div class="ttc" id="aclassTensor_html_a32957d1f871e67a58974059c1ff6b178"><div class="ttname"><a href="classTensor.html#a32957d1f871e67a58974059c1ff6b178">Tensor::Tensor</a></div><div class="ttdeci">KOKKOS_DEFAULTED_FUNCTION Tensor()=default</div><div class="ttdoc">Construct an uninitialised tensor object.</div></div>
 <div class="ttc" id="aclassTensor_html_a44e2cf57c4cb50f22c3537d5bd8edde0"><div class="ttname"><a href="classTensor.html#a44e2cf57c4cb50f22c3537d5bd8edde0">Tensor::size</a></div><div class="ttdeci">static KOKKOS_FUNCTION constexpr std::size_t size()</div><div class="ttdoc">The size of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:72</div></div>
 <div class="ttc" id="aclassTensor_html_a4a3910af9ebdd5a36e6999e2d4b274ac"><div class="ttname"><a href="classTensor.html#a4a3910af9ebdd5a36e6999e2d4b274ac">Tensor::Tensor</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor(ElementType fill_value)</div><div class="ttdoc">Construct a tensor object initialised with a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:90</div></div>
-<div class="ttc" id="aclassTensor_html_a4e1e34b7fc6c2fd076736053e5cf3ec6"><div class="ttname"><a href="classTensor.html#a4e1e34b7fc6c2fd076736053e5cf3ec6">Tensor::operator+=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator+=(Tensor const &amp;val)</div><div class="ttdoc">An operator to add two tensors elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:189</div></div>
-<div class="ttc" id="aclassTensor_html_a52e9979367ea03d4498124b32ec9a821"><div class="ttname"><a href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">Tensor::operator-</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator-(Tensor const &amp;val) const</div><div class="ttdoc">An operator to subtract one tensor from another elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:255</div></div>
-<div class="ttc" id="aclassTensor_html_a539ea3ced7ffa549f2b6b7e282895f13"><div class="ttname"><a href="classTensor.html#a539ea3ced7ffa549f2b6b7e282895f13">Tensor::get</a></div><div class="ttdeci">KOKKOS_FUNCTION ElementType const &amp; get() const</div><div class="ttdoc">Get an element of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:141</div></div>
-<div class="ttc" id="aclassTensor_html_a783dddf339a00723800683e528ef9bc3"><div class="ttname"><a href="classTensor.html#a783dddf339a00723800683e528ef9bc3">Tensor::Tensor</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor(Tensor&lt; OElementType, ValidIndexSet... &gt; const &amp;o_tensor)</div><div class="ttdoc">Construct a tensor object by copying an existing tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:118</div></div>
+<div class="ttc" id="aclassTensor_html_a4e1e34b7fc6c2fd076736053e5cf3ec6"><div class="ttname"><a href="classTensor.html#a4e1e34b7fc6c2fd076736053e5cf3ec6">Tensor::operator+=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator+=(Tensor const &amp;val)</div><div class="ttdoc">An operator to add two tensors elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:223</div></div>
+<div class="ttc" id="aclassTensor_html_a52e9979367ea03d4498124b32ec9a821"><div class="ttname"><a href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">Tensor::operator-</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator-(Tensor const &amp;val) const</div><div class="ttdoc">An operator to subtract one tensor from another elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:289</div></div>
+<div class="ttc" id="aclassTensor_html_a539ea3ced7ffa549f2b6b7e282895f13"><div class="ttname"><a href="classTensor.html#a539ea3ced7ffa549f2b6b7e282895f13">Tensor::get</a></div><div class="ttdeci">KOKKOS_FUNCTION ElementType const &amp; get() const</div><div class="ttdoc">Get an element of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:157</div></div>
+<div class="ttc" id="aclassTensor_html_a783dddf339a00723800683e528ef9bc3"><div class="ttname"><a href="classTensor.html#a783dddf339a00723800683e528ef9bc3">Tensor::Tensor</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor(Tensor&lt; OElementType, ValidIndexSet... &gt; const &amp;o_tensor)</div><div class="ttdoc">Construct a tensor object by copying an existing tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:134</div></div>
 <div class="ttc" id="aclassTensor_html_a7d405bd91e2e89a1ee4c973badd821a6"><div class="ttname"><a href="classTensor.html#a7d405bd91e2e89a1ee4c973badd821a6">Tensor::Tensor</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor(Params... elements)</div><div class="ttdoc">Construct a 1D tensor object by providing the elements that should be saved in the vector.</div><div class="ttdef"><b>Definition</b> tensor.hpp:105</div></div>
+<div class="ttc" id="aclassTensor_html_a865e540a3ab70a849b4f181404cd9fba"><div class="ttname"><a href="classTensor.html#a865e540a3ab70a849b4f181404cd9fba">Tensor::operator=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator=(Coord&lt; Dims... &gt; coord)</div><div class="ttdoc">A copy operator.</div><div class="ttdef"><b>Definition</b> tensor.hpp:176</div></div>
 <div class="ttc" id="aclassTensor_html_a9c45ebb12d858cff471aedf396889708"><div class="ttname"><a href="classTensor.html#a9c45ebb12d858cff471aedf396889708">Tensor::index_set</a></div><div class="ttdeci">ddc::detail::TypeSeq&lt; ValidIndexSet... &gt; index_set</div><div class="ttdoc">The TensorIndexSet describing the possible indices.</div><div class="ttdef"><b>Definition</b> tensor.hpp:44</div></div>
-<div class="ttc" id="aclassTensor_html_ab023077f54456efd237358613f819993"><div class="ttname"><a href="classTensor.html#ab023077f54456efd237358613f819993">Tensor::operator-=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator-=(Tensor const &amp;val)</div><div class="ttdoc">An operator to subtract one tensor from another elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:202</div></div>
+<div class="ttc" id="aclassTensor_html_ab023077f54456efd237358613f819993"><div class="ttname"><a href="classTensor.html#ab023077f54456efd237358613f819993">Tensor::operator-=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator-=(Tensor const &amp;val)</div><div class="ttdoc">An operator to subtract one tensor from another elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:236</div></div>
 <div class="ttc" id="aclassTensor_html_ab427e698416968e0341852bd84203b75"><div class="ttname"><a href="classTensor.html#ab427e698416968e0341852bd84203b75">Tensor::operator=</a></div><div class="ttdeci">KOKKOS_DEFAULTED_FUNCTION Tensor &amp; operator=(Tensor const &amp;other)=default</div><div class="ttdoc">A copy operator.</div></div>
 <div class="ttc" id="aclassTensor_html_ac7619bb6c3891c90bb2c59f7515f474f"><div class="ttname"><a href="classTensor.html#ac7619bb6c3891c90bb2c59f7515f474f">Tensor::rank</a></div><div class="ttdeci">static KOKKOS_FUNCTION constexpr std::size_t rank()</div><div class="ttdoc">The rank of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:61</div></div>
 <div class="ttc" id="aclassTensor_html_ae41b35ad6cc6110daeaff56fff57bc2b"><div class="ttname"><a href="classTensor.html#ae41b35ad6cc6110daeaff56fff57bc2b">Tensor::element_type</a></div><div class="ttdeci">ElementType element_type</div><div class="ttdoc">The type of the elements of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:52</div></div>
-<div class="ttc" id="aclassTensor_html_aef89751059895c9befb75892ca348a68"><div class="ttname"><a href="classTensor.html#aef89751059895c9befb75892ca348a68">Tensor::operator/=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator/=(OElementType val)</div><div class="ttdoc">An operator to divide all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:176</div></div>
-<div class="ttc" id="aclassTensor_html_af0da6591449a8769614164b605781983"><div class="ttname"><a href="classTensor.html#af0da6591449a8769614164b605781983">Tensor::operator*=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator*=(OElementType val)</div><div class="ttdoc">An operator to multiply all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:161</div></div>
-<div class="ttc" id="aclassTensor_html_afffb2e308bfc979b45c83c2f2cdff57d"><div class="ttname"><a href="classTensor.html#afffb2e308bfc979b45c83c2f2cdff57d">Tensor::get</a></div><div class="ttdeci">KOKKOS_FUNCTION ElementType &amp; get()</div><div class="ttdoc">Get a modifiable reference to an element of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:129</div></div>
-<div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector</a></div><div class="ttdoc">A type describing a vector e.g. (E_x, E_y)</div><div class="ttdef"><b>Definition</b> ddc_aliases.hpp:83</div></div>
+<div class="ttc" id="aclassTensor_html_aef89751059895c9befb75892ca348a68"><div class="ttname"><a href="classTensor.html#aef89751059895c9befb75892ca348a68">Tensor::operator/=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator/=(OElementType val)</div><div class="ttdoc">An operator to divide all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:210</div></div>
+<div class="ttc" id="aclassTensor_html_af0da6591449a8769614164b605781983"><div class="ttname"><a href="classTensor.html#af0da6591449a8769614164b605781983">Tensor::operator*=</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor &amp; operator*=(OElementType val)</div><div class="ttdoc">An operator to multiply all the element of the current tensor by a value.</div><div class="ttdef"><b>Definition</b> tensor.hpp:195</div></div>
+<div class="ttc" id="aclassTensor_html_afffb2e308bfc979b45c83c2f2cdff57d"><div class="ttname"><a href="classTensor.html#afffb2e308bfc979b45c83c2f2cdff57d">Tensor::get</a></div><div class="ttdeci">KOKKOS_FUNCTION ElementType &amp; get()</div><div class="ttdoc">Get a modifiable reference to an element of the tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:145</div></div>
 <div class="ttc" id="aclasstensor__tools_1_1TensorIndexElement_html"><div class="ttname"><a href="classtensor__tools_1_1TensorIndexElement.html">tensor_tools::TensorIndexElement</a></div><div class="ttdoc">A class describing an index of a tensor.</div><div class="ttdef"><b>Definition</b> tensor_index_tools.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

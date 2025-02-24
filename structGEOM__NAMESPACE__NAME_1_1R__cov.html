@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Member List</title>
+<title>Gyselalib++: GEOM_NAMESPACE_NAME::R_cov Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classVector.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structGEOM__NAMESPACE__NAME_1_1R__cov.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,18 +103,50 @@ $(document).ready(function(){initNavTree('classVector.html',''); initResizable()
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Vector&lt; ElementType, Dims &gt; Member List</div></div>
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="structGEOM__NAMESPACE__NAME_1_1R__cov-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">GEOM_NAMESPACE_NAME::R_cov Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classVector.html">Vector&lt; ElementType, Dims &gt;</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classVector.html#a712a2fb11d84244a5ba7ea8fa90d4f2a">Vector</a>(Params... p)</td><td class="entry"><a class="el" href="classVector.html">Vector&lt; ElementType, Dims &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>Define non periodic real covariant <a class="el" href="structGEOM__NAMESPACE__NAME_1_1R.html" title="First continuous dimension of all the patches.">R</a> dimension.  
+ <a href="structGEOM__NAMESPACE__NAME_1_1R__cov.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9db969bd4e7d1ff53df6ef4bdb8badac" id="r_a9db969bd4e7d1ff53df6ef4bdb8badac"><td class="memItemLeft" align="right" valign="top"><a id="a9db969bd4e7d1ff53df6ef4bdb8badac" name="a9db969bd4e7d1ff53df6ef4bdb8badac"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Dual</b> = <a class="el" href="structGEOM__NAMESPACE__NAME_1_1R.html">R</a></td></tr>
+<tr class="memdesc:a9db969bd4e7d1ff53df6ef4bdb8badac"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type-alias mapping to the covariant counterpart. <br /></td></tr>
+<tr class="separator:a9db969bd4e7d1ff53df6ef4bdb8badac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a6e61c6546a7452581d5de258886b18fb" id="r_a6e61c6546a7452581d5de258886b18fb"><td class="memItemLeft" align="right" valign="top"><a id="a6e61c6546a7452581d5de258886b18fb" name="a6e61c6546a7452581d5de258886b18fb"></a>
+static bool constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>PERIODIC</b> = false</td></tr>
+<tr class="memdesc:a6e61c6546a7452581d5de258886b18fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non periodic dimension. <br /></td></tr>
+<tr class="separator:a6e61c6546a7452581d5de258886b18fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc0fcd4edbcc848ebc00e486315098c" id="r_a6dc0fcd4edbcc848ebc00e486315098c"><td class="memItemLeft" align="right" valign="top"><a id="a6dc0fcd4edbcc848ebc00e486315098c" name="a6dc0fcd4edbcc848ebc00e486315098c"></a>
+static bool constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>IS_COVARIANT</b> = true</td></tr>
+<tr class="memdesc:a6dc0fcd4edbcc848ebc00e486315098c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A boolean indicating if dimension describes a covariant coordinate. <br /></td></tr>
+<tr class="separator:a6dc0fcd4edbcc848ebc00e486315098c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537c4c132ce7b7083be01be167102437" id="r_a537c4c132ce7b7083be01be167102437"><td class="memItemLeft" align="right" valign="top"><a id="a537c4c132ce7b7083be01be167102437" name="a537c4c132ce7b7083be01be167102437"></a>
+static bool constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>IS_CONTRAVARIANT</b> = false</td></tr>
+<tr class="memdesc:a537c4c132ce7b7083be01be167102437"><td class="mdescLeft">&#160;</td><td class="mdescRight">A boolean indicating if dimension describes a contravariant coordinate. <br /></td></tr>
+<tr class="separator:a537c4c132ce7b7083be01be167102437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Define non periodic real covariant <a class="el" href="structGEOM__NAMESPACE__NAME_1_1R.html" title="First continuous dimension of all the patches.">R</a> dimension. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/multipatch/geometries/<a class="el" href="2patches__2d__onion__shape_8hpp_source.html">2patches_2d_onion_shape.hpp</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><b>GEOM_NAMESPACE_NAME</b></li><li class="navelem"><a class="el" href="structGEOM__NAMESPACE__NAME_1_1R__cov.html">R_cov</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
