@@ -584,19 +584,22 @@ void run_simulations(
     double const rmin = ddc::coordinate(r_idx_range.front());
     double const rmax = ddc::coordinate(r_idx_range.back());
 
-    AdvectionSimulation simulation_1 = get_translation_simulation(to_physical_mapping, rmin, rmax);
-    AdvectionSimulation simulation_2 = get_rotation_simulation(to_physical_mapping, rmin, rmax);
-    AdvectionSimulation simulation_3 = get_decentred_rotation_simulation(to_physical_mapping);
+    AdvectionSimulation simulation_translation
+            = get_translation_simulation(to_physical_mapping, rmin, rmax);
+    AdvectionSimulation simulation_rotation
+            = get_rotation_simulation(to_physical_mapping, rmin, rmax);
+    AdvectionSimulation simulation_decentred_rotation
+            = get_decentred_rotation_simulation(to_physical_mapping);
 
-    std::string const title_simu_1 = " TRANSLATION : ";
-    std::string const title_simu_2 = " ROTATION : ";
-    std::string const title_simu_3 = " DECENTRED ROTATION : ";
+    std::string const title_simu_translation = " TRANSLATION : ";
+    std::string const title_simu_rotation = " ROTATION : ";
+    std::string const title_simu_decentred_rotation = " DECENTRED ROTATION : ";
 
     std::string output_folder = output_stem + "Translation_output";
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
-    std::cout << title + title_simu_1 << std::endl;
+    std::cout << title + title_simu_translation << std::endl;
     simulate(
             to_physical_mapping_host,
             to_physical_mapping,
@@ -606,7 +609,7 @@ void run_simulations(
             grid,
             foot_finder,
             advection_operator,
-            simulation_1,
+            simulation_translation,
             final_time,
             dt,
             save_curves,
@@ -617,7 +620,7 @@ void run_simulations(
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
-    std::cout << title + title_simu_2 << std::endl;
+    std::cout << title + title_simu_rotation << std::endl;
     simulate(
             to_physical_mapping_host,
             to_physical_mapping,
@@ -627,7 +630,7 @@ void run_simulations(
             grid,
             foot_finder,
             advection_operator,
-            simulation_2,
+            simulation_rotation,
             final_time,
             dt,
             save_curves,
@@ -638,7 +641,7 @@ void run_simulations(
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
-    std::cout << title + title_simu_3 << std::endl;
+    std::cout << title + title_simu_decentred_rotation << std::endl;
     simulate(
             to_physical_mapping_host,
             to_physical_mapping,
@@ -648,7 +651,7 @@ void run_simulations(
             grid,
             foot_finder,
             advection_operator,
-            simulation_3,
+            simulation_decentred_rotation,
             final_time,
             dt,
             save_curves,
