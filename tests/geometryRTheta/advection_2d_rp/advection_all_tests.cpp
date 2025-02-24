@@ -216,7 +216,8 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionRTheta advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+    BslAdvectionRTheta
+            advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
 
     simulate_the_3_simulations(
             sim.to_physical_mapping,
