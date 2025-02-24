@@ -325,6 +325,7 @@ void display_time(
  * @see Simulation
  */
 template <
+        class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
         class LogicalToPseudoPhysicalMapping,
@@ -333,6 +334,7 @@ template <
         class AdvectionOperator,
         class Simulation>
 void simulate(
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
         LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
@@ -361,7 +363,7 @@ void simulate(
     host_t<DFieldMemRTheta> allfdistribu_test(grid);
     host_t<DFieldRTheta> allfdistribu_advected_test;
 
-    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec_host(grid);
 
 
     // START TEST -------------------------------------------------------------------------------
@@ -381,12 +383,12 @@ void simulate(
     // Definition of advection field:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         // Moving the coordinates in the physical domain:
-        CoordXY const coord_xy = to_physical_mapping(ddc::coordinate(irp));
+        CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irp));
         CoordXY const advection_field = simulation.advection_field(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<X>(advection_field_test_vec)(irp) = ddc::get<X>(advection_field);
-        ddcHelper::get<Y>(advection_field_test_vec)(irp) = ddc::get<Y>(advection_field);
+        ddcHelper::get<X>(advection_field_test_vec_host)(irp) = ddc::get<X>(advection_field);
+        ddcHelper::get<Y>(advection_field_test_vec_host)(irp) = ddc::get<Y>(advection_field);
     });
 
 
@@ -395,13 +397,13 @@ void simulate(
     for (int i(0); i < iteration_number; ++i) {
         allfdistribu_advected_test = advection_operator(
                 get_field(allfdistribu_test),
-                get_const_field(advection_field_test_vec),
+                get_const_field(advection_field_test_vec_host),
                 dt);
 
         // Save the advected function for each iteration:
         if (save_curves) {
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
-            saving_computed(to_physical_mapping, get_field(allfdistribu_advected_test), name);
+            saving_computed(to_physical_mapping_host, get_field(allfdistribu_advected_test), name);
         }
     }
 
@@ -443,7 +445,7 @@ void simulate(
     std::cout << "   ... "
               << "Relative L2 norm error: "
               << compute_difference_L2_norm(
-                         to_physical_mapping,
+                         to_physical_mapping_host,
                          grid,
                          allfdistribu_advected_test,
                          simulation.function,
@@ -461,11 +463,18 @@ void simulate(
     // SAVE DATA --------------------------------------------------------------------------------
     // Save the computed characteristic feet:
     if (save_feet) {
-        host_t<FieldMemRTheta<CoordRTheta>> feet(grid);
-        ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
+        FieldMemRTheta<CoordRTheta> feet_alloc(grid);
+        FieldRTheta<CoordRTheta> feet = get_field(feet_alloc);
+        ddc::parallel_for_each(
+                grid,
+                KOKKOS_LAMBDA(const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
+        auto advection_field_test_vec = ddcHelper::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(advection_field_test_vec_host));
         foot_finder(get_field(feet), get_const_field(advection_field_test_vec), dt);
+        auto feet_host = ddc::create_mirror_view_and_copy(feet);
         std::string const name = output_folder + "/feet_computed.txt";
-        output_feet(to_physical_mapping, grid, get_field(feet), name);
+        output_feet(to_physical_mapping_host, grid, get_field(feet_host), name);
     }
 
     // Save the values of the exact function at the initial and final states:
@@ -482,8 +491,8 @@ void simulate(
             // Exact final state
             end_function(irp) = simulation.function(feet_coords_rp_end_time(irp));
         });
-        saving_computed(to_physical_mapping, get_field(initial_function), name_0);
-        saving_computed(to_physical_mapping, get_field(end_function), name_1);
+        saving_computed(to_physical_mapping_host, get_field(initial_function), name_0);
+        saving_computed(to_physical_mapping_host, get_field(end_function), name_1);
     }
 
 
@@ -491,7 +500,7 @@ void simulate(
     // Save the exact characteristic feet for a displacement on dt:
     if (save_feet) {
         std::string const name = output_folder + "/feet_exact.txt";
-        output_feet(to_physical_mapping, grid, get_field(feet_coords_rp_dt), name);
+        output_feet(to_physical_mapping_host, grid, get_field(feet_coords_rp_dt), name);
     }
 
 
@@ -548,6 +557,7 @@ void simulate(
  * @see Simulation
  */
 template <
+        class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
         class LogicalToPseudoPhysicalMapping,
@@ -555,6 +565,7 @@ template <
         class PolarFootFinder,
         class AdvectionOperator>
 void simulate_the_3_simulations(
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
         LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
@@ -587,6 +598,7 @@ void simulate_the_3_simulations(
     }
     std::cout << title + title_simu_1 << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
             analytical_to_pseudo_physical_mapping,
@@ -607,6 +619,7 @@ void simulate_the_3_simulations(
     }
     std::cout << title + title_simu_2 << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
             analytical_to_pseudo_physical_mapping,
@@ -627,6 +640,7 @@ void simulate_the_3_simulations(
     }
     std::cout << title + title_simu_3 << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
             analytical_to_pseudo_physical_mapping,

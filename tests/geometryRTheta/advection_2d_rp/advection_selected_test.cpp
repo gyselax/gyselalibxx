@@ -151,7 +151,12 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -164,6 +169,7 @@ int main(int argc, char** argv)
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
     CircularToCartesian<R, Theta, X, Y> to_physical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping_host;
     CartesianToCircular<X, Y, R, Theta> to_logical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
             to_physical_analytical_mapping);
@@ -178,6 +184,7 @@ int main(int argc, char** argv)
 #if defined(CZARNY_MAPPING_PHYSICAL)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
             to_physical_analytical_mapping);
@@ -188,6 +195,7 @@ int main(int argc, char** argv)
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
+    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "CZARNY";
@@ -198,10 +206,17 @@ int main(int argc, char** argv)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
-            mapping_builder(
+            mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder_host,
+                    spline_evaluator_extrapol_host);
+    DiscreteToCartesian to_physical_mapping_host = mapping_builder_host();
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
+            mapping_builder(
+                    Kokkos::DefaultExecutionSpace(),
+                    to_physical_analytical_mapping,
+                    builder,
                     spline_evaluator_extrapol);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
@@ -215,9 +230,9 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE TIME INTEGRATION METHOD.
 #if defined(EULER_METHOD)
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
-          host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-          Kokkos::DefaultHostExecutionSpace>
+    Euler<FieldMemRTheta<CoordRTheta>,
+          DVectorFieldMemRTheta<X_adv, Y_adv>,
+          Kokkos::DefaultExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "EULER";
     key += "euler";
@@ -225,25 +240,25 @@ int main(int argc, char** argv)
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
     CrankNicolson<
-            host_t<FieldMemRTheta<CoordRTheta>>,
-            host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-            Kokkos::DefaultHostExecutionSpace>
+            FieldMemRTheta<CoordRTheta>,
+            DVectorFieldMemRTheta<X_adv, Y_adv>,
+            Kokkos::DefaultExecutionSpace>
             time_stepper(grid, 20, epsilon_CN);
     std::string const method_name = "CRANK NICOLSON";
     key += "crank_nicolson";
 
 #elif defined(RK3_METHOD)
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-        Kokkos::DefaultHostExecutionSpace>
+    RK3<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X_adv, Y_adv>,
+        Kokkos::DefaultExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "RK3";
     key += "rk3";
 
 #elif defined(RK4_METHOD)
-    RK4<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>,
-        Kokkos::DefaultHostExecutionSpace>
+    RK4<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X_adv, Y_adv>,
+        Kokkos::DefaultExecutionSpace>
             time_stepper(grid);
     std::string const method_name = "RK4";
     key += "rk4";
@@ -253,17 +268,18 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE SIMULATION.
 #if defined(TRANSLATION_SIMULATION)
-    AdvectionSimulation simulation = get_translation_simulation(to_physical_mapping, rmin, rmax);
+    AdvectionSimulation simulation
+            = get_translation_simulation(to_physical_mapping_host, rmin, rmax);
     std::string const simu_type = "TRANSLATION";
     key += "Translation";
 
 #elif defined(ROTATION_SIMULATION)
-    AdvectionSimulation simulation = get_rotation_simulation(to_physical_mapping, rmin, rmax);
+    AdvectionSimulation simulation = get_rotation_simulation(to_physical_mapping_host, rmin, rmax);
     std::string const simu_type = "ROTATION";
     key += "Rotation";
 
 #elif defined(DECENTRED_ROTATION_SIMULATION)
-    AdvectionSimulation simulation = get_decentred_rotation_simulation(to_physical_mapping);
+    AdvectionSimulation simulation = get_decentred_rotation_simulation(to_physical_mapping_host);
     std::string const simu_type = "DECENTRED ROTATION";
     key += "Decentred_rotation";
 #endif
@@ -277,7 +293,7 @@ int main(int argc, char** argv)
             time_stepper,
             to_physical_mapping,
             logical_to_pseudo_cart_mapping,
-            builder_host,
+            builder,
             spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, foot_finder, to_physical_mapping);
@@ -285,6 +301,7 @@ int main(int argc, char** argv)
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_analytical_mapping,
             logical_to_pseudo_cart_mapping,
