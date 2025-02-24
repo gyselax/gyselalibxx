@@ -124,8 +124,7 @@ private:
      * @return copy of this element
      */
     template <class... ODDims, typename T, T... ints>
-    auto operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>)
-            const noexcept
+    auto operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>) const noexcept
     {
         if constexpr (std::is_const_v<ElementType>) {
             return element_type((base_type::m_values[ints](delems))...);
