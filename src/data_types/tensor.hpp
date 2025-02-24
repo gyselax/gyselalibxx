@@ -177,7 +177,7 @@ public:
     {
         static_assert(
                 rank() == 1,
-                "Filling the tensor on initialisation is only permitted for 1D vector objects");
+                "Copying a coordinate into a tensor is only possible for 1D tensor objects");
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
