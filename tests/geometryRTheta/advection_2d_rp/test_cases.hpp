@@ -154,9 +154,9 @@ public:
         double const r = ddc::get<R>(coord_rp);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
-                   * std::exp(
-                           -pow(x - m_x0, 2) / (2 * m_sig_x * m_sig_x)
-                           - pow(y - m_y0, 2) / (2 * m_sig_y * m_sig_y));
+                   * Kokkos::exp(
+                           -ipow(x - m_x0, 2) / (2 * m_sig_x * m_sig_x)
+                           - ipow(y - m_y0, 2) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }

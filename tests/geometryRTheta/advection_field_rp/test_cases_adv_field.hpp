@@ -74,9 +74,9 @@ public:
         double const x = ddc::get<X>(coord);
         double const y = ddc::get<Y>(coord);
         double const foot_x
-                = m_xc + (x - m_xc) * std::cos(m_omega * -t) - (y - m_yc) * std::sin(m_omega * -t);
+                = m_xc + (x - m_xc) * Kokkos::cos(m_omega * -t) - (y - m_yc) * Kokkos::sin(m_omega * -t);
         double const foot_y
-                = m_yc + (x - m_xc) * std::sin(m_omega * -t) + (y - m_yc) * std::cos(m_omega * -t);
+                = m_yc + (x - m_xc) * Kokkos::sin(m_omega * -t) + (y - m_yc) * Kokkos::cos(m_omega * -t);
         return CoordXY(foot_x, foot_y);
     }
 };
