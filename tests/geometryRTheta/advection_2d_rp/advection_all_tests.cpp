@@ -81,13 +81,13 @@ public:
             LogicalToPseudoPhysicalMapping const& pseudo_cart_map,
             AnalyticalPhysicalToLogicalMapping const& rev_map,
             AnalyticalLogicalToPhysicalMapping const& a_map,
-            std::string m_name,
-            std::string dom_name)
+            std::string const& map_name,
+            std::string const& dom_name)
         : to_physical_mapping(map)
         , to_logical_mapping(rev_map)
         , analytical_to_pseudo_physical_mapping(pseudo_cart_map)
         , analytical_to_physical_mapping(a_map)
-        , mapping_name(m_name)
+        , mapping_name(map_name)
         , domain_name(dom_name)
     {
     }
@@ -99,7 +99,7 @@ struct NumericalMethodParameters
     TimeStepper time_stepper;
     double time_step;
     std::string method_name;
-    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string name)
+    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string const& name)
         : time_stepper(std::move(time_stepper))
         , time_step(step)
         , method_name(name)
@@ -113,7 +113,7 @@ struct NumericalParams
     IdxRangeRTheta const grid;
     double const dt;
 
-    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {};
+    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {}
     NumericalParams(NumericalParams&& params) = default;
     NumericalParams(NumericalParams& params) = default;
 };
