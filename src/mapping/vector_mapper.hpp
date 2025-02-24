@@ -37,11 +37,6 @@ public:
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
     using memory_space = typename ExecSpace::memory_space;
 
-    /// The vector type in the coordinate system taken as input.
-    using vector_element_type_in = DVector<XIn, YIn>;
-    /// The vector type in the coordinate system returned as output.
-    using vector_element_type_out = DVector<XOut, YOut>;
-
 private:
     Mapping m_mapping;
 
