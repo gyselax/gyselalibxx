@@ -160,11 +160,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Choice of the simulation -------------------------------------------------------------------
 #if defined(TRANSLATION)
-    TranslationAdvectionFieldSimulation simulation(to_physical_mapping, rmin, rmax);
+    AdvectionFieldSimulation simulation
+            = get_translation_advection_field_simulation(to_physical_mapping, rmin, rmax);
 #elif defined(ROTATION)
-    RotationAdvectionFieldSimulation simulation(to_physical_mapping, rmin, rmax);
+    AdvectionFieldSimulation simulation
+            = get_rotation_advection_field_simulation(to_physical_mapping, rmin, rmax);
 #elif defined(DECENTRED_ROTATION)
-    DecentredRotationAdvectionFieldSimulation simulation(to_physical_mapping);
+    AdvectionFieldSimulation simulation
+            = get_decentred_rotation_advection_field_simulation(to_physical_mapping);
 #endif
 
     // ================================================================================================
@@ -200,18 +203,15 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // Initialize functions ******************************************
-    auto function = simulation.get_test_function();
-    auto phi_function = simulation.get_electrostatique_potential();
-    auto advection_field = simulation.get_advection_field();
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
         CoordXY const coord_xy(to_physical_mapping(coord_rp));
 
-        allfdistribu_rp(irp) = function(coord_rp);
+        allfdistribu_rp(irp) = simulation.function(coord_rp);
         allfdistribu_xy(irp) = allfdistribu_rp(irp);
-        electrostatic_potential(irp) = phi_function(coord_xy, 0);
+        electrostatic_potential(irp) = simulation.electrostatical_potential(coord_xy, 0);
 
-        CoordXY const evaluated_advection_field = advection_field(coord_xy, 0);
+        CoordXY const evaluated_advection_field = simulation.advection_field(coord_xy, 0);
         ddcHelper::get<X>(advection_field_exact)(irp) = CoordX(evaluated_advection_field);
         ddcHelper::get<Y>(advection_field_exact)(irp) = CoordY(evaluated_advection_field);
     });

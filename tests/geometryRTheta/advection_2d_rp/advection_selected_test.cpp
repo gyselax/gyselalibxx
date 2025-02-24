@@ -268,17 +268,18 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE SIMULATION.
 #if defined(TRANSLATION_SIMULATION)
-    TranslationSimulation simulation(to_physical_mapping_host, rmin, rmax);
+    AdvectionSimulation simulation
+            = get_translation_simulation(to_physical_mapping_host, rmin, rmax);
     std::string const simu_type = "TRANSLATION";
     key += "Translation";
 
 #elif defined(ROTATION_SIMULATION)
-    RotationSimulation simulation(to_physical_mapping_host, rmin, rmax);
+    AdvectionSimulation simulation = get_rotation_simulation(to_physical_mapping_host, rmin, rmax);
     std::string const simu_type = "ROTATION";
     key += "Rotation";
 
 #elif defined(DECENTRED_ROTATION_SIMULATION)
-    DecentredRotationSimulation simulation(to_physical_mapping_host);
+    AdvectionSimulation simulation = get_decentred_rotation_simulation(to_physical_mapping_host);
     std::string const simu_type = "DECENTRED ROTATION";
     key += "Decentred_rotation";
 #endif
@@ -287,6 +288,15 @@ int main(int argc, char** argv)
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
+
+    SplinePolarFootFinder const foot_finder(
+            time_stepper,
+            to_physical_mapping,
+            logical_to_pseudo_cart_mapping,
+            builder,
+            spline_evaluator_extrapol);
+
+    BslAdvectionRTheta advection_operator(interpolator, foot_finder, to_physical_mapping);
 
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;
@@ -297,11 +307,9 @@ int main(int argc, char** argv)
             logical_to_pseudo_cart_mapping,
             to_physical_analytical_mapping,
             grid,
-            time_stepper,
+            foot_finder,
+            advection_operator,
             simulation,
-            interpolator,
-            builder,
-            spline_evaluator_extrapol,
             final_time,
             dt,
             save_curves,
