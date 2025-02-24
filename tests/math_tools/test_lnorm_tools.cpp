@@ -15,9 +15,21 @@ namespace {
 
 struct X
 {
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the co/contra-variant counterpart.
+    using Dual = X;
 };
 struct Y
 {
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the co/contra-variant counterpart.
+    using Dual = Y;
 };
 
 using GridX = UniformGridBase<X>;
@@ -46,7 +58,7 @@ using DFieldXY = DField<IdxRangeXY>;
 using DVectorFieldXY = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
 
 template <class Grid1D>
-KOKKOS_FUNCTION Coord<typename Grid1D::continuous_dimension_type> get_coordinate(Idx<Grid1D> x)
+KOKKOS_FUNCTION typename Grid1D::continuous_element_type get_coordinate(Idx<Grid1D> x)
 {
     using Dim = typename Grid1D::continuous_dimension_type;
     CoordXY const origin(0.0, 0.0);

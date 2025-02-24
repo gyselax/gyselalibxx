@@ -4,6 +4,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
+#include "tensor.hpp"
 
 template <class FieldType, class NDTypeSeq>
 class VectorFieldCommon;
@@ -53,6 +54,7 @@ inline constexpr auto get(VectorFieldType const& field) noexcept
 template <class QueryTag, class VectorFieldType>
 inline constexpr auto get(VectorFieldType& field) noexcept
 {
+    static_assert(is_vector_field_v<VectorFieldType>);
     return field.template get<QueryTag>();
 }
 
