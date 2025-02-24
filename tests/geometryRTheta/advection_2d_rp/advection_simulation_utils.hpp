@@ -564,7 +564,7 @@ template <
         class AnalyticalLogicalToPhysicalMapping,
         class PolarFootFinder,
         class AdvectionOperator>
-void simulate_the_3_simulations(
+void run_simulations(
         LogicalToPhysicalMappingHost const& to_physical_mapping_host,
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
