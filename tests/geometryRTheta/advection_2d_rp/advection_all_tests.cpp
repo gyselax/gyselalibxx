@@ -86,14 +86,14 @@ public:
             LogicalToPseudoPhysicalMapping const& pseudo_cart_map,
             AnalyticalPhysicalToLogicalMapping const& rev_map,
             AnalyticalLogicalToPhysicalMapping const& a_map,
-            std::string m_name,
-            std::string dom_name)
+            std::string const& map_name,
+            std::string const& dom_name)
         : to_physical_mapping_host(map_host)
         , to_physical_mapping(map)
         , to_logical_mapping(rev_map)
         , analytical_to_pseudo_physical_mapping(pseudo_cart_map)
         , analytical_to_physical_mapping(a_map)
-        , mapping_name(m_name)
+        , mapping_name(map_name)
         , domain_name(dom_name)
     {
     }
@@ -105,7 +105,7 @@ struct NumericalMethodParameters
     TimeStepper time_stepper;
     double time_step;
     std::string method_name;
-    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string name)
+    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string const& name)
         : time_stepper(std::move(time_stepper))
         , time_step(step)
         , method_name(name)
@@ -119,7 +119,7 @@ struct NumericalParams
     IdxRangeRTheta const grid;
     double const dt;
 
-    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {};
+    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {}
     NumericalParams(NumericalParams&& params) = default;
     NumericalParams(NumericalParams& params) = default;
 };
@@ -215,17 +215,25 @@ void run_simulations_with_methods(
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
-    simulate_the_3_simulations(
+    SplinePolarFootFinder const foot_finder(
+            num.time_stepper,
+            sim.to_physical_mapping,
+            sim.analytical_to_pseudo_physical_mapping,
+            params.advection_builder,
+            params.advection_evaluator);
+
+    BslAdvectionRTheta
+            advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+
+    run_simulations(
             sim.to_physical_mapping_host,
             sim.to_physical_mapping,
             sim.to_logical_mapping,
             sim.analytical_to_pseudo_physical_mapping,
             sim.analytical_to_physical_mapping,
             params.grid,
-            num.time_stepper,
-            params.interpolator,
-            params.advection_builder,
-            params.advection_evaluator,
+            foot_finder,
+            advection_operator,
             params.final_time,
             num.time_step,
             params.if_save_curves,
