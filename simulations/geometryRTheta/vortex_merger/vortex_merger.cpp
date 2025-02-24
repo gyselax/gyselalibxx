@@ -139,9 +139,9 @@ int main(int argc, char** argv)
 
 
     // --- Time integration method --------------------------------------------------------------------
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
-          host_t<DVectorFieldMemRTheta<X, Y>>,
-          Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
+    Euler<FieldMemRTheta<CoordRTheta>,
+          DVectorFieldMemRTheta<X, Y>,
+          Kokkos::DefaultExecutionSpace> const time_stepper(grid);
 
 
     // --- Advection operator -------------------------------------------------------------------------
@@ -164,8 +164,8 @@ int main(int argc, char** argv)
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
-            builder_host,
-            spline_evaluator_extrapol_host);
+            builder,
+            spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -198,7 +198,6 @@ int main(int argc, char** argv)
             advection_operator,
             grid,
             builder_host,
-            spline_evaluator_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
 

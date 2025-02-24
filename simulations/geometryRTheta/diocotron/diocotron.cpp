@@ -145,26 +145,26 @@ int main(int argc, char** argv)
 
     // --- Time integration method --------------------------------------------------------------------
 #if defined(EULER_METHOD)
-    Euler<host_t<FieldMemRTheta<CoordRTheta>>,
-          host_t<DVectorFieldMemRTheta<X, Y>>,
-          Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp);
+    Euler<FieldMemRTheta<CoordRTheta>,
+          DVectorFieldMemRTheta<X, Y>,
+          Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp);
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
     CrankNicolson<
-            host_t<FieldMemRTheta<CoordRTheta>>,
-            host_t<DVectorFieldMemRTheta<X, Y>>,
-            Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp, 20, epsilon_CN);
+            FieldMemRTheta<CoordRTheta>,
+            DVectorFieldMemRTheta<X, Y>,
+            Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp, 20, epsilon_CN);
 
 #elif defined(RK3_METHOD)
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X, Y>>,
-        Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp);
+    RK3<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X, Y>,
+        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp);
 
 #elif defined(RK4_METHOD)
-    RK4<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X, Y>>,
-        Kokkos::DefaultHostExecutionSpace> const time_stepper(mesh_rp);
+    RK4<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X, Y>,
+        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp);
 
 #endif
 
@@ -189,8 +189,8 @@ int main(int argc, char** argv)
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
-            builder_host,
-            spline_evaluator_extrapol_host);
+            builder,
+            spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -231,7 +231,6 @@ int main(int argc, char** argv)
             advection_operator,
             mesh_rp,
             builder_host,
-            spline_evaluator_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
 #elif defined(IMPLICIT_PREDCORR)
@@ -241,7 +240,6 @@ int main(int argc, char** argv)
             advection_operator,
             mesh_rp,
             builder_host,
-            spline_evaluator_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
 #endif
