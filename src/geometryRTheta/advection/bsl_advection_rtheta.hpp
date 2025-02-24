@@ -181,10 +181,10 @@ public:
             std::array<std::array<double, 2>, 2> inv_J = inv_jacobian_matrix(coord_rp);
             double const jacobian = m_mapping.jacobian(coord_rp);
 
-            ddcHelper::get<X>(advection_field_xy)(irp)
+            ddcHelper::get<X>(advection_field_xy_host)(irp)
                     = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][0] * jacobian
                       + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][0] * jacobian;
-            ddcHelper::get<Y>(advection_field_xy)(irp)
+            ddcHelper::get<Y>(advection_field_xy_host)(irp)
                     = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][1] * jacobian
                       + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][1] * jacobian;
         });
