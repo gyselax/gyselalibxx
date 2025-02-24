@@ -68,11 +68,11 @@ public:
         double const x_bar = 0.;
         double const y_bar = 0.;
 
-        double const r_1 = std::sqrt((x - x_bar) * (x - x_bar) + 8 * (y - y_bar) * (y - y_bar));
-        double const r_2 = std::sqrt(8 * (x - x_bar) * (x - x_bar) + (y - y_bar) * (y - y_bar));
+        double const r_1 = Kokkos::sqrt((x - x_bar) * (x - x_bar) + 8 * (y - y_bar) * (y - y_bar));
+        double const r_2 = Kokkos::sqrt(8 * (x - x_bar) * (x - x_bar) + (y - y_bar) * (y - y_bar));
 
-        double const G_1 = std::pow(std::cos(M_PI * r_1 / 2. / a), 4) * (r_1 < a);
-        double const G_2 = std::pow(std::cos(M_PI * r_2 / 2. / a), 4) * (r_2 < a);
+        double const G_1 = ipow(Kokkos::cos(M_PI * r_1 / 2. / a), 4) * (r_1 < a);
+        double const G_2 = ipow(Kokkos::cos(M_PI * r_2 / 2. / a), 4) * (r_2 < a);
 
         return 1. / 2. * (G_1 + G_2);
     }
