@@ -104,7 +104,12 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -121,7 +126,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
             builder_host,
-            spline_evaluator_extrapol);
+            spline_evaluator_extrapol_host);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
@@ -137,14 +142,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X, Y>>,
-        Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
+    RK3<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X, Y>,
+        Kokkos::DefaultExecutionSpace> const time_stepper(grid);
     SplinePolarFootFinder find_feet(
             time_stepper,
             to_physical_mapping,
             to_physical_mapping,
-            builder_host,
+            builder,
             spline_evaluator_extrapol);
 
     BslAdvectionRTheta advection_operator(interpolator, find_feet, to_physical_mapping);
