@@ -42,6 +42,11 @@ public:
     using type = typename impl<>::type;
 };
 
+template <class TensorElementType, class OElementType>
+constexpr bool is_operator_compatible_v = std::is_same_v<
+        std::remove_reference_t<TensorElementType>,
+        std::remove_const_t<std::remove_reference_t<OElementType>>>;
+
 } // namespace detail
 
 /**
@@ -110,14 +115,16 @@ private:
         ((std::get<Is>(m_data) /= val), ...);
     }
 
-    template <size_t... Is>
-    KOKKOS_FUNCTION void sum(Tensor val, std::index_sequence<Is...>)
+    template <class OElementType, size_t... Is>
+    KOKKOS_FUNCTION void sum(Tensor<OElementType, ValidIndexSet...> val, std::index_sequence<Is...>)
     {
         ((std::get<Is>(m_data) += std::get<Is>(val.m_data)), ...);
     }
 
-    template <size_t... Is>
-    KOKKOS_FUNCTION void minus(Tensor val, std::index_sequence<Is...>)
+    template <class OElementType, size_t... Is>
+    KOKKOS_FUNCTION void minus(
+            Tensor<OElementType, ValidIndexSet...> val,
+            std::index_sequence<Is...>)
     {
         ((std::get<Is>(m_data) -= std::get<Is>(val.m_data)), ...);
     }
@@ -261,9 +268,12 @@ public:
                 rank() == 1,
                 "Filling the tensor on initialisation is only permitted for 1D vector objects");
         static_assert(
-                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
+                ddc::type_seq_same_v<
+                        VectorIndexSet<Dims...>,
+                        ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
-        m_data = coord.array();
+        using IndexSet = ddc::type_seq_element_t<0, index_set>;
+        ((std::get<ddc::type_seq_rank_v<Dims, IndexSet>>(m_data) = ddc::get<Dims>(coord)), ...);
         return *this;
     }
 
@@ -298,7 +308,10 @@ public:
      * @param val The tensor that should be added to the current tensor.
      * @return A reference to the current modified tensor.
      */
-    KOKKOS_FUNCTION Tensor& operator+=(Tensor const& val)
+    template <
+            class OElementType,
+            class = std::enable_if_t<detail::is_operator_compatible_v<ElementType, OElementType>>>
+    KOKKOS_FUNCTION Tensor& operator+=(Tensor<OElementType, ValidIndexSet...> const& val)
     {
         sum(val, std::make_index_sequence<s_n_elements>());
         return *this;
@@ -309,7 +322,10 @@ public:
      * @param val The tensor that should be subtracted from the current tensor.
      * @return A reference to the current modified tensor.
      */
-    KOKKOS_FUNCTION Tensor& operator-=(Tensor const& val)
+    template <
+            class OElementType,
+            class = std::enable_if_t<detail::is_operator_compatible_v<ElementType, OElementType>>>
+    KOKKOS_FUNCTION Tensor& operator-=(Tensor<OElementType, ValidIndexSet...> const& val)
     {
         minus(val, std::make_index_sequence<s_n_elements>());
         return *this;
@@ -348,7 +364,10 @@ public:
      * @param val The tensor that should be added to the current tensor.
      * @return A new tensor containing the result of the addition.
      */
-    KOKKOS_FUNCTION Tensor operator+(Tensor const& val) const
+    template <
+            class OElementType,
+            class = std::enable_if_t<detail::is_operator_compatible_v<ElementType, OElementType>>>
+    KOKKOS_FUNCTION Tensor operator+(Tensor<OElementType, ValidIndexSet...> const& val) const
     {
         Tensor result(*this);
         result += val;
@@ -360,7 +379,10 @@ public:
      * @param val The tensor that should be subtracted from the current tensor.
      * @return A new tensor containing the result of the subtraction.
      */
-    KOKKOS_FUNCTION Tensor operator-(Tensor const& val) const
+    template <
+            class OElementType,
+            class = std::enable_if_t<detail::is_operator_compatible_v<ElementType, OElementType>>>
+    KOKKOS_FUNCTION Tensor operator-(Tensor<OElementType, ValidIndexSet...> const& val) const
     {
         Tensor result(*this);
         result -= val;
