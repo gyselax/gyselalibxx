@@ -209,16 +209,23 @@ void run_simulations_with_methods(
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
+    SplinePolarFootFinder const foot_finder(
+            num.time_stepper,
+            sim.to_physical_mapping,
+            sim.analytical_to_pseudo_physical_mapping,
+            params.advection_builder,
+            params.advection_evaluator);
+
+    BslAdvectionRTheta advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+
     simulate_the_3_simulations(
             sim.to_physical_mapping,
             sim.to_logical_mapping,
             sim.analytical_to_pseudo_physical_mapping,
             sim.analytical_to_physical_mapping,
             params.grid,
-            num.time_stepper,
-            params.interpolator,
-            params.advection_builder,
-            params.advection_evaluator,
+            foot_finder,
+            advection_operator,
             params.final_time,
             num.time_step,
             params.if_save_curves,
