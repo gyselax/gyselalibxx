@@ -1198,7 +1198,8 @@ public:
             EvalDeriv1DType const& theta_basis)
     {
         value = r_basis.value * theta_basis.value;
-        derivs = {r_basis.derivative * theta_basis.value, r_basis.value * theta_basis.derivative};
+        ddcHelper::get<R>(derivs) = r_basis.derivative * theta_basis.value;
+        ddcHelper::get<Theta>(derivs) = r_basis.value * theta_basis.derivative;
     }
 
     /**
@@ -1218,7 +1219,8 @@ public:
             EvalDeriv2DType const&) // Last argument is duplicate
     {
         value = basis.value;
-        derivs = {basis.radial_derivative, basis.poloidal_derivative};
+        ddcHelper::get<R>(derivs) = basis.radial_derivative;
+        ddcHelper::get<Theta>(derivs) = basis.poloidal_derivative;
     }
 
     /**
