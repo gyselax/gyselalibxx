@@ -274,13 +274,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d",
-"classIAdvectionRTheta.html#a346eaaf9a5ce416b0f3011efe94458b7",
-"classMatrix__Corner__Block.html#a09a6ff9a2b9912b3ee5d2df4d4b37ee1",
-"classPolarSplineEvaluator.html#a66468d51237ba05121d617991da901f3",
-"classVortexMergerEquilibria.html#a3a8975ef28538c07c2a08ce9b0db3c9f",
-"neumann__spline__quadrature_8hpp_source.html",
-"structNullExtrapolationRule.html#afff2dfac58dbcfcc760da499bb23b953"
+"classCrankNicolson.html#acee28614e8739edfb476a51aa7c2fe91",
+"classIInitialization.html#ac70366059a8d5679ff45c1a3eed5ad6b",
+"classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2",
+"classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b",
+"dir_0b94a1bc260289a82ecb53162f2bb9d0.html",
+"quadrature__coeffs__nd_8hpp_source.html",
+"structPolarSpline.html#a0095d1c0d61dc304c8f80dc6d45ac60f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

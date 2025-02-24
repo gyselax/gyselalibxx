@@ -8,7 +8,5 @@ var searchData=
   ['restartinitialization_5',['RestartInitialization',['../classRestartInitialization.html',1,'']]],
   ['rk2_6',['RK2',['../classRK2.html',1,'']]],
   ['rk3_7',['RK3',['../classRK3.html',1,'']]],
-  ['rk4_8',['RK4',['../classRK4.html',1,'']]],
-  ['rotationadvectionfieldsimulation_9',['RotationAdvectionFieldSimulation',['../classRotationAdvectionFieldSimulation.html',1,'']]],
-  ['rotationsimulation_10',['RotationSimulation',['../classRotationSimulation.html',1,'']]]
+  ['rk4_8',['RK4',['../classRK4.html',1,'']]]
 ];

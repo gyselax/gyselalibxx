@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: FunctionToBeAdvected Class Reference</title>
+<title>Gyselalib++: AdvectionSimulation&lt; AdvectionField, FunctionToBeAdvected &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classFunctionToBeAdvected.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structAdvectionSimulation.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -104,75 +104,77 @@ $(document).ready(function(){initNavTree('classFunctionToBeAdvected.html',''); i
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classFunctionToBeAdvected-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">FunctionToBeAdvected Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structAdvectionSimulation-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">AdvectionSimulation&lt; AdvectionField, FunctionToBeAdvected &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for the test functions for the 2D polar advection operator.  
- <a href="classFunctionToBeAdvected.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for FunctionToBeAdvected:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classFunctionToBeAdvected.png" usemap="#FunctionToBeAdvected_map" alt=""/>
-  <map id="FunctionToBeAdvected_map" name="FunctionToBeAdvected_map">
-<area href="classFunctionToBeAdvected__cos__4__elipse.html" title="Test function for the 2D polar advection operator." alt="FunctionToBeAdvected_cos_4_elipse&lt; Mapping &gt;" shape="rect" coords="0,56,298,80"/>
-<area href="classFunctionToBeAdvected__gaussian.html" title="Test function for the 2D polar advection operator." alt="FunctionToBeAdvected_gaussian&lt; Mapping &gt;" shape="rect" coords="308,56,606,80"/>
-  </map>
-</div></div>
+<p>Base class for the tests simulation of the 2D polar advection operator.  
+ <a href="structAdvectionSimulation.html#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ac469846a7162037505e058f7d248dc4b" id="r_ac469846a7162037505e058f7d248dc4b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFunctionToBeAdvected.html#ac469846a7162037505e058f7d248dc4b">operator()</a> (CoordRTheta coord)=0</td></tr>
-<tr class="memdesc:ac469846a7162037505e058f7d248dc4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function.  <br /></td></tr>
-<tr class="separator:ac469846a7162037505e058f7d248dc4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5514ff8c601c1df1602d37c656575c82" id="r_a5514ff8c601c1df1602d37c656575c82"><td class="memItemLeft" align="right" valign="top"><a id="a5514ff8c601c1df1602d37c656575c82" name="a5514ff8c601c1df1602d37c656575c82"></a>
+AdvectionField const&#160;</td><td class="memItemRight" valign="bottom"><b>advection_field</b></td></tr>
+<tr class="memdesc:a5514ff8c601c1df1602d37c656575c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">The chosen advection field for the simulation. <br /></td></tr>
+<tr class="separator:a5514ff8c601c1df1602d37c656575c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01eab4bc2f1a9ae148eab35f1b1c815" id="r_ad01eab4bc2f1a9ae148eab35f1b1c815"><td class="memItemLeft" align="right" valign="top"><a id="ad01eab4bc2f1a9ae148eab35f1b1c815" name="ad01eab4bc2f1a9ae148eab35f1b1c815"></a>
+FunctionToBeAdvected const&#160;</td><td class="memItemRight" valign="bottom"><b>advected_function</b></td></tr>
+<tr class="memdesc:ad01eab4bc2f1a9ae148eab35f1b1c815"><td class="mdescLeft">&#160;</td><td class="mdescRight">The chosen function to be advected for the simulation. <br /></td></tr>
+<tr class="separator:ad01eab4bc2f1a9ae148eab35f1b1c815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for the test functions for the 2D polar advection operator. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class AdvectionField, class FunctionToBeAdvected&gt;<br />
+struct AdvectionSimulation&lt; AdvectionField, FunctionToBeAdvected &gt;</div><p>Base class for the tests simulation of the 2D polar advection operator. </p>
+<p>The simulations are:</p><ul>
+<li>TranslationSimulation,</li>
+<li>RotationSimulation,</li>
+<li>DecentredRotationSimulation.</li>
+</ul>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> </dd>
 <dd>
-<a class="el" href="classAdvectionSimulation.html" title="Base class for the tests simulation of the 2D polar advection operator.">AdvectionSimulation</a> </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac469846a7162037505e058f7d248dc4b" name="ac469846a7162037505e058f7d248dc4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac469846a7162037505e058f7d248dc4b">&#9670;&#160;</a></span>operator()()</h2>
+FunctionToBeAdvected </dd>
+<dd>
+AdvectionField </dd></dl>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5514ff8c601c1df1602d37c656575c82" name="a5514ff8c601c1df1602d37c656575c82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5514ff8c601c1df1602d37c656575c82">&#9670;&#160;</a></span>advection_field</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;class AdvectionField , class FunctionToBeAdvected &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">virtual double FunctionToBeAdvected::operator() </td>
-          <td>(</td>
-          <td class="paramtype">CoordRTheta&#160;</td>
-          <td class="paramname"><em>coord</em></td><td>)</td>
-          <td></td>
+          <td class="memname">AdvectionField const <a class="el" href="structAdvectionSimulation.html">AdvectionSimulation</a>&lt; AdvectionField, FunctionToBeAdvected &gt;::advection_field</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Get the value of the function. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we want to evaluate the function.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of the function at the coordinate. </dd></dl>
-
-<p>Implemented in <a class="el" href="classFunctionToBeAdvected__cos__4__elipse.html#a2f35b8a7024c4e1e1d0a09e761abf56e">FunctionToBeAdvected_cos_4_elipse&lt; Mapping &gt;</a>, and <a class="el" href="classFunctionToBeAdvected__gaussian.html#a5cefc067d3394e546900673571f6e612">FunctionToBeAdvected_gaussian&lt; Mapping &gt;</a>.</p>
+<p>The chosen advection field for the simulation. </p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="ad01eab4bc2f1a9ae148eab35f1b1c815" name="ad01eab4bc2f1a9ae148eab35f1b1c815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad01eab4bc2f1a9ae148eab35f1b1c815">&#9670;&#160;</a></span>advected_function</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AdvectionField , class FunctionToBeAdvected &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">FunctionToBeAdvected const <a class="el" href="structAdvectionSimulation.html">AdvectionSimulation</a>&lt; AdvectionField, FunctionToBeAdvected &gt;::advected_function</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The chosen function to be advected for the simulation. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/advection_2d_rp/<a class="el" href="advection__2d__rp_2test__cases_8hpp_source.html">test_cases.hpp</a></li>
 </ul>
 </div><!-- contents -->
@@ -180,7 +182,7 @@ Public Member Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classFunctionToBeAdvected.html">FunctionToBeAdvected</a></li>
+    <li class="navelem"><a class="el" href="structAdvectionSimulation.html">AdvectionSimulation</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

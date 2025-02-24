@@ -17,7 +17,6 @@ var searchData=
   ['findrelevantidxrangetype_3c_20querygrid1d_2c_20std_3a_3atuple_3c_20idxrangehead_2c_20idxrangetypes_2e_2e_2e_20_3e_20_3e_14',['FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;',['../structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.html',1,'connectivity_details']]],
   ['findrelevantidxrangetype_3c_20querygrid1d_2c_20std_3a_3atuple_3c_3e_20_3e_15',['FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;',['../structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.html',1,'connectivity_details']]],
   ['fluidmoments_16',['FluidMoments',['../classFluidMoments.html',1,'']]],
-  ['functiontobeadvected_17',['FunctionToBeAdvected',['../classFunctionToBeAdvected.html',1,'']]],
-  ['functiontobeadvected_5fcos_5f4_5felipse_18',['FunctionToBeAdvected_cos_4_elipse',['../classFunctionToBeAdvected__cos__4__elipse.html',1,'']]],
-  ['functiontobeadvected_5fgaussian_19',['FunctionToBeAdvected_gaussian',['../classFunctionToBeAdvected__gaussian.html',1,'']]]
+  ['functiontobeadvected_5fcos_5f4_5felipse_17',['FunctionToBeAdvected_cos_4_elipse',['../classFunctionToBeAdvected__cos__4__elipse.html',1,'']]],
+  ['functiontobeadvected_5fgaussian_18',['FunctionToBeAdvected_gaussian',['../classFunctionToBeAdvected__gaussian.html',1,'']]]
 ];

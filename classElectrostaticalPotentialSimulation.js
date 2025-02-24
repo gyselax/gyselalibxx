@@ -1,5 +1,0 @@
-var classElectrostaticalPotentialSimulation =
-[
-    [ "operator()", "classElectrostaticalPotentialSimulation.html#a445037f02ef92015762871398e8fd471", null ],
-    [ "exact_feet", "classElectrostaticalPotentialSimulation.html#acf93729d91941c8db9f9b73d761f4821", null ]
-];
