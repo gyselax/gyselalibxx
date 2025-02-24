@@ -375,7 +375,7 @@ void simulate(
         if (ddc::get<R>(coord) <= 1e-15) {
             ddc::get<Theta>(coord) = 0;
         }
-        allfdistribu_test(irp) = simulation.function(coord);
+        allfdistribu_test(irp) = simulation.advected_function(coord);
     });
 
 
@@ -432,7 +432,7 @@ void simulate(
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         double const err
                 = fabs(allfdistribu_advected_test(irp)
-                       - simulation.function(feet_coords_rp_end_time(irp)));
+                       - simulation.advected_function(feet_coords_rp_end_time(irp)));
         max_err = max_err > err ? max_err : err;
     });
 
@@ -448,7 +448,7 @@ void simulate(
                          to_physical_mapping_host,
                          grid,
                          allfdistribu_advected_test,
-                         simulation.function,
+                         simulation.advected_function,
                          get_field(feet_coords_rp_end_time))
               << std::endl;
 
@@ -486,10 +486,10 @@ void simulate(
         host_t<DFieldMemRTheta> initial_function(grid);
         host_t<DFieldMemRTheta> end_function(grid);
         ddc::for_each(grid, [&](const IdxRTheta irp) {
-            initial_function(irp) = simulation.function(ddc::coordinate(irp));
+            initial_function(irp) = simulation.advected_function(ddc::coordinate(irp));
 
             // Exact final state
-            end_function(irp) = simulation.function(feet_coords_rp_end_time(irp));
+            end_function(irp) = simulation.advected_function(feet_coords_rp_end_time(irp));
         });
         saving_computed(to_physical_mapping_host, get_field(initial_function), name_0);
         saving_computed(to_physical_mapping_host, get_field(end_function), name_1);

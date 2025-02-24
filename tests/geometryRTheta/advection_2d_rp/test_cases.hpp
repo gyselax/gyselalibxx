@@ -452,7 +452,7 @@ struct AdvectionSimulation
     /**
      * @brief The chosen function to be advected for the simulation.
      */
-    FunctionToBeAdvected const function;
+    FunctionToBeAdvected const advected_function;
 };
 
 /**
