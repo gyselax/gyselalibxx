@@ -246,11 +246,11 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][0] * jacobian 
-                  + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][0] * jacobian; 
+                = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][0] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][0] * jacobian;
         ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][1] *jacobian
-                  + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][1] *jacobian; 
+                = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][1] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][1] * jacobian;
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
