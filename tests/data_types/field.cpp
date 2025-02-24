@@ -268,6 +268,19 @@ TEST(VectorField1DTest, Access)
     }
 }
 
+TEST(VectorField1DTest, VectorAccess)
+{
+    Coord2D constexpr factor(1.391, 2.444);
+    DVectorFieldMemX field(idx_range_x);
+    for (IdxX ix : get_idx_range(field)) {
+        Coord2D val = double((ix - idx_range_x.front()).value()) * factor;
+        field(ix) = val;
+        // we expect exact equality, not EXPECT_DOUBLE_EQ: this is the same ref twice
+        EXPECT_EQ(ddc::get<Tag1>(val), ddcHelper::get<Tag1>(field(ix)));
+        EXPECT_EQ(ddc::get<Tag2>(val), ddcHelper::get<Tag2>(field(ix)));
+    }
+}
+
 TEST(VectorField1DTest, GetConstField)
 {
     Coord2D constexpr factor(1.391, 2.444);
