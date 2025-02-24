@@ -54,10 +54,19 @@ public:
      */
     explicit FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {}
 
+    /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_cos_4_elipse(
-            FunctionToBeAdvected_cos_4_elipse const& func)
+            FunctionToBeAdvected_cos_4_elipse const&)
             = default;
 
+    /**
+     * @brief Get the value of the function.
+     *
+     * @param[in] coord_rp
+     *      The coordinate where we want to evaluate the function.
+     *
+     * @return The value of the function at the coordinate.
+     */
     KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
     {
         CoordXY const coord_xy(m_mapping(coord_rp));
@@ -141,10 +150,19 @@ public:
     {
     }
 
+    /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_gaussian(
-            FunctionToBeAdvected_gaussian const& func)
+            FunctionToBeAdvected_gaussian const&)
             = default;
 
+    /**
+     * @brief Get the value of the function.
+     *
+     * @param[in] coord_rp
+     *      The coordinate where we want to evaluate the function.
+     *
+     * @return The value of the function at the coordinate.
+     */
     KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
     {
         // Gaussian centered in (x0, y0):
@@ -206,10 +224,21 @@ public:
     {
     }
 
+    /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
             AdvectionField_decentred_rotation const&)
             = default;
 
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         double const x = m_omega * (m_yc - ddc::get<Y>(coord));
@@ -217,6 +246,16 @@ public:
         return CoordXY(x, y);
     }
 
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
@@ -265,14 +304,35 @@ public:
     {
     }
 
+    /// Copy operator
     KOKKOS_DEFAULTED_FUNCTION AdvectionField_translation(AdvectionField_translation const&)
             = default;
 
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         return m_velocity;
     }
 
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         return coord - t * m_velocity;
@@ -326,8 +386,19 @@ public:
     {
     }
 
+    /// Copy operator
     KOKKOS_DEFAULTED_FUNCTION AdvectionField_rotation(AdvectionField_rotation const&) = default;
 
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord));
@@ -338,6 +409,16 @@ public:
         return CoordXY(vx, vy);
     }
 
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord_xy
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord_xy));

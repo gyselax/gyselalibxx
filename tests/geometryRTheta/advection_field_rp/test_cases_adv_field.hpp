@@ -58,10 +58,21 @@ public:
     {
     }
 
+    /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticalPotentialSimulation_decentred_rotation(
             ElectrostaticalPotentialSimulation_decentred_rotation const&)
             = default;
 
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
@@ -69,6 +80,16 @@ public:
         return m_omega * (-0.5 * x * x + m_xc * x - 0.5 * y * y + m_yc * y);
     }
 
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
@@ -117,10 +138,21 @@ public:
     {
     }
 
+    /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticalPotentialSimulation_translation(
             ElectrostaticalPotentialSimulation_translation const&)
             = default;
 
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
         double const vx = ddc::get<X>(m_velocity);
@@ -128,6 +160,16 @@ public:
         return -vy * ddc::get<X>(coord) + vx * ddc::get<Y>(coord);
     }
 
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         return coord - t * m_velocity;
@@ -176,10 +218,21 @@ public:
     {
     }
 
+    /// Copy operator
     explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticalPotentialSimulation_rotation(
             ElectrostaticalPotentialSimulation_rotation const&)
             = default;
 
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rp(m_mapping(coord));
@@ -187,6 +240,16 @@ public:
         return -0.5 * r * r * m_vtheta;
     }
 
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord_xy
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rp(m_mapping(coord_xy));
