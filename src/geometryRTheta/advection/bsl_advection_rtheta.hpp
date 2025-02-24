@@ -170,13 +170,12 @@ public:
         // Convert advection field on RTheta to advection field on XY
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy(grid);
 
-        MetricTensor<Mapping, CoordRTheta> metric_tensor(m_mapping);
+        InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
 
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-            std::array<std::array<double, 2>, 2> inv_J; // inverse Jacobian matrix
-            m_mapping.inv_jacobian_matrix(coord_rp, inv_J);
+            std::array<std::array<double, 2>, 2> inv_J = inv_jacobian_matrix(coord_rp);
             double const jacobian = m_mapping.jacobian(coord_rp); 
 
             ddcHelper::get<X>(advection_field_xy)(irp)
