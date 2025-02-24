@@ -1,7 +1,7 @@
 var searchData=
 [
   ['field_5ftype_0',['field_type',['../classVectorField.html#a7f814318283767df370cfbc22e757c43',1,'VectorField::field_type'],['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a7cdff0d96a3b6bee16f632dd1cb3d4a6',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::field_type'],['../classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#aa2c395a9fd1033e93f3dbfdb802c04d1',1,'IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::field_type']]],
-  ['fieldrtheta_1',['FieldRTheta',['../classSplinePolarFootFinder.html#a9935580191e75e2439f67ec7d3adbbb0',1,'SplinePolarFootFinder']]],
+  ['fieldrtheta_1',['FieldRTheta',['../classSplinePolarFootFinder.html#ab86fe5696e8bd195e90b57899efc4e13',1,'SplinePolarFootFinder']]],
   ['find_5fconnections_5ft_2',['find_connections_t',['../classMultipatchConnectivity.html#a2e53e4b857d0861bfe271be891c60f50',1,'MultipatchConnectivity']]],
   ['fourier_5ffield_5fmem_5ftype_3',['fourier_field_mem_type',['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a8590dd393f09bf3381a6f81ff8ab0034',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;']]],
   ['fourier_5ffield_5ftype_4',['fourier_field_type',['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#ac0bc6c14fcb18c5426da0c57a1758115',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;']]],

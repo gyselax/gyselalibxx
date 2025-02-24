@@ -86,6 +86,6 @@ var searchData=
   ['domain_20axis_83',['domain axis',['../src_geometryRTheta_advection_field.html#autotoc_md57',1,'Advection field along the logical domain axis'],['../src_geometryRTheta_advection_field.html#autotoc_md56',1,'Advection field along the physical domain axis']]],
   ['domain_20used_20for_20the_20advection_3a_84',['- The mapping and the domain used for the advection:',['../tests_geometryRTheta_advection_2d_rp.html#autotoc_md93',1,'']]],
   ['dual_85',['dual',['../structR.html#a35006d7e5031a9bd48e5af62534c421f',1,'R::Dual'],['../structY.html#aad98c6afa465f3fb654029648420df1f',1,'Y::Dual'],['../structX.html#a11361f8ff006d764ec79d4b06fa3f45f',1,'X::Dual'],['../structY.html#aad98c6afa465f3fb654029648420df1f',1,'Y::Dual'],['../structX.html#a11361f8ff006d764ec79d4b06fa3f45f',1,'X::Dual'],['../structX.html#a11361f8ff006d764ec79d4b06fa3f45f',1,'X::Dual'],['../structTheta__cov.html#a5249a3e36315f79336d879b37293d0fb',1,'Theta_cov::Dual'],['../structR__cov.html#a8730d9a5eb3d718d402cad8cbbc93f0d',1,'R_cov::Dual'],['../structTheta.html#a1f99557f831a14c03c9d03e1a5e33d40',1,'Theta::Dual']]],
-  ['dvectorconstfieldrtheta_86',['DVectorConstFieldRTheta',['../classSplinePolarFootFinder.html#abe5474c741a91ef184789f004915e73b',1,'SplinePolarFootFinder']]],
-  ['dvectorfieldrtheta_87',['DVectorFieldRTheta',['../classSplinePolarFootFinder.html#a80c30b15524539821a2f7367a7ba1770',1,'SplinePolarFootFinder']]]
+  ['dvectorconstfieldrtheta_86',['DVectorConstFieldRTheta',['../classSplinePolarFootFinder.html#a29cf63c2878efe4794b70f6d99d68da2',1,'SplinePolarFootFinder']]],
+  ['dvectorfieldrtheta_87',['DVectorFieldRTheta',['../classSplinePolarFootFinder.html#a71081f823b626aecc22e2ca6af852f63',1,'SplinePolarFootFinder']]]
 ];

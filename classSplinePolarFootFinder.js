@@ -1,12 +1,12 @@
 var classSplinePolarFootFinder =
 [
-    [ "FieldRTheta", "classSplinePolarFootFinder.html#a9935580191e75e2439f67ec7d3adbbb0", null ],
-    [ "ConstFieldRTheta", "classSplinePolarFootFinder.html#aa849e5fd2467cdd1f6f66c2f54087652", null ],
-    [ "DVectorFieldRTheta", "classSplinePolarFootFinder.html#a80c30b15524539821a2f7367a7ba1770", null ],
-    [ "DVectorConstFieldRTheta", "classSplinePolarFootFinder.html#abe5474c741a91ef184789f004915e73b", null ],
-    [ "VectorSplineCoeffsMem2D", "classSplinePolarFootFinder.html#a85c90562ced83f5d247433653ec06b7f", null ],
-    [ "SplinePolarFootFinder", "classSplinePolarFootFinder.html#a92214a07f60f5a24b1a358b65ad88706", null ],
-    [ "operator()", "classSplinePolarFootFinder.html#acbd16196329b51e46790d8f0f259b2e6", null ],
-    [ "is_unified", "classSplinePolarFootFinder.html#adb354561c53fb385fb8979ab2af8fbd1", null ],
-    [ "unify_value_at_center_pt", "classSplinePolarFootFinder.html#a8386efbc3f8042a2804e6a79ff952770", null ]
+    [ "FieldRTheta", "classSplinePolarFootFinder.html#ab86fe5696e8bd195e90b57899efc4e13", null ],
+    [ "ConstFieldRTheta", "classSplinePolarFootFinder.html#a3bc1c3e8f65e938c4ae1b4f84eff0c51", null ],
+    [ "DVectorFieldRTheta", "classSplinePolarFootFinder.html#a71081f823b626aecc22e2ca6af852f63", null ],
+    [ "DVectorConstFieldRTheta", "classSplinePolarFootFinder.html#a29cf63c2878efe4794b70f6d99d68da2", null ],
+    [ "VectorSplineCoeffsMem2D", "classSplinePolarFootFinder.html#afc47336cb0b5e99785d8448a481cbb1b", null ],
+    [ "SplinePolarFootFinder", "classSplinePolarFootFinder.html#a190dbd81c517977edcee7572953add5a", null ],
+    [ "operator()", "classSplinePolarFootFinder.html#a02ac2127e2d8395e92d0643be1400050", null ],
+    [ "is_unified", "classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266", null ],
+    [ "unify_value_at_center_pt", "classSplinePolarFootFinder.html#ae298c9f4ad9736e24464091f572f857e", null ]
 ];

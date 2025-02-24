@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt; Class Template Reference</title>
+<title>Gyselalib++: SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,80 +107,80 @@ $(document).ready(function(){initNavTree('classSplinePolarFootFinder.html',''); 
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSplinePolarFootFinder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class to find the foot of the characteristics on the \( (r,\theta) \) plane.  
  <a href="classSplinePolarFootFinder.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;:</div>
+Inheritance diagram for SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classSplinePolarFootFinder.png" usemap="#SplinePolarFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_2C_20SplineRThetaBuilder_5Fhost_2C_20SplineRThetaEvaluatorConstBound_5Fhost_20_3E_map" alt=""/>
-  <map id="SplinePolarFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_2C_20SplineRThetaBuilder_5Fhost_2C_20SplineRThetaEvaluatorConstBound_5Fhost_20_3E_map" name="SplinePolarFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_2C_20SplineRThetaBuilder_5Fhost_2C_20SplineRThetaEvaluatorConstBound_5Fhost_20_3E_map">
-<area href="classIPolarFootFinder.html" alt="IPolarFootFinder&lt; SplineRThetaBuilder_host::interpolation_discrete_dimension_type1, SplineRThetaBuilder_host::interpolation_discrete_dimension_type2, LogicalToPhysicalMapping::cartesian_tag_x, LogicalToPhysicalMapping::cartesian_tag_y, SplineRThetaBuilder_host::memory_space &gt;" shape="rect" coords="0,0,1641,24"/>
+  <img src="classSplinePolarFootFinder.png" usemap="#SplinePolarFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_2C_20SplineRThetaBuilder_2C_20SplineRThetaEvaluatorConstBound_20_3E_map" alt=""/>
+  <map id="SplinePolarFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_2C_20SplineRThetaBuilder_2C_20SplineRThetaEvaluatorConstBound_20_3E_map" name="SplinePolarFootFinder_3C_20TimeStepper_2C_20LogicalToPhysicalMapping_2C_20LogicalToPseudoPhysicalMapping_2C_20SplineRThetaBuilder_2C_20SplineRThetaEvaluatorConstBound_20_3E_map">
+<area href="classIPolarFootFinder.html" alt="IPolarFootFinder&lt; SplineRThetaBuilder::interpolation_discrete_dimension_type1, SplineRThetaBuilder::interpolation_discrete_dimension_type2, LogicalToPhysicalMapping::cartesian_tag_x, LogicalToPhysicalMapping::cartesian_tag_y, SplineRThetaBuilder::memory_space &gt;" shape="rect" coords="0,0,1551,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a9935580191e75e2439f67ec7d3adbbb0" id="r_a9935580191e75e2439f67ec7d3adbbb0"><td class="memTemplParams" colspan="2"><a id="a9935580191e75e2439f67ec7d3adbbb0" name="a9935580191e75e2439f67ec7d3adbbb0"></a>
+<tr class="memitem:ab86fe5696e8bd195e90b57899efc4e13" id="r_ab86fe5696e8bd195e90b57899efc4e13"><td class="memTemplParams" colspan="2"><a id="ab86fe5696e8bd195e90b57899efc4e13" name="ab86fe5696e8bd195e90b57899efc4e13"></a>
 template&lt;class ElementType &gt; </td></tr>
-<tr class="memitem:a9935580191e75e2439f67ec7d3adbbb0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FieldRTheta</b> = Field&lt; ElementType, IdxRangeRTheta, memory_space &gt;</td></tr>
-<tr class="memdesc:a9935580191e75e2439f67ec7d3adbbb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a field on the polar plane on a compatible memory space. <br /></td></tr>
-<tr class="separator:a9935580191e75e2439f67ec7d3adbbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa849e5fd2467cdd1f6f66c2f54087652" id="r_aa849e5fd2467cdd1f6f66c2f54087652"><td class="memTemplParams" colspan="2"><a id="aa849e5fd2467cdd1f6f66c2f54087652" name="aa849e5fd2467cdd1f6f66c2f54087652"></a>
+<tr class="memitem:ab86fe5696e8bd195e90b57899efc4e13"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FieldRTheta</b> = Field&lt; ElementType, IdxRangeRTheta, memory_space &gt;</td></tr>
+<tr class="memdesc:ab86fe5696e8bd195e90b57899efc4e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a field on the polar plane on a compatible memory space. <br /></td></tr>
+<tr class="separator:ab86fe5696e8bd195e90b57899efc4e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc1c3e8f65e938c4ae1b4f84eff0c51" id="r_a3bc1c3e8f65e938c4ae1b4f84eff0c51"><td class="memTemplParams" colspan="2"><a id="a3bc1c3e8f65e938c4ae1b4f84eff0c51" name="a3bc1c3e8f65e938c4ae1b4f84eff0c51"></a>
 template&lt;class ElementType &gt; </td></tr>
-<tr class="memitem:aa849e5fd2467cdd1f6f66c2f54087652"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ConstFieldRTheta</b> = ConstField&lt; ElementType, IdxRangeRTheta, memory_space &gt;</td></tr>
-<tr class="memdesc:aa849e5fd2467cdd1f6f66c2f54087652"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a constant field on the polar plane on a compatible memory space. <br /></td></tr>
-<tr class="separator:aa849e5fd2467cdd1f6f66c2f54087652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80c30b15524539821a2f7367a7ba1770" id="r_a80c30b15524539821a2f7367a7ba1770"><td class="memTemplParams" colspan="2"><a id="a80c30b15524539821a2f7367a7ba1770" name="a80c30b15524539821a2f7367a7ba1770"></a>
+<tr class="memitem:a3bc1c3e8f65e938c4ae1b4f84eff0c51"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ConstFieldRTheta</b> = ConstField&lt; ElementType, IdxRangeRTheta, memory_space &gt;</td></tr>
+<tr class="memdesc:a3bc1c3e8f65e938c4ae1b4f84eff0c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a constant field on the polar plane on a compatible memory space. <br /></td></tr>
+<tr class="separator:a3bc1c3e8f65e938c4ae1b4f84eff0c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71081f823b626aecc22e2ca6af852f63" id="r_a71081f823b626aecc22e2ca6af852f63"><td class="memTemplParams" colspan="2"><a id="a71081f823b626aecc22e2ca6af852f63" name="a71081f823b626aecc22e2ca6af852f63"></a>
 template&lt;class Dim1 , class Dim2 &gt; </td></tr>
-<tr class="memitem:a80c30b15524539821a2f7367a7ba1770"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>DVectorFieldRTheta</b> = <a class="el" href="classVectorField.html">VectorField</a>&lt; double, IdxRangeRTheta, NDTag&lt; Dim1, Dim2 &gt;, memory_space &gt;</td></tr>
-<tr class="memdesc:a80c30b15524539821a2f7367a7ba1770"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a vector (x,y) field on the polar plane on a compatible memory space. <br /></td></tr>
-<tr class="separator:a80c30b15524539821a2f7367a7ba1770"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe5474c741a91ef184789f004915e73b" id="r_abe5474c741a91ef184789f004915e73b"><td class="memTemplParams" colspan="2"><a id="abe5474c741a91ef184789f004915e73b" name="abe5474c741a91ef184789f004915e73b"></a>
+<tr class="memitem:a71081f823b626aecc22e2ca6af852f63"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>DVectorFieldRTheta</b> = <a class="el" href="classVectorField.html">VectorField</a>&lt; double, IdxRangeRTheta, NDTag&lt; Dim1, Dim2 &gt;, memory_space &gt;</td></tr>
+<tr class="memdesc:a71081f823b626aecc22e2ca6af852f63"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a vector (x,y) field on the polar plane on a compatible memory space. <br /></td></tr>
+<tr class="separator:a71081f823b626aecc22e2ca6af852f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29cf63c2878efe4794b70f6d99d68da2" id="r_a29cf63c2878efe4794b70f6d99d68da2"><td class="memTemplParams" colspan="2"><a id="a29cf63c2878efe4794b70f6d99d68da2" name="a29cf63c2878efe4794b70f6d99d68da2"></a>
 template&lt;class Dim1 , class Dim2 &gt; </td></tr>
-<tr class="memitem:abe5474c741a91ef184789f004915e73b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>DVectorConstFieldRTheta</b> = <a class="el" href="classVectorField.html">VectorConstField</a>&lt; double, IdxRangeRTheta, NDTag&lt; Dim1, Dim2 &gt;, memory_space &gt;</td></tr>
-<tr class="memdesc:abe5474c741a91ef184789f004915e73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a constant vector (x,y) field on the polar plane on a compatible memory space. <br /></td></tr>
-<tr class="separator:abe5474c741a91ef184789f004915e73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85c90562ced83f5d247433653ec06b7f" id="r_a85c90562ced83f5d247433653ec06b7f"><td class="memTemplParams" colspan="2"><a id="a85c90562ced83f5d247433653ec06b7f" name="a85c90562ced83f5d247433653ec06b7f"></a>
+<tr class="memitem:a29cf63c2878efe4794b70f6d99d68da2"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>DVectorConstFieldRTheta</b> = <a class="el" href="classVectorField.html">VectorConstField</a>&lt; double, IdxRangeRTheta, NDTag&lt; Dim1, Dim2 &gt;, memory_space &gt;</td></tr>
+<tr class="memdesc:a29cf63c2878efe4794b70f6d99d68da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a constant vector (x,y) field on the polar plane on a compatible memory space. <br /></td></tr>
+<tr class="separator:a29cf63c2878efe4794b70f6d99d68da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc47336cb0b5e99785d8448a481cbb1b" id="r_afc47336cb0b5e99785d8448a481cbb1b"><td class="memTemplParams" colspan="2"><a id="afc47336cb0b5e99785d8448a481cbb1b" name="afc47336cb0b5e99785d8448a481cbb1b"></a>
 template&lt;class Dim1 , class Dim2 &gt; </td></tr>
-<tr class="memitem:a85c90562ced83f5d247433653ec06b7f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VectorSplineCoeffsMem2D</b> = <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; double, IdxRange&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a> &gt;, NDTag&lt; Dim1, Dim2 &gt;, memory_space &gt;</td></tr>
-<tr class="memdesc:a85c90562ced83f5d247433653ec06b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space. <br /></td></tr>
-<tr class="separator:a85c90562ced83f5d247433653ec06b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc47336cb0b5e99785d8448a481cbb1b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VectorSplineCoeffsMem2D</b> = <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; double, IdxRange&lt; <a class="el" href="structBSplinesR.html">BSplinesR</a>, <a class="el" href="structBSplinesTheta.html">BSplinesTheta</a> &gt;, NDTag&lt; Dim1, Dim2 &gt;, memory_space &gt;</td></tr>
+<tr class="memdesc:afc47336cb0b5e99785d8448a481cbb1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space. <br /></td></tr>
+<tr class="separator:afc47336cb0b5e99785d8448a481cbb1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a92214a07f60f5a24b1a358b65ad88706" id="r_a92214a07f60f5a24b1a358b65ad88706"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#a92214a07f60f5a24b1a358b65ad88706">SplinePolarFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> const &amp;logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical_mapping, SplineRThetaBuilder_host const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound_host const &amp;evaluator_advection_field, double epsilon=1e-12)</td></tr>
-<tr class="memdesc:a92214a07f60f5a24b1a358b65ad88706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <br /></td></tr>
-<tr class="separator:a92214a07f60f5a24b1a358b65ad88706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbd16196329b51e46790d8f0f259b2e6" id="r_acbd16196329b51e46790d8f0f259b2e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#acbd16196329b51e46790d8f0f259b2e6">operator()</a> (<a class="el" href="classSplinePolarFootFinder.html#a9935580191e75e2439f67ec7d3adbbb0">FieldRTheta</a>&lt; CoordRTheta &gt; feet, <a class="el" href="classSplinePolarFootFinder.html#abe5474c741a91ef184789f004915e73b">DVectorConstFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, double dt) const final</td></tr>
-<tr class="memdesc:acbd16196329b51e46790d8f0f259b2e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <br /></td></tr>
-<tr class="separator:acbd16196329b51e46790d8f0f259b2e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb354561c53fb385fb8979ab2af8fbd1" id="r_adb354561c53fb385fb8979ab2af8fbd1"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="structT.html">T</a> &gt; </td></tr>
-<tr class="memitem:adb354561c53fb385fb8979ab2af8fbd1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#adb354561c53fb385fb8979ab2af8fbd1">is_unified</a> (Field&lt; <a class="el" href="structT.html">T</a>, IdxRangeRTheta, memory_space &gt; const &amp;values) const</td></tr>
-<tr class="memdesc:adb354561c53fb385fb8979ab2af8fbd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the values at the center point are the same.  <br /></td></tr>
-<tr class="separator:adb354561c53fb385fb8979ab2af8fbd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8386efbc3f8042a2804e6a79ff952770" id="r_a8386efbc3f8042a2804e6a79ff952770"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="structT.html">T</a> &gt; </td></tr>
-<tr class="memitem:a8386efbc3f8042a2804e6a79ff952770"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#a8386efbc3f8042a2804e6a79ff952770">unify_value_at_center_pt</a> (Field&lt; <a class="el" href="structT.html">T</a>, IdxRangeRTheta, memory_space &gt; values) const</td></tr>
-<tr class="memdesc:a8386efbc3f8042a2804e6a79ff952770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the value at \(  (r=0, \theta)\) point by the value at \( (r=0,0) \) for all \( \theta \).  <br /></td></tr>
-<tr class="separator:a8386efbc3f8042a2804e6a79ff952770"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classIPolarFootFinder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPolarFootFinder')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIPolarFootFinder.html">IPolarFootFinder&lt; SplineRThetaBuilder_host::interpolation_discrete_dimension_type1, SplineRThetaBuilder_host::interpolation_discrete_dimension_type2, LogicalToPhysicalMapping::cartesian_tag_x, LogicalToPhysicalMapping::cartesian_tag_y, SplineRThetaBuilder_host::memory_space &gt;</a></td></tr>
+<tr class="memitem:a190dbd81c517977edcee7572953add5a" id="r_a190dbd81c517977edcee7572953add5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#a190dbd81c517977edcee7572953add5a">SplinePolarFootFinder</a> (TimeStepper const &amp;time_stepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> const &amp;logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical_mapping, SplineRThetaBuilder const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound const &amp;evaluator_advection_field, double epsilon=1e-12)</td></tr>
+<tr class="memdesc:a190dbd81c517977edcee7572953add5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a time integration method for the advection operator.  <br /></td></tr>
+<tr class="separator:a190dbd81c517977edcee7572953add5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ac2127e2d8395e92d0643be1400050" id="r_a02ac2127e2d8395e92d0643be1400050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#a02ac2127e2d8395e92d0643be1400050">operator()</a> (<a class="el" href="classSplinePolarFootFinder.html#ab86fe5696e8bd195e90b57899efc4e13">FieldRTheta</a>&lt; CoordRTheta &gt; feet, <a class="el" href="classSplinePolarFootFinder.html#a29cf63c2878efe4794b70f6d99d68da2">DVectorConstFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, double dt) const final</td></tr>
+<tr class="memdesc:a02ac2127e2d8395e92d0643be1400050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <br /></td></tr>
+<tr class="separator:a02ac2127e2d8395e92d0643be1400050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bb90f1a2ccd7ad807d7b868d4ae2266" id="r_a7bb90f1a2ccd7ad807d7b868d4ae2266"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="structT.html">T</a> &gt; </td></tr>
+<tr class="memitem:a7bb90f1a2ccd7ad807d7b868d4ae2266"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a> (Field&lt; <a class="el" href="structT.html">T</a>, IdxRangeRTheta, memory_space &gt; const &amp;values) const</td></tr>
+<tr class="memdesc:a7bb90f1a2ccd7ad807d7b868d4ae2266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the values at the center point are the same.  <br /></td></tr>
+<tr class="separator:a7bb90f1a2ccd7ad807d7b868d4ae2266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae298c9f4ad9736e24464091f572f857e" id="r_ae298c9f4ad9736e24464091f572f857e"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="structT.html">T</a> &gt; </td></tr>
+<tr class="memitem:ae298c9f4ad9736e24464091f572f857e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSplinePolarFootFinder.html#ae298c9f4ad9736e24464091f572f857e">unify_value_at_center_pt</a> (Field&lt; <a class="el" href="structT.html">T</a>, IdxRangeRTheta, memory_space &gt; values) const</td></tr>
+<tr class="memdesc:ae298c9f4ad9736e24464091f572f857e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the value at \(  (r=0, \theta)\) point by the value at \( (r=0,0) \) for all \( \theta \).  <br /></td></tr>
+<tr class="separator:ae298c9f4ad9736e24464091f572f857e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classIPolarFootFinder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPolarFootFinder')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIPolarFootFinder.html">IPolarFootFinder&lt; SplineRThetaBuilder::interpolation_discrete_dimension_type1, SplineRThetaBuilder::interpolation_discrete_dimension_type2, LogicalToPhysicalMapping::cartesian_tag_x, LogicalToPhysicalMapping::cartesian_tag_y, SplineRThetaBuilder::memory_space &gt;</a></td></tr>
 <tr class="memitem:a75b9147187aa2f0c25e498fb90eb3568 inherit pub_methods_classIPolarFootFinder" id="r_a75b9147187aa2f0c25e498fb90eb3568"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPolarFootFinder.html#a75b9147187aa2f0c25e498fb90eb3568">operator()</a> (Field&lt; Coord&lt; <a class="el" href="classIPolarFootFinder.html#af9711742eb727888074230330e13e782">R</a>, <a class="el" href="classIPolarFootFinder.html#ae129c706b58ecf5657c02fcc9969add3">Theta</a> &gt;, <a class="el" href="classIPolarFootFinder.html#a1aa0c6d201b38fab9b2e45a73981dfb1">IdxRangeRTheta</a>, <a class="el" href="classIPolarFootFinder.html#a490b586b89c6841213df78e60e51b824">memory_space</a> &gt; feet, <a class="el" href="classVectorField.html">DVectorConstField</a>&lt; <a class="el" href="classIPolarFootFinder.html#a1aa0c6d201b38fab9b2e45a73981dfb1">IdxRangeRTheta</a>, NDTag&lt; <a class="el" href="classIPolarFootFinder.html#aad57064cce5dd59aabb33fc778f42010">X</a>, <a class="el" href="classIPolarFootFinder.html#a8950c7d66868672cff1dd4675874efb3">Y</a> &gt;, <a class="el" href="classIPolarFootFinder.html#a490b586b89c6841213df78e60e51b824">memory_space</a> &gt; advection_field, double dt) const=0</td></tr>
 <tr class="memdesc:a75b9147187aa2f0c25e498fb90eb3568 inherit pub_methods_classIPolarFootFinder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect the feet over \( dt \).  <br /></td></tr>
 <tr class="separator:a75b9147187aa2f0c25e498fb90eb3568 inherit pub_methods_classIPolarFootFinder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_types_classIPolarFootFinder"><td colspan="2" onclick="javascript:toggleInherit('pro_types_classIPolarFootFinder')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="classIPolarFootFinder.html">IPolarFootFinder&lt; SplineRThetaBuilder_host::interpolation_discrete_dimension_type1, SplineRThetaBuilder_host::interpolation_discrete_dimension_type2, LogicalToPhysicalMapping::cartesian_tag_x, LogicalToPhysicalMapping::cartesian_tag_y, SplineRThetaBuilder_host::memory_space &gt;</a></td></tr>
+<tr class="inherit_header pro_types_classIPolarFootFinder"><td colspan="2" onclick="javascript:toggleInherit('pro_types_classIPolarFootFinder')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="classIPolarFootFinder.html">IPolarFootFinder&lt; SplineRThetaBuilder::interpolation_discrete_dimension_type1, SplineRThetaBuilder::interpolation_discrete_dimension_type2, LogicalToPhysicalMapping::cartesian_tag_x, LogicalToPhysicalMapping::cartesian_tag_y, SplineRThetaBuilder::memory_space &gt;</a></td></tr>
 <tr class="memitem:a90af5e545602e06dc6d8b0fd86399bb3 inherit pro_types_classIPolarFootFinder" id="r_a90af5e545602e06dc6d8b0fd86399bb3"><td class="memItemLeft" align="right" valign="top">
-using&#160;</td><td class="memItemRight" valign="bottom"><b>GridR</b> = SplineRThetaBuilder_host::interpolation_discrete_dimension_type1</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>GridR</b> = SplineRThetaBuilder::interpolation_discrete_dimension_type1</td></tr>
 <tr class="memdesc:a90af5e545602e06dc6d8b0fd86399bb3 inherit pro_types_classIPolarFootFinder"><td class="mdescLeft">&#160;</td><td class="mdescRight">The continuous radial dimension. <br /></td></tr>
 <tr class="separator:a90af5e545602e06dc6d8b0fd86399bb3 inherit pro_types_classIPolarFootFinder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a579ff11bd08281036e353000ec2e3c39 inherit pro_types_classIPolarFootFinder" id="r_a579ff11bd08281036e353000ec2e3c39"><td class="memItemLeft" align="right" valign="top">
-using&#160;</td><td class="memItemRight" valign="bottom"><b>GridTheta</b> = SplineRThetaBuilder_host::interpolation_discrete_dimension_type2</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>GridTheta</b> = SplineRThetaBuilder::interpolation_discrete_dimension_type2</td></tr>
 <tr class="memdesc:a579ff11bd08281036e353000ec2e3c39 inherit pro_types_classIPolarFootFinder"><td class="mdescLeft">&#160;</td><td class="mdescRight">The continuous poloidal dimension. <br /></td></tr>
 <tr class="separator:a579ff11bd08281036e353000ec2e3c39 inherit pro_types_classIPolarFootFinder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9711742eb727888074230330e13e782 inherit pro_types_classIPolarFootFinder" id="r_af9711742eb727888074230330e13e782"><td class="memItemLeft" align="right" valign="top">
@@ -200,7 +200,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Y</b> = <a class="el
 <tr class="memdesc:a8950c7d66868672cff1dd4675874efb3 inherit pro_types_classIPolarFootFinder"><td class="mdescLeft">&#160;</td><td class="mdescRight">The continuous poloidal dimension. <br /></td></tr>
 <tr class="separator:a8950c7d66868672cff1dd4675874efb3 inherit pro_types_classIPolarFootFinder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a490b586b89c6841213df78e60e51b824 inherit pro_types_classIPolarFootFinder" id="r_a490b586b89c6841213df78e60e51b824"><td class="memItemLeft" align="right" valign="top">
-using&#160;</td><td class="memItemRight" valign="bottom"><b>memory_space</b> = SplineRThetaBuilder_host::memory_space</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>memory_space</b> = SplineRThetaBuilder::memory_space</td></tr>
 <tr class="memdesc:a490b586b89c6841213df78e60e51b824 inherit pro_types_classIPolarFootFinder"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the memory space where the field is saved (CPU vs GPU). <br /></td></tr>
 <tr class="separator:a490b586b89c6841213df78e60e51b824 inherit pro_types_classIPolarFootFinder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aa0c6d201b38fab9b2e45a73981dfb1 inherit pro_types_classIPolarFootFinder" id="r_a1aa0c6d201b38fab9b2e45a73981dfb1"><td class="memItemLeft" align="right" valign="top">
@@ -209,8 +209,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxRangeRTheta</b> =
 <tr class="separator:a1aa0c6d201b38fab9b2e45a73981dfb1 inherit pro_types_classIPolarFootFinder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class TimeStepper, class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilder_host, class SplineRThetaEvaluatorConstBound_host&gt;<br />
-class SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;</div><p>A class to find the foot of the characteristics on the \( (r,\theta) \) plane. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class TimeStepper, class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilder, class SplineRThetaEvaluatorConstBound&gt;<br />
+class SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;</div><p>A class to find the foot of the characteristics on the \( (r,\theta) \) plane. </p>
 <p>The natural advection domain is the physical domain, where the studied equation is given. However, not all the mappings used are analytically invertible and inverting the Jacobian matrix of the mapping could be costly and could introduce numerical errors. That is why, we also introduce a pseudo-Cartesian domain.</p>
 <p>More details can be found in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -218,26 +218,26 @@ class SplinePolarFootFinder&lt; TimeStepper, LogicalToPhysicalMapping, LogicalTo
     <tr><td class="paramname">TimeStepper</td><td>A child class of <a class="el" href="classITimeStepper.html" title="The superclass from which all timestepping methods inherit.">ITimeStepper</a> providing a time integration method. </td></tr>
     <tr><td class="paramname">LogicalToPhysicalMapping</td><td>A mapping from the logical domain to the physical domain. </td></tr>
     <tr><td class="paramname">LogicalToPseudoPhysicalMapping</td><td>A mapping from the logical domain to the domain where the advection is carried out. This may be a pseudo-physical domain or the physical domain itself. </td></tr>
-    <tr><td class="paramname">SplineRThetaBuilder_host</td><td>A 2D SplineBuilder to construct a spline on a polar domain. The code is written generally to handle any builder but only a host builder has been tested for now. Use the GPU version at your own peril until this class has been officially ported. </td></tr>
-    <tr><td class="paramname">SplineRThetaEvaluatorConstBound_host</td><td>A 2D SplineEvaluator to evaluate a spline on a polar domain. A boundary condition must be provided in case the foot of the characteristic is found outside the domain. The code is written generally to handle any evaluator but only a host evaluator has been tested for now. Use the GPU version at your own peril until this class has been officially ported.</td></tr>
+    <tr><td class="paramname">SplineRThetaBuilder</td><td>A 2D SplineBuilder to construct a spline on a polar domain. </td></tr>
+    <tr><td class="paramname">SplineRThetaEvaluatorConstBound</td><td>A 2D SplineEvaluator to evaluate a spline on a polar domain. A boundary condition must be provided in case the foot of the characteristic is found outside the domain.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a92214a07f60f5a24b1a358b65ad88706" name="a92214a07f60f5a24b1a358b65ad88706"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92214a07f60f5a24b1a358b65ad88706">&#9670;&#160;</a></span>SplinePolarFootFinder()</h2>
+<a id="a190dbd81c517977edcee7572953add5a" name="a190dbd81c517977edcee7572953add5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a190dbd81c517977edcee7572953add5a">&#9670;&#160;</a></span>SplinePolarFootFinder()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder_host , class SplineRThetaEvaluatorConstBound_host &gt; </div>
+template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder , class SplineRThetaEvaluatorConstBound &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;<a class="el" href="classSplinePolarFootFinder.html">::SplinePolarFootFinder</a> </td>
+          <td class="memname"><a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;<a class="el" href="classSplinePolarFootFinder.html">::SplinePolarFootFinder</a> </td>
           <td>(</td>
           <td class="paramtype">TimeStepper const &amp;&#160;</td>
           <td class="paramname"><em>time_stepper</em>, </td>
@@ -257,13 +257,13 @@ template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesi
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SplineRThetaBuilder_host const &amp;&#160;</td>
+          <td class="paramtype">SplineRThetaBuilder const &amp;&#160;</td>
           <td class="paramname"><em>builder_advection_field</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SplineRThetaEvaluatorConstBound_host const &amp;&#160;</td>
+          <td class="paramtype">SplineRThetaEvaluatorConstBound const &amp;&#160;</td>
           <td class="paramname"><em>evaluator_advection_field</em>, </td>
         </tr>
         <tr>
@@ -302,27 +302,27 @@ template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesi
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acbd16196329b51e46790d8f0f259b2e6" name="acbd16196329b51e46790d8f0f259b2e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbd16196329b51e46790d8f0f259b2e6">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a02ac2127e2d8395e92d0643be1400050" name="a02ac2127e2d8395e92d0643be1400050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02ac2127e2d8395e92d0643be1400050">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder_host , class SplineRThetaEvaluatorConstBound_host &gt; </div>
+template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder , class SplineRThetaEvaluatorConstBound &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;::operator() </td>
+          <td class="memname">void <a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classSplinePolarFootFinder.html#a9935580191e75e2439f67ec7d3adbbb0">FieldRTheta</a>&lt; CoordRTheta &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classSplinePolarFootFinder.html#ab86fe5696e8bd195e90b57899efc4e13">FieldRTheta</a>&lt; CoordRTheta &gt;&#160;</td>
           <td class="paramname"><em>feet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSplinePolarFootFinder.html#abe5474c741a91ef184789f004915e73b">DVectorConstFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classSplinePolarFootFinder.html#a29cf63c2878efe4794b70f6d99d68da2">DVectorConstFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;&#160;</td>
           <td class="paramname"><em>advection_field</em>, </td>
         </tr>
         <tr>
@@ -357,13 +357,13 @@ template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesi
 
 </div>
 </div>
-<a id="adb354561c53fb385fb8979ab2af8fbd1" name="adb354561c53fb385fb8979ab2af8fbd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb354561c53fb385fb8979ab2af8fbd1">&#9670;&#160;</a></span>is_unified()</h2>
+<a id="a7bb90f1a2ccd7ad807d7b868d4ae2266" name="a7bb90f1a2ccd7ad807d7b868d4ae2266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bb90f1a2ccd7ad807d7b868d4ae2266">&#9670;&#160;</a></span>is_unified()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder_host , class SplineRThetaEvaluatorConstBound_host &gt; </div>
+template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder , class SplineRThetaEvaluatorConstBound &gt; </div>
 <div class="memtemplate">
 template&lt;class <a class="el" href="structT.html">T</a> &gt; </div>
 <table class="mlabels">
@@ -371,7 +371,7 @@ template&lt;class <a class="el" href="structT.html">T</a> &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;::is_unified </td>
+          <td class="memname">void <a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;::is_unified </td>
           <td>(</td>
           <td class="paramtype">Field&lt; <a class="el" href="structT.html">T</a>, IdxRangeRTheta, memory_space &gt; const &amp;&#160;</td>
           <td class="paramname"><em>values</em></td><td>)</td>
@@ -396,13 +396,13 @@ template&lt;class <a class="el" href="structT.html">T</a> &gt; </div>
 
 </div>
 </div>
-<a id="a8386efbc3f8042a2804e6a79ff952770" name="a8386efbc3f8042a2804e6a79ff952770"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8386efbc3f8042a2804e6a79ff952770">&#9670;&#160;</a></span>unify_value_at_center_pt()</h2>
+<a id="ae298c9f4ad9736e24464091f572f857e" name="ae298c9f4ad9736e24464091f572f857e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae298c9f4ad9736e24464091f572f857e">&#9670;&#160;</a></span>unify_value_at_center_pt()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder_host , class SplineRThetaEvaluatorConstBound_host &gt; </div>
+template&lt;class TimeStepper , class <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a> , class LogicalToPseudoPhysicalMapping , class SplineRThetaBuilder , class SplineRThetaEvaluatorConstBound &gt; </div>
 <div class="memtemplate">
 template&lt;class <a class="el" href="structT.html">T</a> &gt; </div>
 <table class="mlabels">
@@ -410,7 +410,7 @@ template&lt;class <a class="el" href="structT.html">T</a> &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host &gt;::unify_value_at_center_pt </td>
+          <td class="memname">void <a class="el" href="classSplinePolarFootFinder.html">SplinePolarFootFinder</a>&lt; TimeStepper, <a class="el" href="classCircularToCartesian.html">LogicalToPhysicalMapping</a>, LogicalToPseudoPhysicalMapping, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound &gt;::unify_value_at_center_pt </td>
           <td>(</td>
           <td class="paramtype">Field&lt; <a class="el" href="structT.html">T</a>, IdxRangeRTheta, memory_space &gt;&#160;</td>
           <td class="paramname"><em>values</em></td><td>)</td>
