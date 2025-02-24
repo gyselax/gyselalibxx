@@ -13,7 +13,7 @@ target_link_libraries(vortex_merger
         Eigen3::Eigen
 
 
-        gslx::advection_rp
+        gslx::advection_polar
         gslx::geometry_RTheta
         gslx::io
         gslx::interpolation_2D_rp

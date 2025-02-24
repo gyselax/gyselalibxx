@@ -9,8 +9,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "advection_field_rp.hpp"
-#include "bsl_advection_rp.hpp"
+#include "advection_field_rtheta.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"

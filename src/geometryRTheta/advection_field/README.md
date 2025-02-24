@@ -12,10 +12,14 @@ Currently, the implemented case is:
 
 The studied equation system is of the following type : 
 ```math
+\left\{
+\begin{aligned}
 \partial_t \rho + A\cdot\nabla \rho = 0, \\
 A = E \wedge e_z, \\
 E = - \nabla  \phi, \\
 - \nabla \cdot \nabla \phi = \rho,
+\end{aligned}
+\right.
 ```
 
 with $`\rho`$ the density, $`\phi`$ the electrostatic potential and $`E`$ the electrical field. 
@@ -34,15 +38,15 @@ If a Field is given as input, it computes the spline representation (on the cros
 The spline representation is needed to compute the derivatives of the function $`\phi`$. 
 If the PolarSplineMem representation is given as input, it can directly compute the derivatives of the function $`\phi`$. 
 
-Once the advection field computed, it is given as input to the BslAdvectionRP operator to advect the density $`\rho`$ function. 
-The BslAdvectionRP operator can handle the advection with an advection field along $`(x,y)`$ and with an advection field along $`(r,\theta)`$. 
-But as the BslAdvectionRP operator advects in the physical domain, it is recommend to work with the advection field along $`(x,y)`$.
+Once the advection field computed, it is given as input to the BslAdvectionRTheta operator to advect the density $`\rho`$ function. 
+The BslAdvectionRTheta operator can handle the advection with an advection field along $`(x,y)`$ and with an advection field along $`(r,\theta)`$. 
+But as the BslAdvectionRTheta operator advects in the physical domain, it is recommended to work with the advection field along $`(x,y)`$.
 
 
 ### Advection field along the physical domain axis 
 
 Thanks to the spline representation, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are computed. 
-The computation of the electrical field can be ill-defined around the O-point so we treat this area separately. 
+The computation of the electrical field can be ill-defined around the O-point, so we treat this area separately. 
 
 * If $`r > \varepsilon`$, we use 
 ```math
@@ -83,7 +87,7 @@ A = E\wedge e_z
 \end{bmatrix}. 
 ```
 
-* If $`r \leq \varepsilon`$, we linearise. The method is detailed in Edoardo Zoni's article [1]. We use only the derivatives along $`r`$ at two  linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
+* If $`r \leq \varepsilon`$, we linearize. The method is detailed in [Zoni et al. (2019)](#zoni). We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
 ```math
 \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
 \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2).
@@ -107,7 +111,7 @@ From these equations, we deduce the (unique) values of $`\partial_x\phi`$ and $`
 \end{bmatrix}.
 ```
 
-Then we compute $`E`$ at $`(x,y) = (0,0)`$ and $`(x,y) = \mathcal{F}(\varepsilon,\theta)`$ $`\forall \theta`$ (for $`\varepsilon\neq 0`$, we use the Jacobian matrix as previously) and we linearise
+Then we compute $`E`$ at $`(x,y) = (0,0)`$ and $`(x,y) = \mathcal{F}(\varepsilon,\theta)`$ $`\forall \theta`$ (for $`\varepsilon\neq 0`$, we use the Jacobian matrix as previously) and we linearize
 
 ```math
 E_x(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E_x(0, \theta) + \frac{r}{\varepsilon} E_x(\varepsilon, \theta), \\
@@ -137,50 +141,36 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here. 
 
 #### General coordinates system 
-* In **general coordinates system**, the gradiant of a function is given by 
+* In **general coordinates system**, the gradient of a function is given by 
 
 ```math
-\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j, 
+\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j
 ```
 
 with 
-* $`J`$ the Jacobian matrix associated the the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
+* $`J`$ the Jacobian matrix associated to the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
 * $`G = J^T J = [g_{ij}]_{ij}`$ the metric tensor, 
 * $`G^{-1} = [g^{ij}]_{ij}`$ the inverse metric tensor 
-* and $`\hat{e}_j`$ the normalized covariant vectors. 
+* and $`e_j`$ the unnormalized local covariant vectors. 
 
 In 2D, it can be rewritten as the following matrix system 
 ```math
 \nabla f = 
-D_{G} G^{-T}
+G^{-1}
 \begin{bmatrix}
     \partial_{x_1} f \\
     \partial_{x_2} f \\
 \end{bmatrix}
-= 
-\begin{bmatrix}
-    \sqrt{g_{11}} & 0 \\
-    0 & \sqrt{g_{22}} \\
-\end{bmatrix}
-\begin{bmatrix}
-    g^{11} & g^{21} \\
-    g^{12} & g^{22} \\
-\end{bmatrix}
-\begin{bmatrix}
-    \partial_{x_1} f \\
-    \partial_{x_2} f \\
-\end{bmatrix}.
 ```
 
-**Remark:** We can prove that $`\det(D_{G} G^{-T}) = 0`$ if $`\det(J) = 0`$ (if the coefficients of the matrix $`D_G`$ are not null).
-So for an invertible matrix, we also have the relation 
+So, for an invertible matrix, we also have the relation 
 ```math
 \begin{bmatrix}
     \partial_{x_1} f \\
     \partial_{x_2} f \\
 \end{bmatrix}
 = 
-G^{T}D_{G}^{-1} \nabla f. 
+G \nabla f. 
 ```
 
 From the relation 
@@ -199,21 +189,24 @@ J^{-T}
 
 we deduce the following relation for invertible case
 ```math
-\nabla_{y_1, y_2} f
-= 
-J D_{G}^{-1}
-\nabla_{x_1, x_2} f,
+\nabla_{y_1, y_2} f = J \nabla_{x_1, x_2} f,
 ```
 
-with $`\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T`$ and $`\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j`$.
+with $`\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T`$ and 
+$`\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j`$.
 
 
-#### Aplication to the advection field
+#### Application to the advection field
 * In our case, we use this formula to compute the electric field along the logical axis: 
 ```math
 E
-= -\nabla \phi  
-= - D_{G} (G^{-1})^{T}
+= 
+\begin{bmatrix}
+    E_r \\
+    E_{\theta} \\
+\end{bmatrix}
+= - \nabla_{r,\theta} \phi  
+= - G^{-1}
 \begin{bmatrix}
     \partial_{r} \phi \\
     \partial_{\theta} \phi \\
@@ -231,11 +224,11 @@ A
 \end{bmatrix}.
 ```
 
-Warning, the matrix $`(G^{-1})^{T}`$ is ill-defined for $r = 0$. 
+Warning, the matrix $`G^{-1}`$ is ill-defined for $r = 0$. 
 
 *Example: circular mapping:* 
 ```math
-(G^{-1})^{T}
+G^{-1}
 = 
 \begin{bmatrix}
     1 & 0 \\
@@ -243,16 +236,16 @@ Warning, the matrix $`(G^{-1})^{T}`$ is ill-defined for $r = 0$.
 \end{bmatrix}.
 ```
 
-In the code, the O-point is differently treated. The domain is splitted between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the *Advection field along the physical domain axis* section. 
+In the code, the O-point is differently treated. The domain is split between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearization done in the [Advection field along the physical domain axis](#src_geometryRTheta_advection_field__Guiding_center_case) section. 
 
 
 
 # References 
 
-[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
+<a name="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", https://doi.org/10.1016/j.jcp.2019.108889, Journal of Computational Physics, 2019.
 
 
 # Contents
 
-* advection\_field\_rp.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding center simulation. 
+* advection\_field\_rtheta.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding center simulation. 

@@ -10,7 +10,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_rp.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"

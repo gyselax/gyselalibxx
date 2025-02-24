@@ -13,7 +13,7 @@ target_link_libraries(time_integration_rp
         gslx::interpolation_2D_rp
         gslx::geometry_RTheta
         gslx::poisson_RTheta
-        gslx::advection_rp
+        gslx::advection_polar
         gslx::utils
         gslx::timestepper
         gslx::advection_field_RTheta

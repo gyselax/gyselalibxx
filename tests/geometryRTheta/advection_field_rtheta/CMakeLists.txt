@@ -32,7 +32,7 @@ function (advection_field_test_executable SIMULATION)
             gslx::poisson_RTheta
             gslx::geometry_RTheta
             gslx::interpolation_2D_rp
-            gslx::advection_rp
+            gslx::advection_polar
             gslx::time_integration_rp
             gslx::quadrature
             gslx::utils
