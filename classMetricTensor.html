@@ -120,6 +120,14 @@ Public Types</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Matrix_2x2</b> = std::array&lt; std::array&lt; double, 2 &gt;, 2 &gt;</td></tr>
 <tr class="memdesc:a8f5d8e41ab5e9d9a2cc84ba42b67843a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the Jacobian matrix and its inverse. <br /></td></tr>
 <tr class="separator:a8f5d8e41ab5e9d9a2cc84ba42b67843a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802b29204c9ebe99ea34b89f81275815" id="r_a802b29204c9ebe99ea34b89f81275815"><td class="memItemLeft" align="right" valign="top"><a id="a802b29204c9ebe99ea34b89f81275815" name="a802b29204c9ebe99ea34b89f81275815"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ContravariantVectorType</b> = <a class="el" href="classTensor.html">DTensor</a>&lt; Dims &gt;</td></tr>
+<tr class="memdesc:a802b29204c9ebe99ea34b89f81275815"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a contravariant vector associated with this mapping. <br /></td></tr>
+<tr class="separator:a802b29204c9ebe99ea34b89f81275815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab33f301d4133361bcfde6e82db922085" id="r_ab33f301d4133361bcfde6e82db922085"><td class="memItemLeft" align="right" valign="top"><a id="ab33f301d4133361bcfde6e82db922085" name="ab33f301d4133361bcfde6e82db922085"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CovariantVectorType</b> = <a class="el" href="classTensor.html">DTensor</a>&lt; vector_index_set_dual_t&lt; Dims &gt; &gt;</td></tr>
+<tr class="memdesc:ab33f301d4133361bcfde6e82db922085"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a covariant vector associated with this mapping. <br /></td></tr>
+<tr class="separator:ab33f301d4133361bcfde6e82db922085"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -132,9 +140,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aad3d46ec6f7910bcacd5075de429a08d" id="r_aad3d46ec6f7910bcacd5075de429a08d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#aad3d46ec6f7910bcacd5075de429a08d">inverse</a> (<a class="el" href="classMetricTensor.html#a8f5d8e41ab5e9d9a2cc84ba42b67843a">Matrix_2x2</a> &amp;matrix, PositionCoordinate const &amp;coord) const</td></tr>
 <tr class="memdesc:aad3d46ec6f7910bcacd5075de429a08d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse metric tensor associated to the mapping.  <br /></td></tr>
 <tr class="separator:aad3d46ec6f7910bcacd5075de429a08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6a650351eb694fef48334a192469d25" id="r_aa6a650351eb694fef48334a192469d25"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION std::array&lt; double, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#aa6a650351eb694fef48334a192469d25">to_covariant</a> (std::array&lt; double, 2 &gt; const &amp;contravariant_vector, PositionCoordinate const &amp;coord) const</td></tr>
-<tr class="memdesc:aa6a650351eb694fef48334a192469d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the covariant vector from the contravariant vector.  <br /></td></tr>
-<tr class="separator:aa6a650351eb694fef48334a192469d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7f8f6140026494ea78ab5d446761833" id="r_ad7f8f6140026494ea78ab5d446761833"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classMetricTensor.html#ab33f301d4133361bcfde6e82db922085">CovariantVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensor.html#ad7f8f6140026494ea78ab5d446761833">to_covariant</a> (<a class="el" href="classMetricTensor.html#a802b29204c9ebe99ea34b89f81275815">ContravariantVectorType</a> const &amp;contravariant_vector, PositionCoordinate const &amp;coord) const</td></tr>
+<tr class="memdesc:ad7f8f6140026494ea78ab5d446761833"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the covariant vector from the contravariant vector.  <br /></td></tr>
+<tr class="separator:ad7f8f6140026494ea78ab5d446761833"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class Mapping, class PositionCoordinate&gt;<br />
@@ -279,8 +287,8 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
 
 </div>
 </div>
-<a id="aa6a650351eb694fef48334a192469d25" name="aa6a650351eb694fef48334a192469d25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6a650351eb694fef48334a192469d25">&#9670;&#160;</a></span>to_covariant()</h2>
+<a id="ad7f8f6140026494ea78ab5d446761833" name="ad7f8f6140026494ea78ab5d446761833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7f8f6140026494ea78ab5d446761833">&#9670;&#160;</a></span>to_covariant()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,9 +299,9 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION std::array&lt; double, 2 &gt; <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; Mapping, PositionCoordinate &gt;::to_covariant </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classMetricTensor.html#ab33f301d4133361bcfde6e82db922085">CovariantVectorType</a> <a class="el" href="classMetricTensor.html">MetricTensor</a>&lt; Mapping, PositionCoordinate &gt;::to_covariant </td>
           <td>(</td>
-          <td class="paramtype">std::array&lt; double, 2 &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classMetricTensor.html#a802b29204c9ebe99ea34b89f81275815">ContravariantVectorType</a> const &amp;&#160;</td>
           <td class="paramname"><em>contravariant_vector</em>, </td>
         </tr>
         <tr>

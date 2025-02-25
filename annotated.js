@@ -58,8 +58,8 @@ var annotated =
       [ "BSplinesY", "structfigure__of__eight__5patches_1_1BSplinesY.html", null ],
       [ "GridX", "structfigure__of__eight__5patches_1_1GridX.html", null ],
       [ "GridY", "structfigure__of__eight__5patches_1_1GridY.html", null ],
-      [ "X", "structfigure__of__eight__5patches_1_1X.html", null ],
-      [ "Y", "structfigure__of__eight__5patches_1_1Y.html", null ]
+      [ "X", "structfigure__of__eight__5patches_1_1X.html", "structfigure__of__eight__5patches_1_1X" ],
+      [ "Y", "structfigure__of__eight__5patches_1_1Y.html", "structfigure__of__eight__5patches_1_1Y" ]
     ] ],
     [ "GEOM_NAMESPACE_NAME", null, [
       [ "BSplinesR", "structGEOM__NAMESPACE__NAME_1_1BSplinesR.html", null ],
@@ -82,12 +82,12 @@ var annotated =
       [ "BSplinesY", "structperiodic__strips__uniform__2d__9patches_1_1BSplinesY.html", null ],
       [ "GridX", "structperiodic__strips__uniform__2d__9patches_1_1GridX.html", null ],
       [ "GridY", "structperiodic__strips__uniform__2d__9patches_1_1GridY.html", null ],
-      [ "X", "structperiodic__strips__uniform__2d__9patches_1_1X.html", null ],
-      [ "Y", "structperiodic__strips__uniform__2d__9patches_1_1Y.html", null ]
+      [ "X", "structperiodic__strips__uniform__2d__9patches_1_1X.html", "structperiodic__strips__uniform__2d__9patches_1_1X" ],
+      [ "Y", "structperiodic__strips__uniform__2d__9patches_1_1Y.html", "structperiodic__strips__uniform__2d__9patches_1_1Y" ]
     ] ],
     [ "physical_geometry", null, [
-      [ "X", "structphysical__geometry_1_1X.html", null ],
-      [ "Y", "structphysical__geometry_1_1Y.html", null ]
+      [ "X", "structphysical__geometry_1_1X.html", "structphysical__geometry_1_1X" ],
+      [ "Y", "structphysical__geometry_1_1Y.html", "structphysical__geometry_1_1Y" ]
     ] ],
     [ "tensor_tools", null, [
       [ "GetContravariantDims", "structtensor__tools_1_1GetContravariantDims.html", null ],

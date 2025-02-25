@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6":[16,0,17,3,0],
+"quadrature__coeffs__nd_8hpp_source.html":[16,0,17,3],
 "restartinitialization_8hpp_source.html":[16,0,5,2,4],
 "rk2_8hpp_source.html":[16,0,19,3],
 "rk3_8hpp_source.html":[16,0,19,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abcf91678d4dd96d85521818178d54d66":[15,161,17],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abf58b838d30e05fa91d71feec6dde132":[15,161,4],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f":[15,161,18],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8":[15,161,15],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33":[15,161,16],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#aed38b340e11a628505083d8ccace02a2":[15,161,7]
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8":[15,161,15]
 };

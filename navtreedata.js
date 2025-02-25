@@ -277,10 +277,10 @@ var NAVTREEINDEX =
 "classCrankNicolson.html#acee28614e8739edfb476a51aa7c2fe91",
 "classIInitialization.html#ac70366059a8d5679ff45c1a3eed5ad6b",
 "classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2",
-"classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b",
-"dir_12b80a83f8a0fcf90cd05b166ef8bdf1.html",
-"restartinitialization_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#af003e5287ebd73f5b10b2d4f5b96a036"
+"classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925",
+"dir_0b94a1bc260289a82ecb53162f2bb9d0.html",
+"quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6",
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
