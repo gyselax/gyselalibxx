@@ -17,6 +17,12 @@ struct X
 {
     /// @brief Non periodic dimension.
     static bool constexpr PERIODIC = false;
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = X;
 };
 
 /// @brief Second continuous physical dimension.
@@ -24,6 +30,12 @@ struct Y
 {
     /// @brief Non periodic dimension.
     static bool constexpr PERIODIC = false;
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = Y;
 };
 
 using PhysicalCoordXY = Coord<X, Y>;
