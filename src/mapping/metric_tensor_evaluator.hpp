@@ -91,10 +91,14 @@ public:
         const double jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);
 
         DTensor<Dims_cov, Dims_cov> inverse_metric_tensor;
-        ddcHelper::get<Dim0_cov, Dim0_cov>(inverse_metric_tensor) = (J_12 * J_12 + J_22 * J_22) / jacob_2;
-        ddcHelper::get<Dim0_cov, Dim1_cov>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1_cov, Dim0_cov>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1_cov, Dim1_cov>(inverse_metric_tensor) = (J_11 * J_11 + J_21 * J_21) / jacob_2;
+        ddcHelper::get<Dim0_cov, Dim0_cov>(inverse_metric_tensor)
+                = (J_12 * J_12 + J_22 * J_22) / jacob_2;
+        ddcHelper::get<Dim0_cov, Dim1_cov>(inverse_metric_tensor)
+                = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
+        ddcHelper::get<Dim1_cov, Dim0_cov>(inverse_metric_tensor)
+                = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
+        ddcHelper::get<Dim1_cov, Dim1_cov>(inverse_metric_tensor)
+                = (J_11 * J_11 + J_21 * J_21) / jacob_2;
 
         return inverse_metric_tensor;
     }
@@ -116,11 +120,15 @@ public:
         DTensor<Dims_cov, Dims_cov> inv_metric_tensor = inverse(coord);
         CovariantVectorType covariant_vector;
         ddcHelper::get<Dim0_cov>(covariant_vector)
-                = ddcHelper::get<Dim0_cov, Dim0_cov>(inv_metric_tensor) * ddcHelper::get<Dim0>(contravariant_vector)
-                  + ddcHelper::get<Dim0_cov, Dim1_cov>(inv_metric_tensor) * ddcHelper::get<Dim1>(contravariant_vector);
+                = ddcHelper::get<Dim0_cov, Dim0_cov>(inv_metric_tensor)
+                          * ddcHelper::get<Dim0>(contravariant_vector)
+                  + ddcHelper::get<Dim0_cov, Dim1_cov>(inv_metric_tensor)
+                            * ddcHelper::get<Dim1>(contravariant_vector);
         ddcHelper::get<Dim1_cov>(covariant_vector)
-                = ddcHelper::get<Dim1_cov, Dim0_cov>(inv_metric_tensor) * ddcHelper::get<Dim0>(contravariant_vector)
-                  + ddcHelper::get<Dim1_cov, Dim1_cov>(inv_metric_tensor) * ddcHelper::get<Dim1>(contravariant_vector);
+                = ddcHelper::get<Dim1_cov, Dim0_cov>(inv_metric_tensor)
+                          * ddcHelper::get<Dim0>(contravariant_vector)
+                  + ddcHelper::get<Dim1_cov, Dim1_cov>(inv_metric_tensor)
+                            * ddcHelper::get<Dim1>(contravariant_vector);
         return covariant_vector;
     }
 };
