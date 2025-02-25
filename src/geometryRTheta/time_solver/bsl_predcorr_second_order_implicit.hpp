@@ -63,12 +63,24 @@ class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
     using EulerMethod
+            = Euler<FieldMemRTheta<CoordRTheta>,
+                    DVectorFieldMemRTheta<X, Y>,
+                    Kokkos::DefaultExecutionSpace>;
+
+    using EulerMethod_host
             = Euler<host_t<FieldMemRTheta<CoordRTheta>>,
                     host_t<DVectorFieldMemRTheta<X, Y>>,
                     Kokkos::DefaultHostExecutionSpace>;
 
     using SplinePolarFootFinderType = SplinePolarFootFinder<
             EulerMethod,
+            LogicalToPhysicalMapping,
+            LogicalToPseudoPhysicalMapping,
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorConstBound>;
+
+    using SplinePolarFootFinderType_host = SplinePolarFootFinder<
+            EulerMethod_host,
             LogicalToPhysicalMapping,
             LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder_host,
@@ -79,8 +91,8 @@ private:
     BslAdvectionRTheta<SplinePolarFootFinderType, LogicalToPhysicalMapping> const&
             m_advection_solver;
 
-    EulerMethod const m_euler;
-    SplinePolarFootFinderType const m_foot_finder;
+    EulerMethod_host const m_euler;
+    SplinePolarFootFinderType_host const m_foot_finder;
 
     PolarSplineFEMPoissonLikeSolver<
             GridR,
@@ -108,8 +120,6 @@ public:
      * @param[in] builder
      *      A spline builder to get the spline representation of the
      *      advection field and the rhs.
-     * @param[in] rhs_evaluator
-     *      The evaluator of B-splines for the rhs.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical
      *      potential.
@@ -123,7 +133,6 @@ public:
                     advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder_host const& builder,
-            SplineRThetaEvaluatorNullBound_host const& rhs_evaluator,
             PolarSplineFEMPoissonLikeSolver<
                     GridR,
                     GridTheta,

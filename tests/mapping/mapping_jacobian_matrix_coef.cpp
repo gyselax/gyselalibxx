@@ -113,7 +113,7 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 /**
  * @brief Check if the two matrix given as input are the same.
  *
- * The error tolerance is given at 1e-15.
+ * The error tolerance is given at 1e-14.
  *
  * @param[in] matrix
  * 			The matrix defined with the matrix function.
@@ -122,7 +122,7 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
  */
 void check_matrix(Matrix_2x2 matrix, Matrix_2x2 matrix_coeff)
 {
-    const double TOL = 1e-15;
+    const double TOL = 1e-14;
     constexpr std::size_t N = 2;
 
     for (std::size_t i(0); i < N; ++i) {

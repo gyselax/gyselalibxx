@@ -19,4 +19,4 @@
 	url = https://github.com/CExA-project/ddc.git
 [submodule "vendor/kokkos-kernels"]
 	path = vendor/kokkos-kernels
-	url = https://github.com/yasahi-hpc/kokkos-kernels
+	url = https://github.com/kokkos/kokkos-kernels.git

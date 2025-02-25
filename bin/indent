@@ -69,10 +69,18 @@ else
     RUN_IF_OK='true'
 fi
 
-CLANG_FORMAT=clang-format
 if [ "$(hostname)" == "persee.partenaires.cea.fr" ]
 then
     CLANG_FORMAT=/data/gyselarunner/clang-format
+else
+    CLANG_FORMAT=clang-format-14
+    set +e
+    if ! command -v ${CLANG_FORMAT} 2>&1 >/dev/null
+    then
+        CLANG_FORMAT=clang-format
+        echo "Could not find clang-format v14. Clang-formatting may not behave as expected"
+    fi
+    set -e
 fi
 
 ${DOCKER_COMMAND} find \

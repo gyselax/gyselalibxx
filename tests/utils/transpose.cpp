@@ -173,7 +173,6 @@ TEST(LayoutTransposition, BadTranspose2D)
     DFieldMemYX end_values_alloc(end_idx_range);
 
     DFieldXY start_values = get_field(start_values_alloc);
-    DFieldYX end_values = get_field(end_values_alloc);
 
     ddc::for_each(start_idx_range, [&](IdxXY ixy) {
         double coord_x = get_coordinate(ddc::select<GridX>(ixy));
@@ -185,7 +184,7 @@ TEST(LayoutTransposition, BadTranspose2D)
     EXPECT_DEATH(
             transpose_layout(
                     Kokkos::DefaultHostExecutionSpace(),
-                    end_values,
+                    get_field(end_values_alloc),
                     get_const_field(start_values)),
             "Assertion");
 #endif

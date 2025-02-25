@@ -15,3 +15,6 @@ jobs:
           ref: main
       - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}

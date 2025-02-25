@@ -30,6 +30,28 @@ KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
     return result;
 }
 
+/**
+ * @brief Compute the infinity norm of a vector on an
+ * orthonormal coordinate system.
+ *
+ * For a given vector @f$ x @f$ , compute
+ * @f$|Vert x |Vert_{\infty} = \sup_n |x_n| @f$.
+ *
+ * @param[in] vec The given vector.
+ *
+ * @return A double containing the value of the infinty norm.
+ */
+template <class... Tags>
+KOKKOS_FUNCTION double norm_inf(DVector<Tags...> vec)
+{
+    using index_set = typename DVector<Tags...>::vector_index_set_t<0>;
+    static_assert(
+            std::is_same_v<index_set, vector_index_set_dual_t<index_set>>,
+            "Mapping is needed to calculate norm_inf on a non-orthonormal coordinate system");
+    double result = 0.0;
+    ((result = Kokkos::max(result, Kokkos::fabs(ddcHelper::get<Tags>(vec)))), ...);
+    return result;
+}
 
 /**
  * @brief Compute the infinity norm.

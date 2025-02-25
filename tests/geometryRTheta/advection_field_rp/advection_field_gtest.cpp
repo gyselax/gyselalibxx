@@ -98,12 +98,18 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder_host const builder_host(grid);
+    SplineRThetaBuilder const builder(grid);
 
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -119,8 +125,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     DiscreteMappingBuilder const discrete_mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+            builder_host,
+            spline_evaluator_extrapol_host);
     DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
@@ -128,7 +134,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
@@ -136,9 +142,9 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
-    RK3<host_t<FieldMemRTheta<CoordRTheta>>,
-        host_t<DVectorFieldMemRTheta<X, Y>>,
-        Kokkos::DefaultHostExecutionSpace> const time_stepper(grid);
+    RK3<FieldMemRTheta<CoordRTheta>,
+        DVectorFieldMemRTheta<X, Y>,
+        Kokkos::DefaultExecutionSpace> const time_stepper(grid);
     SplinePolarFootFinder find_feet(
             time_stepper,
             to_physical_mapping,
@@ -154,11 +160,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Choice of the simulation -------------------------------------------------------------------
 #if defined(TRANSLATION)
-    TranslationAdvectionFieldSimulation simulation(to_physical_mapping, rmin, rmax);
+    AdvectionFieldSimulation simulation
+            = get_translation_advection_field_simulation(to_physical_mapping, rmin, rmax);
 #elif defined(ROTATION)
-    RotationAdvectionFieldSimulation simulation(to_physical_mapping, rmin, rmax);
+    AdvectionFieldSimulation simulation
+            = get_rotation_advection_field_simulation(to_physical_mapping, rmin, rmax);
 #elif defined(DECENTRED_ROTATION)
-    DecentredRotationAdvectionFieldSimulation simulation(to_physical_mapping);
+    AdvectionFieldSimulation simulation
+            = get_decentred_rotation_advection_field_simulation(to_physical_mapping);
 #endif
 
     // ================================================================================================
@@ -194,18 +203,15 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // Initialize functions ******************************************
-    auto function = simulation.get_test_function();
-    auto phi_function = simulation.get_electrostatique_potential();
-    auto advection_field = simulation.get_advection_field();
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
         CoordXY const coord_xy(to_physical_mapping(coord_rp));
 
-        allfdistribu_rp(irp) = function(coord_rp);
+        allfdistribu_rp(irp) = simulation.function(coord_rp);
         allfdistribu_xy(irp) = allfdistribu_rp(irp);
-        electrostatic_potential(irp) = phi_function(coord_xy, 0);
+        electrostatic_potential(irp) = simulation.electrostatical_potential(coord_xy, 0);
 
-        CoordXY const evaluated_advection_field = advection_field(coord_xy, 0);
+        CoordXY const evaluated_advection_field = simulation.advection_field(coord_xy, 0);
         ddcHelper::get<X>(advection_field_exact)(irp) = CoordX(evaluated_advection_field);
         ddcHelper::get<Y>(advection_field_exact)(irp) = CoordY(evaluated_advection_field);
     });

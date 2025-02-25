@@ -17,8 +17,8 @@ class SplineInterpolatorRTheta : public IInterpolatorRTheta
 public:
     /// The type of the 2D Spline Evaluator used by this class
     using evaluator_type = ddc::SplineEvaluator2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::HostSpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -31,16 +31,15 @@ public:
             GridTheta>;
 
 private:
-    SplineRThetaBuilder_host const& m_builder;
+    SplineRThetaBuilder const& m_builder;
 
     evaluator_type const& m_evaluator;
 
-    mutable host_t<DFieldMem<IdxRangeBSRTheta>> m_coefs;
+    mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
-    using r_deriv_type = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type1>>;
-    using p_deriv_type = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type2>>;
-    using mixed_deriv_type
-            = host_t<DConstField<SplineRThetaBuilder_host::batched_derivs_domain_type>>;
+    using r_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type1>;
+    using p_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>;
+    using mixed_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type>;
 
 public:
     /**
@@ -48,9 +47,7 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolatorRTheta(
-            SplineRThetaBuilder_host const& builder,
-            evaluator_type const& evaluator)
+    SplineInterpolatorRTheta(SplineRThetaBuilder const& builder, evaluator_type const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(get_spline_idx_range(builder))
@@ -71,9 +68,9 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    host_t<DFieldRTheta> operator()(
-            host_t<DFieldRTheta> const inout_data,
-            host_t<Field<CoordRTheta const, IdxRangeRTheta>> const coordinates) const override
+    DFieldRTheta operator()(
+            DFieldRTheta const inout_data,
+            ConstField<CoordRTheta, IdxRangeRTheta> const coordinates) const override
     {
 #ifndef NDEBUG
         // To ensure that the interpolator is C0, we ensure that
@@ -81,20 +78,23 @@ public:
         IdxRangeR r_idx_range = get_idx_range<GridR>(inout_data);
         IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(inout_data);
         if (ddc::coordinate(r_idx_range.front()) == 0) {
-            ddc::for_each(theta_idx_range, [&](IdxTheta const ip) {
-                bool const unicity_center_point
-                        = inout_data(r_idx_range.front(), ip)
-                          == inout_data(r_idx_range.front(), theta_idx_range.front());
-                if (!unicity_center_point) {
-                    std::printf("Unicity of the value at the center point is not verified.");
-                    assert(unicity_center_point);
-                }
-            });
+            ddc::parallel_for_each(
+                    theta_idx_range,
+                    KOKKOS_LAMBDA(IdxTheta const ip) {
+                        bool const unicity_center_point
+                                = inout_data(r_idx_range.front(), ip)
+                                  == inout_data(r_idx_range.front(), theta_idx_range.front());
+                        if (!unicity_center_point) {
+                            Kokkos::abort(
+                                    "Unicity of the value at the center point is not verified.");
+                        }
+                    });
         }
 #endif
 
         m_builder(get_field(m_coefs), get_const_field(inout_data));
         m_evaluator(get_field(inout_data), coordinates, get_const_field(m_coefs));
+
         return inout_data;
     }
 };
@@ -114,8 +114,8 @@ class PreallocatableSplineInterpolatorRTheta : public IPreallocatableInterpolato
 public:
     /// The type of the 2D Spline Evaluator used by this class
     using evaluator_type = ddc::SplineEvaluator2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::HostSpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -128,7 +128,7 @@ public:
             GridTheta>;
 
 private:
-    SplineRThetaBuilder_host const& m_builder;
+    SplineRThetaBuilder const& m_builder;
 
     evaluator_type const& m_evaluator;
 
@@ -139,7 +139,7 @@ public:
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
     PreallocatableSplineInterpolatorRTheta(
-            SplineRThetaBuilder_host const& builder,
+            SplineRThetaBuilder const& builder,
             evaluator_type const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)

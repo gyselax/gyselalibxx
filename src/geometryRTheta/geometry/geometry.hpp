@@ -381,6 +381,15 @@ struct X
      * Here, not periodic.
      */
     static bool constexpr PERIODIC = false;
+
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = X;
 };
 /**
  * @brief Define non periodic real Y dimension.
@@ -392,6 +401,15 @@ struct Y
      * Here, not periodic.
      */
     static bool constexpr PERIODIC = false;
+
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = Y;
 };
 
 /**

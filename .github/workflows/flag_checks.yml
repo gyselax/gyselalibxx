@@ -9,18 +9,12 @@ jobs:
   Check_flags:
     name: Check flags
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-      pull-requests: write
-      repository-projects: read
-      issues: write
+    if: github.action.label.name == 'Ready to review' && github.action.pull_request.draft
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - if: github.action.label.name == 'Ready to review' && github.action.pull_request.draft
-        run: |
+      - run: |
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "Ready to review"
           gh pr comment ${{ github.event.pull_request.number }} -b "Please remove the draft status if the PR is ready to review"
         shell: bash

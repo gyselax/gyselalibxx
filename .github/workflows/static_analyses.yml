@@ -10,11 +10,6 @@ on:
   merge_group:
     types: [checks_requested]
 
-# Cancel old static analyses if new pushes are added to the branch
-concurrency:
-  group: ${{ github.workflow }}-${{ github.action.number }}
-  cancel-in-progress: true
-
 jobs:
   Indentation:
     name: Clang Formatting Check

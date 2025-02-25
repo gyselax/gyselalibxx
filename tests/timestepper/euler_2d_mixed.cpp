@@ -19,11 +19,17 @@
 struct X
 {
     bool PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = X;
 };
 
 struct Y
 {
     bool PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Y;
 };
 
 struct GridX : UniformGridBase<X>

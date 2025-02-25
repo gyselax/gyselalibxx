@@ -41,7 +41,6 @@ double VelocityAdvection(
     //Mesh Initialization
     IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
     IdxRangeX const gridx = ddc::select<GridX>(meshSpXVx);
-    IdxRangeVx const gridvx = ddc::select<GridVx>(meshSpXVx);
     // Charge Initialization
     host_t<DFieldMemSp> masses_host(idx_range_allsp);
     host_t<DFieldMemSp> charges_host(idx_range_allsp);
@@ -60,7 +59,6 @@ double VelocityAdvection(
 
     // Initialization of the distribution function
     host_t<DFieldMemSpXVx> allfdistribu_host(meshSpXVx);
-    IdxRangeXVx const gridxvx = get_idx_range<GridX, GridVx>(allfdistribu_host);
     ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxVx const ivx = ddc::select<GridVx>(ispxvx);
         allfdistribu_host(ispxvx) = exp(-0.5 * ddc::coordinate(ivx) * ddc::coordinate(ivx));

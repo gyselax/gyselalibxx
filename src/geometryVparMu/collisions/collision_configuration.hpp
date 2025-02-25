@@ -109,8 +109,6 @@ public:
     /**
      * @brief Can be used to obtain the quantities the operator needs for its
      * initialization, modification is not authorized.
-     * TODO(Etienne M): AFAIK, the DFieldMem behave like pointers, we may need
-     * accessors to enforce constness propagation.
      *
      * @return const CollisionConfigurationDataType&
      */

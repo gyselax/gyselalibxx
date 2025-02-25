@@ -4,6 +4,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "directional_tag.hpp"
 #include "vector_field_mem.hpp"
 
 
@@ -184,8 +185,9 @@ private:
      * @return copy of this element
      */
     template <class... ODDims, typename T, T... ints>
-    KOKKOS_FUNCTION element_type
-    operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>) const noexcept
+    KOKKOS_FUNCTION element_type const operator()(
+            Idx<ODDims...> const& delems,
+            std::integer_sequence<T, ints...>) const noexcept
     {
         return element_type((base_type::m_values[ints](delems))...);
     }
@@ -316,8 +318,8 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    KOKKOS_FUNCTION element_type
-    operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION element_type const operator()(
+            ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->
@@ -329,7 +331,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    KOKKOS_FUNCTION element_type operator()(Idx<ODDims...> const& delems) const noexcept
+    KOKKOS_FUNCTION element_type const operator()(Idx<ODDims...> const& delems) const noexcept
     {
         return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
     }
@@ -432,3 +434,33 @@ struct OnMemorySpace<
 };
 
 } // namespace detail
+
+namespace ddcHelper {
+
+template <
+        class ExecSpace,
+        class ElementType,
+        class IdxRangeType,
+        class... Dims,
+        class MemorySpace,
+        class LayoutStridedPolicy>
+auto create_mirror_view_and_copy(
+        ExecSpace exec_space,
+        VectorField<ElementType, IdxRangeType, NDTag<Dims...>, MemorySpace, LayoutStridedPolicy>
+                field)
+{
+    if constexpr (Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible) {
+        return field;
+    } else {
+        VectorFieldMem<
+                std::remove_const_t<ElementType>,
+                IdxRangeType,
+                NDTag<Dims...>,
+                typename ExecSpace::memory_space>
+                field_alloc(get_idx_range(field));
+        ((ddc::parallel_deepcopy(field_alloc.template get<Dims>(), field.template get<Dims>())),
+         ...);
+        return field_alloc;
+    }
+}
+} // namespace ddcHelper

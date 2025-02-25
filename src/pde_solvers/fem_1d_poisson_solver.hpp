@@ -266,8 +266,6 @@ public:
                     eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
                 });
 
-        FEMSplineEvaluator spline_nu_evaluator_proxy = m_spline_fem_evaluator;
-
         m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
 
         return phi;
@@ -304,8 +302,6 @@ public:
                 KOKKOS_LAMBDA(full_index const idx) {
                     eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
                 });
-
-        FEMSplineEvaluator spline_nu_evaluator_proxy = m_spline_fem_evaluator;
 
         m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
         m_spline_fem_evaluator.deriv(E, get_const_field(eval_pts), get_const_field(phi_coefs));

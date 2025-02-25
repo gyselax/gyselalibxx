@@ -745,7 +745,6 @@ PolarSpline<DDim, MemorySpace> integrals(
     IdxRange<BSplinesR> r_tensor_product_dom(get_idx_range(int_vals.spline_coef));
     tensor_product_idx_range_type
             tensor_bspline_idx_range(r_tensor_product_dom, get_idx_range(theta_integrals));
-    DField<IdxRange<BSplinesR, BSplinesTheta>> spline_integrals = get_field(int_vals.spline_coef);
 
     ddc::parallel_for_each(
             execution_space,

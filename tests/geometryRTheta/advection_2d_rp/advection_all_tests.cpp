@@ -50,15 +50,18 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilderHost = DiscreteToCartesianBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
 template <
+        class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class AnalyticalPhysicalToLogicalMapping,
@@ -70,6 +73,7 @@ public:
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
 
 public:
+    LogicalToPhysicalMappingHost const& to_physical_mapping_host;
     LogicalToPhysicalMapping const& to_physical_mapping;
     AnalyticalPhysicalToLogicalMapping const to_logical_mapping;
     LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping;
@@ -77,17 +81,19 @@ public:
     std::string mapping_name;
     std::string domain_name;
     SimulationParameters(
+            LogicalToPhysicalMappingHost const& map_host,
             LogicalToPhysicalMapping const& map,
             LogicalToPseudoPhysicalMapping const& pseudo_cart_map,
             AnalyticalPhysicalToLogicalMapping const& rev_map,
             AnalyticalLogicalToPhysicalMapping const& a_map,
-            std::string m_name,
-            std::string dom_name)
-        : to_physical_mapping(map)
+            std::string const& map_name,
+            std::string const& dom_name)
+        : to_physical_mapping_host(map_host)
+        , to_physical_mapping(map)
         , to_logical_mapping(rev_map)
         , analytical_to_pseudo_physical_mapping(pseudo_cart_map)
         , analytical_to_physical_mapping(a_map)
-        , mapping_name(m_name)
+        , mapping_name(map_name)
         , domain_name(dom_name)
     {
     }
@@ -99,7 +105,7 @@ struct NumericalMethodParameters
     TimeStepper time_stepper;
     double time_step;
     std::string method_name;
-    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string name)
+    NumericalMethodParameters(TimeStepper&& time_stepper, double step, std::string const& name)
         : time_stepper(std::move(time_stepper))
         , time_step(step)
         , method_name(name)
@@ -113,7 +119,7 @@ struct NumericalParams
     IdxRangeRTheta const grid;
     double const dt;
 
-    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {};
+    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {}
     NumericalParams(NumericalParams&& params) = default;
     NumericalParams(NumericalParams& params) = default;
 };
@@ -126,18 +132,18 @@ private:
     NumericalParams params;
 
 public:
-    using ValFieldMem = host_t<FieldMemRTheta<CoordRTheta>>;
-    using DerivFieldMem = host_t<DVectorFieldMemRTheta<X_adv, Y_adv>>;
+    using ValFieldMem = FieldMemRTheta<CoordRTheta>;
+    using DerivFieldMem = DVectorFieldMemRTheta<X_adv, Y_adv>;
 
     using NumericalTuple = std::tuple<
             NumericalMethodParameters<
-                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+                    Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
             NumericalMethodParameters<
-                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+                    CrankNicolson<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
             NumericalMethodParameters<
-                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>,
+                    RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>,
             NumericalMethodParameters<
-                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>>>;
+                    RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>>>;
 
     static constexpr int size_tuple = std::tuple_size<NumericalTuple> {};
 
@@ -147,7 +153,7 @@ public:
         : params(m_params)
         , numerics(std::make_tuple(
                   NumericalMethodParameters(
-                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                          Euler<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
                                   params.grid),
                           params.dt * 0.1,
                           "EULER"),
@@ -155,16 +161,16 @@ public:
                           CrankNicolson<
                                   ValFieldMem,
                                   DerivFieldMem,
-                                  Kokkos::DefaultHostExecutionSpace>(params.grid, 20, 1e-12),
+                                  Kokkos::DefaultExecutionSpace>(params.grid, 20, 1e-12),
                           params.dt,
                           "CRANK NICOLSON"),
                   NumericalMethodParameters(
-                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                          RK3<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
                                   params.grid),
                           params.dt,
                           "RK3"),
                   NumericalMethodParameters(
-                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultHostExecutionSpace>(
+                          RK4<ValFieldMem, DerivFieldMem, Kokkos::DefaultExecutionSpace>(
                                   params.grid),
                           params.dt,
                           "RK4")))
@@ -178,8 +184,8 @@ struct GeneralParameters
 {
     IdxRangeRTheta grid;
     PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& interpolator;
-    SplineRThetaBuilder_host const& advection_builder;
-    SplineRThetaEvaluatorConstBound_host& advection_evaluator;
+    SplineRThetaBuilder const& advection_builder;
+    SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
     bool if_save_curves;
     bool if_save_feet;
@@ -209,16 +215,25 @@ void run_simulations_with_methods(
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
-    simulate_the_3_simulations(
+    SplinePolarFootFinder const foot_finder(
+            num.time_stepper,
+            sim.to_physical_mapping,
+            sim.analytical_to_pseudo_physical_mapping,
+            params.advection_builder,
+            params.advection_evaluator);
+
+    BslAdvectionRTheta
+            advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+
+    run_simulations(
+            sim.to_physical_mapping_host,
             sim.to_physical_mapping,
             sim.to_logical_mapping,
             sim.analytical_to_pseudo_physical_mapping,
             sim.analytical_to_physical_mapping,
             params.grid,
-            num.time_stepper,
-            params.interpolator,
-            params.advection_builder,
-            params.advection_evaluator,
+            foot_finder,
+            advection_operator,
             params.final_time,
             num.time_step,
             params.if_save_curves,
@@ -295,12 +310,13 @@ int main(int argc, char** argv)
 
     // DEFINITION OF OPERATORS ------------------------------------------------------------------
     // --- Builders for the test function and the to_physical_mapping:
-    SplineRThetaBuilder_host const builder(grid);
+    SplineRThetaBuilder_host const builder_host(grid);
+    SplineRThetaBuilder const builder(grid);
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound_host spline_evaluator(
+    SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             p_extrapolation_rule,
@@ -314,7 +330,12 @@ int main(int argc, char** argv)
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
 
 
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol(
+    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
+            boundary_condition_r_left,
+            boundary_condition_r_right,
+            ddc::PeriodicExtrapolationRule<Theta>(),
+            ddc::PeriodicExtrapolationRule<Theta>());
+    SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -328,8 +349,14 @@ int main(int argc, char** argv)
     CartesianToCircular<X, Y, R, Theta> to_circ_map;
     CzarnyToCartMapping const from_czarny_map(0.3, 1.4);
     CartesianToCzarny<X, Y, R, Theta> const to_czarny_map(0.3, 1.4);
-    DiscreteMappingBuilder const discrete_czarny_map_builder(
+    DiscreteMappingBuilderHost const discrete_czarny_map_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
+            from_czarny_map,
+            builder_host,
+            spline_evaluator_extrapol_host);
+    DiscreteToCartesian const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
+    DiscreteMappingBuilder const discrete_czarny_map_builder(
+            Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
             builder,
             spline_evaluator_extrapol);
@@ -339,6 +366,7 @@ int main(int argc, char** argv)
             SimulationParameters(
                     from_circ_map,
                     from_circ_map,
+                    from_circ_map,
                     to_circ_map,
                     from_circ_map,
                     "CIRCULAR",
@@ -346,11 +374,13 @@ int main(int argc, char** argv)
             SimulationParameters(
                     from_czarny_map,
                     from_czarny_map,
+                    from_czarny_map,
                     to_czarny_map,
                     from_czarny_map,
                     "CZARNY",
                     "PHYSICAL"),
             SimulationParameters(
+                    from_czarny_map,
                     from_czarny_map,
                     to_pseudo_circ_map,
                     to_czarny_map,
@@ -358,6 +388,7 @@ int main(int argc, char** argv)
                     "CZARNY",
                     "PSEUDO CARTESIAN"),
             SimulationParameters(
+                    from_discrete_czarny_map_host,
                     from_discrete_czarny_map,
                     to_pseudo_circ_map,
                     to_czarny_map,

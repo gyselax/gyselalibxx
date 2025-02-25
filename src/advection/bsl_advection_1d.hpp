@@ -174,8 +174,6 @@ public:
         // Get index ranges and operators .............................................................
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
         IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
-        auto const idx_range_batch = ddc::remove_dims_of(idx_range_function, idx_range_advection);
-        IdxRangeInterest const idx_range_interest(idx_range_advection);
 
         std::unique_ptr<FunctionInterpolatorType> const function_interpolator_ptr
                 = m_function_interpolator.preallocate();

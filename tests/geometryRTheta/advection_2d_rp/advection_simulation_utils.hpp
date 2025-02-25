@@ -325,43 +325,30 @@ void display_time(
  * @see Simulation
  */
 template <
+        class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class AnalyticalLogicalToPhysicalMapping,
-        class TimeStepper,
+        class PolarFootFinder,
+        class AdvectionOperator,
         class Simulation>
 void simulate(
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
         LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
         AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
         IdxRangeRTheta const& grid,
-        TimeStepper const& time_stepper,
+        PolarFootFinder const& foot_finder,
+        AdvectionOperator const& advection_operator,
         Simulation& simulation,
-        PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
-                function_interpolator,
-        SplineRThetaBuilder_host const& advection_builder,
-        SplineRThetaEvaluatorConstBound_host& advection_evaluator,
         double const final_time,
         double const dt,
         bool save_curves,
         bool save_feet,
         std::string const& output_folder)
 {
-    SplinePolarFootFinder const foot_finder(
-            time_stepper,
-            to_physical_mapping,
-            analytical_to_pseudo_physical_mapping,
-            advection_builder,
-            advection_evaluator);
-
-    BslAdvectionRTheta advection_operator(function_interpolator, foot_finder, to_physical_mapping);
-    auto function_to_be_advected_test = simulation.get_test_function();
-    auto advection_field_test = simulation.get_advection_field();
-
-
-
     // TO CLOCK THE SIMULATION ------------------------------------------------------------------
     std::chrono::time_point<std::chrono::system_clock> start_simulation;
     std::chrono::time_point<std::chrono::system_clock> end_simulation;
@@ -376,7 +363,7 @@ void simulate(
     host_t<DFieldMemRTheta> allfdistribu_test(grid);
     host_t<DFieldRTheta> allfdistribu_advected_test;
 
-    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec(grid);
+    host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec_host(grid);
 
 
     // START TEST -------------------------------------------------------------------------------
@@ -388,7 +375,7 @@ void simulate(
         if (ddc::get<R>(coord) <= 1e-15) {
             ddc::get<Theta>(coord) = 0;
         }
-        allfdistribu_test(irp) = function_to_be_advected_test(coord);
+        allfdistribu_test(irp) = simulation.advected_function(coord);
     });
 
 
@@ -396,12 +383,12 @@ void simulate(
     // Definition of advection field:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         // Moving the coordinates in the physical domain:
-        CoordXY const coord_xy = to_physical_mapping(ddc::coordinate(irp));
-        CoordXY const advection_field = advection_field_test(coord_xy, 0.);
+        CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irp));
+        CoordXY const advection_field = simulation.advection_field(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<X>(advection_field_test_vec)(irp) = ddc::get<X>(advection_field);
-        ddcHelper::get<Y>(advection_field_test_vec)(irp) = ddc::get<Y>(advection_field);
+        ddcHelper::get<X>(advection_field_test_vec_host)(irp) = ddc::get<X>(advection_field);
+        ddcHelper::get<Y>(advection_field_test_vec_host)(irp) = ddc::get<Y>(advection_field);
     });
 
 
@@ -410,13 +397,13 @@ void simulate(
     for (int i(0); i < iteration_number; ++i) {
         allfdistribu_advected_test = advection_operator(
                 get_field(allfdistribu_test),
-                get_const_field(advection_field_test_vec),
+                get_const_field(advection_field_test_vec_host),
                 dt);
 
         // Save the advected function for each iteration:
         if (save_curves) {
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
-            saving_computed(to_physical_mapping, get_field(allfdistribu_advected_test), name);
+            saving_computed(to_physical_mapping_host, get_field(allfdistribu_advected_test), name);
         }
     }
 
@@ -430,13 +417,13 @@ void simulate(
             grid,
             analytical_to_physical_mapping,
             to_logical_mapping,
-            advection_field_test,
+            simulation.advection_field,
             end_time);
     feet_coords_rp_dt = compute_exact_feet_rp(
             grid,
             analytical_to_physical_mapping,
             to_logical_mapping,
-            advection_field_test,
+            simulation.advection_field,
             dt);
 
 
@@ -445,7 +432,7 @@ void simulate(
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         double const err
                 = fabs(allfdistribu_advected_test(irp)
-                       - function_to_be_advected_test(feet_coords_rp_end_time(irp)));
+                       - simulation.advected_function(feet_coords_rp_end_time(irp)));
         max_err = max_err > err ? max_err : err;
     });
 
@@ -458,10 +445,10 @@ void simulate(
     std::cout << "   ... "
               << "Relative L2 norm error: "
               << compute_difference_L2_norm(
-                         to_physical_mapping,
+                         to_physical_mapping_host,
                          grid,
                          allfdistribu_advected_test,
-                         function_to_be_advected_test,
+                         simulation.advected_function,
                          get_field(feet_coords_rp_end_time))
               << std::endl;
 
@@ -476,11 +463,18 @@ void simulate(
     // SAVE DATA --------------------------------------------------------------------------------
     // Save the computed characteristic feet:
     if (save_feet) {
-        host_t<FieldMemRTheta<CoordRTheta>> feet(grid);
-        ddc::for_each(grid, [&](const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
+        FieldMemRTheta<CoordRTheta> feet_alloc(grid);
+        FieldRTheta<CoordRTheta> feet = get_field(feet_alloc);
+        ddc::parallel_for_each(
+                grid,
+                KOKKOS_LAMBDA(const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
+        auto advection_field_test_vec = ddcHelper::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(advection_field_test_vec_host));
         foot_finder(get_field(feet), get_const_field(advection_field_test_vec), dt);
+        auto feet_host = ddc::create_mirror_view_and_copy(feet);
         std::string const name = output_folder + "/feet_computed.txt";
-        output_feet(to_physical_mapping, grid, get_field(feet), name);
+        output_feet(to_physical_mapping_host, grid, get_field(feet_host), name);
     }
 
     // Save the values of the exact function at the initial and final states:
@@ -492,13 +486,13 @@ void simulate(
         host_t<DFieldMemRTheta> initial_function(grid);
         host_t<DFieldMemRTheta> end_function(grid);
         ddc::for_each(grid, [&](const IdxRTheta irp) {
-            initial_function(irp) = function_to_be_advected_test(ddc::coordinate(irp));
+            initial_function(irp) = simulation.advected_function(ddc::coordinate(irp));
 
             // Exact final state
-            end_function(irp) = function_to_be_advected_test(feet_coords_rp_end_time(irp));
+            end_function(irp) = simulation.advected_function(feet_coords_rp_end_time(irp));
         });
-        saving_computed(to_physical_mapping, get_field(initial_function), name_0);
-        saving_computed(to_physical_mapping, get_field(end_function), name_1);
+        saving_computed(to_physical_mapping_host, get_field(initial_function), name_0);
+        saving_computed(to_physical_mapping_host, get_field(end_function), name_1);
     }
 
 
@@ -506,7 +500,7 @@ void simulate(
     // Save the exact characteristic feet for a displacement on dt:
     if (save_feet) {
         std::string const name = output_folder + "/feet_exact.txt";
-        output_feet(to_physical_mapping, grid, get_field(feet_coords_rp_dt), name);
+        output_feet(to_physical_mapping_host, grid, get_field(feet_coords_rp_dt), name);
     }
 
 
@@ -563,22 +557,22 @@ void simulate(
  * @see Simulation
  */
 template <
+        class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class AnalyticalLogicalToPhysicalMapping,
-        class TimeStepper>
-void simulate_the_3_simulations(
+        class PolarFootFinder,
+        class AdvectionOperator>
+void run_simulations(
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
         LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
         AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
         IdxRangeRTheta const& grid,
-        TimeStepper& time_stepper,
-        PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
-                function_interpolator,
-        SplineRThetaBuilder_host const& advection_builder,
-        SplineRThetaEvaluatorConstBound_host& advection_evaluator,
+        PolarFootFinder const& foot_finder,
+        AdvectionOperator const& advection_operator,
         double const final_time,
         double const dt,
         bool const& save_curves,
@@ -590,30 +584,32 @@ void simulate_the_3_simulations(
     double const rmin = ddc::coordinate(r_idx_range.front());
     double const rmax = ddc::coordinate(r_idx_range.back());
 
-    TranslationSimulation simulation_1(to_physical_mapping, rmin, rmax);
-    RotationSimulation simulation_2(to_physical_mapping, rmin, rmax);
-    DecentredRotationSimulation simulation_3(to_physical_mapping);
+    AdvectionSimulation simulation_translation
+            = get_translation_simulation(to_physical_mapping, rmin, rmax);
+    AdvectionSimulation simulation_rotation
+            = get_rotation_simulation(to_physical_mapping, rmin, rmax);
+    AdvectionSimulation simulation_decentred_rotation
+            = get_decentred_rotation_simulation(to_physical_mapping);
 
-    std::string const title_simu_1 = " TRANSLATION : ";
-    std::string const title_simu_2 = " ROTATION : ";
-    std::string const title_simu_3 = " DECENTRED ROTATION : ";
+    std::string const title_simu_translation = " TRANSLATION : ";
+    std::string const title_simu_rotation = " ROTATION : ";
+    std::string const title_simu_decentred_rotation = " DECENTRED ROTATION : ";
 
     std::string output_folder = output_stem + "Translation_output";
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
-    std::cout << title + title_simu_1 << std::endl;
+    std::cout << title + title_simu_translation << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
             analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             grid,
-            time_stepper,
-            simulation_1,
-            function_interpolator,
-            advection_builder,
-            advection_evaluator,
+            foot_finder,
+            advection_operator,
+            simulation_translation,
             final_time,
             dt,
             save_curves,
@@ -624,18 +620,17 @@ void simulate_the_3_simulations(
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
-    std::cout << title + title_simu_2 << std::endl;
+    std::cout << title + title_simu_rotation << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
             analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             grid,
-            time_stepper,
-            simulation_2,
-            function_interpolator,
-            advection_builder,
-            advection_evaluator,
+            foot_finder,
+            advection_operator,
+            simulation_rotation,
             final_time,
             dt,
             save_curves,
@@ -646,18 +641,17 @@ void simulate_the_3_simulations(
     if (save_curves or save_feet) {
         fs::create_directory(output_folder);
     }
-    std::cout << title + title_simu_3 << std::endl;
+    std::cout << title + title_simu_decentred_rotation << std::endl;
     simulate(
+            to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
             analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             grid,
-            time_stepper,
-            simulation_3,
-            function_interpolator,
-            advection_builder,
-            advection_evaluator,
+            foot_finder,
+            advection_operator,
+            simulation_decentred_rotation,
             final_time,
             dt,
             save_curves,

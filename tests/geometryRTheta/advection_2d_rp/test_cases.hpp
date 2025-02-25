@@ -21,30 +21,9 @@
  */
 
 
-
-// TEST FUNCTIONS -----------------------------------------------------------------
-/**
- * @brief Base class for the test functions for the 2D polar advection operator.
- *
- * @see BslAdvectionRTheta
- * @see AdvectionSimulation
- */
-class FunctionToBeAdvected
-{
-public:
-    virtual ~FunctionToBeAdvected() = default;
-
-    /**
-     * @brief Get the value of the function.
-     *
-     * @param[in] coord
-     *      The coordinate where we want to evaluate the function.
-     *
-     * @return The value of the function at the coordinate.
-     */
-    virtual double operator()(CoordRTheta coord) = 0;
-};
-
+//---------------------------------------------------------------------------------
+//                           TEST FUNCTIONS
+//---------------------------------------------------------------------------------
 
 /**
  * @brief Test function for the 2D polar advection operator.
@@ -61,7 +40,7 @@ public:
  *
  */
 template <class Mapping>
-class FunctionToBeAdvected_cos_4_elipse : public FunctionToBeAdvected
+class FunctionToBeAdvected_cos_4_elipse
 {
 private:
     Mapping const& m_mapping;
@@ -75,7 +54,20 @@ public:
      */
     explicit FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {}
 
-    double operator()(CoordRTheta coord_rp) final
+    /// Copy operator
+    explicit KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_cos_4_elipse(
+            FunctionToBeAdvected_cos_4_elipse const&)
+            = default;
+
+    /**
+     * @brief Get the value of the function.
+     *
+     * @param[in] coord_rp
+     *      The coordinate where we want to evaluate the function.
+     *
+     * @return The value of the function at the coordinate.
+     */
+    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
     {
         CoordXY const coord_xy(m_mapping(coord_rp));
         double const x = ddc::get<X>(coord_xy);
@@ -85,11 +77,11 @@ public:
         double const x_bar = 0.;
         double const y_bar = 0.;
 
-        double const r_1 = std::sqrt((x - x_bar) * (x - x_bar) + 8 * (y - y_bar) * (y - y_bar));
-        double const r_2 = std::sqrt(8 * (x - x_bar) * (x - x_bar) + (y - y_bar) * (y - y_bar));
+        double const r_1 = Kokkos::sqrt((x - x_bar) * (x - x_bar) + 8 * (y - y_bar) * (y - y_bar));
+        double const r_2 = Kokkos::sqrt(8 * (x - x_bar) * (x - x_bar) + (y - y_bar) * (y - y_bar));
 
-        double const G_1 = std::pow(std::cos(M_PI * r_1 / 2. / a), 4) * (r_1 < a);
-        double const G_2 = std::pow(std::cos(M_PI * r_2 / 2. / a), 4) * (r_2 < a);
+        double const G_1 = ipow(Kokkos::cos(M_PI * r_1 / 2. / a), 4) * (r_1 < a);
+        double const G_2 = ipow(Kokkos::cos(M_PI * r_2 / 2. / a), 4) * (r_2 < a);
 
         return 1. / 2. * (G_1 + G_2);
     }
@@ -105,7 +97,7 @@ public:
  *
  */
 template <class Mapping>
-class FunctionToBeAdvected_gaussian : public FunctionToBeAdvected
+class FunctionToBeAdvected_gaussian
 {
 private:
     Mapping const& m_mapping;
@@ -158,7 +150,20 @@ public:
     {
     }
 
-    double operator()(CoordRTheta coord_rp) final
+    /// Copy operator
+    explicit KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_gaussian(
+            FunctionToBeAdvected_gaussian const&)
+            = default;
+
+    /**
+     * @brief Get the value of the function.
+     *
+     * @param[in] coord_rp
+     *      The coordinate where we want to evaluate the function.
+     *
+     * @return The value of the function at the coordinate.
+     */
+    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
     {
         // Gaussian centered in (x0, y0):
         CoordXY const coord_xy(m_mapping(coord_rp));
@@ -167,9 +172,9 @@ public:
         double const r = ddc::get<R>(coord_rp);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
-                   * std::exp(
-                           -pow(x - m_x0, 2) / (2 * m_sig_x * m_sig_x)
-                           - pow(y - m_y0, 2) / (2 * m_sig_y * m_sig_y));
+                   * Kokkos::exp(
+                           -ipow(x - m_x0, 2) / (2 * m_sig_x * m_sig_x)
+                           - ipow(y - m_y0, 2) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }
@@ -178,44 +183,9 @@ public:
 
 
 
-// TEST ADVECTION FIELDS ----------------------------------------------------------
-/**
- * @brief Base class for the advection field for the tests of the 2D polar advection
- * operator.
- *
- * @see BslAdvectionRTheta
- * @see AdvectionSimulation
- */
-class AdvectionField
-{
-public:
-    virtual ~AdvectionField() = default;
-
-    /**
-     * @brief Get the advection field in the physical index range.
-     *
-     * @param[in] coord
-     *      The coordinate in the physical index range.
-     * @param[in] t
-     *      Time component.
-     *
-     * @return The advection field in the physical index range.
-     */
-    virtual CoordXY operator()(CoordXY const coord, double const t = 0.) const = 0;
-
-    /**
-     * @brief Get the characteristic feet in the physical index range.
-     *
-     * @param[in] coord
-     *      The original coordinate in the physical index range.
-     * @param[in] t
-     *      Time component.
-     *
-     * @return The characteristic feet in the physical index range.
-     */
-    virtual CoordXY exact_feet(CoordXY coord, double t) const = 0;
-};
-
+//---------------------------------------------------------------------------------
+//                           TEST ADVECTION FIELDS
+//---------------------------------------------------------------------------------
 
 /**
  * @brief Advection field for the tests of the 2D polar advection operator.
@@ -231,7 +201,7 @@ public:
  * - @f$ Y(t + dt) = y_c + (X(t) - x_c) \sin(\omega dt) + (Y(t) - y_c) \cos(\omega dt) @f$.
  *
  */
-class AdvectionField_decentred_rotation : public AdvectionField
+class AdvectionField_decentred_rotation
 {
 private:
     double const m_omega;
@@ -254,21 +224,46 @@ public:
     {
     }
 
-    CoordXY operator()(CoordXY const coord, double const t) const final
+    /// Copy operator
+    explicit KOKKOS_DEFAULTED_FUNCTION AdvectionField_decentred_rotation(
+            AdvectionField_decentred_rotation const&)
+            = default;
+
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
+    KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         double const x = m_omega * (m_yc - ddc::get<Y>(coord));
         double const y = m_omega * (ddc::get<X>(coord) - m_xc);
         return CoordXY(x, y);
     }
 
-    CoordXY exact_feet(CoordXY coord, double const t) const final
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
+    KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
         double const y = ddc::get<Y>(coord);
-        double const foot_x
-                = m_xc + (x - m_xc) * std::cos(m_omega * -t) - (y - m_yc) * std::sin(m_omega * -t);
-        double const foot_y
-                = m_yc + (x - m_xc) * std::sin(m_omega * -t) + (y - m_yc) * std::cos(m_omega * -t);
+        double const foot_x = m_xc + (x - m_xc) * Kokkos::cos(m_omega * -t)
+                              - (y - m_yc) * Kokkos::sin(m_omega * -t);
+        double const foot_y = m_yc + (x - m_xc) * Kokkos::sin(m_omega * -t)
+                              + (y - m_yc) * Kokkos::cos(m_omega * -t);
         return CoordXY(foot_x, foot_y);
     }
 };
@@ -290,7 +285,7 @@ public:
  * - @f$ Y(t + dt) = Y(t) + dt v_y @f$.
  *
  */
-class AdvectionField_translation : public AdvectionField
+class AdvectionField_translation
 {
 private:
     CoordXY const m_velocity;
@@ -309,12 +304,36 @@ public:
     {
     }
 
-    CoordXY operator()(CoordXY const coord, double const t) const final
+    /// Copy operator
+    KOKKOS_DEFAULTED_FUNCTION AdvectionField_translation(AdvectionField_translation const&)
+            = default;
+
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
+    KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         return m_velocity;
     }
 
-    CoordXY exact_feet(CoordXY coord, double const t) const final
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
+    KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         return coord - t * m_velocity;
     }
@@ -341,7 +360,7 @@ public:
  *      - and @f$ (R(t), \Theta(t)) = \mathcal{F}^{-1} (X(t), Y(t))@f$.
  *
  */
-class AdvectionField_rotation : public AdvectionField
+class AdvectionField_rotation
 {
 private:
     double const m_vr;
@@ -367,7 +386,20 @@ public:
     {
     }
 
-    CoordXY operator()(CoordXY const coord, double const t) const final
+    /// Copy operator
+    KOKKOS_DEFAULTED_FUNCTION AdvectionField_rotation(AdvectionField_rotation const&) = default;
+
+    /**
+￼     * @brief Get the advection field in the physical index range.
+￼     *
+￼     * @param[in] coord
+￼     *      The coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The advection field in the physical index range.
+￼     */
+    KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord));
         std::array<std::array<double, 2>, 2> jacobian;
@@ -377,7 +409,17 @@ public:
         return CoordXY(vx, vy);
     }
 
-    CoordXY exact_feet(CoordXY coord_xy, double const t) const final
+    /**
+￼     * @brief Get the characteristic feet in the physical index range.
+￼     *
+￼     * @param[in] coord_xy
+￼     *      The original coordinate in the physical index range.
+￼     * @param[in] t
+￼     *      Time component.
+￼     *
+￼     * @return The characteristic feet in the physical index range.
+￼     */
+    KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
@@ -401,56 +443,17 @@ public:
  * @see AdvectionField
  */
 template <class AdvectionField, class FunctionToBeAdvected>
-class AdvectionSimulation
+struct AdvectionSimulation
 {
-protected:
     /**
      * @brief The chosen advection field for the simulation.
      */
-    AdvectionField const m_advection_field;
+    AdvectionField const advection_field;
     /**
      * @brief The chosen function to be advected for the simulation.
      */
-    FunctionToBeAdvected const m_function;
-
-public:
-    /**
-     * @brief Instantiate a AdvectionSimulation simulation.
-     *
-     * @param[in] advection_field
-     *      An AdvectionField type object.
-     * @param[in] function
-     *      A FunctionToBeAdvected type object.
-     */
-    AdvectionSimulation(AdvectionField const advection_field, FunctionToBeAdvected const function)
-        : m_advection_field(advection_field)
-        , m_function(function)
-    {
-    }
-    virtual ~AdvectionSimulation() = default;
-
-
-    /**
-     * @brief Get the advection field of the simulation.
-     *
-     * @return A constant reference to the advection field created in the AdvectionSimulation child class.
-     */
-    AdvectionField const& get_advection_field() const
-    {
-        return m_advection_field;
-    }
-
-    /**
-     * @brief Get the test function of the simulation.
-     *
-     * @return A constant reference to the test function created in the AdvectionSimulation child class.
-     */
-    FunctionToBeAdvected const& get_test_function() const
-    {
-        return m_function;
-    }
+    FunctionToBeAdvected const advected_function;
 };
-
 
 /**
  * @brief Simulation of a translated Gaussian.
@@ -475,31 +478,16 @@ public:
  * @see AdvectionField_translation
  */
 template <class Mapping>
-class TranslationSimulation
-    : public AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>
+AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>
+get_translation_simulation(Mapping const& mapping, double const rmin, double const rmax)
 {
-public:
-    /**
-     * @brief Instantiate a TranslationSimulation simulation.
-     *
-     * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
-     * @param[in] rmin
-     *      The minimum value of @f$ r@f$ on the logical index range.
-     * @param[in] rmax
-     *      The maximum value of @f$ r@f$ on the logical index range.
-     */
-    TranslationSimulation(Mapping const& mapping, double const rmin, double const rmax)
-        : AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>(
-                AdvectionField_translation(
-                        CoordVx(std::cos(2 * M_PI * 511. / 4096.) / 2.),
-                        CoordVy(std::sin(2 * M_PI * 511. / 4096.) / 2.)),
-                FunctionToBeAdvected_gaussian<
-                        Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax))
-    {
-    }
-};
-
+    return AdvectionSimulation<AdvectionField_translation, FunctionToBeAdvected_gaussian<Mapping>>(
+            {AdvectionField_translation(
+                     CoordVx(std::cos(2 * M_PI * 511. / 4096.) / 2.),
+                     CoordVy(std::sin(2 * M_PI * 511. / 4096.) / 2.)),
+             FunctionToBeAdvected_gaussian<
+                     Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)});
+}
 
 /**
  * @brief Simulation of a rotated Gaussian.
@@ -526,29 +514,14 @@ public:
  * @see AdvectionField_rotation
  */
 template <class Mapping>
-class RotationSimulation
-    : public AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>
+AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>
+get_rotation_simulation(Mapping const& mapping, double const rmin, double const rmax)
 {
-public:
-    /**
-     * @brief Instantiate a RotationSimulation simulation.
-     *
-     * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
-     * @param[in] rmin
-     *      The minimum value of @f$ r@f$ on the logical index range.
-     * @param[in] rmax
-     *      The maximum value of @f$ r@f$ on the logical index range.
-     */
-    RotationSimulation(Mapping const& mapping, double const rmin, double const rmax)
-        : AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>(
-                AdvectionField_rotation(CoordVr(0.), CoordVtheta(2 * M_PI)),
-                FunctionToBeAdvected_gaussian<
-                        Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax))
-    {
-    }
-};
-
+    return AdvectionSimulation<AdvectionField_rotation, FunctionToBeAdvected_gaussian<Mapping>>(
+            {AdvectionField_rotation(CoordVr(0.), CoordVtheta(2 * M_PI)),
+             FunctionToBeAdvected_gaussian<
+                     Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax)});
+}
 
 /**
  * @brief Simulation of a decentred rotated elipse-type function.
@@ -576,24 +549,12 @@ public:
  * @see AdvectionField_decentred_rotation
  */
 template <class Mapping>
-class DecentredRotationSimulation
-    : public AdvectionSimulation<
-              AdvectionField_decentred_rotation,
-              FunctionToBeAdvected_cos_4_elipse<Mapping>>
+AdvectionSimulation<AdvectionField_decentred_rotation, FunctionToBeAdvected_cos_4_elipse<Mapping>>
+get_decentred_rotation_simulation(Mapping const& mapping)
 {
-public:
-    /**
-     * @brief Instantiate a DecentredRotationSimulation simulation.
-     *
-     * @param[in] mapping
-     *      The mapping from the logical index range to the physical index range.
-     */
-    explicit DecentredRotationSimulation(Mapping const& mapping)
-        : AdvectionSimulation<
-                AdvectionField_decentred_rotation,
-                FunctionToBeAdvected_cos_4_elipse<Mapping>>(
-                AdvectionField_decentred_rotation(),
-                FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping))
-    {
-    }
-};
+    return AdvectionSimulation<
+            AdvectionField_decentred_rotation,
+            FunctionToBeAdvected_cos_4_elipse<Mapping>>(
+            {AdvectionField_decentred_rotation(),
+             FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping)});
+}

@@ -15,9 +15,7 @@ double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_
     using FuncType = MultipatchField<T, Patches...>;
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
-    using IdxRangeFunc = typename FuncType::discrete_domain_type;
     constexpr std::size_t NPatches = multipatch_function.size();
-    IdxRangeFunc idx_range = get_idx_range(multipatch_function);
     std::array<double, NPatches> norm_inf_on_patch(
             {(norm_inf(exec_space, multipatch_function.template get<Patches>()))...});
     double result(0.0);
@@ -43,9 +41,7 @@ double error_norm_inf(
     using FuncType = MultipatchField<T, Patches...>;
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
-    using IdxRangeFunc = typename FuncType::discrete_domain_type;
     constexpr std::size_t NPatches = multipatch_function.size();
-    IdxRangeFunc idx_range = get_idx_range(multipatch_function);
     std::array<double, NPatches> norm_inf_on_patch({(error_norm_inf(
             exec_space,
             multipatch_function.template get<Patches>(),

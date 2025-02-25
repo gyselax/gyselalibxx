@@ -32,7 +32,7 @@ runs:
       changed_files=$(awk '{printf("%s ",$0)} END { printf "\n" }' changed_files.txt)
       echo "CHANGED_FILES=${changed_files}" >> $GITHUB_ENV
       FOUND_POLAR_SPLINES=$(grep "src/interpolation/polar_splines/.*" -x changed_files.txt || true)
-      if [ -z "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV; fi
+      if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV; fi
       FOUND_POISSON_2D=$(grep "src/geometryRTheta/poisson/.*" -x changed_files.txt || true)
       if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV; else echo "POISSON_2D_BUILD_TESTING=ON" >> $GITHUB_ENV; fi
       FOUND_DDC=$(grep "vendor/ddc" changed_files.txt || true)

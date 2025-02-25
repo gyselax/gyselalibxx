@@ -641,10 +641,6 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
     // Extract the values and derivatives from the copy
     DField<IdxRange<GridX, GridY>, Kokkos::HostSpace, Kokkos::layout_stride> values_copy
             = dxdyField_copy.get_values_field();
-    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> left_x_derivs_copy
-            = dxdyField[IdxXdX(first_deriv, deriv_idx_range_x.front())];
-    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> right_x_derivs_copy
-            = dxdyField[IdxXdX(first_deriv, deriv_idx_range_x.back())];
 
     // Check the values
     ddc::for_each(get_idx_range(values), [&](IdxXY ixy) {
@@ -706,14 +702,6 @@ TEST(DerivFieldTest, FieldDeepCopy)
 
     // Copy the deriv field
     ddcHelper::deepcopy(dxdyField_copy, dxdyField);
-
-    // Extract the values and derivatives from the copy
-    DField<IdxRange<GridX, GridY>, Kokkos::HostSpace, Kokkos::layout_stride> values_copy
-            = dxdyField_copy.get_values_field();
-    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> left_x_derivs_copy
-            = dxdyField[IdxXdX(first_deriv, deriv_idx_range_x.front())];
-    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> right_x_derivs_copy
-            = dxdyField[IdxXdX(first_deriv, deriv_idx_range_x.back())];
 
     // Check the values
     ddc::for_each(get_idx_range(values), [&](IdxXY ixy) {

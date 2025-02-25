@@ -61,7 +61,6 @@ public:
         Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
         IdxRangeFdistrib const idx_range = get_idx_range(allfdistribu);
         IdxRange<GridX> const x_idx_range = ddc::select<GridX>(idx_range);
-        IdxRange<GridV> const v_idx_range = ddc::select<GridV>(idx_range);
         IdxRange<Species> const sp_idx_range = ddc::select<Species>(idx_range);
 
         // pre-allocate some memory to prevent allocation later in loop

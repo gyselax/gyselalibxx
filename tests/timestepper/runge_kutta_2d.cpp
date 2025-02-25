@@ -31,11 +31,17 @@ public:
     struct X
     {
         static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = X;
     };
 
     struct Y
     {
         static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Y;
     };
     using CoordX = Coordinate<X>;
     using CoordY = Coordinate<Y>;

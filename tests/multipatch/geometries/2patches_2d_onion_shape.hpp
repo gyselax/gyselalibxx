@@ -28,6 +28,8 @@ bool constexpr is_uniform = false;
 #endif
 
 // CONTINUOUS DIMENSIONS -------------------------------------------------------------------------
+struct R_cov;
+struct Theta_cov;
 /**
  * @brief First continuous dimension of all the patches.
  */
@@ -35,6 +37,12 @@ struct R
 {
     /// @brief Non periodic dimension.
     static bool constexpr PERIODIC = false;
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = false;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = R_cov;
 };
 
 /**
@@ -44,6 +52,41 @@ struct Theta
 {
     /// @brief Periodic dimension.
     static bool constexpr PERIODIC = true;
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = false;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = Theta_cov;
+};
+
+/**
+ * @brief Define non periodic real covariant R dimension.
+ */
+struct R_cov
+{
+    /// @brief Non periodic dimension.
+    static bool constexpr PERIODIC = false;
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = R;
+};
+/**
+ * @brief Define periodic real covariant Theta dimension.
+ */
+struct Theta_cov
+{
+    /// @brief Periodic dimension.
+    static bool constexpr PERIODIC = true;
+    /// A boolean indicating if dimension describes a covariant coordinate.
+    static bool constexpr IS_COVARIANT = true;
+    /// A boolean indicating if dimension describes a contravariant coordinate.
+    static bool constexpr IS_CONTRAVARIANT = false;
+    /// A type-alias mapping to the covariant counterpart.
+    using Dual = Theta;
 };
 
 
