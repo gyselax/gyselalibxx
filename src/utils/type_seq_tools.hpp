@@ -83,4 +83,3 @@ using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
  */
 template <class StartTypeSeq>
 using type_seq_unique_t = typename detail::GetUnique<StartTypeSeq>::type;
-
