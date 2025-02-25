@@ -108,7 +108,9 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 namespace {
 
 template <class Dims>
-void check_inverse_tensor(DTensor<Dims, Dims> tensor,  DTensor<vector_index_set_dual_t<Dims>, vector_index_set_dual_t<Dims>> inv_tensor)
+void check_inverse_tensor(
+        DTensor<Dims, Dims> tensor,
+        DTensor<vector_index_set_dual_t<Dims>, vector_index_set_dual_t<Dims>> inv_tensor)
 {
     double TOL = 1e-10;
 
@@ -117,20 +119,24 @@ void check_inverse_tensor(DTensor<Dims, Dims> tensor,  DTensor<vector_index_set_
     using Dim0_cov = typename Dim0::Dual;
     using Dim1_cov = typename Dim1::Dual;
 
-    double const id_val00 = ddcHelper::get<Dim0, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim0_cov>(inv_tensor) 
-        + ddcHelper::get<Dim0, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim0_cov>(inv_tensor);
+    double const id_val00
+            = ddcHelper::get<Dim0, Dim0>(tensor) * ddcHelper::get<Dim0_cov, Dim0_cov>(inv_tensor)
+              + ddcHelper::get<Dim0, Dim1>(tensor) * ddcHelper::get<Dim1_cov, Dim0_cov>(inv_tensor);
     EXPECT_NEAR(id_val00, 1., TOL);
 
-    double const id_val01 = ddcHelper::get<Dim0, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim1_cov>(inv_tensor) 
-        + ddcHelper::get<Dim0, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim1_cov>(inv_tensor);
+    double const id_val01
+            = ddcHelper::get<Dim0, Dim0>(tensor) * ddcHelper::get<Dim0_cov, Dim1_cov>(inv_tensor)
+              + ddcHelper::get<Dim0, Dim1>(tensor) * ddcHelper::get<Dim1_cov, Dim1_cov>(inv_tensor);
     EXPECT_NEAR(id_val01, 0., TOL);
 
-    double const id_val10 = ddcHelper::get<Dim1, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim0_cov>(inv_tensor) 
-        + ddcHelper::get<Dim1, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim0_cov>(inv_tensor);
+    double const id_val10
+            = ddcHelper::get<Dim1, Dim0>(tensor) * ddcHelper::get<Dim0_cov, Dim0_cov>(inv_tensor)
+              + ddcHelper::get<Dim1, Dim1>(tensor) * ddcHelper::get<Dim1_cov, Dim0_cov>(inv_tensor);
     EXPECT_NEAR(id_val10, 0., TOL);
-    
-    double const id_val11 = ddcHelper::get<Dim1, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim1_cov>(inv_tensor) 
-        + ddcHelper::get<Dim1, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim1_cov>(inv_tensor);
+
+    double const id_val11
+            = ddcHelper::get<Dim1, Dim0>(tensor) * ddcHelper::get<Dim0_cov, Dim1_cov>(inv_tensor)
+              + ddcHelper::get<Dim1, Dim1>(tensor) * ddcHelper::get<Dim1_cov, Dim1_cov>(inv_tensor);
     EXPECT_NEAR(id_val11, 1., TOL);
 }
 
