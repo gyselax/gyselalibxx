@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+/**
+ * @file indexed_tensor.hpp
+ * File providing functions to carry out tensor calculus operations via index patterns.
+ */
 #pragma once
 
 #include "tensor.hpp"
@@ -10,19 +14,38 @@ namespace tensor_tools {
 template <class T>
 inline constexpr bool enable_indexed_tensor = false;
 
+/**
+ * @brief A class to capture the description of a tensor indexed at a specific component.
+ * This class should not be explicitly declared in user code. It is the output of a call
+ * to the index<...> function and is an input to the tensor_mul function.
+ *
+ * @tparam TensorType The tensor being indexed.
+ * @tparam TensorIndexIdMapType A TensorIndexIdMap describing the indices used to access
+ *              the tensor.
+ */
 template <class TensorType, class TensorIndexIdMapType>
 class IndexedTensor
 {
 public:
+    /// The TensorIndexIdMap describing how the tensor is indexed.
     using index_pattern = TensorIndexIdMapType;
+    /// The type of the tensor being indexed.
     using tensor_type = TensorType;
 
 private:
     TensorType& m_tensor;
 
 public:
-    IndexedTensor(TensorType& tensor) : m_tensor(tensor) {}
+    /**
+     * @brief A constructor of an indexed tensor.
+     * @param tensor The tensor to be indexed.
+     */
+    explicit IndexedTensor(TensorType& tensor) : m_tensor(tensor) {}
 
+    /**
+     * @brief An operator to access the underlying tensor.
+     * @return The underlying tensor.
+     */
     TensorType& operator()()
     {
         return m_tensor;
@@ -32,18 +55,28 @@ public:
 template <class TensorType, class TensorIdxIdMapType>
 inline constexpr bool enable_indexed_tensor<IndexedTensor<TensorType, TensorIdxIdMapType>> = true;
 
+/// A tool to check if a type is an IndexedTensor
 template <class Type>
 inline constexpr bool is_indexed_tensor_v
         = enable_indexed_tensor<std::remove_const_t<std::remove_reference_t<Type>>>;
 
+namespace details {
+/**
+ * @brief A tool to build an IndexedTensor object from a set of indices.
+ * This tool is used in the function index and shouldn't be called by users directly.
+ * @param tensor The tensor that is being indexed.
+ * @tparam TypeSeqCharIds A type sequence of characters (saved as integral_constants) describing the
+ *                      index pattern used to index the tensor.
+ * @return An IndexedTensor object.
+ */
 template <class TypeSeqCharIds, class TensorType, std::size_t... I>
-auto internal_index(TensorType& t, std::index_sequence<I...>)
+auto internal_index(TensorType& tensor, std::index_sequence<I...>)
 {
     return IndexedTensor<
             TensorType,
             TensorIndexIdMap<VectorIndexIdMap<
                     ddc::type_seq_element_t<I, TypeSeqCharIds>::value,
-                    typename TensorType::vector_index_set_t<I>>...>>(t);
+                    typename TensorType::vector_index_set_t<I>>...>>(tensor);
 }
 
 template <
@@ -89,54 +122,80 @@ void internal_tensor_mul(
     ((internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
 }
 
+} // namespace details
+
 } // namespace tensor_tools
 
+/**
+ * @brief A tool to build an IndexedTensor object from a set of indices.
+ * This object can be used to carry out a tensor multiplication using the tensor_mul function.
+ * Example:
+ * @code
+ * index<'i', 'j', 'k'>(my_3d_tensor)
+ * @endcode
+ * @param tensor The tensor that is being indexed.
+ * @tparam ids The characters describing the index pattern used to index the tensor.
+ * @return An IndexedTensor object.
+ */
 template <char... ids, class TensorType>
 auto index(TensorType& t)
 {
+    using namespace tensor_tools;
     using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
-    return tensor_tools::internal_index<
-            TypeSeqCharIds>(t, std::make_index_sequence<sizeof...(ids)>());
+    return details::internal_index<TypeSeqCharIds>(t, std::make_index_sequence<sizeof...(ids)>());
 }
 
+/**
+ * @brief A function to multiply tensors together. IndexedTensors are used to describe the index
+ * pattern of the multiplication.
+ * Example:
+ * @code
+ * // Create a tensor C such that C_{ik} = A_{ij} B^{j}_{k}
+ * Tensor C = tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(B));
+ * @endcode
+ * @param tensor_to_mul The indexed tensor objects which should be multiplied together.
+ * @return A tensor that is the result of multiplying the objects according to the index pattern
+ */
 template <class... IndexedTensorType>
-auto tensor_mul(IndexedTensorType... t)
+auto tensor_mul(IndexedTensorType... tensor_to_mul)
 {
-    using GlobalTensorIndexIdMap = tensor_tools::concatenate_tensor_index_id_maps_t<
-            typename IndexedTensorType::index_pattern...>;
-    using TensorTuple = std::tuple<typename IndexedTensorType::tensor_type...>;
-    using ElementType = typename std::tuple_element_t<0, TensorTuple>::element_type;
+    using namespace tensor_tools;
+    static_assert(
+            std::conjunction_v<
+                    std::integral_constant<bool, is_indexed_tensor_v<IndexedTensorType>>...>,
+            "A tensor multiplication must be carried out over IndexedTensor objects");
+    // Get the TensorIndexMap describing all the indices which appear in the calculation.
+    using GlobalTensorIndexIdMap
+            = concatenate_tensor_index_id_maps_t<typename IndexedTensorType::index_pattern...>;
+    // Use the first tensor argument to extract the element type of the result.
+    using ElementType = std::tuple_element_t<
+            0,
+            std::tuple<typename IndexedTensorType::tensor_type::element_type...>>;
     static_assert(
             std::conjunction_v<std::is_same<
                     typename IndexedTensorType::tensor_type::element_type,
                     ElementType>...>,
             "All tensors must have the same element type");
-    static_assert(
-            std::conjunction_v<std::integral_constant<
-                    bool,
-                    tensor_tools::is_indexed_tensor_v<IndexedTensorType>>...>,
-            "A tensor multiplication must be carried out over IndexedTensor objects");
     using ResultIndexTypeSeq = typename GlobalTensorIndexIdMap::result_indices;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
         ElementType result = 0.0;
-        tensor_tools::internal_tensor_mul<GlobalTensorIndexIdMap>(
+        details::internal_tensor_mul<GlobalTensorIndexIdMap>(
                 result,
-                std::make_index_sequence<tensor_tools::details::CalculateSize<
+                std::make_index_sequence<details::CalculateSize<
                         typename GlobalTensorIndexIdMap::unique_indices>::value>(),
-                t...);
+                tensor_to_mul...);
         return result;
     } else {
-        using ResultTensorIndexIdMap = tensor_tools::to_tensor_index_id_map_t<ResultIndexTypeSeq>;
+        using ResultTensorIndexIdMap = to_tensor_index_id_map_t<ResultIndexTypeSeq>;
         using ResultTensorType
                 = to_tensor_t<ElementType, typename ResultTensorIndexIdMap::vector_index_sets>;
         ResultTensorType result(0.0);
-        tensor_tools::IndexedTensor<ResultTensorType, ResultTensorIndexIdMap> indexed_result(
-                result);
-        tensor_tools::internal_tensor_mul<GlobalTensorIndexIdMap>(
+        IndexedTensor<ResultTensorType, ResultTensorIndexIdMap> indexed_result(result);
+        details::internal_tensor_mul<GlobalTensorIndexIdMap>(
                 indexed_result,
-                std::make_index_sequence<tensor_tools::details::CalculateSize<
+                std::make_index_sequence<details::CalculateSize<
                         typename GlobalTensorIndexIdMap::unique_indices>::value>(),
-                t...);
+                tensor_to_mul...);
         return result;
     }
 }
