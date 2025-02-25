@@ -5,9 +5,8 @@
 
 #include "indexed_tensor.hpp"
 #include "tensor.hpp"
-#include "tensor_index_set.hpp"
 #include "tensor_index_tools.hpp"
-#include "vector_index_set.hpp"
+#include "vector_index_tools.hpp"
 
 using namespace tensor_tools;
 
@@ -65,95 +64,6 @@ TEST(TensorTest, ExplicitDotProduct)
     EXPECT_EQ(val, 66);
 }
 
-TEST(TensorTools, CharOccurences)
-{
-    using CharTypeSeq = ddc::detail::TypeSeq<
-            std::integral_constant<char, 'i'>,
-            std::integral_constant<char, 'j'>,
-            std::integral_constant<char, 'i'>,
-            std::integral_constant<char, 'k'>,
-            std::integral_constant<char, 'k'>,
-            std::integral_constant<char, 'k'>>;
-    std::size_t n_i = char_occurences_v<'i', CharTypeSeq>;
-    std::size_t n_j = char_occurences_v<'j', CharTypeSeq>;
-    std::size_t n_k = char_occurences_v<'k', CharTypeSeq>;
-    EXPECT_EQ(n_i, 2);
-    EXPECT_EQ(n_j, 1);
-    EXPECT_EQ(n_k, 3);
-}
-
-TEST(TensorTools, TypeSeqUnique)
-{
-    using CharTypeSeq = ddc::detail::TypeSeq<
-            std::integral_constant<char, 'i'>,
-            std::integral_constant<char, 'j'>,
-            std::integral_constant<char, 'i'>,
-            std::integral_constant<char, 'k'>,
-            std::integral_constant<char, 'k'>,
-            std::integral_constant<char, 'k'>>;
-    using ExpectedTypeSeq = ddc::detail::TypeSeq<
-            std::integral_constant<char, 'i'>,
-            std::integral_constant<char, 'j'>,
-            std::integral_constant<char, 'k'>>;
-    using UniqueCharTypeSeq = type_seq_unique_t<CharTypeSeq>;
-    static_assert(std::is_same_v<UniqueCharTypeSeq, ExpectedTypeSeq>);
-}
-
-TEST(TensorTools, ExtractIndices)
-{
-    using IdxSet = VectorIndexSet<R, Theta>;
-    using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
-    using TypeSeqVectorIdxMap = ddc::detail::TypeSeq<
-            VectorIndexIdMap<'i', IdxSet>,
-            VectorIndexIdMap<'j', IdxSet>,
-            VectorIndexIdMap<'j', IdxSet_cov>,
-            VectorIndexIdMap<'k', IdxSet_cov>,
-            VectorIndexIdMap<'k', IdxSet>,
-            VectorIndexIdMap<'l', IdxSet>>;
-    using IdxTypeSeq = tensor_index_map_extract_id_t<TypeSeqVectorIdxMap>;
-    static_assert(std::is_same_v<
-                  IdxTypeSeq,
-                  ddc::detail::TypeSeq<
-                          std::integral_constant<char, 'i'>,
-                          std::integral_constant<char, 'j'>,
-                          std::integral_constant<char, 'j'>,
-                          std::integral_constant<char, 'k'>,
-                          std::integral_constant<char, 'k'>,
-                          std::integral_constant<char, 'l'>>>);
-}
-
-TEST(TensorTools, RepeatedIndices)
-{
-    using IdxSet = VectorIndexSet<R, Theta>;
-    using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
-    using TypeSeqVectorIdxMap = ddc::detail::TypeSeq<
-            VectorIndexIdMap<'i', IdxSet>,
-            VectorIndexIdMap<'j', IdxSet>,
-            VectorIndexIdMap<'j', IdxSet_cov>,
-            VectorIndexIdMap<'k', IdxSet_cov>,
-            VectorIndexIdMap<'k', IdxSet>,
-            VectorIndexIdMap<'l', IdxSet_cov>>;
-    using NonRepeatedIdxs = non_repeated_indices_t<TypeSeqVectorIdxMap>;
-    using RepeatedIdxs = repeated_indices_t<TypeSeqVectorIdxMap>;
-    using UniqueIdxs = unique_indices_t<TypeSeqVectorIdxMap>;
-    static_assert(std::is_same_v<
-                  NonRepeatedIdxs,
-                  ddc::detail::TypeSeq<
-                          VectorIndexIdMap<'i', IdxSet>,
-                          VectorIndexIdMap<'l', IdxSet_cov>>>);
-    static_assert(std::is_same_v<
-                  RepeatedIdxs,
-                  ddc::detail::
-                          TypeSeq<VectorIndexIdMap<'j', IdxSet>, VectorIndexIdMap<'k', IdxSet>>>);
-    static_assert(std::is_same_v<
-                  UniqueIdxs,
-                  ddc::detail::TypeSeq<
-                          VectorIndexIdMap<'i', IdxSet>,
-                          VectorIndexIdMap<'j', IdxSet>,
-                          VectorIndexIdMap<'k', IdxSet>,
-                          VectorIndexIdMap<'l', IdxSet>>>);
-}
-
 TEST(TensorTest, TensorScalarDiv)
 {
     Vector<int, R_cov, Theta_cov> a;
@@ -194,6 +104,72 @@ TEST(TensorTest, TensorMinus)
     EXPECT_EQ(val, -12);
     val = ddcHelper::get<Theta_cov>(a);
     EXPECT_EQ(val, 24);
+}
+
+TEST(TensorTools, CharOccurences)
+{
+    using CharTypeSeq = ddc::detail::TypeSeq<
+            std::integral_constant<char, 'i'>,
+            std::integral_constant<char, 'j'>,
+            std::integral_constant<char, 'i'>,
+            std::integral_constant<char, 'k'>,
+            std::integral_constant<char, 'k'>,
+            std::integral_constant<char, 'k'>>;
+    std::size_t n_i = char_occurences_v<'i', CharTypeSeq>;
+    std::size_t n_j = char_occurences_v<'j', CharTypeSeq>;
+    std::size_t n_k = char_occurences_v<'k', CharTypeSeq>;
+    EXPECT_EQ(n_i, 2);
+    EXPECT_EQ(n_j, 1);
+    EXPECT_EQ(n_k, 3);
+}
+
+TEST(TensorTools, TypeSeqUnique)
+{
+    using CharTypeSeq = ddc::detail::TypeSeq<
+            std::integral_constant<char, 'i'>,
+            std::integral_constant<char, 'j'>,
+            std::integral_constant<char, 'i'>,
+            std::integral_constant<char, 'k'>,
+            std::integral_constant<char, 'k'>,
+            std::integral_constant<char, 'k'>>;
+    using ExpectedTypeSeq = ddc::detail::TypeSeq<
+            std::integral_constant<char, 'i'>,
+            std::integral_constant<char, 'j'>,
+            std::integral_constant<char, 'k'>>;
+    using UniqueCharTypeSeq = type_seq_unique_t<CharTypeSeq>;
+    static_assert(std::is_same_v<UniqueCharTypeSeq, ExpectedTypeSeq>);
+}
+
+TEST(TensorTools, RepeatedIndices)
+{
+    using IdxSet = VectorIndexSet<R, Theta>;
+    using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
+    using TypeSeqVectorIdxMap = ddc::detail::TypeSeq<
+            VectorIndexIdMap<'i', IdxSet>,
+            VectorIndexIdMap<'j', IdxSet>,
+            VectorIndexIdMap<'j', IdxSet_cov>,
+            VectorIndexIdMap<'k', IdxSet_cov>,
+            VectorIndexIdMap<'k', IdxSet>,
+            VectorIndexIdMap<'l', IdxSet_cov>>;
+    using NonRepeatedIdxs = non_repeated_indices_t<TypeSeqVectorIdxMap>;
+    using RepeatedIdxs = repeated_indices_t<TypeSeqVectorIdxMap>;
+    using UniqueIdxs = unique_indices_t<TypeSeqVectorIdxMap>;
+    static_assert(std::is_same_v<
+                  NonRepeatedIdxs,
+                  ddc::detail::TypeSeq<
+                          VectorIndexIdMap<'i', IdxSet>,
+                          VectorIndexIdMap<'l', IdxSet_cov>>>);
+    static_assert(std::is_same_v<
+                  RepeatedIdxs,
+                  ddc::detail::
+                          TypeSeq<VectorIndexIdMap<'j', IdxSet>, VectorIndexIdMap<'k', IdxSet>>>);
+    static_assert(std::is_same_v<
+                  UniqueIdxs,
+                  ddc::detail::TypeSeq<
+                          VectorIndexIdMap<'i', IdxSet>,
+                          VectorIndexIdMap<'j', IdxSet>,
+                          VectorIndexIdMap<'k', IdxSet>,
+                          VectorIndexIdMap<'l', IdxSet>>>);
 }
 
 TEST(TensorTools, TensorIndexSet)
@@ -244,7 +220,7 @@ TEST(TensorTools, TensorIndexMap)
 {
     using IdxSet = VectorIndexSet<R, Theta>;
     using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
-    using TestIndexSet = TensorIndexSet<IdxSet, IdxSet_cov, IdxSet, IdxSet>;
+    using TestIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet_cov, IdxSet, IdxSet>;
     using GlobalTensorIndexIdMap = TensorIndexIdMap<
             VectorIndexIdMap<'i', IdxSet>,
             VectorIndexIdMap<'j', IdxSet_cov>,
@@ -295,8 +271,8 @@ TEST(TensorTools, ExtractElement)
 {
     using IdxSet = VectorIndexSet<R, Theta>;
     using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
-    using GlobalTensorIndexSet = TensorIndexSet<IdxSet, IdxSet_cov, IdxSet, IdxSet>;
-    using LocalTensorIndexSet = TensorIndexSet<IdxSet, IdxSet_cov>;
+    using GlobalTensorIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet_cov, IdxSet, IdxSet>;
+    using LocalTensorIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet_cov>;
     using GlobalTensorIndexIdMap = TensorIndexIdMap<
             VectorIndexIdMap<'i', IdxSet>,
             VectorIndexIdMap<'j', IdxSet_cov>,
@@ -305,8 +281,6 @@ TEST(TensorTools, ExtractElement)
     using LocalTensorIndexIdMap
             = TensorIndexIdMap<VectorIndexIdMap<'i', IdxSet>, VectorIndexIdMap<'j', IdxSet_cov>>;
     using GlobalTensorIndexElement = TensorIndexElement<GlobalTensorIndexSet, R, R_cov, R, R>;
-    static_assert(GlobalTensorIndexSet::rank() == 4);
-    static_assert(LocalTensorIndexSet::rank() == 2);
     using LocalTensorIndexElement = extract_sub_tensor_element_t<
             GlobalTensorIndexIdMap,
             LocalTensorIndexIdMap,
@@ -329,7 +303,7 @@ TEST(TensorTools, ExtractElement)
             = TensorIndexElement<GlobalTensorIndexSet, R, Theta_cov, Theta, R>;
     using LocalTensorIndexIdMap2
             = TensorIndexIdMap<VectorIndexIdMap<'i', IdxSet>, VectorIndexIdMap<'j', IdxSet>>;
-    using LocalTensorIndexSet2 = TensorIndexSet<IdxSet, IdxSet>;
+    using LocalTensorIndexSet2 = ddc::detail::TypeSeq<IdxSet, IdxSet>;
     using LocalTensorIndexElement2 = extract_sub_tensor_element_t<
             GlobalTensorIndexIdMap,
             LocalTensorIndexIdMap2,

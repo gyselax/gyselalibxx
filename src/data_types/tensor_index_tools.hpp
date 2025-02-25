@@ -311,6 +311,25 @@ struct GetUniqueIndices<ddc::detail::TypeSeq<>, ResultTypeSeq>
     using type = ResultTypeSeq;
 };
 
+template <class TypeSeqVectorIndexIdMap>
+struct ExtractTypeSeqIndexSet;
+
+template <class... VectorIndexIdMap>
+struct ExtractTypeSeqIndexSet<ddc::detail::TypeSeq<VectorIndexIdMap...>>
+{
+    using type = ddc::detail::TypeSeq<typename VectorIndexIdMap::possible_idx_values...>;
+};
+
+template <class TypeSeqVectorIndexMap>
+struct CalculateSize;
+
+template <class... VectorIndexIdMap>
+struct CalculateSize<ddc::detail::TypeSeq<VectorIndexIdMap...>>
+{
+    static constexpr std::size_t value
+            = (ddc::type_seq_size_v<typename VectorIndexIdMap::possible_idx_values> * ...);
+};
+
 } // namespace details
 
 /**
@@ -333,11 +352,14 @@ using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElemen
 
 template <std::size_t Elem, class TensorIndexMapType>
 using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
-        typename TensorIndexMapType::AllIndices,
+        typename details::ExtractTypeSeqIndexSet<typename TensorIndexMapType::AllIndices>::type,
         typename details::GetNthTensorIndexElementFromMap<
                 TensorIndexMapType,
                 // unique_indices is not a TensorIndexSetType
-                get_nth_tensor_index_element_t<Elem, typename TensorIndexMapType::unique_indices>,
+                get_nth_tensor_index_element_t<
+                        Elem,
+                        typename details::ExtractTypeSeqIndexSet<
+                                typename TensorIndexMapType::unique_indices>::type>,
                 ddc::type_seq_size_v<typename TensorIndexMapType::AllIndices>>::type>;
 
 template <class TypeSeqVectorIndexIdMap>
@@ -393,11 +415,71 @@ public:
     using sum_indices = repeated_indices_t<AllIndices>;
     using unique_indices = unique_indices_t<AllIndices>;
     using vector_index_sets = ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>;
-
-    //static constexpr std::size_t size()
-    //{
-    //    return to_tensor_idx_set_t<unique_indices>::size();
-    //}
 };
+
+namespace details {
+
+template <class GlobalTensorIndexIdMap, class LocalTensorIndexIdMap, class GlobalTensorIndexElement>
+struct ExtractSubTensorElement;
+
+template <class GlobalTensorIndexIdMap, class... ValidIndex, class GlobalTensorIndexElement>
+struct ExtractSubTensorElement<
+        GlobalTensorIndexIdMap,
+        TensorIndexIdMap<ValidIndex...>,
+        GlobalTensorIndexElement>
+{
+    using type = TensorIndexElement<
+            ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>,
+            typename GlobalTensorIndexElement::index_on_dim_t<ddc::type_seq_rank_v<
+                    ValidIndex,
+                    typename GlobalTensorIndexIdMap::AllIndices>>...>;
+};
+
+template <class TypeSeqValidIndex>
+struct ToTensorIndexIdMap;
+
+template <class... ValidIndex>
+struct ToTensorIndexIdMap<ddc::detail::TypeSeq<ValidIndex...>>
+{
+    using type = TensorIndexIdMap<ValidIndex...>;
+};
+
+template <class... TensorIndexIdMaps>
+struct ConcatenateTensorIndexIdMaps;
+
+template <class TensorIndexIdMapHead1, class TensorIndexIdMapHead2, class... TensorIndexIdMaps>
+struct ConcatenateTensorIndexIdMaps<
+        TensorIndexIdMapHead1,
+        TensorIndexIdMapHead2,
+        TensorIndexIdMaps...>
+{
+    using type = typename ConcatenateTensorIndexIdMaps<
+            typename ConcatenateTensorIndexIdMaps<TensorIndexIdMapHead1, TensorIndexIdMapHead2>::
+                    type,
+            TensorIndexIdMaps...>::type;
+};
+
+template <class... ValidIndex1, class... ValidIndex2>
+struct ConcatenateTensorIndexIdMaps<
+        TensorIndexIdMap<ValidIndex1...>,
+        TensorIndexIdMap<ValidIndex2...>>
+{
+    using type = TensorIndexIdMap<ValidIndex1..., ValidIndex2...>;
+};
+
+} // namespace details
+
+template <class GlobalTensorIndexIdMap, class LocalTensorIndexIdMap, class GlobalTensorIndexElement>
+using extract_sub_tensor_element_t = typename details::ExtractSubTensorElement<
+        GlobalTensorIndexIdMap,
+        LocalTensorIndexIdMap,
+        GlobalTensorIndexElement>::type;
+
+template <class TypeSeqValidIndex>
+using to_tensor_index_id_map_t = typename details::ToTensorIndexIdMap<TypeSeqValidIndex>::type;
+
+template <class... TensorIndexIdMaps>
+using concatenate_tensor_index_id_maps_t =
+        typename details::ConcatenateTensorIndexIdMaps<TensorIndexIdMaps...>::type;
 
 } // namespace tensor_tools
