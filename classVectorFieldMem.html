@@ -182,14 +182,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae510519021346e3efbc9e45bdc30d774" id="r_ae510519021346e3efbc9e45bdc30d774"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorFieldMem.html#a81d9b53616c4160ede980ca587e33942">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ae510519021346e3efbc9e45bdc30d774">span_view</a> ()</td></tr>
 <tr class="memdesc:ae510519021346e3efbc9e45bdc30d774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to this vector field.  <br /></td></tr>
 <tr class="separator:ae510519021346e3efbc9e45bdc30d774"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9369a957b143d0cee28f49fb82d7d88" id="r_ad9369a957b143d0cee28f49fb82d7d88"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
-<tr class="memitem:ad9369a957b143d0cee28f49fb82d7d88"><td class="memTemplItemLeft" align="right" valign="top">element_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ad9369a957b143d0cee28f49fb82d7d88">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
-<tr class="memdesc:ad9369a957b143d0cee28f49fb82d7d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of Idxs.  <br /></td></tr>
-<tr class="separator:ad9369a957b143d0cee28f49fb82d7d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9430bd40d0b0924dc2a5735617483a5" id="r_ab9430bd40d0b0924dc2a5735617483a5"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
-<tr class="memitem:ab9430bd40d0b0924dc2a5735617483a5"><td class="memTemplItemLeft" align="right" valign="top">element_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#ab9430bd40d0b0924dc2a5735617483a5">operator()</a> (Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
-<tr class="memdesc:ab9430bd40d0b0924dc2a5735617483a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional Idx.  <br /></td></tr>
-<tr class="separator:ab9430bd40d0b0924dc2a5735617483a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d1b5d149b8181d7b6feaed6f7746220" id="r_a5d1b5d149b8181d7b6feaed6f7746220"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
+<tr class="memitem:a5d1b5d149b8181d7b6feaed6f7746220"><td class="memTemplItemLeft" align="right" valign="top">element_type const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a5d1b5d149b8181d7b6feaed6f7746220">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
+<tr class="memdesc:a5d1b5d149b8181d7b6feaed6f7746220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of Idxs.  <br /></td></tr>
+<tr class="separator:a5d1b5d149b8181d7b6feaed6f7746220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd303f292225471ed87de2a5939dcc8" id="r_a2fd303f292225471ed87de2a5939dcc8"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
+<tr class="memitem:a2fd303f292225471ed87de2a5939dcc8"><td class="memTemplItemLeft" align="right" valign="top">element_type const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a2fd303f292225471ed87de2a5939dcc8">operator()</a> (Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
+<tr class="memdesc:a2fd303f292225471ed87de2a5939dcc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional Idx.  <br /></td></tr>
+<tr class="separator:a2fd303f292225471ed87de2a5939dcc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a1536defb86caf5cbdea87c3000d99c" id="r_a6a1536defb86caf5cbdea87c3000d99c"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
 <tr class="memitem:a6a1536defb86caf5cbdea87c3000d99c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorFieldMem.html#a6a1536defb86caf5cbdea87c3000d99c">operator[]</a> (Idx&lt; QueryDDims... &gt; const &amp;slice_spec) const</td></tr>
 <tr class="memdesc:a6a1536defb86caf5cbdea87c3000d99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <br /></td></tr>
@@ -521,8 +521,8 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemSpac
 
 </div>
 </div>
-<a id="ad9369a957b143d0cee28f49fb82d7d88" name="ad9369a957b143d0cee28f49fb82d7d88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9369a957b143d0cee28f49fb82d7d88">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a5d1b5d149b8181d7b6feaed6f7746220" name="a5d1b5d149b8181d7b6feaed6f7746220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d1b5d149b8181d7b6feaed6f7746220">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,7 +535,7 @@ template&lt;class... ODDims&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">element_type <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::operator() </td>
+          <td class="memname">element_type const <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteElement&lt; ODDims &gt; const &amp;...&#160;</td>
           <td class="paramname"><em>delems</em></td><td>)</td>
@@ -560,8 +560,8 @@ template&lt;class... ODDims&gt; </div>
 
 </div>
 </div>
-<a id="ab9430bd40d0b0924dc2a5735617483a5" name="ab9430bd40d0b0924dc2a5735617483a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9430bd40d0b0924dc2a5735617483a5">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a2fd303f292225471ed87de2a5939dcc8" name="a2fd303f292225471ed87de2a5939dcc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fd303f292225471ed87de2a5939dcc8">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -574,7 +574,7 @@ template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">element_type <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::operator() </td>
+          <td class="memname">element_type const <a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; ElementType, IdxRangeType, NDTag, MemSpace &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">Idx&lt; ODDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>delems</em></td><td>)</td>
