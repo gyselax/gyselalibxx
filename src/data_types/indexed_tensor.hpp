@@ -11,6 +11,7 @@
 
 namespace tensor_tools {
 
+/// A boolean, true if the type is an IndexedTensor, false otherwise.
 template <class T>
 inline constexpr bool enable_indexed_tensor = false;
 
@@ -52,6 +53,7 @@ public:
     }
 };
 
+/// A boolean, true if the type is an IndexedTensor.
 template <class TensorType, class TensorIdxIdMapType>
 inline constexpr bool enable_indexed_tensor<IndexedTensor<TensorType, TensorIdxIdMapType>> = true;
 
@@ -138,11 +140,11 @@ void internal_tensor_mul(
  * @return An IndexedTensor object.
  */
 template <char... ids, class TensorType>
-auto index(TensorType& t)
+auto index(TensorType& tensor)
 {
     using namespace tensor_tools;
     using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
-    return details::internal_index<TypeSeqCharIds>(t, std::make_index_sequence<sizeof...(ids)>());
+    return details::internal_index<TypeSeqCharIds>(tensor, std::make_index_sequence<sizeof...(ids)>());
 }
 
 /**
