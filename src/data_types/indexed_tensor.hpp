@@ -144,7 +144,8 @@ auto index(TensorType& tensor)
 {
     using namespace tensor_tools;
     using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
-    return details::internal_index<TypeSeqCharIds>(tensor, std::make_index_sequence<sizeof...(ids)>());
+    return details::internal_index<
+            TypeSeqCharIds>(tensor, std::make_index_sequence<sizeof...(ids)>());
 }
 
 /**
