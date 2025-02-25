@@ -241,22 +241,25 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rp(grid);
 
-    MetricTensor<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
+    MetricTensorEvaluator<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
 
         std::array<std::array<double, 2>, 2> J; // Jacobian matrix
         to_physical_mapping.jacobian_matrix(coord_rp, J);
-        std::array<std::array<double, 2>, 2> G; // Metric tensor
-        metric_tensor(G, coord_rp);
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> G = metric_tensor(coord_rp);
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])
-                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0] / std::sqrt(G[0][0]);
+                = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1]
+                          / std::sqrt(ddcHelper::get<Theta, Theta>(G))
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0]
+                            / std::sqrt(ddcHelper::get<R, R>(G));
         ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])
-                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0] / std::sqrt(G[0][0]);
+                = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1]
+                          / std::sqrt(ddcHelper::get<Theta, Theta>(G))
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0]
+                            / std::sqrt(ddcHelper::get<R, R>(G));
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)

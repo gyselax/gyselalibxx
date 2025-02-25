@@ -9,7 +9,7 @@
 #include "mapping_tools.hpp"
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
-#include "metric_tensor.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
@@ -1272,13 +1272,11 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume)
     {
         static_assert(
-                std::is_same_v<
-                        TestValDerivType,
-                        EvalDeriv1DType> || std::is_same_v<TestValDerivType, EvalDeriv2DType>);
+                std::is_same_v<TestValDerivType, EvalDeriv1DType>
+                || std::is_same_v<TestValDerivType, EvalDeriv2DType>);
         static_assert(
-                std::is_same_v<
-                        TrialValDerivType,
-                        EvalDeriv1DType> || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
+                std::is_same_v<TrialValDerivType, EvalDeriv1DType>
+                || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
 
         // Calculate coefficients at quadrature point
         CoordRTheta coord(ddc::coordinate(idx_r), ddc::coordinate(idx_theta));
@@ -1301,7 +1299,7 @@ public:
                 trial_bspline_val_and_deriv,
                 trial_bspline_val_and_deriv_theta);
 
-        MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
+        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(mapping);
 
         // Assemble the weak integral element
         return int_volume(idx_r, idx_theta)

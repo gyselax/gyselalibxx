@@ -9,7 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "mapping_testing_tools.hpp"
-#include "metric_tensor.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "view.hpp"
 
 struct X
@@ -107,20 +107,31 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
 namespace {
 
-void check_inverse(Matrix_2x2 matrix, Matrix_2x2 inv)
+template <class Dims>
+void check_inverse_tensor(DTensor<Dims, Dims> tensor,  DTensor<vector_index_set_dual_t<Dims>, vector_index_set_dual_t<Dims>> inv_tensor)
 {
     double TOL = 1e-10;
-    std::size_t N = 2;
 
-    for (std::size_t i(0); i < N; ++i) {
-        for (std::size_t j(0); j < N; ++j) {
-            double id_val = 0.0;
-            for (std::size_t k(0); k < N; ++k) {
-                id_val += matrix[i][k] * inv[j][k];
-            }
-            EXPECT_NEAR(id_val, static_cast<double>(i == j), TOL);
-        }
-    }
+    using Dim0 = ddc::type_seq_element_t<0, Dims>;
+    using Dim1 = ddc::type_seq_element_t<1, Dims>;
+    using Dim0_cov = typename Dim0::Dual;
+    using Dim1_cov = typename Dim1::Dual;
+
+    double const id_val00 = ddcHelper::get<Dim0, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim0_cov>(inv_tensor) 
+        + ddcHelper::get<Dim0, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim0_cov>(inv_tensor);
+    EXPECT_NEAR(id_val00, 1., TOL);
+
+    double const id_val01 = ddcHelper::get<Dim0, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim1_cov>(inv_tensor) 
+        + ddcHelper::get<Dim0, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim1_cov>(inv_tensor);
+    EXPECT_NEAR(id_val01, 0., TOL);
+
+    double const id_val10 = ddcHelper::get<Dim1, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim0_cov>(inv_tensor) 
+        + ddcHelper::get<Dim1, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim0_cov>(inv_tensor);
+    EXPECT_NEAR(id_val10, 0., TOL);
+    
+    double const id_val11 = ddcHelper::get<Dim1, Dim0>(tensor)*ddcHelper::get<Dim0_cov, Dim1_cov>(inv_tensor) 
+        + ddcHelper::get<Dim1, Dim1>(tensor)*ddcHelper::get<Dim1_cov, Dim1_cov>(inv_tensor);
+    EXPECT_NEAR(id_val11, 1., TOL);
 }
 
 } // namespace
@@ -137,16 +148,10 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    MetricTensor<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
+    MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 matrix;
-        Matrix_2x2 inv_matrix;
-
-        metric_tensor(matrix, coords(irp));
-        metric_tensor.inverse(inv_matrix, coords(irp));
-
-        check_inverse(matrix, inv_matrix);
+        check_inverse_tensor(metric_tensor(coords(irp)), metric_tensor.inverse(coords(irp)));
     });
 }
 
@@ -160,16 +165,10 @@ TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
     FieldMemRTheta_host<CoordRTheta> coords = get_example_coords(IdxStepR(Nr), IdxStepTheta(Nt));
     IdxRangeRTheta grid = get_idx_range(coords);
 
-    MetricTensor<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
+    MetricTensorEvaluator<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 matrix;
-        Matrix_2x2 inv_matrix;
-
-        metric_tensor(matrix, coords(irp));
-        metric_tensor.inverse(inv_matrix, coords(irp));
-
-        check_inverse(matrix, inv_matrix);
+        check_inverse_tensor(metric_tensor(coords(irp)), metric_tensor.inverse(coords(irp)));
     });
 }
 
