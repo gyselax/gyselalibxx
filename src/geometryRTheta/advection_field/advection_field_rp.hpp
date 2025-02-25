@@ -212,12 +212,14 @@ private:
             host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         static_assert(
-                (std::is_same_v<Evaluator, SplineRThetaEvaluatorNullBound_host>
-                 && std::is_same_v<SplineType, host_t<Spline2D>>)
+                (std::is_same_v<
+                         Evaluator,
+                         SplineRThetaEvaluatorNullBound_host> && std::is_same_v<SplineType, host_t<Spline2D>>)
                 || (std::is_same_v<
                             Evaluator,
-                            PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>>
-                    && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
+                            PolarSplineEvaluator<
+                                    PolarBSplinesRTheta,
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
@@ -440,12 +442,14 @@ private:
             CoordXY& advection_field_xy_center) const
     {
         static_assert(
-                (std::is_same_v<Evaluator, SplineRThetaEvaluatorNullBound_host>
-                 && std::is_same_v<SplineType, host_t<Spline2D>>)
+                (std::is_same_v<
+                         Evaluator,
+                         SplineRThetaEvaluatorNullBound_host> && std::is_same_v<SplineType, host_t<Spline2D>>)
                 || (std::is_same_v<
                             Evaluator,
-                            PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule>>
-                    && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
+                            PolarSplineEvaluator<
+                                    PolarBSplinesRTheta,
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rp);
 

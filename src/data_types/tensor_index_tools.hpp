@@ -22,8 +22,7 @@ inline constexpr bool enable_tensor_index_element = false;
 
 template <class ValidatingTensorIndexSet, class... Dims>
 inline constexpr bool
-        enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>>
-        = true;
+        enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>> = true;
 } // namespace details
 
 template <typename Type>
@@ -59,9 +58,8 @@ private:
     KOKKOS_FUNCTION static constexpr bool valid_indices(std::index_sequence<Is...>)
     {
         return ((ddc::in_tags_v<
-                        ddc::type_seq_element_t<Is, IdxTypeSeq>,
-                        ddc::type_seq_element_t<Is, ValidatingTensorIndexSet>>)
-                && ...);
+                 ddc::type_seq_element_t<Is, IdxTypeSeq>,
+                 ddc::type_seq_element_t<Is, ValidatingTensorIndexSet>>)&&...);
     }
 
     static_assert(

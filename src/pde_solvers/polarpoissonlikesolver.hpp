@@ -1272,11 +1272,13 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume)
     {
         static_assert(
-                std::is_same_v<TestValDerivType, EvalDeriv1DType>
-                || std::is_same_v<TestValDerivType, EvalDeriv2DType>);
+                std::is_same_v<
+                        TestValDerivType,
+                        EvalDeriv1DType> || std::is_same_v<TestValDerivType, EvalDeriv2DType>);
         static_assert(
-                std::is_same_v<TrialValDerivType, EvalDeriv1DType>
-                || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
+                std::is_same_v<
+                        TrialValDerivType,
+                        EvalDeriv1DType> || std::is_same_v<TrialValDerivType, EvalDeriv2DType>);
 
         // Calculate coefficients at quadrature point
         CoordRTheta coord(ddc::coordinate(idx_r), ddc::coordinate(idx_theta));
