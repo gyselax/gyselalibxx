@@ -43,6 +43,26 @@ struct TypeSeqCat<ddc::detail::TypeSeq<First...>, ddc::detail::TypeSeq<Second...
     using type = ddc::detail::TypeSeq<First..., Second...>;
 };
 
+template <class StartTypeSeq, class ResultTypeSeq = ddc::detail::TypeSeq<>>
+struct GetUnique;
+
+template <class HeadElem, class... TailElems, class... ResultElems>
+struct GetUnique<ddc::detail::TypeSeq<HeadElem, TailElems...>, ddc::detail::TypeSeq<ResultElems...>>
+{
+    using type = typename GetUnique<
+            ddc::detail::TypeSeq<TailElems...>,
+            std::conditional_t<
+                    ddc::in_tags_v<HeadElem, ddc::detail::TypeSeq<ResultElems...>>,
+                    ddc::detail::TypeSeq<ResultElems...>,
+                    ddc::detail::TypeSeq<ResultElems..., HeadElem>>>::type;
+};
+
+template <class ResultTypeSeq>
+struct GetUnique<ddc::detail::TypeSeq<>, ResultTypeSeq>
+{
+    using type = ResultTypeSeq;
+};
+
 } // namespace detail
 
 /// A tool to get a subset of a TypeSeq by slicing [Start:End]
@@ -56,3 +76,11 @@ using type_seq_range_t = typename detail::TypeSeqRange<TypeSeqIn, Start, End, St
  */
 template <class... TypeSeqs>
 using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
+
+/**
+ * @brief Get a TypeSeq containing all unique types from the original TypeSeq.
+ * @tparam StartTypeSeq The original TypeSeq which may contain duplicate types.
+ */
+template <class StartTypeSeq>
+using type_seq_unique_t = typename detail::GetUnique<StartTypeSeq>::type;
+
