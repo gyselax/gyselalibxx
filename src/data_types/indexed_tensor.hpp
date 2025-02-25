@@ -2,8 +2,8 @@
 #pragma once
 
 #include "tensor.hpp"
-#include "tensor_index_set.hpp"
-#include "vector_index_set.hpp"
+#include "tensor_index_tools.hpp"
+#include "vector_index_tools.hpp"
 
 namespace tensor_tools {
 

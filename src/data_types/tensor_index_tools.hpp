@@ -110,14 +110,6 @@ struct ToTensorIndexElement<ValidatingTensorIndexSet, ddc::detail::TypeSeq<Valid
     using type = TensorIndexElement<ValidatingTensorIndexSet, ValidIndexSet...>;
 };
 
-} // namespace details
-
-template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
-using to_tensor_index_element_t = typename details::
-        ToTensorIndexElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
-
-namespace details {
-
 template <std::size_t Elem, std::size_t IdxDimHint, class TensorIndexSetType>
 struct GetNthTensorIndexElement
 {
@@ -131,7 +123,7 @@ struct GetNthTensorIndexElement
             ddc::detail::TypeSeq<ddc::type_seq_element_t<
                     Elem % ddc::type_seq_size_v<VectorIndexSetAlongDim>,
                     VectorIndexSetAlongDim>>>;
-    using type = to_tensor_index_element_t<TensorIndexSetType, tensor_index_type_seq>;
+    using type = typename ToTensorIndexElement<TensorIndexSetType, tensor_index_type_seq>::type;
 };
 
 template <std::size_t Elem, class TensorIndexSetType>
@@ -140,12 +132,272 @@ struct GetNthTensorIndexElement<Elem, 0, TensorIndexSetType>
     using tensor_index_type_seq = ddc::detail::TypeSeq<>;
 };
 
+template <
+        class TensorIndexMapType,
+        class StartElement,
+        std::size_t Dim,
+        class ResultTypeSeq = ddc::detail::TypeSeq<>>
+struct GetNthTensorIndexElementFromMap;
+
+template <class TensorIndexMapType, class StartElement, std::size_t Dim, class... ResultElems>
+struct GetNthTensorIndexElementFromMap<
+        TensorIndexMapType,
+        StartElement,
+        Dim,
+        ddc::detail::TypeSeq<ResultElems...>>
+{
+    using ValidIndex = ddc::type_seq_element_t<Dim - 1, typename TensorIndexMapType::AllIndices>;
+    using ContraValidIndex = VectorIndexIdMap<
+            ValidIndex::id,
+            get_contravariant_dims_t<typename ValidIndex::possible_idx_values>>;
+    static constexpr std::size_t RelevantElemIdx
+            = ddc::type_seq_rank_v<ContraValidIndex, typename TensorIndexMapType::unique_indices>;
+    using RelevantElem = typename StartElement::index_on_dim_t<RelevantElemIdx>;
+    using Elem = std::conditional_t<
+            is_contravariant_vector_index_set_v<typename ValidIndex::possible_idx_values>,
+            RelevantElem,
+            typename RelevantElem::Dual>;
+    using type = typename GetNthTensorIndexElementFromMap<
+            TensorIndexMapType,
+            StartElement,
+            Dim - 1,
+            ddc::detail::TypeSeq<Elem, ResultElems...>>::type;
+};
+
+template <class TensorIndexMapType, class StartElement, class... ResultElems>
+struct GetNthTensorIndexElementFromMap<
+        TensorIndexMapType,
+        StartElement,
+        0,
+        ddc::detail::TypeSeq<ResultElems...>>
+{
+    using type = ddc::detail::TypeSeq<ResultElems...>;
+};
+
+template <char search_char, class CharTypeSeq>
+struct CountChar;
+
+template <char search_char>
+struct CountChar<search_char, ddc::detail::TypeSeq<>>
+{
+    static constexpr std::size_t value = 0;
+};
+
+template <char search_char, class head_char_lit, class... char_lit>
+struct CountChar<search_char, ddc::detail::TypeSeq<head_char_lit, char_lit...>>
+{
+    static constexpr std::size_t value
+            = (head_char_lit::value == search_char)
+              + CountChar<search_char, ddc::detail::TypeSeq<char_lit...>>::value;
+};
+
+template <
+        class TypeSeqVectorIndexIdMap,
+        std::size_t Elem,
+        class IdsFound,
+        class ResultTuple = ddc::detail::TypeSeq<>>
+struct GetNonRepeatedIndices;
+
+template <class TypeSeqVectorIndexIdMap, std::size_t Elem, class IdsFound, class... OutIndices>
+struct GetNonRepeatedIndices<
+        TypeSeqVectorIndexIdMap,
+        Elem,
+        IdsFound,
+        ddc::detail::TypeSeq<OutIndices...>>
+{
+    using CurrentIndex = ddc::type_seq_element_t<Elem, TypeSeqVectorIndexIdMap>;
+    static constexpr char current_char = CurrentIndex::id;
+    static constexpr std::size_t n_count = CountChar<current_char, IdsFound>::value == 1;
+
+    using type = typename GetNonRepeatedIndices<
+            TypeSeqVectorIndexIdMap,
+            Elem - 1,
+            IdsFound,
+            std::conditional_t<
+                    CountChar<current_char, IdsFound>::value == 1,
+                    ddc::detail::TypeSeq<CurrentIndex, OutIndices...>,
+                    ddc::detail::TypeSeq<OutIndices...>>>::type;
+};
+
+template <class TypeSeqVectorIndexIdMap, class IdsFound, class... OutIndices>
+struct GetNonRepeatedIndices<
+        TypeSeqVectorIndexIdMap,
+        0,
+        IdsFound,
+        ddc::detail::TypeSeq<OutIndices...>>
+{
+    using CurrentIndex = ddc::type_seq_element_t<0, TypeSeqVectorIndexIdMap>;
+    static constexpr char current_char = CurrentIndex::id;
+    using type = std::conditional_t<
+            CountChar<current_char, IdsFound>::value == 1,
+            ddc::detail::TypeSeq<CurrentIndex, OutIndices...>,
+            ddc::detail::TypeSeq<OutIndices...>>;
+};
+
+template <
+        class TypeSeqVectorIndexIdMap,
+        std::size_t Elem,
+        class IdsFound,
+        class ResultTuple = ddc::detail::TypeSeq<>>
+struct GetRepeatedIndices;
+
+template <class TypeSeqVectorIndexIdMap, std::size_t Elem, class IdsFound, class ResultTypeSeq>
+struct GetRepeatedIndices
+{
+    using CurrentIndex = ddc::type_seq_element_t<
+            ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1 - Elem,
+            TypeSeqVectorIndexIdMap>;
+    static constexpr char current_char = CurrentIndex::id;
+    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
+    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
+
+    using type = typename GetRepeatedIndices<
+            TypeSeqVectorIndexIdMap,
+            Elem - 1,
+            IdsFound,
+            std::conditional_t<
+                    CountChar<current_char, IdsFound>::value == 1,
+                    ResultTypeSeq,
+                    ddc::type_seq_merge_t<ResultTypeSeq, InsertTypeSeq>>>::type;
+};
+
+template <class TypeSeqVectorIndexIdMap, class IdsFound, class ResultTypeSeq>
+struct GetRepeatedIndices<TypeSeqVectorIndexIdMap, 0, IdsFound, ResultTypeSeq>
+{
+    using CurrentIndex = ddc::type_seq_element_t<
+            ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
+            TypeSeqVectorIndexIdMap>;
+    static constexpr char current_char = CurrentIndex::id;
+    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
+    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
+
+    using type = std::conditional_t<
+            CountChar<current_char, IdsFound>::value == 1,
+            ResultTypeSeq,
+            ddc::type_seq_merge_t<ResultTypeSeq, InsertTypeSeq>>;
+};
+
+template <class TypeSeqVectorIndexIdMap>
+struct GetIndexIds;
+
+template <class... ValidIndexMap>
+struct GetIndexIds<ddc::detail::TypeSeq<ValidIndexMap...>>
+{
+    using type = ddc::detail::TypeSeq<std::integral_constant<char, ValidIndexMap::id>...>;
+};
+
+template <class StartTypeSeq, class ResultTypeSeq = ddc::detail::TypeSeq<>>
+struct GetUniqueIndices;
+
+template <class HeadElem, class... TailElems, class... ResultElems>
+struct GetUniqueIndices<
+        ddc::detail::TypeSeq<HeadElem, TailElems...>,
+        ddc::detail::TypeSeq<ResultElems...>>
+{
+    using InsertionType = VectorIndexIdMap<
+            HeadElem::id,
+            get_contravariant_dims_t<typename HeadElem::possible_idx_values>>;
+    using type = typename GetUniqueIndices<
+            ddc::detail::TypeSeq<TailElems...>,
+            std::conditional_t<
+                    ddc::in_tags_v<InsertionType, ddc::detail::TypeSeq<ResultElems...>>,
+                    ddc::detail::TypeSeq<ResultElems...>,
+                    ddc::detail::TypeSeq<ResultElems..., InsertionType>>>::type;
+};
+
+template <class ResultTypeSeq>
+struct GetUniqueIndices<ddc::detail::TypeSeq<>, ResultTypeSeq>
+{
+    using type = ResultTypeSeq;
+};
+
 } // namespace details
+
+/**
+ * @brief Count the number of instances of a character in a TypeSeq of literals.
+ * @tparam search_char The character that you are searching for.
+ * @tparam TupleType The type of the TypeSeq of integral_constants of characters.
+ */
+template <char search_char, class CharTypeSeq>
+std::size_t char_occurences_v = details::CountChar<search_char, CharTypeSeq>::value;
+
+template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
+using to_tensor_index_element_t = typename details::
+        ToTensorIndexElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
 
 template <std::size_t Elem, class TensorIndexSetType>
 using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElement<
         Elem,
         ddc::type_seq_size_v<TensorIndexSetType>,
         TensorIndexSetType>::type;
+
+template <std::size_t Elem, class TensorIndexMapType>
+using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
+        typename TensorIndexMapType::AllIndices,
+        typename details::GetNthTensorIndexElementFromMap<
+                TensorIndexMapType,
+                // unique_indices is not a TensorIndexSetType
+                get_nth_tensor_index_element_t<Elem, typename TensorIndexMapType::unique_indices>,
+                ddc::type_seq_size_v<typename TensorIndexMapType::AllIndices>>::type>;
+
+template <class TypeSeqVectorIndexIdMap>
+using non_repeated_indices_t = typename details::GetNonRepeatedIndices<
+        TypeSeqVectorIndexIdMap,
+        ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
+        typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type>::type;
+
+template <class TypeSeqVectorIndexIdMap>
+using repeated_indices_t = typename details::GetRepeatedIndices<
+        TypeSeqVectorIndexIdMap,
+        ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
+        typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type>::type;
+
+template <class TypeSeqVectorIndexIdMap>
+using unique_indices_t = typename details::GetUniqueIndices<TypeSeqVectorIndexIdMap>::type;
+
+
+template <class... ValidIndex>
+struct TensorIndexIdMap
+{
+public:
+    using AllIndices = ddc::detail::TypeSeq<ValidIndex...>;
+
+private:
+    using AllUniqueIndices = type_seq_unique_t<AllIndices>;
+
+    static_assert(
+            std::is_same_v<AllIndices, AllUniqueIndices>,
+            "You should not have more than two of any one index in an index expression. "
+            "Additionally repeated indices should not be associated with two covariant or two "
+            "contravariant indices.");
+
+    using char_indices = ddc::detail::TypeSeq<std::integral_constant<char, ValidIndex::id>...>;
+
+    template <std::size_t... I>
+    static constexpr std::size_t internal_rank(std::index_sequence<I...>)
+    {
+        return 0
+               + ((char_occurences_v<
+                           ddc::type_seq_element_t<I, char_indices>::value,
+                           char_indices> == 1)
+                  + ...);
+    }
+
+public:
+    static constexpr std::size_t rank()
+    {
+        return internal_rank(std::make_index_sequence<ddc::type_seq_size_v<AllIndices>>());
+    }
+
+    using result_indices = non_repeated_indices_t<AllIndices>;
+    using sum_indices = repeated_indices_t<AllIndices>;
+    using unique_indices = unique_indices_t<AllIndices>;
+    using vector_index_sets = ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>;
+
+    //static constexpr std::size_t size()
+    //{
+    //    return to_tensor_idx_set_t<unique_indices>::size();
+    //}
+};
 
 } // namespace tensor_tools

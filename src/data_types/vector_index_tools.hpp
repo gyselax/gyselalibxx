@@ -108,6 +108,22 @@ struct vector_index_set_dual<VectorIndexSet<Dims...>>
     using type = VectorIndexSet<typename Dims::Dual...>;
 };
 
+/**
+ * @brief A class representing a vector index identifier.
+ *
+ * A vector is indexed at a certain position using an identifier (a character)
+ * which can take one of multiple possible values (types).
+ *
+ * @tparam Id The character identifying the index.
+ * @tparam ValidVectorIdxSet The VectorIndexSet describing valid indices.
+ */
+template <char Id, class ValidVectorIdxSet>
+struct VectorIndexIdMap
+{
+    static constexpr char id = Id;
+    using possible_idx_values = ValidVectorIdxSet;
+};
+
 } // namespace tensor_tools
 
 template <class Type>
