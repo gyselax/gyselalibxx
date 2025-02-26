@@ -268,7 +268,7 @@ TEST(TensorTools, ExtractElement)
     using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
     using GlobalTensorIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet_cov, IdxSet, IdxSet>;
     using LocalTensorIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet_cov>;
-    using GlobalTensorIndexIdMap = TensorIndexIdMap<
+    using GlobalTensorIndexIdMap = ddc::detail::TypeSeq<
             VectorIndexIdMap<'i', IdxSet>,
             VectorIndexIdMap<'j', IdxSet_cov>,
             VectorIndexIdMap<'j', IdxSet>,

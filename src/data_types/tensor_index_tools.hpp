@@ -364,12 +364,12 @@ private:
 
 namespace details {
 
-template <class GlobalTensorIndexIdMap, class LocalTensorIndexIdMap, class GlobalTensorIndexElement>
+template <class TypeSeqVectorIndexIdMapGlobal, class LocalTensorIndexIdMap, class GlobalTensorIndexElement>
 struct ExtractSubTensorElement;
 
-template <class GlobalTensorIndexIdMap, class... ValidIndex, class GlobalTensorIndexElement>
+template <class TypeSeqVectorIndexIdMapGlobal, class... ValidIndex, class GlobalTensorIndexElement>
 struct ExtractSubTensorElement<
-        GlobalTensorIndexIdMap,
+        TypeSeqVectorIndexIdMapGlobal,
         TensorIndexIdMap<ValidIndex...>,
         GlobalTensorIndexElement>
 {
@@ -377,7 +377,7 @@ struct ExtractSubTensorElement<
             ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>,
             typename GlobalTensorIndexElement::index_on_dim_t<ddc::type_seq_rank_v<
                     ValidIndex,
-                    typename GlobalTensorIndexIdMap::AllIndices>>...>;
+                    TypeSeqVectorIndexIdMapGlobal>>...>;
 };
 
 template <class TypeSeqValidIndex>
@@ -414,9 +414,9 @@ struct ConcatenateTensorIndexIdMaps<
 
 } // namespace details
 
-template <class GlobalTensorIndexIdMap, class LocalTensorIndexIdMap, class GlobalTensorIndexElement>
+template <class TypeSeqVectorIndexIdMapGlobal, class LocalTensorIndexIdMap, class GlobalTensorIndexElement>
 using extract_sub_tensor_element_t = typename details::ExtractSubTensorElement<
-        GlobalTensorIndexIdMap,
+        TypeSeqVectorIndexIdMapGlobal,
         LocalTensorIndexIdMap,
         GlobalTensorIndexElement>::type;
 
