@@ -186,4 +186,4 @@ jobs:
     - name: Spell Check Repo
       uses: crate-ci/typos@v1.29.10
       with:
-        files: ./AUTHORS ./CMakeLists.txt ./docs/ ./README.md ./tests/ ./toolchains
+        files: ./AUTHORS ./CMakeLists.txt ./docs/ ./README.md ./simulations ./src ./tests/ ./toolchains
