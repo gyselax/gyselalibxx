@@ -56,7 +56,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the metric tensor.
-     * @param[out] metric_tensor
+     * @return metric_tensor
      * 				A DTensor object containing the value of the metric tensor.
      */
     KOKKOS_FUNCTION DTensor<Dims, Dims> operator()(PositionCoordinate const& coord) const
@@ -79,7 +79,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the metric tensor.
-     * @param[out] inverse_metric_tensor
+     * @return inverse_metric_tensor
      * 				A DTensor object containing the value of the inverse of the metric tensor.
      */
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> inverse(PositionCoordinate const& coord) const
