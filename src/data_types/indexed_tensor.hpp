@@ -185,7 +185,7 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
         details::internal_tensor_mul<GlobalTensorIndexIdMap>(
                 result,
                 std::make_index_sequence<details::CalculateSize<
-                        typename GlobalTensorIndexIdMap::unique_indices>::value>(),
+                        unique_indices_t<typename GlobalTensorIndexIdMap::AllIndices>>::value>(),
                 tensor_to_mul...);
         return result;
     } else {
@@ -197,7 +197,7 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
         details::internal_tensor_mul<GlobalTensorIndexIdMap>(
                 indexed_result,
                 std::make_index_sequence<details::CalculateSize<
-                        typename GlobalTensorIndexIdMap::unique_indices>::value>(),
+                        unique_indices_t<typename GlobalTensorIndexIdMap::AllIndices>>::value>(),
                 tensor_to_mul...);
         return result;
     }
