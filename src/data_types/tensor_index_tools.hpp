@@ -25,10 +25,6 @@ inline constexpr bool
         enable_tensor_index_element<TensorIndexElement<ValidatingTensorIndexSet, Dims...>> = true;
 } // namespace details
 
-template <typename Type>
-inline constexpr bool is_tensor_index_element_v
-        = details::enable_tensor_index_element<std::remove_const_t<std::remove_reference_t<Type>>>;
-
 template <class... ValidatingVectorIndexSets, class... Dims>
 class TensorIndexElement<ddc::detail::TypeSeq<ValidatingVectorIndexSets...>, Dims...>
 {
@@ -101,7 +97,7 @@ public:
 
 namespace details {
 
-template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
+template <class ValidatingTensorIndexSet, class TypeSeqTensorIndexTag>
 struct ToTensorIndexElement;
 
 template <class ValidatingTensorIndexSet, class... ValidIndexSet>
@@ -158,6 +154,14 @@ struct CountChar<search_char, ddc::detail::TypeSeq<head_char_lit, char_lit...>>
 } // namespace details
 
 //-------------------------------------------------------------------------------------------
+
+/**
+ * @brief A helper to check if a type is a TensorIndexElement.
+ */
+template <typename Type>
+inline constexpr bool is_tensor_index_element_v
+        = details::enable_tensor_index_element<std::remove_const_t<std::remove_reference_t<Type>>>;
+
 /**
  * @brief Count the number of instances of a character in a TypeSeq of literals.
  * @tparam search_char The character that you are searching for.
@@ -167,13 +171,22 @@ template <char search_char, class CharTypeSeq>
 constexpr std::size_t char_occurences_v = details::CountChar<search_char, CharTypeSeq>::value;
 
 /**
+ * @brief Get a TensorIndexElement from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices.
+ * @tparam ValidatingTensorIndexSet A TypeSeq containing the VectorIndexSets describing the tags
+ *                  that can be used as indices in each dimension.
+ * @tparam TypeSeqTensorIndexTag A TypeSeq containing the tags used to index the tensor.
  */
-template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
+template <class ValidatingTensorIndexSet, class TypeSeqTensorIndexTag>
 using to_tensor_index_element_t = typename details::
-        ToTensorIndexElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
+        ToTensorIndexElement<ValidatingTensorIndexSet, TypeSeqTensorIndexTag>::type;
 
+/**
+ * @brief Get a TypeSeq of valid VectorIndexSets from a TypeSeq of VectorIndexIdMaps.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
 template <class TypeSeqVectorIndexIdMap>
-using get_type_seq_index_set_t =
+using get_type_seq_vector_index_set_t =
         typename details::ExtractTypeSeqIndexSet<TypeSeqVectorIndexIdMap>::type;
 
 //-------------------------------------------------------------------------------------------
@@ -252,9 +265,21 @@ struct GetNonRepeatedIndices<
 
 //-------------------------------------------------------------------------------------------
 
+/**
+ * @brief Create a TypeSeq of VectorIndexIdMap in which each character id only appears once
+ * from a TypeSeq of VectorIndexIdMaps with repeat character ids.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
 template <class TypeSeqVectorIndexIdMap>
 using unique_indices_t = typename details::GetUniqueIndices<TypeSeqVectorIndexIdMap>::type;
 
+/**
+ * @brief Extract the VectorIndexIdMaps whose character id only appears once in a TypeSeq of
+ * VectorIndexIdMaps.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
 template <class TypeSeqVectorIndexIdMap>
 using non_repeated_indices_t = typename details::GetNonRepeatedIndices<
         TypeSeqVectorIndexIdMap,
@@ -265,24 +290,24 @@ using non_repeated_indices_t = typename details::GetNonRepeatedIndices<
 
 namespace details {
 
-template <std::size_t Elem, std::size_t IdxDimHint, class TensorIndexSetType>
+template <std::size_t Elem, std::size_t IdxDimHint, class TypeSeqVectorIndexSet>
 struct GetNthTensorIndexElement
 {
     static constexpr std::size_t IdxDim = IdxDimHint - 1;
-    using VectorIndexSetAlongDim = ddc::type_seq_element_t<IdxDim, TensorIndexSetType>;
+    using VectorIndexSetAlongDim = ddc::type_seq_element_t<IdxDim, TypeSeqVectorIndexSet>;
     using tensor_index_type_seq = type_seq_cat_t<
             typename GetNthTensorIndexElement<
                     Elem / ddc::type_seq_size_v<VectorIndexSetAlongDim>,
                     IdxDimHint - 1,
-                    TensorIndexSetType>::tensor_index_type_seq,
+                    TypeSeqVectorIndexSet>::tensor_index_type_seq,
             ddc::detail::TypeSeq<ddc::type_seq_element_t<
                     Elem % ddc::type_seq_size_v<VectorIndexSetAlongDim>,
                     VectorIndexSetAlongDim>>>;
-    using type = typename ToTensorIndexElement<TensorIndexSetType, tensor_index_type_seq>::type;
+    using type = to_tensor_index_element_t<TypeSeqVectorIndexSet, tensor_index_type_seq>;
 };
 
-template <std::size_t Elem, class TensorIndexSetType>
-struct GetNthTensorIndexElement<Elem, 0, TensorIndexSetType>
+template <std::size_t Elem, class TypeSeqVectorIndexSet>
+struct GetNthTensorIndexElement<Elem, 0, TypeSeqVectorIndexSet>
 {
     using tensor_index_type_seq = ddc::detail::TypeSeq<>;
 };
@@ -347,25 +372,67 @@ struct ExtractSubTensorElement<
                     ddc::type_seq_rank_v<ValidIndex, TypeSeqVectorIndexIdMapGlobal>>...>;
 };
 
-
 } // namespace details
 
-template <std::size_t Elem, class TensorIndexSetType>
-using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElement<
-        Elem,
-        ddc::type_seq_size_v<TensorIndexSetType>,
-        TensorIndexSetType>::type;
+//-------------------------------------------------------------------------------------------
 
+/**
+ * @brief Get the TensorIndexElement which indexes a Tensor at the n-th position of its internal
+ * array. E.g. for a 2x2 Tensor, get_nth_tensor_index_element_t<1, TypeSeqVectorIndexSet> returns
+ * the TensorIndexElement which indexes element 1 of the array, so the element {0,1} of the tensor.
+ * @tparam IndexPosition The index of the underlying array for which we want to collect the
+ *                      TensorIndexElement.
+ * @tparam TypeSeqVectorIndexSet A TypeSeq containing the VectorIndexSets describing the valid
+ *                      indices along each dimension of the tensor.
+ */
+template <std::size_t IndexPosition, class TypeSeqVectorIndexSet>
+using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElement<
+        IndexPosition,
+        ddc::type_seq_size_v<TypeSeqVectorIndexSet>,
+        TypeSeqVectorIndexSet>::type;
+
+/**
+ * @brief Get the n-th valid index for a tensor which is accessed according to the pattern
+ * described by a TypeSeq of VectorIndexIdMaps.
+ * E.g. for a 2D tensor with components A_{xx}, A_{xy}, A_{yx}, A_{yy}, indexed with
+ * @code
+ * TypeSeq<VectorIndexIdMap<'i', VectorIndexSet<X, Y>>, VectorIndexIdMap<'i', VectorIndexSet<X, Y>>>
+ * @endcode
+ *
+ * - the 1st element is TensorIndexElement<TypeSeq<VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>, X, X>
+ * - the 2nd element is TensorIndexElement<TypeSeq<VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>, Y, Y>
+ *
+ * A_{xy} and A_{yx} are not valid components as they do not respect the index pattern.
+ *
+ * @tparam Elem The element of interest.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
 template <std::size_t Elem, class TypeSeqVectorIndexIdMap>
 using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
-        get_type_seq_index_set_t<TypeSeqVectorIndexIdMap>,
+        get_type_seq_vector_index_set_t<TypeSeqVectorIndexIdMap>,
         typename details::GetNthTensorIndexElementFromMap<
                 TypeSeqVectorIndexIdMap,
                 get_nth_tensor_index_element_t<
                         Elem,
-                        get_type_seq_index_set_t<unique_indices_t<TypeSeqVectorIndexIdMap>>>,
+                        get_type_seq_vector_index_set_t<unique_indices_t<TypeSeqVectorIndexIdMap>>>,
                 ddc::type_seq_size_v<TypeSeqVectorIndexIdMap>>::type>;
 
+/**
+ * @brief Extract the relevant elements of a TensorIndexElement to create a sub-TensorIndexElement
+ * using a global and a local TypeSeq of VectorIndexIdMaps to identify the relevant elements.
+ * For example:
+ * for GlobalTensorIndexElement = TensorIndexElement<X,Y>
+ * with TypeSeqVectorIndexIdMapGlobal = TypeSeq<VectorIndexIdMap<'i', VectorIndexSet<X, Y>>, VectorIndexIdMap<'j', VectorIndexSet<X, Y>>>
+ * and TypeSeqVectorIndexIdMapLocal = TypeSeq<VectorIndexIdMap<'j', VectorIndexSet<X, Y>>>
+ * we obtain TensorIndexElement<Y>
+ *
+ * @tparam TypeSeqVectorIndexIdMapGlobal The global TypeSeq of VectorIndexIdMaps describing how the
+ *              TensorIndexElement was indexed.
+ * @tparam TypeSeqVectorIndexIdMapLocal The local TypeSeq of VectorIndexIdMaps describing how to
+ *              identify the relevant indices for the output.
+ * @tparam GlobalTensorIndexElement The starting TensorIndexElement.
+ */
 template <
         class TypeSeqVectorIndexIdMapGlobal,
         class TypeSeqVectorIndexIdMapLocal,

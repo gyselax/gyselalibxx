@@ -9,6 +9,10 @@
 template <class... Dims>
 using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
 
+/**
+ * @namespace tensor_tools A namespace to group all the tools that are useful to
+ * carry out non-trivial operations on tensors.
+ */
 namespace tensor_tools {
 
 /**

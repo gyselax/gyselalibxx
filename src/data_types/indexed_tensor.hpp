@@ -196,7 +196,7 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
         return result;
     } else {
         using ResultTensorType
-                = to_tensor_t<ElementType, get_type_seq_index_set_t<ResultIndexTypeSeq>>;
+                = to_tensor_t<ElementType, get_type_seq_vector_index_set_t<ResultIndexTypeSeq>>;
         ResultTensorType result(0.0);
         IndexedTensor<ResultTensorType, ResultIndexTypeSeq> indexed_result(result);
         details::internal_tensor_mul<AllIndexIdMaps>(
