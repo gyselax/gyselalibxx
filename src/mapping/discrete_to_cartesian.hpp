@@ -8,6 +8,7 @@
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
 #include "math_tools.hpp"
+#include "tensor.hpp"
 #include "view.hpp"
 
 /**
@@ -56,6 +57,15 @@ public:
     using CoordArg = Coord<R, Theta>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<X, Y>;
+
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+    /// @brief The covariant form of the first logical coordinate.
+    using R_cov = typename R::Dual;
+    /// @brief The covariant form of the second logical coordinate.
+    using Theta_cov = typename Theta::Dual;
 
 private:
     using spline_idx_range = IdxRange<BSplineR, BSplineTheta>;
@@ -149,18 +159,19 @@ public:
      * @param[out] matrix
      * 				The Jacobian matrix returned.
      */
-    KOKKOS_FUNCTION void jacobian_matrix(
-            Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord,
-            Matrix_2x2& matrix) const
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
+            Coord<R, Theta> const& coord) const
     {
-        matrix[0][0]
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix;
+        ddcHelper::get<X, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
-        matrix[0][1]
+        ddcHelper::get<X, Theta_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));
-        matrix[1][0]
+        ddcHelper::get<Y, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        matrix[1][1]
+        ddcHelper::get<Y, Theta_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));
+        return jacobian_matrix;
     }
 
     /**
@@ -262,9 +273,9 @@ public:
     KOKKOS_FUNCTION double jacobian(
             Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        Matrix_2x2 J;
-        jacobian_matrix(coord, J);
-        return determinant(J);
+        Tensor J = jacobian_matrix(coord);
+        return ddcHelper::get<X, R_cov>(J) * ddcHelper::get<Y, Theta_cov>(J)
+               - ddcHelper::get<Y, R_cov>(J) * ddcHelper::get<X, Theta_cov>(J);
     }
 
     /**
@@ -281,19 +292,20 @@ public:
      *
      * @return The first order expansion of the Jacobian matrix with the theta component divided by r.
      */
-    KOKKOS_INLINE_FUNCTION Matrix_2x2 first_order_jacobian_matrix_r_rtheta(
+    KOKKOS_INLINE_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>>
+    first_order_jacobian_matrix_r_rtheta(
             Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        Matrix_2x2 matrix;
-        matrix[0][0]
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix;
+        ddcHelper::get<X, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
-        matrix[0][1] = m_spline_evaluator
-                               .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
-        matrix[1][0]
+        ddcHelper::get<X, Theta_cov>(jacobian_matrix)
+                .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
+        ddcHelper::get<Y, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        matrix[1][1] = m_spline_evaluator
-                               .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
-        return matrix;
+        ddcHelper::get<X, Theta_cov>(jacobian_matrix)
+                .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
+        return jacobian_matrix;
     }
 
     /**
