@@ -20,18 +20,47 @@
 namespace {
 struct X
 {
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = X;
 };
 struct Y
 {
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Y;
 };
+struct R_cov;
+struct Theta_cov;
 struct R
 {
     static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = R_cov;
 };
 
 struct Theta
 {
     static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Theta_cov;
+};
+struct R_cov
+{
+    static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    using Dual = R;
+};
+
+struct Theta_cov
+{
+    static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = false;
+    using Dual = Theta;
 };
 
 using CoordR = Coord<R>;
@@ -120,20 +149,47 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
  * @param[in] inv_matrix
  * 			The inverse Jacobian matrix of the mapping.
  */
-void check_inverse(Matrix_2x2 matrix, Matrix_2x2 inv_matrix)
+template <class StartDims, class EndDims>
+void check_inverse_tensor(
+        DTensor<StartDims, EndDims> const& tensor,
+        DTensor<vector_index_set_dual_t<EndDims>, vector_index_set_dual_t<StartDims>> const&
+                inv_tensor)
 {
-    const double TOL = 1e-15;
-    constexpr std::size_t N = 2;
+    double TOL = 1e-10;
 
-    for (std::size_t i(0); i < N; ++i) {
-        for (std::size_t j(0); j < N; ++j) {
-            double id_val = 0.0;
-            for (std::size_t k(0); k < N; ++k) {
-                id_val += matrix[i][k] * inv_matrix[k][j];
-            }
-            EXPECT_NEAR(id_val, static_cast<double>(i == j), TOL);
-        }
-    }
+    using StartDim0 = ddc::type_seq_element_t<0, StartDims>;
+    using StartDim1 = ddc::type_seq_element_t<1, StartDims>;
+    using StartDim0_cov = typename StartDim0::Dual;
+    using StartDim1_cov = typename StartDim1::Dual;
+
+    using EndDim0_cov = ddc::type_seq_element_t<0, EndDims>;
+    using EndDim1_cov = ddc::type_seq_element_t<1, EndDims>;
+    using EndDim0 = typename EndDim0_cov::Dual;
+    using EndDim1 = typename EndDim1_cov::Dual;
+
+    double const id_val00 = ddcHelper::get<StartDim0, EndDim0_cov>(tensor)
+                                    * ddcHelper::get<EndDim0, StartDim0_cov>(inv_tensor)
+                            + ddcHelper::get<StartDim0, EndDim1_cov>(tensor)
+                                      * ddcHelper::get<EndDim1, StartDim0_cov>(inv_tensor);
+    EXPECT_NEAR(id_val00, 1., TOL);
+
+    double const id_val01 = ddcHelper::get<StartDim0, EndDim0_cov>(tensor)
+                                    * ddcHelper::get<EndDim0, StartDim1_cov>(inv_tensor)
+                            + ddcHelper::get<StartDim0, EndDim1_cov>(tensor)
+                                      * ddcHelper::get<EndDim1, StartDim1_cov>(inv_tensor);
+    EXPECT_NEAR(id_val01, 0., TOL);
+
+    double const id_val10 = ddcHelper::get<StartDim1, EndDim0_cov>(tensor)
+                                    * ddcHelper::get<EndDim0, StartDim0_cov>(inv_tensor)
+                            + ddcHelper::get<StartDim1, EndDim1_cov>(tensor)
+                                      * ddcHelper::get<EndDim1, StartDim0_cov>(inv_tensor);
+    EXPECT_NEAR(id_val10, 0., TOL);
+
+    double const id_val11 = ddcHelper::get<StartDim1, EndDim0_cov>(tensor)
+                                    * ddcHelper::get<EndDim0, StartDim1_cov>(inv_tensor)
+                            + ddcHelper::get<StartDim1, EndDim1_cov>(tensor)
+                                      * ddcHelper::get<EndDim1, StartDim1_cov>(inv_tensor);
+    EXPECT_NEAR(id_val11, 1., TOL);
 }
 
 } // namespace
@@ -161,12 +217,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irp));
-
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-
-        check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+        check_inverse_tensor(mapping.jacobian_matrix(coords(irp)), inv_jacobian(coords(irp)));
     });
 }
 
@@ -184,13 +235,9 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix;
-
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-        mapping.inv_jacobian_matrix(coords(irp), inv_Jacobian_matrix);
-
-        check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+        check_inverse_tensor(
+                mapping.jacobian_matrix(coords(irp)),
+                mapping.inv_jacobian_matrix(coords(irp)));
     });
 }
 
@@ -246,12 +293,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
         const CoordRTheta coord_rp(ddc::coordinate(irp));
         const double r = ddc::get<R>(coord_rp);
         if (fabs(r) > 1e-15) {
-            Matrix_2x2 Jacobian_matrix;
-            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rp);
-
-            mapping.jacobian_matrix(coord_rp, Jacobian_matrix);
-
-            check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+            check_inverse_tensor(mapping.jacobian_matrix(coord_rp), inv_jacobian(coord_rp));
         }
     });
 }
