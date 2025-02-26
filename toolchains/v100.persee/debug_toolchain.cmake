@@ -6,6 +6,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # Compiler options
 set(CMAKE_CXX_COMPILER nvcc_wrapper)
+set(CMAKE_CXX_EXTENSIONS OFF) # Avoid a Kokkos warning that will force if to OFF anyway when compiling with nvcc
 set(CMAKE_CXX_FLAGS "-g -Wall -Werror -Wno-sign-compare -Xcudafe --diag_suppress=unsigned_compare_with_zero -Xcudafe --diag_suppress=integer_sign_change -Wno-unused-but-set-variable")
 
 # Activate/deactivate parts of the code
