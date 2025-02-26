@@ -319,7 +319,7 @@ TEST(TensorTools, IndexedTensorBuild)
     IndexedTensor G_idx = index<'i', 'j', 'k'>(G);
     static_assert(std::is_same_v<
                   typename decltype(G_idx)::index_pattern,
-                  TensorIndexIdMap<
+                  ddc::detail::TypeSeq<
                           VectorIndexIdMap<'i', IdxSet>,
                           VectorIndexIdMap<'j', IdxSet_cov>,
                           VectorIndexIdMap<'k', IdxSet>>>);

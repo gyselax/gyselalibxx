@@ -329,41 +329,6 @@ struct GetNthTensorIndexElementFromMap<
     using type = ddc::detail::TypeSeq<ResultElems...>;
 };
 
-} // namespace details
-
-template <std::size_t Elem, class TensorIndexSetType>
-using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElement<
-        Elem,
-        ddc::type_seq_size_v<TensorIndexSetType>,
-        TensorIndexSetType>::type;
-
-template <std::size_t Elem, class TypeSeqVectorIndexIdMap>
-using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
-        get_type_seq_index_set_t<TypeSeqVectorIndexIdMap>,
-        typename details::GetNthTensorIndexElementFromMap<
-                TypeSeqVectorIndexIdMap,
-                get_nth_tensor_index_element_t<
-                        Elem,
-                        get_type_seq_index_set_t<unique_indices_t<TypeSeqVectorIndexIdMap>>>,
-                ddc::type_seq_size_v<TypeSeqVectorIndexIdMap>>::type>;
-
-
-template <class... ValidIndex>
-struct TensorIndexIdMap
-{
-public:
-    using AllIndices = ddc::detail::TypeSeq<ValidIndex...>;
-
-private:
-    static_assert(
-            std::is_same_v<AllIndices, type_seq_unique_t<AllIndices>>,
-            "You should not have more than two of any one index in an index expression. "
-            "Additionally repeated indices should not be associated with two covariant or two "
-            "contravariant indices.");
-};
-
-namespace details {
-
 template <
         class TypeSeqVectorIndexIdMapGlobal,
         class TypeSeqVectorIndexIdMapLocal,
@@ -382,39 +347,24 @@ struct ExtractSubTensorElement<
                     ddc::type_seq_rank_v<ValidIndex, TypeSeqVectorIndexIdMapGlobal>>...>;
 };
 
-template <class TypeSeqValidIndex>
-struct ToTensorIndexIdMap;
-
-template <class... ValidIndex>
-struct ToTensorIndexIdMap<ddc::detail::TypeSeq<ValidIndex...>>
-{
-    using type = TensorIndexIdMap<ValidIndex...>;
-};
-
-template <class... TensorIndexIdMaps>
-struct ConcatenateTensorIndexIdMaps;
-
-template <class TensorIndexIdMapHead1, class TensorIndexIdMapHead2, class... TensorIndexIdMaps>
-struct ConcatenateTensorIndexIdMaps<
-        TensorIndexIdMapHead1,
-        TensorIndexIdMapHead2,
-        TensorIndexIdMaps...>
-{
-    using type = typename ConcatenateTensorIndexIdMaps<
-            typename ConcatenateTensorIndexIdMaps<TensorIndexIdMapHead1, TensorIndexIdMapHead2>::
-                    type,
-            TensorIndexIdMaps...>::type;
-};
-
-template <class... ValidIndex1, class... ValidIndex2>
-struct ConcatenateTensorIndexIdMaps<
-        TensorIndexIdMap<ValidIndex1...>,
-        TensorIndexIdMap<ValidIndex2...>>
-{
-    using type = TensorIndexIdMap<ValidIndex1..., ValidIndex2...>;
-};
 
 } // namespace details
+
+template <std::size_t Elem, class TensorIndexSetType>
+using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElement<
+        Elem,
+        ddc::type_seq_size_v<TensorIndexSetType>,
+        TensorIndexSetType>::type;
+
+template <std::size_t Elem, class TypeSeqVectorIndexIdMap>
+using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
+        get_type_seq_index_set_t<TypeSeqVectorIndexIdMap>,
+        typename details::GetNthTensorIndexElementFromMap<
+                TypeSeqVectorIndexIdMap,
+                get_nth_tensor_index_element_t<
+                        Elem,
+                        get_type_seq_index_set_t<unique_indices_t<TypeSeqVectorIndexIdMap>>>,
+                ddc::type_seq_size_v<TypeSeqVectorIndexIdMap>>::type>;
 
 template <
         class TypeSeqVectorIndexIdMapGlobal,
@@ -424,12 +374,5 @@ using extract_sub_tensor_element_t = typename details::ExtractSubTensorElement<
         TypeSeqVectorIndexIdMapGlobal,
         TypeSeqVectorIndexIdMapLocal,
         GlobalTensorIndexElement>::type;
-
-template <class TypeSeqValidIndex>
-using to_tensor_index_id_map_t = typename details::ToTensorIndexIdMap<TypeSeqValidIndex>::type;
-
-template <class... TensorIndexIdMaps>
-using concatenate_tensor_index_id_maps_t =
-        typename details::ConcatenateTensorIndexIdMaps<TensorIndexIdMaps...>::type;
 
 } // namespace tensor_tools

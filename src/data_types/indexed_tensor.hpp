@@ -21,17 +21,23 @@ inline constexpr bool enable_indexed_tensor = false;
  * to the index<...> function and is an input to the tensor_mul function.
  *
  * @tparam TensorType The tensor being indexed.
- * @tparam TensorIndexIdMapType A TensorIndexIdMap describing the indices used to access
- *              the tensor.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing VectorIndexIdMaps describing the
+ *              indices used to access the tensor.
  */
-template <class TensorType, class TensorIndexIdMapType>
+template <class TensorType, class TypeSeqVectorIndexIdMap>
 class IndexedTensor
 {
 public:
     /// The TensorIndexIdMap describing how the tensor is indexed.
-    using index_pattern = TensorIndexIdMapType;
+    using index_pattern = TypeSeqVectorIndexIdMap;
     /// The type of the tensor being indexed.
     using tensor_type = TensorType;
+
+    static_assert(
+            std::is_same_v<index_pattern, type_seq_unique_t<index_pattern>>,
+            "You should not have more than two of any one index in an index expression. "
+            "Additionally repeated indices should not be associated with two covariant or two "
+            "contravariant indices.");
 
 private:
     TensorType& m_tensor;
@@ -54,8 +60,9 @@ public:
 };
 
 /// A boolean, true if the type is an IndexedTensor.
-template <class TensorType, class TensorIdxIdMapType>
-inline constexpr bool enable_indexed_tensor<IndexedTensor<TensorType, TensorIdxIdMapType>> = true;
+template <class TensorType, class TypeSeqVectorIndexIdMap>
+inline constexpr bool
+        enable_indexed_tensor<IndexedTensor<TensorType, TypeSeqVectorIndexIdMap>> = true;
 
 /// A tool to check if a type is an IndexedTensor
 template <class Type>
@@ -76,7 +83,7 @@ auto internal_index(TensorType& tensor, std::index_sequence<I...>)
 {
     return IndexedTensor<
             TensorType,
-            TensorIndexIdMap<VectorIndexIdMap<
+            ddc::detail::TypeSeq<VectorIndexIdMap<
                     ddc::type_seq_element_t<I, TypeSeqCharIds>::value,
                     typename TensorType::vector_index_set_t<I>>...>>(tensor);
 }
@@ -90,24 +97,22 @@ void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType
 {
     using TensorTuple = std::tuple<typename IndexedTensorType::tensor_type...>;
     using ElementType = typename std::tuple_element_t<0, TensorTuple>::element_type;
-    using Idx = get_nth_tensor_index_element_from_map_t<
-            Is,
-            typename GlobalTensorIndexIdMap::AllIndices>;
+    using Idx = get_nth_tensor_index_element_from_map_t<Is, GlobalTensorIndexIdMap>;
     if constexpr (std::is_same_v<ResultIndexedTensorType, ElementType>) {
         result
                 += ((t().template get<extract_sub_tensor_element_t<
-                             typename GlobalTensorIndexIdMap::AllIndices,
-                             typename IndexedTensorType::index_pattern::AllIndices,
+                             GlobalTensorIndexIdMap,
+                             typename IndexedTensorType::index_pattern,
                              Idx>>())
                     * ...);
     } else {
         result().template get<extract_sub_tensor_element_t<
-                typename GlobalTensorIndexIdMap::AllIndices,
-                typename ResultIndexedTensorType::index_pattern::AllIndices,
+                GlobalTensorIndexIdMap,
+                typename ResultIndexedTensorType::index_pattern,
                 Idx>>()
                 += (t().template get<extract_sub_tensor_element_t<
-                            typename GlobalTensorIndexIdMap::AllIndices,
-                            typename IndexedTensorType::index_pattern::AllIndices,
+                            GlobalTensorIndexIdMap,
+                            typename IndexedTensorType::index_pattern,
                             Idx>>()
                     * ...);
     }
@@ -169,9 +174,8 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
             std::conjunction_v<
                     std::integral_constant<bool, is_indexed_tensor_v<IndexedTensorType>>...>,
             "A tensor multiplication must be carried out over IndexedTensor objects");
-    // Get the TensorIndexMap describing all the indices which appear in the calculation.
-    using GlobalTensorIndexIdMap
-            = concatenate_tensor_index_id_maps_t<typename IndexedTensorType::index_pattern...>;
+    // Get the TypeSeq of VectorIndexIdMaps describing all the indices which appear in the calculation.
+    using AllIndexIdMaps = type_seq_cat_t<typename IndexedTensorType::index_pattern...>;
     // Use the first tensor argument to extract the element type of the result.
     using ElementType = std::tuple_element_t<
             0,
@@ -181,26 +185,24 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
                     typename IndexedTensorType::tensor_type::element_type,
                     ElementType>...>,
             "All tensors must have the same element type");
-    using ResultIndexTypeSeq = non_repeated_indices_t<typename GlobalTensorIndexIdMap::AllIndices>;
+    using ResultIndexTypeSeq = non_repeated_indices_t<AllIndexIdMaps>;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
         ElementType result = 0.0;
-        details::internal_tensor_mul<GlobalTensorIndexIdMap>(
+        details::internal_tensor_mul<AllIndexIdMaps>(
                 result,
-                std::make_index_sequence<details::CalculateSize<
-                        unique_indices_t<typename GlobalTensorIndexIdMap::AllIndices>>::value>(),
+                std::make_index_sequence<
+                        details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
                 tensor_to_mul...);
         return result;
     } else {
-        using ResultTensorIndexIdMap = to_tensor_index_id_map_t<ResultIndexTypeSeq>;
-        using ResultTensorType = to_tensor_t<
-                ElementType,
-                get_type_seq_index_set_t<typename ResultTensorIndexIdMap::AllIndices>>;
+        using ResultTensorType
+                = to_tensor_t<ElementType, get_type_seq_index_set_t<ResultIndexTypeSeq>>;
         ResultTensorType result(0.0);
-        IndexedTensor<ResultTensorType, ResultTensorIndexIdMap> indexed_result(result);
-        details::internal_tensor_mul<GlobalTensorIndexIdMap>(
+        IndexedTensor<ResultTensorType, ResultIndexTypeSeq> indexed_result(result);
+        details::internal_tensor_mul<AllIndexIdMaps>(
                 indexed_result,
-                std::make_index_sequence<details::CalculateSize<
-                        unique_indices_t<typename GlobalTensorIndexIdMap::AllIndices>>::value>(),
+                std::make_index_sequence<
+                        details::CalculateSize<unique_indices_t<AllIndexIdMaps>>::value>(),
                 tensor_to_mul...);
         return result;
     }
