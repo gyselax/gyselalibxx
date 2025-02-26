@@ -97,17 +97,17 @@ void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType
         result
                 += ((t().template get<extract_sub_tensor_element_t<
                              typename GlobalTensorIndexIdMap::AllIndices,
-                             typename IndexedTensorType::index_pattern,
+                             typename IndexedTensorType::index_pattern::AllIndices,
                              Idx>>())
                     * ...);
     } else {
         result().template get<extract_sub_tensor_element_t<
                 typename GlobalTensorIndexIdMap::AllIndices,
-                typename ResultIndexedTensorType::index_pattern,
+                typename ResultIndexedTensorType::index_pattern::AllIndices,
                 Idx>>()
                 += (t().template get<extract_sub_tensor_element_t<
                             typename GlobalTensorIndexIdMap::AllIndices,
-                            typename IndexedTensorType::index_pattern,
+                            typename IndexedTensorType::index_pattern::AllIndices,
                             Idx>>()
                     * ...);
     }
