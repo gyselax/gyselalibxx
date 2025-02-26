@@ -120,7 +120,9 @@ struct vector_index_set_dual<VectorIndexSet<Dims...>>
 template <char Id, class ValidVectorIdxSet>
 struct VectorIndexIdMap
 {
+    /// The character identifying the index.
     static constexpr char id = Id;
+    /// The VectorIndexSet describing valid indices for this component.
     using possible_idx_values = ValidVectorIdxSet;
 };
 
