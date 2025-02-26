@@ -29,7 +29,7 @@ Y(s; s, x, y) = y.
 
 So to compute the advected function at the next time step, 
  - we compute the characteristics' feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
- for each mesh points $`(x_i, y_j)`$ with a time integration method ; 
+ for each mesh point $`(x_i, y_j)`$ with a time integration method ; 
  - we interpolate the function $f(t = t^n)$ on the characteristics' feet. 
  The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
