@@ -179,7 +179,7 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
                     typename IndexedTensorType::tensor_type::element_type,
                     ElementType>...>,
             "All tensors must have the same element type");
-    using ResultIndexTypeSeq = typename GlobalTensorIndexIdMap::result_indices;
+    using ResultIndexTypeSeq = non_repeated_indices_t<typename GlobalTensorIndexIdMap::AllIndices>;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
         ElementType result = 0.0;
         details::internal_tensor_mul<GlobalTensorIndexIdMap>(
@@ -190,8 +190,9 @@ auto tensor_mul(IndexedTensorType... tensor_to_mul)
         return result;
     } else {
         using ResultTensorIndexIdMap = to_tensor_index_id_map_t<ResultIndexTypeSeq>;
-        using ResultTensorType
-                = to_tensor_t<ElementType, typename ResultTensorIndexIdMap::vector_index_sets>;
+        using ResultTensorType = to_tensor_t<
+                ElementType,
+                get_type_seq_index_set_t<typename ResultTensorIndexIdMap::AllIndices>>;
         ResultTensorType result(0.0);
         IndexedTensor<ResultTensorType, ResultTensorIndexIdMap> indexed_result(result);
         details::internal_tensor_mul<GlobalTensorIndexIdMap>(

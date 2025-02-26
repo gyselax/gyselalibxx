@@ -172,6 +172,10 @@ template <class ValidatingTensorIndexSet, class TypeSeqValidIndexSet>
 using to_tensor_index_element_t = typename details::
         ToTensorIndexElement<ValidatingTensorIndexSet, TypeSeqValidIndexSet>::type;
 
+template <class TypeSeqVectorIndexIdMap>
+using get_type_seq_index_set_t =
+        typename details::ExtractTypeSeqIndexSet<TypeSeqVectorIndexIdMap>::type;
+
 //-------------------------------------------------------------------------------------------
 
 namespace details {
@@ -336,13 +340,13 @@ using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElemen
 
 template <std::size_t Elem, class TensorIndexMapType>
 using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
-        typename details::ExtractTypeSeqIndexSet<typename TensorIndexMapType::AllIndices>::type,
+        get_type_seq_index_set_t<typename TensorIndexMapType::AllIndices>,
         typename details::GetNthTensorIndexElementFromMap<
                 TensorIndexMapType,
                 get_nth_tensor_index_element_t<
                         Elem,
-                        typename details::ExtractTypeSeqIndexSet<
-                                unique_indices_t<typename TensorIndexMapType::AllIndices>>::type>,
+                        get_type_seq_index_set_t<
+                                unique_indices_t<typename TensorIndexMapType::AllIndices>>>,
                 ddc::type_seq_size_v<typename TensorIndexMapType::AllIndices>>::type>;
 
 
@@ -358,10 +362,6 @@ private:
             "You should not have more than two of any one index in an index expression. "
             "Additionally repeated indices should not be associated with two covariant or two "
             "contravariant indices.");
-
-public:
-    using result_indices = non_repeated_indices_t<AllIndices>;
-    using vector_index_sets = ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>;
 };
 
 namespace details {
