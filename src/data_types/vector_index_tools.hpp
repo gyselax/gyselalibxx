@@ -119,15 +119,15 @@ struct vector_index_set_dual<VectorIndexSet<Dims...>>
  * which can take one of multiple possible values (types).
  *
  * @tparam Id The character identifying the index.
- * @tparam ValidVectorIdxSet The VectorIndexSet describing valid indices.
+ * @tparam ValidVectorIndexSet The VectorIndexSet describing valid indices.
  */
-template <char Id, class ValidVectorIdxSet>
+template <char Id, class ValidVectorIndexSet>
 struct VectorIndexIdMap
 {
     /// The character identifying the index.
     static constexpr char id = Id;
     /// The VectorIndexSet describing valid indices for this component.
-    using possible_idx_values = ValidVectorIdxSet;
+    using possible_idx_values = ValidVectorIndexSet;
 };
 
 } // namespace tensor_tools

@@ -151,15 +151,15 @@ TEST(TensorTools, RepeatedIndices)
             VectorIndexIdMap<'k', IdxSet_cov>,
             VectorIndexIdMap<'k', IdxSet>,
             VectorIndexIdMap<'l', IdxSet_cov>>;
-    using NonRepeatedIdxs = non_repeated_indices_t<TypeSeqVectorIdxMap>;
-    using UniqueIdxs = unique_indices_t<TypeSeqVectorIdxMap>;
+    using NonRepeatedIndices = non_repeated_indices_t<TypeSeqVectorIdxMap>;
+    using UniqueIndices = unique_indices_t<TypeSeqVectorIdxMap>;
     static_assert(std::is_same_v<
-                  NonRepeatedIdxs,
+                  NonRepeatedIndices,
                   ddc::detail::TypeSeq<
                           VectorIndexIdMap<'i', IdxSet>,
                           VectorIndexIdMap<'l', IdxSet_cov>>>);
     static_assert(std::is_same_v<
-                  UniqueIdxs,
+                  UniqueIndices,
                   ddc::detail::TypeSeq<
                           VectorIndexIdMap<'i', IdxSet>,
                           VectorIndexIdMap<'j', IdxSet>,
