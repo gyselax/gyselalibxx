@@ -48,7 +48,7 @@ public:
     explicit KOKKOS_FUNCTION MetricTensorEvaluator(Mapping mapping) : m_mapping(mapping) {}
 
     /**
-     * @brief Compute the metric tensor assignd to the mapping.
+     * @brief Compute the metric tensor associated to the mapping at a given position in space.
      *
      * The metric tensor matrix is defined as:
      * @f$ G = (J_{\mathcal{F}})^T J_{\mathcal{F}} @f$.
@@ -56,8 +56,8 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the metric tensor.
-     * @param[out] matrix
-     * 				The metric tensor matrix.
+     * @param[out] metric_tensor
+     * 				A DTensor object containing the value of the metric tensor.
      */
     KOKKOS_FUNCTION DTensor<Dims, Dims> operator()(PositionCoordinate const& coord) const
     {
@@ -75,12 +75,12 @@ public:
     }
 
     /**
-     * @brief Compute the inverse metric tensor associated to the mapping.
+     * @brief Compute the inverse of the metric tensor associated to the mapping at a given position in space.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the metric tensor.
-     * @param[out] matrix
-     * 				The metric tensor matrix.
+     * @param[out] inverse_metric_tensor
+     * 				A DTensor object containing the value of the inverse of the metric tensor.
      */
     KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> inverse(PositionCoordinate const& coord) const
     {
