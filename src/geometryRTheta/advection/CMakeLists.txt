@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
 
-add_library(advection_polar INTERFACE)
-target_include_directories(advection_polar
+add_library(advection_rp INTERFACE)
+target_include_directories(advection_rp
     INTERFACE
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
-target_link_libraries(advection_polar 
+target_link_libraries(advection_rp 
     INTERFACE
         DDC::core
         Eigen3::Eigen
@@ -17,4 +17,4 @@ target_link_libraries(advection_polar
         gslx::math_tools
         gslx::utils
 )
-add_library(gslx::advection_polar ALIAS advection_polar)
+add_library(gslx::advection_rp ALIAS advection_rp)

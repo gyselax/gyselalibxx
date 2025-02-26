@@ -31,7 +31,7 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
             gslx::geometry_RTheta
             gslx::interpolation_2D_rp
             gslx::io
-            gslx::advection_polar
+            gslx::advection_rp
             gslx::time_integration_rp
             gslx::quadrature
             gslx::utils
