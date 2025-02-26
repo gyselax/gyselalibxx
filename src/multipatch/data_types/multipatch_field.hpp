@@ -52,7 +52,7 @@ public:
     template <class Patch>
     using InternalConstFieldOnPatch = typename T<Patch>::view_type;
 
-    template <template <typename P> typename OT, class... OPatches>
+    template <template <typename P> typename OtherType, class... OPatches>
     friend class MultipatchField;
 
     static_assert(
@@ -127,8 +127,8 @@ public:
      *
      * @param other The equivalent MultipatchField being copied.
      */
-    template <template <typename P> typename OT, class... OPatches>
-    MultipatchField(MultipatchField<OT, OPatches...>&& other)
+    template <template <typename P> typename OtherType, class... OPatches>
+    MultipatchField(MultipatchField<OtherType, OPatches...>&& other)
         : base_type(std::make_tuple(other.template get<Patches>()...))
     {
         static_assert(
@@ -136,7 +136,7 @@ public:
                 "Cannot create a MultipatchField from a temporary MultipatchField with a different "
                 "ordering");
         static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OT<OPatches>...>>,
+                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<OPatches>...>>,
                 "MultipatchFields are not equivalent");
     }
 
