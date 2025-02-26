@@ -182,10 +182,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a37eae3b00efc46c87e14e1eae48fecf5"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchFieldMem.html#a37eae3b00efc46c87e14e1eae48fecf5">MultipatchFieldMem</a> (MultipatchObj &amp;other)</td></tr>
 <tr class="memdesc:a37eae3b00efc46c87e14e1eae48fecf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classMultipatchFieldMem.html" title="A class to store field memory block objects on patches.">MultipatchFieldMem</a> class by copying an instance of another compatible <a class="el" href="classMultipatchFieldMem.html" title="A class to store field memory block objects on patches.">MultipatchFieldMem</a>.  <br /></td></tr>
 <tr class="separator:a37eae3b00efc46c87e14e1eae48fecf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64d92adf05d1d0532fe57ae19cce489e" id="r_a64d92adf05d1d0532fe57ae19cce489e"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename P &gt; typename OT, class... OPatches&gt; </td></tr>
-<tr class="memitem:a64d92adf05d1d0532fe57ae19cce489e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchFieldMem.html#a64d92adf05d1d0532fe57ae19cce489e">MultipatchFieldMem</a> (<a class="el" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>&lt; OT, OPatches... &gt; &amp;&amp;other)</td></tr>
-<tr class="memdesc:a64d92adf05d1d0532fe57ae19cce489e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classMultipatchFieldMem.html" title="A class to store field memory block objects on patches.">MultipatchFieldMem</a> class from an r-value (temporary) instance of another <a class="el" href="classMultipatchFieldMem.html" title="A class to store field memory block objects on patches.">MultipatchFieldMem</a> which uses the same type for the internal tuple.  <br /></td></tr>
-<tr class="separator:a64d92adf05d1d0532fe57ae19cce489e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae39abf1d81ca63a0aa65345a79a638fd" id="r_ae39abf1d81ca63a0aa65345a79a638fd"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename P &gt; typename OtherType, class... OPatches&gt; </td></tr>
+<tr class="memitem:ae39abf1d81ca63a0aa65345a79a638fd"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchFieldMem.html#ae39abf1d81ca63a0aa65345a79a638fd">MultipatchFieldMem</a> (<a class="el" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>&lt; OtherType, OPatches... &gt; &amp;&amp;other)</td></tr>
+<tr class="memdesc:ae39abf1d81ca63a0aa65345a79a638fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="classMultipatchFieldMem.html" title="A class to store field memory block objects on patches.">MultipatchFieldMem</a> class from an r-value (temporary) instance of another <a class="el" href="classMultipatchFieldMem.html" title="A class to store field memory block objects on patches.">MultipatchFieldMem</a> which uses the same type for the internal tuple.  <br /></td></tr>
+<tr class="separator:ae39abf1d81ca63a0aa65345a79a638fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a579cfff022a37682e4677b6298559d4f" id="r_a579cfff022a37682e4677b6298559d4f"><td class="memTemplParams" colspan="2">template&lt;class <a class="el" href="structPatch.html">Patch</a> &gt; </td></tr>
 <tr class="memitem:a579cfff022a37682e4677b6298559d4f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMultipatchFieldMem.html#a579cfff022a37682e4677b6298559d4f">get</a> () const</td></tr>
 <tr class="memdesc:a579cfff022a37682e4677b6298559d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve an object from the patch that it is defined on.  <br /></td></tr>
@@ -330,15 +330,15 @@ template&lt;class MultipatchObj &gt; </div>
 
 </div>
 </div>
-<a id="a64d92adf05d1d0532fe57ae19cce489e" name="a64d92adf05d1d0532fe57ae19cce489e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64d92adf05d1d0532fe57ae19cce489e">&#9670;&#160;</a></span>MultipatchFieldMem() <span class="overload">[3/3]</span></h2>
+<a id="ae39abf1d81ca63a0aa65345a79a638fd" name="ae39abf1d81ca63a0aa65345a79a638fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39abf1d81ca63a0aa65345a79a638fd">&#9670;&#160;</a></span>MultipatchFieldMem() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;template&lt; typename P &gt; typename T, class... Patches&gt; </div>
 <div class="memtemplate">
-template&lt;template&lt; typename P &gt; typename OT, class... OPatches&gt; </div>
+template&lt;template&lt; typename P &gt; typename OtherType, class... OPatches&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -346,7 +346,7 @@ template&lt;template&lt; typename P &gt; typename OT, class... OPatches&gt; </di
         <tr>
           <td class="memname"><a class="el" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>&lt; <a class="el" href="structT.html">T</a>, Patches &gt;<a class="el" href="classMultipatchFieldMem.html">::MultipatchFieldMem</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>&lt; OT, OPatches... &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classMultipatchFieldMem.html">MultipatchFieldMem</a>&lt; OtherType, OPatches... &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
