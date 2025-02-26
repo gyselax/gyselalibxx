@@ -195,7 +195,7 @@ template <class ElementType>
 using ConstFieldSpVpar = ConstField<ElementType, IdxRangeSpVpar>;
 using DConstFieldSpVpar = ConstFieldSpVpar<double>;
 
-/* A OTER
+/* A ôter
 New notation:
 - RDimX --> X
 - IDimX --> GridX
