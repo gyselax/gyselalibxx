@@ -347,14 +347,14 @@ public:
      *
      * @param[in] electrostatic_potential
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rtheta
+     * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_center
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
@@ -366,7 +366,7 @@ public:
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef),
-                advection_field_rtheta,
+                advection_field_rp,
                 advection_field_xy_center);
     }
 
@@ -378,20 +378,20 @@ public:
      *
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rtheta
+     * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_center
      *      The advection field on the physical axis at the O-point.  
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         compute_advection_field_RTheta(
                 m_spline_evaluator,
                 electrostatic_potential_coef,
-                advection_field_rtheta,
+                advection_field_rp,
                 advection_field_xy_center);
     }
 
@@ -402,20 +402,20 @@ public:
      *
      * @param[in] electrostatic_potential_coef
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rtheta
+     * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_center
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         compute_advection_field_RTheta(
                 m_polar_spline_evaluator,
                 electrostatic_potential_coef,
-                advection_field_rtheta,
+                advection_field_rp,
                 advection_field_xy_center);
     }
 
@@ -429,7 +429,7 @@ private:
      *      The spline evaluator used to evaluated electrostatic_potential_coef.
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rtheta
+     * @param[out] advection_field_rp
      *      The advection field on the logical axis on an index range without O-point. 
      * @param[out] advection_field_xy_center
      *      The advection field on the physical axis at the O-point. 
@@ -438,7 +438,7 @@ private:
     void compute_advection_field_RTheta(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY& advection_field_xy_center) const
     {
         static_assert(
@@ -451,7 +451,7 @@ private:
                                     PolarBSplinesRTheta,
                                     ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
 
-        IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rtheta);
+        IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rp);
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid_without_Opoint);
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
@@ -487,8 +487,8 @@ private:
                     = -deriv_r_phi(irp) * inv_G[1][0] - deriv_p_phi(irp) * inv_G[1][1];
 
             // A = E \wedge e_z
-            ddcHelper::get<R>(advection_field_rtheta)(irp) = -electric_field_p;
-            ddcHelper::get<Theta>(advection_field_rtheta)(irp) = electric_field_r;
+            ddcHelper::get<R>(advection_field_rp)(irp) = -electric_field_p;
+            ddcHelper::get<Theta>(advection_field_rp)(irp) = electric_field_r;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================

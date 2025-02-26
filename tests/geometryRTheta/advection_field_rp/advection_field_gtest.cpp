@@ -15,7 +15,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_rtheta.hpp"
+#include "bsl_advection_rp.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
@@ -181,7 +181,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldMemRTheta> allfdistribu_xy_alloc(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
-    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rtheta_alloc(grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rp_alloc(grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rp_alloc(grid);
     CoordXY advection_field_xy_center;
@@ -193,7 +193,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
 
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
-    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
+    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp(advection_field_rp_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rp(advection_field_xy_from_rp_alloc);
 
@@ -220,7 +220,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // Constant advection fields *************************************
     advection_field_computer(
             electrostatic_potential,
-            advection_field_rtheta,
+            advection_field_rp,
             advection_field_xy_center);
     advection_field_computer(electrostatic_potential, advection_field_xy);
 
@@ -251,11 +251,11 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][0] * jacobian
-                  + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][0] * jacobian;
+                = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][0] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][0] * jacobian;
         ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][1] * jacobian
-                  + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][1] * jacobian;
+                = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][1] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][1] * jacobian;
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
@@ -294,7 +294,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
-        advection_operator(allfdistribu_rp, advection_field_rtheta, advection_field_xy_center, dt);
+        advection_operator(allfdistribu_rp, advection_field_rp, advection_field_xy_center, dt);
         advection_operator(allfdistribu_xy, advection_field_xy, dt);
 
         // Check the advected functions ---

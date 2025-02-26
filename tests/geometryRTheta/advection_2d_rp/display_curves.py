@@ -1,5 +1,5 @@
 ﻿# Command to launch the test :
-# python3 display_curves.py ../../../build/tests/geometryRTheta/advection_2d_rtheta/<selected advection test>
+# python3 display_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/<selected advection test>
 
 """
 Plot the advected function at regular different time steps.

@@ -220,8 +220,8 @@ to get the advection field along the physical domain axis.
 
 # Unit tests
 
-The test of the advection operator are implemented in the `tests/geometryRTheta/advection_2d_rtheta/` folder 
-([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_2d_rtheta/README.md)).
+The test of the advection operator are implemented in the `tests/geometryRTheta/advection_2d_rp/` folder 
+([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_2d_rp/README.md)).
 
 
 It tests: 
@@ -263,8 +263,8 @@ Journal of Computational Physics (2019).
 # Contents
 
 This folder contains:
- - iadvection\_rtheta.hpp : define the base class for advection operator (IAdvectionRTheta). 
- 	- bsl\_advection\_rtheta.hpp : define the advection operator described just before (BslAdvectionRTheta). 
+ - iadvection\_rp.hpp : define the base class for advection operator (IAdvectionRTheta). 
+ 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRTheta). 
 
 
 

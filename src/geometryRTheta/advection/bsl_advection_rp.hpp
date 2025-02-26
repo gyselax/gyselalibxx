@@ -6,7 +6,7 @@
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "i_interpolator_2d_rp.hpp"
-#include "iadvection_rtheta.hpp"
+#include "iadvection_rp.hpp"
 #include "metric_tensor.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 #include "spline_polar_foot_finder.hpp"
@@ -145,7 +145,7 @@ public:
      *
      * @param [in, out] allfdistribu_host
      *      A Field containing the values of the function we want to advect.
-     * @param [in] advection_field_rtheta
+     * @param [in] advection_field_rp
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the logical index range axis.
      * @param [in] advection_field_xy_center
@@ -158,7 +158,7 @@ public:
      */
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu_host,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rp,
             CoordXY const& advection_field_xy_center,
             double dt) const override
     {
@@ -182,11 +182,11 @@ public:
             double const jacobian = m_mapping.jacobian(coord_rp);
 
             ddcHelper::get<X>(advection_field_xy_host)(irp)
-                    = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][0] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][0] * jacobian;
+                    = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][0] * jacobian
+                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][0] * jacobian;
             ddcHelper::get<Y>(advection_field_xy_host)(irp)
-                    = ddcHelper::get<R>(advection_field_rtheta)(irp) * inv_J[0][1] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irp) * inv_J[1][1] * jacobian;
+                    = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][1] * jacobian
+                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][1] * jacobian;
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {

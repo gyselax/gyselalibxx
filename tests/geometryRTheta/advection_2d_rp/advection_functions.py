@@ -1,5 +1,5 @@
 """
-Define all the functions needed in the python files of the advection_2d_rtheta folder.
+Define all the functions needed in the python files of the advection_2d_rp folder.
 """
 
 import argparse

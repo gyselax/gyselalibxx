@@ -1,5 +1,5 @@
 ﻿# Command to launch the test :
-# python3 display_all_error_for_gtest.py ../../../build/tests/geometryRTheta/advection_2d_rtheta/advection_ALL
+# python3 display_all_error_for_gtest.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL
 
 """
 Compute the space convergence order between two grid sizes

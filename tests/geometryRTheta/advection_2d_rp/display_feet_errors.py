@@ -1,5 +1,5 @@
 ﻿# Command to launch the test :
-# python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_2d_rtheta/advection_2d_rtheta_tests
+# python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_2d_rp_tests
 
 """
 Display the characteristic feet and their errors computed at the last time step of the advection
