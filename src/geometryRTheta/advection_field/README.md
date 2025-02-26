@@ -148,7 +148,7 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 ```
 
 with 
-* $`J`$ the Jacobian matrix associated to the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
+* $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
 * $`G = J^T J = [g_{ij}]_{ij}`$ the metric tensor, 
 * $`G^{-1} = [g^{ij}]_{ij}`$ the inverse metric tensor 
 * and $`e_j`$ the unnormalized local covariant vectors. 
