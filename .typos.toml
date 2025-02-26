@@ -1,3 +1,5 @@
+locale = 'en-gb'
+
 [default.extend-words]
 # Don't correct these word (parts)
 iy = "iy"
