@@ -234,49 +234,6 @@ struct GetNonRepeatedIndices<
             ddc::detail::TypeSeq<OutIndices...>>;
 };
 
-template <
-        class TypeSeqVectorIndexIdMap,
-        std::size_t Elem,
-        class IdsFound,
-        class ResultTuple = ddc::detail::TypeSeq<>>
-struct GetRepeatedIndices;
-
-template <class TypeSeqVectorIndexIdMap, std::size_t Elem, class IdsFound, class ResultTypeSeq>
-struct GetRepeatedIndices
-{
-    using CurrentIndex = ddc::type_seq_element_t<
-            ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1 - Elem,
-            TypeSeqVectorIndexIdMap>;
-    static constexpr char current_char = CurrentIndex::id;
-    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
-    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
-
-    using type = typename GetRepeatedIndices<
-            TypeSeqVectorIndexIdMap,
-            Elem - 1,
-            IdsFound,
-            std::conditional_t<
-                    CountChar<current_char, IdsFound>::value == 1,
-                    ResultTypeSeq,
-                    ddc::type_seq_merge_t<ResultTypeSeq, InsertTypeSeq>>>::type;
-};
-
-template <class TypeSeqVectorIndexIdMap, class IdsFound, class ResultTypeSeq>
-struct GetRepeatedIndices<TypeSeqVectorIndexIdMap, 0, IdsFound, ResultTypeSeq>
-{
-    using CurrentIndex = ddc::type_seq_element_t<
-            ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
-            TypeSeqVectorIndexIdMap>;
-    static constexpr char current_char = CurrentIndex::id;
-    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
-    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
-
-    using type = std::conditional_t<
-            CountChar<current_char, IdsFound>::value == 1,
-            ResultTypeSeq,
-            ddc::type_seq_merge_t<ResultTypeSeq, InsertTypeSeq>>;
-};
-
 template <class TypeSeqVectorIndexIdMap>
 struct GetIndexIds;
 
@@ -369,12 +326,6 @@ using non_repeated_indices_t = typename details::GetNonRepeatedIndices<
         typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type>::type;
 
 template <class TypeSeqVectorIndexIdMap>
-using repeated_indices_t = typename details::GetRepeatedIndices<
-        TypeSeqVectorIndexIdMap,
-        ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
-        typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type>::type;
-
-template <class TypeSeqVectorIndexIdMap>
 using unique_indices_t = typename details::GetUniqueIndices<TypeSeqVectorIndexIdMap>::type;
 
 
@@ -412,7 +363,6 @@ public:
     }
 
     using result_indices = non_repeated_indices_t<AllIndices>;
-    using sum_indices = repeated_indices_t<AllIndices>;
     using unique_indices = unique_indices_t<AllIndices>;
     using vector_index_sets = ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>;
 };
