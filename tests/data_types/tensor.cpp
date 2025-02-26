@@ -273,8 +273,8 @@ TEST(TensorTools, ExtractElement)
             VectorIndexIdMap<'j', IdxSet_cov>,
             VectorIndexIdMap<'j', IdxSet>,
             VectorIndexIdMap<'k', IdxSet>>;
-    using LocalTensorIndexIdMap
-            = ddc::detail::TypeSeq<VectorIndexIdMap<'i', IdxSet>, VectorIndexIdMap<'j', IdxSet_cov>>;
+    using LocalTensorIndexIdMap = ddc::detail::
+            TypeSeq<VectorIndexIdMap<'i', IdxSet>, VectorIndexIdMap<'j', IdxSet_cov>>;
     using GlobalTensorIndexElement = TensorIndexElement<GlobalTensorIndexSet, R, R_cov, R, R>;
     using LocalTensorIndexElement = extract_sub_tensor_element_t<
             GlobalTensorIndexIdMap,
