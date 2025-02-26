@@ -90,7 +90,9 @@ void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType
 {
     using TensorTuple = std::tuple<typename IndexedTensorType::tensor_type...>;
     using ElementType = typename std::tuple_element_t<0, TensorTuple>::element_type;
-    using Idx = get_nth_tensor_index_element_from_map_t<Is, GlobalTensorIndexIdMap>;
+    using Idx = get_nth_tensor_index_element_from_map_t<
+            Is,
+            typename GlobalTensorIndexIdMap::AllIndices>;
     if constexpr (std::is_same_v<ResultIndexedTensorType, ElementType>) {
         result
                 += ((t().template get<extract_sub_tensor_element_t<

@@ -288,41 +288,40 @@ struct GetNthTensorIndexElement<Elem, 0, TensorIndexSetType>
 };
 
 template <
-        class TensorIndexMapType,
+        class TypeSeqVectorIndexIdMap,
         class StartElement,
         std::size_t Dim,
         class ResultTypeSeq = ddc::detail::TypeSeq<>>
 struct GetNthTensorIndexElementFromMap;
 
-template <class TensorIndexMapType, class StartElement, std::size_t Dim, class... ResultElems>
+template <class TypeSeqVectorIndexIdMap, class StartElement, std::size_t Dim, class... ResultElems>
 struct GetNthTensorIndexElementFromMap<
-        TensorIndexMapType,
+        TypeSeqVectorIndexIdMap,
         StartElement,
         Dim,
         ddc::detail::TypeSeq<ResultElems...>>
 {
-    using ValidIndex = ddc::type_seq_element_t<Dim - 1, typename TensorIndexMapType::AllIndices>;
+    using ValidIndex = ddc::type_seq_element_t<Dim - 1, TypeSeqVectorIndexIdMap>;
     using ContraValidIndex = VectorIndexIdMap<
             ValidIndex::id,
             get_contravariant_dims_t<typename ValidIndex::possible_idx_values>>;
-    static constexpr std::size_t RelevantElemIdx = ddc::type_seq_rank_v<
-            ContraValidIndex,
-            unique_indices_t<typename TensorIndexMapType::AllIndices>>;
+    static constexpr std::size_t RelevantElemIdx
+            = ddc::type_seq_rank_v<ContraValidIndex, unique_indices_t<TypeSeqVectorIndexIdMap>>;
     using RelevantElem = typename StartElement::index_on_dim_t<RelevantElemIdx>;
     using Elem = std::conditional_t<
             is_contravariant_vector_index_set_v<typename ValidIndex::possible_idx_values>,
             RelevantElem,
             typename RelevantElem::Dual>;
     using type = typename GetNthTensorIndexElementFromMap<
-            TensorIndexMapType,
+            TypeSeqVectorIndexIdMap,
             StartElement,
             Dim - 1,
             ddc::detail::TypeSeq<Elem, ResultElems...>>::type;
 };
 
-template <class TensorIndexMapType, class StartElement, class... ResultElems>
+template <class TypeSeqVectorIndexIdMap, class StartElement, class... ResultElems>
 struct GetNthTensorIndexElementFromMap<
-        TensorIndexMapType,
+        TypeSeqVectorIndexIdMap,
         StartElement,
         0,
         ddc::detail::TypeSeq<ResultElems...>>
@@ -338,16 +337,15 @@ using get_nth_tensor_index_element_t = typename details::GetNthTensorIndexElemen
         ddc::type_seq_size_v<TensorIndexSetType>,
         TensorIndexSetType>::type;
 
-template <std::size_t Elem, class TensorIndexMapType>
+template <std::size_t Elem, class TypeSeqVectorIndexIdMap>
 using get_nth_tensor_index_element_from_map_t = to_tensor_index_element_t<
-        get_type_seq_index_set_t<typename TensorIndexMapType::AllIndices>,
+        get_type_seq_index_set_t<TypeSeqVectorIndexIdMap>,
         typename details::GetNthTensorIndexElementFromMap<
-                TensorIndexMapType,
+                TypeSeqVectorIndexIdMap,
                 get_nth_tensor_index_element_t<
                         Elem,
-                        get_type_seq_index_set_t<
-                                unique_indices_t<typename TensorIndexMapType::AllIndices>>>,
-                ddc::type_seq_size_v<typename TensorIndexMapType::AllIndices>>::type>;
+                        get_type_seq_index_set_t<unique_indices_t<TypeSeqVectorIndexIdMap>>>,
+                ddc::type_seq_size_v<TypeSeqVectorIndexIdMap>>::type>;
 
 
 template <class... ValidIndex>

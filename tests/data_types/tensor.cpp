@@ -216,7 +216,7 @@ TEST(TensorTools, TensorIndexMap)
     using IdxSet = VectorIndexSet<R, Theta>;
     using IdxSet_cov = VectorIndexSet<R_cov, Theta_cov>;
     using TestIndexSet = ddc::detail::TypeSeq<IdxSet, IdxSet_cov, IdxSet, IdxSet>;
-    using GlobalTensorIndexIdMap = TensorIndexIdMap<
+    using GlobalTensorIndexIdMap = ddc::detail::TypeSeq<
             VectorIndexIdMap<'i', IdxSet>,
             VectorIndexIdMap<'j', IdxSet_cov>,
             VectorIndexIdMap<'j', IdxSet>,
