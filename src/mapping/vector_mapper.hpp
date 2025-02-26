@@ -37,11 +37,6 @@ public:
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
     using memory_space = typename ExecSpace::memory_space;
 
-    /// The vector type in the coordinate system taken as input.
-    using vector_element_type_in = DVector<XIn, YIn>;
-    /// The vector type in the coordinate system returned as output.
-    using vector_element_type_out = DVector<XOut, YOut>;
-
 private:
     Mapping m_mapping;
 
@@ -84,7 +79,7 @@ public:
                         Matrix_2x2 map_J;
                         mapping_proxy.jacobian_matrix(ddc::coordinate(idx), map_J);
 
-                        vector_element_type_out vector_out;
+                        Coord<XOut, YOut> vector_out;
                         vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
                         ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
                         ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
@@ -97,8 +92,12 @@ public:
                     KOKKOS_LAMBDA(IdxType idx) {
                         Matrix_2x2 map_J = inv_mapping(ddc::coordinate(idx));
 
-                        vector_element_type_out vector_out;
-                        vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
+                        Coord<XOut, YOut> vector_out;
+                        // mat_vec_mul should be replaced with a tensor calculus function
+                        // when map_J is stored in a Tensor
+                        vector_out.array() = mat_vec_mul(
+                                map_J,
+                                ddcHelper::to_coord(vector_field_input(idx)).array());
                         ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
                         ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
                     });

@@ -43,9 +43,7 @@ struct Theta_cov
     using Dual = Theta;
 };
 
-int dot_product(
-        tensor_tools::Vector<int, R_cov, Theta_cov> a,
-        tensor_tools::Vector<int, R, Theta> b)
+int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
@@ -53,8 +51,8 @@ int dot_product(
 
 TEST(TensorTest, ExplicitDotProduct)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
-    tensor_tools::Vector<int, R, Theta> b;
+    Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R, Theta> b;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R>(b) = 5;
@@ -65,7 +63,7 @@ TEST(TensorTest, ExplicitDotProduct)
 
 TEST(TensorTest, TensorScalarMul)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> a;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     a *= 4;
@@ -77,7 +75,7 @@ TEST(TensorTest, TensorScalarMul)
 
 TEST(TensorTest, TensorScalarDiv)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> a;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     a /= 2;
@@ -89,8 +87,8 @@ TEST(TensorTest, TensorScalarDiv)
 
 TEST(TensorTest, TensorAdd)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
-    tensor_tools::Vector<int, R_cov, Theta_cov> b;
+    Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> b;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R_cov>(b) = 6;
@@ -104,8 +102,8 @@ TEST(TensorTest, TensorAdd)
 
 TEST(TensorTest, TensorMinus)
 {
-    tensor_tools::Vector<int, R_cov, Theta_cov> a;
-    tensor_tools::Vector<int, R_cov, Theta_cov> b;
+    Vector<int, R_cov, Theta_cov> a;
+    Vector<int, R_cov, Theta_cov> b;
     ddcHelper::get<R_cov>(a) = -6;
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R_cov>(b) = 6;

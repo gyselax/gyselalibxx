@@ -110,6 +110,22 @@ public:
     }
 
     /**
+     * @brief Construct a 1D tensor object from a coordinate.
+     *
+     * @param coord The coordinate.
+     */
+    template <class... Dims>
+    explicit KOKKOS_FUNCTION Tensor(Coord<Dims...> coord) : m_data(coord.array())
+    {
+        static_assert(
+                rank() == 1,
+                "Filling the tensor on initialisation is only permitted for 1D vector objects");
+        static_assert(
+                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+    }
+
+    /**
      * @brief Construct a tensor object by copying an existing tensor.
      *
      * @param o_tensor The tensor to be copied.
@@ -150,6 +166,24 @@ public:
      * @return A reference to the current tensor.
      */
     KOKKOS_DEFAULTED_FUNCTION Tensor& operator=(Tensor const& other) = default;
+
+    /**
+     * @brief A copy operator.
+     * @param coord The coordinate to be copied into the vector.
+     * @return A reference to the current tensor.
+     */
+    template <class... Dims>
+    KOKKOS_FUNCTION Tensor& operator=(Coord<Dims...> coord)
+    {
+        static_assert(
+                rank() == 1,
+                "Copying a coordinate into a tensor is only possible for 1D tensor objects");
+        static_assert(
+                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+        m_data = coord.array();
+        return *this;
+    }
 
     /**
      * @brief An operator to multiply all the element of the current tensor by
@@ -295,9 +329,6 @@ using to_tensor_t = typename detail::ToTensor<ElementType, TypeSeqValidIndexSet>
 template <class... ValidIndexSet>
 using DTensor = Tensor<double, ValidIndexSet...>;
 
-// These objects should be extricated from the namespace in a later PR
-namespace tensor_tools {
-
 /**
  * @brief A helper type alias to get a 1D tensor (a vector).
  * @tparam ElementType The type of the elements of the tensor (usually double/complex).
@@ -312,8 +343,6 @@ using Vector = Tensor<ElementType, VectorIndexSet<Dims...>>;
  */
 template <class... Dims>
 using DVector = Vector<double, Dims...>;
-
-} // namespace tensor_tools
 
 //////////////////////////////////////////////////////////////////////////
 //                         Operators

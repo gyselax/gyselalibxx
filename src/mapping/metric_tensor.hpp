@@ -4,6 +4,8 @@
 
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "tensor.hpp"
+#include "vector_index_tools.hpp"
 #include "view.hpp"
 
 /**
@@ -17,9 +19,21 @@ class MetricTensor
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
 
+    using Dims = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+    using Dim0 = ddc::type_seq_element_t<0, Dims>;
+    using Dim1 = ddc::type_seq_element_t<1, Dims>;
+    using Dim0_cov = typename Dim0::Dual;
+    using Dim1_cov = typename Dim1::Dual;
+
 public:
     /// The type of the Jacobian matrix and its inverse
     using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
+
+    /// The type of a contravariant vector associated with this mapping.
+    using ContravariantVectorType = DTensor<Dims>;
+
+    /// The type of a covariant vector associated with this mapping.
+    using CovariantVectorType = DTensor<vector_index_set_dual_t<Dims>>;
 
 private:
     Mapping m_mapping;
@@ -87,17 +101,19 @@ public:
      *
      * @return A vector of the covariant
      */
-    KOKKOS_FUNCTION std::array<double, 2> to_covariant(
-            std::array<double, 2> const& contravariant_vector,
+    KOKKOS_FUNCTION CovariantVectorType to_covariant(
+            ContravariantVectorType const& contravariant_vector,
             PositionCoordinate const& coord) const
     {
         Matrix_2x2 inv_metric_tensor;
         inverse(inv_metric_tensor, coord);
-        std::array<double, 2> covariant_vector;
-        covariant_vector[0] = inv_metric_tensor[0][0] * contravariant_vector[0]
-                              + inv_metric_tensor[0][1] * contravariant_vector[1];
-        covariant_vector[1] = inv_metric_tensor[1][0] * contravariant_vector[0]
-                              + inv_metric_tensor[1][1] * contravariant_vector[1];
+        CovariantVectorType covariant_vector;
+        ddcHelper::get<Dim0_cov>(covariant_vector)
+                = inv_metric_tensor[0][0] * ddcHelper::get<Dim0>(contravariant_vector)
+                  + inv_metric_tensor[0][1] * ddcHelper::get<Dim1>(contravariant_vector);
+        ddcHelper::get<Dim1_cov>(covariant_vector)
+                = inv_metric_tensor[1][0] * ddcHelper::get<Dim0>(contravariant_vector)
+                  + inv_metric_tensor[1][1] * ddcHelper::get<Dim1>(contravariant_vector);
         return covariant_vector;
     }
 };
