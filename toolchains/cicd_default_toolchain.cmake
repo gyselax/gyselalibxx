@@ -1,6 +1,6 @@
 
 # Kokkos flags
-set(Kokkos_ENABLE_DEPRECATED_CODE_3 OFF)
+set(Kokkos_ENABLE_DEPRECATED_CODE_4 OFF)
 set(Kokkos_ENABLE_DEPRECATION_WARNINGS OFF)
 
 # Deactivate slow tests if requested
