@@ -12,7 +12,7 @@
 /**
 * @brief A tag to choose between the batched iterative solvers provided by Ginkgo.
 *
-* BICGSTAB BiConjugate Gradient Stabilize method. BICGSTAB is able to solve general sparse matrices problems.
+* BICGSTAB BiConjugate Gradient Stabilise method. BICGSTAB is able to solve general sparse matrices problems.
 * CG Conjugate Gradient method (For symmetric positive definite matrices).
 * If the matrices structures verify CG requirements, we encourage the use of this method for its lower computation cost.
 */
@@ -20,13 +20,13 @@ enum class MatrixBatchCsrSolver { CG, BICGSTAB, BATCH_CG, BATCH_BICGSTAB };
 
 /**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.
- * It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilized Bicg.
+ * It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilised Bicg.
  * This class uses the CSR storage format which needs three arrays, one stores values, the other column indices.
  * The third array contains the count of non-zero inside the matrix lines.(eg:for a given line index i nn_per_row[i]= sum of non-zeros until line i)
  * The class returns these arrays (as Kokkos views) with the get_csr_views function, it is then possible to fill them outside the class.
  * The sparsity pattern is the same for all matrices, hence column indices are stored only for one system.
  * Tolerance and maximal number of iterations, which are parameters for the iterative solver, are set in the constructor.
- * It is possibile to get convergence information by activating the logger at constructor call.
+ * It is possible to get convergence information by activating the logger at constructor call.
  * @tparam ExecSpace Execution space,needed by Kokkos for allocations and parallelism.
  * The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace
  * @tparam Solver Refers to the solver type, default value is the Bicgstab which is more general.
@@ -74,7 +74,7 @@ public:
      * @param[in] max_iter maximal number of iterations for the solver, default 1000.
      * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! the relative residual 
      * provided here, will be used as "implicit residual" in ginkgo solver.
-     * @param[in] logger boolean parameter for saving log informations such residual and interations count.
+     * @param[in] logger boolean parameter for saving log information such residual and interations count.
      * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
      */
     explicit MatrixBatchCsr(
@@ -114,7 +114,7 @@ public:
      * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! The residual 
      * provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver.
      * Default value is set to 1e-15.
-     * @param[in] logger bolean parameter to save logger information. Default value false.
+     * @param[in] logger boolean parameter to save logger information. Default value false.
      * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
      */
     explicit MatrixBatchCsr(
@@ -185,7 +185,7 @@ public:
      * It uses the batch of matrices to generate a batched Jacobi preconditioner. Other parameters like maximum number
      * of iterations and tolerance are also used to instantiate a Ginkgo solver.
      *
-     * The stopping criterion is a reduction factor ||Ax-b||/||b||<tol with max_iter maximum iterations.
+     * The stopping criterion is a reduction factor ||Axe-b||/||b||<tol with max_iter maximum iterations.
      */
     void setup_solver() final
     {
@@ -241,11 +241,11 @@ public:
             // Create the solver
             m_solver = solver_factory->generate(m_batch_matrix_csr);
         }
-        gko_exec->synchronize();
+        gko_exec->synchronise();
     }
 
     /**
-     * @brief Solve the batched linear problem Ax=b.
+     * @brief Solve the batched linear problem Axe=b.
      *
      * @param[in, out] b A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solutions.
      */
@@ -258,9 +258,9 @@ public:
     }
 
     /**
-     * @brief Solve the batched linear problem Ax=b.
+     * @brief Solve the batched linear problem Axe=b.
      *
-     * @param[in] x A 2D Kokkos::View storing the batched  inital guests (useful for iterative solver) of the problems, and receiving the corresponding solutions.
+     * @param[in] x A 2D Kokkos::View storing the batched  initial guests (useful for iterative solver) of the problems, and receiving the corresponding solutions.
      *
      * @param[in] b A 2D Kokkos::View storing the batched right-hand side of the problems.
      */

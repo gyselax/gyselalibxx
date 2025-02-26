@@ -89,14 +89,14 @@ using PatchLocator = OnionPatchLocator<
 class MultipatchSplineOnionShapeTest : public ::testing::Test
 {
 protected:
-    /// @brief Nomber of cells in the R direction on the Patch1.
+    /// @brief Number of cells in the R direction on the Patch1.
     static constexpr Patch1::IdxStep1 r1_ncells = Patch1::IdxStep1(16);
-    /// @brief Nomber of cells in the Theta direction on the Patch1.
+    /// @brief Number of cells in the Theta direction on the Patch1.
     static constexpr Patch1::IdxStep2 theta1_ncells = Patch1::IdxStep2(10);
 
-    /// @brief Nomber of cells in the R direction on the Patch2.
+    /// @brief Number of cells in the R direction on the Patch2.
     static constexpr Patch2::IdxStep1 r2_ncells = Patch2::IdxStep1(8);
-    /// @brief Nomber of cells in the Theta direction on the Patch2.
+    /// @brief Number of cells in the Theta direction on the Patch2.
     static constexpr Patch2::IdxStep2 theta2_ncells = Patch2::IdxStep2(12);
 
     // Coordinates delimiting the patches
@@ -196,7 +196,7 @@ public:
      * @brief Initialise the function on Patch1. 
      * Here the function is @f$ f(r,\theta)= r \sin(\theta)@f$.
      * @param[inout] function_1_coef Field of function value on Patch1.
-     * @return A field of function value initiliased on Patch1.
+     * @return A field of function value initialised on Patch1.
      */
     DField<Patch1::IdxRangeBS12> set_spline_1(DField<Patch1::IdxRangeBS12> const& function_1_coef);
 
@@ -204,7 +204,7 @@ public:
      * @brief Initialise the function on Patch2.
      * Here the function is @f$ f(r,\theta)= r^2 \sin(\theta)@f$.
      * @param[inout] function_2_coef Field of function value on Patch2.
-     * @return A field of function value initiliased on Patch2.
+     * @return A field of function value initialised on Patch2.
      */
     DField<Patch2::IdxRangeBS12> set_spline_2(DField<Patch2::IdxRangeBS12> const& function_2_coef);
 };

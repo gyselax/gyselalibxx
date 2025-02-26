@@ -81,12 +81,12 @@ public:
             ddc::parallel_for_each(
                     theta_idx_range,
                     KOKKOS_LAMBDA(IdxTheta const ip) {
-                        bool const unicity_center_point
+                        bool const unicity_centre_point
                                 = inout_data(r_idx_range.front(), ip)
                                   == inout_data(r_idx_range.front(), theta_idx_range.front());
-                        if (!unicity_center_point) {
+                        if (!unicity_centre_point) {
                             Kokkos::abort(
-                                    "Unicity of the value at the center point is not verified.");
+                                    "Unicity of the value at the centre point is not verified.");
                         }
                     });
         }

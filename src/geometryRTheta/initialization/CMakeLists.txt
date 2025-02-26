@@ -1,7 +1,7 @@
 
 # DIOCOTRON SIMULATION ------------------------------------------
 add_library(diocotron_init_eq STATIC
-    diocotron_initialization_equilibrium.cpp
+    diocotron_initialisation_equilibrium.cpp
 )
 
 target_include_directories(diocotron_init_eq

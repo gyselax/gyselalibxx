@@ -165,7 +165,7 @@ public:
      */
     KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
     {
-        // Gaussian centered in (x0, y0):
+        // Gaussian centred in (x0, y0):
         CoordXY const coord_xy(m_mapping(coord_rp));
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);

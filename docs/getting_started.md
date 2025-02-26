@@ -10,7 +10,7 @@ There are multiple coding paradigms possible when writing code in C++. Two of th
 
 ### Key Difference: Functional vs. Object-Oriented Programming (OOP)
 
-**Object-Oriented Programming (OOP)** is built around the concept of objects that encapsulate data and behavior. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.
+**Object-Oriented Programming (OOP)** is built around the concept of objects that encapsulate data and behaviour. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.
 
 **Functional Programming (FP)** aims to make code more readable by making it more obvious where data is modified. This is done by separating data storage from operators. This way, data can never be modified inside its class without passing through an operator. In our code the functional programming paradigm was chosen as it allows us to write the code in a way which more closely resembles the equations.
 
@@ -20,7 +20,7 @@ When using functional programming classes fit into one of two groups:
 
 - **Data Structures**:
   - Serve as containers for data, often passed into operators for processing.
-  - Avoid embedding behavior directly into data structures; instead, let operators handle transformations.
+  - Avoid embedding behaviour directly into data structures; instead, let operators handle transformations.
 
 - **Operators**:
   - Should implement an `operator()` method, allowing them to be used as callable objects.
@@ -28,7 +28,7 @@ When using functional programming classes fit into one of two groups:
   - Break problems into small, composable functions. Avoid the temptation to design large, monolithic classes.
   - Can be thought of as a function. Classes are used instead so the functions called by this function can be decided at compile time.
 
-By separating operators (behavior) from data structures (data), you ensure clarity, reusability, and better adherence to the functional programming style.
+By separating operators (behaviour) from data structures (data), you ensure clarity, reusability, and better adherence to the functional programming style.
 
 For example consider the case of a semi-Lagrangian advection. The operator is similar to a function which modifies a data structure containing the distribution function. By using a class the method used to interpolate the function (e.g. spline interpolation or Lagrange interpolation) can be specified without duplicating code.
 
@@ -50,7 +50,7 @@ The gyselalib++ codebase is organised into several folders. The main folders of 
 
 ## Recommended Steps for Getting Started
 
-1. **Familiarize yourself with DDC:**
+1. **Familiarise yourself with DDC:**
 
    - Gyselalib++ relies heavily on [DDC (Discrete Domain Decomposition Library)](https://ddc.mdls.fr/) for data management. Understanding its usage is key to contributing effectively.
    - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](./DDC_in_gyselalibxx.md).
@@ -62,7 +62,7 @@ The gyselalib++ codebase is organised into several folders. The main folders of 
 
 3. **Identify a simple task:**
 
-   - Start with a small, well-scoped issue to familiarize yourself with the contribution process and code review workflow.
+   - Start with a small, well-scoped issue to familiarise yourself with the contribution process and code review workflow.
 
 
 ---

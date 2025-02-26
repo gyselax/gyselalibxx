@@ -90,7 +90,7 @@ public:
 
 private:
     /// @brief The normalisation used for the Fourier transform
-    static constexpr ddc::FFT_Normalization m_norm = ddc::FFT_Normalization::BACKWARD;
+    static constexpr ddc::FFT_Normalisation m_norm = ddc::FFT_Normalisation::BACKWARD;
 
 private:
     /**

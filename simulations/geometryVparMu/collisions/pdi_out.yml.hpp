@@ -52,7 +52,7 @@ plugins:
       iter:
         - set:
           - iter_saved: '${iter_start} + ${iter}/${nbstep_diag}'
-    on_finalize:
+    on_finalise:
       - release: [iter_saved]
 
   decl_hdf5:

@@ -8,7 +8,7 @@ The `geometryRTheta` folder contains all the code describing methods which are s
 
 - [geometry](./geometry/README.md) - All the dimension tags used for a gyrokinetic semi-Lagrangian simulation in a curvilinear geometry.
 
-- [initialization](./initialization/README.md) - Initializes the simulations on a 2D polar domain. 
+- [initialisation](./initialization/README.md) - Initialises the simulations on a 2D polar domain. 
 
 - [interpolation](./interpolation/README.md) - Code describing interpolation methods on 2D polar domain. 
 

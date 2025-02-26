@@ -7,7 +7,7 @@
 
 #include "matrix.hpp"
 #include "matrix_banded.hpp"
-#include "matrix_center_block.hpp"
+#include "matrix_centre_block.hpp"
 #include "matrix_corner_block.hpp"
 #include "matrix_dense.hpp"
 #include "matrix_pds_tridiag.hpp"
@@ -53,16 +53,16 @@ DSpan2D Matrix::solve_multiple_inplace(DSpan2D const bx) const
     return bx;
 }
 
-void Matrix::factorize()
+void Matrix::factorise()
 {
-    int const info = factorize_method();
+    int const info = factorise_method();
 
     if (info < 0) {
         std::cerr << -info << "-th argument had an illegal value" << std::endl;
         // TODO: Add LOG_FATAL_ERROR
     } else if (info > 0) {
         std::cerr << "U(" << info << "," << info << ") is exactly zero.";
-        std::cerr << " The factorization has been completed, but the factor";
+        std::cerr << " The factorisation has been completed, but the factor";
         std::cerr << " U is exactly singular, and division by zero will occur "
                      "if "
                      "it is used to";
@@ -128,7 +128,7 @@ std::unique_ptr<Matrix> Matrix::make_new_block_with_banded_region(
         return std::make_unique<Matrix_Corner_Block>(n, block1_size, std::move(block_mat));
     } else {
         return std::make_unique<
-                Matrix_Center_Block>(n, block1_size, block2_size, std::move(block_mat));
+                Matrix_Centre_Block>(n, block1_size, block2_size, std::move(block_mat));
     }
 }
 

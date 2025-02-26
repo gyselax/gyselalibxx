@@ -105,7 +105,7 @@ public:
      *        A function taking an index of a position in the index range over which the quadrature is
      *        calculated (including the batch index range) and returning the value of the function to
      *        be integrated at that point.
-     *        Please note that a Field fulfills the described criteria.
+     *        Please note that a Field fulfils the described criteria.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      */
     template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>

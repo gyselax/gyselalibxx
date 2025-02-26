@@ -3,7 +3,7 @@
 
 add_subdirectory(advection)
 add_subdirectory(geometry)
-add_subdirectory(initialization)
+add_subdirectory(initialisation)
 add_subdirectory(interpolation)
 add_subdirectory(poisson)
 add_subdirectory(time_solver)

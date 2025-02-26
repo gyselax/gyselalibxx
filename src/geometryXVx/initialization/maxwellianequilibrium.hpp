@@ -10,7 +10,7 @@
 #include "species_info.hpp"
 
 /**
- * @brief A class that initializes the distribution function as a Maxwellian.
+ * @brief A class that initialises the distribution function as a Maxwellian.
  */
 class MaxwellianEquilibrium : public IEquilibrium
 {
@@ -38,7 +38,7 @@ public:
     ~MaxwellianEquilibrium() override = default;
 
     /**
-     * @brief Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.
+     * @brief Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.
      * @param[in] idx_range_kinsp Index range for the kinetic species
      * @param[in] yaml_input_file YAML input file
      * @return an instance of Maxwellian distribution function.
@@ -48,7 +48,7 @@ public:
             PC_tree_t const& yaml_input_file);
 
     /**
-     * @brief Initializes allfequilibrium as a Maxwellian.
+     * @brief Initialises allfequilibrium as a Maxwellian.
      * @param[out] allfequilibrium A Field containing a Maxwellian distribution function.
      * @return A Field containing a Maxwellian distribution function.
      */

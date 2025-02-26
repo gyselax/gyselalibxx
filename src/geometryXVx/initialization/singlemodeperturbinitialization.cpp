@@ -5,7 +5,7 @@
 #include "ddc_helper.hpp"
 #include "singlemodeperturbinitialization.hpp"
 
-SingleModePerturbInitialization::SingleModePerturbInitialization(
+SingleModePerturbInitialisation::SingleModePerturbInitialisation(
         DConstFieldSpVx fequilibrium,
         host_t<IFieldMemSp> init_perturb_mode,
         host_t<DFieldMemSp> init_perturb_amplitude)
@@ -16,22 +16,22 @@ SingleModePerturbInitialization::SingleModePerturbInitialization(
 }
 
 
-DFieldSpXVx SingleModePerturbInitialization::operator()(DFieldSpXVx const allfdistribu) const
+DFieldSpXVx SingleModePerturbInitialisation::operator()(DFieldSpXVx const allfdistribu) const
 {
     IdxRangeSp const gridsp = get_idx_range<Species>(allfdistribu);
     IdxRangeX const gridx = get_idx_range<GridX>(allfdistribu);
     IdxRangeXVx const gridxvx = get_idx_range<GridX, GridVx>(allfdistribu);
 
-    // Initialization of the perturbation
+    // Initialisation of the perturbation
     DFieldMemX perturbation_alloc(gridx);
     DConstFieldSpVx fequilibrium_proxy = get_const_field(m_fequilibrium);
     DFieldX perturbation_proxy = get_field(perturbation_alloc);
     ddc::for_each(gridsp, [&](IdxSp const isp) {
-        perturbation_initialization(
+        perturbation_initialisation(
                 perturbation_proxy,
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
-        // Initialization of the distribution function --> fill values
+        // Initialisation of the distribution function --> fill values
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 gridxvx,
@@ -50,7 +50,7 @@ DFieldSpXVx SingleModePerturbInitialization::operator()(DFieldSpXVx const allfdi
 }
 
 
-SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input(
+SingleModePerturbInitialisation SingleModePerturbInitialisation::init_from_input(
         DConstFieldSpVx allfequilibrium,
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
@@ -65,14 +65,14 @@ SingleModePerturbInitialization SingleModePerturbInitialization::init_from_input
         init_perturb_mode(isp) = static_cast<int>(PCpp_int(conf_isp, ".perturb_mode"));
     }
 
-    return SingleModePerturbInitialization(
+    return SingleModePerturbInitialisation(
             allfequilibrium,
             std::move(init_perturb_mode),
             std::move(init_perturb_amplitude));
 }
 
 
-void SingleModePerturbInitialization::perturbation_initialization(
+void SingleModePerturbInitialisation::perturbation_initialisation(
         DFieldX const perturbation,
         int const perturb_mode,
         double const perturb_amplitude) const

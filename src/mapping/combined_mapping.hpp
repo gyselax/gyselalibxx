@@ -61,7 +61,7 @@ public:
      * @param[in] mapping_2 The second mapping.
      * @param[in] epsilon The parameter @f$ \varepsilon @f$ which determines when a point is
      *          close enough to the central O-point for linearization to be required when
-     *          calculating the inverse of the Jacobian. The Jacobian is linearized on 
+     *          calculating the inverse of the Jacobian. The Jacobian is linearised on 
      *          @f$ r \in [0, \varepsilon] @f$.
      */
     template <
@@ -219,7 +219,7 @@ public:
      * using non_singular_inverse_jacobian_matrix
      *
      * @param[in] coord The coordinate where we evaluate the inverse Jacobian matrix.
-     * @param[out] matrix The caluclated inverse Jacobian matrix.
+     * @param[out] matrix The calculated inverse Jacobian matrix.
      *
      * @see non_singular_inverse_jacobian_matrix
      */

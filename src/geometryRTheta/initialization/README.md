@@ -1,15 +1,15 @@
-# Initialization
+# Initialisation
 
-This folder defines initialization and equilibrium fonctions for the simulations.  
+This folder defines initialisation and equilibrium functions for the simulations.  
 For more details on each simulation, see [simulations](./../../../simulations/README.md).
 
 ## Diocotron instability
 
 More details about the diocotron simulation are given in [diocotron](./../../../simulations/geometryRTheta/diocotron/README.md).
 
-The initializatrion and equilibrium fonctions are defined in the DiocotronDensitySolution class. 
+The initializatrion and equilibrium functions are defined in the DiocotronDensitySolution class. 
 
-### Initialization
+### Initialisation
 
 We suppose as perturbed initial condition
  - $`\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }`$
@@ -22,7 +22,7 @@ In Edoardo Zoni's article [1], an exponential is also added to make the solution
 with $p = 50$, $`\bar{r} = \frac{R_1 + R_2}{2}`$ and $`d = \frac{R_2 - R_1}{2}`$. 
 This last version is implemented in the code. 
 
-### Equilibirum
+### Equilibrium
 The associated equilibrium is 
  - $`\rho_0(r) = \mathbb{I}_{ R_1 \leq r \leq R_2 }`$
 
@@ -59,7 +59,7 @@ corresponds to the slope of the L2-norm perturbation in the linear phase ($t \in
 
 More details about the diocotron simulation are given in [vortex\_merger](./../../../simulations/geometryRTheta/vortex_merger/README.md).
  
-### Equilibirum
+### Equilibrium
 The equilibrium is determined by the eigenvalue problem of finding $(\sigma, \phi)$ such that 
 
 ```math
@@ -86,8 +86,8 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 
 ## Contents 
 
-* diocotron\_initialization\_equilibrium.hpp : defines a DiocotronDensitySolution class which computes the initialization and equilibrium fonctions. 
-* vortex\_merger\_equilibrium.hpp : defines a VortexMergerEquilibria class which computes the equilibrium fonction. 
-* vortex\_merger\_initialization.hpp : defines a VortexMergerDensitySolution class which computes the initialization fonction. 
+* diocotron\_initialization\_equilibrium.hpp : defines a DiocotronDensitySolution class which computes the initialisation and equilibrium functions. 
+* vortex\_merger\_equilibrium.hpp : defines a VortexMergerEquilibria class which computes the equilibrium function. 
+* vortex\_merger\_initialization.hpp : defines a VortexMergerDensitySolution class which computes the initialisation function. 
 
 

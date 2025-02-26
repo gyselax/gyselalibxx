@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 
     // ---> Initialisation of the distribution function as a perturbed Maxwellian
     DFieldMemSpVparMu allfdistribu(idxrange_spvparmu);
-    NoPerturbInitialization const init(get_const_field(allfequilibrium));
+    NoPerturbInitialisation const init(get_const_field(allfequilibrium));
     init(get_field(allfdistribu));
 
     // ---> Expose unchanged data (related to mesh and species) to PDI
@@ -152,7 +152,7 @@ int main(int argc, char** argv)
 
 
     // --------- FINALISATION ---------
-    PDI_finalize();
+    PDI_finalise();
     PC_tree_destroy(&conf_pdi);
     PC_tree_destroy(&conf_collision);
 

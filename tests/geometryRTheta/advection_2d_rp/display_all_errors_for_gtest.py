@@ -150,7 +150,7 @@ if plot_results:
         mapping : str
             The mapping used.
         """
-        ax = fig.add_subplot(4, 4, index)
+        axe = fig.add_subplot(4, 4, index)
         plt.tight_layout(pad=0.4, w_pad=0.2, h_pad=-0.2)
 
 
@@ -161,16 +161,16 @@ if plot_results:
                 print(f"Simulation {method}, {mapping}, {simu} was not run")
                 continue
             slope = np.polyfit(np.log(Order),np.log(linf_errors),1)
-            ax.loglog(Order, linf_errors, "+--", label=f"{simu} (slope = {round(slope[0],2)})", linewidth = 0.7)
+            axe.loglog(Order, linf_errors, "+--", label=f"{simu} (slope = {round(slope[0],2)})", linewidth = 0.7)
 
-        ax.legend()
-        ax.grid()
+        axe.legend()
+        axe.grid()
 
-        ax.set_xticks(Order)
-        ax.set_ylabel("Errors (log)")
-        ax.set_adjustable("box")
+        axe.set_xticks(Order)
+        axe.set_ylabel("Errors (log)")
+        axe.set_adjustable("box")
 
-        ax.set_title(f'{method.capitalize()} on {mapping}', fontsize=12)
+        axe.set_title(f'{method.capitalise()} on {mapping}', fontsize=12)
 
     index = 1
     for method, method_types in order_expected.items():

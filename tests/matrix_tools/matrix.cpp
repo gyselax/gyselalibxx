@@ -91,7 +91,7 @@ TEST_P(MatrixSizesFixture, PositiveDefiniteSymmetric)
     std::vector<double> inv_ptr(N * N);
     DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
-    matrix->factorize();
+    matrix->factorise();
     matrix->solve_multiple_inplace(inv);
     check_inverse(val, inv);
 }
@@ -119,7 +119,7 @@ TEST_P(MatrixSizesFixture, OffsetBanded)
     std::vector<double> inv_ptr(N * N);
     DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
-    matrix->factorize();
+    matrix->factorise();
     matrix->solve_multiple_inplace(inv);
     check_inverse(val, inv);
 }
@@ -150,7 +150,7 @@ TEST_P(MatrixSizesFixture, PeriodicBanded)
         std::vector<double> inv_ptr(N * N);
         DSpan2D inv(inv_ptr.data(), N, N);
         fill_identity(inv);
-        matrix->factorize();
+        matrix->factorise();
         matrix->solve_multiple_inplace(inv);
         check_inverse(val, inv);
     }
@@ -177,7 +177,7 @@ TEST_P(MatrixSizesFixture, PositiveDefiniteSymmetricTranspose)
     std::vector<double> inv_ptr(N * N);
     DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
-    matrix->factorize();
+    matrix->factorise();
     for (std::size_t i(0); i < N; ++i) {
         DSpan1D inv_line(inv_ptr.data() + i * N, N);
         matrix->solve_transpose_inplace(inv_line);
@@ -208,7 +208,7 @@ TEST_P(MatrixSizesFixture, OffsetBandedTranspose)
     std::vector<double> inv_ptr(N * N);
     DSpan2D inv(inv_ptr.data(), N, N);
     fill_identity(inv);
-    matrix->factorize();
+    matrix->factorise();
     for (std::size_t i(0); i < N; ++i) {
         DSpan1D inv_line(inv_ptr.data() + i * N, N);
         matrix->solve_transpose_inplace(inv_line);
@@ -242,7 +242,7 @@ TEST_P(MatrixSizesFixture, PeriodicBandedTranspose)
         std::vector<double> inv_ptr(N * N);
         DSpan2D inv(inv_ptr.data(), N, N);
         fill_identity(inv);
-        matrix->factorize();
+        matrix->factorise();
         for (int i(0); i < N; ++i) {
             DSpan1D inv_line(inv_ptr.data() + i * N, N);
             matrix->solve_transpose_inplace(inv_line);

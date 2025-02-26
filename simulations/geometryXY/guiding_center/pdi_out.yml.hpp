@@ -70,12 +70,12 @@ plugins:
       iteration:
         - set:
           - iter_saved:  '${iter} % ${nbstep_diag}' 
-    on_finalize:
+    on_finalise:
       - release: [iter_saved]
       
   decl_hdf5:
     - file: 'output/VOICEXX_initstate.h5'
-      on_event: [initialization]
+      on_event: [initialisation]
       collision_policy: replace_and_warn
       write: [Nx_spline_cells, Ny_spline_cells, MeshX, MeshY, nbstep_diag, final_time, time_step, fdistribu_equilibrium]
 

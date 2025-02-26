@@ -69,7 +69,7 @@ plugins:
       iter:
         - set:
           - iter_saved: '${iter}/${nbstep_diag}'
-    on_finalize:
+    on_finalise:
       - release: [iter_saved]
   decl_hdf5:
     - file: 'VOICEXX_initstate.h5'

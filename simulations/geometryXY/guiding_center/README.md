@@ -1,7 +1,7 @@
-# Guiding center (X,Y) simulation
+# Guiding centre (X,Y) simulation
 
 ## Equations
-The `guiding_center` executable deals with the following model: 
+The `guiding_centre` executable deals with the following model: 
 ```math
     \partial_t f(t, x, y) + (E(t, x, y)\wedge e_z) \cdot \nabla f(t, x, y) = 0, \\
     - \Delta \phi(t, x, y)  = -\partial_x^2 \phi(t, x, y) -\partial_y^2 \phi(t, x, y) = f(t, x, y), \\
@@ -14,7 +14,7 @@ The `guiding_center` executable deals with the following model:
 The simulations uses the following operators: 
 
 * advection equation: BslAdvection1D operator with a Strang splitting along $`x`$ and $`y`$. 
-The time integration methods applied to solve the characteritic equation are explicit Euler methods; 
+The time integration methods applied to solve the characteristic equation are explicit Euler methods; 
 * Poisson equation: FFTPoissonSolver solver using FFT to solve the Poisson equation on a periodic domain (and compute the electric field); 
 * equations coupling: PredCorrRK2XY using a RK2 time integration method.
 
@@ -24,11 +24,11 @@ The simulation runs on GPU/CPU.
 
 
 ### Output files
-The `guiding_center` executable creates in the working folder an `output/` folder containing the output files: density, electrostatic potential and electric field values on the grid for some regular time steps. 
+The `guiding_centre` executable creates in the working folder an `output/` folder containing the output files: density, electrostatic potential and electric field values on the grid for some regular time steps. 
 
 ### Command line
 ```shell
-./guiding_center_XY <path_to_params.yaml>
+./guiding_centre_XY <path_to_params.yaml>
 ```
 
 
@@ -47,7 +47,7 @@ The chosen initial conditions are
 
 with $`\varepsilon = 0.015`$ the amplitude of perturbation and $`k = 2\pi/ L_x = 0.5`$ the mode of the perturbation.
 
-See more in [initializations](./../../../src/geometryXY/initialization/README.md). 
+See more in [initialisations](./../../../src/geometryXY/initialization/README.md). 
 
 
 ### Results treatments - diagnosis
@@ -95,7 +95,7 @@ python3 plot_L2_norms.py --name=<name_file_to_save> --folder=<path_to_output>
 ```
 
 ## Contents
-* `guiding_center.cpp`: executable of a guiding-center equation on $`(x,y)`$ geometry with Kelvin-Helmholtz instability test case intial conditions. 
+* `guiding_centre.cpp`: executable of a guiding-centre equation on $`(x,y)`$ geometry with Kelvin-Helmholtz instability test case initial conditions. 
 * `params.yaml`: contains the parameters of the simulation. It needs to be added at the command line to launch the executable. 
 
 ## References

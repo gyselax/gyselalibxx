@@ -43,7 +43,7 @@
  * @tparam AdvectionFieldBuilder
  *          The type of the spline builder for the advection field (see SplineBuilder). 
  * @tparam AdvectionFieldEvaluator
- *          The type of the spline evalutor for the advection field (see SplineEvaluator).  
+ *          The type of the spline evaluator for the advection field (see SplineEvaluator).  
  * @tparam TimeStepper 
  *          The time integration method applied to solve the characteristic equation. 
  *          The method is picked among the child classes of ITimeStepper. 

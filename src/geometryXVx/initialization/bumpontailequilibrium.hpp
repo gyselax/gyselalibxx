@@ -10,9 +10,9 @@
 #include "species_info.hpp"
 
 /**
- * @brief A class that initializes the distribution function as a sum of two Maxwellian functions.
+ * @brief A class that initialises the distribution function as a sum of two Maxwellian functions.
  *
- * This class initializes the distribution function as a sum of two Maxwellian, 
+ * This class initialises the distribution function as a sum of two Maxwellian, 
  * enabling the study of the so-called bump-on-tail instability. One of the 
  * Maxwellians represents the bulk of the distribution function that has no mean 
  * velocity, and the other Maxwellian corresponds to high velocity particles. 
@@ -61,7 +61,7 @@ public:
     ~BumpontailEquilibrium() override = default;
 
     /**
-     * @brief Read the density, temperature and mean velocity required to initialize the bump-on-tail Maxwellian in a YAML input file.
+     * @brief Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file.
      * @param[in] idx_range_kinsp Index range for the kinetic species
      * @param[in] yaml_input_file YAML input file
      * @return an instance of Maxwellian distribution function.
@@ -71,9 +71,9 @@ public:
             PC_tree_t const& yaml_input_file);
 
     /**
-     * @brief Initializes the distribution function as the sum of a bulk and a bump-on-tail Maxwellians. 
-     * @param[out] allfequilibrium The initialized distribution function.
-     * @return The initialized distribution function.
+     * @brief Initialises the distribution function as the sum of a bulk and a bump-on-tail Maxwellians. 
+     * @param[out] allfequilibrium The initialised distribution function.
+     * @return The initialised distribution function.
      */
     DFieldSpVx operator()(DFieldSpVx allfequilibrium) const override;
 

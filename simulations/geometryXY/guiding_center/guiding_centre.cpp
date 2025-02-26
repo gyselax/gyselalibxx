@@ -17,7 +17,7 @@
 #include "euler.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
-#include "initialization_Kelvin_Helmholtz.hpp"
+#include "initialisation_Kelvin_Helmholtz.hpp"
 #include "input.hpp"
 #include "l_norm_tools.hpp"
 #include "output.hpp"
@@ -121,8 +121,8 @@ int main(int argc, char** argv)
             advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler_y);
 
 
-    // Create an initilizer ---
-    KelvinHelmholtzInstabilityInitialization initialize(epsilon, mode_k);
+    // Create an initializer ---
+    KelvinHelmholtzInstabilityInitialisation initialise(epsilon, mode_k);
 
 
     // Create predcorr operator: predictor-corrector method based on RK2 ---
@@ -137,7 +137,7 @@ int main(int argc, char** argv)
     DFieldMemXY allfdistribu_alloc(meshXY);
     DFieldXY allfdistribu = get_field(allfdistribu_alloc);
 
-    initialize(allfdistribu, allfdistribu_equilibrium);
+    initialise(allfdistribu, allfdistribu_equilibrium);
 
 
     // Initialisation of the electrostatic potential and electric field (for saving data)
@@ -196,7 +196,7 @@ int main(int argc, char** argv)
     display_time_difference("Simulation time: ", start, end);
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalize();
+    PDI_finalise();
     PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;

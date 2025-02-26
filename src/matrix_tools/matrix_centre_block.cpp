@@ -3,9 +3,9 @@
 #include <string.h> //for memcpy
 
 #include "matrix.hpp"
-#include "matrix_center_block.hpp"
+#include "matrix_centre_block.hpp"
 
-Matrix_Center_Block::Matrix_Center_Block(
+Matrix_Centre_Block::Matrix_Centre_Block(
         int const n,
         int const top_block_size,
         int const bottom_block_size,
@@ -18,7 +18,7 @@ Matrix_Center_Block::Matrix_Center_Block(
 {
 }
 
-void Matrix_Center_Block::adjust_indexes(int& i, int& j) const
+void Matrix_Centre_Block::adjust_indexes(int& i, int& j) const
 {
     if (i < top_block_size)
         i += q_block->get_size();
@@ -31,19 +31,19 @@ void Matrix_Center_Block::adjust_indexes(int& i, int& j) const
         j -= top_block_size;
 }
 
-double Matrix_Center_Block::get_element(int i, int j) const
+double Matrix_Centre_Block::get_element(int i, int j) const
 {
     adjust_indexes(i, j);
     return Matrix_Corner_Block::get_element(i, j);
 }
 
-void Matrix_Center_Block::set_element(int i, int j, double a_ij)
+void Matrix_Centre_Block::set_element(int i, int j, double a_ij)
 {
     adjust_indexes(i, j);
     Matrix_Corner_Block::set_element(i, j, a_ij);
 }
 
-DSpan1D Matrix_Center_Block::swap_array_to_corner(DSpan1D const bx) const
+DSpan1D Matrix_Centre_Block::swap_array_to_corner(DSpan1D const bx) const
 {
     memcpy(swap_array.get(),
            bx.data_handle() + top_block_size,
@@ -55,7 +55,7 @@ DSpan1D Matrix_Center_Block::swap_array_to_corner(DSpan1D const bx) const
     return bx;
 }
 
-DSpan2D Matrix_Center_Block::swap_array_to_corner(DSpan2D const bx) const
+DSpan2D Matrix_Centre_Block::swap_array_to_corner(DSpan2D const bx) const
 {
     int const ncols = bx.extent(1);
     memcpy(swap_array.get(),
@@ -68,7 +68,7 @@ DSpan2D Matrix_Center_Block::swap_array_to_corner(DSpan2D const bx) const
     return bx;
 }
 
-DSpan1D Matrix_Center_Block::swap_array_to_center(DSpan1D const bx) const
+DSpan1D Matrix_Centre_Block::swap_array_to_centre(DSpan1D const bx) const
 {
     memcpy(swap_array.get(), bx.data_handle(), q_block->get_size() * sizeof(double));
     memcpy(bx.data_handle(),
@@ -80,7 +80,7 @@ DSpan1D Matrix_Center_Block::swap_array_to_center(DSpan1D const bx) const
     return bx;
 }
 
-DSpan2D Matrix_Center_Block::swap_array_to_center(DSpan2D const bx) const
+DSpan2D Matrix_Centre_Block::swap_array_to_centre(DSpan2D const bx) const
 {
     int const ncols = bx.extent(1);
     memcpy(swap_array.get(), bx.data_handle(), q_block->get_size() * ncols * sizeof(double));
@@ -93,26 +93,26 @@ DSpan2D Matrix_Center_Block::swap_array_to_center(DSpan2D const bx) const
     return bx;
 }
 
-DSpan1D Matrix_Center_Block::solve_inplace(DSpan1D const bx) const
+DSpan1D Matrix_Centre_Block::solve_inplace(DSpan1D const bx) const
 {
     swap_array_to_corner(bx);
     Matrix_Corner_Block::solve_inplace(bx);
-    swap_array_to_center(bx);
+    swap_array_to_centre(bx);
     return bx;
 }
 
-DSpan1D Matrix_Center_Block::solve_transpose_inplace(DSpan1D const bx) const
+DSpan1D Matrix_Centre_Block::solve_transpose_inplace(DSpan1D const bx) const
 {
     swap_array_to_corner(bx);
     Matrix_Corner_Block::solve_transpose_inplace(bx);
-    swap_array_to_center(bx);
+    swap_array_to_centre(bx);
     return bx;
 }
 
-DSpan2D Matrix_Center_Block::solve_multiple_inplace(DSpan2D const bx) const
+DSpan2D Matrix_Centre_Block::solve_multiple_inplace(DSpan2D const bx) const
 {
     swap_array_to_corner(bx);
     Matrix_Corner_Block::solve_multiple_inplace(bx);
-    swap_array_to_center(bx);
+    swap_array_to_centre(bx);
     return bx;
 }

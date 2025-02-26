@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
-add_executable(guiding_center_XY guiding_center.cpp)
-target_link_libraries(guiding_center_XY
+add_executable(guiding_centre_XY guiding_centre.cpp)
+target_link_libraries(guiding_centre_XY
     PUBLIC
         DDC::core
         DDC::pdi
@@ -9,7 +9,7 @@ target_link_libraries(guiding_center_XY
         PDI::pdi
 
         gslx::advection
-        gslx::initialization_Kelvin_Helmholtz
+        gslx::initialisation_Kelvin_Helmholtz
         gslx::interpolation
         gslx::io
         gslx::geometry_XY
@@ -22,4 +22,4 @@ target_link_libraries(guiding_center_XY
     
 )
 
-install(TARGETS guiding_center_XY)
+install(TARGETS guiding_centre_XY)

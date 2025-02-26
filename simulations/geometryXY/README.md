@@ -2,4 +2,4 @@
 
 This folder contains the following simulations: 
 
-- [guiding\_center](./guiding_center/README.md) - A guiding center simulation. 
+- [guiding\_center](./guiding_centre/README.md) - A guiding centre simulation. 

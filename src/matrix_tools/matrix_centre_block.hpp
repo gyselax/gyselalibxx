@@ -40,7 +40,7 @@ class Matrix;
  *
  * Internally the matrix is saved in the corner format.
  */
-class Matrix_Center_Block : public Matrix_Corner_Block
+class Matrix_Centre_Block : public Matrix_Corner_Block
 {
 public:
     /**
@@ -50,7 +50,7 @@ public:
      * @param[in] bottom_block_size The size of the matrix I.
      * @param[in] q The banded section of the matrix.
      */
-    Matrix_Center_Block(
+    Matrix_Centre_Block(
             int n,
             int top_block_size,
             int bottom_block_size,
@@ -111,7 +111,7 @@ protected:
      * @param[inout] bx The solution of the rearranged matrix equation.
      * @return The solution of the matrix equation.
      */
-    DSpan1D swap_array_to_center(DSpan1D bx) const;
+    DSpan1D swap_array_to_centre(DSpan1D bx) const;
 
     /**
      * @brief Rearrange the elements of the right-hand sides of the equations so they are aligned
@@ -153,7 +153,7 @@ protected:
      * @param[inout] bx The solutions of the rearranged matrix equations.
      * @return The solutions of the matrix equations.
      */
-    DSpan2D swap_array_to_center(DSpan2D bx) const;
+    DSpan2D swap_array_to_centre(DSpan2D bx) const;
 
     /// The size of the sub-matrix A.
     int const top_block_size;

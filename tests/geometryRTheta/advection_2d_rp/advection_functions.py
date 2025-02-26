@@ -160,8 +160,8 @@ def get_simulation_config(executable_file):
     mapping, method, simulation = executable_name.replace('advection_', '').split('__')
     mapping, domain = mapping.lower().split('_mapping_')
     method = method.replace('_METHOD', '').lower()
-    simulation = simulation.replace('_SIMULATION', '').capitalize()
-    description = f'{simulation.capitalize()} with {method} on {mapping} and {domain}'
+    simulation = simulation.replace('_SIMULATION', '').capitalise()
+    description = f'{simulation.capitalise()} with {method} on {mapping} and {domain}'
     return mapping, method, domain, simulation, description
 
 def extract_simulation_results(var_out):
@@ -188,10 +188,10 @@ def extract_simulation_results(var_out):
                                          if "MAPPING" in line and "DOMAIN" in line]
 
     # Build a readable description of the simulation
-    simulation_names = [f'{simu.capitalize()} with {method} on {mapping} and {domain}'
+    simulation_names = [f'{simu.capitalise()} with {method} on {mapping} and {domain}'
                         for mapping, domain, method, simu in simulation_description]
 
-    simulation_keys = [(method, mapping.replace(" mapping","")+" "+domain.replace(" domain",""), simu.capitalize())
+    simulation_keys = [(method, mapping.replace(" mapping","")+" "+domain.replace(" domain",""), simu.capitalise())
                         for mapping, domain, method, simu in simulation_description]
 
     l_inf_errors = [[float(line.split()[-1]) for line in o if "Max absolute error" in line] for o in out_lines]
@@ -288,7 +288,7 @@ def distance(x1, y1, x2, y2):
 
     Returns
     -------
-        The distance between the two poins.
+        The distance between the two points.
     """
     Distance = np.sqrt((x1 - x2)**2 + (y1 - y2)**2)
     return Distance

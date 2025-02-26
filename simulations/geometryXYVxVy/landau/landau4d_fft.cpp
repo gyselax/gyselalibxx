@@ -80,13 +80,13 @@ int main(int argc, char** argv)
     SplineVxBuilder const builder_vx(meshXYVxVy);
     SplineVyBuilder const builder_vy(meshXYVxVy);
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     DFieldMemSpVxVy allfequilibrium(meshSpVxVy);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
     init_fequilibrium(get_field(allfequilibrium));
     DFieldMemSpXYVxVy allfdistribu(meshSpXYVxVy);
-    SingleModePerturbInitialization const init = SingleModePerturbInitialization::
+    SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
             init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
     init(get_field(allfdistribu));
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
@@ -173,7 +173,7 @@ int main(int argc, char** argv)
 
     PC_tree_destroy(&conf_pdi);
 
-    PDI_finalize();
+    PDI_finalise();
 
     PC_tree_destroy(&conf_voicexx);
 

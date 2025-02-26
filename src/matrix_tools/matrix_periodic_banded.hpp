@@ -38,7 +38,7 @@ public:
     virtual void set_element(int i, int j, double a_ij) override;
 
 protected:
-    virtual void calculate_delta_to_factorize() override;
+    virtual void calculate_delta_to_factorise() override;
     virtual DSpan1D solve_lambda_section(DSpan1D v, DView1D u) const override;
     virtual DSpan1D solve_lambda_section_transpose(DSpan1D u, DView1D v) const override;
     /// Number of subdiagonals.

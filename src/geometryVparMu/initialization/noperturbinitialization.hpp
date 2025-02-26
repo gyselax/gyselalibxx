@@ -9,24 +9,24 @@
 #include "paraconfpp.hpp"
 #include "species_info.hpp"
 
-/// Initialization operator with no perturbation, i.e the distribution function equal to the Maxwellian
-class NoPerturbInitialization : public IInitialization
+/// Initialisation operator with no perturbation, i.e the distribution function equal to the Maxwellian
+class NoPerturbInitialisation : public IInitialisation
 {
     DConstFieldSpVparMu m_fequilibrium;
 
 public:
     /**
-     * @brief Creates an instance of the NoPerturbInitialization class.
+     * @brief Creates an instance of the NoPerturbInitialisation class.
      * @param[in] fequilibrium A Maxwellian. 
      */
-    NoPerturbInitialization(DConstFieldSpVparMu fequilibrium);
+    NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium);
 
-    ~NoPerturbInitialization() override = default;
+    ~NoPerturbInitialisation() override = default;
 
     /**
-     * @brief Initializes the distribution function as as a  Maxwellian. 
-     * @param[in, out] allfdistribu The initialized distribution function.
-     * @return The initialized distribution function.
+     * @brief Initialises the distribution function as as a  Maxwellian. 
+     * @param[in, out] allfdistribu The initialised distribution function.
+     * @return The initialised distribution function.
      */
     DFieldSpVparMu operator()(DFieldSpVparMu allfdistribu) const override;
 };

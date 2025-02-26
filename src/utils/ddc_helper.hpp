@@ -189,7 +189,7 @@ struct OnMemorySpace
 /**
  * @brief Set a `ddc::Chunk` on a given NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk.
+ * @tparam ElementType Type of the elements in the ddc::Chunk.
  * @tparam SupportType Type of the domain of the ddc::Chunk.
  * @tparam Allocator Allocator type (see ddc::KokkosAllocator).
  * @see ddc::Chunk
@@ -205,7 +205,7 @@ struct OnMemorySpace<NewMemorySpace, ddc::Chunk<ElementType, SupportType, Alloca
  * @brief Get a new `ddc::ChunkSpan` type with the same parametrisation
  * except in the memory space which is set to NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk.
+ * @tparam ElementType Type of the elements in the ddc::Chunk.
  * @tparam SupportType Type of the domain of the ddc::Chunk.
  * @tparam Layout Layout tag (see Kokkos).
  * @tparam MemorySpace The original memory space of the chunk.

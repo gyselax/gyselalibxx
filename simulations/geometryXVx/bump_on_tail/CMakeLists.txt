@@ -11,7 +11,7 @@ target_link_libraries(bumpontail_fem_uniform_${GEOMETRY_VARIANT}
         DDC::pdi
         paraconf::paraconf
         PDI::pdi
-        gslx::initialization_${GEOMETRY_VARIANT}
+        gslx::initialisation_${GEOMETRY_VARIANT}
         gslx::interpolation
         gslx::paraconfpp
         gslx::poisson_${GEOMETRY_VARIANT}
@@ -35,7 +35,7 @@ target_link_libraries(bumpontail_fft
         DDC::pdi
         paraconf::paraconf
         PDI::pdi
-        gslx::initialization_xperiod_vx
+        gslx::initialisation_xperiod_vx
         gslx::interpolation
         gslx::paraconfpp
         gslx::poisson_xperiod_vx

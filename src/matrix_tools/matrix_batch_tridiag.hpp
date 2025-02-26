@@ -9,7 +9,7 @@
 #include "matrix_batch.hpp"
 
 /**
- * @brief A structure for solving a set of independant tridiagonal systems using a direct method.
+ * @brief A structure for solving a set of independent tridiagonal systems using a direct method.
  * The parallelism operates on the whole collection by dispatching to threads.
  * Each problem is treated sequentially, by the tridiagonal matrix algorithm (TDMA).
  * This solver is stable for tridiagonal matrices which satisfy one of the following conditions:
@@ -125,7 +125,7 @@ public:
      *
      * It calls check_stability function to verify if the matrices data is in range of validity of the solver.
      *
-     * The stopping criterion is a reduction factor ||Ax-b||/||b||<tol with max_iter maximum iterations.
+     * The stopping criterion is a reduction factor ||Axe-b||/||b||<tol with max_iter maximum iterations.
      */
     void setup_solver() final
     {
@@ -133,7 +133,7 @@ public:
     }
 
     /**
-     * @brief Solve the batched linear problem Ax=b.
+     * @brief Solve the batched linear problem Axe=b.
      *
      * @param[in, out] b A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solutions.
      */

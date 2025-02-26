@@ -20,9 +20,9 @@
 #include "vector_field_mem.hpp"
 
 /**
- * @brief Predictor-corrector based on RK2 for the guiding-center model. 
+ * @brief Predictor-corrector based on RK2 for the guiding-centre model. 
  * 
- * It solves in time the following guiding-center equations system:
+ * It solves in time the following guiding-centre equations system:
  *
  * - @f$  -\Delta \phi = f @f$,
  * - @f$ E = - \nabla \phi @f$,

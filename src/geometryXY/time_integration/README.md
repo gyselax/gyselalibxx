@@ -5,7 +5,7 @@
 The PredCorrRK2XY defines a predictor-corrector based on the RK2 time integration method. 
 The RK2 method is implemented in the ITimeStepper method (see [rk2](../../timestepper/README.md)). 
 
-This time integration method is applied to a a guiding-center equations system documented in [guiding\_center](./../../../simulations/geometryXY/guiding_center/README.md). 
+This time integration method is applied to a a guiding-centre equations system documented in [guiding\_center](./../../../simulations/geometryXY/guiding_center/README.md). 
 ```math
     \partial_t f(t, x, y) + (E(t, x, y)\wedge e_z) \cdot \nabla f(t, x, y) = 0, \\
     - \Delta \phi(t, x, y)  = -\partial_x^2 \phi(t, x, y) -\partial_y^2 \phi(t, x, y) = f(t, x, y), \\

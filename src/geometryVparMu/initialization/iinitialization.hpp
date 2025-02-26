@@ -5,18 +5,18 @@
 #include "geometry.hpp"
 
 /**
- * @brief An abstract class that allows for initializing a distribution function.
+ * @brief An abstract class that allows for initialising a distribution function.
  */
-class IInitialization
+class IInitialisation
 {
 public:
-    virtual ~IInitialization() = default;
+    virtual ~IInitialisation() = default;
 
     /**
-     * @brief Operator for initializing a distribution function.
+     * @brief Operator for initialising a distribution function.
      * @param[in, out] allfdistribu On input: the uninitialized distribution function.
-     *                                 On output: the initialized distribution function.
-     * @return The initialized distribution function.
+     *                                 On output: the initialised distribution function.
+     * @return The initialised distribution function.
      */
     virtual DFieldSpVparMu operator()(DFieldSpVparMu allfdistribu) const = 0;
 };

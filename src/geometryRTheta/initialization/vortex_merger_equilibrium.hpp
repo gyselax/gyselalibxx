@@ -166,7 +166,7 @@ public:
             rho_eq(irp) = sigma(irp) * function(phi_eq(irp));
         });
 
-        // Unify at the center point:
+        // Unify at the centre point:
         IdxRangeR r_idx_range = get_idx_range<GridR>(rho_eq);
         IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(rho_eq);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {

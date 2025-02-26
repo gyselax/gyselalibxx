@@ -1,4 +1,4 @@
-# Initialization on (x,y) geometry
+# Initialisation on (x,y) geometry
 
 Describes different initial conditions for the simulations in $`(x,y)`$ geometry. 
 
@@ -6,7 +6,7 @@ Describes different initial conditions for the simulations in $`(x,y)`$ geometry
 
 
 ## Kelvin-Helmholtz instability test case
-For this test case, the KelvinHelmholtzInstabilityInitialization sets the initial conditions at
+For this test case, the KelvinHelmholtzInstabilityInitialisation sets the initial conditions at
 ```math
     f(0, x, y) = f_{\text{eq}}(x,y) + \varepsilon\cos(kx),  \\
     f_{\text{eq}}(x,y) = \sin(y)
@@ -16,4 +16,4 @@ with $`\varepsilon = 0.015`$ the amplitude of perturbation and $`k = 2\pi/ L_x =
 
 We suppose the domain periodic on $`x`$ and $`y`$.
 
-These are applied in the guiding-center equations. See in [guiding-center](./../../../simulations/geometryXY/guiding_center/README.md).
+These are applied in the guiding-centre equations. See in [guiding-centre](./../../../simulations/geometryXY/guiding_center/README.md).

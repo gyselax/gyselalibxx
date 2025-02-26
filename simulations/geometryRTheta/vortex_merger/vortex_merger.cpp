@@ -39,7 +39,7 @@
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vortex_merger_equilibrium.hpp"
-#include "vortex_merger_initialization.hpp"
+#include "vortex_merger_initialisation.hpp"
 
 
 namespace {
@@ -290,7 +290,7 @@ int main(int argc, char** argv)
 
 
     // --- Save initial data --------------------------------------------------------------------------
-    ddc::PdiEvent("initialization")
+    ddc::PdiEvent("initialisation")
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
@@ -310,7 +310,7 @@ int main(int argc, char** argv)
 
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalize();
+    PDI_finalise();
     PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;

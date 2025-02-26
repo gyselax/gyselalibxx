@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include "diocotron_initialization_equilibrium.hpp"
+#include "diocotron_initialisation_equilibrium.hpp"
 #include "geometry.hpp"
 
 

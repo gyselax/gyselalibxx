@@ -80,7 +80,7 @@ inline void write_log(
     log_file << " System no. " << batch_index << ":" << std::endl;
     log_file << " Number of iterations = " << num_iterations << std::endl;
     log_file << " Implicit residual norm = " << implicit_res_norm << std::endl;
-    log_file << " True (Ax-b) residual norm = " << true_res_norm << std::endl;
+    log_file << " True (Axe-b) residual norm = " << true_res_norm << std::endl;
     log_file << " Right-hand side (b) norm = " << b_norm << std::endl;
     if (!(true_res_norm <= tol)) {
         log_file << " --- System " << batch_index << " did not converge! ---" << std::endl;
@@ -138,7 +138,7 @@ void save_logger(
     one->fill(1.0);
     auto neg_one = gko::matrix::Dense<double>::create(gko_exec, norm_dim);
     neg_one->fill(-1.0);
-    //to estimate the "true" residual, the apply function below computes Ax-res, and stores the result in res.
+    //to estimate the "true" residual, the apply function below computes Axe-res, and stores the result in res.
     matrix->apply(one, x, neg_one, res);
     //compute residual norm.
     res->compute_norm2(res_norm_host);
@@ -203,7 +203,7 @@ void save_logger(
     one->fill(1.0);
     auto neg_one = gko::batch::MultiVector<double>::create(gko_exec, norm_dim);
     neg_one->fill(-1.0);
-    //to estimate the "true" residual, the apply function below computes Ax-res, and stores the result in res.
+    //to estimate the "true" residual, the apply function below computes Axe-res, and stores the result in res.
     batch_matrix->apply(one, x, neg_one, res);
     //compute residual norm.
     res->compute_norm2(res_norm_host);

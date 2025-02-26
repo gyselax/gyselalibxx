@@ -268,7 +268,7 @@ public:
      * @brief Build an iterator using the current value and the distance to the following element
      *
      * @param value The value of the discrete sub-index range element.
-     * @param stride The stride between consectuive sub-index range elements.
+     * @param stride The stride between consecutive sub-index range elements.
      */
     KOKKOS_FUNCTION constexpr explicit IdxRangeSliceIterator(
             Idx<Grid1D> value,

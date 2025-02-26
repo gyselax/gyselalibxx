@@ -6,12 +6,12 @@
 #include "noperturbinitialization.hpp"
 
 
-NoPerturbInitialization::NoPerturbInitialization(DConstFieldSpVparMu fequilibrium)
+NoPerturbInitialisation::NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium)
     : m_fequilibrium(fequilibrium)
 {
 }
 
-DFieldSpVparMu NoPerturbInitialization::operator()(DFieldSpVparMu const allfdistribu) const
+DFieldSpVparMu NoPerturbInitialisation::operator()(DFieldSpVparMu const allfdistribu) const
 {
     IdxRangeSpVparMu const idxrange_spvparmu = get_idx_range(allfdistribu);
 

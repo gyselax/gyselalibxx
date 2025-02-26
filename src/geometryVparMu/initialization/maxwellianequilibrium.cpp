@@ -25,7 +25,7 @@ DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequili
     IdxRangeSp const idxrange_sp = get_idx_range<Species>(allfequilibrium);
     IdxRangeVparMu const idxrange_vparmu = get_idx_range<GridVpar, GridMu>(allfequilibrium);
 
-    // Initialization of the maxwellian
+    // Initialisation of the maxwellian
     DFieldMemVparMu maxwellian_alloc(idxrange_vparmu);
     DFieldVparMu maxwellian = get_field(maxwellian_alloc);
     double const magnetic_field(1.0);

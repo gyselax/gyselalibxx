@@ -77,7 +77,7 @@ public:
 };
 
 template <class PatchLocator>
-void test_operator_assignement(
+void test_operator_assignment(
         PatchLocator const& patch_locator,
         Kokkos::View<Coord<X, Y>*> coords,
         Kokkos::View<int*> patches)
@@ -175,7 +175,7 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCircularOnionPatchLocator2PatchesTes
     Kokkos::deep_copy(coords, coords_host);
     Kokkos::deep_copy(patches, patches_host);
 
-    test_operator_assignement(patch_locator, coords, patches);
+    test_operator_assignment(patch_locator, coords, patches);
 }
 
 
@@ -223,7 +223,7 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     Kokkos::deep_copy(coords, coords_host);
     Kokkos::deep_copy(patches, patches_host);
 
-    test_operator_assignement(patch_locator, coords, patches);
+    test_operator_assignment(patch_locator, coords, patches);
 }
 
 

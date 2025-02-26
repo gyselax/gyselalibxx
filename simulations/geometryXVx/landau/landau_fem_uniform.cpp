@@ -73,7 +73,7 @@ int main(int argc, char** argv)
     SplineXBuilder_1d const builder_x_poisson(mesh_x);
     SplineVxBuilder const builder_vx(meshXVx);
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
@@ -84,11 +84,11 @@ int main(int argc, char** argv)
     DFieldMemSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
-        SingleModePerturbInitialization const init = SingleModePerturbInitialization::
+        SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
                 init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
         init(get_field(allfdistribu));
     } else {
-        RestartInitialization const restart(iter_start, time_start);
+        RestartInitialisation const restart(iter_start, time_start);
         restart(get_field(allfdistribu));
     }
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
@@ -162,7 +162,7 @@ int main(int argc, char** argv)
 
     PC_tree_destroy(&conf_pdi);
 
-    PDI_finalize();
+    PDI_finalise();
 
     PC_tree_destroy(&conf_voicexx);
 

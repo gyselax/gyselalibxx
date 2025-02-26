@@ -62,14 +62,14 @@ TEST(CollisionsInter, CollisionsInter)
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
 
-    // Initialization of the distribution function as a maxwellian
+    // Initialisation of the distribution function as a maxwellian
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     DFieldMemSpXVx allfdistribu(mesh);
 
     std::vector<double> deltat_list = {0.1, 0.01};
     std::vector<double> error_deltat;
     for (double deltat : deltat_list) {
-        // Initialization of the distribution function as a maxwellian with a
+        // Initialisation of the distribution function as a maxwellian with a
         // different electron and ion temperatures
         double const density_init(1.);
         host_t<DFieldMemSp> temperature_init(idx_range_sp);
@@ -163,5 +163,5 @@ TEST(CollisionsInter, CollisionsInter)
     EXPECT_LE(relative_error, 0.05);
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalize();
+    PDI_finalise();
 }

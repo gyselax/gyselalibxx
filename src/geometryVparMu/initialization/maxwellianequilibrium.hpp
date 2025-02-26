@@ -9,7 +9,7 @@
 #include "paraconfpp.hpp"
 #include "species_info.hpp"
 
-/// Equilibrium operator as Maxwellian. This initializes all species.
+/// Equilibrium operator as Maxwellian. This initialises all species.
 class MaxwellianEquilibrium : public IEquilibrium
 {
     // mass of all kinetic species
@@ -47,7 +47,7 @@ public:
     ~MaxwellianEquilibrium() override = default;
 
     /**
-     * @brief Read the density, temperature and mean velocity required to initialize the Maxwellian in a YAML input file.
+     * @brief Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.
      * @param[in] idx_range_kinsp Index range for the kinetic species
      * @param[in] yaml_input_file YAML input file
      * @return an instance of Maxwellian distribution function.
@@ -57,7 +57,7 @@ public:
             PC_tree_t const& yaml_input_file);
 
     /**
-     * @brief Initializes allfequilibrium as a Maxwellian.
+     * @brief Initialises allfequilibrium as a Maxwellian.
      * @param[out] allfequilibrium A Field containing a Maxwellian distribution function.
      * @return A Field containing a Maxwellian distribution function.
      */
