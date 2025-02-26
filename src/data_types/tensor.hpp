@@ -294,6 +294,30 @@ public:
     }
 
     /**
+     * @brief An operator to compare one tensor to another elementwise.
+     * @param o_tensor The tensor that should be compared with the current tensor.
+     * @return True if the tensors are equal, false otherwise.
+     */
+    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor) const
+    {
+        bool equal(true);
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            equal &= (m_data[i] == o_tensor.m_data[i]);
+        }
+        return equal;
+    }
+
+    /**
+     * @brief An operator to compare one tensor to another elementwise.
+     * @param o_tensor The tensor that should be compared with the current tensor.
+     * @return False if the tensors are equal, true otherwise.
+     */
+    KOKKOS_FUNCTION bool operator!=(Tensor const& o_tensor) const
+    {
+        return !(*this == o_tensor);
+    }
+
+    /**
      * @brief A helper type alias to get all possible indices along a
      * specified dimension.
      * @tparam Dim The dimension of interest (0 <= dim < rank()).
