@@ -131,7 +131,7 @@ struct VectorIndexIdMap
     /// The character identifying the index.
     static constexpr char id = Id;
     /// The VectorIndexSet describing valid indices for this component.
-    using possible_idx_values = ValidVectorIndexSet;
+    using possible_idx_values = AssociatedVectorIndexSet;
 };
 
 } // namespace tensor_tools
