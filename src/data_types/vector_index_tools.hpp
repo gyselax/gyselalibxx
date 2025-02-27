@@ -119,13 +119,14 @@ struct vector_index_set_dual<VectorIndexSet<Dims...>>
  * which can take one of multiple possible values (types).
  *
  * @tparam Id The character identifying the index.
- * @tparam ValidVectorIndexSet The VectorIndexSet describing valid indices.
+ * @tparam AssociatedVectorIndexSet The VectorIndexSet describing the indices
+ *              associated with this identifier.
  */
-template <char Id, class ValidVectorIndexSet>
+template <char Id, class AssociatedVectorIndexSet>
 struct VectorIndexIdMap
 {
     static_assert(
-            tensor_tools::is_vector_index_set<ValidVectorIndexSet>::value,
+            tensor_tools::is_vector_index_set<AssociatedVectorIndexSet>::value,
             "The possible index values must be described by a VectorIndexSet.");
     /// The character identifying the index.
     static constexpr char id = Id;
