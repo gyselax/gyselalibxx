@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Geometry (x, y, v_x, v_y)</title>
+<title>Gyselalib++: Initialisation methods</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('src_geometryXYVxVy.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('src_geometryXYVxVy_initialization.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,14 +103,13 @@ $(document).ready(function(){initNavTree('src_geometryXYVxVy.html',''); initResi
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Geometry (x, y, v_x, v_y)</div></div>
+  <div class="headertitle"><div class="title">Initialisation methods</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The <code>geoemtryXYVxVy</code> folder contains all the code describing methods which are specific to a geometry with 2 spatial dimensions and 2 velocity dimensions. It is broken up into the following sub-folders:</p>
-<ul>
-<li><a class="el" href="src_geometryXYVxVy_geometry.html">Geometry X Y-Vx Vy</a> --&gt; - All the dimension tags used for a simulation in the geoemtry.</li>
-<li><a class="el" href="src_geometryXYVxVy_initialization.html">Initialisation methods</a> - --&gt;</li>
-<li><a class="el" href="src_geometryXYVxVy_poisson.html">Quasi-Neutrality Solver</a> - Code describing the Quasi-Neutrality solver. </li>
+<div class="textblock"><p>The initialisation folder contains any methods that define the value of the distribution function at the start of the simulation.</p>
+<p>The implemented initialisation methods are:</p><ul>
+<li><a class="el" href="classMaxwellianEquilibrium.html" title="Equilibrium operator as Maxwellian. This initializes all species.">MaxwellianEquilibrium</a></li>
+<li><a class="el" href="classSingleModePerturbInitialization.html" title="A class that initializes the distribution function as a perturbed Maxwellian.">SingleModePerturbInitialization</a> </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

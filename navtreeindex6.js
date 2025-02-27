@@ -98,9 +98,10 @@ var NAVTREEINDEX6 =
 "src_geometryXY.html":[13,6],
 "src_geometryXYVxVy.html":[13,7],
 "src_geometryXYVxVy_geometry.html":[13,7,0],
-"src_geometryXYVxVy_poisson.html":[13,7,1],
-"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density":[13,7,1,0],
-"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver":[13,7,1,1],
+"src_geometryXYVxVy_initialization.html":[13,7,1],
+"src_geometryXYVxVy_poisson.html":[13,7,2],
+"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density":[13,7,2,0],
+"src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver":[13,7,2,1],
 "src_geometryXY_geometry.html":[13,6,0],
 "src_geometryXY_initialization.html":[13,6,1],
 "src_geometryXY_initialization.html#src_geometryXY_initialization__Kelvin-Helmholtz_instability_test_case":[13,6,1,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abad4a55c8bc66356aeb75b17e6169325":[15,161,0],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abcf91678d4dd96d85521818178d54d66":[15,161,17],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abf58b838d30e05fa91d71feec6dde132":[15,161,4],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f":[15,161,18],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8":[15,161,15]
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ac165e7e0ef0a783518a55c822eeec67f":[15,161,18]
 };

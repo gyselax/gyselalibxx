@@ -191,6 +191,7 @@ var NAVTREE =
       ] ],
       [ "Geometry (x, y, v_x, v_y)", "src_geometryXYVxVy.html", [
         [ "Geometry X Y-Vx Vy", "src_geometryXYVxVy_geometry.html", null ],
+        [ "Initialisation methods", "src_geometryXYVxVy_initialization.html", null ],
         [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html", [
           [ "Charge Density", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density", null ],
           [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver", null ]
@@ -280,7 +281,7 @@ var NAVTREEINDEX =
 "classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925",
 "dir_0b94a1bc260289a82ecb53162f2bb9d0.html",
 "quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33"
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
