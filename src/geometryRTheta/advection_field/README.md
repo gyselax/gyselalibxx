@@ -151,7 +151,7 @@ with
 * $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
 * $`G = J^T J = [g_{ij}]_{ij}`$ the metric tensor, 
 * $`G^{-1} = [g^{ij}]_{ij}`$ the inverse metric tensor 
-* and $`e_j`$ the unnormalized local covariant vectors. 
+* and $`e_j`$ the unnormalised local covariant vectors. 
 
 In 2D, it can be rewritten as the following matrix system 
 ```math
@@ -236,7 +236,7 @@ G^{-1}
 \end{bmatrix}.
 ```
 
-In the code, the O-point is differently treated. The domain is split between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearization done in the [Advection field along the physical domain axis](#src_geometryRTheta_advection_field__Guiding_center_case) section. 
+In the code, the O-point is differently treated. The domain is split between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the [Advection field along the physical domain axis](#src_geometryRTheta_advection_field__Guiding_center_case) section. 
 
 
 

@@ -47,7 +47,7 @@ There are multiple time integration methods available which are implemented in t
  
 We are listing the different schemes for this equation $`\partial_t X (t) = A_x(t, X(t),Y(t))`$. 
 
-We write $X (t) = X (t; s, x, y)$,  $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation 
+We write $X (t) = X (t; s, x, y)$, $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation 
 $`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
 
  
