@@ -124,6 +124,9 @@ struct vector_index_set_dual<VectorIndexSet<Dims...>>
 template <char Id, class ValidVectorIndexSet>
 struct VectorIndexIdMap
 {
+    static_assert(
+            tensor_tools::is_vector_index_set<ValidVectorIndexSet>::value,
+            "The possible index values must be described by a VectorIndexSet.");
     /// The character identifying the index.
     static constexpr char id = Id;
     /// The VectorIndexSet describing valid indices for this component.
