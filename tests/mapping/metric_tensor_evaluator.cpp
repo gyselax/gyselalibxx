@@ -114,6 +114,7 @@ void check_inverse_tensor(
 {
     double TOL = 1e-10;
 
+    static_assert(ddc::type_seq_size_v<Dims> == 2);
     using Dim0 = ddc::type_seq_element_t<0, Dims>;
     using Dim1 = ddc::type_seq_element_t<1, Dims>;
     using Dim0_cov = typename Dim0::Dual;
