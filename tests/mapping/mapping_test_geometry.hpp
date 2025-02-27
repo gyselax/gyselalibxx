@@ -173,4 +173,3 @@ void check_inverse_tensor(
                                       * ddcHelper::get<EndDim1, StartDim1_cov>(inv_tensor);
     EXPECT_NEAR(id_val11, 1., TOL);
 }
-

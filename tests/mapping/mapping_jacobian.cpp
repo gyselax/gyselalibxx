@@ -18,7 +18,6 @@
 
 
 
-
 /**
  * @brief A class for the Google tests.
  */

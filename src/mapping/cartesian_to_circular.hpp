@@ -154,8 +154,8 @@ public:
      * @see Jacobian::jacobian_21
      * @see Jacobian::jacobian_22
      */
-    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>>
-    jacobian_matrix(Coord<X, Y> const& coord) const
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
+            Coord<X, Y> const& coord) const
 
     {
         const double x = ddc::get<X>(coord);

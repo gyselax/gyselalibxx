@@ -126,10 +126,9 @@ public:
     }
 
     template <class... Dims>
-    operator Coord<Dims...>() {
-        static_assert(
-                rank() == 1,
-                "Only vectors can be converted to coordinates");
+    operator Coord<Dims...>()
+    {
+        static_assert(rank() == 1, "Only vectors can be converted to coordinates");
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
