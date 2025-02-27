@@ -117,7 +117,9 @@ public:
             return SamplingImpl(interp_points);
         } else {
             using SamplingImpl = typename Sampling::template Impl<Sampling, Kokkos::HostSpace>;
-            SamplingImpl result(interp_points[0], interp_points[1] - interp_points[0]);
+            double domain_len = ddc::discrete_space<BSplines>().rmax()
+                                - ddc::discrete_space<BSplines>().rmin();
+            SamplingImpl result(interp_points.front(), domain_len / (interp_points.size() - 1));
             IdxRange<Sampling> idx_range(get_domain<Sampling>());
             bool same_points = ddc::transform_reduce(
                     idx_range,
