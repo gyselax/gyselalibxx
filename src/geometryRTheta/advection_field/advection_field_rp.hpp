@@ -477,8 +477,6 @@ private:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-            Matrix_2x2 J; // Jacobian matrix
-            m_mapping.jacobian_matrix(coord_rp, J);
             Matrix_2x2 inv_G; // Inverse metric tensor
             metric_tensor.inverse(inv_G, coord_rp);
             Matrix_2x2 G; // Metric tensor
