@@ -9,42 +9,42 @@ Parameters
 ----------
 rmin : float
     Minimum value of the r values.
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 rmax : float
     Maximum value of the r values.
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Nr : int
     Number of break points in r dimension
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Nth : int
     Number of break points in theta dimension
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 dt : float
     Time step.
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 T : float
     Final time.
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 curves : bool
     Boolean to select if the values of the advected function are saved.
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 feet : bool
     Boolean to select if the characteristic feet are saved.
-    Possibility for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 
