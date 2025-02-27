@@ -56,7 +56,7 @@ public:
     template <class Patch>
     using InternalConstFieldOnPatch = typename T<Patch>::view_type;
 
-    template <template <typename P> typename OT, class... OPatches>
+    template <template <typename P> typename OtherType, class... OPatches>
     friend class MultipatchFieldMem;
 
 public:
@@ -102,8 +102,8 @@ public:
      *
      * @param other The equivalent MultipatchFieldMem being copied.
      */
-    template <template <typename P> typename OT, class... OPatches>
-    MultipatchFieldMem(MultipatchFieldMem<OT, OPatches...>&& other) : base_type(other)
+    template <template <typename P> typename OtherType, class... OPatches>
+    MultipatchFieldMem(MultipatchFieldMem<OtherType, OPatches...>&& other) : base_type(other)
     {
         static_assert(
                 std::is_same_v<ddc::detail::TypeSeq<Patches...>, ddc::detail::TypeSeq<OPatches...>>,
@@ -111,7 +111,7 @@ public:
                 "different "
                 "ordering");
         static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OT<OPatches>...>>,
+                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<OPatches>...>>,
                 "MultipatchFieldMems are not equivalent");
     }
 
