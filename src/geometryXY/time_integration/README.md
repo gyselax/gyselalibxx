@@ -13,7 +13,7 @@ This time integration method is applied to a a guiding-centre equations system d
 ```
 
 
-Applied to this equations system, we have, writing $`\{t^n\}_n \text{ the time discretization, and } f^n = f(t^n, \cdot, \cdot)`$:
+Applied to this equations system, we have, writing $`\{t^n\}_n \text{ the time discretisation, and } f^n = f(t^n, \cdot, \cdot)`$:
 
 
 For $n\geq 0$,

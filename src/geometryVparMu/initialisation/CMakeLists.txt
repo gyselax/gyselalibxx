@@ -2,7 +2,7 @@
 
 add_library("initialisation_vparmu" STATIC
     maxwellianequilibrium.cpp
-    noperturbinitialization.cpp
+    noperturbinitialisation.cpp
 )
 
 target_include_directories("initialisation_vparmu"

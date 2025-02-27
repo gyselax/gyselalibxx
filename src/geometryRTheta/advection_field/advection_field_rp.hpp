@@ -114,7 +114,7 @@ public:
      * @param[in] mapping
      *      The mapping @f$ \mathcal{F} @f$ from the logical index range to the physical index range.
      * @param[in] epsilon
-     *      The parameter @f$ \varepsilon @f$ for the linearization of the
+     *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
      */
     explicit AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)

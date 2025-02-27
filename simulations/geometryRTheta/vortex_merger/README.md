@@ -64,7 +64,7 @@ with
 * $\varepsilon = 10^{-4}$.
 
 The equilibrium solution is computed during the initialisation phase in the VortexMergerEquilibria class. 
-The details are documented in [initialisation](./../../../src/geometryRTheta/initialization/README.md). 
+The details are documented in [initialisation](./../../../src/geometryRTheta/initialisation/README.md). 
 
 
 ## References

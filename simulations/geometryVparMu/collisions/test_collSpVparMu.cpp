@@ -18,7 +18,7 @@
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
-#include "noperturbinitialization.hpp"
+#include "noperturbinitialisation.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -152,7 +152,7 @@ int main(int argc, char** argv)
 
 
     // --------- FINALISATION ---------
-    PDI_finalise();
+    PDI_finalize();
     PC_tree_destroy(&conf_pdi);
     PC_tree_destroy(&conf_collision);
 

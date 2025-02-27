@@ -163,5 +163,5 @@ TEST(CollisionsInter, CollisionsInter)
     EXPECT_LE(relative_error, 0.05);
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
 }

@@ -169,7 +169,7 @@ public:
      * @param[in] evaluator_advection_field
      *      The B-splines evaluator to evaluate the advection field.
      * @param[in] epsilon
-     *      @f$ \varepsilon @f$ parameter used for the linearization of the
+     *      @f$ \varepsilon @f$ parameter used for the linearisation of the
      *      advection field around the central point.
      *
      * @see ITimeStepper

@@ -11,7 +11,7 @@
 
 
 namespace ddcHelper {
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * Calculate the total length of a non-periodic domain.
@@ -27,7 +27,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
     return std::fabs(ddc::rlength(idx_range));
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * Calculate the total length of a uniform periodic domain.
@@ -45,7 +45,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
     return std::fabs(ddc::rlength(idx_range) + ddc::step<IDim>());
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * Calculate the total length of a non-uniform periodic domain.
@@ -64,7 +64,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
     return std::fabs(ddc::rlength(dom_periodic));
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * @brief Calculate the Coordinate inside the domain.

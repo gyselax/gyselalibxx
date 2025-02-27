@@ -2,7 +2,7 @@
 
 add_library("initialisation_xyvxvy" STATIC
     maxwellianequilibrium.cpp
-    singlemodeperturbinitialization.cpp
+    singlemodeperturbinitialisation.cpp
 )
 
 target_include_directories("initialisation_xyvxvy"

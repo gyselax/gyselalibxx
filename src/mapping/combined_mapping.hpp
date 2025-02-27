@@ -60,7 +60,7 @@ public:
      * @param[in] mapping_1 The first mapping.
      * @param[in] mapping_2 The second mapping.
      * @param[in] epsilon The parameter @f$ \varepsilon @f$ which determines when a point is
-     *          close enough to the central O-point for linearization to be required when
+     *          close enough to the central O-point for linearisation to be required when
      *          calculating the inverse of the Jacobian. The Jacobian is linearised on 
      *          @f$ r \in [0, \varepsilon] @f$.
      */

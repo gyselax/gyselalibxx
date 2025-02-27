@@ -123,7 +123,7 @@ TEST(KrookSource, Adaptive)
                 + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
     });
 
-    // reinitialization of the distribution function
+    // reinitialisation of the distribution function
     ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
         DFieldMemVx finit(gridvx);
         if (charge(ddc::select<Species>(ispx)) >= 0.) {
@@ -157,7 +157,7 @@ TEST(KrookSource, Adaptive)
     });
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
 }
 
 TEST(KrookSource, Constant)
@@ -264,5 +264,5 @@ TEST(KrookSource, Constant)
     });
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
 }

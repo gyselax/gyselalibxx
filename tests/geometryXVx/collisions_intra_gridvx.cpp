@@ -93,5 +93,5 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     });
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
 }

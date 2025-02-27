@@ -5,7 +5,7 @@
 #include <ddc/ddc.hpp>
 
 #include "geometry.hpp"
-#include "iinitialization.hpp"
+#include "iinitialisation.hpp"
 #include "species_info.hpp"
 
 /**

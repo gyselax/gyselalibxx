@@ -51,7 +51,7 @@ the unnormalized local contravariant base,
 ## Test case - diocotron instability
 The test case implemented tests the diocoton instabilities (see Davidson book's [3], Edoardo Zoni's article [2] and article [4]).
 The initial function and equilibrium are defined in DiocotronDensitySolution and documented in 
-[initialisation](./../../../src/geometryRTheta/initialization/README.md). 
+[initialisation](./../../../src/geometryRTheta/initialisation/README.md). 
 
 We suppose as perturbed initial condition
 

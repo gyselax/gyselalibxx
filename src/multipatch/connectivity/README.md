@@ -94,18 +94,18 @@ The way that they are identified is mathematically determined via the coordinate
 to the other. 
 Since the transformations are supposed to be affine and bijective, there are only two options: 
 the transformation can be order preserving or 
-order reversing (this corresponds to the orientation of the physical edge where two parametrizations 
+order reversing (this corresponds to the orientation of the physical edge where two parametrisations 
 coming from the two patches can have either the same or the opposite orientation respectively).
 
 So for example, we want to stick the edge $`\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$
 on patch $i$ to the edge $`[a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}`$ on patch $j$. 
-If the transformation is order-preserving (i.e. the orientations of the parametrizations 
+If the transformation is order-preserving (i.e. the orientations of the parametrisations 
 of the physical edge agree), then the transformation from the first edge to the second is 
 ```math
 t \mapsto a_x^{(j)} + \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 ```
 
-If the transformation is order-reversing (i.e. the orientations of the parametrizations 
+If the transformation is order-reversing (i.e. the orientations of the parametrisations 
 of the physical edge are opposite), then it is
 ```math
 t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).

@@ -5,8 +5,8 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 add_library("initialisation_${GEOMETRY_VARIANT}" STATIC
     maxwellianequilibrium.cpp
     bumpontailequilibrium.cpp
-    restartinitialization.cpp
-    singlemodeperturbinitialization.cpp
+    restartinitialisation.cpp
+    singlemodeperturbinitialisation.cpp
 )
 
 target_include_directories("initialisation_${GEOMETRY_VARIANT}"

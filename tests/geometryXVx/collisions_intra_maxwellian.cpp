@@ -359,5 +359,5 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     });
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
 }

@@ -241,7 +241,7 @@ public:
             // Create the solver
             m_solver = solver_factory->generate(m_batch_matrix_csr);
         }
-        gko_exec->synchronise();
+        gko_exec->synchronize();
     }
 
     /**

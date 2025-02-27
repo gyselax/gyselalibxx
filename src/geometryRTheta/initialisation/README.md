@@ -86,8 +86,8 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 
 ## Contents 
 
-* diocotron\_initialization\_equilibrium.hpp : defines a DiocotronDensitySolution class which computes the initialisation and equilibrium functions. 
+* diocotron\_initialisation\_equilibrium.hpp : defines a DiocotronDensitySolution class which computes the initialisation and equilibrium functions. 
 * vortex\_merger\_equilibrium.hpp : defines a VortexMergerEquilibria class which computes the equilibrium function. 
-* vortex\_merger\_initialization.hpp : defines a VortexMergerDensitySolution class which computes the initialisation function. 
+* vortex\_merger\_initialisation.hpp : defines a VortexMergerDensitySolution class which computes the initialisation function. 
 
 

@@ -335,7 +335,7 @@ int main(int argc, char** argv)
 
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
     PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;

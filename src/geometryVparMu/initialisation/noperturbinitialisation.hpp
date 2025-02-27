@@ -5,7 +5,7 @@
 #include <paraconf.h>
 
 #include "geometry.hpp"
-#include "iinitialization.hpp"
+#include "iinitialisation.hpp"
 #include "paraconfpp.hpp"
 #include "species_info.hpp"
 

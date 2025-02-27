@@ -28,8 +28,8 @@
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "qnsolver.hpp"
-#include "restartinitialization.hpp"
-#include "singlemodeperturbinitialization.hpp"
+#include "restartinitialisation.hpp"
+#include "singlemodeperturbinitialisation.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
 #include "spline_interpolator.hpp"
@@ -159,7 +159,7 @@ int main(int argc, char** argv)
 
     PC_tree_destroy(&conf_pdi);
 
-    PDI_finalise();
+    PDI_finalize();
 
     PC_tree_destroy(&conf_voicexx);
 

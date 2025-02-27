@@ -3,7 +3,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_helper.hpp"
-#include "noperturbinitialization.hpp"
+#include "noperturbinitialisation.hpp"
 
 
 NoPerturbInitialisation::NoPerturbInitialisation(DConstFieldSpVparMu fequilibrium)

@@ -186,7 +186,7 @@ public:
                                                  .with_tolerance_type(tol_type)
                                                  .on(gko_exec);
         m_solver = solver_factory->generate(m_batch_matrix_ell);
-        gko_exec->synchronise();
+        gko_exec->synchronize();
     }
 
     /**
@@ -203,7 +203,7 @@ public:
         std::shared_ptr<const gko::batch::log::BatchConvergence<double>> logger
                 = gko::batch::log::BatchConvergence<double>::create();
         m_solver->add_logger(logger);
-        gko_exec->synchronise();
+        gko_exec->synchronize();
 
         Kokkos::deep_copy(x_view, b);
         m_solver->apply(to_gko_multivector(gko_exec, b), to_gko_multivector(gko_exec, x_view));

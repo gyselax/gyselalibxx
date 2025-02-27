@@ -47,7 +47,7 @@ The chosen initial conditions are
 
 with $`\varepsilon = 0.015`$ the amplitude of perturbation and $`k = 2\pi/ L_x = 0.5`$ the mode of the perturbation.
 
-See more in [initialisations](./../../../src/geometryXY/initialization/README.md). 
+See more in [initialisations](./../../../src/geometryXY/initialisation/README.md). 
 
 
 ### Results treatments - diagnosis

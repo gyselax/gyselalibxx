@@ -142,5 +142,5 @@ TEST(KineticSource, Moments)
     EXPECT_LE(error_temperature, 1e-8);
 
     PC_tree_destroy(&conf_pdi);
-    PDI_finalise();
+    PDI_finalize();
 }

@@ -3,7 +3,7 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "restartinitialization.hpp"
+#include "restartinitialisation.hpp"
 
 RestartInitialisation::RestartInitialisation(int iter_start, double& time_start)
     : m_iter_start(iter_start)
