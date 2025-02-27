@@ -16,7 +16,7 @@ var searchData=
   ['matrixbatchell_13',['MatrixBatchEll',['../classMatrixBatchEll.html',1,'']]],
   ['matrixbatchtridiag_14',['MatrixBatchTridiag',['../classMatrixBatchTridiag.html',1,'']]],
   ['maxwellianequilibrium_15',['MaxwellianEquilibrium',['../classMaxwellianEquilibrium.html',1,'']]],
-  ['metrictensor_16',['MetricTensor',['../classMetricTensor.html',1,'']]],
+  ['metrictensorevaluator_16',['MetricTensorEvaluator',['../classMetricTensorEvaluator.html',1,'']]],
   ['momentdensity_17',['MomentDensity',['../classFluidMoments.html#structFluidMoments_1_1MomentDensity',1,'FluidMoments']]],
   ['moments_18',['Moments',['../classMoments.html',1,'']]],
   ['momenttemperature_19',['MomentTemperature',['../classFluidMoments.html#structFluidMoments_1_1MomentTemperature',1,'FluidMoments']]],

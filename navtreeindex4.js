@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925":[15,168,14],
 "classPolarSplineFEMPoissonLikeSolver.html#a36be84f08a082b52a73f5134b8f1a8e2":[15,168,13],
 "classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b":[15,168,11],
 "classPolarSplineFEMPoissonLikeSolver.html#a90ab8ff1603bc0a3f36b5a0c5077de5b":[15,168,17],
@@ -249,5 +248,6 @@ var NAVTREEINDEX4 =
 "derivative__field__common_8hpp_source.html":[16,0,2,2],
 "derivative__field__mem_8hpp_source.html":[16,0,2,3],
 "diocotron__initialisation__equilibrium_8hpp_source.html":[16,0,3,3,0],
-"dir_0b94a1bc260289a82ecb53162f2bb9d0.html":[16,0,3,1]
+"dir_0b94a1bc260289a82ecb53162f2bb9d0.html":[16,0,3,1],
+"dir_115e60596e2d00727777ec90d6d12217.html":[16,0,16]
 };

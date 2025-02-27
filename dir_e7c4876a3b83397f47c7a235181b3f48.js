@@ -13,6 +13,6 @@ var dir_e7c4876a3b83397f47c7a235181b3f48 =
     [ "inv_jacobian_o_point.hpp", "inv__jacobian__o__point_8hpp_source.html", null ],
     [ "inverse_jacobian_matrix.hpp", "inverse__jacobian__matrix_8hpp_source.html", null ],
     [ "mapping_tools.hpp", "mapping__tools_8hpp_source.html", null ],
-    [ "metric_tensor.hpp", "metric__tensor_8hpp_source.html", null ],
+    [ "metric_tensor_evaluator.hpp", "metric__tensor__evaluator_8hpp_source.html", null ],
     [ "vector_mapper.hpp", "vector__mapper_8hpp_source.html", null ]
 ];

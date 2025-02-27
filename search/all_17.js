@@ -80,7 +80,7 @@ var searchData=
   ['to_20raise_20an_20error_77',['Should I use abort, assert, or static_assert to raise an error?',['../docs_developer_FAQ.html#docs_developer_FAQ__Should_I_use_abort_assert_or_static_assert_to_raise_an_error',1,'']]],
   ['to_20solve_20the_20characteristic_20equation_3a_78',['- The time integration method used to solve the characteristic equation:',['../tests_geometryRTheta_advection_2d_rp.html#autotoc_md94',1,'']]],
   ['to_20the_20advection_20field_79',['Application to the advection field',['../src_geometryRTheta_advection_field.html#autotoc_md59',1,'']]],
-  ['to_5fcovariant_80',['to_covariant',['../classMetricTensor.html#ad7f8f6140026494ea78ab5d446761833',1,'MetricTensor']]],
+  ['to_5fcovariant_80',['to_covariant',['../classMetricTensorEvaluator.html#a55437a15b385916e4b02befdad7ab6c8',1,'MetricTensorEvaluator']]],
   ['toolchains_81',['Toolchains',['../toolchains.html#toolchains__Toolchains',1,'']]],
   ['tools_82',['tools',['../src_math_tools.html#src_math_tools__Derivative_tools',1,'Derivative tools'],['../src_matrix_tools.html',1,'Matrix tools'],['../src_math_tools.html#src_math_tools__Utility_tools',1,'Utility tools']]],
   ['top_5fblock_5fsize_83',['top_block_size',['../classMatrix__Centre__Block.html#a421974b6a9996c56bea138314b72291a',1,'Matrix_Centre_Block']]],
