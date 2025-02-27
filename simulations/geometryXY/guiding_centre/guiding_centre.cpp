@@ -121,7 +121,7 @@ int main(int argc, char** argv)
             advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler_y);
 
 
-    // Create an initializer ---
+    // Create an initialiser ---
     KelvinHelmholtzInstabilityInitialisation initialise(epsilon, mode_k);
 
 
