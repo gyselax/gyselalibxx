@@ -27,9 +27,6 @@ class MetricTensorEvaluator
     using Dim1_cov = typename Dim1::Dual;
 
 public:
-    /// The type of the Jacobian matrix and its inverse
-    using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
-
     /// The type of a contravariant vector associated with this mapping.
     using ContravariantVectorType = DTensor<Dims>;
 
