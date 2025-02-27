@@ -8,7 +8,7 @@ executable : string
 
 rmin : float
     Minimum value of the r values.
-    Possibilityfor the user to change it by adding the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 rmax : float
