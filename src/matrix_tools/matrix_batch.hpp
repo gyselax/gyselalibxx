@@ -23,7 +23,7 @@ template <typename ExecSpace>
 class MatrixBatch
 {
 public:
-    /// @brief The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension.
+    /// @brief The type of a Kokkos::View storing batched right-hand sides. Second dimension is batch dimension.
     using BatchedRHS = Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace>;
 
 

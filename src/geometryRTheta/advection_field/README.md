@@ -137,7 +137,7 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here. 
 
 #### General coordinates system 
-* In **general coordinates system**, the gradiant of a function is given by 
+* In **general coordinates system**, the gradient of a function is given by 
 
 ```math
 \nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j, 

@@ -28,7 +28,7 @@ template <
 class Quadrature
 {
 private:
-    /// The tyoe of an element of an index of the quadrature coefficients.
+    /// The type of an element of an index of the quadrature coefficients.
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
     using QuadConstField = DConstField<IdxRangeQuadrature, MemorySpace>;

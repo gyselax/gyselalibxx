@@ -122,7 +122,7 @@ public:
      * When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for 
      * each index range. 
      * 
-     * We can also use it when we want two differents interpolators but defined on the same 
+     * We can also use it when we want two different interpolators but defined on the same 
      * index range (e.g. different boundary conditions for the evaluators).
      * 
      * @param[in] function_interpolator interpolator along the GridInterest direction to interpolate 

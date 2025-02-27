@@ -252,7 +252,7 @@ private:
 
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rp);
 
-                // Gradiant of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical index range (Cartesian index range)
                 double const deriv_x_phi
                         = deriv_r_phi(irp) * inv_J[0][0] + deriv_p_phi(irp) * inv_J[1][0];
                 double const deriv_y_phi
@@ -309,7 +309,7 @@ private:
                         coord_rp_epsilon,
                         get_const_field(electrostatic_potential_coef));
 
-                // Gradiant of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical index range (Cartesian index range)
                 double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
                                                    + deriv_p_phi_epsilon * inv_J_eps[1][0];
                 double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]

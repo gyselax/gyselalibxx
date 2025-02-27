@@ -9,12 +9,12 @@ Parameters
 ----------
 N0 : int
     Size of the first grid: N0xN0. 
-    Possibiliy for the user to change it by addind the two 
+    Possibility for the user to change it by addind the two 
     new sizes in the command line.
 
 N1 : int
     Size of the second grid: N1xN1.
-    Possibiliy for the user to change it by addind the two 
+    Possibility for the user to change it by addind the two 
     new sizes in the command line.
    
 Returns

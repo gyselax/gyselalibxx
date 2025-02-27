@@ -74,7 +74,7 @@ public:
      * @param[in] max_iter maximal number of iterations for the solver, default 1000.
      * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! the relative residual 
      * provided here, will be used as "implicit residual" in ginkgo solver.
-     * @param[in] logger boolean parameter for saving log information such residual and interations count.
+     * @param[in] logger boolean parameter for saving log information such residual and interactions count.
      * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
      */
     explicit MatrixBatchCsr(
