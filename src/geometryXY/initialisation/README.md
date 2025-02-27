@@ -16,4 +16,4 @@ with $`\varepsilon = 0.015`$ the amplitude of perturbation and $`k = 2\pi/ L_x =
 
 We suppose the domain periodic on $`x`$ and $`y`$.
 
-These are applied in the guiding-centre equations. See in [guiding-centre](./../../../simulations/geometryXY/guiding_center/README.md).
+These are applied in the guiding-centre equations. See in [guiding-centre](./../../../simulations/geometryXY/guiding_centre/README.md).
