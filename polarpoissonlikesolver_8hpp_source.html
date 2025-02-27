@@ -354,7 +354,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                          - ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis())</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    {</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keyword">static_assert</span>(has_2d_jacobian_v&lt;Mapping, CoordRTheta&gt;);</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="comment">//initialize x_init</span></div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="comment">//initialise x_init</span></div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        Kokkos::deep_copy(m_x_init, 0);</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        <span class="comment">// Get break points</span></div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        IdxRange&lt;KnotsR&gt; idxrange_r_edges = ddc::discrete_space&lt;BSplinesR&gt;().break_point_domain();</div>
@@ -1340,7 +1340,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l01510" name="l01510"></a><span class="lineno"> 1510</span>                    nnz(k + 1) = n_singular_basis + degree * nbasis_theta_proxy;</div>
 <div class="line"><a id="l01511" name="l01511"></a><span class="lineno"> 1511</span>                });</div>
 <div class="line"><a id="l01512" name="l01512"></a><span class="lineno"> 1512</span> </div>
-<div class="line"><a id="l01513" name="l01513"></a><span class="lineno"> 1513</span>        <span class="comment">// going from the internal boundary the overlapping possiblities between two radial splines increase</span></div>
+<div class="line"><a id="l01513" name="l01513"></a><span class="lineno"> 1513</span>        <span class="comment">// going from the internal boundary the overlapping possibilities between two radial splines increase</span></div>
 <div class="line"><a id="l01514" name="l01514"></a><span class="lineno"> 1514</span>        Kokkos::parallel_for(</div>
 <div class="line"><a id="l01515" name="l01515"></a><span class="lineno"> 1515</span>                <span class="stringliteral">&quot;inner overlap&quot;</span>,</div>
 <div class="line"><a id="l01516" name="l01516"></a><span class="lineno"> 1516</span>                Kokkos::RangePolicy&lt;Kokkos::DefaultExecutionSpace&gt;(1, degree + 2),</div>
@@ -1360,7 +1360,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l01530" name="l01530"></a><span class="lineno"> 1530</span>                        mat_size - degree * nbasis_theta_proxy),</div>
 <div class="line"><a id="l01531" name="l01531"></a><span class="lineno"> 1531</span>                KOKKOS_LAMBDA(<span class="keyword">const</span> <span class="keywordtype">int</span> k) { nnz(k + 2) = radial_overlap * radial_overlap; });</div>
 <div class="line"><a id="l01532" name="l01532"></a><span class="lineno"> 1532</span> </div>
-<div class="line"><a id="l01533" name="l01533"></a><span class="lineno"> 1533</span>        <span class="comment">// Approaching the external boundary the overlapping possiblities between two radial splines decrease</span></div>
+<div class="line"><a id="l01533" name="l01533"></a><span class="lineno"> 1533</span>        <span class="comment">// Approaching the external boundary the overlapping possibilities between two radial splines decrease</span></div>
 <div class="line"><a id="l01534" name="l01534"></a><span class="lineno"> 1534</span>        Kokkos::parallel_for(</div>
 <div class="line"><a id="l01535" name="l01535"></a><span class="lineno"> 1535</span>                <span class="stringliteral">&quot;outer overlap&quot;</span>,</div>
 <div class="line"><a id="l01536" name="l01536"></a><span class="lineno"> 1536</span>                Kokkos::RangePolicy&lt;Kokkos::DefaultExecutionSpace&gt;(1, degree + 1),</div>

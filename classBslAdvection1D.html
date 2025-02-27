@@ -140,7 +140,7 @@ class BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, Adve
     <tr><td class="paramname">IdxRangeAdvection</td><td>The index range \( \Omega&#39; \) where the characteristic equation is solved. It also refers to the index range of the advection field. It had to also be defined on the GridInterest for the time integration method. </td></tr>
     <tr><td class="paramname">IdxRangeFunction</td><td>The index range \( \Omega \) where allfdistribu is defined. </td></tr>
     <tr><td class="paramname">AdvectionFieldBuilder</td><td>The type of the spline builder for the advection field (see SplineBuilder). </td></tr>
-    <tr><td class="paramname">AdvectionFieldEvaluator</td><td>The type of the spline evalutor for the advection field (see SplineEvaluator). <br  />
+    <tr><td class="paramname">AdvectionFieldEvaluator</td><td>The type of the spline evaluator for the advection field (see SplineEvaluator). <br  />
  </td></tr>
     <tr><td class="paramname">TimeStepper</td><td>The time integration method applied to solve the characteristic equation. The method is picked among the child classes of <a class="el" href="classITimeStepper.html" title="The superclass from which all timestepping methods inherit.">ITimeStepper</a>. </td></tr>
   </table>
@@ -197,7 +197,7 @@ template&lt;class GridInterest , class IdxRangeAdvection , class IdxRangeFunctio
 
 <p>Constructor when the advection index range and the function index range are different. </p>
 <p>When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for each index range.</p>
-<p>We can also use it when we want two differents interpolators but defined on the same index range (e.g. different boundary conditions for the evaluators).</p>
+<p>We can also use it when we want two different interpolators but defined on the same index range (e.g. different boundary conditions for the evaluators).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">function_interpolator</td><td>interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the index range of the function. </td></tr>

@@ -153,7 +153,7 @@ Multipatch spline evaluator</h1>
 <li><code>deriv_dim_1()</code>, <code>deriv_dim_2()</code> to compute derivatives on the first or second dimension on a single coordinates or fields of coordinates.</li>
 <li><code>deriv&lt;InterestDim&gt;()</code> to compute derivatives on the first or second dimension on a single coordinates only.</li>
 <li><code>deriv_1_and_2()</code> to compute cross-derivatives n a single coordinates or fields of coordinates.</li>
-<li><code>integrate()</code> to compute the integral on each pacth. The integral are stored in a <code>Kokkos::View</code> defined on host and of the same size as the number of patches.</li>
+<li><code>integrate()</code> to compute the integral on each patch. The integral are stored in a <code>Kokkos::View</code> defined on host and of the same size as the number of patches.</li>
 </ul>
 <p><b>Warning:</b> The current version of <code><a class="el" href="classMultipatchSplineEvaluator2D.html" title="A class to evaluate all the splines of all the patches at once.">MultipatchSplineEvaluator2D</a></code> does not work on batched domain.</p>
 <p><b>Warning:</b> The mappings applied in the given patch locator have to contain <code>operator()</code> from the logical domain to the physical domain and from the physical domain to the logical domain. Both operators are called in the <code><a class="el" href="classMultipatchSplineEvaluator2D.html" title="A class to evaluate all the splines of all the patches at once.">MultipatchSplineEvaluator2D</a></code> class to compute equivalent coordinates from one patch to another.</p>
@@ -161,7 +161,7 @@ Multipatch spline evaluator</h1>
 Multipatch extrapolation rules</h1>
 <p>To evaluate at a given coordinate outside of the domain, extrapolation rules have been implemented. They are declined according to the geometry:</p>
 <ul>
-<li><code><a class="el" href="structNullExtrapolationRule.html" title="Define null extrapolation rule commun to all geometries.">NullExtrapolationRule</a></code>: general for every geometries. It sets the values at zero for every coordinates outside of the domain.</li>
+<li><code><a class="el" href="structNullExtrapolationRule.html" title="Define null extrapolation rule common to all geometries.">NullExtrapolationRule</a></code>: general for every geometries. It sets the values at zero for every coordinates outside of the domain.</li>
 <li><code><a class="el" href="structConstantExtrapolationRuleOnion.html" title="Define constant extrapolation rule for onion shape geometries.">ConstantExtrapolationRuleOnion</a></code>: specialised for onion geometries (see <code><a class="el" href="classOnionPatchLocator.html" title="Patch locator specialised for &quot;onion&quot; geometry.">OnionPatchLocator</a></code> and <a class="el" href="src_multipatch_connectivity.html">Multipatch connectivity</a>). It calls <code>ddc::ConstantExtrapolationRule</code> to evaluate the outside coordinate. Two areas are considered as outside: with radius inferior to the minimum radius and with radius superior to the maximum radius.</li>
 </ul>
 <h1><a class="anchor" id="src_multipatch_spline__Contents"></a>
@@ -171,7 +171,7 @@ Contents</h1>
 <li><code><a class="el" href="multipatch__spline__builder__2d_8hpp_source.html">multipatch_spline_builder_2d.hpp</a></code>: Define the <code><a class="el" href="classMultipatchSplineBuilder2D.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder2D</a></code> operator to apply 2D spline builders on every patches.</li>
 <li><code><a class="el" href="multipatch__spline__builder_8hpp_source.html">multipatch_spline_builder.hpp</a></code>: Define the <code><a class="el" href="classMultipatchSplineBuilder.html" title="A class to call all the builders of all the patches once.">MultipatchSplineBuilder</a></code> operator to apply 1D spline builders on every patches.</li>
 <li><code><a class="el" href="multipatch__spline__evaluator__2d_8hpp_source.html">multipatch_spline_evaluator_2d.hpp</a></code>: Define the <code><a class="el" href="classMultipatchSplineEvaluator2D.html" title="A class to evaluate all the splines of all the patches at once.">MultipatchSplineEvaluator2D</a></code> operator to apply 2D spline evaluators on every patches.</li>
-<li><code><a class="el" href="null__extrapolation__rules_8hpp_source.html">null_extrapolation_rules.hpp</a></code>: Define <code><a class="el" href="structNullExtrapolationRule.html" title="Define null extrapolation rule commun to all geometries.">NullExtrapolationRule</a></code>, a null extrapolation rule for every geometries. <br  />
+<li><code><a class="el" href="null__extrapolation__rules_8hpp_source.html">null_extrapolation_rules.hpp</a></code>: Define <code><a class="el" href="structNullExtrapolationRule.html" title="Define null extrapolation rule common to all geometries.">NullExtrapolationRule</a></code>, a null extrapolation rule for every geometries. <br  />
  </li>
 </ul>
 </div></div><!-- contents -->

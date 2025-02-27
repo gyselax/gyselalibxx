@@ -165,7 +165,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_classMatrixBatch"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classMatrixBatch')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td></tr>
 <tr class="memitem:aaefa005779305b357172ff993db97030 inherit pub_types_classMatrixBatch" id="r_aaefa005779305b357172ff993db97030"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BatchedRHS</b> = Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;</td></tr>
-<tr class="memdesc:aaefa005779305b357172ff993db97030 inherit pub_types_classMatrixBatch"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension. <br /></td></tr>
+<tr class="memdesc:aaefa005779305b357172ff993db97030 inherit pub_types_classMatrixBatch"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Kokkos::View storing batched right-hand sides. Second dimension is batch dimension. <br /></td></tr>
 <tr class="separator:aaefa005779305b357172ff993db97030 inherit pub_types_classMatrixBatch"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classMatrixBatch"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classMatrixBatch')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classMatrixBatch.html">MatrixBatch&lt; ExecSpace &gt;</a></td></tr>
 <tr class="memitem:aa36e5c69da8c424b977aae7ac390715c inherit pro_methods_classMatrixBatch" id="r_aa36e5c69da8c424b977aae7ac390715c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrixBatch.html#aa36e5c69da8c424b977aae7ac390715c">MatrixBatch</a> (const std::size_t <a class="el" href="classMatrixBatch.html#a4ca6fc98c1b218c3aa0a534d04b2a06a">batch_size</a>, const std::size_t mat_size)</td></tr>
@@ -175,7 +175,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>BatchedRHS</b> = Kok
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class ExecSpace&gt;<br />
 class MatrixBatchEll&lt; ExecSpace &gt;</div><p><a class="el" href="classMatrix.html" title="The super class from which matrix classes should inherit.">Matrix</a> class which is able to manage and solve a batch of sparse linear systems. </p>
-<p>Executes on either CPU or GPU. It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilized Bicg. The sparsity pattern is assumed to be the same for all matrices. ie the non-zero components are located at the same places for all matrices. This class uses the ELL storage format which needs two 1D arrays, one stores values the other column indices. The class returns these arrays (as Kokkos views) with the get_batch_idx_and_vals function, it is then possible to fill them outside the class. Tolerance and maximal number of iterations, which are parameters for the iterative solver, are set in the constructor. It is possibile to get convergence information by activating the logger at constructor call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Executes on either CPU or GPU. It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilised Bicg. The sparsity pattern is assumed to be the same for all matrices. ie the non-zero components are located at the same places for all matrices. This class uses the ELL storage format which needs two 1D arrays, one stores values the other column indices. The class returns these arrays (as Kokkos views) with the get_batch_idx_and_vals function, it is then possible to fill them outside the class. Tolerance and maximal number of iterations, which are parameters for the iterative solver, are set in the constructor. It is possible to get convergence information by activating the logger at constructor call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ExecSpace</td><td>Execution space,needed by Kokkos for allocations and parallelism. The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace </td></tr>
   </table>
@@ -250,7 +250,7 @@ template&lt;class ExecSpace &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">non_zeros_per_row</td><td>number of non zero components per line. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">max_iter</td><td>maximal number of iterations for the solver </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">res_tol</td><td>residual tolerance parameter, to ensure convergence. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">logger</td><td>boolean parameter for saving log informations such residual and interations count. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logger</td><td>boolean parameter for saving log information such residual and interactions count. </td></tr>
   </table>
   </dd>
 </dl>
@@ -318,7 +318,7 @@ template&lt;class ExecSpace &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">batch_values</td><td>A Kokkos view which stores the values of non-zero elements. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">max_iter</td><td>maximal number of iterations for the solver, default 500. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">res_tol</td><td>residual tolerance parameter, to ensure convergence. Be careful! The residual provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver. Default value is set to 1e-15. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">logger</td><td>bolean parameter to save logger information. Default value false. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logger</td><td>boolean parameter to save logger information. Default value false. </td></tr>
   </table>
   </dd>
 </dl>

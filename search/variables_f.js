@@ -8,5 +8,5 @@ var searchData=
   ['spline_5fidx_5frange_5frtheta1_5',['spline_idx_range_rtheta1',['../classMultipatchSplineOnionShapeTest.html#afff89052dcc4d753c1ab7c666849351b',1,'MultipatchSplineOnionShapeTest']]],
   ['spline_5fidx_5frange_5frtheta2_6',['spline_idx_range_rtheta2',['../classMultipatchSplineOnionShapeTest.html#a17b2ac5b29dec24cfdce735ef25cc057',1,'MultipatchSplineOnionShapeTest']]],
   ['splines_7',['splines',['../classMultipatchSplineOnionShapeTest.html#a75d3b5817423b6248568461e88e2cfd0',1,'MultipatchSplineOnionShapeTest']]],
-  ['swap_5farray_8',['swap_array',['../classMatrix__Center__Block.html#a9961a05587d30ff4203fb371fbf23515',1,'Matrix_Center_Block']]]
+  ['swap_5farray_8',['swap_array',['../classMatrix__Centre__Block.html#a8525f336ba8700359bfb15a6c90c3612',1,'Matrix_Centre_Block']]]
 ];

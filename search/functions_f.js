@@ -1,7 +1,7 @@
 var searchData=
 [
   ['partialderivative_0',['PartialDerivative',['../classPartialDerivative.html#ac615cba1b0800ef3e0874eeb440fe55f',1,'PartialDerivative']]],
-  ['perturbation_5finitialization_1',['perturbation_initialization',['../classSingleModePerturbInitialization.html#a61e6fb88a3b58a97d55b07577e5ef1e4',1,'SingleModePerturbInitialization::perturbation_initialization(DFieldX perturbation, int const perturb_mode, double const perturb_amplitude) const'],['../classSingleModePerturbInitialization.html#a15387a7189e36d23965cbb2595a8ce8c',1,'SingleModePerturbInitialization::perturbation_initialization(DFieldXY perturbation, int const perturb_mode, double const perturb_amplitude) const']]],
+  ['perturbation_5finitialisation_1',['perturbation_initialisation',['../classSingleModePerturbInitialisation.html#a391dcace1aa2d17922800ac806f7fc9a',1,'SingleModePerturbInitialisation::perturbation_initialisation(DFieldX perturbation, int const perturb_mode, double const perturb_amplitude) const'],['../classSingleModePerturbInitialisation.html#abc8a396d4836e9051751503d7ab5a03c',1,'SingleModePerturbInitialisation::perturbation_initialisation(DFieldXY perturbation, int const perturb_mode, double const perturb_amplitude) const']]],
   ['poissonlikerhsfunction_2',['PoissonLikeRHSFunction',['../classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b',1,'PoissonLikeRHSFunction']]],
   ['poissonsolution_3',['PoissonSolution',['../classPoissonSolution.html#ab858595c50946f5077ed256c5b01f703',1,'PoissonSolution']]],
   ['polarspline_4',['PolarSpline',['../structPolarSpline.html#a83116cfcdadc19cc922a79634a24a51c',1,'PolarSpline']]],

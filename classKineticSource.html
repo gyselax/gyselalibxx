@@ -134,7 +134,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that describes a source of particles. </p>
 <p>The <a class="el" href="classKineticSource.html" title="A class that describes a source of particles.">KineticSource</a> class solves the following evolution equation: df/dt = S_kin Where S_kin = spatial_extent(x) * velocity_shape(v) Since S_kin does not depend on time, we have f(t+dt) = f(t) + S_kin*dt as a solution of this evolution equation.</p>
-<p>spatial_extent defines the location where the source is active. spatial_extent is normalized, so that its integral along the spatial direction equals one. It has a hyperbolic tangent shape. It is equal to one in a central zone of the plasma of width defined by the extent parameter.</p>
+<p>spatial_extent defines the location where the source is active. spatial_extent is normalised, so that its integral along the spatial direction equals one. It has a hyperbolic tangent shape. It is equal to one in a central zone of the plasma of width defined by the extent parameter.</p>
 <p>velocity_shape defines the velocity profile of the source in the parallel velocity direction. It is the sum of a source that injects only density, and a source that injects only energy. If the density and energy parameters are equal to one (usual case), the resulting velocity_shape is maxwellian.</p>
 <p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/kinetic_source.pdf">rhs docs</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

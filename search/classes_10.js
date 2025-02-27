@@ -5,7 +5,7 @@ var searchData=
   ['rbasissubset_2',['RBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['rcelldim_3',['RCellDim',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RCellDim',1,'PolarSplineFEMPoissonLikeSolver']]],
   ['refineddiscretetocartesianbuilder_4',['RefinedDiscreteToCartesianBuilder',['../classRefinedDiscreteToCartesianBuilder.html',1,'']]],
-  ['restartinitialization_5',['RestartInitialization',['../classRestartInitialization.html',1,'']]],
+  ['restartinitialisation_5',['RestartInitialisation',['../classRestartInitialisation.html',1,'']]],
   ['rk2_6',['RK2',['../classRK2.html',1,'']]],
   ['rk3_7',['RK3',['../classRK3.html',1,'']]],
   ['rk4_8',['RK4',['../classRK4.html',1,'']]]

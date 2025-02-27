@@ -139,9 +139,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab1bd5ff2b3826377f400a21d64c701fe inherit pub_methods_classMatrix" id="r_ab1bd5ff2b3826377f400a21d64c701fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix.html#ab1bd5ff2b3826377f400a21d64c701fe">Matrix</a> (int mat_size)</td></tr>
 <tr class="memdesc:ab1bd5ff2b3826377f400a21d64c701fe inherit pub_methods_classMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the matrix.  <br /></td></tr>
 <tr class="separator:ab1bd5ff2b3826377f400a21d64c701fe inherit pub_methods_classMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d3dd4ae5b28f0f1ec3e64ae17998944 inherit pub_methods_classMatrix" id="r_a1d3dd4ae5b28f0f1ec3e64ae17998944"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix.html#a1d3dd4ae5b28f0f1ec3e64ae17998944">factorize</a> ()</td></tr>
-<tr class="memdesc:a1d3dd4ae5b28f0f1ec3e64ae17998944 inherit pub_methods_classMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorize the matrix.  <br /></td></tr>
-<tr class="separator:a1d3dd4ae5b28f0f1ec3e64ae17998944 inherit pub_methods_classMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a647de53df6f957e5a09b8fa13403e758 inherit pub_methods_classMatrix" id="r_a647de53df6f957e5a09b8fa13403e758"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix.html#a647de53df6f957e5a09b8fa13403e758">factorise</a> ()</td></tr>
+<tr class="memdesc:a647de53df6f957e5a09b8fa13403e758 inherit pub_methods_classMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorise the matrix.  <br /></td></tr>
+<tr class="separator:a647de53df6f957e5a09b8fa13403e758 inherit pub_methods_classMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe065061f0c5b43def602676101fb2be inherit pub_methods_classMatrix" id="r_afe065061f0c5b43def602676101fb2be"><td class="memItemLeft" align="right" valign="top">virtual DSpan1D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix.html#afe065061f0c5b43def602676101fb2be">solve_inplace</a> (DSpan1D b) const</td></tr>
 <tr class="memdesc:afe065061f0c5b43def602676101fb2be inherit pub_methods_classMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the matrix equation in place.  <br /></td></tr>
 <tr class="separator:afe065061f0c5b43def602676101fb2be inherit pub_methods_classMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,9 +157,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:af664e9b8322a6fb2e47619fffcc8201b" id="r_af664e9b8322a6fb2e47619fffcc8201b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Banded.html#af664e9b8322a6fb2e47619fffcc8201b">factorize_method</a> () override</td></tr>
-<tr class="memdesc:af664e9b8322a6fb2e47619fffcc8201b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the factorisation method.  <br /></td></tr>
-<tr class="separator:af664e9b8322a6fb2e47619fffcc8201b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172f1287ad45e84dfb7eeb0df23956f1" id="r_a172f1287ad45e84dfb7eeb0df23956f1"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Banded.html#a172f1287ad45e84dfb7eeb0df23956f1">factorise_method</a> () override</td></tr>
+<tr class="memdesc:a172f1287ad45e84dfb7eeb0df23956f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the factorisation method.  <br /></td></tr>
+<tr class="separator:a172f1287ad45e84dfb7eeb0df23956f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a455feff42fd275a959d25cafcb08f7ee" id="r_a455feff42fd275a959d25cafcb08f7ee"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Banded.html#a455feff42fd275a959d25cafcb08f7ee">solve_inplace_method</a> (double *b, char transpose, int n_equations) const override</td></tr>
 <tr class="memdesc:a455feff42fd275a959d25cafcb08f7ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the LAPACK solve method.  <br /></td></tr>
 <tr class="separator:a455feff42fd275a959d25cafcb08f7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -355,8 +355,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="af664e9b8322a6fb2e47619fffcc8201b" name="af664e9b8322a6fb2e47619fffcc8201b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af664e9b8322a6fb2e47619fffcc8201b">&#9670;&#160;</a></span>factorize_method()</h2>
+<a id="a172f1287ad45e84dfb7eeb0df23956f1" name="a172f1287ad45e84dfb7eeb0df23956f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172f1287ad45e84dfb7eeb0df23956f1">&#9670;&#160;</a></span>factorise_method()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,7 +365,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Matrix_Banded::factorize_method </td>
+          <td class="memname">virtual int Matrix_Banded::factorise_method </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -381,7 +381,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Call the factorisation method. </p>
 <dl class="section return"><dt>Returns</dt><dd>The LAPACK error code. </dd></dl>
 
-<p>Implements <a class="el" href="classMatrix.html#a490ec31dfcf14765beb1cce24ba3b985">Matrix</a>.</p>
+<p>Implements <a class="el" href="classMatrix.html#a763f3f848403c33d0bcd494df1133218">Matrix</a>.</p>
 
 </div>
 </div>

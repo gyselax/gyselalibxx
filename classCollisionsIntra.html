@@ -172,10 +172,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6b18fb17a213025672de06d8d6b7cee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the collision coefficient.  <br /></td></tr>
 <tr class="separator:a6b18fb17a213025672de06d8d6b7cee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84de92228a41d6f4226dd87cb834def8" id="r_a84de92228a41d6f4226dd87cb834def8"><td class="memItemLeft" align="right" valign="top">IdxRange&lt; <a class="el" href="structCollisionsIntra_1_1GhostedVx.html">GhostedVx</a> &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a84de92228a41d6f4226dd87cb834def8">get_gridvx_ghosted</a> () const</td></tr>
-<tr class="memdesc:a84de92228a41d6f4226dd87cb834def8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ghosted vx mesh used for computing finite differences centered derivatives.  <br /></td></tr>
+<tr class="memdesc:a84de92228a41d6f4226dd87cb834def8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ghosted vx mesh used for computing finite differences centred derivatives.  <br /></td></tr>
 <tr class="separator:a84de92228a41d6f4226dd87cb834def8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a405ad2094ef4f20d34a6108e70f53d18" id="r_a405ad2094ef4f20d34a6108e70f53d18"><td class="memItemLeft" align="right" valign="top">IdxRange&lt; <a class="el" href="structCollisionsIntra_1_1GhostedVxStaggered.html">GhostedVxStaggered</a> &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a405ad2094ef4f20d34a6108e70f53d18">get_gridvx_ghosted_staggered</a> () const</td></tr>
-<tr class="memdesc:a405ad2094ef4f20d34a6108e70f53d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ghosted and staggered vx mesh used for computing finite differences centered derivatives.  <br /></td></tr>
+<tr class="memdesc:a405ad2094ef4f20d34a6108e70f53d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ghosted and staggered vx mesh used for computing finite differences centred derivatives.  <br /></td></tr>
 <tr class="separator:a405ad2094ef4f20d34a6108e70f53d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a891b8ddb1bea2745b12408041b7ab9f3" id="r_a891b8ddb1bea2745b12408041b7ab9f3"><td class="memItemLeft" align="right" valign="top">IdxRange&lt; <a class="el" href="structSpecies.html">Species</a>, <a class="el" href="structGridX.html">GridX</a>, <a class="el" href="structCollisionsIntra_1_1GhostedVx.html">GhostedVx</a> &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionsIntra.html#a891b8ddb1bea2745b12408041b7ab9f3">get_mesh_ghosted</a> () const</td></tr>
 <tr class="memdesc:a891b8ddb1bea2745b12408041b7ab9f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a mesh containing the species, spatial and the ghosted vx mesh.  <br /></td></tr>
@@ -193,7 +193,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class describing the intra-species collision operator. </p>
 <p>The intra-species collision operator can be written as \( C_{aa} = d/dv (Dcoll df_a/dv - Nucoll f_a) \) Where Dcoll and Nucoll are the collision operator diffusion and advection coefficients that depend on the absolute value of the velocity and possibly on space. f_a is the distribution function. The Nucoll and Dcoll coefficients are adjusted at each time and spatial position so that the collision operator conserves the density, momentum and energy of the considered species it acts on.</p>
-<p>The evolution equation for the collisions \( df_a/dt = C_{aa} \) is solved using a Crank-Nicolson finite difference scheme adapted for non-uniform meshes. The derivatives are computed using centered second-order finite differences. To use the same derivatives formula at the edges of the vx mesh, we introduce a ghosted vx mesh with additional points at the edges. To further improve the accuracy of the computations of the derivatives, we also introduce another vx mesh that is staggered with respect to the initial mesh. The points of the staggered mesh lie at the middle of the cells of the initial vx mesh (where a cell is defined by two adjacent points). The Crank-Nicolson scheme leads to the formulation of a linear system that needs to be resolved at each spatial position of the simulation box. Note that this linear system depends on the considered spatial position.</p>
+<p>The evolution equation for the collisions \( df_a/dt = C_{aa} \) is solved using a Crank-Nicolson finite difference scheme adapted for non-uniform meshes. The derivatives are computed using centred second-order finite differences. To use the same derivatives formula at the edges of the vx mesh, we introduce a ghosted vx mesh with additional points at the edges. To further improve the accuracy of the computations of the derivatives, we also introduce another vx mesh that is staggered with respect to the initial mesh. The points of the staggered mesh lie at the middle of the cells of the initial vx mesh (where a cell is defined by two adjacent points). The Crank-Nicolson scheme leads to the formulation of a linear system that needs to be resolved at each spatial position of the simulation box. Note that this linear system depends on the considered spatial position.</p>
 <p>The complete description of the operator can be found in <a href="https://github.com/gyselax/gyselalibxx/blob/main/doc/geometryXVx/collisions_intra_inter.pdf">rhs docs</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="addf7a93d3bbdc450236e56d71609c10b" name="addf7a93d3bbdc450236e56d71609c10b"></a>
@@ -226,7 +226,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mesh</td><td>The index range on which the operator will act. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nustar0</td><td>The normalized collisionality. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nustar0</td><td>The normalised collisionality. </td></tr>
   </table>
   </dd>
 </dl>
@@ -318,7 +318,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the ghosted vx mesh used for computing finite differences centered derivatives. </p>
+<p>Get the ghosted vx mesh used for computing finite differences centred derivatives. </p>
 <dl class="section return"><dt>Returns</dt><dd>The ghosted vx mesh. </dd></dl>
 
 </div>
@@ -338,7 +338,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the ghosted and staggered vx mesh used for computing finite differences centered derivatives. </p>
+<p>Get the ghosted and staggered vx mesh used for computing finite differences centred derivatives. </p>
 <dl class="section return"><dt>Returns</dt><dd>The ghosted and staggered vx mesh. </dd></dl>
 
 </div>
@@ -491,9 +491,9 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">AA</td><td>A vector representing the lower diagonal of the matrix of the linear system. </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">BB</td><td>A vector representing the diagonal of the matrix of the linear system. </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">CC</td><td>A vector representing the upper diagonal of the matrix of the linear system. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Dcoll</td><td>The velocity-dependent diffusion coefficient of the collision operaror. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Dcoll_staggered</td><td>The velocity-dependent diffusion coefficient of the collision operaror computed on the staggered vx mesh. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Nucoll</td><td>The velocity-dependent advection coefficient of the collision operaror. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Dcoll</td><td>The velocity-dependent diffusion coefficient of the collision operator. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Dcoll_staggered</td><td>The velocity-dependent diffusion coefficient of the collision operator computed on the staggered vx mesh. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Nucoll</td><td>The velocity-dependent advection coefficient of the collision operator. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">deltat</td><td>The time step. </td></tr>
   </table>
   </dd>

@@ -103,11 +103,11 @@ var NAVTREE =
       ] ],
       [ "Simulations in (x, vx) geometry", "simulations_geometryXVx.html", null ],
       [ "Simulations in (x, y) geometry", "simulations_geometryXY.html", [
-        [ "Guiding center (X,Y) simulation", "simulations_geometryXY_guiding_center.html", [
-          [ "Equations", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Equations", null ],
-          [ "Simulation", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Simulation", null ],
-          [ "Contents", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__Contents", null ],
-          [ "References", "simulations_geometryXY_guiding_center.html#simulations_geometryXY_guiding_center__References", null ]
+        [ "Guiding centre (X,Y) simulation", "simulations_geometryXY_guiding_centre.html", [
+          [ "Equations", "simulations_geometryXY_guiding_centre.html#simulations_geometryXY_guiding_centre__Equations", null ],
+          [ "Simulation", "simulations_geometryXY_guiding_centre.html#simulations_geometryXY_guiding_centre__Simulation", null ],
+          [ "Contents", "simulations_geometryXY_guiding_centre.html#simulations_geometryXY_guiding_centre__Contents", null ],
+          [ "References", "simulations_geometryXY_guiding_centre.html#simulations_geometryXY_guiding_centre__References", null ]
         ] ]
       ] ]
     ] ],
@@ -136,17 +136,17 @@ var NAVTREE =
           [ "Contents", "src_geometryRTheta_advection.html#autotoc_md55", null ]
         ] ],
         [ "Advection Field finder", "src_geometryRTheta_advection_field.html", [
-          [ "Guiding center case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_center_case", null ],
+          [ "Guiding centre case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case", null ],
           [ "References", "src_geometryRTheta_advection_field.html#autotoc_md60", null ],
           [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md61", null ]
         ] ],
         [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
           [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
         ] ],
-        [ "Initialization", "src_geometryRTheta_initialization.html", [
-          [ "Diocotron instability", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Diocotron_instability", null ],
-          [ "Vortex merger", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Vortex_merger", null ],
-          [ "Contents", "src_geometryRTheta_initialization.html#src_geometryRTheta_initialization__Contents", null ]
+        [ "Initialisation", "src_geometryRTheta_initialisation.html", [
+          [ "Diocotron instability", "src_geometryRTheta_initialisation.html#src_geometryRTheta_initialisation__Diocotron_instability", null ],
+          [ "Vortex merger", "src_geometryRTheta_initialisation.html#src_geometryRTheta_initialisation__Vortex_merger", null ],
+          [ "Contents", "src_geometryRTheta_initialisation.html#src_geometryRTheta_initialisation__Contents", null ]
         ] ],
         [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ],
         [ "Polar Poisson solver", "src_geometryRTheta_poisson.html", [
@@ -166,12 +166,12 @@ var NAVTREE =
       [ "Geometry (vpar, mu)", "src_geometryVparMu.html", [
         [ "CollisionConfiguration :", "src_geometryVparMu_collisions.html", null ],
         [ "GeometryVparMu :", "src_geometryVparMu_geometry.html", null ],
-        [ "Initialization methods", "src_geometryVparMu_initialization.html", null ]
+        [ "Initialisation methods", "src_geometryVparMu_initialisation.html", null ]
       ] ],
       [ "Geometry (x, v_x)", "src_geometryXVx.html", [
         [ "Boltzmann solver", "src_geometryXVx_boltzmann.html", null ],
         [ "Geometry X-Vx", "src_geometryXVx_geometry.html", null ],
-        [ "Initialization methods", "src_geometryXVx_initialization.html", null ],
+        [ "Initialisation methods", "src_geometryXVx_initialisation.html", null ],
         [ "Quasi-Neutrality Solver", "src_geometryXVx_poisson.html", [
           [ "Charge Density", "src_geometryXVx_poisson.html#src_geometryXVx_poisson__Charge_Density", null ],
           [ "Poisson Solver", "src_geometryXVx_poisson.html#src_geometryXVx_poisson__Poisson_Solver", null ]
@@ -182,8 +182,8 @@ var NAVTREE =
       ] ],
       [ "Geometry (x, y)", "src_geometryXY.html", [
         [ "Geometry XY", "src_geometryXY_geometry.html", null ],
-        [ "Initialization on (x,y) geometry", "src_geometryXY_initialization.html", [
-          [ "Kelvin-Helmholtz instability test case", "src_geometryXY_initialization.html#src_geometryXY_initialization__Kelvin-Helmholtz_instability_test_case", null ]
+        [ "Initialisation on (x,y) geometry", "src_geometryXY_initialisation.html", [
+          [ "Kelvin-Helmholtz instability test case", "src_geometryXY_initialisation.html#src_geometryXY_initialisation__Kelvin-Helmholtz_instability_test_case", null ]
         ] ],
         [ "Predictor-corrector methods", "src_geometryXY_time_integration.html", [
           [ "Predictor-corrector based on RK2", "src_geometryXY_time_integration.html#src_geometryXY_time_integration__Predictor-corrector_based_on_RK2", null ]
@@ -191,7 +191,7 @@ var NAVTREE =
       ] ],
       [ "Geometry (x, y, v_x, v_y)", "src_geometryXYVxVy.html", [
         [ "Geometry X Y-Vx Vy", "src_geometryXYVxVy_geometry.html", null ],
-        [ "Initialisation methods", "src_geometryXYVxVy_initialization.html", null ],
+        [ "Initialisation methods", "src_geometryXYVxVy_initialisation.html", null ],
         [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html", [
           [ "Charge Density", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density", null ],
           [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver", null ]
@@ -276,10 +276,10 @@ var NAVTREEINDEX =
 [
 "2d__spline__interpolator_2params_8yaml_8hpp_source.html",
 "classCrankNicolson.html#acee28614e8739edfb476a51aa7c2fe91",
-"classIInitialization.html#ac70366059a8d5679ff45c1a3eed5ad6b",
+"classIInitialisation.html#ae27774990fe287904bf424adb15a9772",
 "classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2",
 "classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925",
-"dir_0b94a1bc260289a82ecb53162f2bb9d0.html",
+"dir_115e60596e2d00727777ec90d6d12217.html",
 "quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6",
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ad0a77fd592485eb2c2d931f0db1ac9e8"
 ];

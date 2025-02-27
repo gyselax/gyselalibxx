@@ -5,7 +5,7 @@ var searchData=
   ['on_20the_202d_20polar_20advection_20operator_2',['Tests on the 2D polar advection operator',['../tests_geometryRTheta_advection_2d_rp.html',1,'tests_geometryRTheta']]],
   ['on_20the_202d_20polar_20poisson_20solver_3',['Tests on the 2D polar poisson solver',['../tests_geometryRTheta_polar_poisson.html',1,'tests_geometryRTheta']]],
   ['on_20the_20templated_20advection_20operators_4',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
-  ['on_20x_20y_20geometry_5',['Initialization on (x,y) geometry',['../src_geometryXY_initialization.html',1,'src_geometryXY']]],
+  ['on_20x_20y_20geometry_5',['Initialisation on (x,y) geometry',['../src_geometryXY_initialisation.html',1,'src_geometryXY']]],
   ['operator_6',['operator',['../src_geometryRTheta_advection.html',1,'Advection operator'],['../tests_geometryRTheta_advection_2d_rp.html',1,'Tests on the 2D polar advection operator']]],
   ['operators_7',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
   ['output_8',['Functions used for input and output.',['../src_io.html',1,'src']]]

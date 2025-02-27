@@ -2,7 +2,7 @@ var searchData=
 [
   ['s_20faq_0',['Developer&apos;s FAQ',['../docs_developer_FAQ.html',1,'']]],
   ['settings_1',['Pre-made build settings',['../toolchains.html',1,'index']]],
-  ['simulation_2',['Guiding center (X,Y) simulation',['../simulations_geometryXY_guiding_center.html',1,'simulations_geometryXY']]],
+  ['simulation_2',['Guiding centre (X,Y) simulation',['../simulations_geometryXY_guiding_centre.html',1,'simulations_geometryXY']]],
   ['simulations_3',['Gyselalib++ simulations',['../simulations.html',1,'']]],
   ['simulations_20in_20r_20theta_20geometry_4',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
   ['simulations_20in_20x_20vx_20geometry_5',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],

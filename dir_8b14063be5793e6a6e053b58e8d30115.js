@@ -6,7 +6,7 @@ var dir_8b14063be5793e6a6e053b58e8d30115 =
     [ "matrix_batch_csr.hpp", "matrix__batch__csr_8hpp_source.html", null ],
     [ "matrix_batch_ell.hpp", "matrix__batch__ell_8hpp_source.html", null ],
     [ "matrix_batch_tridiag.hpp", "matrix__batch__tridiag_8hpp_source.html", null ],
-    [ "matrix_center_block.hpp", "matrix__center__block_8hpp_source.html", null ],
+    [ "matrix_centre_block.hpp", "matrix__centre__block_8hpp_source.html", null ],
     [ "matrix_corner_block.hpp", "matrix__corner__block_8hpp_source.html", null ],
     [ "matrix_dense.hpp", "matrix__dense_8hpp_source.html", null ],
     [ "matrix_pds_tridiag.hpp", "matrix__pds__tridiag_8hpp_source.html", null ],

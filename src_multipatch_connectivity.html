@@ -107,14 +107,14 @@ $(document).ready(function(){initNavTree('src_multipatch_connectivity.html','');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This directory defines structures and methods to describe patches and how they are connected to one another.</p>
-<p>The following sections decribe the structures and methods implemented:</p>
+<p>The following sections describe the structures and methods implemented:</p>
 <ul>
 <li><a class="el" href="src_multipatch_connectivity.html#src_multipatch_connectivity__Patch">Patch</a> - Definition of <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a> tag.</li>
 <li><a class="el" href="src_multipatch_connectivity.html#src_multipatch_connectivity__Interfaces">Interfaces</a><ul>
 <li>Sticking of Two Edges<ul>
 <li>Multi-patch domain - Mathematical definition of multi-patch domain.</li>
-<li>Edges - Mathematical defintion of edges.</li>
-<li>Sticking and Coordinate Transformation - Mathematical defintion of coordinate transformation and links to the implemented class (<a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a>, <a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> and <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>).</li>
+<li>Edges - Mathematical definition of edges.</li>
+<li>Sticking and Coordinate Transformation - Mathematical definition of coordinate transformation and links to the implemented class (<a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a>, <a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a> and <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>).</li>
 <li>Index transformation - Algorithm of the index transformation in <a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a>.</li>
 <li>Conformity of the meshes - Definition of <code>UniformGridIdxMatching</code>.</li>
 </ul>
@@ -156,7 +156,7 @@ Sticking of Two Edges</h3>
 <p><b>Remark:</b> In the referenced paper, the authors use affine isometries of the entire patch instead of coordinate transformations of the faces. This is equivalent to our approach in the sense that, when the scaling of the domains is removed and we consider only unit squares as logical domains, the coordinate transformations of the faces and the information about which edges are identified determine the isometries used in the paper and vice versa. This is easy to show.</p>
 <h4><a class="anchor" id="autotoc_md77"></a>
 Multi-patch domain</h4>
-<p>For simplicity, we will constrain ourselves to the 2D case, but this approach could be generalized to arbitrary dimensions.</p>
+<p>For simplicity, we will constrain ourselves to the 2D case, but this approach could be generalised to arbitrary dimensions.</p>
 <p>Let \(\Omega\) be the domain of interest and assume that we have patches \(\Omega^{(i)}\), \(i=1,...,K\), which are disjoint, s.t.  </p><p class="formulaDsp">
 \[\Omega = \dot{\bigcup}_{i=1}^K \Omega^{(i)}.
 \]
@@ -178,12 +178,12 @@ Edges</h4>
 <p> In the code, we define edges as follows. Every edge of a logical patch is identified via the patch it belongs to, the dimension and whether it is at the front or the back of the domain. So e.g.the edge \([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>FRONT</code>. \([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>BACK</code> and \(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) would be identified with patch \(i\), dimensions <code>Xi</code> and <code>BACK</code>.</p>
 <h4><a class="anchor" id="autotoc_md79"></a>
 Sticking and Coordinate Transformation</h4>
-<p>Any edge can then be associated with an edge on another patch. This corresponds to the 'sticking'. So for a different patch \(\Omega^{(j)}\), we have the logical coordinate domain \([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\). If we want to stick patch \(i\) to patch \(j\), we have to determine the edges that are identified and how they are identified. The way that they are identified is mathematically determined via the coordinate transformation from one edge to the other. Since the transformations are supposed to be affine and bijective, there are only two options: the transformation can be order preserving or order reversing (this corresponds to the orientation of the phyiscal edge where two parametrizations coming from the two patches can have either the same or the opposite orientation respectively).</p>
-<p>So for example, we want to stick the edge \(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) on patch \(i\) to the edge \([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\) on patch \(j\). If the transformation is order-preserving (i.e. the orientations of the parametrizations of the physical edge agree), then the transformation from the first edge to the second is  </p><p class="formulaDsp">
+<p>Any edge can then be associated with an edge on another patch. This corresponds to the 'sticking'. So for a different patch \(\Omega^{(j)}\), we have the logical coordinate domain \([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\). If we want to stick patch \(i\) to patch \(j\), we have to determine the edges that are identified and how they are identified. The way that they are identified is mathematically determined via the coordinate transformation from one edge to the other. Since the transformations are supposed to be affine and bijective, there are only two options: the transformation can be order preserving or order reversing (this corresponds to the orientation of the physical edge where two parametrisations coming from the two patches can have either the same or the opposite orientation respectively).</p>
+<p>So for example, we want to stick the edge \(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) on patch \(i\) to the edge \([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\) on patch \(j\). If the transformation is order-preserving (i.e. the orientations of the parametrisations of the physical edge agree), then the transformation from the first edge to the second is  </p><p class="formulaDsp">
 \[t \mapsto a_x^{(j)} + \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 \]
 </p>
-<p> If the transformation is order-reversing (i.e. the orientations of the parametrizations of the physical edge are opposite), then it is  </p><p class="formulaDsp">
+<p> If the transformation is order-reversing (i.e. the orientations of the parametrisations of the physical edge are opposite), then it is  </p><p class="formulaDsp">
 \[t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 \]
 </p>

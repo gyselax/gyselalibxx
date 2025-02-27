@@ -17,7 +17,7 @@ var searchData=
   ['idxrangesliceiterator_14',['IdxRangeSliceIterator',['../structIdxRangeSliceIterator.html',1,'']]],
   ['idxrangetoslice_15',['IdxRangeToSlice',['../structIdxRangeToSlice.html',1,'']]],
   ['iequilibrium_16',['IEquilibrium',['../classIEquilibrium.html',1,'']]],
-  ['iinitialization_17',['IInitialization',['../classIInitialization.html',1,'']]],
+  ['iinitialisation_17',['IInitialisation',['../classIInitialisation.html',1,'']]],
   ['iinterpolator_18',['IInterpolator',['../classIInterpolator.html',1,'']]],
   ['iinterpolator_3c_20gridinterp_2c_20grid1d_2e_2e_2e_20_3e_19',['IInterpolator&lt; GridInterp, Grid1D... &gt;',['../classIInterpolator.html',1,'']]],
   ['iinterpolatorrtheta_20',['IInterpolatorRTheta',['../classIInterpolatorRTheta.html',1,'']]],

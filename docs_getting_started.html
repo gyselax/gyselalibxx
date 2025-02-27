@@ -113,7 +113,7 @@ Understanding Functional Programming in Gyselalib++</h1>
 <p>There are multiple coding paradigms possible when writing code in C++. Two of the most common are object-oriented programming and functional programming. You may be familiar with object-oriented programming however gyselalib++ uses functional programming.</p>
 <h3><a class="anchor" id="autotoc_md22"></a>
 Key Difference: Functional vs. Object-Oriented Programming (OOP)</h3>
-<p><b>Object-Oriented Programming (OOP)</b> is built around the concept of objects that encapsulate data and behavior. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.</p>
+<p><b>Object-Oriented Programming (OOP)</b> is built around the concept of objects that encapsulate data and behaviour. Developers used to OOP often think in terms of classes, inheritance, and polymorphism. While these are powerful concepts, they are not central to how gyselalib++ is structured. This is notably because inheritance, and polymorphism are often incompatible with GPU programming.</p>
 <p><b>Functional Programming (FP)</b> aims to make code more readable by making it more obvious where data is modified. This is done by separating data storage from operators. This way, data can never be modified inside its class without passing through an operator. In our code the functional programming paradigm was chosen as it allows us to write the code in a way which more closely resembles the equations.</p>
 <h3><a class="anchor" id="autotoc_md23"></a>
 Operators and Data Structures</h3>
@@ -121,7 +121,7 @@ Operators and Data Structures</h3>
 <ul>
 <li><b>Data Structures</b>:<ul>
 <li>Serve as containers for data, often passed into operators for processing.</li>
-<li>Avoid embedding behavior directly into data structures; instead, let operators handle transformations.</li>
+<li>Avoid embedding behaviour directly into data structures; instead, let operators handle transformations.</li>
 </ul>
 </li>
 <li><b>Operators</b>:<ul>
@@ -132,7 +132,7 @@ Operators and Data Structures</h3>
 </ul>
 </li>
 </ul>
-<p>By separating operators (behavior) from data structures (data), you ensure clarity, reusability, and better adherence to the functional programming style.</p>
+<p>By separating operators (behaviour) from data structures (data), you ensure clarity, reusability, and better adherence to the functional programming style.</p>
 <p>For example consider the case of a semi-Lagrangian advection. The operator is similar to a function which modifies a data structure containing the distribution function. By using a class the method used to interpolate the function (e.g. spline interpolation or <a class="el" href="classLagrange.html" title="A class which implements Lagrange polynomials.">Lagrange</a> interpolation) can be specified without duplicating code.</p>
 <hr  />
 <h1><a class="anchor" id="docs_getting_started__Navigating_the_Gyselalibxx_Codebase"></a>
@@ -149,7 +149,7 @@ Navigating the Gyselalib++ Codebase</h1>
 <h1><a class="anchor" id="docs_getting_started__Recommended_Steps_for_Getting_Started"></a>
 Recommended Steps for Getting Started</h1>
 <ol type="1">
-<li><b>Familiarize yourself with DDC:</b><ul>
+<li><b>Familiarise yourself with DDC:</b><ul>
 <li>Gyselalib++ relies heavily on <a href="https://ddc.mdls.fr/">DDC (Discrete Domain Decomposition Library)</a> for data management. Understanding its usage is key to contributing effectively.</li>
 <li>See our detailed guide on DDC integration: <a class="el" href="docs_DDC_in_gyselalibxx.html">Using DDC in Gyselalibxx</a>.</li>
 </ul>
@@ -160,7 +160,7 @@ Recommended Steps for Getting Started</h1>
 </ul>
 </li>
 <li><b>Identify a simple task:</b><ul>
-<li>Start with a small, well-scoped issue to familiarize yourself with the contribution process and code review workflow.</li>
+<li>Start with a small, well-scoped issue to familiarise yourself with the contribution process and code review workflow.</li>
 </ul>
 </li>
 </ol>

@@ -123,7 +123,7 @@ Inheritance diagram for MatrixBatch&lt; ExecSpace &gt;:</div>
 <area href="classMatrixBatchCsr.html" alt="MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt;" shape="rect" coords="0,56,457,80"/>
 <area href="classMatrixBatchCsr.html" title="Matrix class which is able to manage and solve a batch of sparse linear systems." alt="MatrixBatchCsr&lt; ExecSpace, Solver &gt;" shape="rect" coords="467,56,924,80"/>
 <area href="classMatrixBatchEll.html" title="Matrix class which is able to manage and solve a batch of sparse linear systems." alt="MatrixBatchEll&lt; ExecSpace &gt;" shape="rect" coords="934,56,1391,80"/>
-<area href="classMatrixBatchTridiag.html" title="A structure for solving a set of independant tridiagonal systems using a direct method." alt="MatrixBatchTridiag&lt; ExecSpace &gt;" shape="rect" coords="1401,56,1858,80"/>
+<area href="classMatrixBatchTridiag.html" title="A structure for solving a set of independent tridiagonal systems using a direct method." alt="MatrixBatchTridiag&lt; ExecSpace &gt;" shape="rect" coords="1401,56,1858,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -131,7 +131,7 @@ Inheritance diagram for MatrixBatch&lt; ExecSpace &gt;:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:aaefa005779305b357172ff993db97030" id="r_aaefa005779305b357172ff993db97030"><td class="memItemLeft" align="right" valign="top"><a id="aaefa005779305b357172ff993db97030" name="aaefa005779305b357172ff993db97030"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BatchedRHS</b> = Kokkos::View&lt; double **, Kokkos::LayoutRight, ExecSpace &gt;</td></tr>
-<tr class="memdesc:aaefa005779305b357172ff993db97030"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension. <br /></td></tr>
+<tr class="memdesc:aaefa005779305b357172ff993db97030"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a Kokkos::View storing batched right-hand sides. Second dimension is batch dimension. <br /></td></tr>
 <tr class="separator:aaefa005779305b357172ff993db97030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -163,7 +163,7 @@ Protected Member Functions</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ExecSpace&gt;<br />
 class MatrixBatch&lt; ExecSpace &gt;</div><p><a class="el" href="classMatrixBatch.html" title="MatrixBatch superclass for managing a collection of linear systems.">MatrixBatch</a> superclass for managing a collection of linear systems. </p>
 <p>The main assumption is that all matrices have the same size. It is also assumed that each matrix is used to solve one equation.</p>
-<p>Classes inheriting from this class must manage other aspects: Sparsity: kind of storage (Dense, Ell, Csr, etc.) Kind of solver (direct, iterative) Preconditioners and factorizations</p>
+<p>Classes inheriting from this class must manage other aspects: Sparsity: kind of storage (Dense, Ell, Csr, etc.) Kind of solver (direct, iterative) Preconditioners and factorisations</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ExecSpace</td><td>Execution space,needed by Kokkos for allocations and parallelism. The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace </td></tr>

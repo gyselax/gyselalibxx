@@ -149,7 +149,7 @@ Simplified case</h3>
 </p>
 <h1><a class="anchor" id="simulations_geometryRTheta_diocotron__Test_case_-_diocotron_instability"></a>
 Test case - diocotron instability</h1>
-<p>The test case implemented tests the diocoton instabilities (see Davidson book's [3], Edoardo Zoni's article [2] and article [4]). The initial function and equilibrium are defined in <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> and documented in <a class="el" href="src_geometryRTheta_initialization.html">Initialization</a>.</p>
+<p>The test case implemented tests the diocoton instabilities (see Davidson book's [3], Edoardo Zoni's article [2] and article [4]). The initial function and equilibrium are defined in <a class="el" href="classDiocotronDensitySolution.html" title="The diocotron exact solution of the density .">DiocotronDensitySolution</a> and documented in <a class="el" href="src_geometryRTheta_initialisation.html">Initialisation</a>.</p>
 <p>We suppose as perturbed initial condition</p>
 <p class="formulaDsp">
 \[\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }
@@ -194,7 +194,7 @@ Test case - diocotron instability</h1>
 \\ A_{2,2} = R_2^{-l} + \frac{R_2}{R_2^{2l} - W_2^{2l}} \left[  R_2^{l-1} + \frac{1}{R_2^{l+1}}  W_2^{2l}  \right] - \frac{ R_2^{-l} }{\omega - l\omega_m(R_2)}.
 \]
 </p>
-<p> where \(\omega\) satifies  </p><p class="formulaDsp">
+<p> where \(\omega\) satisfies  </p><p class="formulaDsp">
 \[\left(\frac{\omega}{\omega_D} \right)^2 - b_l \frac{\omega}{\omega_D} + c_l = 0
 \]
 </p>
@@ -251,8 +251,8 @@ Recommended parameters:</h3>
 </li>
 <li><code>Perturbation:</code><ul>
 <li><code>charge_Q: 0.</code> : charge carried by the inner conductor at \(r = W_1\).</li>
-<li><code>l_mode: 9</code> : mode of the pertubation \(\varepsilon \cos(lx)\).</li>
-<li><code>eps: 0.0001</code> : amplitude of the pertubation \(\varepsilon \cos(lx)\).</li>
+<li><code>l_mode: 9</code> : mode of the perturbation \(\varepsilon \cos(lx)\).</li>
+<li><code>eps: 0.0001</code> : amplitude of the perturbation \(\varepsilon \cos(lx)\).</li>
 </ul>
 </li>
 <li><code>Output:</code><ul>

@@ -2,7 +2,7 @@ var searchData=
 [
   ['selectrelevantidxrangetype_0',['SelectRelevantIdxRangeType',['../structconnectivity__details_1_1SelectRelevantIdxRangeType.html',1,'connectivity_details']]],
   ['selectrelevantidxrangetype_3c_20querygrid1d_2c_20idxrange_3c_20idxrangegrids_2e_2e_2e_20_3e_20_3e_1',['SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;',['../structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.html',1,'connectivity_details']]],
-  ['singlemodeperturbinitialization_2',['SingleModePerturbInitialization',['../classSingleModePerturbInitialization.html',1,'']]],
+  ['singlemodeperturbinitialisation_2',['SingleModePerturbInitialisation',['../classSingleModePerturbInitialisation.html',1,'']]],
   ['species_3',['Species',['../structSpecies.html',1,'']]],
   ['speciesinformation_4',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
   ['splineinterpolator_5',['SplineInterpolator',['../classSplineInterpolator.html',1,'']]],

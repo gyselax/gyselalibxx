@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['center_20x_20y_20simulation_0',['Guiding center (X,Y) simulation',['../simulations_geometryXY_guiding_center.html',1,'simulations_geometryXY']]],
+  ['centre_20x_20y_20simulation_0',['Guiding centre (X,Y) simulation',['../simulations_geometryXY_guiding_centre.html',1,'simulations_geometryXY']]],
   ['coding_20standards_1',['Coding Standards',['../docs_CODING_STANDARD.html',1,'']]],
   ['collisionconfiguration_20_3a_2',['CollisionConfiguration :',['../src_geometryVparMu_collisions.html',1,'src_geometryVparMu']]],
   ['collisions_3',['Collisions',['../src_collisions.html',1,'src']]],

@@ -18,7 +18,7 @@ var searchData=
   ['layout_5fspace_15',['layout_space',['../classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#ada3c2ef2dec6dcde01a226cf26f159ab',1,'IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::layout_space'],['../classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#a3a64a6ecef7debc55b0e7acefcb4a8e1',1,'FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::layout_space']]],
   ['layout_5ftype_16',['layout_type',['../classVectorField.html#ad1c164e9d56f4bf65b5b6a5785a161e6',1,'VectorField']]],
   ['like_20equation_17',['The Poisson-like equation',['../src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson-like_equation',1,'']]],
-  ['line_18',['Command line',['../simulations_geometryXY_guiding_center.html#autotoc_md41',1,'']]],
+  ['line_18',['Command line',['../simulations_geometryXY_guiding_centre.html#autotoc_md41',1,'']]],
   ['locally_19',['Building documentation locally',['../docs_Adding_docs.html#docs_Adding_docs__Building_documentation_locally',1,'']]],
   ['locator_20',['Patch locator',['../src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_locator',1,'']]],
   ['logical_20domain_20axis_21',['Advection field along the logical domain axis',['../src_geometryRTheta_advection_field.html#autotoc_md57',1,'']]]

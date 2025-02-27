@@ -134,5 +134,5 @@ var NAVTREEINDEX7 =
 "volume__quadrature__nd_8hpp.html#a606ed8438555c5104a22658ba68f32ae":[16,0,17,7,0],
 "volume__quadrature__nd_8hpp_source.html":[16,0,17,7],
 "vortex__merger__equilibrium_8hpp_source.html":[16,0,3,3,1],
-"vortex__merger__initialization_8hpp_source.html":[16,0,3,3,2]
+"vortex__merger__initialisation_8hpp_source.html":[16,0,3,3,2]
 };

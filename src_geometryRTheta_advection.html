@@ -129,7 +129,7 @@ Y(s; s, x, y) = y.
 </p>
 <p> So to compute the advected function at the next time step,</p><ul>
 <li>we compute the characteristic feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh points \((x_i, y_j)\) with a time integration method ;</li>
-<li>we interpolate the function \(f(t = t^n)\) on the characteristic feet. The proprety ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
+<li>we interpolate the function \(f(t = t^n)\) on the characteristic feet. The property ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Time_integration_methods"></a>
 Time integration methods</h1>
@@ -231,7 +231,7 @@ Advection Field</h1>
 <li>If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRP operator.</li>
 <li>If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain.</li>
 </ul>
-<p><b>In the guiding-center case</b>, the advection field is computed from the electric field,  </p><p class="formulaDsp">
+<p><b>In the guiding-centre case</b>, the advection field is computed from the electric field,  </p><p class="formulaDsp">
 \[A = - E \wedge e_z = -\nabla \phi \wedge e_z.
 \]
 </p>

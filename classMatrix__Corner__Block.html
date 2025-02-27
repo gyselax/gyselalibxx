@@ -121,7 +121,7 @@ Inheritance diagram for Matrix_Corner_Block:</div>
   <img src="classMatrix__Corner__Block.png" usemap="#Matrix_5FCorner_5FBlock_map" alt=""/>
   <map id="Matrix_5FCorner_5FBlock_map" name="Matrix_5FCorner_5FBlock_map">
 <area href="classMatrix.html" title="The super class from which matrix classes should inherit." alt="Matrix" shape="rect" coords="80,0,231,24"/>
-<area href="classMatrix__Center__Block.html" title="A Matrix representing a matrix which has a banded region." alt="Matrix_Center_Block" shape="rect" coords="0,112,151,136"/>
+<area href="classMatrix__Centre__Block.html" title="A Matrix representing a matrix which has a banded region." alt="Matrix_Centre_Block" shape="rect" coords="0,112,151,136"/>
 <area href="classMatrix__Periodic__Banded.html" title="A class representing a periodic banded matrix." alt="Matrix_Periodic_Banded" shape="rect" coords="161,112,312,136"/>
   </map>
 </div></div>
@@ -137,9 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5b5120141de32446632becd4a258088" id="r_aa5b5120141de32446632becd4a258088"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#aa5b5120141de32446632becd4a258088">set_element</a> (int i, int j, double a_ij) override</td></tr>
 <tr class="memdesc:aa5b5120141de32446632becd4a258088"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method to set an element of the <a class="el" href="classMatrix.html" title="The super class from which matrix classes should inherit.">Matrix</a>.  <br /></td></tr>
 <tr class="separator:aa5b5120141de32446632becd4a258088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48fb0458b7bb4811406b6deda078de6e" id="r_a48fb0458b7bb4811406b6deda078de6e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e">factorize</a> () override</td></tr>
-<tr class="memdesc:a48fb0458b7bb4811406b6deda078de6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorize the matrix.  <br /></td></tr>
-<tr class="separator:a48fb0458b7bb4811406b6deda078de6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f1d49f7878a67503dfb5f2679406c4" id="r_ac6f1d49f7878a67503dfb5f2679406c4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#ac6f1d49f7878a67503dfb5f2679406c4">factorise</a> () override</td></tr>
+<tr class="memdesc:ac6f1d49f7878a67503dfb5f2679406c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorise the matrix.  <br /></td></tr>
+<tr class="separator:ac6f1d49f7878a67503dfb5f2679406c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac99e12ba5284a8a73bfd454c8f8b7b60" id="r_ac99e12ba5284a8a73bfd454c8f8b7b60"><td class="memItemLeft" align="right" valign="top">virtual DSpan1D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#ac99e12ba5284a8a73bfd454c8f8b7b60">solve_inplace</a> (DSpan1D bx) const override</td></tr>
 <tr class="memdesc:ac99e12ba5284a8a73bfd454c8f8b7b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the matrix equation in place.  <br /></td></tr>
 <tr class="separator:ac99e12ba5284a8a73bfd454c8f8b7b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,20 +162,20 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a33931b7ada48fc05d33614cd4818c5b7" id="r_a33931b7ada48fc05d33614cd4818c5b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#a33931b7ada48fc05d33614cd4818c5b7">Matrix_Corner_Block</a> (int <a class="el" href="classMatrix.html#a687d05d0c6cb4e1a8dc1a40e4926e9a3">n</a>, int <a class="el" href="classMatrix__Corner__Block.html#ae4272c855b07fbdf88cc781702145ab0">k</a>, std::unique_ptr&lt; <a class="el" href="classMatrix.html">Matrix</a> &gt; q, int lambda_size1, int lambda_size2)</td></tr>
 <tr class="memdesc:a33931b7ada48fc05d33614cd4818c5b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the matrix.  <br /></td></tr>
 <tr class="separator:a33931b7ada48fc05d33614cd4818c5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab334c0f3655210a70d19d763641de24b" id="r_ab334c0f3655210a70d19d763641de24b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#ab334c0f3655210a70d19d763641de24b">calculate_delta_to_factorize</a> ()</td></tr>
-<tr class="memdesc:ab334c0f3655210a70d19d763641de24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contents of the dense matrix \( delta&#39; \) that will be factorised.  <br /></td></tr>
-<tr class="separator:ab334c0f3655210a70d19d763641de24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44f8cd6a96eecbc26f1d594cf0fbe65c" id="r_a44f8cd6a96eecbc26f1d594cf0fbe65c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#a44f8cd6a96eecbc26f1d594cf0fbe65c">calculate_delta_to_factorise</a> ()</td></tr>
+<tr class="memdesc:a44f8cd6a96eecbc26f1d594cf0fbe65c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contents of the dense matrix \( delta&#39; \) that will be factorised.  <br /></td></tr>
+<tr class="separator:a44f8cd6a96eecbc26f1d594cf0fbe65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5af1055a64ebe2f66469e3522411dd73" id="r_a5af1055a64ebe2f66469e3522411dd73"><td class="memItemLeft" align="right" valign="top">virtual DSpan1D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#a5af1055a64ebe2f66469e3522411dd73">solve_lambda_section</a> (DSpan1D v, DView1D u) const</td></tr>
-<tr class="memdesc:a5af1055a64ebe2f66469e3522411dd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcuate the solution to the following equation:  <br /></td></tr>
+<tr class="memdesc:a5af1055a64ebe2f66469e3522411dd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the solution to the following equation:  <br /></td></tr>
 <tr class="separator:a5af1055a64ebe2f66469e3522411dd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb697f1f5f3fa7094b311b16e68c72c8" id="r_acb697f1f5f3fa7094b311b16e68c72c8"><td class="memItemLeft" align="right" valign="top">virtual DSpan1D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#acb697f1f5f3fa7094b311b16e68c72c8">solve_lambda_section_transpose</a> (DSpan1D u, DView1D v) const</td></tr>
-<tr class="memdesc:acb697f1f5f3fa7094b311b16e68c72c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcuate the solution to the following equation:  <br /></td></tr>
+<tr class="memdesc:acb697f1f5f3fa7094b311b16e68c72c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the solution to the following equation:  <br /></td></tr>
 <tr class="separator:acb697f1f5f3fa7094b311b16e68c72c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a824a9d43ce28eef0836510f68deaf7dd" id="r_a824a9d43ce28eef0836510f68deaf7dd"><td class="memItemLeft" align="right" valign="top">virtual DSpan1D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#a824a9d43ce28eef0836510f68deaf7dd">solve_gamma_section</a> (DSpan1D const u, DView1D const v) const</td></tr>
-<tr class="memdesc:a824a9d43ce28eef0836510f68deaf7dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcuate the solution to the following equation:  <br /></td></tr>
+<tr class="memdesc:a824a9d43ce28eef0836510f68deaf7dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the solution to the following equation:  <br /></td></tr>
 <tr class="separator:a824a9d43ce28eef0836510f68deaf7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d8ea2d8cdabf491109060d5a37d517" id="r_a86d8ea2d8cdabf491109060d5a37d517"><td class="memItemLeft" align="right" valign="top">virtual DSpan1D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMatrix__Corner__Block.html#a86d8ea2d8cdabf491109060d5a37d517">solve_gamma_section_transpose</a> (DSpan1D const v, DView1D const u) const</td></tr>
-<tr class="memdesc:a86d8ea2d8cdabf491109060d5a37d517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcuate the solution to the following equation:  <br /></td></tr>
+<tr class="memdesc:a86d8ea2d8cdabf491109060d5a37d517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the solution to the following equation:  <br /></td></tr>
 <tr class="separator:a86d8ea2d8cdabf491109060d5a37d517"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -394,7 +394,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classMatrix.html#aec81ac31e9c308df6db246cb98202f17">Matrix</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classMatrix__Center__Block.html#ac2a92df60c4ce88f33dd25e4a3dd935b">Matrix_Center_Block</a>, and <a class="el" href="classMatrix__Periodic__Banded.html#ac4f7d1dc5b2f8bf013a447830571f949">Matrix_Periodic_Banded</a>.</p>
+<p>Reimplemented in <a class="el" href="classMatrix__Centre__Block.html#a311e6e39347eec4002695353bd22b9e8">Matrix_Centre_Block</a>, and <a class="el" href="classMatrix__Periodic__Banded.html#ac4f7d1dc5b2f8bf013a447830571f949">Matrix_Periodic_Banded</a>.</p>
 
 </div>
 </div>
@@ -450,12 +450,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classMatrix.html#adbaf811ea3f43778b194d385cbefddd9">Matrix</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classMatrix__Center__Block.html#a72441ef643b547e321a67175003fae76">Matrix_Center_Block</a>, and <a class="el" href="classMatrix__Periodic__Banded.html#aec04487e2d8aeb00ed26b92becabb991">Matrix_Periodic_Banded</a>.</p>
+<p>Reimplemented in <a class="el" href="classMatrix__Centre__Block.html#a93b634ab0d6e07d7515f1884222986ac">Matrix_Centre_Block</a>, and <a class="el" href="classMatrix__Periodic__Banded.html#aec04487e2d8aeb00ed26b92becabb991">Matrix_Periodic_Banded</a>.</p>
 
 </div>
 </div>
-<a id="a48fb0458b7bb4811406b6deda078de6e" name="a48fb0458b7bb4811406b6deda078de6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48fb0458b7bb4811406b6deda078de6e">&#9670;&#160;</a></span>factorize()</h2>
+<a id="ac6f1d49f7878a67503dfb5f2679406c4" name="ac6f1d49f7878a67503dfb5f2679406c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f1d49f7878a67503dfb5f2679406c4">&#9670;&#160;</a></span>factorise()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,7 +464,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Matrix_Corner_Block::factorize </td>
+          <td class="memname">virtual void Matrix_Corner_Block::factorise </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -477,10 +477,10 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Factorize the matrix. </p>
-<p>This method prepares the matrix for a call to the solve methods. For most matrix types a call to factorize causes the LU decomposition to be calculated. The elements of the matrix should not be accessed once this method has been called. </p>
+<p>Factorise the matrix. </p>
+<p>This method prepares the matrix for a call to the solve methods. For most matrix types a call to factorise causes the LU decomposition to be calculated. The elements of the matrix should not be accessed once this method has been called. </p>
 
-<p>Reimplemented from <a class="el" href="classMatrix.html#a1d3dd4ae5b28f0f1ec3e64ae17998944">Matrix</a>.</p>
+<p>Reimplemented from <a class="el" href="classMatrix.html#a647de53df6f957e5a09b8fa13403e758">Matrix</a>.</p>
 
 </div>
 </div>
@@ -520,7 +520,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classMatrix.html#afe065061f0c5b43def602676101fb2be">Matrix</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classMatrix__Center__Block.html#a4f9b16b46b2072fb0aaa5fcc81aef64e">Matrix_Center_Block</a>.</p>
+<p>Reimplemented in <a class="el" href="classMatrix__Centre__Block.html#adefe6e7aa5b79f1a586b753193e0ab3f">Matrix_Centre_Block</a>.</p>
 
 </div>
 </div>
@@ -560,7 +560,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classMatrix.html#abdee530d859db8b14e07915573ff5650">Matrix</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classMatrix__Center__Block.html#ac0bcd1e75ec31a079151987909d8fcf9">Matrix_Center_Block</a>.</p>
+<p>Reimplemented in <a class="el" href="classMatrix__Centre__Block.html#a9209354b196b6a30db83e9c303dbfd92">Matrix_Centre_Block</a>.</p>
 
 </div>
 </div>
@@ -600,12 +600,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classMatrix.html#a4945dc199571d35cf8e3bbcf24672030">Matrix</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classMatrix__Center__Block.html#a0726eb1007c361d427b22e7c06e9ac23">Matrix_Center_Block</a>.</p>
+<p>Reimplemented in <a class="el" href="classMatrix__Centre__Block.html#a93bc9880aaade3bf384763f8bcc4ba8a">Matrix_Centre_Block</a>.</p>
 
 </div>
 </div>
-<a id="ab334c0f3655210a70d19d763641de24b" name="ab334c0f3655210a70d19d763641de24b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab334c0f3655210a70d19d763641de24b">&#9670;&#160;</a></span>calculate_delta_to_factorize()</h2>
+<a id="a44f8cd6a96eecbc26f1d594cf0fbe65c" name="a44f8cd6a96eecbc26f1d594cf0fbe65c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f8cd6a96eecbc26f1d594cf0fbe65c">&#9670;&#160;</a></span>calculate_delta_to_factorise()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -614,7 +614,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Matrix_Corner_Block::calculate_delta_to_factorize </td>
+          <td class="memname">virtual void Matrix_Corner_Block::calculate_delta_to_factorise </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -636,7 +636,7 @@ Additional Inherited Members</h2></td></tr>
 <p>\( Q \beta = \gamma \)</p>
 <p>which should already be stored in the variable Abm_1_gamma when this method is called. </p>
 
-<p>Reimplemented in <a class="el" href="classMatrix__Periodic__Banded.html#adede214c5a83cf8080eebee9f5fd5ddd">Matrix_Periodic_Banded</a>.</p>
+<p>Reimplemented in <a class="el" href="classMatrix__Periodic__Banded.html#aa4f9aa0e75f16431e4a207de6aa9f048">Matrix_Periodic_Banded</a>.</p>
 
 </div>
 </div>
@@ -674,7 +674,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calcuate the solution to the following equation: </p>
+<p>Calculate the solution to the following equation: </p>
 <p>\( v - \lambda u \)</p>
 <p>The result is saved into the argument \( v \). This calculation is one of the steps necessary to solve the matrix equation.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -724,7 +724,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calcuate the solution to the following equation: </p>
+<p>Calculate the solution to the following equation: </p>
 <p>\( u - \lambda v \)</p>
 <p>The result is saved into the argument \( u \). This calculation is one of the steps necessary to solve the matrix equation.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -774,7 +774,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calcuate the solution to the following equation: </p>
+<p>Calculate the solution to the following equation: </p>
 <p>\( u - \beta e \)</p>
 <p>The result is saved into the argument \( u \). This calculation is one of the steps necessary to solve the matrix equation.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -822,7 +822,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calcuate the solution to the following equation: </p>
+<p>Calculate the solution to the following equation: </p>
 <p>\( v - \beta u \)</p>
 <p>The result is saved into the argument \( v \). This calculation is one of the steps necessary to solve the matrix equation.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -858,7 +858,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Data storage for the upper-right sub-matrix. </p>
-<p>This memory describes gamma before the <a class="el" href="classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e" title="Factorize the matrix.">factorize()</a> method is called. This memory describes beta after the <a class="el" href="classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e" title="Factorize the matrix.">factorize()</a> method is called. </p>
+<p>This memory describes gamma before the <a class="el" href="classMatrix__Corner__Block.html#ac6f1d49f7878a67503dfb5f2679406c4" title="Factorise the matrix.">factorise()</a> method is called. This memory describes beta after the <a class="el" href="classMatrix__Corner__Block.html#ac6f1d49f7878a67503dfb5f2679406c4" title="Factorise the matrix.">factorise()</a> method is called. </p>
 
 </div>
 </div>
@@ -883,7 +883,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The upper-right sub-matrix. </p>
-<p>The sub-matrix gamma before the <a class="el" href="classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e" title="Factorize the matrix.">factorize()</a> method is called. The sub-matrix beta after the <a class="el" href="classMatrix__Corner__Block.html#a48fb0458b7bb4811406b6deda078de6e" title="Factorize the matrix.">factorize()</a> method is called. </p>
+<p>The sub-matrix gamma before the <a class="el" href="classMatrix__Corner__Block.html#ac6f1d49f7878a67503dfb5f2679406c4" title="Factorise the matrix.">factorise()</a> method is called. The sub-matrix beta after the <a class="el" href="classMatrix__Corner__Block.html#ac6f1d49f7878a67503dfb5f2679406c4" title="Factorise the matrix.">factorise()</a> method is called. </p>
 
 </div>
 </div>

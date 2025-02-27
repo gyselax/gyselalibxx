@@ -251,7 +251,7 @@ static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, class ExtrapolationRule, template&lt; typename P &gt; typename ValuesOnPatch, class <a class="el" href="classOnionPatchLocator.html">PatchLocator</a>, class... Patches&gt;<br />
 class MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, ExtrapolationRule, ValuesOnPatch, PatchLocator, Patches &gt;</div><p>A class to evaluate all the splines of all the patches at once. </p>
-<p>This class computes the evaluations of the splines defined on each pacth at given coordinates. The class does not need to instantiate in advance individual spline evaluators. The coordinates are stored in fields on each patch. On a given storing patch, we do not enforce that a coordinate is physically located on this storing patch. These fields of coordinates can be the result of characteristics equations solving.</p>
+<p>This class computes the evaluations of the splines defined on each patch at given coordinates. The class does not need to instantiate in advance individual spline evaluators. The coordinates are stored in fields on each patch. On a given storing patch, we do not enforce that a coordinate is physically located on this storing patch. These fields of coordinates can be the result of characteristics equations solving.</p>
 <p>This function is useful to avoid calling all the spline evaluators individually, especially in a multipatch geometry with several patches. It also manages to evaluate the right spline at a coordinate physically located on another patch than the storing patch.</p>
 <p>Additionally, methods to compute the first derivatives and cross-derivatives are implemented.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This operator does not work on batched domain.</dd></dl>
@@ -266,7 +266,7 @@ class MultipatchSplineEvaluator2D&lt; ExecSpace, MemorySpace, BSpline1OnPatch, B
     <tr><td class="paramname">ExtrapolationRule</td><td>The extrapolation rule type for outside of the global domain. </td></tr>
     <tr><td class="paramname">ValuesOnPatch</td><td>A Field type storing the evaluated values of the splines. Template on the <a class="el" href="structPatch.html" title="Base tag for a patch.">Patch</a>. </td></tr>
     <tr><td class="paramname">PatchLocator</td><td>A operator that finds the patch where a given coordinate is physically located. </td></tr>
-    <tr><td class="paramname">Pacthes</td><td>A variadic template of all the patches. </td></tr>
+    <tr><td class="paramname">Patches</td><td>A variadic template of all the patches. </td></tr>
   </table>
   </dd>
 </dl>

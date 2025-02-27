@@ -4,7 +4,7 @@ var searchData=
   ['matchingidxslice_1',['MatchingIdxSlice',['../classMatchingIdxSlice.html',1,'']]],
   ['matrix_2',['Matrix',['../classMatrix.html',1,'']]],
   ['matrix_5fbanded_3',['Matrix_Banded',['../classMatrix__Banded.html',1,'']]],
-  ['matrix_5fcenter_5fblock_4',['Matrix_Center_Block',['../classMatrix__Center__Block.html',1,'']]],
+  ['matrix_5fcentre_5fblock_4',['Matrix_Centre_Block',['../classMatrix__Centre__Block.html',1,'']]],
   ['matrix_5fcorner_5fblock_5',['Matrix_Corner_Block',['../classMatrix__Corner__Block.html',1,'']]],
   ['matrix_5fdense_6',['Matrix_Dense',['../classMatrix__Dense.html',1,'']]],
   ['matrix_5fpds_5ftridiag_7',['Matrix_PDS_Tridiag',['../classMatrix__PDS__Tridiag.html',1,'']]],

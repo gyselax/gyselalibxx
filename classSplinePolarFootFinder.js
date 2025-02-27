@@ -8,5 +8,5 @@ var classSplinePolarFootFinder =
     [ "SplinePolarFootFinder", "classSplinePolarFootFinder.html#a190dbd81c517977edcee7572953add5a", null ],
     [ "operator()", "classSplinePolarFootFinder.html#a02ac2127e2d8395e92d0643be1400050", null ],
     [ "is_unified", "classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266", null ],
-    [ "unify_value_at_center_pt", "classSplinePolarFootFinder.html#ae298c9f4ad9736e24464091f572f857e", null ]
+    [ "unify_value_at_centre_pt", "classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4", null ]
 ];

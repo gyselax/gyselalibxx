@@ -9,7 +9,7 @@ var searchData=
   ['matchingidxslice_6',['matchingidxslice',['../classMatchingIdxSlice.html#ab6481837fb8af1581fac27689fcdc488',1,'MatchingIdxSlice::MatchingIdxSlice(IdxRange1D_1 const &amp;idx_range_1, IdxRange1D_2 const &amp;idx_range_2)'],['../classMatchingIdxSlice.html#a4d9de778afd3499b8d59c00d506b5d66',1,'MatchingIdxSlice::MatchingIdxSlice(IdxRange2D_1 const &amp;idx_range_1, IdxRange2D_2 const &amp;idx_range_2)']]],
   ['matrix_7',['Matrix',['../classMatrix.html#ab1bd5ff2b3826377f400a21d64c701fe',1,'Matrix']]],
   ['matrix_5fbanded_8',['Matrix_Banded',['../classMatrix__Banded.html#ac89afe7f80209cd4456138daf37c3cb9',1,'Matrix_Banded']]],
-  ['matrix_5fcenter_5fblock_9',['Matrix_Center_Block',['../classMatrix__Center__Block.html#a7896bee7289f0a272a985067a0820848',1,'Matrix_Center_Block']]],
+  ['matrix_5fcentre_5fblock_9',['Matrix_Centre_Block',['../classMatrix__Centre__Block.html#aec4c02c287577b54d57a0b6123d7f869',1,'Matrix_Centre_Block']]],
   ['matrix_5fcorner_5fblock_10',['matrix_corner_block',['../classMatrix__Corner__Block.html#a02c714c7dbf1c5d96d3deccdc2e1c510',1,'Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr&lt; Matrix &gt; q)'],['../classMatrix__Corner__Block.html#a33931b7ada48fc05d33614cd4818c5b7',1,'Matrix_Corner_Block::Matrix_Corner_Block(int n, int k, std::unique_ptr&lt; Matrix &gt; q, int lambda_size1, int lambda_size2)']]],
   ['matrix_5fdense_11',['Matrix_Dense',['../classMatrix__Dense.html#aaf23419e0189bf1b52c0abebd2fcf93c',1,'Matrix_Dense']]],
   ['matrix_5fpds_5ftridiag_12',['Matrix_PDS_Tridiag',['../classMatrix__PDS__Tridiag.html#a74f44a973fc21fed7e20bcb2d4ee0188',1,'Matrix_PDS_Tridiag']]],
