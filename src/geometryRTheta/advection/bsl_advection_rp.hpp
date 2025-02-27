@@ -178,18 +178,17 @@ public:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-            std::array<std::array<double, 2>, 2> J; // Jacobian matrix
-            m_mapping.jacobian_matrix(coord_rp, J);
+            Tensor jacobian_matrix = m_mapping.jacobian_matrix(coord_rp);
             std::array<std::array<double, 2>, 2> G; // Metric tensor
             metric_tensor(G, coord_rp);
 
             ddcHelper::get<X>(advection_field_xy_host)(irp)
-                    = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])
-                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0]
+                    = ddcHelper::get<R>(advection_field_rp)(irp) * ddcHelper::get<Theta, Theta_cov>(jacobian_matrix) / std::sqrt(G[1][1])
+                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * -ddcHelper::get<Theta, R_cov>(jacobian_matrix)
                                 / std::sqrt(G[0][0]);
             ddcHelper::get<Y>(advection_field_xy_host)(irp)
-                    = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])
-                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0]
+                    = ddcHelper::get<R>(advection_field_rp)(irp) * -ddcHelper::get<R, Theta_cov>(jacobian_matrix) / std::sqrt(G[1][1])
+                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * ddcHelper::get<R, R_cov>(jacobian_matrix)
                                 / std::sqrt(G[0][0]);
         });
 

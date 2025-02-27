@@ -49,6 +49,7 @@ struct Theta_cov
 using CoordR = Coord<R>;
 using CoordTheta = Coord<Theta>;
 using CoordRTheta = Coord<R, Theta>;
+using CoordXY = Coord<X, Y>;
 
 int constexpr BSDegree = 3;
 

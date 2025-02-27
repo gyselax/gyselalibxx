@@ -13,115 +13,15 @@
 #include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "inv_jacobian_o_point.hpp"
+#include "mapping_test_geometry.hpp"
 
 
 namespace {
-struct X
-{
-};
-struct Y
-{
-};
-struct Xpc
-{
-};
-struct Ypc
-{
-};
-struct R
-{
-    static bool constexpr PERIODIC = false;
-};
-
-struct Theta
-{
-    static bool constexpr PERIODIC = true;
-};
-
-using CoordR = Coord<R>;
-using CoordTheta = Coord<Theta>;
-using CoordRTheta = Coord<R, Theta>;
-
-using CoordXY = Coord<X, Y>;
-
-int constexpr BSDegree = 3;
-
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
-{
-};
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
-{
-};
-
-
-using SplineInterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using SplineInterpPointsTheta = ddc::GrevilleInterpolationPoints<
-        BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
-
-struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
-{
-};
-struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
-{
-};
-
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
-
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
-
-using IdxRangeR = IdxRange<GridR>;
-using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-using IdxR = Idx<GridR>;
-using IdxTheta = Idx<GridTheta>;
-using IdxRTheta = Idx<GridR, GridTheta>;
-
-using IdxStepR = IdxStep<GridR>;
-using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepRTheta = IdxStep<GridR, GridTheta>;
-
-template <class ElementType>
-using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
-
-
-
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
 
 using CzarnyMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CircularMapping = CircularToCartesian<R, Theta, X, Y>;
-
-using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
 /**
  * @brief Compare the values given by the analytical mapping and
@@ -290,20 +190,15 @@ double check_Jacobian_on_grid(
     ddc::for_each(idx_range, [&](IdxRTheta const irp) {
         const CoordRTheta coord(ddc::coordinate(irp));
 
-        Matrix_2x2 discrete_Jacobian;
-        Matrix_2x2 analytical_Jacobian;
-        mapping.jacobian_matrix(coord, discrete_Jacobian);
-        analytical_mapping.jacobian_matrix(coord, analytical_Jacobian);
+        Tensor discrete_Jacobian = mapping.jacobian_matrix(coord);
+        Tensor analytical_Jacobian = analytical_mapping.jacobian_matrix(coord);
 
-        const double diff_11 = double(discrete_Jacobian[0][0] - analytical_Jacobian[0][0]);
-        const double diff_12 = double(discrete_Jacobian[0][1] - analytical_Jacobian[0][1]);
-        const double diff_21 = double(discrete_Jacobian[1][0] - analytical_Jacobian[1][0]);
-        const double diff_22 = double(discrete_Jacobian[1][1] - analytical_Jacobian[1][1]);
+        Tensor diff = discrete_Jacobian - analytical_Jacobian;
 
-        max_err = max_err > diff_11 ? max_err : diff_11;
-        max_err = max_err > diff_12 ? max_err : diff_12;
-        max_err = max_err > diff_21 ? max_err : diff_21;
-        max_err = max_err > diff_22 ? max_err : diff_22;
+        max_err = std::max(max_err, ddcHelper::get<R, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<R, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Theta, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Theta, Theta_cov>(diff));
     });
 
     return max_err;
@@ -367,20 +262,15 @@ double check_Jacobian_not_on_grid(
     ddc::for_each(idx_range, [&](IdxRTheta const irp) {
         const CoordRTheta coord(coords(irp));
 
-        Matrix_2x2 discrete_Jacobian;
-        Matrix_2x2 analytical_Jacobian;
-        mapping.jacobian_matrix(coord, discrete_Jacobian);
-        analytical_mapping.jacobian_matrix(coord, analytical_Jacobian);
+        Tensor discrete_Jacobian = mapping.jacobian_matrix(coord);
+        Tensor analytical_Jacobian = analytical_mapping.jacobian_matrix(coord);
 
-        const double diff_11 = double(discrete_Jacobian[0][0] - analytical_Jacobian[0][0]);
-        const double diff_12 = double(discrete_Jacobian[0][1] - analytical_Jacobian[0][1]);
-        const double diff_21 = double(discrete_Jacobian[1][0] - analytical_Jacobian[1][0]);
-        const double diff_22 = double(discrete_Jacobian[1][1] - analytical_Jacobian[1][1]);
+        Tensor diff = discrete_Jacobian - analytical_Jacobian;
 
-        max_err = max_err > diff_11 ? max_err : diff_11;
-        max_err = max_err > diff_12 ? max_err : diff_12;
-        max_err = max_err > diff_21 ? max_err : diff_21;
-        max_err = max_err > diff_22 ? max_err : diff_22;
+        max_err = std::max(max_err, ddcHelper::get<R, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<R, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Theta, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Theta, Theta_cov>(diff));
     });
 
     return max_err;
@@ -441,7 +331,7 @@ double check_pseudo_Cart(
         IdxRangeRTheta const& idx_range)
 {
     const double epsilon(1.e-16);
-    using PseudoCartToCirc = CartesianToCircular<Xpc, Ypc, R, Theta>;
+    using PseudoCartToCirc = CartesianToCircular<X_pC, Y_pC, R, Theta>;
     PseudoCartToCirc pseudo_cart_to_circ;
     CombinedMapping<DiscreteMapping, PseudoCartToCirc>
             pseudo_cart_to_cart(mapping, pseudo_cart_to_circ, epsilon);
@@ -452,19 +342,17 @@ double check_pseudo_Cart(
     InvJacobianOPoint<CombinedMapping<Mapping, PseudoCartToCirc>, CoordRTheta>
             inv_jacob_analytical_mapping(analytical_pseudo_cart_to_cart);
 
-    Matrix_2x2 discrete_pseudo_Cart = inv_jacob_mapping();
-    Matrix_2x2 analytical_pseudo_Cart = inv_jacob_analytical_mapping();
+    Tensor discrete_pseudo_Cart = inv_jacob_mapping();
+    Tensor analytical_pseudo_Cart = inv_jacob_analytical_mapping();
 
-    const double diff_11 = double(discrete_pseudo_Cart[0][0] - analytical_pseudo_Cart[0][0]);
-    const double diff_12 = double(discrete_pseudo_Cart[0][1] - analytical_pseudo_Cart[0][1]);
-    const double diff_21 = double(discrete_pseudo_Cart[1][0] - analytical_pseudo_Cart[1][0]);
-    const double diff_22 = double(discrete_pseudo_Cart[1][1] - analytical_pseudo_Cart[1][1]);
+    Tensor diff = discrete_pseudo_Cart - analytical_pseudo_Cart;
+
 
     double max_err = 0.;
-    max_err = max_err > diff_11 ? max_err : diff_11;
-    max_err = max_err > diff_12 ? max_err : diff_12;
-    max_err = max_err > diff_21 ? max_err : diff_21;
-    max_err = max_err > diff_22 ? max_err : diff_22;
+    max_err = std::max(max_err, ddcHelper::get<R, R_cov>(diff));
+    max_err = std::max(max_err, ddcHelper::get<R, Theta_cov>(diff));
+    max_err = std::max(max_err, ddcHelper::get<Theta, R_cov>(diff));
+    max_err = std::max(max_err, ddcHelper::get<Theta, Theta_cov>(diff));
 
     return max_err;
 }
@@ -539,18 +427,18 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     ddc::init_discrete_space<BSplinesR>(r_knots);
     ddc::init_discrete_space<BSplinesTheta>(theta_knots);
 
-    ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
-    ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
+    ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta interpolation_idx_range_Theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeR interpolation_idx_range_R(InterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_Theta(InterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 
 
     // Operators ---
     SplineRThetaBuilder_host builder(grid);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(r_min);
-    ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(r_max);
+    ddc::NullExtrapolationRule boundary_condition_r_left;
+    ddc::NullExtrapolationRule boundary_condition_r_right;
     SplineRThetaEvaluator spline_evaluator(
             boundary_condition_r_left,
             boundary_condition_r_right,

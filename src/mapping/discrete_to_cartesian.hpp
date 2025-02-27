@@ -300,11 +300,11 @@ public:
         ddcHelper::get<X, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
         ddcHelper::get<X, Theta_cov>(jacobian_matrix)
-                .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
+                = m_spline_evaluator.deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
         ddcHelper::get<Y, R_cov>(jacobian_matrix)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
         ddcHelper::get<X, Theta_cov>(jacobian_matrix)
-                .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
+                = m_spline_evaluator.deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
         return jacobian_matrix;
     }
 
