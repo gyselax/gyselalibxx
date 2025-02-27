@@ -198,31 +198,8 @@ public:
             ddcHelper::get<Y>(advection_field_xy_host)(irp) = CoordY(advection_field_xy_center);
         });
 
-        // Pre-allocate some memory to prevent allocation later in loop
-        std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
+        (*this)(allfdistribu_host, get_field(advection_field_xy_host), dt);
 
-        auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(advection_field_xy_host));
-
-        // Initialise the feet
-        FieldMemRTheta<CoordRTheta> feet_rp_alloc(grid);
-        FieldRTheta<CoordRTheta> feet_rp = get_field(feet_rp_alloc);
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                grid,
-                KOKKOS_LAMBDA(IdxRTheta const irp) { feet_rp(irp) = ddc::coordinate(irp); });
-
-        // Compute the characteristic feet at tn ----------------------------------------------------
-        m_find_feet(feet_rp, get_const_field(advection_field_xy), dt);
-
-        auto allfdistribu = ddc::
-                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);
-
-        // Interpolate the function on the characteristic feet. -------------------------------------
-        (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rp));
-
-        ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
         Kokkos::Profiling::popRegion();
 
         return allfdistribu_host;
