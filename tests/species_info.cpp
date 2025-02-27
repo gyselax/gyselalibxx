@@ -19,7 +19,7 @@ TEST(SpeciesInfo, Ielec)
     charges(my_iion) = 1.;
     ddc::parallel_fill(masses, 1.);
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     EXPECT_EQ(my_ielec, ielec());
 }

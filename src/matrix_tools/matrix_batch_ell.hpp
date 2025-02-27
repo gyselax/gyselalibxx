@@ -11,12 +11,12 @@
 
 /**
  * @brief  Matrix class which is able to manage and solve a batch of sparse linear systems. Executes on either CPU or GPU.
- * It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilized Bicg.
+ * It takes advantage of the sparse structure, and the only batched solver available in Ginkgo : Stabilised Bicg.
  * The sparsity pattern is assumed to be the same for all matrices. ie the non-zero components are located at the same places for all matrices.
  * This class uses the ELL storage format which needs two 1D arrays, one stores values the other column indices.
  * The class returns these arrays (as Kokkos views) with the get_batch_idx_and_vals function, it is then possible to fill them outside the class.
  * Tolerance and maximal number of iterations, which are parameters for the iterative solver, are set in the constructor.
- * It is possibile to get convergence information by activating the logger at constructor call.
+ * It is possible to get convergence information by activating the logger at constructor call.
  * @tparam ExecSpace Execution space,needed by Kokkos for allocations and parallelism.
  * The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace
  */
@@ -49,7 +49,7 @@ public:
      * @param[in] max_iter maximal number of iterations for the solver
      * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! the relative residual 
      * provided here, will be used as "implicit residual" in ginkgo solver.
-     * @param[in] logger boolean parameter for saving log informations such residual and interations count.
+     * @param[in] logger boolean parameter for saving log information such residual and interactions count.
     */
     explicit MatrixBatchEll(
             const int batch_size,
@@ -80,7 +80,7 @@ public:
      * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! The residual 
      * provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver.
      * Default value is set to 1e-15.
-     * @param[in] logger bolean parameter to save logger information. Default value false.
+     * @param[in] logger boolean parameter to save logger information. Default value false.
      */
     explicit MatrixBatchEll(
             Kokkos::View<int**, Kokkos::LayoutLeft, ExecSpace> cols_idx,

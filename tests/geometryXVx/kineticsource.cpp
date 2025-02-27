@@ -61,11 +61,11 @@ TEST(KineticSource, Moments)
     host_t<DFieldMemSp> masses(idx_range_sp);
     ddc::parallel_fill(masses, 1.);
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     DFieldMemSpXVx allfdistribu(mesh);
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     ddc::parallel_fill(allfdistribu, 0.);
 
     // Maxwellian source test

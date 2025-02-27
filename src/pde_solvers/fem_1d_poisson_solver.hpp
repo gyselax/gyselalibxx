@@ -371,8 +371,8 @@ private:
             m_fem_matrix->set_element(i, nbasis, int_vals(ix));
         }
 
-        // Factorize the matrix ready to call solve
-        m_fem_matrix->factorize();
+        // Factorise the matrix ready to call solve
+        m_fem_matrix->factorise();
     }
 
     void build_non_periodic_matrix()
@@ -422,8 +422,8 @@ private:
             }
         });
 
-        // Factorize the matrix ready to call solve
-        m_fem_matrix->factorize();
+        // Factorise the matrix ready to call solve
+        m_fem_matrix->factorise();
     }
 
 

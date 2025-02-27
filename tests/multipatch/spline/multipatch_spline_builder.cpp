@@ -165,7 +165,7 @@ public:
 
 
     // Initialisation methods --------------------------------------------------------------------
-    void initialize_1D_functions(
+    void initialise_1D_functions(
             Field<double, IdxRange<GridX<1>>> function_1,
             Field<double, IdxRange<GridX<2>>> function_2)
     {
@@ -187,7 +187,7 @@ public:
     }
 
 
-    void initialize_2D_functions(
+    void initialise_2D_functions(
             Field<double, IdxRange<GridX<1>, GridY<1>>> function_1,
             Field<double, IdxRange<GridX<2>, GridY<2>>> function_2)
     {
@@ -251,7 +251,7 @@ public:
 
 
 /*
-    The global index range is splitted into two 1D patches on X1 and X2.
+    The global index range is split into two 1D patches on X1 and X2.
  */
 TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 {
@@ -272,7 +272,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
     DFieldMem<IdxRange<GridX<2>>> function_2_alloc(idx_range_x2);
     DField<IdxRange<GridX<2>>> function_2 = get_field(function_2_alloc);
 
-    initialize_1D_functions(function_1, function_2);
+    initialise_1D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
     MultipatchField<DConstField1OnPatch, Patch1, Patch2>
@@ -318,7 +318,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches1D)
 
 
 /*
-    The global index range is splitted into two 2D patches on (X1, Y1) and (X2, Y2).
+    The global index range is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
 TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
 {
@@ -344,7 +344,7 @@ TEST_F(MultipatchSplineBuilderTest, TwoPatches2D)
     DFieldMem<IdxRange<GridX<2>, GridY<2>>> function_2_alloc(idx_range_xy2);
     DField<IdxRange<GridX<2>, GridY<2>>> function_2 = get_field(function_2_alloc);
 
-    initialize_2D_functions(function_1, function_2);
+    initialise_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
     MultipatchField<DConstFieldOnPatch, Patch1, Patch2>

@@ -74,7 +74,7 @@ void check_norm_L2(
 
 
 /**
- * @brief Check if the L1 ane the L2 norms correspond to the expected norms.
+ * @brief Check if the L1 and the L2 norms correspond to the expected norms.
  *
  * Use check_norm_L1 and check_norm_L2.
  *

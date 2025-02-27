@@ -9,7 +9,7 @@ target_link_libraries(test_collSpVparMu
   gslx::collisions
   gslx::geometry_vparmu
   gslx::geometry_collisions_vparmu
-  gslx::initialization_vparmu
+  gslx::initialisation_vparmu
   gslx::io
   gslx::quadrature
   gslx::speciesinfo

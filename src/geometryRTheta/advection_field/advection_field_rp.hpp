@@ -35,8 +35,8 @@
  * We here focus on equation (3). The @f$ \phi @f$ is already computed 
  * on B-splines with the given Poisson solver. Then in the AdvectionFieldRTheta::operator()
  * we compute the advection field (@f$A = E \wedge e_z@f$) thanks to (3) using the B-splines coefficients.
- * Depending on the given mapping, the computation at the center point is not
- * always well-defined so we linearize around the center point as explained
+ * Depending on the given mapping, the computation at the centre point is not
+ * always well-defined so we linearise around the centre point as explained
  * in Edoardo Zoni's article (https://doi.org/10.1016/j.jcp.2019.108889).
  * 
  * The advection field can be computed along the logical index range axis or the physical index range
@@ -46,7 +46,7 @@
  * - @f$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} [\partial_r \phi, \partial_\theta \phi]^T @f$,
  * - @f$ E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) @f$,
  * 
- * For @f$ r < \varepsilon @f$, @f$(J^{-1})^{T}@f$ is  ill-defined so we linearize 
+ * For @f$ r < \varepsilon @f$, @f$(J^{-1})^{T}@f$ is  ill-defined so we linearise 
  * @f$ E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta)
  * + \frac{r}{\varepsilon} E(\varepsilon, \theta) @f$,
  *
@@ -71,7 +71,7 @@
  * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j@f$, 
  * - with @f$g^{ij}@f$, the coefficients of the inverse metric tensor,
  * - @f$g_{jj}@f$, the coefficients of the metric tensor,
- * - @f$\hat{e}_j@f$, the normalized covariants vectors.
+ * - @f$\hat{e}_j@f$, the normalised covariants vectors.
  * 
  * Then, we compute @f$ E = -\nabla \phi  @f$ and @f$A = E \wedge e_z@f$.
  * 
@@ -114,7 +114,7 @@ public:
      * @param[in] mapping
      *      The mapping @f$ \mathcal{F} @f$ from the logical index range to the physical index range.
      * @param[in] epsilon
-     *      The parameter @f$ \varepsilon @f$ for the linearization of the
+     *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
      */
     explicit AdvectionFieldFinder(Mapping const& mapping, double const epsilon = 1e-12)
@@ -252,7 +252,7 @@ private:
 
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rp);
 
-                // Gradiant of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical index range (Cartesian index range)
                 double const deriv_x_phi
                         = deriv_r_phi(irp) * inv_J[0][0] + deriv_p_phi(irp) * inv_J[1][0];
                 double const deriv_y_phi
@@ -309,7 +309,7 @@ private:
                         coord_rp_epsilon,
                         get_const_field(electrostatic_potential_coef));
 
-                // Gradiant of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical index range (Cartesian index range)
                 double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
                                                    + deriv_p_phi_epsilon * inv_J_eps[1][0];
                 double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
@@ -349,13 +349,13 @@ public:
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
-     * @param[out] advection_field_xy_center
+     * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
-            CoordXY& advection_field_xy_center) const
+            CoordXY& advection_field_xy_centre) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
 
@@ -367,7 +367,7 @@ public:
 
         (*this)(get_field(electrostatic_potential_coef),
                 advection_field_rp,
-                advection_field_xy_center);
+                advection_field_xy_centre);
     }
 
 
@@ -380,19 +380,19 @@ public:
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
-     * @param[out] advection_field_xy_center
+     * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point.  
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
-            CoordXY& advection_field_xy_center) const
+            CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_spline_evaluator,
                 electrostatic_potential_coef,
                 advection_field_rp,
-                advection_field_xy_center);
+                advection_field_xy_centre);
     }
 
 
@@ -404,19 +404,19 @@ public:
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis. 
-     * @param[out] advection_field_xy_center
+     * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
-            CoordXY& advection_field_xy_center) const
+            CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_polar_spline_evaluator,
                 electrostatic_potential_coef,
                 advection_field_rp,
-                advection_field_xy_center);
+                advection_field_xy_centre);
     }
 
 
@@ -431,7 +431,7 @@ private:
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rp
      *      The advection field on the logical axis on an index range without O-point. 
-     * @param[out] advection_field_xy_center
+     * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     template <class SplineType, class Evaluator>
@@ -439,7 +439,7 @@ private:
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
-            CoordXY& advection_field_xy_center) const
+            CoordXY& advection_field_xy_centre) const
     {
         static_assert(
                 (std::is_same_v<
@@ -524,6 +524,6 @@ private:
         double const deriv_y_phi_0
                 = (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant;
 
-        advection_field_xy_center = CoordXY(deriv_y_phi_0, -deriv_x_phi_0);
+        advection_field_xy_centre = CoordXY(deriv_y_phi_0, -deriv_x_phi_0);
     }
 };

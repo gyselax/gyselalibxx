@@ -194,13 +194,3 @@ using DConstFieldSpVparMu = ConstFieldSpVparMu<double>;
 template <class ElementType>
 using ConstFieldSpVpar = ConstField<ElementType, IdxRangeSpVpar>;
 using DConstFieldSpVpar = ConstFieldSpVpar<double>;
-
-/* A OTER
-New notation:
-- RDimX --> X
-- IDimX --> GridX
-- IndexX --> IdxX
-- IVectX --> IdxStepX
-- IDomX --> IdxRangeX
-- DBSsplineX --> SplineCoeffX
-*/

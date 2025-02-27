@@ -54,7 +54,7 @@ void Matrix_PDS_Tridiag::set_element(int i, int j, double const a_ij)
     }
 }
 
-int Matrix_PDS_Tridiag::factorize_method()
+int Matrix_PDS_Tridiag::factorise_method()
 {
     int info;
     dpttrf_(&n, d.get(), l.get(), &info);

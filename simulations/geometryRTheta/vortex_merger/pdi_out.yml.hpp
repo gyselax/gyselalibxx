@@ -102,7 +102,7 @@ plugins:
 
   decl_hdf5:
     - file: 'output/VOICEXX_initstate.h5'
-      on_event: [initialization]
+      on_event: [initialisation]
       collision_policy: replace_and_warn
       write: [r_size, p_size, r_coords, p_coords, x_coords, y_coords, jacobian, delta_t, final_T, time_step_diag, density_eq, electrical_potential_eq]
 

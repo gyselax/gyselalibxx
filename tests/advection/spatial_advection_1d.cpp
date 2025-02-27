@@ -168,7 +168,7 @@ public:
 
 
         // INITIALISATION ------------------------------------------------------------------------
-        // Initialization of the masses
+        // Initialisation of the masses
         host_t<DFieldMemSp> masses_host(idx_range_allsp);
         masses_host(i_elec) = 1;
         masses_host(i_ion) = 1;
@@ -177,7 +177,7 @@ public:
         DFieldSp masses = get_field(masses_alloc);
 
 
-        // Initialization of the distribution function and advection field
+        // Initialisation of the distribution function and advection field
         DFieldMemSpXVx allfdistribu_alloc(meshSpXVx);
         DFieldSpXVx allfdistribu = get_field(allfdistribu_alloc);
 

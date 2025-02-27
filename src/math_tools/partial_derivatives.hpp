@@ -14,7 +14,7 @@
 
 
 /**
- * @brief A class which implementes a partial derivative operator
+ * @brief A class which implements a partial derivative operator
  */
 template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
 class PartialDerivative

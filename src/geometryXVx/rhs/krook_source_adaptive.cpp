@@ -40,7 +40,7 @@ KrookSourceAdaptive::KrookSourceAdaptive(
         mask_host = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Normal, false);
         break;
     case RhsType::Sink:
-        // the mask equals zero in the center of the plasma
+        // the mask equals zero in the centre of the plasma
         mask_host = mask_tanh(gridx, m_extent, m_stiffness, MaskType::Inverted, false);
         break;
     }

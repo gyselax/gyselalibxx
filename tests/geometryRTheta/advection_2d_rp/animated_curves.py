@@ -8,42 +8,42 @@ executable : string
 
 rmin : float
     Minimum value of the r values.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 rmax : float
     Maximum value of the r values.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Nr : int
     Number of break points in r dimension
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Nth : int
     Number of break points in theta dimension
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 dt : float
     Time step.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 T : float
     Final time.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 curves : bool
     Boolean to select if the values of the advected function are saved.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 feet : bool
     Boolean to select if the characteristic feet are saved.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Returns
@@ -192,7 +192,7 @@ ask_execute = (answer1=="y")
 
 
 if executable_name == "advection_ALL":
-    answer2 = input(explanations + "Which tests do you want to display ? [int betweent 0 and 47, separated by \',\' or  \'-\']: ")
+    answer2 = input(explanations + "Which tests do you want to display ? [int between 0 and 47, separated by \',\' or  \'-\']: ")
     list_string = answer2.split(",")
 
 answer3 = input("Do you want to remove the folder containing all the data of each test case after running ? [y/n]: ")
