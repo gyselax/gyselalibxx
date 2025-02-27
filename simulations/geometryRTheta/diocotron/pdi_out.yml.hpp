@@ -89,7 +89,7 @@ plugins:
       iteration:
         - set:
           - iter_saved: '${iter} % ${time_step_diag}' 
-    on_finalise:
+    on_finalize:
       - release: [iter_saved]
 
   decl_hdf5:

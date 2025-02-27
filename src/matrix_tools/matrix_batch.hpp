@@ -53,7 +53,7 @@ public:
     virtual void setup_solver() = 0;
 
     /**
-     * @brief Solve the multiple right-hand sides linear problem Axe=b inplace.
+     * @brief Solve the multiple right-hand sides linear problem Ax=b inplace.
      *
      * @param[in, out] b A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solution.
      */

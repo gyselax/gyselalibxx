@@ -128,27 +128,27 @@ def animate (iter_nb, file_name, test_name, output_folder):
 
 
     def set_axis (figure, idx, elev, azim, roll):
-        axe = figure.add_subplot(idx, projection='3d')
-        axe.view_init(elev, azim, roll)
-        axe.set_xlabel("x")
-        axe.set_ylabel("y")
-        axe.set_zlabel("z")
-        axe.set_xlim(min(x_min,y_min), max(x_max,y_max))
-        axe.set_ylim(min(x_min,y_min), max(x_max,y_max))
-        axe.set_title(test_name)
+        ax = figure.add_subplot(idx, projection='3d')
+        ax.view_init(elev, azim, roll)
+        ax.set_xlabel("x")
+        ax.set_ylabel("y")
+        ax.set_zlabel("z")
+        ax.set_xlim(min(x_min,y_min), max(x_max,y_max))
+        ax.set_ylim(min(x_min,y_min), max(x_max,y_max))
+        ax.set_title(test_name)
 
-        plot = [axe.plot_trisurf(zarray[0,0], zarray[0,1], zarray[0,2], cmap = my_cmap, linewidth=0, antialiased=False)]
-        cbar = figure.colorbar(plot[0], axe = axe, shrink = 0.5, aspect = 10)
+        plot = [ax.plot_trisurf(zarray[0,0], zarray[0,1], zarray[0,2], cmap = my_cmap, linewidth=0, antialiased=False)]
+        cbar = figure.colorbar(plot[0], ax = ax, shrink = 0.5, aspect = 10)
 
-        return axe, plot, cbar
+        return ax, plot, cbar
 
 
     fig = plt.figure(figsize=(16,8))
 
-    axe1, plot1, cbar1 = set_axis(fig, 121, 90, -90, 0)
-    axe2, plot2, cbar2 = set_axis(fig, 122, 60, -45, 0)
+    ax1, plot1, cbar1 = set_axis(fig, 121, 90, -90, 0)
+    ax2, plot2, cbar2 = set_axis(fig, 122, 60, -45, 0)
 
-    ani = FuncAnimation(fig, update_plot_function(fig, axe1, axe2), len(zarray), fargs=(zarray, plot1, cbar1, plot2, cbar2), interval=1000/fps)
+    ani = FuncAnimation(fig, update_plot_function(fig, ax1, ax2), len(zarray), fargs=(zarray, plot1, cbar1, plot2, cbar2), interval=1000/fps)
 
     #ani.save(folder + file_name+".mp4",writer='ffmpeg',fps=fps)
     ani.save(folder + file_name +".gif",writer='imagemagick',fps=fps)
@@ -218,7 +218,7 @@ if executable_name == "advection_ALL":
     possible_output_folder_names = [d for d in os.listdir() if d.endswith('_output') and d.count('-')==2]
     output_folder_names = [possible_output_folder_names[s] for s in selected_test]
     keys = [folder.replace('_output','').split('-') for folder in output_folder_names]
-    fct_names = [f'{simulation.capitalise()} with {method.replace("_"," ")} on {mapping.replace("_", " ")}'
+    fct_names = [f'{simulation.capitalize()} with {method.replace("_"," ")} on {mapping.replace("_", " ")}'
                  for mapping, method, simulation in keys]
 else :
     mapping, method, domain, simulation, name = get_simulation_config(executable)

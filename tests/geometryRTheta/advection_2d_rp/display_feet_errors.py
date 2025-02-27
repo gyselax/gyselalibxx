@@ -236,8 +236,8 @@ set_plot_imshow(349, ERR_d_init_end[-1],  f"Distance errors for dt = {DT[-1]}")
 
 
 for i in range(max_pow):
-    axe =plt.subplot(3, 4, i+1 +i//3 +1)
-    plt.plot(Cr, Cp, "+", colour="silver", label="grid")
+    ax =plt.subplot(3, 4, i+1 +i//3 +1)
+    plt.plot(Cr, Cp, "+", color="silver", label="grid")
     plt.plot(L_exact_Fr[i], L_exact_Fp[i], "+", label="exact")
     plt.plot(L_computed_Fr[i], L_computed_Fp[i], "+", label="computed")
 
@@ -245,7 +245,7 @@ for i in range(max_pow):
     plt.ylabel("theta")
     plt.legend()
     plt.title(f"Exact and computed feet \n for dt = {DT[i]} and NrxNt = {Nr}x{Nt}", fontdict={'fontsize': 10 })
-    axe.set_adjustable("box")
+    ax.set_adjustable("box")
 
 plt.show()
 

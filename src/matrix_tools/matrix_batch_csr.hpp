@@ -185,7 +185,7 @@ public:
      * It uses the batch of matrices to generate a batched Jacobi preconditioner. Other parameters like maximum number
      * of iterations and tolerance are also used to instantiate a Ginkgo solver.
      *
-     * The stopping criterion is a reduction factor ||Axe-b||/||b||<tol with max_iter maximum iterations.
+     * The stopping criterion is a reduction factor ||Ax-b||/||b||<tol with max_iter maximum iterations.
      */
     void setup_solver() final
     {
@@ -245,7 +245,7 @@ public:
     }
 
     /**
-     * @brief Solve the batched linear problem Axe=b.
+     * @brief Solve the batched linear problem Ax=b.
      *
      * @param[in, out] b A 2D Kokkos::View storing the batched right-hand sides of the problem and receiving the corresponding solutions.
      */
@@ -258,7 +258,7 @@ public:
     }
 
     /**
-     * @brief Solve the batched linear problem Axe=b.
+     * @brief Solve the batched linear problem Ax=b.
      *
      * @param[in] x A 2D Kokkos::View storing the batched  initial guests (useful for iterative solver) of the problems, and receiving the corresponding solutions.
      *

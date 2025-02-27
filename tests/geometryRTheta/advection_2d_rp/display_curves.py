@@ -58,13 +58,13 @@ import matplotlib.pyplot as plt
 from advection_functions import set_input, execute, treatment, get_simulation_config
 
 # Definition of functions ---------------------------------------
-def set_axis(axe, x_label, y_label, z_label, axe_label):
+def set_axis(ax, x_label, y_label, z_label, ax_label):
     """
     Set the labels of the axis of the plot.
 
     Parameters
     ----------
-    axe: matplotlib.axis
+    ax: matplotlib.axis
         The axis object.
     x_label: string
         The label for the x axis.
@@ -72,13 +72,13 @@ def set_axis(axe, x_label, y_label, z_label, axe_label):
         The label for the y axis.
     z_label: string
         The label for the z axis.
-    axe_label: string
+    ax_label: string
         To set property on the axis.
     """
-    axe.set_xlabel(x_label)
-    axe.set_ylabel(y_label)
-    axe.set_zlabel(z_label)
-    axe.axis(axe_label)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.set_zlabel(z_label)
+    ax.axis(ax_label)
 
 
 def set_surface(fig, nb_x, nb_y, n_idx, X, Y, Z, elev, azim, roll):
@@ -117,11 +117,11 @@ def set_surface(fig, nb_x, nb_y, n_idx, X, Y, Z, elev, azim, roll):
         The matplotlib.axis object of the selected subplot.
     """
     my_cmap = plt.get_cmap('Spectral')
-    axe = fig.add_subplot(nb_x, nb_y, n_idx+1, projection='3d')
-    axe.view_init(elev, azim, roll)
-    surf = axe.plot_trisurf(X, Y, Z, cmap = my_cmap, linewidth=0, antialiased=False)
-    fig.colorbar(surf, axe = axe, shrink = 0.5, aspect = 5)
-    return axe
+    ax = fig.add_subplot(nb_x, nb_y, n_idx+1, projection='3d')
+    ax.view_init(elev, azim, roll)
+    surf = ax.plot_trisurf(X, Y, Z, cmap = my_cmap, linewidth=0, antialiased=False)
+    fig.colorbar(surf, ax = ax, shrink = 0.5, aspect = 5)
+    return ax
 
 
 def display(iter_nb, dt, title, subtitle, output_folder):
@@ -152,7 +152,7 @@ def display(iter_nb, dt, title, subtitle, output_folder):
         Y = np.array(CoordY)
         Z = np.array(list_F)
 
-        axe = set_surface(fig, 3, 5, n_idx, X, Y, Z, 90, -90, 0)
+        ax = set_surface(fig, 3, 5, n_idx, X, Y, Z, 90, -90, 0)
 
         if idx == 0 :
             plt.title(f"Initial condition\n (maximum = {max(Z):.3}) ")
@@ -161,7 +161,7 @@ def display(iter_nb, dt, title, subtitle, output_folder):
         else:
             plt.title(f"Final state ({iter_nb} times)\n (maximum = {max(Z):.3}) ")
 
-        set_axis(axe, "x", "y", "z", "equal")
+        set_axis(ax, "x", "y", "z", "equal")
 
 
     namefile_final = os.path.join(output_folder, f"after_{iter_nb}.txt")
@@ -176,22 +176,22 @@ def display(iter_nb, dt, title, subtitle, output_folder):
     Ze = np.array(list_F_exact)
     Z = Ze - Zf
 
-    axe = set_surface(fig, 3, 5, 11, X, Y, Ze, 90, -90, 0)
+    ax = set_surface(fig, 3, 5, 11, X, Y, Ze, 90, -90, 0)
     plt.title("Expected final state")
-    set_axis(axe, "x", "y", "z", "equal")
+    set_axis(ax, "x", "y", "z", "equal")
 
-    axe = set_surface(fig, 3, 5, 12, X, Y, Z, 90, -90, 0)
+    ax = set_surface(fig, 3, 5, 12, X, Y, Z, 90, -90, 0)
     plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z)):.3} ")
-    set_axis(axe, "x", "y", "z", "equal")
+    set_axis(ax, "x", "y", "z", "equal")
 
-    axe = set_surface(fig, 3, 5, 13, X, Y, Z, 45, -45, 0)
+    ax = set_surface(fig, 3, 5, 13, X, Y, Z, 45, -45, 0)
     plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z)):.3} ")
-    set_axis(axe, "x", "y", "z", "on")
+    set_axis(ax, "x", "y", "z", "on")
 
 
-    axe = set_surface(fig, 3, 5, 14, X, Y, -Z, 45, -45, 0)
+    ax = set_surface(fig, 3, 5, 14, X, Y, -Z, 45, -45, 0)
     plt.title(f"Difference (=-(exact-advected))\n max error = {max(abs(Z)):.3} ")
-    set_axis(axe, "x", "y", "-z", "on")
+    set_axis(ax, "x", "y", "-z", "on")
 
 
     #plt.savefig(title + ".png")
