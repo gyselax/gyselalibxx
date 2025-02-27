@@ -9,7 +9,7 @@
 #include "matrix_batch.hpp"
 
 /**
- * @brief A structure for solving a set of independant tridiagonal systems using a direct method.
+ * @brief A structure for solving a set of independent tridiagonal systems using a direct method.
  * The parallelism operates on the whole collection by dispatching to threads.
  * Each problem is treated sequentially, by the tridiagonal matrix algorithm (TDMA).
  * This solver is stable for tridiagonal matrices which satisfy one of the following conditions:

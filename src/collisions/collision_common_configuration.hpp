@@ -131,7 +131,7 @@ public:
      *
      * @param[in] yaml_input_file simulation input file.
      * @param[in] index_range_fdistribution the index range that will represent the
-     * distribution fuction given to the operator.
+     * distribution function given to the operator.
      * @param[in] coeff_intdmu quadrature coefficient.
      * @param[in] coeff_intdvpar quadrature coefficient.
      */
@@ -202,7 +202,7 @@ public:
         }
 
         {
-            /* Initialize grid coordinates.
+            /* Initialise grid coordinates.
              */
             ddcHelper::
                     dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(m_mug_allocation));

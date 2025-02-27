@@ -108,7 +108,7 @@ public:
 
     /**
      * @brief Can be used to obtain the quantities the operator needs for its
-     * initialization, modification is not authorized.
+     * initialisation, modification is not authorised.
      *
      * @return const CollisionConfigurationDataType&
      */
@@ -119,7 +119,7 @@ public:
 
 protected:
     /**
-     * @brief Does the initialization specific to this geometry.
+     * @brief Does the initialisation specific to this geometry.
      *
      * @param[in] input_B_norm
      * @param[in] input_Bstar_s

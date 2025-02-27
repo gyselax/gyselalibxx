@@ -57,7 +57,7 @@ endforeach()
 
 
 ##################################################################
-# Create one executable for all the possibilties listed before.  #
+# Create one executable for all the possibilities listed before.  #
 #                                                                #
 ##################################################################
 

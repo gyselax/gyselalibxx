@@ -31,7 +31,7 @@ So to compute the advected function at the next time step,
  - we compute the characteristic feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and  $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
  for each mesh points $`(x_i, y_j)`$ with a time integration method ; 
  - we interpolate the function $f(t = t^n)$ on the characteristic feet. 
- The proprety ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
+ The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
 
 
@@ -162,7 +162,7 @@ The advection field can be computed thanks to the AdvectionFieldFinder operator.
 
 * If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain. 
 
-**In the guiding-center case**, the advection field is computed from the electric field, 
+**In the guiding-centre case**, the advection field is computed from the electric field, 
 ```math
 A = - E \wedge e_z = -\nabla \phi \wedge e_z.
 ```

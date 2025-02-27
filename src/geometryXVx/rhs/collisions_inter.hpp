@@ -33,7 +33,7 @@ public:
      * @brief The constructor for the operator.
      *
      * @param[in] mesh The index range on which the operator will act.
-     * @param[in] nustar0 The normalized collisionality.
+     * @param[in] nustar0 The normalised collisionality.
      */
     CollisionsInter(IdxRangeSpXVx const& mesh, double nustar0);
 

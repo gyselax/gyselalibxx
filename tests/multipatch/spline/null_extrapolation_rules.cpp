@@ -21,7 +21,7 @@ void test_on_device(MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> 
 
     int constexpr outside = -1;
 
-    // Outside outter ring.
+    // Outside outer ring.
     typename Patch1::Coord12 outside_coord_1(2.5, 3 / 2. * M_PI);
     typename Patch2::Coord12 outside_coord_2(2.5, 3 / 2. * M_PI);
 
@@ -54,7 +54,7 @@ TEST_F(MultipatchSplineOnionShapeTest, NullExtrapolationRuleHostTest)
 
     int constexpr outside = -1;
 
-    // Outside outter ring.
+    // Outside outer ring.
     typename Patch1::Coord12 outside_coord_1(2.5, 3 / 2. * M_PI);
     typename Patch2::Coord12 outside_coord_2(2.5, 3 / 2. * M_PI);
 

@@ -18,7 +18,7 @@
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
-#include "noperturbinitialization.hpp"
+#include "noperturbinitialisation.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 
     // ---> Initialisation of the distribution function as a perturbed Maxwellian
     DFieldMemSpVparMu allfdistribu(idxrange_spvparmu);
-    NoPerturbInitialization const init(get_const_field(allfequilibrium));
+    NoPerturbInitialisation const init(get_const_field(allfequilibrium));
     init(get_field(allfdistribu));
 
     // ---> Expose unchanged data (related to mesh and species) to PDI

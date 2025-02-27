@@ -295,7 +295,7 @@ private:
         return idx_1 + (idx_2 - idx_1) / 2;
     }
 
-    /// @brief Get the closest target index wich is supposed to be the equivalent to the current index.
+    /// @brief Get the closest target index which is supposed to be the equivalent to the current index.
     template <class TargetGrid, class CurrentGrid>
     Idx<TargetGrid> const get_target_idx(
             IdxRange<TargetGrid> const& target_idx_range,

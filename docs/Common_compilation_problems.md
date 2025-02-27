@@ -72,7 +72,7 @@ In practice this means that while `ddc::Chunk` is used to initialise the memory,
 
 When this rule is not followed you may see a large number of errors. The following is a selection of the error messages that you may see:
 
-The first error to appear is not very explicit. It simply indicates that the lvalue (the value on the left hand side of the assignment) has an unknown type. As a result the compiler does not know how to assing a value to it:
+The first error to appear is not very explicit. It simply indicates that the lvalue (the value on the left hand side of the assignment) has an unknown type. As a result the compiler does not know how to assign a value to it:
 ```
 <PATH_TO_FILE>(<LINE_NUMBER>): error: expression must be a modifiable lvalue
 ```

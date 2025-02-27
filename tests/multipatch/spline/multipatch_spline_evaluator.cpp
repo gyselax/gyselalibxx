@@ -130,7 +130,7 @@ public:
 // Checking functions ----------------------------------------------------------------------------
 // One function per method of MultipatchSplineEvaluator tested.
 // Test operator() ...............................................................................
-void test_operator_assignement(
+void test_operator_assignment(
         DeviceMultipatchSplineRThetaEvaluator const& evaluators,
         SplineRThetaEvaluator<1, DeviceExecSpace> const& single_evaluator_1,
         SplineRThetaEvaluator<2, DeviceExecSpace> const& single_evaluator_2,
@@ -311,7 +311,7 @@ TEST_F(MultipatchSplineEvaluatorTest, HostEvaluateOnSingleCoord)
     host_t<DConstField<IdxRange<BSplinesR<2>, BSplinesTheta<2>>>> const const_function_2_coef_host(
             get_const_field(function_2_coef_host));
 
-    // Check assignement operator on host.
+    // Check assignment operator on host.
     double eval_function = evaluators(eval_coord_1_on_patch_1, splines_host);
     double expected_function
             = evaluator_1_host(eval_coord_1_on_patch_1, const_function_1_coef_host);
@@ -376,8 +376,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceEvaluateOnSingleCoord)
 
     Kokkos::deep_copy(coords, coords_host);
 
-    // Check assignement operator on device.
-    test_operator_assignement(
+    // Check assignment operator on device.
+    test_operator_assignment(
             evaluators,
             evaluator_1,
             evaluator_2,
