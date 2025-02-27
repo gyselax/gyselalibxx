@@ -7,7 +7,7 @@
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "iqnsolver.hpp"
-#include "metric_tensor.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
@@ -471,7 +471,7 @@ private:
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
-        MetricTensor<Mapping, CoordRTheta> metric_tensor(m_mapping);
+        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
 
         // > computation of the advection field
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
@@ -479,18 +479,19 @@ private:
 
             Matrix_2x2 J; // Jacobian matrix
             m_mapping.jacobian_matrix(coord_rp, J);
-            Matrix_2x2 inv_G; // Inverse metric tensor
-            metric_tensor.inverse(inv_G, coord_rp);
-            Matrix_2x2 G; // Metric tensor
-            metric_tensor(G, coord_rp);
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> G = metric_tensor(coord_rp);
+            DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
+                    = metric_tensor.inverse(coord_rp);
 
             // E = -grad phi
             double const electric_field_r
-                    = (-deriv_r_phi(irp) * inv_G[0][0] - deriv_p_phi(irp) * inv_G[1][0])
-                      * std::sqrt(G[0][0]);
+                    = (-deriv_r_phi(irp) * ddcHelper::get<R_cov, R_cov>(inv_G)
+                       - deriv_p_phi(irp) * ddcHelper::get<Theta_cov, R_cov>(inv_G))
+                      * std::sqrt(ddcHelper::get<R, R>(G));
             double const electric_field_p
-                    = (-deriv_r_phi(irp) * inv_G[0][1] - deriv_p_phi(irp) * inv_G[1][1])
-                      * std::sqrt(G[1][1]);
+                    = (-deriv_r_phi(irp) * ddcHelper::get<R_cov, Theta_cov>(inv_G)
+                       - deriv_p_phi(irp) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G))
+                      * std::sqrt(ddcHelper::get<Theta, Theta>(G));
 
             // A = E \wedge e_z
             ddcHelper::get<R>(advection_field_rp)(irp) = -electric_field_p;
