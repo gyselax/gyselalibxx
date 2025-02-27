@@ -363,8 +363,7 @@ public:
 class AdvectionField_rotation
 {
 private:
-    double const m_vr;
-    double const m_vtheta;
+    DVector<R, Theta> m_v;
     CartesianToCircular<X, Y, R, Theta> const m_physical_to_logical_mapping;
     CircularToCartesian<R, Theta, X, Y> const m_logical_to_physical_mapping;
 
@@ -379,8 +378,7 @@ public:
      *      The constant second polar component of the advection field in the physical index range.
      */
     AdvectionField_rotation(CoordVr vr, CoordVtheta vtheta)
-        : m_vr(vr)
-        , m_vtheta(vtheta)
+        : m_v(vr, vtheta)
         , m_physical_to_logical_mapping()
         , m_logical_to_physical_mapping()
     {
@@ -402,10 +400,11 @@ public:
     KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord));
-        std::array<std::array<double, 2>, 2> jacobian;
-        m_logical_to_physical_mapping.jacobian_matrix(coord_rp, jacobian);
-        double const vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];
-        double const vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];
+        Tensor jacobian = m_logical_to_physical_mapping.jacobian_matrix(coord_rp);
+        double const vx = ddcHelper::get<R>(m_v) * ddcHelper::get<R, R_cov>(jacobian)
+                          + ddcHelper::get<Theta>(m_v) * ddcHelper::get<R, Theta_cov>(jacobian);
+        double const vy = ddcHelper::get<R>(m_v) * ddcHelper::get<Theta, R_cov>(jacobian)
+                          + ddcHelper::get<Theta>(m_v) * ddcHelper::get<Theta, Theta_cov>(jacobian);
         return CoordXY(vx, vy);
     }
 
@@ -422,7 +421,7 @@ public:
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord_xy));
-        CoordRTheta const velocity(m_vr, m_vtheta);
+        CoordRTheta const velocity(m_v);
         return m_logical_to_physical_mapping(coord_rp - t * velocity);
     }
 };

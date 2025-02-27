@@ -12,131 +12,10 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "inverse_jacobian_matrix.hpp"
+#include "mapping_test_geometry.hpp"
 #include "mapping_testing_tools.hpp"
 #include "mesh_builder.hpp"
 
-
-
-namespace {
-struct X
-{
-};
-struct Y
-{
-};
-struct R
-{
-    static bool constexpr PERIODIC = false;
-};
-
-struct Theta
-{
-    static bool constexpr PERIODIC = true;
-};
-
-using CoordR = Coord<R>;
-using CoordTheta = Coord<Theta>;
-using CoordRTheta = Coord<R, Theta>;
-
-int constexpr BSDegree = 3;
-
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
-{
-};
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
-{
-};
-
-using InterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
-        BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
-
-struct GridR : InterpPointsR::interpolation_discrete_dimension_type
-{
-};
-struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
-{
-};
-
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
-
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
-
-using IdxRangeR = IdxRange<GridR>;
-using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-using IdxR = Idx<GridR>;
-using IdxTheta = Idx<GridTheta>;
-using IdxRTheta = Idx<GridR, GridTheta>;
-
-using IdxStepR = IdxStep<GridR>;
-using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepRTheta = IdxStep<GridR, GridTheta>;
-
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-
-template <class ElementType>
-using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
-
-using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
-
-/**
- * @brief Check if the product of the matrix and inv_matrix gives the identity matrix.
- *
- * The error tolerance is given at 1e-15.
- *
- * @param[in] matrix
- * 			The Jacobian matrix of the mapping.
- * @param[in] inv_matrix
- * 			The inverse Jacobian matrix of the mapping.
- */
-void check_inverse(Matrix_2x2 matrix, Matrix_2x2 inv_matrix)
-{
-    const double TOL = 1e-15;
-    constexpr std::size_t N = 2;
-
-    for (std::size_t i(0); i < N; ++i) {
-        for (std::size_t j(0); j < N; ++j) {
-            double id_val = 0.0;
-            for (std::size_t k(0); k < N; ++k) {
-                id_val += matrix[i][k] * inv_matrix[k][j];
-            }
-            EXPECT_NEAR(id_val, static_cast<double>(i == j), TOL);
-        }
-    }
-}
-
-} // namespace
 
 
 /**
@@ -161,12 +40,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irp));
-
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-
-        check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+        check_inverse_tensor(mapping.jacobian_matrix(coords(irp)), inv_jacobian(coords(irp)));
     });
 }
 
@@ -184,13 +58,9 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix;
-
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-        mapping.inv_jacobian_matrix(coords(irp), inv_Jacobian_matrix);
-
-        check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+        check_inverse_tensor(
+                mapping.jacobian_matrix(coords(irp)),
+                mapping.inv_jacobian_matrix(coords(irp)));
     });
 }
 
@@ -246,12 +116,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
         const CoordRTheta coord_rp(ddc::coordinate(irp));
         const double r = ddc::get<R>(coord_rp);
         if (fabs(r) > 1e-15) {
-            Matrix_2x2 Jacobian_matrix;
-            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rp);
-
-            mapping.jacobian_matrix(coord_rp, Jacobian_matrix);
-
-            check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
+            check_inverse_tensor(mapping.jacobian_matrix(coord_rp), inv_jacobian(coord_rp));
         }
     });
 }

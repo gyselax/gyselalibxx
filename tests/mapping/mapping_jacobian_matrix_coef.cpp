@@ -12,128 +12,10 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "inverse_jacobian_matrix.hpp"
+#include "mapping_test_geometry.hpp"
 #include "mapping_testing_tools.hpp"
 #include "mesh_builder.hpp"
 
-
-
-namespace {
-struct X
-{
-};
-struct Y
-{
-};
-struct R
-{
-    static bool constexpr PERIODIC = false;
-};
-
-struct Theta
-{
-    static bool constexpr PERIODIC = true;
-};
-
-using CoordR = Coord<R>;
-using CoordTheta = Coord<Theta>;
-using CoordRTheta = Coord<R, Theta>;
-
-int constexpr BSDegree = 3;
-
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
-{
-};
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
-{
-};
-
-using InterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
-        BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
-
-struct GridR : InterpPointsR::interpolation_discrete_dimension_type
-{
-};
-struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
-{
-};
-
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
-
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
-
-using IdxRangeR = IdxRange<GridR>;
-using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-using IdxR = Idx<GridR>;
-using IdxTheta = Idx<GridTheta>;
-using IdxRTheta = Idx<GridR, GridTheta>;
-
-using IdxStepR = IdxStep<GridR>;
-using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepRTheta = IdxStep<GridR, GridTheta>;
-
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-
-template <class ElementType>
-using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
-
-using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
-
-/**
- * @brief Check if the two matrix given as input are the same.
- *
- * The error tolerance is given at 1e-14.
- *
- * @param[in] matrix
- * 			The matrix defined with the matrix function.
- * @param[in] matrix_coeff
- * 			The matrix defined with the matrix coefficient functions.
- */
-void check_matrix(Matrix_2x2 matrix, Matrix_2x2 matrix_coeff)
-{
-    const double TOL = 1e-13;
-    constexpr std::size_t N = 2;
-
-    for (std::size_t i(0); i < N; ++i) {
-        for (std::size_t j(0); j < N; ++j) {
-            const double id_val = fabs(matrix[i][j] - matrix_coeff[i][j]);
-            EXPECT_NEAR(id_val, 0., TOL);
-        }
-    }
-}
-
-} // namespace
 
 
 /**
@@ -161,30 +43,28 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 Jacobian_matrix_coeff;
+        Tensor Jacobian_matrix = mapping.jacobian_matrix(coords(irp));
 
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-        Jacobian_matrix_coeff[0][0] = mapping.jacobian_11(coords(irp));
-        Jacobian_matrix_coeff[0][1] = mapping.jacobian_12(coords(irp));
-        Jacobian_matrix_coeff[1][0] = mapping.jacobian_21(coords(irp));
-        Jacobian_matrix_coeff[1][1] = mapping.jacobian_22(coords(irp));
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> Jacobian_matrix_coeff;
+        ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff) = mapping.jacobian_11(coords(irp));
+        ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff) = mapping.jacobian_12(coords(irp));
+        ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff) = mapping.jacobian_21(coords(irp));
+        ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff) = mapping.jacobian_22(coords(irp));
 
-        check_matrix(Jacobian_matrix, Jacobian_matrix_coeff);
+        EXPECT_TRUE(Jacobian_matrix == Jacobian_matrix_coeff);
     });
 
     // --- for the inverse Jacobian matrix:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 inv_Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix_coeff;
+        Tensor inv_Jacobian_matrix = mapping.inv_jacobian_matrix(coords(irp));
 
-        mapping.inv_jacobian_matrix(coords(irp), inv_Jacobian_matrix);
-        inv_Jacobian_matrix_coeff[0][0] = mapping.inv_jacobian_11(coords(irp));
-        inv_Jacobian_matrix_coeff[0][1] = mapping.inv_jacobian_12(coords(irp));
-        inv_Jacobian_matrix_coeff[1][0] = mapping.inv_jacobian_21(coords(irp));
-        inv_Jacobian_matrix_coeff[1][1] = mapping.inv_jacobian_22(coords(irp));
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
+        ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_11(coords(irp));
+        ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_12(coords(irp));
+        ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_21(coords(irp));
+        ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_22(coords(irp));
 
-        check_matrix(inv_Jacobian_matrix, inv_Jacobian_matrix_coeff);
+        EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
     });
 }
 
@@ -205,30 +85,29 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 Jacobian_matrix_coeff;
+        Tensor Jacobian_matrix = mapping.jacobian_matrix(coords(irp));
 
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-        Jacobian_matrix_coeff[0][0] = mapping.jacobian_11(coords(irp));
-        Jacobian_matrix_coeff[0][1] = mapping.jacobian_12(coords(irp));
-        Jacobian_matrix_coeff[1][0] = mapping.jacobian_21(coords(irp));
-        Jacobian_matrix_coeff[1][1] = mapping.jacobian_22(coords(irp));
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> Jacobian_matrix_coeff;
+        ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff) = mapping.jacobian_11(coords(irp));
+        ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff) = mapping.jacobian_12(coords(irp));
+        ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff) = mapping.jacobian_21(coords(irp));
+        ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff) = mapping.jacobian_22(coords(irp));
 
-        check_matrix(Jacobian_matrix, Jacobian_matrix_coeff);
+        EXPECT_TRUE(Jacobian_matrix == Jacobian_matrix_coeff);
     });
 
     InverseJacobianMatrix inv_jacobian(mapping);
     // --- for the inverseJacobian matrix:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
-        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irp));
-        Matrix_2x2 inv_Jacobian_matrix_coeff;
+        Tensor inv_Jacobian_matrix = inv_jacobian(coords(irp));
 
-        inv_Jacobian_matrix_coeff[0][0] = inv_jacobian.inv_jacobian_11(coords(irp));
-        inv_Jacobian_matrix_coeff[0][1] = inv_jacobian.inv_jacobian_12(coords(irp));
-        inv_Jacobian_matrix_coeff[1][0] = inv_jacobian.inv_jacobian_21(coords(irp));
-        inv_Jacobian_matrix_coeff[1][1] = inv_jacobian.inv_jacobian_22(coords(irp));
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
+        ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_11(coords(irp));
+        ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_12(coords(irp));
+        ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_21(coords(irp));
+        ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff) = mapping.inv_jacobian_22(coords(irp));
 
-        check_matrix(inv_Jacobian_matrix, inv_Jacobian_matrix_coeff);
+        EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
     });
 }
 
@@ -288,28 +167,31 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
         const double r = ddc::get<R>(coord_rp);
         if (fabs(r) > 1e-15) {
             // --- for the Jacobian matrix:
-            Matrix_2x2 Jacobian_matrix;
-            Matrix_2x2 Jacobian_matrix_coeff;
+            Tensor Jacobian_matrix = mapping.jacobian_matrix(coord_rp);
 
-            mapping.jacobian_matrix(coord_rp, Jacobian_matrix);
-            Jacobian_matrix_coeff[0][0] = mapping.jacobian_11(coord_rp);
-            Jacobian_matrix_coeff[0][1] = mapping.jacobian_12(coord_rp);
-            Jacobian_matrix_coeff[1][0] = mapping.jacobian_21(coord_rp);
-            Jacobian_matrix_coeff[1][1] = mapping.jacobian_22(coord_rp);
+            DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> Jacobian_matrix_coeff;
+            ddcHelper::get<X, R_cov>(Jacobian_matrix_coeff) = mapping.jacobian_11(coord_rp);
+            ddcHelper::get<X, Theta_cov>(Jacobian_matrix_coeff) = mapping.jacobian_12(coord_rp);
+            ddcHelper::get<Y, R_cov>(Jacobian_matrix_coeff) = mapping.jacobian_21(coord_rp);
+            ddcHelper::get<Y, Theta_cov>(Jacobian_matrix_coeff) = mapping.jacobian_22(coord_rp);
 
-            check_matrix(Jacobian_matrix, Jacobian_matrix_coeff);
+            EXPECT_TRUE(Jacobian_matrix == Jacobian_matrix_coeff);
 
 
             // --- for the inverse Jacobian matrix:
-            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rp);
-            Matrix_2x2 inv_Jacobian_matrix_coeff;
+            Tensor inv_Jacobian_matrix = inv_jacobian(coord_rp);
 
-            inv_Jacobian_matrix_coeff[0][0] = inv_jacobian.inv_jacobian_11(coord_rp);
-            inv_Jacobian_matrix_coeff[0][1] = inv_jacobian.inv_jacobian_12(coord_rp);
-            inv_Jacobian_matrix_coeff[1][0] = inv_jacobian.inv_jacobian_21(coord_rp);
-            inv_Jacobian_matrix_coeff[1][1] = inv_jacobian.inv_jacobian_22(coord_rp);
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
+            ddcHelper::get<R, X>(inv_Jacobian_matrix_coeff)
+                    = inv_jacobian.inv_jacobian_11(coord_rp);
+            ddcHelper::get<R, Y>(inv_Jacobian_matrix_coeff)
+                    = inv_jacobian.inv_jacobian_12(coord_rp);
+            ddcHelper::get<Theta, X>(inv_Jacobian_matrix_coeff)
+                    = inv_jacobian.inv_jacobian_21(coord_rp);
+            ddcHelper::get<Theta, Y>(inv_Jacobian_matrix_coeff)
+                    = inv_jacobian.inv_jacobian_22(coord_rp);
 
-            check_matrix(inv_Jacobian_matrix, inv_Jacobian_matrix_coeff);
+            EXPECT_TRUE(inv_Jacobian_matrix == inv_Jacobian_matrix_coeff);
         }
     });
 }
