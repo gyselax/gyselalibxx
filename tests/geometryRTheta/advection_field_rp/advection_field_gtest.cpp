@@ -187,7 +187,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rp_alloc(grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rp_alloc(grid);
-    CoordXY advection_field_xy_center;
+    CoordXY advection_field_xy_centre;
 
     host_t<DFieldMemRTheta> electrostatic_potential_alloc(grid);
 
@@ -202,7 +202,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
 
-    // Initialize functions ******************************************
+    // Initialise functions ******************************************
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
         CoordXY const coord_xy(to_physical_mapping(coord_rp));
@@ -221,7 +221,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     advection_field_computer(
             electrostatic_potential,
             advection_field_rp,
-            advection_field_xy_center);
+            advection_field_xy_centre);
     advection_field_computer(electrostatic_potential, advection_field_xy);
 
 
@@ -272,8 +272,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {
         // computation made in BslAdvectionRTheta operator:
-        ddcHelper::get<X>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_center);
-        ddcHelper::get<Y>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_center);
+        ddcHelper::get<X>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_centre);
+        ddcHelper::get<Y>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_centre);
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
@@ -298,7 +298,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
-        advection_operator(allfdistribu_rp, advection_field_rp, advection_field_xy_center, dt);
+        advection_operator(allfdistribu_rp, advection_field_rp, advection_field_xy_centre, dt);
         advection_operator(allfdistribu_xy, advection_field_xy, dt);
 
         // Check the advected functions ---

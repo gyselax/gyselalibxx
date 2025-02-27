@@ -83,7 +83,7 @@ void Matrix_Corner_Block::set_element(int const i, int const j, double const a_i
     }
 }
 
-void Matrix_Corner_Block::calculate_delta_to_factorize()
+void Matrix_Corner_Block::calculate_delta_to_factorise()
 {
     for (int i = 0; i < k; ++i) {
         for (int j = 0; j < k; ++j) {
@@ -96,19 +96,19 @@ void Matrix_Corner_Block::calculate_delta_to_factorize()
     }
 }
 
-void Matrix_Corner_Block::factorize()
+void Matrix_Corner_Block::factorise()
 {
     /// Factorise Q
-    q_block->factorize();
+    q_block->factorise();
 
     /// Solve Q \beta = \gamma for \beta
     q_block->solve_multiple_inplace(Abm_1_gamma);
 
     /// Calculate \delta' = \delta - \lambda \beta
-    calculate_delta_to_factorize();
+    calculate_delta_to_factorise();
 
     /// Factorise \delta'
-    delta.factorize();
+    delta.factorise();
 }
 
 DSpan1D Matrix_Corner_Block::solve_lambda_section(DSpan1D const v, DView1D const u) const

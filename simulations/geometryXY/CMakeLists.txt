@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
 
 
-add_subdirectory(guiding_center)
+add_subdirectory(guiding_centre)
 

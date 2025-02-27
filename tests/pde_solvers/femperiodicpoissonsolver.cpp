@@ -118,7 +118,7 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     host_t<DFieldMemX> electric_field_host(gridx);
     host_t<DFieldMemX> rhs_host(gridx);
 
-    // Initialization of the distribution function --> fill values
+    // Initialisation of the distribution function --> fill values
     for (IdxX const ix : gridx) {
         rhs_host(ix) = cos(ddc::coordinate(ix));
     }
@@ -178,7 +178,7 @@ TEST(FemPeriodicPoissonSolver, BatchedCosineSource)
     host_t<DFieldMemBatchX> electric_field_host(gridbx);
     host_t<DFieldMemBatchX> rhs_host(gridbx);
 
-    // Initialization of the distribution function --> fill values
+    // Initialisation of the distribution function --> fill values
     for (IdxBatch const ib : gridb) {
         for (IdxX const ix : gridx) {
             rhs_host(ib, ix) = cos(ddc::coordinate(ib) * ddc::coordinate(ix));

@@ -2,14 +2,14 @@
 
 This directory defines structures and methods to describe patches and how they are connected to one another.
 
-The following sections decribe the structures and methods implemented: 
+The following sections describe the structures and methods implemented: 
 
 -  [Patch](#src_multipatch_connectivity__Patch) - Definition of Patch tag.
 -  [Interfaces](#src_multipatch_connectivity__Interfaces)
     - [Sticking of Two Edges](#src_multipatch_connectivity__Interfaces__Sticking_of_Two_Edges)
         - [Multi-patch domain](#src_multipatch_connectivity__Interfaces__Multi-patch_domain) - Mathematical definition of multi-patch domain.
-        - [Edges](#src_multipatch_connectivity__Interfaces__Edges) - Mathematical defintion of edges. 
-        - [Sticking and Coordinate Transformation](#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation) - Mathematical defintion of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation). 
+        - [Edges](#src_multipatch_connectivity__Interfaces__Edges) - Mathematical definition of edges. 
+        - [Sticking and Coordinate Transformation](#src_multipatch_connectivity__Interfaces__Sticking_and_Coordinate_Transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation). 
         - [Index transformation](#src_multipatch_connectivity__Interfaces__Index_transformation) - Algorithm of the index transformation in EdgeTransformation. 
         - [Conformity of the meshes](#src_multipatch_connectivity__Interfaces__Conformity_of_the_meshes) - Definition of `UniformGridIdxMatching`.
 - [Patch locator](#src_multipatch_connectivity__Patch_locator) - Definition of patch locator operators to identify the patch where a given physical coordinate is.
@@ -51,7 +51,7 @@ isometries used in the paper and vice versa. This is easy to show.
 
 #### Multi-patch domain
 For simplicity, we will constrain ourselves to the 2D case, but this approach
-could be generalized to arbitrary dimensions.
+could be generalised to arbitrary dimensions.
 
 Let $\Omega$ be the domain of interest and assume that we have patches $\Omega^{(i)}$, $i=1,...,K$, which are disjoint, s.t.
 ```math
@@ -94,18 +94,18 @@ The way that they are identified is mathematically determined via the coordinate
 to the other. 
 Since the transformations are supposed to be affine and bijective, there are only two options: 
 the transformation can be order preserving or 
-order reversing (this corresponds to the orientation of the phyiscal edge where two parametrizations 
+order reversing (this corresponds to the orientation of the physical edge where two parametrisations 
 coming from the two patches can have either the same or the opposite orientation respectively).
 
 So for example, we want to stick the edge $`\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$
 on patch $i$ to the edge $`[a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}`$ on patch $j$. 
-If the transformation is order-preserving (i.e. the orientations of the parametrizations 
+If the transformation is order-preserving (i.e. the orientations of the parametrisations 
 of the physical edge agree), then the transformation from the first edge to the second is 
 ```math
 t \mapsto a_x^{(j)} + \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 ```
 
-If the transformation is order-reversing (i.e. the orientations of the parametrizations 
+If the transformation is order-reversing (i.e. the orientations of the parametrisations 
 of the physical edge are opposite), then it is
 ```math
 t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).

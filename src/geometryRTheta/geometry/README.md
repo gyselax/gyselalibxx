@@ -9,7 +9,7 @@ The polar coordinates represent a **logical domain**, and the Cartesian coordina
 
 The splines applied are cubic and only defined on the logical domain. 
 
-The polar geometry can have a degenerated point. We call *O-point* or *center point*, the points $`(r=0, \theta) \ \forall \theta`$. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code *polar spline* (see PolarSpline). Both basis are used in the code. 
+The polar geometry can have a degenerated point. We call *O-point* or *centre point*, the points $`(r=0, \theta) \ \forall \theta`$. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code *polar spline* (see PolarSpline). Both basis are used in the code. 
 
 ## Shortcuts
 The shortcuts defined in the geometry file represent:

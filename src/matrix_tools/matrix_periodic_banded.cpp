@@ -73,7 +73,7 @@ void Matrix_Periodic_Banded::set_element(int const i, int j, double const a_ij)
     }
 }
 
-void Matrix_Periodic_Banded::calculate_delta_to_factorize()
+void Matrix_Periodic_Banded::calculate_delta_to_factorise()
 {
     for (int i = 0; i < k; ++i) {
         for (int j = 0; j < k; ++j) {

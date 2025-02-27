@@ -21,7 +21,7 @@ public:
      * @param[in] dt
      *      The time step.
      * @param[in] steps
-     *      The number @f$ N@f$ of time interations.
+     *      The number @f$ N@f$ of time interactions.
      *
      * @return A Field toward allfdistribu.
      */

@@ -111,7 +111,7 @@ using IDimInterest = IDimX;
 
 ### Parameters
 The operator takes as templated parameters:
-* IDimInterest: a dimension of interest (or advection dimension) wich refers to the dimension along wich we advect the function;
+* IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;
 * AdvectionDomain: an advection domain, which refers to the domain where the advection field is defined. It has to contain the dimension of interest for the interpolation of the advection field in the time integration method;
 * FunctionDomain: the full domain where the function we want to advect is defined;
 * AdvectionFieldBuilder: a spline builder type for the advection field.

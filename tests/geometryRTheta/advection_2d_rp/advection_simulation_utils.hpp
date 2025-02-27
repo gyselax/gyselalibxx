@@ -182,13 +182,13 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
                   DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound_host>>);
 
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp(idx_range_rp);
-    CoordXY const coord_xy_center = CoordXY(logical_to_physical_mapping(CoordRTheta(0, 0)));
+    CoordXY const coord_xy_centre = CoordXY(logical_to_physical_mapping(CoordRTheta(0, 0)));
     ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp = ddc::coordinate(irp);
         CoordXY const coord_xy
                 = advection_field.exact_feet(logical_to_physical_mapping(coord_rp), time);
 
-        CoordXY const coord_diff = coord_xy - coord_xy_center;
+        CoordXY const coord_diff = coord_xy - coord_xy_centre;
         if (norm_inf(coord_diff) < 1e-15) {
             feet_coords_rp(irp) = CoordRTheta(0, 0);
         } else {
@@ -369,7 +369,7 @@ void simulate(
     // START TEST -------------------------------------------------------------------------------
     start_simulation = std::chrono::system_clock::now();
 
-    // Initialization of the advected function:
+    // Initialisation of the advected function:
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta coord = coordinate(irp);
         if (ddc::get<R>(coord) <= 1e-15) {

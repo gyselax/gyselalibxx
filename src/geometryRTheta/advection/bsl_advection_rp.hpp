@@ -148,7 +148,7 @@ public:
      * @param [in] advection_field_rp
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the logical index range axis.
-     * @param [in] advection_field_xy_center
+     * @param [in] advection_field_xy_centre
      *      A CoordXY containing the value of the advection field on the 
      *      physical index range axis at the O-point. 
      * @param [in] dt
@@ -159,7 +159,7 @@ public:
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu_host,
             host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rp,
-            CoordXY const& advection_field_xy_center,
+            CoordXY const& advection_field_xy_centre,
             double dt) const override
     {
         Kokkos::Profiling::pushRegion("PolarAdvection");
@@ -195,8 +195,8 @@ public:
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {
-            ddcHelper::get<X>(advection_field_xy_host)(irp) = CoordX(advection_field_xy_center);
-            ddcHelper::get<Y>(advection_field_xy_host)(irp) = CoordY(advection_field_xy_center);
+            ddcHelper::get<X>(advection_field_xy_host)(irp) = CoordX(advection_field_xy_centre);
+            ddcHelper::get<Y>(advection_field_xy_host)(irp) = CoordY(advection_field_xy_centre);
         });
 
         // Pre-allocate some memory to prevent allocation later in loop

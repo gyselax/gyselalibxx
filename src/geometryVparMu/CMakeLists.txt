@@ -2,4 +2,4 @@
 
 add_subdirectory(collisions)
 add_subdirectory(geometry)
-add_subdirectory(initialization)
+add_subdirectory(initialisation)

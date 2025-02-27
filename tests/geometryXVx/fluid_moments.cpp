@@ -14,7 +14,7 @@
 #include "trapezoid_quadrature.hpp"
 
 /**
-     * Initializes the distribution function as a Maxwellian with fluid moments depending on space.
+     * Initialises the distribution function as a Maxwellian with fluid moments depending on space.
      * Uses the FluidMoments methods to recompute these moments.
      */
 TEST(Physics, FluidMoments)
@@ -53,13 +53,13 @@ TEST(Physics, FluidMoments)
     host_t<DFieldMemSp> masses(idx_range_sp);
     ddc::parallel_fill(masses, 1);
 
-    // Initialization of the distribution function as a maxwellian
+    // Initialisation of the distribution function as a maxwellian
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     host_t<DFieldMemSpXVx> allfdistribu_host(mesh);
     DFieldMemSpXVx allfdistribu(mesh);
 
 
-    // Initialization of the distribution function as a maxwellian with
+    // Initialisation of the distribution function as a maxwellian with
     // moments depending on space
     host_t<DFieldMemSpX> density_init(get_idx_range<Species, GridX>(allfdistribu_host));
     host_t<DFieldMemSpX> mean_velocity_init(get_idx_range<Species, GridX>(allfdistribu_host));

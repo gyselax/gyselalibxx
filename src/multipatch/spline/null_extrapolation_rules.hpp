@@ -10,7 +10,7 @@
 #include "multipatch_type.hpp"
 
 /**
- * @brief Define null extrapolation rule commun to all geometries. 
+ * @brief Define null extrapolation rule common to all geometries. 
  * @see MultipatchSplineEvaluator2D.
  */
 struct NullExtrapolationRule

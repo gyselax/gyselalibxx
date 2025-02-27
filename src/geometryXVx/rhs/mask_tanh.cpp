@@ -13,7 +13,7 @@ host_t<DFieldMemX> mask_tanh(
         double const extent,
         double const stiffness,
         MaskType const type,
-        bool const normalized)
+        bool const normalised)
 {
     if (stiffness <= 0) {
         throw std::runtime_error("Invalid stiffness, cannot be negative");
@@ -51,7 +51,7 @@ host_t<DFieldMemX> mask_tanh(
             break;
         }
 
-        if (normalized) {
+        if (normalised) {
             host_t<DFieldMemX> const quadrature_coeffs
                     = trapezoid_quadrature_coefficients<Kokkos::DefaultHostExecutionSpace>(gridx);
             host_t<Quadrature<IdxRangeX>> const integrate_x(get_const_field(quadrature_coeffs));

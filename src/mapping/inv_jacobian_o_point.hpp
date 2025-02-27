@@ -30,11 +30,12 @@ template <class Mapping1, class Mapping2>
 class CombinedMapping;
 
 /**
- * A specialisation of InvJacobianOPoint for a combined mapping FoG where F is a
- * circular mapping from logical to physical, and G is an inverse circular mapping from
- * physical to logical. The combined mapping FoG therefore maps from a physical
- * domain (Xpc, Ypc) to a physical domain (X,Y) (this mapping is equivalent to
- * the identity).
+ * A specialisation of InvJacobianOPoint for a combined mapping 
+ * @f$ \mathcal{F} \circ \mathcal{G} @f$  where @f$ \mathcal{F} @f$ is a circular
+ * mapping from logical to physical, and @f$ \mathcal{G} @f$ is an inverse circular
+ * mapping from physical to logical. The combined mapping @f$ \mathcal{F} \circ \mathcal{G} @f$ 
+ * therefore maps from a physical domain @f$ (X_{pc}, Y_{pc}) @f$ to a physical domain 
+ * @f$ (X, Y) @f$ (this mapping is equivalent to the identity).
  */
 template <class X, class Y, class R, class Theta, class Xpc, class Ypc>
 class InvJacobianOPoint<
@@ -87,10 +88,12 @@ public:
 };
 
 /**
- * A specialisation of InvJacobianOPoint for a combined mapping FoG where F is a
- * Czarny mapping from logical to physical, and G is an inverse circular mapping from
- * physical to logical. The combined mapping FoG therefore maps from a physical
- * domain (Xpc, Ypc) to a physical domain (X,Y).
+ * A specialisation of InvJacobianOPoint for a combined mapping
+ * @f$ \mathcal{F} \circ \mathcal{G} @f$ where @f$ \mathcal{F} @f$ is a Czarny mapping 
+ * from logical to physical, and @f$ \mathcal{G} @f$ is an inverse circular mapping 
+ * from physical to logical. The combined mapping @f$ \mathcal{F} \circ \mathcal{G} @f$ 
+ * therefore maps from a physical domain @f$ (X_{pc}, Y_{pc}) @f$ to a physical domain
+ * @f$ (X, Y) @f$.
  */
 template <class X, class Y, class R, class Theta, class Xpc, class Ypc>
 class InvJacobianOPoint<
@@ -144,10 +147,11 @@ public:
 };
 
 /**
- * A specialisation of InvJacobianOPoint for a combined mapping FoG where F is a
- * discrete mapping from logical to physical, and G is an inverse circular mapping from
- * physical to logical. The combined mapping FoG therefore maps from a physical
- * domain (Xpc, Ypc) to a physical domain (X,Y).
+ * A specialisation of InvJacobianOPoint for a combined mapping @f$ \mathcal{F} \circ \mathcal{G} @f$ 
+ * where @f$ \mathcal{F} @f$ is a discrete mapping from logical to physical, and 
+ * @f$ \mathcal{G} @f$ is an inverse circular mapping from physical to logical. 
+ * The combined mapping @f$ \mathcal{F} \circ \mathcal{G} @f$ therefore maps from a 
+ * physical domain @f$ (X_{pc}, Y_{pc}) @f$ to a physical domain @f$ (X, Y) @f$.
  */
 template <
         class X,

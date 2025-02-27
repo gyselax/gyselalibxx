@@ -14,7 +14,7 @@
 /**
  * @brief A class to call all the builders of all the patches once.
  *
- * We need to instantiate all the builders for all the pacthes in the main code.
+ * We need to instantiate all the builders for all the patches in the main code.
  * We process the same way for the Field containing the spline coefficients and the
  * values of the function on each patch. The Fields are stored in MultipatchField
  * objects. The builders are stored in this class.

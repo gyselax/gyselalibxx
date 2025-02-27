@@ -92,7 +92,7 @@ public:
     static constexpr int outside_rmax_domain = -1;
 
     /// @brief Default value to define outside domain (not a patch)
-    /// for radius smaller than the minimun radius.
+    /// for radius smaller than the minimum radius.
     static constexpr int outside_rmin_domain = -2;
 
 private:

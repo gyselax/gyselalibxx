@@ -10,7 +10,7 @@ import subprocess
 def take_errors_from_out(var_out, degree):
     """
     Take from the output the maximum absolute error 
-    for each fonction.    
+    for each function.    
     
     Parameters
     ----------
@@ -33,7 +33,7 @@ def take_errors_from_out(var_out, degree):
 
 def take_names_from_out(var_out):
     """
-    Take from the output the name of each fonction
+    Take from the output the name of each function
     and the degree of splines tested.    
     
     Parameters
@@ -58,7 +58,7 @@ def take_names_from_out(var_out):
 
 def launch_executable(executable, NN):
     """
-    Launch executale for grid size of NxN for each N in NN.    
+    Launch executable for grid size of NxN for each N in NN.    
     
     Parameters
     ----------

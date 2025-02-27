@@ -18,7 +18,7 @@
 #include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "diocotron_initialization_equilibrium.hpp"
+#include "diocotron_initialisation_equilibrium.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
@@ -300,7 +300,7 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> rho(mesh_rp);
     host_t<DFieldMemRTheta> rho_eq(mesh_rp);
 
-    // Initialize rho and rho equilibrium ****************************
+    // Initialise rho and rho equilibrium ****************************
     ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
         rho(irp) = exact_rho.initialisation(coords(irp));
         rho_eq(irp) = exact_rho.equilibrium(coords(irp));
@@ -316,7 +316,7 @@ int main(int argc, char** argv)
     ddc::parallel_deepcopy(phi_eq, phi_eq_host);
 
     // --- Save initial data --------------------------------------------------------------------------
-    ddc::PdiEvent("initialization")
+    ddc::PdiEvent("initialisation")
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)

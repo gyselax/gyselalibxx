@@ -11,7 +11,7 @@
 
 
 namespace ddcHelper {
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * Calculate the total length of a non-periodic domain.
@@ -27,7 +27,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
     return std::fabs(ddc::rlength(idx_range));
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * Calculate the total length of a uniform periodic domain.
@@ -45,7 +45,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
     return std::fabs(ddc::rlength(idx_range) + ddc::step<IDim>());
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * Calculate the total length of a non-uniform periodic domain.
@@ -64,7 +64,7 @@ total_interval_length(IdxRange<IDim> const& idx_range)
     return std::fabs(ddc::rlength(dom_periodic));
 }
 
-//TODO: this should be directly handled by ddc::Discretization really,
+//TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 /**
  * @brief Calculate the Coordinate inside the domain.
@@ -189,7 +189,7 @@ struct OnMemorySpace
 /**
  * @brief Set a `ddc::Chunk` on a given NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk.
+ * @tparam ElementType Type of the elements in the ddc::Chunk.
  * @tparam SupportType Type of the domain of the ddc::Chunk.
  * @tparam Allocator Allocator type (see ddc::KokkosAllocator).
  * @see ddc::Chunk
@@ -205,7 +205,7 @@ struct OnMemorySpace<NewMemorySpace, ddc::Chunk<ElementType, SupportType, Alloca
  * @brief Get a new `ddc::ChunkSpan` type with the same parametrisation
  * except in the memory space which is set to NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk.
+ * @tparam ElementType Type of the elements in the ddc::Chunk.
  * @tparam SupportType Type of the domain of the ddc::Chunk.
  * @tparam Layout Layout tag (see Kokkos).
  * @tparam MemorySpace The original memory space of the chunk.
