@@ -361,7 +361,6 @@ void simulate(
 
 
     host_t<DFieldMemRTheta> allfdistribu_test(grid);
-    host_t<DFieldRTheta> allfdistribu_advected_test;
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_test_vec_host(grid);
 
@@ -391,21 +390,29 @@ void simulate(
         ddcHelper::get<Y>(advection_field_test_vec_host)(irp) = ddc::get<Y>(advection_field);
     });
 
+    auto allfdistribu = ddc::
+                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(allfdistribu_test));
+
+    auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
+                Kokkos::DefaultExecutionSpace(),
+                get_field(advection_field_test_vec_host));
 
     // SIMULATION -------------------------------------------------------------------------------
     // Advect "iteration_number" times:
     for (int i(0); i < iteration_number; ++i) {
-        allfdistribu_advected_test = advection_operator(
-                get_field(allfdistribu_test),
-                get_const_field(advection_field_test_vec_host),
+        advection_operator(
+                get_field(allfdistribu),
+                get_const_field(advection_field_xy),
                 dt);
 
         // Save the advected function for each iteration:
         if (save_curves) {
+            ddc::parallel_deepcopy(allfdistribu_test, allfdistribu);
             std::string const name = output_folder + "/after_" + std::to_string(i + 1) + ".txt";
-            saving_computed(to_physical_mapping_host, get_field(allfdistribu_advected_test), name);
+            saving_computed(to_physical_mapping_host, get_field(allfdistribu_test), name);
         }
     }
+    ddc::parallel_deepcopy(allfdistribu_test, allfdistribu);
 
 
 
@@ -431,7 +438,7 @@ void simulate(
     double max_err = 0.;
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         double const err
-                = fabs(allfdistribu_advected_test(irp)
+                = fabs(allfdistribu_test(irp)
                        - simulation.advected_function(feet_coords_rp_end_time(irp)));
         max_err = max_err > err ? max_err : err;
     });
@@ -447,7 +454,7 @@ void simulate(
               << compute_difference_L2_norm(
                          to_physical_mapping_host,
                          grid,
-                         allfdistribu_advected_test,
+                         get_field(allfdistribu_test),
                          simulation.advected_function,
                          get_field(feet_coords_rp_end_time))
               << std::endl;
