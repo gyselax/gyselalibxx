@@ -196,7 +196,7 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_xy_host));
 
-        (*this)(allfdistribu, get_const_field(advection_field_xy), dt);
+        (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
 
         ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));
 

@@ -290,13 +290,22 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         EXPECT_LE(abs(ddcHelper::get<Y>(difference_between_fields_xy_and_rp)(irp)), 1e-13);
     });
 
+    auto allfdistribu_xy_device
+            = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_xy);
+    auto advection_field_xy_device = ddcHelper::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_xy);
 
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
         advection_operator(allfdistribu_rp, advection_field_rp, advection_field_xy_center, dt);
-        advection_operator(allfdistribu_xy, advection_field_xy, dt);
+        advection_operator(
+                get_field(allfdistribu_xy_device),
+                get_const_field(advection_field_xy_device),
+                dt);
+
+        ddc::parallel_deepcopy(allfdistribu_xy, get_const_field(allfdistribu_xy_device));
 
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irp) {
