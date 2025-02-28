@@ -1,0 +1,19 @@
+[default]
+locale = 'en-gb'
+extend-ignore-re = ["capitalize()",
+                    "MPI_\\S*",
+                    "PDI_\\S*",
+                    "ddc::\\S*",
+                    "gko_exec->\\S*",
+                    "on_finalize:",
+                    ]
+
+[default.extend-words]
+# Don't correct these word (parts)
+iy = "iy"
+ND = "ND"
+Strang = "Strang"
+Ax = "Ax"
+ax = "ax"
+color = "color"
+colors = "colors"

@@ -4,4 +4,4 @@ The initialisation folder contains any methods that define the value of the dist
 
 The implemented initialisation methods are: 
 - MaxwellianEquilibrium
-- SingleModePerturbInitialization
+- SingleModePerturbInitialisation
