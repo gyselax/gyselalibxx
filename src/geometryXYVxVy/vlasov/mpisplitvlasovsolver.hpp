@@ -68,4 +68,3 @@ public:
             DConstFieldXY electric_field_y,
             double dt) const override;
 };
-
