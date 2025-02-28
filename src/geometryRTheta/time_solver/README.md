@@ -33,7 +33,7 @@ Advect on a half time step:
 
  2. From $\phi^n$, we compute $E^n$ by deriving (IQNSolver);
 
- 3. From $\rho^n \text{ and } A^n$, we compute $\rho^{n+1/2}$ by advecting (IAdvectionRP) on $\frac{dt}{2}$ with one of the selected time integration methods (ITimeStepper);
+ 3. From $\rho^n \text{ and } A^n$, we compute $\rho^{n+1/2}$ by advecting (IAdvectionRTheta) on $\frac{dt}{2}$ with one of the selected time integration methods (ITimeStepper);
 
 Advect on a full time step:
 
@@ -41,7 +41,7 @@ Advect on a full time step:
 
  5. From $\phi^{n+1/2}$, we compute $E^{n+1/2}$ by deriving (IQNSolver);
 
- 6. From $\rho^n \text{ and } A^{n+1/2}$, we compute $\rho^{n+1}$ by advecting (IAdvectionRP) on $dt$ with one of the selected time integration methods (ITimeStepper).
+ 6. From $\rho^n \text{ and } A^{n+1/2}$, we compute $\rho^{n+1}$ by advecting (IAdvectionRTheta) on $dt$ with one of the selected time integration methods (ITimeStepper).
 
 
 ## Explicit predictor-corrector
@@ -54,7 +54,7 @@ Prediction:
 
  2. From $\phi^n$, we compute $E^n$ by deriving (IQNSolver);
 
- 3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRP) on $dt$;
+ 3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRTheta) on $dt$;
  	- We write $X^P$ the characteristic feet such that $`\partial_t X^P = A^n(X^n)`$.
 
 Correction:
@@ -63,7 +63,7 @@ Correction:
 
  5. From $\phi^{P}$, we compute $E^{P}$ by deriving (IQNSolver);
 
- 6. From $\rho^n \text{ and } \frac{A^{P}(X^n) + A^n(X^P)}{2}$, we compute $\rho^{C} = \rho^{n+1}$ by advecting (IAdvectionRP) on $dt$.
+ 6. From $\rho^n \text{ and } \frac{A^{P}(X^n) + A^n(X^P)}{2}$, we compute $\rho^{C} = \rho^{n+1}$ by advecting (IAdvectionRTheta) on $dt$.
 
 
 
@@ -78,7 +78,7 @@ Prediction:
 
  2. From $\phi^n$, we compute $E^n$ by deriving (IQNSolver);
 
- 3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRP) on $\frac{dt}{2}$;
+ 3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRTheta) on $\frac{dt}{2}$;
  	- We write $X^P$ the characteristic feet such that it is the result of the implicit method:
 ```math
 \partial_t X^k = \frac{A^n(X^n) + A^n(X^{k-1})}{2},  \qquad  X^k = X^n - \frac{dt}{2} \partial_t X^k.
@@ -91,7 +91,7 @@ Correction:
 
  5. From $\phi^{P}$, we compute $E^{P}$ by deriving (IQNSolver);
 
- 6. From $\rho^n \text{ and } A^{P}$, we compute $\rho^{C} = \rho^{n+1}$ by advecting (IAdvectionRP) on $dt$.
+ 6. From $\rho^n \text{ and } A^{P}$, we compute $\rho^{C} = \rho^{n+1}$ by advecting (IAdvectionRTheta) on $dt$.
   	- We write $X^C$ the characteristic feet such that it is the result of the implicit method:
 ```math
 \partial_t X^k = \frac{A^P(X^n) + A^P(X^{k-1})}{2},  \qquad  X^k = X^n - dt \partial_t X^k.

@@ -1,6 +1,6 @@
 """
 Plot the curve of the density and the electrostatic potential of
-the guiding center XY simulation at a given time step.
+the guiding centre XY simulation at a given time step.
 """
 
 import argparse

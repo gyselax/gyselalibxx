@@ -245,21 +245,17 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-        std::array<std::array<double, 2>, 2> J; // Jacobian matrix
-        to_physical_mapping.jacobian_matrix(coord_rp, J);
-        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> G = metric_tensor(coord_rp);
+        std::array<std::array<double, 2>, 2> inv_J; // inverse Jacobian matrix
+        to_physical_mapping.inv_jacobian_matrix(coord_rp, inv_J);
+        double const jacobian = to_physical_mapping.jacobian(coord_rp);
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1]
-                          / std::sqrt(ddcHelper::get<Theta, Theta>(G))
-                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0]
-                            / std::sqrt(ddcHelper::get<R, R>(G));
+                = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][0] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][0] * jacobian;
         ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1]
-                          / std::sqrt(ddcHelper::get<Theta, Theta>(G))
-                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0]
-                            / std::sqrt(ddcHelper::get<R, R>(G));
+                = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][1] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][1] * jacobian;
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)

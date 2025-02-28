@@ -9,7 +9,7 @@ from matplotlib.animation import FuncAnimation
 
 from gysdata import DiskStore
 
-# FONCTIONS USED IN THIS FILE ####################################################################
+# FUNCTIONS USED IN THIS FILE ####################################################################
 def get_data(folder):
     """
     Get data from the output folder.
@@ -22,7 +22,7 @@ def get_data(folder):
 
     Returns
     -------
-        A dictionnary containing
+        A dictionary containing
             Nx: Number of cells in x.
             Ny: Number of cells in y.
             x_grid: Grid in x.
@@ -51,7 +51,7 @@ def get_periodic_grid(grid):
     To use the trapezoid method, we need to duplicate
     points to make the grids periodic for the
     np.trapz() operator.
-    We supose the grid uniform.
+    We suppose the grid uniform.
 
     Parameters
     ----------
@@ -102,7 +102,7 @@ def get_periodic_function(data):
 
 
 
-# FONCTIONS FOR OTHER FILES ######################################################################
+# FUNCTIONS FOR OTHER FILES ######################################################################
 def animate(folder, name_animation):
     """
     Save and plot the animation of the density and the electrical potential of the simulation.
