@@ -47,7 +47,7 @@ public:
      * @brief A constructor of an indexed tensor.
      * @param tensor The tensor to be indexed.
      */
-    explicit IndexedTensor(TensorType& tensor) : m_tensor(tensor) {}
+    explicit KOKKOS_FUNCTION IndexedTensor(TensorType& tensor) : m_tensor(tensor) {}
 
     IndexedTensor(IndexedTensor const&) = delete;
 
@@ -55,7 +55,7 @@ public:
      * @brief An operator to access the underlying tensor.
      * @return The underlying tensor.
      */
-    TensorType& operator()()
+    KOKKOS_FUNCTION TensorType& operator()()
     {
         return m_tensor;
     }
@@ -64,7 +64,7 @@ public:
      * @brief An operator to access the underlying tensor.
      * @return The underlying tensor.
      */
-    TensorType const& operator()() const
+    KOKKOS_FUNCTION TensorType const& operator()() const
     {
         return m_tensor;
     }
@@ -90,7 +90,7 @@ namespace details {
  * @return An IndexedTensor object.
  */
 template <class TypeSeqCharIds, class TensorType, std::size_t... I>
-auto internal_index(TensorType& tensor, std::index_sequence<I...>)
+KOKKOS_FUNCTION auto internal_index(TensorType& tensor, std::index_sequence<I...>)
 {
     return IndexedTensor<
             TensorType,
@@ -104,7 +104,7 @@ template <
         std::size_t Is,
         class ResultIndexedTensorType,
         class... IndexedTensorType>
-void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType const&... t)
+KOKKOS_FUNCTION void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType const&... t)
 {
     using TensorTuple = std::tuple<typename IndexedTensorType::tensor_type...>;
     using ElementType = typename std::tuple_element_t<0, TensorTuple>::element_type;
@@ -134,7 +134,7 @@ template <
         class ResultIndexedTensorType,
         class... IndexedTensorType,
         std::size_t... Is>
-void internal_tensor_mul(
+KOKKOS_FUNCTION void internal_tensor_mul(
         ResultIndexedTensorType& result,
         std::index_sequence<Is...>,
         IndexedTensorType const&... t)
@@ -158,7 +158,7 @@ void internal_tensor_mul(
  * @return An IndexedTensor object.
  */
 template <char... ids, class TensorType>
-auto index(TensorType& tensor)
+KOKKOS_FUNCTION auto index(TensorType& tensor)
 {
     static_assert(
             sizeof...(ids) == TensorType::rank(),
@@ -181,7 +181,7 @@ auto index(TensorType& tensor)
  * @return A tensor that is the result of multiplying the objects according to the index pattern
  */
 template <class... IndexedTensorType>
-auto tensor_mul(IndexedTensorType... tensor_to_mul)
+KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
 {
     using namespace tensor_tools;
     static_assert(
