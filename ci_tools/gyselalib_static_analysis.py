@@ -202,14 +202,14 @@ def get_relevant_files():
 
     files = set((HOME_DIR / 'src').glob('**/*.hpp')).union((HOME_DIR / 'src').glob('**/*.cpp'))
 
-    if DEFAULT_GEOMETRY:
-        files = files.union((GYSELALIBXX_HOME_DIR / 'src' / DEFAULT_GEOMETRY).glob('**/*.hpp')) \
-                     .union((GYSELALIBXX_HOME_DIR / 'src' / DEFAULT_GEOMETRY).glob('**/*.cpp'))
+    if HOME_DIR != GYSELALIBXX_HOME_DIR:
+        files = files.union((GYSELALIBXX_HOME_DIR / 'src').glob('**/*.hpp')).union((GYSELALIBXX_HOME_DIR / 'src').glob('**/*.cpp'))
 
     # Collect all files in src/ and group them by geometry
     for g, folder in possible_geometries['src'].items():
         relevant_files_in_folder = set(f for f in files if folder in f.parents)
-        files = files - relevant_files_in_folder
+        if g != DEFAULT_GEOMETRY:
+            files = files - relevant_files_in_folder
         relevant_files.setdefault(g, set()).update(relevant_files_in_folder)
 
     # Any remaining files from src not associated with a particular geometry are relevant to all configurations
@@ -670,7 +670,7 @@ def check_exec_space_usage(file):
                 type_descr = ' '.join(type_elements)
 
             # If the type is a Field or a FieldMem then identify the space where the memory is located
-            if (type_elements[0] in field_types) or (type_elements[0] == 'host_t' and type_elements[2] in field_types):
+            if (type_elements[0] in field_types) or (type_elements[0] == 'host_t' and any(type_elements[2].startswith(t) for t in field_types)):
                 attribs = v.attrib
                 attribs['type'] = type_descr
                 field_variables[name] = attribs
@@ -855,7 +855,7 @@ if __name__ == '__main__':
     for geom, files in relevant_files.items():
         if no_file_filter or any(f in filter_files for f in files) or geom == DEFAULT_GEOMETRY:
             print("------------- Checking ", geom, " -------------")
-            geom_file_filter = [] if no_file_filter else filter_files+['*geometry.hpp', str(spec_info)]
+            geom_file_filter = [] if no_file_filter else filter_files+['*geometry*/geometry/*.hpp', str(spec_info)]
             p = subprocess.run(cppcheck_command + list(files) + [f'--file-filter={f}' for f in geom_file_filter], check=False)
             if p.returncode:
                 error_level = max(error_level, possible_error_levels[STYLE])
