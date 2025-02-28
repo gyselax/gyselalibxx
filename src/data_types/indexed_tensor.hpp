@@ -49,6 +49,8 @@ public:
      */
     explicit IndexedTensor(TensorType& tensor) : m_tensor(tensor) {}
 
+    IndexedTensor(IndexedTensor const&) = delete;
+
     /**
      * @brief An operator to access the underlying tensor.
      * @return The underlying tensor.
