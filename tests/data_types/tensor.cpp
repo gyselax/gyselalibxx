@@ -56,7 +56,7 @@ TEST(TensorTest, ExplicitDotProduct)
     ddcHelper::get<Theta_cov>(a) = 8;
     ddcHelper::get<R>(b) = 5;
     ddcHelper::get<Theta>(b) = 12;
-    double val = dot_product(a, b);
+    int val = dot_product(a, b);
     EXPECT_EQ(val, 66);
 }
 
