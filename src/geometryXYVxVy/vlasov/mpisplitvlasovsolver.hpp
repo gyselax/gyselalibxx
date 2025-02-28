@@ -6,6 +6,7 @@
 #include "iadvectionvx.hpp"
 #include "iadvectionx.hpp"
 #include "ivlasovsolver.hpp"
+#include "mpitransposealltoall.hpp"
 
 /**
  * @brief A class that solves a Vlasov equation using Strang's splitting
