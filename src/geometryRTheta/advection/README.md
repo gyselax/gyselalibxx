@@ -198,7 +198,7 @@ We deduce that
 \end{bmatrix}
 = 
 \begin{bmatrix}
-	- Ey \\
+	- E_y \\
 	E_x 
 \end{bmatrix}
 = \det(J)
