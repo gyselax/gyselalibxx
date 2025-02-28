@@ -6,6 +6,7 @@ extend-ignore-re = ["capitalize()",
                     "ddc::\\S*",
                     "gko_exec->\\S*",
                     "on_finalize:",
+                    "colors.Normalize"
                     ]
 
 [default.extend-words]
@@ -17,3 +18,4 @@ Ax = "Ax"
 ax = "ax"
 color = "color"
 colors = "colors"
+iit = "iit"

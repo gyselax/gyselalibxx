@@ -12,18 +12,18 @@ dic_coeff_FD = {}
 
 # *** Finite differences for first and second derivative at 2th order ***
 denom = 2.
-dic_coeff_FD['[1,2],centered'] = np.array([-1., 0., 1.])/denom
+dic_coeff_FD['[1,2],centred'] = np.array([-1., 0., 1.])/denom
 dic_coeff_FD['[1,2],forward'] = np.array([-3., 4., -1.])/denom
 dic_coeff_FD['[1,2],backward'] = np.array([1., -4., 3.])/denom
 
-dic_coeff_FD['[2,2],centered'] = np.array([1., -2., 1.])
+dic_coeff_FD['[2,2],centred'] = np.array([1., -2., 1.])
 dic_coeff_FD['[2,2],forward'] = np.array([1., -2., 1.])
 dic_coeff_FD['[2,2],backward'] = np.array([1., -2., 1.])
 
 # *** Finite differences for first and second derivative at 4th order ***
 denom = 12.
-# - centered coefficients (-2,-1,0,1,2): Rk c_{i} = -c{-i} and c_0 = 0.
-dic_coeff_FD['[1,4],centered'] = np.array([1., -8., 0., 8., -1.])/denom
+# - centred coefficients (-2,-1,0,1,2): Rk c_{i} = -c{-i} and c_0 = 0.
+dic_coeff_FD['[1,4],centred'] = np.array([1., -8., 0., 8., -1.])/denom
 # - forward and backward coefficients:
 # 'forward' for (0,1,2,3,4) and 'backward' for (-4,-3,-2,-1,0)
 dic_coeff_FD['[1,4],forward'] = np.array([-25., 48., -36., 16., -3.])/denom
@@ -33,7 +33,7 @@ dic_coeff_FD['[1,4],mixed_p'] = np.array([-3., -10., 18, -6., 1.])/denom
 dic_coeff_FD['[1,4],mixed_m'] = np.array([-1., 6., -18, 10., 3.])/denom
 
 denom = 12.
-dic_coeff_FD['[2,4],centered'] = np.array([-1., 16., -30., 16., -1.])/denom
+dic_coeff_FD['[2,4],centred'] = np.array([-1., 16., -30., 16., -1.])/denom
 dic_coeff_FD['[2,4],forward'] = np.array([45., -154., 214., -156., 61., -10.])/denom
 dic_coeff_FD['[2,4],backward'] = np.array([-10., 61., -156., 214., -154., 45.])/denom
 dic_coeff_FD['[2,4],mixed_p'] = np.array([10., -15., -4., 14., -6., 1.])/denom
@@ -41,7 +41,7 @@ dic_coeff_FD['[2,4],mixed_m'] = np.array([1., -6., 14., -4., -15., 10.])/denom
 
 # *** Finite differences for first and second derivative at 6th order ***
 denom = 60.
-dic_coeff_FD['[1,6],centered'] = np.array([-1., 9., -45., 0., 45., -9., 1.])/denom
+dic_coeff_FD['[1,6],centred'] = np.array([-1., 9., -45., 0., 45., -9., 1.])/denom
 dic_coeff_FD['[1,6],forward'] = np.array([-147., 360., -450.,
                                           400., -225., 72., -10.])/denom
 dic_coeff_FD['[1,6],backward'] = np.array([10., -72., 225., -400.,
@@ -52,7 +52,7 @@ dic_coeff_FD['[1,6],mixed_m'] = np.array([-2., 15., -50.,
                                           100., -150, 77., 10.])/denom
 
 denom = 180.
-dic_coeff_FD['[2,6],centered'] = np.array([2., -27., 270.,
+dic_coeff_FD['[2,6],centred'] = np.array([2., -27., 270.,
                                            -490., 270., -27., 2.])/denom
 dic_coeff_FD['[2,6],forward'] = np.array([938., -4014., 7911., -9490.,
                                           7380., -3618., 1019., -126.])/denom
@@ -98,14 +98,14 @@ def Deriv_nthorder(F, dx, periodic=0, nth_deriv=1, order=4):
     offset = order//2
 
     s_deriv_order = str([nth_deriv,order]).replace(" ", "")
-    cc = dic_coeff_FD[s_deriv_order+',centered']
+    cc = dic_coeff_FD[s_deriv_order+',centred']
     cb = dic_coeff_FD[s_deriv_order+',backward']
     cf = dic_coeff_FD[s_deriv_order+',forward']
     if order > 2:
         cm_m = dic_coeff_FD[s_deriv_order+',mixed_m']
         cm_p = dic_coeff_FD[s_deriv_order+',mixed_p']
 
-    # centered differences for dnFdxn[i] with offset<i<nx-offset
+    # centred differences for dnFdxn[i] with offset<i<nx-offset
     #  --> example for 4th order :
     #   dnFdxn[i] = c[0](F[i-2]-F[i+2]) + c[1](F[i-1]-F[i+1])
     for i, coeff in enumerate(cc):
