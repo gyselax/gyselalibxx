@@ -149,6 +149,9 @@ void internal_tensor_mul(
 template <char... ids, class TensorType>
 auto index(TensorType& tensor)
 {
+    static_assert(
+            sizeof...(ids) == TensorType::rank(),
+            "The number of indices provided must be equal to the rank of the tensor.");
     using namespace tensor_tools;
     using TypeSeqCharIds = ddc::detail::TypeSeq<std::integral_constant<char, ids>...>;
     return details::internal_index<
