@@ -13,9 +13,9 @@ density:
     # get the coordinates of this dimension from a scalar in the file
     time:    { local_coord: [ 'time' ] }
   - &rd
-    r:       { global_coord: [ &initialization "VOICEXX_initstate.h5",  r_coords] }
+    r:       { global_coord: [ &initialisation "VOICEXX_initstate.h5",  r_coords] }
   - &pd
-    p:       { global_coord: [ *initialization,  p_coords] }
+    p:       { global_coord: [ *initialisation,  p_coords] }
 
 
 density_eq:

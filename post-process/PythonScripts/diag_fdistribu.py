@@ -32,17 +32,17 @@ def plot_fdistribu_atfourtimes(fdistribu: xr.DataArray, figurename):
     nb_time = fdistribu.sizes["time"]
     nb_x = fdistribu.sizes["x"]
     ix_array = np.linspace(nb_x//8, nb_x, 3, dtype=int, endpoint=False)
-    it_array = np.linspace(0, nb_time-1, 4, dtype=int, endpoint=True)
+    itime_array = np.linspace(0, nb_time-1, 4, dtype=int, endpoint=True)
     style_true = ['b-', 'c-', 'r-', 'k-']
     _, axs = plt.subplots(1, len(ix_array), figsize=(30, 8))
     for iix, ix in enumerate(ix_array):
         str_x_iix = str(round(float(fdistribu.coords['x'][ix]), 3))
-        for iit, it in enumerate(it_array):
-            str_time_iit = str(round(float(fdistribu.coords['time'][it]), 3))
+        for itime_index, itime_val in enumerate(itime_array):
+            str_time = str(round(float(fdistribu.coords['time'][itime_val]), 3))
             axs[iix].plot(fdistribu.coords['v_x'],
-                          fdistribu.isel(time=it, x=ix),
-                          style_true[iit],
-                          label='t = '+str_time_iit)
+                          fdistribu.isel(time=itime_val, x=ix),
+                          style_true[itime_index],
+                          label='t = '+str_time)
             subtitle = 'x = '+str_x_iix
             axs[iix].set_title(subtitle, fontsize=16)
             axs[iix].set_xlabel('v_x', fontsize=16)
@@ -63,7 +63,7 @@ def plot_fdistribu_atonetime(fdistribu: xr.DataArray,
 
     nb_time = fdistribu.sizes["time"]
     assert(itime < nb_time)
-    it_array = [0, itime, -1]
+    itime_array = [0, itime, -1]
     time_diag = fdistribu.coords["time"].values[itime]
 
     nb_x = fdistribu.sizes["x"]
@@ -92,11 +92,11 @@ def plot_fdistribu_atonetime(fdistribu: xr.DataArray,
 
         # plot 2: f(v) for 3 times
         ix2 = 3*ispec+1
-        for iit, it in enumerate(it_array):
+        for itime_index, itime_val in enumerate(itime_array):
             axs[ix2].plot(fdistribu.coords['v_x'],
-                          fdistribu.isel(time=it, species=ispec, x=ix),
-                          line_type[iit],
-                          label=f't= {fdistribu.coords["time"].values[it]}')
+                          fdistribu.isel(time=itime_val, species=ispec, x=ix),
+                          line_type[itime_index],
+                          label=f't= {fdistribu.coords["time"].values[itime_val]}')
         axs[ix2].set_xlabel(f"${f_spec.coords['v_x'].name}$", fontsize=12)
         axs[ix2].set_ylabel('fdistribu', fontsize=12)
         axs[ix2].legend()
