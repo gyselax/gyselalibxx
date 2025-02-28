@@ -40,9 +40,9 @@ neutrals_masses:
   dimensions: [ *speciesnd ]
   path: { file: 'VOICEXX_initstate.h5', dataset: 'neutrals_masses' }
 
-normalization_coeff_neutrals:
+normalisation_coeff_neutrals:
   dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'normalization_coeff_neutrals' }
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'normalisation_coeff_neutrals' }
 
 norm_coeff_rate_neutrals:
   dimensions: [ ]
@@ -53,15 +53,15 @@ charge_exchange_coefficients:
     - cx: { constant_coord: [ '0', '1', '2', '3', '4' ] }
   path: { file: 'VOICEXX_initstate.h5', dataset: 'charge_exchange_coefficients' }
 
-ionization_slope_coefficients:
+ionisation_slope_coefficients:
   dimensions: 
     - i: { constant_coord: [ '0', '1', '2', '3', '4', '5' ] }
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'ionization_slope_coefficients' }
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'ionisation_slope_coefficients' }
 
-ionization_intercept_coefficients:
+ionisation_intercept_coefficients:
   dimensions: 
     - i: { constant_coord: [ '0', '1', '2', '3', '4', '5' ] }
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'ionization_intercept_coefficients' }
+  path: { file: 'VOICEXX_initstate.h5', dataset: 'ionisation_intercept_coefficients' }
 
 recombination_slope_coefficients:
   dimensions: 

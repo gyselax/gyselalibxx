@@ -13,9 +13,9 @@ fdistribu:
     # get the coordinates of this dimension from a scalar in the file
     time:    { local_coord: [ 'time_saved' ] }
   - &xd
-    x:       { global_coord: [ &initialization "VOICEXX_initstate.h5",  'MeshX'] }
+    x:       { global_coord: [ &initialisation "VOICEXX_initstate.h5",  'MeshX'] }
   - &yd
-    y:       { global_coord: [ *initialization,  'MeshY'] }
+    y:       { global_coord: [ *initialisation,  'MeshY'] }
 
 
 fdistribu_equilibrium:
