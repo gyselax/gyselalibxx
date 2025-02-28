@@ -169,7 +169,7 @@ def plot_epot_atonetime(epot: xr.DataArray,
         axs[ix3].plot(epot.coords['x'],
                       epot.isel(time=itime_val),
                       line_type[itime_index],
-                      label=f't= {epot.coords["time"].values[itime]}')
+                      label=f't= {epot.coords["time"].values[itime_val]}')
     axs[ix3].set_xlabel(f"${epot.coords['x'].name}$", fontsize=12)
     axs[ix3].set_ylabel('epot', fontsize=12)
     axs[ix3].legend()
