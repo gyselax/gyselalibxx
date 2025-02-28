@@ -102,7 +102,7 @@ TEST(TensorTest, TensorMinus)
     EXPECT_EQ(val, 24);
 }
 
-TEST(TensorTools, CharOccurences)
+TEST(TensorTools, CharOccurrences)
 {
     using CharTypeSeq = ddc::detail::TypeSeq<
             std::integral_constant<char, 'i'>,
