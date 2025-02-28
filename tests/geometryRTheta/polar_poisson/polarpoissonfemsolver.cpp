@@ -133,12 +133,12 @@ int main(int argc, char** argv)
 
     IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(builder);
 
-    DFieldMemRTheta coeff_alpha_alloc(grid); // values of the coefficent alpha
+    DFieldMemRTheta coeff_alpha_alloc(grid); // values of the coefficient alpha
     DFieldMemRTheta coeff_beta_alloc(grid);
     DFieldMemRTheta x_alloc(grid);
     DFieldMemRTheta y_alloc(grid);
 
-    DFieldRTheta coeff_alpha = get_field(coeff_alpha_alloc); // values of the coefficent alpha
+    DFieldRTheta coeff_alpha = get_field(coeff_alpha_alloc); // values of the coefficient alpha
     DFieldRTheta coeff_beta = get_field(coeff_beta_alloc);
     DFieldRTheta x = get_field(x_alloc);
     DFieldRTheta y = get_field(y_alloc);

@@ -96,7 +96,7 @@ public:
                 build_uniform_break_points(y2_min, y2_max, y2_ncells));
     }
 
-    void initialize_2D_functions(DFieldOnPatch<Patch1> function_1, DFieldOnPatch<Patch2> function_2)
+    void initialise_2D_functions(DFieldOnPatch<Patch1> function_1, DFieldOnPatch<Patch2> function_2)
     {
         ddc::parallel_for_each(
                 get_idx_range(function_1),
@@ -185,7 +185,7 @@ public:
 
 
 /*
-    The global index range is splitted into two 2D patches on (X1, Y1) and (X2, Y2).
+    The global index range is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
 TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
 {
@@ -229,7 +229,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
     DFieldMemOnPatch<Patch2> function_2_alloc(idx_range_xy2);
     DFieldOnPatch<Patch2> function_2 = get_field(function_2_alloc);
 
-    initialize_2D_functions(function_1, function_2);
+    initialise_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
     MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
@@ -317,7 +317,7 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
     DFieldMemOnPatch<Patch2> function_2_alloc(idx_range_xy2);
     DFieldOnPatch<Patch2> function_2 = get_field(function_2_alloc);
 
-    initialize_2D_functions(function_1, function_2);
+    initialise_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
     MultipatchField<DConstFieldOnPatch, Patch1, Patch2>

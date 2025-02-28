@@ -40,9 +40,9 @@ public:
      *      The function to be advected.
      * @param[in] advection_field
      *      The advection field along the logical index range axes, RTheta.
-     * @param[in] advection_field_xy_center
+     * @param[in] advection_field_xy_centre
      *      The advection field along the physical index range axes, XY
-     *      at the center point.
+     *      at the centre point.
      * @param[in] dt
      *      The time step.
      *
@@ -51,6 +51,6 @@ public:
     virtual host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
             host_t<DConstVectorFieldRTheta<R, Theta>> advection_field,
-            CoordXY const& advection_field_xy_center,
+            CoordXY const& advection_field_xy_centre,
             double const dt) const = 0;
 };

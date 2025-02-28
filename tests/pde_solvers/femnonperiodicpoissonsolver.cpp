@@ -83,7 +83,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
     host_t<DFieldMemX> electric_field_host(gridx);
     host_t<DFieldMemX> rhs_host(gridx);
 
-    // Initialization of the distribution function --> fill values
+    // Initialisation of the distribution function --> fill values
     for (IdxX const ix : gridx) {
         rhs_host(ix) = sin(ddc::coordinate(ix));
     }

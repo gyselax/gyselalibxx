@@ -36,7 +36,7 @@ double Matrix_Dense::get_element(int const i, int const j) const
     return a[j * n + i];
 }
 
-int Matrix_Dense::factorize_method()
+int Matrix_Dense::factorise_method()
 {
     int info;
     dgetrf_(&n, &n, a.get(), &n, ipiv.get(), &info);

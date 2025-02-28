@@ -62,7 +62,7 @@ public:
     /**
      * @brief Compute the (1,1) coefficient of the inverse Jacobian matrix.
      *
-     * Be careful because not all mappings are invertible, especially at the center point.
+     * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the inverse Jacobian matrix.
@@ -84,7 +84,7 @@ public:
     /**
      * @brief Compute the (1,2) coefficient of the inverse Jacobian matrix.
      *
-     * Be careful because not all mappings are invertible, especially at the center point.
+     * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the inverse Jacobian matrix.
@@ -105,7 +105,7 @@ public:
     /**
      * @brief Compute the (2,1) coefficient of the inverse Jacobian matrix.
      *
-     * Be careful because not all mappings are invertible, especially at the center point.
+     * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the inverse Jacobian matrix.
@@ -127,7 +127,7 @@ public:
     /**
      * @brief Compute the (2,2) coefficient of the inverse Jacobian matrix.
      *
-     * Be careful because not all mappings are invertible, especially at the center point.
+     * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the inverse Jacobian matrix.

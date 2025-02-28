@@ -5,10 +5,10 @@ The operator implemented here is a previous step to the advection operator.
 It computes the advection field along the axes in the physical domain or the axes in the logical domain.
 
 Currently, the implemented case is:
-* Guiding center equations system.
+* Guiding centre equations system.
 
 
-## Guiding center case
+## Guiding centre case
 
 The studied equation system is of the following type : 
 ```math
@@ -248,4 +248,4 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 
 # Contents
 
-* advection\_field\_rp.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding center simulation. 
+* advection\_field\_rp.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation. 

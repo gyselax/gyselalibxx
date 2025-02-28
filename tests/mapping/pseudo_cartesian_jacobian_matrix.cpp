@@ -314,7 +314,7 @@ TEST(PseudoCartesianJacobianMatrix, TestDiscreteMapping)
 {
     std::cout << "Comparison of the pseudo cartesian Jacobian matrix between analytical and "
               << std::endl
-              << "discrete mappings at the center point: -----------------------------------"
+              << "discrete mappings at the centre point: -----------------------------------"
               << std::endl
               << ">>> L_inf norm of | M_map - M_dis_map |" << std::endl;
 

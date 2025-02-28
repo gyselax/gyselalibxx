@@ -16,7 +16,7 @@
  * as a solution of this evolution equation. 
  * 
  * spatial_extent defines the location where the source is active.
- * spatial_extent is normalized, so that its integral along the 
+ * spatial_extent is normalised, so that its integral along the 
  * spatial direction equals one. It has a hyperbolic tangent shape. 
  * It is equal to one in a central zone of the plasma of width defined by the extent parameter.
 *  

@@ -19,7 +19,7 @@ The studied equations system is Vlasov-Poisson equations
 ```
 
 
-Let's write $`\{t^n\}_n \text{ the time discretization, and } f^n = f(t^n, \cdot, \cdot)`$.
+Let's write $`\{t^n\}_n \text{ the time discretisation, and } f^n = f(t^n, \cdot, \cdot)`$.
 
 
 

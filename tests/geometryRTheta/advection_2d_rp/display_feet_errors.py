@@ -12,42 +12,42 @@ executable : string
 
 rmin : float
     Minimum value of the r values.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 rmax : float
     Maximum value of the r values.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Nr : int
     Number of break points in r dimension
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 Nth : int
     Number of break points in theta dimension
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 dt : float
     Time step.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 T : float
     Final time.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 curves : bool
     Boolean to select if the values of the advected function are saved.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 feet : bool
     Boolean to select if the characteristic feet are saved.
-    Possibiliy for the user to change it by addind the two
+    Possibility for the user to change it by adding the two
     new sizes in the command line.
 
 """
@@ -63,7 +63,7 @@ from advection_functions import set_input, execute, treatment_feet, distance, ge
 # --- Compute errors
 def compute_max_distance_error(Nr, Nt, computed_Fx, computed_Fy,exact_Fx, exact_Fy):
     """
-    Compute the maximum distance betweent the exact feet and the computed feet.
+    Compute the maximum distance between the exact feet and the computed feet.
 
     Parameters
     ----------

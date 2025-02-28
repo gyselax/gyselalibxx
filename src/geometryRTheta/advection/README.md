@@ -163,7 +163,7 @@ The advection field can be computed thanks to the AdvectionFieldFinder operator.
 
 * If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain. 
 
-**In the guiding-center case**, the advection field is computed from the electric field, 
+**In the guiding-centre case**, the advection field is computed from the electric field, 
 ```math
 A = - E \wedge e_z = -\nabla \phi \wedge e_z.
 ```

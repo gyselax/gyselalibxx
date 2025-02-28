@@ -169,7 +169,7 @@ public:
      * @param[in] evaluator_advection_field
      *      The B-splines evaluator to evaluate the advection field.
      * @param[in] epsilon
-     *      @f$ \varepsilon @f$ parameter used for the linearization of the
+     *      @f$ \varepsilon @f$ parameter used for the linearisation of the
      *      advection field around the central point.
      *
      * @see ITimeStepper
@@ -250,7 +250,7 @@ public:
 
         IdxRangeRTheta const idx_range_rp = get_idx_range<GridR, GridTheta>(feet);
 
-        CoordXY_adv coord_center(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
+        CoordXY_adv coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
         LogicalToPseudoPhysicalMapping logical_to_pseudo_physical_proxy
                 = m_logical_to_pseudo_physical;
         PseudoPhysicalToLogicalMapping pseudo_physical_to_logical_proxy
@@ -272,7 +272,7 @@ public:
 
                                 CoordXY_adv const feet_xy = coord_xy - dt * advection_field(irp);
 
-                                if (norm_inf(feet_xy - coord_center) < 1e-15) {
+                                if (norm_inf(feet_xy - coord_centre) < 1e-15) {
                                     feet(irp) = CoordRTheta(0, 0);
                                 } else {
                                     feet(irp) = pseudo_physical_to_logical_proxy(feet_xy);
@@ -284,8 +284,8 @@ public:
                             });
 
                     // Treatment to conserve the C0 property of the advected function:
-                    unify_value_at_center_pt(feet);
-                    // Test if the values are the same at the center point
+                    unify_value_at_centre_pt(feet);
+                    // Test if the values are the same at the centre point
                     is_unified(feet);
                 };
 
@@ -299,14 +299,14 @@ public:
 
 
     /**
-     * @brief Check if the values at the center point are the same.
+     * @brief Check if the values at the centre point are the same.
      *
-     *  For polar geometry, to ensure continuity at the center point, we
+     *  For polar geometry, to ensure continuity at the centre point, we
      *  have to be sure that all the points for @f$ r = 0 @f$ have the same value.
      *  This function check if for @f$ r= 0 @f$, the values @f$ \forall \theta @f$ are the same.
      *
      *  @param[in] values
-     *      A table of values we want to check if the center point has
+     *      A table of values we want to check if the centre point has
      *      an unique value.
      *
      */
@@ -323,7 +323,7 @@ public:
                     KOKKOS_LAMBDA(const IdxTheta ip) {
                         if (norm_inf(values(r0_idx, ip) - values(r0_idx, theta_idx_range.front()))
                             > 1e-15) {
-                            Kokkos::printf("WARNING ! -> Discontinous at the center point.");
+                            Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
                         }
                         KOKKOS_ASSERT(
                                 values(r0_idx, ip) == values(r0_idx, theta_idx_range.front()));
@@ -336,7 +336,7 @@ public:
      * @brief Replace the value at @f$  (r=0, \theta)@f$  point
      *  by the value at @f$ (r=0,0) @f$ for all @f$ \theta @f$.
      *
-     *  For polar geometry, to ensure continuity at the center point, we
+     *  For polar geometry, to ensure continuity at the centre point, we
      *  have to be sure that all the points for @f$ r = 0 @f$ have the same value.
      *  As the computation of the values of a table can induces machine errors,
      *  this function is useful to reset the values at the central point at
@@ -346,7 +346,7 @@ public:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_center_pt(Field<T, IdxRangeRTheta, memory_space> values) const
+    void unify_value_at_centre_pt(Field<T, IdxRangeRTheta, memory_space> values) const
     {
         IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
         IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);

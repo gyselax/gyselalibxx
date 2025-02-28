@@ -403,12 +403,12 @@ get_rotation_advection_field_simulation(
 
 
 /**
- * @brief Simulation of a decentred rotated elipse-type function.
+ * @brief Simulation of a decentred rotated ellipse-type function.
  *
  * The simulation is given in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
- * Define a simulation with a elipse-type function defined by FunctionToBeAdvected_cos_4_elipse
+ * Define a simulation with a ellipse-type function defined by FunctionToBeAdvected_cos_4_ellipse
  * and a decentred rotation advection field defined by ElectrostaticalPotentialSimulation_decentred_rotation:
  *
  * - @f$ f(x, y) =  \frac{1}{2}\left( G(r_1(x,y)) + G(r_2(x,y))\right)@f$
@@ -426,22 +426,22 @@ get_rotation_advection_field_simulation(
  * @param[in] mapping
  *      The mapping from the logical index range to the physical index range.
  *
- * @see FunctionToBeAdvected_cos_4_elipse
+ * @see FunctionToBeAdvected_cos_4_ellipse
  * @see ElectrostaticalPotentialSimulation_decentred_rotation
  * @see AdvectionField_decentred_rotation
  */
 template <class Mapping>
 AdvectionFieldSimulation<
         ElectrostaticalPotentialSimulation_decentred_rotation,
-        FunctionToBeAdvected_cos_4_elipse<Mapping>,
+        FunctionToBeAdvected_cos_4_ellipse<Mapping>,
         AdvectionField_decentred_rotation>
 get_decentred_rotation_advection_field_simulation(Mapping const& mapping)
 {
     return AdvectionFieldSimulation<
             ElectrostaticalPotentialSimulation_decentred_rotation,
-            FunctionToBeAdvected_cos_4_elipse<Mapping>,
+            FunctionToBeAdvected_cos_4_ellipse<Mapping>,
             AdvectionField_decentred_rotation>(
             {ElectrostaticalPotentialSimulation_decentred_rotation(),
-             FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping),
+             FunctionToBeAdvected_cos_4_ellipse<Mapping>(mapping),
              AdvectionField_decentred_rotation()});
 }
