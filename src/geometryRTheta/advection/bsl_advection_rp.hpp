@@ -95,9 +95,9 @@ public:
     /**
      * @brief Allocate a Field of the advected function.
      *
-     * @param [in, out] allfdistribu_host
+     * @param [in, out] allfdistribu
      *      A Field containing the values of the function we want to advect.
-     * @param [in] advection_field_xy_host
+     * @param [in] advection_field_xy
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the physical domain axes.
      * @param [in] dt
