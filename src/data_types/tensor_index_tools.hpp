@@ -170,7 +170,7 @@ inline constexpr bool is_tensor_index_element_v
  * @tparam TupleType The type of the TypeSeq of integral_constants of characters.
  */
 template <char search_char, class CharTypeSeq>
-constexpr std::size_t char_occurences_v = details::CountChar<search_char, CharTypeSeq>::value;
+constexpr std::size_t char_occurrences_v = details::CountChar<search_char, CharTypeSeq>::value;
 
 /**
  * @brief Get a TensorIndexElement from a TypeSeq of valid VectorIndexSets and a TypeSeq of indices.
@@ -243,7 +243,7 @@ struct GetNonRepeatedIndices<
             Elem - 1,
             IdsFound,
             std::conditional_t<
-                    char_occurences_v<current_char, IdsFound> == 1,
+                    char_occurrences_v<current_char, IdsFound> == 1,
                     ddc::detail::TypeSeq<CurrentIndex, OutIndices...>,
                     ddc::detail::TypeSeq<OutIndices...>>>::type;
 };
@@ -258,7 +258,7 @@ struct GetNonRepeatedIndices<
     using CurrentIndex = ddc::type_seq_element_t<0, TypeSeqVectorIndexIdMap>;
     static constexpr char current_char = CurrentIndex::id;
     using type = std::conditional_t<
-            char_occurences_v<current_char, IdsFound> == 1,
+            char_occurrences_v<current_char, IdsFound> == 1,
             ddc::detail::TypeSeq<CurrentIndex, OutIndices...>,
             ddc::detail::TypeSeq<OutIndices...>>;
 };

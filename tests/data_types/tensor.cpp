@@ -111,9 +111,9 @@ TEST(TensorTools, CharOccurences)
             std::integral_constant<char, 'k'>,
             std::integral_constant<char, 'k'>,
             std::integral_constant<char, 'k'>>;
-    std::size_t n_i = char_occurences_v<'i', CharTypeSeq>;
-    std::size_t n_j = char_occurences_v<'j', CharTypeSeq>;
-    std::size_t n_k = char_occurences_v<'k', CharTypeSeq>;
+    std::size_t n_i = char_occurrences_v<'i', CharTypeSeq>;
+    std::size_t n_j = char_occurrences_v<'j', CharTypeSeq>;
+    std::size_t n_k = char_occurrences_v<'k', CharTypeSeq>;
     EXPECT_EQ(n_i, 2);
     EXPECT_EQ(n_j, 1);
     EXPECT_EQ(n_k, 3);
