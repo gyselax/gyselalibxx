@@ -40,14 +40,14 @@ public:
      * @param[in] advec_vx An advection operator along the vx direction.
      * @param[in] advec_vy An advection operator along the vy direction.
      */
-    SplitVlasovSolver(
+    MpiSplitVlasovSolver(
             IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
             IAdvectionSpatial<GeometryVxVyXY, GridY> const& advec_y,
             IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
             IAdvectionVelocity<GeometryXYVxVy, GridVy> const& advec_vy,
             MPITransposeAllToAll<X2DSplit, V2DSplit> const& transpose);
 
-    ~SplitVlasovSolver() override = default;
+    ~MpiSplitVlasovSolver() override = default;
 
     /**
      * @brief Solves a Vlasov equation on a timestep dt.

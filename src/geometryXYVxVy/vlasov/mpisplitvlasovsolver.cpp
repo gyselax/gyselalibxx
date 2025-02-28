@@ -2,7 +2,7 @@
 
 #include "mpisplitvlasovsolver.hpp"
 
-SplitVlasovSolver::SplitVlasovSolver(
+MpiSplitVlasovSolver::MpiSplitVlasovSolver(
         IAdvectionSpatial<GeometryXYVxVy, GridX> const& advec_x,
         IAdvectionSpatial<GeometryXYVxVy, GridY> const& advec_y,
         IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
@@ -16,7 +16,7 @@ SplitVlasovSolver::SplitVlasovSolver(
 {
 }
 
-DFieldSpXYVxVy SplitVlasovSolver::operator()(
+DFieldSpXYVxVy MpiSplitVlasovSolver::operator()(
         DFieldSpXYVxVy const allfdistribu_x2Dsplit,
         DConstFieldXY const electric_field_x,
         DConstFieldXY const electric_field_y,
