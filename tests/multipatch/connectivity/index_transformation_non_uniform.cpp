@@ -100,7 +100,7 @@ public:
 } // namespace
 
 
-TEST_F(IndexTransformationNonUniformTest, IndexAvaibility)
+TEST_F(IndexTransformationNonUniformTest, IndexAvailability)
 {
     using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
     using EdgeY2F = Edge<Patch2, GridY<2>, FRONT>;

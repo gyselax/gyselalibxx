@@ -142,24 +142,24 @@ class scattered_coord:
             pattern = self.build_pattern(filelist)
             global_coords[field+"pattern"] = pattern
 
-        file_match_dictionnary = file_match.groupdict()
-        dataset_match_dictionnary = dataset_match.groupdict()
+        file_match_dictionary = file_match.groupdict()
+        dataset_match_dictionary = dataset_match.groupdict()
 
-        match_dictionnary = {}
+        match_dictionary = {}
 
-        match_dictionnary.update(file_match_dictionnary)
-        match_dictionnary.update(dataset_match_dictionnary)
+        match_dictionary.update(file_match_dictionary)
+        match_dictionary.update(dataset_match_dictionary)
 
         for dim in pattern.dims:
-            if dim in match_dictionnary:
-                pattern = pattern[{dim: int(match_dictionnary[dim])}]
+            if dim in match_dictionary:
+                pattern = pattern[{dim: int(match_dictionary[dim])}]
         pattern = pattern.data
 
         # This is the number of fragments in which the dimension is scattered
         n_fragments_dim = pattern[self.scatter_pattern_index]
 
         # This is the fragment number we are looking for
-        fragment_index = int(match_dictionnary[self.filename_regexp_group_key])
+        fragment_index = int(match_dictionary[self.filename_regexp_group_key])
 
         try:
             coords_full = global_coords[self.global_coords_file + self.global_coords_key]
@@ -205,7 +205,7 @@ class scattered_coord:
                 dims = ["dim_"+str(i) for i in range(data.ndim)]
                 coords_dict = {}
 
-                #Labeling dimensions
+                #Labelling dimensions
                 if len(file_groups) != 0:
                     dims = dims + list(file_groups.keys())
                     coords_dict.update(file_groups)

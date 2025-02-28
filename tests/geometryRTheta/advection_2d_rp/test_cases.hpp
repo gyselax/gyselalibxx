@@ -40,23 +40,23 @@
  *
  */
 template <class Mapping>
-class FunctionToBeAdvected_cos_4_elipse
+class FunctionToBeAdvected_cos_4_ellipse
 {
 private:
     Mapping const& m_mapping;
 
 public:
     /**
-     * @brief Instantiate a FunctionToBeAdvected_cos_4_elipse function.
+     * @brief Instantiate a FunctionToBeAdvected_cos_4_ellipse function.
      *
      * @param[in] mapping
      *      The mapping from the logical index range to the physical index range.
      */
-    explicit FunctionToBeAdvected_cos_4_elipse(Mapping const& mapping) : m_mapping(mapping) {}
+    explicit FunctionToBeAdvected_cos_4_ellipse(Mapping const& mapping) : m_mapping(mapping) {}
 
     /// Copy operator
-    explicit KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_cos_4_elipse(
-            FunctionToBeAdvected_cos_4_elipse const&)
+    explicit KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_cos_4_ellipse(
+            FunctionToBeAdvected_cos_4_ellipse const&)
             = default;
 
     /**
@@ -165,7 +165,7 @@ public:
      */
     KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
     {
-        // Gaussian centered in (x0, y0):
+        // Gaussian centred in (x0, y0):
         CoordXY const coord_xy(m_mapping(coord_rp));
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
@@ -524,12 +524,12 @@ get_rotation_simulation(Mapping const& mapping, double const rmin, double const 
 }
 
 /**
- * @brief Simulation of a decentred rotated elipse-type function.
+ * @brief Simulation of a decentred rotated ellipse-type function.
  *
  * The simulation is given in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
- * Define a simulation with a elipse-type function defined by FunctionToBeAdvected_cos_4_elipse
+ * Define a simulation with a ellipse-type function defined by FunctionToBeAdvected_cos_4_ellipse
  * and a decentred rotation advection field defined by AdvectionField_decentred_rotation:
  *
  * - @f$ f(x, y) =  \frac{1}{2}\left( G(r_1(x,y)) + G(r_2(x,y))\right)@f$
@@ -545,16 +545,16 @@ get_rotation_simulation(Mapping const& mapping, double const rmin, double const 
  * with @f$\omega = 2\pi@f$ and  @f$ (x_c, y_c) = (0.25, 0) @f$.
  *
  *
- * @see FunctionToBeAdvected_cos_4_elipse
+ * @see FunctionToBeAdvected_cos_4_ellipse
  * @see AdvectionField_decentred_rotation
  */
 template <class Mapping>
-AdvectionSimulation<AdvectionField_decentred_rotation, FunctionToBeAdvected_cos_4_elipse<Mapping>>
+AdvectionSimulation<AdvectionField_decentred_rotation, FunctionToBeAdvected_cos_4_ellipse<Mapping>>
 get_decentred_rotation_simulation(Mapping const& mapping)
 {
     return AdvectionSimulation<
             AdvectionField_decentred_rotation,
-            FunctionToBeAdvected_cos_4_elipse<Mapping>>(
+            FunctionToBeAdvected_cos_4_ellipse<Mapping>>(
             {AdvectionField_decentred_rotation(),
-             FunctionToBeAdvected_cos_4_elipse<Mapping>(mapping)});
+             FunctionToBeAdvected_cos_4_ellipse<Mapping>(mapping)});
 }

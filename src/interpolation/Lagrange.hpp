@@ -116,7 +116,7 @@ KOKKOS_INLINE_FUNCTION Idx<GridInterp> Lagrange<Execspace, GridInterp, BcMin, Bc
  *
  * @param[in] x_interp a node where we want to evaluate the function.
  * @param[in] j index of the basis.
- * @param[in] polynom_subindex range a part of the mesh centered around x_interp
+ * @param[in] polynom_subindex range a part of the mesh centred around x_interp
  *
  * @return The value of the basis at x_intercept
  */

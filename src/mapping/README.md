@@ -122,7 +122,7 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
 The tools are:
 - InverseJacobianMatrix : this tool calculates the inverse Jacobian matrix on the specified coordinate system.
 - InvJacobianOPoint : this tool calculates the inverse Jacobian matrix at the O-point on the specified coordinate system.
-- MetricTensor : this tool calculates the metric tensor associated with a coordinate transformation.
+- MetricTensorEvaluator : this tool calculates the metric tensor associated with a coordinate transformation.
 - VectorMapper : this tool helps when converting vectors stored in a `VectorField` from one coordinate system to another.
 - other static analysis tools found in `mapping_tools.hpp`
 

@@ -14,7 +14,7 @@
  * Classes inheriting from this class must manage other aspects:
  * Sparsity: kind of storage (Dense, Ell, Csr, etc.)
  * Kind of solver (direct, iterative)
- * Preconditioners and factorizations
+ * Preconditioners and factorisations
  *
  * @tparam ExecSpace Execution space,needed by Kokkos for allocations and parallelism.
  * The simplest choice is to follow Kokkos, for that: specify Kokkos::DefaultExecutionSpace
@@ -23,7 +23,7 @@ template <typename ExecSpace>
 class MatrixBatch
 {
 public:
-    /// @brief The type of a Kokkos::View storing batched right-hand sides. Second dimenion is batch dimension.
+    /// @brief The type of a Kokkos::View storing batched right-hand sides. Second dimension is batch dimension.
     using BatchedRHS = Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace>;
 
 

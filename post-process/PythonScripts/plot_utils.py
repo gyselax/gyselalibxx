@@ -26,7 +26,7 @@ def plot_field1d(data_dict, titlename, filename, **opt_args):
     filename: pathlib.Path or str
         path of the file to generate
 
-    data_dict : dictionnary of the form
+    data_dict : dictionary of the form
         { label : xarray.DataArray}
         the xarray is the 1D data to plot
         label to be put in the figure legend}

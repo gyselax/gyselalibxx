@@ -13,7 +13,7 @@ executable: string
 
 Returns
 -------
-    : matplotlib objet
+    : matplotlib object
     The curves are printed. 
 """
 

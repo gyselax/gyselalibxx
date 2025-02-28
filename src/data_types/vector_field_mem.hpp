@@ -319,7 +319,7 @@ namespace detail {
 /**
  * @brief Set a `VectorFieldMem` on a given NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
+ * @tparam ElementType Type of the elements in the ddc::Chunk of the VectorFieldMem.
  * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
  * @tparam NDTag NDTag object storing the dimensions along which the VectorFieldMem is defined.
  *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 

@@ -12,7 +12,7 @@
  * 
  * mask defines the spatial region where the operator is active.
  * 
- * ftarget is a maxwellian characterized by density and temperature, and a zero fluid velocity.
+ * ftarget is a maxwellian characterised by density and temperature, and a zero fluid velocity.
  *
  * amplitude depends on space, time and the considered species so that: 
  * - amplitude(ions) = m_amplitude = constant  

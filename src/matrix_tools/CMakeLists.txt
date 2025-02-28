@@ -4,7 +4,7 @@ add_library(matrix_tools STATIC
     matrix_dense.cpp
     matrix_banded.cpp
     matrix_corner_block.cpp
-    matrix_center_block.cpp
+    matrix_centre_block.cpp
     matrix_periodic_banded.cpp
     matrix_pds_tridiag.cpp
 )

@@ -28,10 +28,10 @@ Y(s; s, x, y) = y.
 ```
 
 So to compute the advected function at the next time step, 
- - we compute the characteristic feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and  $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
- for each mesh points $`(x_i, y_j)`$ with a time integration method ; 
- - we interpolate the function $f(t = t^n)$ on the characteristic feet. 
- The proprety ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
+ - we compute the characteristics' feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
+ for each mesh point $`(x_i, y_j)`$ with a time integration method ; 
+ - we interpolate the function $f(t = t^n)$ on the characteristics' feet. 
+ The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
 
 
@@ -47,7 +47,8 @@ There are multiple time integration methods available which are implemented in t
  
 We are listing the different schemes for this equation $`\partial_t X (t) = A_x(t, X(t),Y(t))`$. 
 
-We write $X (t) = X (t; s, x, y)$,  $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation $`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
+We write $X (t) = X (t; s, x, y)$, $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation 
+$`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
 
  
 ### Explicit Euler method
@@ -112,12 +113,12 @@ compute the mesh points in the physical domain using a mapping function $\mathca
 
 This adds some steps to the advection operator, we now have to compute 
  - the mesh points in the physical domain using $\mathcal{F}$; 
- - the characteristic feet in the physical domain; 
- - the characteristic feet in the logical domain (polar grid) using $\mathcal{F}^{-1}$; 
- - then interpolate the advection function at the  characteristic feet in the logical domain. 
+ - the characteristics' feet in the physical domain; 
+ - the characteristics' feet in the logical domain (polar grid) using $\mathcal{F}^{-1}$; 
+ - then interpolate the advection function at the characteristics' feet in the logical domain. 
  
 The third step can be difficult especially if the mapping function $\mathcal{F}$ is not analytically invertible. 
-It is not impossible but the computations can be costly. 
+It is not impossible, but the computations can be costly. 
 
 
 That is why, we introduce the **pseudo-Cartesian domain**. 
@@ -130,12 +131,12 @@ We use another mapping function $\mathcal{G}$ such that:
 Then the four previous steps become
  - calculate the mesh points in the pseudo-Cartesian domain using $\mathcal{G}$; 
  - calculate the advection field $A$ in the pseudo-Cartesian domain using the Jacobian matrix of $(\mathcal{F}\circ\mathcal{G}^{-1})^{-1}$; 
- - calculate the characteristic feet in the pseudo\_Cartesian domain; 
- - calculate the characteristic feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$; 
- - interpolate the advection function at the  characteristic feet in the logical domain. 
+ - calculate the characteristics' feet in the pseudo\_Cartesian domain; 
+ - calculate the characteristics' feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$; 
+ - interpolate the advection function at the characteristics' feet in the logical domain. 
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$) 
-and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Edoardo Zoni's article [1]. 
+and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in [Zoni et al. (2019)](#zoni). 
 
 
 **Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same. 
@@ -151,38 +152,28 @@ In the studied equation, the advection field is given along the physical domain 
 \partial_t f + A_x \partial_x f + A_y \partial_y f = 0.
 ```
 
-The BslAdvectionRP operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,
+The BslAdvectionRTheta operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,
 ```math
 A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta).
 ```
 
 The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see [advection\_field\_rp](./../advection_field/README.md)).
 
-* If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRP operator. 
+* If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRTheta operator. 
 
 * If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain. 
 
-**In the guiding-center case**, the advection field is computed from the electric field, 
+**In the guiding-centre case**, the advection field is computed from the electric field, 
 ```math
 A = - E \wedge e_z = -\nabla \phi \wedge e_z.
 ```
 
 In [the documentation for the advection field](./../advection_field/README.md), we show that 
 ```math
-\nabla_{xy} \phi = J D_{G}^{-1}\nabla_{r\theta} \phi,
+\nabla_{xy} \phi = J \nabla_{r\theta} \phi,
 ```
 
-with *J* the Jacobian matrix and the following diagonal matrix 
-```math
-D_{G} 
-= 
-\begin{bmatrix}
-    \sqrt{g_{11}} & 0 \\
-    0 & \sqrt{g_{22}} \\
-\end{bmatrix}
-```
-
-with the metric tensor $`G = J^TJ = [g_{ij}]_{ij}`$. 
+with *J* the Jacobian matrix (and the metric tensor $`G = J^TJ = [g_{ij}]_{ij}`$). 
 
 It gives the following relation for the electric field
 ```math
@@ -191,16 +182,7 @@ It gives the following relation for the electric field
     E_y \\
 \end{bmatrix} 
 = 
-J D_{G}^{-1}
-\begin{bmatrix}
-    E_r \\
-    E_\theta \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \frac{j_{11}}{\sqrt{g_{11}}} & \frac{j_{12}}{\sqrt{g_{22}}} \\
-    \frac{j_{21}}{\sqrt{g_{11}}} & \frac{j_{22}}{\sqrt{g_{22}}} \\
-\end{bmatrix}
+J
 \begin{bmatrix}
     E_r \\
     E_\theta \\
@@ -216,47 +198,24 @@ We deduce that
 \end{bmatrix}
 = 
 \begin{bmatrix}
-	- Ey \\
+	- E_y \\
 	E_x 
 \end{bmatrix}
-= 
-\begin{bmatrix}
-	- \frac{j_{21}}{\sqrt{g_{11}}}E_r - \frac{j_{22}}{\sqrt{g_{22}}} E_\theta\\
-	\frac{j_{11}}{\sqrt{g_{11}}}E_r + \frac{j_{12}}{\sqrt{g_{22}}} E_\theta \\
-\end{bmatrix}
-= 
-\begin{bmatrix}
-	\frac{j_{22}}{\sqrt{g_{22}}}  & - \frac{j_{21}}{\sqrt{g_{11}}} \\
-	- \frac{j_{12}}{\sqrt{g_{22}}} & \frac{j_{11}}{\sqrt{g_{11}}}
-\end{bmatrix}
+= \det(J)
+J^{-T}
 \begin{bmatrix}
 	- E_\theta \\
 	E_r
 \end{bmatrix}
-= 
-\det(JD_{G}^{-1}) ((JD_{G}^{-1})^{-1})^{T}
-\begin{bmatrix}
-	- E_\theta \\
-	E_r
-\end{bmatrix}
-= 
-\det(J) (J^{-1})^{T} det(D_{G}^{-1}) D_G 
+= \det(J)
+J^{-T}
 \begin{bmatrix}
 	A_r \\
 	A_\theta
 \end{bmatrix}.
 ```
 
-So, from the advection field along the logical domain axis, we multiply by 
-```math
-\det(J) det(D_{G}^{-1})  (J^{-1})^{T} D_G
-= 
-\begin{bmatrix}
-	\frac{j_{22}}{\sqrt{g_{22}}}  & - \frac{j_{21}}{\sqrt{g_{11}}} \\
-	- \frac{j_{12}}{\sqrt{g_{22}}} & \frac{j_{11}}{\sqrt{g_{11}}}
-\end{bmatrix},
-```
-
+So, from the advection field along the logical domain axis, we multiply by $`J^{-1}`$
 to get the advection field along the physical domain axis. 
 
 
@@ -280,7 +239,7 @@ It tests:
  	- simulation 2: rotation of Gaussian function 
  		- $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
  		- $`A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
- 	- simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]). 
+ 	- simulation 3: decentred rotation (test given in [Zoni et al. (2019)](#zoni)). 
  	 	- $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
  	 		- with 
  	 			- $`G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)`$, 
@@ -296,7 +255,7 @@ for $n = 1, 2, 4, 8,  ...$.
 
 
 # References
-[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
+<a name="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". 
 ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889).)
 Journal of Computational Physics (2019).
@@ -305,9 +264,8 @@ Journal of Computational Physics (2019).
 # Contents
 
 This folder contains:
- - iadvectionrp.hpp : define the base class for advection operator (IAdvectionRP). 
- 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRP). 
- - spline\_foot\_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder).
+ - iadvection\_rp.hpp : define the base class for advection operator (IAdvectionRTheta). 
+ 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRTheta). 
 
 
 

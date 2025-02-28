@@ -131,7 +131,7 @@ using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
  *
  * @param[in] mapping
  *          The mapping we are testing.
- * @param[in] analytical_mappping
+ * @param[in] analytical_mapping
  *          The mapping analytically defined.
  * @param[in] idx_range
  *          The index range on which we test the values.
@@ -172,7 +172,7 @@ double check_value_on_grid(
  *
  * @param[in] mapping
  *          The mapping we are testing.
- * @param[in] analytical_mappping
+ * @param[in] analytical_mapping
  *          The mapping analytically defined.
  * @param[in] idx_range
  *          The index range on which we test the values.
@@ -274,7 +274,7 @@ double test_on_grid_and_not_on_grid(
  *
  * @param[in] mapping
  *          The mapping we are testing.
- * @param[in] analytical_mappping
+ * @param[in] analytical_mapping
  *          The mapping analytically defined.
  * @param[in] idx_range
  *          The index range on which we test the values.
@@ -321,7 +321,7 @@ double check_Jacobian_on_grid(
  *
  * @param[in] mapping
  *          The mapping we are testing.
- * @param[in] analytical_mappping
+ * @param[in] analytical_mapping
  *          The mapping analytically defined.
  * @param[in] idx_range
  *          The index range on which we test the values.
@@ -429,7 +429,7 @@ double test_Jacobian(
  *
  * @param[in] mapping
  *          The mapping we are testing.
- * @param[in] analytical_mappping
+ * @param[in] analytical_mapping
  *          The mapping analytically defined.
  * @param[in] idx_range
  *          The index range on which we test the values.

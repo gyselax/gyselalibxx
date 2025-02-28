@@ -187,7 +187,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rp_alloc(grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rp_alloc(grid);
-    CoordXY advection_field_xy_center;
+    CoordXY advection_field_xy_centre;
 
     host_t<DFieldMemRTheta> electrostatic_potential_alloc(grid);
 
@@ -202,7 +202,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
 
-    // Initialize functions ******************************************
+    // Initialise functions ******************************************
     ddc::for_each(grid, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
         CoordXY const coord_xy(to_physical_mapping(coord_rp));
@@ -221,7 +221,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     advection_field_computer(
             electrostatic_potential,
             advection_field_rp,
-            advection_field_xy_center);
+            advection_field_xy_centre);
     advection_field_computer(electrostatic_potential, advection_field_xy);
 
 
@@ -241,22 +241,21 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rp(grid);
 
-    MetricTensor<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
+    MetricTensorEvaluator<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
         CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-        std::array<std::array<double, 2>, 2> J; // Jacobian matrix
-        to_physical_mapping.jacobian_matrix(coord_rp, J);
-        std::array<std::array<double, 2>, 2> G; // Metric tensor
-        metric_tensor(G, coord_rp);
+        std::array<std::array<double, 2>, 2> inv_J; // inverse Jacobian matrix
+        to_physical_mapping.inv_jacobian_matrix(coord_rp, inv_J);
+        double const jacobian = to_physical_mapping.jacobian(coord_rp);
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1] / std::sqrt(G[1][1])
-                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0] / std::sqrt(G[0][0]);
+                = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][0] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][0] * jacobian;
         ddcHelper::get<Y>(advection_field_xy_from_rp)(irp)
-                = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1] / std::sqrt(G[1][1])
-                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0] / std::sqrt(G[0][0]);
+                = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][1] * jacobian
+                  + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][1] * jacobian;
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
@@ -269,8 +268,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {
         // computation made in BslAdvectionRTheta operator:
-        ddcHelper::get<X>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_center);
-        ddcHelper::get<Y>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_center);
+        ddcHelper::get<X>(advection_field_xy_from_rp)(irp) = CoordX(advection_field_xy_centre);
+        ddcHelper::get<Y>(advection_field_xy_from_rp)(irp) = CoordY(advection_field_xy_centre);
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rp)(irp)
@@ -299,7 +298,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
-        advection_operator(allfdistribu_rp, advection_field_rp, advection_field_xy_center, dt);
+        advection_operator(allfdistribu_rp, advection_field_rp, advection_field_xy_centre, dt);
         advection_operator(
                 get_field(allfdistribu_xy_device),
                 get_const_field(advection_field_xy_device),

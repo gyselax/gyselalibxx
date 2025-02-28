@@ -9,7 +9,7 @@
 #include "mapping_tools.hpp"
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
-#include "metric_tensor.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
@@ -322,7 +322,7 @@ public:
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
         static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
-        //initialize x_init
+        //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points
         IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
@@ -1301,7 +1301,7 @@ public:
                 trial_bspline_val_and_deriv,
                 trial_bspline_val_and_deriv_theta);
 
-        MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
+        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(mapping);
 
         // Assemble the weak integral element
         return int_volume(idx_r, idx_theta)
@@ -1510,7 +1510,7 @@ public:
                     nnz(k + 1) = n_singular_basis + degree * nbasis_theta_proxy;
                 });
 
-        // going from the internal boundary the overlapping possiblities between two radial splines increase
+        // going from the internal boundary the overlapping possibilities between two radial splines increase
         Kokkos::parallel_for(
                 "inner overlap",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 2),
@@ -1530,7 +1530,7 @@ public:
                         mat_size - degree * nbasis_theta_proxy),
                 KOKKOS_LAMBDA(const int k) { nnz(k + 2) = radial_overlap * radial_overlap; });
 
-        // Approaching the external boundary the overlapping possiblities between two radial splines decrease
+        // Approaching the external boundary the overlapping possibilities between two radial splines decrease
         Kokkos::parallel_for(
                 "outer overlap",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 1),
