@@ -59,6 +59,15 @@ public:
     {
         return m_tensor;
     }
+
+    /**
+     * @brief An operator to access the underlying tensor.
+     * @return The underlying tensor.
+     */
+    TensorType const& operator()() const
+    {
+        return m_tensor;
+    }
 };
 
 /// A boolean, true if the type is an IndexedTensor.
@@ -95,7 +104,7 @@ template <
         std::size_t Is,
         class ResultIndexedTensorType,
         class... IndexedTensorType>
-void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType... t)
+void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType const&... t)
 {
     using TensorTuple = std::tuple<typename IndexedTensorType::tensor_type...>;
     using ElementType = typename std::tuple_element_t<0, TensorTuple>::element_type;
@@ -128,7 +137,7 @@ template <
 void internal_tensor_mul(
         ResultIndexedTensorType& result,
         std::index_sequence<Is...>,
-        IndexedTensorType... t)
+        IndexedTensorType const&... t)
 {
     ((internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
 }
