@@ -280,6 +280,7 @@ using IdxRangeXYVxVy = IdxRange<GridX, GridY, GridVx, GridVy>;
 using IdxRangeVxVy = IdxRange<GridVx, GridVy>;
 using IdxRangeSpVxVy = IdxRange<Species, GridVx, GridVy>;
 using IdxRangeSpXYVxVy = IdxRange<Species, GridX, GridY, GridVx, GridVy>;
+using IdxRangeSpVxVyXY = IdxRange<Species, GridVx, GridVy, GridX, GridY>;
 
 template <class ElementType>
 using FieldMemX = FieldMem<ElementType, IdxRangeX>;
@@ -377,6 +378,13 @@ template <class ElementType>
 using ConstFieldSpXYVxVy = Field<ElementType const, IdxRangeSpXYVxVy>;
 using DConstFieldSpXYVxVy = ConstFieldSpXYVxVy<double>;
 
+template <class ElementType>
+using ConstFieldSpVxVyXY = Field<ElementType const, IdxRangeSpVxVyXY>;
+using DConstFieldSpVxVyXY = ConstFieldSpVxVyXY<double>;
+
+using X2DSplit = MPILayout<IdxRangeSpXYVxVy, GridX, GridY>;
+using V2DSplit = MPILayout<IdxRangeSpVxVyXY, GridVx, GridVy>;
+
 /**
  * @brief A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operat
 ors such as advections.
@@ -413,4 +421,38 @@ public:
      * @brief An alias for the whole distribution function discrete index range type.
      */
     using IdxRangeFdistribu = IdxRangeSpXYVxVy;
+};
+
+class GeometryVxVyXY
+{
+public:
+    /**
+     * @brief A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type.
+     */
+    template <class T>
+    using velocity_dim_for = std::conditional_t<
+            std::is_same_v<T, GridX>,
+            GridVx,
+            std::conditional_t<std::is_same_v<T, GridY>, GridVy, void>>;
+
+    /**
+     * @brief A templated type giving the spatial discretised dimension type associated to a velocity discretised dimension type.
+     */
+    // template <class T>
+    // using spatial_dim_for = std::conditional_t<std::is_same_v<T, GridVx>, GridX, std::conditional_t<std::is_same_v<T, GridVy>, GridY, void>>;
+
+    /**
+     * @brief An alias for the spatial discrete index range type.
+     */
+    using IdxRangeSpatial = IdxRangeXY;
+
+    /**
+     * @brief An alias for the velocity discrete index range type.
+     */
+    using IdxRangeVelocity = IdxRangeVxVy;
+
+    /**
+     * @brief An alias for the whole distribution function discrete index range type.
+     */
+    using IdxRangeFdistribu = IdxRangeSpVxVyXY;
 };
