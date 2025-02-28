@@ -128,8 +128,8 @@ Y(s; s, x, y) = y.
 \]
 </p>
 <p> So to compute the advected function at the next time step,</p><ul>
-<li>we compute the characteristic feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh points \((x_i, y_j)\) with a time integration method ;</li>
-<li>we interpolate the function \(f(t = t^n)\) on the characteristic feet. The property ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
+<li>we compute the characteristics' feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh point \((x_i, y_j)\) with a time integration method ;</li>
+<li>we interpolate the function \(f(t = t^n)\) on the characteristics' feet. The property ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Time_integration_methods"></a>
 Time integration methods</h1>
@@ -196,11 +196,11 @@ Advection domain</h1>
 </p>
 <p>This adds some steps to the advection operator, we now have to compute</p><ul>
 <li>the mesh points in the physical domain using \(\mathcal{F}\);</li>
-<li>the characteristic feet in the physical domain;</li>
-<li>the characteristic feet in the logical domain (polar grid) using \(\mathcal{F}^{-1}\);</li>
-<li>then interpolate the advection function at the characteristic feet in the logical domain.</li>
+<li>the characteristics' feet in the physical domain;</li>
+<li>the characteristics' feet in the logical domain (polar grid) using \(\mathcal{F}^{-1}\);</li>
+<li>then interpolate the advection function at the characteristics' feet in the logical domain.</li>
 </ul>
-<p>The third step can be difficult especially if the mapping function \(\mathcal{F}\) is not analytically invertible. It is not impossible but the computations can be costly.</p>
+<p>The third step can be difficult especially if the mapping function \(\mathcal{F}\) is not analytically invertible. It is not impossible, but the computations can be costly.</p>
 <p>That is why, we introduce the <b>pseudo-Cartesian domain</b>. We use another mapping function \(\mathcal{G}\) such that:</p>
 <p class="formulaDsp">
 \[ \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}. 
@@ -209,11 +209,11 @@ Advection domain</h1>
 <p> Then the four previous steps become</p><ul>
 <li>calculate the mesh points in the pseudo-Cartesian domain using \(\mathcal{G}\);</li>
 <li>calculate the advection field \(A\) in the pseudo-Cartesian domain using the Jacobian matrix of \((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\);</li>
-<li>calculate the characteristic feet in the pseudo_Cartesian domain;</li>
-<li>calculate the characteristic feet in the logical domain (polar grid) using \(\mathcal{G}^{-1}\);</li>
-<li>interpolate the advection function at the characteristic feet in the logical domain.</li>
+<li>calculate the characteristics' feet in the pseudo_Cartesian domain;</li>
+<li>calculate the characteristics' feet in the logical domain (polar grid) using \(\mathcal{G}^{-1}\);</li>
+<li>interpolate the advection function at the characteristics' feet in the logical domain.</li>
 </ul>
-<p>Here, \(\mathcal{G}\) is analytically invertible (we can fix \(\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)\)) and \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in Edoardo Zoni's article [1].</p>
+<p>Here, \(\mathcal{G}\) is analytically invertible (we can fix \(\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)\)) and \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in <a class="el" href="src_geometryRTheta_advection_field.html#zoni">Zoni et al. (2019)</a>.</p>
 <p><b>Remark 1:</b> if \(\mathcal{F}\) is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.</p>
 <p><b>Remark 2:</b> if the mapping function is analytically invertible, it is less costly to advect in the physical domain.</p>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Advection_Field"></a>
@@ -222,13 +222,13 @@ Advection Field</h1>
 \[\partial_t f + A_x \partial_x f + A_y \partial_y f = 0.
 \]
 </p>
-<p> The BslAdvectionRP operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,  </p><p class="formulaDsp">
+<p> The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,  </p><p class="formulaDsp">
 \[A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta).
 \]
 </p>
 <p> The advection field can be computed thanks to the <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>).</p>
 <ul>
-<li>If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRP operator.</li>
+<li>If the advection field is directly given along the physical domain axes, no treatment is needed in the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator.</li>
 <li>If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain.</li>
 </ul>
 <p><b>In the guiding-centre case</b>, the advection field is computed from the electric field,  </p><p class="formulaDsp">
@@ -236,35 +236,17 @@ Advection Field</h1>
 \]
 </p>
 <p> In <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>, we show that  </p><p class="formulaDsp">
-\[\nabla_{xy} \phi = J D_{G}^{-1}\nabla_{r\theta} \phi,
+\[\nabla_{xy} \phi = J \nabla_{r\theta} \phi,
 \]
 </p>
-<p> with <em>J</em> the Jacobian matrix and the following diagonal matrix  </p><p class="formulaDsp">
-\[D_{G} 
-= 
-\begin{bmatrix}
-    \sqrt{g_{11}} &amp; 0 \\
-    0 &amp; \sqrt{g_{22}} \\
-\end{bmatrix}
-\]
-</p>
-<p> with the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\).</p>
+<p> with <em>J</em> the Jacobian matrix (and the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\)).</p>
 <p>It gives the following relation for the electric field  </p><p class="formulaDsp">
 \[\begin{bmatrix}
     E_x \\
     E_y \\
 \end{bmatrix} 
 = 
-J D_{G}^{-1}
-\begin{bmatrix}
-    E_r \\
-    E_\theta \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \frac{j_{11}}{\sqrt{g_{11}}} &amp; \frac{j_{12}}{\sqrt{g_{22}}} \\
-    \frac{j_{21}}{\sqrt{g_{11}}} &amp; \frac{j_{22}}{\sqrt{g_{22}}} \\
-\end{bmatrix}
+J
 \begin{bmatrix}
     E_r \\
     E_\theta \\
@@ -278,47 +260,24 @@ J D_{G}^{-1}
 \end{bmatrix}
 = 
 \begin{bmatrix}
-    - Ey \\
+    - E_y \\
     E_x 
 \end{bmatrix}
-= 
-\begin{bmatrix}
-    - \frac{j_{21}}{\sqrt{g_{11}}}E_r - \frac{j_{22}}{\sqrt{g_{22}}} E_\theta\\
-    \frac{j_{11}}{\sqrt{g_{11}}}E_r + \frac{j_{12}}{\sqrt{g_{22}}} E_\theta \\
-\end{bmatrix}
-= 
-\begin{bmatrix}
-    \frac{j_{22}}{\sqrt{g_{22}}}  &amp; - \frac{j_{21}}{\sqrt{g_{11}}} \\
-    - \frac{j_{12}}{\sqrt{g_{22}}} &amp; \frac{j_{11}}{\sqrt{g_{11}}}
-\end{bmatrix}
+= \det(J)
+J^{-T}
 \begin{bmatrix}
     - E_\theta \\
     E_r
 \end{bmatrix}
-= 
-\det(JD_{G}^{-1}) ((JD_{G}^{-1})^{-1})^{T}
-\begin{bmatrix}
-    - E_\theta \\
-    E_r
-\end{bmatrix}
-= 
-\det(J) (J^{-1})^{T} det(D_{G}^{-1}) D_G 
+= \det(J)
+J^{-T}
 \begin{bmatrix}
     A_r \\
     A_\theta
 \end{bmatrix}.
 \]
 </p>
-<p> So, from the advection field along the logical domain axis, we multiply by  </p><p class="formulaDsp">
-\[\det(J) det(D_{G}^{-1})  (J^{-1})^{T} D_G
-= 
-\begin{bmatrix}
-    \frac{j_{22}}{\sqrt{g_{22}}}  &amp; - \frac{j_{21}}{\sqrt{g_{11}}} \\
-    - \frac{j_{12}}{\sqrt{g_{22}}} &amp; \frac{j_{11}}{\sqrt{g_{11}}}
-\end{bmatrix},
-\]
-</p>
-<p> to get the advection field along the physical domain axis.</p>
+<p> So, from the advection field along the logical domain axis, we multiply by \(J^{-1}\) to get the advection field along the physical domain axis.</p>
 <h1><a class="anchor" id="autotoc_md53"></a>
 Unit tests</h1>
 <p>The test of the advection operator are implemented in the <code>tests/geometryRTheta/advection_2d_rp/</code> folder (<a class="el" href="tests_geometryRTheta_advection_2d_rp.html">Tests on the 2D polar advection operator</a>).</p>
@@ -342,7 +301,7 @@ Unit tests</h1>
 <li>\(A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)\).</li>
 </ul>
 </li>
-<li>simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]).<ul>
+<li>simulation 3: decentred rotation (test given in <a class="el" href="src_geometryRTheta_advection_field.html#zoni">Zoni et al. (2019)</a>).<ul>
 <li>\(f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)\),<ul>
 <li>with<ul>
 <li>\(G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r&lt;a}(r)\),</li>
@@ -362,16 +321,15 @@ Unit tests</h1>
  for \((N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)\) and then \((n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)\) for \(n = 1, 2, 4, 8,  ...\).</p>
 <h1><a class="anchor" id="autotoc_md54"></a>
 References</h1>
-<p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
+<p><a class="anchor" id="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019).</p>
 <h1><a class="anchor" id="autotoc_md55"></a>
 Contents</h1>
 <p>This folder contains:</p><ul>
-<li><a class="el" href="iadvectionrp_8hpp_source.html">iadvectionrp.hpp</a> : define the base class for advection operator (IAdvectionRP).<ul>
-<li><a class="el" href="bsl__advection__rp_8hpp_source.html">bsl_advection_rp.hpp</a> : define the advection operator described just before (BslAdvectionRP).</li>
+<li><a class="el" href="iadvection__rp_8hpp_source.html">iadvection_rp.hpp</a> : define the base class for advection operator (<a class="el" href="classIAdvectionRTheta.html" title="Define the base class of 2D advection operators in polar index range.">IAdvectionRTheta</a>).<ul>
+<li><a class="el" href="bsl__advection__rp_8hpp_source.html">bsl_advection_rp.hpp</a> : define the advection operator described just before (<a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a>). </li>
 </ul>
 </li>
-<li>spline_foot_finder.hpp : solve the characteristic equation thanks to a given time integration method (IFootFinder). </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

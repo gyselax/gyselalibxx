@@ -173,10 +173,10 @@ class AdvectionFieldFinder&lt; Mapping &gt;</div><p>Solve the Poisson-like equat
 <p>where \( \theta_1 \) and \( \theta_2 \) correspond to linearly independent directions.</p>
 <p>Then the advection field along the physical index range axis is given by \(A = E \wedge e_z\).</p>
 <p>2- In the second case, the advection field along the logical index range axis is computed with</p><ul>
-<li>\( \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j\),</li>
+<li>\( \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} e_j\),</li>
 <li>with \(g^{ij}\), the coefficients of the inverse metric tensor,</li>
 <li>\(g_{jj}\), the coefficients of the metric tensor,</li>
-<li>\(\hat{e}_j\), the normalised covariants vectors.</li>
+<li>\(e_j\), the unnormalized local covariants vectors.</li>
 </ul>
 <p>Then, we compute \( E = -\nabla \phi  \) and \(A = E \wedge e_z\).</p>
 <p>The equation (1) is solved thanks to advection operator (<a class="el" href="classIAdvectionRTheta.html" title="Define the base class of 2D advection operators in polar index range.">IAdvectionRTheta</a>).</p>

@@ -152,7 +152,7 @@ var NAVTREEINDEX5 =
 "geometry__pseudo__cartesian_8hpp_source.html":[16,0,10,9],
 "grid__builder_8hpp_source.html":[16,1,0,0],
 "i__interpolator__2d__rp_8hpp_source.html":[16,0,3,4,0],
-"iadvectionrp_8hpp_source.html":[16,0,3,0,1],
+"iadvection__rp_8hpp_source.html":[16,0,3,0,1],
 "iadvectionvx_8hpp_source.html":[16,0,0,3],
 "iadvectionx_8hpp_source.html":[16,0,0,4],
 "iboltzmannsolver_8hpp_source.html":[16,0,5,0,0],

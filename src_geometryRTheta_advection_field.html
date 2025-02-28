@@ -113,10 +113,14 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_advection_field.htm
 <h1><a class="anchor" id="src_geometryRTheta_advection_field__Guiding_centre_case"></a>
 Guiding centre case</h1>
 <p>The studied equation system is of the following type :  </p><p class="formulaDsp">
-\[\partial_t \rho + A\cdot\nabla \rho = 0, \\
+\[\left\{
+\begin{aligned}
+\partial_t \rho + A\cdot\nabla \rho = 0, \\
 A = E \wedge e_z, \\
 E = - \nabla  \phi, \\
 - \nabla \cdot \nabla \phi = \rho,
+\end{aligned}
+\right.
 \]
 </p>
 <p> with \(\rho\) the density, \(\phi\) the electrostatic potential and \(E\) the electrical field.</p>
@@ -129,10 +133,10 @@ E = - \nabla  \phi, \\
 <li>a <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> representation of the solution.</li>
 </ul>
 <p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> can handle as input the two forms. If a Field is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D. The spline representation is needed to compute the derivatives of the function \(\phi\). If the <a class="el" href="structPolarSplineMem.html" title="A structure containing the two FieldMems necessary to define a spline on a set of polar basis splines...">PolarSplineMem</a> representation is given as input, it can directly compute the derivatives of the function \(\phi\).</p>
-<p>Once the advection field computed, it is given as input to the BslAdvectionRP operator to advect the density \(\rho\) function. The BslAdvectionRP operator can handle the advection with an advection field along \((x,y)\) and with an advection field along \((r,\theta)\). But as the BslAdvectionRP operator advects in the physical domain, it is recommend to work with the advection field along \((x,y)\).</p>
+<p>Once the advection field computed, it is given as input to the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator to advect the density \(\rho\) function. The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator can handle the advection with an advection field along \((x,y)\) and with an advection field along \((r,\theta)\). But as the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator advects in the physical domain, it is recommended to work with the advection field along \((x,y)\).</p>
 <h3><a class="anchor" id="autotoc_md56"></a>
 Advection field along the physical domain axis</h3>
-<p>Thanks to the spline representation, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are computed. The computation of the electrical field can be ill-defined around the O-point so we treat this area separately.</p>
+<p>Thanks to the spline representation, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are computed. The computation of the electrical field can be ill-defined around the O-point, so we treat this area separately.</p>
 <ul>
 <li>If \(r &gt; \varepsilon\), we use  <p class="formulaDsp">
 \[\begin{bmatrix}
@@ -171,7 +175,7 @@ J^{-T}
 \]
 </p>
 </li>
-<li>If \(r \leq \varepsilon\), we linearise. The method is detailed in Edoardo Zoni's article [1]. We use only the derivatives along \(r\) at two linearly independent directions of \(\theta\) : \(\theta_1\) and \(\theta_2\)  <p class="formulaDsp">
+<li>If \(r \leq \varepsilon\), we linearise. The method is detailed in <a class="el" href="src_geometryRTheta_advection_field.html#zoni">Zoni et al. (2019)</a>. We use only the derivatives along \(r\) at two linearly independent directions of \(\theta\) : \(\theta_1\) and \(\theta_2\)  <p class="formulaDsp">
 \[\partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
 \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2).
 \]
@@ -224,44 +228,31 @@ General coordinates system</h4>
 <li>In <b>general coordinates system</b>, the gradient of a function is given by</li>
 </ul>
 <p class="formulaDsp">
-\[\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j, 
+\[\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j
 \]
 </p>
 <p> with</p><ul>
-<li>\(J\) the Jacobian matrix associated the the mapping function of the system \(\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)\),</li>
+<li>\(J\) the Jacobian matrix associated with the mapping function of the system \(\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)\),</li>
 <li>\(G = J^T J = [g_{ij}]_{ij}\) the metric tensor,</li>
 <li>\(G^{-1} = [g^{ij}]_{ij}\) the inverse metric tensor</li>
-<li>and \(\hat{e}_j\) the normalised covariant vectors.</li>
+<li>and \(e_j\) the unnormalised local covariant vectors.</li>
 </ul>
 <p>In 2D, it can be rewritten as the following matrix system  </p><p class="formulaDsp">
 \[\nabla f = 
-D_{G} G^{-T}
+G^{-1}
 \begin{bmatrix}
     \partial_{x_1} f \\
     \partial_{x_2} f \\
 \end{bmatrix}
-= 
-\begin{bmatrix}
-    \sqrt{g_{11}} &amp; 0 \\
-    0 &amp; \sqrt{g_{22}} \\
-\end{bmatrix}
-\begin{bmatrix}
-    g^{11} &amp; g^{21} \\
-    g^{12} &amp; g^{22} \\
-\end{bmatrix}
-\begin{bmatrix}
-    \partial_{x_1} f \\
-    \partial_{x_2} f \\
-\end{bmatrix}.
 \]
 </p>
-<p> <b>Remark:</b> We can prove that \(\det(D_{G} G^{-T}) = 0\) if \(\det(J) = 0\) (if the coefficients of the matrix \(D_G\) are not null). So for an invertible matrix, we also have the relation  </p><p class="formulaDsp">
+<p> So, for an invertible matrix, we also have the relation  </p><p class="formulaDsp">
 \[\begin{bmatrix}
     \partial_{x_1} f \\
     \partial_{x_2} f \\
 \end{bmatrix}
 = 
-G^{T}D_{G}^{-1} \nabla f. 
+G \nabla f. 
 \]
 </p>
 <p> From the relation  </p><p class="formulaDsp">
@@ -278,20 +269,22 @@ J^{-T}
 \]
 </p>
 <p> we deduce the following relation for invertible case  </p><p class="formulaDsp">
-\[\nabla_{y_1, y_2} f
-= 
-J D_{G}^{-1}
-\nabla_{x_1, x_2} f,
+\[\nabla_{y_1, y_2} f = J \nabla_{x_1, x_2} f,
 \]
 </p>
-<p> with \(\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T\) and \(\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j\).</p>
+<p> with \(\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T\) and \(\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j\).</p>
 <h4><a class="anchor" id="autotoc_md59"></a>
 Application to the advection field</h4>
 <ul>
 <li>In our case, we use this formula to compute the electric field along the logical axis:  <p class="formulaDsp">
 \[E
-= -\nabla \phi  
-= - D_{G} (G^{-1})^{T}
+= 
+\begin{bmatrix}
+    E_r \\
+    E_{\theta} \\
+\end{bmatrix}
+= - \nabla_{r,\theta} \phi  
+= - G^{-1}
 \begin{bmatrix}
     \partial_{r} \phi \\
     \partial_{\theta} \phi \\
@@ -308,10 +301,10 @@ Application to the advection field</h4>
 \end{bmatrix}.
 \]
 </p>
- Warning, the matrix \((G^{-1})^{T}\) is ill-defined for \(r = 0\).</li>
+ Warning, the matrix \(G^{-1}\) is ill-defined for \(r = 0\).</li>
 </ul>
 <p><em>Example: circular mapping:</em>  </p><p class="formulaDsp">
-\[(G^{-1})^{T}
+\[G^{-1}
 = 
 \begin{bmatrix}
     1 &amp; 0 \\
@@ -319,10 +312,10 @@ Application to the advection field</h4>
 \end{bmatrix}.
 \]
 </p>
-<p> In the code, the O-point is differently treated. The domain is split between a domain without the O-point ( \((0,\theta), \forall \theta\)) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the <em>Advection field along the physical domain axis</em> section.</p>
+<p> In the code, the O-point is differently treated. The domain is split between a domain without the O-point ( \((0,\theta), \forall \theta\)) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the <a class="el" href="src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case">Advection field along the physical domain axis</a> section.</p>
 <h1><a class="anchor" id="autotoc_md60"></a>
 References</h1>
-<p>[1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
+<p><a class="anchor" id="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 
 method of characteristics and spline finite elements", <a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>, Journal of Computational Physics, 2019.</p>
 <h1><a class="anchor" id="autotoc_md61"></a>
 Contents</h1>
