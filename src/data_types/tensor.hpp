@@ -89,7 +89,9 @@ public:
      */
     explicit KOKKOS_FUNCTION Tensor(ElementType fill_value)
     {
-        m_data.fill(fill_value);
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            m_data[i] = fill_value;
+        }
     }
 
     /**

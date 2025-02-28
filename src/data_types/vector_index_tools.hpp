@@ -9,6 +9,10 @@
 template <class... Dims>
 using VectorIndexSet = ddc::detail::TypeSeq<Dims...>;
 
+/**
+ * @namespace tensor_tools A namespace to group all the tools that are useful to
+ * carry out non-trivial operations on tensors.
+ */
 namespace tensor_tools {
 
 /**
@@ -106,6 +110,28 @@ struct vector_index_set_dual<VectorIndexSet<Dims...>>
 {
     /// A type alias describing the matching VectorIndexSet.
     using type = VectorIndexSet<typename Dims::Dual...>;
+};
+
+/**
+ * @brief A class representing a vector index identifier.
+ *
+ * A vector is indexed at a certain position using an identifier (a character)
+ * which can take one of multiple possible values (types).
+ *
+ * @tparam Id The character identifying the index.
+ * @tparam AssociatedVectorIndexSet The VectorIndexSet describing the indices
+ *              associated with this identifier.
+ */
+template <char Id, class AssociatedVectorIndexSet>
+struct VectorIndexIdMap
+{
+    static_assert(
+            tensor_tools::is_vector_index_set<AssociatedVectorIndexSet>::value,
+            "The possible index values must be described by a VectorIndexSet.");
+    /// The character identifying the index.
+    static constexpr char id = Id;
+    /// The VectorIndexSet describing valid indices for this component.
+    using possible_idx_values = AssociatedVectorIndexSet;
 };
 
 } // namespace tensor_tools
