@@ -15,11 +15,15 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
+#include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "mpichargedensitycalculator.hpp"
+#include "mpisplitvlasovsolver.hpp"
+#include "mpitransposealltoall.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
@@ -31,7 +35,6 @@
 #include "species_info.hpp"
 #include "species_init.hpp"
 #include "spline_interpolator.hpp"
-#include "splitvlasovsolver.hpp"
 
 using std::cerr;
 using std::endl;
@@ -50,42 +53,51 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    IdxRangeX const mesh_x = init_spline_dependent_idx_range<
+    IdxRangeX const idxrange_x = init_spline_dependent_idx_range<
             GridX,
             BSplinesX,
             SplineInterpPointsX>(conf_voicexx, "x");
-    IdxRangeY const mesh_y = init_spline_dependent_idx_range<
+    IdxRangeY const idxrange_y = init_spline_dependent_idx_range<
             GridY,
             BSplinesY,
             SplineInterpPointsY>(conf_voicexx, "y");
-    IdxRangeVx const mesh_vx = init_spline_dependent_idx_range<
+    IdxRangeVx const idxrange_vx = init_spline_dependent_idx_range<
             GridVx,
             BSplinesVx,
             SplineInterpPointsVx>(conf_voicexx, "vx");
-    IdxRangeVy const mesh_vy = init_spline_dependent_idx_range<
+    IdxRangeVy const idxrange_vy = init_spline_dependent_idx_range<
             GridVy,
             BSplinesVy,
             SplineInterpPointsVy>(conf_voicexx, "vy");
-    IdxRangeXY const mesh_xy(mesh_x, mesh_y);
-    IdxRangeVxVy mesh_vxvy(mesh_vx, mesh_vy);
-    IdxRangeXYVxVy const meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
+    IdxRangeXY const idxrange_xy(idxrange_x, idxrange_y);
+    IdxRangeVxVy idxrange_vxvy(idxrange_vx, idxrange_vy);
+    IdxRangeXYVxVy const idxrange_xyvxvy(idxrange_x, idxrange_y, idxrange_vx, idxrange_vy);
 
     IdxRangeSp const idx_range_kinsp = init_species(conf_voicexx);
 
-    IdxRangeSpVxVy const meshSpVxVy(idx_range_kinsp, mesh_vx, mesh_vy);
-    IdxRangeSpXYVxVy const meshSpXYVxVy(idx_range_kinsp, meshXYVxVy);
+    IdxRangeSpXYVxVy const idxrange_glob_spxyvxvy(idx_range_kinsp, idxrange_xyvxvy);
 
-    SplineXBuilder const builder_x(meshXYVxVy);
-    SplineYBuilder const builder_y(meshXYVxVy);
-    SplineVxBuilder const builder_vx(meshXYVxVy);
-    SplineVyBuilder const builder_vy(meshXYVxVy);
+    MPITransposeAllToAll<X2DSplit, V2DSplit> transpose(idxrange_glob_spxyvxvy, MPI_COMM_WORLD);
 
+    IdxRangeSpXYVxVy idxrange_spxyvxvy_x2Dsplit(transpose.get_local_idx_range<X2DSplit>());
+    IdxRangeSpVxVyXY idxrange_spvxvyxy_v2Dsplit(transpose.get_local_idx_range<V2DSplit>());
+
+    IdxRangeVxVy idxrange_vxvy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
+
+    IdxRangeVxVyXY idxrange_vyxyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
+    IdxRangeXYVxVy idxrange_vyxyxy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
+    SplineXBuilder const builder_x(idxrange_vyxyxy_v2Dsplit);
+    SplineYBuilder const builder_y(idxrange_vyxyxy_v2Dsplit);
+    SplineVxBuilder const builder_vx(idxrange_vyxyxy_x2Dsplit);
+    SplineVyBuilder const builder_vy(idxrange_vyxyxy_x2Dsplit);
+
+    IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
-    DFieldMemSpVxVy allfequilibrium(meshSpVxVy);
+    DFieldMemSpVxVy allfequilibrium(idxrange_spvxvy_local);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
     init_fequilibrium(get_field(allfequilibrium));
-    DFieldMemSpXYVxVy allfdistribu(meshSpXYVxVy);
+    DFieldMemSpXYVxVy allfdistribu(idxrange_spxyvxvy_x2Dsplit);
     SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
             init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
     init(get_field(allfdistribu));
@@ -112,32 +124,38 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolator const spline_y_interpolator(builder_y, spline_y_evaluator);
 
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(mesh_vx.front()));
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(mesh_vx.back()));
+    ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(idxrange_vx.front()));
+    ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(idxrange_vx.back()));
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator);
 
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(mesh_vy.front()));
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(mesh_vy.back()));
+    ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(idxrange_vy.front()));
+    ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(idxrange_vy.back()));
     SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
 
     PreallocatableSplineInterpolator const spline_vy_interpolator(builder_vy, spline_vy_evaluator);
 
     // Create advection operator
-    BslAdvectionSpatial<GeometryXYVxVy, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionSpatial<GeometryXYVxVy, GridY> const advection_y(spline_y_interpolator);
+    BslAdvectionSpatial<GeometryVxVyXY, GridX> const advection_x(spline_x_interpolator);
+    BslAdvectionSpatial<GeometryVxVyXY, GridY> const advection_y(spline_y_interpolator);
     BslAdvectionVelocity<GeometryXYVxVy, GridVx> const advection_vx(spline_vx_interpolator);
     BslAdvectionVelocity<GeometryXYVxVy, GridVy> const advection_vy(spline_vy_interpolator);
 
-    SplitVlasovSolver const vlasov(advection_x, advection_y, advection_vx, advection_vy);
+    MpiSplitVlasovSolver const
+            vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
     DFieldMemVxVy const quadrature_coeffs(
             neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(mesh_vxvy, builder_vx, builder_vy));
+                    Kokkos::DefaultExecutionSpace>(idxrange_vxvy, builder_vx, builder_vy));
+    DFieldMemVxVy local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
+    ddc::parallel_deepcopy(
+            get_field(local_quadrature_coeffs),
+            quadrature_coeffs[idxrange_vxvy_v2Dsplit]);
 
-    FFTPoissonSolver<IdxRangeXY> fft_poisson_solver(mesh_xy);
-    ChargeDensityCalculator const rhs(get_const_field(quadrature_coeffs));
+    FFTPoissonSolver<IdxRangeXY> fft_poisson_solver(idxrange_xy);
+    ChargeDensityCalculator const rhs_local(get_const_field(local_quadrature_coeffs));
+    MpiChargeDensityCalculator const rhs(MPI_COMM_WORLD, rhs_local);
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     // Create predcorr operator
@@ -148,10 +166,10 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("Ny_spline_cells", ddc::discrete_space<BSplinesY>().ncells());
     ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space<BSplinesVx>().ncells());
     ddc::expose_to_pdi("Nvy_spline_cells", ddc::discrete_space<BSplinesVy>().ncells());
-    expose_mesh_to_pdi("MeshX", mesh_x);
-    expose_mesh_to_pdi("MeshY", mesh_y);
-    expose_mesh_to_pdi("MeshVx", mesh_vx);
-    expose_mesh_to_pdi("MeshVy", mesh_vy);
+    expose_mesh_to_pdi("MeshX", idxrange_x);
+    expose_mesh_to_pdi("MeshY", idxrange_y);
+    expose_mesh_to_pdi("MeshVx", idxrange_vx);
+    expose_mesh_to_pdi("MeshVy", idxrange_vy);
     ddc::expose_to_pdi("nbstep_diag", nbstep_diag);
     ddc::expose_to_pdi("Nkinspecies", idx_range_kinsp.size());
     ddc::expose_to_pdi(

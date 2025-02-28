@@ -2,6 +2,7 @@
 
 add_library("poisson_xy" STATIC
     chargedensitycalculator.cpp
+    mpichargedensitycalculator.cpp
     nullqnsolver.cpp
     qnsolver.cpp
 )
