@@ -203,7 +203,7 @@ class ManufacturedPoissonTest
 {
 public:
     /**
-     * @brief Type the choosen solution of the Poisson equation.
+     * @brief Type the chosen solution of the Poisson equation.
      */
     using CurvilinearToCartesian = typename ChosenSolution::coordinate_converter_type;
 

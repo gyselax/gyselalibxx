@@ -37,7 +37,7 @@ The tests are made for different parameters which are:
 
 ## Python tests
 
-- animated\_curves.py: create `.mp4` video(s) of the advected function for the selected configuations among the 48 test ones.
+- animated\_curves.py: create `.mp4` video(s) of the advected function for the selected configurations among the 48 test ones.
 	- Command to launch the test in this folder: `python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL`
 	or `python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/<selected advection test case>`
 

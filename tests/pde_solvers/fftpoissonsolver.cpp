@@ -69,7 +69,7 @@ TEST(FftPoissonSolver, CosineSource)
     host_t<DFieldMemX> electric_field_host(gridx);
     host_t<DFieldMemX> rhs_host(gridx);
 
-    // Initialization of the distribution function --> fill values
+    // Initialisation of the distribution function --> fill values
     for (IdxX const ix : gridx) {
         rhs_host(ix) = cos(ddc::coordinate(ix));
     }
@@ -119,7 +119,7 @@ TEST(FftPoissonSolver, BatchedCosineSource)
     host_t<DFieldMemXY> electric_field_host(gridxy);
     host_t<DFieldMemXY> rhs_host(gridxy);
 
-    // Initialization of the distribution function --> fill values
+    // Initialisation of the distribution function --> fill values
     for (IdxX const ix : gridx) {
         double const c = (ix - gridx.front()) + 1;
         for (IdxY const iy : gridy) {
@@ -180,7 +180,7 @@ static void TestFftPoissonSolver2DCosineSource()
     VectorField electric_field = get_field(electric_field_alloc);
     DFieldXY rhs = get_field(rhs_alloc);
 
-    // Initialization of the distribution function --> fill values
+    // Initialisation of the distribution function --> fill values
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             gridxy,

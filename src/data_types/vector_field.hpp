@@ -411,7 +411,7 @@ namespace detail {
  * @brief Get a new `VectorField` type with the same parametrisation
  * except in the memory space which is set to NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
+ * @tparam ElementType Type of the elements in the ddc::Chunk of the VectorFieldMem.
  * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
  * @tparam NDTag NDTag object storing directions of the VectorFieldMem as dimensions. 
  *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 

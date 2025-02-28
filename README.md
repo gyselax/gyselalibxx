@@ -67,7 +67,7 @@ Then execute the following:
 ```sh
 spack env create gyselalibxx spack.yaml
 spack env activate gyselalibxx
-spack concretize --reuse
+spack concretise --reuse
 spack install
 ```
 

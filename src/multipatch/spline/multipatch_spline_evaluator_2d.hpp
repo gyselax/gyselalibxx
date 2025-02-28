@@ -17,7 +17,7 @@
 /**
  * @brief A class to evaluate all the splines of all the patches at once.
  * 
- * This class computes the evaluations of the splines defined on each pacth at 
+ * This class computes the evaluations of the splines defined on each patch at 
  * given coordinates. The class does not need to instantiate in advance individual 
  * spline evaluators. The coordinates are stored in fields on each patch. On a given 
  * storing patch, we do not enforce that a coordinate is physically located on this 
@@ -45,7 +45,7 @@
  * @tparam ExtrapolationRule The extrapolation rule type for outside of the global domain. 
  * @tparam ValuesOnPatch A Field type storing the evaluated values of the splines. Template on the Patch. 
  * @tparam PatchLocator A operator that finds the patch where a given coordinate is physically located. 
- * @tparam Pacthes A variadic template of all the patches. 
+ * @tparam Patches A variadic template of all the patches. 
  */
 template <
         class ExecSpace,
@@ -206,7 +206,7 @@ private:
     static_assert(
             is_onion_patch_locator_v<PatchLocator>,
             "Operator currently works only on analytical mappings and patches on the same logical "
-            "continous dimension. E.g. OnionPatchLocator.");
+            "continuous dimension. E.g. OnionPatchLocator.");
 
 
     // Members -----------------------------------------------------------------------------------
@@ -712,7 +712,7 @@ private:
 
     // Evaluation functions ----------------------------------------------------------------------
 
-    /// @brief Evaluate the given spline at the given coordinate without carring of the boundary
+    /// @brief Evaluate the given spline at the given coordinate without carrying of the boundary
     /// conditions.
     template <class EvalType1, class EvalType2, class Patch, class Layout>
     KOKKOS_INLINE_FUNCTION double eval_no_bc(

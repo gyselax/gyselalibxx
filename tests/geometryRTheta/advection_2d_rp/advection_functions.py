@@ -288,7 +288,7 @@ def distance(x1, y1, x2, y2):
 
     Returns
     -------
-        The distance between the two poins.
+        The distance between the two points.
     """
     Distance = np.sqrt((x1 - x2)**2 + (y1 - y2)**2)
     return Distance

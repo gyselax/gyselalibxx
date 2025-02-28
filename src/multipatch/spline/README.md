@@ -85,7 +85,7 @@ The methods implemented are
 * `deriv_dim_1()`, `deriv_dim_2()` to compute derivatives on the first or second dimension on a single coordinates or fields of coordinates. 
 * `deriv<InterestDim>()` to compute derivatives on the first or second dimension on a single coordinates only.
 * `deriv_1_and_2()` to compute cross-derivatives n a single coordinates or fields of coordinates. 
-* `integrate()` to compute the integral on each pacth. The integral are stored in a `Kokkos::View` defined on host and of the same size as the number of patches. 
+* `integrate()` to compute the integral on each patch. The integral are stored in a `Kokkos::View` defined on host and of the same size as the number of patches. 
 
 
 **Warning:** The current version of `MultipatchSplineEvaluator2D` does not work on batched domain. 

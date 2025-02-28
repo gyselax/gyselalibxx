@@ -38,13 +38,13 @@ public:
     virtual void set_element(int i, int j, double a_ij) = 0;
 
     /**
-     * @brief Factorize the matrix.
+     * @brief Factorise the matrix.
      * This method prepares the matrix for a call to the solve methods.
-     * For most matrix types a call to factorize causes the LU decomposition
+     * For most matrix types a call to factorise causes the LU decomposition
      * to be calculated. The elements of the matrix should not be accessed
      * once this method has been called.
      */
-    virtual void factorize();
+    virtual void factorise();
 
     /**
      * @brief Solve the matrix equation in place.
@@ -170,7 +170,7 @@ protected:
      *
      * @return The LAPACK error code.
      */
-    virtual int factorize_method() = 0;
+    virtual int factorise_method() = 0;
 
     /**
      * @brief Call the LAPACK solve method.

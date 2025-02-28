@@ -146,7 +146,7 @@ public:
             // Save the old characteristic feet
             base_type::copy(y_old, get_const_field(y));
 
-            // Re-initialiase the characteristic feet
+            // Re-initialise the characteristic feet
             base_type::copy(y, get_const_field(y_init));
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)

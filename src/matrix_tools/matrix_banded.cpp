@@ -72,7 +72,7 @@ void Matrix_Banded::set_element(int const i, int const j, double const a_ij)
     }
 }
 
-int Matrix_Banded::factorize_method()
+int Matrix_Banded::factorise_method()
 {
     int info;
     dgbtrf_(&n, &n, &kl, &ku, q.get(), &c, ipiv.get(), &info);

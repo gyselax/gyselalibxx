@@ -39,9 +39,9 @@ double SpatialAdvection(
     IdxRangeSp const idx_range_allsp(IdxSp(0), nb_species);
     IdxSp const i_elec = idx_range_allsp.front();
     IdxSp const i_ion = idx_range_allsp.back();
-    //Mesh Initialization
+    //Mesh Initialisation
     IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
-    // Charge Initialization
+    // Charge Initialisation
     host_t<DFieldMemSp> masses_host(idx_range_allsp);
     host_t<DFieldMemSp> charges_host(idx_range_allsp);
 
@@ -49,9 +49,9 @@ double SpatialAdvection(
     masses_host(i_ion) = 1.;
     charges_host(i_elec) = -1.;
     charges_host(i_ion) = 1.;
-    // Initialization Species index range
+    // Initialisation Species index range
     ddc::init_discrete_space<Species>(std::move(charges_host), std::move(masses_host));
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     host_t<DFieldMemSpXVx> allfdistribu_host(meshSpXVx);
     ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxX const ix = ddc::select<GridX>(ispxvx);

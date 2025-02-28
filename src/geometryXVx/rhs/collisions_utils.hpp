@@ -12,7 +12,7 @@
 /**
 * @brief Compute the collisionality spatial profile.
 * @param[inout] nustar_profile The collisionality profile.
-* @param[in] nustar0 normalized collisionality coefficient.
+* @param[in] nustar0 normalised collisionality coefficient.
 */
 void compute_nustar_profile(DFieldSpX nustar_profile, double nustar0);
 

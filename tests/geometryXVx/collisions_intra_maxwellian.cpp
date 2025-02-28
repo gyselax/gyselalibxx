@@ -67,11 +67,11 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     masses(my_ielec) = mass_elec;
     masses(my_iion) = mass_ion;
 
-    // Initialization of the distribution function as a maxwellian
+    // Initialisation of the distribution function as a maxwellian
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
     DFieldMemSpXVx allfdistribu(mesh);
 
-    // Initialization of the distribution function as a maxwellian with
+    // Initialisation of the distribution function as a maxwellian with
     // moments depending on space
     host_t<DFieldMemSpX> density_init_host(ddc::select<Species, GridX>(mesh));
     host_t<DFieldMemSpX> mean_velocity_init_host(ddc::select<Species, GridX>(mesh));

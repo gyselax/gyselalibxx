@@ -77,7 +77,7 @@ public:
      * @brief Instantiate a DiscreteToCartesian from the coefficients of 2D splines approximating the mapping.
      *
      * A discrete mapping is a mapping whose values are known only at the mesh points of the grid.
-     * To interpolate the mapping, we use B-splines. The DiscreteToCartesian mapping is initialized
+     * To interpolate the mapping, we use B-splines. The DiscreteToCartesian mapping is initialised
      * from the coefficients in front of the basis splines which arise when we approximate the
      * functions @f$ x(r,\theta) @f$, and @f$ y(r,\theta) @f$ (with @f$ x @f$ and @f$ y @f$ the physical dimensions in
      * the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping,

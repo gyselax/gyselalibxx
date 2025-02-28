@@ -5,10 +5,10 @@ The operator implemented here is a previous step to the advection operator.
 It computes the advection field along the axes in the physical domain or the axes in the logical domain.
 
 Currently, the implemented case is:
-* Guiding center equations system.
+* Guiding centre equations system.
 
 
-## Guiding center case
+## Guiding centre case
 
 The studied equation system is of the following type : 
 ```math
@@ -137,7 +137,7 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here. 
 
 #### General coordinates system 
-* In **general coordinates system**, the gradiant of a function is given by 
+* In **general coordinates system**, the gradient of a function is given by 
 
 ```math
 \nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j, 
@@ -147,7 +147,7 @@ with
 * $`J`$ the Jacobian matrix associated the the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
 * $`G = J^T J = [g_{ij}]_{ij}`$ the metric tensor, 
 * $`G^{-1} = [g^{ij}]_{ij}`$ the inverse metric tensor 
-* and $`\hat{e}_j`$ the normalized covariant vectors. 
+* and $`\hat{e}_j`$ the normalised covariant vectors. 
 
 In 2D, it can be rewritten as the following matrix system 
 ```math
@@ -208,7 +208,7 @@ J D_{G}^{-1}
 with $`\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T`$ and $`\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j`$.
 
 
-#### Aplication to the advection field
+#### Application to the advection field
 * In our case, we use this formula to compute the electric field along the logical axis: 
 ```math
 E
@@ -243,7 +243,7 @@ Warning, the matrix $`(G^{-1})^{T}`$ is ill-defined for $r = 0$.
 \end{bmatrix}.
 ```
 
-In the code, the O-point is differently treated. The domain is splitted between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the *Advection field along the physical domain axis* section. 
+In the code, the O-point is differently treated. The domain is split between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the *Advection field along the physical domain axis* section. 
 
 
 
@@ -255,4 +255,4 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 
 # Contents
 
-* advection\_field\_rp.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding center simulation. 
+* advection\_field\_rp.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation. 

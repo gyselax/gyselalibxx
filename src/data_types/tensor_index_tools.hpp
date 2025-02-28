@@ -58,7 +58,9 @@ private:
                  ddc::type_seq_element_t<Is, ValidatingTensorIndexSet>>)&&...);
     }
 
-    static_assert(valid_indices(std::make_index_sequence<sizeof...(Dims)>()));
+    static_assert(
+            valid_indices(std::make_index_sequence<sizeof...(Dims)>()),
+            "Index is not compatible with tensor type");
 
     template <std::size_t... Is>
     KOKKOS_FUNCTION static constexpr std::size_t internal_index(std::index_sequence<Is...>)

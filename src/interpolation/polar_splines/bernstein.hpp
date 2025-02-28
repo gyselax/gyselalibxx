@@ -17,7 +17,7 @@
  * Where @f$ \lambda_1 @f$, @f$ \lambda_2 @f$, and @f$ \lambda_3 @f$ are the barycentric coordinates of @f$ (x,y) @f$
  *
  * c.f. Toshniwal et al. 2017
- * Multi-degree smooth polar splines: A framework for geometric modeling and isogeometric analysis
+ * Multi-degree smooth polar splines: A framework for geometric modelling and isogeometric analysis
  * https://doi.org/10.1016/j.cma.2016.11.009
  *
  * @tparam X The first dimension of the Cartesian coordinate system.

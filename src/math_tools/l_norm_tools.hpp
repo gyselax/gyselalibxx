@@ -20,7 +20,7 @@
  * @param[in] coord
  *      The given vector.
  *
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class... Tags>
 KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
@@ -39,7 +39,7 @@ KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
  *
  * @param[in] vec The given vector.
  *
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class... Tags>
 KOKKOS_FUNCTION double norm_inf(DVector<Tags...> vec)
@@ -62,7 +62,7 @@ KOKKOS_FUNCTION double norm_inf(DVector<Tags...> vec)
  * @param[in] coord
  *      The given double.
  *
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 KOKKOS_INLINE_FUNCTION double norm_inf(double const coord)
 {
@@ -114,8 +114,8 @@ double error_norm_inf(ExecSpace exec_space, FuncType function, FuncType exact_fu
 /**
  * @brief Compute the infinity norm for a Field.
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
- * @param[in] function The function whose norm is calcuated.
- * @return A double containing the value of the infinty norm.
+ * @param[in] function The function whose norm is calculated.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, class ElementType, class IdxRange>
 inline double norm_inf(
@@ -128,8 +128,8 @@ inline double norm_inf(
 /**
  * @brief Compute the infinity norm for a VectorField.
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
- * @param[in] function The function whose norm is calcuated.
- * @return A double containing the value of the infinty norm.
+ * @param[in] function The function whose norm is calculated.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, class ElementType, class IdxRange, class NDTag>
 inline double norm_inf(
@@ -144,7 +144,7 @@ inline double norm_inf(
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] function The calculated function.
  * @param[in] exact_function The exact function with which the calculated function is compared.
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, class ElementType, class IdxRange>
 inline double error_norm_inf(
@@ -160,7 +160,7 @@ inline double error_norm_inf(
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] function The calculated function.
  * @param[in] exact_function The exact function with which the calculated function is compared.
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, class ElementType, class IdxRange, class NDTag>
 inline double error_norm_inf(
@@ -204,7 +204,7 @@ double norm_L1(
  * @param[in] quadrature The quadrature used to compute the integral.
  * @param[in] function The calculated function.
  * @param[in] exact_function The exact function with which the calculated function is compared.
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class IdxRangeQuad, class ExecSpace>
 double error_norm_L1(
@@ -254,7 +254,7 @@ double norm_L2(
  * @param[in] quadrature The quadrature used to compute the integral.
  * @param[in] function The calculated function.
  * @param[in] exact_function The exact function with which the calculated function is compared.
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class IdxRangeQuad, class ExecSpace>
 double error_norm_L2(
