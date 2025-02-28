@@ -34,7 +34,7 @@ public:
     using tensor_type = TensorType;
 
     static_assert(
-            std::is_same_v<index_pattern, type_seq_unique_t<index_pattern>>,
+            type_seq_has_unique_elements_v<index_pattern>,
             "You should not have more than two of any one index in an index expression. "
             "Additionally repeated indices should not be associated with two covariant or two "
             "contravariant indices.");

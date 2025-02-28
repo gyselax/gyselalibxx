@@ -83,3 +83,11 @@ using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
  */
 template <class StartTypeSeq>
 using type_seq_unique_t = typename detail::GetUnique<StartTypeSeq>::type;
+
+/**
+ * @brief Determine if a type sequence only contains unique elements.
+ * @tparam TypeSeqType The type sequence being examined.
+ */
+template <class TypeSeqType>
+constexpr bool type_seq_has_unique_elements_v
+        = std::is_same_v<TypeSeqType, type_seq_unique_t<TypeSeqType>>;
