@@ -390,20 +390,18 @@ void simulate(
         ddcHelper::get<Y>(advection_field_test_vec_host)(irp) = ddc::get<Y>(advection_field);
     });
 
-    auto allfdistribu = ddc::
-                create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(allfdistribu_test));
+    auto allfdistribu = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(allfdistribu_test));
 
     auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
-                Kokkos::DefaultExecutionSpace(),
-                get_field(advection_field_test_vec_host));
+            Kokkos::DefaultExecutionSpace(),
+            get_field(advection_field_test_vec_host));
 
     // SIMULATION -------------------------------------------------------------------------------
     // Advect "iteration_number" times:
     for (int i(0); i < iteration_number; ++i) {
-        advection_operator(
-                get_field(allfdistribu),
-                get_const_field(advection_field_xy),
-                dt);
+        advection_operator(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
 
         // Save the advected function for each iteration:
         if (save_curves) {

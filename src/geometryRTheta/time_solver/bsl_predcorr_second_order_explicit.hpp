@@ -235,10 +235,7 @@ public:
             auto advection_field = ddcHelper::create_mirror_view_and_copy(
                     Kokkos::DefaultExecutionSpace(),
                     advection_field_host);
-            m_advection_solver(
-                    get_field(allfdistribu_predicted),
-                    get_field(advection_field),
-                    dt);
+            m_advection_solver(get_field(allfdistribu_predicted), get_field(advection_field), dt);
 
             // --- advect also the feet because it is needed for the next step
             host_t<FieldMemRTheta<CoordRTheta>> feet_coords(grid);

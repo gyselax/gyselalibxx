@@ -169,7 +169,10 @@ public:
                       auto advection_field = ddcHelper::create_mirror_view_and_copy(
                               Kokkos::DefaultExecutionSpace(),
                               advection_field_host);
-                      m_advection_solver(get_field(allfdistribu), get_const_field(advection_field), dt);
+                      m_advection_solver(
+                              get_field(allfdistribu),
+                              get_const_field(advection_field),
+                              dt);
                       ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
                   };
 
