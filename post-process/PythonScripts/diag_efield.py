@@ -137,7 +137,7 @@ def plot_epot_atonetime(epot: xr.DataArray,
 
     nb_time = epot.sizes["time"]
     assert(itime < nb_time)
-    it_array = [0, itime, -1]
+    itime_array = [0, itime, -1]
     time_diag = epot.coords["time"].values[itime]
 
     line_type = ['-b', '-r', '-g']
@@ -165,10 +165,10 @@ def plot_epot_atonetime(epot: xr.DataArray,
 
     # plot 3: E(x) for 3 times
     ix3 = 2
-    for iit, it in enumerate(it_array):
+    for itime_index, itime_val in enumerate(itime_array):
         axs[ix3].plot(epot.coords['x'],
-                      epot.isel(time=it),
-                      line_type[iit],
+                      epot.isel(time=itime_val),
+                      line_type[itime_index],
                       label=f't= {epot.coords["time"].values[itime]}')
     axs[ix3].set_xlabel(f"${epot.coords['x'].name}$", fontsize=12)
     axs[ix3].set_ylabel('epot', fontsize=12)
