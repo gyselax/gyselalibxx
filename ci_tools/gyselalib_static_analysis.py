@@ -505,6 +505,25 @@ def update_aliases(all_files):
     geom_files = [f for f in all_files if (f.file.name.startswith('geometry') and f.file.suffix == '.hpp') or 'geometries' in f.file.parts]
     multipatch_geom_file_names = {f.file.name: f for f in geom_files if f.file.name != 'geometry.hpp'}
 
+    for file in geom_files:
+        if not file.configs:
+            continue
+        directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
+                            if Path(d.attrib['file']) == file.file}
+        include_directives = {linenr: words[1] for linenr, words in directives.items() if len(words)>1 and words[0] == '#include'}
+        for linenr, include_str in include_directives.items():
+            include_file = include_str[1:-1]
+            if include_file == 'species_info.hpp':
+                file.aliases.update(spec_file.aliases)
+            elif include_file.startswith('geometry') and include_file.endswith('.hpp'):
+                relevant_geom = next((p for p in file.file.parts if p.startswith('geometry')), DEFAULT_GEOMETRY)
+                geom_file = next((f for f in geom_files if relevant_geom in f.file.parts), None)
+                if geom_file is None:
+                    geom_file = next(f for f in geom_files if DEFAULT_GEOMETRY in f.file.parts)
+                if file.file.name == 'gridneutralconstantinit.cpp':
+                    print(geom)
+                file.aliases.update(geom_file.aliases)
+
     for file in all_files:
         if not file.configs:
             continue
@@ -515,14 +534,18 @@ def update_aliases(all_files):
             include_file = include_str[1:-1]
             if include_file == 'species_info.hpp':
                 file.aliases.update(spec_file.aliases)
-            elif include_file == 'geometry.hpp':
+            elif include_file.startswith('geometry') and include_file.endswith('.hpp'):
                 relevant_geom = next((p for p in file.file.parts if p.startswith('geometry')), DEFAULT_GEOMETRY)
                 geom_file = next((f for f in geom_files if relevant_geom in f.file.parts), None)
                 if geom_file is None:
                     geom_file = next(f for f in geom_files if DEFAULT_GEOMETRY in f.file.parts)
+                if file.file.name == 'gridneutralconstantinit.cpp':
+                    print(geom)
                 file.aliases.update(geom_file.aliases)
             elif include_file in multipatch_geom_file_names:
                 file.aliases.update(multipatch_geom_file_names[include_file].aliases)
+        if file.file.name == 'gridneutralconstantinit.cpp':
+            print(file.file, file.aliases.keys())
 
 
 def check_kokkos_lambda_use(file):
@@ -653,7 +676,7 @@ def check_exec_space_usage(file):
                 type_descr = ' '.join(type_elements)
 
             # If the type is a Field or a FieldMem then identify the space where the memory is located
-            if (type_elements[0] in field_types) or (type_elements[0] == 'host_t' and type_elements[1] in field_types):
+            if (type_elements[0] in field_types) or (type_elements[0] == 'host_t' and type_elements[2] in field_types):
                 attribs = v.attrib
                 attribs['type'] = type_descr
                 field_variables[name] = attribs
