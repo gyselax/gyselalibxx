@@ -104,7 +104,9 @@ template <
         std::size_t Is,
         class ResultIndexedTensorType,
         class... IndexedTensorType>
-KOKKOS_FUNCTION void internal_tensor_mul_elem(ResultIndexedTensorType& result, IndexedTensorType const&... t)
+KOKKOS_FUNCTION void internal_tensor_mul_elem(
+        ResultIndexedTensorType& result,
+        IndexedTensorType const&... t)
 {
     using TensorTuple = std::tuple<typename IndexedTensorType::tensor_type...>;
     using ElementType = typename std::tuple_element_t<0, TensorTuple>::element_type;
