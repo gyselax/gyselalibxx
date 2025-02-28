@@ -358,3 +358,32 @@ TEST(TensorTest, Mul)
     int E = tensor_mul(index<'i', 'j'>(A), index<'j', 'i'>(B));
     EXPECT_EQ(E, 42);
 }
+
+TEST(TensorTest, MulConst)
+{
+    using Tensor2D_A = Tensor<int, VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>>;
+    using Tensor2D_B
+            = Tensor<int, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>;
+    using Tensor2D_C = Tensor<int, VectorIndexSet<R, Theta>, VectorIndexSet<R_cov, Theta_cov>>;
+    Tensor2D_A A;
+    Tensor2D_B B;
+    ddcHelper::get<R, R>(A) = 1;
+    ddcHelper::get<R, Theta>(A) = 0;
+    ddcHelper::get<Theta, R>(A) = 2;
+    ddcHelper::get<Theta, Theta>(A) = 4;
+    ddcHelper::get<R_cov, R_cov>(B) = 6;
+    ddcHelper::get<R_cov, Theta_cov>(B) = 8;
+    ddcHelper::get<Theta_cov, R_cov>(B) = 4;
+    ddcHelper::get<Theta_cov, Theta_cov>(B) = 5;
+    Tensor2D_A const& A_const(A);
+    Tensor2D_B const& B_const(B);
+    Tensor2D_C C = tensor_mul(index<'i', 'j'>(A_const), index<'j', 'k'>(B_const));
+    int val = ddcHelper::get<R, R_cov>(C);
+    EXPECT_EQ(val, 6);
+    val = ddcHelper::get<R, Theta_cov>(C);
+    EXPECT_EQ(val, 8);
+    val = ddcHelper::get<Theta, R_cov>(C);
+    EXPECT_EQ(val, 28);
+    val = ddcHelper::get<Theta, Theta_cov>(C);
+    EXPECT_EQ(val, 36);
+}
