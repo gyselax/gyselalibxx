@@ -281,7 +281,7 @@ def compute_intFdv(F, v):
     intFdv = np.zeros([nt, nx])
     for ix in np.arange(nx):
         for it in np.arange(nt):
-            intFdv[it, ix] = integrate.simps(F[it, ix, :], v)
+            intFdv[it, ix] = integrate.simpson(F[it, ix, :], v)
 
     return intFdv
 
