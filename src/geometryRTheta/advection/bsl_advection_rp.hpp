@@ -6,7 +6,7 @@
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "i_interpolator_2d_rp.hpp"
-#include "iadvectionrp.hpp"
+#include "iadvection_rp.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_2d_rp.hpp"
 #include "spline_polar_foot_finder.hpp"
@@ -173,25 +173,20 @@ public:
         // Convert advection field on RTheta to advection field on XY
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_host(grid);
 
-        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
+        InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
 
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-            std::array<std::array<double, 2>, 2> J; // Jacobian matrix
-            m_mapping.jacobian_matrix(coord_rp, J);
-            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> G = metric_tensor(coord_rp);
+            std::array<std::array<double, 2>, 2> inv_J = inv_jacobian_matrix(coord_rp);
+            double const jacobian = m_mapping.jacobian(coord_rp);
 
             ddcHelper::get<X>(advection_field_xy_host)(irp)
-                    = ddcHelper::get<R>(advection_field_rp)(irp) * J[1][1]
-                              / std::sqrt(ddcHelper::get<Theta, Theta>(G))
-                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * -J[1][0]
-                                / std::sqrt(ddcHelper::get<R, R>(G));
+                    = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][0] * jacobian
+                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][0] * jacobian;
             ddcHelper::get<Y>(advection_field_xy_host)(irp)
-                    = ddcHelper::get<R>(advection_field_rp)(irp) * -J[0][1]
-                              / std::sqrt(ddcHelper::get<Theta, Theta>(G))
-                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * J[0][0]
-                                / std::sqrt(ddcHelper::get<R, R>(G));
+                    = ddcHelper::get<R>(advection_field_rp)(irp) * inv_J[0][1] * jacobian
+                      + ddcHelper::get<Theta>(advection_field_rp)(irp) * inv_J[1][1] * jacobian;
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irp) {

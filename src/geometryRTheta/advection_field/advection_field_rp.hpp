@@ -68,10 +68,10 @@
  * 
  * 2- In the second case, the advection field along the logical index range axis
  * is computed with 
- * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} \sqrt{g_{jj}} \hat{e}_j@f$, 
+ * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} e_j@f$, 
  * - with @f$g^{ij}@f$, the coefficients of the inverse metric tensor,
  * - @f$g_{jj}@f$, the coefficients of the metric tensor,
- * - @f$\hat{e}_j@f$, the normalised covariants vectors.
+ * - @f$e_j@f$, the unnormalized local covariants vectors.
  * 
  * Then, we compute @f$ E = -\nabla \phi  @f$ and @f$A = E \wedge e_z@f$.
  * 
@@ -477,21 +477,16 @@ private:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
             CoordRTheta const coord_rp(ddc::coordinate(irp));
 
-            Matrix_2x2 J; // Jacobian matrix
-            m_mapping.jacobian_matrix(coord_rp, J);
-            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> G = metric_tensor(coord_rp);
             DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
                     = metric_tensor.inverse(coord_rp);
 
             // E = -grad phi
             double const electric_field_r
-                    = (-deriv_r_phi(irp) * ddcHelper::get<R_cov, R_cov>(inv_G)
-                       - deriv_p_phi(irp) * ddcHelper::get<Theta_cov, R_cov>(inv_G))
-                      * std::sqrt(ddcHelper::get<R, R>(G));
+                    = -deriv_r_phi(irp) * ddcHelper::get<R_cov, R_cov>(inv_G)
+                      - deriv_p_phi(irp) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
             double const electric_field_p
-                    = (-deriv_r_phi(irp) * ddcHelper::get<R_cov, Theta_cov>(inv_G)
-                       - deriv_p_phi(irp) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G))
-                      * std::sqrt(ddcHelper::get<Theta, Theta>(G));
+                    = -deriv_r_phi(irp) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
+                      - deriv_p_phi(irp) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
 
             // A = E \wedge e_z
             ddcHelper::get<R>(advection_field_rp)(irp) = -electric_field_p;
