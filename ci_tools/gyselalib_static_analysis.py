@@ -520,8 +520,6 @@ def update_aliases(all_files):
                 geom_file = next((f for f in geom_files if relevant_geom in f.file.parts), None)
                 if geom_file is None:
                     geom_file = next(f for f in geom_files if DEFAULT_GEOMETRY in f.file.parts)
-                if file.file.name == 'gridneutralconstantinit.cpp':
-                    print(geom)
                 file.aliases.update(geom_file.aliases)
 
     for file in all_files:
@@ -539,13 +537,9 @@ def update_aliases(all_files):
                 geom_file = next((f for f in geom_files if relevant_geom in f.file.parts), None)
                 if geom_file is None:
                     geom_file = next(f for f in geom_files if DEFAULT_GEOMETRY in f.file.parts)
-                if file.file.name == 'gridneutralconstantinit.cpp':
-                    print(geom)
                 file.aliases.update(geom_file.aliases)
             elif include_file in multipatch_geom_file_names:
                 file.aliases.update(multipatch_geom_file_names[include_file].aliases)
-        if file.file.name == 'gridneutralconstantinit.cpp':
-            print(file.file, file.aliases.keys())
 
 
 def check_kokkos_lambda_use(file):
