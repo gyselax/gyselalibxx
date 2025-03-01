@@ -35,9 +35,9 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
                 Eigen3::Eigen
 
 
-                gslx::advection_rp
+                gslx::advection_polar
                 gslx::geometry_RTheta
-                gslx::interpolation_2D_rp
+                gslx::interpolation_polar
                 gslx::io
                 gslx::paraconfpp
                 gslx::quadrature
@@ -74,9 +74,9 @@ target_link_libraries(advection_ALL
 		Eigen3::Eigen
 
 
-		gslx::advection_rp
+		gslx::advection_polar
 		gslx::geometry_RTheta
-		gslx::interpolation_2D_rp
+		gslx::interpolation_polar
 		gslx::io
 		gslx::paraconfpp
 		gslx::quadrature

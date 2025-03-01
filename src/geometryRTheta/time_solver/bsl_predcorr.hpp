@@ -9,8 +9,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "advection_field_rp.hpp"
-#include "bsl_advection_rp.hpp"
+#include "advection_field_rtheta.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
@@ -19,7 +19,7 @@
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 
 /**
  * @brief Predictor-corrector for the Vlasov-Poisson equations.

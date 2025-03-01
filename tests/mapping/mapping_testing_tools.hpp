@@ -33,12 +33,12 @@ auto get_example_coords(IdxStep<GridR> r_ncells, IdxStep<GridTheta> theta_ncells
     IdxRangeRTheta grid(idx_range_r, idx_range_theta);
 
     host_t<FieldMem<Coord<R, Theta>, IdxRangeRTheta>> coords(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        IdxR ir(irp);
-        IdxTheta ip(irp);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        IdxR ir(irtheta);
+        IdxTheta itheta(irtheta);
         Coord<R> r(r_min + dr * (ir - r_zero));
-        Coord<Theta> theta(theta_min + dtheta * (ip - theta_start));
-        coords(irp) = Coord<R, Theta>(r, theta);
+        Coord<Theta> theta(theta_min + dtheta * (itheta - theta_start));
+        coords(irtheta) = Coord<R, Theta>(r, theta);
     });
 
     return coords;

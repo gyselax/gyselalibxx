@@ -140,10 +140,10 @@ using CoordVtheta = Coord<Vtheta>;
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
-int constexpr BSDegreeP = 3;
+int constexpr BSDegreeTheta = 3;
 
 bool constexpr BsplineOnUniformCellsR = false;
-bool constexpr BsplineOnUniformCellsP = false;
+bool constexpr BsplineOnUniformCellsTheta = false;
 
 struct BSplinesR
     : std::conditional_t<
@@ -154,9 +154,9 @@ struct BSplinesR
 };
 struct BSplinesTheta
     : std::conditional_t<
-              BsplineOnUniformCellsP,
-              ddc::UniformBSplines<Theta, BSDegreeP>,
-              ddc::NonUniformBSplines<Theta, BSDegreeP>>
+              BsplineOnUniformCellsTheta,
+              ddc::UniformBSplines<Theta, BSDegreeTheta>,
+              ddc::NonUniformBSplines<Theta, BSDegreeTheta>>
 {
 };
 struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
@@ -164,12 +164,12 @@ struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
 };
 
 ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplinePBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
 using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplinePBoundary, SplinePBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
 
 // --- Discrete dimensions
 struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
@@ -189,8 +189,8 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         GridTheta,
         SplineRBoundary, // boundary at r=0
         SplineRBoundary, // boundary at rmax
-        SplinePBoundary,
-        SplinePBoundary,
+        SplineThetaBoundary,
+        SplineThetaBoundary,
         ddc::SplineSolver::LAPACK,
         GridR,
         GridTheta>;
@@ -232,8 +232,8 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         GridTheta,
         SplineRBoundary, // boundary at r=0
         SplineRBoundary, // boundary at rmax
-        SplinePBoundary,
-        SplinePBoundary,
+        SplineThetaBoundary,
+        SplineThetaBoundary,
         ddc::SplineSolver::LAPACK,
         GridR,
         GridTheta>;

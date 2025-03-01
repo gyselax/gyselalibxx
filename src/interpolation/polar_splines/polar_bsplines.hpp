@@ -321,10 +321,10 @@ public:
                         = ddc::discrete_space<BSplinesTheta>().full_domain();
 
                 for (IdxR const ir : IdxRange<BSplinesR>(IdxR(0), IdxStepR(C + 1))) {
-                    for (IdxTheta const ip : poloidal_spline_idx_range.take_first(np_in_singular)) {
+                    for (IdxTheta const itheta : poloidal_spline_idx_range.take_first(np_in_singular)) {
                         const ddc::Coordinate<DimX, DimY> point
                                 = curvilinear_to_cartesian.control_point(
-                                        mapping_tensor_product_index_type(ir, ip));
+                                        mapping_tensor_product_index_type(ir, itheta));
                         host_t<DFieldMem<IdxRange<BernsteinBasis>>> bernstein_vals(
                                 bernstein_idx_range);
                         ddc::discrete_space<BernsteinBasis>()
@@ -335,15 +335,15 @@ public:
                                     discrete_element_type {
                                             (k - bernstein_idx_range.front()).value()},
                                     ir,
-                                    ip)
+                                    itheta)
                                     = bernstein_vals(k);
                         }
                     }
                     for (discrete_element_type k : singular_idx_range<DDim>()) {
-                        for (IdxTheta const ip : poloidal_spline_idx_range.take_first(
+                        for (IdxTheta const itheta : poloidal_spline_idx_range.take_first(
                                      IdxStepTheta {BSplinesTheta::degree()})) {
-                            m_singular_basis_elements(k, ir, ip + np_in_singular)
-                                    = m_singular_basis_elements(k, ir, ip);
+                            m_singular_basis_elements(k, ir, itheta + np_in_singular)
+                                    = m_singular_basis_elements(k, ir, itheta);
                         }
                     }
                 }

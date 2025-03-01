@@ -157,8 +157,8 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
 
     MetricTensorEvaluator<CircularToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        check_inverse_tensor(metric_tensor(coords(irp)), metric_tensor.inverse(coords(irp)));
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        check_inverse_tensor(metric_tensor(coords(irtheta)), metric_tensor.inverse(coords(irtheta)));
     });
 }
 
@@ -174,8 +174,8 @@ TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
 
     MetricTensorEvaluator<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta> metric_tensor(mapping);
     // Test for each coordinates if the inverse_metric_tensor is the inverse of the metric_tensor
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        check_inverse_tensor(metric_tensor(coords(irp)), metric_tensor.inverse(coords(irp)));
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        check_inverse_tensor(metric_tensor(coords(irtheta)), metric_tensor.inverse(coords(irtheta)));
     });
 }
 

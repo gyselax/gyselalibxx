@@ -9,7 +9,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "bsl_advection_rp.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
@@ -19,7 +19,7 @@
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -46,24 +46,24 @@ std::string to_lower(std::string s)
  *
  * @param[inout] out_file
  *      The stream to which the output is printed.
- * @param[in] coord_rp
+ * @param[in] coord_rtheta
  *      The coordinate to be printed.
  * @param[in] to_physical_mapping
  *      The mapping function from the logical domain to the physical domain.
- * @param[in] idx_range_p
+ * @param[in] idx_range_theta
  *      The index range to which the poloidal coordinate should be restricted.
  */
 template <class LogicalToPhysicalMapping>
 void print_coordinate(
         std::ofstream& out_file,
-        CoordRTheta coord_rp,
+        CoordRTheta coord_rtheta,
         LogicalToPhysicalMapping const& to_physical_mapping,
-        IdxRangeTheta idx_range_p)
+        IdxRangeTheta idx_range_theta)
 {
-    double const r = ddc::get<R>(coord_rp);
-    double const th = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rp), idx_range_p);
+    double const r = ddc::get<R>(coord_rtheta);
+    double const th = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rtheta), idx_range_theta);
 
-    CoordXY coord_xy(to_physical_mapping(coord_rp));
+    CoordXY coord_xy(to_physical_mapping(coord_rtheta));
     double const x = ddc::get<X>(coord_xy);
     double const y = ddc::get<Y>(coord_xy);
 
@@ -78,9 +78,9 @@ void print_coordinate(
  * @param[in] to_physical_mapping
  *      The mapping function from the logical domain to the physical
  *      domain.
- * @param[in] idx_range_rp
+ * @param[in] idx_range_rtheta
  *      The index range in the logical domain where the feet are defined.
- * @param[in] feet_coords_rp
+ * @param[in] feet_coords_rtheta
  *      The characteristic feet in the logical domain.
  * @param[in] name
  *      The name of the file where the feet are saved.
@@ -88,25 +88,25 @@ void print_coordinate(
 template <class LogicalToPhysicalMapping>
 void output_feet(
         LogicalToPhysicalMapping const& to_physical_mapping,
-        IdxRangeRTheta const& idx_range_rp,
-        host_t<FieldRTheta<CoordRTheta>> const& feet_coords_rp,
+        IdxRangeRTheta const& idx_range_rtheta,
+        host_t<FieldRTheta<CoordRTheta>> const& feet_coords_rtheta,
         std::string const& name)
 {
     std::ofstream file_feet(name, std::ofstream::out);
     file_feet << std::fixed << std::setprecision(16);
 
-    IdxRangeR idx_range_r(idx_range_rp);
-    IdxRangeTheta idx_range_p(idx_range_rp);
+    IdxRangeR idx_range_r(idx_range_rtheta);
+    IdxRangeTheta idx_range_theta(idx_range_rtheta);
     Idx<GridR> ir_start = idx_range_r.front();
-    Idx<GridTheta> ip_start = idx_range_p.front();
+    Idx<GridTheta> itheta_start = idx_range_theta.front();
 
-    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
-        IdxR ir(irp);
-        IdxTheta ip(irp);
+    ddc::for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
+        IdxR ir(irtheta);
+        IdxTheta itheta(irtheta);
         file_feet << std::setw(15) << (ir - ir_start).value() << std::setw(15)
-                  << (ip - ip_start).value();
-        print_coordinate(file_feet, ddc::coordinate(irp), to_physical_mapping, idx_range_p);
-        print_coordinate(file_feet, feet_coords_rp(irp), to_physical_mapping, idx_range_p);
+                  << (itheta - itheta_start).value();
+        print_coordinate(file_feet, ddc::coordinate(irtheta), to_physical_mapping, idx_range_theta);
+        print_coordinate(file_feet, feet_coords_rtheta(irtheta), to_physical_mapping, idx_range_theta);
         file_feet << std::endl;
     });
     file_feet.close();
@@ -135,18 +135,18 @@ void saving_computed(
     out_file << std::fixed << std::setprecision(16);
 
     IdxRangeR idx_range_r(grid);
-    IdxRangeTheta idx_range_p(grid);
+    IdxRangeTheta idx_range_theta(grid);
     Idx<GridR> ir_start = idx_range_r.front();
-    Idx<GridTheta> ip_start = idx_range_p.front();
+    Idx<GridTheta> itheta_start = idx_range_theta.front();
 
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        IdxR const ir(irp);
-        IdxTheta const ip(irp);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        IdxR const ir(irtheta);
+        IdxTheta const itheta(irtheta);
 
         out_file << std::setw(15) << (ir - ir_start).value() << std::setw(15)
-                 << (ip - ip_start).value();
-        print_coordinate(out_file, ddc::coordinate(irp), to_physical_mapping, idx_range_p);
-        out_file << std::setw(25) << function(irp);
+                 << (itheta - itheta_start).value();
+        print_coordinate(out_file, ddc::coordinate(irtheta), to_physical_mapping, idx_range_theta);
+        out_file << std::setw(25) << function(irtheta);
         out_file << std::endl;
     });
     out_file.close();
@@ -156,7 +156,7 @@ void saving_computed(
  * @brief Get the exact characteristic feet of the simulation
  * at a given time.
  *
- * @param[in] idx_range_rp
+ * @param[in] idx_range_rtheta
  *      The logical domain where the characteristic feet are defined.
  * @param[in] to_physical_mapping
  *      The mapping function from the logical domain to the physical
@@ -170,8 +170,8 @@ void saving_computed(
  * @return A FieldMem with the exact characteristic feet at the given time.
  */
 template <class AdvectionField, class LogicalToPhysicalMapping, class PhysicalToLogicalMapping>
-host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
-        IdxRangeRTheta const& idx_range_rp,
+host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
+        IdxRangeRTheta const& idx_range_rtheta,
         LogicalToPhysicalMapping const& logical_to_physical_mapping,
         PhysicalToLogicalMapping const& physical_to_logical_mapping,
         AdvectionField const& advection_field,
@@ -181,22 +181,22 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rp(
                   LogicalToPhysicalMapping,
                   DiscreteToCartesian<X, Y, SplineRThetaEvaluatorConstBound_host>>);
 
-    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp(idx_range_rp);
+    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rtheta(idx_range_rtheta);
     CoordXY const coord_xy_centre = CoordXY(logical_to_physical_mapping(CoordRTheta(0, 0)));
-    ddc::for_each(idx_range_rp, [&](IdxRTheta const irp) {
-        CoordRTheta const coord_rp = ddc::coordinate(irp);
+    ddc::for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
+        CoordRTheta const coord_rtheta = ddc::coordinate(irtheta);
         CoordXY const coord_xy
-                = advection_field.exact_feet(logical_to_physical_mapping(coord_rp), time);
+                = advection_field.exact_feet(logical_to_physical_mapping(coord_rtheta), time);
 
         CoordXY const coord_diff = coord_xy - coord_xy_centre;
         if (norm_inf(coord_diff) < 1e-15) {
-            feet_coords_rp(irp) = CoordRTheta(0, 0);
+            feet_coords_rtheta(irtheta) = CoordRTheta(0, 0);
         } else {
-            feet_coords_rp(irp) = physical_to_logical_mapping(coord_xy);
+            feet_coords_rtheta(irtheta) = physical_to_logical_mapping(coord_xy);
         }
     });
 
-    return feet_coords_rp;
+    return feet_coords_rtheta;
 }
 
 
@@ -230,9 +230,9 @@ double compute_difference_L2_norm(
 {
     host_t<DFieldMemRTheta> exact_function(grid);
     host_t<DFieldMemRTheta> difference_function(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        exact_function(irp) = function_to_be_advected(feet_coord(irp));
-        difference_function(irp) = exact_function(irp) - allfdistribu_advected(irp);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        exact_function(irtheta) = function_to_be_advected(feet_coord(irtheta));
+        difference_function(irtheta) = exact_function(irtheta) - allfdistribu_advected(irtheta);
     });
 
     host_t<DFieldMemRTheta> const quadrature_coeffs = compute_coeffs_on_mapping(
@@ -370,25 +370,25 @@ void simulate(
     start_simulation = std::chrono::system_clock::now();
 
     // Initialisation of the advected function:
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        CoordRTheta coord = coordinate(irp);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        CoordRTheta coord = coordinate(irtheta);
         if (ddc::get<R>(coord) <= 1e-15) {
             ddc::get<Theta>(coord) = 0;
         }
-        allfdistribu_test(irp) = simulation.advected_function(coord);
+        allfdistribu_test(irtheta) = simulation.advected_function(coord);
     });
 
 
 
     // Definition of advection field:
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         // Moving the coordinates in the physical domain:
-        CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irp));
+        CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irtheta));
         CoordXY const advection_field = simulation.advection_field(coord_xy, 0.);
 
         // Define the advection field on the physical domain:
-        ddcHelper::get<X>(advection_field_test_vec_host)(irp) = ddc::get<X>(advection_field);
-        ddcHelper::get<Y>(advection_field_test_vec_host)(irp) = ddc::get<Y>(advection_field);
+        ddcHelper::get<X>(advection_field_test_vec_host)(irtheta) = ddc::get<X>(advection_field);
+        ddcHelper::get<Y>(advection_field_test_vec_host)(irtheta) = ddc::get<Y>(advection_field);
     });
 
 
@@ -411,15 +411,15 @@ void simulate(
 
     // TREATMENT OF DATA ------------------------------------------------------------------------
     // Compute the exact characteristic feet:
-    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_end_time(grid);
-    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rp_dt(grid);
-    feet_coords_rp_end_time = compute_exact_feet_rp(
+    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rtheta_end_time(grid);
+    host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rtheta_dt(grid);
+    feet_coords_rtheta_end_time = compute_exact_feet_rtheta(
             grid,
             analytical_to_physical_mapping,
             to_logical_mapping,
             simulation.advection_field,
             end_time);
-    feet_coords_rp_dt = compute_exact_feet_rp(
+    feet_coords_rtheta_dt = compute_exact_feet_rtheta(
             grid,
             analytical_to_physical_mapping,
             to_logical_mapping,
@@ -429,10 +429,10 @@ void simulate(
 
     // Compute the maximal absolute error on the space at the end of the simulation:
     double max_err = 0.;
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         double const err
-                = fabs(allfdistribu_advected_test(irp)
-                       - simulation.advected_function(feet_coords_rp_end_time(irp)));
+                = fabs(allfdistribu_advected_test(irtheta)
+                       - simulation.advected_function(feet_coords_rtheta_end_time(irtheta)));
         max_err = max_err > err ? max_err : err;
     });
 
@@ -449,7 +449,7 @@ void simulate(
                          grid,
                          allfdistribu_advected_test,
                          simulation.advected_function,
-                         get_field(feet_coords_rp_end_time))
+                         get_field(feet_coords_rtheta_end_time))
               << std::endl;
 
 
@@ -467,7 +467,7 @@ void simulate(
         FieldRTheta<CoordRTheta> feet = get_field(feet_alloc);
         ddc::parallel_for_each(
                 grid,
-                KOKKOS_LAMBDA(const IdxRTheta irp) { feet(irp) = ddc::coordinate(irp); });
+                KOKKOS_LAMBDA(const IdxRTheta irtheta) { feet(irtheta) = ddc::coordinate(irtheta); });
         auto advection_field_test_vec = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_test_vec_host));
@@ -485,11 +485,11 @@ void simulate(
 
         host_t<DFieldMemRTheta> initial_function(grid);
         host_t<DFieldMemRTheta> end_function(grid);
-        ddc::for_each(grid, [&](const IdxRTheta irp) {
-            initial_function(irp) = simulation.advected_function(ddc::coordinate(irp));
+        ddc::for_each(grid, [&](const IdxRTheta irtheta) {
+            initial_function(irtheta) = simulation.advected_function(ddc::coordinate(irtheta));
 
             // Exact final state
-            end_function(irp) = simulation.advected_function(feet_coords_rp_end_time(irp));
+            end_function(irtheta) = simulation.advected_function(feet_coords_rtheta_end_time(irtheta));
         });
         saving_computed(to_physical_mapping_host, get_field(initial_function), name_0);
         saving_computed(to_physical_mapping_host, get_field(end_function), name_1);
@@ -500,7 +500,7 @@ void simulate(
     // Save the exact characteristic feet for a displacement on dt:
     if (save_feet) {
         std::string const name = output_folder + "/feet_exact.txt";
-        output_feet(to_physical_mapping_host, grid, get_field(feet_coords_rp_dt), name);
+        output_feet(to_physical_mapping_host, grid, get_field(feet_coords_rtheta_dt), name);
     }
 
 

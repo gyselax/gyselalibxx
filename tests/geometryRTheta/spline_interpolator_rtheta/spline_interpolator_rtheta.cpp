@@ -1,5 +1,5 @@
 /*
- * Testing the "src/interpolation/spline_interpolator_2d_rp.hpp" file.
+ * Testing the "src/interpolation/spline_interpolator_rtheta.hpp" file.
  */
 
 #include <filesystem>
@@ -12,7 +12,7 @@
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 
 
 /*
@@ -57,9 +57,9 @@ void Interpolation_on_random_coord(
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             grid,
-            KOKKOS_LAMBDA(IdxRTheta const irp) {
-                CoordRTheta coord(ddc::coordinate(irp));
-                function_evaluated(irp) = exact_function(coord);
+            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                CoordRTheta coord(ddc::coordinate(irtheta));
+                function_evaluated(irtheta) = exact_function(coord);
             });
 
 
@@ -74,34 +74,34 @@ void Interpolation_on_random_coord(
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             grid,
-            KOKKOS_LAMBDA(IdxRTheta const irp) {
-                CoordR coord_r(coordinate(ddc::select<GridR>(irp)));
-                CoordTheta coord_p(coordinate(ddc::select<GridTheta>(irp)));
+            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                CoordR coord_r(coordinate(ddc::select<GridR>(irtheta)));
+                CoordTheta coord_theta(coordinate(ddc::select<GridTheta>(irtheta)));
 
                 if (On_the_nodes) {
-                    random_coords(irp) = CoordRTheta(coord_r, coord_p);
+                    random_coords(irtheta) = CoordRTheta(coord_r, coord_theta);
                 } else {
                     IdxRangeR r_idx_range(grid);
                     IdxRangeTheta theta_idx_range(grid);
 
                     IdxR ir_min(r_idx_range.front());
-                    IdxTheta ip_min(theta_idx_range.front());
+                    IdxTheta itheta_min(theta_idx_range.front());
 
                     IdxR ir_max(r_idx_range.back());
-                    IdxTheta ip_max(theta_idx_range.back());
+                    IdxTheta itheta_max(theta_idx_range.back());
 
-                    IdxR ir(irp);
-                    IdxTheta ip(irp);
+                    IdxR ir(irtheta);
+                    IdxTheta itheta(irtheta);
 
                     unsigned index_r = ir - ir_min;
-                    unsigned index_p = ip - ip_min;
+                    unsigned index_theta = itheta - itheta_min;
                     int const number_r = (301 * index_r + 3) % (Nr * Nt);
-                    int const number_p = (103 * index_p + 2) % (Nr * Nt);
+                    int const number_theta = (103 * index_theta + 2) % (Nr * Nt);
                     // Pseudo-random number between 0 and 1 generated :
                     double const random_factor_r
-                            = double(number_r) / Nr / Nt * (1 - double(number_p) / Nr / Nt);
-                    double const random_factor_p
-                            = double(number_p) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
+                            = double(number_r) / Nr / Nt * (1 - double(number_theta) / Nr / Nt);
+                    double const random_factor_theta
+                            = double(number_theta) / Nr / Nt * (1 - double(number_r) / Nr / Nt);
 
                     CoordR delta_coord_r;
                     if (ir + 1 <= ir_max) {
@@ -110,29 +110,29 @@ void Interpolation_on_random_coord(
                         delta_coord_r = CoordR(0.);
                     }
 
-                    CoordTheta delta_coord_p;
-                    if (ip + 1 <= ip_max) {
-                        delta_coord_p = CoordTheta(ddc::coordinate(ip + 1) - ddc::coordinate(ip));
+                    CoordTheta delta_coord_theta;
+                    if (itheta + 1 <= itheta_max) {
+                        delta_coord_theta = CoordTheta(ddc::coordinate(itheta + 1) - ddc::coordinate(itheta));
                     } else {
-                        delta_coord_p
-                                = CoordTheta(ddc::coordinate(ip_min) - ddc::coordinate(ip_min + 1));
+                        delta_coord_theta
+                                = CoordTheta(ddc::coordinate(itheta_min) - ddc::coordinate(itheta_min + 1));
                     }
 
-                    random_coords(irp) = CoordRTheta(
+                    random_coords(irtheta) = CoordRTheta(
                             coord_r + delta_coord_r * random_factor_r,
-                            CoordTheta(fmod(coord_p + delta_coord_p * random_factor_p, 2 * M_PI)));
+                            CoordTheta(fmod(coord_theta + delta_coord_theta * random_factor_theta, 2 * M_PI)));
                 }
             });
 
 
     // Interpolate the function on Bsplines on the "random" grid. ----------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
 
     SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
@@ -143,8 +143,8 @@ void Interpolation_on_random_coord(
             grid,
             0.0,
             ddc::reducer::max<double>(),
-            KOKKOS_LAMBDA(IdxRTheta const irp) {
-                return Kokkos::fabs(function_evaluated(irp) - exact_function(random_coords(irp)));
+            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                return Kokkos::fabs(function_evaluated(irtheta) - exact_function(random_coords(irtheta)));
             });
 
     std::cout << "   Max absolute error : " << max_err;
@@ -197,8 +197,8 @@ public:
     KOKKOS_FUNCTION double operator()(CoordRTheta const& coord) const
     {
         const double r = ddc::get<R>(coord);
-        const double t = ddc::get<Theta>(coord);
-        return r * Kokkos::cos(t);
+        const double theta = ddc::get<Theta>(coord);
+        return r * Kokkos::cos(theta);
     }
 };
 
@@ -216,15 +216,15 @@ public:
     KOKKOS_FUNCTION double operator()(CoordRTheta const& coord) const
     {
         const double r = ddc::get<R>(coord);
-        const double t = ddc::get<Theta>(coord);
+        const double theta = ddc::get<Theta>(coord);
 
         double x0 = 0.;
         double y0 = 0.;
         double sig_x = 0.25;
         double sig_y = 0.25;
         return Kokkos::exp(
-                -ipow(r * Kokkos::cos(t) - x0, 2) / (2 * sig_x * sig_x)
-                - ipow(r * Kokkos::sin(t) - y0, 2) / (2 * sig_y * sig_y));
+                -ipow(r * Kokkos::cos(theta) - x0, 2) / (2 * sig_x * sig_x)
+                - ipow(r * Kokkos::sin(theta) - y0, 2) / (2 * sig_y * sig_y));
         ;
     }
 };
@@ -240,7 +240,7 @@ namespace fs = std::filesystem;
  * @brief Test the interpolator on bsplines in polar coordinates. Test on the mesh point
  * and not on the mesh points for several test functions.
  *
- * Test the "src/interpolation/spline_interpolator_2d_rp.hpp" file.
+ * Test the "src/interpolation/spline_interpolator_rtheta.hpp" file.
  * The degree of bsplines is defined in the geometry.hpp file. Normally, the degree is set
  * at 3 for the bsplines in the r dimension and the theta dimension. The interpolation on
  * mesh points must be exact. The interpolation of r-polynomial functions of degree d <= 3
@@ -274,7 +274,7 @@ int main(int argc, char** argv)
 
     // Parameters of the grid. ---------------------------------------------------------------
     int Nr = PCpp_int(conf_voicexx, ".Mesh.r_size");
-    int Nt = PCpp_int(conf_voicexx, ".Mesh.p_size");
+    int Nt = PCpp_int(conf_voicexx, ".Mesh.theta_size");
 
 
     int spline_degree = BSplinesR::degree();
@@ -284,34 +284,34 @@ int main(int argc, char** argv)
     CoordR const r_max(1.0);
     IdxStepR const r_size(Nr);
 
-    CoordTheta const p_min(0.0);
-    CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_size(Nt);
+    CoordTheta const theta_min(0.0);
+    CoordTheta const theta_max(2.0 * M_PI);
+    IdxStepTheta const theta_size(Nt);
 
     double const dr((r_max - r_min) / r_size);
-    double const dp((p_max - p_min) / p_size);
+    double const dp((theta_max - theta_min) / theta_size);
 
     std::vector<CoordR> r_knots(r_size + 1);
-    std::vector<CoordTheta> p_knots(p_size + 1);
+    std::vector<CoordTheta> theta_knots(theta_size + 1);
 
     for (int i(0); i < r_size + 1; ++i) {
         r_knots[i] = CoordR(r_min + i * dr);
     }
-    for (int i(0); i < p_size + 1; ++i) {
-        p_knots[i] = CoordTheta(p_min + i * dp);
+    for (int i(0); i < theta_size + 1; ++i) {
+        theta_knots[i] = CoordTheta(theta_min + i * dp);
     }
 
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesTheta>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
 
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
     IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
+    IdxRangeTheta interpolation_idx_range_Theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 
 
     // TESTS ON THE DISCRETE SPACE ===========================================================

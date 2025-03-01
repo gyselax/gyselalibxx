@@ -40,7 +40,7 @@ def animate(folder, name_animation, if_perturb):
     tstep_diag = int(ds["time_step_diag"])
 
     Nr = int(ds["r_size"])
-    Nt = int(ds["p_size"])
+    Nt = int(ds["theta_size"])
 
 
     # Get initial data
@@ -176,7 +176,7 @@ def plot_mass_conservation(folder, if_save, name_file):
     tstep_diag = int(ds["time_step_diag"])
 
     Nr = int(ds["r_size"])
-    Nt = int(ds["p_size"])
+    Nt = int(ds["theta_size"])
 
     # Treatment for periodicity:
     jacobian = np.zeros((Nr+3, Nt+1))
@@ -192,7 +192,7 @@ def plot_mass_conservation(folder, if_save, name_file):
 
     # Treatment for periodicity:
     p_grid = np.zeros(Nt+1)
-    p_grid[:-1] = np.array(ds["density"].coords["p"])
+    p_grid[:-1] = np.array(ds["density"].coords["theta"])
     p_grid[-1] = p_grid[0]  + 2*np.pi
 
 
@@ -269,7 +269,7 @@ def compute_L2_norms(folder, if_save, name_file):
     tstep_diag = int(ds["time_step_diag"])
 
     Nr = int(ds["r_size"])
-    Nt = int(ds["p_size"])
+    Nt = int(ds["theta_size"])
     omega_Im = float(ds["slope"])
 
 

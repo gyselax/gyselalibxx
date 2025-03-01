@@ -82,13 +82,13 @@ public:
         IdxRangeRTheta grid = get_idx_range<GridR, GridTheta>(rho_init);
 
         // Initialisation:
-        ddc::for_each(grid, [&](IdxRTheta const irp) {
-            const CoordRTheta coord_rp(ddc::coordinate(irp));
-            const CoordXY coord_xy(m_mapping(coord_rp));
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
+            const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get<X>(coord_xy);
             const double y = ddc::get<Y>(coord_xy);
 
-            rho_init(irp) = rho_eq(irp)
+            rho_init(irtheta) = rho_eq(irtheta)
                             + eps
                                       * (std::exp(
                                                  -((x - x_star_1) * (x - x_star_1)
