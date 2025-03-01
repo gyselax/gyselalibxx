@@ -1,6 +1,6 @@
 """
 Save and plot the animation of the density and the electrostatic potential of
-the guiding center XY simulation.
+the guiding centre XY simulation.
 """
 
 import argparse
