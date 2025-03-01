@@ -39,8 +39,8 @@ namespace detail {
 {
     ::koliop_Operator operator_handle;
 
-    std::size_t const r_extent = tor2_extent;
-    std::size_t const theta_extent = tor1_extent;
+    std::size_t const r_extent = tor1_extent;
+    std::size_t const theta_extent = tor2_extent;
 
     if (::koliop_Create(
                 &operator_handle,
