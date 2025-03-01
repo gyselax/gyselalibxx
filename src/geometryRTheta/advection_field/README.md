@@ -248,4 +248,4 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 
 # Contents
 
-* advection\_field\_rp.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation. 
+* advection\_field\_rtheta.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation. 

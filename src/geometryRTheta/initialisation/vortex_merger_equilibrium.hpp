@@ -122,8 +122,8 @@ public:
         do {
             count += 1;
             // STEP 1: compute rho^i
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
-                rho_eq(irp) = sigma(irp) * function(phi_eq(irp));
+            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+                rho_eq(irtheta) = sigma(irtheta) * function(phi_eq(irtheta));
             });
 
 
@@ -136,42 +136,42 @@ public:
             // STEP 3: compute c^i
             // If phi_max is given:
             double norm_Linf_phi_star(0.);
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
-                double const abs_phi_star = fabs(phi_star_host(irp));
+            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+                double const abs_phi_star = fabs(phi_star_host(irtheta));
                 norm_Linf_phi_star
                         = norm_Linf_phi_star > abs_phi_star ? norm_Linf_phi_star : abs_phi_star;
             });
 
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
-                ci(irp) = phi_max / norm_Linf_phi_star;
+            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+                ci(irtheta) = phi_max / norm_Linf_phi_star;
             });
 
 
             // STEP 4: update sigma and phi
             difference_sigma = 0.;
-            ddc::for_each(m_grid, [&](IdxRTheta const irp) {
-                double const abs_diff_sigma = fabs(sigma(irp) - ci(irp) * sigma(irp));
+            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+                double const abs_diff_sigma = fabs(sigma(irtheta) - ci(irtheta) * sigma(irtheta));
                 difference_sigma
                         = difference_sigma > abs_diff_sigma ? difference_sigma : abs_diff_sigma;
 
-                sigma(irp) = ci(irp) * sigma(irp);
-                phi_eq(irp) = ci(irp) * phi_star_host(irp);
+                sigma(irtheta) = ci(irtheta) * sigma(irtheta);
+                phi_eq(irtheta) = ci(irtheta) * phi_star_host(irtheta);
             });
 
         } while ((difference_sigma > tau) and (count < count_max));
 
 
         // STEP 1: compute rho^i
-        ddc::for_each(m_grid, [&](IdxRTheta const irp) {
-            rho_eq(irp) = sigma(irp) * function(phi_eq(irp));
+        ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            rho_eq(irtheta) = sigma(irtheta) * function(phi_eq(irtheta));
         });
 
         // Unify at the centre point:
         IdxRangeR r_idx_range = get_idx_range<GridR>(rho_eq);
         IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(rho_eq);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const IdxTheta ip) {
-                rho_eq(r_idx_range.front(), ip)
+            ddc::for_each(theta_idx_range, [&](const IdxTheta itheta) {
+                rho_eq(r_idx_range.front(), itheta)
                         = rho_eq(r_idx_range.front(), theta_idx_range.front());
             });
         }
@@ -204,13 +204,13 @@ public:
         host_t<DFieldMemRTheta> sigma_0(grid);
         host_t<DFieldMemRTheta> phi_eq(grid);
         const double sig = 0.3;
-        ddc::for_each(grid, [&](IdxRTheta const irp) {
-            const CoordRTheta coord_rp(ddc::coordinate(irp));
-            const CoordXY coord_xy(m_mapping(coord_rp));
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
+            const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get<X>(coord_xy);
             const double y = ddc::get<Y>(coord_xy);
-            sigma_0(irp) = sig;
-            phi_eq(irp) = std::exp(-(x * x + y * y) / (2 * sig * sig));
+            sigma_0(irtheta) = sig;
+            phi_eq(irtheta) = std::exp(-(x * x + y * y) / (2 * sig * sig));
         });
         find_equilibrium(
                 get_field(sigma_0),

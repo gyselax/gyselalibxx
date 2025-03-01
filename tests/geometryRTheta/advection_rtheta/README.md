@@ -38,17 +38,17 @@ The tests are made for different parameters which are:
 ## Python tests
 
 - animated\_curves.py: create `.mp4` video(s) of the advected function for the selected configurations among the 48 test ones.
-	- Command to launch the test in this folder: `python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL`
-	or `python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/<selected advection test case>`
+	- Command to launch the test in this folder: `python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/advection_ALL`
+	or `python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/<selected advection test case>`
 
 - display\_all\_errors\_for\_gtest.py: Google test which tests the convergence order for the 48 configurations.
-	- Command to launch the test in this folder: `python3 display_all_errors_for_gtest.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL`
+	- Command to launch the test in this folder: `python3 display_all_errors_for_gtest.py ../../../build/tests/geometryRTheta/advection_rtheta/advection_ALL`
 
 - display\_curves.py: display the curve of the function for 9 time steps between the initial and the final state.  
-	- Command to launch the test in this folder: `python3 display_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/<selected advection test case>`
+	- Command to launch the test in this folder: `python3 display_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/<selected advection test case>`
 
 - display\_feet\_errors.py: compute the convergence order of the characteristic feet and display the computed and the exact feet. 
-	- Command to launch the test in this folder: `python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_2d_rp/<selected advection test case>`
+	- Command to launch the test in this folder: `python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_rtheta/<selected advection test case>`
 
 - advection\_functions.py: define all the useful functions used in the other python files. 
 

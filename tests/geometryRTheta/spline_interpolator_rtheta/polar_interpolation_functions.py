@@ -83,7 +83,7 @@ def launch_executable(executable, NN):
     with open("grid_size.yaml", "w", encoding="utf-8") as f:
         print("Mesh:", file=f)
         print(f"  r_size: {N}", file=f)
-        print(f"  p_size: {N}", file=f)
+        print(f"  theta_size: {N}", file=f)
 
     with subprocess.Popen([executable, "grid_size.yaml"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as p:
         out, err = p.communicate()
@@ -102,7 +102,7 @@ def launch_executable(executable, NN):
         with open("grid_size.yaml", "w", encoding="utf-8") as f:
             print("Mesh:", file=f)
             print(f"  r_size: {N}", file=f)
-            print(f"  p_size: {N}", file=f)
+            print(f"  theta_size: {N}", file=f)
 
         with subprocess.Popen([executable, "grid_size.yaml"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as p:
             out, err = p.communicate()

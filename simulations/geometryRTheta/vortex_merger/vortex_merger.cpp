@@ -11,7 +11,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_rp.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
@@ -34,7 +34,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 
     // Build the grid for the space. ------------------------------------------------------------------
     int const Nr(PCpp_int(conf_gyselalibxx, ".SplineMesh.r_ncells"));
-    int const Nt(PCpp_int(conf_gyselalibxx, ".SplineMesh.p_ncells"));
+    int const Nt(PCpp_int(conf_gyselalibxx, ".SplineMesh.theta_ncells"));
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
@@ -91,11 +91,11 @@ int main(int argc, char** argv)
             GridR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselalibxx, "r");
-    IdxRangeTheta const mesh_p = init_pseudo_uniform_spline_dependent_idx_range<
+    IdxRangeTheta const mesh_theta = init_pseudo_uniform_spline_dependent_idx_range<
             GridTheta,
             BSplinesTheta,
-            SplineInterpPointsTheta>(conf_gyselalibxx, "p");
-    IdxRangeRTheta const grid(mesh_r, mesh_p);
+            SplineInterpPointsTheta>(conf_gyselalibxx, "theta");
+    IdxRangeRTheta const grid(mesh_r, mesh_theta);
 
 
     // OPERATORS ======================================================================================
@@ -146,17 +146,17 @@ int main(int argc, char** argv)
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
     SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
@@ -218,19 +218,19 @@ int main(int argc, char** argv)
 
     // --- save simulation data
     ddc::expose_to_pdi("r_size", Nr);
-    ddc::expose_to_pdi("p_size", Nt);
+    ddc::expose_to_pdi("theta_size", Nt);
 
     host_t<FieldMemR<CoordR>> coords_r(ddc::select<GridR>(grid));
     host_t<FieldMemTheta<CoordTheta>> coords_p(ddc::select<GridTheta>(grid));
     ddc::for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
         coords_r(ir) = ddc::coordinate(ir);
     });
-    ddc::for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const ip) {
-        coords_p(ip) = ddc::coordinate(ip);
+    ddc::for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const itheta) {
+        coords_p(itheta) = ddc::coordinate(itheta);
     });
 
     ddc::expose_to_pdi("r_coords", coords_r);
-    ddc::expose_to_pdi("p_coords", coords_p);
+    ddc::expose_to_pdi("theta_coords", coords_p);
 
     ddc::expose_to_pdi("delta_t", dt);
     ddc::expose_to_pdi("final_T", final_T);
@@ -244,11 +244,11 @@ int main(int argc, char** argv)
     host_t<FieldMemRTheta<CoordX>> coords_x(grid);
     host_t<FieldMemRTheta<CoordY>> coords_y(grid);
     host_t<DFieldMemRTheta> jacobian(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irp));
-        coords_x(irp) = ddc::select<X>(coords_xy);
-        coords_y(irp) = ddc::select<Y>(coords_xy);
-        jacobian(irp) = to_physical_mapping.jacobian(ddc::coordinate(irp));
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irtheta));
+        coords_x(irtheta) = ddc::select<X>(coords_xy);
+        coords_y(irtheta) = ddc::select<Y>(coords_xy);
+        jacobian(irtheta) = to_physical_mapping.jacobian(ddc::coordinate(irtheta));
     });
 
     double const tau(1e-10);

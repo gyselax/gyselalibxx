@@ -1,5 +1,5 @@
 ﻿# Command to launch the test :
-# python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_2d_rp_tests
+# python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_rtheta/advection_rtheta_tests
 
 """
 Display the characteristic feet and their errors computed at the last time step of the advection
@@ -208,7 +208,7 @@ for dt in DT:
     _, _, _, _, _, _,  exact_Fr, exact_Fp, exact_Fx, exact_Fy = treatment_feet(namefile2)
 
     Nr = yaml_parameters['SplineMesh']['r_ncells']
-    Nt = yaml_parameters['SplineMesh']['p_ncells']
+    Nt = yaml_parameters['SplineMesh']['theta_ncells']
 
     # --- Plot type 1 : the convergence order
     ERR_d += [compute_max_distance_error(Nr+3, Nt, computed_Fx, computed_Fy, exact_Fx, exact_Fy)]

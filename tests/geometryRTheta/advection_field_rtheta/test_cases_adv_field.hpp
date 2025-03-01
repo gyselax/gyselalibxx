@@ -2,7 +2,7 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
-#include "../advection_2d_rp/test_cases.hpp"
+#include "../advection_rtheta/test_cases.hpp"
 
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
@@ -10,7 +10,7 @@
 #include "math_tools.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 
 /*
  *  This file defines
@@ -235,8 +235,8 @@ public:
 ￼     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
-        CoordRTheta const coord_rp(m_mapping(coord));
-        double const r = ddc::get<R>(coord_rp);
+        CoordRTheta const coord_rtheta(m_mapping(coord));
+        double const r = ddc::get<R>(coord_rtheta);
         return -0.5 * r * r * m_vtheta;
     }
 
@@ -252,10 +252,10 @@ public:
 ￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
-        CoordRTheta const coord_rp(m_mapping(coord_xy));
+        CoordRTheta const coord_rtheta(m_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
         CircularToCartesian<R, Theta, X, Y> logical_to_physical_mapping;
-        return logical_to_physical_mapping(coord_rp - t * velocity);
+        return logical_to_physical_mapping(coord_rtheta - t * velocity);
     }
 };
 

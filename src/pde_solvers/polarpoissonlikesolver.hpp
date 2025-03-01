@@ -374,7 +374,7 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
         // Find value and derivative of 2D B-splines covering the singular point
-        ddc::for_each(m_idxrange_quadrature_singular, [&](IdxQuadratureRTheta const irp) {
+        ddc::for_each(m_idxrange_quadrature_singular, [&](IdxQuadratureRTheta const irtheta) {
             std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
             std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
             // Values of the polar basis splines around the singular point
@@ -383,10 +383,10 @@ public:
             // Values of the polar basis splines, that do not cover the singular point,
             // at a given coordinate
             DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
-            IdxQuadratureR const idx_r(irp);
-            IdxQuadratureTheta const idx_theta(irp);
+            IdxQuadratureR const idx_r(irtheta);
+            IdxQuadratureTheta const idx_theta(irtheta);
 
-            const CoordRTheta coord(ddc::coordinate(irp));
+            const CoordRTheta coord(ddc::coordinate(irtheta));
 
             // Calculate the value
             ddc::discrete_space<PolarBSplinesRTheta>().eval_basis(singular_vals, vals, coord);

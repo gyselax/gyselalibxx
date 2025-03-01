@@ -19,7 +19,7 @@ The shortcuts defined in the geometry file represent:
 2. The type of coordinates of objects represented on the dimensions (`CoordR`, `CoordTheta`, `CoordRTheta`, `CoordVr`, `CoordVtheta`, `CoordX`, `CoordY`, `CoordXY`, `CoordVx` and `CoordVy`).
 3.  The type of the B-Spline bases used on the logical dimensions (`BSplinesR` and `BSplinesTheta`).
 4.  The type which will describe the grid points on which the simulation will evolve (`GridR`, `GridTheta`). 
-5.  The type of the helper class which initialises grid points in space which are compatible with the defined splines (`SplineInterpPointsR`,  `SplineInterpPointsTheta`).
+5.  The type of the helper class which initialises grid points in space which are compatible with the defined splines (`SplineInterpPointsR`, `SplineInterpPointsTheta`).
 6.  The type of the objects used to build splines and evaluate them (`SplineRThetaBuilder`, `SplineRThetaEvaluator`).
 7.  The type which describes the index of a grid point (e.g. `IdxR`).
 8.  The type which describes a distance between grid points (e.g. `IdxStepR`).

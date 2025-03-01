@@ -10,7 +10,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_rp.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "bsl_predcorr.hpp"
 #include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
@@ -35,7 +35,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
     // SETUP ==========================================================================================
     fs::create_directory("output");
 
-    // Get the parameters of the mesh_rp from the grid_size.yaml. ----------------------------------------
+    // Get the parameters of the mesh_rtheta from the grid_size.yaml. ----------------------------------------
     PC_tree_t conf_gyselalibxx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
@@ -82,27 +82,29 @@ int main(int argc, char** argv)
 
     start_simulation = std::chrono::system_clock::now();
 
-    // Build the mesh_rp for the space. ------------------------------------------------------------------
+    // Build the mesh_rtheta for the space. ------------------------------------------------------------------
     IdxRangeR const mesh_r = init_pseudo_uniform_spline_dependent_idx_range<
             GridR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselalibxx, "r");
-    IdxRangeTheta const mesh_p = init_pseudo_uniform_spline_dependent_idx_range<
+    IdxRangeTheta const mesh_theta = init_pseudo_uniform_spline_dependent_idx_range<
             GridTheta,
             BSplinesTheta,
-            SplineInterpPointsTheta>(conf_gyselalibxx, "p");
+            SplineInterpPointsTheta>(conf_gyselalibxx, "theta");
     double const dt(PCpp_double(conf_gyselalibxx, ".Time.delta_t"));
     double const final_T(PCpp_double(conf_gyselalibxx, ".Time.final_T"));
 
-    IdxRangeRTheta const mesh_rp(mesh_r, mesh_p);
+    IdxRangeRTheta const mesh_rtheta(mesh_r, mesh_theta);
 
-    host_t<FieldMemRTheta<CoordRTheta>> coords(mesh_rp);
-    ddc::for_each(mesh_rp, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
+    host_t<FieldMemRTheta<CoordRTheta>> coords(mesh_rtheta);
+    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+        coords(irtheta) = ddc::coordinate(irtheta);
+    });
 
 
     // OPERATORS ======================================================================================
-    SplineRThetaBuilder const builder(mesh_rp);
-    SplineRThetaBuilder_host const builder_host(mesh_rp);
+    SplineRThetaBuilder const builder(mesh_rtheta);
+    SplineRThetaBuilder_host const builder_host(mesh_rtheta);
 
 
     // --- Define the mapping. ------------------------------------------------------------------------
@@ -147,41 +149,41 @@ int main(int argc, char** argv)
 #if defined(EULER_METHOD)
     Euler<FieldMemRTheta<CoordRTheta>,
           DVectorFieldMemRTheta<X, Y>,
-          Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp);
+          Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
 
 #elif defined(CRANK_NICOLSON_METHOD)
     double const epsilon_CN = 1e-8;
     CrankNicolson<
             FieldMemRTheta<CoordRTheta>,
             DVectorFieldMemRTheta<X, Y>,
-            Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp, 20, epsilon_CN);
+            Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta, 20, epsilon_CN);
 
 #elif defined(RK3_METHOD)
     RK3<FieldMemRTheta<CoordRTheta>,
         DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp);
+        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
 
 #elif defined(RK4_METHOD)
     RK4<FieldMemRTheta<CoordRTheta>,
         DVectorFieldMemRTheta<X, Y>,
-        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rp);
+        Kokkos::DefaultExecutionSpace> const time_stepper(mesh_rtheta);
 
 #endif
 
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
     SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
@@ -198,8 +200,8 @@ int main(int argc, char** argv)
 
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
-    DFieldMemRTheta coeff_alpha(mesh_rp);
-    DFieldMemRTheta coeff_beta(mesh_rp);
+    DFieldMemRTheta coeff_alpha(mesh_rtheta);
+    DFieldMemRTheta coeff_beta(mesh_rtheta);
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
@@ -229,7 +231,7 @@ int main(int argc, char** argv)
             to_physical_mapping,
             to_physical_mapping,
             advection_operator,
-            mesh_rp,
+            mesh_rtheta,
             builder_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
@@ -238,7 +240,7 @@ int main(int argc, char** argv)
             to_physical_mapping,
             to_physical_mapping,
             advection_operator,
-            mesh_rp,
+            mesh_rtheta,
             builder_host,
             poisson_solver,
             spline_evaluator_extrapol_host);
@@ -268,10 +270,10 @@ int main(int argc, char** argv)
 
     // --- save simulation data
     ddc::expose_to_pdi("r_size", ddc::discrete_space<BSplinesR>().ncells());
-    ddc::expose_to_pdi("p_size", ddc::discrete_space<BSplinesTheta>().ncells());
+    ddc::expose_to_pdi("theta_size", ddc::discrete_space<BSplinesTheta>().ncells());
 
     expose_mesh_to_pdi("r_coords", mesh_r);
-    expose_mesh_to_pdi("p_coords", mesh_p);
+    expose_mesh_to_pdi("theta_coords", mesh_theta);
 
     ddc::expose_to_pdi("delta_t", dt);
     ddc::expose_to_pdi("final_T", final_T);
@@ -285,30 +287,30 @@ int main(int argc, char** argv)
     // INITIALISATION                                                                                 |
     // ================================================================================================
     // Cartesian coordinates and jacobian ****************************
-    host_t<FieldMemRTheta<CoordX>> coords_x(mesh_rp);
-    host_t<FieldMemRTheta<CoordY>> coords_y(mesh_rp);
-    host_t<DFieldMemRTheta> jacobian(mesh_rp);
-    ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
-        CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irp));
-        coords_x(irp) = ddc::select<X>(coords_xy);
-        coords_y(irp) = ddc::select<Y>(coords_xy);
-        jacobian(irp) = to_physical_mapping.jacobian(ddc::coordinate(irp));
+    host_t<FieldMemRTheta<CoordX>> coords_x(mesh_rtheta);
+    host_t<FieldMemRTheta<CoordY>> coords_y(mesh_rtheta);
+    host_t<DFieldMemRTheta> jacobian(mesh_rtheta);
+    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+        CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irtheta));
+        coords_x(irtheta) = ddc::select<X>(coords_xy);
+        coords_y(irtheta) = ddc::select<Y>(coords_xy);
+        jacobian(irtheta) = to_physical_mapping.jacobian(ddc::coordinate(irtheta));
     });
 
 
 
-    host_t<DFieldMemRTheta> rho(mesh_rp);
-    host_t<DFieldMemRTheta> rho_eq(mesh_rp);
+    host_t<DFieldMemRTheta> rho(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_eq(mesh_rtheta);
 
     // Initialise rho and rho equilibrium ****************************
-    ddc::for_each(mesh_rp, [&](IdxRTheta const irp) {
-        rho(irp) = exact_rho.initialisation(coords(irp));
-        rho_eq(irp) = exact_rho.equilibrium(coords(irp));
+    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+        rho(irtheta) = exact_rho.initialisation(coords(irtheta));
+        rho_eq(irtheta) = exact_rho.equilibrium(coords(irtheta));
     });
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldMemRTheta phi_eq(mesh_rp);
-    host_t<DFieldMemRTheta> phi_eq_host(mesh_rp);
+    DFieldMemRTheta phi_eq(mesh_rtheta);
+    host_t<DFieldMemRTheta> phi_eq_host(mesh_rtheta);
     host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
     builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator_host);

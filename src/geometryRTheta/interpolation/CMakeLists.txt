@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: MIT
 
 
-add_library("interpolation_2D_rp" INTERFACE
+add_library("interpolation_polar" INTERFACE
 )
 
-target_include_directories("interpolation_2D_rp"
+target_include_directories("interpolation_polar"
     INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-target_link_libraries("interpolation_2D_rp"
+target_link_libraries("interpolation_polar"
     INTERFACE
         DDC::core
         gslx::geometry_RTheta
@@ -16,4 +16,4 @@ target_link_libraries("interpolation_2D_rp"
 
 )
 
-add_library("gslx::interpolation_2D_rp" ALIAS "interpolation_2D_rp")
+add_library("gslx::interpolation_polar" ALIAS "interpolation_polar")

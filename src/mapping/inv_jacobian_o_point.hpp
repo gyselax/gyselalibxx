@@ -243,8 +243,8 @@ public:
         IdxRangeRTheta idx_range_singular_point = discrete_mapping.idx_range_singular_point();
         // Average the values at (r = 0, theta):
         IdxR ir(idx_range_singular_point.front());
-        for (IdxTheta ip : IdxRangeTheta(idx_range_singular_point)) {
-            Coord<R, Theta> coord(ddc::coordinate(ir), ddc::coordinate(ip));
+        for (IdxTheta itheta : IdxRangeTheta(idx_range_singular_point)) {
+            Coord<R, Theta> coord(ddc::coordinate(ir), ddc::coordinate(itheta));
             Matrix_2x2 J_first_order = discrete_mapping.first_order_jacobian_matrix_r_rtheta(coord);
 
             double th = ddc::get<Theta>(coord);

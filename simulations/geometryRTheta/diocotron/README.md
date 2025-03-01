@@ -172,7 +172,7 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
  ### Recommended parameters: 
 * `Mesh:`
   * `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
-  * `p_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
+  * `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
   * `r_min: 0.0`  : position of the inner wall $`W_1`$. (Tests in Edoardo Zoni's article.)
   * `r_minus: 0.45` : position of the inner boundary of the initial density $`R_1`$. (Tests in Edoardo Zoni's article.)
   * `r_plus: 0.50`: position of the outer boundary of the initial density $`R_2`$. (Tests in Edoardo Zoni's article.)

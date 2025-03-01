@@ -3,7 +3,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
-#include "i_interpolator_2d_rp.hpp"
+#include "i_interpolator_rtheta.hpp"
 
 
 /**
@@ -38,7 +38,7 @@ private:
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
     using r_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type1>;
-    using p_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>;
+    using theta_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>;
     using mixed_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type>;
 
 public:
@@ -80,9 +80,9 @@ public:
         if (ddc::coordinate(r_idx_range.front()) == 0) {
             ddc::parallel_for_each(
                     theta_idx_range,
-                    KOKKOS_LAMBDA(IdxTheta const ip) {
+                    KOKKOS_LAMBDA(IdxTheta const itheta) {
                         bool const unicity_centre_point
-                                = inout_data(r_idx_range.front(), ip)
+                                = inout_data(r_idx_range.front(), itheta)
                                   == inout_data(r_idx_range.front(), theta_idx_range.front());
                         if (!unicity_centre_point) {
                             Kokkos::abort(

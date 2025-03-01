@@ -1,5 +1,5 @@
 """
-Define all the functions needed in the python files of the advection_2d_rp folder.
+Define all the functions needed in the python files of the advection_rtheta folder.
 """
 
 import argparse
@@ -82,7 +82,7 @@ def set_input(rmin_def, rmax_def, Nr_def, Nth_def, dt_def, T_def, curves_def=Fal
                             'r_min': args.rmin,
                             'r_max': args.rmax,
                             'r_ncells': args.Nr,
-                            'p_ncells': args.Nth
+                            'theta_ncells': args.Nth
                         },
                         'Time': {
                             'time_step': args.dt,
@@ -245,8 +245,8 @@ def treatment_feet(namefile):
         coordinates in theta; coordinates in x; coordinates in y;
         feet in r; feet in theta; feet in x; feet in y.
     """
-    Ir, Ip, Cr, Cp, Cx, Cy, Fr, Fp, Fx, Fy = np.loadtxt(namefile).T
-    return np.int64(Ir), np.int64(Ip), Cr, Cp, Cx, Cy, Fr, Fp, Fx, Fy
+    Ir, Ip, Cr, Ctheta, Cx, Cy, Fr, Fp, Fx, Fy = np.loadtxt(namefile).T
+    return np.int64(Ir), np.int64(Ip), Cr, Ctheta, Cx, Cy, Fr, Fp, Fx, Fy
 
 
 def take_errors_from_out(var_out):

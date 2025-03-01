@@ -6,9 +6,9 @@ constexpr char const* const params_yaml = R"PDI_CFG(SplineMesh:
   r_ncells: 128
   r_min: 0.0
   r_max: 1.0 
-  p_ncells: 256
-  p_min: 0.0
-  p_max: 6.283185307179586
+  theta_ncells: 256
+  theta_min: 0.0
+  theta_max: 6.283185307179586
 
 Time:
   delta_t: 0.1

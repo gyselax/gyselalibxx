@@ -18,7 +18,7 @@ input_file=test_case+".yaml"
 with open(input_file, "w", encoding="utf-8") as f:
     print("SplineMesh:", file=f)
     print("  r_ncells: 32", file=f)
-    print("  p_ncells: 32", file=f)
+    print("  theta_ncells: 32", file=f)
 
 with subprocess.Popen([executable, input_file], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()
@@ -36,7 +36,7 @@ error_32 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
 with open(input_file, "w", encoding="utf-8") as f:
     print("SplineMesh:", file=f)
     print("  r_ncells: 64", file=f)
-    print("  p_ncells: 64", file=f)
+    print("  theta_ncells: 64", file=f)
 
 with subprocess.Popen([executable, input_file], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()
