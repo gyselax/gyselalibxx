@@ -321,7 +321,8 @@ public:
                         = ddc::discrete_space<BSplinesTheta>().full_domain();
 
                 for (IdxR const ir : IdxRange<BSplinesR>(IdxR(0), IdxStepR(C + 1))) {
-                    for (IdxTheta const itheta : poloidal_spline_idx_range.take_first(np_in_singular)) {
+                    for (IdxTheta const itheta :
+                         poloidal_spline_idx_range.take_first(np_in_singular)) {
                         const ddc::Coordinate<DimX, DimY> point
                                 = curvilinear_to_cartesian.control_point(
                                         mapping_tensor_product_index_type(ir, itheta));

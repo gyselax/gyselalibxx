@@ -89,15 +89,15 @@ public:
             const double y = ddc::get<Y>(coord_xy);
 
             rho_init(irtheta) = rho_eq(irtheta)
-                            + eps
-                                      * (std::exp(
-                                                 -((x - x_star_1) * (x - x_star_1)
-                                                   + (y - y_star_1) * (y - y_star_1))
-                                                 / (2 * sigma * sigma))
-                                         + std::exp(
-                                                 -((x - x_star_2) * (x - x_star_2)
-                                                   + (y - y_star_2) * (y - y_star_2))
-                                                 / (2 * sigma * sigma)));
+                                + eps
+                                          * (std::exp(
+                                                     -((x - x_star_1) * (x - x_star_1)
+                                                       + (y - y_star_1) * (y - y_star_1))
+                                                     / (2 * sigma * sigma))
+                                             + std::exp(
+                                                     -((x - x_star_2) * (x - x_star_2)
+                                                       + (y - y_star_2) * (y - y_star_2))
+                                                     / (2 * sigma * sigma)));
         });
     }
 };

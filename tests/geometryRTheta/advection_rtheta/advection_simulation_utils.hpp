@@ -61,7 +61,8 @@ void print_coordinate(
         IdxRangeTheta idx_range_theta)
 {
     double const r = ddc::get<R>(coord_rtheta);
-    double const th = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rtheta), idx_range_theta);
+    double const th
+            = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(coord_rtheta), idx_range_theta);
 
     CoordXY coord_xy(to_physical_mapping(coord_rtheta));
     double const x = ddc::get<X>(coord_xy);
@@ -106,7 +107,11 @@ void output_feet(
         file_feet << std::setw(15) << (ir - ir_start).value() << std::setw(15)
                   << (itheta - itheta_start).value();
         print_coordinate(file_feet, ddc::coordinate(irtheta), to_physical_mapping, idx_range_theta);
-        print_coordinate(file_feet, feet_coords_rtheta(irtheta), to_physical_mapping, idx_range_theta);
+        print_coordinate(
+                file_feet,
+                feet_coords_rtheta(irtheta),
+                to_physical_mapping,
+                idx_range_theta);
         file_feet << std::endl;
     });
     file_feet.close();
@@ -467,7 +472,9 @@ void simulate(
         FieldRTheta<CoordRTheta> feet = get_field(feet_alloc);
         ddc::parallel_for_each(
                 grid,
-                KOKKOS_LAMBDA(const IdxRTheta irtheta) { feet(irtheta) = ddc::coordinate(irtheta); });
+                KOKKOS_LAMBDA(const IdxRTheta irtheta) {
+                    feet(irtheta) = ddc::coordinate(irtheta);
+                });
         auto advection_field_test_vec = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_test_vec_host));
@@ -489,7 +496,8 @@ void simulate(
             initial_function(irtheta) = simulation.advected_function(ddc::coordinate(irtheta));
 
             // Exact final state
-            end_function(irtheta) = simulation.advected_function(feet_coords_rtheta_end_time(irtheta));
+            end_function(irtheta)
+                    = simulation.advected_function(feet_coords_rtheta_end_time(irtheta));
         });
         saving_computed(to_physical_mapping_host, get_field(initial_function), name_0);
         saving_computed(to_physical_mapping_host, get_field(end_function), name_1);

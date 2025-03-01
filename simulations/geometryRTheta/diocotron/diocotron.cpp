@@ -97,7 +97,9 @@ int main(int argc, char** argv)
     IdxRangeRTheta const mesh_rtheta(mesh_r, mesh_theta);
 
     host_t<FieldMemRTheta<CoordRTheta>> coords(mesh_rtheta);
-    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) { coords(irtheta) = ddc::coordinate(irtheta); });
+    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+        coords(irtheta) = ddc::coordinate(irtheta);
+    });
 
 
     // OPERATORS ======================================================================================

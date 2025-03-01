@@ -206,7 +206,8 @@ TEST_P(SplineQuadrature, TestFunctions)
     IdxStepTheta const theta_ncells(Nt);
 
     std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> theta_knots = build_uniform_break_points(theta_min, theta_max, theta_ncells);
+    std::vector<CoordTheta> theta_knots
+            = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);

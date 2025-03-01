@@ -169,7 +169,9 @@ public:
         IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(allfdistribu));
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) { coords(irtheta) = ddc::coordinate(irtheta); });
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            coords(irtheta) = ddc::coordinate(irtheta);
+        });
 
         IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
@@ -435,8 +437,9 @@ private:
             // Convergence test:
             square_difference_feet = 0.;
             ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-                double sqr_diff_feet
-                        = compute_square_polar_distance(feet_coords(irtheta), feet_coords_tmp(irtheta));
+                double sqr_diff_feet = compute_square_polar_distance(
+                        feet_coords(irtheta),
+                        feet_coords_tmp(irtheta));
                 square_difference_feet = square_difference_feet > sqr_diff_feet
                                                  ? square_difference_feet
                                                  : sqr_diff_feet;

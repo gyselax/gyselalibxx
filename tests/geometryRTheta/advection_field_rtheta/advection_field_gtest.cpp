@@ -78,7 +78,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     IdxStepTheta const theta_ncells(Nt);
 
     std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> theta_knots = build_uniform_break_points(theta_min, theta_max, theta_ncells);
+    std::vector<CoordTheta> theta_knots
+            = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
     // Creating mesh & supports:
     ddc::init_discrete_space<BSplinesR>(r_knots);
@@ -88,7 +89,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
     IdxRangeR const interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta const interpolation_idx_range_Theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeTheta const interpolation_idx_range_Theta(
+            SplineInterpPointsTheta::get_domain<GridTheta>());
     IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 
     // Split the index range of the advection field along RTheta
@@ -198,7 +200,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
     host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
-    host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(advection_field_xy_from_rtheta_alloc);
+    host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(
+            advection_field_xy_from_rtheta_alloc);
 
 
 
@@ -268,8 +271,10 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
         // computation made in BslAdvectionRTheta operator:
-        ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta) = CoordX(advection_field_xy_centre);
-        ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta) = CoordY(advection_field_xy_centre);
+        ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
+                = CoordX(advection_field_xy_centre);
+        ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
+                = CoordY(advection_field_xy_centre);
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)
@@ -294,7 +299,11 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
-        advection_operator(allfdistribu_rtheta, advection_field_rtheta, advection_field_xy_centre, dt);
+        advection_operator(
+                allfdistribu_rtheta,
+                advection_field_rtheta,
+                advection_field_xy_centre,
+                dt);
         advection_operator(allfdistribu_xy, advection_field_xy, dt);
 
         // Check the advected functions ---

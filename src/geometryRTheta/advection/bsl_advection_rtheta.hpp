@@ -119,7 +119,9 @@ public:
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(advection_field_xy_host),
-                KOKKOS_LAMBDA(IdxRTheta const irtheta) { feet_rtheta(irtheta) = ddc::coordinate(irtheta); });
+                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                    feet_rtheta(irtheta) = ddc::coordinate(irtheta);
+                });
 
         auto advection_field_xy = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
@@ -183,10 +185,12 @@ public:
 
             ddcHelper::get<X>(advection_field_xy_host)(irtheta)
                     = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][0] * jacobian;
+                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][0]
+                                * jacobian;
             ddcHelper::get<Y>(advection_field_xy_host)(irtheta)
                     = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][1] * jacobian;
+                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][1]
+                                * jacobian;
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
@@ -207,7 +211,9 @@ public:
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 grid,
-                KOKKOS_LAMBDA(IdxRTheta const irtheta) { feet_rtheta(irtheta) = ddc::coordinate(irtheta); });
+                KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                    feet_rtheta(irtheta) = ddc::coordinate(irtheta);
+                });
 
         // Compute the characteristic feet at tn ----------------------------------------------------
         m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);

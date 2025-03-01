@@ -106,10 +106,12 @@ int main(int argc, char** argv)
             SplineInterpPointsR>(conf_voicexx, "r");
     PC_tree_destroy(&conf_voicexx);
 
-    std::vector<CoordTheta> theta_knots = build_uniform_break_points(theta_min, theta_max, theta_ncells);
+    std::vector<CoordTheta> theta_knots
+            = build_uniform_break_points(theta_min, theta_max, theta_ncells);
     ddc::init_discrete_space<BSplinesTheta>(theta_knots);
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
-    IdxRangeTheta const interpolation_idx_range_Theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeTheta const interpolation_idx_range_Theta(
+            SplineInterpPointsTheta::get_domain<GridTheta>());
 
     IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
 

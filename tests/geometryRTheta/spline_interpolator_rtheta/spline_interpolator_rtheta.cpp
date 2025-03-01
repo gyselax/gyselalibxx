@@ -112,15 +112,18 @@ void Interpolation_on_random_coord(
 
                     CoordTheta delta_coord_theta;
                     if (itheta + 1 <= itheta_max) {
-                        delta_coord_theta = CoordTheta(ddc::coordinate(itheta + 1) - ddc::coordinate(itheta));
-                    } else {
                         delta_coord_theta
-                                = CoordTheta(ddc::coordinate(itheta_min) - ddc::coordinate(itheta_min + 1));
+                                = CoordTheta(ddc::coordinate(itheta + 1) - ddc::coordinate(itheta));
+                    } else {
+                        delta_coord_theta = CoordTheta(
+                                ddc::coordinate(itheta_min) - ddc::coordinate(itheta_min + 1));
                     }
 
                     random_coords(irtheta) = CoordRTheta(
                             coord_r + delta_coord_r * random_factor_r,
-                            CoordTheta(fmod(coord_theta + delta_coord_theta * random_factor_theta, 2 * M_PI)));
+                            CoordTheta(
+                                    fmod(coord_theta + delta_coord_theta * random_factor_theta,
+                                         2 * M_PI)));
                 }
             });
 
@@ -144,7 +147,8 @@ void Interpolation_on_random_coord(
             0.0,
             ddc::reducer::max<double>(),
             KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                return Kokkos::fabs(function_evaluated(irtheta) - exact_function(random_coords(irtheta)));
+                return Kokkos::fabs(
+                        function_evaluated(irtheta) - exact_function(random_coords(irtheta)));
             });
 
     std::cout << "   Max absolute error : " << max_err;

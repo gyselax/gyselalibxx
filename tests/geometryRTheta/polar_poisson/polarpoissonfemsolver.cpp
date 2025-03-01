@@ -86,7 +86,8 @@ int main(int argc, char** argv)
     IdxStepTheta const theta_ncells(PCpp_int(conf_voicexx, ".SplineMesh.theta_ncells"));
 
     std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> theta_knots = build_uniform_break_points(theta_min, theta_max, theta_ncells);
+    std::vector<CoordTheta> theta_knots
+            = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
@@ -115,7 +116,8 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
     SplineRThetaEvaluatorNullBound evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
-    SplineRThetaEvaluatorNullBound_host evaluator_host(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
+    SplineRThetaEvaluatorNullBound_host
+            evaluator_host(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
 
     DiscreteMappingBuilder_host const discrete_mapping_builder_host(
             Kokkos::DefaultHostExecutionSpace(),
@@ -207,7 +209,9 @@ int main(int argc, char** argv)
         Spline2DMem rhs_spline(idx_range_bsplinesRTheta);
         host_t<DFieldMemRTheta> rhs_vals_host(grid);
 
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) { rhs_vals_host(irtheta) = rhs(coords(irtheta)); });
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            rhs_vals_host(irtheta) = rhs(coords(irtheta));
+        });
         auto rhs_vals = ddc::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(rhs_vals_host));

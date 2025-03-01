@@ -225,7 +225,9 @@ private:
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) { coords(irtheta) = ddc::coordinate(irtheta); });
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            coords(irtheta) = ddc::coordinate(irtheta);
+        });
 
         // > computation of the phi derivatives
         host_t<DFieldMemRTheta> deriv_r_phi(grid);
@@ -253,10 +255,10 @@ private:
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
 
                 // Gradient of phi in the physical index range (Cartesian index range)
-                double const deriv_x_phi
-                        = deriv_r_phi(irtheta) * inv_J[0][0] + deriv_theta_phi(irtheta) * inv_J[1][0];
-                double const deriv_y_phi
-                        = deriv_r_phi(irtheta) * inv_J[0][1] + deriv_theta_phi(irtheta) * inv_J[1][1];
+                double const deriv_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
+                                           + deriv_theta_phi(irtheta) * inv_J[1][0];
+                double const deriv_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
+                                           + deriv_theta_phi(irtheta) * inv_J[1][1];
 
                 // E = -grad phi
                 ddcHelper::get<X>(electric_field)(irtheta) = -deriv_x_phi;
@@ -321,15 +323,19 @@ private:
 
 
                 // --- Linearisation:
-                ddcHelper::get<X>(electric_field)(irtheta) = electric_field_x_0 * (1 - r / m_epsilon)
-                                                         + electric_field_x_epsilon * r / m_epsilon;
-                ddcHelper::get<Y>(electric_field)(irtheta) = electric_field_y_0 * (1 - r / m_epsilon)
-                                                         + electric_field_y_epsilon * r / m_epsilon;
+                ddcHelper::get<X>(electric_field)(irtheta)
+                        = electric_field_x_0 * (1 - r / m_epsilon)
+                          + electric_field_x_epsilon * r / m_epsilon;
+                ddcHelper::get<Y>(electric_field)(irtheta)
+                        = electric_field_y_0 * (1 - r / m_epsilon)
+                          + electric_field_y_epsilon * r / m_epsilon;
             }
 
             // > computation of the advection field
-            ddcHelper::get<X>(advection_field_xy)(irtheta) = -ddcHelper::get<Y>(electric_field)(irtheta);
-            ddcHelper::get<Y>(advection_field_xy)(irtheta) = ddcHelper::get<X>(electric_field)(irtheta);
+            ddcHelper::get<X>(advection_field_xy)(irtheta)
+                    = -ddcHelper::get<Y>(electric_field)(irtheta);
+            ddcHelper::get<Y>(advection_field_xy)(irtheta)
+                    = ddcHelper::get<X>(electric_field)(irtheta);
         });
     }
 
