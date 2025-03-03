@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ensures the script is not being sourced
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    echo "This script must be executed, not sourced!" >&2
+    return 1
+fi
+
 TOOLCHAIN_ROOT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)"
 
 set -eu
@@ -17,22 +23,23 @@ module load spack-user-4.0.0
 # Inject PDI recipes into our local repo.
 git clone https://github.com/pdidev/spack pdi.spack || true
 cd pdi.spack && git checkout ac5b78d && cd ..
-cp -rf -- pdi.spack/packages "${SPACK_USER_PREFIX}/config_user_spack/local-repo"
+# NOTE: We could do a: spack repo add
+cp -rf -- pdi.spack/packages "${SPACK_USER_CONFIG_PATH}/local-repo"
 
 # NOTE: A sparse checkout would be great.
 git clone https://github.com/spack/spack spack.spack || true
-cd spack.spack && git fetch && git checkout ba6cb62 && cd ..
+cd spack.spack && git fetch && git checkout 8e7489bc172442a49ac03263a3032c6829c96f21 && cd ..
 # NOTE: We may be overriding some CINES modified recipes.
-cp -rf -- spack.spack/var/spack/repos/builtin/packages/ginkgo "${SPACK_USER_PREFIX}/config_user_spack/local-repo/packages"
+cp -rf -- spack.spack/var/spack/repos/builtin/packages/ginkgo "${SPACK_USER_CONFIG_PATH}/local-repo/packages"
 
 # FIXME: Add a recent Ginkgo to its package.py
-sed -i '/version("master", branch="master")/a\    version("1.8.0", commit="586b1754058d7a32d4bd1b650f9603484c2a8927")  # v1.8.0' ${SPACK_USER_PREFIX}/config_user_spack/local-repo/packages/ginkgo/package.py
+sed -i '/args.append("-DGINKGO_HIP_AMDGPU={0}".format(arch_str))/a\                args.append("-DCMAKE_HIP_ARCHITECTURES={0}".format(arch_str))' "${SPACK_USER_CONFIG_PATH}/local-repo/packages/ginkgo/package.py"
 
 echo "Preparing the Spack environment..."
 
 # # Either do not use the source mirrors or use --no-check-signature. There is an
 # # ongoing issue a CINES to fix the issue.
-# echo "# Disabled" >"${SPACK_USER_PREFIX}/config_user_spack/mirrors.yaml"
+# echo "# Disabled" >"${SPACK_USER_CONFIG_PATH}/mirrors.yaml"
 
 # We use GCC as a base compiler (c/c++/fortran) and implicitly, ROCm's hipcc when the +rocm variant is specified.
 PRODUCT_SPEC_LIST="
