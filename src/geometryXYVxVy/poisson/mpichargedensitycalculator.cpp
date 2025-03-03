@@ -16,7 +16,7 @@ MpiChargeDensityCalculator::MpiChargeDensityCalculator(
 {
 }
 
-void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpXYVxVy allfdistribu) const
+void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("MpiChargeDensityCalculator");
 

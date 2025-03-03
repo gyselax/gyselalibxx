@@ -22,7 +22,7 @@ void QNSolver::operator()(
         DFieldXY const electrostatic_potential,
         DFieldXY const electric_field_x,
         DFieldXY const electric_field_y,
-        DConstFieldSpXYVxVy const allfdistribu) const
+        DConstFieldSpVxVyXY const allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("QNSolver");
     assert((get_idx_range(electrostatic_potential) == get_idx_range<GridX, GridY>(allfdistribu)));
