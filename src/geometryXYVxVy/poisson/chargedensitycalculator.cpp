@@ -9,7 +9,7 @@
 
 ChargeDensityCalculator::ChargeDensityCalculator(DConstFieldVxVy coeffs) : m_quadrature(coeffs) {}
 
-void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpXYVxVy allfdistribu) const
+void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const
 {
     Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
 
