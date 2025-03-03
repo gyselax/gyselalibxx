@@ -441,7 +441,7 @@ void simulate(
     double max_err = 0.;
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         double const err
-                = fabs(allfdistribu_advected_test(irtheta)
+                = fabs(allfdistribu_test(irtheta)
                        - simulation.advected_function(feet_coords_rtheta_end_time(irtheta)));
         max_err = max_err > err ? max_err : err;
     });
