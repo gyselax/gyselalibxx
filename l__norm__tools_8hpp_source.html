@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('l__norm__tools_8hpp_source.html',''); 
 <div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="l__norm__tools_8hpp.html#af586948949594fb53ccfd4010d0a0fd6">   67</a></span>KOKKOS_INLINE_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> coord)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> coord;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> Kokkos::fabs(coord);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
