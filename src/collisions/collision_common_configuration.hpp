@@ -93,13 +93,13 @@ public:
     using GridSpType = GridSp;
 
     /**
-     * @brief Sp,R,Theta,Vpar index range.
+     * @brief Sp,Theta,R,Vpar index range.
      */
-    using IdxRangeSpRThetaVparType = IdxRange<GridSpType, GridRType, GridThetaType, GridVparType>;
+    using IdxRangeSpThetaRVparType = IdxRange<GridSpType, GridThetaType, GridRType, GridVparType>;
     /**
-     * @brief R,Theta index range.
+     * @brief Theta,R index range.
      */
-    using IdxRangeRThetaType = IdxRange<GridRType, GridThetaType>;
+    using IdxRangeThetaRType = IdxRange<GridThetaType, GridRType>;
 
     /**
      * @brief Mu index range.
@@ -143,14 +143,14 @@ public:
         : m_hat_As_allocation {extract_md_index_range<GridSpType>(index_range_fdistribution)}
         , m_hat_Zs_allocation {extract_md_index_range<GridSpType>(index_range_fdistribution)}
         , m_mask_buffer_r_allocation {extract_md_index_range<GridRType>(index_range_fdistribution)}
-        , m_mask_LIM_allocation {extract_md_index_range<GridRType, GridThetaType>(
+        , m_mask_LIM_allocation {extract_md_index_range<GridThetaType, GridRType>(
                   index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range<GridRType, GridThetaType>(
+        , m_B_norm_allocation {extract_md_index_range<GridThetaType, GridRType>(
                   index_range_fdistribution)}
         , m_Bstar_s_allocation {extract_md_index_range<
                   GridSpType,
-                  GridRType,
                   GridThetaType,
+                  GridRType,
                   GridVparType>(index_range_fdistribution)}
         , m_mug_allocation {extract_md_index_range<GridMuType>(index_range_fdistribution)}
         , m_vparg_allocation {extract_md_index_range<GridVparType>(index_range_fdistribution)}
@@ -323,19 +323,19 @@ public:
     /**
      * @brief Limiter mask in (theta,r).
      */
-    DFieldMem<IdxRangeRThetaType> m_mask_LIM_allocation;
+    DFieldMem<IdxRangeThetaRType> m_mask_LIM_allocation;
 
     /**
      * @brief B norm in (theta,r).
      * [TODO] Attention this must be 3D for generalisation to 3D geometry.
      */
-    DFieldMem<IdxRangeRThetaType> m_B_norm_allocation;
+    DFieldMem<IdxRangeThetaRType> m_B_norm_allocation;
 
     /**
      * @brief Bstar_s(species,theta,r,vpar).
      * [TODO] Must be 5D for full 3D geometry.
      */
-    DFieldMem<IdxRangeSpRThetaVparType> m_Bstar_s_allocation;
+    DFieldMem<IdxRangeSpThetaRVparType> m_Bstar_s_allocation;
 
     /**
      * @brief Grid in mu direction.
