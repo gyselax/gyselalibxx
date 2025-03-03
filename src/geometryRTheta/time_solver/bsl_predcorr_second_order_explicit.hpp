@@ -9,8 +9,8 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
-#include "advection_field_rp.hpp"
-#include "bsl_advection_rp.hpp"
+#include "advection_field_rtheta.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
@@ -18,7 +18,7 @@
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
@@ -169,7 +169,9 @@ public:
         IdxRangeRTheta const grid(get_idx_range<GridR, GridTheta>(allfdistribu_host));
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            coords(irtheta) = ddc::coordinate(irtheta);
+        });
 
         IdxRangeBSR radial_bsplines(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStep<BSplinesR> {PolarBSplinesRTheta::continuity + 1}));
@@ -239,8 +241,8 @@ public:
 
             // --- advect also the feet because it is needed for the next step
             host_t<FieldMemRTheta<CoordRTheta>> feet_coords(grid);
-            ddc::for_each(grid, [&](IdxRTheta const irp) {
-                feet_coords(irp) = CoordRTheta(ddc::coordinate(irp));
+            ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+                feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));
             });
             m_find_feet(get_field(feet_coords), get_field(advection_field_host), dt);
 
@@ -279,14 +281,14 @@ public:
 
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
-            ddc::for_each(grid, [&](IdxRTheta const irp) {
-                ddcHelper::get<X>(advection_field_host)(irp)
-                        = (ddcHelper::get<X>(advection_field_evaluated)(irp)
-                           + ddcHelper::get<X>(advection_field_predicted)(irp))
+            ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+                ddcHelper::get<X>(advection_field_host)(irtheta)
+                        = (ddcHelper::get<X>(advection_field_evaluated)(irtheta)
+                           + ddcHelper::get<X>(advection_field_predicted)(irtheta))
                           / 2.;
-                ddcHelper::get<Y>(advection_field_host)(irp)
-                        = (ddcHelper::get<Y>(advection_field_evaluated)(irp)
-                           + ddcHelper::get<Y>(advection_field_predicted)(irp))
+                ddcHelper::get<Y>(advection_field_host)(irtheta)
+                        = (ddcHelper::get<Y>(advection_field_evaluated)(irtheta)
+                           + ddcHelper::get<Y>(advection_field_predicted)(irtheta))
                           / 2.;
             });
 

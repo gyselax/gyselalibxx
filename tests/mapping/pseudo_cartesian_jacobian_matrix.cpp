@@ -179,10 +179,10 @@ public:
         ddc::init_discrete_space<GridR>(InterpPointsR::template get_sampling<GridR>());
         ddc::init_discrete_space<GridTheta>(InterpPointsTheta::template get_sampling<GridTheta>());
 
-        IdxRangeR interpolation_idx_range_R(InterpPointsR::template get_domain<GridR>());
-        IdxRangeTheta interpolation_idx_range_Theta(
+        IdxRangeR interpolation_idx_range_r(InterpPointsR::template get_domain<GridR>());
+        IdxRangeTheta interpolation_idx_range_theta(
                 InterpPointsTheta::template get_domain<GridTheta>());
-        IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
+        IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
         // --- Define the operators. ----------------------------------------------------------------------
         SplineRThetaBuilder_host const builder(grid);

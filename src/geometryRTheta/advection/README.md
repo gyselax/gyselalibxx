@@ -157,7 +157,7 @@ The BslAdvectionRTheta operator can take as input the advection field along the 
 A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta).
 ```
 
-The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see [advection\_field\_rp](./../advection_field/README.md)).
+The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see [advection\_field\_rtheta](./../advection_field/README.md)).
 
 * If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRTheta operator. 
 
@@ -221,8 +221,8 @@ to get the advection field along the physical domain axis.
 
 # Unit tests
 
-The test of the advection operator are implemented in the `tests/geometryRTheta/advection_2d_rp/` folder 
-([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_2d_rp/README.md)).
+The test of the advection operator are implemented in the `tests/geometryRTheta/advection_rtheta/` folder 
+([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_rtheta/README.md)).
 
 
 It tests: 
@@ -264,8 +264,8 @@ Journal of Computational Physics (2019).
 # Contents
 
 This folder contains:
- - iadvection\_rp.hpp : define the base class for advection operator (IAdvectionRTheta). 
- 	- bsl\_advection\_rp.hpp : define the advection operator described just before (BslAdvectionRTheta). 
+ - iadvection\_rtheta.hpp : define the base class for advection operator (IAdvectionRTheta). 
+ 	- bsl\_advection\_rtheta.hpp : define the advection operator described just before (BslAdvectionRTheta). 
 
 
 
