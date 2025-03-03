@@ -97,11 +97,11 @@ int main(int argc, char** argv)
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
     init_fequilibrium(get_field(allfequilibrium));
-    DFieldMemSpXYVxVy allfdistribu(idxrange_spxyvxvy_x2Dsplit);
+    DFieldMemSpXYVxVy allfdistribu_x2D_split(idxrange_spxyvxvy_x2Dsplit);
+    DFieldMemSpVxVyXY allfdistribu_v2D_split(idxrange_spvxvyxy_v2Dsplit);
     SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
             init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
-    init(get_field(allfdistribu));
-    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
+    init(get_field(allfdistribu_x2D_split));
 
     // --> Algorithm info
     double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
@@ -178,11 +178,17 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi(
             "fdistribu_masses",
             ddc::discrete_space<Species>().masses()[idx_range_kinsp]);
+    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
     ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
 
     steady_clock::time_point const start = steady_clock::now();
 
-    predcorr(get_field(allfdistribu), deltat, nbiter);
+    transpose(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(allfdistribu_v2D_split),
+            get_const_field(allfdistribu_x2D_split));
+
+    predcorr(get_field(allfdistribu_v2D_split), deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();
 
