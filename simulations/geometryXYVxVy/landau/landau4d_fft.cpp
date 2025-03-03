@@ -188,6 +188,10 @@ int main(int argc, char** argv)
             get_field(allfdistribu_v2D_split),
             get_const_field(allfdistribu_x2D_split));
 
+    // Save the output index range
+    IdxRangeSpXYVxVy idxrange_spxyvxvy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
+    PDI_expose_idx_range(idxrange_spxyvxvy_v2Dsplit, "local_fdistribu");
+
     predcorr(get_field(allfdistribu_v2D_split), deltat, nbiter);
 
     steady_clock::time_point const end = steady_clock::now();

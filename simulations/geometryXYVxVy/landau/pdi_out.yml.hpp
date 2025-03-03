@@ -48,19 +48,25 @@ metadata:
     subtype: double
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]', '$fdistribu_eq_extents[2]' ]
 
+  #-- Parallel data
+  local_fdistribu_starts: { type: array, subtype: size_t, size: 5 }
+  local_fdistribu_extents: { type: array, subtype: size_t, size: 5 }
+
+
 data:
   fdistribu_extents: { type: array, subtype: int64, size: 5 }
   fdistribu:
     type: array
     subtype: double
-    size: [ '$fdistribu_extents[0]', '$fdistribu_extents[1]', '$fdistribu_extents[2]', '$fdistribu_extents[3]', '$fdistribu_extents[4]' ]
+    size: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]' ]
   electrostatic_potential_extents: { type: array, subtype: int64, size: 2 }
   electrostatic_potential:
     type: array
     subtype: double
-    size: [ '$electrostatic_potential_extents[0]', '$electrostatic_potential_extents[1]' ]
+    size: [ '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]' ]
 
 plugins:
+  mpi:
   set_value:
     on_init:
       - share:
@@ -77,9 +83,21 @@ plugins:
       collision_policy: replace_and_warn
       write: [Nx_spline_cells, Nvx_spline_cells, MeshX, MeshY, MeshVx, MeshVy, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
     - file: 'VOICEXX_${iter_saved:05}.h5'
+      communicator: $MPI_COMM_WORLD
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
-      write: [time_saved, fdistribu, electrostatic_potential]
+      datasets:
+        fdistribu:
+          type: array
+          subtype: double
+          size: []
+      write:
+        time_saved: ~
+        fdistribu:
+          dataset_selection:
+            size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
+            start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]' ]
+        electrostatic_potential: ~
   #trace: ~
 )PDI_CFG";
