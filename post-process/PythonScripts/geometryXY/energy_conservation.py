@@ -1,5 +1,5 @@
 """
-Save and plot the energy conservation of the guiding center XY simulation.
+Save and plot the energy conservation of the guiding centre XY simulation.
 """
 
 import argparse

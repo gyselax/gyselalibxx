@@ -53,7 +53,7 @@ if __name__ == '__main__':
                         action='store',
                         default=-0.1533,
                         type=float,
-                        help='theoritical growth rate')
+                        help='theoretical growth rate')
 
     args = parser.parse_args()
 
@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
     def plot_fdist(itime,Vx,Vy):
         '''
-        Plot the initial distribution function in (X,Y) fo a fixed (Vx, Vy) velocity position.
+        Plot the initial distribution function in (X,Y) of a fixed (Vx, Vy) velocity position.
         '''
 
         plt.clf()

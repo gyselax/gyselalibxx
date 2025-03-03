@@ -44,7 +44,7 @@ KOKKOS_FUNCTION double norm_inf(ddc::Coordinate<Tags...> coord)
 template <class... Tags>
 KOKKOS_FUNCTION double norm_inf(DVector<Tags...> vec)
 {
-    using index_set = typename DVector<Tags...>::vector_index_set_t<0>;
+    using index_set = typename DVector<Tags...>::template vector_index_set_t<0>;
     static_assert(
             std::is_same_v<index_set, vector_index_set_dual_t<index_set>>,
             "Mapping is needed to calculate norm_inf on a non-orthonormal coordinate system");
@@ -66,7 +66,7 @@ KOKKOS_FUNCTION double norm_inf(DVector<Tags...> vec)
  */
 KOKKOS_INLINE_FUNCTION double norm_inf(double const coord)
 {
-    return coord;
+    return Kokkos::fabs(coord);
 }
 
 namespace detail {

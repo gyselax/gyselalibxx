@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
         time[i] = time_diag
         for ispecies in range(Nspecies):
-            # Warning: the velocity grid is normalized to v_Ts = sqrt(T0_s / m_s).
+            # Warning: the velocity grid is normalised to v_Ts = sqrt(T0_s / m_s).
             #  Right now we assume T0_s = 1
             # Density
             xr_fdistribu_sps = xr_fdistribu.isel(species=ispecies) / (mass.isel(species=ispecies))**1.5
