@@ -31,8 +31,8 @@ function (advection_field_test_executable SIMULATION)
             
             gslx::poisson_RTheta
             gslx::geometry_RTheta
-            gslx::interpolation_rtheta
-            gslx::advection_rtheta
+            gslx::interpolation_RTheta
+            gslx::advection_RTheta
             gslx::time_integration_rtheta
             gslx::quadrature
             gslx::utils
