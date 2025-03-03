@@ -396,8 +396,8 @@ using X2DSplit = MPILayout<IdxRangeSpXYVxVy, GridX, GridY>;
 using V2DSplit = MPILayout<IdxRangeSpVxVyXY, GridVx, GridVy>;
 
 /**
- * @brief A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operat
-ors such as advections.
+ * @brief A class providing aliases for useful subindex ranges of the geometry when the data is saved with the spatial dimensions
+ * distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections.
  */
 class GeometryXYVxVy
 {
@@ -433,6 +433,10 @@ public:
     using IdxRangeFdistribu = IdxRangeSpXYVxVy;
 };
 
+/**
+ * @brief A class providing aliases for useful subindex ranges of the geometry when the data is saved with the velocity dimensions
+ * distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections.
+ */
 class GeometryVxVyXY
 {
 public:
