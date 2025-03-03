@@ -46,10 +46,14 @@ int main(int argc, char** argv)
     PC_tree_t conf_voicexx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
+    MPI_Init(&argc, &argv);
     PDI_init(conf_pdi);
 
     Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
+
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     // Reading config
     // --> Mesh info
@@ -178,8 +182,10 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi(
             "fdistribu_masses",
             ddc::discrete_space<Species>().masses()[idx_range_kinsp]);
-    auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
-    ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
+    if (rank == 0) {
+        auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
+        ddc::PdiEvent("initial_state").with("fdistribu_eq", allfequilibrium_host);
+    }
 
     steady_clock::time_point const start = steady_clock::now();
 
@@ -202,6 +208,8 @@ int main(int argc, char** argv)
     PC_tree_destroy(&conf_pdi);
 
     PDI_finalize();
+
+    MPI_Finalize();
 
     PC_tree_destroy(&conf_voicexx);
 

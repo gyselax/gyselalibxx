@@ -91,7 +91,7 @@ plugins:
         fdistribu:
           type: array
           subtype: double
-          size: []
+          size: [ 'Nkinspecies', '$MeshX_extents[0]', '$MeshY_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]' ]
       write:
         time_saved: ~
         fdistribu:
