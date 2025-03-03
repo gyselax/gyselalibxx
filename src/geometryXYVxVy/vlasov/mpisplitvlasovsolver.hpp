@@ -63,7 +63,7 @@ public:
      * @return The distribution function after solving the Vlasov equation.
      */
     DFieldSpXYVxVy operator()(
-            DFieldSpXYVxVy allfdistribu,
+            DFieldSpVxVyXY allfdistribu,
             DConstFieldXY electric_field_x,
             DConstFieldXY electric_field_y,
             double dt) const override;

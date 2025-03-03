@@ -17,7 +17,7 @@ MpiSplitVlasovSolver::MpiSplitVlasovSolver(
 }
 
 DFieldSpXYVxVy MpiSplitVlasovSolver::operator()(
-        DFieldSpXYVxVy const allfdistribu_x2Dsplit,
+        DFieldSpVxVyXY const allfdistribu_x2Dsplit,
         DConstFieldXY const electric_field_x,
         DConstFieldXY const electric_field_y,
         double const dt) const
@@ -37,21 +37,26 @@ DFieldSpXYVxVy MpiSplitVlasovSolver::operator()(
             get_field(local_electric_field_y),
             electric_field_y[idx_range_xy_v2Dsplit]);
 
-    m_advec_vx(allfdistribu_x2Dsplit, get_const_field(local_electric_field_x), dt / 2);
-    m_advec_vy(allfdistribu_x2Dsplit, get_const_field(local_electric_field_y), dt / 2);
-    m_transpose(
-            Kokkos::DefaultExecutionSpace(),
-            allfdistribu_v2Dsplit,
-            get_const_field(allfdistribu_x2Dsplit));
+    // Advect in spatial dimensions
     m_advec_x(allfdistribu_v2Dsplit, dt / 2);
-    m_advec_y(allfdistribu_v2Dsplit, dt);
-    m_advec_x(allfdistribu_v2Dsplit, dt / 2);
+    m_advec_y(allfdistribu_v2Dsplit, dt / 2);
+    // Swap to vxvy contiguous layout
     m_transpose(
             Kokkos::DefaultExecutionSpace(),
             allfdistribu_x2Dsplit,
             get_const_field(allfdistribu_v2Dsplit));
+    // Advect in velocity dimensions
     m_advec_vx(allfdistribu_x2Dsplit, get_const_field(local_electric_field_x), dt / 2);
-    m_advec_vy(allfdistribu_x2Dsplit, get_const_field(local_electric_field_y), dt / 2);
+    m_advec_vy(allfdistribu_x2Dsplit, get_const_field(local_electric_field_y), dt);
+    m_advec_vx(allfdistribu_x2Dsplit, get_const_field(local_electric_field_x), dt / 2);
+    // Swap to xy contiguous layout
+    m_transpose(
+            Kokkos::DefaultExecutionSpace(),
+            allfdistribu_v2Dsplit,
+            get_const_field(allfdistribu_x2Dsplit));
+    // Advect in spatial dimensions
+    m_advec_y(allfdistribu_v2Dsplit, dt / 2);
+    m_advec_x(allfdistribu_v2Dsplit, dt / 2);
 
-    return allfdistribu_x2Dsplit;
+    return allfdistribu_v2Dsplit;
 }
