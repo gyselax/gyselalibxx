@@ -17,13 +17,13 @@ PredCorr::PredCorr(IVlasovSolver const& vlasov_solver, IQNSolver const& poisson_
 {
 }
 
-DFieldSpXYVxVy PredCorr::operator()(
-        DFieldSpXYVxVy const allfdistribu,
+DFieldSpVxVyXY PredCorr::operator()(
+        DFieldSpVxVyXY const allfdistribu,
         double const dt,
         int const steps) const
 {
     auto allfdistribu_host_alloc = ddc::create_mirror_view_and_copy(allfdistribu);
-    host_t<DFieldSpXYVxVy> allfdistribu_host = get_field(allfdistribu_host_alloc);
+    host_t<DFieldSpVxVyXY> allfdistribu_host = get_field(allfdistribu_host_alloc);
 
     // electrostatic potential and electric field (depending only on x)
     DFieldMemXY electrostatic_potential(get_idx_range<GridX, GridY>(allfdistribu));
@@ -33,7 +33,7 @@ DFieldSpXYVxVy PredCorr::operator()(
     host_t<DFieldMemXY> electrostatic_potential_host(get_idx_range<GridX, GridY>(allfdistribu));
 
     // a 2D memory block of the same size as fdistribu
-    DFieldMemSpXYVxVy allfdistribu_half_t(get_idx_range(allfdistribu));
+    DFieldMemSpVxVyXY allfdistribu_half_t(get_idx_range(allfdistribu));
 
     m_poisson_solver(
             get_field(electrostatic_potential),

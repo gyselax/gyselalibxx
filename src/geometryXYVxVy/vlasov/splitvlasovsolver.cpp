@@ -16,7 +16,7 @@ SplitVlasovSolver::SplitVlasovSolver(
 {
 }
 
-DFieldSpXYVxVy SplitVlasovSolver::operator()(
+DFieldSpVxVyXY SplitVlasovSolver::operator()(
         DFieldSpVxVyXY const allfdistribu,
         DConstFieldXY const electric_field_x,
         DConstFieldXY const electric_field_y,
