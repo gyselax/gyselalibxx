@@ -74,12 +74,12 @@ plugins:
       - release: [iter_saved]
       
   decl_hdf5:
-    - file: 'output/VOICEXX_initstate.h5'
+    - file: 'output/GYSELALIBXX_initstate.h5'
       on_event: [initialisation]
       collision_policy: replace_and_warn
       write: [Nx_spline_cells, Ny_spline_cells, MeshX, MeshY, nbstep_diag, final_time, time_step, fdistribu_equilibrium]
 
-    - file: 'output/VOICEXX_${iter:05}.h5'
+    - file: 'output/GYSELALIBXX_${iter:05}.h5'
       on_event: [iteration]
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
