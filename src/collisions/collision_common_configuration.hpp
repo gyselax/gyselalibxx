@@ -165,12 +165,12 @@ public:
         , m_phi_extent {extract_md_index_range<GridPhiType>(index_range_fdistribution).size()}
         , m_sp_extent {extract_md_index_range<GridSpType>(index_range_fdistribution).size()}
     {
-        if ((m_mu_extent > 0) && ((m_mu_extent & (m_mu_extent - 1)) == 0) && (m_vpar_extent > 0)
-            && ((m_vpar_extent & (m_vpar_extent - 1)) == 0) && (m_r_extent > 0)
-            && ((m_r_extent & (m_r_extent - 1)) == 0) && (m_theta_extent > 0)
-            && ((m_theta_extent & (m_theta_extent - 1)) == 0) && (m_phi_extent > 0)
-            && ((m_phi_extent & (m_phi_extent - 1)) == 0) && (m_sp_extent > 0)
-            && ((m_sp_extent & (m_sp_extent - 1)) == 0)) {
+        if (!((m_mu_extent > 0) && ((m_mu_extent & (m_mu_extent - 1)) == 0) && (m_vpar_extent > 0)
+              && ((m_vpar_extent & (m_vpar_extent - 1)) == 0) && (m_r_extent > 0)
+              && ((m_r_extent & (m_r_extent - 1)) == 0) && (m_theta_extent > 0)
+              && ((m_theta_extent & (m_theta_extent - 1)) == 0) && (m_phi_extent > 0)
+              && ((m_phi_extent & (m_phi_extent - 1)) == 0) && (m_sp_extent > 0)
+              && ((m_sp_extent & (m_sp_extent - 1)) == 0))) {
             throw std::runtime_error("For performance reason, the number of points in "
                                      "each dimension must be a power of 2.");
         }
