@@ -54,7 +54,6 @@ metadata:
 
 
 data:
-  fdistribu_extents: { type: array, subtype: int64, size: 5 }
   fdistribu:
     type: array
     subtype: double
@@ -63,7 +62,7 @@ data:
   electrostatic_potential:
     type: array
     subtype: double
-    size: [ '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]' ]
+    size: [ '$electrostatic_potential_extents[0]', '$electrostatic_potential_extents[1]' ]
 
 plugins:
   mpi:
