@@ -285,7 +285,7 @@ int main(int argc, char** argv)
     CoordTheta const theta_max(2.0 * M_PI);
     IdxStepTheta const theta_ncells(PCpp_int(conf_voicexx, ".SplineMesh.theta_ncells"));
 
-    IdxRangeR const interpolation_idx_range_R = init_pseudo_uniform_spline_dependent_idx_range<
+    IdxRangeR const interpolation_idx_range_r = init_pseudo_uniform_spline_dependent_idx_range<
             GridR,
             BSplinesR,
             SplineInterpPointsR>(conf_voicexx, "r");
@@ -298,14 +298,14 @@ int main(int argc, char** argv)
 
     IdxRangeTheta const interpolation_idx_range_theta(
             SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_theta);
+    IdxRangeRTheta const grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    CoordR const rmin = ddc::coordinate(interpolation_idx_range_R.front());
-    CoordR const rmax = ddc::coordinate(interpolation_idx_range_R.back());
+    CoordR const rmin = ddc::coordinate(interpolation_idx_range_r.front());
+    CoordR const rmax = ddc::coordinate(interpolation_idx_range_r.back());
 
     std::cout << "TESTS ON THE ADVECTION OPERATOR "
               << "FOR [rmin, rmax] = [" << double(rmin) << ", " << double(rmax) << "], "
-              << "WITH NrxNt = " << interpolation_idx_range_R.size() << "x"
+              << "WITH NrxNt = " << interpolation_idx_range_r.size() << "x"
               << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
 

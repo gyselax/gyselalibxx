@@ -216,9 +216,9 @@ TEST_P(SplineQuadrature, TestFunctions)
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeR interpolation_idx_range_r(SplineInterpPointsR::get_domain<GridR>());
     IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_theta);
+    IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     SplineRThetaBuilder_host builder(grid);
 

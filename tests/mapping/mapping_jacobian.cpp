@@ -218,9 +218,9 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeR interpolation_idx_range_R(InterpPointsR::get_domain<GridR>());
+    IdxRangeR interpolation_idx_range_r(InterpPointsR::get_domain<GridR>());
     IdxRangeTheta interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_theta);
+    IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     SplineRThetaBuilder_host builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
