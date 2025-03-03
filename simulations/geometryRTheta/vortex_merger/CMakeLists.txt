@@ -21,7 +21,7 @@ target_link_libraries(vortex_merger
         gslx::poisson_RTheta
         gslx::quadrature
         gslx::simulation_utils
-        gslx::time_integration_rtheta
+        gslx::time_integration_RTheta
         gslx::utils
         gslx::vortex_merger_init_eq
 )

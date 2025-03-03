@@ -33,7 +33,7 @@ function (advection_field_test_executable SIMULATION)
             gslx::geometry_RTheta
             gslx::interpolation_RTheta
             gslx::advection_RTheta
-            gslx::time_integration_rtheta
+            gslx::time_integration_RTheta
             gslx::quadrature
             gslx::utils
             gslx::diocotron_init_eq

@@ -32,7 +32,7 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
             gslx::interpolation_RTheta
             gslx::io
             gslx::advection_RTheta
-            gslx::time_integration_rtheta
+            gslx::time_integration_RTheta
             gslx::quadrature
             gslx::utils
             gslx::diocotron_init_eq
