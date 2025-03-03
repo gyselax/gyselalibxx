@@ -29,9 +29,9 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
 
             gslx::poisson_RTheta
             gslx::geometry_RTheta
-            gslx::interpolation_polar
+            gslx::interpolation_rtheta
             gslx::io
-            gslx::advection_polar
+            gslx::advection_rtheta
             gslx::time_integration_rtheta
             gslx::quadrature
             gslx::utils

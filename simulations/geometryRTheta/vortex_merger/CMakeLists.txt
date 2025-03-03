@@ -13,10 +13,10 @@ target_link_libraries(vortex_merger
         Eigen3::Eigen
 
 
-        gslx::advection_polar
+        gslx::advection_rtheta
         gslx::geometry_RTheta
         gslx::io
-        gslx::interpolation_polar
+        gslx::interpolation_rtheta
         gslx::paraconfpp
         gslx::poisson_RTheta
         gslx::quadrature

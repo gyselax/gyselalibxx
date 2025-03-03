@@ -11,7 +11,7 @@ target_link_libraries("${test_name}"
     PUBLIC
         DDC::core
         gslx::geometry_RTheta
-        gslx::interpolation_polar
+        gslx::interpolation_rtheta
         gslx::paraconfpp
         gslx::utils
 

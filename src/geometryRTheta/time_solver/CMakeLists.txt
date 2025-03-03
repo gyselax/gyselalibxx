@@ -10,10 +10,10 @@ target_link_libraries(time_integration_rtheta
     INTERFACE
         DDC::core
         Eigen3::Eigen
-        gslx::interpolation_polar
+        gslx::interpolation_rtheta
         gslx::geometry_RTheta
         gslx::poisson_RTheta
-        gslx::advection_polar
+        gslx::advection_rtheta
         gslx::utils
         gslx::timestepper
         gslx::advection_field_RTheta
