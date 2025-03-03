@@ -110,10 +110,10 @@ int main(int argc, char** argv)
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);
     ddc::init_discrete_space<BSplinesTheta>(theta_knots);
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
-    IdxRangeTheta const interpolation_idx_range_Theta(
+    IdxRangeTheta const interpolation_idx_range_theta(
             SplineInterpPointsTheta::get_domain<GridTheta>());
 
-    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
+    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_theta);
 
     CoordR const rmin = ddc::coordinate(interpolation_idx_range_R.front());
     CoordR const rmax = ddc::coordinate(interpolation_idx_range_R.back());
@@ -121,7 +121,7 @@ int main(int argc, char** argv)
     std::cout << "TESTS ON THE ADVECTION OPERATOR "
               << "FOR [rmin, rmax] = [" << double(rmin) << ", " << double(rmax) << "], "
               << "WITH NrxNt = " << interpolation_idx_range_R.size() << "x"
-              << interpolation_idx_range_Theta.size() << " AND dt = " << dt << ": " << std::endl;
+              << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
     std::ofstream file("r_knots.txt");
     for_each(interpolation_idx_range_R, [&](IdxR ir) {

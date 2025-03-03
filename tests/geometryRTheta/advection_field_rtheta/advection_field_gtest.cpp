@@ -89,9 +89,9 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
     IdxRangeR const interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta const interpolation_idx_range_Theta(
+    IdxRangeTheta const interpolation_idx_range_theta(
             SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
+    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_theta);
 
     // Split the index range of the advection field along RTheta
     const int npoints_theta = IdxRangeTheta(grid).size();
