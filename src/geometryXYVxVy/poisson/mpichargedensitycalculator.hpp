@@ -26,8 +26,11 @@ private:
 public:
     /**
      * @brief Create a MpiChargeDensityCalculator object.
-     * @param[in] coeffs
-     *            The coefficients of the quadrature.
+     * @param[in] comm The MPI communicator across which the calculation is carried out.
+     * @param[in] local_charge_density_calculator
+     *                 An operator which calculates the density locally
+     *                 on a given MPI node. The results from this operator
+     *                 will then be combined using MPI.
      */
     explicit MpiChargeDensityCalculator(
             MPI_Comm comm,
