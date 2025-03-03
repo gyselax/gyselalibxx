@@ -57,7 +57,7 @@ data:
   fdistribu:
     type: array
     subtype: double
-    size: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]' ]
+    size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
   electrostatic_potential_extents: { type: array, subtype: int64, size: 2 }
   electrostatic_potential:
     type: array
@@ -90,7 +90,7 @@ plugins:
         fdistribu:
           type: array
           subtype: double
-          size: [ 'Nkinspecies', '$MeshX_extents[0]', '$MeshY_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]' ]
+          size: [ '$Nkinspecies', '$MeshX_extents[0]', '$MeshY_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]' ]
       write:
         time_saved: ~
         fdistribu:
