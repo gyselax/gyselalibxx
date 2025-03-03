@@ -1,6 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2":[15,129,16],
 "classMatrix__Corner__Block.html#afd674000287386818ce4e1a149a36ef3":[15,129,19],
 "classMatrix__Dense.html":[15,130],
 "classMatrix__Dense.html#a73607d2ec0371ff458255c468cf592e1":[15,130,2],
@@ -24,8 +23,8 @@ var NAVTREEINDEX3 =
 "classMatrix__Periodic__Banded.html#aec04487e2d8aeb00ed26b92becabb991":[15,132,2],
 "classMatrix__Periodic__Banded.html#af48d182f8f5278093ebde8b96ded9dbc":[15,132,4],
 "classMaxwellianEquilibrium.html":[15,137],
-"classMaxwellianEquilibrium.html#a034e0f873e3403b14b56ec4200b44bb9":[15,137,2],
 "classMaxwellianEquilibrium.html#a034e0f873e3403b14b56ec4200b44bb9":[15,137,1],
+"classMaxwellianEquilibrium.html#a034e0f873e3403b14b56ec4200b44bb9":[15,137,2],
 "classMaxwellianEquilibrium.html#a0cc2b9bdb6300dd5661cedbfc27957b3":[15,137,3],
 "classMaxwellianEquilibrium.html#a0de7a4e921a394a01123af2eae342c21":[15,137,13],
 "classMaxwellianEquilibrium.html#a19a92489bebf290fb48a26a641c9e292":[15,137,15],
@@ -35,8 +34,8 @@ var NAVTREEINDEX3 =
 "classMaxwellianEquilibrium.html#a86de6dac16d6f3a968b16b028c4bee8d":[15,137,9],
 "classMaxwellianEquilibrium.html#a86de6dac16d6f3a968b16b028c4bee8d":[15,137,5],
 "classMaxwellianEquilibrium.html#a883dfc9d838b53deeb47e93f178c7655":[15,137,12],
-"classMaxwellianEquilibrium.html#ad82c2908d1306574b250ddc190bc2d28":[15,137,10],
 "classMaxwellianEquilibrium.html#ad82c2908d1306574b250ddc190bc2d28":[15,137,6],
+"classMaxwellianEquilibrium.html#ad82c2908d1306574b250ddc190bc2d28":[15,137,10],
 "classMaxwellianEquilibrium.html#aeba2d5c30212bd67b789c87610205263":[15,137,14],
 "classMaxwellianEquilibrium.html#aebb6814626426a44934a85ced7e2fe62":[15,137,4],
 "classMaxwellianEquilibrium.html#af3b41f93de3bb96ae0b44d8f89ee2a0a":[15,137,8],
@@ -187,7 +186,7 @@ var NAVTREEINDEX3 =
 "classPartialDerivative.html#ac615cba1b0800ef3e0874eeb440fe55f":[15,159,4],
 "classPartialDerivative.html#afbc2bd5b3d99d56fb2715baecb845eec":[15,159,3],
 "classPoissonLikeRHSFunction.html":[15,162],
-"classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a":[15,162,2],
+"classPoissonLikeRHSFunction.html#a5bd29b8f01140ea3d8f5642fde150af0":[15,162,2],
 "classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9":[15,162,0],
 "classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b":[15,162,1],
 "classPoissonSolution.html":[15,163],
@@ -249,5 +248,6 @@ var NAVTREEINDEX3 =
 "classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c":[15,167,1],
 "classPolarSplineFEMPoissonLikeSolver.html":[15,168],
 "classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417":[15,168,9],
-"classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925":[15,168,14]
+"classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925":[15,168,14],
+"classPolarSplineFEMPoissonLikeSolver.html#a36be84f08a082b52a73f5134b8f1a8e2":[15,168,13]
 };

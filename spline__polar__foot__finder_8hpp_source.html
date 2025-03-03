@@ -295,82 +295,85 @@ $(document).ready(function(){initNavTree('spline__polar__foot__finder_8hpp_sourc
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                    ddc::parallel_for_each(</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                            ExecSpace(),</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                            idx_range_rp,</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                            KOKKOS_LAMBDA(IdxRTheta <span class="keyword">const</span> irp) {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                                CoordRTheta <span class="keyword">const</span> coord_rp(feet(irp));</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                            KOKKOS_LAMBDA(IdxRTheta <span class="keyword">const</span> irtheta) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                                CoordRTheta <span class="keyword">const</span> coord_rtheta(feet(irtheta));</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                                CoordXY_adv <span class="keyword">const</span> coord_xy</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                                        = logical_to_pseudo_physical_proxy(coord_rp);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                                        = logical_to_pseudo_physical_proxy(coord_rtheta);</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                                CoordXY_adv <span class="keyword">const</span> feet_xy = coord_xy - dt * advection_field(irp);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                                <span class="keywordflow">if</span> (<a class="code hl_function" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(feet_xy - coord_centre) &lt; 1e-15) {</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                                    feet(irp) = CoordRTheta(0, 0);</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                                    feet(irp) = pseudo_physical_to_logical_proxy(feet_xy);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                                    ddc::select&lt;Theta&gt;(feet(irp))</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                                            = ddcHelper::restrict_to_idx_range(</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                                                    ddc::select&lt;Theta&gt;(feet(irp)),</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                                                    IdxRangeTheta(idx_range_rp));</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                                }</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                            });</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                    <span class="comment">// Treatment to conserve the C0 property of the advected function:</span></div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                    <a class="code hl_function" href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">unify_value_at_centre_pt</a>(feet);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                    <span class="comment">// Test if the values are the same at the centre point</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                    <a class="code hl_function" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a>(feet);</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                };</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                                CoordXY_adv <span class="keyword">const</span> feet_xy</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                                        = coord_xy - dt * advection_field(irtheta);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                                <span class="keywordflow">if</span> (<a class="code hl_function" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(feet_xy - coord_centre) &lt; 1e-15) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                                    feet(irtheta) = CoordRTheta(0, 0);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                                    feet(irtheta) = pseudo_physical_to_logical_proxy(feet_xy);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                                    ddc::select&lt;Theta&gt;(feet(irtheta))</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                                            = ddcHelper::restrict_to_idx_range(</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                                                    ddc::select&lt;Theta&gt;(feet(irtheta)),</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                                                    IdxRangeTheta(idx_range_rp));</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                                }</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                            });</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                    <span class="comment">// Treatment to conserve the C0 property of the advected function:</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                    <a class="code hl_function" href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">unify_value_at_centre_pt</a>(feet);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                    <span class="comment">// Test if the values are the same at the centre point</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                    <a class="code hl_function" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a>(feet);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                };</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="comment">// Solve the characteristic equation</span></div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        m_time_stepper.update(ExecSpace(), feet, dt, dy, update_function);</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        <a class="code hl_function" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a>(feet);</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    }</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <span class="comment">// Solve the characteristic equation</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        m_time_stepper.update(ExecSpace(), feet, dt, dy, update_function);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        <a class="code hl_function" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a>(feet);</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    }</div>
 </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">  314</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a>(Field&lt;T, IdxRangeRTheta, memory_space&gt; <span class="keyword">const</span>&amp; values)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        IdxRangeR <span class="keyword">const</span> r_idx_range = get_idx_range&lt;GridR&gt;(values);</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        IdxRangeTheta <span class="keyword">const</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(values);</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        IdxR r0_idx = r_idx_range.front();</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">if</span> (Kokkos::fabs(ddc::coordinate(r0_idx)) &lt; 1e-15) {</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>            ddc::parallel_for_each(</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>                    ExecSpace(),</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                    theta_idx_range,</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                    KOKKOS_LAMBDA(<span class="keyword">const</span> IdxTheta ip) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                        <span class="keywordflow">if</span> (<a class="code hl_function" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(values(r0_idx, ip) - values(r0_idx, theta_idx_range.front()))</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                            &gt; 1e-15) {</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                            Kokkos::printf(<span class="stringliteral">&quot;WARNING ! -&gt; Discontinuous at the centre point.&quot;</span>);</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                        }</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                        KOKKOS_ASSERT(</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                                values(r0_idx, ip) == values(r0_idx, theta_idx_range.front()));</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                    });</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        }</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00315" data-start="{" data-end="}">
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno"><a class="line" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">  315</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">is_unified</a>(Field&lt;T, IdxRangeRTheta, memory_space&gt; <span class="keyword">const</span>&amp; values)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        IdxRangeR <span class="keyword">const</span> r_idx_range = get_idx_range&lt;GridR&gt;(values);</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        IdxRangeTheta <span class="keyword">const</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(values);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        IdxR r0_idx = r_idx_range.front();</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordflow">if</span> (Kokkos::fabs(ddc::coordinate(r0_idx)) &lt; 1e-15) {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            ddc::parallel_for_each(</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                    ExecSpace(),</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                    theta_idx_range,</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                    KOKKOS_LAMBDA(<span class="keyword">const</span> IdxTheta itheta) {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                        <span class="keywordflow">if</span> (<a class="code hl_function" href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a>(</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                                    values(r0_idx, itheta)</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                                    - values(r0_idx, theta_idx_range.front()))</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                            &gt; 1e-15) {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                            Kokkos::printf(<span class="stringliteral">&quot;WARNING ! -&gt; Discontinuous at the centre point.&quot;</span>);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                        }</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                        KOKKOS_ASSERT(</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                                values(r0_idx, itheta) == values(r0_idx, theta_idx_range.front()));</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>                    });</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        }</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    }</div>
 </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="foldopen" id="foldopen00349" data-start="{" data-end="}">
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno"><a class="line" href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">  349</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">unify_value_at_centre_pt</a>(Field&lt;T, IdxRangeRTheta, memory_space&gt; values)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        IdxRangeR <span class="keyword">const</span> r_idx_range = get_idx_range&lt;GridR&gt;(values);</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        IdxRangeTheta <span class="keyword">const</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(values);</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        IdxR r0_idx = r_idx_range.front();</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="keywordflow">if</span> (std::fabs(ddc::coordinate(r0_idx)) &lt; 1e-15) {</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            ddc::parallel_for_each(</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                    ExecSpace(),</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                    theta_idx_range,</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                    KOKKOS_LAMBDA(<span class="keyword">const</span> IdxTheta ip) {</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                        values(r0_idx, ip) = values(r0_idx, theta_idx_range.front());</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                    });</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        }</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00352" data-start="{" data-end="}">
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno"><a class="line" href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">  352</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">unify_value_at_centre_pt</a>(Field&lt;T, IdxRangeRTheta, memory_space&gt; values)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        IdxRangeR <span class="keyword">const</span> r_idx_range = get_idx_range&lt;GridR&gt;(values);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        IdxRangeTheta <span class="keyword">const</span> theta_idx_range = get_idx_range&lt;GridTheta&gt;(values);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        IdxR r0_idx = r_idx_range.front();</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <span class="keywordflow">if</span> (std::fabs(ddc::coordinate(r0_idx)) &lt; 1e-15) {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            ddc::parallel_for_each(</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                    ExecSpace(),</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                    theta_idx_range,</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                    KOKKOS_LAMBDA(<span class="keyword">const</span> IdxTheta itheta) {</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>                        values(r0_idx, itheta) = values(r0_idx, theta_idx_range.front());</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>                    });</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    }</div>
 </div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>};</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>};</div>
 </div>
 <div class="ttc" id="aclassCartesianToCircular_html"><div class="ttname"><a href="classCartesianToCircular.html">CartesianToCircular</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition</b> cartesian_to_circular.hpp:40</div></div>
 <div class="ttc" id="aclassCircularToCartesian_html"><div class="ttname"><a href="classCircularToCartesian.html">CircularToCartesian</a></div><div class="ttdoc">A class for describing the circular 2D mapping.</div><div class="ttdef"><b>Definition</b> circular_to_cartesian.hpp:43</div></div>
@@ -390,9 +393,9 @@ $(document).ready(function(){initNavTree('spline__polar__foot__finder_8hpp_sourc
 <div class="ttc" id="aclassSplinePolarFootFinder_html_a02ac2127e2d8395e92d0643be1400050"><div class="ttname"><a href="classSplinePolarFootFinder.html#a02ac2127e2d8395e92d0643be1400050">SplinePolarFootFinder::operator()</a></div><div class="ttdeci">void operator()(FieldRTheta&lt; CoordRTheta &gt; feet, DVectorConstFieldRTheta&lt; X, Y &gt; advection_field, double dt) const final</div><div class="ttdoc">Advect the feet over .</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:212</div></div>
 <div class="ttc" id="aclassSplinePolarFootFinder_html_a190dbd81c517977edcee7572953add5a"><div class="ttname"><a href="classSplinePolarFootFinder.html#a190dbd81c517977edcee7572953add5a">SplinePolarFootFinder::SplinePolarFootFinder</a></div><div class="ttdeci">SplinePolarFootFinder(TimeStepper const &amp;time_stepper, LogicalToPhysicalMapping const &amp;logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical_mapping, SplineRThetaBuilder const &amp;builder_advection_field, SplineRThetaEvaluatorConstBound const &amp;evaluator_advection_field, double epsilon=1e-12)</div><div class="ttdoc">Instantiate a time integration method for the advection operator.</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:177</div></div>
 <div class="ttc" id="aclassSplinePolarFootFinder_html_a3bc1c3e8f65e938c4ae1b4f84eff0c51"><div class="ttname"><a href="classSplinePolarFootFinder.html#a3bc1c3e8f65e938c4ae1b4f84eff0c51">SplinePolarFootFinder::ConstFieldRTheta</a></div><div class="ttdeci">ConstField&lt; ElementType, IdxRangeRTheta, memory_space &gt; ConstFieldRTheta</div><div class="ttdoc">The type of a constant field on the polar plane on a compatible memory space.</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:135</div></div>
-<div class="ttc" id="aclassSplinePolarFootFinder_html_a7bb90f1a2ccd7ad807d7b868d4ae2266"><div class="ttname"><a href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">SplinePolarFootFinder::is_unified</a></div><div class="ttdeci">void is_unified(Field&lt; T, IdxRangeRTheta, memory_space &gt; const &amp;values) const</div><div class="ttdoc">Check if the values at the centre point are the same.</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:314</div></div>
+<div class="ttc" id="aclassSplinePolarFootFinder_html_a7bb90f1a2ccd7ad807d7b868d4ae2266"><div class="ttname"><a href="classSplinePolarFootFinder.html#a7bb90f1a2ccd7ad807d7b868d4ae2266">SplinePolarFootFinder::is_unified</a></div><div class="ttdeci">void is_unified(Field&lt; T, IdxRangeRTheta, memory_space &gt; const &amp;values) const</div><div class="ttdoc">Check if the values at the centre point are the same.</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:315</div></div>
 <div class="ttc" id="aclassSplinePolarFootFinder_html_ab86fe5696e8bd195e90b57899efc4e13"><div class="ttname"><a href="classSplinePolarFootFinder.html#ab86fe5696e8bd195e90b57899efc4e13">SplinePolarFootFinder::FieldRTheta</a></div><div class="ttdeci">Field&lt; ElementType, IdxRangeRTheta, memory_space &gt; FieldRTheta</div><div class="ttdoc">The type of a field on the polar plane on a compatible memory space.</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:131</div></div>
-<div class="ttc" id="aclassSplinePolarFootFinder_html_afc638328cf20c712fb8af24a638b4ec4"><div class="ttname"><a href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">SplinePolarFootFinder::unify_value_at_centre_pt</a></div><div class="ttdeci">void unify_value_at_centre_pt(Field&lt; T, IdxRangeRTheta, memory_space &gt; values) const</div><div class="ttdoc">Replace the value at  point by the value at  for all .</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:349</div></div>
+<div class="ttc" id="aclassSplinePolarFootFinder_html_afc638328cf20c712fb8af24a638b4ec4"><div class="ttname"><a href="classSplinePolarFootFinder.html#afc638328cf20c712fb8af24a638b4ec4">SplinePolarFootFinder::unify_value_at_centre_pt</a></div><div class="ttdeci">void unify_value_at_centre_pt(Field&lt; T, IdxRangeRTheta, memory_space &gt; values) const</div><div class="ttdoc">Replace the value at  point by the value at  for all .</div><div class="ttdef"><b>Definition</b> spline_polar_foot_finder.hpp:352</div></div>
 <div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition</b> vector_field_mem.hpp:55</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:66</div></div>
 <div class="ttc" id="al__norm__tools_8hpp_html_a939e3995d29bdb32c073e38494563009"><div class="ttname"><a href="l__norm__tools_8hpp.html#a939e3995d29bdb32c073e38494563009">norm_inf</a></div><div class="ttdeci">KOKKOS_FUNCTION double norm_inf(ddc::Coordinate&lt; Tags... &gt; coord)</div><div class="ttdoc">Compute the infinity norm.</div><div class="ttdef"><b>Definition</b> l_norm_tools.hpp:26</div></div>

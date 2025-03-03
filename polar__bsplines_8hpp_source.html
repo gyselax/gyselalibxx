@@ -327,390 +327,392 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                assert(nr_in_singular.value() &lt; <span class="keywordtype">int</span>(ddc::discrete_space&lt;BSplinesR&gt;().size()));</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                <span class="comment">// The number of poloidal bases used to construct the B-splines traversing the singular point.</span></div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                <span class="keyword">const</span> IdxStepTheta np_in_singular(ddc::discrete_space&lt;BSplinesTheta&gt;().<a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a>());</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>                <span class="comment">// The number of elements of the poloidal basis which will have an associated coefficient</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>                <span class="comment">// (This will be larger than np_in_singular as it includes the periodicity)</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>                <span class="keyword">const</span> IdxStepTheta np_tot(ddc::discrete_space&lt;BSplinesTheta&gt;().size());</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>                <span class="comment">// The index range of the 2D B-splines in the innermost circles from which the polar B-splines</span></div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>                <span class="comment">// traversing the singular point will be constructed.</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>                <a class="code hl_typedef" href="classPolarBSplines.html#a84ea418aed020ad1396d3283aba7904e">tensor_product_idx_range_type</a> <span class="keyword">const</span> dom_bsplines_inner(</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a>(0, 0),</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a6b1ab0ce3118e3bb0172d9a70ce7ccca">tensor_product_idx_step_type</a>(nr_in_singular, np_tot));</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>                <span class="comment">// Initialise memory</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>                m_singular_basis_elements_alloc</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                        = host_t&lt;DFieldMem&lt;singular_basis_linear_combination_idx_range_type&gt;&gt;(</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                                singular_basis_linear_combination_idx_range_type(</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                                        singular_idx_range&lt;DDim&gt;(),</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                                        dom_bsplines_inner));</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>                IdxRange&lt;BernsteinBasis&gt; bernstein_idx_range(</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>                        Idx&lt;BernsteinBasis&gt; {0},</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>                        IdxStep&lt;BernsteinBasis&gt; {<a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">n_singular_basis</a>()});</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>                IdxRange&lt;BSplinesTheta&gt; poloidal_spline_idx_range</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>                        = ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain();</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                <span class="keywordflow">for</span> (IdxR <span class="keyword">const</span> ir : IdxRange&lt;BSplinesR&gt;(IdxR(0), IdxStepR(C + 1))) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                    <span class="keywordflow">for</span> (IdxTheta <span class="keyword">const</span> ip : poloidal_spline_idx_range.take_first(np_in_singular)) {</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                        <span class="keyword">const</span> ddc::Coordinate&lt;DimX, DimY&gt; point</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                                = curvilinear_to_cartesian.control_point(</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                                        mapping_tensor_product_index_type(ir, ip));</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                        host_t&lt;DFieldMem&lt;IdxRange&lt;BernsteinBasis&gt;&gt;&gt; bernstein_vals(</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                                bernstein_idx_range);</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                        ddc::discrete_space&lt;BernsteinBasis&gt;()</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                                .eval_basis(get_field(bernstein_vals), point);</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                        <span class="comment">// Fill spline coefficients</span></div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>                        <span class="keywordflow">for</span> (Idx&lt;BernsteinBasis&gt; k : bernstein_idx_range) {</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                            m_singular_basis_elements(</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                                    <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">discrete_element_type</a> {</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                                            (k - bernstein_idx_range.front()).value()},</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                                    ir,</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                                    ip)</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                                    = bernstein_vals(k);</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                        }</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                    }</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">discrete_element_type</a> k : singular_idx_range&lt;DDim&gt;()) {</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>                        <span class="keywordflow">for</span> (IdxTheta <span class="keyword">const</span> ip : poloidal_spline_idx_range.take_first(</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                                     IdxStepTheta {BSplinesTheta::degree()})) {</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                            m_singular_basis_elements(k, ir, ip + np_in_singular)</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                                    = m_singular_basis_elements(k, ir, ip);</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                        }</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>                    }</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>                }</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>                <span class="comment">// Initialise m_singular_basis_elements to avoid any problems in the copy constructor</span></div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>                <a class="code hl_typedef" href="classPolarBSplines.html#a84ea418aed020ad1396d3283aba7904e">tensor_product_idx_range_type</a> <span class="keyword">const</span> empty_dom_bsplines(</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a>(0, 0),</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a6b1ab0ce3118e3bb0172d9a70ce7ccca">tensor_product_idx_step_type</a>(0, 0));</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                m_singular_basis_elements_alloc</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                        = host_t&lt;DFieldMem&lt;singular_basis_linear_combination_idx_range_type&gt;&gt;(</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                                singular_basis_linear_combination_idx_range_type(</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                                        singular_idx_range&lt;DDim&gt;(),</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                                        empty_dom_bsplines));</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            }</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        }</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                <span class="keyword">const</span> IdxStepTheta n_theta_in_singular(</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>                        ddc::discrete_space&lt;BSplinesTheta&gt;().<a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a>());</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>                <span class="comment">// The number of elements of the poloidal basis which will have an associated coefficient</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>                <span class="comment">// (This will be larger than n_theta_in_singular as it includes the periodicity)</span></div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>                <span class="keyword">const</span> IdxStepTheta np_tot(ddc::discrete_space&lt;BSplinesTheta&gt;().size());</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>                <span class="comment">// The index range of the 2D B-splines in the innermost circles from which the polar B-splines</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>                <span class="comment">// traversing the singular point will be constructed.</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>                <a class="code hl_typedef" href="classPolarBSplines.html#a84ea418aed020ad1396d3283aba7904e">tensor_product_idx_range_type</a> <span class="keyword">const</span> dom_bsplines_inner(</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a>(0, 0),</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a6b1ab0ce3118e3bb0172d9a70ce7ccca">tensor_product_idx_step_type</a>(nr_in_singular, np_tot));</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>                <span class="comment">// Initialise memory</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                m_singular_basis_elements_alloc</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                        = host_t&lt;DFieldMem&lt;singular_basis_linear_combination_idx_range_type&gt;&gt;(</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                                singular_basis_linear_combination_idx_range_type(</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                                        singular_idx_range&lt;DDim&gt;(),</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                                        dom_bsplines_inner));</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>                m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>                IdxRange&lt;BernsteinBasis&gt; bernstein_idx_range(</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>                        Idx&lt;BernsteinBasis&gt; {0},</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>                        IdxStep&lt;BernsteinBasis&gt; {<a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">n_singular_basis</a>()});</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>                IdxRange&lt;BSplinesTheta&gt; poloidal_spline_idx_range</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                        = ddc::discrete_space&lt;BSplinesTheta&gt;().full_domain();</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                <span class="keywordflow">for</span> (IdxR <span class="keyword">const</span> ir : IdxRange&lt;BSplinesR&gt;(IdxR(0), IdxStepR(C + 1))) {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                    <span class="keywordflow">for</span> (IdxTheta <span class="keyword">const</span> itheta :</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                         poloidal_spline_idx_range.take_first(n_theta_in_singular)) {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                        <span class="keyword">const</span> ddc::Coordinate&lt;DimX, DimY&gt; point</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                                = curvilinear_to_cartesian.control_point(</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                                        mapping_tensor_product_index_type(ir, itheta));</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                        host_t&lt;DFieldMem&lt;IdxRange&lt;BernsteinBasis&gt;&gt;&gt; bernstein_vals(</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                                bernstein_idx_range);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                        ddc::discrete_space&lt;BernsteinBasis&gt;()</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>                                .eval_basis(get_field(bernstein_vals), point);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                        <span class="comment">// Fill spline coefficients</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                        <span class="keywordflow">for</span> (Idx&lt;BernsteinBasis&gt; k : bernstein_idx_range) {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                            m_singular_basis_elements(</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                                    <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">discrete_element_type</a> {</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                                            (k - bernstein_idx_range.front()).value()},</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                                    ir,</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                                    itheta)</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                                    = bernstein_vals(k);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                        }</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>                    }</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">discrete_element_type</a> k : singular_idx_range&lt;DDim&gt;()) {</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                        <span class="keywordflow">for</span> (IdxTheta <span class="keyword">const</span> itheta : poloidal_spline_idx_range.take_first(</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                                     IdxStepTheta {BSplinesTheta::degree()})) {</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                            m_singular_basis_elements(k, ir, itheta + n_theta_in_singular)</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>                                    = m_singular_basis_elements(k, ir, itheta);</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>                        }</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>                    }</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>                }</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>                <span class="comment">// Initialise m_singular_basis_elements to avoid any problems in the copy constructor</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>                <a class="code hl_typedef" href="classPolarBSplines.html#a84ea418aed020ad1396d3283aba7904e">tensor_product_idx_range_type</a> <span class="keyword">const</span> empty_dom_bsplines(</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a>(0, 0),</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                        <a class="code hl_typedef" href="classPolarBSplines.html#a6b1ab0ce3118e3bb0172d9a70ce7ccca">tensor_product_idx_step_type</a>(0, 0));</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                m_singular_basis_elements_alloc</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                        = host_t&lt;DFieldMem&lt;singular_basis_linear_combination_idx_range_type&gt;&gt;(</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                                singular_basis_linear_combination_idx_range_type(</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                                        singular_idx_range&lt;DDim&gt;(),</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                                        empty_dom_bsplines));</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>                m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            }</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        }</div>
 </div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> OriginMemorySpace&gt;</div>
-<div class="foldopen" id="foldopen00370" data-start="{" data-end="}">
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">  370</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">Impl</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl&lt;DDim, OriginMemorySpace&gt;</a> <span class="keyword">const</span>&amp; impl)</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            : m_singular_basis_elements_alloc(get_idx_range(impl.m_singular_basis_elements))</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        {</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>            ddc::parallel_deepcopy(m_singular_basis_elements, impl.m_singular_basis_elements);</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> OriginMemorySpace&gt;</div>
+<div class="foldopen" id="foldopen00372" data-start="{" data-end="}">
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">  372</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">Impl</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl&lt;DDim, OriginMemorySpace&gt;</a> <span class="keyword">const</span>&amp; impl)</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            : m_singular_basis_elements_alloc(get_idx_range(impl.m_singular_basis_elements))</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        {</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>            ddc::parallel_deepcopy(m_singular_basis_elements, impl.m_singular_basis_elements);</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        }</div>
 </div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">  382</a></span>        <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">Impl</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a> <span class="keyword">const</span>&amp; x) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">  389</a></span>        <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">Impl</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp;&amp; x) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2">  394</a></span>        <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2">~Impl</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a954186a181dc16f537322080f4484a1f">  403</a></span>        <a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a954186a181dc16f537322080f4484a1f">operator=</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a> <span class="keyword">const</span>&amp; x) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a44b135ad2f6adec16d22471819ed98c1">  412</a></span>        <a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a44b135ad2f6adec16d22471819ed98c1">operator=</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp;&amp; x) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
-<div class="foldopen" id="foldopen00430" data-start="{" data-end="}">
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">  430</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">eval_basis</a>(</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>                DSpan1D singular_values,</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>                DSpan2D values,</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
-<div class="foldopen" id="foldopen00451" data-start="{" data-end="}">
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">  451</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">eval_deriv_r</a>(</div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>                DSpan1D singular_derivs,</div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>                DSpan2D derivs,</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
-<div class="foldopen" id="foldopen00472" data-start="{" data-end="}">
-<div class="line"><a id="l00472" name="l00472"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">  472</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">eval_deriv_theta</a>(</div>
-<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>                DSpan1D singular_derivs,</div>
-<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>                DSpan2D derivs,</div>
-<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span> </div>
-<div class="foldopen" id="foldopen00494" data-start="{" data-end="}">
-<div class="line"><a id="l00494" name="l00494"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">  494</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">eval_deriv_r_and_theta</a>(</div>
-<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>                DSpan1D singular_derivs,</div>
-<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>                DSpan2D derivs,</div>
-<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span> </div>
-<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> MemorySpace2&gt;</div>
-<div class="foldopen" id="foldopen00505" data-start="{" data-end="}">
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af11b5fa49f044552020019eb1b8f4457">  505</a></span>        [[deprecated(<span class="stringliteral">&quot;Use `integrals` instead&quot;</span>)]] <span class="keywordtype">void</span> integrals(</div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>                <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace2&gt;</a> int_vals) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span> </div>
-<div class="foldopen" id="foldopen00513" data-start="{" data-end="}">
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">  513</a></span>        std::size_t <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a>() const noexcept</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>        {</div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>            std::size_t nr = ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - C - 1;</div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>            std::size_t ntheta = ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();</div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">n_singular_basis</a>() + nr * ntheta;</div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>        }</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">  384</a></span>        <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">Impl</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a> <span class="keyword">const</span>&amp; x) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">  391</a></span>        <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">Impl</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp;&amp; x) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2">  396</a></span>        <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2">~Impl</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a954186a181dc16f537322080f4484a1f">  405</a></span>        <a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a954186a181dc16f537322080f4484a1f">operator=</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a> <span class="keyword">const</span>&amp; x) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a44b135ad2f6adec16d22471819ed98c1">  414</a></span>        <a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp; <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a44b135ad2f6adec16d22471819ed98c1">operator=</a>(<a class="code hl_class" href="classPolarBSplines_1_1Impl.html">Impl</a>&amp;&amp; x) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="foldopen" id="foldopen00432" data-start="{" data-end="}">
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">  432</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">eval_basis</a>(</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>                DSpan1D singular_values,</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>                DSpan2D values,</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span> </div>
+<div class="foldopen" id="foldopen00453" data-start="{" data-end="}">
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">  453</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">eval_deriv_r</a>(</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>                DSpan1D singular_derivs,</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>                DSpan2D derivs,</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>
+<div class="foldopen" id="foldopen00474" data-start="{" data-end="}">
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">  474</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">eval_deriv_theta</a>(</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>                DSpan1D singular_derivs,</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>                DSpan2D derivs,</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span> </div>
+<div class="foldopen" id="foldopen00496" data-start="{" data-end="}">
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">  496</a></span>        KOKKOS_FUNCTION <a class="code hl_typedef" href="classPolarBSplines.html#a9d78494d89fbe4d9abea58a61619fae8">tensor_product_index_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">eval_deriv_r_and_theta</a>(</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>                DSpan1D singular_derivs,</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>                DSpan2D derivs,</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span> </div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> MemorySpace2&gt;</div>
+<div class="foldopen" id="foldopen00507" data-start="{" data-end="}">
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af11b5fa49f044552020019eb1b8f4457">  507</a></span>        [[deprecated(<span class="stringliteral">&quot;Use `integrals` instead&quot;</span>)]] <span class="keywordtype">void</span> integrals(</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>                <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace2&gt;</a> int_vals) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span> </div>
+<div class="foldopen" id="foldopen00515" data-start="{" data-end="}">
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">  515</a></span>        std::size_t <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a>() const noexcept</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>        {</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>            std::size_t nr = ddc::discrete_space&lt;BSplinesR&gt;().nbasis() - C - 1;</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>            std::size_t ntheta = ddc::discrete_space&lt;BSplinesTheta&gt;().nbasis();</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">n_singular_basis</a>() + nr * ntheta;</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        }</div>
 </div>
-<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span> </div>
-<div class="foldopen" id="foldopen00525" data-start="{" data-end="}">
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">  525</a></span>        <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">discrete_domain_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">full_domain</a>() const noexcept</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>        {</div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>            <span class="keywordflow">return</span> <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">discrete_domain_type</a>(<a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">discrete_element_type</a> {0}, <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aa3ab2a3455e0aec1bbaf3e8d89eaa7bb">discrete_vector_type</a> {<a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a>()});</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>        }</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span> </div>
+<div class="foldopen" id="foldopen00527" data-start="{" data-end="}">
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">  527</a></span>        <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">discrete_domain_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">full_domain</a>() const noexcept</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>        {</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>            <span class="keywordflow">return</span> <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">discrete_domain_type</a>(<a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">discrete_element_type</a> {0}, <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aa3ab2a3455e0aec1bbaf3e8d89eaa7bb">discrete_vector_type</a> {<a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">nbasis</a>()});</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>        }</div>
 </div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
-<div class="foldopen" id="foldopen00537" data-start="{" data-end="}">
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">  537</a></span>        <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">discrete_domain_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">tensor_bspline_idx_range</a>() const noexcept</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>        {</div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">full_domain</a>().remove_first(<a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aa3ab2a3455e0aec1bbaf3e8d89eaa7bb">discrete_vector_type</a> {<a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">n_singular_basis</a>()});</div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>        }</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
+<div class="foldopen" id="foldopen00539" data-start="{" data-end="}">
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">  539</a></span>        <a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">discrete_domain_type</a> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">tensor_bspline_idx_range</a>() const noexcept</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>        {</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">full_domain</a>().remove_first(<a class="code hl_typedef" href="classPolarBSplines_1_1Impl.html#aa3ab2a3455e0aec1bbaf3e8d89eaa7bb">discrete_vector_type</a> {<a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">n_singular_basis</a>()});</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        }</div>
 </div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> EvalTypeR, <span class="keyword">class</span> EvalTypeTheta&gt;</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>        KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; eval(</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>                DSpan1D singular_values,</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>                DSpan2D values,</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; coord_eval,</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>                EvalTypeR <span class="keyword">const</span>,</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>                EvalTypeTheta <span class="keyword">const</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>    };</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>};</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
-<div class="foldopen" id="foldopen00556" data-start="{" data-end="}">
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">  556</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_basis</a>(</div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>                DSpan1D singular_values,</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>                DSpan2D values,</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="keywordflow">return</span> eval(singular_values, values, p, eval_type(), eval_type());</div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>}</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span> </div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        <span class="keyword">template</span> &lt;<span class="keyword">class</span> EvalTypeR, <span class="keyword">class</span> EvalTypeTheta&gt;</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; eval(</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>                DSpan1D singular_values,</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>                DSpan2D values,</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; coord_eval,</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>                EvalTypeR <span class="keyword">const</span>,</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>                EvalTypeTheta <span class="keyword">const</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    };</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>};</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span> </div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
+<div class="foldopen" id="foldopen00558" data-start="{" data-end="}">
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">  558</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_basis</a>(</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>                DSpan1D singular_values,</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>                DSpan2D values,</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    <span class="keywordflow">return</span> eval(singular_values, values, p, eval_type(), eval_type());</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>}</div>
 </div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span> </div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
-<div class="foldopen" id="foldopen00567" data-start="{" data-end="}">
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">  567</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_r</a>(</div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>                DSpan1D singular_derivs,</div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>                DSpan2D derivs,</div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    <span class="keywordflow">return</span> eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());</div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>}</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span> </div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
+<div class="foldopen" id="foldopen00569" data-start="{" data-end="}">
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">  569</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_r</a>(</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>                DSpan1D singular_derivs,</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>                DSpan2D derivs,</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    <span class="keywordflow">return</span> eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>}</div>
 </div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span> </div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
-<div class="foldopen" id="foldopen00578" data-start="{" data-end="}">
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">  578</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_theta</a>(</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>                DSpan1D singular_derivs,</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>                DSpan2D derivs,</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">return</span> eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>}</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span> </div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
+<div class="foldopen" id="foldopen00580" data-start="{" data-end="}">
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">  580</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_theta</a>(</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                DSpan1D singular_derivs,</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>                DSpan2D derivs,</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    <span class="keywordflow">return</span> eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>}</div>
 </div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
-<div class="foldopen" id="foldopen00589" data-start="{" data-end="}">
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">  589</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_r_and_theta</a>(</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>                DSpan1D singular_derivs,</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>                DSpan2D derivs,</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>    <span class="keywordflow">return</span> eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>}</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span> </div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
+<div class="foldopen" id="foldopen00591" data-start="{" data-end="}">
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">  591</a></span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval_deriv_r_and_theta</a>(</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>                DSpan1D singular_derivs,</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>                DSpan2D derivs,</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; p)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    <span class="keywordflow">return</span> eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>}</div>
 </div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span> </div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> EvalTypeR, <span class="keyword">class</span> EvalTypeTheta&gt;</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval</a>(</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>                DSpan1D singular_values,</div>
-<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>                DSpan2D values,</div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; coord_eval,</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>                EvalTypeR <span class="keyword">const</span>,</div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>                EvalTypeTheta <span class="keyword">const</span>)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    assert(singular_values.extent(0) == n_singular_basis());</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>    assert(values.extent(0) == BSplinesR::degree() + 1);</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    assert(values.extent(1) == BSplinesTheta::degree() + 1);</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    <span class="keyword">static_assert</span>(</div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>            std::is_same_v&lt;EvalTypeR, eval_type&gt; || std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;);</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span> </div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> EvalTypeR, <span class="keyword">class</span> EvalTypeTheta&gt;</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>KOKKOS_FUNCTION Idx&lt;BSplinesR, BSplinesTheta&gt; <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::</a></div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span><a class="code hl_class" href="classPolarBSplines.html">        Impl&lt;DDim, MemorySpace&gt;::eval</a>(</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>                DSpan1D singular_values,</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>                DSpan2D values,</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>                ddc::Coordinate&lt;DimR, DimTheta&gt; coord_eval,</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>                EvalTypeR <span class="keyword">const</span>,</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>                EvalTypeTheta <span class="keyword">const</span>)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    assert(singular_values.extent(0) == n_singular_basis());</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    assert(values.extent(0) == BSplinesR::degree() + 1);</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    assert(values.extent(1) == BSplinesTheta::degree() + 1);</div>
 <div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>    <span class="keyword">static_assert</span>(</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>            std::is_same_v&lt;</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>                    EvalTypeTheta,</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>                    eval_type&gt; || std::is_same_v&lt;EvalTypeTheta, eval_deriv_type&gt;);</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span> </div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    Idx&lt;BSplinesR&gt; jmin_r;</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    Idx&lt;BSplinesTheta&gt; jmin_theta;</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span> </div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    std::size_t <span class="keyword">constexpr</span> nr = BSplinesR::degree() + 1;</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    std::size_t <span class="keyword">constexpr</span> ntheta = BSplinesTheta::degree() + 1;</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span> </div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    std::array&lt;double, nr&gt; vals_r_ptr;</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    std::array&lt;double, ntheta&gt; vals_theta_ptr;</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    DSpan1D <span class="keyword">const</span> vals_r(vals_r_ptr.data(), nr);</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    DSpan1D <span class="keyword">const</span> vals_theta(vals_theta_ptr.data(), ntheta);</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span> </div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeR, eval_type&gt;) {</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_basis(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;) {</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_deriv(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    }</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeTheta, eval_type&gt;) {</div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>        jmin_theta = ddc::discrete_space&lt;BSplinesTheta&gt;()</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>                             .eval_basis(vals_theta, ddc::select&lt;DimTheta&gt;(coord_eval));</div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeTheta, eval_deriv_type&gt;) {</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>        jmin_theta = ddc::discrete_space&lt;BSplinesTheta&gt;()</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>                             .eval_deriv(vals_theta, ddc::select&lt;DimTheta&gt;(coord_eval));</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    }</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span> </div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    std::size_t nr_done = 0;</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>            std::is_same_v&lt;EvalTypeR, eval_type&gt; || std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;);</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>    <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>            std::is_same_v&lt;</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>                    EvalTypeTheta,</div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>                    eval_type&gt; || std::is_same_v&lt;EvalTypeTheta, eval_deriv_type&gt;);</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span> </div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    Idx&lt;BSplinesR&gt; jmin_r;</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    Idx&lt;BSplinesTheta&gt; jmin_theta;</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span> </div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    std::size_t <span class="keyword">constexpr</span> nr = BSplinesR::degree() + 1;</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    std::size_t <span class="keyword">constexpr</span> ntheta = BSplinesTheta::degree() + 1;</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span> </div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    std::array&lt;double, nr&gt; vals_r_ptr;</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    std::array&lt;double, ntheta&gt; vals_theta_ptr;</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    DSpan1D <span class="keyword">const</span> vals_r(vals_r_ptr.data(), nr);</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    DSpan1D <span class="keyword">const</span> vals_theta(vals_theta_ptr.data(), ntheta);</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span> </div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeR, eval_type&gt;) {</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_basis(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeR, eval_deriv_type&gt;) {</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>        jmin_r = ddc::discrete_space&lt;BSplinesR&gt;().eval_deriv(vals_r, ddc::select&lt;DimR&gt;(coord_eval));</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    }</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeTheta, eval_type&gt;) {</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>        jmin_theta = ddc::discrete_space&lt;BSplinesTheta&gt;()</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>                             .eval_basis(vals_theta, ddc::select&lt;DimTheta&gt;(coord_eval));</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;EvalTypeTheta, eval_deriv_type&gt;) {</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>        jmin_theta = ddc::discrete_space&lt;BSplinesTheta&gt;()</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>                             .eval_deriv(vals_theta, ddc::select&lt;DimTheta&gt;(coord_eval));</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    }</div>
 <div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span> </div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    Idx&lt;BSplinesR&gt; first_tensor_product_radial_spline(C + 1);</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    std::size_t nr_done = 0;</div>
 <div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span> </div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keywordflow">if</span> (jmin_r &lt; first_tensor_product_radial_spline) {</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>        nr_done = first_tensor_product_radial_spline - jmin_r;</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>        <span class="keywordflow">for</span> (discrete_element_type k : singular_idx_range&lt;DDim&gt;()) {</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>            singular_values(k - discrete_element_type(0)) = 0.0;</div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>            <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr_done; ++i) {</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>                <span class="keywordflow">for</span> (std::size_t j(0); j &lt; ntheta; ++j) {</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>                    singular_values(k - discrete_element_type(0))</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>                            += m_singular_basis_elements(k, jmin_r + i, jmin_theta + j) * vals_r[i]</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>                               * vals_theta[j];</div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>                }</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>            }</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>        }</div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>        <span class="keywordflow">for</span> (std::size_t k(0); k &lt; n_singular_basis(); ++k) {</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>            singular_values(k) = 0.0;</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>        }</div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    }</div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr - nr_done; ++i) {</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; ntheta; ++j) {</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>            values(i, j) = vals_r[i + nr_done] * vals_theta[j];</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>        }</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    }</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <span class="keywordflow">for</span> (std::size_t i(nr - nr_done); i &lt; nr; ++i) {</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; ntheta; ++j) {</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>            values(i, j) = 0.0;</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>        }</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    }</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    <span class="keywordflow">return</span> Idx&lt;BSplinesR, BSplinesTheta&gt;(jmin_r, jmin_theta);</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>}</div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span> </div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span><a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace&gt;</a> integrals(</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>        <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace&gt;</a> int_vals)</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>{</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    <span class="keyword">static_assert</span>(</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>            Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible,</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>            <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesR.html">BSplinesR</a> = <span class="keyword">typename</span> DDim::BSplinesR_tag;</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesTheta.html">BSplinesTheta</a> = <span class="keyword">typename</span> DDim::BSplinesTheta_tag;</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <span class="keyword">using </span>tensor_product_idx_range_type = IdxRange&lt;BSplinesR, BSplinesTheta&gt;;</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    <span class="keyword">using </span>tensor_product_idx_type = Idx&lt;BSplinesR, BSplinesTheta&gt;;</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    <span class="keyword">using </span>IdxR = Idx&lt;BSplinesR&gt;;</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>    <span class="keyword">using </span>IdxTheta = Idx&lt;BSplinesTheta&gt;;</div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span> </div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    <span class="keyword">auto</span> r_bspl_space = ddc::discrete_space&lt;BSplinesR&gt;();</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <span class="keyword">auto</span> theta_bspl_space = ddc::discrete_space&lt;BSplinesTheta&gt;();</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span> </div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#a0095d1c0d61dc304c8f80dc6d45ac60f">singular_spline_coef</a>).extents() == DDim::n_singular_basis());</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).front().template uid&lt;BSplinesR&gt;()</div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>           == DDim::continuity + 1);</div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).back().template uid&lt;BSplinesR&gt;()</div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>           == r_bspl_space.nbasis() - 1);</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).template extent&lt;BSplinesTheta&gt;()</div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>                   == theta_bspl_space.nbasis()</div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>           || get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).template extent&lt;BSplinesTheta&gt;()</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>                      == theta_bspl_space.size());</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span> </div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>    DFieldMem&lt;IdxRange&lt;BSplinesR&gt;, MemorySpace&gt; r_integrals_alloc(</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>            r_bspl_space.full_domain().take_first(IdxStep&lt;BSplinesR&gt; {r_bspl_space.nbasis()}));</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    DFieldMem&lt;IdxRange&lt;BSplinesTheta&gt;, MemorySpace&gt; theta_integrals_alloc(</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>            theta_bspl_space.full_domain().take_first(</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>                    IdxStep&lt;BSplinesTheta&gt; {theta_bspl_space.size()}));</div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>    DField&lt;IdxRange&lt;BSplinesR&gt;, MemorySpace&gt; r_integrals = get_field(r_integrals_alloc);</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    DField&lt;IdxRange&lt;BSplinesTheta&gt;, MemorySpace&gt; theta_integrals = get_field(theta_integrals_alloc);</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span> </div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>    ddc::integrals(execution_space, r_integrals);</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>    ddc::integrals(execution_space, theta_integrals);</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span> </div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    IdxRange&lt;BSplinesR, BSplinesTheta&gt; singular_2d_idx_range(</div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>            get_idx_range(ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements));</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    DField&lt;IdxRange&lt;DDim&gt;&gt; singular_spline_integrals = get_field(int_vals.<a class="code hl_variable" href="structPolarSpline.html#a0095d1c0d61dc304c8f80dc6d45ac60f">singular_spline_coef</a>);</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    IdxRange&lt;DDim&gt; singular_idx_range = DDim::template singular_idx_range&lt;DDim&gt;();</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    Kokkos::parallel_for(</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>            Kokkos::TeamPolicy&lt;&gt;(execution_space, singular_idx_range.size(), Kokkos::AUTO),</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>            KOKKOS_LAMBDA(<span class="keyword">const</span> Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>                <span class="keyword">const</span> <span class="keywordtype">int</span> idx = team.league_rank();</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>                Idx&lt;DDim&gt; k(idx);</div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span> </div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>                <span class="comment">// Sum over quadrature dimensions</span></div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>                <span class="keywordtype">double</span> teamSum = 0;</div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>                Kokkos::parallel_reduce(</div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>                        Kokkos::TeamThreadMDRange(</div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>                                team,</div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>                                singular_2d_idx_range.template extent&lt;BSplinesR&gt;().value(),</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>                                singular_2d_idx_range.template extent&lt;BSplinesTheta&gt;().value()),</div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>                        [&amp;](<span class="keywordtype">int</span> r_thread_index, <span class="keywordtype">int</span> theta_thread_index, <span class="keywordtype">double</span>&amp; sum) {</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>                            IdxR i(r_thread_index);</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>                            IdxTheta j(theta_thread_index);</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>                            sum += ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements(k, i, j)</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>                                   * r_integrals(i) * theta_integrals(j);</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>                        },</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>                        teamSum);</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>                singular_spline_integrals(k) = teamSum;</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>            });</div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span> </div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    IdxRange&lt;BSplinesR&gt; r_tensor_product_dom(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>));</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    tensor_product_idx_range_type</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>            tensor_bspline_idx_range(r_tensor_product_dom, get_idx_range(theta_integrals));</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span> </div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>    ddc::parallel_for_each(</div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>            execution_space,</div>
-<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>            tensor_bspline_idx_range,</div>
-<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>            KOKKOS_LAMBDA(tensor_product_idx_type idx) {</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>                int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>(idx) = r_integrals(ddc::select&lt;BSplinesR&gt;(idx))</div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>                                            * theta_integrals(ddc::select&lt;BSplinesTheta&gt;(idx));</div>
-<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>            });</div>
-<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>    <span class="keywordflow">if</span> (get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).template extent&lt;BSplinesTheta&gt;()</div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>        == theta_bspl_space.size()) {</div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>        IdxRange&lt;BSplinesTheta&gt; periodic_points(</div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>                get_idx_range(theta_integrals)</div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>                        .take_last(IdxStep&lt;BSplinesTheta&gt; {BSplinesTheta::degree()}));</div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        tensor_product_idx_range_type repeat_idx_range(r_tensor_product_dom, periodic_points);</div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>        ddc::parallel_fill(execution_space, int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>[repeat_idx_range], 0.0);</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>    }</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>    <span class="keywordflow">return</span> int_vals;</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>}</div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> MemorySpace2&gt;</div>
-<div class="foldopen" id="foldopen00771" data-start="{" data-end="}">
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af11b5fa49f044552020019eb1b8f4457">  771</a></span><span class="keywordtype">void</span> <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::Impl&lt;DDim, MemorySpace&gt;::integrals</a>(</div>
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>        <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace2&gt;</a> int_vals)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    integrals(Kokkos::DefaultHostExecutionSpace(), int_vals);</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>}</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    Idx&lt;BSplinesR&gt; first_tensor_product_radial_spline(C + 1);</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span> </div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <span class="keywordflow">if</span> (jmin_r &lt; first_tensor_product_radial_spline) {</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>        nr_done = first_tensor_product_radial_spline - jmin_r;</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>        <span class="keywordflow">for</span> (discrete_element_type k : singular_idx_range&lt;DDim&gt;()) {</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>            singular_values(k - discrete_element_type(0)) = 0.0;</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>            <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr_done; ++i) {</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>                <span class="keywordflow">for</span> (std::size_t j(0); j &lt; ntheta; ++j) {</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>                    singular_values(k - discrete_element_type(0))</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>                            += m_singular_basis_elements(k, jmin_r + i, jmin_theta + j) * vals_r[i]</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>                               * vals_theta[j];</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>                }</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>            }</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>        }</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>        <span class="keywordflow">for</span> (std::size_t k(0); k &lt; n_singular_basis(); ++k) {</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>            singular_values(k) = 0.0;</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>        }</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    }</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span> </div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>    <span class="keywordflow">for</span> (std::size_t i(0); i &lt; nr - nr_done; ++i) {</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; ntheta; ++j) {</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>            values(i, j) = vals_r[i + nr_done] * vals_theta[j];</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>        }</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    }</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    <span class="keywordflow">for</span> (std::size_t i(nr - nr_done); i &lt; nr; ++i) {</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>        <span class="keywordflow">for</span> (std::size_t j(0); j &lt; ntheta; ++j) {</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>            values(i, j) = 0.0;</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>        }</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    }</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <span class="keywordflow">return</span> Idx&lt;BSplinesR, BSplinesTheta&gt;(jmin_r, jmin_theta);</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>}</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span> </div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> ExecSpace, <span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span><a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace&gt;</a> integrals(</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>        ExecSpace <span class="keyword">const</span>&amp; execution_space,</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>        <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace&gt;</a> int_vals)</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>{</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible,</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>            <span class="stringliteral">&quot;MemorySpace has to be accessible for ExecutionSpace.&quot;</span>);</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesR.html">BSplinesR</a> = <span class="keyword">typename</span> DDim::BSplinesR_tag;</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    <span class="keyword">using </span><a class="code hl_struct" href="structBSplinesTheta.html">BSplinesTheta</a> = <span class="keyword">typename</span> DDim::BSplinesTheta_tag;</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    <span class="keyword">using </span>tensor_product_idx_range_type = IdxRange&lt;BSplinesR, BSplinesTheta&gt;;</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>    <span class="keyword">using </span>tensor_product_idx_type = Idx&lt;BSplinesR, BSplinesTheta&gt;;</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    <span class="keyword">using </span>IdxR = Idx&lt;BSplinesR&gt;;</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    <span class="keyword">using </span>IdxTheta = Idx&lt;BSplinesTheta&gt;;</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span> </div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <span class="keyword">auto</span> r_bspl_space = ddc::discrete_space&lt;BSplinesR&gt;();</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    <span class="keyword">auto</span> theta_bspl_space = ddc::discrete_space&lt;BSplinesTheta&gt;();</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span> </div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#a0095d1c0d61dc304c8f80dc6d45ac60f">singular_spline_coef</a>).extents() == DDim::n_singular_basis());</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).front().template uid&lt;BSplinesR&gt;()</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>           == DDim::continuity + 1);</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).back().template uid&lt;BSplinesR&gt;()</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>           == r_bspl_space.nbasis() - 1);</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>    assert(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).template extent&lt;BSplinesTheta&gt;()</div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>                   == theta_bspl_space.nbasis()</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>           || get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).template extent&lt;BSplinesTheta&gt;()</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>                      == theta_bspl_space.size());</div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span> </div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    DFieldMem&lt;IdxRange&lt;BSplinesR&gt;, MemorySpace&gt; r_integrals_alloc(</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>            r_bspl_space.full_domain().take_first(IdxStep&lt;BSplinesR&gt; {r_bspl_space.nbasis()}));</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    DFieldMem&lt;IdxRange&lt;BSplinesTheta&gt;, MemorySpace&gt; theta_integrals_alloc(</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>            theta_bspl_space.full_domain().take_first(</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>                    IdxStep&lt;BSplinesTheta&gt; {theta_bspl_space.size()}));</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>    DField&lt;IdxRange&lt;BSplinesR&gt;, MemorySpace&gt; r_integrals = get_field(r_integrals_alloc);</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>    DField&lt;IdxRange&lt;BSplinesTheta&gt;, MemorySpace&gt; theta_integrals = get_field(theta_integrals_alloc);</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span> </div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    ddc::integrals(execution_space, r_integrals);</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    ddc::integrals(execution_space, theta_integrals);</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    IdxRange&lt;BSplinesR, BSplinesTheta&gt; singular_2d_idx_range(</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>            get_idx_range(ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements));</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    DField&lt;IdxRange&lt;DDim&gt;&gt; singular_spline_integrals = get_field(int_vals.<a class="code hl_variable" href="structPolarSpline.html#a0095d1c0d61dc304c8f80dc6d45ac60f">singular_spline_coef</a>);</div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    IdxRange&lt;DDim&gt; singular_idx_range = DDim::template singular_idx_range&lt;DDim&gt;();</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    Kokkos::parallel_for(</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>            Kokkos::TeamPolicy&lt;&gt;(execution_space, singular_idx_range.size(), Kokkos::AUTO),</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>            KOKKOS_LAMBDA(<span class="keyword">const</span> Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>                <span class="keyword">const</span> <span class="keywordtype">int</span> idx = team.league_rank();</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>                Idx&lt;DDim&gt; k(idx);</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span> </div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>                <span class="comment">// Sum over quadrature dimensions</span></div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>                <span class="keywordtype">double</span> teamSum = 0;</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>                Kokkos::parallel_reduce(</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>                        Kokkos::TeamThreadMDRange(</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>                                team,</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>                                singular_2d_idx_range.template extent&lt;BSplinesR&gt;().value(),</div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>                                singular_2d_idx_range.template extent&lt;BSplinesTheta&gt;().value()),</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>                        [&amp;](<span class="keywordtype">int</span> r_thread_index, <span class="keywordtype">int</span> theta_thread_index, <span class="keywordtype">double</span>&amp; sum) {</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>                            IdxR i(r_thread_index);</div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>                            IdxTheta j(theta_thread_index);</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>                            sum += ddc::discrete_space&lt;DDim&gt;().m_singular_basis_elements(k, i, j)</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>                                   * r_integrals(i) * theta_integrals(j);</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>                        },</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>                        teamSum);</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>                singular_spline_integrals(k) = teamSum;</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>            });</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span> </div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    IdxRange&lt;BSplinesR&gt; r_tensor_product_dom(get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>));</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    tensor_product_idx_range_type</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>            tensor_bspline_idx_range(r_tensor_product_dom, get_idx_range(theta_integrals));</div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span> </div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    ddc::parallel_for_each(</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>            execution_space,</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>            tensor_bspline_idx_range,</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>            KOKKOS_LAMBDA(tensor_product_idx_type idx) {</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>                int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>(idx) = r_integrals(ddc::select&lt;BSplinesR&gt;(idx))</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>                                            * theta_integrals(ddc::select&lt;BSplinesTheta&gt;(idx));</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>            });</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span> </div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>    <span class="keywordflow">if</span> (get_idx_range(int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>).template extent&lt;BSplinesTheta&gt;()</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        == theta_bspl_space.size()) {</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>        IdxRange&lt;BSplinesTheta&gt; periodic_points(</div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>                get_idx_range(theta_integrals)</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>                        .take_last(IdxStep&lt;BSplinesTheta&gt; {BSplinesTheta::degree()}));</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>        tensor_product_idx_range_type repeat_idx_range(r_tensor_product_dom, periodic_points);</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>        ddc::parallel_fill(execution_space, int_vals.<a class="code hl_variable" href="structPolarSpline.html#af608abfc57c38e2f35f25a0b9916d077">spline_coef</a>[repeat_idx_range], 0.0);</div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>    }</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>    <span class="keywordflow">return</span> int_vals;</div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>}</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span> </div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> BSplinesR, <span class="keyword">class</span> BSplinesTheta, <span class="keywordtype">int</span> C&gt;</div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> DDim, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> MemorySpace2&gt;</div>
+<div class="foldopen" id="foldopen00773" data-start="{" data-end="}">
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno"><a class="line" href="classPolarBSplines_1_1Impl.html#af11b5fa49f044552020019eb1b8f4457">  773</a></span><span class="keywordtype">void</span> <a class="code hl_class" href="classPolarBSplines.html">PolarBSplines&lt;BSplinesR, BSplinesTheta, C&gt;::Impl&lt;DDim, MemorySpace&gt;::integrals</a>(</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>        <a class="code hl_struct" href="structPolarSpline.html">PolarSpline&lt;DDim, MemorySpace2&gt;</a> int_vals)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    integrals(Kokkos::DefaultHostExecutionSpace(), int_vals);</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>}</div>
 </div>
 </div>
 </div>
@@ -721,22 +723,22 @@ $(document).ready(function(){initNavTree('polar__bsplines_8hpp_source.html','');
 </div>
 <div class="ttc" id="aclassCartesianToBarycentric_html"><div class="ttname"><a href="classCartesianToBarycentric.html">CartesianToBarycentric</a></div><div class="ttdoc">A class to convert Cartesian coordinates to barycentric coordinates on a triangle.</div><div class="ttdef"><b>Definition</b> cartesian_to_barycentric.hpp:24</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html">PolarBSplines::Impl</a></div><div class="ttdoc">The Impl class holds the implementation of the PolarBSplines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:174</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">PolarBSplines::Impl::nbasis</a></div><div class="ttdeci">std::size_t nbasis() const noexcept</div><div class="ttdoc">Get the total number of basis functions.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:513</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a244d6ebb4a31d96e25c1844614979cc7"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">PolarBSplines::Impl::full_domain</a></div><div class="ttdeci">discrete_domain_type full_domain() const noexcept</div><div class="ttdoc">Returns the index range containing the indices of all the polar b-splines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:525</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a26cb42c2179c32c3a896f6e04392bbd2"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">PolarBSplines::Impl::eval_deriv_r</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the radial derivative of the polar basis splines at the coordinate p.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:567</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a1ca0df2d7f5defe89ecf42ef6bcfb9fa"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a1ca0df2d7f5defe89ecf42ef6bcfb9fa">PolarBSplines::Impl::nbasis</a></div><div class="ttdeci">std::size_t nbasis() const noexcept</div><div class="ttdoc">Get the total number of basis functions.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:515</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a244d6ebb4a31d96e25c1844614979cc7"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a244d6ebb4a31d96e25c1844614979cc7">PolarBSplines::Impl::full_domain</a></div><div class="ttdeci">discrete_domain_type full_domain() const noexcept</div><div class="ttdoc">Returns the index range containing the indices of all the polar b-splines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:527</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a26cb42c2179c32c3a896f6e04392bbd2"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a26cb42c2179c32c3a896f6e04392bbd2">PolarBSplines::Impl::eval_deriv_r</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the radial derivative of the polar basis splines at the coordinate p.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:569</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a386e9fe73ec0a24b3773353aa4ad1af2"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a386e9fe73ec0a24b3773353aa4ad1af2">PolarBSplines::Impl::Impl</a></div><div class="ttdeci">Impl(Impl &amp;&amp;x)=default</div><div class="ttdoc">A copy constructor for the PolarBSplines taking a temporary r-value.</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a44b135ad2f6adec16d22471819ed98c1"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a44b135ad2f6adec16d22471819ed98c1">PolarBSplines::Impl::operator=</a></div><div class="ttdeci">Impl &amp; operator=(Impl &amp;&amp;x)=default</div><div class="ttdoc">A copy operator for the PolarBSplines taking a temporary r-value.</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a769bcf1a461b8a95ce433eade266abe0"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">PolarBSplines::Impl::eval_basis</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_basis(DSpan1D singular_values, DSpan2D values, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the polar basis splines at the coordinate p.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:556</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a769bcf1a461b8a95ce433eade266abe0"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a769bcf1a461b8a95ce433eade266abe0">PolarBSplines::Impl::eval_basis</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_basis(DSpan1D singular_values, DSpan2D values, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the polar basis splines at the coordinate p.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:558</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a76ae9aee443a828ec5f62ddabbda37fb"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a76ae9aee443a828ec5f62ddabbda37fb">PolarBSplines::Impl::Impl</a></div><div class="ttdeci">Impl(const DiscreteMapping &amp;curvilinear_to_cartesian)</div><div class="ttdoc">A constructor for the PolarBSplines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:247</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_a954186a181dc16f537322080f4484a1f"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#a954186a181dc16f537322080f4484a1f">PolarBSplines::Impl::operator=</a></div><div class="ttdeci">Impl &amp; operator=(Impl const &amp;x)=default</div><div class="ttdoc">A copy operator for the PolarBSplines.</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_aa3ab2a3455e0aec1bbaf3e8d89eaa7bb"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#aa3ab2a3455e0aec1bbaf3e8d89eaa7bb">PolarBSplines::Impl::discrete_vector_type</a></div><div class="ttdeci">IdxStep&lt; DDim &gt; discrete_vector_type</div><div class="ttdoc">The type of a vector associated with a PolarBSpline.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:237</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_aa4c6ff5c6a2e63283fc779ef1a6befd2"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2">PolarBSplines::Impl::~Impl</a></div><div class="ttdeci">~Impl()=default</div><div class="ttdoc">The destructor for the PolarBSplines.</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_aad7f0ed019b40ca8bea9259f53d94a83"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">PolarBSplines::Impl::Impl</a></div><div class="ttdeci">Impl(Impl&lt; DDim, OriginMemorySpace &gt; const &amp;impl)</div><div class="ttdoc">A copy constructor for the PolarBSplines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:370</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_acf9b19d29e5ed2ffee1a9795fc7774ea"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">PolarBSplines::Impl::eval_deriv_theta</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the poloidal derivative of the polar basis splines at the coordinate p.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:578</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_aad7f0ed019b40ca8bea9259f53d94a83"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#aad7f0ed019b40ca8bea9259f53d94a83">PolarBSplines::Impl::Impl</a></div><div class="ttdeci">Impl(Impl&lt; DDim, OriginMemorySpace &gt; const &amp;impl)</div><div class="ttdoc">A copy constructor for the PolarBSplines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:372</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_acf9b19d29e5ed2ffee1a9795fc7774ea"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#acf9b19d29e5ed2ffee1a9795fc7774ea">PolarBSplines::Impl::eval_deriv_theta</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the poloidal derivative of the polar basis splines at the coordinate p.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:580</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_ad59005ab67bc08a9bade86b4cbb86c6e"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e">PolarBSplines::Impl::discrete_element_type</a></div><div class="ttdeci">Idx&lt; DDim &gt; discrete_element_type</div><div class="ttdoc">The type of an index associated with a PolarBSpline.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:231</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_ae600480dcb012c8817f6a72dcbb46407"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">PolarBSplines::Impl::eval_deriv_r_and_theta</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions...</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:589</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_ae600480dcb012c8817f6a72dcbb46407"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407">PolarBSplines::Impl::eval_deriv_r_and_theta</a></div><div class="ttdeci">KOKKOS_FUNCTION tensor_product_index_type eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, ddc::Coordinate&lt; DimR, DimTheta &gt; p) const</div><div class="ttdoc">Evaluate the second order derivative of the polar basis splines in the radial and poloidal directions...</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:591</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_aede52d653b3250142ef44aadb56904f8"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8">PolarBSplines::Impl::discrete_domain_type</a></div><div class="ttdeci">IdxRange&lt; DDim &gt; discrete_domain_type</div><div class="ttdoc">The type of a index range of PolarBSplines.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:234</div></div>
-<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_af3133a4ea7b7cc4796da428de9bba352"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">PolarBSplines::Impl::tensor_bspline_idx_range</a></div><div class="ttdeci">discrete_domain_type tensor_bspline_idx_range() const noexcept</div><div class="ttdoc">Returns the IdxRange containing the indices of the b-splines which don't traverse the singular point ...</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:537</div></div>
+<div class="ttc" id="aclassPolarBSplines_1_1Impl_html_af3133a4ea7b7cc4796da428de9bba352"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#af3133a4ea7b7cc4796da428de9bba352">PolarBSplines::Impl::tensor_bspline_idx_range</a></div><div class="ttdeci">discrete_domain_type tensor_bspline_idx_range() const noexcept</div><div class="ttdoc">Returns the IdxRange containing the indices of the b-splines which don't traverse the singular point ...</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:539</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_af79c5cc9a060916b31c8a41e5f7cd7da"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#af79c5cc9a060916b31c8a41e5f7cd7da">PolarBSplines::Impl::Impl</a></div><div class="ttdeci">Impl(Impl const &amp;x)=default</div><div class="ttdoc">A copy constructor for the PolarBSplines.</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_structPolarBSplines_1_1Impl_1_1Corner1Tag"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner1Tag">PolarBSplines::Impl::Corner1Tag</a></div><div class="ttdoc">The tag for the first corner of the Barycentric coordinates.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:204</div></div>
 <div class="ttc" id="aclassPolarBSplines_1_1Impl_html_structPolarBSplines_1_1Impl_1_1Corner2Tag"><div class="ttname"><a href="classPolarBSplines_1_1Impl.html#structPolarBSplines_1_1Impl_1_1Corner2Tag">PolarBSplines::Impl::Corner2Tag</a></div><div class="ttdoc">The tag for the second corner of the Barycentric coordinates.</div><div class="ttdef"><b>Definition</b> polar_bsplines.hpp:208</div></div>

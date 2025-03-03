@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/advection_2d_rp/test_cases.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/advection_rtheta/test_cases.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('advection__rtheta_2test__cases_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;params.yaml.hpp&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;polar_spline.hpp&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;polar_spline_evaluator.hpp&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;spline_interpolator_rtheta.hpp&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *  This file defines</span></div>
@@ -148,9 +148,9 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classFunctionToBeAdvected__cos__4__ellipse.html#a99fc9f5eb007cff6b25387b3bb572429">   70</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classFunctionToBeAdvected__cos__4__ellipse.html#a99fc9f5eb007cff6b25387b3bb572429">operator()</a>(CoordRTheta coord_rp)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classFunctionToBeAdvected__cos__4__ellipse.html#afb539546a58e3041af7a0ddc7d9d19ba">   70</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classFunctionToBeAdvected__cos__4__ellipse.html#afb539546a58e3041af7a0ddc7d9d19ba">operator()</a>(CoordRTheta coord_rtheta)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        CoordXY <span class="keyword">const</span> coord_xy(m_mapping(coord_rp));</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        CoordXY <span class="keyword">const</span> coord_xy(m_mapping(coord_rtheta));</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> x = ddc::get&lt;X&gt;(coord_xy);</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> y = ddc::get&lt;Y&gt;(coord_xy);</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
@@ -213,13 +213,13 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
 <div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classFunctionToBeAdvected__gaussian.html#a9508b0cbbfc94951b1c99a41b2132f5e">  166</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classFunctionToBeAdvected__gaussian.html#a9508b0cbbfc94951b1c99a41b2132f5e">operator()</a>(CoordRTheta coord_rp)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classFunctionToBeAdvected__gaussian.html#a3b312abb04e5c552809dc1bbfa298f2b">  166</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classFunctionToBeAdvected__gaussian.html#a3b312abb04e5c552809dc1bbfa298f2b">operator()</a>(CoordRTheta coord_rtheta)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="keyword">    </span>{</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="comment">// Gaussian centred in (x0, y0):</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        CoordXY <span class="keyword">const</span> coord_xy(m_mapping(coord_rp));</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        CoordXY <span class="keyword">const</span> coord_xy(m_mapping(coord_rtheta));</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> x = ddc::get&lt;X&gt;(coord_xy);</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> y = ddc::get&lt;Y&gt;(coord_xy);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> r = ddc::get&lt;R&gt;(coord_rp);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> r = ddc::get&lt;R&gt;(coord_rtheta);</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordflow">if</span> ((m_rmin &lt;= r) and (r &lt;= m_rmax)) {</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">return</span> m_constant</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                   * Kokkos::exp(</div>
@@ -352,9 +352,9 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <div class="foldopen" id="foldopen00402" data-start="{" data-end="}">
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno"><a class="line" href="classAdvectionField__rotation.html#ae06551b70c3ae99fc68b8ebdd232fcac">  402</a></span>    KOKKOS_FUNCTION CoordXY <a class="code hl_function" href="classAdvectionField__rotation.html#ae06551b70c3ae99fc68b8ebdd232fcac">operator()</a>(CoordXY <span class="keyword">const</span> coord, <span class="keywordtype">double</span> <span class="keyword">const</span> t)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        CoordRTheta <span class="keyword">const</span> coord_rp(m_physical_to_logical_mapping(coord));</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        CoordRTheta <span class="keyword">const</span> coord_rtheta(m_physical_to_logical_mapping(coord));</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        std::array&lt;std::array&lt;double, 2&gt;, 2&gt; jacobian;</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        m_logical_to_physical_mapping.<a class="code hl_function" href="classCircularToCartesian.html#ae9c604e51d6716810b885b92b989f4ff">jacobian_matrix</a>(coord_rp, jacobian);</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        m_logical_to_physical_mapping.<a class="code hl_function" href="classCircularToCartesian.html#ae9c604e51d6716810b885b92b989f4ff">jacobian_matrix</a>(coord_rtheta, jacobian);</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];</div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];</div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <span class="keywordflow">return</span> CoordXY(vx, vy);</div>
@@ -364,9 +364,9 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <div class="foldopen" id="foldopen00422" data-start="{" data-end="}">
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno"><a class="line" href="classAdvectionField__rotation.html#a40858e4cfc5ab905d70ca8f4b334ddb0">  422</a></span>    KOKKOS_FUNCTION CoordXY <a class="code hl_function" href="classAdvectionField__rotation.html#a40858e4cfc5ab905d70ca8f4b334ddb0">exact_feet</a>(CoordXY coord_xy, <span class="keywordtype">double</span> <span class="keyword">const</span> t)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        CoordRTheta <span class="keyword">const</span> coord_rp(m_physical_to_logical_mapping(coord_xy));</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        CoordRTheta <span class="keyword">const</span> coord_rtheta(m_physical_to_logical_mapping(coord_xy));</div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        CoordRTheta <span class="keyword">const</span> velocity(m_vr, m_vtheta);</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>        <span class="keywordflow">return</span> m_logical_to_physical_mapping(coord_rp - t * velocity);</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>        <span class="keywordflow">return</span> m_logical_to_physical_mapping(coord_rtheta - t * velocity);</div>
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>    }</div>
 </div>
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>};</div>
@@ -436,11 +436,11 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <div class="ttc" id="aclassCircularToCartesian_html_ae9c604e51d6716810b885b92b989f4ff"><div class="ttname"><a href="classCircularToCartesian.html#ae9c604e51d6716810b885b92b989f4ff">CircularToCartesian::jacobian_matrix</a></div><div class="ttdeci">KOKKOS_FUNCTION void jacobian_matrix(Coord&lt; R, Theta &gt; const &amp;coord, Matrix_2x2 &amp;matrix) const</div><div class="ttdoc">Compute full Jacobian matrix.</div><div class="ttdef"><b>Definition</b> circular_to_cartesian.hpp:143</div></div>
 <div class="ttc" id="aclassFunctionToBeAdvected__cos__4__ellipse_html"><div class="ttname"><a href="classFunctionToBeAdvected__cos__4__ellipse.html">FunctionToBeAdvected_cos_4_ellipse</a></div><div class="ttdoc">Test function for the 2D polar advection operator.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:44</div></div>
 <div class="ttc" id="aclassFunctionToBeAdvected__cos__4__ellipse_html_a3f00f049cc44a27fa06e8dd14e7aa746"><div class="ttname"><a href="classFunctionToBeAdvected__cos__4__ellipse.html#a3f00f049cc44a27fa06e8dd14e7aa746">FunctionToBeAdvected_cos_4_ellipse::FunctionToBeAdvected_cos_4_ellipse</a></div><div class="ttdeci">KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_cos_4_ellipse(FunctionToBeAdvected_cos_4_ellipse const &amp;)=default</div><div class="ttdoc">Copy operator.</div></div>
-<div class="ttc" id="aclassFunctionToBeAdvected__cos__4__ellipse_html_a99fc9f5eb007cff6b25387b3bb572429"><div class="ttname"><a href="classFunctionToBeAdvected__cos__4__ellipse.html#a99fc9f5eb007cff6b25387b3bb572429">FunctionToBeAdvected_cos_4_ellipse::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const</div><div class="ttdoc">Get the value of the function.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:70</div></div>
 <div class="ttc" id="aclassFunctionToBeAdvected__cos__4__ellipse_html_adbac9f1793d607c303b61fc050c97aab"><div class="ttname"><a href="classFunctionToBeAdvected__cos__4__ellipse.html#adbac9f1793d607c303b61fc050c97aab">FunctionToBeAdvected_cos_4_ellipse::FunctionToBeAdvected_cos_4_ellipse</a></div><div class="ttdeci">FunctionToBeAdvected_cos_4_ellipse(Mapping const &amp;mapping)</div><div class="ttdoc">Instantiate a FunctionToBeAdvected_cos_4_ellipse function.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:55</div></div>
+<div class="ttc" id="aclassFunctionToBeAdvected__cos__4__ellipse_html_afb539546a58e3041af7a0ddc7d9d19ba"><div class="ttname"><a href="classFunctionToBeAdvected__cos__4__ellipse.html#afb539546a58e3041af7a0ddc7d9d19ba">FunctionToBeAdvected_cos_4_ellipse::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION double operator()(CoordRTheta coord_rtheta) const</div><div class="ttdoc">Get the value of the function.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:70</div></div>
 <div class="ttc" id="aclassFunctionToBeAdvected__gaussian_html"><div class="ttname"><a href="classFunctionToBeAdvected__gaussian.html">FunctionToBeAdvected_gaussian</a></div><div class="ttdoc">Test function for the 2D polar advection operator.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:101</div></div>
+<div class="ttc" id="aclassFunctionToBeAdvected__gaussian_html_a3b312abb04e5c552809dc1bbfa298f2b"><div class="ttname"><a href="classFunctionToBeAdvected__gaussian.html#a3b312abb04e5c552809dc1bbfa298f2b">FunctionToBeAdvected_gaussian::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION double operator()(CoordRTheta coord_rtheta) const</div><div class="ttdoc">Get the value of the function.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:166</div></div>
 <div class="ttc" id="aclassFunctionToBeAdvected__gaussian_html_a77a7e614dec94a94046f17f1dabf2e10"><div class="ttname"><a href="classFunctionToBeAdvected__gaussian.html#a77a7e614dec94a94046f17f1dabf2e10">FunctionToBeAdvected_gaussian::FunctionToBeAdvected_gaussian</a></div><div class="ttdeci">KOKKOS_DEFAULTED_FUNCTION FunctionToBeAdvected_gaussian(FunctionToBeAdvected_gaussian const &amp;)=default</div><div class="ttdoc">Copy operator.</div></div>
-<div class="ttc" id="aclassFunctionToBeAdvected__gaussian_html_a9508b0cbbfc94951b1c99a41b2132f5e"><div class="ttname"><a href="classFunctionToBeAdvected__gaussian.html#a9508b0cbbfc94951b1c99a41b2132f5e">FunctionToBeAdvected_gaussian::operator()</a></div><div class="ttdeci">KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const</div><div class="ttdoc">Get the value of the function.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:166</div></div>
 <div class="ttc" id="aclassFunctionToBeAdvected__gaussian_html_aef3eeccf31077b83bd59c4d83d5ab360"><div class="ttname"><a href="classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360">FunctionToBeAdvected_gaussian::FunctionToBeAdvected_gaussian</a></div><div class="ttdeci">FunctionToBeAdvected_gaussian(Mapping const &amp;mapping, double const constant, double const x0, double const y0, double const sig_x, double const sig_y, double const rmin, double const rmax)</div><div class="ttdoc">Instantiate a FunctionToBeAdvected_gaussian function.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:133</div></div>
 <div class="ttc" id="astructAdvectionSimulation_html"><div class="ttname"><a href="structAdvectionSimulation.html">AdvectionSimulation</a></div><div class="ttdoc">Base class for the tests simulation of the 2D polar advection operator.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:447</div></div>
 <div class="ttc" id="astructAdvectionSimulation_html_a5514ff8c601c1df1602d37c656575c82"><div class="ttname"><a href="structAdvectionSimulation.html#a5514ff8c601c1df1602d37c656575c82">AdvectionSimulation::advection_field</a></div><div class="ttdeci">AdvectionField const advection_field</div><div class="ttdoc">The chosen advection field for the simulation.</div><div class="ttdef"><b>Definition</b> test_cases.hpp:451</div></div>
@@ -452,7 +452,7 @@ $(document).ready(function(){initNavTree('advection__2d__rp_2test__cases_8hpp_so
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_831f43445894a06c32ca53e744f921f4.html">tests</a></li><li class="navelem"><a class="el" href="dir_517ca5cf38039cdc09da4808bf84bf13.html">geometryRTheta</a></li><li class="navelem"><a class="el" href="dir_8142eccf7ee007e36ec6c0e71e8a36dc.html">advection_2d_rp</a></li><li class="navelem"><b>test_cases.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_831f43445894a06c32ca53e744f921f4.html">tests</a></li><li class="navelem"><a class="el" href="dir_517ca5cf38039cdc09da4808bf84bf13.html">geometryRTheta</a></li><li class="navelem"><a class="el" href="dir_f6506f08d3e1d33463f29fb1f38a28ac.html">advection_rtheta</a></li><li class="navelem"><b>test_cases.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

@@ -406,7 +406,7 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                = PolarBSplinesRTheta::template singular_idx_range&lt;PolarBSplinesRTheta&gt;();</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <span class="comment">// Find value and derivative of 2D B-splines covering the singular point</span></div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        ddc::for_each(m_idxrange_quadrature_singular, [&amp;](IdxQuadratureRTheta <span class="keyword">const</span> irp) {</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        ddc::for_each(m_idxrange_quadrature_singular, [&amp;](IdxQuadratureRTheta <span class="keyword">const</span> irtheta) {</div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>            std::array&lt;double, <a class="code hl_function" href="classPolarBSplines.html#a9254ee09fe5fce248ae80efac56c82c3">PolarBSplinesRTheta::n_singular_basis</a>()&gt; singular_data;</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>            std::array&lt;double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta&gt; data;</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>            <span class="comment">// Values of the polar basis splines around the singular point</span></div>
@@ -415,10 +415,10 @@ $(document).ready(function(){initNavTree('polarpoissonlikesolver_8hpp_source.htm
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            <span class="comment">// Values of the polar basis splines, that do not cover the singular point,</span></div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>            <span class="comment">// at a given coordinate</span></div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>            IdxQuadratureR <span class="keyword">const</span> idx_r(irp);</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>            IdxQuadratureTheta <span class="keyword">const</span> idx_theta(irp);</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>            IdxQuadratureR <span class="keyword">const</span> idx_r(irtheta);</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>            IdxQuadratureTheta <span class="keyword">const</span> idx_theta(irtheta);</div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>            <span class="keyword">const</span> CoordRTheta coord(ddc::coordinate(irp));</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>            <span class="keyword">const</span> CoordRTheta coord(ddc::coordinate(irtheta));</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>            <span class="comment">// Calculate the value</span></div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>            ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().eval_basis(singular_vals, vals, coord);</div>

@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classCrankNicolson.html#acee28614e8739edfb476a51aa7c2fe91":[15,43,5],
 "classCrankNicolson.html#ad0949984fa0c2d0004f6b7a10e19cd69":[15,43,1],
 "classCrankNicolson.html#afdf22291a9a2f9180e1904d3a0728737":[15,43,10],
 "classCurvilinearSolution.html":[15,44],
@@ -215,11 +214,11 @@ var NAVTREEINDEX1 =
 "classFluidMoments.html#structFluidMoments_1_1MomentVelocity":[15,64,2],
 "classFunctionToBeAdvected__cos__4__ellipse.html":[15,65],
 "classFunctionToBeAdvected__cos__4__ellipse.html#a3f00f049cc44a27fa06e8dd14e7aa746":[15,65,1],
-"classFunctionToBeAdvected__cos__4__ellipse.html#a99fc9f5eb007cff6b25387b3bb572429":[15,65,2],
 "classFunctionToBeAdvected__cos__4__ellipse.html#adbac9f1793d607c303b61fc050c97aab":[15,65,0],
+"classFunctionToBeAdvected__cos__4__ellipse.html#afb539546a58e3041af7a0ddc7d9d19ba":[15,65,2],
 "classFunctionToBeAdvected__gaussian.html":[15,66],
+"classFunctionToBeAdvected__gaussian.html#a3b312abb04e5c552809dc1bbfa298f2b":[15,66,2],
 "classFunctionToBeAdvected__gaussian.html#a77a7e614dec94a94046f17f1dabf2e10":[15,66,1],
-"classFunctionToBeAdvected__gaussian.html#a9508b0cbbfc94951b1c99a41b2132f5e":[15,66,2],
 "classFunctionToBeAdvected__gaussian.html#aef3eeccf31077b83bd59c4d83d5ab360":[15,66,0],
 "classGaussLegendre.html":[15,67],
 "classGaussLegendre.html#a421cde58db551c40987077ee12b4e954":[15,67,5],
@@ -249,5 +248,6 @@ var NAVTREEINDEX1 =
 "classIEquilibrium.html#ac3766d5ef01c1e949ec3dd6d55892a75":[15,89,2],
 "classIInitialisation.html":[15,90],
 "classIInitialisation.html#ab823ad3fb18fb03f7b46f7e7576e5e5b":[15,90,1],
-"classIInitialisation.html#ae08dacb88d913d1854652b86a6828c49":[15,90,2]
+"classIInitialisation.html#ae08dacb88d913d1854652b86a6828c49":[15,90,2],
+"classIInitialisation.html#ae27774990fe287904bf424adb15a9772":[15,90,0]
 };

@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('src_geometryRTheta_interpolation.html'
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Use a function basis built from a product of two 1D spline bases in \(r\) and in \(\theta\). This interpolator does <b>not</b> use the polar spline basis with special treatment for the centre. This means that care must be taken when using this interpolator, to ensure that numerically identical values are provided at \(r=0\). If this rule is respected then the representation will be continuous.</p>
-<p>The interpolator is built from a product of b-splines if \(r\) and \(\theta\) rather than using a polar spline basis as the former is significantly less costly than the latter. Therefore the polar spline basis should only be used when additional smoothness is required.</p>
+<p>The interpolator is built from a product of b-splines if \(r\) and \(\theta\) rather than using a polar spline basis as the former is significantly less costly than the latter. Therefore, the polar spline basis should only be used when additional smoothness is required.</p>
 <p>The <code>operator()</code> takes as input the values of the function we want to interpolate and the coordinates where we want to interpolate. It computes the coefficients on the 2D B-splines basis and evaluates the decomposition on the coordinates given as input. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -130,9 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a85ddb58463ee4c5bd45f70ec0e77a43a" id="r_a85ddb58463ee4c5bd45f70ec0e77a43a"><td class="memItemLeft" align="right" valign="top">DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#a85ddb58463ee4c5bd45f70ec0e77a43a">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field_xy, double dt) const override</td></tr>
 <tr class="memdesc:a85ddb58463ee4c5bd45f70ec0e77a43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field of the advected function.  <br /></td></tr>
 <tr class="separator:a85ddb58463ee4c5bd45f70ec0e77a43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af01b09781f5f06f70916fcfed5204c13" id="r_af01b09781f5f06f70916fcfed5204c13"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#af01b09781f5f06f70916fcfed5204c13">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu_host, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt; advection_field_rp, CoordXY const &amp;advection_field_xy_centre, double dt) const override</td></tr>
-<tr class="memdesc:af01b09781f5f06f70916fcfed5204c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field to the advected function.  <br /></td></tr>
-<tr class="separator:af01b09781f5f06f70916fcfed5204c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf6c49b5c10b335e3d69c2d9ccdf01f2" id="r_abf6c49b5c10b335e3d69c2d9ccdf01f2"><td class="memItemLeft" align="right" valign="top">host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBslAdvectionRTheta.html#abf6c49b5c10b335e3d69c2d9ccdf01f2">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu_host, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt; advection_field_rtheta, CoordXY const &amp;advection_field_xy_centre, double dt) const override</td></tr>
+<tr class="memdesc:abf6c49b5c10b335e3d69c2d9ccdf01f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a Field to the advected function.  <br /></td></tr>
+<tr class="separator:abf6c49b5c10b335e3d69c2d9ccdf01f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class FootFinder, class Mapping&gt;<br />
@@ -266,8 +266,8 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 
 </div>
 </div>
-<a id="af01b09781f5f06f70916fcfed5204c13" name="af01b09781f5f06f70916fcfed5204c13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af01b09781f5f06f70916fcfed5204c13">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="abf6c49b5c10b335e3d69c2d9ccdf01f2" name="abf6c49b5c10b335e3d69c2d9ccdf01f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf6c49b5c10b335e3d69c2d9ccdf01f2">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,7 +287,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;&#160;</td>
-          <td class="paramname"><em>advection_field_rp</em>, </td>
+          <td class="paramname"><em>advection_field_rtheta</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -318,7 +318,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">allfdistribu_host</td><td>A Field containing the values of the function we want to advect. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_rp</td><td>A DConstVectorFieldRTheta containing the values of the advection field on the logical index range axis. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_rtheta</td><td>A DConstVectorFieldRTheta containing the values of the advection field on the logical index range axis. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">advection_field_xy_centre</td><td>A CoordXY containing the value of the advection field on the physical index range axis at the O-point. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>A time step used.</td></tr>
   </table>
@@ -331,7 +331,7 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/<a class="el" href="bsl__advection__rp_8hpp_source.html">bsl_advection_rp.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection/<a class="el" href="bsl__advection__rtheta_8hpp_source.html">bsl_advection_rtheta.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

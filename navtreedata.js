@@ -250,13 +250,13 @@ var NAVTREE =
         [ "Contents", "tests_advection.html#tests_advection__Contents", null ]
       ] ],
       [ "Tests : Geometry (r, theta)", "tests_geometryRTheta.html", [
-        [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_2d_rp.html", [
-          [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator", null ],
-          [ "Python tests", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Python_tests", null ],
-          [ "References", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__References", null ],
-          [ "Contents", "tests_geometryRTheta_advection_2d_rp.html#tests_geometryRTheta_advection_2d_rp__Contents", null ]
+        [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_rtheta.html", [
+          [ "Tests on the 2D polar advection operator", "tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__Tests_on_the_2D_polar_advection_operator", null ],
+          [ "Python tests", "tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__Python_tests", null ],
+          [ "References", "tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__References", null ],
+          [ "Contents", "tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__Contents", null ]
         ] ],
-        [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_2d_spline_interpolator.html", null ],
+        [ "Tests on spline interpolator in polar coordinates", "tests_geometryRTheta_spline_interpolator_rtheta.html", null ],
         [ "Tests on the 2D polar poisson solver", "tests_geometryRTheta_polar_poisson.html", [
           [ "Polar Poisson solver", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__Polar_Poisson_solver", null ],
           [ "References", "tests_geometryRTheta_polar_poisson.html#tests_geometryRTheta_polar_poisson__References", null ],
@@ -274,13 +274,13 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"2d__spline__interpolator_2params_8yaml_8hpp_source.html",
-"classCrankNicolson.html#acee28614e8739edfb476a51aa7c2fe91",
-"classIInitialisation.html#ae27774990fe287904bf424adb15a9772",
-"classMatrix__Corner__Block.html#af19beee83d0007747a3d47bbea2371b2",
-"classPolarSplineFEMPoissonLikeSolver.html#a36be84f08a082b52a73f5134b8f1a8e2",
-"dir_12b80a83f8a0fcf90cd05b166ef8bdf1.html",
-"quadrature__coeffs__nd_8hpp_source.html",
+"2patches__2d__non__periodic_8hpp_source.html",
+"classCrankNicolson.html#ad0949984fa0c2d0004f6b7a10e19cd69",
+"classIInterpolator.html",
+"classMatrix__Corner__Block.html#afd674000287386818ce4e1a149a36ef3",
+"classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b",
+"dir_1565b715753ffeaa27b85f9d3e8ee903.html",
+"restartinitialisation_8hpp_source.html",
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#ae6a2972346b2cd63c07ff4d77a5b5b33"
 ];
 

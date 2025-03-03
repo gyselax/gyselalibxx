@@ -126,9 +126,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8e139a35bc001862fd4ce97c68b2946b" id="r_a8e139a35bc001862fd4ce97c68b2946b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a8e139a35bc001862fd4ce97c68b2946b">PoissonLikeRHSFunction</a> (host_t&lt; ConstSpline2D &gt; coefs, <a class="el" href="classPoissonLikeRHSFunction.html#a8a5be6904f96090542b2a617dbfb7bd9">evaluator_type</a> const &amp;evaluator)</td></tr>
 <tr class="memdesc:a8e139a35bc001862fd4ce97c68b2946b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate a <a class="el" href="classPoissonLikeRHSFunction.html" title="Type of right-hand side (rhs) function of the Poisson equation.">PoissonLikeRHSFunction</a>.  <br /></td></tr>
 <tr class="separator:a8e139a35bc001862fd4ce97c68b2946b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87f656365ccc4fe8d8fb650c0264679a" id="r_a87f656365ccc4fe8d8fb650c0264679a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a87f656365ccc4fe8d8fb650c0264679a">operator()</a> (CoordRTheta const &amp;coord_rp) const</td></tr>
-<tr class="memdesc:a87f656365ccc4fe8d8fb650c0264679a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <br /></td></tr>
-<tr class="separator:a87f656365ccc4fe8d8fb650c0264679a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd29b8f01140ea3d8f5642fde150af0" id="r_a5bd29b8f01140ea3d8f5642fde150af0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoissonLikeRHSFunction.html#a5bd29b8f01140ea3d8f5642fde150af0">operator()</a> (CoordRTheta const &amp;coord_rtheta) const</td></tr>
+<tr class="memdesc:a5bd29b8f01140ea3d8f5642fde150af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at a given coordinate.  <br /></td></tr>
+<tr class="separator:a5bd29b8f01140ea3d8f5642fde150af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class RadialExtrapolationRule&gt;<br />
@@ -188,8 +188,8 @@ template&lt;class RadialExtrapolationRule &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a87f656365ccc4fe8d8fb650c0264679a" name="a87f656365ccc4fe8d8fb650c0264679a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87f656365ccc4fe8d8fb650c0264679a">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a5bd29b8f01140ea3d8f5642fde150af0" name="a5bd29b8f01140ea3d8f5642fde150af0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd29b8f01140ea3d8f5642fde150af0">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,7 +203,7 @@ template&lt;class RadialExtrapolationRule &gt; </div>
           <td class="memname">double <a class="el" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a>&lt; RadialExtrapolationRule &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">CoordRTheta const &amp;&#160;</td>
-          <td class="paramname"><em>coord_rp</em></td><td>)</td>
+          <td class="paramname"><em>coord_rtheta</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -217,7 +217,7 @@ template&lt;class RadialExtrapolationRule &gt; </div>
 <p>Get the value of the function at a given coordinate. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rp</td><td>Polar coordinate where we want to evaluate the rhs function.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>Polar coordinate where we want to evaluate the rhs function.</td></tr>
   </table>
   </dd>
 </dl>

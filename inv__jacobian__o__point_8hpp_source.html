@@ -245,8 +245,8 @@ $(document).ready(function(){initNavTree('inv__jacobian__o__point_8hpp_source.ht
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        IdxRangeRTheta idx_range_singular_point = discrete_mapping.<a class="code hl_function" href="classDiscreteToCartesian.html#aeade6cd026d0d03df92d00b0f2651195">idx_range_singular_point</a>();</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <span class="comment">// Average the values at (r = 0, theta):</span></div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        IdxR ir(idx_range_singular_point.front());</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">for</span> (IdxTheta ip : IdxRangeTheta(idx_range_singular_point)) {</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            Coord&lt;R, Theta&gt; coord(ddc::coordinate(ir), ddc::coordinate(ip));</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">for</span> (IdxTheta itheta : IdxRangeTheta(idx_range_singular_point)) {</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            Coord&lt;R, Theta&gt; coord(ddc::coordinate(ir), ddc::coordinate(itheta));</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            Matrix_2x2 J_first_order = discrete_mapping.<a class="code hl_function" href="classDiscreteToCartesian.html#ab06f432d9091e0568045f5d5e5bd7d29">first_order_jacobian_matrix_r_rtheta</a>(coord);</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            <span class="keywordtype">double</span> th = ddc::get&lt;Theta&gt;(coord);</div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/advection_field_rp/test_cases_adv_field.hpp Source File</title>
+<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/tests/geometryRTheta/advection_field_rtheta/test_cases_adv_field.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('test__cases__adv__field_8hpp_source.ht
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../advection_2d_rp/test_cases.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../advection_rtheta/test_cases.hpp&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;circular_to_cartesian.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('test__cases__adv__field_8hpp_source.ht
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;math_tools.hpp&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;polar_spline.hpp&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;polar_spline_evaluator.hpp&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;spline_interpolator_rtheta.hpp&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> *  This file defines</span></div>
@@ -244,8 +244,8 @@ $(document).ready(function(){initNavTree('test__cases__adv__field_8hpp_source.ht
 <div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classElectrostaticalPotentialSimulation__rotation.html#a0e997599dce6ca277a07c1a2a2aa62b9">  236</a></span>    KOKKOS_FUNCTION <span class="keywordtype">double</span> <a class="code hl_function" href="classElectrostaticalPotentialSimulation__rotation.html#a0e997599dce6ca277a07c1a2a2aa62b9">operator()</a>(CoordXY <span class="keyword">const</span> coord, <span class="keywordtype">double</span> <span class="keyword">const</span> t)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        CoordRTheta <span class="keyword">const</span> coord_rp(m_mapping(coord));</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> r = ddc::get&lt;R&gt;(coord_rp);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        CoordRTheta <span class="keyword">const</span> coord_rtheta(m_mapping(coord));</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> r = ddc::get&lt;R&gt;(coord_rtheta);</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="keywordflow">return</span> -0.5 * r * r * m_vtheta;</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    }</div>
 </div>
@@ -253,10 +253,10 @@ $(document).ready(function(){initNavTree('test__cases__adv__field_8hpp_source.ht
 <div class="foldopen" id="foldopen00253" data-start="{" data-end="}">
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classElectrostaticalPotentialSimulation__rotation.html#a0ca17c8dadd7ddee728eab74d6c8498d">  253</a></span>    KOKKOS_FUNCTION CoordXY <a class="code hl_function" href="classElectrostaticalPotentialSimulation__rotation.html#a0ca17c8dadd7ddee728eab74d6c8498d">exact_feet</a>(CoordXY coord_xy, <span class="keywordtype">double</span> <span class="keyword">const</span> t)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        CoordRTheta <span class="keyword">const</span> coord_rp(m_mapping(coord_xy));</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        CoordRTheta <span class="keyword">const</span> coord_rtheta(m_mapping(coord_xy));</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        CoordRTheta <span class="keyword">const</span> velocity(m_vr, m_vtheta);</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <a class="code hl_class" href="classCircularToCartesian.html">CircularToCartesian&lt;R, Theta, X, Y&gt;</a> logical_to_physical_mapping;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">return</span> logical_to_physical_mapping(coord_rp - t * velocity);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">return</span> logical_to_physical_mapping(coord_rtheta - t * velocity);</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
 </div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>};</div>
@@ -371,7 +371,7 @@ $(document).ready(function(){initNavTree('test__cases__adv__field_8hpp_source.ht
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_831f43445894a06c32ca53e744f921f4.html">tests</a></li><li class="navelem"><a class="el" href="dir_517ca5cf38039cdc09da4808bf84bf13.html">geometryRTheta</a></li><li class="navelem"><a class="el" href="dir_bcfd14d5afee2d50bbc0cdea4134ef05.html">advection_field_rp</a></li><li class="navelem"><b>test_cases_adv_field.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_831f43445894a06c32ca53e744f921f4.html">tests</a></li><li class="navelem"><a class="el" href="dir_517ca5cf38039cdc09da4808bf84bf13.html">geometryRTheta</a></li><li class="navelem"><a class="el" href="dir_b1b00ba671607b31c6eeac072db69bdf.html">advection_field_rtheta</a></li><li class="navelem"><b>test_cases_adv_field.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

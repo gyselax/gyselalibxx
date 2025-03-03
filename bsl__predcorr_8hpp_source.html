@@ -117,8 +117,8 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;ddc/ddc.hpp&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;ddc/pdi.hpp&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;advection_field_rp.hpp&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;bsl_advection_rp.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;advection_field_rtheta.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;bsl_advection_rtheta.hpp&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;geometry.hpp&quot;</span></div>
@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;poisson_like_rhs_function.hpp&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;polarpoissonlikesolver.hpp&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;rk2.hpp&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;spline_interpolator_2d_rp.hpp&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;spline_interpolator_rtheta.hpp&quot;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> Mapping, <span class="keyword">class</span> FootFinder&gt;</div>
 <div class="foldopen" id="foldopen00056" data-start="{" data-end="};">
@@ -276,8 +276,8 @@ $(document).ready(function(){initNavTree('bsl__predcorr_8hpp_source.html',''); i
 </div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>};</div>
 </div>
-<div class="ttc" id="aclassAdvectionFieldFinder_html"><div class="ttname"><a href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a></div><div class="ttdoc">Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.</div><div class="ttdef"><b>Definition</b> advection_field_rp.hpp:91</div></div>
-<div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition</b> bsl_advection_rp.hpp:56</div></div>
+<div class="ttc" id="aclassAdvectionFieldFinder_html"><div class="ttname"><a href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a></div><div class="ttdoc">Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.</div><div class="ttdef"><b>Definition</b> advection_field_rtheta.hpp:91</div></div>
+<div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition</b> bsl_advection_rtheta.hpp:56</div></div>
 <div class="ttc" id="aclassBslPredCorrRTheta_html"><div class="ttname"><a href="classBslPredCorrRTheta.html">BslPredCorrRTheta</a></div><div class="ttdoc">Predictor-corrector for the Vlasov-Poisson equations.</div><div class="ttdef"><b>Definition</b> bsl_predcorr.hpp:57</div></div>
 <div class="ttc" id="aclassBslPredCorrRTheta_html_ab4b18b2f58e93e38933d46e3c3da5c5f"><div class="ttname"><a href="classBslPredCorrRTheta.html#ab4b18b2f58e93e38933d46e3c3da5c5f">BslPredCorrRTheta::operator()</a></div><div class="ttdeci">host_t&lt; DFieldRTheta &gt; operator()(host_t&lt; DFieldRTheta &gt; allfdistribu_host, double const dt, int const steps) const override</div><div class="ttdoc">Solves on  the equations system.</div><div class="ttdef"><b>Definition</b> bsl_predcorr.hpp:109</div></div>
 <div class="ttc" id="aclassBslPredCorrRTheta_html_ac5a6457ec7d54f8fbb926aca93a55069"><div class="ttname"><a href="classBslPredCorrRTheta.html#ac5a6457ec7d54f8fbb926aca93a55069">BslPredCorrRTheta::BslPredCorrRTheta</a></div><div class="ttdeci">BslPredCorrRTheta(Mapping const &amp;mapping, BslAdvectionRTheta&lt; FootFinder, Mapping &gt; const &amp;advection_solver, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;rhs_evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</div><div class="ttdoc">Instantiate a BslPredCorrRTheta.</div><div class="ttdef"><b>Definition</b> bsl_predcorr.hpp:91</div></div>

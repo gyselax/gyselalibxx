@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('tests_geometryRTheta_advection_2d_rp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('tests_geometryRTheta_advection_rtheta.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -106,11 +106,11 @@ $(document).ready(function(){initNavTree('tests_geometryRTheta_advection_2d_rp.h
   <div class="headertitle"><div class="title">Tests on the 2D polar advection operator</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="tests_geometryRTheta_advection_2d_rp__Tests_on_the_2D_polar_advection_operator"></a>
+<div class="textblock"><h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__Tests_on_the_2D_polar_advection_operator"></a>
 Tests on the 2D polar advection operator</h1>
 <p>The tests implemented in this folder test the 2D polar advection operator implemented in the <code>src/geometryRTheta/advection/</code> folder ( <a class="el" href="src_geometryRTheta_advection.html">Advection operator</a> ).</p>
 <p>The tests are made for different parameters which are:</p>
-<h3><a class="anchor" id="autotoc_md93"></a>
+<h3><a class="anchor" id="autotoc_md91"></a>
 - The mapping and the domain used for the advection:</h3>
 <ul>
 <li>Circular mapping in the physical domain (<a class="el" href="classCircularToCartesian.html" title="A class for describing the circular 2D mapping.">CircularToCartesian</a> and AdvectionPhysicalDomain);</li>
@@ -118,7 +118,7 @@ Tests on the 2D polar advection operator</h1>
 <li>Czarny mapping in the pseudo-Cartesian domain (<a class="el" href="classCzarnyToCartesian.html" title="A class for describing the Czarny 2D mapping.">CzarnyToCartesian</a> and AdvectionPseudoCartesianDomain);</li>
 <li>Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (<a class="el" href="classDiscreteToCartesian.html" title="A class for describing discrete 2D mappings from the logical domain to the physical domain.">DiscreteToCartesian</a> and AdvectionPseudoCartesianDomain).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md94"></a>
+<h3><a class="anchor" id="autotoc_md92"></a>
 - The time integration method used to solve the characteristic equation:</h3>
 <ul>
 <li>Explicit <a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a> (<a class="el" href="classEuler.html" title="A class which provides an implementation of an explicit Euler method.">Euler</a>);</li>
@@ -126,7 +126,7 @@ Tests on the 2D polar advection operator</h1>
 <li>Runge-Kutta 3 (<a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a>);</li>
 <li>Runge-Kutta 4 (<a class="el" href="classRK4.html" title="A class which provides an implementation of a fourth-order Runge-Kutta method.">RK4</a>).</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md95"></a>
+<h3><a class="anchor" id="autotoc_md93"></a>
 - The test simulation:</h3>
 <ul>
 <li>simulation 1: translation of Gaussian function (TranslationSimulation)<ul>
@@ -151,33 +151,33 @@ Tests on the 2D polar advection operator</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="tests_geometryRTheta_advection_2d_rp__Python_tests"></a>
+<h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__Python_tests"></a>
 Python tests</h1>
 <ul>
 <li>animated_curves.py: create <code>.mp4</code> video(s) of the advected function for the selected configurations among the 48 test ones.<ul>
-<li>Command to launch the test in this folder: <code>python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL</code> or <code>python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/&lt;selected advection test case&gt;</code></li>
+<li>Command to launch the test in this folder: <code>python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/advection_ALL</code> or <code>python3 animated_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/&lt;selected advection test case&gt;</code></li>
 </ul>
 </li>
 <li>display_all_errors_for_gtest.py: Google test which tests the convergence order for the 48 configurations.<ul>
-<li>Command to launch the test in this folder: <code>python3 display_all_errors_for_gtest.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL</code></li>
+<li>Command to launch the test in this folder: <code>python3 display_all_errors_for_gtest.py ../../../build/tests/geometryRTheta/advection_rtheta/advection_ALL</code></li>
 </ul>
 </li>
 <li>display_curves.py: display the curve of the function for 9 time steps between the initial and the final state. <br  />
 <ul>
-<li>Command to launch the test in this folder: <code>python3 display_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/&lt;selected advection test case&gt;</code></li>
+<li>Command to launch the test in this folder: <code>python3 display_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/&lt;selected advection test case&gt;</code></li>
 </ul>
 </li>
 <li>display_feet_errors.py: compute the convergence order of the characteristic feet and display the computed and the exact feet.<ul>
-<li>Command to launch the test in this folder: <code>python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_2d_rp/&lt;selected advection test case&gt;</code></li>
+<li>Command to launch the test in this folder: <code>python3 display_feet_errors.py ../../../build/tests/geometryRTheta/advection_rtheta/&lt;selected advection test case&gt;</code></li>
 </ul>
 </li>
 <li>advection_functions.py: define all the useful functions used in the other python files.</li>
 </ul>
-<h1><a class="anchor" id="tests_geometryRTheta_advection_2d_rp__References"></a>
+<h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__References"></a>
 References</h1>
 <p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019).</p>
-<h1><a class="anchor" id="tests_geometryRTheta_advection_2d_rp__Contents"></a>
+<h1><a class="anchor" id="tests_geometryRTheta_advection_rtheta__Contents"></a>
 Contents</h1>
 <ul>
 <li>advection_all_tests.cpp : launch the 48 configurations on an uniform mesh.</li>
