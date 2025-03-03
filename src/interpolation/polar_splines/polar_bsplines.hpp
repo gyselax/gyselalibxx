@@ -293,7 +293,8 @@ public:
                 assert(nr_in_singular.value() < int(ddc::discrete_space<BSplinesR>().size()));
 
                 // The number of poloidal bases used to construct the B-splines traversing the singular point.
-                const IdxStepTheta n_theta_in_singular(ddc::discrete_space<BSplinesTheta>().nbasis());
+                const IdxStepTheta n_theta_in_singular(
+                        ddc::discrete_space<BSplinesTheta>().nbasis());
 
                 // The number of elements of the poloidal basis which will have an associated coefficient
                 // (This will be larger than n_theta_in_singular as it includes the periodicity)
