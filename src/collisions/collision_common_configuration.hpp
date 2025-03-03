@@ -55,8 +55,8 @@ template <
         class IdxRangeDistributionFunction,
         class GridSp,
         class GridPhi,
-        class GridTheta,
         class GridR,
+        class GridTheta,
         class GridVpar,
         class GridMu>
 class CollisionConfigurationData
@@ -93,13 +93,13 @@ public:
     using GridSpType = GridSp;
 
     /**
-     * @brief Sp,Theta,R,Vpar index range.
+     * @brief Sp,R,Theta,Vpar index range.
      */
-    using IdxRangeSpThetaRVparType = IdxRange<GridSpType, GridThetaType, GridRType, GridVparType>;
+    using IdxRangeSpRThetaVparType = IdxRange<GridSpType, GridRType, GridThetaType, GridVparType>;
     /**
-     * @brief Theta,R index range.
+     * @brief R,Theta index range.
      */
-    using IdxRangeThetaRType = IdxRange<GridThetaType, GridRType>;
+    using IdxRangeRThetaType = IdxRange<GridRType, GridThetaType>;
 
     /**
      * @brief Mu index range.
@@ -143,14 +143,14 @@ public:
         : m_hat_As_allocation {extract_md_index_range<GridSpType>(index_range_fdistribution)}
         , m_hat_Zs_allocation {extract_md_index_range<GridSpType>(index_range_fdistribution)}
         , m_mask_buffer_r_allocation {extract_md_index_range<GridRType>(index_range_fdistribution)}
-        , m_mask_LIM_allocation {extract_md_index_range<GridThetaType, GridRType>(
+        , m_mask_LIM_allocation {extract_md_index_range<GridRType, GridThetaType>(
                   index_range_fdistribution)}
-        , m_B_norm_allocation {extract_md_index_range<GridThetaType, GridRType>(
+        , m_B_norm_allocation {extract_md_index_range<GridRType, GridThetaType>(
                   index_range_fdistribution)}
         , m_Bstar_s_allocation {extract_md_index_range<
                   GridSpType,
-                  GridThetaType,
                   GridRType,
+                  GridThetaType,
                   GridVparType>(index_range_fdistribution)}
         , m_mug_allocation {extract_md_index_range<GridMuType>(index_range_fdistribution)}
         , m_vparg_allocation {extract_md_index_range<GridVparType>(index_range_fdistribution)}
@@ -323,19 +323,19 @@ public:
     /**
      * @brief Limiter mask in (theta,r).
      */
-    DFieldMem<IdxRangeThetaRType> m_mask_LIM_allocation;
+    DFieldMem<IdxRangeRThetaType> m_mask_LIM_allocation;
 
     /**
      * @brief B norm in (theta,r).
      * [TODO] Attention this must be 3D for generalisation to 3D geometry.
      */
-    DFieldMem<IdxRangeThetaRType> m_B_norm_allocation;
+    DFieldMem<IdxRangeRThetaType> m_B_norm_allocation;
 
     /**
      * @brief Bstar_s(species,theta,r,vpar).
      * [TODO] Must be 5D for full 3D geometry.
      */
-    DFieldMem<IdxRangeSpThetaRVparType> m_Bstar_s_allocation;
+    DFieldMem<IdxRangeSpRThetaVparType> m_Bstar_s_allocation;
 
     /**
      * @brief Grid in mu direction.
@@ -374,22 +374,27 @@ public:
      * @brief Mu dimension extent.
      */
     std::size_t m_mu_extent;
+
     /**
      * @brief Vpar dimension extent.
      */
     std::size_t m_vpar_extent;
+
     /**
      * @brief R dimension extent.
      */
     std::size_t m_r_extent;
+
     /**
      * @brief Theta dimension extent.
      */
     std::size_t m_theta_extent;
+
     /**
      * @brief Phi dimension extent.
      */
     std::size_t m_phi_extent;
+
     /**
      * @brief Species dimension extent.
      */
