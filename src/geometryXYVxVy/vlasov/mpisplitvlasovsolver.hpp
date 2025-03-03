@@ -40,6 +40,7 @@ public:
      * @param[in] advec_y An advection operator along the y direction.
      * @param[in] advec_vx An advection operator along the vx direction.
      * @param[in] advec_vy An advection operator along the vy direction.
+     * @param[in] transpose A MPI transpose operator to move between layouts.
      */
     MpiSplitVlasovSolver(
             IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
