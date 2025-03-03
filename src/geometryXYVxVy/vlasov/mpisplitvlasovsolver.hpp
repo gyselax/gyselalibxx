@@ -5,7 +5,7 @@
 #include "geometry.hpp"
 #include "iadvectionvx.hpp"
 #include "iadvectionx.hpp"
-#include "impivlasovsolver.hpp"
+#include "ivlasovsolver.hpp"
 #include "mpitransposealltoall.hpp"
 
 /**
@@ -18,7 +18,7 @@
  * of length dt/2, then the Vy-direction advection on a time dt, and
  * finally the X, Y, and Vx directions again in reverse order on dt/2.
  */
-class MpiSplitVlasovSolver : public IMpiVlasovSolver
+class MpiSplitVlasovSolver : public IVlasovSolver
 {
     /// Advection operator in the x direction
     IAdvectionSpatial<GeometryVxVyXY, GridX> const& m_advec_x;

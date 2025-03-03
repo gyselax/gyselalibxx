@@ -16,16 +16,17 @@ MpiSplitVlasovSolver::MpiSplitVlasovSolver(
 {
 }
 
-DFieldSpXYVxVy MpiSplitVlasovSolver::operator()(
-        DFieldSpVxVyXY const allfdistribu_x2Dsplit,
+DFieldSpVxVyXY MpiSplitVlasovSolver::operator()(
+        DFieldSpVxVyXY const allfdistribu_v2Dsplit,
         DConstFieldXY const electric_field_x,
         DConstFieldXY const electric_field_y,
         double const dt) const
 {
     IdxRangeSpVxVyXY idxrange_v2Dsplit(m_transpose.get_local_idx_range<V2DSplit>());
+    IdxRangeSpXYVxVy idxrange_x2Dsplit(m_transpose.get_local_idx_range<X2DSplit>());
     IdxRangeXY idx_range_xy_v2Dsplit(idxrange_v2Dsplit);
-    DFieldMemSpVxVyXY allfdistribu_v2Dsplit_alloc(idxrange_v2Dsplit);
-    DFieldSpVxVyXY allfdistribu_v2Dsplit = get_field(allfdistribu_v2Dsplit_alloc);
+    DFieldMemSpXYVxVy allfdistribu_x2Dsplit_alloc(idxrange_x2Dsplit);
+    DFieldSpXYVxVy allfdistribu_x2Dsplit = get_field(allfdistribu_x2Dsplit_alloc);
 
     // Create contiguous memory space to contain the relevant section of the electric field
     DFieldMemXY local_electric_field_x(idx_range_xy_v2Dsplit);

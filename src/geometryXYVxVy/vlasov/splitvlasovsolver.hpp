@@ -22,14 +22,14 @@ class IAdvectionVelocity;
 class SplitVlasovSolver : public IVlasovSolver
 {
     /// Advection operator in the x direction
-    IAdvectionSpatial<GeometryXYVxVy, GridX> const& m_advec_x;
+    IAdvectionSpatial<GeometryVxVyXY, GridX> const& m_advec_x;
     /// Advection operator in the y direction
-    IAdvectionSpatial<GeometryXYVxVy, GridY> const& m_advec_y;
+    IAdvectionSpatial<GeometryVxVyXY, GridY> const& m_advec_y;
 
     /// Advection operator in the vx direction
-    IAdvectionVelocity<GeometryXYVxVy, GridVx> const& m_advec_vx;
+    IAdvectionVelocity<GeometryVxVyXY, GridVx> const& m_advec_vx;
     /// Advection operator in the vy direction
-    IAdvectionVelocity<GeometryXYVxVy, GridVy> const& m_advec_vy;
+    IAdvectionVelocity<GeometryVxVyXY, GridVy> const& m_advec_vy;
 
 public:
     /**
@@ -40,10 +40,10 @@ public:
      * @param[in] advec_vy An advection operator along the vy direction.
      */
     SplitVlasovSolver(
-            IAdvectionSpatial<GeometryXYVxVy, GridX> const& advec_x,
-            IAdvectionSpatial<GeometryXYVxVy, GridY> const& advec_y,
-            IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
-            IAdvectionVelocity<GeometryXYVxVy, GridVy> const& advec_vy);
+            IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
+            IAdvectionSpatial<GeometryVxVyXY, GridY> const& advec_y,
+            IAdvectionVelocity<GeometryVxVyXY, GridVx> const& advec_vx,
+            IAdvectionVelocity<GeometryVxVyXY, GridVy> const& advec_vy);
 
     ~SplitVlasovSolver() override = default;
 
@@ -59,8 +59,8 @@ public:
      *
      * @return The distribution function after solving the Vlasov equation.
      */
-    DFieldSpXYVxVy operator()(
-            DFieldSpXYVxVy allfdistribu,
+    DFieldSpVxVyXY operator()(
+            DFieldSpVxVyXY allfdistribu,
             DConstFieldXY electric_field_x,
             DConstFieldXY electric_field_y,
             double dt) const override;

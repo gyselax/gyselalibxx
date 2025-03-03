@@ -25,7 +25,7 @@ public:
      * @return The distribution function after solving the Vlasov equation.
      */
     virtual DFieldSpXYVxVy operator()(
-            DFieldSpXYVxVy allfdistribu,
+            DFieldSpVxVyXY allfdistribu,
             DConstFieldXY efield_x,
             DConstFieldXY efield_y,
             double dt) const = 0;
