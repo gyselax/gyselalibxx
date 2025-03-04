@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <iostream>
+
+#include "ddc/uniform_point_sampling.hpp"
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ipartial_derivatives.hpp"
@@ -59,45 +63,26 @@ public:
 
         IdxStepDeriv step(1);
 
-        // Calculate forward differences at left boundary
-        double inv_dx0 = 1.0
-                         / (ddc::coordinate(idxrange_deriv.front() + step)
-                            - ddc::coordinate(idxrange_deriv.front()));
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                idxrange_batch,
-                KOKKOS_LAMBDA(IdxBatch ib) {
-                    dfieldval_dxi(idxrange_deriv.front(), ib)
-                            = (fieldval(idxrange_deriv.front() + step, ib)
-                               - fieldval(idxrange_deriv.front(), ib))
-                              * inv_dx0;
-                });
-
-        // Calculate backward differences at right boundary
-        double inv_dxN = 1.0
-                         / (ddc::coordinate(idxrange_deriv.back())
-                            - ddc::coordinate(idxrange_deriv.back() - step));
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                idxrange_batch,
-                KOKKOS_LAMBDA(IdxBatch ib) {
-                    dfieldval_dxi(idxrange_deriv.front(), ib)
-                            = (fieldval(idxrange_deriv.back(), ib)
-                               - fieldval(idxrange_deriv.back() - step, ib))
-                              * inv_dxN;
-                });
-
-        IdxRangeDeriv idxrange_deriv_central = idxrange_deriv.remove(step, step);
-        IdxRangeFieldVal idxrange(idxrange_deriv_central, idxrange_batch);
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                idxrange,
+                idxrange_full,
                 KOKKOS_LAMBDA(IdxFieldVal ibx) {
                     IdxBatch ib(ibx);
                     IdxDeriv ix(ibx);
-                    dfieldval_dxi(ibx)
-                            = (fieldval(ib, ix + step) - fieldval(ib, ix - step))
-                              / (ddc::coordinate(ix + step) - ddc::coordinate(ix - step));
+                    if (ix == idxrange_deriv.front()) {
+                        // Calculate forward differences at left boundary
+                        dfieldval_dxi(ibx) = (fieldval(ix + step, ib) - fieldval(ibx))
+                                             / (ddc::coordinate(ix + step) - ddc::coordinate(ix));
+                    } else if (ix == idxrange_deriv.back()) {
+                        // Calculate forward differences at left boundary
+                        dfieldval_dxi(ix, ib)
+                                = (fieldval(ix, ib) - fieldval(ix - step, ib))
+                                  / (ddc::coordinate(ix) - ddc::coordinate(ix-step));
+                    } else {
+                        dfieldval_dxi(ibx)
+                                = (fieldval(ib, ix + step) - fieldval(ib, ix - step))
+                                  / (ddc::coordinate(ix + step) - ddc::coordinate(ix - step));
+                    }
                 });
     }
 };
