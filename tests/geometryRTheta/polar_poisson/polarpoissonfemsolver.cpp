@@ -58,9 +58,9 @@ int main(int argc, char** argv)
     ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ::ddc::ScopeGuard ddc_scope(argc, argv);
 
-    PC_tree_t conf_voicexx;
+    PC_tree_t conf_gyselalibxx;
     if (argc == 2) {
-        conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
+        conf_gyselalibxx = PC_parse_path(fs::path(argv[1]).c_str());
     } else if (argc == 3) {
         if (argv[1] == std::string_view("--dump-config")) {
             std::fstream file(argv[2], std::fstream::out);
@@ -79,11 +79,11 @@ int main(int argc, char** argv)
 
     CoordR const r_min(0.0);
     CoordR const r_max(1.0);
-    IdxStepR const r_ncells(PCpp_int(conf_voicexx, ".SplineMesh.r_ncells"));
+    IdxStepR const r_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.r_ncells"));
 
     CoordTheta const p_min(0.0);
     CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_ncells(PCpp_int(conf_voicexx, ".SplineMesh.p_ncells"));
+    IdxStepTheta const p_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.p_ncells"));
 
     std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
     std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);
@@ -244,6 +244,6 @@ int main(int argc, char** argv)
     });
     std::cout << "Max error : " << max_err << std::endl;
 
-    PC_tree_destroy(&conf_voicexx);
+    PC_tree_destroy(&conf_gyselalibxx);
     return 0;
 }

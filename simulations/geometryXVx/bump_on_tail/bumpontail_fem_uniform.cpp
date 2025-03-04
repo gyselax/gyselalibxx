@@ -43,8 +43,8 @@ namespace fs = std::filesystem;
 int main(int argc, char** argv)
 {
     long int iter_start;
-    PC_tree_t conf_voicexx;
-    parse_executable_arguments(conf_voicexx, iter_start, argc, argv, params_yaml);
+    PC_tree_t conf_gyselalibxx;
+    parse_executable_arguments(conf_gyselalibxx, iter_start, argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
@@ -57,14 +57,14 @@ int main(int argc, char** argv)
     IdxRangeX const mesh_x = init_spline_dependent_idx_range<
             GridX,
             BSplinesX,
-            SplineInterpPointsX>(conf_voicexx, "x");
+            SplineInterpPointsX>(conf_gyselalibxx, "x");
     IdxRangeVx const mesh_vx = init_spline_dependent_idx_range<
             GridVx,
             BSplinesVx,
-            SplineInterpPointsVx>(conf_voicexx, "vx");
+            SplineInterpPointsVx>(conf_gyselalibxx, "vx");
     IdxRangeXVx const meshXVx(mesh_x, mesh_vx);
 
-    IdxRangeSp const idx_range_kinsp = init_species(conf_voicexx);
+    IdxRangeSp const idx_range_kinsp = init_species(conf_gyselalibxx);
 
     IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
     BumpontailEquilibrium const init_fequilibrium
-            = BumpontailEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
+            = BumpontailEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
     init_fequilibrium(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
@@ -85,7 +85,7 @@ int main(int argc, char** argv)
     double time_start(0);
     if (iter_start == 0) {
         SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
-                init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
+                init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_gyselalibxx);
         init(get_field(allfdistribu));
     } else {
         RestartInitialisation const restart(iter_start, time_start);
@@ -94,11 +94,11 @@ int main(int argc, char** argv)
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
 
     // --> Algorithm info
-    double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
-    int const nbiter = static_cast<int>(PCpp_int(conf_voicexx, ".Algorithm.nbiter"));
+    double const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
+    int const nbiter = static_cast<int>(PCpp_int(conf_gyselalibxx, ".Algorithm.nbiter"));
 
     // --> Output info
-    double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
+    double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
 #ifdef PERIODIC_RDIMX
@@ -161,7 +161,7 @@ int main(int argc, char** argv)
 
     PDI_finalize();
 
-    PC_tree_destroy(&conf_voicexx);
+    PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;
 }
