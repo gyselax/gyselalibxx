@@ -70,7 +70,7 @@ spack config --scope user add 'concretizer:unify:true'
 echo "Removing old packages (errors are expected)."
 spack uninstall --dependents --all --yes-to-all ${PRODUCT_SPEC_LIST} || true
 echo "Installing new packages (errors are NOT expected)."
-spack spec --reuse-deps ${PRODUCT_SPEC_LIST}
+spack spec -lt ${PRODUCT_SPEC_LIST}
 for ((i = 0; i < 2; ++i)); do
     spack install --no-check-signature --fresh ${PRODUCT_SPEC_LIST}
 done
