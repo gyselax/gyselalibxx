@@ -140,42 +140,42 @@ void launch_tests(
 
     // --- TEST 1 -------------------------------------------------------------------------------------
     std::cout << "TEST 1: f(r,theta ) = 1. " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irp) { test(irp) = 1.; });
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) { test(irtheta) = 1.; });
     check_norms(quadrature, get_field(test), expected_norms[0], TOLs[0]);
 
     // --- TEST 2 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 2: f(r,theta ) = cos(theta) " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        double const th = ddc::select<Theta>(ddc::coordinate(irp));
-        test(irp) = std::cos(th);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        double const th = ddc::select<Theta>(ddc::coordinate(irtheta));
+        test(irtheta) = std::cos(th);
     });
     check_norms(quadrature, get_field(test), expected_norms[1], TOLs[1]);
     std::cout << "Remark: (r, theta) -> |cos(theta)| not C¹." << std::endl;
 
     // --- TEST 3 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 3: f(r,theta ) = r " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        double const r = ddc::select<R>(ddc::coordinate(irp));
-        test(irp) = r;
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        double const r = ddc::select<R>(ddc::coordinate(irtheta));
+        test(irtheta) = r;
     });
     check_norms(quadrature, get_field(test), expected_norms[2], TOLs[2]);
 
     // --- TEST 4 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 4: f(r,theta ) = r cos(theta) " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        double const r = ddc::select<R>(ddc::coordinate(irp));
-        double const th = ddc::select<Theta>(ddc::coordinate(irp));
-        test(irp) = r * std::cos(th);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        double const r = ddc::select<R>(ddc::coordinate(irtheta));
+        double const th = ddc::select<Theta>(ddc::coordinate(irtheta));
+        test(irtheta) = r * std::cos(th);
     });
     check_norms(quadrature, get_field(test), expected_norms[3], TOLs[3]);
     std::cout << "Remark: (r, theta) -> |r cos(theta)| not C¹." << std::endl;
 
     // --- TEST 5 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 5: f(r,theta ) = r⁵ cos(10*theta) " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        double const r = ddc::select<R>(ddc::coordinate(irp));
-        double const th = ddc::select<Theta>(ddc::coordinate(irp));
-        test(irp) = std::pow(r, 5) * std::cos(10 * th);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        double const r = ddc::select<R>(ddc::coordinate(irtheta));
+        double const th = ddc::select<Theta>(ddc::coordinate(irtheta));
+        test(irtheta) = std::pow(r, 5) * std::cos(10 * th);
     });
     check_norms(quadrature, get_field(test), expected_norms[4], TOLs[4]);
     std::cout << "Remark: (r, theta) -> |r⁵ cos(10*theta)| not C¹." << std::endl;
@@ -201,23 +201,24 @@ TEST_P(SplineQuadrature, TestFunctions)
     CoordR const r_max(1.);
     IdxStepR const r_ncells(Nr);
 
-    CoordTheta const p_min(0.0);
-    CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_ncells(Nt);
+    CoordTheta const theta_min(0.0);
+    CoordTheta const theta_max(2.0 * M_PI);
+    IdxStepTheta const theta_ncells(Nt);
 
     std::vector<CoordR> r_knots = build_uniform_break_points(r_min, r_max, r_ncells);
-    std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);
+    std::vector<CoordTheta> theta_knots
+            = build_uniform_break_points(theta_min, theta_max, theta_ncells);
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesR>(r_knots);
-    ddc::init_discrete_space<BSplinesTheta>(p_knots);
+    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
 
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_P);
+    IdxRangeR interpolation_idx_range_r(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     SplineRThetaBuilder_host builder(grid);
 
@@ -258,10 +259,10 @@ TEST_P(SplineQuadrature, TestFunctions)
               << std::endl;
     ddc::ConstantExtrapolationRule<R, Theta> bv_r_min(r_min);
     ddc::ConstantExtrapolationRule<R, Theta> bv_r_max(r_max);
-    ddc::PeriodicExtrapolationRule<Theta> bv_p_min;
-    ddc::PeriodicExtrapolationRule<Theta> bv_p_max;
+    ddc::PeriodicExtrapolationRule<Theta> bv_knots_min;
+    ddc::PeriodicExtrapolationRule<Theta> bv_knots_max;
     SplineRThetaEvaluatorConstBound_host
-            spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_p_min, bv_p_max);
+            spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_knots_min, bv_knots_max);
 
     DiscreteToCartesianBuilder<
             X,
