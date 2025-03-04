@@ -10,7 +10,6 @@
 #include <ddc/ddc.hpp>
 
 #include "bsl_advection_rtheta.hpp"
-#include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
 #include "math_tools.hpp"

@@ -11,7 +11,6 @@
 #include "bsl_advection_1d.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
