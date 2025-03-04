@@ -40,7 +40,7 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    PC_tree_t conf_voicexx = parse_executable_arguments(argc, argv, params_yaml);
+    PC_tree_t conf_gyselalibxx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
@@ -53,24 +53,24 @@ int main(int argc, char** argv)
     IdxRangeX const mesh_x = init_spline_dependent_idx_range<
             GridX,
             BSplinesX,
-            SplineInterpPointsX>(conf_voicexx, "x");
+            SplineInterpPointsX>(conf_gyselalibxx, "x");
     IdxRangeY const mesh_y = init_spline_dependent_idx_range<
             GridY,
             BSplinesY,
-            SplineInterpPointsY>(conf_voicexx, "y");
+            SplineInterpPointsY>(conf_gyselalibxx, "y");
     IdxRangeVx const mesh_vx = init_spline_dependent_idx_range<
             GridVx,
             BSplinesVx,
-            SplineInterpPointsVx>(conf_voicexx, "vx");
+            SplineInterpPointsVx>(conf_gyselalibxx, "vx");
     IdxRangeVy const mesh_vy = init_spline_dependent_idx_range<
             GridVy,
             BSplinesVy,
-            SplineInterpPointsVy>(conf_voicexx, "vy");
+            SplineInterpPointsVy>(conf_gyselalibxx, "vy");
     IdxRangeXY const mesh_xy(mesh_x, mesh_y);
     IdxRangeVxVy mesh_vxvy(mesh_vx, mesh_vy);
     IdxRangeXYVxVy const meshXYVxVy(mesh_x, mesh_y, mesh_vx, mesh_vy);
 
-    IdxRangeSp const idx_range_kinsp = init_species(conf_voicexx);
+    IdxRangeSp const idx_range_kinsp = init_species(conf_gyselalibxx);
 
     IdxRangeSpVxVy const meshSpVxVy(idx_range_kinsp, mesh_vx, mesh_vy);
     IdxRangeSpXYVxVy const meshSpXYVxVy(idx_range_kinsp, meshXYVxVy);
@@ -83,20 +83,20 @@ int main(int argc, char** argv)
     // Initialisation of the distribution function
     DFieldMemSpVxVy allfequilibrium(meshSpVxVy);
     MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
+            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
     init_fequilibrium(get_field(allfequilibrium));
     DFieldMemSpXYVxVy allfdistribu(meshSpXYVxVy);
     SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
-            init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
+            init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_gyselalibxx);
     init(get_field(allfdistribu));
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
 
     // --> Algorithm info
-    double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
-    int const nbiter = static_cast<int>(PCpp_int(conf_voicexx, ".Algorithm.nbiter"));
+    double const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
+    int const nbiter = static_cast<int>(PCpp_int(conf_gyselalibxx, ".Algorithm.nbiter"));
 
     // --> Output info
-    double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
+    double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
     // Create spline evaluator
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
 
     PDI_finalize();
 
-    PC_tree_destroy(&conf_voicexx);
+    PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;
 }

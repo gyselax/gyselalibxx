@@ -43,8 +43,8 @@ namespace fs = std::filesystem;
 int main(int argc, char** argv)
 {
     long int iter_start;
-    PC_tree_t conf_voicexx;
-    parse_executable_arguments(conf_voicexx, iter_start, argc, argv, params_yaml);
+    PC_tree_t conf_gyselalibxx;
+    parse_executable_arguments(conf_gyselalibxx, iter_start, argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
     PDI_init(conf_pdi);
@@ -54,12 +54,12 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
-    CoordX const x_min(PCpp_double(conf_voicexx, ".SplineMesh.x_min"));
-    CoordX const x_max(PCpp_double(conf_voicexx, ".SplineMesh.x_max"));
-    IdxStepX const x_ncells(PCpp_int(conf_voicexx, ".SplineMesh.x_ncells"));
-    CoordVx const vx_min(PCpp_double(conf_voicexx, ".SplineMesh.vx_min"));
-    CoordVx const vx_max(PCpp_double(conf_voicexx, ".SplineMesh.vx_max"));
-    IdxStepVx const vx_ncells(PCpp_int(conf_voicexx, ".SplineMesh.vx_ncells"));
+    CoordX const x_min(PCpp_double(conf_gyselalibxx, ".SplineMesh.x_min"));
+    CoordX const x_max(PCpp_double(conf_gyselalibxx, ".SplineMesh.x_max"));
+    IdxStepX const x_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.x_ncells"));
+    CoordVx const vx_min(PCpp_double(conf_gyselalibxx, ".SplineMesh.vx_min"));
+    CoordVx const vx_max(PCpp_double(conf_gyselalibxx, ".SplineMesh.vx_max"));
+    IdxStepVx const vx_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.vx_ncells"));
 
     // Creating mesh & supports
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_ncells);
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
     IdxRangeVx mesh_vx(SplineInterpPointsVx::get_domain<GridVx>());
     IdxRangeXVx meshXVx(mesh_x, mesh_vx);
 
-    IdxRangeSp const idx_range_kinsp = init_species(conf_voicexx);
+    IdxRangeSp const idx_range_kinsp = init_species(conf_gyselalibxx);
 
     IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, mesh_x, mesh_vx);
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
     BumpontailEquilibrium const init_fequilibrium
-            = BumpontailEquilibrium::init_from_input(idx_range_kinsp, conf_voicexx);
+            = BumpontailEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
     init_fequilibrium(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
@@ -91,8 +91,11 @@ int main(int argc, char** argv)
     DFieldMemSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
-        SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
-                init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_voicexx);
+        SingleModePerturbInitialisation const init
+                = SingleModePerturbInitialisation::init_from_input(
+                        get_const_field(allfequilibrium),
+                        idx_range_kinsp,
+                        conf_gyselalibxx);
         init(get_field(allfdistribu));
     } else {
         RestartInitialisation const restart(iter_start, time_start);
@@ -101,11 +104,11 @@ int main(int argc, char** argv)
     auto allfequilibrium_host = ddc::create_mirror_view_and_copy(get_field(allfequilibrium));
 
     // --> Algorithm info
-    double const deltat = PCpp_double(conf_voicexx, ".Algorithm.deltat");
-    int const nbiter = static_cast<int>(PCpp_int(conf_voicexx, ".Algorithm.nbiter"));
+    double const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
+    int const nbiter = static_cast<int>(PCpp_int(conf_gyselalibxx, ".Algorithm.nbiter"));
 
     // --> Output info
-    double const time_diag = PCpp_double(conf_voicexx, ".Output.time_diag");
+    double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
 #ifdef PERIODIC_RDIMX
@@ -167,7 +170,7 @@ int main(int argc, char** argv)
 
     PDI_finalize();
 
-    PC_tree_destroy(&conf_voicexx);
+    PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;
 }

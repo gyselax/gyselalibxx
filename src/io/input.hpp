@@ -16,14 +16,14 @@
 /**
  * @brief Extract the paraconf configuration and the restart iteration from the executable arguments.
  *
- * @param[out] conf_voicexx The paraconf configuration describing the simulation.
+ * @param[out] conf_gyselalibxx The paraconf configuration describing the simulation.
  * @param[out] iter_start The index of the iteration from which the simulation should restart.
  * @param[in] argc The number of arguments passed to the executable.
  * @param[in] argv The arguments passed to the executable.
  * @param[in] params_yaml The default parameters for the yaml file.
  */
 void parse_executable_arguments(
-        PC_tree_t& conf_voicexx,
+        PC_tree_t& conf_gyselalibxx,
         long int& iter_start,
         int argc,
         char** argv,
@@ -60,7 +60,7 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
  */
 template <class Grid1D, class BSplines, class InterpPointInitMethod>
 inline IdxRange<Grid1D> init_spline_dependent_idx_range(
-        PC_tree_t const& conf_voicexx,
+        PC_tree_t const& conf_gyselalibxx,
         std::string const& mesh_identifier)
 {
     using Dim = typename Grid1D::continuous_dimension_type;
@@ -70,10 +70,10 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
 
     if constexpr (BSplines::is_uniform()) {
         // If uniform BSplines are used and interpolation points are calculated from them
-        Coord1D min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
-        Coord1D max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
+        Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_min"));
+        Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_max"));
         IdxStep<Grid1D> ncells(
-                PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
+                PCpp_int(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_ncells"));
         ddc::init_discrete_space<BSplines>(min, max, ncells);
     } else if constexpr (!ddcHelper::is_non_uniform_interpolation_points_v<InterpPointInitMethod>) {
         PDI_get_arrays("read_" + mesh_identifier, "breakpoints_" + mesh_identifier, breakpoints);
@@ -128,16 +128,17 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
  */
 template <class Grid1D, class BSplines, class InterpPointInitMethod>
 inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
-        PC_tree_t const& conf_voicexx,
+        PC_tree_t const& conf_gyselalibxx,
         std::string const& mesh_identifier)
 {
     static_assert(!BSplines::is_uniform());
     using Dim = typename Grid1D::continuous_dimension_type;
     using Coord1D = Coord<Dim>;
 
-    Coord1D min(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_min"));
-    Coord1D max(PCpp_double(conf_voicexx, ".SplineMesh." + mesh_identifier + "_max"));
-    IdxStep<Grid1D> ncells(PCpp_int(conf_voicexx, ".SplineMesh." + mesh_identifier + "_ncells"));
+    Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_min"));
+    Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_max"));
+    IdxStep<Grid1D> ncells(
+            PCpp_int(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_ncells"));
 
     std::vector<Coord1D> break_points = build_uniform_break_points(min, max, ncells);
 
