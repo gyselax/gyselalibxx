@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 /**
  * @file spline_partial_derivatives_1d.hpp
- * File containing functions to compute the partial derivatives from a spline interpolation.
+ * File containing functions to compute the partial derivatives from a 1d spline interpolation.
  */
 
 #pragma once
@@ -13,7 +13,7 @@
 
 /**
  * @brief A class which implements a partial derivative operator
- * using a spline interpolation.
+ * using a 1d spline interpolation.
  */
 template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
 class SplinePartialDerivative1D
