@@ -485,7 +485,7 @@ auto create_mirror_view_and_copy(
         VectorField<
                 ElementType,
                 IdxRangeType,
-                VectorIndexSetType<Dims...>,
+                VectorIndexSet<Dims...>,
                 MemorySpace,
                 LayoutStridedPolicy> field)
 {
@@ -495,7 +495,7 @@ auto create_mirror_view_and_copy(
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
-                VectorIndexSetType<Dims...>,
+                VectorIndexSet<Dims...>,
                 typename ExecSpace::memory_space>
                 field_alloc(get_idx_range(field));
         ((ddc::parallel_deepcopy(field_alloc.template get<Dims>(), field.template get<Dims>())),
