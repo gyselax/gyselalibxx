@@ -51,6 +51,12 @@ public:
 
     IndexedTensor(IndexedTensor const&) = delete;
 
+    IndexedTensor(IndexedTensor&&) = delete;
+
+    IndexedTensor& operator=(IndexedTensor const&) = delete;
+
+    IndexedTensor& operator=(IndexedTensor&&) = delete;
+
     /**
      * @brief An operator to access the underlying tensor.
      * @return The underlying tensor.
