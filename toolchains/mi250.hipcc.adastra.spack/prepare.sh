@@ -43,16 +43,16 @@ echo "Preparing the Spack environment..."
 
 # We use GCC as a base compiler (c/c++/fortran) and implicitly, ROCm's hipcc when the +rocm variant is specified.
 PRODUCT_SPEC_LIST="
-ninja%gcc arch=linux-rhel8-zen3
-libyaml%gcc arch=linux-rhel8-zen3
-paraconf%gcc arch=linux-rhel8-zen3
-pdi%gcc+python arch=linux-rhel8-zen3
-pdiplugin-decl-hdf5%gcc arch=linux-rhel8-zen3
-pdiplugin-set-value%gcc arch=linux-rhel8-zen3
-pdiplugin-trace%gcc arch=linux-rhel8-zen3
-pdiplugin-mpi%gcc arch=linux-rhel8-zen3
-ginkgo%gcc+openmp+rocm~shared amdgpu_target=gfx90a arch=linux-rhel8-zen3
-eigen%gcc arch=linux-rhel8-zen3
+ninja%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+libyaml%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+paraconf%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+pdi%gcc@13.2.1.mi250+python arch=linux-rhel8-zen3
+pdiplugin-decl-hdf5%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+pdiplugin-set-value%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+pdiplugin-trace%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+pdiplugin-mpi%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
+ginkgo%gcc@13.2.1.mi250+openmp+rocm~shared amdgpu_target=gfx90a arch=linux-rhel8-zen3
+eigen%gcc@13.2.1.mi250 arch=linux-rhel8-zen3
 "
 # openblas@0.3.26%gcc@12.1.generic~bignuma~consistent_fpcsr+dynamic_dispatch+fortran~ilp64+locking+pic+shared build_system=makefile symbol_suffix=none threads=none arch=linux-rhel8-zen3
 
