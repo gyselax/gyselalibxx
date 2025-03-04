@@ -11,7 +11,7 @@
 #include "params.yaml.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 
 /*
  *  This file defines
@@ -62,14 +62,14 @@ public:
     /**
      * @brief Get the value of the function.
      *
-     * @param[in] coord_rp
+     * @param[in] coord_rtheta
      *      The coordinate where we want to evaluate the function.
      *
      * @return The value of the function at the coordinate.
      */
-    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
+    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rtheta) const
     {
-        CoordXY const coord_xy(m_mapping(coord_rp));
+        CoordXY const coord_xy(m_mapping(coord_rtheta));
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
 
@@ -158,18 +158,18 @@ public:
     /**
      * @brief Get the value of the function.
      *
-     * @param[in] coord_rp
+     * @param[in] coord_rtheta
      *      The coordinate where we want to evaluate the function.
      *
      * @return The value of the function at the coordinate.
      */
-    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rp) const
+    KOKKOS_FUNCTION double operator()(CoordRTheta coord_rtheta) const
     {
         // Gaussian centred in (x0, y0):
-        CoordXY const coord_xy(m_mapping(coord_rp));
+        CoordXY const coord_xy(m_mapping(coord_rtheta));
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
-        double const r = ddc::get<R>(coord_rp);
+        double const r = ddc::get<R>(coord_rtheta);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * Kokkos::exp(
@@ -401,9 +401,9 @@ public:
 ￼     */
     KOKKOS_FUNCTION CoordXY operator()(CoordXY const coord, double const t) const
     {
-        CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord));
+        CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord));
         std::array<std::array<double, 2>, 2> jacobian;
-        m_logical_to_physical_mapping.jacobian_matrix(coord_rp, jacobian);
+        m_logical_to_physical_mapping.jacobian_matrix(coord_rtheta, jacobian);
         double const vx = m_vr * jacobian[0][0] + m_vtheta * jacobian[0][1];
         double const vy = m_vr * jacobian[1][0] + m_vtheta * jacobian[1][1];
         return CoordXY(vx, vy);
@@ -421,9 +421,9 @@ public:
 ￼     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
-        CoordRTheta const coord_rp(m_physical_to_logical_mapping(coord_xy));
+        CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord_xy));
         CoordRTheta const velocity(m_vr, m_vtheta);
-        return m_logical_to_physical_mapping(coord_rp - t * velocity);
+        return m_logical_to_physical_mapping(coord_rtheta - t * velocity);
     }
 };
 

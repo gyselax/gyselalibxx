@@ -14,36 +14,36 @@ density:
     time:    { local_coord: [ 'time' ] }
   - &rd
     r:       { global_coord: [ &initialisation "GYSELALIBXX_initstate.h5",  r_coords] }
-  - &pd
-    p:       { global_coord: [ *initialisation,  p_coords] }
+  - &thetad
+    theta:       { global_coord: [ *initialisation,  theta_coords] }
 
 
 density_eq:
-  dimensions: [ *rd , *pd ]
+  dimensions: [ *rd , *thetad ]
   path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'density_eq' }
 
 
 electrical_potential:
-  dimensions: [ *timed , *rd , *pd ]
+  dimensions: [ *timed , *rd , *thetad ]
   path: { file: 'GYSELALIBXX_\d+.h5', dataset: 'electrical_potential' }
   
   
 electrical_potential_eq:
-  dimensions: [ *rd , *pd ]
+  dimensions: [ *rd , *thetad ]
   path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'electrical_potential_eq' }
  
 
 
 x_coords:
-  dimensions: [ *rd , *pd ]
+  dimensions: [ *rd , *thetad ]
   path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'x_coords' }
 
 y_coords:
-  dimensions: [ *rd , *pd ]
+  dimensions: [ *rd , *thetad ]
   path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'y_coords' }
   
 jacobian:
-  dimensions: [ *rd , *pd ]
+  dimensions: [ *rd , *thetad ]
   path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'jacobian' }
   
 
@@ -67,9 +67,9 @@ r_size:
   dimensions: [ ]
   path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'r_size' }
   
-p_size:
+theta_size:
   dimensions: [ ]
-  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'p_size' }  
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'theta_size' }  
   
   
 

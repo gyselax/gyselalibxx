@@ -66,7 +66,7 @@ KOKKOS_FUNCTION double norm_inf(DVector<Tags...> vec)
  */
 KOKKOS_INLINE_FUNCTION double norm_inf(double const coord)
 {
-    return coord;
+    return Kokkos::fabs(coord);
 }
 
 namespace detail {

@@ -1,5 +1,5 @@
 ﻿# Command to launch the test :
-# python3 display_curves.py ../../../build/tests/geometryRTheta/advection_2d_rp/<selected advection test>
+# python3 display_curves.py ../../../build/tests/geometryRTheta/advection_rtheta/<selected advection test>
 
 """
 Plot the advected function at regular different time steps.
@@ -219,7 +219,7 @@ mapping, method, domain, simulation, name = get_simulation_config(executable)
 rmin = yaml_parameters['SplineMesh']['r_min']
 rmax = yaml_parameters['SplineMesh']['r_max']
 Nr = yaml_parameters['SplineMesh']['r_ncells']
-Nth = yaml_parameters['SplineMesh']['p_ncells']
+Nth = yaml_parameters['SplineMesh']['theta_ncells']
 dt = yaml_parameters['Time']['time_step']
 T = yaml_parameters['Time']['final_time']
 iter_nb = int(T/dt)

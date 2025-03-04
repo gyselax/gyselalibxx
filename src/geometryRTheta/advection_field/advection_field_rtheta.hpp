@@ -225,42 +225,44 @@ private:
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irp) { coords(irp) = ddc::coordinate(irp); });
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            coords(irtheta) = ddc::coordinate(irtheta);
+        });
 
         // > computation of the phi derivatives
         host_t<DFieldMemRTheta> deriv_r_phi(grid);
-        host_t<DFieldMemRTheta> deriv_p_phi(grid);
+        host_t<DFieldMemRTheta> deriv_theta_phi(grid);
 
         evaluator.deriv_dim_1(
                 get_field(deriv_r_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
-                get_field(deriv_p_phi),
+                get_field(deriv_theta_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
         InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
 
         // > computation of the electric field
-        ddc::for_each(grid, [&](IdxRTheta const irp) {
-            double const r = ddc::coordinate(ddc::select<GridR>(irp));
-            double const th = ddc::coordinate(ddc::select<GridTheta>(irp));
+        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+            double const r = ddc::coordinate(ddc::select<GridR>(irtheta));
+            double const th = ddc::coordinate(ddc::select<GridTheta>(irtheta));
 
             if (r > m_epsilon) {
-                CoordRTheta const coord_rp(r, th);
+                CoordRTheta const coord_rtheta(r, th);
 
-                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rp);
+                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
 
                 // Gradient of phi in the physical index range (Cartesian index range)
-                double const deriv_x_phi
-                        = deriv_r_phi(irp) * inv_J[0][0] + deriv_p_phi(irp) * inv_J[1][0];
-                double const deriv_y_phi
-                        = deriv_r_phi(irp) * inv_J[0][1] + deriv_p_phi(irp) * inv_J[1][1];
+                double const deriv_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
+                                           + deriv_theta_phi(irtheta) * inv_J[1][0];
+                double const deriv_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
+                                           + deriv_theta_phi(irtheta) * inv_J[1][1];
 
                 // E = -grad phi
-                ddcHelper::get<X>(electric_field)(irp) = -deriv_x_phi;
-                ddcHelper::get<Y>(electric_field)(irp) = -deriv_y_phi;
+                ddcHelper::get<X>(electric_field)(irtheta) = -deriv_x_phi;
+                ddcHelper::get<Y>(electric_field)(irtheta) = -deriv_y_phi;
 
             } else {
                 // Linearisation of the electric field
@@ -298,22 +300,22 @@ private:
 
 
                 // --- Value at r = m_epsilon:
-                CoordRTheta const coord_rp_epsilon(m_epsilon, th);
+                CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rp_epsilon);
+                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
-                        coord_rp_epsilon,
+                        coord_rtheta_epsilon,
                         get_const_field(electrostatic_potential_coef));
-                double const deriv_p_phi_epsilon = evaluator.deriv_dim_2(
-                        coord_rp_epsilon,
+                double const deriv_theta_phi_epsilon = evaluator.deriv_dim_2(
+                        coord_rtheta_epsilon,
                         get_const_field(electrostatic_potential_coef));
 
                 // Gradient of phi in the physical index range (Cartesian index range)
                 double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
-                                                   + deriv_p_phi_epsilon * inv_J_eps[1][0];
+                                                   + deriv_theta_phi_epsilon * inv_J_eps[1][0];
                 double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
-                                                   + deriv_p_phi_epsilon * inv_J_eps[1][1];
+                                                   + deriv_theta_phi_epsilon * inv_J_eps[1][1];
 
                 // E = -grad phi
                 double const electric_field_x_epsilon = -deriv_x_phi_epsilon;
@@ -321,15 +323,19 @@ private:
 
 
                 // --- Linearisation:
-                ddcHelper::get<X>(electric_field)(irp) = electric_field_x_0 * (1 - r / m_epsilon)
-                                                         + electric_field_x_epsilon * r / m_epsilon;
-                ddcHelper::get<Y>(electric_field)(irp) = electric_field_y_0 * (1 - r / m_epsilon)
-                                                         + electric_field_y_epsilon * r / m_epsilon;
+                ddcHelper::get<X>(electric_field)(irtheta)
+                        = electric_field_x_0 * (1 - r / m_epsilon)
+                          + electric_field_x_epsilon * r / m_epsilon;
+                ddcHelper::get<Y>(electric_field)(irtheta)
+                        = electric_field_y_0 * (1 - r / m_epsilon)
+                          + electric_field_y_epsilon * r / m_epsilon;
             }
 
             // > computation of the advection field
-            ddcHelper::get<X>(advection_field_xy)(irp) = -ddcHelper::get<Y>(electric_field)(irp);
-            ddcHelper::get<Y>(advection_field_xy)(irp) = ddcHelper::get<X>(electric_field)(irp);
+            ddcHelper::get<X>(advection_field_xy)(irtheta)
+                    = -ddcHelper::get<Y>(electric_field)(irtheta);
+            ddcHelper::get<Y>(advection_field_xy)(irtheta)
+                    = ddcHelper::get<X>(electric_field)(irtheta);
         });
     }
 
@@ -347,14 +353,14 @@ public:
      *
      * @param[in] electrostatic_potential
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rp
+     * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
@@ -366,7 +372,7 @@ public:
         builder(get_field(electrostatic_potential_coef), get_const_field(electrostatic_potential));
 
         (*this)(get_field(electrostatic_potential_coef),
-                advection_field_rp,
+                advection_field_rtheta,
                 advection_field_xy_centre);
     }
 
@@ -378,20 +384,20 @@ public:
      *
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rp
+     * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point.  
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_spline_evaluator,
                 electrostatic_potential_coef,
-                advection_field_rp,
+                advection_field_rtheta,
                 advection_field_xy_centre);
     }
 
@@ -402,20 +408,20 @@ public:
      *
      * @param[in] electrostatic_potential_coef
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rp
+     * @param[out] advection_field_rtheta
      *      The advection field on the logical axis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
                 m_polar_spline_evaluator,
                 electrostatic_potential_coef,
-                advection_field_rp,
+                advection_field_rtheta,
                 advection_field_xy_centre);
     }
 
@@ -429,7 +435,7 @@ private:
      *      The spline evaluator used to evaluated electrostatic_potential_coef.
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
-     * @param[out] advection_field_rp
+     * @param[out] advection_field_rtheta
      *      The advection field on the logical axis on an index range without O-point. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
@@ -438,7 +444,7 @@ private:
     void compute_advection_field_RTheta(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rp,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         static_assert(
@@ -451,46 +457,46 @@ private:
                                     PolarBSplinesRTheta,
                                     ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
 
-        IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rp);
+        IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rtheta);
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid_without_Opoint);
-        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
-            coords(irp) = ddc::coordinate(irp);
+        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
+            coords(irtheta) = ddc::coordinate(irtheta);
         });
 
         // > computation of the phi derivatives
         host_t<DFieldMemRTheta> deriv_r_phi(grid_without_Opoint);
-        host_t<DFieldMemRTheta> deriv_p_phi(grid_without_Opoint);
+        host_t<DFieldMemRTheta> deriv_theta_phi(grid_without_Opoint);
 
         evaluator.deriv_dim_1(
                 get_field(deriv_r_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
-                get_field(deriv_p_phi),
+                get_field(deriv_theta_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
         MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
 
         // > computation of the advection field
-        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irp) {
-            CoordRTheta const coord_rp(ddc::coordinate(irp));
+        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
+            CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
-                    = metric_tensor.inverse(coord_rp);
+                    = metric_tensor.inverse(coord_rtheta);
 
             // E = -grad phi
             double const electric_field_r
-                    = -deriv_r_phi(irp) * ddcHelper::get<R_cov, R_cov>(inv_G)
-                      - deriv_p_phi(irp) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
-            double const electric_field_p
-                    = -deriv_r_phi(irp) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
-                      - deriv_p_phi(irp) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+                    = -deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
+                      - deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
+            double const electric_field_theta
+                    = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
+                      - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
 
             // A = E \wedge e_z
-            ddcHelper::get<R>(advection_field_rp)(irp) = -electric_field_p;
-            ddcHelper::get<Theta>(advection_field_rp)(irp) = electric_field_r;
+            ddcHelper::get<R>(advection_field_rtheta)(irtheta) = -electric_field_theta;
+            ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) = electric_field_r;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================

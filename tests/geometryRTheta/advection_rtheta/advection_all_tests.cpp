@@ -12,7 +12,7 @@
 #include <ddc/ddc.hpp>
 
 #include "advection_simulation_utils.hpp"
-#include "bsl_advection_rp.hpp"
+#include "bsl_advection_rtheta.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
@@ -34,7 +34,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
-#include "spline_interpolator_2d_rp.hpp"
+#include "spline_interpolator_rtheta.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "test_cases.hpp"
 #include "vector_field.hpp"
@@ -281,30 +281,32 @@ int main(int argc, char** argv)
 
     // BUILD GRIDS ------------------------------------------------------------------------------
     // Grid creation of space. ------------------------------------------------------------------
-    CoordTheta const p_min(0.0);
-    CoordTheta const p_max(2.0 * M_PI);
-    IdxStepTheta const p_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.p_ncells"));
+    CoordTheta const theta_min(0.0);
+    CoordTheta const theta_max(2.0 * M_PI);
+    IdxStepTheta const theta_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.theta_ncells"));
 
-    IdxRangeR const interpolation_idx_range_R = init_pseudo_uniform_spline_dependent_idx_range<
+    IdxRangeR const interpolation_idx_range_r = init_pseudo_uniform_spline_dependent_idx_range<
             GridR,
             BSplinesR,
             SplineInterpPointsR>(conf_gyselalibxx, "r");
     PC_tree_destroy(&conf_gyselalibxx);
 
-    std::vector<CoordTheta> p_knots = build_uniform_break_points(p_min, p_max, p_ncells);
-    ddc::init_discrete_space<BSplinesTheta>(p_knots);
+    std::vector<CoordTheta> theta_knots
+            = build_uniform_break_points(theta_min, theta_max, theta_ncells);
+    ddc::init_discrete_space<BSplinesTheta>(theta_knots);
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeTheta const interpolation_idx_range_P(SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta const grid(interpolation_idx_range_R, interpolation_idx_range_P);
+    IdxRangeTheta const interpolation_idx_range_theta(
+            SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta const grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
-    CoordR const rmin = ddc::coordinate(interpolation_idx_range_R.front());
-    CoordR const rmax = ddc::coordinate(interpolation_idx_range_R.back());
+    CoordR const rmin = ddc::coordinate(interpolation_idx_range_r.front());
+    CoordR const rmax = ddc::coordinate(interpolation_idx_range_r.back());
 
     std::cout << "TESTS ON THE ADVECTION OPERATOR "
               << "FOR [rmin, rmax] = [" << double(rmin) << ", " << double(rmax) << "], "
-              << "WITH NrxNt = " << interpolation_idx_range_R.size() << "x"
-              << interpolation_idx_range_P.size() << " AND dt = " << dt << ": " << std::endl;
+              << "WITH NrxNt = " << interpolation_idx_range_r.size() << "x"
+              << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
 
 
@@ -315,12 +317,12 @@ int main(int argc, char** argv)
 
     // --- Evaluator for the test function:
     ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> p_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluatorNullBound spline_evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
-            p_extrapolation_rule,
-            p_extrapolation_rule);
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
 
     PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
 
