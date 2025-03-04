@@ -44,7 +44,7 @@ protected:
     /// The internal tuple containing the data
     std::tuple<T<Patches>...> m_tuple;
 
-    template <template <typename P> typename OT, class... OPatches>
+    template <template <typename P> typename OtherType, class... OPatches>
     friend class MultipatchType;
 
     /**
@@ -79,15 +79,15 @@ public:
      * 
      * @param other The equivalent MultipatchType being copied.
      */
-    template <template <typename P> typename OT, class... OPatches>
-    KOKKOS_FUNCTION MultipatchType(MultipatchType<OT, OPatches...> const& other)
+    template <template <typename P> typename OtherType, class... OPatches>
+    KOKKOS_FUNCTION MultipatchType(MultipatchType<OtherType, OPatches...> const& other)
         : m_tuple(std::make_tuple(other.template get<Patches>()...))
     {
         static_assert(
                 ddc::type_seq_contains_v<PatchOrdering, ddc::detail::TypeSeq<OPatches...>>,
                 "The type being copied does not contain all the required patches");
         static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OT<Patches>...>>,
+                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<Patches>...>>,
                 "MultipatchTypes are not equivalent");
     }
 
@@ -97,8 +97,8 @@ public:
      * 
      * @param other The equivalent MultipatchType being copied.
      */
-    template <template <typename P> typename OT, class... OPatches>
-    MultipatchType(MultipatchType<OT, OPatches...>&& other)
+    template <template <typename P> typename OtherType, class... OPatches>
+    MultipatchType(MultipatchType<OtherType, OPatches...>&& other)
         : m_tuple(std::make_tuple(std::move(other.template get<Patches>())...))
     {
         static_assert(
@@ -106,7 +106,7 @@ public:
                 "Cannot create a MultipatchType from a temporary MultipatchType with a different "
                 "ordering");
         static_assert(
-                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OT<OPatches>...>>,
+                std::is_same_v<std::tuple<T<Patches>...>, std::tuple<OtherType<OPatches>...>>,
                 "MultipatchTypes are not equivalent");
     }
 

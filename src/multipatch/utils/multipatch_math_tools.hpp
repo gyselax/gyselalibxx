@@ -6,8 +6,8 @@
 /**
  * @brief Compute the infinity norm for a Field or VectorField over multiple patches.
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
- * @param[in] function The function whose norm is calcuated.
- * @return A double containing the value of the infinty norm.
+ * @param[in] function The function whose norm is calculated.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, template <typename P> typename T, class... Patches>
 double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_function)
@@ -30,7 +30,7 @@ double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] function The calculated function.
  * @param[in] exact_function The exact function with which the calculated function is compared.
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, template <typename P> typename T, class... Patches>
 double error_norm_inf(

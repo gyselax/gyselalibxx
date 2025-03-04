@@ -51,7 +51,7 @@ the unnormalized local contravariant base,
 ## Test case - diocotron instability
 The test case implemented tests the diocoton instabilities (see Davidson book's [3], Edoardo Zoni's article [2] and article [4]).
 The initial function and equilibrium are defined in DiocotronDensitySolution and documented in 
-[initialization](./../../../src/geometryRTheta/initialization/README.md). 
+[initialisation](./../../../src/geometryRTheta/initialisation/README.md). 
 
 We suppose as perturbed initial condition
 
@@ -112,7 +112,7 @@ with
 \\ A_{2,2} = R_2^{-l} + \frac{R_2}{R_2^{2l} - W_2^{2l}} \left[  R_2^{l-1} + \frac{1}{R_2^{l+1}}  W_2^{2l}  \right] - \frac{ R_2^{-l} }{\omega - l\omega_m(R_2)}.
 ```
 
-where $\omega$ satifies 
+where $\omega$ satisfies 
 ```math
 \left(\frac{\omega}{\omega_D} \right)^2 - b_l \frac{\omega}{\omega_D} + c_l = 0
 ```
@@ -172,7 +172,7 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
  ### Recommended parameters: 
 * `Mesh:`
   * `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
-  * `p_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
+  * `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
   * `r_min: 0.0`  : position of the inner wall $`W_1`$. (Tests in Edoardo Zoni's article.)
   * `r_minus: 0.45` : position of the inner boundary of the initial density $`R_1`$. (Tests in Edoardo Zoni's article.)
   * `r_plus: 0.50`: position of the outer boundary of the initial density $`R_2`$. (Tests in Edoardo Zoni's article.)
@@ -184,8 +184,8 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
   
 * `Perturbation:`
   * `charge_Q: 0.` : charge carried by the inner conductor at $`r = W_1`$.
-  * `l_mode: 9` : mode of the pertubation $\varepsilon \cos(lx)$. 
-  * `eps: 0.0001` : amplitude of the pertubation $\varepsilon \cos(lx)$. 
+  * `l_mode: 9` : mode of the perturbation $\varepsilon \cos(lx)$. 
+  * `eps: 0.0001` : amplitude of the perturbation $\varepsilon \cos(lx)$. 
   
 * `Output:`
   * `time_step_diag: 10` : number of time steps between two recordings of the data. 

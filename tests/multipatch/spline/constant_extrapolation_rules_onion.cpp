@@ -33,7 +33,7 @@ void test_on_device(
     ddc::ConstantExtrapolationRule<typename Patch2::Dim1, typename Patch2::Dim2>
             local_extrapol_rule_max(r2_max);
 
-    // Outside outter ring.
+    // Outside outer ring.
     typename Patch1::Coord12 outside_coord_max_1(2.5, 3 / 2. * M_PI);
     typename Patch2::Coord12 outside_coord_max_2(2.5, 3 / 2. * M_PI);
 
@@ -100,7 +100,7 @@ TEST_F(MultipatchSplineOnionShapeTest, ConstantExtrapolationRuleOnionShapeHostTe
     double expected_value;
     double extrapol_value;
 
-    // Outside outter ring.
+    // Outside outer ring.
     typename Patch1::Coord12 outside_coord_max_1(2.5, 3 / 2. * M_PI);
     typename Patch2::Coord12 outside_coord_max_2(2.5, 3 / 2. * M_PI);
 

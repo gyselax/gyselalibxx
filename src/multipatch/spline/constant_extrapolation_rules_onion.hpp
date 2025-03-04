@@ -13,7 +13,7 @@
 
 /**
  * @brief Define constant extrapolation rule for onion shape geometries. 
- * Struct usefull for the MultipatchSplineEvaluator types.  
+ * Struct useful for the MultipatchSplineEvaluator types.  
  * @tparam PatchLocator A patch locator specialised for onion shape geometries. 
  */
 template <class PatchLocator>
@@ -45,7 +45,7 @@ public:
      * @brief Instantiate a ConstantExtrapolationRuleOnion.
      * The R1 and R2 templates are needed for GPU.
      * @tparam R1 Continuous dimension of the minimum radial coordinate of the domain.
-     * @tparam R2 Continuous dimension of the maximun radial coordinate of the domain.
+     * @tparam R2 Continuous dimension of the maximum radial coordinate of the domain.
      * @param[in] r_min Minimum radial coordinate of the domain.
      * @param[in] r_max Maximum radial coordinate of the domain.
      */

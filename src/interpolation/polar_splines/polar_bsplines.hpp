@@ -293,10 +293,11 @@ public:
                 assert(nr_in_singular.value() < int(ddc::discrete_space<BSplinesR>().size()));
 
                 // The number of poloidal bases used to construct the B-splines traversing the singular point.
-                const IdxStepTheta np_in_singular(ddc::discrete_space<BSplinesTheta>().nbasis());
+                const IdxStepTheta n_theta_in_singular(
+                        ddc::discrete_space<BSplinesTheta>().nbasis());
 
                 // The number of elements of the poloidal basis which will have an associated coefficient
-                // (This will be larger than np_in_singular as it includes the periodicity)
+                // (This will be larger than n_theta_in_singular as it includes the periodicity)
                 const IdxStepTheta np_tot(ddc::discrete_space<BSplinesTheta>().size());
 
                 // The index range of the 2D B-splines in the innermost circles from which the polar B-splines
@@ -321,10 +322,11 @@ public:
                         = ddc::discrete_space<BSplinesTheta>().full_domain();
 
                 for (IdxR const ir : IdxRange<BSplinesR>(IdxR(0), IdxStepR(C + 1))) {
-                    for (IdxTheta const ip : poloidal_spline_idx_range.take_first(np_in_singular)) {
+                    for (IdxTheta const itheta :
+                         poloidal_spline_idx_range.take_first(n_theta_in_singular)) {
                         const ddc::Coordinate<DimX, DimY> point
                                 = curvilinear_to_cartesian.control_point(
-                                        mapping_tensor_product_index_type(ir, ip));
+                                        mapping_tensor_product_index_type(ir, itheta));
                         host_t<DFieldMem<IdxRange<BernsteinBasis>>> bernstein_vals(
                                 bernstein_idx_range);
                         ddc::discrete_space<BernsteinBasis>()
@@ -335,15 +337,15 @@ public:
                                     discrete_element_type {
                                             (k - bernstein_idx_range.front()).value()},
                                     ir,
-                                    ip)
+                                    itheta)
                                     = bernstein_vals(k);
                         }
                     }
                     for (discrete_element_type k : singular_idx_range<DDim>()) {
-                        for (IdxTheta const ip : poloidal_spline_idx_range.take_first(
+                        for (IdxTheta const itheta : poloidal_spline_idx_range.take_first(
                                      IdxStepTheta {BSplinesTheta::degree()})) {
-                            m_singular_basis_elements(k, ir, ip + np_in_singular)
-                                    = m_singular_basis_elements(k, ir, ip);
+                            m_singular_basis_elements(k, ir, itheta + n_theta_in_singular)
+                                    = m_singular_basis_elements(k, ir, itheta);
                         }
                     }
                 }

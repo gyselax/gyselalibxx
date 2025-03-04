@@ -24,7 +24,7 @@
  * 
  * The evolution equation for the collisions @f$ df_a/dt = C_{aa} @f$ is solved using a Crank-Nicolson 
  * finite difference scheme adapted for non-uniform meshes. The derivatives are computed using
- * centered second-order finite differences. To use the same derivatives formula at the edges of 
+ * centred second-order finite differences. To use the same derivatives formula at the edges of 
  * the vx mesh, we introduce a ghosted vx mesh with additional points at the edges. To further 
  * improve the accuracy of the computations of the derivatives, we also introduce another vx 
  * mesh that is staggered with respect to the initial mesh. The points of the staggered mesh 
@@ -128,7 +128,7 @@ public:
      * @brief The constructor for the operator.
      *
      * @param[in] mesh The index range on which the operator will act.
-     * @param[in] nustar0 The normalized collisionality.
+     * @param[in] nustar0 The normalised collisionality.
      */
     CollisionsIntra(IdxRangeSpXVx const& mesh, double nustar0);
 
@@ -155,14 +155,14 @@ public:
     double get_nustar0() const;
 
     /**
-     * @brief Get the ghosted vx mesh used for computing finite differences centered derivatives.
+     * @brief Get the ghosted vx mesh used for computing finite differences centred derivatives.
      *
      * @return The ghosted vx mesh.
      */
     IdxRange<GhostedVx> const& get_gridvx_ghosted() const;
 
     /**
-     * @brief Get the ghosted and staggered vx mesh used for computing finite differences centered derivatives.
+     * @brief Get the ghosted and staggered vx mesh used for computing finite differences centred derivatives.
      *
      * @return The ghosted and staggered vx mesh.
      */
@@ -196,9 +196,9 @@ public:
      * @param[inout] AA A vector representing the lower diagonal of the matrix of the linear system.
      * @param[inout] BB A vector representing the diagonal of the matrix of the linear system.
      * @param[inout] CC A vector representing the upper diagonal of the matrix of the linear system.
-     * @param[in] Dcoll The velocity-dependent diffusion coefficient of the collision operaror. 
-     * @param[in] Dcoll_staggered The velocity-dependent diffusion coefficient of the collision operaror computed on the staggered vx mesh. 
-     * @param[in] Nucoll The velocity-dependent advection coefficient of the collision operaror. 
+     * @param[in] Dcoll The velocity-dependent diffusion coefficient of the collision operator. 
+     * @param[in] Dcoll_staggered The velocity-dependent diffusion coefficient of the collision operator computed on the staggered vx mesh. 
+     * @param[in] Nucoll The velocity-dependent advection coefficient of the collision operator. 
      * @param[in] deltat The time step.
      */
     void compute_matrix_coeff(

@@ -68,7 +68,7 @@ TEST(KrookSource, Adaptive)
     charges(my_ielec) = -1.;
     ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     double const extent = 0.5;
@@ -87,7 +87,7 @@ TEST(KrookSource, Adaptive)
             density_target,
             temperature_target);
 
-    // Initialization of the distribution function : maxwellian
+    // Initialisation of the distribution function : maxwellian
     double const density_init_ion = 1.;
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
@@ -123,7 +123,7 @@ TEST(KrookSource, Adaptive)
                 + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
     });
 
-    // reinitialization of the distribution function
+    // reinitialisation of the distribution function
     ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
         DFieldMemVx finit(gridvx);
         if (charge(ddc::select<Species>(ispx)) >= 0.) {
@@ -201,7 +201,7 @@ TEST(KrookSource, Constant)
     charges(idx_range_sp.back()) = -1.;
     ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
-    // Initialization of the distribution function
+    // Initialisation of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
 
     double const extent = 0.25;
@@ -226,7 +226,7 @@ TEST(KrookSource, Constant)
     // simulation
     double const deltat = 1.;
 
-    // Initialization of the distribution function : maxwellian
+    // Initialisation of the distribution function : maxwellian
     double const density_init = 1.;
     double const temperature_init = 1.;
     DFieldMemVx finit(gridvx);

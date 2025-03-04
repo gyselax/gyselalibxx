@@ -32,7 +32,7 @@ public:
     Matrix_Corner_Block(int n, int k, std::unique_ptr<Matrix> q);
     virtual double get_element(int i, int j) const override;
     virtual void set_element(int i, int j, double a_ij) override;
-    virtual void factorize() override;
+    virtual void factorise() override;
     virtual DSpan1D solve_inplace(DSpan1D bx) const override;
     virtual DSpan1D solve_transpose_inplace(DSpan1D bx) const override;
     virtual DSpan2D solve_multiple_inplace(DSpan2D bx) const override;
@@ -70,10 +70,10 @@ protected:
      *
      * which should already be stored in the variable Abm_1_gamma when this method is called.
      */
-    virtual void calculate_delta_to_factorize();
+    virtual void calculate_delta_to_factorise();
 
     /**
-     * @brief Calcuate the solution to the following equation:
+     * @brief Calculate the solution to the following equation:
      *
      * @f$ v - \lambda u @f$
      *
@@ -90,7 +90,7 @@ protected:
     virtual DSpan1D solve_lambda_section(DSpan1D v, DView1D u) const;
 
     /**
-     * @brief Calcuate the solution to the following equation:
+     * @brief Calculate the solution to the following equation:
      *
      * @f$ u - \lambda v @f$
      *
@@ -107,7 +107,7 @@ protected:
     virtual DSpan1D solve_lambda_section_transpose(DSpan1D u, DView1D v) const;
 
     /**
-     * @brief Calcuate the solution to the following equation:
+     * @brief Calculate the solution to the following equation:
      *
      * @f$ u - \beta e @f$
      *
@@ -124,7 +124,7 @@ protected:
     virtual DSpan1D solve_gamma_section(DSpan1D const u, DView1D const v) const;
 
     /**
-     * @brief Calcuate the solution to the following equation:
+     * @brief Calculate the solution to the following equation:
      *
      * @f$ v - \beta u @f$
      *
@@ -146,8 +146,8 @@ protected:
     int const nb;
     /**
      * @brief Data storage for the upper-right sub-matrix.
-     * This memory describes gamma before the factorize() method is called.
-     * This memory describes beta after the factorize() method is called.
+     * This memory describes gamma before the factorise() method is called.
+     * This memory describes beta after the factorise() method is called.
      */
     std::unique_ptr<double[]> Abm_1_gamma_ptr;
     /// @brief Data storage for the sub-matrix lambda.
@@ -160,8 +160,8 @@ protected:
     Matrix_Dense delta;
     /**
      * @brief The upper-right sub-matrix.
-     * The sub-matrix gamma before the factorize() method is called.
-     * The sub-matrix beta after the factorize() method is called.
+     * The sub-matrix gamma before the factorise() method is called.
+     * The sub-matrix beta after the factorise() method is called.
      */
     DSpan2D Abm_1_gamma;
 
@@ -169,7 +169,7 @@ protected:
     DSpan2D lambda;
 
 private:
-    virtual int factorize_method() override
+    virtual int factorise_method() override
     {
         return 0;
     }

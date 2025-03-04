@@ -1,0 +1,11 @@
+SplineMesh:
+  r_min: 0
+  r_max: 1
+  r_ncells: 40
+  theta_ncells: 80
+Time:
+  time_step: 0.1
+  final_time: 0.8
+Output:
+  save_curves: false
+  save_feet: false

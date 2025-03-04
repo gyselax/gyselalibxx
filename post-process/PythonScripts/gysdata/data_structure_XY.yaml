@@ -4,7 +4,7 @@ fdistribu:
   # the list of HDF5 datasets where this field can be found (this can also be a single dict)
   path:
     # file regex, in the regex we capture values that can be used in filename_coord (?P<NAME>CAPTURE)
-    file: 'VOICEXX_\d+.h5'
+    file: 'GYSELALIBXX_\d+.h5'
     # dataset regex
     dataset: 'fdistribu'
   dimensions:
@@ -13,55 +13,55 @@ fdistribu:
     # get the coordinates of this dimension from a scalar in the file
     time:    { local_coord: [ 'time_saved' ] }
   - &xd
-    x:       { global_coord: [ &initialization "VOICEXX_initstate.h5",  'MeshX'] }
+    x:       { global_coord: [ &initialisation "GYSELALIBXX_initstate.h5",  'MeshX'] }
   - &yd
-    y:       { global_coord: [ *initialization,  'MeshY'] }
+    y:       { global_coord: [ *initialisation,  'MeshY'] }
 
 
 fdistribu_equilibrium:
   dimensions: [ *xd , *yd ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'fdistribu_equilibrium' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'fdistribu_equilibrium' }
 
 
 electrostatic_potential:
   dimensions: [ *timed , *xd , *yd ]
-  path: { file: 'VOICEXX_\d+.h5', dataset: 'electrostatic_potential' }
+  path: { file: 'GYSELALIBXX_\d+.h5', dataset: 'electrostatic_potential' }
 
 
 electric_field_x:
   dimensions: [ *timed , *xd , *yd ]
-  path: { file: 'VOICEXX_\d+.h5', dataset: 'electric_field_x' }
+  path: { file: 'GYSELALIBXX_\d+.h5', dataset: 'electric_field_x' }
 
 electric_field_y:
   dimensions: [ *timed , *xd , *yd ]
-  path: { file: 'VOICEXX_\d+.h5', dataset: 'electric_field_y' }
+  path: { file: 'GYSELALIBXX_\d+.h5', dataset: 'electric_field_y' }
 
 
 
 
 delta_t:
   dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'time_step' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'time_step' }
 
   
 final_time:
   dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'final_time' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'final_time' }
 
 nbstep_diag:
   dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'nbstep_diag' } 
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'nbstep_diag' } 
 
 
 
 
 Nx_spline_cells:
   dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'Nx_spline_cells' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'Nx_spline_cells' }
   
 Ny_spline_cells:
   dimensions: [ ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'Ny_spline_cells' }  
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'Ny_spline_cells' }  
   
 
 

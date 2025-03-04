@@ -124,7 +124,7 @@ template <class TagToInsert, std::size_t POS, class TypeSeq>
 using insert_into_type_seq_t = typename detail::InsertIntoTypeSeq<TagToInsert, POS, TypeSeq>::type;
 
 /**
- * @brief A tool to insert a tag into an existing TypeSeq immediately preceeding an existing
+ * @brief A tool to insert a tag into an existing TypeSeq immediately preceding an existing
  * subset of tags.
  *
  * @tparam TagToInsert The tag to be inserted.
@@ -143,7 +143,7 @@ namespace detail {
  * @brief Insert MPI distribution tags into an existing TypeSeq.
  *
  * The MPI tags are each associated with an index range. The MPI tags are inserted into the TypeSeq
- * immediately preceeding the tag with which they are associated. This allows an index range to be
+ * immediately preceding the tag with which they are associated. This allows an index range to be
  * split along the axes on which it will be scattered.
  *
  * E.g. if MPI<Phi> is inserted into <R, Theta, Phi, VPar> we would obtain:
@@ -179,7 +179,7 @@ struct InsertMPITags<ddc::detail::TypeSeq<>, TypeSeq>
  * @brief Insert MPI distribution tags into an existing TypeSeq.
  *
  * The MPI tags are each associated with an index range. The MPI tags are inserted into the TypeSeq
- * immediately preceeding the tag with which they are associated. This allows an index range to be
+ * immediately preceding the tag with which they are associated. This allows an index range to be
  * split along the axes on which it will be scattered.
  *
  * E.g. if MPI<Phi> is inserted into <R, Theta, Phi, VPar> we would obtain:

@@ -1,6 +1,6 @@
 # Gyselalib++ simulations 
 
-The `simulations/` constains the simulations implemented in the code. 
+The `simulations/` contains the simulations implemented in the code. 
 It is broken up into the following sub-folders:
 
  - [geometryRTheta](./geometryRTheta/README.md) - Simulations in the polar geometry.

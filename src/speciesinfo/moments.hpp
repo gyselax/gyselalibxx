@@ -23,7 +23,7 @@ public:
 
         /**
          * @brief Conversion constructor between different memory spaces.
-         * @param[in] impl object from `OMemorySpace` that will be used to initialize this object on `MemorySpace`
+         * @param[in] impl object from `OMemorySpace` that will be used to initialise this object on `MemorySpace`
          */
         template <class OMemorySpace>
         explicit Impl(Impl<Grid1D, OMemorySpace> const& impl)

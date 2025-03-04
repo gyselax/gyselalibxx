@@ -1,6 +1,6 @@
 # Simulations in (x, vx) geometry
 
-This folder constains the following simulations: 
+This folder contains the following simulations: 
 
 - Landau
 - Bump-On-Tail

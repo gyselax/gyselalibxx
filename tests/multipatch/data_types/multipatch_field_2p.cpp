@@ -68,7 +68,7 @@ protected:
 public:
     static void SetUpTestSuite()
     {
-        // Initializing the grid on each patch
+        // Initialising the grid on each patch
 
         ddc::init_discrete_space<Patch1::Grid1>(Patch1::Grid1::init(x1_min, x1_max, x1_size));
         ddc::init_discrete_space<Patch1::Grid2>(Patch1::Grid2::init(y1_min, y1_max, y1_size));
@@ -78,7 +78,7 @@ public:
     }
 
     /// Fill field1 with function x^2 + y^2 and field2 with x^2 - y^2
-    void initialize_non_const_fields(Field1 field1, Field2 field2)
+    void initialise_non_const_fields(Field1 field1, Field2 field2)
     {
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
@@ -149,7 +149,7 @@ TEST_F(MultiPatchField2Patches, Polynomials)
     Field1 const field1 = get_field(field_mem1);
     Field2 const field2 = get_field(field_mem2);
 
-    initialize_non_const_fields(field1, field2);
+    initialise_non_const_fields(field1, field2);
 
     MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
@@ -189,7 +189,7 @@ TEST_F(MultiPatchField2Patches, GetIdxRange)
     Field1 const field1 = get_field(field_mem1);
     Field2 const field2 = get_field(field_mem2);
 
-    initialize_non_const_fields(field1, field2);
+    initialise_non_const_fields(field1, field2);
 
     MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
@@ -205,7 +205,7 @@ TEST_F(MultiPatchField2Patches, ConstField)
     Field1 const field1 = get_field(field_mem1);
     Field2 const field2 = get_field(field_mem2);
 
-    initialize_non_const_fields(field1, field2);
+    initialise_non_const_fields(field1, field2);
 
     MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
