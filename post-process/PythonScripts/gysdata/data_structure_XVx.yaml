@@ -5,7 +5,7 @@ fdistribu:
   # the list of HDF5 datasets where this field can be found (this can also be a single dict)
   path:
     # file regex, in the regex we capture values that can be used in filename_coord (?P<NAME>CAPTURE)
-    file: 'VOICEXX_\d+.h5'
+    file: 'GYSELALIBXX_\d+.h5'
     # dataset regex
     dataset: 'fdistribu'
   dimensions:
@@ -17,22 +17,22 @@ fdistribu:
     # get the coordinates of this dimension from a field in another file
     species: { constant_coord: [ "electrons", "ions" ] }
   - &xd
-    x:       { global_coord: [ &initstate "VOICEXX_initstate.h5", MeshX ] }
+    x:       { global_coord: [ &initstate "GYSELALIBXX_initstate.h5", MeshX ] }
   - &vxd
     v_x:     { global_coord: [ *initstate , MeshVx ] }
 
 electrostatic_potential:
   dimensions: [ *timed , *xd ]
-  path: { file: 'VOICEXX_\d+.h5', dataset: 'electrostatic_potential' }
+  path: { file: 'GYSELALIBXX_\d+.h5', dataset: 'electrostatic_potential' }
 
 fdistribu_charges:
   dimensions: [ *speciesd ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'fdistribu_charges' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'fdistribu_charges' }
 
 fdistribu_masses:
   dimensions: [ *speciesd ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'fdistribu_masses' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'fdistribu_masses' }
 
 fdistribu_eq:
   dimensions: [ *speciesd , *vxd ]
-  path: { file: 'VOICEXX_initstate.h5', dataset: 'fdistribu_eq' }
+  path: { file: 'GYSELALIBXX_initstate.h5', dataset: 'fdistribu_eq' }

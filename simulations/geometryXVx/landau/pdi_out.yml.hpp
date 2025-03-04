@@ -61,16 +61,16 @@ plugins:
     on_finalize:
       - release: [iter_saved]
   decl_hdf5:
-    - file: 'VOICEXX_initstate.h5'
+    - file: 'GYSELALIBXX_initstate.h5'
       on_event: [initial_state]
       collision_policy: replace_and_warn
       write: [Nx_spline_cells, Nvx_spline_cells, MeshX, MeshVx, nbstep_diag, Nkinspecies, fdistribu_charges,fdistribu_masses, fdistribu_eq]
-    - file: 'VOICEXX_${iter_saved:05}.h5'
+    - file: 'GYSELALIBXX_${iter_saved:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${nbstep_diag} = 0'
       collision_policy: replace_and_warn
       write: [time_saved, fdistribu, electrostatic_potential]
-    - file: 'VOICEXX_${iter_start:05}.h5'
+    - file: 'GYSELALIBXX_${iter_start:05}.h5'
       on_event: restart
       read: [time_saved, fdistribu]
   #trace: ~

@@ -43,8 +43,8 @@ namespace {
 template <class Function>
 void Interpolation_on_random_coord(
         IdxRangeRTheta& grid,
-        bool& On_the_nodes,
-        Function& exact_function,
+        bool const& On_the_nodes,
+        Function const& exact_function,
         double const TOL)
 {
     int const Nr = ddc::discrete_space<BSplinesR>().ncells();
@@ -261,9 +261,9 @@ int main(int argc, char** argv)
     ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ::ddc::ScopeGuard ddc_scope(argc, argv);
 
-    PC_tree_t conf_voicexx;
+    PC_tree_t conf_gyselalibxx;
     if (argc == 2) {
-        conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
+        conf_gyselalibxx = PC_parse_path(fs::path(argv[1]).c_str());
     } else if (argc == 3) {
         if (argv[1] == std::string_view("--dump-config")) {
             std::fstream file(argv[2], std::fstream::out);
@@ -277,8 +277,8 @@ int main(int argc, char** argv)
     PC_errhandler(PC_NULL_HANDLER);
 
     // Parameters of the grid. ---------------------------------------------------------------
-    int Nr = PCpp_int(conf_voicexx, ".Mesh.r_size");
-    int Nt = PCpp_int(conf_voicexx, ".Mesh.theta_size");
+    int Nr = PCpp_int(conf_gyselalibxx, ".Mesh.r_size");
+    int Nt = PCpp_int(conf_gyselalibxx, ".Mesh.theta_size");
 
 
     int spline_degree = BSplinesR::degree();
@@ -410,5 +410,5 @@ int main(int argc, char** argv)
     std::cout << "  -------------------------------------------------------------------"
               << std::endl;
 
-    PC_tree_destroy(&conf_voicexx);
+    PC_tree_destroy(&conf_gyselalibxx);
 }
