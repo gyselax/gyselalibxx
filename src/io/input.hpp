@@ -137,7 +137,8 @@ inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
 
     Coord1D min(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_min"));
     Coord1D max(PCpp_double(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_max"));
-    IdxStep<Grid1D> ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_ncells"));
+    IdxStep<Grid1D> ncells(
+            PCpp_int(conf_gyselalibxx, ".SplineMesh." + mesh_identifier + "_ncells"));
 
     std::vector<Coord1D> break_points = build_uniform_break_points(min, max, ncells);
 

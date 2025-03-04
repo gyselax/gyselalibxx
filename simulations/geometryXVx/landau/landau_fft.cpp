@@ -82,8 +82,11 @@ int main(int argc, char** argv)
     DFieldMemSpXVx allfdistribu(meshSpXVx);
     double time_start(0);
     if (iter_start == 0) {
-        SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
-                init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_gyselalibxx);
+        SingleModePerturbInitialisation const init
+                = SingleModePerturbInitialisation::init_from_input(
+                        get_const_field(allfequilibrium),
+                        idx_range_kinsp,
+                        conf_gyselalibxx);
         init(get_field(allfdistribu));
     } else {
         RestartInitialisation const restart(iter_start, time_start);
