@@ -6,8 +6,8 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "directional_tag.hpp"
 #include "ipoisson_solver.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * See @ref FFTPoissonSolverImplementation.
