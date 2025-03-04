@@ -54,8 +54,8 @@ void PDI_get_arrays(
         std::vector<T>& out_vector,
         Args&... input_args)
 {
-    auto idx_sequence = std::make_index_sequence<sizeof...(Args) / 2 + 1> {};
-    auto arg_tuple = std::tie(name, out_vector, input_args...);
+    std::integer_sequence idx_sequence = std::make_index_sequence<sizeof...(Args) / 2 + 1> {};
+    std::tuple arg_tuple = std::tie(name, out_vector, input_args...);
     auto names = detail::get_name_tuple(arg_tuple, idx_sequence);
     auto out_vectors = detail::get_vector_tuple(arg_tuple, idx_sequence);
     detail::PDI_get_array(event_name, names, out_vectors, idx_sequence);
