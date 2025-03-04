@@ -6,6 +6,7 @@
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
+#include "indexed_tensor.hpp"
 #include "math_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"

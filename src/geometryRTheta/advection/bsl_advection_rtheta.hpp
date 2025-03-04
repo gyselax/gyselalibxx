@@ -7,6 +7,7 @@
 #include "geometry.hpp"
 #include "i_interpolator_rtheta.hpp"
 #include "iadvection_rtheta.hpp"
+#include "indexed_tensor.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_rtheta.hpp"
 #include "spline_polar_foot_finder.hpp"
