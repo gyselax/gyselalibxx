@@ -43,8 +43,8 @@ namespace {
 template <class Function>
 void Interpolation_on_random_coord(
         IdxRangeRTheta& grid,
-        bool& On_the_nodes,
-        Function& exact_function,
+        bool const& On_the_nodes,
+        Function const& exact_function,
         double const TOL)
 {
     int const Nr = ddc::discrete_space<BSplinesR>().ncells();
