@@ -154,13 +154,13 @@ $(document).ready(function(){initNavTree('pdi__helper_8hpp_source.html',''); ini
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">template</span> &lt;<span class="keyword">class </span><a class="code hl_struct" href="structT.html">T</a>, <span class="keyword">class</span>... Args&gt;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordtype">void</span> PDI_get_arrays(</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        std::string event_name,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        std::string name,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        std::string <span class="keyword">const</span>&amp; event_name,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        std::string <span class="keyword">const</span>&amp; name,</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        std::vector&lt;T&gt;&amp; out_vector,</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        Args&amp;... input_args)</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>{</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">auto</span> idx_sequence = std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Args) / 2 + 1&gt; {};</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">auto</span> arg_tuple = std::tie(name, out_vector, input_args...);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    std::integer_sequence idx_sequence = std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Args) / 2 + 1&gt; {};</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    std::tuple arg_tuple = std::tie(name, out_vector, input_args...);</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">auto</span> names = detail::get_name_tuple(arg_tuple, idx_sequence);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">auto</span> out_vectors = detail::get_vector_tuple(arg_tuple, idx_sequence);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    detail::PDI_get_array(event_name, names, out_vectors, idx_sequence);</div>
