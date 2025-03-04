@@ -52,6 +52,8 @@ public:
     IndexedTensor(IndexedTensor const&) = delete;
 
     IndexedTensor(IndexedTensor&&) = delete;
+    
+    KOKKOS_DEFAULTED_FUNCTION ~IndexedTensor() noexcept = default;
 
     IndexedTensor& operator=(IndexedTensor const&) = delete;
 
