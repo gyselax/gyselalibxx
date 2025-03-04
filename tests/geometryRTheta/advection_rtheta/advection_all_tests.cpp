@@ -256,9 +256,9 @@ int main(int argc, char** argv)
     ::ddc::ScopeGuard ddc_scope(argc, argv);
 
 
-    PC_tree_t conf_voicexx;
+    PC_tree_t conf_gyselalibxx;
     if (argc == 2) {
-        conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
+        conf_gyselalibxx = PC_parse_path(fs::path(argv[1]).c_str());
     } else if (argc == 3) {
         if (argv[1] == std::string_view("--dump-config")) {
             std::fstream file(argv[2], std::fstream::out);
@@ -274,22 +274,22 @@ int main(int argc, char** argv)
 
 
     // Parameters of the simulation. ------------------------------------------------------------
-    double const dt = PCpp_double(conf_voicexx, ".Time.time_step");
-    double const final_time = PCpp_double(conf_voicexx, ".Time.final_time");
-    bool const if_save_curves = PCpp_bool(conf_voicexx, ".Output.save_curves");
-    bool const if_save_feet = PCpp_bool(conf_voicexx, ".Output.save_feet");
+    double const dt = PCpp_double(conf_gyselalibxx, ".Time.time_step");
+    double const final_time = PCpp_double(conf_gyselalibxx, ".Time.final_time");
+    bool const if_save_curves = PCpp_bool(conf_gyselalibxx, ".Output.save_curves");
+    bool const if_save_feet = PCpp_bool(conf_gyselalibxx, ".Output.save_feet");
 
     // BUILD GRIDS ------------------------------------------------------------------------------
     // Grid creation of space. ------------------------------------------------------------------
     CoordTheta const theta_min(0.0);
     CoordTheta const theta_max(2.0 * M_PI);
-    IdxStepTheta const theta_ncells(PCpp_int(conf_voicexx, ".SplineMesh.theta_ncells"));
+    IdxStepTheta const theta_ncells(PCpp_int(conf_gyselalibxx, ".SplineMesh.theta_ncells"));
 
     IdxRangeR const interpolation_idx_range_r = init_pseudo_uniform_spline_dependent_idx_range<
             GridR,
             BSplinesR,
-            SplineInterpPointsR>(conf_voicexx, "r");
-    PC_tree_destroy(&conf_voicexx);
+            SplineInterpPointsR>(conf_gyselalibxx, "r");
+    PC_tree_destroy(&conf_gyselalibxx);
 
     std::vector<CoordTheta> theta_knots
             = build_uniform_break_points(theta_min, theta_max, theta_ncells);

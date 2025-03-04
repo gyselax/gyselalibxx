@@ -4,7 +4,7 @@
 #  file : READutils.py
 #  date : 2016/04/12
 #
-#  Reading of the VOICEXX files
+#  Reading of the GYSELALIBXX files
 #--------------------------------------------------
 
 """ Tools for accessing results folders
@@ -19,7 +19,7 @@ def valid_directory(ResuDir):
     """ Check if result directory is valid
     """
     cache_file  = os.path.join(ResuDir, 'combined_diag.h5')
-    find_fnames = os.path.join(ResuDir,'VOICEXX_[0-9]*.h5')
+    find_fnames = os.path.join(ResuDir,'GYSELALIBXX_[0-9]*.h5')
     find_fnames = glob.glob(find_fnames)
     nb_fnames   = len(find_fnames)
     return nb_fnames!=0 or os.path.exists(cache_file)
@@ -37,7 +37,7 @@ def Ask_directory():
         if valid_directory(ResuDir):
             break
         else:
-            print('==> There are no VOICEXX results in this directory')
+            print('==> There are no GYSELALIBXX results in this directory')
 
     return ResuDir
 
@@ -46,11 +46,11 @@ def Ask_directory():
 
 
 #===============================================
-def Read_VOICEXX_results(ResuDir, cache = True):
+def Read_GYSELALIBXX_results(ResuDir, cache = True):
     """ Read the result directory
     """
     cache_file = os.path.join(ResuDir, 'combined_diag.h5')
-    ResuFileList = sorted(glob.glob(ResuDir+'/VOICEXX_[0-9]*.h5'))
+    ResuFileList = sorted(glob.glob(ResuDir+'/GYSELALIBXX_[0-9]*.h5'))
 
     if cache and os.path.exists(cache_file) and \
             (len(ResuFileList)==0 or \
@@ -60,7 +60,7 @@ def Read_VOICEXX_results(ResuDir, cache = True):
         return H
 
     H = H5ut.loadHDF5(ResuFileList)
-    Hinit = H5ut.loadHDF5(ResuDir+'/VOICEXX_initstate.h5')
+    Hinit = H5ut.loadHDF5(ResuDir+'/GYSELALIBXX_initstate.h5')
     H.append(Hinit)
     H.dirname = ResuDir
 
@@ -69,5 +69,5 @@ def Read_VOICEXX_results(ResuDir, cache = True):
 
     return H
 
-#end def Read_VOICE_results
+#end def Read_GYSELALIBXX_results
 
