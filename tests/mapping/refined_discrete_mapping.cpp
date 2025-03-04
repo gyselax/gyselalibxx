@@ -144,8 +144,8 @@ double check_value_on_grid(
 {
     const double TOL = 1e-7;
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
-        const CoordRTheta coord(ddc::coordinate(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+        const CoordRTheta coord(ddc::coordinate(irtheta));
         const CoordXY discrete_coord = mapping(coord);
         const CoordXY analytical_coord = analytical_mapping(coord);
 
@@ -188,8 +188,8 @@ double check_value_not_on_grid(
     FieldMemRTheta_host<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
     IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
-    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
-        IdxR ir(ddc::select<GridR>(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+        IdxR ir(ddc::select<GridR>(irtheta));
         CoordR coord_r_0 = ddc::coordinate(ir);
         CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
@@ -200,23 +200,23 @@ double check_value_not_on_grid(
             coord_r = coord_r_0;
         }
 
-        IdxTheta ip(ddc::select<GridTheta>(irp));
-        CoordTheta coord_theta_0 = ddc::coordinate(ip);
-        CoordTheta coord_theta_1 = ddc::coordinate(ip + 1);
+        IdxTheta itheta(ddc::select<GridTheta>(irtheta));
+        CoordTheta coord_theta_0 = ddc::coordinate(itheta);
+        CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
         double coord_theta;
-        if (ip < itheta_max) {
+        if (itheta < itheta_max) {
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
             coord_theta = coord_theta_0;
         }
-        coords(irp) = CoordRTheta(coord_r, coord_theta);
+        coords(irtheta) = CoordRTheta(coord_r, coord_theta);
     });
 
     const double TOL = 5e-5;
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
-        const CoordRTheta coord(coords(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+        const CoordRTheta coord(coords(irtheta));
         const CoordXY discrete_coord = mapping(coord);
         const CoordXY analytical_coord = analytical_mapping(coord);
 
@@ -287,8 +287,8 @@ double check_Jacobian_on_grid(
 {
     static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
-        const CoordRTheta coord(ddc::coordinate(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+        const CoordRTheta coord(ddc::coordinate(irtheta));
 
         Matrix_2x2 discrete_Jacobian;
         Matrix_2x2 analytical_Jacobian;
@@ -337,8 +337,8 @@ double check_Jacobian_not_on_grid(
     FieldMemRTheta_host<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
     IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
-    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
-        IdxR ir(ddc::select<GridR>(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+        IdxR ir(ddc::select<GridR>(irtheta));
         CoordR coord_r_0 = ddc::coordinate(ir);
         CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
@@ -349,23 +349,23 @@ double check_Jacobian_not_on_grid(
             coord_r = coord_r_0;
         }
 
-        IdxTheta ip(ddc::select<GridTheta>(irp));
-        CoordTheta coord_theta_0 = ddc::coordinate(ip);
-        CoordTheta coord_theta_1 = ddc::coordinate(ip + 1);
+        IdxTheta itheta(ddc::select<GridTheta>(irtheta));
+        CoordTheta coord_theta_0 = ddc::coordinate(itheta);
+        CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
         double coord_theta;
-        if (ip < itheta_max) {
+        if (itheta < itheta_max) {
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
             coord_theta = coord_theta_0;
         }
-        coords(irp) = CoordRTheta(coord_r, coord_theta);
+        coords(irtheta) = CoordRTheta(coord_r, coord_theta);
     });
 
 
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irp) {
-        const CoordRTheta coord(coords(irp));
+    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+        const CoordRTheta coord(coords(irtheta));
 
         Matrix_2x2 discrete_Jacobian;
         Matrix_2x2 analytical_Jacobian;
@@ -542,9 +542,9 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     ddc::init_discrete_space<GridR>(SplineInterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(SplineInterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeR interpolation_idx_range_R(SplineInterpPointsR::get_domain<GridR>());
-    IdxRangeTheta interpolation_idx_range_Theta(SplineInterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
+    IdxRangeR interpolation_idx_range_r(SplineInterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_theta(SplineInterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
 
     // Operators ---

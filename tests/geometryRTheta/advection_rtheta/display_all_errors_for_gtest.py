@@ -1,5 +1,5 @@
 ﻿# Command to launch the test :
-# python3 display_all_error_for_gtest.py ../../../build/tests/geometryRTheta/advection_2d_rp/advection_ALL
+# python3 display_all_error_for_gtest.py ../../../build/tests/geometryRTheta/advection_rtheta/advection_ALL
 
 """
 Compute the space convergence order between two grid sizes
@@ -72,12 +72,12 @@ else :
 yaml_configs = [deepcopy(yaml_parameters) for _ in list_pow]
 
 Nr0 = yaml_parameters['SplineMesh']['r_ncells']
-Nt0 = yaml_parameters['SplineMesh']['p_ncells']
+Nt0 = yaml_parameters['SplineMesh']['theta_ncells']
 dt0 = yaml_parameters['Time']['time_step']
 for i, p in enumerate(list_pow):
     yaml_configs[i]['Time']['time_step'] = dt0 / 2**p
     yaml_configs[i]['SplineMesh'].update({'r_ncells': Nr0 * 2**p,
-                                          'p_ncells': Nt0 * 2**p})
+                                          'theta_ncells': Nt0 * 2**p})
 Order = [2**-i for i in list_pow]
 
 

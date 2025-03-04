@@ -5,7 +5,7 @@ then
     exit 1
 fi
 
-. /data/gyselarunner/spack-0.22.2/share/spack/setup-env.sh
+. /data/gyselarunner/spack-0.23.0/share/spack/setup-env.sh
 
 spack load gcc@12
-spack env activate gyselalibxx-env-cuda
+spack env activate gyselalibxx-env-omp

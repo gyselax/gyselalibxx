@@ -94,7 +94,7 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
  ### Recommended parameters: 
 * `Mesh:`
   * `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
-  * `p_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
+  * `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
   * `r_min: 0.0`  : start of $`r`$ domain. (Tests in Edoardo Zoni's article.)
   * `r_max: 1.0` : end of $`r`$ domain. (Tests in Edoardo Zoni's article.)
 

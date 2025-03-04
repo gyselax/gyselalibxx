@@ -229,7 +229,7 @@ else :
 rmin = yaml_parameters['SplineMesh']['r_min']
 rmax = yaml_parameters['SplineMesh']['r_max']
 Nr = yaml_parameters['SplineMesh']['r_ncells']
-Nt = yaml_parameters['SplineMesh']['p_ncells']
+Nt = yaml_parameters['SplineMesh']['theta_ncells']
 dt0 = yaml_parameters['Time']['time_step']
 T = yaml_parameters['Time']['final_time']
 details1 = f"_{Nr}x{Nt}_[{rmin}_{rmax}]"
