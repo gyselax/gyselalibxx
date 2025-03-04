@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <mpi.h>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_helper.hpp"
