@@ -134,7 +134,7 @@ public:
         static_assert(
                 std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
                 "The coordinate must have the same memory layout to make a clean conversion.");
-        return Coord<Dims...>({m_data[ddc::type_seq_rank_v<Dims, index_set>]...});
+        return Coord<Dims...>(m_data[ddc::type_seq_rank_v<Dims, index_set>]...);
     }
 
     /**
