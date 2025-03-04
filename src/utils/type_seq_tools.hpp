@@ -42,7 +42,7 @@ struct FindGrid<Dim, ddc::detail::TypeSeq<HeadGrid, Grids...>>
 template <class Dim>
 struct FindGrid<Dim, ddc::detail::TypeSeq<>>
 {
-    using type = void;
+    static_assert(std::is_same_v<Dim, Dim>, "Grid not found");
 };
 
 template <class... TypeSeqs>
