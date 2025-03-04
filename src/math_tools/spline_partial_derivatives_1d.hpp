@@ -16,7 +16,7 @@
  * using a spline interpolation.
  */
 template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
-class SplinePartialDerivative
+class SplinePartialDerivative1D
     : public IPartialDerivative<
               DField<typename FieldXiBuilderBatched::batched_interpolation_domain_type>,
               typename FieldXiBuilderBatched::continuous_dimension_type>
@@ -57,12 +57,12 @@ private:
 
 public:
     /**
-    * @brief Construct an instance of the class SplinePartialDerivative.
+    * @brief Construct an instance of the class SplinePartialDerivative1D.
     *
     * @param fieldxi_builder Builder for intermediate interpolation representation.
     * @param fieldxi_evaluator Evaluator for intermediate interpolation representation.
     */
-    explicit SplinePartialDerivative(
+    explicit SplinePartialDerivative1D(
             FieldXiBuilderBatched const& fieldxi_builder,
             FieldXiEvaluatorBatched const& fieldxi_evaluator)
         : m_fieldxi_builder(fieldxi_builder)
