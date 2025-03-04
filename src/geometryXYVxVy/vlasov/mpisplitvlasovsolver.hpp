@@ -3,15 +3,14 @@
 #pragma once
 
 #include "geometry.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "ivlasovsolver.hpp"
-
-template <class Geometry, class GridX>
-class IAdvectionSpatial;
-template <class Geometry, class GridV>
-class IAdvectionVelocity;
+#include "mpitransposealltoall.hpp"
 
 /**
- * @brief A class that solves a Vlasov equation using Strang's splitting.
+ * @brief A class that solves a Vlasov equation using Strang's splitting
+ * on an MPI distributed mesh.
  *
  * The Vlasov equation is split between four advection equations 
  * along the X, Y, Vx and Vy directions. The splitting involves solving 
@@ -19,7 +18,7 @@ class IAdvectionVelocity;
  * of length dt/2, then the Vy-direction advection on a time dt, and
  * finally the X, Y, and Vx directions again in reverse order on dt/2.
  */
-class SplitVlasovSolver : public IVlasovSolver
+class MpiSplitVlasovSolver : public IVlasovSolver
 {
     /// Advection operator in the x direction
     IAdvectionSpatial<GeometryVxVyXY, GridX> const& m_advec_x;
@@ -27,9 +26,12 @@ class SplitVlasovSolver : public IVlasovSolver
     IAdvectionSpatial<GeometryVxVyXY, GridY> const& m_advec_y;
 
     /// Advection operator in the vx direction
-    IAdvectionVelocity<GeometryVxVyXY, GridVx> const& m_advec_vx;
+    IAdvectionVelocity<GeometryXYVxVy, GridVx> const& m_advec_vx;
     /// Advection operator in the vy direction
-    IAdvectionVelocity<GeometryVxVyXY, GridVy> const& m_advec_vy;
+    IAdvectionVelocity<GeometryXYVxVy, GridVy> const& m_advec_vy;
+
+    /// MPI transpose operator
+    MPITransposeAllToAll<X2DSplit, V2DSplit> const& m_transpose;
 
 public:
     /**
@@ -38,14 +40,16 @@ public:
      * @param[in] advec_y An advection operator along the y direction.
      * @param[in] advec_vx An advection operator along the vx direction.
      * @param[in] advec_vy An advection operator along the vy direction.
+     * @param[in] transpose A MPI transpose operator to move between layouts.
      */
-    SplitVlasovSolver(
+    MpiSplitVlasovSolver(
             IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
             IAdvectionSpatial<GeometryVxVyXY, GridY> const& advec_y,
-            IAdvectionVelocity<GeometryVxVyXY, GridVx> const& advec_vx,
-            IAdvectionVelocity<GeometryVxVyXY, GridVy> const& advec_vy);
+            IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
+            IAdvectionVelocity<GeometryXYVxVy, GridVy> const& advec_vy,
+            MPITransposeAllToAll<X2DSplit, V2DSplit> const& transpose);
 
-    ~SplitVlasovSolver() override = default;
+    ~MpiSplitVlasovSolver() override = default;
 
     /**
      * @brief Solves a Vlasov equation on a timestep dt.

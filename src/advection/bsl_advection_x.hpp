@@ -20,9 +20,8 @@ class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
     using IdxV = Idx<GridV>;
     using DimX = typename GridX::continuous_dimension_type;
     using DimV = typename GridV::continuous_dimension_type;
-    using IdxRangeSpaceVelocity = ddc::cartesian_prod_t<
-            typename Geometry::IdxRangeSpatial,
-            typename Geometry::IdxRangeVelocity>;
+    using IdxRangeSpaceVelocity
+            = ddc::remove_dims_of_t<typename Geometry::IdxRangeFdistribu, Species>;
 
 private:
     using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
