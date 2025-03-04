@@ -43,16 +43,16 @@ echo "Preparing the Spack environment..."
 
 # We use GCC as a base compiler (c/c++/fortran) and implicitly, ROCm's hipcc when the +rocm variant is specified.
 PRODUCT_SPEC_LIST="
-ninja%gcc+re2c arch=linux-rhel8-zen3
+ninja%gcc arch=linux-rhel8-zen3
 libyaml%gcc arch=linux-rhel8-zen3
-paraconf%gcc+fortran~ipo~shared~tests arch=linux-rhel8-zen3
-pdi%gcc~benchs~docs+fortran~ipo+python~tests arch=linux-rhel8-zen3
-pdiplugin-decl-hdf5%gcc~benchs~fortran~ipo~mpi~tests arch=linux-rhel8-zen3
-pdiplugin-set-value%gcc~ipo~tests arch=linux-rhel8-zen3
-pdiplugin-trace%gcc~ipo~tests arch=linux-rhel8-zen3
-pdiplugin-mpi%gcc~ipo~tests arch=linux-rhel8-zen3
-ginkgo%gcc~cuda~develtools~full_optimizations~hwloc~ipo~mpi+openmp+rocm~sde~shared~sycl amdgpu_target=gfx90a arch=linux-rhel8-zen3
-eigen%gcc~ipo arch=linux-rhel8-zen3
+paraconf%gcc~shared arch=linux-rhel8-zen3
+pdi%gcc+python arch=linux-rhel8-zen3
+pdiplugin-decl-hdf5%gcc arch=linux-rhel8-zen3
+pdiplugin-set-value%gcc arch=linux-rhel8-zen3
+pdiplugin-trace%gcc arch=linux-rhel8-zen3
+pdiplugin-mpi%gcc arch=linux-rhel8-zen3
+ginkgo%gcc+openmp+rocm~shared amdgpu_target=gfx90a arch=linux-rhel8-zen3
+eigen%gcc arch=linux-rhel8-zen3
 "
 # openblas@0.3.26%gcc@12.1.generic~bignuma~consistent_fpcsr+dynamic_dispatch+fortran~ilp64+locking+pic+shared build_system=makefile symbol_suffix=none threads=none arch=linux-rhel8-zen3
 
@@ -61,6 +61,7 @@ which spack
 spack config --scope user update --yes-to-all packages
 spack config --scope user add 'packages:all:permissions:read:world'
 spack config --scope user add 'packages:all:permissions:write:group'
+spack config --scope user add 'concretizer:unify:true'
 
 # If we start preparing a new environment, ensure we wont get name clashes by
 # uninstalling previous products.
