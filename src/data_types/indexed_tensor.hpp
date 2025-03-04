@@ -193,8 +193,7 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
 {
     using namespace tensor_tools;
     static_assert(
-            std::conjunction_v<
-                    std::integral_constant<bool, is_indexed_tensor_v<IndexedTensorType>>...>,
+            (is_indexed_tensor_v<IndexedTensorType> && ...),
             "A tensor multiplication must be carried out over IndexedTensor objects");
     // Get the TypeSeq of VectorIndexIdMaps describing all the indices which appear in the calculation.
     using AllIndexIdMaps = type_seq_cat_t<typename IndexedTensorType::index_pattern...>;
@@ -203,9 +202,9 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             0,
             std::tuple<typename IndexedTensorType::tensor_type::element_type...>>;
     static_assert(
-            std::conjunction_v<std::is_same<
-                    typename IndexedTensorType::tensor_type::element_type,
-                    ElementType>...>,
+            (std::is_same_v<
+                     typename IndexedTensorType::tensor_type::element_type,
+                     ElementType> && ...),
             "All tensors must have the same element type");
     using ResultIndexTypeSeq = non_repeated_indices_t<AllIndexIdMaps>;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
