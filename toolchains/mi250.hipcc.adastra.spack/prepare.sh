@@ -45,7 +45,7 @@ echo "Preparing the Spack environment..."
 PRODUCT_SPEC_LIST="
 ninja%gcc arch=linux-rhel8-zen3
 libyaml%gcc arch=linux-rhel8-zen3
-paraconf%gcc~shared arch=linux-rhel8-zen3
+paraconf%gcc arch=linux-rhel8-zen3
 pdi%gcc+python arch=linux-rhel8-zen3
 pdiplugin-decl-hdf5%gcc arch=linux-rhel8-zen3
 pdiplugin-set-value%gcc arch=linux-rhel8-zen3
