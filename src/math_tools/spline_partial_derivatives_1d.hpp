@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * @file spline_partial_derivatives.hpp
+ * @file spline_partial_derivatives_1d.hpp
  * File containing functions to compute the partial derivatives from a spline interpolation.
  */
 
