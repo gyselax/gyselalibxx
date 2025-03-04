@@ -6,7 +6,8 @@ This folder contains mathematical classes and functions.
 
 Functions for calculating derivatives with different methods:
 
-- `partial_derivatives.hpp` : calculate derivatives using spline interpolation
+- `spline_partial_derivatives.hpp` : calculate derivatives using spline interpolation
+- `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method. At the boundary, order one left and right FDM derivatives are used
 
 ## Utility tools
 
