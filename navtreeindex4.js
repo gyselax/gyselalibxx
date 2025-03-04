@@ -227,6 +227,12 @@ var NAVTREEINDEX4 =
 "classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[15,203,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html":[15,1,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[15,1,2,0],
+"classtensor__tools_1_1IndexedTensor.html":[15,6,4],
+"classtensor__tools_1_1IndexedTensor.html#a3a4979a7a7ef6e30e2818d6d48e61c00":[15,6,4,1],
+"classtensor__tools_1_1IndexedTensor.html#a3de570a42eca6f3872f3817a1a6f3ac4":[15,6,4,3],
+"classtensor__tools_1_1IndexedTensor.html#a9b1aa0cb99b47fe5ea64752e79c6d30a":[15,6,4,0],
+"classtensor__tools_1_1IndexedTensor.html#aa64e4beab28845e03a3f7fe9fcd50f88":[15,6,4,4],
+"classtensor__tools_1_1IndexedTensor.html#adc2f44bbee1b54e63cfc68a08ff8f632":[15,6,4,2],
 "collision__common__configuration_8hpp_source.html":[16,0,1,0],
 "collision__configuration_8hpp_source.html":[16,0,4,0,0],
 "collision__operator_8hpp_source.html":[16,0,1,1],
@@ -243,11 +249,5 @@ var NAVTREEINDEX4 =
 "ddc__aliases_8hpp_source.html":[16,0,20,2],
 "ddc__helper_8hpp_source.html":[16,0,20,3],
 "deriv__details_8hpp_source.html":[16,0,2,0],
-"derivative__field_8hpp_source.html":[16,0,2,1],
-"derivative__field__common_8hpp_source.html":[16,0,2,2],
-"derivative__field__mem_8hpp_source.html":[16,0,2,3],
-"diocotron__initialisation__equilibrium_8hpp_source.html":[16,0,3,3,0],
-"dir_0b94a1bc260289a82ecb53162f2bb9d0.html":[16,0,3,1],
-"dir_115e60596e2d00727777ec90d6d12217.html":[16,0,16],
-"dir_12b80a83f8a0fcf90cd05b166ef8bdf1.html":[16,0,11]
+"derivative__field_8hpp_source.html":[16,0,2,1]
 };

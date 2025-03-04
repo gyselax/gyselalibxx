@@ -89,20 +89,22 @@ var annotated =
       [ "X", "structphysical__geometry_1_1X.html", "structphysical__geometry_1_1X" ],
       [ "Y", "structphysical__geometry_1_1Y.html", "structphysical__geometry_1_1Y" ]
     ] ],
-    [ "tensor_tools", null, [
-      [ "GetContravariantDims", "structtensor__tools_1_1GetContravariantDims.html", null ],
-      [ "GetContravariantDims< VectorIndexSet< Dims... > >", "structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html", "structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" ],
-      [ "GetCovariantDims", "structtensor__tools_1_1GetCovariantDims.html", null ],
-      [ "GetCovariantDims< VectorIndexSet< Dims... > >", "structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html", "structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" ],
-      [ "is_contravariant_vector_index_set", "structtensor__tools_1_1is__contravariant__vector__index__set.html", null ],
+    [ "tensor_tools", "namespacetensor__tools.html", [
+      [ "GetContravariantDims", "namespacetensor__tools.html#structtensor__tools_1_1GetContravariantDims", null ],
+      [ "GetContravariantDims< VectorIndexSet< Dims... > >", "namespacetensor__tools.html#structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4", "namespacetensor__tools_structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_dup" ],
+      [ "GetCovariantDims", "namespacetensor__tools.html#structtensor__tools_1_1GetCovariantDims", null ],
+      [ "GetCovariantDims< VectorIndexSet< Dims... > >", "namespacetensor__tools.html#structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4", "namespacetensor__tools_structtensor__tools_1_1GetCovariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_dup" ],
+      [ "IndexedTensor", "classtensor__tools_1_1IndexedTensor.html", "classtensor__tools_1_1IndexedTensor" ],
+      [ "is_contravariant_vector_index_set", "namespacetensor__tools.html#structtensor__tools_1_1is__contravariant__vector__index__set", null ],
       [ "is_contravariant_vector_index_set< VectorIndexSet< Dims... > >", "structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html", null ],
-      [ "is_covariant_vector_index_set", "structtensor__tools_1_1is__covariant__vector__index__set.html", null ],
+      [ "is_covariant_vector_index_set", "namespacetensor__tools.html#structtensor__tools_1_1is__covariant__vector__index__set", null ],
       [ "is_covariant_vector_index_set< VectorIndexSet< Dims... > >", "structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html", null ],
       [ "is_vector_index_set", "structtensor__tools_1_1is__vector__index__set.html", null ],
       [ "is_vector_index_set< VectorIndexSet< Dims... > >", "structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html", null ],
-      [ "TensorIndexElement", "classtensor__tools_1_1TensorIndexElement.html", null ],
-      [ "vector_index_set_dual", "structtensor__tools_1_1vector__index__set__dual.html", null ],
-      [ "vector_index_set_dual< VectorIndexSet< Dims... > >", "structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html", "structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" ]
+      [ "TensorIndexElement", "namespacetensor__tools.html#classtensor__tools_1_1TensorIndexElement", null ],
+      [ "vector_index_set_dual", "namespacetensor__tools.html#structtensor__tools_1_1vector__index__set__dual", null ],
+      [ "vector_index_set_dual< VectorIndexSet< Dims... > >", "namespacetensor__tools.html#structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4", "namespacetensor__tools_structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_dup" ],
+      [ "VectorIndexIdMap", "structtensor__tools_1_1VectorIndexIdMap.html", "structtensor__tools_1_1VectorIndexIdMap" ]
     ] ],
     [ "AdvectionField_decentred_rotation", "classAdvectionField__decentred__rotation.html", "classAdvectionField__decentred__rotation" ],
     [ "AdvectionField_rotation", "classAdvectionField__rotation.html", "classAdvectionField__rotation" ],

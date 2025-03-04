@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['neumann_5fspline_5fquadrature_2ehpp_0',['neumann_spline_quadrature.hpp',['../neumann__spline__quadrature_8hpp.html',1,'']]]
+  ['l_5fnorm_5ftools_2ehpp_0',['l_norm_tools.hpp',['../l__norm__tools_8hpp.html',1,'']]]
 ];

@@ -175,10 +175,10 @@ $(document).ready(function(){initNavTree('fft__poisson__solver_8hpp_source.html'
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... FDim&gt;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    KOKKOS_FUNCTION <span class="keyword">static</span> <span class="keywordtype">double</span> get_laplace_operator(Idx&lt;FDim...&gt; index)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    KOKKOS_FUNCTION <span class="keyword">static</span> <span class="keywordtype">double</span> get_laplace_operator(Idx&lt;FDim...&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>)</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> (((<span class="keywordtype">double</span>)ddc::coordinate(ddc::select&lt;FDim&gt;(index))</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                 * (<span class="keywordtype">double</span>)ddc::coordinate(ddc::select&lt;FDim&gt;(index)))</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> (((<span class="keywordtype">double</span>)ddc::coordinate(ddc::select&lt;FDim&gt;(<a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>))</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                 * (<span class="keywordtype">double</span>)ddc::coordinate(ddc::select&lt;FDim&gt;(<a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>)))</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                + ...);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
@@ -369,6 +369,7 @@ $(document).ready(function(){initNavTree('fft__poisson__solver_8hpp_source.html'
 <div class="ttc" id="aclassFFTPoissonSolver_html"><div class="ttname"><a href="classFFTPoissonSolver.html">FFTPoissonSolver</a></div><div class="ttdoc">See FFTPoissonSolverImplementation.</div><div class="ttdef"><b>Definition</b> fft_poisson_solver.hpp:20</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition</b> ipoisson_solver.hpp:10</div></div>
 <div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:66</div></div>
+<div class="ttc" id="aindexed__tensor_8hpp_html_a749270ceff141fbe4c41761f587a9647"><div class="ttname"><a href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a></div><div class="ttdeci">KOKKOS_FUNCTION auto index(TensorType &amp;tensor)</div><div class="ttdoc">A tool to build an IndexedTensor object from a set of indices.</div><div class="ttdef"><b>Definition</b> indexed_tensor.hpp:171</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

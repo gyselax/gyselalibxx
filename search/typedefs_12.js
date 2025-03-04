@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_0',['Y',['../classIPolarFootFinder.html#a8950c7d66868672cff1dd4675874efb3',1,'IPolarFootFinder']]]
+  ['x_0',['X',['../classIPolarFootFinder.html#aad57064cce5dd59aabb33fc778f42010',1,'IPolarFootFinder']]]
 ];

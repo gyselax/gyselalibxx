@@ -2,7 +2,7 @@ var searchData=
 [
   ['t_0',['T',['../structT.html',1,'']]],
   ['tensor_1',['Tensor',['../classTensor.html',1,'']]],
-  ['tensorindexelement_2',['TensorIndexElement',['../classtensor__tools_1_1TensorIndexElement.html',1,'tensor_tools']]],
+  ['tensorindexelement_2',['TensorIndexElement',['../namespacetensor__tools.html#classtensor__tools_1_1TensorIndexElement',1,'tensor_tools']]],
   ['theta_3',['theta',['../structGEOM__NAMESPACE__NAME_1_1Theta.html',1,'GEOM_NAMESPACE_NAME::Theta'],['../structTheta.html',1,'Theta']]],
   ['theta_5fcov_4',['theta_cov',['../structGEOM__NAMESPACE__NAME_1_1Theta__cov.html',1,'GEOM_NAMESPACE_NAME::Theta_cov'],['../structTheta__cov.html',1,'Theta_cov']]],
   ['thetabasissubset_5',['ThetaBasisSubset',['../classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1ThetaBasisSubset',1,'PolarSplineFEMPoissonLikeSolver']]],
