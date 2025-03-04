@@ -49,8 +49,8 @@ auto get_vector_tuple(TupleType input_args, std::integer_sequence<size_t, I...>)
  */
 template <class T, class... Args>
 void PDI_get_arrays(
-        std::string event_name,
-        std::string name,
+        std::string const& event_name,
+        std::string const& name,
         std::vector<T>& out_vector,
         Args&... input_args)
 {
