@@ -10,6 +10,7 @@
 
 #include "quadrature.hpp"
 #include "vector_field.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * @brief Compute the infinity norm.
@@ -131,10 +132,14 @@ inline double norm_inf(
  * @param[in] function The function whose norm is calculated.
  * @return A double containing the value of the infinity norm.
  */
-template <class ExecSpace, class ElementType, class IdxRange, class NDTag>
+template <class ExecSpace, class ElementType, class IdxRange, class VectorIndexSetType>
 inline double norm_inf(
         ExecSpace exec_space,
-        VectorConstField<ElementType, IdxRange, NDTag, typename ExecSpace::memory_space> function)
+        VectorConstField<
+                ElementType,
+                IdxRange,
+                VectorIndexSetType,
+                typename ExecSpace::memory_space> function)
 {
     return detail::norm_inf(exec_space, function);
 }
@@ -162,12 +167,19 @@ inline double error_norm_inf(
  * @param[in] exact_function The exact function with which the calculated function is compared.
  * @return A double containing the value of the infinity norm.
  */
-template <class ExecSpace, class ElementType, class IdxRange, class NDTag>
+template <class ExecSpace, class ElementType, class IdxRange, class VectorIndexSetType>
 inline double error_norm_inf(
         ExecSpace exec_space,
-        VectorConstField<ElementType, IdxRange, NDTag, typename ExecSpace::memory_space> function,
-        VectorConstField<ElementType, IdxRange, NDTag, typename ExecSpace::memory_space>
-                exact_function)
+        VectorConstField<
+                ElementType,
+                IdxRange,
+                VectorIndexSetType,
+                typename ExecSpace::memory_space> function,
+        VectorConstField<
+                ElementType,
+                IdxRange,
+                VectorIndexSetType,
+                typename ExecSpace::memory_space> exact_function)
 {
     return detail::error_norm_inf(exec_space, function, exact_function);
 }

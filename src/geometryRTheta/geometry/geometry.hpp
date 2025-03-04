@@ -348,24 +348,27 @@ using IdxPolarBspl = Idx<PolarBSplinesRTheta>;
 
 // --- VectorFieldMem definitions
 template <class Dim1, class Dim2>
-using DVectorFieldMemRTheta = VectorFieldMem<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using DVectorFieldMemRTheta = VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DConstVectorFieldRTheta = VectorConstField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>>;
+using DConstVectorFieldRTheta
+        = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffsMem2D = VectorFieldMem<double, IdxRangeBSRTheta, NDTag<Dim1, Dim2>>;
+using VectorSplineCoeffsMem2D
+        = VectorFieldMem<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using VectorSplineCoeffs2D = VectorField<double, IdxRangeBSRTheta, NDTag<Dim1, Dim2>>;
+using VectorSplineCoeffs2D = VectorField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using ConstVectorSplineCoeffs2D = VectorConstField<double, IdxRangeBSRTheta, NDTag<Dim1, Dim2>>;
+using ConstVectorSplineCoeffs2D
+        = VectorConstField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 
 

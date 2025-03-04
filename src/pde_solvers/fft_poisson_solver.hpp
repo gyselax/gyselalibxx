@@ -163,7 +163,7 @@ private:
             VectorField<
                     double,
                     laplacian_idx_range_type,
-                    NDTag<Dims...>,
+                    VectorIndexSet<Dims...>,
                     memory_space,
                     layout_space> gradient,
             fourier_field_type fourier_derivative,
