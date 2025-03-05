@@ -334,7 +334,7 @@ struct GetNthTensorIndexElementFromMap<
             get_contravariant_dims_t<typename ValidIndex::possible_idx_values>>;
     static constexpr std::size_t RelevantElemIdx
             = ddc::type_seq_rank_v<ContraValidIndex, unique_indices_t<TypeSeqVectorIndexIdMap>>;
-    using RelevantElem = typename StartElement::index_on_dim_t<RelevantElemIdx>;
+    using RelevantElem = typename StartElement::template index_on_dim_t<RelevantElemIdx>;
     using Elem = std::conditional_t<
             is_contravariant_vector_index_set_v<typename ValidIndex::possible_idx_values>,
             RelevantElem,
@@ -370,7 +370,7 @@ struct ExtractSubTensorElement<
 {
     using type = TensorIndexElement<
             ddc::detail::TypeSeq<typename ValidIndex::possible_idx_values...>,
-            typename GlobalTensorIndexElement::index_on_dim_t<
+            typename GlobalTensorIndexElement::template index_on_dim_t<
                     ddc::type_seq_rank_v<ValidIndex, TypeSeqVectorIndexIdMapGlobal>>...>;
 };
 
