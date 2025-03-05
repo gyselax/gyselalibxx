@@ -38,7 +38,7 @@ namespace {
  * @param[in] TOL A tolerance threshold above which the error is considered
  * 				to be sufficiently small.
  *
- * @see SplineInterpolatorRTheta
+ * @see SplineInterpolator2D
  */
 template <class Function>
 void Interpolation_on_random_coord(
@@ -137,7 +137,7 @@ void Interpolation_on_random_coord(
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    SplineInterpolator2D interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
     // Compare the obtained values with the exact function. ----------------------------------
@@ -252,7 +252,7 @@ namespace fs = std::filesystem;
  *
  * @param[in] The path to the grid_size.yaml file.
  *
- * @see SplineInterpolatorRTheta
+ * @see SplineInterpolator2D
  * @tag Spline_interpolator_polar_test
  */
 int main(int argc, char** argv)

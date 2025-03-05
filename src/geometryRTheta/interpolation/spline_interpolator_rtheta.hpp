@@ -10,7 +10,7 @@
  * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
  */
 template <class Spline2DBuilder, class Spline2DEvaluator>
-class SplineInterpolatorRTheta
+class SplineInterpolator2D
     : public IInterpolator2D<
               typename Spline2DBuilder::interpolation_domain_type,
               typename Spline2DBuilder::batched_interpolation_domain_type>
@@ -43,7 +43,7 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolatorRTheta(Spline2DBuilder const& builder, Spline2DEvaluator const& evaluator)
+    SplineInterpolator2D(Spline2DBuilder const& builder, Spline2DEvaluator const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(get_spline_idx_range(builder))
@@ -75,10 +75,10 @@ public:
 
 
 /**
- * @brief A class which stores information necessary to create a pointer to an instance of the SplineInterpolatorRTheta class.
+ * @brief A class which stores information necessary to create a pointer to an instance of the SplineInterpolator2D class.
  *
- * This class allows an instance of the SplineInterpolatorRTheta class where necessary. This allows the
- * memory allocated in the private members of the SplineInterpolatorRTheta to be freed when the object is not in use.
+ * This class allows an instance of the SplineInterpolator2D class where necessary. This allows the
+ * memory allocated in the private members of the SplineInterpolator2D to be freed when the object is not in use.
  * These objects are: m_coefs.
  */
 template <class Spline2DBuilder, class Spline2DEvaluator>
@@ -94,7 +94,7 @@ private:
 
 public:
     /**
-     * @brief Create an object capable of creating SplineInterpolatorRTheta objects.
+     * @brief Create an object capable of creating SplineInterpolator2D objects.
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
@@ -107,17 +107,16 @@ public:
     }
 
     /**
-     * Create a pointer to an instance of the SplineInterpolatorRTheta class.
+     * Create a pointer to an instance of the SplineInterpolator2D class.
      *
-     * @return A pointer to an instance of the SplineInterpolatorRTheta class.
+     * @return A pointer to an instance of the SplineInterpolator2D class.
      */
     std::unique_ptr<IInterpolator2D<
             typename Spline2DBuilder::interpolation_domain_type,
             typename Spline2DBuilder::batched_interpolation_domain_type>>
     preallocate() const override
     {
-        return std::make_unique<SplineInterpolatorRTheta<
-                Spline2DBuilder,
-                Spline2DEvaluator>>(m_builder, m_evaluator);
+        return std::make_unique<
+                SplineInterpolator2D<Spline2DBuilder, Spline2DEvaluator>>(m_builder, m_evaluator);
     }
 };
