@@ -77,7 +77,7 @@ public:
 /**
  * @brief A class which stores information necessary to create a pointer to an instance of the SplineInterpolator2D class.
  *
- * This class allows an instance of the SplineInterpolator2D class where necessary. This allows the
+ * This class allows an instance of the SplineInterpolator2D class to be instantiated where necessary. This allows the
  * memory allocated in the private members of the SplineInterpolator2D to be freed when the object is not in use.
  * These objects are: m_coefs.
  */
