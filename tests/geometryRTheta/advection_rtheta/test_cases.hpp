@@ -11,7 +11,6 @@
 #include "params.yaml.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "spline_interpolator_rtheta.hpp"
 
 /*
  *  This file defines

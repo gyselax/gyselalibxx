@@ -7,16 +7,17 @@ target_link_libraries(vortex_merger
     PUBLIC
         DDC::core
         DDC::pdi
+
         paraconf::paraconf
+
         PDI::pdi
 
         Eigen3::Eigen
 
-
         gslx::advection_RTheta
         gslx::geometry_RTheta
         gslx::io
-        gslx::interpolation_RTheta
+        gslx::interpolation
         gslx::paraconfpp
         gslx::poisson_RTheta
         gslx::quadrature
