@@ -4,10 +4,10 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
-#include "i_interpolator_rtheta.hpp"
+#include "i_interpolator_2d.hpp"
 #include "iadvection_rtheta.hpp"
 #include "metric_tensor_evaluator.hpp"
-#include "spline_interpolator_rtheta.hpp"
+#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -54,7 +54,23 @@ template <class FootFinder, class Mapping>
 class BslAdvectionRTheta : public IAdvectionRTheta
 {
 private:
-    PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& m_interpolator;
+    /// The type of the 2D Spline Evaluator used by this class
+    using evaluator_type = ddc::SplineEvaluator2D<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesTheta,
+            GridR,
+            GridTheta,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            GridR,
+            GridTheta>;
+    using PreallocatableSplineInterpolatorType
+            = PreallocatableSplineInterpolator2D<SplineRThetaBuilder, evaluator_type>;
+    PreallocatableSplineInterpolatorType const& m_interpolator;
 
     FootFinder const& m_find_feet;
 
@@ -78,8 +94,7 @@ public:
      *      A child class of IFootFinder.
      */
     BslAdvectionRTheta(
-            PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
-                    function_interpolator,
+            PreallocatableSplineInterpolatorType const& function_interpolator,
             FootFinder const& foot_finder,
             Mapping const& mapping)
         : m_interpolator(function_interpolator)
@@ -110,7 +125,8 @@ public:
             double dt) const override
     {
         // Pre-allocate some memory to prevent allocation later in loop
-        std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
+        std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeRTheta>> const interpolator_ptr
+                = m_interpolator.preallocate();
 
         // Initialise the feet
         FieldMemRTheta<CoordRTheta> feet_rtheta_alloc(get_idx_range(advection_field_xy));

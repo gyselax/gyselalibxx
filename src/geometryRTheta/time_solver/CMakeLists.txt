@@ -10,7 +10,6 @@ target_link_libraries(time_integration_RTheta
     INTERFACE
         DDC::core
         Eigen3::Eigen
-        gslx::interpolation_RTheta
         gslx::geometry_RTheta
         gslx::poisson_RTheta
         gslx::advection_RTheta
