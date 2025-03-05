@@ -53,6 +53,8 @@ public:
     * if required, i.e. if not already computed by the other dimension than DimOfInterest.
     *
     * @param[in] field_values The field to be used to compute spline coefficients.
+    *
+    * @return The spline coefficients updated if required.
     */
     template <class DimOfInterest>
     DConstFieldSplineCoeffs compute_coeffs(DConstField<IdxRangeField> field_values)
