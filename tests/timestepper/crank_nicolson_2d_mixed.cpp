@@ -9,10 +9,10 @@
 #include <gtest/gtest.h>
 
 #include "crank_nicolson.hpp"
-#include "directional_tag.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 using namespace ddc;
 
@@ -55,11 +55,11 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
     using IdxRangeY = IdxRange<GridY>;
     using IdxXY = Idx<GridX, GridY>;
     using IdxRangeXY = IdxRange<GridX, GridY>;
-    using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>>;
+    using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, VectorIndexSet<X, Y>>>;
     using CFieldMemXY = host_t<FieldMem<CoordXY, IdxRangeXY>>;
     using Method = CrankNicolson<CFieldMemXY, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>;
-    using AdvectionField = host_t<VectorField<double, IdxRangeXY, NDTag<X, Y>>>;
-    using ConstAdvectionField = host_t<VectorConstField<double, IdxRangeXY, NDTag<X, Y>>>;
+    using AdvectionField = host_t<VectorField<double, IdxRangeXY, VectorIndexSet<X, Y>>>;
+    using ConstAdvectionField = host_t<VectorConstField<double, IdxRangeXY, VectorIndexSet<X, Y>>>;
 
     CoordX x_min(-1.0);
     CoordX x_max(1.0);
@@ -162,12 +162,12 @@ void CrankNicolson2DOrderMixedTypesTest()
     using IdxRangeY = IdxRange<GridY>;
     using IdxXY = Idx<GridX, GridY>;
     using IdxRangeXY = IdxRange<GridX, GridY>;
-    using AdvectionFieldMem = VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>;
+    using AdvectionFieldMem = VectorFieldMem<double, IdxRangeXY, VectorIndexSet<X, Y>>;
     using CFieldMemXY = FieldMem<CoordXY, IdxRangeXY>;
     using CFieldXY = Field<CoordXY, IdxRangeXY>;
     using Method = CrankNicolson<CFieldMemXY, AdvectionFieldMem>;
-    using AdvectionField = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
-    using ConstAdvectionField = VectorConstField<double, IdxRangeXY, NDTag<X, Y>>;
+    using AdvectionField = VectorField<double, IdxRangeXY, VectorIndexSet<X, Y>>;
+    using ConstAdvectionField = VectorConstField<double, IdxRangeXY, VectorIndexSet<X, Y>>;
 
     CoordX x_min(-1.0);
     CoordX x_max(1.0);

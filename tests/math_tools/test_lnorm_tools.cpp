@@ -6,10 +6,10 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "directional_tag.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 
@@ -52,10 +52,10 @@ using CoordY = Coord<Y>;
 using CoordXY = Coord<X, Y>;
 
 using DFieldMemXY = DFieldMem<IdxRangeXY>;
-using DVectorFieldMemXY = VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>;
+using DVectorFieldMemXY = VectorFieldMem<double, IdxRangeXY, VectorIndexSet<X, Y>>;
 
 using DFieldXY = DField<IdxRangeXY>;
-using DVectorFieldXY = VectorField<double, IdxRangeXY, NDTag<X, Y>>;
+using DVectorFieldXY = VectorField<double, IdxRangeXY, VectorIndexSet<X, Y>>;
 
 template <class Grid1D>
 KOKKOS_FUNCTION typename Grid1D::continuous_element_type get_coordinate(Idx<Grid1D> x)

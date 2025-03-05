@@ -5,9 +5,9 @@
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 
 // GRIDS -----------------------------------------------------------------------------------------
@@ -65,21 +65,21 @@ template <class Patch>
 using DVectorFieldMemOnPatch = VectorFieldMem<
         double,
         typename Patch::IdxRange12,
-        NDTag<typename Patch::Dim1, typename Patch::Dim2>>;
+        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
 
 /// @brief A VectorField defined on the Patch's 2D logical domain.
 template <class Patch>
 using DVectorFieldOnPatch = VectorField<
         double,
         typename Patch::IdxRange12,
-        NDTag<typename Patch::Dim1, typename Patch::Dim2>>;
+        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
 
 /// @brief A ConstVectorField defined on the Patch's 2D logical domain.
 template <class Patch>
 using DVectorConstFieldOnPatch = VectorConstField<
         double,
         typename Patch::IdxRange12,
-        NDTag<typename Patch::Dim1, typename Patch::Dim2>>;
+        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
 
 // IDX, IDXRANGE ---------------------------------------------------------------------------------
 
