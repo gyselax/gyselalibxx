@@ -36,7 +36,7 @@ struct FindGrid<Dim, ddc::detail::TypeSeq<HeadGrid, Grids...>>
     using type = std::conditional_t<
             std::is_same_v<typename HeadGrid::continuous_dimension_type, Dim>,
             HeadGrid,
-            FindGrid<Dim, ddc::detail::TypeSeq<Grids...>>>;
+            typename FindGrid<Dim, ddc::detail::TypeSeq<Grids...>>::type>;
 };
 
 template <class Dim>
