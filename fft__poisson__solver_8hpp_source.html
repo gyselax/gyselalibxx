@@ -114,8 +114,8 @@ $(document).ready(function(){initNavTree('fft__poisson__solver_8hpp_source.html'
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;ddc_alias_inline_functions.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;ddc_aliases.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;ddc_helper.hpp&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;directional_tag.hpp&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;ipoisson_solver.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;ipoisson_solver.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;vector_index_tools.hpp&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">class </span>IdxRangeLaplacian,</div>
@@ -214,7 +214,7 @@ $(document).ready(function(){initNavTree('fft__poisson__solver_8hpp_source.html'
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <a class="code hl_class" href="classVectorField.html">VectorField</a>&lt;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    <span class="keywordtype">double</span>,</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    laplacian_idx_range_type,</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                    NDTag&lt;Dims...&gt;,</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                    VectorIndexSet&lt;Dims...&gt;,</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    memory_space,</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                    layout_space&gt; gradient,</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            fourier_field_type fourier_derivative,</div>
@@ -368,7 +368,7 @@ $(document).ready(function(){initNavTree('fft__poisson__solver_8hpp_source.html'
 <div class="ttc" id="aclassFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_html_af83b239c2f9ffce4663b0210488b5cc0"><div class="ttname"><a href="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.html#af83b239c2f9ffce4663b0210488b5cc0">FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::laplacian_idx_range_type</a></div><div class="ttdeci">typename base_type::laplacian_idx_range_type laplacian_idx_range_type</div><div class="ttdoc">The type of the index range on which the equation is defined.</div><div class="ttdef"><b>Definition</b> fft_poisson_solver.hpp:72</div></div>
 <div class="ttc" id="aclassFFTPoissonSolver_html"><div class="ttname"><a href="classFFTPoissonSolver.html">FFTPoissonSolver</a></div><div class="ttdoc">See FFTPoissonSolverImplementation.</div><div class="ttdef"><b>Definition</b> fft_poisson_solver.hpp:20</div></div>
 <div class="ttc" id="aclassIPoissonSolver_html"><div class="ttname"><a href="classIPoissonSolver.html">IPoissonSolver</a></div><div class="ttdef"><b>Definition</b> ipoisson_solver.hpp:10</div></div>
-<div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:66</div></div>
+<div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:78</div></div>
 <div class="ttc" id="aindexed__tensor_8hpp_html_a749270ceff141fbe4c41761f587a9647"><div class="ttname"><a href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a></div><div class="ttdeci">KOKKOS_FUNCTION auto index(TensorType &amp;tensor)</div><div class="ttdoc">A tool to build an IndexedTensor object from a set of indices.</div><div class="ttdef"><b>Definition</b> indexed_tensor.hpp:171</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

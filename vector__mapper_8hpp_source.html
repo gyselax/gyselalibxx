@@ -109,9 +109,9 @@ $(document).ready(function(){initNavTree('vector__mapper_8hpp_source.html',''); 
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// SPDX-License-Identifier: MIT</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;directional_tag.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;vector_field.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;vector_field_mem.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;vector_field.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;vector_field_mem.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;vector_index_tools.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;view.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> InVectorSpace, <span class="keyword">class</span> OutVectorSpace, <span class="keyword">class</span> Mapping, <span class="keyword">class</span> ExecSpace&gt;</div>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('vector__mapper_8hpp_source.html',''); 
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> XIn, <span class="keyword">class</span> YIn, <span class="keyword">class</span> XOut, <span class="keyword">class</span> YOut, <span class="keyword">class</span> Mapping, <span class="keyword">class</span> ExecSpace&gt;</div>
 <div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classVectorMapper.html">VectorMapper</a>&lt;NDTag&lt;XIn, YIn&gt;, NDTag&lt;XOut, YOut&gt;, Mapping, ExecSpace&gt;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classVectorMapper.html">VectorMapper</a>&lt;VectorIndexSet&lt;XIn, YIn&gt;, VectorIndexSet&lt;XOut, YOut&gt;, Mapping, ExecSpace&gt;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">static_assert</span>(is_accessible_v&lt;ExecSpace, Mapping&gt;);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">static_assert</span>(</div>
@@ -130,115 +130,120 @@ $(document).ready(function(){initNavTree('vector__mapper_8hpp_source.html',''); 
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            || (std::is_same_v&lt;Coord&lt;XOut, YOut&gt;, <span class="keyword">typename</span> Mapping::CoordResult&gt;));</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a22e3f4154a1fee0447f72eb41f238eb3">   38</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a22e3f4154a1fee0447f72eb41f238eb3">memory_space</a> = <span class="keyword">typename</span> ExecSpace::memory_space;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a6619429f4a45d957a5b821f76ab7ed35">   38</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a6619429f4a45d957a5b821f76ab7ed35">memory_space</a> = <span class="keyword">typename</span> ExecSpace::memory_space;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    Mapping m_mapping;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#af340c2a705c78bd00f7928744898abbf">   48</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#af340c2a705c78bd00f7928744898abbf">VectorMapper</a>(Mapping mapping) : m_mapping(mapping) {}</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#ab036919c0c99391dbe70caf3f6524486">   48</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#ab036919c0c99391dbe70caf3f6524486">VectorMapper</a>(Mapping mapping) : m_mapping(mapping) {}</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">template</span> &lt;<span class="keyword">class</span> IdxRangeType, <span class="keyword">class</span> LayoutStr<span class="keywordtype">id</span>edPolicy1, <span class="keyword">class</span> LayoutStr<span class="keywordtype">id</span>edPolicy2&gt;</div>
 <div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a47677a0e696c7f9eb9f254f4a92bde73">   59</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a47677a0e696c7f9eb9f254f4a92bde73">operator()</a>(</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a787c7ed77c430264e17d73ee15802098">   59</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a787c7ed77c430264e17d73ee15802098">operator()</a>(</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            ExecSpace exec_space,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <a class="code hl_class" href="classVectorField.html">VectorField</a>&lt;<span class="keywordtype">double</span>, IdxRangeType, NDTag&lt;XOut, YOut&gt;, <a class="code hl_typedef" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a22e3f4154a1fee0447f72eb41f238eb3">memory_space</a>, LayoutStridedPolicy1&gt;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    vector_field_output,</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <a class="code hl_class" href="classVectorField.html">VectorConstField</a>&lt;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    <span class="keywordtype">double</span>,</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                    IdxRangeType,</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    NDTag&lt;XIn, YIn&gt;,</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <a class="code hl_typedef" href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a22e3f4154a1fee0447f72eb41f238eb3">memory_space</a>,</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                    LayoutStridedPolicy2&gt; vector_field_input)</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keyword">using </span>IdxType = <span class="keyword">typename</span> IdxRangeType::discrete_element_type;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        Mapping mapping_proxy = m_mapping;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;Coord&lt;XIn, YIn&gt;, <span class="keyword">typename</span> Mapping::CoordArg&gt;) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            ddc::parallel_for_each(</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                    exec_space,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                    get_idx_range(vector_field_input),</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    KOKKOS_LAMBDA(IdxType idx) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                        Matrix_2x2 map_J;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                        mapping_proxy.jacobian_matrix(ddc::coordinate(idx), map_J);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                        Coord&lt;XOut, YOut&gt; vector_out;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                        ddcHelper::get&lt;XOut&gt;(vector_field_output)(idx) = ddc::get&lt;XOut&gt;(vector_out);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                        ddcHelper::get&lt;YOut&gt;(vector_field_output)(idx) = ddc::get&lt;YOut&gt;(vector_out);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    });</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <a class="code hl_class" href="classInverseJacobianMatrix.html">InverseJacobianMatrix&lt;Mapping, ddc::coordinate_of_t&lt;IdxType&gt;</a>&gt; inv_mapping(m_mapping);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            ddc::parallel_for_each(</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    exec_space,</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    get_idx_range(vector_field_input),</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    KOKKOS_LAMBDA(IdxType idx) {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                        Matrix_2x2 map_J = inv_mapping(ddc::coordinate(idx));</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                        Coord&lt;XOut, YOut&gt; vector_out;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                        <span class="comment">// mat_vec_mul should be replaced with a tensor calculus function</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                        <span class="comment">// when map_J is stored in a Tensor</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                        vector_out.array() = mat_vec_mul(</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                                map_J,</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                                ddcHelper::to_coord(vector_field_input(idx)).array());</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                        ddcHelper::get&lt;XOut&gt;(vector_field_output)(idx) = ddc::get&lt;XOut&gt;(vector_out);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                        ddcHelper::get&lt;YOut&gt;(vector_field_output)(idx) = ddc::get&lt;YOut&gt;(vector_out);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    });</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        }</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <a class="code hl_class" href="classVectorField.html">VectorField</a>&lt;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    <span class="keywordtype">double</span>,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    IdxRangeType,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    VectorIndexSet&lt;XOut, YOut&gt;,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                    <a class="code hl_typedef" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a6619429f4a45d957a5b821f76ab7ed35">memory_space</a>,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    LayoutStridedPolicy1&gt; vector_field_output,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <a class="code hl_class" href="classVectorField.html">VectorConstField</a>&lt;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                    <span class="keywordtype">double</span>,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                    IdxRangeType,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    VectorIndexSet&lt;XIn, YIn&gt;,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                    <a class="code hl_typedef" href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a6619429f4a45d957a5b821f76ab7ed35">memory_space</a>,</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                    LayoutStridedPolicy2&gt; vector_field_input)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">using </span>IdxType = <span class="keyword">typename</span> IdxRangeType::discrete_element_type;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        Mapping mapping_proxy = m_mapping;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;Coord&lt;XIn, YIn&gt;, <span class="keyword">typename</span> Mapping::CoordArg&gt;) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            ddc::parallel_for_each(</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    exec_space,</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    get_idx_range(vector_field_input),</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                    KOKKOS_LAMBDA(IdxType idx) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        Matrix_2x2 map_J;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                        mapping_proxy.jacobian_matrix(ddc::coordinate(idx), map_J);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                        Coord&lt;XOut, YOut&gt; vector_out;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                        ddcHelper::get&lt;XOut&gt;(vector_field_output)(idx) = ddc::get&lt;XOut&gt;(vector_out);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                        ddcHelper::get&lt;YOut&gt;(vector_field_output)(idx) = ddc::get&lt;YOut&gt;(vector_out);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    });</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <a class="code hl_class" href="classInverseJacobianMatrix.html">InverseJacobianMatrix&lt;Mapping, ddc::coordinate_of_t&lt;IdxType&gt;</a>&gt; inv_mapping(m_mapping);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            ddc::parallel_for_each(</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    exec_space,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    get_idx_range(vector_field_input),</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    KOKKOS_LAMBDA(IdxType idx) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                        Matrix_2x2 map_J = inv_mapping(ddc::coordinate(idx));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                        Coord&lt;XOut, YOut&gt; vector_out;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                        <span class="comment">// mat_vec_mul should be replaced with a tensor calculus function</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                        <span class="comment">// when map_J is stored in a Tensor</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                        vector_out.array() = mat_vec_mul(</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                                map_J,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                                ddcHelper::to_coord(vector_field_input(idx)).array());</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        ddcHelper::get&lt;XOut&gt;(vector_field_output)(idx) = ddc::get&lt;XOut&gt;(vector_out);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                        ddcHelper::get&lt;YOut&gt;(vector_field_output)(idx) = ddc::get&lt;YOut&gt;(vector_out);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    });</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
 </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>};</div>
 </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keyword">template</span> &lt;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">class </span>ExecSpace,</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keyword">class </span>Mapping,</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keyword">class </span>ElementType,</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keyword">class </span>IdxRangeType,</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keyword">class </span><a class="code hl_struct" href="structX.html">X</a>,</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keyword">class </span><a class="code hl_struct" href="structY.html">Y</a>,</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keyword">class </span>LayoutStridedPolicy&gt;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">auto</span> create_geometry_mirror_view(</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        ExecSpace exec_space,</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <a class="code hl_class" href="classVectorField.html">VectorField</a>&lt;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                ElementType,</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                IdxRangeType,</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                NDTag&lt;X, Y&gt;,</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                <span class="keyword">typename</span> ExecSpace::memory_space,</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                LayoutStridedPolicy&gt; vector_field,</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        Mapping mapping)</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>{</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">using </span>CoordOut = std::conditional_t&lt;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            std::is_same_v&lt;typename Mapping::CoordArg, Coord&lt;X, Y&gt;&gt;,</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keyword">typename</span> Mapping::CoordResult,</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <span class="keyword">typename</span> Mapping::CoordArg&gt;;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;CoordOut, Coord&lt;X, Y&gt;&gt;) {</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span> vector_field;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keyword">using </span>X_out = ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;CoordOut&gt;&gt;;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keyword">using </span>Y_out = ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;CoordOut&gt;&gt;;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem</a>&lt;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                std::remove_const_t&lt;ElementType&gt;,</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                IdxRangeType,</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                NDTag&lt;X_out, Y_out&gt;,</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                vector_field_out(get_idx_range(vector_field));</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <a class="code hl_class" href="classVectorMapper.html">VectorMapper&lt;NDTag&lt;X, Y&gt;</a>, NDTag&lt;X_out, Y_out&gt;, Mapping, ExecSpace&gt; vector_mapping(mapping);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        vector_mapping(exec_space, get_field(vector_field_out), get_const_field(vector_field));</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">return</span> vector_field_out;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>}</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">template</span> &lt;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keyword">class </span>ExecSpace,</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keyword">class </span>Mapping,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keyword">class </span>ElementType,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keyword">class </span>IdxRangeType,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">class </span><a class="code hl_struct" href="structX.html">X</a>,</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keyword">class </span><a class="code hl_struct" href="structY.html">Y</a>,</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keyword">class </span>LayoutStridedPolicy&gt;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">auto</span> create_geometry_mirror_view(</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        ExecSpace exec_space,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <a class="code hl_class" href="classVectorField.html">VectorField</a>&lt;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                ElementType,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                IdxRangeType,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                VectorIndexSet&lt;X, Y&gt;,</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                <span class="keyword">typename</span> ExecSpace::memory_space,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                LayoutStridedPolicy&gt; vector_field,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        Mapping mapping)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>{</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">using </span>CoordOut = std::conditional_t&lt;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            std::is_same_v&lt;typename Mapping::CoordArg, Coord&lt;X, Y&gt;&gt;,</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keyword">typename</span> Mapping::CoordResult,</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keyword">typename</span> Mapping::CoordArg&gt;;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;CoordOut, Coord&lt;X, Y&gt;&gt;) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">return</span> vector_field;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keyword">using </span>X_out = ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;CoordOut&gt;&gt;;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keyword">using </span>Y_out = ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;CoordOut&gt;&gt;;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <a class="code hl_class" href="classVectorFieldMem.html">VectorFieldMem</a>&lt;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                std::remove_const_t&lt;ElementType&gt;,</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                IdxRangeType,</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                VectorIndexSet&lt;X_out, Y_out&gt;,</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                vector_field_out(get_idx_range(vector_field));</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_class" href="classVectorMapper.html">VectorMapper&lt;VectorIndexSet&lt;X, Y&gt;</a>, VectorIndexSet&lt;X_out, Y_out&gt;, Mapping, ExecSpace&gt;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                vector_mapping(mapping);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        vector_mapping(exec_space, get_field(vector_field_out), get_const_field(vector_field));</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">return</span> vector_field_out;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>}</div>
 <div class="ttc" id="aclassInverseJacobianMatrix_html"><div class="ttname"><a href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a></div><div class="ttdoc">A class to calculate the inverse of the Jacobian matrix.</div><div class="ttdef"><b>Definition</b> inverse_jacobian_matrix.hpp:18</div></div>
-<div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition</b> vector_field_mem.hpp:55</div></div>
-<div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:66</div></div>
-<div class="ttc" id="aclassVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4_html_a22e3f4154a1fee0447f72eb41f238eb3"><div class="ttname"><a href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a22e3f4154a1fee0447f72eb41f238eb3">VectorMapper&lt; NDTag&lt; XIn, YIn &gt;, NDTag&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;::memory_space</a></div><div class="ttdeci">typename ExecSpace::memory_space memory_space</div><div class="ttdoc">The type of the memory space where the field is saved (CPU vs GPU).</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:38</div></div>
-<div class="ttc" id="aclassVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4_html_a47677a0e696c7f9eb9f254f4a92bde73"><div class="ttname"><a href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#a47677a0e696c7f9eb9f254f4a92bde73">VectorMapper&lt; NDTag&lt; XIn, YIn &gt;, NDTag&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;::operator()</a></div><div class="ttdeci">void operator()(ExecSpace exec_space, VectorField&lt; double, IdxRangeType, NDTag&lt; XOut, YOut &gt;, memory_space, LayoutStridedPolicy1 &gt; vector_field_output, VectorConstField&lt; double, IdxRangeType, NDTag&lt; XIn, YIn &gt;, memory_space, LayoutStridedPolicy2 &gt; vector_field_input)</div><div class="ttdoc">Convert vectors defined in the input coordinate system to equivalent vectors in the output coordinate...</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:59</div></div>
-<div class="ttc" id="aclassVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4_html_af340c2a705c78bd00f7928744898abbf"><div class="ttname"><a href="classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html#af340c2a705c78bd00f7928744898abbf">VectorMapper&lt; NDTag&lt; XIn, YIn &gt;, NDTag&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;::VectorMapper</a></div><div class="ttdeci">VectorMapper(Mapping mapping)</div><div class="ttdoc">A constructor for the VectorMapper.</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:48</div></div>
+<div class="ttc" id="aclassVectorFieldMem_html"><div class="ttname"><a href="classVectorFieldMem.html">VectorFieldMem</a></div><div class="ttdoc">Pre-declaration of VectorFieldMem.</div><div class="ttdef"><b>Definition</b> vector_field_mem.hpp:56</div></div>
+<div class="ttc" id="aclassVectorField_html"><div class="ttname"><a href="classVectorField.html">VectorField</a></div><div class="ttdoc">A class which holds multiple (scalar) fields in order to represent a vector field.</div><div class="ttdef"><b>Definition</b> vector_field.hpp:78</div></div>
+<div class="ttc" id="aclassVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_html_a6619429f4a45d957a5b821f76ab7ed35"><div class="ttname"><a href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a6619429f4a45d957a5b821f76ab7ed35">VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;::memory_space</a></div><div class="ttdeci">typename ExecSpace::memory_space memory_space</div><div class="ttdoc">The type of the memory space where the field is saved (CPU vs GPU).</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:38</div></div>
+<div class="ttc" id="aclassVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_html_a787c7ed77c430264e17d73ee15802098"><div class="ttname"><a href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a787c7ed77c430264e17d73ee15802098">VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;::operator()</a></div><div class="ttdeci">void operator()(ExecSpace exec_space, VectorField&lt; double, IdxRangeType, VectorIndexSet&lt; XOut, YOut &gt;, memory_space, LayoutStridedPolicy1 &gt; vector_field_output, VectorConstField&lt; double, IdxRangeType, VectorIndexSet&lt; XIn, YIn &gt;, memory_space, LayoutStridedPolicy2 &gt; vector_field_input)</div><div class="ttdoc">Convert vectors defined in the input coordinate system to equivalent vectors in the output coordinate...</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:59</div></div>
+<div class="ttc" id="aclassVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c_html_ab036919c0c99391dbe70caf3f6524486"><div class="ttname"><a href="classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#ab036919c0c99391dbe70caf3f6524486">VectorMapper&lt; VectorIndexSet&lt; XIn, YIn &gt;, VectorIndexSet&lt; XOut, YOut &gt;, Mapping, ExecSpace &gt;::VectorMapper</a></div><div class="ttdeci">VectorMapper(Mapping mapping)</div><div class="ttdoc">A constructor for the VectorMapper.</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:48</div></div>
 <div class="ttc" id="aclassVectorMapper_html"><div class="ttname"><a href="classVectorMapper.html">VectorMapper</a></div><div class="ttdoc">The general predeclaration of VectorMapper.</div><div class="ttdef"><b>Definition</b> vector_mapper.hpp:13</div></div>
-<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:378</div></div>
-<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:398</div></div>
+<div class="ttc" id="astructX_html"><div class="ttname"><a href="structX.html">X</a></div><div class="ttdoc">Define non periodic real X dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:381</div></div>
+<div class="ttc" id="astructY_html"><div class="ttname"><a href="structY.html">Y</a></div><div class="ttdoc">Define non periodic real Y dimension.</div><div class="ttdef"><b>Definition</b> geometry.hpp:401</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

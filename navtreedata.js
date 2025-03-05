@@ -280,8 +280,8 @@ var NAVTREEINDEX =
 "classMatrix__Corner__Block.html#afd674000287386818ce4e1a149a36ef3",
 "classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b",
 "derivative__field__common_8hpp_source.html",
-"poisson__like__rhs__function_8hpp_source.html",
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a4753baa1e93d836c5aaeb8ddbf9c58d2"
+"polar__bsplines_8hpp_source.html",
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a5c42d5d066063a881abd5061ade08933"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

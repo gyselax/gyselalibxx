@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"poisson__like__rhs__function_8hpp_source.html":[16,0,3,5,1],
 "polar__bsplines_8hpp_source.html":[16,0,8,0,1],
 "polar__poisson_2params_8yaml_8hpp_source.html":[16,1,1,2,0],
 "polar__poisson_2test__cases_8hpp_source.html":[16,1,1,2,1],
@@ -8,7 +7,7 @@ var NAVTREEINDEX6 =
 "polar__spline__evaluator_8hpp_source.html":[16,0,8,0,3],
 "polarpoissonlikesolver_8hpp_source.html":[16,0,16,3],
 "predcorr__RK2_8hpp_source.html":[16,0,6,2,0],
-"preprocessor_8hpp_source.html":[16,0,20,8],
+"preprocessor_8hpp_source.html":[16,0,20,7],
 "quadrature_8hpp_source.html":[16,0,17,2],
 "quadrature__coeffs__nd_8hpp.html":[16,0,17,3],
 "quadrature__coeffs__nd_8hpp.html#a56334602cc056e84c19d35f298a13aa6":[16,0,17,3,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX6 =
 "structNullExtrapolationRule.html#afff2dfac58dbcfcc760da499bb23b953":[15,154,0],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html":[15,161],
 "structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a10e13ba81718c97997111ded99c2276c":[15,161,1],
-"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a281638bbfde5f496544d54ce87a89461":[15,161,19]
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a281638bbfde5f496544d54ce87a89461":[15,161,19],
+"structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a4753baa1e93d836c5aaeb8ddbf9c58d2":[15,161,20]
 };

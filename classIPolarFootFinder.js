@@ -8,5 +8,5 @@ var classIPolarFootFinder =
     [ "Y", "classIPolarFootFinder.html#a8950c7d66868672cff1dd4675874efb3", null ],
     [ "memory_space", "classIPolarFootFinder.html#a490b586b89c6841213df78e60e51b824", null ],
     [ "IdxRangeRTheta", "classIPolarFootFinder.html#a1aa0c6d201b38fab9b2e45a73981dfb1", null ],
-    [ "operator()", "classIPolarFootFinder.html#a75b9147187aa2f0c25e498fb90eb3568", null ]
+    [ "operator()", "classIPolarFootFinder.html#a0bcbb9863b40febb421ad38cfdc60d10", null ]
 ];

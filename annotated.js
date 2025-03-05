@@ -300,7 +300,7 @@ var annotated =
     [ "VectorFieldCommon", "classVectorFieldCommon.html", null ],
     [ "VectorFieldMem", "classVectorFieldMem.html", "classVectorFieldMem" ],
     [ "VectorMapper", "classVectorMapper.html", null ],
-    [ "VectorMapper< NDTag< XIn, YIn >, NDTag< XOut, YOut >, Mapping, ExecSpace >", "classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4.html", "classVectorMapper_3_01NDTag_3_01XIn_00_01YIn_01_4_00_01NDTag_3_01XOut_00_01YOut_01_4_00_01Mapping_00_01ExecSpace_01_4" ],
+    [ "VectorMapper< VectorIndexSet< XIn, YIn >, VectorIndexSet< XOut, YOut >, Mapping, ExecSpace >", "classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html", "classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c" ],
     [ "VortexMergerDensitySolution", "classVortexMergerDensitySolution.html", "classVortexMergerDensitySolution" ],
     [ "VortexMergerEquilibria", "classVortexMergerEquilibria.html", "classVortexMergerEquilibria" ],
     [ "Vpar", "structVpar.html", null ],

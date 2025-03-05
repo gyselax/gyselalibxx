@@ -114,6 +114,7 @@ $(document).ready(function(){initNavTree('l__norm__tools_8hpp.html',''); initRes
 <div class="textblock"><code>#include &lt;ddc/ddc.hpp&gt;</code><br />
 <code>#include &quot;quadrature.hpp&quot;</code><br />
 <code>#include &quot;vector_field.hpp&quot;</code><br />
+<code>#include &quot;vector_index_tools.hpp&quot;</code><br />
 </div>
 <p><a href="l__norm__tools_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -134,18 +135,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a4c8219dfeea80b86bff16a853e188f8d"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#a4c8219dfeea80b86bff16a853e188f8d">norm_inf</a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function)</td></tr>
 <tr class="memdesc:a4c8219dfeea80b86bff16a853e188f8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm for a Field.  <br /></td></tr>
 <tr class="separator:a4c8219dfeea80b86bff16a853e188f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d0feb06070948df0746df5df7c30c9" id="r_ad1d0feb06070948df0746df5df7c30c9"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class ElementType , class IdxRange , class NDTag &gt; </td></tr>
-<tr class="memitem:ad1d0feb06070948df0746df5df7c30c9"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#ad1d0feb06070948df0746df5df7c30c9">norm_inf</a> (ExecSpace exec_space, <a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, NDTag, typename ExecSpace::memory_space &gt; function)</td></tr>
-<tr class="memdesc:ad1d0feb06070948df0746df5df7c30c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm for a <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>.  <br /></td></tr>
-<tr class="separator:ad1d0feb06070948df0746df5df7c30c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7039002a54c7de373d8c9b27de00ca" id="r_a1e7039002a54c7de373d8c9b27de00ca"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class ElementType , class IdxRange , class VectorIndexSetType &gt; </td></tr>
+<tr class="memitem:a1e7039002a54c7de373d8c9b27de00ca"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#a1e7039002a54c7de373d8c9b27de00ca">norm_inf</a> (ExecSpace exec_space, <a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; function)</td></tr>
+<tr class="memdesc:a1e7039002a54c7de373d8c9b27de00ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm for a <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>.  <br /></td></tr>
+<tr class="separator:a1e7039002a54c7de373d8c9b27de00ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaecce94200353e1fc9bd3e73d9e85ca" id="r_adaecce94200353e1fc9bd3e73d9e85ca"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class ElementType , class IdxRange &gt; </td></tr>
 <tr class="memitem:adaecce94200353e1fc9bd3e73d9e85ca"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#adaecce94200353e1fc9bd3e73d9e85ca">error_norm_inf</a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; exact_function)</td></tr>
 <tr class="memdesc:adaecce94200353e1fc9bd3e73d9e85ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm of the error between 2 Fields.  <br /></td></tr>
 <tr class="separator:adaecce94200353e1fc9bd3e73d9e85ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45430c16dfe8e7235584fb194c65c164" id="r_a45430c16dfe8e7235584fb194c65c164"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class ElementType , class IdxRange , class NDTag &gt; </td></tr>
-<tr class="memitem:a45430c16dfe8e7235584fb194c65c164"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#a45430c16dfe8e7235584fb194c65c164">error_norm_inf</a> (ExecSpace exec_space, <a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, NDTag, typename ExecSpace::memory_space &gt; function, <a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, NDTag, typename ExecSpace::memory_space &gt; exact_function)</td></tr>
-<tr class="memdesc:a45430c16dfe8e7235584fb194c65c164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm of the error between 2 VectorFields.  <br /></td></tr>
-<tr class="separator:a45430c16dfe8e7235584fb194c65c164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd8c6a554b42bfe5b2e272cf286993a7" id="r_abd8c6a554b42bfe5b2e272cf286993a7"><td class="memTemplParams" colspan="2">template&lt;class ExecSpace , class ElementType , class IdxRange , class VectorIndexSetType &gt; </td></tr>
+<tr class="memitem:abd8c6a554b42bfe5b2e272cf286993a7"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#abd8c6a554b42bfe5b2e272cf286993a7">error_norm_inf</a> (ExecSpace exec_space, <a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; function, <a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; exact_function)</td></tr>
+<tr class="memdesc:abd8c6a554b42bfe5b2e272cf286993a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the infinity norm of the error between 2 VectorFields.  <br /></td></tr>
+<tr class="separator:abd8c6a554b42bfe5b2e272cf286993a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f4a4eefdd0dcdf92e87faf0a722f611" id="r_a7f4a4eefdd0dcdf92e87faf0a722f611"><td class="memTemplParams" colspan="2">template&lt;class IdxRangeQuad , class ExecSpace &gt; </td></tr>
 <tr class="memitem:a7f4a4eefdd0dcdf92e87faf0a722f611"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="l__norm__tools_8hpp.html#a7f4a4eefdd0dcdf92e87faf0a722f611">norm_L1</a> (ExecSpace exec_space, <a class="el" href="classQuadrature.html">Quadrature</a>&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function)</td></tr>
 <tr class="memdesc:a7f4a4eefdd0dcdf92e87faf0a722f611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute L1 norm of a function with a given quadrature.  <br /></td></tr>
@@ -302,13 +303,13 @@ template&lt;class ExecSpace , class ElementType , class IdxRange &gt; </div>
 
 </div>
 </div>
-<a id="ad1d0feb06070948df0746df5df7c30c9" name="ad1d0feb06070948df0746df5df7c30c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1d0feb06070948df0746df5df7c30c9">&#9670;&#160;</a></span>norm_inf() <span class="overload">[5/5]</span></h2>
+<a id="a1e7039002a54c7de373d8c9b27de00ca" name="a1e7039002a54c7de373d8c9b27de00ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e7039002a54c7de373d8c9b27de00ca">&#9670;&#160;</a></span>norm_inf() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace , class ElementType , class IdxRange , class NDTag &gt; </div>
+template&lt;class ExecSpace , class ElementType , class IdxRange , class VectorIndexSetType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -322,7 +323,7 @@ template&lt;class ExecSpace , class ElementType , class IdxRange , class NDTag &
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, NDTag, typename ExecSpace::memory_space &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;&#160;</td>
           <td class="paramname"><em>function</em>&#160;</td>
         </tr>
         <tr>
@@ -405,13 +406,13 @@ template&lt;class ExecSpace , class ElementType , class IdxRange &gt; </div>
 
 </div>
 </div>
-<a id="a45430c16dfe8e7235584fb194c65c164" name="a45430c16dfe8e7235584fb194c65c164"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45430c16dfe8e7235584fb194c65c164">&#9670;&#160;</a></span>error_norm_inf() <span class="overload">[2/2]</span></h2>
+<a id="abd8c6a554b42bfe5b2e272cf286993a7" name="abd8c6a554b42bfe5b2e272cf286993a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd8c6a554b42bfe5b2e272cf286993a7">&#9670;&#160;</a></span>error_norm_inf() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ExecSpace , class ElementType , class IdxRange , class NDTag &gt; </div>
+template&lt;class ExecSpace , class ElementType , class IdxRange , class VectorIndexSetType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -425,13 +426,13 @@ template&lt;class ExecSpace , class ElementType , class IdxRange , class NDTag &
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, NDTag, typename ExecSpace::memory_space &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;&#160;</td>
           <td class="paramname"><em>function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, NDTag, typename ExecSpace::memory_space &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorConstField</a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt;&#160;</td>
           <td class="paramname"><em>exact_function</em>&#160;</td>
         </tr>
         <tr>

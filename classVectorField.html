@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: VectorField&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt; Class Template Reference</title>
+<title>Gyselalib++: VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,151 +107,151 @@ $(document).ready(function(){initNavTree('classVectorField.html',''); initResiza
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classVectorField-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">VectorField&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class which holds multiple (scalar) fields in order to represent a vector field.  
  <a href="classVectorField.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for VectorField&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;:</div>
+Inheritance diagram for VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classVectorField.png" usemap="#VectorField_3C_20ElementType_2C_20IdxRangeType_2C_20NDTag_2C_20MemorySpace_2C_20LayoutStridedPolicy_20_3E_map" alt=""/>
-  <map id="VectorField_3C_20ElementType_2C_20IdxRangeType_2C_20NDTag_2C_20MemorySpace_2C_20LayoutStridedPolicy_20_3E_map" name="VectorField_3C_20ElementType_2C_20IdxRangeType_2C_20NDTag_2C_20MemorySpace_2C_20LayoutStridedPolicy_20_3E_map">
-<area href="classVectorFieldCommon.html" alt="VectorFieldCommon&lt; Field&lt; ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy &gt;, NDTag &gt;" shape="rect" coords="0,0,624,24"/>
+  <img src="classVectorField.png" usemap="#VectorField_3C_20ElementType_2C_20IdxRangeType_2C_20VectorIndexSetType_2C_20MemorySpace_2C_20LayoutStridedPolicy_20_3E_map" alt=""/>
+  <map id="VectorField_3C_20ElementType_2C_20IdxRangeType_2C_20VectorIndexSetType_2C_20MemorySpace_2C_20LayoutStridedPolicy_20_3E_map" name="VectorField_3C_20ElementType_2C_20IdxRangeType_2C_20VectorIndexSetType_2C_20MemorySpace_2C_20LayoutStridedPolicy_20_3E_map">
+<area href="classVectorFieldCommon.html" alt="VectorFieldCommon&lt; Field&lt; ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy &gt;, VectorIndexSetType &gt;" shape="rect" coords="0,0,699,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a7f814318283767df370cfbc22e757c43" id="r_a7f814318283767df370cfbc22e757c43"><td class="memItemLeft" align="right" valign="top"><a id="a7f814318283767df370cfbc22e757c43" name="a7f814318283767df370cfbc22e757c43"></a>
+<tr class="memitem:a01f8bd0c5d7057416efd5bbade551210" id="r_a01f8bd0c5d7057416efd5bbade551210"><td class="memItemLeft" align="right" valign="top"><a id="a01f8bd0c5d7057416efd5bbade551210" name="a01f8bd0c5d7057416efd5bbade551210"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>field_type</b> = Field&lt; ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy &gt;</td></tr>
-<tr class="memdesc:a7f814318283767df370cfbc22e757c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type describing the object which can be extracted from this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> using the get&lt;&gt; function. <br /></td></tr>
-<tr class="separator:a7f814318283767df370cfbc22e757c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3218822ab1d75e77caa2e0b1cb0d39c8" id="r_a3218822ab1d75e77caa2e0b1cb0d39c8"><td class="memItemLeft" align="right" valign="top"><a id="a3218822ab1d75e77caa2e0b1cb0d39c8" name="a3218822ab1d75e77caa2e0b1cb0d39c8"></a>
+<tr class="memdesc:a01f8bd0c5d7057416efd5bbade551210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type describing the object which can be extracted from this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> using the get&lt;&gt; function. <br /></td></tr>
+<tr class="separator:a01f8bd0c5d7057416efd5bbade551210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a558d1a564902f587f2be70fa119bedf5" id="r_a558d1a564902f587f2be70fa119bedf5"><td class="memItemLeft" align="right" valign="top"><a id="a558d1a564902f587f2be70fa119bedf5" name="a558d1a564902f587f2be70fa119bedf5"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>element_type</b> = typename base_type::element_type</td></tr>
-<tr class="memdesc:a3218822ab1d75e77caa2e0b1cb0d39c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an element in one of the Fields comprising the <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>. <br /></td></tr>
-<tr class="separator:a3218822ab1d75e77caa2e0b1cb0d39c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a200cc004afdaf07fa28dd6df74ac21e4" id="r_a200cc004afdaf07fa28dd6df74ac21e4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a200cc004afdaf07fa28dd6df74ac21e4">span_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;</td></tr>
-<tr class="memdesc:a200cc004afdaf07fa28dd6df74ac21e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a modifiable reference to a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <br /></td></tr>
-<tr class="separator:a200cc004afdaf07fa28dd6df74ac21e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c20246f5f96540aa464ee3603b3fb0b" id="r_a6c20246f5f96540aa464ee3603b3fb0b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a6c20246f5f96540aa464ee3603b3fb0b">view_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;</td></tr>
-<tr class="memdesc:a6c20246f5f96540aa464ee3603b3fb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a constant reference to a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <br /></td></tr>
-<tr class="separator:a6c20246f5f96540aa464ee3603b3fb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1c164e9d56f4bf65b5b6a5785a161e6" id="r_ad1c164e9d56f4bf65b5b6a5785a161e6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ad1c164e9d56f4bf65b5b6a5785a161e6">layout_type</a> = LayoutStridedPolicy</td></tr>
-<tr class="memdesc:ad1c164e9d56f4bf65b5b6a5785a161e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type describing the way in which the data is laid out in the Field memory.  <br /></td></tr>
-<tr class="separator:ad1c164e9d56f4bf65b5b6a5785a161e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cfc48c5dad4cd4e2dd1d99583a19ba8" id="r_a2cfc48c5dad4cd4e2dd1d99583a19ba8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a2cfc48c5dad4cd4e2dd1d99583a19ba8">discrete_domain_type</a> = typename base_type::discrete_domain_type</td></tr>
-<tr class="memdesc:a2cfc48c5dad4cd4e2dd1d99583a19ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the index range on which the field is defined.  <br /></td></tr>
-<tr class="separator:a2cfc48c5dad4cd4e2dd1d99583a19ba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afde84cdadf9f031e6cd584f15b0acb3f" id="r_afde84cdadf9f031e6cd584f15b0acb3f"><td class="memItemLeft" align="right" valign="top"><a id="afde84cdadf9f031e6cd584f15b0acb3f" name="afde84cdadf9f031e6cd584f15b0acb3f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>index_range_type</b> = <a class="el" href="classVectorField.html#a2cfc48c5dad4cd4e2dd1d99583a19ba8">discrete_domain_type</a></td></tr>
-<tr class="memdesc:afde84cdadf9f031e6cd584f15b0acb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The IdxRange on which the fields in this object are defined. <br /></td></tr>
-<tr class="separator:afde84cdadf9f031e6cd584f15b0acb3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53a0c580bb20a8dc481c38a2d30fddd0" id="r_a53a0c580bb20a8dc481c38a2d30fddd0"><td class="memItemLeft" align="right" valign="top"><a id="a53a0c580bb20a8dc481c38a2d30fddd0" name="a53a0c580bb20a8dc481c38a2d30fddd0"></a>
+<tr class="memdesc:a558d1a564902f587f2be70fa119bedf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of an element in one of the Fields comprising the <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>. <br /></td></tr>
+<tr class="separator:a558d1a564902f587f2be70fa119bedf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26a5aba14a99a5d32086df8e34c89131" id="r_a26a5aba14a99a5d32086df8e34c89131"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a26a5aba14a99a5d32086df8e34c89131">span_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</td></tr>
+<tr class="memdesc:a26a5aba14a99a5d32086df8e34c89131"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a modifiable reference to a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <br /></td></tr>
+<tr class="separator:a26a5aba14a99a5d32086df8e34c89131"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f93eebda677a7328532e3bfd1464cb" id="r_a30f93eebda677a7328532e3bfd1464cb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a30f93eebda677a7328532e3bfd1464cb">view_type</a> = <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</td></tr>
+<tr class="memdesc:a30f93eebda677a7328532e3bfd1464cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type which can hold a constant reference to a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>.  <br /></td></tr>
+<tr class="separator:a30f93eebda677a7328532e3bfd1464cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae49ce7f9b3a24a4b22f7b247ae0da5bc" id="r_ae49ce7f9b3a24a4b22f7b247ae0da5bc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ae49ce7f9b3a24a4b22f7b247ae0da5bc">layout_type</a> = LayoutStridedPolicy</td></tr>
+<tr class="memdesc:ae49ce7f9b3a24a4b22f7b247ae0da5bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type describing the way in which the data is laid out in the Field memory.  <br /></td></tr>
+<tr class="separator:ae49ce7f9b3a24a4b22f7b247ae0da5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c0935cdc49c78dfd4ab49469f159bf" id="r_a48c0935cdc49c78dfd4ab49469f159bf"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a48c0935cdc49c78dfd4ab49469f159bf">discrete_domain_type</a> = typename base_type::discrete_domain_type</td></tr>
+<tr class="memdesc:a48c0935cdc49c78dfd4ab49469f159bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the index range on which the field is defined.  <br /></td></tr>
+<tr class="separator:a48c0935cdc49c78dfd4ab49469f159bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9539aca5b29cc5ffac9e20897e131d95" id="r_a9539aca5b29cc5ffac9e20897e131d95"><td class="memItemLeft" align="right" valign="top"><a id="a9539aca5b29cc5ffac9e20897e131d95" name="a9539aca5b29cc5ffac9e20897e131d95"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>index_range_type</b> = <a class="el" href="classVectorField.html#a48c0935cdc49c78dfd4ab49469f159bf">discrete_domain_type</a></td></tr>
+<tr class="memdesc:a9539aca5b29cc5ffac9e20897e131d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">The IdxRange on which the fields in this object are defined. <br /></td></tr>
+<tr class="separator:a9539aca5b29cc5ffac9e20897e131d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a109ad5f0d78a34d2e51301018265a96b" id="r_a109ad5f0d78a34d2e51301018265a96b"><td class="memItemLeft" align="right" valign="top"><a id="a109ad5f0d78a34d2e51301018265a96b" name="a109ad5f0d78a34d2e51301018265a96b"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>memory_space</b> = typename field_type::memory_space</td></tr>
-<tr class="memdesc:a53a0c580bb20a8dc481c38a2d30fddd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the memory space where the field is saved (CPU vs GPU). <br /></td></tr>
-<tr class="separator:a53a0c580bb20a8dc481c38a2d30fddd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a109ad5f0d78a34d2e51301018265a96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the memory space where the field is saved (CPU vs GPU). <br /></td></tr>
+<tr class="separator:a109ad5f0d78a34d2e51301018265a96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adeae17a1b54257b9538527c60bb03f2e" id="r_adeae17a1b54257b9538527c60bb03f2e"><td class="memItemLeft" align="right" valign="top"><a id="adeae17a1b54257b9538527c60bb03f2e" name="adeae17a1b54257b9538527c60bb03f2e"></a>
+<tr class="memitem:a59017a80e0e8dd2617f45938848fdcfa" id="r_a59017a80e0e8dd2617f45938848fdcfa"><td class="memItemLeft" align="right" valign="top"><a id="a59017a80e0e8dd2617f45938848fdcfa" name="a59017a80e0e8dd2617f45938848fdcfa"></a>
 KOKKOS_DEFAULTED_FUNCTION constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>VectorField</b> ()=default</td></tr>
-<tr class="memdesc:adeae17a1b54257b9538527c60bb03f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>. <br /></td></tr>
-<tr class="separator:adeae17a1b54257b9538527c60bb03f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8427826fe85452b261065430f7beebd0" id="r_a8427826fe85452b261065430f7beebd0"><td class="memItemLeft" align="right" valign="top"><a id="a8427826fe85452b261065430f7beebd0" name="a8427826fe85452b261065430f7beebd0"></a>
+<tr class="memdesc:a59017a80e0e8dd2617f45938848fdcfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>. <br /></td></tr>
+<tr class="separator:a59017a80e0e8dd2617f45938848fdcfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b36131fbfab447bcdc402fc91cf1131" id="r_a2b36131fbfab447bcdc402fc91cf1131"><td class="memItemLeft" align="right" valign="top"><a id="a2b36131fbfab447bcdc402fc91cf1131" name="a2b36131fbfab447bcdc402fc91cf1131"></a>
 KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><b>~VectorField</b> ()=default</td></tr>
-<tr class="memdesc:a8427826fe85452b261065430f7beebd0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> destructor. <br /></td></tr>
-<tr class="separator:a8427826fe85452b261065430f7beebd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e0493fa69eb324b9753ba73757c6d4e" id="r_a5e0493fa69eb324b9753ba73757c6d4e"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a5e0493fa69eb324b9753ba73757c6d4e">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a5e0493fa69eb324b9753ba73757c6d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> by copy, yields a new view to the same data.  <br /></td></tr>
-<tr class="separator:a5e0493fa69eb324b9753ba73757c6d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4c6d468107f0c37ff7696bcc8f4d252" id="r_ae4c6d468107f0c37ff7696bcc8f4d252"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ae4c6d468107f0c37ff7696bcc8f4d252">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:ae4c6d468107f0c37ff7696bcc8f4d252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> by move.  <br /></td></tr>
-<tr class="separator:ae4c6d468107f0c37ff7696bcc8f4d252"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1d64026927e0b54c9f746e374880262" id="r_af1d64026927e0b54c9f746e374880262"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class Allocator &gt; </td></tr>
-<tr class="memitem:af1d64026927e0b54c9f746e374880262"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#af1d64026927e0b54c9f746e374880262">VectorField</a> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, NDTag, Allocator &gt; &amp;other) noexcept</td></tr>
-<tr class="memdesc:af1d64026927e0b54c9f746e374880262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> from a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>, yields a new view to the same data.  <br /></td></tr>
-<tr class="separator:af1d64026927e0b54c9f746e374880262"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a837db49f2246c84419f7c821e1901212" id="r_a837db49f2246c84419f7c821e1901212"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class SFINAEElementType  = ElementType, class  = std::enable_if_t&lt;std::is_const_v&lt;SFINAEElementType&gt;&gt;, class Allocator &gt; </td></tr>
-<tr class="memitem:a837db49f2246c84419f7c821e1901212"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a837db49f2246c84419f7c821e1901212">VectorField</a> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, NDTag, Allocator &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:a837db49f2246c84419f7c821e1901212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> from a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>, yields a new view to the same data.  <br /></td></tr>
-<tr class="separator:a837db49f2246c84419f7c821e1901212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cc199d021be13390f32d444b0ac611f" id="r_a0cc199d021be13390f32d444b0ac611f"><td class="memTemplParams" colspan="2"><a id="a0cc199d021be13390f32d444b0ac611f" name="a0cc199d021be13390f32d444b0ac611f"></a>
+<tr class="memdesc:a2b36131fbfab447bcdc402fc91cf1131"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> destructor. <br /></td></tr>
+<tr class="separator:a2b36131fbfab447bcdc402fc91cf1131"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8eec4895a4014560afa7dda745c2dda" id="r_aa8eec4895a4014560afa7dda745c2dda"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#aa8eec4895a4014560afa7dda745c2dda">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:aa8eec4895a4014560afa7dda745c2dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> by copy, yields a new view to the same data.  <br /></td></tr>
+<tr class="separator:aa8eec4895a4014560afa7dda745c2dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9447492b20bf7116d1d7695faa2321af" id="r_a9447492b20bf7116d1d7695faa2321af"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a9447492b20bf7116d1d7695faa2321af">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a9447492b20bf7116d1d7695faa2321af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> by move.  <br /></td></tr>
+<tr class="separator:a9447492b20bf7116d1d7695faa2321af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3928c161f1d696e2d304fc17f3335a80" id="r_a3928c161f1d696e2d304fc17f3335a80"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class Allocator &gt; </td></tr>
+<tr class="memitem:a3928c161f1d696e2d304fc17f3335a80"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a3928c161f1d696e2d304fc17f3335a80">VectorField</a> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, VectorIndexSetType, Allocator &gt; &amp;other) noexcept</td></tr>
+<tr class="memdesc:a3928c161f1d696e2d304fc17f3335a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> from a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>, yields a new view to the same data.  <br /></td></tr>
+<tr class="separator:a3928c161f1d696e2d304fc17f3335a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac16c73a23faf2699217c48ecfb0c775" id="r_aac16c73a23faf2699217c48ecfb0c775"><td class="memTemplParams" colspan="2">template&lt;class OElementType , class SFINAEElementType  = ElementType, class  = std::enable_if_t&lt;std::is_const_v&lt;SFINAEElementType&gt;&gt;, class Allocator &gt; </td></tr>
+<tr class="memitem:aac16c73a23faf2699217c48ecfb0c775"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#aac16c73a23faf2699217c48ecfb0c775">VectorField</a> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, VectorIndexSetType, Allocator &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:aac16c73a23faf2699217c48ecfb0c775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> from a <a class="el" href="classVectorFieldMem.html" title="Pre-declaration of VectorFieldMem.">VectorFieldMem</a>, yields a new view to the same data.  <br /></td></tr>
+<tr class="separator:aac16c73a23faf2699217c48ecfb0c775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b283009bf471c66ff408b5bf4650d6" id="r_ac4b283009bf471c66ff408b5bf4650d6"><td class="memTemplParams" colspan="2"><a id="ac4b283009bf471c66ff408b5bf4650d6" name="ac4b283009bf471c66ff408b5bf4650d6"></a>
 template&lt;class OElementType , class Allocator &gt; </td></tr>
-<tr class="memitem:a0cc199d021be13390f32d444b0ac611f"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VectorField</b> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, NDTag, Allocator &gt; &amp;&amp;other)=delete</td></tr>
-<tr class="separator:a0cc199d021be13390f32d444b0ac611f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6798959899487931e5bc9911400fabff" id="r_a6798959899487931e5bc9911400fabff"><td class="memTemplParams" colspan="2">template&lt;class OElementType &gt; </td></tr>
-<tr class="memitem:a6798959899487931e5bc9911400fabff"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a6798959899487931e5bc9911400fabff">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, <a class="el" href="classVectorField.html#afde84cdadf9f031e6cd584f15b0acb3f">index_range_type</a>, NDTag, MemorySpace, LayoutStridedPolicy &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:a6798959899487931e5bc9911400fabff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> by copy of a chunk, yields a new view to the same data.  <br /></td></tr>
-<tr class="separator:a6798959899487931e5bc9911400fabff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dd4c5dac27d80520f9b91241d14ed9f" id="r_a3dd4c5dac27d80520f9b91241d14ed9f"><td class="memTemplParams" colspan="2">template&lt;class... OElementType, class  = std::enable_if_t&lt;                    std::conjunction_v&lt;std::is_same&lt;OElementType, ElementType&gt;...&gt;&gt;, class  = std::enable_if_t&lt;sizeof...(OElementType) == base_type::NDims&gt;&gt; </td></tr>
-<tr class="memitem:a3dd4c5dac27d80520f9b91241d14ed9f"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a3dd4c5dac27d80520f9b91241d14ed9f">VectorField</a> (<a class="el" href="classVectorField.html#afde84cdadf9f031e6cd584f15b0acb3f">index_range_type</a> const &amp;idx_range, OElementType *... ptr)</td></tr>
-<tr class="memdesc:a3dd4c5dac27d80520f9b91241d14ed9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> from scratch.  <br /></td></tr>
-<tr class="separator:a3dd4c5dac27d80520f9b91241d14ed9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab16c4bfc5f2ae903c2cb6ff851506ce3" id="r_ab16c4bfc5f2ae903c2cb6ff851506ce3"><td class="memTemplParams" colspan="2">template&lt;class... FieldType, class  = std::enable_if_t&lt;std::conjunction_v&lt;std::is_same&lt;FieldType, field_type&gt;...&gt;&gt;&gt; </td></tr>
-<tr class="memitem:ab16c4bfc5f2ae903c2cb6ff851506ce3"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#ab16c4bfc5f2ae903c2cb6ff851506ce3">VectorField</a> (FieldType... fields)</td></tr>
-<tr class="memdesc:ab16c4bfc5f2ae903c2cb6ff851506ce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> containing references to Field.  <br /></td></tr>
-<tr class="separator:ab16c4bfc5f2ae903c2cb6ff851506ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a97d62245a86f52cbf47d28dc2102f2" id="r_a4a97d62245a86f52cbf47d28dc2102f2"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a4a97d62245a86f52cbf47d28dc2102f2">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=default</td></tr>
-<tr class="memdesc:a4a97d62245a86f52cbf47d28dc2102f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns a new value to this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>, yields a new view to the same data.  <br /></td></tr>
-<tr class="separator:a4a97d62245a86f52cbf47d28dc2102f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49846dbded5742a15ca648e57da8570a" id="r_a49846dbded5742a15ca648e57da8570a"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a49846dbded5742a15ca648e57da8570a">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> &amp;&amp;other)=default</td></tr>
-<tr class="memdesc:a49846dbded5742a15ca648e57da8570a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns a new value to this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>.  <br /></td></tr>
-<tr class="separator:a49846dbded5742a15ca648e57da8570a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62b46d1bda7b5edd08cfa68e9ae12961" id="r_a62b46d1bda7b5edd08cfa68e9ae12961"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorField.html#a6c20246f5f96540aa464ee3603b3fb0b">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a62b46d1bda7b5edd08cfa68e9ae12961">span_cview</a> () const</td></tr>
-<tr class="memdesc:a62b46d1bda7b5edd08cfa68e9ae12961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to the vector field referred to by this vector field span.  <br /></td></tr>
-<tr class="separator:a62b46d1bda7b5edd08cfa68e9ae12961"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a895dc47dcab8f241c7fac1b01ae0be06" id="r_a895dc47dcab8f241c7fac1b01ae0be06"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorField.html#a200cc004afdaf07fa28dd6df74ac21e4">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a895dc47dcab8f241c7fac1b01ae0be06">span_view</a> () const</td></tr>
-<tr class="memdesc:a895dc47dcab8f241c7fac1b01ae0be06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to the vector field referred to by this vector field span.  <br /></td></tr>
-<tr class="separator:a895dc47dcab8f241c7fac1b01ae0be06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dba8c051e1f62c0504c68a95b4b7286" id="r_a1dba8c051e1f62c0504c68a95b4b7286"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
-<tr class="memitem:a1dba8c051e1f62c0504c68a95b4b7286"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a> const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a1dba8c051e1f62c0504c68a95b4b7286">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
-<tr class="memdesc:a1dba8c051e1f62c0504c68a95b4b7286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of Idxs.  <br /></td></tr>
-<tr class="separator:a1dba8c051e1f62c0504c68a95b4b7286"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cece373211472dc9ec59753d4096ea7" id="r_a0cece373211472dc9ec59753d4096ea7"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
-<tr class="memitem:a0cece373211472dc9ec59753d4096ea7"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a> const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a0cece373211472dc9ec59753d4096ea7">operator()</a> (Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
-<tr class="memdesc:a0cece373211472dc9ec59753d4096ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional Idx.  <br /></td></tr>
-<tr class="separator:a0cece373211472dc9ec59753d4096ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee92cfeb00bbf5fcafe0e23e1e08ea6f" id="r_aee92cfeb00bbf5fcafe0e23e1e08ea6f"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
-<tr class="memitem:aee92cfeb00bbf5fcafe0e23e1e08ea6f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#aee92cfeb00bbf5fcafe0e23e1e08ea6f">operator[]</a> (Idx&lt; QueryDDims... &gt; const &amp;slice_spec)</td></tr>
-<tr class="memdesc:aee92cfeb00bbf5fcafe0e23e1e08ea6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <br /></td></tr>
-<tr class="separator:aee92cfeb00bbf5fcafe0e23e1e08ea6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25dc23127eaa9fbb2e13a3aa49ecf2f5" id="r_a25dc23127eaa9fbb2e13a3aa49ecf2f5"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
-<tr class="memitem:a25dc23127eaa9fbb2e13a3aa49ecf2f5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a25dc23127eaa9fbb2e13a3aa49ecf2f5">operator[]</a> (IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range)</td></tr>
-<tr class="memdesc:a25dc23127eaa9fbb2e13a3aa49ecf2f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <br /></td></tr>
-<tr class="separator:a25dc23127eaa9fbb2e13a3aa49ecf2f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05b63bac1b8d9bcf253baea6110cbd64" id="r_a05b63bac1b8d9bcf253baea6110cbd64"><td class="memTemplParams" colspan="2">template&lt;class QueryTag &gt; </td></tr>
-<tr class="memitem:a05b63bac1b8d9bcf253baea6110cbd64"><td class="memTemplItemLeft" align="right" valign="top">constexpr chunk_span_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a05b63bac1b8d9bcf253baea6110cbd64">get</a> () const noexcept</td></tr>
-<tr class="memdesc:a05b63bac1b8d9bcf253baea6110cbd64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Field describing the component in the QueryTag direction.  <br /></td></tr>
-<tr class="separator:a05b63bac1b8d9bcf253baea6110cbd64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b283009bf471c66ff408b5bf4650d6"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>VectorField</b> (<a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, VectorIndexSetType, Allocator &gt; &amp;&amp;other)=delete</td></tr>
+<tr class="separator:ac4b283009bf471c66ff408b5bf4650d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc5b648ae6509375d9002447c8f1652" id="r_acbc5b648ae6509375d9002447c8f1652"><td class="memTemplParams" colspan="2">template&lt;class OElementType &gt; </td></tr>
+<tr class="memitem:acbc5b648ae6509375d9002447c8f1652"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#acbc5b648ae6509375d9002447c8f1652">VectorField</a> (<a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, <a class="el" href="classVectorField.html#a9539aca5b29cc5ffac9e20897e131d95">index_range_type</a>, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:acbc5b648ae6509375d9002447c8f1652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> by copy of a chunk, yields a new view to the same data.  <br /></td></tr>
+<tr class="separator:acbc5b648ae6509375d9002447c8f1652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302b90ce88e5f5b64c08f7734284c387" id="r_a302b90ce88e5f5b64c08f7734284c387"><td class="memTemplParams" colspan="2">template&lt;class... OElementType, class  = std::enable_if_t&lt;                    std::conjunction_v&lt;std::is_same&lt;OElementType, ElementType&gt;...&gt;&gt;, class  = std::enable_if_t&lt;sizeof...(OElementType) == base_type::NDims&gt;&gt; </td></tr>
+<tr class="memitem:a302b90ce88e5f5b64c08f7734284c387"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a302b90ce88e5f5b64c08f7734284c387">VectorField</a> (<a class="el" href="classVectorField.html#a9539aca5b29cc5ffac9e20897e131d95">index_range_type</a> const &amp;idx_range, OElementType *... ptr)</td></tr>
+<tr class="memdesc:a302b90ce88e5f5b64c08f7734284c387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> from scratch.  <br /></td></tr>
+<tr class="separator:a302b90ce88e5f5b64c08f7734284c387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64ff813a3b5d71388b2f27f1be99e30" id="r_ad64ff813a3b5d71388b2f27f1be99e30"><td class="memTemplParams" colspan="2">template&lt;class... FieldType, class  = std::enable_if_t&lt;std::conjunction_v&lt;std::is_same&lt;FieldType, field_type&gt;...&gt;&gt;&gt; </td></tr>
+<tr class="memitem:ad64ff813a3b5d71388b2f27f1be99e30"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#ad64ff813a3b5d71388b2f27f1be99e30">VectorField</a> (FieldType... fields)</td></tr>
+<tr class="memdesc:ad64ff813a3b5d71388b2f27f1be99e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a> containing references to Field.  <br /></td></tr>
+<tr class="separator:ad64ff813a3b5d71388b2f27f1be99e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c798891c4ee5f16d899e61e5353e30e" id="r_a9c798891c4ee5f16d899e61e5353e30e"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a9c798891c4ee5f16d899e61e5353e30e">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> const &amp;other)=default</td></tr>
+<tr class="memdesc:a9c798891c4ee5f16d899e61e5353e30e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns a new value to this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>, yields a new view to the same data.  <br /></td></tr>
+<tr class="separator:a9c798891c4ee5f16d899e61e5353e30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3ccb08f4e0e126273e19f8a25fe5d3a" id="r_ab3ccb08f4e0e126273e19f8a25fe5d3a"><td class="memItemLeft" align="right" valign="top">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#ab3ccb08f4e0e126273e19f8a25fe5d3a">operator=</a> (<a class="el" href="classVectorField.html">VectorField</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:ab3ccb08f4e0e126273e19f8a25fe5d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns a new value to this <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>.  <br /></td></tr>
+<tr class="separator:ab3ccb08f4e0e126273e19f8a25fe5d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d1c98d30d0a835f4cb2638fd71f90f0" id="r_a7d1c98d30d0a835f4cb2638fd71f90f0"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorField.html#a30f93eebda677a7328532e3bfd1464cb">view_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a7d1c98d30d0a835f4cb2638fd71f90f0">span_cview</a> () const</td></tr>
+<tr class="memdesc:a7d1c98d30d0a835f4cb2638fd71f90f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to the vector field referred to by this vector field span.  <br /></td></tr>
+<tr class="separator:a7d1c98d30d0a835f4cb2638fd71f90f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fc01406c2f71d080a0b2fc04810af33" id="r_a6fc01406c2f71d080a0b2fc04810af33"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classVectorField.html#a26a5aba14a99a5d32086df8e34c89131">span_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorField.html#a6fc01406c2f71d080a0b2fc04810af33">span_view</a> () const</td></tr>
+<tr class="memdesc:a6fc01406c2f71d080a0b2fc04810af33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a modifiable reference to the vector field referred to by this vector field span.  <br /></td></tr>
+<tr class="separator:a6fc01406c2f71d080a0b2fc04810af33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a0cf6842e82d0c5ac04da69ac984e7" id="r_a20a0cf6842e82d0c5ac04da69ac984e7"><td class="memTemplParams" colspan="2">template&lt;class... ODDims&gt; </td></tr>
+<tr class="memitem:a20a0cf6842e82d0c5ac04da69ac984e7"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a558d1a564902f587f2be70fa119bedf5">element_type</a> const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a20a0cf6842e82d0c5ac04da69ac984e7">operator()</a> (ddc::DiscreteElement&lt; ODDims &gt; const &amp;... delems) const noexcept</td></tr>
+<tr class="memdesc:a20a0cf6842e82d0c5ac04da69ac984e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a list of Idxs.  <br /></td></tr>
+<tr class="separator:a20a0cf6842e82d0c5ac04da69ac984e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f40f7ef7598f56d57be677682224530" id="r_a5f40f7ef7598f56d57be677682224530"><td class="memTemplParams" colspan="2">template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </td></tr>
+<tr class="memitem:a5f40f7ef7598f56d57be677682224530"><td class="memTemplItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a558d1a564902f587f2be70fa119bedf5">element_type</a> const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a5f40f7ef7598f56d57be677682224530">operator()</a> (Idx&lt; ODDims... &gt; const &amp;delems) const noexcept</td></tr>
+<tr class="memdesc:a5f40f7ef7598f56d57be677682224530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access using a multi-dimensional Idx.  <br /></td></tr>
+<tr class="separator:a5f40f7ef7598f56d57be677682224530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91884e95ae7f44dccbd595274f470426" id="r_a91884e95ae7f44dccbd595274f470426"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
+<tr class="memitem:a91884e95ae7f44dccbd595274f470426"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a91884e95ae7f44dccbd595274f470426">operator[]</a> (Idx&lt; QueryDDims... &gt; const &amp;slice_spec)</td></tr>
+<tr class="memdesc:a91884e95ae7f44dccbd595274f470426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <br /></td></tr>
+<tr class="separator:a91884e95ae7f44dccbd595274f470426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28c3e424b784451e334e370aee4568c" id="r_ad28c3e424b784451e334e370aee4568c"><td class="memTemplParams" colspan="2">template&lt;class... QueryDDims&gt; </td></tr>
+<tr class="memitem:ad28c3e424b784451e334e370aee4568c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#ad28c3e424b784451e334e370aee4568c">operator[]</a> (IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range)</td></tr>
+<tr class="memdesc:ad28c3e424b784451e334e370aee4568c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice out some dimensions.  <br /></td></tr>
+<tr class="separator:ad28c3e424b784451e334e370aee4568c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32ae690f71304ab13847d8f80e42e576" id="r_a32ae690f71304ab13847d8f80e42e576"><td class="memTemplParams" colspan="2">template&lt;class QueryTag &gt; </td></tr>
+<tr class="memitem:a32ae690f71304ab13847d8f80e42e576"><td class="memTemplItemLeft" align="right" valign="top">constexpr chunk_span_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVectorField.html#a32ae690f71304ab13847d8f80e42e576">get</a> () const noexcept</td></tr>
+<tr class="memdesc:a32ae690f71304ab13847d8f80e42e576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Field describing the component in the QueryTag direction.  <br /></td></tr>
+<tr class="separator:a32ae690f71304ab13847d8f80e42e576"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class ElementType, class IdxRangeType, class NDTag, class MemorySpace, class LayoutStridedPolicy&gt;<br />
-class VectorField&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;</div><p>A class which holds multiple (scalar) fields in order to represent a vector field. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ElementType, class IdxRangeType, class VectorIndexSetType, class MemorySpace, class LayoutStridedPolicy&gt;<br />
+class VectorField&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;</div><p>A class which holds multiple (scalar) fields in order to represent a vector field. </p>
 <p>Pre-declaration of <a class="el" href="classVectorField.html" title="A class which holds multiple (scalar) fields in order to represent a vector field.">VectorField</a>.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ElementType</td><td>The data type of a scalar element of the vector field. </td></tr>
     <tr><td class="paramname">IdxRangeType</td><td></td></tr>
-    <tr><td class="paramname">NDTag</td><td>A NDTag describing the dimensions described by the scalar elements of a vector field element. </td></tr>
+    <tr><td class="paramname">VectorIndexSetType</td><td>A VectorIndexSet describing the dimensions described by the scalar elements of a vector field element. </td></tr>
     <tr><td class="paramname">MemorySpace</td><td>The memory space (CPU/GPU). </td></tr>
     <tr><td class="paramname">LayoutStridedPolicy</td><td>The memory layout. See DDC. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a200cc004afdaf07fa28dd6df74ac21e4" name="a200cc004afdaf07fa28dd6df74ac21e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a200cc004afdaf07fa28dd6df74ac21e4">&#9670;&#160;</a></span>span_type</h2>
+<a id="a26a5aba14a99a5d32086df8e34c89131" name="a26a5aba14a99a5d32086df8e34c89131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26a5aba14a99a5d32086df8e34c89131">&#9670;&#160;</a></span>span_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::span_type =  <a class="el" href="classVectorField.html">VectorField</a>&lt;ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy&gt;</td>
+          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_type =  <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -261,16 +261,16 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a6c20246f5f96540aa464ee3603b3fb0b" name="a6c20246f5f96540aa464ee3603b3fb0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c20246f5f96540aa464ee3603b3fb0b">&#9670;&#160;</a></span>view_type</h2>
+<a id="a30f93eebda677a7328532e3bfd1464cb" name="a30f93eebda677a7328532e3bfd1464cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f93eebda677a7328532e3bfd1464cb">&#9670;&#160;</a></span>view_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::view_type =  <a class="el" href="classVectorField.html">VectorField</a>&lt;const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy&gt;</td>
+          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::view_type =  <a class="el" href="classVectorField.html">VectorField</a>&lt; const ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -280,16 +280,16 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="ad1c164e9d56f4bf65b5b6a5785a161e6" name="ad1c164e9d56f4bf65b5b6a5785a161e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1c164e9d56f4bf65b5b6a5785a161e6">&#9670;&#160;</a></span>layout_type</h2>
+<a id="ae49ce7f9b3a24a4b22f7b247ae0da5bc" name="ae49ce7f9b3a24a4b22f7b247ae0da5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae49ce7f9b3a24a4b22f7b247ae0da5bc">&#9670;&#160;</a></span>layout_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::layout_type =  LayoutStridedPolicy</td>
+          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::layout_type =  LayoutStridedPolicy</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -299,16 +299,16 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a2cfc48c5dad4cd4e2dd1d99583a19ba8" name="a2cfc48c5dad4cd4e2dd1d99583a19ba8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cfc48c5dad4cd4e2dd1d99583a19ba8">&#9670;&#160;</a></span>discrete_domain_type</h2>
+<a id="a48c0935cdc49c78dfd4ab49469f159bf" name="a48c0935cdc49c78dfd4ab49469f159bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48c0935cdc49c78dfd4ab49469f159bf">&#9670;&#160;</a></span>discrete_domain_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::discrete_domain_type =  typename base_type::discrete_domain_type</td>
+          <td class="memname">using <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::discrete_domain_type =  typename base_type::discrete_domain_type</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -319,21 +319,21 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5e0493fa69eb324b9753ba73757c6d4e" name="a5e0493fa69eb324b9753ba73757c6d4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e0493fa69eb324b9753ba73757c6d4e">&#9670;&#160;</a></span>VectorField() <span class="overload">[1/7]</span></h2>
+<a id="aa8eec4895a4014560afa7dda745c2dda" name="aa8eec4895a4014560afa7dda745c2dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8eec4895a4014560afa7dda745c2dda">&#9670;&#160;</a></span>VectorField() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -355,21 +355,21 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="ae4c6d468107f0c37ff7696bcc8f4d252" name="ae4c6d468107f0c37ff7696bcc8f4d252"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4c6d468107f0c37ff7696bcc8f4d252">&#9670;&#160;</a></span>VectorField() <span class="overload">[2/7]</span></h2>
+<a id="a9447492b20bf7116d1d7695faa2321af" name="a9447492b20bf7116d1d7695faa2321af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9447492b20bf7116d1d7695faa2321af">&#9670;&#160;</a></span>VectorField() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -391,13 +391,13 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="af1d64026927e0b54c9f746e374880262" name="af1d64026927e0b54c9f746e374880262"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1d64026927e0b54c9f746e374880262">&#9670;&#160;</a></span>VectorField() <span class="overload">[3/7]</span></h2>
+<a id="a3928c161f1d696e2d304fc17f3335a80" name="a3928c161f1d696e2d304fc17f3335a80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3928c161f1d696e2d304fc17f3335a80">&#9670;&#160;</a></span>VectorField() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class OElementType , class Allocator &gt; </div>
 <table class="mlabels">
@@ -405,9 +405,9 @@ template&lt;class OElementType , class Allocator &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, NDTag, Allocator &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, VectorIndexSetType, Allocator &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -429,13 +429,13 @@ template&lt;class OElementType , class Allocator &gt; </div>
 
 </div>
 </div>
-<a id="a837db49f2246c84419f7c821e1901212" name="a837db49f2246c84419f7c821e1901212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a837db49f2246c84419f7c821e1901212">&#9670;&#160;</a></span>VectorField() <span class="overload">[4/7]</span></h2>
+<a id="aac16c73a23faf2699217c48ecfb0c775" name="aac16c73a23faf2699217c48ecfb0c775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac16c73a23faf2699217c48ecfb0c775">&#9670;&#160;</a></span>VectorField() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class OElementType , class SFINAEElementType  = ElementType, class  = std::enable_if_t&lt;std::is_const_v&lt;SFINAEElementType&gt;&gt;, class Allocator &gt; </div>
 <table class="mlabels">
@@ -443,9 +443,9 @@ template&lt;class OElementType , class SFINAEElementType  = ElementType, class  
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, NDTag, Allocator &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorFieldMem.html">VectorFieldMem</a>&lt; OElementType, IdxRangeType, VectorIndexSetType, Allocator &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -467,13 +467,13 @@ template&lt;class OElementType , class SFINAEElementType  = ElementType, class  
 
 </div>
 </div>
-<a id="a6798959899487931e5bc9911400fabff" name="a6798959899487931e5bc9911400fabff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6798959899487931e5bc9911400fabff">&#9670;&#160;</a></span>VectorField() <span class="overload">[5/7]</span></h2>
+<a id="acbc5b648ae6509375d9002447c8f1652" name="acbc5b648ae6509375d9002447c8f1652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbc5b648ae6509375d9002447c8f1652">&#9670;&#160;</a></span>VectorField() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class OElementType &gt; </div>
 <table class="mlabels">
@@ -481,9 +481,9 @@ template&lt;class OElementType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, <a class="el" href="classVectorField.html#afde84cdadf9f031e6cd584f15b0acb3f">index_range_type</a>, NDTag, MemorySpace, LayoutStridedPolicy &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; OElementType, <a class="el" href="classVectorField.html#a9539aca5b29cc5ffac9e20897e131d95">index_range_type</a>, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -505,13 +505,13 @@ template&lt;class OElementType &gt; </div>
 
 </div>
 </div>
-<a id="a3dd4c5dac27d80520f9b91241d14ed9f" name="a3dd4c5dac27d80520f9b91241d14ed9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dd4c5dac27d80520f9b91241d14ed9f">&#9670;&#160;</a></span>VectorField() <span class="overload">[6/7]</span></h2>
+<a id="a302b90ce88e5f5b64c08f7734284c387" name="a302b90ce88e5f5b64c08f7734284c387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a302b90ce88e5f5b64c08f7734284c387">&#9670;&#160;</a></span>VectorField() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class... OElementType, class  = std::enable_if_t&lt;                    std::conjunction_v&lt;std::is_same&lt;OElementType, ElementType&gt;...&gt;&gt;, class  = std::enable_if_t&lt;sizeof...(OElementType) == base_type::NDims&gt;&gt; </div>
 <table class="mlabels">
@@ -519,9 +519,9 @@ template&lt;class... OElementType, class  = std::enable_if_t&lt;                
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html#afde84cdadf9f031e6cd584f15b0acb3f">index_range_type</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html#a9539aca5b29cc5ffac9e20897e131d95">index_range_type</a> const &amp;&#160;</td>
           <td class="paramname"><em>idx_range</em>, </td>
         </tr>
         <tr>
@@ -554,13 +554,13 @@ template&lt;class... OElementType, class  = std::enable_if_t&lt;                
 
 </div>
 </div>
-<a id="ab16c4bfc5f2ae903c2cb6ff851506ce3" name="ab16c4bfc5f2ae903c2cb6ff851506ce3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab16c4bfc5f2ae903c2cb6ff851506ce3">&#9670;&#160;</a></span>VectorField() <span class="overload">[7/7]</span></h2>
+<a id="ad64ff813a3b5d71388b2f27f1be99e30" name="ad64ff813a3b5d71388b2f27f1be99e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64ff813a3b5d71388b2f27f1be99e30">&#9670;&#160;</a></span>VectorField() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class... FieldType, class  = std::enable_if_t&lt;std::conjunction_v&lt;std::is_same&lt;FieldType, field_type&gt;...&gt;&gt;&gt; </div>
 <table class="mlabels">
@@ -568,7 +568,7 @@ template&lt;class... FieldType, class  = std::enable_if_t&lt;std::conjunction_v&
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
+          <td class="memname">KOKKOS_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;<a class="el" href="classVectorField.html">::VectorField</a> </td>
           <td>(</td>
           <td class="paramtype">FieldType...&#160;</td>
           <td class="paramname"><em>fields</em></td><td>)</td>
@@ -593,21 +593,21 @@ template&lt;class... FieldType, class  = std::enable_if_t&lt;std::conjunction_v&
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4a97d62245a86f52cbf47d28dc2102f2" name="a4a97d62245a86f52cbf47d28dc2102f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a97d62245a86f52cbf47d28dc2102f2">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a9c798891c4ee5f16d899e61e5353e30e" name="a9c798891c4ee5f16d899e61e5353e30e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c798891c4ee5f16d899e61e5353e30e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp; <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator= </td>
+          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp; <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -630,21 +630,21 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a49846dbded5742a15ca648e57da8570a" name="a49846dbded5742a15ca648e57da8570a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49846dbded5742a15ca648e57da8570a">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="ab3ccb08f4e0e126273e19f8a25fe5d3a" name="ab3ccb08f4e0e126273e19f8a25fe5d3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3ccb08f4e0e126273e19f8a25fe5d3a">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp; <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator= </td>
+          <td class="memname">KOKKOS_DEFAULTED_FUNCTION constexpr <a class="el" href="classVectorField.html">VectorField</a> &amp; <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -667,19 +667,19 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a62b46d1bda7b5edd08cfa68e9ae12961" name="a62b46d1bda7b5edd08cfa68e9ae12961"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62b46d1bda7b5edd08cfa68e9ae12961">&#9670;&#160;</a></span>span_cview()</h2>
+<a id="a7d1c98d30d0a835f4cb2638fd71f90f0" name="a7d1c98d30d0a835f4cb2638fd71f90f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d1c98d30d0a835f4cb2638fd71f90f0">&#9670;&#160;</a></span>span_cview()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorField.html#a6c20246f5f96540aa464ee3603b3fb0b">view_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::span_cview </td>
+          <td class="memname">constexpr <a class="el" href="classVectorField.html#a30f93eebda677a7328532e3bfd1464cb">view_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_cview </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -698,19 +698,19 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a895dc47dcab8f241c7fac1b01ae0be06" name="a895dc47dcab8f241c7fac1b01ae0be06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a895dc47dcab8f241c7fac1b01ae0be06">&#9670;&#160;</a></span>span_view()</h2>
+<a id="a6fc01406c2f71d080a0b2fc04810af33" name="a6fc01406c2f71d080a0b2fc04810af33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fc01406c2f71d080a0b2fc04810af33">&#9670;&#160;</a></span>span_view()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classVectorField.html#a200cc004afdaf07fa28dd6df74ac21e4">span_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::span_view </td>
+          <td class="memname">constexpr <a class="el" href="classVectorField.html#a26a5aba14a99a5d32086df8e34c89131">span_type</a> <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::span_view </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -729,13 +729,13 @@ template&lt;class ElementType , class IdxRangeType , class NDTag , class MemoryS
 
 </div>
 </div>
-<a id="a1dba8c051e1f62c0504c68a95b4b7286" name="a1dba8c051e1f62c0504c68a95b4b7286"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dba8c051e1f62c0504c68a95b4b7286">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a20a0cf6842e82d0c5ac04da69ac984e7" name="a20a0cf6842e82d0c5ac04da69ac984e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a0cf6842e82d0c5ac04da69ac984e7">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class... ODDims&gt; </div>
 <table class="mlabels">
@@ -743,7 +743,7 @@ template&lt;class... ODDims&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a> const <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator() </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a558d1a564902f587f2be70fa119bedf5">element_type</a> const <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">ddc::DiscreteElement&lt; ODDims &gt; const &amp;...&#160;</td>
           <td class="paramname"><em>delems</em></td><td>)</td>
@@ -768,13 +768,13 @@ template&lt;class... ODDims&gt; </div>
 
 </div>
 </div>
-<a id="a0cece373211472dc9ec59753d4096ea7" name="a0cece373211472dc9ec59753d4096ea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cece373211472dc9ec59753d4096ea7">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a5f40f7ef7598f56d57be677682224530" name="a5f40f7ef7598f56d57be677682224530"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f40f7ef7598f56d57be677682224530">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1&gt;&gt; </div>
 <table class="mlabels">
@@ -782,7 +782,7 @@ template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a3218822ab1d75e77caa2e0b1cb0d39c8">element_type</a> const <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator() </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classVectorField.html#a558d1a564902f587f2be70fa119bedf5">element_type</a> const <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">Idx&lt; ODDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>delems</em></td><td>)</td>
@@ -807,13 +807,13 @@ template&lt;class... ODDims, class  = std::enable_if_t&lt;sizeof...(ODDims) != 1
 
 </div>
 </div>
-<a id="aee92cfeb00bbf5fcafe0e23e1e08ea6f" name="aee92cfeb00bbf5fcafe0e23e1e08ea6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee92cfeb00bbf5fcafe0e23e1e08ea6f">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+<a id="a91884e95ae7f44dccbd595274f470426" name="a91884e95ae7f44dccbd595274f470426"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91884e95ae7f44dccbd595274f470426">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class... QueryDDims&gt; </div>
 <table class="mlabels">
@@ -821,7 +821,7 @@ template&lt;class... QueryDDims&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator[] </td>
+          <td class="memname">constexpr auto <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator[] </td>
           <td>(</td>
           <td class="paramtype">Idx&lt; QueryDDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>slice_spec</em></td><td>)</td>
@@ -847,13 +847,13 @@ template&lt;class... QueryDDims&gt; </div>
 
 </div>
 </div>
-<a id="a25dc23127eaa9fbb2e13a3aa49ecf2f5" name="a25dc23127eaa9fbb2e13a3aa49ecf2f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25dc23127eaa9fbb2e13a3aa49ecf2f5">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+<a id="ad28c3e424b784451e334e370aee4568c" name="ad28c3e424b784451e334e370aee4568c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28c3e424b784451e334e370aee4568c">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class... QueryDDims&gt; </div>
 <table class="mlabels">
@@ -861,7 +861,7 @@ template&lt;class... QueryDDims&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::operator[] </td>
+          <td class="memname">constexpr auto <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::operator[] </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; QueryDDims... &gt; const &amp;&#160;</td>
           <td class="paramname"><em>oidx_range</em></td><td>)</td>
@@ -887,13 +887,13 @@ template&lt;class... QueryDDims&gt; </div>
 
 </div>
 </div>
-<a id="a05b63bac1b8d9bcf253baea6110cbd64" name="a05b63bac1b8d9bcf253baea6110cbd64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05b63bac1b8d9bcf253baea6110cbd64">&#9670;&#160;</a></span>get()</h2>
+<a id="a32ae690f71304ab13847d8f80e42e576" name="a32ae690f71304ab13847d8f80e42e576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32ae690f71304ab13847d8f80e42e576">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ElementType , class IdxRangeType , class NDTag , class MemorySpace , class LayoutStridedPolicy &gt; </div>
+template&lt;class ElementType , class IdxRangeType , class VectorIndexSetType , class MemorySpace , class LayoutStridedPolicy &gt; </div>
 <div class="memtemplate">
 template&lt;class QueryTag &gt; </div>
 <table class="mlabels">
@@ -901,7 +901,7 @@ template&lt;class QueryTag &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr chunk_span_type <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy &gt;::get </td>
+          <td class="memname">constexpr chunk_span_type <a class="el" href="classVectorField.html">VectorField</a>&lt; ElementType, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

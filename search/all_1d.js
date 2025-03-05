@@ -6,5 +6,5 @@ var searchData=
   ['_7ederivfieldmem_3',['~DerivFieldMem',['../classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html#a7af910528c9b40eb599439539340925d',1,'DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;']]],
   ['_7eimpl_4',['~Impl',['../classPolarBSplines_1_1Impl.html#aa4c6ff5c6a2e63283fc779ef1a6befd2',1,'PolarBSplines::Impl']]],
   ['_7ematrixbatch_5',['~MatrixBatch',['../classMatrixBatch.html#ad51f64ea5ba9ccd34f7bb1aa2993f547',1,'MatrixBatch']]],
-  ['_7evectorfield_6',['~VectorField',['../classVectorField.html#a8427826fe85452b261065430f7beebd0',1,'VectorField']]]
+  ['_7evectorfield_6',['~VectorField',['../classVectorField.html#a2b36131fbfab447bcdc402fc91cf1131',1,'VectorField']]]
 ];
