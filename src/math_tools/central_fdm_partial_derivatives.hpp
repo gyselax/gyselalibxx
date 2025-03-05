@@ -71,18 +71,23 @@ public:
                     IdxBatch ib(ibx);
                     IdxDeriv ix(ibx);
                     if (ix == idxrange_deriv.front()) {
-                        // Calculate forward differences at left boundary
-                        // We keep order two using decentered FDM
-                        dfieldval_dxi(ibx)
-                                = (-fieldval(ib, ix + 2 * step) + 4 * fieldval(ib, ix + step)
-                                   - 3 * fieldval(ibx))
-                                  / (ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix));
+                        double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+                        double const h2
+                                = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
+                        double const c3 = -h1 / (h2 * (h1 + h2));
+                        double const c2 = 1. / h1 + 1. / h2;
+                        double const c1 = -c3 - c2;
+                        dfieldval_dxi(ibx) = c1 * fieldval(ibx) + c2 * fieldval(ib, ix + step)
+                                             + c3 * fieldval(ib, ix + 2 * step);
                     } else if (ix == idxrange_deriv.back()) {
-                        // Calculate backward differences at right boundary
-                        dfieldval_dxi(ibx)
-                                = (3 * fieldval(ibx) - 4 * fieldval(ib, ix - step)
-                                   + fieldval(ib, ix - 2 * step))
-                                  / (ddc::coordinate(ix) - ddc::coordinate(ix - 2 * step));
+                        double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+                        double const h2
+                                = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+                        double const c3 = h1 / (h2 * (h1 + h2));
+                        double const c2 = -(h1 + h2) / (h1 * h2);
+                        double const c1 = -c3 - c2;
+                        dfieldval_dxi(ibx) = c1 * fieldval(ibx) + c2 * fieldval(ib, ix - step)
+                                             + c3 * fieldval(ib, ix - 2 * step);
                     } else {
                         // forward FDM
                         double const forward_fdm
@@ -90,8 +95,8 @@ public:
                                   / (ddc::coordinate(ix + step) - ddc::coordinate(ix));
                         // backward FDM
                         double const backward_fdm
-                                = (fieldval(ib, ix + step) - fieldval(ib, ix - step))
-                                  / (ddc::coordinate(ix + step) - ddc::coordinate(ix - step));
+                                = (fieldval(ibx) - fieldval(ib, ix - step))
+                                  / (ddc::coordinate(ix) - ddc::coordinate(ix - step));
                         // mean of the two
                         dfieldval_dxi(ibx) = (backward_fdm + forward_fdm) / 2.;
                     }
