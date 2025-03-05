@@ -87,6 +87,18 @@ public:
      */
     virtual std::unique_ptr<IInterpolator2D<IdxRange2D, IdxRangeBatched>> preallocate() const = 0;
 
+    /**
+     * @brief Approximate the value of a function at a set of coordinates using the
+     * current values at a known set of interpolation points.
+     *
+     * @param[in, out] inout_data
+     * 					On input: an array containing the value of the function at the interpolation points.
+     * 					On output: an array containing the value of the function at the coordinates.
+     * @param[in] coordinates
+     * 					The coordinates where the function should be evaluated.
+     *
+     * @return A reference to the inout_data array containing the value of the function at the coordinates.
+     */
     DField<IdxRangeBatched> operator()(
             DField<IdxRangeBatched> inout_data,
             ConstField<CoordType, IdxRangeBatched> coordinates) const override
