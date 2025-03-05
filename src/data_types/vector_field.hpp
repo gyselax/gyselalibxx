@@ -5,12 +5,13 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 class VectorField;
@@ -18,29 +19,41 @@ class VectorField;
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace,
         class LayoutStridedPolicy>
-inline constexpr bool enable_vector_field<
-        VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>> = true;
+inline constexpr bool enable_vector_field<VectorField<
+        ElementType,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>> = true;
 
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace,
         class LayoutStridedPolicy>
-inline constexpr bool enable_data_access_methods<
-        VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>> = true;
+inline constexpr bool enable_data_access_methods<VectorField<
+        ElementType,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>> = true;
 
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace,
         class LayoutStridedPolicy>
-inline constexpr bool enable_borrowed_vector_field<
-        VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>> = true;
+inline constexpr bool enable_borrowed_vector_field<VectorField<
+        ElementType,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>> = true;
 
 
 /**
@@ -48,20 +61,20 @@ inline constexpr bool enable_borrowed_vector_field<
  *
  * @tparam ElementType The data type of a scalar element of the vector field.
  * @tparam IdxRangeType
- * @tparam NDTag A NDTag describing the dimensions described by the scalar elements of a vector field element.
+ * @tparam VectorIndexSetType A VectorIndexSet describing the dimensions described by the scalar elements of a vector field element.
  * @tparam MemorySpace The memory space (CPU/GPU).
  * @tparam LayoutStridedPolicy The memory layout. See DDC.
  */
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace,
         class LayoutStridedPolicy>
 class VectorField
     : public VectorFieldCommon<
               Field<ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy>,
-              NDTag>
+              VectorIndexSetType>
 {
 public:
     /**
@@ -70,7 +83,7 @@ public:
     using field_type = Field<ElementType, IdxRangeType, MemorySpace, LayoutStridedPolicy>;
 
 private:
-    using base_type = VectorFieldCommon<field_type, NDTag>;
+    using base_type = VectorFieldCommon<field_type, VectorIndexSetType>;
 
 public:
     /// The type of an element in one of the Fields comprising the VectorField
@@ -89,14 +102,22 @@ public:
      * so is the span type.
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using span_type
-            = VectorField<ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+    using span_type = VectorField<
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy>;
     /**
      * @brief A type which can hold a constant reference to a VectorFieldMem.
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using view_type
-            = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+    using view_type = VectorField<
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemorySpace,
+            LayoutStridedPolicy>;
 
     /**
      * @brief Type describing the way in which the data is laid out in the Field memory.
@@ -126,9 +147,10 @@ private:
 
     template <class OElementType, class Allocator, std::size_t... Is>
     KOKKOS_FUNCTION constexpr VectorField(
-            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>& other,
+            VectorFieldMem<OElementType, IdxRangeType, VectorIndexSetType, Allocator>& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+        : base_type((field_type(
+                ddcHelper::get<ddc::type_seq_element_t<Is, VectorIndexSetType>>(other)))...)
     {
     }
 
@@ -143,9 +165,10 @@ private:
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
             class Allocator>
     KOKKOS_FUNCTION constexpr VectorField(
-            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator> const& other,
+            VectorFieldMem<OElementType, IdxRangeType, VectorIndexSetType, Allocator> const& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+        : base_type((field_type(
+                ddcHelper::get<ddc::type_seq_element_t<Is, VectorIndexSetType>>(other)))...)
     {
     }
 
@@ -157,11 +180,12 @@ private:
             VectorField<
                     OElementType,
                     index_range_type,
-                    NDTag,
+                    VectorIndexSetType,
                     MemorySpace,
                     LayoutStridedPolicy> const& other,
             std::index_sequence<Is...> const&) noexcept
-        : base_type((field_type(ddcHelper::get<ddc::type_seq_element_t<Is, NDTag>>(other)))...)
+        : base_type((field_type(
+                ddcHelper::get<ddc::type_seq_element_t<Is, VectorIndexSetType>>(other)))...)
     {
     }
 
@@ -169,12 +193,13 @@ private:
     constexpr auto get_slice(SliceType const& slice_spec, std::index_sequence<Is...> const&)
     {
         auto chunk_slices = std::make_tuple(
-                this->template get<ddc::type_seq_element_t<Is, NDTag>>()[slice_spec]...);
+                this->template get<
+                        ddc::type_seq_element_t<Is, VectorIndexSetType>>()[slice_spec]...);
         using FieldType = std::tuple_element_t<0, decltype(chunk_slices)>;
         return VectorField<
                 ElementType,
                 typename FieldType::discrete_domain_type,
-                NDTag,
+                VectorIndexSetType,
                 typename FieldType::memory_space,
                 typename FieldType::layout_type>(std::move(std::get<Is>(chunk_slices))...);
     }
@@ -184,8 +209,9 @@ private:
      * @return copy of this element
      */
     template <class... ODDims, typename T, T... ints>
-    KOKKOS_FUNCTION element_type
-    operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>) const noexcept
+    KOKKOS_FUNCTION element_type const operator()(
+            Idx<ODDims...> const& delems,
+            std::integer_sequence<T, ints...>) const noexcept
     {
         return element_type((base_type::m_values[ints](delems))...);
     }
@@ -212,7 +238,8 @@ public:
      */
     template <class OElementType, class Allocator>
     KOKKOS_FUNCTION explicit constexpr VectorField(
-            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>& other) noexcept
+            VectorFieldMem<OElementType, IdxRangeType, VectorIndexSetType, Allocator>&
+                    other) noexcept
         : VectorField(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
@@ -227,13 +254,15 @@ public:
             class = std::enable_if_t<std::is_const_v<SFINAEElementType>>,
             class Allocator>
     KOKKOS_FUNCTION explicit constexpr VectorField(
-            VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator> const& other) noexcept
+            VectorFieldMem<OElementType, IdxRangeType, VectorIndexSetType, Allocator> const&
+                    other) noexcept
         : VectorField(other, std::make_index_sequence<base_type::NDims> {})
     {
     }
 
     template <class OElementType, class Allocator>
-    VectorField(VectorFieldMem<OElementType, IdxRangeType, NDTag, Allocator>&& other) = delete;
+    VectorField(VectorFieldMem<OElementType, IdxRangeType, VectorIndexSetType, Allocator>&& other)
+            = delete;
 
     /** Constructs a new VectorField by copy of a chunk, yields a new view to the same data
      * @param other the VectorField to move
@@ -242,7 +271,7 @@ public:
     KOKKOS_FUNCTION constexpr VectorField(VectorField<
                                           OElementType,
                                           index_range_type,
-                                          NDTag,
+                                          VectorIndexSetType,
                                           MemorySpace,
                                           LayoutStridedPolicy> const& other) noexcept
         : VectorField(other, std::make_index_sequence<base_type::NDims> {})
@@ -316,8 +345,8 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    KOKKOS_FUNCTION element_type
-    operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    KOKKOS_FUNCTION element_type const operator()(
+            ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->
@@ -329,7 +358,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    KOKKOS_FUNCTION element_type operator()(Idx<ODDims...> const& delems) const noexcept
+    KOKKOS_FUNCTION element_type const operator()(Idx<ODDims...> const& delems) const noexcept
     {
         return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
     }
@@ -382,26 +411,35 @@ public:
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
-using VectorConstField
-        = VectorField<const ElementType, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+using VectorConstField = VectorField<
+        const ElementType,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>;
 
 template <
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
-using DVectorField = VectorField<double, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+using DVectorField
+        = VectorField<double, IdxRangeType, VectorIndexSetType, MemorySpace, LayoutStridedPolicy>;
 
 template <
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
-using DVectorConstField
-        = VectorConstField<double, IdxRangeType, NDTag, MemorySpace, LayoutStridedPolicy>;
+using DVectorConstField = VectorConstField<
+        double,
+        IdxRangeType,
+        VectorIndexSetType,
+        MemorySpace,
+        LayoutStridedPolicy>;
 
 namespace detail {
 
@@ -409,9 +447,9 @@ namespace detail {
  * @brief Get a new `VectorField` type with the same parametrisation
  * except in the memory space which is set to NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
+ * @tparam ElementType Type of the elements in the ddc::Chunk of the VectorFieldMem.
  * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
- * @tparam NDTag NDTag object storing directions of the VectorFieldMem as dimensions. 
+ * @tparam VectorIndexSetType VectorIndexSet object storing directions of the VectorFieldMem as dimensions. 
  *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
  * @tparam Layout Layout tag (see Kokkos).
  * @tparam MemorySpace The original memory space of the chunk of the VectorFieldMem.
@@ -421,14 +459,48 @@ template <
         class NewMemorySpace,
         class ElementType,
         class SupportType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemorySpace,
         class Layout>
 struct OnMemorySpace<
         NewMemorySpace,
-        VectorField<ElementType, SupportType, NDTag, MemorySpace, Layout>>
+        VectorField<ElementType, SupportType, VectorIndexSetType, MemorySpace, Layout>>
 {
-    using type = VectorField<ElementType, SupportType, NDTag, NewMemorySpace, Layout>;
+    using type = VectorField<ElementType, SupportType, VectorIndexSetType, NewMemorySpace, Layout>;
 };
 
 } // namespace detail
+
+namespace ddcHelper {
+
+template <
+        class ExecSpace,
+        class ElementType,
+        class IdxRangeType,
+        class... Dims,
+        class MemorySpace,
+        class LayoutStridedPolicy>
+auto create_mirror_view_and_copy(
+        ExecSpace exec_space,
+        VectorField<
+                ElementType,
+                IdxRangeType,
+                VectorIndexSet<Dims...>,
+                MemorySpace,
+                LayoutStridedPolicy> field)
+{
+    if constexpr (Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible) {
+        return field;
+    } else {
+        VectorFieldMem<
+                std::remove_const_t<ElementType>,
+                IdxRangeType,
+                VectorIndexSet<Dims...>,
+                typename ExecSpace::memory_space>
+                field_alloc(get_idx_range(field));
+        ((ddc::parallel_deepcopy(field_alloc.template get<Dims>(), field.template get<Dims>())),
+         ...);
+        return field_alloc;
+    }
+}
+} // namespace ddcHelper

@@ -161,12 +161,15 @@ protected:
      * @param[in] new_val The coordinate that should be saved to the vector field.
      */
     template <class DerivFieldType, class Idx, class... DDims>
-    KOKKOS_FUNCTION static void fill_k_total(DerivFieldType k_total, Idx i, Coord<DDims...> new_val)
+    KOKKOS_FUNCTION static void fill_k_total(
+            DerivFieldType k_total,
+            Idx i,
+            DVector<DDims...> new_val)
     {
         static_assert(
                 (std::is_same_v<DerivField, DerivFieldType>)
                 || (is_multipatch_field_v<DerivField>));
-        ((ddcHelper::get<DDims>(k_total)(i) = ddc::get<DDims>(new_val)), ...);
+        ((ddcHelper::get<DDims>(k_total)(i) = ddcHelper::get<DDims>(new_val)), ...);
     }
 
     /**

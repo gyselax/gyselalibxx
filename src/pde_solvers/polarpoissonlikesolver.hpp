@@ -9,7 +9,7 @@
 #include "mapping_tools.hpp"
 #include "math_tools.hpp"
 #include "matrix_batch_csr.hpp"
-#include "metric_tensor.hpp"
+#include "metric_tensor_evaluator.hpp"
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature_coeffs_nd.hpp"
@@ -322,7 +322,7 @@ public:
                           - ddc::discrete_space<BSplinesTheta>().nbasis())
     {
         static_assert(has_2d_jacobian_v<Mapping, CoordRTheta>);
-        //initialize x_init
+        //initialise x_init
         Kokkos::deep_copy(m_x_init, 0);
         // Get break points
         IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
@@ -374,7 +374,7 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
         // Find value and derivative of 2D B-splines covering the singular point
-        ddc::for_each(m_idxrange_quadrature_singular, [&](IdxQuadratureRTheta const irp) {
+        ddc::for_each(m_idxrange_quadrature_singular, [&](IdxQuadratureRTheta const irtheta) {
             std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
             std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
             // Values of the polar basis splines around the singular point
@@ -383,10 +383,10 @@ public:
             // Values of the polar basis splines, that do not cover the singular point,
             // at a given coordinate
             DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
-            IdxQuadratureR const idx_r(irp);
-            IdxQuadratureTheta const idx_theta(irp);
+            IdxQuadratureR const idx_r(irtheta);
+            IdxQuadratureTheta const idx_theta(irtheta);
 
-            const CoordRTheta coord(ddc::coordinate(irp));
+            const CoordRTheta coord(ddc::coordinate(irtheta));
 
             // Calculate the value
             ddc::discrete_space<PolarBSplinesRTheta>().eval_basis(singular_vals, vals, coord);
@@ -1185,7 +1185,7 @@ public:
      * 
      * @param[out] value The product of radial and poloidal values.
      *
-     * @param[out] gradient derivatives over @f$ (r, \theta) @f$ directions. 
+     * @param[out] derivs derivatives over @f$ (r, \theta) @f$ directions. 
      *
      * @param[in] r_basis A data structure containing values and derivative over radial direction.
      *
@@ -1193,12 +1193,13 @@ public:
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            std::array<double, 2>& gradient,
+            DVector<R, Theta>& derivs,
             EvalDeriv1DType const& r_basis,
             EvalDeriv1DType const& theta_basis)
     {
         value = r_basis.value * theta_basis.value;
-        gradient = {r_basis.derivative * theta_basis.value, r_basis.value * theta_basis.derivative};
+        ddcHelper::get<R>(derivs) = r_basis.derivative * theta_basis.value;
+        ddcHelper::get<Theta>(derivs) = r_basis.value * theta_basis.derivative;
     }
 
     /**
@@ -1206,19 +1207,20 @@ public:
      * 
      * @param[out] value The product of radial and poloidal values.
      *
-     * @param[out] gradient derivatives over @f$ (r, \theta) @f$ directions. 
+     * @param[out] derivs derivatives over @f$ (r, \theta) @f$ directions. 
      *
      * @param[in] basis A data structure containing values and derivative over radial and poloidal directions.
      *
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            std::array<double, 2>& gradient,
+            DVector<R, Theta>& derivs,
             EvalDeriv2DType const& basis,
             EvalDeriv2DType const&) // Last argument is duplicate
     {
         value = basis.value;
-        gradient = {basis.radial_derivative, basis.poloidal_derivative};
+        ddcHelper::get<R>(derivs) = basis.radial_derivative;
+        ddcHelper::get<Theta>(derivs) = basis.poloidal_derivative;
     }
 
     /**
@@ -1286,27 +1288,27 @@ public:
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
         double basis_val_trial_space;
-        std::array<double, 2> basis_gradient_test_space;
-        std::array<double, 2> basis_gradient_trial_space;
+        DVector<R, Theta> basis_derivs_test_space;
+        DVector<R, Theta> basis_derivs_trial_space;
         get_value_and_gradient(
                 basis_val_test_space,
-                basis_gradient_test_space,
+                basis_derivs_test_space,
                 test_bspline_val_and_deriv,
                 test_bspline_val_and_deriv_theta);
         get_value_and_gradient(
                 basis_val_trial_space,
-                basis_gradient_trial_space,
+                basis_derivs_trial_space,
                 trial_bspline_val_and_deriv,
                 trial_bspline_val_and_deriv_theta);
 
-        MetricTensor<Mapping, CoordRTheta> metric_tensor(mapping);
+        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(mapping);
 
         // Assemble the weak integral element
         return int_volume(idx_r, idx_theta)
                * (alpha
                           * dot_product(
-                                  basis_gradient_test_space,
-                                  metric_tensor.to_covariant(basis_gradient_trial_space, coord))
+                                  basis_derivs_test_space,
+                                  metric_tensor.to_covariant(basis_derivs_trial_space, coord))
                   + beta * basis_val_test_space * basis_val_trial_space);
     }
 
@@ -1508,7 +1510,7 @@ public:
                     nnz(k + 1) = n_singular_basis + degree * nbasis_theta_proxy;
                 });
 
-        // going from the internal boundary the overlapping possiblities between two radial splines increase
+        // going from the internal boundary the overlapping possibilities between two radial splines increase
         Kokkos::parallel_for(
                 "inner overlap",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 2),
@@ -1528,7 +1530,7 @@ public:
                         mat_size - degree * nbasis_theta_proxy),
                 KOKKOS_LAMBDA(const int k) { nnz(k + 2) = radial_overlap * radial_overlap; });
 
-        // Approaching the external boundary the overlapping possiblities between two radial splines decrease
+        // Approaching the external boundary the overlapping possibilities between two radial splines decrease
         Kokkos::parallel_for(
                 "outer overlap",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, degree + 1),

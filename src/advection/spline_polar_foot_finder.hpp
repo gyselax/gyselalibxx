@@ -6,10 +6,10 @@
 #include "combined_mapping.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "directional_tag.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "ipolar_foot_finder.hpp"
 #include "mapping_tools.hpp"
+#include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
 /**
@@ -33,18 +33,12 @@
  *      A mapping from the logical domain to the domain where the advection is
  *      carried out. This may be a pseudo-physical domain or the physical domain
  *      itself.
- * @tparam SplineRThetaBuilder_host
+ * @tparam SplineRThetaBuilder
  *      A 2D SplineBuilder to construct a spline on a polar domain.
- *      The code is written generally to handle any builder but only a host
- *      builder has been tested for now. Use the GPU version at your own peril
- *      until this class has been officially ported.
- * @tparam SplineRThetaEvaluatorConstBound_host
+ * @tparam SplineRThetaEvaluatorConstBound
  *      A 2D SplineEvaluator to evaluate a spline on a polar domain.
  *      A boundary condition must be provided in case the foot of the characteristic
  *      is found outside the domain.
- *      The code is written generally to handle any evaluator but only a host
- *      evaluator has been tested for now. Use the GPU version at your own peril
- *      until this class has been officially ported.
  *
  * @see BslAdvectionRTheta
  */
@@ -52,38 +46,37 @@ template <
         class TimeStepper,
         class LogicalToPhysicalMapping,
         class LogicalToPseudoPhysicalMapping,
-        class SplineRThetaBuilder_host,
-        class SplineRThetaEvaluatorConstBound_host>
+        class SplineRThetaBuilder,
+        class SplineRThetaEvaluatorConstBound>
 class SplinePolarFootFinder
     : public IPolarFootFinder<
-              typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type1,
-              typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type2,
+              typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
+              typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
               typename LogicalToPhysicalMapping::cartesian_tag_x,
               typename LogicalToPhysicalMapping::cartesian_tag_y,
-              typename SplineRThetaBuilder_host::memory_space>
+              typename SplineRThetaBuilder::memory_space>
 {
     static_assert(is_mapping_v<LogicalToPhysicalMapping>);
     static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(std::is_same_v<
-                  typename SplineRThetaBuilder_host::memory_space,
-                  typename SplineRThetaEvaluatorConstBound_host::memory_space>);
+                  typename SplineRThetaBuilder::memory_space,
+                  typename SplineRThetaEvaluatorConstBound::memory_space>);
+    static_assert(
+            is_accessible_v<typename SplineRThetaBuilder::exec_space, LogicalToPhysicalMapping>);
     static_assert(is_accessible_v<
-                  typename SplineRThetaBuilder_host::exec_space,
-                  LogicalToPhysicalMapping>);
-    static_assert(is_accessible_v<
-                  typename SplineRThetaBuilder_host::exec_space,
+                  typename SplineRThetaBuilder::exec_space,
                   LogicalToPseudoPhysicalMapping>);
 
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
     using base_type = IPolarFootFinder<
-            typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type1,
-            typename SplineRThetaBuilder_host::interpolation_discrete_dimension_type2,
+            typename SplineRThetaBuilder::interpolation_discrete_dimension_type1,
+            typename SplineRThetaBuilder::interpolation_discrete_dimension_type2,
             typename LogicalToPhysicalMapping::cartesian_tag_x,
             typename LogicalToPhysicalMapping::cartesian_tag_y,
-            typename SplineRThetaBuilder_host::memory_space>;
+            typename SplineRThetaBuilder::memory_space>;
 
 private:
     using typename base_type::GridR;
@@ -93,7 +86,7 @@ private:
     using typename base_type::Theta;
     using typename base_type::X;
     using typename base_type::Y;
-    using ExecSpace = typename SplineRThetaBuilder_host::exec_space;
+    using ExecSpace = typename SplineRThetaBuilder::exec_space;
     /**
      * @brief Tag the first dimension in the advection index range.
      */
@@ -120,8 +113,8 @@ private:
     using PseudoPhysicalToPhysicalMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
-    using BSplinesR = typename SplineRThetaBuilder_host::bsplines_type1;
-    using BSplinesTheta = typename SplineRThetaBuilder_host::bsplines_type2;
+    using BSplinesR = typename SplineRThetaBuilder::bsplines_type1;
+    using BSplinesTheta = typename SplineRThetaBuilder::bsplines_type2;
 
     TimeStepper const& m_time_stepper;
 
@@ -129,8 +122,8 @@ private:
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
 
-    SplineRThetaBuilder_host const& m_builder_advection_field;
-    SplineRThetaEvaluatorConstBound_host const& m_evaluator_advection_field;
+    SplineRThetaBuilder const& m_builder_advection_field;
+    SplineRThetaEvaluatorConstBound const& m_evaluator_advection_field;
 
 public:
     /// The type of a field on the polar plane on a compatible memory space.
@@ -143,19 +136,20 @@ public:
 
     /// The type of a vector (x,y) field on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
-    using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>, memory_space>;
+    using DVectorFieldRTheta
+            = VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
 
     /// The type of a constant vector (x,y) field on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
     using DVectorConstFieldRTheta
-            = VectorConstField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>, memory_space>;
+            = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
 
     /// The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
     using VectorSplineCoeffsMem2D = VectorFieldMem<
             double,
             IdxRange<BSplinesR, BSplinesTheta>,
-            NDTag<Dim1, Dim2>,
+            VectorIndexSet<Dim1, Dim2>,
             memory_space>;
 
 public:
@@ -176,7 +170,7 @@ public:
      * @param[in] evaluator_advection_field
      *      The B-splines evaluator to evaluate the advection field.
      * @param[in] epsilon
-     *      @f$ \varepsilon @f$ parameter used for the linearization of the
+     *      @f$ \varepsilon @f$ parameter used for the linearisation of the
      *      advection field around the central point.
      *
      * @see ITimeStepper
@@ -185,8 +179,8 @@ public:
             TimeStepper const& time_stepper,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical_mapping,
-            SplineRThetaBuilder_host const& builder_advection_field,
-            SplineRThetaEvaluatorConstBound_host const& evaluator_advection_field,
+            SplineRThetaBuilder const& builder_advection_field,
+            SplineRThetaEvaluatorConstBound const& evaluator_advection_field,
             double epsilon = 1e-12)
         : m_time_stepper(time_stepper)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
@@ -226,7 +220,7 @@ public:
 
         // Compute the advection field in the advection domain.
         auto advection_field_in_adv_domain = create_geometry_mirror_view(
-                Kokkos::DefaultHostExecutionSpace(),
+                ExecSpace(),
                 advection_field,
                 m_pseudo_physical_to_physical);
 
@@ -257,7 +251,7 @@ public:
 
         IdxRangeRTheta const idx_range_rp = get_idx_range<GridR, GridTheta>(feet);
 
-        CoordXY_adv coord_center(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
+        CoordXY_adv coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
         LogicalToPseudoPhysicalMapping logical_to_pseudo_physical_proxy
                 = m_logical_to_pseudo_physical;
         PseudoPhysicalToLogicalMapping pseudo_physical_to_logical_proxy
@@ -272,27 +266,28 @@ public:
                     ddc::parallel_for_each(
                             ExecSpace(),
                             idx_range_rp,
-                            KOKKOS_LAMBDA(IdxRTheta const irp) {
-                                CoordRTheta const coord_rp(feet(irp));
+                            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                                CoordRTheta const coord_rtheta(feet(irtheta));
                                 CoordXY_adv const coord_xy
-                                        = logical_to_pseudo_physical_proxy(coord_rp);
+                                        = logical_to_pseudo_physical_proxy(coord_rtheta);
 
-                                CoordXY_adv const feet_xy = coord_xy - dt * advection_field(irp);
+                                CoordXY_adv const feet_xy
+                                        = coord_xy - dt * advection_field(irtheta);
 
-                                if (norm_inf(feet_xy - coord_center) < 1e-15) {
-                                    feet(irp) = CoordRTheta(0, 0);
+                                if (norm_inf(feet_xy - coord_centre) < 1e-15) {
+                                    feet(irtheta) = CoordRTheta(0, 0);
                                 } else {
-                                    feet(irp) = pseudo_physical_to_logical_proxy(feet_xy);
-                                    ddc::select<Theta>(feet(irp))
+                                    feet(irtheta) = pseudo_physical_to_logical_proxy(feet_xy);
+                                    ddc::select<Theta>(feet(irtheta))
                                             = ddcHelper::restrict_to_idx_range(
-                                                    ddc::select<Theta>(feet(irp)),
+                                                    ddc::select<Theta>(feet(irtheta)),
                                                     IdxRangeTheta(idx_range_rp));
                                 }
                             });
 
                     // Treatment to conserve the C0 property of the advected function:
-                    unify_value_at_center_pt(feet);
-                    // Test if the values are the same at the center point
+                    unify_value_at_centre_pt(feet);
+                    // Test if the values are the same at the centre point
                     is_unified(feet);
                 };
 
@@ -306,14 +301,14 @@ public:
 
 
     /**
-     * @brief Check if the values at the center point are the same.
+     * @brief Check if the values at the centre point are the same.
      *
-     *  For polar geometry, to ensure continuity at the center point, we
+     *  For polar geometry, to ensure continuity at the centre point, we
      *  have to be sure that all the points for @f$ r = 0 @f$ have the same value.
      *  This function check if for @f$ r= 0 @f$, the values @f$ \forall \theta @f$ are the same.
      *
      *  @param[in] values
-     *      A table of values we want to check if the center point has
+     *      A table of values we want to check if the centre point has
      *      an unique value.
      *
      */
@@ -327,13 +322,15 @@ public:
             ddc::parallel_for_each(
                     ExecSpace(),
                     theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta ip) {
-                        if (norm_inf(values(r0_idx, ip) - values(r0_idx, theta_idx_range.front()))
+                    KOKKOS_LAMBDA(const IdxTheta itheta) {
+                        if (norm_inf(
+                                    values(r0_idx, itheta)
+                                    - values(r0_idx, theta_idx_range.front()))
                             > 1e-15) {
-                            Kokkos::printf("WARNING ! -> Discontinous at the center point.");
+                            Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
                         }
                         KOKKOS_ASSERT(
-                                values(r0_idx, ip) == values(r0_idx, theta_idx_range.front()));
+                                values(r0_idx, itheta) == values(r0_idx, theta_idx_range.front()));
                     });
         }
     }
@@ -343,7 +340,7 @@ public:
      * @brief Replace the value at @f$  (r=0, \theta)@f$  point
      *  by the value at @f$ (r=0,0) @f$ for all @f$ \theta @f$.
      *
-     *  For polar geometry, to ensure continuity at the center point, we
+     *  For polar geometry, to ensure continuity at the centre point, we
      *  have to be sure that all the points for @f$ r = 0 @f$ have the same value.
      *  As the computation of the values of a table can induces machine errors,
      *  this function is useful to reset the values at the central point at
@@ -353,7 +350,7 @@ public:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_center_pt(Field<T, IdxRangeRTheta, memory_space> values) const
+    void unify_value_at_centre_pt(Field<T, IdxRangeRTheta, memory_space> values) const
     {
         IdxRangeR const r_idx_range = get_idx_range<GridR>(values);
         IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(values);
@@ -362,8 +359,8 @@ public:
             ddc::parallel_for_each(
                     ExecSpace(),
                     theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta ip) {
-                        values(r0_idx, ip) = values(r0_idx, theta_idx_range.front());
+                    KOKKOS_LAMBDA(const IdxTheta itheta) {
+                        values(r0_idx, itheta) = values(r0_idx, theta_idx_range.front());
                     });
         }
     }

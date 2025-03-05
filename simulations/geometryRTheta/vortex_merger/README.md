@@ -63,8 +63,8 @@ with
 * $\sigma = 0.08$ and 
 * $\varepsilon = 10^{-4}$.
 
-The equilibrium solution is computed during the initialization phase in the VortexMergerEquilibria class. 
-The details are documented in [initialization](./../../../src/geometryRTheta/initialization/README.md). 
+The equilibrium solution is computed during the initialisation phase in the VortexMergerEquilibria class. 
+The details are documented in [initialisation](./../../../src/geometryRTheta/initialisation/README.md). 
 
 
 ## References
@@ -94,7 +94,7 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
  ### Recommended parameters: 
 * `Mesh:`
   * `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
-  * `p_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
+  * `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
   * `r_min: 0.0`  : start of $`r`$ domain. (Tests in Edoardo Zoni's article.)
   * `r_max: 1.0` : end of $`r`$ domain. (Tests in Edoardo Zoni's article.)
 
@@ -103,11 +103,11 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
   * `final_T: 10.0`: final time of the simulation. (Tests in Edoardo Zoni's article.)
   
 * `Perturbation:`
-  * `eps: 0.0001` : amplitude of the pertubation. 
-  * `x_star_1: 0.08` : $`x`$ coordinate of the center of the initial first vortex.
-  * `y_star_1: -0.14` : $`y`$ coordinate of the center of the initial first vortex.
-  * `x_star_2: -0.08` : $`x`$ coordinate of the center of the initial second vortex.
-  * `y_star_2: 0.14` : $`y`$ coordinate of the center of the initial second vortex.
+  * `eps: 0.0001` : amplitude of the perturbation. 
+  * `x_star_1: 0.08` : $`x`$ coordinate of the centre of the initial first vortex.
+  * `y_star_1: -0.14` : $`y`$ coordinate of the centre of the initial first vortex.
+  * `x_star_2: -0.08` : $`x`$ coordinate of the centre of the initial second vortex.
+  * `y_star_2: 0.14` : $`y`$ coordinate of the centre of the initial second vortex.
   * `sigma: 0.08` : the standard deviation of the initial Gaussian function. 
   
 * `Output:`

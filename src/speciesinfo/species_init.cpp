@@ -6,14 +6,14 @@
  * @brief Initialise the species domain
  * @param[out] kinetic species domain 
  * @param[out] fluid species domain 
- * @param[in] conf_voicexx is the YAML input file
+ * @param[in] conf_gyselalibxx is the YAML input file
  * @param[in] nb_kinspecies number of kinetic species
  * @param[in] nb_fluidspecies number of fluid species
  */
 void init_all_species(
         IdxRangeSp& idxrange_kinsp,
         IdxRangeSp& idxrange_fluidsp,
-        PC_tree_t conf_voicexx,
+        PC_tree_t conf_gyselalibxx,
         int nb_kinspecies,
         int nb_fluidspecies)
 {
@@ -25,7 +25,7 @@ void init_all_species(
     // Define the domain of kinetic species
     for (IdxSp const isp : idxrange_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(
-                conf_voicexx,
+                conf_gyselalibxx,
                 ".SpeciesInfo[%d]",
                 (isp - idxrange_kinsp.front()).value());
 
@@ -53,7 +53,7 @@ void init_all_species(
     host_t<DFieldMemSp> fluid_masses(idxrange_fluidsp);
     for (IdxSp const isp : idxrange_fluidsp) {
         PC_tree_t const conf_nisp = PCpp_get(
-                conf_voicexx,
+                conf_gyselalibxx,
                 ".NeutralSpeciesInfo[%d]",
                 (isp - idxrange_fluidsp.front()).value());
         fluid_charges(isp) = 0.; // neutral charge is zero
@@ -93,19 +93,19 @@ void init_all_species(
 
 /**
  * @brief Initialise the species domain in the case of adiabatic and kinetic species
- * @param[in] conf_voicexx is the YAML input file
+ * @param[in] conf_gyselalibxx is the YAML input file
  * @return the kinetic species domain 
  */
-IdxRangeSp init_species(PC_tree_t conf_voicexx)
+IdxRangeSp init_species(PC_tree_t conf_gyselalibxx)
 {
-    IdxStepSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
+    IdxStepSp const nb_kinspecies(PCpp_len(conf_gyselalibxx, ".SpeciesInfo"));
     IdxStepSp const nb_fluidspecies(0);
     IdxRangeSp idxrange_kinsp;
     IdxRangeSp idxrange_fluidsp;
     init_all_species(
             idxrange_kinsp,
             idxrange_fluidsp,
-            conf_voicexx,
+            conf_gyselalibxx,
             nb_kinspecies,
             nb_fluidspecies);
     return idxrange_kinsp;
@@ -117,19 +117,19 @@ IdxRangeSp init_species(PC_tree_t conf_voicexx)
  *   added to adiabatic and kinetic species
  * @param[out] kinetic species domain 
  * @param[out] fluid species domain 
- * @param[in] conf_voicexx is the YAML input file
+ * @param[in] conf_gyselalibxx is the YAML input file
  */
 void init_species_withfluid(
         IdxRangeSp& idxrange_kinsp,
         IdxRangeSp& idxrange_fluidsp,
-        PC_tree_t conf_voicexx)
+        PC_tree_t conf_gyselalibxx)
 {
-    IdxStepSp const nb_kinspecies(PCpp_len(conf_voicexx, ".SpeciesInfo"));
-    IdxStepSp const nb_fluidspecies(PCpp_len(conf_voicexx, ".NeutralSpeciesInfo"));
+    IdxStepSp const nb_kinspecies(PCpp_len(conf_gyselalibxx, ".SpeciesInfo"));
+    IdxStepSp const nb_fluidspecies(PCpp_len(conf_gyselalibxx, ".NeutralSpeciesInfo"));
     init_all_species(
             idxrange_kinsp,
             idxrange_fluidsp,
-            conf_voicexx,
+            conf_gyselalibxx,
             nb_kinspecies,
             nb_fluidspecies);
 }

@@ -9,7 +9,7 @@ target_link_libraries(landau4d_fft
         PDI::pdi
         gslx::paraconfpp
         gslx::geometry_xyvxvy
-        gslx::initialization_xyvxvy
+        gslx::initialisation_xyvxvy
         gslx::interpolation
         gslx::io
         gslx::advection

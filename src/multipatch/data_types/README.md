@@ -18,8 +18,8 @@ template<class Patch>
 using DFieldOnPatch = DField<Patch::IdxRange12>;
 ```
 we could then have three fields `field1`, `field2` and `field3` on 
-patches 1,2 and 3 repectively. The `MultipatchType` object would then 
-be initialized as
+patches 1,2 and 3 respectively. The `MultipatchType` object would then 
+be initialised as
 ```
 MultipatchType<DFieldOnPatch, Patch1, Patch2, Patch3> multipatch_field(field1, field2, field3);
 ```

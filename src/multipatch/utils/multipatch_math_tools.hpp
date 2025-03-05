@@ -6,8 +6,8 @@
 /**
  * @brief Compute the infinity norm for a Field or VectorField over multiple patches.
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
- * @param[in] function The function whose norm is calcuated.
- * @return A double containing the value of the infinty norm.
+ * @param[in] function The function whose norm is calculated.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, template <typename P> typename T, class... Patches>
 double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_function)
@@ -15,9 +15,7 @@ double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_
     using FuncType = MultipatchField<T, Patches...>;
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
-    using IdxRangeFunc = typename FuncType::discrete_domain_type;
     constexpr std::size_t NPatches = multipatch_function.size();
-    IdxRangeFunc idx_range = get_idx_range(multipatch_function);
     std::array<double, NPatches> norm_inf_on_patch(
             {(norm_inf(exec_space, multipatch_function.template get<Patches>()))...});
     double result(0.0);
@@ -32,7 +30,7 @@ double norm_inf(ExecSpace exec_space, MultipatchField<T, Patches...> multipatch_
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] function The calculated function.
  * @param[in] exact_function The exact function with which the calculated function is compared.
- * @return A double containing the value of the infinty norm.
+ * @return A double containing the value of the infinity norm.
  */
 template <class ExecSpace, template <typename P> typename T, class... Patches>
 double error_norm_inf(
@@ -43,9 +41,7 @@ double error_norm_inf(
     using FuncType = MultipatchField<T, Patches...>;
     static_assert(
             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
-    using IdxRangeFunc = typename FuncType::discrete_domain_type;
     constexpr std::size_t NPatches = multipatch_function.size();
-    IdxRangeFunc idx_range = get_idx_range(multipatch_function);
     std::array<double, NPatches> norm_inf_on_patch({(error_norm_inf(
             exec_space,
             multipatch_function.template get<Patches>(),

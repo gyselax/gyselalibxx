@@ -7,6 +7,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "vector_field_common.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * @brief Pre-declaration of VectorFieldMem.
@@ -14,7 +15,7 @@
 template <
         class ElementType,
         class IdxRangeType,
-        class NDTag,
+        class VectorIndexSetType,
         class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
 class VectorFieldMem;
 
@@ -46,12 +47,12 @@ class VectorField;
  *
  * @tparam ElementType The data type of a scalar element of the vector field.
  * @tparam IdxRangeType
- * @tparam NDTag A NDTag describing the dimensions described by the scalar elements of a vector field element.
+ * @tparam VectorIndexSetType A VectorIndexSet describing the dimensions described by the scalar elements of a vector field element.
  * @tparam MemSpace The type describing where the memory is allocated. See DDC.
  */
-template <class ElementType, class IdxRangeType, class NDTag, class MemSpace>
+template <class ElementType, class IdxRangeType, class VectorIndexSetType, class MemSpace>
 class VectorFieldMem
-    : public VectorFieldCommon<FieldMem<ElementType, IdxRangeType, MemSpace>, NDTag>
+    : public VectorFieldCommon<FieldMem<ElementType, IdxRangeType, MemSpace>, VectorIndexSetType>
 {
 public:
     /**
@@ -64,7 +65,7 @@ public:
     using chunk_type = FieldMem<ElementType, IdxRangeType, MemSpace>;
 
 private:
-    using base_type = VectorFieldCommon<chunk_type, NDTag>;
+    using base_type = VectorFieldCommon<chunk_type, VectorIndexSetType>;
 
 public:
     /// The type of an element in one of the FieldMems comprising the VectorFieldMem
@@ -84,15 +85,24 @@ public:
      *
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using span_type = VectorField<ElementType, IdxRangeType, NDTag, MemSpace, Kokkos::layout_right>;
+    using span_type = VectorField<
+            ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right>;
 
     /**
      * @brief A type which can hold a constant reference to this VectorFieldMem.
      *
      * This is a DDC keyword used to make this class interchangeable with Field.
      */
-    using view_type
-            = VectorField<const ElementType, IdxRangeType, NDTag, MemSpace, Kokkos::layout_right>;
+    using view_type = VectorField<
+            const ElementType,
+            IdxRangeType,
+            VectorIndexSetType,
+            MemSpace,
+            Kokkos::layout_right>;
 
     /**
      * @brief The type of the index range on which the field is defined.
@@ -124,7 +134,7 @@ private:
      * @return copy of this element
      */
     template <class... ODDims, typename T, T... ints>
-    element_type operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>)
+    element_type const operator()(Idx<ODDims...> const& delems, std::integer_sequence<T, ints...>)
             const noexcept
     {
         return element_type((base_type::m_values[ints](delems))...);
@@ -210,7 +220,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims>
-    element_type operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
+    element_type const operator()(ddc::DiscreteElement<ODDims> const&... delems) const noexcept
     {
         Idx<ODDims...> delem_idx(delems...);
         return this->
@@ -222,7 +232,7 @@ public:
      * @return copy of this element
      */
     template <class... ODDims, class = std::enable_if_t<sizeof...(ODDims) != 1>>
-    element_type operator()(Idx<ODDims...> const& delems) const noexcept
+    element_type const operator()(Idx<ODDims...> const& delems) const noexcept
     {
         return this->operator()(delems, std::make_integer_sequence<int, element_type::size()> {});
     }
@@ -319,16 +329,23 @@ namespace detail {
 /**
  * @brief Set a `VectorFieldMem` on a given NewMemorySpace.
  * @tparam NewMemorySpace The new memory space. 
- * @tparam ElementType Type of the elememts in the ddc::Chunk of the VectorFieldMem.
+ * @tparam ElementType Type of the elements in the ddc::Chunk of the VectorFieldMem.
  * @tparam SupportType Type of the domain of the ddc::Chunk in the VectorFieldMem.
- * @tparam NDTag NDTag object storing the dimensions along which the VectorFieldMem is defined.
+ * @tparam VectorIndexSetType VectorIndexSet object storing the dimensions along which the VectorFieldMem is defined.
  *               The dimensions refer to the dimensions of the arrival domain of the VectorFieldMem. 
  * @tparam MemSpace The old memory space.
  * @see VectorFieldMem
  */
-template <class NewMemorySpace, class ElementType, class SupportType, class NDTag, class MemSpace>
-struct OnMemorySpace<NewMemorySpace, VectorFieldMem<ElementType, SupportType, NDTag, MemSpace>>
+template <
+        class NewMemorySpace,
+        class ElementType,
+        class SupportType,
+        class VectorIndexSetType,
+        class MemSpace>
+struct OnMemorySpace<
+        NewMemorySpace,
+        VectorFieldMem<ElementType, SupportType, VectorIndexSetType, MemSpace>>
 {
-    using type = VectorFieldMem<ElementType, SupportType, NDTag, NewMemorySpace>;
+    using type = VectorFieldMem<ElementType, SupportType, VectorIndexSetType, NewMemorySpace>;
 };
 } // namespace detail

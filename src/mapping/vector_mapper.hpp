@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 #include "view.hpp"
 
 /** The general predeclaration of VectorMapper.
@@ -17,13 +17,13 @@ class VectorMapper;
  *
  * @anchor VectorMapperImplementation
  *
- * @tparam InVectorSpace A NDTag<XIn, YIn> describing the dimensions of the coordinate system taken as input.
- * @tparam OutVectorSpace A NDTag<XOut, YOut> describing the dimensions of the coordinate system returned as output.
+ * @tparam InVectorSpace A VectorIndexSet<XIn, YIn> describing the dimensions of the coordinate system taken as input.
+ * @tparam OutVectorSpace A VectorIndexSet<XOut, YOut> describing the dimensions of the coordinate system returned as output.
  * @tparam Mapping A class describing a mapping system.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  */
 template <class XIn, class YIn, class XOut, class YOut, class Mapping, class ExecSpace>
-class VectorMapper<NDTag<XIn, YIn>, NDTag<XOut, YOut>, Mapping, ExecSpace>
+class VectorMapper<VectorIndexSet<XIn, YIn>, VectorIndexSet<XOut, YOut>, Mapping, ExecSpace>
 {
     static_assert(is_accessible_v<ExecSpace, Mapping>);
     static_assert(
@@ -36,11 +36,6 @@ class VectorMapper<NDTag<XIn, YIn>, NDTag<XOut, YOut>, Mapping, ExecSpace>
 public:
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
     using memory_space = typename ExecSpace::memory_space;
-
-    /// The vector type in the coordinate system taken as input.
-    using vector_element_type_in = DVector<XIn, YIn>;
-    /// The vector type in the coordinate system returned as output.
-    using vector_element_type_out = DVector<XOut, YOut>;
 
 private:
     Mapping m_mapping;
@@ -63,12 +58,16 @@ public:
     template <class IdxRangeType, class LayoutStridedPolicy1, class LayoutStridedPolicy2>
     void operator()(
             ExecSpace exec_space,
-            VectorField<double, IdxRangeType, NDTag<XOut, YOut>, memory_space, LayoutStridedPolicy1>
-                    vector_field_output,
+            VectorField<
+                    double,
+                    IdxRangeType,
+                    VectorIndexSet<XOut, YOut>,
+                    memory_space,
+                    LayoutStridedPolicy1> vector_field_output,
             VectorConstField<
                     double,
                     IdxRangeType,
-                    NDTag<XIn, YIn>,
+                    VectorIndexSet<XIn, YIn>,
                     memory_space,
                     LayoutStridedPolicy2> vector_field_input)
     {
@@ -84,7 +83,7 @@ public:
                         Matrix_2x2 map_J;
                         mapping_proxy.jacobian_matrix(ddc::coordinate(idx), map_J);
 
-                        vector_element_type_out vector_out;
+                        Coord<XOut, YOut> vector_out;
                         vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
                         ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
                         ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
@@ -97,8 +96,12 @@ public:
                     KOKKOS_LAMBDA(IdxType idx) {
                         Matrix_2x2 map_J = inv_mapping(ddc::coordinate(idx));
 
-                        vector_element_type_out vector_out;
-                        vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
+                        Coord<XOut, YOut> vector_out;
+                        // mat_vec_mul should be replaced with a tensor calculus function
+                        // when map_J is stored in a Tensor
+                        vector_out.array() = mat_vec_mul(
+                                map_J,
+                                ddcHelper::to_coord(vector_field_input(idx)).array());
                         ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
                         ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
                     });
@@ -136,7 +139,7 @@ auto create_geometry_mirror_view(
         VectorField<
                 ElementType,
                 IdxRangeType,
-                NDTag<X, Y>,
+                VectorIndexSet<X, Y>,
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field,
         Mapping mapping)
@@ -153,10 +156,11 @@ auto create_geometry_mirror_view(
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
-                NDTag<X_out, Y_out>,
+                VectorIndexSet<X_out, Y_out>,
                 typename ExecSpace::memory_space>
                 vector_field_out(get_idx_range(vector_field));
-        VectorMapper<NDTag<X, Y>, NDTag<X_out, Y_out>, Mapping, ExecSpace> vector_mapping(mapping);
+        VectorMapper<VectorIndexSet<X, Y>, VectorIndexSet<X_out, Y_out>, Mapping, ExecSpace>
+                vector_mapping(mapping);
         vector_mapping(exec_space, get_field(vector_field_out), get_const_field(vector_field));
         return vector_field_out;
     }

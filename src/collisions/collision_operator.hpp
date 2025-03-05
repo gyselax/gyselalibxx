@@ -97,7 +97,7 @@ public:
      * @brief Construct a new Collision Operator object
      *
      * @param[in] collision_configuration This parametrise the operator. It contains the
-     * data required for its initialization.
+     * data required for its initialisation.
      */
     explicit CollisionOperator(CollisionConfigurationType const& collision_configuration)
         : m_operator_handle {detail::do_operator_initialisation(

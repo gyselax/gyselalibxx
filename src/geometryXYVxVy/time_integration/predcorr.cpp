@@ -32,7 +32,7 @@ DFieldSpXYVxVy PredCorr::operator()(
 
     host_t<DFieldMemXY> electrostatic_potential_host(get_idx_range<GridX, GridY>(allfdistribu));
 
-    // a 2D chunck of the same size as fdistribu
+    // a 2D memory block of the same size as fdistribu
     DFieldMemSpXYVxVy allfdistribu_half_t(get_idx_range(allfdistribu));
 
     m_poisson_solver(

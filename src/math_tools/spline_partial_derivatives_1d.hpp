@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 /**
- * @file spline_partial_derivatives.hpp
- * File containing functions to compute the partial derivatives from a spline interpolation.
+ * @file spline_partial_derivatives_1d.hpp
+ * File containing functions to compute the partial derivatives from a 1d spline interpolation.
  */
 
 #pragma once
@@ -12,11 +12,11 @@
 
 
 /**
- * @brief A class which implementes a partial derivative operator
- * using a spline interpolation.
+ * @brief A class which implements a partial derivative operator
+ * using a 1d spline interpolation.
  */
 template <class FieldXiBuilderBatched, class FieldXiEvaluatorBatched>
-class SplinePartialDerivative
+class SplinePartialDerivative1D
     : public IPartialDerivative<
               DField<typename FieldXiBuilderBatched::batched_interpolation_domain_type>,
               typename FieldXiBuilderBatched::continuous_dimension_type>
@@ -57,12 +57,12 @@ private:
 
 public:
     /**
-    * @brief Construct an instance of the class SplinePartialDerivative.
+    * @brief Construct an instance of the class SplinePartialDerivative1D.
     *
     * @param fieldxi_builder Builder for intermediate interpolation representation.
     * @param fieldxi_evaluator Evaluator for intermediate interpolation representation.
     */
-    explicit SplinePartialDerivative(
+    explicit SplinePartialDerivative1D(
             FieldXiBuilderBatched const& fieldxi_builder,
             FieldXiEvaluatorBatched const& fieldxi_evaluator)
         : m_fieldxi_builder(fieldxi_builder)

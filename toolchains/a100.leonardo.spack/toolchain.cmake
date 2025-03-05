@@ -6,10 +6,11 @@ set(CMAKE_BUILD_TYPE Release)
 
 # Compiler options
 set(CMAKE_CXX_COMPILER ${CMAKE_CURRENT_LIST_DIR}/../../vendor/kokkos/bin/nvcc_wrapper)
+set(CMAKE_CXX_EXTENSIONS OFF) # Avoid a Kokkos warning that will force if to OFF anyway when compiling with nvcc
 set(CMAKE_CXX_FLAGS "-Wall -Wno-sign-compare --Werror cross-execution-space-call -Xcudafe --diag_suppress=unsigned_compare_with_zero -Xcudafe --diag_suppress=integer_sign_change")
 
 # Gyselalibxx options
-set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Voice++" FORCE)
+set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
 
 # Kokkos options
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "Allow serial code to run" FORCE)

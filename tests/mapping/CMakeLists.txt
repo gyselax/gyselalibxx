@@ -2,7 +2,7 @@ include(GoogleTest)
 
 add_executable(metric_tensor_tests_sll
     ../main.cpp
-    metric_tensor.cpp
+    metric_tensor_evaluator.cpp
 )
 target_compile_features(metric_tensor_tests_sll PUBLIC cxx_std_17)
 target_link_libraries(metric_tensor_tests_sll

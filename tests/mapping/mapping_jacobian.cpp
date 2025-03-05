@@ -160,11 +160,11 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         Matrix_2x2 Jacobian_matrix;
-        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irp));
+        Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coords(irtheta));
 
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
+        mapping.jacobian_matrix(coords(irtheta), Jacobian_matrix);
 
         check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
     });
@@ -183,12 +183,12 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
     static_assert(has_2d_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>, CoordRTheta>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         Matrix_2x2 Jacobian_matrix;
         Matrix_2x2 inv_Jacobian_matrix;
 
-        mapping.jacobian_matrix(coords(irp), Jacobian_matrix);
-        mapping.inv_jacobian_matrix(coords(irp), inv_Jacobian_matrix);
+        mapping.jacobian_matrix(coords(irtheta), Jacobian_matrix);
+        mapping.inv_jacobian_matrix(coords(irtheta), inv_Jacobian_matrix);
 
         check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
     });
@@ -218,9 +218,9 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
 
-    IdxRangeR interpolation_idx_range_R(InterpPointsR::get_domain<GridR>());
-    IdxRangeTheta interpolation_idx_range_Theta(InterpPointsTheta::get_domain<GridTheta>());
-    IdxRangeRTheta grid(interpolation_idx_range_R, interpolation_idx_range_Theta);
+    IdxRangeR interpolation_idx_range_r(InterpPointsR::get_domain<GridR>());
+    IdxRangeTheta interpolation_idx_range_theta(InterpPointsTheta::get_domain<GridTheta>());
+    IdxRangeRTheta grid(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     SplineRThetaBuilder_host builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
@@ -242,14 +242,14 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irp) {
-        const CoordRTheta coord_rp(ddc::coordinate(irp));
-        const double r = ddc::get<R>(coord_rp);
+    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
+        const double r = ddc::get<R>(coord_rtheta);
         if (fabs(r) > 1e-15) {
             Matrix_2x2 Jacobian_matrix;
-            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rp);
+            Matrix_2x2 inv_Jacobian_matrix = inv_jacobian(coord_rtheta);
 
-            mapping.jacobian_matrix(coord_rp, Jacobian_matrix);
+            mapping.jacobian_matrix(coord_rtheta, Jacobian_matrix);
 
             check_inverse(Jacobian_matrix, inv_Jacobian_matrix);
         }

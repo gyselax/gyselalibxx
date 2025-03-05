@@ -8,12 +8,12 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "directional_tag.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 using namespace ddc;
 
@@ -31,11 +31,17 @@ public:
     struct X
     {
         static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = X;
     };
 
     struct Y
     {
         static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Y;
     };
     using CoordX = Coordinate<X>;
     using CoordY = Coordinate<Y>;
@@ -53,7 +59,7 @@ public:
     using IdxRangeY = IdxRange<GridY>;
     using IdxXY = Idx<GridX, GridY>;
     using IdxRangeXY = IdxRange<GridX, GridY>;
-    using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>>>;
+    using AdvectionFieldMem = host_t<VectorFieldMem<double, IdxRangeXY, VectorIndexSet<X, Y>>>;
     using RungeKutta = std::conditional_t<
             ORDER == 2,
             RK2<AdvectionFieldMem, AdvectionFieldMem, Kokkos::DefaultHostExecutionSpace>,
@@ -90,8 +96,8 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     using IdxRangeXY = typename TestFixture::IdxRangeXY;
     using RungeKutta = typename TestFixture::RungeKutta;
     using AdvectionFieldMem = typename TestFixture::AdvectionFieldMem;
-    using AdvectionField = host_t<VectorField<double, IdxRangeXY, NDTag<X, Y>>>;
-    using ConstAdvectionField = host_t<VectorConstField<double, IdxRangeXY, NDTag<X, Y>>>;
+    using AdvectionField = host_t<VectorField<double, IdxRangeXY, VectorIndexSet<X, Y>>>;
+    using ConstAdvectionField = host_t<VectorConstField<double, IdxRangeXY, VectorIndexSet<X, Y>>>;
 
     CoordX x_min(-1.0);
     CoordX x_max(1.0);

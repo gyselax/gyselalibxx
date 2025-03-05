@@ -20,7 +20,7 @@ option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
 option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this should be set to off to build documentation without the C++ dependencies)" ON)
-set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Voice++")
+set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Gyselalib++")
 option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
@@ -90,7 +90,7 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-find_package(Kokkos 4.5.1)
+find_package(Kokkos 4.5.1 QUIET)
 if(NOT "${Kokkos_FOUND}")
   ## Use Kokkos from `vendor/`
   if("${Kokkos_ENABLE_CUDA}")
@@ -100,22 +100,27 @@ if(NOT "${Kokkos_FOUND}")
   add_subdirectory("vendor/kokkos/" "kokkos") # SYSTEM)
 endif()
 
-# NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
-set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
-add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
+find_package(KokkosKernels 4.5.1 QUIET)
+if(NOT "${KokkosKernels_FOUND}")
+  # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
+  set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
+  set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
+  set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
+  add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels") # SYSTEM)
+endif()
 
 find_package (Eigen3 3.3 NO_MODULE)
-
 if (NOT EIGEN3_FOUND)
   ## Use Eigen from `vendor/`
   set(EIGEN_BUILD_DOC OFF CACHE BOOL "Don't build eigen docs")
   add_subdirectory("vendor/eigen/" "eigen") # SYSTEM)
 endif (NOT EIGEN3_FOUND)
 
-## Use the discrete domain computation library (ddc) from `vendor/`
-add_subdirectory("vendor/ddc/" "ddc") # SYSTEM)
+find_package(DDC 0.5 QUIET COMPONENTS fft pdi splines)
+if(NOT "${DDC_FOUND}")
+  ## Use the discrete domain computation library (ddc) from `vendor/`
+  add_subdirectory("vendor/ddc/" "ddc") # SYSTEM)
+endif()
 
 set(koliop_BUILD_TESTING OFF CACHE BOOL "")
 set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
@@ -127,7 +132,7 @@ add_subdirectory("vendor/koliop/" "koliop") # SYSTEM)
 ###############################################################################################
 # Our project code
 
-## Change the C++ flags to the voice specific ones
+## Change the C++ flags to the Gyselalib++ specific ones
 set(CMAKE_CXX_FLAGS "${GYSELALIBXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)

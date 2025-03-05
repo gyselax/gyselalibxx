@@ -279,7 +279,7 @@ def search_for_unnecessary_auto(file):
             if not any(v['str'] in chain(mirror_functions, auto_functions) for v in config.data[start:end]):
                 report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
-        if config.data_xml is None:
+        if not config.data_xml:
             continue
 
         # Find auto in arguments of lambda functions
@@ -298,7 +298,7 @@ def search_for_unnecessary_auto(file):
             lambda_args = ' '.join(a['str'] for a in config.data[end_idx+2:end_args_idx]).split(',')
             for a in lambda_args:
                 if 'auto' in a:
-                    report_error(ERROR, file, config.data[start_idx]['linenr'], f"Please use explicit types instead of auto ({a})")
+                    report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
 
         for elem in chain(config.data_xml.findall(".token[@str='KOKKOS_CLASS_LAMBDA']"), config.data_xml.findall(".token[@str='KOKKOS_LAMBDA']")):
             start_idx = config.data.index(elem.attrib)+3
@@ -306,7 +306,7 @@ def search_for_unnecessary_auto(file):
             lambda_args = ' '.join(a['str'] for a in config.data[start_idx:end_args_idx]).split(',')
             for a in lambda_args:
                 if 'auto' in a.split():
-                    report_error(ERROR, file, config.data[start_idx]['linenr'], f"Please use explicit types instead of auto ({a})")
+                    report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({a})")
 
 def search_for_bad_create_mirror(file):
     """
@@ -404,7 +404,7 @@ def search_for_bad_aliases(file):
                        "can be multi-D. Please use Grid1D")
                 report_error(STYLE, file, linenr, msg)
             # Beginning with verbs is ok as are some specific prefixes
-            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx')
+            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq')
             if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
                 prefix = 'Multipatch' if 'Multipatch' in a_name else ''
                 name = a_name.replace('Multipatch','')
@@ -439,7 +439,7 @@ def search_for_uid(file):
     Test for use of uid(). The DDC internal unique identifier should never be used directly.
     """
     for config in file.configs:
-        if config.data_xml is None:
+        if not config.data_xml:
             continue
         uid_usage = [d.attrib for d in config.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
         uid_indices = [config.data.index(d) for d in uid_usage]
@@ -525,7 +525,7 @@ def check_kokkos_lambda_use(file):
     - Check that class variables are not used in lambda functions passed to ddc::parallel_X functions.
     """
     for config in file.configs:
-        if config.data_xml is None:
+        if not config.data_xml:
             continue
 
         for p in parallel_functions:
@@ -775,7 +775,8 @@ def check_exec_space_usage(file):
                               'conditional', 'conditional_t', 'enable_if', 'enable_if_t', 'is_base_of', 'is_base_of_v',
                               'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
                               'make_integer_sequence', 'make_index_sequence', 'index_sequence',
-                              'experimental::full_extent', 'experimental::submdspan')
+                              'experimental::full_extent', 'experimental::submdspan', 'conjunction_v', 'disjunction_v',
+                              'conjunction', 'disjunction')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
                 func = None
@@ -814,7 +815,7 @@ if __name__ == '__main__':
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
                         '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
-                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse']
+                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation']
     for f in multipatch_geom:
         if no_file_filter or f in (*filter_files, spec_info):
             print("------------- Checking ", f, " -------------")

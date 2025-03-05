@@ -9,7 +9,7 @@ The polar coordinates represent a **logical domain**, and the Cartesian coordina
 
 The splines applied are cubic and only defined on the logical domain. 
 
-The polar geometry can have a degenerated point. We call *O-point* or *center point*, the points $`(r=0, \theta) \ \forall \theta`$. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code *polar spline* (see PolarSpline). Both basis are used in the code. 
+The polar geometry can have a degenerated point. We call *O-point* or *centre point*, the points $`(r=0, \theta) \ \forall \theta`$. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code *polar spline* (see PolarSpline). Both basis are used in the code. 
 
 ## Shortcuts
 The shortcuts defined in the geometry file represent:
@@ -19,7 +19,7 @@ The shortcuts defined in the geometry file represent:
 2. The type of coordinates of objects represented on the dimensions (`CoordR`, `CoordTheta`, `CoordRTheta`, `CoordVr`, `CoordVtheta`, `CoordX`, `CoordY`, `CoordXY`, `CoordVx` and `CoordVy`).
 3.  The type of the B-Spline bases used on the logical dimensions (`BSplinesR` and `BSplinesTheta`).
 4.  The type which will describe the grid points on which the simulation will evolve (`GridR`, `GridTheta`). 
-5.  The type of the helper class which initialises grid points in space which are compatible with the defined splines (`SplineInterpPointsR`,  `SplineInterpPointsTheta`).
+5.  The type of the helper class which initialises grid points in space which are compatible with the defined splines (`SplineInterpPointsR`, `SplineInterpPointsTheta`).
 6.  The type of the objects used to build splines and evaluate them (`SplineRThetaBuilder`, `SplineRThetaEvaluator`).
 7.  The type which describes the index of a grid point (e.g. `IdxR`).
 8.  The type which describes a distance between grid points (e.g. `IdxStepR`).
@@ -31,4 +31,4 @@ The shortcuts defined in the geometry file represent:
 14. The templated type of a constant field defined on each of the domains (e.g. `ConstFieldR<ElementType>`).
 15. The type of a constant field of doubles defined on each of the domains (e.g. `DConstFieldR`).
 16. The type of a field of doubles defined on the spline domains representing a spline on the Cartesian product base (e.g. `Spline2D`), and a spline on the polar spline base (e.g. `PolarSplineRTheta`).
-17. The type of VectorField defined on the index range `IdxRangeRTheta` on the template directions `NDTag<Dim1, Dim2>` (`VectorDFieldRTheta<Dim1, Dim2>`). The directions used in the code are either `<R, Theta>` or `<X, Y>`. 
+17. The type of VectorField defined on the index range `IdxRangeRTheta` on the template directions `VectorIndexSet<Dim1, Dim2>` (`VectorDFieldRTheta<Dim1, Dim2>`). The directions used in the code are either `<R, Theta>` or `<X, Y>`. 

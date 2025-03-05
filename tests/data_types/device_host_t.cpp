@@ -8,9 +8,9 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 
 namespace {
@@ -21,7 +21,7 @@ class Tag2
 {
 };
 
-using Direction = NDTag<Tag1, Tag2>;
+using Direction = VectorIndexSet<Tag1, Tag2>;
 
 
 struct GridX

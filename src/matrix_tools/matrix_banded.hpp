@@ -22,7 +22,7 @@ public:
     virtual void set_element(int i, int j, double a_ij) override;
 
 protected:
-    virtual int factorize_method() override;
+    virtual int factorise_method() override;
     virtual int solve_inplace_method(double* b, char transpose, int n_equations) const override;
     /// Number of subdiagonals.
     int const kl;

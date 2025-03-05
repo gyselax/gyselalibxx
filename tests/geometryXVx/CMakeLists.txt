@@ -15,7 +15,6 @@ add_executable(unit_tests_${GEOMETRY_VARIANT}
     krooksource.cpp
     masks.cpp
     splitvlasovsolver.cpp
-    maxwellian.cpp
     ../main.cpp
 )
 
@@ -36,6 +35,29 @@ target_link_libraries(unit_tests_${GEOMETRY_VARIANT}
 )
 
 gtest_discover_tests(unit_tests_${GEOMETRY_VARIANT}
+    TEST_SUFFIX "_${GEOMETRY_VARIANT}"
+    PROPERTIES TIMEOUT 10
+    DISCOVERY_MODE PRE_TEST
+)
+
+add_executable(unit_tests_maxwellian_${GEOMETRY_VARIANT}
+    maxwellian.cpp
+    ../main.cpp
+)
+
+target_link_libraries(unit_tests_maxwellian_${GEOMETRY_VARIANT}
+    PUBLIC
+        GTest::gtest
+        GTest::gmock
+        gslx::geometry_${GEOMETRY_VARIANT}
+        gslx::initialisation_${GEOMETRY_VARIANT}
+        gslx::quadrature
+        gslx::speciesinfo
+        gslx::time_integration_${GEOMETRY_VARIANT}
+        gslx::utils
+)
+
+gtest_discover_tests(unit_tests_maxwellian_${GEOMETRY_VARIANT}
     TEST_SUFFIX "_${GEOMETRY_VARIANT}"
     PROPERTIES TIMEOUT 10
     DISCOVERY_MODE PRE_TEST

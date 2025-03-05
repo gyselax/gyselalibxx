@@ -27,11 +27,9 @@ struct Theta
 };
 struct X
 {
-    static constexpr bool PERIODIC = false;
 };
 struct Y
 {
-    static constexpr bool PERIODIC = false;
 };
 
 static constexpr std::size_t spline_r_degree = DEGREE_R;
@@ -140,10 +138,10 @@ TEST(PolarSplineTest, ConstantEval)
 
     ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
-    IdxRange<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
-    IdxRange<GridTheta> interpolation_idx_range_P(GrevillePointsTheta::get_domain<GridTheta>());
+    IdxRange<GridR> interpolation_idx_range_r(GrevillePointsR::get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_theta(GrevillePointsTheta::get_domain<GridTheta>());
     IdxRange<GridR, GridTheta>
-            interpolation_idx_range(interpolation_idx_range_R, interpolation_idx_range_P);
+            interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     BuilderRTheta builder_rtheta(interpolation_idx_range);
 
@@ -263,10 +261,10 @@ void test_polar_integrals()
 
     ddc::init_discrete_space<GridR>(GrevillePointsR::get_sampling<GridR>());
     ddc::init_discrete_space<GridTheta>(GrevillePointsTheta::get_sampling<GridTheta>());
-    IdxRange<GridR> interpolation_idx_range_R(GrevillePointsR::get_domain<GridR>());
-    IdxRange<GridTheta> interpolation_idx_range_P(GrevillePointsTheta::get_domain<GridTheta>());
+    IdxRange<GridR> interpolation_idx_range_r(GrevillePointsR::get_domain<GridR>());
+    IdxRange<GridTheta> interpolation_idx_range_theta(GrevillePointsTheta::get_domain<GridTheta>());
     IdxRange<GridR, GridTheta>
-            interpolation_idx_range(interpolation_idx_range_R, interpolation_idx_range_P);
+            interpolation_idx_range(interpolation_idx_range_r, interpolation_idx_range_theta);
 
     BuilderRTheta builder_rtheta(interpolation_idx_range);
 
