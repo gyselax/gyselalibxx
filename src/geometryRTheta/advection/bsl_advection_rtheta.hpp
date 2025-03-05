@@ -4,7 +4,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
-#include "i_interpolator_rtheta.hpp"
+#include "i_interpolator_2d.hpp"
 #include "iadvection_rtheta.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_rtheta.hpp"

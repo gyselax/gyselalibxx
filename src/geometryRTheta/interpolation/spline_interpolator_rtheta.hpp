@@ -2,7 +2,7 @@
 #pragma once
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "i_interpolator_rtheta.hpp"
+#include "i_interpolator_2d.hpp"
 
 /**
  * @brief A class for interpolating a function using splines in polar coordinates.
