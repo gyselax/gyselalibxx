@@ -82,7 +82,7 @@ public:
  * These objects are: m_coefs.
  */
 template <class Spline2DBuilder, class Spline2DEvaluator>
-class PreallocatableSplineInterpolatorRTheta
+class PreallocatableSplineInterpolator2D
     : public IPreallocatableInterpolator2D<
               typename Spline2DBuilder::interpolation_domain_type,
               typename Spline2DBuilder::batched_interpolation_domain_type>
@@ -98,7 +98,7 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    PreallocatableSplineInterpolatorRTheta(
+    PreallocatableSplineInterpolator2D(
             Spline2DBuilder const& builder,
             Spline2DEvaluator const& evaluator)
         : m_builder(builder)

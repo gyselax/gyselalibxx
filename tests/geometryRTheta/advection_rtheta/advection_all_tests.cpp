@@ -182,7 +182,7 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& interpolator;
+    PreallocatableSplineInterpolator2D<ddc::NullExtrapolationRule> const& interpolator;
     SplineRThetaBuilder const& advection_builder;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
@@ -323,7 +323,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
 
 
     // --- Evaluator for the test advection field:

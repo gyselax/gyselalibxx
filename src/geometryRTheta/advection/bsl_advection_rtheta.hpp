@@ -54,7 +54,7 @@ template <class FootFinder, class Mapping>
 class BslAdvectionRTheta : public IAdvectionRTheta
 {
 private:
-    PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& m_interpolator;
+    PreallocatableSplineInterpolator2D<ddc::NullExtrapolationRule> const& m_interpolator;
 
     FootFinder const& m_find_feet;
 
@@ -78,7 +78,7 @@ public:
      *      A child class of IFootFinder.
      */
     BslAdvectionRTheta(
-            PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const&
+            PreallocatableSplineInterpolator2D<ddc::NullExtrapolationRule> const&
                     function_interpolator,
             FootFinder const& foot_finder,
             Mapping const& mapping)

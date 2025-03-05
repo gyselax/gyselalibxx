@@ -142,7 +142,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
 
     RK3<FieldMemRTheta<CoordRTheta>,
         DVectorFieldMemRTheta<X, Y>,
