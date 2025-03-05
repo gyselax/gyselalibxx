@@ -104,7 +104,7 @@ KOKKOS_FUNCTION auto internal_index(TensorType& tensor, std::index_sequence<I...
             TensorType,
             ddc::detail::TypeSeq<VectorIndexIdMap<
                     ddc::type_seq_element_t<I, TypeSeqCharIds>::value,
-                    typename TensorType::vector_index_set_t<I>>...>>(tensor);
+                    typename TensorType::template vector_index_set_t<I>>...>>(tensor);
 }
 
 template <
