@@ -64,7 +64,7 @@ public:
         * false so that when the function is called with the other dimension, the builder is not 
         * called again. 
         *
-        * To summarize with X and Y as the two dimensions: 
+        * To summarise with X and Y as the two dimensions: 
         * ITERATION N 
         *   compute_coeff<X>(field) --> calls spline_builder
         *   compute_coeff<Y>(field) --> does not call spline_builder
