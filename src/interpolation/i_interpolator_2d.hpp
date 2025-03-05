@@ -24,8 +24,13 @@ class IInterpolator2D
             continuous_dimension_type;
 
 public:
+    /// The type of a coordinate on the 2D plane.
     using CoordType = Coord<Dim1, Dim2>;
+
+    /// The type of a field which can be interpolated.
     using DFieldType = DField<IdxRangeBatched>;
+
+    /// The type of a field containing the coordinates where a field should be evaluated.
     using CConstFieldType = ConstField<CoordType, IdxRangeBatched>;
 
 public:
@@ -70,8 +75,6 @@ public:
     using typename IInterpolator2D<IdxRange2D, IdxRangeBatched>::CoordType;
 
 public:
-    ~IPreallocatableInterpolator2D() override = default;
-
     /**
      * @brief Allocate an instance of a pointer to an InterpolatorRTheta.
      *
