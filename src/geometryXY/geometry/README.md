@@ -20,4 +20,4 @@ The shortcuts defined in the geometry file represent:
 13. The type of a field of doubles defined on each of the domains (e.g. `DFieldX`).
 14. The templated type of a constant field defined on each of the domains (e.g. `ConstFieldX<ElementType>`).
 15. The type of a constant field of doubles defined on each of the domains (e.g. `DConstFieldX`).
-16. The type of VectorField defined on the index range `IdxRangeXY` on the directions `NDTag<RDimX, RDimY>` (`VectorFieldXY_XY`). 
+16. The type of VectorField defined on the index range `IdxRangeXY` on the directions `VectorIndexSet<RDimX, RDimY>` (`VectorFieldXY_XY`). 

@@ -27,6 +27,25 @@ struct TypeSeqRange<TypeSeqIn, Start, End, End, TypeSeqOut>
     using type = TypeSeqOut;
 };
 
+template <class Dim, class TypeSeqGrid>
+struct FindGrid;
+
+template <class Dim, class HeadGrid, class... Grids>
+struct FindGrid<Dim, ddc::detail::TypeSeq<HeadGrid, Grids...>>
+{
+    using type = std::conditional_t<
+            std::is_same_v<typename HeadGrid::continuous_dimension_type, Dim>,
+            HeadGrid,
+            typename FindGrid<Dim, ddc::detail::TypeSeq<Grids...>>::type>;
+};
+
+template <class Dim>
+struct FindGrid<Dim, ddc::detail::TypeSeq<>>
+{
+    static_assert(std::is_same_v<Dim, Dim>, "Grid not found");
+    using type = void;
+};
+
 template <class... TypeSeqs>
 struct TypeSeqCat;
 
@@ -76,6 +95,10 @@ using type_seq_range_t = typename detail::TypeSeqRange<TypeSeqIn, Start, End, St
  */
 template <class... TypeSeqs>
 using type_seq_cat_t = typename detail::TypeSeqCat<TypeSeqs...>::type;
+
+/// A tool to find the grid that is defined along the specified dimension (e.g. get GridX from X)
+template <class Dim, class TypeSeqGrid>
+using find_grid_t = typename detail::FindGrid<Dim, TypeSeqGrid>::type;
 
 /**
  * @brief Get a TypeSeq containing all unique types from the original TypeSeq.

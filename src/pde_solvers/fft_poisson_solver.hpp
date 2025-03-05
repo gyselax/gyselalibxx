@@ -6,8 +6,8 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "directional_tag.hpp"
 #include "ipoisson_solver.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * See @ref FFTPoissonSolverImplementation.
@@ -163,7 +163,7 @@ private:
             VectorField<
                     double,
                     laplacian_idx_range_type,
-                    NDTag<Dims...>,
+                    VectorIndexSet<Dims...>,
                     memory_space,
                     layout_space> gradient,
             fourier_field_type fourier_derivative,
