@@ -27,12 +27,17 @@
  * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
  */
 template <class SplineRThetaBuilder, class SplineRThetaEvaluator>
-class SplineInterpolatorRTheta : public IInterpolatorRTheta
+class SplineInterpolatorRTheta
+    : public IInterpolator2D<
+              typename SplineRThetaBuilder::interpolation_domain_type,
+              typename SplineRThetaBuilder::batched_interpolation_domain_type>
 {
 private:
     SplineRThetaBuilder const& m_builder;
 
     SplineRThetaEvaluator const& m_evaluator;
+
+    using IdxRangeBSRTheta = typename SplineRThetaBuilder::batched_spline_domain_type;
 
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
@@ -46,7 +51,9 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolatorRTheta(SplineRThetaBuilder const& builder, SplineRThetaEvaluator const& evaluator)
+    SplineInterpolatorRTheta(
+            SplineRThetaBuilder const& builder,
+            SplineRThetaEvaluator const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(get_spline_idx_range(builder))
@@ -108,7 +115,8 @@ public:
  * These objects are: m_coefs.
  */
 template <class RadialExtrapolationRule>
-class PreallocatableSplineInterpolatorRTheta : public IPreallocatableInterpolatorRTheta
+class PreallocatableSplineInterpolatorRTheta
+    : public IPreallocatableInterpolator2D<IdxRangeRTheta, IdxRangeRTheta>
 {
 public:
     /// The type of the 2D Spline Evaluator used by this class
@@ -152,7 +160,7 @@ public:
      *
      * @return A pointer to an instance of the SplineInterpolatorRTheta class.
      */
-    std::unique_ptr<IInterpolatorRTheta> preallocate() const override
+    std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeRTheta>> preallocate() const override
     {
         return std::make_unique<SplineInterpolatorRTheta<
                 SplineRThetaBuilder,
