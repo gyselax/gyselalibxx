@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 /**
  * @file spline_builder_2d_cache.hpp
- * File containing a class to store the spline builder coefficients and recompute them when required..
+ * File containing a class to store the spline builder coefficients and recompute them when required.
  */
 
 #pragma once
