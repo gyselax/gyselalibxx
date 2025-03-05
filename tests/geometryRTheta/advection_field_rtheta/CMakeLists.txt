@@ -32,7 +32,7 @@ function (advection_field_test_executable SIMULATION)
             gslx::advection_RTheta
             gslx::diocotron_init_eq
             gslx::geometry_RTheta
-            gslx::interpolation_RTheta
+            gslx::interpolation
             gslx::paraconfpp
             gslx::poisson_RTheta
             gslx::quadrature
