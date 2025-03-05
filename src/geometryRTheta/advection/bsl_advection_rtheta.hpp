@@ -7,7 +7,7 @@
 #include "i_interpolator_2d.hpp"
 #include "iadvection_rtheta.hpp"
 #include "metric_tensor_evaluator.hpp"
-#include "spline_interpolator_rtheta.hpp"
+#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
