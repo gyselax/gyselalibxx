@@ -14,7 +14,7 @@
  * the value of a function to be approximated at a set of
  * coordinates from a set of known values of the function.
  */
-template <class IdxRange2D, class BatchedIdxRange>
+template <class IdxRange2D, class IdxRangeBatched>
 class IInterpolator2D
 {
     static_assert(IdxRange2D::rank() == 2);
@@ -25,8 +25,8 @@ class IInterpolator2D
 
 public:
     using CoordType = Coord<Dim1, Dim2>;
-    using DFieldType = DField<BatchedIdxRange>;
-    using CConstFieldType = ConstField<CoordType, BatchedIdxRange>;
+    using DFieldType = DField<IdxRangeBatched>;
+    using CConstFieldType = ConstField<CoordType, IdxRangeBatched>;
 
 public:
     virtual ~IInterpolator2D() = default;
@@ -43,9 +43,9 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    virtual DField<BatchedIdxRange> operator()(
-            DField<BatchedIdxRange> inout_data,
-            ConstField<CoordType, BatchedIdxRange> coordinates) const = 0;
+    virtual DField<IdxRangeBatched> operator()(
+            DField<IdxRangeBatched> inout_data,
+            ConstField<CoordType, IdxRangeBatched> coordinates) const = 0;
 };
 
 
@@ -63,11 +63,11 @@ public:
  * This means that objects of this class take up little or no space in memory.
  *
  */
-template <class IdxRange2D, class BatchedIdxRange>
-class IPreallocatableInterpolator2D : public IInterpolator2D<IdxRange2D, BatchedIdxRange>
+template <class IdxRange2D, class IdxRangeBatched>
+class IPreallocatableInterpolator2D : public IInterpolator2D<IdxRange2D, IdxRangeBatched>
 {
 public:
-    using typename IInterpolator2D<IdxRange2D, BatchedIdxRange>::CoordType;
+    using typename IInterpolator2D<IdxRange2D, IdxRangeBatched>::CoordType;
 
 public:
     ~IPreallocatableInterpolator2D() override = default;
@@ -82,11 +82,11 @@ public:
      *
      * @see IInterpolator2D
      */
-    virtual std::unique_ptr<IInterpolator2D<IdxRange2D, BatchedIdxRange>> preallocate() const = 0;
+    virtual std::unique_ptr<IInterpolator2D<IdxRange2D, IdxRangeBatched>> preallocate() const = 0;
 
-    DField<BatchedIdxRange> operator()(
-            DField<BatchedIdxRange> inout_data,
-            ConstField<CoordType, BatchedIdxRange> coordinates) const override
+    DField<IdxRangeBatched> operator()(
+            DField<IdxRangeBatched> inout_data,
+            ConstField<CoordType, IdxRangeBatched> coordinates) const override
     {
         return (*preallocate())(inout_data, coordinates);
     }
