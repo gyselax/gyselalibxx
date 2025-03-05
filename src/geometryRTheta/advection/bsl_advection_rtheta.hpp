@@ -54,7 +54,23 @@ template <class FootFinder, class Mapping>
 class BslAdvectionRTheta : public IAdvectionRTheta
 {
 private:
-    PreallocatableSplineInterpolator2D<ddc::NullExtrapolationRule> const& m_interpolator;
+    /// The type of the 2D Spline Evaluator used by this class
+    using evaluator_type = ddc::SplineEvaluator2D<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            BSplinesR,
+            BSplinesTheta,
+            GridR,
+            GridTheta,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            GridR,
+            GridTheta>;
+    using PreallocatableSplineInterpolatorType
+            = PreallocatableSplineInterpolator2D<SplineRThetaBuilder, evaluator_type>;
+    PreallocatableSplineInterpolatorType const& m_interpolator;
 
     FootFinder const& m_find_feet;
 
@@ -78,8 +94,7 @@ public:
      *      A child class of IFootFinder.
      */
     BslAdvectionRTheta(
-            PreallocatableSplineInterpolator2D<ddc::NullExtrapolationRule> const&
-                    function_interpolator,
+            PreallocatableSplineInterpolatorType const& function_interpolator,
             FootFinder const& foot_finder,
             Mapping const& mapping)
         : m_interpolator(function_interpolator)
@@ -110,7 +125,8 @@ public:
             double dt) const override
     {
         // Pre-allocate some memory to prevent allocation later in loop
-        std::unique_ptr<IInterpolatorRTheta> const interpolator_ptr = m_interpolator.preallocate();
+        std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeRTheta>> const interpolator_ptr
+                = m_interpolator.preallocate();
 
         // Initialise the feet
         FieldMemRTheta<CoordRTheta> feet_rtheta_alloc(get_idx_range(advection_field_xy));
