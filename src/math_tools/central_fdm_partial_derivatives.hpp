@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "ddc/discrete_domain.hpp"
 #include "ddc/uniform_point_sampling.hpp"
 
 #include "ddc_alias_inline_functions.hpp"
@@ -79,13 +80,20 @@ public:
                     } else if (ix == idxrange_deriv.back()) {
                         // Calculate backward differences at right boundary
                         dfieldval_dxi(ibx)
-                                = (3*fieldval(ibx)
-                                  - 4*fieldval(ib, ix - step)+fieldval(ib,ix-2*step))
-                                            / (ddc::coordinate(ix) - ddc::coordinate(ix - 2*step));
+                                = (3 * fieldval(ibx) - 4 * fieldval(ib, ix - step)
+                                   + fieldval(ib, ix - 2 * step))
+                                  / (ddc::coordinate(ix) - ddc::coordinate(ix - 2 * step));
                     } else {
-                        dfieldval_dxi(ibx)
+                        // forward FDM
+                        double const forward_fdm
+                                = (fieldval(ib, ix + step) - fieldval(ibx))
+                                  / (ddc::coordinate(ix + step) - ddc::coordinate(ix));
+                        // backward FDM
+                        double const backward_fdm
                                 = (fieldval(ib, ix + step) - fieldval(ib, ix - step))
                                   / (ddc::coordinate(ix + step) - ddc::coordinate(ix - step));
+                        // mean of the two
+                        dfieldval_dxi(ibx) = (backward_fdm + forward_fdm) / 2.;
                     }
                 });
     }
