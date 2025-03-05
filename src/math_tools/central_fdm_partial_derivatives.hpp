@@ -12,7 +12,7 @@
 
 
 /**
- * @brief A class which implementes a partial derivative operator
+ * @brief A class which implements a partial derivative operator
  * using a central finite differences calculation. Forward and
  * backward finite differences are used at the boundaries.
  */
