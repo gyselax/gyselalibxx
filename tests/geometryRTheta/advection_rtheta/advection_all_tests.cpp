@@ -182,7 +182,8 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolator2D<ddc::NullExtrapolationRule> const& interpolator;
+    PreallocatableSplineInterpolator2D<SplineRThetaBuilder, SplineRThetaEvaluatorNullBound> const&
+            interpolator;
     SplineRThetaBuilder const& advection_builder;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
