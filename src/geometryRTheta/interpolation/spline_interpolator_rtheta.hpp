@@ -5,18 +5,8 @@
 #include "geometry.hpp"
 #include "i_interpolator_rtheta.hpp"
 
-
-/**
- * @brief A class for interpolating a function using splines in polar coordinates.
- *
- * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
- */
-template <class RadialExtrapolationRule>
-class SplineInterpolatorRTheta : public IInterpolatorRTheta
-{
-public:
-    /// The type of the 2D Spline Evaluator used by this class
-    using evaluator_type = ddc::SplineEvaluator2D<
+/*
+ *ddc::SplineEvaluator2D<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
@@ -29,17 +19,26 @@ public:
             ddc::PeriodicExtrapolationRule<Theta>,
             GridR,
             GridTheta>;
+*/
 
+/**
+ * @brief A class for interpolating a function using splines in polar coordinates.
+ *
+ * @tparam RadialExtrapolationRule The extrapolation rule applied at the outer radial bound.
+ */
+template <class SplineRThetaBuilder, class SplineRThetaEvaluator>
+class SplineInterpolatorRTheta : public IInterpolatorRTheta
+{
 private:
     SplineRThetaBuilder const& m_builder;
 
-    evaluator_type const& m_evaluator;
+    SplineRThetaEvaluator const& m_evaluator;
 
     mutable DFieldMem<IdxRangeBSRTheta> m_coefs;
 
-    using r_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type1>;
-    using theta_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type2>;
-    using mixed_deriv_type = DConstField<SplineRThetaBuilder::batched_derivs_domain_type>;
+    using r_deriv_type = DConstField<typename SplineRThetaBuilder::batched_derivs_domain_type1>;
+    using theta_deriv_type = DConstField<typename SplineRThetaBuilder::batched_derivs_domain_type2>;
+    using mixed_deriv_type = DConstField<typename SplineRThetaBuilder::batched_derivs_domain_type>;
 
 public:
     /**
@@ -47,7 +46,7 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    SplineInterpolatorRTheta(SplineRThetaBuilder const& builder, evaluator_type const& evaluator)
+    SplineInterpolatorRTheta(SplineRThetaBuilder const& builder, SplineRThetaEvaluator const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_coefs(get_spline_idx_range(builder))
@@ -155,7 +154,8 @@ public:
      */
     std::unique_ptr<IInterpolatorRTheta> preallocate() const override
     {
-        return std::make_unique<
-                SplineInterpolatorRTheta<RadialExtrapolationRule>>(m_builder, m_evaluator);
+        return std::make_unique<SplineInterpolatorRTheta<
+                SplineRThetaBuilder,
+                evaluator_type>>(m_builder, m_evaluator);
     }
 };
