@@ -25,6 +25,8 @@ class IInterpolator2D
 
 public:
     using CoordType = Coord<Dim1, Dim2>;
+    using DFieldType = DField<BatchedIdxRange>;
+    using CConstFieldType = ConstField<CoordType, BatchedIdxRange>;
 
 public:
     virtual ~IInterpolator2D() = default;
