@@ -18,7 +18,6 @@
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
-#include "spline_interpolator_rtheta.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"

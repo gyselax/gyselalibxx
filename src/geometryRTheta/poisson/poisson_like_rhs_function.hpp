@@ -4,7 +4,6 @@
 #include <ddc/ddc.hpp>
 
 #include "geometry.hpp"
-#include "spline_interpolator_rtheta.hpp"
 
 
 
