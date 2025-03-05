@@ -71,13 +71,17 @@ public:
                     IdxDeriv ix(ibx);
                     if (ix == idxrange_deriv.front()) {
                         // Calculate forward differences at left boundary
-                        dfieldval_dxi(ibx) = (fieldval(ix + step, ib) - fieldval(ibx))
-                                             / (ddc::coordinate(ix + step) - ddc::coordinate(ix));
+                        // We keep order two using decentered FDM
+                        dfieldval_dxi(ibx)
+                                = (-fieldval(ib, ix + 2 * step) + 4 * fieldval(ib, ix + step)
+                                   - 3 * fieldval(ibx))
+                                  / (ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix));
                     } else if (ix == idxrange_deriv.back()) {
-                        // Calculate forward differences at left boundary
-                        dfieldval_dxi(ix, ib)
-                                = (fieldval(ix, ib) - fieldval(ix - step, ib))
-                                  / (ddc::coordinate(ix) - ddc::coordinate(ix-step));
+                        // Calculate backward differences at right boundary
+                        dfieldval_dxi(ibx)
+                                = (3*fieldval(ibx)
+                                  - 4*fieldval(ib, ix - step)+fieldval(ib,ix-2*step))
+                                            / (ddc::coordinate(ix) - ddc::coordinate(ix - 2*step));
                     } else {
                         dfieldval_dxi(ibx)
                                 = (fieldval(ib, ix + step) - fieldval(ib, ix - step))
