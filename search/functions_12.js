@@ -30,7 +30,7 @@ var searchData=
   ['spline_5fquadrature_5fcoefficients_27',['spline_quadrature_coefficients',['../spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55',1,'spline_quadrature.hpp']]],
   ['spline_5fquadrature_5fcoefficients_5f1d_28',['spline_quadrature_coefficients_1d',['../spline__quadrature_8hpp.html#a7ba2798b4e65365dc3ddf922cad024ae',1,'spline_quadrature.hpp']]],
   ['splineinterpolator_29',['SplineInterpolator',['../classSplineInterpolator.html#a59381462373a38935329febd6950bed0',1,'SplineInterpolator']]],
-  ['splineinterpolatorrtheta_30',['SplineInterpolatorRTheta',['../classSplineInterpolatorRTheta.html#a494f3eceeddaea2b82f0934360be29d7',1,'SplineInterpolatorRTheta']]],
+  ['splineinterpolator2d_30',['SplineInterpolator2D',['../classSplineInterpolator2D.html#a8f6c46c5c501230611e0bdb7cc749ded',1,'SplineInterpolator2D']]],
   ['splinepartialderivative1d_31',['SplinePartialDerivative1D',['../classSplinePartialDerivative1D.html#a2f2e55d0474a8dad6cf0e14de894f22a',1,'SplinePartialDerivative1D']]],
   ['splinepolarfootfinder_32',['SplinePolarFootFinder',['../classSplinePolarFootFinder.html#a190dbd81c517977edcee7572953add5a',1,'SplinePolarFootFinder']]],
   ['splitrighthandsidesolver_33',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html#a0774d6960fa867c5ceacd89f05ecbd44',1,'SplitRightHandSideSolver']]],

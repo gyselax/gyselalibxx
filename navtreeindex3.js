@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classMatrix__Corner__Block.html#a7d06d0294c301af28e252ae180139704":[15,130,6],
+"classMatrix__Corner__Block.html#a824a9d43ce28eef0836510f68deaf7dd":[15,130,11],
+"classMatrix__Corner__Block.html#a86d8ea2d8cdabf491109060d5a37d517":[15,130,12],
 "classMatrix__Corner__Block.html#a9f1ba0d1ee24583b842b7a71c7479e19":[15,130,7],
 "classMatrix__Corner__Block.html#aa5b5120141de32446632becd4a258088":[15,130,3],
 "classMatrix__Corner__Block.html#aaf8dcc6cde4f47c3aea20101d3f9d451":[15,130,18],
@@ -37,8 +40,8 @@ var NAVTREEINDEX3 =
 "classMaxwellianEquilibrium.html#a0cc2b9bdb6300dd5661cedbfc27957b3":[15,138,3],
 "classMaxwellianEquilibrium.html#a0de7a4e921a394a01123af2eae342c21":[15,138,13],
 "classMaxwellianEquilibrium.html#a19a92489bebf290fb48a26a641c9e292":[15,138,15],
-"classMaxwellianEquilibrium.html#a37c0f236ccb7c4a8ce018c6d560c75c4":[15,138,7],
 "classMaxwellianEquilibrium.html#a37c0f236ccb7c4a8ce018c6d560c75c4":[15,138,11],
+"classMaxwellianEquilibrium.html#a37c0f236ccb7c4a8ce018c6d560c75c4":[15,138,7],
 "classMaxwellianEquilibrium.html#a52616624ef6c0da7107c05d680a11a74":[15,138,0],
 "classMaxwellianEquilibrium.html#a86de6dac16d6f3a968b16b028c4bee8d":[15,138,9],
 "classMaxwellianEquilibrium.html#a86de6dac16d6f3a968b16b028c4bee8d":[15,138,5],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "classPolarSplineEvaluator.html#ad283c37ae44c6a72f43bf2b6e48d43a8":[15,167,9],
 "classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791":[15,167,4],
 "classPolarSplineEvaluator.html#ae4fffa5d618015f463908c3fd9d019f0":[15,167,11],
-"classPolarSplineEvaluator.html#ae6eafb664ed50f902c2a07236d1c062d":[15,167,10],
-"classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c":[15,167,1],
-"classPolarSplineFEMPoissonLikeSolver.html":[15,168],
-"classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417":[15,168,9]
+"classPolarSplineEvaluator.html#ae6eafb664ed50f902c2a07236d1c062d":[15,167,10]
 };

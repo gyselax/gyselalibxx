@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"structIdxRangeSliceIterator.html#ae433765c9e433256f44fae63b22c8dd3":[15,87,0],
+"structInterface.html":[15,95],
 "structInterface.html#a0eba2d684c513fce67db0f0f977d1315":[15,95,0],
 "structInterface.html#a8f23b4f792c4cc36db73b8f7f49b4d7a":[15,95,1],
 "structInterface.html#add430c600a6a1181e4793a5a3b8beafd":[15,95,2],

@@ -28,7 +28,7 @@ var searchData=
   ['bottom_5fblock_5fsize_25',['bottom_block_size',['../classMatrix__Centre__Block.html#a518e1030a8ea5e08018a3f2c76c56f59',1,'Matrix_Centre_Block']]],
   ['branches_26',['Branches',['../docs_Using_git.html#docs_Using_git__Branches',1,'']]],
   ['bsladvection1d_27',['bsladvection1d',['../classBslAdvection1D.html#a7ae25b90d5ed98e07638f207bb18a0a6',1,'BslAdvection1D::BslAdvection1D()'],['../classBslAdvection1D.html',1,'BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, AdvectionFieldBuilder, AdvectionFieldEvaluator, TimeStepper &gt;']]],
-  ['bsladvectionrtheta_28',['bsladvectionrtheta',['../classBslAdvectionRTheta.html',1,'BslAdvectionRTheta&lt; FootFinder, Mapping &gt;'],['../classBslAdvectionRTheta.html#af559bba295fb3d5fcac425cae71bb972',1,'BslAdvectionRTheta::BslAdvectionRTheta()']]],
+  ['bsladvectionrtheta_28',['bsladvectionrtheta',['../classBslAdvectionRTheta.html',1,'BslAdvectionRTheta&lt; FootFinder, Mapping &gt;'],['../classBslAdvectionRTheta.html#a49bf03be8882926e0cab726a38a8f032',1,'BslAdvectionRTheta::BslAdvectionRTheta()']]],
   ['bsladvectionrtheta_3c_20splinepolarfootfinder_2c_20circulartocartesian_20_3e_29',['BslAdvectionRTheta&lt; SplinePolarFootFinder, CircularToCartesian &gt;',['../classBslAdvectionRTheta.html',1,'']]],
   ['bsladvectionspatial_30',['bsladvectionspatial',['../classBslAdvectionSpatial.html',1,'BslAdvectionSpatial&lt; Geometry, GridX &gt;'],['../classBslAdvectionSpatial.html#a6ee34fd8becaaf459692d47d6f59568d',1,'BslAdvectionSpatial::BslAdvectionSpatial()']]],
   ['bsladvectionspatial_20and_20bsladvectionvelocity_31',['Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity',['../tests_advection.html#autotoc_md90',1,'']]],

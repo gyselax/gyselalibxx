@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IInterpolatorRTheta Class Reference</title>
+<title>Gyselalib++: IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classIInterpolatorRTheta.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classIInterpolator2D.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -104,56 +104,74 @@ $(document).ready(function(){initNavTree('classIInterpolatorRTheta.html',''); in
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classIInterpolatorRTheta-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">IInterpolatorRTheta Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+<a href="classIInterpolator2D-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>A class which provides an interpolating function.  
- <a href="classIInterpolatorRTheta.html#details">More...</a></p>
+ <a href="classIInterpolator2D.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for IInterpolatorRTheta:</div>
+Inheritance diagram for IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classIInterpolatorRTheta.png" usemap="#IInterpolatorRTheta_map" alt=""/>
-  <map id="IInterpolatorRTheta_map" name="IInterpolatorRTheta_map">
-<area href="classIPreallocatableInterpolatorRTheta.html" title="A class which provides access to an interpolating function which can be preallocated where useful." alt="IPreallocatableInterpolatorRTheta" shape="rect" coords="206,56,608,80"/>
-<area href="classSplineInterpolatorRTheta.html" title="A class for interpolating a function using splines in polar coordinates." alt="SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;" shape="rect" coords="618,56,1020,80"/>
-<area href="classPreallocatableSplineInterpolatorRTheta.html" alt="PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;" shape="rect" coords="0,112,402,136"/>
-<area href="classPreallocatableSplineInterpolatorRTheta.html" title="A class which stores information necessary to create a pointer to an instance of the SplineInterpolat..." alt="PreallocatableSplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;" shape="rect" coords="412,112,814,136"/>
+  <img src="classIInterpolator2D.png" usemap="#IInterpolator2D_3C_20IdxRange2D_2C_20IdxRangeBatched_20_3E_map" alt=""/>
+  <map id="IInterpolator2D_3C_20IdxRange2D_2C_20IdxRangeBatched_20_3E_map" name="IInterpolator2D_3C_20IdxRange2D_2C_20IdxRangeBatched_20_3E_map">
+<area href="classIPreallocatableInterpolator2D.html" alt="IPreallocatableInterpolator2D&lt; Spline2DBuilder::interpolation_domain_type, Spline2DBuilder::batched_interpolation_domain_type &gt;" shape="rect" coords="0,56,749,80"/>
+<area href="classIPreallocatableInterpolator2D.html" title="A class which provides access to an interpolating function which can be preallocated where useful." alt="IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;" shape="rect" coords="759,56,1508,80"/>
+<area href="classPreallocatableSplineInterpolator2D.html" title="A class which stores information necessary to create a pointer to an instance of the SplineInterpolat..." alt="PreallocatableSplineInterpolator2D&lt; Spline2DBuilder, Spline2DEvaluator &gt;" shape="rect" coords="0,112,749,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa16e2d83b01633e1e88b8f5b84534613" id="r_aa16e2d83b01633e1e88b8f5b84534613"><td class="memItemLeft" align="right" valign="top"><a id="aa16e2d83b01633e1e88b8f5b84534613" name="aa16e2d83b01633e1e88b8f5b84534613"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordType</b> = Coord&lt; Dim1, Dim2 &gt;</td></tr>
+<tr class="memdesc:aa16e2d83b01633e1e88b8f5b84534613"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a coordinate on the 2D plane. <br /></td></tr>
+<tr class="separator:aa16e2d83b01633e1e88b8f5b84534613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4255ea63affeb96b4ba02e3c53c685c7" id="r_a4255ea63affeb96b4ba02e3c53c685c7"><td class="memItemLeft" align="right" valign="top"><a id="a4255ea63affeb96b4ba02e3c53c685c7" name="a4255ea63affeb96b4ba02e3c53c685c7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DFieldType</b> = DField&lt; IdxRangeBatched &gt;</td></tr>
+<tr class="memdesc:a4255ea63affeb96b4ba02e3c53c685c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a field which can be interpolated. <br /></td></tr>
+<tr class="separator:a4255ea63affeb96b4ba02e3c53c685c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42729a16cf23045e851682173916d3cc" id="r_a42729a16cf23045e851682173916d3cc"><td class="memItemLeft" align="right" valign="top"><a id="a42729a16cf23045e851682173916d3cc" name="a42729a16cf23045e851682173916d3cc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CConstFieldType</b> = ConstField&lt; <a class="el" href="classIInterpolator2D.html#aa16e2d83b01633e1e88b8f5b84534613">CoordType</a>, IdxRangeBatched &gt;</td></tr>
+<tr class="memdesc:a42729a16cf23045e851682173916d3cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a field containing the coordinates where a field should be evaluated. <br /></td></tr>
+<tr class="separator:a42729a16cf23045e851682173916d3cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a69b7130c9254502ada6f7bde85c43274" id="r_a69b7130c9254502ada6f7bde85c43274"><td class="memItemLeft" align="right" valign="top">virtual DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolatorRTheta.html#a69b7130c9254502ada6f7bde85c43274">operator()</a> (DFieldRTheta inout_data, ConstFieldRTheta&lt; CoordRTheta &gt; coordinates) const =0</td></tr>
-<tr class="memdesc:a69b7130c9254502ada6f7bde85c43274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <br /></td></tr>
-<tr class="separator:a69b7130c9254502ada6f7bde85c43274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad26242ffd54d4df04b8aa746ba25201e" id="r_ad26242ffd54d4df04b8aa746ba25201e"><td class="memItemLeft" align="right" valign="top">virtual DField&lt; IdxRangeBatched &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIInterpolator2D.html#ad26242ffd54d4df04b8aa746ba25201e">operator()</a> (DField&lt; IdxRangeBatched &gt; inout_data, ConstField&lt; <a class="el" href="classIInterpolator2D.html#aa16e2d83b01633e1e88b8f5b84534613">CoordType</a>, IdxRangeBatched &gt; coordinates) const =0</td></tr>
+<tr class="memdesc:ad26242ffd54d4df04b8aa746ba25201e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.  <br /></td></tr>
+<tr class="separator:ad26242ffd54d4df04b8aa746ba25201e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class which provides an interpolating function. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class IdxRange2D, class IdxRangeBatched&gt;<br />
+class IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</div><p>A class which provides an interpolating function. </p>
 <p>An abstract class which implements a function allowing the value of a function to be approximated at a set of coordinates from a set of known values of the function. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a69b7130c9254502ada6f7bde85c43274" name="a69b7130c9254502ada6f7bde85c43274"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69b7130c9254502ada6f7bde85c43274">&#9670;&#160;</a></span>operator()()</h2>
+<a id="ad26242ffd54d4df04b8aa746ba25201e" name="ad26242ffd54d4df04b8aa746ba25201e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad26242ffd54d4df04b8aa746ba25201e">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class IdxRange2D , class IdxRangeBatched &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DFieldRTheta IInterpolatorRTheta::operator() </td>
+          <td class="memname">virtual DField&lt; IdxRangeBatched &gt; <a class="el" href="classIInterpolator2D.html">IInterpolator2D</a>&lt; IdxRange2D, IdxRangeBatched &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype">DFieldRTheta&#160;</td>
+          <td class="paramtype">DField&lt; IdxRangeBatched &gt;&#160;</td>
           <td class="paramname"><em>inout_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ConstFieldRTheta&lt; CoordRTheta &gt;&#160;</td>
+          <td class="paramtype">ConstField&lt; <a class="el" href="classIInterpolator2D.html#aa16e2d83b01633e1e88b8f5b84534613">CoordType</a>, IdxRangeBatched &gt;&#160;</td>
           <td class="paramname"><em>coordinates</em>&#160;</td>
         </tr>
         <tr>
@@ -179,19 +197,19 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the inout_data array containing the value of the function at the coordinates. </dd></dl>
 
-<p>Implemented in <a class="el" href="classIPreallocatableInterpolatorRTheta.html#a4d28bfece4da02e58796a300634426e2">IPreallocatableInterpolatorRTheta</a>.</p>
+<p>Implemented in <a class="el" href="classIPreallocatableInterpolator2D.html#af1e25f21907360d777e5e385ccbe599e">IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/interpolation/<a class="el" href="i__interpolator__rtheta_8hpp_source.html">i_interpolator_rtheta.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/<a class="el" href="i__interpolator__2d_8hpp_source.html">i_interpolator_2d.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classIInterpolatorRTheta.html">IInterpolatorRTheta</a></li>
+    <li class="navelem"><a class="el" href="classIInterpolator2D.html">IInterpolator2D</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

@@ -6,7 +6,7 @@ var searchData=
   ['species_3',['Species',['../structSpecies.html',1,'']]],
   ['speciesinformation_4',['SpeciesInformation',['../classSpeciesInformation.html',1,'']]],
   ['splineinterpolator_5',['SplineInterpolator',['../classSplineInterpolator.html',1,'']]],
-  ['splineinterpolatorrtheta_6',['SplineInterpolatorRTheta',['../classSplineInterpolatorRTheta.html',1,'']]],
+  ['splineinterpolator2d_6',['SplineInterpolator2D',['../classSplineInterpolator2D.html',1,'']]],
   ['splinepartialderivative1d_7',['SplinePartialDerivative1D',['../classSplinePartialDerivative1D.html',1,'']]],
   ['splinepolarfootfinder_8',['SplinePolarFootFinder',['../classSplinePolarFootFinder.html',1,'']]],
   ['splitrighthandsidesolver_9',['SplitRightHandSideSolver',['../classSplitRightHandSideSolver.html',1,'']]],

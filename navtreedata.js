@@ -148,7 +148,6 @@ var NAVTREE =
           [ "Vortex merger", "src_geometryRTheta_initialisation.html#src_geometryRTheta_initialisation__Vortex_merger", null ],
           [ "Contents", "src_geometryRTheta_initialisation.html#src_geometryRTheta_initialisation__Contents", null ]
         ] ],
-        [ "Spline interpolator in polar coordinates", "src_geometryRTheta_interpolation.html", null ],
         [ "Polar Poisson solver", "src_geometryRTheta_poisson.html", [
           [ "The Poisson-like equation", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__The_Poisson-like_equation", null ],
           [ "Unit tests", "src_geometryRTheta_poisson.html#src_geometryRTheta_poisson__Unit_tests", null ],
@@ -277,11 +276,11 @@ var NAVTREEINDEX =
 "2patches__2d__non__periodic_8hpp_source.html",
 "classCrankNicolson.html#ad0949984fa0c2d0004f6b7a10e19cd69",
 "classIInterpolator.html",
-"classMatrix__Corner__Block.html#a9f1ba0d1ee24583b842b7a71c7479e19",
-"classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925",
-"connectivity__details_8hpp_source.html",
-"onion__patch__locator_8hpp_source.html",
-"structInterface.html#a0eba2d684c513fce67db0f0f977d1315"
+"classMatrix__Corner__Block.html#a7d06d0294c301af28e252ae180139704",
+"classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c",
+"collisions__intra_8hpp_source.html",
+"noperturbinitialisation_8hpp_source.html",
+"structIdxRangeSliceIterator.html#ae433765c9e433256f44fae63b22c8dd3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

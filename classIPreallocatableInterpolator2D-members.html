@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classSplineInterpolatorRTheta.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classIPreallocatableInterpolator2D.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,18 +103,18 @@ $(document).ready(function(){initNavTree('classSplineInterpolatorRTheta.html',''
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt; Member List</div></div>
+  <div class="headertitle"><div class="title">IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classIPreallocatableInterpolator2D.html">IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html#a1a3bc7571b3fc4d92ba639acdd26ea7f">evaluator_type</a> typedef</td><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html#a6406a1f9db2d02e67653b106d505ad98">operator()</a>(DFieldRTheta const inout_data, ConstField&lt; CoordRTheta, IdxRangeRTheta &gt; const coordinates) const override</td><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIInterpolatorRTheta.html#a69b7130c9254502ada6f7bde85c43274">IInterpolatorRTheta::operator()</a>(DFieldRTheta inout_data, ConstFieldRTheta&lt; CoordRTheta &gt; coordinates) const =0</td><td class="entry"><a class="el" href="classIInterpolatorRTheta.html">IInterpolatorRTheta</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html#a494f3eceeddaea2b82f0934360be29d7">SplineInterpolatorRTheta</a>(SplineRThetaBuilder const &amp;builder, evaluator_type const &amp;evaluator)</td><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~IInterpolatorRTheta</b>()=default (defined in <a class="el" href="classIInterpolatorRTheta.html">IInterpolatorRTheta</a>)</td><td class="entry"><a class="el" href="classIInterpolatorRTheta.html">IInterpolatorRTheta</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>~SplineInterpolatorRTheta</b>() override=default (defined in <a class="el" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;</a>)</td><td class="entry"><a class="el" href="classSplineInterpolatorRTheta.html">SplineInterpolatorRTheta&lt; RadialExtrapolationRule &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIInterpolator2D.html#a42729a16cf23045e851682173916d3cc">CConstFieldType</a> typedef</td><td class="entry"><a class="el" href="classIInterpolator2D.html">IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIInterpolator2D.html#aa16e2d83b01633e1e88b8f5b84534613">CoordType</a> typedef</td><td class="entry"><a class="el" href="classIInterpolator2D.html">IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIInterpolator2D.html#a4255ea63affeb96b4ba02e3c53c685c7">DFieldType</a> typedef</td><td class="entry"><a class="el" href="classIInterpolator2D.html">IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIPreallocatableInterpolator2D.html#af1e25f21907360d777e5e385ccbe599e">operator()</a>(DField&lt; IdxRangeBatched &gt; inout_data, ConstField&lt; CoordType, IdxRangeBatched &gt; coordinates) const override</td><td class="entry"><a class="el" href="classIPreallocatableInterpolator2D.html">IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIPreallocatableInterpolator2D.html#a88eb569b2a9496f0d68693e81a96c4dc">preallocate</a>() const =0</td><td class="entry"><a class="el" href="classIPreallocatableInterpolator2D.html">IPreallocatableInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>~IInterpolator2D</b>()=default (defined in <a class="el" href="classIInterpolator2D.html">IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a>)</td><td class="entry"><a class="el" href="classIInterpolator2D.html">IInterpolator2D&lt; IdxRange2D, IdxRangeBatched &gt;</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

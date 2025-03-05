@@ -18,8 +18,7 @@ var searchData=
   ['polarsplinemem_15',['PolarSplineMem',['../structPolarSplineMem.html',1,'']]],
   ['preallocatablelagrangeinterpolator_16',['PreallocatableLagrangeInterpolator',['../classPreallocatableLagrangeInterpolator.html',1,'']]],
   ['preallocatablesplineinterpolator_17',['PreallocatableSplineInterpolator',['../classPreallocatableSplineInterpolator.html',1,'']]],
-  ['preallocatablesplineinterpolatorrtheta_18',['PreallocatableSplineInterpolatorRTheta',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
-  ['preallocatablesplineinterpolatorrtheta_3c_20ddc_3a_3anullextrapolationrule_20_3e_19',['PreallocatableSplineInterpolatorRTheta&lt; ddc::NullExtrapolationRule &gt;',['../classPreallocatableSplineInterpolatorRTheta.html',1,'']]],
-  ['predcorr_20',['PredCorr',['../classPredCorr.html',1,'']]],
-  ['predcorrrk2xy_21',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
+  ['preallocatablesplineinterpolator2d_18',['PreallocatableSplineInterpolator2D',['../classPreallocatableSplineInterpolator2D.html',1,'']]],
+  ['predcorr_19',['PredCorr',['../classPredCorr.html',1,'']]],
+  ['predcorrrk2xy_20',['PredCorrRK2XY',['../classPredCorrRK2XY.html',1,'']]]
 ];
