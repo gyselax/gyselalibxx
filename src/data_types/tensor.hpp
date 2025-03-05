@@ -127,6 +127,16 @@ public:
                 "The coordinate must have the same memory layout to make a clean conversion.");
     }
 
+    template <class... Dims>
+    operator Coord<Dims...>()
+    {
+        static_assert(rank() == 1, "Only vectors can be converted to coordinates");
+        static_assert(
+                std::is_same_v<VectorIndexSet<Dims...>, ddc::type_seq_element_t<0, index_set>>,
+                "The coordinate must have the same memory layout to make a clean conversion.");
+        return Coord<Dims...>(m_data[ddc::type_seq_rank_v<Dims, index_set>]...);
+    }
+
     /**
      * @brief Construct a tensor object by copying an existing tensor.
      *
@@ -293,6 +303,30 @@ public:
         Tensor result(*this);
         result -= val;
         return result;
+    }
+
+    /**
+     * @brief An operator to compare one tensor to another elementwise.
+     * @param o_tensor The tensor that should be compared with the current tensor.
+     * @return True if the tensors are equal, false otherwise.
+     */
+    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor) const
+    {
+        bool equal(true);
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            equal &= (m_data[i] == o_tensor.m_data[i]);
+        }
+        return equal;
+    }
+
+    /**
+     * @brief An operator to compare one tensor to another elementwise.
+     * @param o_tensor The tensor that should be compared with the current tensor.
+     * @return False if the tensors are equal, true otherwise.
+     */
+    KOKKOS_FUNCTION bool operator!=(Tensor const& o_tensor) const
+    {
+        return !(*this == o_tensor);
     }
 
     /**

@@ -6,6 +6,7 @@
 #include "geometry.hpp"
 #include "i_interpolator_rtheta.hpp"
 #include "iadvection_rtheta.hpp"
+#include "indexed_tensor.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "spline_interpolator_rtheta.hpp"
 #include "spline_polar_foot_finder.hpp"
@@ -170,17 +171,14 @@ public:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-            std::array<std::array<double, 2>, 2> inv_J = inv_jacobian_matrix(coord_rtheta);
+            Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
-            ddcHelper::get<X>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][0]
-                                * jacobian;
-            ddcHelper::get<Y>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][1]
-                                * jacobian;
+            Vector advec_field_rtheta = advection_field_rtheta(irtheta);
+            Vector advec_field_xy
+                    = tensor_mul(index<'i'>(advec_field_rtheta), index<'i', 'j'>(inv_J)) * jacobian;
+            ddcHelper::get<X>(advection_field_xy_host)(irtheta) = ddcHelper::get<X>(advec_field_xy);
+            ddcHelper::get<Y>(advection_field_xy_host)(irtheta) = ddcHelper::get<Y>(advec_field_xy);
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {

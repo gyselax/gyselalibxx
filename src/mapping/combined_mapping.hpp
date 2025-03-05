@@ -132,15 +132,14 @@ public:
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
      * @param[out] matrix The calculated Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION void jacobian_matrix(CoordJacobian const& coord, Matrix_2x2& matrix)
-            const
+    KOKKOS_INLINE_FUNCTION DTensor<
+            ddc::to_type_seq_t<CoordArg>,
+            vector_index_set_dual_t<ddc::to_type_seq_t<CoordResult>>>
+    jacobian_matrix(CoordJacobian const& coord) const
     {
-        Matrix_2x2 jacobian_mapping_1;
-        m_mapping_1.jacobian_matrix(coord, jacobian_mapping_1);
-
-        Matrix_2x2 m_jacobian_mapping_2 = m_jacobian_mapping_2(coord);
-
-        matrix = mat_mul(jacobian_mapping_1, m_jacobian_mapping_2);
+        return tensor_mul(
+                index<'i', 'j'>(m_mapping_1.jacobian_matrix(coord)),
+                index<'j', 'k'>(m_jacobian_mapping_2(coord)));
     }
 
     /**
@@ -203,9 +202,7 @@ public:
      */
     KOKKOS_INLINE_FUNCTION double jacobian(CoordJacobian const& coord_rtheta) const
     {
-        Matrix_2x2 J;
-        jacobian_matrix(coord_rtheta, J);
-        return determinant(J);
+        return determinant(jacobian_matrix(coord_rtheta));
     }
 
     /**
@@ -297,8 +294,7 @@ public:
      */
     KOKKOS_INLINE_FUNCTION double inv_jacobian_22(CoordJacobian const& coord_rtheta) const
     {
-        Matrix_2x2 J;
-        inv_jacobian_matrix(coord_rtheta, J);
+        Tensor J = inv_jacobian_matrix(coord_rtheta);
         return J[1][1];
     }
 
@@ -310,9 +306,7 @@ public:
      */
     KOKKOS_INLINE_FUNCTION double inv_jacobian(CoordJacobian const& coord_rtheta) const
     {
-        Matrix_2x2 J;
-        inv_jacobian_matrix(coord_rtheta, J);
-        return determinant(J);
+        return determinant(inv_jacobian_matrix(coord_rtheta));
     }
 
     /**
@@ -348,17 +342,15 @@ private:
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
      * @param[out] matrix The calculated Jacobian matrix.
      */
-    KOKKOS_INLINE_FUNCTION void non_singular_inverse_jacobian_matrix(
-            CoordJacobian const& coord,
-            Matrix_2x2& matrix) const
+    KOKKOS_INLINE_FUNCTION DTensor<
+            ddc::to_type_seq_t<CoordResult>,
+            vector_index_set_dual_t<ddc::to_type_seq_t<CoordArg>>>
+    non_singular_inverse_jacobian_matrix(CoordJacobian const& coord) const
     {
         InverseJacobianMatrix<Mapping1, CoordJacobian> inv_jacobian_matrix_1(m_mapping_1);
-        Matrix_2x2 inv_jacobian_mapping_1 = inv_jacobian_matrix_1(coord);
-
-        Matrix_2x2 inv_jacobian_mapping_2;
-        m_inv_mapping_2.jacobian_matrix(coord, inv_jacobian_mapping_2);
-
-        matrix = mat_mul(inv_jacobian_mapping_2, inv_jacobian_mapping_1);
+        return tensor_mul(
+                index<'i', 'j'>(m_inv_mapping_2.jacobian_matrix(coord)),
+                index<'j', 'k'>(inv_jacobian_matrix_1(coord)));
     }
 };
 

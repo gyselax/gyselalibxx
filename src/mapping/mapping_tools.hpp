@@ -113,16 +113,11 @@ class Defines2DJacobian
     {
         constexpr std::tuple<bool, const char*> success = has_2d_jacobian_methods();
         if constexpr (std::get<bool>(success)) {
-            if (!std::is_invocable_r_v<
-                        void,
-                        decltype(&Type::jacobian_matrix),
-                        Type,
-                        CoordinateType,
-                        Matrix_2x2&>) {
+            if (!std::is_invocable_v<decltype(&Type::jacobian_matrix), Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
-                        "The jacobian_matrix method of a 2D Mapping must take a Coordinate and a "
-                        "Matrix_2x2& as an argument and return nothing.");
+                        "The jacobian_matrix method of a 2D Mapping must take a Coordinate as an "
+                        "argument and return a 2D Tensor.");
             }
             if (!std::is_invocable_r_v<
                         double,
@@ -223,16 +218,11 @@ class Defines2DInvJacobian
     {
         constexpr std::tuple<bool, const char*> success = has_2d_inv_jacobian_methods();
         if constexpr (std::get<bool>(success)) {
-            if (!std::is_invocable_r_v<
-                        void,
-                        decltype(&Type::inv_jacobian_matrix),
-                        Type,
-                        CoordinateType,
-                        Matrix_2x2&>) {
+            if (!std::is_invocable_v<decltype(&Type::inv_jacobian_matrix), Type, CoordinateType>) {
                 return std::make_tuple(
                         false,
-                        "The inv_jacobian_matrix method of a 2D Mapping must take a Coordinate and "
-                        "a Matrix_2x2& as an argument and return nothing.");
+                        "The inv_jacobian_matrix method of a 2D Mapping must take a Coordinate as "
+                        "an argument and return a Tensor.");
             }
             if (!std::is_invocable_r_v<
                         double,

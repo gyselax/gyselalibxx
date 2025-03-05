@@ -465,15 +465,14 @@ private:
         });
 
         // > computation of the phi derivatives
-        host_t<DFieldMemRTheta> deriv_r_phi(grid_without_Opoint);
-        host_t<DFieldMemRTheta> deriv_theta_phi(grid_without_Opoint);
+        host_t<DVectorFieldMemRTheta<R, Theta>> deriv_phi(grid_without_Opoint);
 
         evaluator.deriv_dim_1(
-                get_field(deriv_r_phi),
+                ddcHelper::get<R>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
-                get_field(deriv_theta_phi),
+                ddcHelper::get<Theta>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
@@ -487,16 +486,11 @@ private:
                     = metric_tensor.inverse(coord_rtheta);
 
             // E = -grad phi
-            double const electric_field_r
-                    = -deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
-                      - deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
-            double const electric_field_theta
-                    = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
-                      - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+            Tensor E = tensor(index<'i'>(deriv_phi), index<'i', 'j'>(inv_G));
 
             // A = E \wedge e_z
-            ddcHelper::get<R>(advection_field_rtheta)(irtheta) = -electric_field_theta;
-            ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) = electric_field_r;
+            ddcHelper::get<R>(advection_field_rtheta)(irtheta) = -ddc::get<Theta_cov>(E);
+            ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) = ddc::get<R_cov>(E);
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================

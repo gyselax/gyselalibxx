@@ -80,13 +80,17 @@ public:
                     exec_space,
                     get_idx_range(vector_field_input),
                     KOKKOS_LAMBDA(IdxType idx) {
-                        Matrix_2x2 map_J;
-                        mapping_proxy.jacobian_matrix(ddc::coordinate(idx), map_J);
-
-                        Coord<XOut, YOut> vector_out;
-                        vector_out.array() = mat_vec_mul(map_J, vector_field_input(idx).array());
-                        ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
+                        Tensor jacobian = mapping_proxy.jacobian_matrix(ddc::coordinate(idx));
+                        ddcHelper::get<XOut>(vector_field_output)(idx)
+                                = ddcHelper::get<XOut, XIn::Dual>(jacobian)
+                                          * ddc::get<XIn>(vector_field_input)
+                                  + ddcHelper::get<XOut, YIn::Dual>(jacobian)
+                                            * ddc::get<YIn>(vector_field_input);
+                        ddcHelper::get<YOut>(vector_field_output)(idx)
+                                = ddcHelper::get<YOut, XIn::Dual>(jacobian)
+                                          * ddc::get<XIn>(vector_field_input)
+                                  + ddcHelper::get<YOut, YIn::Dual>(jacobian)
+                                            * ddc::get<YIn>(vector_field_input);
                     });
         } else {
             InverseJacobianMatrix<Mapping, ddc::coordinate_of_t<IdxType>> inv_mapping(m_mapping);
@@ -94,16 +98,15 @@ public:
                     exec_space,
                     get_idx_range(vector_field_input),
                     KOKKOS_LAMBDA(IdxType idx) {
-                        Matrix_2x2 map_J = inv_mapping(ddc::coordinate(idx));
+                        Tensor map_J = inv_mapping(ddc::coordinate(idx));
 
-                        Coord<XOut, YOut> vector_out;
-                        // mat_vec_mul should be replaced with a tensor calculus function
-                        // when map_J is stored in a Tensor
-                        vector_out.array() = mat_vec_mul(
-                                map_J,
-                                ddcHelper::to_coord(vector_field_input(idx)).array());
-                        ddcHelper::get<XOut>(vector_field_output)(idx) = ddc::get<XOut>(vector_out);
-                        ddcHelper::get<YOut>(vector_field_output)(idx) = ddc::get<YOut>(vector_out);
+                        DVector<XOut, YOut> vector_out = tensor_mul(
+                                index<'i', 'j'>(map_J),
+                                index<'j'>(vector_field_input(idx)));
+                        ddcHelper::get<XOut>(vector_field_output)(idx)
+                                = ddcHelper::get<XOut>(vector_out);
+                        ddcHelper::get<YOut>(vector_field_output)(idx)
+                                = ddcHelper::get<YOut>(vector_out);
                     });
         }
     }

@@ -16,6 +16,16 @@
 template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
 class InverseJacobianMatrix
 {
+public:
+    using ValidArgIndices = ddc::to_type_seq_t<typename Mapping::CoordArg>;
+    using ValidResultIndices = ddc::to_type_seq_t<typename Mapping::CoordResult>;
+    using DimArg0 = ddc::type_seq_element_t<0, ValidArgIndices>;
+    using DimArg1 = ddc::type_seq_element_t<1, ValidArgIndices>;
+    using DimRes0_cov = typename ddc::type_seq_element_t<0, ValidResultIndices>::Dual;
+    using DimRes1_cov = typename ddc::type_seq_element_t<1, ValidResultIndices>::Dual;
+    using InverseJacobianTensor
+            = DTensor<ValidArgIndices, vector_index_set_dual_t<ValidResultIndices>>;
+
 private:
     Mapping m_mapping;
 
@@ -42,21 +52,21 @@ public:
      * @see inv_jacobian_21
      * @see inv_jacobian_22
      */
-    KOKKOS_INLINE_FUNCTION Matrix_2x2 operator()(PositionCoordinate const& coord) const
+    KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(PositionCoordinate const& coord) const
     {
-        Matrix_2x2 matrix;
         if constexpr (has_2d_inv_jacobian_v<Mapping, PositionCoordinate>) {
-            m_mapping.inv_jacobian_matrix(coord, matrix);
+            return m_mapping.inv_jacobian_matrix(coord);
         } else {
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
             double jacob = m_mapping.jacobian(coord);
             assert(fabs(jacob) > 1e-15);
-            matrix[0][0] = m_mapping.jacobian_22(coord) / jacob;
-            matrix[0][1] = -m_mapping.jacobian_12(coord) / jacob;
-            matrix[1][0] = -m_mapping.jacobian_21(coord) / jacob;
-            matrix[1][1] = m_mapping.jacobian_11(coord) / jacob;
+            InverseJacobianTensor matrix;
+            ddcHelper::get<DimArg0, DimRes0_cov>(matrix) = m_mapping.jacobian_22(coord) / jacob;
+            ddcHelper::get<DimArg0, DimRes1_cov>(matrix) = -m_mapping.jacobian_12(coord) / jacob;
+            ddcHelper::get<DimArg1, DimRes0_cov>(matrix) = -m_mapping.jacobian_21(coord) / jacob;
+            ddcHelper::get<DimArg1, DimRes1_cov>(matrix) = m_mapping.jacobian_11(coord) / jacob;
+            return matrix;
         }
-        return matrix;
     }
 
     /**
