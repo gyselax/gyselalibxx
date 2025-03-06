@@ -309,20 +309,22 @@ private:
      *
      * @return A double with the infinity norm of the difference.
      */
-    double check_same(Matrix_2x2 const& matrix_1, Matrix_2x2 const& matrix_2, double TOL)
+    double check_same(
+            DTensor<VectorIndexSet<X_pC, Y_pC>, VectorIndexSet<X, Y>> const& matrix_1,
+            DTensor<VectorIndexSet<X_pC, Y_pC>, VectorIndexSet<X, Y>> const& matrix_2,
+            double TOL)
     {
-        std::size_t size = 2;
+        EXPECT_NEAR((ddcHelper::get<X_pC, X>(matrix_1)), (ddcHelper::get<X_pC, X>(matrix_2)), TOL);
+        EXPECT_NEAR((ddcHelper::get<X_pC, Y>(matrix_1)), (ddcHelper::get<X_pC, Y>(matrix_2)), TOL);
+        EXPECT_NEAR((ddcHelper::get<Y_pC, X>(matrix_1)), (ddcHelper::get<Y_pC, X>(matrix_2)), TOL);
+        EXPECT_NEAR((ddcHelper::get<Y_pC, Y>(matrix_1)), (ddcHelper::get<Y_pC, Y>(matrix_2)), TOL);
 
-        double max_diff = 0.;
-        for (std::size_t i(0); i < size; ++i) {
-            for (std::size_t j(0); j < size; ++j) {
-                double const diff = fabs(matrix_1[i][j] - matrix_2[i][j]);
-                max_diff = diff > max_diff ? diff : max_diff;
-
-                EXPECT_NEAR(matrix_1[i][j], matrix_2[i][j], TOL);
-            }
-        }
-        return max_diff;
+        DTensor<VectorIndexSet<X_pC, Y_pC>, VectorIndexSet<X, Y>> diff = matrix_1 - matrix_2;
+        return std::max(
+                {fabs(ddcHelper::get<X_pC, X>(diff)),
+                 fabs(ddcHelper::get<X_pC, Y>(diff)),
+                 fabs(ddcHelper::get<Y_pC, X>(diff)),
+                 fabs(ddcHelper::get<Y_pC, Y>(diff))});
     }
 };
 
