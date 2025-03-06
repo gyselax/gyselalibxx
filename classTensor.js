@@ -19,5 +19,8 @@ var classTensor =
     [ "operator*", "classTensor.html#a1b1faf34db4a030d44560352b18d0c0c", null ],
     [ "operator/", "classTensor.html#a0f64f0f2afb76cb6f701ffd8e8b55d8d", null ],
     [ "operator+", "classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23", null ],
-    [ "operator-", "classTensor.html#a52e9979367ea03d4498124b32ec9a821", null ]
+    [ "operator-", "classTensor.html#a52e9979367ea03d4498124b32ec9a821", null ],
+    [ "operator-", "classTensor.html#a3637eb231d1a15258bc76e8add5aee1c", null ],
+    [ "operator==", "classTensor.html#af56991fee2994f60383cf13f6f31eb76", null ],
+    [ "operator!=", "classTensor.html#a7c3c2bce8859c632c8a36ed0bb978069", null ]
 ];

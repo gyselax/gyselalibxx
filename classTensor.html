@@ -194,6 +194,15 @@ KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a52e9979367ea03d4498124b32ec9a821" id="r_a52e9979367ea03d4498124b32ec9a821"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">Tensor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTensor.html#a52e9979367ea03d4498124b32ec9a821">operator-</a> (<a class="el" href="classTensor.html">Tensor</a> const &amp;val) const</td></tr>
 <tr class="memdesc:a52e9979367ea03d4498124b32ec9a821"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator to subtract one tensor from another elementwise.  <br /></td></tr>
 <tr class="separator:a52e9979367ea03d4498124b32ec9a821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3637eb231d1a15258bc76e8add5aee1c" id="r_a3637eb231d1a15258bc76e8add5aee1c"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">Tensor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTensor.html#a3637eb231d1a15258bc76e8add5aee1c">operator-</a> ()</td></tr>
+<tr class="memdesc:a3637eb231d1a15258bc76e8add5aee1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator to subtract one tensor from another elementwise.  <br /></td></tr>
+<tr class="separator:a3637eb231d1a15258bc76e8add5aee1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af56991fee2994f60383cf13f6f31eb76" id="r_af56991fee2994f60383cf13f6f31eb76"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTensor.html#af56991fee2994f60383cf13f6f31eb76">operator==</a> (<a class="el" href="classTensor.html">Tensor</a> const &amp;o_tensor)</td></tr>
+<tr class="memdesc:af56991fee2994f60383cf13f6f31eb76"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator to compare one tensor to another elementwise.  <br /></td></tr>
+<tr class="separator:af56991fee2994f60383cf13f6f31eb76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3c2bce8859c632c8a36ed0bb978069" id="r_a7c3c2bce8859c632c8a36ed0bb978069"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTensor.html#a7c3c2bce8859c632c8a36ed0bb978069">operator!=</a> (<a class="el" href="classTensor.html">Tensor</a> const &amp;o_tensor) const</td></tr>
+<tr class="memdesc:a7c3c2bce8859c632c8a36ed0bb978069"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator to compare one tensor to another elementwise.  <br /></td></tr>
+<tr class="separator:a7c3c2bce8859c632c8a36ed0bb978069"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -875,7 +884,7 @@ template&lt;class ElementType , class... ValidIndexSet&gt; </div>
 </div>
 </div>
 <a id="a52e9979367ea03d4498124b32ec9a821" name="a52e9979367ea03d4498124b32ec9a821"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52e9979367ea03d4498124b32ec9a821">&#9670;&#160;</a></span>operator-()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52e9979367ea03d4498124b32ec9a821">&#9670;&#160;</a></span>operator-() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -908,6 +917,116 @@ template&lt;class ElementType , class... ValidIndexSet&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new tensor containing the result of the subtraction. </dd></dl>
+
+</div>
+</div>
+<a id="a3637eb231d1a15258bc76e8add5aee1c" name="a3637eb231d1a15258bc76e8add5aee1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3637eb231d1a15258bc76e8add5aee1c">&#9670;&#160;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class... ValidIndexSet&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">Tensor</a> <a class="el" href="classTensor.html">Tensor</a>&lt; ElementType, ValidIndexSet &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An operator to subtract one tensor from another elementwise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>The tensor that should be subtracted from the current tensor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new tensor containing the result of the subtraction. </dd></dl>
+
+</div>
+</div>
+<a id="af56991fee2994f60383cf13f6f31eb76" name="af56991fee2994f60383cf13f6f31eb76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56991fee2994f60383cf13f6f31eb76">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class... ValidIndexSet&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION bool <a class="el" href="classTensor.html">Tensor</a>&lt; ElementType, ValidIndexSet &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classTensor.html">Tensor</a>&lt; ElementType, ValidIndexSet &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>o_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An operator to compare one tensor to another elementwise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">o_tensor</td><td>The tensor that should be compared with the current tensor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the tensors are equal, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a7c3c2bce8859c632c8a36ed0bb978069" name="a7c3c2bce8859c632c8a36ed0bb978069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c3c2bce8859c632c8a36ed0bb978069">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ElementType , class... ValidIndexSet&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">KOKKOS_FUNCTION bool <a class="el" href="classTensor.html">Tensor</a>&lt; ElementType, ValidIndexSet &gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classTensor.html">Tensor</a>&lt; ElementType, ValidIndexSet &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>o_tensor</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An operator to compare one tensor to another elementwise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">o_tensor</td><td>The tensor that should be compared with the current tensor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>False if the tensors are equal, true otherwise. </dd></dl>
 
 </div>
 </div>

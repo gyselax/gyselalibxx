@@ -206,10 +206,10 @@ Index Range</h1>
 <div class="line">IdxStep&lt;GridX, GridY&gt; size((j_index-i_index), (l_index-k_index));</div>
 <div class="line">IdxRange&lt;GridX, GridY&gt; idx_range(origin, size);</div>
 </div><!-- fragment --><p>When working with index ranges we do not usually know if we have access to all of the grid or just a subset. It is therefore important to use the <code>get_index_range</code> function to traverse fields rather than initialising elements manually as we don't know the index of the first element of a <code>IdxRange</code> at compile time.</p>
-<p>There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as <code>IdxRange</code> implements the functions <code>begin()</code> and <code>end()</code>. These functions are called automatically using the modern C++ syntax for a for element in list, or using the <code>ddc::for_each</code> function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (Idx&lt;GridX&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a> : idx_range) {</div>
+<p>There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as <code>IdxRange</code> implements the functions <code>begin()</code> and <code>end()</code>. These functions are called automatically using the modern C++ syntax for a for element in list, or using the <code>ddc::for_each</code> function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (Idx&lt;GridX&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a> : idx_range) {</div>
 <div class="line">}</div>
-<div class="ttc" id="aindexed__tensor_8hpp_html_a749270ceff141fbe4c41761f587a9647"><div class="ttname"><a href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a></div><div class="ttdeci">KOKKOS_FUNCTION auto index(TensorType &amp;tensor)</div><div class="ttdoc">A tool to build an IndexedTensor object from a set of indices.</div><div class="ttdef"><b>Definition</b> indexed_tensor.hpp:171</div></div>
-</div><!-- fragment --><p> or: </p><div class="fragment"><div class="line">ddc::for_each(idx_range, [&amp;](Idx&lt;GridX&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>) {</div>
+<div class="ttc" id="aindexed__tensor_8hpp_html_a8fef2d2da09ec84f74e44e63491ff4aa"><div class="ttname"><a href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a></div><div class="ttdeci">KOKKOS_FUNCTION auto index(TensorType const &amp;tensor)</div><div class="ttdoc">A tool to build an IndexedTensor object from a set of indices.</div><div class="ttdef"><b>Definition</b> indexed_tensor.hpp:171</div></div>
+</div><!-- fragment --><p> or: </p><div class="fragment"><div class="line">ddc::for_each(idx_range, [&amp;](Idx&lt;GridX&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a>) {</div>
 <div class="line">});</div>
 </div><!-- fragment --><p> In the case of a <code>ddc::for_each</code> the second argument is a lambda function. The <code>[&amp;]</code> ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.</p>
 <p>It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however <code>IdxRange</code> also contains several helper functions which are designed to facilitate the creation of these sets:</p><ul>
@@ -221,7 +221,7 @@ Index Range</h1>
 </ul>
 <p>It is also possible to extract a lower-dimensional index range from an ND index range using <code>ddc::select&lt;GridOfInterest&gt;(my_nd_idx_range)</code>.</p>
 <p>Finally it may not be possible to express the elements you want to iterate over as an index range. This is notably the case if you want to iterate over every j-th element. In this case it is necessary to fall back on <code>IdxRangeIterator</code>. The syntax in this case is: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (IdxRangeIterator&lt;GridX&gt; it=idx_range.begin(); it &lt; idx_range.end(); it += j) {</div>
-<div class="line">    Idx&lt;GridX&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a> = *it;</div>
+<div class="line">    Idx&lt;GridX&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a> = *it;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>In addition to the iteration functionalities, <code>IdxRange</code> also has other useful functions. The following is a non-exhaustive list of useful functions:</p><ul>
 <li><code>front()</code> : Returns the first <code>Idx</code> in the domain.</li>
@@ -254,8 +254,8 @@ Data Storage</h1>
 </div><!-- fragment --><p> This is particularly useful if we don't know the layout order of the data and will allow us to reorder this data without changing the way we interact with the chunk.</p>
 <p>Finally a <code>Field</code> also implements a <code>[]</code> operator. A <code>Field</code> does not have to reference the entire memory block stored in the associated <code>FieldMem</code>. The <code>[]</code> operator can be passed an <code>IdxRange</code> to create a <code>Field</code> which only references part of the <code>FieldMem</code>. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a \((r, \theta)\) slice from a distribution function defined in \((r, \theta, \varphi, v_\parallel, \mu)\) we would do the following: </p><div class="fragment"><div class="line">DFieldMem&lt;IdxRange&lt;GridR, GridTheta, GridPhi, GridVpar, GridMu&gt;&gt; distribution_function_alloc(idx_range);</div>
 <div class="line">DField&lt;IdxRange&lt;GridR, GridTheta, GridPhi, GridVpar, GridMu&gt;&gt; distribution_function(distribution_function_alloc);</div>
-<div class="line">Idx&lt;GridPhi, GridVpar, GridMu&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>;</div>
-<div class="line">DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; distribution_function_slice = distribution_function[<a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>];</div>
+<div class="line">Idx&lt;GridPhi, GridVpar, GridMu&gt; <a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a>;</div>
+<div class="line">DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; distribution_function_slice = distribution_function[<a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a>];</div>
 </div><!-- fragment --><h1><a class="anchor" id="docs_DDC_in_gyselalibxx__Example"></a>
 Example</h1>
 <p>Let us consider the following system of equations (a simple Vlasov-Poisson system):  </p><p class="formulaDsp">
@@ -295,11 +295,11 @@ f_s(0,x,v) = \frac{n_0}{2\pi T_0}\exp\left(-\frac{v^2}{T_0}\right)\cos(k_xx)
 <div class="line">DFieldMemSpXVx distribution_function_alloc(idx_range);</div>
 <div class="line">DFieldSpXVx distribution_function(distribution_function_alloc);</div>
 <div class="line"> </div>
-<div class="line">ddc::for_each(idx_range, [&amp;](IdxSpXVx <a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>) {</div>
-<div class="line">    CoordXVx coord = ddc::coordinate(ddc::select&lt;GridX, GridVx&gt;(<a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>));</div>
+<div class="line">ddc::for_each(idx_range, [&amp;](IdxSpXVx <a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a>) {</div>
+<div class="line">    CoordXVx coord = ddc::coordinate(ddc::select&lt;GridX, GridVx&gt;(<a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a>));</div>
 <div class="line">    <span class="keywordtype">double</span> v_pos = ddc::get&lt;Vx&gt;(coord);</div>
 <div class="line">    <span class="keywordtype">double</span> x_pos = ddc::get&lt;X&gt;(coord);</div>
-<div class="line">    distribution_function(<a class="code hl_function" href="indexed__tensor_8hpp.html#a749270ceff141fbe4c41761f587a9647">index</a>) = n0 / (2 * M_PI * T0) * exp(-v_pos * v_pos / T0) * cos(kx * x_pos);</div>
+<div class="line">    distribution_function(<a class="code hl_function" href="indexed__tensor_8hpp.html#a8fef2d2da09ec84f74e44e63491ff4aa">index</a>) = n0 / (2 * M_PI * T0) * exp(-v_pos * v_pos / T0) * cos(kx * x_pos);</div>
 <div class="line">});</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md16"></a>
 Continuous vs. discrete objects</h3>

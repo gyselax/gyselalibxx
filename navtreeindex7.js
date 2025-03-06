@@ -1,5 +1,8 @@
 var NAVTREEINDEX7 =
 {
+"structIdxRangeSliceIterator.html#a96c7777c808fa57c6fa4da36a6e9830e":[15,87,3],
+"structIdxRangeSliceIterator.html#a9c97b510fa95c83eb250ad2888d1614f":[15,87,14],
+"structIdxRangeSliceIterator.html#a9e1f33547deedae501feaeea8c1d6376":[15,87,20],
 "structIdxRangeSliceIterator.html#aa0e84d0ad195d6b35f0d567da81b8ab8":[15,87,5],
 "structIdxRangeSliceIterator.html#aa3784446d2f1f986e069a084cec61160":[15,87,1],
 "structIdxRangeSliceIterator.html#aa5734dbd3f9f99ba7f354330a1f8fede":[15,87,9],
