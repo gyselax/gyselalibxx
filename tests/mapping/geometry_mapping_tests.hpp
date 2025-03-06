@@ -11,12 +11,14 @@ struct X
 {
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
     using Dual = X;
 };
 struct Y
 {
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
     using Dual = Y;
 };
 struct R_cov;
@@ -26,6 +28,7 @@ struct R
     static bool constexpr PERIODIC = false;
     static bool constexpr IS_COVARIANT = false;
     static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
     using Dual = R_cov;
 };
 
@@ -34,6 +37,7 @@ struct Theta
     static bool constexpr PERIODIC = true;
     static bool constexpr IS_COVARIANT = false;
     static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
     using Dual = Theta_cov;
 };
 struct R_cov
@@ -41,6 +45,7 @@ struct R_cov
     static bool constexpr PERIODIC = false;
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
     using Dual = R;
 };
 
@@ -49,6 +54,7 @@ struct Theta_cov
     static bool constexpr PERIODIC = true;
     static bool constexpr IS_COVARIANT = true;
     static bool constexpr IS_CONTRAVARIANT = false;
+    /// The corresponding type in the dual space.
     using Dual = Theta;
 };
 
