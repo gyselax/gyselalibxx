@@ -92,7 +92,7 @@ public:
   *
   * @param spline_domain The domain on which splines are constructed.  
   */
-    DummySplineBuilder2D(IdxRangeBSXY spline_domain)
+    explicit DummySplineBuilder2D(IdxRangeBSXY spline_domain)
         : m_spline_domain(spline_domain)
         , m_builder_call_counter(0)
     {
