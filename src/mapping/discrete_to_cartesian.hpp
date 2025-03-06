@@ -295,18 +295,18 @@ public:
     first_order_jacobian_matrix_r_rtheta(
             Coord<curvilinear_tag_r, curvilinear_tag_theta> const& coord) const
     {
-        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix;
-        ddcHelper::get<X, R_cov>(jacobian_matrix)
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J;
+        ddcHelper::get<X, R_cov>(J)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
-        ddcHelper::get<X, Theta_cov>(jacobian_matrix)
+        ddcHelper::get<X, Theta_cov>(J)
                 = m_spline_evaluator
                           .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
-        ddcHelper::get<Y, R_cov>(jacobian_matrix)
+        ddcHelper::get<Y, R_cov>(J)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        ddcHelper::get<X, Theta_cov>(jacobian_matrix)
+        ddcHelper::get<X, Theta_cov>(J)
                 = m_spline_evaluator
                           .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
-        return jacobian_matrix;
+        return J;
     }
 
     /**
