@@ -164,32 +164,11 @@ void check_inverse_tensor(
     using StartDim0_cov = typename StartDim0::Dual;
     using StartDim1_cov = typename StartDim1::Dual;
 
-    using EndDim0_cov = ddc::type_seq_element_t<0, EndDims>;
-    using EndDim1_cov = ddc::type_seq_element_t<1, EndDims>;
-    using EndDim0 = typename EndDim0_cov::Dual;
-    using EndDim1 = typename EndDim1_cov::Dual;
+    DTensor<StartDims, vector_index_set_dual_t<StartDims>> identity
+            = tensor_mul(index<'i', 'j'>(tensor), index<'j', 'k'>(inv_tensor));
 
-    double const id_val00 = ddcHelper::get<StartDim0, EndDim0_cov>(tensor)
-                                    * ddcHelper::get<EndDim0, StartDim0_cov>(inv_tensor)
-                            + ddcHelper::get<StartDim0, EndDim1_cov>(tensor)
-                                      * ddcHelper::get<EndDim1, StartDim0_cov>(inv_tensor);
-    EXPECT_NEAR(id_val00, 1., TOL);
-
-    double const id_val01 = ddcHelper::get<StartDim0, EndDim0_cov>(tensor)
-                                    * ddcHelper::get<EndDim0, StartDim1_cov>(inv_tensor)
-                            + ddcHelper::get<StartDim0, EndDim1_cov>(tensor)
-                                      * ddcHelper::get<EndDim1, StartDim1_cov>(inv_tensor);
-    EXPECT_NEAR(id_val01, 0., TOL);
-
-    double const id_val10 = ddcHelper::get<StartDim1, EndDim0_cov>(tensor)
-                                    * ddcHelper::get<EndDim0, StartDim0_cov>(inv_tensor)
-                            + ddcHelper::get<StartDim1, EndDim1_cov>(tensor)
-                                      * ddcHelper::get<EndDim1, StartDim0_cov>(inv_tensor);
-    EXPECT_NEAR(id_val10, 0., TOL);
-
-    double const id_val11 = ddcHelper::get<StartDim1, EndDim0_cov>(tensor)
-                                    * ddcHelper::get<EndDim0, StartDim1_cov>(inv_tensor)
-                            + ddcHelper::get<StartDim1, EndDim1_cov>(tensor)
-                                      * ddcHelper::get<EndDim1, StartDim1_cov>(inv_tensor);
-    EXPECT_NEAR(id_val11, 1., TOL);
+    EXPECT_NEAR((ddcHelper::get<StartDim0, StartDim0_cov>(identity)), 1., TOL);
+    EXPECT_NEAR((ddcHelper::get<StartDim0, StartDim1_cov>(identity)), 0., TOL);
+    EXPECT_NEAR((ddcHelper::get<StartDim1, StartDim0_cov>(identity)), 0., TOL);
+    EXPECT_NEAR((ddcHelper::get<StartDim1, StartDim1_cov>(identity)), 1., TOL);
 }
