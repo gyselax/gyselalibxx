@@ -78,9 +78,10 @@ struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
 {
 };
 
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+template <class ExecSpace>
+using SplineRThetaBuilder = ddc::SplineBuilder2D<
+        ExecSpace,
+        typename ExecSpace::memory_space,
         BSplinesR,
         BSplinesTheta,
         GridR,
@@ -92,10 +93,12 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         ddc::SplineSolver::LAPACK,
         GridR,
         GridTheta>;
+using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
 
+template <class ExecSpace>
 using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
+        ExecSpace,
+        typename ExecSpace::memory_space,
         BSplinesR,
         BSplinesTheta,
         GridR,
@@ -106,6 +109,11 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Theta>,
         GridR,
         GridTheta>;
+using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
+
+using IdxRangeBSR = IdxRange<BSplinesR>;
+using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
+using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
 
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
