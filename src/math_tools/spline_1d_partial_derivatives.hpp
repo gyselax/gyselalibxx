@@ -18,7 +18,7 @@
 template <class Spline1DBuilder, class Spline1DEvaluator>
 class Spline1DPartialDerivative
     : public IPartialDerivative<
-              typename Spline1DBuilder::batched_interpolation_domain_type>,
+              typename Spline1DBuilder::batched_interpolation_domain_type,
               typename Spline1DBuilder::continuous_dimension_type>
 {
     static_assert(std::is_same_v<
@@ -30,18 +30,13 @@ class Spline1DPartialDerivative
 
 private:
     using base_type = IPartialDerivative<
-            DField<typename Spline1DBuilder::batched_interpolation_domain_type>,
+            typename Spline1DBuilder::batched_interpolation_domain_type,
             typename Spline1DBuilder::continuous_dimension_type>;
 
 public:
-    /// The dimension Xi on which the partial derivative is calculated.
-    using typename base_type::DerivativeDirection;
-
-    /// The index range on which this operator acts.
-    using typename base_type::IdxRange;
-
     /// The type of the object that will be differentiated.
     using typename base_type::DFieldType;
+    using typename base_type::DFieldMemType;
 
     /// The type of the calculated derivative.
     using typename base_type::DConstFieldType;
@@ -52,8 +47,8 @@ private:
     using DFieldBSMem = DFieldMem<IdxRangeBS>;
     using DFieldBS = DField<IdxRangeBS>;
 
-    Spline1DBuilder const& m_field_builder;
-    Spline1DEvaluator const& m_field_evaluator;
+    Spline1DBuilder const& m_builder;
+    Spline1DEvaluator const& m_evaluator;
 
 public:
     /**
@@ -63,11 +58,10 @@ public:
     * @param field_evaluator Evaluator for intermediate interpolation representation.
     */
     explicit Spline1DPartialDerivative(
-            Spline1DBuilder const& field_builder,
-            Spline1DEvaluator const& field_evaluator)
-        : m_field_builder(field_builder)
-        , m_field_evaluator(field_evaluator)
-        // TODO coeffs ?
+            Spline1DBuilder const& builder,
+            Spline1DEvaluator const& evaluator)
+        : m_builder(builder)
+        , m_evaluator(evaluator)
     {
     }
 
@@ -77,14 +71,16 @@ public:
     * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
     */
-    void operator()(DFieldVal dfieldval_dxi, DConstFieldVal fieldval) const final
+    DFieldType operator()(DConstFieldType fieldval) const final
     {
         // Build spline representation of the field ....................................
-        FieldXiSplineMem fieldxi_coefs_alloc(m_fieldxi_builder.batched_spline_domain());
-        FieldXiSplineCoeffs fieldxi_coefs = get_field(fieldxi_coefs_alloc);
+        DFieldBSMem spline_coefs_alloc(m_builder.batched_spline_domain());
+        DFieldBS spline_coefs = get_field(spline_coefs_alloc);
 
-        m_fieldxi_builder(fieldxi_coefs, get_const_field(fieldval));
-        m_fieldxi_evaluator.deriv(dfieldval_dxi, get_const_field(fieldxi_coefs));
+        m_builder(spline_coefs, fieldval);
+        DFieldMemType differentiated_fieldval(get_idx_range(fieldval));
+        m_evaluator.deriv(get_field(differentiated_fieldval), get_const_field(spline_coefs));
+        return get_field(differentiated_fieldval);
     }
 };
 
@@ -96,14 +92,14 @@ public:
  * memory allocated in the private members of the Spline1DPartialDerivative to be freed when the object is not in use.
  * These objects are: m_coefs.
  */
-template <class Spline1Dbuilder, class Spline1DEvaluator>
-class PreallocatableSpline1DPartialDerivative
-: public IPreallocatablePartialDerivative<
-              typename Spline1DBuilder::interpolation_domain_type,
-              typename Spline1DBuilder::batched_interpolation_domain_type>
+template <class Spline1DBuilder, class Spline1DEvaluator>
+class Spline1DPartialDerivativeCreator
+: public IPartialDerivativeCreator<
+              typename Spline1DBuilder::batched_interpolation_domain_type,
+              typename Spline1DBuilder::continuous_dimension_type>
 {
 private:
-    Spline1Dbuilder const& m_builder;
+    Spline1DBuilder const& m_builder;
 
     Spline1DEvaluator const& m_evaluator;
 
@@ -113,8 +109,8 @@ public:
      * @param[in] builder An operator which builds spline coefficients from the values of a function at known interpolation points.
      * @param[in] evaluator An operator which evaluates the value of a spline at requested coordinates.
      */
-    PreallocatableSpline1DPartialDerivative(
-            Spline1Dbuilder const& builder,
+    Spline1DPartialDerivativeCreator(
+            Spline1DBuilder const& builder,
             Spline1DEvaluator const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
@@ -126,12 +122,12 @@ public:
      *
      * @return A pointer to an instance of the Spline1DPartialDerivative class.
      */
-    std::unique_ptr<Spline1DPartialDerivative<
-            typename Spline1Dbuilder::interpolation_domain_type,
-            typename Spline1Dbuilder::batched_interpolation_domain_type>>
+    std::unique_ptr<IPartialDerivative<
+            typename Spline1DBuilder::batched_interpolation_domain_type,
+              typename Spline1DBuilder::continuous_dimension_type>>
     preallocate() const
     {
         return std::make_unique<
-                Spline1DPartialDerivative<Spline1Dbuilder, Spline1DEvaluator>>(m_builder, m_evaluator);
+                Spline1DPartialDerivative<Spline1DBuilder, Spline1DEvaluator>>(m_builder, m_evaluator);
     }
 };

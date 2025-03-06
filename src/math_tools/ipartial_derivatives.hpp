@@ -13,41 +13,37 @@
  * @tparam DFieldType The type of the field on which the operator acts.
  * @tparam DerivDirection The dimension Xi on which the partial derivative is calculated.
  */
-template <class IdxRange, class DerivativeDirection>
+template <class IdxRangeType, class DerivativeDim>
 class IPartialDerivative
 {
-    static_assert(ddc::is_borrowed_chunk_v<DFieldType>);
+    static_assert(ddc::is_borrowed_chunk_v<DField<IdxRangeType>>);
 
 public:
-    using DerivativeDirection = typename DerivativeDirection;
-    /// The index range on which this operator acts.
-    using IdxRange = typename IdxRange;
 
     /// The type of the object that will be differentiated.
-    using DFieldType = DField<IdxRange>;
+    using DFieldType = DField<IdxRangeType>;
+    using DFieldMemType = DFieldMem<IdxRangeType>;
 
     /// The type of the calculated derivative.
     using DConstFieldType = typename DFieldType::view_type;
 
     /// The type of the grid on the dimension Xi on which the partial derivative is calculated.
-    using GridDerivativeDirection
-            = find_grid_t<DerivativeDirection, ddc::to_type_seq_t<IdxRange>>;
+    using GridDerivativeDim
+            = find_grid_t<DerivativeDim, ddc::to_type_seq_t<IdxRangeType>>;
 
     /// The index range of the dimension Xi on which the partial derivative is calculated.
-    using IdxRangeDeriv = IdxRange<GridDerivativeDirection>;
+    using IdxRangeDeriv = IdxRange<GridDerivativeDim>;
 
     /// The index range of all dimensions except Xi.
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRange, GridDerivativeDirection>;
+    using IdxRangeBatched = ddc::remove_dims_of_t<IdxRangeType, GridDerivativeDim>;
 
 public:
     /**
     * @brief Compute the partial derivative of @f$ F(X1,..,Xn)@f$ in Xi direction.
     *
-    * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
     */
-    virtual DFieldType operator()(DField<IdxRangeBatched> fieldval,
-            ConstField<CoordType, IdxRange> coordinates) const = 0;
+    virtual DFieldType operator()(DConstFieldType fieldval) const = 0;
 };
 
 /**
@@ -63,8 +59,8 @@ public:
  * This means that objects of this class take up little or no space in memory.
  *
  */
-template <class IdxRange, class DerivDirection>
-class IPreallocatablePartialDerivative : public IPartialDerivative<IdxRange, DerivativeDirection>
+template <class IdxRangeType, class DerivativeDim>
+class IPartialDerivativeCreator : public IPartialDerivative<IdxRangeType, DerivativeDim>
 {
 
 public:
@@ -78,7 +74,7 @@ public:
      *
      * @see IPartialDerivative
      */
-    virtual std::unique_ptr<IPartialDerivative<IdxRange, DerivativeDirection>> preallocate() const = 0;
+    virtual std::unique_ptr<IPartialDerivative<IdxRangeType, DerivativeDim>> preallocate() const = 0;
 
     /**
      * @brief Computes the partial derivative of a function at each coordinate 
@@ -91,10 +87,9 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    DField<IdxRange> operator()(
-            DField<IdxRange> fieldval,
-            ConstField<CoordType, IdxRange> coordinates) const override
+    DField<IdxRangeType> operator()(
+            DConstField<IdxRangeType> fieldval) const override
     {
-        return (*preallocate())(fieldval, coordinates);
+        return (*preallocate())(fieldval);
     }
 };
