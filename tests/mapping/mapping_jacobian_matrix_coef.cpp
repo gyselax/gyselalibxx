@@ -11,6 +11,7 @@
 #include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_mapping_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "mapping_test_geometry.hpp"
 #include "mapping_testing_tools.hpp"
@@ -148,12 +149,12 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     SplineRThetaBuilder_host builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator evaluator(
+    SplineRThetaEvaluator_host evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,

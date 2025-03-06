@@ -11,106 +11,13 @@
 #include "czarny_to_cartesian.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_mapping_tests.hpp"
 
 
 
 namespace {
-struct X
-{
-};
-struct Y
-{
-};
-struct R
-{
-    static bool constexpr PERIODIC = false;
-};
-
-struct Theta
-{
-    static bool constexpr PERIODIC = true;
-};
-
-using CoordR = Coord<R>;
-using CoordTheta = Coord<Theta>;
-using CoordRTheta = Coord<R, Theta>;
-
-using CoordXY = Coord<X, Y>;
-
-int constexpr BSDegree = 3;
-
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
-{
-};
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
-{
-};
-
-using InterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
-        BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
-
-struct GridR : InterpPointsR::interpolation_discrete_dimension_type
-{
-};
-struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
-{
-};
-
 using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 using DeviceExecSpace = Kokkos::DefaultExecutionSpace;
-
-template <class ExecSpace>
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        ExecSpace,
-        typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
-
-template <class ExecSpace>
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        ExecSpace,
-        typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
-
-using IdxRangeBSR = IdxRange<BSplinesR>;
-using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
-using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
-
-using IdxRangeR = IdxRange<GridR>;
-using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-using IdxR = Idx<GridR>;
-using IdxTheta = Idx<GridTheta>;
-using IdxRTheta = Idx<GridR, GridTheta>;
-
-using IdxStepR = IdxStep<GridR>;
-using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepRTheta = IdxStep<GridR, GridTheta>;
-
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
 
 
 class MappingMemoryAccess : public ::testing::Test
@@ -301,7 +208,7 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
-    SplineRThetaBuilder_host<HostExecSpace> builder(interpolation_idx_range_rtheta);
+    SplineRThetaBuilder<HostExecSpace> builder(interpolation_idx_range_rtheta);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
@@ -314,7 +221,7 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
     DiscreteToCartesianBuilder<
             X,
             Y,
-            SplineRThetaBuilder_host<HostExecSpace>,
+            SplineRThetaBuilder<HostExecSpace>,
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
@@ -413,7 +320,7 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     static_assert(
             is_accessible_v<Kokkos::DefaultExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
 
-    SplineRThetaBuilder_host<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
+    SplineRThetaBuilder<DeviceExecSpace> builder(interpolation_idx_range_rtheta);
 
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
@@ -426,7 +333,7 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
     DiscreteToCartesianBuilder<
             X,
             Y,
-            SplineRThetaBuilder_host<DeviceExecSpace>,
+            SplineRThetaBuilder<DeviceExecSpace>,
             SplineRThetaEvaluator<DeviceExecSpace>>
             mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
     DiscreteToCartesian to_physical_mapping = mapping_builder();
