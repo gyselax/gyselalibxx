@@ -91,7 +91,6 @@ public:
                     } else {
                         h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
                         h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-                        denom = h1 * h1 * (h2 - 1.) + h1 * h2 * h2 + h2 * h2;
                         c3 = h1 / (h2 * (h1 + h2));
                         c2 = 1. / h1 - 1. / h2;
                         c1 = -c3 - c2;
