@@ -47,6 +47,7 @@ public:
 public:
     /**
     * @brief Compute the partial derivative of @f$ F(X1,..,Xn)@f$ in Xi direction.
+    * For more information about the coefficients, see `../../doc/finite_difference_method/decentered_FDM.pdf`
     *
     * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
