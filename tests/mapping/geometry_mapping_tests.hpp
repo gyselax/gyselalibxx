@@ -4,6 +4,8 @@
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "indexed_tensor.hpp"
+#include "tensor.hpp"
 
 struct X
 {
