@@ -62,7 +62,7 @@ public:
         IdxRangeDeriv idxrange_deriv(idxrange_full);
         IdxRangeBatch idxrange_batch(idxrange_full);
 
-        IdxStepDeriv step(1);
+        IdxStepDeriv const step(1);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
@@ -70,35 +70,32 @@ public:
                 KOKKOS_LAMBDA(IdxFieldVal ibx) {
                     IdxBatch ib(ibx);
                     IdxDeriv ix(ibx);
+                    double h1, h2, c1, c2, c3, denom;
                     if (ix == idxrange_deriv.front()) {
-                        double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-                        double const h2
-                                = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
-                        double const c3 = -h1 / (h2 * (h1 + h2));
-                        double const c2 = 1. / h1 + 1. / h2;
-                        double const c1 = -c3 - c2;
+                        h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+                        h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
+                        c3 = -h1 / (h2 * (h1 + h2));
+                        c2 = 1. / h1 + 1. / h2;
+                        c1 = -c3 - c2;
                         dfieldval_dxi(ibx) = c1 * fieldval(ibx) + c2 * fieldval(ib, ix + step)
                                              + c3 * fieldval(ib, ix + 2 * step);
                     } else if (ix == idxrange_deriv.back()) {
-                        double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-                        double const h2
-                                = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
-                        double const c3 = h1 / (h2 * (h1 + h2));
-                        double const c2 = -(h1 + h2) / (h1 * h2);
-                        double const c1 = -c3 - c2;
+                        h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+                        h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+                        c3 = h1 / (h2 * (h1 + h2));
+                        c2 = -(h1 + h2) / (h1 * h2);
+                        c1 = -c3 - c2;
                         dfieldval_dxi(ibx) = c1 * fieldval(ibx) + c2 * fieldval(ib, ix - step)
                                              + c3 * fieldval(ib, ix - 2 * step);
                     } else {
-                        // forward FDM
-                        double const forward_fdm
-                                = (fieldval(ib, ix + step) - fieldval(ibx))
-                                  / (ddc::coordinate(ix + step) - ddc::coordinate(ix));
-                        // backward FDM
-                        double const backward_fdm
-                                = (fieldval(ibx) - fieldval(ib, ix - step))
-                                  / (ddc::coordinate(ix) - ddc::coordinate(ix - step));
-                        // mean of the two
-                        dfieldval_dxi(ibx) = (backward_fdm + forward_fdm) / 2.;
+                        h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+                        h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+                        denom = h1 * h1 * (h2 - 1.) + h1 * h2 * h2 + h2 * h2;
+                        c3 = h1 / (h2 * (h1 + h2));
+                        c2 = 1. / h1 - 1. / h2;
+                        c1 = -c3 - c2;
+                        dfieldval_dxi(ibx) = c1 * fieldval(ib, ix - step) + c2 * fieldval(ibx)
+                                             + c3 * fieldval(ib, ix + step);
                     }
                 });
     }
