@@ -76,8 +76,8 @@ class DummySplineBuilder2D
 public:
     using continuous_dimension_type1 = X;
     using continuous_dimension_type2 = Y;
-    using batched_interpolation_domain_type = ddc::DiscreteDomain<GridX, GridY>;
-    using batched_spline_domain_type = ddc::DiscreteDomain<BSplinesX, BSplinesY>;
+    using batched_interpolation_domain_type = IdxRange<GridX, GridY>;
+    using batched_spline_domain_type = IdxRange<BSplinesX, BSplinesY>;
     using DFieldSplineCoeff = DField<batched_spline_domain_type>;
     using DConstFieldCoeff = DConstField<batched_interpolation_domain_type>;
 
