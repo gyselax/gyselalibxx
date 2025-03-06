@@ -147,8 +147,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
+     * @return The Jacobian matrix.
      */
     KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
             Coord<R, Theta> const& coord) const
@@ -244,8 +243,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The inverse Jacobian matrix returned.
+     * @return The inverse Jacobian matrix.
      *
      *
      * @see Jacobian::inv_jacobian_11

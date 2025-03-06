@@ -145,8 +145,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
+     * @return The Jacobian matrix.
      *
      *
      * @see Jacobian::jacobian_11

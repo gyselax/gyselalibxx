@@ -206,8 +206,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
+     * @return The Jacobian matrix.
      *
      *
      * @see Jacobian::jacobian_11
@@ -343,8 +342,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The inverse Jacobian matrix returned.
+     * @return The inverse Jacobian matrix.
      *
      *
      * @see Jacobian::inv_jacobian_11
