@@ -42,7 +42,8 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
-                inv_jacobian(coords(irtheta)));
+                inv_jacobian(coords(irtheta)),
+                1e-15);
     });
 }
 
@@ -62,7 +63,8 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
-                mapping.inv_jacobian_matrix(coords(irtheta)));
+                mapping.inv_jacobian_matrix(coords(irtheta)),
+                1e-15);
     });
 }
 
@@ -118,7 +120,10 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
         const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
         const double r = ddc::get<R>(coord_rtheta);
         if (fabs(r) > 1e-15) {
-            check_inverse_tensor(mapping.jacobian_matrix(coord_rtheta), inv_jacobian(coord_rtheta));
+            check_inverse_tensor(
+                    mapping.jacobian_matrix(coord_rtheta),
+                    inv_jacobian(coord_rtheta),
+                    1e-15);
         }
     });
 }
