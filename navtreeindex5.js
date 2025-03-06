@@ -171,6 +171,7 @@ var NAVTREEINDEX5 =
 "geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[16,0,7,4,1],
 "geometryXY_2geometry_2geometry_8hpp_source.html":[16,0,6,0,0],
 "geometry__descriptors_8hpp_source.html":[16,0,20,4],
+"geometry__mapping__tests_8hpp_source.html":[16,1,2,0],
 "geometry__pseudo__cartesian_8hpp_source.html":[16,0,10,9],
 "grid__builder_8hpp_source.html":[16,1,0,0],
 "i__interpolator__2d_8hpp_source.html":[16,0,8,1],
@@ -221,7 +222,7 @@ var NAVTREEINDEX5 =
 "l__norm__tools_8hpp.html#ae78caab94d9b010c79a18002ffc99331":[16,0,11,1,1],
 "l__norm__tools_8hpp.html#af586948949594fb53ccfd4010d0a0fd6":[16,0,11,1,2],
 "l__norm__tools_8hpp_source.html":[16,0,11,1],
-"mapping__testing__tools_8hpp_source.html":[16,1,2,0],
+"mapping__testing__tools_8hpp_source.html":[16,1,2,1],
 "mapping__tools_8hpp_source.html":[16,0,10,12],
 "mask__tanh_8hpp_source.html":[16,0,5,4,7],
 "matching__idx__slice_8hpp_source.html":[16,0,14,0,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "multipatch__field__mem_8hpp_source.html":[16,0,14,1,1],
 "multipatch__math__tools_8hpp_source.html":[16,0,14,3,0],
 "multipatch__spline__builder_8hpp_source.html":[16,0,14,2,1],
-"multipatch__spline__builder__2d_8hpp_source.html":[16,0,14,2,2],
-"multipatch__spline__evaluator__2d_8hpp_source.html":[16,0,14,2,3]
+"multipatch__spline__builder__2d_8hpp_source.html":[16,0,14,2,2]
 };

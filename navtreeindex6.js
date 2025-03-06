@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"multipatch__spline__evaluator__2d_8hpp_source.html":[16,0,14,2,3],
 "multipatch__type_8hpp_source.html":[16,0,14,1,2],
 "neumann__spline__quadrature_8hpp.html":[16,0,17,1],
 "neumann__spline__quadrature_8hpp.html#a37299f0bf453ce5d896cedeed766a92d":[16,0,17,1,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "structIdxRangeSliceIterator.html#a54ae7139ec113bb5154889dd69c34459":[15,87,8],
 "structIdxRangeSliceIterator.html#a58387aeb6b23bade952ee6c6f17af075":[15,87,7],
 "structIdxRangeSliceIterator.html#a5eb3d57f669cb12e33c94ba7c933bb8d":[15,87,22],
-"structIdxRangeSliceIterator.html#a72cd1010b51d205c6dfeb7d86c2a52cc":[15,87,19],
-"structIdxRangeSliceIterator.html#a7f68c5678b29c6091de746305c7c7807":[15,87,10]
+"structIdxRangeSliceIterator.html#a72cd1010b51d205c6dfeb7d86c2a52cc":[15,87,19]
 };

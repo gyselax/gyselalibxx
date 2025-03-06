@@ -279,8 +279,8 @@ var NAVTREEINDEX =
 "classMatrix__Corner__Block.html#a7d06d0294c301af28e252ae180139704",
 "classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c",
 "classtensor__tools_1_1IndexedTensor.html#aa64e4beab28845e03a3f7fe9fcd50f88",
-"multipatch__type_8hpp_source.html",
-"structIdxRangeSliceIterator.html#a96c7777c808fa57c6fa4da36a6e9830e"
+"multipatch__spline__evaluator__2d_8hpp_source.html",
+"structIdxRangeSliceIterator.html#a7f68c5678b29c6091de746305c7c7807"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
