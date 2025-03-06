@@ -6,7 +6,7 @@
 
 #include "ddc_aliases.hpp"
 #include "mesh_builder.hpp"
-#include "spline_partial_derivatives_1d.hpp"
+#include "spline_1d_partial_derivatives.hpp"
 
 namespace {
 
@@ -138,9 +138,8 @@ TEST(PartialDerivative, SplinePartialDerivative1DDx)
     ddc::ConstantExtrapolationRule<X> bv_x_max(x_max);
     SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
 
-    SplinePartialDerivative1D<SplineXBuilder, SplineXEvaluator>
-            partial_dx(builder_x, spline_evaluator_x);
-    test_partial_derivative_dx(partial_dx, idxrange_xy);
+    PreallocatableSpline1DPartialDerivative<SplineXBuilder, SplineXEvaluator>
+            preallocator_partial_dx(builder_x, spline_evaluator_x);
 }
 
 } // namespace
