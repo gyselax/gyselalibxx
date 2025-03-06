@@ -10,8 +10,6 @@ The `geometryRTheta` folder contains all the code describing methods which are s
 
 - [initialisation](./initialisation/README.md) - Initialises the simulations on a 2D polar domain. 
 
-- [interpolation](./interpolation/README.md) - Code describing interpolation methods on 2D polar domain. 
-
 - [poisson](./poisson/README.md) - Code describing the polar Quasi-Neutrality solver.
 
 - [time\_solver](./time_solver/README.md) - The methods to solve in time the equations system. 

@@ -33,7 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
-#include "spline_interpolator_rtheta.hpp"
+#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "test_cases.hpp"
 #include "vector_field.hpp"
@@ -182,7 +182,8 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolatorRTheta<ddc::NullExtrapolationRule> const& interpolator;
+    PreallocatableSplineInterpolator2D<SplineRThetaBuilder, SplineRThetaEvaluatorNullBound> const&
+            interpolator;
     SplineRThetaBuilder const& advection_builder;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
@@ -323,7 +324,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
 
 
     // --- Evaluator for the test advection field:
