@@ -286,6 +286,7 @@ var annotated =
     [ "SingleModePerturbInitialisation", "classSingleModePerturbInitialisation.html", "classSingleModePerturbInitialisation" ],
     [ "Species", "structSpecies.html", null ],
     [ "SpeciesInformation", "classSpeciesInformation.html", "classSpeciesInformation" ],
+    [ "SplineBuilder2DCache", "classSplineBuilder2DCache.html", "classSplineBuilder2DCache" ],
     [ "SplineInterpolator", "classSplineInterpolator.html", "classSplineInterpolator" ],
     [ "SplineInterpolator2D", "classSplineInterpolator2D.html", "classSplineInterpolator2D" ],
     [ "SplinePartialDerivative1D", "classSplinePartialDerivative1D.html", "classSplinePartialDerivative1D" ],

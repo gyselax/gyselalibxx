@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"collision__configuration_8hpp_source.html":[16,0,4,0,0],
+"collision__operator_8hpp_source.html":[16,0,1,1],
+"collisions__inter_8hpp_source.html":[16,0,5,4,0],
 "collisions__intra_8hpp_source.html":[16,0,5,4,1],
 "collisions__utils_8hpp_source.html":[16,0,5,4,2],
 "combined__mapping_8hpp_source.html":[16,0,10,5],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "multipatch__spline__evaluator__2d_8hpp_source.html":[16,0,14,2,3],
 "multipatch__type_8hpp_source.html":[16,0,14,1,2],
 "neumann__spline__quadrature_8hpp.html":[16,0,17,1],
-"neumann__spline__quadrature_8hpp.html#a37299f0bf453ce5d896cedeed766a92d":[16,0,17,1,0],
-"neumann__spline__quadrature_8hpp.html#a722b8e6f2d653832879fad900a9baf25":[16,0,17,1,1],
-"neumann__spline__quadrature_8hpp_source.html":[16,0,17,1],
-"non__uniform__interpolation__points_8hpp_source.html":[16,0,20,6]
+"neumann__spline__quadrature_8hpp.html#a37299f0bf453ce5d896cedeed766a92d":[16,0,17,1,0]
 };

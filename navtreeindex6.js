@@ -1,5 +1,8 @@
 var NAVTREEINDEX6 =
 {
+"neumann__spline__quadrature_8hpp.html#a722b8e6f2d653832879fad900a9baf25":[16,0,17,1,1],
+"neumann__spline__quadrature_8hpp_source.html":[16,0,17,1],
+"non__uniform__interpolation__points_8hpp_source.html":[16,0,20,6],
 "noperturbinitialisation_8hpp_source.html":[16,0,4,2,3],
 "null__extrapolation__rules_8hpp_source.html":[16,0,14,2,4],
 "nulladvectionvx_8hpp_source.html":[16,0,0,6],
@@ -50,11 +53,13 @@ var NAVTREEINDEX6 =
 "simulations_geometryXY_guiding_centre.html#simulations_geometryXY_guiding_centre__Simulation":[12,2,0,1],
 "species__info_8hpp_source.html":[16,0,18,1],
 "species__init_8hpp_source.html":[16,0,18,2],
+"spline__builder__2d__cache_8hpp.html":[16,0,11,3],
+"spline__builder__2d__cache_8hpp_source.html":[16,0,11,3],
 "spline__interpolator_8hpp_source.html":[16,0,8,5],
 "spline__interpolator__2d_8hpp_source.html":[16,0,8,6],
 "spline__interpolator__rtheta_2params_8yaml_8hpp_source.html":[16,1,1,3,0],
-"spline__partial__derivatives__1d_8hpp.html":[16,0,11,3],
-"spline__partial__derivatives__1d_8hpp_source.html":[16,0,11,3],
+"spline__partial__derivatives__1d_8hpp.html":[16,0,11,4],
+"spline__partial__derivatives__1d_8hpp_source.html":[16,0,11,4],
 "spline__polar__foot__finder_8hpp_source.html":[16,0,0,7],
 "spline__quadrature_8hpp.html":[16,0,17,5],
 "spline__quadrature_8hpp.html#a23fc7a03f5433595ee746bbddafded55":[16,0,17,5,1],
@@ -244,10 +249,5 @@ var NAVTREEINDEX6 =
 "structIdxRangeSliceIterator.html#a7f68c5678b29c6091de746305c7c7807":[15,87,10],
 "structIdxRangeSliceIterator.html#a96c7777c808fa57c6fa4da36a6e9830e":[15,87,3],
 "structIdxRangeSliceIterator.html#a9c97b510fa95c83eb250ad2888d1614f":[15,87,14],
-"structIdxRangeSliceIterator.html#a9e1f33547deedae501feaeea8c1d6376":[15,87,20],
-"structIdxRangeSliceIterator.html#aa0e84d0ad195d6b35f0d567da81b8ab8":[15,87,5],
-"structIdxRangeSliceIterator.html#aa3784446d2f1f986e069a084cec61160":[15,87,1],
-"structIdxRangeSliceIterator.html#aa5734dbd3f9f99ba7f354330a1f8fede":[15,87,9],
-"structIdxRangeSliceIterator.html#aaf0b7e03e22115a3531bc5158986c5b6":[15,87,11],
-"structIdxRangeSliceIterator.html#adce70917996571583d5e289de0873794":[15,87,15]
+"structIdxRangeSliceIterator.html#a9e1f33547deedae501feaeea8c1d6376":[15,87,20]
 };
