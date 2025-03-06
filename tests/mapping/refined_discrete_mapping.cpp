@@ -194,10 +194,10 @@ double check_Jacobian_on_grid(
 
         Tensor diff = discrete_Jacobian - analytical_Jacobian;
 
-        max_err = std::max(max_err, ddcHelper::get<R, R_cov>(diff));
-        max_err = std::max(max_err, ddcHelper::get<R, Theta_cov>(diff));
-        max_err = std::max(max_err, ddcHelper::get<Theta, R_cov>(diff));
-        max_err = std::max(max_err, ddcHelper::get<Theta, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<X, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<X, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, Theta_cov>(diff));
     });
 
     return max_err;
@@ -266,10 +266,10 @@ double check_Jacobian_not_on_grid(
 
         Tensor diff = discrete_Jacobian - analytical_Jacobian;
 
-        max_err = std::max(max_err, ddcHelper::get<R, R_cov>(diff));
-        max_err = std::max(max_err, ddcHelper::get<R, Theta_cov>(diff));
-        max_err = std::max(max_err, ddcHelper::get<Theta, R_cov>(diff));
-        max_err = std::max(max_err, ddcHelper::get<Theta, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<X, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<X, Theta_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, R_cov>(diff));
+        max_err = std::max(max_err, ddcHelper::get<Y, Theta_cov>(diff));
     });
 
     return max_err;
@@ -348,10 +348,10 @@ double check_pseudo_Cart(
 
 
     double max_err = 0.;
-    max_err = std::max(max_err, ddcHelper::get<R, R_cov>(diff));
-    max_err = std::max(max_err, ddcHelper::get<R, Theta_cov>(diff));
-    max_err = std::max(max_err, ddcHelper::get<Theta, R_cov>(diff));
-    max_err = std::max(max_err, ddcHelper::get<Theta, Theta_cov>(diff));
+    max_err = std::max(max_err, ddcHelper::get<X_pC, X>(diff));
+    max_err = std::max(max_err, ddcHelper::get<X_pC, Y>(diff));
+    max_err = std::max(max_err, ddcHelper::get<Y_pC, X>(diff));
+    max_err = std::max(max_err, ddcHelper::get<Y_pC, Y>(diff));
 
     return max_err;
 }
