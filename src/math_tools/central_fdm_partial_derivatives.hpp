@@ -71,7 +71,7 @@ public:
                 KOKKOS_LAMBDA(IdxFieldVal ibx) {
                     IdxBatch ib(ibx);
                     IdxDeriv ix(ibx);
-                    double h1, h2, c1, c2, c3, denom;
+                    double h1, h2, c1, c2, c3;
                     if (ix == idxrange_deriv.front()) {
                         h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
                         h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
