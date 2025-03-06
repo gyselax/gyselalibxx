@@ -11,10 +11,10 @@
 #include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_mapping_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "mapping_testing_tools.hpp"
 #include "mesh_builder.hpp"
-#include "geometry_mapping_tests.hpp"
 
 
 namespace {
