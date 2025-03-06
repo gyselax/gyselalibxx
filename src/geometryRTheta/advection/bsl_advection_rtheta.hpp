@@ -3,7 +3,6 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "i_interpolator_rtheta.hpp"
 #include "iadvection_rtheta.hpp"
