@@ -168,7 +168,7 @@ KOKKOS_FUNCTION void internal_tensor_mul(
  * @return An IndexedTensor object.
  */
 template <char... ids, class TensorType>
-KOKKOS_FUNCTION auto index(TensorType& tensor)
+KOKKOS_FUNCTION auto index(TensorType const& tensor)
 {
     static_assert(
             sizeof...(ids) == TensorType::rank(),
