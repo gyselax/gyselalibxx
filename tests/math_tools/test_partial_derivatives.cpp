@@ -110,7 +110,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
 //}
 
 
-TEST(PartialDerivative, SplinePartialDerivative1DDx)
+TEST(PartialDerivative, SplinePartialDerivative1D)
 {
     int n_elems_x(10);
     int n_elems_y(20);

@@ -19,7 +19,6 @@ class IPartialDerivative
     static_assert(ddc::is_borrowed_chunk_v<DField<IdxRangeType>>);
 
 public:
-
     /// The type of the object that will be differentiated.
     using DFieldType = DField<IdxRangeType>;
     using DFieldMemType = DFieldMem<IdxRangeType>;
@@ -28,8 +27,7 @@ public:
     using DConstFieldType = typename DFieldType::view_type;
 
     /// The type of the grid on the dimension Xi on which the partial derivative is calculated.
-    using GridDerivativeDim
-            = find_grid_t<DerivativeDim, ddc::to_type_seq_t<IdxRangeType>>;
+    using GridDerivativeDim = find_grid_t<DerivativeDim, ddc::to_type_seq_t<IdxRangeType>>;
 
     /// The index range of the dimension Xi on which the partial derivative is calculated.
     using IdxRangeDeriv = IdxRange<GridDerivativeDim>;
@@ -62,7 +60,6 @@ public:
 template <class IdxRangeType, class DerivativeDim>
 class IPartialDerivativeCreator : public IPartialDerivative<IdxRangeType, DerivativeDim>
 {
-
 public:
     /**
      * @brief Allocate an instance of a pointer to an IPartialDerivative.
@@ -74,7 +71,8 @@ public:
      *
      * @see IPartialDerivative
      */
-    virtual std::unique_ptr<IPartialDerivative<IdxRangeType, DerivativeDim>> preallocate() const = 0;
+    virtual std::unique_ptr<IPartialDerivative<IdxRangeType, DerivativeDim>> preallocate()
+            const = 0;
 
     /**
      * @brief Computes the partial derivative of a function at each coordinate 
@@ -87,8 +85,7 @@ public:
      *
      * @return A reference to the inout_data array containing the value of the function at the coordinates.
      */
-    DField<IdxRangeType> operator()(
-            DConstField<IdxRangeType> fieldval) const override
+    DField<IdxRangeType> operator()(DConstField<IdxRangeType> fieldval) const override
     {
         return (*preallocate())(fieldval);
     }

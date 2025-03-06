@@ -35,8 +35,8 @@ private:
 
 public:
     /// The type of the object that will be differentiated.
-    using typename base_type::DFieldType;
     using typename base_type::DFieldMemType;
+    using typename base_type::DFieldType;
 
     /// The type of the calculated derivative.
     using typename base_type::DConstFieldType;
@@ -94,7 +94,7 @@ public:
  */
 template <class Spline1DBuilder, class Spline1DEvaluator>
 class Spline1DPartialDerivativeCreator
-: public IPartialDerivativeCreator<
+    : public IPartialDerivativeCreator<
               typename Spline1DBuilder::batched_interpolation_domain_type,
               typename Spline1DBuilder::continuous_dimension_type>
 {
@@ -124,10 +124,11 @@ public:
      */
     std::unique_ptr<IPartialDerivative<
             typename Spline1DBuilder::batched_interpolation_domain_type,
-              typename Spline1DBuilder::continuous_dimension_type>>
+            typename Spline1DBuilder::continuous_dimension_type>>
     preallocate() const
     {
-        return std::make_unique<
-                Spline1DPartialDerivative<Spline1DBuilder, Spline1DEvaluator>>(m_builder, m_evaluator);
+        return std::make_unique<Spline1DPartialDerivative<
+                Spline1DBuilder,
+                Spline1DEvaluator>>(m_builder, m_evaluator);
     }
 };
