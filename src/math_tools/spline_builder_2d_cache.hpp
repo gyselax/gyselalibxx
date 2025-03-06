@@ -40,7 +40,7 @@ public:
     *
     * @param spline_builder A 2D spline builder.
     */
-    SplineBuilder2DCache(SplineBuilder2D const& spline_builder)
+    explicit SplineBuilder2DCache(SplineBuilder2D const& spline_builder)
         : m_spline_builder(spline_builder)
         , m_spline_coeffs(spline_builder.batched_spline_domain())
         , m_compute_coeffs_dim1(true)
