@@ -62,7 +62,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
-                mapping.inv_jacobian(coords(irtheta)));
+                mapping.inv_jacobian_matrix(coords(irtheta)));
     });
 }
 

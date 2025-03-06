@@ -8,6 +8,7 @@
 #include "czarny_to_cartesian.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "math_tools.hpp"
 
 
@@ -21,23 +22,46 @@ class PseudoCartesianJacobianMatrixTest
 public:
     struct X
     {
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = X;
     };
     struct Y
     {
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Y;
     };
-    struct X_pc
-    {
-    };
-    struct Y_pc
-    {
-    };
+    struct R_cov;
+    struct Theta_cov;
     struct R
     {
         static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = false;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = R_cov;
     };
     struct Theta
     {
         static bool constexpr PERIODIC = true;
+        static bool constexpr IS_COVARIANT = false;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Theta_cov;
+    };
+    struct R_cov
+    {
+        static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = false;
+        using Dual = R;
+    };
+
+    struct Theta_cov
+    {
+        static bool constexpr PERIODIC = true;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = false;
+        using Dual = Theta;
     };
 
 
@@ -194,18 +218,15 @@ public:
                 theta_extrapolation_rule,
                 theta_extrapolation_rule);
 
-        Matrix_2x2 analytical_matrix;
-        Matrix_2x2 discrete_matrix;
-
 
         // --- CIRCULAR MAPPING ---------------------------------------------------------------------------
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
                   << "   - Circular mapping: ";
         const CircularToCartesian<R, Theta, X, Y> circ_to_cart;
-        const CartesianToCircular<X_pc, Y_pc, R, Theta> pseudo_cart_to_circ;
+        const CartesianToCircular<X_pC, Y_pC, R, Theta> pseudo_cart_to_circ;
         using PseudoCartToCircToCart = CombinedMapping<
                 CircularToCartesian<R, Theta, X, Y>,
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCircToCart
                 pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
@@ -217,7 +238,7 @@ public:
         DiscreteToCartesian discrete_mapping_circ_to_cart = mapping_builder_circ();
         using DiscreteMappingCirc = CombinedMapping<
                 decltype(discrete_mapping_circ_to_cart),
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         DiscreteMappingCirc discrete_pseudo_cart_to_circ_to_cart(
                 discrete_mapping_circ_to_cart,
                 pseudo_cart_to_circ,
@@ -227,8 +248,8 @@ public:
                 pseudo_cart_to_circ_to_cart);
         InvJacobianOPoint<DiscreteMappingCirc, CoordRTheta> inv_o_point_discrete_circ(
                 discrete_pseudo_cart_to_circ_to_cart);
-        analytical_matrix = inv_o_point_analytical_circ();
-        discrete_matrix = inv_o_point_discrete_circ();
+        Tensor analytical_matrix = inv_o_point_analytical_circ();
+        Tensor discrete_matrix = inv_o_point_discrete_circ();
         double max_diff_circ
                 = check_same(analytical_matrix, discrete_matrix, 1e-5 * ipow(16. / double(N), 4));
         std::cout << max_diff_circ << std::endl;
@@ -240,7 +261,7 @@ public:
         const CzarnyToCartesian<R, Theta, X, Y> czarny_to_cart(0.3, 1.4);
         using PseudoCartToCzarnyToCart = CombinedMapping<
                 CzarnyToCartesian<R, Theta, X, Y>,
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCzarnyToCart
                 pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
@@ -252,7 +273,7 @@ public:
         DiscreteToCartesian discrete_mapping_czarny_to_cart = mapping_builder_czarny();
         using DiscreteMappingCzarny = CombinedMapping<
                 decltype(discrete_mapping_czarny_to_cart),
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         DiscreteMappingCzarny discrete_pseudo_cart_to_czarny_to_cart(
                 discrete_mapping_czarny_to_cart,
                 pseudo_cart_to_circ,

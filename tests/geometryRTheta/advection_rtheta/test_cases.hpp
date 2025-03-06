@@ -402,8 +402,8 @@ public:
     {
         CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord));
         Tensor jacobian = m_logical_to_physical_mapping.jacobian_matrix(coord_rtheta);
-        DVector<X, Y> v = tensor_mul(index<'i'>(m_v), index<'i', 'j'>(jacobian));
-        return CoordXY(v);
+        DVector<X, Y> v = tensor_mul(index<'i', 'j'>(jacobian), index<'j'>(m_v));
+        return CoordXY(ddcHelper::get<X>(v), ddcHelper::get<Y>(v));
     }
 
     /**
@@ -419,8 +419,7 @@ public:
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rtheta(m_physical_to_logical_mapping(coord_xy));
-        CoordRTheta const velocity(m_v);
-        return m_logical_to_physical_mapping(coord_rtheta - t * velocity);
+        return m_logical_to_physical_mapping(coord_rtheta - t * m_v);
     }
 };
 

@@ -175,9 +175,9 @@ public:
             Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
-            Vector advec_field_rtheta = advection_field_rtheta(irtheta);
-            Vector advec_field_xy
-                    = tensor_mul(index<'i'>(advec_field_rtheta), index<'i', 'j'>(inv_J)) * jacobian;
+            DVector<R, Theta> advec_field_rtheta = advection_field_rtheta(irtheta);
+            DVector<X, Y> advec_field_xy
+                    = tensor_mul(index<'i', 'j'>(inv_J), index<'i'>(advec_field_rtheta)) * jacobian;
             ddcHelper::get<X>(advection_field_xy_host)(irtheta) = ddcHelper::get<X>(advec_field_xy);
             ddcHelper::get<Y>(advection_field_xy_host)(irtheta) = ddcHelper::get<Y>(advec_field_xy);
         });
