@@ -98,10 +98,10 @@ namespace details {
  * @return An IndexedTensor object.
  */
 template <class TypeSeqCharIds, class TensorType, std::size_t... I>
-KOKKOS_FUNCTION auto internal_index(TensorType& tensor, std::index_sequence<I...>)
+KOKKOS_FUNCTION auto internal_index(TensorType const& tensor, std::index_sequence<I...>)
 {
     return IndexedTensor<
-            TensorType,
+            const TensorType,
             ddc::detail::TypeSeq<VectorIndexIdMap<
                     ddc::type_seq_element_t<I, TypeSeqCharIds>::value,
                     typename TensorType::template vector_index_set_t<I>>...>>(tensor);
@@ -168,7 +168,7 @@ KOKKOS_FUNCTION void internal_tensor_mul(
  * @return An IndexedTensor object.
  */
 template <char... ids, class TensorType>
-KOKKOS_FUNCTION auto index(TensorType& tensor)
+KOKKOS_FUNCTION auto index(TensorType const& tensor)
 {
     static_assert(
             sizeof...(ids) == TensorType::rank(),
