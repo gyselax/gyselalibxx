@@ -144,21 +144,20 @@ using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
 /**
  * @brief Check if the product of the matrix and inv_matrix gives the identity matrix.
  *
- * The error tolerance is given at 1e-15.
- *
  * @param[in] matrix
  * 			The Jacobian matrix of the mapping.
  * @param[in] inv_matrix
  * 			The inverse Jacobian matrix of the mapping.
+ * @param[in] TOL
+ *          The error tolerance.
  */
 template <class StartDims, class EndDims>
 void check_inverse_tensor(
         DTensor<StartDims, EndDims> const& tensor,
         DTensor<vector_index_set_dual_t<EndDims>, vector_index_set_dual_t<StartDims>> const&
-                inv_tensor)
+                inv_tensor,
+        double TOL)
 {
-    double TOL = 1e-10;
-
     using StartDim0 = ddc::type_seq_element_t<0, StartDims>;
     using StartDim1 = ddc::type_seq_element_t<1, StartDims>;
     using StartDim0_cov = typename StartDim0::Dual;

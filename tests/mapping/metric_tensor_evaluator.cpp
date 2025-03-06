@@ -32,7 +32,8 @@ TEST_P(InverseMetricTensor, InverseMatrixCircMap)
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 metric_tensor(coords(irtheta)),
-                metric_tensor.inverse(coords(irtheta)));
+                metric_tensor.inverse(coords(irtheta)),
+                1e-10);
     });
 }
 
@@ -51,7 +52,8 @@ TEST_P(InverseMetricTensor, InverseMatrixCzarMap)
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 metric_tensor(coords(irtheta)),
-                metric_tensor.inverse(coords(irtheta)));
+                metric_tensor.inverse(coords(irtheta)),
+                1e-10);
     });
 }
 
