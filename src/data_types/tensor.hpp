@@ -294,52 +294,43 @@ public:
         result -= val;
         return result;
     }
+
     /**
-￼     * @brief An operator to subtract one tensor from another elementwise.
-￼     * @param val The tensor that should be subtracted from the current tensor.
-￼     * @return A new tensor containing the result of the subtraction.
-￼     */
-    ￼ KOKKOS_FUNCTION Tensor operator-()
-￼
+* @brief An operator to subtract one tensor from another elementwise.
+* @param val The tensor that should be subtracted from the current tensor.
+* @return A new tensor containing the result of the subtraction.
+*/
+    KOKKOS_FUNCTION Tensor operator-()
     {
-        ￼ Tensor result;
-        ￼ for (std::size_t i(0); i < s_n_elements; ++i)
-        {
-            ￼ result.m_data[i] = -m_data[i];
-            ￼
+        Tensor result;
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            result.m_data[i] = -m_data[i];
         }
-        ￼ return result;
-        ￼
+        return result;
     }
-    ￼
-￼ /**
-￼     * @brief An operator to compare one tensor to another elementwise.
-￼     * @param o_tensor The tensor that should be compared with the current tensor.
-￼     * @return True if the tensors are equal, false otherwise.
-￼     */
-￼ KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor) const
-￼
+
+    /**
+     * @brief An operator to compare one tensor to another elementwise.
+     * @param o_tensor The tensor that should be compared with the current tensor.
+     * @return True if the tensors are equal, false otherwise.
+     */
+    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor)
     {
-        ￼ bool equal(true);
-        ￼ for (std::size_t i(0); i < s_n_elements; ++i)
-        {
-            ￼ equal &= (m_data[i] == o_tensor.m_data[i]);
-            ￼
+        bool equal(true);
+        for (std::size_t i(0); i < s_n_elements; ++i) {
+            equal &= (m_data[i] == o_tensor.m_data[i]);
         }
-        ￼ return equal;
-        ￼
+        return equal;
     }
-    ￼
-￼ /**
-￼     * @brief An operator to compare one tensor to another elementwise.
-￼     * @param o_tensor The tensor that should be compared with the current tensor.
-￼     * @return False if the tensors are equal, true otherwise.
-￼     */
-￼ KOKKOS_FUNCTION bool operator!=(Tensor const& o_tensor) const
-￼
+
+    /**
+     * @brief An operator to compare one tensor to another elementwise.
+     * @param o_tensor The tensor that should be compared with the current tensor.
+     * @return False if the tensors are equal, true otherwise.
+     */
+    KOKKOS_FUNCTION bool operator!=(Tensor const& o_tensor) const
     {
-        ￼ return !(*this == o_tensor);
-        ￼
+        return !(*this == o_tensor);
     }
 
     /**
