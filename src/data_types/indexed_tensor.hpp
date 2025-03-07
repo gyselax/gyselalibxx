@@ -199,6 +199,11 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             "A tensor multiplication must be carried out over IndexedTensor objects");
     // Get the TypeSeq of VectorIndexIdMaps describing all the indices which appear in the calculation.
     using AllIndexIdMaps = type_seq_cat_t<typename IndexedTensorType::index_pattern...>;
+    static_assert(
+            type_seq_has_unique_elements_v<AllIndexIdMaps>,
+            "You should not have more than two of any one index in an index expression. "
+            "Additionally repeated indices should not be associated with two covariant or two "
+            "contravariant indices.");
     // Use the first tensor argument to extract the element type of the result.
     using ElementType = std::tuple_element_t<
             0,

@@ -296,11 +296,11 @@ public:
     }
 
     /**
-* @brief An operator to subtract one tensor from another elementwise.
-* @param val The tensor that should be subtracted from the current tensor.
-* @return A new tensor containing the result of the subtraction.
-*/
-    KOKKOS_FUNCTION Tensor operator-()
+     * @brief An operator to subtract one tensor from another elementwise.
+     * @param val The tensor that should be subtracted from the current tensor.
+     * @return A new tensor containing the result of the subtraction.
+     */
+    KOKKOS_FUNCTION Tensor operator-() const
     {
         Tensor result;
         for (std::size_t i(0); i < s_n_elements; ++i) {
@@ -314,11 +314,11 @@ public:
      * @param o_tensor The tensor that should be compared with the current tensor.
      * @return True if the tensors are equal, false otherwise.
      */
-    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor)
+    KOKKOS_FUNCTION bool operator==(Tensor const& o_tensor) const
     {
         bool equal(true);
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            equal &= (m_data[i] == o_tensor.m_data[i]);
+            equal = equal && (m_data[i] == o_tensor.m_data[i]);
         }
         return equal;
     }
