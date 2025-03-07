@@ -167,7 +167,7 @@ public:
      */
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu_host,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DConstVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
             double dt) const override
     {
@@ -190,7 +190,7 @@ public:
             Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
-            DVector<R, Theta> advec_field_rtheta = advection_field_rtheta(irtheta);
+            DVector<R_cov, Theta_cov> advec_field_rtheta = advection_field_rtheta(irtheta);
             // advec_field_xy = J^{-T} A
             DVector<X, Y> advec_field_xy
                     = tensor_mul(index<'i', 'j'>(inv_J), index<'i'>(advec_field_rtheta)) * jacobian;
