@@ -162,11 +162,11 @@ KOKKOS_INLINE_FUNCTION void check_id_validity()
         using Set1 = ddc::type_seq_element_t<0, RelevantVectorIndexSets>;
         using Set2 = ddc::type_seq_element_t<1, RelevantVectorIndexSets>;
         constexpr bool has_covariant_idx = (is_covariant_vector_index_set_v<Set1>)
-                                           or (is_covariant_vector_index_set_v<Set2>);
+                                           || (is_covariant_vector_index_set_v<Set2>);
         constexpr bool has_contravariant_idx = (is_contravariant_vector_index_set_v<Set1>)
-                                               or (is_contravariant_vector_index_set_v<Set2>);
+                                               || (is_contravariant_vector_index_set_v<Set2>);
         static_assert(
-                has_covariant_idx and has_contravariant_idx,
+                has_covariant_idx && has_contravariant_idx,
                 "Repeated indices should not be associated with two covariant or two contravariant "
                 "indices.");
         static_assert(
