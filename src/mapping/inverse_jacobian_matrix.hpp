@@ -16,13 +16,16 @@
 template <class Mapping, class PositionCoordinate = typename Mapping::CoordArg>
 class InverseJacobianMatrix
 {
-public:
+private:
     using ValidArgIndices = ddc::to_type_seq_t<typename Mapping::CoordArg>;
     using ValidResultIndices = ddc::to_type_seq_t<typename Mapping::CoordResult>;
     using DimArg0 = ddc::type_seq_element_t<0, ValidArgIndices>;
     using DimArg1 = ddc::type_seq_element_t<1, ValidArgIndices>;
     using DimRes0_cov = typename ddc::type_seq_element_t<0, ValidResultIndices>::Dual;
     using DimRes1_cov = typename ddc::type_seq_element_t<1, ValidResultIndices>::Dual;
+
+public:
+    /// The type of the tensor representing the inverse Jacobian.
     using InverseJacobianTensor
             = DTensor<ValidArgIndices, vector_index_set_dual_t<ValidResultIndices>>;
 

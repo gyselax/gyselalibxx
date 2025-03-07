@@ -144,7 +144,7 @@ public:
      * so they can be calculated on the correct coordinate system.
      *
      * @param[in] coord The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix The calculated Jacobian matrix.
+     * @return The calculated Jacobian matrix.
      */
     KOKKOS_INLINE_FUNCTION JacobianMatrixType jacobian_matrix(CoordJacobian const& coord) const
     {
@@ -223,7 +223,7 @@ public:
      * using non_singular_inverse_jacobian_matrix
      *
      * @param[in] coord The coordinate where we evaluate the inverse Jacobian matrix.
-     * @param[out] matrix The calculated inverse Jacobian matrix.
+     * @return The calculated inverse Jacobian matrix.
      *
      * @see non_singular_inverse_jacobian_matrix
      */
