@@ -73,24 +73,20 @@ public:
     {
         using IdxType = typename IdxRangeType::discrete_element_type;
 
-        Mapping mapping_proxy = m_mapping;
-
         if constexpr (std::is_same_v<Coord<XIn, YIn>, typename Mapping::CoordArg>) {
+            Mapping mapping_proxy = m_mapping;
             ddc::parallel_for_each(
                     exec_space,
                     get_idx_range(vector_field_input),
                     KOKKOS_LAMBDA(IdxType idx) {
                         Tensor jacobian = mapping_proxy.jacobian_matrix(ddc::coordinate(idx));
+                        DVector<XOut, YOut> vector_field_out = tensor_mul(
+                                index<'i', 'j'>(jacobian),
+                                index<'j'>(vector_field_input));
                         ddcHelper::get<XOut>(vector_field_output)(idx)
-                                = ddcHelper::get<XOut, XIn::Dual>(jacobian)
-                                          * ddc::get<XIn>(vector_field_input)
-                                  + ddcHelper::get<XOut, YIn::Dual>(jacobian)
-                                            * ddc::get<YIn>(vector_field_input);
+                                = ddcHelper::get<XOut>(vector_field_out);
                         ddcHelper::get<YOut>(vector_field_output)(idx)
-                                = ddcHelper::get<YOut, XIn::Dual>(jacobian)
-                                          * ddc::get<XIn>(vector_field_input)
-                                  + ddcHelper::get<YOut, YIn::Dual>(jacobian)
-                                            * ddc::get<YIn>(vector_field_input);
+                                = ddcHelper::get<YOut>(vector_field_out);
                     });
         } else {
             InverseJacobianMatrix<Mapping, ddc::coordinate_of_t<IdxType>> inv_mapping(m_mapping);
