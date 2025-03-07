@@ -31,8 +31,8 @@ set_tests_properties(${file} PROPERTIES
 
 endfunction()
 
-add_static_assert_test(tensor_mul_cov_cov "Additionally repeated indices should not be associated with two covariant or two contravariant indices.")
-add_static_assert_test(tensor_mul_contra_contra "Additionally repeated indices should not be associated with two covariant or two contravariant indices.")
+add_static_assert_test(tensor_mul_cov_cov "Repeated indices should not be associated with two covariant or two contravariant indices.")
+add_static_assert_test(tensor_mul_contra_contra "Repeated indices should not be associated with two covariant or two contravariant indices.")
 add_static_assert_test(tensor_mul_incompatible_index_set "Cannot sum over incompatible VectorIndexSets.")
 add_static_assert_test(tensor_mul_3_indices "You should not have more than two of any one index in an index expression.")
 add_static_assert_test(tensor_mul_multiple_types "All tensors in a tensor_mul must have the same element type.")
