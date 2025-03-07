@@ -20,23 +20,24 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
         PUBLIC
             DDC::core
             DDC::pdi
+
             paraconf::paraconf
+
             PDI::pdi
 
             Eigen3::Eigen
 
-            gslx::paraconfpp
-
-            gslx::poisson_RTheta
-            gslx::geometry_RTheta
-            gslx::interpolation_2D_rp
-            gslx::io
-            gslx::advection_rp
-            gslx::time_integration_rp
-            gslx::quadrature
-            gslx::utils
+            gslx::advection_RTheta
             gslx::diocotron_init_eq
+            gslx::geometry_RTheta
+            gslx::interpolation
+            gslx::io
+            gslx::paraconfpp
+            gslx::poisson_RTheta
+            gslx::quadrature
             gslx::simulation_utils
+            gslx::time_integration_RTheta
+            gslx::utils
     )
     target_compile_definitions("${test_name}" PUBLIC -D${TIME_METHOD} -D${PREDCORR_METHOD})
 endfunction()

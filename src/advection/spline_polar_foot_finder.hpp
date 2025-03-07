@@ -6,10 +6,10 @@
 #include "combined_mapping.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "directional_tag.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "ipolar_foot_finder.hpp"
 #include "mapping_tools.hpp"
+#include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
 /**
@@ -136,19 +136,20 @@ public:
 
     /// The type of a vector (x,y) field on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
-    using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>, memory_space>;
+    using DVectorFieldRTheta
+            = VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
 
     /// The type of a constant vector (x,y) field on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
     using DVectorConstFieldRTheta
-            = VectorConstField<double, IdxRangeRTheta, NDTag<Dim1, Dim2>, memory_space>;
+            = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>, memory_space>;
 
     /// The type of 2 splines representing the x and y components of a vector on the polar plane on a compatible memory space.
     template <class Dim1, class Dim2>
     using VectorSplineCoeffsMem2D = VectorFieldMem<
             double,
             IdxRange<BSplinesR, BSplinesTheta>,
-            NDTag<Dim1, Dim2>,
+            VectorIndexSet<Dim1, Dim2>,
             memory_space>;
 
 public:
@@ -265,20 +266,21 @@ public:
                     ddc::parallel_for_each(
                             ExecSpace(),
                             idx_range_rp,
-                            KOKKOS_LAMBDA(IdxRTheta const irp) {
-                                CoordRTheta const coord_rp(feet(irp));
+                            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                                CoordRTheta const coord_rtheta(feet(irtheta));
                                 CoordXY_adv const coord_xy
-                                        = logical_to_pseudo_physical_proxy(coord_rp);
+                                        = logical_to_pseudo_physical_proxy(coord_rtheta);
 
-                                CoordXY_adv const feet_xy = coord_xy - dt * advection_field(irp);
+                                CoordXY_adv const feet_xy
+                                        = coord_xy - dt * advection_field(irtheta);
 
                                 if (norm_inf(feet_xy - coord_centre) < 1e-15) {
-                                    feet(irp) = CoordRTheta(0, 0);
+                                    feet(irtheta) = CoordRTheta(0, 0);
                                 } else {
-                                    feet(irp) = pseudo_physical_to_logical_proxy(feet_xy);
-                                    ddc::select<Theta>(feet(irp))
+                                    feet(irtheta) = pseudo_physical_to_logical_proxy(feet_xy);
+                                    ddc::select<Theta>(feet(irtheta))
                                             = ddcHelper::restrict_to_idx_range(
-                                                    ddc::select<Theta>(feet(irp)),
+                                                    ddc::select<Theta>(feet(irtheta)),
                                                     IdxRangeTheta(idx_range_rp));
                                 }
                             });
@@ -320,13 +322,15 @@ public:
             ddc::parallel_for_each(
                     ExecSpace(),
                     theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta ip) {
-                        if (norm_inf(values(r0_idx, ip) - values(r0_idx, theta_idx_range.front()))
+                    KOKKOS_LAMBDA(const IdxTheta itheta) {
+                        if (norm_inf(
+                                    values(r0_idx, itheta)
+                                    - values(r0_idx, theta_idx_range.front()))
                             > 1e-15) {
                             Kokkos::printf("WARNING ! -> Discontinuous at the centre point.");
                         }
                         KOKKOS_ASSERT(
-                                values(r0_idx, ip) == values(r0_idx, theta_idx_range.front()));
+                                values(r0_idx, itheta) == values(r0_idx, theta_idx_range.front()));
                     });
         }
     }
@@ -355,8 +359,8 @@ public:
             ddc::parallel_for_each(
                     ExecSpace(),
                     theta_idx_range,
-                    KOKKOS_LAMBDA(const IdxTheta ip) {
-                        values(r0_idx, ip) = values(r0_idx, theta_idx_range.front());
+                    KOKKOS_LAMBDA(const IdxTheta itheta) {
+                        values(r0_idx, itheta) = values(r0_idx, theta_idx_range.front());
                     });
         }
     }

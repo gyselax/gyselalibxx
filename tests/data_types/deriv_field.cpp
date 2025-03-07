@@ -9,7 +9,6 @@
 #include "ddc_helper.hpp"
 #include "derivative_field.hpp"
 #include "derivative_field_mem.hpp"
-#include "directional_tag.hpp"
 #include "grid_builder.hpp"
 #include "view.hpp"
 

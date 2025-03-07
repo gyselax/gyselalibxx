@@ -4,7 +4,6 @@
 #include <ddc/ddc.hpp>
 
 #include "geometry.hpp"
-#include "spline_interpolator_2d_rp.hpp"
 
 
 
@@ -53,13 +52,13 @@ public:
     /**
 	 * @brief Get the value of the function at a given coordinate.
 	 *
-	 * @param[in] coord_rp
+	 * @param[in] coord_rtheta
 	 *      Polar coordinate where we want to evaluate the rhs function.
 	 *
 	 * @return A double with the value of the rhs at the given coordinate.
 	 */
-    double operator()(CoordRTheta const& coord_rp) const
+    double operator()(CoordRTheta const& coord_rtheta) const
     {
-        return m_evaluator(coord_rp, m_coefs);
+        return m_evaluator(coord_rtheta, m_coefs);
     }
 };

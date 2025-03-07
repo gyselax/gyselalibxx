@@ -32,22 +32,22 @@ module purge
 
 spack external find autoconf
 
-# create our environment (VOICE_DIR contains spack.yaml)
-VOICE_DIR="$(dirname "$(dirname "$(readlink -f "$0" )")")"
-spack env create -d "${VOICE_DIR}" 2> /dev/null || true
-spack -e "${VOICE_DIR}" config add "packages:all:compiler:[gcc@10.3.0]"
+# create our environment (GYSELALIB_DIR contains spack.yaml)
+GYSELALIB_DIR="$(dirname "$(dirname "$(readlink -f "$0" )")")"
+spack env create -d "${GYSELALIB_DIR}" 2> /dev/null || true
+spack -e "${GYSELALIB_DIR}" config add "packages:all:compiler:[gcc@10.3.0]"
 
 # do the actual install
 echo -e "\n   Now installing everything...\n\e[91m\e[1mBeware\e[33m, this can take up to mutiple hours and multi-GB of space!\e[0m\n" >&2
 trap 'kill $(jobs -p) 2> /dev/null' EXIT QUIT ABRT KILL SEGV INT TERM STOP
 for N in $(seq 10)
-do spack -e "${VOICE_DIR}" install --reuse --fail-fast --show-log-on-error
+do spack -e "${GYSELALIB_DIR}" install --reuse --fail-fast --show-log-on-error
 done
 wait
 trap '-' EXIT QUIT ABRT KILL SEGV INT TERM STOP
 
 # create an activation script
-cat<<EOF > "${VOICE_DIR}/bin/gyselalibxx.env.sh"
+cat<<EOF > "${GYSELALIB_DIR}/bin/gyselalibxx.env.sh"
 despacktivate &> /dev/null || true
 spack unload -a &> /dev/null || true
 module purge &> /dev/null || true
@@ -56,6 +56,6 @@ if ! which spack &> /dev/null
 then
     . "${SPACK_ROOT}/share/spack/setup-env.sh"
 fi
-spack env activate -d "${VOICE_DIR}"
+spack env activate -d "${GYSELALIB_DIR}"
 EOF
-echo -e "\n\nIf everything went well, you can now activate your environment with:\n source $(realpath --relative-to=. ${VOICE_DIR}/bin/gyselalibxx.env.sh)"
+echo -e "\n\nIf everything went well, you can now activate your environment with:\n source $(realpath --relative-to=. ${GYSELALIB_DIR}/bin/gyselalibxx.env.sh)"

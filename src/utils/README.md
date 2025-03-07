@@ -4,4 +4,4 @@ This folder contains classes and functions which facilitate the writing of the r
 
 The class ddcHelper exists to provide functionalities which are currently missing from DDC.
 
-The class NDTag exists to provide a way to group directional tags together. This is notably useful in order to create a vector field.
+The class VectorIndexSet exists to provide a way to group directional tags together. This is notably useful in order to create a vector field.

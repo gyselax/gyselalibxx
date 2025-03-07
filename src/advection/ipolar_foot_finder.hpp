@@ -64,6 +64,6 @@ public:
      */
     virtual void operator()(
             Field<Coord<R, Theta>, IdxRangeRTheta, memory_space> feet,
-            DVectorConstField<IdxRangeRTheta, NDTag<X, Y>, memory_space> advection_field,
+            DVectorConstField<IdxRangeRTheta, VectorIndexSet<X, Y>, memory_space> advection_field,
             double dt) const = 0;
 };

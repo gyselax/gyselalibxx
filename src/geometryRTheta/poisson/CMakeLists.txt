@@ -12,7 +12,6 @@ target_link_libraries(poisson_RTheta INTERFACE
         gslx::geometry_RTheta
         gslx::speciesinfo
         gslx::utils
-        gslx::interpolation_2D_rp
 )
 
 add_library("gslx::poisson_RTheta" ALIAS "poisson_RTheta")
