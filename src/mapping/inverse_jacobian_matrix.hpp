@@ -3,6 +3,7 @@
 
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "math_tools.hpp"
 #include "view.hpp"
 
 /**
@@ -61,14 +62,10 @@ public:
             return m_mapping.inv_jacobian_matrix(coord);
         } else {
             static_assert(has_2d_jacobian_v<Mapping, PositionCoordinate>);
-            double jacob = m_mapping.jacobian(coord);
-            assert(fabs(jacob) > 1e-15);
-            InverseJacobianTensor matrix;
-            ddcHelper::get<DimArg0, DimRes0_cov>(matrix) = m_mapping.jacobian_22(coord) / jacob;
-            ddcHelper::get<DimArg0, DimRes1_cov>(matrix) = -m_mapping.jacobian_12(coord) / jacob;
-            ddcHelper::get<DimArg1, DimRes0_cov>(matrix) = -m_mapping.jacobian_21(coord) / jacob;
-            ddcHelper::get<DimArg1, DimRes1_cov>(matrix) = m_mapping.jacobian_11(coord) / jacob;
-            return matrix;
+            DTensor<ValidResultIndices, vector_index_set_dual_t<ValidArgIndices>> jacobian
+                    = m_mapping.jacobian_matrix(coord);
+            assert(fabs(determinant(jacobian)) > 1e-15);
+            return inverse(jacobian);
         }
     }
 
