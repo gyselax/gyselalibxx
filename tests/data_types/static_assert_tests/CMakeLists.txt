@@ -7,7 +7,6 @@ add_executable(${file}-build-fail-test
 )
 target_link_libraries(${file}-build-fail-test
         PUBLIC
-        GTest::gtest
         GTest::gmock
 
         gslx::data_types
