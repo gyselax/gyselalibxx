@@ -10,36 +10,36 @@
 /**
  * @brief A class which implements a partial derivative operator
  * using a 1d spline interpolation.
- * @tparam Spline1DBuilder A 1D spline builder.
+ * @tparam SplineBuilder1D A 1D spline builder.
  * @tparam Spline1DEvaluator A 1D spline evaluator.
  */
-template <class Spline1DBuilder, class Spline1DEvaluator>
+template <class SplineBuilder1D, class Spline1DEvaluator>
 class Spline1DPartialDerivative
     : public IPartialDerivative<
-              typename Spline1DBuilder::batched_interpolation_domain_type,
-              typename Spline1DBuilder::continuous_dimension_type>
+              typename SplineBuilder1D::batched_interpolation_domain_type,
+              typename SplineBuilder1D::continuous_dimension_type>
 {
     static_assert(std::is_same_v<
-                  typename Spline1DBuilder::batched_spline_domain_type,
+                  typename SplineBuilder1D::batched_spline_domain_type,
                   typename Spline1DEvaluator::batched_spline_domain_type>);
     static_assert(std::is_same_v<
-                  typename Spline1DBuilder::batched_interpolation_domain_type,
+                  typename SplineBuilder1D::batched_interpolation_domain_type,
                   typename Spline1DEvaluator::batched_evaluation_domain_type>);
 
 private:
     using base_type = IPartialDerivative<
-            typename Spline1DBuilder::batched_interpolation_domain_type,
-            typename Spline1DBuilder::continuous_dimension_type>;
+            typename SplineBuilder1D::batched_interpolation_domain_type,
+            typename SplineBuilder1D::continuous_dimension_type>;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldMemType;
     using typename base_type::DFieldType;
 
-    using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type;
+    using IdxRangeBS = typename SplineBuilder1D::batched_spline_domain_type;
     using DFieldBSMem = DFieldMem<IdxRangeBS>;
     using DFieldBS = DField<IdxRangeBS>;
 
-    Spline1DBuilder const& m_builder;
+    SplineBuilder1D const& m_builder;
     Spline1DEvaluator const& m_evaluator;
     DConstFieldType const m_field;
 
@@ -52,7 +52,7 @@ public:
     * @param field The field to be differentiated.
     */
     explicit Spline1DPartialDerivative(
-            Spline1DBuilder const& builder,
+            SplineBuilder1D const& builder,
             Spline1DEvaluator const& evaluator,
             DConstFieldType const field)
         : m_builder(builder)
@@ -85,20 +85,20 @@ public:
  * Typically, the Spline1DPartialDerivativeCreator is instantiated in the initialisation of the simulation, 
  * and the corresponding Spline1DPartialDerivative object is instantiated where computing partial derivatives
  * is required. 
- * @tparam Spline1DBuilder A 1D spline builder.
+ * @tparam SplineBuilder1D A 1D spline builder.
  * @tparam Spline1DEvaluator A 1D spline evaluator.
  */
-template <class Spline1DBuilder, class Spline1DEvaluator>
+template <class SplineBuilder1D, class Spline1DEvaluator>
 class Spline1DPartialDerivativeCreator
     : public IPartialDerivativeCreator<
-              typename Spline1DBuilder::batched_interpolation_domain_type,
-              typename Spline1DBuilder::continuous_dimension_type>
+              typename SplineBuilder1D::batched_interpolation_domain_type,
+              typename SplineBuilder1D::continuous_dimension_type>
 {
 private:
     using DConstFieldType
-            = DConstField<typename Spline1DBuilder::batched_interpolation_domain_type>;
+            = DConstField<typename SplineBuilder1D::batched_interpolation_domain_type>;
 
-    Spline1DBuilder const& m_builder;
+    SplineBuilder1D const& m_builder;
     Spline1DEvaluator const& m_evaluator;
 
 public:
@@ -108,7 +108,7 @@ public:
      * @param[in] evaluator A 1d spline evaluator.
      */
     Spline1DPartialDerivativeCreator(
-            Spline1DBuilder const& builder,
+            SplineBuilder1D const& builder,
             Spline1DEvaluator const& evaluator)
         : m_builder(builder)
         , m_evaluator(evaluator)
@@ -125,12 +125,12 @@ public:
      * @return A pointer to an instance of the IPartialDerivative class.
      */
     std::unique_ptr<IPartialDerivative<
-            typename Spline1DBuilder::batched_interpolation_domain_type,
-            typename Spline1DBuilder::continuous_dimension_type>>
+            typename SplineBuilder1D::batched_interpolation_domain_type,
+            typename SplineBuilder1D::continuous_dimension_type>>
     create_instance(DConstFieldType field) const
     {
         return std::make_unique<Spline1DPartialDerivative<
-                Spline1DBuilder,
+                SplineBuilder1D,
                 Spline1DEvaluator>>(m_builder, m_evaluator, field);
     }
 };
