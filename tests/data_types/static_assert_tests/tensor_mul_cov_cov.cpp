@@ -3,11 +3,12 @@
 
 #include <gtest/gtest.h>
 
+#include "../geometry_tensor.hpp"
+
 #include "indexed_tensor.hpp"
 #include "tensor.hpp"
 #include "tensor_index_tools.hpp"
 #include "vector_index_tools.hpp"
-#include "../geometry_tensor.hpp"
 
 TEST(TensorTest, Mul)
 {

@@ -46,4 +46,3 @@ struct Y
 };
 
 } // namespace
-
