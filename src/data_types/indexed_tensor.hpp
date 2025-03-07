@@ -155,9 +155,9 @@ KOKKOS_FUNCTION void internal_tensor_mul(
 template <char ID, class AllIndexIdMaps>
 KOKKOS_INLINE_FUNCTION void check_id_validity()
 {
-    constexpr std::size_t n_occurences
+    constexpr std::size_t n_occurrences
             = char_occurrences_v<ID, index_identifiers_t<AllIndexIdMaps>>;
-    if constexpr (n_occurences == 2) {
+    if constexpr (n_occurrences == 2) {
         using RelevantVectorIndexSets = relevant_vector_index_sets_t<ID, AllIndexIdMaps>;
         using Set1 = ddc::type_seq_element_t<0, RelevantVectorIndexSets>;
         using Set2 = ddc::type_seq_element_t<1, RelevantVectorIndexSets>;
@@ -174,7 +174,7 @@ KOKKOS_INLINE_FUNCTION void check_id_validity()
                 "Cannot sum over incompatible VectorIndexSets.");
     } else {
         static_assert(
-                n_occurences == 1,
+                n_occurrences == 1,
                 "You should not have more than two of any one index in an index expression.");
     }
 }
