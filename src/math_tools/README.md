@@ -6,7 +6,7 @@ This folder contains mathematical classes and functions.
 
 Functions for calculating derivatives with different methods:
 
-- `partial_derivatives.hpp` : calculate derivatives using spline interpolation
+- `spline_1d_partial_derivative.hpp` : calculate derivatives using a 1d spline representation.
 
 ## Utility tools
 
