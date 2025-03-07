@@ -318,7 +318,7 @@ public:
     {
         bool equal(true);
         for (std::size_t i(0); i < s_n_elements; ++i) {
-            equal &= (m_data[i] == o_tensor.m_data[i]);
+            equal = equal && (m_data[i] == o_tensor.m_data[i]);
         }
         return equal;
     }
