@@ -152,6 +152,39 @@ KOKKOS_FUNCTION void internal_tensor_mul(
     ((internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
 }
 
+template <char ID, class AllIndexIdMaps>
+KOKKOS_INLINE_FUNCTION void check_id_validity()
+{
+    constexpr std::size_t n_occurences
+            = char_occurrences_v<ID, index_identifiers_t<AllIndexIdMaps>>;
+    if constexpr (n_occurences == 2) {
+        using RelevantVectorIndexSets = relevant_vector_index_sets_t<ID, AllIndexIdMaps>;
+        using Set1 = ddc::type_seq_element_t<0, RelevantVectorIndexSets>;
+        using Set2 = ddc::type_seq_element_t<1, RelevantVectorIndexSets>;
+        constexpr bool has_covariant_idx = (is_covariant_vector_index_set_v<Set1>)
+                                           or (is_covariant_vector_index_set_v<Set2>);
+        constexpr bool has_contravariant_idx = (is_contravariant_vector_index_set_v<Set1>)
+                                               or (is_contravariant_vector_index_set_v<Set2>);
+        static_assert(
+                has_covariant_idx and has_contravariant_idx,
+                "Repeated indices should not be associated with two covariant or two contravariant "
+                "indices.");
+        static_assert(
+                std::is_same_v<get_contravariant_dims_t<Set1>, get_contravariant_dims_t<Set2>>,
+                "Cannot sum over incompatible VectorIndexSets.");
+    } else {
+        static_assert(
+                n_occurences == 1,
+                "You should not have more than two of any one index in an index expression.");
+    }
+}
+
+template <class AllIndexIdMaps, class UniqueIds, std::size_t... Is>
+KOKKOS_INLINE_FUNCTION void check_all_id_validity(std::index_sequence<Is...>)
+{
+    ((check_id_validity<ddc::type_seq_element_t<Is, UniqueIds>::value, AllIndexIdMaps>()), ...);
+}
+
 } // namespace details
 
 } // namespace tensor_tools
@@ -199,16 +232,9 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             "A tensor multiplication must be carried out over IndexedTensor objects");
     // Get the TypeSeq of VectorIndexIdMaps describing all the indices which appear in the calculation.
     using AllIndexIdMaps = type_seq_cat_t<typename IndexedTensorType::index_pattern...>;
-    static_assert(
-            type_seq_has_unique_elements_v<AllIndexIdMaps>,
-            "You should not have more than two of any one index in an index expression. "
-            "Additionally repeated indices should not be associated with two covariant or two "
-            "contravariant indices.");
-    using SumVectorIndexIdMap = repeated_indices_t<AllIndexIdMaps>;
-    using SumUniqueIds = type_seq_unique_t<index_identifiers_t<SumVectorIndexIdMap>>;
-    static_assert(
-            ddc::type_seq_size_v<SumVectorIndexIdMap> == ddc::type_seq_size_v<SumUniqueIds>,
-            "Cannot sum over incompatible VectorIndexSets.");
+    using UniqueIndexIds = type_seq_unique_t<index_identifiers_t<AllIndexIdMaps>>;
+    details::check_all_id_validity<AllIndexIdMaps, UniqueIndexIds>(
+            std::make_index_sequence<ddc::type_seq_size_v<UniqueIndexIds>>());
     // Use the first tensor argument to extract the element type of the result.
     using ElementType = std::tuple_element_t<
             0,
