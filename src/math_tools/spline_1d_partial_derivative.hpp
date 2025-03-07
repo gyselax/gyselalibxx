@@ -1,8 +1,4 @@
 // SPDX-License-Identifier: MIT
-/**
- * @file spline_1d_partial_derivative.hpp
- * File containing a class to compute partial derivatives of a field from a 1d spline representation. 
- */
 
 #pragma once
 
