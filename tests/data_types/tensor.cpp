@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include "geometry_tensor.hpp"
 #include "indexed_tensor.hpp"
 #include "tensor.hpp"
 #include "tensor_index_tools.hpp"
@@ -10,43 +11,12 @@
 
 using namespace tensor_tools;
 
-namespace {
-struct R_cov;
-struct Theta_cov;
-
-struct R
-{
-    static bool constexpr IS_COVARIANT = false;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = R_cov;
-};
-struct Theta
-{
-    static bool constexpr IS_COVARIANT = false;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = Theta_cov;
-};
-
-struct R_cov
-{
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = false;
-    using Dual = R;
-};
-struct Theta_cov
-{
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = false;
-    using Dual = Theta;
-};
 
 int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
 }
-
-} // namespace
 
 TEST(TensorTest, ExplicitDotProduct)
 {
