@@ -19,6 +19,7 @@
 
 namespace {
 
+
 using CzarnyMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CircularMapping = CircularToCartesian<R, Theta, X, Y>;
 

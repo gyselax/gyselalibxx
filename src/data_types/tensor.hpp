@@ -300,7 +300,7 @@ public:
      * @param val The tensor that should be subtracted from the current tensor.
      * @return A new tensor containing the result of the subtraction.
      */
-    KOKKOS_FUNCTION Tensor operator-()
+    KOKKOS_FUNCTION Tensor operator-() const
     {
         Tensor result;
         for (std::size_t i(0); i < s_n_elements; ++i) {
