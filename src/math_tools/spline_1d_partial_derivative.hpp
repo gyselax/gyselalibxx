@@ -89,6 +89,8 @@ public:
  * Typically, the Spline1DPartialDerivativeCreator is instantiated in the initialisation of the simulation, 
  * and the corresponding Spline1DPartialDerivative object is instantiated where computing partial derivatives
  * is required. 
+ * @tparam Spline1DBuilder A 1D spline builder.
+ * @tparam Spline1DEvaluator A 1D spline evaluator.
  */
 template <class Spline1DBuilder, class Spline1DEvaluator>
 class Spline1DPartialDerivativeCreator
