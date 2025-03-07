@@ -32,7 +32,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_interpolator_rtheta.hpp"
+#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases_adv_field.hpp"
@@ -142,7 +142,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator);
 
     RK3<FieldMemRTheta<CoordRTheta>,
         DVectorFieldMemRTheta<X, Y>,

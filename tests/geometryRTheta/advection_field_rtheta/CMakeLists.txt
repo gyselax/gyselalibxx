@@ -19,25 +19,26 @@ function (advection_field_test_executable SIMULATION)
     PUBLIC
             DDC::core
             DDC::pdi
+
             paraconf::paraconf
+
             PDI::pdi
             
             Eigen3::Eigen
-            
-            gslx::paraconfpp
 
             GTest::gtest
             GTest::gmock
             
-            gslx::poisson_RTheta
-            gslx::geometry_RTheta
-            gslx::interpolation_RTheta
             gslx::advection_RTheta
-            gslx::time_integration_RTheta
-            gslx::quadrature
-            gslx::utils
             gslx::diocotron_init_eq
+            gslx::geometry_RTheta
+            gslx::interpolation
+            gslx::paraconfpp
+            gslx::poisson_RTheta
+            gslx::quadrature
             gslx::simulation_utils
+            gslx::time_integration_RTheta
+            gslx::utils
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${SIMULATION})    
     gtest_discover_tests("${test_name_gtest}"

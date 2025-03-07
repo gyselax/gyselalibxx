@@ -11,102 +11,13 @@
 #include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_mapping_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "mapping_testing_tools.hpp"
 #include "mesh_builder.hpp"
 
 
-
 namespace {
-struct X
-{
-};
-struct Y
-{
-};
-struct R
-{
-    static bool constexpr PERIODIC = false;
-};
-
-struct Theta
-{
-    static bool constexpr PERIODIC = true;
-};
-
-using CoordR = Coord<R>;
-using CoordTheta = Coord<Theta>;
-using CoordRTheta = Coord<R, Theta>;
-
-int constexpr BSDegree = 3;
-
-struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
-{
-};
-struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
-{
-};
-
-using InterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
-using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
-        BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
-
-struct GridR : InterpPointsR::interpolation_discrete_dimension_type
-{
-};
-struct GridTheta : InterpPointsTheta::interpolation_discrete_dimension_type
-{
-};
-
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK,
-        GridR,
-        GridTheta>;
-
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::DefaultHostExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        GridR,
-        GridTheta>;
-
-using IdxRangeR = IdxRange<GridR>;
-using IdxRangeTheta = IdxRange<GridTheta>;
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-using IdxR = Idx<GridR>;
-using IdxTheta = Idx<GridTheta>;
-using IdxRTheta = Idx<GridR, GridTheta>;
-
-using IdxStepR = IdxStep<GridR>;
-using IdxStepTheta = IdxStep<GridTheta>;
-using IdxStepRTheta = IdxStep<GridR, GridTheta>;
-
-using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-
-template <class ElementType>
-using FieldMemRTheta_host = host_t<FieldMem<ElementType, IdxRangeRTheta>>;
 
 using Matrix_2x2 = std::array<std::array<double, 2>, 2>;
 
@@ -265,12 +176,12 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
     SplineRThetaBuilder_host builder(grid);
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluator evaluator(
+    SplineRThetaEvaluator_host evaluator(
             r_extrapolation_rule,
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
