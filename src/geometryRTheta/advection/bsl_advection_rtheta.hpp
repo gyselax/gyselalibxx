@@ -191,6 +191,7 @@ public:
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
             DVector<R, Theta> advec_field_rtheta = advection_field_rtheta(irtheta);
+            // advec_field_xy = J^{-T} A
             DVector<X, Y> advec_field_xy
                     = tensor_mul(index<'i', 'j'>(inv_J), index<'i'>(advec_field_rtheta)) * jacobian;
             ddcHelper::get<X>(advection_field_xy_host)(irtheta) = ddcHelper::get<X>(advec_field_xy);
