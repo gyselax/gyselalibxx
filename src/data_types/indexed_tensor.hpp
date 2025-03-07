@@ -204,6 +204,11 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             "You should not have more than two of any one index in an index expression. "
             "Additionally repeated indices should not be associated with two covariant or two "
             "contravariant indices.");
+    using SumVectorIndexIdMap = repeated_indices_t<AllIndexIdMaps>;
+    using SumUniqueIds = type_seq_unique_t<index_identifiers_t<SumVectorIndexIdMap>>;
+    static_assert(
+            ddc::type_seq_size_v<SumVectorIndexIdMap> == ddc::type_seq_size_v<SumUniqueIds>,
+            "Cannot sum over incompatible VectorIndexSets.");
     // Use the first tensor argument to extract the element type of the result.
     using ElementType = std::tuple_element_t<
             0,
@@ -212,7 +217,7 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             (std::is_same_v<
                      typename IndexedTensorType::tensor_type::element_type,
                      ElementType> && ...),
-            "All tensors must have the same element type");
+            "All tensors in a tensor_mul must have the same element type.");
     using ResultIndexTypeSeq = non_repeated_indices_t<AllIndexIdMaps>;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
         ElementType result = 0.0;
