@@ -88,12 +88,12 @@ int main(int argc, char** argv)
 
     IdxRangeVxVy idxrange_vxvy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
 
-    IdxRangeVxVyXY idxrange_vyxyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
-    IdxRangeXYVxVy idxrange_vyxyxy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
-    SplineXBuilder const builder_x(idxrange_vyxyxy_v2Dsplit);
-    SplineYBuilder const builder_y(idxrange_vyxyxy_v2Dsplit);
-    SplineVxBuilder const builder_vx(idxrange_vyxyxy_x2Dsplit);
-    SplineVyBuilder const builder_vy(idxrange_vyxyxy_x2Dsplit);
+    IdxRangeVxVyXY idxrange_vxvyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
+    IdxRangeXYVxVy idxrange_xyvxvy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
+    SplineXBuilder const builder_x(idxrange_vxvyxy_v2Dsplit);
+    SplineYBuilder const builder_y(idxrange_vxvyxy_v2Dsplit);
+    SplineVxBuilder const builder_vx(idxrange_xyvxvy_x2Dsplit);
+    SplineVyBuilder const builder_vy(idxrange_xyvxvy_x2Dsplit);
 
     IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
