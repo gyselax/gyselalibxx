@@ -277,8 +277,10 @@ struct GetRepeatedIndices
             ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1 - Elem,
             TypeSeqVectorIndexIdMap>;
     static constexpr char current_char = CurrentIndex::id;
-    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
-    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
+    using ContravariantVectorIndexSet
+            = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
+    using InsertTypeSeq
+            = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContravariantVectorIndexSet>>;
 
     using type = typename GetRepeatedIndices<
             TypeSeqVectorIndexIdMap,
@@ -297,8 +299,10 @@ struct GetRepeatedIndices<TypeSeqVectorIndexIdMap, 0, IdsFound, ResultTypeSeq>
             ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
             TypeSeqVectorIndexIdMap>;
     static constexpr char current_char = CurrentIndex::id;
-    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
-    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
+    using ContravariantVectorIndexSet
+            = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
+    using InsertTypeSeq
+            = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContravariantVectorIndexSet>>;
 
     using type = std::conditional_t<
             CountChar<current_char, IdsFound>::value == 1,
