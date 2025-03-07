@@ -128,9 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a96cd4aff911a5d2155fb29480f92a5db" id="r_a96cd4aff911a5d2155fb29480f92a5db"><td class="memItemLeft" align="right" valign="top">virtual DFieldRTheta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionRTheta.html#a96cd4aff911a5d2155fb29480f92a5db">operator()</a> (DFieldRTheta allfdistribu, <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; advection_field, double const dt) const =0</td></tr>
 <tr class="memdesc:a96cd4aff911a5d2155fb29480f92a5db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect a function along the advection field given on dt with a given advection field along XY.  <br /></td></tr>
 <tr class="separator:a96cd4aff911a5d2155fb29480f92a5db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dd0ef5043c5948d37d24ffee33bb6b6" id="r_a3dd0ef5043c5948d37d24ffee33bb6b6"><td class="memItemLeft" align="right" valign="top">virtual host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionRTheta.html#a3dd0ef5043c5948d37d24ffee33bb6b6">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt; advection_field, CoordXY const &amp;advection_field_xy_centre, double const dt) const =0</td></tr>
-<tr class="memdesc:a3dd0ef5043c5948d37d24ffee33bb6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect a function along the advection field given on dt with a given advection field along RTheta.  <br /></td></tr>
-<tr class="separator:a3dd0ef5043c5948d37d24ffee33bb6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a654216338217affcecf34d740b5cf0" id="r_a3a654216338217affcecf34d740b5cf0"><td class="memItemLeft" align="right" valign="top">virtual host_t&lt; DFieldRTheta &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIAdvectionRTheta.html#a3a654216338217affcecf34d740b5cf0">operator()</a> (host_t&lt; DFieldRTheta &gt; allfdistribu, host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt; &gt; advection_field, CoordXY const &amp;advection_field_xy_centre, double const dt) const =0</td></tr>
+<tr class="memdesc:a3a654216338217affcecf34d740b5cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advect a function along the advection field given on dt with a given advection field along RTheta.  <br /></td></tr>
+<tr class="separator:a3a654216338217affcecf34d740b5cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Define the base class of 2D advection operators in polar index range. </p>
@@ -190,8 +190,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3dd0ef5043c5948d37d24ffee33bb6b6" name="a3dd0ef5043c5948d37d24ffee33bb6b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dd0ef5043c5948d37d24ffee33bb6b6">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a3a654216338217affcecf34d740b5cf0" name="a3a654216338217affcecf34d740b5cf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a654216338217affcecf34d740b5cf0">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,7 +208,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;&#160;</td>
+          <td class="paramtype">host_t&lt; <a class="el" href="classVectorField.html">DConstVectorFieldRTheta</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt; &gt;&#160;</td>
           <td class="paramname"><em>advection_field</em>, </td>
         </tr>
         <tr>
@@ -248,7 +248,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A Field of the advected function (allfdistribu). </dd></dl>
 
-<p>Implemented in <a class="el" href="classBslAdvectionRTheta.html#abf6c49b5c10b335e3d69c2d9ccdf01f2">BslAdvectionRTheta&lt; FootFinder, Mapping &gt;</a>, and <a class="el" href="classBslAdvectionRTheta.html#abf6c49b5c10b335e3d69c2d9ccdf01f2">BslAdvectionRTheta&lt; SplinePolarFootFinder, CircularToCartesian &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classBslAdvectionRTheta.html#a72f84aa3e8ce43b2dbf8f9d2a7af6df1">BslAdvectionRTheta&lt; FootFinder, Mapping &gt;</a>, and <a class="el" href="classBslAdvectionRTheta.html#a72f84aa3e8ce43b2dbf8f9d2a7af6df1">BslAdvectionRTheta&lt; SplinePolarFootFinder, CircularToCartesian &gt;</a>.</p>
 
 </div>
 </div>
