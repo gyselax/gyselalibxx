@@ -198,7 +198,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
 
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
-    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
+    host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta(
+            advection_field_rtheta_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(
             advection_field_xy_from_rtheta_alloc);
@@ -254,11 +255,13 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
-                = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
-                  + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][0] * jacobian;
+                = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
+                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][0]
+                            * jacobian;
         ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
-                = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
-                  + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][1] * jacobian;
+                = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
+                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][1]
+                            * jacobian;
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)

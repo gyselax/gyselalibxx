@@ -166,7 +166,7 @@ public:
      */
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu_host,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DConstVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
             double dt) const override
     {
@@ -190,12 +190,14 @@ public:
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
             ddcHelper::get<X>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][0]
+                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][0]
+                              * jacobian
+                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][0]
                                 * jacobian;
             ddcHelper::get<Y>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
-                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * inv_J[1][1]
+                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][1]
+                              * jacobian
+                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][1]
                                 * jacobian;
         });
 
