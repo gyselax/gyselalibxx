@@ -263,9 +263,60 @@ struct GetNonRepeatedIndices<
             ddc::detail::TypeSeq<OutIndices...>>;
 };
 
+template <
+        class TypeSeqVectorIndexIdMap,
+        std::size_t Elem,
+        class IdsFound,
+        class ResultTuple = ddc::detail::TypeSeq<>>
+struct GetRepeatedIndices;
+
+template <class TypeSeqVectorIndexIdMap, std::size_t Elem, class IdsFound, class ResultTypeSeq>
+struct GetRepeatedIndices
+{
+    using CurrentIndex = ddc::type_seq_element_t<
+            ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1 - Elem,
+            TypeSeqVectorIndexIdMap>;
+    static constexpr char current_char = CurrentIndex::id;
+    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
+    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
+
+    using type = typename GetRepeatedIndices<
+            TypeSeqVectorIndexIdMap,
+            Elem - 1,
+            IdsFound,
+            std::conditional_t<
+                    CountChar<current_char, IdsFound>::value == 1,
+                    ResultTypeSeq,
+                    ddc::type_seq_merge_t<ResultTypeSeq, InsertTypeSeq>>>::type;
+};
+
+template <class TypeSeqVectorIndexIdMap, class IdsFound, class ResultTypeSeq>
+struct GetRepeatedIndices<TypeSeqVectorIndexIdMap, 0, IdsFound, ResultTypeSeq>
+{
+    using CurrentIndex = ddc::type_seq_element_t<
+            ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
+            TypeSeqVectorIndexIdMap>;
+    static constexpr char current_char = CurrentIndex::id;
+    using ContraIdxValues = get_contravariant_dims_t<typename CurrentIndex::possible_idx_values>;
+    using InsertTypeSeq = ddc::detail::TypeSeq<VectorIndexIdMap<current_char, ContraIdxValues>>;
+
+    using type = std::conditional_t<
+            CountChar<current_char, IdsFound>::value == 1,
+            ResultTypeSeq,
+            ddc::type_seq_merge_t<ResultTypeSeq, InsertTypeSeq>>;
+};
+
 } // namespace details
 
 //-------------------------------------------------------------------------------------------
+/**
+ * @brief Create a TypeSeq of integral_constants containing all the character ids found in
+ * the TypeSeqVectorIndexIdMap.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
+template <class TypeSeqVectorIndexIdMap>
+using index_identifiers_t = typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type;
 
 /**
  * @brief Create a TypeSeq of VectorIndexIdMap in which each character id only appears once
@@ -286,7 +337,19 @@ template <class TypeSeqVectorIndexIdMap>
 using non_repeated_indices_t = typename details::GetNonRepeatedIndices<
         TypeSeqVectorIndexIdMap,
         ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
-        typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type>::type;
+        index_identifiers_t<TypeSeqVectorIndexIdMap>>::type;
+
+/**
+ * @brief Extract the VectorIndexIdMaps whose character id appears more than once in a TypeSeq of
+ * VectorIndexIdMaps. The output only contains contravariant VectorIndexSets.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
+template <class TypeSeqVectorIndexIdMap>
+using repeated_indices_t = typename details::GetRepeatedIndices<
+        TypeSeqVectorIndexIdMap,
+        ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
+        index_identifiers_t<TypeSeqVectorIndexIdMap>>::type;
 
 //-------------------------------------------------------------------------------------------
 
