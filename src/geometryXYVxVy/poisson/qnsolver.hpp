@@ -51,5 +51,5 @@ public:
             DFieldXY electrostatic_potential,
             DFieldXY electric_field_x,
             DFieldXY electric_field_y,
-            DConstFieldSpXYVxVy allfdistribu) const override;
+            DConstFieldSpVxVyXY allfdistribu) const override;
 };

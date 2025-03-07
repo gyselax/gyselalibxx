@@ -6,6 +6,6 @@ void NullQNSolver::operator()(
         DFieldXY const,
         DFieldXY const,
         DFieldXY const,
-        DConstFieldSpXYVxVy const) const
+        DConstFieldSpVxVyXY const) const
 {
 }
