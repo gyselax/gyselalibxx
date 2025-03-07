@@ -16,12 +16,16 @@ template <class IdxRangeType, class DerivativeDimension>
 class IPartialDerivative
 {
 public:
+    // The type of the field to be differentiated 
     using DFieldMemType = DFieldMem<IdxRangeType>;
+
+    // The type of a reference to the field to be differentiated 
     using DFieldType = DField<IdxRangeType>;
+
+    // The type of a constant reference to the field to be differentiated 
     using DConstFieldType = DConstField<IdxRangeType>;
     ;
 
-public:
     /**
     * @brief Compute the partial derivative of a field in a given direction.
     *

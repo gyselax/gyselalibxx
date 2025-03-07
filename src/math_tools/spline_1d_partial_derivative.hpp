@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 /**
  * @file spline_1d_partial_derivative.hpp
- * File containing a classe to compute partial derivatives of a field from a 1d spline representation. 
+ * File containing a class to compute partial derivatives of a field from a 1d spline representation. 
  */
 
 #pragma once
@@ -86,7 +86,7 @@ public:
  * an instance of the Spline1DPartialDerivative class.
  *
  * This class allows an instance of the Spline1DPartialDerivative class to be instantiated where necessary.
- * Typically, the Spline1DPartialDerivativeCreator is instantiated in the initialization of the simulation, 
+ * Typically, the Spline1DPartialDerivativeCreator is instantiated in the initialisation of the simulation, 
  * and the corresponding Spline1DPartialDerivative object is instantiated where computing partial derivatives
  * is required. 
  */
