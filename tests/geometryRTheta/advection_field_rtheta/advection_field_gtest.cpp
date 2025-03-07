@@ -186,7 +186,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldMemRTheta> allfdistribu_xy_alloc(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
-    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rtheta_alloc(grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> advection_field_rtheta_alloc(
+            grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rtheta_alloc(grid);
     CoordXY advection_field_xy_centre;
@@ -250,11 +251,13 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
         // inverse Jacobian matrix
-        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
-                = to_physical_mapping.jacobian_matrix(coord_rtheta);
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_J
+                = to_physical_mapping.inv_jacobian_matrix(coord_rtheta);
+        double const jacobian = to_physical_mapping.jacobian(coord_rtheta);
 
         DVector<X, Y> adv_field
-                = tensor_mul(index<'i', 'j'>(J), index<'j'>(advection_field_rtheta(irtheta)));
+                = tensor_mul(index<'j', 'i'>(inv_J), index<'j'>(advection_field_rtheta(irtheta)))
+                  * jacobian;
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta) = ddcHelper::get<X>(adv_field);
