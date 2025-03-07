@@ -263,9 +263,47 @@ struct GetNonRepeatedIndices<
             ddc::detail::TypeSeq<OutIndices...>>;
 };
 
+template <char ID, class TypeSeqVectorIndexIdMap, class ResultTypeSeq = ddc::detail::TypeSeq<>>
+struct GetRelevantVectorIndexSets;
+
+template <
+        char ID,
+        class HeadVectorIndexIdMap,
+        class... TailVectorIndexIdMap,
+        class... OutVectorIndexSets>
+struct GetRelevantVectorIndexSets<
+        ID,
+        ddc::detail::TypeSeq<HeadVectorIndexIdMap, TailVectorIndexIdMap...>,
+        ddc::detail::TypeSeq<OutVectorIndexSets...>>
+{
+    using type = typename GetRelevantVectorIndexSets<
+            ID,
+            ddc::detail::TypeSeq<TailVectorIndexIdMap...>,
+            std::conditional_t<
+                    HeadVectorIndexIdMap::id == ID,
+                    ddc::detail::TypeSeq<
+                            typename HeadVectorIndexIdMap::possible_idx_values,
+                            OutVectorIndexSets...>,
+                    ddc::detail::TypeSeq<OutVectorIndexSets...>>>::type;
+};
+
+template <char ID, class ResultTypeSeq>
+struct GetRelevantVectorIndexSets<ID, ddc::detail::TypeSeq<>, ResultTypeSeq>
+{
+    using type = ResultTypeSeq;
+};
+
 } // namespace details
 
 //-------------------------------------------------------------------------------------------
+/**
+ * @brief Create a TypeSeq of integral_constants containing all the character ids found in
+ * the TypeSeqVectorIndexIdMap.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
+template <class TypeSeqVectorIndexIdMap>
+using index_identifiers_t = typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type;
 
 /**
  * @brief Create a TypeSeq of VectorIndexIdMap in which each character id only appears once
@@ -286,7 +324,17 @@ template <class TypeSeqVectorIndexIdMap>
 using non_repeated_indices_t = typename details::GetNonRepeatedIndices<
         TypeSeqVectorIndexIdMap,
         ddc::type_seq_size_v<TypeSeqVectorIndexIdMap> - 1,
-        typename details::GetIndexIds<TypeSeqVectorIndexIdMap>::type>::type;
+        index_identifiers_t<TypeSeqVectorIndexIdMap>>::type;
+
+/**
+ * @brief Extract all VectorIndexSets which are described by the same character identifier.
+ * @tparam ID The character identifying the VectorIndexSets we are searching for.
+ * @tparam TypeSeqVectorIndexIdMap A TypeSeq containing a VectorIndexIdMap for each dimension
+ *              of the tensor.
+ */
+template <char ID, class TypeSeqVectorIndexIdMap>
+using relevant_vector_index_sets_t =
+        typename details::GetRelevantVectorIndexSets<ID, TypeSeqVectorIndexIdMap>::type;
 
 //-------------------------------------------------------------------------------------------
 

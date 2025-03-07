@@ -20,3 +20,5 @@ target_link_libraries(unit_tests_data_types
 )
 
 gtest_discover_tests(unit_tests_data_types DISCOVERY_MODE PRE_TEST)
+
+add_subdirectory(static_assert_tests)
