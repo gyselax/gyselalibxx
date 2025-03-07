@@ -93,12 +93,12 @@ plugins:
       - release: [iter_saved]
 
   decl_hdf5:
-    - file: 'output/VOICEXX_initstate.h5'
+    - file: 'output/GYSELALIBXX_initstate.h5'
       on_event: [initialisation]
       collision_policy: replace_and_warn
       write: [r_size, theta_size, r_coords, theta_coords, x_coords, y_coords, jacobian, delta_t, final_T, time_step_diag, slope, density_eq, electrical_potential_eq]
 
-    - file: 'output/VOICEXX_${iter:05}.h5'
+    - file: 'output/GYSELALIBXX_${iter:05}.h5'
       on_event: [iteration, last_iteration]
       when: '${iter} % ${time_step_diag} = 0'
       collision_policy: replace_and_warn

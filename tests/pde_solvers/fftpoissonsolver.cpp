@@ -173,7 +173,7 @@ static void TestFftPoissonSolver2DCosineSource()
     FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace> poisson(gridxy);
 
     DFieldMemXY electrostatic_potential_alloc(gridxy);
-    VectorFieldMem<double, IdxRangeXY, NDTag<X, Y>> electric_field_alloc(gridxy);
+    VectorFieldMem<double, IdxRangeXY, VectorIndexSet<X, Y>> electric_field_alloc(gridxy);
     DFieldMemXY rhs_alloc(gridxy);
 
     DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);

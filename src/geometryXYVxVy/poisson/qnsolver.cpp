@@ -8,9 +8,9 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "qnsolver.hpp"
+#include "vector_index_tools.hpp"
 
 QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator const& compute_rho)
     : m_solve_poisson(solve_poisson)
@@ -36,7 +36,7 @@ void QNSolver::operator()(
     VectorField<
             double,
             IdxRangeXY,
-            NDTag<X, Y>,
+            VectorIndexSet<X, Y>,
             Kokkos::DefaultExecutionSpace::memory_space,
             typename DFieldMemXY::layout_type>
             electric_field(electric_field_x, electric_field_y);

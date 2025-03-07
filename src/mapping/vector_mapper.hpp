@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "directional_tag.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 #include "view.hpp"
 
 /** The general predeclaration of VectorMapper.
@@ -17,13 +17,13 @@ class VectorMapper;
  *
  * @anchor VectorMapperImplementation
  *
- * @tparam InVectorSpace A NDTag<XIn, YIn> describing the dimensions of the coordinate system taken as input.
- * @tparam OutVectorSpace A NDTag<XOut, YOut> describing the dimensions of the coordinate system returned as output.
+ * @tparam InVectorSpace A VectorIndexSet<XIn, YIn> describing the dimensions of the coordinate system taken as input.
+ * @tparam OutVectorSpace A VectorIndexSet<XOut, YOut> describing the dimensions of the coordinate system returned as output.
  * @tparam Mapping A class describing a mapping system.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
  */
 template <class XIn, class YIn, class XOut, class YOut, class Mapping, class ExecSpace>
-class VectorMapper<NDTag<XIn, YIn>, NDTag<XOut, YOut>, Mapping, ExecSpace>
+class VectorMapper<VectorIndexSet<XIn, YIn>, VectorIndexSet<XOut, YOut>, Mapping, ExecSpace>
 {
     static_assert(is_accessible_v<ExecSpace, Mapping>);
     static_assert(
@@ -58,12 +58,16 @@ public:
     template <class IdxRangeType, class LayoutStridedPolicy1, class LayoutStridedPolicy2>
     void operator()(
             ExecSpace exec_space,
-            VectorField<double, IdxRangeType, NDTag<XOut, YOut>, memory_space, LayoutStridedPolicy1>
-                    vector_field_output,
+            VectorField<
+                    double,
+                    IdxRangeType,
+                    VectorIndexSet<XOut, YOut>,
+                    memory_space,
+                    LayoutStridedPolicy1> vector_field_output,
             VectorConstField<
                     double,
                     IdxRangeType,
-                    NDTag<XIn, YIn>,
+                    VectorIndexSet<XIn, YIn>,
                     memory_space,
                     LayoutStridedPolicy2> vector_field_input)
     {
@@ -135,7 +139,7 @@ auto create_geometry_mirror_view(
         VectorField<
                 ElementType,
                 IdxRangeType,
-                NDTag<X, Y>,
+                VectorIndexSet<X, Y>,
                 typename ExecSpace::memory_space,
                 LayoutStridedPolicy> vector_field,
         Mapping mapping)
@@ -152,10 +156,11 @@ auto create_geometry_mirror_view(
         VectorFieldMem<
                 std::remove_const_t<ElementType>,
                 IdxRangeType,
-                NDTag<X_out, Y_out>,
+                VectorIndexSet<X_out, Y_out>,
                 typename ExecSpace::memory_space>
                 vector_field_out(get_idx_range(vector_field));
-        VectorMapper<NDTag<X, Y>, NDTag<X_out, Y_out>, Mapping, ExecSpace> vector_mapping(mapping);
+        VectorMapper<VectorIndexSet<X, Y>, VectorIndexSet<X_out, Y_out>, Mapping, ExecSpace>
+                vector_mapping(mapping);
         vector_mapping(exec_space, get_field(vector_field_out), get_const_field(vector_field));
         return vector_field_out;
     }

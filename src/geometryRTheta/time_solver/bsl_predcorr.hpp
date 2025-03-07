@@ -19,7 +19,6 @@
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator_rtheta.hpp"
 
 /**
  * @brief Predictor-corrector for the Vlasov-Poisson equations.

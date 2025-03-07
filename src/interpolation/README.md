@@ -14,6 +14,11 @@ The interpolation methods implemented are:
 
 The folder also contains tools useful for constructing and evaluating interpolating functions. The sub-folder [polar\_splines](./polar_splines/README.md) contains methods specific to polar splines.
 
+An operator IInterpolator2D is also available for interpolating on a 2D domain.
+
+The interpolation methods implemented are:
+-  SplineInterpolator2D
+
 ## Spline Interpolation
 
 Interpolation by a spline interpolating function is implemented in the class SplineInterpolator. In this case the interpolating function $\phi(x)$ is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.

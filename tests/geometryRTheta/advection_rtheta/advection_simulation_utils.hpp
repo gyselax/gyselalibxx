@@ -10,7 +10,6 @@
 #include <ddc/ddc.hpp>
 
 #include "bsl_advection_rtheta.hpp"
-#include "directional_tag.hpp"
 #include "geometry.hpp"
 #include "l_norm_tools.hpp"
 #include "math_tools.hpp"
@@ -19,7 +18,6 @@
 #include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
-#include "spline_interpolator_rtheta.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases.hpp"
 #include "trapezoid_quadrature.hpp"

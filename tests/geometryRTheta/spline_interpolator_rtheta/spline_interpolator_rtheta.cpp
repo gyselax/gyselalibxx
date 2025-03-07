@@ -12,7 +12,7 @@
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "spline_interpolator_rtheta.hpp"
+#include "spline_interpolator_2d.hpp"
 
 
 /*
@@ -38,13 +38,13 @@ namespace {
  * @param[in] TOL A tolerance threshold above which the error is considered
  * 				to be sufficiently small.
  *
- * @see SplineInterpolatorRTheta
+ * @see SplineInterpolator2D
  */
 template <class Function>
 void Interpolation_on_random_coord(
         IdxRangeRTheta& grid,
-        bool& On_the_nodes,
-        Function& exact_function,
+        bool const& On_the_nodes,
+        Function const& exact_function,
         double const TOL)
 {
     int const Nr = ddc::discrete_space<BSplinesR>().ncells();
@@ -137,7 +137,7 @@ void Interpolation_on_random_coord(
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplineInterpolatorRTheta interpolator(builder, spline_evaluator);
+    SplineInterpolator2D interpolator(builder, spline_evaluator);
     interpolator(get_field(function_evaluated), get_const_field(random_coords));
 
     // Compare the obtained values with the exact function. ----------------------------------
@@ -252,7 +252,7 @@ namespace fs = std::filesystem;
  *
  * @param[in] The path to the grid_size.yaml file.
  *
- * @see SplineInterpolatorRTheta
+ * @see SplineInterpolator2D
  * @tag Spline_interpolator_polar_test
  */
 int main(int argc, char** argv)
@@ -261,9 +261,9 @@ int main(int argc, char** argv)
     ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ::ddc::ScopeGuard ddc_scope(argc, argv);
 
-    PC_tree_t conf_voicexx;
+    PC_tree_t conf_gyselalibxx;
     if (argc == 2) {
-        conf_voicexx = PC_parse_path(fs::path(argv[1]).c_str());
+        conf_gyselalibxx = PC_parse_path(fs::path(argv[1]).c_str());
     } else if (argc == 3) {
         if (argv[1] == std::string_view("--dump-config")) {
             std::fstream file(argv[2], std::fstream::out);
@@ -277,8 +277,8 @@ int main(int argc, char** argv)
     PC_errhandler(PC_NULL_HANDLER);
 
     // Parameters of the grid. ---------------------------------------------------------------
-    int Nr = PCpp_int(conf_voicexx, ".Mesh.r_size");
-    int Nt = PCpp_int(conf_voicexx, ".Mesh.theta_size");
+    int Nr = PCpp_int(conf_gyselalibxx, ".Mesh.r_size");
+    int Nt = PCpp_int(conf_gyselalibxx, ".Mesh.theta_size");
 
 
     int spline_degree = BSplinesR::degree();
@@ -410,5 +410,5 @@ int main(int argc, char** argv)
     std::cout << "  -------------------------------------------------------------------"
               << std::endl;
 
-    PC_tree_destroy(&conf_voicexx);
+    PC_tree_destroy(&conf_gyselalibxx);
 }
