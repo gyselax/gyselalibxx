@@ -8,6 +8,7 @@
 #include "czarny_to_cartesian.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "math_tools.hpp"
 
 
@@ -21,23 +22,46 @@ class PseudoCartesianJacobianMatrixTest
 public:
     struct X
     {
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = X;
     };
     struct Y
     {
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Y;
     };
-    struct X_pc
-    {
-    };
-    struct Y_pc
-    {
-    };
+    struct R_cov;
+    struct Theta_cov;
     struct R
     {
         static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = false;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = R_cov;
     };
     struct Theta
     {
         static bool constexpr PERIODIC = true;
+        static bool constexpr IS_COVARIANT = false;
+        static bool constexpr IS_CONTRAVARIANT = true;
+        using Dual = Theta_cov;
+    };
+    struct R_cov
+    {
+        static bool constexpr PERIODIC = false;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = false;
+        using Dual = R;
+    };
+
+    struct Theta_cov
+    {
+        static bool constexpr PERIODIC = true;
+        static bool constexpr IS_COVARIANT = true;
+        static bool constexpr IS_CONTRAVARIANT = false;
+        using Dual = Theta;
     };
 
 
@@ -194,18 +218,15 @@ public:
                 theta_extrapolation_rule,
                 theta_extrapolation_rule);
 
-        Matrix_2x2 analytical_matrix;
-        Matrix_2x2 discrete_matrix;
-
 
         // --- CIRCULAR MAPPING ---------------------------------------------------------------------------
         std::cout << " - Nr x Nt  = " << Nr << " x " << Nt << std::endl
                   << "   - Circular mapping: ";
         const CircularToCartesian<R, Theta, X, Y> circ_to_cart;
-        const CartesianToCircular<X_pc, Y_pc, R, Theta> pseudo_cart_to_circ;
+        const CartesianToCircular<X_pC, Y_pC, R, Theta> pseudo_cart_to_circ;
         using PseudoCartToCircToCart = CombinedMapping<
                 CircularToCartesian<R, Theta, X, Y>,
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCircToCart
                 pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
@@ -217,7 +238,7 @@ public:
         DiscreteToCartesian discrete_mapping_circ_to_cart = mapping_builder_circ();
         using DiscreteMappingCirc = CombinedMapping<
                 decltype(discrete_mapping_circ_to_cart),
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         DiscreteMappingCirc discrete_pseudo_cart_to_circ_to_cart(
                 discrete_mapping_circ_to_cart,
                 pseudo_cart_to_circ,
@@ -227,8 +248,8 @@ public:
                 pseudo_cart_to_circ_to_cart);
         InvJacobianOPoint<DiscreteMappingCirc, CoordRTheta> inv_o_point_discrete_circ(
                 discrete_pseudo_cart_to_circ_to_cart);
-        analytical_matrix = inv_o_point_analytical_circ();
-        discrete_matrix = inv_o_point_discrete_circ();
+        Tensor analytical_matrix = inv_o_point_analytical_circ();
+        Tensor discrete_matrix = inv_o_point_discrete_circ();
         double max_diff_circ
                 = check_same(analytical_matrix, discrete_matrix, 1e-5 * ipow(16. / double(N), 4));
         std::cout << max_diff_circ << std::endl;
@@ -240,7 +261,7 @@ public:
         const CzarnyToCartesian<R, Theta, X, Y> czarny_to_cart(0.3, 1.4);
         using PseudoCartToCzarnyToCart = CombinedMapping<
                 CzarnyToCartesian<R, Theta, X, Y>,
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCzarnyToCart
                 pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
         DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
@@ -252,7 +273,7 @@ public:
         DiscreteToCartesian discrete_mapping_czarny_to_cart = mapping_builder_czarny();
         using DiscreteMappingCzarny = CombinedMapping<
                 decltype(discrete_mapping_czarny_to_cart),
-                CartesianToCircular<X_pc, Y_pc, R, Theta>>;
+                CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         DiscreteMappingCzarny discrete_pseudo_cart_to_czarny_to_cart(
                 discrete_mapping_czarny_to_cart,
                 pseudo_cart_to_circ,
@@ -288,20 +309,22 @@ private:
      *
      * @return A double with the infinity norm of the difference.
      */
-    double check_same(Matrix_2x2 const& matrix_1, Matrix_2x2 const& matrix_2, double TOL)
+    double check_same(
+            DTensor<VectorIndexSet<X_pC, Y_pC>, VectorIndexSet<X, Y>> const& matrix_1,
+            DTensor<VectorIndexSet<X_pC, Y_pC>, VectorIndexSet<X, Y>> const& matrix_2,
+            double TOL)
     {
-        std::size_t size = 2;
+        EXPECT_NEAR((ddcHelper::get<X_pC, X>(matrix_1)), (ddcHelper::get<X_pC, X>(matrix_2)), TOL);
+        EXPECT_NEAR((ddcHelper::get<X_pC, Y>(matrix_1)), (ddcHelper::get<X_pC, Y>(matrix_2)), TOL);
+        EXPECT_NEAR((ddcHelper::get<Y_pC, X>(matrix_1)), (ddcHelper::get<Y_pC, X>(matrix_2)), TOL);
+        EXPECT_NEAR((ddcHelper::get<Y_pC, Y>(matrix_1)), (ddcHelper::get<Y_pC, Y>(matrix_2)), TOL);
 
-        double max_diff = 0.;
-        for (std::size_t i(0); i < size; ++i) {
-            for (std::size_t j(0); j < size; ++j) {
-                double const diff = fabs(matrix_1[i][j] - matrix_2[i][j]);
-                max_diff = diff > max_diff ? diff : max_diff;
-
-                EXPECT_NEAR(matrix_1[i][j], matrix_2[i][j], TOL);
-            }
-        }
-        return max_diff;
+        DTensor<VectorIndexSet<X_pC, Y_pC>, VectorIndexSet<X, Y>> diff = matrix_1 - matrix_2;
+        return std::max(
+                {fabs(ddcHelper::get<X_pC, X>(diff)),
+                 fabs(ddcHelper::get<X_pC, Y>(diff)),
+                 fabs(ddcHelper::get<Y_pC, X>(diff)),
+                 fabs(ddcHelper::get<Y_pC, Y>(diff))});
     }
 };
 

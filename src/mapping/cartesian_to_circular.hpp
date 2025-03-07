@@ -5,6 +5,7 @@
 
 #include "ddc_aliases.hpp"
 #include "mapping_tools.hpp"
+#include "tensor.hpp"
 #include "view.hpp"
 
 // Pre-declaration of analytical inverse
@@ -52,6 +53,15 @@ public:
     using CoordArg = Coord<X, Y>;
     /// The type of the result of the function described by this mapping
     using CoordResult = Coord<R, Theta>;
+
+    /// @brief The covariant form of the first physical coordinate.
+    using X_cov = typename X::Dual;
+    /// @brief The covariant form of the second physical coordinate.
+    using Y_cov = typename Y::Dual;
+    /// @brief The covariant form of the first logical coordinate.
+    using R_cov = typename R::Dual;
+    /// @brief The covariant form of the second logical coordinate.
+    using Theta_cov = typename Theta::Dual;
 
 public:
     CartesianToCircular() = default;
@@ -135,8 +145,7 @@ public:
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
-     * @param[out] matrix
-     * 				The Jacobian matrix returned.
+     * @return The Jacobian matrix.
      *
      *
      * @see Jacobian::jacobian_11
@@ -144,15 +153,18 @@ public:
      * @see Jacobian::jacobian_21
      * @see Jacobian::jacobian_22
      */
-    KOKKOS_FUNCTION void jacobian_matrix(Coord<X, Y> const& coord, Matrix_2x2& matrix)
+    KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> jacobian_matrix(
+            Coord<X, Y> const& coord) const
 
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
-        matrix[0][0] = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
-        matrix[0][1] = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
-        matrix[1][0] = -y / Kokkos::pow(x * x + y * y, 2.);
-        matrix[1][1] = x / Kokkos::pow(x * x + y * y, 2.);
+        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> jacobian_matrix;
+        ddcHelper::get<R, X_cov>(jacobian_matrix) = 2 * x / Kokkos::pow(x * x + y * y, 0.5);
+        ddcHelper::get<R, Y_cov>(jacobian_matrix) = 2 * y / Kokkos::pow(x * x + y * y, 0.5);
+        ddcHelper::get<Theta, X_cov>(jacobian_matrix) = -y / Kokkos::pow(x * x + y * y, 2.);
+        ddcHelper::get<Theta, Y_cov>(jacobian_matrix) = x / Kokkos::pow(x * x + y * y, 2.);
+        return jacobian_matrix;
     }
 
     /**
