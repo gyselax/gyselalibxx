@@ -70,12 +70,12 @@ template <
 using DConstField = ConstField<double, IdxRange, MemorySpace, LayoutStridedPolicy>;
 
 /// An alias describing the type from which a uniform grid must inherit.
-template <class GridType>
-using UniformGridBase = ddc::UniformPointSampling<GridType>;
+template <class Dim>
+using UniformGridBase = ddc::UniformPointSampling<Dim>;
 
 /// An alias describing the type from which a non-uniform grid must inherit.
-template <class GridType>
-using NonUniformGridBase = ddc::NonUniformPointSampling<GridType>;
+template <class Dim>
+using NonUniformGridBase = ddc::NonUniformPointSampling<Dim>;
 
 
 //----------------------------------------------
