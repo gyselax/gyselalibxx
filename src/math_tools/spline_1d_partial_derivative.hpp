@@ -45,7 +45,7 @@ private:
 
     Spline1DBuilder const& m_builder;
     Spline1DEvaluator const& m_evaluator;
-    DConstFieldType const& m_field;
+    DConstFieldType const m_field;
 
 public:
     /**
@@ -58,7 +58,7 @@ public:
     explicit Spline1DPartialDerivative(
             Spline1DBuilder const& builder,
             Spline1DEvaluator const& evaluator,
-            DConstFieldType const& field)
+            DConstFieldType const field)
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_field(field)
