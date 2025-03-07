@@ -1,10 +1,5 @@
 
 // SPDX-License-Identifier: MIT
-/**
- * @file spline_builder_2d_cache.hpp
- * File containing a class to store the spline builder coefficients and recompute them when required.
- */
-
 #pragma once
 
 #include <ddc/ddc.hpp>
@@ -86,6 +81,17 @@ public:
             m_spline_builder(get_field(m_spline_coeffs), field_values);
         }
 
+        return get_const_field(m_spline_coeffs);
+    }
+
+    /**
+    * @brief TODO Compute the partial derivative of a field in the direction 
+    * where the field is represented using 2d splines.
+    *
+    * @param[out] differentiated_field Contains on output the value of the differentiated field.
+    */
+    DConstFieldSplineCoeffs operator()() const
+    {
         return get_const_field(m_spline_coeffs);
     }
 };
