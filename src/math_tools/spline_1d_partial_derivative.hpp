@@ -64,11 +64,11 @@ public:
     }
 
     /**
-    * @brief Compute the partial derivative of a field in the direction 
-    * where the field is represented using 1d splines.
-    *
-    * @param[out] differentiated_field Contains on output the value of the differentiated field.
-    */
+     * @brief Compute the partial derivative of a field in the direction 
+     * where the field is represented using 1d splines.
+     *
+     * @param[out] differentiated_field Contains on output the value of the differentiated field.
+     */
     void operator()(DFieldType differentiated_field) const final
     {
         m_evaluator.deriv(differentiated_field, get_const_field(m_spline_coefs));
