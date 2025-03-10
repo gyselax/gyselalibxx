@@ -45,12 +45,12 @@ private:
 
 public:
     /**
-    * @brief Construct an instance of the class Spline1DPartialDerivative.
-    *
-    * @param builder A 1D spline builder.
-    * @param evaluator A 1D spline evaluator.
-    * @param field The field to be differentiated.
-    */
+     * @brief Construct an instance of the class Spline1DPartialDerivative.
+     *
+     * @param builder A 1D spline builder.
+     * @param evaluator A 1D spline evaluator.
+     * @param field The field to be differentiated.
+     */
     explicit Spline1DPartialDerivative(
             Spline1DBuilder const& builder,
             Spline1DEvaluator const& evaluator,
