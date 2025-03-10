@@ -28,6 +28,8 @@ set_tests_properties(${file} PROPERTIES
     PASS_REGULAR_EXPRESSION ${error_msg}
 )
 
+set_property(TEST ${file} PROPERTY TIMEOUT 20)
+
 endfunction()
 
 add_static_assert_test(tensor_mul_cov_cov "Repeated indices should not be associated with two covariant or two contravariant indices.")
