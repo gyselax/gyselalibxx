@@ -9,21 +9,19 @@
 
 /**
  * @brief An abstract class for a partial derivative operator.
- * @tparam IdxRangeType The index range of the field on which the operator acts.
+ * @tparam IdxRangeBatched The index range of the field on which the operator acts 
+ * (with all dimensions, including batched).
  * @tparam DerivativeDimension The dimension on which the partial derivative is calculated.
  */
-template <class IdxRangeType, class DerivativeDimension>
+template <class IdxRangeBatched, class DerivativeDimension>
 class IPartialDerivative
 {
 public:
-    /// The type of the field to be differentiated.
-    using DFieldMemType = DFieldMem<IdxRangeType>;
-
     /// The type of a reference to the field to be differentiated.
-    using DFieldType = DField<IdxRangeType>;
+    using DFieldType = DField<IdxRangeBatched>;
 
     /// The type of a constant reference to the field to be differentiated.
-    using DConstFieldType = DConstField<IdxRangeType>;
+    using DConstFieldType = DConstField<IdxRangeBatched>;
     ;
 
     /**
@@ -39,7 +37,7 @@ public:
  * an object of the IPartialDerivative class where required. 
  * 
  */
-template <class IdxRangeType, class DerivativeDimension>
+template <class IdxRangeBatched, class DerivativeDimension>
 class IPartialDerivativeCreator
 {
 public:
@@ -52,6 +50,6 @@ public:
      *
      * @see IPartialDerivative
      */
-    virtual std::unique_ptr<IPartialDerivative<IdxRangeType, DerivativeDimension>> create_instance(
-            DConstField<IdxRangeType> field) const = 0;
+    virtual std::unique_ptr<IPartialDerivative<IdxRangeBatched, DerivativeDimension>>
+    create_instance(DConstField<IdxRangeBatched> field) const = 0;
 };
