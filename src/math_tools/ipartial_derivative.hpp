@@ -17,9 +17,6 @@ template <class IdxRangeBatched, class DerivativeDimension>
 class IPartialDerivative
 {
 public:
-    /// The type of the field to be differentiated.
-    using DFieldMemType = DFieldMem<IdxRangeBatched>;
-
     /// The type of a reference to the field to be differentiated.
     using DFieldType = DField<IdxRangeBatched>;
 
