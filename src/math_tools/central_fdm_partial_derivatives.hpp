@@ -14,7 +14,7 @@
 /**
  * @brief A class which implements a partial derivative operator
  * using a finite differences calculation of order two. A decentered
- * scheme is used at the boundary, whereas centered finite difference
+ * scheme is used at the boundary, whereas centred finite difference
  * are used inside the domain.
  */
 template <class DFieldValue, class DerivDirection>

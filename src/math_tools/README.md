@@ -8,10 +8,10 @@ Functions for calculating derivatives with different methods:
 
 - `spline_partial_derivatives.hpp` : calculate derivatives using spline interpolation
 - `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method. The method is as follow:
-Take a function $f$. We want to approximate the value of $f'(x_1)$ knowing the value of $f(x_1)$, $f(x_2)$ and $f(x_3)$ for
-$x_3>x_2>x_1$.
-Denote $\alpha :=|x_2-x_1|$ and $\beta :=|x_3-x_2|$.
-We call $Df(x_1)$ the approximate value of $f'(x_1)$. We want $|f'(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)$.
+Take a function $f$. We want to approximate the value of $`f'(x_1)`$ knowing the value of $`f(x_1)`$, $`f(x_2)`$ and $`f(x_3)`$ for
+$`x_3>x_2>x_1`$.
+Denote $`\alpha :=|x_2-x_1|`$ and $`\beta :=|x_3-x_2|`$.
+We call $`Df(x_1)`$ the approximate value of $`f'(x_1)`$. We want $`|f'(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)`$.
 To this end, write
 ```math
 	Df(x_1)=c_1f(x_1)+c_2f(x_2)+c_3f(x_3),
@@ -35,7 +35,7 @@ The solution is therefore given by
 ```math
 	c_1=-\frac{2\alpha+\beta}{\alpha^2+\alpha\beta}\qquad c_2=\frac{1}{\alpha}+\frac{1}{\beta}\qquad c_3=-\frac{\alpha}{\beta(\alpha+\beta)}.
 ```
-The same computation can be made for the backward and the centered FDM scheme, and lead to these three formulas:
+The same computation can be made for the backward and the centred FDM scheme, and lead to these three formulas:
 ```math
 	Df(x_1) & = -\frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)-\frac{\alpha}{\beta(\alpha+\beta)}f(x_3) \\
 	Df(x_2) & = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
