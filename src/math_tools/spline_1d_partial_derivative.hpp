@@ -32,7 +32,6 @@ private:
             typename Spline1DBuilder::continuous_dimension_type>;
 
     using typename base_type::DConstFieldType;
-    using typename base_type::DFieldMemType;
     using typename base_type::DFieldType;
 
     using IdxRangeBS = typename Spline1DBuilder::batched_spline_domain_type;
@@ -42,6 +41,7 @@ private:
     Spline1DBuilder const& m_builder;
     Spline1DEvaluator const& m_evaluator;
     DConstFieldType const m_field;
+    DFieldBSMem m_spline_coefs;
 
 public:
     /**
@@ -58,7 +58,9 @@ public:
         : m_builder(builder)
         , m_evaluator(evaluator)
         , m_field(field)
+        , m_spline_coefs(builder.batched_spline_domain())
     {
+        m_builder(get_field(m_spline_coefs), m_field);
     }
 
     /**
@@ -69,10 +71,7 @@ public:
     */
     void operator()(DFieldType differentiated_field) const final
     {
-        DFieldBSMem spline_coefs(m_builder.batched_spline_domain());
-
-        m_builder(get_field(spline_coefs), m_field);
-        m_evaluator.deriv(differentiated_field, get_const_field(spline_coefs));
+        m_evaluator.deriv(differentiated_field, get_const_field(m_spline_coefs));
     }
 };
 
