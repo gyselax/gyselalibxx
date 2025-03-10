@@ -17,7 +17,7 @@ set(Kokkos_ARCH_VEGA90A ON CACHE BOOL "Enable support for AMD GPU MI200 series (
 # build. Note that it can be detrimental to performance.
 set(Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE ON CACHE BOOL "")
 
-set(Kokkos_ENABLE_OPENMP ON CACHE BOOL "")
+set(Kokkos_ENABLE_OPENMP OFF CACHE BOOL "")
 set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "")
 set(Kokkos_ARCH_ZEN3 ON CACHE BOOL "Optimize for AMD Zen3 architecture (HOST).")
 
