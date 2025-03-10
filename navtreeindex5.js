@@ -176,7 +176,8 @@ var NAVTREEINDEX5 =
 "geometry__descriptors_8hpp_source.html":[16,0,20,4],
 "geometry__mapping__tests_8hpp_source.html":[16,1,2,0],
 "geometry__pseudo__cartesian_8hpp_source.html":[16,0,10,9],
-"grid__builder_8hpp_source.html":[16,1,0,0],
+"geometry__tensor_8hpp_source.html":[16,1,0,0],
+"grid__builder_8hpp_source.html":[16,1,0,1],
 "i__interpolator__2d_8hpp_source.html":[16,0,8,1],
 "iadvection__rtheta_8hpp_source.html":[16,0,3,0,1],
 "iadvectionvx_8hpp_source.html":[16,0,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "mpichargedensitycalculator_8hpp_source.html":[16,0,7,2,3],
 "mpilayout_8hpp_source.html":[16,0,13,2],
 "mpisplitvlasovsolver_8hpp_source.html":[16,0,7,4,1],
-"mpitools_8hpp_source.html":[16,0,13,3],
-"mpitransposealltoall_8hpp_source.html":[16,0,13,4]
+"mpitools_8hpp_source.html":[16,0,13,3]
 };
