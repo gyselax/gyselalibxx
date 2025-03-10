@@ -23,27 +23,27 @@
  *
  * The Vlasov-Poisson equations are given by
  *
- * - (1) @f$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y\rho = 0 @f$,
+ * - (1) @f$ \partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0 @f$,
  *
- * - (2) @f$ - L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho  @f$,
+ * - (2) @f$ - \nabla \phi = \rho  @f$,
  *
- * - (3) and @f$ E = -\nabla \phi  @f$.
+ * - (3) @f$ E = -\nabla \phi  @f$.
  *
- * The functions are defined on a logical index range, and the mapping from the logical
- * index range to the physical index range is written @f$\mathcal{F}@f$.
+ * The functions are defined on a logical domain, and the mapping from the logical
+ * domain to the physical domain is written @f$\mathcal{F}@f$.
  *
  * We here focus on equation (3). The @f$ \phi @f$ is already computed 
- * on B-splines with the given Poisson solver. Then in the AdvectionFieldRTheta::operator()
+ * on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator()
  * we compute the advection field (@f$A = E \wedge e_z@f$) thanks to (3) using the B-splines coefficients.
  * Depending on the given mapping, the computation at the centre point is not
  * always well-defined so we linearise around the centre point as explained
  * in Edoardo Zoni's article (https://doi.org/10.1016/j.jcp.2019.108889).
  * 
- * The advection field can be computed along the logical index range axis or the physical index range
+ * The advection field can be computed along the logical domain axis or the physical domain
  * axis. 
  * 
  * 1- In the first case, we compute the electric field thanks to (3) and 
- * - @f$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} [\partial_r \phi, \partial_\theta \phi]^T @f$,
+ * - @f$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} \hat{\nabla}_{r,\theta} \phi(r, \theta) @f$,
  * - @f$ E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) @f$,
  * 
  * For @f$ r < \varepsilon @f$, @f$(J^{-1})^{T}@f$ is  ill-defined so we linearise 
@@ -62,18 +62,21 @@
  * linearly independent directions.
  * 
  * 
- * Then the advection field along the physical index range axis 
+ * Then the advection field along the physical domain axis 
  * is given by @f$A = E \wedge e_z@f$.
  * 
  * 
- * 2- In the second case, the advection field along the logical index range axis
+ * 2- In the second case, the advection field along the logical domain axis
  * is computed with 
- * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} e_j@f$, 
+ * - @f$ \hat{\nabla} \phi = \sum_{i,j} \partial_{x_i} \phi g^{ij} e_j@f$, 
  * - with @f$g^{ij}@f$, the coefficients of the inverse metric tensor,
  * - @f$g_{jj}@f$, the coefficients of the metric tensor,
  * - @f$e_j@f$, the unnormalized local covariants vectors.
  * 
- * Then, we compute @f$ E = -\nabla \phi  @f$ and @f$A = E \wedge e_z@f$.
+ * Then, we compute @f$ \hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi @f$ and 
+ * @f$ \hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z) @f$, 
+ * with @f$ J @f$ the Jacobian matrix of the transformation 
+ * @f$ (r,\theta) \mapsto (x,y) @f$.
  * 
  *
  * The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
@@ -82,9 +85,7 @@
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  *
- *
  * @see PolarSplineFEMPoissonLikeSolver
- *
  */
 template <class Mapping>
 class AdvectionFieldFinder
@@ -112,7 +113,7 @@ public:
      * @brief Instantiate a AdvectionFieldRTheta .
      *
      * @param[in] mapping
-     *      The mapping @f$ \mathcal{F} @f$ from the logical index range to the physical index range.
+     *      The mapping @f$ \mathcal{F} @f$ from the logical domain to the physical domain.
      * @param[in] epsilon
      *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
@@ -254,7 +255,7 @@ private:
 
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
 
-                // Gradient of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical domain (Cartesian domain)
                 double const deriv_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
                                            + deriv_theta_phi(irtheta) * inv_J[1][0];
                 double const deriv_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
@@ -311,7 +312,7 @@ private:
                         coord_rtheta_epsilon,
                         get_const_field(electrostatic_potential_coef));
 
-                // Gradient of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical domain (Cartesian domain)
                 double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
                                                    + deriv_theta_phi_epsilon * inv_J_eps[1][0];
                 double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
@@ -436,7 +437,7 @@ private:
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis on an index range without O-point. 
+     *      The advection field on the logical axis on an domain without O-point. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
