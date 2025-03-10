@@ -12,7 +12,7 @@ target_link_libraries(advection_RTheta
         gslx::advection
         gslx::data_types
         gslx::geometry_RTheta
-        gslx::interpolation_RTheta
+        gslx::interpolation
         gslx::mapping
         gslx::math_tools
         gslx::utils
