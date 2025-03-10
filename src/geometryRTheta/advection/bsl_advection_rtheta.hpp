@@ -181,24 +181,19 @@ public:
         // Convert advection field on RTheta to advection field on XY
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_host(grid);
 
-        InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
-
+        // A_xy = J A_rtheta
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
-
-            std::array<std::array<double, 2>, 2> inv_J = inv_jacobian_matrix(coord_rtheta);
-            double const jacobian = m_mapping.jacobian(coord_rtheta);
+            
+            std::array<std::array<double, 2>, 2> J; // Jacobian matrix 
+            m_mapping.jacobian_matrix(coord_rtheta, J); 
 
             ddcHelper::get<X>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][0]
-                              * jacobian
-                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][0]
-                                * jacobian;
+                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[0][0]
+                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[0][1];
             ddcHelper::get<Y>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][1]
-                              * jacobian
-                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][1]
-                                * jacobian;
+                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[1][0]
+                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[1][1];
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {

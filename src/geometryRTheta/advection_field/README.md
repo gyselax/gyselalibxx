@@ -141,10 +141,10 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here. 
 
 #### General coordinates system 
-* In **general coordinates system**, the gradient of a function is given by 
+* In **general coordinates system**, the gradient of a function in the logical domain is given by 
 
 ```math
-\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j
+\hat{\nabla} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j
 ```
 
 with 
@@ -155,7 +155,7 @@ with
 
 In 2D, it can be rewritten as the following matrix system 
 ```math
-\nabla f = 
+\hat{\nabla} f = 
 G^{-1}
 \begin{bmatrix}
     \partial_{x_1} f \\
@@ -170,7 +170,7 @@ So, for an invertible matrix, we also have the relation
     \partial_{x_2} f \\
 \end{bmatrix}
 = 
-G \nabla f. 
+G \hat{\nabla} f. 
 ```
 
 From the relation 
@@ -189,23 +189,23 @@ J^{-T}
 
 we deduce the following relation for invertible case
 ```math
-\nabla_{y_1, y_2} f = J \nabla_{x_1, x_2} f,
+\nabla_{y_1, y_2} f = J \hat{\nabla}_{x_1, x_2} f,
 ```
 
 with $`\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T`$ and 
-$`\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j`$.
+$` \hat{\nabla}_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j`$.
 
 
 #### Application to the advection field
 * In our case, we use this formula to compute the electric field along the logical axis: 
 ```math
-E
+\hat{E}
 = 
 \begin{bmatrix}
-    E_r \\
-    E_{\theta} \\
+    \hat{E}_r \\
+    \hat{E}_{\theta} \\
 \end{bmatrix}
-= - \nabla_{r,\theta} \phi  
+= -  \hat{\nabla}_{r,\theta} \phi  
 = - G^{-1}
 \begin{bmatrix}
     \partial_{r} \phi \\
@@ -215,24 +215,34 @@ E
 
 Then the advection field is given by 
 ```math
-A
-= E \wedge e_z
+\hat{A}_{r,\theta} = J^{-1} A_{x,y} = J^{-1}(E_{x,y} \wedge e_z) = J^{-1}(J \hat{E}_{r,\theta} \wedge e_z)
 = 
+\frac{1}{\det(J)}
 \begin{bmatrix}
-    -E_{\theta} \\
-    E_r \\
-\end{bmatrix}.
+    -(J_{1,1}J_{1,2} + J_{2,1}J_{2,2})  & -(J_{2,2}^2 + J_{1,2}^2) \\
+     (J_{1,1}^2 + J_{2,1}^2)            &  (J_{1,1}J_{1,2} + J_{2,1}J_{2,2}) \\
+\end{bmatrix}
+\begin{bmatrix}
+    \hat{E}_r \\
+    \hat{E}_\theta \\
+\end{bmatrix},
 ```
 
-Warning, the matrix $`G^{-1}`$ is ill-defined for $r = 0$. 
+with $`J_{i,j}`$ the elements of the Jacobian matrix. 
+
+**Warning:** this matrix can be ill-defined for $r = 0$. 
 
 *Example: circular mapping:* 
 ```math
-G^{-1}
+\frac{1}{\det(J)}
+\begin{bmatrix}
+    -(J_{1,1}J_{1,2} + J_{2,1}J_{2,2})  & -(J_{2,2}^2 + J_{1,2}^2) \\
+     (J_{1,1}^2 + J_{2,1}^2)            &  (J_{1,1}J_{1,2} + J_{2,1}J_{2,2}) \\
+\end{bmatrix}
 = 
 \begin{bmatrix}
-    1 & 0 \\
-    0 & \frac{1}{r^2} \\
+    0           & -r \\
+    \frac{1}{r} &  0 \\
 \end{bmatrix}.
 ```
 

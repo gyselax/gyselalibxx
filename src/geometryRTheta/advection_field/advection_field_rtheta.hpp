@@ -484,7 +484,10 @@ private:
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
-                    = metric_tensor.inverse(coord_rtheta);
+                    = metric_tensor.inverse(coord_rtheta); // inverse tensor metric
+            std::array<std::array<double, 2>, 2> J; // Jacobian matrix
+            m_mapping.jacobian_matrix(coord_rtheta, J);
+            double const jacobian = m_mapping.jacobian(coord_rtheta);
 
             // E = -grad phi
             double const electric_field_r
@@ -494,9 +497,13 @@ private:
                     = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
                       - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
 
-            // A = E \wedge e_z
-            ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) = -electric_field_theta;
-            ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) = electric_field_r;
+            // A = J^{-1}(J E \wedge e_z)
+            ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta)
+                    = -(J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_r / jacobian
+                      - (J[1][1] * J[1][1] + J[0][1] * J[0][1]) * electric_field_theta / jacobian;
+            ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta)
+                    = (J[0][0] * J[0][0] + J[1][0] * J[1][0]) * electric_field_r / jacobian
+                      + (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_theta / jacobian;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================

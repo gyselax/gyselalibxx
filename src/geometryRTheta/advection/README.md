@@ -149,12 +149,12 @@ and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details
 
 In the studied equation, the advection field is given along the physical domain axis: 
 ```math
-\partial_t f + A_x \partial_x f + A_y \partial_y f = 0.
+\partial_t f + A_{x,y} \cdot \nabla_{x,y} f = 0.
 ```
 
 The BslAdvectionRTheta operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,
 ```math
-A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta).
+A = (A_x, A_y) \quad \text{or} \quad \hat{A} = (A_r, A_\theta).
 ```
 
 The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see [advection\_field\_rtheta](./../advection_field/README.md)).
@@ -163,9 +163,9 @@ The advection field can be computed thanks to the AdvectionFieldFinder operator.
 
 * If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain. 
 
-**In the guiding-centre case**, the advection field is computed from the electric field, 
+**In the guiding-centre case**, the advection field is computed from the electric field in the physical domain, 
 ```math
-A = - E \wedge e_z = -\nabla \phi \wedge e_z.
+A_{x,y} = - E_{x,y} \wedge e_z = -\nabla_{x,y} \phi \wedge e_z.
 ```
 
 In [the documentation for the advection field](./../advection_field/README.md), we show that 
@@ -184,39 +184,26 @@ It gives the following relation for the electric field
 = 
 J
 \begin{bmatrix}
-    E_r \\
-    E_\theta \\
+    \hat{E}_r \\
+    \hat{E}_\theta \\
 \end{bmatrix}.
 ```
 
 
-We deduce that 
+In the logical domain, we write the equivalent studied equation as follows
 ```math
-\begin{bmatrix}
-	A_x \\
-	A_y 
-\end{bmatrix}
-= 
-\begin{bmatrix}
-	- E_y \\
-	E_x 
-\end{bmatrix}
-= \det(J)
-J^{-T}
-\begin{bmatrix}
-	- E_\theta \\
-	E_r
-\end{bmatrix}
-= \det(J)
-J^{-T}
-\begin{bmatrix}
-	A_r \\
-	A_\theta
-\end{bmatrix}.
+\partial_t f + \hat{A}_{r,\theta} \cdot \hat{\nabla}_{r,\theta} f = 0.
 ```
 
-So, from the advection field along the logical domain axis, we multiply by $`J^{-1}`$
-to get the advection field along the physical domain axis. 
+with 
+```math
+\hat{A}_{r,\theta} = J^{-1} A_{x,y} = J^{-1}(E_{x,y} \wedge e_z) = J^{-1}(J \hat{E}_{r,\theta} \wedge e_z).
+```
+
+So, from the advection field along the logical domain axis, we multiply by $`J`$
+to get the advection field along the physical domain axis: $`A_{x,y}  = J \hat{A}_{r,\theta}`$. 
+
+**Remark:** The advection field and the electric field in the logical domain are expressed on the covariant vectors. 
 
 
 # Unit tests
