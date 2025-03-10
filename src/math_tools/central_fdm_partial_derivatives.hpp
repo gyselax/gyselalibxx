@@ -13,8 +13,9 @@
 
 /**
  * @brief A class which implements a partial derivative operator
- * using a central finite differences calculation. Forward and
- * backward finite differences are used at the boundaries.
+ * using a finite differences calculation of order two. A decentered
+ * scheme is used at the boundary, whereas centered finite difference
+ * are used inside the domain.
  */
 template <class DFieldValue, class DerivDirection>
 class CentralFDMPartialDerivative : public IPartialDerivative<DFieldValue, DerivDirection>
@@ -23,9 +24,6 @@ private:
     using base_type = IPartialDerivative<DFieldValue, DerivDirection>;
 
 public:
-    /// The dimension Xi on which the partial derivative is calculated.
-    using typename base_type::DerivativeDirection;
-
     /// The index range on which this operator acts.
     using typename base_type::IdxRangeFieldVal;
 
@@ -34,9 +32,6 @@ public:
 
     /// The type of the calculated derivative.
     using typename base_type::DConstFieldVal;
-
-    /// The type of the grid on the dimension Xi on which the partial derivative is calculated.
-    using typename base_type::GridDerivativeDirection;
 
     /// The index range of the dimension Xi on which the partial derivative is calculated.
     using typename base_type::IdxRangeDeriv;
@@ -47,7 +42,7 @@ public:
 public:
     /**
     * @brief Compute the partial derivative of @f$ F(X1,..,Xn)@f$ in Xi direction.
-    * For more information about the coefficients, see `../../doc/finite_difference_method/decentered_FDM.pdf`
+    * For more information about the coefficients, see `./README.md`
     *
     * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
     * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
