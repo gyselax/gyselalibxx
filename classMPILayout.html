@@ -105,8 +105,8 @@ $(document).ready(function(){initNavTree('classMPILayout.html',''); initResizabl
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classMPILayout-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MPILayout&lt; IdxRangeData, DistributedDim &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -152,22 +152,22 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>distributed_type_seq
 <tr class="memdesc:a5734be7b4782cfd49498bd2ad6610353 inherit pub_types_classIMPILayout"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type sequence describing the dimensions which are distributed across MPI processes. <br /></td></tr>
 <tr class="separator:a5734be7b4782cfd49498bd2ad6610353 inherit pub_types_classIMPILayout"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:af33d3fc6e12f1505f769d32fd8d293c6" id="r_af33d3fc6e12f1505f769d32fd8d293c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#af33d3fc6e12f1505f769d32fd8d293c6">distribute_idx_range</a> (<a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a> global_idx_range, int comm_size, int rank)</td></tr>
-<tr class="memdesc:af33d3fc6e12f1505f769d32fd8d293c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the distributed index range which follows the chosen layout.  <br /></td></tr>
-<tr class="separator:af33d3fc6e12f1505f769d32fd8d293c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a455677e1ae24aca58a4be965bd1f397e" id="r_a455677e1ae24aca58a4be965bd1f397e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a455677e1ae24aca58a4be965bd1f397e">distribute_idx_range</a> (<a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a> global_idx_range, int comm_size, int rank)</td></tr>
+<tr class="memdesc:a455677e1ae24aca58a4be965bd1f397e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the distributed index range which follows the chosen layout.  <br /></td></tr>
+<tr class="separator:a455677e1ae24aca58a4be965bd1f397e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6f9deb749c456a6c7a8fbccb10f35bd6" id="r_a6f9deb749c456a6c7a8fbccb10f35bd6"><td class="memTemplParams" colspan="2">template&lt;class HeadTag &gt; </td></tr>
-<tr class="memitem:a6f9deb749c456a6c7a8fbccb10f35bd6"><td class="memTemplItemLeft" align="right" valign="top">IdxRange&lt; HeadTag &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#a6f9deb749c456a6c7a8fbccb10f35bd6">internal_distribute_idx_range</a> (IdxRange&lt; HeadTag &gt; global_idx_range, int comm_size, int rank)</td></tr>
-<tr class="memdesc:a6f9deb749c456a6c7a8fbccb10f35bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute a 1D index range over the MPI processes.  <br /></td></tr>
-<tr class="separator:a6f9deb749c456a6c7a8fbccb10f35bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad73e8704d2db772bd557acb1876f0b02" id="r_ad73e8704d2db772bd557acb1876f0b02"><td class="memTemplParams" colspan="2">template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) &gt; 0), bool &gt;  = true&gt; </td></tr>
-<tr class="memitem:ad73e8704d2db772bd557acb1876f0b02"><td class="memTemplItemLeft" align="right" valign="top">IdxRange&lt; HeadTag, Tags... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#ad73e8704d2db772bd557acb1876f0b02">internal_distribute_idx_range</a> (IdxRange&lt; HeadTag, Tags... &gt; idx_range, int comm_size, int rank)</td></tr>
-<tr class="memdesc:ad73e8704d2db772bd557acb1876f0b02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute the index range over the MPI processes.  <br /></td></tr>
-<tr class="separator:ad73e8704d2db772bd557acb1876f0b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab32c4d3ad1b3e2475033c0d08bb014e6" id="r_ab32c4d3ad1b3e2475033c0d08bb014e6"><td class="memTemplParams" colspan="2">template&lt;class HeadTag &gt; </td></tr>
+<tr class="memitem:ab32c4d3ad1b3e2475033c0d08bb014e6"><td class="memTemplItemLeft" align="right" valign="top">static IdxRange&lt; HeadTag &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#ab32c4d3ad1b3e2475033c0d08bb014e6">internal_distribute_idx_range</a> (IdxRange&lt; HeadTag &gt; global_idx_range, int comm_size, int rank)</td></tr>
+<tr class="memdesc:ab32c4d3ad1b3e2475033c0d08bb014e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute a 1D index range over the MPI processes.  <br /></td></tr>
+<tr class="separator:ab32c4d3ad1b3e2475033c0d08bb014e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc8ae4453ec8db31580d3a6bf4974fa1" id="r_afc8ae4453ec8db31580d3a6bf4974fa1"><td class="memTemplParams" colspan="2">template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) &gt; 0), bool &gt;  = true&gt; </td></tr>
+<tr class="memitem:afc8ae4453ec8db31580d3a6bf4974fa1"><td class="memTemplItemLeft" align="right" valign="top">static IdxRange&lt; HeadTag, Tags... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPILayout.html#afc8ae4453ec8db31580d3a6bf4974fa1">internal_distribute_idx_range</a> (IdxRange&lt; HeadTag, Tags... &gt; idx_range, int comm_size, int rank)</td></tr>
+<tr class="memdesc:afc8ae4453ec8db31580d3a6bf4974fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute the index range over the MPI processes.  <br /></td></tr>
+<tr class="separator:afc8ae4453ec8db31580d3a6bf4974fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -194,8 +194,8 @@ class MPILayout&lt; IdxRangeData, DistributedDim &gt;</div><p>A class describing
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af33d3fc6e12f1505f769d32fd8d293c6" name="af33d3fc6e12f1505f769d32fd8d293c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af33d3fc6e12f1505f769d32fd8d293c6">&#9670;&#160;</a></span>distribute_idx_range()</h2>
+<a id="a455677e1ae24aca58a4be965bd1f397e" name="a455677e1ae24aca58a4be965bd1f397e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a455677e1ae24aca58a4be965bd1f397e">&#9670;&#160;</a></span>distribute_idx_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +206,7 @@ template&lt;class IdxRangeData , class... DistributedDim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a> <a class="el" href="classMPILayout.html">MPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::distribute_idx_range </td>
+          <td class="memname">static <a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a> <a class="el" href="classMPILayout.html">MPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::distribute_idx_range </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMPILayout.html#ad8142e0f533a266313e76614698b2ccc">idx_range_type</a>&#160;</td>
           <td class="paramname"><em>global_idx_range</em>, </td>
@@ -231,7 +231,7 @@ template&lt;class IdxRangeData , class... DistributedDim&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -249,8 +249,8 @@ template&lt;class IdxRangeData , class... DistributedDim&gt; </div>
 
 </div>
 </div>
-<a id="a6f9deb749c456a6c7a8fbccb10f35bd6" name="a6f9deb749c456a6c7a8fbccb10f35bd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f9deb749c456a6c7a8fbccb10f35bd6">&#9670;&#160;</a></span>internal_distribute_idx_range() <span class="overload">[1/2]</span></h2>
+<a id="ab32c4d3ad1b3e2475033c0d08bb014e6" name="ab32c4d3ad1b3e2475033c0d08bb014e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab32c4d3ad1b3e2475033c0d08bb014e6">&#9670;&#160;</a></span>internal_distribute_idx_range() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,7 +263,7 @@ template&lt;class HeadTag &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">IdxRange&lt; HeadTag &gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::internal_distribute_idx_range </td>
+          <td class="memname">static IdxRange&lt; HeadTag &gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::internal_distribute_idx_range </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; HeadTag &gt;&#160;</td>
           <td class="paramname"><em>global_idx_range</em>, </td>
@@ -288,7 +288,7 @@ template&lt;class HeadTag &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -306,8 +306,8 @@ template&lt;class HeadTag &gt; </div>
 
 </div>
 </div>
-<a id="ad73e8704d2db772bd557acb1876f0b02" name="ad73e8704d2db772bd557acb1876f0b02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad73e8704d2db772bd557acb1876f0b02">&#9670;&#160;</a></span>internal_distribute_idx_range() <span class="overload">[2/2]</span></h2>
+<a id="afc8ae4453ec8db31580d3a6bf4974fa1" name="afc8ae4453ec8db31580d3a6bf4974fa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc8ae4453ec8db31580d3a6bf4974fa1">&#9670;&#160;</a></span>internal_distribute_idx_range() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,7 +320,7 @@ template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">IdxRange&lt; HeadTag, Tags... &gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::internal_distribute_idx_range </td>
+          <td class="memname">static IdxRange&lt; HeadTag, Tags... &gt; <a class="el" href="classMPILayout.html">MPILayout</a>&lt; IdxRangeData, DistributedDim &gt;::internal_distribute_idx_range </td>
           <td>(</td>
           <td class="paramtype">IdxRange&lt; HeadTag, Tags... &gt;&#160;</td>
           <td class="paramname"><em>idx_range</em>, </td>
@@ -345,7 +345,7 @@ template&lt;class HeadTag , class... Tags, std::enable_if_t&lt;(sizeof...(Tags) 
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

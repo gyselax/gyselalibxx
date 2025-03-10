@@ -68,7 +68,7 @@ var searchData=
   ['discretetocartesianbuilder_65',['discretetocartesianbuilder',['../classDiscreteToCartesianBuilder.html',1,'DiscreteToCartesianBuilder&lt; X, Y, SplineBuilder, SplineEvaluator &gt;'],['../classDiscreteToCartesianBuilder.html#aaceea5d628916172449bdbdc4c08eb76',1,'DiscreteToCartesianBuilder::DiscreteToCartesianBuilder()']]],
   ['dispersion_20relation_66',['Dispersion relation',['../src_geometryRTheta_initialisation.html#autotoc_md64',1,'']]],
   ['display_5ftime_5fdifference_67',['display_time_difference',['../classITimeSolverRTheta.html#a5503beee2f7240e8b09ef8ac3be2af24',1,'ITimeSolverRTheta']]],
-  ['distribute_5fidx_5frange_68',['distribute_idx_range',['../classMPILayout.html#af33d3fc6e12f1505f769d32fd8d293c6',1,'MPILayout']]],
+  ['distribute_5fidx_5frange_68',['distribute_idx_range',['../classMPILayout.html#a455677e1ae24aca58a4be965bd1f397e',1,'MPILayout']]],
   ['distributed_5fdim_69',['distributed_dim',['../structMPIDim.html#a62179945b549053ebb430dc843a87dae',1,'MPIDim']]],
   ['distributed_5fidx_5frange_5ftype1_70',['distributed_idx_range_type1',['../classMPITransposeAllToAll.html#a313e5b285bf71c5fdb45855e4ecd4573',1,'MPITransposeAllToAll']]],
   ['distributed_5fidx_5frange_5ftype2_71',['distributed_idx_range_type2',['../classMPITransposeAllToAll.html#a1119f153697f8f23c1c382f70f208d4a',1,'MPITransposeAllToAll']]],

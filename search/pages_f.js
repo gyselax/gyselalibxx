@@ -7,7 +7,7 @@ var searchData=
   ['simulations_20in_20r_20theta_20geometry_4',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
   ['simulations_20in_20x_20vx_20geometry_5',['Simulations in (x, vx) geometry',['../simulations_geometryXVx.html',1,'simulations']]],
   ['simulations_20in_20x_20y_20geometry_6',['Simulations in (x, y) geometry',['../simulations_geometryXY.html',1,'simulations']]],
-  ['solver_7',['solver',['../src_geometryXVx_boltzmann.html',1,'Boltzmann solver'],['../src_geometryRTheta_poisson.html',1,'Polar Poisson solver'],['../src_geometryXVx_poisson.html',1,'Quasi-Neutrality Solver'],['../src_geometryXYVxVy_poisson.html',1,'Quasi-Neutrality Solver'],['../tests_geometryRTheta_polar_poisson.html',1,'Tests on the 2D polar poisson solver']]],
+  ['solver_7',['solver',['../src_geometryXVx_boltzmann.html',1,'Boltzmann solver'],['../src_geometryRTheta_poisson.html',1,'Polar Poisson solver'],['../src_geometryXYVxVy_poisson.html',1,'Quasi-Neutrality Solver'],['../src_geometryXVx_poisson.html',1,'Quasi-Neutrality Solver'],['../tests_geometryRTheta_polar_poisson.html',1,'Tests on the 2D polar poisson solver'],['../src_geometryXYVxVy_vlasov.html',1,'Vlasov solver']]],
   ['solvers_8',['PDE Solvers',['../src_pde_solvers.html',1,'src']]],
   ['speciesinfo_20x_20v_5fx_9',['SpeciesInfo (x, v_x)',['../src_speciesinfo.html',1,'src']]],
   ['spline_20interpolator_20in_20polar_20coordinates_10',['Tests on spline interpolator in polar coordinates',['../tests_geometryRTheta_spline_interpolator_rtheta.html',1,'tests_geometryRTheta']]],

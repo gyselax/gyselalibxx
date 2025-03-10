@@ -157,18 +157,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1c663a83e6a7b770ef8d764d877d4deb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#a1c663a83e6a7b770ef8d764d877d4deb">MPITransposeAllToAll</a> (IdxRange global_idx_range, MPI_Comm comm)</td></tr>
 <tr class="memdesc:a1c663a83e6a7b770ef8d764d877d4deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the transpose operator.  <br /></td></tr>
 <tr class="separator:a1c663a83e6a7b770ef8d764d877d4deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a992524cf2f61b2ba1e199d108140aad8" id="r_a992524cf2f61b2ba1e199d108140aad8"><td class="memTemplParams" colspan="2">template&lt;class Layout &gt; </td></tr>
-<tr class="memitem:a992524cf2f61b2ba1e199d108140aad8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#a992524cf2f61b2ba1e199d108140aad8">get_local_idx_range</a> ()</td></tr>
-<tr class="memdesc:a992524cf2f61b2ba1e199d108140aad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the local index range.  <br /></td></tr>
-<tr class="separator:a992524cf2f61b2ba1e199d108140aad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d1c226fe054058b70a1b1d9a228ff1a" id="r_a0d1c226fe054058b70a1b1d9a228ff1a"><td class="memTemplParams" colspan="2">template&lt;class ElementType , class InIdxRange , class IdxRangeOut , class MemSpace , class ExecSpace &gt; </td></tr>
-<tr class="memitem:a0d1c226fe054058b70a1b1d9a228ff1a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#a0d1c226fe054058b70a1b1d9a228ff1a">operator()</a> (ExecSpace const &amp;execution_space, Field&lt; ElementType, IdxRangeOut, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send_field)</td></tr>
-<tr class="memdesc:a0d1c226fe054058b70a1b1d9a228ff1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which transposes from one layout to another.  <br /></td></tr>
-<tr class="separator:a0d1c226fe054058b70a1b1d9a228ff1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8710a5c605dad849087077632f2e17e" id="r_ab8710a5c605dad849087077632f2e17e"><td class="memTemplParams" colspan="2">template&lt;class OutLayout , class ElementType , class MemSpace , class ExecSpace , class InIdxRange &gt; </td></tr>
-<tr class="memitem:ab8710a5c605dad849087077632f2e17e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#ab8710a5c605dad849087077632f2e17e">transpose_to</a> (ExecSpace const &amp;execution_space, Field&lt; ElementType, typename OutLayout::discrete_domain_type, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send_field)</td></tr>
-<tr class="memdesc:ab8710a5c605dad849087077632f2e17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which transposes from one layout to another.  <br /></td></tr>
-<tr class="separator:ab8710a5c605dad849087077632f2e17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9c808ac3e2561eb23c62e545479d896" id="r_ac9c808ac3e2561eb23c62e545479d896"><td class="memTemplParams" colspan="2">template&lt;class Layout &gt; </td></tr>
+<tr class="memitem:ac9c808ac3e2561eb23c62e545479d896"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#ac9c808ac3e2561eb23c62e545479d896">get_local_idx_range</a> () const</td></tr>
+<tr class="memdesc:ac9c808ac3e2561eb23c62e545479d896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the local index range.  <br /></td></tr>
+<tr class="separator:ac9c808ac3e2561eb23c62e545479d896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedee134078a94aab50d0b3c33fecfdc1" id="r_aedee134078a94aab50d0b3c33fecfdc1"><td class="memTemplParams" colspan="2">template&lt;class ElementType , class InIdxRange , class IdxRangeOut , class MemSpace , class ExecSpace &gt; </td></tr>
+<tr class="memitem:aedee134078a94aab50d0b3c33fecfdc1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#aedee134078a94aab50d0b3c33fecfdc1">operator()</a> (ExecSpace const &amp;execution_space, Field&lt; ElementType, IdxRangeOut, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send_field) const</td></tr>
+<tr class="memdesc:aedee134078a94aab50d0b3c33fecfdc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which transposes from one layout to another.  <br /></td></tr>
+<tr class="separator:aedee134078a94aab50d0b3c33fecfdc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6292dc81cee04163749bfa358d2bb41" id="r_ae6292dc81cee04163749bfa358d2bb41"><td class="memTemplParams" colspan="2">template&lt;class OutLayout , class ElementType , class MemSpace , class ExecSpace , class InIdxRange &gt; </td></tr>
+<tr class="memitem:ae6292dc81cee04163749bfa358d2bb41"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMPITransposeAllToAll.html#ae6292dc81cee04163749bfa358d2bb41">transpose_to</a> (ExecSpace const &amp;execution_space, Field&lt; ElementType, typename OutLayout::discrete_domain_type, MemSpace &gt; recv_field, ConstField&lt; ElementType, InIdxRange, MemSpace &gt; send_field) const</td></tr>
+<tr class="memdesc:ae6292dc81cee04163749bfa358d2bb41"><td class="mdescLeft">&#160;</td><td class="mdescRight">An operator which transposes from one layout to another.  <br /></td></tr>
+<tr class="separator:ae6292dc81cee04163749bfa358d2bb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIMPITranspose"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIMPITranspose')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIMPITranspose.html">IMPITranspose&lt; Layout1, Layout2 &gt;</a></td></tr>
 <tr class="memitem:a896a457be3e1f9584122760868b9cbd4 inherit pub_methods_classIMPITranspose" id="r_a896a457be3e1f9584122760868b9cbd4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMPITranspose.html#a896a457be3e1f9584122760868b9cbd4">IMPITranspose</a> (MPI_Comm comm)</td></tr>
 <tr class="memdesc:a896a457be3e1f9584122760868b9cbd4 inherit pub_methods_classIMPITranspose"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the class.  <br /></td></tr>
@@ -244,8 +244,8 @@ template&lt;class IdxRange &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a992524cf2f61b2ba1e199d108140aad8" name="a992524cf2f61b2ba1e199d108140aad8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a992524cf2f61b2ba1e199d108140aad8">&#9670;&#160;</a></span>get_local_idx_range()</h2>
+<a id="ac9c808ac3e2561eb23c62e545479d896" name="ac9c808ac3e2561eb23c62e545479d896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c808ac3e2561eb23c62e545479d896">&#9670;&#160;</a></span>get_local_idx_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,7 +261,7 @@ template&lt;class Layout &gt; </div>
           <td class="memname">auto <a class="el" href="classMPITransposeAllToAll.html">MPITransposeAllToAll</a>&lt; Layout1, Layout2 &gt;::get_local_idx_range </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -282,8 +282,8 @@ template&lt;class Layout &gt; </div>
 
 </div>
 </div>
-<a id="a0d1c226fe054058b70a1b1d9a228ff1a" name="a0d1c226fe054058b70a1b1d9a228ff1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d1c226fe054058b70a1b1d9a228ff1a">&#9670;&#160;</a></span>operator()()</h2>
+<a id="aedee134078a94aab50d0b3c33fecfdc1" name="aedee134078a94aab50d0b3c33fecfdc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedee134078a94aab50d0b3c33fecfdc1">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,7 +316,7 @@ template&lt;class ElementType , class InIdxRange , class IdxRangeOut , class Mem
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -339,8 +339,8 @@ template&lt;class ElementType , class InIdxRange , class IdxRangeOut , class Mem
 
 </div>
 </div>
-<a id="ab8710a5c605dad849087077632f2e17e" name="ab8710a5c605dad849087077632f2e17e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8710a5c605dad849087077632f2e17e">&#9670;&#160;</a></span>transpose_to()</h2>
+<a id="ae6292dc81cee04163749bfa358d2bb41" name="ae6292dc81cee04163749bfa358d2bb41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6292dc81cee04163749bfa358d2bb41">&#9670;&#160;</a></span>transpose_to()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,7 +373,7 @@ template&lt;class OutLayout , class ElementType , class MemSpace , class ExecSpa
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>

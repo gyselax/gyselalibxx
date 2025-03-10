@@ -118,15 +118,15 @@ $(document).ready(function(){initNavTree('ivlasovsolver_8hpp_source.html',''); i
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classIVlasovSolver.html">~IVlasovSolver</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classIVlasovSolver.html#ae2c2b1a0762d06fe0beba20613003bff">   27</a></span>    <span class="keyword">virtual</span> DFieldSpXYVxVy <a class="code hl_function" href="classIVlasovSolver.html#ae2c2b1a0762d06fe0beba20613003bff">operator()</a>(</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            DFieldSpXYVxVy allfdistribu,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classIVlasovSolver.html#acebf6983052fcf3d3f359a43bf83f451">   27</a></span>    <span class="keyword">virtual</span> DFieldSpVxVyXY <a class="code hl_function" href="classIVlasovSolver.html#acebf6983052fcf3d3f359a43bf83f451">operator()</a>(</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            DFieldSpVxVyXY allfdistribu,</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            DConstFieldXY efield_x,</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            DConstFieldXY efield_y,</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordtype">double</span> dt) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
 </div>
 <div class="ttc" id="aclassIVlasovSolver_html"><div class="ttname"><a href="classIVlasovSolver.html">IVlasovSolver</a></div><div class="ttdoc">An abstract class for solving a Vlasov equation.</div><div class="ttdef"><b>Definition</b> ivlasovsolver.hpp:11</div></div>
-<div class="ttc" id="aclassIVlasovSolver_html_ae2c2b1a0762d06fe0beba20613003bff"><div class="ttname"><a href="classIVlasovSolver.html#ae2c2b1a0762d06fe0beba20613003bff">IVlasovSolver::operator()</a></div><div class="ttdeci">virtual DFieldSpXYVxVy operator()(DFieldSpXYVxVy allfdistribu, DConstFieldXY efield_x, DConstFieldXY efield_y, double dt) const =0</div><div class="ttdoc">Solves a Vlasov equation on a timestep dt.</div></div>
+<div class="ttc" id="aclassIVlasovSolver_html_acebf6983052fcf3d3f359a43bf83f451"><div class="ttname"><a href="classIVlasovSolver.html#acebf6983052fcf3d3f359a43bf83f451">IVlasovSolver::operator()</a></div><div class="ttdeci">virtual DFieldSpVxVyXY operator()(DFieldSpVxVyXY allfdistribu, DConstFieldXY efield_x, DConstFieldXY efield_y, double dt) const =0</div><div class="ttdoc">Solves a Vlasov equation on a timestep dt.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

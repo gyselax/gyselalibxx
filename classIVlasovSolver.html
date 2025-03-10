@@ -118,21 +118,22 @@ Inheritance diagram for IVlasovSolver:</div>
  <div class="center">
   <img src="classIVlasovSolver.png" usemap="#IVlasovSolver_map" alt=""/>
   <map id="IVlasovSolver_map" name="IVlasovSolver_map">
-<area href="classSplitVlasovSolver.html" title="A class that solves a Vlasov equation using Strang&#39;s splitting." alt="SplitVlasovSolver" shape="rect" coords="0,56,112,80"/>
+<area href="classMpiSplitVlasovSolver.html" title="A class that solves a Vlasov equation using Strang&#39;s splitting on an MPI distributed mesh." alt="MpiSplitVlasovSolver" shape="rect" coords="0,56,133,80"/>
+<area href="classSplitVlasovSolver.html" title="A class that solves a Vlasov equation using Strang&#39;s splitting." alt="SplitVlasovSolver" shape="rect" coords="143,56,276,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae2c2b1a0762d06fe0beba20613003bff" id="r_ae2c2b1a0762d06fe0beba20613003bff"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIVlasovSolver.html#ae2c2b1a0762d06fe0beba20613003bff">operator()</a> (DFieldSpXYVxVy allfdistribu, DConstFieldXY efield_x, DConstFieldXY efield_y, double dt) const =0</td></tr>
-<tr class="memdesc:ae2c2b1a0762d06fe0beba20613003bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a Vlasov equation on a timestep dt.  <br /></td></tr>
-<tr class="separator:ae2c2b1a0762d06fe0beba20613003bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acebf6983052fcf3d3f359a43bf83f451" id="r_acebf6983052fcf3d3f359a43bf83f451"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpVxVyXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIVlasovSolver.html#acebf6983052fcf3d3f359a43bf83f451">operator()</a> (DFieldSpVxVyXY allfdistribu, DConstFieldXY efield_x, DConstFieldXY efield_y, double dt) const =0</td></tr>
+<tr class="memdesc:acebf6983052fcf3d3f359a43bf83f451"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a Vlasov equation on a timestep dt.  <br /></td></tr>
+<tr class="separator:acebf6983052fcf3d3f359a43bf83f451"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for solving a Vlasov equation. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae2c2b1a0762d06fe0beba20613003bff" name="ae2c2b1a0762d06fe0beba20613003bff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2c2b1a0762d06fe0beba20613003bff">&#9670;&#160;</a></span>operator()()</h2>
+<a id="acebf6983052fcf3d3f359a43bf83f451" name="acebf6983052fcf3d3f359a43bf83f451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acebf6983052fcf3d3f359a43bf83f451">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,9 +142,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DFieldSpXYVxVy IVlasovSolver::operator() </td>
+          <td class="memname">virtual DFieldSpVxVyXY IVlasovSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DFieldSpXYVxVy&#160;</td>
+          <td class="paramtype">DFieldSpVxVyXY&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -189,7 +190,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the Vlasov equation. </dd></dl>
 
-<p>Implemented in <a class="el" href="classSplitVlasovSolver.html#ad980db982084e40e1777484ddc3312b0">SplitVlasovSolver</a>.</p>
+<p>Implemented in <a class="el" href="classMpiSplitVlasovSolver.html#a56c9ea30c1c357155f5e5624d604ab3b">MpiSplitVlasovSolver</a>, and <a class="el" href="classSplitVlasovSolver.html#ad8ad688aa43f231851bbd11072e2c9c1">SplitVlasovSolver</a>.</p>
 
 </div>
 </div>

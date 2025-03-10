@@ -128,9 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abfdecd652433d1ae388a6489da2ed865" id="r_abfdecd652433d1ae388a6489da2ed865"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXVx&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolver.html#abfdecd652433d1ae388a6489da2ed865">operator()</a> (DFieldSpXVx allfdistribu, double time_start, double dt, int steps=1) const =0</td></tr>
 <tr class="memdesc:abfdecd652433d1ae388a6489da2ed865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator for solving the Boltzmann-Poisson system.  <br /></td></tr>
 <tr class="separator:abfdecd652433d1ae388a6489da2ed865"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66cc73d3765db94df87fc17cc215c01b" id="r_a66cc73d3765db94df87fc17cc215c01b"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolver.html#a66cc73d3765db94df87fc17cc215c01b">operator()</a> (DFieldSpXYVxVy allfdistribu, double dt, int steps=1) const =0</td></tr>
-<tr class="memdesc:a66cc73d3765db94df87fc17cc215c01b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Vlasov-Poisson system.  <br /></td></tr>
-<tr class="separator:a66cc73d3765db94df87fc17cc215c01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1848f9cee5d5c8e3c69a133cb17d0196" id="r_a1848f9cee5d5c8e3c69a133cb17d0196"><td class="memItemLeft" align="right" valign="top">virtual DFieldSpVxVyXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimeSolver.html#a1848f9cee5d5c8e3c69a133cb17d0196">operator()</a> (DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const =0</td></tr>
+<tr class="memdesc:a1848f9cee5d5c8e3c69a133cb17d0196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Vlasov-Poisson system.  <br /></td></tr>
+<tr class="separator:a1848f9cee5d5c8e3c69a133cb17d0196"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class for solving a Boltzmann-Poisson system of equations. </p>
@@ -198,8 +198,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a66cc73d3765db94df87fc17cc215c01b" name="a66cc73d3765db94df87fc17cc215c01b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66cc73d3765db94df87fc17cc215c01b">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a1848f9cee5d5c8e3c69a133cb17d0196" name="a1848f9cee5d5c8e3c69a133cb17d0196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1848f9cee5d5c8e3c69a133cb17d0196">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,9 +208,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual DFieldSpXYVxVy ITimeSolver::operator() </td>
+          <td class="memname">virtual DFieldSpVxVyXY ITimeSolver::operator() </td>
           <td>(</td>
-          <td class="paramtype">DFieldSpXYVxVy&#160;</td>
+          <td class="paramtype">DFieldSpVxVyXY&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -249,7 +249,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
 
-<p>Implemented in <a class="el" href="classPredCorr.html#afbad5baf6bfcce5c48b0cd47ce1de29d">PredCorr</a>.</p>
+<p>Implemented in <a class="el" href="classPredCorr.html#a3b8e02177cabfc230b09eb5d5b49c084">PredCorr</a>.</p>
 
 </div>
 </div>

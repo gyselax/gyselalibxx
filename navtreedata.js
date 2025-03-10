@@ -194,7 +194,9 @@ var NAVTREE =
         [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html", [
           [ "Charge Density", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Charge_Density", null ],
           [ "Quasi-Neutrality Solver", "src_geometryXYVxVy_poisson.html#src_geometryXYVxVy_poisson__Quasi-Neutrality_Solver", null ]
-        ] ]
+        ] ],
+        [ "Time integration", "src_geometryXYVxVy_time_integration.html", null ],
+        [ "Vlasov solver", "src_geometryXYVxVy_vlasov.html", null ]
       ] ],
       [ "Interpolation Methods", "src_interpolation.html", [
         [ "Spline Interpolation", "src_interpolation.html#src_interpolation__Spline_Interpolation", null ],
@@ -276,11 +278,11 @@ var NAVTREEINDEX =
 "2patches__2d__non__periodic_8hpp_source.html",
 "classCrankNicolson.html#ad0949984fa0c2d0004f6b7a10e19cd69",
 "classIInterpolator.html",
-"classMatrix__Corner__Block.html#a7d06d0294c301af28e252ae180139704",
-"classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c",
-"classtensor__tools_1_1IndexedTensor.html#aa64e4beab28845e03a3f7fe9fcd50f88",
-"multipatch__spline__evaluator__2d_8hpp_source.html",
-"structIdxRangeSliceIterator.html#a7f68c5678b29c6091de746305c7c7807"
+"classMatrix__Corner__Block.html#a9f1ba0d1ee24583b842b7a71c7479e19",
+"classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791",
+"classtensor__tools_1_1IndexedTensor.html#a3a4979a7a7ef6e30e2818d6d48e61c00",
+"multipatch__field_8hpp_source.html",
+"structIdxRangeSliceIterator.html#a428daf3ced0f82c06eb2a2c9eef543c6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

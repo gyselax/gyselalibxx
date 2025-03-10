@@ -134,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc97ef53ef6d27e3dae91eafbf3deb6a" id="r_afc97ef53ef6d27e3dae91eafbf3deb6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#afc97ef53ef6d27e3dae91eafbf3deb6a">PredCorr</a> (<a class="el" href="classIVlasovSolver.html">IVlasovSolver</a> const &amp;vlasov_solver, <a class="el" href="classIQNSolver.html">IQNSolver</a> const &amp;poisson_solver)</td></tr>
 <tr class="memdesc:afc97ef53ef6d27e3dae91eafbf3deb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of the predictor-corrector class.  <br /></td></tr>
 <tr class="separator:afc97ef53ef6d27e3dae91eafbf3deb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbad5baf6bfcce5c48b0cd47ce1de29d" id="r_afbad5baf6bfcce5c48b0cd47ce1de29d"><td class="memItemLeft" align="right" valign="top">DFieldSpXYVxVy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#afbad5baf6bfcce5c48b0cd47ce1de29d">operator()</a> (DFieldSpXYVxVy allfdistribu, double dt, int steps=1) const override</td></tr>
-<tr class="memdesc:afbad5baf6bfcce5c48b0cd47ce1de29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Vlasov-Poisson system.  <br /></td></tr>
-<tr class="separator:afbad5baf6bfcce5c48b0cd47ce1de29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b8e02177cabfc230b09eb5d5b49c084" id="r_a3b8e02177cabfc230b09eb5d5b49c084"><td class="memItemLeft" align="right" valign="top">DFieldSpVxVyXY&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPredCorr.html#a3b8e02177cabfc230b09eb5d5b49c084">operator()</a> (DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const override</td></tr>
+<tr class="memdesc:a3b8e02177cabfc230b09eb5d5b49c084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Vlasov-Poisson system.  <br /></td></tr>
+<tr class="separator:a3b8e02177cabfc230b09eb5d5b49c084"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme. </p>
@@ -281,8 +281,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afbad5baf6bfcce5c48b0cd47ce1de29d" name="afbad5baf6bfcce5c48b0cd47ce1de29d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbad5baf6bfcce5c48b0cd47ce1de29d">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a3b8e02177cabfc230b09eb5d5b49c084" name="a3b8e02177cabfc230b09eb5d5b49c084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8e02177cabfc230b09eb5d5b49c084">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,9 +291,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DFieldSpXYVxVy PredCorr::operator() </td>
+          <td class="memname">DFieldSpVxVyXY PredCorr::operator() </td>
           <td>(</td>
-          <td class="paramtype">DFieldSpXYVxVy&#160;</td>
+          <td class="paramtype">DFieldSpVxVyXY&#160;</td>
           <td class="paramname"><em>allfdistribu</em>, </td>
         </tr>
         <tr>
@@ -332,7 +332,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The distribution function after solving the system. </dd></dl>
 
-<p>Implements <a class="el" href="classITimeSolver.html#a66cc73d3765db94df87fc17cc215c01b">ITimeSolver</a>.</p>
+<p>Implements <a class="el" href="classITimeSolver.html#a1848f9cee5d5c8e3c69a133cb17d0196">ITimeSolver</a>.</p>
 
 </div>
 </div>

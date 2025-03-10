@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"classtensor__tools_1_1IndexedTensor.html#a3a4979a7a7ef6e30e2818d6d48e61c00":[15,6,4,1],
+"classtensor__tools_1_1IndexedTensor.html#a3de570a42eca6f3872f3817a1a6f3ac4":[15,6,4,3],
+"classtensor__tools_1_1IndexedTensor.html#a9b1aa0cb99b47fe5ea64752e79c6d30a":[15,6,4,0],
 "classtensor__tools_1_1IndexedTensor.html#aa64e4beab28845e03a3f7fe9fcd50f88":[15,6,4,4],
 "classtensor__tools_1_1IndexedTensor.html#adc2f44bbee1b54e63cfc68a08ff8f632":[15,6,4,2],
 "collision__common__configuration_8hpp_source.html":[16,0,1,0],
@@ -164,11 +167,11 @@ var NAVTREEINDEX5 =
 "geometryXYVxVy_2poisson_2chargedensitycalculator_8hpp_source.html":[16,0,7,2,0],
 "geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp_source.html":[16,0,7,2,1],
 "geometryXYVxVy_2poisson_2iqnsolver_8hpp_source.html":[16,0,7,2,2],
-"geometryXYVxVy_2poisson_2nullqnsolver_8hpp_source.html":[16,0,7,2,3],
-"geometryXYVxVy_2poisson_2qnsolver_8hpp_source.html":[16,0,7,2,4],
+"geometryXYVxVy_2poisson_2nullqnsolver_8hpp_source.html":[16,0,7,2,4],
+"geometryXYVxVy_2poisson_2qnsolver_8hpp_source.html":[16,0,7,2,5],
 "geometryXYVxVy_2time__integration_2itimesolver_8hpp_source.html":[16,0,7,3,0],
 "geometryXYVxVy_2time__integration_2predcorr_8hpp_source.html":[16,0,7,3,1],
-"geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[16,0,7,4,1],
+"geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source.html":[16,0,7,4,2],
 "geometryXY_2geometry_2geometry_8hpp_source.html":[16,0,6,0,0],
 "geometry__descriptors_8hpp_source.html":[16,0,20,4],
 "geometry__mapping__tests_8hpp_source.html":[16,1,2,0],
@@ -242,12 +245,9 @@ var NAVTREEINDEX5 =
 "mesh__builder_8hpp_source.html":[16,0,20,5],
 "metric__tensor__evaluator_8hpp_source.html":[16,0,10,13],
 "moments_8hpp_source.html":[16,0,18,0],
+"mpichargedensitycalculator_8hpp_source.html":[16,0,7,2,3],
 "mpilayout_8hpp_source.html":[16,0,13,2],
+"mpisplitvlasovsolver_8hpp_source.html":[16,0,7,4,1],
 "mpitools_8hpp_source.html":[16,0,13,3],
-"mpitransposealltoall_8hpp_source.html":[16,0,13,4],
-"multipatch__field_8hpp_source.html":[16,0,14,1,0],
-"multipatch__field__mem_8hpp_source.html":[16,0,14,1,1],
-"multipatch__math__tools_8hpp_source.html":[16,0,14,3,0],
-"multipatch__spline__builder_8hpp_source.html":[16,0,14,2,1],
-"multipatch__spline__builder__2d_8hpp_source.html":[16,0,14,2,2]
+"mpitransposealltoall_8hpp_source.html":[16,0,13,4]
 };

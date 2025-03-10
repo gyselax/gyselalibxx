@@ -12,7 +12,7 @@ var searchData=
   ['the_20templated_20advection_20operators_9',['Tests on the templated advection operators',['../tests_advection.html',1,'tests']]],
   ['theta_10',['theta',['../src_geometryRTheta.html',1,'Geometry (r, theta)'],['../tests_geometryRTheta.html',1,'Tests : Geometry (r, theta)']]],
   ['theta_20geometry_11',['Simulations in (r, theta) geometry',['../simulations_geometryRTheta.html',1,'simulations']]],
-  ['time_20integration_12',['Time integration',['../src_geometryXVx_time_integration.html',1,'src_geometryXVx']]],
+  ['time_20integration_12',['time integration',['../src_geometryXYVxVy_time_integration.html',1,'Time integration'],['../src_geometryXVx_time_integration.html',1,'Time integration']]],
   ['time_20stepping_20methods_13',['Time Stepping Methods',['../src_timestepper.html',1,'src']]],
   ['tools_14',['Matrix tools',['../src_matrix_tools.html',1,'src']]],
   ['types_15',['Data Storage Types',['../src_data_types.html',1,'src']]],
