@@ -360,7 +360,7 @@ public:
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
@@ -391,7 +391,7 @@ public:
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
@@ -415,7 +415,7 @@ public:
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
@@ -444,7 +444,7 @@ private:
     void compute_advection_field_RTheta(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         static_assert(
@@ -495,8 +495,8 @@ private:
                       - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
 
             // A = E \wedge e_z
-            ddcHelper::get<R>(advection_field_rtheta)(irtheta) = -electric_field_theta;
-            ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) = electric_field_r;
+            ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) = -electric_field_theta;
+            ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) = electric_field_r;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================
