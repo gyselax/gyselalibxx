@@ -24,10 +24,10 @@ public:
     using DConstFieldType = DConstField<IdxRangeBatched>;
 
     /**
-    * @brief Compute the partial derivative of a field in a given direction.
-    *
-    * @param[out] differentiated_field On output, contains values of the differentiated field.
-    */
+     * @brief Compute the partial derivative of a field in a given direction.
+     *
+     * @param[out] differentiated_field On output, contains values of the differentiated field.
+     */
     virtual void operator()(DFieldType differentiated_field) const = 0;
 };
 
