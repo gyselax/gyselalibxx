@@ -50,7 +50,7 @@ public:
      */
     virtual host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu,
-            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field,
+            host_t<DConstVectorFieldRTheta<R_cov, Theta_cov>> advection_field,
             CoordXY const& advection_field_xy_centre,
             double const dt) const = 0;
 };
