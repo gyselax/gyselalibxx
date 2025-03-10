@@ -40,7 +40,6 @@ private:
 
     Spline1DBuilder const& m_builder;
     Spline1DEvaluator const& m_evaluator;
-    DConstFieldType const m_field;
     DFieldBSMem m_spline_coefs;
 
 public:
@@ -57,10 +56,9 @@ public:
             DConstFieldType const field)
         : m_builder(builder)
         , m_evaluator(evaluator)
-        , m_field(field)
         , m_spline_coefs(builder.batched_spline_domain())
     {
-        m_builder(get_field(m_spline_coefs), m_field);
+        m_builder(get_field(m_spline_coefs), field);
     }
 
     /**
