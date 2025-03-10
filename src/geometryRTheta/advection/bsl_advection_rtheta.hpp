@@ -184,9 +184,9 @@ public:
         // A_xy = J A_rtheta
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
-            
-            std::array<std::array<double, 2>, 2> J; // Jacobian matrix 
-            m_mapping.jacobian_matrix(coord_rtheta, J); 
+
+            std::array<std::array<double, 2>, 2> J; // Jacobian matrix
+            m_mapping.jacobian_matrix(coord_rtheta, J);
 
             ddcHelper::get<X>(advection_field_xy_host)(irtheta)
                     = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[0][0]

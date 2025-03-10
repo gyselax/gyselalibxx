@@ -256,10 +256,10 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
                 = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[0][0]
-                    + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[0][1];
+                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[0][1];
         ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
                 = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[1][0]
-                    + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[1][1];
+                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[1][1];
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)
