@@ -55,7 +55,10 @@ public:
      *
      * @returns The distributed index range.
      */
-    idx_range_type distribute_idx_range(idx_range_type global_idx_range, int comm_size, int rank)
+    static idx_range_type distribute_idx_range(
+            idx_range_type global_idx_range,
+            int comm_size,
+            int rank)
     {
         return internal_distribute_idx_range(global_idx_range, comm_size, rank);
     }
@@ -73,7 +76,7 @@ protected:
      * @returns The distributed index range.
      */
     template <class HeadTag>
-    IdxRange<HeadTag> internal_distribute_idx_range(
+    static IdxRange<HeadTag> internal_distribute_idx_range(
             IdxRange<HeadTag> global_idx_range,
             int comm_size,
             int rank)
@@ -105,7 +108,7 @@ protected:
      * @returns The distributed index range.
      */
     template <class HeadTag, class... Tags, std::enable_if_t<(sizeof...(Tags) > 0), bool> = true>
-    IdxRange<HeadTag, Tags...> internal_distribute_idx_range(
+    static IdxRange<HeadTag, Tags...> internal_distribute_idx_range(
             IdxRange<HeadTag, Tags...> idx_range,
             int comm_size,
             int rank)
