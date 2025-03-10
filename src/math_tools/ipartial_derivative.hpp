@@ -22,7 +22,6 @@ public:
 
     /// The type of a constant reference to the field to be differentiated.
     using DConstFieldType = DConstField<IdxRangeBatched>;
-    ;
 
     /**
     * @brief Compute the partial derivative of a field in a given direction.
