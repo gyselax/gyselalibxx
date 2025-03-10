@@ -44,12 +44,12 @@ private:
 
 public:
     /**
-    * @brief Construct an instance of the class Spline1DPartialDerivative.
-    *
-    * @param builder A 1D spline builder.
-    * @param evaluator A 1D spline evaluator.
-    * @param field The field to be differentiated.
-    */
+     * @brief Construct an instance of the class Spline1DPartialDerivative.
+     *
+     * @param builder A 1D spline builder.
+     * @param evaluator A 1D spline evaluator.
+     * @param field The field to be differentiated.
+     */
     explicit Spline1DPartialDerivative(
             Spline1DBuilder const& builder,
             Spline1DEvaluator const& evaluator,
@@ -62,11 +62,11 @@ public:
     }
 
     /**
-    * @brief Compute the partial derivative of a field in the direction 
-    * where the field is represented using 1d splines.
-    *
-    * @param[out] differentiated_field Contains on output the value of the differentiated field.
-    */
+     * @brief Compute the partial derivative of a field in the direction 
+     * where the field is represented using 1d splines.
+     *
+     * @param[out] differentiated_field Contains on output the value of the differentiated field.
+     */
     void operator()(DFieldType differentiated_field) const final
     {
         m_evaluator.deriv(differentiated_field, get_const_field(m_spline_coefs));
