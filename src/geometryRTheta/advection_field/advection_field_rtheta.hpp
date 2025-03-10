@@ -489,7 +489,7 @@ private:
             m_mapping.jacobian_matrix(coord_rtheta, J);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
-            // E = -grad phi
+            // E_rtheta = -grad_rtheta phi
             double const electric_field_r
                     = -deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
                       - deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
@@ -497,7 +497,7 @@ private:
                     = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
                       - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
 
-            // A = J^{-1}(J E \wedge e_z)
+            // A_rtheta = J^{-1}(J E_rtheta \wedge e_z)
             ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta)
                     = -(J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_r / jacobian
                       - (J[1][1] * J[1][1] + J[0][1] * J[0][1]) * electric_field_theta / jacobian;
