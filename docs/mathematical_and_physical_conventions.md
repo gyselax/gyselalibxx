@@ -60,16 +60,8 @@ A = A_i b^i = A^i b_i,
 ```
 
 Where 
-- $`\{A_i\}`$ are the components of $`A`$ in the covariant bases. We call these *the contravariant components* of $`A`$;
-- $`\{A^i\}`$ are the components of $`A`$ in the contravariant bases. We call these *the covariant components* of $`A`$;
-
-### On the "covariant" and "contravariant" terminology
-
-Imagine that $`A`$ represents a physical quantity---such as a current for instance. The vector $`A`$ should remain invariant under a transformation of the bases vectors. More precisely, if we define a new coordinate system $`\{\tilde q^i\}`$ by $`\tilde q^i = \alpha q^i`$, with $`\alpha`$ a constant factor, then
-- Covariant bases vectors scale "with" the coordinates, meaning the new covariant bases $`\{\tilde b^i\}`$ verifies $`\tilde b^i = \alpha b^i`$ (hence the name *covariant bases*);
-- Contravariant bases vectors scale "in opposition with" the coordinates, meaning $`\tilde b_i = \alpha^{-1} b_i`$ (hence the name *contravariant bases*).
-
-Given that $`A`$ must remain unchanged under such transformation of the coordinate system, its components in the covariant or contravariant vector bases must scale inversely to the considered bases, i.e. a contravariant component $`A_i`$ must be multiplied with a covariant vector bases $`b^i`$ in the expression of $`A`$.
+- $`\{A_i\}`$ are the components of $`A`$ in *the covariant bases*. We call these *the covariant components* of $`A`$;
+- $`\{A^i\}`$ are the components of $`A`$ in *the contravariant bases*. We call these *the contravariant components* of $`A`$;
 
 ## Metric tensor
 
@@ -150,7 +142,7 @@ Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{
 A = A^i\{p\} b_i = A_i\{p\} b^i = A^i\{q\} c_i = A_i\{q\} c^i, 
 ```
 
-where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th covariant (resp. contravariant) component of $`A`$ expressed in the vector bases associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th covariant (resp. contravariant) component of $`A`$ expressed in the vector bases associated with coordinates $`\{q^i\}`$. We have
+where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector bases associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector bases associated with coordinates $`\{q^i\}`$. We have
 
 ```math
 A^i\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\} A^j\{q\}. 
