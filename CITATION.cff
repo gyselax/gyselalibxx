@@ -15,15 +15,15 @@ authors:
     orcid: 'https://orcid.org/0000-0002-3469-2338'
   - given-names: Virginie
     family-names: Grandgirard
-    orcid: 'https://orcid.org/0000-0001-7821-9107'
     affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0000-0001-7821-9107'
   - given-names: Yuuichi
     family-names: Asahi
-    orcid: 'https://orcid.org/0000-0002-9997-1274'
     affiliation: >-
       Maison de la Simulation, CEA, CNRS, Univ. Paris-Sud,
       UVSQ, Université Paris-Saclay, F-91191 Gif-sur-Yvette,
       France
+    orcid: 'https://orcid.org/0000-0002-9997-1274'
   - given-names: Julien
     family-names: Bigot
     affiliation: >-
@@ -51,8 +51,8 @@ authors:
     family-names: Legouix
   - given-names: Etienne
     family-names: Malaboeuf
-    orcid: 'https://orcid.org/0009-0007-3320-1406'
     affiliation: 'CINES, France'
+    orcid: 'https://orcid.org/0009-0007-3320-1406'
   - given-names: Dorian
     family-names: Midou
     affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
@@ -64,26 +64,26 @@ authors:
     family-names: Peybernes
     affiliation: 'SCITAS, EPFL, CH-1015 Lausanne, Switzerland'
     orcid: 'https://orcid.org/0009-0000-4011-9047'
-  - orcid: 'https://orcid.org/0009-0003-5852-7446'
-    given-names: Matthieu
+  - given-names: Matthieu
     family-names: Protais
     affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0009-0003-5852-7446'
   - given-names: Kevin
     family-names: Obrejan
     affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
     orcid: 'https://orcid.org/0000-0002-1906-4181'
   - given-names: Thomas
     family-names: Padioleau
-    orcid: 'https://orcid.org/0000-0001-5496-0013'
     affiliation: >-
       Maison de la Simulation, CEA, CNRS, Univ. Paris-Sud,
       UVSQ, Université Paris-Saclay, F-91191 Gif-sur-Yvette,
       France
-  - affiliation: >-
+    orcid: 'https://orcid.org/0000-0001-5496-0013'
+  - given-names: Pauline
+    family-names: Vidal
+    affiliation: >-
       Max-Planck-Institut für Plasmaphysik, Garching,
       Germany
-    given-names: Pauline
-    family-names: Vidal
     orcid: 'https://orcid.org/0009-0008-7233-6351'
 repository-code: 'https://github.com/gyselax/gyselalibxx'
 url: 'https://gyselax.github.io/gyselalibxx/'
