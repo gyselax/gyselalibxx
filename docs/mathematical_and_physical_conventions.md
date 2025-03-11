@@ -89,7 +89,7 @@ An easy way to get the above formulas right is to remember that the metric tenso
 
 ### Curvilinear to Cartesian
 
-The *Jacobian* $`J`$ associated with the tranformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J_{ij}`$ as 
+The *Jacobian* $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J_{ij}`$ as 
 
 ```math
 J_{ij} = \frac{\partial x^i}{\partial q^j},
