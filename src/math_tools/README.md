@@ -41,6 +41,9 @@ The same computation can be made for the backward and the centred FDM scheme, an
 	Df(x_2) & = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
 	Df(x_3) & = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_3).
 ```
+
+One can check than in the uniform case ($\alpha=\beta$) we recover the well known coefficient $-1/2$ and $1/2$ for the centred case
+and $-3/2$, $2$ and $-1/2$ for the decentred case.
  
 ## Utility tools
 
