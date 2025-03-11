@@ -180,6 +180,8 @@ This quantity can be expressed in the both contravariant $`\{b_i\}`$ and covaria
 \nabla f = \frac{\partial f}{\partial q^i} b^i = g^{ij} \frac{\partial f}{\partial q^j} b_i. 
 ```
 
+Note that the definition that uses the contravariant bases $`\{b_i\}`$ is much more common. 
+
 ### Divergence
 
 **TODO**
