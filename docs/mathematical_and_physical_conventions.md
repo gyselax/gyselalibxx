@@ -107,7 +107,7 @@ Both Jacobian and metric tensor relate to each other as
 G = J^{T}J.
 ```
 
-The Jacobian of a curvilinear coordinate transform can be used to relate the components of a vector expressed in the Cartesian basis $`\{e_i\}`$ to the components of the vector expressed in the contravariant basis $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
+The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian basis $`\{e_i\}`$ to the components of the vector expressed in the contravariant basis $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
 
 ```math
 A = A^i_\text{c} e_i = A^i b_i, 
