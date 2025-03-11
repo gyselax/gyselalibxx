@@ -48,7 +48,7 @@ we have $`b_i(x^1, \ldots , x^N)`$ and $`b^i(x^1, \ldots , x^N)`$. A geometrical
 ![Geometrical interpretation of the contravariant and covariant bases vectors](./curvilinear_coordinates_contravariant_covariant_bases.png)
 
 
-Note that neither contravariant nor covariant bases form orthonormal vector sets in general, but the following property holds 
+Note that neither contravariant nor covariant bases form orthonormal vector sets in general. Additionally note that in the case of Cartesian coordinates covariant and contravariant bases are the same. In general, the following property holds 
 ```math
 b^i \cdot b_j = \delta_{ij}, 
 ```
