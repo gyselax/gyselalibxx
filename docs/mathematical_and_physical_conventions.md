@@ -17,7 +17,7 @@ Let us consider a system of coordinates denoted by $`\{q^i\}_{ i \in [1, N]}`$, 
 q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 ```
 
-The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinates curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. As their name suggest, coordinates curves do not form straight lines in general.
+The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinate curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. As their name suggests, coordinate curves do not form straight lines in general. An illustration for these geometrical concepts is given in the following figure.
 
 ![Coordinate curves, surfaces and axes in a three-dimensional space](./curvilinear_coordinates_def.png "")
 
@@ -118,7 +118,7 @@ Both Jacobian and metric tensor relate to each other as
 G = J^{T}J.
 ```
 
-The Jacobian of a curvilinear coordinate transform can be used to relate the components of a vector expressed in the Cartesian bases $`\{e_i\}`$ to the components of the vector expressed in the contravariant bases $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
+The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian bases $`\{e_i\}`$ to the components of the vector expressed in the contravariant bases $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
 
 ```math
 A = A^i_\text{c} e_i = A^i b_i, 
