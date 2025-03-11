@@ -27,7 +27,7 @@ The position of any point in space can be written as
 \overrightarrow{r} = x^i e_i,
 ```
 
-where we introduced the unit vectors of the orthonormal Cartesian bases $`\{e_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation.
+where we introduced the unit vectors of the orthonormal Cartesian bases $`\{e_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
 
 ## Contravariant and covariant bases
 Let us define the *contravariant bases* $`\{b_i\}`$ associated to the $`\{q^i\}`$ coordinates by
