@@ -17,7 +17,7 @@ Let us consider a system of coordinates denoted by $`\{q^i\}_{ i \in [1, N]}`$, 
 q^i = q^i(x^1, \ldots , x^N) \quad \forall i \in [1, N].
 ```
 
-The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinates curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. **TODO ADD IMAGE**. As their name suggest, coordinates curves do not form straight lines in general. The position of any point in space can be written as
+The surface defined by $`q^i = \text{constant}`$ is called a *coordinate surface*, the intersection of these surfaces define *coordinate curves*. A *coordinate axis* is locally defined as the axis tangent to a given coordinate curve. **TODO ADD IMAGE**. As their name suggests, coordinate curves do not form straight lines in general. The position of any point in space can be written as
 
 ```math
 \mathbf{r} = x^i e_i,
