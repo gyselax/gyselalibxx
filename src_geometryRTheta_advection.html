@@ -112,7 +112,7 @@ Studied equation</h1>
 \[\partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,
 \]
 </p>
-<p> with \(f(0,x,y) = f_0(x,y)\) and <em>A</em> the advection field.</p>
+<p>with \(f(0,x,y) = f_0(x,y)\) and <em>A</em> the advection field.</p>
 <p><b>We want to solve it on a polar grid so we have:</b> \((t,x,y) = (t,x(r,\theta),y(r,\theta))\).</p>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Backward_Semi-Lagrangian_method"></a>
 Backward Semi-Lagrangian method</h1>
@@ -120,14 +120,14 @@ Backward Semi-Lagrangian method</h1>
 \[\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y))
 \]
 </p>
-<p> with:  </p><p class="formulaDsp">
+<p>with:  </p><p class="formulaDsp">
 \[\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\
 \partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\
 X(s; s, x, y) = x,\\
 Y(s; s, x, y) = y.
 \]
 </p>
-<p> So to compute the advected function at the next time step,</p><ul>
+<p>So to compute the advected function at the next time step,</p><ul>
 <li>we compute the characteristics' feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh point \((x_i, y_j)\) with a time integration method ;</li>
 <li>we interpolate the function \(f(t = t^n)\) on the characteristics' feet. The property ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
@@ -206,7 +206,7 @@ Advection domain</h1>
 \[ \mathcal{G} : (r,\theta)_{i,j} \mapsto  (x,y)_{i,j} = (r\cos(\theta), r\sin(\theta))_{i,j}. 
 \]
 </p>
-<p> Then the four previous steps become</p><ul>
+<p>Then the four previous steps become</p><ul>
 <li>calculate the mesh points in the pseudo-Cartesian domain using \(\mathcal{G}\);</li>
 <li>calculate the advection field \(A\) in the pseudo-Cartesian domain using the Jacobian matrix of \((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\);</li>
 <li>calculate the characteristics' feet in the pseudo_Cartesian domain;</li>
@@ -222,11 +222,11 @@ Advection Field</h1>
 \[\partial_t f + A_x \partial_x f + A_y \partial_y f = 0.
 \]
 </p>
-<p> The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,  </p><p class="formulaDsp">
+<p>The <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,  </p><p class="formulaDsp">
 \[A = (A_x, A_y) \quad \text{or} \quad A = (A_r, A_\theta).
 \]
 </p>
-<p> The advection field can be computed thanks to the <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>).</p>
+<p>The advection field can be computed thanks to the <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>).</p>
 <ul>
 <li>If the advection field is directly given along the physical domain axes, no treatment is needed in the <a class="el" href="classBslAdvectionRTheta.html" title="Define an advection operator on 2D  index range.">BslAdvectionRTheta</a> operator.</li>
 <li>If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain.</li>
@@ -235,11 +235,11 @@ Advection Field</h1>
 \[A = - E \wedge e_z = -\nabla \phi \wedge e_z.
 \]
 </p>
-<p> In <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>, we show that  </p><p class="formulaDsp">
+<p>In <a class="el" href="src_geometryRTheta_advection_field.html">Advection Field finder</a>, we show that  </p><p class="formulaDsp">
 \[\nabla_{xy} \phi = J \nabla_{r\theta} \phi,
 \]
 </p>
-<p> with <em>J</em> the Jacobian matrix (and the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\)).</p>
+<p>with <em>J</em> the Jacobian matrix (and the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\)).</p>
 <p>It gives the following relation for the electric field  </p><p class="formulaDsp">
 \[\begin{bmatrix}
     E_x \\
@@ -277,7 +277,7 @@ J^{-T}
 \end{bmatrix}.
 \]
 </p>
-<p> So, from the advection field along the logical domain axis, we multiply by \(J^{-1}\) to get the advection field along the physical domain axis.</p>
+<p>So, from the advection field along the logical domain axis, we multiply by \(J^{-1}\) to get the advection field along the physical domain axis.</p>
 <h1><a class="anchor" id="autotoc_md53"></a>
 Unit tests</h1>
 <p>The test of the advection operator are implemented in the <code>tests/geometryRTheta/advection_rtheta/</code> folder (<a class="el" href="tests_geometryRTheta_advection_rtheta.html">Tests on the 2D polar advection operator</a>).</p>

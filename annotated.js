@@ -133,6 +133,7 @@ var annotated =
     [ "CartesianToBarycentric", "classCartesianToBarycentric.html", "classCartesianToBarycentric" ],
     [ "CartesianToCircular", "classCartesianToCircular.html", "classCartesianToCircular" ],
     [ "CartesianToCzarny", "classCartesianToCzarny.html", "classCartesianToCzarny" ],
+    [ "CentralFDMPartialDerivative", "classCentralFDMPartialDerivative.html", "classCentralFDMPartialDerivative" ],
     [ "ChargeDensityCalculator", "classChargeDensityCalculator.html", "classChargeDensityCalculator" ],
     [ "CircularToCartesian", "classCircularToCartesian.html", "classCircularToCartesian" ],
     [ "CollisionConfiguration", "classCollisionConfiguration.html", "classCollisionConfiguration" ],

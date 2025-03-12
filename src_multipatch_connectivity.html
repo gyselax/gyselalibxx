@@ -161,11 +161,11 @@ Multi-patch domain</h4>
 \[\Omega = \dot{\bigcup}_{i=1}^K \Omega^{(i)}.
 \]
 </p>
-<p> For every patch \(\Omega^{(i)}\) we have a mapping  </p><p class="formulaDsp">
+<p>For every patch \(\Omega^{(i)}\) we have a mapping  </p><p class="formulaDsp">
 \[F^{(i)}: [a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}] \rightarrow \Omega^{(i)}, 
 \]
 </p>
-<p> where the rectangular domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}]\) defines the logical coordinates for the patch. We call this logical coordinate domain the <em>logical patch</em>.</p>
+<p>where the rectangular domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}]\) defines the logical coordinates for the patch. We call this logical coordinate domain the <em>logical patch</em>.</p>
 <h4><a class="anchor" id="autotoc_md78"></a>
 Edges</h4>
 <p>So we obtain four logical edges  </p><p class="formulaDsp">
@@ -175,7 +175,7 @@ Edges</h4>
 \{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}] 
 \]
 </p>
-<p> In the code, we define edges as follows. Every edge of a logical patch is identified via the patch it belongs to, the dimension and whether it is at the front or the back of the domain. So e.g.the edge \([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>FRONT</code>. \([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>BACK</code> and \(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) would be identified with patch \(i\), dimensions <code>Xi</code> and <code>BACK</code>.</p>
+<p>In the code, we define edges as follows. Every edge of a logical patch is identified via the patch it belongs to, the dimension and whether it is at the front or the back of the domain. So e.g.the edge \([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>FRONT</code>. \([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>BACK</code> and \(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) would be identified with patch \(i\), dimensions <code>Xi</code> and <code>BACK</code>.</p>
 <h4><a class="anchor" id="autotoc_md79"></a>
 Sticking and Coordinate Transformation</h4>
 <p>Any edge can then be associated with an edge on another patch. This corresponds to the 'sticking'. So for a different patch \(\Omega^{(j)}\), we have the logical coordinate domain \([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\). If we want to stick patch \(i\) to patch \(j\), we have to determine the edges that are identified and how they are identified. The way that they are identified is mathematically determined via the coordinate transformation from one edge to the other. Since the transformations are supposed to be affine and bijective, there are only two options: the transformation can be order preserving or order reversing (this corresponds to the orientation of the physical edge where two parametrisations coming from the two patches can have either the same or the opposite orientation respectively).</p>
@@ -183,7 +183,7 @@ Sticking and Coordinate Transformation</h4>
 \[t \mapsto a_x^{(j)} + \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 \]
 </p>
-<p> If the transformation is order-reversing (i.e. the orientations of the parametrisations of the physical edge are opposite), then it is  </p><p class="formulaDsp">
+<p>If the transformation is order-reversing (i.e. the orientations of the parametrisations of the physical edge are opposite), then it is  </p><p class="formulaDsp">
 \[t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 \]
 </p>
@@ -230,7 +230,7 @@ Mappings</h3>
 \[    \mathcal{F}^{(i)}: \hat{\Omega}^{(i)} \rightarrow \Omega^{(i)}
 \]
 </p>
-<p> (The \(\hat{\Omega}^{(i)}\) refers to the above domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]\).) The domain \(\hat{\Omega}^{(i)}\) is called the <em>logical domain</em> and \(\Omega^{(i)}\) the <em>physical domain</em>.</p>
+<p>(The \(\hat{\Omega}^{(i)}\) refers to the above domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]\).) The domain \(\hat{\Omega}^{(i)}\) is called the <em>logical domain</em> and \(\Omega^{(i)}\) the <em>physical domain</em>.</p>
 <h3><a class="anchor" id="autotoc_md83"></a>
 Global analytical invertible mapping</h3>
 <p>We assume that there is a global mapping analytically invertible such that  </p><p class="formulaDsp">
@@ -240,7 +240,7 @@ Global analytical invertible mapping</h3>
         \text{and } \hat{\Omega} = \bigcup_{i = 0}^{K} \hat{\Omega}^{(i)} .\\
 \]
 </p>
-<p> We can easily apply \((\mathcal{F})^{-1}\) to identify the equivalent logical coordinate of a given physical coordinate \(x\in\Omega\). We check then for each patch if the logical coordinate is on a rectangular logical patch \(\hat{\Omega}^{(i)}\), i.e. if \((\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}\).</p>
+<p>We can easily apply \((\mathcal{F})^{-1}\) to identify the equivalent logical coordinate of a given physical coordinate \(x\in\Omega\). We check then for each patch if the logical coordinate is on a rectangular logical patch \(\hat{\Omega}^{(i)}\), i.e. if \((\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}\).</p>
 <h4><a class="anchor" id="autotoc_md84"></a>
 Onion shape geometry</h4>
 <p>We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches. The patches are defined on the same dimensions <code><a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a></code> and <code><a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a></code>. The logical grid is then split into different logical grids, one for each patch. We can then define one global mapping from the (<code><a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a></code>, <code><a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a></code>) domain to the (<code><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></code>, <code><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></code>) domain for all the patches. This mapping also needs to be defined from the physical domain to the logical domain.</p>

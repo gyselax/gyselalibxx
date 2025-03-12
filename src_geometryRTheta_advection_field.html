@@ -123,7 +123,7 @@ E = - \nabla  \phi, \\
 \right.
 \]
 </p>
-<p> with \(\rho\) the density, \(\phi\) the electrostatic potential and \(E\) the electrical field.</p>
+<p>with \(\rho\) the density, \(\phi\) the electrostatic potential and \(E\) the electrical field.</p>
 <p>The <a class="el" href="classAdvectionFieldFinder.html" title="Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.">AdvectionFieldFinder</a> computes the advection field \(A\) from the electrical field \(\phi\) returned by the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a>. It has two types of <code>operator()</code>:</p><ul>
 <li>one returning the advection field along the axis of the physical domain: \(A = (A_x, A_y)\)</li>
 <li>and the another returning the advection field along the axis of the logical domain: \(A = (A_r, A_\theta)\).</li>
@@ -151,7 +151,9 @@ J^{-T}
 \end{bmatrix}
 \]
 </p>
- with \(J\) the Jacobian matrix of the mapping \(\mathcal{F}: (r,\theta)\mapsto(x,y)\). Then the electric field is given by  <p class="formulaDsp">
+</li>
+</ul>
+<p>with \(J\) the Jacobian matrix of the mapping \(\mathcal{F}: (r,\theta)\mapsto(x,y)\). Then the electric field is given by  </p><p class="formulaDsp">
 \[E = -\nabla \phi
 = 
 \begin{bmatrix}
@@ -160,7 +162,7 @@ J^{-T}
 \end{bmatrix} 
 \]
 </p>
- and the advection field by  <p class="formulaDsp">
+<p>and the advection field by  </p><p class="formulaDsp">
 \[A = E\wedge e_z 
 = 
 \begin{bmatrix}
@@ -174,14 +176,15 @@ J^{-T}
 \end{bmatrix}. 
 \]
 </p>
-</li>
+<ul>
 <li>If \(r \leq \varepsilon\), we linearise. The method is detailed in <a class="el" href="src_geometryRTheta_advection_field.html#zoni">Zoni et al. (2019)</a>. We use only the derivatives along \(r\) at two linearly independent directions of \(\theta\) : \(\theta_1\) and \(\theta_2\)  <p class="formulaDsp">
 \[\partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
 \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2).
 \]
 </p>
- From these equations, we deduce the (unique) values of \(\partial_x\phi\) and \(\partial_y\phi\) at \((x,y) = (0,0)\),</li>
+</li>
 </ul>
+<p>From these equations, we deduce the (unique) values of \(\partial_x\phi\) and \(\partial_y\phi\) at \((x,y) = (0,0)\),</p>
 <p class="formulaDsp">
 \[\begin{bmatrix}
     \partial_x \phi (0, \theta) \\
@@ -198,13 +201,13 @@ J^{-T}
 \end{bmatrix}.
 \]
 </p>
-<p> Then we compute \(E\) at \((x,y) = (0,0)\) and \((x,y) = \mathcal{F}(\varepsilon,\theta)\) \(\forall \theta\) (for \(\varepsilon\neq 0\), we use the Jacobian matrix as previously) and we linearise</p>
+<p>Then we compute \(E\) at \((x,y) = (0,0)\) and \((x,y) = \mathcal{F}(\varepsilon,\theta)\) \(\forall \theta\) (for \(\varepsilon\neq 0\), we use the Jacobian matrix as previously) and we linearise</p>
 <p class="formulaDsp">
 \[E_x(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E_x(0, \theta) + \frac{r}{\varepsilon} E_x(\varepsilon, \theta), \\
 E_y(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E_y(0, \theta) + \frac{r}{\varepsilon} E_y(\varepsilon, \theta), 
 \]
 </p>
-<p> As previously, we compute the advection field by  </p><p class="formulaDsp">
+<p>As previously, we compute the advection field by  </p><p class="formulaDsp">
 \[A = E\wedge e_z 
 = 
 \begin{bmatrix}
@@ -218,7 +221,7 @@ E_y(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E_y(0, \theta) + \fra
 \end{bmatrix}. 
 \]
 </p>
-<p> (In the code, we chose \(\theta_1 = \frac{\pi}{4}\) and \(\theta_2  = - \frac{\pi}{4}\), and \(\varepsilon = 10^{-12}\).)</p>
+<p>(In the code, we chose \(\theta_1 = \frac{\pi}{4}\) and \(\theta_2  = - \frac{\pi}{4}\), and \(\varepsilon = 10^{-12}\).)</p>
 <h3><a class="anchor" id="autotoc_md57"></a>
 Advection field along the logical domain axis</h3>
 <p>Firstly, the derivatives \(\partial_r \phi\) and \(\partial_\theta \phi\) are also computed here.</p>
@@ -231,7 +234,7 @@ General coordinates system</h4>
 \[\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j
 \]
 </p>
-<p> with</p><ul>
+<p>with</p><ul>
 <li>\(J\) the Jacobian matrix associated with the mapping function of the system \(\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)\),</li>
 <li>\(G = J^T J = [g_{ij}]_{ij}\) the metric tensor,</li>
 <li>\(G^{-1} = [g^{ij}]_{ij}\) the inverse metric tensor</li>
@@ -246,7 +249,7 @@ G^{-1}
 \end{bmatrix}
 \]
 </p>
-<p> So, for an invertible matrix, we also have the relation  </p><p class="formulaDsp">
+<p>So, for an invertible matrix, we also have the relation  </p><p class="formulaDsp">
 \[\begin{bmatrix}
     \partial_{x_1} f \\
     \partial_{x_2} f \\
@@ -255,7 +258,7 @@ G^{-1}
 G \nabla f. 
 \]
 </p>
-<p> From the relation  </p><p class="formulaDsp">
+<p>From the relation  </p><p class="formulaDsp">
 \[\begin{bmatrix}
     \partial_{y_1} f \\
     \partial_{y_2} f \\
@@ -268,11 +271,11 @@ J^{-T}
 \end{bmatrix}, 
 \]
 </p>
-<p> we deduce the following relation for invertible case  </p><p class="formulaDsp">
+<p>we deduce the following relation for invertible case  </p><p class="formulaDsp">
 \[\nabla_{y_1, y_2} f = J \nabla_{x_1, x_2} f,
 \]
 </p>
-<p> with \(\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T\) and \(\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j\).</p>
+<p>with \(\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T\) and \(\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j\).</p>
 <h4><a class="anchor" id="autotoc_md59"></a>
 Application to the advection field</h4>
 <ul>
@@ -291,7 +294,9 @@ Application to the advection field</h4>
 \end{bmatrix}.
 \]
 </p>
- Then the advection field is given by  <p class="formulaDsp">
+</li>
+</ul>
+<p>Then the advection field is given by  </p><p class="formulaDsp">
 \[A
 = E \wedge e_z
 = 
@@ -301,8 +306,7 @@ Application to the advection field</h4>
 \end{bmatrix}.
 \]
 </p>
- Warning, the matrix \(G^{-1}\) is ill-defined for \(r = 0\).</li>
-</ul>
+<p>Warning, the matrix \(G^{-1}\) is ill-defined for \(r = 0\).</p>
 <p><em>Example: circular mapping:</em>  </p><p class="formulaDsp">
 \[G^{-1}
 = 
@@ -312,7 +316,7 @@ Application to the advection field</h4>
 \end{bmatrix}.
 \]
 </p>
-<p> In the code, the O-point is differently treated. The domain is split between a domain without the O-point ( \((0,\theta), \forall \theta\)) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the <a class="el" href="src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case">Advection field along the physical domain axis</a> section.</p>
+<p>In the code, the O-point is differently treated. The domain is split between a domain without the O-point ( \((0,\theta), \forall \theta\)) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the <a class="el" href="src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case">Advection field along the physical domain axis</a> section.</p>
 <h1><a class="anchor" id="autotoc_md60"></a>
 References</h1>
 <p><a class="anchor" id="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the 

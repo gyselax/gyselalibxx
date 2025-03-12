@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: Initialisation on (x,y) geometry</title>
+<title>Gyselalib++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('src_geometryXY_initialisation.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classCentralFDMPartialDerivative.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -102,24 +102,22 @@ $(document).ready(function(){initNavTree('src_geometryXY_initialisation.html',''
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Initialisation on (x,y) geometry</div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Describes different initial conditions for the simulations in \((x,y)\) geometry.</p>
-<p>(See more on the simulation in <a class="el" href="simulations_geometryXY.html">Simulations in (x, y) geometry</a>.)</p>
-<h1><a class="anchor" id="src_geometryXY_initialisation__Kelvin-Helmholtz_instability_test_case"></a>
-Kelvin-Helmholtz instability test case</h1>
-<p>For this test case, the <a class="el" href="classKelvinHelmholtzInstabilityInitialisation.html" title="Initialise the allfdistribu function.">KelvinHelmholtzInstabilityInitialisation</a> sets the initial conditions at  </p><p class="formulaDsp">
-\[    f(0, x, y) = f_{\text{eq}}(x,y) + \varepsilon\cos(kx),  \\
-    f_{\text{eq}}(x,y) = \sin(y)
-\]
-</p>
-<p>with \(\varepsilon = 0.015\) the amplitude of perturbation and \(k = 2\pi/ L_x = 0.5\) the mode of the perturbation.</p>
-<p>We suppose the domain periodic on \(x\) and \(y\).</p>
-<p>These are applied in the guiding-centre equations. See in <a class="el" href="simulations_geometryXY_guiding_centre.html">Guiding centre (X,Y) simulation</a>. </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>This is the complete list of members for <a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html#abda1e7b8313ded22ed32507b75c6c5ca">DConstFieldVal</a> typedef</td><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIPartialDerivative.html#a0eebcf0be6d2d97bc4423109ac133aa8">DerivativeDirection</a> typedef</td><td class="entry"><a class="el" href="classIPartialDerivative.html">IPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html#a4ea34d768feb51f42929d53362f4e84f">DFieldVal</a> typedef</td><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIPartialDerivative.html#a14216da88c913a32250c7c8afb17d10a">GridDerivativeDirection</a> typedef</td><td class="entry"><a class="el" href="classIPartialDerivative.html">IPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html#ad7bc2b31afa1bda0aab494e588cd2637">IdxRangeBatch</a> typedef</td><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html#a382a8ad2b6ef73e1342d9fde5b7133fe">IdxRangeDeriv</a> typedef</td><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html#ac1918dd290bb97fc43c7f8296ab2b534">IdxRangeFieldVal</a> typedef</td><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html#ac3d3391728c48093f8b33ac7df81f8f7">operator()</a>(DFieldVal dfieldval_dxi, DConstFieldVal fieldval) const final</td><td class="entry"><a class="el" href="classCentralFDMPartialDerivative.html">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

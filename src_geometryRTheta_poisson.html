@@ -115,7 +115,7 @@ in the 5D GYSELA Code". December 2022.)</p>
 \[L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho
 \]
 </p>
-<p> with the boundary condition \(\phi = 0\), on \(\partial \Omega\).</p>
+<p>with the boundary condition \(\phi = 0\), on \(\partial \Omega\).</p>
 <p>To solve this equation, the <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html" title="Define a polar PDE solver for a Poisson-like equation.">PolarSplineFEMPoissonLikeSolver</a> uses a finite element method on the B-splines.</p>
 <h3><a class="anchor" id="autotoc_md67"></a>
 B-splines FEM</h3>
@@ -139,13 +139,13 @@ Weak formulation</h4>
 \[\int_{\Omega} \lbrack \beta(r) \phi(r,\theta) \hat{B}_l(r,\theta) + \alpha(r) \nabla \phi(r,\theta) \cdot  \nabla \hat{B}_l(r,\theta) \rbrack |det(J_{\mathcal{F}}(r,\theta))| dr d\theta =  \int_{\Omega} \rho(r,\theta) \hat{B}_l(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta
 \]
 </p>
-<p> with \(\{\hat{B}_l\}_l\) the B-splines basis.</p>
+<p>with \(\{\hat{B}_l\}_l\) the B-splines basis.</p>
 <p>Written as matrix form, it gives</p>
 <p class="formulaDsp">
 \[(M + S) \hat{\phi} = M \hat{\rho},
 \]
 </p>
-<p> with</p><ul>
+<p>with</p><ul>
 <li>the mass matrix, \(M_{i,j} =  \int_{\Omega} \beta(r,\theta) \hat{B}_i(r,\theta)\hat{B}_j(r,\theta) |det(J_{\mathcal{F}}(r,\theta))| dr d\theta\),</li>
 <li>the stiffness matrix, \(S_{i,j} =  \int_{\Omega} \alpha(r) \left[\sum_{\xi_1\in[r,\theta]} \sum_{\xi_2\in[r,\theta]} \partial_{\xi_1}\hat{B}_i(r,\theta) \partial_{\xi_2}\hat{B}_j(r,\theta) g^{\xi_1, \xi_2}\right] |det(J_{\mathcal{F}}(r,\theta))| dr d\theta\)<ul>
 <li>with \(g^{\xi_1, \xi_2}\), the scalar product between the unit vector in \(\xi_1\) and the unit vector in \(\xi_2\).</li>

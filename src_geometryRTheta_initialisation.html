@@ -138,16 +138,16 @@ Dispersion relation</h3>
 \[\left(\frac{\omega}{\omega_D} \right)^2 - b_l \frac{\omega}{\omega_D} + c_l = 0
 \]
 </p>
-<p> with  </p><p class="formulaDsp">
+<p>with  </p><p class="formulaDsp">
 \[b_l \left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) = l\left[ 1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \left( 1 + \frac{R_1^2}{R_2^2} \right)\right]\left[ 1 - \frac{W_1^{2l}}{W_2^{2l}} \right] + \left(1 - \frac{R_1^{2l}}{R_2^{2l}} \right) \left(\frac{R_2^{2l}}{W_2^{2l}} - \frac{W_1^{2l}}{R_1^{2l}} \right)
 \]
 </p>
-  <p class="formulaDsp">
+<p class="formulaDsp">
 \[ c_l \left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) = l^2 \frac{\omega_q }{\omega_D} \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2}\right]\left( 1 - \frac{W_1^{2l}}{W_2^{2l}}  \right) -l \frac{\omega_q }{\omega_D} \left( 1 - \frac{W_1^{2l}}{R_2^{2l}} \right)\left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) 
 \\ \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad + l \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2} \right]\left( 1 - \frac{R_1^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right) - \left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right)  \left( 1 - \frac{R_1^{2l}}{R_2^{2l}} \right)
 \]
 </p>
-<p> The imaginary part of the dispersion relation solution is given by <a class="el" href="classDiocotronDensitySolution.html#a59c17bab82ed59b39b68750be2f81b62" title="Get the slope of the perturbation.">DiocotronDensitySolution::get_slope()</a> and its real part by <a class="el" href="classDiocotronDensitySolution.html#a9a485619ee6cbd2ff396ae8fe2a0a1bd" title="Get the frequency of the perturbation.">DiocotronDensitySolution::get_frequency()</a>. The imaginary part of the dispersion relation solution corresponds to the slope of the L2-norm perturbation in the linear phase ( \(t \in [20, 50]\) s for the default parameters).</p>
+<p>The imaginary part of the dispersion relation solution is given by <a class="el" href="classDiocotronDensitySolution.html#a59c17bab82ed59b39b68750be2f81b62" title="Get the slope of the perturbation.">DiocotronDensitySolution::get_slope()</a> and its real part by <a class="el" href="classDiocotronDensitySolution.html#a9a485619ee6cbd2ff396ae8fe2a0a1bd" title="Get the frequency of the perturbation.">DiocotronDensitySolution::get_frequency()</a>. The imaginary part of the dispersion relation solution corresponds to the slope of the L2-norm perturbation in the linear phase ( \(t \in [20, 50]\) s for the default parameters).</p>
 <h1><a class="anchor" id="src_geometryRTheta_initialisation__Vortex_merger"></a>
 Vortex merger</h1>
 <p>More details about the diocotron simulation are given in <a class="el" href="simulations_geometryRTheta_vortex_merger.html">Vortex merger</a>.</p>
@@ -158,7 +158,7 @@ Equilibrium</h3>
 \[    - \nabla \cdot \nabla \phi = \sigma f(\phi),
 \]
 </p>
-<p> with given \(f\) such that \(f&#39;(\phi) \neq 0\). See Edoardo Zoni's article [1] for more details.</p>
+<p>with given \(f\) such that \(f&#39;(\phi) \neq 0\). See Edoardo Zoni's article [1] for more details.</p>
 <p>The algorithm for given initial data \((\sigma^0, \phi^0)\) is the following:</p><ul>
 <li>compute the density: \(\rho^{i} = \sigma^{i-1} f(\phi^{i-1})\),</li>
 <li>compute a temporary electrical potential: \(- \nabla\cdot\nabla \phi_*^{i} = \rho^i\),</li>

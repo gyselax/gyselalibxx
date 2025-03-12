@@ -114,7 +114,7 @@ Equations</h1>
     E(t, x, y) =  - \nabla \phi(t, x, y).
 \]
 </p>
-<p> <b>Remark:</b> the advection field of the advection equation is given by \(\frac{E\wedge B}{|B|^2} = E(t, x, y)\wedge e_z\) with \(B\) the magnetic field supposed of norm 1, (and \(e_z\) a vector perpendicular to the \((x,y)\) plane in the direct direction).</p>
+<p><b>Remark:</b> the advection field of the advection equation is given by \(\frac{E\wedge B}{|B|^2} = E(t, x, y)\wedge e_z\) with \(B\) the magnetic field supposed of norm 1, (and \(e_z\) a vector perpendicular to the \((x,y)\) plane in the direct direction).</p>
 <h3><a class="anchor" id="autotoc_md38"></a>
 Operators</h3>
 <p>The simulations uses the following operators:</p>
@@ -144,7 +144,7 @@ Test case: Kelvin-Helmholtz instability test case</h3>
     f_{\text{eq}}(x,y) = \sin(y)
 \]
 </p>
-<p> with \(\varepsilon = 0.015\) the amplitude of perturbation and \(k = 2\pi/ L_x = 0.5\) the mode of the perturbation.</p>
+<p>with \(\varepsilon = 0.015\) the amplitude of perturbation and \(k = 2\pi/ L_x = 0.5\) the mode of the perturbation.</p>
 <p>See more in <a class="el" href="src_geometryXY_initialisation.html">Initialisation on (x,y) geometry</a>.</p>
 <h3><a class="anchor" id="autotoc_md44"></a>
 Results treatments - diagnosis</h3>
@@ -158,14 +158,18 @@ Results treatments - diagnosis</h3>
 \[d\mathcal{M}: t\mapsto \int_{\Omega} |E(t)|^2 - \int_{\Omega} |E_0|^2
 \]
 </p>
- The command line is given by <div class="fragment"><div class="line">python3 energy_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
-</div><!-- fragment --></li>
+</li>
+</ul>
+<p>The command line is given by </p><div class="fragment"><div class="line">python3 energy_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
+</div><!-- fragment --><ul>
 <li><code>mass_conservation.py</code> plots the evolution of the mass of the system along the simulation:  <p class="formulaDsp">
 \[d\mathcal{W}: t\mapsto \int_{\Omega} f(t) - \int_{\Omega} f_0
 \]
 </p>
- The command line is given by <div class="fragment"><div class="line">python3 mass_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
-</div><!-- fragment --></li>
+</li>
+</ul>
+<p>The command line is given by </p><div class="fragment"><div class="line">python3 mass_conservation.py --name=&lt;name_file_to_save&gt; --folder=&lt;path_to_output&gt;</div>
+</div><!-- fragment --><ul>
 <li><code>plot_individual_curve.py</code> plots the curves of the density \(f\) and the electrostatic potential \(\phi\) for a given time</li>
 </ul>
 <p>The command line is given by </p><div class="fragment"><div class="line">python3 plot_individual_curve.py --name=&lt;name_file_to_save&gt; --time=&lt;given_time&gt; --folder=&lt;path_to_output&gt;</div>
