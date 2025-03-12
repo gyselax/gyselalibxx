@@ -253,8 +253,8 @@ private:
             if (r > m_epsilon) {
                 CoordRTheta const coord_rtheta(r, th);
 
-                Tensor<double, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
-                        = metric_tensor.inverse(coord_rtheta); // inverse tensor metric
+                Tensor<double, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>
+                        inv_G = metric_tensor.inverse(coord_rtheta); // inverse tensor metric
                 std::array<std::array<double, 2>, 2> J; // Jacobian matrix
                 m_mapping.jacobian_matrix(coord_rtheta, J);
 
