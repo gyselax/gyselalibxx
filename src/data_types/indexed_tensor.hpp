@@ -98,10 +98,10 @@ namespace details {
  * @return An IndexedTensor object.
  */
 template <class TypeSeqCharIds, class TensorType, std::size_t... I>
-KOKKOS_FUNCTION auto internal_index(TensorType& tensor, std::index_sequence<I...>)
+KOKKOS_FUNCTION auto internal_index(TensorType const& tensor, std::index_sequence<I...>)
 {
     return IndexedTensor<
-            TensorType,
+            const TensorType,
             ddc::detail::TypeSeq<VectorIndexIdMap<
                     ddc::type_seq_element_t<I, TypeSeqCharIds>::value,
                     typename TensorType::template vector_index_set_t<I>>...>>(tensor);
@@ -152,6 +152,39 @@ KOKKOS_FUNCTION void internal_tensor_mul(
     ((internal_tensor_mul_elem<GlobalTensorIndexIdMap, Is>(result, t...)), ...);
 }
 
+template <char ID, class AllIndexIdMaps>
+KOKKOS_INLINE_FUNCTION void check_id_validity()
+{
+    constexpr std::size_t n_occurrences
+            = char_occurrences_v<ID, index_identifiers_t<AllIndexIdMaps>>;
+    if constexpr (n_occurrences == 2) {
+        using RelevantVectorIndexSets = relevant_vector_index_sets_t<ID, AllIndexIdMaps>;
+        using Set1 = ddc::type_seq_element_t<0, RelevantVectorIndexSets>;
+        using Set2 = ddc::type_seq_element_t<1, RelevantVectorIndexSets>;
+        constexpr bool has_covariant_idx = (is_covariant_vector_index_set_v<Set1>)
+                                           || (is_covariant_vector_index_set_v<Set2>);
+        constexpr bool has_contravariant_idx = (is_contravariant_vector_index_set_v<Set1>)
+                                               || (is_contravariant_vector_index_set_v<Set2>);
+        static_assert(
+                has_covariant_idx && has_contravariant_idx,
+                "Repeated indices should not be associated with two covariant or two contravariant "
+                "indices.");
+        static_assert(
+                std::is_same_v<get_contravariant_dims_t<Set1>, get_contravariant_dims_t<Set2>>,
+                "Cannot sum over incompatible VectorIndexSets.");
+    } else {
+        static_assert(
+                n_occurrences == 1,
+                "You should not have more than two of any one index in an index expression.");
+    }
+}
+
+template <class AllIndexIdMaps, class UniqueIds, std::size_t... Is>
+KOKKOS_INLINE_FUNCTION void check_all_id_validity(std::index_sequence<Is...>)
+{
+    ((check_id_validity<ddc::type_seq_element_t<Is, UniqueIds>::value, AllIndexIdMaps>()), ...);
+}
+
 } // namespace details
 
 } // namespace tensor_tools
@@ -168,7 +201,7 @@ KOKKOS_FUNCTION void internal_tensor_mul(
  * @return An IndexedTensor object.
  */
 template <char... ids, class TensorType>
-KOKKOS_FUNCTION auto index(TensorType& tensor)
+KOKKOS_FUNCTION auto index(TensorType const& tensor)
 {
     static_assert(
             sizeof...(ids) == TensorType::rank(),
@@ -199,6 +232,9 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             "A tensor multiplication must be carried out over IndexedTensor objects");
     // Get the TypeSeq of VectorIndexIdMaps describing all the indices which appear in the calculation.
     using AllIndexIdMaps = type_seq_cat_t<typename IndexedTensorType::index_pattern...>;
+    using UniqueIndexIds = type_seq_unique_t<index_identifiers_t<AllIndexIdMaps>>;
+    details::check_all_id_validity<AllIndexIdMaps, UniqueIndexIds>(
+            std::make_index_sequence<ddc::type_seq_size_v<UniqueIndexIds>>());
     // Use the first tensor argument to extract the element type of the result.
     using ElementType = std::tuple_element_t<
             0,
@@ -207,7 +243,7 @@ KOKKOS_FUNCTION auto tensor_mul(IndexedTensorType... tensor_to_mul)
             (std::is_same_v<
                      typename IndexedTensorType::tensor_type::element_type,
                      ElementType> && ...),
-            "All tensors must have the same element type");
+            "All tensors in a tensor_mul must have the same element type.");
     using ResultIndexTypeSeq = non_repeated_indices_t<AllIndexIdMaps>;
     if constexpr (ddc::type_seq_size_v<ResultIndexTypeSeq> == 0) {
         ElementType result = 0.0;
