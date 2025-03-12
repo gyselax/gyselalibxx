@@ -20,16 +20,12 @@ authors:
   - given-names: Yuuichi
     family-names: Asahi
     affiliation: >-
-      Maison de la Simulation, CEA, CNRS, Univ. Paris-Sud,
-      UVSQ, Université Paris-Saclay, F-91191 Gif-sur-Yvette,
-      France
+      Université Paris-Saclay, UVSQ, CNRS, CEA, Maison de la Simulation, 91191, Gif-sur-Yvette, France
     orcid: 'https://orcid.org/0000-0002-9997-1274'
   - given-names: Julien
     family-names: Bigot
     affiliation: >-
-      Maison de la Simulation, CEA, CNRS, Univ. Paris-Sud,
-      UVSQ, Université Paris-Saclay, F-91191 Gif-sur-Yvette,
-      France
+      Université Paris-Saclay, UVSQ, CNRS, CEA, Maison de la Simulation, 91191, Gif-sur-Yvette, France
     orcid: 'https://orcid.org/0000-0002-0015-4304'
   - given-names: Peter
     family-names: Donnel
@@ -76,9 +72,7 @@ authors:
   - given-names: Thomas
     family-names: Padioleau
     affiliation: >-
-      Maison de la Simulation, CEA, CNRS, Univ. Paris-Sud,
-      UVSQ, Université Paris-Saclay, F-91191 Gif-sur-Yvette,
-      France
+      Université Paris-Saclay, UVSQ, CNRS, CEA, Maison de la Simulation, 91191, Gif-sur-Yvette, France
     orcid: 'https://orcid.org/0000-0001-5496-0013'
   - given-names: Pauline
     family-names: Vidal
