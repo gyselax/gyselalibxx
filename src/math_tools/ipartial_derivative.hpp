@@ -23,6 +23,13 @@ public:
     /// The type of a constant reference to the field to be differentiated.
     using DConstFieldType = DConstField<IdxRangeBatched>;
 
+    /// The type of the grid on the DerivativeDimension dimension.
+    using GridDerivativeDimension
+            = find_grid_t<DerivativeDimension, ddc::to_type_seq_t<IdxRangeBatched>>;
+
+    /// The index range of the dimension Xi on which the partial derivative is calculated.
+    using IdxRangeDeriv = IdxRange<GridDerivativeDimension>;
+
     /**
      * @brief Compute the partial derivative of a field in a given direction.
      *
