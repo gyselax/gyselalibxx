@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"mpitransposealltoall_8hpp_source.html":[16,0,13,4],
 "multipatch__field_8hpp_source.html":[16,0,14,1,0],
 "multipatch__field__mem_8hpp_source.html":[16,0,14,1,1],
 "multipatch__math__tools_8hpp_source.html":[16,0,14,3,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX6 =
 "structIdxRangeSliceIterator.html#a0d6d96f92a4a45d06b6da3bbacadba5b":[15,88,18],
 "structIdxRangeSliceIterator.html#a186ef24babacb71c2a78f6966d82cdb2":[15,88,2],
 "structIdxRangeSliceIterator.html#a1e37f4a4026b90bd62412946e907e0ad":[15,88,16],
-"structIdxRangeSliceIterator.html#a2fbcfc79ed570291cd4fe9ec34bdec60":[15,88,12]
+"structIdxRangeSliceIterator.html#a2fbcfc79ed570291cd4fe9ec34bdec60":[15,88,12],
+"structIdxRangeSliceIterator.html#a407dc73b77575c1e846ba9c3f3cef165":[15,88,13]
 };

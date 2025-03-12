@@ -1,6 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classPolarSplineEvaluator.html#adf99dc8e8d1141f1881627a6e5218791":[15,170,4],
 "classPolarSplineEvaluator.html#ae4fffa5d618015f463908c3fd9d019f0":[15,170,11],
 "classPolarSplineEvaluator.html#ae6eafb664ed50f902c2a07236d1c062d":[15,170,10],
 "classPolarSplineEvaluator.html#af825f47ac1278302e5dd3ac0d906f09c":[15,170,1],
@@ -42,8 +41,8 @@ var NAVTREEINDEX4 =
 "classQNSolver.html":[15,178],
 "classQNSolver.html#a2472bab9fe832f065531f90c605df7dc":[15,178,3],
 "classQNSolver.html#a866ea0a8cd34e7789d8847aaf963fdf2":[15,178,2],
-"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[15,178,0],
 "classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[15,178,1],
+"classQNSolver.html#a8e24e91f5ed1c4bb590e93eb4f1f81ba":[15,178,0],
 "classQuadrature.html":[15,179],
 "classQuadrature.html#acc3a757e91e2d185ee290c409156fd4f":[15,179,1],
 "classQuadrature.html#ad7645c75af6af6bdf3f2d13eaa7cd6ff":[15,179,2],
@@ -249,5 +248,6 @@ var NAVTREEINDEX4 =
 "classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[15,208,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html":[15,1,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[15,1,2,0],
-"classtensor__tools_1_1IndexedTensor.html":[15,6,4]
+"classtensor__tools_1_1IndexedTensor.html":[15,6,4],
+"classtensor__tools_1_1IndexedTensor.html#a3a4979a7a7ef6e30e2818d6d48e61c00":[15,6,4,1]
 };

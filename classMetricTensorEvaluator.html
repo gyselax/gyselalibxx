@@ -136,9 +136,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a14ceec2cd9deff5904c4d9070967f8fc" id="r_a14ceec2cd9deff5904c4d9070967f8fc"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims_cov, Dims_cov &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#a14ceec2cd9deff5904c4d9070967f8fc">inverse</a> (PositionCoordinate const &amp;coord) const</td></tr>
 <tr class="memdesc:a14ceec2cd9deff5904c4d9070967f8fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse metric tensor associated with the mapping at a given position in space.  <br /></td></tr>
 <tr class="separator:a14ceec2cd9deff5904c4d9070967f8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55437a15b385916e4b02befdad7ab6c8" id="r_a55437a15b385916e4b02befdad7ab6c8"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classMetricTensorEvaluator.html#a963a1d9b3ed9d5fea6fff6f19a9c0ba2">CovariantVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#a55437a15b385916e4b02befdad7ab6c8">to_covariant</a> (<a class="el" href="classMetricTensorEvaluator.html#a7ca6db7787f9a6522e0123f7b00381eb">ContravariantVectorType</a> const &amp;contravariant_vector, PositionCoordinate const &amp;coord) const</td></tr>
-<tr class="memdesc:a55437a15b385916e4b02befdad7ab6c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the covariant vector from the contravariant vector.  <br /></td></tr>
-<tr class="separator:a55437a15b385916e4b02befdad7ab6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class Mapping, class PositionCoordinate&gt;<br />
@@ -260,54 +257,6 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>inverse_metric_tensor A DTensor object containing the value of the inverse of the metric tensor. </dd></dl>
-
-</div>
-</div>
-<a id="a55437a15b385916e4b02befdad7ab6c8" name="a55437a15b385916e4b02befdad7ab6c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55437a15b385916e4b02befdad7ab6c8">&#9670;&#160;</a></span>to_covariant()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Mapping , class PositionCoordinate &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classMetricTensorEvaluator.html#a963a1d9b3ed9d5fea6fff6f19a9c0ba2">CovariantVectorType</a> <a class="el" href="classMetricTensorEvaluator.html">MetricTensorEvaluator</a>&lt; Mapping, PositionCoordinate &gt;::to_covariant </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classMetricTensorEvaluator.html#a7ca6db7787f9a6522e0123f7b00381eb">ContravariantVectorType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>contravariant_vector</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compute the covariant vector from the contravariant vector. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">contravariant_vector</td><td>The metric tensor matrix. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we want to compute the convariant vector.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A vector of the covariant </dd></dl>
 
 </div>
 </div>
