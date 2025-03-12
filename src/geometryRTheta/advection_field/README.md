@@ -159,7 +159,7 @@ J^{-T}
 
 
 #### Application to the advection field
-The gradient is expressed in the *covariant* basis. We expresse the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$. 
+The gradient is expressed in the *covariant* basis. We express the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$. 
 * In the [contravariant basis](#docs_mathematical_and_physical_coneventions) $`(e_r, e_\theta)`$, 
 we compute the electric field,
 ```math
