@@ -68,37 +68,43 @@ public:
         IdxRangeDeriv idxrange_deriv(idxrange_full);
         IdxRangeBatch idxrange_batch(idxrange_full);
 
+        DConstFieldType const field_proxy = m_field;
+
         // front batched derivative
-        IdxDeriv ix(idxrange_deriv.front());
+        IdxDeriv const ix_front(idxrange_deriv.front());
         IdxStepDeriv const step(1);
-        double h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-        double h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
+        double const h1_front = ddc::coordinate(ix_front + step) - ddc::coordinate(ix_front);
+        double const h2_front
+                = ddc::coordinate(ix_front + 2 * step) - ddc::coordinate(ix_front + step);
+        double const c3_front = -h1_front / (h2_front * (h1_front + h2_front));
+        double const c2_front = 1. / h1_front + 1. / h2_front;
+        double const c1_front = -c3_front - c2_front;
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 idxrange_batch,
                 KOKKOS_LAMBDA(IdxBatch ib) {
-                    IdxFull ibx(ib, ix);
-                    double const c3 = -h1 / (h2 * (h1 + h2));
-                    double const c2 = 1. / h1 + 1. / h2;
-                    double const c1 = -c3 - c2;
-                    differentiated_field(ibx) = c1 * m_field(ibx) + c2 * m_field(ib, ix + step)
-                                                + c3 * m_field(ib, ix + 2 * step);
+                    IdxFull ibx(ib, ix_front);
+                    differentiated_field(ibx) = c1_front * field_proxy(ibx)
+                                                + c2_front * field_proxy(ib, ix_front + step)
+                                                + c3_front * field_proxy(ib, ix_front + 2 * step);
                 });
 
         // back batched derivative
-        ix = idxrange_deriv.back();
-        h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-        h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+        IdxDeriv const ix_back = idxrange_deriv.back();
+        double const h1_back = ddc::coordinate(ix_back) - ddc::coordinate(ix_back - step);
+        double const h2_back
+                = ddc::coordinate(ix_back - step) - ddc::coordinate(ix_back - 2 * step);
+        double const c3_back = h1_back / (h2_back * (h1_back + h2_back));
+        double const c2_back = -(h1_back + h2_back) / (h1_back * h2_back);
+        double const c1_back = -c3_back - c2_back;
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 idxrange_batch,
                 KOKKOS_LAMBDA(IdxBatch ib) {
-                    IdxFull ibx(ib, ix);
-                    double const c3 = h1 / (h2 * (h1 + h2));
-                    double const c2 = -(h1 + h2) / (h1 * h2);
-                    double const c1 = -c3 - c2;
-                    differentiated_field(ibx) = c1 * m_field(ibx) + c2 * m_field(ib, ix - step)
-                                                + c3 * m_field(ib, ix - 2 * step);
+                    IdxFull ibx(ib, ix_back);
+                    differentiated_field(ibx) = c1_back * field_proxy(ibx)
+                                                + c2_back * field_proxy(ib, ix_back - step)
+                                                + c3_back * field_proxy(ib, ix_back - 2 * step);
                 });
 
         // central domain batched derivative
@@ -115,8 +121,9 @@ public:
                     double const c3 = h1 / (h2 * (h1 + h2));
                     double const c2 = 1. / h1 - 1. / h2;
                     double const c1 = -c3 - c2;
-                    differentiated_field(ibx) = c1 * m_field(ib, ix - step) + c2 * m_field(ibx)
-                                                + c3 * m_field(ib, ix + step);
+                    differentiated_field(ibx) = c1 * field_proxy(ib, ix - step)
+                                                + c2 * field_proxy(ibx)
+                                                + c3 * field_proxy(ib, ix + step);
                 });
     }
 };
