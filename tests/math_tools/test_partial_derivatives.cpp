@@ -172,7 +172,7 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeDx)
 
     IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
-    CentralFDMPartialDerivative<DFieldXY, X> partial_dx;
-    test_partial_derivative_dx(partial_dx, idxrange_xy);
+    CentralFDMPartialDerivativeCreator<IdxRangeXY, X> const partial_dx_creator;
+    test_partial_derivative_dx(partial_dx_creator, idxrange_xy);
 }
 } // namespace

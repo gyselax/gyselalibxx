@@ -16,79 +16,107 @@
  * using a finite differences calculation of order two. A decentered
  * scheme is used at the boundary, whereas centred finite difference
  * are used inside the domain.
+ *
+ * @tparam IdxRangeFull The index range of the field on which the operator acts 
+ * (with all dimensions, batched and dimension of interest).
+ * @tparam DerivativeDimension The dimension on which the partial derivative is calculated.
  */
-template <class IdxRangeBatched, class DerivativeDimension>
-class CentralFDMPartialDerivative : public IPartialDerivative<IdxRangeBatched, DerivativeDimension>
+template <class IdxRangeFull, class DerivativeDimension>
+class CentralFDMPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
 private:
-    using base_type = IPartialDerivative<IdxRangeBatched, DerivativeDimension>;
+    using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
-public:
     /// The type of a reference to the field to be differentiated.
-    using DFieldType = DField<IdxRangeBatched>;
+    using typename base_type::DFieldType;
 
-    /// The type of the calculated derivative.
-    using typename DFieldType::DConstFieldVal;
+    /// The type of a constant reference to the field to be differentiated.
+    using typename base_type::DConstFieldType;
 
-    /// The index range of the dimension Xi on which the partial derivative is calculated.
-    using IdxRangeDeriv = base_type:: ddc::remove_dims_of_t<IdxRangeFieldVal, GridDerivativeDirection>;
+    /// The index range of the dimension on which the partial derivative is calculated.
+    using typename base_type::IdxRangeDeriv;
 
-    /// The index range of all dimensions except Xi.
+    /// The index range of all dimensions except DerivativeDimension.
     using typename base_type::IdxRangeBatch;
+
+    /// A constant reference to the field to be differentiated
+    DConstFieldType const m_field;
 
 public:
     /**
-    * @brief Compute the partial derivative of @f$ F(X1,..,Xn)@f$ in Xi direction.
-    * For more information about the coefficients, see `./README.md`
-    *
-    * @param[out] dfieldval_dxi Partial derivatives in Xi direction.
-    * @param[in] fieldval Values of the field @f$ F(X1,..,Xn)@f$.
-    */
-    void operator()(DFieldType dfieldval_dxi, DConstFieldVal fieldval) const final
+     * @brief Construct an instance of the class CentralFDMPartialDerivative.
+     *
+     * @param field The field to be differentiated.
+     */
+    explicit CentralFDMPartialDerivative(DConstFieldType const field) : m_field(field) {}
+
+    /**
+     * @brief Compute the partial derivative of a field in a given direction
+     * using a finite difference scheme. For more information about the coefficients,
+     * see `./README.md`
+     *
+     * @param[out] differentiated_field On output, contains values of the differentiated field.
+     */
+    void operator()(DFieldType differentiated_field) const final
     {
-        using IdxFieldVal = typename IdxRangeBatched::discrete_element_type;
+        using IdxFull = typename IdxRangeFull::discrete_element_type;
         using IdxDeriv = typename IdxRangeDeriv::discrete_element_type;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
         using IdxStepDeriv = typename IdxRangeDeriv::discrete_vector_type;
 
-        IdxRangeBatched idxrange_full = get_idx_range(fieldval);
+        IdxRangeFull idxrange_full = get_idx_range(m_field);
         IdxRangeDeriv idxrange_deriv(idxrange_full);
         IdxRangeBatch idxrange_batch(idxrange_full);
 
+        // front batched derivative
+        IdxDeriv ix(idxrange_deriv.front());
         IdxStepDeriv const step(1);
-
+        double h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+        double h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                idxrange_full,
-                KOKKOS_LAMBDA(IdxFieldVal ibx) {
+                idxrange_batch,
+                KOKKOS_LAMBDA(IdxBatch ib) {
+                    IdxFull ibx(ib, ix);
+                    double const c3 = -h1 / (h2 * (h1 + h2));
+                    double const c2 = 1. / h1 + 1. / h2;
+                    double const c1 = -c3 - c2;
+                    differentiated_field(ibx) = c1 * m_field(ibx) + c2 * m_field(ib, ix + step)
+                                                + c3 * m_field(ib, ix + 2 * step);
+                });
+
+        // back batched derivative
+        ix = idxrange_deriv.back();
+        h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+        h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                idxrange_batch,
+                KOKKOS_LAMBDA(IdxBatch ib) {
+                    IdxFull ibx(ib, ix);
+                    double const c3 = h1 / (h2 * (h1 + h2));
+                    double const c2 = -(h1 + h2) / (h1 * h2);
+                    double const c1 = -c3 - c2;
+                    differentiated_field(ibx) = c1 * m_field(ibx) + c2 * m_field(ib, ix - step)
+                                                + c3 * m_field(ib, ix - 2 * step);
+                });
+
+        // central domain batched derivative
+        IdxRangeDeriv idxrange_deriv_central = idxrange_deriv.remove(step, step);
+        IdxRangeFull idxrange_central(idxrange_deriv_central, idxrange_batch);
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                idxrange_central,
+                KOKKOS_LAMBDA(IdxFull ibx) {
                     IdxBatch ib(ibx);
                     IdxDeriv ix(ibx);
-                    double h1, h2, c1, c2, c3;
-                    if (ix == idxrange_deriv.front()) {
-                        h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-                        h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
-                        c3 = -h1 / (h2 * (h1 + h2));
-                        c2 = 1. / h1 + 1. / h2;
-                        c1 = -c3 - c2;
-                        dfieldval_dxi(ibx) = c1 * fieldval(ibx) + c2 * fieldval(ib, ix + step)
-                                             + c3 * fieldval(ib, ix + 2 * step);
-                    } else if (ix == idxrange_deriv.back()) {
-                        h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-                        h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
-                        c3 = h1 / (h2 * (h1 + h2));
-                        c2 = -(h1 + h2) / (h1 * h2);
-                        c1 = -c3 - c2;
-                        dfieldval_dxi(ibx) = c1 * fieldval(ibx) + c2 * fieldval(ib, ix - step)
-                                             + c3 * fieldval(ib, ix - 2 * step);
-                    } else {
-                        h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-                        h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-                        c3 = h1 / (h2 * (h1 + h2));
-                        c2 = 1. / h1 - 1. / h2;
-                        c1 = -c3 - c2;
-                        dfieldval_dxi(ibx) = c1 * fieldval(ib, ix - step) + c2 * fieldval(ibx)
-                                             + c3 * fieldval(ib, ix + step);
-                    }
+                    double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+                    double const h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+                    double const c3 = h1 / (h2 * (h1 + h2));
+                    double const c2 = 1. / h1 - 1. / h2;
+                    double const c1 = -c3 - c2;
+                    differentiated_field(ibx) = c1 * m_field(ib, ix - step) + c2 * m_field(ibx)
+                                                + c3 * m_field(ib, ix + step);
                 });
     }
 };
@@ -101,33 +129,19 @@ public:
  * Typically, the CentralFDMPartialDerivativeCreator is instantiated in the initialisation of the simulation, 
  * and the corresponding CentralFDMPartialDerivative object is instantiated where computing partial derivatives
  * is required. 
- * @tparam Spline1DBuilder A 1D spline builder.
- * @tparam Spline1DEvaluator A 1D spline evaluator.
+ * @tparam IdxRangeFull The index range of the field on which the operator acts 
+ * (with all dimensions, batched and dimension of interest).
+ * @tparam DerivativeDimension The dimension on which the partial derivative is calculated.
  */
-template <class DFieldTypeue, class DerivDirection>
+template <class IdxRangeFull, class DerivativeDimension>
 class CentralFDMPartialDerivativeCreator
-    : public IPartialDerivativeCreator<DFieldValue, DerivDirection>
+    : public IPartialDerivativeCreator<IdxRangeFull, DerivativeDimension>
 {
 private:
-    using DConstFieldType = typename DFieldValue::view_type;
-
-    Spline1DBuilder const& m_builder;
-    Spline1DEvaluator const& m_evaluator;
+    /// The type of a constant reference to the field to be differentiated.
+    using DConstFieldType = DConstField<IdxRangeFull>;
 
 public:
-    /**
-     * @brief Construct an instance of the CentralFDMPartialDerivativeCreator class.
-     * @param[in] builder A 1d spline builder.
-     * @param[in] evaluator A 1d spline evaluator.
-     */
-    CentralFDMPartialDerivativeCreator(
-            Spline1DBuilder const& builder,
-            Spline1DEvaluator const& evaluator)
-        : m_builder(builder)
-        , m_evaluator(evaluator)
-    {
-    }
-
     /**
      * Create a pointer to an instance of the abstract class IPartialDerivative.
      * The type of the returned object will be determined when the pointer is 
@@ -137,13 +151,10 @@ public:
      *
      * @return A pointer to an instance of the IPartialDerivative class.
      */
-    std::unique_ptr<IPartialDerivative<
-            typename Spline1DBuilder::batched_interpolation_domain_type,
-            typename Spline1DBuilder::continuous_dimension_type>>
-    create_instance(DConstFieldType field) const
+    std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
+            DConstFieldType field) const final
     {
-        return std::make_unique<CentralFDMPartialDerivative<
-                Spline1DBuilder,
-                Spline1DEvaluator>>(m_builder, m_evaluator, field);
+        return std::make_unique<CentralFDMPartialDerivative<IdxRangeFull, DerivativeDimension>>(
+                field);
     }
 };

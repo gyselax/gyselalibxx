@@ -124,7 +124,7 @@ public:
     std::unique_ptr<IPartialDerivative<
             typename Spline1DBuilder::batched_interpolation_domain_type,
             typename Spline1DBuilder::continuous_dimension_type>>
-    create_instance(DConstFieldType field) const
+    create_instance(DConstFieldType field) const final
     {
         return std::make_unique<Spline1DPartialDerivative<
                 Spline1DBuilder,
