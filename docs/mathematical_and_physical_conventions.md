@@ -166,7 +166,7 @@ Let us consider a scalar field $`f`$. The gradient $`\nabla f`$ of such field is
 \nabla f = \frac{\partial f}{\partial x^i} e_i. 
 ```
 
-This quantity can be expressed in the both contravariant $`\{b_i\}`$ and covariant $`\{b^i\}`$ vector bases as
+This quantity can be expressed in the both covariant $`\{b^i\}`$ and contravariant $`\{b_i\}`$  vector bases as
 
 ```math
 \nabla f = \frac{\partial f}{\partial q^i} b^i = g^{ij} \frac{\partial f}{\partial q^j} b_i. 
