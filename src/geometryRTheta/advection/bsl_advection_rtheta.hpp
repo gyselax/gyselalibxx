@@ -156,6 +156,7 @@ public:
      * @param [in] advection_field_rtheta
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the logical index range axis.
+     *      It is expressed in the contravariant basis.
      * @param [in] advection_field_xy_centre
      *      A CoordXY containing the value of the advection field on the 
      *      physical index range axis at the O-point. 
@@ -166,7 +167,7 @@ public:
      */
     host_t<DFieldRTheta> operator()(
             host_t<DFieldRTheta> allfdistribu_host,
-            host_t<DConstVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
+            host_t<DConstVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY const& advection_field_xy_centre,
             double dt) const override
     {
@@ -181,7 +182,7 @@ public:
         // Convert advection field on RTheta to advection field on XY
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_host(grid);
 
-        // A_xy = J A_rtheta
+        // (Ax, Ay) = J (Ar, Atheta)
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
@@ -189,11 +190,11 @@ public:
             m_mapping.jacobian_matrix(coord_rtheta, J);
 
             ddcHelper::get<X>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[0][0]
-                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[0][1];
+                    = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * J[0][0]
+                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * J[0][1];
             ddcHelper::get<Y>(advection_field_xy_host)(irtheta)
-                    = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * J[1][0]
-                      + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * J[1][1];
+                    = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * J[1][0]
+                      + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * J[1][1];
         });
 
         ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {

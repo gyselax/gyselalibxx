@@ -13,24 +13,24 @@ with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
 
 ## Backward Semi-Lagrangian method
 
-The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). 
-It uses the conservation along the characteristics property: 
+The method used to solve the equation is a backward Semi-Lagrangian method (BSL). 
+It uses the conservation property along the characteristics: 
 ```math
 \forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y))
 ```
 
 with:
 ```math
-\partial_t X (t; s, x, y) = A_x(t,X(t; s, x, y),Y(t; s, x, y)),\\
-\partial_t Y (t; s, x, y) = A_y(t,X(t; s, x, y),Y(t; s, x, y)),\\
+\partial_t X (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_x,\\
+\partial_t Y (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_y,\\
 X(s; s, x, y) = x,\\
 Y(s; s, x, y) = y.
 ```
 
 So to compute the advected function at the next time step, 
- - we compute the characteristics' feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
+ - we compute the feet of the characteristic $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
  for each mesh point $`(x_i, y_j)`$ with a time integration method ; 
- - we interpolate the function $f(t = t^n)$ on the characteristics' feet. 
+ - we interpolate the function $f(t = t^n)$ on the feet of the characteristics. 
  The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
 
@@ -45,9 +45,9 @@ There are multiple time integration methods available which are implemented in t
 
  
  
-We are listing the different schemes for this equation $`\partial_t X (t) = A_x(t, X(t),Y(t))`$. 
+We are listing the different schemes for this equation $`\partial_t X (t) = A(t, X(t))`$. 
 
-We write $X (t) = X (t; s, x, y)$, $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation 
+We write $X (t) = X (t; s, x)$, $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation 
 $`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
 
  
@@ -149,62 +149,35 @@ and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details
 
 In the studied equation, the advection field is given along the physical domain axis: 
 ```math
-\partial_t f + A_{x,y} \cdot \nabla_{x,y} f = 0.
+\partial_t f + A \cdot \nabla f = 0.
 ```
 
-The BslAdvectionRTheta operator can take as input the advection field along the physical domain axis or the advection field along the logical domain axis,
+The BslAdvectionRTheta operator can take as input 
+the advection field expressed on the $`(e_x, e_y)`$ basis of the physical domain or 
+the advection field expressed on the $`(e_r, e_\theta)`$ [contravariant basis](#docs_mathematical_and_physical_conventions) of the logical domain,
 ```math
-A = (A_x, A_y) \quad \text{or} \quad \hat{A} = (A_r, A_\theta).
+A = A_x e_x + A_y e_y \quad \text{or} \quad A = A^r e_r + A^\theta e_\theta.
 ```
 
-The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns the advection field along the physical domain axes or the advection field along the logical domain axes (see [advection\_field\_rtheta](./../advection_field/README.md)).
+The advection field can be computed thanks to the AdvectionFieldFinder operator. This operator returns both expressions of the advection field (see [advection\_field\_rtheta](./../advection_field/README.md)).
 
-* If the advection field is directly given along the physical domain axes, no treatment is needed in the BslAdvectionRTheta operator. 
+* If the advection field is directly expressed on the $`(e_x, e_y)`$ basis of the physical domain, no treatment is needed in the BslAdvectionRTheta operator. 
 
-* If the advection field is given along the logical domain axes, then we need to compute the advection field along the physical domain axes to advect in the physical domain. 
+* If the advection field is expressed on the $`(e_r, e_\theta)`$ contravariant basis of the logical domain, then we need to compute the advection field on the $`(e_x, e_y)`$ basis to advect in the physical domain. 
 
-**In the guiding-centre case**, the advection field is computed from the electric field in the physical domain, 
-```math
-A_{x,y} = - E_{x,y} \wedge e_z = -\nabla_{x,y} \phi \wedge e_z.
-```
-
-In [the documentation for the advection field](./../advection_field/README.md), we show that 
-```math
-\nabla_{xy} \phi = J \nabla_{r\theta} \phi,
-```
-
-with *J* the Jacobian matrix (and the metric tensor $`G = J^TJ = [g_{ij}]_{ij}`$). 
-
-It gives the following relation for the electric field
+To pass from the composants on the $`(e_r, e_\theta)`$ contravariant basis to the composants on the $`(e_x, e_y)`$ basis, we use the Jacobian matrix *J* of the coordinate transformation $`(r,\theta) \mapsto (x,y)`$, 
 ```math
 \begin{bmatrix}
-    E_x \\
-    E_y \\
-\end{bmatrix} 
+    A\cdot e_x \\
+    A\cdot e_y \\
+\end{bmatrix}
 = 
 J
 \begin{bmatrix}
-    \hat{E}_r \\
-    \hat{E}_\theta \\
+    A \cdot e_{r} \\
+    A \cdot e_{\theta} \\
 \end{bmatrix}.
 ```
-
-
-In the logical domain, we write the equivalent studied equation as follows
-```math
-\partial_t f + \hat{A}_{r,\theta} \cdot \hat{\nabla}_{r,\theta} f = 0.
-```
-
-with 
-```math
-\hat{A}_{r,\theta} = J^{-1} A_{x,y} = J^{-1}(E_{x,y} \wedge e_z) = J^{-1}(J \hat{E}_{r,\theta} \wedge e_z).
-```
-
-So, from the advection field along the logical domain axis, we multiply by $`J`$
-to get the advection field along the physical domain axis: $`A_{x,y}  = J \hat{A}_{r,\theta}`$. 
-
-**Remark:** The advection field and the electric field in the logical domain are expressed on the covariant vectors. 
-
 
 # Unit tests
 
