@@ -18,8 +18,10 @@ To this end, write
 ```
 and expand $f$ to the second order.
 ```math
-	Df(x_1) & = c_1f(x_1)+c_2\left(f(x_1)+\alpha f'(x_1)+\frac{1}{2}\alpha^2f''(x_1)+o(\alpha^2)\right)               \\
-	        & +c_3\left(f(x_1)+(\alpha+\beta) f'(x_1)+\frac{1}{2}(\alpha+\beta)^2f''(x_1)+o((\alpha+\beta)^2)\right).
+    \begin{aligned}
+        Df(x_1) & = c_1f(x_1)+c_2\left(f(x_1)+\alpha f'(x_1)+\frac{1}{2}\alpha^2f''(x_1)+o(\alpha^2)\right)               \\
+                & +c_3\left(f(x_1)+(\alpha+\beta) f'(x_1)+\frac{1}{2}(\alpha+\beta)^2f''(x_1)+o((\alpha+\beta)^2)\right).
+    \end{aligned}
 ```
 A term-by-term comparison gives us the following system:
 ```math
@@ -37,9 +39,11 @@ The solution is therefore given by
 ```
 The same computation can be made for the backward and the centred FDM scheme, and lead to these three formulas:
 ```math
-	Df(x_1) & = -\frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)-\frac{\alpha}{\beta(\alpha+\beta)}f(x_3) \\
-	Df(x_2) & = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
-	Df(x_3) & = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_3).
+    \begin{aligned}
+        Df(x_1) & = -\frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)-\frac{\alpha}{\beta(\alpha+\beta)}f(x_3) \\
+        Df(x_2) & = -\frac{\beta}{\alpha(\alpha+\beta)}f(x_1)+\left(\frac{1}{\alpha}-\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\alpha(\alpha+\beta)}f(x_3)        \\
+        Df(x_3) & = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_3).
+    \end{aligned}
 ```
 
 One can check than in the uniform case ($\alpha=\beta$) we recover the well known coefficient $-1/2$ and $1/2$ for the centred case
