@@ -124,7 +124,7 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here. 
 
 #### General coordinates system 
-* In **general coordinates system**, the gradient of a function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by 
+* In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by 
 
 ```math
 \nabla f = \sum_i \partial_{q_i} f \mathbf{b^j}
