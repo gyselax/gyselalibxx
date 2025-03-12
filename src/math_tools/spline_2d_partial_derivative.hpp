@@ -31,16 +31,14 @@ private:
             DerivativeDimension>;
 
     using typename base_type::DConstFieldType;
-    using typename base_type::DFieldMemType;
     using typename base_type::DFieldType;
 
     using IdxRangeBS = typename SplineEvaluator2D::batched_evaluation_domain_type;
     using DFieldBSMem = DFieldMem<IdxRangeBS>;
     using DFieldBS = DField<IdxRangeBS>;
 
-    SplineBuilder2DCache const& m_builder_cache;
+    SplineBuilder2DCache& m_builder_cache;
     SplineEvaluator2D const& m_evaluator;
-    DConstFieldType const m_field;
 
 public:
     /**
@@ -51,13 +49,13 @@ public:
     * @param field The field to be differentiated.
     */
     explicit Spline2DPartialDerivative(
-            SplineBuilder2DCache const& builder_cache,
+            SplineBuilder2DCache& builder_cache,
             SplineEvaluator2D const& evaluator,
             DConstFieldType const field)
         : m_builder_cache(builder_cache)
         , m_evaluator(evaluator)
-        , m_field(field)
     {
+      m_builder_cache.template compute_coeffs<DerivativeDimension>(field);
     }
 
     /**
@@ -77,16 +75,6 @@ public:
         }
     }
 
-    /**
-    * @brief Compute the partial derivative of a field in the direction 
-    * where the field is represented using 2d splines.
-    *
-    * @param[out] differentiated_field Contains on output the value of the differentiated field.
-    */
-    void precompute() const
-    {
-        m_builder_cache.template compute_coeffs<DerivativeDimension>(m_field);
-    }
 };
 
 
@@ -110,7 +98,7 @@ class Spline2DPartialDerivativeCreator
 private:
     using DConstFieldType = DConstField<typename SplineEvaluator2D::batched_evaluation_domain_type>;
 
-    SplineBuilder2DCache const& m_builder_cache;
+    SplineBuilder2DCache& m_builder_cache;
     SplineEvaluator2D const& m_evaluator;
 
 public:
@@ -120,7 +108,7 @@ public:
      * @param[in] evaluator A 2d spline evaluator.
      */
     Spline2DPartialDerivativeCreator(
-            SplineBuilder2DCache const& builder_cache,
+            SplineBuilder2DCache& builder_cache,
             SplineEvaluator2D const& evaluator)
         : m_builder_cache(builder_cache)
         , m_evaluator(evaluator)

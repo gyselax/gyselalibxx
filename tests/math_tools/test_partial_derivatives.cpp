@@ -291,5 +291,11 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
             X>(function_to_differentiate, partial2d_dx_creator, idxrange_xy);
 
     // derivatives in Y direction
-}
+    Spline2DPartialDerivativeCreator<
+            SplineBuilder2DCache<SplineXYBuilder>,
+            SplineXYEvaluator,
+            Y> const partial2d_dy_creator(builder_cache, evaluator_xy);
+    test_partial_derivative<
+            FunctionToDifferentiatePolynomial,
+            Y>(function_to_differentiate, partial2d_dy_creator, idxrange_xy);}
 } // namespace
