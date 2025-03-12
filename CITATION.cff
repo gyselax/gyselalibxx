@@ -1,0 +1,101 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Gyselalib++
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file. The provided reference should be
+  replaced with a reference to an article shortly.
+type: software
+authors:
+  - given-names: Emily
+    family-names: Bourne
+    affiliation: 'SCITAS, EPFL, CH-1015 Lausanne, Switzerland'
+    orcid: 'https://orcid.org/0000-0002-3469-2338'
+  - given-names: Virginie
+    family-names: Grandgirard
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0000-0001-7821-9107'
+  - given-names: Yuuichi
+    family-names: Asahi
+    affiliation: >-
+      Université Paris-Saclay, UVSQ, CNRS, CEA, 
+      Maison de la Simulation, 
+      91191, Gif-sur-Yvette, France
+    orcid: 'https://orcid.org/0000-0002-9997-1274'
+  - given-names: Julien
+    family-names: Bigot
+    affiliation: >-
+      Université Paris-Saclay, UVSQ, CNRS, CEA,
+      Maison de la Simulation,
+      91191, Gif-sur-Yvette, France
+    orcid: 'https://orcid.org/0000-0002-0015-4304'
+  - given-names: Peter
+    family-names: Donnel
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0000-0002-6669-416X'
+  - given-names: Alexander
+    family-names: Hoffmann
+    affiliation: >-
+      Max-Planck-Institut für Plasmaphysik, Garching,
+      Germany
+    orcid: 'https://orcid.org/0009-0005-0736-6122'
+  - given-names: Abdelhadi
+    family-names: Kara
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+  - given-names: Philipp
+    family-names: Krah
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0000-0001-8982-4230'
+  - given-names: Baptiste
+    family-names: Legouix
+  - given-names: Etienne
+    family-names: Malaboeuf
+    affiliation: 'CINES, France'
+    orcid: 'https://orcid.org/0009-0007-3320-1406'
+  - given-names: Dorian
+    family-names: Midou
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+  - given-names: Yann
+    family-names: Munschy
+    affiliation: 'SCITAS, EPFL, CH-1015 Lausanne, Switzerland'
+    orcid: 'https://orcid.org/0000-0002-3002-9352'
+  - given-names: Mathieu
+    family-names: Peybernes
+    affiliation: 'SCITAS, EPFL, CH-1015 Lausanne, Switzerland'
+    orcid: 'https://orcid.org/0009-0000-4011-9047'
+  - given-names: Matthieu
+    family-names: Protais
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0009-0003-5852-7446'
+  - given-names: Kevin
+    family-names: Obrejan
+    affiliation: 'CEA, IRFM, 13108 Saint-Paul-lez-Durance Cedex, France'
+    orcid: 'https://orcid.org/0000-0002-1906-4181'
+  - given-names: Thomas
+    family-names: Padioleau
+    affiliation: >-
+      Université Paris-Saclay, UVSQ, CNRS, CEA,
+      Maison de la Simulation,
+      91191, Gif-sur-Yvette, France
+    orcid: 'https://orcid.org/0000-0001-5496-0013'
+  - given-names: Pauline
+    family-names: Vidal
+    affiliation: >-
+      Max-Planck-Institut für Plasmaphysik, Garching,
+      Germany
+    orcid: 'https://orcid.org/0009-0008-7233-6351'
+repository-code: 'https://github.com/gyselax/gyselalibxx'
+url: 'https://gyselax.github.io/gyselalibxx/'
+abstract: >-
+  Gyselalib++ is a collection of C++ components for writing
+  gyrokinetic semi-lagrangian codes and similar.
+keywords:
+  - hpc
+  - ddc
+  - plasma physics
+  - gyrokinetic
+  - numerical simulation
+  - semi-Lagrangian
+license: MIT
