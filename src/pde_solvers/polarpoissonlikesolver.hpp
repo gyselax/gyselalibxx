@@ -64,6 +64,12 @@ public:
     static_assert(R::IS_CONTRAVARIANT);
     static_assert(Theta::IS_CONTRAVARIANT);
 
+private:
+    /// The radial dimension
+    using R_cov = typename R::Dual;
+    /// The poloidal dimension
+    using Theta_cov = typename Theta::Dual;
+
 public:
     struct RBasisSubset
     {
@@ -181,8 +187,7 @@ public:
     struct EvalDeriv2DType
     {
         double value;
-        double radial_derivative;
-        double poloidal_derivative;
+        DVector<R, Theta> derivative;
     };
 
     /**
@@ -398,14 +403,15 @@ public:
             // Calculate the radial derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).radial_derivative
+                ddcHelper::get<R>(m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
 
             // Calculate the poloidal derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).poloidal_derivative
+                ddcHelper::get<Theta>(
+                        m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
         });
@@ -1219,8 +1225,7 @@ public:
             EvalDeriv2DType const&) // Last argument is duplicate
     {
         value = basis.value;
-        ddcHelper::get<R>(derivs) = basis.radial_derivative;
-        ddcHelper::get<Theta>(derivs) = basis.poloidal_derivative;
+        derivs = basis.derivative;
     }
 
     /**
@@ -1301,14 +1306,17 @@ public:
                 trial_bspline_val_and_deriv,
                 trial_bspline_val_and_deriv_theta);
 
-        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(mapping);
+        MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
+
+        Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
 
         // Assemble the weak integral element
         return int_volume(idx_r, idx_theta)
                * (alpha
-                          * dot_product(
-                                  basis_derivs_test_space,
-                                  metric_tensor.to_covariant(basis_derivs_trial_space, coord))
+                          * tensor_mul(
+                                  index<'i'>(basis_derivs_test_space),
+                                  index<'i', 'j'>(inv_metric_tensor),
+                                  index<'j'>(basis_derivs_trial_space))
                   + beta * basis_val_test_space * basis_val_trial_space);
     }
 
