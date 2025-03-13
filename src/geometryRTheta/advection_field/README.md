@@ -70,12 +70,12 @@ A = E\wedge e_z
 = 
 \begin{bmatrix}
      E\cdot e_y  \\
-    -E\cdot e_x  \\
+    -E\cdot e_x 
 \end{bmatrix} 
 = 
 \begin{bmatrix}
     -\partial_y \phi \\
-     \partial_x \phi \\
+     \partial_x \phi
 \end{bmatrix}. 
 ```
 
@@ -90,16 +90,16 @@ From these equations, we deduce the (unique) values of $`\partial_x\phi`$ and $`
 ```math
 \begin{bmatrix}
     \partial_x \phi (0, \theta) \\
-    \partial_y \phi (0, \theta) \\
+    \partial_y \phi (0, \theta)
 \end{bmatrix}
  = 
  \begin{bmatrix}
     \partial_r x (0, \theta_1)  & \partial_r y (0, \theta_1) \\
-    \partial_r x (0, \theta_2)  & \partial_r y (0, \theta_2) \\
+    \partial_r x (0, \theta_2)  & \partial_r y (0, \theta_2)
 \end{bmatrix} ^{-1}
 \begin{bmatrix}
     \partial_r \phi (0, \theta_1) \\
-    \partial_r \phi (0, \theta_2) \\
+    \partial_r \phi (0, \theta_2)
 \end{bmatrix}.
 ```
 
@@ -115,7 +115,7 @@ A = E\wedge e_z
 = 
 \begin{bmatrix}
       E\cdot e_y  \\
-    - E\cdot e_x  \\
+    - E\cdot e_x 
 \end{bmatrix}.
 ```
 
@@ -150,13 +150,13 @@ With the composants linked by the following relation,
 ```math
 \begin{bmatrix}
     \partial_{x} f \\
-    \partial_{y} f \\
+    \partial_{y} f
 \end{bmatrix}
 = 
 J^{-T}
 \begin{bmatrix}
     \partial_{r} f \\
-    \partial_{\theta} f \\
+    \partial_{\theta} f
 \end{bmatrix}.
 ```
 
@@ -170,13 +170,13 @@ E
 = 
 \begin{bmatrix}
     E \cdot e_r \\
-    E \cdot e_{\theta} \\
+    E \cdot e_{\theta}
 \end{bmatrix}
 = 
 G^{-1}
 \begin{bmatrix}
     - \partial_{r} \phi \\
-    - \partial_{\theta} \phi \\
+    - \partial_{\theta} \phi
 \end{bmatrix}.
 ```
 
@@ -187,7 +187,7 @@ Then the advection field is given by
 A = E \wedge e_z = 
 \begin{bmatrix}
      E \cdot e_y \\
-    -E \cdot e_x \\
+    -E \cdot e_x
 \end{bmatrix},
 ```
 
@@ -195,7 +195,7 @@ with in contravariant basis,
 ```math
 \begin{bmatrix}
     E \cdot e_x \\
-    E \cdot e_y \\
+    E \cdot e_y
 \end{bmatrix}
 = 
 J
@@ -262,7 +262,7 @@ G^{-1}
 = 
 \begin{bmatrix}
     1 & 0 \\
-    0 & \frac{1}{r^2} \\
+    0 & \frac{1}{r^2}
 \end{bmatrix}.
 ```
 

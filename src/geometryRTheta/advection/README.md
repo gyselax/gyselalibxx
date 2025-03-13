@@ -169,13 +169,13 @@ To pass from the composants on the $`(e_r, e_\theta)`$ contravariant basis to th
 ```math
 \begin{bmatrix}
     A\cdot e_x \\
-    A\cdot e_y \\
+    A\cdot e_y
 \end{bmatrix}
 = 
 J
 \begin{bmatrix}
     A \cdot e_{r} \\
-    A \cdot e_{\theta} \\
+    A \cdot e_{\theta}
 \end{bmatrix}.
 ```
 
