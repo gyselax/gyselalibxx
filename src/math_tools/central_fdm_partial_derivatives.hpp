@@ -27,6 +27,9 @@ class CentralFDMPartialDerivative : public IPartialDerivative<IdxRangeFull, Deri
 private:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
+    /// The type of the field to be differentiated.
+    using DFieldMemType = DFieldMem<IdxRangeFull>;
+
     /// The type of a reference to the field to be differentiated.
     using typename base_type::DFieldType;
 
@@ -39,8 +42,8 @@ private:
     /// The index range of all dimensions except DerivativeDimension.
     using typename base_type::IdxRangeBatch;
 
-    /// A constant reference to the field to be differentiated
-    DConstFieldType const m_field;
+    /// The field to be differentiated
+    DFieldMemType m_field;
 
 public:
     /**
@@ -48,7 +51,11 @@ public:
      *
      * @param field The field to be differentiated.
      */
-    explicit CentralFDMPartialDerivative(DConstFieldType const field) : m_field(field) {}
+    explicit CentralFDMPartialDerivative(DConstFieldType const field_ref)
+        : m_field(get_idx_range(field_ref))
+    {
+        ddc::parallel_deepcopy(get_field(m_field), field_ref);
+    }
 
     /**
      * @brief Compute the partial derivative of a field in a given direction
@@ -68,7 +75,7 @@ public:
         IdxRangeDeriv idxrange_deriv(idxrange_full);
         IdxRangeBatch idxrange_batch(idxrange_full);
 
-        DConstFieldType const field_proxy = m_field;
+        DConstFieldType const field_proxy = get_const_field(m_field);
 
         IdxStepDeriv const step(1);
 
@@ -131,6 +138,8 @@ public:
                     });
         }
     }
+
+private:
 };
 
 /**
@@ -159,14 +168,14 @@ public:
      * The type of the returned object will be determined when the pointer is 
      * dereferenced.
      *
-     * @param[in] field A field to be differentiated.
+     * @param[in] field_ref A field to be differentiated.
      *
      * @return A pointer to an instance of the IPartialDerivative class.
      */
     std::unique_ptr<IPartialDerivative<IdxRangeFull, DerivativeDimension>> create_instance(
-            DConstFieldType field) const final
+            DConstFieldType field_ref) const final
     {
         return std::make_unique<CentralFDMPartialDerivative<IdxRangeFull, DerivativeDimension>>(
-                field);
+                field_ref);
     }
 };
