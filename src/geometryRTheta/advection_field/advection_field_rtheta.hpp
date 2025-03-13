@@ -315,7 +315,8 @@ private:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
                 Tensor<double, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>
-                        inv_G_eps = metric_tensor.inverse(coord_rtheta_epsilon); // inverse tensor metric
+                        inv_G_eps
+                        = metric_tensor.inverse(coord_rtheta_epsilon); // inverse tensor metric
                 std::array<std::array<double, 2>, 2> J_eps; // Jacobian matrix
                 m_mapping.jacobian_matrix(coord_rtheta_epsilon, J_eps);
 
@@ -333,11 +334,14 @@ private:
                           + deriv_theta_phi_epsilon * ddcHelper::get<R_cov, Theta_cov>(inv_G_eps);
                 double const grad_theta_phi_epsilon
                         = deriv_r_phi_epsilon * ddcHelper::get<Theta_cov, R_cov>(inv_G_eps)
-                          + deriv_theta_phi_epsilon * ddcHelper::get<Theta_cov, Theta_cov>(inv_G_eps);
+                          + deriv_theta_phi_epsilon
+                                    * ddcHelper::get<Theta_cov, Theta_cov>(inv_G_eps);
 
                 // (dx phi, dy phi) = J G^{-1} (dr phi, dtheta phi)
-                double const grad_x_phi_epsilon = grad_r_phi_epsilon * J_eps[0][0] + grad_theta_phi_epsilon * J_eps[0][1];
-                double const grad_y_phi_epsilon = grad_r_phi_epsilon * J_eps[1][0] + grad_theta_phi_epsilon * J_eps[1][1];
+                double const grad_x_phi_epsilon
+                        = grad_r_phi_epsilon * J_eps[0][0] + grad_theta_phi_epsilon * J_eps[0][1];
+                double const grad_y_phi_epsilon
+                        = grad_r_phi_epsilon * J_eps[1][0] + grad_theta_phi_epsilon * J_eps[1][1];
 
                 // E = -grad phi
                 double const electric_field_x_epsilon = -grad_x_phi_epsilon;
