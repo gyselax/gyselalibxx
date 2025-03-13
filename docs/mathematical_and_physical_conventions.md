@@ -36,7 +36,7 @@ Let us define the *contravariant basis* $`\{b_i\}`$ associated to the $`\{q^i\}`
 b_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} e_j,
 ```
 
-and the *covariant basis* $`\{b^i\}`$ by
+and its dual basis, the *covariant basis* $`\{b^i\}`$ by
 
 ```math
 b^i = \nabla q^i = \frac{\partial q^i}{\partial x^j} e_j.
