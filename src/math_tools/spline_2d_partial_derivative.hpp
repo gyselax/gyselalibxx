@@ -55,7 +55,7 @@ public:
         : m_builder_cache(builder_cache)
         , m_evaluator(evaluator)
     {
-      m_builder_cache.template compute_coeffs<DerivativeDimension>(field);
+        m_builder_cache.template compute_coeffs<DerivativeDimension>(field);
     }
 
     /**
@@ -74,7 +74,6 @@ public:
             m_evaluator.deriv_dim_2(differentiated_field, m_builder_cache());
         }
     }
-
 };
 
 
