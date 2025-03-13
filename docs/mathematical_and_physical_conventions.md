@@ -53,7 +53,7 @@ Note that neither contravariant nor covariant bases form orthonormal vector sets
 b^i \cdot b_j = \delta_{ij}, 
 ```
 
-with $`\cdot`$ the dot product operator and the Kronecker delta $`\delta_{ij} = 1`$ if $`i= j`$, and $`\delta_{ij} = 0`$ otherwise. Let us now consider a vector $`A`$. This vector may be expressed in either contravariant or covariant bases as
+with $`\cdot`$ the dot product operator and the Kronecker delta $`\delta_{ij} = 1`$ if $`i= j`$, and $`\delta_{ij} = 0`$ otherwise. Let us now consider a vector $`A \in \mathbb{R}^N`$. This vector may be expressed in either contravariant or covariant bases as
 
 ```math
 A = A_i b^i = A^i b_i, 
