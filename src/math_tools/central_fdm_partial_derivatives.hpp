@@ -27,8 +27,8 @@ class CentralFDMPartialDerivative : public IPartialDerivative<IdxRangeFull, Deri
 private:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
-    /// The type of a reference to the field to be differentiated.
-    using typename base_type::DFieldType;
+    /// The type of the field to be differentiated.
+    using DFieldMemType = DFieldMem<IdxRangeFull>;
 
     /// The type of a constant reference to the field to be differentiated.
     using typename base_type::DConstFieldType;
@@ -39,8 +39,8 @@ private:
     /// The index range of all dimensions except DerivativeDimension.
     using typename base_type::IdxRangeBatch;
 
-    /// A constant reference to the field to be differentiated
-    DConstFieldType const m_field;
+    /// The field to be differentiated
+    DFieldMemType const m_field;
 
 public:
     /**
@@ -48,7 +48,7 @@ public:
      *
      * @param field The field to be differentiated.
      */
-    explicit CentralFDMPartialDerivative(DConstFieldType const field) : m_field(field) {}
+    explicit CentralFDMPartialDerivative(DConstFieldType const field_ref) : m_field(field) {}
 
     /**
      * @brief Compute the partial derivative of a field in a given direction
