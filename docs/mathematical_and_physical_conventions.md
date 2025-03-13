@@ -130,7 +130,7 @@ A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k.
 
 ### Curvilinear to curvilinear
 
-Let us now consider the more general case where one seeks to relate two curvilinear coordinate system $`\{q^i\}`$ and $`\{p^i\}`$. We denote by $`J\{q\to p\}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian and of its inverse are defined similarly as above as 
+Let us now consider the more general case where one seeks to relate two curvilinear coordinate systems $`\{q^i\}`$ and $`\{p^i\}`$. We denote by $`J\{q\to p\}`$ the Jacobian of the transformation from the coordinate system $`\{q^i\}`$ to $`\{p^i\}`$. The components of the Jacobian and of its inverse are defined similarly as above as 
 
 ```math
 J\left.^{i}_{\;j}\right.\{q\to p\} = \frac{\partial p^i}{\partial q^j}, \quad J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = \frac{\partial q^i}{\partial p^j}. 
