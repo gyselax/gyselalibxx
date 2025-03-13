@@ -27,16 +27,16 @@ The position of any point in space can be written as
 \overrightarrow{r} = x^i e_i,
 ```
 
-where we introduced the unit vectors of the orthonormal Cartesian bases $`\{e_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
+where we introduced the unit vectors of the orthonormal Cartesian basis $`\{e_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
 
 ## Contravariant and covariant bases
-Let us define the *contravariant bases* $`\{b_i\}`$ associated to the $`\{q^i\}`$ coordinates by
+Let us define the *contravariant basis* $`\{b_i\}`$ associated to the $`\{q^i\}`$ coordinates by
 
 ```math
 b_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} e_j,
 ```
 
-and the *covariant bases* $`\{b^i\}`$ by
+and the *covariant basis* $`\{b^i\}`$ by
 
 ```math
 b^i = \nabla q^i = \frac{\partial q^i}{\partial x^j} e_j.
@@ -60,8 +60,8 @@ A = A_i b^i = A^i b_i,
 ```
 
 Where 
-- $`\{A_i\}`$ are the components of $`A`$ in *the covariant bases*. We call these *the covariant components* of $`A`$;
-- $`\{A^i\}`$ are the components of $`A`$ in *the contravariant bases*. We call these *the contravariant components* of $`A`$;
+- $`\{A_i\}`$ are the components of $`A`$ in *the covariant basis*. We call these *the covariant components* of $`A`$;
+- $`\{A^i\}`$ are the components of $`A`$ in *the contravariant basis*. We call these *the contravariant components* of $`A`$;
 
 ## Metric tensor
 
@@ -110,19 +110,19 @@ Both Jacobian and metric tensor relate to each other as
 G = J^{T}J.
 ```
 
-The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian bases $`\{e_i\}`$ to the components of the vector expressed in the contravariant bases $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
+The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian basis $`\{e_i\}`$ to the components of the vector expressed in the contravariant basis $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
 
 ```math
 A = A^i_\text{c} e_i = A^i b_i, 
 ```
 
-Where the "c" subscript indicates that the considered components is computed in the Cartesian bases. It can be shown using the chain rule that the following equality holds
+Where the "c" subscript indicates that the considered components is computed in the Cartesian basis. It can be shown using the chain rule that the following equality holds
 
 ```math
 A^i_\text{c} = J\left.^{i}_{\;j}\right. A^j. 
 ```
 
-Note that relating the components of the vector $`A`$ expressed in the covariant bases is less straightforward as this involves the metric tensor, i.e.  
+Note that relating the components of the vector $`A`$ expressed in the covariant basis is less straightforward as this involves the metric tensor, i.e.  
 
 ```math
 A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k. 
@@ -136,19 +136,19 @@ Let us now consider the more general case where one seeks to relate two curvilin
 J\left.^{i}_{\;j}\right.\{q\to p\} = \frac{\partial p^i}{\partial q^j}, \quad J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = \frac{\partial q^i}{\partial p^j}. 
 ```
 
-Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{\;j}\right.\{q\to p\}`$. Let us now write $`\{b_i\}`$ (resp. $`\{b^i\}`$) the contravariant (resp. covariant) vector bases associated with coordinates $`\{q^i\}`$, and $`\{c_i\}`$ (resp. $`\{c^i\}`$) the contravariant (resp. covariant) vector bases associated with coordinates $`\{p^i\}`$. Let us now express a vector $`A`$ in these bases as 
+Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{\;j}\right.\{q\to p\}`$. Let us now write $`\{b_i\}`$ (resp. $`\{b^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{q^i\}`$, and $`\{c_i\}`$ (resp. $`\{c^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{p^i\}`$. Let us now express a vector $`A`$ in these bases as 
 
 ```math
 A = A^i\{p\} b_i = A_i\{p\} b^i = A^i\{q\} c_i = A_i\{q\} c^i, 
 ```
 
-where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector bases associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector bases associated with coordinates $`\{q^i\}`$. We have
+where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
 
 ```math
 A^i\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\} A^j\{q\}. 
 ```
 
-By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`A`$ expressed in covariant vector bases associated with both curvilinear coordinates system as 
+By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`A`$ expressed in covariant vector basis associated with both curvilinear coordinates system as 
 
 ```math
 g^{ik}\{p\}A_k\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\}g^{jl}\{p\} A_l\{q\}. 
@@ -160,19 +160,19 @@ Hereafter are expressed differential operators in a curvilinear coordinate syste
 
 ### Gradient
 
-Let us consider a scalar field $`f`$. The gradient $`\nabla f`$ of such field is defined in the Cartesian bases $`\{e_i\}`$ as
+Let us consider a scalar field $`f`$. The gradient $`\nabla f`$ of such field is defined in the Cartesian basis $`\{e_i\}`$ as
 
 ```math
 \nabla f = \frac{\partial f}{\partial x^i} e_i. 
 ```
 
-This quantity can be expressed in the both covariant $`\{b^i\}`$ and contravariant $`\{b_i\}`$  vector bases as
+This quantity can be expressed in the both covariant $`\{b^i\}`$ and contravariant $`\{b_i\}`$  vector basis as
 
 ```math
 \nabla f = \frac{\partial f}{\partial q^i} b^i = g^{ij} \frac{\partial f}{\partial q^j} b_i. 
 ```
 
-Note that the definition that uses the contravariant bases $`\{b_i\}`$ is much more common. 
+Note that the definition that uses the contravariant basis $`\{b_i\}`$ is much more common. 
 
 ### Divergence
 
