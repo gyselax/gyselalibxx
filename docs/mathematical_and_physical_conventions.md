@@ -1,6 +1,6 @@
 # Mathematical and physical conventions
 
-The conventions adopted in gyselalibxx for describing physical quantities such as scalar fields, vector fields and tensors are detailed hereafter. 
+The conventions adopted in Gyselalib++ for describing physical quantities such as scalar fields, vector fields and tensors are detailed hereafter. 
 
 ## Contents
 
