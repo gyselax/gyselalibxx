@@ -49,7 +49,7 @@ public:
     /**
      * @brief Construct an instance of the class CentralFDMPartialDerivative.
      *
-     * @param field The field to be differentiated.
+     * @param field_ref The field to be differentiated.
      */
     explicit CentralFDMPartialDerivative(DConstFieldType const field_ref)
         : m_field(get_idx_range(field_ref))
@@ -138,8 +138,6 @@ public:
                     });
         }
     }
-
-private:
 };
 
 /**
