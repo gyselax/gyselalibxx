@@ -89,6 +89,8 @@ public:
     * where the field is represented using 2d splines.
     *
     * @param[out] differentiated_field Contains on output the value of the differentiated field.
+    *
+    * @return A reference to a constant field that contains the spline coefficients.
     */
     DConstFieldSplineCoeffs operator()() const
     {
