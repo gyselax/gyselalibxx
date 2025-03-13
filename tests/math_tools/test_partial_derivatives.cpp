@@ -301,7 +301,6 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
             Y>(function_to_differentiate, partial2d_dy_creator, idxrange_xy);
 }
 
-
 TEST(PartialDerivative, CentralFDMPartialDerivativeDx)
 {
     int n_elems_x(10);

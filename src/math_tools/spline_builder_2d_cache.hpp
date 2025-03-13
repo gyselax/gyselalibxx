@@ -85,10 +85,7 @@ public:
     }
 
     /**
-    * @brief TODO Compute the partial derivative of a field in the direction 
-    * where the field is represented using 2d splines.
-    *
-    * @param[out] differentiated_field Contains on output the value of the differentiated field.
+    * @brief Returns a constand field reference to the spline coefficients.
     *
     * @return A reference to a constant field that contains the spline coefficients.
     */
