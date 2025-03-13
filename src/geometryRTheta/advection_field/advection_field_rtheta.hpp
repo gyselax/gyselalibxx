@@ -254,7 +254,7 @@ private:
                 CoordRTheta const coord_rtheta(r, th);
 
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta); // inverse Jacobian matrix
-                
+
                 // Gradient of phi in the physical domain (Cartesian domain)
                 // grad phi = (dr phi, dtheta phi) in coravariant basis
                 double const grad_r_phi = deriv_r_phi(irtheta);
@@ -306,7 +306,8 @@ private:
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon); // inverse Jacobian matrix
+                Matrix_2x2 inv_J_eps
+                        = inv_jacobian_matrix(coord_rtheta_epsilon); // inverse Jacobian matrix
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
                         coord_rtheta_epsilon,
@@ -321,10 +322,10 @@ private:
                 double const grad_theta_phi_epsilon = deriv_theta_phi_epsilon;
 
                 // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
-                double const grad_x_phi_epsilon
-                        = grad_r_phi_epsilon * inv_J_eps[0][0] + grad_theta_phi_epsilon * inv_J_eps[1][0];
-                double const grad_y_phi_epsilon
-                        = grad_r_phi_epsilon * inv_J_eps[0][1] + grad_theta_phi_epsilon * inv_J_eps[1][1];
+                double const grad_x_phi_epsilon = grad_r_phi_epsilon * inv_J_eps[0][0]
+                                                  + grad_theta_phi_epsilon * inv_J_eps[1][0];
+                double const grad_y_phi_epsilon = grad_r_phi_epsilon * inv_J_eps[0][1]
+                                                  + grad_theta_phi_epsilon * inv_J_eps[1][1];
 
                 // E = -grad phi
                 double const electric_field_x_epsilon = -grad_x_phi_epsilon;
