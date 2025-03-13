@@ -243,7 +243,6 @@ private:
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
-        MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
         InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
 
         // > computation of the electric field
@@ -254,23 +253,16 @@ private:
             if (r > m_epsilon) {
                 CoordRTheta const coord_rtheta(r, th);
 
-                Tensor<double, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>
-                        inv_G = metric_tensor.inverse(coord_rtheta); // inverse tensor metric
-                std::array<std::array<double, 2>, 2> J; // Jacobian matrix
-                m_mapping.jacobian_matrix(coord_rtheta, J);
-
+                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta); // inverse Jacobian matrix
+                
                 // Gradient of phi in the physical domain (Cartesian domain)
-                // grad phi = G^{-1} (dr phi, dtheta phi) in contravariant basis
-                double const grad_r_phi
-                        = deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
-                          + deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
-                double const grad_theta_phi
-                        = deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
-                          + deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+                // grad phi = (dr phi, dtheta phi) in coravariant basis
+                double const grad_r_phi = deriv_r_phi(irtheta);
+                double const grad_theta_phi = deriv_theta_phi(irtheta);
 
-                // (dx phi, dy phi) = J G^{-1} (dr phi, dtheta phi)
-                double const grad_x_phi = grad_r_phi * J[0][0] + grad_theta_phi * J[0][1];
-                double const grad_y_phi = grad_r_phi * J[1][0] + grad_theta_phi * J[1][1];
+                // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
+                double const grad_x_phi = grad_r_phi * inv_J[0][0] + grad_theta_phi * inv_J[1][0];
+                double const grad_y_phi = grad_r_phi * inv_J[0][1] + grad_theta_phi * inv_J[1][1];
 
                 // E = -grad phi
                 ddcHelper::get<X>(electric_field)(irtheta) = -grad_x_phi;
@@ -314,11 +306,7 @@ private:
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Tensor<double, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>
-                        inv_G_eps
-                        = metric_tensor.inverse(coord_rtheta_epsilon); // inverse tensor metric
-                std::array<std::array<double, 2>, 2> J_eps; // Jacobian matrix
-                m_mapping.jacobian_matrix(coord_rtheta_epsilon, J_eps);
+                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon); // inverse Jacobian matrix
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
                         coord_rtheta_epsilon,
@@ -328,20 +316,15 @@ private:
                         get_const_field(electrostatic_potential_coef));
 
                 // Gradient of phi in the physical domain (Cartesian domain)
-                // grad phi = G^{-1} (dr phi, dtheta phi) in covariant basis
-                double const grad_r_phi_epsilon
-                        = deriv_r_phi_epsilon * ddcHelper::get<R_cov, R_cov>(inv_G_eps)
-                          + deriv_theta_phi_epsilon * ddcHelper::get<R_cov, Theta_cov>(inv_G_eps);
-                double const grad_theta_phi_epsilon
-                        = deriv_r_phi_epsilon * ddcHelper::get<Theta_cov, R_cov>(inv_G_eps)
-                          + deriv_theta_phi_epsilon
-                                    * ddcHelper::get<Theta_cov, Theta_cov>(inv_G_eps);
+                // grad phi = (dr phi, dtheta phi) in covariant basis
+                double const grad_r_phi_epsilon = deriv_r_phi_epsilon;
+                double const grad_theta_phi_epsilon = deriv_theta_phi_epsilon;
 
-                // (dx phi, dy phi) = J G^{-1} (dr phi, dtheta phi)
+                // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
                 double const grad_x_phi_epsilon
-                        = grad_r_phi_epsilon * J_eps[0][0] + grad_theta_phi_epsilon * J_eps[0][1];
+                        = grad_r_phi_epsilon * inv_J_eps[0][0] + grad_theta_phi_epsilon * inv_J_eps[1][0];
                 double const grad_y_phi_epsilon
-                        = grad_r_phi_epsilon * J_eps[1][0] + grad_theta_phi_epsilon * J_eps[1][1];
+                        = grad_r_phi_epsilon * inv_J_eps[0][1] + grad_theta_phi_epsilon * inv_J_eps[1][1];
 
                 // E = -grad phi
                 double const electric_field_x_epsilon = -grad_x_phi_epsilon;

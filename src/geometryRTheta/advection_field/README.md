@@ -52,9 +52,9 @@ The computation of the electrical field can be ill-defined around the O-point, s
 ```math
 \nabla \phi
 = \partial_x \phi e_x + \partial_y \phi e_y 
-= J G^{-1}(\partial_r \phi e_r + \partial_\theta \phi e_\theta), 
+= J^{-T}(\partial_r \phi e^r + \partial_\theta \phi e^\theta), 
 \qquad 
-\text{in the contravariant basis,}
+\text{in the covavariant basis,}
 ```
 
 with $`J`$  the Jacobian matrix and *G* the tensor metric of the mapping $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$. 
@@ -130,20 +130,20 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 * In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by 
 
 ```math
-\nabla f = \sum_i \partial_{q_i} f \mathbf{b^j}
+\nabla f = \sum_i \partial_{q_i} f b^j
 ```
 
 with 
 * $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)`$, 
 * $`G = J^T J`$ the metric tensor, whose components are $`g_{ij}`$,  
 * $`G^{-1}`$ the inverse metric tensor, whose components are $`g^{ij}`$, 
-* and $`\mathbf{b^j}`$ the unnormalised local covariant vectors. 
+* and $`b^j`$ the unnormalised local covariant vectors. 
 
 In 2D with $`(q_1, q_2) = (r,\theta)`$ and $`(x_1, x_2) = (x,y)`$, it can be rewritten as the following matrix system 
 ```math
 \hat{\nabla} f 
-= \partial_x f \mathbf{e_x} + \partial_y f \mathbf{e_y}
-= \partial_r f \mathbf{e^r} + \partial_\theta f \mathbf{e^\theta}
+= \partial_x f e_x + \partial_y f e_y
+= \partial_r f e^r + \partial_\theta f e^\theta
 ```
 
 With the composants linked by the following relation, 
