@@ -244,6 +244,7 @@ private:
                 get_const_field(electrostatic_potential_coef));
 
         MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
+        InverseJacobianMatrix<Mapping, CoordRTheta> inv_jacobian_matrix(m_mapping);
 
         // > computation of the electric field
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
@@ -323,14 +324,21 @@ private:
                         get_const_field(electrostatic_potential_coef));
 
                 // Gradient of phi in the physical domain (Cartesian domain)
-                double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
-                                                   + deriv_theta_phi_epsilon * inv_J_eps[1][0];
-                double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
-                                                   + deriv_theta_phi_epsilon * inv_J_eps[1][1];
+                // grad phi = G^{-1} (dr phi, dtheta phi) in covariant basis
+                double const grad_r_phi_epsilon
+                        = deriv_r_phi_epsilon * ddcHelper::get<R_cov, R_cov>(inv_G)
+                          + deriv_theta_phi_epsilon * ddcHelper::get<R_cov, Theta_cov>(inv_G);
+                double const grad_theta_phi_epsilon
+                        = deriv_r_phi_epsilon * ddcHelper::get<Theta_cov, R_cov>(inv_G)
+                          + deriv_theta_phi_epsilon * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+
+                // (dx phi, dy phi) = J G^{-1} (dr phi, dtheta phi)
+                double const grad_x_phi_epsilon = grad_r_phi_epsilon * J[0][0] + grad_theta_phi_epsilon * J[0][1];
+                double const grad_y_phi_epsilon = grad_r_phi_epsilon * J[1][0] + grad_theta_phi_epsilon * J[1][1];
 
                 // E = -grad phi
-                double const electric_field_x_epsilon = -deriv_x_phi_epsilon;
-                double const electric_field_y_epsilon = -deriv_y_phi_epsilon;
+                double const electric_field_x_epsilon = -grad_x_phi_epsilon;
+                double const electric_field_y_epsilon = -grad_y_phi_epsilon;
 
 
                 // --- Linearisation:
