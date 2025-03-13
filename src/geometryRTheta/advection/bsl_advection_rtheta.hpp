@@ -30,10 +30,10 @@
  * @f$ f(t, x) = f(0, X(t; 0, x)), \quad \forall t. @f$
  *
  *
- * So the first step of the advection operator is to compute the feet of the characteristic 
+ * So the first step of the advection operator is to compute the feet of the characteristics
  * @f$ X(t; t+\Delta t, x_i) @f$ for each mesh point @f$ x_i @f$.
  *
- * For the second step, we interpolate the function at the computed feet of the characteristic, 
+ * For the second step, we interpolate the function at the computed feet of the characteristics, 
  * and obtain the function at the next time step: 
  * @f$ f(t + \Delta t, x) = f(t, X(t; t+\Delta, x))@f$.
  *
@@ -83,9 +83,9 @@ public:
      *
      * @param [in] function_interpolator
      *       The polar interpolator to interpolate the function once the
-     *      characteristic computed.
+     *      characteristics computed.
      * @param[in] foot_finder
-     *      An IFootFinder which computes the characteristic feet.
+     *      An IFootFinder which computes the feet of the characteristics.
      * @param[in] mapping
      *      The mapping function from the logical domain to the physical
      *      domain. 
@@ -138,10 +138,10 @@ public:
                     feet_rtheta(irtheta) = ddc::coordinate(irtheta);
                 });
 
-        // Compute the characteristic feet at tn ----------------------------------------------------
+        // Compute the feet of the characteristics at tn -----------------------------------------
         m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);
 
-        // Interpolate the function on the characteristic feet. -------------------------------------
+        // Interpolate the function on the feet of the characteristics. --------------------------
         (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rtheta));
 
         return allfdistribu;
