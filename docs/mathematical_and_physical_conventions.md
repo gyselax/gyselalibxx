@@ -116,7 +116,7 @@ The Jacobian of a curvilinear coordinate transformation can be used to relate th
 A = A^i_\text{c} e_i = A^i b_i, 
 ```
 
-Where the "c" subscript indicates that the considered components is computed in the Cartesian basis. It can be shown using the chain rule that the following equality holds
+Where the "c" subscript indicates that the considered components is computed in the Cartesian basis. Note that we used the contravariant basis in the expression above. It can be shown using the chain rule that the following equality holds
 
 ```math
 A^i_\text{c} = J\left.^{i}_{\;j}\right. A^j. 
