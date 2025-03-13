@@ -52,10 +52,13 @@ The computation of the electrical field can be ill-defined around the O-point, s
 ```math
 \nabla \phi
 = \partial_x \phi e_x + \partial_y \phi e_y 
-= J^{-T} (\partial_r \phi e^r + \partial_\theta \phi e^\theta) 
+= J G^{-1}(\partial_r \phi e_r + \partial_\theta \phi e_\theta), 
+\qquad 
+\text{in the contravariant basis,}
 ```
 
-with $`J`$  the Jacobian matrix of the mapping $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$. Then the electric field is given by 
+with $`J`$  the Jacobian matrix and *G* the tensor metric of the mapping $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$. 
+Then the electric field is given by 
 ```math
 E = -\nabla \phi
 = - \partial_x \phi e_x - \partial_y \phi e_y 
@@ -231,8 +234,8 @@ So,
 \end{bmatrix}
 = J^{-1}
 \begin{bmatrix}
-    -J_{2,1} & -J_{2,2} \\
-    J_{1,1} & J_{1,2}
+    J_{2,1} & J_{2,2} \\
+    -J_{1,1} & -J_{1,2}
 \end{bmatrix}
 \begin{bmatrix}
     E \cdot e_r \\

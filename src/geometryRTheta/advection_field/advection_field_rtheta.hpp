@@ -260,7 +260,7 @@ private:
                 m_mapping.jacobian_matrix(coord_rtheta, J);
 
                 // Gradient of phi in the physical domain (Cartesian domain)
-                // grad phi = G^{-1} (dr phi, dtheta phi) in covariant basis
+                // grad phi = G^{-1} (dr phi, dtheta phi) in contravariant basis
                 double const grad_r_phi
                         = deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
                           + deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
@@ -314,7 +314,10 @@ private:
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
+                Tensor<double, VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>>
+                        inv_G_eps = metric_tensor.inverse(coord_rtheta_epsilon); // inverse tensor metric
+                std::array<std::array<double, 2>, 2> J_eps; // Jacobian matrix
+                m_mapping.jacobian_matrix(coord_rtheta_epsilon, J_eps);
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
                         coord_rtheta_epsilon,
@@ -326,15 +329,15 @@ private:
                 // Gradient of phi in the physical domain (Cartesian domain)
                 // grad phi = G^{-1} (dr phi, dtheta phi) in covariant basis
                 double const grad_r_phi_epsilon
-                        = deriv_r_phi_epsilon * ddcHelper::get<R_cov, R_cov>(inv_G)
-                          + deriv_theta_phi_epsilon * ddcHelper::get<R_cov, Theta_cov>(inv_G);
+                        = deriv_r_phi_epsilon * ddcHelper::get<R_cov, R_cov>(inv_G_eps)
+                          + deriv_theta_phi_epsilon * ddcHelper::get<R_cov, Theta_cov>(inv_G_eps);
                 double const grad_theta_phi_epsilon
-                        = deriv_r_phi_epsilon * ddcHelper::get<Theta_cov, R_cov>(inv_G)
-                          + deriv_theta_phi_epsilon * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+                        = deriv_r_phi_epsilon * ddcHelper::get<Theta_cov, R_cov>(inv_G_eps)
+                          + deriv_theta_phi_epsilon * ddcHelper::get<Theta_cov, Theta_cov>(inv_G_eps);
 
                 // (dx phi, dy phi) = J G^{-1} (dr phi, dtheta phi)
-                double const grad_x_phi_epsilon = grad_r_phi_epsilon * J[0][0] + grad_theta_phi_epsilon * J[0][1];
-                double const grad_y_phi_epsilon = grad_r_phi_epsilon * J[1][0] + grad_theta_phi_epsilon * J[1][1];
+                double const grad_x_phi_epsilon = grad_r_phi_epsilon * J_eps[0][0] + grad_theta_phi_epsilon * J_eps[0][1];
+                double const grad_y_phi_epsilon = grad_r_phi_epsilon * J_eps[1][0] + grad_theta_phi_epsilon * J_eps[1][1];
 
                 // E = -grad phi
                 double const electric_field_x_epsilon = -grad_x_phi_epsilon;
@@ -352,9 +355,9 @@ private:
 
             // > computation of the advection field
             ddcHelper::get<X>(advection_field_xy)(irtheta)
-                    = -ddcHelper::get<Y>(electric_field)(irtheta);
+                    = ddcHelper::get<Y>(electric_field)(irtheta);
             ddcHelper::get<Y>(advection_field_xy)(irtheta)
-                    = ddcHelper::get<X>(electric_field)(irtheta);
+                    = -ddcHelper::get<X>(electric_field)(irtheta);
         });
     }
 
@@ -519,11 +522,11 @@ private:
 
             // A (see README for the expression)
             ddcHelper::get<R>(advection_field_rtheta)(irtheta)
-                    = -(J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_r / jacobian
-                      - (J[1][1] * J[1][1] + J[0][1] * J[0][1]) * electric_field_theta / jacobian;
+                    = (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_r / jacobian
+                      + (J[1][1] * J[1][1] + J[0][1] * J[0][1]) * electric_field_theta / jacobian;
             ddcHelper::get<Theta>(advection_field_rtheta)(irtheta)
-                    = (J[0][0] * J[0][0] + J[1][0] * J[1][0]) * electric_field_r / jacobian
-                      + (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_theta / jacobian;
+                    = -(J[0][0] * J[0][0] + J[1][0] * J[1][0]) * electric_field_r / jacobian
+                      - (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_theta / jacobian;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================
@@ -553,6 +556,6 @@ private:
         double const deriv_y_phi_0
                 = (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant;
 
-        advection_field_xy_centre = CoordXY(deriv_y_phi_0, -deriv_x_phi_0);
+        advection_field_xy_centre = CoordXY(-deriv_y_phi_0, deriv_x_phi_0);
     }
 };
