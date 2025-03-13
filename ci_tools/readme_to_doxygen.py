@@ -172,7 +172,7 @@ if __name__ == '__main__':
             if in_code:
                 in_code = False
             elif in_math_code:
-                body.append('@f]')
+                body.append('@f]\n')
                 in_math_code = False
                 line_index += 1
                 continue

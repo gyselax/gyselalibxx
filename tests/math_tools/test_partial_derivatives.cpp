@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 
+#include "central_fdm_partial_derivatives.hpp"
 #include "ddc_aliases.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
@@ -297,5 +298,36 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
             Y> const partial2d_dy_creator(builder_cache, evaluator_xy);
     test_partial_derivative<
             FunctionToDifferentiatePolynomial,
-            Y>(function_to_differentiate, partial2d_dy_creator, idxrange_xy);}
+            Y>(function_to_differentiate, partial2d_dy_creator, idxrange_xy);
+}
+
+
+TEST(PartialDerivative, CentralFDMPartialDerivativeDx)
+{
+    int n_elems_x(10);
+    int n_elems_y(20);
+
+    Coord<X> const x_min(0.0);
+    Coord<X> const x_max(1.0);
+    IdxStepX x_ncells(n_elems_x);
+
+    Coord<Y> const y_min(0.0);
+    Coord<Y> const y_max(2.0);
+    IdxStepY y_ncells(n_elems_y);
+
+    ddc::init_discrete_space<GridX>(build_random_non_uniform_break_points(x_min, x_max, x_ncells));
+    IdxRangeX idxrange_x(IdxX {0}, x_ncells);
+
+    ddc::init_discrete_space<GridY>(build_random_non_uniform_break_points(y_min, y_max, y_ncells));
+    IdxRangeY idxrange_y(IdxY {0}, y_ncells);
+
+    IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+
+    CentralFDMPartialDerivativeCreator<IdxRangeXY, X> const partial_dx_creator;
+
+    FunctionToDifferentiatePolynomial function_to_differentiate;
+    test_partial_derivative<
+            FunctionToDifferentiatePolynomial,
+            X>(function_to_differentiate, partial_dx_creator, idxrange_xy);
+}
 } // namespace
