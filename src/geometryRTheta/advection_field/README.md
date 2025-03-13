@@ -66,13 +66,13 @@ and the advection field in the basis $`(e_x, e_y)`$ by
 A = E\wedge e_z 
 = 
 \begin{bmatrix}
-    - E\cdot e_y  \\
-      E\cdot e_x  \\
+     E\cdot e_y  \\
+    -E\cdot e_x  \\
 \end{bmatrix} 
 = 
 \begin{bmatrix}
-    \partial_y \phi \\
-    - \partial_x \phi \\
+    -\partial_y \phi \\
+     \partial_x \phi \\
 \end{bmatrix}. 
 ```
 
@@ -95,8 +95,8 @@ From these equations, we deduce the (unique) values of $`\partial_x\phi`$ and $`
     \partial_r x (0, \theta_2)  & \partial_r y (0, \theta_2) \\
 \end{bmatrix} ^{-1}
 \begin{bmatrix}
-    \partial_r \phi (0, \theta_1)  \\
-   \partial_r \phi (0, \theta_2) \\
+    \partial_r \phi (0, \theta_1) \\
+    \partial_r \phi (0, \theta_2) \\
 \end{bmatrix}.
 ```
 
@@ -111,8 +111,8 @@ As previously, we compute the advection field by
 A = E\wedge e_z 
 = 
 \begin{bmatrix}
-    - E\cdot e_y  \\
-      E\cdot e_x  \\
+      E\cdot e_y  \\
+    - E\cdot e_x  \\
 \end{bmatrix}.
 ```
 
@@ -183,8 +183,8 @@ Then the advection field is given by
 ```math
 A = E \wedge e_z = 
 \begin{bmatrix}
-    - E \cdot e_x \\
-      E \cdot e_y \\
+     E \cdot e_y \\
+    -E \cdot e_x \\
 \end{bmatrix},
 ```
 
@@ -226,8 +226,8 @@ So,
 \end{bmatrix}
 = J^{-1}
 \begin{bmatrix}
-    -E \cdot e_y \\
-     E \cdot e_x
+     E \cdot e_y \\
+    -E \cdot e_x
 \end{bmatrix}
 = J^{-1}
 \begin{bmatrix}
@@ -240,8 +240,8 @@ So,
 \end{bmatrix}
 = \frac{1}{\det(J)}
 \begin{bmatrix}
-    -(J_{11}J_{12} + J_{21}J_{22}) &  - (J_{22}^2 + J_{12}^2) \\
-    (J_{11}^2 + J_{21}^2)          & (J_{11}J_{12} + J_{21}J_{22})
+    (J_{11}J_{12} + J_{21}J_{22})  &  (J_{22}^2 + J_{12}^2) \\
+    -(J_{11}^2 + J_{21}^2)         & -(J_{11}J_{12} + J_{21}J_{22})
 \end{bmatrix}
 \begin{bmatrix}
     E \cdot e_r \\
