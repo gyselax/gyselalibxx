@@ -44,7 +44,7 @@ public:
     /**
     * @brief Construct an instance of the class Spline2DPartialDerivative.
     *
-    * @param builder A 2D spline builder.
+    * @param builder_cache A 2D spline builder cache.
     * @param evaluator A 2D spline evaluator.
     * @param field The field to be differentiated.
     */
