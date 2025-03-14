@@ -92,7 +92,7 @@ An easy way to get the above formulas right is to remember that the metric tenso
 
 ### Curvilinear to Cartesian
 
-The *Jacobian* $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J\left.^{i}_{\;j}\right.`$ as 
+The *Jacobian* matrix $`J`$ associated with the transformation from the curvilinear coordinates $`\{q^i\}`$ to the Cartesian coordinates $`\{x^i\}`$ is defined from its components $`J\left.^{i}_{\;j}\right.`$ as 
 
 ```math
 J\left.^{i}_{\;j}\right. = \frac{\partial x^i}{\partial q^j},
@@ -148,7 +148,7 @@ where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (re
 A^i\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\} A^j\{q\}. 
 ```
 
-By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`A`$ expressed in covariant vector basis associated with both curvilinear coordinates system as 
+By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`\mathbf{A}`$ expressed in covariant vector basis associated with both curvilinear coordinates system as 
 
 ```math
 g^{ik}\{p\}A_k\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\}g^{jl}\{p\} A_l\{q\}. 
