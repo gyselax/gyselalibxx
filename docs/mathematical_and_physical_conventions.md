@@ -113,7 +113,7 @@ G = J^{T}J.
 The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian basis $`\{\mathbf{e}_i\}`$ to the components of the vector expressed in the contravariant basis $`\{\mathbf{b}_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
 
 ```math
-A = A^i_\text{c} \mathbf{e}_i = A^i \mathbf{b}_i, 
+\mathbf{A} = A^i_\text{c} \mathbf{e}_i = A^i \mathbf{b}_i, 
 ```
 
 Where the "c" subscript indicates that the considered components is computed in the Cartesian basis. Note that we used the contravariant basis in the expression above. It can be shown using the chain rule that the following equality holds
