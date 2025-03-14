@@ -60,7 +60,7 @@ with $`\cdot`$ the dot product operator and the Kronecker delta $`\delta_{ij} = 
 ```
 
 Where 
-- $`\{A_i\}`$ are the components of $`A`$ in *the covariant basis*. We call these *the covariant components* of $`A`$;
+- $`\{A_i\}`$ are the components of $`\mathbf{A}`$ in *the covariant basis*. We call these *the covariant components* of $`A`$;
 - $`\{A^i\}`$ are the components of $`A`$ in *the contravariant basis*. We call these *the contravariant components* of $`A`$;
 
 ## Metric tensor
