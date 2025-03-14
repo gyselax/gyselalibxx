@@ -173,12 +173,3 @@ This quantity can be expressed in the both covariant $`\{\mathbf{b}^i\}`$ and co
 ```
 
 Note that the definition that uses the contravariant basis $`\{\mathbf{b}_i\}`$ is much more common. 
-
-### Divergence
-
-**TODO**
-
-
-### Curl
-
-**TODO**
