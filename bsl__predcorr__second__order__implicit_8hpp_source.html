@@ -331,7 +331,7 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            <span class="comment">// X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:</span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            <span class="comment">// --- Copy phi^n because it will be modified:</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            <span class="comment">// --- Copy rho^n because it will be modified:</span></div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            DFieldMemRTheta allfdistribu_predicted(grid);</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            ddc::parallel_deepcopy(allfdistribu_predicted, allfdistribu_host);</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keyword">auto</span> advection_field_k_tot = ddcHelper::create_mirror_view_and_copy(</div>
@@ -353,172 +353,174 @@ $(document).ready(function(){initNavTree('bsl__predcorr__second__order__implicit
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            <span class="comment">// STEP 4: From rho^P, we compute phi^P: Poisson equation</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_host));</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>                    charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            <span class="comment">// STEP 5: From phi^P, we compute A^P:</span></div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>            advection_field_computer(electrostatic_potential_coef, advection_field);</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            <span class="comment">// STEP 6: From rho^n and A^P, we compute rho^{n+1}: Vlasov equation</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            m_builder(</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                    ddcHelper::get&lt;X&gt;(advection_field_coefs_k),</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field)));</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            m_builder(</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                    ddcHelper::get&lt;Y&gt;(advection_field_coefs_k),</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field)));</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>            <span class="comment">// initialisation:</span></div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>                feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            });</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            implicit_loop(</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                    advection_field,</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                    get_const_field(advection_field_coefs_k),</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                    get_field(feet_coords),</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                    dt / 2.,</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                    tau);</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            <span class="comment">// Evaluate A^P at X^P:</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            m_evaluator(</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                    get_field(ddcHelper::get&lt;X&gt;(advection_field_k)),</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>                    get_const_field(feet_coords),</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field_coefs_k)));</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            m_evaluator(</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                    get_field(ddcHelper::get&lt;Y&gt;(advection_field_k)),</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                    get_const_field(feet_coords),</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field_coefs_k)));</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            <span class="comment">// Computed advection field (A^P(X^n) + A^P(X^P)) /2:</span></div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                ddcHelper::get&lt;X&gt;(advection_field_k_tot_host)(irtheta)</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>                        = (ddcHelper::get&lt;X&gt;(advection_field)(irtheta)</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                           + ddcHelper::get&lt;X&gt;(advection_field_k)(irtheta))</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                          / 2.;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                ddcHelper::get&lt;Y&gt;(advection_field_k_tot_host)(irtheta)</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                        = (ddcHelper::get&lt;Y&gt;(advection_field)(irtheta)</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>                           + ddcHelper::get&lt;Y&gt;(advection_field_k)(irtheta))</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>                          / 2.;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            });</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            <span class="comment">// X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2</span></div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            <span class="keyword">auto</span> allfdistribu = ddc::</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>                    create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            ddc::parallel_deepcopy(</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                    ddcHelper::get&lt;X&gt;(advection_field_k_tot),</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                    ddcHelper::get&lt;X&gt;(advection_field_k_tot_host));</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>            ddc::parallel_deepcopy(</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                    ddcHelper::get&lt;Y&gt;(advection_field_k_tot),</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                    ddcHelper::get&lt;Y&gt;(advection_field_k_tot_host));</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            m_advection_solver(get_field(allfdistribu), get_const_field(advection_field_k_tot), dt);</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        }</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <span class="comment">// STEP 1: From rho^n, we compute phi^n: Poisson equation</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        host_t&lt;Spline2DMem&gt; allfdistribu_coef(get_spline_idx_range(m_builder));</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_host));</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>                charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        m_poisson_solver(charge_density_coord, get_field(electrical_potential));</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        ddc::PdiEvent(<span class="stringliteral">&quot;last_iteration&quot;</span>)</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                .with(<span class="stringliteral">&quot;iter&quot;</span>, steps)</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                .with(<span class="stringliteral">&quot;time&quot;</span>, steps * dt)</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>                .with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu_host)</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                .with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential_host);</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        end_time = std::chrono::system_clock::now();</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <a class="code hl_function" href="classITimeSolverRTheta.html#a5503beee2f7240e8b09ef8ac3be2af24">display_time_difference</a>(<span class="stringliteral">&quot;Iterations time: &quot;</span>, start_time, end_time);</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>            <span class="keyword">auto</span> allfdistribu_predicted_host</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>                    = ddc::create_mirror_view_and_copy(get_field(allfdistribu_predicted));</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted_host));</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>                    charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>            <span class="comment">// STEP 5: From phi^P, we compute A^P:</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            advection_field_computer(electrostatic_potential_coef, advection_field);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>            <span class="comment">// STEP 6: From rho^n and A^P, we compute rho^{n+1}: Vlasov equation</span></div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            m_builder(</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                    ddcHelper::get&lt;X&gt;(advection_field_coefs_k),</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field)));</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            m_builder(</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>                    ddcHelper::get&lt;Y&gt;(advection_field_coefs_k),</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field)));</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>            <span class="comment">// initialisation:</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            });</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            implicit_loop(</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                    advection_field,</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                    get_const_field(advection_field_coefs_k),</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                    get_field(feet_coords),</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                    dt / 2.,</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                    tau);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            <span class="comment">// Evaluate A^P at X^P:</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            m_evaluator(</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                    get_field(ddcHelper::get&lt;X&gt;(advection_field_k)),</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                    get_const_field(feet_coords),</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                    ddcHelper::get&lt;X&gt;(get_const_field(advection_field_coefs_k)));</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>            m_evaluator(</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                    get_field(ddcHelper::get&lt;Y&gt;(advection_field_k)),</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                    get_const_field(feet_coords),</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                    ddcHelper::get&lt;Y&gt;(get_const_field(advection_field_coefs_k)));</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            <span class="comment">// Computed advection field (A^P(X^n) + A^P(X^P)) /2:</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                ddcHelper::get&lt;X&gt;(advection_field_k_tot_host)(irtheta)</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                        = (ddcHelper::get&lt;X&gt;(advection_field)(irtheta)</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                           + ddcHelper::get&lt;X&gt;(advection_field_k)(irtheta))</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                          / 2.;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>                ddcHelper::get&lt;Y&gt;(advection_field_k_tot_host)(irtheta)</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>                        = (ddcHelper::get&lt;Y&gt;(advection_field)(irtheta)</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>                           + ddcHelper::get&lt;Y&gt;(advection_field_k)(irtheta))</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>                          / 2.;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            });</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            <span class="comment">// X^k = X^n - dt * ( A^P(X^n) + A^P(X^P) )/2</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            <span class="keyword">auto</span> allfdistribu = ddc::</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                    create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), allfdistribu_host);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            ddc::parallel_deepcopy(</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                    ddcHelper::get&lt;X&gt;(advection_field_k_tot),</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                    ddcHelper::get&lt;X&gt;(advection_field_k_tot_host));</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            ddc::parallel_deepcopy(</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                    ddcHelper::get&lt;Y&gt;(advection_field_k_tot),</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                    ddcHelper::get&lt;Y&gt;(advection_field_k_tot_host));</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            m_advection_solver(get_field(allfdistribu), get_const_field(advection_field_k_tot), dt);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            ddc::parallel_deepcopy(allfdistribu_host, get_const_field(allfdistribu));</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        }</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        <span class="comment">// STEP 1: From rho^n, we compute phi^n: Poisson equation</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        host_t&lt;Spline2DMem&gt; allfdistribu_coef(get_spline_idx_range(m_builder));</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_host));</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <a class="code hl_class" href="classPoissonLikeRHSFunction.html">PoissonLikeRHSFunction</a> <span class="keyword">const</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>                charge_density_coord(get_const_field(allfdistribu_coef), m_evaluator);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        m_poisson_solver(charge_density_coord, get_field(electrical_potential));</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        ddc::PdiEvent(<span class="stringliteral">&quot;last_iteration&quot;</span>)</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>                .with(<span class="stringliteral">&quot;iter&quot;</span>, steps)</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                .with(<span class="stringliteral">&quot;time&quot;</span>, steps * dt)</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                .with(<span class="stringliteral">&quot;density&quot;</span>, allfdistribu_host)</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                .with(<span class="stringliteral">&quot;electrical_potential&quot;</span>, electrical_potential_host);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        end_time = std::chrono::system_clock::now();</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <a class="code hl_function" href="classITimeSolverRTheta.html#a5503beee2f7240e8b09ef8ac3be2af24">display_time_difference</a>(<span class="stringliteral">&quot;Iterations time: &quot;</span>, start_time, end_time);</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        <span class="keywordflow">return</span> allfdistribu_host;</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    }</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        <span class="keywordflow">return</span> allfdistribu_host;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    }</div>
 </div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    <span class="keywordtype">double</span> compute_square_polar_distance(CoordRTheta <span class="keyword">const</span>&amp; coord1, CoordRTheta <span class="keyword">const</span>&amp; coord2)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        CoordXY coord_xy1(m_logical_to_physical(coord1));</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        CoordXY coord_xy2(m_logical_to_physical(coord2));</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> x1 = ddc::select&lt;X&gt;(coord_xy1);</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> y1 = ddc::select&lt;Y&gt;(coord_xy1);</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> x2 = ddc::select&lt;X&gt;(coord_xy2);</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> y2 = ddc::select&lt;Y&gt;(coord_xy2);</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keywordflow">return</span> (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    }</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    <span class="keywordtype">void</span> implicit_loop(</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>            host_t&lt;<a class="code hl_class" href="classVectorField.html">DVectorFieldRTheta&lt;X, Y&gt;</a>&gt; advection_field,</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>            host_t&lt;<a class="code hl_class" href="classVectorField.html">ConstVectorSplineCoeffs2D&lt;X, Y&gt;</a>&gt; advection_field_coefs_k,</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            host_t&lt;FieldRTheta&lt;CoordRTheta&gt;&gt; feet_coords,</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dt,</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> tau)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>        IdxRangeRTheta <span class="keyword">const</span> grid = get_idx_range(advection_field);</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_k(grid);</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_k_tot_host(grid);</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords_tmp(grid);</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        <span class="keywordtype">double</span> square_difference_feet = 0.;</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>        <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> max_count = 50;</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        <span class="keywordflow">do</span> {</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>            count++;</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            <span class="comment">// Evaluate A at X^{k-1}:</span></div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>            m_evaluator(</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>                    get_field(ddcHelper::get&lt;X&gt;(advection_field_k)),</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>                    get_const_field(feet_coords),</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>                    ddcHelper::get&lt;X&gt;(advection_field_coefs_k));</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>            m_evaluator(</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>                    get_field(ddcHelper::get&lt;Y&gt;(advection_field_k)),</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>                    get_const_field(feet_coords),</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>                    ddcHelper::get&lt;Y&gt;(advection_field_coefs_k));</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span> </div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>            <span class="comment">// Compute the new advection field A(X^n) + A(X^{k-1}):</span></div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>                ddcHelper::get&lt;X&gt;(advection_field_k_tot_host)(irtheta)</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>                        = ddcHelper::get&lt;X&gt;(advection_field)(irtheta)</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>                          + ddcHelper::get&lt;X&gt;(advection_field_k)(irtheta);</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>                ddcHelper::get&lt;Y&gt;(advection_field_k_tot_host)(irtheta)</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>                        = ddcHelper::get&lt;Y&gt;(advection_field)(irtheta)</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>                          + ddcHelper::get&lt;Y&gt;(advection_field_k)(irtheta);</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>            });</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span> </div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>            <span class="comment">// X^{k-1} = X^k:</span></div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>            ddc::parallel_deepcopy(feet_coords_tmp, feet_coords);</div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span> </div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>            <span class="comment">// X^k = X^n - dt* X^k:</span></div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>                feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));</div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>            });</div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>            m_foot_finder(feet_coords, get_const_field(advection_field_k_tot_host), dt);</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span> </div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>            <span class="comment">// Convergence test:</span></div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>            square_difference_feet = 0.;</div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>                <span class="keywordtype">double</span> sqr_diff_feet = compute_square_polar_distance(</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>                        feet_coords(irtheta),</div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>                        feet_coords_tmp(irtheta));</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>                square_difference_feet = square_difference_feet &gt; sqr_diff_feet</div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>                                                 ? square_difference_feet</div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>                                                 : sqr_diff_feet;</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>            });</div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span> </div>
-<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>        } <span class="keywordflow">while</span> ((square_difference_feet &gt; tau * tau) and (count &lt; max_count));</div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    }</div>
-<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>};</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keywordtype">double</span> compute_square_polar_distance(CoordRTheta <span class="keyword">const</span>&amp; coord1, CoordRTheta <span class="keyword">const</span>&amp; coord2)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        CoordXY coord_xy1(m_logical_to_physical(coord1));</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        CoordXY coord_xy2(m_logical_to_physical(coord2));</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> x1 = ddc::select&lt;X&gt;(coord_xy1);</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> y1 = ddc::select&lt;Y&gt;(coord_xy1);</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> x2 = ddc::select&lt;X&gt;(coord_xy2);</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> y2 = ddc::select&lt;Y&gt;(coord_xy2);</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        <span class="keywordflow">return</span> (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    }</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordtype">void</span> implicit_loop(</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            host_t&lt;<a class="code hl_class" href="classVectorField.html">DVectorFieldRTheta&lt;X, Y&gt;</a>&gt; advection_field,</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>            host_t&lt;<a class="code hl_class" href="classVectorField.html">ConstVectorSplineCoeffs2D&lt;X, Y&gt;</a>&gt; advection_field_coefs_k,</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            host_t&lt;FieldRTheta&lt;CoordRTheta&gt;&gt; feet_coords,</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> dt,</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            <span class="keywordtype">double</span> <span class="keyword">const</span> tau)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        IdxRangeRTheta <span class="keyword">const</span> grid = get_idx_range(advection_field);</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_k(grid);</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        host_t&lt;DVectorFieldMemRTheta&lt;X, Y&gt;&gt; advection_field_k_tot_host(grid);</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        host_t&lt;FieldMemRTheta&lt;CoordRTheta&gt;&gt; feet_coords_tmp(grid);</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        <span class="keywordtype">double</span> square_difference_feet = 0.;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> max_count = 50;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>        <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            count++;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>            <span class="comment">// Evaluate A at X^{k-1}:</span></div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>            m_evaluator(</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>                    get_field(ddcHelper::get&lt;X&gt;(advection_field_k)),</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                    get_const_field(feet_coords),</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>                    ddcHelper::get&lt;X&gt;(advection_field_coefs_k));</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>            m_evaluator(</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>                    get_field(ddcHelper::get&lt;Y&gt;(advection_field_k)),</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>                    get_const_field(feet_coords),</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>                    ddcHelper::get&lt;Y&gt;(advection_field_coefs_k));</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span> </div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>            <span class="comment">// Compute the new advection field A(X^n) + A(X^{k-1}):</span></div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>                ddcHelper::get&lt;X&gt;(advection_field_k_tot_host)(irtheta)</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>                        = ddcHelper::get&lt;X&gt;(advection_field)(irtheta)</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>                          + ddcHelper::get&lt;X&gt;(advection_field_k)(irtheta);</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>                ddcHelper::get&lt;Y&gt;(advection_field_k_tot_host)(irtheta)</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>                        = ddcHelper::get&lt;Y&gt;(advection_field)(irtheta)</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>                          + ddcHelper::get&lt;Y&gt;(advection_field_k)(irtheta);</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>            });</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span> </div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>            <span class="comment">// X^{k-1} = X^k:</span></div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>            ddc::parallel_deepcopy(feet_coords_tmp, feet_coords);</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span> </div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>            <span class="comment">// X^k = X^n - dt* X^k:</span></div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>                feet_coords(irtheta) = CoordRTheta(ddc::coordinate(irtheta));</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>            });</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>            m_foot_finder(feet_coords, get_const_field(advection_field_k_tot_host), dt);</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span> </div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span> </div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>            <span class="comment">// Convergence test:</span></div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>            square_difference_feet = 0.;</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>            ddc::for_each(grid, [&amp;](IdxRTheta <span class="keyword">const</span> irtheta) {</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>                <span class="keywordtype">double</span> sqr_diff_feet = compute_square_polar_distance(</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>                        feet_coords(irtheta),</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>                        feet_coords_tmp(irtheta));</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>                square_difference_feet = square_difference_feet &gt; sqr_diff_feet</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>                                                 ? square_difference_feet</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>                                                 : sqr_diff_feet;</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>            });</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span> </div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>        } <span class="keywordflow">while</span> ((square_difference_feet &gt; tau * tau) and (count &lt; max_count));</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    }</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>};</div>
 </div>
 <div class="ttc" id="aclassAdvectionFieldFinder_html"><div class="ttname"><a href="classAdvectionFieldFinder.html">AdvectionFieldFinder</a></div><div class="ttdoc">Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation.</div><div class="ttdef"><b>Definition</b> advection_field_rtheta.hpp:91</div></div>
 <div class="ttc" id="aclassBslAdvectionRTheta_html"><div class="ttname"><a href="classBslAdvectionRTheta.html">BslAdvectionRTheta</a></div><div class="ttdoc">Define an advection operator on 2D  index range.</div><div class="ttdef"><b>Definition</b> bsl_advection_rtheta.hpp:55</div></div>
