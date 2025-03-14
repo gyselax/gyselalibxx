@@ -122,7 +122,7 @@ Where the "c" subscript indicates that the considered components is computed in 
 A^i_\text{c} = J\left.^{i}_{\;j}\right. A^j. 
 ```
 
-Note that relating the components of the vector $`A`$ expressed in the covariant basis is less straightforward as this involves the metric tensor, i.e.  
+Note that relating the components of the vector $`\mathbf{A}`$ expressed in the covariant basis is less straightforward as this involves the metric tensor, i.e.  
 
 ```math
 A^i_\text{c} = J\left.^{i}_{\;j}\right. g^{jk}A_k. 
