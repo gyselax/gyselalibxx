@@ -85,6 +85,14 @@ var NAVTREE =
       [ "Navigating the Gyselalib++ Codebase", "docs_getting_started.html#docs_getting_started__Navigating_the_Gyselalibxx_Codebase", null ],
       [ "Recommended Steps for Getting Started", "docs_getting_started.html#docs_getting_started__Recommended_Steps_for_Getting_Started", null ]
     ] ],
+    [ "Mathematical and physical conventions", "docs_mathematical_and_physical_conventions.html", [
+      [ "Contents", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Contents", null ],
+      [ "On the use of curvilinear coordinates", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__On_the_use_of_curvilinear_coordinates", null ],
+      [ "Contravariant and covariant bases", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Contravariant_and_covariant_bases", null ],
+      [ "Metric tensor", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Metric_tensor", null ],
+      [ "Jacobian", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Jacobian", null ],
+      [ "Differential operators", "docs_mathematical_and_physical_conventions.html#docs_mathematical_and_physical_conventions__Differential_operators", null ]
+    ] ],
     [ "Gyselalib++ simulations", "simulations.html", [
       [ "Simulations in (r, theta) geometry", "simulations_geometryRTheta.html", [
         [ "Diocotron instability", "simulations_geometryRTheta_diocotron.html", [
@@ -117,7 +125,7 @@ var NAVTREE =
         [ "Velocity advection", "src_advection.html#src_advection__Velocity_advection", null ],
         [ "1D advection with a given advection field", "src_advection.html#src_advection__1D_advection_with_a_given_advection_field", null ],
         [ "PolarFootFinder", "src_advection.html#src_advection__PolarFootFinder", null ],
-        [ "References", "src_advection.html#autotoc_md48", null ]
+        [ "References", "src_advection.html#autotoc_md51", null ]
       ] ],
       [ "Collisions", "src_collisions.html", null ],
       [ "Data Storage Types", "src_data_types.html", [
@@ -131,14 +139,14 @@ var NAVTREE =
           [ "Time integration methods", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Time_integration_methods", null ],
           [ "Advection domain", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_domain", null ],
           [ "Advection Field", "src_geometryRTheta_advection.html#src_geometryRTheta_advection__Advection_Field", null ],
-          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md53", null ],
-          [ "References", "src_geometryRTheta_advection.html#autotoc_md54", null ],
-          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md55", null ]
+          [ "Unit tests", "src_geometryRTheta_advection.html#autotoc_md56", null ],
+          [ "References", "src_geometryRTheta_advection.html#autotoc_md57", null ],
+          [ "Contents", "src_geometryRTheta_advection.html#autotoc_md58", null ]
         ] ],
         [ "Advection Field finder", "src_geometryRTheta_advection_field.html", [
           [ "Guiding centre case", "src_geometryRTheta_advection_field.html#src_geometryRTheta_advection_field__Guiding_centre_case", null ],
-          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md60", null ],
-          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md61", null ]
+          [ "References", "src_geometryRTheta_advection_field.html#autotoc_md63", null ],
+          [ "Contents", "src_geometryRTheta_advection_field.html#autotoc_md64", null ]
         ] ],
         [ "Geometry RTheta", "src_geometryRTheta_geometry.html", [
           [ "Shortcuts", "src_geometryRTheta_geometry.html#src_geometryRTheta_geometry__Shortcuts", null ]
@@ -281,8 +289,8 @@ var NAVTREEINDEX =
 "classMatrix__Corner__Block.html#a4a86d05bdf1716db3c228a921b6a80b0",
 "classPolarSplineEvaluator.html#a91d593b5d3e4428e9f21e5ad466ae681",
 "classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019",
-"mpichargedensitycalculator_8hpp_source.html",
-"structIdxRangeSliceIterator.html#a186ef24babacb71c2a78f6966d82cdb2"
+"matrix__dense_8hpp_source.html",
+"structGridVx.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

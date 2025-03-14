@@ -132,7 +132,7 @@ Velocity advection</h1>
 <li>\(A\) the advection field. It could be defined on a subdomain \(\Omega&#39;\subset \Omega\);</li>
 <li>and \(x_i\) a given direction. The advection field domain has to be defined on this dimension for the time integration method.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md45"></a>
+<h3><a class="anchor" id="autotoc_md48"></a>
 Example of use</h3>
 <p>Here are some examples of equation types the <a class="el" href="classBslAdvection1D.html" title="A class which computes the advection along the dimension of interest GridInterest.">BslAdvection1D</a> operator can solve:</p><ul>
 <li>Equation on a 1D domain (and time dimension):  <p class="formulaDsp">
@@ -193,7 +193,7 @@ Example of use</h3>
 <p>Here \(\Omega&#39; = \Omega \in \mathbb{R}^2\). In the code, it would correspond to </p><div class="fragment"><div class="line">DFieldSpXVx f(idx_range_sp_xvx);</div>
 <div class="line">DFieldSpX A(idx_range_sp_x);</div>
 <div class="line"><span class="keyword">using </span>IDimInterest = IDimX;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md46"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md49"></a>
 Parameters</h3>
 <p>The operator takes as templated parameters:</p><ul>
 <li>IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;</li>
@@ -220,7 +220,7 @@ Y(s; s, x, y) = y.
 \]
 </p>
 <p>The characteristic feet are calculated using a time integration method. For details of available methods see <a class="el" href="src_timestepper.html">Time Stepping Methods</a>.</p>
-<h3><a class="anchor" id="autotoc_md47"></a>
+<h3><a class="anchor" id="autotoc_md50"></a>
 Advection domain</h3>
 <p>There are two advection domains to consider:</p><ul>
 <li>the physical domain;</li>
@@ -254,7 +254,7 @@ Advection domain</h3>
 <p>Here, \(\mathcal{G}\) is analytically invertible (we can fix \(\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)\)) and \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in Edoardo Zoni's article [1].</p>
 <p><b>Remark 1:</b> if \(\mathcal{F}\) is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.</p>
 <p><b>Remark 2:</b> if the mapping function is analytically invertible, it is less costly to advect in the physical domain.</p>
-<h1><a class="anchor" id="autotoc_md48"></a>
+<h1><a class="anchor" id="autotoc_md51"></a>
 References</h1>
 <p>[1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019). </p>

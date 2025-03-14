@@ -141,19 +141,19 @@ Time integration methods</h1>
 </ul>
 <p>We are listing the different schemes for this equation \(\partial_t X (t) = A_x(t, X(t),Y(t))\).</p>
 <p>We write \(X (t) = X (t; s, x, y)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1},  \forall n\}_n\).</p>
-<h3><a class="anchor" id="autotoc_md49"></a>
+<h3><a class="anchor" id="autotoc_md52"></a>
 Explicit Euler method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - dt A^{n+1}(X^{n+1})\)</li>
 <li>Convergence order : 1.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md50"></a>
+<h3><a class="anchor" id="autotoc_md53"></a>
 Crank-Nicolson method</h3>
 <ul>
 <li>Scheme: \(X^{k+1} = X^{n+1} - \frac{dt}{2} \left( A^{n+1}(X^{n+1}) + A^k(X^k) \right)\) and \(X^{n+1} = X^{k+1}\) once converged.</li>
 <li>Convergence order : 2.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md51"></a>
+<h3><a class="anchor" id="autotoc_md54"></a>
 RK3 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)\)<ul>
@@ -167,7 +167,7 @@ RK3 method</h3>
 </li>
 <li>Convergence order : 3.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md52"></a>
+<h3><a class="anchor" id="autotoc_md55"></a>
 RK4 method</h3>
 <ul>
 <li>Scheme: \(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)\)<ul>
@@ -278,7 +278,7 @@ J^{-T}
 \]
 </p>
 <p>So, from the advection field along the logical domain axis, we multiply by \(J^{-1}\) to get the advection field along the physical domain axis.</p>
-<h1><a class="anchor" id="autotoc_md53"></a>
+<h1><a class="anchor" id="autotoc_md56"></a>
 Unit tests</h1>
 <p>The test of the advection operator are implemented in the <code>tests/geometryRTheta/advection_rtheta/</code> folder (<a class="el" href="tests_geometryRTheta_advection_rtheta.html">Tests on the 2D polar advection operator</a>).</p>
 <p>It tests:</p><ul>
@@ -319,11 +319,11 @@ Unit tests</h1>
 </ul>
 <p>The tests of the convergence order are made for constant CFL which means it checks the slope of the errors (infinity norm of the difference at the final time) <br  />
  for \((N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)\) and then \((n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)\) for \(n = 1, 2, 4, 8,  ...\).</p>
-<h1><a class="anchor" id="autotoc_md54"></a>
+<h1><a class="anchor" id="autotoc_md57"></a>
 References</h1>
 <p><a class="anchor" id="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped 
 disk-like domains with the method of characteristics and spline finite elements". (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>.) Journal of Computational Physics (2019).</p>
-<h1><a class="anchor" id="autotoc_md55"></a>
+<h1><a class="anchor" id="autotoc_md58"></a>
 Contents</h1>
 <p>This folder contains:</p><ul>
 <li><a class="el" href="iadvection__rtheta_8hpp_source.html">iadvection_rtheta.hpp</a> : define the base class for advection operator (<a class="el" href="classIAdvectionRTheta.html" title="Define the base class of 2D advection operators in polar index range.">IAdvectionRTheta</a>).<ul>
