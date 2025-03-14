@@ -24,39 +24,39 @@ Note that even though an inverse of the functions $`q^i(x^1, \ldots , x^N)`$ mus
 The position of any point in space can be written as
 
 ```math
-\overrightarrow{r} = x^i e_i,
+\overrightarrow{r} = x^i \mathbf{e}_i,
 ```
 
-where we introduced the unit vectors of the orthonormal Cartesian basis $`\{e_i\}`$ $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
+where we introduced the unit vectors of the orthonormal Cartesian basis $`\{\mathbf{e}_i\}`$. The position vector $`\overrightarrow{r}`$ is not to be confused with the radial coordinate $`r`$. We rely on the Einstein summation in the above equation and in the following, i.e. we consider that repeated indices indicate a summation. See the [wikipedia page on Einstein summation](https://en.wikipedia.org/wiki/Einstein_notation) for more details.
 
 ## Contravariant and covariant bases
-Let us define the *contravariant basis* $`\{b_i\}`$ associated to the $`\{q^i\}`$ coordinates by
+Let us define the *contravariant basis* $`\{\mathbf{b}_i\}`$ associated to the $`\{q^i\}`$ coordinates by
 
 ```math
-b_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} e_j,
+\mathbf{b}_i = \frac{\partial \overrightarrow{r}}{\partial q^i} = \frac{\partial x^j}{\partial q^i} \mathbf{e}_j,
 ```
 
-and its dual basis, the *covariant basis* $`\{b^i\}`$ by
+and its dual basis, the *covariant basis* $`\{\mathbf{b}^i\}`$ by
 
 ```math
-b^i = \nabla q^i = \frac{\partial q^i}{\partial x^j} e_j.
+\mathbf{b}^i = \nabla q^i = \frac{\partial q^i}{\partial x^j} \mathbf{e}_j.
 ```
 
-These two bases are *local bases*, in the sense that the $`b_i`$ and $`b^i`$ vectors depend on the considered position in space, i.e. 
-we have $`b_i(x^1, \ldots , x^N)`$ and $`b^i(x^1, \ldots , x^N)`$. A geometrical interpretation of these two bases reads as follows. The *covariant* unit vector $`b^i`$ is orthogonal to the coordinate surface $`q^i = \text{constant}`$, while the *contravariant* unit vector $`b_i`$ is locally tangent to the coordinate curve associated with the $`q^i`$ coordinate. This is the situation depicted in the following picture.
+These two bases are *local bases*, in the sense that the $`\mathbf{b}_i`$ and $`\mathbf{b}^i`$ vectors depend on the considered position in space, i.e. 
+we have $`\mathbf{b}_i(x^1, \ldots , x^N)`$ and $`\mathbf{b}^i(x^1, \ldots , x^N)`$. A geometrical interpretation of these two bases reads as follows. The *covariant* unit vector $`\mathbf{b}^i`$ is orthogonal to the coordinate surface $`q^i = \text{constant}`$, while the *contravariant* unit vector $`\mathbf{b}_i`$ is locally tangent to the coordinate curve associated with the $`q^i`$ coordinate. This is the situation depicted in the following picture.
 
 ![Geometrical interpretation of the contravariant and covariant bases vectors](./curvilinear_coordinates_contravariant_covariant_bases.png)
 
 
 Note that neither contravariant nor covariant bases form orthonormal vector sets in general. Additionally note that in the case of Cartesian coordinates covariant and contravariant bases are the same. In general, the following property holds 
 ```math
-b^i \cdot b_j = \delta_{ij}, 
+\mathbf{b}^i \cdot \mathbf{b}_j = \delta_{ij}, 
 ```
 
 with $`\cdot`$ the dot product operator and the Kronecker delta $`\delta_{ij} = 1`$ if $`i= j`$, and $`\delta_{ij} = 0`$ otherwise. Let us now consider a vector $`A \in \mathbb{R}^N`$. This vector may be expressed in either covariant or contravariant bases as
 
 ```math
-A = A_i b^i = A^i b_i, 
+A = A_i \mathbf{b}^i = A^i \mathbf{b}_i, 
 ```
 
 Where 
@@ -68,13 +68,13 @@ Where
 The *metric tensor* $`G`$ associated with the set of coordinates $`\{q^i\}`$ is defined from its components $`g_{ij}`$ as
 
 ```math
-g_{ij} = b_i \cdot b_j,
+g_{ij} = \mathbf{b}_i \cdot \mathbf{b}_j,
 ```
 
 and the *inverse metric tensor* $`G^{-1}`$, whose components are written as $`g^{ij}`$, is defined as
 
 ```math
-g^{ij} = b^i \cdot b^j.
+g^{ij} = \mathbf{b}^i \cdot \mathbf{b}^j.
 ```
 
 A property of the metric tensor is that it can be used to transform contravariant components of a vector into covariant components and conversely, as 
@@ -110,10 +110,10 @@ Both Jacobian and metric tensor relate to each other as
 G = J^{T}J.
 ```
 
-The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian basis $`\{e_i\}`$ to the components of the vector expressed in the contravariant basis $`\{b_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
+The Jacobian of a curvilinear coordinate transformation can be used to relate the components of a vector expressed in the Cartesian basis $`\{\mathbf{e}_i\}`$ to the components of the vector expressed in the contravariant basis $`\{\mathbf{b}_i\}`$ associated with the curvilinear coordinate system. More precisely, let us write a vector $`A`$ as 
 
 ```math
-A = A^i_\text{c} e_i = A^i b_i, 
+A = A^i_\text{c} \mathbf{e}_i = A^i \mathbf{b}_i, 
 ```
 
 Where the "c" subscript indicates that the considered components is computed in the Cartesian basis. Note that we used the contravariant basis in the expression above. It can be shown using the chain rule that the following equality holds
@@ -136,10 +136,10 @@ Let us now consider the more general case where one seeks to relate two curvilin
 J\left.^{i}_{\;j}\right.\{q\to p\} = \frac{\partial p^i}{\partial q^j}, \quad J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = \frac{\partial q^i}{\partial p^j}. 
 ```
 
-Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{\;j}\right.\{q\to p\}`$. Let us now write $`\{b_i\}`$ (resp. $`\{b^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{q^i\}`$, and $`\{c_i\}`$ (resp. $`\{c^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{p^i\}`$. Let us now express a vector $`A`$ in these bases as 
+Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{\;j}\right.\{q\to p\}`$. Let us now write $`\{\mathbf{b}_i\}`$ (resp. $`\{\mathbf{b}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{q^i\}`$, and $`\{\mathbf{c}_i\}`$ (resp. $`\{\mathbf{c}^i\}`$) the contravariant (resp. covariant) vector basis associated with coordinates $`\{p^i\}`$. Let us now express a vector $`A`$ in these bases as 
 
 ```math
-A = A^i\{p\} b_i = A_i\{p\} b^i = A^i\{q\} c_i = A_i\{q\} c^i, 
+A = A^i\{p\} \mathbf{b}_i = A_i\{p\} \mathbf{b}^i = A^i\{q\} \mathbf{c}_i = A_i\{q\} \mathbf{c}^i, 
 ```
 
 where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
@@ -160,19 +160,19 @@ Hereafter are expressed differential operators in a curvilinear coordinate syste
 
 ### Gradient
 
-Let us consider a scalar field $`f`$. The gradient $`\nabla f`$ of such field is defined in the Cartesian basis $`\{e_i\}`$ as
+Let us consider a scalar field $`f`$. The gradient $`\nabla f`$ of such field is defined in the Cartesian basis $`\{\mathbf{e}_i\}`$ as
 
 ```math
-\nabla f = \frac{\partial f}{\partial x^i} e_i. 
+\nabla f = \frac{\partial f}{\partial x^i} \mathbf{e}_i. 
 ```
 
-This quantity can be expressed in the both covariant $`\{b^i\}`$ and contravariant $`\{b_i\}`$  vector basis as
+This quantity can be expressed in the both covariant $`\{\mathbf{b}^i\}`$ and contravariant $`\{\mathbf{b}_i\}`$  vector basis as
 
 ```math
-\nabla f = \frac{\partial f}{\partial q^i} b^i = g^{ij} \frac{\partial f}{\partial q^j} b_i. 
+\nabla f = \frac{\partial f}{\partial q^i} \mathbf{b}^i = g^{ij} \frac{\partial f}{\partial q^j} \mathbf{b}_i. 
 ```
 
-Note that the definition that uses the contravariant basis $`\{b_i\}`$ is much more common. 
+Note that the definition that uses the contravariant basis $`\{\mathbf{b}_i\}`$ is much more common. 
 
 ### Divergence
 
