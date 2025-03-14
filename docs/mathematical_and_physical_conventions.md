@@ -142,7 +142,7 @@ Here one may note that $`J^{-1}\left.^{i}_{\;j}\right.\{p\to q\} = J\left.^{i}_{
 \mathbf{A} = A^i\{p\} \mathbf{b}_i = A_i\{p\} \mathbf{b}^i = A^i\{q\} \mathbf{c}_i = A_i\{q\} \mathbf{c}^i, 
 ```
 
-where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`A`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
+where $`A^i\{p\}`$ (resp. $`A_i\{p\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{p^i\}`$, and similarly $`A^i\{q\}`$ (resp. $`A_i\{q\}`$) refers to the $`i`$-th contravariant (resp. covariant) component of $`\mathbf{A}`$ expressed in the vector basis associated with coordinates $`\{q^i\}`$. We have
 
 ```math
 A^i\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\} A^j\{q\}. 
