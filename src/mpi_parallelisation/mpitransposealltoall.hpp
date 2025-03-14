@@ -79,7 +79,7 @@ public:
                                      "would be used when maximumly distributing the data");
         }
         // Ensure that the load balancing is good
-        if (distrib_idx_range.size() % comm_size != 0) {
+        if (distrib_idx_range.size() % m_comm_size != 0) {
             throw std::runtime_error("The provided index range cannot be split equally over "
                                      "the specified number of MPI ranks.");
         }
