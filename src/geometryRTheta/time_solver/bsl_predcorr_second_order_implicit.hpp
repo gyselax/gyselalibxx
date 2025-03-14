@@ -275,7 +275,7 @@ public:
 
 
             // X^P = X^n - dt/2 * ( E^n(X^n) + E^n(X^P) )/2:
-            // --- Copy phi^n because it will be modified:
+            // --- Copy rho^n because it will be modified:
             DFieldMemRTheta allfdistribu_predicted(grid);
             ddc::parallel_deepcopy(allfdistribu_predicted, allfdistribu_host);
             auto advection_field_k_tot = ddcHelper::create_mirror_view_and_copy(
@@ -297,7 +297,7 @@ public:
 
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
-            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_host));
+            m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted));
             PoissonLikeRHSFunction const
                     charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);
             m_poisson_solver(charge_density_coord_4, electrostatic_potential_coef);
