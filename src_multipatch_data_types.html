@@ -114,7 +114,7 @@ MultipatchType</h1>
 <div class="line">using DFieldOnPatch = DField&lt;Patch::IdxRange12&gt;;</div>
 </div><!-- fragment --><p> we could then have three fields <code>field1</code>, <code>field2</code> and <code>field3</code> on patches 1,2 and 3 respectively. The <code><a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a></code> object would then be initialised as </p><div class="fragment"><div class="line">MultipatchType&lt;DFieldOnPatch, Patch1, Patch2, Patch3&gt; multipatch_field(field1, field2, field3);</div>
 </div><!-- fragment --><p> and the field on patch 3 can be retrieved via </p><div class="fragment"><div class="line">DField&lt;Patch3::IdxRange12&gt; field3_from_multipatch = multipatch_field.get&lt;Patch3&gt;();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md85"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md86"></a>
 Types</h3>
 <p>In <code><a class="el" href="types_8hpp_source.html">types.hpp</a></code> file different aliases are defined to use the <a class="el" href="classMultipatchType.html" title="A class to store several objects that are of a type which is templated by the patch.">MultipatchType</a> class:</p>
 <ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_partial_derivatives_1d.hpp File Reference</title>
+<title>Gyselalib++: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('spline__partial__derivatives__1d_8hpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classSpline1DPartialDerivative.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,34 +103,23 @@ $(document).ready(function(){initNavTree('spline__partial__derivatives__1d_8hpp.
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
-  <div class="headertitle"><div class="title">spline_partial_derivatives_1d.hpp File Reference</div></div>
+  <div class="headertitle"><div class="title">Spline1DPartialDerivative&lt; Spline1DBuilder, Spline1DEvaluator &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>File containing functions to compute the partial derivatives from a 1d spline interpolation.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;ddc_alias_inline_functions.hpp&quot;</code><br />
-<code>#include &quot;ddc_aliases.hpp&quot;</code><br />
-<code>#include &quot;ipartial_derivatives.hpp&quot;</code><br />
-</div>
-<p><a href="spline__partial__derivatives__1d_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSplinePartialDerivative1D.html">SplinePartialDerivative1D&lt; FieldXiBuilderBatched, FieldXiEvaluatorBatched &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class which implements a partial derivative operator using a 1d spline interpolation.  <a href="classSplinePartialDerivative1D.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>File containing functions to compute the partial derivatives from a 1d spline interpolation. </p>
-</div></div><!-- contents -->
+<p>This is the complete list of members for <a class="el" href="classSpline1DPartialDerivative.html">Spline1DPartialDerivative&lt; Spline1DBuilder, Spline1DEvaluator &gt;</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classIPartialDerivative.html#a5b5bbff2fea1001b2a434b28784f288f">GridDerivativeDimension</a> typedef</td><td class="entry"><a class="el" href="classIPartialDerivative.html">IPartialDerivative&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIPartialDerivative.html#a883ec2b528cf2188db6e593ae849fe0e">IdxRangeBatch</a> typedef</td><td class="entry"><a class="el" href="classIPartialDerivative.html">IPartialDerivative&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIPartialDerivative.html#ae5e7d597e015b5024376bb27091c096d">IdxRangeDeriv</a> typedef</td><td class="entry"><a class="el" href="classIPartialDerivative.html">IPartialDerivative&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classSpline1DPartialDerivative.html#af4be2ff9b4174c671a26b778da15f51e">operator()</a>(DFieldType differentiated_field) const final</td><td class="entry"><a class="el" href="classSpline1DPartialDerivative.html">Spline1DPartialDerivative&lt; Spline1DBuilder, Spline1DEvaluator &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIPartialDerivative.html#ad0c4758b3151a9bbd01d9fda1d423353">IPartialDerivative&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;::operator()</a>(DFieldType differentiated_field) const=0</td><td class="entry"><a class="el" href="classIPartialDerivative.html">IPartialDerivative&lt; Spline1DBuilder::batched_interpolation_domain_type, Spline1DBuilder::continuous_dimension_type &gt;</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classSpline1DPartialDerivative.html#a88cdb2edebd484f55c420cf838970c1d">Spline1DPartialDerivative</a>(Spline1DBuilder const &amp;builder, Spline1DEvaluator const &amp;evaluator, DConstFieldType const field)</td><td class="entry"><a class="el" href="classSpline1DPartialDerivative.html">Spline1DPartialDerivative&lt; Spline1DBuilder, Spline1DEvaluator &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2cb1bf5254cdb852c9c33e2ec5cf247b.html">src</a></li><li class="navelem"><a class="el" href="dir_12b80a83f8a0fcf90cd05b166ef8bdf1.html">math_tools</a></li><li class="navelem"><a class="el" href="spline__partial__derivatives__1d_8hpp.html">spline_partial_derivatives_1d.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

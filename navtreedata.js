@@ -276,13 +276,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2patches__2d__non__periodic_8hpp_source.html",
-"classCrankNicolson.html#a58d11b9c1e57348b94e50b1ea284886f",
-"classIEquilibrium.html",
-"classMatrix__Corner__Block.html#a33931b7ada48fc05d33614cd4818c5b7",
-"classPolarSplineEvaluator.html#a87b7163ab815cc562d0222b1d5dcd27e",
-"classVortexMergerEquilibria.html",
-"mesh__builder_8hpp_source.html",
-"structGridY.html"
+"classCrankNicolson.html#a7ee2d8a1e9031e625d0861031891bd52",
+"classIEquilibrium.html#a425f7b104d75900fcc769bdee9c0cdbd",
+"classMatrix__Corner__Block.html#a4a86d05bdf1716db3c228a921b6a80b0",
+"classPolarSplineEvaluator.html#a91d593b5d3e4428e9f21e5ad466ae681",
+"classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019",
+"mpichargedensitycalculator_8hpp_source.html",
+"structIdxRangeSliceIterator.html#a186ef24babacb71c2a78f6966d82cdb2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

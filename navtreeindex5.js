@@ -1,9 +1,6 @@
 var NAVTREEINDEX5 =
 {
-"classVortexMergerEquilibria.html":[15,209],
-"classVortexMergerEquilibria.html#a3a8975ef28538c07c2a08ce9b0db3c9f":[15,209,0],
-"classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b":[15,209,1],
-"classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[15,209,2],
+"classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[15,212,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html":[15,1,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[15,1,2,0],
 "classtensor__tools_1_1IndexedTensor.html":[15,6,4],
@@ -211,7 +208,7 @@ var NAVTREEINDEX5 =
 "interface_8hpp_source.html":[16,0,14,0,4],
 "inv__jacobian__o__point_8hpp_source.html":[16,0,10,10],
 "inverse__jacobian__matrix_8hpp_source.html":[16,0,10,11],
-"ipartial__derivatives_8hpp_source.html":[16,0,11,1],
+"ipartial__derivative_8hpp_source.html":[16,0,11,1],
 "ipoisson__solver_8hpp_source.html":[16,0,16,2],
 "ipolar__foot__finder_8hpp_source.html":[16,0,0,5],
 "irighthandside_8hpp_source.html":[16,0,5,4,3],
@@ -249,5 +246,8 @@ var NAVTREEINDEX5 =
 "matrix__dense_8hpp_source.html":[16,0,12,8],
 "matrix__pds__tridiag_8hpp_source.html":[16,0,12,9],
 "matrix__periodic__banded_8hpp_source.html":[16,0,12,10],
-"matrix__utils_8hpp_source.html":[16,0,12,11]
+"matrix__utils_8hpp_source.html":[16,0,12,11],
+"mesh__builder_8hpp_source.html":[16,0,20,5],
+"metric__tensor__evaluator_8hpp_source.html":[16,0,10,13],
+"moments_8hpp_source.html":[16,0,18,0]
 };

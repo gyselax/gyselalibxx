@@ -150,11 +150,11 @@ Patch</h1>
 <p>The domain defined on this patch is called <em>logical domain</em>.</p>
 <h1><a class="anchor" id="src_multipatch_connectivity__Interfaces"></a>
 Interfaces</h1>
-<h3><a class="anchor" id="autotoc_md76"></a>
+<h3><a class="anchor" id="autotoc_md77"></a>
 Sticking of Two Edges</h3>
 <p>We follow the idea to represent the topology of a multipatch domain using the idea of <em>domain manifolds</em> (see [1]). This means that we have several independent tensor-product logical domains and define their sticking via coordinate transformations.</p>
 <p><b>Remark:</b> In the referenced paper, the authors use affine isometries of the entire patch instead of coordinate transformations of the faces. This is equivalent to our approach in the sense that, when the scaling of the domains is removed and we consider only unit squares as logical domains, the coordinate transformations of the faces and the information about which edges are identified determine the isometries used in the paper and vice versa. This is easy to show.</p>
-<h4><a class="anchor" id="autotoc_md77"></a>
+<h4><a class="anchor" id="autotoc_md78"></a>
 Multi-patch domain</h4>
 <p>For simplicity, we will constrain ourselves to the 2D case, but this approach could be generalised to arbitrary dimensions.</p>
 <p>Let \(\Omega\) be the domain of interest and assume that we have patches \(\Omega^{(i)}\), \(i=1,...,K\), which are disjoint, s.t.  </p><p class="formulaDsp">
@@ -166,7 +166,7 @@ Multi-patch domain</h4>
 \]
 </p>
 <p>where the rectangular domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}]\) defines the logical coordinates for the patch. We call this logical coordinate domain the <em>logical patch</em>.</p>
-<h4><a class="anchor" id="autotoc_md78"></a>
+<h4><a class="anchor" id="autotoc_md79"></a>
 Edges</h4>
 <p>So we obtain four logical edges  </p><p class="formulaDsp">
 \[[a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}, \quad
@@ -176,7 +176,7 @@ Edges</h4>
 \]
 </p>
 <p>In the code, we define edges as follows. Every edge of a logical patch is identified via the patch it belongs to, the dimension and whether it is at the front or the back of the domain. So e.g.the edge \([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>FRONT</code>. \([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\) would be identified with patch \(i\), dimensions <code>Yi</code> and <code>BACK</code> and \(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) would be identified with patch \(i\), dimensions <code>Xi</code> and <code>BACK</code>.</p>
-<h4><a class="anchor" id="autotoc_md79"></a>
+<h4><a class="anchor" id="autotoc_md80"></a>
 Sticking and Coordinate Transformation</h4>
 <p>Any edge can then be associated with an edge on another patch. This corresponds to the 'sticking'. So for a different patch \(\Omega^{(j)}\), we have the logical coordinate domain \([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\). If we want to stick patch \(i\) to patch \(j\), we have to determine the edges that are identified and how they are identified. The way that they are identified is mathematically determined via the coordinate transformation from one edge to the other. Since the transformations are supposed to be affine and bijective, there are only two options: the transformation can be order preserving or order reversing (this corresponds to the orientation of the physical edge where two parametrisations coming from the two patches can have either the same or the opposite orientation respectively).</p>
 <p>So for example, we want to stick the edge \(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) on patch \(i\) to the edge \([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\) on patch \(j\). If the transformation is order-preserving (i.e. the orientations of the parametrisations of the physical edge agree), then the transformation from the first edge to the second is  </p><p class="formulaDsp">
@@ -189,7 +189,7 @@ Sticking and Coordinate Transformation</h4>
 </p>
 <p>In the code, an edge is represented by the <code><a class="el" href="structEdge.html" title="Define an edge of a given patch.">Edge</a></code> structure. The sticking of two edges is represented by an <code><a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a></code> structure which contains tags to the first patch and the second patch as well as the boolean member <code>orientations_agree</code>. The transformation from one edge to the other is done using the <code><a class="el" href="classEdgeTransformation.html" title="Transform a coordinate or an index from one edge to the one on the other edge.">EdgeTransformation</a></code> operator.</p>
 <p>This operator contains an <code>operator()</code> to transform a given coordinate on a coordinate on the other patch. It has also been extended for indices.</p>
-<h4><a class="anchor" id="autotoc_md80"></a>
+<h4><a class="anchor" id="autotoc_md81"></a>
 Index transformation</h4>
 <p>All the patches are discretized into a finite number of points indexed by indices. So each index refers to a coordinate on a patch. For a given index on an edge of a patch at the interface, we can find an equivalent index on the other patch. This is always true for conforming meshes but not always the case for non-conforming meshes.</p>
 <p>For non-conforming meshes, the method <code>is_match_available()</code> is needed to identify if the given index has an equivalent or not. If <code>is_match_available()</code> returns true, we can then call the <code>operator()</code> to get the equivalent index on the other patch. Instead of calling both method, it is also possible to call <code>search_for_match()</code> which returns true if there is an equivalent index and updates it the given target index.</p>
@@ -203,7 +203,7 @@ Index transformation</h4>
 <li>If the greatest common divisor is \(1\), there is no equivalent index except for the first and last indices.</li>
 </ul>
 <p><b>For non-uniform grids</b>, we cannot use this algorithm. We check all the indices of the target patch if one of them fit with the current one. We can use dichotomy method for the search.</p>
-<h4><a class="anchor" id="autotoc_md81"></a>
+<h4><a class="anchor" id="autotoc_md82"></a>
 Conformity of the meshes</h4>
 <p>When there are non-conforming meshes, some operators need to loop on the "conforming indexes" at each <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a>, i.e. the indexes with an equivalent index on the other patch of the interface.</p>
 <p>The <code>UniformIdxStepIndexMatching</code> storage class stores for a given <a class="el" href="structInterface.html" title="Represent a simple sticking of two edges.">Interface</a> the "conforming indexes" in an <a class="el" href="classIdxRangeSlice.html" title="A class which describes a collection of equally spaced Idxs which form a index range.">IdxRangeSlice</a> for each patch. Currently, the <a class="el" href="classIdxRangeSlice.html" title="A class which describes a collection of equally spaced Idxs which form a index range.">IdxRangeSlice</a> stores indexes from an IdxRange with regular index steps. So the <code>UniformIdxStepIndexMatching</code> class does the same, and triggers assert when the conformity between two edges is not uniform.</p>
@@ -224,14 +224,14 @@ Conformity of the meshes</h4>
 <h1><a class="anchor" id="src_multipatch_connectivity__Patch_locator"></a>
 Patch locator</h1>
 <p>The patch locator operators identify the patch where a given physical coordinate is.</p>
-<h3><a class="anchor" id="autotoc_md82"></a>
+<h3><a class="anchor" id="autotoc_md83"></a>
 Mappings</h3>
 <p>On each patch, we define a mapping from the logical domain to the physical domain.  </p><p class="formulaDsp">
 \[    \mathcal{F}^{(i)}: \hat{\Omega}^{(i)} \rightarrow \Omega^{(i)}
 \]
 </p>
 <p>(The \(\hat{\Omega}^{(i)}\) refers to the above domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]\).) The domain \(\hat{\Omega}^{(i)}\) is called the <em>logical domain</em> and \(\Omega^{(i)}\) the <em>physical domain</em>.</p>
-<h3><a class="anchor" id="autotoc_md83"></a>
+<h3><a class="anchor" id="autotoc_md84"></a>
 Global analytical invertible mapping</h3>
 <p>We assume that there is a global mapping analytically invertible such that  </p><p class="formulaDsp">
 \[    \mathcal{F}: \hat{\Omega} \rightarrow \Omega \\
@@ -241,7 +241,7 @@ Global analytical invertible mapping</h3>
 \]
 </p>
 <p>We can easily apply \((\mathcal{F})^{-1}\) to identify the equivalent logical coordinate of a given physical coordinate \(x\in\Omega\). We check then for each patch if the logical coordinate is on a rectangular logical patch \(\hat{\Omega}^{(i)}\), i.e. if \((\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}\).</p>
-<h4><a class="anchor" id="autotoc_md84"></a>
+<h4><a class="anchor" id="autotoc_md85"></a>
 Onion shape geometry</h4>
 <p>We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches. The patches are defined on the same dimensions <code><a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a></code> and <code><a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a></code>. The logical grid is then split into different logical grids, one for each patch. We can then define one global mapping from the (<code><a class="el" href="structR.html" title="Define non periodic real contravariant R dimension.">R</a></code>, <code><a class="el" href="structTheta.html" title="Define periodic real contravariant Theta dimension.">Theta</a></code>) domain to the (<code><a class="el" href="structX.html" title="Define non periodic real X dimension.">X</a></code>, <code><a class="el" href="structY.html" title="Define non periodic real Y dimension.">Y</a></code>) domain for all the patches. This mapping also needs to be defined from the physical domain to the logical domain.</p>
 <p>We order the patches from the O-point to the outside boundary.</p>

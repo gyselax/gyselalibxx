@@ -11,7 +11,7 @@ var searchData=
   ['grid1_8',['Grid1',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#abad4a55c8bc66356aeb75b17e6169325',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
   ['grid1d_9',['Grid1D',['../classGaussLegendre.html#ad4beb0ab162fcd8fd6961ae9013c3f61',1,'GaussLegendre']]],
   ['grid2_10',['Grid2',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#a10e13ba81718c97997111ded99c2276c',1,'Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;']]],
-  ['gridderivativedirection_11',['GridDerivativeDirection',['../classIPartialDerivative.html#a14216da88c913a32250c7c8afb17d10a',1,'IPartialDerivative']]],
+  ['gridderivativedimension_11',['GridDerivativeDimension',['../classIPartialDerivative.html#a5b5bbff2fea1001b2a434b28784f288f',1,'IPartialDerivative']]],
   ['gridmutype_12',['GridMuType',['../classCollisionConfiguration.html#a77e5d69224da2c41da3bb3ed08f316e2',1,'CollisionConfiguration']]],
   ['gridphitype_13',['GridPhiType',['../classCollisionConfiguration.html#ad23e1c19b3c9ad3ec57abf9faeded4a2',1,'CollisionConfiguration']]],
   ['gridr_14',['GridR',['../classIPolarFootFinder.html#a90af5e545602e06dc6d8b0fd86399bb3',1,'IPolarFootFinder']]],

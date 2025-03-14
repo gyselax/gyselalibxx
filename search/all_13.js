@@ -10,7 +10,7 @@ var searchData=
   ['parts_20of_20the_20code_7',['References to other relevant parts of the code',['../docs_Adding_docs.html#autotoc_md4',1,'']]],
   ['passing_8',['Parameter passing',['../docs_CODING_STANDARD.html#docs_CODING_STANDARD__Parameter_passing',1,'']]],
   ['patch_9',['patch',['../structPatch.html',1,'Patch&lt; T &gt;'],['../src_multipatch_connectivity.html#src_multipatch_connectivity__Patch',1,'Patch']]],
-  ['patch_20domain_10',['Multi-patch domain',['../src_multipatch_connectivity.html#autotoc_md77',1,'']]],
+  ['patch_20domain_10',['Multi-patch domain',['../src_multipatch_connectivity.html#autotoc_md78',1,'']]],
   ['patch_20locator_11',['Patch locator',['../src_multipatch_connectivity.html#src_multipatch_connectivity__Patch_locator',1,'']]],
   ['patch_3c_20grid1_2c_20grid2_2c_20bsplines_5fdim1_2c_20bsplines_5fdim2_20_3e_12',['Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;',['../structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html',1,'']]],
   ['patchconnection_13',['PatchConnection',['../structconnectivity__details_1_1PatchConnection.html',1,'connectivity_details']]],
@@ -68,6 +68,6 @@ var searchData=
   ['programming_20in_20gyselalib_65',['Understanding Functional Programming in Gyselalib++',['../docs_getting_started.html#docs_getting_started__Understanding_Functional_Programming_in_Gyselalibxx',1,'']]],
   ['programming_20oop_66',['Key Difference: Functional vs. Object-Oriented Programming (OOP)',['../docs_getting_started.html#autotoc_md22',1,'']]],
   ['protected_20access_20within_20its_20class_67',['The enclosing parent function for an extended &apos;__host__&apos; &apos;__device__&apos; lambda cannot have private or protected access within its class',['../docs_Common_compilation_problems.html#docs_Common_compilation_problems__The_enclosing_parent_function_for_an_extended____host_______device____lambda_cannot_have_private_or_protected_access_within_its_class',1,'']]],
-  ['python_20scripts_68',['Python scripts',['../tests_geometryRTheta_spline_interpolator_rtheta.html#autotoc_md95',1,'']]],
+  ['python_20scripts_68',['Python scripts',['../tests_geometryRTheta_spline_interpolator_rtheta.html#autotoc_md96',1,'']]],
   ['python_20tests_69',['Python tests',['../tests_geometryRTheta_advection_rtheta.html#tests_geometryRTheta_advection_rtheta__Python_tests',1,'']]]
 ];

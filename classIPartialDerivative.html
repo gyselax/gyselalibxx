@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gyselalib++: IPartialDerivative&lt; DFieldValue, DerivDirection &gt; Class Template Reference</title>
+<title>Gyselalib++: IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,97 +107,79 @@ $(document).ready(function(){initNavTree('classIPartialDerivative.html',''); ini
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classIPartialDerivative-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">IPartialDerivative&lt; DFieldValue, DerivDirection &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A super class for a partial derivative operator.  
+<p>An abstract class for a partial derivative operator.  
  <a href="classIPartialDerivative.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for IPartialDerivative&lt; DFieldValue, DerivDirection &gt;:</div>
+Inheritance diagram for IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classIPartialDerivative.png" usemap="#IPartialDerivative_3C_20DFieldValue_2C_20DerivDirection_20_3E_map" alt=""/>
-  <map id="IPartialDerivative_3C_20DFieldValue_2C_20DerivDirection_20_3E_map" name="IPartialDerivative_3C_20DFieldValue_2C_20DerivDirection_20_3E_map">
-<area href="classCentralFDMPartialDerivative.html" title="A class which implements a partial derivative operator using a finite differences calculation of orde..." alt="CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;" shape="rect" coords="0,56,360,80"/>
+  <img src="classIPartialDerivative.png" usemap="#IPartialDerivative_3C_20IdxRangeFull_2C_20DerivativeDimension_20_3E_map" alt=""/>
+  <map id="IPartialDerivative_3C_20IdxRangeFull_2C_20DerivativeDimension_20_3E_map" name="IPartialDerivative_3C_20IdxRangeFull_2C_20DerivativeDimension_20_3E_map">
+<area href="classCentralFDMPartialDerivative.html" title="A class which implements a partial derivative operator using a finite differences calculation of orde..." alt="CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;" shape="rect" coords="0,56,397,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a0eebcf0be6d2d97bc4423109ac133aa8" id="r_a0eebcf0be6d2d97bc4423109ac133aa8"><td class="memItemLeft" align="right" valign="top"><a id="a0eebcf0be6d2d97bc4423109ac133aa8" name="a0eebcf0be6d2d97bc4423109ac133aa8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DerivativeDirection</b> = DerivDirection</td></tr>
-<tr class="memdesc:a0eebcf0be6d2d97bc4423109ac133aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The dimension Xi on which the partial derivative is calculated. <br /></td></tr>
-<tr class="separator:a0eebcf0be6d2d97bc4423109ac133aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1918dd290bb97fc43c7f8296ab2b534" id="r_ac1918dd290bb97fc43c7f8296ab2b534"><td class="memItemLeft" align="right" valign="top"><a id="ac1918dd290bb97fc43c7f8296ab2b534" name="ac1918dd290bb97fc43c7f8296ab2b534"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxRangeFieldVal</b> = typename DFieldValue::discrete_domain_type</td></tr>
-<tr class="memdesc:ac1918dd290bb97fc43c7f8296ab2b534"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range on which this operator acts. <br /></td></tr>
-<tr class="separator:ac1918dd290bb97fc43c7f8296ab2b534"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ea34d768feb51f42929d53362f4e84f" id="r_a4ea34d768feb51f42929d53362f4e84f"><td class="memItemLeft" align="right" valign="top"><a id="a4ea34d768feb51f42929d53362f4e84f" name="a4ea34d768feb51f42929d53362f4e84f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DFieldVal</b> = DFieldValue</td></tr>
-<tr class="memdesc:a4ea34d768feb51f42929d53362f4e84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the object that will be differentiated. <br /></td></tr>
-<tr class="separator:a4ea34d768feb51f42929d53362f4e84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abda1e7b8313ded22ed32507b75c6c5ca" id="r_abda1e7b8313ded22ed32507b75c6c5ca"><td class="memItemLeft" align="right" valign="top"><a id="abda1e7b8313ded22ed32507b75c6c5ca" name="abda1e7b8313ded22ed32507b75c6c5ca"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DConstFieldVal</b> = typename DFieldValue::view_type</td></tr>
-<tr class="memdesc:abda1e7b8313ded22ed32507b75c6c5ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the calculated derivative. <br /></td></tr>
-<tr class="separator:abda1e7b8313ded22ed32507b75c6c5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14216da88c913a32250c7c8afb17d10a" id="r_a14216da88c913a32250c7c8afb17d10a"><td class="memItemLeft" align="right" valign="top"><a id="a14216da88c913a32250c7c8afb17d10a" name="a14216da88c913a32250c7c8afb17d10a"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>GridDerivativeDirection</b> = find_grid_t&lt; <a class="el" href="classIPartialDerivative.html#a0eebcf0be6d2d97bc4423109ac133aa8">DerivativeDirection</a>, ddc::to_type_seq_t&lt; <a class="el" href="classIPartialDerivative.html#ac1918dd290bb97fc43c7f8296ab2b534">IdxRangeFieldVal</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a14216da88c913a32250c7c8afb17d10a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the grid on the dimension Xi on which the partial derivative is calculated. <br /></td></tr>
-<tr class="separator:a14216da88c913a32250c7c8afb17d10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a382a8ad2b6ef73e1342d9fde5b7133fe" id="r_a382a8ad2b6ef73e1342d9fde5b7133fe"><td class="memItemLeft" align="right" valign="top"><a id="a382a8ad2b6ef73e1342d9fde5b7133fe" name="a382a8ad2b6ef73e1342d9fde5b7133fe"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxRangeDeriv</b> = IdxRange&lt; <a class="el" href="classIPartialDerivative.html#a14216da88c913a32250c7c8afb17d10a">GridDerivativeDirection</a> &gt;</td></tr>
-<tr class="memdesc:a382a8ad2b6ef73e1342d9fde5b7133fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the dimension Xi on which the partial derivative is calculated. <br /></td></tr>
-<tr class="separator:a382a8ad2b6ef73e1342d9fde5b7133fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7bc2b31afa1bda0aab494e588cd2637" id="r_ad7bc2b31afa1bda0aab494e588cd2637"><td class="memItemLeft" align="right" valign="top"><a id="ad7bc2b31afa1bda0aab494e588cd2637" name="ad7bc2b31afa1bda0aab494e588cd2637"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxRangeBatch</b> = ddc::remove_dims_of_t&lt; <a class="el" href="classIPartialDerivative.html#ac1918dd290bb97fc43c7f8296ab2b534">IdxRangeFieldVal</a>, <a class="el" href="classIPartialDerivative.html#a14216da88c913a32250c7c8afb17d10a">GridDerivativeDirection</a> &gt;</td></tr>
-<tr class="memdesc:ad7bc2b31afa1bda0aab494e588cd2637"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of all dimensions except Xi. <br /></td></tr>
-<tr class="separator:ad7bc2b31afa1bda0aab494e588cd2637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47c973564187001a3097fe9b0eb901d5" id="r_a47c973564187001a3097fe9b0eb901d5"><td class="memItemLeft" align="right" valign="top"><a id="a47c973564187001a3097fe9b0eb901d5" name="a47c973564187001a3097fe9b0eb901d5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DFieldType</b> = DField&lt; IdxRangeFull &gt;</td></tr>
+<tr class="memdesc:a47c973564187001a3097fe9b0eb901d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a reference to the field to be differentiated. <br /></td></tr>
+<tr class="separator:a47c973564187001a3097fe9b0eb901d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c8b026718b72ff0c996c4503b95136" id="r_a85c8b026718b72ff0c996c4503b95136"><td class="memItemLeft" align="right" valign="top"><a id="a85c8b026718b72ff0c996c4503b95136" name="a85c8b026718b72ff0c996c4503b95136"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DConstFieldType</b> = DConstField&lt; IdxRangeFull &gt;</td></tr>
+<tr class="memdesc:a85c8b026718b72ff0c996c4503b95136"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a constant reference to the field to be differentiated. <br /></td></tr>
+<tr class="separator:a85c8b026718b72ff0c996c4503b95136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b5bbff2fea1001b2a434b28784f288f" id="r_a5b5bbff2fea1001b2a434b28784f288f"><td class="memItemLeft" align="right" valign="top"><a id="a5b5bbff2fea1001b2a434b28784f288f" name="a5b5bbff2fea1001b2a434b28784f288f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>GridDerivativeDimension</b> = find_grid_t&lt; DerivativeDimension, ddc::to_type_seq_t&lt; IdxRangeFull &gt; &gt;</td></tr>
+<tr class="memdesc:a5b5bbff2fea1001b2a434b28784f288f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the grid on the dimension on which the partial derivative is calculated. <br /></td></tr>
+<tr class="separator:a5b5bbff2fea1001b2a434b28784f288f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e7d597e015b5024376bb27091c096d" id="r_ae5e7d597e015b5024376bb27091c096d"><td class="memItemLeft" align="right" valign="top"><a id="ae5e7d597e015b5024376bb27091c096d" name="ae5e7d597e015b5024376bb27091c096d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxRangeDeriv</b> = IdxRange&lt; <a class="el" href="classIPartialDerivative.html#a5b5bbff2fea1001b2a434b28784f288f">GridDerivativeDimension</a> &gt;</td></tr>
+<tr class="memdesc:ae5e7d597e015b5024376bb27091c096d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of the dimension on which the partial derivative is calculated. <br /></td></tr>
+<tr class="separator:ae5e7d597e015b5024376bb27091c096d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883ec2b528cf2188db6e593ae849fe0e" id="r_a883ec2b528cf2188db6e593ae849fe0e"><td class="memItemLeft" align="right" valign="top"><a id="a883ec2b528cf2188db6e593ae849fe0e" name="a883ec2b528cf2188db6e593ae849fe0e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxRangeBatch</b> = ddc::remove_dims_of_t&lt; IdxRangeFull, <a class="el" href="classIPartialDerivative.html#a5b5bbff2fea1001b2a434b28784f288f">GridDerivativeDimension</a> &gt;</td></tr>
+<tr class="memdesc:a883ec2b528cf2188db6e593ae849fe0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index range of all dimensions except DerivativeDimension. <br /></td></tr>
+<tr class="separator:a883ec2b528cf2188db6e593ae849fe0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1d235c8b9f61d37b4e9920d86d19d4e3" id="r_a1d235c8b9f61d37b4e9920d86d19d4e3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPartialDerivative.html#a1d235c8b9f61d37b4e9920d86d19d4e3">operator()</a> (<a class="el" href="classIPartialDerivative.html#a4ea34d768feb51f42929d53362f4e84f">DFieldVal</a> dfieldval_dxi, <a class="el" href="classIPartialDerivative.html#abda1e7b8313ded22ed32507b75c6c5ca">DConstFieldVal</a> fieldval) const =0</td></tr>
-<tr class="memdesc:a1d235c8b9f61d37b4e9920d86d19d4e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the partial derivative of \( F(X1,..,Xn)\) in Xi direction.  <br /></td></tr>
-<tr class="separator:a1d235c8b9f61d37b4e9920d86d19d4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c4758b3151a9bbd01d9fda1d423353" id="r_ad0c4758b3151a9bbd01d9fda1d423353"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPartialDerivative.html#ad0c4758b3151a9bbd01d9fda1d423353">operator()</a> (<a class="el" href="classIPartialDerivative.html#a47c973564187001a3097fe9b0eb901d5">DFieldType</a> differentiated_field) const =0</td></tr>
+<tr class="memdesc:ad0c4758b3151a9bbd01d9fda1d423353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the partial derivative of a field in a given direction.  <br /></td></tr>
+<tr class="separator:ad0c4758b3151a9bbd01d9fda1d423353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class DFieldValue, class DerivDirection&gt;<br />
-class IPartialDerivative&lt; DFieldValue, DerivDirection &gt;</div><p>A super class for a partial derivative operator. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class IdxRangeFull, class DerivativeDimension&gt;<br />
+class IPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</div><p>An abstract class for a partial derivative operator. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">DFieldValue</td><td>The type of the field on which the operator acts. </td></tr>
-    <tr><td class="paramname">DerivDirection</td><td>The dimension Xi on which the partial derivative is calculated. </td></tr>
+    <tr><td class="paramname">IdxRangeFull</td><td>The index range of the field on which the operator acts (with all dimensions, batched and dimension of interest). </td></tr>
+    <tr><td class="paramname">DerivativeDimension</td><td>The dimension on which the partial derivative is calculated. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1d235c8b9f61d37b4e9920d86d19d4e3" name="a1d235c8b9f61d37b4e9920d86d19d4e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d235c8b9f61d37b4e9920d86d19d4e3">&#9670;&#160;</a></span>operator()()</h2>
+<a id="ad0c4758b3151a9bbd01d9fda1d423353" name="ad0c4758b3151a9bbd01d9fda1d423353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c4758b3151a9bbd01d9fda1d423353">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class DFieldValue , class DerivDirection &gt; </div>
+template&lt;class IdxRangeFull , class DerivativeDimension &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classIPartialDerivative.html">IPartialDerivative</a>&lt; DFieldValue, DerivDirection &gt;::operator() </td>
+          <td class="memname">virtual void <a class="el" href="classIPartialDerivative.html">IPartialDerivative</a>&lt; IdxRangeFull, DerivativeDimension &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classIPartialDerivative.html#a4ea34d768feb51f42929d53362f4e84f">DFieldVal</a>&#160;</td>
-          <td class="paramname"><em>dfieldval_dxi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classIPartialDerivative.html#abda1e7b8313ded22ed32507b75c6c5ca">DConstFieldVal</a>&#160;</td>
-          <td class="paramname"><em>fieldval</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramtype"><a class="el" href="classIPartialDerivative.html#a47c973564187001a3097fe9b0eb901d5">DFieldType</a>&#160;</td>
+          <td class="paramname"><em>differentiated_field</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -207,21 +189,20 @@ template&lt;class DFieldValue , class DerivDirection &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Compute the partial derivative of \( F(X1,..,Xn)\) in Xi direction. </p>
+<p>Compute the partial derivative of a field in a given direction. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">dfieldval_dxi</td><td>Partial derivatives in Xi direction. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fieldval</td><td>Values of the field \( F(X1,..,Xn)\). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">differentiated_field</td><td>On output, contains values of the differentiated field. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classCentralFDMPartialDerivative.html#ac3d3391728c48093f8b33ac7df81f8f7">CentralFDMPartialDerivative&lt; DFieldValue, DerivDirection &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classCentralFDMPartialDerivative.html#ae3faa9459a609771457f2677ef709bd5">CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/<a class="el" href="ipartial__derivatives_8hpp_source.html">ipartial_derivatives.hpp</a></li>
+<li>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/<a class="el" href="ipartial__derivative_8hpp_source.html">ipartial_derivative.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
