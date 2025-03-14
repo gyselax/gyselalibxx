@@ -23,27 +23,27 @@
  *
  * The Vlasov-Poisson equations are given by
  *
- * - (1) @f$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y\rho = 0 @f$,
+ * - (1) @f$ \partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0 @f$,
  *
- * - (2) @f$ - L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho  @f$,
+ * - (2) @f$ - \nabla \phi = \rho  @f$,
  *
- * - (3) and @f$ E = -\nabla \phi  @f$.
+ * - (3) @f$ E = -\nabla \phi  @f$.
  *
- * The functions are defined on a logical index range, and the mapping from the logical
- * index range to the physical index range is written @f$\mathcal{F}@f$.
+ * The functions are defined on a logical domain, and the mapping from the logical
+ * domain to the physical domain is written @f$\mathcal{F}@f$.
  *
  * We here focus on equation (3). The @f$ \phi @f$ is already computed 
- * on B-splines with the given Poisson solver. Then in the AdvectionFieldRTheta::operator()
+ * on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator()
  * we compute the advection field (@f$A = E \wedge e_z@f$) thanks to (3) using the B-splines coefficients.
  * Depending on the given mapping, the computation at the centre point is not
  * always well-defined so we linearise around the centre point as explained
  * in Edoardo Zoni's article (https://doi.org/10.1016/j.jcp.2019.108889).
  * 
- * The advection field can be computed along the logical index range axis or the physical index range
+ * The advection field can be computed along the logical domain axis or the physical domain
  * axis. 
  * 
  * 1- In the first case, we compute the electric field thanks to (3) and 
- * - @f$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} [\partial_r \phi, \partial_\theta \phi]^T @f$,
+ * - @f$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} \hat{\nabla}_{r,\theta} \phi(r, \theta) @f$,
  * - @f$ E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) @f$,
  * 
  * For @f$ r < \varepsilon @f$, @f$(J^{-1})^{T}@f$ is  ill-defined so we linearise 
@@ -62,18 +62,21 @@
  * linearly independent directions.
  * 
  * 
- * Then the advection field along the physical index range axis 
+ * Then the advection field along the physical domain axis 
  * is given by @f$A = E \wedge e_z@f$.
  * 
  * 
- * 2- In the second case, the advection field along the logical index range axis
+ * 2- In the second case, the advection field along the logical domain axis
  * is computed with 
- * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} e_j@f$, 
+ * - @f$ \hat{\nabla} \phi = \sum_{i,j} \partial_{x_i} \phi g^{ij} e_j@f$, 
  * - with @f$g^{ij}@f$, the coefficients of the inverse metric tensor,
  * - @f$g_{jj}@f$, the coefficients of the metric tensor,
  * - @f$e_j@f$, the unnormalized local covariants vectors.
  * 
- * Then, we compute @f$ E = -\nabla \phi  @f$ and @f$A = E \wedge e_z@f$.
+ * Then, we compute @f$ \hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi @f$ and 
+ * @f$ \hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z) @f$, 
+ * with @f$ J @f$ the Jacobian matrix of the transformation 
+ * @f$ (r,\theta) \mapsto (x,y) @f$.
  * 
  *
  * The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
@@ -82,9 +85,7 @@
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  *
- *
  * @see PolarSplineFEMPoissonLikeSolver
- *
  */
 template <class Mapping>
 class AdvectionFieldFinder
@@ -112,7 +113,7 @@ public:
      * @brief Instantiate a AdvectionFieldRTheta .
      *
      * @param[in] mapping
-     *      The mapping @f$ \mathcal{F} @f$ from the logical index range to the physical index range.
+     *      The mapping @f$ \mathcal{F} @f$ from the logical domain to the physical domain.
      * @param[in] epsilon
      *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
@@ -252,17 +253,20 @@ private:
             if (r > m_epsilon) {
                 CoordRTheta const coord_rtheta(r, th);
 
-                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
+                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta); // inverse Jacobian matrix
 
-                // Gradient of phi in the physical index range (Cartesian index range)
-                double const deriv_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
-                                           + deriv_theta_phi(irtheta) * inv_J[1][0];
-                double const deriv_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
-                                           + deriv_theta_phi(irtheta) * inv_J[1][1];
+                // Gradient of phi in the physical domain (Cartesian domain)
+                // grad phi = (dr phi, dtheta phi) in coravariant basis
+                double const grad_r_phi = deriv_r_phi(irtheta);
+                double const grad_theta_phi = deriv_theta_phi(irtheta);
+
+                // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
+                double const grad_x_phi = grad_r_phi * inv_J[0][0] + grad_theta_phi * inv_J[1][0];
+                double const grad_y_phi = grad_r_phi * inv_J[0][1] + grad_theta_phi * inv_J[1][1];
 
                 // E = -grad phi
-                ddcHelper::get<X>(electric_field)(irtheta) = -deriv_x_phi;
-                ddcHelper::get<Y>(electric_field)(irtheta) = -deriv_y_phi;
+                ddcHelper::get<X>(electric_field)(irtheta) = -grad_x_phi;
+                ddcHelper::get<Y>(electric_field)(irtheta) = -grad_y_phi;
 
             } else {
                 // Linearisation of the electric field
@@ -302,7 +306,8 @@ private:
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
+                Matrix_2x2 inv_J_eps
+                        = inv_jacobian_matrix(coord_rtheta_epsilon); // inverse Jacobian matrix
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
                         coord_rtheta_epsilon,
@@ -311,15 +316,20 @@ private:
                         coord_rtheta_epsilon,
                         get_const_field(electrostatic_potential_coef));
 
-                // Gradient of phi in the physical index range (Cartesian index range)
-                double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
-                                                   + deriv_theta_phi_epsilon * inv_J_eps[1][0];
-                double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
-                                                   + deriv_theta_phi_epsilon * inv_J_eps[1][1];
+                // Gradient of phi in the physical domain (Cartesian domain)
+                // grad phi = (dr phi, dtheta phi) in covariant basis
+                double const grad_r_phi_epsilon = deriv_r_phi_epsilon;
+                double const grad_theta_phi_epsilon = deriv_theta_phi_epsilon;
+
+                // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
+                double const grad_x_phi_epsilon = grad_r_phi_epsilon * inv_J_eps[0][0]
+                                                  + grad_theta_phi_epsilon * inv_J_eps[1][0];
+                double const grad_y_phi_epsilon = grad_r_phi_epsilon * inv_J_eps[0][1]
+                                                  + grad_theta_phi_epsilon * inv_J_eps[1][1];
 
                 // E = -grad phi
-                double const electric_field_x_epsilon = -deriv_x_phi_epsilon;
-                double const electric_field_y_epsilon = -deriv_y_phi_epsilon;
+                double const electric_field_x_epsilon = -grad_x_phi_epsilon;
+                double const electric_field_y_epsilon = -grad_y_phi_epsilon;
 
 
                 // --- Linearisation:
@@ -333,9 +343,9 @@ private:
 
             // > computation of the advection field
             ddcHelper::get<X>(advection_field_xy)(irtheta)
-                    = -ddcHelper::get<Y>(electric_field)(irtheta);
+                    = ddcHelper::get<Y>(electric_field)(irtheta);
             ddcHelper::get<Y>(advection_field_xy)(irtheta)
-                    = ddcHelper::get<X>(electric_field)(irtheta);
+                    = -ddcHelper::get<X>(electric_field)(irtheta);
         });
     }
 
@@ -343,7 +353,7 @@ private:
 
 public:
     // -------------------------------------------------------------------------------------------
-    // COMPUTE ADVECTION FIELD IN RTheta:                                                            |
+    // COMPUTE ADVECTION FIELD IN RTheta:                                                        |
     // Advection field along the logical directions.                                             |
     // -------------------------------------------------------------------------------------------
 
@@ -354,13 +364,13 @@ public:
      * @param[in] electrostatic_potential
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis. 
+     *      The advection field on the logical axis. It is expressed in the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<DFieldRTheta> electrostatic_potential,
-            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         IdxRangeRTheta const grid = get_idx_range(electrostatic_potential);
@@ -385,13 +395,13 @@ public:
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis. 
+     *      The advection field on the logical axis. It is expressed in the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point.  
      */
     void operator()(
             host_t<Spline2D> electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
@@ -409,13 +419,13 @@ public:
      * @param[in] electrostatic_potential_coef
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis. 
+     *      The advection field on the logical axis. It is expressed in the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
     void operator()(
             host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         compute_advection_field_RTheta(
@@ -436,7 +446,8 @@ private:
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis on an index range without O-point. 
+     *      The advection field on the logical axis on an domain without O-point.
+     *      It is expressed in the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
@@ -444,7 +455,7 @@ private:
     void compute_advection_field_RTheta(
             Evaluator evaluator,
             SplineType& electrostatic_potential_coef,
-            host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta,
+            host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             CoordXY& advection_field_xy_centre) const
     {
         static_assert(
@@ -484,7 +495,10 @@ private:
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
-                    = metric_tensor.inverse(coord_rtheta);
+                    = metric_tensor.inverse(coord_rtheta); // inverse tensor metric
+            std::array<std::array<double, 2>, 2> J; // Jacobian matrix
+            m_mapping.jacobian_matrix(coord_rtheta, J);
+            double const jacobian = m_mapping.jacobian(coord_rtheta);
 
             // E = -grad phi
             double const electric_field_r
@@ -494,9 +508,13 @@ private:
                     = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
                       - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
 
-            // A = E \wedge e_z
-            ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) = -electric_field_theta;
-            ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) = electric_field_r;
+            // A (see README for the expression)
+            ddcHelper::get<R>(advection_field_rtheta)(irtheta)
+                    = (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_r / jacobian
+                      + (J[1][1] * J[1][1] + J[0][1] * J[0][1]) * electric_field_theta / jacobian;
+            ddcHelper::get<Theta>(advection_field_rtheta)(irtheta)
+                    = -(J[0][0] * J[0][0] + J[1][0] * J[1][0]) * electric_field_r / jacobian
+                      - (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_theta / jacobian;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================
@@ -526,6 +544,6 @@ private:
         double const deriv_y_phi_0
                 = (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant;
 
-        advection_field_xy_centre = CoordXY(deriv_y_phi_0, -deriv_x_phi_0);
+        advection_field_xy_centre = CoordXY(-deriv_y_phi_0, deriv_x_phi_0);
     }
 };
