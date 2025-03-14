@@ -297,7 +297,8 @@ public:
 
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
-            auto allfdistribu_predicted_host = ddc::create_mirror_view_and_copy(allfdistribu_predicted);
+            auto allfdistribu_predicted_host
+                    = ddc::create_mirror_view_and_copy(allfdistribu_predicted);
             m_builder(get_field(allfdistribu_coef), get_const_field(allfdistribu_predicted_host));
             PoissonLikeRHSFunction const
                     charge_density_coord_4(get_const_field(allfdistribu_coef), m_evaluator);
