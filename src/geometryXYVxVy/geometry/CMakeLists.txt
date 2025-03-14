@@ -8,6 +8,7 @@ target_include_directories("geometry_xyvxvy"
 )
 target_link_libraries("geometry_xyvxvy" INTERFACE
     DDC::core
+    gslx::mpi_parallelisation
     gslx::speciesinfo
     gslx::utils
 )

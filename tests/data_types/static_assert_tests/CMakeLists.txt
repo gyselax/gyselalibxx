@@ -3,13 +3,9 @@ function(add_static_assert_test file error_msg)
 
 add_executable(${file}-build-fail-test
     ${file}.cpp
-    ../../main.cpp
 )
 target_link_libraries(${file}-build-fail-test
         PUBLIC
-        GTest::gtest
-        GTest::gmock
-
         gslx::data_types
         gslx::utils
 )
@@ -28,6 +24,8 @@ add_test(
 set_tests_properties(${file} PROPERTIES
     PASS_REGULAR_EXPRESSION ${error_msg}
 )
+
+set_property(TEST ${file} PROPERTY TIMEOUT 20)
 
 endfunction()
 

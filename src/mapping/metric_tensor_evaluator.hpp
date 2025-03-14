@@ -3,6 +3,7 @@
 #include <type_traits>
 
 #include "ddc_aliases.hpp"
+#include "indexed_tensor.hpp"
 #include "mapping_tools.hpp"
 #include "tensor.hpp"
 #include "vector_index_tools.hpp"
@@ -98,34 +99,5 @@ public:
                 = (J_11 * J_11 + J_21 * J_21) / jacob_2;
 
         return inverse_metric_tensor;
-    }
-
-    /**
-     * @brief Compute the covariant vector from the contravariant vector
-     *
-     * @param[in] contravariant_vector
-     * 				The metric tensor matrix.
-     * @param[in] coord
-     * 				The coordinate where we want to compute the convariant vector.
-     *
-     * @return A vector of the covariant
-     */
-    KOKKOS_FUNCTION CovariantVectorType to_covariant(
-            ContravariantVectorType const& contravariant_vector,
-            PositionCoordinate const& coord) const
-    {
-        DTensor<Dims_cov, Dims_cov> inv_metric_tensor = inverse(coord);
-        CovariantVectorType covariant_vector;
-        ddcHelper::get<Dim0_cov>(covariant_vector)
-                = ddcHelper::get<Dim0_cov, Dim0_cov>(inv_metric_tensor)
-                          * ddcHelper::get<Dim0>(contravariant_vector)
-                  + ddcHelper::get<Dim0_cov, Dim1_cov>(inv_metric_tensor)
-                            * ddcHelper::get<Dim1>(contravariant_vector);
-        ddcHelper::get<Dim1_cov>(covariant_vector)
-                = ddcHelper::get<Dim1_cov, Dim0_cov>(inv_metric_tensor)
-                          * ddcHelper::get<Dim0>(contravariant_vector)
-                  + ddcHelper::get<Dim1_cov, Dim1_cov>(inv_metric_tensor)
-                            * ddcHelper::get<Dim1>(contravariant_vector);
-        return covariant_vector;
     }
 };
