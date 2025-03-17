@@ -25,7 +25,7 @@
  *
  * - (1) @f$ \partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0 @f$,
  *
- * - (2) @f$ - \nabla \phi = \rho  @f$,
+ * - (2) @f$ - \nabla\cdot\nabla \phi = \rho  @f$,
  *
  * - (3) @f$ E = -\nabla \phi  @f$.
  *
