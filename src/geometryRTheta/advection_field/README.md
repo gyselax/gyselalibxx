@@ -27,7 +27,7 @@ with $`\rho`$ the density, $`\phi`$ the electrostatic potential and $`E`$ the el
 The AdvectionFieldFinder computes the advection field $`A`$ from the electrical field $`\phi`$ returned by the PolarSplineFEMPoissonLikeSolver. 
 It has two types of `operator()`: 
 * one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
-* and the another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$. 
+* and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$. 
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
 * a Field of values of the solution on the mesh points of the grid; 
@@ -54,7 +54,7 @@ The computation of the electrical field can be ill-defined around the O-point, s
 = \partial_x \phi e_x + \partial_y \phi e_y 
 = J^{-T}(\partial_r \phi e^r + \partial_\theta \phi e^\theta), 
 \qquad 
-\text{in the covavariant basis,}
+\text{in the covariant basis,}
 ```
 
 with $`J`$  the Jacobian matrix and *G* the tensor metric of the mapping $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$. 

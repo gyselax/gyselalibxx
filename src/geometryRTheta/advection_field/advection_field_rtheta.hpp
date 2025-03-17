@@ -256,13 +256,11 @@ private:
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta); // inverse Jacobian matrix
 
                 // Gradient of phi in the physical domain (Cartesian domain)
-                // grad phi = (dr phi, dtheta phi) in coravariant basis
-                double const grad_r_phi = deriv_r_phi(irtheta);
-                double const grad_theta_phi = deriv_theta_phi(irtheta);
-
                 // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
-                double const grad_x_phi = grad_r_phi * inv_J[0][0] + grad_theta_phi * inv_J[1][0];
-                double const grad_y_phi = grad_r_phi * inv_J[0][1] + grad_theta_phi * inv_J[1][1];
+                double const grad_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
+                                          + deriv_theta_phi(irtheta) * inv_J[1][0];
+                double const grad_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
+                                          + deriv_theta_phi(irtheta) * inv_J[1][1];
 
                 // E = -grad phi
                 ddcHelper::get<X>(electric_field)(irtheta) = -grad_x_phi;
@@ -317,15 +315,11 @@ private:
                         get_const_field(electrostatic_potential_coef));
 
                 // Gradient of phi in the physical domain (Cartesian domain)
-                // grad phi = (dr phi, dtheta phi) in covariant basis
-                double const grad_r_phi_epsilon = deriv_r_phi_epsilon;
-                double const grad_theta_phi_epsilon = deriv_theta_phi_epsilon;
-
                 // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
-                double const grad_x_phi_epsilon = grad_r_phi_epsilon * inv_J_eps[0][0]
-                                                  + grad_theta_phi_epsilon * inv_J_eps[1][0];
-                double const grad_y_phi_epsilon = grad_r_phi_epsilon * inv_J_eps[0][1]
-                                                  + grad_theta_phi_epsilon * inv_J_eps[1][1];
+                double const grad_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
+                                                  + deriv_theta_phi_epsilon * inv_J_eps[1][0];
+                double const grad_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
+                                                  + deriv_theta_phi_epsilon * inv_J_eps[1][1];
 
                 // E = -grad phi
                 double const electric_field_x_epsilon = -grad_x_phi_epsilon;
@@ -364,7 +358,7 @@ public:
      * @param[in] electrostatic_potential
      *      The values of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis. It is expressed in the contravariant basis. 
+     *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
@@ -395,7 +389,7 @@ public:
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis. It is expressed in the contravariant basis. 
+     *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point.  
      */
@@ -419,7 +413,7 @@ public:
      * @param[in] electrostatic_potential_coef
      *      The polar spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis. It is expressed in the contravariant basis. 
+     *      The advection field on the logical axis. It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
@@ -447,7 +441,7 @@ private:
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
      *      The advection field on the logical axis on an domain without O-point.
-     *      It is expressed in the contravariant basis. 
+     *      It is expressed on the contravariant basis. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */
@@ -495,7 +489,7 @@ private:
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
-                    = metric_tensor.inverse(coord_rtheta); // inverse tensor metric
+                    = metric_tensor.inverse(coord_rtheta); // inverse metric tensor 
             std::array<std::array<double, 2>, 2> J; // Jacobian matrix
             m_mapping.jacobian_matrix(coord_rtheta, J);
             double const jacobian = m_mapping.jacobian(coord_rtheta);

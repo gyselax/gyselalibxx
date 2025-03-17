@@ -156,7 +156,7 @@ public:
      * @param [in] advection_field_rtheta
      *      A DConstVectorFieldRTheta containing the values of the advection field
      *      on the logical index range axis.
-     *      It is expressed in the contravariant basis.
+     *      It is expressed on the contravariant basis.
      * @param [in] advection_field_xy_centre
      *      A CoordXY containing the value of the advection field on the 
      *      physical index range axis at the O-point. 

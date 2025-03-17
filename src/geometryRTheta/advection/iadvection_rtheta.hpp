@@ -39,7 +39,7 @@ public:
      * @param[in, out] allfdistribu
      *      The function to be advected.
      * @param[in] advection_field
-     *      The advection field in the contravariant basis of the logical domain.
+     *      The advection field on the contravariant basis of the logical domain.
      * @param[in] advection_field_xy_centre
      *      The advection field along the physical index range axes, XY
      *      at the centre point.
