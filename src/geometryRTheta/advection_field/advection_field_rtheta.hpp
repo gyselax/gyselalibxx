@@ -253,7 +253,7 @@ private:
             if (r > m_epsilon) {
                 CoordRTheta const coord_rtheta(r, th);
 
-                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta); 
+                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
 
                 // Gradient of phi in the physical domain (Cartesian domain)
                 // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
@@ -304,8 +304,7 @@ private:
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps
-                        = inv_jacobian_matrix(coord_rtheta_epsilon); 
+                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
 
                 double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
                         coord_rtheta_epsilon,
@@ -489,8 +488,8 @@ private:
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
-                    = metric_tensor.inverse(coord_rtheta); 
-            std::array<std::array<double, 2>, 2> J; 
+                    = metric_tensor.inverse(coord_rtheta);
+            std::array<std::array<double, 2>, 2> J;
             m_mapping.jacobian_matrix(coord_rtheta, J);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
