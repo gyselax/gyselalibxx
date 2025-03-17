@@ -1,0 +1,41 @@
+site_name: GyselalibX
+repo_url: https://github.com/gyselax/gyselalibxx/
+
+docs_dir: 'mkdoc/'
+
+nav:
+  - General: 
+    - Home: README.md 
+    - Installation: docs/tutorials/install.md
+  - Documentation:
+    - Source: src
+    - toolchains 
+    - Simulations: simulations
+    - Tests: tests
+  - Tutorials: docs/tutorials
+    # - Getting Started: getting_started.md
+    # - Coding Standards: CODING_STANDARD.md
+    # - Git Version Control: Using_git.md
+    # - Adding Documentation: Adding_docs.md
+    # - DDC: DDC_in_gyselalibxx.md
+    # - Compilaiton Problems: Common_compilation_problems.md
+    # - FAQ: developer_FAQ.md
+
+theme: readthedocs
+
+plugins:
+  - mkdocs-pdf
+  - search
+  - include_dir_to_nav:
+      flat: false
+      file_name_as_title: true
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - jscript/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
