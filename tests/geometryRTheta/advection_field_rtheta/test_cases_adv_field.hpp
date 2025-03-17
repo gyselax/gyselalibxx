@@ -268,18 +268,15 @@ public:
  * @see ElectrostaticPotentialSimulation
  * @see AdvectionField
  */
-template <
-        class ElectrostaticPotentialSimulation,
-        class FunctionToBeAdvected,
-        class AdvectionField>
+template <class ElectrostaticPotentialSimulation, class FunctionToBeAdvected, class AdvectionField>
 struct AdvectionFieldSimulation
 {
     /// @brief The chosen electrostatical potential for the simulation.
     ElectrostaticPotentialSimulation const electrostatical_potential;
-    
+
     /// @brief The chosen function to be advected for the simulation.
     FunctionToBeAdvected const function;
-    
+
     /// @brief The chosen advection field for the simulation.
     AdvectionField const advection_field;
 };
