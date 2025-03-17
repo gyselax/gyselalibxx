@@ -8,8 +8,8 @@ The tests implemented in this folder test the 2D polar advection operator implem
 The tests are made for different parameters which are:
 
 ### - The mapping and the domain used for the advection: 
- - Circular mapping in the physical domain (CircularToCartesian and AdvectionPhysicalDomain); 
- - Czarny mapping in the physical domain (CzarnyToCartesian and AdvectionPhysicalDomain); 
+ - Circular mapping in the physical domain (CircularToCartesian); 
+ - Czarny mapping in the physical domain (CzarnyToCartesian); 
  - Czarny mapping in the pseudo-Cartesian domain (CzarnyToCartesian); 
  - Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (DiscreteToCartesian).
  	
