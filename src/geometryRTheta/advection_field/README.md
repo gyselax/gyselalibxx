@@ -57,7 +57,7 @@ The computation of the electrical field can be ill-defined around the O-point, s
 \text{in the covariant basis,}
 ```
 
-with $`J`$  the Jacobian matrix and *G* the tensor metric of the mapping $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$. 
+with $`J`$  the Jacobian matrix  of the coordinate transformation (mapping) $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$ and *G* the tensor metric of the contravariant basis of the curvilinear coordinates $`(r,\theta)`$. 
 Then the electric field is given by 
 ```math
 E = -\nabla \phi
@@ -130,7 +130,7 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 * In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by 
 
 ```math
-\nabla f = \sum_i \partial_{q_i} f b^j
+\nabla f = \sum_i \partial_{q_i} f b^i
 ```
 
 with 
