@@ -2,9 +2,9 @@ var searchData=
 [
   ['edge_0',['Edge',['../structEdge.html',1,'']]],
   ['edgetransformation_1',['EdgeTransformation',['../classEdgeTransformation.html',1,'']]],
-  ['electrostaticalpotentialsimulation_5fdecentred_5frotation_2',['ElectrostaticalPotentialSimulation_decentred_rotation',['../classElectrostaticalPotentialSimulation__decentred__rotation.html',1,'']]],
-  ['electrostaticalpotentialsimulation_5frotation_3',['ElectrostaticalPotentialSimulation_rotation',['../classElectrostaticalPotentialSimulation__rotation.html',1,'']]],
-  ['electrostaticalpotentialsimulation_5ftranslation_4',['ElectrostaticalPotentialSimulation_translation',['../classElectrostaticalPotentialSimulation__translation.html',1,'']]],
+  ['electrostaticpotentialsimulation_5fdecentred_5frotation_2',['ElectrostaticPotentialSimulation_decentred_rotation',['../classElectrostaticPotentialSimulation__decentred__rotation.html',1,'']]],
+  ['electrostaticpotentialsimulation_5frotation_3',['ElectrostaticPotentialSimulation_rotation',['../classElectrostaticPotentialSimulation__rotation.html',1,'']]],
+  ['electrostaticpotentialsimulation_5ftranslation_4',['ElectrostaticPotentialSimulation_translation',['../classElectrostaticPotentialSimulation__translation.html',1,'']]],
   ['enforcefirstinterfaceedge_5',['EnforceFirstInterfaceEdge',['../structconnectivity__details_1_1EnforceFirstInterfaceEdge.html',1,'connectivity_details']]],
   ['enforcefirstinterfaceedge_3c_20interface_3c_20edge2_2c_20firstedge_2c_20orientations_20_3e_2c_20firstedge_20_3e_6',['EnforceFirstInterfaceEdge&lt; Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;',['../structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01Edge2_00_01FirstEdge_221a02b03250a49af1745b2263467420.html',1,'connectivity_details']]],
   ['enforcefirstinterfaceedge_3c_20interface_3c_20firstedge_2c_20edge2_2c_20orientations_20_3e_2c_20firstedge_20_3e_7',['EnforceFirstInterfaceEdge&lt; Interface&lt; FirstEdge, Edge2, Orientations &gt;, FirstEdge &gt;',['../structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01FirstEdge_00_01Edge2_788676fcb3310ca4c1ec984ff0b4531b.html',1,'connectivity_details']]],

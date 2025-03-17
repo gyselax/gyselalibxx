@@ -1,6 +1,6 @@
 var structAdvectionFieldSimulation =
 [
-    [ "electrostatical_potential", "structAdvectionFieldSimulation.html#a3e814db3cf19eb30b2d1996edb6992b9", null ],
-    [ "function", "structAdvectionFieldSimulation.html#afeaddd07bafe593e61adab53ac40a600", null ],
-    [ "advection_field", "structAdvectionFieldSimulation.html#ad9b91146d71964104f3ade857f87263d", null ]
+    [ "electrostatical_potential", "structAdvectionFieldSimulation.html#a01abdb1eb88418d9794702eae59754b2", null ],
+    [ "function", "structAdvectionFieldSimulation.html#a1b74d8f5a0620298a6c1cc7c289e1af7", null ],
+    [ "advection_field", "structAdvectionFieldSimulation.html#a12c8b1b0e0cbdd6a627dfa841f5423a6", null ]
 ];

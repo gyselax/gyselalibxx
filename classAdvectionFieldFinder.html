@@ -154,9 +154,9 @@ class AdvectionFieldFinder&lt; Mapping &gt;</div><p>Solve the Poisson-like equat
 <li>(2) \( - L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho  \),</li>
 <li>(3) and \( E = -\nabla \phi  \).</li>
 </ul>
-<p>The functions are defined on a logical index range, and the mapping from the logical index range to the physical index range is written \(\mathcal{F}\).</p>
-<p>We here focus on equation (3). The \( \phi \) is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldRTheta::operator() we compute the advection field ( \(A = E \wedge e_z\)) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
-<p>The advection field can be computed along the logical index range axis or the physical index range axis.</p>
+<p>The functions are defined on a logical domain, and the mapping from the logical domain to the physical domain is written \(\mathcal{F}\).</p>
+<p>We here focus on equation (3). The \( \phi \) is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator() we compute the advection field ( \(A = E \wedge e_z\)) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
+<p>The advection field can be computed along the logical domain axis or the physical domain axis.</p>
 <p>1- In the first case, we compute the electric field thanks to (3) and</p><ul>
 <li>\( \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} [\partial_r \phi, \partial_\theta \phi]^T \),</li>
 <li>\( E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) \),</li>
@@ -171,8 +171,8 @@ class AdvectionFieldFinder&lt; Mapping &gt;</div><p>Solve the Poisson-like equat
 + \partial_r y  \partial_y \phi \right] (0, \theta_2) \),</li>
 </ul>
 <p>where \( \theta_1 \) and \( \theta_2 \) correspond to linearly independent directions.</p>
-<p>Then the advection field along the physical index range axis is given by \(A = E \wedge e_z\).</p>
-<p>2- In the second case, the advection field along the logical index range axis is computed with</p><ul>
+<p>Then the advection field along the physical domain axis is given by \(A = E \wedge e_z\).</p>
+<p>2- In the second case, the advection field along the logical domain axis is computed with</p><ul>
 <li>\( \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} e_j\),</li>
 <li>with \(g^{ij}\), the coefficients of the inverse metric tensor,</li>
 <li>\(g_{jj}\), the coefficients of the metric tensor,</li>
@@ -227,7 +227,7 @@ template&lt;class Mapping &gt; </div>
 <p>Instantiate a AdvectionFieldRTheta . </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping \( \mathcal{F} \) from the logical index range to the physical index range. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping \( \mathcal{F} \) from the logical domain to the physical domain. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">epsilon</td><td>The parameter \( \varepsilon \) for the linearisation of the electric field. </td></tr>
   </table>
   </dd>

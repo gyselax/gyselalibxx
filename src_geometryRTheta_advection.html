@@ -116,7 +116,7 @@ Studied equation</h1>
 <p><b>We want to solve it on a polar grid so we have:</b> \((t,x,y) = (t,x(r,\theta),y(r,\theta))\).</p>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Backward_Semi-Lagrangian_method"></a>
 Backward Semi-Lagrangian method</h1>
-<p>The method used to solve the equation is a Backward Semi-Lagrangian method (BSL). It uses the conservation along the characteristics property:  </p><p class="formulaDsp">
+<p>The method used to solve the equation is a backward Semi-Lagrangian method (BSL). It uses the conservation property along the characteristics:  </p><p class="formulaDsp">
 \[\forall t, \quad f(t, x, y) = f(s, X(t; s, x, y), Y(t; s, x, y))
 \]
 </p>
@@ -128,8 +128,8 @@ Y(s; s, x, y) = y.
 \]
 </p>
 <p>So to compute the advected function at the next time step,</p><ul>
-<li>we compute the characteristics' feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh point \((x_i, y_j)\) with a time integration method ;</li>
-<li>we interpolate the function \(f(t = t^n)\) on the characteristics' feet. The property ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
+<li>we compute the feet of the characteristics \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) for each mesh point \((x_i, y_j)\) with a time integration method ;</li>
+<li>we interpolate the function \(f(t = t^n)\) on the feet of the characteristics. The property ensures that the interpolation gives the function at the next time step \(f(t = t^{n+1})\).</li>
 </ul>
 <h1><a class="anchor" id="src_geometryRTheta_advection__Time_integration_methods"></a>
 Time integration methods</h1>
@@ -139,8 +139,8 @@ Time integration methods</h1>
 <li>Runge-Kutta 3 method: <a class="el" href="classRK3.html" title="A class which provides an implementation of a third-order Runge-Kutta method.">RK3</a>;</li>
 <li>Runge-Kutta 4 method: <a class="el" href="classRK4.html" title="A class which provides an implementation of a fourth-order Runge-Kutta method.">RK4</a>;</li>
 </ul>
-<p>We are listing the different schemes for this equation \(\partial_t X (t) = A_x(t, X(t),Y(t))\).</p>
-<p>We write \(X (t) = X (t; s, x, y)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1},  \forall n\}_n\).</p>
+<p>We are listing the different schemes for this equation \(\partial_t X (t) = A(t, X(t))\).</p>
+<p>We write \(X (t) = X (t; s, x)\), \(X^n = X(t^n)\) and \(A^n(X) = A(t^n, X)\) for a time discretisation \(\{t^n; t^n &gt; t^{n-1},  \forall n\}_n\).</p>
 <h3><a class="anchor" id="autotoc_md52"></a>
 Explicit Euler method</h3>
 <ul>
@@ -196,9 +196,9 @@ Advection domain</h1>
 </p>
 <p>This adds some steps to the advection operator, we now have to compute</p><ul>
 <li>the mesh points in the physical domain using \(\mathcal{F}\);</li>
-<li>the characteristics' feet in the physical domain;</li>
-<li>the characteristics' feet in the logical domain (polar grid) using \(\mathcal{F}^{-1}\);</li>
-<li>then interpolate the advection function at the characteristics' feet in the logical domain.</li>
+<li>the feet of the characteristics in the physical domain;</li>
+<li>the feet of the characteristics in the logical domain (polar grid) using \(\mathcal{F}^{-1}\);</li>
+<li>then interpolate the advection function at the feet of the characteristics in the logical domain.</li>
 </ul>
 <p>The third step can be difficult especially if the mapping function \(\mathcal{F}\) is not analytically invertible. It is not impossible, but the computations can be costly.</p>
 <p>That is why, we introduce the <b>pseudo-Cartesian domain</b>. We use another mapping function \(\mathcal{G}\) such that:</p>
@@ -209,9 +209,9 @@ Advection domain</h1>
 <p>Then the four previous steps become</p><ul>
 <li>calculate the mesh points in the pseudo-Cartesian domain using \(\mathcal{G}\);</li>
 <li>calculate the advection field \(A\) in the pseudo-Cartesian domain using the Jacobian matrix of \((\mathcal{F}\circ\mathcal{G}^{-1})^{-1}\);</li>
-<li>calculate the characteristics' feet in the pseudo_Cartesian domain;</li>
-<li>calculate the characteristics' feet in the logical domain (polar grid) using \(\mathcal{G}^{-1}\);</li>
-<li>interpolate the advection function at the characteristics' feet in the logical domain.</li>
+<li>calculate the feet of the characteristics in the pseudo_Cartesian domain;</li>
+<li>calculate the feet of the characteristics in the logical domain (polar grid) using \(\mathcal{G}^{-1}\);</li>
+<li>interpolate the advection function at the feet of the characteristics in the logical domain.</li>
 </ul>
 <p>Here, \(\mathcal{G}\) is analytically invertible (we can fix \(\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)\)) and \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in <a class="el" href="src_geometryRTheta_advection_field.html#zoni">Zoni et al. (2019)</a>.</p>
 <p><b>Remark 1:</b> if \(\mathcal{F}\) is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.</p>

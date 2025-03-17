@@ -137,16 +137,16 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class FootFinder, class Mapping&gt;<br />
 class BslAdvectionRTheta&lt; FootFinder, Mapping &gt;</div><p>Define an advection operator on 2D \((r, \theta)\) index range. </p>
-<p>The advection operator uses a semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</p>
-<p>For the following equation: \(\partial_t f(t,x) + V(t, x) \cdot \nabla_x f(t,x) = 0,  \)</p>
-<p>we write the characteristics: \( \partial_t X(t; s, x) = V(t, X(t; s, x)), \qquad \text{ with } X(s; s, x) = x. \)</p>
+<p>The advection operator uses a backward semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</p>
+<p>For the following equation: \(\partial_t f(t,x) + A(t, x) \cdot \nabla_x f(t,x) = 0,  \)</p>
+<p>we write the characteristics: \( \partial_t X(t; s, x) = A(t, X(t; s, x)), \qquad \text{ with } X(s; s, x) = x. \)</p>
 <p>Then the property gives us: \( f(t, x) = f(0, X(t; 0, x)), \quad \forall t. \)</p>
-<p>So the first step of the advection operator is to compute the characteristic feet \( X(t; t+dt, x_i) \) for each mesh point \( x_i \).</p>
-<p>For the second step, we interpolate the function at the characteristic feet computed, and obtain the function at the next time step: \( f(t + dt, x) = f(t, X(t + dt; t, x))\).</p>
-<p>Different time integration methods are implemented to solve the characteristic equation. They are defined in the IFootFinder class.</p>
-<p>The feet can be advected on different domains. Theses domains are defined in the AdvectionDomain class.</p>
-<p>The interpolation of the function is always done in the logical index range.</p>
-<dl class="section see"><dt>See also</dt><dd>IFootFinder </dd></dl>
+<p>So the first step of the advection operator is to compute the feet of the characteristics \( X(t; t+dt, x_i) \) for each mesh point \( x_i \).</p>
+<p>For the second step, we interpolate the function at the feet of the characteristics computed, and obtain the function at the next time step: \( f(t + dt, x) = f(t, X(t + dt; t, x))\).</p>
+<p>Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the <a class="el" href="classIPolarFootFinder.html" title="Define a base class for all the time integration methods used to find the foot of a characteristic on...">IPolarFootFinder</a> class.</p>
+<p>The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the <a class="el" href="classSplinePolarFootFinder.html" title="A class to find the foot of the characteristics on the  plane.">SplinePolarFootFinder</a> operator.</p>
+<p>The interpolation of the function is always done in the logical domain, where the B-splines are defined.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classIPolarFootFinder.html" title="Define a base class for all the time integration methods used to find the foot of a characteristic on...">IPolarFootFinder</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a49bf03be8882926e0cab726a38a8f032" name="a49bf03be8882926e0cab726a38a8f032"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49bf03be8882926e0cab726a38a8f032">&#9670;&#160;</a></span>BslAdvectionRTheta()</h2>
@@ -193,8 +193,8 @@ template&lt;class FootFinder , class Mapping &gt; </div>
 <p>Instantiate an advection operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">function_interpolator</td><td>The polar interpolator to interpolate the function once the characteristic computed. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">foot_finder</td><td>An IFootFinder which computes the characteristic feet. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">function_interpolator</td><td>The polar interpolator to interpolate the function once the characteristics have been computed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">foot_finder</td><td>An IFootFinder which computes the feet of the characteristics. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping function from the logical domain to the physical domain.</td></tr>
   </table>
   </dd>
