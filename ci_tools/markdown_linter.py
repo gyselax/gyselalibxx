@@ -22,8 +22,12 @@ def index_to_line_info(idx, text_block):
 
 # '$'
 inline_math_tag = re.compile(r'(?<!\`)(?<!\$)\$(?!\`)(?!\$)')
-start_inline_math_tag = re.compile(r'(?<!\$)\$\`(?!\$)')
-end_inline_math_tag = re.compile(r'(?<!\$)\`\$(?!\$)')
+# '$`'/'`$'
+start_inline_math_tag1 = re.compile(r'(?<!\$)\$\`(?!\$)')
+end_inline_math_tag1 = re.compile(r'(?<!\$)\`\$(?!\$)')
+# '\('/'\)'
+start_inline_math_tag2 = re.compile(r'\\\(')
+end_inline_math_tag2 = re.compile(r'\\\)')
 # '$$'
 standalone_math_tag = re.compile(r'(?<!\$)\$\$(?!\$)')
 # '`'
@@ -56,11 +60,11 @@ if __name__ == '__main__':
 
         n_chars = len(file_contents)
 
-        start_tags = [inline_math_tag, start_inline_math_tag, standalone_math_tag, inline_code_tag, multiline_code_tag, start_link_tag]
-        end_tags = [inline_math_tag, end_inline_math_tag, standalone_math_tag, inline_code_tag, multiline_code_tag, end_link_tag]
+        start_tags = [inline_math_tag, start_inline_math_tag1, start_inline_math_tag2, standalone_math_tag, inline_code_tag, multiline_code_tag, start_link_tag]
+        end_tags = [inline_math_tag, end_inline_math_tag1, end_inline_math_tag2, standalone_math_tag, inline_code_tag, multiline_code_tag, end_link_tag]
         n_tag_types = len(start_tags)
 
-        tag_names = ["inline math tag $", "inline math tag $`", "standalone equation tag $$", "inline code tag `", "multiline code tag ```", "link tag []()"]
+        tag_names = ["inline math tag $", "inline math tag $`", "inline math tag \(", "standalone equation tag $$", "inline code tag `", "multiline code tag ```", "link tag []()"]
         tags = [list(s_tag.finditer(file_contents)) for s_tag in start_tags]
 
         expressions = {t: [] for t in chain(tag_names, ["markdown"])}
@@ -101,7 +105,7 @@ if __name__ == '__main__':
         expressions["markdown"].append(Expression(end_line_info, index_to_line_info(n_chars, file_contents), file_contents[content_idx:]))
 
         content_lines = file_contents.split('\n')
-        n_math_blocks = sum(len(expressions[t]) for t in tag_names if "math tag" in t or "equation tag" in t)
+        n_math_blocks = sum(len(expressions[t]) for t in tag_names if "math tag" in t)
 
         # Examine inline maths:
         for expr in expressions["inline math tag $"]:
@@ -115,9 +119,9 @@ if __name__ == '__main__':
                 suggestion = suggestion.strip()
             if any(c in markdown_special_chars for c in expr.contents):
                 success = False
-                start_code = '$`'
-                end_code = '`$'
-                print(f"::error file={file},line={line_info.line}:: Simple inline maths expressions should not contain Markdown special characters {markdown_special_chars}. Please avoid these characters or use $` tags. ({file}: Line {expr.start_pos.line}, position {expr.start_pos.char})", file=sys.stderr)
+                start_code = '\('
+                end_code = '\)'
+                print(f"::error file={file},line={line_info.line}:: Simple inline maths expressions should not contain Markdown special characters {markdown_special_chars}. Please avoid these characters or use \\( tags. ({file}: Line {expr.start_pos.line}, position {expr.start_pos.char})", file=sys.stderr)
             if expr.start_pos.line != expr.end_pos.line:
                 success = False
                 print(f"::error file={file},line={line_info.line}:: Inline maths expressions should be written in one line. ({file}: Line {expr.start_pos.line}-{expr.end_pos.line}, position {expr.start_pos.char})", file=sys.stderr)
@@ -128,12 +132,21 @@ if __name__ == '__main__':
         # Examine inline quoted maths
         for expr in expressions["inline math tag $`"]:
             suggestion = expr.contents
-            start_code = '$`'
-            end_code = '`$'
+            start_code = r'$`'
+            end_code = r'`$'
+            success = False
+            print(f"::error file={file},line={line_info.line}:: Inline maths expressions should not use code quotes.", file=sys.stderr)
+            suggestion = suggestion.replace('$`',r'\(').replace('`$',r'\)')
+
+        # Examine inline quoted maths
+        for expr in chain(expressions["inline math tag $`"], expressions["inline math tag \("]):
+            suggestion = expr.contents
+            start_code = r'\('
+            end_code = r'\)'
             if expr.start_pos.line != expr.end_pos.line:
                 success = False
                 print(f"::error file={file},line={line_info.line}:: Inline maths expressions should be written in one line. ({file}: Line {expr.start_pos.line}-{expr.end_pos.line}, position {expr.start_pos.char})", file=sys.stderr)
-                suggestion = suggestion.replace('\n','')
+                suggestion = suggestion.replace('$`',r'\(').replace('`$',r'\)').replace('\n','')
 
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, start_code+suggestion+end_code))
 
