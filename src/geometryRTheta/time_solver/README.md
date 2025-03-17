@@ -19,7 +19,7 @@ The studied equations system is Vlasov-Poisson equations
 ```
 
 
-Let's write $`\{t^n\}_n \text{ the time discretisation, and } f^n = f(t^n, \cdot, \cdot)`$.
+Let's write \(\{t^n\}_n \text{ the time discretisation, and } f^n = f(t^n, \cdot, \cdot)\).
 
 
 
@@ -55,7 +55,7 @@ Prediction:
  2. From $\phi^n$, we compute $E^n$ by deriving (IQNSolver);
 
  3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRTheta) on $dt$;
- 	- We write $X^P$ the characteristic feet such that $`\partial_t X^P = A^n(X^n)`$.
+ 	- We write $X^P$ the characteristic feet such that \(\partial_t X^P = A^n(X^n)\).
 
 Correction:
 

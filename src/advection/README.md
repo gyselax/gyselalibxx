@@ -26,9 +26,9 @@ The dynamics of the motion are governed by the following equation.
 ```
 
 with
-* $`f`$ the function to advect. It is defined on $`\Omega`$ domain and the time dimension;
-* $`A`$ the advection field. It could be defined on a subdomain $`\Omega'\subset \Omega`$;
-* and $`x_i`$ a given direction. The advection field domain has to be defined on this dimension for the time integration method.
+* \(f\) the function to advect. It is defined on \(\Omega\) domain and the time dimension;
+* \(A\) the advection field. It could be defined on a subdomain \(\Omega'\subset \Omega\);
+* and \(x_i\) a given direction. The advection field domain has to be defined on this dimension for the time integration method.
 
 
 ### Example of use
@@ -39,7 +39,7 @@ Here are some examples of equation types the BslAdvection1D operator can solve:
     \qquad x \in \Omega,
 ```
 
-Here $`\Omega' = \Omega \in \mathbb{R}`$. In the code, it would correspond to
+Here \(\Omega' = \Omega \in \mathbb{R}\). In the code, it would correspond to
 ```cpp
 DFieldX f(idx_range_x);
 DFieldX A(idx_range_x);
@@ -52,7 +52,7 @@ using IDimInterest = IDimX;
     \partial_t f(t,x,y) + A_x(x,y)\partial_{x}f(t,x,y) = 0,
 ```
 
-Here $`\Omega' = \Omega \in \mathbb{R}^2`$. In the code, it would correspond to
+Here \(\Omega' = \Omega \in \mathbb{R}^2\). In the code, it would correspond to
 ```cpp
 DFieldXY f(idx_range_xy);
 DFieldXY A(idx_range_xy);
@@ -65,7 +65,7 @@ using IDimInterest = IDimX;
     \partial_t f(t,x,y,v_x,v_y) + A_x(x,y)\partial_{x}f(t,x,y,v_x,v_y) = 0,
 ```
 
-Here $`\Omega' \in \mathbb{R}^2`$ and $`\Omega \in \mathbb{R}^4`$. In the code, it would correspond to
+Here \(\Omega' \in \mathbb{R}^2\) and \(\Omega \in \mathbb{R}^4\). In the code, it would correspond to
 ```cpp
 DFieldXYVxVy f(idx_range_xyvxvy);
 DFieldXY A(idx_range_xy);
@@ -83,7 +83,7 @@ using IDimInterest = IDimX;
 \end{aligned}
 ```
 
-Here $`\Omega' = \Omega \in \mathbb{R}^2`$. In the code, it would correspond to
+Here \(\Omega' = \Omega \in \mathbb{R}^2\). In the code, it would correspond to
 ```cpp
 DFieldXVx f(idx_range_xvx);
 DFieldXVx A(idx_range_xvx);
@@ -101,7 +101,7 @@ using IDimInterest = IDimVx;
 \end{aligned}
 ```
 
-Here $`\Omega' = \Omega \in \mathbb{R}^2`$. In the code, it would correspond to
+Here \(\Omega' = \Omega \in \mathbb{R}^2\). In the code, it would correspond to
 ```cpp
 DFieldSpXVx f(idx_range_sp_xvx);
 DFieldSpX A(idx_range_sp_x);
@@ -129,7 +129,7 @@ These methods are designed to calculate the foot of the characteristic on the po
 \partial_t f(t,x(r,\theta),y(r,\theta)) + A(t,x(r,\theta),y(r,\theta))\cdot\nabla f(t,x(r,\theta),y(r,\theta)) = 0,
 ```
 
-with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field.
+with \(f(0,x,y) = f_0(x,y)\) and *A* the advection field.
 
 The characteristics are the solutions $X$ and $Y$ of the equations:
 ```math
@@ -181,8 +181,8 @@ Then the four previous steps become
  3. calculate the characteristic feet in the pseudo-Cartesian domain;
  4. calculate the characteristic feet in the logical domain (polar grid) using $\mathcal{G}^{-1}$;
 
-Here, $\mathcal{G}$ is analytically invertible (we can fix  $`\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)`$)
-and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in Edoardo Zoni's article [1].
+Here, $\mathcal{G}$ is analytically invertible (we can fix  \(\mathcal{G}^{-1}(x = x_0, y = y_0) = (r = 0, \theta = 0)\))
+and  \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in Edoardo Zoni's article [1].
 
 
 **Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same.

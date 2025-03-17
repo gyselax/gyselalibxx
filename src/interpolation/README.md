@@ -1,8 +1,8 @@
 # Interpolation Methods
 
-Interpolation methods are any methods which, given values $`f_j=f(x_j)`$, allow the construction of an interpolating function $\phi(x)$ such that:
+Interpolation methods are any methods which, given values \(f_j=f(x_j)\), allow the construction of an interpolating function $\phi(x)$ such that:
 
-$`\phi(x_j)=f_j=f(x_j)`$
+\(\phi(x_j)=f_j=f(x_j)\)
 
 which can return the value of that interpolating function $\phi(x)$ at the desired coordinates.
 
@@ -23,7 +23,7 @@ The interpolation methods implemented are:
 
 Interpolation by a spline interpolating function is implemented in the class SplineInterpolator. In this case the interpolating function $\phi(x)$ is a spline. The basis splines are passed as a template parameter, it is these that determine the order of the spline interpolation.
 
-In order for the interpolation to function correctly the values $`f_j=f(x_j)`$ provided must be located at the points $`x_j`$ identified as the spline interpolation points.
+In order for the interpolation to function correctly the values \(f_j=f(x_j)\) provided must be located at the points \(x_j\) identified as the spline interpolation points.
 
 The spline interpolation method is based entirely on the SplineBuilder and SplineEvaluator classes which are found in DDC.
 

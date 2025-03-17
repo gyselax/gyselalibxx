@@ -21,18 +21,18 @@ The tests are made for different parameters which are:
  	
 ### - The test simulation: 
  - simulation 1: translation of Gaussian function (TranslationSimulation)
-   - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
-   - $`V(t, x, y) = (v_x, v_y)`$ . 
+   - \(f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)\), 
+   - \(V(t, x, y) = (v_x, v_y)\) . 
  - simulation 2: rotation of Gaussian function (RotationSimulation)
-  - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
-  - $`V(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
+  - \(f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)\), 
+  - \(V(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)\). 
  - simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]) (DecentredRotationSimulation)
-  - $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
+  - \(f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)\),
   - with 
-     - $`G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)`$, 
-     - $`r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}`$ 
-     - $`r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}`$ 
-  - $`V(t, x, y) = \omega(y_c - y, x - x_c)`$. 
+     - \(G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)\), 
+     - \(r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}\) 
+     - \(r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}\) 
+  - \(V(t, x, y) = \omega(y_c - y, x - x_c)\). 
 
 
 ## Python tests

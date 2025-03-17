@@ -12,10 +12,10 @@ Functions for calculating derivatives with different methods:
 ### Finite difference derivatives
 
 The method is as follow:
-Take a function $f$. We want to approximate the value of $`f'(x_1)`$ knowing the value of $`f(x_1)`$, $`f(x_2)`$ and $`f(x_3)`$ for
-$`x_3>x_2>x_1`$.
-Denote $`\alpha :=|x_2-x_1|`$ and $`\beta :=|x_3-x_2|`$.
-We call $`Df(x_1)`$ the approximate value of $`f'(x_1)`$. We want $`|f'(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)`$.
+Take a function $f$. We want to approximate the value of \(f'(x_1)\) knowing the value of \(f(x_1)\), \(f(x_2)\) and \(f(x_3)\) for
+\(x_3>x_2>x_1\).
+Denote \(\alpha :=|x_2-x_1|\) and \(\beta :=|x_3-x_2|\).
+We call \(Df(x_1)\) the approximate value of \(f'(x_1)\). We want \(|f'(x_1)-Df(x_1)|=o\left(\max(\alpha,\beta\right)^2)\).
 To this end, write
 ```math
 	Df(x_1)=c_1f(x_1)+c_2f(x_2)+c_3f(x_3),
@@ -55,5 +55,5 @@ and $-3/2$, $2$ and $-1/2$ for the decentred case.
 ## Utility tools
 
 The l\_norm\_tools.hpp file contains functions computing the infinity norm. For now, it computes the infinity norm of 
-- a double: $`\Vert x \Vert_{\infty} = x`$; 
-- a coordinate: $`\Vert x \Vert_{\infty} = \max_{i} (|x_i|)`$.
+- a double: \(\Vert x \Vert_{\infty} = x\); 
+- a coordinate: \(\Vert x \Vert_{\infty} = \max_{i} (|x_i|)\).

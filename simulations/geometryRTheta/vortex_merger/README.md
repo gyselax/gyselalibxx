@@ -2,7 +2,7 @@
 
 ## Studied problem
 ### Field setup 
-We work with cylindrical coordinates $(r,\theta,z)$ on the corresponding orthonormal basis vectors $`(e_r, e_\theta, e_z)`$.
+We work with cylindrical coordinates $(r,\theta,z)$ on the corresponding orthonormal basis vectors \((e_r, e_\theta, e_z)\).
 
 
 ### General case
@@ -22,17 +22,17 @@ E = -\nabla \phi
 ```
 
 where
-* $\rho = \rho(t,r,\theta)$ is the **electric charge density** of the particles (electrons with mass $`m_e`$ and charge $q$);
+* $\rho = \rho(t,r,\theta)$ is the **electric charge density** of the particles (electrons with mass \(m_e\) and charge $q$);
 * $v$ is the velocity of the particles ($div(v) = 0$); 
 * $\phi$ is the usual electric potential associated with the total electric field; 
-* $(E,B)$ the electromagnetic field such that $`B = B_z(r) e_z`$ the external magnetic field
+* $(E,B)$ the electromagnetic field such that \(B = B_z(r) e_z\) the external magnetic field
 
 
 ### Simplified case
-We study a simplified case where $`B = e_z`$, $`\varepsilon_0 = 1`$. 
+We study a simplified case where \(B = e_z\), \(\varepsilon_0 = 1\). 
 On a circular mapping, it gives 
-$`v = -\nabla\phi \wedge e_z`$, $div(v) = 0$  
-and with $`(e_r, e_\theta)`$ 
+\(v = -\nabla\phi \wedge e_z\), $div(v) = 0$  
+and with \((e_r, e_\theta)\) 
 the unnormalized local contravariant base, 
 ```math
 \partial_t \rho - \frac{\partial_\theta\phi}{r}\partial_r\rho + \partial_r\phi \frac{\partial_\theta\rho}{r} =0,
@@ -58,8 +58,8 @@ We suppose as perturbed initial condition
 
 
 with 
-* $`(x_1^*, y_1^*) = (0.08, -0.14)`$, 
-* $`(x_2^*, y_2^*) = (-0.08, 0.14)`$,
+* \((x_1^*, y_1^*) = (0.08, -0.14)\), 
+* \((x_2^*, y_2^*) = (-0.08, 0.14)\),
 * $\sigma = 0.08$ and 
 * $\varepsilon = 10^{-4}$.
 
@@ -95,8 +95,8 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 * `Mesh:`
   * `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
   * `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
-  * `r_min: 0.0`  : start of $`r`$ domain. (Tests in Edoardo Zoni's article.)
-  * `r_max: 1.0` : end of $`r`$ domain. (Tests in Edoardo Zoni's article.)
+  * `r_min: 0.0`  : start of \(r\) domain. (Tests in Edoardo Zoni's article.)
+  * `r_max: 1.0` : end of \(r\) domain. (Tests in Edoardo Zoni's article.)
 
 * `Time:`
   * `delta_t: 0.1` : time step. (Tests in Edoardo Zoni's article.)
@@ -104,10 +104,10 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
   
 * `Perturbation:`
   * `eps: 0.0001` : amplitude of the perturbation. 
-  * `x_star_1: 0.08` : $`x`$ coordinate of the centre of the initial first vortex.
-  * `y_star_1: -0.14` : $`y`$ coordinate of the centre of the initial first vortex.
-  * `x_star_2: -0.08` : $`x`$ coordinate of the centre of the initial second vortex.
-  * `y_star_2: 0.14` : $`y`$ coordinate of the centre of the initial second vortex.
+  * `x_star_1: 0.08` : \(x\) coordinate of the centre of the initial first vortex.
+  * `y_star_1: -0.14` : \(y\) coordinate of the centre of the initial first vortex.
+  * `x_star_2: -0.08` : \(x\) coordinate of the centre of the initial second vortex.
+  * `y_star_2: 0.14` : \(y\) coordinate of the centre of the initial second vortex.
   * `sigma: 0.08` : the standard deviation of the initial Gaussian function. 
   
 * `Output:`

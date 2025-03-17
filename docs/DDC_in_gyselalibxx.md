@@ -30,7 +30,7 @@ Coordinates can have 1 or more dimension. E.g. the coordinate of a position on a
 
 If the value of the coordinate needs to be used in a mathematical expression, the scalar (`double`) quantity stored in one of the dimensions of a coordinate can be extracted using `ddc::get<DimOfInterest>(my_coord)`.
 
-It is also possible to extract a coordinate on a subset of the original dimensions using `ddc::select<DimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space $`(r, \theta, \varphi, v_\parallel, \mu)`$ then we can do:
+It is also possible to extract a coordinate on a subset of the original dimensions using `ddc::select<DimOfInterest>(my_coord)`. For example if we want to get the position of an object on a radial slice $(r,\theta)$, but we are given the coordinate in the full vector space \((r, \theta, \varphi, v_\parallel, \mu)\) then we can do:
 ```cpp
 Coord<R, Theta, Phi, Vpar, Mu> full_coord(...);
 Coord<R, Theta> slice_coord = ddc::select<R, Theta>(full_coord);
@@ -62,7 +62,7 @@ DDC provides multiple types to represent the concepts required to index elements
 
 ## Grid
 
-The points $`\{x_0, ..., x_N\}`$ form the grid on which the simulation evolves. This sampling can either be uniform or non-uniform. Accordingly DDC provides 2 classes for which Gysela provides the following type aliases:
+The points \(\{x_0, ..., x_N\}\) form the grid on which the simulation evolves. This sampling can either be uniform or non-uniform. Accordingly DDC provides 2 classes for which Gysela provides the following type aliases:
 - `UniformGridBase` (the type alias of `ddc::UniformPointSampling`)
 - `NonUniformGridBase` (the type alias of `NonUniformPointSampling`)
 
@@ -134,14 +134,14 @@ Each index range is described by:
 -   An origin : This is the `Idx` which indicates the first point in the domain.
 -   A size : This is a `IdxStep` indicating the number of elements in each dimension.
 
-For example if we consider the 2D grid: $`[x_0, ..., x_N] \times [y_0, ... y_M]`$, the index range would be described as:
+For example if we consider the 2D grid: \([x_0, ..., x_N] \times [y_0, ... y_M]\), the index range would be described as:
 ```cpp
 Idx<GridX, GridY> origin(0, 0);
 IdxStep<GridX, GridY> size(N, M);
 IdxRange<GridX, GridY> idx_range(origin, size);
 ```
 
-Similarly the section of the grid: $`[x_i, ..., x_j] \times [y_k, ... y_l]`$ would be described as:
+Similarly the section of the grid: \([x_i, ..., x_j] \times [y_k, ... y_l]\) would be described as:
 ```cpp
 Idx<GridX> i_index(i);
 Idx<GridX> j_index(j);
@@ -236,7 +236,7 @@ double get_element_2(DFieldXVx my_chunk, IdxX i, IdxY j) {
 ```
 This is particularly useful if we don't know the layout order of the data and will allow us to reorder this data without changing the way we interact with the chunk.
 
-Finally a `Field` also implements a `[]` operator. A `Field` does not have to reference the entire memory block stored in the associated `FieldMem`. The `[]` operator can be passed an `IdxRange` to create a `Field` which only references part of the `FieldMem`. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a $(r, \theta)$ slice from a distribution function defined in $`(r, \theta, \varphi, v_\parallel, \mu)`$ we would do the following:
+Finally a `Field` also implements a `[]` operator. A `Field` does not have to reference the entire memory block stored in the associated `FieldMem`. The `[]` operator can be passed an `IdxRange` to create a `Field` which only references part of the `FieldMem`. This is especially useful for accessing slices. In this case a simpler syntax exists, where we only need to pass the index of the slice. For example, if we wish to get a $(r, \theta)$ slice from a distribution function defined in \((r, \theta, \varphi, v_\parallel, \mu)\) we would do the following:
 ```cpp
 DFieldMem<IdxRange<GridR, GridTheta, GridPhi, GridVpar, GridMu>> distribution_function_alloc(idx_range);
 DField<IdxRange<GridR, GridTheta, GridPhi, GridVpar, GridMu>> distribution_function(distribution_function_alloc);
@@ -269,9 +269,9 @@ struct Vx {
 }
 ```
 
-We also need types to define the grid on which the simulation will evolve. The domain is discretised on the following grid: $`[i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]`$. Grid types are required to define the positions of the grid points in each of the three dimensions:
-- The object $`[x_0,...,x_N]`$ is defined with a grid and will be denoted $GridX$.
-- The object $`[v_0,...,v_{N_v}]`$ is defined with a grid and will be denoted $GridVx$.
+We also need types to define the grid on which the simulation will evolve. The domain is discretised on the following grid: \([i, e]\times[x_0,...,x_N]\times[v_0,...,v_{N_v}]\). Grid types are required to define the positions of the grid points in each of the three dimensions:
+- The object \([x_0,...,x_N]\) is defined with a grid and will be denoted $GridX$.
+- The object \([v_0,...,v_{N_v}]\) is defined with a grid and will be denoted $GridVx$.
 - The object $['i', 'e']$ is defined as a `SpeciesInformation` collection and will be denoted $Species$.
 
 With these objects defined, the index range(s) can then be created. The index range for the distribution function has the type: `IdxRange<Species, GridX, GridVx>` however for simplicity it is denoted `IdxRangeSpXVx`. The electric potential $\phi$ has a smaller domain with the type `IdxRange<GridX>` denoted `IdxRangeX`.

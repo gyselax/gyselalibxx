@@ -2,9 +2,9 @@
 
 ## Studied problem
 ### Field setup 
-We work with cylindrical coordinates $`(r,\theta,z)`$ on the corresponding orthonormal basis vectors $`(e_r, e_\theta, e_z)`$.
-We suppose that the particles (electrons) are trapped between two cylindrically conducting walls at the radii $`W_1`$ and $`W_2`$, (setup from Petri's articles [6], [7]). 
-The plasma is confined between the radii $`R_1`$ et $`R_2`$ such that 
+We work with cylindrical coordinates \((r,\theta,z)\) on the corresponding orthonormal basis vectors \((e_r, e_\theta, e_z)\).
+We suppose that the particles (electrons) are trapped between two cylindrically conducting walls at the radii \(W_1\) and \(W_2\), (setup from Petri's articles [6], [7]). 
+The plasma is confined between the radii \(R_1\) et \(R_2\) such that 
 
 ```math
 W_1 \leq R_1 \lt R_2 \leq W_2. 
@@ -22,21 +22,21 @@ Conservation of the density equation and Maxwell-Poisson equation:
 ```
 
 where
-* $`\rho = \rho(t,r,\theta)`$ is the **density** of the particles (electrons with mass $`m_e`$ and charge $q = -1$);
+* \(\rho = \rho(t,r,\theta)\) is the **density** of the particles (electrons with mass \(m_e\) and charge $q = -1$);
 * $v$ is the velocity of the particles ($div(v) = 0$); 
 * $\phi$ is the usual electric potential associated withe the total electric field; 
-* $(E,B)$ the electromagnetic field such that $`B = B_z(r) e_z`$ the external magnetic field
+* $(E,B)$ the electromagnetic field such that \(B = B_z(r) e_z\) the external magnetic field
 
 
 ### Simplified case
 We study a simplified case where 
-- $`B = e_z`$, 
-- $`\varepsilon_0 = 1`$. 
+- \(B = e_z\), 
+- \(\varepsilon_0 = 1\). 
 
 On a circular mapping, it gives 
-$`v = -\nabla\phi \wedge e_z`$, $div(v) = 0$  
+\(v = -\nabla\phi \wedge e_z\), $div(v) = 0$  
 and 
-$`v = -\nabla\phi \wedge e_z = - \frac{\partial_\theta\phi}{r^2}e_r + \partial_r\phi e_\theta`$ with $`(e_r, e_\theta)`$ 
+\(v = -\nabla\phi \wedge e_z = - \frac{\partial_\theta\phi}{r^2}e_r + \partial_r\phi e_\theta\) with \((e_r, e_\theta)\) 
 the unnormalized local contravariant base, 
 
 ```math
@@ -67,7 +67,7 @@ In Edoardo Zoni's article [2], an exponential is also added to make the solution
 \rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }
 ```
 
-with $`p = 50 \text{, } \bar{r} = \frac{R_1 + R_2}{2} \text{, and } d = \frac{R_2 - R_1}{2}`$. 
+with \(p = 50 \text{, } \bar{r} = \frac{R_1 + R_2}{2} \text{, and } d = \frac{R_2 - R_1}{2}\). 
 
 The explicit solution $(\phi,\rho)$ is given by 
 ```math
@@ -94,15 +94,15 @@ or
 
 
 
-with $`l\in\mathbb{N}`$ the selected mode, $`\omega \in \mathbb{C}`$ a pulsation to be determined, and 
- - if  $`W_1 \leq r\lt R_1`$ then,
-   $`\widehat{\phi_{1,l}} (r) = \phi_{1,I}(r) = \frac{R_1^l}{r^l} \left( B R_1^l + C R_1^{-l}\right) \frac{r^{2l} - W_1^{2l}}{R_1^{2l} - W_1^{2l}}`$
- - if  $`R_1 \leq r\lt R_2`$ then,
-   $`\widehat{\phi_{1,l}} (r) = \phi_{1,II}(r) =  B r^l + C r^{-l}`$ 
- - if  $`R_2 \leq r\lt W_2`$ then,
-   $`\widehat{\phi_{1,l}} (r) = \phi_{1,III}(r) = \frac{R_2^l}{r^l} \left( B R_2^l + C R_2^{-l}\right) \frac{r^{2l} - W_2^{2l}}{ R_2^{2l} - W_2^{2l}}`$.
+with \(l\in\mathbb{N}\) the selected mode, \(\omega \in \mathbb{C}\) a pulsation to be determined, and 
+ - if  \(W_1 \leq r\lt R_1\) then,
+   \(\widehat{\phi_{1,l}} (r) = \phi_{1,I}(r) = \frac{R_1^l}{r^l} \left( B R_1^l + C R_1^{-l}\right) \frac{r^{2l} - W_1^{2l}}{R_1^{2l} - W_1^{2l}}\)
+ - if  \(R_1 \leq r\lt R_2\) then,
+   \(\widehat{\phi_{1,l}} (r) = \phi_{1,II}(r) =  B r^l + C r^{-l}\) 
+ - if  \(R_2 \leq r\lt W_2\) then,
+   \(\widehat{\phi_{1,l}} (r) = \phi_{1,III}(r) = \frac{R_2^l}{r^l} \left( B R_2^l + C R_2^{-l}\right) \frac{r^{2l} - W_2^{2l}}{ R_2^{2l} - W_2^{2l}}\).
 
-for $B$ and $C$ constants stastifying continuity conditions such that $`A[B,C]^t = 0`$ 
+for $B$ and $C$ constants stastifying continuity conditions such that \(A[B,C]^t = 0\) 
 
 with 
 ```math
@@ -128,8 +128,8 @@ b_l \left( 1 - \frac{W_1^{2l}}{W_2^{2l}} \right) = l\left[ 1 - \frac{R_1^2}{R_2^
 \\ \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad + l \left[1 - \frac{R_1^2}{R_2^2} + \frac{\omega_q }{\omega_D} \frac{R_1^2}{R_2^2} \right]\left( 1 - \frac{R_1^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right) - \left( 1 - \frac{R_2^{2l}}{W_2^{2l}} \right) \left( 1 - \frac{W_1^{2l}}{R_1^{2l}} \right)  \left( 1 - \frac{R_1^{2l}}{R_2^{2l}} \right)
 ```
 
-and $`\omega_q = - \frac{2Q}{R_1^2}`$, $`\omega_D = \frac{1}{2}`$ and $Q$ the charge carried by unit of length at $`r = W_1`$ 
-(in our simulation, we put $`Q = 0`$).
+and \(\omega_q = - \frac{2Q}{R_1^2}\), \(\omega_D = \frac{1}{2}\) and $Q$ the charge carried by unit of length at \(r = W_1\) 
+(in our simulation, we put \(Q = 0\)).
  
  
  
@@ -173,17 +173,17 @@ method of characteristics and spline finite elements", https://doi.org/10.1016/j
 * `Mesh:`
   * `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
   * `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
-  * `r_min: 0.0`  : position of the inner wall $`W_1`$. (Tests in Edoardo Zoni's article.)
-  * `r_minus: 0.45` : position of the inner boundary of the initial density $`R_1`$. (Tests in Edoardo Zoni's article.)
-  * `r_plus: 0.50`: position of the outer boundary of the initial density $`R_2`$. (Tests in Edoardo Zoni's article.)
-  * `r_max: 1.0` : position of the outer wall $`W_2`$. (Tests in Edoardo Zoni's article.)
+  * `r_min: 0.0`  : position of the inner wall \(W_1\). (Tests in Edoardo Zoni's article.)
+  * `r_minus: 0.45` : position of the inner boundary of the initial density \(R_1\). (Tests in Edoardo Zoni's article.)
+  * `r_plus: 0.50`: position of the outer boundary of the initial density \(R_2\). (Tests in Edoardo Zoni's article.)
+  * `r_max: 1.0` : position of the outer wall \(W_2\). (Tests in Edoardo Zoni's article.)
 
 * `Time:`
   * `delta_t: 0.1` : time step. (Tests in Edoardo Zoni's article.)
   * `final_T: 70.0`: final time of the simulation (end of the linear phase at $T = 50s$). (Tests in Edoardo Zoni's article.)
   
 * `Perturbation:`
-  * `charge_Q: 0.` : charge carried by the inner conductor at $`r = W_1`$.
+  * `charge_Q: 0.` : charge carried by the inner conductor at \(r = W_1\).
   * `l_mode: 9` : mode of the perturbation $\varepsilon \cos(lx)$. 
   * `eps: 0.0001` : amplitude of the perturbation $\varepsilon \cos(lx)$. 
   

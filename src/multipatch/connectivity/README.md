@@ -63,7 +63,7 @@ For every patch $\Omega^{(i)}$ we have a mapping
 F^{(i)}: [a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}] \rightarrow \Omega^{(i)}, 
 ```
 
-where the rectangular domain $`[a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}]`$ defines 
+where the rectangular domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)} b_y^{(i)}]\) defines 
 the logical coordinates for the patch. We call this logical coordinate domain 
 the *logical patch*.
 
@@ -79,15 +79,15 @@ So we obtain four logical edges
 In the code, we define edges as follows. 
 Every edge of a logical patch is identified via the patch it belongs to, the dimension 
 and whether it is at the front or the back of the domain. 
-So e.g.the edge $`[a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}`$ would be identified with patch $i$, dimensions `Yi` and `FRONT`.
-$`[a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}`$ would be identified with patch $i$, dimensions `Yi` and `BACK` and 
-$`\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$ would be identified with patch $i$, dimensions `Xi` and `BACK`.
+So e.g.the edge \([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\) would be identified with patch $i$, dimensions `Yi` and `FRONT`.
+\([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\) would be identified with patch $i$, dimensions `Yi` and `BACK` and 
+\(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\) would be identified with patch $i$, dimensions `Xi` and `BACK`.
 
 #### Sticking and Coordinate Transformation
 Any edge can then be associated with an edge on another patch. 
 This corresponds to the 'sticking'. 
-So for a different patch $`\Omega^{(j)}`$, we have the logical coordinate domain
-$`[a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]`$.
+So for a different patch \(\Omega^{(j)}\), we have the logical coordinate domain
+\([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\).
 If we want to stick patch $i$ to patch $j$, we have to determine the edges that
 are identified and how they are identified. 
 The way that they are identified is mathematically determined via the coordinate transformation from one edge
@@ -97,8 +97,8 @@ the transformation can be order preserving or
 order reversing (this corresponds to the orientation of the physical edge where two parametrisations 
 coming from the two patches can have either the same or the opposite orientation respectively).
 
-So for example, we want to stick the edge $`\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$
-on patch $i$ to the edge $`[a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}`$ on patch $j$. 
+So for example, we want to stick the edge \(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\)
+on patch $i$ to the edge \([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\) on patch $j$. 
 If the transformation is order-preserving (i.e. the orientations of the parametrisations 
 of the physical edge agree), then the transformation from the first edge to the second is 
 ```math
@@ -133,18 +133,18 @@ call the `operator()` to get the equivalent index on the other patch.
 Instead of calling both method, it is also possible to call `search_for_match()` which 
 returns true if there is an equivalent index and updates it the given target index. 
 
-**For uniform grids** $`\{x_i\}_{i=0, ..., N}`$ (current grid)  and $`\{x_j\}_{j=0, ..., M}`$ (target grid), 
+**For uniform grids** \(\{x_i\}_{i=0, ..., N}\) (current grid)  and \(\{x_j\}_{j=0, ..., M}\) (target grid), 
 finding an equivalent index can be done with the following steps:
 
-* We compute the greatest common divisor of the number of cells $`N`$ and $`M`$ 
-(e.g. $`\exists \ gcd \in\mathbb{N}, gcd>1; \ M \wedge N = gcd`$).
+* We compute the greatest common divisor of the number of cells \(N\) and \(M\) 
+(e.g. \(\exists \ gcd \in\mathbb{N}, gcd>1; \ M \wedge N = gcd\)).
 
-* The current index $`k`$ can have an equivalent index on the target patch. 
+* The current index \(k\) can have an equivalent index on the target patch. 
 
-Depending on if $`k / p \in \mathbb{N}^*`$ with $`p = \frac{N}{gcd} \in \mathbb{N}^*`$,
-this equivalent is given by multiplying by $`\frac{M}{N}`$ and adapt if the coordinate transformation is not order-preserving. 
+Depending on if \(k / p \in \mathbb{N}^*\) with \(p = \frac{N}{gcd} \in \mathbb{N}^*\),
+this equivalent is given by multiplying by \(\frac{M}{N}\) and adapt if the coordinate transformation is not order-preserving. 
 
-* If the greatest common divisor is $`1`$, there is no equivalent index except for the first and last indices. 
+* If the greatest common divisor is \(1\), there is no equivalent index except for the first and last indices. 
 
 
 
@@ -187,8 +187,8 @@ The grids can be uniform or not uniform, as long as the index steps between the 
 If the grids are uniform, we know that the index steps between the conforming indices are regular. 
 Moreover the index steps are given by the number of cells divided by the greatest common divisor of the 
 two numbers of cells. 
-(E.g. if the first example was on uniform grids: $`\gcd(8,4) = 4`$. On the first edge, the index step is $`\frac{8}{4} = 2`$ and 
-on the second edge, $`\frac{4}{4} = 1`$.) 
+(E.g. if the first example was on uniform grids: \(\gcd(8,4) = 4\). On the first edge, the index step is \(\frac{8}{4} = 2\) and 
+on the second edge, \(\frac{4}{4} = 1\).) 
 
 
 
@@ -201,8 +201,8 @@ On each patch, we define a mapping from the logical domain to the physical domai
     \mathcal{F}^{(i)}: \hat{\Omega}^{(i)} \rightarrow \Omega^{(i)}
 ```
 
-(The $`\hat{\Omega}^{(i)}`$ refers to the above domain $`[a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]`$.)
-The domain $`\hat{\Omega}^{(i)}`$  is called the *logical domain* and $`\Omega^{(i)}`$ the *physical domain*. 
+(The \(\hat{\Omega}^{(i)}\) refers to the above domain \([a_x^{(i)}, b_x^{(i)}]\times[a_y^{(i)}, b_y^{(i)}]\).)
+The domain \(\hat{\Omega}^{(i)}\)  is called the *logical domain* and \(\Omega^{(i)}\) the *physical domain*. 
 
 ### Global analytical invertible mapping
 We assume that there is a global mapping analytically invertible such that
@@ -213,9 +213,9 @@ We assume that there is a global mapping analytically invertible such that
         \text{and } \hat{\Omega} = \bigcup_{i = 0}^{K} \hat{\Omega}^{(i)} .\\
 ```
 
-We can easily apply $`(\mathcal{F})^{-1}`$ to identify the equivalent logical coordinate of a given physical coordinate $`x\in\Omega`$. 
+We can easily apply \((\mathcal{F})^{-1}\) to identify the equivalent logical coordinate of a given physical coordinate \(x\in\Omega\). 
 We check then for each patch if the logical coordinate is on a rectangular logical patch $\hat{\Omega}^{(i)}$, 
-i.e. if $`(\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}`$. 
+i.e. if \((\mathcal{F})^{-1}(x)\in\hat{\Omega}^{(i)}\). 
 
 #### Onion shape geometry 
 We call "onion" shape geometry a disk-like patch surrounded by concentric ring-like patches.
@@ -226,8 +226,8 @@ This mapping also needs to be defined from the physical domain to the logical do
 
 We order the patches from the O-point to the outside boundary. 
 
-The patch grids have to be continuous (i.e. we define patches such as $`b_x^{(i)} = a_x^{(i+1)}`$ for 
-edges on $`\{a_x^{(i)}\}\times[a_y^{(i)}, b_y^{(i)}]`$ and $`\{b_x^{(i+1)}\}\times[a_y^{(i+1)}, b_y^{(i+1)}]`$).
+The patch grids have to be continuous (i.e. we define patches such as \(b_x^{(i)} = a_x^{(i+1)}\) for 
+edges on \(\{a_x^{(i)}\}\times[a_y^{(i)}, b_y^{(i)}]\) and \(\{b_x^{(i+1)}\}\times[a_y^{(i+1)}, b_y^{(i+1)}]\)).
 
 In the `OnionPatchLocator` operator, we use these properties to apply a dichotomy method 
 and reduce the number of tests to identify where the physical coordinate is. 

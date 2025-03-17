@@ -7,9 +7,9 @@ The studied equation is the following 2D transport equation type :
 \partial_t f(t,x,y) + A(t,x,y)\cdot\nabla f(t,x,y) = 0,
 ```
 
-with $`f(0,x,y) = f_0(x,y)`$ and *A* the advection field. 
+with \(f(0,x,y) = f_0(x,y)\) and *A* the advection field. 
 
-**We want to solve it on a polar grid so we have:**  $`(t,x,y) = (t,x(r,\theta),y(r,\theta))`$. 
+**We want to solve it on a polar grid so we have:**  \((t,x,y) = (t,x(r,\theta),y(r,\theta))\). 
 
 ## Backward Semi-Lagrangian method
 
@@ -28,8 +28,8 @@ Y(s; s, x, y) = y.
 ```
 
 So to compute the advected function at the next time step, 
- - we compute the characteristics' feet $`X(t^n; t^{n+1}, x_i, y_j)`$ and $`Y(t^n; t^{n+1}, x_i, y_j)`$ 
- for each mesh point $`(x_i, y_j)`$ with a time integration method ; 
+ - we compute the characteristics' feet \(X(t^n; t^{n+1}, x_i, y_j)\) and \(Y(t^n; t^{n+1}, x_i, y_j)\) 
+ for each mesh point \((x_i, y_j)\) with a time integration method ; 
  - we interpolate the function $f(t = t^n)$ on the characteristics' feet. 
  The property ensures that the interpolation gives the function at the next time step $f(t = t^{n+1})$.
 
@@ -45,10 +45,10 @@ There are multiple time integration methods available which are implemented in t
 
  
  
-We are listing the different schemes for this equation $`\partial_t X (t) = A_x(t, X(t),Y(t))`$. 
+We are listing the different schemes for this equation \(\partial_t X (t) = A_x(t, X(t),Y(t))\). 
 
 We write $X (t) = X (t; s, x, y)$, $X^n = X(t^n)$ and $A^n(X) = A(t^n, X)$ for a time discretisation 
-$`\{t^n; t^n > t^{n-1},  \forall n\}_n`$. 
+\(\{t^n; t^n > t^{n-1},  \forall n\}_n\). 
 
  
 ### Explicit Euler method
@@ -71,11 +71,11 @@ $X^{n+1} = X^{k+1}$ once converged.
 ### RK3 method
 
 - Scheme: 
-$`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
+\(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)\)
 	- with 
-		- $`k_1 =  A^{n+1}(X^{n+1})`$, 
-		- $`k_2 =  A{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)`$, 
-		- $`k_3 =  A{n+1/2} (X^{n+1} - dt( 2k_2 - k_1))`$.
+		- \(k_1 =  A^{n+1}(X^{n+1})\), 
+		- \(k_2 =  A{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)\), 
+		- \(k_3 =  A{n+1/2} (X^{n+1} - dt( 2k_2 - k_1))\).
 
 - Convergence order : 3.
 
@@ -84,12 +84,12 @@ $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
 ### RK4 method
 
 - Scheme: 
-$`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
+\(X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)\)
 	- with 
-		- $`k_1 =  A^{n+1}(X^{n+1})`$, 
-		- $`k_2 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)`$, 
-		- $`k_3 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_2)`$, 
-		- $`k_4 =  A^{n} (X^{n+1} - dt k_3)`$.
+		- \(k_1 =  A^{n+1}(X^{n+1})\), 
+		- \(k_2 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)\), 
+		- \(k_3 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_2)\), 
+		- \(k_4 =  A^{n} (X^{n+1} - dt k_3)\).
 
 - Convergence order : 4.
 
@@ -136,7 +136,7 @@ Then the four previous steps become
  - interpolate the advection function at the characteristics' feet in the logical domain. 
 
 Here, $\mathcal{G}$ is analytically invertible (we can fix  $\mathcal{G}^{-1}(x = 0, y = 0) = (r = 0, \theta = 0)$) 
-and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details are given in [Zoni et al. (2019)](#zoni). 
+and  \((J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}\) is well-defined. The details are given in [Zoni et al. (2019)](#zoni). 
 
 
 **Remark 1:** if $\mathcal{F}$ is the circular mapping function, then the physical domain and the pseudo-Cartesian domain are the same. 
@@ -173,7 +173,7 @@ In [the documentation for the advection field](./../advection_field/README.md), 
 \nabla_{xy} \phi = J \nabla_{r\theta} \phi,
 ```
 
-with *J* the Jacobian matrix (and the metric tensor $`G = J^TJ = [g_{ij}]_{ij}`$). 
+with *J* the Jacobian matrix (and the metric tensor \(G = J^TJ = [g_{ij}]_{ij}\)). 
 
 It gives the following relation for the electric field
 ```math
@@ -215,7 +215,7 @@ J^{-T}
 \end{bmatrix}.
 ```
 
-So, from the advection field along the logical domain axis, we multiply by $`J^{-1}`$
+So, from the advection field along the logical domain axis, we multiply by \(J^{-1}\)
 to get the advection field along the physical domain axis. 
 
 
@@ -234,22 +234,22 @@ It tests:
  	- Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain. 
  - on 3 different simulations: 
  	- simulation 1: translation of Gaussian function 
- 		- $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
- 		- $`A(t, x, y) = (v_x, v_y)`$ . 
+ 		- \(f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)\), 
+ 		- \(A(t, x, y) = (v_x, v_y)\) . 
  	- simulation 2: rotation of Gaussian function 
- 		- $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
- 		- $`A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
+ 		- \(f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)\), 
+ 		- \(A(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)\). 
  	- simulation 3: decentred rotation (test given in [Zoni et al. (2019)](#zoni)). 
- 	 	- $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
+ 	 	- \(f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)\),
  	 		- with 
- 	 			- $`G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)`$, 
- 	 			- $`r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}`$ 
- 	 			- $`r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}`$ 
- 		- $`A(t, x, y) = \omega(y_c - y, x - x_c)`$. 
+ 	 			- \(G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)\), 
+ 	 			- \(r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}\) 
+ 	 			- \(r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}\) 
+ 		- \(A(t, x, y) = \omega(y_c - y, x - x_c)\). 
 
 The tests of the convergence order are made for constant CFL which means it checks the slope of the errors 
 (infinity norm of the difference at the final time)  
-for $`(N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)`$ and then $`(n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)`$
+for \((N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)\) and then \((n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)\)
 for $n = 1, 2, 4, 8,  ...$. 
 
 

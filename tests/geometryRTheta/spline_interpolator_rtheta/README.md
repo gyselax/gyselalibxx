@@ -2,9 +2,9 @@
 
 ### Functions tests: 
 
-* $(r,\theta) \mapsto r^p$ with $`0\leq p<4`$: interpolation with cubic B-splines supposed to be exact.
+* $(r,\theta) \mapsto r^p$ with \(0\leq p<4\): interpolation with cubic B-splines supposed to be exact.
 * $(r,\theta) \mapsto r^p$ with $p \geq 4$: interpolation with cubic B-splines supposed to be order 4.
-* $(r,\theta) \mapsto r \cos(\theta)$ and $`(r,\theta) \mapsto \exp\left(- \frac{(x(r,\theta) - x_0)^2}{2\sigma_x^2} - \frac{(y(r,\theta) - y_0)^2}{2\sigma_y^2} \right)`$ : added and interpolation with cubic B-splines supposed to be order 4.
+* $(r,\theta) \mapsto r \cos(\theta)$ and \((r,\theta) \mapsto \exp\left(- \frac{(x(r,\theta) - x_0)^2}{2\sigma_x^2} - \frac{(y(r,\theta) - y_0)^2}{2\sigma_y^2} \right)\) : added and interpolation with cubic B-splines supposed to be order 4.
 
 Test the interpolator on mesh points where the errors are supposed to be exact (machine error) and test the interpolator on "pseudo-random" points where the errors are supposed to be order 4 with a cubic B-splines basis. 
     

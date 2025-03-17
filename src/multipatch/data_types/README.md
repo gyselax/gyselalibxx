@@ -48,6 +48,6 @@ In `types.hpp` file different aliases are defined to use the MultipatchType clas
     * 2D: spline coefficients on the first dimension `SplineCoeff1OnPatch_2D` and `ConstSplineCoeff1OnPatch_2D`; 
     * 1D on the fist dimension: spline coefficients `SplineCoeff1OnPatch_1D` and `SplineCoeff2OnPatch_1D`; 
 * To store derivatives: 
-    * $`\partial_^{(i)} f(x, y_j)`$: `ConstDeriv1_OnPatch_2D`
-    * $`\partial_^{(i)} f(x_j, y)`$: `ConstDeriv2_OnPatch_2D`
-    * $`\partial_^{(i)} \partial_y^{(j)} f(x, y)`$: `ConstDeriv12_OnPatch_2D`
+    * \(\partial_^{(i)} f(x, y_j)\): `ConstDeriv1_OnPatch_2D`
+    * \(\partial_^{(i)} f(x_j, y)\): `ConstDeriv2_OnPatch_2D`
+    * \(\partial_^{(i)} \partial_y^{(j)} f(x, y)\): `ConstDeriv12_OnPatch_2D`

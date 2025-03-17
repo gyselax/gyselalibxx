@@ -12,22 +12,22 @@ The initializatrion and equilibrium functions are defined in the DiocotronDensit
 ### Initialisation
 
 We suppose as perturbed initial condition
- - $`\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }`$
+ - \(\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\)
 
-where $`\mathbb{I}`$ is the characteristic function.
+where \(\mathbb{I}\) is the characteristic function.
 
 In Edoardo Zoni's article [1], an exponential is also added to make the solution smoother: 
-- $`\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }`$  
+- \(\rho(0,r, \theta) = ( 1 + \epsilon \cos(l\theta)) \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\)  
 
-with $p = 50$, $`\bar{r} = \frac{R_1 + R_2}{2}`$ and $`d = \frac{R_2 - R_1}{2}`$. 
+with $p = 50$, \(\bar{r} = \frac{R_1 + R_2}{2}\) and \(d = \frac{R_2 - R_1}{2}\). 
 This last version is implemented in the code. 
 
 ### Equilibrium
 The associated equilibrium is 
- - $`\rho_0(r) = \mathbb{I}_{ R_1 \leq r \leq R_2 }`$
+ - \(\rho_0(r) = \mathbb{I}_{ R_1 \leq r \leq R_2 }\)
 
 or 
- - $`\rho_0(r) = \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }`$
+ - \(\rho_0(r) = \exp\left(- \left(\frac{r - \bar{r}}{d}\right)^p\right) \ \mathbb{I}_{ R_1 \leq r \leq R_2 }\)
 in  Edoardo Zoni's article [1].
 
 
@@ -70,14 +70,14 @@ with given $f$  such that $f'(\phi) \neq 0$. See Edoardo Zoni's article [1] for 
 
 The algorithm for given initial data $(\sigma^0, \phi^0)$ is the following: 
 * compute the density: $\rho^{i} = \sigma^{i-1} f(\phi^{i-1})$, 
-* compute a temporary electrical potential: $`- \nabla\cdot\nabla \phi_*^{i} = \rho^i`$, 
+* compute a temporary electrical potential: \(- \nabla\cdot\nabla \phi_*^{i} = \rho^i\), 
 * compute the coefficient: 
-    * if the maximum value $`\phi_{\text{max}}`$ is given: $`c^i = \frac{\phi_{\text{max}}}{\Vert\phi_*^i\Vert_{\mathcal{L}^\infty}}`$, 
-* update the data: $`(\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)`$. 
+    * if the maximum value \(\phi_{\text{max}}\) is given: \(c^i = \frac{\phi_{\text{max}}}{\Vert\phi_*^i\Vert_{\mathcal{L}^\infty}}\), 
+* update the data: \((\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i)\). 
 
 Then, we repeat all the steps until $|\sigma^i - \sigma^{i-1}| \leq \tau$ for a given tolerance. 
 
-For the vortex merger simulation, we choose $`f(\phi)= \phi^2`$ and $`\phi_{\text{max}} = 1`$. 
+For the vortex merger simulation, we choose \(f(\phi)= \phi^2\) and \(\phi_{\text{max}} = 1\). 
 
 
 ### References

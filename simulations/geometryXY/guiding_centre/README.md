@@ -8,12 +8,12 @@ The `guiding_centre` executable deals with the following model:
     E(t, x, y) =  - \nabla \phi(t, x, y).
 ```
 
-**Remark:** the advection field of the advection equation is given by $`\frac{E\wedge B}{|B|^2} = E(t, x, y)\wedge e_z`$ with $`B`$ the magnetic field supposed of norm 1, (and $`e_z`$ a vector perpendicular to the $`(x,y)`$ plane in the direct direction).
+**Remark:** the advection field of the advection equation is given by \(\frac{E\wedge B}{|B|^2} = E(t, x, y)\wedge e_z\) with \(B\) the magnetic field supposed of norm 1, (and \(e_z\) a vector perpendicular to the \((x,y)\) plane in the direct direction).
 
 ### Operators 
 The simulations uses the following operators: 
 
-* advection equation: BslAdvection1D operator with a Strang splitting along $`x`$ and $`y`$. 
+* advection equation: BslAdvection1D operator with a Strang splitting along \(x\) and \(y\). 
 The time integration methods applied to solve the characteristic equation are explicit Euler methods; 
 * Poisson equation: FFTPoissonSolver solver using FFT to solve the Poisson equation on a periodic domain (and compute the electric field); 
 * equations coupling: PredCorrRK2XY using a RK2 time integration method.
@@ -35,7 +35,7 @@ The `guiding_centre` executable creates in the working folder an `output/` folde
 ## Simulation
 
 ### Grid
-The simulation runs on a grid on $`[0, 4\pi]\times[0, 2\pi]`$  with 64 uniformly distributed points in each direction. 
+The simulation runs on a grid on \([0, 4\pi]\times[0, 2\pi]\)  with 64 uniformly distributed points in each direction. 
 
 
 ### Test case: Kelvin-Helmholtz instability test case
@@ -45,7 +45,7 @@ The chosen initial conditions are
     f_{\text{eq}}(x,y) = \sin(y)
 ```
 
-with $`\varepsilon = 0.015`$ the amplitude of perturbation and $`k = 2\pi/ L_x = 0.5`$ the mode of the perturbation.
+with \(\varepsilon = 0.015\) the amplitude of perturbation and \(k = 2\pi/ L_x = 0.5\) the mode of the perturbation.
 
 See more in [initialisations](./../../../src/geometryXY/initialisation/README.md). 
 
@@ -53,7 +53,7 @@ See more in [initialisations](./../../../src/geometryXY/initialisation/README.md
 ### Results treatments - diagnosis
 In `post-process/PythonScripts/geometryXY/` folder, python files are available to plot the results saved in the `output/` folder: 
 
-* `animation.py` displays and can save the curves of the density $`f`$ and the electrostatic potential $`\phi`$ for each time steps saved in the `output/` folder. 
+* `animation.py` displays and can save the curves of the density \(f\) and the electrostatic potential \(\phi\) for each time steps saved in the `output/` folder. 
 
 The command line is given by 
 ```shell
@@ -80,14 +80,14 @@ The command line is given by
 python3 mass_conservation.py --name=<name_file_to_save> --folder=<path_to_output>
 ```
 
-* `plot_individual_curve.py` plots the curves of the density $`f`$ and the electrostatic potential $`\phi`$ for a given time
+* `plot_individual_curve.py` plots the curves of the density \(f\) and the electrostatic potential \(\phi\) for a given time
 
 The command line is given by 
 ```shell
 python3 plot_individual_curve.py --name=<name_file_to_save> --time=<given_time> --folder=<path_to_output>
 ```
 
-* `plot_L2_norms.py` plots the $`\mathcal{L}^2`$ norms of the density $`f - f_{eq}`$ and the electrostatic potential $`\phi`$ along the simulation
+* `plot_L2_norms.py` plots the \(\mathcal{L}^2\) norms of the density \(f - f_{eq}\) and the electrostatic potential \(\phi\) along the simulation
 
 The command line is given by 
 ```shell
@@ -95,7 +95,7 @@ python3 plot_L2_norms.py --name=<name_file_to_save> --folder=<path_to_output>
 ```
 
 ## Contents
-* `guiding_centre.cpp`: executable of a guiding-centre equation on $`(x,y)`$ geometry with Kelvin-Helmholtz instability test case initial conditions. 
+* `guiding_centre.cpp`: executable of a guiding-centre equation on \((x,y)\) geometry with Kelvin-Helmholtz instability test case initial conditions. 
 * `params.yaml`: contains the parameters of the simulation. It needs to be added at the command line to launch the executable. 
 
 ## References

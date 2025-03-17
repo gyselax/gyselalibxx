@@ -4,12 +4,12 @@ The geometry folder contains a helper file `geometry.hpp` which provides shortcu
 * 2 spatial dimensions (denoted `R` and `Theta`) in polar coordinates; 
 * 2 spatial dimensions (denoted `X` and `Y`) in Cartesian coordinates.
 
-We suppose $`r`$ positive non periodic, $`\theta`$ periodic, $`x`$ and $`y`$ non periodic. We denote in the code `Theta` the polar coordinate $`\theta`$. 
-The polar coordinates represent a **logical domain**, and the Cartesian coordinates the **physical domain**. Some mappings from the logical domain to the physical domain $`(r,\theta) \mapsto (x,y)`$ are defined in `src/mapping/`.
+We suppose \(r\) positive non periodic, \(\theta\) periodic, \(x\) and \(y\) non periodic. We denote in the code `Theta` the polar coordinate \(\theta\). 
+The polar coordinates represent a **logical domain**, and the Cartesian coordinates the **physical domain**. Some mappings from the logical domain to the physical domain \((r,\theta) \mapsto (x,y)\) are defined in `src/mapping/`.
 
 The splines applied are cubic and only defined on the logical domain. 
 
-The polar geometry can have a degenerated point. We call *O-point* or *centre point*, the points $`(r=0, \theta) \ \forall \theta`$. At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code *polar spline* (see PolarSpline). Both basis are used in the code. 
+The polar geometry can have a degenerated point. We call *O-point* or *centre point*, the points \((r=0, \theta) \ \forall \theta\). At these points, the loss of some properties pushes us to define another B-spline basis. This new spline is called in the code *polar spline* (see PolarSpline). Both basis are used in the code. 
 
 ## Shortcuts
 The shortcuts defined in the geometry file represent:

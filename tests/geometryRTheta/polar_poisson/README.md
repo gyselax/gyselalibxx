@@ -15,7 +15,7 @@ The studied equation is
 $$L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho, $$
 
 with  
- * $`\alpha(r) = \exp\left( - \tanh\left( \frac{r - r_p}{\delta_r} \right) \right)`$, with $`r_p = 0.7`$ and $`\delta_r = 0.05`$, 
+ * \(\alpha(r) = \exp\left( - \tanh\left( \frac{r - r_p}{\delta_r} \right) \right)\), with \(r_p = 0.7\) and \(\delta_r = 0.05\), 
  * $\beta(r) = \frac{1}{\alpha(r)}$. 
 
 
