@@ -19,7 +19,7 @@
 
 
 
-// TEST ELECTROSTATIC POTENTIALS ---------------------------------------------------
+// TEST ELECTROSTATIC POTENTIALS -----------------------------------------------------------------
 /**
  * @brief Electrostatic potential for a decentred rotation test of the 2D polar advection operator.
  *
@@ -105,7 +105,6 @@ public:
 /**
  * @brief Electrostatic potential for a translation test of the 2D polar advection operator.
  *
- *
  * The test advection field for a translation in the physical domain is given by :
  *
  * @f$ A(x,y) = [v_x, v_y] = [-\partial_y \phi, \partial_x \phi]^T @f$,
@@ -152,7 +151,7 @@ public:
      * @param[in] t
      *      Time component.
      *
-     * @return  The electrostatic potential at the given coordinate.
+     * @return The electrostatic potential at the given coordinate.
      */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
@@ -181,7 +180,6 @@ public:
 
 /**
  * @brief Electrostatic potential for a rotation test of the 2D polar advection operator.
- *
  *
  * The test advection field for a rotation in the physical domain is given by :
  *
@@ -235,7 +233,7 @@ public:
      * @param[in] t
      *      Time component.
      *
-     * @return  The electrostatic potential at the given coordinate.
+     * @return The electrostatic potential at the given coordinate.
      */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
