@@ -82,7 +82,7 @@ public:
      *
      * @param [in] function_interpolator
      *       The polar interpolator to interpolate the function once the
-     *      characteristics computed.
+     *      characteristics have been computed.
      * @param[in] foot_finder
      *      An IFootFinder which computes the feet of the characteristics.
      * @param[in] mapping
