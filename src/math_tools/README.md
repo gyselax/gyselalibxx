@@ -6,8 +6,12 @@ This folder contains mathematical classes and functions.
 
 Functions for calculating derivatives with different methods:
 
-- `spline_partial_derivatives.hpp` : calculate derivatives using spline interpolation
-- `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method. The method is as follow:
+- `spline_1d_partial_derivative.hpp` : calculate derivatives using a 1d spline representation.
+- `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method. 
+
+### Finite difference derivatives
+
+The method is as follow:
 Take a function $f$. We want to approximate the value of $`f'(x_1)`$ knowing the value of $`f(x_1)`$, $`f(x_2)`$ and $`f(x_3)`$ for
 $`x_3>x_2>x_1`$.
 Denote $`\alpha :=|x_2-x_1|`$ and $`\beta :=|x_3-x_2|`$.
@@ -45,7 +49,6 @@ The same computation can be made for the backward and the centred FDM scheme, an
         Df(x_3) & = \frac{2\alpha+\beta}{\alpha(\alpha+\beta)}f(x_1)-\left(\frac{1}{\alpha}+\frac{1}{\beta}\right)f(x_2)+\frac{\alpha}{\beta(\alpha+\beta)}f(x_3).
     \end{aligned}
 ```
-
 One can check than in the uniform case ($\alpha=\beta$) we recover the well known coefficient $-1/2$ and $1/2$ for the centred case
 and $-3/2$, $2$ and $-1/2$ for the decentred case.
  
