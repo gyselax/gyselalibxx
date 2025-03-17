@@ -17,38 +17,37 @@
 /**
  * @brief Define an advection operator on 2D @f$(r, \theta)@f$ index range.
  *
- * The advection operator uses a semi-Lagrangian method. The method is based on
+ * The advection operator uses a backward semi-Lagrangian method. The method is based on
  * the property that the solution is constant along the characteristics.
  *
  * For the following equation:
- * @f$\partial_t f(t,x) + V(t, x) \cdot \nabla_x f(t,x) = 0,  @f$
+ * @f$\partial_t f(t,x) + A(t, x) \cdot \nabla_x f(t,x) = 0,  @f$
  *
  * we write the characteristics:
- * @f$ \partial_t X(t; s, x) = V(t, X(t; s, x)), \qquad \text{ with } X(s; s, x) = x. @f$
+ * @f$ \partial_t X(t; s, x) = A(t, X(t; s, x)), \qquad \text{ with } X(s; s, x) = x. @f$
  *
  * Then the property gives us:
  * @f$ f(t, x) = f(0, X(t; 0, x)), \quad \forall t. @f$
  *
  *
- * So the first step of the advection operator is to compute the characteristic feet @f$ X(t; t+dt, x_i) @f$
- * for each mesh point @f$ x_i @f$.
+ * So the first step of the advection operator is to compute the feet of the characteristics 
+ * @f$ X(t; t+dt, x_i) @f$ for each mesh point @f$ x_i @f$.
  *
- * For the second step, we interpolate the function at the characteristic feet computed, and obtain the
+ * For the second step, we interpolate the function at the feet of the characteristics computed, and obtain the
  * function at the next time step: @f$ f(t + dt, x) = f(t, X(t + dt; t, x))@f$.
  *
  *
- * Different time integration methods are implemented to solve the characteristic equation.
- * They are defined in the IFootFinder class.
+ * Different time integration methods are implemented to solve the equation of the characteristics.
+ * They are defined in the IPolarFootFinder class.
  *
- * The feet can be advected on different domains.
- * Theses domains are defined in the AdvectionDomain class.
+ * The feet can be advected on different domains (physical domain or pseudo-physical domain)
+ * which are determined in the SplinePolarFootFinder operator.
  *
- * The interpolation of the function is always done in the logical index range.
+ * The interpolation of the function is always done in the logical domain,
+ * where the B-splines are defined.
  *
- *
- *
- * @see IFootFinder
- *
+ * 
+ * @see IPolarFootFinder
  */
 template <class FootFinder, class Mapping>
 class BslAdvectionRTheta : public IAdvectionRTheta
@@ -83,9 +82,9 @@ public:
      *
      * @param [in] function_interpolator
      *       The polar interpolator to interpolate the function once the
-     *      characteristic computed.
+     *      characteristics computed.
      * @param[in] foot_finder
-     *      An IFootFinder which computes the characteristic feet.
+     *      An IFootFinder which computes the feet of the characteristics.
      * @param[in] mapping
      *      The mapping function from the logical domain to the physical
      *      domain. 
@@ -138,10 +137,10 @@ public:
                     feet_rtheta(irtheta) = ddc::coordinate(irtheta);
                 });
 
-        // Compute the characteristic feet at tn ----------------------------------------------------
+        // Compute the feet of the characteristics at tn -----------------------------------------
         m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);
 
-        // Interpolate the function on the characteristic feet. -------------------------------------
+        // Interpolate the function on the feet of the characteristics. --------------------------
         (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rtheta));
 
         return allfdistribu;

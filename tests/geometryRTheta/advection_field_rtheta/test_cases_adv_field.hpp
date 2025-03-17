@@ -13,16 +13,15 @@
 
 /*
  *  This file defines
- *   - the TEST ELECTROSTATICAL POTENTIALS,
+ *   - the TEST ELECTROSTATIC POTENTIALS,
  *   - and the TEST SIMULATIONS.
  */
 
 
 
-// TEST ELECTROSTATICAL POTENTIALS ------------------------------------------------
+// TEST ELECTROSTATIC POTENTIALS -----------------------------------------------------------------
 /**
- * @brief Advection field for the tests of the 2D polar advection operator.
- *
+ * @brief Electrostatic potential for a decentred rotation test of the 2D polar advection operator.
  *
  * The test advection field is given in Edoardo Zoni's article
  * (https://doi.org/10.1016/j.jcp.2019.108889):
@@ -34,7 +33,7 @@
  * - @f$ Y(t + dt) = y_c + (X(t) - x_c) \sin(\omega dt) + (Y(t) - y_c) \cos(\omega dt) @f$.
  *
  */
-class ElectrostaticalPotentialSimulation_decentred_rotation
+class ElectrostaticPotentialSimulation_decentred_rotation
 {
 private:
     double const m_omega;
@@ -44,11 +43,8 @@ private:
     double const m_y_bar;
 
 public:
-    /**
-     * @brief Instantiate an ElectrostaticalPotentialSimulation_decentred_rotation advection field.
-     *
-     */
-    KOKKOS_FUNCTION ElectrostaticalPotentialSimulation_decentred_rotation()
+    /// @brief Instantiate an ElectrostaticPotentialSimulation_decentred_rotation advection field.
+    KOKKOS_FUNCTION ElectrostaticPotentialSimulation_decentred_rotation()
         : m_omega(2 * M_PI)
         , m_xc(0.25)
         , m_yc(0.)
@@ -58,20 +54,20 @@ public:
     }
 
     /// Copy operator
-    explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticalPotentialSimulation_decentred_rotation(
-            ElectrostaticalPotentialSimulation_decentred_rotation const&)
+    explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticPotentialSimulation_decentred_rotation(
+            ElectrostaticPotentialSimulation_decentred_rotation const&)
             = default;
 
     /**
-￼     * @brief Get the advection field in the physical index range.
-￼     *
-￼     * @param[in] coord
-￼     *      The coordinate in the physical index range.
-￼     * @param[in] t
-￼     *      Time component.
-￼     *
-￼     * @return The advection field in the physical index range.
-￼     */
+     * @brief Get the electrostatic potential associated to the advection field.
+     *
+     * @param[in] coord
+     *      The coordinate in the physical domain.
+     * @param[in] t
+     *      Time component.
+     *
+     * @return The electrostatic potential at the given coordinate.
+     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
@@ -80,15 +76,15 @@ public:
     }
 
     /**
-￼     * @brief Get the characteristic feet in the physical index range.
-￼     *
-￼     * @param[in] coord
-￼     *      The original coordinate in the physical index range.
-￼     * @param[in] t
-￼     *      Time component.
-￼     *
-￼     * @return The characteristic feet in the physical index range.
-￼     */
+     * @brief Get the characteristic feet in the physical domain.
+     *
+     * @param[in] coord
+     *      The original coordinate in the physical domain.
+     * @param[in] t
+     *      Time component.
+     *
+     * @return The characteristic feet in the physical domain.
+     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         double const x = ddc::get<X>(coord);
@@ -104,10 +100,9 @@ public:
 
 
 /**
- * @brief Advection field for the tests of the 2D polar advection operator.
+ * @brief Electrostatic potential for a translation test of the 2D polar advection operator.
  *
- *
- * The test advection field for a translation in the physical index range is given by :
+ * The test advection field for a translation in the physical domain is given by :
  *
  * @f$ A(x,y) = [v_x, v_y]@f$.
  *
@@ -118,40 +113,40 @@ public:
  * - @f$ Y(t + dt) = Y(t) + dt v_y @f$.
  *
  */
-class ElectrostaticalPotentialSimulation_translation
+class ElectrostaticPotentialSimulation_translation
 {
 private:
     CoordXY const m_velocity;
 
 public:
     /**
-     * @brief Instantiate an ElectrostaticalPotentialSimulation_translation advection field.
+     * @brief Instantiate an ElectrostaticPotentialSimulation_translation advection field.
      *
      * @param[in] vx
-     *      The constant first component of the advection field in the physical index range.
+     *      The constant first component of the advection field in the physical domain.
      * @param[in] vy
-     *      The constant second component of the advection field in the physical index range.
+     *      The constant second component of the advection field in the physical domain.
      */
-    ElectrostaticalPotentialSimulation_translation(CoordVx vx, CoordVy vy)
+    ElectrostaticPotentialSimulation_translation(CoordVx vx, CoordVy vy)
         : m_velocity(ddc::get<Vx>(vx), ddc::get<Vy>(vy))
     {
     }
 
     /// Copy operator
-    explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticalPotentialSimulation_translation(
-            ElectrostaticalPotentialSimulation_translation const&)
+    explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticPotentialSimulation_translation(
+            ElectrostaticPotentialSimulation_translation const&)
             = default;
 
     /**
-￼     * @brief Get the advection field in the physical index range.
-￼     *
-￼     * @param[in] coord
-￼     *      The coordinate in the physical index range.
-￼     * @param[in] t
-￼     *      Time component.
-￼     *
-￼     * @return The advection field in the physical index range.
-￼     */
+     * @brief Get the electrostatic potential associated to the advection field.
+     *
+     * @param[in] coord
+     *      The coordinate in the physical domain.
+     * @param[in] t
+     *      Time component.
+     *
+     * @return The electrostatic potential at the given coordinate.
+     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
         double const vx = ddc::get<X>(m_velocity);
@@ -160,15 +155,15 @@ public:
     }
 
     /**
-￼     * @brief Get the characteristic feet in the physical index range.
-￼     *
-￼     * @param[in] coord
-￼     *      The original coordinate in the physical index range.
-￼     * @param[in] t
-￼     *      Time component.
-￼     *
-￼     * @return The characteristic feet in the physical index range.
-￼     */
+     * @brief Get the characteristic feet in the physical domain.
+     *
+     * @param[in] coord
+     *      The original coordinate in the physical domain.
+     * @param[in] t
+     *      Time component.
+     *
+     * @return The characteristic feet in the physical domain.
+     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord, double const t) const
     {
         return coord - t * m_velocity;
@@ -178,10 +173,9 @@ public:
 
 
 /**
- * @brief Advection field for the tests of the 2D polar advection operator.
+ * @brief Electrostatic potential for a rotation test of the 2D polar advection operator.
  *
- *
- * The test advection field for a rotation in the physical index range is given by :
+ * The test advection field for a rotation in the physical domain is given by :
  *
  * @f$ A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]@f$.
  *
@@ -196,7 +190,7 @@ public:
  *      - and @f$ (R(t), \Theta(t)) = \mathcal{F}^{-1} (X(t), Y(t))@f$.
  *
  */
-class ElectrostaticalPotentialSimulation_rotation
+class ElectrostaticPotentialSimulation_rotation
 {
 private:
     double const m_vr;
@@ -205,12 +199,12 @@ private:
 
 public:
     /**
-     * @brief Instantiate an ElectrostaticalPotentialSimulation_rotation advection field.
+     * @brief Instantiate an ElectrostaticPotentialSimulation_rotation advection field.
      *
      * @param[in] vtheta
-     *      The constant second polar component of the advection field in the physical index range.
+     *      The constant second polar component of the advection field in the physical domain.
      */
-    explicit ElectrostaticalPotentialSimulation_rotation(CoordVtheta vtheta)
+    explicit ElectrostaticPotentialSimulation_rotation(CoordVtheta vtheta)
         : m_vr(0)
         , m_vtheta(vtheta)
         , m_mapping()
@@ -218,20 +212,20 @@ public:
     }
 
     /// Copy operator
-    explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticalPotentialSimulation_rotation(
-            ElectrostaticalPotentialSimulation_rotation const&)
+    explicit KOKKOS_DEFAULTED_FUNCTION ElectrostaticPotentialSimulation_rotation(
+            ElectrostaticPotentialSimulation_rotation const&)
             = default;
 
     /**
-￼     * @brief Get the advection field in the physical index range.
-￼     *
-￼     * @param[in] coord
-￼     *      The coordinate in the physical index range.
-￼     * @param[in] t
-￼     *      Time component.
-￼     *
-￼     * @return The advection field in the physical index range.
-￼     */
+     * @brief Get the electrostatic potential associated to the advection field.
+     *
+     * @param[in] coord
+     *      The coordinate in the physical domain.
+     * @param[in] t
+     *      Time component.
+     *
+     * @return The electrostatic potential at the given coordinate.
+     */
     KOKKOS_FUNCTION double operator()(CoordXY const coord, double const t) const
     {
         CoordRTheta const coord_rtheta(m_mapping(coord));
@@ -240,15 +234,15 @@ public:
     }
 
     /**
-￼     * @brief Get the characteristic feet in the physical index range.
-￼     *
-￼     * @param[in] coord_xy
-￼     *      The original coordinate in the physical index range.
-￼     * @param[in] t
-￼     *      Time component.
-￼     *
-￼     * @return The characteristic feet in the physical index range.
-￼     */
+     * @brief Get the characteristic feet in the physical domain.
+     *
+     * @param[in] coord_xy
+     *      The original coordinate in the physical domain.
+     * @param[in] t
+     *      Time component.
+     *
+     * @return The characteristic feet in the physical domain.
+     */
     KOKKOS_FUNCTION CoordXY exact_feet(CoordXY coord_xy, double const t) const
     {
         CoordRTheta const coord_rtheta(m_mapping(coord_xy));
@@ -260,7 +254,7 @@ public:
 
 
 
-// TEST SIMULATIONS ---------------------------------------------------------------
+// TEST SIMULATIONS ------------------------------------------------------------------------------
 /**
  * @brief Base class for the tests simulation of the 2D polar advection operator.
  *
@@ -271,26 +265,22 @@ public:
  *
  * @see BslAdvectionRTheta
  * @see FunctionToBeAdvected
- * @see ElectrostaticalPotentialSimulation
+ * @see ElectrostaticPotentialSimulation
  * @see AdvectionField
  */
 template <
-        class ElectrostaticalPotentialSimulation,
+        class ElectrostaticPotentialSimulation,
         class FunctionToBeAdvected,
         class AdvectionField>
 struct AdvectionFieldSimulation
 {
-    /**
-     * @brief The chosen electrostatical potential for the simulation.
-     */
-    ElectrostaticalPotentialSimulation const electrostatical_potential;
-    /**
-     * @brief The chosen function to be advected for the simulation.
-     */
+    /// @brief The chosen electrostatical potential for the simulation.
+    ElectrostaticPotentialSimulation const electrostatical_potential;
+    
+    /// @brief The chosen function to be advected for the simulation.
     FunctionToBeAdvected const function;
-    /**
-     * @brief The chosen advection field for the simulation.
-     */
+    
+    /// @brief The chosen advection field for the simulation.
     AdvectionField const advection_field;
 };
 
@@ -299,7 +289,7 @@ struct AdvectionFieldSimulation
  * @brief Simulation of a translated Gaussian.
  *
  * Define a simulation with a Gaussian defined by FunctionToBeAdvected_gaussian
- * and a translation advection field defined by ElectrostaticalPotentialSimulation_translation:
+ * and a translation advection field defined by ElectrostaticPotentialSimulation_translation:
  *
  * - @f$ f(x, y) =  C \exp\left( - \frac{(x - x_0)^2}{2\sigma_x^2}  - \frac{(y - y_0)^2}{2\sigma_y^2}  \right)@f$
  * with
@@ -315,19 +305,19 @@ struct AdvectionFieldSimulation
  * with @f$ v_x @f$ and @f$ v_y @f$ constants.
  *
  * @param[in] mapping
- *      The mapping from the logical index range to the physical index range.
+ *      The mapping from the logical domain to the physical domain.
  * @param[in] rmin
- *      The minimum value of @f$ r@f$ on the logical index range.
+ *      The minimum value of @f$ r@f$ on the logical domain.
  * @param[in] rmax
- *      The maximum value of @f$ r@f$ on the logical index range.
+ *      The maximum value of @f$ r@f$ on the logical domain.
  *
  * @see FunctionToBeAdvected_gaussian
- * @see ElectrostaticalPotentialSimulation_translation
+ * @see ElectrostaticPotentialSimulation_translation
  * @see AdvectionField_translation
  */
 template <class Mapping>
 AdvectionFieldSimulation<
-        ElectrostaticalPotentialSimulation_translation,
+        ElectrostaticPotentialSimulation_translation,
         FunctionToBeAdvected_gaussian<Mapping>,
         AdvectionField_translation>
 get_translation_advection_field_simulation(
@@ -336,10 +326,10 @@ get_translation_advection_field_simulation(
         double const rmax)
 {
     return AdvectionFieldSimulation<
-            ElectrostaticalPotentialSimulation_translation,
+            ElectrostaticPotentialSimulation_translation,
             FunctionToBeAdvected_gaussian<Mapping>,
             AdvectionField_translation>(
-            {ElectrostaticalPotentialSimulation_translation(
+            {ElectrostaticPotentialSimulation_translation(
                      CoordVx(-std::cos(2 * M_PI * 511. / 4096.) / 2.),
                      CoordVy(-std::sin(2 * M_PI * 511. / 4096.) / 2.)),
              FunctionToBeAdvected_gaussian<Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
@@ -353,7 +343,7 @@ get_translation_advection_field_simulation(
  * @brief Simulation of a rotated Gaussian.
  *
  * Define a simulation with a Gaussian defined by FunctionToBeAdvected_gaussian
- * and a rotation advection field defined by ElectrostaticalPotentialSimulation_rotation:
+ * and a rotation advection field defined by ElectrostaticPotentialSimulation_rotation:
  *
  *
  * - @f$ f(x, y) =  C \exp\left( - \frac{(x - x_0)^2}{2\sigma_x^2}  - \frac{(y - y_0)^2}{2\sigma_y^2}  \right)@f$
@@ -371,19 +361,19 @@ get_translation_advection_field_simulation(
  * circular mapping.
  *
  * @param[in] mapping
- *      The mapping from the logical index range to the physical index range.
+ *      The mapping from the logical domain to the physical domain.
  * @param[in] rmin
- *      The minimum value of @f$ r@f$ on the logical index range.
+ *      The minimum value of @f$ r@f$ on the logical domain.
  * @param[in] rmax
- *      The maximum value of @f$ r@f$ on the logical index range.
+ *      The maximum value of @f$ r@f$ on the logical domain.
  *
  * @see FunctionToBeAdvected_gaussian
- * @see ElectrostaticalPotentialSimulation_rotation
+ * @see ElectrostaticPotentialSimulation_rotation
  * @see AdvectionField_rotation
  */
 template <class Mapping>
 AdvectionFieldSimulation<
-        ElectrostaticalPotentialSimulation_rotation,
+        ElectrostaticPotentialSimulation_rotation,
         FunctionToBeAdvected_gaussian<Mapping>,
         AdvectionField_rotation>
 get_rotation_advection_field_simulation(
@@ -392,10 +382,10 @@ get_rotation_advection_field_simulation(
         double const rmax)
 {
     return AdvectionFieldSimulation<
-            ElectrostaticalPotentialSimulation_rotation,
+            ElectrostaticPotentialSimulation_rotation,
             FunctionToBeAdvected_gaussian<Mapping>,
             AdvectionField_rotation>(
-            {ElectrostaticalPotentialSimulation_rotation(CoordVtheta(2 * M_PI)),
+            {ElectrostaticPotentialSimulation_rotation(CoordVtheta(2 * M_PI)),
              FunctionToBeAdvected_gaussian<Mapping>(mapping, 1., -0.2, -0.2, 0.1, 0.1, rmin, rmax),
              AdvectionField_rotation(CoordVr(0), CoordVtheta(2 * M_PI))});
 }
@@ -408,7 +398,7 @@ get_rotation_advection_field_simulation(
  * (https://doi.org/10.1016/j.jcp.2019.108889).
  *
  * Define a simulation with a ellipse-type function defined by FunctionToBeAdvected_cos_4_ellipse
- * and a decentred rotation advection field defined by ElectrostaticalPotentialSimulation_decentred_rotation:
+ * and a decentred rotation advection field defined by ElectrostaticPotentialSimulation_decentred_rotation:
  *
  * - @f$ f(x, y) =  \frac{1}{2}\left( G(r_1(x,y)) + G(r_2(x,y))\right)@f$
  *
@@ -423,24 +413,24 @@ get_rotation_advection_field_simulation(
  * with @f$\omega = 2\pi@f$ and  @f$ (x_c, y_c) = (0.25, 0) @f$.
  *
  * @param[in] mapping
- *      The mapping from the logical index range to the physical index range.
+ *      The mapping from the logical domain to the physical domain.
  *
  * @see FunctionToBeAdvected_cos_4_ellipse
- * @see ElectrostaticalPotentialSimulation_decentred_rotation
+ * @see ElectrostaticPotentialSimulation_decentred_rotation
  * @see AdvectionField_decentred_rotation
  */
 template <class Mapping>
 AdvectionFieldSimulation<
-        ElectrostaticalPotentialSimulation_decentred_rotation,
+        ElectrostaticPotentialSimulation_decentred_rotation,
         FunctionToBeAdvected_cos_4_ellipse<Mapping>,
         AdvectionField_decentred_rotation>
 get_decentred_rotation_advection_field_simulation(Mapping const& mapping)
 {
     return AdvectionFieldSimulation<
-            ElectrostaticalPotentialSimulation_decentred_rotation,
+            ElectrostaticPotentialSimulation_decentred_rotation,
             FunctionToBeAdvected_cos_4_ellipse<Mapping>,
             AdvectionField_decentred_rotation>(
-            {ElectrostaticalPotentialSimulation_decentred_rotation(),
+            {ElectrostaticPotentialSimulation_decentred_rotation(),
              FunctionToBeAdvected_cos_4_ellipse<Mapping>(mapping),
              AdvectionField_decentred_rotation()});
 }

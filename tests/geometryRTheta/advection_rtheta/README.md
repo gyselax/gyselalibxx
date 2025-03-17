@@ -10,8 +10,8 @@ The tests are made for different parameters which are:
 ### - The mapping and the domain used for the advection: 
  - Circular mapping in the physical domain (CircularToCartesian and AdvectionPhysicalDomain); 
  - Czarny mapping in the physical domain (CzarnyToCartesian and AdvectionPhysicalDomain); 
- - Czarny mapping in the pseudo-Cartesian domain (CzarnyToCartesian and AdvectionPseudoCartesianDomain); 
- - Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (DiscreteToCartesian and AdvectionPseudoCartesianDomain).
+ - Czarny mapping in the pseudo-Cartesian domain (CzarnyToCartesian); 
+ - Discrete mapping of the Czarny mapping in the pseudo-Cartesian domain (DiscreteToCartesian).
  	
 ### - The time integration method used to solve the characteristic equation: 
  - Explicit Euler (Euler); 
@@ -20,19 +20,19 @@ The tests are made for different parameters which are:
  - Runge-Kutta 4 (RK4). 
  	
 ### - The test simulation: 
- - simulation 1: translation of Gaussian function (TranslationSimulation)
+ - simulation 1: translation of Gaussian function (AdvectionFieldSimulation)
    - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
    - $`V(t, x, y) = (v_x, v_y)`$ . 
- - simulation 2: rotation of Gaussian function (RotationSimulation)
+ - simulation 2: rotation of Gaussian function (AdvectionFieldSimulation)
   - $`f_0(x,y) = \exp\left( - \frac{(x- x_0)^2}{2 \sigma_x^2} - \frac{(y- y_0)^2}{2 \sigma_y^2} \right)`$, 
   - $`V(t, x, y) = J_{\mathcal{F}_{\text{circular}}}(v_r, v_\theta)`$. 
- - simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]) (DecentredRotationSimulation)
+ - simulation 3: decentred rotation (test given in Edoardo Zoni's article [1]) (AdvectionFieldSimulation)
   - $`f_0(x,y) = \frac{1}{2} \left( G(r_1(x,y)) + G(r_2(x,y))\right)`$,
   - with 
      - $`G(r) = \cos\left(\frac{\pi r}{2 a}\right)^4 * 1_{r<a}(r)`$, 
      - $`r_1(x, y) = \sqrt{(x-x_0)^2 + 8(y-y_0)^2}`$ 
      - $`r_2(x, y) = \sqrt{8(x-x_0)^2 + (y-y_0)^2}`$ 
-  - $`V(t, x, y) = \omega(y_c - y, x - x_c)`$. 
+  - $`A(t, x, y) = \omega(y_c - y, x - x_c)`$. 
 
 
 ## Python tests
