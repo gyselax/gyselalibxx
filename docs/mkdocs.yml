@@ -23,6 +23,23 @@ nav:
     # - DDC: DDC_in_gyselalibxx.md
     # - Compilaiton Problems: Common_compilation_problems.md
     # - FAQ: developer_FAQ.md
+  - API:
+      - Gyselalib++:
+          - 'Classes':
+              - 'Class List': 'gyselalibxx/annotated.md'
+              - 'Class Index': 'gyselalibxx/classes.md'
+              - 'Class Hierarchy': 'gyselalibxx/hierarchy.md'
+          - 'Namespaces':
+              - 'Namespace List': 'gyselalibxx/namespaces.md'
+              - 'Namespace Members': 'gyselalibxx/namespace_members.md'
+              - 'Namespace Member Functions': 'gyselalibxx/namespace_member_functions.md'
+              - 'Namespace Member Variables': 'gyselalibxx/namespace_member_variables.md'
+              - 'Namespace Member Typedefs': 'gyselalibxx/namespace_member_typedefs.md'
+              - 'Namespace Member Enumerations': 'gyselalibxx/namespace_member_enums.md'
+          - 'Functions': 'gyselalibxx/functions.md'
+          - 'Variables': 'gyselalibxx/variables.md'
+          - 'Macros': 'gyselalibxx/macros.md'
+          - 'Files': 'gyselalibxx/files.md'
 
 theme: readthedocs
 
@@ -32,6 +49,26 @@ plugins:
   - include_dir_to_nav:
       flat: false
       file_name_as_title: true
+  - mkdoxy:
+      projects:
+        gyselalibxx:
+          src-dirs: ../src
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.cpp *.h*"
+            RECURSIVE: True
+            EXTRACT_ALL: False
+            EXCLUDE_SYMBOLS: "detail details mapping_detail"
+            EXTRACT_LOCAL_CLASSES: True
+            BUILTIN_STL_SUPPORT: Yes
+            CLANG_ASSISTED_PARSING: Yes
+            ENUM_VALUES_PER_LINE: 1
+            FULL_PATH_NAMES: True
+            GENERATE_TREEVIEW: True
+            SHOW_FILES: True
+            SHOW_INCLUDE_FILES: True
+            TYPEDEF_HIDES_STRUCT: True
+
 
 markdown_extensions:
   - attr_list
