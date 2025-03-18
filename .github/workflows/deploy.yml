@@ -58,22 +58,33 @@ jobs:
         run: |
           sudo apt install doxygen
         shell: bash
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+      - name: Install Python dependencies
+        run:
+          pip install -r requirements.txt
+        shell: bash
+        working-directory: ./code_branch/docs
       - name: Generate docs
         run: |
-          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs code_branch
-          cmake --build build-docs
+          python3 docs/prepare_mkdocs.py . docs/mkdoc build-docs/ vendor/ build docs/mkdoc
+          cd docs
+          mkdocs build
         shell: bash
+        working-directory: ./code_branch
       - name: Update documentation
         run: |
-          cd doc_branch
           git rm -r *
-          cp -r ../build-docs/docs/html/* .
+          cp -r ../code_branch/docs/site/* .
           git add .
           git config --global user.name "GitHub CI Documentation builder"
           git config --global user.email "username@users.noreply.github.com"
           git commit -m "Update docs" || true
           git push
         shell: bash
+        working-directory: ./doc_branch
         env:
           GH_TOKEN: ${{ github.token }}
 
