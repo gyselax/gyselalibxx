@@ -1,11 +1,10 @@
 window.MathJax = {
   tex: {
-    inlineMath: [["\\(", "\\)"], ["$", "$"], ["`$", "`$"]],
-    displayMath: [["\\[", "\\]"], ["\```math", "\```"]],
-    processEscapes: true,
-    processEnvironments: true
-  },
-  loader: {load: ['[tex]/autoload', '[tex]/ams']}
+    inlineMath: [["$", "$"],["\\(", "\\)"], ["$`", "`$"]],
+    displayMath: [["\\[", "\\]"], ["```math", "```"]],
+    // processEscapes: true,
+    // processEnvironments: true
+  }
 };
 
 document$.subscribe(() => { 
