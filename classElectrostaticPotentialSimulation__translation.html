@@ -132,8 +132,9 @@ KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><b>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Electrostatic potential for a translation test of the 2D polar advection operator. </p>
 <p>The test advection field for a translation in the physical domain is given by :</p>
-<p>\( A(x,y) = [v_x, v_y]\).</p>
+<p>\( A(x,y) = [v_x, v_y] = [-\partial_y \phi, \partial_x \phi]^T \),</p>
 <p>with \( v_x \) and \( v_y \) constants.</p>
+<p>An adapted electrostatic potential is \( \phi(x,y) = v_y x - v_x y\).</p>
 <p>The characteristic feet are then given by</p><ul>
 <li>\( X(t + dt) = X(t) + dt v_x \),</li>
 <li>\( Y(t + dt) = Y(t) + dt v_y \). </li>

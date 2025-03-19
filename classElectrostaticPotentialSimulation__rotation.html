@@ -132,8 +132,9 @@ KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><b>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Electrostatic potential for a rotation test of the 2D polar advection operator. </p>
 <p>The test advection field for a rotation in the physical domain is given by :</p>
-<p>\( A(x,y) = J_{\mathcal{F}}[v_r, v_\theta]\).</p>
-<p>with \( v_r \) and \( v_\theta \) constants and \( \mathcal{F}\) the circular mapping.</p>
+<p>\( A(x,y) = J_{\mathcal{F}}[v^r, v^\theta] = [-\partial_y \phi, \partial_x \phi]^T \),</p>
+<p>with \( v^r \) and \( v^\theta \) constants composants in the contravariant basis and \(\mathcal{F}\) the circular mapping.</p>
+<p>An adapted electrostatic potential for \( v^r = 0 \) is \( \phi(x,y) = 1/2 v^\theta (x^2 + y^2 )\).</p>
 <p>The characteristic feet are then given by</p><ul>
 <li>\( (X(t + dt), Y(t + dt))  = \mathcal{F} (R(t + dt), \Theta(t + dt))\),</li>
 <li>with<ul>

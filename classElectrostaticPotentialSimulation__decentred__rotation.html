@@ -133,7 +133,8 @@ KOKKOS_DEFAULTED_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><b>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Electrostatic potential for a decentred rotation test of the 2D polar advection operator. </p>
 <p>The test advection field is given in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>):</p>
-<p>\( A(x,y) = \omega [y_c - y, x - x_c]\).</p>
+<p>\( A(x,y) = \omega [y_c - y, x - x_c]^T = [-\partial_y \phi, \partial_x \phi]^T \),</p>
+<p>An adapted electrostatic potential is \( \phi(x,y) = \omega (1\2 * x^2 - x x_c + 1/2 * y^2 - y y_c)\).</p>
 <p>The characteristic feet are then given by</p><ul>
 <li>\( X(t + dt) = x_c + (X(t) - x_c) \cos(\omega dt) - (Y(t) - y_c) \sin(\omega dt) \),</li>
 <li>\( Y(t + dt) = y_c + (X(t) - x_c) \sin(\omega dt) + (Y(t) - y_c) \cos(\omega dt) \). </li>
