@@ -21,10 +21,12 @@ It uses the conservation property along the characteristics:
 
 with:
 ```math
+\begin{aligned}
 \partial_t X (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_x,\\
 \partial_t Y (t; s, x, y) = A(t,X(t; s, x, y),Y(t; s, x, y)) \cdot e_y,\\
 X(s; s, x, y) = x,\\
 Y(s; s, x, y) = y.
+\end{aligned}
 ```
 
 So to compute the advected function at the next time step, 
