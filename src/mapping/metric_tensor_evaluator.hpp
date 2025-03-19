@@ -89,14 +89,10 @@ public:
         const double jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);
 
         DTensor<Dims, Dims> inverse_metric_tensor;
-        ddcHelper::get<Dim0, Dim0>(inverse_metric_tensor)
-                = (J_12 * J_12 + J_22 * J_22) / jacob_2;
-        ddcHelper::get<Dim0, Dim1>(inverse_metric_tensor)
-                = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1, Dim0>(inverse_metric_tensor)
-                = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1, Dim1>(inverse_metric_tensor)
-                = (J_11 * J_11 + J_21 * J_21) / jacob_2;
+        ddcHelper::get<Dim0, Dim0>(inverse_metric_tensor) = (J_12 * J_12 + J_22 * J_22) / jacob_2;
+        ddcHelper::get<Dim0, Dim1>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
+        ddcHelper::get<Dim1, Dim0>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
+        ddcHelper::get<Dim1, Dim1>(inverse_metric_tensor) = (J_11 * J_11 + J_21 * J_21) / jacob_2;
 
         return inverse_metric_tensor;
     }

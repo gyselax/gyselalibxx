@@ -403,7 +403,8 @@ public:
             // Calculate the radial derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<R_cov>(m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
+                ddcHelper::get<R_cov>(
+                        m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
 
