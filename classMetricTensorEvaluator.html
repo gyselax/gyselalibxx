@@ -130,12 +130,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9cc21d5dd3c74af9af9d1a270692612" id="r_aa9cc21d5dd3c74af9af9d1a270692612"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#aa9cc21d5dd3c74af9af9d1a270692612">MetricTensorEvaluator</a> (Mapping mapping)</td></tr>
 <tr class="memdesc:aa9cc21d5dd3c74af9af9d1a270692612"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the metric tensor operator.  <br /></td></tr>
 <tr class="separator:aa9cc21d5dd3c74af9af9d1a270692612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35a3b1349c76e3e4671578640dad1cc6" id="r_a35a3b1349c76e3e4671578640dad1cc6"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims, Dims &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#a35a3b1349c76e3e4671578640dad1cc6">operator()</a> (PositionCoordinate const &amp;coord) const</td></tr>
-<tr class="memdesc:a35a3b1349c76e3e4671578640dad1cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the metric tensor associated with the mapping at a given position in space.  <br /></td></tr>
-<tr class="separator:a35a3b1349c76e3e4671578640dad1cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14ceec2cd9deff5904c4d9070967f8fc" id="r_a14ceec2cd9deff5904c4d9070967f8fc"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims_cov, Dims_cov &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#a14ceec2cd9deff5904c4d9070967f8fc">inverse</a> (PositionCoordinate const &amp;coord) const</td></tr>
-<tr class="memdesc:a14ceec2cd9deff5904c4d9070967f8fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse metric tensor associated with the mapping at a given position in space.  <br /></td></tr>
-<tr class="separator:a14ceec2cd9deff5904c4d9070967f8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a440ec0f675e0633e8b68cf23719ea125" id="r_a440ec0f675e0633e8b68cf23719ea125"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims_cov, Dims_cov &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#a440ec0f675e0633e8b68cf23719ea125">operator()</a> (PositionCoordinate const &amp;coord) const</td></tr>
+<tr class="memdesc:a440ec0f675e0633e8b68cf23719ea125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the metric tensor associated with the mapping at a given position in space.  <br /></td></tr>
+<tr class="separator:a440ec0f675e0633e8b68cf23719ea125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1756e929309a1af8757ef30bb1d2dbf6" id="r_a1756e929309a1af8757ef30bb1d2dbf6"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims, Dims &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMetricTensorEvaluator.html#a1756e929309a1af8757ef30bb1d2dbf6">inverse</a> (PositionCoordinate const &amp;coord) const</td></tr>
+<tr class="memdesc:a1756e929309a1af8757ef30bb1d2dbf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse metric tensor associated with the mapping at a given position in space.  <br /></td></tr>
+<tr class="separator:a1756e929309a1af8757ef30bb1d2dbf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class Mapping, class PositionCoordinate&gt;<br />
@@ -185,8 +185,8 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a35a3b1349c76e3e4671578640dad1cc6" name="a35a3b1349c76e3e4671578640dad1cc6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35a3b1349c76e3e4671578640dad1cc6">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a440ec0f675e0633e8b68cf23719ea125" name="a440ec0f675e0633e8b68cf23719ea125"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a440ec0f675e0633e8b68cf23719ea125">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +197,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims, Dims &gt; <a class="el" href="classMetricTensorEvaluator.html">MetricTensorEvaluator</a>&lt; Mapping, PositionCoordinate &gt;::operator() </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims_cov, Dims_cov &gt; <a class="el" href="classMetricTensorEvaluator.html">MetricTensorEvaluator</a>&lt; Mapping, PositionCoordinate &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>
@@ -223,8 +223,8 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
 
 </div>
 </div>
-<a id="a14ceec2cd9deff5904c4d9070967f8fc" name="a14ceec2cd9deff5904c4d9070967f8fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14ceec2cd9deff5904c4d9070967f8fc">&#9670;&#160;</a></span>inverse()</h2>
+<a id="a1756e929309a1af8757ef30bb1d2dbf6" name="a1756e929309a1af8757ef30bb1d2dbf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1756e929309a1af8757ef30bb1d2dbf6">&#9670;&#160;</a></span>inverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +235,7 @@ template&lt;class Mapping , class PositionCoordinate &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims_cov, Dims_cov &gt; <a class="el" href="classMetricTensorEvaluator.html">MetricTensorEvaluator</a>&lt; Mapping, PositionCoordinate &gt;::inverse </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; Dims, Dims &gt; <a class="el" href="classMetricTensorEvaluator.html">MetricTensorEvaluator</a>&lt; Mapping, PositionCoordinate &gt;::inverse </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>

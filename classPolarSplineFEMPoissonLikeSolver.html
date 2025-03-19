@@ -197,12 +197,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af97748fe740d17247902a8b1d4b1f2ac"><td class="memTemplItemLeft" align="right" valign="top">static KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#af97748fe740d17247902a8b1d4b1f2ac">weak_integral_element</a> (IdxQuadratureR idx_r, IdxQuadratureTheta idx_theta, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType">EvalDeriv2DType</a> const &amp;test_bspline_val_and_deriv, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType">EvalDeriv2DType</a> const &amp;trial_bspline_val_and_deriv, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp;evaluator, Mapping const &amp;mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume)</td></tr>
 <tr class="memdesc:af97748fe740d17247902a8b1d4b1f2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the weak integral value.  <br /></td></tr>
 <tr class="separator:af97748fe740d17247902a8b1d4b1f2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf091aa5bdf3805b2635249a49297ea0" id="r_adf091aa5bdf3805b2635249a49297ea0"><td class="memItemLeft" align="right" valign="top">static KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#adf091aa5bdf3805b2635249a49297ea0">get_value_and_gradient</a> (double &amp;value, <a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9">R</a>, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417">Theta</a> &gt; &amp;derivs, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType">EvalDeriv1DType</a> const &amp;r_basis, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType">EvalDeriv1DType</a> const &amp;theta_basis)</td></tr>
-<tr class="memdesc:adf091aa5bdf3805b2635249a49297ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value and gradient from r_basis and theta_basis inputs.  <br /></td></tr>
-<tr class="separator:adf091aa5bdf3805b2635249a49297ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ed8ec0e5d5259d7c7292dc7acb67ca1" id="r_a5ed8ec0e5d5259d7c7292dc7acb67ca1"><td class="memItemLeft" align="right" valign="top">static KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a5ed8ec0e5d5259d7c7292dc7acb67ca1">get_value_and_gradient</a> (double &amp;value, <a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9">R</a>, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417">Theta</a> &gt; &amp;derivs, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType">EvalDeriv2DType</a> const &amp;basis, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType">EvalDeriv2DType</a> const &amp;)</td></tr>
-<tr class="memdesc:a5ed8ec0e5d5259d7c7292dc7acb67ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value and gradient from r_basis and theta_basis inputs.  <br /></td></tr>
-<tr class="separator:a5ed8ec0e5d5259d7c7292dc7acb67ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc0c26e86f3cfce747b6220c4b96ea23" id="r_abc0c26e86f3cfce747b6220c4b96ea23"><td class="memItemLeft" align="right" valign="top">static KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#abc0c26e86f3cfce747b6220c4b96ea23">get_value_and_gradient</a> (double &amp;value, <a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt; &amp;derivs, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType">EvalDeriv1DType</a> const &amp;r_basis, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType">EvalDeriv1DType</a> const &amp;theta_basis)</td></tr>
+<tr class="memdesc:abc0c26e86f3cfce747b6220c4b96ea23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value and gradient from r_basis and theta_basis inputs.  <br /></td></tr>
+<tr class="separator:abc0c26e86f3cfce747b6220c4b96ea23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a571591661a8661ddb186b64cdd5a0921" id="r_a571591661a8661ddb186b64cdd5a0921"><td class="memItemLeft" align="right" valign="top">static KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a571591661a8661ddb186b64cdd5a0921">get_value_and_gradient</a> (double &amp;value, <a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt; &amp;derivs, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType">EvalDeriv2DType</a> const &amp;basis, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType">EvalDeriv2DType</a> const &amp;)</td></tr>
+<tr class="memdesc:a571591661a8661ddb186b64cdd5a0921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value and gradient from r_basis and theta_basis inputs.  <br /></td></tr>
+<tr class="separator:a571591661a8661ddb186b64cdd5a0921"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac94824022d7b90428f769126de178000" id="r_ac94824022d7b90428f769126de178000"><td class="memTemplParams" colspan="2">template&lt;class Mapping , class TestValDerivType , class TrialValDerivType &gt; </td></tr>
 <tr class="memitem:ac94824022d7b90428f769126de178000"><td class="memTemplItemLeft" align="right" valign="top">static KOKKOS_FUNCTION double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#ac94824022d7b90428f769126de178000">templated_weak_integral_element</a> (IdxQuadratureR idx_r, IdxQuadratureTheta idx_theta, TestValDerivType const &amp;test_bspline_val_and_deriv, TrialValDerivType const &amp;trial_bspline_val_and_deriv, TestValDerivType const &amp;test_bspline_val_and_deriv_theta, TrialValDerivType const &amp;trial_bspline_val_and_deriv_theta, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Mapping const &amp;mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int_volume)</td></tr>
 <tr class="memdesc:ac94824022d7b90428f769126de178000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a quadrature summand corresponding to the inner product.  <br /></td></tr>
@@ -284,7 +284,7 @@ value</td>
 <td class="fielddoc">
 </td></tr>
 <tr><td class="fieldtype">
-<a id="a96f41269a4cf0b173be3654994922378" name="a96f41269a4cf0b173be3654994922378"></a><a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9">R</a>, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417">Theta</a> &gt;</td>
+<a id="a85e12c01584beb77b03e7ba61e740233" name="a85e12c01584beb77b03e7ba61e740233"></a><a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt;</td>
 <td class="fieldname">
 derivative</td>
 <td class="fielddoc">
@@ -927,8 +927,8 @@ template&lt;class Mapping &gt; </div>
 
 </div>
 </div>
-<a id="adf091aa5bdf3805b2635249a49297ea0" name="adf091aa5bdf3805b2635249a49297ea0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf091aa5bdf3805b2635249a49297ea0">&#9670;&#160;</a></span>get_value_and_gradient() <span class="overload">[1/2]</span></h2>
+<a id="abc0c26e86f3cfce747b6220c4b96ea23" name="abc0c26e86f3cfce747b6220c4b96ea23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc0c26e86f3cfce747b6220c4b96ea23">&#9670;&#160;</a></span>get_value_and_gradient() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -947,7 +947,7 @@ template&lt;class <a class="el" href="structGridR.html">GridR</a> , class <a cla
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9">R</a>, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417">Theta</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>derivs</em>, </td>
         </tr>
         <tr>
@@ -988,8 +988,8 @@ template&lt;class <a class="el" href="structGridR.html">GridR</a> , class <a cla
 
 </div>
 </div>
-<a id="a5ed8ec0e5d5259d7c7292dc7acb67ca1" name="a5ed8ec0e5d5259d7c7292dc7acb67ca1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ed8ec0e5d5259d7c7292dc7acb67ca1">&#9670;&#160;</a></span>get_value_and_gradient() <span class="overload">[2/2]</span></h2>
+<a id="a571591661a8661ddb186b64cdd5a0921" name="a571591661a8661ddb186b64cdd5a0921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a571591661a8661ddb186b64cdd5a0921">&#9670;&#160;</a></span>get_value_and_gradient() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1008,7 +1008,7 @@ template&lt;class <a class="el" href="structGridR.html">GridR</a> , class <a cla
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#aea7575e5ec7f7e2a776c1677a79137d9">R</a>, <a class="el" href="classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417">Theta</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classTensor.html">DVector</a>&lt; <a class="el" href="structR__cov.html">R_cov</a>, <a class="el" href="structTheta__cov.html">Theta_cov</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>derivs</em>, </td>
         </tr>
         <tr>
