@@ -74,9 +74,15 @@ public:
         MPI_Comm_size(comm, &m_comm_size);
         MPI_Comm_rank(comm, &rank);
         distributed_idx_range_type1 distrib_idx_range(global_idx_range_layout_1);
-        assert(m_comm_size <= distrib_idx_range.size());
+        if (m_comm_size > distrib_idx_range.size()) {
+            throw std::runtime_error("The number of MPI ranks is greater than the number that "
+                                     "would be used when maximumly distributing the data");
+        }
         // Ensure that the load balancing is good
-        assert(distrib_idx_range.size() % m_comm_size == 0);
+        if (distrib_idx_range.size() % m_comm_size != 0) {
+            throw std::runtime_error("The provided index range cannot be split equally over "
+                                     "the specified number of MPI ranks.");
+        }
         m_local_idx_range_1
                 = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);
         m_local_idx_range_2
@@ -97,7 +103,7 @@ public:
      * @returns The local index range in the specified MPI layout.
      */
     template <class Layout>
-    auto get_local_idx_range()
+    auto get_local_idx_range() const
     {
         static_assert(
                 std::is_same_v<Layout, Layout1> || std::is_same_v<Layout, Layout2>,
@@ -131,7 +137,7 @@ public:
     void operator()(
             ExecSpace const& execution_space,
             Field<ElementType, IdxRangeOut, MemSpace> recv_field,
-            ConstField<ElementType, InIdxRange, MemSpace> send_field)
+            ConstField<ElementType, InIdxRange, MemSpace> send_field) const
     {
         static_assert(!std::is_same_v<InIdxRange, IdxRangeOut>);
         static_assert(
@@ -166,7 +172,7 @@ public:
     void transpose_to(
             ExecSpace const& execution_space,
             Field<ElementType, typename OutLayout::discrete_domain_type, MemSpace> recv_field,
-            ConstField<ElementType, InIdxRange, MemSpace> send_field)
+            ConstField<ElementType, InIdxRange, MemSpace> send_field) const
     {
         using InLayout = std::conditional_t<std::is_same_v<OutLayout, Layout1>, Layout2, Layout1>;
         /*****************************************************************
@@ -319,7 +325,7 @@ private:
     void call_all_to_all(
             ExecSpace const& execution_space,
             Field<ElementType, MPIRecvIdxRange, MemSpace> recv_field,
-            ConstField<ElementType, MPISendIdxRange, MemSpace> send_field)
+            ConstField<ElementType, MPISendIdxRange, MemSpace> send_field) const
     {
         // No Cuda-aware MPI yet
         auto send_buffer = ddc::create_mirror_view_and_copy(send_field);
@@ -340,7 +346,7 @@ private:
     template <class... DistributedDims>
     IdxRange<MPIDim<DistributedDims>...> get_distribution(
             IdxRange<DistributedDims...> local_idx_range,
-            IdxRange<DistributedDims...> global_idx_range)
+            IdxRange<DistributedDims...> global_idx_range) const
     {
         Idx<MPIDim<DistributedDims>...> start(Idx<MPIDim<DistributedDims>> {0}...);
         IdxStep<MPIDim<DistributedDims>...> size(IdxStep<MPIDim<DistributedDims>> {

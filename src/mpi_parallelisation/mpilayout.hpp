@@ -55,7 +55,10 @@ public:
      *
      * @returns The distributed index range.
      */
-    idx_range_type distribute_idx_range(idx_range_type global_idx_range, int comm_size, int rank)
+    static idx_range_type distribute_idx_range(
+            idx_range_type global_idx_range,
+            int comm_size,
+            int rank)
     {
         return internal_distribute_idx_range(global_idx_range, comm_size, rank);
     }
@@ -73,13 +76,16 @@ protected:
      * @returns The distributed index range.
      */
     template <class HeadTag>
-    IdxRange<HeadTag> internal_distribute_idx_range(
+    static IdxRange<HeadTag> internal_distribute_idx_range(
             IdxRange<HeadTag> global_idx_range,
             int comm_size,
             int rank)
     {
         if constexpr (ddc::in_tags_v<HeadTag, distributed_type_seq>) {
-            assert(global_idx_range.size() % comm_size == 0);
+            if (global_idx_range.size() % comm_size != 0) {
+                throw std::runtime_error("The provided index range cannot be split equally over "
+                                         "the specified number of MPI ranks.");
+            }
             IdxStep<HeadTag> elems_on_dim(global_idx_range.size() / comm_size);
             IdxRange<HeadTag>
                     local_idx_range(global_idx_range.front() + rank * elems_on_dim, elems_on_dim);
@@ -105,7 +111,7 @@ protected:
      * @returns The distributed index range.
      */
     template <class HeadTag, class... Tags, std::enable_if_t<(sizeof...(Tags) > 0), bool> = true>
-    IdxRange<HeadTag, Tags...> internal_distribute_idx_range(
+    static IdxRange<HeadTag, Tags...> internal_distribute_idx_range(
             IdxRange<HeadTag, Tags...> idx_range,
             int comm_size,
             int rank)

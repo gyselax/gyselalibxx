@@ -35,5 +35,5 @@ public:
      * @param[in, out] rho
      * @param[in] allfdistribu 
      */
-    void operator()(DFieldXY rho, DConstFieldSpXYVxVy allfdistribu) const final;
+    void operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const final;
 };
