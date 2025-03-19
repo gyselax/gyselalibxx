@@ -87,10 +87,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup documenation compilation
-        run: |
-          cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=ON -B build -S .
-        shell: bash
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
