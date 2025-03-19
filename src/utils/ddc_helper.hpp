@@ -204,8 +204,6 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
 
     return max_dist;
 }
-
-
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------

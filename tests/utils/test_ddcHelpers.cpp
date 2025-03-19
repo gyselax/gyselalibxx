@@ -16,12 +16,12 @@ public:
 
 using Coord1D = Coord<Tag>;
 
-template<std::size_t ncells>
+template <std::size_t ncells>
 struct GridUniform : UniformGridBase<Tag>
 {
 };
 
-template<std::size_t ncells>
+template <std::size_t ncells>
 struct GridNonUniform : NonUniformGridBase<Tag>
 {
 };
@@ -38,12 +38,12 @@ TEST(DDCHelper, UniformPeriodicRestriction)
 
     Coord1D x_min(-1.0);
     Coord1D x_max(1.0);
-    IdxStep npoints(ncells+1);
+    IdxStep npoints(ncells + 1);
     double x_len = x_max - x_min;
 
     ddc::init_discrete_space<Grid>(Grid::init(x_min, x_max, npoints));
 
-    IdxRange idx_range(Idx(0), npoints-1);
+    IdxRange idx_range(Idx(0), npoints - 1);
 
     constexpr int ntest = 10;
     Coord1D test_start_very_low(x_min - 20 * x_len);
@@ -81,7 +81,7 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
 
     Coord1D x_min(-1.0);
     Coord1D x_max(1.0);
-    IdxStep npoints(ncells+1);
+    IdxStep npoints(ncells + 1);
     double x_len = x_max - x_min;
 
     std::vector<double> nu_points(6);
@@ -92,7 +92,7 @@ TEST(DDCHelper, NonUniformPeriodicRestriction)
 
     ddc::init_discrete_space<Grid>(nu_points);
 
-    IdxRange idx_range(Idx(0), npoints-1);
+    IdxRange idx_range(Idx(0), npoints - 1);
 
     constexpr int ntest = 10;
     Coord1D test_start_very_low(x_min - 20 * x_len);
@@ -134,15 +134,15 @@ TEST(DDCHelper, ComputeMaxDistanceUniformGrid)
 
     Coord1D x_min(0.);
     Coord1D x_max(1.0);
-    IdxStep npoints(ncells+1);
+    IdxStep npoints(ncells + 1);
     double x_len = x_max - x_min;
 
     ddc::init_discrete_space<Grid>(Grid::init(x_min, x_max, npoints));
 
     IdxRange idx_range(Idx(0), npoints);
     double const max_dx(x_len / (ncells));
-    double const max_dx_ddchelper(ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
-
+    double const max_dx_ddchelper(
+            ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
 
     EXPECT_NEAR(max_dx, max_dx_ddchelper, 1e-12);
 }
@@ -163,11 +163,12 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridFirst)
     std::vector<double> points_list = {0., 0.9, 1., 1.1, 1.5, 2.};
     ddc::init_discrete_space<Grid>(points_list);
 
-    IdxStep npoints(ncells+1);
+    IdxStep npoints(ncells + 1);
     IdxRange idx_range(Idx(0), npoints);
 
     double const max_dx(0.9);
-    double const max_dx_ddchelper(ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
+    double const max_dx_ddchelper(
+            ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
 
     EXPECT_NEAR(max_dx, max_dx_ddchelper, 1e-12);
 }
@@ -188,11 +189,12 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridMiddle)
     std::vector<double> points_list = {0., 0.1, 1., 1.1, 1.5, 2.};
     ddc::init_discrete_space<Grid>(points_list);
 
-    IdxStep npoints(ncells+1);
+    IdxStep npoints(ncells + 1);
     IdxRange idx_range(Idx(0), npoints);
 
     double const max_dx(0.9);
-    double const max_dx_ddchelper(ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
+    double const max_dx_ddchelper(
+            ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
 
     EXPECT_NEAR(max_dx, max_dx_ddchelper, 1e-12);
 }
@@ -213,11 +215,12 @@ TEST(DDCHelper, ComputeMaxDistanceNonUniformGridLast)
     std::vector<double> points_list = {0., 0.3, 0.9, 1., 1.1, 2.};
     ddc::init_discrete_space<Grid>(points_list);
 
-    IdxStep npoints(ncells+1);
+    IdxStep npoints(ncells + 1);
     IdxRange idx_range(Idx(0), npoints);
 
     double const max_dx(0.9);
-    double const max_dx_ddchelper(ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
+    double const max_dx_ddchelper(
+            ddcHelper::maximum_distance_between_adjacent_points<Grid>(idx_range));
 
     EXPECT_NEAR(max_dx, max_dx_ddchelper, 1e-12);
 }
