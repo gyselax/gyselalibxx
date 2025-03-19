@@ -170,7 +170,9 @@ public:
     */
     struct EvalDeriv1DType
     {
+        // The value of the function @f$f(x)@f$.
         double value;
+        // The derivative of the function @f$\partial_x f(x)@f$.
         double derivative;
     };
 
@@ -180,8 +182,11 @@ public:
     */
     struct EvalDeriv2DType
     {
+        // The value of the function @f$f(r, \theta)@f$.
         double value;
+        // The radial derivative of the function @f$\partial_r f(r, \theta)@f$.
         double radial_derivative;
+        // The poloidial derivative of the function @f$\partial_\theta f(r, \theta)@f$.
         double poloidal_derivative;
     };
 
