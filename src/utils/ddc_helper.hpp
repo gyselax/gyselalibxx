@@ -263,8 +263,6 @@ struct TypeSeqIntersection<
 };
 
 
-/// \endcond
-
 } // namespace detail
 
 /**
