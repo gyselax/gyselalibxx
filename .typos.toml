@@ -18,3 +18,7 @@ Ax = "Ax"
 ax = "ax"
 color = "color"
 colors = "colors"
+
+[files]
+extend-exclude = ["*.tex"
+                  ]
