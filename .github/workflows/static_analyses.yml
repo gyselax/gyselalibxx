@@ -80,9 +80,6 @@ jobs:
   Documentation:
     name: Documentation check
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user 1001
     steps:
       - uses: actions/checkout@v4
         with:
