@@ -474,7 +474,7 @@ private:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-            DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
                     = metric_tensor.inverse(coord_rtheta);
             DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
                     = m_mapping.jacobian_matrix(coord_rtheta);
@@ -490,7 +490,7 @@ private:
                        + ddcHelper::get<Y, R_cov>(J) * ddcHelper::get<Y, Theta_cov>(J))
                               * ddcHelper::get<R>(electric_field) / jacobian
                       + (ddcHelper::get<Y, Theta_cov>(J) * ddcHelper::get<Y, Theta_cov>(J)
-                         + ddcHelper::get<X, R_cov>(J) * ddcHelper::get<X, Theta_cov>(J))
+                         + ddcHelper::get<X, Theta_cov>(J) * ddcHelper::get<X, Theta_cov>(J))
                                 * ddcHelper::get<Theta>(electric_field) / jacobian;
             ddcHelper::get<Theta>(advection_field_rtheta)(irtheta)
                     = -(ddcHelper::get<X, R_cov>(J) * ddcHelper::get<X, R_cov>(J)
