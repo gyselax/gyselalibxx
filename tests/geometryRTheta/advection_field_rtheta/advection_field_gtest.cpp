@@ -252,8 +252,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
                 = to_physical_mapping.jacobian_matrix(coord_rtheta);
 
         DVector<X, Y> adv_field
-                = tensor_mul(index<'j', 'i'>(J), index<'j'>(advection_field_rtheta(irtheta)))
-                  * jacobian;
+                = tensor_mul(index<'i', 'j'>(J), index<'j'>(advection_field_rtheta(irtheta)));
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta) = ddcHelper::get<X>(adv_field);
