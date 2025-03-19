@@ -135,8 +135,6 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 
 with 
 * $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)`$, 
-* $`G = J^T J`$ the metric tensor, whose components are $`g_{ij}`$,  
-* $`G^{-1}`$ the inverse metric tensor, whose components are $`g^{ij}`$, 
 * and $`b^j`$ the unnormalised local covariant vectors. 
 
 In 2D with $`(q_1, q_2) = (r,\theta)`$ and $`(x_1, x_2) = (x,y)`$, it can be rewritten as the following matrix system 
