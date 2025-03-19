@@ -180,7 +180,7 @@ inline void dump_coordinates(
  * @brief Calculate the maximum distance between two adjacent points 
  * within an IdxRange
  *
- * @param idx_range The domain on which the disance should be calculated.
+ * @param idx_range The domain on which the distance should be calculated.
  *
  * @return The maximum distance between two adjacent points.
  */
@@ -199,7 +199,7 @@ double maximum_distance_between_two_points(IdxRange<GridDim> const& idx_range)
             idx_range_chopped,
             0.,
             ddc::reducer::max<double>(),
-            [=](IdxDim const ix) { return ddc::coordinate(ix) - ddc::coordinate(ix - step); });
+            KOKKOS_LAMBDA(IdxDim const ix) { return ddc::coordinate(ix) - ddc::coordinate(ix - step); });
 
 
     return max_dist;

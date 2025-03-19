@@ -250,8 +250,8 @@ private:
             Kokkos::DefaultExecutionSpace::memory_space,
             typename base_type::BSplinesDDim,
             typename base_type::GridDDim,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
+            base_type::SplineBoundary,
+            base_type::SplineBoundary,
             ddc::SplineSolver::LAPACK,
             typename base_type::GridDDim,
             typename base_type::GridODim>;
