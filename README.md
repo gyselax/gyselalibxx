@@ -1,4 +1,4 @@
-![image](docs/images/logo_big.png)
+![image](docs/images/logo_big.png){ width=300 }
 
 # Gyselalibxx
 [![License](https://img.shields.io/github/license/gyselax/gyselalibxx?color=blue&logo=open-source-initiative&logoColor=white)](https://github.com/gyselax/gyselalibxx/blob/master/LICENSE)
