@@ -187,7 +187,7 @@ public:
     struct EvalDeriv2DType
     {
         double value;
-        DVector<R, Theta> derivative;
+        DVector<R_cov, Theta_cov> derivative;
     };
 
     /**
@@ -409,14 +409,15 @@ public:
             // Calculate the radial derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_r(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<R>(m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
+                ddcHelper::get<R_cov>(
+                        m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
 
             // Calculate the poloidal derivative
             ddc::discrete_space<PolarBSplinesRTheta>().eval_deriv_theta(singular_vals, vals, coord);
             for (IdxBSPolar ib : idxrange_singular) {
-                ddcHelper::get<Theta>(
+                ddcHelper::get<Theta_cov>(
                         m_singular_basis_vals_and_derivs(ib, idx_r, idx_theta).derivative)
                         = singular_vals[ib - idxrange_singular.front()];
             }
@@ -1220,13 +1221,13 @@ public:
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            DVector<R, Theta>& derivs,
+            DVector<R_cov, Theta_cov>& derivs,
             EvalDeriv1DType const& r_basis,
             EvalDeriv1DType const& theta_basis)
     {
         value = r_basis.value * theta_basis.value;
-        ddcHelper::get<R>(derivs) = r_basis.derivative * theta_basis.value;
-        ddcHelper::get<Theta>(derivs) = r_basis.value * theta_basis.derivative;
+        ddcHelper::get<R_cov>(derivs) = r_basis.derivative * theta_basis.value;
+        ddcHelper::get<Theta_cov>(derivs) = r_basis.value * theta_basis.derivative;
     }
 
     /**
@@ -1241,7 +1242,7 @@ public:
      */
     static KOKKOS_INLINE_FUNCTION void get_value_and_gradient(
             double& value,
-            DVector<R, Theta>& derivs,
+            DVector<R_cov, Theta_cov>& derivs,
             EvalDeriv2DType const& basis,
             EvalDeriv2DType const&) // Last argument is duplicate
     {
@@ -1314,8 +1315,8 @@ public:
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
         double basis_val_trial_space;
-        DVector<R, Theta> basis_derivs_test_space;
-        DVector<R, Theta> basis_derivs_trial_space;
+        DVector<R_cov, Theta_cov> basis_derivs_test_space;
+        DVector<R_cov, Theta_cov> basis_derivs_trial_space;
         get_value_and_gradient(
                 basis_val_test_space,
                 basis_derivs_test_space,

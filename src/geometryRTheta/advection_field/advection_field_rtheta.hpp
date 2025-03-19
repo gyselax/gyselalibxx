@@ -469,15 +469,14 @@ private:
         });
 
         // > computation of the phi derivatives
-        host_t<DFieldMemRTheta> deriv_r_phi(grid_without_Opoint);
-        host_t<DFieldMemRTheta> deriv_theta_phi(grid_without_Opoint);
+        host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> deriv_phi(grid_without_Opoint);
 
         evaluator.deriv_dim_1(
-                get_field(deriv_r_phi),
+                ddcHelper::get<R_cov>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
-                get_field(deriv_theta_phi),
+                ddcHelper::get<Theta_cov>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
@@ -487,27 +486,27 @@ private:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-            DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
                     = metric_tensor.inverse(coord_rtheta);
             std::array<std::array<double, 2>, 2> J;
             m_mapping.jacobian_matrix(coord_rtheta, J);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
             // E = -grad phi
-            double const electric_field_r
-                    = -deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
-                      - deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
-            double const electric_field_theta
-                    = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
-                      - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+            DVector<R, Theta> electric_field
+                    = -tensor_mul(index<'i', 'j'>(inv_G), index<'j'>(deriv_phi(irtheta)));
 
             // A (see README for the expression)
             ddcHelper::get<R>(advection_field_rtheta)(irtheta)
-                    = (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_r / jacobian
-                      + (J[1][1] * J[1][1] + J[0][1] * J[0][1]) * electric_field_theta / jacobian;
+                    = (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * ddcHelper::get<R>(electric_field)
+                              / jacobian
+                      + (J[1][1] * J[1][1] + J[0][1] * J[0][1])
+                                * ddcHelper::get<Theta>(electric_field) / jacobian;
             ddcHelper::get<Theta>(advection_field_rtheta)(irtheta)
-                    = -(J[0][0] * J[0][0] + J[1][0] * J[1][0]) * electric_field_r / jacobian
-                      - (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * electric_field_theta / jacobian;
+                    = -(J[0][0] * J[0][0] + J[1][0] * J[1][0]) * ddcHelper::get<R>(electric_field)
+                              / jacobian
+                      - (J[0][0] * J[0][1] + J[1][0] * J[1][1])
+                                * ddcHelper::get<Theta>(electric_field) / jacobian;
         });
 
         // SPECIAL TREATMENT FOR THE O-POINT =====================================================
