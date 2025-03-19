@@ -59,14 +59,17 @@ plugins:
             EXTRACT_ALL: False            # Only extract documented elements
             EXCLUDE_SYMBOLS: "detail details mapping_detail"  # Exclude internal namespaces
             EXTRACT_LOCAL_CLASSES: True   # Include local classes
-            BUILTIN_STL_SUPPORT: Yes      # Enable STL class parsing
-            CLANG_ASSISTED_PARSING: Yes   # Use Clang for improved parsing
+            BUILTIN_STL_SUPPORT: True     # Enable STL class parsing
+            CLANG_ASSISTED_PARSING: False # Use Clang for improved parsing
             ENUM_VALUES_PER_LINE: 1       # Display enum values one per line
+            FORCE_LOCAL_INCLUDES: False   # List include files with double quotes rather than with sharp brackets.
             FULL_PATH_NAMES: True         # Show full file paths
             GENERATE_TREEVIEW: True       # Enable a tree structure in the navigation
+            GENERATE_LATEX: False
             SHOW_FILES: True              # Display file list in documentation
             SHOW_INCLUDE_FILES: True      # Show included header files
             TYPEDEF_HIDES_STRUCT: True    # Hide struct definitions when typedefs are used
+            USE_MATHJAX: True             # Use MathJax for formulae.
             WARN_LOGFILE: doxygen.log     # Save warnings to a log file
 
 # Markdown Extensions
