@@ -20,5 +20,7 @@ color = "color"
 colors = "colors"
 
 [files]
-extend-exclude = ["*.tex"
+extend-exclude = ["*.tex",
+                  "*.bib",
+                  "*.sty"
                   ]

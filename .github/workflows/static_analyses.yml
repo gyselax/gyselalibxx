@@ -80,13 +80,14 @@ jobs:
   Documentation:
     name: Documentation check
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user 1001
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install doxygen
+        run:
+          apt install doxygen
+        shell: bash
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -96,10 +97,10 @@ jobs:
           pip install -r requirements.txt
         shell: bash
         working-directory: ./docs
-      - name: Make documenation
+      - name: Make documentation
         run: |
           # Make docs
-          python3 docs/prepare_mkdocs.py . docs/mkdoc build-docs/ vendor/ build docs/mkdoc
+          python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
           cd docs
           mkdocs build
         shell: bash
