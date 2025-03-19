@@ -86,11 +86,7 @@ jobs:
           fetch-depth: 0
       - name: Install doxygen
         run:
-<<<<<<< HEAD
           apt install doxygen
-=======
-          sudo apt-get install doxygen
->>>>>>> c2f0e64839c1d3985212294d344beef60534de12
         shell: bash
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -176,7 +172,7 @@ jobs:
       uses: crate-ci/typos@v1.29.10
       with:
         files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/
-  
+
   set_draft_failing:
     runs-on: ubuntu-latest
     needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
