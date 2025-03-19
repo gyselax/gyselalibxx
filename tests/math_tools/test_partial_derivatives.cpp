@@ -95,9 +95,10 @@ class PartialDerivativeTest
     static_assert(std::is_same_v<DerivativeDimension, X> || std::is_same_v<DerivativeDimension, Y>);
 
 public:
-    struct BSplinesX : ddc::UniformBSplines<X, spline_degree>
+    struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
     {
     };
+
     auto static constexpr SplineBoundary = ddc::BoundCond::GREVILLE;
 
     using SplineInterpPointsX
@@ -107,9 +108,10 @@ public:
     {
     };
 
-    struct BSplinesY : ddc::UniformBSplines<Y, spline_degree>
+    struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
     {
     };
+
     using SplineInterpPointsY
             = ddc::GrevilleInterpolationPoints<BSplinesY, SplineBoundary, SplineBoundary>;
     struct GridY : NonUniformGridBase<Y>
@@ -152,9 +154,6 @@ public:
     CoordODim const m_odim_max;
     IdxStepDDim const m_ncells_ddim;
     IdxStepODim const m_ncells_odim;
-    IdxRangeDDim m_idxrange_ddim;
-    IdxRangeODim m_idxrange_odim;
-    IdxRangeFull m_idxrange;
 
     PartialDerivativeTest(
             double const ddim_min,
@@ -168,17 +167,20 @@ public:
         , m_ncells_ddim(N_ddim)
         , m_ncells_odim(N_odim)
     {
-        ddc::init_discrete_space<BSplinesDDim>(m_ddim_min, m_ddim_max, m_ncells_ddim);
+        std::vector<CoordDDim> point_sampling_ddim
+                = build_random_non_uniform_break_points(m_ddim_min, m_ddim_max, m_ncells_ddim);
+
+        ddc::init_discrete_space<BSplinesDDim>(point_sampling_ddim);
         ddc::init_discrete_space<GridDDim>(
                 SplineInterpPointsDDim::template get_sampling<GridDDim>());
 
-        ddc::init_discrete_space<BSplinesODim>(m_odim_min, m_odim_max, m_ncells_odim);
+
+        std::vector<CoordODim> point_sampling_odim
+                = build_random_non_uniform_break_points(m_odim_min, m_odim_max, m_ncells_odim);
+
+        ddc::init_discrete_space<BSplinesODim>(point_sampling_odim);
         ddc::init_discrete_space<GridODim>(
                 SplineInterpPointsODim::template get_sampling<GridODim>());
-
-        m_idxrange_ddim = SplineInterpPointsDDim::template get_domain<GridDDim>();
-        m_idxrange_odim = SplineInterpPointsODim::template get_domain<GridODim>();
-        m_idxrange = IdxRangeFull(m_idxrange_ddim, m_idxrange_odim);
     }
 
     template <class FunctionToDifferentiate>
@@ -188,14 +190,18 @@ public:
                     partial_derivative_creator,
             double& delta_ddim) const
     {
-        delta_ddim = ddcHelper::maximum_distance_between_two_points(m_idxrange_ddim);
+        IdxRangeDDim idxrange_ddim(SplineInterpPointsDDim::template get_domain<GridDDim>());
+        IdxRangeODim idxrange_odim(SplineInterpPointsODim::template get_domain<GridODim>());
+        IdxRangeFull idxrange(idxrange_ddim, idxrange_odim);
+
+        delta_ddim = ddcHelper::maximum_distance_between_adjacent_points(idxrange_ddim);
 
         // field to be differentiated
-        DFieldMemType field_to_differentiate(m_idxrange);
+        DFieldMemType field_to_differentiate(idxrange);
         DFieldType field_to_differentiate_proxy = get_field(field_to_differentiate);
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
-                m_idxrange,
+                idxrange,
                 KOKKOS_LAMBDA(IdxFull const idx) {
                     field_to_differentiate_proxy(idx)
                             = function_to_differentiate(ddc::coordinate(idx));
@@ -209,13 +215,13 @@ public:
         IPartialDerivative<IdxRangeFull, DerivativeDimension> const& partial_derivative
                 = *partial_derivative_creator_pointer;
 
-        DFieldMemType field_differentiated_alloc(m_idxrange);
+        DFieldMemType field_differentiated_alloc(idxrange);
         DFieldType field_differentiated = get_field(field_differentiated_alloc);
         partial_derivative(field_differentiated);
 
         double const max_error = ddc::parallel_transform_reduce(
                 Kokkos::DefaultExecutionSpace(),
-                m_idxrange,
+                idxrange,
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(IdxFull const idx) {
@@ -266,6 +272,16 @@ private:
             typename base_type::GridDDim,
             typename base_type::GridODim>;
 
+    using IdxRangeDDim = typename base_type::IdxRangeDDim;
+    using IdxRangeODim = typename base_type::IdxRangeODim;
+    using IdxRangeFull = typename base_type::IdxRangeFull;
+
+    using SplineInterpPointsDDim = typename base_type::SplineInterpPointsDDim;
+    using SplineInterpPointsODim = typename base_type::SplineInterpPointsODim;
+
+    using GridDDim = typename base_type::GridDDim;
+    using GridODim = typename base_type::GridODim;
+
     ddc::ConstantExtrapolationRule<DDim> const m_bv_min;
     ddc::ConstantExtrapolationRule<DDim> const m_bv_max;
 
@@ -283,7 +299,10 @@ public:
 
     double const operator()(double& delta_ddim) const
     {
-        SplineDDimBuilder const builder(base_type::m_idxrange);
+        IdxRangeDDim const idxrange_ddim = SplineInterpPointsDDim::template get_domain<GridDDim>();
+        IdxRangeODim const idxrange_odim = SplineInterpPointsODim::template get_domain<GridODim>();
+        IdxRangeFull const idxrange = IdxRangeFull(idxrange_ddim, idxrange_odim);
+        SplineDDimBuilder const builder(idxrange);
 
         SplineDDimEvaluator const spline_evaluator(m_bv_min, m_bv_max);
 
@@ -357,8 +376,8 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
     double const ymin(0.2);
     double const ymax(1.2);
     std::size_t constexpr spline_degree = 4;
-    // relative error of convergence should be less than 10%
-    double const TOL = 0.1;
+    // relative error of convergence should be less than 15%
+    double const TOL = 0.15;
 
     // Partial Derivative in X direction
     double delta_low_x,
@@ -401,8 +420,8 @@ TEST(PartialDerivative, CentralFDMPartialDerivative)
     double const ymin(0.2);
     double const ymax(1.2);
     std::size_t constexpr spline_degree = 4;
-    // relative error of convergence should be less than 10%
-    double const TOL = 0.1;
+    // relative error of convergence should be less than 15%
+    double const TOL = 0.15;
 
     // Partial Derivative in X direction
     double delta_low_x,
