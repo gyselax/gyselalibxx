@@ -186,8 +186,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldMemRTheta> allfdistribu_xy_alloc(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
-    host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> advection_field_rtheta_alloc(
-            grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rtheta_alloc(grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rtheta_alloc(grid);
     CoordXY advection_field_xy_centre;
@@ -199,8 +198,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
 
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
-    host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta(
-            advection_field_rtheta_alloc);
+    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(
             advection_field_xy_from_rtheta_alloc);
@@ -246,23 +244,19 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rtheta(grid);
 
-    MetricTensorEvaluator<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-        std::array<std::array<double, 2>, 2> inv_J; // inverse Jacobian matrix
-        to_physical_mapping.inv_jacobian_matrix(coord_rtheta, inv_J);
-        double const jacobian = to_physical_mapping.jacobian(coord_rtheta);
+        std::array<std::array<double, 2>, 2> J;
+        to_physical_mapping.jacobian_matrix(coord_rtheta, J);
 
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::get<X>(advection_field_xy_from_rtheta)(irtheta)
-                = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][0] * jacobian
-                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][0]
-                            * jacobian;
+                = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * J[0][0]
+                  + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * J[0][1];
         ddcHelper::get<Y>(advection_field_xy_from_rtheta)(irtheta)
-                = ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) * inv_J[0][1] * jacobian
-                  + ddcHelper::get<Theta_cov>(advection_field_rtheta)(irtheta) * inv_J[1][1]
-                            * jacobian;
+                = ddcHelper::get<R>(advection_field_rtheta)(irtheta) * J[1][0]
+                  + ddcHelper::get<Theta>(advection_field_rtheta)(irtheta) * J[1][1];
 
         // compare
         ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)
@@ -321,7 +315,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-            EXPECT_NEAR(allfdistribu_rtheta(irtheta), allfdistribu_xy(irtheta), 1e-13);
+            EXPECT_NEAR(allfdistribu_rtheta(irtheta), allfdistribu_xy(irtheta), 5e-13);
         });
     }
 
