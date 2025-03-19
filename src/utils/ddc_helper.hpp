@@ -199,7 +199,9 @@ double maximum_distance_between_two_points(IdxRange<GridDim> const& idx_range)
             idx_range_chopped,
             0.,
             ddc::reducer::max<double>(),
-            KOKKOS_LAMBDA(IdxDim const ix) { return ddc::coordinate(ix) - ddc::coordinate(ix - step); });
+            KOKKOS_LAMBDA(IdxDim const ix) {
+                return ddc::coordinate(ix) - ddc::coordinate(ix - step);
+            });
 
 
     return max_dist;
