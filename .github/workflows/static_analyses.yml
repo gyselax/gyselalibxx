@@ -93,10 +93,10 @@ jobs:
           pip install -r requirements.txt
         shell: bash
         working-directory: ./docs
-      - name: Make documenation
+      - name: Make documentation
         run: |
           # Make docs
-          python3 docs/prepare_mkdocs.py . docs/mkdoc build-docs/ vendor/ build docs/mkdoc
+          python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
           cd docs
           mkdocs build
         shell: bash
