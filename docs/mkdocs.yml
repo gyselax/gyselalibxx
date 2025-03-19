@@ -13,16 +13,10 @@ nav:
     - toolchains 
     - Simulations: simulations
     - Tests: tests
-  - Tutorials: 
-    - docs/tutorials
-    - MkDocs: docs/README.md
-    # - Getting Started: getting_started.md
-    # - Coding Standards: CODING_STANDARD.md
-    # - Git Version Control: Using_git.md
-    # - Adding Documentation: Adding_docs.md
-    # - DDC: DDC_in_gyselalibxx.md
-    # - Compilaiton Problems: Common_compilation_problems.md
-    # - FAQ: developer_FAQ.md
+  - Tutorials: docs/tutorials
+
+  - MkDocs: docs/README.md
+   
   - API:
       - Gyselalib++:
           - 'Classes':
@@ -82,8 +76,8 @@ markdown_extensions:
 #   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
 
 
-extra_css:
-  - https://unpkg.com/katex@0/dist/katex.min.css
+# extra_css:
+#   - https://unpkg.com/katex@0/dist/katex.min.css
 
 extra_javascript:
   - docs/jscript/mathjax.js

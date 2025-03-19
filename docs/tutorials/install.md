@@ -1,7 +1,7 @@
 # Gyselalib++
 
 Gyselalib++ is a collection of C++ components for writing gyrokinetic semi-lagrangian codes.
-If this is your first interaction with gyselalib++ please check out the documentation on [Getting Started with Gyselalib++](./docs/getting_started.md).
+If this is your first interaction with gyselalib++ please check out the documentation on [Getting Started with Gyselalib++](getting_started.md).
 
 ## Set-up
 
@@ -20,7 +20,7 @@ cd gyselalibxx
 
 on a machine for which Gyselalib++ is already used an environment script may be available to set up the necessary modules etc.
 
-Please check the `toolchains/` folder to find the existing configurations. See the documentation about [toolchains](./toolchains/README.md) for more information on the provided files.
+Please check the `toolchains/` folder to find the existing configurations. See the documentation about [toolchains](../../toolchains/README.md) for more information on the provided files.
 
 For example in order to set up the environment on the Adastra supercomputer simply run:
 ```
@@ -41,7 +41,7 @@ make
 
 The toolchains are found in the folder `toolchains/`. Each toolchain is designed for specific hardware with the exception of those in the folder `docker.gyselalibxx_env/`. These toolchains can be used with the docker environment on most hardware.
 
-For more details about toolchains, see the documentation about [toolchains](./toolchains/README.md).
+For more details about toolchains, see the documentation about [toolchains](../../toolchains/README.md).
 
 ## Execution
 

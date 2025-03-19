@@ -38,7 +38,7 @@ For example consider the case of a semi-Lagrangian advection. The operator is si
 ## Navigating the Gyselalib++ Codebase
 
 The gyselalib++ codebase is organised into several folders. The main folders of interest are:
-- **src/** : This folder contains the source code for the library. It contains folders grouping the code by subject. The `src/` folder and each sub-folder contains a `README.md` detailing its contents. It is simple to navigate within this documentation : [src](../src/README.md)
+- **src/** : This folder contains the source code for the library. It contains folders grouping the code by subject. The `src/` folder and each sub-folder contains a `README.md` detailing its contents. It is simple to navigate within this documentation : [src](../../src/README.md)
     - **geometry...** : The `src/` folder contains sub-folders whose names begin with `geometry`. These sub-folders contain code which is specific to a given geometry. Each geometry is defined by the dimensions on which its equations are defined. In these folders you will also find sub-folders grouping the code by subject. Each `geometry...` folder will contain a folder called `geometry` containing a file `geometry.hpp`. This file contains type aliases which are useful for this geometry. This includes the definition of the classes representing the dimensions. If a `geometry.hpp` is included in a file then this file can only be used for that specific geometry. Therefore files in a `geometry...` folder cannot be used for other geometries even if the two appear to be compatible at first glance (e.g. files from the `geometryRTheta` folder cannot be used for the `geometryAxi` simulations, files from the `geometryXVx` folder cannot be used for the `geometryXYVxVy` simulations).
 
 - **tests/** : This folder contains the unit tests for the library. The folder structure is similar to that found in the `src/` folder.
@@ -53,12 +53,12 @@ The gyselalib++ codebase is organised into several folders. The main folders of 
 1. **Familiarize yourself with DDC:**
 
    - Gyselalib++ relies heavily on [DDC (Discrete Domain Decomposition Library)](https://ddc.mdls.fr/) for data management. Understanding its usage is key to contributing effectively.
-   - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](./DDC_in_gyselalibxx.md).
+   - See our detailed guide on DDC integration: [Using DDC in Gyselalib++](DDC_in_gyselalibxx.md).
 
 2. **Build the project:**
 
    - Follow the build instructions in the repository's README.
-   - More detailed instructions especially instructions for specific systems like the CEA's persee can be found in the toolchain documentation: [Pre-made build settings](../toolchains/README.md).
+   - More detailed instructions especially instructions for specific systems like the CEA's persee can be found in the toolchain documentation: [Pre-made build settings](../../toolchains/README.md).
 
 3. **Identify a simple task:**
 
