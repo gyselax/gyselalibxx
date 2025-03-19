@@ -221,7 +221,7 @@ private:
     // Matrix size is equal to the number of Polar bspline
     const int m_matrix_size;
 
-    // Domains
+    // Index ranges
     IdxRangeBSPolar m_idxrange_fem_non_singular;
     IdxRangeBSR m_idxrange_bsplines_r;
     IdxRangeBSTheta m_idxrange_bsplines_theta;
@@ -229,6 +229,10 @@ private:
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
+
+    // Index
+    Idx<BSplinesR> m_idx_bsplines_r_front;
+    Idx<BSplinesTheta> m_idx_bsplines_theta_front;
 
     // Gauss-Legendre points and weights
     FieldMem<double, IdxRangeQuadratureR> m_weights_r;
@@ -302,6 +306,8 @@ public:
                   m_idxrange_quadrature_r.take_first(
                           IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
+        , m_idx_bsplines_r_front(ddc::discrete_space<BSplinesR>().full_domain().front())
+        , m_idx_bsplines_theta_front(ddc::discrete_space<BSplinesTheta>().full_domain().front())
         , m_weights_r(m_idxrange_quadrature_r)
         , m_weights_theta(m_idxrange_quadrature_theta)
         , m_singular_basis_vals_and_derivs(IdxRange<PolarBSplinesRTheta, QDimRMesh, QDimThetaMesh>(
@@ -635,15 +641,20 @@ public:
                 const Idx<BSplinesTheta> idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial));
 
                 // Find the index range covering the cells where both the test and trial functions are non-zero
-                const Idx<RCellDim> first_overlap_element_r(
-                        idx_trial_r.uid() < BSplinesR::degree()
-                                ? 0
-                                : idx_trial_r.uid() - BSplinesR::degree());
+                const std::size_t idx_trial_r_val = (idx_trial_r - m_idx_bsplines_r_front).value();
+                const std::size_t idx_trial_theta_val
+                        = (idx_trial_theta - m_idx_bsplines_theta_front).value();
+                const std::size_t first_overlap_element_r_val
+                        = idx_trial_r_val < BSplinesR::degree()
+                                  ? 0
+                                  : idx_trial_r_val - BSplinesR::degree();
+
+                const Idx<RCellDim> first_overlap_element_r(first_overlap_element_r_val);
                 const Idx<ThetaCellDim> first_overlap_element_theta(
-                        theta_mod(idx_trial_theta.uid() - BSplinesTheta::degree()));
+                        theta_mod(idx_trial_theta_val - BSplinesTheta::degree()));
 
                 const IdxStep<RCellDim> n_overlap_r(
-                        m_n_overlap_cells - first_overlap_element_r.uid());
+                        m_n_overlap_cells - first_overlap_element_r_val);
                 const IdxStep<ThetaCellDim> n_overlap_theta(BSplinesTheta::degree() + 1);
 
                 const IdxRange<RCellDim> r_cells(first_overlap_element_r, n_overlap_r);
@@ -655,16 +666,17 @@ public:
                     double element = 0.0;
 
                     ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
-                        const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
-                        const int cell_idx_theta(
-                                theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
-
+                        const int cell_idx_r(
+                                (ddc::select<RCellDim>(cell_idx) - Idx<RCellDim>(0)).value());
+                        const int cell_idx_theta(theta_mod(
+                                (ddc::select<ThetaCellDim>(cell_idx) - Idx<ThetaCellDim>(0))
+                                        .value()));
                         const IdxRangeQuadratureRTheta cell_quad_points(
                                 get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
                         // Find the column where the non-zero data is stored
-                        Idx<RBasisSubset> ib_trial_r(idx_trial_r.uid() - cell_idx_r);
+                        Idx<RBasisSubset> ib_trial_r(idx_trial_r_val - cell_idx_r);
                         Idx<ThetaBasisSubset> ib_trial_theta(
-                                theta_mod(idx_trial_theta.uid() - cell_idx_theta));
+                                theta_mod(idx_trial_theta_val - cell_idx_theta));
                         // Calculate the weak integral
                         element += ddc::parallel_transform_reduce(
                                 Kokkos::DefaultExecutionSpace(),
@@ -744,8 +756,10 @@ public:
         // Calculate the matrix elements following a stencil
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
             const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
-            const std::size_t idx_test_r(ddc::select<BSplinesR>(idx_test).uid());
-            const std::size_t idx_test_theta(ddc::select<BSplinesTheta>(idx_test).uid());
+            const std::size_t idx_test_r(
+                    (ddc::select<BSplinesR>(idx_test) - m_idx_bsplines_r_front).value());
+            const std::size_t idx_test_theta(
+                    (ddc::select<BSplinesTheta>(idx_test) - m_idx_bsplines_theta_front).value());
 
             // Calculate the index of the elements that are already filled
             IdxRangeBSTheta remaining_theta(
@@ -753,9 +767,10 @@ public:
                     IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
             ddc::for_each(remaining_theta, [&](Idx<BSplinesTheta> const idx_trial_theta) {
                 IdxBSRTheta idx_trial(Idx<BSplinesR>(idx_test_r), idx_trial_theta);
-                IdxBSPolar idx_trial_polar(
-                        PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
-                                IdxBSRTheta(idx_test_r, theta_mod(idx_trial_theta.uid()))));
+                IdxBSPolar idx_trial_polar(PolarBSplinesRTheta::template get_polar_index<
+                                           PolarBSplinesRTheta>(IdxBSRTheta(
+                        idx_test_r,
+                        theta_mod((idx_trial_theta - m_idx_bsplines_theta_front).value()))));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -797,8 +812,11 @@ public:
             IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
 
             ddc::for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
-                const int idx_trial_r(ddc::select<BSplinesR>(idx_trial).uid());
-                const int idx_trial_theta(ddc::select<BSplinesTheta>(idx_trial).uid());
+                const int idx_trial_r(
+                        (ddc::select<BSplinesR>(idx_trial) - m_idx_bsplines_r_front).value());
+                const int idx_trial_theta(
+                        (ddc::select<BSplinesTheta>(idx_trial) - m_idx_bsplines_theta_front)
+                                .value());
                 IdxBSPolar idx_trial_polar(
                         PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(
                                 IdxBSRTheta(idx_trial_r, theta_mod(idx_trial_theta))));
@@ -890,8 +908,10 @@ public:
 
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
             const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            const std::size_t idx_r(ddc::select<BSplinesR>(idx_2d).uid());
-            const std::size_t idx_theta(ddc::select<BSplinesTheta>(idx_2d).uid());
+            const std::size_t idx_r(
+                    (ddc::select<BSplinesR>(idx_2d) - m_idx_bsplines_r_front).value());
+            const std::size_t idx_theta(
+                    (ddc::select<BSplinesTheta>(idx_2d) - m_idx_bsplines_theta_front).value());
 
             // Find the cells on which the bspline is non-zero
             int first_cell_r(idx_r - BSplinesR::degree());
@@ -913,8 +933,9 @@ public:
             assert(r_length * theta_length > 0);
             double element = 0.0;
             ddc::for_each(non_zero_cells, [&](IdxCell const cell_idx) {
-                const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
-                const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
+                const int cell_idx_r((ddc::select<RCellDim>(cell_idx) - Idx<RCellDim>(0)).value());
+                const int cell_idx_theta(theta_mod(
+                        (ddc::select<ThetaCellDim>(cell_idx) - Idx<ThetaCellDim>(0)).value()));
 
                 const IdxRangeQuadratureRTheta cell_quad_points(
                         get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
@@ -969,7 +990,7 @@ public:
                 });
         ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx) {
             const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
-            spline.spline_coef(idx_2d) = x_init_host(0, idx.uid());
+            spline.spline_coef(idx_2d) = x_init_host(0, (idx - IdxBSPolar(0)).value());
         });
         ddc::for_each(dirichlet_boundary_idx_range, [&](IdxBSRTheta const idx) {
             spline.spline_coef(idx) = 0.0;
@@ -1354,12 +1375,14 @@ public:
         // 0 <= idx_test_r < 8
         // 0 <= idx_trial_r < 8
         // idx_test_r < idx_trial_r
-        const int idx_test_r(ddc::select<BSplinesR>(idx_test).uid());
-        const int idx_trial_r(ddc::select<BSplinesR>(idx_trial).uid());
+        const int idx_test_r((ddc::select<BSplinesR>(idx_test) - m_idx_bsplines_r_front).value());
+        const int idx_trial_r((ddc::select<BSplinesR>(idx_trial) - m_idx_bsplines_r_front).value());
         // 0 <= idx_test_theta < 8
         // 0 <= idx_trial_theta < 8
-        int idx_test_theta(theta_mod(ddc::select<BSplinesTheta>(idx_test).uid()));
-        int idx_trial_theta(theta_mod(ddc::select<BSplinesTheta>(idx_trial).uid()));
+        int idx_test_theta(theta_mod(
+                (ddc::select<BSplinesTheta>(idx_test) - m_idx_bsplines_theta_front).value()));
+        int idx_trial_theta(theta_mod(
+                (ddc::select<BSplinesTheta>(idx_trial) - m_idx_bsplines_theta_front).value()));
 
         const std::size_t ncells_r = ddc::discrete_space<BSplinesR>().ncells();
 
@@ -1426,8 +1449,10 @@ public:
                 0.0,
                 ddc::reducer::sum<double>(),
                 [&](IdxCell const cell_idx) {
-                    const int cell_idx_r(ddc::select<RCellDim>(cell_idx).uid());
-                    const int cell_idx_theta(theta_mod(ddc::select<ThetaCellDim>(cell_idx).uid()));
+                    const int cell_idx_r(
+                            (ddc::select<RCellDim>(cell_idx) - Idx<RCellDim>(0)).value());
+                    const int cell_idx_theta(theta_mod(
+                            (ddc::select<ThetaCellDim>(cell_idx) - Idx<ThetaCellDim>(0)).value()));
 
                     const IdxRangeQuadratureRTheta cell_quad_points(
                             get_quadrature_points_in_cell(cell_idx_r, cell_idx_theta));
@@ -1441,10 +1466,12 @@ public:
                     Idx<RBasisSubset> ib_trial_r(idx_trial_r - cell_idx_r);
                     Idx<ThetaBasisSubset> ib_trial_theta(theta_mod(ib_trial_theta_idx));
 
-                    assert(ib_test_r.uid() < BSplinesR::degree() + 1);
-                    assert(ib_test_theta.uid() < BSplinesTheta::degree() + 1);
-                    assert(ib_trial_r.uid() < BSplinesR::degree() + 1);
-                    assert(ib_trial_theta.uid() < BSplinesTheta::degree() + 1);
+                    assert((ib_test_r - Idx<RBasisSubset>(0)).value() < BSplinesR::degree() + 1);
+                    assert((ib_test_theta - Idx<ThetaBasisSubset>(0)).value()
+                           < BSplinesTheta::degree() + 1);
+                    assert((ib_trial_r - Idx<RBasisSubset>(0)).value() < BSplinesR::degree() + 1);
+                    assert((ib_trial_theta - Idx<ThetaBasisSubset>(0)).value()
+                           < BSplinesTheta::degree() + 1);
 
                     // Calculate the weak integral
                     return ddc::parallel_transform_reduce(
