@@ -85,7 +85,7 @@ public:
     }
 
     /**
-    * @brief Returns a constand field reference to the spline coefficients.
+    * @brief Returns a constant field reference to the spline coefficients.
     *
     * @return A reference to a constant field that contains the spline coefficients.
     */

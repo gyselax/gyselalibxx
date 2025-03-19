@@ -76,15 +76,16 @@ public:
     }
 };
 
-
 /**
  * @brief A class which stores information necessary to create a pointer to 
  * an instance of the Spline2DPartialDerivative class.
  *
- * This class allows an instance of the Spline2DPartialDerivative class to be instantiated where necessary.
- * Typically, the Spline2DPartialDerivativeCreator is instantiated in the initialisation of the simulation, 
- * and the corresponding Spline2DPartialDerivative object is instantiated where computing partial derivatives
- * is required. 
+ * This class allows an instance of the Spline2DPartialDerivative class to be 
+ * instantiated where necessary. Typically, the Spline2DPartialDerivativeCreator
+ * is instantiated in the initialisation of the simulation, and the corresponding 
+ * Spline2DPartialDerivative object is instantiated where computing partial 
+ * derivatives is required. 
+ *
  * @tparam SplineBuilder2D A 2D spline builder.
  * @tparam SplineEvaluator2D A 2D spline evaluator.
  */

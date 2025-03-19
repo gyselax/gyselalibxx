@@ -321,7 +321,6 @@ public:
 
 /**
  * @brief A class that represents a test for partial derivatives.
-<<<<<<< HEAD
  * The test can be used with 2d splines for computing partial 
  * derivatives.
  */
@@ -337,13 +336,13 @@ private:
     using base_type = PartialDerivativeTest<DerivativeDimension, N_ddim, N_odim, spline_degree>;
 
     using DDim = DerivativeDimension;
-    using ODim = typename base_type::ODim;
+    using typename base_type::ODim;
 
-    using CoordDDim = typename base_type::CoordDDim;
-    using CoordODim = typename base_type::CoordODim;
+    using typename base_type::CoordDDim;
+    using typename base_type::CoordODim;
 
-    using GridDDim = typename base_type::GridDDim;
-    using GridODim = typename base_type::GridODim;
+    using typename base_type::GridDDim;
+    using typename base_type::GridODim;
 
     using SplineBuilder2D = ddc::SplineBuilder2D<
             Kokkos::DefaultExecutionSpace,
@@ -374,12 +373,12 @@ private:
             GridDDim,
             GridODim>;
 
-    using IdxRangeDDim = typename base_type::IdxRangeDDim;
-    using IdxRangeODim = typename base_type::IdxRangeODim;
-    using IdxRangeFull = typename base_type::IdxRangeFull;
+    using typename base_type::IdxRangeDDim;
+    using typename base_type::IdxRangeFull;
+    using typename base_type::IdxRangeODim;
 
-    using SplineInterpPointsDDim = typename base_type::SplineInterpPointsDDim;
-    using SplineInterpPointsODim = typename base_type::SplineInterpPointsODim;
+    using typename base_type::SplineInterpPointsDDim;
+    using typename base_type::SplineInterpPointsODim;
 
     ddc::ConstantExtrapolationRule<DDim, ODim> const m_bv_ddim_min;
     ddc::ConstantExtrapolationRule<DDim, ODim> const m_bv_ddim_max;
