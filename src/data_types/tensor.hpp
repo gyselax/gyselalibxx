@@ -433,9 +433,9 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(Vector<ElementType, Dims...> cons
 } // namespace ddcHelper
 
 /**
- * @brief An operator to multiply all the element of the current tensor by
- * a value.
+ * @brief An operator to multiply all a tensor by a value.
  * @param val The value by which the elements should be multiplied.
+ * @param tensor The tensor being multiplied.
  * @return A new tensor containing the result of the multiplication.
  */
 template <class ElementType, class OElementType, class... ValidIndexSet>
@@ -450,7 +450,8 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
  * An operator to add the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
- * @param tensor The tensor to be converted.
+ * @param[in] coord The coordinate to which the tensor is added.
+ * @param[in] tensor The tensor to be converted.
  * @return The new coordinate.
  */
 template <class... Dims>
@@ -465,7 +466,8 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
  * An operator to add the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
- * @param tensor The tensor to be converted.
+ * @param[in] coord The coordinate from which the tensor is subtracted.
+ * @param[in] tensor The tensor to be converted.
  * @return The new coordinate.
  */
 template <class... Dims>
@@ -480,7 +482,8 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
  * An operator to add the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
- * @param tensor The tensor to be converted.
+ * @param[inout] coord The coordinate to which the tensor is added.
+ * @param[in] tensor The tensor to be converted.
  * @return The new coordinate.
  */
 template <class... Dims>
@@ -496,7 +499,8 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
  * An operator to add the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
- * @param tensor The tensor to be converted.
+ * @param[inout] coord The coordinate from which the tensor is subtracted.
+ * @param[in] tensor The tensor to be converted.
  * @return The new coordinate.
  */
 template <class... Dims>
