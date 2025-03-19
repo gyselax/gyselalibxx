@@ -111,7 +111,7 @@ jobs:
           # Get files which have changed in this merge request
           git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}..${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
           python3 ci_tools/check_readme_presence.py pull_new_files.txt
-          if [ -s build/docs/doxygen.log ]; then exit 1; fi
+          if [ -s docs/doxygen.log ]; then exit 1; fi
         shell: bash
 
   cppcheck_static_analysis_errors:
