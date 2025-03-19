@@ -483,16 +483,16 @@ private:
         ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-            DTensor<VectorIndexSet<R_cov, Theta_cov>, VectorIndexSet<R_cov, Theta_cov>> inv_G
+            DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
                     = metric_tensor.inverse(coord_rtheta);
 
             // E = -grad phi
             double const electric_field_r
-                    = -deriv_r_phi(irtheta) * ddcHelper::get<R_cov, R_cov>(inv_G)
-                      - deriv_theta_phi(irtheta) * ddcHelper::get<R_cov, Theta_cov>(inv_G);
+                    = -deriv_r_phi(irtheta) * ddcHelper::get<R, R>(inv_G)
+                      - deriv_theta_phi(irtheta) * ddcHelper::get<R, Theta>(inv_G);
             double const electric_field_theta
-                    = -deriv_r_phi(irtheta) * ddcHelper::get<Theta_cov, R_cov>(inv_G)
-                      - deriv_theta_phi(irtheta) * ddcHelper::get<Theta_cov, Theta_cov>(inv_G);
+                    = -deriv_r_phi(irtheta) * ddcHelper::get<Theta, R>(inv_G)
+                      - deriv_theta_phi(irtheta) * ddcHelper::get<Theta, Theta>(inv_G);
 
             // A = E \wedge e_z
             ddcHelper::get<R_cov>(advection_field_rtheta)(irtheta) = -electric_field_theta;
