@@ -6,8 +6,8 @@
 
 /**
  * @brief A function to convert a 2D Kokkos view into a ginkgo multivector structure.
- * @param gko_exec[in] A Ginkgo executor that has access to the Kokkos::View memory space
- * @param view[in] A 2-D Kokkos::View with unit stride in the second dimension
+ * @param[in] gko_exec A Ginkgo executor that has access to the Kokkos::View memory space
+ * @param[in] view A 2-D Kokkos::View with unit stride in the second dimension
  * @return A Ginkgo Multivector view over the Kokkos::View data
  */
 
