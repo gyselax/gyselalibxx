@@ -1,13 +1,15 @@
+""" Script Copies specified file types [".md", ".png", ".jpg"] from `src_dir` to `dest_dir`, preserving directory structure
+    and excluding given directories.
+"""
 from pathlib import Path
 import shutil
 import argparse
-import sys
 from readme_to_mkdocs import replace_math_tags_with_mkdoc_compatible_tags
 
 
 def copy_files(src_dir, dest_dir, exclude_dirs, extensions=(".md", ".png", ".jpg")):
     """
-    Copies specified file types [".md", ".png", ".jpg"] from `src_dir` to `dest_dir`, preserving directory structure 
+    Copies specified file types [".md", ".png", ".jpg"] from `src_dir` to `dest_dir`, preserving directory structure
     and excluding given directories.
 
     Parameters:
@@ -26,7 +28,7 @@ def copy_files(src_dir, dest_dir, exclude_dirs, extensions=(".md", ".png", ".jpg
     """
 
     exclude_dirs = [Path(e) for e in exclude_dirs]
-    
+
     for e in extensions:
         for src_file in src_dir.rglob(f"*{e}"):
             if any(e in src_file.parents for e in exclude_dirs):
@@ -47,5 +49,5 @@ if __name__ == "__main__":
     parser.add_argument("dest_dir", type=Path, help="Destination directory")
     parser.add_argument("exclude_dirs", nargs='*', help="Directories to exclude")
     args = parser.parse_args()
-    
+
     copy_files(args.src_dir, args.dest_dir, args.exclude_dirs)

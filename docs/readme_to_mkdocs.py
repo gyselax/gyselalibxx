@@ -103,6 +103,8 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace, conte
     start_match = start_tag.search(line)
     if contents:
         n = len(contents)
+    else:
+        n = 1
 
     while start_match:
         if not any(start < start_match.start() < end for start, end in code_blocks):
@@ -126,6 +128,17 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace, conte
     return line, idx
 
 def replace_math_tags_with_mkdoc_compatible_tags(in_file, out_file):
+    """
+    Converts math block tags in a Markdown file to MkDocs-compatible tags.
+
+    This function reads a Markdown file, detects math block tags formatted as ` ```math `,
+    and replaces them with MkDocs-compatible tags. Inline math expressions
+    are also converted accordingly.
+
+    Args:
+        in_file (str): Path to the input Markdown file.
+        out_file (str): Path to the output file where the modified content will be written.
+    """
     print(in_file, out_file)
     with open(in_file, 'r', encoding='utf-8') as f:
         contents = f.readlines()
@@ -152,7 +165,7 @@ def replace_math_tags_with_mkdoc_compatible_tags(in_file, out_file):
                 in_code = True
         elif not in_code and not in_math_code:
             # Replace inline math with mkdoc tag
-            line, _ = format_equations(line, single_math_start_tag, single_math_end_tag, "\\(", "\\)")
+            line, _ = format_equations(line, single_math_start_tag, single_math_end_tag, "\\(", "\\)", contents=None, idx=None)
 
         body.append(line)
 
