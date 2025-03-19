@@ -321,6 +321,7 @@ public:
 
 /**
  * @brief A class that represents a test for partial derivatives.
+<<<<<<< HEAD
  * The test can be used with 2d splines for computing partial 
  * derivatives.
  */
