@@ -176,6 +176,34 @@ inline void dump_coordinates(
             KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
 }
 
+/**
+ * @brief Computes the maximum distance between two adjacent points 
+ * within an IdxRange.
+ *
+ * @param idx_range The domain on which the distance should be calculated.
+ *
+ * @return The maximum distance between two adjacent points.
+ */
+template <class GridDim>
+double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_range)
+{
+    using IdxStep = IdxStep<GridDim>;
+    using IdxDim = Idx<GridDim>;
+
+    IdxStep const step(1);
+    IdxRange<GridDim> idx_range_chopped = idx_range.remove_first(step);
+
+    double const max_dist = ddc::parallel_transform_reduce(
+            Kokkos::DefaultHostExecutionSpace(),
+            idx_range_chopped,
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxDim const ix) {
+                return ddc::coordinate(ix) - ddc::coordinate(ix - step);
+            });
+
+    return max_dist;
+}
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------
