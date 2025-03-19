@@ -2,14 +2,6 @@
 
 #include "species_init.hpp"
 
-/**
- * @brief Initialise the species domain
- * @param[out] kinetic species domain 
- * @param[out] fluid species domain 
- * @param[in] conf_gyselalibxx is the YAML input file
- * @param[in] nb_kinspecies number of kinetic species
- * @param[in] nb_fluidspecies number of fluid species
- */
 void init_all_species(
         IdxRangeSp& idxrange_kinsp,
         IdxRangeSp& idxrange_fluidsp,
