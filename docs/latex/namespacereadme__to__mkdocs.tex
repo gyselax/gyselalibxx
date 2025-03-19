@@ -1,0 +1,146 @@
+\doxysection{readme\+\_\+to\+\_\+mkdocs Namespace Reference}
+\hypertarget{namespacereadme__to__mkdocs}{}\label{namespacereadme__to__mkdocs}\index{readme\_to\_mkdocs@{readme\_to\_mkdocs}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacereadme__to__mkdocs_a81f3b86e48dd8658438cd9075495da14}{get\+\_\+compatible\+\_\+tag}} (tag)
+\item 
+\mbox{\hyperlink{namespacereadme__to__mkdocs_aaa00d2b2f44aa6913557ca7685d0e348}{get\+\_\+code\+\_\+blocks}} (line)
+\item 
+\mbox{\hyperlink{namespacereadme__to__mkdocs_a3b18b8fe8a450fbb3721ddef3cf89484}{format\+\_\+equations}} (line, start\+\_\+tag, end\+\_\+tag, start\+\_\+replace, end\+\_\+replace, contents=None, idx=None)
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_a46772bc6c472aeb536d80b8fbd1cfb86}\label{namespacereadme__to__mkdocs_a46772bc6c472aeb536d80b8fbd1cfb86} 
+{\bfseries replace\+\_\+math\+\_\+tags\+\_\+with\+\_\+mkdoc\+\_\+compatible\+\_\+tags} (in\+\_\+file, out\+\_\+file)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_aabe743209bcdb09643747eea212eba76}\label{namespacereadme__to__mkdocs_aabe743209bcdb09643747eea212eba76} 
+{\bfseries single\+\_\+math\+\_\+start\+\_\+tag} = re.\+compile(r\textquotesingle{}(?$<$!\textbackslash{}\$)\textbackslash{}\$\textbackslash{}\`{}(?!\textbackslash{}\$)\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_ab7a55941f293e7d68d78eeb925bf4940}\label{namespacereadme__to__mkdocs_ab7a55941f293e7d68d78eeb925bf4940} 
+{\bfseries single\+\_\+math\+\_\+end\+\_\+tag} = re.\+compile(r\textquotesingle{}(?$<$!\textbackslash{}\$)\textbackslash{}\`{}\textbackslash{}\$(?!\textbackslash{}\$)\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_ad93851a872810e6e1282aee08e6c00d9}\label{namespacereadme__to__mkdocs_ad93851a872810e6e1282aee08e6c00d9} 
+{\bfseries single\+\_\+math\+\_\+tag} = re.\+compile(r\textquotesingle{}(?$<$!@f)(?$<$!\textbackslash{}\$)\textbackslash{}\$(?!\textbackslash{}\$)\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_a9333d4baf58af12f9c0dc288c202781f}\label{namespacereadme__to__mkdocs_a9333d4baf58af12f9c0dc288c202781f} 
+{\bfseries multiline\+\_\+math\+\_\+tag} = re.\+compile(r\textquotesingle{}(?$<$!\textbackslash{}\$)\textbackslash{}\$\textbackslash{}\$(?!\textbackslash{}\$)\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_ae32b811b0bef782fc27d0932b3e64516}\label{namespacereadme__to__mkdocs_ae32b811b0bef782fc27d0932b3e64516} 
+{\bfseries reference\+\_\+tag} = re.\+compile(r\textquotesingle{}(\textbackslash{}\mbox{[}\mbox{[}\texorpdfstring{$^\wedge$}{\string^}\textbackslash{}\mbox{]}\mbox{]}\texorpdfstring{$\ast$}{*}\textbackslash{}\mbox{]})(\textbackslash{}(\mbox{[}\texorpdfstring{$^\wedge$}{\string^}\textbackslash{})\mbox{]}\texorpdfstring{$\ast$}{*}\textbackslash{}))\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_af057f5b791c211f09fd3e9122ff67696}\label{namespacereadme__to__mkdocs_af057f5b791c211f09fd3e9122ff67696} 
+{\bfseries section\+\_\+tag} = re.\+compile(r\textquotesingle{}\textbackslash{}n\#\# (\mbox{[}\texorpdfstring{$^\wedge$}{\string^}\textbackslash{}n\mbox{]}\texorpdfstring{$\ast$}{*})\textbackslash{}n\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_aa86c4c768ca645ca79758e7420f43db0}\label{namespacereadme__to__mkdocs_aa86c4c768ca645ca79758e7420f43db0} 
+dict {\bfseries doxygen\+\_\+tag\+\_\+dict} = \{"{} "{}\+:"{}\+\_\+"{}, "{}+"{}\+:"{}x"{}, "{}\textquotesingle{}"{}\+:\textquotesingle{}\+\_\+\textquotesingle{}, os.\+path.\+sep\+: \textquotesingle{}\+\_\+\textquotesingle{}, \textquotesingle{}?\textquotesingle{}\+:\textquotesingle{}\textquotesingle{}, \textquotesingle{}!\textquotesingle{}\+:\textquotesingle{}\textquotesingle{}, \textquotesingle{},\textquotesingle{}\+:\textquotesingle{}\textquotesingle{}, r\textquotesingle{}\textbackslash{}\+\_\+\textquotesingle{}\+: \textquotesingle{}\+\_\+\textquotesingle{}\}
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_a1a0733d0d36d2acff781f289050b4944}\label{namespacereadme__to__mkdocs_a1a0733d0d36d2acff781f289050b4944} 
+{\bfseries parser} = Argument\+Parser(description=\textquotesingle{}Tool for translating Markdown files to a format that can be understood by Doxygen.\textquotesingle{})
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_a4e9e722acb993c85ceaeff71287b1a79}\label{namespacereadme__to__mkdocs_a4e9e722acb993c85ceaeff71287b1a79} 
+{\bfseries type}
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_a557784088720d3af6b073576843e71b4}\label{namespacereadme__to__mkdocs_a557784088720d3af6b073576843e71b4} 
+{\bfseries str}
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_aff85e524270011ef869218d8c83b6dbf}\label{namespacereadme__to__mkdocs_aff85e524270011ef869218d8c83b6dbf} 
+{\bfseries help}
+\item 
+\Hypertarget{namespacereadme__to__mkdocs_abc417f4121e649f8d2fb911b14fad8a0}\label{namespacereadme__to__mkdocs_abc417f4121e649f8d2fb911b14fad8a0} 
+{\bfseries args} = parser.\+parse\+\_\+args()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb} Script for translating Markdown files compatible with GitHub/GitLab to a format that can be understood by Doxygen.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacereadme__to__mkdocs_a3b18b8fe8a450fbb3721ddef3cf89484}\label{namespacereadme__to__mkdocs_a3b18b8fe8a450fbb3721ddef3cf89484} 
+\index{readme\_to\_mkdocs@{readme\_to\_mkdocs}!format\_equations@{format\_equations}}
+\index{format\_equations@{format\_equations}!readme\_to\_mkdocs@{readme\_to\_mkdocs}}
+\doxysubsubsection{\texorpdfstring{format\_equations()}{format\_equations()}}
+{\footnotesize\ttfamily readme\+\_\+to\+\_\+mkdocs.\+format\+\_\+equations (\begin{DoxyParamCaption}\item[{}]{line,  }\item[{}]{start\+\_\+tag,  }\item[{}]{end\+\_\+tag,  }\item[{}]{start\+\_\+replace,  }\item[{}]{end\+\_\+replace,  }\item[{}]{contents = {\ttfamily None},  }\item[{}]{idx = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Format equations with Doxygen style.
+
+Use regexes to find equations. If they are not in code blocks (e.g. for
+documentation explaining how to format equations) then replace Markdown
+formatting with Doxygen style formatting.
+
+Parameters
+----------
+line : str
+    A line of markdown text.
+
+start_tag : re.Pattern
+    A regex pattern matching the start of the equation.
+
+end_tag : re.Pattern
+    A regex pattern matching the end of the equation.
+
+start_replace : str
+    A Doxygen-compatible string which should be used to introduce the equation.
+
+end_replace : str
+    A Doxygen-compatible string which should be used to close the equation.
+
+contents : list, optional
+    A list of all the lines in the file. This should be provided for multi-line
+    equations.
+
+idx : int
+    The index of the line in the contents. This should be provided for multi-line
+    equations.
+
+Returns
+-------
+str
+    The updated line.
+
+int
+    The updated line index.
+\end{DoxyVerb}
+ \Hypertarget{namespacereadme__to__mkdocs_aaa00d2b2f44aa6913557ca7685d0e348}\label{namespacereadme__to__mkdocs_aaa00d2b2f44aa6913557ca7685d0e348} 
+\index{readme\_to\_mkdocs@{readme\_to\_mkdocs}!get\_code\_blocks@{get\_code\_blocks}}
+\index{get\_code\_blocks@{get\_code\_blocks}!readme\_to\_mkdocs@{readme\_to\_mkdocs}}
+\doxysubsubsection{\texorpdfstring{get\_code\_blocks()}{get\_code\_blocks()}}
+{\footnotesize\ttfamily readme\+\_\+to\+\_\+mkdocs.\+get\+\_\+code\+\_\+blocks (\begin{DoxyParamCaption}\item[{}]{line }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the position of code blocks in the line.
+
+Parameters
+----------
+line : str
+    A line of markdown text.
+
+Returns
+-------
+list of 2-tuples
+    Returns a list of 2-tuples describing the start and end of the code blocks in the line.
+\end{DoxyVerb}
+ \Hypertarget{namespacereadme__to__mkdocs_a81f3b86e48dd8658438cd9075495da14}\label{namespacereadme__to__mkdocs_a81f3b86e48dd8658438cd9075495da14} 
+\index{readme\_to\_mkdocs@{readme\_to\_mkdocs}!get\_compatible\_tag@{get\_compatible\_tag}}
+\index{get\_compatible\_tag@{get\_compatible\_tag}!readme\_to\_mkdocs@{readme\_to\_mkdocs}}
+\doxysubsubsection{\texorpdfstring{get\_compatible\_tag()}{get\_compatible\_tag()}}
+{\footnotesize\ttfamily readme\+\_\+to\+\_\+mkdocs.\+get\+\_\+compatible\+\_\+tag (\begin{DoxyParamCaption}\item[{}]{tag }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get a Doxygen tag which doesn't contain problematic symbols.
+
+Construct a Doxygen tag from a string by replacing any problematic
+symbols.
+
+Parameters
+----------
+tag : str
+    The string from which the tag should be constructed.
+
+Returns
+-------
+str
+    A string that can be used as a Doxygen tag.
+\end{DoxyVerb}
+ 
