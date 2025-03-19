@@ -29,17 +29,17 @@
  *
  * - (3) and @f$ E = -\nabla \phi  @f$.
  *
- * The functions are defined on a logical index range, and the mapping from the logical
- * index range to the physical index range is written @f$\mathcal{F}@f$.
+ * The functions are defined on a logical domain, and the mapping from the logical
+ * domain to the physical domain is written @f$\mathcal{F}@f$.
  *
  * We here focus on equation (3). The @f$ \phi @f$ is already computed 
- * on B-splines with the given Poisson solver. Then in the AdvectionFieldRTheta::operator()
+ * on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator()
  * we compute the advection field (@f$A = E \wedge e_z@f$) thanks to (3) using the B-splines coefficients.
  * Depending on the given mapping, the computation at the centre point is not
  * always well-defined so we linearise around the centre point as explained
  * in Edoardo Zoni's article (https://doi.org/10.1016/j.jcp.2019.108889).
  * 
- * The advection field can be computed along the logical index range axis or the physical index range
+ * The advection field can be computed along the logical domain axis or the physical domain
  * axis. 
  * 
  * 1- In the first case, we compute the electric field thanks to (3) and 
@@ -62,11 +62,11 @@
  * linearly independent directions.
  * 
  * 
- * Then the advection field along the physical index range axis 
+ * Then the advection field along the physical domain axis 
  * is given by @f$A = E \wedge e_z@f$.
  * 
  * 
- * 2- In the second case, the advection field along the logical index range axis
+ * 2- In the second case, the advection field along the logical domain axis
  * is computed with 
  * - @f$ \nabla \phi = \sum_{i,j} \partial_{x_i} f g^{ij} e_j@f$, 
  * - with @f$g^{ij}@f$, the coefficients of the inverse metric tensor,
@@ -112,7 +112,7 @@ public:
      * @brief Instantiate a AdvectionFieldRTheta .
      *
      * @param[in] mapping
-     *      The mapping @f$ \mathcal{F} @f$ from the logical index range to the physical index range.
+     *      The mapping @f$ \mathcal{F} @f$ from the logical domain to the physical domain.
      * @param[in] epsilon
      *      The parameter @f$ \varepsilon @f$ for the linearisation of the
      *      electric field.
@@ -254,7 +254,7 @@ private:
 
                 Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
 
-                // Gradient of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical domain (Cartesian domain)
                 double const deriv_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
                                            + deriv_theta_phi(irtheta) * inv_J[1][0];
                 double const deriv_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
@@ -311,7 +311,7 @@ private:
                         coord_rtheta_epsilon,
                         get_const_field(electrostatic_potential_coef));
 
-                // Gradient of phi in the physical index range (Cartesian index range)
+                // Gradient of phi in the physical domain (Cartesian domain)
                 double const deriv_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
                                                    + deriv_theta_phi_epsilon * inv_J_eps[1][0];
                 double const deriv_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
@@ -343,7 +343,7 @@ private:
 
 public:
     // -------------------------------------------------------------------------------------------
-    // COMPUTE ADVECTION FIELD IN RTheta:                                                            |
+    // COMPUTE ADVECTION FIELD IN RTheta:                                                        |
     // Advection field along the logical directions.                                             |
     // -------------------------------------------------------------------------------------------
 
@@ -436,7 +436,7 @@ private:
      * @param[in] electrostatic_potential_coef
      *      The spline representation of the solution @f$\phi@f$ of the Poisson-like equation (2).
      * @param[out] advection_field_rtheta
-     *      The advection field on the logical axis on an index range without O-point. 
+     *      The advection field on the logical axis on an domain without O-point. 
      * @param[out] advection_field_xy_centre
      *      The advection field on the physical axis at the O-point. 
      */

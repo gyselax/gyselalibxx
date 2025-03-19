@@ -1,6 +1,7 @@
 """
 Script for linting .md files. This is especially important for files containing equations to ensure that the syntax can be correctly parsed by GitLab.
 """
+from itertools import chain
 from argparse import ArgumentParser
 from collections import namedtuple
 import re
@@ -62,7 +63,7 @@ if __name__ == '__main__':
         tag_names = ["inline math tag $", "inline math tag $`", "standalone equation tag $$", "inline code tag `", "multiline code tag ```", "link tag []()"]
         tags = [list(s_tag.finditer(file_contents)) for s_tag in start_tags]
 
-        expressions = [[] for _ in range(n_tag_types+1)]
+        expressions = {t: [] for t in chain(tag_names, ["markdown"])}
         suggested_expressions = []
 
         end_line_info = LineInfo(1,1)
@@ -70,14 +71,15 @@ if __name__ == '__main__':
 
         while any(len(t)>0 for t in tags):
             key_idx = np.argmin([n_chars if len(t)==0 else t[0].start() for t in tags])
+            tag_name = tag_names[key_idx]
             start_tag = tags[key_idx][0]
             if start_tag.groups():
                 found_start = start_tag.end(1)
             else:
                 found_start = start_tag.end()
             start_line_info = index_to_line_info(start_tag.start(), file_contents)
-            expressions[-1].append(Expression(end_line_info, start_line_info, file_contents[content_idx:start_tag.start()]))
-            if key_idx in (1, 5):
+            expressions["markdown"].append(Expression(end_line_info, start_line_info, file_contents[content_idx:start_tag.start()]))
+            if tag_name != "inline math tag $":
                 end_tag = end_tags[key_idx].search(file_contents, found_start)
             else:
                 try:
@@ -92,17 +94,17 @@ if __name__ == '__main__':
             else:
                 expr = file_contents[found_start:end_tag.start()]
                 end_line_info = index_to_line_info(end_tag.start(), file_contents)
-                expressions[key_idx].append(Expression(start_line_info, end_line_info, expr, end_tag[0]))
+                expressions[tag_name].append(Expression(start_line_info, end_line_info, expr, end_tag[0]))
                 content_idx = end_tag.end()
                 tags = [list(s_tag.finditer(file_contents, content_idx)) for s_tag in start_tags]
 
-        expressions[-1].append(Expression(end_line_info, index_to_line_info(n_chars, file_contents), file_contents[content_idx:]))
+        expressions["markdown"].append(Expression(end_line_info, index_to_line_info(n_chars, file_contents), file_contents[content_idx:]))
 
         content_lines = file_contents.split('\n')
-        n_math_blocks = len(expressions[0]) + len(expressions[1]) + len(expressions[2])
+        n_math_blocks = sum(len(expressions[t]) for t in tag_names if "math tag" in t or "equation tag" in t)
 
         # Examine inline maths:
-        for expr in expressions[0]:
+        for expr in expressions["inline math tag $"]:
             suggestion = expr.contents
             start_code = '$'
             end_code = '$'
@@ -124,7 +126,7 @@ if __name__ == '__main__':
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, start_code+suggestion+end_code))
 
         # Examine inline quoted maths
-        for expr in expressions[1]:
+        for expr in expressions["inline math tag $`"]:
             suggestion = expr.contents
             start_code = '$`'
             end_code = '`$'
@@ -136,7 +138,7 @@ if __name__ == '__main__':
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, start_code+suggestion+end_code))
 
         # Examine standalone equations
-        for expr in expressions[2]:
+        for expr in expressions["standalone equation tag $$"]:
             suggestion = expr.contents
             start_code = '$$'
             end_code = '$$'
@@ -168,7 +170,7 @@ if __name__ == '__main__':
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, start_code+suggestion+end_code))
 
         # Examine inline code tags
-        for expr in expressions[3]:
+        for expr in expressions["inline code tag `"]:
             suggestion = expr.contents
             start_code = '`'
             end_code = '`'
@@ -180,10 +182,10 @@ if __name__ == '__main__':
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, start_code+suggestion+end_code))
 
         # Examine code blocks (nothing to do)
-        suggested_expressions.extend(Expression(expr.start_pos, expr.end_pos, f'```{expr.contents}```') for expr in expressions[4])
+        suggested_expressions.extend(Expression(expr.start_pos, expr.end_pos, f'```{expr.contents}```') for expr in expressions["multiline code tag ```"])
 
         # Examine link text
-        for expr in expressions[5]:
+        for expr in expressions["link tag []()"]:
             suggestion = expr.contents
             unquoted_underscore_problems = list(unquoted_underscore.finditer(suggestion))
             if unquoted_underscore_problems:
@@ -199,7 +201,7 @@ if __name__ == '__main__':
             suggested_expressions.append(Expression(expr.start_pos, expr.end_pos, '['+suggestion+expr.closing_tag))
 
         # Examine text
-        for expr in expressions[6]:
+        for expr in expressions["markdown"]:
             suggestion = expr.contents
             unquoted_underscore_problems = list(unquoted_underscore.finditer(suggestion))
             if unquoted_underscore_problems:
