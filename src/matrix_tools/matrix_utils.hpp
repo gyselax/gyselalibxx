@@ -57,9 +57,9 @@ inline void check_conv(
 }
 
 /**
- * @brief An helper to write the log corresponding to a single batch.
- * @param[in] log_file The stream of the log file.
- * @param[in] index The index of the batch.
+ * @brief A helper to write the log corresponding to a single batch.
+ * @param[inout] log_file The stream of the log file.
+ * @param[in] batch_index The index of the batch.
  * @param[in] num_iterations The number of iterations the iterative solver performed for this batch.
  * @param[in] implicit_res_norm The implicit residual norm at the end of the solver call (evaluated by
  * the Ginkgo solver).
