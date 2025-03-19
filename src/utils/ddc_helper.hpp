@@ -194,7 +194,7 @@ double maximum_distance_between_adjacent_points(IdxRange<GridDim> const& idx_ran
     IdxRange<GridDim> idx_range_chopped = idx_range.remove_first(step);
 
     double const max_dist = ddc::parallel_transform_reduce(
-            Kokkos::DefaultHostExecutionSpace(),
+            Kokkos::DefaultExecutionSpace(),
             idx_range_chopped,
             0.,
             ddc::reducer::max<double>(),
