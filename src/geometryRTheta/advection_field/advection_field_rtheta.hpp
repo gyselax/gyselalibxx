@@ -469,14 +469,14 @@ private:
         });
 
         // > computation of the phi derivatives
-        host_t<DVectorFieldMemRTheta<R, Theta>> deriv_phi(grid_without_Opoint);
+        host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> deriv_phi(grid_without_Opoint);
 
         evaluator.deriv_dim_1(
-                ddcHelper::get<R>(deriv_phi),
+                ddcHelper::get<R_cov>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
-                ddcHelper::get<Theta>(deriv_phi),
+                ddcHelper::get<Theta_cov>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
