@@ -86,7 +86,7 @@ jobs:
           fetch-depth: 0
       - name: Install doxygen
         run:
-          apt install doxygen
+          sudo apt-get install doxygen
         shell: bash
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
