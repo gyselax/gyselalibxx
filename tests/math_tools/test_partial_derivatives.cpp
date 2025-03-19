@@ -9,7 +9,10 @@
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "spline_1d_partial_derivative.hpp"
+<<<<<<< HEAD
 #include "spline_2d_partial_derivative.hpp"
+=======
+>>>>>>> origin/main
 
 namespace {
 
@@ -79,6 +82,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         GridX,
         GridY>;
 
+<<<<<<< HEAD
 // --- Operators ---
 using SplineYBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
@@ -185,6 +189,11 @@ void test_partial_derivative(
         FunctionToDifferentiate const function_to_differentiate,
         IPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const&
                 partial_derivative_creator,
+=======
+template <class Dimension>
+void test_partial_derivative_dx(
+        IPartialDerivativeCreator<IdxRangeXY, Dimension> const& partial_dx_creator,
+>>>>>>> origin/main
         IdxRangeXY const& idxrange_xy)
 {
     DFieldMemXY field_xy_alloc(idxrange_xy);
@@ -197,6 +206,7 @@ void test_partial_derivative(
             });
 
 
+<<<<<<< HEAD
     std::unique_ptr<IPartialDerivative<IdxRangeXY, DerivativeDimension>> const
             partial_derivative_creator_pointer
             = partial_derivative_creator.create_instance(get_const_field(field_xy));
@@ -207,6 +217,15 @@ void test_partial_derivative(
     DFieldXY field_differentiated = get_field(field_differentiated_alloc);
     partial_derivative(field_differentiated);
 
+=======
+    std::unique_ptr<IPartialDerivative<IdxRangeXY, X>> const partial_dx_pointer
+            = partial_dx_creator.create_instance(get_const_field(field_xy));
+    IPartialDerivative<IdxRangeXY, X> const& partial_dx = *partial_dx_pointer;
+
+    DFieldMemXY dfield_dx_xy_alloc(idxrange_xy);
+    DFieldXY dfield_dx_xy = get_field(dfield_dx_xy_alloc);
+    partial_dx(dfield_dx_xy);
+>>>>>>> origin/main
     double max_error = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             idxrange_xy,
@@ -256,6 +275,7 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
 
     Spline1DPartialDerivativeCreator<SplineXBuilder, SplineXEvaluator> const
             partial_dx_creator(builder_x, spline_evaluator_x);
+<<<<<<< HEAD
     test_partial_derivative<
             FunctionToDifferentiatePolynomial,
             X>(function_to_differentiate, partial_dx_creator, idxrange_xy);
@@ -299,7 +319,12 @@ TEST(PartialDerivative, Spline1DPartialDerivative)
     test_partial_derivative<
             FunctionToDifferentiatePolynomial,
             Y>(function_to_differentiate, partial2d_dy_creator, idxrange_xy);
+=======
+
+    test_partial_derivative_dx<X>(partial_dx_creator, idxrange_xy);
+>>>>>>> origin/main
 }
+
 
 TEST(PartialDerivative, CentralFDMPartialDerivativeDx)
 {
@@ -323,10 +348,14 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeDx)
     IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
     CentralFDMPartialDerivativeCreator<IdxRangeXY, X> const partial_dx_creator;
+<<<<<<< HEAD
 
     FunctionToDifferentiatePolynomial function_to_differentiate;
     test_partial_derivative<
             FunctionToDifferentiatePolynomial,
             X>(function_to_differentiate, partial_dx_creator, idxrange_xy);
+=======
+    test_partial_derivative_dx(partial_dx_creator, idxrange_xy);
+>>>>>>> origin/main
 }
 } // namespace

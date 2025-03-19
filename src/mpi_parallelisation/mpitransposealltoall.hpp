@@ -74,9 +74,15 @@ public:
         MPI_Comm_size(comm, &m_comm_size);
         MPI_Comm_rank(comm, &rank);
         distributed_idx_range_type1 distrib_idx_range(global_idx_range_layout_1);
-        assert(m_comm_size <= distrib_idx_range.size());
+        if (m_comm_size > distrib_idx_range.size()) {
+            throw std::runtime_error("The number of MPI ranks is greater than the number that "
+                                     "would be used when maximumly distributing the data");
+        }
         // Ensure that the load balancing is good
-        assert(distrib_idx_range.size() % m_comm_size == 0);
+        if (distrib_idx_range.size() % m_comm_size != 0) {
+            throw std::runtime_error("The provided index range cannot be split equally over "
+                                     "the specified number of MPI ranks.");
+        }
         m_local_idx_range_1
                 = m_layout_1.distribute_idx_range(global_idx_range_layout_1, m_comm_size, rank);
         m_local_idx_range_2

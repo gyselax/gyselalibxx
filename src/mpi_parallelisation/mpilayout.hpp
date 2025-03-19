@@ -82,7 +82,10 @@ protected:
             int rank)
     {
         if constexpr (ddc::in_tags_v<HeadTag, distributed_type_seq>) {
-            assert(global_idx_range.size() % comm_size == 0);
+            if (global_idx_range.size() % comm_size != 0) {
+                throw std::runtime_error("The provided index range cannot be split equally over "
+                                         "the specified number of MPI ranks.");
+            }
             IdxStep<HeadTag> elems_on_dim(global_idx_range.size() / comm_size);
             IdxRange<HeadTag>
                     local_idx_range(global_idx_range.front() + rank * elems_on_dim, elems_on_dim);

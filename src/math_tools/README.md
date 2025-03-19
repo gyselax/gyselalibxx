@@ -8,6 +8,7 @@ Functions for calculating derivatives with different methods:
 
 - `spline_1d_partial_derivative.hpp` : calculate derivatives using a 1d spline representation.
 - `spline_2d_partial_derivative.hpp` : calculate derivatives using a 2d spline representation.
+- `central_fdm_partial_derivatives.hpp` : calculate derivatives using Finite Difference Method. 
 
 ### Spline derivatives
 
