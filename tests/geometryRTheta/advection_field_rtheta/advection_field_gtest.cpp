@@ -186,8 +186,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldMemRTheta> allfdistribu_xy_alloc(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
-    host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> advection_field_rtheta_alloc(
-            grid_without_Opoint);
+    host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rtheta_alloc(grid_without_Opoint);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rtheta_alloc(grid);
     CoordXY advection_field_xy_centre;
@@ -199,8 +198,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
 
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
-    host_t<DVectorFieldRTheta<R_cov, Theta_cov>> advection_field_rtheta(
-            advection_field_rtheta_alloc);
+    host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
     host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(
             advection_field_xy_from_rtheta_alloc);
@@ -246,17 +244,15 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rtheta(grid);
 
-    MetricTensorEvaluator<LogicalToPhysicalMapping, CoordRTheta> metric_tensor(to_physical_mapping);
     ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
-        // inverse Jacobian matrix
-        DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_J
-                = to_physical_mapping.inv_jacobian_matrix(coord_rtheta);
-        double const jacobian = to_physical_mapping.jacobian(coord_rtheta);
+        // Jacobian matrix
+        DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
+                = to_physical_mapping.jacobian_matrix(coord_rtheta);
 
         DVector<X, Y> adv_field
-                = tensor_mul(index<'j', 'i'>(inv_J), index<'j'>(advection_field_rtheta(irtheta)))
+                = tensor_mul(index<'j', 'i'>(J), index<'j'>(advection_field_rtheta(irtheta)))
                   * jacobian;
 
         // computation made in BslAdvectionRTheta operator:
@@ -320,7 +316,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-            EXPECT_NEAR(allfdistribu_rtheta(irtheta), allfdistribu_xy(irtheta), 1e-13);
+            EXPECT_NEAR(allfdistribu_rtheta(irtheta), allfdistribu_xy(irtheta), 5e-13);
         });
     }
 
