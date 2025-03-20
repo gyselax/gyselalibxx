@@ -18,7 +18,6 @@ Ax = "Ax"
 ax = "ax"
 color = "color"
 colors = "colors"
-"Comput. Phys. Commun." = "Comput. Phys. Commun."
 
 [files]
 extend-exclude = ["*.tex",
