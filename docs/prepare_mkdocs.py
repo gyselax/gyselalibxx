@@ -7,7 +7,7 @@ import argparse
 from readme_to_mkdocs import replace_math_tags_with_mkdoc_compatible_tags
 
 
-def copy_files(src_dir, dest_dir, exclude_dirs, extensions=(".md", ".png", ".jpg")):
+def copy_files(src_dir, dest_dir, exclude_dirs, extensions=(".md", ".png", ".jpg", ".txt")):
     """
     Copies specified file types [".md", ".png", ".jpg"] from `src_dir` to `dest_dir`, preserving directory structure
     and excluding given directories.
