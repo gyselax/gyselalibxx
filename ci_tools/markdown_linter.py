@@ -5,8 +5,8 @@ from itertools import chain
 from argparse import ArgumentParser
 from collections import namedtuple
 import re
-import sys,os
-
+import sys
+import os
 import numpy as np
 
 LineInfo = namedtuple('LineInfo', ('line', 'char'))
@@ -21,6 +21,9 @@ def index_to_line_info(idx, text_block):
     return LineInfo(line, char)
 
 def find_markdown_files(folder):
+    """
+    Find all.md files in a given folder and its subfolders.
+    """
     md_files = []
     for root, _, files in os.walk(folder):
         for file in files:
@@ -52,18 +55,18 @@ if __name__ == '__main__':
     parser.add_argument('input_files', type=str, nargs='*', default=[], help='The file(s) to check.')
     parser.add_argument('--fix', action='store_true', help='If this flag is used then the script will attempt to fix the file in place. Please check the output before committing')
     parser.add_argument('--folder', type=str, help='Folder to search for markdown files.')
-    
+
     args = parser.parse_args()
 
     input_files = args.input_files[:]
-    
+
     if args.folder:
         input_files.extend(find_markdown_files(args.folder))
-    
+
     if not input_files:
         print("No markdown files found.")
-        exit(1)
- 
+        sys.exit(1)
+
     success = True
     warnings = False
 
