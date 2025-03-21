@@ -1,6 +1,7 @@
 # Coding Standards
 
 ## C++ Features
+
 - We use C++17
 - We don't use raw pointers
 - We don't use plain C arrays
@@ -11,6 +12,7 @@
   - to store the result of an expression specifically specifying the type of the generated value
 
 ## Parameter passing
+
 - We take out/inout-parameters (those we modify) first
 - If there is a single out/inout-parameter, we return it
 - For in-parameters (those we use but don't modify)
@@ -22,6 +24,7 @@
   - otherwise, we take a ref: `Type&`
 
 ## Naming
+
 - we name everything using expressive English names (e.g. `temperature`) and don't use variable
   names from the equations (e.g. `u`, `u_bar_star`)
 - files, functions and variables use `snake_case`
@@ -36,6 +39,7 @@
 - capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed
 
 ## Style
+
 - We use the style specified by the `.clang-format` file using clang-format 10
 - we do not use numerical values in the code except to initialise a named constexpr documenting
   the semantic of the value
@@ -64,6 +68,7 @@ offer various overloads of this operator with different parameters but
 similar behaviour.
 
 Interfaces should:
+
 - be prefixed by `I` as in `IVlasovSolver`,
 - explicitly define a virtual destructor,
 - implicitly define constructors and assignment operators.
