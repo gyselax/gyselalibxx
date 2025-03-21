@@ -1,5 +1,7 @@
 {
   "line-length": false,
-  "MD004": { "style" : "dash" },
+  "ul-style": { "style" : "dash" },
+  "ol-prefix": false,
+  "no-duplicate-heading": { "siblings_only": true },
   "no-hard-tabs": true
 }
