@@ -98,16 +98,16 @@ void Matrix_Corner_Block::calculate_delta_to_factorise()
 
 void Matrix_Corner_Block::factorise()
 {
-    /// Factorise Q
+    // Factorise Q
     q_block->factorise();
 
-    /// Solve Q \beta = \gamma for \beta
+    // Solve Q \beta = \gamma for \beta
     q_block->solve_multiple_inplace(Abm_1_gamma);
 
-    /// Calculate \delta' = \delta - \lambda \beta
+    // Calculate \delta' = \delta - \lambda \beta
     calculate_delta_to_factorise();
 
-    /// Factorise \delta'
+    // Factorise \delta'
     delta.factorise();
 }
 
