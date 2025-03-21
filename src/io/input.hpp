@@ -46,12 +46,12 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
  *
  * The index range is initialised using information from an input yaml file.
  * If the B-splines are uniform then the information to be read is:
- * - .SplineMesh.<mesh_identifier>_min
- * - .SplineMesh.<mesh_identifier>_max
- * - .SplineMesh.<mesh_identifier>_ncells
+ * - .SplineMesh.\<mesh_identifier\>_min
+ * - .SplineMesh.\<mesh_identifier\>_max
+ * - .SplineMesh.\<mesh_identifier\>_ncells
  *
  * If the B-splines are non-uniform then the information to be read is:
- * - .SplineMesh.<mesh_identifier>_MeshFile
+ * - .SplineMesh.\<mesh_identifier\>_MeshFile
  *
  * This string indicates the name of a file which contains the knots of the bspline.
  *
@@ -120,9 +120,9 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
  * position at the boundary.
  *
  * The information to be read from the file is:
- * - .SplineMesh.<mesh_identifier>_min
- * - .SplineMesh.<mesh_identifier>_max
- * - .SplineMesh.<mesh_identifier>_ncells
+ * - .SplineMesh.\<mesh_identifier\>_min
+ * - .SplineMesh.\<mesh_identifier\>_max
+ * - .SplineMesh.\<mesh_identifier\>_ncells
  *
  * The interpolation index range is then created using the specified method.
  */

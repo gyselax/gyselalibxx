@@ -58,6 +58,7 @@ plugins:
             EXTRACT_ALL: False            # Only extract documented elements
             EXCLUDE_SYMBOLS: "detail details mapping_detail"  # Exclude internal namespaces
             EXTRACT_LOCAL_CLASSES: True   # Include local classes
+            EXAMPLE_PATH: ""              # Specify that there is no folder for example code fragments
             BUILTIN_STL_SUPPORT: True     # Enable STL class parsing
             CLANG_ASSISTED_PARSING: False # Use Clang for improved parsing
             ENUM_VALUES_PER_LINE: 1       # Display enum values one per line

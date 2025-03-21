@@ -203,7 +203,7 @@ using ConstDeriv2_OnPatch_2D
         = DConstField<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
 
 /**
- * @brief Type for MultipatchType: A constant field of the derivatives \partial_1^(n)\partial_2^(m) f(x)
+ * @brief Type for MultipatchType: A constant field of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
  * defined on the index ranges of valid n and m.
  */
 template <class Patch>
