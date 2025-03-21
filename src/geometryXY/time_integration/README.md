@@ -17,7 +17,7 @@ Applied to this equations system, we have, writing $`\{t^n\}_n \text{ the time d
 
 For $n\geq 0$,
 
-* Advect on a half time step:
+- Advect on a half time step:
 
  1. From $f^n$, we compute $\phi^n$ with the Poisson-like equation (FFTPoissonSolver);
 
@@ -25,7 +25,7 @@ For $n\geq 0$,
 
  3. From $f^n \text{ and } E^n$, we compute $f^{n+1/2}$ by advecting (BslAdvection1D) on $\frac{dt}{2}$;
 
-* Advect on a full time step:
+- Advect on a full time step:
 
  4. From $f^{n+1/2}$, we compute $\phi^{n+1/2}$ with the Poisson-like equation (FFTPoissonSolver);
 

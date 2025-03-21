@@ -4,8 +4,7 @@ The operator implemented here is a previous step to the advection operator.
 It computes the advection field along the axes in the physical domain or the axes in the logical domain.
 
 Currently, the implemented case is:
-
-* Guiding centre equations system.
+- Guiding centre equations system.
 
 ## Guiding centre case
 
@@ -26,14 +25,12 @@ with $`\rho`$ the density, $`\phi`$ the electrostatic potential and $`E`$ the el
 
 The AdvectionFieldFinder computes the advection field $`A`$ from the electrical field $`\phi`$ returned by the PolarSplineFEMPoissonLikeSolver.
 It has two types of `operator()`:
-
-* one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
-* and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
+- one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
+- and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
-
-* a Field of values of the solution on the mesh points of the grid;
-* a PolarSplineMem representation of the solution.
+- a Field of values of the solution on the mesh points of the grid;
+- a PolarSplineMem representation of the solution.
 
 The AdvectionFieldFinder can handle as input the two forms.
 If a Field is given as input, it computes the spline representation (on the cross-product of two 1D bases) using a SplineBuilder2D.
@@ -49,7 +46,7 @@ But as the BslAdvectionRTheta operator advects in the physical domain, it is rec
 Thanks to the spline representation, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are computed.
 The computation of the electrical field can be ill-defined around the O-point, so we treat this area separately.
 
-* If $`r > \varepsilon`$, we use
+- If $`r > \varepsilon`$, we use
 
 ```math
 \nabla \phi
@@ -83,7 +80,7 @@ A = E\wedge e_z
 \end{bmatrix}. 
 ```
 
-* If $`r \leq \varepsilon`$, we linearise. The method is detailed in [Zoni et al. (2019)](#zoni). We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
+- If $`r \leq \varepsilon`$, we linearise. The method is detailed in [Zoni et al. (2019)](#zoni). We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
 
 ```math
 \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
@@ -132,17 +129,15 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here.
 
 #### General coordinates system
-
-* In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by
+- In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by
 
 ```math
 \nabla f = \sum_i \partial_{q_i} f b^i
 ```
 
 with
-
-* $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)`$,
-* and $`b^j`$ the unnormalised local covariant vectors.
+- $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)`$,
+- and $`b^j`$ the unnormalised local covariant vectors.
 
 In 2D with $`(q_1, q_2) = (r,\theta)`$ and $`(x_1, x_2) = (x,y)`$, it can be rewritten as the following matrix system
 
@@ -170,8 +165,7 @@ J^{-T}
 #### Application to the advection field
 
 The gradient is expressed in the *covariant* basis. We express the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$.
-
-* In the [contravariant basis](#docs_mathematical_and_physical_coneventions) $`(e_r, e_\theta)`$,
+- In the [contravariant basis](#docs_mathematical_and_physical_coneventions) $`(e_r, e_\theta)`$,
 we compute the electric field,
 
 ```math
@@ -288,4 +282,4 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
 
 # Contents
 
-* advection\_field\_rtheta.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation.
+- advection\_field\_rtheta.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation.

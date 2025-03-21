@@ -29,16 +29,14 @@ The dynamics of the motion are governed by the following equation.
 ```
 
 with
-
-* $`f`$ the function to advect. It is defined on $`\Omega`$ domain and the time dimension;
-* $`A`$ the advection field. It could be defined on a subdomain $`\Omega'\subset \Omega`$;
-* and $`x_i`$ a given direction. The advection field domain has to be defined on this dimension for the time integration method.
+- $`f`$ the function to advect. It is defined on $`\Omega`$ domain and the time dimension;
+- $`A`$ the advection field. It could be defined on a subdomain $`\Omega'\subset \Omega`$;
+- and $`x_i`$ a given direction. The advection field domain has to be defined on this dimension for the time integration method.
 
 ### Example of use
 
 Here are some examples of equation types the BslAdvection1D operator can solve:
-
-* Equation on a 1D domain (and time dimension):
+- Equation on a 1D domain (and time dimension):
 
 ```math
     \partial_t f(t,x) + A_x(x)\partial_{x}f(t,x) = 0,
@@ -53,7 +51,7 @@ DFieldX A(idx_range_x);
 using IDimInterest = IDimX;
 ```
 
-* Equation on a 2D domain (and time dimension):
+- Equation on a 2D domain (and time dimension):
 
 ```math
     \partial_t f(t,x,y) + A_x(x,y)\partial_{x}f(t,x,y) = 0,
@@ -67,7 +65,7 @@ DFieldXY A(idx_range_xy);
 using IDimInterest = IDimX;
 ```
 
-* Equation on a 2Dx2V domain (and time dimension):
+- Equation on a 2Dx2V domain (and time dimension):
 
 ```math
     \partial_t f(t,x,y,v_x,v_y) + A_x(x,y)\partial_{x}f(t,x,y,v_x,v_y) = 0,
@@ -81,7 +79,7 @@ DFieldXY A(idx_range_xy);
 using IDimInterest = IDimX;
 ```
 
-* Equation on a 1Dx1V domain (and time dimension):
+- Equation on a 1Dx1V domain (and time dimension):
 
 ```math
 \begin{aligned}
@@ -106,7 +104,7 @@ or
 using IDimInterest = IDimVx;
 ```
 
-* Equation on a 1Dx1V domain with species dimension (and time dimension):
+- Equation on a 1Dx1V domain with species dimension (and time dimension):
 
 ```math
 \begin{aligned}
@@ -125,13 +123,12 @@ using IDimInterest = IDimX;
 ### Parameters
 
 The operator takes as templated parameters:
-
-* IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;
-* AdvectionDomain: an advection domain, which refers to the domain where the advection field is defined. It has to contain the dimension of interest for the interpolation of the advection field in the time integration method;
-* FunctionDomain: the full domain where the function we want to advect is defined;
-* AdvectionFieldBuilder: a spline builder type for the advection field.
-* AdvectionFieldEvaluator: a spline evaluator type for the advection field.
-* TimeStepper: a time integration method (see [timestepper](./../timestepper/README.md)) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Field of coordinates of the dimension of interest defined on the advection field domain.
+- IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;
+- AdvectionDomain: an advection domain, which refers to the domain where the advection field is defined. It has to contain the dimension of interest for the interpolation of the advection field in the time integration method;
+- FunctionDomain: the full domain where the function we want to advect is defined;
+- AdvectionFieldBuilder: a spline builder type for the advection field.
+- AdvectionFieldEvaluator: a spline evaluator type for the advection field.
+- TimeStepper: a time integration method (see [timestepper](./../timestepper/README.md)) to solve the characteristic equation. It has to be defined on the advection field domain. The feet have to be a Field of coordinates of the dimension of interest defined on the advection field domain.
 
 **Remark/Warning:** the BslAdvection1D operator is built with builder and evaluator for the advection field and interpolator for the function we want to advect. Theses operators have to be defined on the same domain as the advection field and function. For instance, if the advection field and/or the function are defined on the species dimension, then the interpolators have to contain the species dimension in its batched dimensions (see tests in the `tests/advection/` folder).
 
@@ -170,8 +167,8 @@ The characteristic feet are calculated using a time integration method. For deta
 
 There are two advection domains to consider:
 
-* the physical domain;
-* the pseudo-Cartesian domain.
+- the physical domain;
+- the pseudo-Cartesian domain.
 
 The logical domain is not used as it would be hard to calculate the feet close to the O-point in this domain.
 

@@ -1,9 +1,8 @@
 # Geometry RTheta
 
 The geometry folder contains a helper file `geometry.hpp` which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with
-
-* 2 spatial dimensions (denoted `R` and `Theta`) in polar coordinates;
-* 2 spatial dimensions (denoted `X` and `Y`) in Cartesian coordinates.
+- 2 spatial dimensions (denoted `R` and `Theta`) in polar coordinates;
+- 2 spatial dimensions (denoted `X` and `Y`) in Cartesian coordinates.
 
 We suppose $`r`$ positive non periodic, $`\theta`$ periodic, $`x`$ and $`y`$ non periodic. We denote in the code `Theta` the polar coordinate $`\theta`$.
 The polar coordinates represent a **logical domain**, and the Cartesian coordinates the **physical domain**. Some mappings from the logical domain to the physical domain $`(r,\theta) \mapsto (x,y)`$ are defined in `src/mapping/`.
