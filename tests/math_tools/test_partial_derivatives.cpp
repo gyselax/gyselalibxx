@@ -123,6 +123,30 @@ public:
     using DFieldMemType = DFieldMem<IdxRangeFull>;
     using DFieldType = DField<IdxRangeFull>;
 
+protected:
+    CoordDDim const m_ddim_min;
+    CoordDDim const m_ddim_max;
+    CoordODim const m_odim_min;
+    CoordODim const m_odim_max;
+
+    IdxStepDDim const m_ncells_ddim;
+    IdxStepODim const m_ncells_odim;
+
+public:
+    PartialDerivativeTest(
+            double const ddim_min,
+            double const ddim_max,
+            double const odim_min,
+            double const odim_max)
+        : m_ddim_min(ddim_min)
+        , m_ddim_max(ddim_max)
+        , m_odim_min(odim_min)
+        , m_odim_max(odim_max)
+        , m_ncells_ddim(N_ddim)
+        , m_ncells_odim(N_odim)
+    {
+    }
+
     template <class FunctionToDifferentiate>
     double compute_max_error(
             IdxRangeFull const& idxrange,
@@ -243,39 +267,30 @@ private:
     ddc::ConstantExtrapolationRule<DDim> const m_bv_min;
     ddc::ConstantExtrapolationRule<DDim> const m_bv_max;
 
-    CoordDDim const m_ddim_min;
-    CoordDDim const m_ddim_max;
-    CoordODim const m_odim_min;
-    CoordODim const m_odim_max;
-
-    IdxStepDDim const m_ncells_ddim;
-    IdxStepODim const m_ncells_odim;
-
 public:
     PartialDerivativeTestSpline1D(
             double const ddim_min,
             double const ddim_max,
             double const odim_min,
             double const odim_max)
-        : m_bv_min(CoordDDim(ddim_min))
+        : base_type(ddim_min, ddim_max, odim_min, odim_max)
+        , m_bv_min(CoordDDim(ddim_min))
         , m_bv_max(CoordDDim(ddim_max))
-        , m_ddim_min(ddim_min)
-        , m_ddim_max(ddim_max)
-        , m_odim_min(odim_min)
-        , m_odim_max(odim_max)
-        , m_ncells_ddim(N_ddim)
-        , m_ncells_odim(N_odim)
     {
-        std::vector<CoordDDim> point_sampling_ddim
-                = build_random_non_uniform_break_points(m_ddim_min, m_ddim_max, m_ncells_ddim);
+        std::vector<CoordDDim> point_sampling_ddim = build_random_non_uniform_break_points(
+                base_type::m_ddim_min,
+                base_type::m_ddim_max,
+                base_type::m_ncells_ddim);
 
         ddc::init_discrete_space<BSplinesDDim>(point_sampling_ddim);
         ddc::init_discrete_space<GridDDim>(
                 SplineInterpPointsDDim::template get_sampling<GridDDim>());
 
 
-        std::vector<CoordODim> point_sampling_odim
-                = build_random_non_uniform_break_points(m_odim_min, m_odim_max, m_ncells_odim);
+        std::vector<CoordODim> point_sampling_odim = build_random_non_uniform_break_points(
+                base_type::m_odim_min,
+                base_type::m_odim_max,
+                base_type::m_ncells_odim);
 
         ddc::init_discrete_space<BSplinesODim>(point_sampling_odim);
         ddc::init_discrete_space<GridODim>(
@@ -329,39 +344,31 @@ private:
     using typename base_type::IdxRangeFull;
     using typename base_type::IdxRangeODim;
 
-    CoordDDim const m_ddim_min;
-    CoordDDim const m_ddim_max;
-    CoordODim const m_odim_min;
-    CoordODim const m_odim_max;
-    IdxStepDDim const m_ncells_ddim;
-    IdxStepODim const m_ncells_odim;
-
 public:
     PartialDerivativeTestFDM(
             double const ddim_min,
             double const ddim_max,
             double const odim_min,
             double const odim_max)
-        : m_ddim_min(ddim_min)
-        , m_ddim_max(ddim_max)
-        , m_odim_min(odim_min)
-        , m_odim_max(odim_max)
-        , m_ncells_ddim(N_ddim)
-        , m_ncells_odim(N_odim)
+        : base_type(ddim_min, ddim_max, odim_min, odim_max)
     {
-        std::vector<CoordDDim> point_sampling_ddim
-                = build_random_non_uniform_break_points(m_ddim_min, m_ddim_max, m_ncells_ddim);
+        std::vector<CoordDDim> point_sampling_ddim = build_random_non_uniform_break_points(
+                base_type::m_ddim_min,
+                base_type::m_ddim_max,
+                base_type::m_ncells_ddim);
         ddc::init_discrete_space<GridDDim>(point_sampling_ddim);
 
-        std::vector<CoordODim> point_sampling_odim
-                = build_random_non_uniform_break_points(m_odim_min, m_odim_max, m_ncells_odim);
+        std::vector<CoordODim> point_sampling_odim = build_random_non_uniform_break_points(
+                base_type::m_odim_min,
+                base_type::m_odim_max,
+                base_type::m_ncells_odim);
         ddc::init_discrete_space<GridODim>(point_sampling_odim);
     }
 
     double const operator()(double& delta_ddim) const
     {
-        IdxRangeDDim idxrange_ddim(Idx<GridDDim>(0), m_ncells_ddim + 1);
-        IdxRangeODim idxrange_odim(Idx<GridODim>(0), m_ncells_odim + 1);
+        IdxRangeDDim idxrange_ddim(Idx<GridDDim>(0), base_type::m_ncells_ddim + 1);
+        IdxRangeODim idxrange_odim(Idx<GridODim>(0), base_type::m_ncells_odim + 1);
         IdxRangeFull idxrange(idxrange_ddim, idxrange_odim);
 
         CentralFDMPartialDerivativeCreator<typename base_type::IdxRangeFull, DDim> const
