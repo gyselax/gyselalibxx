@@ -8,10 +8,11 @@ There are two types of documentation which are described in detail below:
 
 The documentation can be built locally by running the following commands from the root directory:
 ```
-python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc build/
 cd docs
 mkdocs build
 ```
+
 Make sure you have installed `mkdocs` and the requirements:
 ```
 pip install -r docs/requirements.txt
