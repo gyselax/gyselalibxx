@@ -51,7 +51,8 @@ Prediction:
  2. From $\phi^n$, we compute $E^n$ by deriving (IQNSolver);
 
  3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRTheta) on $dt$;
-  - We write $X^P$ the characteristic feet such that $`\partial_t X^P = A^n(X^n)`$.
+
+- We write $X^P$ the characteristic feet such that $`\partial_t X^P = A^n(X^n)`$.
 
 Correction:
 
@@ -72,7 +73,8 @@ Prediction:
  2. From $\phi^n$, we compute $E^n$ by deriving (IQNSolver);
 
  3. From $\rho^n \text{ and } A^n$, we compute $\rho^P$ by advecting (IAdvectionRTheta) on $\frac{dt}{2}$;
-  - We write $X^P$ the characteristic feet such that it is the result of the implicit method:
+
+- We write $X^P$ the characteristic feet such that it is the result of the implicit method:
 
 ```math
 \partial_t X^k = \frac{A^n(X^n) + A^n(X^{k-1})}{2},  \qquad  X^k = X^n - \frac{dt}{2} \partial_t X^k.
@@ -85,7 +87,8 @@ Correction:
  5. From $\phi^{P}$, we compute $E^{P}$ by deriving (IQNSolver);
 
  6. From $\rho^n \text{ and } A^{P}$, we compute $\rho^{C} = \rho^{n+1}$ by advecting (IAdvectionRTheta) on $dt$.
-   - We write $X^C$ the characteristic feet such that it is the result of the implicit method:
+
+- We write $X^C$ the characteristic feet such that it is the result of the implicit method:
 
 ```math
 \partial_t X^k = \frac{A^P(X^n) + A^P(X^{k-1})}{2},  \qquad  X^k = X^n - dt \partial_t X^k.

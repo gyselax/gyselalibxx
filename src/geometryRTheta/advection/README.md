@@ -72,10 +72,10 @@ $X^{n+1} = X^{k+1}$ once converged.
 
 - Scheme:
 $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
- 	- with
-  		- $`k_1 =  A^{n+1}(X^{n+1})`$,
-  		- $`k_2 =  A{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)`$,
-  		- $`k_3 =  A{n+1/2} (X^{n+1} - dt( 2k_2 - k_1))`$.
+  - with
+    - $`k_1 =  A^{n+1}(X^{n+1})`$,
+    - $`k_2 =  A{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)`$,
+    - $`k_3 =  A{n+1/2} (X^{n+1} - dt( 2k_2 - k_1))`$.
 
 - Convergence order : 3.
 
@@ -83,11 +83,11 @@ $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 4 k_2 + k_3 \right)`$
 
 - Scheme:
 $`X^n = X^{n+1} - \frac{dt}{6}  \left( k_1 + 2 k_2 + 2 k_3  + k_4\right)`$
- 	- with
-  		- $`k_1 =  A^{n+1}(X^{n+1})`$,
-  		- $`k_2 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)`$,
-  		- $`k_3 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_2)`$,
-  		- $`k_4 =  A^{n} (X^{n+1} - dt k_3)`$.
+  - with
+    - $`k_1 =  A^{n+1}(X^{n+1})`$,
+    - $`k_2 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_1)`$,
+    - $`k_3 =  A^{n+1/2} (X^{n+1} - \frac{dt}{2} k_2)`$,
+    - $`k_4 =  A^{n} (X^{n+1} - dt k_3)`$.
 
 - Convergence order : 4.
 

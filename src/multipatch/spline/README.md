@@ -85,6 +85,7 @@ The coordinates are not enforced to be physically located on the storing patch.
 
 Similarly to `SplineEvaluator2D`, methods to get the derivatives are implemented. No extrapolation rules are given, so `MultipatchSplineEvaluator2D` will throw an exception error if we give a coordinate outside of the domain.
 The methods implemented are
+
 - `operator()` to compute a single value or fields of values.
 - `deriv_dim_1()`, `deriv_dim_2()` to compute derivatives on the first or second dimension on a single coordinates or fields of coordinates.
 - `deriv<InterestDim>()` to compute derivatives on the first or second dimension on a single coordinates only.

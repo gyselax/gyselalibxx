@@ -73,6 +73,7 @@ The equilibrium is determined by the eigenvalue problem of finding $(\sigma, \ph
 with given $f$  such that $f'(\phi) \neq 0$. See Edoardo Zoni's article [1] for more details.
 
 The algorithm for given initial data $(\sigma^0, \phi^0)$ is the following:
+
 - compute the density: $\rho^{i} = \sigma^{i-1} f(\phi^{i-1})$,
 - compute a temporary electrical potential: $`- \nabla\cdot\nabla \phi_*^{i} = \rho^i`$,
 - compute the coefficient:

@@ -29,6 +29,7 @@ The dynamics of the motion are governed by the following equation.
 ```
 
 with
+
 - $`f`$ the function to advect. It is defined on $`\Omega`$ domain and the time dimension;
 - $`A`$ the advection field. It could be defined on a subdomain $`\Omega'\subset \Omega`$;
 - and $`x_i`$ a given direction. The advection field domain has to be defined on this dimension for the time integration method.
@@ -36,6 +37,7 @@ with
 ### Example of use
 
 Here are some examples of equation types the BslAdvection1D operator can solve:
+
 - Equation on a 1D domain (and time dimension):
 
 ```math
@@ -123,6 +125,7 @@ using IDimInterest = IDimX;
 ### Parameters
 
 The operator takes as templated parameters:
+
 - IDimInterest: a dimension of interest (or advection dimension) which refers to the dimension along which we advect the function;
 - AdvectionDomain: an advection domain, which refers to the domain where the advection field is defined. It has to contain the dimension of interest for the interpolation of the advection field in the time integration method;
 - FunctionDomain: the full domain where the function we want to advect is defined;

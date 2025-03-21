@@ -4,6 +4,7 @@ The operator implemented here is a previous step to the advection operator.
 It computes the advection field along the axes in the physical domain or the axes in the logical domain.
 
 Currently, the implemented case is:
+
 - Guiding centre equations system.
 
 ## Guiding centre case
@@ -25,10 +26,12 @@ with $`\rho`$ the density, $`\phi`$ the electrostatic potential and $`E`$ the el
 
 The AdvectionFieldFinder computes the advection field $`A`$ from the electrical field $`\phi`$ returned by the PolarSplineFEMPoissonLikeSolver.
 It has two types of `operator()`:
+
 - one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
 - and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$.
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
+
 - a Field of values of the solution on the mesh points of the grid;
 - a PolarSplineMem representation of the solution.
 
@@ -129,6 +132,7 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here.
 
 #### General coordinates system
+
 - In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by
 
 ```math
@@ -136,6 +140,7 @@ Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are al
 ```
 
 with
+
 - $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)`$,
 - and $`b^j`$ the unnormalised local covariant vectors.
 
@@ -165,6 +170,7 @@ J^{-T}
 #### Application to the advection field
 
 The gradient is expressed in the *covariant* basis. We express the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$.
+
 - In the [contravariant basis](#docs_mathematical_and_physical_coneventions) $`(e_r, e_\theta)`$,
 we compute the electric field,
 

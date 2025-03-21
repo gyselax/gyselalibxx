@@ -79,7 +79,7 @@ The PolarSplineFEMPoissonLikeSolver is tested on a circular mapping (CircularToC
     - with $C = 2^{12}1e-4$ and $m = 11$;
   - Cartesian solution: $\phi(x,y) = C (1+r(x,y))^6  (1 - r(x,y))^6 \cos(2\pi x) \sin(2\pi y)$,
     - with  $C = 2^{12}1e-4$.
-   
+
 ## References
 
 [1] Emily Bourne, "Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code". December 2022.

@@ -1,6 +1,7 @@
 # Geometry RTheta
 
 The geometry folder contains a helper file `geometry.hpp` which provides shortcuts to the types needed to define the specific geometry. In this case the geometry is a simulation with
+
 - 2 spatial dimensions (denoted `R` and `Theta`) in polar coordinates;
 - 2 spatial dimensions (denoted `X` and `Y`) in Cartesian coordinates.
 
