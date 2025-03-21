@@ -1,3 +1,5 @@
 {
-  "line-length": false
+  "line-length": false,
+  "MD004": { "style" : "dash" },
+  "no-hard-tabs": true
 }
