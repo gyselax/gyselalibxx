@@ -231,15 +231,14 @@ private:
         });
 
         // > computation of the phi derivatives
-        host_t<DFieldMemRTheta> deriv_r_phi(grid);
-        host_t<DFieldMemRTheta> deriv_theta_phi(grid);
+        host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> deriv_phi(grid);
 
         evaluator.deriv_dim_1(
-                get_field(deriv_r_phi),
+                ddcHelper::get<R_cov>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
-                get_field(deriv_theta_phi),
+                ddcHelper::get<Theta_cov>(deriv_phi),
                 get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
@@ -253,18 +252,17 @@ private:
             if (r > m_epsilon) {
                 CoordRTheta const coord_rtheta(r, th);
 
-                Matrix_2x2 inv_J = inv_jacobian_matrix(coord_rtheta);
+                DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_J
+                        = inv_jacobian_matrix(coord_rtheta);
 
-                // Gradient of phi in the physical domain (Cartesian domain)
-                // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
-                double const grad_x_phi = deriv_r_phi(irtheta) * inv_J[0][0]
-                                          + deriv_theta_phi(irtheta) * inv_J[1][0];
-                double const grad_y_phi = deriv_r_phi(irtheta) * inv_J[0][1]
-                                          + deriv_theta_phi(irtheta) * inv_J[1][1];
+                // Gradient of phi in the physical index range (Cartesian index range)
+                // grad_{x,y} phi = J^{-T} grad_{r,theta} phi
+                DVector<X, Y> grad_phi
+                        = tensor_mul(index<'j', 'i'>(inv_J), index<'j'>(deriv_phi(irtheta)));
 
                 // E = -grad phi
-                ddcHelper::get<X>(electric_field)(irtheta) = -grad_x_phi;
-                ddcHelper::get<Y>(electric_field)(irtheta) = -grad_y_phi;
+                ddcHelper::get<X>(electric_field)(irtheta) = -ddcHelper::get<X>(grad_phi);
+                ddcHelper::get<Y>(electric_field)(irtheta) = -ddcHelper::get<Y>(grad_phi);
 
             } else {
                 // Linearisation of the electric field
@@ -290,48 +288,38 @@ private:
 
                 double const determinant = dr_x_1 * dr_y_2 - dr_x_2 * dr_y_1;
 
-                double const deriv_x_phi_0
-                        = (dr_y_2 * deriv_r_phi_1 - dr_y_1 * deriv_r_phi_2) / determinant;
-                double const deriv_y_phi_0
-                        = (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant;
+                DVector<X, Y> deriv_phi_0(
+                        (dr_y_2 * deriv_r_phi_1 - dr_y_1 * deriv_r_phi_2) / determinant,
+                        (-dr_x_2 * deriv_r_phi_1 + dr_x_1 * deriv_r_phi_2) / determinant);
 
                 // E = -grad phi
-                double const electric_field_x_0 = -deriv_x_phi_0;
-                double const electric_field_y_0 = -deriv_y_phi_0;
-
-
+                DVector<X, Y> electric_field_0 = -deriv_phi_0;
 
                 // --- Value at r = m_epsilon:
                 CoordRTheta const coord_rtheta_epsilon(m_epsilon, th);
 
-                Matrix_2x2 inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
+                Tensor inv_J_eps = inv_jacobian_matrix(coord_rtheta_epsilon);
 
-                double const deriv_r_phi_epsilon = evaluator.deriv_dim_1(
-                        coord_rtheta_epsilon,
-                        get_const_field(electrostatic_potential_coef));
-                double const deriv_theta_phi_epsilon = evaluator.deriv_dim_2(
-                        coord_rtheta_epsilon,
-                        get_const_field(electrostatic_potential_coef));
+                DVector<R_cov, Theta_cov> deriv_phi_epsilon(
+                        evaluator.deriv_dim_1(
+                                coord_rtheta_epsilon,
+                                get_const_field(electrostatic_potential_coef)),
+                        evaluator.deriv_dim_2(
+                                coord_rtheta_epsilon,
+                                get_const_field(electrostatic_potential_coef)));
 
                 // Gradient of phi in the physical domain (Cartesian domain)
                 // (dx phi, dy phi) = J^{-T} (dr phi, dtheta phi)
-                double const grad_x_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][0]
-                                                  + deriv_theta_phi_epsilon * inv_J_eps[1][0];
-                double const grad_y_phi_epsilon = deriv_r_phi_epsilon * inv_J_eps[0][1]
-                                                  + deriv_theta_phi_epsilon * inv_J_eps[1][1];
-
                 // E = -grad phi
-                double const electric_field_x_epsilon = -grad_x_phi_epsilon;
-                double const electric_field_y_epsilon = -grad_y_phi_epsilon;
+                DVector<X, Y> electric_field_epsilon
+                        = -tensor_mul(index<'j', 'i'>(inv_J_eps), index<'j'>(deriv_phi_epsilon));
 
+                DVector<X, Y> E = electric_field_0 * (1 - r / m_epsilon)
+                                  + electric_field_epsilon * r / m_epsilon;
 
                 // --- Linearisation:
-                ddcHelper::get<X>(electric_field)(irtheta)
-                        = electric_field_x_0 * (1 - r / m_epsilon)
-                          + electric_field_x_epsilon * r / m_epsilon;
-                ddcHelper::get<Y>(electric_field)(irtheta)
-                        = electric_field_y_0 * (1 - r / m_epsilon)
-                          + electric_field_y_epsilon * r / m_epsilon;
+                ddcHelper::get<X>(electric_field)(irtheta) = ddcHelper::get<X>(E);
+                ddcHelper::get<Y>(electric_field)(irtheta) = ddcHelper::get<Y>(E);
             }
 
             // > computation of the advection field
@@ -488,8 +476,8 @@ private:
 
             DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G
                     = metric_tensor.inverse(coord_rtheta);
-            std::array<std::array<double, 2>, 2> J;
-            m_mapping.jacobian_matrix(coord_rtheta, J);
+            DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> J
+                    = m_mapping.jacobian_matrix(coord_rtheta);
             double const jacobian = m_mapping.jacobian(coord_rtheta);
 
             // E = -grad phi
@@ -498,14 +486,18 @@ private:
 
             // A (see README for the expression)
             ddcHelper::get<R>(advection_field_rtheta)(irtheta)
-                    = (J[0][0] * J[0][1] + J[1][0] * J[1][1]) * ddcHelper::get<R>(electric_field)
-                              / jacobian
-                      + (J[1][1] * J[1][1] + J[0][1] * J[0][1])
+                    = (ddcHelper::get<X, R_cov>(J) * ddcHelper::get<X, Theta_cov>(J)
+                       + ddcHelper::get<Y, R_cov>(J) * ddcHelper::get<Y, Theta_cov>(J))
+                              * ddcHelper::get<R>(electric_field) / jacobian
+                      + (ddcHelper::get<Y, Theta_cov>(J) * ddcHelper::get<Y, Theta_cov>(J)
+                         + ddcHelper::get<X, Theta_cov>(J) * ddcHelper::get<X, Theta_cov>(J))
                                 * ddcHelper::get<Theta>(electric_field) / jacobian;
             ddcHelper::get<Theta>(advection_field_rtheta)(irtheta)
-                    = -(J[0][0] * J[0][0] + J[1][0] * J[1][0]) * ddcHelper::get<R>(electric_field)
-                              / jacobian
-                      - (J[0][0] * J[0][1] + J[1][0] * J[1][1])
+                    = -(ddcHelper::get<X, R_cov>(J) * ddcHelper::get<X, R_cov>(J)
+                        + ddcHelper::get<Y, R_cov>(J) * ddcHelper::get<Y, R_cov>(J))
+                              * ddcHelper::get<R>(electric_field) / jacobian
+                      - (ddcHelper::get<X, R_cov>(J) * ddcHelper::get<X, Theta_cov>(J)
+                         + ddcHelper::get<Y, R_cov>(J) * ddcHelper::get<Y, Theta_cov>(J))
                                 * ddcHelper::get<Theta>(electric_field) / jacobian;
         });
 
