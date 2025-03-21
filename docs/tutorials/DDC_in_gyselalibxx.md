@@ -38,7 +38,7 @@ Coord<R, Theta> slice_coord = ddc::select<R, Theta>(full_coord);
 
 Coordinates can be combined using operators. For example, let us consider three vectors $P$, $Q$, and $R$ defined on a cartesian space $(x,y)$:
 
-![Vector Image](./images/Coordinate_operations.jpg)
+![Vector Image](../images/Coordinate_operations.jpg)
 
 The vector $Q$ can be written as $Q=R-P$. Similarly in the code, we would have:
 ```cpp

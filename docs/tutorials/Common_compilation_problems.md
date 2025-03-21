@@ -26,8 +26,8 @@ Luckily it is simple to avoid the class being captured. It is sufficient to defi
 
 E.g. for the following code:
 ```cpp
-double my_function() const 
-{   
+double my_function() const
+{
     return ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             m_class_field_x.domain(),
@@ -36,9 +36,9 @@ double my_function() const
 ```
 where `m_class_field_x` is a class member function the code should be:
 ```cpp
-double my_function() const 
+double my_function() const
 {
-    DSpanX class_field_x_proxy = m_class_field_x.span_view();   
+    DSpanX class_field_x_proxy = m_class_field_x.span_view();
     return ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             class_field_x_proxy.domain(),
@@ -113,7 +113,7 @@ Kokkos is bound by restrictions coming from various different low level language
 When this rule is not followed you will see the following error message:
 ```
 <PATH_TO_FILE>(<LINE_NUMBER>): error: The enclosing parent function ("<FUNCTION>") for an extended __host__ __device__ lambda cannot have private or protected access within its class
-          detected during instantiation of "<CLASS>::<CLASS>(Argtypes)" 
+          detected during instantiation of "<CLASS>::<CLASS>(Argtypes)"
 ```
 
 ## A nonstatic member reference must be relative to a specific object

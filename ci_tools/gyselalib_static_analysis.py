@@ -760,7 +760,7 @@ def check_exec_space_usage(file):
                     if scope['exec_space'] == 'DefaultExecutionSpace' and (v['type'] == 'auto' or 'FieldMem' in v['type']):
                         msg = ''
                         if v['type'] == 'auto':
-                            msg = "An auto type may be either a Field or a FieldMem depending on compilation paramaters. "
+                            msg = "An auto type may be either a Field or a FieldMem depending on compilation parameters. "
                         msg += ("The FieldMem copy operator is deleted to avoid accidental memory allocation. "
                                 "You probably do not want a copy of the FieldMem allocated on each GPU thread. "
                                 "Please use a Field to access the data that has already been allocated.")
@@ -791,7 +791,7 @@ def check_exec_space_usage(file):
                     report_error(FATAL, file, relevant_code[idx].attrib['linenr'], msg)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser("A static analysis scipt to search for common errors using cppcheck")
+    parser = argparse.ArgumentParser("A static analysis script to search for common errors using cppcheck")
     parser.add_argument('files', type=str, nargs='*')
     parser.add_argument('--errors-only', action='store_true')
     parser.add_argument('--home-dir', type=Path, default=None)
