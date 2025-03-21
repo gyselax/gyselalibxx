@@ -9,7 +9,7 @@ There are two types of documentation which are described in detail below:
 
 The documentation can be built locally by running the following commands from the root directory:
 
-```
+```bash
 cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
 cmake --build build-docs
 ```
@@ -39,7 +39,7 @@ Where it is helpful references to other parts of the code may also be added.
 
 Code documentation blocks must be notated in a multi-line comment beginning with `/**`. For example:
 
-```
+```cpp
 /**
  * Here is a multi-line comment which will be noticed by Doxygen.
  */
@@ -69,7 +69,7 @@ If other parts of the code are relevant to your description or may be relevant i
 
 ### Example
 
-```
+```cpp
 /**
  * @brief A class which provides an interpolating function.
  *
@@ -125,7 +125,7 @@ If the folder doesn't contain a `.private` file (indicating that the folder is n
 By default Doxygen only documents classes and class methods. In order to also document the functions in a file an additional descriptor must be added to the top of that file.
 The following is an example:
 
-```
+```cpp
 /**
  * @file my_file.hpp
  * Description of file.
@@ -140,25 +140,25 @@ Mathematical notation can be used in Doxygen output.
 
 In Markdown files it should be blocked with `$` commands. E.g:
 
-```
+```markdown
 $a \ne b$
 ```
 
 However if the equation includes characters which are used for markdown highlighting it is safer to use the following syntax:
 
-```
+```markdown
 $`a \ne b`$
 ```
 
 An equation can also be printed on its own line using `$$` commands. The syntax must be one of the following:
 
-```
+```markdown
 $$a \ne b$$
 ```
 
 or
 
-```
+```markdown
 $$
 a \ne b
 $$

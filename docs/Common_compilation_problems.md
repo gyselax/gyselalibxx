@@ -18,7 +18,7 @@ The only valid capture expression is capture by copy (i.e. everything used in th
 
 When this rule is not followed you will see the following error message:
 
-```
+```bash
 ${GYSELALIBXX_HOME}/vendor/kokkos/core/src/Cuda/Kokkos_Cuda_KernelLaunch.hpp(345): error: The closure type for a lambda ("lambda [](ArgTypes)->void", defined at <PATH_TO_FILE>:<LINE_NUMBER>) cannot be used in the template argument type of a __global__ function template instantiation, unless the lambda is defined within a __device__ or __global__ function, or the flag '-extended-lambda' is specified and the lambda is an extended lambda (a __device__ or __host__ __device__ lambda defined within a __host__ or __host__ __device__ function)
 ```
 
@@ -59,7 +59,7 @@ Unfortunately the error message is only a warning so if this is missed the code 
 
 When this rule is not followed you will see the following error message:
 
-```
+```bash
 <PATH_TO_FILE>(<LINE_NUMBER>): warning #20178-D: Implicit capture of 'this' in extended lambda expression
 ```
 
@@ -83,20 +83,20 @@ When this rule is not followed you may see a large number of errors. The followi
 
 The first error to appear is not very explicit. It simply indicates that the lvalue (the value on the left hand side of the assignment) has an unknown type. As a result the compiler does not know how to assign a value to it:
 
-```
+```bash
 <PATH_TO_FILE>(<LINE_NUMBER>): error: expression must be a modifiable lvalue
 ```
 
 The next error highlights the problem. It says that a `ddc::Chunk` cannot be copied using a constructor. This is because such an operation would allocate memory and this is not what is wanted.
 
-```
+```bash
 <PATH_TO_FILE>(<LINE_NUMBER>): error: function "ddc::Chunk<ElementType, ddc::DiscreteDomain<DDims...>, Allocator>::Chunk(const ddc::Chunk<ElementType, ddc::DiscreteDomain<DDims...>, Allocator> &) [with ElementType=double, DDims=<Dim1, Dim2,...>, Allocator=ddc::KokkosAllocator<double, Kokkos::CudaSpace>]"
 ${GYSELALIBXX_HOME}/vendor/ddc/include/ddc/chunk.hpp(109): here cannot be referenced -- it is a deleted function
 ```
 
 Similarly the following error then says that the lambda function itself cannot be created because the function will not work without first capturing the chunk.
 
-```
+```bash
 ${GYSELALIBXX_HOME}/vendor/ddc/include/ddc/parallel_for_each.hpp(34): error: function "lambda [](ArgType)->void::<unnamed>(const lambda [](ArgType)->void &)" (declared implicitly) cannot be referenced -- it is a deleted function
 ```
 
@@ -124,7 +124,7 @@ Kokkos is bound by restrictions coming from various different low level language
 
 When this rule is not followed you will see the following error message:
 
-```
+```bash
 <PATH_TO_FILE>(<LINE_NUMBER>): error: The enclosing parent function ("<FUNCTION>") for an extended __host__ __device__ lambda cannot have private or protected access within its class
           detected during instantiation of "<CLASS>::<CLASS>(Argtypes)" 
 ```
