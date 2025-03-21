@@ -7,7 +7,7 @@ window.MathJax = {
   }
 };
 
-document$.subscribe(() => { 
+document$.subscribe(() => {
   MathJax.startup.output.clearCache()
   MathJax.typesetClear()
   MathJax.texReset()
@@ -18,9 +18,9 @@ document$.subscribe(() => {
 window.MathJax = {
     startup: {
       ready: () => {
-        console.log('MathJax is loaded, but not yet initialized');
+        console.log('MathJax is loaded, but not yet initialised');
         MathJax.startup.defaultReady();
-        console.log('MathJax is initialized, and the initial typeset is queued');
+        console.log('MathJax is initialised, and the initial typeset is queued');
       }
     }
   };
