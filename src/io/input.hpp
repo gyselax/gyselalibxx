@@ -86,9 +86,9 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
         // if you want to ensure that the interpolation points used match exactly the points
         // used to initialise values passed into the simulation.
         std::vector<Coord1D> mesh;
-        std::string grid_name = "grid_" + mesh_identifier;
 
         if constexpr (BSplines::is_uniform()) {
+            std::string grid_name = "grid_" + mesh_identifier;
             PDI_get_arrays("read_" + mesh_identifier, grid_name, mesh);
         } else {
             std::string breakpoints_name = "breakpoints_" + mesh_identifier;
