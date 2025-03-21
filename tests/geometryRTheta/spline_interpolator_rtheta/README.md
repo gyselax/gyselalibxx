@@ -1,6 +1,6 @@
 # Tests on spline interpolator in polar coordinates
 
-### Functions tests
+## Functions tests
 
 - $(r,\theta) \mapsto r^p$ with $`0\leq p<4`$: interpolation with cubic B-splines supposed to be exact.
 - $(r,\theta) \mapsto r^p$ with $p \geq 4$: interpolation with cubic B-splines supposed to be order 4.
@@ -8,7 +8,7 @@
 
 Test the interpolator on mesh points where the errors are supposed to be exact (machine error) and test the interpolator on "pseudo-random" points where the errors are supposed to be order 4 with a cubic B-splines basis.
 
-### Python scripts
+## Python scripts
 
 - `test_convergence.py` : compute the convergence order in space for the tests where the errors are not supposed to be exact.
   - launch the executable for a 64x64 grid and for a 128x128 grid to compare the errors.
