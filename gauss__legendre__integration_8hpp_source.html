@@ -276,33 +276,33 @@ $(document).ready(function(){initNavTree('gauss__legendre__integration_8hpp_sour
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>};</div>
 </div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... GaussLegendreQuad&gt;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>DFieldMem&lt;IdxRange&lt;<span class="keyword">typename</span> GaussLegendreQuad::Grid1D...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>gauss_legendre_quadrature_coefficients(GaussLegendreQuad <span class="keyword">const</span>&amp;... gl)</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>{</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="comment">// Get coefficients for each dimension</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    std::tuple&lt;host_t&lt;DFieldMem&lt;IdxRange&lt;typename GaussLegendreQuad::Grid1D&gt;&gt;&gt;...&gt;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    current_dim_coeffs(gl.template gauss_legendre_coefficients&lt;Kokkos::HostSpace&gt;()...);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>ExecSpace, <span class="keyword">class</span>... GaussLegendreQuad&gt;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>DFieldMem&lt;IdxRange&lt;<span class="keyword">typename</span> GaussLegendreQuad::Grid1D...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>gauss_legendre_quadrature_coefficients(GaussLegendreQuad <span class="keyword">const</span>&amp;... gl)</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>{</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="comment">// Get coefficients for each dimension</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    std::tuple&lt;host_t&lt;DFieldMem&lt;IdxRange&lt;typename GaussLegendreQuad::Grid1D&gt;&gt;&gt;...&gt;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    current_dim_coeffs(gl.template gauss_legendre_coefficients&lt;Kokkos::HostSpace&gt;()...);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    IdxRange&lt;<span class="keyword">typename</span> GaussLegendreQuad::Grid1D...&gt; idx_range(gl.get_idx_range()...);</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    IdxRange&lt;<span class="keyword">typename</span> GaussLegendreQuad::Grid1D...&gt; idx_range(gl.get_idx_range()...);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="comment">// Allocate ND coefficients</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    DFieldMem&lt;IdxRange&lt;<span class="keyword">typename</span> GaussLegendreQuad::Grid1D...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            coefficients(idx_range);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keyword">auto</span> coefficients_host = ddc::create_mirror(get_field(coefficients));</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="comment">// Serial loop is used due to nvcc bug concerning functions with variadic template arguments</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">// (see https://github.com/kokkos/kokkos/pull/7059)</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    ddc::for_each(idx_range, [&amp;](Idx&lt;typename GaussLegendreQuad::Grid1D...&gt; <span class="keyword">const</span> idim) {</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="comment">// multiply the 1D coefficients by one another</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        coefficients_host(idim)</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                = (std::get&lt;host_t&lt;DFieldMem&lt;IdxRange&lt;typename GaussLegendreQuad::Grid1D&gt;&gt;&gt;&gt;(</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>                           current_dim_coeffs)(</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                           ddc::select&lt;typename GaussLegendreQuad::Grid1D&gt;(idim))</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                   * ... * 1);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    });</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    ddc::parallel_deepcopy(coefficients, coefficients_host);</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordflow">return</span> coefficients;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="comment">// Allocate ND coefficients</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    DFieldMem&lt;IdxRange&lt;<span class="keyword">typename</span> GaussLegendreQuad::Grid1D...&gt;, <span class="keyword">typename</span> ExecSpace::memory_space&gt;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            coefficients(idx_range);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keyword">auto</span> coefficients_host = ddc::create_mirror(get_field(coefficients));</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="comment">// Serial loop is used due to nvcc bug concerning functions with variadic template arguments</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="comment">// (see https://github.com/kokkos/kokkos/pull/7059)</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    ddc::for_each(idx_range, [&amp;](Idx&lt;typename GaussLegendreQuad::Grid1D...&gt; <span class="keyword">const</span> idim) {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="comment">// multiply the 1D coefficients by one another</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        coefficients_host(idim)</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                = (std::get&lt;host_t&lt;DFieldMem&lt;IdxRange&lt;typename GaussLegendreQuad::Grid1D&gt;&gt;&gt;&gt;(</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                           current_dim_coeffs)(</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                           ddc::select&lt;typename GaussLegendreQuad::Grid1D&gt;(idim))</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>                   * ... * 1);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    });</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    ddc::parallel_deepcopy(coefficients, coefficients_host);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">return</span> coefficients;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
 <div class="ttc" id="aclassGaussLegendre_html"><div class="ttname"><a href="classGaussLegendre.html">GaussLegendre</a></div><div class="ttdoc">An operator for constructing a Gauss-Legendre quadrature.</div><div class="ttdef"><b>Definition</b> gauss_legendre_integration.hpp:52</div></div>
 <div class="ttc" id="aclassGaussLegendre_html_a24a562fa02d5517588d6c4b4daa8c171"><div class="ttname"><a href="classGaussLegendre.html#a24a562fa02d5517588d6c4b4daa8c171">GaussLegendre::order</a></div><div class="ttdeci">static constexpr std::size_t order()</div><div class="ttdoc">The order of the quadrature scheme.</div><div class="ttdef"><b>Definition</b> gauss_legendre_integration.hpp:66</div></div>
 <div class="ttc" id="aclassGaussLegendre_html_a421cde58db551c40987077ee12b4e954"><div class="ttname"><a href="classGaussLegendre.html#a421cde58db551c40987077ee12b4e954">GaussLegendre::gauss_legendre_coefficients</a></div><div class="ttdeci">DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt; gauss_legendre_coefficients() const</div><div class="ttdoc">Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature.</div><div class="ttdef"><b>Definition</b> gauss_legendre_integration.hpp:136</div></div>

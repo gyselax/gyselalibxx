@@ -1,5 +1,9 @@
 var NAVTREEINDEX5 =
 {
+"classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8":[16,211,1],
+"classVortexMergerEquilibria.html":[16,212],
+"classVortexMergerEquilibria.html#a3a8975ef28538c07c2a08ce9b0db3c9f":[16,212,0],
+"classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b":[16,212,1],
 "classVortexMergerEquilibria.html#afcf358db72fd433f4470facfecd25019":[16,212,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html":[16,1,2],
 "classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab":[16,1,2,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX5 =
 "matrix_8hpp_source.html":[17,0,12,0],
 "matrix__banded_8hpp_source.html":[17,0,12,1],
 "matrix__batch_8hpp_source.html":[17,0,12,2],
-"matrix__batch__csr_8hpp_source.html":[17,0,12,3],
-"matrix__batch__ell_8hpp_source.html":[17,0,12,4],
-"matrix__batch__tridiag_8hpp_source.html":[17,0,12,5],
-"matrix__centre__block_8hpp_source.html":[17,0,12,6],
-"matrix__corner__block_8hpp_source.html":[17,0,12,7]
+"matrix__batch__csr_8hpp_source.html":[17,0,12,3]
 };

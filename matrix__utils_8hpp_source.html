@@ -128,47 +128,47 @@ $(document).ready(function(){initNavTree('matrix__utils_8hpp_source.html',''); i
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                           gko::array&lt;value_type&gt;::view(gko_exec, view.span(), view.data())));</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">inline</span> <span class="keywordtype">void</span> check_conv(</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">int</span> <span class="keyword">const</span> batch_size,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> tol,</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::shared_ptr&lt;const gko::Executor&gt; gko_exec,</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        std::shared_ptr&lt;<span class="keyword">const</span> gko::batch::log::BatchConvergence&lt;double&gt;&gt; logger)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">auto</span> logger_residual_host</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            = gko::make_temporary_clone(gko_exec-&gt;get_master(), &amp;logger-&gt;get_residual_norm());</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">bool</span> has_converged = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    Kokkos::parallel_reduce(</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="stringliteral">&quot;convergence&quot;</span>,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            Kokkos::RangePolicy&lt;Kokkos::DefaultHostExecutionSpace&gt;(0, batch_size),</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            [&amp;](<span class="keywordtype">int</span> batch_idx, <span class="keywordtype">bool</span>&amp; check_tol) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                check_tol = check_tol &amp;&amp; (logger_residual_host-&gt;get_const_data()[batch_idx] &lt;= tol);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            },</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            Kokkos::LAnd&lt;bool&gt;(has_converged));</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> (!has_converged) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        throw ::std::runtime_error(<span class="stringliteral">&quot;Ginkgo did not converge&quot;</span>);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">inline</span> <span class="keywordtype">void</span> write_log(</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        std::fstream&amp; log_file,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">int</span> <span class="keyword">const</span> batch_index,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">int</span> <span class="keyword">const</span> num_iterations,</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> implicit_res_norm,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> true_res_norm,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> b_norm,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> tol)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>{</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    log_file &lt;&lt; <span class="stringliteral">&quot; System no. &quot;</span> &lt;&lt; batch_index &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    log_file &lt;&lt; <span class="stringliteral">&quot; Number of iterations = &quot;</span> &lt;&lt; num_iterations &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    log_file &lt;&lt; <span class="stringliteral">&quot; Implicit residual norm = &quot;</span> &lt;&lt; implicit_res_norm &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    log_file &lt;&lt; <span class="stringliteral">&quot; True (Ax-b) residual norm = &quot;</span> &lt;&lt; true_res_norm &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    log_file &lt;&lt; <span class="stringliteral">&quot; Right-hand side (b) norm = &quot;</span> &lt;&lt; b_norm &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (!(true_res_norm &lt;= tol)) {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        log_file &lt;&lt; <span class="stringliteral">&quot; --- System &quot;</span> &lt;&lt; batch_index &lt;&lt; <span class="stringliteral">&quot; did not converge! ---&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    log_file &lt;&lt; <span class="stringliteral">&quot;------------------------------------------------&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">inline</span> <span class="keywordtype">void</span> check_conv(</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordtype">int</span> <span class="keyword">const</span> batch_size,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> tol,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        std::shared_ptr&lt;const gko::Executor&gt; gko_exec,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::shared_ptr&lt;<span class="keyword">const</span> gko::batch::log::BatchConvergence&lt;double&gt;&gt; logger)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">auto</span> logger_residual_host</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            = gko::make_temporary_clone(gko_exec-&gt;get_master(), &amp;logger-&gt;get_residual_norm());</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">bool</span> has_converged = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    Kokkos::parallel_reduce(</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="stringliteral">&quot;convergence&quot;</span>,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            Kokkos::RangePolicy&lt;Kokkos::DefaultHostExecutionSpace&gt;(0, batch_size),</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            [&amp;](<span class="keywordtype">int</span> batch_idx, <span class="keywordtype">bool</span>&amp; check_tol) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                check_tol = check_tol &amp;&amp; (logger_residual_host-&gt;get_const_data()[batch_idx] &lt;= tol);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            },</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            Kokkos::LAnd&lt;bool&gt;(has_converged));</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (!has_converged) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        throw ::std::runtime_error(<span class="stringliteral">&quot;Ginkgo did not converge&quot;</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">inline</span> <span class="keywordtype">void</span> write_log(</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        std::fstream&amp; log_file,</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordtype">int</span> <span class="keyword">const</span> batch_index,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">int</span> <span class="keyword">const</span> num_iterations,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> implicit_res_norm,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> true_res_norm,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> b_norm,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordtype">double</span> <span class="keyword">const</span> tol)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    log_file &lt;&lt; <span class="stringliteral">&quot; System no. &quot;</span> &lt;&lt; batch_index &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    log_file &lt;&lt; <span class="stringliteral">&quot; Number of iterations = &quot;</span> &lt;&lt; num_iterations &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    log_file &lt;&lt; <span class="stringliteral">&quot; Implicit residual norm = &quot;</span> &lt;&lt; implicit_res_norm &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    log_file &lt;&lt; <span class="stringliteral">&quot; True (Ax-b) residual norm = &quot;</span> &lt;&lt; true_res_norm &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    log_file &lt;&lt; <span class="stringliteral">&quot; Right-hand side (b) norm = &quot;</span> &lt;&lt; b_norm &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span> (!(true_res_norm &lt;= tol)) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        log_file &lt;&lt; <span class="stringliteral">&quot; --- System &quot;</span> &lt;&lt; batch_index &lt;&lt; <span class="stringliteral">&quot; did not converge! ---&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    log_file &lt;&lt; <span class="stringliteral">&quot;------------------------------------------------&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> sparse_type&gt;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keywordtype">void</span> save_logger(</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        std::fstream&amp; log_file,</div>

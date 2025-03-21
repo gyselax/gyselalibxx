@@ -1,7 +1,13 @@
 var classPolarSplineFEMPoissonLikeSolver =
 [
-    [ "EvalDeriv1DType", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType", null ],
-    [ "EvalDeriv2DType", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType", null ],
+    [ "EvalDeriv1DType", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType", [
+      [ "value", "classPolarSplineFEMPoissonLikeSolver.html#a59fd1b049baa158b324f7726653c7e62", null ],
+      [ "derivative", "classPolarSplineFEMPoissonLikeSolver.html#a4b954ccf1b13c5806b5476c5ef323b75", null ]
+    ] ],
+    [ "EvalDeriv2DType", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType", [
+      [ "value", "classPolarSplineFEMPoissonLikeSolver.html#a8ec2e7ec83bedae738b096e1930b6093", null ],
+      [ "derivative", "classPolarSplineFEMPoissonLikeSolver.html#a85e12c01584beb77b03e7ba61e740233", null ]
+    ] ],
     [ "QDimRMesh", "structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html", null ],
     [ "QDimThetaMesh", "structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.html", null ],
     [ "RBasisSubset", "classPolarSplineFEMPoissonLikeSolver.html#structPolarSplineFEMPoissonLikeSolver_1_1RBasisSubset", null ],

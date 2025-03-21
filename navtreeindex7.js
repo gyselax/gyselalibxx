@@ -1,5 +1,9 @@
 var NAVTREEINDEX7 =
 {
+"structGridMu.html":[16,76],
+"structGridR.html":[16,77],
+"structGridTheta.html":[16,78],
+"structGridVpar.html":[16,79],
 "structGridVx.html":[16,80],
 "structGridVy.html":[16,81],
 "structGridX.html":[16,82],

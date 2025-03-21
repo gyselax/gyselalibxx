@@ -13,7 +13,11 @@ var NAVTREEINDEX4 =
 "classPolarSplineFEMPoissonLikeSolver.html#a0c880f33d839cedfafdf2b3b32139417":[16,174,9],
 "classPolarSplineFEMPoissonLikeSolver.html#a161e772a03b980ad5cb19bdeb6b02925":[16,174,14],
 "classPolarSplineFEMPoissonLikeSolver.html#a36be84f08a082b52a73f5134b8f1a8e2":[16,174,13],
+"classPolarSplineFEMPoissonLikeSolver.html#a4b954ccf1b13c5806b5476c5ef323b75":[16,174,0,1],
+"classPolarSplineFEMPoissonLikeSolver.html#a59fd1b049baa158b324f7726653c7e62":[16,174,0,0],
 "classPolarSplineFEMPoissonLikeSolver.html#a6e4d95b7b1ce10cf43579ff77b9ea88b":[16,174,11],
+"classPolarSplineFEMPoissonLikeSolver.html#a85e12c01584beb77b03e7ba61e740233":[16,174,1,1],
+"classPolarSplineFEMPoissonLikeSolver.html#a8ec2e7ec83bedae738b096e1930b6093":[16,174,1,0],
 "classPolarSplineFEMPoissonLikeSolver.html#a90ab8ff1603bc0a3f36b5a0c5077de5b":[16,174,17],
 "classPolarSplineFEMPoissonLikeSolver.html#ab9963fa7157d221f701133a42bda9e9a":[16,174,15],
 "classPolarSplineFEMPoissonLikeSolver.html#ac699f74359d1f9160bed57ffcf325861":[16,174,16],
@@ -245,9 +249,5 @@ var NAVTREEINDEX4 =
 "classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#a787c7ed77c430264e17d73ee15802098":[16,210,2],
 "classVectorMapper_3_01VectorIndexSet_3_01XIn_00_01YIn_01_4_00_01VectorIndexSet_3_01XOut_00_01YOu77c12468788509067d2c0ef34f5e389c.html#ab036919c0c99391dbe70caf3f6524486":[16,210,1],
 "classVortexMergerDensitySolution.html":[16,211],
-"classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[16,211,0],
-"classVortexMergerDensitySolution.html#aebe20037b60ca33bd8020faba80fe4f8":[16,211,1],
-"classVortexMergerEquilibria.html":[16,212],
-"classVortexMergerEquilibria.html#a3a8975ef28538c07c2a08ce9b0db3c9f":[16,212,0],
-"classVortexMergerEquilibria.html#ad3b9139693f6f2aeabf9355d14c7c37b":[16,212,1]
+"classVortexMergerDensitySolution.html#a75f051a4a9d1ccfee6c1976e4a914c75":[16,211,0]
 };

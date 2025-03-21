@@ -427,39 +427,39 @@ $(document).ready(function(){initNavTree('tensor_8hpp_source.html',''); initResi
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    <span class="keywordflow">return</span> tensor * val;</div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>}</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span> </div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator+(</div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>{</div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) + ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
-<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>}</div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span> </div>
-<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator-(</div>
-<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
-<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>{</div>
-<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) - ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
-<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>}</div>
-<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span> </div>
-<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator+=(</div>
-<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
-<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>{</div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    ((ddc::get&lt;Dims&gt;(coord) += ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
-<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    <span class="keywordflow">return</span> coord;</div>
-<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>}</div>
-<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span> </div>
-<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
-<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator-=(</div>
-<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>{</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>    ((ddc::get&lt;Dims&gt;(coord) -= ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>    <span class="keywordflow">return</span> coord;</div>
-<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>}</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator+(</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>{</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) + ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>}</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span> </div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; operator-(</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>        Coord&lt;Dims...&gt; <span class="keyword">const</span>&amp; coord,</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>{</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>    <span class="keywordflow">return</span> Coord&lt;Dims...&gt;((ddc::get&lt;Dims&gt;(coord) - ddcHelper::get&lt;Dims&gt;(tensor))...);</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>}</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span> </div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator+=(</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>{</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    ((ddc::get&lt;Dims&gt;(coord) += ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    <span class="keywordflow">return</span> coord;</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>}</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span> </div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Dims&gt;</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt;&amp; operator-=(</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        Coord&lt;Dims...&gt;&amp; coord,</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        <a class="code hl_class" href="classTensor.html">DVector&lt;Dims...&gt;</a> <span class="keyword">const</span>&amp; tensor)</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>{</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>    ((ddc::get&lt;Dims&gt;(coord) -= ddcHelper::get&lt;Dims&gt;(tensor)), ...);</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    <span class="keywordflow">return</span> coord;</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>}</div>
 <div class="ttc" id="aclassTensor_html"><div class="ttname"><a href="classTensor.html">Tensor</a></div><div class="ttdoc">A class representing a Tensor.</div><div class="ttdef"><b>Definition</b> tensor.hpp:35</div></div>
 <div class="ttc" id="aclassTensor_html_a02ea288d5a36d155e4c6ed3cd7e50c23"><div class="ttname"><a href="classTensor.html#a02ea288d5a36d155e4c6ed3cd7e50c23">Tensor::operator+</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator+(Tensor const &amp;val) const</div><div class="ttdoc">An operator to add two tensors elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:279</div></div>
 <div class="ttc" id="aclassTensor_html_a0a4985762ba9e45713294996fdae7268"><div class="ttname"><a href="classTensor.html#a0a4985762ba9e45713294996fdae7268">Tensor::operator-</a></div><div class="ttdeci">KOKKOS_FUNCTION Tensor operator-() const</div><div class="ttdoc">An operator to subtract one tensor from another elementwise.</div><div class="ttdef"><b>Definition</b> tensor.hpp:303</div></div>

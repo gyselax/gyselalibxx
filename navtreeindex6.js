@@ -1,5 +1,9 @@
 var NAVTREEINDEX6 =
 {
+"matrix__batch__ell_8hpp_source.html":[17,0,12,4],
+"matrix__batch__tridiag_8hpp_source.html":[17,0,12,5],
+"matrix__centre__block_8hpp_source.html":[17,0,12,6],
+"matrix__corner__block_8hpp_source.html":[17,0,12,7],
 "matrix__dense_8hpp_source.html":[17,0,12,8],
 "matrix__pds__tridiag_8hpp_source.html":[17,0,12,9],
 "matrix__periodic__banded_8hpp_source.html":[17,0,12,10],
@@ -245,9 +249,5 @@ var NAVTREEINDEX6 =
 "structGEOM__NAMESPACE__NAME_1_1Y.html":[16,3,13],
 "structGEOM__NAMESPACE__NAME_1_1Y.html#ac7297a3ab6e1674fd249a6850075071d":[16,3,13,0],
 "structGaussLegendreCoefficients.html":[16,70],
-"structGridMom.html":[16,75],
-"structGridMu.html":[16,76],
-"structGridR.html":[16,77],
-"structGridTheta.html":[16,78],
-"structGridVpar.html":[16,79]
+"structGridMom.html":[16,75]
 };
