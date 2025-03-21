@@ -140,10 +140,10 @@ KOKKOS_INLINE_FUNCTION void restrict_to_bspline_domain(
 }
 
 /**
- * @brief Dump the coordinates found on a domain into a span.
+ * @brief Dump the coordinates of a field into the field.
  *
- * @param[out] dump_coord The span which will contain the coordinates.
- * @param[in] sampler The domain indicating the coordinates.
+ * @param[in] exec_space The execution space on which the code will run.
+ * @param[out] dump_coord The field which will contain the coordinates.
  */
 template <class ExecSpace, class Grid1D, class Layout, class MemorySpace>
 inline void dump_coordinates(
@@ -157,10 +157,10 @@ inline void dump_coordinates(
 }
 
 /**
- * @brief Dump the coordinates found on a domain into a span.
+ * @brief Dump the coordinates of a field into the field.
  *
- * @param[out] dump_coord The span which will contain the coordinates.
- * @param[in] sampler The domain indicating the coordinates.
+ * @param[in] exec_space The execution space on which the code will run.
+ * @param[out] dump_coord The field which will contain the coordinates.
  */
 template <class ExecSpace, class Grid1D, class Layout, class MemorySpace>
 inline void dump_coordinates(
@@ -290,8 +290,6 @@ struct TypeSeqIntersection<
                     ddc::detail::TypeSeq<TagsR...>>::type>;
 };
 
-
-/// \endcond
 
 } // namespace detail
 
