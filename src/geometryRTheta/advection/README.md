@@ -176,7 +176,7 @@ J
 \end{bmatrix}.
 ```
 
-# Unit tests
+## Unit tests
 
 The test of the advection operator are implemented in the `tests/geometryRTheta/advection_rtheta/` folder
 ([advection\_2d\_rp](./../../../tests/geometryRTheta/advection_rtheta/README.md)).
@@ -209,14 +209,14 @@ The tests of the convergence order are made for constant CFL which means it chec
 for $`(N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)`$ and then $`(n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)`$
 for $n = 1, 2, 4, 8,  ...$.
 
-# References
+## References
 
 <a name="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
 disk-like domains with the method of characteristics and spline finite elements".
 ([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889).)
 Journal of Computational Physics (2019).
 
-# Contents
+## Contents
 
 This folder contains:
 
