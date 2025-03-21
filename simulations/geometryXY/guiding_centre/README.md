@@ -107,6 +107,7 @@ python3 plot_L2_norms.py --name=<name_file_to_save> --folder=<path_to_output>
 ```
 
 ## Contents
+
 - `guiding_centre.cpp`: executable of a guiding-centre equation on $`(x,y)`$ geometry with Kelvin-Helmholtz instability test case initial conditions.
 - `params.yaml`: contains the parameters of the simulation. It needs to be added at the command line to launch the executable.
 

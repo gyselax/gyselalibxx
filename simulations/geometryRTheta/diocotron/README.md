@@ -24,6 +24,7 @@ Conservation of the density equation and Maxwell-Poisson equation:
 ```
 
 where
+
 - $`\rho = \rho(t,r,\theta)`$ is the **density** of the particles (electrons with mass $`m_e`$ and charge $q = -1$);
 - $v$ is the velocity of the particles ($div(v) = 0$);
 - $\phi$ is the usual electric potential associated withe the total electric field;
@@ -174,6 +175,7 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
 - mass\_conservation.py : plot the relative errors of the mass of the particles.
 
 ### Recommended parameters
+
 - `Mesh:`
   - `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
   - `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
@@ -195,6 +197,7 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
   - `time_step_diag: 10` : number of time steps between two recordings of the data.
 
 ### Executables
+
 - `diocotron_EXPLICIT_PREDCORRR_EULER_METHOD` : uses the predictor-corrector defined in BslExplicitPredCorrRP (ill-defined for other time integration methods).
 - `diocotron_IMPLICIT_PREDCORRR_EULER_METHOD` : uses the predictor-corrector defined in BslImplicitPredCorrRP (ill-defined for other time integration methods).
 - `diocotron_PREDCORRR_EULER_METHOD` : uses the predictor-corrector defined in BslPredCorrRP with a Euler method for the BslAdvectionRP advection operator.

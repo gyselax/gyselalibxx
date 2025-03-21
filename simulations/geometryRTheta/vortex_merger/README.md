@@ -27,6 +27,7 @@ E = -\nabla \phi
 ```
 
 where
+
 - $\rho = \rho(t,r,\theta)$ is the **electric charge density** of the particles (electrons with mass $`m_e`$ and charge $q$);
 - $v$ is the velocity of the particles ($div(v) = 0$);
 - $\phi$ is the usual electric potential associated with the total electric field;
@@ -63,6 +64,7 @@ We suppose as perturbed initial condition
 ```
 
 with
+
 - $`(x_1^*, y_1^*) = (0.08, -0.14)`$,
 - $`(x_2^*, y_2^*) = (-0.08, 0.14)`$,
 - $\sigma = 0.08$ and
@@ -93,6 +95,7 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
 - mass\_conservation.py : plot the relative errors of the mass of the particles.
 
 ### Recommended parameters
+
 - `Mesh:`
   - `r_size: 128` : number of cells in $r$-dimension. (Tests in Edoardo Zoni's article.)
   - `theta_size: 256` : number of cells in $\theta$-dimension. (Tests in Edoardo Zoni's article.)
@@ -115,6 +118,7 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
   - `time_step_diag: 5` : number of time steps between two recordings of the data.
 
 ### Executables
+
 - `vortex_merger` : the vortex-merger simulation with the given parameters.
 
 The results of the simulation are saved in a `output` folder that the executable creates.
