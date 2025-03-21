@@ -40,7 +40,6 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
           config: './.markdownlint.json'
-          fix: true
           globs: |
             **/*.md
       - name: Check files
