@@ -1,27 +1,30 @@
 # Coding Standards
 
 ## C++ Features
+
 * We use C++17
 * We don't use raw pointers
 * We don't use plain C arrays
 * We try not to use macros
 * The `auto` keyword should be used for types as `auto&&` and only in one of the following cases:
-  - in iterations either in range based for or to refer to iterators
-  - to store objects that can not be typed otherwise (e.g. lambdas)
-  - to store the result of an expression specifically specifying the type of the generated value
+  * in iterations either in range based for or to refer to iterators
+  * to store objects that can not be typed otherwise (e.g. lambdas)
+  * to store the result of an expression specifically specifying the type of the generated value
 
 ## Parameter passing
+
 * We take out/inout-parameters (those we modify) first
 * If there is a single out/inout-parameter, we return it
 * For in-parameters (those we use but don't modify)
-  - if it's a scalar native type (int, double, ...) we take it by copy
-  - if it's a const view type (`std::span<const T>`, `BlockView<T>`, ...) we take it by copy
-  - otherwise, we take a const-ref: `Type const&`
+  * if it's a scalar native type (int, double, ...) we take it by copy
+  * if it's a const view type (`std::span<const T>`, `BlockView<T>`, ...) we take it by copy
+  * otherwise, we take a const-ref: `Type const&`
 * For out/inout-parameters
-  - if it's a modifiable view type (`std::span<T>`, `BlockSpan<T>`, ...) we take it by copy
-  - otherwise, we take a ref: `Type&`
+  * if it's a modifiable view type (`std::span<T>`, `BlockSpan<T>`, ...) we take it by copy
+  * otherwise, we take a ref: `Type&`
 
 ## Naming
+
 * we name everything using expressive English names (e.g. `temperature`) and don't use variable
   names from the equations (e.g. `u`, `u_bar_star`)
 * files, functions and variables use `snake_case`
@@ -36,15 +39,16 @@
 * capturing classes members through `KOKKOS_LAMBDA` or `KOKKOS_CLASS_LAMBDA` may be complicated, we often need to copy-by-reference the member to a local variable, which must be `_proxy` suffixed
 
 ## Style
+
 * We use the style specified by the `.clang-format` file using clang-format 10
 * we do not use numerical values in the code except to initialise a named constexpr documenting
   the semantic of the value
 * In a class
-  - we put all member types first (public, then protected, then private),
-  - followed by static member variables (public, then protected, then private),
-  - followed by non-static member variables (public, then protected, then private),
-  - followed by static member functions (public, then protected, then private),
-  - followed by non-static member functions (public, then protected, then private),
+  * we put all member types first (public, then protected, then private),
+  * followed by static member variables (public, then protected, then private),
+  * followed by non-static member variables (public, then protected, then private),
+  * followed by static member functions (public, then protected, then private),
+  * followed by non-static member functions (public, then protected, then private),
     * the constructors first
     * then the destructor
     * then the various operators
@@ -64,6 +68,7 @@ offer various overloads of this operator with different parameters but
 similar behaviour.
 
 Interfaces should:
+
 * be prefixed by `I` as in `IVlasovSolver`,
 * explicitly define a virtual destructor,
 * implicitly define constructors and assignment operators.
@@ -104,5 +109,5 @@ It is rare to need to actually write a data storage class. In most cases they ca
 
 Templating is a very useful tool to improve performance, however it increases compilation overhead and reduces code readability, especially for developers less familiar with C++. We therefore try to strike a balance with the use of templates. Templates are therefore recommended in the following cases:
 
--   In performance bottlenecks to improve results.
--   Where they significantly decrease code duplication (~2 additional copies avoided).
+* In performance bottlenecks to improve results.
+* Where they significantly decrease code duplication (~2 additional copies avoided).

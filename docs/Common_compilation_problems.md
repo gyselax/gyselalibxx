@@ -1,12 +1,15 @@
 # Common compilation problems
 
 <a name="KOKKOS-LAMBDA"></a>
+
 ## The closure type for a lambda cannot be used in the template argument type of a '\_\_global\_\_' function
 
 When using `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` the last argument passed to the functions is usually a lambda function. The usual syntax for lambda functions is:
+
 ```cpp
 [capture_expression](ArgTypes arguments) { code; }
 ```
+
 When compiling for GPU this syntax must be modified slightly.
 
 The only valid capture expression is capture by copy (i.e. everything used in the code which is defined elsewhere is passed by copy). This is so that objects (especially scalars) can be copied to the device when they are needed. A capture by reference would lead to the code trying to use objects on the GPU which are only accessible from the CPU.
@@ -14,6 +17,7 @@ The only valid capture expression is capture by copy (i.e. everything used in th
 ### Error Message
 
 When this rule is not followed you will see the following error message:
+
 ```
 ${GYSELALIBXX_HOME}/vendor/kokkos/core/src/Cuda/Kokkos_Cuda_KernelLaunch.hpp(345): error: The closure type for a lambda ("lambda [](ArgTypes)->void", defined at <PATH_TO_FILE>:<LINE_NUMBER>) cannot be used in the template argument type of a __global__ function template instantiation, unless the lambda is defined within a __device__ or __global__ function, or the flag '-extended-lambda' is specified and the lambda is an extended lambda (a __device__ or __host__ __device__ lambda defined within a __host__ or __host__ __device__ function)
 ```
@@ -25,6 +29,7 @@ Lambdas capture variables from their environment in order to use them in the exp
 Luckily it is simple to avoid the class being captured. It is sufficient to define local copies or accessors (i.e. `ddc::ChunkSpan`) to the variables that will be used in the function.
 
 E.g. for the following code:
+
 ```cpp
 double my_function() const 
 {   
@@ -34,7 +39,9 @@ double my_function() const
             KOKKOS_LAMBDA(IdxX ix) { return m_class_field_x(ix); });
 }
 ```
+
 where `m_class_field_x` is a class member function the code should be:
+
 ```cpp
 double my_function() const 
 {
@@ -51,6 +58,7 @@ Unfortunately the error message is only a warning so if this is missed the code 
 ### Error Message
 
 When this rule is not followed you will see the following error message:
+
 ```
 <PATH_TO_FILE>(<LINE_NUMBER>): warning #20178-D: Implicit capture of 'this' in extended lambda expression
 ```
@@ -58,9 +66,10 @@ When this rule is not followed you will see the following error message:
 ## Accessing allocated data
 
 DDC provides 3 types of objects for storing/accessing array data:
--  `ddc::Chunk`
--  `ddc::ChunkSpan`
--  `ddc::ChunkView`
+
+- `ddc::Chunk`
+- `ddc::ChunkSpan`
+- `ddc::ChunkView`
 
 Whenever a new `ddc::Chunk` is created, memory is allocated. This includes when a `ddc::Chunk` is copied. In order to avoid accidental memory allocation the copy operator of `ddc::Chunk` is therefore deleted.
 
@@ -73,22 +82,25 @@ In practice this means that while `ddc::Chunk` is used to initialise the memory,
 When this rule is not followed you may see a large number of errors. The following is a selection of the error messages that you may see:
 
 The first error to appear is not very explicit. It simply indicates that the lvalue (the value on the left hand side of the assignment) has an unknown type. As a result the compiler does not know how to assign a value to it:
+
 ```
 <PATH_TO_FILE>(<LINE_NUMBER>): error: expression must be a modifiable lvalue
 ```
 
 The next error highlights the problem. It says that a `ddc::Chunk` cannot be copied using a constructor. This is because such an operation would allocate memory and this is not what is wanted.
+
 ```
 <PATH_TO_FILE>(<LINE_NUMBER>): error: function "ddc::Chunk<ElementType, ddc::DiscreteDomain<DDims...>, Allocator>::Chunk(const ddc::Chunk<ElementType, ddc::DiscreteDomain<DDims...>, Allocator> &) [with ElementType=double, DDims=<Dim1, Dim2,...>, Allocator=ddc::KokkosAllocator<double, Kokkos::CudaSpace>]"
 ${GYSELALIBXX_HOME}/vendor/ddc/include/ddc/chunk.hpp(109): here cannot be referenced -- it is a deleted function
 ```
 
 Similarly the following error then says that the lambda function itself cannot be created because the function will not work without first capturing the chunk.
+
 ```
 ${GYSELALIBXX_HOME}/vendor/ddc/include/ddc/parallel_for_each.hpp(34): error: function "lambda [](ArgType)->void::<unnamed>(const lambda [](ArgType)->void &)" (declared implicitly) cannot be referenced -- it is a deleted function
 ```
 
-##  The enclosing parent function for an extended '\_\_host\_\_' '\_\_device\_\_' lambda cannot have private or protected access within its class
+## The enclosing parent function for an extended '\_\_host\_\_' '\_\_device\_\_' lambda cannot have private or protected access within its class
 
 Kokkos is bound by restrictions coming from various different low level languages. One of the most surprising of these is the fact that lambdas cannot be found in a private or protected context. In other words we cannot use `ddc::parallel_for_each` or `ddc::parallel_transform_reduce` in a private or protected class method.
 
@@ -98,11 +110,11 @@ This particular restriction comes from [Cuda](https://docs.nvidia.com/cuda/cuda-
 
 > The enclosing function for the extended lambda must be named and its address can be taken. If the enclosing function is a class member, then the following conditions must be satisfied:
 >
-> -  All classes enclosing the member function must have a name.
+> - All classes enclosing the member function must have a name.
 >
-> -  The member function must not have private or protected access within its parent class.
+> - The member function must not have private or protected access within its parent class.
 >
-> -  All enclosing classes must not have private or protected access within their respective parent classes.
+> - All enclosing classes must not have private or protected access within their respective parent classes.
 
 ## The enclosing parent function for an extended '\_\_host\_\_' '\_\_device\_\_' lambda must allow its address to be taken
 
@@ -111,6 +123,7 @@ Kokkos is bound by restrictions coming from various different low level language
 ### Error Message
 
 When this rule is not followed you will see the following error message:
+
 ```
 <PATH_TO_FILE>(<LINE_NUMBER>): error: The enclosing parent function ("<FUNCTION>") for an extended __host__ __device__ lambda cannot have private or protected access within its class
           detected during instantiation of "<CLASS>::<CLASS>(Argtypes)" 
