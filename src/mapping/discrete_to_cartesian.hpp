@@ -303,7 +303,7 @@ public:
                           .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
         ddcHelper::get<Y, R_cov>(J)
                 = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
-        ddcHelper::get<X, Theta_cov>(J)
+        ddcHelper::get<Y, Theta_cov>(J)
                 = m_spline_evaluator
                           .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
         return J;
