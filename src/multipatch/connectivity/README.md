@@ -169,7 +169,7 @@ uniform.
 
 For example, `UniformIdxStepIndexMatching` is adapted to this type of interface
 
-```
+```none
     0   1   2   3   4   5   6   7   8       <- Edge1
     |   |   |   |   |   |   |   |   |
        -2-     -2-     -2-     -2-          <- The index steps are regular. 
@@ -180,7 +180,7 @@ For example, `UniformIdxStepIndexMatching` is adapted to this type of interface
 
 but fails for this type of interface
 
-```
+```none
     0   1   2   3   4   5   6   7   8       <- Edge1
     |   |   |   |   |   |   |   |   |
      -1-     -3-       -2-     -2-          <- The index steps are NOT regular. 
