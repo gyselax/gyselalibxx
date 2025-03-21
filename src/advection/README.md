@@ -215,7 +215,7 @@ and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details
 
 **Remark 2:** if the mapping function is analytically invertible, it is less costly to advect in the physical domain.
 
-# References
+## References
 
 [1] Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
 disk-like domains with the method of characteristics and spline finite elements".
