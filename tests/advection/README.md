@@ -3,8 +3,7 @@
 ## Contents
 
 ### Advection along x on (t, x)
-
-* 1d\_advection\_x.cpp: test the BslAdvection1D operator for a 1D case.
+- 1d\_advection\_x.cpp: test the BslAdvection1D operator for a 1D case.
 
 The test is the following:
 
@@ -26,8 +25,7 @@ on $`\Omega = [-\pi, \pi]`$ with
 We test it on a grid $`N_x = 32`$  with $`dt = 0.05`$. The simulation runs on $`t\in[0,0.4]`$ and the relative error is expected to be below $` 5*10^{-3}`$.
 
 ### Advection along x on (t, x, vx)
-
-* 1d\_advection\_xvx.cpp: test the BslAdvection1D operator for a 1Dx1V case.
+- 1d\_advection\_xvx.cpp: test the BslAdvection1D operator for a 1Dx1V case.
 
 The test is the following:
 
@@ -49,8 +47,7 @@ on $`\Omega = [-\pi, \pi]\times[-6, 6]`$ with
 We test it on a grid $`N_x\times N_{v_x} = 100\times50`$  with $`dt = 0.1`$. The simulation runs on $`t\in[0,0.4]`$ and the relative error is expected to be below $` 5*10^{-7}`$.
 
 ### Advection along x and y on (t, x, y, vx, vy)
-
-* 1d\_advection\_xyvxvy.cpp: test the BslAdvection1D operator for a 2Dx2V case with a Strang splitting for the resolution.
+- 1d\_advection\_xyvxvy.cpp: test the BslAdvection1D operator for a 2Dx2V case with a Strang splitting for the resolution.
 
 The test is the following:
 
@@ -90,8 +87,7 @@ with
 We test it on a grid $`N_x \times N_y \times N_{v_x} \times N_{v_y} = 60 \times 60 \times 2 \times 2`$  with $`dt = 0.05`$. The simulation runs on $`t\in[0,0.2]`$ and the relative error is expected to be below $` 7*10^{-2}`$.
 
 ### Same test cases as for BslAdvectionSpatial and BslAdvectionVelocity
-
-* 1d\_spatial\_advection.cpp: test the BslAdvection1D operator for a 1Dx1V case.  
+- 1d\_spatial\_advection.cpp: test the BslAdvection1D operator for a 1Dx1V case.  
 This test is similar to `tests/geometryXVx/spatialadvection.cpp` which tests the BslAdvectionSpatial operator.
 
 The test is the following:
@@ -113,7 +109,7 @@ on $`\Omega = [-\pi, \pi]\times[-6, 6]`$ with
 
 We test it on a grid $`N_x\times N_{v_x} = 100\times50`$  with $`dt = 0.1`$. The simulation runs on $`t\in[0,0.1]`$ and the relative error is expected to be below $` 1*10^{-6}`$.
 
-* 1d\_velocity\_advection.cpp: test the BslAdvection1D operator for a 1Dx1V case.  
+- 1d\_velocity\_advection.cpp: test the BslAdvection1D operator for a 1Dx1V case.  
 This test is similar to `tests/geometryXVx/velocityadvection.cpp` which tests the BslAdvectionVelocity operator.
 
 The test is the following:
