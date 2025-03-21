@@ -96,7 +96,7 @@ inline IdxRange<Grid1D> init_spline_dependent_idx_range(
                     "read_" + mesh_identifier,
                     breakpoints_name,
                     breakpoints,
-                    grid_name,
+                    mesh_identifier,
                     mesh);
             ddc::init_discrete_space<BSplines>(breakpoints);
         }
