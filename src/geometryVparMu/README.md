@@ -7,7 +7,3 @@ The `geometryVparMu` folder contains all the code describing methods which are s
 - [geometry](./geometry/README.md) - All the dimension tags used for (vpar,mu) velocity space geometry description.
 
 - [initialisation](./initialisation/README.md) - Initialises the distribution function (species,vpar,mu).
-
-
-
-

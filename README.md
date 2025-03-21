@@ -6,12 +6,15 @@ If this is your first interaction with gyselalib++ please check out the document
 ## Set-up
 
 In order to set up Gyselalib++ on a new machine, simply run:
+
 ```
 git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
 ./bin/install-hooks
 ```
+
 or
+
 ```
 git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
@@ -23,6 +26,7 @@ on a machine for which Gyselalib++ is already used an environment script may be 
 Please check the `toolchains/` folder to find the existing configurations. See the documentation about [toolchains](./toolchains/README.md) for more information on the provided files.
 
 For example in order to set up the environment on the Adastra supercomputer simply run:
+
 ```
 source toolchains/mi250.hipcc.adastra.spack/prepare.sh
 source toolchains/mi250.hipcc.adastra.spack/environment.sh
@@ -46,6 +50,7 @@ For more details about toolchains, see the documentation about [toolchains](./to
 ## Execution
 
 to run the tests:
+
 ```
 ctest --output-on-failure
 ```
@@ -61,9 +66,10 @@ and `tests/geometryXVx/landau/fft/frequency_t0.0to45.0.png`:
 ## Dependencies
 
 To install dependencies through spack, first follow the the 3 first steps of
-https://github.com/pdidev/spack
+<https://github.com/pdidev/spack>
 
 Then execute the following:
+
 ```sh
 spack env create gyselalibxx spack.yaml
 spack env activate gyselalibxx

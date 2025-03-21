@@ -1,12 +1,13 @@
 # Initialisation on (x,y) geometry
 
-Describes different initial conditions for the simulations in $`(x,y)`$ geometry. 
+Describes different initial conditions for the simulations in $`(x,y)`$ geometry.
 
 (See more on the simulation in [simulations](./../../../simulations/geometryXY/README.md).)
 
-
 ## Kelvin-Helmholtz instability test case
+
 For this test case, the KelvinHelmholtzInstabilityInitialisation sets the initial conditions at
+
 ```math
     f(0, x, y) = f_{\text{eq}}(x,y) + \varepsilon\cos(kx),  \\
     f_{\text{eq}}(x,y) = \sin(y)

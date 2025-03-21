@@ -22,9 +22,8 @@ The charge density is calculated by integrating the distribution function.
 
 The Quasi-Neutrality equation can be solved with a variety of different methods. Here we have implemented:
 
--   FftQNSolver
+- FftQNSolver
 
 These classes return the electric potential $\phi$ and the electric field $\frac{d \phi}{dx}$.
 
 The FftQNSolver does not calculate the electric field using the Fourier modes. Rather it uses a spline interpolation to approximate this value. This interpolation is calculated by the operator ElectricField.
-
