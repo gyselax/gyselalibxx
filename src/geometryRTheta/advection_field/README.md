@@ -26,8 +26,8 @@ with $`\rho`$ the density, $`\phi`$ the electrostatic potential and $`E`$ the el
 
 The AdvectionFieldFinder computes the advection field $`A`$ from the electrical field $`\phi`$ returned by the PolarSplineFEMPoissonLikeSolver. 
 It has two types of `operator()`: 
-* one returning the advection field along the axis of the physical domain: $`A = (A_x, A_y)`$
-* and the another returning the advection field along the axis of the logical domain: $`A = (A_r, A_\theta)`$. 
+* one returning the advection field expressed on the vectors $`(e_x, e_y)`$ of the physical domain: $`A = A_x e_x + A_y e_y`$
+* and another returning the advection field expressed on the vectors $`(e^r, e^\theta)`$ of the [contravariant basis](#docs_mathematical_and_physical_conventions) on the logical domain: $`A = A^r e_r + A^\theta e_\theta`$. 
 
 The PolarSplineFEMPoissonLikeSolver can return the solution $`\phi`$ of the PDE under two forms:
 * a Field of values of the solution on the mesh points of the grid; 
@@ -50,40 +50,32 @@ The computation of the electrical field can be ill-defined around the O-point, s
 
 * If $`r > \varepsilon`$, we use 
 ```math
-\begin{bmatrix}
-    \partial_x \phi \\
-    \partial_y \phi \\
-\end{bmatrix} 
-= 
-J^{-T}
-\begin{bmatrix}
-    \partial_r \phi \\
-    \partial_\theta \phi \\
-\end{bmatrix}
+\nabla \phi
+= \partial_x \phi e_x + \partial_y \phi e_y 
+= J^{-T}(\partial_r \phi e^r + \partial_\theta \phi e^\theta), 
+\qquad 
+\text{in the covariant basis,}
 ```
 
-with $`J`$  the Jacobian matrix of the mapping $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$. Then the electric field is given by 
+with $`J`$  the Jacobian matrix  of the coordinate transformation (mapping) $`\mathcal{F}: (r,\theta)\mapsto(x,y)`$ and *G* the tensor metric of the contravariant basis of the curvilinear coordinates $`(r,\theta)`$. 
+Then the electric field is given by 
 ```math
 E = -\nabla \phi
-= 
-\begin{bmatrix}
-    - \partial_x \phi \\
-    - \partial_y \phi \\
-\end{bmatrix} 
+= - \partial_x \phi e_x - \partial_y \phi e_y 
 ```
 
-and the advection field by 
+and the advection field in the basis $`(e_x, e_y)`$ by
 ```math
 A = E\wedge e_z 
 = 
 \begin{bmatrix}
-    - E_y  \\
-    E_x  \\
+     E\cdot e_y  \\
+    -E\cdot e_x 
 \end{bmatrix} 
 = 
 \begin{bmatrix}
-    \partial_y \phi \\
-    - \partial_x \phi \\
+    -\partial_y \phi \\
+     \partial_x \phi
 \end{bmatrix}. 
 ```
 
@@ -98,24 +90,23 @@ From these equations, we deduce the (unique) values of $`\partial_x\phi`$ and $`
 ```math
 \begin{bmatrix}
     \partial_x \phi (0, \theta) \\
-    \partial_y \phi (0, \theta) \\
+    \partial_y \phi (0, \theta)
 \end{bmatrix}
  = 
  \begin{bmatrix}
     \partial_r x (0, \theta_1)  & \partial_r y (0, \theta_1) \\
-    \partial_r x (0, \theta_2)  & \partial_r y (0, \theta_2) \\
+    \partial_r x (0, \theta_2)  & \partial_r y (0, \theta_2)
 \end{bmatrix} ^{-1}
 \begin{bmatrix}
-    \partial_r \phi (0, \theta_1)  \\
-   \partial_r \phi (0, \theta_2) \\
+    \partial_r \phi (0, \theta_1) \\
+    \partial_r \phi (0, \theta_2)
 \end{bmatrix}.
 ```
 
 Then we compute $`E`$ at $`(x,y) = (0,0)`$ and $`(x,y) = \mathcal{F}(\varepsilon,\theta)`$ $`\forall \theta`$ (for $`\varepsilon\neq 0`$, we use the Jacobian matrix as previously) and we linearise
 
 ```math
-E_x(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E_x(0, \theta) + \frac{r}{\varepsilon} E_x(\varepsilon, \theta), \\
-E_y(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E_y(0, \theta) + \frac{r}{\varepsilon} E_y(\varepsilon, \theta), 
+E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta) + \frac{r}{\varepsilon} E(\varepsilon, \theta), \\
 ```
 
 As previously, we compute the advection field by 
@@ -123,14 +114,9 @@ As previously, we compute the advection field by
 A = E\wedge e_z 
 = 
 \begin{bmatrix}
-    - E_y  \\
-    E_x  \\
-\end{bmatrix} 
-= 
-\begin{bmatrix}
-    \partial_y \phi \\
-    - \partial_x \phi \\
-\end{bmatrix}. 
+      E\cdot e_y  \\
+    - E\cdot e_x 
+\end{bmatrix}.
 ```
 
 (In the code, we chose $`\theta_1 = \frac{\pi}{4}`$ and $`\theta_2  = - \frac{\pi}{4}`$, and $\varepsilon = 10^{-12}$.)
@@ -141,90 +127,132 @@ A = E\wedge e_z
 Firstly, the derivatives $`\partial_r \phi`$ and $`\partial_\theta \phi`$ are also computed here. 
 
 #### General coordinates system 
-* In **general coordinates system**, the gradient of a function is given by 
+* In a **general coordinate system**, the gradient of a scalar function in the logical domain is given in the [covariant basis](#docs_mathematical_and_physical_conventions) by 
 
 ```math
-\nabla f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j
+\nabla f = \sum_i \partial_{q_i} f b^i
 ```
 
 with 
-* $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(x_1, x_2)\mapsto(y_1,y_2)`$, 
-* $`G = J^T J = [g_{ij}]_{ij}`$ the metric tensor, 
-* $`G^{-1} = [g^{ij}]_{ij}`$ the inverse metric tensor 
-* and $`e_j`$ the unnormalised local covariant vectors. 
+* $`J`$ the Jacobian matrix associated with the mapping function of the system $`\mathcal{F}:(q_1,..., q_N)\mapsto(x_1, ..., x_N)`$, 
+* and $`b^j`$ the unnormalised local covariant vectors. 
 
-In 2D, it can be rewritten as the following matrix system 
+In 2D with $`(q_1, q_2) = (r,\theta)`$ and $`(x_1, x_2) = (x,y)`$, it can be rewritten as the following matrix system 
 ```math
-\nabla f = 
-G^{-1}
-\begin{bmatrix}
-    \partial_{x_1} f \\
-    \partial_{x_2} f \\
-\end{bmatrix}
+\hat{\nabla} f 
+= \partial_x f e_x + \partial_y f e_y
+= \partial_r f e^r + \partial_\theta f e^\theta
 ```
 
-So, for an invertible matrix, we also have the relation 
+With the composants linked by the following relation, 
 ```math
 \begin{bmatrix}
-    \partial_{x_1} f \\
-    \partial_{x_2} f \\
-\end{bmatrix}
-= 
-G \nabla f. 
-```
-
-From the relation 
-```math
-\begin{bmatrix}
-    \partial_{y_1} f \\
-    \partial_{y_2} f \\
+    \partial_{x} f \\
+    \partial_{y} f
 \end{bmatrix}
 = 
 J^{-T}
 \begin{bmatrix}
-    \partial_{x_1} f \\
-    \partial_{x_2} f \\
-\end{bmatrix}, 
+    \partial_{r} f \\
+    \partial_{\theta} f
+\end{bmatrix}.
 ```
-
-we deduce the following relation for invertible case
-```math
-\nabla_{y_1, y_2} f = J \nabla_{x_1, x_2} f,
-```
-
-with $`\nabla_{y_1, y_2} f = [\partial_{y_1} f, \partial_{y_2} f]^T`$ and 
-$`\nabla_{x_1, x_2} f = \sum_i \sum_j \partial_{x_i} f g^{ij} e_j`$.
 
 
 #### Application to the advection field
-* In our case, we use this formula to compute the electric field along the logical axis: 
+The gradient is expressed in the *covariant* basis. We express the advection field in the *contravariant* basis to use the nice property $`e_r\cdot e^r = 1`$ and $`e_\theta\cdot e^\theta = 1`$. 
+* In the [contravariant basis](#docs_mathematical_and_physical_coneventions) $`(e_r, e_\theta)`$, 
+we compute the electric field,
 ```math
 E
 = 
 \begin{bmatrix}
-    E_r \\
-    E_{\theta} \\
+    E \cdot e_r \\
+    E \cdot e_{\theta}
 \end{bmatrix}
-= - \nabla_{r,\theta} \phi  
-= - G^{-1}
+= 
+G^{-1}
 \begin{bmatrix}
-    \partial_{r} \phi \\
-    \partial_{\theta} \phi \\
+    - \partial_{r} \phi \\
+    - \partial_{\theta} \phi
 \end{bmatrix}.
 ```
+
+with $`G^{-1}`$ the inverse [metric tensor](#docs_mathematical_and_physical_coneventions__Metric_tensor). 
 
 Then the advection field is given by 
 ```math
-A
-= E \wedge e_z
-= 
+A = E \wedge e_z = 
 \begin{bmatrix}
-    -E_{\theta} \\
-    E_r \\
-\end{bmatrix}.
+     E \cdot e_y \\
+    -E \cdot e_x
+\end{bmatrix},
 ```
 
-Warning, the matrix $`G^{-1}`$ is ill-defined for $r = 0$. 
+with in contravariant basis, 
+```math
+\begin{bmatrix}
+    E \cdot e_x \\
+    E \cdot e_y
+\end{bmatrix}
+= 
+J
+\begin{bmatrix}
+    E \cdot e_r \\
+    E \cdot e_\theta
+\end{bmatrix} ,
+\qquad
+\begin{bmatrix}
+    A \cdot e_x \\
+    A \cdot e_y
+\end{bmatrix}
+= 
+J
+\begin{bmatrix}
+    A \cdot e_r \\
+    A \cdot e_\theta
+\end{bmatrix}. 
+```
+
+So, 
+```math
+\begin{bmatrix}
+    A \cdot e_r \\
+    A \cdot e_\theta
+\end{bmatrix}
+= J^{-1}
+\begin{bmatrix}
+    A \cdot e_x \\
+    A \cdot e_y
+\end{bmatrix}
+= J^{-1}
+\begin{bmatrix}
+     E \cdot e_y \\
+    -E \cdot e_x
+\end{bmatrix}
+= J^{-1}
+\begin{bmatrix}
+    J_{2,1} & J_{2,2} \\
+    -J_{1,1} & -J_{1,2}
+\end{bmatrix}
+\begin{bmatrix}
+    E \cdot e_r \\
+    E \cdot e_\theta
+\end{bmatrix}
+= \frac{1}{\det(J)}
+\begin{bmatrix}
+    (J_{11}J_{12} + J_{21}J_{22})  &  (J_{22}^2 + J_{12}^2) \\
+    -(J_{11}^2 + J_{21}^2)         & -(J_{11}J_{12} + J_{21}J_{22})
+\end{bmatrix}
+\begin{bmatrix}
+    E \cdot e_r \\
+    E \cdot e_\theta
+\end{bmatrix}
+```
+
+with $`J_{ij}`$ the elements of the matrix *J*. 
+
+Warning, the matrix $`G^{-1}`$ can be ill-defined for $r = 0$. 
 
 *Example: circular mapping:* 
 ```math
@@ -232,7 +260,7 @@ G^{-1}
 = 
 \begin{bmatrix}
     1 & 0 \\
-    0 & \frac{1}{r^2} \\
+    0 & \frac{1}{r^2}
 \end{bmatrix}.
 ```
 

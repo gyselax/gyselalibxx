@@ -57,17 +57,17 @@ public:
      * @return metric_tensor
      * 				A DTensor object containing the value of the metric tensor.
      */
-    KOKKOS_FUNCTION DTensor<Dims, Dims> operator()(PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> operator()(PositionCoordinate const& coord) const
     {
         const double J_11 = m_mapping.jacobian_11(coord);
         const double J_12 = m_mapping.jacobian_12(coord);
         const double J_21 = m_mapping.jacobian_21(coord);
         const double J_22 = m_mapping.jacobian_22(coord);
-        DTensor<Dims, Dims> metric_tensor;
-        ddcHelper::get<Dim0, Dim0>(metric_tensor) = (J_11 * J_11 + J_21 * J_21);
-        ddcHelper::get<Dim0, Dim1>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
-        ddcHelper::get<Dim1, Dim0>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
-        ddcHelper::get<Dim1, Dim1>(metric_tensor) = (J_12 * J_12 + J_22 * J_22);
+        DTensor<Dims_cov, Dims_cov> metric_tensor;
+        ddcHelper::get<Dim0_cov, Dim0_cov>(metric_tensor) = (J_11 * J_11 + J_21 * J_21);
+        ddcHelper::get<Dim0_cov, Dim1_cov>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
+        ddcHelper::get<Dim1_cov, Dim0_cov>(metric_tensor) = (J_11 * J_12 + J_21 * J_22);
+        ddcHelper::get<Dim1_cov, Dim1_cov>(metric_tensor) = (J_12 * J_12 + J_22 * J_22);
 
         return metric_tensor;
     }
@@ -80,7 +80,7 @@ public:
      * @return inverse_metric_tensor
      * 				A DTensor object containing the value of the inverse of the metric tensor.
      */
-    KOKKOS_FUNCTION DTensor<Dims_cov, Dims_cov> inverse(PositionCoordinate const& coord) const
+    KOKKOS_FUNCTION DTensor<Dims, Dims> inverse(PositionCoordinate const& coord) const
     {
         const double J_11 = m_mapping.jacobian_11(coord);
         const double J_12 = m_mapping.jacobian_12(coord);
@@ -88,15 +88,11 @@ public:
         const double J_22 = m_mapping.jacobian_22(coord);
         const double jacob_2 = m_mapping.jacobian(coord) * m_mapping.jacobian(coord);
 
-        DTensor<Dims_cov, Dims_cov> inverse_metric_tensor;
-        ddcHelper::get<Dim0_cov, Dim0_cov>(inverse_metric_tensor)
-                = (J_12 * J_12 + J_22 * J_22) / jacob_2;
-        ddcHelper::get<Dim0_cov, Dim1_cov>(inverse_metric_tensor)
-                = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1_cov, Dim0_cov>(inverse_metric_tensor)
-                = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
-        ddcHelper::get<Dim1_cov, Dim1_cov>(inverse_metric_tensor)
-                = (J_11 * J_11 + J_21 * J_21) / jacob_2;
+        DTensor<Dims, Dims> inverse_metric_tensor;
+        ddcHelper::get<Dim0, Dim0>(inverse_metric_tensor) = (J_12 * J_12 + J_22 * J_22) / jacob_2;
+        ddcHelper::get<Dim0, Dim1>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
+        ddcHelper::get<Dim1, Dim0>(inverse_metric_tensor) = (-J_11 * J_12 - J_21 * J_22) / jacob_2;
+        ddcHelper::get<Dim1, Dim1>(inverse_metric_tensor) = (J_11 * J_11 + J_21 * J_21) / jacob_2;
 
         return inverse_metric_tensor;
     }
