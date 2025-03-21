@@ -58,7 +58,7 @@ var searchData=
   ['collectinterfacesalongdim_3c_20startedge_2c_20interfacetypeseq_2c_20insert_5fpos_2c_20foundinterfaces_2c_20outsideedge_2c_20false_20_3e_55',['CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, OutsideEdge, false &gt;',['../structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_ebd86d7b2345baf351562d16964c47d9.html',1,'connectivity_details']]],
   ['collisionconfiguration_56',['collisionconfiguration',['../classCollisionConfiguration.html',1,'CollisionConfiguration&lt; GridSp, GridVpar, GridMu &gt;'],['../classCollisionConfiguration.html#a0215481eecb81a3068c3335cf0929104',1,'CollisionConfiguration::CollisionConfiguration()']]],
   ['collisionconfiguration_20_3a_57',['CollisionConfiguration :',['../src_geometryVparMu_collisions.html',1,'src_geometryVparMu']]],
-  ['collisionconfigurationdatatype_58',['CollisionConfigurationDataType',['../classCollisionConfiguration.html#ae77057265a19770a8a1054a08218f567',1,'CollisionConfiguration']]],
+  ['collisionconfigurationdatatype_58',['CollisionConfigurationDataType',['../classCollisionConfiguration.html#af6f098de78a916ed942a90890981acbe',1,'CollisionConfiguration']]],
   ['collisionconfigurationtype_59',['CollisionConfigurationType',['../classCollisionOperator.html#a9a0bdc7a33ea088ef7abfc0e53efe096',1,'CollisionOperator']]],
   ['collisionoperator_60',['collisionoperator',['../classCollisionOperator.html',1,'CollisionOperator&lt; CollisionConfiguration &gt;'],['../classCollisionOperator.html#aa4966c0cc076e065c3f35754f0fa9155',1,'CollisionOperator::CollisionOperator()']]],
   ['collisions_61',['Collisions',['../src_collisions.html',1,'src']]],

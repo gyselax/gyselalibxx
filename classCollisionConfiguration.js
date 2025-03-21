@@ -10,7 +10,7 @@ var classCollisionConfiguration =
     [ "IdxRangeVparType", "classCollisionConfiguration.html#ae670abd3ec52030c53d712175336c244", null ],
     [ "IdxRangeSpVparType", "classCollisionConfiguration.html#acacaddd6c74b2c52ee14e6b5d4983467", null ],
     [ "IdxRangeDistributionFunctionType", "classCollisionConfiguration.html#af04c3dc20040cbe7a074981e9d153b85", null ],
-    [ "CollisionConfigurationDataType", "classCollisionConfiguration.html#ae77057265a19770a8a1054a08218f567", null ],
+    [ "CollisionConfigurationDataType", "classCollisionConfiguration.html#af6f098de78a916ed942a90890981acbe", null ],
     [ "CollisionConfiguration", "classCollisionConfiguration.html#a0215481eecb81a3068c3335cf0929104", null ],
     [ "configuration", "classCollisionConfiguration.html#a806514341ca2509be90b2db2d6d4fbe3", null ],
     [ "do_configuration_data_initialisation", "classCollisionConfiguration.html#a43d76d19ef1e45a5fa778c7c59f76471", null ],
