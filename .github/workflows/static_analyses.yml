@@ -34,10 +34,12 @@ jobs:
       - name: Get Python dependencies
         run: |
           pip install numpy
+          pwd
+          ls
       - name: Markdownlint
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
-          config: '.markdownlint.json'
+          config: './.markdownlint.json'
           fix: true
           globs: |
             **/*.md
