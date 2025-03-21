@@ -8,13 +8,15 @@ There are two types of documentation which are described in detail below:
 
 The documentation can be built locally by running the following commands from the root directory:
 ```
-cmake -DGYSELALIBXX_COMPILE_SOURCE=OFF -DGYSELALIBXX_BUILD_DOCUMENTATION=1 -B build-docs .
-cmake --build build-docs
+python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+cd docs
+mkdocs build
 ```
-The option `-DGYSELALIBXX_COMPILE_SOURCE=OFF` ensures that the C++ code is not built, thereby avoiding the need to have all the C++ dependencies installed on your system.
-If this option is not used then `make docs` should be used to build only the documentation.
-
-In order to view the docs the file `build-docs/docs/html/index.html` should be opened in a browser (e.g. Firefox).
+Make sure you have installed `mkdocs` and the requirements:
+```
+pip install -r docs/requirements.txt
+```
+In order to view the docs the file `docs/site/index.html` should be opened in a browser (e.g. Firefox).
 
 ## Documentation describing code structures
 

@@ -4,7 +4,9 @@ The packages required to make the docs are listed in the [requirements.txt](./re
 ```
 pip install -r requirements.txt
 ```
+Adjustments to MkDocs can be done in the `mkdocs.yml`.
 
+To run the documentation locally follow the instructions in [Add Documentation](./tutorials/Adding_docs.md).
 
 # Useful pages used for setting up MkDocs:
 

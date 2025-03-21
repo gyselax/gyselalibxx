@@ -15,10 +15,9 @@ nav:
       - Source: src                             # Link to the source directory
       - toolchains                              # Placeholder for toolchain-related documentation
       - Simulations: simulations                # Documentation on simulations
-      - Tests: tests                            # Testing documentation
+      - Tests: tests                            # Testing
+      - MkDocs: docs/README.md                  # Documentation on how to use MkDocs for this project
   - Tutorials: docs/tutorials   # Section for tutorials
-
-  - MkDocs: docs/README.md      # Documentation on how to use MkDocs for this project
 
   - API:  # API reference documentation
       - Gyselalib++:
