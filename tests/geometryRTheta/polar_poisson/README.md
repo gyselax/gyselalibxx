@@ -26,7 +26,7 @@ The defined test functions are:
   
 The VlasovPoissonSolver is also tested on a circular mapping (CircularToCartesian) and on a Czarny mapping (CzarnyToCartesian)
 for the same Poisson equation with the Cartesian solution.
-   
+
 ## References
 
 [1] Emily Bourne, "Non-Uniform Numerical Schemes for the Modelling of Turbulence in the 5D GYSELA Code". December 2022.
