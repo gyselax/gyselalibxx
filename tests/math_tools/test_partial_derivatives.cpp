@@ -4,9 +4,10 @@
 
 #include <gtest/gtest.h>
 
+#include "central_fdm_partial_derivatives.hpp"
 #include "ddc_aliases.hpp"
 #include "mesh_builder.hpp"
-#include "spline_partial_derivatives_1d.hpp"
+#include "spline_1d_partial_derivative.hpp"
 
 namespace {
 
@@ -74,9 +75,10 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         GridX,
         GridY>;
 
+template <class Dimension>
 void test_partial_derivative_dx(
-        IPartialDerivative<DFieldXY, X> const& partial_dx,
-        IdxRangeXY idxrange_xy)
+        IPartialDerivativeCreator<IdxRangeXY, Dimension> const& partial_dx_creator,
+        IdxRangeXY const& idxrange_xy)
 {
     DFieldMemXY field_xy_alloc(idxrange_xy);
     DFieldXY field_xy = get_field(field_xy_alloc);
@@ -91,10 +93,14 @@ void test_partial_derivative_dx(
                         = ddc::coordinate(idx_x) * ddc::coordinate(idx_x) * ddc::coordinate(idx_y);
             });
 
+
+    std::unique_ptr<IPartialDerivative<IdxRangeXY, X>> const partial_dx_pointer
+            = partial_dx_creator.create_instance(get_const_field(field_xy));
+    IPartialDerivative<IdxRangeXY, X> const& partial_dx = *partial_dx_pointer;
+
     DFieldMemXY dfield_dx_xy_alloc(idxrange_xy);
     DFieldXY dfield_dx_xy = get_field(dfield_dx_xy_alloc);
-    partial_dx(dfield_dx_xy, get_const_field(field_xy));
-
+    partial_dx(dfield_dx_xy);
     double max_error = ddc::parallel_transform_reduce(
             Kokkos::DefaultExecutionSpace(),
             idxrange_xy,
@@ -110,7 +116,7 @@ void test_partial_derivative_dx(
 }
 
 
-TEST(PartialDerivative, SplinePartialDerivative1DDx)
+TEST(PartialDerivative, Spline1DPartialDerivative)
 {
     int n_elems_x(10);
     int n_elems_y(20);
@@ -138,9 +144,35 @@ TEST(PartialDerivative, SplinePartialDerivative1DDx)
     ddc::ConstantExtrapolationRule<X> bv_x_max(x_max);
     SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
 
-    SplinePartialDerivative1D<SplineXBuilder, SplineXEvaluator>
-            partial_dx(builder_x, spline_evaluator_x);
-    test_partial_derivative_dx(partial_dx, idxrange_xy);
+    Spline1DPartialDerivativeCreator<SplineXBuilder, SplineXEvaluator> const
+            partial_dx_creator(builder_x, spline_evaluator_x);
+
+    test_partial_derivative_dx<X>(partial_dx_creator, idxrange_xy);
 }
 
+
+TEST(PartialDerivative, CentralFDMPartialDerivativeDx)
+{
+    int n_elems_x(10);
+    int n_elems_y(20);
+
+    Coord<X> const x_min(0.0);
+    Coord<X> const x_max(1.0);
+    IdxStepX x_ncells(n_elems_x);
+
+    Coord<Y> const y_min(0.0);
+    Coord<Y> const y_max(2.0);
+    IdxStepY y_ncells(n_elems_y);
+
+    ddc::init_discrete_space<GridX>(build_random_non_uniform_break_points(x_min, x_max, x_ncells));
+    IdxRangeX idxrange_x(IdxX {0}, x_ncells);
+
+    ddc::init_discrete_space<GridY>(build_random_non_uniform_break_points(y_min, y_max, y_ncells));
+    IdxRangeY idxrange_y(IdxY {0}, y_ncells);
+
+    IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
+
+    CentralFDMPartialDerivativeCreator<IdxRangeXY, X> const partial_dx_creator;
+    test_partial_derivative_dx(partial_dx_creator, idxrange_xy);
+}
 } // namespace

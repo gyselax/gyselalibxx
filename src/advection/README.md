@@ -139,6 +139,14 @@ X(s; s, x, y) = x,\\
 Y(s; s, x, y) = y.
 ```
 
+The characteristic $X$ represents the trajectory on the $x$-dimension of the solution $f$ 
+(idem for $Y$ on the $y$-dimension). 
+The parametrisation of the trajectory are given after the ";". 
+$(X (t; s, x, y), Y (t; s, x, y))$ indicates that at the time $s$, the trajectory passes by the point $(x,y)$. 
+In the backward semi-Lagrangian method, we solve the equation of the characteristics to identify the trajectory 
+of the solution passing by each mesh point $`(x,y)_{ij}`$ at the time $s = t+dt$. We are interested in its position 
+at the previous time step $t$. The conservation property along the characteristics informs us that the value of the function at this position $(X(t; s=t+dt, x, y), Y (t; s=t+dt, x, y))$  at $t$ is the same as the value of the function at the mesh point $`(x,y)_{ij}`$ at the time $s = t+dt$.
+
 The characteristic feet are calculated using a time integration method. For details of available methods see [timestepper](../timestepper/README.md).
 
 ### Advection domain

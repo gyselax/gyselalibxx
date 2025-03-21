@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include "geometry_tensor.hpp"
 #include "indexed_tensor.hpp"
 #include "tensor.hpp"
 #include "tensor_index_tools.hpp"
@@ -10,43 +11,12 @@
 
 using namespace tensor_tools;
 
-namespace {
-struct R_cov;
-struct Theta_cov;
-
-struct R
-{
-    static bool constexpr IS_COVARIANT = false;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = R_cov;
-};
-struct Theta
-{
-    static bool constexpr IS_COVARIANT = false;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = Theta_cov;
-};
-
-struct R_cov
-{
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = false;
-    using Dual = R;
-};
-struct Theta_cov
-{
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = false;
-    using Dual = Theta;
-};
 
 int dot_product(Vector<int, R_cov, Theta_cov> a, Vector<int, R, Theta> b)
 {
     return ddcHelper::get<R_cov>(a) * ddcHelper::get<R>(b)
            + ddcHelper::get<Theta_cov>(a) * ddcHelper::get<Theta>(b);
 }
-
-} // namespace
 
 TEST(TensorTest, ExplicitDotProduct)
 {
@@ -386,4 +356,41 @@ TEST(TensorTest, MulConst)
     EXPECT_EQ(val, 28);
     val = ddcHelper::get<Theta, Theta_cov>(C);
     EXPECT_EQ(val, 36);
+}
+
+TEST(TensorTest, MulOrthonormal)
+{
+    using Tensor2D_A = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    using Tensor2D_B = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    using Tensor2D_C = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    Tensor2D_A A;
+    Tensor2D_B B;
+    ddcHelper::get<X, X>(A) = 1;
+    ddcHelper::get<X, Y>(A) = 0;
+    ddcHelper::get<Y, X>(A) = 2;
+    ddcHelper::get<Y, Y>(A) = 4;
+    ddcHelper::get<X, X>(B) = 6;
+    ddcHelper::get<X, Y>(B) = 8;
+    ddcHelper::get<Y, X>(B) = 4;
+    ddcHelper::get<Y, Y>(B) = 5;
+    Tensor2D_C C = tensor_mul(index<'i', 'j'>(A), index<'j', 'k'>(B));
+    int val = ddcHelper::get<X, X>(C);
+    EXPECT_EQ(val, 6);
+    val = ddcHelper::get<X, Y>(C);
+    EXPECT_EQ(val, 8);
+    val = ddcHelper::get<Y, X>(C);
+    EXPECT_EQ(val, 28);
+    val = ddcHelper::get<Y, Y>(C);
+    EXPECT_EQ(val, 36);
+    Tensor2D_C D = tensor_mul(index<'i', 'j'>(A), index<'k', 'j'>(B));
+    val = ddcHelper::get<X, X>(D);
+    EXPECT_EQ(val, 6);
+    val = ddcHelper::get<X, Y>(D);
+    EXPECT_EQ(val, 4);
+    val = ddcHelper::get<Y, X>(D);
+    EXPECT_EQ(val, 44);
+    val = ddcHelper::get<Y, Y>(D);
+    EXPECT_EQ(val, 28);
+    int E = tensor_mul(index<'i', 'j'>(A), index<'j', 'i'>(B));
+    EXPECT_EQ(E, 42);
 }
