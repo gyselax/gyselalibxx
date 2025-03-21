@@ -53,7 +53,7 @@ plugins:
           src-dirs: ../src                # Source directory containing C++ code
           full-doc: True                  # Generates full documentation
           doxy-cfg:                       # Doxygen configuration settings
-            FILE_PATTERNS: "*.cpp *.h*"   # Files to process
+            FILE_PATTERNS: "*.cpp *.hpp"   # Files to process
             RECURSIVE: True               # Scan directories recursively
             EXTRACT_ALL: False            # Only extract documented elements
             EXCLUDE_SYMBOLS: "detail details mapping_detail"  # Exclude internal namespaces
