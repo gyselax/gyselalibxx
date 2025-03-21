@@ -451,7 +451,7 @@ KOKKOS_INLINE_FUNCTION Tensor<ElementType, ValidIndexSet...> operator*(
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[in] coord The coordinate to which the tensor is added.
- * @param[in] tensor The tensor to be converted.
+ * @param[in] tensor The tensor to be added to the coordinate.
  * @return The new coordinate.
  */
 template <class... Dims>
@@ -467,7 +467,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[in] coord The coordinate from which the tensor is subtracted.
- * @param[in] tensor The tensor to be converted.
+ * @param[in] tensor The tensor to be subtracted from the coordinate.
  * @return The new coordinate.
  */
 template <class... Dims>
@@ -483,7 +483,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator-(
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[inout] coord The coordinate to which the tensor is added.
- * @param[in] tensor The tensor to be converted.
+ * @param[in] tensor The tensor to be added to the coordinate.
  * @return The new coordinate.
  */
 template <class... Dims>
@@ -500,7 +500,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[inout] coord The coordinate from which the tensor is subtracted.
- * @param[in] tensor The tensor to be converted.
+ * @param[in] tensor The tensor to be subtracted from the coordinate.
  * @return The new coordinate.
  */
 template <class... Dims>
