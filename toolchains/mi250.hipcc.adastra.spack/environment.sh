@@ -24,6 +24,7 @@ module load \
     gcc/13.2.1.mi250/zen3/paraconf \
     gcc/13.2.1.mi250/zen3/pdi \
     gcc/13.2.1.mi250/zen3/pdiplugin-decl-hdf5 \
+    gcc/13.2.1.mi250/zen3/pdiplugin-mpi \
     gcc/13.2.1.mi250/zen3/pdiplugin-set-value \
     gcc/13.2.1.mi250/zen3/pdiplugin-trace \
     gcc/13.2.1.mi250/zen3/ginkgo \
