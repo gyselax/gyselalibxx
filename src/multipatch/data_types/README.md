@@ -13,7 +13,7 @@ For example we can use fields on different patches which would be the type
 
 So after defining
 
-```
+```cpp
 template<class Patch>
 using DFieldOnPatch = DField<Patch::IdxRange12>;
 ```
@@ -22,13 +22,13 @@ we could then have three fields `field1`, `field2` and `field3` on
 patches 1,2 and 3 respectively. The `MultipatchType` object would then
 be initialised as
 
-```
+```cpp
 MultipatchType<DFieldOnPatch, Patch1, Patch2, Patch3> multipatch_field(field1, field2, field3);
 ```
 
 and the field on patch 3 can be retrieved via
 
-```
+```cpp
 DField<Patch3::IdxRange12> field3_from_multipatch = multipatch_field.get<Patch3>();
 ```
 
