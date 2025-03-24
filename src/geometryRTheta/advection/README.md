@@ -209,16 +209,16 @@ The tests of the convergence order are made for constant CFL which means it chec
 for $`(N_r\times N_\theta, dt) = (N_{r,0}\times N_{\theta,0}, dt_0)`$ and then $`(n*N_{r,0}\times n*N_{\theta,0}, dt_0/n)`$
 for $n = 1, 2, 4, 8,  ...$.
 
-## References
-
-[^1]: Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
-disk-like domains with the method of characteristics and spline finite elements".
-([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889).)
-Journal of Computational Physics (2019).
-
 ## Contents
 
 This folder contains:
 
 - iadvection\_rtheta.hpp : define the base class for advection operator (IAdvectionRTheta).
   - bsl\_advection\_rtheta.hpp : define the advection operator described just before (BslAdvectionRTheta).
+
+## References
+
+[^1]: Edoardo Zoni, Yaman Güçlü. "Solving hyperbolic-elliptic problems on singular mapped
+disk-like domains with the method of characteristics and spline finite elements".
+([https://doi.org/10.1016/j.jcp.2019.108889](https://doi.org/10.1016/j.jcp.2019.108889).)
+Journal of Computational Physics (2019).

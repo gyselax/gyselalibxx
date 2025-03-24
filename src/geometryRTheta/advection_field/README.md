@@ -83,7 +83,7 @@ A = E\wedge e_z
 \end{bmatrix}. 
 ```
 
-- If $`r \leq \varepsilon`$, we linearise. The method is detailed in [Zoni et al. (2019)](#zoni). We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
+- If $`r \leq \varepsilon`$, we linearise. The method is detailed in Zoni et al. (2019)[^1]. We use only the derivatives along $`r`$ at two linearly independent directions of $`\theta`$ : $`\theta_1`$ and $`\theta_2`$
 
 ```math
 \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_1), \\
@@ -281,11 +281,11 @@ G^{-1}
 
 In the code, the O-point is differently treated. The domain is split between a domain without the O-point ($`(0,\theta), \forall \theta`$) and the domain containing only the O-point. For the first domain, we compute the advection field along the logical axis as explain previously. On the second domain, we compute the unique value of the advection field along the physical axis using the linearisation done in the [Advection field along the physical domain axis](#src_geometryRTheta_advection_field__Guiding_centre_case) section.
 
-## References
-
-<a name="zoni"></a> [1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
-method of characteristics and spline finite elements", <https://doi.org/10.1016/j.jcp.2019.108889>, Journal of Computational Physics, 2019.
-
 ## Contents
 
 - advection\_field\_rtheta.hpp : containing AdvectionFieldFinder with the advection field computation for the guiding centre simulation.
+
+## References
+
+[^1] Edoardo Zoni, Yaman Güçlü, "Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the
+method of characteristics and spline finite elements", <https://doi.org/10.1016/j.jcp.2019.108889>, Journal of Computational Physics, 2019.
