@@ -109,7 +109,7 @@ std::cout << ddc::coordinate(i) << std::endl;
 
 will output:
 
-```
+```none
 (0.0)
 ```
 
