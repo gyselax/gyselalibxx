@@ -167,7 +167,13 @@ A^i\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\} A^j\{q\}.
 By introducing the metric tensors $`G\{p\}`$  and $`G\{q\}`$ associated with both curvilinear coordinates system, and by writing $`g_{ij}\{p\}`$ and $`g_{ij}\{q\}`$ their elements ($`g^{ij}\{p\}`$ and $`g^{ij}\{q\}`$ the elements of their inverse) one relates the components of $`\mathbf{A}`$ expressed in covariant vector basis associated with both curvilinear coordinates system as 
 
 ```math
-g^{ik}\{p\}A_k\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\}g^{jl}\{p\} A_l\{q\}. 
+g^{ik}\{p\}A_k\{p\} = J\left.^{i}_{\;j}\right.\{q\to p\}g^{jl}\{q\} A_l\{q\}.
+```
+
+as for the curvilinear to Cartesian case we can use the fact that $JG^{-1}=J^{-T}$ to write this equation in an alternate form:
+
+```math
+g^{ik}\{p\}A_k\{p\} = (J^{-T})_{\;i}^j\{q\to p\}A_j\{q\} = (J^{-1})^j_{\;i}\{q\to p\}A_j\{q\} = (J)^j_{\;i}\{p\to q\} A_j\{q\}.
 ```
 
 ## Differential operators
