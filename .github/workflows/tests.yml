@@ -85,17 +85,17 @@ jobs:
           lcov --ignore-errors unused -e lcov.info -o cleaned_coverage.txt "$(dirname $(pwd))/src/*"
           lcov -l cleaned_coverage.txt
         working-directory: ./build
-      - name: Generate cleanly
-        uses: threeal/gcovr-action@v1.1.0
-        with:
-          xml-out: cobertura.xml
-      - name: Annotate coverage
-        uses: ZainAmjad68/test-coverage-annotate@v0.8
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          coverage-info-path: './build/lcov.info'
-          annotation-coverage: 'detailed'
-          annotation-type: 'all'
+      #- name: Generate cleanly
+      #  uses: threeal/gcovr-action@v1.1.0
+      #  with:
+      #    xml-out: cobertura.xml
+      #- name: Annotate coverage
+      #  uses: ZainAmjad68/test-coverage-annotate@v0.8
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    coverage-info-path: './build/lcov.info'
+      #    annotation-coverage: 'detailed'
+      #    annotation-type: 'all'
 
   #set_draft_failing:
   #  runs-on: ubuntu-latest
