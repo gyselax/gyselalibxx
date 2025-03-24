@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e":[16,170,0,5],
 "classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407":[16,170,0,18],
 "classPolarBSplines_1_1Impl.html#aede52d653b3250142ef44aadb56904f8":[16,170,0,6],
 "classPolarBSplines_1_1Impl.html#af11b5fa49f044552020019eb1b8f4457":[16,170,0,19],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "classVectorFieldMem.html#a43fb3313fbd0e4c96ebd7b7252031532":[16,208,10],
 "classVectorFieldMem.html#a4a5b0921086127d5a1e57ee4d587c5d5":[16,208,17],
 "classVectorFieldMem.html#a5770ccc15ea62e4105e65aab707837e7":[16,208,21],
-"classVectorFieldMem.html#a5b66c7eca07a6ec79a9963fc13e2b6cc":[16,208,16],
-"classVectorFieldMem.html#a5c5366a96f56e4422e59e8dec1e9c850":[16,208,14]
+"classVectorFieldMem.html#a5b66c7eca07a6ec79a9963fc13e2b6cc":[16,208,16]
 };

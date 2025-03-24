@@ -284,13 +284,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2patches__2d__non__periodic_8hpp_source.html",
-"classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d",
-"classGaussLegendre.html#ad4beb0ab162fcd8fd6961ae9013c3f61",
-"classMatrix__Centre__Block.html#a2f2b0a3f24815ba87139c0639ec93c6b",
-"classPolarBSplines_1_1Impl.html#ae600480dcb012c8817f6a72dcbb46407",
-"classVectorFieldMem.html#a7a81a04ae5a72fd9236b3a3886dded3b",
-"l__norm__tools_8hpp.html#a27082a4ff6b4ad2c890a613983f6f287",
-"structGEOM__NAMESPACE__NAME_1_1BSplinesY.html"
+"classCombinedMapping.html#ad7043f25e2074ab5befc28233e7a7a88",
+"classGaussLegendre.html#abb70874897c85fa6df64c91511e2d24e",
+"classMatrix__Centre__Block.html",
+"classPolarBSplines_1_1Impl.html#ad59005ab67bc08a9bade86b4cbb86c6e",
+"classVectorFieldMem.html#a5c5366a96f56e4422e59e8dec1e9c850",
+"l__norm__tools_8hpp.html#a1e7039002a54c7de373d8c9b27de00ca",
+"structGEOM__NAMESPACE__NAME_1_1BSplinesX.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

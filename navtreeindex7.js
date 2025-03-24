@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"structGEOM__NAMESPACE__NAME_1_1BSplinesX.html":[16,3,2],
 "structGEOM__NAMESPACE__NAME_1_1BSplinesY.html":[16,3,3],
 "structGEOM__NAMESPACE__NAME_1_1GridR.html":[16,3,4],
 "structGEOM__NAMESPACE__NAME_1_1GridTheta.html":[16,3,5],

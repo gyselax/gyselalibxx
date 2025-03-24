@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"classGaussLegendre.html#abb70874897c85fa6df64c91511e2d24e":[16,69,2],
 "classGaussLegendre.html#ad4beb0ab162fcd8fd6961ae9013c3f61":[16,69,0],
 "classGridBuilder.html":[16,74],
 "classGridBuilder.html#a070eaf99580a98f094ee4e42f66ea2dd":[16,74,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "classMatrix__Banded.html#a5b048b1936941d7188b996cd531cd630":[16,132,8],
 "classMatrix__Banded.html#ab8fe5741b3b61c8351ab6be287e6d98f":[16,132,5],
 "classMatrix__Banded.html#ac89afe7f80209cd4456138daf37c3cb9":[16,132,0],
-"classMatrix__Banded.html#ad7b9a08a95f612d924e4b074e1772247":[16,132,6],
-"classMatrix__Centre__Block.html":[16,133]
+"classMatrix__Banded.html#ad7b9a08a95f612d924e4b074e1772247":[16,132,6]
 };
