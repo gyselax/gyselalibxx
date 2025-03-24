@@ -128,6 +128,14 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordResult</b> = ty
 using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordJacobian</b> = typename Mapping2::CoordResult</td></tr>
 <tr class="memdesc:adb0b420bad29ecc3a1fcec5252421d6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The coordinate system on which the Jacobian is described. <br /></td></tr>
 <tr class="separator:adb0b420bad29ecc3a1fcec5252421d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c929e7836a5a62c9a9fbb4770e5b996" id="r_a0c929e7836a5a62c9a9fbb4770e5b996"><td class="memItemLeft" align="right" valign="top"><a id="a0c929e7836a5a62c9a9fbb4770e5b996" name="a0c929e7836a5a62c9a9fbb4770e5b996"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>JacobianMatrixType</b> = <a class="el" href="classTensor.html">DTensor</a>&lt; ddc::to_type_seq_t&lt; <a class="el" href="classCombinedMapping.html#a72884aba7cc176b42af7cfd3053cbe4d">CoordResult</a> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <a class="el" href="classCombinedMapping.html#a967567a14f47ca5d71be6aab594b1f14">CoordArg</a> &gt; &gt; &gt;</td></tr>
+<tr class="memdesc:a0c929e7836a5a62c9a9fbb4770e5b996"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the Jacobian matrix. <br /></td></tr>
+<tr class="separator:a0c929e7836a5a62c9a9fbb4770e5b996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c680b6476d5fbf069f06df1211ae7e" id="r_ae7c680b6476d5fbf069f06df1211ae7e"><td class="memItemLeft" align="right" valign="top"><a id="ae7c680b6476d5fbf069f06df1211ae7e" name="ae7c680b6476d5fbf069f06df1211ae7e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>InvJacobianMatrixType</b> = <a class="el" href="classTensor.html">DTensor</a>&lt; ddc::to_type_seq_t&lt; <a class="el" href="classCombinedMapping.html#a967567a14f47ca5d71be6aab594b1f14">CoordArg</a> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <a class="el" href="classCombinedMapping.html#a72884aba7cc176b42af7cfd3053cbe4d">CoordResult</a> &gt; &gt; &gt;</td></tr>
+<tr class="memdesc:ae7c680b6476d5fbf069f06df1211ae7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the inverse Jacobian matrix. <br /></td></tr>
+<tr class="separator:ae7c680b6476d5fbf069f06df1211ae7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -142,9 +150,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6bdf142f7b26378f0dc1326e9045fde" id="r_ae6bdf142f7b26378f0dc1326e9045fde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCombinedMapping.html#a72884aba7cc176b42af7cfd3053cbe4d">CoordResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#ae6bdf142f7b26378f0dc1326e9045fde">operator()</a> (<a class="el" href="classCombinedMapping.html#a967567a14f47ca5d71be6aab594b1f14">CoordArg</a> coord)</td></tr>
 <tr class="memdesc:ae6bdf142f7b26378f0dc1326e9045fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the argument coordinate to the equivalent result coordinate.  <br /></td></tr>
 <tr class="separator:ae6bdf142f7b26378f0dc1326e9045fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73e456fb8f481c0c0f484f43125fa82c" id="r_a73e456fb8f481c0c0f484f43125fa82c"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#a73e456fb8f481c0c0f484f43125fa82c">jacobian_matrix</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord, Matrix_2x2 &amp;matrix) const</td></tr>
-<tr class="memdesc:a73e456fb8f481c0c0f484f43125fa82c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a73e456fb8f481c0c0f484f43125fa82c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4358592aca13d79f589bd0628121e8" id="r_a6f4358592aca13d79f589bd0628121e8"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION <a class="el" href="classCombinedMapping.html#a0c929e7836a5a62c9a9fbb4770e5b996">JacobianMatrixType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#a6f4358592aca13d79f589bd0628121e8">jacobian_matrix</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord) const</td></tr>
+<tr class="memdesc:a6f4358592aca13d79f589bd0628121e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a6f4358592aca13d79f589bd0628121e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d8fe70ec7af6a1f834be44611e9c8d8" id="r_a3d8fe70ec7af6a1f834be44611e9c8d8"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#a3d8fe70ec7af6a1f834be44611e9c8d8">jacobian_11</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord_rtheta) const</td></tr>
 <tr class="memdesc:a3d8fe70ec7af6a1f834be44611e9c8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a3d8fe70ec7af6a1f834be44611e9c8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,9 +168,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef4b5216c34ee7a72285a45da9a86ef4" id="r_aef4b5216c34ee7a72285a45da9a86ef4"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#aef4b5216c34ee7a72285a45da9a86ef4">jacobian</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord_rtheta) const</td></tr>
 <tr class="memdesc:aef4b5216c34ee7a72285a45da9a86ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the determinant of the Jacobian matrix.  <br /></td></tr>
 <tr class="separator:aef4b5216c34ee7a72285a45da9a86ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dbf6686929960b3bc19973a22c2c275" id="r_a6dbf6686929960b3bc19973a22c2c275"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#a6dbf6686929960b3bc19973a22c2c275">inv_jacobian_matrix</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord, Matrix_2x2 &amp;matrix) const</td></tr>
-<tr class="memdesc:a6dbf6686929960b3bc19973a22c2c275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a6dbf6686929960b3bc19973a22c2c275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3cb98e450447ccb284380d288490674" id="r_ab3cb98e450447ccb284380d288490674"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classCombinedMapping.html#ae7c680b6476d5fbf069f06df1211ae7e">InvJacobianMatrixType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#ab3cb98e450447ccb284380d288490674">inv_jacobian_matrix</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord) const</td></tr>
+<tr class="memdesc:ab3cb98e450447ccb284380d288490674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse Jacobian matrix.  <br /></td></tr>
+<tr class="separator:ab3cb98e450447ccb284380d288490674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ed2f33fa5953ac3e731b041c9bc149b" id="r_a3ed2f33fa5953ac3e731b041c9bc149b"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCombinedMapping.html#a3ed2f33fa5953ac3e731b041c9bc149b">inv_jacobian_11</a> (<a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;coord_rtheta) const</td></tr>
 <tr class="memdesc:a3ed2f33fa5953ac3e731b041c9bc149b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a3ed2f33fa5953ac3e731b041c9bc149b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -333,8 +341,8 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 
 </div>
 </div>
-<a id="a73e456fb8f481c0c0f484f43125fa82c" name="a73e456fb8f481c0c0f484f43125fa82c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73e456fb8f481c0c0f484f43125fa82c">&#9670;&#160;</a></span>jacobian_matrix()</h2>
+<a id="a6f4358592aca13d79f589bd0628121e8" name="a6f4358592aca13d79f589bd0628121e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4358592aca13d79f589bd0628121e8">&#9670;&#160;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -345,21 +353,11 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION void <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; Mapping1, Mapping2 &gt;::jacobian_matrix </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION <a class="el" href="classCombinedMapping.html#a0c929e7836a5a62c9a9fbb4770e5b996">JacobianMatrixType</a> <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; Mapping1, Mapping2 &gt;::jacobian_matrix </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
-          <td class="paramname"><em>matrix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -376,10 +374,10 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The calculated Jacobian matrix. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The calculated Jacobian matrix. </dd></dl>
 
 </div>
 </div>
@@ -410,7 +408,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (1,1) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a73e456fb8f481c0c0f484f43125fa82c" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6f4358592aca13d79f589bd0628121e8" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -448,7 +446,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (1,2) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a73e456fb8f481c0c0f484f43125fa82c" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6f4358592aca13d79f589bd0628121e8" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -486,7 +484,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (2,1) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a73e456fb8f481c0c0f484f43125fa82c" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6f4358592aca13d79f589bd0628121e8" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -524,7 +522,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (2,2) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a73e456fb8f481c0c0f484f43125fa82c" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6f4358592aca13d79f589bd0628121e8" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -562,7 +560,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the determinant of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a73e456fb8f481c0c0f484f43125fa82c" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6f4358592aca13d79f589bd0628121e8" title="Compute full Jacobian matrix.">jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -573,8 +571,8 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 
 </div>
 </div>
-<a id="a6dbf6686929960b3bc19973a22c2c275" name="a6dbf6686929960b3bc19973a22c2c275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dbf6686929960b3bc19973a22c2c275">&#9670;&#160;</a></span>inv_jacobian_matrix()</h2>
+<a id="ab3cb98e450447ccb284380d288490674" name="ab3cb98e450447ccb284380d288490674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3cb98e450447ccb284380d288490674">&#9670;&#160;</a></span>inv_jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -585,21 +583,11 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; Mapping1, Mapping2 &gt;::inv_jacobian_matrix </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classCombinedMapping.html#ae7c680b6476d5fbf069f06df1211ae7e">InvJacobianMatrixType</a> <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; Mapping1, Mapping2 &gt;::inv_jacobian_matrix </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classCombinedMapping.html#adb0b420bad29ecc3a1fcec5252421d6d">CoordJacobian</a> const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
-          <td class="paramname"><em>matrix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -614,10 +602,10 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the inverse Jacobian matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The calculated inverse Jacobian matrix.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The calculated inverse Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>non_singular_inverse_jacobian_matrix </dd></dl>
 
 </div>
@@ -649,7 +637,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (1,1) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6dbf6686929960b3bc19973a22c2c275" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#ab3cb98e450447ccb284380d288490674" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -687,7 +675,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (1,2) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6dbf6686929960b3bc19973a22c2c275" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#ab3cb98e450447ccb284380d288490674" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -725,7 +713,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (2,1) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6dbf6686929960b3bc19973a22c2c275" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#ab3cb98e450447ccb284380d288490674" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -763,7 +751,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the (2,2) coefficient of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6dbf6686929960b3bc19973a22c2c275" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#ab3cb98e450447ccb284380d288490674" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
@@ -801,7 +789,7 @@ template&lt;class Mapping1 , class Mapping2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Compute the determinant of the Jacobian matrix. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#a6dbf6686929960b3bc19973a22c2c275" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classCombinedMapping.html#ab3cb98e450447ccb284380d288490674" title="Compute the full inverse Jacobian matrix.">inv_jacobian_matrix</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord_rtheta</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>

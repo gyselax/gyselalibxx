@@ -140,6 +140,22 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordArg</b> = Coord
 using&#160;</td><td class="memItemRight" valign="bottom"><b>CoordResult</b> = Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;</td></tr>
 <tr class="memdesc:a96445d5169722628a035e142fbf516d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the result of the function described by this mapping. <br /></td></tr>
 <tr class="separator:a96445d5169722628a035e142fbf516d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8e1bbab5fe5d419953f4250237260e7" id="r_ad8e1bbab5fe5d419953f4250237260e7"><td class="memItemLeft" align="right" valign="top"><a id="ad8e1bbab5fe5d419953f4250237260e7" name="ad8e1bbab5fe5d419953f4250237260e7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>X_cov</b> = typename <a class="el" href="structX.html#a11361f8ff006d764ec79d4b06fa3f45f">X::Dual</a></td></tr>
+<tr class="memdesc:ad8e1bbab5fe5d419953f4250237260e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The covariant form of the first physical coordinate. <br /></td></tr>
+<tr class="separator:ad8e1bbab5fe5d419953f4250237260e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fac6fc2bff81a582bd4089fc6b0344f" id="r_a2fac6fc2bff81a582bd4089fc6b0344f"><td class="memItemLeft" align="right" valign="top"><a id="a2fac6fc2bff81a582bd4089fc6b0344f" name="a2fac6fc2bff81a582bd4089fc6b0344f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Y_cov</b> = typename <a class="el" href="structY.html#aad98c6afa465f3fb654029648420df1f">Y::Dual</a></td></tr>
+<tr class="memdesc:a2fac6fc2bff81a582bd4089fc6b0344f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The covariant form of the second physical coordinate. <br /></td></tr>
+<tr class="separator:a2fac6fc2bff81a582bd4089fc6b0344f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3af040539c015e89917c4a4194c8b9e2" id="r_a3af040539c015e89917c4a4194c8b9e2"><td class="memItemLeft" align="right" valign="top"><a id="a3af040539c015e89917c4a4194c8b9e2" name="a3af040539c015e89917c4a4194c8b9e2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>R_cov</b> = typename <a class="el" href="structR.html#a35006d7e5031a9bd48e5af62534c421f">R::Dual</a></td></tr>
+<tr class="memdesc:a3af040539c015e89917c4a4194c8b9e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The covariant form of the first logical coordinate. <br /></td></tr>
+<tr class="separator:a3af040539c015e89917c4a4194c8b9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d38114e75c30437baa95e8fb3e27fd0" id="r_a1d38114e75c30437baa95e8fb3e27fd0"><td class="memItemLeft" align="right" valign="top"><a id="a1d38114e75c30437baa95e8fb3e27fd0" name="a1d38114e75c30437baa95e8fb3e27fd0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Theta_cov</b> = typename <a class="el" href="structTheta.html#a1f99557f831a14c03c9d03e1a5e33d40">Theta::Dual</a></td></tr>
+<tr class="memdesc:a1d38114e75c30437baa95e8fb3e27fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The covariant form of the second logical coordinate. <br /></td></tr>
+<tr class="separator:a1d38114e75c30437baa95e8fb3e27fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -161,9 +177,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a275832f34d53e29ba6a1304819d040fe" id="r_a275832f34d53e29ba6a1304819d040fe"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToCircular.html#a275832f34d53e29ba6a1304819d040fe">jacobian</a> (Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;coord)</td></tr>
 <tr class="memdesc:a275832f34d53e29ba6a1304819d040fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.  <br /></td></tr>
 <tr class="separator:a275832f34d53e29ba6a1304819d040fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a339a78003a57898fefa543aedbafd7ea" id="r_a339a78003a57898fefa543aedbafd7ea"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToCircular.html#a339a78003a57898fefa543aedbafd7ea">jacobian_matrix</a> (Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;coord, Matrix_2x2 &amp;matrix)</td></tr>
-<tr class="memdesc:a339a78003a57898fefa543aedbafd7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
-<tr class="separator:a339a78003a57898fefa543aedbafd7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82b4bdf6426a7ca736ece9eda07fd968" id="r_a82b4bdf6426a7ca736ece9eda07fd968"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; VectorIndexSet&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, VectorIndexSet&lt; <a class="el" href="classCartesianToCircular.html#a3af040539c015e89917c4a4194c8b9e2">R_cov</a>, <a class="el" href="classCartesianToCircular.html#a1d38114e75c30437baa95e8fb3e27fd0">Theta_cov</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToCircular.html#a82b4bdf6426a7ca736ece9eda07fd968">jacobian_matrix</a> (Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;coord) const</td></tr>
+<tr class="memdesc:a82b4bdf6426a7ca736ece9eda07fd968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a82b4bdf6426a7ca736ece9eda07fd968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf596f31101774cc5f69e482a3f2be32" id="r_acf596f31101774cc5f69e482a3f2be32"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCartesianToCircular.html#acf596f31101774cc5f69e482a3f2be32">jacobian_11</a> (Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;coord)</td></tr>
 <tr class="memdesc:acf596f31101774cc5f69e482a3f2be32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the Jacobian matrix.  <br /></td></tr>
 <tr class="separator:acf596f31101774cc5f69e482a3f2be32"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -415,8 +431,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 
 </div>
 </div>
-<a id="a339a78003a57898fefa543aedbafd7ea" name="a339a78003a57898fefa543aedbafd7ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a339a78003a57898fefa543aedbafd7ea">&#9670;&#160;</a></span>jacobian_matrix()</h2>
+<a id="a82b4bdf6426a7ca736ece9eda07fd968" name="a82b4bdf6426a7ca736ece9eda07fd968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82b4bdf6426a7ca736ece9eda07fd968">&#9670;&#160;</a></span>jacobian_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -427,21 +443,11 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION void <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_matrix </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; VectorIndexSet&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt;, VectorIndexSet&lt; <a class="el" href="classCartesianToCircular.html#a3af040539c015e89917c4a4194c8b9e2">R_cov</a>, <a class="el" href="classCartesianToCircular.html#a1d38114e75c30437baa95e8fb3e27fd0">Theta_cov</a> &gt; &gt; <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt;::jacobian_matrix </td>
           <td>(</td>
           <td class="paramtype">Coord&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>coord</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Matrix_2x2 &amp;&#160;</td>
-          <td class="paramname"><em>matrix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"><em>coord</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -456,10 +462,10 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">coord</td><td>The coordinate where we evaluate the Jacobian matrix. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">matrix</td><td>The Jacobian matrix returned.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The Jacobian matrix.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>Jacobian::jacobian_11 </dd>
 <dd>
 Jacobian::jacobian_12 </dd>

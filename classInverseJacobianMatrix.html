@@ -104,6 +104,7 @@ $(document).ready(function(){initNavTree('classInverseJacobianMatrix.html',''); 
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classInverseJacobianMatrix-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">InverseJacobianMatrix&lt; Mapping, PositionCoordinate &gt; Class Template Reference</div></div>
@@ -113,14 +114,21 @@ $(document).ready(function(){initNavTree('classInverseJacobianMatrix.html',''); 
 <p>A class to calculate the inverse of the Jacobian matrix.  
  <a href="classInverseJacobianMatrix.html#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a81c90715177eda38dbbabd977964d6d1" id="r_a81c90715177eda38dbbabd977964d6d1"><td class="memItemLeft" align="right" valign="top"><a id="a81c90715177eda38dbbabd977964d6d1" name="a81c90715177eda38dbbabd977964d6d1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>InverseJacobianTensor</b> = <a class="el" href="classTensor.html">DTensor</a>&lt; ValidArgIndices, vector_index_set_dual_t&lt; ValidResultIndices &gt; &gt;</td></tr>
+<tr class="memdesc:a81c90715177eda38dbbabd977964d6d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the tensor representing the inverse Jacobian. <br /></td></tr>
+<tr class="separator:a81c90715177eda38dbbabd977964d6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8484531e5dbf59a3ab2a6ef08711a84d" id="r_a8484531e5dbf59a3ab2a6ef08711a84d"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#a8484531e5dbf59a3ab2a6ef08711a84d">InverseJacobianMatrix</a> (Mapping const &amp;mapping)</td></tr>
 <tr class="memdesc:a8484531e5dbf59a3ab2a6ef08711a84d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for the <a class="el" href="classInverseJacobianMatrix.html" title="A class to calculate the inverse of the Jacobian matrix.">InverseJacobianMatrix</a>.  <br /></td></tr>
 <tr class="separator:a8484531e5dbf59a3ab2a6ef08711a84d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad33e3bab6bf8473ddbb65ca77661b3a2" id="r_ad33e3bab6bf8473ddbb65ca77661b3a2"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#ad33e3bab6bf8473ddbb65ca77661b3a2">operator()</a> (PositionCoordinate const &amp;coord) const</td></tr>
-<tr class="memdesc:ad33e3bab6bf8473ddbb65ca77661b3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <br /></td></tr>
-<tr class="separator:ad33e3bab6bf8473ddbb65ca77661b3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57305c9d836bb953313a1dc648952b29" id="r_a57305c9d836bb953313a1dc648952b29"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION <a class="el" href="classInverseJacobianMatrix.html#a81c90715177eda38dbbabd977964d6d1">InverseJacobianTensor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#a57305c9d836bb953313a1dc648952b29">operator()</a> (PositionCoordinate const &amp;coord) const</td></tr>
+<tr class="memdesc:a57305c9d836bb953313a1dc648952b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute full inverse Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a57305c9d836bb953313a1dc648952b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39a32715b1ab87b946eef74360303c30" id="r_a39a32715b1ab87b946eef74360303c30"><td class="memItemLeft" align="right" valign="top">KOKKOS_INLINE_FUNCTION double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverseJacobianMatrix.html#a39a32715b1ab87b946eef74360303c30">inv_jacobian_11</a> (PositionCoordinate const &amp;coord) const</td></tr>
 <tr class="memdesc:a39a32715b1ab87b946eef74360303c30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the (1,1) coefficient of the inverse Jacobian matrix.  <br /></td></tr>
 <tr class="separator:a39a32715b1ab87b946eef74360303c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,8 +191,8 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad33e3bab6bf8473ddbb65ca77661b3a2" name="ad33e3bab6bf8473ddbb65ca77661b3a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad33e3bab6bf8473ddbb65ca77661b3a2">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a57305c9d836bb953313a1dc648952b29" name="a57305c9d836bb953313a1dc648952b29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57305c9d836bb953313a1dc648952b29">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,7 +203,7 @@ template&lt;class Mapping , class PositionCoordinate  = typename Mapping::CoordA
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_INLINE_FUNCTION Matrix_2x2 <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::operator() </td>
+          <td class="memname">KOKKOS_INLINE_FUNCTION <a class="el" href="classInverseJacobianMatrix.html#a81c90715177eda38dbbabd977964d6d1">InverseJacobianTensor</a> <a class="el" href="classInverseJacobianMatrix.html">InverseJacobianMatrix</a>&lt; Mapping, PositionCoordinate &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">PositionCoordinate const &amp;&#160;</td>
           <td class="paramname"><em>coord</em></td><td>)</td>

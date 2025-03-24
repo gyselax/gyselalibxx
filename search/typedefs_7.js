@@ -47,5 +47,7 @@ var searchData=
   ['internalfieldonpatch_44',['internalfieldonpatch',['../classMultipatchField.html#af03d87daa72042dad5e2f47b11f3fc06',1,'MultipatchField::InternalFieldOnPatch'],['../classMultipatchFieldMem.html#a0619dafdf75c12736c49816b0d928f6a',1,'MultipatchFieldMem::InternalFieldOnPatch']]],
   ['internalidxrangeonpatch_45',['internalidxrangeonpatch',['../classMultipatchField.html#a233d6c418d017cdfd11e79694eee50b0',1,'MultipatchField::InternalIdxRangeOnPatch'],['../classMultipatchFieldMem.html#affec2555dc86033cbcb5e80113cd91ac',1,'MultipatchFieldMem::InternalIdxRangeOnPatch']]],
   ['interpolation_5fdiscrete_5fdimension_5ftype_46',['interpolation_discrete_dimension_type',['../classddcHelper_1_1NonUniformInterpolationPoints.html#afe391dfd5787f205a4096fef58e7beab',1,'ddcHelper::NonUniformInterpolationPoints']]],
-  ['iterator_5fcategory_47',['iterator_category',['../structIdxRangeSliceIterator.html#ae433765c9e433256f44fae63b22c8dd3',1,'IdxRangeSliceIterator']]]
+  ['inversejacobiantensor_47',['InverseJacobianTensor',['../classInverseJacobianMatrix.html#a81c90715177eda38dbbabd977964d6d1',1,'InverseJacobianMatrix']]],
+  ['invjacobianmatrixtype_48',['InvJacobianMatrixType',['../classCombinedMapping.html#ae7c680b6476d5fbf069f06df1211ae7e',1,'CombinedMapping']]],
+  ['iterator_5fcategory_49',['iterator_category',['../structIdxRangeSliceIterator.html#ae433765c9e433256f44fae63b22c8dd3',1,'IdxRangeSliceIterator']]]
 ];

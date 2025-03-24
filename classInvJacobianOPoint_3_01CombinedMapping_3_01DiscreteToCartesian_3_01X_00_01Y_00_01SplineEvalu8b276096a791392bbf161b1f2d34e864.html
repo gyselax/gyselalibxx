@@ -118,9 +118,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae5a754ceb5d84ce9413717a1ab8b0fc4" id="r_ae5a754ceb5d84ce9413717a1ab8b0fc4"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.html#ae5a754ceb5d84ce9413717a1ab8b0fc4">InvJacobianOPoint</a> (<a class="el" href="classCombinedMapping.html">Mapping</a> const &amp;mapping)</td></tr>
 <tr class="memdesc:ae5a754ceb5d84ce9413717a1ab8b0fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of <a class="el" href="classInvJacobianOPoint.html" title="An operator for calculating the inverse of the Jacobian at an O-point.">InvJacobianOPoint</a>.  <br /></td></tr>
 <tr class="separator:ae5a754ceb5d84ce9413717a1ab8b0fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac854474a28b2dd15f37af081fcfda2cb" id="r_ac854474a28b2dd15f37af081fcfda2cb"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION Matrix_2x2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.html#ac854474a28b2dd15f37af081fcfda2cb">operator()</a> () const</td></tr>
-<tr class="memdesc:ac854474a28b2dd15f37af081fcfda2cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y) at the central point.  <br /></td></tr>
-<tr class="separator:ac854474a28b2dd15f37af081fcfda2cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8230461c70b952dffa81768bea261ac" id="r_ae8230461c70b952dffa81768bea261ac"><td class="memItemLeft" align="right" valign="top">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu8b276096a791392bbf161b1f2d34e864.html#ae8230461c70b952dffa81768bea261ac">operator()</a> () const</td></tr>
+<tr class="memdesc:ae8230461c70b952dffa81768bea261ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y) at the central point.  <br /></td></tr>
+<tr class="separator:ae8230461c70b952dffa81768bea261ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="structX.html">X</a>, class <a class="el" href="structY.html">Y</a>, class SplineEvaluator, class <a class="el" href="structR.html">R</a>, class <a class="el" href="structTheta.html">Theta</a>, class MemorySpace, class Xpc, class Ypc&gt;<br />
@@ -164,8 +164,8 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac854474a28b2dd15f37af081fcfda2cb" name="ac854474a28b2dd15f37af081fcfda2cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac854474a28b2dd15f37af081fcfda2cb">&#9670;&#160;</a></span>operator()()</h2>
+<a id="ae8230461c70b952dffa81768bea261ac" name="ae8230461c70b952dffa81768bea261ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8230461c70b952dffa81768bea261ac">&#9670;&#160;</a></span>operator()()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +176,7 @@ template&lt;class <a class="el" href="structX.html">X</a> , class <a class="el" 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KOKKOS_FUNCTION Matrix_2x2 <a class="el" href="classInvJacobianOPoint.html">InvJacobianOPoint</a>&lt; <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;, <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; Xpc, Ypc, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;, Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;::operator() </td>
+          <td class="memname">KOKKOS_FUNCTION <a class="el" href="classTensor.html">DTensor</a>&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; <a class="el" href="classInvJacobianOPoint.html">InvJacobianOPoint</a>&lt; <a class="el" href="classCombinedMapping.html">CombinedMapping</a>&lt; <a class="el" href="classDiscreteToCartesian.html">DiscreteToCartesian</a>&lt; <a class="el" href="structX.html">X</a>, <a class="el" href="structY.html">Y</a>, SplineEvaluator, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a>, MemorySpace &gt;, <a class="el" href="classCartesianToCircular.html">CartesianToCircular</a>&lt; Xpc, Ypc, <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;, Coord&lt; <a class="el" href="structR.html">R</a>, <a class="el" href="structTheta.html">Theta</a> &gt; &gt;::operator() </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

@@ -13,6 +13,7 @@ var searchData=
   ['x_20y_20simulation_10',['Guiding centre (X,Y) simulation',['../simulations_geometryXY_guiding_centre.html',1,'simulations_geometryXY']]],
   ['x_20y_20v_5fx_20v_5fy_11',['Geometry (x, y, v_x, v_y)',['../src_geometryXYVxVy.html',1,'src']]],
   ['x_20y_20vx_20vy_12',['Geometry X Y-Vx Vy',['../src_geometryXYVxVy_geometry.html',1,'src_geometryXYVxVy']]],
-  ['x_5fpc_13',['X_pC',['../structX__pC.html',1,'']]],
-  ['xy_14',['Geometry XY',['../src_geometryXY_geometry.html',1,'src_geometryXY']]]
+  ['x_5fcov_13',['x_cov',['../classCircularToCartesian.html#acb13de22eb215b860dfed57b2dfe96a3',1,'CircularToCartesian::X_cov'],['../classDiscreteToCartesian.html#a9c137067e23580e1970c360a02f295ce',1,'DiscreteToCartesian::X_cov'],['../classCzarnyToCartesian.html#a01671e9f90dfeda7700cd6226b3f4007',1,'CzarnyToCartesian::X_cov'],['../classCartesianToCircular.html#ad8e1bbab5fe5d419953f4250237260e7',1,'CartesianToCircular::X_cov']]],
+  ['x_5fpc_14',['X_pC',['../structX__pC.html',1,'']]],
+  ['xy_15',['Geometry XY',['../src_geometryXY_geometry.html',1,'src_geometryXY']]]
 ];
