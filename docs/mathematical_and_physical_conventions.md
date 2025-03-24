@@ -70,7 +70,7 @@ The basis of a multi-dimensional tensor is the tensor product of 1D bases.
 
 For example, a 2D tensor can be written in any of the following four forms:
 ```math
-M = m^{ij} \mathbf{b}_i \otimes \mathbf{b}_j = m^{i}_j \mathbf{b}_i \otimes \mathbf{b}^j = m_{i}^j \mathbf{b}^i \otimes \mathbf{b}_j = m_{ij} \mathbf{b}^i \otimes \mathbf{b}^j
+M = m^{ij} \mathbf{b}_i \otimes \mathbf{b}_j = m^{i}_{\;j} \mathbf{b}_i \otimes \mathbf{b}^j = m_{i}^{\;j} \mathbf{b}^i \otimes \mathbf{b}_j = m_{ij} \mathbf{b}^i \otimes \mathbf{b}^j
 ```
 
 This notation is useful as it provides a visual reminder of what element-wise operations are valid. When writing a tensor multiplication we must always follow the following rules:
