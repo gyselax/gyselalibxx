@@ -7,7 +7,7 @@ If this is your first interaction with gyselalib++ please check out the document
 
 In order to set up Gyselalib++ on a new machine, simply run:
 
-```
+```sh
 git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
 ./bin/install-hooks
@@ -15,7 +15,7 @@ cd gyselalibxx
 
 or
 
-```
+```sh
 git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
 ./bin/install-hooks
@@ -27,7 +27,7 @@ Please check the `toolchains/` folder to find the existing configurations. See t
 
 For example in order to set up the environment on the Adastra supercomputer simply run:
 
-```
+```sh
 source toolchains/mi250.hipcc.adastra.spack/prepare.sh
 source toolchains/mi250.hipcc.adastra.spack/environment.sh
 ```
@@ -36,7 +36,7 @@ source toolchains/mi250.hipcc.adastra.spack/environment.sh
 
 To compile Gyselalib++, navigate to the folder where the library was cloned to and run:
 
-```
+```sh
 mkdir build
 cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=<TOOLCHAIN_FILE> ..
@@ -51,7 +51,7 @@ For more details about toolchains, see the documentation about [toolchains](./to
 
 to run the tests:
 
-```
+```sh
 ctest --output-on-failure
 ```
 

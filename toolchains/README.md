@@ -10,7 +10,7 @@ In order to build Gyselalib++ the necessary steps are:
 
 For example on Adastra the necessary commands are:
 
-```
+```sh
 mkdir -p build && cd build
 ../toolchains/mi250.hipcc.adastra.spack/prepare.sh
 source ../toolchains/mi250.hipcc.adastra.spack/environment.sh
@@ -23,7 +23,7 @@ The [toolchains](https://en.wikipedia.org/wiki/Toolchain) are represented using 
 
 You can use the toolchains like so:
 
-```
+```sh
 mkdir -p build && cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchains/<CONFIG>/toolchain.cmake
 ```
@@ -36,7 +36,7 @@ Additionally the folder `docker.gyselalibxx_env` provides toolchains which will 
 
 Toolchains may require a non default environment. For that purpose environment scripts are provided. Each `CONFIG` folder in `toolchains` should contain (a potentially empty) environment file named `environment.sh`. The environment file is used like so:
 
-```
+```sh
 source toolchains/<CONFIG>/environment.sh
 ```
 
@@ -46,7 +46,7 @@ The *sourcing* of an environment file will generally happen before the build or 
 
 The environment may need preparation (for example if the dependencies are not available on the machine). For that purpose the `CONFIG` folders should contain (a potentially empty) preparation file named `prepare.sh`. The preparation file is used like so:
 
-```
+```sh
 toolchains/<CONFIG>/prepare.sh
 ```
 
